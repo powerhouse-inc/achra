@@ -10,23 +10,31 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  ...compat.extends('plugin:prettier/recommended'),
-  // Ensure Prettier options match project preferences
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'),
   {
     rules: {
-      'prettier/prettier': [
+      '@typescript-eslint/consistent-type-imports': [
         'error',
         {
-          semi: false,
-          singleQuote: true,
-          trailingComma: 'all',
-          printWidth: 100,
-          tabWidth: 2,
+          disallowTypeAnnotations: false,
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports',
         },
       ],
-      quotes: 'off',
-      semi: 'off',
+      'import/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'object', 'type'],
+          pathGroups: [
+            {
+              pattern: '@/**/**',
+              group: 'parent',
+              position: 'before',
+            },
+          ],
+          alphabetize: { order: 'asc' },
+        },
+      ],
     },
   },
 ]
