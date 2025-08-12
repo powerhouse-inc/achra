@@ -3,6 +3,7 @@ import './globals.css'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { Footer } from '@/shared/components/footer/footer'
 import { Navbar } from '@/shared/components/navbar/navbar'
+import { QueryClientProvider } from '@/shared/providers/query-client'
 import type { Metadata } from 'next'
 
 const inter = Inter({
@@ -24,8 +25,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-          <Navbar />
-          {children}
+          <QueryClientProvider>
+            <Navbar />
+            {children}
+          </QueryClientProvider>
           <Footer />
         </ThemeProvider>
       </body>
