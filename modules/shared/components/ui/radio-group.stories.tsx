@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { RadioGroup, RadioGroupItem } from './radio-group';
-import { Label } from './label';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { RadioGroup, RadioGroupItem } from './radio-group'
+import { Label } from './label'
 
 const meta = {
   title: 'Shared/Shadcn/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof RadioGroup>;
+} satisfies Meta<typeof RadioGroup>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -26,6 +26,4 @@ export const Default: Story = {
       </div>
     </RadioGroup>
   ),
-};
-
-
+}

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Skeleton } from './skeleton';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Skeleton } from './skeleton'
 
 const meta = {
   title: 'Shared/Shadcn/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Skeleton>;
+} satisfies Meta<typeof Skeleton>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -19,6 +19,4 @@ export const Default: Story = {
       <Skeleton className="h-8 w-24" />
     </div>
   ),
-};
-
-
+}

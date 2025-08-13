@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Dialog,
   DialogTrigger,
@@ -9,18 +9,18 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from './dialog';
-import { Button } from './button';
+} from './dialog'
+import { Button } from './button'
 
 const meta = {
   title: 'Shared/Shadcn/Dialog',
   component: Dialog,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Dialog>;
+} satisfies Meta<typeof Dialog>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -41,6 +41,4 @@ export const Basic: Story = {
       </DialogContent>
     </Dialog>
   ),
-};
-
-
+}

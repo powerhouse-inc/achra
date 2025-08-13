@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   ContextMenu,
   ContextMenuTrigger,
@@ -7,17 +7,17 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuLabel,
-} from './context-menu';
+} from './context-menu'
 
 const meta = {
   title: 'Shared/Shadcn/ContextMenu',
   component: ContextMenu,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof ContextMenu>;
+} satisfies Meta<typeof ContextMenu>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -34,6 +34,4 @@ export const Basic: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-};
-
-
+}

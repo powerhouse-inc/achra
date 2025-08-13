@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { AspectRatio } from './aspect-ratio';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { AspectRatio } from './aspect-ratio'
 
 const meta = {
   title: 'Shared/Shadcn/AspectRatio',
   component: AspectRatio,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof AspectRatio>;
+} satisfies Meta<typeof AspectRatio>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Image: Story = {
   render: () => (
@@ -24,6 +24,4 @@ export const Image: Story = {
       </AspectRatio>
     </div>
   ),
-};
-
-
+}

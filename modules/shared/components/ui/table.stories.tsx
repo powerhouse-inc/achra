@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './table';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './table'
 
 const meta = {
   title: 'Shared/Shadcn/Table',
   component: Table,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Table>;
+} satisfies Meta<typeof Table>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -39,6 +39,4 @@ export const Basic: Story = {
       </TableBody>
     </Table>
   ),
-};
-
-
+}

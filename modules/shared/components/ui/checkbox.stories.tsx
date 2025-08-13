@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Checkbox } from './checkbox';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Checkbox } from './checkbox'
 
 const meta = {
   title: 'Shared/Shadcn/Checkbox',
@@ -8,11 +8,9 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { id: 'cb' },
-} satisfies Meta<typeof Checkbox>;
+} satisfies Meta<typeof Checkbox>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
-
-
+export const Default: Story = {}

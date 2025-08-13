@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from './chart';
-import * as Recharts from 'recharts';
+} from './chart'
+import * as Recharts from 'recharts'
 
 const meta = {
   title: 'Shared/Shadcn/Chart',
   component: ChartContainer,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof ChartContainer>;
+} satisfies Meta<typeof ChartContainer>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 const data = [
   { month: 'Jan', value: 400 },
@@ -25,9 +25,13 @@ const data = [
   { month: 'Mar', value: 200 },
   { month: 'Apr', value: 278 },
   { month: 'May', value: 189 },
-];
+]
 
 export const Line: Story = {
+  args: {
+    children: <div />,
+    config: { value: { label: 'Revenue', color: 'hsl(var(--primary))' } },
+  },
   render: () => (
     <div style={{ width: 520 }}>
       <ChartContainer config={{ value: { label: 'Revenue', color: 'hsl(var(--primary))' } }}>
@@ -42,6 +46,4 @@ export const Line: Story = {
       </ChartContainer>
     </div>
   ),
-};
-
-
+}

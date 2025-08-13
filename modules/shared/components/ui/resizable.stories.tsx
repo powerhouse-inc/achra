@@ -1,18 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './resizable';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from './resizable'
 
 const meta = {
   title: 'Shared/Shadcn/Resizable',
   component: ResizablePanelGroup,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
-} satisfies Meta<typeof ResizablePanelGroup>;
+} satisfies Meta<typeof ResizablePanelGroup>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Horizontal: Story = {
+  args: { direction: 'horizontal' },
   render: () => (
     <div style={{ height: 240 }}>
       <ResizablePanelGroup direction="horizontal">
@@ -22,6 +23,4 @@ export const Horizontal: Story = {
       </ResizablePanelGroup>
     </div>
   ),
-};
-
-
+}

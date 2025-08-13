@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './carousel';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from './carousel'
 
 const meta = {
   title: 'Shared/Shadcn/Carousel',
   component: Carousel,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Carousel>;
+} satisfies Meta<typeof Carousel>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Horizontal: Story = {
   render: () => (
@@ -19,7 +19,9 @@ export const Horizontal: Story = {
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, i) => (
             <CarouselItem key={i}>
-              <div className="bg-muted flex h-40 items-center justify-center rounded-md">Slide {i + 1}</div>
+              <div className="bg-muted flex h-40 items-center justify-center rounded-md">
+                Slide {i + 1}
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -28,6 +30,4 @@ export const Horizontal: Story = {
       </Carousel>
     </div>
   ),
-};
-
-
+}

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Pagination,
   PaginationContent,
@@ -8,17 +8,17 @@ import {
   PaginationNext,
   PaginationLink,
   PaginationEllipsis,
-} from './pagination';
+} from './pagination'
 
 const meta = {
   title: 'Shared/Shadcn/Pagination',
   component: Pagination,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Pagination>;
+} satisfies Meta<typeof Pagination>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -47,6 +47,4 @@ export const Basic: Story = {
       </PaginationContent>
     </Pagination>
   ),
-};
-
-
+}

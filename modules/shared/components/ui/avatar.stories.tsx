@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Avatar, AvatarImage, AvatarFallback } from './avatar';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Avatar, AvatarImage, AvatarFallback } from './avatar'
 
 const meta = {
   title: 'Shared/Shadcn/Avatar',
   component: Avatar,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Avatar>;
+} satisfies Meta<typeof Avatar>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -19,7 +19,7 @@ export const Default: Story = {
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
   ),
-};
+}
 
 export const FallbackOnly: Story = {
   render: () => (
@@ -27,7 +27,7 @@ export const FallbackOnly: Story = {
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
   ),
-};
+}
 
 export const BrokenImageFallback: Story = {
   render: () => (
@@ -36,28 +36,26 @@ export const BrokenImageFallback: Story = {
       <AvatarFallback>NA</AvatarFallback>
     </Avatar>
   ),
-};
+}
 
 export const Group: Story = {
   render: () => (
     <div className="flex -space-x-3">
-      <Avatar className="ring-2 ring-background">
+      <Avatar className="ring-background ring-2">
         <AvatarImage src="https://i.pravatar.cc/100?img=1" alt="A" />
         <AvatarFallback>A</AvatarFallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar className="ring-background ring-2">
         <AvatarImage src="https://i.pravatar.cc/100?img=2" alt="B" />
         <AvatarFallback>B</AvatarFallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar className="ring-background ring-2">
         <AvatarImage src="/broken-image.png" alt="C" />
         <AvatarFallback>C</AvatarFallback>
       </Avatar>
-      <Avatar className="ring-2 ring-background">
+      <Avatar className="ring-background ring-2">
         <AvatarFallback>+2</AvatarFallback>
       </Avatar>
     </div>
   ),
-};
-
-
+}

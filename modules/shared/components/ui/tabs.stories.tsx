@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs'
 
 const meta = {
   title: 'Shared/Shadcn/Tabs',
   component: Tabs,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Tabs>;
+} satisfies Meta<typeof Tabs>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -23,6 +23,4 @@ export const Basic: Story = {
       <TabsContent value="password">Change your password here.</TabsContent>
     </Tabs>
   ),
-};
-
-
+}

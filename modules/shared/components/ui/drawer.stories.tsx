@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Drawer,
   DrawerTrigger,
@@ -9,18 +9,18 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerClose,
-} from './drawer';
-import { Button } from './button';
+} from './drawer'
+import { Button } from './button'
 
 const meta = {
   title: 'Shared/Shadcn/Drawer',
   component: Drawer,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Drawer>;
+} satisfies Meta<typeof Drawer>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -41,6 +41,4 @@ export const Basic: Story = {
       </DrawerContent>
     </Drawer>
   ),
-};
-
-
+}

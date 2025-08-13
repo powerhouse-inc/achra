@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Menubar,
   MenubarMenu,
@@ -14,17 +14,17 @@ import {
   MenubarCheckboxItem,
   MenubarRadioGroup,
   MenubarRadioItem,
-} from './menubar';
+} from './menubar'
 
 const meta = {
   title: 'Shared/Shadcn/Menubar',
   component: Menubar,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Menubar>;
+} satisfies Meta<typeof Menubar>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -40,7 +40,7 @@ export const Basic: Story = {
       </MenubarMenu>
     </Menubar>
   ),
-};
+}
 
 export const Complete: Story = {
   render: () => (
@@ -102,9 +102,7 @@ export const Complete: Story = {
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
           <MenubarCheckboxItem>Always Show Bookmarks Bar</MenubarCheckboxItem>
-          <MenubarCheckboxItem checked>
-            Always Show Full URLs
-          </MenubarCheckboxItem>
+          <MenubarCheckboxItem checked>Always Show Full URLs</MenubarCheckboxItem>
           <MenubarSeparator />
           <MenubarItem inset>
             Reload <MenubarShortcut>⌘R</MenubarShortcut>
@@ -135,6 +133,4 @@ export const Complete: Story = {
       </MenubarMenu>
     </Menubar>
   ),
-};
-
-
+}

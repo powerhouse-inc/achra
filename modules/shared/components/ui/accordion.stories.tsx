@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion'
 
 const meta = {
   title: 'Shared/Shadcn/Accordion',
   component: Accordion,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Accordion>;
+} satisfies Meta<typeof Accordion>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Single: Story = {
   args: { type: 'single' },
@@ -26,7 +26,7 @@ export const Single: Story = {
       </AccordionItem>
     </Accordion>
   ),
-};
+}
 
 export const Multiple: Story = {
   args: { type: 'multiple' },
@@ -42,6 +42,4 @@ export const Multiple: Story = {
       </AccordionItem>
     </Accordion>
   ),
-};
-
-
+}

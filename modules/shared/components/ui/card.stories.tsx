@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card';
-import { Button } from './button';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card'
+import { Button } from './button'
 
 const meta = {
   title: 'Shared/Shadcn/Card',
   component: Card,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof Card>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -26,6 +26,4 @@ export const Basic: Story = {
       </CardFooter>
     </Card>
   ),
-};
-
-
+}

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Label } from './label';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Label } from './label'
 
 const meta = {
   title: 'Shared/Shadcn/Label',
@@ -8,11 +8,9 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { children: 'Label' },
-} satisfies Meta<typeof Label>;
+} satisfies Meta<typeof Label>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
-
-
+export const Default: Story = {}

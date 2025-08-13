@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Terminal } from 'lucide-react';
-import { Alert, AlertTitle, AlertDescription } from './alert';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Terminal } from 'lucide-react'
+import { Alert, AlertTitle, AlertDescription } from './alert'
 
 const meta = {
   title: 'Shared/Shadcn/Alert',
@@ -14,10 +14,10 @@ const meta = {
       options: ['default', 'destructive'],
     },
   },
-} satisfies Meta<typeof Alert>;
+} satisfies Meta<typeof Alert>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -26,7 +26,7 @@ export const Default: Story = {
       <AlertDescription>This is an alert message.</AlertDescription>
     </Alert>
   ),
-};
+}
 
 export const DefaultWithIcon: Story = {
   render: () => (
@@ -38,7 +38,7 @@ export const DefaultWithIcon: Story = {
       </AlertDescription>
     </Alert>
   ),
-};
+}
 
 export const Destructive: Story = {
   render: () => (
@@ -50,6 +50,4 @@ export const Destructive: Story = {
       </AlertDescription>
     </Alert>
   ),
-};
-
-
+}

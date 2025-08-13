@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { ScrollArea } from './scroll-area';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { ScrollArea } from './scroll-area'
 
 const meta = {
   title: 'Shared/Shadcn/ScrollArea',
   component: ScrollArea,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof ScrollArea>;
+} satisfies Meta<typeof ScrollArea>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: () => (
@@ -24,6 +24,4 @@ export const Default: Story = {
       </ScrollArea>
     </div>
   ),
-};
-
-
+}

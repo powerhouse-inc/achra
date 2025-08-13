@@ -1,17 +1,24 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription } from './sheet';
-import { Button } from './button';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from './sheet'
+import { Button } from './button'
 
 const meta = {
   title: 'Shared/Shadcn/Sheet',
   component: Sheet,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Sheet>;
+} satisfies Meta<typeof Sheet>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -27,6 +34,4 @@ export const Basic: Story = {
       </SheetContent>
     </Sheet>
   ),
-};
-
-
+}

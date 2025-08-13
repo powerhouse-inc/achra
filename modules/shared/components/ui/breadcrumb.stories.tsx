@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -7,17 +7,17 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from './breadcrumb';
+} from './breadcrumb'
 
 const meta = {
   title: 'Shared/Shadcn/Breadcrumb',
   component: Breadcrumb,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Breadcrumb>;
+} satisfies Meta<typeof Breadcrumb>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -37,6 +37,4 @@ export const Basic: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-};
-
-
+}

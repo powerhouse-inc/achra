@@ -1,18 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from './input-otp';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from './input-otp'
 
 const meta = {
   title: 'Shared/Shadcn/InputOTP',
   component: InputOTP,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof InputOTP>;
+  args: { children: <></>, maxLength: 6 },
+} satisfies Meta<typeof InputOTP>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
+  args: { maxLength: 6 },
   render: () => (
     <InputOTP maxLength={6}>
       <InputOTPGroup>
@@ -28,6 +30,4 @@ export const Basic: Story = {
       </InputOTPGroup>
     </InputOTP>
   ),
-};
-
-
+}

@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { HoverCard, HoverCardTrigger, HoverCardContent } from './hover-card';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { HoverCard, HoverCardTrigger, HoverCardContent } from './hover-card'
 
 const meta = {
   title: 'Shared/Shadcn/HoverCard',
   component: HoverCard,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof HoverCard>;
+} satisfies Meta<typeof HoverCard>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -19,6 +19,4 @@ export const Basic: Story = {
       <HoverCardContent>Some content</HoverCardContent>
     </HoverCard>
   ),
-};
-
-
+}

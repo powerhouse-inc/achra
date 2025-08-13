@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip'
 
 const meta = {
   title: 'Shared/Shadcn/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Tooltip>;
+} satisfies Meta<typeof Tooltip>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -21,6 +21,4 @@ export const Basic: Story = {
       </Tooltip>
     </TooltipProvider>
   ),
-};
-
-
+}

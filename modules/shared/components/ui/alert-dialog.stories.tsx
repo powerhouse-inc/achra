@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -10,18 +10,18 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from './alert-dialog';
-import { Button } from './button';
+} from './alert-dialog'
+import { Button } from './button'
 
 const meta = {
   title: 'Shared/Shadcn/AlertDialog',
   component: AlertDialog,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof AlertDialog>;
+} satisfies Meta<typeof AlertDialog>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -41,6 +41,4 @@ export const Basic: Story = {
       </AlertDialogContent>
     </AlertDialog>
   ),
-};
-
-
+}

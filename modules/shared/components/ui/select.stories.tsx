@@ -1,22 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-} from './select';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from './select'
 
 const meta = {
   title: 'Shared/Shadcn/Select',
   component: Select,
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Select>;
+} satisfies Meta<typeof Select>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -30,6 +24,4 @@ export const Basic: Story = {
       </SelectContent>
     </Select>
   ),
-};
-
-
+}

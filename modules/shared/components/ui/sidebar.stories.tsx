@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
 import {
   Sidebar,
   SidebarProvider,
@@ -14,17 +14,17 @@ import {
   SidebarMenuButton,
   SidebarTrigger,
   SidebarInset,
-} from './sidebar';
+} from './sidebar'
 
 const meta = {
   title: 'Shared/Shadcn/Sidebar',
   component: Sidebar,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },
-} satisfies Meta<typeof Sidebar>;
+} satisfies Meta<typeof Sidebar>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -56,6 +56,4 @@ export const Basic: Story = {
       </SidebarInset>
     </SidebarProvider>
   ),
-};
-
-
+}

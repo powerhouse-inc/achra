@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import React from 'react';
-import { Textarea } from './textarea';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import React from 'react'
+import { Textarea } from './textarea'
 
 const meta = {
   title: 'Shared/Shadcn/Textarea',
@@ -8,11 +8,9 @@ const meta = {
   tags: ['autodocs'],
   parameters: { layout: 'centered' },
   args: { placeholder: 'Type your message here' },
-} satisfies Meta<typeof Textarea>;
+} satisfies Meta<typeof Textarea>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
-
-
+export const Default: Story = {}
