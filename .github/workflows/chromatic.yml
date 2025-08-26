@@ -7,8 +7,8 @@ on:
       - staging
       - dev
   pull_request:
-        branches: ['main', 'staging', 'dev']
-        types: [opened, synchronize]
+    branches: ['main', 'staging', 'dev']
+    types: [opened, synchronize]
   workflow_dispatch:
 
 env:
