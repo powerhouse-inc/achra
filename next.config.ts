@@ -1,30 +1,11 @@
 import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                icon: true,
-                svgo: true,
-                svgoConfig: {
-                  plugins: [
-                    {
-                      name: 'removeViewBox',
-                      active: false,
-                    },
-                  ],
-                },
-              },
-            },
-          ],
-          as: '*.js',
-        },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
