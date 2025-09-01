@@ -10,8 +10,8 @@ interface NavbarProps {
 }
 
 type NavbarConfig = {
-  brandLogo?: React.ComponentType<React.SVGProps<SVGSVGElement>>
-  brandLogotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  Isotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  Logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   navItems: NavItem[]
   authComponent: 'loginButton' | 'avatar' | 'launchButton' | null
   launchButtonText?: string

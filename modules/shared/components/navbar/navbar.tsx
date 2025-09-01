@@ -16,19 +16,19 @@ function Navbar() {
 
   const config = getNavbarConfig(pathname)
 
-  const { brandLogo: BrandLogo, brandLogotype: BrandLogotype, navItems } = config
+  const { Isotype: Isotype, Logotype: Logotype, navItems } = config
 
   return (
     <header className="bg-background/50 border2 sticky top-0 mx-auto flex items-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
       <div className="bg-card flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="text-border bg-accent border-border flex items-center justify-center rounded-l-lg border-r-2 px-4 py-3.5 md:px-6 md:py-4.5">
+            <div className="text-border bg-background border-border flex items-center justify-center rounded-l-lg border-r-2 px-4 py-3.5 md:px-6 md:py-4.5">
               <AchraLogo className="h-9 w-9" />
             </div>
             <div className="flex items-center gap-2">
-              {BrandLogo && <BrandLogo className="h-8 w-8" />}
-              {BrandLogotype && <BrandLogotype className="hidden:md:flex h-8 w-16" />}
+              {Isotype && <Isotype className="h-8 w-8" />}
+              {Logotype && <Logotype className="hidden:md:flex h-8 w-16" />}
             </div>
             <div className="flex min-w-37.75 items-center gap-8 md:hidden">
               <div>Select Network</div>
