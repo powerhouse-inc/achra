@@ -16,7 +16,7 @@ function Navbar() {
 
   const config = getNavbarConfig(pathname)
 
-  const { Isotype: Isotype, Logotype: Logotype, navItems } = config
+  const { isotype: Isotype, logotype: Logotype, navItems } = config
 
   return (
     <header className="bg-background/50 border2 sticky top-0 mx-auto flex items-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">

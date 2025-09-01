@@ -1,12 +1,12 @@
 import PowerhouseLogo from '@/modules/shared/components/svgs/powerhouse.svg'
-import SkyLogo from '@/modules/shared/components/svgs/sky-logo.svg'
+import SkyIsotype from '@/modules/shared/components/svgs/sky-isotype.svg'
 import SkyLogotype from '@/modules/shared/components/svgs/sky-logotype.svg'
 import type { NavbarConfig } from './types'
 
 export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
   '/sky': {
-    Isotype: SkyLogo,
-    Logotype: SkyLogotype,
+    isotype: SkyIsotype,
+    logotype: SkyLogotype,
     navItems: [
       { label: 'Contributors', href: '/contributors' },
       { label: 'Roadmap', href: '/roadmap' },
@@ -17,8 +17,8 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     authComponent: 'loginButton',
   },
   '/powerhouse': {
-    Isotype: PowerhouseLogo,
-    Logotype: PowerhouseLogo,
+    isotype: PowerhouseLogo,
+    logotype: PowerhouseLogo,
     navItems: [
       { label: 'Example1', href: '/example' },
       { label: 'Example2', href: '/example' },
