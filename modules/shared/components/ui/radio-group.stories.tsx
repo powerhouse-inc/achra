@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
-import { RadioGroup, RadioGroupItem } from './radio-group'
 import { Label } from './label'
+import { RadioGroup, RadioGroupItem } from './radio-group'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/RadioGroup',

@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
 import {
   Breadcrumb,
@@ -8,6 +7,7 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from './breadcrumb'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/Breadcrumb',

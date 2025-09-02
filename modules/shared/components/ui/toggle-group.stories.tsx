@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import React from 'react'
 import { ToggleGroup, ToggleGroupItem } from './toggle-group'
 import { Bold, Italic, Underline } from 'lucide-react'

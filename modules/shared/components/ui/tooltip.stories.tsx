@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/Tooltip',

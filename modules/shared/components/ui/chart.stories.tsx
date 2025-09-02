@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
+import * as Recharts from 'recharts'
 import {
   ChartContainer,
   ChartLegend,
@@ -7,7 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from './chart'
-import * as Recharts from 'recharts'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/Chart',
