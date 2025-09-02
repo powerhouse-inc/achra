@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
 import {
   AlertDialog,
@@ -12,6 +11,7 @@ import {
   AlertDialogAction,
 } from './alert-dialog'
 import { Button } from './button'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/AlertDialog',

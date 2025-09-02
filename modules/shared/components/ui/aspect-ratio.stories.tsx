@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import React from 'react'
 import { AspectRatio } from './aspect-ratio'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/AspectRatio',
