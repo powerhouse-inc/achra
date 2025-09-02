@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 import React from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card'
 import { Button } from './button'

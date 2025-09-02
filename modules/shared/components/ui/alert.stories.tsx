@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import React from 'react'
 import { Terminal } from 'lucide-react'
+import React from 'react'
 import { Alert, AlertTitle, AlertDescription } from './alert'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Shadcn/Alert',
