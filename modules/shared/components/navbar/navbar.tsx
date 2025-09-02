@@ -3,8 +3,8 @@ import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
+import KebabMenu from '@/modules/shared/components/svgs/kebab-menu.svg'
 import { cn } from '../../lib/utils'
-import { KebabMenu } from '../svgs'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
 import { getNavbarConfig } from './navbar-config'
@@ -19,7 +19,7 @@ function Navbar() {
   const { isotype: Isotype, logotype: Logotype, navItems } = config
 
   return (
-    <header className="border2 bg-muted/50 sticky top-0 mx-auto flex max-w-[var(--container-width)] items-center justify-center rounded-3xl backdrop-blur-[7.5px] md:top-1.5 md:p-2.5">
+    <header className="border2 bg-muted/50 sticky top-0 mx-auto flex max-w-[var(--container-width)] items-center justify-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
       <div className="bg-card flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
