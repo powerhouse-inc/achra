@@ -19,11 +19,11 @@ function Navbar() {
   const { isotype: Isotype, logotype: Logotype, navItems } = config
 
   return (
-    <header className="border2 bg-muted/50 sticky top-0 mx-auto flex max-w-[var(--container-width)] items-center justify-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
+    <header className="border2 bg-muted/50 sticky top-0 mx-auto flex max-w-[var(--container-width)] items-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
       <div className="bg-card flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="text-border bg-primary/5 border-border flex items-center justify-center rounded-l-lg border-r-1 px-4 py-3.5 md:px-6 md:py-4.5">
+            <div className="text-border bg-primary/5 border-border flex items-center justify-center rounded-l-lg border-r px-4 py-3.5 md:px-6 md:py-4.5">
               <AchraLogo className="h-9 w-9" />
             </div>
             <div className="flex items-center gap-2">
