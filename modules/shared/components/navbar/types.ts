@@ -1,6 +1,8 @@
+import { type RouteWithDynamicPages } from '../../types/routes'
+
 type NavItem = {
   label: string
-  href: string
+  href: RouteWithDynamicPages
   isExternal?: boolean
 }
 
@@ -18,4 +20,9 @@ type NavbarConfig = {
   launchButtonHref?: string
 }
 
-export type { NavbarConfig, NavItem, NavbarProps }
+interface User {
+  username: string
+  avatar: string
+}
+
+export type { NavbarConfig, NavItem, NavbarProps, User }
