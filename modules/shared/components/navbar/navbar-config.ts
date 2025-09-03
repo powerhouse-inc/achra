@@ -20,9 +20,9 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     isotype: PowerhouseLogo,
     logotype: PowerhouseLogo,
     navItems: [
-      { label: 'Example1', href: '/example' },
-      { label: 'Example2', href: '/example' },
-      { label: 'Example3', href: '/example' },
+      { label: 'Example1', href: '/' },
+      { label: 'Example2', href: '/' },
+      { label: 'Example3', href: '/' },
     ],
     authComponent: 'loginButton',
   },

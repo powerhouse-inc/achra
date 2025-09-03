@@ -1,10 +1,22 @@
 import Link from 'next/link'
+import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
-const networks = [
+interface Network {
+  id: string
+  title: string
+  href: RouteWithDynamicPages
+  tag: string
+  tagColor: string
+  bgGradient: string
+  description: string
+  buttonText: string
+}
+
+const networks: Network[] = [
   {
     id: 'powerhouse',
     title: 'POWERHOUSE',
-    href: 'network/powerhouse',
+    href: '/network/powerhouse',
     tag: 'OSS',
     tagColor: 'bg-purple-500',
     description:
@@ -15,7 +27,7 @@ const networks = [
   {
     id: 'sky',
     title: 'Sky',
-    href: 'network/sky',
+    href: '/network/sky',
     tag: 'DeFi',
     tagColor: 'bg-blue-500',
     description:
@@ -26,7 +38,7 @@ const networks = [
   {
     id: 'spark',
     title: 'Spark',
-    href: 'network/spark',
+    href: '/network/spark',
     tag: 'DeFi',
     tagColor: 'bg-blue-500',
     description:
@@ -37,7 +49,7 @@ const networks = [
   {
     id: 'grove',
     title: 'Grove',
-    href: 'network/grove',
+    href: '/network/grove',
     tag: 'OSS',
     tagColor: 'bg-purple-500',
     description:
@@ -48,7 +60,7 @@ const networks = [
   {
     id: 'launch-agent-2',
     title: 'Launch Agent 2',
-    href: 'network/launch-agent-2',
+    href: '/network/launch-agent-2',
     tag: 'OSS',
     tagColor: 'bg-purple-500',
     description:
@@ -59,7 +71,7 @@ const networks = [
   {
     id: 'launch-agent-3',
     title: 'Launch Agent 3',
-    href: 'network/launch-agent-3',
+    href: '/network/launch-agent-3',
     tag: 'DeFi',
     tagColor: 'bg-blue-500',
     description:
