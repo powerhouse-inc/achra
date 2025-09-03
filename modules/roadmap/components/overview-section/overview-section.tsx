@@ -1,5 +1,7 @@
 import { SectionTitle } from '../section-title'
 import { Timeline } from '../timeline'
+// TODO: replace with real data from API
+import { milestones } from './mocked-data'
 
 export default function OverviewSection() {
   return (
@@ -11,7 +13,7 @@ export default function OverviewSection() {
       />
 
       <div className="mt-6">
-        <Timeline />
+        <Timeline milestones={milestones} />
       </div>
     </div>
   )

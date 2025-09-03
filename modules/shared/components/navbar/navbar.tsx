@@ -19,7 +19,7 @@ function Navbar() {
   const { isotype: Isotype, logotype: Logotype, navItems } = config
 
   return (
-    <header className="bg-muted/50 sticky top-0 mx-auto flex max-w-[var(--container-width)] items-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
+    <header className="bg-muted/50 sticky top-0 z-50 mx-auto flex max-w-[var(--container-width)] items-center rounded-3xl backdrop-blur md:top-1.5 md:p-2.5">
       <div className="bg-card flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
