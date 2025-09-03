@@ -27,7 +27,7 @@ function Navbar() {
       <div className="bg-popover flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4 md:gap-6">
-            <div className="text-border bg-primary/5 border-border flex items-center justify-center overflow-hidden rounded-l-lg border-r px-4 py-3.5 md:px-6 md:py-4.5">
+            <div className="text-border bg-primary/5 border-border flex items-center justify-center overflow-hidden rounded-l-2xl border-r px-4 py-3.5 md:px-6 md:py-4.5">
               <Link href="/">
                 <AchraLogo className="h-9 w-9" />
               </Link>
