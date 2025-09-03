@@ -36,6 +36,8 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+        env:
+          HOMEPAGE_REMOTE_URL: "http://localhost:3000"
 
       - name: Run Chromatic
         uses: chromaui/action@latest
