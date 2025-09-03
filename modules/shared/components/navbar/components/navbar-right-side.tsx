@@ -1,5 +1,4 @@
-import { MoonIcon, SunIcon, UserIcon } from 'lucide-react'
-import Link from 'next/link'
+import { UserIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import React from 'react'
 import KebabMenu from '@/shared/components/svgs/kebab-menu.svg'
@@ -13,24 +12,27 @@ import {
 } from '../../ui/dropdown-menu'
 import { type User } from '../types'
 import LoginAvatar from './login-avatar'
+import ThemeIconLabel from './toogle-theme-label'
 
 interface NavbarRightSideProps {
   isLoggedIn: boolean
   user?: User
+  onLoginClick?: () => void // Renombrado para mayor claridad
 }
 
-function NavbarRightSide({ isLoggedIn, user }: NavbarRightSideProps) {
+function NavbarRightSide({ isLoggedIn, user, onLoginClick }: NavbarRightSideProps) {
   const { theme, setTheme } = useTheme()
 
   const handleThemeToggle = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
+
   return (
     <>
       <div className="hidden items-center gap-2 md:flex">
         <ThemeToggle />
         <div className="bg-border mx-4 h-9 w-px" />
-        <LoginAvatar isLoggedIn={isLoggedIn} user={user} />
+        <LoginAvatar isLoggedIn={isLoggedIn} user={user} onLoginClick={onLoginClick} />
       </div>
 
       <div className="flex items-center md:hidden">
@@ -46,32 +48,18 @@ function NavbarRightSide({ isLoggedIn, user }: NavbarRightSideProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end">
             {isLoggedIn ? (
-              <>
-                <DropdownMenuItem>
-                  <LoginAvatar isLoggedIn={isLoggedIn} user={user} />
-                </DropdownMenuItem>
-              </>
+              <DropdownMenuItem>
+                <LoginAvatar isLoggedIn={isLoggedIn} user={user} />
+              </DropdownMenuItem>
             ) : (
-              <>
-                {/* <DropdownMenuItem>
-                  <LoginAvatar isLoggedIn={isLoggedIn} user={user} />
-                </DropdownMenuItem> */}
-                <DropdownMenuItem asChild>
-                  <Link href="/" className="cursor-pointer">
-                    <UserIcon className="mr-2 h-4 w-4" />
-                    <span>Login</span>
-                  </Link>
-                </DropdownMenuItem>
-              </>
+              <DropdownMenuItem onClick={onLoginClick} className="cursor-pointer">
+                <UserIcon className="mr-2 h-4 w-4" />
+                <span>Login</span>
+              </DropdownMenuItem>
             )}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleThemeToggle} className="cursor-pointer">
-              {theme === 'dark' ? (
-                <MoonIcon className="mr-2 h-4 w-4" />
-              ) : (
-                <SunIcon className="mr-2 h-4 w-4" />
-              )}
-              <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+              <ThemeIconLabel theme={theme} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -79,4 +67,5 @@ function NavbarRightSide({ isLoggedIn, user }: NavbarRightSideProps) {
     </>
   )
 }
+
 export default NavbarRightSide

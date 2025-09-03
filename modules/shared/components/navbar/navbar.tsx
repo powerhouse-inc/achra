@@ -8,13 +8,14 @@ import NavbarRightSide from './components/navbar-right-side'
 import { getNavbarConfig } from './navbar-config'
 
 function Navbar() {
-  // TODO: get from auth/session state
-  const isLoggedIn = true
   const pathname = usePathname()
+  // TODO: get from auth/session state
+  const isLoggedIn = false
   const user = {
     username: 'John Doe',
     avatar: 'https://github.com/shadcn.png',
   }
+  const handleLoginClick = () => {}
 
   const config = getNavbarConfig(pathname)
 
@@ -40,7 +41,7 @@ function Navbar() {
             </div>
           </div>
           <NavbarItemsDesk navItems={navItems} pathname={pathname} />
-          <NavbarRightSide isLoggedIn={isLoggedIn} user={user} />
+          <NavbarRightSide isLoggedIn={isLoggedIn} user={user} onLoginClick={handleLoginClick} />
         </div>
       </div>
     </header>
