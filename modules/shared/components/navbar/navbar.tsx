@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
-import NavBarItemMobile from './components/nav-bar-item-mobile'
+import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
 import NavbarRightSide from './components/navbar-right-side'
 import { getNavbarConfig } from './navbar-config'
@@ -37,7 +37,7 @@ function Navbar() {
                 {BrandLogo && <BrandLogo className="h-8 w-8" />}
                 {BrandLogotype && <BrandLogotype className="hidden:md:flex h-8 w-16" />}
               </div>
-              <NavBarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
+              <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
             </div>
           </div>
           <NavbarItemsDesk navItems={navItems} pathname={pathname} />

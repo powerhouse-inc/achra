@@ -17,7 +17,7 @@ import ThemeIconLabel from './toogle-theme-label'
 interface NavbarRightSideProps {
   isLoggedIn: boolean
   user?: User
-  onLoginClick?: () => void // Renombrado para mayor claridad
+  onLoginClick?: () => void
 }
 
 function NavbarRightSide({ isLoggedIn, user, onLoginClick }: NavbarRightSideProps) {

@@ -11,13 +11,13 @@ import {
 } from '../../ui/navigation-menu'
 import { type NavItem } from '../types'
 
-interface NavBarItemMobileProps {
+interface NavbarItemMobileProps {
   activeItem?: NavItem
   navItems: NavItem[]
   pathname: string
 }
 
-function NavBarItemMobile({ activeItem, navItems, pathname }: NavBarItemMobileProps) {
+function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobileProps) {
   return (
     <div className="flex items-center md:hidden">
       <NavigationMenu>
@@ -52,4 +52,4 @@ function NavBarItemMobile({ activeItem, navItems, pathname }: NavBarItemMobilePr
   )
 }
 
-export default NavBarItemMobile
+export default NavbarItemMobile
