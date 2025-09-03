@@ -1,16 +1,17 @@
 import { ArrowRight } from 'lucide-react'
+import { type Route } from 'next'
 import Link from 'next/link'
 import { cn } from '@/modules/shared/lib/utils'
 
-interface ProjectLinkProps {
-  href?: string
+interface ProjectLinkProps<T extends string = string> {
+  href?: Route<T> | URL
   code: string
   name: string
 }
 
 const ProjectLink: React.FC<ProjectLinkProps> = ({ href, code, name }) => (
   <Link
-    href={href ?? ''}
+    href={href ?? '#'}
     className="flex w-full justify-between overflow-hidden rounded-sm bg-white shadow-sm"
   >
     <div className="flex w-full max-w-[calc(100%-40px)] items-center gap-2 px-1 py-1 pl-2">

@@ -1,6 +1,8 @@
+import { type RouteWithDynamicPages } from '../../types/routes'
+
 type NavItem = {
   label: string
-  href: string
+  href: RouteWithDynamicPages
   isExternal?: boolean
 }
 
