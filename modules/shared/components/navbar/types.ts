@@ -18,4 +18,9 @@ type NavbarConfig = {
   launchButtonHref?: string
 }
 
-export type { NavbarConfig, NavItem, NavbarProps }
+interface User {
+  username: string
+  avatar: string
+}
+
+export type { NavbarConfig, NavItem, NavbarProps, User }
