@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { DetailsSection } from '@/modules/roadmap/components/details-section'
 import { OverviewSection } from '@/modules/roadmap/components/overview-section'
 import {
@@ -16,11 +17,15 @@ export default function RoadmapPage() {
         <Breadcrumb className="container mx-auto px-4">
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/networks">Networks</BreadcrumbLink>
+              <BreadcrumbLink asChild>
+                <Link href="/networks">Networks</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/network/powerhouse">Powerhouse</BreadcrumbLink>
+              <BreadcrumbLink asChild>
+                <Link href="/network/powerhouse">Powerhouse</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
