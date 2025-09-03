@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useMemo } from 'react'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
 import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
@@ -17,7 +18,7 @@ function Navbar() {
   }
   const handleLoginClick = () => {}
 
-  const config = getNavbarConfig(pathname)
+  const config = useMemo(() => getNavbarConfig(pathname), [pathname])
 
   const { isotype: BrandLogo, logotype: BrandLogotype, navItems } = config
   const activeItem = navItems.find((item) => pathname === item.href)
