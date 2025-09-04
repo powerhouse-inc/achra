@@ -1,4 +1,4 @@
-import { DeliverableStatus, ProgressStatus, type Milestone } from '../milestone-details-card/type'
+import { DeliverableStatus, ProgressStatus, type Milestone } from '../milestone-details-card/types'
 
 export const mockedMilestone1: Milestone = {
   id: 'ustpb52jla',

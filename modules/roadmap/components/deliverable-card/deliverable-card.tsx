@@ -12,7 +12,7 @@ import {
   type IncrementedDeliverable,
   type Deliverable,
   type MDeliverable,
-} from '../milestone-details-card/type'
+} from '../milestone-details-card/types'
 import DeliverablePercentageBar from './deliverable-percentage-bar'
 import DeliverableStorypointBar from './deliverable-storypoint-bar'
 import MilestoneLink from './milestone-link'
