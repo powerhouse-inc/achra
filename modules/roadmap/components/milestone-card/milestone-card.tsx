@@ -1,9 +1,9 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
+import { Button } from '@/shared/components/ui/button'
 import { Card, CardHeader, CardContent, CardFooter } from '@/shared/components/ui/card'
 import { Progress } from '@/shared/components/ui/progress'
-import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 import { formatDateStringToQuarter, getStatusColor } from './utils'
 import type { Milestone } from './types'
@@ -34,7 +34,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col p-2">
-        <div className="mb-2 flex flex-1 flex-col rounded-lg border border-gray-200 bg-gray-50 p-2">
+        <div className="milestone-title-section mb-2 flex flex-1 flex-col rounded-lg border border-gray-200 bg-gray-50 p-2">
           <h4 className="mb-1 line-clamp-2 text-sm font-semibold text-gray-900">
             {milestone.title}
           </h4>
@@ -67,10 +67,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
                 milestone.status === 'To do' && '[&>div]:bg-orange-600',
               )}
             />
-            <div
-              className="absolute inset-0 flex items-center justify-end pr-2 text-xs font-medium text-white"
-              style={{ zIndex: 10 }}
-            >
+            <div className="absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-medium text-white">
               {milestone.progress}%
             </div>
           </div>
