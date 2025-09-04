@@ -1,7 +1,7 @@
 import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'
 import { DeliverableCard } from '../deliverable-card'
-import type { MDeliverable } from './type'
+import type { MDeliverable } from './types'
 
 interface DeliverablesSectionProps {
   deliverables: MDeliverable[]

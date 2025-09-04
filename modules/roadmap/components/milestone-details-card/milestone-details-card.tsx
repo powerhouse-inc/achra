@@ -5,7 +5,7 @@ import DeliverablesSection from './deliverables-section'
 import MilestoneProgress from './milestone-progress'
 import TargetData from './target-data'
 import TitleAndDescription from './title-and-description'
-import type { Milestone } from './type'
+import type { Milestone } from './types'
 
 interface MilestoneDetailsCardProps {
   milestone: Milestone

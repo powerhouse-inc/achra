@@ -1,6 +1,6 @@
 import { UserRound } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
-import type { OwnerRef } from './type'
+import type { OwnerRef } from './types'
 
 interface CoordinatorsProps {
   coordinators: OwnerRef[]

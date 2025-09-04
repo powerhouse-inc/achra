@@ -1,4 +1,4 @@
-import type { DeliverableSet } from './type'
+import type { DeliverableSet } from './types'
 
 interface MilestoneProgressProps {
   data: Omit<DeliverableSet, 'deliverables'>

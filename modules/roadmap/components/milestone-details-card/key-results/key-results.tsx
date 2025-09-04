@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import { cn } from '@/modules/shared/lib/utils'
 import { type DeliverableViewMode } from '../../deliverable-card/deliverable-card'
-import { type KeyResult } from '../type'
+import { type KeyResult } from '../types'
 import ExpandableButtonItem from './expandable-button-item'
 import MaybeScrollableList from './maybe-scrollable-list'
 
@@ -68,7 +68,7 @@ export default function KeyResults({
 
   return (
     <div
-      className="overflow-hiddenpn-2 mt-4 flex w-full flex-col gap-2 rounded-lg border"
+      className="mt-4 flex w-full flex-col gap-2 overflow-hidden rounded-lg border p-2"
       style={!isMobile ? { height: componentHeight } : undefined}
     >
       <div className="m-0 px-2 pt-1 pb-0 text-xs font-medium">
