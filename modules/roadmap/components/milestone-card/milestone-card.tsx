@@ -15,57 +15,59 @@ interface MilestoneCardProps {
 
 export default function MilestoneCard({ milestone, className }: MilestoneCardProps) {
   return (
-    <Card className={cn(
-      'w-full h-full bg-white rounded-xl border-gray-200 shadow-sm overflow-hidden gap-0 py-0',
-      className
-    )}>
-      <CardHeader className="flex flex-row justify-between items-center px-2 py-1 bg-gray-50 border-b border-gray-100 gap-0 grid-rows-none auto-rows-auto">
+    <Card
+      className={cn(
+        'h-full w-full gap-0 overflow-hidden rounded-xl border-gray-200 bg-white py-0 shadow-sm',
+        className,
+      )}
+    >
+      <CardHeader className="flex auto-rows-auto grid-rows-none flex-row items-center justify-between gap-0 border-b border-gray-100 bg-gray-50 px-2 py-1">
         <div className="flex items-center gap-1">
-          <span className="text-gray-400 font-semibold text-sm">{milestone.sequenceCode}</span>
-          <span className="text-gray-900 font-semibold text-sm">{milestone.code}</span>
+          <span className="text-sm font-semibold text-gray-400">{milestone.sequenceCode}</span>
+          <span className="text-sm font-semibold text-gray-900">{milestone.code}</span>
         </div>
-        <div className="px-1 py-0.5 rounded">
-          <span className="text-gray-400 font-semibold text-sm">
+        <div className="rounded px-1 py-0.5">
+          <span className="text-sm font-semibold text-gray-400">
             {formatDateStringToQuarter(milestone.targetDate)}
           </span>
         </div>
       </CardHeader>
 
-      <CardContent className="p-2 flex-1 flex flex-col">
-        <div className="mb-2 p-2 bg-gray-50 border border-gray-200 rounded-lg flex-1 flex flex-col">
-          <h4 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">
+      <CardContent className="flex flex-1 flex-col p-2">
+        <div className="mb-2 flex flex-1 flex-col rounded-lg border border-gray-200 bg-gray-50 p-2">
+          <h4 className="mb-1 line-clamp-2 text-sm font-semibold text-gray-900">
             {milestone.title}
           </h4>
           {milestone.abstract && (
-            <p className="text-xs text-gray-600 flex-1 overflow-hidden text-ellipsis">
+            <p className="flex-1 overflow-hidden text-xs text-ellipsis text-gray-600">
               {milestone.abstract}
             </p>
           )}
         </div>
 
-        <div className="p-2 bg-gray-50 border border-gray-200 rounded-lg">
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-xs font-medium text-gray-600">
-              Status
-            </span>
-            <span className={cn(
-              'px-2 py-0.5 rounded-full text-xs font-medium',
-              getStatusColor(milestone.status)
-            )}>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-2">
+          <div className="mb-1 flex items-center justify-between">
+            <span className="text-xs font-medium text-gray-600">Status</span>
+            <span
+              className={cn(
+                'rounded-full px-2 py-0.5 text-xs font-medium',
+                getStatusColor(milestone.status),
+              )}
+            >
               {milestone.status}
             </span>
           </div>
           <div className="relative">
-            <Progress 
-              value={milestone.progress} 
+            <Progress
+              value={milestone.progress}
               className={cn(
                 'h-6 bg-gray-200',
                 milestone.status === 'Delivered' && '[&>div]:bg-green-600',
                 milestone.status === 'In Progress' && '[&>div]:bg-blue-600',
-                milestone.status === 'To do' && '[&>div]:bg-orange-600'
+                milestone.status === 'To do' && '[&>div]:bg-orange-600',
               )}
             />
-            <div 
+            <div
               className="absolute inset-0 flex items-center justify-end pr-2 text-xs font-medium text-white"
               style={{ zIndex: 10 }}
             >
@@ -76,10 +78,10 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
       </CardContent>
 
       <CardFooter className="p-2 pt-0">
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="w-full justify-center gap-1 text-xs h-7"
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-7 w-full justify-center gap-1 text-xs"
           asChild
         >
           <a href={`#${milestone.code}`}>

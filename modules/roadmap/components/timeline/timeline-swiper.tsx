@@ -12,11 +12,11 @@ import type { Milestone } from '../milestone-card/types'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-export default function TimelineSwiper({ milestones }: {milestones: Milestone[]}) {
+export default function TimelineSwiper({ milestones }: { milestones: Milestone[] }) {
   const swiperRef = useRef<SwiperRef>(null)
 
   return (
-    <div className="hidden md:flex lg:hidden flex-col mt-6">
+    <div className="mt-6 hidden flex-col md:flex lg:hidden">
       <div className="relative -mx-2">
         <Swiper
           ref={swiperRef}
@@ -34,17 +34,17 @@ export default function TimelineSwiper({ milestones }: {milestones: Milestone[]}
           centerInsufficientSlides
           className={cn(
             'milestone-swiper',
-            '[&_.swiper-slide]:box-border [&_.swiper-slide]:h-auto [&_.swiper-slide]:mb-2',
+            '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:h-auto',
             '[&_.swiper-pagination-horizontal]:relative [&_.swiper-pagination-horizontal]:bottom-0 [&_.swiper-pagination-horizontal]:mt-4',
-            '[&_.swiper-pagination-bullet]:w-4 [&_.swiper-pagination-bullet]:h-4 [&_.swiper-pagination-bullet]:bg-gray-300 [&_.swiper-pagination-bullet]:opacity-100',
+            '[&_.swiper-pagination-bullet]:h-4 [&_.swiper-pagination-bullet]:w-4 [&_.swiper-pagination-bullet]:bg-gray-300 [&_.swiper-pagination-bullet]:opacity-100',
             '[&_.swiper-pagination-bullet:first-child]:rounded-l-full [&_.swiper-pagination-bullet:last-child]:rounded-r-full',
             '[&_.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover]:bg-gray-400',
-            '[&_.swiper-pagination-bullet-active]:bg-blue-600'
+            '[&_.swiper-pagination-bullet-active]:bg-blue-600',
           )}
         >
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id}>
-              <div className="h-full mx-2">
+              <div className="mx-2 h-full">
                 <MilestoneCard milestone={milestone} />
               </div>
             </SwiperSlide>
