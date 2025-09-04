@@ -42,7 +42,7 @@ export default function MilestoneProgress({ data }: MilestoneProgressProps) {
       {/* Placeholder for PercentageProgressBar */}
       <PlaceholderProgressBar value={progress} />
 
-      <div className="text-sm leading-6 font-semibold text-gray-900 dark:text-gray-50">
+      <div className="text-sm leading-6 font-semibold text-gray-900">
         <span className="text-blue-700 dark:text-blue-900">{data?.deliverablesCompleted ?? 0}</span>
         <span className="px-1 font-bold text-slate-500 dark:text-slate-400">/</span>
         <span className="font-bold text-slate-500 dark:text-slate-400">

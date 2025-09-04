@@ -6,6 +6,7 @@ import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliver
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
+import KeyResults from '../milestone-details-card/key-results/key-results'
 import {
   DeliverableStatus,
   type IncrementedDeliverable,
@@ -34,7 +35,7 @@ export default function DeliverableCard({
 }: DeliverableCardProps) {
   const isMobile = useMediaQuery('(min-width: 768px)')
   const [expanded, setExpanded] = useState<boolean>(false)
-  const handleToggleExpanded = useCallback(() => {
+  const handleToggleExpand = useCallback(() => {
     setExpanded((prev) => !prev)
   }, [])
   const deliverableProgress =
@@ -124,13 +125,13 @@ export default function DeliverableCard({
                 name={(deliverable as MDeliverable).budgetAnchor.project.title}
               />
             )}
-        {/* <KeyResults
+        <KeyResults
           keyResults={deliverable.keyResults}
           viewMode={viewMode}
           expanded={expanded}
           handleToggleExpand={handleToggleExpand}
           maxKeyResultsOnRow={maxKeyResultsOnRow}
-        /> */}
+        />
       </div>
     </div>
   )
