@@ -23,9 +23,15 @@ export function NavbarBrand({ isNetworksPage, BrandLogo, BrandLogotype }: Navbar
   return (
     <div className="flex items-center gap-4 md:gap-6">
       <div className={logoContainerClasses}>
-        <Link href="https://staging.achra.com/" target="_blank" className="cursor-pointer">
+        <a
+          href="https://staging.achra.com/"
+          target="_blank"
+          className="cursor-pointer"
+          rel="noopener noreferrer"
+          aria-label="Achra homepage"
+        >
           <MainLogoComponent className={cn('h-9', isNetworksPage ? 'text-primary w-42' : 'w-9')} />
-        </Link>
+        </a>
       </div>
       {!isNetworksPage && BrandLogo && BrandLogotype && (
         <Link href="/networks" className="cursor-pointer">
