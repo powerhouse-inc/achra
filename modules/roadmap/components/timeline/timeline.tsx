@@ -34,7 +34,7 @@ export default function Timeline({ milestones }: { milestones: Milestone[] }) {
             milestones.length > 3 && 'pr-20 lg:pr-[130px] xl:pr-[180px] 2xl:pr-[195px]',
           )}
         >
-          {upMilestones.map((milestone, _) => {
+          {upMilestones.map((milestone) => {
             const isLast = milestone === milestones[milestones.length - 1]
 
             return (
@@ -76,7 +76,7 @@ export default function Timeline({ milestones }: { milestones: Milestone[] }) {
               'pl-20 lg:pl-[130px] xl:pl-[180px] 2xl:pl-[195px]',
             )}
           >
-            {downMilestones.map((milestone, _) => {
+            {downMilestones.map((milestone) => {
               const isLast = milestone === milestones[milestones.length - 1]
 
               return (
