@@ -3,7 +3,6 @@ import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
 import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
 import { cn } from '@/modules/shared/lib/utils'
 import React from 'react'
-import { HOME_URL } from '../const'
 import { NAVBAR_CONFIGS } from '../navbar-config'
 
 interface NavbarBrandProps {
@@ -31,7 +30,7 @@ export function NavbarBrand({
     <div className="flex items-center gap-4 md:gap-6">
       <div className={logoContainerClasses}>
         <a
-          href={HOME_URL}
+          href="/"
           target="_blank"
           className="cursor-pointer"
           rel="noopener noreferrer"
