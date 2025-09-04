@@ -8,7 +8,7 @@ export type NetworkSlug =
   | 'launch-agent-2'
   | 'launch-agent-3'
 
-export type NetworkPages = 'contributors' | 'roadmap' | 'finances' | 'builders'
+export type NetworkPages = 'contributors' | 'roadmap' | 'finances' | 'builders' | 'services'
 
 export type RouteWithDynamicPages = Route<
   `/network/${NetworkSlug}` | `/network/${NetworkSlug}/${NetworkPages}`
