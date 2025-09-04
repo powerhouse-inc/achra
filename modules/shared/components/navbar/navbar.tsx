@@ -18,7 +18,7 @@ function Navbar() {
   const handleLoginClick = () => {}
 
   const config = useMemo(() => getNavbarConfig(pathname), [pathname])
-  const { isotype: BrandLogo, logotype: BrandLogotype, navItems } = config
+  const { isotype: Isotype, logotype: Logotype, navItems } = config
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
@@ -30,8 +30,8 @@ function Navbar() {
           <div className="flex items-center gap-4">
             <NavbarBrand
               isNetworksPage={isNetworksPage}
-              BrandLogo={BrandLogo}
-              BrandLogotype={BrandLogotype}
+              isotypeLogo={Isotype}
+              logotype={Logotype}
             />
             <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
           </div>
