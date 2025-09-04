@@ -23,15 +23,17 @@ export function NavbarBrand({ isNetworksPage, BrandLogo, BrandLogotype }: Navbar
   return (
     <div className="flex items-center gap-4 md:gap-6">
       <div className={logoContainerClasses}>
-        <Link href="/networks">
+        <Link href="https://staging.achra.com/" target="_blank" className="cursor-pointer">
           <MainLogoComponent className={cn('h-9', isNetworksPage ? 'text-primary w-42' : 'w-9')} />
         </Link>
       </div>
       {!isNetworksPage && BrandLogo && BrandLogotype && (
-        <div className="flex items-center gap-2">
-          <BrandLogo className="h-8 w-8" />
-          <BrandLogotype className="hidden h-8 w-16 md:flex" />
-        </div>
+        <Link href="/networks" className="cursor-pointer">
+          <div className="flex items-center gap-2">
+            <BrandLogo className="h-8 w-8" />
+            <BrandLogotype className="hidden h-8 w-16 md:flex" />
+          </div>
+        </Link>
       )}
     </div>
   )
