@@ -35,7 +35,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     navItems: [
       { label: 'Networks', href: '/networks' },
       { label: 'Roadmaps', href: '/network/sky/roadmap' },
-      { label: 'Services', href: '/network/sky/services' },
+      { label: 'Services', href: '/services' },
     ],
     authComponent: 'loginButton',
   },
