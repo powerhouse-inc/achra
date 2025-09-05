@@ -6,4 +6,3 @@ export { default as PowerhouseLogoIsotype } from './powerhouse-isotype.svg'
 export { default as PowerhouseLogoLogotype } from './powerhouse-logotype.svg'
 export { default as SparkIsotype } from './spark-isotype.svg'
 export { default as GroveIsotype } from './grove-isotype.svg'
-

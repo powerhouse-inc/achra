@@ -1,4 +1,3 @@
-import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import { NetworkCard } from '@/modules/networks/components/network-card'
 import {
   PowerhouseLogoIsotype,
@@ -6,6 +5,7 @@ import {
   SparkIsotype,
   GroveIsotype,
 } from '@/modules/shared/components/svgs'
+import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface Network {
   id: string

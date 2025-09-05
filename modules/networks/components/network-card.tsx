@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/compo
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface NetworkCardProps {
   isotype: React.ReactNode
@@ -11,7 +12,7 @@ interface NetworkCardProps {
   description: string
   buttonText: string
   backgroundImage: string
-  href: string
+  href: RouteWithDynamicPages
 }
 
 export function NetworkCard({
@@ -42,17 +43,14 @@ export function NetworkCard({
               {title}
             </div>
           </CardTitle>
-          <Badge
-            variant="secondary"
-            className={`text-foreground ${tagColor}`}
-          >
+          <Badge variant="secondary" className={`text-foreground ${tagColor}`}>
             {tag}
           </Badge>
         </div>
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col justify-between p-0 pt-0">
-        <div className="flex flex-col mt-2">
+        <div className="mt-2 flex flex-col">
           <p className="text-foreground text-sm font-medium">{description}</p>
         </div>
 
