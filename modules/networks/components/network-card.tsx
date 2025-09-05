@@ -38,7 +38,7 @@ export function NetworkCard({
       <CardHeader className="p-0">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <div className="flex h-8 w-8 md:h-9 md:w-9">{isotype}</div>
+            <div className="flex h-6 w-6 md:h-8 md:w-8">{isotype}</div>
             <div className="text-accent-foreground flex w-full items-center text-2xl md:text-3xl">
               {title}
             </div>
