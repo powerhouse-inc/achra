@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import React from 'react'
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/modules/shared/components/ui/card'
-import { SkyIsotype } from '@/modules/shared/components/svgs'
+import { PowerhouseLogoIsotype } from '@/modules/shared/components/svgs'
 import { NetworkCard } from './network-card'
 
 const meta = {
@@ -23,7 +15,7 @@ type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   args: {
-    isotype: <SkyIsotype width={32} height={24} />,
+    isotype: <PowerhouseLogoIsotype />,
     title: 'Powerhouse',
     href: '/network/powerhouse',
     tag: 'OSS',
