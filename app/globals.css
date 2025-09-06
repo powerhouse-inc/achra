@@ -176,6 +176,9 @@
   --color-status-progress: var(--status-progress);
   --color-status-success: var(--status-success);
   --color-status-warning: var(--status-warning);
+
+  /* CUSTOM ACHRA FONTS */
+  --text-lead: 32px;
 }
 
 @layer base {
