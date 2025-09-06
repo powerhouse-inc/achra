@@ -13,6 +13,7 @@ interface NetworkCardProps {
   buttonText: string
   backgroundImage: string
   href: RouteWithDynamicPages
+  titleColor: string
 }
 
 export function NetworkCard({
@@ -24,6 +25,7 @@ export function NetworkCard({
   buttonText,
   backgroundImage,
   href,
+  titleColor,
 }: NetworkCardProps) {
   const cardStyle = {
     backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.7) 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(${backgroundImage})`,
@@ -44,7 +46,7 @@ export function NetworkCard({
               {title}
             </div>
           </CardTitle>
-          <Badge variant="secondary" className={`text-foreground ${tagColor}`}>
+          <Badge variant="secondary" className={`${titleColor} ${tagColor}`}>
             {tag}
           </Badge>
         </div>

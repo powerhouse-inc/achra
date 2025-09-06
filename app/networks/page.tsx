@@ -18,6 +18,7 @@ interface Network {
   description: string
   buttonText: string
   backgroundImage: string
+  titleColor: string
 }
 
 const networks: Network[] = [
@@ -33,6 +34,7 @@ const networks: Network[] = [
     buttonText: 'Explore Powerhouse ',
     bgGradient: 'from-purple-500/20 to-blue-500/20',
     backgroundImage: '/powerhouse-card-background.png',
+    titleColor: 'text-foreground',
   },
   {
     id: 'sky',
@@ -40,12 +42,13 @@ const networks: Network[] = [
     title: 'Sky',
     href: '/network/sky',
     tag: 'DeFi',
-    tagColor: 'bg-blue-500',
+    tagColor: 'bg-status-progress/40',
     description:
       'Sky serves as a pivotal hub within the ecosystem, where users can access a wealth of resources and tools. This platform empowers exploration and innovation, enabling seamless interactions and collaboration among various stakeholders.',
     buttonText: 'Explore Sky ',
     bgGradient: 'from-pink-500/20 to-purple-500/20',
     backgroundImage: '/sky-card-background.png',
+    titleColor: 'text-status-progress',
   },
   {
     id: 'spark',
@@ -53,12 +56,13 @@ const networks: Network[] = [
     title: 'Spark',
     href: '/network/spark',
     tag: 'DeFi',
-    tagColor: 'bg-blue-500',
+    tagColor: 'bg-status-progress/40',
     description:
       "Spark is a dynamic network within the Powerhouse ecosystem, designed to amplify the platform's capabilities. By facilitating seamless interactions and resource sharing, Spark empowers users to innovate and collaborate effectively.",
     buttonText: 'Explore Spark ',
     bgGradient: 'from-green-400/20 to-white/20',
     backgroundImage: '/spark-card-background.png',
+    titleColor: 'text-status-progress',
   },
   {
     id: 'grove',
@@ -72,6 +76,7 @@ const networks: Network[] = [
     buttonText: 'Explore Grove ',
     bgGradient: 'from-green-600/20 to-emerald-500/20',
     backgroundImage: '/grove-card-background.png',
+    titleColor: 'text-foreground',
   },
   {
     id: 'launch-agent-2',
@@ -85,6 +90,7 @@ const networks: Network[] = [
     buttonText: 'Explore Launch Agent 2 ',
     bgGradient: 'from-orange-500/20 to-red-500/20',
     backgroundImage: '/image.png',
+    titleColor: 'text-foreground',
   },
   {
     id: 'launch-agent-3',
@@ -92,12 +98,13 @@ const networks: Network[] = [
     title: 'Launch Agent 3',
     href: '/network/launch-agent-3',
     tag: 'DeFi',
-    tagColor: 'bg-blue-500',
+    tagColor: 'bg-status-progress/40',
     description:
       'Launch Agent 3 is a cutting-edge network within the Powerhouse ecosystem, designed to optimize connectivity and streamline operations.',
     buttonText: 'Explore Launch Agent 3',
     bgGradient: 'from-sky-400/20 to-blue-300/20',
     backgroundImage: '/launch-card-background.png',
+    titleColor: 'text-status-progress',
   },
 ]
 
@@ -121,6 +128,7 @@ export default function NetworksPage() {
               tagColor={network.tagColor}
               description={network.description}
               buttonText={network.buttonText}
+              titleColor={network.titleColor}
             />
           ))}
         </div>
