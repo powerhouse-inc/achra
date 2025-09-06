@@ -2,10 +2,10 @@
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
+import { NavbarBrand } from './components/navbar-brand'
 import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
 import NavbarRightSide from './components/navbar-right-side'
-import { NavbarBrand } from './components/navbar-brand'
 import { getNavbarConfig } from './navbar-config'
 
 function Navbar() {
@@ -18,7 +18,7 @@ function Navbar() {
   const handleLoginClick = () => {}
 
   const config = useMemo(() => getNavbarConfig(pathname), [pathname])
-  const { isotype: Isotype, logotype: Logotype, navItems } = config
+  const { isotype: Isotype, logotype: Logotype, logotypeClassName, navItems } = config
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
@@ -32,6 +32,7 @@ function Navbar() {
               isNetworksPage={isNetworksPage}
               isotypeLogo={Isotype}
               logotype={Logotype}
+              logotypeClassName={logotypeClassName}
             />
             <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
           </div>

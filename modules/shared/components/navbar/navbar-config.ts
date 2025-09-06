@@ -1,7 +1,8 @@
-import PowerhouseLogo from '@/modules/shared/components/svgs/powerhouse.svg'
+import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
+import PowerhouseLogo from '@/modules/shared/components/svgs/powerhouse-isotype.svg'
+import PowerhouseLogotype from '@/modules/shared/components/svgs/powerhouse-logotype.svg'
 import SkyIsotype from '@/modules/shared/components/svgs/sky-isotype.svg'
 import SkyLogotype from '@/modules/shared/components/svgs/sky-logotype.svg'
-import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
 import type { NavbarConfig } from './types'
 
 export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
@@ -18,8 +19,9 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     authComponent: 'loginButton',
   },
   '/powerhouse': {
-    isotype: SkyIsotype,
-    logotype: SkyLogotype,
+    isotype: PowerhouseLogo,
+    logotype: PowerhouseLogotype,
+    logotypeClassName: 'w-44',
     navItems: [
       { label: 'Contributors', href: '/network/sky/contributors' },
       { label: 'Roadmap', href: '/network/sky/roadmap' },
