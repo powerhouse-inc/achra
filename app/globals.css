@@ -21,7 +21,7 @@
   --destructive: oklch(0.6257 0.2058 29.0773);
   --destructive-foreground: oklch(0.9911 0 0);
   --border: oklch(0.8817 0.0018 247.84);
-  --input: oklch(1 0 0);
+  --input: oklch(0.922 0 0);
   --ring: oklch(0.3372 0.0058 214.37);
   --chart-1: oklch(0.81 0.1 252);
   --chart-2: oklch(0.62 0.19 260);
@@ -59,6 +59,11 @@
   --shadow-modules: 1px 4px 15px 0 hsl(219 22% 37% / 0.25);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+  /* CUSTOM ACHRA COLORS */
+  --status-progress: oklch(0.684 0.1727 250.59);
+  --status-success: oklch(0.7432 0.1665 149.27);
+  --status-warning: oklch(0.7873 0.1608 64.84);
 }
 
 .dark {
@@ -115,6 +120,11 @@
   --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
   --shadow-modules: 1px 4px 15px 0 hsl(219 22% 37% / 0.25);
+
+  /* CUSTOM ACHRA COLORS */
+  --status-progress: oklch(0.684 0.1727 250.59);
+  --status-success: oklch(0.7432 0.1665 149.27);
+  --status-warning: oklch(0.7873 0.1608 64.84);
 }
 
 @theme inline {
@@ -173,6 +183,11 @@
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
   --shadow-modules: var(--shadow-modules);
+
+  /* CUSTOM ACHRA COLORS */
+  --color-status-progress: var(--status-progress);
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
 }
 
 @layer base {

@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/type'
+import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
 
 interface DeliverableStatusChipProps {
   status: DeliverableStatus
