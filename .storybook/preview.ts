@@ -1,4 +1,5 @@
 import { withThemeByClassName } from '@storybook/addon-themes'
+import { withNextjsExtras } from '../modules/shared/lib/decorators'
 import type { Preview } from '@storybook/nextjs'
 
 import '../app/globals.css'
@@ -12,6 +13,7 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    withNextjsExtras,
   ],
   parameters: {
     controls: {

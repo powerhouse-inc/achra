@@ -3,7 +3,7 @@ import MilestoneDetailsCard from './milestone-details-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Roadmap/Components/MilestoneDetailsCard',
+  title: 'Modules/Roadmap/Components/MilestoneDetailsCard',
   component: MilestoneDetailsCard,
   parameters: {
     nextjs: {
