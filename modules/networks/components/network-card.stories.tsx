@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs'
 import React from 'react'
 import { PowerhouseLogoIsotype } from '@/modules/shared/components/svgs'
 import { NetworkCard } from './network-card'
+import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Components/NetworkCard',
@@ -23,6 +23,6 @@ export const Basic: Story = {
     description:
       'Powerhouse is the central network within the Sky ecosystem, dedicated to gathering and simplifying data for all users. It ensures that information is not only accessible but also easy to understand.',
     buttonText: 'Explore Powerhouse',
-    backgroundImage: '/image.png',
+    backgroundImage: '/network-backgrounds/powerhouse-card-background.png',
   },
 }
