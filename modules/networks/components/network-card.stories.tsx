@@ -1,5 +1,5 @@
 import React from 'react'
-import { PowerhouseLogoIsotype } from '@/modules/shared/components/svgs'
+import { PowerhouseLogoIsotype, PowerhouseLogotype } from '@/modules/shared/components/svgs'
 import { NetworkCard } from './network-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -14,8 +14,12 @@ type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   args: {
-    isotype: <PowerhouseLogoIsotype />,
-    title: 'Powerhouse',
+    isotype: (
+      <div className="flex items-center gap-2">
+        <PowerhouseLogoIsotype className="h-6 w-6" />
+        <PowerhouseLogotype className="w-40" />
+      </div>
+    ),
     href: '/network/powerhouse',
     tag: 'OSS',
     variant: 'oss',

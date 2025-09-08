@@ -7,7 +7,7 @@ import NetworkChip from './network-chips'
 
 interface NetworkCardProps {
   isotype: React.ReactNode
-  title: string
+  title?: string | React.ReactNode
   tag: string
   description: string
   buttonText: string
@@ -27,7 +27,7 @@ export function NetworkCard({
   variant,
 }: NetworkCardProps) {
   const cardStyle = {
-    backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.7) 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(${backgroundImage})`,
+    backgroundImage: `linear-gradient(180deg, #FFF 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(${backgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

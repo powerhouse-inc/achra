@@ -5,13 +5,17 @@ import {
   SkyIsotype,
   SparkIsotype,
   GroveIsotype,
+  PowerhouseLogotype,
+  SkyLogotype,
+  SparkLogotype,
+  InstagramIsotype,
 } from '@/modules/shared/components/svgs'
 import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface Network {
   id: string
   isotype: React.ReactNode
-  title: string
+  title?: string
   href: RouteWithDynamicPages
   tag: string
   description: string
@@ -23,8 +27,12 @@ interface Network {
 const networks: Network[] = [
   {
     id: 'powerhouse',
-    isotype: <PowerhouseLogoIsotype />,
-    title: 'Powerhouse',
+    isotype: (
+      <div className="flex items-center gap-2">
+        <PowerhouseLogoIsotype className="h-6 w-6" />
+        <PowerhouseLogotype className="w-40" />
+      </div>
+    ),
     href: '/network/powerhouse',
     tag: 'OSS',
 
@@ -36,8 +44,12 @@ const networks: Network[] = [
   },
   {
     id: 'sky',
-    isotype: <SkyIsotype />,
-    title: 'Sky',
+    isotype: (
+      <div className="flex items-center gap-2">
+        <SkyIsotype className="h-6 w-6" />
+        <SkyLogotype className="h-8" />
+      </div>
+    ),
     href: '/network/sky',
     tag: 'DeFi',
     description:
@@ -48,8 +60,12 @@ const networks: Network[] = [
   },
   {
     id: 'spark',
-    isotype: <SparkIsotype />,
-    title: 'Spark',
+    isotype: (
+      <div className="flex items-center gap-2">
+        <SparkIsotype className="h-9 w-9" />
+        <SparkLogotype className="h-10" />
+      </div>
+    ),
     href: '/network/spark',
     tag: 'DeFi',
     description:
@@ -72,7 +88,7 @@ const networks: Network[] = [
   },
   {
     id: 'launch-agent-2',
-    isotype: <GroveIsotype />,
+    isotype: <InstagramIsotype />,
     title: 'Launch Agent 2',
     href: '/network/launch-agent-2',
     tag: 'OSS',
@@ -84,7 +100,7 @@ const networks: Network[] = [
   },
   {
     id: 'launch-agent-3',
-    isotype: <GroveIsotype />,
+    isotype: <InstagramIsotype className="h-10 w-10" />,
     title: 'Launch Agent 3',
     href: '/network/launch-agent-3',
     tag: 'DeFi',
