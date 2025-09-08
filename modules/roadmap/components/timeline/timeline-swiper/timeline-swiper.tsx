@@ -38,10 +38,10 @@ export default function TimelineSwiper({ milestones }: { milestones: Milestone[]
             'milestone-swiper !pb-10',
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
             '[&_.swiper-pagination]:!absolute [&_.swiper-pagination]:!bottom-0 [&_.swiper-pagination]:!z-10',
-            '[&_.swiper-pagination-bullet]:h-4 [&_.swiper-pagination-bullet]:w-4 [&_.swiper-pagination-bullet]:bg-gray-300 [&_.swiper-pagination-bullet]:opacity-100',
-            '[&_.swiper-pagination-bullet:first-child]:rounded-l-full [&_.swiper-pagination-bullet:last-child]:rounded-r-full',
-            '[&_.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover]:bg-gray-400',
-            '[&_.swiper-pagination-bullet-active]:bg-blue-600',
+            '[&_.swiper-pagination-bullet]:!bg-muted [&_.swiper-pagination-bullet]:!h-4 [&_.swiper-pagination-bullet]:!w-4 [&_.swiper-pagination-bullet]:!opacity-100',
+            '[&_.swiper-pagination-bullet:first-child]:!rounded-r-none [&_.swiper-pagination-bullet:last-child]:!rounded-l-none',
+            '[&_.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover]:!bg-primary/10',
+            '[&_.swiper-pagination-bullet-active]:!bg-primary',
           )}
         >
           {milestones.map((milestone) => (
