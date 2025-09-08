@@ -5,29 +5,34 @@ import {
   SkyIsotype,
   SparkIsotype,
   GroveIsotype,
+  PowerhouseLogotype,
+  SkyLogotype,
+  SparkLogotype,
+  InstagramIsotype,
+  GroveLogotype,
 } from '@/modules/shared/components/svgs'
 import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface Network {
   id: string
   isotype: React.ReactNode
-  title: string
+  title?: string
   href: RouteWithDynamicPages
   tag: string
   description: string
   buttonText: string
   backgroundImage: string
   variant: ChipVariant
+  logotype?: React.ReactNode
 }
 
 const networks: Network[] = [
   {
     id: 'powerhouse',
-    isotype: <PowerhouseLogoIsotype />,
-    title: 'Powerhouse',
+    isotype: <PowerhouseLogoIsotype className="h-6 w-6" />,
+    logotype: <PowerhouseLogotype className="w-40" />,
     href: '/network/powerhouse',
     tag: 'OSS',
-
     description:
       'Powerhouse is the central network within the Sky ecosystem, dedicated to gathering and simplifying data for all users. It ensures that information is not only accessible but also easy to understand.',
     buttonText: 'Explore Powerhouse ',
@@ -36,8 +41,8 @@ const networks: Network[] = [
   },
   {
     id: 'sky',
-    isotype: <SkyIsotype />,
-    title: 'Sky',
+    isotype: <SkyIsotype className="h-7 w-7" />,
+    logotype: <SkyLogotype className="h-8" />,
     href: '/network/sky',
     tag: 'DeFi',
     description:
@@ -48,8 +53,8 @@ const networks: Network[] = [
   },
   {
     id: 'spark',
-    isotype: <SparkIsotype />,
-    title: 'Spark',
+    isotype: <SparkIsotype className="h-7 w-7 md:h-9 md:w-9" />,
+    logotype: <SparkLogotype className="h-9 md:h-9 md:w-20" />,
     href: '/network/spark',
     tag: 'DeFi',
     description:
@@ -60,8 +65,8 @@ const networks: Network[] = [
   },
   {
     id: 'grove',
-    isotype: <GroveIsotype />,
-    title: 'Grove',
+    isotype: <GroveIsotype className="h-8 w-8 sm:h-10 sm:w-10" />,
+    logotype: <GroveLogotype className="h-5 md:h-9 md:w-20" />,
     href: '/network/grove',
     tag: 'OSS',
     description:
@@ -72,7 +77,7 @@ const networks: Network[] = [
   },
   {
     id: 'launch-agent-2',
-    isotype: <GroveIsotype />,
+    isotype: <InstagramIsotype className="h-10 w-10" />,
     title: 'Launch Agent 2',
     href: '/network/launch-agent-2',
     tag: 'OSS',
@@ -84,7 +89,7 @@ const networks: Network[] = [
   },
   {
     id: 'launch-agent-3',
-    isotype: <GroveIsotype />,
+    isotype: <InstagramIsotype className="h-10 w-10" />,
     title: 'Launch Agent 3',
     href: '/network/launch-agent-3',
     tag: 'DeFi',
@@ -116,6 +121,7 @@ export default function NetworksPage() {
               description={network.description}
               buttonText={network.buttonText}
               variant={network.variant}
+              logotype={network.logotype}
             />
           ))}
         </div>
