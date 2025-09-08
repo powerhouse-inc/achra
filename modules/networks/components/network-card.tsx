@@ -1,29 +1,30 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { Badge } from '@/modules/shared/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
+import { type ChipVariant } from '../types'
+import NetworkChip from './network-chips'
 
 interface NetworkCardProps {
   isotype: React.ReactNode
   title: string
   tag: string
-  tagColor: string
   description: string
   buttonText: string
   backgroundImage: string
   href: RouteWithDynamicPages
+  variant: ChipVariant
 }
 
 export function NetworkCard({
   isotype,
   title,
   tag,
-  tagColor,
   description,
   buttonText,
   backgroundImage,
   href,
+  variant,
 }: NetworkCardProps) {
   const cardStyle = {
     backgroundImage: `linear-gradient(180deg, rgba(255, 255, 255, 0.7) 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(${backgroundImage})`,
@@ -44,9 +45,7 @@ export function NetworkCard({
               {title}
             </div>
           </CardTitle>
-          <Badge variant="secondary" className={`text-foreground ${tagColor}`}>
-            {tag}
-          </Badge>
+          <NetworkChip variant={variant}>{tag}</NetworkChip>
         </div>
       </CardHeader>
 
