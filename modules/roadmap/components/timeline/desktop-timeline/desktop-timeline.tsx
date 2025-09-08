@@ -6,18 +6,12 @@ import useDesktopTimeline from './use-desktop-timeline'
 import type { Milestone } from '../../milestone-card/types'
 
 export default function DesktopTimeline({ milestones }: { milestones: Milestone[] }) {
-  const desktopTimeline = useDesktopTimeline()
+  const { containerRef, upMilestones, downMilestones } = useDesktopTimeline({ milestones })
 
   if (milestones.length === 0) return null
 
-  const upMilestones = milestones.length < 4 ? milestones : milestones.filter((_, i) => i % 2 === 0)
-  const downMilestones = milestones.filter((_, i) => i % 2 !== 0)
-
   return (
-    <div
-      className="hidden lg:mx-auto lg:flex lg:w-fit lg:flex-col"
-      ref={desktopTimeline.containerRef}
-    >
+    <div className="hidden lg:mx-auto lg:flex lg:w-fit lg:flex-col" ref={containerRef}>
       <div
         className={cn(
           'flex items-stretch gap-6 lg:gap-10 xl:gap-[73px] 2xl:gap-[103px]',
@@ -30,7 +24,7 @@ export default function DesktopTimeline({ milestones }: { milestones: Milestone[
           return (
             <div
               key={milestone.id}
-              className="overview-up-card-wrapper relative w-full max-w-[291px] pb-6 xl:max-w-[304px]"
+              className="relative w-full max-w-[291px] pb-6 xl:max-w-[304px]"
               data-milestone-order={order}
             >
               <div className="desktop-timeline-line absolute -bottom-0.5 left-1/2 z-0 ml-5 h-0.5 w-0 bg-gray-200" />
@@ -60,7 +54,7 @@ export default function DesktopTimeline({ milestones }: { milestones: Milestone[
             return (
               <div
                 key={milestone.id}
-                className="overview-down-card-wrapper relative w-full max-w-[291px] pt-6 xl:max-w-[304px]"
+                className="relative w-full max-w-[291px] pt-6 xl:max-w-[304px]"
                 data-milestone-order={order}
               >
                 <div className="desktop-timeline-line absolute top-0 left-1/2 z-0 ml-5 h-0.5 w-0 bg-gray-200" />

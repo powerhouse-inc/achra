@@ -1,10 +1,18 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo } from 'react'
 import { useWindowSize } from 'usehooks-ts'
+import type { Milestone } from '../../milestone-card/types'
 
-export default function useDesktopTimeline() {
+export default function useDesktopTimeline({ milestones }: { milestones: Milestone[] }) {
   const containerRef = useRef<HTMLDivElement | null>(null)
+
+  const upMilestones = useMemo(
+    () => (milestones.length < 4 ? milestones : milestones.filter((_, i) => i % 2 === 0)),
+    [milestones],
+  )
+  const downMilestones = useMemo(() => milestones.filter((_, i) => i % 2 !== 0), [milestones])
+
   const { width } = useWindowSize()
   const gapPx = 20
 
@@ -36,5 +44,5 @@ export default function useDesktopTimeline() {
     })
   }, [width])
 
-  return { containerRef }
+  return { containerRef, upMilestones, downMilestones }
 }
