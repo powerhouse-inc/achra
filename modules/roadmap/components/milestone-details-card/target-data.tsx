@@ -8,16 +8,16 @@ interface TargetDataProps {
 
 export default function TargetData({ targetDate }: TargetDataProps) {
   return (
-    <div className="flex flex-col items-start gap-4 self-stretch rounded-xl border border-slate-200 px-4 py-2 lg:px-[15px] lg:py-[15px] dark:border-neutral-700">
+    <div className="flex flex-col items-start gap-4 rounded-xl border px-4 py-2 lg:p-4">
       <div className="flex items-center justify-between gap-4 self-stretch">
-        <div className="flex items-center text-xs font-medium text-gray-700 dark:text-gray-600">
+        <div className="flex items-center gap-1 text-xs font-medium">
           Target Date
           <Tooltip>
             <TooltipTrigger asChild>
-              <InfoIcon className="size-4" />
+              <InfoIcon className="text-foreground/30 size-4" />
             </TooltipTrigger>
             <TooltipContent>
-              <div className="max-w-[260px]">
+              <div className="max-w-66">
                 Target dates are meant as internal project management indicators. They are subject
                 to change without notice and offer no guarantee for the delivery time of the
                 milestone
@@ -25,7 +25,7 @@ export default function TargetData({ targetDate }: TargetDataProps) {
             </TooltipContent>
           </Tooltip>
         </div>
-        <div className="flex flex-nowrap items-center gap-1 text-sm leading-[22px] font-semibold text-gray-900 lg:text-base lg:leading-normal lg:font-bold dark:text-gray-50">
+        <div className="flex flex-nowrap items-center font-bold">
           {formatDateStringToQuarter(targetDate, true)}
         </div>
       </div>
