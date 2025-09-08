@@ -27,6 +27,6 @@ export function getStatusColor(status: Milestone['status']) {
     case 'In Progress':
       return 'bg-status-progress/30 text-status-progress'
     default:
-      return 'bg-status-todo/30 text-status-todo'
+      return 'bg-status-warning/30 text-status-warning'
   }
 }

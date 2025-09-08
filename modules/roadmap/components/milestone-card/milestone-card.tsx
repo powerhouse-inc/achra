@@ -65,7 +65,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
                 'bg-accent h-4 rounded-[calc(var(--radius)-6px)]',
                 milestone.status === 'Delivered' && '[&>div]:bg-status-success',
                 milestone.status === 'In Progress' && '[&>div]:bg-status-progress',
-                milestone.status === 'To do' && '[&>div]:bg-status-todo',
+                milestone.status === 'To do' && '[&>div]:bg-status-warning',
               )}
             />
             <div
