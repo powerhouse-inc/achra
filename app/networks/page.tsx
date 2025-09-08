@@ -31,8 +31,8 @@ const networks: Network[] = [
     description:
       'Powerhouse is the central network within the Sky ecosystem, dedicated to gathering and simplifying data for all users. It ensures that information is not only accessible but also easy to understand.',
     buttonText: 'Explore Powerhouse ',
-    backgroundImage: '/network-backgrounds/powerhouse-card-background.png',
     variant: 'oss',
+    backgroundImage: '/network-backgrounds/powerhouse-card-background.png',
   },
   {
     id: 'sky',
@@ -43,8 +43,8 @@ const networks: Network[] = [
     description:
       'Sky serves as a pivotal hub within the ecosystem, where users can access a wealth of resources and tools. This platform empowers exploration and innovation, enabling seamless interactions and collaboration among various stakeholders.',
     buttonText: 'Explore Sky ',
-    backgroundImage: '/network-backgrounds/sky-card-background.png',
     variant: 'defi',
+    backgroundImage: '/network-backgrounds/sky-card-background.png',
   },
   {
     id: 'spark',
@@ -55,8 +55,8 @@ const networks: Network[] = [
     description:
       "Spark is a dynamic network within the Powerhouse ecosystem, designed to amplify the platform's capabilities. By facilitating seamless interactions and resource sharing, Spark empowers users to innovate and collaborate effectively.",
     buttonText: 'Explore Spark ',
-    backgroundImage: 'network-backgrounds/spark-card-background.png',
     variant: 'defi',
+    backgroundImage: 'network-backgrounds/spark-card-background.png',
   },
   {
     id: 'grove',
@@ -67,8 +67,8 @@ const networks: Network[] = [
     description:
       'Grove is a vital network within the Powerhouse platform, dedicated to fostering growth and nurturing its builders. By providing essential resources and support, Grove cultivates an environment where innovation thrives.',
     buttonText: 'Explore Grove ',
-    backgroundImage: 'network-backgrounds/grove-card-background.png',
     variant: 'oss',
+    backgroundImage: 'network-backgrounds/grove-card-background.png',
   },
   {
     id: 'launch-agent-2',
@@ -79,8 +79,8 @@ const networks: Network[] = [
     description:
       'Launch Agent 2 is a pivotal network within the Powerhouse ecosystem, designed to enhance connectivity and streamline operations. By utilizing cutting-edge technology, it fosters collaboration among various platforms.',
     buttonText: 'Explore Launch Agent 2 ',
-    backgroundImage: 'network-backgrounds/launch-agent-2-card-background.png',
     variant: 'oss',
+    backgroundImage: 'network-backgrounds/launch-agent-2-card-background.png',
   },
   {
     id: 'launch-agent-3',
@@ -91,8 +91,8 @@ const networks: Network[] = [
     description:
       'Launch Agent 3 is a cutting-edge network within the Powerhouse ecosystem, designed to optimize connectivity and streamline operations.',
     buttonText: 'Explore Launch Agent 3',
-    backgroundImage: 'network-backgrounds/launch-card-background.png',
     variant: 'defi',
+    backgroundImage: 'network-backgrounds/launch-card-background.png',
   },
 ]
 

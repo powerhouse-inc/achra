@@ -6,7 +6,6 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 const meta = {
   title: 'Shared/Components/NetworkCard',
   component: NetworkCard,
-  tags: ['autodocs'],
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof NetworkCard>
 
@@ -19,7 +18,7 @@ export const Basic: Story = {
     title: 'Powerhouse',
     href: '/network/powerhouse',
     tag: 'OSS',
-    tagColor: 'bg-purple-500',
+    variant: 'oss',
     description:
       'Powerhouse is the central network within the Sky ecosystem, dedicated to gathering and simplifying data for all users. It ensures that information is not only accessible but also easy to understand.',
     buttonText: 'Explore Powerhouse',
