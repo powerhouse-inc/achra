@@ -1,21 +1,18 @@
 'use client'
 
-import { useRef } from 'react'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { cn } from '@/shared/lib/utils'
-import { MilestoneCard } from '../milestone-card'
-import useTimeline from './use-timeline'
-import type { Milestone } from '../milestone-card/types'
-import type { SwiperRef } from 'swiper/react'
+import { MilestoneCard } from '../../milestone-card'
+import useTimelineSwiper from './use-timeline-swiper'
+import type { Milestone } from '../../milestone-card/types'
 
 // Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 export default function TimelineSwiper({ milestones }: { milestones: Milestone[] }) {
-  const swiperRef = useRef<SwiperRef>(null)
-  useTimeline()
+  const { adjustCardHeights, swiperRef } = useTimelineSwiper()
 
   return (
     <div className="mt-6 hidden flex-col md:flex lg:hidden">
@@ -26,6 +23,9 @@ export default function TimelineSwiper({ milestones }: { milestones: Milestone[]
           pagination={{
             clickable: true,
           }}
+          onAfterInit={() => adjustCardHeights()}
+          onResize={() => adjustCardHeights()}
+          onBreakpoint={() => adjustCardHeights()}
           breakpoints={{
             768: {
               slidesPerView: 3,

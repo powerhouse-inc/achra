@@ -12,13 +12,13 @@ interface ProjectLinkProps<T extends string = string> {
 const ProjectLink: React.FC<ProjectLinkProps> = ({ href, code, name }) => (
   <Link
     href={href ?? '#'}
-    className="flex w-full justify-between overflow-hidden rounded-sm bg-white shadow-sm"
+    className="group/project-link bg-popover hover:bg-secondary flex w-full justify-between overflow-hidden rounded-sm shadow-sm"
   >
     <div className="flex w-full max-w-[calc(100%-40px)] items-center gap-2 px-1 py-1 pl-2">
       <div
         className={cn(
-          'relative pr-2 text-xs leading-[18px] font-medium text-slate-100 uppercase dark:text-slate-200',
-          "after:bg-charcoal-100 after:absolute after:top-0 after:right-0 after:h-full after:w-px after:content-[''] dark:after:bg-slate-200",
+          'text-foreground/30 group-hover/project-link:text-foreground/50 relative pr-2 text-xs/4.5 font-medium uppercase',
+          "after:bg-foreground/30 after:absolute after:top-0 after:right-0 after:h-full after:w-px after:content-['']",
         )}
       >
         Project
@@ -26,19 +26,19 @@ const ProjectLink: React.FC<ProjectLinkProps> = ({ href, code, name }) => (
       <div
         className={`flex items-start gap-1 ${href ? 'w-[calc(100%-50px)]' : 'w-[calc(100%-40px)]'}`}
       >
-        <span className="text-sm leading-[22px] font-semibold text-slate-100 dark:text-slate-200">
+        <span className="text-foreground/30 group-hover/project-link:text-foreground/50 text-sm/5.5 font-semibold">
           {code}
         </span>
         <span
-          className={`overflow-hidden text-sm leading-[22px] font-semibold text-ellipsis whitespace-nowrap text-gray-900 dark:text-slate-50 ${href ? 'max-w-[calc(100%-55px)]' : 'max-w-full'}`}
+          className={`truncate text-sm/5.5 font-semibold ${href ? 'max-w-[calc(100%-55px)]' : 'max-w-full'}`}
         >
           {name}
         </span>
       </div>
     </div>
     {href && (
-      <div className="flex h-8 w-8 items-center justify-center overflow-hidden bg-slate-50 dark:bg-gray-700">
-        <ArrowRight className="size-4" />
+      <div className="bg-accent group-hover/project-link:bg-muted flex h-8 w-8 items-center justify-center overflow-hidden">
+        <ArrowRight className="text-accent-foreground size-4" />
       </div>
     )}
   </Link>

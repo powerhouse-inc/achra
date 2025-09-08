@@ -13,19 +13,20 @@ export function formatDateStringToQuarter(targetDate: Milestone['targetDate']): 
     else if (month >= 7 && month <= 9) quarter = 'Q3'
     else if (month >= 10 && month <= 12) quarter = 'Q4'
 
-    return `${quarter}'${year}`
+    return `${quarter}’${year}`
   } catch {
     return ''
   }
 }
 
+// TODO: remove this once the shared component (Chip) is 100% ready
 export function getStatusColor(status: Milestone['status']) {
   switch (status) {
     case 'Delivered':
-      return 'bg-green-100 text-green-800'
+      return 'bg-status-success/30 text-status-success'
     case 'In Progress':
-      return 'bg-blue-100 text-blue-800'
+      return 'bg-status-progress/30 text-status-progress'
     default:
-      return 'bg-orange-100 text-orange-800'
+      return 'bg-status-warning/30 text-status-warning'
   }
 }
