@@ -1,7 +1,8 @@
 'use client'
 
+import { ArrowUpRight } from 'lucide-react'
 import { useMemo } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
+import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import { type DeliverableViewMode } from '../../deliverable-card/deliverable-card'
 import { type KeyResult } from '../types'
@@ -24,7 +25,7 @@ export default function KeyResults({
   maxKeyResultsOnRow,
 }: KeyResultsProps) {
   const isEmpty = keyResults.length === 0
-  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isMobile = useIsMobile()
 
   const results = useMemo(() => {
     if (viewMode === 'compacted') {
@@ -68,10 +69,10 @@ export default function KeyResults({
 
   return (
     <div
-      className="mt-4 flex w-full flex-col gap-2 overflow-hidden rounded-lg border p-2"
+      className="mt-4 flex w-full flex-col gap-2 overflow-hidden rounded-lg border px-2 pt-1 pb-2"
       style={!isMobile ? { height: componentHeight } : undefined}
     >
-      <div className="m-0 px-2 pt-1 pb-0 text-xs font-medium">
+      <div className="m-0 text-xs/4.5 font-medium">
         {isMobile && isEmpty ? 'No Key Results' : 'Key Results'}
       </div>
       {((isMobile && !isEmpty) || !isMobile) && (
@@ -85,20 +86,24 @@ export default function KeyResults({
           ) : (
             <>
               {results.map((keyResult) => (
-                <li className="flex list-none items-center" key={keyResult.id}>
+                <li className="flex items-center" key={keyResult.id}>
                   {keyResult.link ? (
                     <a
                       href={keyResult.link}
                       target="_blank"
-                      className="relative max-w-full gap-1.5 truncate pl-5.5 text-sm font-medium"
+                      className={cn(
+                        'group/link text-foreground relative flex max-w-full items-center gap-1.5 truncate pl-5.5 text-sm/4.5 font-medium',
+                        'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
+                      )}
                     >
-                      {keyResult.title}
+                      <div className="group-hover/link:underline">{keyResult.title}</div>
+                      <ArrowUpRight className="text-foreground size-4" />
                     </a>
                   ) : (
                     <div
                       className={cn(
                         'relative flex max-w-full gap-1.5 pl-6 text-sm font-medium',
-                        'before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
+                        'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
                       )}
                     >
                       <span className="truncate">{keyResult.title}</span>

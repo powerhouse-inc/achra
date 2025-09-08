@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import 'simplebar-react/dist/simplebar.min.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -185,4 +186,11 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.simplebar-scrollbar:before {
+  width: var(--spacing);
+  background-color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
+  border-radius: var(--radius-lg);
+  margin-left: var(--spacing);
 }

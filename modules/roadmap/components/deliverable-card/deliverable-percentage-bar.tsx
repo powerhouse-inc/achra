@@ -9,21 +9,16 @@ export default function DeliverablePercentageBar({ percentage }: DeliverablePerc
   const width = percentage === 0 ? '0%' : `max(${percentage * 100}%, 0.5px)`
 
   return (
-    <div className="relative w-full rounded bg-slate-50">
+    <div className="bg-accent relative w-full rounded">
       <div
         className={cn(
-          'h-4 bg-blue-500',
+          'h-4',
           percentage === 1 ? 'rounded' : 'rounded-l',
-          percentage === 1 ? 'bg-green-500' : 'bg-blue-500',
+          percentage === 1 ? 'bg-status-success' : 'bg-status-progress',
         )}
         style={{ width }}
       />
-      <span
-        className={cn(
-          'absolute top-0 right-2 text-xs font-bold',
-          percentage === 1 ? 'text-slate-50' : 'text-slate-100',
-        )}
-      >
+      <span className={cn('text-accent-foreground/30 absolute top-0 right-2 text-xs font-bold')}>
         {usLocalizedNumber(percentage * 100, 0)}%
       </span>
     </div>

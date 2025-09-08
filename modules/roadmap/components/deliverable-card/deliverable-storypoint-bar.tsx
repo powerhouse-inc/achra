@@ -14,7 +14,7 @@ export default function DeliverableStorypointBar({
       <div className={cn('flex h-full w-full items-center', total > 10 ? 'gap-0.5' : 'gap-1')}>
         {Array.from({ length: total }).map((_, index) => (
           <div
-            className={cn('h-full w-full rounded', completed ? 'bg-blue-700' : 'bg-slate-50')}
+            className={cn('h-full w-full rounded', completed ? 'bg-status-progress' : 'bg-accent')}
             key={index}
           />
         ))}
