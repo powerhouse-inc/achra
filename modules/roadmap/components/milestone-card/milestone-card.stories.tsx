@@ -3,9 +3,8 @@ import MilestoneCard from './milestone-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Roadmap/Components/MilestoneCard',
+  title: 'Modules/Roadmap/Components/MilestoneCard',
   component: MilestoneCard,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

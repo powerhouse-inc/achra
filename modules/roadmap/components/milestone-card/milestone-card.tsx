@@ -15,13 +15,14 @@ interface MilestoneCardProps {
 
 export default function MilestoneCard({ milestone, className }: MilestoneCardProps) {
   return (
+    // TODO: add the correct shadow if different from shadow-sm
     <Card
       className={cn(
-        'shadow-modules h-full w-full gap-0 overflow-hidden rounded-[calc(var(--radius)+2px)] border-0 px-0 pt-0 pb-2',
+        'h-full w-full gap-0 overflow-hidden rounded-xl border-0 px-0 pt-0 pb-2',
         className,
       )}
     >
-      <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-[calc(var(--radius)+2px)] rounded-b-none p-2">
+      <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none p-2">
         <div className="flex items-center gap-1">
           <span className="text-accent-foreground/30 font-semibold">{milestone.sequenceCode}</span>
           <span className="text-accent-foreground font-semibold">{milestone.code}</span>
@@ -34,7 +35,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
       </CardHeader>
 
       <CardContent className="mx-2 mt-2 flex flex-1 flex-col gap-1 p-0">
-        <div className="milestone-title-section bg-popover flex flex-1 flex-col gap-2 rounded-[calc(var(--radius)+2px)] border px-2 py-1">
+        <div className="milestone-title-section bg-popover flex flex-1 flex-col gap-2 rounded-xl border px-2 py-1">
           <h4 className="text-card-foreground line-clamp-2 text-sm leading-6 font-semibold">
             {milestone.title}
           </h4>
@@ -45,13 +46,13 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
           )}
         </div>
 
-        <div className="bg-popover flex flex-col gap-2 rounded-[calc(var(--radius)+2px)] border p-2">
+        <div className="bg-popover flex flex-col gap-2 rounded-xl border p-2">
           <div className="flex items-center justify-between">
             <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
             {/* TODO: replace this <div> with the shared component (Chip) once it is 100% ready */}
             <div
               className={cn(
-                'flex items-center justify-center rounded-sm px-3 py-0.25 text-xs leading-5.5 font-semibold',
+                'flex items-center justify-center rounded-md px-3 py-0.25 text-xs leading-5.5 font-semibold',
                 getStatusColor(milestone.status),
               )}
             >
@@ -62,7 +63,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
             <Progress
               value={milestone.progress}
               className={cn(
-                'bg-accent h-4 rounded-[calc(var(--radius)-6px)]',
+                'bg-accent h-4 rounded',
                 milestone.status === 'Delivered' && '[&>div]:bg-status-success',
                 milestone.status === 'In Progress' && '[&>div]:bg-status-progress',
                 milestone.status === 'To do' && '[&>div]:bg-status-warning',
@@ -85,7 +86,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
       <CardFooter className="mx-2 mt-1 p-0">
         <Button
           variant="secondary"
-          className="hover:bg-secondary w-full rounded-sm shadow-none hover:opacity-90 has-[>svg]:px-4"
+          className="hover:bg-secondary w-full rounded-md shadow-none hover:opacity-90 has-[>svg]:px-4"
           asChild
         >
           <a href={`#${milestone.code}`}>

@@ -14,7 +14,7 @@ export default function Timeline({ milestones }: { milestones: Milestone[] }) {
     <>
       {/* Mobile Timeline */}
       <div className="relative z-10 flex flex-col gap-6 md:hidden">
-        <div className="absolute top-0 left-1/2 -z-10 h-full w-1.5 -translate-x-1/2 bg-gray-200" />
+        <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />
         {milestones.map((milestone) => (
           <MilestoneCard key={milestone.id} milestone={milestone} />
         ))}
