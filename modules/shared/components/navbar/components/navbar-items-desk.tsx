@@ -11,8 +11,10 @@ interface NavbarCenterProps {
 }
 
 function NavbarItemsDesk({ navItems, pathname }: NavbarCenterProps) {
+  const numberOfItems = navItems.length > 3 ? 4 : 12
+
   return (
-    <nav className="hidden items-center gap-2 md:flex md:gap-4 lg:gap-12">
+    <nav className={cn('hidden items-center gap-2 lg:flex', `lg:gap-${numberOfItems} xl:gap-12`)}>
       {navItems.map((item) => {
         return (
           <div key={item.label} className="flex items-center gap-1">
