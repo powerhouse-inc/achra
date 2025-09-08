@@ -1,10 +1,10 @@
 'use client'
 
 import { useCallback, useState } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
+import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import KeyResults from '../milestone-details-card/key-results/key-results'
 import {
@@ -33,7 +33,7 @@ export default function DeliverableCard({
   maxKeyResultsOnRow,
   isProjectCard,
 }: DeliverableCardProps) {
-  const isMobile = useMediaQuery('(min-width: 768px)')
+  const isMobile = useIsMobile()
   const [expanded, setExpanded] = useState<boolean>(false)
   const handleToggleExpand = useCallback(() => {
     setExpanded((prev) => !prev)
@@ -97,7 +97,7 @@ export default function DeliverableCard({
       </div>
 
       {(viewMode === 'detailed' || expanded) && (
-        <div className="mt-2 flex flex-col gap-2 text-sm xl:text-base">
+        <div className="mt-2 flex flex-col gap-2 text-sm/5.5 xl:text-base">
           {deliverable.description?.split('\n').map((paragraph, index) => (
             <p className="m-0" key={index}>
               {paragraph}

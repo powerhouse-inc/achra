@@ -12,10 +12,10 @@ export default function DeliverablesSection({ deliverables }: DeliverablesSectio
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center justify-between self-stretch lg:pr-2 xl:pr-4">
-        <div className="flex-start flex gap-2.5">
-          <h3 className="text-lg/6 font-bold xl:text-xl/6">Deliverables</h3>
-          <div className="text-lg/6 font-bold xl:text-xl/6">{deliverables.length}</div>
+      <div className="flex items-center justify-between self-stretch">
+        <div className={cn('flex-start flex gap-3.5', 'text-lg font-bold lg:text-xl lg:font-bold')}>
+          <h3>Deliverables</h3>
+          <div>{deliverables.length}</div>
         </div>
       </div>
 
@@ -27,7 +27,7 @@ export default function DeliverablesSection({ deliverables }: DeliverablesSectio
         )}
       >
         {deliverables.length === 0 && (
-          <div className="flex w-full max-w-full justify-center py-16 text-center text-2xl leading-normal font-semibold tracking-[0.025em] text-gray-400 md:text-3xl dark:text-slate-400">
+          <div className="text-muted-foreground flex w-full max-w-full justify-center py-16 text-center text-2xl leading-normal font-semibold tracking-[0.025em] md:text-3xl">
             No Deliverable Available
           </div>
         )}

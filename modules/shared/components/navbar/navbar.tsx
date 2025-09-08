@@ -2,10 +2,10 @@
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
+import { NavbarBrand } from './components/navbar-brand'
 import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
 import NavbarRightSide from './components/navbar-right-side'
-import { NavbarBrand } from './components/navbar-brand'
 import { getNavbarConfig } from './navbar-config'
 
 function Navbar() {
@@ -18,13 +18,13 @@ function Navbar() {
   const handleLoginClick = () => {}
 
   const config = useMemo(() => getNavbarConfig(pathname), [pathname])
-  const { isotype: Isotype, logotype: Logotype, navItems } = config
+  const { isotype: Isotype, logotype: Logotype, logotypeClassName, navItems } = config
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
 
   return (
-    <header className="bg-muted/30 sticky top-0 z-50 container mx-auto flex items-center justify-center rounded-3xl backdrop-blur-[7.5px] md:top-1.5 md:p-2.5">
+    <header className="bg-muted/30 sticky top-0 z-50 container mx-auto flex items-center justify-center rounded-3xl backdrop-blur-[7.5px] md:p-1.5">
       <div className="bg-popover flex flex-1 items-center justify-between rounded-2xl pr-4 md:pr-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4">
@@ -32,6 +32,7 @@ function Navbar() {
               isNetworksPage={isNetworksPage}
               isotypeLogo={Isotype}
               logotype={Logotype}
+              logotypeClassName={logotypeClassName}
             />
             <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
           </div>

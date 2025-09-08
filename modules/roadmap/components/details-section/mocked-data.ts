@@ -129,7 +129,7 @@ export const mockedMilestone1: Milestone = {
     ],
     status: ProgressStatus.FINISHED,
     progress: {
-      value: 1,
+      value: 0.7,
       __typename: 'Percentage',
     },
     totalDeliverables: 3,

@@ -1,20 +1,22 @@
 import Link from 'next/link'
-import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
-import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
-import { cn } from '@/modules/shared/lib/utils'
 import React from 'react'
+import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
+import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
+import { cn } from '@/modules/shared/lib/utils'
 import { NAVBAR_CONFIGS } from '../navbar-config'
 
 interface NavbarBrandProps {
   isNetworksPage: boolean
-  isotypeLogo?: React.ElementType
-  logotype?: React.ElementType
+  isotypeLogo?: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
+  logotypeClassName?: string
 }
 
 export function NavbarBrand({
   isNetworksPage,
   isotypeLogo: IsotypeLogo,
   logotype: Logotype,
+  logotypeClassName,
 }: NavbarBrandProps) {
   const MainLogoComponent = isNetworksPage ? AchraIsotype : AchraLogo
   const showIsotype = !isNetworksPage && IsotypeLogo && Logotype
@@ -42,8 +44,12 @@ export function NavbarBrand({
       {showIsotype && (
         <Link href={NAVBAR_CONFIGS['/networks'].navItems[0].href} className="cursor-pointer">
           <div className="flex items-center gap-2">
-            <IsotypeLogo className="h-8 w-8" />
-            <Logotype className="hidden h-8 w-16 md:flex" />
+            {IsotypeLogo && typeof IsotypeLogo === 'function' && (
+              <IsotypeLogo className="h-8 w-8" />
+            )}
+            {Logotype && typeof Logotype === 'function' && (
+              <Logotype className={cn('hidden h-8 md:flex', logotypeClassName)} />
+            )}
           </div>
         </Link>
       )}
