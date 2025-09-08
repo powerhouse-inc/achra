@@ -17,73 +17,80 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
   return (
     <Card
       className={cn(
-        'h-full w-full gap-0 overflow-hidden rounded-xl border-gray-200 bg-white py-0 shadow-sm',
+        'shadow-modules h-full w-full gap-0 overflow-hidden rounded-[calc(var(--radius)+2px)] border-0 px-0 pt-0 pb-2',
         className,
       )}
     >
-      <CardHeader className="flex auto-rows-auto grid-rows-none flex-row items-center justify-between gap-0 border-b border-gray-100 bg-gray-50 px-2 py-1">
+      <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-[calc(var(--radius)+2px)] rounded-b-none p-2">
         <div className="flex items-center gap-1">
-          <span className="text-sm font-semibold text-gray-400">{milestone.sequenceCode}</span>
-          <span className="text-sm font-semibold text-gray-900">{milestone.code}</span>
+          <span className="text-accent-foreground/30 font-semibold">{milestone.sequenceCode}</span>
+          <span className="text-accent-foreground font-semibold">{milestone.code}</span>
         </div>
-        <div className="rounded px-1 py-0.5">
-          <span className="text-sm font-semibold text-gray-400">
+        <div className="flex items-center">
+          <span className="text-accent-foreground/30 font-semibold">
             {formatDateStringToQuarter(milestone.targetDate)}
           </span>
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-1 flex-col p-2">
-        <div className="milestone-title-section mb-2 flex flex-1 flex-col rounded-lg border border-gray-200 bg-gray-50 p-2">
-          <h4 className="mb-1 line-clamp-2 text-sm font-semibold text-gray-900">
+      <CardContent className="mx-2 mt-2 flex flex-1 flex-col gap-1 p-0">
+        <div className="milestone-title-section bg-popover flex flex-1 flex-col gap-2 rounded-[calc(var(--radius)+2px)] border px-2 py-1">
+          <h4 className="text-card-foreground line-clamp-2 text-sm leading-6 font-semibold">
             {milestone.title}
           </h4>
           {milestone.abstract && (
-            <p className="flex-1 overflow-hidden text-xs text-ellipsis text-gray-600">
+            <p className="text-card-foreground/50 flex-1 text-xs leading-4.5 font-medium">
               {milestone.abstract}
             </p>
           )}
         </div>
 
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-2">
-          <div className="mb-1 flex items-center justify-between">
-            <span className="text-xs font-medium text-gray-600">Status</span>
-            <span
+        <div className="bg-popover flex flex-col gap-2 rounded-[calc(var(--radius)+2px)] border p-2">
+          <div className="flex items-center justify-between">
+            <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
+            {/* TODO: replace this <div> with the shared component (Chip) once it is 100% ready */}
+            <div
               className={cn(
-                'rounded-full px-2 py-0.5 text-xs font-medium',
+                'flex items-center justify-center rounded-sm px-3 py-0.25 text-xs leading-5.5 font-semibold',
                 getStatusColor(milestone.status),
               )}
             >
-              {milestone.status}
-            </span>
+              {milestone.status.toUpperCase()}
+            </div>
           </div>
           <div className="relative">
             <Progress
               value={milestone.progress}
               className={cn(
-                'h-6 bg-gray-200',
-                milestone.status === 'Delivered' && '[&>div]:bg-green-600',
-                milestone.status === 'In Progress' && '[&>div]:bg-blue-600',
-                milestone.status === 'To do' && '[&>div]:bg-orange-600',
+                'bg-accent h-4 rounded-[calc(var(--radius)-6px)]',
+                milestone.status === 'Delivered' && '[&>div]:bg-status-success',
+                milestone.status === 'In Progress' && '[&>div]:bg-status-progress',
+                milestone.status === 'To do' && '[&>div]:bg-status-warning',
               )}
             />
-            <div className="absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-medium text-white">
+            <div
+              className={cn(
+                'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
+                milestone.status === 'Delivered'
+                  ? 'text-primary-foreground'
+                  : 'text-accent-foreground/30',
+              )}
+            >
               {milestone.progress}%
             </div>
           </div>
         </div>
       </CardContent>
 
-      <CardFooter className="p-2 pt-0">
+      <CardFooter className="mx-2 mt-1 p-0">
         <Button
-          variant="outline"
-          size="sm"
-          className="h-7 w-full justify-center gap-1 text-xs"
+          variant="secondary"
+          className="hover:bg-secondary w-full rounded-sm shadow-none hover:opacity-90 has-[>svg]:px-4"
           asChild
         >
           <a href={`#${milestone.code}`}>
             View
-            <ArrowRight className="h-3 w-3" />
+            <ArrowRight />
           </a>
         </Button>
       </CardFooter>
