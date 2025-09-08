@@ -4,7 +4,7 @@ import { NetworkCard } from './network-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Shared/Components/NetworkCard',
+  title: 'Modules/Networks/Components/NetworkCard',
   component: NetworkCard,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof NetworkCard>
