@@ -19,7 +19,7 @@ interface NavbarItemMobileProps {
 
 function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobileProps) {
   return (
-    <div className="flex items-center md:hidden">
+    <div className="flex items-center lg:hidden">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>

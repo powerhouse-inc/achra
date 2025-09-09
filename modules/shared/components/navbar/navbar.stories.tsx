@@ -5,7 +5,6 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 const meta = {
   title: 'Shared/Components/Navbar',
   component: Navbar,
-  tags: ['autodocs'],
   parameters: {
     nextjs: {
       appDirectory: true,
