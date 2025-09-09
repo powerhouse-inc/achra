@@ -16,7 +16,7 @@ export default function TargetData({ targetDate }: TargetDataProps) {
             <TooltipTrigger asChild>
               <InfoIcon className="text-foreground/30 size-4" />
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent side="bottom" align="start" arrowPadding={8}>
               <div className="max-w-66">
                 Target dates are meant as internal project management indicators. They are subject
                 to change without notice and offer no guarantee for the delivery time of the

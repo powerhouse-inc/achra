@@ -9,7 +9,7 @@ interface ContributorsProps {
 export default function Contributors({ contributors }: ContributorsProps) {
   return (
     <div className="flex flex-col gap-4 rounded-xl border px-4 pt-2 pb-4">
-      <div className="text-xs font-medium">Coordinator(s)</div>
+      <div className="text-xs font-medium">Contributor(s)</div>
 
       <div className="flex flex-wrap gap-4">
         {contributors.map((contributor) => (
