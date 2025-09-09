@@ -36,7 +36,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logotype: undefined,
     navItems: [
       { label: 'Networks', href: '/networks' },
-      { label: 'Roadmaps', href: '/network/sky/roadmap' },
+      { label: 'Roadmaps', href: '/network/powerhouse/roadmap' },
       { label: 'Services', href: '/services' },
     ],
     authComponent: 'loginButton',
