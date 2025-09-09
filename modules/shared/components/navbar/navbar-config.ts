@@ -9,6 +9,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
   '/sky': {
     isotype: SkyIsotype,
     logotype: SkyLogotype,
+    logoHref: '/network/sky',
     navItems: [
       { label: 'Contributors', href: '/network/sky/contributors' },
       { label: 'Roadmap', href: '/network/sky/roadmap' },
@@ -22,6 +23,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     isotype: PowerhouseLogo,
     logotype: PowerhouseLogotype,
     logotypeClassName: 'w-44',
+    logoHref: '/network/powerhouse',
     navItems: [
       { label: 'Contributors', href: '/network/powerhouse/contributors' },
       { label: 'Roadmap', href: '/network/powerhouse/roadmap' },
@@ -36,7 +38,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logotype: undefined,
     navItems: [
       { label: 'Networks', href: '/networks' },
-      { label: 'Roadmaps', href: '/network/sky/roadmap' },
+      { label: 'Roadmaps', href: '/network/powerhouse/roadmap' },
       { label: 'Services', href: '/services' },
     ],
     authComponent: 'loginButton',
