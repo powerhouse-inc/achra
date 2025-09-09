@@ -1,4 +1,5 @@
 'use client'
+import { type Route } from 'next'
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 
@@ -18,7 +19,7 @@ function Navbar() {
   const handleLoginClick = () => {}
 
   const config = useMemo(() => getNavbarConfig(pathname), [pathname])
-  const { isotype: Isotype, logotype: Logotype, logotypeClassName, navItems } = config
+  const { isotype: Isotype, logotype: Logotype, logotypeClassName, logoHref, navItems } = config
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
@@ -33,6 +34,7 @@ function Navbar() {
               isotypeLogo={Isotype}
               logotype={Logotype}
               logotypeClassName={logotypeClassName}
+              logoHref={logoHref as Route}
             />
             <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
           </div>
