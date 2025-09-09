@@ -3,13 +3,14 @@ import React from 'react'
 import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
 import { cn } from '@/modules/shared/lib/utils'
-import { NAVBAR_CONFIGS } from '../navbar-config'
+import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface NavbarBrandProps {
   isNetworksPage: boolean
   isotypeLogo?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotypeClassName?: string
+  logoHref?: RouteWithDynamicPages
 }
 
 export function NavbarBrand({
@@ -17,6 +18,7 @@ export function NavbarBrand({
   isotypeLogo: IsotypeLogo,
   logotype: Logotype,
   logotypeClassName,
+  logoHref,
 }: NavbarBrandProps) {
   const MainLogoComponent = isNetworksPage ? AchraIsotype : AchraLogo
   const showIsotype = !isNetworksPage && IsotypeLogo && Logotype
@@ -31,13 +33,7 @@ export function NavbarBrand({
   return (
     <div className="flex items-center gap-4 md:gap-6">
       <div className={logoContainerClasses}>
-        <a
-          href="/"
-          target="_blank"
-          className="cursor-pointer"
-          rel="noopener noreferrer"
-          aria-label="Achra homepage"
-        >
+        <a href="/" target="_self" className="cursor-pointer" aria-label="Achra homepage">
           <MainLogoComponent
             className={cn(
               'h-9 sm:flex',
@@ -47,8 +43,8 @@ export function NavbarBrand({
           {isNetworksPage && <AchraLogo className="text-primary h-9 w-9 sm:hidden" />}
         </a>
       </div>
-      {showIsotype && (
-        <Link href={NAVBAR_CONFIGS['/networks'].navItems[0].href} className="cursor-pointer">
+      {showIsotype && logoHref && (
+        <Link href={logoHref} className="cursor-pointer">
           <div className="flex items-center gap-2">
             {IsotypeLogo && typeof IsotypeLogo === 'function' && (
               <IsotypeLogo className="h-8 w-8" />
