@@ -38,7 +38,13 @@ export function NavbarBrand({
           rel="noopener noreferrer"
           aria-label="Achra homepage"
         >
-          <MainLogoComponent className={cn('h-9', isNetworksPage ? 'text-primary w-42' : 'w-9')} />
+          <MainLogoComponent
+            className={cn(
+              'h-9 sm:flex',
+              isNetworksPage ? 'text-primary hidden w-42 sm:flex' : 'w-9',
+            )}
+          />
+          {isNetworksPage && <AchraLogo className="text-primary h-9 w-9 sm:hidden" />}
         </a>
       </div>
       {showIsotype && (

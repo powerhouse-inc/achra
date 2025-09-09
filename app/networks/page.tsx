@@ -61,7 +61,7 @@ const networks: Network[] = [
       "Spark is a dynamic network within the Powerhouse ecosystem, designed to amplify the platform's capabilities. By facilitating seamless interactions and resource sharing, Spark empowers users to innovate and collaborate effectively.",
     buttonText: 'Explore Spark ',
     variant: 'defi',
-    backgroundImage: 'network-backgrounds/spark-card-background.png',
+    backgroundImage: '/network-backgrounds/spark-card-background.png',
   },
   {
     id: 'grove',
@@ -73,7 +73,7 @@ const networks: Network[] = [
       'Grove is a vital network within the Powerhouse platform, dedicated to fostering growth and nurturing its builders. By providing essential resources and support, Grove cultivates an environment where innovation thrives.',
     buttonText: 'Explore Grove ',
     variant: 'oss',
-    backgroundImage: 'network-backgrounds/grove-card-background.png',
+    backgroundImage: '/network-backgrounds/grove-card-background.png',
   },
   {
     id: 'launch-agent-2',
@@ -85,7 +85,7 @@ const networks: Network[] = [
       'Launch Agent 2 is a pivotal network within the Powerhouse ecosystem, designed to enhance connectivity and streamline operations. By utilizing cutting-edge technology, it fosters collaboration among various platforms.',
     buttonText: 'Explore Launch Agent 2 ',
     variant: 'oss',
-    backgroundImage: 'network-backgrounds/launch-agent-2-card-background.png',
+    backgroundImage: '/network-backgrounds/launch-agent-2-card-background.png',
   },
   {
     id: 'launch-agent-3',
@@ -97,7 +97,7 @@ const networks: Network[] = [
       'Launch Agent 3 is a cutting-edge network within the Powerhouse ecosystem, designed to optimize connectivity and streamline operations.',
     buttonText: 'Explore Launch Agent 3',
     variant: 'defi',
-    backgroundImage: 'network-backgrounds/launch-card-background.png',
+    backgroundImage: '/network-backgrounds/launch-card-background.png',
   },
 ]
 
