@@ -184,6 +184,27 @@
   }
 }
 
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+
+  @media (min-width: 40rem) {
+    max-width: 44rem; /* up to 704px for sm */
+  }
+  @media (min-width: 48rem) {
+    max-width: 60rem; /* up to 960px for md */
+  }
+  @media (min-width: 64rem) {
+    max-width: 75rem; /* up to 1200px for lg */
+  }
+  @media (min-width: 80rem) {
+    max-width: 82rem; /* up to 1312px for xl */
+  }
+  @media (min-width: 96rem) {
+    max-width: 90rem; /* up to 1440px for 2xl */
+  }
+}
+
 .simplebar-scrollbar:before {
   width: var(--spacing);
   background-color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
