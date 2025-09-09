@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
+import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableStatusChipProps {
   status: DeliverableStatus
@@ -50,7 +51,11 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
 
   return (
     <div
-      className={`inline-flex items-center justify-center rounded-md px-4 py-1 text-sm leading-[22px] font-semibold text-nowrap ${bgColor} ${textColor}`}
+      className={cn(
+        'inline-flex items-center justify-center rounded-md px-3 py-px text-xs/5.5 font-semibold text-nowrap uppercase',
+        bgColor,
+        textColor,
+      )}
     >
       {label}
     </div>
