@@ -52,7 +52,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
             {/* TODO: replace this <div> with the shared component (Chip) once it is 100% ready */}
             <div
               className={cn(
-                'flex items-center justify-center rounded-md px-3 py-0.25 text-xs leading-5.5 font-semibold',
+                'flex items-center justify-center rounded-md px-3 py-px text-xs leading-5.5 font-semibold',
                 getStatusColor(milestone.status),
               )}
             >
