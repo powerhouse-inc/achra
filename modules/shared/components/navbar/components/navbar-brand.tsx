@@ -3,14 +3,14 @@ import React from 'react'
 import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Route } from 'next'
+import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface NavbarBrandProps {
   isNetworksPage: boolean
   isotypeLogo?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotypeClassName?: string
-  logoHref?: Route
+  logoHref?: RouteWithDynamicPages
 }
 
 export function NavbarBrand({
@@ -33,13 +33,7 @@ export function NavbarBrand({
   return (
     <div className="flex items-center gap-4 md:gap-6">
       <div className={logoContainerClasses}>
-        <a
-          href="/"
-          target="_self"
-          className="cursor-pointer"
-          rel="noopener noreferrer"
-          aria-label="Achra homepage"
-        >
+        <a href="/" target="_self" className="cursor-pointer" aria-label="Achra homepage">
           <MainLogoComponent
             className={cn(
               'h-9 sm:flex',

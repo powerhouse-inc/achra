@@ -36,7 +36,6 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
   '/networks': {
     isotype: AchraIsotype,
     logotype: undefined,
-    logoHref: '/networks',
     navItems: [
       { label: 'Networks', href: '/networks' },
       { label: 'Roadmaps', href: '/network/powerhouse/roadmap' },

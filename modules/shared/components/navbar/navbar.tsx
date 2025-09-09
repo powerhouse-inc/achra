@@ -34,7 +34,7 @@ function Navbar() {
               isotypeLogo={Isotype}
               logotype={Logotype}
               logotypeClassName={logotypeClassName}
-              logoHref={logoHref as Route}
+              logoHref={logoHref}
             />
             <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
           </div>
