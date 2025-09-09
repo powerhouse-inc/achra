@@ -37,41 +37,43 @@ export function NetworkCard({
     gap: 0,
   }
 
+  const buttonStyles =
+    'text-primary-foreground bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2'
+
   return (
-    <Card className="flex h-64 flex-col p-4 sm:p-6" style={cardStyle}>
-      <CardHeader className="gap-0 p-0">
-        <div className="flex h-8 items-center justify-between sm:h-8 md:h-10">
-          <CardTitle className="flex items-center gap-2">
-            {logotype ? (
-              <div className="flex items-center gap-1.5 md:gap-2">
-                {isotype} {logotype}
+    <Link href={href} className="h-full">
+      <Card className="flex h-64 flex-col p-4 sm:p-6" style={cardStyle}>
+        <CardHeader className="gap-0 p-0">
+          <div className="flex h-8 items-center justify-between sm:h-8 md:h-10">
+            <CardTitle className="flex items-center gap-2">
+              {logotype ? (
+                <div className="flex items-center gap-1.5 md:gap-2">
+                  {isotype} {logotype}
+                </div>
+              ) : (
+                <div className="flex items-center">{isotype}</div>
+              )}
+              <div className="text-accent-foreground md:text-lead flex w-full items-center text-2xl">
+                {title}
               </div>
-            ) : (
-              <div className="flex items-center">{isotype}</div>
-            )}
-            <div className="text-accent-foreground md:text-lead flex w-full items-center text-2xl">
-              {title}
+            </CardTitle>
+            <NetworkChip variant={variant}>{tag}</NetworkChip>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex flex-1 flex-col justify-between p-0 pt-0">
+          <div className="mt-2 flex flex-col">
+            <p className="text-foreground text-sm leading-5.5 font-medium">{description}</p>
+          </div>
+
+          <div className="flex h-9 w-full justify-end">
+            <div className={buttonStyles}>
+              {buttonText}
+              <ArrowRight className="ml-2 h-4 w-4" />
             </div>
-          </CardTitle>
-          <NetworkChip variant={variant}>{tag}</NetworkChip>
-        </div>
-      </CardHeader>
-
-      <CardContent className="flex flex-1 flex-col justify-between p-0 pt-0">
-        <div className="mt-2 flex flex-col">
-          <p className="text-foreground text-sm leading-5.5 font-medium">{description}</p>
-        </div>
-
-        <div className="flex h-9 w-full justify-end">
-          <Link
-            href={href}
-            className="text-primary-foreground bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2"
-          >
-            {buttonText}
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
