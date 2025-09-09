@@ -18,16 +18,19 @@ interface NavbarItemMobileProps {
 }
 
 function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobileProps) {
+  const clickOnlyTriggerProps = {
+    onPointerMove: (event: React.PointerEvent) => event.preventDefault(),
+    onPointerEnter: (event: React.PointerEvent) => event.preventDefault(),
+    onPointerLeave: (event: React.PointerEvent) => event.preventDefault(),
+  }
   return (
     <div className="flex items-center lg:hidden">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger
-              onPointerMove={(event) => event.preventDefault()}
-              onPointerEnter={(event) => event.preventDefault()}
-              onPointerLeave={(event) => event.preventDefault()}
               className="border-border w-37.5 justify-between rounded-lg border"
+              {...clickOnlyTriggerProps}
             >
               {activeItem ? activeItem.label : 'Home'}
             </NavigationMenuTrigger>
