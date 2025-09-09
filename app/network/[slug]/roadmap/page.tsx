@@ -14,7 +14,7 @@ export default function RoadmapPage() {
   return (
     <main>
       <div className="bg-background fixed top-18 z-50 w-full border-b py-3 md:top-21">
-        <Breadcrumb className="container px-4 sm:px-6 md:px-8 xl:px-10 2xl:px-16">
+        <Breadcrumb className="container">
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
@@ -35,7 +35,7 @@ export default function RoadmapPage() {
         </Breadcrumb>
       </div>
 
-      <div className="container mt-16 mb-8 flex flex-col gap-6 px-4 sm:px-6 md:px-8 xl:px-10 2xl:px-16">
+      <div className="container mt-16 mb-8 flex flex-col gap-6">
         <div className="flex flex-col">
           <h1 className="m-0 text-lg font-bold text-gray-900 md:text-xl md:leading-6 xl:text-2xl">
             Powerhouse Roadmaps

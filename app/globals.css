@@ -187,21 +187,31 @@
 @utility container {
   width: 100%;
   margin-inline: auto;
+  padding-inline: 1rem;
 
   @media (min-width: 40rem) {
     max-width: 44rem; /* up to 704px for sm */
+    padding-inline: 1.5rem;
   }
   @media (min-width: 48rem) {
     max-width: 60rem; /* up to 960px for md */
+    padding-inline: 2rem;
   }
   @media (min-width: 64rem) {
     max-width: 75rem; /* up to 1200px for lg */
+    padding-inline: 2rem;
   }
   @media (min-width: 80rem) {
     max-width: 82rem; /* up to 1312px for xl */
+    padding-inline: 2.5rem;
+  }
+  @media (min-width: 90rem) {
+    max-width: 90rem; /* up to 1440px for 1440px */
+    padding-inline: 4rem;
   }
   @media (min-width: 96rem) {
     max-width: 90rem; /* up to 1440px for 2xl */
+    padding-inline: 4rem;
   }
 }
 
