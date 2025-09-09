@@ -29,7 +29,7 @@ function NavbarRightSide({ isLoggedIn, user, onLoginClick }: NavbarRightSideProp
 
   return (
     <>
-      <div className="hidden items-center gap-2 md:flex">
+      <div className="hidden items-center md:flex">
         <ThemeToggle />
         <div className="bg-border mx-4 h-9 w-px" />
         <LoginAvatar isLoggedIn={isLoggedIn} user={user} onLoginClick={onLoginClick} />
