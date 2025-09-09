@@ -13,7 +13,7 @@ import {
 export default function RoadmapPage() {
   return (
     <main>
-      <div className="bg-background fixed top-[calc(var(--spacing)*1.5+92px)] z-50 w-full border-b py-3">
+      <div className="bg-background fixed top-[72px] z-50 w-full border-b py-3 md:top-[84px]">
         <Breadcrumb className="container mx-auto px-4">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -35,7 +35,7 @@ export default function RoadmapPage() {
         </Breadcrumb>
       </div>
 
-      <div className="container mx-auto mt-18 mb-8 px-4">
+      <div className="container mx-auto mt-16 mb-8 px-4">
         <div className="flex flex-col">
           <h1 className="m-0 text-lg font-bold text-gray-900 md:text-xl md:leading-6 xl:text-2xl">
             Powerhouse Roadmaps
