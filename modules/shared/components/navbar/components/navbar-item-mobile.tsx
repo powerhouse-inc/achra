@@ -23,7 +23,12 @@ function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobilePr
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="border-border w-[151px] justify-between rounded-lg border">
+            <NavigationMenuTrigger
+              onPointerMove={(event) => event.preventDefault()}
+              onPointerEnter={(event) => event.preventDefault()}
+              onPointerLeave={(event) => event.preventDefault()}
+              className="border-border w-37.5 justify-between rounded-lg border"
+            >
               {activeItem ? activeItem.label : 'Home'}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
