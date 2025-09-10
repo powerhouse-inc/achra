@@ -104,7 +104,7 @@ const networks: Network[] = [
 export default function NetworksPage() {
   return (
     <main>
-      <div className="container mx-auto mt-6 mb-8 px-4">
+      <div className="container mt-6 mb-8">
         <h1 className="text-foreground/50 md:text- mb-4 text-3xl font-bold tracking-tight">
           Networks
         </h1>
