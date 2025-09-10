@@ -1,0 +1,19 @@
+query NetworkProfile($docId: PHID!) {
+  NetworkProfile {
+    getDocument(docId: $docId) {
+      state {
+        category
+        description
+        discord
+        github
+        icon
+        logo
+        logoBig
+        name
+        website
+        x
+        youtube
+      }
+    }
+  }
+}

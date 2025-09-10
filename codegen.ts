@@ -1,16 +1,19 @@
+import { config as dotenvConfig } from 'dotenv'
 import type { CodegenConfig } from '@graphql-codegen/cli'
+
+// Load environment variables from .env file
+dotenvConfig()
 
 // see: https://plainenglish.io/blog/next-js-app-router-graphql-codegen-and-tanstack-query
 
 const config: CodegenConfig = {
   // Where your GQL schema is located (could also be externally hosted)
-  // TODO: move the URL to the .env file
-  schema: 'https://sky-switchboard-staging.vetra.to/graphql',
+  schema: process.env.NEXT_PUBLIC_SWITCHBOARD_URL,
   overwrite: true,
-  documents: ['./modules/**/*.gql', './modules/**/*.{tsx,ts}', './app/**/*.{tsx,ts}'],
+  documents: ['./modules/**/*.graphql', './modules/**/*.{tsx,ts}', './app/**/*.{tsx,ts}'],
   generates: {
     // Where the generated types and hooks file will be placed
-    './modules/__generated__/graphql/gql-generated.ts': {
+    './modules/__generated__/graphql/switchboard-generated.ts': {
       plugins: [
         {
           add: {
@@ -48,7 +51,7 @@ next?: NextFetchRequestConfig;
         addSuspenseQuery: true,
         // Allows us to specify a custom fetcher function that will leverage
         // Next.js caching fetaures within our generated query hooks.
-        fetcher: '@/shared/lib/fetcher#fetcher',
+        fetcher: '@/shared/lib/fetcher#switchboardFetcher',
       },
     },
   },

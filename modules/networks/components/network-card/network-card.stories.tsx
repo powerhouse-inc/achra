@@ -1,6 +1,6 @@
 import React from 'react'
 import { PowerhouseLogoIsotype, PowerhouseLogotype } from '@/modules/shared/components/svgs'
-import { NetworkCard } from './network-card'
+import { NetworkCard } from '.'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {

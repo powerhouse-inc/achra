@@ -1,0 +1,73 @@
+query ScopeOfWork($docId: PHID!) {
+  ScopeOfWork {
+    getDocument(docId: $docId) {
+      id
+      state {
+        roadmaps {
+          slug
+          title
+          milestones {
+            description
+            budget
+            title
+            sequenceCode
+            id
+          }
+        }
+        contributors {
+          agentType
+          code
+          id
+          name
+        }
+        deliverables {
+          budgetAnchor {
+            margin
+            project
+            quantity
+            unit
+            unitCost
+          }
+          code
+          description
+          id
+          keyResults {
+            id
+            link
+            title
+          }
+          owner
+          status
+          title
+        }
+        description
+        projects {
+          abstract
+          budget
+          budgetType
+          code
+          currency
+          expenditure {
+            actuals
+            cap
+            percentage
+          }
+          id
+          imageUrl
+          projectOwner
+          title
+          scope {
+            status
+            deliverablesCompleted {
+              completed
+              total
+            }
+            deliverables
+          }
+        }
+        status
+        title
+      }
+    }
+  }
+}
