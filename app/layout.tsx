@@ -27,7 +27,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
             <Navbar />
-            <main className="pt-18 md:pt-21">{children}</main>
+            <main className="pt-18 md:pt-22">{children}</main>
           </QueryClientProvider>
           <Footer />
         </ThemeProvider>
