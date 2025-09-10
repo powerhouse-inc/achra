@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import { type ChipVariant } from '../types'
@@ -38,7 +39,7 @@ export function NetworkCard({
   }
 
   const buttonStyles =
-    'text-primary-foreground bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2'
+    'text-primary-foreground bg-primary hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2 cursor-pointer'
 
   return (
     <Link href={href} className="h-full">
@@ -67,10 +68,10 @@ export function NetworkCard({
           </div>
 
           <div className="flex h-9 w-full justify-end">
-            <div className={buttonStyles}>
+            <Button className={buttonStyles}>
               {buttonText}
               <ArrowRight className="ml-2 h-4 w-4" />
-            </div>
+            </Button>
           </div>
         </CardContent>
       </Card>
