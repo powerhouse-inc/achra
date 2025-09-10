@@ -35,7 +35,7 @@ export default function RoadmapPage() {
         </Breadcrumb>
       </div>
 
-      <div className="container mt-16 mb-8 flex flex-col gap-6">
+      <div className="container mt-18 mb-8 flex flex-col gap-6">
         <div className="flex flex-col">
           <h1 className="m-0 text-lg font-bold text-gray-900 md:text-xl md:leading-6 xl:text-2xl">
             Powerhouse Roadmaps
