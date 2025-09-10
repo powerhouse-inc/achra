@@ -14,7 +14,7 @@ export default function useDesktopTimeline({ milestones }: { milestones: Milesto
   const downMilestones = useMemo(() => milestones.filter((_, i) => i % 2 !== 0), [milestones])
 
   const { width } = useWindowSize()
-  const gapPx = 20
+  const gapPx = 16
 
   useEffect(() => {
     if (!containerRef.current) return
