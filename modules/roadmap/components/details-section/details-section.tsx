@@ -4,10 +4,10 @@ import { mockedMilestone1, mockedMilestone2, mockedMilestone3 } from './mocked-d
 
 export default function DetailsSection() {
   return (
-    <div className="mt-6">
+    <div className="flex flex-col gap-6">
       <SectionTitle title="Milestones Roadmap Details" />
 
-      <div className="mt-6 flex flex-col gap-10 md:mt-8 md:gap-8">
+      <div className="flex flex-col gap-8">
         <MilestoneDetailsCard milestone={mockedMilestone1} />
         <MilestoneDetailsCard milestone={mockedMilestone2} />
         <MilestoneDetailsCard milestone={mockedMilestone3} />
