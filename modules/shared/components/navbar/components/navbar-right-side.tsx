@@ -46,7 +46,7 @@ function NavbarRightSide({ isLoggedIn, user, onLoginClick }: NavbarRightSideProp
               <span className="sr-only">Open menu</span>
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="z-content-menu w-56" align="end">
+          <DropdownMenuContent className="z-160 w-56" align="end">
             {isLoggedIn ? (
               <DropdownMenuItem>
                 <LoginAvatar isLoggedIn={isLoggedIn} user={user} />
