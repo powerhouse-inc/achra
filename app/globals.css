@@ -173,11 +173,6 @@
   --color-status-success: var(--status-success);
   --color-status-warning: var(--status-warning);
   --color-purple: var(--purple);
-
-  /* THIS SECTION FOR THE Z-INDEX */
-  --z-index-breadcrumb: 50;
-  --z-index-navbar: 150;
-  --z-index-content-menu: 160;
 }
 
 @layer base {
