@@ -15,6 +15,9 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
   ],
   framework: '@storybook/nextjs',
+  features: {
+    experimentalRSC: true,
+  },
   staticDirs: ['../public'],
   async webpackFinal(config) {
     if (config.module?.rules) {

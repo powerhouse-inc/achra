@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
-import { type ChipVariant } from '../types'
-import NetworkChip from './network-chips'
+import { type ChipVariant } from '../../types'
+import NetworkChip from '../network-chips'
 
 interface NetworkCardProps {
   isotype: React.ReactNode

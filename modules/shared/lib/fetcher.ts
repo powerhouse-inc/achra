@@ -7,15 +7,28 @@ type RequestInit = {
   headers: (HeadersInit & FetchOptions) | FetchOptions
 }
 
-export const fetcher = <TData, TVariables>(
+export const switchboardFetcher = <TData, TVariables>(
+  query: string,
+  variables?: TVariables,
+  options?: RequestInit['headers'],
+) => {
+  return graphqlFetcher<TData, TVariables>(
+    process.env.NEXT_PUBLIC_SWITCHBOARD_URL,
+    query,
+    variables,
+    options,
+  )
+}
+
+const graphqlFetcher = <TData, TVariables>(
+  url: string,
   query: string,
   variables?: TVariables,
   options?: RequestInit['headers'],
 ) => {
   return async (): Promise<TData> => {
     const { next, cache, ...restOptions } = options || {}
-    // TODO: move the URL to the .env file
-    const res = await fetch('https://publish-dev-vpighsmr70zxa92r9w.herokuapp.com/graphql', {
+    const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
