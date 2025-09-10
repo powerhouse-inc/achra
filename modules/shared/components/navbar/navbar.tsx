@@ -25,26 +25,28 @@ function Navbar() {
   const activeItem = navItems.find((item) => pathname === item.href)
 
   return (
-    <header className="bg-muted/30 sticky top-0 z-100 container flex items-center justify-center rounded-3xl shadow-lg backdrop-blur-[7.5px] md:p-1.5">
-      <div className="bg-popover flex flex-1 items-center justify-between pr-4 sm:rounded-2xl md:pr-4">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-4">
-            <NavbarBrand
-              isNetworksPage={isNetworksPage}
-              isotypeLogo={Isotype}
-              logotype={Logotype}
-              logotypeClassName={logotypeClassName}
-              logoHref={logoHref}
-            />
-            <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
+    <div className="z-navbar bg-muted/30 sticky top-0 mx-auto rounded-3xl px-0 py-0 shadow-lg backdrop-blur-[7.5px] md:mx-6 md:px-2.5 md:py-2.5 md:shadow-none">
+      <header className="flex items-center justify-center">
+        <div className="bg-popover flex flex-1 items-center justify-between rounded-none pr-4 sm:rounded-2xl md:pr-4">
+          <div className="flex w-full items-center justify-between">
+            <div className="flex items-center gap-4">
+              <NavbarBrand
+                isNetworksPage={isNetworksPage}
+                isotypeLogo={Isotype}
+                logotype={Logotype}
+                logotypeClassName={logotypeClassName}
+                logoHref={logoHref}
+              />
+              <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
+            </div>
+
+            <NavbarItemsDesk navItems={navItems} pathname={pathname} />
+
+            <NavbarRightSide isLoggedIn={isLoggedIn} user={user} onLoginClick={handleLoginClick} />
           </div>
-
-          <NavbarItemsDesk navItems={navItems} pathname={pathname} />
-
-          <NavbarRightSide isLoggedIn={isLoggedIn} user={user} onLoginClick={handleLoginClick} />
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   )
 }
 
