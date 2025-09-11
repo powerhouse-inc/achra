@@ -27,6 +27,12 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
           bgColor: 'bg-slate-50', // TODO: replace colors
           textColor: 'text-gray-500',
         }
+      case ScopeOfWork_DeliverableStatus.Canceled:
+        return {
+          label: 'Canceled',
+          bgColor: 'bg-slate-50', // TODO: replace colors
+          textColor: 'text-gray-500',
+        }
       case ScopeOfWork_DeliverableStatus.Draft:
       case ScopeOfWork_DeliverableStatus.Todo:
         return {

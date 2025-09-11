@@ -7,6 +7,7 @@ import {
   type ScopeOfWork_Deliverable,
   type ScopeOfWork_Milestone,
   ScopeOfWork_DeliverableStatus,
+  ScopeOfWork_DeliverableSetStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
@@ -15,7 +16,6 @@ import DeliverablesSection from './deliverables-section'
 import MilestoneProgress from './milestone-progress'
 import TargetData from './target-data'
 import TitleAndDescription from './title-and-description'
-import { ProgressStatus } from './types'
 
 interface MilestoneDetailsCardProps {
   milestone: ScopeOfWork_Milestone
@@ -45,9 +45,9 @@ export default function MilestoneDetailsCard({
   return (
     <article
       id={milestone.sequenceCode}
-      className="relative scroll-mt-[170px] md:flex md:flex-col md:gap-6 lg:flex-row lg:gap-8"
+      className="relative scroll-mt-[155px] md:flex md:flex-col md:gap-6 lg:flex-row lg:gap-8"
     >
-      <div className="flex flex-col gap-4 md:flex-row md:gap-6 lg:sticky lg:top-[170px] lg:h-fit">
+      <div className="flex flex-col gap-4 md:flex-row md:gap-6 lg:sticky lg:top-[160px] lg:h-fit">
         <aside
           className={cn(
             // Layout
@@ -71,15 +71,18 @@ export default function MilestoneDetailsCard({
           <MilestoneProgress
             // TODO: replace this with the actual progress data from the API once it is fixed
             data={{
-              totalDeliverables: deliverables.length,
-              deliverablesCompleted: deliverables.filter(
-                (deliverable) => deliverable.status === ScopeOfWork_DeliverableStatus.Delivered,
-              ).length,
+              deliverablesCompleted: {
+                __typename: 'ScopeOfWork_DeliverablesCompleted',
+                completed: deliverables.filter(
+                  (deliverable) => deliverable.status === ScopeOfWork_DeliverableStatus.Delivered,
+                ).length,
+                total: deliverables.length,
+              },
               progress: {
-                __typename: 'Percentage',
+                __typename: 'ScopeOfWork_Percentage',
                 value: 0.8,
               },
-              status: ProgressStatus.IN_PROGRESS,
+              status: ScopeOfWork_DeliverableSetStatus.InProgress,
             }}
           />
           <TargetData targetDate={milestone.deliveryTarget} />

@@ -44,6 +44,24 @@ export const Draft: Story = {
   },
 }
 
+export const Blocked: Story = {
+  args: {
+    status: ScopeOfWork_DeliverableStatus.Blocked,
+  },
+}
+
+export const Canceled: Story = {
+  args: {
+    status: ScopeOfWork_DeliverableStatus.Canceled,
+  },
+}
+
+export const WontDo: Story = {
+  args: {
+    status: ScopeOfWork_DeliverableStatus.WontDo,
+  },
+}
+
 export const AllStatuses: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
@@ -52,6 +70,9 @@ export const AllStatuses: Story = {
         <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
         <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Delivered} />
         <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Draft} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Blocked} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Canceled} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.WontDo} />
       </div>
     </div>
   ),

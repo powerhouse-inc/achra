@@ -1,11 +1,15 @@
 'use client'
 
+import { type ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneCard } from '../milestone-card'
 import { DesktopTimeline } from './desktop-timeline'
 import { TimelineSwiper } from './timeline-swiper'
-import type { Milestone } from '../milestone-card/types'
 
-export default function Timeline({ milestones }: { milestones: Milestone[] }) {
+interface TimelineProps {
+  milestones: ScopeOfWork_Milestone[]
+}
+
+export default function Timeline({ milestones }: TimelineProps) {
   if (milestones.length === 0) {
     return null
   }
