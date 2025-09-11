@@ -1,5 +1,6 @@
 'use client'
 
+import { Circle, CircleWithDot } from '@/shared/components/svgs'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
 import useDesktopTimeline from './use-desktop-timeline'
@@ -11,9 +12,7 @@ const spacingDownClasses = 'pl-32.5 xl:pl-45 2xl:pl-48.75'
 const milestoneBaseClasses = 'relative w-full max-w-72.75 xl:max-w-76'
 const lineBaseClasses =
   'desktop-timeline-line bg-accent-foreground/30 absolute left-1/2 z-0 ml-4 h-px w-0'
-const dotBaseClasses =
-  'border-accent-foreground/30 absolute left-1/2 z-10 flex h-2.75 w-2.75 -translate-x-1/2 items-center justify-center rounded-full border'
-const progressDotClasses = 'bg-status-progress h-1.5 w-1.5 rounded-full'
+const dotBaseClasses = 'absolute left-1/2 z-10 h-4 w-4 -translate-x-1/2'
 
 export default function DesktopTimeline({ milestones }: { milestones: Milestone[] }) {
   const { containerRef, upMilestones, downMilestones } = useDesktopTimeline({ milestones })
@@ -33,8 +32,12 @@ export default function DesktopTimeline({ milestones }: { milestones: Milestone[
               data-milestone-order={order}
             >
               <div className={cn(lineBaseClasses, '-bottom-px')} />
-              <div className={cn(dotBaseClasses, '-bottom-1.5')}>
-                {milestone.progress !== 0 && <div className={progressDotClasses} />}
+              <div className={cn(dotBaseClasses, '-bottom-2')}>
+                {milestone.progress === 0 ? (
+                  <Circle className="text-accent-foreground" />
+                ) : (
+                  <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />
+                )}
               </div>
               <MilestoneCard milestone={milestone} />
             </div>
@@ -54,8 +57,12 @@ export default function DesktopTimeline({ milestones }: { milestones: Milestone[
                 data-milestone-order={order}
               >
                 <div className={cn(lineBaseClasses, 'top-0')} />
-                <div className={cn(dotBaseClasses, '-top-1.25')}>
-                  {milestone.progress !== 0 && <div className={progressDotClasses} />}
+                <div className={cn(dotBaseClasses, '-top-2')}>
+                  {milestone.progress === 0 ? (
+                    <Circle className="text-accent-foreground" />
+                  ) : (
+                    <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />
+                  )}
                 </div>
                 <MilestoneCard milestone={milestone} />
               </div>
