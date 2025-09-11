@@ -1,3 +1,5 @@
+import { type DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
+
 export interface Milestone {
   id: string
   sequenceCode: string
@@ -5,6 +7,6 @@ export interface Milestone {
   targetDate: string
   title: string
   abstract: string
-  status: 'To do' | 'In Progress' | 'Delivered'
+  status: DeliverableStatus
   progress: number
 }
