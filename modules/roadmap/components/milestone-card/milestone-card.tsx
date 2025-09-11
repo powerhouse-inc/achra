@@ -1,11 +1,12 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
+import { DeliverableStatusChip } from '@/shared/components/chips/deliverable-status-chip'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardHeader, CardContent, CardFooter } from '@/shared/components/ui/card'
 import { Progress } from '@/shared/components/ui/progress'
 import { cn } from '@/shared/lib/utils'
-import { formatDateStringToQuarter, getStatusColor } from './utils'
+import { formatDateStringToQuarter } from './utils'
 import type { Milestone } from './types'
 
 interface MilestoneCardProps {
@@ -49,30 +50,20 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
         <div className="bg-popover flex flex-col gap-2 rounded-xl border p-2">
           <div className="flex items-center justify-between">
             <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
-            {/* TODO: replace this <div> with the shared component (Chip) once it is 100% ready */}
-            <div
-              className={cn(
-                'flex items-center justify-center rounded-md px-3 py-px text-xs leading-5.5 font-semibold',
-                getStatusColor(milestone.status),
-              )}
-            >
-              {milestone.status.toUpperCase()}
-            </div>
+            <DeliverableStatusChip status={milestone.status} />
           </div>
           <div className="relative">
             <Progress
               value={milestone.progress}
               className={cn(
-                'bg-accent h-4 rounded',
-                milestone.status === 'Delivered' && '[&>div]:bg-status-success',
-                milestone.status === 'In Progress' && '[&>div]:bg-status-progress',
-                milestone.status === 'To do' && '[&>div]:bg-status-warning',
+                'bg-accent [&>div]:bg-status-progress h-4 rounded',
+                milestone.progress === 100 && '[&>div]:bg-status-success',
               )}
             />
             <div
               className={cn(
                 'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
-                milestone.status === 'Delivered'
+                milestone.progress === 100
                   ? 'text-primary-foreground'
                   : 'text-accent-foreground/30',
               )}
