@@ -2,16 +2,20 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { type ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
 import useTimelineSwiper from './use-timeline-swiper'
-import type { Milestone } from '../../milestone-card/types'
 
 // Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-export default function TimelineSwiper({ milestones }: { milestones: Milestone[] }) {
+interface TimelineSwiperProps {
+  milestones: ScopeOfWork_Milestone[]
+}
+
+export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
   const { adjustCardHeights, swiperRef } = useTimelineSwiper()
 
   return (

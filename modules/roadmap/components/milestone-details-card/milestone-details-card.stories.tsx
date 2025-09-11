@@ -3,7 +3,7 @@ import {
   mockedDeliverables1,
   mockedContributors1,
   mockedProjects1,
-} from '../details-section/mocked-data'
+} from '@/modules/roadmap/mocks'
 import MilestoneDetailsCard from './milestone-details-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 

@@ -2,9 +2,13 @@
 
 import { useEffect, useRef, useMemo } from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import type { Milestone } from '../../milestone-card/types'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 
-export default function useDesktopTimeline({ milestones }: { milestones: Milestone[] }) {
+interface UseDesktopTimelineOptions {
+  milestones: ScopeOfWork_Milestone[]
+}
+
+export default function useDesktopTimeline({ milestones }: UseDesktopTimelineOptions) {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const upMilestones = useMemo(

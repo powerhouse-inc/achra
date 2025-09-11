@@ -1,6 +1,4 @@
-import type { Milestone } from './types'
-
-export function formatDateStringToQuarter(targetDate: Milestone['targetDate']): string {
+export function formatDateStringToQuarter(targetDate: string): string {
   if (!targetDate) return ''
 
   try {
