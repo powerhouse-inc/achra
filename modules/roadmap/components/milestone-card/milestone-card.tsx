@@ -1,14 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  type ScopeOfWork_Milestone,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useMemo } from 'react'
+import { type ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardHeader, CardContent, CardFooter } from '@/shared/components/ui/card'
 import { Progress } from '@/shared/components/ui/progress'
 import { cn } from '@/shared/lib/utils'
+import { getProgressPercentage } from '../../lib/type-helpers'
 import { formatDateStringToQuarter } from './utils'
 
 interface MilestoneCardProps {
@@ -17,6 +16,10 @@ interface MilestoneCardProps {
 }
 
 export default function MilestoneCard({ milestone, className }: MilestoneCardProps) {
+  const progress = useMemo(() => {
+    return getProgressPercentage(milestone.scope?.progress)
+  }, [milestone.scope?.progress])
+
   return (
     <Card
       className={cn(
@@ -25,9 +28,8 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
       )}
     >
       <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none p-2">
-        <div className="flex items-center gap-1">
-          <span className="text-accent-foreground/30 font-semibold">{milestone.sequenceCode}</span>
-          {/* <span className="text-accent-foreground font-semibold">{milestone.code}</span> */}
+        <div className="text-accent-foreground/30 flex items-center gap-1 font-semibold">
+          {milestone.sequenceCode}
         </div>
         <div className="flex items-center">
           <span className="text-accent-foreground/30 font-semibold">
@@ -51,41 +53,26 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
         <div className="bg-popover flex flex-col gap-2 rounded-xl border p-2">
           <div className="flex items-center justify-between">
             <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
-            {/* TODO: replace this with the actual status from the API */}
-            <DeliverableSetStatusChip
-              status={milestone.scope?.status ?? ScopeOfWork_DeliverableSetStatus.Todo}
-            />
+            {milestone.scope?.status && (
+              <DeliverableSetStatusChip status={milestone.scope?.status} />
+            )}
           </div>
           <div className="relative">
             <Progress
-              value={50}
-              className={cn('bg-accent [&>div]:bg-status-progress h-4 rounded')}
-            />
-            <div
-              className={cn(
-                'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
-                'text-accent-foreground/30',
-              )}
-            >
-              50%
-            </div>
-            {/* <Progress
-              value={milestone.progress}
+              value={progress}
               className={cn(
                 'bg-accent [&>div]:bg-status-progress h-4 rounded',
-                milestone.progress === 100 && '[&>div]:bg-status-success',
+                progress === 100 && '[&>div]:bg-status-success',
               )}
             />
             <div
               className={cn(
                 'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
-                milestone.progress === 100
-                  ? 'text-primary-foreground'
-                  : 'text-accent-foreground/30',
+                progress === 100 ? 'text-primary-foreground' : 'text-accent-foreground/30',
               )}
             >
-              {milestone.progress}%
-            </div> */}
+              {progress}%
+            </div>
           </div>
         </div>
       </CardContent>

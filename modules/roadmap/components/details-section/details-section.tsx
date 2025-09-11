@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation'
 import {
+  type ScopeOfWork_Deliverable,
   type ScopeOfWork_Project,
   useScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -33,8 +34,8 @@ export default function DetailsSection() {
           <MilestoneDetailsCard
             key={milestone.id}
             milestone={milestone}
-            deliverables={(data?.ScopeOfWork?.getDocument?.state.deliverables ?? []).filter(
-              (deliverable) =>
+            deliverables={(data?.ScopeOfWork?.getDocument?.stateJSON?.deliverables ?? []).filter(
+              (deliverable: ScopeOfWork_Deliverable) =>
                 milestone.scope?.deliverables.some(
                   (deliverableId) => deliverableId === deliverable.id,
                 ),

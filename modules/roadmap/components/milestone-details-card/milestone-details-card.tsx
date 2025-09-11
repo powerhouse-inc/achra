@@ -6,8 +6,6 @@ import {
   type ScopeOfWork_Project,
   type ScopeOfWork_Deliverable,
   type ScopeOfWork_Milestone,
-  ScopeOfWork_DeliverableStatus,
-  ScopeOfWork_DeliverableSetStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
@@ -34,9 +32,10 @@ export default function MilestoneDetailsCard({
     const uniqueContributors: Record<string, ScopeOfWork_Agent> = {}
     deliverables.forEach((deliverable) => {
       if (deliverable.owner && !uniqueContributors[deliverable.owner]) {
-        uniqueContributors[deliverable.owner] = contributors.find(
-          (contributor) => contributor.id === deliverable.owner,
-        )!
+        const contributor = contributors.find((contributor) => contributor.id === deliverable.owner)
+        if (contributor) {
+          uniqueContributors[deliverable.owner] = contributor
+        }
       }
     })
     return Object.values(uniqueContributors)
@@ -68,23 +67,7 @@ export default function MilestoneDetailsCard({
             {milestone.sequenceCode}
           </div>
 
-          <MilestoneProgress
-            // TODO: replace this with the actual progress data from the API once it is fixed
-            data={{
-              deliverablesCompleted: {
-                __typename: 'ScopeOfWork_DeliverablesCompleted',
-                completed: deliverables.filter(
-                  (deliverable) => deliverable.status === ScopeOfWork_DeliverableStatus.Delivered,
-                ).length,
-                total: deliverables.length,
-              },
-              progress: {
-                __typename: 'ScopeOfWork_Percentage',
-                value: 0.8,
-              },
-              status: ScopeOfWork_DeliverableSetStatus.InProgress,
-            }}
-          />
+          <MilestoneProgress scope={milestone.scope!} />
           <TargetData targetDate={milestone.deliveryTarget} />
           <Coordinators coordinators={milestone.coordinators} />
           <Contributors contributors={milestoneContributors} />
