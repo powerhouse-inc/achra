@@ -58,18 +58,6 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
             )}
           </div>
           <div className="relative">
-            {/* <Progress
-              value={50}
-              className={cn('bg-accent [&>div]:bg-status-progress h-4 rounded')}
-            />
-            <div
-              className={cn(
-                'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
-                'text-accent-foreground/30',
-              )}
-            >
-              50%
-            </div> */}
             <Progress
               value={progress}
               className={cn(
