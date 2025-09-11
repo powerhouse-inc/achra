@@ -40,7 +40,7 @@ function NavbarRightSide({ isLoggedIn, user, onLoginClick }: NavbarRightSideProp
           <DropdownMenuTrigger asChild>
             <button
               type="button"
-              className="text-background focus:ring-ring rounded-md focus:ring-2 focus:ring-offset-2 focus:outline-none"
+              className="text-background rounded-md focus:ring-2 focus:ring-offset-2 focus:outline-none"
             >
               <KebabMenu className="h-9 w-9" />
               <span className="sr-only">Open menu</span>
