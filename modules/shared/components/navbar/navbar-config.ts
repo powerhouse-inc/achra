@@ -11,7 +11,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logotype: SkyLogotype,
     logoHref: '/network/sky',
     navItems: [
-      { label: 'Contributors', href: '/network/sky/contributors' },
+      { label: 'Contribute', href: '/network/sky/contributors' },
       { label: 'Roadmap', href: '/network/sky/roadmap' },
       { label: 'Finances', href: '/network/sky/finances' },
       { label: 'Builders', href: '/network/sky/builders' },
@@ -25,7 +25,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logotypeClassName: 'w-44',
     logoHref: '/network/powerhouse',
     navItems: [
-      { label: 'Contributors', href: '/network/powerhouse/contributors' },
+      { label: 'Contribute', href: '/network/powerhouse/contributors' },
       { label: 'Roadmap', href: '/network/powerhouse/roadmap' },
       { label: 'Finances', href: '/network/powerhouse/finances' },
       { label: 'Builders', href: '/network/powerhouse/builders' },
