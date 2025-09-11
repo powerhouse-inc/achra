@@ -1,18 +1,17 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import {
+  type ScopeOfWork_Project,
+  type ScopeOfWork_Agent,
+  type ScopeOfWork_Deliverable,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import KeyResults from '../milestone-details-card/key-results/key-results'
-import {
-  DeliverableStatus,
-  type IncrementedDeliverable,
-  type Deliverable,
-  type MDeliverable,
-} from '../milestone-details-card/types'
 import DeliverablePercentageBar from './deliverable-percentage-bar'
 import DeliverableStorypointBar from './deliverable-storypoint-bar'
 import MilestoneLink from './milestone-link'
@@ -21,7 +20,9 @@ import ProjectLink from './project-link'
 export type DeliverableViewMode = 'compacted' | 'detailed'
 
 interface DeliverableCardProps {
-  deliverable: Deliverable | MDeliverable
+  deliverable: ScopeOfWork_Deliverable
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
   viewMode: DeliverableViewMode
   maxKeyResultsOnRow: number
   isProjectCard?: boolean
@@ -29,6 +30,8 @@ interface DeliverableCardProps {
 
 export default function DeliverableCard({
   deliverable,
+  contributors,
+  projects,
   viewMode,
   maxKeyResultsOnRow,
   isProjectCard,
@@ -38,8 +41,11 @@ export default function DeliverableCard({
   const handleToggleExpand = useCallback(() => {
     setExpanded((prev) => !prev)
   }, [])
-  const deliverableProgress =
-    'workProgress' in deliverable ? deliverable.workProgress : deliverable.progress
+
+  const deliverableOwner = contributors.find((contributor) => contributor.id === deliverable.owner)
+  const deliverableProject = projects.find(
+    (project) => project.id === deliverable.budgetAnchor?.project,
+  )
 
   return (
     <div
@@ -59,8 +65,7 @@ export default function DeliverableCard({
           <Tooltip>
             <TooltipTrigger asChild>
               <Avatar className="size-6.5 self-start border-2 shadow-md">
-                <AvatarImage src={deliverable.owner.imageUrl} />
-                <AvatarFallback>{deliverable.owner.name.charAt(0)}</AvatarFallback>
+                <AvatarFallback>{deliverableOwner?.name?.charAt(0)}</AvatarFallback>
               </Avatar>
             </TooltipTrigger>
             <TooltipContent side="bottom" align="end">
@@ -69,10 +74,9 @@ export default function DeliverableCard({
 
                 <div className="flex items-center gap-2">
                   <Avatar className="size-8 border-2 shadow-md">
-                    <AvatarImage src={deliverable.owner.imageUrl} />
-                    <AvatarFallback>{deliverable.owner.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{deliverableOwner?.name?.charAt(0)}</AvatarFallback>
                   </Avatar>
-                  <div className="text-base tracking-wide">{deliverable.owner.name}</div>
+                  <div className="text-base tracking-wide">{deliverableOwner?.name}</div>
                 </div>
               </div>
             </TooltipContent>
@@ -84,7 +88,9 @@ export default function DeliverableCard({
       <div className="flex w-full items-center gap-2">
         <DeliverableStatusChip status={deliverable.status} />
 
-        {deliverable.status === DeliverableStatus.IN_PROGRESS &&
+        {/* TODO: add the progress once the api is fixed */}
+
+        {/* {deliverable.status === DeliverableStatus.IN_PROGRESS &&
           deliverableProgress &&
           (deliverableProgress.__typename === 'Percentage' ? (
             <DeliverablePercentageBar percentage={deliverableProgress.value} />
@@ -93,7 +99,7 @@ export default function DeliverableCard({
               total={deliverableProgress.total}
               completed={deliverableProgress.completed}
             />
-          ))}
+          ))} */}
       </div>
 
       {(viewMode === 'detailed' || expanded) && (
@@ -107,24 +113,29 @@ export default function DeliverableCard({
       )}
 
       <div className="mt-auto flex w-full flex-col pt-4">
-        {isProjectCard
-          ? (deliverable as IncrementedDeliverable).milestoneOverride && (
-              <MilestoneLink
-                roadmapSlug={
-                  (deliverable as IncrementedDeliverable).milestoneOverride?.roadmapSlug ?? ''
-                }
-                code={(deliverable as IncrementedDeliverable).milestoneOverride?.code ?? ''}
-              />
-            )
-          : (deliverable as MDeliverable).budgetAnchor.project &&
-            (deliverable as MDeliverable).budgetAnchor.project.code &&
-            (deliverable as MDeliverable).budgetAnchor.project.title && (
-              <ProjectLink
-                href={'#'}
-                code={(deliverable as MDeliverable).budgetAnchor.project.code}
-                name={(deliverable as MDeliverable).budgetAnchor.project.title}
-              />
-            )}
+        {isProjectCard ? (
+          // TODO: enable this once the project pages are implemented
+
+          // (deliverable as IncrementedDeliverable).milestoneOverride && (
+          //     <MilestoneLink
+          //       roadmapSlug={
+          //         (deliverable as IncrementedDeliverable).milestoneOverride?.roadmapSlug ?? ''
+          //       }
+          //       code={(deliverable as IncrementedDeliverable).milestoneOverride?.code ?? ''}
+          //     />
+          //   )
+          <div>Milestone link - Coming soon</div>
+        ) : (
+          deliverableProject &&
+          deliverableProject.code &&
+          deliverableProject.title && (
+            <ProjectLink
+              href={'#'} // TODO: enable this once the project pages are implemented
+              code={deliverableProject.code}
+              name={deliverableProject.title}
+            />
+          )
+        )}
         <KeyResults
           keyResults={deliverable.keyResults}
           viewMode={viewMode}

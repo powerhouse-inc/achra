@@ -22,7 +22,11 @@ function getProgressPercent(progress: DeliverableSet['progress']): number {
 }
 
 export default function MilestoneProgress({ data }: MilestoneProgressProps) {
-  const progress = getProgressPercent(data?.progress)
+  // TODO: reenable this once the progress is fixed in the api
+  // const progress = getProgressPercent(data?.progress)
+
+  // TODO: remove this once the progress is fixed in the api
+  const progress = ((data.deliverablesCompleted ?? 0) * 100) / (data.totalDeliverables ?? 0)
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 self-stretch rounded-md pt-2">

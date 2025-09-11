@@ -1,9 +1,9 @@
 import { UserRound } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import type { OwnerRef } from './types'
+import { type ScopeOfWork_Agent } from '@/modules/__generated__/graphql/switchboard-generated'
+import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 
 interface ContributorsProps {
-  contributors: OwnerRef[]
+  contributors: ScopeOfWork_Agent[]
 }
 
 export default function Contributors({ contributors }: ContributorsProps) {
@@ -15,7 +15,6 @@ export default function Contributors({ contributors }: ContributorsProps) {
         {contributors.map((contributor) => (
           <div key={contributor.id} className="flex items-center gap-2 self-stretch">
             <Avatar className="size-6">
-              <AvatarImage src={contributor.imageUrl} />
               <AvatarFallback className="bg-border">
                 <UserRound className="size-4" />
               </AvatarFallback>
