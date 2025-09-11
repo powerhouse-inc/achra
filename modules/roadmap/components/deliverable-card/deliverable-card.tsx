@@ -5,13 +5,17 @@ import {
   type ScopeOfWork_Project,
   type ScopeOfWork_Agent,
   type ScopeOfWork_Deliverable,
+  ScopeOfWork_DeliverableStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
+import { isBinaryProgress, isStoryPointProgress } from '../../lib/type-helpers'
 import KeyResults from '../milestone-details-card/key-results/key-results'
+import DeliverablePercentageBar from './deliverable-percentage-bar'
+import DeliverableStoryPointBar from './deliverable-storypoint-bar'
 import ProjectLink from './project-link'
 
 export type DeliverableViewMode = 'compacted' | 'detailed'
@@ -84,19 +88,18 @@ export default function DeliverableCard({
       {/* progress */}
       <div className="flex w-full items-center gap-2">
         <DeliverableStatusChip status={deliverable.status} />
-
-        {/* TODO: add the progress once the api is fixed */}
-
-        {/* {deliverable.status === DeliverableStatus.IN_PROGRESS &&
-          deliverableProgress &&
-          (deliverableProgress.__typename === 'Percentage' ? (
-            <DeliverablePercentageBar percentage={deliverableProgress.value} />
-          ) : (
-            <DeliverableStorypointBar
-              total={deliverableProgress.total}
-              completed={deliverableProgress.completed}
+        {deliverable.status === ScopeOfWork_DeliverableStatus.InProgress &&
+          deliverable.workProgress &&
+          (isStoryPointProgress(deliverable.workProgress) ? (
+            <DeliverableStoryPointBar
+              total={deliverable.workProgress.total}
+              completed={deliverable.workProgress.completed}
             />
-          ))} */}
+          ) : isBinaryProgress(deliverable.workProgress) ? (
+            <DeliverablePercentageBar percentage={deliverable.workProgress.done ? 100 : 0} />
+          ) : (
+            <DeliverablePercentageBar percentage={deliverable.workProgress.value ?? 0} />
+          ))}
       </div>
 
       {(viewMode === 'detailed' || expanded) && (

@@ -2,6 +2,7 @@ query ScopeOfWork($docId: PHID!) {
   ScopeOfWork {
     getDocument(docId: $docId) {
       id
+      stateJSON
       state {
         roadmaps {
           id

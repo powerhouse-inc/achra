@@ -16,7 +16,9 @@ export function getRoadmapFromScopeOfWork(
   scopeOfWork: ScopeOfWorkQuery,
   roadmapSlug: string,
 ): ScopeOfWork_Roadmap | undefined {
-  return scopeOfWork.ScopeOfWork?.getDocument?.state.roadmaps.find(
-    (roadmap) => roadmap.slug === roadmapSlug,
+  // TODO: use the state instead of the stateJSON once the progress is fixed in the api
+  // This is a temporary workaround to use the progress information
+  return scopeOfWork.ScopeOfWork?.getDocument?.stateJSON?.roadmaps?.find(
+    (roadmap: ScopeOfWork_Roadmap) => roadmap.slug === roadmapSlug,
   ) as ScopeOfWork_Roadmap | undefined
 }
