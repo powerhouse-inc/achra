@@ -4,14 +4,26 @@ query ScopeOfWork($docId: PHID!) {
       id
       state {
         roadmaps {
+          id
           slug
           title
+          description
           milestones {
             description
             budget
             title
             sequenceCode
             id
+            coordinators
+            deliveryTarget
+            scope {
+              deliverables
+              deliverablesCompleted {
+                completed
+                total
+              }
+              status
+            }
           }
         }
         contributors {

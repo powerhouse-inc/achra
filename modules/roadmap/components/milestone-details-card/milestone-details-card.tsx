@@ -1,3 +1,13 @@
+'use client'
+
+import { useMemo } from 'react'
+import {
+  type ScopeOfWork_Agent,
+  type ScopeOfWork_Project,
+  type ScopeOfWork_Deliverable,
+  type ScopeOfWork_Milestone,
+  ScopeOfWork_DeliverableStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
 import Coordinators from './coordinators'
@@ -5,16 +15,36 @@ import DeliverablesSection from './deliverables-section'
 import MilestoneProgress from './milestone-progress'
 import TargetData from './target-data'
 import TitleAndDescription from './title-and-description'
-import type { Milestone } from './types'
+import { ProgressStatus } from './types'
 
 interface MilestoneDetailsCardProps {
-  milestone: Milestone
+  milestone: ScopeOfWork_Milestone
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
-export default function MilestoneDetailsCard({ milestone }: MilestoneDetailsCardProps) {
+export default function MilestoneDetailsCard({
+  milestone,
+  deliverables,
+  contributors,
+  projects,
+}: MilestoneDetailsCardProps) {
+  const milestoneContributors = useMemo(() => {
+    const uniqueContributors: Record<string, ScopeOfWork_Agent> = {}
+    deliverables.forEach((deliverable) => {
+      if (deliverable.owner && !uniqueContributors[deliverable.owner]) {
+        uniqueContributors[deliverable.owner] = contributors.find(
+          (contributor) => contributor.id === deliverable.owner,
+        )!
+      }
+    })
+    return Object.values(uniqueContributors)
+  }, [deliverables, contributors])
+
   return (
     <article
-      id={milestone.id}
+      id={milestone.sequenceCode}
       className="relative scroll-mt-[170px] md:flex md:flex-col md:gap-6 lg:flex-row lg:gap-8"
     >
       <div className="flex flex-col gap-4 md:flex-row md:gap-6 lg:sticky lg:top-[170px] lg:h-fit">
@@ -34,15 +64,27 @@ export default function MilestoneDetailsCard({ milestone }: MilestoneDetailsCard
             '2xl:w-[416px]',
           )}
         >
-          <div className="inline-flex max-w-fit items-center gap-1 rounded-md border px-2 py-1 text-xl font-bold">
-            <div className="text-foreground/30">{milestone.sequenceCode}</div>
-            <div>{milestone.code}</div>
+          <div className="text-foreground/30 inline-flex max-w-fit items-center gap-1 rounded-md border px-2 py-1 text-xl font-bold">
+            {milestone.sequenceCode}
           </div>
 
-          <MilestoneProgress data={milestone.scope} />
-          <TargetData targetDate={milestone.targetDate} />
+          <MilestoneProgress
+            // TODO: replace this with the actual progress data from the API once it is fixed
+            data={{
+              totalDeliverables: deliverables.length,
+              deliverablesCompleted: deliverables.filter(
+                (deliverable) => deliverable.status === ScopeOfWork_DeliverableStatus.Delivered,
+              ).length,
+              progress: {
+                __typename: 'Percentage',
+                value: 0.8,
+              },
+              status: ProgressStatus.IN_PROGRESS,
+            }}
+          />
+          <TargetData targetDate={milestone.deliveryTarget} />
           <Coordinators coordinators={milestone.coordinators} />
-          <Contributors contributors={milestone.contributors} />
+          <Contributors contributors={milestoneContributors} />
         </aside>
 
         <div className="block md:w-1/2 lg:hidden">
@@ -63,7 +105,11 @@ export default function MilestoneDetailsCard({ milestone }: MilestoneDetailsCard
           <TitleAndDescription title={milestone.title} description={milestone.description} />
         </div>
 
-        <DeliverablesSection deliverables={milestone.scope.deliverables} />
+        <DeliverablesSection
+          deliverables={deliverables}
+          contributors={contributors}
+          projects={projects}
+        />
       </main>
     </article>
   )

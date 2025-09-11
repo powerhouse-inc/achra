@@ -1,4 +1,4 @@
-import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
+import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableStatusChip from './deliverable-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -11,7 +11,7 @@ const meta: Meta<typeof DeliverableStatusChip> = {
   argTypes: {
     status: {
       control: 'select',
-      options: Object.values(DeliverableStatus),
+      options: Object.values(ScopeOfWork_DeliverableStatus),
       description: 'The status of the deliverable',
     },
   },
@@ -22,25 +22,25 @@ type Story = StoryObj<typeof meta>
 
 export const Todo: Story = {
   args: {
-    status: DeliverableStatus.TODO,
+    status: ScopeOfWork_DeliverableStatus.Todo,
   },
 }
 
 export const InProgress: Story = {
   args: {
-    status: DeliverableStatus.IN_PROGRESS,
+    status: ScopeOfWork_DeliverableStatus.InProgress,
   },
 }
 
 export const Delivered: Story = {
   args: {
-    status: DeliverableStatus.DELIVERED,
+    status: ScopeOfWork_DeliverableStatus.Delivered,
   },
 }
 
 export const Draft: Story = {
   args: {
-    status: DeliverableStatus.DRAFT,
+    status: ScopeOfWork_DeliverableStatus.Draft,
   },
 }
 
@@ -48,10 +48,10 @@ export const AllStatuses: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">
-        <DeliverableStatusChip status={DeliverableStatus.TODO} />
-        <DeliverableStatusChip status={DeliverableStatus.IN_PROGRESS} />
-        <DeliverableStatusChip status={DeliverableStatus.DELIVERED} />
-        <DeliverableStatusChip status={DeliverableStatus.DRAFT} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Todo} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Delivered} />
+        <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Draft} />
       </div>
     </div>
   ),

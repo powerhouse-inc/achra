@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight } from 'lucide-react'
+import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/shared/components/chips/deliverable-status-chip'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardHeader, CardContent, CardFooter } from '@/shared/components/ui/card'
@@ -50,7 +51,8 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
         <div className="bg-popover flex flex-col gap-2 rounded-xl border p-2">
           <div className="flex items-center justify-between">
             <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
-            <DeliverableStatusChip status={milestone.status} />
+            {/* TODO: replace this with the actual status from the API */}
+            <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Todo} />
           </div>
           <div className="relative">
             <Progress

@@ -1,13 +1,23 @@
+import {
+  type ScopeOfWork_Project,
+  type ScopeOfWork_Agent,
+  type ScopeOfWork_Deliverable,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'
 import { DeliverableCard } from '../deliverable-card'
-import type { MDeliverable } from './types'
 
 interface DeliverablesSectionProps {
-  deliverables: MDeliverable[]
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
-export default function DeliverablesSection({ deliverables }: DeliverablesSectionProps) {
+export default function DeliverablesSection({
+  deliverables,
+  contributors,
+  projects,
+}: DeliverablesSectionProps) {
   const deliverablesRows = splitInRows(deliverables, 2)
 
   return (
@@ -37,6 +47,8 @@ export default function DeliverablesSection({ deliverables }: DeliverablesSectio
             <DeliverableCard
               key={deliverable.id}
               deliverable={deliverable}
+              contributors={contributors}
+              projects={projects}
               viewMode="detailed"
               maxKeyResultsOnRow={row
                 .map((d) => d.keyResults.length)

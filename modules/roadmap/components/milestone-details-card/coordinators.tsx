@@ -1,9 +1,8 @@
 import { UserRound } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
-import type { OwnerRef } from './types'
 
 interface CoordinatorsProps {
-  coordinators: OwnerRef[]
+  coordinators: string[]
 }
 
 export default function Coordinators({ coordinators }: CoordinatorsProps) {
@@ -13,13 +12,13 @@ export default function Coordinators({ coordinators }: CoordinatorsProps) {
 
       <div className="flex flex-wrap gap-4">
         {coordinators?.map((coordinator) => (
-          <div key={coordinator.id} className="flex items-center gap-2 self-stretch">
+          <div key={coordinator} className="flex items-center gap-2 self-stretch">
             <Avatar className="size-6">
               <AvatarFallback className="bg-border">
                 <UserRound className="size-4" />
               </AvatarFallback>
             </Avatar>
-            <div className="font-semibold">{coordinator.name}</div>
+            <div className="font-semibold">{coordinator}</div>
           </div>
         ))}
       </div>

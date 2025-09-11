@@ -1,40 +1,40 @@
 import { useMemo } from 'react'
-import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
+import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableStatusChipProps {
-  status: DeliverableStatus
+  status: ScopeOfWork_DeliverableStatus
 }
 
 export default function DeliverableStatusChip({ status }: DeliverableStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
     switch (status) {
-      case DeliverableStatus.IN_PROGRESS:
+      case ScopeOfWork_DeliverableStatus.InProgress:
         return {
           label: 'In Progress',
           bgColor: 'bg-status-progress/30',
           textColor: 'text-status-progress',
         }
-      case DeliverableStatus.DELIVERED:
+      case ScopeOfWork_DeliverableStatus.Delivered:
         return {
           label: 'Delivered',
           bgColor: 'bg-status-success/30',
           textColor: 'text-status-success',
         }
-      case DeliverableStatus.BLOCKED:
+      case ScopeOfWork_DeliverableStatus.Blocked:
         return {
           label: 'Blocked',
           bgColor: 'bg-slate-50', // TODO: replace colors
           textColor: 'text-gray-500',
         }
-      case DeliverableStatus.DRAFT:
-      case DeliverableStatus.TODO:
+      case ScopeOfWork_DeliverableStatus.Draft:
+      case ScopeOfWork_DeliverableStatus.Todo:
         return {
-          label: status === DeliverableStatus.DRAFT ? 'Draft' : 'To do',
+          label: status === ScopeOfWork_DeliverableStatus.Draft ? 'Draft' : 'To do',
           bgColor: 'bg-status-warning/30',
           textColor: 'text-status-warning',
         }
-      case DeliverableStatus.WONT_DO:
+      case ScopeOfWork_DeliverableStatus.WontDo:
         return {
           label: "Won't do",
           bgColor: 'bg-gray-100', // TODO: replace colors
