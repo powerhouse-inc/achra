@@ -23,7 +23,7 @@ function Navbar() {
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
-  const navbarBackgroundClass = isNetworksPage ? 'md:backdrop-blur-[40px]' : 'bg-background'
+  const navbarBackgroundClass = isNetworksPage ? 'md:backdrop-blur-[40px]' : 'md:bg-background'
 
   return (
     <div className={cn('fixed top-0 right-0 left-0 z-160 h-24 w-full pb-2', navbarBackgroundClass)}>
