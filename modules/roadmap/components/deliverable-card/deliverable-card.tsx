@@ -12,9 +12,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/compon
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import KeyResults from '../milestone-details-card/key-results/key-results'
-import DeliverablePercentageBar from './deliverable-percentage-bar'
-import DeliverableStorypointBar from './deliverable-storypoint-bar'
-import MilestoneLink from './milestone-link'
 import ProjectLink from './project-link'
 
 export type DeliverableViewMode = 'compacted' | 'detailed'
