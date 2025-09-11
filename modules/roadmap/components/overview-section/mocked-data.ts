@@ -1,3 +1,4 @@
+import { DeliverableStatus } from '@/modules/roadmap/components/milestone-details-card/types'
 import type { Milestone } from '../milestone-card/types'
 
 export const milestones: Milestone[] = [
@@ -9,7 +10,7 @@ export const milestones: Milestone[] = [
     abstract:
       'Decentralized Operations Platform - Proof of Concept, including: First technical integration of RWA Portfolio (Connect & Switchboard); Expense dashboard increments (on-chain data, budget breakdowns).',
     targetDate: '2024-03-31',
-    status: 'In Progress',
+    status: DeliverableStatus.IN_PROGRESS,
     progress: 50,
   },
   {
@@ -20,7 +21,7 @@ export const milestones: Milestone[] = [
     abstract:
       'Decentralized Operations Platform - Minimum Viable Product Release, including: MVP release of the MakerDAO transparency reporting information; Integrated Powerhouse Platform delivery.',
     targetDate: '2024-03-31',
-    status: 'To do',
+    status: DeliverableStatus.TODO,
     progress: 0,
   },
   {
@@ -31,7 +32,7 @@ export const milestones: Milestone[] = [
     abstract:
       'Decentralized Operations Platform - Production release, including: (scope not final) Production grade release of the MakerDAO transparency reporting information; Integrated Powerhouse platform.',
     targetDate: '2024-09-30',
-    status: 'Delivered',
+    status: DeliverableStatus.DELIVERED,
     progress: 100,
   },
   {
@@ -42,7 +43,7 @@ export const milestones: Milestone[] = [
     abstract:
       'Decentralized Operations Platform - Atlas Editor + Integration / Automation PoC, including: (scope not final) of Atlas Editor document model; Automation process POC.',
     targetDate: '2024-09-30',
-    status: 'To do',
+    status: DeliverableStatus.TODO,
     progress: 0,
   },
   {
@@ -53,7 +54,7 @@ export const milestones: Milestone[] = [
     abstract:
       'Powerhouse spin-off research, creation and structuring, including: legal entity; business model; token model; new customers; public comms.',
     targetDate: '2024-09-30',
-    status: 'In Progress',
+    status: DeliverableStatus.IN_PROGRESS,
     progress: 33,
   },
   {
@@ -64,7 +65,7 @@ export const milestones: Milestone[] = [
     abstract:
       'MakerDAO project management consultancy, including: Endgame advisory & Operations coordination; Management & delivelt of Pointable AI SOW1; related OCF work & management.',
     targetDate: '2024-09-30',
-    status: 'In Progress',
+    status: DeliverableStatus.IN_PROGRESS,
     progress: 66,
   },
 ]
