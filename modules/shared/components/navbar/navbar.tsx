@@ -8,6 +8,7 @@ import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
 import NavbarRightSide from './components/navbar-right-side'
 import { getNavbarConfig } from './navbar-config'
+import { hasBlurBackground } from './utils'
 
 function Navbar() {
   const pathname = usePathname()
@@ -23,10 +24,16 @@ function Navbar() {
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)
-  const navbarBackgroundClass = isNetworksPage ? 'md:backdrop-blur-[40px]' : 'md:bg-background'
+
+  const navBarWithBlurBackground = hasBlurBackground(pathname)
 
   return (
-    <div className={cn('fixed top-0 right-0 left-0 z-160 h-24 w-full pb-2', navbarBackgroundClass)}>
+    <div
+      className={cn(
+        'fixed top-0 right-0 left-0 z-160 h-24 w-full pb-2',
+        navBarWithBlurBackground ? 'md:backdrop-blur-[40px]' : 'md:bg-background',
+      )}
+    >
       <div className="bg-muted/30 fixed top-0 right-0 left-0 z-150 rounded-3xl p-0 shadow-lg md:mx-6 md:p-2.5 md:shadow-none xl:container xl:px-2.5 2xl:mx-14 2xl:max-w-[calc(100%-108px)]">
         <header className="bg-popover flex h-full flex-1 items-center justify-between rounded-none pr-4 md:rounded-2xl">
           <div className="flex w-full items-center justify-between">
