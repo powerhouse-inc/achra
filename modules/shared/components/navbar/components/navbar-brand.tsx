@@ -25,7 +25,7 @@ export function NavbarBrand({
   const logoContainerClasses = cn(
     'text-border flex items-center justify-center overflow-hidden py-4.5',
     {
-      'sm:rounded-l-2xl border-r bg-primary/5 border-border px-4 md:px-6': !isNetworksPage,
+      'md:rounded-l-2xl border-r bg-primary/5 border-border px-4 md:px-6': !isNetworksPage,
       'pl-6': isNetworksPage,
     },
   )
