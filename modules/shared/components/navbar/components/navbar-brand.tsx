@@ -37,14 +37,14 @@ export function NavbarBrand({
           <MainLogoComponent
             className={cn(
               'h-9 sm:flex',
-              isNetworksPage ? 'text-primary hidden w-42 sm:flex' : 'w-9',
+              isNetworksPage ? 'text-primary hidden w-42 sm:flex' : 'hover:text-primary/50 w-9',
             )}
           />
           {isNetworksPage && <AchraLogo className="text-primary h-9 w-9 sm:hidden" />}
         </a>
       </div>
       {showIsotype && logoHref && (
-        <Link href={logoHref} className="cursor-pointer">
+        <Link href={logoHref} className="cursor-pointer hover:opacity-80">
           <div className="flex items-center gap-2">
             {IsotypeLogo && typeof IsotypeLogo === 'function' && (
               <IsotypeLogo className="h-8 w-8" />
