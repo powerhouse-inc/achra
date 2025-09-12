@@ -29,7 +29,7 @@ function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobilePr
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuTrigger
-              className="border-border w-37.5 justify-between rounded-lg border"
+              className="border-border text-secondary-foreground w-37.5 justify-between rounded-lg border text-sm"
               {...clickOnlyTriggerProps}
             >
               {activeItem ? activeItem.label : 'Home'}
@@ -42,8 +42,8 @@ function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobilePr
                       <Link
                         href={item.href}
                         className={cn(
-                          'hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-ring block rounded-md p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
-                          pathname === item.href && 'bg-accent text-accent-foreground',
+                          'hover:bg-accent hover:text-foreground/50 focus:bg-accent focus:text-accent-foreground text-foreground block rounded-md p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
+                          pathname === item.href && 'text-primary hover:text-primary',
                         )}
                       >
                         {item.label}
