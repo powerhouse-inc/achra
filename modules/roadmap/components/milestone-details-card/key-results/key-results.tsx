@@ -96,8 +96,10 @@ export default function KeyResults({
                         'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
                       )}
                     >
-                      <div className="group-hover/link:underline">{keyResult.title}</div>
-                      <ArrowUpRight className="text-foreground size-4" />
+                      <div className="max-w-full truncate group-hover/link:underline">
+                        {keyResult.title}
+                      </div>
+                      <ArrowUpRight className="text-foreground size-4 min-w-4" />
                     </a>
                   ) : (
                     <div
