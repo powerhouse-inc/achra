@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from './navbar'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 

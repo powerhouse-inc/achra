@@ -16,7 +16,7 @@ function NavbarItemsDesk({ navItems, pathname }: NavbarCenterProps) {
   return (
     <nav
       className={cn('hidden items-center gap-2 lg:flex xl:gap-12', {
-        'lg:gap-4': hasManyItems,
+        'lg:gap-3': hasManyItems,
         'lg:gap-12': !hasManyItems,
       })}
     >
