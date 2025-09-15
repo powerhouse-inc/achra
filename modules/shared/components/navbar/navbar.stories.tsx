@@ -7,8 +7,8 @@ const meta = {
   parameters: {
     nextjs: {
       appDirectory: true,
-      router: {
-        pathname: '/',
+      navigation: {
+        pathname: '/networks',
       },
     },
   },
@@ -18,5 +18,27 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
-  render: () => <Navbar />,
+  name: 'Navbar (Achra)',
+}
+
+export const WithPowerhousePathname: Story = {
+  name: 'Navbar (Powerhouse)',
+  parameters: {
+    nextjs: {
+      navigation: {
+        pathname: '/network/powerhouse/roadmap',
+      },
+    },
+  },
+}
+
+export const WithSkyPathname: Story = {
+  name: 'Navbar (Sky)',
+  parameters: {
+    nextjs: {
+      navigation: {
+        pathname: '/network/sky/finances',
+      },
+    },
+  },
 }
