@@ -52,7 +52,9 @@ export function NetworkCard({ profile }: NetworkCardProps) {
 
         <CardContent className="flex flex-1 flex-col justify-between p-0 pt-0">
           <div className="mt-2 flex flex-col">
-            <p className="text-foreground text-sm leading-5.5 font-medium">{profile.description}</p>
+            <p className="text-foreground line-clamp-3 text-sm leading-5.5 font-medium">
+              {profile.description}
+            </p>
           </div>
 
           <div className="flex h-9 w-full justify-end">
