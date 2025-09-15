@@ -19,8 +19,13 @@ function Navbar() {
   }
   const handleLoginClick = () => {}
 
-  const config = useMemo(() => getNavbarConfig(pathname), [pathname])
-  const { isotype: Isotype, logotype: Logotype, logotypeClassName, logoHref, navItems } = config
+  const {
+    isotype: Isotype,
+    logotype: Logotype,
+    logotypeClassName,
+    logoHref,
+    navItems,
+  } = useMemo(() => getNavbarConfig(pathname), [pathname])
 
   const isNetworksPage = pathname === '/networks'
   const activeItem = navItems.find((item) => pathname === item.href)

@@ -17,13 +17,6 @@ export function RoadmapLinks({ slug }: RoadmapLinksProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <Button asChild variant="default">
-        <Link href={`/network/${slug}/roadmap`}>
-          View Roadmap
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Link>
-      </Button>
-
       {isLoading && <div>Loading roadmaps...</div>}
 
       {data?.ScopeOfWork?.getDocument?.state.roadmaps.map((roadmap) => (

@@ -63,7 +63,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/network/powerhouse/roadmap">Roadmap</Link>
+                  <Link href="/network/powerhouse/roadmaps">Roadmaps</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

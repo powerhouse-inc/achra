@@ -9,9 +9,10 @@ const meta = {
     nextjs: {
       appDirectory: true,
       router: {
-        pathname: '/network/powerhouse/roadmap',
+        pathname: '/network/powerhouse/roadmap/roadmap-1',
         params: {
           slug: 'powerhouse',
+          roadmapSlug: 'roadmap-1',
         },
       },
     },
@@ -21,4 +22,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    params: Promise.resolve({
+      slug: 'powerhouse',
+      roadmapSlug: 'roadmap-1',
+    }),
+  },
+}

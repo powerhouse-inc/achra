@@ -12,7 +12,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logoHref: '/network/sky',
     navItems: [
       { label: 'Contribute', href: '/network/sky/contributors' },
-      { label: 'Roadmap', href: '/network/sky/roadmap' },
+      { label: 'Roadmap', href: '/network/sky/roadmaps' },
       { label: 'Finances', href: '/network/sky/finances' },
       { label: 'Builders', href: '/network/sky/builders' },
       { label: 'Governance', href: 'https://governance.achra.network', isExternal: true },
@@ -26,7 +26,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logoHref: '/network/powerhouse',
     navItems: [
       { label: 'Contribute', href: '/network/powerhouse/contributors' },
-      { label: 'Roadmap', href: '/network/powerhouse/roadmap' },
+      { label: 'Roadmap', href: '/network/powerhouse/roadmaps' },
       { label: 'Finances', href: '/network/powerhouse/finances' },
       { label: 'Builders', href: '/network/powerhouse/builders' },
       { label: 'Governance', href: 'https://governance.achra.network', isExternal: true },
@@ -38,7 +38,7 @@ export const NAVBAR_CONFIGS: Record<string, NavbarConfig> = {
     logotype: undefined,
     navItems: [
       { label: 'Networks', href: '/networks' },
-      { label: 'Roadmaps', href: '/network/powerhouse/roadmap' },
+      { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
       { label: 'Services', href: '/services' },
     ],
     authComponent: 'loginButton',

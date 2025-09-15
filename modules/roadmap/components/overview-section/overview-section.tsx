@@ -14,10 +14,10 @@ export default function OverviewSection() {
     {
       docId: SCOPE_OF_WORK_DOCUMENT_ID,
     },
-    {
-      enabled: !!roadmapSlug,
-      refetchInterval: FAST_REFRESH_INTERVAL,
-    },
+    // {
+    //   enabled: !!roadmapSlug,
+    //   refetchInterval: FAST_REFRESH_INTERVAL,
+    // },
   )
   const roadmap = data && getRoadmapFromScopeOfWork(data, roadmapSlug as string)
 
