@@ -17,46 +17,42 @@ interface NavbarItemMobileProps {
 }
 
 function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobileProps) {
+  const triggerLabel = activeItem ? activeItem.label : 'Home'
+
   return (
     <div className="flex items-center lg:hidden">
       <DropdownMenu>
         <DropdownMenuTrigger
           className={cn(
             'group border-border text-secondary-foreground flex w-37.5 items-center justify-between rounded-lg border px-3 py-2 text-sm',
+            // focus
+            'focus:visible:ring-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none',
           )}
         >
-          {activeItem ? activeItem.label : 'Home'}
-          <ChevronDown className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180" />
+          {triggerLabel}
+          <ChevronDown className="relative top-0.25 ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180" />
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="z-170 w-50 p-2">
-          <ul className="gap-1 p-2">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <DropdownMenuItem
-                  asChild
-                  className={cn(
-                    'cursor-pointer p-0',
-                    // Styles for hover and focus
-                    'hover:bg-accent focus:text-accent-foreground',
-                    // Conditional text logic
-                    pathname === item.href
-                      ? 'text-primary hover:text-primary'
-                      : 'text-foreground hover:text-foreground/50',
-                  )}
-                >
+          <ul className="flex flex-col">
+            <li>
+              {navItems.map((item) => (
+                <DropdownMenuItem key={item.label} asChild className="p-2">
                   <Link
                     href={item.href}
                     className={cn(
-                      // Base styles
-                      'block rounded-md p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
+                      'block w-full rounded-sm p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
+
+                      pathname === item.href
+                        ? 'text-primary hover:bg-accent hover:!text-primary font-semibold'
+                        : 'text-foreground hover:bg-accent hover:!text-foreground/50',
                     )}
                   >
                     {item.label}
                   </Link>
                 </DropdownMenuItem>
-              </li>
-            ))}
+              ))}
+            </li>
           </ul>
         </DropdownMenuContent>
       </DropdownMenu>
