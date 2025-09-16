@@ -9,6 +9,7 @@ import {
   ScopeOfWork_DeliverableSetStatus,
   ScopeOfWork_AgentType,
   ScopeOfWork_ScopeOfWorkStatus,
+  type ScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 // Mocked contributors/agents
@@ -376,6 +377,16 @@ export const mockedScopeOfWorkState: ScopeOfWork_ScopeOfWorkState = {
   contributors: mockedContributors,
   deliverables: mockedDeliverables,
   projects: mockedProjects,
+}
+
+export const mockedScopeOfWorkQuery: ScopeOfWorkQuery = {
+  ScopeOfWork: {
+    getDocument: {
+      id: 'powerhouse-scope-of-work-2024',
+      state: mockedScopeOfWorkState,
+      stateJSON: mockedScopeOfWorkState,
+    },
+  },
 }
 
 // Legacy compatibility exports for existing components

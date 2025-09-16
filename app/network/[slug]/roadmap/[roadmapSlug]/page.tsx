@@ -37,7 +37,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
     }),
     scopeOfWork,
   )
-
+  console.log('roadmap', scopeOfWork)
   if (!scopeOfWork || !roadmap) {
     notFound()
   }
