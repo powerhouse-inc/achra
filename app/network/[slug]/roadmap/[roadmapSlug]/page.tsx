@@ -5,8 +5,7 @@ import {
   type ScopeOfWorkQuery,
   useScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { DetailsSection } from '@/modules/roadmap/components/details-section'
-import { OverviewSection } from '@/modules/roadmap/components/overview-section'
+import { RoadmapDetailsContent } from '@/modules/roadmap/components/roadmap-details-content'
 import { SCOPE_OF_WORK_DOCUMENT_ID } from '@/modules/roadmap/lib/constants'
 import {
   fetchPowerhouseScopeOfWork,
@@ -63,7 +62,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/network/powerhouse/roadmap">Roadmap</Link>
+                  <Link href="/network/powerhouse/roadmaps">Roadmaps</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -81,10 +80,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
             </h1>
           </div>
 
-          <div className="flex flex-col gap-10">
-            <OverviewSection />
-            <DetailsSection />
-          </div>
+          <RoadmapDetailsContent />
         </div>
       </main>
     </HydrationBoundary>
