@@ -1,18 +1,15 @@
-interface NetworkPageProps {
-  params: Promise<{ slug: string }>
-}
+import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
 
-export default async function NetworkPage({ params }: NetworkPageProps) {
-  const { slug } = await params
-
+export default async function NetworkPage() {
   return (
-    <main className="flex min-h-[calc(100dvh-8rem)] items-center justify-center px-6">
-      <div className="space-y-3 text-center">
-        <h1 className="text-4xl font-semibold tracking-tight text-indigo-800 sm:text-5xl">
-          Network homepage - {slug}
-        </h1>
-        <p className="text-muted-foreground sm:text-md text-base">Coming soon</p>
-      </div>
+    <main className="container mt-8 mb-8">
+      <HomepageBanner
+        title="Sky DAO Dashboard"
+        description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
+        isLoggedIn={false}
+      />
+
+      <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
     </main>
   )
 }
