@@ -12,7 +12,7 @@ const meta = {
     includeLayout: true,
     nextjs: {
       appDirectory: true,
-      router: {
+      navigation: {
         pathname: '/networks',
       },
     },
