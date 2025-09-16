@@ -10,11 +10,8 @@ const meta = {
     includeLayout: true,
     nextjs: {
       appDirectory: true,
-      router: {
+      navigation: {
         pathname: '/network/sky',
-        params: {
-          slug: 'sky',
-        },
       },
     },
   },
