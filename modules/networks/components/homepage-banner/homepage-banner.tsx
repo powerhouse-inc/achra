@@ -28,7 +28,7 @@ export function HomepageBanner({
       defaultOpen={defaultExpanded}
       onOpenChange={setIsExpanded}
       className={cn(
-        'relative flex w-full flex-col gap-4 overflow-hidden rounded-xl p-8 transition-all duration-300 ease-in-out text-primary-foreground',
+        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl p-8 transition-all duration-300 ease-in-out',
         !isExpanded && 'py-6',
         className,
       )}
@@ -47,14 +47,17 @@ export function HomepageBanner({
           {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
         </Button>
       </CollapsibleTrigger>
-      <span className="z-1 text-[32px] leading-[1.2] font-bold">
-        {title}
-      </span>
+      <span className="z-1 text-[32px] leading-[1.2] font-bold">{title}</span>
       <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] text-base leading-[1.5]">
         {description}
       </CollapsibleContent>
       {isLoggedIn && (
-        <div className={cn('lg:absolute lg:bottom-6 lg:right-6 z-1 w-fit transition-all duration-300 ease-in-out', !isExpanded && 'lg:bottom-4 lg:right-15')}>
+        <div
+          className={cn(
+            'z-1 w-fit transition-all duration-300 ease-in-out lg:absolute lg:right-6 lg:bottom-6',
+            !isExpanded && 'lg:right-15 lg:bottom-4',
+          )}
+        >
           <ConnectLink />
         </div>
       )}
