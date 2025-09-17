@@ -1,17 +1,18 @@
 'use client'
 
-import { ChevronDown, ChevronUp, ExternalLink, Globe } from 'lucide-react'
+import { Maximize2, Minimize2 } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
-
-interface HomepageBannerProps {
-  title: string
-  description: string
-  isLoggedIn?: boolean
-  className?: string
-  defaultExpanded?: boolean
-}
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from '@/shared/components/ui/collapsible'
+import Image from 'next/image'
+import './styles.css'
+import { HomepageBannerProps } from './types'
+import { ConnectLink } from './components/connect-link'
 
 export function HomepageBanner({
   title,
@@ -27,66 +28,40 @@ export function HomepageBanner({
   }
 
   return (
-    <div
+    <Collapsible
+      defaultOpen={defaultExpanded}
+      onOpenChange={setIsExpanded}
       className={cn(
-        'relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 text-white transition-all duration-300 ease-in-out',
-        isExpanded ? 'h-auto p-6' : 'h-16 p-4',
+        'relative flex w-full flex-col gap-4 overflow-hidden rounded-xl p-8 transition-all duration-300 ease-in-out text-primary-foreground',
+        !isExpanded && 'py-6',
         className,
       )}
     >
-      {/* Expand/Collapse Button - Always visible */}
-      <button
-        onClick={toggleExpanded}
-        className="absolute top-4 right-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-200 hover:bg-white/20"
-        aria-label={isExpanded ? 'Collapse banner' : 'Expand banner'}
-      >
-        {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-      </button>
-
-      {/* Collapsed State - Show only title */}
-      {!isExpanded ? (
-        <div className="flex items-center pr-12">
-          <h1 className="text-xl font-bold">{title}</h1>
-        </div>
-      ) : (
-        /* Expanded State - Show full content */
-        <div className="transition-all duration-300 ease-in-out">
-          <div className="flex items-start justify-between">
-            <div className="flex-1 pr-4">
-              <h1 className="mb-3 text-3xl leading-tight font-bold">{title}</h1>
-              <p className="text-lg leading-relaxed text-white/90">{description}</p>
-            </div>
-
-            {/* Edit in Connect Button - Only shown when logged in */}
-            {isLoggedIn && (
-              <div className="flex flex-col items-end space-y-1">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-auto border-white/20 bg-white/10 px-3 py-1 text-xs text-white backdrop-blur-sm hover:bg-white/20"
-                  asChild
-                >
-                  <a href="#" className="flex items-center gap-1">
-                    EDIT IN CONNECT
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="h-auto border-white/20 bg-white/10 px-3 py-2 text-sm font-medium text-white backdrop-blur-sm hover:bg-white/20"
-                  asChild
-                >
-                  <a href="#" className="flex items-center gap-2">
-                    <Globe className="h-4 w-4" />
-                    Sky Network Admin
-                  </a>
-                </Button>
-              </div>
-            )}
-          </div>
+      <Image
+        src={'/networks/backgrounds/sky.png'}
+        alt="Header card background"
+        fill
+        priority
+        quality={100}
+        objectFit="cover"
+        className="absolute z-0"
+      />
+      <CollapsibleTrigger asChild className="absolute top-3 right-3 z-1">
+        <Button className="hover:bg-secondary-foreground/30 h-6 w-6 bg-transparent shadow-none [&:has(>svg)]:p-1">
+          {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+        </Button>
+      </CollapsibleTrigger>
+      <span className="z-1 text-[32px] leading-[1.2] font-bold">
+        {title}
+      </span>
+      <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] text-base leading-[1.5]">
+        {description}
+      </CollapsibleContent>
+      {isLoggedIn && (
+        <div className={cn('lg:absolute lg:bottom-6 lg:right-6 z-1 w-fit transition-all duration-300 ease-in-out', !isExpanded && 'lg:bottom-4 lg:right-15')}>
+          <ConnectLink />
         </div>
       )}
-    </div>
+    </Collapsible>
   )
 }
