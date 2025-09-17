@@ -23,10 +23,6 @@ export function HomepageBanner({
 }: HomepageBannerProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded)
 
-  const toggleExpanded = () => {
-    setIsExpanded(!isExpanded)
-  }
-
   return (
     <Collapsible
       defaultOpen={defaultExpanded}
