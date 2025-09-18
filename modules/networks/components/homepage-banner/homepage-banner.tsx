@@ -1,7 +1,6 @@
 'use client'
 
 import { Maximize2, Minimize2 } from 'lucide-react'
-import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 import {
@@ -11,6 +10,7 @@ import {
 } from '@/shared/components/ui/collapsible'
 import Image from 'next/image'
 import { ConnectLink } from './components/connect-link'
+import { useHomepageBanner } from './use-homepage-banner'
 
 export interface HomepageBannerProps {
   title: string
@@ -27,12 +27,14 @@ export function HomepageBanner({
   className,
   defaultExpanded = true,
 }: HomepageBannerProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded)
+  const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner({
+    defaultExpanded,
+  })
 
   return (
     <Collapsible
-      defaultOpen={defaultExpanded}
-      onOpenChange={setIsExpanded}
+      open={isExpanded}
+      onOpenChange={handleIsExpanded}
       className={cn(
         'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl p-8 transition-all duration-300 ease-in-out',
         !isExpanded && 'py-6',
@@ -54,7 +56,10 @@ export function HomepageBanner({
         </Button>
       </CollapsibleTrigger>
       <span className="z-1 text-[32px] leading-[1.2] font-bold">{title}</span>
-      <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] text-base leading-[1.5] overflow-hidden">
+      <CollapsibleContent
+        ref={collapsibleElement}
+        className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] overflow-hidden text-base leading-[1.5]"
+      >
         {description}
       </CollapsibleContent>
       {isLoggedIn && (
