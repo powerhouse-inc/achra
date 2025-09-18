@@ -5,7 +5,7 @@ const meta = {
   title: 'Modules/Networks/Components/HomepageBanner',
   component: HomepageBanner,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   argTypes: {
     title: {
@@ -19,6 +19,10 @@ const meta = {
     isLoggedIn: {
       control: 'boolean',
       description: 'Whether to show the admin buttons (Edit in Connect)',
+    },
+    defaultExpanded: {
+      control: 'boolean',
+      description: 'Whether the banner is expanded by default',
     },
     className: {
       control: 'text',
@@ -35,23 +39,23 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Expanded: Story = {
+export const Expanded: Story = {}
+
+export const Collapsed: Story = {
   args: {
-    defaultExpanded: true,
+    defaultExpanded: false,
   },
 }
-
-export const Collapsed: Story = {}
 
 export const ExpandedAndAuthenticated: Story = {
   args: {
     isLoggedIn: true,
-    defaultExpanded: true,
   },
 }
 
 export const CollapsedAndAuthenticated: Story = {
   args: {
+    defaultExpanded: false,
     isLoggedIn: true,
   },
 }
