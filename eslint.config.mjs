@@ -5,9 +5,6 @@ import { fileURLToPath } from 'url'
 import { FlatCompat } from '@eslint/eslintrc'
 import globals from 'globals'
 import pluginJs from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
-import pluginReactHooks from 'eslint-plugin-react-hooks'
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import storybook from 'eslint-plugin-storybook'
 
@@ -19,11 +16,14 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  // Global ignores
   {
     ignores: [
-      'modules/__generated__/**',
       'node_modules/**',
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'modules/__generated__/**',
       'dist/**',
       'storybook-static/**',
       '.storybook/**',
@@ -31,22 +31,15 @@ const eslintConfig = [
       '*.config.js',
       '*.config.ts',
       'scripts/**',
+      'vitest.shims.d.ts',
     ],
   },
-
-  // Base JavaScript configuration
-  pluginJs.configs.recommended,
-
-  // Next.js configurations (includes React and basic TypeScript rules)
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'),
-
-  // JSX A11y configuration
+  pluginJs.configs.recommended, // Next.js configurations (includes React and basic TypeScript rules)
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'), // JSX A11y configuration
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     ...pluginJsxA11y.configs['flat/recommended'],
-  },
-
-  // Base configuration for all TypeScript/React files
+  }, // Base configuration for all TypeScript/React files
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -227,9 +220,7 @@ const eslintConfig = [
         },
       ],
     },
-  },
-
-  // Specific rules for test files
+  }, // Specific rules for test files
   {
     files: ['**/*.{test,spec}.{ts,tsx}', '**/*.test.{ts,tsx}'],
     rules: {
@@ -237,9 +228,7 @@ const eslintConfig = [
       '@typescript-eslint/no-non-null-assertion': 'off',
       'no-console': 'off',
     },
-  },
-
-  // Specific rules for Storybook files
+  }, // Specific rules for Storybook files
   {
     files: ['**/*.stories.{ts,tsx}', '**/.storybook/**/*.{ts,tsx}'],
     rules: {
@@ -247,9 +236,7 @@ const eslintConfig = [
       'no-console': 'off',
       'react/function-component-definition': 'off',
     },
-  },
-
-  // Configuration files
+  }, // Configuration files
   {
     files: ['**/*.config.{js,ts}', '**/.*rc.{js,ts}'],
     languageOptions: {
@@ -259,9 +246,7 @@ const eslintConfig = [
       '@typescript-eslint/no-require-imports': 'off',
       'no-console': 'off',
     },
-  },
-
-  // Storybook configurations
+  }, // Storybook configurations
   ...storybook.configs['flat/recommended'],
 ]
 

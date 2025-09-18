@@ -2,7 +2,7 @@ import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import { type NavItem } from '../types'
+import type { NavItem } from '../types'
 
 interface NavbarCenterProps {
   navItems: NavItem[]

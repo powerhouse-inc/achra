@@ -1,6 +1,6 @@
-import { type RouteWithDynamicPages } from '../../types/routes'
+import type { RouteWithDynamicPages } from '../../types/routes'
 
-type NavItem = {
+interface NavItem {
   label: string
   href: RouteWithDynamicPages
   isExternal?: boolean
@@ -11,7 +11,7 @@ interface NavbarProps {
   isLoggedIn?: boolean
 }
 
-type NavbarConfig = {
+interface NavbarConfig {
   isotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotypeClassName?: string

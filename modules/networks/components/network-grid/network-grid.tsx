@@ -19,13 +19,13 @@ export function NetworkGrid() {
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {data?.NetworkProfile?.getDocument?.state && (
-        <NetworkCard profile={data?.NetworkProfile?.getDocument?.state} />
+        <NetworkCard profile={data.NetworkProfile.getDocument.state} />
       )}
 
       {mockedNetworks
         // the network from the api should be Powerhosue, so we need to filter it out
         // this should be temporary until the full implementation of the network profile is done
-        .filter((network) => network.name !== data?.NetworkProfile?.getDocument?.state?.name)
+        .filter((network) => network.name !== data?.NetworkProfile?.getDocument?.state.name)
         .map((network) => (
           <NetworkCard key={network.name} profile={network} />
         ))}

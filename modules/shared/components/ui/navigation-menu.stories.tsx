@@ -1,5 +1,4 @@
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
-import { type Route } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import {
@@ -12,6 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from './navigation-menu'
 import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Route } from 'next'
 
 const meta = {
   title: 'Shared/Shadcn/NavigationMenu',

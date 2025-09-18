@@ -2,10 +2,10 @@
 
 import { useCallback, useState } from 'react'
 import {
-  type ScopeOfWork_Project,
   type ScopeOfWork_Agent,
   type ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableStatus,
+  type ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
@@ -66,7 +66,7 @@ export default function DeliverableCard({
           <Tooltip>
             <TooltipTrigger asChild>
               <Avatar className="size-6.5 self-start border-2 shadow-md">
-                <AvatarFallback>{deliverableOwner?.name?.charAt(0)}</AvatarFallback>
+                <AvatarFallback>{deliverableOwner?.name.charAt(0)}</AvatarFallback>
               </Avatar>
             </TooltipTrigger>
             <TooltipContent side="bottom" align="end">
@@ -75,7 +75,7 @@ export default function DeliverableCard({
 
                 <div className="flex items-center gap-2">
                   <Avatar className="size-8 border-2 shadow-md">
-                    <AvatarFallback>{deliverableOwner?.name?.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{deliverableOwner?.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div className="text-base tracking-wide">{deliverableOwner?.name}</div>
                 </div>
@@ -98,13 +98,13 @@ export default function DeliverableCard({
           ) : isBinaryProgress(deliverable.workProgress) ? (
             <DeliverablePercentageBar percentage={deliverable.workProgress.done ? 100 : 0} />
           ) : (
-            <DeliverablePercentageBar percentage={deliverable.workProgress.value ?? 0} />
+            <DeliverablePercentageBar percentage={deliverable.workProgress.value} />
           ))}
       </div>
 
       {(viewMode === 'detailed' || expanded) && (
         <div className="mt-2 flex flex-col gap-2 text-sm/5.5 xl:text-base">
-          {deliverable.description?.split('\n').map((paragraph, index) => (
+          {deliverable.description.split('\n').map((paragraph, index) => (
             <p className="m-0" key={index}>
               {paragraph}
             </p>
@@ -126,11 +126,10 @@ export default function DeliverableCard({
           //   )
           <div>Milestone link - Coming soon</div>
         ) : (
-          deliverableProject &&
-          deliverableProject.code &&
+          deliverableProject?.code &&
           deliverableProject.title && (
             <ProjectLink
-              href={'#'} // TODO: enable this once the project pages are implemented
+              href="#" // TODO: enable this once the project pages are implemented
               code={deliverableProject.code}
               name={deliverableProject.title}
             />

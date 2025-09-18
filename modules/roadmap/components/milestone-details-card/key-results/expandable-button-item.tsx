@@ -5,10 +5,7 @@ interface ExpandableButtonItemProps {
   handleToggleExpand: () => void
 }
 
-const ExpandableButtonItem: React.FC<ExpandableButtonItemProps> = ({
-  expanded,
-  handleToggleExpand,
-}) => {
+function ExpandableButtonItem({ expanded, handleToggleExpand }: ExpandableButtonItemProps) {
   return (
     <div className="flex items-center" onClick={handleToggleExpand}>
       <div className="mt-2 flex w-full cursor-pointer items-center gap-2 pl-2">

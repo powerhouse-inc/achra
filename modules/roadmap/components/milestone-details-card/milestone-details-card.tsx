@@ -1,11 +1,11 @@
 'use client'
 
 import { useMemo } from 'react'
-import {
-  type ScopeOfWork_Agent,
-  type ScopeOfWork_Project,
-  type ScopeOfWork_Deliverable,
-  type ScopeOfWork_Milestone,
+import type {
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Milestone,
+  ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
@@ -31,7 +31,10 @@ export default function MilestoneDetailsCard({
   const milestoneContributors = useMemo(() => {
     const uniqueContributors: Record<string, ScopeOfWork_Agent> = {}
     deliverables.forEach((deliverable) => {
-      if (deliverable.owner && !uniqueContributors[deliverable.owner]) {
+      if (
+        deliverable.owner &&
+        !Object.prototype.hasOwnProperty.call(uniqueContributors, deliverable.owner)
+      ) {
         const contributor = contributors.find((contributor) => contributor.id === deliverable.owner)
         if (contributor) {
           uniqueContributors[deliverable.owner] = contributor

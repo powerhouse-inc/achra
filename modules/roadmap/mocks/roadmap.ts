@@ -1,13 +1,13 @@
 import {
   type ScopeOfWork_Agent,
-  type ScopeOfWork_Project,
+  ScopeOfWork_AgentType,
   type ScopeOfWork_Deliverable,
+  ScopeOfWork_DeliverableSetStatus,
+  ScopeOfWork_DeliverableStatus,
   type ScopeOfWork_Milestone,
+  type ScopeOfWork_Project,
   type ScopeOfWork_Roadmap,
   type ScopeOfWork_ScopeOfWorkState,
-  ScopeOfWork_DeliverableStatus,
-  ScopeOfWork_DeliverableSetStatus,
-  ScopeOfWork_AgentType,
   ScopeOfWork_ScopeOfWorkStatus,
   type ScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'

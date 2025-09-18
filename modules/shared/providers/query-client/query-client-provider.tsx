@@ -7,7 +7,7 @@ import {
   QueryClientProvider as TanstackQueryClientProvider,
 } from '@tanstack/react-query'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-import { type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 function makeQueryClient() {
   return new QueryClient({
