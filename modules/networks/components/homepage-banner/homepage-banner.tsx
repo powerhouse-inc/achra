@@ -10,9 +10,15 @@ import {
   CollapsibleContent,
 } from '@/shared/components/ui/collapsible'
 import Image from 'next/image'
-import './styles.css'
-import { HomepageBannerProps } from './types'
 import { ConnectLink } from './components/connect-link'
+
+export interface HomepageBannerProps {
+  title: string
+  description: string
+  isLoggedIn?: boolean
+  className?: string
+  defaultExpanded?: boolean
+}
 
 export function HomepageBanner({
   title,
@@ -48,7 +54,7 @@ export function HomepageBanner({
         </Button>
       </CollapsibleTrigger>
       <span className="z-1 text-[32px] leading-[1.2] font-bold">{title}</span>
-      <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] text-base leading-[1.5]">
+      <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] text-base leading-[1.5] overflow-hidden">
         {description}
       </CollapsibleContent>
       {isLoggedIn && (
