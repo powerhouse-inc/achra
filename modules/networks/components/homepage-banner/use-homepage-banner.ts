@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HOME_BANNER_EXPANDED_STORAGE_KEY } from './constants'
 
 interface UseHomepageBannerProps {

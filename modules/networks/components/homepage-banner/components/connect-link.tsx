@@ -1,4 +1,4 @@
-import { LucideExternalLink, LucideLink } from 'lucide-react'
+import { LucideExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -8,7 +8,7 @@ export function ConnectLink() {
       <div className="outline-border bg-primary flex items-center gap-2 rounded-xl py-[6px] pr-4 pl-2 outline-[2px]">
         <div className="relative size-10">
           <Image
-            src={'/networks/logos/connect-light.png'}
+            src="/networks/logos/connect-light.png"
             alt="Connect Link"
             fill
             objectFit="cover"
