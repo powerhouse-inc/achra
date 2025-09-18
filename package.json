@@ -75,6 +75,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.1",
     "@eslint/eslintrc": "^3",
+    "@eslint/js": "^9.35.0",
     "@graphql-codegen/add": "^5.0.3",
     "@graphql-codegen/cli": "^5.0.7",
     "@graphql-codegen/typescript-operations": "^4.6.1",
@@ -98,8 +99,12 @@
     "eslint-config-next": "15.5.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-storybook": "^9.1.6",
+    "globals": "^16.4.0",
     "msw": "^2.11.2",
     "msw-storybook-addon": "^2.0.5",
     "playwright": "^1.54.2",
@@ -109,6 +114,7 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5",
+    "typescript-eslint": "^8.44.0",
     "vitest": "^3.2.4"
   },
   "msw": {

@@ -1,6 +1,6 @@
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
 
-export default async function NetworkPage() {
+export default function NetworkPage() {
   return (
     <main className="container mt-8 mb-8">
       <HomepageBanner
