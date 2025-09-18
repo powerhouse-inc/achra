@@ -1,7 +1,7 @@
-import {
-  type ScopeOfWork_Project,
-  type ScopeOfWork_Agent,
-  type ScopeOfWork_Deliverable,
+import type {
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'

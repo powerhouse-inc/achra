@@ -1,6 +1,6 @@
 import {
-  type NetworkProfile_NetworkProfileState,
   NetworkProfile_NetworkCategory,
+  type NetworkProfile_NetworkProfileState,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export const mockedNetworks: NetworkProfile_NetworkProfileState[] = [

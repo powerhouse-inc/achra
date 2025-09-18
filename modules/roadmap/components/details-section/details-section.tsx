@@ -1,8 +1,8 @@
-import {
-  type ScopeOfWork_Deliverable,
-  type ScopeOfWork_Project,
-  type ScopeOfWork_Roadmap,
-  type ScopeOfWorkQuery,
+import type {
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Project,
+  ScopeOfWork_Roadmap,
+  ScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneDetailsCard } from '../milestone-details-card'
 import { SectionTitle } from '../section-title'
@@ -18,7 +18,7 @@ export default function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSec
       <SectionTitle title="Milestones Roadmap Details" />
 
       <div className="flex flex-col gap-8">
-        {roadmap?.milestones?.map((milestone) => (
+        {roadmap?.milestones.map((milestone) => (
           <MilestoneDetailsCard
             key={milestone.id}
             milestone={milestone}

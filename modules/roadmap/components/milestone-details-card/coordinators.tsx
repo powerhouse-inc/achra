@@ -11,7 +11,7 @@ export default function Coordinators({ coordinators }: CoordinatorsProps) {
       <div className="text-xs font-medium">Coordinator(s)</div>
 
       <div className="flex flex-wrap gap-4">
-        {coordinators?.map((coordinator) => (
+        {coordinators.map((coordinator) => (
           <div key={coordinator} className="flex items-center gap-2 self-stretch">
             <Avatar className="size-6">
               <AvatarFallback className="bg-border">

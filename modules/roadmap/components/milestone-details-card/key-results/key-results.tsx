@@ -2,12 +2,12 @@
 
 import { ArrowUpRight } from 'lucide-react'
 import { useMemo } from 'react'
-import { type ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
-import { type DeliverableViewMode } from '../../deliverable-card/deliverable-card'
 import ExpandableButtonItem from './expandable-button-item'
 import MaybeScrollableList from './maybe-scrollable-list'
+import type { DeliverableViewMode } from '../../deliverable-card/deliverable-card'
 
 interface KeyResultsProps {
   keyResults: ScopeOfWork_KeyResult[]

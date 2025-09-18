@@ -3,7 +3,7 @@ import React from 'react'
 import AchraIsotype from '@/modules/shared/components/svgs/achra-imagotipo.svg'
 import AchraLogo from '@/modules/shared/components/svgs/achra-logo.svg'
 import { cn } from '@/modules/shared/lib/utils'
-import { type RouteWithDynamicPages } from '@/modules/shared/types/routes'
+import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface NavbarBrandProps {
   isNetworksPage: boolean
@@ -46,10 +46,8 @@ export function NavbarBrand({
       {showIsotype && logoHref && (
         <Link href={logoHref} className="cursor-pointer hover:opacity-80">
           <div className="flex items-center gap-2">
-            {IsotypeLogo && typeof IsotypeLogo === 'function' && (
-              <IsotypeLogo className="h-8 w-8" />
-            )}
-            {Logotype && typeof Logotype === 'function' && (
+            {typeof IsotypeLogo === 'function' && <IsotypeLogo className="h-8 w-8" />}
+            {typeof Logotype === 'function' && (
               <Logotype className={cn('hidden h-8 md:flex', logotypeClassName)} />
             )}
           </div>

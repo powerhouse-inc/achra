@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { type NetworkProfile_NetworkProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { NetworkProfile_NetworkProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 import { slugify } from '@/modules/shared/lib/slug'
@@ -36,7 +36,7 @@ export function NetworkCard({ profile }: NetworkCardProps) {
               ) : (
                 <div className="text-accent-foreground md:text-lead flex w-full items-center gap-2 text-2xl">
                   <Image
-                    src={'/networks/logos/unknown.png'}
+                    src="/networks/logos/unknown.png"
                     width={40}
                     height={40}
                     alt="Network Logo"

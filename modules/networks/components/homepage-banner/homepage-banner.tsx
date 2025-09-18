@@ -1,14 +1,14 @@
 'use client'
 
 import { Maximize2, Minimize2 } from 'lucide-react'
+import Image from 'next/image'
 import { Button } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 import {
   Collapsible,
-  CollapsibleTrigger,
   CollapsibleContent,
+  CollapsibleTrigger,
 } from '@/shared/components/ui/collapsible'
-import Image from 'next/image'
+import { cn } from '@/shared/lib/utils'
 import { ConnectLink } from './components/connect-link'
 import { useHomepageBanner } from './use-homepage-banner'
 
@@ -42,7 +42,7 @@ export function HomepageBanner({
       )}
     >
       <Image
-        src={'/networks/backgrounds/sky.png'}
+        src="/networks/backgrounds/sky.png"
         alt="Header card background"
         fill
         priority

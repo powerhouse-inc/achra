@@ -1,9 +1,9 @@
-type FetchOptions = {
+interface FetchOptions {
   cache?: RequestCache
   next?: NextFetchRequestConfig
 }
 
-type RequestInit = {
+interface RequestInit {
   headers: (HeadersInit & FetchOptions) | FetchOptions
 }
 
@@ -27,7 +27,7 @@ const graphqlFetcher = <TData, TVariables>(
   options?: RequestInit['headers'],
 ) => {
   return async (): Promise<TData> => {
-    const { next, cache, ...restOptions } = options || {}
+    const { next, cache, ...restOptions } = options ?? {}
     const res = await fetch(url, {
       method: 'POST',
       headers: {

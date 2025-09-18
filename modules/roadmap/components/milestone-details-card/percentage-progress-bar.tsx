@@ -1,13 +1,13 @@
 'use client'
 
-import { useMemo, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
 interface PercentageProgressBarProps {
   value: number
 }
 
-const PercentageProgressBar: React.FC<PercentageProgressBarProps> = ({ value }) => {
+function PercentageProgressBar({ value }: PercentageProgressBarProps) {
   const isDesktopQuery = useMediaQuery('(min-width: 1024px)')
   const [isDesktop, setIsDesktop] = useState(false)
   const [isHydrated, setIsHydrated] = useState(false)

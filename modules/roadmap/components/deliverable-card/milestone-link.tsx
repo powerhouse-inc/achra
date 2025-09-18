@@ -7,7 +7,7 @@ interface MilestoneLinkProps {
   code: string
 }
 
-export default function MilestoneLink({ roadmapSlug, code }: MilestoneLinkProps) {
+export default function MilestoneLink({ code }: MilestoneLinkProps) {
   return (
     <Link
       className="flex w-full justify-between overflow-hidden rounded-sm bg-white shadow-sm"

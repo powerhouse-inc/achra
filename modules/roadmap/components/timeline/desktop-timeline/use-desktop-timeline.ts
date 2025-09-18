@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 

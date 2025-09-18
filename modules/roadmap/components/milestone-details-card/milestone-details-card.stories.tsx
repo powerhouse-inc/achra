@@ -1,7 +1,7 @@
 import {
-  mockedMilestone1,
-  mockedDeliverables1,
   mockedContributors1,
+  mockedDeliverables1,
+  mockedMilestone1,
   mockedProjects1,
 } from '@/modules/roadmap/mocks'
 import MilestoneDetailsCard from './milestone-details-card'

@@ -10,9 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
-import { type User } from '../types'
 import LoginAvatar from './login-avatar'
 import ThemeIconLabel from './toogle-theme-label'
+import type { User } from '../types'
 
 interface NavbarRightSideProps {
   isLoggedIn: boolean

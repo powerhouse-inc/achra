@@ -1,4 +1,4 @@
-import { type ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SectionTitle } from '../section-title'
 import { Timeline } from '../timeline'
 

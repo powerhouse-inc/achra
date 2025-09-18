@@ -1,10 +1,10 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import { type ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { Button } from '@/shared/components/ui/button'
-import { Card, CardHeader, CardContent, CardFooter } from '@/shared/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
 import { Progress } from '@/shared/components/ui/progress'
 import { cn } from '@/shared/lib/utils'
 import { getProgressPercentage } from '../../lib/type-helpers'
@@ -54,7 +54,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
           <div className="flex items-center justify-between">
             <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
             {milestone.scope?.status && (
-              <DeliverableSetStatusChip status={milestone.scope?.status} />
+              <DeliverableSetStatusChip status={milestone.scope.status} />
             )}
           </div>
           <div className="relative">

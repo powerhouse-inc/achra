@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
-import { type NavItem } from '../types'
+import type { NavItem } from '../types'
 
 interface NavbarItemMobileProps {
   activeItem?: NavItem

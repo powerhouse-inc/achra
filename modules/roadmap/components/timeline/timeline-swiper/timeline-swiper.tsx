@@ -2,7 +2,7 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { type ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
 import useTimelineSwiper from './use-timeline-swiper'
@@ -27,9 +27,15 @@ export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
           pagination={{
             clickable: true,
           }}
-          onAfterInit={() => adjustCardHeights()}
-          onResize={() => adjustCardHeights()}
-          onBreakpoint={() => adjustCardHeights()}
+          onAfterInit={() => {
+            adjustCardHeights()
+          }}
+          onResize={() => {
+            adjustCardHeights()
+          }}
+          onBreakpoint={() => {
+            adjustCardHeights()
+          }}
           breakpoints={{
             768: {
               slidesPerView: 3,

@@ -51,7 +51,7 @@ export function getProgressPercentage(progress: ScopeOfWork_Progress | undefined
   if (!progress) return 0
 
   if (isPercentageProgress(progress)) {
-    return Math.round(progress.value ?? 0)
+    return Math.round(progress.value || 0)
   }
 
   if (isBinaryProgress(progress)) {
