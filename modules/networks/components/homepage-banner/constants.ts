@@ -1,1 +1,1 @@
-export const LOCAL_STORAGE_KEY = 'home-header-card-expanded'
+export const HOME_BANNER_EXPANDED_STORAGE_KEY = 'home-banner-expanded'

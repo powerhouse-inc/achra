@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { LOCAL_STORAGE_KEY } from './constants'
+import { HOME_BANNER_EXPANDED_STORAGE_KEY } from './constants'
 
 interface UseHomepageBannerProps {
   defaultExpanded: boolean
@@ -10,11 +10,11 @@ export function useHomepageBanner({ defaultExpanded }: UseHomepageBannerProps) {
   const collapsibleElement = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const storedValue = localStorage.getItem(LOCAL_STORAGE_KEY)
+    const storedValue = localStorage.getItem(HOME_BANNER_EXPANDED_STORAGE_KEY)
     if (storedValue !== null) {
       const waitForElementStyles = () => {
         if (collapsibleElement.current) {
-          setIsExpanded(storedValue !== '0')
+          setIsExpanded(storedValue === 'true')
         }
       }
       requestAnimationFrame(waitForElementStyles)
@@ -23,7 +23,7 @@ export function useHomepageBanner({ defaultExpanded }: UseHomepageBannerProps) {
 
   const handleIsExpanded = (value: boolean) => {
     setIsExpanded(value)
-    localStorage.setItem(LOCAL_STORAGE_KEY, value ? '1' : '0')
+    localStorage.setItem(HOME_BANNER_EXPANDED_STORAGE_KEY, value ? 'true' : 'false')
   }
 
   return {
