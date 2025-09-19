@@ -36,7 +36,7 @@ export function HomepageBanner({
       open={isExpanded}
       onOpenChange={handleIsExpanded}
       className={cn(
-        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl px-6 pt-8 sm:pt-5.5 pb-31 transition-all duration-300 ease-in-out sm:pb-21.5 md:px-6 md:pt-8 md:pb-5.75 lg:px-8 lg:pt-8 lg:pb-11.75 xl:p-8',
+        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl px-6 pt-8 pb-31 transition-all duration-300 ease-in-out sm:pt-5.5 sm:pb-21.5 md:px-6 md:pt-8 md:pb-5.75 lg:px-8 lg:pt-8 lg:pb-11.75 xl:p-8',
         !isExpanded && 'min-h-38.5 !py-7 pl-6 sm:min-h-21.5 lg:pl-8 xl:!py-6',
         className,
       )}
