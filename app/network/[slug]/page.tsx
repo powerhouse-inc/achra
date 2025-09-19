@@ -1,5 +1,5 @@
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
-import { FinacesSection } from '@/modules/networks/finances-section/components/finances-sections'
+import { FinacesSection } from '@/modules/networks/sections/finances-section'
 
 export default function NetworkPage() {
   return (
