@@ -36,8 +36,8 @@ export function HomepageBanner({
       open={isExpanded}
       onOpenChange={handleIsExpanded}
       className={cn(
-        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl p-8 transition-all duration-300 ease-in-out',
-        !isExpanded && 'py-6',
+        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl px-6 pt-[22px] pb-[124px] transition-all duration-300 ease-in-out sm:pb-[86px] md:px-6 md:pt-8 md:pb-[23px] lg:px-8 lg:pt-8 lg:pb-[47px] xl:p-8',
+        !isExpanded && 'min-h-[154px] !py-7 pl-6 sm:min-h-[86px] lg:pl-8 xl:!py-6',
         className,
       )}
     >
@@ -55,18 +55,18 @@ export function HomepageBanner({
           {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
         </Button>
       </CollapsibleTrigger>
-      <span className="z-1 text-[32px] leading-[1.2] font-bold">{title}</span>
+      <span className="z-1 text-2xl leading-[1.2] font-bold xl:text-[32px]">{title}</span>
       <CollapsibleContent
         ref={collapsibleElement}
-        className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[675px] overflow-hidden text-base leading-[1.5]"
+        className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[524px] overflow-hidden text-sm leading-[22px] md:max-w-[399px] lg:max-w-[647px] xl:max-w-[675px] xl:text-base xl:leading-[1.5]"
       >
         {description}
       </CollapsibleContent>
       {isLoggedIn && (
         <div
           className={cn(
-            'z-1 w-fit transition-all duration-300 ease-in-out lg:absolute lg:right-6 lg:bottom-6',
-            !isExpanded && 'lg:right-15 lg:bottom-4',
+            'absolute right-6 bottom-4 z-1 w-[calc(100%-48px)] max-w-[295px] transition-all duration-300 ease-in-out sm:right-4 sm:w-fit md:right-6 md:bottom-6 lg:right-6 lg:bottom-6',
+            !isExpanded && '!right-[unset] !bottom-4 !left-6 sm:!right-15 sm:!left-[unset]',
           )}
         >
           <ConnectLink />
