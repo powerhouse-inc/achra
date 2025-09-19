@@ -1,5 +1,4 @@
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
-
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import ProposalsSection from '@/modules/networks/components/proposals-section/proposals-section'
 import { FinacesSection } from '@/modules/networks/sections/finances-section'
