@@ -55,7 +55,7 @@ export function HomepageBanner({
           {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
         </Button>
       </CollapsibleTrigger>
-      <span className="z-1 text-2xl leading-[1.2] font-bold xl:text-[32px]">{title}</span>
+      <span className="z-1 text-xl sm:text-2xl leading-[1.2] font-bold xl:text-[32px]">{title}</span>
       <CollapsibleContent
         ref={collapsibleElement}
         className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down z-1 max-w-[524px] overflow-hidden text-sm leading-[22px] md:max-w-[399px] lg:max-w-[647px] xl:max-w-[675px] xl:text-base xl:leading-[1.5]"
