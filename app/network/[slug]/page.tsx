@@ -1,6 +1,6 @@
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
-import ProposalsSection from '@/modules/networks/components/proposals-section/proposals-section'
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
+import ProposalsSection from '@/modules/networks/components/proposals-section/proposals-section'
 
 export default function NetworkPage() {
   return (

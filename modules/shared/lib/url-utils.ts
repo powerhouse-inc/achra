@@ -21,7 +21,6 @@ export function useCurrentUrl() {
       await navigator.clipboard.writeText(url)
       return { success: true, url }
     } catch (error) {
-      console.error('Failed to copy URL:', error)
       return { success: false, error }
     }
   }

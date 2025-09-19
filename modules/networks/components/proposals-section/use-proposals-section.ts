@@ -6,7 +6,9 @@ export function useProposalsSection() {
   const handleCopyUrl = async () => {
     const result = await copyUrlToClipboard('proposals')
     if (result.success) {
-      console.log('URL copied to clipboard:', result.url)
+      console.log('URL copied to clipboard')
+    } else {
+      console.error('Failed to copy URL')
     }
   }
 

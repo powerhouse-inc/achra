@@ -30,7 +30,9 @@ export default function ProposalsSection({ proposals, className }: ProposalsSect
           <Button
             variant="ghost"
             className="text-muted-foreground hover:text-muted-foreground/50 !p-0 hover:bg-transparent"
-            onClick={handleCopyUrl}
+            onClick={() => {
+              void handleCopyUrl()
+            }}
           >
             <Link className="size-6" />
           </Button>
