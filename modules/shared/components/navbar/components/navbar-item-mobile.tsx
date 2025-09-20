@@ -1,6 +1,6 @@
 import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import {
   DropdownMenu,
@@ -11,13 +11,15 @@ import {
 import type { NavItem } from '../types'
 
 interface NavbarItemMobileProps {
-  activeItem?: NavItem
   navItems: NavItem[]
   pathname: string
 }
 
-function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobileProps) {
-  const triggerLabel = activeItem ? activeItem.label : 'Home'
+function NavbarItemMobile({ navItems, pathname }: NavbarItemMobileProps) {
+  const triggerLabel = useMemo(() => {
+    const item = navItems.find((item) => !item.isExternal && item.isActive(pathname))
+    return item ? item.label : 'Home'
+  }, [navItems, pathname])
 
   return (
     <div className="flex items-center lg:hidden">
@@ -43,7 +45,7 @@ function NavbarItemMobile({ activeItem, navItems, pathname }: NavbarItemMobilePr
                     className={cn(
                       'block w-full rounded-sm p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
 
-                      pathname === item.href
+                      !item.isExternal && item.isActive(pathname)
                         ? 'text-primary hover:bg-accent hover:!text-primary font-semibold'
                         : 'text-foreground hover:bg-accent hover:!text-foreground/50',
                     )}

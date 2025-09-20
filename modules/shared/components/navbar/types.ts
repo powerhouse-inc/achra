@@ -1,10 +1,17 @@
 import type { RouteWithDynamicPages } from '../../types/routes'
 
-interface NavItem {
-  label: string
-  href: RouteWithDynamicPages
-  isExternal?: boolean
-}
+type NavItem =
+  | {
+      label: string
+      href: RouteWithDynamicPages
+      isExternal: true
+    }
+  | {
+      label: string
+      href: RouteWithDynamicPages
+      isExternal?: false
+      isActive: (currentPath: string) => boolean
+    }
 
 interface NavbarProps {
   navItems: NavItem[]

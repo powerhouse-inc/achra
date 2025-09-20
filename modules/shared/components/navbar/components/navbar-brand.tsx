@@ -6,7 +6,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 
 interface NavbarBrandProps {
-  isNetworksPage: boolean
+  isAchraPage: boolean
   isotypeLogo?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotype?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   logotypeClassName?: string
@@ -14,19 +14,19 @@ interface NavbarBrandProps {
 }
 
 export function NavbarBrand({
-  isNetworksPage,
+  isAchraPage,
   isotypeLogo: IsotypeLogo,
   logotype: Logotype,
   logotypeClassName,
   logoHref,
 }: NavbarBrandProps) {
-  const MainLogoComponent = isNetworksPage ? AchraIsotype : AchraLogo
-  const showIsotype = !isNetworksPage && IsotypeLogo && Logotype
+  const MainLogoComponent = isAchraPage ? AchraIsotype : AchraLogo
+  const showIsotype = !isAchraPage && IsotypeLogo && Logotype
   const logoContainerClasses = cn(
     'text-border flex items-center justify-center overflow-hidden py-4.5',
     {
-      'md:rounded-l-2xl border-r bg-primary/5 border-border px-4 md:px-6': !isNetworksPage,
-      'pl-6': isNetworksPage,
+      'md:rounded-l-2xl border-r bg-primary/5 border-border px-4 md:px-6': !isAchraPage,
+      'pl-6': isAchraPage,
     },
   )
 
@@ -37,10 +37,10 @@ export function NavbarBrand({
           <MainLogoComponent
             className={cn(
               'h-9 sm:flex',
-              isNetworksPage ? 'text-primary hidden w-42 sm:flex' : 'hover:text-primary/50 w-9',
+              isAchraPage ? 'text-primary hidden w-42 sm:flex' : 'hover:text-primary/50 w-9',
             )}
           />
-          {isNetworksPage && <AchraLogo className="text-primary h-9 w-9 sm:hidden" />}
+          {isAchraPage && <AchraLogo className="text-primary h-9 w-9 sm:hidden" />}
         </a>
       </div>
       {showIsotype && logoHref && (
