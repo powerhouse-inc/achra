@@ -12,9 +12,7 @@ export default function WorkstreamBanner() {
   useEffect(() => {
     const storedValue = localStorage.getItem(WORKSTREAM_BANNER_HIDDEN_STORAGE_KEY)
     if (storedValue !== null) {
-      setTimeout(() => {
-        setIsHidden(storedValue === 'true')
-      }, 0)
+      setIsHidden(storedValue === 'true')
     }
   }, [])
 
