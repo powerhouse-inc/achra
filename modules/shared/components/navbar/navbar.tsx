@@ -1,13 +1,13 @@
 'use client'
+
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
-
 import { cn } from '../../lib/utils'
 import { NavbarBrand } from './components/navbar-brand'
 import NavbarItemMobile from './components/navbar-item-mobile'
 import NavbarItemsDesk from './components/navbar-items-desk'
 import NavbarRightSide from './components/navbar-right-side'
-import { getNavbarConfig } from './navbar-config'
+import { getNavbarConfig, isNetworkPathOrSubpath } from './navbar-config'
 import { hasBlurBackground } from './utils'
 
 function Navbar() {
@@ -27,9 +27,6 @@ function Navbar() {
     navItems,
   } = useMemo(() => getNavbarConfig(pathname), [pathname])
 
-  const isNetworksPage = pathname === '/networks'
-  const activeItem = navItems.find((item) => pathname === item.href)
-
   const navBarWithBlurBackground = hasBlurBackground(pathname)
 
   return (
@@ -44,13 +41,13 @@ function Navbar() {
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
               <NavbarBrand
-                isNetworksPage={isNetworksPage}
+                isAchraPage={!isNetworkPathOrSubpath(pathname)}
                 isotypeLogo={Isotype}
                 logotype={Logotype}
                 logotypeClassName={logotypeClassName}
                 logoHref={logoHref}
               />
-              <NavbarItemMobile activeItem={activeItem} navItems={navItems} pathname={pathname} />
+              <NavbarItemMobile navItems={navItems} pathname={pathname} />
             </div>
 
             <NavbarItemsDesk navItems={navItems} pathname={pathname} />
