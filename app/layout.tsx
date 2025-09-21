@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { Footer } from '@/shared/components/footer/footer'
 import Navbar from '@/shared/components/navbar/navbar'
@@ -26,8 +27,10 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
-            <Navbar />
-            <main className="pt-18 md:pt-21">{children}</main>
+            <NuqsAdapter>
+              <Navbar />
+              <main className="pt-18 md:pt-21">{children}</main>
+            </NuqsAdapter>
           </QueryClientProvider>
           <Footer />
         </ThemeProvider>
