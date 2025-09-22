@@ -22,7 +22,7 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="text-muted-foreground hover:text-muted-foreground/50 !p-0 hover:bg-transparent"
+            className="text-muted-foreground hover:text-muted-foreground/50 h-fit !p-0 hover:bg-transparent"
             onMouseEnter={handleLinkMouseEnter}
             onMouseLeave={handleLinkMouseLeave}
             onClick={() => {
@@ -32,7 +32,7 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
             <Link className="size-6" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent className="max-w-66" side="bottom" align="start" arrowPadding={16}>
+        <TooltipContent className="max-w-66 pointer-events-none" side="bottom" align="start" arrowPadding={16}>
           {tooltip}
         </TooltipContent>
       </Tooltip>
