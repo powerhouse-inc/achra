@@ -1,23 +1,22 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
 import { useMemo } from 'react'
 import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
-import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
-import { formatDateStringToQuarter } from './utils'
 
-interface MilestoneCardProps {
+interface MilestoneExtendedCardProps {
   milestone: ScopeOfWork_Milestone
   className?: string
 }
 
-export default function MilestoneCard({ milestone, className }: MilestoneCardProps) {
+export default function MilestoneExtendedCard({
+  milestone,
+  className,
+}: MilestoneExtendedCardProps) {
   const progress = useMemo(() => {
     return getProgressPercentage(milestone.scope?.progress)
   }, [milestone.scope?.progress])
@@ -34,9 +33,7 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
           {milestone.sequenceCode}
         </div>
         <div className="flex items-center">
-          <span className="text-accent-foreground/30 font-semibold">
-            {formatDateStringToQuarter(milestone.deliveryTarget)}
-          </span>
+          <span className="text-accent-foreground/30 font-semibold">Details</span>
         </div>
       </CardHeader>
 
@@ -44,15 +41,6 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
         <MilestoneTitleSection title={milestone.title} description={milestone.description} />
         <MilestoneStatusSection status={milestone.scope?.status} progress={progress} />
       </CardContent>
-
-      <CardFooter className="mx-2 mt-1 p-0">
-        <Button variant="secondary" className="w-full" asChild>
-          <Link href={`#${milestone.sequenceCode}`}>
-            View
-            <ArrowRight />
-          </Link>
-        </Button>
-      </CardFooter>
     </Card>
   )
 }

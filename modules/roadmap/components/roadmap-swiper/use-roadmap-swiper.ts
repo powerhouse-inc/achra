@@ -3,7 +3,7 @@
 import { useCallback, useRef } from 'react'
 import type { SwiperRef } from 'swiper/react'
 
-export default function useTimelineSwiper() {
+export default function useRoadmapSwiper() {
   const swiperRef = useRef<SwiperRef>(null)
 
   const adjustCardHeights = useCallback(() => {
