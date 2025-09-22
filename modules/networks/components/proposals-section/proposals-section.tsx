@@ -1,10 +1,9 @@
 'use client'
 
-import { Link } from 'lucide-react'
-import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
+import type { RouteWithDynamicPages } from '@/shared/types/routes'
+import SectionTitle from '../section-title/section-title'
 import { ProposalCard } from './components/proposal-card'
-import { useProposalsSection } from './use-proposals-section'
 
 export interface Proposal {
   id: string
@@ -12,7 +11,7 @@ export interface Proposal {
   budget: string
   deadlineDate: string
   experienceLevel: string
-  detailsHref?: string
+  detailsHref: RouteWithDynamicPages
 }
 
 export interface ProposalsSectionProps {
@@ -21,23 +20,11 @@ export interface ProposalsSectionProps {
 }
 
 export default function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
-  const { handleCopyUrl } = useProposalsSection()
   return (
     <section id="proposals" className={cn('flex w-full flex-col gap-6', className)}>
       <div className="flex flex-col">
-        <div className="flex w-fit items-center gap-4">
-          <span className="text-[32px] leading-[1.2] font-bold">Proposals</span>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground hover:text-muted-foreground/50 !p-0 hover:bg-transparent"
-            onClick={() => {
-              void handleCopyUrl()
-            }}
-          >
-            <Link className="size-6" />
-          </Button>
-        </div>
-        <span className="text-foreground/50 text-base/6">
+        <SectionTitle title="Proposals" hash="proposals" />
+        <span className="text-foreground/50 text-base/6 font-semibold">
           Powerhouse has 1 active Request for Proposal
         </span>
       </div>
