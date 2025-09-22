@@ -56,7 +56,7 @@ export const createTooltipFormatter =
     };padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px;font-family:Inter, sans-serif">
       <div style="display:flex;flex-direction:column;gap:8px;min-width:194px;max-width:450px;">
         
-        <div style="display: flex;justify-content: space-between;align-items: center;border:2px solid red">  
+        <div style="display: flex;justify-content: space-between;align-items: center">  
           <div style="display:flex;align-items:center"> 
             <svg xmlns="http://www.w3.org/2000/svg" width="${isMobile ? 13 : 16}" height="${
               isMobile ? 13 : 16
@@ -73,7 +73,7 @@ export const createTooltipFormatter =
           };">30%</span>
         </div>
 
-        <div style="display: flex;justify-content: space-between;align-items: center;border:2px solid blue">  
+        <div style="display: flex;justify-content: space-between;align-items: center">  
           <div style="display:flex;align-items:center">
             <span style="font-size:14px;font-weight:600;line-height:22px;color:#B6BCC2;max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Total:</span>
           </div>
@@ -87,7 +87,7 @@ export const createTooltipFormatter =
     }
   }
 
-export const replaceAllNumberLetOneBeforeDot = (num: number, isShowNegative = false) => {
+export const formatNumberToShortScale = (num: number, isShowNegative = false) => {
   // Need to be sure that its negative
   const isNegative = num < 0
   const mathAbsolute = Math.abs(num)
@@ -116,3 +116,12 @@ export const getYearsForChart = (revenueAndSpendingData: RevenueAndSpendingRecor
     // limit the years to 2021-2024 as there's no UI space for more years
     .filter((year) => Number(year) >= 2021 && Number(year) <= 2024)
     .sort((a, b) => Number(a) - Number(b))
+
+export const barChartSeriesConfig = [
+  { key: 'psm', stack: 'revenue', color: '#4FC86F', radius: 0 },
+  { key: 'liquidationIncome', stack: 'revenue', color: '#7AD693', radius: 0 },
+  { key: 'fees', stack: 'revenue', color: '#A6E3B6', radius: [8, 8, 0, 0] },
+  { key: 'dsr', stack: 'spending', color: '#FFA132', radius: 0 },
+  { key: 'mkrVesting', stack: 'spending', color: '#F07B72', radius: 0 },
+  { key: 'daiSpent', stack: 'spending', color: '#F4A19A', radius: [8, 8, 0, 0] },
+]

@@ -1,10 +1,11 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
-import useFinancesBarChart from '../../hooks/use-finances-bar-chart'
-import { createTooltipFormatter, replaceAllNumberLetOneBeforeDot } from '../../sections/utils'
+import { barChartSeriesConfig, createTooltipFormatter, formatNumberToShortScale } from '../../sections/utils'
 import type { BarChartSeries, RevenueAndSpendingRecords } from '../../sections/types'
+
+
 
 interface FinancesBarChartProps {
   revenueAndSpendingData: RevenueAndSpendingRecords
@@ -12,7 +13,7 @@ interface FinancesBarChartProps {
 }
 
 function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
-  const { financesBarChartRef } = useFinancesBarChart()
+  const financesBarChartRef = useRef<EChartsOption>(null)
   const isMobile = useIsMobile()
 
   const { chartSeries } = useMemo(() => {
@@ -47,104 +48,21 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
 
   const barWidth = 40
 
-  const series = [
-    {
-      data: chartSeries.psm,
-      type: 'bar',
-      stack: 'revenue',
-      name: 'psm',
-      barWidth,
-      itemStyle: {
-        color: '#4FC86F',
-        borderRadius: 0,
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
+  
+  const series = barChartSeriesConfig.map((config) => ({
+    data: chartSeries[config.key],
+    type: 'bar',
+    stack: config.stack,
+    name: config.key,
+    barWidth,
+    itemStyle: {
+      color: config.color,
+      borderRadius: config.radius,
     },
-    {
-      data: chartSeries.liquidationIncome,
-      type: 'bar',
-      stack: 'revenue',
-      name: 'liquidationIncome',
-      barWidth,
-      itemStyle: {
-        color: '#7AD693',
-        borderRadius: 0,
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
+    emphasis: {
+      itemStyle: { color: 'inherit' },
     },
-    {
-      data: chartSeries.fees,
-      type: 'bar',
-      stack: 'revenue',
-      name: 'fees',
-      barWidth,
-      itemStyle: {
-        color: '#A6E3B6',
-        borderRadius: [8, 8, 0, 0],
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
-    },
-    {
-      data: chartSeries.dsr,
-      type: 'bar',
-      stack: 'spending',
-      name: 'dsr',
-      barWidth,
-      itemStyle: {
-        color: '#FFA132',
-        borderRadius: 0,
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
-    },
-    {
-      data: chartSeries.mkrVesting,
-      type: 'bar',
-      stack: 'spending',
-      name: 'mkrVesting',
-      barWidth,
-      itemStyle: {
-        color: '#F07B72',
-        borderRadius: 0,
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
-    },
-    {
-      data: chartSeries.daiSpent,
-      type: 'bar',
-      stack: 'spending',
-      name: 'daiSpent',
-      barWidth,
-      itemStyle: {
-        color: '#F4A19A',
-        borderRadius: [8, 8, 0, 0],
-      },
-      emphasis: {
-        itemStyle: {
-          color: 'inherit',
-        },
-      },
-    },
-  ]
+  }))
   const options: EChartsOption = {
     tooltip: {
       show: true,
@@ -220,7 +138,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
           if (value === 0 && index === 0) {
             return value.toString()
           }
-          return replaceAllNumberLetOneBeforeDot(value, true)
+          return formatNumberToShortScale(value, true)
         },
       },
     },
