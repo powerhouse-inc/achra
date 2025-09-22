@@ -1,4 +1,4 @@
-import { type Proposal } from "../proposals-section";
+import { type Proposal } from '../proposals-section'
 
 export const PROPOSALS: Proposal[] = [
   {
