@@ -17,7 +17,7 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
 
   return (
     <div className={cn('flex w-fit items-center gap-4', className)}>
-      <span className="text-[32px] leading-[1.2] font-bold">{title}</span>
+      <span className="text-[32px] leading-[120%] font-bold">{title}</span>
       <Tooltip open={!!tooltip}>
         <TooltipTrigger asChild>
           <Button
@@ -32,7 +32,12 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
             <Link className="size-6" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent className="max-w-66 pointer-events-none" side="bottom" align="start" arrowPadding={16}>
+        <TooltipContent
+          className="pointer-events-none max-w-66"
+          side="bottom"
+          align="start"
+          arrowPadding={16}
+        >
           {tooltip}
         </TooltipContent>
       </Tooltip>
