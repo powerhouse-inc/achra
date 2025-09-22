@@ -1,4 +1,5 @@
 import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
+import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 
@@ -8,8 +9,8 @@ interface RoadmapSectionProps {
 
 export default function RoadmapSection({ roadmap }: RoadmapSectionProps) {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="text-3xl/9.5 font-bold">Section title</div>
+    <section id="roadmap" className="flex flex-col gap-6">
+      <SectionTitle title="Roadmap" hash="roadmap" />
       <div className="font-semibold">Tabs component</div>
       <div className="font-semibold">{roadmap.description}</div>
       {/* Mobile Roadmap */}
@@ -20,6 +21,6 @@ export default function RoadmapSection({ roadmap }: RoadmapSectionProps) {
         ))}
       </div>
       <RoadmapSwiper milestones={roadmap.milestones} />
-    </div>
+    </section>
   )
 }
