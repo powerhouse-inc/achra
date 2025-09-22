@@ -1,11 +1,11 @@
 import React from 'react'
 import { revenueAndSpendingData } from '@/mocks/networks-mock/revenueAndSpendingData'
 import { ExternalLinkButton } from '@/modules/shared/components/external-link-button/external-link-button'
+import { InternalLinkButton } from '@/modules/shared/components/internal-link-buttoms'
 import { Card, CardTitle } from '@/modules/shared/components/ui/card'
-import { getYearsForChart } from '../../sections/utils'
+import { getYearsForChart } from '../finances-section/utils'
 import FinancesBarChart from './finaces-bar-chart'
 import { FinancesLegends } from './legend-card-section'
-import InternalLinkButton from '@/modules/shared/components/internal-link-buttoms/internal-link-buttom'
 
 export function CardBarChart() {
   return (

@@ -2,10 +2,12 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useMemo, useRef } from 'react'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
-import { barChartSeriesConfig, createTooltipFormatter, formatNumberToShortScale } from '../../sections/utils'
-import type { BarChartSeries, RevenueAndSpendingRecords } from '../../sections/types'
-
-
+import {
+  barChartSeriesConfig,
+  createTooltipFormatter,
+  formatNumberToShortScale,
+} from '../finances-section/utils'
+import type { BarChartSeries, RevenueAndSpendingRecords } from '../finances-section/types'
 
 interface FinancesBarChartProps {
   revenueAndSpendingData: RevenueAndSpendingRecords
@@ -48,7 +50,6 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
 
   const barWidth = 40
 
-  
   const series = barChartSeriesConfig.map((config) => ({
     data: chartSeries[config.key],
     type: 'bar',

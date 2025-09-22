@@ -1,7 +1,7 @@
+import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import ProposalsSection from '@/modules/networks/components/proposals-section/proposals-section'
-import { FinacesSection } from '@/modules/networks/sections/finances-section'
 
 export default function NetworkPage() {
   return (
@@ -13,7 +13,7 @@ export default function NetworkPage() {
       />
 
       <ProposalsSection proposals={PROPOSALS} />
-      <FinacesSection />
+      <FinancesSection />
       <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
     </main>
   )
