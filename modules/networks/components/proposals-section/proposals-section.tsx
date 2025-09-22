@@ -21,7 +21,13 @@ export interface ProposalsSectionProps {
 
 export default function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
   return (
-    <section id="proposals" className={cn('flex w-full flex-col gap-6', className)}>
+    <section
+      id="proposals"
+      className={cn(
+        `flex w-full flex-col gap-6 ${proposals.length === 0 ? 'hidden' : ''}`,
+        className,
+      )}
+    >
       <div className="flex flex-col">
         <SectionTitle title="Proposals" hash="proposals" />
         <span className="text-foreground/50 text-base/6 font-semibold">

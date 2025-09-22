@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
 import type { Proposal } from '../../proposals-section'
 
@@ -16,9 +17,9 @@ export function ProposalCard({
   className,
 }: ProposalCardProps) {
   return (
-    <div
+    <Card
       className={cn(
-        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
+        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl border-none pt-0 pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
         className,
       )}
     >
@@ -48,6 +49,6 @@ export function ProposalCard({
           <span className="text-destructive">{experienceLevel}</span>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
