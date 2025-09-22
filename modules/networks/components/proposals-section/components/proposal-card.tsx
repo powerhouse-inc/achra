@@ -1,14 +1,9 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/shared/lib/utils'
+import { Proposal } from '../proposals-section'
 
-export interface ProposalCardProps {
-  id: string
-  title: string
-  budget: string
-  deadlineDate: string
-  experienceLevel: string
-  detailsHref?: string
+export interface ProposalCardProps extends Proposal {
   className?: string
 }
 
@@ -17,41 +12,35 @@ export function ProposalCard({
   budget,
   deadlineDate,
   experienceLevel,
-  detailsHref = '#',
+  detailsHref,
   className,
 }: ProposalCardProps) {
   return (
-    <div
-      className={cn(
-        'rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md',
-        className,
-      )}
-    >
-      <div className="mb-4 flex items-start justify-between">
-        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+    <div className={cn('bg-card shadow-card flex w-79 flex-col gap-2 rounded-xl pb-6', className)}>
+      <div className="bg-accent flex items-center justify-between px-2 py-2">
+        <span className="text-lg font-bold text-gray-900">{title}</span>
         <Link
-          href={detailsHref as any}
+          href={detailsHref}
           className="flex items-center gap-1 text-gray-700 transition-colors hover:text-gray-900"
         >
-          <span className="text-sm font-medium">Details</span>
+          <span className="text-secondary-foreground text-sm leading-5 font-medium">Details</span>
           <ArrowRight className="size-4" />
         </Link>
       </div>
-
-      <div className="space-y-3">
+      <div className="flex flex-col gap-2 px-2 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">Budget</span>
-          <span className="text-sm font-medium text-gray-900">{budget}</span>
+          <span className="text-foreground/50">Budget</span>
+          <span className="text-foreground">{budget}</span>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">Deadline Date</span>
-          <span className="text-sm font-medium text-gray-900">{deadlineDate}</span>
+          <span className="text-foreground/50">Deadline Date</span>
+          <span className="text-foreground">{deadlineDate}</span>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-600">Experience Level</span>
-          <span className="text-sm font-medium text-red-600">{experienceLevel}</span>
+          <span className="text-foreground/50">Experience Level</span>
+          <span className="text-destructive">{experienceLevel}</span>
         </div>
       </div>
     </div>
