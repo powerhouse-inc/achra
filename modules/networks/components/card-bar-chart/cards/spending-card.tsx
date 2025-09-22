@@ -4,8 +4,8 @@ import { SpendingItem } from './spending-item'
 
 export function SpendingCard() {
   return (
-    <div className="md:bg-red relative flex flex-col gap-4 md:rounded-xl md:bg-gray-50 md:px-1 md:pt-4 md:pb-2">
-      <span className="w-full justify-center text-center md:absolute md:-top-4 md:left-6 md:w-fit md:rounded-lg md:bg-white md:px-2">
+    <div className="relative flex w-full flex-col gap-4 sm:rounded-xl sm:bg-gray-50 sm:px-1 sm:pt-4 sm:pb-2 lg:flex-row xl:flex-col">
+      <span className="w-full justify-center text-center sm:absolute sm:-top-4 sm:left-6 sm:w-fit sm:rounded-lg sm:bg-white sm:px-2">
         Spending
       </span>
       <SpendingItem title="Oper Expenses" mobileTitle="Operational Expenses">
