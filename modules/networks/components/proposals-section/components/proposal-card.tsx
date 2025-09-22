@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/shared/lib/utils'
-import { Proposal } from '../proposals-section'
+import type { Proposal } from '../proposals-section'
 
 export interface ProposalCardProps extends Proposal {
   className?: string

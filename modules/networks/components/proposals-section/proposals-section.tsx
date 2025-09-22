@@ -3,9 +3,9 @@
 import { Link } from 'lucide-react'
 import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
+import type { RouteWithDynamicPages } from '@/shared/types/routes'
 import { ProposalCard } from './components/proposal-card'
 import { useProposalsSection } from './use-proposals-section'
-import { RouteWithDynamicPages } from '@/shared/types/routes'
 
 export interface Proposal {
   id: string
