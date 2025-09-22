@@ -1,10 +1,10 @@
 import { mockedMilestones } from '@/modules/roadmap/mocks'
-import Timeline from './timeline'
+import RoadmapSwiper from './roadmap-swiper'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Modules/Roadmap/Components/Timeline',
-  component: Timeline,
+  title: 'Modules/Roadmap/Components/RoadmapSwiper',
+  component: RoadmapSwiper,
   parameters: {
     layout: 'centered',
     viewport: {
@@ -18,7 +18,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Timeline>
+} satisfies Meta<typeof RoadmapSwiper>
 
 export default meta
 type Story = StoryObj<typeof meta>
