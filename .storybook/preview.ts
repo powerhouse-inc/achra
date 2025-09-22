@@ -2,6 +2,7 @@ import { withThemeByClassName } from '@storybook/addon-themes'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { withNextjsExtras } from '../modules/shared/lib/decorators'
 import type { Preview } from '@storybook/nextjs'
+import { create } from 'storybook/theming'
 
 import '../app/globals.css'
 
@@ -33,6 +34,12 @@ const preview: Preview = {
     },
     nextjs: {
       appDirectory: true,
+    },
+    docs: {
+      theme: create({
+        base: 'light',
+        fontBase: 'Inter',
+      }),
     },
 
     a11y: {
