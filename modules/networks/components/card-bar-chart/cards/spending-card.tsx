@@ -9,8 +9,8 @@ export function SpendingCard() {
         Spending
       </span>
       <SpendingItem title="Oper Expenses" mobileTitle="Operational Expenses">
-        <ItemLegend color="fill-red-500">USDS/DAI Expensed</ItemLegend>
-        <ItemLegend color="fill-red-700">MKR Vesting</ItemLegend>
+        <ItemLegend color="fill-red-500">USDS Expensed</ItemLegend>
+        <ItemLegend color="fill-red-700">SKY Vesting</ItemLegend>
       </SpendingItem>
       <SpendingItem title="Protocol Costs">
         <ItemLegend color="fill-orange-700">DSR Cost</ItemLegend>

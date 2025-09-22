@@ -1,6 +1,6 @@
 import React from 'react'
-import { ExternalLinkButton } from '../../../shared/components/external-link-button/external-link-button'
-import InternalLinkButton from '../../../shared/components/internal-link-buttoms.tsx/internal-link-buttom'
+import { ExternalLinkButton } from '@/modules/shared/components/external-link-button'
+import { InternalLinkButton } from '@/modules/shared/components/internal-link-buttoms'
 import { RevenueCard } from './cards/revenue-card'
 import { SpendingCard } from './cards/spending-card'
 
