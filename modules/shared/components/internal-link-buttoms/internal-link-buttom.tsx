@@ -29,5 +29,3 @@ export function InternalLinkButton({ href, children, className }: InternalLinkBu
     </Link>
   )
 }
-
-export default InternalLinkButton
