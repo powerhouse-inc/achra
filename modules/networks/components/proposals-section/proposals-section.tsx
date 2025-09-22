@@ -2,8 +2,8 @@
 
 import { cn } from '@/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/shared/types/routes'
-import { ProposalCard } from './components/proposal-card'
 import SectionTitle from '../section-title/section-title'
+import { ProposalCard } from './components/proposal-card'
 
 export interface Proposal {
   id: string

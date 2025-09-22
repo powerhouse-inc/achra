@@ -1,21 +1,22 @@
 'use client'
 
 import { Link } from 'lucide-react'
+import { cn } from '@/modules/shared/lib/utils'
 import { Button } from '@/shared/components/ui/button'
-import { Info } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 import { useSectionTitle } from './use-section-title'
 
 export interface SectionTitleProps {
   title: string
   hash: string
+  className?: string
 }
 
-export default function SectionTitle({ title, hash }: SectionTitleProps) {
+export default function SectionTitle({ title, hash, className }: SectionTitleProps) {
   const { handleCopyUrl, handleLinkMouseEnter, handleLinkMouseLeave, tooltip } = useSectionTitle()
 
   return (
-    <div className="flex w-fit items-center gap-4">
+    <div className={cn('flex w-fit items-center gap-4', className)}>
       <span className="text-[32px] leading-[1.2] font-bold">{title}</span>
       <Tooltip open={!!tooltip}>
         <TooltipTrigger asChild>

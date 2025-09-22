@@ -1,5 +1,5 @@
-import { useCurrentUrl } from '@/modules/shared/hooks/use-current-url'
 import { useState } from 'react'
+import { useCurrentUrl } from '@/modules/shared/hooks/use-current-url'
 
 export function useSectionTitle() {
   const [tooltip, setTooltip] = useState<string | null>(null)
