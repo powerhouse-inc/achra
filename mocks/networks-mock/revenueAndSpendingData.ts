@@ -1,0 +1,38 @@
+export const revenueAndSpendingData = {
+  '2021': {
+    fees: 850000,
+    liquidationIncome: 420000,
+    psm: 180000,
+    daiSpent: 650000,
+    mkrVesting: 280000,
+    annualProfit: 320000,
+    dsr: 95000,
+  },
+  '2022': {
+    fees: 1200000,
+    liquidationIncome: 680000,
+    psm: 320000,
+    daiSpent: 890000,
+    mkrVesting: 450000,
+    annualProfit: 580000,
+    dsr: 120000,
+  },
+  '2023': {
+    fees: 1580000,
+    liquidationIncome: 920000,
+    psm: 480000,
+    daiSpent: 1150000,
+    mkrVesting: 620000,
+    annualProfit: 780000,
+    dsr: 145000,
+  },
+  '2024': {
+    fees: 2100000,
+    liquidationIncome: 1350000,
+    psm: 720000,
+    daiSpent: 1480000,
+    mkrVesting: 890000,
+    annualProfit: 1120000,
+    dsr: 180000,
+  },
+}

@@ -3,19 +3,19 @@
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MilestoneCard } from '@/modules/roadmap/components/milestone-card'
-import useRoadmapSwiper from '@/modules/roadmap/components/roadmap-swiper/use-roadmap-swiper'
+import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { cn } from '@/shared/lib/utils'
+import useRoadmapSwiper from './use-roadmap-swiper'
 
-interface TimelineSwiperProps {
+interface RoadmapSwiperProps {
   milestones: ScopeOfWork_Milestone[]
 }
 
-export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
+export default function RoadmapSwiper({ milestones }: RoadmapSwiperProps) {
   const { adjustCardHeights, swiperRef } = useRoadmapSwiper()
 
   return (
-    <div className="mt-6 hidden flex-col md:flex lg:hidden">
+    <div className="hidden flex-col sm:flex">
       <div className="relative -mx-2">
         <Swiper
           ref={swiperRef}
@@ -33,10 +33,25 @@ export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
             adjustCardHeights()
           }}
           breakpoints={{
+            640: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+              spaceBetween: 0,
+            },
             768: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+              spaceBetween: 8,
+            },
+            1024: {
               slidesPerView: 3,
               slidesPerGroup: 3,
               spaceBetween: 8,
+            },
+            1280: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+              spaceBetween: 0,
             },
           }}
           centerInsufficientSlides
@@ -48,7 +63,7 @@ export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id} className="flex">
               <div className="mx-2 flex h-full flex-1">
-                <MilestoneCard milestone={milestone} className="swiper-milestone-card" />
+                <MilestoneExtendedCard milestone={milestone} className="swiper-milestone-card" />
               </div>
             </SwiperSlide>
           ))}

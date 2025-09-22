@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'simplebar-react/dist/simplebar.min.css';
+@import 'swiper/css';
+@import 'swiper/css/pagination';
 @source "../node_modules/streamdown/dist/index.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -208,4 +210,33 @@
   background-color: color-mix(in srgb, var(--color-foreground) 50%, transparent);
   border-radius: var(--radius-lg);
   margin-left: var(--spacing);
+}
+
+/* SWIPER PAGINATION */
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 0 !important;
+  z-index: 10 !important;
+}
+.swiper-pagination-bullet {
+  height: calc(var(--spacing) * 4) !important;
+  width: calc(var(--spacing) * 4) !important;
+  margin-left: calc(var(--spacing) * 2) !important;
+  margin-right: calc(var(--spacing) * 2) !important;
+  background-color: var(--muted) !important;
+  opacity: 1 !important;
+}
+.swiper-pagination-bullet:first-child {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.swiper-pagination-bullet:last-child {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+  background-color: color-mix(in srgb, var(--primary) 10%, transparent) !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--primary) !important;
 }
