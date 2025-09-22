@@ -18,7 +18,7 @@ export function ProposalCard({
   return (
     <div
       className={cn(
-        'bg-card flex w-full flex-col gap-2 rounded-xl pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
+        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
         className,
       )}
     >

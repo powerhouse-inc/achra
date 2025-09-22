@@ -25,7 +25,7 @@ export default function ProposalsSection({ proposals, className }: ProposalsSect
       <div className="flex flex-col">
         <SectionTitle title="Proposals" hash="proposals" />
         <span className="text-foreground/50 text-base/6 font-semibold">
-          Powerhouse has 1 active Request for Proposal
+          {`Powerhouse has ${proposals.length} active ${proposals.length === 1 ? 'Request' : 'Requests'} for Proposal`}
         </span>
       </div>
       <ProposalsSwiper proposals={proposals} />
