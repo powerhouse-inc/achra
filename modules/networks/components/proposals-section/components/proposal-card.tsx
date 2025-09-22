@@ -16,9 +16,14 @@ export function ProposalCard({
   className,
 }: ProposalCardProps) {
   return (
-    <div className={cn('bg-card shadow-card flex w-79 flex-col gap-2 rounded-xl pb-6', className)}>
+    <div
+      className={cn(
+        'bg-card shadow-card flex w-full flex-col gap-2 rounded-xl pb-6 sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
+        className,
+      )}
+    >
       <div className="bg-accent flex items-center justify-between px-2 py-2">
-        <span className="text-lg font-bold text-gray-900">{title}</span>
+        <span className="text-lg leading-6 font-bold text-gray-900">{title}</span>
         <Link
           href={detailsHref}
           className="flex items-center gap-1 text-gray-700 transition-colors hover:text-gray-900"
