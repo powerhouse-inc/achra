@@ -1,6 +1,6 @@
 'use client'
 
-import { BookX, FolderGit2, FolderKanban } from 'lucide-react'
+import { FolderGit2, FolderKanban, X } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -71,7 +71,7 @@ export default function WorkstreamBanner() {
       </div>
 
       <Button variant="ghost" className="absolute top-3 right-3 z-20 h-6 w-6" onClick={handleHide}>
-        <BookX className="text-primary" />
+        <X className="text-primary" />
       </Button>
     </motion.div>
   )
