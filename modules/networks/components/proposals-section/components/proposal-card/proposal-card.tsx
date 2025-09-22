@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/shared/lib/utils'
-import type { Proposal } from '../proposals-section'
+import type { Proposal } from '../../proposals-section'
 
 export interface ProposalCardProps extends Proposal {
   className?: string
@@ -18,7 +18,7 @@ export function ProposalCard({
   return (
     <div
       className={cn(
-        'bg-card shadow-card flex w-full flex-col gap-2 rounded-xl pb-6 sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
+        'bg-card flex w-full flex-col gap-2 rounded-xl pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
         className,
       )}
     >

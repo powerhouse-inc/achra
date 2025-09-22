@@ -32,7 +32,12 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
             <Link className="size-6" />
           </Button>
         </TooltipTrigger>
-        <TooltipContent className="max-w-66 pointer-events-none" side="bottom" align="start" arrowPadding={16}>
+        <TooltipContent
+          className="pointer-events-none max-w-66"
+          side="bottom"
+          align="start"
+          arrowPadding={16}
+        >
           {tooltip}
         </TooltipContent>
       </Tooltip>

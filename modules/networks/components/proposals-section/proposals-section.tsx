@@ -3,7 +3,7 @@
 import { cn } from '@/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/shared/types/routes'
 import SectionTitle from '../section-title/section-title'
-import { ProposalCard } from './components/proposal-card'
+import ProposalsSwiper from './components/proposals-swiper/proposals-swiper'
 
 export interface Proposal {
   id: string
@@ -28,12 +28,7 @@ export default function ProposalsSection({ proposals, className }: ProposalsSect
           Powerhouse has 1 active Request for Proposal
         </span>
       </div>
-      <div className="flex flex-col gap-4">
-        {/* Note: Temporary implemenation of proposals */}
-        {proposals.map((proposal) => (
-          <ProposalCard key={proposal.id} {...proposal} />
-        ))}
-      </div>
+      <ProposalsSwiper proposals={proposals} />
     </section>
   )
 }
