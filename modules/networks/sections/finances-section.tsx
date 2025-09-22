@@ -2,6 +2,7 @@ import { LinkIcon } from 'lucide-react'
 import React from 'react'
 import { CardBarChart } from '@/modules/networks/components/card-bar-chart/card-bar-chart'
 import { CardStackedAreaChart } from '@/modules/networks/components/card-stacked-area-chart/card-stacked-area-chart'
+import { UsdsIcon } from '@/modules/shared/components/svgs'
 
 export function FinacesSection() {
   return (
@@ -11,7 +12,10 @@ export function FinacesSection() {
           <h2 className="text-2xl leading-9 font-bold lg:text-3xl">Finances</h2>
           <LinkIcon />
         </div>
-        <div>*All values are converted to USDS</div>
+        <div className="flex items-center gap-2 text-xs/5 font-semibold xl:text-sm">
+          <UsdsIcon className="size-5 md:size-6" />
+          *All values are converted to USDS
+        </div>
       </div>
       <div className="flex w-full flex-col items-center gap-4 xl:flex-row xl:gap-8">
         <CardBarChart />
