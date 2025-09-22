@@ -36,8 +36,8 @@ export function HomepageBanner({
       open={isExpanded}
       onOpenChange={handleIsExpanded}
       className={cn(
-        'text-primary-foreground relative flex w-full flex-col gap-4 overflow-hidden rounded-xl px-6 pt-8 pb-31 transition-all duration-300 ease-in-out sm:pt-5.5 sm:pb-21.5 md:px-6 md:pt-8 md:pb-5.75 lg:px-8 lg:pt-8 lg:pb-11.75 xl:p-8',
-        !isExpanded && 'min-h-38.5 !py-7 pl-6 sm:min-h-21.5 lg:pl-8 xl:!py-6',
+        'text-primary-foreground relative flex w-full flex-col overflow-hidden rounded-xl px-6 pt-8 pb-31 transition-all duration-300 ease-out sm:pt-5.5 sm:pb-21.5 md:px-6 md:pt-8 md:pb-5.75 lg:px-8 lg:pt-8 lg:pb-11.75 xl:p-8',
+        !isExpanded && '!min-h-21.5 !py-7 pl-6 lg:pl-8 xl:!py-6',
         className,
       )}
     >
@@ -55,7 +55,12 @@ export function HomepageBanner({
           {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
         </Button>
       </CollapsibleTrigger>
-      <span className="z-1 text-xl leading-[1.2] font-bold sm:text-2xl xl:text-[32px]">
+      <span
+        className={cn(
+          'z-1 pb-4 text-xl leading-[120%] font-bold transition-all duration-300 ease-out sm:text-2xl xl:text-3xl',
+          !isExpanded && 'hidden sm:block sm:pb-0',
+        )}
+      >
         {title}
       </span>
       <CollapsibleContent
@@ -67,8 +72,8 @@ export function HomepageBanner({
       {isLoggedIn && (
         <div
           className={cn(
-            'absolute right-6 bottom-4 z-1 w-[calc(100%-48px)] max-w-73.75 transition-all duration-300 ease-in-out sm:right-4 sm:w-fit md:right-6 md:bottom-6 lg:right-6 lg:bottom-6',
-            !isExpanded && '!right-[unset] !bottom-4 !left-6 sm:!right-15 sm:!left-[unset]',
+            'absolute right-6 bottom-4 z-1 w-[calc(100%-48px)] max-w-64 transition-all duration-300 ease-out sm:right-4 sm:w-fit sm:max-w-73.75 md:right-6 md:bottom-6 lg:right-6 lg:bottom-6',
+            !isExpanded && 'right-11 !bottom-4 sm:!right-15',
           )}
         >
           <ConnectLink />
