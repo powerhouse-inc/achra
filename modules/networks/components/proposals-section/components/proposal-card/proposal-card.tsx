@@ -1,6 +1,11 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { Card } from '@/modules/shared/components/ui/card'
+import {
+  StripedCard,
+  StripedCardContent,
+  StripedCardHeader,
+  StripedCardTitle,
+} from '@/modules/shared/components/striped-card'
 import { cn } from '@/shared/lib/utils'
 import type { Proposal } from '../../proposals-section'
 
@@ -17,23 +22,18 @@ export function ProposalCard({
   className,
 }: ProposalCardProps) {
   return (
-    <Card
-      className={cn(
-        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl border-none pt-0 pb-6 shadow-lg',
-        className,
-      )}
-    >
-      <div className="bg-accent flex items-center justify-between px-2 py-2">
-        <span className="text-lg leading-6 font-bold text-gray-900">{title}</span>
+    <StripedCard className={cn('w-full', className)}>
+      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5">
+        <StripedCardTitle>{title}</StripedCardTitle>
         <Link
           href={detailsHref}
-          className="flex items-center gap-1 text-gray-700 transition-colors hover:text-gray-900"
+          className="flex items-center gap-1 justify-self-end text-gray-700 transition-colors hover:text-gray-900"
         >
           <span className="text-secondary-foreground text-sm leading-5 font-medium">Details</span>
           <ArrowRight className="size-4" />
         </Link>
-      </div>
-      <div className="flex flex-col gap-2 px-2 text-sm leading-5.5 font-semibold">
+      </StripedCardHeader>
+      <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
           <span className="text-foreground/50">Budget</span>
           <span className="text-foreground">{budget}</span>
@@ -48,7 +48,7 @@ export function ProposalCard({
           <span className="text-foreground/50">Experience Level</span>
           <span className="text-destructive">{experienceLevel}</span>
         </div>
-      </div>
-    </Card>
+      </StripedCardContent>
+    </StripedCard>
   )
 }
