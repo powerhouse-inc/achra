@@ -4,7 +4,7 @@ import { ItemLegend } from './legend-item'
 
 export function RevenueCard() {
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2 lg:h-32 xl:h-36">
       <div
         className={cn(
           'sm:bg-accent relative flex flex-col items-center rounded-xl px-4 py-2 sm:items-start',
