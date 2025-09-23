@@ -78,13 +78,13 @@ export default function WorkstreamBanner() {
         />
         <FolderKanban
           className={cn(
-            'absolute -bottom-10 -left-4 size-39 -rotate-[19deg] text-[#9EA0A180] transition-all duration-500 ease-in-out',
+            'text-muted-foreground/50 absolute -bottom-10 -left-4 size-39 -rotate-[19deg] transition-all duration-500 ease-in-out',
             'lg:-bottom-7 lg:-left-3',
           )}
         />
         <FolderGit2
           className={cn(
-            'absolute right-0 bottom-0 hidden size-32 -rotate-[15deg] text-[#9EA0A180] transition-all duration-500 ease-in-out',
+            'text-muted-foreground/50 absolute right-0 bottom-0 hidden size-32 -rotate-[15deg] transition-all duration-500 ease-in-out',
             'sm:-right-5 sm:-bottom-4 sm:block',
             'md:-right-2 md:-bottom-1',
             'lg:-right-1 lg:bottom-3',
@@ -92,7 +92,7 @@ export default function WorkstreamBanner() {
           )}
         />
 
-        <div className="border-accent absolute inset-0 rounded-lg border-[3px] bg-[rgba(244,244,244,0.50)] backdrop-blur-[2px] transition-all duration-300 ease-in-out" />
+        <div className="border-accent bg-secondary/50 absolute inset-0 rounded-lg border-[3px] backdrop-blur-[2px] transition-all duration-300 ease-in-out" />
       </div>
 
       {/* content */}
