@@ -19,7 +19,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
   const { adjustCardHeights, swiperRef, swiperBreakpoints } = useProposalsSwiper()
 
   return (
-    <div className="relative">
+    <div className="relative -mx-2">
       <Swiper
         ref={swiperRef}
         modules={[Pagination]}
@@ -51,7 +51,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
                 deadlineDate={proposal.deadlineDate}
                 experienceLevel={proposal.experienceLevel}
                 detailsHref={proposal.detailsHref}
-                className="swiper-proposal-card sm:ml-1"
+                className="swiper-proposal-card"
               />
             </div>
           </SwiperSlide>

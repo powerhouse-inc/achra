@@ -40,9 +40,3 @@ export const TwoProposals: Story = {
     proposals: PROPOSALS.slice(0, 2),
   },
 }
-
-export const Empty: Story = {
-  args: {
-    proposals: [],
-  },
-}
