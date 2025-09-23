@@ -15,13 +15,12 @@ export function InternalLinkButton({ href, children, className }: InternalLinkBu
     <Link
       href={href}
       className={cn(
-        'text-foreground inline-flex min-h-[32px] w-fit items-center gap-2 rounded-lg border border-transparent bg-slate-50 transition-all duration-200 ease-in-out',
-        children ? 'py-1 pr-4 pl-6' : 'px-4 py-1',
+        'text-foreground bg-secondary inline-flex h-9 w-fit items-center gap-2 rounded-lg border border-transparent px-4 py-2 transition-all duration-200 ease-in-out',
         'hover:gap-4 hover:pr-2',
         className,
       )}
     >
-      {children && <span className="text-base leading-6 font-semibold">{children}</span>}
+      {children && <span className="text-base font-medium">{children}</span>}
 
       <div className="flex items-center">
         <ArrowRight className="h-5 w-5" />
