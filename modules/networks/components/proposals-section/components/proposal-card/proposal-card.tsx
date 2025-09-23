@@ -1,7 +1,15 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import {
+  StripedCard,
+  StripedCardAction,
+  StripedCardContent,
+  StripedCardHeader,
+  StripedCardTitle,
+} from '@/modules/shared/components/striped-card'
+import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
-import type { Proposal } from '../proposals-section'
+import type { Proposal } from '../../proposals-section'
 
 export interface ProposalCardProps extends Proposal {
   className?: string
@@ -16,23 +24,19 @@ export function ProposalCard({
   className,
 }: ProposalCardProps) {
   return (
-    <div
-      className={cn(
-        'bg-card shadow-card flex w-full flex-col gap-2 rounded-xl pb-6 sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
-        className,
-      )}
-    >
-      <div className="bg-accent flex items-center justify-between px-2 py-2">
-        <span className="text-lg leading-6 font-bold text-gray-900">{title}</span>
-        <Link
-          href={detailsHref}
-          className="flex items-center gap-1 text-gray-700 transition-colors hover:text-gray-900"
-        >
-          <span className="text-secondary-foreground text-sm leading-5 font-medium">Details</span>
-          <ArrowRight className="size-4" />
-        </Link>
-      </div>
-      <div className="flex flex-col gap-2 px-2 text-sm leading-5.5 font-semibold">
+    <StripedCard className={cn('w-full', className)}>
+      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5 py-0.5 pr-2">
+        <StripedCardTitle>{title}</StripedCardTitle>
+        <StripedCardAction>
+          <Button variant="ghost" asChild>
+            <Link href={detailsHref}>
+              Details
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </StripedCardAction>
+      </StripedCardHeader>
+      <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
           <span className="text-foreground/50">Budget</span>
           <span className="text-foreground">{budget}</span>
@@ -47,7 +51,7 @@ export function ProposalCard({
           <span className="text-foreground/50">Experience Level</span>
           <span className="text-destructive">{experienceLevel}</span>
         </div>
-      </div>
-    </div>
+      </StripedCardContent>
+    </StripedCard>
   )
 }
