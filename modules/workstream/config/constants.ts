@@ -1,1 +1,1 @@
-export const WORKSTREAM_BANNER_HIDDEN_STORAGE_KEY = 'workstream-banner-hidden'
+export const WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY = 'workstream-banner-visible'

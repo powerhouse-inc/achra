@@ -6,17 +6,19 @@ import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstrea
 
 export default function WorkstreamsPage() {
   return (
-    <main className="container mt-8 mb-8 flex flex-col gap-8">
+    <main className="container mt-8 mb-8">
       <WorkstreamBanner />
 
-      <Suspense fallback={<WorkstreamFiltersSkeleton />}>
-        <WorkstreamFilters />
-      </Suspense>
-
       <div className="flex flex-col gap-8">
-        <WorkstreamCard />
-        <WorkstreamCard />
-        <WorkstreamCard />
+        <Suspense fallback={<WorkstreamFiltersSkeleton />}>
+          <WorkstreamFilters />
+        </Suspense>
+
+        <div className="flex flex-col gap-8">
+          <WorkstreamCard />
+          <WorkstreamCard />
+          <WorkstreamCard />
+        </div>
       </div>
     </main>
   )
