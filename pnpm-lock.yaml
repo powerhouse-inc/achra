@@ -164,6 +164,9 @@ importers:
       recharts:
         specifier: ^2.15.4
         version: 2.15.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      shiki:
+        specifier: ^3.13.0
+        version: 3.13.0
       simplebar-react:
         specifier: ^3.3.2
         version: 3.3.2(react@19.1.0)
