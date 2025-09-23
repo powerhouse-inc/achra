@@ -1,7 +1,7 @@
 import React from 'react'
 import { revenueAndSpendingData } from '@/mocks/networks-mock/revenueAndSpendingData'
 import { ExternalLinkButton } from '@/modules/shared/components/external-link-button/external-link-button'
-import { InternalLinkButton } from '@/modules/shared/components/internal-link-buttoms'
+import { InternalLinkButton } from '@/modules/shared/components/internal-link-button'
 import { Card, CardTitle } from '@/modules/shared/components/ui/card'
 import { getYearsForChart } from '../finances-section/utils'
 import FinancesBarChart from './finaces-bar-chart'
