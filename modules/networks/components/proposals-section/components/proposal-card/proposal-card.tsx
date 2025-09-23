@@ -1,13 +1,14 @@
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import {
   StripedCard,
+  StripedCardAction,
   StripedCardContent,
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
-import { useProposalCard } from './use-proposal-card'
 import type { Proposal } from '../../proposals-section'
 
 export interface ProposalCardProps extends Proposal {
@@ -22,16 +23,18 @@ export function ProposalCard({
   detailsHref,
   className,
 }: ProposalCardProps) {
-  const { handleDetailsClick } = useProposalCard({ detailsHref })
-
   return (
     <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5">
+      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5 py-0.5 pr-3">
         <StripedCardTitle>{title}</StripedCardTitle>
-        <Button variant="ghost" className="justify-self-end !p-0" onClick={handleDetailsClick}>
-          <span className="text-secondary-foreground text-sm leading-5 font-medium">Details</span>
-          <ArrowRight className="size-4" />
-        </Button>
+        <StripedCardAction>
+          <Button variant="ghost" asChild>
+            <Link href={detailsHref}>
+              Details
+              <ArrowRight className="size-4" />
+            </Link>
+          </Button>
+        </StripedCardAction>
       </StripedCardHeader>
       <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
