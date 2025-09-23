@@ -25,7 +25,7 @@ export function ProposalCard({
 }: ProposalCardProps) {
   return (
     <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5 py-0.5 pr-3">
+      <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5 py-0.5 pr-2">
         <StripedCardTitle>{title}</StripedCardTitle>
         <StripedCardAction>
           <Button variant="ghost" asChild>
