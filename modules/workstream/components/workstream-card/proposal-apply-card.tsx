@@ -102,11 +102,11 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
   const hiddenCount = tags.length - visibleCount
 
   return (
-    <Card className="rounded-lg p-0">
+    <Card className="rounded-lg p-0 shadow-sm">
       <CardContent className="flex gap-4 p-3">
         <div className="w-full">
           <div className="mb-0.5 text-sm/5.5 font-semibold xl:text-base/6">{title}</div>
-          <div>{description}</div>
+          <div className="text-sm/5.5">{description}</div>
           <div ref={containerRef} className="mt-4 flex flex-wrap gap-2">
             {visibleCount === -1 ? (
               <Skeleton className="h-6 w-full" />
