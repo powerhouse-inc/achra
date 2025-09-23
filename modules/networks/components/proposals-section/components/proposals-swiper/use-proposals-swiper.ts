@@ -7,22 +7,25 @@ export default function useProposalsSwiper() {
   const swiperRef = useRef<SwiperRef>(null)
 
   const swiperBreakpoints = {
-    375: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      spaceBetween: 24,
-    },
     640: {
       slidesPerView: 2,
       slidesPerGroup: 2,
+      spaceBetween: 0,
+    },
+    768: {
+      slidesPerView: 2,
+      slidesPerGroup: 2,
+      spaceBetween: 8,
     },
     1024: {
       slidesPerView: 3,
       slidesPerGroup: 3,
+      spaceBetween: 8,
     },
     1280: {
       slidesPerView: 4,
       slidesPerGroup: 4,
+      spaceBetween: 0,
     },
   }
 

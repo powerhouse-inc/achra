@@ -36,19 +36,24 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
           adjustCardHeights()
         }}
         breakpoints={swiperBreakpoints}
-        className={cn('proposals-swiper !pb-10')}
+        className={cn(
+          '!pb-10',
+          '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
+        )}
       >
         {proposals.map((proposal) => (
-          <SwiperSlide key={proposal.id}>
-            <ProposalCard
-              id={proposal.id}
-              title={proposal.title}
-              budget={proposal.budget}
-              deadlineDate={proposal.deadlineDate}
-              experienceLevel={proposal.experienceLevel}
-              detailsHref={proposal.detailsHref}
-              className="swiper-proposal-card sm:ml-1"
-            />
+          <SwiperSlide key={proposal.id} className="flex">
+            <div className="mx-2 flex h-full flex-1">
+              <ProposalCard
+                id={proposal.id}
+                title={proposal.title}
+                budget={proposal.budget}
+                deadlineDate={proposal.deadlineDate}
+                experienceLevel={proposal.experienceLevel}
+                detailsHref={proposal.detailsHref}
+                className="swiper-proposal-card sm:ml-1"
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -19,7 +19,7 @@ export function ProposalCard({
   return (
     <Card
       className={cn(
-        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl border-none pt-0 pb-6 shadow-lg sm:w-72 md:w-85 lg:w-76 xl:w-72 2xl:w-79',
+        'bg-card flex w-full flex-col gap-2 overflow-hidden rounded-xl border-none pt-0 pb-6 shadow-lg',
         className,
       )}
     >

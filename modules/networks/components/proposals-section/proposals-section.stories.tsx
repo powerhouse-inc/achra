@@ -46,10 +46,3 @@ export const Empty: Story = {
     proposals: [],
   },
 }
-
-export const WithCustomClassName: Story = {
-  args: {
-    proposals: PROPOSALS,
-    className: 'bg-red-50 mt-10',
-  },
-}
