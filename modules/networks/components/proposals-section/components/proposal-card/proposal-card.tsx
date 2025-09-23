@@ -1,12 +1,13 @@
 import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
 import {
   StripedCard,
   StripedCardContent,
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
+import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
+import { useProposalCard } from './use-proposal-card'
 import type { Proposal } from '../../proposals-section'
 
 export interface ProposalCardProps extends Proposal {
@@ -21,17 +22,16 @@ export function ProposalCard({
   detailsHref,
   className,
 }: ProposalCardProps) {
+  const { handleDetailsClick } = useProposalCard({ detailsHref })
+
   return (
     <StripedCard className={cn('w-full', className)}>
       <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-0.5">
         <StripedCardTitle>{title}</StripedCardTitle>
-        <Link
-          href={detailsHref}
-          className="flex items-center gap-1 justify-self-end text-gray-700 transition-colors hover:text-gray-900"
-        >
+        <Button variant="ghost" className="justify-self-end !p-0" onClick={handleDetailsClick}>
           <span className="text-secondary-foreground text-sm leading-5 font-medium">Details</span>
           <ArrowRight className="size-4" />
-        </Link>
+        </Button>
       </StripedCardHeader>
       <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">

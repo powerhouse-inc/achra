@@ -6,29 +6,6 @@ import type { SwiperRef } from 'swiper/react'
 export default function useProposalsSwiper() {
   const swiperRef = useRef<SwiperRef>(null)
 
-  const swiperBreakpoints = {
-    640: {
-      slidesPerView: 2,
-      slidesPerGroup: 2,
-      spaceBetween: 0,
-    },
-    768: {
-      slidesPerView: 2,
-      slidesPerGroup: 2,
-      spaceBetween: 0,
-    },
-    1024: {
-      slidesPerView: 3,
-      slidesPerGroup: 3,
-      spaceBetween: 0,
-    },
-    1280: {
-      slidesPerView: 4,
-      slidesPerGroup: 4,
-      spaceBetween: 0,
-    },
-  }
-
   const adjustCardHeights = useCallback(() => {
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.swiper-proposal-card'))
     if (cards.length > 0) {
@@ -50,5 +27,5 @@ export default function useProposalsSwiper() {
     }
   }, [])
 
-  return { adjustCardHeights, swiperRef, swiperBreakpoints }
+  return { adjustCardHeights, swiperRef }
 }

@@ -4,6 +4,7 @@ import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { cn } from '@/shared/lib/utils'
 import { ProposalCard } from '../proposal-card/proposal-card'
+import { PROPOSALS_SWIPER_BREAKPOINTS } from './constants'
 import useProposalsSwiper from './use-proposals-swiper'
 import type { Proposal } from '../../proposals-section'
 
@@ -16,7 +17,7 @@ interface ProposalsSwiperProps {
 }
 
 export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
-  const { adjustCardHeights, swiperRef, swiperBreakpoints } = useProposalsSwiper()
+  const { adjustCardHeights, swiperRef } = useProposalsSwiper()
 
   return (
     <div className="relative -mx-2">
@@ -35,7 +36,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
         onBreakpoint={() => {
           adjustCardHeights()
         }}
-        breakpoints={swiperBreakpoints}
+        breakpoints={PROPOSALS_SWIPER_BREAKPOINTS}
         className={cn(
           '!pb-10',
           '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
