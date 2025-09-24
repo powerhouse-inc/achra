@@ -1,15 +1,16 @@
 import { Button } from '@/modules/shared/components/ui/button'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 
 export function FinacesTabs() {
-  const isMobile = useIsMobile()
   return (
     <div className="sm:gap:6 flex gap-2">
       <Button variant="ghost" className="p-0">
-        {isMobile ? 'Realized Expenses' : 'Realized Exp.'}
+        <span className="sm:hidden">Realized Expenses</span>
+        <span className="hidden sm:inline">Realized Exp.</span>
       </Button>
+
       <Button variant="ghost" className="p-0">
-        {isMobile ? 'Operational Reserves' : 'Operational Res.'}
+        <span className="sm:hidden">Operational Reserves</span>
+        <span className="hidden sm:inline">Operational Res.</span>
       </Button>
       <Button variant="ghost" className="p-0">
         Forecast

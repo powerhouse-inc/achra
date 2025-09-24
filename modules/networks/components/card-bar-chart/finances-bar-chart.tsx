@@ -9,7 +9,7 @@ import {
   createTooltipFormatter,
   formatNumberToShortScale,
 } from '../finances-section/utils'
-import type { BarChartSeries, RevenueAndSpendingRecords } from '../finances-section/types'
+import type { BarChartSeries, RevenueAndSpendingRecords } from './types'
 
 interface FinancesBarChartProps {
   revenueAndSpendingData: RevenueAndSpendingRecords
