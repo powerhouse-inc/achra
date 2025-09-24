@@ -25,7 +25,7 @@ export function CardBarChart() {
         </div>
       </div>
       <div className="flex flex-wrap justify-between">
-        <ExternalLink href="https://makerburn.com">makerburn.com</ExternalLink>
+        <ExternalLink href="https://makerburn.com">Risk Dashboard</ExternalLink>
         <InternalLink href="/networks">Details</InternalLink>
       </div>
     </Card>

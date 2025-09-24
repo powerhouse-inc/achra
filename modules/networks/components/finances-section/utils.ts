@@ -1,5 +1,5 @@
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import type { BarChartSeries, RevenueAndSpendingRecords } from './types'
+import type { BarChartSeries, RevenueAndSpendingRecords } from '../card-bar-chart/types'
 
 const tooltipLabels: Record<string, string> = {
   psm: 'PSM',

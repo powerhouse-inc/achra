@@ -16,7 +16,9 @@ export function FinancesSection() {
       </div>
       <div className="flex w-full flex-col items-center gap-4 xl:flex-row xl:gap-8">
         <CardBarChart />
-        <CardStackedAreaChart />
+        <div className="flex w-full">
+          <CardStackedAreaChart />
+        </div>
       </div>
     </div>
   )
