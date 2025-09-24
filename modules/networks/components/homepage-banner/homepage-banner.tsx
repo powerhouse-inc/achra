@@ -17,7 +17,6 @@ export interface HomepageBannerProps {
   description: string
   isLoggedIn?: boolean
   className?: string
-  defaultExpanded?: boolean
 }
 
 export function HomepageBanner({
@@ -25,11 +24,8 @@ export function HomepageBanner({
   description,
   isLoggedIn = false,
   className,
-  defaultExpanded = true,
 }: HomepageBannerProps) {
-  const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner({
-    defaultExpanded,
-  })
+  const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner()
 
   return (
     <Collapsible
