@@ -1,20 +1,29 @@
 import React from 'react'
+import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from './legend-item'
 import { SpendingItem } from './spending-item'
 
 export function SpendingCard() {
   return (
-    <div className="relative flex w-full flex-col gap-4 sm:rounded-xl sm:bg-gray-50 sm:px-1 sm:pt-4 sm:pb-2 lg:flex-row xl:flex-col">
-      <span className="w-full justify-center text-center sm:absolute sm:-top-4 sm:left-6 sm:w-fit sm:rounded-lg sm:bg-white sm:px-2">
+    <div
+      className={cn(
+        'sm:bg-accent xl:h-full  relative flex w-full flex-col gap-4 sm:rounded-xl lg:h-32 lg:flex-row xl:flex-col',
+        // padding
+        'sm:px-2 sm:pt-4 sm:pb-2 xl:pt-4 xl:pb-1',
+      )}
+    >
+      <span className="text-muted-foreground sm:text-popover-foreground sm:bg-popover w-full justify-center text-center text-xs/5 font-medium sm:absolute sm:-top-2 sm:left-6 sm:w-fit sm:rounded-lg sm:px-2 md:text-sm md:leading-5 md:font-semibold xl:text-base xl:leading-6">
         Spending
       </span>
-      <SpendingItem title="Oper Expenses" mobileTitle="Operational Expenses">
-        <ItemLegend color="fill-red-500">USDS Expensed</ItemLegend>
-        <ItemLegend color="fill-red-700">SKY Vesting</ItemLegend>
-      </SpendingItem>
-      <SpendingItem title="Protocol Costs">
-        <ItemLegend color="fill-orange-700">DSR Cost</ItemLegend>
-      </SpendingItem>
+      <div className="flex w-full flex-col gap-4 sm:mt-2 lg:flex-row xl:flex-col">
+        <SpendingItem title="Oper Expenses" mobileTitle="Operational Expenses">
+          <ItemLegend color="fill-destructive/70 text-transparent">USDS Expensed</ItemLegend>
+          <ItemLegend color="fill-destructive text-transparent">SKY Vesting</ItemLegend>
+        </SpendingItem>
+        <SpendingItem title="Protocol Costs">
+          <ItemLegend color="fill-status-warning text-transparent">DSR Cost</ItemLegend>
+        </SpendingItem>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { revenueAndSpendingData } from '@/mocks/networks-mock/revenueAndSpendingData'
-import { ExternalLinkButton } from '@/modules/shared/components/external-link-button/external-link-button'
-import { InternalLinkButton } from '@/modules/shared/components/internal-link-buttoms'
+import { ExternalLink } from '@/modules/shared/components/external-link/external-link'
+import { InternalLink } from '@/modules/shared/components/internal-link/internal-link'
 import { Card, CardTitle } from '@/modules/shared/components/ui/card'
 import { getYearsForChart } from '../finances-section/utils'
 import FinancesBarChart from './finaces-bar-chart'
@@ -25,8 +25,8 @@ export function CardBarChart() {
         </div>
       </div>
       <div className="flex flex-wrap justify-between">
-        <ExternalLinkButton href="https://makerburn.com">makerburn.com</ExternalLinkButton>
-        <InternalLinkButton href="/networks">Details</InternalLinkButton>
+        <ExternalLink href="https://makerburn.com">makerburn.com</ExternalLink>
+        <InternalLink href="/networks">Details</InternalLink>
       </div>
     </Card>
   )

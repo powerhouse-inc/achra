@@ -1,9 +1,9 @@
-import { InternalLinkButton } from './internal-link-buttom'
+import { ExternalLink } from './external-link'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Shared/Components/Buttons/Internal Link Button',
-  component: InternalLinkButton,
+  title: 'Shared/Components/Buttons/External Link Button',
+  component: ExternalLink,
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -12,15 +12,15 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof InternalLinkButton>
+} satisfies Meta<typeof ExternalLink>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
-  name: 'InternalLinkButton',
+  name: 'ExternalLink',
   args: {
-    href: '/',
-    children: 'Internal Link Button',
+    href: 'https://www.google.com',
+    children: 'External Link',
   },
 }
