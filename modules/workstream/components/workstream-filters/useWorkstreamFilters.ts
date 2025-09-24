@@ -1,4 +1,5 @@
 import { parseAsString, parseAsStringEnum, useQueryState } from 'nuqs'
+import { useCallback } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export default function useWorkstreamFilters() {
@@ -11,5 +12,11 @@ export default function useWorkstreamFilters() {
   )
   const [network, setNetwork] = useQueryState('network', parseAsString.withDefault('all'))
 
-  return { search, status, network, setSearch, setStatus, setNetwork }
+  const onReset = useCallback(() => {
+    void setSearch('')
+    void setStatus(WorkstreamStatus.OpenForProposals)
+    void setNetwork('all')
+  }, [setSearch, setStatus, setNetwork])
+
+  return { search, status, network, setSearch, setStatus, setNetwork, onReset }
 }

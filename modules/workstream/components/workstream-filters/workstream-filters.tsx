@@ -1,80 +1,39 @@
 'use client'
 
-import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import SearchInput from '@/modules/shared/components/search-input'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/modules/shared/components/ui/select'
+import { Separator } from '@/modules/shared/components/ui/separator'
+import { NetworkSelect, NetworkSelectDrawer } from './network-select'
+import { StatusSelect, StatusSelectDrawer } from './status-select'
 import useWorkstreamFilters from './useWorkstreamFilters'
 
 export default function WorkstreamFilters() {
-  const { search, status, network, setSearch, setStatus, setNetwork } = useWorkstreamFilters()
+  const { search, status, network, setSearch, setStatus, setNetwork, onReset } =
+    useWorkstreamFilters()
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="grid grid-cols-[1fr_auto] grid-rows-1 gap-4 sm:grid-cols-1 sm:grid-rows-2 md:flex lg:gap-6">
       <SearchInput value={search} onChange={(value) => void setSearch(value)} />
+      <div className="hidden items-center gap-4 sm:flex lg:gap-6">
+        <StatusSelect
+          status={status}
+          setStatus={setStatus}
+          className="sm:flex-1 md:w-full md:max-w-54 md:min-w-54 lg:max-w-64 lg:min-w-64 xl:max-w-75 xl:min-w-75"
+        />
+        <NetworkSelect
+          network={network}
+          setNetwork={setNetwork}
+          className="sm:flex-1 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
+        />
+      </div>
 
-      <Select
-        value={status}
-        onValueChange={(value) => {
-          void setStatus(value as WorkstreamStatus)
-        }}
-      >
-        <SelectTrigger className="bg-background dark:bg-background min-w-64 xl:min-w-75">
-          <SelectValue placeholder="Status" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Status</SelectLabel>
-            <SelectItem value={WorkstreamStatus.RfpDraft}>
-              <WorkstreamStatusChip status={WorkstreamStatus.RfpDraft} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.PreworkRfc}>
-              <WorkstreamStatusChip status={WorkstreamStatus.PreworkRfc} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.RfpCancelled}>
-              <WorkstreamStatusChip status={WorkstreamStatus.RfpCancelled} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.OpenForProposals}>
-              <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.ProposalSubmitted}>
-              <WorkstreamStatusChip status={WorkstreamStatus.ProposalSubmitted} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.Awarded}>
-              <WorkstreamStatusChip status={WorkstreamStatus.Awarded} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.InProgress}>
-              <WorkstreamStatusChip status={WorkstreamStatus.InProgress} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.Finished}>
-              <WorkstreamStatusChip status={WorkstreamStatus.Finished} />
-            </SelectItem>
-            <SelectItem value={WorkstreamStatus.NotAwarded}>
-              <WorkstreamStatusChip status={WorkstreamStatus.NotAwarded} />
-            </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-
-      <Select value={network} onValueChange={(value) => void setNetwork(value)}>
-        <SelectTrigger className="bg-background dark:bg-background min-w-46 xl:min-w-75">
-          <SelectValue placeholder="Network" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All Networks</SelectItem>
-          <SelectItem value="sky">Sky</SelectItem>
-          <SelectItem value="powerhouse">Powerhouse</SelectItem>
-          <SelectItem value="spark">Spark</SelectItem>
-        </SelectContent>
-      </Select>
+      <div className="flex items-center gap-4 sm:hidden">
+        <Separator orientation="vertical" className="h-7!" />
+        <FilterDrawer onReset={onReset}>
+          <NetworkSelectDrawer network={network} setNetwork={setNetwork} />
+          <StatusSelectDrawer status={status} setStatus={setStatus} />
+        </FilterDrawer>
+      </div>
     </div>
   )
 }
