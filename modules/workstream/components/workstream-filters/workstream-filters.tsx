@@ -27,7 +27,7 @@ export default function WorkstreamFilters() {
           void setStatus(value as WorkstreamStatus)
         }}
       >
-        <SelectTrigger className="min-w-64 xl:min-w-75">
+        <SelectTrigger className="bg-background dark:bg-background min-w-64 xl:min-w-75">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
@@ -65,7 +65,7 @@ export default function WorkstreamFilters() {
       </Select>
 
       <Select value={network} onValueChange={(value) => void setNetwork(value)}>
-        <SelectTrigger className="min-w-46 xl:min-w-75">
+        <SelectTrigger className="bg-background dark:bg-background min-w-46 xl:min-w-75">
           <SelectValue placeholder="Network" />
         </SelectTrigger>
         <SelectContent>
