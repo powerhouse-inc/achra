@@ -13,7 +13,6 @@ export default function NetworkPage() {
         description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
         isLoggedIn={true}
       />
-
       <ProposalsSection proposals={PROPOSALS} />
       <RoadmapSection roadmap={mockedRoadmap} />
       <FinancesSection />
