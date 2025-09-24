@@ -12,7 +12,9 @@ export default function RoadmapSection({ roadmap }: RoadmapSectionProps) {
     <section id="roadmap" className="flex flex-col gap-6">
       <SectionTitle title="Roadmap" hash="roadmap" />
       <div className="font-semibold">Tabs component</div>
-      <div className="font-semibold">{roadmap.description}</div>
+      <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
+        {roadmap.description}
+      </div>
       {/* Mobile Roadmap */}
       <div className="relative z-10 flex flex-col gap-6 sm:hidden">
         <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />

@@ -201,6 +201,113 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
       unit: null,
     },
   },
+  {
+    __typename: 'ScopeOfWork_Deliverable',
+    id: 'mvp-deliverable-1',
+    code: 'MVP1',
+    title: 'MVP Platform Core Features',
+    description:
+      'Core platform features for the MVP release including user management, document editing, and basic workflows.',
+    status: ScopeOfWork_DeliverableStatus.InProgress,
+    owner: '93RF8qO5',
+    keyResults: [
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'mvp-kr-1',
+        title: 'User Authentication System',
+        link: 'https://github.com/powerhouse-inc/auth-system',
+      },
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'mvp-kr-2',
+        title: 'Document Editor MVP',
+        link: 'https://github.com/powerhouse-inc/document-editor',
+      },
+    ],
+    workProgress: {
+      __typename: 'ScopeOfWork_Percentage',
+      value: 0.6,
+    },
+    budgetAnchor: {
+      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      project: 'php-project',
+      margin: 0.15,
+      quantity: 1,
+      unitCost: 200000,
+      unit: null,
+    },
+  },
+  {
+    __typename: 'ScopeOfWork_Deliverable',
+    id: 'prod-deliverable-1',
+    code: 'PROD1',
+    title: 'Production Infrastructure Setup',
+    description:
+      'Production-ready infrastructure including monitoring, logging, security, and scalability improvements.',
+    status: ScopeOfWork_DeliverableStatus.Todo,
+    owner: '93RF8qO5',
+    keyResults: [
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'prod-kr-1',
+        title: 'Infrastructure Documentation',
+        link: '',
+      },
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'prod-kr-2',
+        title: 'Security Audit Report',
+        link: 'https://security-audit.example.com',
+      },
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'prod-kr-3',
+        title: 'Performance Benchmarks',
+        link: '',
+      },
+    ],
+    workProgress: {
+      __typename: 'ScopeOfWork_Percentage',
+      value: 0,
+    },
+    budgetAnchor: {
+      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      project: 'php-project',
+      margin: 0.2,
+      quantity: 1,
+      unitCost: 300000,
+      unit: null,
+    },
+  },
+  {
+    __typename: 'ScopeOfWork_Deliverable',
+    id: 'atlas-deliverable-1',
+    code: 'ATLAS1',
+    title: 'Atlas Editor Integration',
+    description: 'Integration of Atlas Editor with automation processes and workflow management.',
+    status: ScopeOfWork_DeliverableStatus.Todo,
+    owner: '11F2ho3q',
+    keyResults: [
+      {
+        __typename: 'ScopeOfWork_KeyResult',
+        id: 'atlas-kr-1',
+        title: 'Atlas Editor Prototype',
+        link: '',
+      },
+    ],
+    workProgress: {
+      __typename: 'ScopeOfWork_Percentage',
+      value: 0,
+    },
+    budgetAnchor: {
+      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      project: 'php-project',
+      margin: 0.1,
+      quantity: 1,
+      unitCost: 100000,
+      unit: null,
+    },
+  },
 ]
 
 // Mocked milestones
@@ -242,7 +349,7 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     coordinators: ['Prometheus', 'teep'],
     scope: {
       __typename: 'ScopeOfWork_DeliverablesSet',
-      deliverables: [],
+      deliverables: ['mvp-deliverable-1'],
       status: ScopeOfWork_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
         __typename: 'ScopeOfWork_DeliverablesCompleted',
@@ -267,7 +374,7 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     coordinators: ['Powerhouse', 'Prometheus'],
     scope: {
       __typename: 'ScopeOfWork_DeliverablesSet',
-      deliverables: [],
+      deliverables: ['prod-deliverable-1'],
       status: ScopeOfWork_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
         __typename: 'ScopeOfWork_DeliverablesCompleted',
@@ -292,7 +399,7 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     coordinators: ['meraki', 'callmeT'],
     scope: {
       __typename: 'ScopeOfWork_DeliverablesSet',
-      deliverables: [],
+      deliverables: ['atlas-deliverable-1'],
       status: ScopeOfWork_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
         __typename: 'ScopeOfWork_DeliverablesCompleted',

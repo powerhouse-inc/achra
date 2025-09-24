@@ -6,45 +6,32 @@ import type { SwiperRef } from 'swiper/react'
 export default function useRoadmapSwiper() {
   const swiperRef = useRef<SwiperRef>(null)
 
-  const adjustCardHeights = useCallback(() => {
-    const cards = Array.from(document.querySelectorAll<HTMLElement>('.swiper-milestone-card'))
-    if (cards.length > 0) {
-      cards.forEach((card) => {
-        card.style.height = 'auto'
+  const adjustElementHeights = useCallback((className: string) => {
+    const elements = Array.from(document.querySelectorAll<HTMLElement>(className))
+    if (elements.length > 0) {
+      elements.forEach((element) => {
+        element.style.height = 'auto'
       })
 
-      let maxCardHeight = 0
-      cards.forEach((card) => {
-        const height = card.getBoundingClientRect().height
-        if (height > maxCardHeight) {
-          maxCardHeight = height
+      let maxHeight = 0
+      elements.forEach((element) => {
+        const height = element.getBoundingClientRect().height
+        if (height > maxHeight) {
+          maxHeight = height
         }
       })
 
-      cards.forEach((card) => {
-        card.style.height = `${maxCardHeight}px`
-      })
-    }
-
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('.milestone-title-section'))
-    if (sections.length > 0) {
-      sections.forEach((section) => {
-        section.style.height = 'auto'
-      })
-
-      let maxSectionHeight = 0
-      sections.forEach((section) => {
-        const height = section.getBoundingClientRect().height
-        if (height > maxSectionHeight) {
-          maxSectionHeight = height
-        }
-      })
-
-      sections.forEach((section) => {
-        section.style.height = `${maxSectionHeight}px`
+      elements.forEach((element) => {
+        element.style.height = `${maxHeight}px`
       })
     }
   }, [])
+
+  const adjustCardHeights = useCallback(() => {
+    adjustElementHeights('.swiper-milestone-card')
+    adjustElementHeights('.milestone-title-section')
+    adjustElementHeights('.milestone-latest-key-results')
+  }, [adjustElementHeights])
 
   return { adjustCardHeights, swiperRef }
 }
