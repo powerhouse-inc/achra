@@ -1,22 +1,41 @@
 import { InfoIcon } from 'lucide-react'
 import React from 'react'
+import { cn } from '@/modules/shared/lib/utils'
 
 interface SpendingItemProps extends React.PropsWithChildren {
   title: string
   mobileTitle?: string
+  className?: string
 }
 
-export function SpendingItem({ title, mobileTitle, children }: SpendingItemProps) {
+export function SpendingItem({ title, mobileTitle, children, className }: SpendingItemProps) {
   return (
-    <div className="relative flex w-full flex-col items-center rounded-xl border border-gray-200 p-2 pt-3 pr-2 pb-2 pl-4 sm:py-6 sm:pr-4 md:items-start md:justify-center md:bg-none md:pl-8 xl:h-[120px] xl:p-6">
-      <div className="absolute -top-2.5 left-8 flex items-center gap-2 bg-white px-2 md:-top-2 md:rounded-lg md:md:bg-gray-50">
-        <span className="text-xs leading-6 font-medium text-gray-500 md:left-8 md:py-0 md:text-sm md:leading-5 md:font-semibold md:text-gray-600 xl:left-4 xl:text-base xl:leading-6">
-          {mobileTitle && <span className="block md:hidden">{mobileTitle}</span>}
-          <span className={mobileTitle ? 'hidden md:block' : ''}>{title}</span>
+    <div
+      className={cn(
+        'relative flex w-full flex-col items-center rounded-xl sm:items-start md:justify-center md:bg-none xl:px-4 xl:py-1',
+        // border
+        'border border-gray-200',
+        // padding
+        'p-2 pt-3 pr-2 pb-2 pl-4 sm:px-2 sm:py-1.5',
+      )}
+    >
+      <div className="bg-popover sm:bg-accent absolute -top-2.5 left-8 flex items-center gap-2 px-2 sm:-top-3 sm:left-1 sm:px-2 md:rounded-lg">
+        <span
+          className={cn(
+            // text
+            'text-popover-foreground text-xs leading-6 font-medium md:text-sm md:leading-5 md:font-semibold xl:text-sm xl:leading-4',
+            // position
+            'md:left-8 md:py-0 xl:left-4',
+          )}
+        >
+          {mobileTitle && <span className="block sm:hidden">{mobileTitle}</span>}
+          <span className={mobileTitle ? 'hidden sm:block' : ''}>{title}</span>
         </span>
-        <InfoIcon className="h-4 w-4" />
+        <InfoIcon className="text-muted-foreground h-2.5 w-2.5" />
       </div>
-      <div className="flex gap-6 md:flex-col md:gap-4 xl:gap-6">{children}</div>
+      <div className={cn('flex gap-6 sm:flex-col sm:justify-start sm:gap-2', className)}>
+        {children}
+      </div>
     </div>
   )
 }

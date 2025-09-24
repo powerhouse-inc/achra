@@ -9,7 +9,7 @@ interface RoadmapSectionProps {
 
 export default function RoadmapSection({ roadmap }: RoadmapSectionProps) {
   return (
-    <section id="roadmap" className="flex flex-col gap-6">
+    <section className="flex flex-col gap-6">
       <SectionTitle title="Roadmap" hash="roadmap" />
       <div className="font-semibold">Tabs component</div>
       <div className="font-semibold">{roadmap.description}</div>

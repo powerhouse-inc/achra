@@ -47,7 +47,7 @@ export default function SearchInput({
   }, [])
 
   return (
-    <div className="flex w-full items-center justify-between rounded-md bg-gray-100 pr-1 pl-3">
+    <div className="bg-accent flex w-full items-center justify-between rounded-md pr-1 pl-3">
       <div className="flex flex-1 items-center gap-3">
         <div className="h-4 w-4 shrink-0">
           <Search className="text-accent-foreground/30 h-4 w-4" />

@@ -1,7 +1,9 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useMemo, useRef } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
+import { cn } from '@/modules/shared/lib/utils'
 import {
   barChartSeriesConfig,
   createTooltipFormatter,
@@ -17,6 +19,8 @@ interface FinancesBarChartProps {
 function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   const financesBarChartRef = useRef<EChartsOption>(null)
   const isMobile = useIsMobile()
+
+  const isTablet = useMediaQuery('(min-width: 680px) and (max-width: 1024px)')
 
   const { chartSeries } = useMemo(() => {
     const series: Record<string, number[]> = {
@@ -48,7 +52,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
     }
   }, [revenueAndSpendingData])
 
-  const barWidth = 40
+  const barWidth = isMobile ? 24 : isTablet ? 32 : 40
 
   const series = barChartSeriesConfig.map((config) => ({
     data: chartSeries[config.key],
@@ -147,7 +151,17 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   }
 
   return (
-    <div className="relative mt-2 flex h-[216px] w-full flex-col justify-center md:h-[253px] md:w-[385px] lg:w-[526px] xl:h-[360px] xl:min-w-[449px]">
+    <div
+      className={cn(
+        'relative mt-2 flex flex-col justify-center',
+        // Dimensions
+        'h-[216px] w-full',
+        'sm:h-[310px] sm:w-[337px]',
+        'md:h-[290px] md:w-[385px]',
+        'lg:h-[282px] lg:w-[526px]',
+        'lg:w-[526px]',
+      )}
+    >
       <ReactECharts
         ref={financesBarChartRef}
         option={options}
