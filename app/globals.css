@@ -233,7 +233,8 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+.swiper-pagination.swiper-pagination-bullets
+  > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
   background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
