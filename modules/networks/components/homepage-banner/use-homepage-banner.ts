@@ -1,29 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import { HOME_BANNER_EXPANDED_STORAGE_KEY } from './constants'
 
-interface UseHomepageBannerProps {
-  defaultExpanded: boolean
-}
-
-export function useHomepageBanner({ defaultExpanded }: UseHomepageBannerProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded)
+export function useHomepageBanner() {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [storedValue, setStoredValue] = useLocalStorage(HOME_BANNER_EXPANDED_STORAGE_KEY, false, {
+    deserializer(value) {
+      return value !== 'false'
+    },
+  })
   const collapsibleElement = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const storedValue = localStorage.getItem(HOME_BANNER_EXPANDED_STORAGE_KEY)
-    if (storedValue !== null) {
-      const waitForElementStyles = () => {
-        if (collapsibleElement.current) {
-          setIsExpanded(storedValue === 'true')
-        }
-      }
-      requestAnimationFrame(waitForElementStyles)
-    }
+    setIsExpanded(storedValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleIsExpanded = (value: boolean) => {
     setIsExpanded(value)
-    localStorage.setItem(HOME_BANNER_EXPANDED_STORAGE_KEY, value ? 'true' : 'false')
+    setStoredValue(value)
   }
 
   return {

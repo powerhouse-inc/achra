@@ -20,10 +20,6 @@ const meta = {
       control: 'boolean',
       description: 'Whether to show the admin buttons (Edit in Connect)',
     },
-    defaultExpanded: {
-      control: 'boolean',
-      description: 'Whether the banner is expanded by default',
-    },
     className: {
       control: 'text',
       description: 'Additional CSS classes',
@@ -39,23 +35,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Expanded: Story = {}
+export const Default: Story = {}
 
-export const Collapsed: Story = {
+export const Authenticated: Story = {
   args: {
-    defaultExpanded: false,
-  },
-}
-
-export const ExpandedAndAuthenticated: Story = {
-  args: {
-    isLoggedIn: true,
-  },
-}
-
-export const CollapsedAndAuthenticated: Story = {
-  args: {
-    defaultExpanded: false,
     isLoggedIn: true,
   },
 }
