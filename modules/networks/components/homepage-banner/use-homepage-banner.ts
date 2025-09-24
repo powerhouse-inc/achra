@@ -4,7 +4,7 @@ import { HOME_BANNER_EXPANDED_STORAGE_KEY } from './constants'
 
 export function useHomepageBanner() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [storedValue, setStoredValue] = useLocalStorage(HOME_BANNER_EXPANDED_STORAGE_KEY, false, {
+  const [storedValue, setStoredValue] = useLocalStorage(HOME_BANNER_EXPANDED_STORAGE_KEY, true, {
     deserializer(value) {
       return value !== 'false'
     },
