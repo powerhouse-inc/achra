@@ -4,7 +4,7 @@ import { ExternalLink } from '@/modules/shared/components/external-link/external
 import { InternalLink } from '@/modules/shared/components/internal-link/internal-link'
 import { Card, CardTitle } from '@/modules/shared/components/ui/card'
 import { getYearsForChart } from '../finances-section/utils'
-import FinancesBarChart from './finaces-bar-chart'
+import FinancesBarChart from './finances-bar-chart'
 import { FinancesLegends } from './legend-card-section'
 
 export function CardBarChart() {

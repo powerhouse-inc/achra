@@ -21,12 +21,12 @@ export type BudgetKey =
   | 'immutable'
 export type FormattedFinancesData = Record<MetricKey, Record<BudgetKey, number[]>>
 
-interface StacketAreaChartProps {
+interface StackedAreaChartProps {
   years: string[]
   series: StackedAreaSeries[]
 }
 
-function StacketAreaChart({ series, years }: StacketAreaChartProps) {
+function StackedAreaChart({ series, years }: StackedAreaChartProps) {
   const financesLineChartRef = useRef<ReactECharts>(null)
 
   const isMobile = useIsMobile()
@@ -246,7 +246,6 @@ function StacketAreaChart({ series, years }: StacketAreaChartProps) {
     <div className="flex flex-col gap-4 sm:flex-row xl:flex-col xl:gap-[14px]">
       <div
         className={cn(
-          // 'border-2 border-red-500',
           'relative mt-2 flex flex-col items-center justify-center sm:mt-0',
           'h-[216px] w-full min-w-[300px]',
           'sm:h-[280px] sm:w-[337px] sm:min-w-[337px]',
@@ -267,4 +266,4 @@ function StacketAreaChart({ series, years }: StacketAreaChartProps) {
   )
 }
 
-export default StacketAreaChart
+export default StackedAreaChart

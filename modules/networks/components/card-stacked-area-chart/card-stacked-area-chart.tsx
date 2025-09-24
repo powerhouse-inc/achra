@@ -4,9 +4,9 @@ import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
-import { FinacesTabs } from './componentes/finaces-tabs'
-import StacketAreaChart from './componentes/stacket-area-chart'
-import { TabButton } from './componentes/tab-button'
+import { FinacesTabs } from './components/finances-tabs'
+import StackedAreaChart from './components/stacket-area-chart'
+import { TabButton } from './components/tab-button'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
 import { getStackedAreaSeries } from './utils'
 
@@ -31,7 +31,7 @@ export function CardStackedAreaChart() {
         </div>
       </div>
       <div className="flex h-full w-full flex-col gap-4 sm:flex-row lg:gap-6 xl:flex-col xl:gap-4.5">
-        <StacketAreaChart series={series} years={mockYears} />
+        <StackedAreaChart series={series} years={mockYears} />
 
         <div
           className={cn(
