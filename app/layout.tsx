@@ -29,7 +29,7 @@ export default function RootLayout({
           <QueryClientProvider>
             <NuqsAdapter>
               <Navbar />
-              <main className="pt-18 md:pt-21">{children}</main>
+              <div className="pt-18 md:pt-21">{children}</div>
             </NuqsAdapter>
           </QueryClientProvider>
           <Footer />

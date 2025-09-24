@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { PageBackground } from '@/modules/shared/components/page-background'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCard } from '@/modules/workstream/components/workstream-card'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
@@ -6,20 +7,22 @@ import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstrea
 
 export default function WorkstreamsPage() {
   return (
-    <main className="container mt-8 mb-8">
-      <WorkstreamBanner />
-
-      <div className="flex flex-col gap-8">
-        <Suspense fallback={<WorkstreamFiltersSkeleton />}>
-          <WorkstreamFilters />
-        </Suspense>
+    <PageBackground>
+      <main className="container mt-8 mb-8">
+        <WorkstreamBanner />
 
         <div className="flex flex-col gap-8">
-          <WorkstreamCard />
-          <WorkstreamCard />
-          <WorkstreamCard />
+          <Suspense fallback={<WorkstreamFiltersSkeleton />}>
+            <WorkstreamFilters />
+          </Suspense>
+
+          <div className="flex flex-col gap-8">
+            <WorkstreamCard />
+            <WorkstreamCard />
+            <WorkstreamCard />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </PageBackground>
   )
 }
