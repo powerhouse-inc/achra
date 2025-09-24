@@ -8,10 +8,6 @@ import { PROPOSALS_SWIPER_BREAKPOINTS } from './constants'
 import useProposalsSwiper from './use-proposals-swiper'
 import type { Proposal } from '../../proposals-section'
 
-// Swiper styles
-import 'swiper/css'
-import 'swiper/css/pagination'
-
 interface ProposalsSwiperProps {
   proposals: Proposal[]
 }
