@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
+import { TabButton } from '../../../shared/components/tab-button/tab-button'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacket-area-chart'
-import { TabButton } from './components/tab-button'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
 import { TABS, type TabValue } from './type'
 import { getStackedAreaSeries } from './utils'
@@ -14,9 +14,15 @@ import { getStackedAreaSeries } from './utils'
 export function CardStackedAreaChart() {
   const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
   const [activeTab, setActiveTab] = useState<TabValue>(TABS.REALIZED_EXPENSES)
+  const [realizedExpensesFilter, setRealizedExpensesFilter] = useState<'Actuals' | 'Payments'>(
+    'Actuals',
+  )
 
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab)
+  }
+  const handleRealizedExpensesFilterChange = (filter: 'Actuals' | 'Payments') => {
+    setRealizedExpensesFilter(filter)
   }
 
   return (
@@ -33,8 +39,20 @@ export function CardStackedAreaChart() {
         <FinancesTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
         <div className="flex w-full items-end justify-end gap-2 px-4 sm:px-0">
-          <TabButton label="Actuals" onClick={() => {}} isSelect />
-          <TabButton label="Payments" onClick={() => {}} />
+          <TabButton
+            label="Actuals"
+            onClick={() => {
+              handleRealizedExpensesFilterChange('Actuals')
+            }}
+            isSelect={realizedExpensesFilter === 'Actuals'}
+          />
+          <TabButton
+            label="Payments"
+            onClick={() => {
+              handleRealizedExpensesFilterChange('Payments')
+            }}
+            isSelect={realizedExpensesFilter === 'Payments'}
+          />
         </div>
       </div>
       <div className="flex h-full w-full flex-col gap-4 px-4 sm:flex-row sm:px-0 lg:gap-6 xl:flex-col xl:gap-4.5">
