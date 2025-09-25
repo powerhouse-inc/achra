@@ -1,5 +1,3 @@
-'use client'
-
 import { ArrowRight, CalendarClock, FilePenLine, HandCoins, UserCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -21,7 +19,6 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import ProposalApplyCard from './proposal-apply-card'
 import ProposalCardOutline from './proposal-card-outline'
 import ProposalKeyValueElement from './proposal-key-value-element'
@@ -38,8 +35,6 @@ The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, 
 This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
 `
 export default function WorkstreamCard() {
-  const isMobile = useMediaQuery({ to: 'sm' })
-
   return (
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
@@ -84,7 +79,12 @@ export default function WorkstreamCard() {
             value="10K - 25K USD"
           />
           <ProposalKeyValueElement
-            keyValue={isMobile ? 'Deadline' : 'Submission Deadline'}
+            keyValue={
+              <div>
+                <span className="sm:hidden">Deadline</span>
+                <span className="hidden sm:block">Submission Deadline</span>
+              </div>
+            }
             keyIcon={CalendarClock}
             value="12 SEP 2025 @ 12:00 CET"
           />
