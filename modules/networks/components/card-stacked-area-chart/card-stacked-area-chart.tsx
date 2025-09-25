@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
@@ -8,10 +8,17 @@ import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacket-area-chart'
 import { TabButton } from './components/tab-button'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
+import { TABS, type TabValue } from './type'
 import { getStackedAreaSeries } from './utils'
 
 export function CardStackedAreaChart() {
   const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
+  const [activeTab, setActiveTab] = useState<TabValue>(TABS.REALIZED_EXPENSES)
+
+  const handleTabChange = (tab: TabValue) => {
+    setActiveTab(tab)
+  }
+
   return (
     <Card
       className={cn(
@@ -23,7 +30,7 @@ export function CardStackedAreaChart() {
       )}
     >
       <div className="sm:gap:8 flex flex-col gap-4.5 sm:flex-row xl:flex-col xl:gap-2">
-        <FinancesTabs />
+        <FinancesTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
         <div className="flex w-full items-end justify-end gap-2 px-4 sm:px-0">
           <TabButton label="Actuals" onClick={() => {}} isSelect />
