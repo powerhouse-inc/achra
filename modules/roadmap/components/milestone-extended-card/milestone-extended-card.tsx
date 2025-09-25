@@ -5,8 +5,11 @@ import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/swit
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
+import { mockedDeliverables } from '@/modules/roadmap/mocks/roadmap'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
+import Coordinators from './coordinators'
+import LatestKeyResults from './latest-key-results'
 
 interface MilestoneExtendedCardProps {
   milestone: ScopeOfWork_Milestone
@@ -20,6 +23,17 @@ export default function MilestoneExtendedCard({
   const progress = useMemo(() => {
     return getProgressPercentage(milestone.scope?.progress)
   }, [milestone.scope?.progress])
+
+  const keyResults = useMemo(() => {
+    if (!milestone.scope?.deliverables) return []
+
+    const allKeyResults = milestone.scope.deliverables.flatMap((deliverableId) => {
+      const deliverable = mockedDeliverables.find((d) => d.id === deliverableId)
+      return deliverable?.keyResults ?? []
+    })
+
+    return allKeyResults.slice(0, 3)
+  }, [milestone.scope?.deliverables])
 
   return (
     <Card
@@ -40,6 +54,8 @@ export default function MilestoneExtendedCard({
       <CardContent className="mx-2 mt-2 flex flex-1 flex-col gap-1 p-0">
         <MilestoneTitleSection title={milestone.title} description={milestone.description} />
         <MilestoneStatusSection status={milestone.scope?.status} progress={progress} />
+        <Coordinators coordinators={milestone.coordinators} />
+        <LatestKeyResults keyResults={keyResults} />
       </CardContent>
     </Card>
   )
