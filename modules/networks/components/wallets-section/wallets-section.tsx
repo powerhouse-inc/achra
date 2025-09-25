@@ -2,6 +2,7 @@
 
 import { cn } from '@/shared/lib/utils'
 import SectionTitle from '../section-title/section-title'
+import { WalletsCard } from './components/wallets-card/wallets-card'
 
 export interface Wallet {
   id: string
@@ -9,7 +10,7 @@ export interface Wallet {
   address: string
   usdsBalance: string
   skyBalance: string
-  isConnected: boolean
+  image: string
 }
 
 export interface WalletsSectionProps {
@@ -17,7 +18,7 @@ export interface WalletsSectionProps {
   className?: string
 }
 
-export default function WalletsSection({ wallets, className }: WalletsSectionProps) {
+export function WalletsSection({ wallets, className }: WalletsSectionProps) {
   return (
     <section
       className={cn(
@@ -25,9 +26,8 @@ export default function WalletsSection({ wallets, className }: WalletsSectionPro
         className,
       )}
     >
-      <div className="flex flex-col">
-        <SectionTitle title="Wallets" hash="wallets" />
-      </div>
+      <SectionTitle title="Wallets" hash="wallets" />
+      <WalletsCard wallets={wallets} />
     </section>
   )
 }

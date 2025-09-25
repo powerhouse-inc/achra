@@ -27,7 +27,7 @@ function StripedCardTitle({ className, ...props }: React.ComponentProps<'div'>) 
   return (
     <div
       data-slot="card-title"
-      className={cn('text-accent-foreground self-center leading-6 font-semibold', className)}
+      className={cn('text-accent-foreground self-center text-base/6 font-semibold', className)}
       {...props}
     />
   )
@@ -37,10 +37,7 @@ function StripedCardAction({ className, ...props }: React.ComponentProps<'div'>)
   return (
     <div
       data-slot="card-action"
-      className={cn(
-        'col-start-2 row-span-2 row-start-1 self-center self-start justify-self-end',
-        className,
-      )}
+      className={cn('col-start-2 row-span-2 row-start-1 self-center justify-self-end', className)}
       {...props}
     />
   )
