@@ -23,3 +23,8 @@ export const TABS_CONFIG = [
     className: 'rounded-tr-lg sm:rounded-none',
   },
 ]
+
+export enum REALIZED_EXPENSES_FILTER {
+  ACTUALS = 'Actuals',
+  PAYMENTS = 'Payments',
+}
