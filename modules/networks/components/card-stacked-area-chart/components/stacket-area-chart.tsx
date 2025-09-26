@@ -6,6 +6,7 @@ import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import { formatNumberToShortScale } from '../../finances-section/utils'
 import type { BarChartSeries } from '../../card-bar-chart/types'
+
 import type { StackedAreaSeries } from '../type'
 
 export type MetricKey = 'Actuals' | 'PaymentsOnChain' | 'Forecast' | 'OperationalReserves'
@@ -55,16 +56,15 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       show: !isMobile,
       trigger: 'axis',
       borderRadius: 12,
-      backgroundColor: '#F2F4F7',
+      backgroundColor: 'var(--color-muted)',
       axisPointer: {
         type: 'shadow',
         shadowStyle: {
-          color: '#D4D9E1',
           opacity: 0.15,
         },
       },
       padding: 0,
-      borderColor: '#F2F4F7',
+      borderColor: 'var(--color-muted)',
       position: (
         point: number[],
         params: EChartsOption,
@@ -110,8 +110,8 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         }
         const noZeroValues = paramsArray.filter((item) => item.value !== 0)
         return `
-          <div style="background-color:#F2F4F7;box-shadow:none;padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px; font-family:Inter ,sans-serif">
-            <div style="margin-bottom:8px;font-size:16px;font-weight:600;color:#8391A7;line-height:24px;">${noZeroValues[0]?.name}</div>
+          <div style="background-color:var(--secondary);box-shadow:none;padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px; font-family:Inter,sans-serif">
+            <div style="margin-bottom:8px;font-size:16px;font-weight:600;color:var(--color-muted-foreground);line-height:24px;">${noZeroValues[0]?.name}</div>
             <div style="display:flex;flex-direction:${flexDirection};gap:${gap}px;min-width:194px;max-width:450px;flex-wrap:wrap;">
               ${noZeroValues
                 .reverse()
@@ -121,8 +121,8 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 13 13" fill="none">
                     <circle cx="6.5" cy="6.5" r="4" fill="${item.color}" />
                   </svg>
-                  <span style="font-size:14px;font-weight:600;line-height:22px;color:#9DA6B9;max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.seriesName}:</span>
-                  <span style="font-size:14px;margin-left:4px;font-weight:600;line-height:22px;color:#252A34;">${item.value.toLocaleString()}</span>
+                  <span style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.seriesName}:</span>
+                  <span style="font-size:14px;margin-left:4px;font-weight:600;line-height:22px;color:var(--color-foreground)">${item.value.toLocaleString()}</span>
                 </div>`,
                 )
                 .join('')}
@@ -152,17 +152,17 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       ],
       axisLine: {
         lineStyle: {
-          color: '#B6BCC2',
+          color: 'var(--color-input)',
         },
       },
       axisTick: { show: false },
       axisLabel: {
         margin: 4,
-        fontFamily: 'OpenSansCondensed, san-serif',
+        fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
-        lineHeight: isMobile ? 16 : 19,
-        color: '#B6BCC2',
+        lineHeight: isMobile ? 16 : 14,
+        color: 'var(--color-muted-foreground)',
         interval: 0,
         formatter: (value: string) => {
           const [quarterly, year] = value.split('-')
@@ -183,14 +183,14 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
               : isTablet640 || isDesktop760
                 ? [2, -1, 22, 16]
                 : [2, 0, 20, 20],
-            fontFamily: 'OpenSansCondensed, san-serif',
-            color: '#B6BCC2',
+            fontFamily: 'Open Sans Condensed, sans-serif',
+            color: 'var(--color-muted-foreground)',
           },
           year: {
             fontSize: isMobile ? 10 : 14,
-            fontFamily: 'OpenSansCondensed, san-serif',
+            fontFamily: 'Open Sans Condensed, sans-serif',
             fontWeight: 700,
-            color: '#B6BCC2',
+            color: 'var(--color-foreground)',
             lineHeight: 22,
             padding: isMobile
               ? [0, 0, 10, 20]
@@ -204,7 +204,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       splitLine: {
         show: true,
         lineStyle: {
-          color: '#B6BCC2',
+          color: 'var(--color-muted-foreground)',
           type: 'line',
           width: 1,
         },
@@ -214,23 +214,23 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       splitLine: {
         lineStyle: {
           type: 'line',
-          color: '#D4D9E1',
+          color: 'var(--color-muted-foreground)',
         },
       },
       axisLine: {
         show: true,
         lineStyle: {
-          color: '#D4D9E1',
+          color: 'var(--color-muted-foreground)',
         },
       },
       axisLabel: {
         width: 48,
         margin: 16,
-        fontFamily: 'OpenSansCondensed, san-serif',
+        fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
-        fontSize: isMobile ? 12 : 14,
-        lineHeight: isMobile ? 16 : 19,
-        color: '#B6BCC2',
+        fontSize: 14,
+        lineHeight: 14,
+        color: 'var(--color-foreground)',
         formatter: (value: number, index: number) => {
           if (value === 0 && index === 0) {
             return value.toString()

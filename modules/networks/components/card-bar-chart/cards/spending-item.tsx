@@ -14,7 +14,7 @@ export function SpendingItem({ title, mobileTitle, children, className }: Spendi
       className={cn(
         'relative flex w-full flex-col items-center rounded-xl sm:items-start md:justify-center md:bg-none xl:px-4 xl:py-1',
         // border
-        'border border-gray-200',
+        'border-input border',
         // padding
         'p-2 pt-3 pr-2 pb-2 pl-4 sm:px-2 sm:py-1.5',
       )}

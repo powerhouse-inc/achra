@@ -9,7 +9,7 @@ export function RevenueCard() {
         className={cn(
           'sm:bg-accent relative flex flex-col items-center rounded-xl px-4 py-2 sm:items-start',
           // border
-          'border border-gray-200 sm:rounded-xl sm:border-none',
+          'border-border border sm:rounded-xl sm:border-none',
           // padding
           'h-full sm:p-4 md:py-4 md:pr-4 md:pl-8 xl:h-full xl:px-6 xl:py-4',
         )}
