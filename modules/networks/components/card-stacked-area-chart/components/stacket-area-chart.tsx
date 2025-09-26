@@ -50,7 +50,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
             ? 470
             : isDesk1280
               ? 595
-              : 600,
+              : 645,
     },
     tooltip: {
       show: !isMobile,
@@ -161,7 +161,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
-        lineHeight: isMobile ? 16 : 14,
+        lineHeight: 18,
         color: 'var(--color-muted-foreground)',
         interval: 0,
         formatter: (value: string) => {
@@ -228,8 +228,8 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         margin: 16,
         fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
-        fontSize: 14,
-        lineHeight: 14,
+        fontSize: isMobile ? 12 : 14,
+        lineHeight: isMobile ? 16 : 19,
         color: 'var(--color-foreground)',
         formatter: (value: number, index: number) => {
           if (value === 0 && index === 0) {
@@ -252,7 +252,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
           'md:h-[280px] md:w-[385px] md:min-w-[385px]',
           'lg:h-[296px] lg:w-[526px] lg:min-w-[526px]',
           'xl:h-[380px] xl:w-[655px] xl:min-w-[655px]',
-          '2xl:h-[382px] 2xl:w-[601px]',
+          '2xl:h-[382px] 2xl:w-[704px]',
         )}
       >
         <ReactECharts
