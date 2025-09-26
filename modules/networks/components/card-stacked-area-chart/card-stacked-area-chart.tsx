@@ -7,7 +7,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacket-area-chart'
-import { TABS } from './constants'
+import { REALIZED_EXPENSES_FILTER, TABS } from './constants'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
 import { getStackedAreaSeries } from './utils'
 import type { TabValue } from './type'
@@ -15,21 +15,21 @@ import type { TabValue } from './type'
 export function CardStackedAreaChart() {
   const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
   const [activeTab, setActiveTab] = useState<TabValue>(TABS.REALIZED_EXPENSES)
-  const [realizedExpensesFilter, setRealizedExpensesFilter] = useState<'Actuals' | 'Payments'>(
-    'Actuals',
+  const [realizedExpensesFilter, setRealizedExpensesFilter] = useState<REALIZED_EXPENSES_FILTER>(
+    REALIZED_EXPENSES_FILTER.ACTUALS,
   )
 
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab)
   }
-  const handleRealizedExpensesFilterChange = (filter: 'Actuals' | 'Payments') => {
+  const handleRealizedExpensesFilterChange = (filter: REALIZED_EXPENSES_FILTER) => {
     setRealizedExpensesFilter(filter)
   }
 
   return (
     <Card
       className={cn(
-        'bg-popover w-full overflow-hidden overflow-y-auto rounded-lg shadow-lg',
+        'bg-popover w-full overflow-hidden rounded-lg shadow-lg',
         // Padding
         'pt-0 pb-4 sm:p-4 lg:px-6 xl:px-4 xl:pt-4 xl:pb-6 2xl:px-6 2xl:pt-4 2xl:pb-6',
         // gap
@@ -43,16 +43,16 @@ export function CardStackedAreaChart() {
           <TabButton
             label="Actuals"
             onClick={() => {
-              handleRealizedExpensesFilterChange('Actuals')
+              handleRealizedExpensesFilterChange(REALIZED_EXPENSES_FILTER.ACTUALS)
             }}
-            isSelect={realizedExpensesFilter === 'Actuals'}
+            isSelect={realizedExpensesFilter === REALIZED_EXPENSES_FILTER.ACTUALS}
           />
           <TabButton
             label="Payments"
             onClick={() => {
-              handleRealizedExpensesFilterChange('Payments')
+              handleRealizedExpensesFilterChange(REALIZED_EXPENSES_FILTER.PAYMENTS)
             }}
-            isSelect={realizedExpensesFilter === 'Payments'}
+            isSelect={realizedExpensesFilter === REALIZED_EXPENSES_FILTER.PAYMENTS}
           />
         </div>
       </div>
