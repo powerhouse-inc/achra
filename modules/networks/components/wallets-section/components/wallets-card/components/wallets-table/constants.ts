@@ -4,6 +4,7 @@ export interface WalletsTableColumn {
   accessorKey: string
   hasSort: boolean
   sortReverse: boolean
+  isNumeric: boolean
 }
 
 export const WALLETS_TABLE_COLUMNS: WalletsTableColumn[] = [
@@ -12,12 +13,14 @@ export const WALLETS_TABLE_COLUMNS: WalletsTableColumn[] = [
     accessorKey: 'name',
     hasSort: true,
     sortReverse: false,
+    isNumeric: false,
   },
   {
     header: 'Address',
     accessorKey: 'address',
     hasSort: true,
     sortReverse: false,
+    isNumeric: false,
   },
   {
     header: 'Balance (USDS)',
@@ -25,6 +28,7 @@ export const WALLETS_TABLE_COLUMNS: WalletsTableColumn[] = [
     accessorKey: 'usdsBalance',
     hasSort: true,
     sortReverse: false,
+    isNumeric: true,
   },
   {
     header: 'Balance (SKY)',
@@ -32,5 +36,6 @@ export const WALLETS_TABLE_COLUMNS: WalletsTableColumn[] = [
     accessorKey: 'skyBalance',
     hasSort: true,
     sortReverse: false,
+    isNumeric: true,
   },
 ]

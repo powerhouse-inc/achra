@@ -10,30 +10,29 @@ import {
   TableHeader,
   TableRow,
 } from '@/modules/shared/components/ui/table'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
-import { WALLETS_TABLE_COLUMNS } from './constants'
 import { SortEnum, useWalletsTable } from './use-wallets-table'
 import type { Wallet } from '../../../../wallets-section'
 
 export interface WalletsTableProps {
   wallets: Wallet[]
+  onCopyAddress: (address: string) => void
   className?: string
 }
 
-export function WalletsTable({ wallets, className }: WalletsTableProps) {
-  const { handleCopyAddress, onSortClick, headersSort, sortedWallets } = useWalletsTable({
-    wallets,
-  })
-
-  const isDesktop = useMediaQuery({ from: 'lg' })
+export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTableProps) {
+  const { onSortClick, headersSort, sortedWallets, proccesedWalletsTableColumns } = useWalletsTable(
+    {
+      wallets,
+    },
+  )
 
   return (
     <Table variant="pills" className={className}>
       <TableHeader>
         <TableRow>
-          {WALLETS_TABLE_COLUMNS.map((column, index) => (
-            <TableHead key={column.accessorKey}>
+          {proccesedWalletsTableColumns.map((column, index) => (
+            <TableHead key={column.accessorKey} className={cn(column.isNumeric && 'text-right')}>
               <Button
                 variant="ghost"
                 onClick={() => {
@@ -47,12 +46,12 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
                     '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
                 )}
               >
-                {!isDesktop && column.shortHeader ? column.shortHeader : column.header}
+                {column.header}
                 <ArrowUpDown className="size-4" />
               </Button>
             </TableHead>
           ))}
-          <TableHead />
+          <TableHead className="text-right" />
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -84,17 +83,21 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
                 <Button
                   variant="icon"
                   size="iconXsm"
-                  onClick={() => void handleCopyAddress(wallet.address)}
+                  onClick={() => {
+                    onCopyAddress(wallet.address)
+                  }}
                 >
                   <Copy className="size-4" />
                 </Button>
               </div>
             </TableCell>
-            <TableCell>{wallet.usdsBalance}</TableCell>
-            <TableCell>{wallet.skyBalance}</TableCell>
-            <TableCell>
-              <Button variant="outline" size="icon">
-                <ArrowRight className="size-4" />
+            <TableCell className="text-right">{wallet.usdsBalance}</TableCell>
+            <TableCell className="text-right">{wallet.skyBalance}</TableCell>
+            <TableCell className="text-right">
+              <Button variant="outline" size="icon" asChild>
+                <Link href="/network/powerhouse#wallets" target="_blank">
+                  <ArrowRight className="size-4" />
+                </Link>
               </Button>
             </TableCell>
           </TableRow>

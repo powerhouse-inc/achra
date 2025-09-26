@@ -13,6 +13,10 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
     setToogleWalletTable(!toogleWalletTable)
   }
 
+  const handleCopyAddress = async (address: string) => {
+    await navigator.clipboard.writeText(address)
+  }
+
   const usdsTotalBalance = useMemo(
     () => calculateTotalBalance({ wallets, balanceKey: 'usdsBalance' }),
     [wallets],
@@ -27,5 +31,6 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
     usdsTotalBalance,
     skyTotalBalance,
     handleToogleWalletTable,
+    handleCopyAddress,
   }
 }

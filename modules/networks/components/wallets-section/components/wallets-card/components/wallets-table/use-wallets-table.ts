@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
 import type { Wallet } from '../../../../wallets-section'
 
@@ -20,10 +21,22 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     ),
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
+  const isDesktop = useMediaQuery({ from: 'lg' })
+  const [proccesedWalletsTableColumns, setProccesedWalletsTableColumns] = useState<
+    Array<Omit<WalletsTableColumn, 'shortHeader'>>
+  >([])
 
-  const handleCopyAddress = async (address: string) => {
-    await navigator.clipboard.writeText(address)
-  }
+  useEffect(() => {
+    setProccesedWalletsTableColumns(
+      WALLETS_TABLE_COLUMNS.map((column) => ({
+        accessorKey: column.accessorKey,
+        hasSort: column.hasSort,
+        sortReverse: column.sortReverse,
+        isNumeric: column.isNumeric,
+        header: !isDesktop && column.shortHeader ? column.shortHeader : column.header,
+      })),
+    )
+  }, [isDesktop])
 
   const onSortClick = useCallback(
     (index: number) => {
@@ -83,9 +96,9 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
   const sortedWallets = useMemo(() => sortWallets(wallets), [wallets, sortWallets])
 
   return {
-    handleCopyAddress,
-    onSortClick,
+    proccesedWalletsTableColumns,
     headersSort,
     sortedWallets,
+    onSortClick,
   }
 }

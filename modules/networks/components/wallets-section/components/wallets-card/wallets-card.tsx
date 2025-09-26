@@ -9,7 +9,9 @@ import {
 } from '@/modules/shared/components/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
+import { WalletsList } from './components/wallets-list/wallets-list'
 import { WalletsTable } from './components/wallets-table/wallets-table'
 import { useWalletsCard } from './use-wallets-card'
 import type { Wallet } from '../../wallets-section'
@@ -20,8 +22,14 @@ export interface WalletsCardProps {
 }
 
 export function WalletsCard({ wallets, className }: WalletsCardProps) {
-  const { toogleWalletTable, usdsTotalBalance, skyTotalBalance, handleToogleWalletTable } =
-    useWalletsCard({ wallets })
+  const {
+    toogleWalletTable,
+    usdsTotalBalance,
+    skyTotalBalance,
+    handleToogleWalletTable,
+    handleCopyAddress,
+  } = useWalletsCard({ wallets })
+  const isMobile = useMediaQuery({ to: 'md' })
   return (
     <StripedCard className={cn('w-full', className)}>
       <StripedCardHeader className="grid-cols-[auto_auto] items-center px-4">
@@ -60,7 +68,9 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
           animate={{
             opacity: toogleWalletTable ? 1 : 0,
             height: toogleWalletTable ? 'auto' : 0,
-            margin: toogleWalletTable ? '0 calc(var(--spacing) * 2)' : 0,
+            margin: toogleWalletTable
+              ? `${isMobile ? 'calc(var(--spacing) * 2)' : '0'} calc(var(--spacing) * 2)`
+              : 0,
           }}
           transition={{
             duration: 0.3,
@@ -69,7 +79,20 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             marginBottom: { duration: 0.3, ease: 'easeInOut' },
           }}
         >
-          <WalletsTable wallets={wallets} className="hidden md:table" />
+          <WalletsTable
+            wallets={wallets}
+            className="hidden md:table"
+            onCopyAddress={(address) => {
+              void handleCopyAddress(address)
+            }}
+          />
+          <WalletsList
+            wallets={wallets}
+            className="block md:hidden"
+            onCopyAddress={(address) => {
+              void handleCopyAddress(address)
+            }}
+          />
         </motion.div>
       </StripedCardContent>
     </StripedCard>
