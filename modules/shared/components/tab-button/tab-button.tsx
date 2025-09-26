@@ -38,8 +38,6 @@ export function TabButton({ label, className, onClick, isSelect = false }: TabsP
           'font-semibold',
           'text-base',
           'leading-6',
-
-          'font-sans',
           'transition-colors',
 
           isSelect
