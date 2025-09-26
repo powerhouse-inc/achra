@@ -12,7 +12,7 @@ export const WALLETS: Wallet[] = [
   {
     id: '2',
     name: 'Powerhouse Treasury',
-    address: '0x12345...ADV313',
+    address: '0x23456...ADV313',
     usdsBalance: '12,000,000',
     skyBalance: '5,550,000',
     image: '/networks/wallet-images/yellow-wallet.png',
@@ -20,7 +20,7 @@ export const WALLETS: Wallet[] = [
   {
     id: '3',
     name: 'Workstream Escrow',
-    address: '0x12345...ADV313',
+    address: '0x34567...ADV313',
     usdsBalance: '750,000',
     skyBalance: '250,000',
     image: '/networks/wallet-images/red-wallet.png',

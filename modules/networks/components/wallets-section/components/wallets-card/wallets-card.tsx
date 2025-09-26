@@ -1,4 +1,5 @@
 import { ChevronUp } from 'lucide-react'
+import { motion } from 'motion/react'
 import {
   StripedCard,
   StripedCardAction,
@@ -9,6 +10,7 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/shared/lib/utils'
+import { WalletsTable } from './components/wallets-table/wallets-table'
 import { useWalletsCard } from './use-wallets-card'
 import type { Wallet } from '../../wallets-section'
 
@@ -52,8 +54,27 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
           </Button>
         </StripedCardAction>
       </StripedCardHeader>
-      <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
-        Content
+      <StripedCardContent className="flex flex-col gap-2 p-0 text-sm leading-5.5 font-semibold">
+        <motion.div
+          initial={{
+            opacity: 0,
+            height: 0,
+            marginBottom: 0,
+          }}
+          animate={{
+            opacity: toogleWalletTable ? 1 : 0,
+            height: toogleWalletTable ? 'auto' : 0,
+            margin: toogleWalletTable ? '0 calc(var(--spacing) * 2)' : 0,
+          }}
+          transition={{
+            duration: 0.3,
+            ease: 'easeInOut',
+            height: { duration: 0.3, ease: 'easeInOut' },
+            marginBottom: { duration: 0.3, ease: 'easeInOut' },
+          }}
+        >
+          <WalletsTable wallets={wallets} />
+        </motion.div>
       </StripedCardContent>
     </StripedCard>
   )
