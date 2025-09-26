@@ -1,15 +1,16 @@
 'use client'
 import React, { useState } from 'react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
+import { TabButton } from '@/modules/shared/components/tab-button/tab-button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import { TabButton } from '../../../shared/components/tab-button/tab-button'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacket-area-chart'
+import { TABS } from './constants'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
-import { TABS, type TabValue } from './type'
 import { getStackedAreaSeries } from './utils'
+import type { TabValue } from './type'
 
 export function CardStackedAreaChart() {
   const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
