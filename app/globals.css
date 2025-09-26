@@ -3,6 +3,7 @@
 @import 'simplebar-react/dist/simplebar.min.css';
 @import 'swiper/css';
 @import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
 @source "../node_modules/streamdown/dist/index.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -57,6 +58,18 @@
   --status-success: oklch(0.7432 0.1665 149.27);
   --status-warning: oklch(0.7873 0.1608 64.84);
   --purple: oklch(59.01% 0.214 296.91);
+
+  /* SWIPER */
+  --swiper-navigation-size: 10px;
+  --swiper-navigation-sides-offset: 4px;
+  --swiper-theme-color: var(--muted-foreground);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --swiper-navigation-size: 14px;
+    --swiper-navigation-sides-offset: 6px;
+  }
 }
 
 .dark {
@@ -107,6 +120,9 @@
   --status-success: oklch(0.7432 0.1665 149.27);
   --status-warning: oklch(0.7873 0.1608 64.84);
   --purple: oklch(59.01% 0.214 296.91);
+
+  /* SWIPER */
+  --swiper-theme-color: var(--muted-foreground);
 }
 
 @theme inline {

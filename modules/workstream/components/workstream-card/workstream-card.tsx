@@ -19,9 +19,9 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import ProposalApplyCard from './proposal-apply-card'
-import ProposalCardOutline from './proposal-card-outline'
+import ProposalCardsGrid from './proposal-cards-grid'
 import ProposalKeyValueElement from './proposal-key-value-element'
+import StatCards from './stat-cards'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
@@ -127,45 +127,7 @@ export default function WorkstreamCard() {
         </div>
 
         {/* stat cards */}
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4 lg:grid-cols-3 lg:gap-6 md:[&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
-          <ProposalCardOutline title="Roadmap">
-            <div className="flex gap-2 text-center">
-              <div className="flex flex-1 flex-col">
-                <div className="text-3xl font-bold">5</div>
-                <div className="text-foreground/50">Milestones</div>
-              </div>
-              <div className="flex flex-1 flex-col">
-                <div className="text-3xl font-bold">37</div>
-                <div className="text-foreground/50">Deliverables</div>
-              </div>
-            </div>
-          </ProposalCardOutline>
-          <ProposalCardOutline title="Budget Estimate" className="pb-6">
-            <div className="flex h-full gap-2 text-center">
-              <div className="flex flex-1 items-end justify-center gap-2">
-                <div className="text-3xl font-bold">18.2</div>
-                <div className="text-foreground/50 text-left leading-4 uppercase">
-                  <div>K</div>
-                  <div>USD</div>
-                </div>
-              </div>
-              <div className="flex flex-1 items-end justify-center gap-2">
-                <div className="text-3xl font-bold">4.0</div>
-                <div className="text-foreground/50 text-left leading-4 uppercase">
-                  <div>K</div>
-                  <div>POWTS</div>
-                </div>
-              </div>
-            </div>
-          </ProposalCardOutline>
-          <ProposalCardOutline title="Payment Terms" className="gap-8">
-            <div className="flex flex-wrap justify-between gap-2 gap-y-3 px-6 text-center text-sm/5.5 uppercase [&>div]:flex-1 [&>div]:whitespace-nowrap">
-              <div>Retainer</div>
-              <div>Monthly</div>
-              <div>Cost & Materials</div>
-            </div>
-          </ProposalCardOutline>
-        </div>
+        <StatCards />
 
         <Button variant="outline" className="ml-auto max-w-fit sm:hidden">
           View Proposal <ArrowRight />
@@ -190,41 +152,7 @@ export default function WorkstreamCard() {
           GraphQL endpoing to provide powerful insight into network activity.
         </p>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4 xl:grid-cols-3 xl:gap-6">
-          <ProposalApplyCard
-            title="D1: Conduct Business Analysis"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['BA', 'Balsamiq', 'UI Design']}
-          />
-          <ProposalApplyCard
-            title="D2: Deploy the smart contracts"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['GraphQL', 'JavaScript', 'UI Design', 'Smart Contracts', 'React']}
-          />
-          <ProposalApplyCard
-            title="D3: Conduct Business Analysis"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['BA', 'Balsamiq', 'UI Design']}
-          />
-          <ProposalApplyCard
-            title="D4: Conduct Business Analysis"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['BA', 'Balsamiq', 'UI Design', 'Smart Contracts']}
-          />
-          <ProposalApplyCard
-            title="D5: Conduct Business Analysis"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['BA', 'Balsamiq', 'UI Design', 'Smart Contracts', 'React', 'Figma']}
-          />
-          <ProposalApplyCard
-            title="D6: Conduct Business Analysis"
-            description="Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam."
-            tags={['BA', 'Balsamiq', 'UI Design', 'Smart Contracts', 'React', 'Figma']}
-          />
-        </div>
-        <div className="flex justify-center pt-2">
-          <Button variant="outline">Load More</Button>
-        </div>
+        <ProposalCardsGrid />
       </div>
 
       <div className="flex flex-col gap-2 p-2 sm:gap-4 sm:p-4">
