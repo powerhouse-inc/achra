@@ -73,16 +73,16 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       show: true,
       trigger: 'axis',
       borderRadius: 12,
-      backgroundColor: '#F2F4F7',
+      backgroundColor: 'var(--color-muted)',
       axisPointer: {
         type: 'shadow',
         shadowStyle: {
-          color: '#D4D9E1',
+          color: 'var(--color-muted-foreground)',
           opacity: 0.15,
         },
       },
       padding: 0,
-      borderColor: '#F2F4F7',
+      borderColor: 'var(--color-muted)',
       formatter: (value: BarChartSeries) => {
         const toolTipStyle = createTooltipFormatter(isMobile)(value)
         return toolTipStyle
@@ -99,7 +99,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       type: 'category',
       axisLine: {
         lineStyle: {
-          color: '#D4D9E1',
+          color: 'var(--color-input)',
         },
       },
       axisTick: {
@@ -107,11 +107,11 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
       axisLabel: {
         margin: 4,
-        fontFamily: 'OpenSansCondensed, san-serif',
+        fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         lineHeight: isMobile ? 16 : 19,
-        color: '#B6BCC2',
+        color: 'var(--color-muted-foreground)',
       },
       axisPointer: {
         show: !isMobile,
@@ -125,20 +125,21 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       type: 'value',
       splitLine: {
         lineStyle: {
-          color: '#B6BCC2',
+          color: 'var(--color-border)',
         },
       },
       axisLine: {
         show: true,
         lineStyle: {
-          color: '#B6BCC2',
+          color: 'var(--color-border)',
         },
       },
+
       axisLabel: {
-        fontFamily: 'OpenSansCondensed, san-serif',
+        fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
-        color: '#B6BCC2',
+        color: 'var(--color-foreground)',
         formatter(value: number, index: number) {
           if (value === 0 && index === 0) {
             return value.toString()

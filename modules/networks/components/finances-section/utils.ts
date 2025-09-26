@@ -25,9 +25,9 @@ export const createTooltipFormatter =
       const noZeroValues = params.filter((item) => item.value !== 0)
 
       return `
-  <div style="background-color:#F2F4F7;box-shadow:'none'
+  <div style="background-color:var(--secondary);box-shadow:'none'
   };padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px; font-family:Inter ,sans-serif">
-    <div style="margin-bottom:8px;font-size:16px;font-weight:600;color:#B6BCC2";line-height:24px;>${noZeroValues[0]?.name}</div>
+    <div style="margin-bottom:8px;font-size:16px;font-weight:600;color:var(--color-muted-foreground)";line-height:24px;>${noZeroValues[0]?.name}</div>
     <div style="display:flex;flex-direction:${flexDirection};gap:${gap}px;min-width:194px;max-width:450px;flex-wrap:wrap;">
       ${noZeroValues
         .reverse()
@@ -39,10 +39,10 @@ export const createTooltipFormatter =
           }" viewBox="0 0 13 13" fill="none">
             <circle cx="6.5" cy="6.5" r="4" fill="${item.color}" />
           </svg>
-          <span style="font-size:14px;font-weight:600;line-height:22px;color:#B6BCC2;max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> ${getCorrectLabelForToolTip(
+          <span style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"> ${getCorrectLabelForToolTip(
             item.seriesName,
           )}:</span>
-          <span style="font-size:14px;margin-left:4px;font-weight:600;line-height:22px;color:#343839">${usLocalizedNumber(item.value, 2)}</span>
+          <span style="font-size:14px;margin-left:4px;font-weight:600;line-height:22px;color:var(--color-foreground)">${usLocalizedNumber(item.value, 2)}</span>
         </div>`,
         )
         .join('')}
@@ -51,7 +51,7 @@ export const createTooltipFormatter =
   `
     } else {
       return `
-    <div style="background-color:#F2F4F7;box-shadow:'none'
+    <div style="background-color:var(--color-muted);box-shadow:'none'
     };box-shadow:'none'
     };padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px;font-family:Inter, sans-serif">
       <div style="display:flex;flex-direction:column;gap:8px;min-width:194px;max-width:450px;">
@@ -63,21 +63,21 @@ export const createTooltipFormatter =
             }" viewBox="0 0 13 13" fill="none">
                  <circle cx="6.5" cy="6.5" r="4" fill="${params.color}" />
            </svg>
-            <span style="font-size:14px;font-weight:600;line-height:22px;color:#B6BCC2;
+            <span style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);
             };max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${getCorrectLabelForToolTip(
               params.seriesName,
             )}:</span>
           </div>
 
-          <span style="font-size:14px;font-weight:600;line-height:22px;color:#EDEFFF;
+          <span style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);
           };">30%</span>
         </div>
 
         <div style="display: flex;justify-content: space-between;align-items: center">  
           <div style="display:flex;align-items:center">
-            <span style="font-size:14px;font-weight:600;line-height:22px;color:#B6BCC2;max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Total:</span>
+            <span style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);max-width:350px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Total:</span>
           </div>
-          <div style="font-size:14px;font-weight:600;line-height:22px;color:#EDEFFF;
+          <div style="font-size:14px;font-weight:600;line-height:22px;color:var(--color-muted-foreground);
           };">${usLocalizedNumber(params.value, 2)}</div>
         </div>
 

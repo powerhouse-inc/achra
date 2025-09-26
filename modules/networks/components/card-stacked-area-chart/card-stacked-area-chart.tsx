@@ -25,7 +25,6 @@ export function CardStackedAreaChart() {
   const handleRealizedExpensesFilterChange = (filter: REALIZED_EXPENSES_FILTER) => {
     setRealizedExpensesFilter(filter)
   }
-
   return (
     <Card
       className={cn(
@@ -39,7 +38,12 @@ export function CardStackedAreaChart() {
       <div className="sm:gap:8 flex flex-col gap-4.5 sm:flex-row xl:flex-col xl:gap-2">
         <FinancesTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
-        <div className="flex w-full items-end justify-end gap-2 px-4 sm:px-0">
+        <div
+          className={cn(
+            'flex w-full items-end justify-end gap-2 px-4 sm:px-0',
+            activeTab === TABS.REALIZED_EXPENSES ? 'visible' : 'invisible',
+          )}
+        >
           <TabButton
             label="Actuals"
             onClick={() => {
