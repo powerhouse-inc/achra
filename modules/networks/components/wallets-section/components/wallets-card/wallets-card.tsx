@@ -25,21 +25,17 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
   return (
     <StripedCard className={cn('w-full', className)}>
       <StripedCardHeader className="grid-cols-[auto_auto] items-center px-4">
-        <StripedCardTitle>{`Wallets: ${wallets.length || 0}`}</StripedCardTitle>
-        <StripedCardAction className="flex items-center justify-between gap-10">
-          <div className="flex items-center gap-3.5">
+        <StripedCardTitle className="text-sm/5.5 md:text-base/6">{`Wallets: ${wallets.length || 0}`}</StripedCardTitle>
+        <StripedCardAction className="flex items-center justify-between gap-6 md:gap-8 lg:gap-10">
+          <div className="flex flex-col items-end gap-0 text-sm/5.5 md:flex-row md:items-center md:gap-2 xl:gap-3.5 xl:text-base/6">
             <div className="flex items-center gap-2">
-              <span className="text-accent-foreground text-base/6 font-semibold">
-                {usdsTotalBalance}
-              </span>
-              <span className="text-accent-foreground/30 text-base/6 font-semibold">USDS</span>
+              <span className="text-accent-foreground font-semibold">{usdsTotalBalance}</span>
+              <span className="text-accent-foreground/30 font-semibold">USDS</span>
             </div>
-            <Separator orientation="vertical" className="h-5.5!" />
+            <Separator orientation="vertical" className="hidden h-5.5! md:block" />
             <div className="flex items-center gap-2">
-              <span className="text-accent-foreground text-base/6 font-semibold">
-                {skyTotalBalance}
-              </span>
-              <span className="text-accent-foreground/30 text-base/6 font-semibold">SKY</span>
+              <span className="text-accent-foreground font-semibold">{skyTotalBalance}</span>
+              <span className="text-accent-foreground/30 font-semibold">SKY</span>
             </div>
           </div>
           <Button
@@ -73,7 +69,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             marginBottom: { duration: 0.3, ease: 'easeInOut' },
           }}
         >
-          <WalletsTable wallets={wallets} />
+          <WalletsTable wallets={wallets} className="hidden md:table" />
         </motion.div>
       </StripedCardContent>
     </StripedCard>

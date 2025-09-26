@@ -10,22 +10,26 @@ import {
   TableHeader,
   TableRow,
 } from '@/modules/shared/components/ui/table'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
-import { SortEnum, WALLETS_TABLE_COLUMNS } from './constants'
-import { useWalletsTable } from './use-wallets-table'
+import { WALLETS_TABLE_COLUMNS } from './constants'
+import { SortEnum, useWalletsTable } from './use-wallets-table'
 import type { Wallet } from '../../../../wallets-section'
 
 export interface WalletsTableProps {
   wallets: Wallet[]
+  className?: string
 }
 
-export function WalletsTable({ wallets }: WalletsTableProps) {
+export function WalletsTable({ wallets, className }: WalletsTableProps) {
   const { handleCopyAddress, onSortClick, headersSort, sortedWallets } = useWalletsTable({
     wallets,
   })
 
+  const isDesktop = useMediaQuery({ from: 'lg' })
+
   return (
-    <Table variant="pills">
+    <Table variant="pills" className={className}>
       <TableHeader>
         <TableRow>
           {WALLETS_TABLE_COLUMNS.map((column, index) => (
@@ -36,14 +40,14 @@ export function WalletsTable({ wallets }: WalletsTableProps) {
                   onSortClick(index)
                 }}
                 className={cn(
-                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground hover:bg-transparent',
+                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! hover:bg-transparent',
                   headersSort[index] === SortEnum.Asc &&
                     '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
                   headersSort[index] === SortEnum.Desc &&
                     '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
                 )}
               >
-                {column.header}
+                {!isDesktop && column.shortHeader ? column.shortHeader : column.header}
                 <ArrowUpDown className="size-4" />
               </Button>
             </TableHead>

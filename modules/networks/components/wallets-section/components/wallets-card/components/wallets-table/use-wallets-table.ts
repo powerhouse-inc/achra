@@ -1,14 +1,23 @@
 import { useCallback, useMemo, useState } from 'react'
-import { SortEnum, WALLETS_TABLE_COLUMNS } from './constants'
+import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
 import type { Wallet } from '../../../../wallets-section'
 
 interface UseWalletsTableProps {
   wallets: Wallet[]
 }
 
+export enum SortEnum {
+  Neutral = 'neutral',
+  Asc = 'asc',
+  Desc = 'desc',
+  Disabled = 'disabled',
+}
+
 export function useWalletsTable({ wallets }: UseWalletsTableProps) {
   const [headersSort, setHeadersSort] = useState<SortEnum[]>(
-    WALLETS_TABLE_COLUMNS.map((column) => (column.hasSort ? SortEnum.Neutral : SortEnum.Disabled)),
+    WALLETS_TABLE_COLUMNS.map((column: WalletsTableColumn) =>
+      column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
+    ),
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
 

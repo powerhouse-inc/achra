@@ -1,11 +1,12 @@
-export enum SortEnum {
-  Neutral = 'neutral',
-  Asc = 'asc',
-  Desc = 'desc',
-  Disabled = 'disabled',
+export interface WalletsTableColumn {
+  header: string
+  shortHeader?: string
+  accessorKey: string
+  hasSort: boolean
+  sortReverse: boolean
 }
 
-export const WALLETS_TABLE_COLUMNS = [
+export const WALLETS_TABLE_COLUMNS: WalletsTableColumn[] = [
   {
     header: 'Name',
     accessorKey: 'name',
@@ -20,12 +21,14 @@ export const WALLETS_TABLE_COLUMNS = [
   },
   {
     header: 'Balance (USDS)',
+    shortHeader: '(USDS)',
     accessorKey: 'usdsBalance',
     hasSort: true,
     sortReverse: false,
   },
   {
     header: 'Balance (SKY)',
+    shortHeader: '(SKY)',
     accessorKey: 'skyBalance',
     hasSort: true,
     sortReverse: false,
