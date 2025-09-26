@@ -1,17 +1,31 @@
 'use client'
 
+import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
 import { cn } from '@/shared/lib/utils'
 
-function Table({ className, ...props }: React.ComponentProps<'table'>) {
+const tableVariants = cva('relative w-full', {
+  variants: {
+    variant: {
+      default: 'overflow-x-auto',
+      pills:
+        'overflow-x-visible [&_table]:text-sm/5.5 xl:[&_table]:text-base/6 [&_table]:border-separate [&_table]:border-spacing-y-2 [&_tr]:rounded-xl [&_tr_th]:py-4 [&_tr_th:first-child]:pl-4 [&_tr_th:last-child]:pr-4 [&_tbody_tr_td]:py-3 [&_tr_td:first-child]:pl-4 [&_tr_td:last-child]:pr-4 [&_thead_tr]:outline [&_thead_tr]:outline-border [&_thead_tr_th]:text-foreground/50 [&_thead]:bg-color-background [&_tr]:shadow-xs',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
+
+function Table({
+  variant,
+  className,
+  ...props
+}: React.ComponentProps<'table'> & VariantProps<typeof tableVariants>) {
   return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto">
-      <table
-        data-slot="table"
-        className={cn('w-full caption-bottom text-sm', className)}
-        {...props}
-      />
+    <div data-slot="table-container" className={cn(tableVariants({ variant }), className)}>
+      <table data-slot="table" className={cn('w-full caption-bottom', className)} {...props} />
     </div>
   )
 }
