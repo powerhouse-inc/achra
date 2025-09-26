@@ -7,9 +7,10 @@ import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacket-area-chart'
 import { TabButton } from './components/tab-button'
+import { TABS } from './constants'
 import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
-import { TABS, type TabValue } from './type'
 import { getStackedAreaSeries } from './utils'
+import type { TabValue } from './type'
 
 export function CardStackedAreaChart() {
   const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
