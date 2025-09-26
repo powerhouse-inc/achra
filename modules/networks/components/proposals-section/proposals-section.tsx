@@ -19,7 +19,7 @@ export interface ProposalsSectionProps {
   className?: string
 }
 
-export default function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
+export function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
   return (
     <section
       className={cn(

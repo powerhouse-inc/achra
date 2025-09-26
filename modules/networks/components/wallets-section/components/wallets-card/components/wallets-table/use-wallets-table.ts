@@ -1,0 +1,104 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
+import type { Wallet } from '../../../../wallets-section'
+
+interface UseWalletsTableProps {
+  wallets: Wallet[]
+}
+
+export enum SortEnum {
+  Neutral = 'neutral',
+  Asc = 'asc',
+  Desc = 'desc',
+  Disabled = 'disabled',
+}
+
+export function useWalletsTable({ wallets }: UseWalletsTableProps) {
+  const [headersSort, setHeadersSort] = useState<SortEnum[]>(
+    WALLETS_TABLE_COLUMNS.map((column: WalletsTableColumn) =>
+      column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
+    ),
+  )
+  const [sortColumn, setSortColumn] = useState<number>(-1)
+  const isDesktop = useMediaQuery({ from: 'lg' })
+  const [proccesedWalletsTableColumns, setProccesedWalletsTableColumns] = useState<
+    Array<Omit<WalletsTableColumn, 'shortHeader'>>
+  >([])
+
+  useEffect(() => {
+    setProccesedWalletsTableColumns(
+      WALLETS_TABLE_COLUMNS.map((column) => ({
+        accessorKey: column.accessorKey,
+        hasSort: column.hasSort,
+        sortReverse: column.sortReverse,
+        isNumeric: column.isNumeric,
+        header: !isDesktop && column.shortHeader ? column.shortHeader : column.header,
+      })),
+    )
+  }, [isDesktop])
+
+  const onSortClick = useCallback(
+    (index: number) => {
+      const sortNeutralState = WALLETS_TABLE_COLUMNS.map((column) =>
+        column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
+      ) as SortEnum[]
+
+      if (headersSort[index] === SortEnum.Neutral) {
+        if (WALLETS_TABLE_COLUMNS[index].sortReverse) {
+          sortNeutralState[index] = SortEnum.Desc
+        } else {
+          sortNeutralState[index] = SortEnum.Asc
+        }
+      } else {
+        sortNeutralState[index] = headersSort[index] === SortEnum.Asc ? SortEnum.Desc : SortEnum.Asc
+      }
+
+      setHeadersSort(sortNeutralState)
+      setSortColumn(index)
+    },
+    [headersSort],
+  )
+
+  const sortWallets = useCallback(
+    (wallets: Wallet[]) => {
+      if (sortColumn === -1) return wallets
+
+      const column = WALLETS_TABLE_COLUMNS[sortColumn]
+      const sortDirection = headersSort[sortColumn]
+
+      if (sortDirection === SortEnum.Neutral || sortDirection === SortEnum.Disabled) {
+        return wallets
+      }
+
+      return [...wallets].sort((a, b) => {
+        let aValue: string | number = a[column.accessorKey as keyof Wallet]
+        let bValue: string | number = b[column.accessorKey as keyof Wallet]
+
+        // Handle numeric sorting for balance columns
+        if (column.accessorKey === 'usdsBalance' || column.accessorKey === 'skyBalance') {
+          aValue = parseFloat(aValue.toString().replace(/,/g, ''))
+          bValue = parseFloat(bValue.toString().replace(/,/g, ''))
+        }
+
+        if (aValue < bValue) {
+          return sortDirection === SortEnum.Asc ? -1 : 1
+        }
+        if (aValue > bValue) {
+          return sortDirection === SortEnum.Asc ? 1 : -1
+        }
+        return 0
+      })
+    },
+    [sortColumn, headersSort],
+  )
+
+  const sortedWallets = useMemo(() => sortWallets(wallets), [wallets, sortWallets])
+
+  return {
+    proccesedWalletsTableColumns,
+    headersSort,
+    sortedWallets,
+    onSortClick,
+  }
+}

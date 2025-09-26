@@ -1,5 +1,5 @@
 import { PROPOSALS } from './mocks/proposals'
-import ProposalsSection from './proposals-section'
+import { ProposalsSection } from './proposals-section'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
