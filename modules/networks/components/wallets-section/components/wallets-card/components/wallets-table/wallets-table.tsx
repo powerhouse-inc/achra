@@ -21,11 +21,15 @@ export interface WalletsTableProps {
 }
 
 export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTableProps) {
-  const { onSortClick, headersSort, sortedWallets, proccesedWalletsTableColumns } = useWalletsTable(
-    {
-      wallets,
-    },
-  )
+  const {
+    handleSortClick,
+    handleRowClick,
+    headersSort,
+    sortedWallets,
+    proccesedWalletsTableColumns,
+  } = useWalletsTable({
+    wallets,
+  })
 
   return (
     <Table variant="pills" className={className}>
@@ -36,7 +40,7 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
               <Button
                 variant="ghost"
                 onClick={() => {
-                  onSortClick(index)
+                  handleSortClick(index)
                 }}
                 className={cn(
                   '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! hover:bg-transparent lg:text-base/6',
@@ -56,7 +60,13 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
       </TableHeader>
       <TableBody>
         {sortedWallets.map((wallet) => (
-          <TableRow key={wallet.id}>
+          <TableRow
+            key={wallet.id}
+            className="cursor-pointer"
+            onClick={() => {
+              handleRowClick(wallet.address)
+            }}
+          >
             <TableCell>{wallet.name}</TableCell>
             <TableCell>
               <div className="flex items-center gap-2">

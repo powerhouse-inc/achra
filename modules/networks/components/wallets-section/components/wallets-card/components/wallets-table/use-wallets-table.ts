@@ -38,7 +38,7 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     )
   }, [isDesktop])
 
-  const onSortClick = useCallback(
+  const handleSortClick = useCallback(
     (index: number) => {
       const sortNeutralState = WALLETS_TABLE_COLUMNS.map((column) =>
         column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
@@ -59,6 +59,11 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     },
     [headersSort],
   )
+
+  const handleRowClick = (address: string) => {
+    // Note: it has not been defined
+    console.log('wallet address:', address)
+  }
 
   const sortWallets = useCallback(
     (wallets: Wallet[]) => {
@@ -99,6 +104,7 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     proccesedWalletsTableColumns,
     headersSort,
     sortedWallets,
-    onSortClick,
+    handleSortClick,
+    handleRowClick,
   }
 }
