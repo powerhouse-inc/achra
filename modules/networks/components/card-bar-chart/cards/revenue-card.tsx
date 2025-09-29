@@ -7,7 +7,7 @@ export function RevenueCard() {
     <div className="flex w-full flex-col gap-2 lg:h-32 xl:h-36">
       <div
         className={cn(
-          'sm:bg-accent relative flex flex-col items-center rounded-xl px-4 py-2 sm:items-start',
+          'sm:bg-accent relative flex flex-col items-center rounded-xl px-4 py-1 sm:items-start',
           // border
           'border-border border sm:rounded-xl sm:border-none',
           // padding

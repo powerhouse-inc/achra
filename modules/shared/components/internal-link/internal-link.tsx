@@ -1,33 +1,29 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-
-import { Button } from '@/shared/components/ui/button'
+import { Button, type buttonVariants } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
+import type { VariantProps } from 'class-variance-authority'
 import type { Route } from 'next'
 
 interface InternalLinkProps {
   href: Route
   children?: React.ReactNode
   className?: string
+  variant?: VariantProps<typeof buttonVariants>['variant']
 }
 
-export function InternalLink({ href, children, className }: InternalLinkProps) {
+export function InternalLink({
+  href,
+  children,
+  className,
+  variant = 'secondary',
+}: InternalLinkProps) {
   return (
-    <Button
-      variant="secondary"
-      asChild
-      className={cn(
-        'group shadow-none transition-all duration-200 ease-in-out hover:gap-4 hover:pr-2',
-        className,
-      )}
-    >
+    <Button variant={variant} asChild className={cn('group/link', className)}>
       <Link href={href}>
-        {children && <span className="text-base font-medium">{children}</span>}
-
-        <div className="flex items-center">
-          <ArrowRight className="h-5 w-5" />
-        </div>
+        {children}{' '}
+        <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
       </Link>
     </Button>
   )

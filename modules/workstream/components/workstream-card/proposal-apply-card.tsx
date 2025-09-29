@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface ProposalApplyCardProps {
@@ -103,11 +104,13 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
 
   return (
     <Card className="rounded-lg p-0 shadow-sm">
-      <CardContent className="flex gap-4 p-3">
+      <CardContent className="flex gap-4 p-2 sm:p-3">
         <div className="w-full">
-          <div className="mb-0.5 text-sm/5.5 font-semibold xl:text-base/6">{title}</div>
-          <div className="text-sm/5.5">{description}</div>
-          <div ref={containerRef} className="mt-4 flex flex-wrap gap-2">
+          <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
+            {title}
+          </div>
+          <div className="line-clamp-2 text-sm/5.5">{description}</div>
+          <div ref={containerRef} className="mt-3 flex flex-wrap gap-2 sm:mt-4">
             {visibleCount === -1 ? (
               <Skeleton className="h-6 w-full" />
             ) : (
@@ -123,9 +126,27 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
                   </div>
                 ))}
                 {hiddenCount > 0 && (
-                  <div className={cn(tagVariants({ variant: 'default' }), 'px-2')}>
-                    +{hiddenCount}
-                  </div>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className={cn(tagVariants({ variant: 'default' }), 'px-2')}>
+                        +{hiddenCount}
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" align="start">
+                      <div className="max-w-64 space-y-1">
+                        <div className="flex flex-wrap gap-2">
+                          {tags.slice(visibleCount).map((tag) => (
+                            <div
+                              key={tag}
+                              className={cn(tagVariants({ variant: getVariant(tag) }), 'text-xs')}
+                            >
+                              {tag}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
                 )}
               </>
             )}

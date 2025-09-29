@@ -1,8 +1,7 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useMemo, useRef } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
 import {
   barChartSeriesConfig,
@@ -18,9 +17,8 @@ interface FinancesBarChartProps {
 
 function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   const financesBarChartRef = useRef<EChartsOption>(null)
-  const isMobile = useIsMobile()
-
-  const isTablet = useMediaQuery('(min-width: 680px) and (max-width: 1024px)')
+  const isMobile = useMediaQuery({ from: 'xs', to: 'sm' })
+  const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
 
   const { chartSeries } = useMemo(() => {
     const series: Record<string, number[]> = {
@@ -89,7 +87,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
     },
     grid: {
-      top: 8,
+      top: isTablet ? 40 : isMobile ? 6 : 40,
       right: 0,
       bottom: 20,
       left: isMobile ? 40 : 49,
@@ -154,13 +152,14 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   return (
     <div
       className={cn(
-        'relative mt-2 flex flex-col justify-center',
+        'relative mt-2 flex flex-col justify-center sm:mt-0',
         // Dimensions
         'h-[216px] w-full',
-        'sm:h-[310px] sm:w-[337px]',
-        'md:h-[290px] md:w-[385px]',
+        'sm:h-[282px] sm:w-[337px]',
+        'md:h-[282px] md:w-[385px]',
         'lg:h-[282px] lg:w-[526px]',
-        'lg:w-[526px]',
+        'xl:h-[386px] xl:w-[449px]',
+        '2xl:h-[386px] 2xl:w-[480px]',
       )}
     >
       <ReactECharts
