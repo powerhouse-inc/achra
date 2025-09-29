@@ -4,25 +4,22 @@ export const WALLETS: Wallet[] = [
   {
     id: '1',
     name: 'Powerhouse Ops',
-    address: '0x12345...ADV313',
+    address: '0x7cB57B5A97eAbe94205C07890BE4c1aD31E486A8',
     usdsBalance: '1,311,031',
     skyBalance: '1,000,000',
-    image: '/networks/wallet-images/blue-wallet.png',
   },
   {
     id: '2',
     name: 'Powerhouse Treasury',
-    address: '0x23456...ADV313',
+    address: '0x9eE79C7C89gCde06427E29012EG6e3cF53G608C',
     usdsBalance: '12,000,000',
     skyBalance: '5,550,000',
-    image: '/networks/wallet-images/yellow-wallet.png',
   },
   {
     id: '3',
     name: 'Workstream Escrow',
-    address: '0x34567...ADV313',
+    address: '0x588562508937B75d8387937259096521586A8310',
     usdsBalance: '750,000',
     skyBalance: '250,000',
-    image: '/networks/wallet-images/red-wallet.png',
   },
 ]

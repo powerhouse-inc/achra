@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Wallet } from '../../../../wallets-section'
+import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsListProps {
-  wallets: Wallet[]
+  wallets: ProccesedWallets[]
   tooltip: string | null
   hoveredRowIndex: number | null
   onCopyAddress: (address: string) => void
@@ -51,7 +51,7 @@ export function WalletsList({
                       target="_blank"
                       className="font-normal text-(--status-progress)"
                     >
-                      {wallet.address}
+                      {wallet.shortAddress}
                     </Link>
                   </div>
                   <Tooltip open={!!tooltip && hoveredRowIndex === index}>

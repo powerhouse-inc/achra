@@ -10,7 +10,6 @@ export interface Wallet {
   address: string
   usdsBalance: string
   skyBalance: string
-  image: string
 }
 
 export interface WalletsSectionProps {

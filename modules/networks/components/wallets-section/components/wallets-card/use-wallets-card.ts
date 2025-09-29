@@ -1,15 +1,29 @@
+import makeBlockie from 'ethereum-blockies-base64'
 import { useMemo, useState } from 'react'
-import { calculateTotalBalance } from './utils'
+import { addressShortener, calculateTotalBalance } from './utils'
 import type { Wallet } from '../../wallets-section'
 
 interface UseWalletsCardProps {
   wallets: Wallet[]
 }
 
+export interface ProccesedWallets extends Wallet {
+  image: string
+  shortAddress: string
+}
+
 export function useWalletsCard({ wallets }: UseWalletsCardProps) {
   const [toogleWalletTable, setToogleWalletTable] = useState(true)
   const [tooltip, setTooltip] = useState<string | null>(null)
   const [hoveredRowIndex, setHoveredRowIndex] = useState<number | null>(null)
+
+  const proccesedWallets: ProccesedWallets[] = useMemo(() => {
+    return wallets.map((wallet) => ({
+      ...wallet,
+      image: makeBlockie(wallet.address),
+      shortAddress: addressShortener(wallet.address),
+    }))
+  }, [wallets])
 
   const handleCopyMouseEnter = (index: number) => {
     setHoveredRowIndex(index)
@@ -43,6 +57,7 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
   )
 
   return {
+    proccesedWallets,
     toogleWalletTable,
     usdsTotalBalance,
     skyTotalBalance,

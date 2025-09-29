@@ -13,10 +13,10 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum, useWalletsTable } from './use-wallets-table'
-import type { Wallet } from '../../../../wallets-section'
+import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsTableProps {
-  wallets: Wallet[]
+  wallets: ProccesedWallets[]
   tooltip: string | null
   hoveredRowIndex: number | null
   onCopyAddress: (address: string) => void
@@ -102,7 +102,7 @@ export function WalletsTable({
                     target="_blank"
                     className="font-normal text-(--status-progress)"
                   >
-                    {wallet.address}
+                    {wallet.shortAddress}
                   </Link>
                 </div>
                 <Tooltip open={!!tooltip && hoveredRowIndex === index}>

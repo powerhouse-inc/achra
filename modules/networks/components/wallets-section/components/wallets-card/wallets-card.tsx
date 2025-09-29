@@ -28,6 +28,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
     skyTotalBalance,
     hoveredRowIndex,
     tooltip,
+    proccesedWallets,
     handleToogleWalletTable,
     handleCopyMouseEnter,
     handleCopyMouseLeave,
@@ -84,7 +85,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
           }}
         >
           <WalletsTable
-            wallets={wallets}
+            wallets={proccesedWallets}
             tooltip={tooltip}
             hoveredRowIndex={hoveredRowIndex}
             className="hidden md:table"
@@ -95,7 +96,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             onCopyMouseLeave={handleCopyMouseLeave}
           />
           <WalletsList
-            wallets={wallets}
+            wallets={proccesedWallets}
             tooltip={tooltip}
             hoveredRowIndex={hoveredRowIndex}
             className="block md:hidden"

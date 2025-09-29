@@ -8,10 +8,12 @@ interface CalculateTotalBalanceParams {
 export const calculateTotalBalance = ({ wallets, balanceKey }: CalculateTotalBalanceParams) => {
   const total = wallets.reduce((acc, wallet) => {
     const cleanValue = wallet[balanceKey].replace(/,/g, '')
-    const numericValue = parseFloat(cleanValue) || 0 // Fallback to 0 if parsing fails
+    const numericValue = parseFloat(cleanValue) || 0
     return acc + numericValue
   }, 0)
-
-  // Format the total with commas
   return total.toLocaleString()
+}
+
+export const addressShortener = (address: string) => {
+  return `${address.slice(0, 7)}...${address.slice(-6)}`
 }
