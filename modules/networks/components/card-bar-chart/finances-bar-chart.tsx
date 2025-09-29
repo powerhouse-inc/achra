@@ -17,7 +17,7 @@ interface FinancesBarChartProps {
 
 function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   const financesBarChartRef = useRef<EChartsOption>(null)
-  const isMobile = useMediaQuery({ to: 'sm' })
+  const isMobile = useMediaQuery({ from: 'xs', to: 'sm' })
   const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
 
   const { chartSeries } = useMemo(() => {
@@ -87,7 +87,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
     },
     grid: {
-      top: isMobile ? 6 : isTablet ? 40 : 6,
+      top: isTablet ? 40 : isMobile ? 6 : 40,
       right: 0,
       bottom: 20,
       left: isMobile ? 40 : 49,
