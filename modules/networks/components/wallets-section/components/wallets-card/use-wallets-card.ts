@@ -27,7 +27,7 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
 
   const handleCopyMouseEnter = (index: number) => {
     setHoveredRowIndex(index)
-    setTooltip('Copy link')
+    setTooltip('Copy Address.')
   }
   const handleCopyMouseLeave = () => {
     setHoveredRowIndex(null)
