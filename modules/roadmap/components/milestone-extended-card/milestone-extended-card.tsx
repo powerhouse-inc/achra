@@ -45,7 +45,7 @@ export default function MilestoneExtendedCard({
         className,
       )}
     >
-      <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none p-2">
+      <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none px-2 py-0.5">
         <div className="text-accent-foreground/30 flex items-center gap-1 text-base/6 font-semibold">
           {milestone.sequenceCode}
         </div>
