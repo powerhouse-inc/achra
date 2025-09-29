@@ -38,7 +38,7 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     )
   }, [isDesktop])
 
-  const onSortClick = useCallback(
+  const handleSortClick = useCallback(
     (index: number) => {
       const sortNeutralState = WALLETS_TABLE_COLUMNS.map((column) =>
         column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
@@ -59,6 +59,10 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     },
     [headersSort],
   )
+
+  const handleRowClick = (address: string) => {
+    window.open(`https://etherscan.io/address/${address}`, '_blank')
+  }
 
   const sortWallets = useCallback(
     (wallets: Wallet[]) => {
@@ -99,6 +103,7 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     proccesedWalletsTableColumns,
     headersSort,
     sortedWallets,
-    onSortClick,
+    handleSortClick,
+    handleRowClick,
   }
 }

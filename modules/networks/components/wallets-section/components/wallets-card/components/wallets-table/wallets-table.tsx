@@ -21,11 +21,15 @@ export interface WalletsTableProps {
 }
 
 export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTableProps) {
-  const { onSortClick, headersSort, sortedWallets, proccesedWalletsTableColumns } = useWalletsTable(
-    {
-      wallets,
-    },
-  )
+  const {
+    handleSortClick,
+    handleRowClick,
+    headersSort,
+    sortedWallets,
+    proccesedWalletsTableColumns,
+  } = useWalletsTable({
+    wallets,
+  })
 
   return (
     <Table variant="pills" className={className}>
@@ -36,10 +40,10 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
               <Button
                 variant="ghost"
                 onClick={() => {
-                  onSortClick(index)
+                  handleSortClick(index)
                 }}
                 className={cn(
-                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! hover:bg-transparent lg:text-base/6',
+                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6',
                   headersSort[index] === SortEnum.Asc &&
                     '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
                   headersSort[index] === SortEnum.Desc &&
@@ -56,8 +60,16 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
       </TableHeader>
       <TableBody>
         {sortedWallets.map((wallet) => (
-          <TableRow key={wallet.id}>
-            <TableCell>{wallet.name}</TableCell>
+          <TableRow
+            key={wallet.id}
+            className="cursor-pointer"
+            onClick={() => {
+              handleRowClick(wallet.address)
+            }}
+          >
+            <TableCell>
+              <span className="text-wrap">{wallet.name}</span>
+            </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
