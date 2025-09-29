@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, FilePenLine, HandCoins, UserCheck } from 'lucide-react'
+import { CalendarClock, FilePenLine, HandCoins, UserCheck } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Streamdown } from 'streamdown'
@@ -8,6 +8,7 @@ import {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -97,10 +98,10 @@ export default function WorkstreamCard() {
               {proposalDescriptionMarkdown}
             </Streamdown>
           </div>
-          <Button variant="outline" className="group/rfp-details ml-auto max-w-fit">
-            RFP Details{' '}
-            <ArrowRight className="transition-transform duration-200 group-hover/rfp-details:translate-x-1" />
-          </Button>
+
+          <InternalLink href="#" className="ml-auto max-w-fit" variant="outline">
+            RFP Details
+          </InternalLink>
         </div>
       </div>
 
@@ -121,17 +122,17 @@ export default function WorkstreamCard() {
               <span>Powerhouse RGH Team</span>
             </div>
           </div>
-          <Button variant="outline" className="hidden sm:inline-flex sm:self-start">
-            View Proposal <ArrowRight />
-          </Button>
+          <InternalLink href="#" className="hidden sm:inline-flex sm:self-start" variant="outline">
+            View Proposal
+          </InternalLink>
         </div>
 
         {/* stat cards */}
         <StatCards />
 
-        <Button variant="outline" className="ml-auto max-w-fit sm:hidden">
-          View Proposal <ArrowRight />
-        </Button>
+        <InternalLink href="#" className="ml-auto max-w-fit sm:hidden" variant="outline">
+          View Proposal
+        </InternalLink>
 
         <Separator />
 
