@@ -43,7 +43,7 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
                   handleSortClick(index)
                 }}
                 className={cn(
-                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! hover:bg-transparent lg:text-base/6',
+                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:!stroke-foreground h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6',
                   headersSort[index] === SortEnum.Asc &&
                     '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
                   headersSort[index] === SortEnum.Desc &&
@@ -67,7 +67,9 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
               handleRowClick(wallet.address)
             }}
           >
-            <TableCell>{wallet.name}</TableCell>
+            <TableCell>
+              <span className="text-wrap">{wallet.name}</span>
+            </TableCell>
             <TableCell>
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
