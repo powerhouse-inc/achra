@@ -11,7 +11,7 @@ export interface WalletsListProps {
   wallets: ProccesedWallets[]
   tooltip: string | null
   hoveredRowIndex: number | null
-  onCopyAddress: (address: string) => void
+  onCopyAddress: (event: React.MouseEvent<HTMLButtonElement>, address: string) => void
   onCopyMouseEnter: (index: number) => void
   onCopyMouseLeave: () => void
   className?: string
@@ -33,8 +33,8 @@ export function WalletsList({
         <div
           key={wallet.id}
           className="flex cursor-pointer flex-col gap-2 rounded-xl p-2 shadow-xs"
-          onClick={() => {
-            handleItemClick(wallet.address)
+          onClick={(event) => {
+            handleItemClick(event, wallet.address)
           }}
         >
           <div className="flex justify-between">
@@ -67,8 +67,8 @@ export function WalletsList({
                       <Button
                         variant="icon"
                         size="iconXsm"
-                        onClick={() => {
-                          onCopyAddress(wallet.address)
+                        onClick={(event) => {
+                          onCopyAddress(event, wallet.address)
                         }}
                         onMouseEnter={() => {
                           onCopyMouseEnter(index)

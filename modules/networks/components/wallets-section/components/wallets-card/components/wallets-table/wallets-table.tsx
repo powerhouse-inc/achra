@@ -19,7 +19,7 @@ export interface WalletsTableProps {
   wallets: ProccesedWallets[]
   tooltip: string | null
   hoveredRowIndex: number | null
-  onCopyAddress: (address: string) => void
+  onCopyAddress: (event: React.MouseEvent<HTMLButtonElement>, address: string) => void
   onCopyMouseEnter: (index: number) => void
   onCopyMouseLeave: () => void
   className?: string
@@ -76,8 +76,8 @@ export function WalletsTable({
           <TableRow
             key={wallet.id}
             className="cursor-pointer"
-            onClick={() => {
-              handleRowClick(wallet.address)
+            onClick={(event) => {
+              handleRowClick(event, wallet.address)
             }}
           >
             <TableCell>
@@ -110,8 +110,8 @@ export function WalletsTable({
                     <Button
                       variant="icon"
                       size="iconXsm"
-                      onClick={() => {
-                        onCopyAddress(wallet.address)
+                      onClick={(event) => {
+                        onCopyAddress(event, wallet.address)
                       }}
                       onMouseEnter={() => {
                         onCopyMouseEnter(index)

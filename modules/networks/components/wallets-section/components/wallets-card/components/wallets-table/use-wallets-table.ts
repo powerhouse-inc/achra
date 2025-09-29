@@ -60,8 +60,10 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     [headersSort],
   )
 
-  const handleRowClick = (address: string) => {
-    window.open(`https://etherscan.io/address/${address}`, '_blank')
+  const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>, address: string) => {
+    if (!(event.target instanceof HTMLAnchorElement)) {
+      window.open(`https://etherscan.io/address/${address}`, '_blank')
+    }
   }
 
   const sortWallets = useCallback(

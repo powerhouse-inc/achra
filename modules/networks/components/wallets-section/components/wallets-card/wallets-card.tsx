@@ -89,8 +89,8 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             tooltip={tooltip}
             hoveredRowIndex={hoveredRowIndex}
             className="hidden md:table"
-            onCopyAddress={(address) => {
-              void handleCopyAddress(address)
+            onCopyAddress={(event, address) => {
+              void handleCopyAddress(event, address)
             }}
             onCopyMouseEnter={handleCopyMouseEnter}
             onCopyMouseLeave={handleCopyMouseLeave}
@@ -100,8 +100,8 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             tooltip={tooltip}
             hoveredRowIndex={hoveredRowIndex}
             className="block md:hidden"
-            onCopyAddress={(address) => {
-              void handleCopyAddress(address)
+            onCopyAddress={(event, address) => {
+              void handleCopyAddress(event, address)
             }}
             onCopyMouseEnter={handleCopyMouseEnter}
             onCopyMouseLeave={handleCopyMouseLeave}

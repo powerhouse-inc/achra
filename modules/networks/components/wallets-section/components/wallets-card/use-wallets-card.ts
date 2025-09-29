@@ -34,7 +34,8 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
     setTooltip(null)
   }
 
-  const handleCopyAddress = async (address: string) => {
+  const handleCopyAddress = async (event: React.MouseEvent<HTMLButtonElement>, address: string) => {
+    event.stopPropagation()
     try {
       await navigator.clipboard.writeText(address)
       setTooltip('Copied!')
