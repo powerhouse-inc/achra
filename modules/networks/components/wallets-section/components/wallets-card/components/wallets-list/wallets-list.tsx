@@ -1,8 +1,8 @@
-import { ArrowRight, Copy } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CopyTooltip } from '@/modules/shared/components/copy-tooltip/copy-tooltip'
 import { Button } from '@/modules/shared/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import { useWalletsList } from './use-wallets-list'
 import type { ProccesedWallets } from '../../use-wallets-card'
@@ -49,8 +49,6 @@ export function WalletsList({
                         alt={wallet.name}
                         fill
                         priority
-                        quality={100}
-                        objectFit="cover"
                         className="absolute"
                       />
                     </div>
@@ -62,31 +60,17 @@ export function WalletsList({
                       {wallet.shortAddress}
                     </Link>
                   </div>
-                  <Tooltip open={!!tooltip && hoveredRowIndex === index}>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="icon"
-                        size="iconXsm"
-                        onClick={(event) => {
-                          onCopyAddress(event, wallet.address)
-                        }}
-                        onMouseEnter={() => {
-                          onCopyMouseEnter(index)
-                        }}
-                        onMouseLeave={onCopyMouseLeave}
-                      >
-                        <Copy className="size-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent
-                      className="pointer-events-none max-w-66"
-                      side="bottom"
-                      align="start"
-                      arrowPadding={16}
-                    >
-                      {tooltip}
-                    </TooltipContent>
-                  </Tooltip>
+                  <CopyTooltip
+                    open={!!tooltip && hoveredRowIndex === index}
+                    tooltip={tooltip}
+                    onTriggerClick={(event) => {
+                      onCopyAddress(event, wallet.address)
+                    }}
+                    onTriggerMouseEnter={() => {
+                      onCopyMouseEnter(index)
+                    }}
+                    onTriggerMouseLeave={onCopyMouseLeave}
+                  />
                 </div>
               </div>
             </div>
