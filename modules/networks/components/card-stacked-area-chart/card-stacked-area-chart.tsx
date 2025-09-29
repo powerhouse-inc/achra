@@ -35,7 +35,7 @@ export function CardStackedAreaChart() {
         'sm:gap:4 gap-2 lg:gap-4 xl:gap-2',
       )}
     >
-      <div className="sm:gap:8 flex flex-col gap-4.5 sm:flex-row xl:flex-col xl:gap-2">
+      <div className="flex flex-col gap-4.5 sm:flex-row sm:gap-8 xl:flex-col xl:gap-2">
         <FinancesTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
         <div

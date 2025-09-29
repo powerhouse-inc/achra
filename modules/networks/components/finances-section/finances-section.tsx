@@ -6,7 +6,7 @@ import SectionTitle from '../section-title/section-title'
 
 export function FinancesSection() {
   return (
-    <div className="mt-6 flex flex-col gap-6 xl:mt-8">
+    <div className="flex flex-col gap-6 xl:mt-8">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <SectionTitle title="Finances" hash="finances" />
         <div className="flex items-center gap-2 text-xs/5 font-semibold xl:text-sm">
@@ -14,7 +14,7 @@ export function FinancesSection() {
           *All values are converted to USDS
         </div>
       </div>
-      <div className="flex w-full flex-col items-center gap-4 xl:flex-row xl:gap-8">
+      <div className="flex w-full flex-col gap-4 xl:flex-row xl:gap-8">
         <CardBarChart />
         <div className="flex w-full">
           <CardStackedAreaChart />
