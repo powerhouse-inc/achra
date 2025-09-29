@@ -8,9 +8,16 @@ interface TabsProps {
   className?: string
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
   isSelect?: boolean
+  size?: 'default' | 'small'
 }
 
-export function TabButton({ label, className, onClick, isSelect = false }: TabsProps) {
+export function TabButton({
+  label,
+  className,
+  onClick,
+  isSelect = false,
+  size = 'default',
+}: TabsProps) {
   return (
     <Button
       variant="default"
@@ -22,7 +29,7 @@ export function TabButton({ label, className, onClick, isSelect = false }: TabsP
         'items-center',
         'rounded-lg',
         'cursor-pointer',
-        'px-6',
+        size === 'small' ? 'px-4' : 'px-6',
         'py-1',
         'transition-colors',
 
