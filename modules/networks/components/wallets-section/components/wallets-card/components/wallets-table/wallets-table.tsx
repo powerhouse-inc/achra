@@ -10,23 +10,36 @@ import {
   TableHeader,
   TableRow,
 } from '@/modules/shared/components/ui/table'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum, useWalletsTable } from './use-wallets-table'
 import type { Wallet } from '../../../../wallets-section'
 
 export interface WalletsTableProps {
   wallets: Wallet[]
+  tooltip: string | null
+  hoveredRowIndex: number | null
   onCopyAddress: (address: string) => void
+  onCopyMouseEnter: (index: number) => void
+  onCopyMouseLeave: () => void
   className?: string
 }
 
-export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTableProps) {
+export function WalletsTable({
+  wallets,
+  className,
+  tooltip,
+  hoveredRowIndex,
+  onCopyMouseEnter,
+  onCopyMouseLeave,
+  onCopyAddress,
+}: WalletsTableProps) {
   const {
-    handleSortClick,
-    handleRowClick,
     headersSort,
     sortedWallets,
     proccesedWalletsTableColumns,
+    handleSortClick,
+    handleRowClick,
   } = useWalletsTable({
     wallets,
   })
@@ -59,7 +72,7 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
         </TableRow>
       </TableHeader>
       <TableBody>
-        {sortedWallets.map((wallet) => (
+        {sortedWallets.map((wallet, index) => (
           <TableRow
             key={wallet.id}
             className="cursor-pointer"
@@ -92,15 +105,31 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
                     {wallet.address}
                   </Link>
                 </div>
-                <Button
-                  variant="icon"
-                  size="iconXsm"
-                  onClick={() => {
-                    onCopyAddress(wallet.address)
-                  }}
-                >
-                  <Copy className="size-4" />
-                </Button>
+                <Tooltip open={!!tooltip && hoveredRowIndex === index}>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="icon"
+                      size="iconXsm"
+                      onClick={() => {
+                        onCopyAddress(wallet.address)
+                      }}
+                      onMouseEnter={() => {
+                        onCopyMouseEnter(index)
+                      }}
+                      onMouseLeave={onCopyMouseLeave}
+                    >
+                      <Copy className="size-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent
+                    className="pointer-events-none max-w-66"
+                    side="bottom"
+                    align="start"
+                    arrowPadding={16}
+                  >
+                    {tooltip}
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </TableCell>
             <TableCell className="text-right">{wallet.usdsBalance}</TableCell>

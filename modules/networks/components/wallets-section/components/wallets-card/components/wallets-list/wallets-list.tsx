@@ -2,19 +2,32 @@ import { ArrowRight, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Wallet } from '../../../../wallets-section'
 
 export interface WalletsListProps {
   wallets: Wallet[]
-  className?: string
+  tooltip: string | null
+  hoveredRowIndex: number | null
   onCopyAddress: (address: string) => void
+  onCopyMouseEnter: (index: number) => void
+  onCopyMouseLeave: () => void
+  className?: string
 }
 
-export function WalletsList({ wallets, className, onCopyAddress }: WalletsListProps) {
+export function WalletsList({
+  wallets,
+  tooltip,
+  hoveredRowIndex,
+  className,
+  onCopyAddress,
+  onCopyMouseEnter,
+  onCopyMouseLeave,
+}: WalletsListProps) {
   return (
     <div className={cn('space-y-2', className)}>
-      {wallets.map((wallet) => (
+      {wallets.map((wallet, index) => (
         <div key={wallet.id} className="flex flex-col gap-2 rounded-xl p-2 shadow-xs">
           <div className="flex justify-between">
             <div className="flex flex-col">
@@ -41,15 +54,31 @@ export function WalletsList({ wallets, className, onCopyAddress }: WalletsListPr
                       {wallet.address}
                     </Link>
                   </div>
-                  <Button
-                    variant="icon"
-                    size="iconXsm"
-                    onClick={() => {
-                      onCopyAddress(wallet.address)
-                    }}
-                  >
-                    <Copy className="size-4" />
-                  </Button>
+                  <Tooltip open={!!tooltip && hoveredRowIndex === index}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="icon"
+                        size="iconXsm"
+                        onClick={() => {
+                          onCopyAddress(wallet.address)
+                        }}
+                        onMouseEnter={() => {
+                          onCopyMouseEnter(index)
+                        }}
+                        onMouseLeave={onCopyMouseLeave}
+                      >
+                        <Copy className="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent
+                      className="pointer-events-none max-w-66"
+                      side="bottom"
+                      align="start"
+                      arrowPadding={16}
+                    >
+                      {tooltip}
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             </div>
