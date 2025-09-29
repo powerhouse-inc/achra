@@ -465,14 +465,32 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
 ]
 
 // Mocked roadmap
-export const mockedRoadmap: ScopeOfWork_Roadmap = {
-  __typename: 'ScopeOfWork_Roadmap',
-  id: 'roadmap-powerhouse-2024',
-  slug: 'powerhouse-2024',
-  title: 'Powerhouse 2024 Roadmap',
-  description: 'Comprehensive roadmap for Powerhouse development and operations in 2024',
-  milestones: mockedMilestones,
-}
+export const mockedRoadmaps: ScopeOfWork_Roadmap[] = [
+  {
+    __typename: 'ScopeOfWork_Roadmap',
+    id: 'roadmap-powerhouse-2024',
+    slug: 'powerhouse-2024',
+    title: 'Powerhouse 2024 Roadmap',
+    description: 'Comprehensive roadmap for Powerhouse development and operations in 2024.',
+    milestones: mockedMilestones,
+  },
+  {
+    __typename: 'ScopeOfWork_Roadmap',
+    id: 'roadmap-powerhouse-2025',
+    slug: 'powerhouse-2025',
+    title: 'Powerhouse 2025 Roadmap',
+    description: 'Comprehensive roadmap for Powerhouse development and operations in 2025.',
+    milestones: mockedMilestones,
+  },
+  {
+    __typename: 'ScopeOfWork_Roadmap',
+    id: 'roadmap-powerhouse-2026',
+    slug: 'powerhouse-2026',
+    title: 'Powerhouse 2026 Roadmap',
+    description: 'Comprehensive roadmap for Powerhouse development and operations in 2026.',
+    milestones: mockedMilestones,
+  },
+]
 
 // Mocked scope of work state
 export const mockedScopeOfWorkState: ScopeOfWork_ScopeOfWorkState = {
@@ -480,7 +498,7 @@ export const mockedScopeOfWorkState: ScopeOfWork_ScopeOfWorkState = {
   title: 'Powerhouse Scope of Work 2024',
   description: 'Comprehensive scope of work for Powerhouse operations and development',
   status: ScopeOfWork_ScopeOfWorkStatus.InProgress,
-  roadmaps: [mockedRoadmap],
+  roadmaps: mockedRoadmaps,
   contributors: mockedContributors,
   deliverables: mockedDeliverables,
   projects: mockedProjects,
