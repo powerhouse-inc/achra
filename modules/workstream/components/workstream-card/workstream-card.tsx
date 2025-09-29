@@ -94,7 +94,7 @@ export default function WorkstreamCard() {
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
           <div className="w-full">
             {/* TODO: Replace it as we can't change the styles of the streamdown component */}
-            <Streamdown className="line-clamp-6 text-xs/4.5 sm:line-clamp-4">
+            <Streamdown className="line-clamp-6 text-xs/4.5 sm:line-clamp-4 sm:text-sm/5.5 xl:text-base/6">
               {proposalDescriptionMarkdown}
             </Streamdown>
           </div>
