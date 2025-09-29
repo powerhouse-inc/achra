@@ -5,7 +5,7 @@ import { ProposalsSection } from '@/modules/networks/components/proposals-sectio
 import { RoadmapSection } from '@/modules/networks/components/roadmap-section'
 import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { WalletsSection } from '@/modules/networks/components/wallets-section/wallets-section'
-import { mockedRoadmap } from '@/modules/roadmap/mocks'
+import { mockedRoadmaps } from '@/modules/roadmap/mocks'
 import { PageBackground } from '@/modules/shared/components/page-background'
 
 export default function NetworkPage() {
@@ -18,7 +18,7 @@ export default function NetworkPage() {
           isLoggedIn={true}
         />
         <ProposalsSection proposals={PROPOSALS} />
-        <RoadmapSection roadmap={mockedRoadmap} />
+        <RoadmapSection roadmaps={mockedRoadmaps} />
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
         <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>

@@ -1,11 +1,14 @@
 'use client'
 
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import { useMemo } from 'react'
 import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { mockedDeliverables } from '@/modules/roadmap/mocks/roadmap'
+import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
 import Coordinators from './coordinators'
@@ -43,12 +46,15 @@ export default function MilestoneExtendedCard({
       )}
     >
       <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none p-2">
-        <div className="text-accent-foreground/30 flex items-center gap-1 font-semibold">
+        <div className="text-accent-foreground/30 flex items-center gap-1 text-base/6 font-semibold">
           {milestone.sequenceCode}
         </div>
-        <div className="flex items-center">
-          <span className="text-accent-foreground/30 font-semibold">Details</span>
-        </div>
+        <Button variant="ghost" asChild>
+          <Link href="/network/powerhouse">
+            Details
+            <ArrowRight className="size-4" />
+          </Link>
+        </Button>
       </CardHeader>
 
       <CardContent className="mx-2 mt-2 flex flex-1 flex-col gap-1 p-0">

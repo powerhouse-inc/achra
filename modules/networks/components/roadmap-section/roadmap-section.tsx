@@ -2,27 +2,48 @@ import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switch
 import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { ROADMAP_TABS_CONFIG } from './constants'
 
 interface RoadmapSectionProps {
-  roadmap: ScopeOfWork_Roadmap
+  roadmaps: ScopeOfWork_Roadmap[]
 }
 
-export default function RoadmapSection({ roadmap }: RoadmapSectionProps) {
+export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
   return (
     <section className="flex flex-col gap-6">
       <SectionTitle title="Roadmap" hash="roadmap" />
-      <div className="font-semibold">Tabs component</div>
-      <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
-        {roadmap.description}
-      </div>
-      {/* Mobile Roadmap */}
-      <div className="relative z-10 flex flex-col gap-6 sm:hidden">
-        <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />
-        {roadmap.milestones.map((milestone) => (
-          <MilestoneExtendedCard key={milestone.id} milestone={milestone} />
+      <Tabs defaultValue="phase-1" className="gap-6">
+        <TabsList className="gap-2 bg-transparent p-0">
+          {ROADMAP_TABS_CONFIG.map((tab) => (
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              className="text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:bg-accent h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold shadow-lg data-[state=active]:shadow-lg lg:text-base/6"
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {roadmaps.map((roadmap, index) => (
+          <TabsContent
+            key={roadmap.id}
+            value={`phase-${index + 1}`}
+            className="flex flex-col gap-6"
+          >
+            <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
+              {roadmap.description}
+            </div>
+            <div className="relative z-10 flex flex-col gap-6 sm:hidden">
+              <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />
+              {roadmap.milestones.map((milestone) => (
+                <MilestoneExtendedCard key={milestone.id} milestone={milestone} />
+              ))}
+            </div>
+            <RoadmapSwiper milestones={roadmap.milestones} />
+          </TabsContent>
         ))}
-      </div>
-      <RoadmapSwiper milestones={roadmap.milestones} />
+      </Tabs>
     </section>
   )
 }
