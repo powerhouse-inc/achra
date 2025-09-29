@@ -11,7 +11,7 @@ import '../app/globals.css'
  * See https://github.com/mswjs/msw-storybook-addon#configuring-msw
  * to learn how to customize it
  */
-initialize()
+initialize({ onUnhandledRequest: 'warn' })
 
 const preview: Preview = {
   decorators: [
