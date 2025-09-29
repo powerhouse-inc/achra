@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
+import { useWalletsList } from './use-wallets-list'
 import type { Wallet } from '../../../../wallets-section'
 
 export interface WalletsListProps {
@@ -12,10 +13,17 @@ export interface WalletsListProps {
 }
 
 export function WalletsList({ wallets, className, onCopyAddress }: WalletsListProps) {
+  const { handleItemClick } = useWalletsList()
   return (
     <div className={cn('space-y-2', className)}>
       {wallets.map((wallet) => (
-        <div key={wallet.id} className="flex flex-col gap-2 rounded-xl p-2 shadow-xs">
+        <div
+          key={wallet.id}
+          className="flex cursor-pointer flex-col gap-2 rounded-xl p-2 shadow-xs"
+          onClick={() => {
+            handleItemClick(wallet.address)
+          }}
+        >
           <div className="flex justify-between">
             <div className="flex flex-col">
               <span className="text-sm/5.5 font-semibold">{wallet.name}</span>

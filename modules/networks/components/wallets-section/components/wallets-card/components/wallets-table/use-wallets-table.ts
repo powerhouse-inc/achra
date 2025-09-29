@@ -61,8 +61,7 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
   )
 
   const handleRowClick = (address: string) => {
-    // Note: it has not been defined
-    console.log('wallet address:', address)
+    window.open(`https://etherscan.io/address/${address}`, '_blank')
   }
 
   const sortWallets = useCallback(
