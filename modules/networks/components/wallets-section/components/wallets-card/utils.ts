@@ -7,9 +7,7 @@ interface CalculateTotalBalanceParams {
 
 export const calculateTotalBalance = ({ wallets, balanceKey }: CalculateTotalBalanceParams) => {
   const total = wallets.reduce((acc, wallet) => {
-    const cleanValue = wallet[balanceKey].replace(/,/g, '')
-    const numericValue = parseFloat(cleanValue) || 0
-    return acc + numericValue
+    return acc + wallet[balanceKey]
   }, 0)
   return total.toLocaleString()
 }

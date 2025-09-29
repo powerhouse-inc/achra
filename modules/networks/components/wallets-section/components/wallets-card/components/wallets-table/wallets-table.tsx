@@ -116,8 +116,8 @@ export function WalletsTable({
                 />
               </div>
             </TableCell>
-            <TableCell className="text-right">{wallet.usdsBalance}</TableCell>
-            <TableCell className="text-right">{wallet.skyBalance}</TableCell>
+            <TableCell className="text-right">{wallet.usdsBalance.toLocaleString()}</TableCell>
+            <TableCell className="text-right">{wallet.skyBalance.toLocaleString()}</TableCell>
             <TableCell className="text-right">
               <Button variant="outline" size="icon" asChild>
                 <Link href="/network/powerhouse#wallets" target="_blank">

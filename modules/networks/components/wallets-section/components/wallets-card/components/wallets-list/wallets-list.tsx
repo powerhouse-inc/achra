@@ -82,11 +82,15 @@ export function WalletsList({
           </div>
           <div className="flex justify-between px-2 py-1">
             <span className="text-foreground/50 text-sm/5.5 font-semibold">Balance (USDS)</span>
-            <span className="text-foreground text-sm/5.5 font-semibold">{wallet.usdsBalance}</span>
+            <span className="text-foreground text-sm/5.5 font-semibold">
+              {wallet.usdsBalance.toLocaleString()}
+            </span>
           </div>
           <div className="flex justify-between px-2 py-1">
             <span className="text-foreground/50 text-sm/5.5 font-semibold">Balance (SKY)</span>
-            <span className="text-foreground text-sm/5.5 font-semibold">{wallet.skyBalance}</span>
+            <span className="text-foreground text-sm/5.5 font-semibold">
+              {wallet.skyBalance.toLocaleString()}
+            </span>
           </div>
         </div>
       ))}

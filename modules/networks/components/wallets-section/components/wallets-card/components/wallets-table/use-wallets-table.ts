@@ -78,14 +78,8 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
       }
 
       return [...wallets].sort((a, b) => {
-        let aValue: string | number = a[column.accessorKey as keyof ProccesedWallets]
-        let bValue: string | number = b[column.accessorKey as keyof ProccesedWallets]
-
-        // Handle numeric sorting for balance columns
-        if (column.accessorKey === 'usdsBalance' || column.accessorKey === 'skyBalance') {
-          aValue = parseFloat(aValue.toString().replace(/,/g, ''))
-          bValue = parseFloat(bValue.toString().replace(/,/g, ''))
-        }
+        const aValue: string | number = a[column.accessorKey as keyof ProccesedWallets]
+        const bValue: string | number = b[column.accessorKey as keyof ProccesedWallets]
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1
