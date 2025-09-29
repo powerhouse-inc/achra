@@ -6,10 +6,6 @@ const meta = {
   component: WorkstreamCard,
   parameters: {
     layout: 'centered',
-    chromatic: {
-      viewports: [375, 640, 768, 1024, 1280, 1536],
-      pauseAnimationAtEnd: true,
-    },
     nextjs: {
       appDirectory: true,
     },
