@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
 import { formatNumberToShortScale } from '../../finances-section/utils'
+import { getLegendSeries } from '../utils'
 import type { BarChartSeries } from '../../card-bar-chart/types'
 
 import type { StackedAreaSeries } from '../type'
@@ -133,24 +134,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       },
     },
     xAxis: {
-      data: [
-        `Q1-${years[0]}`,
-        'Q2',
-        'Q3',
-        'Q4',
-        `Q1-${years[1]}`,
-        'Q2',
-        'Q3',
-        'Q4',
-        `Q1-${years[2]}`,
-        'Q2',
-        'Q3',
-        'Q4',
-        `Q1-${years[3]}`,
-        'Q2',
-        'Q3',
-        'Q4',
-      ],
+      data: getLegendSeries(years),
       axisLine: {
         lineStyle: {
           color: 'var(--color-input)',

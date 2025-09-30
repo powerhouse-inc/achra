@@ -1,4 +1,4 @@
-import type { FormattedFinancesData, MetricKey } from './components/stacket-area-chart'
+import type { FormattedFinancesData, MetricKey } from './components/stacked-area-chart'
 import type { StackedAreaSeries } from './type'
 
 export const getStackedAreaSeries = (
@@ -101,3 +101,22 @@ export const getStackedAreaSeries = (
   ]
   return series
 }
+
+export const getLegendSeries = (years: string[]) => [
+  `Q1-${years[0]}`,
+  'Q2',
+  'Q3',
+  'Q4',
+  `Q1-${years[1]}`,
+  'Q2',
+  'Q3',
+  'Q4',
+  `Q1-${years[2]}`,
+  'Q2',
+  'Q3',
+  'Q4',
+  `Q1-${years[3]}`,
+  'Q2',
+  'Q3',
+  'Q4',
+]
