@@ -1,7 +1,7 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useRef } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import { formatNumberToShortScale } from '../../finances-section/utils'
@@ -31,17 +31,17 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
   const financesLineChartRef = useRef<ReactECharts>(null)
 
   const isMobile = useIsMobile()
-  const isTablet640 = useMediaQuery('(min-width: 640px) and (max-width: 759px)')
-  const isDesktop760 = useMediaQuery('(min-width: 760px) and (max-width: 1023px)')
-  const isDesk1024 = useMediaQuery('(min-width: 1024px) and (max-width: 1279px)')
-  const isDesk1280 = useMediaQuery('(min-width: 1280px) and (max-width: 1439px)')
-  const isDesk1440 = useMediaQuery('(min-width: 1440px)')
+  const isTablet640 = useMediaQuery({ from: 'sm', to: 'md' })
+  const isDesktop760 = useMediaQuery({ from: 'md', to: 'lg' })
+  const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
+  const isDesk1280 = useMediaQuery({ from: 'xl', to: '2xl' })
+  const isDesk1440 = useMediaQuery({ from: '2xl' })
   const options: EChartsOption = {
     grid: {
       top: 8,
       right: 10,
       bottom: 40,
-      left: isTablet640 || isDesktop760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 45,
+      left: isTablet640 || isDesktop760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
       width: isMobile
         ? 'calc(100% - 50px)'
         : isTablet640 || isDesktop760
@@ -246,12 +246,12 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
     <div className="flex flex-col gap-4 sm:flex-row xl:flex-col xl:gap-[14px]">
       <div
         className={cn(
-          'relative mt-2 flex flex-col items-center justify-center sm:mt-0',
-          'h-[216px] w-full min-w-[300px]',
+          'relative flex flex-col items-center justify-center sm:mt-0',
+          'h-[288px] w-full min-w-[327px]',
           'sm:h-[280px] sm:w-[337px] sm:min-w-[337px]',
           'md:h-[280px] md:w-[385px] md:min-w-[385px]',
           'lg:h-[296px] lg:w-[526px] lg:min-w-[526px]',
-          'xl:h-[380px] xl:w-[655px] xl:min-w-[655px]',
+          'xl:h-[382px] xl:w-[655px] xl:min-w-[655px]',
           '2xl:h-[382px] 2xl:w-[704px]',
         )}
       >

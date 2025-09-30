@@ -15,7 +15,7 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
       className={cn(
         'bg-background flex items-center rounded-t-lg shadow-xs sm:bg-transparent sm:shadow-none',
         'sm:w-fit sm:gap-6 sm:rounded-none sm:bg-transparent',
-        'leading-4.5 lg:w-full lg:justify-center lg:gap-8',
+        'leading-4.5 lg:w-full lg:justify-center lg:gap-8 xl:pr-14 2xl:pr-0',
       )}
     >
       {TABS_CONFIG.map((tab) => (
