@@ -29,7 +29,7 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
             'h-auto flex-1 rounded-none border-none px-2 text-xs leading-4.5 font-medium shadow-none transition-colors duration-150 focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 sm:h-[22px] sm:w-auto sm:flex-none sm:p-0 sm:text-sm sm:leading-5.5 sm:hover:bg-transparent lg:h-6 lg:text-base lg:leading-6',
             tab.className,
             activeTab === tab.id
-              ? 'text-accent-foreground bg-accent border-foreground font-bold focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 sm:!bg-transparent sm:hover:!bg-transparent'
+              ? 'text-accent-foreground bg-accent border-foreground font-semibold focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:ring-0 sm:!bg-transparent sm:hover:!bg-transparent'
               : 'text-foreground/50 hover:text-foreground sm:hover:!bg-transparent',
           )}
         >

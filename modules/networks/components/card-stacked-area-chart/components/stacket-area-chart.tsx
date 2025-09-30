@@ -2,7 +2,6 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useRef } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import { formatNumberToShortScale } from '../../finances-section/utils'
 import type { BarChartSeries } from '../../card-bar-chart/types'
@@ -30,27 +29,29 @@ interface StackedAreaChartProps {
 function StackedAreaChart({ series, years }: StackedAreaChartProps) {
   const financesLineChartRef = useRef<ReactECharts>(null)
 
-  const isMobile = useIsMobile()
+  const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet640 = useMediaQuery({ from: 'sm', to: 'md' })
-  const isDesktop760 = useMediaQuery({ from: 'md', to: 'lg' })
+  const isTable760 = useMediaQuery({ from: 'md', to: 'lg' })
   const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesk1280 = useMediaQuery({ from: 'xl', to: '2xl' })
   const isDesk1440 = useMediaQuery({ from: '2xl' })
+
   const options: EChartsOption = {
     grid: {
       top: 8,
       right: 10,
       bottom: 40,
-      left: isTablet640 || isDesktop760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
-      width: isMobile
-        ? 'calc(100% - 50px)'
-        : isTablet640 || isDesktop760
-          ? 330
-          : isDesk1024
-            ? 470
-            : isDesk1280
-              ? 595
-              : 645,
+      left: isTablet640 || isTable760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
+      width:
+        isMobile || isTablet640
+          ? 'calc(100% - 50px)'
+          : isTable760
+            ? 330
+            : isDesk1024
+              ? 470
+              : isDesk1280
+                ? 595
+                : 645,
     },
     tooltip: {
       show: !isMobile,
@@ -77,7 +78,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       ) => {
         const tooltipWidth = size.contentSize[0]
         const containerWidth = size.viewSize[0]
-        const margin = isTablet640 || isDesktop760 ? 0 : 8
+        const margin = isTablet640 || isTable760 ? 0 : 8
 
         let xPos = point[0]
         const yPos = point[1] + margin
@@ -160,7 +161,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         margin: 4,
         fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
-        fontSize: isMobile ? 12 : 14,
+        fontSize: isMobile || isTablet640 ? 12 : 14,
         lineHeight: 18,
         color: 'var(--color-muted-foreground)',
         interval: 0,
@@ -174,29 +175,31 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         rich: {
           quarterly: {
             verticalAlign: 'top',
-            fontSize: isMobile ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 12 : 14,
             fontWeight: 700,
             lineHeight: 22,
             interval: 0,
-            padding: isMobile
-              ? [2, 0, 20, 12]
-              : isTablet640 || isDesktop760
-                ? [2, -1, 22, 16]
-                : [2, 0, 20, 20],
+            padding:
+              isMobile || isTablet640
+                ? [3, 8, 20, 12]
+                : isTable760
+                  ? [2, 14, 20, 20]
+                  : [2, 0, 20, 20],
             fontFamily: 'Open Sans Condensed, sans-serif',
             color: 'var(--color-muted-foreground)',
           },
           year: {
-            fontSize: isMobile ? 10 : 14,
+            fontSize: isMobile || isTablet640 ? 12 : 14,
             fontFamily: 'Open Sans Condensed, sans-serif',
             fontWeight: 700,
             color: 'var(--color-foreground)',
             lineHeight: 22,
-            padding: isMobile
-              ? [0, 0, 10, 20]
-              : isTablet640 || isDesktop760
-                ? [0, 0, 10, 32]
-                : [0, 0, 10, 32],
+            padding:
+              isMobile || isTablet640
+                ? [0, 2, 10, 20]
+                : isTable760
+                  ? [0, 6, 10, 32]
+                  : [0, 0, 10, 32],
           },
         },
       },

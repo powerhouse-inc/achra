@@ -77,11 +77,19 @@ export function CardStackedAreaChart() {
             'h-28 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
           )}
         >
-          {series.map((item) => (
-            <ItemLegend key={item.name} color={item.itemStyle.color}>
-              {item.name}
-            </ItemLegend>
-          ))}
+          {series.map((item) => {
+            return (
+              <ItemLegend
+                style={{
+                  color: item.itemStyle.color,
+                  fill: item.itemStyle.color,
+                }}
+                key={item.name}
+              >
+                {item.name}
+              </ItemLegend>
+            )
+          })}
         </div>
       </div>
 
