@@ -1,4 +1,4 @@
-import type { FormattedFinancesData } from '../components/stacket-area-chart'
+import type { FormattedFinancesData } from '../components/stacked-area-chart'
 
 export const mockFinancesData: FormattedFinancesData = {
   Actuals: {
