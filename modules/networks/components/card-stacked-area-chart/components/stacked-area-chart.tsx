@@ -9,19 +9,6 @@ import type { BarChartSeries } from '../../card-bar-chart/types'
 
 import type { StackedAreaSeries } from '../type'
 
-export type MetricKey = 'Actuals' | 'PaymentsOnChain' | 'Forecast' | 'OperationalReserves'
-export type MetricKeyExtended = MetricKey | 'ProtocolNetOutflow' | 'PaymentsOnChainSum'
-export type BudgetKey =
-  | 'legacyOthers'
-  | 'legacyCoreUnits'
-  | 'governanceScope'
-  | 'stability'
-  | 'support'
-  | 'protocol'
-  | 'accessibility'
-  | 'immutable'
-export type FormattedFinancesData = Record<MetricKey, Record<BudgetKey, number[]>>
-
 interface StackedAreaChartProps {
   years: string[]
   series: StackedAreaSeries[]
