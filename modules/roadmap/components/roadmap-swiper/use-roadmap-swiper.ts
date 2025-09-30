@@ -1,9 +1,10 @@
 'use client'
 
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import type { SwiperRef } from 'swiper/react'
 
 export default function useRoadmapSwiper() {
+  const [isSwiperReady, setIsSwiperReady] = useState(false)
   const swiperRef = useRef<SwiperRef>(null)
 
   const adjustElementHeights = useCallback((className: string) => {
@@ -33,5 +34,10 @@ export default function useRoadmapSwiper() {
     adjustElementHeights('.milestone-latest-key-results')
   }, [adjustElementHeights])
 
-  return { adjustCardHeights, swiperRef }
+  const handleAfterInit = useCallback(() => {
+    adjustCardHeights()
+    setIsSwiperReady(true)
+  }, [adjustCardHeights])
+
+  return { swiperRef, isSwiperReady, handleAfterInit, adjustCardHeights }
 }
