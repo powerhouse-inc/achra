@@ -1,6 +1,7 @@
-import { ArrowRight, ArrowUpDown, Copy } from 'lucide-react'
+import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CopyButton } from '@/modules/shared/components/copy-butoon/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,
@@ -12,21 +13,25 @@ import {
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum, useWalletsTable } from './use-wallets-table'
-import type { Wallet } from '../../../../wallets-section'
+import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsTableProps {
-  wallets: Wallet[]
-  onCopyAddress: (address: string) => void
+  wallets: ProccesedWallets[]
+  tooltip: string | null
+  hoveredRowIndex: number | null
+  onCopyAddress: (event: React.MouseEvent<HTMLButtonElement>, address: string) => void
+  onCopyMouseEnter: (index: number) => void
+  onCopyMouseLeave: () => void
   className?: string
 }
 
-export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTableProps) {
+export function WalletsTable({ wallets, className }: WalletsTableProps) {
   const {
-    handleSortClick,
-    handleRowClick,
     headersSort,
     sortedWallets,
     proccesedWalletsTableColumns,
+    handleSortClick,
+    handleRowClick,
   } = useWalletsTable({
     wallets,
   })
@@ -63,8 +68,8 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
           <TableRow
             key={wallet.id}
             className="cursor-pointer"
-            onClick={() => {
-              handleRowClick(wallet.address)
+            onClick={(event) => {
+              handleRowClick(event, wallet.address)
             }}
           >
             <TableCell>
@@ -79,8 +84,6 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
                       alt={wallet.name}
                       fill
                       priority
-                      quality={100}
-                      objectFit="cover"
                       className="absolute"
                     />
                   </div>
@@ -89,22 +92,14 @@ export function WalletsTable({ wallets, className, onCopyAddress }: WalletsTable
                     target="_blank"
                     className="font-normal text-(--status-progress)"
                   >
-                    {wallet.address}
+                    {wallet.shortAddress}
                   </Link>
                 </div>
-                <Button
-                  variant="icon"
-                  size="iconXsm"
-                  onClick={() => {
-                    onCopyAddress(wallet.address)
-                  }}
-                >
-                  <Copy className="size-4" />
-                </Button>
+                <CopyButton value={wallet.address} tooltip="Copy Address." />
               </div>
             </TableCell>
-            <TableCell className="text-right">{wallet.usdsBalance}</TableCell>
-            <TableCell className="text-right">{wallet.skyBalance}</TableCell>
+            <TableCell className="text-right">{wallet.usdsBalance.toLocaleString()}</TableCell>
+            <TableCell className="text-right">{wallet.skyBalance.toLocaleString()}</TableCell>
             <TableCell className="text-right">
               <Button variant="outline" size="icon" asChild>
                 <Link href="/network/powerhouse#wallets" target="_blank">

@@ -1,18 +1,23 @@
-import { ArrowRight, Copy } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CopyButton } from '@/modules/shared/components/copy-butoon/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import { useWalletsList } from './use-wallets-list'
-import type { Wallet } from '../../../../wallets-section'
+import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsListProps {
-  wallets: Wallet[]
+  wallets: ProccesedWallets[]
+  tooltip: string | null
+  hoveredRowIndex: number | null
+  onCopyAddress: (event: React.MouseEvent<HTMLButtonElement>, address: string) => void
+  onCopyMouseEnter: (index: number) => void
+  onCopyMouseLeave: () => void
   className?: string
-  onCopyAddress: (address: string) => void
 }
 
-export function WalletsList({ wallets, className, onCopyAddress }: WalletsListProps) {
+export function WalletsList({ wallets, className }: WalletsListProps) {
   const { handleItemClick } = useWalletsList()
   return (
     <div className={cn('space-y-2', className)}>
@@ -20,8 +25,8 @@ export function WalletsList({ wallets, className, onCopyAddress }: WalletsListPr
         <div
           key={wallet.id}
           className="flex cursor-pointer flex-col gap-2 rounded-xl p-2 shadow-xs"
-          onClick={() => {
-            handleItemClick(wallet.address)
+          onClick={(event) => {
+            handleItemClick(event, wallet.address)
           }}
         >
           <div className="flex justify-between">
@@ -36,8 +41,6 @@ export function WalletsList({ wallets, className, onCopyAddress }: WalletsListPr
                         alt={wallet.name}
                         fill
                         priority
-                        quality={100}
-                        objectFit="cover"
                         className="absolute"
                       />
                     </div>
@@ -46,18 +49,10 @@ export function WalletsList({ wallets, className, onCopyAddress }: WalletsListPr
                       target="_blank"
                       className="font-normal text-(--status-progress)"
                     >
-                      {wallet.address}
+                      {wallet.shortAddress}
                     </Link>
                   </div>
-                  <Button
-                    variant="icon"
-                    size="iconXsm"
-                    onClick={() => {
-                      onCopyAddress(wallet.address)
-                    }}
-                  >
-                    <Copy className="size-4" />
-                  </Button>
+                  <CopyButton value={wallet.address} tooltip="Copy Address." />
                 </div>
               </div>
             </div>
@@ -69,11 +64,15 @@ export function WalletsList({ wallets, className, onCopyAddress }: WalletsListPr
           </div>
           <div className="flex justify-between px-2 py-1">
             <span className="text-foreground/50 text-sm/5.5 font-semibold">Balance (USDS)</span>
-            <span className="text-foreground text-sm/5.5 font-semibold">{wallet.usdsBalance}</span>
+            <span className="text-foreground text-sm/5.5 font-semibold">
+              {wallet.usdsBalance.toLocaleString()}
+            </span>
           </div>
           <div className="flex justify-between px-2 py-1">
             <span className="text-foreground/50 text-sm/5.5 font-semibold">Balance (SKY)</span>
-            <span className="text-foreground text-sm/5.5 font-semibold">{wallet.skyBalance}</span>
+            <span className="text-foreground text-sm/5.5 font-semibold">
+              {wallet.skyBalance.toLocaleString()}
+            </span>
           </div>
         </div>
       ))}

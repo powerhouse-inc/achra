@@ -26,7 +26,12 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
     toogleWalletTable,
     usdsTotalBalance,
     skyTotalBalance,
+    hoveredRowIndex,
+    tooltip,
+    proccesedWallets,
     handleToogleWalletTable,
+    handleCopyMouseEnter,
+    handleCopyMouseLeave,
     handleCopyAddress,
   } = useWalletsCard({ wallets })
   const isMobile = useMediaQuery({ to: 'md' })
@@ -80,18 +85,26 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
           }}
         >
           <WalletsTable
-            wallets={wallets}
+            wallets={proccesedWallets}
+            tooltip={tooltip}
+            hoveredRowIndex={hoveredRowIndex}
             className="hidden md:table"
-            onCopyAddress={(address) => {
-              void handleCopyAddress(address)
+            onCopyAddress={(event, address) => {
+              void handleCopyAddress(event, address)
             }}
+            onCopyMouseEnter={handleCopyMouseEnter}
+            onCopyMouseLeave={handleCopyMouseLeave}
           />
           <WalletsList
-            wallets={wallets}
+            wallets={proccesedWallets}
+            tooltip={tooltip}
+            hoveredRowIndex={hoveredRowIndex}
             className="block md:hidden"
-            onCopyAddress={(address) => {
-              void handleCopyAddress(address)
+            onCopyAddress={(event, address) => {
+              void handleCopyAddress(event, address)
             }}
+            onCopyMouseEnter={handleCopyMouseEnter}
+            onCopyMouseLeave={handleCopyMouseLeave}
           />
         </motion.div>
       </StripedCardContent>

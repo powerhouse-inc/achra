@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
-import type { Wallet } from '../../../../wallets-section'
+import type { ProccesedWallets } from '../../use-wallets-card'
 
 interface UseWalletsTableProps {
-  wallets: Wallet[]
+  wallets: ProccesedWallets[]
 }
 
 export enum SortEnum {
@@ -60,12 +60,14 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
     [headersSort],
   )
 
-  const handleRowClick = (address: string) => {
-    window.open(`https://etherscan.io/address/${address}`, '_blank')
+  const handleRowClick = (event: React.MouseEvent<HTMLTableRowElement>, address: string) => {
+    if (!(event.target instanceof HTMLAnchorElement)) {
+      window.open(`https://etherscan.io/address/${address}`, '_blank')
+    }
   }
 
   const sortWallets = useCallback(
-    (wallets: Wallet[]) => {
+    (wallets: ProccesedWallets[]) => {
       if (sortColumn === -1) return wallets
 
       const column = WALLETS_TABLE_COLUMNS[sortColumn]
@@ -76,14 +78,8 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
       }
 
       return [...wallets].sort((a, b) => {
-        let aValue: string | number = a[column.accessorKey as keyof Wallet]
-        let bValue: string | number = b[column.accessorKey as keyof Wallet]
-
-        // Handle numeric sorting for balance columns
-        if (column.accessorKey === 'usdsBalance' || column.accessorKey === 'skyBalance') {
-          aValue = parseFloat(aValue.toString().replace(/,/g, ''))
-          bValue = parseFloat(bValue.toString().replace(/,/g, ''))
-        }
+        const aValue: string | number = a[column.accessorKey as keyof ProccesedWallets]
+        const bValue: string | number = b[column.accessorKey as keyof ProccesedWallets]
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1

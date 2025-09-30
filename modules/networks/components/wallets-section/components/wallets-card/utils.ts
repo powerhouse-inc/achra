@@ -7,11 +7,11 @@ interface CalculateTotalBalanceParams {
 
 export const calculateTotalBalance = ({ wallets, balanceKey }: CalculateTotalBalanceParams) => {
   const total = wallets.reduce((acc, wallet) => {
-    const cleanValue = wallet[balanceKey].replace(/,/g, '')
-    const numericValue = parseFloat(cleanValue) || 0 // Fallback to 0 if parsing fails
-    return acc + numericValue
+    return acc + wallet[balanceKey]
   }, 0)
-
-  // Format the total with commas
   return total.toLocaleString()
+}
+
+export const addressShortener = (address: string) => {
+  return `${address.slice(0, 7)}...${address.slice(-6)}`
 }

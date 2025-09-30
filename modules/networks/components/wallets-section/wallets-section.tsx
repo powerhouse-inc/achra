@@ -8,9 +8,8 @@ export interface Wallet {
   id: string
   name: string
   address: string
-  usdsBalance: string
-  skyBalance: string
-  image: string
+  usdsBalance: number
+  skyBalance: number
 }
 
 export interface WalletsSectionProps {
