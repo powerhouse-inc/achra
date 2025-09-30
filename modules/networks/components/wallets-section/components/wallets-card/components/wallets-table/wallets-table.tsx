@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CopyTooltip } from '@/modules/shared/components/copy-tooltip/copy-tooltip'
+import { CopyButton } from '@/modules/shared/components/copy-butoon/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,
@@ -25,15 +25,7 @@ export interface WalletsTableProps {
   className?: string
 }
 
-export function WalletsTable({
-  wallets,
-  className,
-  tooltip,
-  hoveredRowIndex,
-  onCopyMouseEnter,
-  onCopyMouseLeave,
-  onCopyAddress,
-}: WalletsTableProps) {
+export function WalletsTable({ wallets, className }: WalletsTableProps) {
   const {
     headersSort,
     sortedWallets,
@@ -72,7 +64,7 @@ export function WalletsTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {sortedWallets.map((wallet, index) => (
+        {sortedWallets.map((wallet) => (
           <TableRow
             key={wallet.id}
             className="cursor-pointer"
@@ -103,17 +95,7 @@ export function WalletsTable({
                     {wallet.shortAddress}
                   </Link>
                 </div>
-                <CopyTooltip
-                  open={!!tooltip && hoveredRowIndex === index}
-                  tooltip={tooltip}
-                  onTriggerClick={(event) => {
-                    onCopyAddress(event, wallet.address)
-                  }}
-                  onTriggerMouseEnter={() => {
-                    onCopyMouseEnter(index)
-                  }}
-                  onTriggerMouseLeave={onCopyMouseLeave}
-                />
+                <CopyButton value={wallet.address} tooltip="Copy Address." />
               </div>
             </TableCell>
             <TableCell className="text-right">{wallet.usdsBalance.toLocaleString()}</TableCell>

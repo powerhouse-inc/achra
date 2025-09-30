@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CopyTooltip } from '@/modules/shared/components/copy-tooltip/copy-tooltip'
+import { CopyButton } from '@/modules/shared/components/copy-butoon/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import { useWalletsList } from './use-wallets-list'
@@ -17,19 +17,11 @@ export interface WalletsListProps {
   className?: string
 }
 
-export function WalletsList({
-  wallets,
-  tooltip,
-  hoveredRowIndex,
-  className,
-  onCopyAddress,
-  onCopyMouseEnter,
-  onCopyMouseLeave,
-}: WalletsListProps) {
+export function WalletsList({ wallets, className }: WalletsListProps) {
   const { handleItemClick } = useWalletsList()
   return (
     <div className={cn('space-y-2', className)}>
-      {wallets.map((wallet, index) => (
+      {wallets.map((wallet) => (
         <div
           key={wallet.id}
           className="flex cursor-pointer flex-col gap-2 rounded-xl p-2 shadow-xs"
@@ -60,17 +52,7 @@ export function WalletsList({
                       {wallet.shortAddress}
                     </Link>
                   </div>
-                  <CopyTooltip
-                    open={!!tooltip && hoveredRowIndex === index}
-                    tooltip={tooltip}
-                    onTriggerClick={(event) => {
-                      onCopyAddress(event, wallet.address)
-                    }}
-                    onTriggerMouseEnter={() => {
-                      onCopyMouseEnter(index)
-                    }}
-                    onTriggerMouseLeave={onCopyMouseLeave}
-                  />
+                  <CopyButton value={wallet.address} tooltip="Copy Address." />
                 </div>
               </div>
             </div>
