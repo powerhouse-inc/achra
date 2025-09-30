@@ -53,7 +53,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
         {proposals.map((proposal) => (
           <div
             key={proposal.id}
-            className="mx-2 mb-2 flex h-full w-full sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
+            className="mx-2 mb-2 flex h-full w-full min-w-[calc(100%-16px)] sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
           >
             <ProposalCard
               id={proposal.id}
