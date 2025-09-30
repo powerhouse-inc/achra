@@ -1,5 +1,4 @@
-import type { FormattedFinancesData, MetricKey } from './components/stacked-area-chart'
-import type { StackedAreaSeries } from './type'
+import type { FormattedFinancesData, MetricKey, StackedAreaSeries } from './type'
 
 export const getStackedAreaSeries = (
   financesData: FormattedFinancesData,
