@@ -191,6 +191,12 @@
   --text-5xl: 4rem;
 }
 
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

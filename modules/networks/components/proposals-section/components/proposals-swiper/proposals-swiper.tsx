@@ -13,7 +13,7 @@ interface ProposalsSwiperProps {
 }
 
 export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
-  const { adjustCardHeights, swiperRef } = useProposalsSwiper()
+  const { handleAfterInit, swiperRef, isSwiperReady } = useProposalsSwiper()
 
   return (
     <div className="relative -mx-2">
@@ -24,18 +24,13 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
           clickable: true,
         }}
         onAfterInit={() => {
-          adjustCardHeights()
-        }}
-        onResize={() => {
-          adjustCardHeights()
-        }}
-        onBreakpoint={() => {
-          adjustCardHeights()
+          handleAfterInit()
         }}
         breakpoints={PROPOSALS_SWIPER_BREAKPOINTS}
         className={cn(
           '!pb-10',
           '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
+          !isSwiperReady && '!hidden',
         )}
       >
         {proposals.map((proposal) => (
@@ -54,6 +49,24 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className={cn('flex overflow-hidden pb-10', isSwiperReady && 'hidden')}>
+        {proposals.map((proposal) => (
+          <div
+            key={proposal.id}
+            className="mx-2 mb-2 flex h-full w-full min-w-[calc(100%-16px)] sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
+          >
+            <ProposalCard
+              id={proposal.id}
+              title={proposal.title}
+              budget={proposal.budget}
+              deadlineDate={proposal.deadlineDate}
+              experienceLevel={proposal.experienceLevel}
+              detailsHref={proposal.detailsHref}
+              className="swiper-proposal-card w-full"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

@@ -14,16 +14,18 @@ export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
     <section className="flex flex-col gap-6">
       <SectionTitle title="Roadmap" hash="roadmap" />
       <Tabs defaultValue="phase-1" className="gap-6">
-        <TabsList className="gap-2 bg-transparent p-0">
-          {ROADMAP_TABS_CONFIG.map((tab) => (
-            <TabsTrigger
-              key={tab.id}
-              value={tab.id}
-              className="text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:bg-accent h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold shadow-lg data-[state=active]:shadow-lg lg:text-base/6"
-            >
-              {tab.label}
-            </TabsTrigger>
-          ))}
+        <TabsList className="no-scrollbar -mx-1 w-full justify-start overflow-x-auto bg-transparent p-0">
+          <div className="flex w-fit gap-2">
+            {ROADMAP_TABS_CONFIG.map((tab) => (
+              <TabsTrigger
+                key={tab.id}
+                value={tab.id}
+                className="text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:bg-accent mx-1 h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold shadow-lg data-[state=active]:shadow-lg lg:text-base/6"
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </div>
         </TabsList>
         {roadmaps.map((roadmap, index) => (
           <TabsContent
