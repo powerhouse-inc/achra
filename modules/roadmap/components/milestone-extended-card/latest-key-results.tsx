@@ -40,7 +40,7 @@ export default function LatestKeyResults({ keyResults }: LatestKeyResultsProps) 
                   )}
                 >
                   <span className="text-foreground/50 truncate">{keyResult.title}</span>
-                  <div className="bg-muted text-muted-foreground rounded-md px-1.5 py-0.5 text-xs/4.5 font-medium uppercase">
+                  <div className="bg-muted text-muted-foreground min-w-12.5 rounded-md px-1.5 py-0.5 text-xs/4.5 font-medium uppercase">
                     TO DO
                   </div>
                 </div>
