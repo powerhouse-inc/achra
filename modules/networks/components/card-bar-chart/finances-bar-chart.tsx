@@ -152,7 +152,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   return (
     <div
       className={cn(
-        'relative mt-2 flex flex-col justify-center sm:mt-0',
+        'relative mt-2.5 flex flex-col justify-center sm:mt-0',
         // Dimensions
         'h-[216px] w-full',
         'sm:h-[282px] sm:w-[337px]',
