@@ -88,14 +88,7 @@ export function useScrollToSection(options: UseScrollToSectionOptions = {}) {
       handleHashScroll()
     }
 
-    const initialTimeout = setTimeout(() => {
-      if (typeof window !== 'undefined' && window.location.hash) {
-        handleHashScroll()
-      }
-    }, 50)
-
     return () => {
-      clearTimeout(initialTimeout)
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current)
       }
