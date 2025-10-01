@@ -8,7 +8,9 @@ export default function useProposalsSwiper() {
   const swiperRef = useRef<SwiperRef>(null)
 
   const handleAfterInit = useCallback(() => {
-    setIsSwiperReady(true)
+    requestAnimationFrame(() => {
+      setIsSwiperReady(true)
+    })
   }, [])
 
   return { swiperRef, isSwiperReady, handleAfterInit }
