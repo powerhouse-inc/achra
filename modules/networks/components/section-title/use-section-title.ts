@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useCurrentUrl } from '@/modules/shared/hooks/use-current-url'
+import { useScrollToSection } from '@/modules/shared/hooks/use-scroll-to-section'
 
 export function useSectionTitle() {
   const [tooltip, setTooltip] = useState<string | null>(null)
   const { copyUrlToClipboard } = useCurrentUrl()
+
+  useScrollToSection()
 
   const handleLinkMouseEnter = () => {
     setTooltip('Copy link')
@@ -20,6 +23,7 @@ export function useSectionTitle() {
       setTooltip('Failed to copy URL')
     }
   }
+
   return {
     handleCopyUrl,
     handleLinkMouseEnter,
