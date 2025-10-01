@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { TabButton } from '@/modules/shared/components/tab-button/tab-button'
 import { Card } from '@/modules/shared/components/ui/card'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
@@ -19,8 +18,6 @@ export function CardStackedAreaChart() {
   const [realizedExpensesFilter, setRealizedExpensesFilter] = useState<REALIZED_EXPENSES_FILTER>(
     REALIZED_EXPENSES_FILTER.ACTUALS,
   )
-
-  const isTablet = useMediaQuery({ from: 'sm', to: 'md' })
 
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab)
@@ -49,14 +46,12 @@ export function CardStackedAreaChart() {
         >
           <TabButton
             label="Actuals"
-            size={isTablet ? 'small' : 'default'}
             onClick={() => {
               handleRealizedExpensesFilterChange(REALIZED_EXPENSES_FILTER.ACTUALS)
             }}
             isSelect={realizedExpensesFilter === REALIZED_EXPENSES_FILTER.ACTUALS}
           />
           <TabButton
-            size={isTablet ? 'small' : 'default'}
             label="Payments"
             onClick={() => {
               handleRealizedExpensesFilterChange(REALIZED_EXPENSES_FILTER.PAYMENTS)
