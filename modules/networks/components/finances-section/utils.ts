@@ -25,7 +25,7 @@ export const createTooltipFormatter =
       const noZeroValues = params.filter((item) => item.value !== 0)
 
       return `
-  <div style="background-color:var(--secondary);box-shadow:'none'
+  <div style="background-color:var(--popover);box-shadow:'none'
   };padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px; font-family:Inter ,sans-serif">
     <div style="margin-bottom:8px;font-size:16px;font-weight:600;color:var(--color-muted-foreground)";line-height:24px;>${noZeroValues[0]?.name}</div>
     <div style="display:flex;flex-direction:${flexDirection};gap:${gap}px;min-width:194px;max-width:450px;flex-wrap:wrap;">
@@ -51,7 +51,7 @@ export const createTooltipFormatter =
   `
     } else {
       return `
-    <div style="background-color:var(--color-muted);box-shadow:'none'
+    <div style="background-color:var(--popover);box-shadow:'none'
     };box-shadow:'none'
     };padding:8px 16px;min-width:194px;overflow:auto;border-radius:12px;font-family:Inter, sans-serif">
       <div style="display:flex;flex-direction:column;gap:8px;min-width:194px;max-width:450px;">
