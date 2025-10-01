@@ -36,7 +36,9 @@ export default function useRoadmapSwiper() {
 
   const handleAfterInit = useCallback(() => {
     adjustCardHeights()
-    setIsSwiperReady(true)
+    requestAnimationFrame(() => {
+      setIsSwiperReady(true)
+    })
   }, [adjustCardHeights])
 
   return { swiperRef, isSwiperReady, handleAfterInit, adjustCardHeights }
