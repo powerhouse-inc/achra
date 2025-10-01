@@ -16,7 +16,10 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
   const { handleCopyUrl, handleLinkMouseEnter, handleLinkMouseLeave, tooltip } = useSectionTitle()
 
   return (
-    <div className={cn('flex w-fit scroll-mt-38 items-center gap-4', className)} id={hash}>
+    <div
+      className={cn('flex w-fit scroll-mt-20 items-center gap-4 md:scroll-mt-24', className)}
+      id={hash}
+    >
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
       <Tooltip open={!!tooltip}>
         <TooltipTrigger asChild>
