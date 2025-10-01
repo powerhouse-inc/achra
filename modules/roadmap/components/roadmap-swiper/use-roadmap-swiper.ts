@@ -23,7 +23,7 @@ export default function useRoadmapSwiper() {
       })
 
       elements.forEach((element) => {
-        element.style.height = `${maxHeight}px`
+        element.style.minHeight = `${maxHeight}px`
       })
     }
   }, [])
@@ -36,7 +36,9 @@ export default function useRoadmapSwiper() {
 
   const handleAfterInit = useCallback(() => {
     adjustCardHeights()
-    setIsSwiperReady(true)
+    requestAnimationFrame(() => {
+      setIsSwiperReady(true)
+    })
   }, [adjustCardHeights])
 
   return { swiperRef, isSwiperReady, handleAfterInit, adjustCardHeights }

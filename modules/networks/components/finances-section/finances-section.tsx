@@ -6,7 +6,7 @@ import SectionTitle from '../section-title/section-title'
 
 export function FinancesSection() {
   return (
-    <div className="flex flex-col gap-2 sm:gap-6 xl:mt-8">
+    <div className="flex flex-col gap-2 sm:gap-6">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <SectionTitle title="Finances" hash="finances" />
         <div className="flex items-center gap-2 text-xs/5 font-semibold xl:text-sm">
