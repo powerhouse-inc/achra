@@ -23,7 +23,7 @@ export default function useRoadmapSwiper() {
       })
 
       elements.forEach((element) => {
-        element.style.height = `${maxHeight}px`
+        element.style.minHeight = `${maxHeight}px`
       })
     }
   }, [])
