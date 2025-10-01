@@ -1,7 +1,7 @@
 'use client'
 
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
-import SearchInput from '@/modules/shared/components/search-input'
+import SearchInput from '@/modules/shared/components/form/search-input'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { NetworkSelect, NetworkSelectDrawer } from './network-select'
 import { StatusSelect, StatusSelectDrawer } from './status-select'
