@@ -56,11 +56,10 @@ export function OverflowList<T>({
   // Re-run when state changes
   useShallowCompareEffect(() => {
     repartition(false)
-  }, [state])
+  }, [state, isMounted])
 
   // Run once on mount
   useMount(() => {
-    repartition(false)
     setIsMounted(true)
   })
 
