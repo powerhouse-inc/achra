@@ -3,8 +3,8 @@
 import { Search } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
-import { cn } from '../../lib/utils'
-import { Input } from '../ui/input'
+import { Input } from '@/shared/components/ui/input'
+import { cn } from '@/shared/lib/utils'
 
 const OsCommandKeyboardShortcut = dynamic(
   async () => {
