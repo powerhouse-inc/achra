@@ -40,10 +40,7 @@ export default function MilestoneExtendedCard({
 
   return (
     <Card
-      className={cn(
-        'h-full w-full gap-0 overflow-hidden rounded-xl border-0 px-0 pt-0 pb-2',
-        className,
-      )}
+      className={cn('w-full gap-0 overflow-hidden rounded-xl border-0 px-0 pt-0 pb-2', className)}
     >
       <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none px-2 py-0.5">
         <div className="text-accent-foreground/30 flex items-center gap-1 text-base/6 font-semibold">
@@ -57,7 +54,7 @@ export default function MilestoneExtendedCard({
         </Button>
       </CardHeader>
 
-      <CardContent className="mx-2 mt-2 flex flex-1 flex-col gap-1 p-0">
+      <CardContent className="mx-2 mt-2 flex flex-col gap-1 p-0">
         <MilestoneTitleSection title={milestone.title} description={milestone.description} />
         <MilestoneStatusSection status={milestone.scope?.status} progress={progress} />
         <Coordinators coordinators={milestone.coordinators} />

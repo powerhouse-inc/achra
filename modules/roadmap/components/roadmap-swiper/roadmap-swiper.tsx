@@ -63,21 +63,26 @@ export default function RoadmapSwiper({ milestones }: RoadmapSwiperProps) {
         >
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id} className="flex">
-              <div className="mx-2 flex h-full flex-1">
+              <div className="mx-2 flex h-full">
                 <MilestoneExtendedCard milestone={milestone} className="swiper-milestone-card" />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className={cn('flex overflow-hidden pb-10', isSwiperReady && 'hidden')}>
-          {milestones.map((milestone) => (
-            <div
-              key={milestone.id}
-              className="mx-2 mb-2 flex h-full w-full flex-1 sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
-            >
-              <MilestoneExtendedCard milestone={milestone} className="swiper-milestone-card" />
-            </div>
-          ))}
+        <div className="grid grid-cols-1">
+          <div className={cn('flex h-full overflow-hidden pb-10', isSwiperReady && 'hidden')}>
+            {milestones.map((milestone) => (
+              <div
+                key={milestone.id}
+                className="mx-2 flex h-full w-full sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
+              >
+                <MilestoneExtendedCard
+                  milestone={milestone}
+                  className="swiper-milestone-card mb-2"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
