@@ -22,7 +22,7 @@ export function ExternalLink({ href, imageSrc, name, description, className }: E
       )}
     >
       <div className="relative size-10">
-        <Image src={imageSrc} alt={name} fill objectFit="cover" className="absolute" />
+        <Image src={imageSrc} alt={name} fill className="absolute" sizes="100%" />
       </div>
       <div className="flex flex-col">
         <div className="text-foreground/50 flex items-center gap-1">
