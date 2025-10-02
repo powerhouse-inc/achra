@@ -14,21 +14,38 @@ import { transToGroupOption } from './utils'
 
 export interface Option {
   value: string
-  label: string
+  label: string | React.ReactNode
   disable?: boolean
   /** fixed option that can't be removed. */
   fixed?: boolean
   /** Group the options by providing key. */
-  [key: string]: string | boolean | undefined
+  group?: string
 }
 export type GroupOption = Record<string, Option[]>
+
+export type CustomItemRenderer = (
+  option: Option,
+  badgeClassName?: string,
+  disabled?: boolean,
+  onUnselect?: (option: Option) => void,
+) => React.ReactNode
+
+export type CustomOverflowRenderer = (
+  overflowItems: Option[],
+  badgeClassName?: string,
+) => React.ReactNode
 
 function renderItem(
   option: Option,
   badgeClassName?: string,
   disabled?: boolean,
   onUnselect?: (option: Option) => void,
-) {
+  customRenderer?: CustomItemRenderer,
+): React.ReactElement {
+  if (customRenderer) {
+    return customRenderer(option, badgeClassName, disabled, onUnselect) as React.ReactElement
+  }
+
   return (
     <ItemRenderer
       key={option.value}
@@ -40,7 +57,15 @@ function renderItem(
   )
 }
 
-function renderOverflow(overflowItems: Option[], badgeClassName?: string) {
+function renderOverflow(
+  overflowItems: Option[],
+  badgeClassName?: string,
+  customRenderer?: CustomOverflowRenderer,
+): React.ReactElement {
+  if (customRenderer) {
+    return customRenderer(overflowItems, badgeClassName) as React.ReactElement
+  }
+
   return <OverflowRenderer overflowItems={overflowItems} badgeClassName={badgeClassName} />
 }
 
@@ -78,6 +103,10 @@ interface MultipleSelectorProps {
   selectAllLabel?: string
   /** Group name to place the "Select All" option in. If not set, it will be shown at the top level. */
   selectAllGroup?: string
+  /** Custom renderer for individual items in the overflow list */
+  customItemRenderer?: CustomItemRenderer
+  /** Custom renderer for overflow items */
+  customOverflowRenderer?: CustomOverflowRenderer
   /** Props of `Command` */
   commandProps?: React.ComponentPropsWithoutRef<typeof Command>
   /** Props of `CommandInput` */
@@ -114,6 +143,8 @@ function MultipleSelector({
   enableSelectAll = false,
   selectAllLabel,
   selectAllGroup,
+  customItemRenderer,
+  customOverflowRenderer,
   commandProps,
   inputProps,
   hideClearAllButton = false,
@@ -218,7 +249,25 @@ function MultipleSelector({
       return
     }
     const newOption = transToGroupOption(arrayOptions, groupBy)
-    if (JSON.stringify(newOption) !== JSON.stringify(options)) {
+
+    // Compare options by their values and structure
+    const hasChanged =
+      Object.keys(newOption).length !== Object.keys(options).length ||
+      Object.keys(newOption).some((key) => {
+        const newGroup = newOption[key]
+        const oldGroup = options[key]
+        if (newGroup.length !== oldGroup.length) return true
+        return newGroup.some((newItem, index) => {
+          const oldItem = oldGroup[index]
+          return (
+            newItem.value !== oldItem.value ||
+            newItem.disable !== oldItem.disable ||
+            newItem.fixed !== oldItem.fixed
+          )
+        })
+      })
+
+    if (hasChanged) {
       setOptions(newOption)
     }
   }, [arrayDefaultOptions, arrayOptions, groupBy, options])
@@ -234,9 +283,12 @@ function MultipleSelector({
 
     const filteredOptions: GroupOption = {}
     Object.entries(options).forEach(([groupKey, groupOptions]) => {
-      const filtered = groupOptions.filter((option) =>
-        option.label.toLowerCase().includes(inputValue.toLowerCase()),
-      )
+      const filtered = groupOptions.filter((option) => {
+        return (
+          typeof option.label === 'string' &&
+          option.label.toLowerCase().includes(inputValue.toLowerCase())
+        )
+      })
       if (filtered.length > 0) {
         filteredOptions[groupKey] = filtered
       }
@@ -286,11 +338,13 @@ function MultipleSelector({
           {selected.length > 0 ? (
             <OverflowList
               items={selected}
-              className="gap-1"
+              className="items-center gap-1"
               itemRenderer={(option) =>
-                renderItem(option, badgeClassName, disabled, handleUnselect)
+                renderItem(option, badgeClassName, disabled, handleUnselect, customItemRenderer)
               }
-              overflowRenderer={(overflowItems) => renderOverflow(overflowItems, badgeClassName)}
+              overflowRenderer={(overflowItems) =>
+                renderOverflow(overflowItems, badgeClassName, customOverflowRenderer)
+              }
             />
           ) : (
             <span className="text-muted-foreground/70">{placeholder}</span>
@@ -441,7 +495,11 @@ function MultipleSelector({
                                 <div className="flex h-4 w-4 items-center justify-center">
                                   {isSelected && <Check className="h-4 w-4" />}
                                 </div>
-                                <span>{option.label}</span>
+                                {typeof option.label === 'string' ? (
+                                  <span>{option.label}</span>
+                                ) : (
+                                  option.label
+                                )}
                               </div>
                             </CommandItem>
                           )

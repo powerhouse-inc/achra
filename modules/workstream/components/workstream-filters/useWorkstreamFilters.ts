@@ -4,11 +4,9 @@ import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-ge
 
 export default function useWorkstreamFilters() {
   const [search, setSearch] = useQueryState('search', parseAsString.withDefault(''))
-  const [status, setStatus] = useQueryState(
-    'status',
-    parseAsStringEnum(Object.values(WorkstreamStatus)).withDefault(
-      WorkstreamStatus.OpenForProposals,
-    ),
+  const [statuses, setStatuses] = useQueryState(
+    'statuses',
+    parseAsArrayOf(parseAsStringEnum(Object.values(WorkstreamStatus))).withDefault([]),
   )
   const [networks, setNetworks] = useQueryState(
     'networks',
@@ -17,9 +15,9 @@ export default function useWorkstreamFilters() {
 
   const onReset = useCallback(() => {
     void setSearch('')
-    void setStatus(WorkstreamStatus.OpenForProposals)
+    void setStatuses([WorkstreamStatus.OpenForProposals])
     void setNetworks([])
-  }, [setSearch, setStatus, setNetworks])
+  }, [setSearch, setStatuses, setNetworks])
 
-  return { search, status, networks, setSearch, setStatus, setNetworks, onReset }
+  return { search, statuses, networks, setSearch, setStatuses, setNetworks, onReset }
 }

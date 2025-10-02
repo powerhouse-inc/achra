@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { MultipleSelector, type Option } from './multiselect'
+import {
+  type CustomItemRenderer,
+  type CustomOverflowRenderer,
+  MultipleSelector,
+  type Option,
+} from './multiselect'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 /**
@@ -84,18 +89,18 @@ const basicOptions: Option[] = [
 ]
 
 const groupedOptions: Option[] = [
-  { value: 'react', label: 'React', category: 'Frontend' },
-  { value: 'vue', label: 'Vue', category: 'Frontend' },
-  { value: 'angular', label: 'Angular', category: 'Frontend' },
-  { value: 'svelte', label: 'Svelte', category: 'Frontend' },
-  { value: 'nodejs', label: 'Node.js', category: 'Backend' },
-  { value: 'express', label: 'Express', category: 'Backend' },
-  { value: 'fastify', label: 'Fastify', category: 'Backend' },
-  { value: 'nestjs', label: 'NestJS', category: 'Backend' },
-  { value: 'mongodb', label: 'MongoDB', category: 'Database' },
-  { value: 'postgresql', label: 'PostgreSQL', category: 'Database' },
-  { value: 'redis', label: 'Redis', category: 'Database' },
-  { value: 'mysql', label: 'MySQL', category: 'Database' },
+  { value: 'react', label: 'React', group: 'Frontend' },
+  { value: 'vue', label: 'Vue', group: 'Frontend' },
+  { value: 'angular', label: 'Angular', group: 'Frontend' },
+  { value: 'svelte', label: 'Svelte', group: 'Frontend' },
+  { value: 'nodejs', label: 'Node.js', group: 'Backend' },
+  { value: 'express', label: 'Express', group: 'Backend' },
+  { value: 'fastify', label: 'Fastify', group: 'Backend' },
+  { value: 'nestjs', label: 'NestJS', group: 'Backend' },
+  { value: 'mongodb', label: 'MongoDB', group: 'Database' },
+  { value: 'postgresql', label: 'PostgreSQL', group: 'Database' },
+  { value: 'redis', label: 'Redis', group: 'Database' },
+  { value: 'mysql', label: 'MySQL', group: 'Database' },
 ]
 
 const optionsWithFixed: Option[] = [
@@ -177,7 +182,7 @@ export const WithGroupedOptions: Story = {
           value={selected}
           onChange={setSelected}
           options={groupedOptions}
-          groupBy="category"
+          groupBy="group"
           placeholder="Select technologies..."
           emptyIndicator={
             <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
@@ -335,6 +340,182 @@ export const WithoutClearAll: Story = {
           onChange={setSelected}
           options={basicOptions}
           hideClearAllButton
+          placeholder="Select technologies..."
+          emptyIndicator={
+            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+              No results found.
+            </p>
+          }
+        />
+      </div>
+    )
+  },
+}
+
+/**
+ * MultipleSelector with custom item renderer.
+ * Demonstrates how to customize the appearance of individual selected items.
+ */
+export const WithCustomItemRenderer: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Option[]>([
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+    ])
+
+    const customItemRenderer: CustomItemRenderer = (
+      option,
+      badgeClassName,
+      disabled,
+      onUnselect,
+    ) => {
+      return (
+        <div
+          key={option.value}
+          className={`${badgeClassName} relative inline-flex h-8 shrink-0 cursor-default items-center rounded-full border border-blue-200 bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 transition-all hover:bg-blue-200`}
+        >
+          <span className="mr-2">🚀</span>
+          {typeof option.label === 'string' ? option.label : option.label}
+          <button
+            className="ml-2 text-blue-600 hover:text-blue-800"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              onUnselect?.(option)
+            }}
+            disabled={disabled}
+          >
+            ×
+          </button>
+        </div>
+      )
+    }
+
+    return (
+      <div className="w-80">
+        <MultipleSelector
+          value={selected}
+          onChange={setSelected}
+          options={basicOptions}
+          customItemRenderer={customItemRenderer}
+          placeholder="Select technologies..."
+          emptyIndicator={
+            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+              No results found.
+            </p>
+          }
+        />
+      </div>
+    )
+  },
+}
+
+/**
+ * MultipleSelector with custom overflow renderer.
+ * Shows how to customize the appearance of the overflow indicator.
+ */
+export const WithCustomOverflowRenderer: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Option[]>([
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'angular', label: 'Angular' },
+      { value: 'svelte', label: 'Svelte' },
+      { value: 'nextjs', label: 'Next.js' },
+      { value: 'nuxt', label: 'Nuxt' },
+      { value: 'sveltekit', label: 'SvelteKit' },
+      { value: 'remix', label: 'Remix' },
+    ])
+
+    const customOverflowRenderer: CustomOverflowRenderer = (overflowItems, badgeClassName) => {
+      return (
+        <div
+          className={`${badgeClassName} relative inline-flex h-8 shrink-0 cursor-default items-center rounded-full border border-purple-200 bg-purple-100 px-3 py-1 text-sm font-medium text-purple-800`}
+        >
+          <span className="mr-1">📦</span>+{overflowItems.length} more
+        </div>
+      )
+    }
+
+    return (
+      <div className="w-80">
+        <MultipleSelector
+          value={selected}
+          onChange={setSelected}
+          options={basicOptions}
+          customOverflowRenderer={customOverflowRenderer}
+          placeholder="Select technologies..."
+          emptyIndicator={
+            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+              No results found.
+            </p>
+          }
+        />
+      </div>
+    )
+  },
+}
+
+/**
+ * MultipleSelector with both custom item and overflow renderers.
+ * Demonstrates using both custom renderers together.
+ */
+export const WithCustomRenderers: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Option[]>([
+      { value: 'react', label: 'React' },
+      { value: 'vue', label: 'Vue' },
+      { value: 'angular', label: 'Angular' },
+      { value: 'svelte', label: 'Svelte' },
+      { value: 'nextjs', label: 'Next.js' },
+    ])
+
+    const customItemRenderer: CustomItemRenderer = (
+      option,
+      badgeClassName,
+      disabled,
+      onUnselect,
+    ) => {
+      return (
+        <div
+          key={option.value}
+          className={`${badgeClassName} relative inline-flex h-8 shrink-0 cursor-default items-center rounded-lg border border-green-200 bg-green-100 px-3 py-1 text-sm font-medium text-green-800 transition-all hover:bg-green-200`}
+        >
+          <span className="mr-2">✨</span>
+          {typeof option.label === 'string' ? option.label : option.label}
+          <button
+            className="ml-2 text-green-600 hover:text-green-800"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              onUnselect?.(option)
+            }}
+            disabled={disabled}
+          >
+            ×
+          </button>
+        </div>
+      )
+    }
+
+    const customOverflowRenderer: CustomOverflowRenderer = (overflowItems, badgeClassName) => {
+      return (
+        <div
+          className={`${badgeClassName} relative inline-flex h-8 shrink-0 cursor-default items-center rounded-lg border border-orange-200 bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800`}
+        >
+          <span className="mr-1">🎯</span>+{overflowItems.length} others
+        </div>
+      )
+    }
+
+    return (
+      <div className="w-80">
+        <MultipleSelector
+          value={selected}
+          onChange={setSelected}
+          options={basicOptions}
+          customItemRenderer={customItemRenderer}
+          customOverflowRenderer={customOverflowRenderer}
           placeholder="Select technologies..."
           emptyIndicator={
             <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">

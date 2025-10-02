@@ -31,7 +31,7 @@ function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps)
       groupBy="group"
       enableSelectAll={true}
       selectAllGroup="Network"
-      placeholder="Networks"
+      placeholder="All Networks"
       className={cn('bg-background dark:bg-background', className)}
     />
   )
