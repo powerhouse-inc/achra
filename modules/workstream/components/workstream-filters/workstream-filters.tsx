@@ -8,7 +8,7 @@ import { StatusSelect, StatusSelectDrawer } from './status-select'
 import useWorkstreamFilters from './useWorkstreamFilters'
 
 export default function WorkstreamFilters() {
-  const { search, status, network, setSearch, setStatus, setNetwork, onReset } =
+  const { search, status, networks, setSearch, setStatus, setNetworks, onReset } =
     useWorkstreamFilters()
 
   return (
@@ -21,8 +21,8 @@ export default function WorkstreamFilters() {
           className="sm:flex-1 md:w-full md:max-w-54 md:min-w-54 lg:max-w-64 lg:min-w-64 xl:max-w-75 xl:min-w-75"
         />
         <NetworkSelect
-          network={network}
-          setNetwork={setNetwork}
+          networks={networks}
+          setNetworks={setNetworks}
           className="sm:flex-1 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
         />
       </div>
@@ -30,7 +30,7 @@ export default function WorkstreamFilters() {
       <div className="flex items-center gap-4 sm:hidden">
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer onReset={onReset}>
-          <NetworkSelectDrawer network={network} setNetwork={setNetwork} />
+          <NetworkSelectDrawer networks={networks} setNetworks={setNetworks} />
           <StatusSelectDrawer status={status} setStatus={setStatus} />
         </FilterDrawer>
       </div>

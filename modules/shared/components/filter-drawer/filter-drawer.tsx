@@ -53,13 +53,40 @@ function FilterDrawer({ children, onReset, filterTrigger }: FilterDrawerProps) {
 }
 
 interface DrawerSelectProps<T extends string> {
-  value: T
-  onChange: (value: T) => void
+  value?: T | T[]
+  onChange: ((value: T) => void) | ((values: T[]) => void)
   label?: string
   options: Array<{ label: string | React.ReactNode; value: T }>
+  multiselect?: boolean
 }
 
-function DrawerSelect<T extends string>({ value, onChange, label, options }: DrawerSelectProps<T>) {
+function DrawerSelect<T extends string>({
+  value,
+  onChange,
+  label,
+  options,
+  multiselect = false,
+}: DrawerSelectProps<T>) {
+  const handleToggle = (optionValue: T) => {
+    if (multiselect && Array.isArray(value)) {
+      const isSelected = value.includes(optionValue)
+      if (isSelected) {
+        ;(onChange as (values: T[]) => void)(value.filter((val) => val !== optionValue))
+      } else {
+        ;(onChange as (values: T[]) => void)([...value, optionValue])
+      }
+    } else if (!multiselect && !Array.isArray(value)) {
+      ;(onChange as (value: T) => void)(optionValue)
+    }
+  }
+
+  const isSelected = (optionValue: T) => {
+    if (multiselect && Array.isArray(value)) {
+      return value.includes(optionValue)
+    }
+    return value === optionValue
+  }
+
   return (
     <div className="bg-popover flex flex-col rounded-md border py-1">
       <div className="px-8 py-2 text-sm/5.5 font-semibold">{label}</div>
@@ -68,11 +95,11 @@ function DrawerSelect<T extends string>({ value, onChange, label, options }: Dra
           key={option.value}
           className="hover:bg-accent flex cursor-pointer items-center justify-between py-2 pr-3 pl-8 text-sm/5.5"
           onClick={() => {
-            onChange(option.value)
+            handleToggle(option.value)
           }}
         >
           {option.label}
-          {value === option.value && <CheckIcon className="ml-auto size-4" />}
+          {isSelected(option.value) && <CheckIcon className="ml-auto size-4" />}
         </div>
       ))}
     </div>
