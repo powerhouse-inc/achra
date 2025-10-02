@@ -12,7 +12,7 @@ export function transToGroupOption(options: Option[], groupBy?: string) {
 
   const groupOption: GroupOption = {}
   options.forEach((option) => {
-    const key = (option[groupBy] as string) || ''
+    const key = (option[groupBy as keyof Option] as string) || ''
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!groupOption[key]) {
       groupOption[key] = []
