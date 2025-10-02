@@ -9,9 +9,9 @@ interface NetworkSelectProps {
 }
 
 const networkOptions: Option[] = [
-  { value: 'sky', label: 'Sky' },
-  { value: 'powerhouse', label: 'Powerhouse' },
-  { value: 'spark', label: 'Spark' },
+  { value: 'sky', label: 'Sky', group: 'Network' },
+  { value: 'powerhouse', label: 'Powerhouse', group: 'Network' },
+  { value: 'spark', label: 'Spark', group: 'Network' },
 ]
 
 function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps) {
@@ -27,6 +27,10 @@ function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps)
       value={selectedOptions}
       onChange={handleChange}
       options={networkOptions}
+      enableSearch={false}
+      groupBy="group"
+      enableSelectAll={true}
+      selectAllGroup="Network"
       placeholder="Networks"
       className={cn('bg-background dark:bg-background', className)}
     />
