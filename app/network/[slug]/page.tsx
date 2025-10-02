@@ -1,4 +1,5 @@
 import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
+import { GovernanceSection } from '@/modules/networks/components/governance-section/governance-section'
 import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import { ProposalsSection } from '@/modules/networks/components/proposals-section/proposals-section'
@@ -21,6 +22,7 @@ export default function NetworkPage() {
         <RoadmapSection roadmaps={mockedRoadmaps} />
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
+        <GovernanceSection />
         <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
       </main>
     </PageBackground>
