@@ -22,7 +22,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
 
   const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet640 = useMediaQuery({ from: 'sm', to: 'md' })
-  const isTable760 = useMediaQuery({ from: 'md', to: 'lg' })
+  const isTablet768 = useMediaQuery({ from: 'md', to: 'lg' })
   const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesk1280 = useMediaQuery({ from: 'xl', to: '2xl' })
   const isDesk1440 = useMediaQuery({ from: '2xl' })
@@ -32,11 +32,11 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       top: 8,
       right: 10,
       bottom: 40,
-      left: isTablet640 || isTable760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
+      left: isTablet640 || isTablet768 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
       width:
         isMobile || isTablet640
           ? 'calc(100% - 50px)'
-          : isTable760
+          : isTablet768
             ? 330
             : isDesk1024
               ? 470
@@ -69,7 +69,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       ) => {
         const tooltipWidth = size.contentSize[0]
         const containerWidth = size.viewSize[0]
-        const margin = isTablet640 || isTable760 ? 0 : 8
+        const margin = isTablet640 || isTablet768 ? 0 : 8
 
         let xPos = point[0]
         const yPos = point[1] + margin
@@ -135,7 +135,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
         margin: 4,
         fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
-        fontSize: isMobile || isTablet640 ? 10 : isTable760 ? 12 : 14,
+        fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
         lineHeight: 18,
         color: 'var(--color-muted-foreground)',
         interval: 0,
@@ -152,14 +152,14 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
         rich: {
           quarterly: {
             verticalAlign: 'top',
-            fontSize: isMobile || isTablet640 ? 10 : isTable760 ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
             fontWeight: 700,
             lineHeight: 22,
             interval: 0,
             padding:
               isMobile || isTablet640
                 ? [3, -1, 20, 12]
-                : isTable760
+                : isTablet768
                   ? [2, 4, 20, 20]
                   : [2, 0, 20, 20],
             fontFamily: 'Open Sans Condensed, sans-serif',
@@ -169,7 +169,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
             },
           },
           year: {
-            fontSize: isMobile || isTablet640 ? 10 : isTable760 ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
             fontFamily: 'Open Sans Condensed, sans-serif',
             fontWeight: 700,
             color: 'var(--color-foreground)',
@@ -177,12 +177,12 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
             padding:
               isMobile || isTablet640
                 ? [0, -4, 10, 20]
-                : isTable760
+                : isTablet768
                   ? [0, 4, 10, 32]
                   : [0, 0, 10, 32],
           },
           quarterlyQ2: {
-            fontSize: isMobile || isTablet640 ? 10 : isTable760 ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
             fontFamily: 'Open Sans Condensed, sans-serif',
             fontWeight: 700,
             color: 'var(--color-muted-foreground)',
@@ -190,7 +190,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
             padding:
               isMobile || isTablet640
                 ? [4, 14, 10, 20]
-                : isTable760
+                : isTablet768
                   ? [5, 12, 10, 20]
                   : [4, 14, 10, 20],
           },
