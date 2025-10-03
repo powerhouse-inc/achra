@@ -221,7 +221,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       },
       axisLabel: {
         width: 48,
-        margin: isTablet640 || isTablet768 ? 12 : 16,
+        margin: isTablet640 || isTablet768 ? 12 : isDesk1024 ? 12 : 16,
         fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
