@@ -133,7 +133,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       axisTick: { show: false },
       axisLabel: {
         margin: 4,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
         lineHeight: 18,
@@ -160,36 +160,41 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
               isMobile || isTablet640
                 ? [3, -1, 20, 12]
                 : isTablet768
-                  ? [2, 4, 20, 20]
-                  : [2, 0, 20, 20],
-            fontFamily: 'Open Sans Condensed, sans-serif',
+                  ? [3.5, 3, 18, 20]
+                  : isDesk1024
+                    ? [3, 0, 20, 22]
+                    : [2, 0, 20, 20],
+            fontFamily: 'var(--font-open-sans-condensed)',
             color: 'var(--color-muted-foreground)',
+
             backgroundColor: {
               image: isLightMode ? '/chart/line.png' : '/chart/line_dark.png',
             },
           },
           year: {
             fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
-            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontFamily: 'var(--font-open-sans-condensed)',
             fontWeight: 700,
             color: 'var(--color-foreground)',
             lineHeight: 22,
             padding:
               isMobile || isTablet640
-                ? [0, -4, 10, 20]
+                ? [4, -4, 10, 20]
                 : isTablet768
                   ? [0, 4, 10, 32]
-                  : [0, 0, 10, 32],
+                  : isDesk1024
+                    ? [0, 0, 10, 36]
+                    : [0, 0, 10, 32],
           },
           quarterlyQ2: {
             fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
-            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontFamily: 'var(--font-open-sans-condensed)',
             fontWeight: 700,
             color: 'var(--color-muted-foreground)',
             lineHeight: 22,
             padding:
               isMobile || isTablet640
-                ? [4, 14, 10, 20]
+                ? [5, 14, 10, 20]
                 : isTablet768
                   ? [5, 12, 10, 20]
                   : [4, 14, 10, 20],
@@ -221,8 +226,8 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       },
       axisLabel: {
         width: 48,
-        margin: 16,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        margin: isTablet640 || isTablet768 ? 12 : isDesk1024 ? 12 : 16,
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         lineHeight: isMobile ? 16 : 19,

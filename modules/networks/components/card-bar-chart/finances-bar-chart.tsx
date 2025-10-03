@@ -105,7 +105,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
       axisLabel: {
         margin: 4,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         lineHeight: isMobile ? 16 : 19,
@@ -134,7 +134,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
 
       axisLabel: {
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         color: 'var(--color-foreground)',
