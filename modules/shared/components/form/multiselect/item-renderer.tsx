@@ -25,9 +25,14 @@ export function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: I
     >
       {option.label}
       <div
-        className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute -inset-y-px -end-px flex size-7 cursor-pointer items-center justify-center rounded-e-md border border-transparent p-0 outline-hidden transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
+        className={cn(
+          'text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute -inset-y-px -end-px flex size-7 cursor-pointer items-center justify-center rounded-e-md border border-transparent p-0 outline-hidden transition-[color,box-shadow] outline-none focus-visible:ring-[3px]',
+          {
+            hidden: option.fixed,
+          },
+        )}
         onKeyDown={(e) => {
-          if (e.key === 'Enter') {
+          if (e.key === 'Enter' && !option.fixed) {
             e.preventDefault()
             e.stopPropagation()
             onUnselect(option)
@@ -40,7 +45,9 @@ export function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: I
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
-          onUnselect(option)
+          if (!option.fixed) {
+            onUnselect(option)
+          }
         }}
         role="button"
         tabIndex={0}

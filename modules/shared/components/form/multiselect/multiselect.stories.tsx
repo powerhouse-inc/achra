@@ -201,9 +201,7 @@ export const WithGroupedOptions: Story = {
  */
 export const WithFixedOptions: Story = {
   render: () => {
-    const [selected, setSelected] = useState<Option[]>([
-      { value: 'admin', label: 'Admin', fixed: true },
-    ])
+    const [selected, setSelected] = useState<Option[]>([{ ...optionsWithFixed[0], fixed: true }])
 
     return (
       <div className="w-80">

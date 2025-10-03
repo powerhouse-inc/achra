@@ -165,6 +165,9 @@ function MultipleSelector({
 
   const handleUnselect = React.useCallback(
     (option: Option) => {
+      if (option.fixed) {
+        return
+      }
       const newOptions = selected.filter((s) => s.value !== option.value)
       setSelected(newOptions)
       onChange?.(newOptions)
@@ -207,10 +210,13 @@ function MultipleSelector({
       if (input) {
         if (e.key === 'Delete' || e.key === 'Backspace') {
           if (input.value === '' && selected.length > 0) {
-            const lastSelectOption = selected[selected.length - 1]
-            // If last item is fixed, we should not remove it.
-            if (!lastSelectOption.fixed) {
-              handleUnselect(selected[selected.length - 1])
+            // Find the last non-fixed option to remove
+            for (let i = selected.length - 1; i >= 0; i--) {
+              const option = selected[i]
+              if (!option.fixed) {
+                handleUnselect(option)
+                break
+              }
             }
           }
         }
@@ -356,8 +362,10 @@ function MultipleSelector({
           onClick={(e) => {
             e.preventDefault()
             e.stopPropagation()
-            setSelected(selected.filter((s) => s.fixed))
-            onChange?.(selected.filter((s) => s.fixed))
+            // Keep only fixed options when clearing all
+            const fixedOptions = selected.filter((s) => s.fixed)
+            setSelected(fixedOptions)
+            onChange?.(fixedOptions)
           }}
           className={cn(
             'text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute end-6 top-0 z-10 flex size-9 items-center justify-center rounded-md border border-transparent transition-[color,box-shadow] outline-none focus-visible:ring-[3px]',
@@ -467,7 +475,10 @@ function MultipleSelector({
                                 )
 
                                 if (isAlreadySelected) {
-                                  // If already selected, remove it (toggle off)
+                                  // If already selected, only remove it if it's not fixed
+                                  if (option.fixed) {
+                                    return // Don't allow unselecting fixed options
+                                  }
                                   const newOptions = selected.filter(
                                     (s) => s.value !== option.value,
                                   )
