@@ -182,7 +182,7 @@
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
   --font-inter: var(--font-inter);
-  --font-sans-condensed: ['var(--font-open-sans-condensed)'];
+  --font-sans-condensed: [ 'var(--font-open-sans-condensed)'];
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -279,4 +279,3 @@
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }
-
