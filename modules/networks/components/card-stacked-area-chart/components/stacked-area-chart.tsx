@@ -160,8 +160,10 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
               isMobile || isTablet640
                 ? [3, -1, 20, 12]
                 : isTablet768
-                  ? [4, 3, 18, 20]
-                  : [2, 0, 20, 20],
+                  ? [3.5, 3, 18, 20]
+                  : isDesk1024
+                    ? [3, 0, 20, 22]
+                    : [2, 0, 20, 20],
             fontFamily: 'var(--font-open-sans-condensed)',
             color: 'var(--color-muted-foreground)',
 
@@ -180,7 +182,9 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
                 ? [4, -4, 10, 20]
                 : isTablet768
                   ? [0, 4, 10, 32]
-                  : [0, 0, 10, 32],
+                  : isDesk1024
+                    ? [0, 0, 10, 36]
+                    : [0, 0, 10, 32],
           },
           quarterlyQ2: {
             fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
