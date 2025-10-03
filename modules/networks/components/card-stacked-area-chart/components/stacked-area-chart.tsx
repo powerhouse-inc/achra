@@ -160,7 +160,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
               isMobile || isTablet640
                 ? [3, -1, 20, 12]
                 : isTablet768
-                  ? [2, 4, 20, 20]
+                  ? [3, 4, 20, 20]
                   : [2, 0, 20, 20],
             fontFamily: 'var(--font-open-sans-condensed)',
             color: 'var(--color-muted-foreground)',
@@ -170,7 +170,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
           },
           year: {
             fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
-            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontFamily: 'var(--font-open-sans-condensed)',
             fontWeight: 700,
             color: 'var(--color-foreground)',
             lineHeight: 22,
@@ -189,7 +189,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
             lineHeight: 22,
             padding:
               isMobile || isTablet640
-                ? [4, 14, 10, 20]
+                ? [5, 14, 10, 20]
                 : isTablet768
                   ? [5, 12, 10, 20]
                   : [4, 14, 10, 20],
@@ -221,7 +221,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       },
       axisLabel: {
         width: 48,
-        margin: 16,
+        margin: isTablet640 || isTablet768 ? 12 : 16,
         fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
