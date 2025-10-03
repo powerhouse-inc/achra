@@ -1,6 +1,8 @@
 import { cn } from '@/modules/shared/lib/utils'
 import { SectionTitle } from '../section-title'
+import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
 import { ExternalLink } from './components/external-link/external-link'
+import { EXECUTIVE_PROPOSALS } from './mocks'
 
 export interface GovernanceSectionProps {
   className?: string
@@ -30,6 +32,7 @@ export function GovernanceSection({ className }: GovernanceSectionProps) {
           description="Launch Sky Vote"
         />
       </div>
+      <ExecutiveProposals title="Executive Proposals" executiveProposals={EXECUTIVE_PROPOSALS} />
     </section>
   )
 }
