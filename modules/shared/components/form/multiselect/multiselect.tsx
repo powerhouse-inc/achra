@@ -340,7 +340,7 @@ function MultipleSelector({
         )}
         aria-label="Open multiselect"
       >
-        <div className="flex w-full max-w-full items-center pr-13">
+        <div className="flex w-full max-w-full items-center pr-12">
           {selected.length > 0 ? (
             <OverflowList
               items={selected}
