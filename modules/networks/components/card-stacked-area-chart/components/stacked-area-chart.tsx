@@ -239,7 +239,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
   }
 
   return (
-    <div className="flex flex-col gap-4 sm:flex-row xl:flex-col xl:gap-[14px]">
+    <div className="flex flex-col gap-4 overflow-hidden sm:flex-row sm:overflow-visible xl:flex-col xl:gap-[14px]">
       <div
         className={cn(
           'relative flex flex-col items-center justify-center sm:mt-0',
