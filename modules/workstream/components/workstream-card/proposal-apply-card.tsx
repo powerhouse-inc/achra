@@ -1,6 +1,7 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
+import { useCallback } from 'react'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -41,6 +42,41 @@ function getVariant(tag: string) {
 }
 
 export default function ProposalApplyCard({ title, description, tags }: ProposalApplyCardProps) {
+  const itemRenderer = useCallback(
+    (tag: string) => (
+      <div
+        className={tagVariants({
+          variant: getVariant(tag),
+        })}
+      >
+        {tag}
+      </div>
+    ),
+    [],
+  )
+
+  const overflowRenderer = useCallback(
+    (items: string[]) => (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className={cn(tagVariants({ variant: 'default' }), 'px-2')}>+{items.length}</div>
+        </TooltipTrigger>
+        <TooltipContent side="bottom" align="start">
+          <div className="max-w-64 space-y-1">
+            <div className="flex flex-wrap gap-2">
+              {items.map((tag) => (
+                <div key={tag} className={cn(tagVariants({ variant: getVariant(tag) }), 'text-xs')}>
+                  {tag}
+                </div>
+              ))}
+            </div>
+          </div>
+        </TooltipContent>
+      </Tooltip>
+    ),
+    [],
+  )
+
   return (
     <Card className="rounded-lg p-0 shadow-sm">
       <CardContent className="flex gap-4 p-2 sm:p-3">
@@ -48,45 +84,12 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
           <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
             {title}
           </div>
-          <div className="line-clamp-2 text-sm/5.5">{description}</div>
+          <div className="line-clamp-2 text-sm/5.5 md:line-clamp-3">{description}</div>
           <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
             <OverflowList
               items={tags}
-              // eslint-disable-next-line react/no-unstable-nested-components
-              itemRenderer={(tag: string) => (
-                <div
-                  className={tagVariants({
-                    variant: getVariant(tag),
-                  })}
-                  key={tag}
-                >
-                  {tag}
-                </div>
-              )}
-              // eslint-disable-next-line react/no-unstable-nested-components
-              overflowRenderer={(items) => (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className={cn(tagVariants({ variant: 'default' }), 'px-2')}>
-                      +{items.length}
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" align="start">
-                    <div className="max-w-64 space-y-1">
-                      <div className="flex flex-wrap gap-2">
-                        {items.map((tag) => (
-                          <div
-                            key={tag}
-                            className={cn(tagVariants({ variant: getVariant(tag) }), 'text-xs')}
-                          >
-                            {tag}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </TooltipContent>
-                </Tooltip>
-              )}
+              itemRenderer={itemRenderer}
+              overflowRenderer={overflowRenderer}
             />
           </div>
         </div>
