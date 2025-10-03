@@ -133,7 +133,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       axisTick: { show: false },
       axisLabel: {
         margin: 4,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
         lineHeight: 18,
@@ -162,7 +162,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
                 : isTablet768
                   ? [2, 4, 20, 20]
                   : [2, 0, 20, 20],
-            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontFamily: 'var(--font-open-sans-condensed)',
             color: 'var(--color-muted-foreground)',
             backgroundColor: {
               image: isLightMode ? '/chart/line.png' : '/chart/line_dark.png',
@@ -183,7 +183,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
           },
           quarterlyQ2: {
             fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
-            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontFamily: 'var(--font-open-sans-condensed)',
             fontWeight: 700,
             color: 'var(--color-muted-foreground)',
             lineHeight: 22,
@@ -222,7 +222,7 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
       axisLabel: {
         width: 48,
         margin: 16,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         lineHeight: isMobile ? 16 : 19,

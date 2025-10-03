@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
@@ -10,6 +11,26 @@ import type { Metadata } from 'next'
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+})
+const openSansCondensed = localFont({
+  src: [
+    {
+      path: './fonts/OpenSansCondensed/OpenSansCondensed-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './fonts/OpenSansCondensed/OpenSansCondensed-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './fonts/OpenSansCondensed/OpenSansCondensed-LightItalic.ttf',
+      weight: '300',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-open-sans-condensed',
 })
 
 export const metadata: Metadata = {
@@ -24,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className="scroll-smooth" lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} ${openSansCondensed.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
             <NuqsAdapter>
