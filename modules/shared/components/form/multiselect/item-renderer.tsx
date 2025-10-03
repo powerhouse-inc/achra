@@ -23,7 +23,7 @@ export function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: I
       data-fixed={option.fixed}
       data-disabled={disabled ?? undefined}
     >
-      {typeof option.label === 'string' ? option.label : option.label}
+      {option.label}
       <div
         className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute -inset-y-px -end-px flex size-7 cursor-pointer items-center justify-center rounded-e-md border border-transparent p-0 outline-hidden transition-[color,box-shadow] outline-none focus-visible:ring-[3px]"
         onKeyDown={(e) => {

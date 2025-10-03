@@ -18,12 +18,12 @@ export default function WorkstreamFilters() {
         <StatusSelect
           statuses={statuses}
           setStatuses={setStatuses}
-          className="sm:flex-1 md:w-full md:max-w-54 md:min-w-54 lg:max-w-64 lg:min-w-64 xl:max-w-75 xl:min-w-75"
+          className="w-1/2 md:w-full md:max-w-54 md:min-w-54 lg:max-w-64 lg:min-w-64 xl:max-w-75 xl:min-w-75"
         />
         <NetworkSelect
           networks={networks}
           setNetworks={setNetworks}
-          className="sm:flex-1 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
+          className="w-1/2 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
         />
       </div>
 
