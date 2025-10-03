@@ -86,7 +86,7 @@ export function CardStackedAreaChart() {
             // gap
             'gap-x-6 gap-y-2',
             // Padding
-            'h-28 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
+            'min-h-28 px-2 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
           )}
         >
           {series.map((item) => {

@@ -33,8 +33,8 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
               : 'text-foreground/50 hover:text-foreground sm:hover:!bg-transparent',
           )}
         >
-          <span className="block sm:hidden lg:block">{tab.longName}</span>
-          <span className="hidden sm:block lg:hidden">{tab.shortName}</span>
+          <span className="block sm:hidden md:block">{tab.longName}</span>
+          <span className="hidden sm:block md:hidden">{tab.shortName}</span>
         </Button>
       ))}
     </div>
