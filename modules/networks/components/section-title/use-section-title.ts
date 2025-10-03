@@ -20,6 +20,7 @@ export function useSectionTitle() {
       setTooltip('Failed to copy URL')
     }
   }
+
   return {
     handleCopyUrl,
     handleLinkMouseEnter,

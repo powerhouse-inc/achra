@@ -3,6 +3,7 @@ import type { FormattedFinancesData, MetricKey, StackedAreaSeries } from './type
 export const getStackedAreaSeries = (
   financesData: FormattedFinancesData,
   selectedMetric: MetricKey,
+  isLightMode: boolean,
 ) => {
   const series: StackedAreaSeries[] = [
     {
@@ -15,7 +16,7 @@ export const getStackedAreaSeries = (
       showSymbol: false,
       data: financesData[selectedMetric].legacyOthers,
       itemStyle: {
-        color: 'var(--color-chart-7)',
+        color: '#9da6b9',
       },
     },
     {
@@ -28,7 +29,7 @@ export const getStackedAreaSeries = (
       showSymbol: false,
       data: financesData[selectedMetric].legacyCoreUnits,
       itemStyle: {
-        color: 'var(--color-chart-8)',
+        color: '#ced3dc',
       },
     },
     {
@@ -40,7 +41,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].governanceScope,
-      itemStyle: { color: 'var(--color-fusion)' },
+      itemStyle: { color: '#ff82a1' },
     },
     {
       type: 'line',
@@ -51,7 +52,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].stability,
-      itemStyle: { color: 'var(--color-status-progress)' },
+      itemStyle: { color: '#329DFF' },
     },
     {
       type: 'line',
@@ -62,7 +63,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].support,
-      itemStyle: { color: 'var(--color-chart-6)' },
+      itemStyle: { color: isLightMode ? 'rgb(248, 133, 126)' : 'rgb(248, 133, 126)' },
     },
     {
       type: 'line',
@@ -73,7 +74,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].protocol,
-      itemStyle: { color: 'var(--color-status-success)' },
+      itemStyle: { color: '#4FC86F' },
     },
     {
       type: 'line',
@@ -84,7 +85,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].accessibility,
-      itemStyle: { color: 'var(--color-purple)' },
+      itemStyle: { color: '#8E55EA' },
     },
     {
       type: 'line',
@@ -95,7 +96,7 @@ export const getStackedAreaSeries = (
       emphasis: { focus: 'series' },
       showSymbol: false,
       data: financesData[selectedMetric].immutable,
-      itemStyle: { color: 'var(--color-to-do)' },
+      itemStyle: { color: '#FFA132' },
     },
   ]
   return series

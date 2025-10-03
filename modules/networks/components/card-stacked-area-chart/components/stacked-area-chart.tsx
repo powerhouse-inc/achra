@@ -1,5 +1,6 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
+import { useTheme } from 'next-themes'
 import { useRef } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
@@ -14,12 +15,14 @@ interface StackedAreaChartProps {
   series: StackedAreaSeries[]
 }
 
-function StackedAreaChart({ series, years }: StackedAreaChartProps) {
-  const financesLineChartRef = useRef<ReactECharts>(null)
+function StackedAreaChart({ years, series }: StackedAreaChartProps) {
+  const financesLineChartRef = useRef<EChartsOption>(null)
+  const { theme } = useTheme()
+  const isLightMode = theme === 'light'
 
   const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet640 = useMediaQuery({ from: 'sm', to: 'md' })
-  const isTable760 = useMediaQuery({ from: 'md', to: 'lg' })
+  const isTablet768 = useMediaQuery({ from: 'md', to: 'lg' })
   const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesk1280 = useMediaQuery({ from: 'xl', to: '2xl' })
   const isDesk1440 = useMediaQuery({ from: '2xl' })
@@ -29,11 +32,11 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       top: 8,
       right: 10,
       bottom: 40,
-      left: isTablet640 || isTable760 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
+      left: isTablet640 || isTablet768 ? 40 : isDesk1280 ? 50 : isDesk1440 ? 50 : 40,
       width:
         isMobile || isTablet640
           ? 'calc(100% - 50px)'
-          : isTable760
+          : isTablet768
             ? 330
             : isDesk1024
               ? 470
@@ -49,7 +52,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       axisPointer: {
         type: 'shadow',
         shadowStyle: {
-          opacity: 0.15,
+          opacity: 0.3,
         },
       },
       padding: 0,
@@ -66,7 +69,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
       ) => {
         const tooltipWidth = size.contentSize[0]
         const containerWidth = size.viewSize[0]
-        const margin = isTablet640 || isTable760 ? 0 : 8
+        const margin = isTablet640 || isTablet768 ? 0 : 8
 
         let xPos = point[0]
         const yPos = point[1] + margin
@@ -132,7 +135,7 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
         margin: 4,
         fontFamily: 'Open Sans Condensed, sans-serif',
         fontWeight: 700,
-        fontSize: isMobile || isTablet640 ? 12 : 14,
+        fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
         lineHeight: 18,
         color: 'var(--color-muted-foreground)',
         interval: 0,
@@ -141,36 +144,55 @@ function StackedAreaChart({ series, years }: StackedAreaChartProps) {
           if (year) {
             return `{quarterly|${quarterly}}\n{year|${year}}`
           }
+          if (quarterly === 'Q2') {
+            return `{quarterlyQ2|${quarterly}}`
+          }
           return quarterly
         },
         rich: {
           quarterly: {
             verticalAlign: 'top',
-            fontSize: isMobile || isTablet640 ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
             fontWeight: 700,
             lineHeight: 22,
             interval: 0,
             padding:
               isMobile || isTablet640
-                ? [3, 8, 20, 12]
-                : isTable760
-                  ? [2, 14, 20, 20]
+                ? [3, -1, 20, 12]
+                : isTablet768
+                  ? [2, 4, 20, 20]
                   : [2, 0, 20, 20],
             fontFamily: 'Open Sans Condensed, sans-serif',
             color: 'var(--color-muted-foreground)',
+            backgroundColor: {
+              image: isLightMode ? '/chart/line.png' : '/chart/line_dark.png',
+            },
           },
           year: {
-            fontSize: isMobile || isTablet640 ? 12 : 14,
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
             fontFamily: 'Open Sans Condensed, sans-serif',
             fontWeight: 700,
             color: 'var(--color-foreground)',
             lineHeight: 22,
             padding:
               isMobile || isTablet640
-                ? [0, 2, 10, 20]
-                : isTable760
-                  ? [0, 6, 10, 32]
+                ? [0, -4, 10, 20]
+                : isTablet768
+                  ? [0, 4, 10, 32]
                   : [0, 0, 10, 32],
+          },
+          quarterlyQ2: {
+            fontSize: isMobile || isTablet640 ? 10 : isTablet768 ? 12 : 14,
+            fontFamily: 'Open Sans Condensed, sans-serif',
+            fontWeight: 700,
+            color: 'var(--color-muted-foreground)',
+            lineHeight: 22,
+            padding:
+              isMobile || isTablet640
+                ? [4, 14, 10, 20]
+                : isTablet768
+                  ? [5, 12, 10, 20]
+                  : [4, 14, 10, 20],
           },
         },
       },
