@@ -160,10 +160,11 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
               isMobile || isTablet640
                 ? [3, -1, 20, 12]
                 : isTablet768
-                  ? [3, 4, 20, 20]
+                  ? [3, 3, 20, 20]
                   : [2, 0, 20, 20],
             fontFamily: 'var(--font-open-sans-condensed)',
             color: 'var(--color-muted-foreground)',
+
             backgroundColor: {
               image: isLightMode ? '/chart/line.png' : '/chart/line_dark.png',
             },
@@ -176,9 +177,9 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
             lineHeight: 22,
             padding:
               isMobile || isTablet640
-                ? [0, -4, 10, 20]
+                ? [4, -4, 10, 20]
                 : isTablet768
-                  ? [0, 4, 10, 32]
+                  ? [0, 4, 10, 34]
                   : [0, 0, 10, 32],
           },
           quarterlyQ2: {

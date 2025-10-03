@@ -15,17 +15,17 @@ const inter = Inter({
 const openSansCondensed = localFont({
   src: [
     {
-      path: './fonts/OpenSansCondensed/OpenSansCondensed-Light.ttf',
+      path: '../public/fonts/OpenSansCondensed/OpenSansCondensed-Light.ttf',
       weight: '300',
       style: 'normal',
     },
     {
-      path: './fonts/OpenSansCondensed/OpenSansCondensed-Bold.ttf',
+      path: '../public/fonts/OpenSansCondensed/OpenSansCondensed-Bold.ttf',
       weight: '700',
       style: 'normal',
     },
     {
-      path: './fonts/OpenSansCondensed/OpenSansCondensed-LightItalic.ttf',
+      path: '../public/fonts/OpenSansCondensed/OpenSansCondensed-LightItalic.ttf',
       weight: '300',
       style: 'italic',
     },
