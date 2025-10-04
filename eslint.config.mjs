@@ -149,7 +149,6 @@ const eslintConfig = [
         },
       ],
       'react/no-array-index-key': 'warn',
-      'react/no-unstable-nested-components': 'error',
       'react/jsx-key': ['error', { checkFragmentShorthand: true }],
       'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
 
