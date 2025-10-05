@@ -77,7 +77,7 @@ export function CardStackedAreaChart() {
           />
         </div>
       </div>
-      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-6 xl:flex-col xl:gap-4.5">
+      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-4 xl:flex-col xl:gap-4.5">
         <StackedAreaChart series={series} years={mockYears} />
 
         <div
