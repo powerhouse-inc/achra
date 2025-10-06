@@ -9,8 +9,8 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from '@/modules/shared/components/ui/hover-card'
+import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
-import { useTooltipPosition } from '../hooks/use-tooltip-position'
 import { MobileDialogContent } from '../tooltips/mobile-tooltip-modal'
 
 interface SpendingItemProps extends React.PropsWithChildren {
@@ -27,7 +27,7 @@ export function SpendingItem({
   children,
   className,
 }: SpendingItemProps) {
-  const isMobile = useTooltipPosition('(max-width: 767px)')
+  const isMobile = useIsMobile()
 
   const [alignment, setAlignment] = useState<'start' | 'end'>('start')
   const triggerRef = useRef<HTMLButtonElement>(null)

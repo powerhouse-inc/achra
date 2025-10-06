@@ -1,7 +1,6 @@
-// src/modules/shared/components/ui/mobile-tooltip-dialog.tsx
 'use client'
 
-import * as DialogPrimitive from '@radix-ui/react-dialog' // Usamos los primitivos directamente
+import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import * as React from 'react'
 import { DialogClose, DialogOverlay, DialogPortal } from '@/modules/shared/components/ui/dialog'
