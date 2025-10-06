@@ -1,9 +1,8 @@
 import { EllipsisIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { useMediaQuery } from 'usehooks-ts'
-
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,12 +18,8 @@ interface DotsSegmentProps {
 
 function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   const [open, setOpen] = useState(defaultOpen)
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const isMobileOrTablet = useMediaQuery('(max-width: 1024px)')
-
-  useEffect(() => {
-    setOpen(defaultOpen)
-  }, [defaultOpen])
+  const isMobile = useMediaQuery({ to: 'md' })
+  const isMobileOrTablet = useMediaQuery({ to: 'lg' })
 
   const triggerIcon = (
     <div className="sm:bg-accent flex cursor-pointer items-center justify-center rounded-lg bg-transparent px-1">
