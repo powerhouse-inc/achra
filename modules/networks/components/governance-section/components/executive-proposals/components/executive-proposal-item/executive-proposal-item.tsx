@@ -47,7 +47,7 @@ export function ExecutiveProposalItem({
               .toFormat("LLL dd yyyy HH:mm 'UTC'")
               .toUpperCase()}`}</span>
           </div>
-          {isHat && executiveProposal.address !== ethers.constants.AddressZero && (
+          {isHat && executiveProposal.address !== ethers.ZeroAddress && (
             <Badge variant="success" className="order-1 uppercase xl:order-2">
               Governing Proposal
             </Badge>

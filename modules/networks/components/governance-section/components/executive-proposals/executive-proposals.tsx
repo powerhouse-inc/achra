@@ -1,3 +1,4 @@
+'use client'
 import {
   StripedCard,
   StripedCardContent,
@@ -5,23 +6,16 @@ import {
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card/striped-card'
 import { cn } from '@/modules/shared/lib/utils'
-import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 import { ExecutiveProposalItem } from './components/executive-proposal-item/executive-proposal-item'
 import { useExecutiveProposals } from './use-executive-proposals'
 
 interface ExecutiveProposalsProps {
-  executiveProposals?: ExtendedExecutiveProposal[]
-  hatAddress?: string | null
   className?: string
 }
 
-export function ExecutiveProposals({
-  executiveProposals,
-  hatAddress,
-  className,
-}: ExecutiveProposalsProps) {
-  const { openProposals, activeProposals, passedProposals, slicedPassedProposals } =
-    useExecutiveProposals({ executiveProposals, hatAddress })
+export function ExecutiveProposals({ className }: ExecutiveProposalsProps) {
+  const { openProposals, activeProposals, passedProposals, slicedPassedProposals, hatAddress } =
+    useExecutiveProposals()
 
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>

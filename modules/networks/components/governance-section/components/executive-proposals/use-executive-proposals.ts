@@ -1,15 +1,20 @@
+import { useQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
+import { fetchGovernanceProposals } from '@/modules/networks/lib/fetch-governance-proposals'
+import { getChiefHat } from '@/web3/api/governance'
+import { GOVERNANCE_CHIEF_HAT_QUERY_KEY, GOVERNANCE_PROPOSALS_QUERY_KEY } from '../../constants'
 
-interface UseExecutiveProposalsProps {
-  executiveProposals?: ExtendedExecutiveProposal[]
-  hatAddress?: string | null
-}
+export function useExecutiveProposals() {
+  const { data: executiveProposals } = useQuery({
+    queryKey: [GOVERNANCE_PROPOSALS_QUERY_KEY],
+    queryFn: fetchGovernanceProposals,
+  })
 
-export function useExecutiveProposals({
-  executiveProposals,
-  hatAddress,
-}: UseExecutiveProposalsProps) {
+  const { data: hatAddress } = useQuery({
+    queryKey: [GOVERNANCE_CHIEF_HAT_QUERY_KEY],
+    queryFn: getChiefHat,
+  })
+
   const openProposals = useMemo(() => {
     if (!executiveProposals) return []
     return executiveProposals.filter(
