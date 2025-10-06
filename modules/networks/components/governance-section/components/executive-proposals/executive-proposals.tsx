@@ -24,7 +24,7 @@ export function ExecutiveProposals({
     useExecutiveProposals({ executiveProposals, hatAddress })
 
   return (
-    <div className={cn('flex w-full flex-col gap-2', className)}>
+    <div className={cn('flex w-full flex-col gap-4', className)}>
       {openProposals.length > 0 && (
         <StripedCard className={cn('w-full', className)}>
           <StripedCardHeader>

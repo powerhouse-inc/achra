@@ -16,7 +16,7 @@ export interface ExecutiveProposal {
     nextCastTime: string
     datePassed: string
     dateExecuted: string
-    mkrSupport: string
+    skySupport: string
     executiveHash: string
     officeHours: boolean
   }

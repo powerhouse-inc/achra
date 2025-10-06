@@ -1,6 +1,6 @@
 'use client'
 
-import { ethers, utils } from 'ethers'
+import { ethers } from 'ethers'
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
@@ -22,7 +22,7 @@ export function ExecutiveProposalItem({
   className,
   isHat,
 }: ExecutiveProposalItemProps) {
-  const mkrSupportEth = parseFloat(utils.formatEther(executiveProposal.spellData.mkrSupport))
+  const skySupportEth = parseFloat(executiveProposal.spellData.skySupport)
 
   return (
     <div
@@ -69,7 +69,7 @@ export function ExecutiveProposalItem({
           </span>
           <div className="flex items-center gap-0.5">
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
-              {usLocalizedNumber(mkrSupportEth, mkrSupportEth < 1000 ? 2 : 0)}
+              {usLocalizedNumber(skySupportEth, skySupportEth < 1000 ? 2 : 0)}
             </span>
             <div className="relative size-5">
               <Image
