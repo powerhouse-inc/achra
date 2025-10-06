@@ -62,10 +62,12 @@ export function SpendingItem({
         'p-2 pt-3 pr-2 pb-2 pl-4 sm:px-2 sm:py-1.5',
       )}
     >
-      <div className="bg-popover sm:bg-accent absolute -top-2.5 left-8 flex items-center gap-2 px-2 sm:-top-3 sm:left-1 sm:px-2 md:rounded-lg">
+      <div className="bg-popover sm:bg-accent absolute -top-2.5 left-8 flex items-center gap-2 px-2 sm:-top-3 sm:left-1 sm:px-2 md:-top-2 md:rounded-lg md:px-1">
         <span
           className={cn(
-            'text-popover-foreground text-xs leading-6 font-medium md:text-sm md:leading-5 md:font-semibold xl:text-sm xl:leading-4',
+            // text
+            'text-popover-foreground text-xs/4.5 font-medium xl:text-sm xl:leading-4',
+            // position
             'md:left-8 md:py-0 xl:left-4',
           )}
         >

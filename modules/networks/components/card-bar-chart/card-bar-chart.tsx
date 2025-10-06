@@ -14,7 +14,7 @@ export function CardBarChart() {
         Sky Ecosystem Finances
       </CardTitle>
       <div className="flex w-full flex-col gap-3.5 sm:flex-row sm:gap-4 xl:flex-col xl:gap-6.25">
-        <div className="flex w-full">
+        <div className="flex">
           <FinancesBarChart
             revenueAndSpendingData={revenueAndSpendingData}
             years={getYearsForChart(revenueAndSpendingData)}

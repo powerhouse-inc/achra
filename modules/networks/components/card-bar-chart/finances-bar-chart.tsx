@@ -156,7 +156,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       className={cn(
         'relative mt-2.5 flex flex-col justify-center sm:mt-0',
         // Dimensions
-        'h-[216px] w-full',
+        'h-[216px] min-w-full',
         'sm:h-[282px] sm:w-[337px]',
         'md:h-[282px] md:w-[385px]',
         'lg:h-[282px] lg:w-[526px]',

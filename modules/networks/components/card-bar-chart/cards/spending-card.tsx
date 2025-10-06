@@ -17,7 +17,7 @@ export function SpendingCard() {
       <span className="text-muted-foreground sm:text-popover-foreground sm:bg-popover mb-2 w-full justify-center text-center text-xs/5 font-medium sm:absolute sm:-top-2 sm:left-6 sm:mb-0 sm:w-fit sm:rounded-lg sm:px-2 sm:py-0 md:text-sm md:leading-5 md:font-semibold xl:-mt-2 xl:text-base/6">
         Spending
       </span>
-      <div className="flex w-full flex-col gap-2.5 sm:mt-2 sm:gap-4 md:mt-1.5 lg:flex-row xl:flex-col">
+      <div className="flex w-full flex-col gap-2.5 sm:mt-2 sm:gap-4 md:mt-1.5 lg:flex-row lg:gap-2 xl:flex-col xl:gap-4">
         <SpendingItem
           shortTitle="Oper Expenses"
           title="Operational Expenses"
