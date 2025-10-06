@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from './legend-item'
@@ -16,11 +18,45 @@ export function SpendingCard() {
         Spending
       </span>
       <div className="flex w-full flex-col gap-2.5 sm:mt-2 sm:gap-4 md:mt-1.5 lg:flex-row lg:gap-2 xl:flex-col xl:gap-4">
-        <SpendingItem title="Oper Expenses" mobileTitle="Operational Expenses">
+        <SpendingItem
+          shortTitle="Oper Expenses"
+          title="Operational Expenses"
+          tooltipContent={
+            <div>
+              <div className="mb-1">
+                <span className="text-foreground font-bold">USDS/DAI</span>
+                <p>
+                  Operational costs such as salaries, services, and other day-to-day expenses
+                  necessary for the running of the Sky Ecosystem.
+                </p>
+              </div>
+
+              <div>
+                <span className="text-foreground font-bold">MKR</span>
+                <p>
+                  Governance tokens are allocated to Sky Ecosystem Contributors as a long-term
+                  incentive.
+                </p>
+              </div>
+            </div>
+          }
+        >
           <ItemLegend color="fill-destructive/70 text-transparent">USDS Expensed</ItemLegend>
           <ItemLegend color="fill-destructive text-transparent">SKY Vesting</ItemLegend>
         </SpendingItem>
-        <SpendingItem title="Protocol Costs">
+        <SpendingItem
+          title="Protocol Costs"
+          tooltipContent={
+            <div>
+              <p className="text-sm">
+                <span>
+                  Represents the total interest paid to USDS holders for locking their USDS in the
+                  USDS Savings Rate module.
+                </span>
+              </p>
+            </div>
+          }
+        >
           <ItemLegend color="fill-status-warning text-transparent">DSR Cost</ItemLegend>
         </SpendingItem>
       </div>

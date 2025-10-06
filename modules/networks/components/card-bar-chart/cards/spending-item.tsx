@@ -1,21 +1,64 @@
+'use client'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { InfoIcon } from 'lucide-react'
-import React from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/modules/shared/components/ui/hover-card'
+import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
+import { MobileDialogContent } from '../tooltips/mobile-tooltip-modal'
 
 interface SpendingItemProps extends React.PropsWithChildren {
   title: string
-  mobileTitle?: string
+  shortTitle?: string
+  tooltipContent: React.ReactNode
   className?: string
 }
+const tooltipWidth = 320
+export function SpendingItem({
+  title,
+  shortTitle,
+  tooltipContent,
+  children,
+  className,
+}: SpendingItemProps) {
+  const isMobile = useIsMobile()
 
-export function SpendingItem({ title, mobileTitle, children, className }: SpendingItemProps) {
+  const [alignment, setAlignment] = useState<'start' | 'end'>('start')
+  const triggerRef = useRef<HTMLButtonElement>(null)
+
+  const calculateAlignment = useCallback(() => {
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect()
+      const viewportWidth = window.innerWidth
+      const newAlignment = rect.right + tooltipWidth > viewportWidth ? 'end' : 'start'
+      setAlignment(newAlignment)
+    }
+  }, [])
+
+  useEffect(() => {
+    calculateAlignment()
+
+    window.addEventListener('resize', calculateAlignment)
+
+    return () => {
+      window.removeEventListener('resize', calculateAlignment)
+    }
+  }, [calculateAlignment, isMobile])
+
+  const triggerAriaLabel = 'Ver más información'
+  const TriggerIcon = <InfoIcon className="text-muted-foreground h-2.5 w-2.5" />
+
   return (
     <div
       className={cn(
         'relative flex w-full flex-col items-center rounded-xl sm:items-start md:justify-center md:bg-none xl:px-4 xl:py-1',
-        // border
         'border-input border',
-        // padding
         'p-2 pt-3 pr-2 pb-2 pl-4 sm:px-2 sm:py-1.5',
       )}
     >
@@ -28,10 +71,48 @@ export function SpendingItem({ title, mobileTitle, children, className }: Spendi
             'md:left-8 md:py-0 xl:left-4',
           )}
         >
-          {mobileTitle && <span className="block sm:hidden">{mobileTitle}</span>}
-          <span className={mobileTitle ? 'hidden sm:block' : ''}>{title}</span>
+          {shortTitle && <span className="hidden sm:block xl:hidden">{shortTitle}</span>}
+          {shortTitle && <span className="block sm:hidden xl:block">{title}</span>}
+          {!shortTitle && <span className="block">{title}</span>}
         </span>
-        <InfoIcon className="text-muted-foreground h-2.5 w-2.5" />
+
+        {isMobile ? (
+          <DialogPrimitive.Root>
+            <DialogPrimitive.Trigger asChild>
+              <button type="button" aria-label={triggerAriaLabel}>
+                {TriggerIcon}
+              </button>
+            </DialogPrimitive.Trigger>
+            <MobileDialogContent>
+              <VisuallyHidden>
+                <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
+              </VisuallyHidden>
+              <div className="text-muted-foreground text-sm">{tooltipContent}</div>
+            </MobileDialogContent>
+          </DialogPrimitive.Root>
+        ) : (
+          <HoverCard openDelay={200} closeDelay={100}>
+            <HoverCardTrigger asChild>
+              <button
+                ref={triggerRef}
+                type="button"
+                aria-label={triggerAriaLabel}
+                className="flex cursor-pointer items-center"
+              >
+                {TriggerIcon}
+              </button>
+            </HoverCardTrigger>
+            <HoverCardContent
+              side="bottom"
+              sideOffset={10}
+              collisionPadding={16}
+              align={alignment}
+              className="bg-popover w-80 rounded-xl border p-4 shadow-md"
+            >
+              <div className="text-sm">{tooltipContent}</div>
+            </HoverCardContent>
+          </HoverCard>
+        )}
       </div>
       <div className={cn('flex gap-6 sm:flex-col sm:justify-start sm:gap-2', className)}>
         {children}
