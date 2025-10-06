@@ -1,4 +1,3 @@
-import { type Route } from 'next'
 import BreadcrumbNavigation from './breadcrumb-navigation'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
