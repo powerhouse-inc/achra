@@ -75,7 +75,7 @@ interface UseScrollToSectionOptions {
  * @returns Object containing scrollToSection function for external use
  */
 export function useScrollToSection(options: UseScrollToSectionOptions = {}) {
-  const { animationDelay = 350, disableNativeScroll = true } = options
+  const { animationDelay = 800, disableNativeScroll = true } = options
 
   const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const isScrollingRef = useRef(false)
