@@ -28,7 +28,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
       <EllipsisIcon />
     </div>
   )
-
+  const currentItemLabel = items[items.length - 1].label
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
@@ -36,8 +36,12 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
 
         <DrawerContent className="data-[vaul-drawer-direction=bottom]:bg-popover [&>div:first-child]:bg-foreground/30 mt-0 mb-0 rounded-t-xl border-none bg-transparent data-[vaul-drawer-direction=bottom]:bottom-0">
           <div className="flex flex-col gap-2 overflow-hidden px-4 py-2 hover:rounded-md">
-            {[...items].reverse().map((item, index) => (
-              <MobileItem key={item.label} item={item} index={index} />
+            {[...items].reverse().map((item) => (
+              <MobileItem
+                key={item.label}
+                item={item}
+                isCurrent={item.label === currentItemLabel}
+              />
             ))}
           </div>
         </DrawerContent>

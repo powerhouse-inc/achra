@@ -6,25 +6,23 @@ import type { BreadcrumbItemNavigation } from '../types'
 
 interface MobileItemProps {
   item: BreadcrumbItemNavigation
-  index: number
-  key: React.Key
+  isCurrent: boolean
 }
 
-export function MobileItem({ item, index, key }: MobileItemProps) {
+export function MobileItem({ item, isCurrent }: MobileItemProps) {
   return (
     <div
-      key={key}
       className={cn(
         'hover:bg-accent relative flex w-full rounded-md px-3 py-2 text-sm leading-tight',
         {
-          'bg-accent': index === 0,
+          'bg-accent': isCurrent,
         },
       )}
     >
       <Link href={item.href} className="text-foreground w-full font-normal">
         {item.label}
       </Link>
-      {index === 0 && <CheckIcon className="absolute top-1/2 right-2 -translate-y-1/2" />}
+      {isCurrent && <CheckIcon className="absolute top-1/2 right-2 -translate-y-1/2" />}
     </div>
   )
 }
