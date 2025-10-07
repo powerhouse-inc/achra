@@ -94,7 +94,7 @@ export function ExecutiveProposalItem({
         <div className="flex w-fit justify-end sm:min-w-30 md:min-w-fit">
           <Button variant="outline" size="default" asChild className="w-9 lg:w-fit">
             <Link
-              href={`https://vote.makerdao.com/executive/${executiveProposal.key}`}
+              href={`https://vote.sky.money/executive/${executiveProposal.key}`}
               target="_blank"
             >
               <span className="hidden lg:block">View</span>
