@@ -1,7 +1,7 @@
 import { EllipsisIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
 
+import { useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   DropdownMenu,
@@ -9,6 +9,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
+import { Drawer, DrawerContent, DrawerTrigger } from '../../ui/drawer'
+import { MobileItem } from './mobile-item'
 import type { BreadcrumbItemNavigation } from '../types'
 
 interface DotsSegmentProps {
@@ -26,15 +28,24 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
       <EllipsisIcon />
     </div>
   )
-
+  const currentItemLabel = items[items.length - 1].label
   if (isMobile) {
-    // TODO: Add mobile view
     return (
-      <div>
-        {items.map((item: BreadcrumbItemNavigation) => (
-          <div key={item.label}>{item.label}</div>
-        ))}
-      </div>
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger asChild>{triggerIcon}</DrawerTrigger>
+
+        <DrawerContent className="data-[vaul-drawer-direction=bottom]:bg-popover [&>div:first-child]:bg-foreground/30 mt-0 mb-0 rounded-t-xl border-none bg-transparent data-[vaul-drawer-direction=bottom]:bottom-0">
+          <div className="flex flex-col gap-2 overflow-hidden px-4 py-2 hover:rounded-md">
+            {[...items].reverse().map((item) => (
+              <MobileItem
+                key={item.label}
+                item={item}
+                isCurrent={item.label === currentItemLabel}
+              />
+            ))}
+          </div>
+        </DrawerContent>
+      </Drawer>
     )
   }
 
