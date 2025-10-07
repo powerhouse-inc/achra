@@ -8,11 +8,19 @@ export function useExecutiveProposals() {
   const { data: executiveProposals } = useQuery({
     queryKey: [GOVERNANCE_PROPOSALS_QUERY_KEY],
     queryFn: fetchGovernanceProposals,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   })
 
   const { data: hatAddress } = useQuery({
     queryKey: [GOVERNANCE_CHIEF_HAT_QUERY_KEY],
     queryFn: getChiefHat,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   })
 
   const openProposals = useMemo(() => {
