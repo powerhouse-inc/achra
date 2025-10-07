@@ -37,15 +37,24 @@ export function ExecutiveProposalItem({
         </span>
         <div className="flex flex-col justify-between gap-2 xl:flex-row xl:items-center">
           <div className="text-foreground/50 order-2 flex flex-col gap-0.5 text-xs/4.5 font-medium sm:flex-row sm:gap-2 xl:order-1 xl:text-sm/5.5 xl:font-semibold">
-            <span>{`Passed on ${DateTime.fromISO(executiveProposal.spellData.datePassed)
-              .toUTC()
-              .toFormat("LLL dd yyyy HH:mm 'UTC'")
-              .toUpperCase()}`}</span>
-            <span className="hidden sm:inline">-</span>
-            <span>{`Executed on ${DateTime.fromISO(executiveProposal.spellData.dateExecuted)
-              .toUTC()
-              .toFormat("LLL dd yyyy HH:mm 'UTC'")
-              .toUpperCase()}`}</span>
+            {executiveProposal.spellData.datePassed && executiveProposal.spellData.dateExecuted ? (
+              <>
+                <span>{`Passed on ${DateTime.fromISO(executiveProposal.spellData.datePassed)
+                  .toUTC()
+                  .toFormat("LLL dd yyyy HH:mm 'UTC'")
+                  .toUpperCase()}`}</span>
+                <span className="hidden sm:inline">-</span>
+                <span>{`Executed on ${DateTime.fromISO(executiveProposal.spellData.dateExecuted)
+                  .toUTC()
+                  .toFormat("LLL dd yyyy HH:mm 'UTC'")
+                  .toUpperCase()}`}</span>
+              </>
+            ) : (
+              <span>{`Expires at ${DateTime.fromISO(executiveProposal.spellData.expiration)
+                .toUTC()
+                .toFormat("LLL dd yyyy HH:mm 'UTC'")
+                .toUpperCase()}`}</span>
+            )}
           </div>
           {isHat && executiveProposal.address !== ethers.ZeroAddress && (
             <Badge variant="success" className="order-1 uppercase xl:order-2">
