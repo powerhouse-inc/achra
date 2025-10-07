@@ -77,7 +77,7 @@ export function CardStackedAreaChart() {
           />
         </div>
       </div>
-      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-4 xl:flex-col xl:gap-4.5">
+      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-4 xl:flex-col xl:gap-4">
         <StackedAreaChart series={series} years={mockYears} />
 
         <div
@@ -86,7 +86,7 @@ export function CardStackedAreaChart() {
             // gap
             'gap-x-6 gap-y-2',
             // Padding
-            'min-h-28 px-2 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
+            'xl:min-h-none min-h-28 px-2 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:h-36 xl:px-6 xl:py-7',
           )}
         >
           {series.map((item) => {
@@ -106,7 +106,7 @@ export function CardStackedAreaChart() {
       </div>
 
       <div className="mt-3.5 flex justify-center sm:-mt-0.5 lg:mt-2 xl:mt-4">
-        <InternalLink href="/networks" className="h-8 w-fit">
+        <InternalLink href="/networks" className="h-8 w-fit xl:h-9">
           Realized Expenses
         </InternalLink>
       </div>
