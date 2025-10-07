@@ -19,12 +19,12 @@ export function SpendingCard() {
       </span>
       <div className="flex w-full flex-col gap-2.5 sm:mt-2 sm:gap-4 md:mt-1.5 lg:flex-row lg:gap-2 xl:flex-col xl:gap-4">
         <SpendingItem
-          shortTitle="Oper Expenses"
+          shortTitle="Opr Expenses"
           title="Operational Expenses"
           tooltipContent={
             <div>
               <div className="mb-1">
-                <span className="text-foreground font-bold">USDS/DAI</span>
+                <span className="text-foreground font-bold">USDS</span>
                 <p>
                   Operational costs such as salaries, services, and other day-to-day expenses
                   necessary for the running of the Sky Ecosystem.
@@ -32,7 +32,7 @@ export function SpendingCard() {
               </div>
 
               <div>
-                <span className="text-foreground font-bold">MKR</span>
+                <span className="text-foreground font-bold">SKY</span>
                 <p>
                   Governance tokens are allocated to Sky Ecosystem Contributors as a long-term
                   incentive.

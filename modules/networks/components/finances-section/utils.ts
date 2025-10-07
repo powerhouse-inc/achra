@@ -5,8 +5,8 @@ const tooltipLabels: Record<string, string> = {
   psm: 'PSM',
   liquidationIncome: 'Liquidation Income',
   fees: 'Fees',
-  daiSpent: 'DAI Spent',
-  mkrVesting: 'MKR Vesting',
+  daiSpent: 'USDS Spent',
+  mkrVesting: 'SKY Vesting',
   dsr: 'DSR',
 }
 
