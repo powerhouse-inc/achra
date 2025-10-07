@@ -83,7 +83,7 @@ function BreadcrumbNavigation({
                     <BreadcrumbItem>
                       <DotsSegment items={items} defaultOpen={defaultOpen} />
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator className="text-foreground/30 [&>svg]:size-6" />
                   </>
                 )}
                 <BreadcrumbItem
@@ -106,13 +106,13 @@ function BreadcrumbNavigation({
                 {groupedItems.map((item: BreadcrumbItemExtended, index: number) => (
                   <Fragment key={`${item.label}-${item.href}-${item.recommendedWidth}`}>
                     <BreadcrumbItem
-                      className="group text-foreground/70 cursor-pointer text-base font-semibold"
+                      className="group text-foreground/30 cursor-pointer text-base font-normal"
                       style={{ maxWidth: item.recommendedWidth }}
                     >
                       {item.label === '...' ? (
                         <DotsSegment items={item.attachedItems ?? []} defaultOpen={defaultOpen} />
                       ) : index === groupedItems.length - 1 ? (
-                        <BreadcrumbPage className="overflow-hidden text-base text-ellipsis whitespace-nowrap">
+                        <BreadcrumbPage className="w-full overflow-hidden text-base font-semibold text-ellipsis whitespace-nowrap">
                           {item.label}
                         </BreadcrumbPage>
                       ) : (
