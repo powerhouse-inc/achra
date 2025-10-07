@@ -78,7 +78,6 @@ function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
       enableSelectAll={true}
       selectAllGroup="Statuses"
       placeholder="All Statuses"
-      hideClearAllButton={true}
       className={cn('bg-background dark:bg-background')}
       commandProps={{
         className,

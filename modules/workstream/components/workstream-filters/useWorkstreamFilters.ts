@@ -15,7 +15,7 @@ export default function useWorkstreamFilters() {
 
   const onReset = useCallback(() => {
     void setSearch('')
-    void setStatuses([WorkstreamStatus.OpenForProposals])
+    void setStatuses([])
     void setNetworks([])
   }, [setSearch, setStatuses, setNetworks])
 
