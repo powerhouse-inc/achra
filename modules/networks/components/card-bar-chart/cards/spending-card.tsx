@@ -24,7 +24,7 @@ export function SpendingCard() {
           tooltipContent={
             <div>
               <div className="mb-1">
-                <span className="text-foreground font-bold">USDS/USDS</span>
+                <span className="text-foreground font-bold">USDS</span>
                 <p>
                   Operational costs such as salaries, services, and other day-to-day expenses
                   necessary for the running of the Sky Ecosystem.
