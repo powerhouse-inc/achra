@@ -12,17 +12,16 @@ interface MobileItemProps {
 export function MobileItem({ item, isCurrent }: MobileItemProps) {
   return (
     <div
-      className={cn(
-        'hover:bg-accent relative flex w-full rounded-md px-3 py-2 text-sm leading-tight',
-        {
-          'bg-accent': isCurrent,
-        },
-      )}
+      className={cn('hover:bg-accent relative flex w-full rounded-md px-3 py-2', {
+        'bg-accent': isCurrent,
+      })}
     >
-      <Link href={item.href} className="text-foreground w-full font-normal">
+      <Link href={item.href} className="text-foreground w-full text-sm/5.5">
         {item.label}
       </Link>
-      {isCurrent && <CheckIcon className="absolute top-1/2 right-2 -translate-y-1/2" />}
+      {isCurrent && (
+        <CheckIcon className="text-foreground absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2" />
+      )}
     </div>
   )
 }
