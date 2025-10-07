@@ -1,12 +1,8 @@
-import { CalendarClock, FilePenLine, HandCoins, UserCheck } from 'lucide-react'
+import { FilePenLine } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Streamdown } from 'streamdown'
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  WorkstreamStatus,
-} from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import {
@@ -14,14 +10,14 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/modules/shared/components/ui/breadcrumb'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
+import WorkstreamStats from '../workstream-stats/workstream-stats'
 import ProposalCardsGrid from './proposal-cards-grid'
-import ProposalKeyValueElement from './proposal-key-value-element'
 import StatCards from './stat-cards'
 
 // TODO: remove this once the component is integrated with the API
@@ -44,7 +40,10 @@ export default function WorkstreamCard() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="/" className="relative flex h-4 items-center sm:h-4.5 md:h-6">
+                  <Link
+                    href="/network/powerhouse/workstreams"
+                    className="relative flex h-4 items-center sm:h-4.5 md:h-6"
+                  >
                     <Image
                       src="/networks/logos/powerhouse.png"
                       alt="Powerhouse"
@@ -59,37 +58,21 @@ export default function WorkstreamCard() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="text-foreground [&>svg]:size-4 md:[&>svg]:size-6" />
               <BreadcrumbItem>
-                <BreadcrumbPage className="max-w-50 truncate text-sm/5.5 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold md:max-w-100 md:text-2xl">
-                  Vetra Beta Launch
-                </BreadcrumbPage>
+                <BreadcrumbLink
+                  asChild
+                  className="text-foreground max-w-50 truncate text-sm/5.5 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold md:max-w-100 md:text-2xl"
+                >
+                  <Link href="/network/powerhouse/workstream/vetra-beta-launch">
+                    Vetra Beta Launch
+                  </Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
           <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-x-6 xl:grid-cols-3 xl:grid-cols-[1fr_1fr_1.3fr] sm:[&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
-          <ProposalKeyValueElement
-            keyValue="Issuer"
-            keyIcon={UserCheck}
-            value="Powerhouse RGH Team"
-          />
-          <ProposalKeyValueElement
-            keyValue="Budget Range"
-            keyIcon={HandCoins}
-            value="10K - 25K USD"
-          />
-          <ProposalKeyValueElement
-            keyValue={
-              <div>
-                <span className="sm:hidden">Deadline</span>
-                <span className="hidden sm:block">Submission Deadline</span>
-              </div>
-            }
-            keyIcon={CalendarClock}
-            value="12 SEP 2025 @ 12:00 CET"
-          />
-        </div>
+        <WorkstreamStats />
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
           <div className="w-full">
@@ -106,28 +89,8 @@ export default function WorkstreamCard() {
       </div>
 
       <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-        {/* Initial Proposal header */}
-        <div className="flex items-center justify-between">
-          <div className="flex w-full flex-col items-center gap-1 sm:items-start sm:gap-2 md:flex-row md:gap-4">
-            <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:gap-1 md:justify-start md:gap-2">
-              <div className="text-sm/5.5 font-semibold sm:text-base/6 md:text-lg md:leading-[120%] lg:text-xl lg:font-bold">
-                Initial Proposal
-              </div>
-              <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
-            </div>
+        <InitialProposalHeader />
 
-            <div className="text-foreground/50 flex w-full items-center gap-2 text-xs/4.5 font-medium sm:text-sm/5.5 sm:font-semibold md:w-auto md:text-base/6 md:font-normal">
-              <span>by</span>
-              <UserCheck className="size-4 sm:size-6" />
-              <span>Powerhouse RGH Team</span>
-            </div>
-          </div>
-          <InternalLink href="#" className="hidden sm:inline-flex sm:self-start" variant="outline">
-            View Proposal
-          </InternalLink>
-        </div>
-
-        {/* stat cards */}
         <StatCards />
 
         <InternalLink href="#" className="ml-auto max-w-fit sm:hidden" variant="outline">
