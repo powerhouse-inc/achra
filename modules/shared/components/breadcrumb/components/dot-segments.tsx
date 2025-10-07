@@ -12,7 +12,7 @@ import {
 } from '@/shared/components/ui/dropdown-menu'
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from '../../ui/drawer'
 import { MobileItem } from './mobile-item'
-import { TriggerIcon } from './trigger'
+import { TriggerIcon } from './trigger-icon'
 import type { BreadcrumbItemNavigation } from '../types'
 
 interface DotsSegmentProps {
@@ -61,7 +61,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
-        className="bg-popover max-w-49 min-w-[197px] rounded-xl border-none px-2 py-1 shadow-lg"
+        className="bg-popover max-w-49 min-w-49.25 rounded-xl border-none px-2 py-1 shadow-lg"
       >
         <div className="flex flex-col gap-2 overflow-hidden py-1">
           {itemsToRender.map((item: BreadcrumbItemNavigation) => (
