@@ -104,16 +104,13 @@ export default function KeyResults({
                   ) : (
                     <div
                       className={cn(
-                        'relative flex max-w-full gap-1.5 pl-6 text-sm font-medium',
-                        'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
+                        'relative flex max-w-full items-center gap-1 pl-6 text-sm/4.5 font-medium',
+                        'before:bg-foreground/50 before:absolute before:top-2 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
                       )}
                     >
-                      <span className="truncate">{keyResult.title}</span>
-                      <div
-                        className="ml-2 rounded-md bg-slate-50 px-2 py-0 text-xs leading-[18px] font-medium"
-                        style={{ fontSize: 12, fontWeight: 500 }}
-                      >
-                        Todo
+                      <span className="text-foreground/50 truncate">{keyResult.title}</span>
+                      <div className="bg-muted text-muted-foreground min-w-12.5 rounded-md px-1.5 text-xs/4 font-medium uppercase">
+                        TO DO
                       </div>
                     </div>
                   )}

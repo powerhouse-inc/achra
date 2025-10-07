@@ -18,7 +18,9 @@ interface FinancesBarChartProps {
 function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   const financesBarChartRef = useRef<EChartsOption>(null)
   const isMobile = useMediaQuery({ from: 'xs', to: 'sm' })
-  const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
+  const isTablet = useMediaQuery({ from: 'sm', to: 'md' })
+  const isTablet768 = useMediaQuery({ from: 'md', to: 'lg' })
+  const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
 
   const { chartSeries } = useMemo(() => {
     const series: Record<string, number[]> = {
@@ -50,7 +52,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
     }
   }, [revenueAndSpendingData])
 
-  const barWidth = isMobile ? 24 : isTablet ? 32 : 40
+  const barWidth = isMobile ? 24 : isTablet || isTablet768 ? 32 : 40
 
   const series = barChartSeriesConfig.map((config) => ({
     data: chartSeries[config.key],
@@ -87,10 +89,10 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
     },
     grid: {
-      top: isTablet ? 40 : isMobile ? 6 : 40,
+      top: isTablet || isTablet768 ? 40 : isMobile ? 6 : 40,
       right: 0,
       bottom: 20,
-      left: isMobile ? 40 : 49,
+      left: isMobile ? 40 : isTablet768 ? 40 : isDesk1024 ? 40 : 49,
     },
     xAxis: {
       data: ['2021', '2022', '2023', '2024'],
@@ -105,7 +107,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
       axisLabel: {
         margin: 4,
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         lineHeight: isMobile ? 16 : 19,
@@ -134,7 +136,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
 
       axisLabel: {
-        fontFamily: 'Open Sans Condensed, sans-serif',
+        fontFamily: 'var(--font-open-sans-condensed)',
         fontWeight: 700,
         fontSize: isMobile ? 12 : 14,
         color: 'var(--color-foreground)',
@@ -154,7 +156,7 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       className={cn(
         'relative mt-2.5 flex flex-col justify-center sm:mt-0',
         // Dimensions
-        'h-[216px] w-full',
+        'h-[216px] min-w-full',
         'sm:h-[282px] sm:w-[337px]',
         'md:h-[282px] md:w-[385px]',
         'lg:h-[282px] lg:w-[526px]',

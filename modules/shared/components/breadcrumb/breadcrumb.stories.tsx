@@ -2,7 +2,7 @@ import BreadcrumbNavigation from './breadcrumb-navigation'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Shared/Components/BreadcrumbNavigation',
+  title: 'Shared/Components/Breadcrumb',
   component: BreadcrumbNavigation,
   parameters: {
     nextjs: {
@@ -21,7 +21,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
-  name: 'MainBreadcrumb (Achra)',
+  name: 'Breadcrumb (Achra)',
   args: {
     className: 'container',
     maxSegmentWidthMobile: 100,

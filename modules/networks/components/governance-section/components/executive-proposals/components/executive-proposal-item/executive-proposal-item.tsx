@@ -1,0 +1,81 @@
+'use client'
+
+import { ExternalLinkIcon } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Badge } from '@/modules/shared/components/ui/badge'
+import { Button } from '@/modules/shared/components/ui/button'
+import { cn } from '@/modules/shared/lib/utils'
+import type { ExecutiveProposal } from '../../executive-proposals'
+
+export interface ExecutiveProposalItemProps {
+  executiveProposal: ExecutiveProposal
+  className?: string
+}
+
+export function ExecutiveProposalItem({
+  executiveProposal,
+  className,
+}: ExecutiveProposalItemProps) {
+  return (
+    <div
+      className={cn(
+        'bg-background outline-border grid grid-cols-1 gap-2 rounded-xl outline md:grid-cols-[1fr_auto] md:gap-0',
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-2 p-2 lg:gap-3 lg:p-4">
+        <span className="text-foreground text-xs/4.5 font-medium lg:text-sm/5.5 lg:font-semibold xl:text-base/6">
+          {executiveProposal.description}
+        </span>
+        <div className="flex flex-col justify-between gap-2 xl:flex-row xl:items-center">
+          <div className="text-foreground/50 order-2 flex flex-col gap-0.5 text-xs/4.5 font-medium sm:flex-row sm:gap-2 xl:order-1 xl:text-sm/5.5 xl:font-semibold">
+            <span>{`Passed on ${executiveProposal.passedDate}`}</span>
+            <span className="hidden sm:inline">-</span>
+            <span>{`Executed on ${executiveProposal.executedDate}`}</span>
+          </div>
+          <Badge variant="success" className="order-1 uppercase xl:order-2">
+            {executiveProposal.badgeText}
+          </Badge>
+        </div>
+      </div>
+      <div className="flex h-full items-center justify-between px-2 md:gap-4 lg:pl-4 xl:gap-8 xl:pr-4 xl:pl-2 2xl:px-12">
+        <div className="flex flex-col items-center gap-0.25 p-2 sm:min-w-30 md:min-w-fit lg:min-w-30">
+          <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
+            Supporters
+          </span>
+          <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
+            {executiveProposal.supporters.toLocaleString()}
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-0.5 p-2 sm:min-w-30 md:min-w-fit md:items-end lg:min-w-30">
+          <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
+            SKY Support
+          </span>
+          <div className="flex items-center gap-0.5">
+            <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
+              {executiveProposal.skySupport.toLocaleString()}
+            </span>
+            <div className="relative size-5">
+              <Image
+                src="/networks/logos/sky-vote.png"
+                alt="Sky Vote"
+                fill
+                className="absolute"
+                sizes="100%"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex w-fit justify-end sm:min-w-30 md:min-w-fit">
+          <Button variant="outline" size="default" asChild className="w-9 lg:w-fit">
+            <Link href={executiveProposal.href} target="_blank">
+              <span className="hidden lg:block">View</span>
+              <ExternalLinkIcon className="size-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}

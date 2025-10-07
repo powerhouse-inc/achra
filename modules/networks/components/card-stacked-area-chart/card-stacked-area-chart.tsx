@@ -1,4 +1,5 @@
 'use client'
+import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { TabButton } from '@/modules/shared/components/tab-button/tab-button'
@@ -8,16 +9,32 @@ import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacked-area-chart'
 import { REALIZED_EXPENSES_FILTER, TABS } from './constants'
-import { mockedFinancesStackedAreaChartData, mockYears } from './mocks/finances'
+import { mockFinancesData, mockYears } from './mocks/finances'
 import { getStackedAreaSeries } from './utils'
-import type { TabValue } from './type'
+import type { MetricKey, TabValue } from './type'
 
 export function CardStackedAreaChart() {
-  const series = getStackedAreaSeries(mockedFinancesStackedAreaChartData, 'PaymentsOnChain')
+  const isLightMode = useTheme().theme === 'light'
+
   const [activeTab, setActiveTab] = useState<TabValue>(TABS.REALIZED_EXPENSES)
   const [realizedExpensesFilter, setRealizedExpensesFilter] = useState<REALIZED_EXPENSES_FILTER>(
     REALIZED_EXPENSES_FILTER.ACTUALS,
   )
+
+  const getSelectedMetric = (): MetricKey => {
+    if (activeTab === TABS.REALIZED_EXPENSES) {
+      return realizedExpensesFilter === REALIZED_EXPENSES_FILTER.ACTUALS
+        ? 'Actuals'
+        : 'PaymentsOnChain'
+    }
+    if (activeTab === TABS.OPERATIONAL_RESERVES) {
+      return 'OperationalReserves'
+    }
+    return 'Forecast'
+  }
+
+  const selectedMetric = getSelectedMetric()
+  const series = getStackedAreaSeries(mockFinancesData, selectedMetric, isLightMode)
 
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab)
@@ -28,7 +45,7 @@ export function CardStackedAreaChart() {
   return (
     <Card
       className={cn(
-        'bg-popover w-full overflow-hidden rounded-lg shadow-lg',
+        'bg-popover w-full rounded-lg shadow-lg',
         // Padding
         'pt-0 pb-4 sm:p-4 lg:px-6 xl:px-4 xl:pt-4 xl:pb-6 2xl:px-6 2xl:pt-4 2xl:pb-6',
         // gap
@@ -60,7 +77,7 @@ export function CardStackedAreaChart() {
           />
         </div>
       </div>
-      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-6 xl:flex-col xl:gap-4.5">
+      <div className="flex h-full w-full flex-col gap-4 px-2 sm:flex-row sm:px-0 lg:gap-4 xl:flex-col xl:gap-4.5">
         <StackedAreaChart series={series} years={mockYears} />
 
         <div
@@ -69,7 +86,7 @@ export function CardStackedAreaChart() {
             // gap
             'gap-x-6 gap-y-2',
             // Padding
-            'h-28 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
+            'min-h-28 px-2 py-2 sm:h-full sm:p-3.5 md:px-8 md:py-4 xl:px-6 xl:py-7',
           )}
         >
           {series.map((item) => {

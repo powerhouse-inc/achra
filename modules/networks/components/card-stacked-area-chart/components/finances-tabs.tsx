@@ -13,7 +13,7 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
   return (
     <div
       className={cn(
-        'bg-background flex items-center rounded-t-lg shadow-xs sm:bg-transparent sm:shadow-none',
+        'bg-background flex items-center overflow-hidden rounded-t-lg shadow-xs sm:overflow-visible sm:bg-transparent sm:shadow-none',
         'sm:w-fit sm:gap-6 sm:rounded-none sm:bg-transparent',
         'leading-4.5 lg:w-full lg:justify-center lg:gap-8 xl:pr-14 2xl:pr-0',
       )}
@@ -33,8 +33,8 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
               : 'text-foreground/50 hover:text-foreground sm:hover:!bg-transparent',
           )}
         >
-          <span className="block sm:hidden lg:block">{tab.longName}</span>
-          <span className="hidden sm:block lg:hidden">{tab.shortName}</span>
+          <span className="block sm:hidden md:block">{tab.longName}</span>
+          <span className="hidden sm:block md:hidden">{tab.shortName}</span>
         </Button>
       ))}
     </div>

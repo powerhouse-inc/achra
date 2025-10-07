@@ -3,7 +3,6 @@ import type { Route } from 'next'
 export interface BreadcrumbItemNavigation {
   label: string
   href: Route
-  number?: number
 }
 
 export interface DotsSegmentProps {

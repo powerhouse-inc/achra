@@ -68,7 +68,7 @@ export const Basic: Story = {
         <DrawerSelect
           label="Status"
           value={filters.status}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, status: value }))
           }}
           options={[
@@ -81,7 +81,7 @@ export const Basic: Story = {
         <DrawerSelect
           label="Network"
           value={filters.network}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, network: value }))
           }}
           options={[
@@ -130,7 +130,7 @@ export const CustomTrigger: Story = {
         <DrawerSelect
           label="Category"
           value={filters.category}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, category: value }))
           }}
           options={[
@@ -144,7 +144,7 @@ export const CustomTrigger: Story = {
         <DrawerSelect
           label="Priority"
           value={filters.priority}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, priority: value }))
           }}
           options={[
@@ -174,7 +174,7 @@ export const WithoutReset: Story = {
         <DrawerSelect
           label="Type"
           value={filters.type}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, type: value }))
           }}
           options={[
@@ -230,7 +230,7 @@ export const ComplexFilters: Story = {
         <DrawerSelect
           label="Status"
           value={filters.status}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, status: value }))
           }}
           options={[
@@ -244,7 +244,7 @@ export const ComplexFilters: Story = {
         <DrawerSelect
           label="Network"
           value={filters.network}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, network: value }))
           }}
           options={[
@@ -258,7 +258,7 @@ export const ComplexFilters: Story = {
         <DrawerSelect
           label="Priority"
           value={filters.priority}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, priority: value }))
           }}
           options={[
@@ -272,7 +272,7 @@ export const ComplexFilters: Story = {
         <DrawerSelect
           label="Date Range"
           value={filters.dateRange}
-          onChange={(value) => {
+          onChange={(value: string) => {
             setFilters((prev) => ({ ...prev, dateRange: value }))
           }}
           options={[

@@ -10,6 +10,8 @@ function MaybeScrollableList({ scrollable, children }: MaybeScrollableListProps)
       <SimpleBar
         style={{
           height: 150,
+          marginRight: -8,
+          paddingRight: 8,
         }}
         autoHide={false}
       >

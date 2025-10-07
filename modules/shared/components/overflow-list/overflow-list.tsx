@@ -142,7 +142,7 @@ export function OverflowList<T>({
         )}
         <div className="invisible flex">
           {items.map((item, index) => {
-            return itemRenderer(item, index)
+            return <React.Fragment key={index}>{itemRenderer(item, index)}</React.Fragment>
           })}
         </div>
       </div>
@@ -156,7 +156,9 @@ export function OverflowList<T>({
       className: cn('flex w-full min-w-0 gap-2 flex-nowrap overflow-hidden', className),
     },
     collapseFrom === 'start' ? maybeOverflow : null,
-    state.visible.map(itemRenderer),
+    state.visible.map((item, index) => (
+      <React.Fragment key={index}>{itemRenderer(item, index)}</React.Fragment>
+    )),
     collapseFrom === 'end' ? maybeOverflow : null,
     React.createElement('div', { style: { flexShrink: 1, width: 1 }, ref: spacer }),
   )
