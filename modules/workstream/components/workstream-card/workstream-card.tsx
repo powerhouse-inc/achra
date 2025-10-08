@@ -1,22 +1,14 @@
 import { FilePenLine } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from '@/modules/shared/components/ui/breadcrumb'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
 import WorkstreamStats from '../workstream-stats/workstream-stats'
+import { NavigationHeader } from './navigation-header'
 import ProposalCardsGrid from './proposal-cards-grid'
 import StatCards from './stat-cards'
 
@@ -36,39 +28,7 @@ export default function WorkstreamCard() {
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link
-                    href="/network/powerhouse/workstreams"
-                    className="relative flex h-4 items-center sm:h-4.5 md:h-6"
-                  >
-                    <Image
-                      src="/networks/logos/powerhouse.png"
-                      alt="Powerhouse"
-                      // size workaround: https://github.com/vercel/next.js/discussions/18474#discussioncomment-5501724
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                      style={{ width: '100%', height: '100%' }}
-                    />
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="text-foreground [&>svg]:size-4 md:[&>svg]:size-6" />
-              <BreadcrumbItem>
-                <BreadcrumbLink
-                  asChild
-                  className="text-foreground max-w-50 truncate text-sm/5.5 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold md:max-w-100 md:text-2xl"
-                >
-                  <Link href="/network/powerhouse/workstream/vetra-beta-launch">
-                    Vetra Beta Launch
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <NavigationHeader />
           <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
         </div>
 
