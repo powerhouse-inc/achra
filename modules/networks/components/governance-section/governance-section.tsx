@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { SectionTitle } from '../section-title'
 import { ErrorBoundary } from './components/error-boundary/error-boundary'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
-import { ExternalLink } from './components/external-link/external-link'
+import { ExternalLinks } from './components/external-links/external-links'
 
 export function GovernanceSection() {
   return (
@@ -14,20 +14,7 @@ export function GovernanceSection() {
           Explore this document for yourself through the Atlas Explorer.
         </span>
       </div>
-      <div className="align-center flex flex-col gap-4 sm:flex-row md:gap-6">
-        <ExternalLink
-          href="https://sky-atlas.powerhouse.io/"
-          imageSrc="/networks/logos/atlas.png"
-          name="Powerhouse Atlas"
-          description="Launch Atlas Explorer"
-        />
-        <ExternalLink
-          href="https://vote.sky.money/"
-          imageSrc="/networks/logos/sky-vote.png"
-          name="Sky Vote"
-          description="Launch Sky Vote"
-        />
-      </div>
+      <ExternalLinks />
       <ErrorBoundary>
         <Suspense fallback={<div>Loading...</div>}>
           <ExecutiveProposals />
