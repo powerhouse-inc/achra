@@ -1,4 +1,6 @@
+import { Suspense } from 'react'
 import { SectionTitle } from '../section-title'
+import { ErrorBoundary } from './components/error-boundary/error-boundary'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
 import { ExternalLink } from './components/external-link/external-link'
 
@@ -26,7 +28,11 @@ export function GovernanceSection() {
           description="Launch Sky Vote"
         />
       </div>
-      <ExecutiveProposals />
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ExecutiveProposals />
+        </Suspense>
+      </ErrorBoundary>
     </section>
   )
 }
