@@ -1,24 +1,8 @@
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
-import { getChiefHat } from '@/web3/api/governance'
-import { fetchGovernanceProposals } from '../../lib/fetch-governance-proposals'
 import { SectionTitle } from '../section-title'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
 import { ExternalLink } from './components/external-link/external-link'
-import { GOVERNANCE_CHIEF_HAT_QUERY_KEY, GOVERNANCE_PROPOSALS_QUERY_KEY } from './constants'
 
-export async function GovernanceSection() {
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery({
-    queryKey: [GOVERNANCE_PROPOSALS_QUERY_KEY],
-    queryFn: fetchGovernanceProposals,
-  })
-
-  await queryClient.prefetchQuery({
-    queryKey: [GOVERNANCE_CHIEF_HAT_QUERY_KEY],
-    queryFn: getChiefHat,
-  })
-
+export function GovernanceSection() {
   return (
     <section className="flex w-full flex-col gap-6">
       <div className="flex flex-col">
@@ -42,9 +26,7 @@ export async function GovernanceSection() {
           description="Launch Sky Vote"
         />
       </div>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ExecutiveProposals />
-      </HydrationBoundary>
+      <ExecutiveProposals />
     </section>
   )
 }
