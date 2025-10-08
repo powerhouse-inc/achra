@@ -1,5 +1,4 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   type ScopeOfWorkQuery,
@@ -11,14 +10,8 @@ import {
   fetchPowerhouseScopeOfWork,
   getRoadmapFromScopeOfWork,
 } from '@/modules/roadmap/lib/fetch-scope-of-work'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/modules/shared/components/ui/breadcrumb'
+import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
+import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 
 interface RoadmapPageProps {
   params: Promise<{ roadmapSlug: string }>
@@ -42,35 +35,21 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
     notFound()
   }
 
+  const items: BreadcrumbItemNavigation[] = [
+    { label: 'Networks', href: '/networks' },
+    { label: 'Powerhouse', href: '/network/powerhouse' },
+    { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
+    {
+      label: roadmap.title,
+      href: `/network/powerhouse/roadmap/${roadmapSlug}`,
+    },
+  ]
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
-        <div className="bg-background fixed top-18 z-50 w-full border-b py-3 md:top-21">
-          <Breadcrumb className="container">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/networks">Networks</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/network/powerhouse">Powerhouse</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/network/powerhouse/roadmaps">Roadmaps</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{roadmap.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+        <div className="bg-background border-accent fixed top-18 z-50 w-full border-b py-3 md:top-22">
+          <BreadcrumbNavigation items={items} className="container" />
         </div>
 
         <div className="container mt-16 mb-8 flex flex-col gap-6">

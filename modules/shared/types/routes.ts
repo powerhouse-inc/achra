@@ -11,5 +11,9 @@ export type NetworkSlug =
 export type NetworkPages = 'contributors' | 'roadmaps' | 'finances' | 'builders'
 
 export type RouteWithDynamicPages = Route<
-  `/network/${NetworkSlug}` | `/network/${NetworkSlug}/${NetworkPages}`
+  | '/networks'
+  | `/network/${NetworkSlug}`
+  | `/network/${NetworkSlug}/${NetworkPages}`
+  | `/network/${NetworkSlug}/roadmaps/${string}`
+  | `/network/${NetworkSlug}/roadmap/${string}`
 >

@@ -1,8 +1,8 @@
-import type { Route } from 'next'
+import type { RouteWithDynamicPages } from '../../types/routes'
 
 export interface BreadcrumbItemNavigation {
   label: string
-  href: Route
+  href: RouteWithDynamicPages
 }
 
 export interface DotsSegmentProps {
