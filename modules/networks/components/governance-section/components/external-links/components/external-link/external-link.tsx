@@ -26,7 +26,7 @@ export function ExternalLink({ href, imageSrc, name, description, className }: E
       </div>
       <div className="flex flex-col">
         <div className="text-foreground/50 hover:text-foreground flex items-center gap-1">
-          <span className="text-xs/4.5 font-medium uppercase">{description}</span>
+          <span className="text-[11px]/4.5 font-medium uppercase">{description}</span>
           <ExternalLinkIcon className="h-3 w-4" />
         </div>
         <span className="text-foreground text-base/6 font-semibold">{name}</span>

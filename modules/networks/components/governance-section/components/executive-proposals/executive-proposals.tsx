@@ -1,45 +1,29 @@
-import {
-  StripedCard,
-  StripedCardContent,
-  StripedCardHeader,
-  StripedCardTitle,
-} from '@/modules/shared/components/striped-card/striped-card'
-import { cn } from '@/modules/shared/lib/utils'
-import { ExecutiveProposalItem } from './components/executive-proposal-item/executive-proposal-item'
-import type Link from 'next/link'
+import { fetchGovernanceProposals } from '@/modules/networks/lib/fetch-governance-proposals'
+import { groupGovernanceProposals } from '@/modules/networks/lib/group-governance-proposals'
+import { getChiefHat } from '@/web3/api/governance'
+import { ExecutiveProposalsList } from './components/executive-proposals-list/executive-proposals-list'
 
-export interface ExecutiveProposal {
-  id: string
-  description: string
-  passedDate: string
-  executedDate: string
-  badgeText: string
-  supporters: number
-  skySupport: number
-  href: Pick<React.ComponentProps<typeof Link>, 'href'>['href']
-}
-
-export interface ExecutiveProposalsProps {
-  title: string
-  executiveProposals: ExecutiveProposal[]
+interface ExecutiveProposalsProps {
   className?: string
 }
 
-export function ExecutiveProposals({
-  title,
-  executiveProposals,
-  className,
-}: ExecutiveProposalsProps) {
+export async function ExecutiveProposals({ className }: ExecutiveProposalsProps) {
+  const [executiveProposals, hatAddress] = await Promise.all([
+    fetchGovernanceProposals(),
+    getChiefHat(),
+  ])
+
+  const { openProposals, activeProposals, passedProposals, slicedPassedProposals } =
+    groupGovernanceProposals(executiveProposals, hatAddress)
+
   return (
-    <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader>
-        <StripedCardTitle>{title}</StripedCardTitle>
-      </StripedCardHeader>
-      <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
-        {executiveProposals.map((executiveProposal) => (
-          <ExecutiveProposalItem key={executiveProposal.id} executiveProposal={executiveProposal} />
-        ))}
-      </StripedCardContent>
-    </StripedCard>
+    <ExecutiveProposalsList
+      openProposals={openProposals}
+      activeProposals={activeProposals}
+      passedProposals={passedProposals}
+      slicedPassedProposals={slicedPassedProposals}
+      hatAddress={hatAddress}
+      className={className}
+    />
   )
 }

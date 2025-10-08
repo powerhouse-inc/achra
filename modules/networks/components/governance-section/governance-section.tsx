@@ -1,16 +1,12 @@
-import { cn } from '@/modules/shared/lib/utils'
+import { Suspense } from 'react'
 import { SectionTitle } from '../section-title'
+import { ErrorBoundary } from './components/error-boundary/error-boundary'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
-import { ExternalLink } from './components/external-link/external-link'
-import { EXECUTIVE_PROPOSALS } from './mocks'
+import { ExternalLinks } from './components/external-links/external-links'
 
-export interface GovernanceSectionProps {
-  className?: string
-}
-
-export function GovernanceSection({ className }: GovernanceSectionProps) {
+export function GovernanceSection() {
   return (
-    <section className={cn('flex w-full flex-col gap-6', className)}>
+    <section className="flex w-full flex-col gap-6">
       <div className="flex flex-col">
         <SectionTitle title="Governance" hash="governance" />
         <span className="text-foreground/50 text-base/6 font-semibold">
@@ -18,21 +14,12 @@ export function GovernanceSection({ className }: GovernanceSectionProps) {
           Explore this document for yourself through the Atlas Explorer.
         </span>
       </div>
-      <div className="align-center flex flex-col gap-4 sm:flex-row md:gap-6">
-        <ExternalLink
-          href="https://sky-atlas.powerhouse.io/"
-          imageSrc="/networks/logos/atlas.png"
-          name="Powerhouse Atlas"
-          description="Launch Atlas Explorer"
-        />
-        <ExternalLink
-          href="https://vote.sky.money/"
-          imageSrc="/networks/logos/sky-vote.png"
-          name="Sky Vote"
-          description="Launch Sky Vote"
-        />
-      </div>
-      <ExecutiveProposals title="Executive Proposals" executiveProposals={EXECUTIVE_PROPOSALS} />
+      <ExternalLinks />
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ExecutiveProposals />
+        </Suspense>
+      </ErrorBoundary>
     </section>
   )
 }
