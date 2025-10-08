@@ -63,16 +63,16 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
         align="start"
         className="bg-popover max-w-49 min-w-49.25 rounded-xl border-none px-2 py-1 shadow-lg"
       >
-        <div className="flex flex-col gap-2 overflow-hidden py-1">
+        <div className="flex flex-col gap-2 py-1">
           {itemsToRender.map((item: BreadcrumbItemNavigation) => (
             <DropdownMenuItem
               key={item.label}
               asChild
-              className="focus:bg-accent cursor-pointer p-0 px-3 py-2 text-sm font-normal"
+              className="focus:bg-accent block w-full min-w-0 cursor-pointer p-0 px-3 py-2 text-sm font-normal"
             >
               <Link
                 href={item.href}
-                className="text-foreground w-full overflow-hidden px-2 py-2 font-normal text-ellipsis whitespace-nowrap"
+                className="text-foreground w-full truncate px-2 py-2 font-normal"
               >
                 {item.label}
               </Link>
