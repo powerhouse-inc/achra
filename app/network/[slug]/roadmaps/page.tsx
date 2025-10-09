@@ -1,43 +1,23 @@
-import Link from 'next/link'
 import { RoadmapLinks } from '@/modules/roadmap/components/roadmap-links'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/modules/shared/components/ui/breadcrumb'
+import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
+import type { Route } from 'next'
 
 interface RoadmapPageProps {
   params: Promise<{ slug: string }>
 }
 
+const items = [
+  { label: 'Networks', href: '/networks' as Route },
+  { label: 'Powerhouse', href: '/network/powerhouse' as Route },
+  { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as Route },
+]
 export default async function RoadmapPage({ params }: RoadmapPageProps) {
   const { slug } = await params
 
   return (
     <main>
-      <div className="bg-background fixed top-18 z-50 w-full border-b py-3 md:top-21">
-        <Breadcrumb className="container">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/networks">Networks</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="/network/powerhouse">Powerhouse</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Roadmaps</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="bg-background border-accent fixed top-18 z-50 w-full border-b py-3 md:top-22">
+        <BreadcrumbNavigation items={items} className="container" />
       </div>
 
       <div className="container mt-18 mb-8 flex flex-col gap-6">
