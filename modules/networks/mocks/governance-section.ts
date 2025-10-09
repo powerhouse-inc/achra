@@ -3,6 +3,7 @@ import type {
   ExecutiveProposalSupporters,
   ExtendedExecutiveProposal,
 } from '@/modules/shared/types/makervote'
+import type { Topic } from '../lib/fetch-forum-posts'
 
 export const mockedExecutiveProposals: ExecutiveProposal[] = [
   {
@@ -131,3 +132,57 @@ export function getMockedExtendedProposals(): ExtendedExecutiveProposal[] {
     }
   })
 }
+
+export const mockedForumPosts: Topic[] = [
+  {
+    id: 20686,
+    title: 'About the General Discussion category',
+    slug: 'about-the-general-discussion-category',
+    posts_count: 1,
+    created_at: '2023-04-28T14:34:30.799Z',
+    tags: [],
+    like_count: 7,
+    category_id: 89,
+  },
+  {
+    id: 27299,
+    title:
+      'Request: Assistance — DAI (PoS) tokens accidentally sent to DAI contract on Polygon (TxID included',
+    slug: 'request-assistance-dai-pos-tokens-accidentally-sent-to-dai-contract-on-polygon-txid-included',
+    posts_count: 2,
+    created_at: '2025-10-08T14:10:08.274Z',
+    tags: [],
+    like_count: 0,
+    category_id: 101,
+  },
+  {
+    id: 27291,
+    title: 'Risk Month in Review: September 2025',
+    slug: 'risk-month-in-review-september-2025',
+    posts_count: 1,
+    created_at: '2025-10-07T10:11:35.393Z',
+    tags: ['ba-labs'],
+    like_count: 2,
+    category_id: 89,
+  },
+  {
+    id: 27206,
+    title: 'SKY Token Staking Reward Systems (Ideas)',
+    slug: 'sky-token-staking-reward-systems-ideas',
+    posts_count: 2,
+    created_at: '2025-09-24T21:09:44.198Z',
+    tags: [],
+    like_count: 1,
+    category_id: 89,
+  },
+  {
+    id: 27256,
+    title: 'DAI coin stuck on Andromeda Chain (Métis)',
+    slug: 'dai-coin-stuck-on-andromeda-chain-metis',
+    posts_count: 3,
+    created_at: '2025-10-02T20:06:16.891Z',
+    tags: ['dai', 'aave', 'metis'],
+    like_count: 1,
+    category_id: 101,
+  },
+]
