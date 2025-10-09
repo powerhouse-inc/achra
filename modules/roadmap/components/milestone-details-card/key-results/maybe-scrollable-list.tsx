@@ -9,7 +9,7 @@ function MaybeScrollableList({ scrollable, children }: MaybeScrollableListProps)
     return (
       <SimpleBar
         style={{
-          height: 150,
+          height: 170,
           marginRight: -8,
           paddingRight: 8,
         }}

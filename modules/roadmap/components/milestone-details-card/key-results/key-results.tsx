@@ -46,7 +46,7 @@ export default function KeyResults({
       if (maxKeyResultsOnRow > 0) {
         const items = Math.min(6, maxKeyResultsOnRow)
         // items * its height + gap between items
-        height = NON_VARIABLE_HEIGHTS + items * 18 + (items - 1) * 8
+        height = NON_VARIABLE_HEIGHTS + items * 22 + (items - 1) * 8
       }
     } else {
       // compacted:
@@ -56,7 +56,7 @@ export default function KeyResults({
           height = 'auto'
         } else if (maxKeyResultsOnRow <= 4) {
           const items = Math.min(4, maxKeyResultsOnRow)
-          height = NON_VARIABLE_HEIGHTS + items * 18 + (items - 1) * 8
+          height = NON_VARIABLE_HEIGHTS + items * 22 + (items - 1) * 8
         } else {
           // more than 4 so we have at least one card with the expand button
           height = NON_VARIABLE_HEIGHTS + 70 + 26
@@ -92,7 +92,7 @@ export default function KeyResults({
                       href={keyResult.link}
                       target="_blank"
                       className={cn(
-                        'group/link text-foreground relative flex max-w-full items-center gap-1.5 truncate pl-5.5 text-sm/4.5 font-medium',
+                        'group/link text-foreground relative flex max-w-full items-center gap-1.5 truncate pl-5.5 text-sm/5.5 font-medium',
                         'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
                       )}
                     >
@@ -104,12 +104,12 @@ export default function KeyResults({
                   ) : (
                     <div
                       className={cn(
-                        'relative flex max-w-full items-center gap-1 pl-6 text-sm/4.5 font-medium',
+                        'relative flex max-w-full items-center gap-1 pl-6 text-sm/5.5 font-medium',
                         'before:bg-foreground/50 before:absolute before:top-2 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
                       )}
                     >
                       <span className="text-foreground/50 truncate">{keyResult.title}</span>
-                      <div className="bg-muted text-muted-foreground min-w-12.5 rounded-md px-1.5 text-xs/4 font-medium uppercase">
+                      <div className="bg-muted text-muted-foreground min-w-12.5 rounded-md px-1.5 py-0.5 text-xs/4.5 font-medium uppercase">
                         TO DO
                       </div>
                     </div>
