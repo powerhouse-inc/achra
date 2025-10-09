@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -8,17 +7,15 @@ function NavigationHeader() {
       <div className="relative flex items-center self-stretch pr-7 sm:pr-8 md:pr-9">
         <Link
           href="/network/powerhouse/workstreams"
-          className="relative flex h-4 items-center sm:h-4.5 md:h-6"
+          className="relative flex h-4 w-full items-center sm:h-4.5 md:h-6"
         >
-          <Image
+          {/* Note: Here we don't use Nextjs Image component because it doesn't work well with unknown image sizes
+          and the existing workarounds doesn't work well in all the devices/browsers */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/networks/logos/powerhouse.png"
-            alt="Powerhouse"
-            // size workaround: https://github.com/vercel/next.js/discussions/18474#discussioncomment-5501724
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: '100%', height: '100%' }}
-            className="dark:invert"
+            alt="Powerhouse" // TODO: replace it with the network logo once integrated with the API
+            className="h-full dark:invert"
           />
         </Link>
         <div
