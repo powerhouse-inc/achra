@@ -3,6 +3,7 @@ import { SectionTitle } from '../section-title'
 import { ErrorBoundary } from './components/error-boundary/error-boundary'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
 import { ExternalLinks } from './components/external-links/external-links'
+import ForumOverview from './components/forum-overview/forum-overview'
 
 export function GovernanceSection() {
   return (
@@ -20,6 +21,7 @@ export function GovernanceSection() {
           <ExecutiveProposals />
         </Suspense>
       </ErrorBoundary>
+      <ForumOverview />
     </section>
   )
 }
