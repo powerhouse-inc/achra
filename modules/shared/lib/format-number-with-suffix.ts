@@ -1,4 +1,4 @@
-export const formatNumberWithSuffix = (num: number, isShowNegative = false) => {
+export const formatNumberWithSuffix = (num: number, showNegative = false) => {
   const isNegative = num < 0
   const mathAbsolute = Math.abs(num)
 
@@ -18,5 +18,5 @@ export const formatNumberWithSuffix = (num: number, isShowNegative = false) => {
     result = mathAbsolute.toString()
   }
 
-  return isShowNegative && isNegative ? `-${result}` : result
+  return showNegative && isNegative ? `-${result}` : result
 }
