@@ -1,6 +1,6 @@
-import Image from 'next/image'
+import FireIcon from '@/public/networks/governance/fire.svg'
 
-function Dot({ className }: { className?: string }) {
+export function Dot({ className }: { className?: string }) {
   return <span className={`inline-block size-3 rounded-full ${className}`} />
 }
 
@@ -18,7 +18,7 @@ export const forumCategories: ForumCategory[] = [
     category: 'General Discussion',
     categorySlug: 'general-discussion',
     tabLabel: 'Popular',
-    icon: <Image src="/fire.svg" alt="fire" fill className="absolute" sizes="100%" />,
+    icon: <FireIcon className="size-4" />,
   },
   {
     id: 68,

@@ -3,6 +3,7 @@ import type {
   ExecutiveProposalSupporters,
   ExtendedExecutiveProposal,
 } from '@/modules/shared/types/makervote'
+import type { Topic } from '../lib/fetch-forum-posts'
 
 export const mockedExecutiveProposals: ExecutiveProposal[] = [
   {
@@ -131,3 +132,122 @@ export function getMockedExtendedProposals(): ExtendedExecutiveProposal[] {
     }
   })
 }
+
+export const mockedForumPosts: Topic[] = [
+  // Category 89 - General Discussion
+  {
+    id: 20686,
+    title: 'About the General Discussion category',
+    slug: 'about-the-general-discussion-category',
+    posts_count: 1,
+    created_at: '2023-04-28T14:34:30.799Z',
+    tags: [],
+    like_count: 7,
+    category_id: 89,
+  },
+  {
+    id: 27291,
+    title: 'Risk Month in Review: September 2025',
+    slug: 'risk-month-in-review-september-2025',
+    posts_count: 1,
+    created_at: '2025-10-07T10:11:35.393Z',
+    tags: ['ba-labs'],
+    like_count: 2,
+    category_id: 89,
+  },
+  {
+    id: 27206,
+    title: 'SKY Token Staking Reward Systems (Ideas)',
+    slug: 'sky-token-staking-reward-systems-ideas',
+    posts_count: 2,
+    created_at: '2025-09-24T21:09:44.198Z',
+    tags: [],
+    like_count: 1,
+    category_id: 89,
+  },
+  // Category 68 - New to MakerDAO (Onboarding)
+  {
+    id: 27310,
+    title: 'Welcome! Start Here: Community Guidelines and FAQ',
+    slug: 'welcome-start-here-community-guidelines-and-faq',
+    posts_count: 4,
+    created_at: '2025-10-08T09:00:00.000Z',
+    tags: ['welcome', 'guide'],
+    like_count: 5,
+    category_id: 68,
+  },
+  {
+    id: 27311,
+    title: 'How to get SKY and participate in governance',
+    slug: 'how-to-get-sky-and-participate-in-governance',
+    posts_count: 6,
+    created_at: '2025-10-06T12:30:00.000Z',
+    tags: ['onboarding', 'governance'],
+    like_count: 8,
+    category_id: 68,
+  },
+  // Category 92 - Maker Core (Finances)
+  {
+    id: 27320,
+    title: 'Treasury Report: Q3 2025 Overview',
+    slug: 'treasury-report-q3-2025-overview',
+    posts_count: 10,
+    created_at: '2025-10-04T15:00:00.000Z',
+    tags: ['treasury', 'report'],
+    like_count: 12,
+    category_id: 92,
+  },
+  {
+    id: 27321,
+    title: 'DAI Reserve Allocation Discussion',
+    slug: 'dai-reserve-allocation-discussion',
+    posts_count: 7,
+    created_at: '2025-10-05T18:45:00.000Z',
+    tags: ['finances', 'allocation'],
+    like_count: 9,
+    category_id: 92,
+  },
+  // Category 78 - Alignment Conservers (Governance)
+  {
+    id: 27330,
+    title: 'Proposal: Update to Voting Thresholds',
+    slug: 'proposal-update-to-voting-thresholds',
+    posts_count: 14,
+    created_at: '2025-10-07T08:20:00.000Z',
+    tags: ['proposal', 'voting'],
+    like_count: 20,
+    category_id: 78,
+  },
+  {
+    id: 27331,
+    title: 'Governance Process Improvements — Feedback Wanted',
+    slug: 'governance-process-improvements-feedback-wanted',
+    posts_count: 9,
+    created_at: '2025-10-03T11:10:00.000Z',
+    tags: ['governance', 'process'],
+    like_count: 15,
+    category_id: 78,
+  },
+  // Category 101 - Atlas (Governance AI Tools)
+  {
+    id: 27299,
+    title:
+      'Request: Assistance — DAI (PoS) tokens accidentally sent to DAI contract on Polygon (TxID included',
+    slug: 'request-assistance-dai-pos-tokens-accidentally-sent-to-dai-contract-on-polygon-txid-included',
+    posts_count: 2,
+    created_at: '2025-10-08T14:10:08.274Z',
+    tags: [],
+    like_count: 0,
+    category_id: 101,
+  },
+  {
+    id: 27256,
+    title: 'DAI coin stuck on Andromeda Chain (Métis)',
+    slug: 'dai-coin-stuck-on-andromeda-chain-metis',
+    posts_count: 3,
+    created_at: '2025-10-02T20:06:16.891Z',
+    tags: ['dai', 'aave', 'metis'],
+    like_count: 1,
+    category_id: 101,
+  },
+]
