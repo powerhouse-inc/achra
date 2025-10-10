@@ -51,7 +51,7 @@ function ForumOverview() {
     >
       <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-7.5 w-12.5 rounded-tl-lg bg-gradient-to-r to-transparent md:hidden" />
       <TabsList className="no-scrollbar h-fit w-full justify-start overflow-x-auto rounded-b-none bg-transparent p-0 md:overflow-x-visible">
-        <div className="flex w-fit gap-2 md:pt-4 xl:pt-6">
+        <div className="flex w-fit gap-2">
           {forumCategories.map((category) => (
             <TabsTrigger
               key={category.id}
