@@ -2,6 +2,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { delay, http, HttpResponse } from 'msw'
 import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
+import { BASE_URL } from '@/modules/shared/config/constants'
 import { forumCategories } from './categories'
 import ForumOverview from './forum-overview'
 import type { Meta, StoryObj } from '@storybook/nextjs'
@@ -59,10 +60,7 @@ type Story = StoryObj<typeof meta>
 const getPostsByCategory = (categoryId: number) =>
   mockedForumPosts.filter((post) => post.category_id === categoryId)
 
-// Resolve the full forum API URL when env is present, otherwise fall back to wildcard
-const FORUM_API_URL = process.env.NEXT_PUBLIC_BASE_URL
-  ? new URL('/api/forum', process.env.NEXT_PUBLIC_BASE_URL).toString()
-  : '*/api/forum'
+const FORUM_API_URL = new URL('/api/forum', BASE_URL).toString()
 
 // Generic handler that returns posts based on the `id` query param
 const forumRequestHandler = ({ request }: { request: Request }) => {

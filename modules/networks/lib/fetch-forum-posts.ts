@@ -1,3 +1,5 @@
+import { BASE_URL } from '@/modules/shared/config/constants'
+
 export interface Topic {
   id: number
   created_at: string
@@ -16,8 +18,6 @@ export interface TopicList {
   }
 }
 
-// TODO: Set this new environment variable in vercel
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://fusion.sky.money'
 const forumApi = (id: string) => `/api/forum?id=${id}`
 
 export const fetchForumPosts = async (categoryId: number | string): Promise<Topic[]> => {
