@@ -14,6 +14,8 @@ export const formatNumberWithSuffix = (num: number, showNegative = false) => {
     result = `${(mathAbsolute / 1000000000).toFixed(1).replace(/\.?0+$/g, '')}B`
   } else if (mathAbsolute < 1000000000000000) {
     result = `${(mathAbsolute / 1000000000000).toFixed(1).replace(/\.?0+$/g, '')}T`
+  } else if (mathAbsolute < 1000000000000000000) {
+    result = `${(mathAbsolute / 1000000000000000).toFixed(1).replace(/\.?0+$/g, '')}Q`
   } else {
     result = mathAbsolute.toString()
   }
