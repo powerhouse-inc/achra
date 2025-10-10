@@ -5,9 +5,9 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
 import Link from 'next/link'
+import { formatNumberWithSuffix } from '@/modules/networks/lib/format-number-with-suffix'
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { Button } from '@/modules/shared/components/ui/button'
-import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 
@@ -78,7 +78,7 @@ export function ExecutiveProposalItem({
           </span>
           <div className="flex items-center gap-0.5">
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
-              {usLocalizedNumber(skySupportEth, skySupportEth < 1000 ? 2 : 0)}
+              {formatNumberWithSuffix(skySupportEth)}
             </span>
             <div className="relative size-5">
               <Image
