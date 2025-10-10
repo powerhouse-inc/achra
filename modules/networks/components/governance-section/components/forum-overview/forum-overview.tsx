@@ -47,29 +47,25 @@ function ForumOverview() {
       onValueChange={(tab) => {
         setActiveTab(tab)
       }}
-      className="relative gap-0 overflow-hidden rounded-lg shadow-lg md:overflow-visible md:rounded-none md:shadow-none"
+      className="relative gap-0 overflow-hidden drop-shadow-lg"
     >
       <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-7.5 w-12.5 rounded-tl-lg bg-gradient-to-r to-transparent md:hidden" />
       <TabsList className="no-scrollbar h-fit w-full justify-start overflow-x-auto rounded-b-none bg-transparent p-0 md:overflow-x-visible">
         <div className="flex w-fit gap-2 md:pt-4 xl:pt-6">
           {forumCategories.map((category) => (
-            <div key={category.id} className="relative">
-              <div className="absolute top-0 left-0 h-full w-full rounded-t-lg rounded-b-none shadow-lg" />
-
-              <TabsTrigger
-                value={category.id.toString()}
-                className="bg-background text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:!bg-accent relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
-              >
-                <div className="relative flex size-4 items-center">{category.icon}</div>
-                {category.tabLabel}
-              </TabsTrigger>
-            </div>
+            <TabsTrigger
+              key={category.id}
+              value={category.id.toString()}
+              className="bg-background text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:!bg-accent relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
+            >
+              <div className="relative flex size-4 items-center">{category.icon}</div>
+              {category.tabLabel}
+            </TabsTrigger>
           ))}
         </div>
       </TabsList>
-      <div className="absolute inset-0 z-[-1] hidden rounded-tl-none rounded-tr-lg rounded-b-lg shadow-lg md:top-12 md:block xl:top-14" />
       {forumCategories.map((category) => (
-        <TabsContent key={category.id} value={category.id.toString()} className="z-1">
+        <TabsContent key={category.id} value={category.id.toString()}>
           <StripedCard className="w-full rounded-tl-none rounded-tr-none shadow-none md:rounded-tr-xl">
             <StripedCardHeader className="flex flex-col gap-2 px-4 py-2 md:flex-row md:justify-between xl:py-1 xl:pr-4 xl:pl-6">
               <StripedCardTitle>
