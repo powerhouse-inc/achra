@@ -58,7 +58,7 @@ function ForumOverview() {
 
               <TabsTrigger
                 value={category.id.toString()}
-                className="text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:!bg-accent relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
+                className="bg-background text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:!bg-accent relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
               >
                 <div className="relative flex size-4 items-center">{category.icon}</div>
                 {category.tabLabel}
