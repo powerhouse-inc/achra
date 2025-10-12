@@ -11,4 +11,9 @@ export const envSchema = z.object({
     error:
       'Must be a valid URL (e.g., https://switchboard.example.com/graphql) for the Switchboard API.',
   }),
+
+  NEXT_PUBLIC_ETH_MAINNET_RPC: z.url({
+    error:
+      'Must be a valid URL (e.g., https://mainnet.infura.io/v3/your-project-id) for the Ethereum Mainnet RPC.',
+  }),
 })
