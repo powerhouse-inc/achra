@@ -21,7 +21,7 @@ function NavigationHeader() {
         <div
           className={cn(
             'absolute -top-1 right-0 -bottom-1 sm:-top-2 sm:-bottom-2 md:-top-3 md:-bottom-3',
-            'before:bg-secondary before:absolute before:top-0 before:bottom-0 before:-left-2 before:z-20 before:w-2',
+            'before:bg-secondary before:absolute before:top-0 before:bottom-0 before:-left-2 before:z-1 before:w-2',
           )}
         >
           <svg

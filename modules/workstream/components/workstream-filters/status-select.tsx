@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
@@ -59,8 +60,9 @@ const statusOptions: Option[] = [
 ]
 
 function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
-  const selectedOptions = statusOptions.filter((option) =>
-    statuses.includes(option.value as WorkstreamStatus),
+  const selectedOptions = useMemo(
+    () => statusOptions.filter((option) => statuses.includes(option.value as WorkstreamStatus)),
+    [statuses],
   )
 
   const handleChange = (options: Option[]) => {
@@ -102,7 +104,7 @@ function StatusSelectDrawer({ statuses, setStatuses }: StatusSelectProps) {
       options={statusOptions}
       multiselect={true}
       enableSelectAll={true}
-      selectAllLabel="All Statuses"
+      selectAllLabel="Select All"
     />
   )
 }
