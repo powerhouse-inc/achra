@@ -1,9 +1,11 @@
+import { withPortalFontStyles } from '../../lib/decorators'
 import BreadcrumbNavigation from './breadcrumb-navigation'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Components/Breadcrumb',
   component: BreadcrumbNavigation,
+  decorators: [withPortalFontStyles],
   parameters: {
     nextjs: {
       appDirectory: true,

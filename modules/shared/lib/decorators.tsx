@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
+import { useEffect } from 'react'
 import RootLayout from '@/app/layout'
 import type { StoryContext } from '@storybook/nextjs'
 
@@ -52,5 +53,30 @@ export const withNextjsExtras = (Story: React.ComponentType, context: StoryConte
     >
       <Story />
     </div>
+  )
+}
+
+function PortalFontProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const body = document.body
+    body.classList.add(inter.variable, openSansCondensed.variable, inter.className)
+
+    return () => {
+      body.classList.remove(inter.variable, openSansCondensed.variable, inter.className)
+    }
+  }, [])
+
+  return <>{children}</>
+}
+
+/**
+ * Storybook decorator for components that render portals, tooltips, menus, and overlays
+ * that need font styles applied to the document body
+ */
+export const withPortalFontStyles = (Story: React.ComponentType) => {
+  return (
+    <PortalFontProvider>
+      <Story />
+    </PortalFontProvider>
   )
 }
