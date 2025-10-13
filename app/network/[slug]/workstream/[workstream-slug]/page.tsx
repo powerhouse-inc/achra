@@ -1,17 +1,9 @@
-import Link from 'next/link'
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { PageBackground } from '@/modules/shared/components/page-background'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/modules/shared/components/ui/breadcrumb'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
@@ -33,25 +25,18 @@ This project not only aims to improve user experience but also includes smaller 
 export default function WorkstreamDetailsPage() {
   return (
     <PageBackground>
-      <main className="container mt-8 mb-8 flex flex-col gap-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link
-                  href="/network/powerhouse/workstreams"
-                  className="relative flex h-4 items-center sm:h-4.5 md:h-6"
-                >
-                  Powerhouse
-                </Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="text-foreground [&>svg]:size-4 md:[&>svg]:size-6" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Vetra Beta Launch</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <main className="container mt-4 mb-8 flex flex-col gap-6 sm:mt-8">
+        <div className="bg-secondary rounded-xl p-2 sm:bg-transparent sm:p-0">
+          <BreadcrumbNavigation
+            items={[
+              { label: 'Powerhouse', href: '/network/powerhouse' },
+              {
+                label: 'Vetra Beta Launch',
+                href: '/network/powerhouse/workstream/vetra-beta-launch',
+              },
+            ]}
+          />
+        </div>
 
         <div className="flex justify-between gap-2 md:items-start">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
