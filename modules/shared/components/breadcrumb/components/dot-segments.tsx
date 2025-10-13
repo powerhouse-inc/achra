@@ -40,7 +40,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
           <VisuallyHidden>
             <DrawerTitle />
           </VisuallyHidden>
-          <div className="flex flex-col gap-2 overflow-hidden px-4 py-2 hover:rounded-md">
+          <div className="flex flex-col overflow-hidden px-4 py-2 hover:rounded-md">
             {[...items].reverse().map((item) => (
               <MobileItem
                 key={item.label}
@@ -63,7 +63,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
         align="start"
         className="bg-popover max-w-49 min-w-49.25 rounded-xl border-none px-2 py-1 shadow-lg"
       >
-        <div className="flex flex-col gap-2 py-1">
+        <div className="flex flex-col py-1">
           {itemsToRender.map((item: BreadcrumbItemNavigation) => (
             <DropdownMenuItem
               key={item.label}
