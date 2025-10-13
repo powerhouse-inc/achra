@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
 const meta = {
   title: 'Shared/Components/Breadcrumb',
   component: BreadcrumbNavigation,
+  tags: ['autodocs'],
   parameters: {
     nextjs: {
       appDirectory: true,
