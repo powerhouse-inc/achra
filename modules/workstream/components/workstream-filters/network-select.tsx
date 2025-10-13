@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
@@ -15,7 +16,10 @@ const networkOptions: Option[] = [
 ]
 
 function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps) {
-  const selectedOptions = networkOptions.filter((option) => networks.includes(option.value))
+  const selectedOptions = useMemo(
+    () => networkOptions.filter((option) => networks.includes(option.value)),
+    [networks],
+  )
 
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value)
@@ -53,7 +57,7 @@ function NetworkSelectDrawer({ networks, setNetworks }: NetworkSelectProps) {
       options={networkOptions}
       multiselect={true}
       enableSelectAll={true}
-      selectAllLabel="All Networks"
+      selectAllLabel="Select All"
     />
   )
 }
