@@ -341,20 +341,25 @@ function MultipleSelector({
         aria-label="Open multiselect"
       >
         <div className="flex w-full max-w-full items-center pr-12">
-          {selected.length > 0 ? (
-            <OverflowList
-              items={selected}
-              className="items-center gap-1"
-              itemRenderer={(option) =>
-                renderItem(option, badgeClassName, disabled, handleUnselect, customItemRenderer)
-              }
-              overflowRenderer={(overflowItems) =>
-                renderOverflow(overflowItems, badgeClassName, customOverflowRenderer)
-              }
-            />
-          ) : (
-            <span className="text-muted-foreground/70">{placeholder}</span>
-          )}
+          <OverflowList
+            items={selected}
+            className={cn('items-center gap-1', {
+              hidden: selected.length === 0,
+            })}
+            itemRenderer={(option) =>
+              renderItem(option, badgeClassName, disabled, handleUnselect, customItemRenderer)
+            }
+            overflowRenderer={(overflowItems) =>
+              renderOverflow(overflowItems, badgeClassName, customOverflowRenderer)
+            }
+          />
+          <span
+            className={cn('text-muted-foreground/70', {
+              hidden: selected.length > 0,
+            })}
+          >
+            {placeholder}
+          </span>
         </div>
         <div
           role="button"
