@@ -190,6 +190,7 @@ function FieldError({
       return null
     }
 
+    // TS ignored to keep the same logic as shadcn
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (errors?.length == 1) {
       return errors[0]?.message
@@ -202,6 +203,7 @@ function FieldError({
     )
   }, [children, errors])
 
+  // TS ignored to keep the same logic as shadcn
   // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/no-unnecessary-condition
   if (!content) {
     return null
