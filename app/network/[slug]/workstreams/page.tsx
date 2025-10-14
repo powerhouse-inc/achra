@@ -20,8 +20,8 @@ export default async function NetworkWorkstreamsPage({ params }: NetworkWorkstre
         <WorkstreamBanner network={slug} />
 
         <div className="flex flex-col gap-8">
-          <Suspense fallback={<WorkstreamFiltersSkeleton />}>
-            <WorkstreamFilters />
+          <Suspense fallback={<WorkstreamFiltersSkeleton showNetworkFilter={false} />}>
+            <WorkstreamFilters showNetworkFilter={false} />
           </Suspense>
 
           <div className="flex flex-col gap-8">

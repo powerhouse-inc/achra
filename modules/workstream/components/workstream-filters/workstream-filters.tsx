@@ -7,7 +7,11 @@ import { NetworkSelect, NetworkSelectDrawer } from './network-select'
 import { StatusSelect, StatusSelectDrawer } from './status-select'
 import useWorkstreamFilters from './useWorkstreamFilters'
 
-export default function WorkstreamFilters() {
+interface WorkstreamFiltersProps {
+  showNetworkFilter?: boolean
+}
+
+export default function WorkstreamFilters({ showNetworkFilter = true }: WorkstreamFiltersProps) {
   const { search, statuses, networks, setSearch, setStatuses, setNetworks, onReset } =
     useWorkstreamFilters()
 
@@ -20,17 +24,21 @@ export default function WorkstreamFilters() {
           setStatuses={setStatuses}
           className="w-1/2 md:w-full md:max-w-54 md:min-w-54 lg:max-w-64 lg:min-w-64 xl:max-w-75 xl:min-w-75"
         />
-        <NetworkSelect
-          networks={networks}
-          setNetworks={setNetworks}
-          className="w-1/2 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
-        />
+        {showNetworkFilter && (
+          <NetworkSelect
+            networks={networks}
+            setNetworks={setNetworks}
+            className="w-1/2 md:w-full md:max-w-46 md:min-w-46 xl:max-w-75 xl:min-w-75"
+          />
+        )}
       </div>
 
       <div className="flex items-center gap-4 sm:hidden">
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer onReset={onReset}>
-          <NetworkSelectDrawer networks={networks} setNetworks={setNetworks} />
+          {showNetworkFilter && (
+            <NetworkSelectDrawer networks={networks} setNetworks={setNetworks} />
+          )}
           <StatusSelectDrawer statuses={statuses} setStatuses={setStatuses} />
         </FilterDrawer>
       </div>
