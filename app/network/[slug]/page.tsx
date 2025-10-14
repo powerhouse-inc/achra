@@ -9,13 +9,13 @@ import ScrollSpyWrapper from '@/modules/networks/components/scroll-spy-wrapper/s
 import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { WalletsSection } from '@/modules/networks/components/wallets-section/wallets-section'
 import { mockedRoadmaps } from '@/modules/roadmap/mocks'
-import { PageBackground } from '@/modules/shared/components/page-background'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 
 export default function NetworkPage() {
   const sectionIds = ['proposals', 'roadmap', 'finances', 'wallets', 'builders', 'governance']
   return (
     <PageBackground>
-      <main className="container mt-8 mb-8 flex flex-col gap-8">
+      <PageContent className="gap-8">
         <ScrollSpyWrapper sectionIds={sectionIds} />
         <HomepageBanner
           title="Sky DAO Dashboard"
@@ -29,7 +29,7 @@ export default function NetworkPage() {
         <BuildersSection />
         <GovernanceSection />
         <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
-      </main>
+      </PageContent>
     </PageBackground>
   )
 }

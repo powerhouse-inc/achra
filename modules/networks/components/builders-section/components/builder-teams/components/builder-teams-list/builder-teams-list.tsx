@@ -8,6 +8,7 @@ import {
 } from '@/modules/shared/components/striped-card/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
+import { BuilderTeamsItem } from '../builder-teams-item/builder-teams-item'
 
 export interface ExecutiveProposalsListProps {
   className?: string
@@ -29,7 +30,7 @@ export function BuilderTeamsList({ className }: ExecutiveProposalsListProps) {
           </StripedCardAction>
         </StripedCardHeader>
         <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
-          Content will be implemented here
+          <BuilderTeamsItem />
         </StripedCardContent>
       </StripedCard>
     </div>

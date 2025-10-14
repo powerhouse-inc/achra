@@ -3,6 +3,7 @@ import { useNetworkProfileQuery } from '@/modules/__generated__/graphql/switchbo
 import { NetworkGrid } from '@/modules/networks/components/network-grid'
 import { NETWORK_PROFILE_DOCUMENT_ID } from '@/modules/networks/lib/constants'
 import { fetchPowerhouseNetworkProfile } from '@/modules/networks/lib/fetch-networks'
+import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default async function NetworksPage() {
   const queryClient = new QueryClient()
@@ -15,13 +16,13 @@ export default async function NetworksPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="container mt-8 mb-8">
+      <PageContent>
         <h1 className="text-foreground/50 md:text- mb-4 text-3xl font-bold tracking-tight">
           Networks
         </h1>
 
         <NetworkGrid />
-      </main>
+      </PageContent>
     </HydrationBoundary>
   )
 }

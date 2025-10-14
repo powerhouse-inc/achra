@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { PageBackground } from '@/modules/shared/components/page-background'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCard } from '@/modules/workstream/components/workstream-card'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
@@ -8,7 +8,7 @@ import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstrea
 export default function WorkstreamsPage() {
   return (
     <PageBackground>
-      <main className="container mt-8 mb-8">
+      <PageContent>
         <WorkstreamBanner />
 
         <div className="flex flex-col gap-8">
@@ -22,7 +22,7 @@ export default function WorkstreamsPage() {
             <WorkstreamCard />
           </div>
         </div>
-      </main>
+      </PageContent>
     </PageBackground>
   )
 }
