@@ -10,10 +10,7 @@ import {
   fetchPowerhouseScopeOfWork,
   getRoadmapFromScopeOfWork,
 } from '@/modules/roadmap/lib/fetch-scope-of-work'
-import {
-  Breadcrumb,
-  PageBreadcrumbContainer,
-} from '@/modules/shared/components/breadcrumb/breadcrumb'
+import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
 

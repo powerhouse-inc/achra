@@ -1,38 +1,95 @@
 import { withPortalFontStyles } from '../../lib/decorators'
-import BreadcrumbNavigation from './breadcrumb'
+import { Breadcrumb, PageBreadcrumbContainer } from './index'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
+/**
+ * Breadcrumb Navigation Component
+ *
+ * A responsive breadcrumb navigation component that provides hierarchical navigation
+ * for users to understand their current location within the application and navigate
+ * back to parent pages.
+ *
+ * ## Usage
+ *
+ * ### Import
+ * ```tsx
+ * import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+ * ```
+ *
+ * ### Basic Usage
+ * ```tsx
+ * <Breadcrumb
+ *   items={[
+ *     { label: 'Networks', href: '/networks' },
+ *     { label: 'Powerhouse', href: '/network/powerhouse' },
+ *     { label: 'Overview', href: '/network/powerhouse/roadmap/overview' }
+ *   ]}
+ * />
+ * ```
+ *
+ * ### With Page Container
+ * `PageBreadcrumbContainer` adds a fixed positioning, background styling, and responsive layout typically used in page headers.
+ *
+ * ```tsx
+ * <PageBreadcrumbContainer>
+ *   <Breadcrumb items={breadcrumbItems} />
+ * </PageBreadcrumbContainer>
+ * ```
+ */
 const meta = {
   title: 'Shared/Components/Breadcrumb',
-  component: BreadcrumbNavigation,
+  component: Breadcrumb,
   decorators: [withPortalFontStyles],
   parameters: {
+    layout: 'fullscreen',
     nextjs: {
       appDirectory: true,
       navigation: {
-        pathname: '/networks',
+        pathname: '/network/powerhouse/roadmap/overview',
         params: {
-          slug: 'networks',
+          slug: 'powerhouse',
+          roadmapSlug: 'overview',
         },
       },
     },
   },
-} satisfies Meta<typeof BreadcrumbNavigation>
+  tags: ['autodocs'],
+} satisfies Meta<typeof Breadcrumb>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
-  name: 'Breadcrumb (Achra)',
+  name: 'Breadcrumb Component',
   args: {
-    className: 'container',
     maxSegmentWidthMobile: 100,
     items: [
       { label: 'Networks', href: '/networks' },
-      { label: 'Powerhouse', href: '/networks' },
-      { label: 'Roadmaps', href: '/networks' },
-      { label: 'Roadmap', href: '/networks' },
-      { label: 'Overview', href: '/networks' },
+      { label: 'Powerhouse', href: '/network/powerhouse' },
+      { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
+      { label: 'Roadmap', href: '/network/powerhouse/roadmap/overview' },
+      { label: 'Overview', href: '/network/powerhouse/roadmap/overview' },
+    ],
+  },
+}
+
+export const WithContainer: Story = {
+  name: 'Breadcrumb with Page Container',
+  render: (args) => (
+    <div className="min-h-100">
+      <PageBreadcrumbContainer>
+        <Breadcrumb {...args} />
+      </PageBreadcrumbContainer>
+    </div>
+  ),
+  args: {
+    maxSegmentWidthMobile: 100,
+    items: [
+      { label: 'Networks', href: '/networks' },
+      { label: 'Powerhouse', href: '/network/powerhouse' },
+      { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
+      { label: 'Roadmap', href: '/network/powerhouse/roadmap/overview' },
+      { label: 'Overview', href: '/network/powerhouse/roadmap/overview' },
     ],
   },
 }

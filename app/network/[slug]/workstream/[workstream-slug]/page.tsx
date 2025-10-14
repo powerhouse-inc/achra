@@ -1,9 +1,6 @@
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  Breadcrumb,
-  PageBreadcrumbContainer,
-} from '@/modules/shared/components/breadcrumb/breadcrumb'
+import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'

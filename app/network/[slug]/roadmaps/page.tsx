@@ -1,8 +1,5 @@
 import { RoadmapLinks } from '@/modules/roadmap/components/roadmap-links'
-import {
-  Breadcrumb,
-  PageBreadcrumbContainer,
-} from '@/modules/shared/components/breadcrumb/breadcrumb'
+import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
 
