@@ -4,11 +4,11 @@ import { Fragment, useMemo, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useResizeObserver } from 'usehooks-ts'
 import {
-  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
+  Breadcrumb as BreadcrumbPrimitive,
   BreadcrumbSeparator,
 } from '../ui/breadcrumb'
 import DotsSegment from './components/dot-segments'
@@ -17,19 +17,19 @@ import { getTextWidth, mobileRecommendedSegmentWidth } from './utils'
 import type { BreadcrumbItemExtended, BreadcrumbItemNavigation } from './types'
 import type { Route } from 'next'
 
-interface BreadcrumbNavigatioProps {
+interface BreadcrumbProps {
   items: BreadcrumbItemNavigation[]
   defaultOpen?: boolean
   className?: string
   maxSegmentWidthMobile?: number
 }
 
-function BreadcrumbNavigation({
+function Breadcrumb({
   items,
   defaultOpen = false,
   className,
   maxSegmentWidthMobile = MAX_SEGMENT_WIDTH_MOBILE_DEFAULT,
-}: BreadcrumbNavigatioProps) {
+}: BreadcrumbProps) {
   const isMounted = useMountedState()
   const [elementWidths, setElementWidths] = useState([0, 0])
   const contentRef = useRef<HTMLDivElement>(null)
@@ -72,7 +72,7 @@ function BreadcrumbNavigation({
   }, [itemsExtended])
 
   return (
-    <Breadcrumb className={`w-ful ${className}`}>
+    <BreadcrumbPrimitive className={`w-ful ${className}`}>
       <div className="w-[calc(100%-32px)] max-md:mx-4 max-md:rounded-xl md:w-full">
         <div>
           <div ref={contentRef} className="flex items-center justify-between max-md:-mx-2">
@@ -138,8 +138,8 @@ function BreadcrumbNavigation({
           </div>
         </div>
       </div>
-    </Breadcrumb>
+    </BreadcrumbPrimitive>
   )
 }
 
-export default BreadcrumbNavigation
+export { Breadcrumb }
