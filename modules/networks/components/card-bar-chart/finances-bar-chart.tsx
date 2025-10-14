@@ -83,6 +83,13 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
       },
       padding: 0,
       borderColor: 'var(--color-muted)',
+      position: (point: [number, number]) => {
+        const margin = isTablet || isTablet768 ? 0 : 8
+        const xPos = point[0] + margin
+        const yPos = point[1] + margin
+
+        return [xPos, yPos]
+      },
       formatter: (value: BarChartSeries) => {
         const toolTipStyle = createTooltipFormatter(isMobile)(value)
         return toolTipStyle
