@@ -6,7 +6,7 @@ function NavigationHeader() {
     <div className="bg-secondary flex w-fit items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
       <div className="relative flex items-center self-stretch pr-7 sm:pr-8 md:pr-9">
         <Link
-          href="/network/powerhouse/workstreams"
+          href="/network/powerhouse"
           className="relative flex h-4 w-full items-center sm:h-4.5 md:h-6"
         >
           {/* Note: Here we don't use Nextjs Image component because it doesn't work well with unknown image sizes
