@@ -9,9 +9,10 @@ interface DeliverableSetStatusChipProps {
 export default function DeliverableSetStatusChip({ status }: DeliverableSetStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
     switch (status) {
+      case ScopeOfWork_DeliverableSetStatus.Draft:
       case ScopeOfWork_DeliverableSetStatus.InProgress:
         return {
-          label: 'In Progress',
+          label: status === ScopeOfWork_DeliverableSetStatus.Draft ? 'Draft' : 'In Progress',
           bgColor: 'bg-status-progress/30',
           textColor: 'text-status-progress',
         }
@@ -27,10 +28,9 @@ export default function DeliverableSetStatusChip({ status }: DeliverableSetStatu
           bgColor: 'bg-slate-50', // TODO: replace colors
           textColor: 'text-gray-500',
         }
-      case ScopeOfWork_DeliverableSetStatus.Draft:
       case ScopeOfWork_DeliverableSetStatus.Todo:
         return {
-          label: status === ScopeOfWork_DeliverableSetStatus.Draft ? 'Draft' : 'To do',
+          label: 'To do',
           bgColor: 'bg-status-warning/30',
           textColor: 'text-status-warning',
         }
