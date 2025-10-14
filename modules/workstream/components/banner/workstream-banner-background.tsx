@@ -1,4 +1,5 @@
 import { FolderGit2, FolderKanban } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface WorkstreamBannerBackgroundProps {
@@ -13,12 +14,15 @@ export default function WorkstreamBannerBackground({
   if (isNetworkBanner) {
     return (
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div
-          className="relative h-full w-full items-center bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(180deg, #FFF 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(/networks/backgrounds/${network}.png)`,
-          }}
-        />
+        <div className="relative h-full w-full">
+          <Image
+            src={`/networks/backgrounds/${network}.png`}
+            alt={`${network} network background`}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
       </div>
     )
   }
