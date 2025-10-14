@@ -11,7 +11,7 @@ interface RoadmapSectionProps {
 
 export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
   return (
-    <section id="roadmap" className="flex flex-col">
+    <section className="flex flex-col">
       <SectionTitle title="Roadmap" hash="roadmap" />
       <Tabs defaultValue="phase-1" className="gap-0">
         <TabsList className="no-scrollbar -mx-2 h-fit w-full justify-start overflow-x-auto bg-transparent p-0">

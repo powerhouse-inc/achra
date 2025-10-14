@@ -20,7 +20,6 @@ export interface WalletsSectionProps {
 export function WalletsSection({ wallets, className }: WalletsSectionProps) {
   return (
     <section
-      id="wallets"
       className={cn(
         `flex w-full flex-col gap-6 ${wallets.length === 0 ? 'hidden' : ''}`,
         className,
