@@ -10,8 +10,12 @@ import {
   fetchPowerhouseScopeOfWork,
   getRoadmapFromScopeOfWork,
 } from '@/modules/roadmap/lib/fetch-scope-of-work'
-import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
+import {
+  Breadcrumb,
+  PageBreadcrumbContainer,
+} from '@/modules/shared/components/breadcrumb/breadcrumb'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
+import { PageContent } from '@/modules/shared/components/page-containers'
 
 interface RoadmapPageProps {
   params: Promise<{ roadmapSlug: string }>
@@ -48,11 +52,11 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <main>
-        <div className="bg-background border-accent fixed top-18 z-50 w-full border-b py-3 md:top-22">
-          <BreadcrumbNavigation items={items} className="container" />
-        </div>
+        <PageBreadcrumbContainer>
+          <Breadcrumb items={items} />
+        </PageBreadcrumbContainer>
 
-        <div className="container mt-16 mb-8 flex flex-col gap-6">
+        <PageContent className="gap-6" as="div" variant="with-breadcrumb">
           <div className="flex flex-col">
             <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
               {roadmap.title}
@@ -60,7 +64,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
           </div>
 
           <RoadmapDetailsContent />
-        </div>
+        </PageContent>
       </main>
     </HydrationBoundary>
   )

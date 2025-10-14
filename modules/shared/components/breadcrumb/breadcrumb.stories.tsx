@@ -1,5 +1,5 @@
 import { withPortalFontStyles } from '../../lib/decorators'
-import BreadcrumbNavigation from './breadcrumb-navigation'
+import BreadcrumbNavigation from './breadcrumb'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {

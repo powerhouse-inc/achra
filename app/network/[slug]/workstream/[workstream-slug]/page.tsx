@@ -1,9 +1,12 @@
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
+import {
+  Breadcrumb,
+  PageBreadcrumbContainer,
+} from '@/modules/shared/components/breadcrumb/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
-import { PageBackground } from '@/modules/shared/components/page-background'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
@@ -25,19 +28,18 @@ This project not only aims to improve user experience but also includes smaller 
 export default function WorkstreamDetailsPage() {
   return (
     <PageBackground>
-      <main className="container mt-4 mb-8 flex flex-col gap-6 sm:mt-8">
-        <div className="bg-secondary rounded-xl p-2 sm:bg-transparent sm:p-0">
-          <BreadcrumbNavigation
-            items={[
-              { label: 'Powerhouse', href: '/network/powerhouse' },
-              {
-                label: 'Vetra Beta Launch',
-                href: '/network/powerhouse/workstream/vetra-beta-launch',
-              },
-            ]}
-          />
-        </div>
-
+      <PageBreadcrumbContainer>
+        <Breadcrumb
+          items={[
+            { label: 'Powerhouse', href: '/network/powerhouse' },
+            {
+              label: 'Vetra Beta Launch',
+              href: '/network/powerhouse/workstream/vetra-beta-launch',
+            },
+          ]}
+        />
+      </PageBreadcrumbContainer>
+      <PageContent className="gap-6" variant="with-breadcrumb">
         <div className="flex justify-between gap-2 md:items-start">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <h1 className="leading-6 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl xl:text-2xl">
@@ -86,7 +88,7 @@ export default function WorkstreamDetailsPage() {
 
           <ProposalCardsGrid />
         </div>
-      </main>
+      </PageContent>
     </PageBackground>
   )
 }

@@ -8,12 +8,12 @@ import { RoadmapSection } from '@/modules/networks/components/roadmap-section'
 import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { WalletsSection } from '@/modules/networks/components/wallets-section/wallets-section'
 import { mockedRoadmaps } from '@/modules/roadmap/mocks'
-import { PageBackground } from '@/modules/shared/components/page-background'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 
 export default function NetworkPage() {
   return (
     <PageBackground>
-      <main className="container mt-8 mb-8 flex flex-col gap-8">
+      <PageContent className="gap-8">
         <HomepageBanner
           title="Sky DAO Dashboard"
           description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
@@ -26,7 +26,7 @@ export default function NetworkPage() {
         <BuildersSection />
         <GovernanceSection />
         <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
-      </main>
+      </PageContent>
     </PageBackground>
   )
 }

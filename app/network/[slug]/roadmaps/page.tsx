@@ -1,5 +1,9 @@
 import { RoadmapLinks } from '@/modules/roadmap/components/roadmap-links'
-import BreadcrumbNavigation from '@/modules/shared/components/breadcrumb/breadcrumb-navigation'
+import {
+  Breadcrumb,
+  PageBreadcrumbContainer,
+} from '@/modules/shared/components/breadcrumb/breadcrumb'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
 
 interface RoadmapPageProps {
@@ -16,11 +20,11 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
 
   return (
     <main>
-      <div className="bg-background border-accent fixed top-18 z-50 w-full border-b py-3 md:top-22">
-        <BreadcrumbNavigation items={items} className="container" />
-      </div>
+      <PageBreadcrumbContainer>
+        <Breadcrumb items={items} />
+      </PageBreadcrumbContainer>
 
-      <div className="container mt-18 mb-8 flex flex-col gap-6">
+      <PageContent className="gap-6" variant="with-breadcrumb">
         <div className="flex flex-col">
           <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
             Powerhouse All Roadmaps
@@ -30,7 +34,7 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
             <RoadmapLinks slug={slug} />
           </div>
         </div>
-      </div>
+      </PageContent>
     </main>
   )
 }

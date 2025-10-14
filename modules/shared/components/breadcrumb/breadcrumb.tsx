@@ -3,12 +3,13 @@ import Link from 'next/link'
 import { Fragment, useMemo, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useResizeObserver } from 'usehooks-ts'
+import { cn } from '@/shared/lib/utils'
 import {
-  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
+  Breadcrumb as BreadcrumbPrimitive,
   BreadcrumbSeparator,
 } from '../ui/breadcrumb'
 import DotsSegment from './components/dot-segments'
@@ -17,19 +18,19 @@ import { getTextWidth, mobileRecommendedSegmentWidth } from './utils'
 import type { BreadcrumbItemExtended, BreadcrumbItemNavigation } from './types'
 import type { Route } from 'next'
 
-interface BreadcrumbNavigatioProps {
+interface BreadcrumbProps {
   items: BreadcrumbItemNavigation[]
   defaultOpen?: boolean
   className?: string
   maxSegmentWidthMobile?: number
 }
 
-function BreadcrumbNavigation({
+function Breadcrumb({
   items,
   defaultOpen = false,
   className,
   maxSegmentWidthMobile = MAX_SEGMENT_WIDTH_MOBILE_DEFAULT,
-}: BreadcrumbNavigatioProps) {
+}: BreadcrumbProps) {
   const isMounted = useMountedState()
   const [elementWidths, setElementWidths] = useState([0, 0])
   const contentRef = useRef<HTMLDivElement>(null)
@@ -72,7 +73,7 @@ function BreadcrumbNavigation({
   }, [itemsExtended])
 
   return (
-    <Breadcrumb className={`w-ful ${className}`}>
+    <BreadcrumbPrimitive className={`w-ful ${className}`}>
       <div className="w-[calc(100%-32px)] max-md:mx-4 max-md:rounded-xl md:w-full">
         <div>
           <div ref={contentRef} className="flex items-center justify-between max-md:-mx-2">
@@ -138,8 +139,23 @@ function BreadcrumbNavigation({
           </div>
         </div>
       </div>
-    </Breadcrumb>
+    </BreadcrumbPrimitive>
   )
 }
 
-export default BreadcrumbNavigation
+function PageBreadcrumbContainer({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-background fixed top-18 z-50 w-full px-4 pt-4 pb-2 sm:px-0 sm:py-0 md:top-22">
+      <div
+        className={cn(
+          'bg-secondary rounded-xl p-2', // mobile classes
+          'sm:bg-background border-accent sm:rounded-none sm:border-b sm:px-0 sm:py-3',
+        )}
+      >
+        <div className="sm:container">{children}</div>
+      </div>
+    </div>
+  )
+}
+
+export { Breadcrumb, PageBreadcrumbContainer }
