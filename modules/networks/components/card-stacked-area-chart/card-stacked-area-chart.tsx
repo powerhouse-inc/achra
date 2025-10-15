@@ -106,7 +106,7 @@ export function CardStackedAreaChart() {
       </div>
 
       <div className="mt-3.5 flex justify-center sm:-mt-0.5 lg:mt-2 xl:mt-4">
-        <InternalLink href="/networks" className="h-8 w-fit xl:h-9">
+        <InternalLink href="/networks" className="w-fit xl:h-9">
           Realized Expenses
         </InternalLink>
       </div>
