@@ -3,10 +3,10 @@
 import { useScrollHash } from '@/modules/shared/hooks/use-scroll-hash'
 
 interface ScrollSpyWrapperProps {
-  sectionIds: string[]
+  sectionHashs: string[]
 }
 
-export default function ScrollSpyWrapper({ sectionIds }: ScrollSpyWrapperProps) {
-  useScrollHash(sectionIds)
+export default function ScrollSpyWrapper({ sectionHashs }: ScrollSpyWrapperProps) {
+  useScrollHash(sectionHashs)
   return null
 }

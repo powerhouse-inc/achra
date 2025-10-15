@@ -12,11 +12,11 @@ import { mockedRoadmaps } from '@/modules/roadmap/mocks'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 
 export default function NetworkPage() {
-  const sectionIds = ['proposals', 'roadmap', 'finances', 'wallets', 'builders', 'governance']
+  const sectionHashs = ['proposals', 'roadmap', 'finances', 'wallets', 'builders', 'governance']
   return (
     <PageBackground>
       <PageContent className="gap-8">
-        <ScrollSpyWrapper sectionIds={sectionIds} />
+        <ScrollSpyWrapper sectionHashs={sectionHashs} />
         <HomepageBanner
           title="Sky DAO Dashboard"
           description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
