@@ -17,4 +17,5 @@ export type RouteWithDynamicPages = Route<
   | `/network/${NetworkSlug}/roadmaps/${string}`
   | `/network/${NetworkSlug}/roadmap/${string}`
   | `/network/${NetworkSlug}/workstream/${string}`
+  | `/network/${NetworkSlug}/rfp/${string}`
 >
