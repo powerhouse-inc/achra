@@ -3,7 +3,7 @@ import { BuilderTeams } from './components/builder-teams/builder-teams'
 
 export function BuildersSection() {
   return (
-    <section id="builders" className="flex w-full flex-col gap-6">
+    <section className="flex w-full flex-col gap-6">
       <SectionTitle title="Builders" hash="builders" />
       <BuilderTeams />
     </section>
