@@ -18,12 +18,11 @@ export enum BudgetStatus {
 }
 
 export enum TeamStatus {
-  RFC = 'RFC',
-  FormalSubmission = 'Formal Submission',
+  Progress = 'Progress',
+  'To Do' = 'To Do',
+  Canceled = 'Canceled',
   Accepted = 'Accepted',
-  Rejected = 'Rejected',
   Obsolete = 'Obsolete',
-  Withdrawn = 'Withdrawn',
 }
 
 export enum TeamCategory {
