@@ -83,7 +83,9 @@ const createNetworkNavbarConfig = (network: string): NavbarConfig => {
       {
         label: 'Contribute',
         href: `/network/${network}/workstreams` as RouteWithDynamicPages,
-        isActive: (currentPath) => currentPath.startsWith(`/network/${network}/workstream`),
+        isActive: (currentPath) =>
+          currentPath.startsWith(`/network/${network}/workstream`) ||
+          currentPath.startsWith(`/network/${network}/rfp`),
       },
       {
         label: 'Roadmap',
