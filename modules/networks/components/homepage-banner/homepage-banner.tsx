@@ -2,7 +2,7 @@
 
 import { Maximize2, Minimize2 } from 'lucide-react'
 import Image from 'next/image'
-import { ConnectLink } from '@/modules/shared/components/connect-link/connect-link'
+import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Button } from '@/shared/components/ui/button'
 import {
   Collapsible,
