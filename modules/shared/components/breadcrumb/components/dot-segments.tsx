@@ -55,13 +55,13 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   }
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
+    <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
       <DropdownMenuTrigger asChild>
         <TriggerIcon />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="start"
-        className="bg-popover max-w-49 min-w-49.25 rounded-xl border-none px-2 py-1 shadow-lg"
+        className="bg-popover max-w-49 min-w-49.25 flex-1 rounded-xl border-none px-2 py-1 shadow-lg"
       >
         <div className="flex flex-col py-1">
           {itemsToRender.map((item: BreadcrumbItemNavigation) => (
