@@ -64,7 +64,7 @@
   --fusion: oklch(75.53% 0.154 5.76);
   --to-do: oklch(78.73% 0.161 64.84);
   --yellow: oklch(0.8447 0.1726 88.48);
-    /* SWIPER */
+  /* SWIPER */
   --swiper-navigation-size: 10px;
   --swiper-navigation-sides-offset: 4px;
   --swiper-theme-color: var(--muted-foreground);
@@ -263,7 +263,7 @@
   z-index: 10;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet {
   height: calc(var(--spacing) * 4);
   width: calc(var(--spacing) * 4);
   margin-left: calc(var(--spacing) * 2);
@@ -272,20 +272,21 @@
   opacity: 1;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:first-child {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:first-child {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:last-child {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:last-child {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+.swiper-pagination.swiper-pagination-bullets
+  > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
   background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet-active {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }
