@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType } from '@/modules/shared/types/types'
-import CompactItem from '../compact-item/compact-item'
-import LargeItem from '../large-item/large-item'
+import CompactItem from './components/compact-item/compact-item'
+import LargeItem from './components/large-item/large-item'
 
 export interface BuilderTeamsItemProps {
   team: Team

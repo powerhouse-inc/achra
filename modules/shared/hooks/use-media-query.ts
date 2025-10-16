@@ -71,5 +71,9 @@ function getQuery(options: UseMediaQueryOptions): string {
  * ```
  */
 export const useMediaQuery = (options: UseMediaQueryOptions) => {
-  return useMediaQueryTsHook(getQuery(options))
+  // Use a stable initial value across SSR and first client render to avoid hydration mismatches
+  return useMediaQueryTsHook(getQuery(options), {
+    defaultValue: false,
+    initializeWithValue: false,
+  })
 }
