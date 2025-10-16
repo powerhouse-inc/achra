@@ -1,8 +1,8 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ConnectLink } from '@/modules/networks/components/homepage-banner/components/connect-link'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { ConnectLink } from '@/modules/shared/components/connect-link/connect-link'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card } from '@/modules/shared/components/ui/card'
 
