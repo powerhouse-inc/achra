@@ -59,7 +59,9 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
     (items: string[]) => (
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className={cn(tagVariants({ variant: 'default' }), 'px-2')}>+{items.length}</div>
+          <div className={cn(tagVariants({ variant: 'default' }), 'px-2', 'select-none')}>
+            +{items.length}
+          </div>
         </TooltipTrigger>
         <TooltipContent side="bottom" align="start">
           <div className="max-w-64 space-y-1">
