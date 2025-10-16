@@ -51,7 +51,7 @@ export function SpendingItem({
     }
   }, [calculateAlignment, isMobile])
 
-  const triggerAriaLabel = 'Ver más información'
+  const triggerAriaLabel = 'View more information'
   const TriggerIcon = <InfoIcon className="text-muted-foreground h-2.5 w-2.5" />
 
   return (
