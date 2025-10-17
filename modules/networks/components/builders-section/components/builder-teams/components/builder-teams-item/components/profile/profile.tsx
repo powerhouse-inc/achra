@@ -20,10 +20,9 @@ export default function Profile({ name, shortCode, status, image, className }: P
         <AvatarImage src={image} alt={name || 'Wallet'} />
       </Avatar>
       <div className="flex flex-col">
-        <div className="flex items-center gap-1">
-          <span className="text-foreground/30 text-sm/5.5 font-semibold">{shortCode}</span>
-          <span className="text-foreground text-sm/5.5 font-semibold">{name}</span>
-        </div>
+        <p className="text-foreground/30 line-clamp-1 w-full text-sm/5.5 font-semibold">
+          {shortCode} <span className="text-foreground">{name}</span>
+        </p>
         <Badge variant="default" className={cn(statusBadgeStyles[status], 'px-3 leading-4.5')}>
           {status.toUpperCase()}
         </Badge>
