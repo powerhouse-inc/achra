@@ -1,8 +1,8 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ConnectLink } from '@/modules/networks/components/homepage-banner/components/connect-link'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card } from '@/modules/shared/components/ui/card'
 
@@ -18,8 +18,8 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
   const { slug } = await params
 
   const items = [
-    { label: 'Allocation System v1', href: '/networks/allocation-system-v1' as Route },
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
+    { label: 'Allocation System v1', href: '/networks/allocation-system-v1' as Route },
     { label: 'RPF', href: `/network/${slug}/rpf` as Route },
   ]
 
@@ -121,7 +121,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             </div>
           </div>
           <div className="flex flex-col gap-2 p-2 sm:gap-4 sm:p-4">
-            <div className="bg-background rounded-lg pb-2 transition-all">
+            <div className="rounded-lg pb-2 transition-all">
               <h2 className="text-foreground mb-2 text-lg font-bold">Briefing</h2>
               Creation of the roadmap proposal for the Start Teams onboarding to Achra platform,
               including full SoW and payment terms. This project will outline key milestones,
