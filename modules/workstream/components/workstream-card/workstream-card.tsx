@@ -1,8 +1,8 @@
 import { FilePenLine } from 'lucide-react'
-import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
+import { Markdown } from '@/modules/shared/components/markdown'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -35,12 +35,9 @@ export default function WorkstreamCard() {
         <WorkstreamStats />
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-          <div className="w-full">
-            {/* TODO: Replace it as we can't change the styles of the streamdown component */}
-            <Streamdown className="line-clamp-6 text-xs/4.5 sm:line-clamp-4 sm:text-sm/5.5 xl:text-base/6">
-              {proposalDescriptionMarkdown}
-            </Streamdown>
-          </div>
+          <Markdown className="line-clamp-6 sm:line-clamp-4">
+            {proposalDescriptionMarkdown}
+          </Markdown>
 
           <InternalLink href="#" className="ml-auto max-w-fit" variant="outline">
             RFP Details
