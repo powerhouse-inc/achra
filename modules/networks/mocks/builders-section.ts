@@ -127,7 +127,7 @@ export const mockBuilderTeams: Team[] = [
     type: ResourceType.CoreUnit,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
     budgetPath: '',
-    category: [TeamCategory.Technical, TeamCategory.Support],
+    category: [TeamCategory.Technical, TeamCategory.Support, TeamCategory.Business],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',

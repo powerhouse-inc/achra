@@ -7,7 +7,7 @@ import { ResourceType, type TeamCategory } from '@/modules/shared/types/types'
 import CategoryBadge from '../category-badge/category-badge'
 import ItemProfile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
-import ItemScope from '../scope-badge/scope-badge'
+import ScopeBadge from '../scope-badge/scope-badge'
 import { useCompactItem } from './use-compact-item'
 
 export interface CompactItemProps {
@@ -41,7 +41,7 @@ export default function CompactItem({ team, className }: CompactItemProps) {
           <>
             <div className="flex gap-1">
               {team.scopes.map((scope) => (
-                <ItemScope key={scope.id} scope={scope} size={scopeSizeVariant} />
+                <ScopeBadge key={scope.id} scope={scope} size={scopeSizeVariant} />
               ))}
             </div>
             <RoleBadge type={team.type} />

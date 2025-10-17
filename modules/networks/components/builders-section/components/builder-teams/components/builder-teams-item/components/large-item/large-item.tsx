@@ -3,10 +3,11 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType, type TeamCategory } from '@/modules/shared/types/types'
+import BadgeGroup from '../badge-group/badge-group'
 import CategoryBadge from '../category-badge/category-badge'
 import ItemProfile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
-import ItemScope from '../scope-badge/scope-badge'
+import ScopeBadge from '../scope-badge/scope-badge'
 
 export interface LargeItemProps {
   team: Team
@@ -29,12 +30,14 @@ export default function LargeItem({ team, className }: LargeItemProps) {
       />
       <div className="flex justify-between">
         {team.type === ResourceType.EcosystemActor ? (
-          <div className="flex flex-col gap-1">
-            {team.scopes.map((scope) => (
-              <ItemScope key={scope.id} scope={scope} size="large" />
-            ))}
-          </div>
-        ) : (
+          team.scopes.length > 1 ? (
+            <BadgeGroup items={team.scopes} />
+          ) : team.scopes.length === 0 ? null : (
+            <ScopeBadge key={team.scopes[0].id} scope={team.scopes[0]} size="large" />
+          )
+        ) : team.category.length > 2 ? (
+          <BadgeGroup items={team.category as TeamCategory[]} />
+        ) : team.category.length === 0 ? null : (
           <div className="flex flex-col gap-1">
             {team.category.map((category) => (
               <CategoryBadge key={category} category={category as TeamCategory} />
