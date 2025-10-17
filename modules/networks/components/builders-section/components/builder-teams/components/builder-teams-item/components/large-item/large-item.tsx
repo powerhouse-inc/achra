@@ -11,14 +11,15 @@ import ScopeBadge from '../scope-badge/scope-badge'
 
 export interface LargeItemProps {
   team: Team
+  profileUpdateDate: string
   className?: string
 }
 
-export default function LargeItem({ team, className }: LargeItemProps) {
+export default function LargeItem({ team, className, profileUpdateDate }: LargeItemProps) {
   return (
     <div
       className={cn(
-        'bg-popover grid w-full grid-cols-[1fr_1fr_1fr_1fr_auto] items-center rounded-xl px-2 py-3 shadow-xs xl:px-4',
+        'bg-popover grid w-full grid-cols-[1fr_15%_1fr_13%_auto] items-center gap-x-15 rounded-xl px-2 py-3 shadow-xs xl:gap-x-22 xl:px-4 2xl:gap-x-25',
         className,
       )}
     >
@@ -46,7 +47,10 @@ export default function LargeItem({ team, className }: LargeItemProps) {
         )}
       </div>
       <RoleBadge type={team.type} />
-      <div />
+      <div className="flex flex-col">
+        <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
+        <span className="text-foreground/50 text-sm/5.5 font-semibold">{profileUpdateDate}</span>
+      </div>
       <Button variant="outline" size="icon">
         <ArrowRight className="size-4" />
       </Button>
