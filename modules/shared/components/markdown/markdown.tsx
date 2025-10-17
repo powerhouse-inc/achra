@@ -1,5 +1,8 @@
+'use client'
+
 import { Streamdown } from 'streamdown'
 import { cn } from '../../lib/utils'
+import { componentsOverrides } from './markdown-components'
 
 interface MarkdownProps {
   children: string
@@ -7,7 +10,14 @@ interface MarkdownProps {
 }
 export function Markdown({ children, className }: MarkdownProps) {
   return (
-    <Streamdown className={cn('text-xs/4.5 sm:text-sm/5.5 xl:text-base/6', className)}>
+    <Streamdown
+      className={cn('text-xs/4.5 sm:text-sm/5.5 xl:text-base/6', className)}
+      components={componentsOverrides}
+      controls={{
+        table: false,
+        code: false,
+      }}
+    >
       {children}
     </Streamdown>
   )
