@@ -1,8 +1,14 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  BriefingMarkdown,
+  CriteriaMarkdown,
+  markdownEvaluation,
+} from '@/modules/rfp/mocks/markdown'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
+import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card } from '@/modules/shared/components/ui/card'
 
@@ -85,67 +91,16 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             including full SoW and payment terms.
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="bg-background rounded-lg p-3 transition-all">
-                <h2 className="text-foreground mb-4 text-lg font-bold">Eligibility Criteria</h2>
-                <ul className="text-muted-foreground space-y-2">
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>Agile PM Experience, Prince Certification</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>4 years of BA work experience</span>
-                  </li>
-                </ul>
+                <Markdown>{CriteriaMarkdown}</Markdown>
               </div>
               <div className="bg-background rounded-lg p-3 transition-all">
-                <h2 className="text-foreground mb-4 text-lg font-bold">Evaluation Criteria</h2>
-                <ul className="text-muted-foreground space-y-2">
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>Agile PM Experience, Prince Certification</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>Clarity of deliverables and key results</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>Complete Proposal</span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-foreground">•</span>
-                    <span>Maximum one Revision allowed</span>
-                  </li>
-                </ul>
+                <Markdown>{markdownEvaluation}</Markdown>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2 p-2 sm:gap-4 sm:p-4">
             <div className="rounded-lg pb-2 transition-all">
-              <h2 className="text-foreground mb-2 text-lg font-bold">Briefing</h2>
-              Creation of the roadmap proposal for the Start Teams onboarding to Achra platform,
-              including full SoW and payment terms. This project will outline key milestones,
-              resource allocation, and risk mitigation strategies for a seamless transition. We are
-              seeking a detailed roadmap proposal for integrating Start Teams onto the Achra
-              platform. This proposal should include:
-              <ul className="text-muted-foreground space-y-2">
-                <li className="flex gap-2">
-                  <span className="text-foreground">•</span>A comprehensive Statement of Work (SoW)
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-foreground">•</span>A clear payment schedule
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-foreground">•</span>Well-defined project milestones
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-foreground">•</span>Resource needs assessment
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-foreground">•</span>
-                  Risk management strategies for a seamless transition
-                </li>
-              </ul>
+              <Markdown>{BriefingMarkdown}</Markdown>
             </div>
           </div>
         </Card>

@@ -72,7 +72,16 @@ function TableCell({ children, ...props }: HTMLAttributes<HTMLTableCellElement>)
   )
 }
 
+function Blockquote({ children, ...props }: HTMLAttributes<HTMLQuoteElement>) {
+  return (
+    <blockquote className="border-foreground/50 ml-4 border-l-2 pr-3 pl-4" {...props}>
+      {children}
+    </blockquote>
+  )
+}
+
 export const componentsOverrides: StreamdownProps['components'] = {
+  blockquote: Blockquote,
   ol: OrderedList,
   ul: UnorderedList,
   table: Table,
