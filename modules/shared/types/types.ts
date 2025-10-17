@@ -34,9 +34,8 @@ export enum TeamCategory {
   Growth = 'Growth',
   Finance = 'Finance',
   Legal = 'Legal',
-  AdvisoryCouncilMember = 'AdvisoryCouncilMember',
-  ActiveEcosystemActor = 'ActiveEcosystemActor',
   ScopeFacilitator = 'ScopeFacilitator',
+  All = 'All',
 }
 
 export enum ActorCategory {

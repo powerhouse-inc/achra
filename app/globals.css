@@ -63,7 +63,7 @@
   --purple: oklch(59.01% 0.214 296.91);
   --fusion: oklch(75.53% 0.154 5.76);
   --to-do: oklch(78.73% 0.161 64.84);
-
+  --yellow: oklch(0.8447 0.1726 88.48);
   /* SWIPER */
   --swiper-navigation-size: 10px;
   --swiper-navigation-sides-offset: 4px;
@@ -130,6 +130,7 @@
   --purple: oklch(59.01% 0.214 296.91);
   --fusion: oklch(75.53% 0.154 5.76);
   --to-do: oklch(78.73% 0.161 64.84);
+  --yellow: oklch(0.8447 0.1726 88.48);
 
   /* SWIPER */
   --swiper-theme-color: var(--muted-foreground);
@@ -201,6 +202,7 @@
   --color-purple: var(--purple);
   --color-fusion: var(--fusion);
   --color-to-do: var(--to-do);
+  --color-yellow: var(--yellow);
 
   /* Font overrides */
   --text-3xl: 2rem;
@@ -218,6 +220,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -231,14 +234,17 @@
   @media (min-width: theme(breakpoint.sm)) {
     padding-inline: calc(var(--spacing) * 6);
   }
+
   @media (min-width: theme(breakpoint.md)) {
     padding-inline: calc(var(--spacing) * 8);
   }
+
   @media (min-width: theme(breakpoint.xl)) {
     max-width: calc(var(--spacing) * 300);
     margin-inline: auto;
     padding-inline: 0;
   }
+
   @media (min-width: theme(breakpoint.2xl)) {
     max-width: calc(var(--spacing) * 328);
   }
@@ -256,6 +262,7 @@
   bottom: 0;
   z-index: 10;
 }
+
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet {
   height: calc(var(--spacing) * 4);
   width: calc(var(--spacing) * 4);
@@ -264,18 +271,22 @@
   background-color: var(--muted);
   opacity: 1;
 }
+
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:first-child {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:last-child {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
 .swiper-pagination.swiper-pagination-bullets
   > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
   background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 }
+
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }

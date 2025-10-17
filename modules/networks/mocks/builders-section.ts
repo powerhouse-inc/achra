@@ -14,7 +14,7 @@ export const mockBuilderTeams: Team[] = [
     image:
       'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/DEWIZ/DEWIZ_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ActiveEcosystemActor],
+    category: [TeamCategory.Technical, TeamCategory.ScopeFacilitator],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -51,6 +51,16 @@ export const mockBuilderTeams: Team[] = [
         id: '1',
         code: 'ACC',
         name: TeamScopeEnum.AccessibilityScope,
+      },
+      {
+        id: '2',
+        code: 'STB',
+        name: TeamScopeEnum.StabilityScope,
+      },
+      {
+        id: '3',
+        code: 'SUP',
+        name: TeamScopeEnum.SupportScope,
       },
     ],
     budgetStatements: [],
@@ -100,9 +110,9 @@ export const mockBuilderTeams: Team[] = [
     updates: [],
     scopes: [
       {
-        id: '2',
-        code: 'ACC',
-        name: TeamScopeEnum.AccessibilityScope,
+        id: '4',
+        code: 'STB',
+        name: TeamScopeEnum.StabilityScope,
       },
     ],
     budgetStatements: [],
@@ -117,7 +127,7 @@ export const mockBuilderTeams: Team[] = [
     type: ResourceType.CoreUnit,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
     budgetPath: '',
-    category: [TeamCategory.Operational, TeamCategory.Technical],
+    category: [TeamCategory.Technical, TeamCategory.Support, TeamCategory.Business],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -151,9 +161,9 @@ export const mockBuilderTeams: Team[] = [
     updates: [],
     scopes: [
       {
-        id: '3',
-        code: 'ACC',
-        name: TeamScopeEnum.AccessibilityScope,
+        id: '5',
+        code: 'SUP',
+        name: TeamScopeEnum.SupportScope,
       },
     ],
     budgetStatements: [],
@@ -168,7 +178,7 @@ export const mockBuilderTeams: Team[] = [
     type: ResourceType.CoreUnit,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ScopeFacilitator, TeamCategory.Operational],
+    category: [TeamCategory.Operational, TeamCategory.Business],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -202,9 +212,9 @@ export const mockBuilderTeams: Team[] = [
     updates: [],
     scopes: [
       {
-        id: '3',
-        code: 'ACC',
-        name: TeamScopeEnum.AccessibilityScope,
+        id: '6',
+        code: 'PRT',
+        name: TeamScopeEnum.ProtocolScope,
       },
     ],
     budgetStatements: [],
@@ -220,7 +230,7 @@ export const mockBuilderTeams: Team[] = [
     image:
       'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ActiveEcosystemActor],
+    category: [TeamCategory.Growth, TeamCategory.RWAs],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -254,9 +264,9 @@ export const mockBuilderTeams: Team[] = [
     updates: [],
     scopes: [
       {
-        id: '4',
-        code: 'ACC',
-        name: TeamScopeEnum.AccessibilityScope,
+        id: '7',
+        code: 'GOV',
+        name: TeamScopeEnum.GovernanceScope,
       },
     ],
     budgetStatements: [],
@@ -272,7 +282,7 @@ export const mockBuilderTeams: Team[] = [
     image:
       'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/DEWIZ/DEWIZ_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ActiveEcosystemActor],
+    category: [TeamCategory.Finance, TeamCategory.Legal],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -306,9 +316,9 @@ export const mockBuilderTeams: Team[] = [
     updates: [],
     scopes: [
       {
-        id: '1',
-        code: 'ACC',
-        name: TeamScopeEnum.AccessibilityScope,
+        id: '8',
+        code: 'ALL',
+        name: TeamScopeEnum.All,
       },
     ],
     budgetStatements: [],
@@ -324,7 +334,7 @@ export const mockBuilderTeams: Team[] = [
     image:
       'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ScopeFacilitator],
+    category: [TeamCategory.All],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -375,7 +385,7 @@ export const mockBuilderTeams: Team[] = [
     type: ResourceType.CoreUnit,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
     budgetPath: '',
-    category: [TeamCategory.Operational, TeamCategory.Technical],
+    category: [TeamCategory.Technical, TeamCategory.Support],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -426,7 +436,7 @@ export const mockBuilderTeams: Team[] = [
     type: ResourceType.CoreUnit,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ScopeFacilitator, TeamCategory.Operational],
+    category: [TeamCategory.ScopeFacilitator, TeamCategory.Technical],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
@@ -478,7 +488,7 @@ export const mockBuilderTeams: Team[] = [
     image:
       'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     budgetPath: '',
-    category: [TeamCategory.ActiveEcosystemActor],
+    category: [TeamCategory.Growth, TeamCategory.RWAs],
     sentenceDescription: '',
     paragraphDescription: '',
     paragraphImage: '',
