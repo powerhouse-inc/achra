@@ -1,10 +1,6 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
-import {
-  BriefingMarkdown,
-  CriteriaMarkdown,
-  markdownEvaluation,
-} from '@/mocks/networks-mock/markdown'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BriefingMarkdown, CriteriaMarkdown, markdownEvaluation } from '@/modules/rfp/constants'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
