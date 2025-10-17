@@ -1,5 +1,6 @@
 import { withThemeByClassName } from '@storybook/addon-themes'
 import { initialize, mswLoader } from 'msw-storybook-addon'
+import { mockDateDecorator } from 'storybook-mock-date-decorator'
 import { withNextjsExtras } from '../modules/shared/lib/decorators'
 import type { Preview } from '@storybook/nextjs'
 import { create } from 'storybook/theming'
@@ -15,6 +16,7 @@ initialize({ onUnhandledRequest: 'warn' })
 
 const preview: Preview = {
   decorators: [
+    mockDateDecorator,
     withThemeByClassName({
       themes: {
         light: 'light',
