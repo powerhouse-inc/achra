@@ -1,3 +1,4 @@
+import { createHeadingComponent } from './utils'
 import type { HTMLAttributes } from 'react'
 import type { StreamdownProps } from 'streamdown'
 
@@ -80,6 +81,26 @@ function Blockquote({ children, ...props }: HTMLAttributes<HTMLQuoteElement>) {
   )
 }
 
+const Heading1 = createHeadingComponent(1, 'mt-0 mb-4 text-2xl font-bold')
+const Heading2 = createHeadingComponent(2, 'mt-0 mb-4 text-xl font-bold')
+const Heading3 = createHeadingComponent(3, 'mt-0 mb-4 text-lg font-bold')
+
+function Hr({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <hr className="border-border my-4" {...props}>
+      {children}
+    </hr>
+  )
+}
+
+function Link({ children, ...props }: HTMLAttributes<HTMLAnchorElement>) {
+  return (
+    <a className="text-foreground hover:text-primary underline-offset-4 hover:underline" {...props}>
+      {children}
+    </a>
+  )
+}
+
 export const componentsOverrides: StreamdownProps['components'] = {
   blockquote: Blockquote,
   ol: OrderedList,
@@ -90,4 +111,9 @@ export const componentsOverrides: StreamdownProps['components'] = {
   tr: TableRow,
   th: TableHeaderCell,
   td: TableCell,
+  h1: Heading1,
+  h2: Heading2,
+  h3: Heading3,
+  hr: Hr,
+  a: Link,
 }
