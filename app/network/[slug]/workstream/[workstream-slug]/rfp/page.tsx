@@ -12,7 +12,7 @@ import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card } from '@/modules/shared/components/ui/card'
 
-import ProposalKeyValueElement from '@/modules/workstream/components/workstream-stats/proposal-key-value-element'
+import ProposalKeyValueElement from '@/modules/shared/components/workstream-stats/proposal-key-value-element'
 
 import type { Route } from 'next'
 
@@ -26,7 +26,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
   const items = [
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
     { label: 'Allocation System v1', href: '/networks/allocation-system-v1' as Route },
-    { label: 'RPF', href: `/network/${slug}/rpf` as Route },
+    { label: 'RFP', href: `/network/${slug}/rpf` as Route },
   ]
 
   return (

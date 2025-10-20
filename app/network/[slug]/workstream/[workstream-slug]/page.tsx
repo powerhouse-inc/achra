@@ -5,10 +5,10 @@ import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-s
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import WorkstreamStats from '@/modules/shared/components/workstream-stats/workstream-stats'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
 import StatCards from '@/modules/workstream/components/workstream-card/stat-cards'
-import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
