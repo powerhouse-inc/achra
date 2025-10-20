@@ -42,14 +42,14 @@ const ACHRA_CONFIG: NavbarConfig = {
       isActive: (currentPath) => isItemActive(currentPath, '/workstreams'),
     },
     {
-      label: 'Roadmaps',
-      href: '/network/powerhouse/roadmaps',
-      isActive: (currentPath) => isItemActive(currentPath, '/network/powerhouse/roadmaps'),
-    },
-    {
       label: 'Services',
       href: '/services',
       isActive: (currentPath) => isItemActive(currentPath, '/services'),
+    },
+    {
+      label: 'Use Cases',
+      href: '/cases',
+      isActive: (currentPath) => isItemActive(currentPath, '/cases'),
     },
   ],
   authComponent: 'loginButton',
