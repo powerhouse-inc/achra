@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { Button } from '@/modules/shared/components/ui/button'
-import { formatNumberWithSuffix } from '@/modules/shared/lib/format-number-with-suffix'
+import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 
@@ -23,6 +23,8 @@ export function ExecutiveProposalItem({
   isHat,
 }: ExecutiveProposalItemProps) {
   const skySupportEth = parseFloat(executiveProposal.spellData.skySupport)
+  const { value: skySupportValue, suffix: skySupportSuffix } =
+    threeDigitsPrecisionHumanization(skySupportEth)
 
   return (
     <div
@@ -76,9 +78,9 @@ export function ExecutiveProposalItem({
           <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
             SKY Support
           </span>
-          <div className="flex items-center gap-0.5">
+          <div className="flex items-center gap-1">
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
-              {formatNumberWithSuffix(skySupportEth)}
+              {`${skySupportValue}${skySupportSuffix}`}
             </span>
             <div className="relative size-5">
               <Image
