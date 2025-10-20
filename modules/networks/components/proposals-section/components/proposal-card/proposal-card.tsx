@@ -2,7 +2,6 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import {
   StripedCard,
-  StripedCardAction,
   StripedCardContent,
   StripedCardHeader,
   StripedCardTitle,
@@ -18,39 +17,31 @@ export interface ProposalCardProps extends Proposal {
 export function ProposalCard({
   title,
   budget,
-  deadlineDate,
-  experienceLevel,
+  submissionDeadline,
   detailsHref,
   className,
 }: ProposalCardProps) {
   return (
     <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader className="grid-cols-[auto_auto] items-center py-0.5 pr-2">
+      <StripedCardHeader className="grid-cols-[auto_auto] items-center py-1.5 pr-2">
         <StripedCardTitle>{title}</StripedCardTitle>
-        <StripedCardAction>
-          <Button variant="ghost" asChild>
-            <Link href={detailsHref}>
-              Details
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-        </StripedCardAction>
       </StripedCardHeader>
-      <StripedCardContent className="flex flex-col gap-2 pb-4 text-sm leading-5.5 font-semibold">
+      <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
           <span className="text-foreground/50">Budget</span>
           <span className="text-foreground">{budget}</span>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-foreground/50">Deadline Date</span>
-          <span className="text-foreground">{deadlineDate}</span>
+          <span className="text-foreground/50">Submission Deadline</span>
+          <span className="text-foreground">{submissionDeadline}</span>
         </div>
-
-        <div className="flex items-center justify-between">
-          <span className="text-foreground/50">Experience Level</span>
-          <span className="text-destructive">{experienceLevel}</span>
-        </div>
+        <Button variant="outline" asChild className="w-fit self-end leading-5">
+          <Link href={detailsHref}>
+            Details
+            <ArrowRight className="size-4" />
+          </Link>
+        </Button>
       </StripedCardContent>
     </StripedCard>
   )
