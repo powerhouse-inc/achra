@@ -95,7 +95,7 @@ function Hr({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
 
 function Link({ children, ...props }: HTMLAttributes<HTMLAnchorElement>) {
   return (
-    <a className="text-foreground hover:text-primary underline-offset-4 hover:underline" {...props}>
+    <a className="text-foreground" {...props}>
       {children}
     </a>
   )
