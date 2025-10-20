@@ -40,7 +40,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
                 id={proposal.id}
                 title={proposal.title}
                 budget={proposal.budget}
-                deadlineDate={proposal.deadlineDate}
+                submissionDeadline={proposal.submissionDeadline}
                 experienceLevel={proposal.experienceLevel}
                 detailsHref={proposal.detailsHref}
                 className="swiper-proposal-card"
@@ -59,7 +59,7 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
               id={proposal.id}
               title={proposal.title}
               budget={proposal.budget}
-              deadlineDate={proposal.deadlineDate}
+              submissionDeadline={proposal.submissionDeadline}
               experienceLevel={proposal.experienceLevel}
               detailsHref={proposal.detailsHref}
               className="swiper-proposal-card w-full"

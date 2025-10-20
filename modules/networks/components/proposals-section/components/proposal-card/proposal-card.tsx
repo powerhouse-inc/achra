@@ -18,7 +18,7 @@ export interface ProposalCardProps extends Proposal {
 export function ProposalCard({
   title,
   budget,
-  deadlineDate,
+  submissionDeadline,
   experienceLevel,
   detailsHref,
   className,
@@ -43,8 +43,8 @@ export function ProposalCard({
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-foreground/50">Deadline Date</span>
-          <span className="text-foreground">{deadlineDate}</span>
+          <span className="text-foreground/50">Submission Deadline</span>
+          <span className="text-foreground">{submissionDeadline}</span>
         </div>
 
         <div className="flex items-center justify-between">

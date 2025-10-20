@@ -9,7 +9,7 @@ export interface Proposal {
   id: string
   title: string
   budget: string
-  deadlineDate: string
+  submissionDeadline: string
   experienceLevel: string
   detailsHref: RouteWithDynamicPages
 }
