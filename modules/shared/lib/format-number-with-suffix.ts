@@ -4,18 +4,23 @@ export const formatNumberWithSuffix = (num: number, showNegative = false) => {
 
   let result
 
+  const formatTruncated = (value: number) => {
+    const truncated = Math.floor(value * 100) / 100
+    return truncated.toFixed(2).replace(/\.?0+$/g, '')
+  }
+
   if (mathAbsolute < 1000) {
     result = mathAbsolute.toString()
   } else if (mathAbsolute < 1000000) {
-    result = `${(mathAbsolute / 1000).toFixed(1).replace(/\.?0+$/g, '')}K`
+    result = `${formatTruncated(mathAbsolute / 1000)}K`
   } else if (mathAbsolute < 1000000000) {
-    result = `${(mathAbsolute / 1000000).toFixed(1).replace(/\.?0+$/g, '')}M`
+    result = `${formatTruncated(mathAbsolute / 1000000)}M`
   } else if (mathAbsolute < 1000000000000) {
-    result = `${(mathAbsolute / 1000000000).toFixed(1).replace(/\.?0+$/g, '')}B`
+    result = `${formatTruncated(mathAbsolute / 1000000000)}B`
   } else if (mathAbsolute < 1000000000000000) {
-    result = `${(mathAbsolute / 1000000000000).toFixed(1).replace(/\.?0+$/g, '')}T`
+    result = `${formatTruncated(mathAbsolute / 1000000000000)}T`
   } else if (mathAbsolute < 1000000000000000000) {
-    result = `${(mathAbsolute / 1000000000000000).toFixed(1).replace(/\.?0+$/g, '')}Q`
+    result = `${formatTruncated(mathAbsolute / 1000000000000000)}Q`
   } else {
     result = mathAbsolute.toString()
   }
