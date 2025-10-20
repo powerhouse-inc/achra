@@ -290,3 +290,14 @@
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }
+
+code:not(pre > code) {
+  background-color: var(--foreground);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--accent);
+}
+
