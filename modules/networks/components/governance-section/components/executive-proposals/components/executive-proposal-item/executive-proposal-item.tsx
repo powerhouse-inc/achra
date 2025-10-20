@@ -76,7 +76,7 @@ export function ExecutiveProposalItem({
           <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
             SKY Support
           </span>
-          <div className="flex items-center gap-0.5">
+          <div className="flex items-center gap-1">
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
               {formatNumberWithSuffix(skySupportEth)}
             </span>
