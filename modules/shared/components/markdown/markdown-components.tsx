@@ -84,6 +84,9 @@ function Blockquote({ children, ...props }: HTMLAttributes<HTMLQuoteElement>) {
 const Heading1 = createHeadingComponent(1, 'mt-0 mb-4 text-3xl font-bold')
 const Heading2 = createHeadingComponent(2, 'mt-0 mb-4 text-2xl font-bold')
 const Heading3 = createHeadingComponent(3, 'mt-0 mb-4 text-xl font-bold')
+const Heading4 = createHeadingComponent(4, 'mt-0 mb-4 text-lg font-bold')
+const Heading5 = createHeadingComponent(5, 'mt-0 mb-4 text-base font-bold')
+const Heading6 = createHeadingComponent(6, 'mt-0 mb-4 text-sm font-bold')
 
 function Hr({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
@@ -114,6 +117,9 @@ export const componentsOverrides: StreamdownProps['components'] = {
   h1: Heading1,
   h2: Heading2,
   h3: Heading3,
+  h4: Heading4,
+  h5: Heading5,
+  h6: Heading6,
   hr: Hr,
   a: Link,
 }
