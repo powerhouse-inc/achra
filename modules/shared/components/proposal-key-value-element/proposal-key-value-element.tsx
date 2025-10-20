@@ -8,7 +8,7 @@ interface ProposalKeyValueElementProps {
   className?: string
 }
 
-export default function ProposalKeyValueElement({
+export function ProposalKeyValueElement({
   keyValue,
   keyIcon: KeyIcon,
   value,

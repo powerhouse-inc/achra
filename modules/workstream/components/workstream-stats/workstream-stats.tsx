@@ -1,5 +1,5 @@
 import { CalendarClock, HandCoins, UserCheck } from 'lucide-react'
-import ProposalKeyValueElement from './proposal-key-value-element'
+import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 
 export default function WorkstreamStats() {
   return (

@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         source: '/',
         destination: process.env.HOMEPAGE_REMOTE_URL ?? '',
       },
+      {
+        source: '/cases',
+        destination: `${process.env.HOMEPAGE_REMOTE_URL!}/cases`,
+      },
     ]
   },
   turbopack: {
