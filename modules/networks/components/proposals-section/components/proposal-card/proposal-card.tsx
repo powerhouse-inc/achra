@@ -36,7 +36,7 @@ export function ProposalCard({
           <span className="text-foreground/50">Submission Deadline</span>
           <span className="text-foreground">{submissionDeadline}</span>
         </div>
-        <Button variant="outline" asChild className="w-fit self-end">
+        <Button variant="outline" asChild className="w-fit self-end leading-5">
           <Link href={detailsHref}>
             Details
             <ArrowRight className="size-4" />
