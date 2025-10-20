@@ -6,7 +6,6 @@ export const PROPOSALS: Proposal[] = [
     title: '3.1: Billing Analytics',
     budget: '100,000 + 25,000 POWt',
     submissionDeadline: '01/01/2026',
-    experienceLevel: 'Advanced',
     detailsHref: '/network/powerhouse',
   },
   {
@@ -14,7 +13,6 @@ export const PROPOSALS: Proposal[] = [
     title: '2.3: User Dashboard',
     budget: '75,000 + 15,000 POWt',
     submissionDeadline: '15/12/2025',
-    experienceLevel: 'Intermediate',
     detailsHref: '/network/powerhouse',
   },
   {
@@ -22,7 +20,6 @@ export const PROPOSALS: Proposal[] = [
     title: '3.1: Billing Analytics',
     budget: '100,000 + 25,000 POWt',
     submissionDeadline: '01/01/2026',
-    experienceLevel: 'Advanced',
     detailsHref: '/network/powerhouse',
   },
   {
@@ -30,7 +27,6 @@ export const PROPOSALS: Proposal[] = [
     title: '3.1: Billing Analytics',
     budget: '100,000 + 25,000 POWt',
     submissionDeadline: '01/01/2026',
-    experienceLevel: 'Advanced',
     detailsHref: '/network/powerhouse',
   },
   {
@@ -38,7 +34,6 @@ export const PROPOSALS: Proposal[] = [
     title: '3.1: Billing Analytics',
     budget: '100,000 + 25,000 POWt',
     submissionDeadline: '01/01/2026',
-    experienceLevel: 'Advanced',
     detailsHref: '/network/powerhouse',
   },
   {
@@ -46,7 +41,6 @@ export const PROPOSALS: Proposal[] = [
     title: '3.1: Billing Analytics',
     budget: '100,000 + 25,000 POWt',
     submissionDeadline: '01/01/2026',
-    experienceLevel: 'Advanced',
     detailsHref: '/network/powerhouse',
   },
 ]

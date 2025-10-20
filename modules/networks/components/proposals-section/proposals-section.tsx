@@ -10,7 +10,6 @@ export interface Proposal {
   title: string
   budget: string
   submissionDeadline: string
-  experienceLevel: string
   detailsHref: RouteWithDynamicPages
 }
 
