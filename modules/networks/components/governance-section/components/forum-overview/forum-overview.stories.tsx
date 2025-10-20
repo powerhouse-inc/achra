@@ -25,6 +25,7 @@ const meta = {
   component: ForumOverview,
   parameters: {
     layout: 'padded',
+    date: new Date(2025, 10, 1),
     docs: {
       description: {
         component:

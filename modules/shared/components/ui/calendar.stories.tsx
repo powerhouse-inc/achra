@@ -6,7 +6,10 @@ const meta = {
   title: 'Shared/Shadcn/Calendar',
   component: Calendar,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    date: new Date(2025, 0, 1),
+  },
 } satisfies Meta<typeof Calendar>
 
 export default meta
