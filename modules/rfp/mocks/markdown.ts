@@ -15,13 +15,13 @@ export const CriteriaMarkdown = `
 `
 
 export const BriefingMarkdown = `
-## Briefing
+Briefing
 
 ---
 
-## Statement of Work
+# Statement of Work
 
-**The selected agency will be responsible for the following:**
+ ## The selected agency will be responsible for the following:
 
 *   **Market research and analysis:** Conduct thorough market research to identify target audiences, competitive landscape, and industry trends.
 *   **Brand Strategy:** Develop a comprehensive brand strategy, including messaging, positioning, and brand guidelines.

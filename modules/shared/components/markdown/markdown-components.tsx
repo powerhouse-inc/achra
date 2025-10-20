@@ -81,9 +81,9 @@ function Blockquote({ children, ...props }: HTMLAttributes<HTMLQuoteElement>) {
   )
 }
 
-const Heading1 = createHeadingComponent(1, 'mt-0 mb-4 text-2xl font-bold')
-const Heading2 = createHeadingComponent(2, 'mt-0 mb-4 text-xl font-bold')
-const Heading3 = createHeadingComponent(3, 'mt-0 mb-4 text-lg font-bold')
+const Heading1 = createHeadingComponent(1, 'mt-0 mb-4 text-3xl font-bold')
+const Heading2 = createHeadingComponent(2, 'mt-0 mb-4 text-2xl font-bold')
+const Heading3 = createHeadingComponent(3, 'mt-0 mb-4 text-xl font-bold')
 
 function Hr({ children, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   return (
