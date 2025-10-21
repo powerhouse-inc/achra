@@ -14,8 +14,8 @@ export function Markdown({ children, className }: MarkdownProps) {
       className={cn('text-xs/4.5 sm:text-sm/5.5 xl:text-base/6', className)}
       components={componentsOverrides}
       controls={{
+        code: true,
         table: false,
-        code: false,
       }}
     >
       {children}
