@@ -1,5 +1,4 @@
 export const markdownEvaluation = `
-### Evaluation Criteria
 
 - Agile PM Experience, Prince Certification
 - Clarity of deliverables and key results
@@ -8,7 +7,6 @@ export const markdownEvaluation = `
 `
 
 export const CriteriaMarkdown = `
-### Eligibility Criteria
 
 - Agile PM Experience, Prince Certification
 - 4 years of BA work experience

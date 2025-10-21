@@ -93,10 +93,16 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             including full SoW and payment terms.
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="bg-background rounded-lg p-3 transition-all">
-                <Markdown>{CriteriaMarkdown}</Markdown>
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-sm/5.5 font-semibold xl:text-base/6">Eligibility Criteria</h2>
+                  <Markdown>{CriteriaMarkdown}</Markdown>
+                </div>
               </div>
               <div className="bg-background rounded-lg p-3 transition-all">
-                <Markdown>{markdownEvaluation}</Markdown>
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-sm/5.5 font-semibold xl:text-base/6">Evaluation Criteria</h2>
+                  <Markdown>{markdownEvaluation}</Markdown>
+                </div>
               </div>
             </div>
           </div>
