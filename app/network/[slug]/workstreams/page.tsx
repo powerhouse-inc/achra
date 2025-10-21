@@ -25,9 +25,9 @@ export default async function NetworkWorkstreamsPage({ params }: NetworkWorkstre
           </Suspense>
 
           <div className="flex flex-col gap-8">
-            <WorkstreamCard />
-            <WorkstreamCard />
-            <WorkstreamCard />
+            <WorkstreamCard slug={slug} workstreamSlug="vetra-beta-launch" />
+            <WorkstreamCard slug={slug} workstreamSlug="vetra-beta-launch" />
+            <WorkstreamCard slug={slug} workstreamSlug="vetra-beta-launch" />
           </div>
         </div>
       </PageContent>

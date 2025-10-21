@@ -64,13 +64,22 @@ if __name__ == "__main__":
 > Proin id tortor sed diam tristique. Vulputate ipsum amet dui quis enim id maecenas posuere. Orci nec eu cras nisl. Eu lorem id scelerisque viverra quis dignissim.
 
 ## Important numbers
-- 1546           - 1546           - 1546           - 1546
-- 2,11           - 2,11           - 2,11           - 2,11
-- 64.003         - 64.003         - 64.003         - 64.003
 
-1546     1546     1546     1546  
-2,11     2,11     2,11     2,11  
-64.003   64.003   64.003   64.003
+**Value 1:**  35K ~ 45K  
+**Value 2:**  90K ~ 120K  
+**Value 3:**  250K  
+
+•&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;1546  
+•&nbsp;&nbsp;&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;2,11  
+•&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;64.003
+
+
+&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1546&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1546  
+&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2,11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2,11  
+&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;64.003&nbsp;&nbsp;&nbsp;&nbsp;64.003  
+
+
+
 
 
 ## Table of Content
