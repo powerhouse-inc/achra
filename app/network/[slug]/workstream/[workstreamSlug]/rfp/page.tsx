@@ -16,16 +16,19 @@ import { Card } from '@/modules/shared/components/ui/card'
 import type { Route } from 'next'
 
 interface RequesForProposalPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; workstreamSlug: string }>
 }
 
 export default async function RequesForProposalPage({ params }: RequesForProposalPageProps) {
-  const { slug } = await params
+  const { slug, workstreamSlug } = await params
 
   const items = [
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
-    { label: 'Allocation System v1', href: '/networks/allocation-system-v1' as Route },
-    { label: 'Request For Proposal', href: `/network/${slug}/rpf` as Route },
+    { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
+    {
+      label: 'Request For Proposal',
+      href: `/network/${slug}/workstream/${workstreamSlug}/rfp` as Route,
+    },
   ]
 
   return (

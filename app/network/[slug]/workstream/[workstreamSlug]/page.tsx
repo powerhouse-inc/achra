@@ -9,6 +9,7 @@ import InitialProposalHeader from '@/modules/workstream/components/initial-propo
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
 import StatCards from '@/modules/workstream/components/workstream-card/stat-cards'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
+import type { Route } from 'next'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
@@ -22,7 +23,13 @@ The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, 
 This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
 `
 
-export default function WorkstreamDetailsPage() {
+interface Props {
+  params: Promise<{ slug: string; workstreamSlug: string }>
+}
+
+export default async function WorkstreamDetailsPage({ params }: Props) {
+  const { slug, workstreamSlug } = await params
+
   return (
     <PageBackground>
       <PageBreadcrumbContainer>
@@ -31,7 +38,7 @@ export default function WorkstreamDetailsPage() {
             { label: 'Powerhouse', href: '/network/powerhouse' },
             {
               label: 'Vetra Beta Launch',
-              href: '/network/powerhouse/workstream/vetra-beta-launch',
+              href: `/network/${slug}/workstream/${workstreamSlug}` as Route,
             },
           ]}
         />
@@ -44,7 +51,10 @@ export default function WorkstreamDetailsPage() {
             </h1>
             <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
           </div>
-          <InternalLink href="#" variant="outline">
+          <InternalLink
+            href={`/network/${slug}/workstream/${workstreamSlug}/rfp` as Route}
+            variant="outline"
+          >
             RFP Details
           </InternalLink>
         </div>

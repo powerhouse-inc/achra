@@ -11,6 +11,7 @@ import WorkstreamStats from '../workstream-stats/workstream-stats'
 import { NavigationHeader } from './navigation-header'
 import ProposalCardsGrid from './proposal-cards-grid'
 import StatCards from './stat-cards'
+import type { Route } from 'next'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
@@ -23,7 +24,12 @@ The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, 
 
 This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
 `
-export default function WorkstreamCard() {
+
+interface WorkstreamCardProps {
+  slug: string
+  workstreamSlug: string
+}
+export default function WorkstreamCard({ slug, workstreamSlug }: WorkstreamCardProps) {
   return (
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
@@ -39,7 +45,11 @@ export default function WorkstreamCard() {
             {proposalDescriptionMarkdown}
           </Markdown>
 
-          <InternalLink href="#" className="ml-auto max-w-fit" variant="outline">
+          <InternalLink
+            href={`/network/${slug}/workstream/${workstreamSlug}/rfp` as Route}
+            className="ml-auto max-w-fit"
+            variant="outline"
+          >
             RFP Details
           </InternalLink>
         </div>
