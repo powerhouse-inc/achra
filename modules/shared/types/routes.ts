@@ -20,4 +20,5 @@ export type RouteWithDynamicPages = Route<
   | `/network/${NetworkSlug}/rfp/${string}`
   | `/network/${NetworkSlug}/builders/ecosystem-actors/${string}`
   | `/network/${NetworkSlug}/builders/core-units/${string}`
+  | `/network/${NetworkSlug}/workstream/${string}/initial-proposal/project-details`
 >
