@@ -13,6 +13,7 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 
+import { Separator } from '@/modules/shared/components/ui/separator'
 import type { Route } from 'next'
 
 interface RequesForProposalPageProps {
@@ -93,10 +94,20 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             including full SoW and payment terms.
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="bg-background rounded-lg p-3 transition-all">
-                <Markdown>{CriteriaMarkdown}</Markdown>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm/5.5 font-semibold xl:text-base/6">
+                    Eligibility Criteria
+                  </label>
+                  <Markdown>{CriteriaMarkdown}</Markdown>
+                </div>
               </div>
               <div className="bg-background rounded-lg p-3 transition-all">
-                <Markdown>{markdownEvaluation}</Markdown>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm/5.5 font-semibold xl:text-base/6">
+                    Evaluation Criteria
+                  </label>
+                  <Markdown>{markdownEvaluation}</Markdown>
+                </div>
               </div>
             </div>
           </div>
