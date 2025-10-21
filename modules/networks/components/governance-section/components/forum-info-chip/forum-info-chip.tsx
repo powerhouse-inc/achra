@@ -10,7 +10,7 @@ interface ForumInfoChipProps {
 
 function ForumInfoChip({ value, type, popular = false }: ForumInfoChipProps) {
   return (
-    <div className="outline-border flex w-full items-center gap-2 overflow-hidden rounded-lg pr-2 outline md:min-w-20 lg:min-w-[110px]">
+    <div className="outline-border flex items-center gap-2 overflow-hidden rounded-lg pr-2 outline md:min-w-20 lg:min-w-[110px]">
       <div className="bg-muted text-muted-foreground flex size-8 items-center justify-center p-2">
         {type === 'likes' && <LikeIcon className="size-4" />}
         {type === 'replies' && <MessagesIcon className="size-4" />}
