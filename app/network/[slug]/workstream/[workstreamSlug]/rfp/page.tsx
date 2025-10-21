@@ -13,7 +13,6 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 
-import { Separator } from '@/modules/shared/components/ui/separator'
 import type { Route } from 'next'
 
 interface RequesForProposalPageProps {
