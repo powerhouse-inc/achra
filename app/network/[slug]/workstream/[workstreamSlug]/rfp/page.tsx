@@ -94,17 +94,13 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="bg-background rounded-lg p-3 transition-all">
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm/5.5 font-semibold xl:text-base/6">
-                    Eligibility Criteria
-                  </label>
+                  <h2 className="text-sm/5.5 font-semibold xl:text-base/6">Eligibility Criteria</h2>
                   <Markdown>{CriteriaMarkdown}</Markdown>
                 </div>
               </div>
               <div className="bg-background rounded-lg p-3 transition-all">
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm/5.5 font-semibold xl:text-base/6">
-                    Evaluation Criteria
-                  </label>
+                  <h2 className="text-sm/5.5 font-semibold xl:text-base/6">Evaluation Criteria</h2>
                   <Markdown>{markdownEvaluation}</Markdown>
                 </div>
               </div>
