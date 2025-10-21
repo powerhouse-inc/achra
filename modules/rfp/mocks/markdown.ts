@@ -13,9 +13,6 @@ export const CriteriaMarkdown = `
 `
 
 export const BriefingMarkdown = `
-## Briefing
-
----
 
 ## Statement of Work
 
