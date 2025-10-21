@@ -16,8 +16,8 @@ function ForumPost({ post, isPopular = false }: ForumPostProps) {
   const category = forumCategories.find((c) => c.id === post.category_id)
 
   return (
-    <div className="bg-background outline-border grid grid-cols-1 gap-2 rounded-xl p-2 md:grid-cols-[1fr_49%] md:gap-0 md:shadow-none md:outline xl:md:grid-cols-[1fr_41%]">
-      <div className="flex w-full flex-col gap-2">
+    <div className="bg-popover border-border grid grid-cols-1 gap-2 rounded-xl border p-2 md:grid-cols-[1fr_49%] md:gap-0 md:shadow-none xl:md:grid-cols-[1fr_41%]">
+      <div className="flex w-full flex-col gap-2 pb-2 md:pb-0">
         <div className="text-foreground text-xs/4.5 font-medium lg:text-sm/5.5 lg:font-semibold xl:text-base/6">
           {post.title}
         </div>
@@ -44,18 +44,18 @@ function ForumPost({ post, isPopular = false }: ForumPostProps) {
           ))}
         </div>
       </div>
-      <div className="flex w-full items-center gap-2 md:justify-end lg:gap-4">
-        <div className={cn('md:py-2', isPopular && 'md:pl-2 lg:pl-4 xl:pl-6')}>
+      <div className="flex w-full items-center gap-2 pt-2 md:justify-end md:pt-0 lg:gap-4">
+        <div className={cn('w-full md:w-fit md:py-2', isPopular && 'md:pl-2 lg:pl-4 xl:pl-6')}>
           <ForumInfoChip type="likes" value={post.like_count} popular={isPopular} />
         </div>
-        <div className="md:py-2 xl:px-2">
+        <div className="w-full md:w-fit md:py-2 xl:px-2">
           <ForumInfoChip type="replies" value={post.posts_count - 1} />
         </div>
-        <div className="md:py-2 xl:px-2">
+        <div className="w-full md:w-fit md:py-2 xl:px-2">
           <ForumInfoChip type="date" value={`${Math.floor(date)}d`} />
         </div>
         <div className="flex w-fit justify-end">
-          <Button variant="outline" size="default" asChild className="w-9">
+          <Button variant="outline" size="default" asChild className="size-8">
             <a
               href={`https://forum.makerdao.com/t/${post.slug}/${post.id}`}
               target="_blank"
