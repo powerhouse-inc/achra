@@ -113,7 +113,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             <div className="flex flex-col rounded-lg transition-all">
               <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
               <Separator className="text-border mt-1" />
-              <div className="px-6">
+              <div className="px-4 sm:px-3 md:px-2">
                 <Markdown>{BriefingMarkdown}</Markdown>
               </div>
             </div>
