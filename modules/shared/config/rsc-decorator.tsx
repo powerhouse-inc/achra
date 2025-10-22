@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ // console is used for debugging/DX purposes
 // This file is a workaround for Storybook's RSC, it is a copy/paste from the docs so keep it as is
 /* eslint-disable @typescript-eslint/promise-function-async */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
@@ -69,7 +70,9 @@ function traverse(
   const label = previousLabel ? `${previousLabel} > ${componentName}` : componentName
 
   // biome-ignore lint/suspicious/noConsole: Debugging
-  shouldLog(label) && console.log('starting =======>', label)
+  if (shouldLog(label)) {
+    console.log('starting =======>', label)
+  }
 
   const logWrapper = logWrapperFactory(label)
 

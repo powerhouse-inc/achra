@@ -19,7 +19,8 @@ interface SpendingItemProps extends React.PropsWithChildren {
   tooltipContent: React.ReactNode
   className?: string
 }
-const tooltipWidth = 320
+const TOOLTIP_WIDTH = 320
+
 export function SpendingItem({
   title,
   shortTitle,
@@ -31,25 +32,36 @@ export function SpendingItem({
 
   const [alignment, setAlignment] = useState<'start' | 'end'>('start')
   const triggerRef = useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState(false)
 
   const calculateAlignment = useCallback(() => {
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect()
       const viewportWidth = window.innerWidth
-      const newAlignment = rect.right + tooltipWidth > viewportWidth ? 'end' : 'start'
+      const newAlignment = rect.right + TOOLTIP_WIDTH > viewportWidth ? 'end' : 'start'
       setAlignment(newAlignment)
     }
   }, [])
 
   useEffect(() => {
-    calculateAlignment()
+    if (!isOpen) return
 
     window.addEventListener('resize', calculateAlignment)
 
     return () => {
       window.removeEventListener('resize', calculateAlignment)
     }
-  }, [calculateAlignment, isMobile])
+  }, [calculateAlignment, isOpen])
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      setIsOpen(open)
+      if (open) {
+        calculateAlignment()
+      }
+    },
+    [calculateAlignment],
+  )
 
   const triggerAriaLabel = 'View more information'
   const TriggerIcon = <InfoIcon className="text-muted-foreground h-2.5 w-2.5" />
@@ -91,7 +103,7 @@ export function SpendingItem({
             </MobileDialogContent>
           </DialogPrimitive.Root>
         ) : (
-          <HoverCard openDelay={200} closeDelay={100}>
+          <HoverCard openDelay={200} closeDelay={100} onOpenChange={handleOpenChange}>
             <HoverCardTrigger asChild>
               <button
                 ref={triggerRef}

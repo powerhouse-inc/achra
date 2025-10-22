@@ -1,3 +1,4 @@
+/* eslint-disable no-console */ // console is required for DX purposes
 import z from 'zod'
 import { envSchema } from './env-schema'
 

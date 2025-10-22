@@ -89,7 +89,11 @@ function SidebarProvider({
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
-    isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
+    if (isMobile) {
+      setOpenMobile((open) => !open)
+    } else {
+      setOpen((open) => !open)
+    }
   }, [isMobile, setOpen, setOpenMobile])
 
   // Adds a keyboard shortcut to toggle the sidebar.
@@ -590,6 +594,8 @@ function SidebarMenuSkeleton({
 }) {
   // Random width between 50 to 90%.
   const width = React.useMemo(() => {
+    // disabled to keep the component as it come form shadcn
+    // eslint-disable-next-line react-hooks/purity
     return `${Math.floor(Math.random() * 40) + 50}%`
   }, [])
 

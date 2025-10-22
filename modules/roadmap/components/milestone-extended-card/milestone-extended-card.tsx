@@ -36,7 +36,7 @@ export default function MilestoneExtendedCard({
     })
 
     return allKeyResults.slice(0, 3)
-  }, [milestone.scope?.deliverables])
+  }, [milestone.scope])
 
   return (
     <Card

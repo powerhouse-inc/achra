@@ -13,6 +13,8 @@ function CommandEmpty({
   return (
     <div
       className={cn('px-2 py-4 text-center text-sm', className)}
+      // disabled to keep the component as it come form shadcn
+      // eslint-disable-next-line react/no-unknown-property
       cmdk-empty=""
       role="presentation"
       {...props}

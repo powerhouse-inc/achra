@@ -15,6 +15,9 @@ function PercentageProgressBar({ value }: PercentageProgressBarProps) {
   // Handle hydration mismatch by ensuring we start with a consistent state
   useEffect(() => {
     setIsHydrated(true)
+  }, [])
+
+  useEffect(() => {
     setIsDesktop(isDesktopQuery)
   }, [isDesktopQuery])
 

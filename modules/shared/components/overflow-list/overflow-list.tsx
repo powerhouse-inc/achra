@@ -53,29 +53,6 @@ export function OverflowList<T>({
 
   const spacer = useRef<HTMLDivElement>(null)
 
-  // Re-run when state changes
-  useShallowCompareEffect(() => {
-    repartition(false)
-  }, [state, isMounted])
-
-  // Run once on mount
-  useMount(() => {
-    setIsMounted(true)
-  })
-
-  // Reset when items change
-  useUpdateEffect(() => {
-    setState(() => ({
-      overflowDirection: 'none',
-      lastOverflowCount: 0,
-      overflow: [],
-      visible: items,
-    }))
-  }, [items])
-
-  const maybeOverflow =
-    state.overflow.length === 0 && !alwaysRenderOverflow ? null : overflowRenderer(state.overflow)
-
   const repartition = useCallback(
     (growing: boolean) => {
       if (!spacer.current) return
@@ -123,6 +100,29 @@ export function OverflowList<T>({
     [collapseFrom, minVisibleItems, items],
   )
 
+  // Re-run when state changes
+  useShallowCompareEffect(() => {
+    repartition(false)
+  }, [state, isMounted])
+
+  // Run once on mount
+  useMount(() => {
+    setIsMounted(true)
+  })
+
+  // Reset when items change
+  useUpdateEffect(() => {
+    setState(() => ({
+      overflowDirection: 'none',
+      lastOverflowCount: 0,
+      overflow: [],
+      visible: items,
+    }))
+  }, [items])
+
+  const maybeOverflow =
+    state.overflow.length === 0 && !alwaysRenderOverflow ? null : overflowRenderer(state.overflow)
+
   const [ref, { width }] = useMeasure<HTMLElement>()
   const previousWidth = usePrevious(width)
 
@@ -160,6 +160,8 @@ export function OverflowList<T>({
       <React.Fragment key={index}>{itemRenderer(item, index)}</React.Fragment>
     )),
     collapseFrom === 'end' ? maybeOverflow : null,
+    // TODO: fix this
+    // eslint-disable-next-line react-hooks/refs
     React.createElement('div', { style: { flexShrink: 1, width: 1 }, ref: spacer }),
   )
 }

@@ -22,6 +22,7 @@ export default function LatestKeyResults({ keyResults }: LatestKeyResultsProps) 
                 <a
                   href={keyResult.link}
                   target="_blank"
+                  rel="noreferrer"
                   className={cn(
                     'group/link relative flex max-w-full items-center gap-1 truncate pl-3.5 text-sm/5.5 font-medium',
                     'before:bg-foreground before:absolute before:top-2 before:left-0 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',
