@@ -33,7 +33,7 @@ export function ExecutiveProposalItem({
         className,
       )}
     >
-      <div className="flex flex-col gap-2 p-2 lg:gap-3 lg:p-4">
+      <div className="flex h-fit flex-col gap-2 p-2 lg:gap-3 lg:p-4">
         <span className="text-foreground text-xs/4.5 font-medium lg:text-sm/5.5 lg:font-semibold xl:text-base/6">
           {executiveProposal.proposalBlurb}
         </span>
@@ -65,7 +65,7 @@ export function ExecutiveProposalItem({
           )}
         </div>
       </div>
-      <div className="flex h-full items-center justify-between px-2 md:gap-4 lg:pl-4 xl:gap-8 xl:pr-4 xl:pl-2 2xl:px-12">
+      <div className="flex h-fit items-center justify-between px-2 md:h-full md:gap-4 lg:pl-4 xl:gap-8 xl:pr-4 xl:pl-2 2xl:px-12">
         <div className="flex flex-col items-center gap-0.25 p-2 sm:min-w-30 md:min-w-fit lg:min-w-30">
           <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
             Supporters
