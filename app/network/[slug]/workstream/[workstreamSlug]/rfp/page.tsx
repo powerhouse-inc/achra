@@ -55,7 +55,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
                   <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
                 </div>
               </div>
-              <div className="text-foreground/50 flex items-center justify-between text-xs/4.5 font-medium uppercase md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
+              <div className="text-foreground/50 flex items-center justify-between text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
                 <div className="flex sm:hidden">frp-ach-01</div>
                 <div className="flex md:hidden">
                   <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
@@ -112,8 +112,8 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
           <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
             <div className="flex flex-col rounded-lg transition-all">
               <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
-              <Separator className="text-border mt-2 xl:mt-8" />
-              <div className="px-4 pt-2 pb-4 sm:px-4 sm:pt-3 sm:pb-4 md:px-6 md:pt-4 xl:px-18 xl:pt-0">
+              <Separator className="text-border mt-1" />
+              <div className="px-6">
                 <Markdown>{BriefingMarkdown}</Markdown>
               </div>
             </div>
