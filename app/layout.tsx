@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { WhitelistOverlay } from '@/modules/shared/components/whitelist-overlay'
+import ff from '@/modules/shared/lib/feature-flags'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { Footer } from '@/shared/components/footer/footer'
 import Navbar from '@/shared/components/navbar/navbar'
@@ -52,7 +53,7 @@ export default function RootLayout({
             <NuqsAdapter>
               <Navbar />
               <div className="pt-18 md:pt-21">{children}</div>
-              <WhitelistOverlay />
+              {ff.FEATURE_WHITELIST_OVERLAY && <WhitelistOverlay />}
             </NuqsAdapter>
           </QueryClientProvider>
           <Footer />

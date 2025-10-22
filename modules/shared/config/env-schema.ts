@@ -16,4 +16,9 @@ export const envSchema = z.object({
     error:
       'Must be a valid URL (e.g., https://mainnet.infura.io/v3/your-project-id) for the Ethereum Mainnet RPC.',
   }),
+
+  NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY: z
+    .enum(['true', 'false'] as const)
+    .optional()
+    .default('false'),
 })
