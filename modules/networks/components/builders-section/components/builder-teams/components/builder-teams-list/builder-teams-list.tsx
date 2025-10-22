@@ -25,7 +25,7 @@ export function BuilderTeamsList({ className }: ExecutiveProposalsListProps) {
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>
       <StripedCard className={cn('w-full', className)}>
-        <StripedCardHeader className="grid-cols-[auto_auto] items-center gap-x-2 px-4">
+        <StripedCardHeader className="items-center justify-between gap-x-2 px-4">
           <StripedCardTitle className="text-sm leading-5.5 font-semibold sm:text-base/6">
             All Builder teams involved in the Sky Workstreams
           </StripedCardTitle>

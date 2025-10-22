@@ -17,7 +17,7 @@ function StripedCardHeader({ className, ...props }: React.ComponentProps<'div'>)
   return (
     <div
       data-slot="card-header"
-      className={cn('bg-accent @container/card-header grid grid-rows-1 items-start p-2', className)}
+      className={cn('bg-accent @container/card-header flex items-start p-2', className)}
       {...props}
     />
   )

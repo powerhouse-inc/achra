@@ -23,7 +23,7 @@ export function ProposalCard({
 }: ProposalCardProps) {
   return (
     <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader className="grid-cols-[auto_auto] items-center py-1.5 pr-2">
+      <StripedCardHeader className="items-center py-1.5 pr-2">
         <StripedCardTitle>{title}</StripedCardTitle>
       </StripedCardHeader>
       <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
