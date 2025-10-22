@@ -13,6 +13,7 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 
+import { Separator } from '@/modules/shared/components/ui/separator'
 import type { Route } from 'next'
 
 interface RequesForProposalPageProps {
@@ -54,7 +55,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
                   <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
                 </div>
               </div>
-              <div className="text-foreground/50 flex items-center justify-between text-xs/4.5 font-medium uppercase md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
+              <div className="text-foreground/50 flex items-center justify-between text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
                 <div className="flex sm:hidden">frp-ach-01</div>
                 <div className="flex md:hidden">
                   <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
@@ -89,8 +90,10 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
           </div>
 
           <div className="bg-accent flex flex-col gap-4 border border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-            Creation of the roadmap proposal for the Start Teams onboarding to Achra platform,
-            including full SoW and payment terms.
+            <p className="text-sm/5.5 font-normal xl:text-base/6">
+              Creation of the roadmap proposal for the Start Teams onboarding to Achra platform,
+              including full SoW and payment terms.
+            </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="bg-background rounded-lg p-3 transition-all">
                 <div className="flex flex-col gap-2">
@@ -106,9 +109,13 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-2 p-2 sm:gap-4 sm:p-4">
-            <div className="rounded-lg pb-2 transition-all">
-              <Markdown>{BriefingMarkdown}</Markdown>
+          <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
+            <div className="flex flex-col rounded-lg transition-all">
+              <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
+              <Separator className="text-border mt-1" />
+              <div className="px-4 sm:px-3 md:px-2">
+                <Markdown>{BriefingMarkdown}</Markdown>
+              </div>
             </div>
           </div>
         </Card>
