@@ -1,5 +1,5 @@
 import { Avatar, AvatarImage } from '@/shared/components/ui/avatar'
-import { JOINED_USERS } from './constants'
+import { JOINED_USERS } from './users'
 
 interface JoinedUsersBadgeProps {
   count?: number

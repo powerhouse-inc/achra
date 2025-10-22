@@ -1,7 +1,8 @@
 import type { JoinedUser } from './types'
 
-export const STORAGE_KEY = 'whitelist-submitted'
-
+/**
+ * List of users who have joined the whitelist
+ */
 export const JOINED_USERS: JoinedUser[] = [
   {
     name: 'acaldas',

@@ -2,18 +2,24 @@
 
 import { useCallback, useEffect } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
+import { WHITELIST_OVERLAY_STORAGE_KEY } from '@/shared/config/constants'
 import { cn } from '@/shared/lib/utils'
-import { STORAGE_KEY } from './constants'
+import { useWhitelistOverlay } from '../../hooks/use-whitelist-overlay'
 import { SuccessView } from './success-view'
 import { WhitelistForm } from './whitelist-form'
 
 function WhitelistOverlay() {
-  const [isSubmitted, setIsSubmitted] = useLocalStorage<boolean>(STORAGE_KEY, false, {
-    initializeWithValue: false,
-  })
+  const shouldShow = useWhitelistOverlay()
+  const [isSubmitted, setIsSubmitted] = useLocalStorage<boolean>(
+    WHITELIST_OVERLAY_STORAGE_KEY,
+    false,
+    {
+      initializeWithValue: false,
+    },
+  )
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined' || !shouldShow) return
 
     const body = document.body
     body.style.overflow = 'hidden'
@@ -21,11 +27,17 @@ function WhitelistOverlay() {
     return () => {
       body.style.overflow = 'auto'
     }
-  }, [])
+  }, [shouldShow])
 
   const handleSuccess = useCallback(() => {
     setIsSubmitted(true)
   }, [setIsSubmitted])
+
+  /**
+   * The whitelist overlay should not be rendered for the current route or it
+   * is not enabled in the feature flags.
+   */
+  if (!shouldShow) return null
 
   return (
     <div className="fixed right-0 bottom-0 left-0 z-50 h-[calc(100vh-12rem)] sm:h-[calc(100vh-18rem)]">
