@@ -37,7 +37,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
   const isMobile = useMediaQuery({ to: 'md' })
   return (
     <StripedCard className={cn('w-full', className)}>
-      <StripedCardHeader className="items-center justify-between px-4">
+      <StripedCardHeader className="items-center px-4">
         <StripedCardTitle className="text-sm/5.5 md:text-base/6">{`Wallets: ${wallets.length || 0}`}</StripedCardTitle>
         <StripedCardAction className="flex items-center justify-between gap-6 md:gap-8 lg:gap-10">
           <div className="flex flex-col items-end gap-0 text-sm/5.5 md:flex-row md:items-center md:gap-2 xl:gap-3.5 xl:text-base/6">

@@ -67,7 +67,7 @@ function ForumOverview() {
       {forumCategories.map((category) => (
         <TabsContent key={category.id} value={category.id.toString()}>
           <StripedCard className="w-full rounded-tl-none rounded-tr-none shadow-none md:rounded-tr-xl">
-            <StripedCardHeader className="flex-col gap-2 px-4 py-2 md:flex-row md:justify-between xl:py-1 xl:pr-4 xl:pl-6">
+            <StripedCardHeader className="flex-col gap-2 px-4 py-2 md:flex-row xl:py-1 xl:pr-4 xl:pl-6">
               <StripedCardTitle>
                 <p className="text-xs/4.5 font-medium lg:text-sm/5.5 lg:font-semibold">
                   <span className="text-accent-foreground/30">Sky Forum: </span>
