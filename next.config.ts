@@ -2,6 +2,10 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
+  reactCompiler: true,
+  images: {
+    qualities: [100, 75],
+  },
   async rewrites() {
     if (!process.env.HOMEPAGE_REMOTE_URL) {
       return []

@@ -4,7 +4,7 @@
 @import 'swiper/css';
 @import 'swiper/css/pagination';
 @import 'swiper/css/navigation';
-@source "../node_modules/streamdown/dist/index.js";
+@source '../node_modules/streamdown/dist/index.js';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

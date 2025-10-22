@@ -11,7 +11,8 @@ export function ConnectLink() {
             src="/networks/logos/connect-light.png"
             alt="Connect Link"
             fill
-            objectFit="cover"
+            sizes="40px"
+            style={{ objectFit: 'cover' }}
             className="absolute"
           />
         </div>

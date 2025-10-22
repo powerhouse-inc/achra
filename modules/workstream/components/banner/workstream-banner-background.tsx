@@ -19,6 +19,7 @@ export default function WorkstreamBannerBackground({
             src={`/networks/backgrounds/${network}.png`}
             alt={`${network} network background`}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
