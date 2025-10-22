@@ -1,13 +1,13 @@
 'use client'
 
 import { useActionState, useEffect } from 'react'
+import type { WhitelistFormState } from '@/modules/whitelist/config/types'
+import { submitWhitelistEmailAction } from '@/modules/whitelist/lib/whitelist-actions'
 import { Button } from '@/shared/components/ui/button'
 import { Field, FieldLabel } from '@/shared/components/ui/field'
 import { Input } from '@/shared/components/ui/input'
 import { cn } from '@/shared/lib/utils'
-import { JoinedUsersBadge } from './joined-users-badge'
-import { submitWhitelistEmailAction } from './whitelist-actions'
-import type { WhitelistFormState } from './types'
+import { JoinedUsersBadge } from '../joined-users-badge'
 
 const initialState: WhitelistFormState = {
   success: false,

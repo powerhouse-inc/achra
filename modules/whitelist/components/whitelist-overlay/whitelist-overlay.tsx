@@ -2,11 +2,11 @@
 
 import { useCallback, useEffect } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
-import { WHITELIST_OVERLAY_STORAGE_KEY } from '@/shared/config/constants'
+import { WHITELIST_OVERLAY_STORAGE_KEY } from '@/modules/whitelist/config/constants'
+import { useWhitelistOverlay } from '@/modules/whitelist/hooks/use-whitelist-overlay'
 import { cn } from '@/shared/lib/utils'
-import { useWhitelistOverlay } from '../../hooks/use-whitelist-overlay'
-import { SuccessView } from './success-view'
-import { WhitelistForm } from './whitelist-form'
+import { SuccessView } from '../success-view'
+import { WhitelistForm } from '../whitelist-form'
 
 function WhitelistOverlay() {
   const shouldShow = useWhitelistOverlay()

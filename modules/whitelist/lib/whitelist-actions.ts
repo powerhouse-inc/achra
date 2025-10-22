@@ -1,7 +1,7 @@
 'use server'
 
 import { z } from 'zod'
-import type { WhitelistFormState } from './types'
+import type { WhitelistFormState } from '../config/types'
 
 const emailSchema = z.object({
   email: z.email({ message: 'Please enter a valid email address' }),

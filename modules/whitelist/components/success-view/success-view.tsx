@@ -1,6 +1,6 @@
 import { CheckCircle2 } from 'lucide-react'
 import RealisticConfetti from 'react-canvas-confetti/dist/presets/realistic'
-import { JoinedUsersBadge } from './joined-users-badge'
+import { JoinedUsersBadge } from '../joined-users-badge'
 
 export function SuccessView() {
   return (
@@ -24,7 +24,7 @@ export function SuccessView() {
         Thank you for joining our waitlist. We&apos;ll notify you as soon as we launch. Stay tuned
         for updates!
       </p>
-      <JoinedUsersBadge count={101} />
+      <JoinedUsersBadge count={100} />
     </>
   )
 }

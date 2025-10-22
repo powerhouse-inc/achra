@@ -1,4 +1,4 @@
-import type { JoinedUser } from './types'
+import type { JoinedUser } from '../config/types'
 
 /**
  * List of users who have joined the whitelist

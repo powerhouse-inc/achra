@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
+import ff from '@/shared/lib/feature-flags'
 import { OMIT_WHITELIST_OVERLAY_FROM_ROUTES } from '../config/constants'
-import ff from '../lib/feature-flags'
 
 /**
  * Hook to determine whether the whitelist overlay should be shown based on the current pathname

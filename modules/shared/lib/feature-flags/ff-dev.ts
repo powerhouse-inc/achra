@@ -1,4 +1,4 @@
-import { SHOW_WHITELIST_OVERLAY } from '../../config/constants'
+import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
 import type { FeatureFlags } from './types'
 
 const ffDev: FeatureFlags = {
