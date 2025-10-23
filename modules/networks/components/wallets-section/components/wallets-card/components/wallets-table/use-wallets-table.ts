@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
 import type { ProccesedWallets } from '../../use-wallets-card'
@@ -22,21 +22,17 @@ export function useWalletsTable({ wallets }: UseWalletsTableProps) {
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
   const isDesktop = useMediaQuery({ from: 'lg' })
-  const [proccesedWalletsTableColumns, setProccesedWalletsTableColumns] = useState<
-    Array<Omit<WalletsTableColumn, 'shortHeader'>>
-  >([])
 
-  useEffect(() => {
-    setProccesedWalletsTableColumns(
-      WALLETS_TABLE_COLUMNS.map((column) => ({
+  const proccesedWalletsTableColumns: Array<Omit<WalletsTableColumn, 'shortHeader'>> =
+    useMemo(() => {
+      return WALLETS_TABLE_COLUMNS.map((column) => ({
         accessorKey: column.accessorKey,
         hasSort: column.hasSort,
         sortReverse: column.sortReverse,
         isNumeric: column.isNumeric,
         header: !isDesktop && column.shortHeader ? column.shortHeader : column.header,
-      })),
-    )
-  }, [isDesktop])
+      }))
+    }, [isDesktop])
 
   const handleSortClick = useCallback(
     (index: number) => {

@@ -43,7 +43,8 @@ export function HomepageBanner({
         fill
         priority
         quality={100}
-        objectFit="cover"
+        sizes="100vw"
+        style={{ objectFit: 'cover' }}
         className="absolute z-0"
       />
       <CollapsibleTrigger asChild className="absolute top-3 right-3 z-1">

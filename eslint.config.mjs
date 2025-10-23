@@ -2,20 +2,22 @@
 
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
 import globals from 'globals'
 import pluginJs from '@eslint/js'
-import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
+import tseslint from 'typescript-eslint'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import nextPlugin from '@next/eslint-plugin-next'
+import importPlugin from 'eslint-plugin-import'
+import prettierConfig from 'eslint-config-prettier'
+import prettierPlugin from 'eslint-plugin-prettier'
 import storybook from 'eslint-plugin-storybook'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
-
-const eslintConfig = [
+export default [
   {
     ignores: [
       'node_modules/**',
@@ -34,11 +36,32 @@ const eslintConfig = [
       'vitest.shims.d.ts',
     ],
   },
-  pluginJs.configs.recommended, // Next.js configurations (includes React and basic TypeScript rules)
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended'), // JSX A11y configuration
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  prettierConfig,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    ...pluginJsxA11y.configs['flat/recommended'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      'jsx-a11y': jsxA11y,
+      '@next/next': nextPlugin,
+      import: importPlugin,
+      prettier: prettierPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactPlugin.configs['jsx-runtime'].rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+      ...prettierPlugin.configs.recommended.rules,
+    },
   }, // Base configuration for all TypeScript/React files
   {
     files: ['**/*.{ts,tsx}'],
@@ -248,5 +271,3 @@ const eslintConfig = [
   }, // Storybook configurations
   ...storybook.configs['flat/recommended'],
 ]
-
-export default eslintConfig

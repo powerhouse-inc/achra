@@ -16,6 +16,8 @@ export const Image: Story = {
   render: () => (
     <div style={{ width: 300 }}>
       <AspectRatio ratio={16 / 9}>
+        {/* This is used for stories purposes, we don't want to use next/image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://picsum.photos/seed/storybook/600/338"
           alt="Landscape image for aspect ratio demo"

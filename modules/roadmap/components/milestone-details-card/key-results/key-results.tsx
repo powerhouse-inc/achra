@@ -91,6 +91,7 @@ export default function KeyResults({
                     <a
                       href={keyResult.link}
                       target="_blank"
+                      rel="noreferrer"
                       className={cn(
                         'group/link text-foreground relative flex max-w-full items-center gap-1.5 truncate pl-5.5 text-sm/5.5 font-medium',
                         'before:bg-foreground before:absolute before:top-1.5 before:left-2 before:block before:h-1.5 before:w-1.5 before:rounded-full before:content-[""]',

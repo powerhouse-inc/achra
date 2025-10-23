@@ -181,6 +181,8 @@ function FieldError({
 }: React.ComponentProps<'div'> & {
   errors?: Array<{ message?: string } | undefined>
 }) {
+  // disabled to keep the component as it come form shadcn
+  // eslint-disable-next-line react-hooks/use-memo
   const content = useMemo(async () => {
     if (children) {
       return children
