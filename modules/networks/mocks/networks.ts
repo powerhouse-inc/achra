@@ -12,7 +12,7 @@ export const mockedNetworks: NetworkProfile_NetworkProfileState[] = [
     category: [NetworkProfile_NetworkCategory.Oss],
     logo: '/networks/logos/powerhouse.png',
     logoBig: '/networks/backgrounds/powerhouse.png',
-    icon: '/networks/logos/powerhouse.png',
+    icon: '/networks/logos/powerhouse-isotype.svg',
   },
   {
     __typename: 'NetworkProfile_NetworkProfileState',
@@ -22,7 +22,7 @@ export const mockedNetworks: NetworkProfile_NetworkProfileState[] = [
     category: [NetworkProfile_NetworkCategory.Defi],
     logo: '/networks/logos/sky.png',
     logoBig: '/networks/backgrounds/sky.png',
-    icon: '/networks/logos/sky.png',
+    icon: '/networks/logos/sky-isotype.svg',
   },
   {
     __typename: 'NetworkProfile_NetworkProfileState',
@@ -32,7 +32,7 @@ export const mockedNetworks: NetworkProfile_NetworkProfileState[] = [
     category: [NetworkProfile_NetworkCategory.Defi],
     logo: '/networks/logos/spark.png',
     logoBig: '/networks/backgrounds/spark.png',
-    icon: '/networks/logos/spark.png',
+    icon: '/networks/logos/spark-isotype.svg',
   },
   {
     __typename: 'NetworkProfile_NetworkProfileState',
@@ -42,7 +42,7 @@ export const mockedNetworks: NetworkProfile_NetworkProfileState[] = [
     category: [NetworkProfile_NetworkCategory.Oss],
     logo: '/networks/logos/grove.png',
     logoBig: '/networks/backgrounds/grove.png',
-    icon: '/networks/logos/grove.png',
+    icon: '/networks/logos/grove-isotype.svg',
   },
   {
     __typename: 'NetworkProfile_NetworkProfileState',

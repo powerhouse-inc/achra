@@ -1,63 +1,38 @@
-'use client'
-
-import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
-import { cn } from '../../lib/utils'
-import { NavbarBrand } from './components/navbar-brand'
-import NavbarItemMobile from './components/navbar-item-mobile'
-import NavbarItemsDesk from './components/navbar-items-desk'
-import NavbarRightSide from './components/navbar-right-side'
-import { getNavbarConfig, isNetworkPathOrSubpath } from './navbar-config'
-import { hasBlurBackground } from './utils'
+import { AchraNav } from './components/achra-nav'
+import { NetworkBrand } from './components/network-brand'
+import { NetworksNav } from './components/networks-nav'
+import { ThemeToggle, ThemeToggleOption } from './components/theme-toggle'
+import { UserButton, UserOption } from './components/user-button'
+import * as NavbarPrimitives from './primitives'
 
 function Navbar() {
-  const pathname = usePathname()
-  const isLoggedIn = false
-  const user = {
-    username: 'John Doe',
-    avatar: 'https://github.com/shadcn.png',
-  }
-  const handleLoginClick = () => {}
-
-  const {
-    isotype: Isotype,
-    logotype: Logotype,
-    logotypeClassName,
-    logoHref,
-    navItems,
-  } = useMemo(() => getNavbarConfig(pathname), [pathname])
-
-  const navBarWithBlurBackground = hasBlurBackground(pathname)
-
   return (
-    <div
-      className={cn(
-        'fixed top-0 right-0 left-0 z-160 h-24 w-full pb-2',
-        navBarWithBlurBackground ? 'md:backdrop-blur-[40px]' : 'md:bg-background',
-      )}
-    >
-      <div className="bg-muted/30 fixed top-0 right-0 left-0 z-150 rounded-3xl p-0 shadow-lg md:mx-6 md:p-2.5 md:shadow-none xl:container xl:px-2.5 2xl:mx-14 2xl:max-w-[calc(100%-108px)]">
-        <header className="bg-popover flex h-full flex-1 items-center justify-between rounded-none pr-4 md:rounded-2xl">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-4">
-              <NavbarBrand
-                isAchraPage={!isNetworkPathOrSubpath(pathname)}
-                isotypeLogo={Isotype}
-                logotype={Logotype}
-                logotypeClassName={logotypeClassName}
-                logoHref={logoHref}
-              />
-              <NavbarItemMobile navItems={navItems} pathname={pathname} />
-            </div>
+    <NavbarPrimitives.Root>
+      <NavbarPrimitives.BrandArea>
+        <NavbarPrimitives.AchraBrand />
+        <NetworkBrand />
 
-            <NavbarItemsDesk navItems={navItems} pathname={pathname} />
+        <NavbarPrimitives.MobileNav />
+      </NavbarPrimitives.BrandArea>
 
-            <NavbarRightSide isLoggedIn={isLoggedIn} user={user} onLoginClick={handleLoginClick} />
-          </div>
-        </header>
-      </div>
-    </div>
+      <AchraNav />
+      <NetworksNav />
+
+      <NavbarPrimitives.ActionsArea>
+        <NavbarPrimitives.ActionWithOptions className="flex md:hidden">
+          <UserOption />
+          <NavbarPrimitives.ActionOptionSeparator />
+          <ThemeToggleOption />
+        </NavbarPrimitives.ActionWithOptions>
+
+        <NavbarPrimitives.ActionsGroup className="hidden md:flex">
+          <ThemeToggle />
+          <NavbarPrimitives.ActionSeparator />
+          <UserButton />
+        </NavbarPrimitives.ActionsGroup>
+      </NavbarPrimitives.ActionsArea>
+    </NavbarPrimitives.Root>
   )
 }
 
-export default Navbar
+export { Navbar }
