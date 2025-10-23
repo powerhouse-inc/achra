@@ -1,13 +1,12 @@
 'use client'
 
-import { TanStackDevtools } from '@tanstack/react-devtools'
 import {
   isServer,
   QueryClient,
   QueryClientProvider as TanstackQueryClientProvider,
 } from '@tanstack/react-query'
-import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-import type { ReactNode } from 'react'
+import dynamic from 'next/dynamic'
+import { type ReactNode, Suspense } from 'react'
 
 function makeQueryClient() {
   return new QueryClient({
@@ -37,6 +36,13 @@ function getQueryClient() {
   }
 }
 
+const ConditionalDevTools =
+  process.env.NODE_ENV === 'development'
+    ? dynamic(async () => (await import('./dev-tools')).DevTools, {
+        ssr: false,
+      })
+    : () => null
+
 export default function QueryClientProvider({ children }: { children: ReactNode }) {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
@@ -47,14 +53,10 @@ export default function QueryClientProvider({ children }: { children: ReactNode 
   return (
     <TanstackQueryClientProvider client={queryClient}>
       {children}
-      <TanStackDevtools
-        plugins={[
-          {
-            name: 'TanStack Query',
-            render: <ReactQueryDevtoolsPanel />,
-          },
-        ]}
-      />
+
+      <Suspense>
+        <ConditionalDevTools />
+      </Suspense>
     </TanstackQueryClientProvider>
   )
 }
