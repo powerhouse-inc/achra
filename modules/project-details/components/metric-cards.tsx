@@ -1,6 +1,5 @@
-// src/modules/shared/components/ui/metric-card.tsx
-import { Card } from '@/modules/shared/components/ui/card' // Asumo que esta ruta es correcta
-import { cn } from '@/shared/lib/utils' // Asumo que esta ruta es correcta
+import { Card } from '@/modules/shared/components/ui/card'
+import { cn } from '@/shared/lib/utils'
 import type { ReactNode } from 'react'
 
 interface MetricCardProps {
