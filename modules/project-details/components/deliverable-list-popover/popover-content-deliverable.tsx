@@ -2,17 +2,12 @@
 import { ArrowUpRight, CopyIcon } from 'lucide-react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-
-export interface KeyResultItem {
-  title: string
-  url: string
-  date?: string
-}
+import type { KeyResult } from '../../types'
 
 interface PopoverContentDeliverableProps {
   title: string
   code: string
-  keyResults: KeyResultItem[]
+  keyResults: KeyResult[]
   count?: number
   className?: string
 }
@@ -30,7 +25,7 @@ export function PopoverContentDeliverable({
       </h3>
       <ul className="flex flex-col gap-4">
         {keyResults.map((keyResults) => (
-          <li key={keyResults.title}>
+          <li key={keyResults.id}>
             <div className="flex items-start gap-2">
               <span className="bg-foreground mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
               <div className="flex-1">
