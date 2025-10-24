@@ -1,10 +1,6 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  BriefingMarkdown,
-  CriteriaMarkdown,
-  markdownEvaluation,
-} from '@/modules/rfp/mocks/markdown'
+
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
@@ -14,6 +10,7 @@ import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-ke
 import { Card } from '@/modules/shared/components/ui/card'
 
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { BriefingMarkdown, CriteriaMarkdown } from '@/modules/workstream/mocks/markdown'
 import type { Route } from 'next'
 
 interface RequesForProposalPageProps {
@@ -104,7 +101,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
               <div className="bg-background rounded-lg p-3 transition-all">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-sm/5.5 font-semibold xl:text-base/6">Evaluation Criteria</h2>
-                  <Markdown>{markdownEvaluation}</Markdown>
+                  <Markdown>{CriteriaMarkdown}</Markdown>
                 </div>
               </div>
             </div>
