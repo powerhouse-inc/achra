@@ -19,7 +19,7 @@ export default function LargeItem({ team, className, profileUpdateDate }: LargeI
   return (
     <div
       className={cn(
-        'bg-popover hover:bg-accent grid w-full grid-cols-[1fr_15%_1fr_13%_auto] items-center gap-x-15 rounded-xl px-2 py-3 shadow-xs xl:gap-x-22 xl:px-4 2xl:gap-x-25',
+        'bg-popover hover:bg-accent grid w-full grid-cols-[25%_17%_17%_14%_auto] items-center justify-between rounded-xl px-2 py-3 shadow-xs',
         className,
       )}
     >
