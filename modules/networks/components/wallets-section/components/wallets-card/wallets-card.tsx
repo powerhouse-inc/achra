@@ -9,7 +9,6 @@ import {
 } from '@/modules/shared/components/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
 import { WalletsList } from './components/wallets-list/wallets-list'
 import { WalletsTable } from './components/wallets-table/wallets-table'
@@ -34,7 +33,6 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
     handleCopyMouseLeave,
     handleCopyAddress,
   } = useWalletsCard({ wallets })
-  const isMobile = useMediaQuery({ to: 'md' })
   return (
     <StripedCard className={cn('w-full', className)}>
       <StripedCardHeader className="items-center px-4">
@@ -73,9 +71,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
           animate={{
             opacity: toogleWalletTable ? 1 : 0,
             height: toogleWalletTable ? 'auto' : 0,
-            margin: toogleWalletTable
-              ? `${isMobile ? 'calc(var(--spacing) * 2)' : '0'} calc(var(--spacing) * 2)`
-              : 0,
+            margin: toogleWalletTable ? 'calc(var(--spacing) * 2)' : 0,
           }}
           transition={{
             duration: 0.3,
@@ -88,7 +84,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             wallets={proccesedWallets}
             tooltip={tooltip}
             hoveredRowIndex={hoveredRowIndex}
-            className="hidden md:table"
+            className="hidden md:block"
             onCopyAddress={(event, address) => {
               void handleCopyAddress(event, address)
             }}
