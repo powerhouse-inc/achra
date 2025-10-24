@@ -1,4 +1,4 @@
-import Navbar from './navbar'
+import { Navbar } from './navbar'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
@@ -25,8 +25,10 @@ export const WithPowerhousePathname: Story = {
   name: 'Navbar (Powerhouse)',
   parameters: {
     nextjs: {
+      appDirectory: true,
       navigation: {
         pathname: '/network/powerhouse/roadmap',
+        segments: [['slug', 'powerhouse']],
       },
     },
   },
@@ -36,8 +38,10 @@ export const WithSkyPathname: Story = {
   name: 'Navbar (Sky)',
   parameters: {
     nextjs: {
+      appDirectory: true,
       navigation: {
         pathname: '/network/sky/finances',
+        segments: [['slug', 'sky']],
       },
     },
   },
