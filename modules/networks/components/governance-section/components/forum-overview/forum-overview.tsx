@@ -49,14 +49,14 @@ function ForumOverview() {
       }}
       className="relative gap-0 overflow-hidden drop-shadow-lg"
     >
-      <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-7.5 w-12.5 rounded-tl-lg bg-gradient-to-r to-transparent md:hidden" />
+      <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-7.5 w-12.5 rounded-tl-lg bg-linear-to-r to-transparent md:hidden" />
       <TabsList className="no-scrollbar h-fit w-full justify-start overflow-x-auto rounded-b-none bg-transparent p-0 md:overflow-x-visible">
         <div className="flex w-fit gap-2">
           {forumCategories.map((category) => (
             <TabsTrigger
               key={category.id}
               value={category.id.toString()}
-              className="bg-background text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:!bg-accent relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
+              className="bg-background text-foreground/50 data-[state=active]:text-accent-foreground data-[state=active]:bg-accent! relative h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold data-[state=active]:shadow-none lg:text-base/6"
             >
               <div className="relative flex size-4 items-center">{category.icon}</div>
               {category.tabLabel}
