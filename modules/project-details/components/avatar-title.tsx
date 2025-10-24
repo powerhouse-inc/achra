@@ -10,7 +10,7 @@ interface AvatarTitleProps {
 
 export function AvatarTitle({ avatar, title, className }: AvatarTitleProps) {
   return (
-    <div className={cn('gap:1 flex items-center lg:gap-2')}>
+    <div className={cn('flex items-center gap-1 lg:gap-2')}>
       <Avatar className={cn('size-6', className)}>
         <AvatarImage src={avatar} alt={title} />
         <AvatarFallback>{title.substring(0, 2).toUpperCase()}</AvatarFallback>

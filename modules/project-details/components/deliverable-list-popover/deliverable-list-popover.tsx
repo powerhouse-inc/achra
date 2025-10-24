@@ -2,12 +2,13 @@ import { Link } from 'lucide-react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shared/components/ui/popover'
 import { cn } from '@/modules/shared/lib/utils'
-import { type KeyResultItem, PopoverContentDeliverable } from './popover-content-deliverable'
+import { PopoverContentDeliverable } from './popover-content-deliverable'
+import type { KeyResult } from '../../types'
 
 interface DeliverableListPopoverProps {
   title: string
   code: string
-  keyResults: KeyResultItem[]
+  keyResults: KeyResult[]
   count?: number
   className?: string
 }
