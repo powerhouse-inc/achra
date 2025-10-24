@@ -31,7 +31,7 @@ export function BuilderTeamsItem({ team }: BuilderTeamsItemProps) {
   return (
     <Link href={href}>
       <CompactItem
-        className="min-h-34 lg:hidden"
+        className="min-h-33 lg:hidden"
         team={team}
         profileUpdateDate={profileUpdateDate}
       />

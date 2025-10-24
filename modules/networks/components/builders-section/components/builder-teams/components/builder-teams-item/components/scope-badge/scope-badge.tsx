@@ -17,10 +17,10 @@ export default function ScopeBadge({ scope, className, size = 'large' }: ScopeBa
       variant="outline"
       className={cn(
         scopeBadgeStyles[scope.name],
-        'border-2',
-        size === 'small' && 'px-2 py-1 text-xs/4.5 font-medium',
+        'box-border border-2',
+        size === 'small' && 'h-6 w-8.5 text-xs/4.5 font-medium',
         size === 'medium' && 'px-2 py-0 text-sm/5.5 font-semibold',
-        size === 'large' && 'px-2 py-0 text-sm/5.5 font-semibold',
+        size === 'large' && 'h-6 px-1.5 py-0.25 text-sm/5.5 font-semibold',
         size === 'extraLarge' && 'px-2 py-1 text-sm/5.5 font-semibold',
         className,
       )}

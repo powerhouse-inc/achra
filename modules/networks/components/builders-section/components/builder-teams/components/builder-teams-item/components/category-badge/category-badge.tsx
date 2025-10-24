@@ -16,7 +16,7 @@ export default function CategoryBadge({ category, className }: CategoryBadgeProp
       variant="outline"
       className={cn(
         categoryBadgeStyles[category],
-        'text-foreground/50 border-2 px-4 py-0 text-sm/5.5 font-semibold',
+        'text-foreground/50 h-6 border-2 px-1 py-0 text-sm/5.5 font-semibold sm:px-4',
         className,
       )}
     >

@@ -41,7 +41,7 @@ export default function CompactItem({ team, className, profileUpdateDate }: Comp
         {team.type === ResourceType.EcosystemActor ? (
           <>
             <div className="flex gap-1">
-              {team.scopes.map((scope) => (
+              {team.scopes.slice(0, 2).map((scope) => (
                 <ScopeBadge key={scope.id} scope={scope} size={scopeSizeVariant} />
               ))}
             </div>

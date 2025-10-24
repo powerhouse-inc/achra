@@ -13,7 +13,7 @@ export default function RoleBadge({ type, className }: RoleBadgeProps) {
     <Badge
       variant="default"
       className={cn(
-        'border-border bg-muted text-muted-foreground flex justify-self-end border-0 border-b text-sm/5.5 font-semibold',
+        'border-border bg-muted text-muted-foreground flex justify-self-end border-0 border-b px-1 py-0 text-sm/5.5 font-semibold',
         className,
       )}
     >
