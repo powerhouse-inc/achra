@@ -29,7 +29,7 @@ export function DeliverableList({ deliverables, className }: DeliverableListProp
         >
           <div className="flex justify-between">
             <div className="flex flex-col">
-              <div className="sm: flex min-w-0 flex-row items-center gap-1 sm:w-47">
+              <div className="min-w-0 flex-row items-center gap-1 sm:flex sm:w-47">
                 <div className="flex items-center gap-1">
                   <Avatar className={cn('size-8', className)}>
                     <AvatarImage src={deliverable.image} alt={deliverable.title} />
@@ -69,7 +69,11 @@ export function DeliverableList({ deliverables, className }: DeliverableListProp
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
             <DescriptionItem label="QTY" value={`${deliverable.qyt} USD`} />
             <DescriptionItem label="Unit Budget" value={`${deliverable.unitBudget} USD`} />
-            <DescriptionItem label="Subtotal" value={`${deliverable.subtotal} USD`} />
+            <DescriptionItem
+              label="Subtotal"
+              value={`${deliverable.subtotal} USD`}
+              className="sm:justify-end"
+            />
           </div>
         </div>
       ))}
