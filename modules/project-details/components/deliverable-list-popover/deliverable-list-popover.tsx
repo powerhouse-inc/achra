@@ -36,7 +36,7 @@ export function DeliverableListPopover({
         </PopoverTrigger>
         <PopoverContent
           align="start"
-          className="border-input bg-popover py-3  w-98 rounded-2xl border px-4 shadow-md"
+          className="border-input bg-popover w-98 rounded-2xl border px-4 shadow-md"
         >
           <PopoverContentDeliverable
             title={title}
