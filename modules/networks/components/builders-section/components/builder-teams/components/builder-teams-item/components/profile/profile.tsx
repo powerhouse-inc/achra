@@ -15,11 +15,11 @@ export interface ProfileProps {
 export default function Profile({ name, shortCode, status, image, className }: ProfileProps) {
   const { statusBadgeStyles } = useProfile()
   return (
-    <div className={cn('flex items-center gap-1 xl:gap-2', className)}>
+    <div className={cn('flex items-center gap-2', className)}>
       <Avatar className="size-8">
         <AvatarImage src={image} alt={name || 'Wallet'} />
       </Avatar>
-      <div className="flex flex-col">
+      <div className="flex flex-col lg:gap-2">
         <p className="text-foreground/30 line-clamp-1 w-full text-sm/5.5 font-semibold">
           {shortCode} <span className="text-foreground">{name}</span>
         </p>
