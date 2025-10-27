@@ -15,7 +15,7 @@ interface ForumInfoChipProps {
 
 function ForumInfoChip({ value, type, popular = false, onMeasureChip }: ForumInfoChipProps) {
   const rootRef = useRef<HTMLDivElement | null>(null)
-  const largeScreen = useMediaQuery({ from: 'md' })
+  const isLargeScreen = useMediaQuery({ from: 'md' })
 
   useLayoutEffect(() => {
     if (!rootRef.current) return
@@ -24,8 +24,8 @@ function ForumInfoChip({ value, type, popular = false, onMeasureChip }: ForumInf
   }, [value, type, popular, onMeasureChip])
 
   const widthVar = useMemo(
-    () => (largeScreen ? `var(--chip-width-${type}, auto)` : '100%'),
-    [type, largeScreen],
+    () => (isLargeScreen ? `var(--chip-width-${type}, auto)` : '100%'),
+    [type, isLargeScreen],
   )
 
   return (
