@@ -13,7 +13,7 @@ import {
 } from '@/modules/shared/components/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import ForumPost from '../forum-post/forum-post'
+import { ForumList } from '../forum-list/forum-list'
 import ForumPostSkeleton from '../forum-post/forum-post-skeleton'
 import { forumCategories } from './categories'
 interface Topic {
@@ -99,13 +99,7 @@ function ForumOverview() {
                   Error fetching forum posts
                 </div>
               )}
-              {posts?.map((post) => (
-                <ForumPost
-                  key={post.id}
-                  post={post}
-                  isPopular={!!biggerLikes && post.like_count === biggerLikes}
-                />
-              ))}
+              <ForumList posts={posts ?? []} biggerLikes={biggerLikes ?? 0} />
             </StripedCardContent>
           </StripedCard>
         </TabsContent>
