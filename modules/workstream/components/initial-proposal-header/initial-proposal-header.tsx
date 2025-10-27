@@ -2,8 +2,17 @@ import { UserCheck } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link/internal-link'
+import type { Route } from 'next'
 
-export default function InitialProposalHeader() {
+interface InitialProposalHeaderProps {
+  slug?: string
+  workstreamSlug?: string
+}
+
+export default function InitialProposalHeader({
+  slug,
+  workstreamSlug,
+}: InitialProposalHeaderProps) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex w-full flex-col items-center gap-1 sm:items-start sm:gap-2 md:flex-row md:gap-4">
@@ -20,7 +29,11 @@ export default function InitialProposalHeader() {
           <span>Powerhouse RGH Team</span>
         </div>
       </div>
-      <InternalLink href="#" className="hidden sm:inline-flex sm:self-start" variant="outline">
+      <InternalLink
+        href={`/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route}
+        className="hidden sm:inline-flex sm:self-start"
+        variant="outline"
+      >
         View Proposal
       </InternalLink>
     </div>
