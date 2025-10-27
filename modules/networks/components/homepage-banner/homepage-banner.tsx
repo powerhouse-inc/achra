@@ -30,7 +30,7 @@ export function HomepageBanner() {
         alt="Header card background"
         fill
         priority
-        quality={70}
+        quality={75}
         sizes="100vw"
         style={{ objectFit: 'cover' }}
         className="absolute z-0"
