@@ -1,9 +1,11 @@
+import { FilePenLine } from 'lucide-react'
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
@@ -76,16 +78,22 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
 
           <Separator />
 
-          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-foreground/50 text-sm/5.5 font-semibold uppercase xl:text-base/6">
-              Join this proposal
-            </div>
-            <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
-              <span className="whitespace-nowrap">Application Deadline:</span>
-              <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
-                31 SEP 2025
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
+            <div className="flex w-full flex-col gap-2">
+              <div className="text-foreground/50 text-sm/5.5 font-semibold uppercase xl:text-base/6">
+                Join this proposal
+              </div>
+              <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
+                <span className="whitespace-nowrap">Application Deadline:</span>
+                <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
+                  31 SEP 2025
+                </div>
               </div>
             </div>
+
+            <Button>
+              Create Alternative Proposal <FilePenLine className="size-4" />
+            </Button>
           </div>
 
           <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
