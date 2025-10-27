@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import ProgressCard from './progress-card'
+import { ProgressCard } from './progress-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {

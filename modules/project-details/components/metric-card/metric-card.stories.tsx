@@ -1,5 +1,5 @@
 import React from 'react'
-import { MetricCard } from './metric-cards'
+import { MetricCard } from './metric-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {

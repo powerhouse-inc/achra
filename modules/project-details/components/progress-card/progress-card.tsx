@@ -9,7 +9,7 @@ interface ProgressCardProps {
   progress: number
 }
 
-export default function ProgressCard({ status, progress }: ProgressCardProps) {
+export function ProgressCard({ status, progress }: ProgressCardProps) {
   return (
     <div className="bg-popover flex w-full flex-col gap-2 rounded-xl border p-2">
       <div className="flex items-center justify-between">

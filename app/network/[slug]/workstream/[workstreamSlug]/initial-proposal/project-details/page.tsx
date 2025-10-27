@@ -1,9 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { AvatarTitle } from '@/modules/project-details/components/avatar-title'
-import { MetricCard } from '@/modules/project-details/components/metric-card'
-import ProgressCard from '@/modules/project-details/components/progress-card/progress-card'
-import TotalCostField from '@/modules/project-details/components/total-cost-field'
+import {
+  AvatarTitle,
+  MetricCard,
+  ProgressCard,
+  TotalCostField,
+} from '@/modules/project-details/components'
+
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
@@ -82,7 +85,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                 </div>
               </div>
 
-              <div className="flex shrink grow-1 flex-col gap-2 sm:w-full sm:flex-row sm:gap-2 lg:basis-[35%] lg:flex-col">
+              <div className="flex shrink grow flex-col gap-2 sm:w-full sm:flex-row sm:gap-2 lg:basis-[35%] lg:flex-col">
                 <MetricCard label="Budget" value="100K" unit="USD" footer="CAPEX" />
                 <ProgressCard progress={50} status={ScopeOfWork_DeliverableSetStatus.Todo} />
                 <MetricCard
