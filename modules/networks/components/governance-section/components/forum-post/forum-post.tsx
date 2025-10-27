@@ -2,7 +2,6 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import type { Topic } from '@/modules/networks/lib/fetch-forum-posts'
 import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 import ForumInfoChip from '../forum-info-chip/forum-info-chip'
 import { Dot, forumCategories } from '../forum-overview/categories'
 import type { MeasureChipParams } from '../forum-list/forum-list'
@@ -47,7 +46,7 @@ function ForumPost({ post, isPopular = false, onMeasureChip }: ForumPostProps) {
         </div>
       </div>
       <div className="flex w-full items-center gap-2 pt-2 md:justify-end md:pt-0 lg:gap-4">
-        <div className={cn('w-full md:w-fit md:py-2', isPopular && 'md:pl-2 lg:pl-4 xl:pl-6')}>
+        <div className="w-full md:w-fit md:py-2">
           <ForumInfoChip
             type="likes"
             value={post.like_count}
@@ -66,7 +65,7 @@ function ForumPost({ post, isPopular = false, onMeasureChip }: ForumPostProps) {
           <ForumInfoChip type="date" value={`${Math.floor(date)}d`} onMeasureChip={onMeasureChip} />
         </div>
         <div className="flex w-fit justify-end">
-          <Button variant="outline" size="default" asChild className="size-8">
+          <Button variant="outline" size="icon" asChild>
             <a
               href={`https://forum.makerdao.com/t/${post.slug}/${post.id}`}
               target="_blank"
