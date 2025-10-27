@@ -5,7 +5,7 @@ interface TotalCostFieldProps {
   value: string
 }
 
-function TotalCostField({ label, value }: TotalCostFieldProps) {
+export function TotalCostField({ label, value }: TotalCostFieldProps) {
   return (
     <div className="flex w-full items-center justify-end gap-4">
       <h2 className="text-end text-sm/5.5 font-semibold">{label}</h2>
@@ -15,5 +15,3 @@ function TotalCostField({ label, value }: TotalCostFieldProps) {
     </div>
   )
 }
-
-export default TotalCostField
