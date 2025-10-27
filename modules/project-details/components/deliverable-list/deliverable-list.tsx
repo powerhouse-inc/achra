@@ -8,6 +8,7 @@ import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-
 import { DescriptionItem } from '../description-item/description-item'
 import { ProgressComponent } from '../progress-component/progress-component'
 import type { Deliverable } from '../../types'
+import type { Route } from 'next'
 
 export interface DeliverableListProps {
   deliverables: Deliverable[]
@@ -33,7 +34,11 @@ export function DeliverableList({ deliverables, className }: DeliverableListProp
                 <div className="flex items-center gap-1">
                   <Avatar className={cn('size-8', className)}>
                     <AvatarImage src={deliverable.image} alt={deliverable.title} />
-                    <AvatarTitle avatar={deliverable.image} title={deliverable.title} />
+                    <AvatarTitle
+                      avatar={deliverable.image}
+                      title={deliverable.title}
+                      href={'/network/powerhouse/builders' as Route}
+                    />
                     <AvatarFallback>
                       {deliverable.title.substring(0, 2).toUpperCase()}
                     </AvatarFallback>
