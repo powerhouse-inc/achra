@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { useNetworkProfileQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { NetworkGrid } from '@/modules/networks/components/network-grid'
-import { NETWORK_PROFILE_DOCUMENT_ID } from '@/modules/networks/lib/constants'
+import { NETWORK_PROFILE_DOCUMENT_ID } from '@/modules/networks/config/constants'
 import { fetchPowerhouseNetworkProfile } from '@/modules/networks/lib/fetch-networks'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
