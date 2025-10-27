@@ -52,7 +52,7 @@ export function ForumList({ posts, biggerLikes }: ForumListProps) {
   }, [maxWidths.likes, maxWidths.replies, maxWidths.date])
 
   return (
-    <div style={styleVars}>
+    <div style={styleVars} className="flex flex-col gap-2">
       {posts.map((post) => (
         <ForumPost
           key={post.id}
