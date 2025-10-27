@@ -13,20 +13,23 @@ import { Card } from '@/modules/shared/components/ui/card'
 import type { Route } from 'next'
 
 interface ProjectDetailsPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; workstreamSlug: string }>
 }
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
-  const { slug } = await params
+  const { slug, workstreamSlug } = await params
   const totalCost = 1442.5
   const totalBudget = 100
   const items = [
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
-    { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/vetra-beta-launch` as Route },
-    { label: 'Initiative Proposal', href: `/network/${slug}/project-details` as Route },
+    { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
+    {
+      label: 'Initiative Proposal',
+      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route,
+    },
     {
       label: 'PRJ-1 - Front-end Development',
-      href: `/network/${slug}/project-details/PRJ-1 - Front-end Development` as Route,
+      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project-details` as Route,
     },
   ]
   return (
@@ -39,7 +42,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
         <Card className="gap-0 p-0">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 px-4 pt-3 pb-4 lg:flex-row">
-              <div className="flex shrink grow-[2] basis-[62.3%] flex-col gap-1 sm:gap-2">
+              <div className="flex shrink grow-2 basis-[62.3%] flex-col gap-1 sm:gap-2">
                 <div className="flex w-full flex-row items-start justify-between">
                   <div className="flex w-full flex-col gap-1">
                     <div className="flex w-full flex-row items-center gap-1 sm:items-center sm:gap-2">

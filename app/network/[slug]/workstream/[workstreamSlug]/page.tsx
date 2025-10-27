@@ -70,7 +70,11 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
 
           <StatCards />
 
-          <InternalLink href="#" className="ml-auto max-w-fit sm:hidden" variant="outline">
+          <InternalLink
+            href={`/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route}
+            className="ml-auto max-w-fit sm:hidden"
+            variant="outline"
+          >
             View Proposal
           </InternalLink>
 
