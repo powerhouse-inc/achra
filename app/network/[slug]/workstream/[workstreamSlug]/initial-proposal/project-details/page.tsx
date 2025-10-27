@@ -1,12 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+
 import {
   AvatarTitle,
   MetricCard,
   ProgressCard,
   TotalCostField,
 } from '@/modules/project-details/components'
-
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
@@ -60,6 +60,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                       <AvatarTitle
                         avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
                         title="Powerhouse OH"
+                        href={`/network/${slug}/builders` as Route}
                       />
                     </div>
                   </div>
@@ -71,6 +72,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                   <AvatarTitle
                     avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
                     title="Powerhouse OH"
+                    href={`/network/${slug}/builders` as Route}
                   />
                 </div>
 
