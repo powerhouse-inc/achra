@@ -7,11 +7,6 @@ export interface KeyResult {
   parentIdRef?: string
 }
 
-export interface BProject {
-  code: string
-  title: string
-}
-
 export interface Deliverable {
   id: string
   title: string
@@ -22,4 +17,14 @@ export interface Deliverable {
   qyt: number
   unitBudget: number
   subtotal: number
+}
+
+export enum KeyResultStatus {
+  WONT_DO = 'WONT_DO',
+  DRAFT = 'DRAFT',
+  TODO = 'TODO',
+  BLOCKED = 'BLOCKED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  DELIVERED = 'DELIVERED',
+  CANCELED = 'CANCELED',
 }
