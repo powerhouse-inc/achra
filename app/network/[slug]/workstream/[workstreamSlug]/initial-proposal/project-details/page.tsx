@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { AvatarTitle } from '@/modules/project-details/components/avatar-title'
-import { MetricCard } from '@/modules/project-details/components/metric-cards'
-import ProgressCard from '@/modules/project-details/components/progress-card'
+import { MetricCard } from '@/modules/project-details/components/metric-card'
+import ProgressCard from '@/modules/project-details/components/progress-card/progress-card'
 import TotalCostField from '@/modules/project-details/components/total-cost-field'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
