@@ -2,7 +2,7 @@
 
 import { useNetworkProfileQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { FAST_REFRESH_INTERVAL } from '@/modules/shared/config/constants'
-import { NETWORK_PROFILE_DOCUMENT_ID } from '../../lib/constants'
+import { NETWORK_PROFILE_DOCUMENT_ID } from '../../config/constants'
 import { mockedNetworks } from '../../mocks/networks'
 import { NetworkCard } from '../network-card'
 

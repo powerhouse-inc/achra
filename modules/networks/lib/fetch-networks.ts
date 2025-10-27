@@ -5,8 +5,8 @@ import {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { slugify } from '@/modules/shared/lib/slug'
 import { switchboardFetcher } from '@/shared/lib/fetcher'
+import { NETWORK_PROFILE_DOCUMENT_ID } from '../config/constants'
 import { mockedNetworks } from '../mocks/networks'
-import { NETWORK_PROFILE_DOCUMENT_ID } from './constants'
 
 export async function fetchPowerhouseNetworkProfile(): Promise<NetworkProfileQuery> {
   return switchboardFetcher(NetworkProfileDocument, {

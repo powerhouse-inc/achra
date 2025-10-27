@@ -17,18 +17,13 @@ export default function NetworkPage() {
     <PageBackground>
       <PageContent className="gap-8">
         <ScrollSpyWrapper sectionHashs={sectionHashs} />
-        <HomepageBanner
-          title="Sky DAO Dashboard"
-          description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
-          isLoggedIn={true}
-        />
+        <HomepageBanner />
         <ProposalsSection proposals={PROPOSALS} />
         <RoadmapSection roadmaps={mockedRoadmaps} />
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
         <BuildersSection />
         <GovernanceSection />
-        <p className="text-muted-foreground sm:text-md mt-12 text-base">Coming soon</p>
       </PageContent>
     </PageBackground>
   )
