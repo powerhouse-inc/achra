@@ -1,6 +1,6 @@
 import { fetchGovernanceProposals } from '@/modules/networks/lib/fetch-governance-proposals'
 import { groupGovernanceProposals } from '@/modules/networks/lib/group-governance-proposals'
-import { getChiefHat } from '@/web3/api/governance'
+import { getChiefHat } from '@/modules/web3/api/governance'
 import { ExecutiveProposalsList } from './components/executive-proposals-list/executive-proposals-list'
 
 interface ExecutiveProposalsProps {
