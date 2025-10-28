@@ -5,10 +5,14 @@ import type {
 } from '@/shared/types/makervote'
 
 export async function fetchGovernanceProposals(): Promise<ExtendedExecutiveProposal[]> {
-  const executiveResponse = await fetch('https://vote.sky.money/api/executive')
+  const executiveResponse = await fetch('https://vote.sky.money/api/executive', {
+    next: { revalidate: 600 }, // Revalidate every 10 minutes
+  })
   const proposals = (await executiveResponse.json()) as ExecutiveProposal[]
 
-  const supportersResponse = await fetch('https://vote.sky.money/api/executive/supporters')
+  const supportersResponse = await fetch('https://vote.sky.money/api/executive/supporters', {
+    next: { revalidate: 600 }, // Revalidate every 10 minutes
+  })
   const supporters = (await supportersResponse.json()) as ExecutiveProposalSupporters
 
   proposals.forEach((proposal) => {
