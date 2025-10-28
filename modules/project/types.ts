@@ -5,11 +5,7 @@ export interface KeyResult {
   title: string
   url: string
   parentIdRef?: string
-}
-
-export interface BProject {
-  code: string
-  title: string
+  status: boolean
 }
 
 export interface Deliverable {
