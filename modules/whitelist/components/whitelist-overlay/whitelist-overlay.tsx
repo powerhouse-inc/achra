@@ -47,7 +47,7 @@ function WhitelistOverlay() {
           'before:to-background before:absolute before:-top-[118px] before:right-0 before:left-0 before:h-30 before:bg-gradient-to-b before:from-transparent before:content-[""]',
         )}
       >
-        <div className="container flex h-full w-full flex-col items-center justify-center px-4 pt-8">
+        <div className="container flex h-full w-full flex-col items-center justify-center px-4">
           {isSubmitted ? <SuccessView /> : <WhitelistForm onSuccess={handleSuccess} />}
         </div>
       </div>

@@ -5,7 +5,7 @@ import { ProgressCard } from './progress-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Modules/Project Details/Components/ProgressCard',
+  title: 'Modules/Project/Components/ProgressCard',
   component: ProgressCard,
 } satisfies Meta<typeof ProgressCard>
 
