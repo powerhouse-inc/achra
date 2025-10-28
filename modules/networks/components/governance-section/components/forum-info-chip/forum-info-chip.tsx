@@ -40,11 +40,7 @@ function ForumInfoChip({ value, type, popular = false, onMeasureChip }: ForumInf
         {type === 'date' && <ClockIcon className="size-4" />}
       </div>
       <span>{value}</span>
-      {popular && (
-        <div className="ml-auto">
-          <FireIcon className="size-4" />
-        </div>
-      )}
+      {popular && <FireIcon className="size-4" />}
     </div>
   )
 }
