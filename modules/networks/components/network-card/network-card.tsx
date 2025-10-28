@@ -15,9 +15,9 @@ export function NetworkCard({ profile }: NetworkCardProps) {
   return (
     <Link href={`/network/${slugify(profile.name)}`} className="h-full">
       <Card
-        className="flex h-64 flex-col gap-0 bg-cover bg-center bg-no-repeat p-4 shadow-sm sm:p-6"
+        className="flex h-64 flex-col gap-0 border-none bg-cover bg-center bg-no-repeat p-4 shadow-sm sm:p-6"
         style={{
-          backgroundImage: `linear-gradient(180deg, #FFF 31.73%, rgba(255, 255, 255, 0.40) 91.35%), url(${profile.logoBig})`,
+          backgroundImage: `linear-gradient(180deg, var(--popover) 31.73%, color-mix(in srgb, var(--popover) 40%, transparent) 91.35%), url(${profile.logoBig})`,
         }}
       >
         <CardHeader className="gap-0 p-0">
