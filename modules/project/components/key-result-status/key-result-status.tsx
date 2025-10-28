@@ -12,7 +12,7 @@ export function KeyResultStatusChip({ className }: KeyResultStatusChipProps) {
         className,
       )}
     >
-      TODO
+      TO DO
     </div>
   )
 }
