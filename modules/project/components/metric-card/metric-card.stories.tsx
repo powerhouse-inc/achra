@@ -3,7 +3,7 @@ import { MetricCard } from './metric-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Modules/Project Details/Components/MetricCard',
+  title: 'Modules/Project/Components/MetricCard',
   component: MetricCard,
 } satisfies Meta<typeof MetricCard>
 
