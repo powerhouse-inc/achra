@@ -3,7 +3,7 @@ import { KeyResultStatusChip } from './key-result-status'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Modules/Project Details/Components/KeyResultStatusChip',
+  title: 'Modules/Project/Components/KeyResultStatusChip',
   component: KeyResultStatusChip,
 } satisfies Meta<typeof KeyResultStatusChip>
 

@@ -5,6 +5,7 @@ export interface KeyResult {
   title: string
   url: string
   parentIdRef?: string
+  status: KeyResultStatus
 }
 
 export interface Deliverable {

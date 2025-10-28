@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority'
+import { KeyResultStatus } from '@/modules/project/types'
 import { cn } from '@/modules/shared/lib/utils'
-import { KeyResultStatus } from '../../types'
 
 interface KeyResultStatusChipProps {
   status: KeyResultStatus
