@@ -64,7 +64,7 @@
   --fusion: oklch(75.53% 0.154 5.76);
   --to-do: oklch(78.73% 0.161 64.84);
   --yellow: oklch(0.8447 0.1726 88.48);
-  --destructive: oklch(0.6257 0.2058 29.08);
+
   /* SWIPER */
   --swiper-navigation-size: 10px;
   --swiper-navigation-sides-offset: 4px;
@@ -132,7 +132,6 @@
   --fusion: oklch(75.53% 0.154 5.76);
   --to-do: oklch(78.73% 0.161 64.84);
   --yellow: oklch(0.8447 0.1726 88.48);
-  --destructive: oklch(0.6257 0.2058 29.08);
 
   /* SWIPER */
   --swiper-theme-color: var(--muted-foreground);
@@ -205,7 +204,6 @@
   --color-fusion: var(--fusion);
   --color-to-do: var(--to-do);
   --color-yellow: var(--yellow);
-  --color-destructive: var(--destructive);
 
   /* Font overrides */
   --text-3xl: 2rem;
