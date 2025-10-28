@@ -16,8 +16,8 @@ interface ProjectDetailsPageProps {
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
   const { slug, workstreamSlug } = await params
-  const totalCost = 1442.5
-  const totalBudget = 100
+
+  const totalBudget = 100000
   const items = [
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
     { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
@@ -59,7 +59,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                       />
                     </div>
                   </div>
-                  <div className="text-primary-foreground hidden w-[calc(100%-48px)] max-w-64 sm:block">
+                  <div className="text-primary-foreground hidden w-[calc(100%-48px)] max-w-64 sm:flex sm:justify-end">
                     <ConnectLink />
                   </div>
                 </div>
@@ -106,8 +106,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
             Deliverables coming soon
           </div>
           <div className="flex w-full flex-col gap-2 self-end px-4 pt-4 pb-3 sm:pb-4">
-            <TotalCostField label="Total Cost" value={`${totalCost} USD`} />
-            <TotalCostField label="Total Budget" value={`${totalBudget} USD`} />
+            <TotalCostField label="Total Budget" value={totalBudget} />
           </div>
         </Card>
       </PageContent>
