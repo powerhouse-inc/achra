@@ -8,10 +8,13 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 import ForumPost from '../forum-post/forum-post'
+import ForumPostSkeleton from '../forum-post/forum-post-skeleton'
 
 export interface ForumListProps {
   posts: Topic[]
   biggerLikes: number
+  error: Error | null
+  isLoading: boolean
 }
 
 interface MaxChipWidths {
@@ -25,7 +28,7 @@ export interface MeasureChipParams {
   width: number
 }
 
-export function ForumList({ posts, biggerLikes }: ForumListProps) {
+export function ForumList({ posts, biggerLikes, error, isLoading }: ForumListProps) {
   const maxWidthsRef = useRef<MaxChipWidths>({
     likes: 0,
     replies: 0,
@@ -59,7 +62,21 @@ export function ForumList({ posts, biggerLikes }: ForumListProps) {
 
   return (
     <div style={styleVars} className="flex flex-col gap-2">
-      {posts.length === 0 ? (
+      {isLoading && (
+        <>
+          <ForumPostSkeleton />
+          <ForumPostSkeleton />
+          <ForumPostSkeleton />
+          <ForumPostSkeleton />
+          <ForumPostSkeleton />
+        </>
+      )}
+      {error && (
+        <div className="text-foreground/50 text-sm/5.5 font-semibold">
+          Error fetching forum posts
+        </div>
+      )}
+      {!isLoading && !error && posts.length === 0 ? (
         <Empty>
           <EmptyHeader>
             <EmptyTitle>No posts found</EmptyTitle>
