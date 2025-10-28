@@ -29,12 +29,12 @@ export function ProposalCard({
       <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
         <div className="flex items-center justify-between">
           <span className="text-foreground/50">Budget</span>
-          <span className="text-foreground">{budget}</span>
+          <span className="text-card-foreground">{budget}</span>
         </div>
 
         <div className="flex items-center justify-between">
           <span className="text-foreground/50">Submission Deadline</span>
-          <span className="text-foreground">{submissionDeadline}</span>
+          <span className="text-card-foreground">{submissionDeadline}</span>
         </div>
         <Button variant="outline" asChild className="w-fit self-end leading-5">
           <Link href={detailsHref}>
