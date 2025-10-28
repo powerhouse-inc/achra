@@ -13,7 +13,13 @@ export function Footer() {
         <div className="flex items-center gap-1.5">
           Made with ❤️ by{' '}
           <Link href="https://www.powerhouse.inc/" target="_blank">
-            <Image src="/networks/logos/powerhouse.png" alt="Powerhouse" height={16} width={111} />
+            <Image
+              src="/networks/logos/powerhouse.png"
+              alt="Powerhouse"
+              height={16}
+              width={111}
+              className="dark:invert"
+            />
           </Link>
         </div>
       </div>
