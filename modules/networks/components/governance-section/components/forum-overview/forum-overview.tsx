@@ -14,7 +14,6 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { ForumList } from '../forum-list/forum-list'
-import ForumPostSkeleton from '../forum-post/forum-post-skeleton'
 import { forumCategories } from './categories'
 interface Topic {
   id: number
@@ -33,10 +32,10 @@ function ForumOverview() {
   const { isLoading, data, error } = useQuery<Topic[]>({
     queryKey: ['forum', activeTab],
     queryFn: async () => fetchForumPosts(activeTab),
-    staleTime: Infinity,
+    refetchInterval: 10 * 60 * 1000, // Update every 10 minutes
   })
-  const posts = data?.slice(0, 5)
-  const biggerLikes = posts?.reduce(
+  const posts = Array.isArray(data) && data.length > 0 ? data.slice(0, 5) : []
+  const biggerLikes = posts.reduce(
     (acc, post) => (post.like_count > acc ? post.like_count : acc),
     0,
   )
@@ -85,21 +84,12 @@ function ForumOverview() {
               </StripedCardAction>
             </StripedCardHeader>
             <StripedCardContent className="flex flex-col gap-2 text-sm leading-5.5 font-semibold">
-              {isLoading && (
-                <>
-                  <ForumPostSkeleton />
-                  <ForumPostSkeleton />
-                  <ForumPostSkeleton />
-                  <ForumPostSkeleton />
-                  <ForumPostSkeleton />
-                </>
-              )}
-              {error && (
-                <div className="text-foreground/50 text-sm/5.5 font-semibold">
-                  Error fetching forum posts
-                </div>
-              )}
-              <ForumList posts={posts ?? []} biggerLikes={biggerLikes ?? 0} />
+              <ForumList
+                posts={posts}
+                biggerLikes={biggerLikes}
+                error={error}
+                isLoading={isLoading}
+              />
             </StripedCardContent>
           </StripedCard>
         </TabsContent>
