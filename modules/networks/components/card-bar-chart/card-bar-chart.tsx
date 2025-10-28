@@ -9,7 +9,7 @@ import { FinancesLegends } from './legend-card-section'
 
 export function CardBarChart() {
   return (
-    <Card className="bg-popover h-full w-full rounded-xl p-4 pt-2 shadow-lg sm:gap-0 sm:pt-4 lg:px-6 xl:px-4 xl:pt-4 xl:pb-6 2xl:px-6 2xl:pt-4 2xl:pb-6">
+    <Card className="bg-popover h-full w-full rounded-xl border-transparent p-4 pt-2 shadow-lg sm:gap-0 sm:pt-4 lg:px-6 xl:px-4 xl:pt-4 xl:pb-6 2xl:px-6 2xl:pt-4 2xl:pb-6">
       <CardTitle className="mb-0.5 text-xl leading-[120%] font-bold lg:mb-0 xl:mb-6 xl:text-lg 2xl:mb-7">
         Sky Ecosystem Finances
       </CardTitle>

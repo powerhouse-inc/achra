@@ -45,7 +45,7 @@ export function CardStackedAreaChart() {
   return (
     <Card
       className={cn(
-        'bg-popover w-full rounded-lg shadow-lg',
+        'bg-popover w-full rounded-lg border-transparent shadow-lg',
         // Padding
         'pt-0 pb-4 sm:p-4 lg:px-6 xl:px-4 xl:pt-4 xl:pb-6 2xl:px-6 2xl:pt-4 2xl:pb-6',
         // gap
