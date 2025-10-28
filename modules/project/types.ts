@@ -5,7 +5,7 @@ export interface KeyResult {
   title: string
   url: string
   parentIdRef?: string
-  status: KeyResultStatus
+  status: boolean
 }
 
 export interface Deliverable {
@@ -18,14 +18,4 @@ export interface Deliverable {
   qyt: number
   unitBudget: number
   subtotal: number
-}
-
-export enum KeyResultStatus {
-  WONT_DO = 'WONT_DO',
-  DRAFT = 'DRAFT',
-  TODO = 'TODO',
-  BLOCKED = 'BLOCKED',
-  IN_PROGRESS = 'IN_PROGRESS',
-  DELIVERED = 'DELIVERED',
-  CANCELED = 'CANCELED',
 }
