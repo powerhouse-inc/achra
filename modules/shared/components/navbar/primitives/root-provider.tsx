@@ -40,11 +40,11 @@ function RootProvider({ children }: { children: React.ReactNode }) {
         className={cn(
           {
             '**:data-[brand="achra"]:hidden **:data-[brand="network"]:flex': isANetworkPage,
-            'lg:**:data-[nav="achra"]:hidden lg:**:data-[nav="network"]:flex': isANetworkPage,
+            'xl:**:data-[nav="achra"]:hidden xl:**:data-[nav="network"]:flex': isANetworkPage,
           },
           {
             '**:data-[brand="achra"]:flex **:data-[brand="network"]:hidden': !isANetworkPage,
-            'lg:**:data-[nav="achra"]:flex lg:**:data-[nav="network"]:hidden': !isANetworkPage,
+            'xl:**:data-[nav="achra"]:flex xl:**:data-[nav="network"]:hidden': !isANetworkPage,
           },
         )}
       >

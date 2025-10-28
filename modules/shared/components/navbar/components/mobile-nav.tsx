@@ -40,7 +40,7 @@ function MobileNav() {
   }, [links, pathname])
 
   return (
-    <div className="flex items-center lg:hidden">
+    <div className="flex items-center xl:hidden">
       <DropdownMenu>
         <DropdownMenuTrigger
           aria-label={`Navigation menu - Current: ${activeLinkLabel}`}
