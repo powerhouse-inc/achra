@@ -33,10 +33,10 @@ function ForumOverview() {
   const { isLoading, data, error } = useQuery<Topic[]>({
     queryKey: ['forum', activeTab],
     queryFn: async () => fetchForumPosts(activeTab),
-    staleTime: Infinity,
+    refetchInterval: 10 * 60 * 1000, // Update every 10 minutes
   })
-  const posts = data?.slice(0, 5)
-  const biggerLikes = posts?.reduce(
+  const posts = Array.isArray(data) && data.length > 0 ? data.slice(0, 5) : []
+  const biggerLikes = posts.reduce(
     (acc, post) => (post.like_count > acc ? post.like_count : acc),
     0,
   )
@@ -99,7 +99,7 @@ function ForumOverview() {
                   Error fetching forum posts
                 </div>
               )}
-              <ForumList posts={posts ?? []} biggerLikes={biggerLikes ?? 0} />
+              <ForumList posts={posts} biggerLikes={biggerLikes} />
             </StripedCardContent>
           </StripedCard>
         </TabsContent>

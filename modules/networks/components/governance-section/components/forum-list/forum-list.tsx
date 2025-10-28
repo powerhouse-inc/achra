@@ -1,6 +1,12 @@
 'use client'
 import { useMemo, useRef, useState } from 'react'
 import type { Topic } from '@/modules/networks/lib/fetch-forum-posts'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import ForumPost from '../forum-post/forum-post'
 
 export interface ForumListProps {
@@ -53,14 +59,23 @@ export function ForumList({ posts, biggerLikes }: ForumListProps) {
 
   return (
     <div style={styleVars} className="flex flex-col gap-2">
-      {posts.map((post) => (
-        <ForumPost
-          key={post.id}
-          post={post}
-          isPopular={!!biggerLikes && post.like_count === biggerLikes}
-          onMeasureChip={handleMeasureChip}
-        />
-      ))}
+      {posts.length === 0 ? (
+        <Empty>
+          <EmptyHeader>
+            <EmptyTitle>No posts found</EmptyTitle>
+            <EmptyDescription>There are no posts to display at this time.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      ) : (
+        posts.map((post) => (
+          <ForumPost
+            key={post.id}
+            post={post}
+            isPopular={!!biggerLikes && post.like_count === biggerLikes}
+            onMeasureChip={handleMeasureChip}
+          />
+        ))
+      )}
     </div>
   )
 }
