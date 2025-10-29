@@ -98,8 +98,15 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               </div>
             </div>
           </div>
-          <div className="bg-accent flex h-32 flex-col gap-4 border-t p-4 pb-6">
-            Deliverables coming soon
+
+          <div className="bg-accent flex h-32 flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4 sm:pb-0">
+            <p className="text-base/6 font-semibold">Deliverables</p>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
+                <p className="text-foreground/50 text-sm/5.5 font-medium">Deliverable 1</p>
+                <p className="text-foreground/50 text-sm/5.5 font-medium">Deliverable 2</p>
+              </div>
+            </div>
           </div>
           <div className="flex w-full flex-col gap-2 self-end px-4 pt-4 pb-3 sm:pb-4">
             <TotalCostField label="Total Budget" value={totalBudget} />
