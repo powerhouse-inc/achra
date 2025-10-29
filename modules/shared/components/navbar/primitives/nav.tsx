@@ -18,7 +18,7 @@ function Nav({ children, className, ...props }: NavProps) {
   return (
     <nav
       className={cn(
-        'hidden items-center gap-2 lg:flex xl:gap-12',
+        'hidden items-center gap-2 xl:flex xl:gap-12',
         {
           'lg:gap-3': hasManyItems,
           'lg:gap-12': !hasManyItems,

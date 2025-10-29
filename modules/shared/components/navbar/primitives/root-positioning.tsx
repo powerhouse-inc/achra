@@ -24,7 +24,7 @@ function RootPositioning({ children, routesWithBlurBackground }: RootPositioning
     <div
       className={cn(
         'fixed top-0 right-0 left-0 z-160 h-24 w-full pb-2',
-        hasBlurBackground ? 'md:backdrop-blur-2xl' : 'md:bg-background',
+        hasBlurBackground ? 'sm:backdrop-blur-2xl' : 'sm:bg-background',
       )}
     >
       {children}

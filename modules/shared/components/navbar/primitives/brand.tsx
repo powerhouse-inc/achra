@@ -14,7 +14,7 @@ export interface BrandAreaProps {
  * Groups Achra logo, network logo, and mobile navigation
  */
 function BrandArea({ children }: BrandAreaProps) {
-  return <div className="flex items-center gap-4">{children}</div>
+  return <div className="flex items-center gap-4 sm:gap-9 xl:gap-4">{children}</div>
 }
 BrandArea.displayName = 'NavbarBrandArea'
 

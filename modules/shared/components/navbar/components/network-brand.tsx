@@ -9,8 +9,8 @@ import { NetworkSpecificBrandSkeleton } from './network-specific-brand-skeleton'
  */
 function NetworkBrand() {
   return (
-    <div className="flex items-center gap-4 md:gap-6" data-brand="network">
-      <div className="text-border bg-primary/5 border-border flex items-center justify-center overflow-hidden border-r px-4 py-4.5 md:rounded-l-2xl md:px-6">
+    <div className="flex items-center gap-4 sm:gap-6" data-brand="network">
+      <div className="text-border bg-primary/5 border-border flex items-center justify-center overflow-hidden border-r px-4 py-4.5 sm:rounded-l-2xl sm:px-6">
         <Link href="/" target="_self" className="cursor-pointer" aria-label="Achra homepage">
           <AchraLogo className="hover:text-primary/50 h-9 w-9 sm:flex" />
         </Link>
