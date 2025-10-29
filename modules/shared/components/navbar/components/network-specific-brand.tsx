@@ -62,7 +62,7 @@ NetworkSpecificBrand.displayName = 'NetworkSpecificBrand'
 function NetworkIcon({ icon, name }: { icon: string | null | undefined; name: string }) {
   const iconSrc = icon ?? '/networks/logos/unknown.png'
 
-  return <Image src={iconSrc} alt={name} width={32} height={32} className="min-w-8 lg:hidden" />
+  return <Image src={iconSrc} alt={name} width={36} height={36} className="min-w-8 lg:hidden" />
 }
 
 /**
