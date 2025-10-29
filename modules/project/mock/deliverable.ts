@@ -1,4 +1,4 @@
-import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { Deliverable } from '@/modules/project/types'
 
 // Mock data
@@ -6,7 +6,8 @@ export const mockDeliverables: Deliverable[] = [
   {
     id: 'D1',
     title: 'Deliverable 1',
-    status: ScopeOfWork_DeliverableSetStatus.InProgress,
+    status: ScopeOfWork_DeliverableStatus.InProgress,
+
     keyResults: [
       {
         id: 'kr1',
@@ -54,7 +55,7 @@ export const mockDeliverables: Deliverable[] = [
   {
     id: 'D2',
     title: 'Deliverable 2',
-    status: ScopeOfWork_DeliverableSetStatus.Canceled,
+    status: ScopeOfWork_DeliverableStatus.Canceled,
     keyResults: [
       {
         id: 'kr7',
@@ -96,7 +97,7 @@ export const mockDeliverables: Deliverable[] = [
   {
     id: 'D3',
     title: 'Deliverable 3',
-    status: ScopeOfWork_DeliverableSetStatus.Todo,
+    status: ScopeOfWork_DeliverableStatus.InProgress,
     keyResults: [
       {
         id: 'kr12',
@@ -132,7 +133,7 @@ export const mockDeliverables: Deliverable[] = [
   {
     id: 'D4',
     title: 'Deliverable 4',
-    status: ScopeOfWork_DeliverableSetStatus.Finished,
+    status: ScopeOfWork_DeliverableStatus.Canceled,
     keyResults: [
       {
         id: 'kr16',
