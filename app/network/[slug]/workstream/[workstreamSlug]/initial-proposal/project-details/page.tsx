@@ -35,7 +35,6 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
-
       <PageContent className="gap-6" variant="with-breadcrumb">
         <Card className="gap-0 p-0">
           <div className="flex flex-col gap-4">
@@ -98,7 +97,6 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               </div>
             </div>
           </div>
-
           <div className="bg-accent flex h-32 flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4 sm:pb-0">
             <p className="text-base/6 font-semibold">Deliverables</p>
             <div className="flex flex-col gap-2">
