@@ -27,7 +27,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
     },
     {
       label: 'PRJ-1 - Front-end Development',
-      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project-details` as Route,
+      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project` as Route,
     },
   ]
   return (
