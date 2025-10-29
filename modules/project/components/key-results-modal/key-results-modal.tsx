@@ -29,11 +29,10 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
     onClose()
     onReset()
   }
-
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="max-h-173.5 w-full max-w-279.5! gap-0 overflow-hidden p-0"
+        className="mb-12 w-full gap-0 overflow-hidden p-0 sm:max-w-xl! md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!"
         showCloseButton={false}
       >
         <DialogHeader className="border-input flex flex-col border-b px-4 py-3">
@@ -87,13 +86,13 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
           </div>
         </DialogHeader>
 
-        <div className="no-scrollbar h-150 overflow-y-auto px-3 pt-4 pb-15">
+        <div className="no-scrollbar h-150 overflow-y-auto sm:px-4 sm:py-3">
           {filteredDeliverables.length === 0 ? (
             <div className="flex h-full items-center justify-center">
               <p className="text-muted-foreground text-lg">Results not found...</p>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 pb-3">
               {filteredDeliverables.map((deliverable) => (
                 <div key={deliverable.id}>
                   <div className="bg-accent mb-3 flex items-center justify-between rounded-md p-2">
@@ -109,7 +108,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                       <DeliverableStatusChip status={deliverable.status} />
                     </div>
                   </div>
-                  <ul className="flex flex-col gap-3 px-4">
+                  <ul className="flex flex-col gap-3 sm:pl-2 md:pl-4 xl:pl-4">
                     {deliverable.keyResults.map((keyResult) => (
                       <KeyResultItem key={keyResult.id} keyResult={keyResult} />
                     ))}

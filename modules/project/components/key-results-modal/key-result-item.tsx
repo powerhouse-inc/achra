@@ -14,7 +14,12 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
   return (
     <li className="border-muted mb-0! flex items-center justify-between gap-2 border-b px-2 pb-2 last:border-b-0">
       <div className="flex items-center gap-1">
-        <span className="bg-foreground h-1.5 w-1.5 shrink-0 rounded-full" />
+        <span
+          className={cn(
+            'h-1.5 w-1.5 shrink-0 rounded-full',
+            keyResult.status ? 'bg-foreground' : 'bg-foreground/50',
+          )}
+        />
         <div className="flex flex-col gap-1">
           <span
             className={cn(
@@ -39,10 +44,12 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
         )}
       </div>
       {keyResult.status && (
-        <div className="flex items-center gap-2">
-          <span className="text-muted-foreground w-fll flex text-sm">{keyResult.url}</span>
-          <Button variant="ghost" size="iconSm">
-            <Copy className="h-3.5 w-3.5" />
+        <div className="flex items-center gap-2 sm:w-30 md:w-48 lg:w-64">
+          <span className="text-muted-foreground w-full truncate text-end text-sm">
+            {keyResult.url}
+          </span>
+          <Button variant="ghost" size="iconXxs">
+            <Copy />
           </Button>
         </div>
       )}
