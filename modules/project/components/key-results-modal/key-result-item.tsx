@@ -39,10 +39,12 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
         )}
       </div>
       {keyResult.status && (
-        <div className="flex items-center gap-2">
-          <span className="text-muted-foreground w-fll flex text-sm">{keyResult.url}</span>
-          <Button variant="ghost" size="iconSm">
-            <Copy className="h-3.5 w-3.5" />
+        <div className="flex items-center gap-2 sm:w-30 md:w-48 lg:w-64">
+          <span className="text-muted-foreground w-full truncate text-end text-sm">
+            {keyResult.url}
+          </span>
+          <Button variant="ghost" size="iconXxs">
+            <Copy />
           </Button>
         </div>
       )}
