@@ -1,4 +1,4 @@
-import type { ScopeOfWork_DeliverableSetStatus } from '../__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export interface KeyResult {
   id: string
@@ -13,7 +13,7 @@ export interface Deliverable {
   title: string
   image: string
   keyResults: KeyResult[]
-  status: ScopeOfWork_DeliverableSetStatus
+  status: ScopeOfWork_DeliverableStatus
   progress: number
   qyt: number
   unitBudget: number

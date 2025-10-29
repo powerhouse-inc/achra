@@ -1,12 +1,12 @@
-import { ArrowRight } from 'lucide-react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { AvatarTitle, MetricCard, ProgressCard, TotalCostField } from '@/modules/project/components'
 
+import { ButtonTriggerKeyResult } from '@/modules/project/components/metric-card/button-trigger-key-result'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import { Button } from '@/modules/shared/components/ui/button'
+
 import { Card } from '@/modules/shared/components/ui/card'
 import type { Route } from 'next'
 
@@ -93,11 +93,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                       <span className="text-foreground/50"> / 12</span>
                     </>
                   }
-                  action={
-                    <Button variant="outline" size="icon">
-                      <ArrowRight className="size-4" />
-                    </Button>
-                  }
+                  action={<ButtonTriggerKeyResult />}
                 />
               </div>
             </div>
