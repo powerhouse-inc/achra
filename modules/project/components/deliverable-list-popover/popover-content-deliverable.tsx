@@ -19,18 +19,21 @@ export function PopoverContentDeliverable({
   className,
 }: PopoverContentDeliverableProps) {
   return (
-    <div className={cn('flex flex-col gap-4', className)}>
-      <h3 className="text-muted-foreground text-sm font-medium">
-        <span className="text-muted-foreground text-sm/5.5 font-semibold">{code}</span> - {title}
-      </h3>
-      <ul className="flex flex-col gap-4">
+    <div className={cn('flex flex-col gap-3', className)}>
+      <div className="flex gap-1">
+        <span className="text-foreground/30 flex text-sm/5.5 font-semibold">{code}</span>
+        <span className="text-sm/5.5 font-semibold">{title}</span>
+      </div>
+      <ul className="flex flex-col gap-4 pl-6">
         {keyResults.map((keyResults) => (
           <li key={keyResults.id}>
             <div className="flex items-start gap-2">
               <span className="bg-foreground mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-foreground text-sm font-medium">{keyResults.title}</span>
+                  <span className="text-foreground text-sm/5.5 font-medium">
+                    {keyResults.title}
+                  </span>
                   <ArrowUpRight className="size-4" />
                 </div>
                 <div className="flex items-center gap-2">
@@ -43,10 +46,10 @@ export function PopoverContentDeliverable({
                       e.preventDefault()
                       e.stopPropagation()
                     }}
-                    className="text-muted-foreground hover:text-foreground &>svg:px-0 h-fit py-0 has-[>svg]:px-0 has-[>svg]:py-0"
+                    className="text-foreground/50 hover:text-foreground &>svg:px-0 h-fit py-0 has-[>svg]:px-0 has-[>svg]:py-0"
                     title="Copy URL"
                   >
-                    <CopyIcon className="size-4" />
+                    <CopyIcon className="size-3" />
                   </Button>
                 </div>
               </div>
