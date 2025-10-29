@@ -1,34 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-interface UseCopyButtonProps {
-  tooltip: string | null
-  copiedTooltip: string | null
+interface UseCopyToClipboardProps {
+  resetDelay?: number
 }
 
-export function useCopyButton({ tooltip, copiedTooltip }: UseCopyButtonProps) {
-  const [currentTooltip, setCurrentTooltip] = useState<string | null>(null)
+export function useCopyToClipboard({ resetDelay = 2000 }: UseCopyToClipboardProps = {}) {
+  const [isCopied, setIsCopied] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
 
-  const handleMouseEnter = () => {
-    setCurrentTooltip(tooltip)
-  }
-  const handleMouseLeave = () => {
-    setCurrentTooltip(null)
-  }
-
-  const handleCopyAddress = async (event: React.MouseEvent<HTMLButtonElement>, value: string) => {
-    event.stopPropagation()
+  const handleCopy = async (value: string) => {
     try {
       await navigator.clipboard.writeText(value)
-      setCurrentTooltip(copiedTooltip)
-    } catch {
-      setCurrentTooltip('Failed to copy')
+      setIsCopied(true)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('Failed to copy'))
+      setIsCopied(false)
     }
   }
 
+  useEffect(() => {
+    if (isCopied) {
+      const timer = setTimeout(() => {
+        setIsCopied(false)
+      }, resetDelay)
+
+      return () => {
+        clearTimeout(timer)
+      }
+    }
+  }, [isCopied, resetDelay])
+
   return {
-    currentTooltip,
-    handleMouseEnter,
-    handleMouseLeave,
-    handleCopyAddress,
+    isCopied,
+    error,
+    handleCopy,
   }
 }
