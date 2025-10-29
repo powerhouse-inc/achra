@@ -45,7 +45,7 @@ function MobileNav() {
         <DropdownMenuTrigger
           aria-label={`Navigation menu - Current: ${activeLinkLabel}`}
           className={cn(
-            'group border-border text-secondary-foreground flex w-37.5 items-center justify-between rounded-lg border px-3 py-2 text-sm',
+            'group border-border text-secondary-foreground flex h-9 w-37.5 items-center justify-between rounded-lg border px-3 py-2 text-sm',
             // focus
             'focus:visible:ring-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none',
           )}
