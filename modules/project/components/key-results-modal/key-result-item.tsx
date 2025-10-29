@@ -41,7 +41,7 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
       {keyResult.status && (
         <div className="flex items-center gap-2">
           <span className="text-muted-foreground w-fll flex text-sm">{keyResult.url}</span>
-          <Button variant="ghost" size="icon" className="h-6 w-6">
+          <Button variant="ghost" size="iconSm">
             <Copy className="h-3.5 w-3.5" />
           </Button>
         </div>

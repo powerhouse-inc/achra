@@ -19,14 +19,13 @@ export function ButtonTriggerKeyResult() {
       >
         <ArrowRight className="size-4" />
       </Button>
-      {isOpen && (
-        <KeyResultsModal
-          isOpen={isOpen}
-          onClose={() => {
-            setIsOpen(false)
-          }}
-        />
-      )}
+
+      <KeyResultsModal
+        isOpen={isOpen}
+        onClose={() => {
+          setIsOpen(false)
+        }}
+      />
     </>
   )
 }

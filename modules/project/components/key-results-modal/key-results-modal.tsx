@@ -33,10 +33,9 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="max-h-[694px] w-full max-w-[1118px]! gap-0 overflow-hidden p-0"
+        className="max-h-173.5 w-full max-w-279.5! gap-0 overflow-hidden p-0"
         showCloseButton={false}
       >
-        {/* Header */}
         <DialogHeader className="border-input flex flex-col border-b px-4 py-3">
           <div className="flex w-full flex-row items-center justify-between">
             <div className="flex items-center gap-2">
@@ -54,8 +53,6 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
               <X className="h-5 w-5" />
             </Button>
           </div>
-
-          {/* Search and Filter Bar */}
           <div className="flex items-center gap-6">
             <div className="relative flex-1">
               <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
@@ -99,7 +96,6 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
             <div className="space-y-3">
               {filteredDeliverables.map((deliverable) => (
                 <div key={deliverable.id}>
-                  {/* Deliverable Header */}
                   <div className="bg-accent mb-3 flex items-center justify-between rounded-md p-2">
                     <div className="flex items-center gap-1">
                       <span className="text-foreground/30 text-sm/4.5 font-semibold">
@@ -113,8 +109,6 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                       <DeliverableStatusChip status={deliverable.status} />
                     </div>
                   </div>
-
-                  {/* Key Results */}
                   <ul className="flex flex-col gap-3 px-4">
                     {deliverable.keyResults.map((keyResult) => (
                       <KeyResultItem key={keyResult.id} keyResult={keyResult} />
