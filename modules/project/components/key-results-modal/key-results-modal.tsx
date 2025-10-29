@@ -29,11 +29,10 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
     onClose()
     onReset()
   }
-  //
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="mb-12 w-full gap-0 overflow-hidden p-0 sm:max-h-158.5! sm:max-w-144! md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!"
+        className="mb-12 w-full gap-0 overflow-hidden p-0 sm:max-w-xl! md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!"
         showCloseButton={false}
       >
         <DialogHeader className="border-input flex flex-col border-b px-4 py-3">

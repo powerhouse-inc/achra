@@ -115,7 +115,7 @@ export const mockDeliverables: Deliverable[] = [
         id: 'kr14',
         title: 'Source code on Powerhouse Github repo',
         status: false,
-        url: 'www.celestia-portfolasdasdasdasdasddio.com',
+        url: 'www.celestia-portfolio.com',
       },
       {
         id: 'kr15',

@@ -14,7 +14,12 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
   return (
     <li className="border-muted mb-0! flex items-center justify-between gap-2 border-b px-2 pb-2 last:border-b-0">
       <div className="flex items-center gap-1">
-        <span className="bg-foreground h-1.5 w-1.5 shrink-0 rounded-full" />
+        <span
+          className={cn(
+            'h-1.5 w-1.5 shrink-0 rounded-full',
+            keyResult.status ? 'bg-foreground' : 'bg-foreground/50',
+          )}
+        />
         <div className="flex flex-col gap-1">
           <span
             className={cn(
