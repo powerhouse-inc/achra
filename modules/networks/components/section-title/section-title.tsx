@@ -13,16 +13,17 @@ export interface SectionTitleProps {
 }
 
 export default function SectionTitle({ title, hash, className }: SectionTitleProps) {
-  const { handleCopyUrl, handleLinkMouseEnter, handleLinkMouseLeave, tooltip } = useSectionTitle()
+  const { handleCopyUrl, handleLinkMouseEnter, handleLinkMouseLeave, tooltip, showTooltip } =
+    useSectionTitle()
 
   return (
     <div className={cn('flex w-fit items-center gap-4', className)} data-hash={hash}>
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
-      <Tooltip open={!!tooltip}>
+      <Tooltip open={showTooltip}>
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            className="text-muted-foreground hover:text-muted-foreground/50 h-fit p-0! hover:bg-transparent"
+            className="text-muted-foreground hover:text-muted-foreground/50 h-fit p-0! hover:bg-transparent dark:hover:bg-transparent"
             onMouseEnter={handleLinkMouseEnter}
             onMouseLeave={handleLinkMouseLeave}
             onClick={() => {

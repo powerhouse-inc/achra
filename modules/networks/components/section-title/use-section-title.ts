@@ -3,13 +3,18 @@ import { useCurrentUrl } from '@/modules/shared/hooks/use-current-url'
 
 export function useSectionTitle() {
   const [tooltip, setTooltip] = useState<string | null>(null)
+  const [showTooltip, setShowTooltip] = useState(false)
   const { copyUrlToClipboard } = useCurrentUrl()
 
   const handleLinkMouseEnter = () => {
     setTooltip('Copy link')
+    setShowTooltip(true)
   }
   const handleLinkMouseLeave = () => {
-    setTooltip(null)
+    setShowTooltip(false)
+    setTimeout(() => {
+      setTooltip(null)
+    }, 300)
   }
 
   const handleCopyUrl = async (hash: string) => {
@@ -26,5 +31,6 @@ export function useSectionTitle() {
     handleLinkMouseEnter,
     handleLinkMouseLeave,
     tooltip,
+    showTooltip,
   }
 }
