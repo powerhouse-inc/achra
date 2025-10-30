@@ -48,7 +48,11 @@ export function WalletsList({ wallets, className }: WalletsListProps) {
                     </Link>
                   </div>
                   <CopyButton.Root value={wallet.address}>
-                    <CopyButton.Tooltip side="top" tooltip="Copy Address" copiedTooltip="Copied!">
+                    <CopyButton.Tooltip
+                      side="bottom"
+                      tooltip="Copy Address"
+                      copiedTooltip="Copied!"
+                    >
                       <CopyButton.Trigger variant="icon" size="iconXsm">
                         <Copy />
                       </CopyButton.Trigger>

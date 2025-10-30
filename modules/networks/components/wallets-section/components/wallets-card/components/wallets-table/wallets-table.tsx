@@ -101,7 +101,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
                   </Link>
                 </div>
                 <CopyButton.Root value={wallet.address}>
-                  <CopyButton.Tooltip tooltip="Copy Address" copiedTooltip="Copied!">
+                  <CopyButton.Tooltip side="bottom" tooltip="Copy Address" copiedTooltip="Copied!">
                     <CopyButton.Trigger variant="icon" size="iconXsm">
                       <Copy />
                     </CopyButton.Trigger>
