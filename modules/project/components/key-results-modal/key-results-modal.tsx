@@ -1,5 +1,6 @@
-import { Search, X } from 'lucide-react'
+import { ArrowLeft, Search, X } from 'lucide-react'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
+import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Dialog,
@@ -10,7 +11,7 @@ import {
 import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
 import { mockDeliverables } from '../../mock/deliverable'
-import { StatusSelectDeliverable } from './key-resul-filters'
+import { StatusSelectDelivarableDrawer, StatusSelectDeliverable } from './key-result-filters'
 import { KeyResultItem } from './key-result-item'
 import useDeliverableFilters from './useDeliverableFilters'
 
@@ -32,22 +33,36 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className="mb-12 w-full gap-0 overflow-hidden p-0 sm:max-w-xl! md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!"
+        className={cn(
+          // mobile
+          'no-scrollbar top-0 left-0 z-160 mb-0 h-screen max-h-full! w-screen max-w-full translate-x-0 translate-y-0 content-start items-start gap-0 overflow-hidden overflow-y-auto rounded-none p-0',
+          'sm:top-[50%] sm:left-[50%] sm:mb-12 sm:h-auto sm:w-full sm:max-w-xl! sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!',
+        )}
         showCloseButton={false}
       >
         <DialogHeader className="border-input flex flex-col border-b px-4 py-3">
           <div className="flex w-full flex-row items-center justify-between">
-            <div className="flex items-center gap-2">
-              <DialogTitle className="text-foreground text-lg/[120%] font-bold">
+            <div className="flex items-start gap-2 sm:items-center">
+              <Button
+                variant="outline"
+                size="icon"
+                className="flex items-center sm:hidden"
+                onClick={onClose}
+              >
+                <ArrowLeft className="size-4" />
+              </Button>
+              <DialogTitle className="text-foreground flex flex-col text-lg/[120%] font-bold sm:flex-row sm:gap-2">
                 Front-end Development
+                <p className="text-foreground/50 text-start text-base/6 font-semibold sm:text-start">
+                  Key Results
+                </p>
               </DialogTitle>
-              <p className="text-foreground/50 text-base/6 font-semibold">Key Results</p>
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="text-popover-foreground hover:text-popover-foreground/80"
+              className="text-popover-foreground hover:text-popover-foreground/80 hidden sm:flex"
             >
               <X className="h-5 w-5" />
             </Button>
@@ -76,17 +91,22 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                 )}
               />
             </div>
-            <div>
+            <div className="hidden sm:block">
               <StatusSelectDeliverable
                 statuses={statuses}
                 setStatuses={setStatuses}
                 className="w-56"
               />
             </div>
+            <div className="flex sm:hidden">
+              <FilterDrawer className="z-200" onReset={onReset}>
+                <StatusSelectDelivarableDrawer statuses={statuses} setStatuses={setStatuses} />
+              </FilterDrawer>
+            </div>
           </div>
         </DialogHeader>
 
-        <div className="no-scrollbar h-150 overflow-y-auto sm:px-4 sm:py-3">
+        <div className="no-scrollbar overflow-y-auto px-4 py-3 sm:h-150 sm:px-4 sm:py-3">
           {filteredDeliverables.length === 0 ? (
             <div className="flex h-full items-center justify-center">
               <p className="text-muted-foreground text-lg">Results not found...</p>
