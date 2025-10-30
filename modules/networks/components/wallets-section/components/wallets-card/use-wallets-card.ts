@@ -14,8 +14,6 @@ export interface ProccesedWallets extends Wallet {
 
 export function useWalletsCard({ wallets }: UseWalletsCardProps) {
   const [toogleWalletTable, setToogleWalletTable] = useState(true)
-  const [tooltip, setTooltip] = useState<string | null>(null)
-  const [hoveredRowIndex, setHoveredRowIndex] = useState<number | null>(null)
 
   const proccesedWallets: ProccesedWallets[] = useMemo(() => {
     return wallets.map((wallet) => ({
@@ -24,25 +22,6 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
       shortAddress: addressShortener(wallet.address),
     }))
   }, [wallets])
-
-  const handleCopyMouseEnter = (index: number) => {
-    setHoveredRowIndex(index)
-    setTooltip('Copy Address.')
-  }
-  const handleCopyMouseLeave = () => {
-    setHoveredRowIndex(null)
-    setTooltip(null)
-  }
-
-  const handleCopyAddress = async (event: React.MouseEvent<HTMLButtonElement>, address: string) => {
-    event.stopPropagation()
-    try {
-      await navigator.clipboard.writeText(address)
-      setTooltip('Copied!')
-    } catch {
-      setTooltip('Failed to copy URL')
-    }
-  }
 
   const handleToogleWalletTable = () => {
     setToogleWalletTable(!toogleWalletTable)
@@ -62,11 +41,6 @@ export function useWalletsCard({ wallets }: UseWalletsCardProps) {
     toogleWalletTable,
     usdsTotalBalance,
     skyTotalBalance,
-    tooltip,
-    hoveredRowIndex,
     handleToogleWalletTable,
-    handleCopyAddress,
-    handleCopyMouseEnter,
-    handleCopyMouseLeave,
   }
 }

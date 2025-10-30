@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCopyToClipboard as useCopyToClipboardHook } from 'usehooks-ts'
 
 interface UseCopyToClipboardProps {
   resetDelay?: number
 }
 export function useCopyToClipboard({ resetDelay = 2000 }: UseCopyToClipboardProps = {}) {
-  const [copiedText, copy] = useCopyToClipboardHook()
+  const [, copy] = useCopyToClipboardHook()
+  const [isCopied, setIsCopied] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const previousHoverRef = useRef(false)
@@ -13,35 +14,41 @@ export function useCopyToClipboard({ resetDelay = 2000 }: UseCopyToClipboardProp
   const handleCopy = async (value: string): Promise<void> => {
     try {
       await copy(value)
+      setIsCopied(true)
       setError(null)
     } catch (err) {
+      setIsCopied(false)
       setError(err instanceof Error ? err : new Error('Failed to copy'))
     }
   }
 
-  useEffect(() => {
-    if (isHovered && !previousHoverRef.current && !!copiedText) {
-      void copy('')
-    }
-    previousHoverRef.current = isHovered
-  }, [isHovered, copiedText, copy])
+  const handleSetHovered = useCallback(
+    (hovered: boolean) => {
+      if (hovered && !previousHoverRef.current && isCopied) {
+        setIsCopied(false)
+      }
+      previousHoverRef.current = hovered
+      setIsHovered(hovered)
+    },
+    [isCopied],
+  )
 
   useEffect(() => {
-    if (!!copiedText && !isHovered) {
+    if (isCopied && !isHovered) {
       const timer = setTimeout(() => {
-        void copy('')
+        setIsCopied(false)
       }, resetDelay)
       return () => {
         clearTimeout(timer)
       }
     }
-  }, [copiedText, isHovered, copy, resetDelay])
+  }, [isCopied, isHovered, resetDelay])
 
   return {
-    isCopied: !!copiedText,
+    isCopied,
     error,
     handleCopy,
-    setIsHovered,
+    setIsHovered: handleSetHovered,
     isHovered,
   }
 }

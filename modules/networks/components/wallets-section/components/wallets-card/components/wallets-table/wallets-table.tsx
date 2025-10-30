@@ -17,11 +17,6 @@ import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsTableProps {
   wallets: ProccesedWallets[]
-  tooltip: string | null
-  hoveredRowIndex: number | null
-  onCopyAddress: (event: React.MouseEvent<HTMLButtonElement>, address: string) => void
-  onCopyMouseEnter: (index: number) => void
-  onCopyMouseLeave: () => void
   className?: string
 }
 
