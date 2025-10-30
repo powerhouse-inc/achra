@@ -12,9 +12,6 @@ export function useSectionTitle() {
   }
   const handleLinkMouseLeave = () => {
     setShowTooltip(false)
-    setTimeout(() => {
-      setTooltip(null)
-    }, 300)
   }
 
   const handleCopyUrl = async (hash: string) => {
