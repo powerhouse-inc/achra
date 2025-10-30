@@ -21,7 +21,7 @@ export const Basic: Story = {
       {
         id: '1',
         title: 'RWA Portfolio conceptuual wireframes ',
-        url: 'RWA Portfolio conceptuual wireframes ',
+        url: 'www.examplelink.com',
         status: true,
       },
       {

@@ -1,6 +1,6 @@
 'use client'
-import { ArrowUpRight, CopyIcon } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
+import { ArrowUpRight } from 'lucide-react'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { cn } from '@/modules/shared/lib/utils'
 import type { KeyResult } from '../../types'
 
@@ -25,32 +25,24 @@ export function PopoverContentDeliverable({
         <span className="text-sm/5.5 font-semibold">{title}</span>
       </div>
       <ul className="flex flex-col gap-4 pl-6">
-        {keyResults.map((keyResults) => (
-          <li key={keyResults.id}>
+        {keyResults.map((keyResult) => (
+          <li key={keyResult.id}>
             <div className="flex items-start gap-2">
               <span className="bg-foreground mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-foreground text-sm/5.5 font-medium">
-                    {keyResults.title}
-                  </span>
+                  <span className="text-foreground text-sm/5.5 font-medium">{keyResult.title}</span>
                   <ArrowUpRight className="size-4" />
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   <span className="text-foreground/50 text-xs/4.5 font-medium">
-                    {keyResults.url}
+                    {keyResult.url}
                   </span>
-                  <Button
-                    variant="ghost"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                    }}
-                    className="text-foreground/50 hover:text-foreground &>svg:px-0 h-fit py-0 has-[>svg]:px-0 has-[>svg]:py-0"
-                    title="Copy URL"
-                  >
-                    <CopyIcon className="size-3" />
-                  </Button>
+                  <CopyButton value={keyResult.url}>
+                    <CopyTrigger>
+                      <CopyAnimatedIcon className="size-3" />
+                    </CopyTrigger>
+                  </CopyButton>
                 </div>
               </div>
             </div>
