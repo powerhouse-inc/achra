@@ -1,4 +1,5 @@
 import { usePathname } from 'next/navigation'
+import { useCopyToClipboard } from 'usehooks-ts'
 
 /**
  * Hook to get the current URL with optional hash fragment
@@ -6,7 +7,7 @@ import { usePathname } from 'next/navigation'
  */
 export function useCurrentUrl() {
   const pathname = usePathname()
-
+  const [, copy] = useCopyToClipboard()
   const getUrlWithHash = (hash?: string) => {
     if (typeof window === 'undefined') return ''
 
@@ -18,7 +19,7 @@ export function useCurrentUrl() {
   const copyUrlToClipboard = async (hash?: string) => {
     try {
       const url = getUrlWithHash(hash)
-      await navigator.clipboard.writeText(url)
+      await copy(url)
       return { success: true, url }
     } catch (error) {
       return { success: false, error }
