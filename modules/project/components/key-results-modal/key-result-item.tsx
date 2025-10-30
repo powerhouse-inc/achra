@@ -12,7 +12,7 @@ interface KeyResultItemProps {
 
 export function KeyResultItem({ keyResult }: KeyResultItemProps) {
   return (
-    <li className="border-muted mb-0! flex items-center justify-between gap-2 border-b px-2 pb-2 last:border-b-0">
+    <li className="border-muted mb-0! flex flex-wrap items-center justify-between gap-x-2 border-b px-2 pb-2 last:border-b-0 sm:flex-nowrap sm:gap-2">
       <div className="flex items-center gap-1">
         <span
           className={cn(

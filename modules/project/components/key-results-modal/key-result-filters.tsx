@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
+import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -83,4 +84,22 @@ function StatusSelectDeliverable({ statuses, setStatuses, className }: StatusSel
   )
 }
 
-export { StatusSelectDeliverable }
+function StatusSelectDelivarableDrawer({ statuses, setStatuses }: StatusSelectProps) {
+  const handleChange = (values: string[]) => {
+    void setStatuses(values as ScopeOfWork_DeliverableStatus[])
+  }
+
+  return (
+    <DrawerSelect
+      value={statuses}
+      onChange={handleChange}
+      label="Statuses"
+      options={statusOptions}
+      multiselect={true}
+      enableSelectAll={true}
+      selectAllLabel="Select All"
+    />
+  )
+}
+
+export { StatusSelectDeliverable, StatusSelectDelivarableDrawer }

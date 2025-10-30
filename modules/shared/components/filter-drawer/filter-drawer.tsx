@@ -15,9 +15,10 @@ import { Button } from '../ui/button'
 interface FilterDrawerProps extends React.PropsWithChildren {
   filterTrigger?: React.ReactNode
   onReset?: () => void
+  className?: string
 }
 
-function FilterDrawer({ children, onReset, filterTrigger }: FilterDrawerProps) {
+function FilterDrawer({ children, onReset, filterTrigger, className }: FilterDrawerProps) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -27,7 +28,7 @@ function FilterDrawer({ children, onReset, filterTrigger }: FilterDrawerProps) {
           </Button>
         )}
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className={className}>
         <VisuallyHidden>
           <DrawerTitle>Filters</DrawerTitle>
         </VisuallyHidden>
