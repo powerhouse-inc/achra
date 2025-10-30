@@ -24,14 +24,14 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
       case ScopeOfWork_DeliverableStatus.Blocked:
         return {
           label: 'Blocked',
-          bgColor: 'bg-slate-50', // TODO: replace colors
-          textColor: 'text-gray-500',
+          bgColor: 'bg-destructive/30',
+          textColor: 'text-destructive',
         }
       case ScopeOfWork_DeliverableStatus.Canceled:
         return {
           label: 'Canceled',
-          bgColor: 'bg-slate-50', // TODO: replace colors
-          textColor: 'text-gray-500',
+          bgColor: 'bg-destructive/30',
+          textColor: 'text-destructive',
         }
       case ScopeOfWork_DeliverableStatus.Draft:
       case ScopeOfWork_DeliverableStatus.Todo:
@@ -43,8 +43,8 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
       case ScopeOfWork_DeliverableStatus.WontDo:
         return {
           label: "Won't do",
-          bgColor: 'bg-gray-100', // TODO: replace colors
-          textColor: 'text-gray-600',
+          bgColor: 'bg-muted',
+          textColor: 'text-muted-foreground',
         }
       default:
         return {
