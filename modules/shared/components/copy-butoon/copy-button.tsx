@@ -79,13 +79,7 @@ function TooltipWrapper({
 
   return (
     <Tooltip open={isHovered}>
-      <TooltipTrigger
-        asChild
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onPointerEnter={handleMouseEnter}
-        onPointerLeave={handleMouseLeave}
-      >
+      <TooltipTrigger asChild onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {children}
       </TooltipTrigger>
       {tooltipText && (
