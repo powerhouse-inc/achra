@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CopyButton } from '@/modules/shared/components/copy-butoon/copy-button'
@@ -52,7 +52,13 @@ export function WalletsList({ wallets, className }: WalletsListProps) {
                       {wallet.shortAddress}
                     </Link>
                   </div>
-                  <CopyButton value={wallet.address} tooltip="Copy Address." />
+                  <CopyButton.Root value={wallet.address}>
+                    <CopyButton.Tooltip side="top" tooltip="Copy Address." copiedTooltip="Copied!">
+                      <CopyButton.Trigger variant="icon" size="iconXsm">
+                        <Copy />
+                      </CopyButton.Trigger>
+                    </CopyButton.Tooltip>
+                  </CopyButton.Root>
                 </div>
               </div>
             </div>

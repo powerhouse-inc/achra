@@ -1,39 +1,47 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useCopyToClipboard as useCopyToClipboardHook } from 'usehooks-ts'
 
 interface UseCopyToClipboardProps {
   resetDelay?: number
 }
-
 export function useCopyToClipboard({ resetDelay = 2000 }: UseCopyToClipboardProps = {}) {
-  const [isCopied, setIsCopied] = useState(false)
+  const [copiedText, copy] = useCopyToClipboardHook()
+  const [isHovered, setIsHovered] = useState(false)
   const [error, setError] = useState<Error | null>(null)
+  const previousHoverRef = useRef(false)
 
-  const handleCopy = async (value: string) => {
+  const handleCopy = async (value: string): Promise<void> => {
     try {
-      await navigator.clipboard.writeText(value)
-      setIsCopied(true)
+      await copy(value)
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Failed to copy'))
-      setIsCopied(false)
     }
   }
 
   useEffect(() => {
-    if (isCopied) {
-      const timer = setTimeout(() => {
-        setIsCopied(false)
-      }, resetDelay)
+    if (isHovered && !previousHoverRef.current && !!copiedText) {
+      void copy('')
+    }
+    previousHoverRef.current = isHovered
+  }, [isHovered, copiedText, copy])
 
+  useEffect(() => {
+    if (!!copiedText && !isHovered) {
+      const timer = setTimeout(() => {
+        void copy('')
+      }, resetDelay)
       return () => {
         clearTimeout(timer)
       }
     }
-  }, [isCopied, resetDelay])
+  }, [copiedText, isHovered, copy, resetDelay])
 
   return {
-    isCopied,
+    isCopied: !!copiedText,
     error,
     handleCopy,
+    setIsHovered,
+    isHovered,
   }
 }
