@@ -1,6 +1,6 @@
-import { Copy, ExternalLink } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/modules/shared/components/ui/button'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { cn } from '@/modules/shared/lib/utils'
 import { KeyResultStatusChip } from '../key-result-status/key-result-status'
 import type { KeyResult } from '../../types'
@@ -48,9 +48,11 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
           <span className="text-muted-foreground w-full truncate text-end text-sm">
             {keyResult.url}
           </span>
-          <Button variant="ghost" size="iconXxs">
-            <Copy />
-          </Button>
+          <CopyButton value={keyResult.url}>
+            <CopyTrigger>
+              <CopyAnimatedIcon className="size-4" />
+            </CopyTrigger>
+          </CopyButton>
         </div>
       )}
     </li>
