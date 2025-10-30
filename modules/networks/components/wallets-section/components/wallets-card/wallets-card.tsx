@@ -25,13 +25,8 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
     toogleWalletTable,
     usdsTotalBalance,
     skyTotalBalance,
-    hoveredRowIndex,
-    tooltip,
     proccesedWallets,
     handleToogleWalletTable,
-    handleCopyMouseEnter,
-    handleCopyMouseLeave,
-    handleCopyAddress,
   } = useWalletsCard({ wallets })
   return (
     <StripedCard className={cn('w-full', className)}>
@@ -80,28 +75,8 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
             marginBottom: { duration: 0.3, ease: 'easeInOut' },
           }}
         >
-          <WalletsTable
-            wallets={proccesedWallets}
-            tooltip={tooltip}
-            hoveredRowIndex={hoveredRowIndex}
-            className="hidden md:block"
-            onCopyAddress={(event, address) => {
-              void handleCopyAddress(event, address)
-            }}
-            onCopyMouseEnter={handleCopyMouseEnter}
-            onCopyMouseLeave={handleCopyMouseLeave}
-          />
-          <WalletsList
-            wallets={proccesedWallets}
-            tooltip={tooltip}
-            hoveredRowIndex={hoveredRowIndex}
-            className="block md:hidden"
-            onCopyAddress={(event, address) => {
-              void handleCopyAddress(event, address)
-            }}
-            onCopyMouseEnter={handleCopyMouseEnter}
-            onCopyMouseLeave={handleCopyMouseLeave}
-          />
+          <WalletsTable wallets={proccesedWallets} className="hidden md:block" />
+          <WalletsList wallets={proccesedWallets} className="block md:hidden" />
         </motion.div>
       </StripedCardContent>
     </StripedCard>
