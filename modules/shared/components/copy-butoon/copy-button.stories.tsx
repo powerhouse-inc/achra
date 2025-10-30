@@ -1,16 +1,16 @@
 import { CheckCircle, Copy } from 'lucide-react'
-import { CopyButton } from './copy-button'
+import { CopyAnimatedIcon, CopyButton, CopyTooltip, CopyTrigger } from './copy-button'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
-const meta: Meta<typeof CopyButton.Root> = {
+const meta: Meta<typeof CopyButton> = {
   title: 'Shared/Components/CopyButton',
-  component: CopyButton.Root,
+  component: CopyButton,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'A flexible, composable copy-to-clipboard button component that provides visual feedback through tooltips and animated icons. Built with a composition pattern for maximum flexibility, allowing you to mix and match features as needed.\n\n**Composition Pattern:**\n- `CopyButton.Root` - Required wrapper that provides context and manages copy state\n- `CopyButton.Trigger` - The clickable button element that triggers the copy action\n- `CopyButton.Tooltip` - Optional wrapper that adds tooltip feedback (use with any child content)\n- `CopyButton.AnimatedIcon` - Optional animated icon that transitions between Copy and a custom icon (defaults to Check). Accepts a `copiedIcon` prop to customize the copied state icon\n\nCombine these subcomponents to create a clipboard copy button with custom icon feedback.',
+          'A flexible, composable copy-to-clipboard button component that provides visual feedback through tooltips and animated icons. Built with a composition pattern for maximum flexibility, allowing you to mix and match features as needed.\n\n**Composition Pattern:**\n- `CopyButton.Root` - Required wrapper that provides context and manages copy state\n- `CopyButton.Trigger` - The clickable element that triggers the copy action (renders a Button by default)\n- `CopyButton.Tooltip` - Optional wrapper that adds tooltip feedback (use with any child content)\n- `CopyButton.AnimatedIcon` - Optional animated icon that transitions between Copy and a custom icon (defaults to Check). Accepts a `copiedIcon` prop to customize the copied state icon\n\n**Need something other than a button?** Set `asChild` on `CopyButton.Trigger` to render any tag or component (e.g. `span`, `a`, custom components). All `Button` props (like `variant`, `size`, `onClick`) are forwarded to the child via Radix Slot, so styles and behavior are preserved.\n\nCombine these subcomponents to create a clipboard copy button with custom icon feedback.',
       },
     },
   },
@@ -29,7 +29,7 @@ const meta: Meta<typeof CopyButton.Root> = {
 }
 
 export default meta
-type Story = StoryObj<typeof CopyButton.Root>
+type Story = StoryObj<typeof CopyButton>
 
 /**
  * Copy button with tooltip feedback but without icon animation.
@@ -38,13 +38,13 @@ type Story = StoryObj<typeof CopyButton.Root>
  */
 export const WithTooltip: Story = {
   render: (args) => (
-    <CopyButton.Root {...args}>
-      <CopyButton.Tooltip tooltip="Copy" copiedTooltip="Copied!">
-        <CopyButton.Trigger>
+    <CopyButton {...args}>
+      <CopyTooltip tooltip="Copy" copiedTooltip="Copied!">
+        <CopyTrigger>
           <Copy />
-        </CopyButton.Trigger>
-      </CopyButton.Tooltip>
-    </CopyButton.Root>
+        </CopyTrigger>
+      </CopyTooltip>
+    </CopyButton>
   ),
   args: {
     value: '0x1234567890abcdef1234567890abcdef12345678',
@@ -58,11 +58,11 @@ export const WithTooltip: Story = {
  */
 export const WithIconChange: Story = {
   render: (args) => (
-    <CopyButton.Root {...args}>
-      <CopyButton.Trigger>
-        <CopyButton.AnimatedIcon className="size-4" />
-      </CopyButton.Trigger>
-    </CopyButton.Root>
+    <CopyButton {...args}>
+      <CopyTrigger>
+        <CopyAnimatedIcon className="size-4" />
+      </CopyTrigger>
+    </CopyButton>
   ),
   args: {
     value: '0x1234567890abcdef1234567890abcdef12345679',
@@ -76,13 +76,32 @@ export const WithIconChange: Story = {
  */
 export const WithCustomCopiedIcon: Story = {
   render: (args) => (
-    <CopyButton.Root {...args}>
-      <CopyButton.Trigger>
-        <CopyButton.AnimatedIcon className="size-4" copiedIcon={CheckCircle} />
-      </CopyButton.Trigger>
-    </CopyButton.Root>
+    <CopyButton {...args}>
+      <CopyTrigger>
+        <CopyAnimatedIcon className="size-4" copiedIcon={CheckCircle} />
+      </CopyTrigger>
+    </CopyButton>
   ),
   args: {
     value: '0x1234567890abcdef1234567890abcdef12345680',
+  },
+}
+
+/**
+ * Demonstrates rendering a non-button element using `asChild`.
+ * All Button props are forwarded to the child via Slot, preserving styles and behavior.
+ */
+export const AsChildWithCustomElement: Story = {
+  render: (args) => (
+    <CopyButton {...args}>
+      <CopyTooltip tooltip="Copy" copiedTooltip="Copied!">
+        <CopyTrigger asChild variant="outline" size="sm">
+          <span className="inline-flex items-center gap-1.5 select-none">Copy address</span>
+        </CopyTrigger>
+      </CopyTooltip>
+    </CopyButton>
+  ),
+  args: {
+    value: '0x1234567890abcdef1234567890abcdef12345681',
   },
 }

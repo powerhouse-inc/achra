@@ -6,9 +6,9 @@ import React, { createContext, useContext } from 'react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import { Button } from '../ui/button'
-import { useCopyToClipboard } from './use-copy-button'
+import { useCopyButton } from './useCopyButton'
 
-interface CopyButtonContextValue extends ReturnType<typeof useCopyToClipboard> {
+interface CopyButtonContextValue extends ReturnType<typeof useCopyButton> {
   value: string
 }
 
@@ -17,24 +17,24 @@ const CopyButtonContext = createContext<CopyButtonContextValue | null>(null)
 function useCopyButtonContext() {
   const context = useContext<CopyButtonContextValue | null>(CopyButtonContext)
   if (!context) {
-    throw new Error('CopyButton components must be used within a <CopyButton.Root>')
+    throw new Error('CopyButton components must be used within a <CopyButton>')
   }
   return context
 }
 
 /**
- * @name CopyButton.Root
+ * @name CopyButton
  * @description
- * Root component that initializes the state and provides the context.
+ * Initializes the state and provides the context for its subcomponents.
  */
-interface RootProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface CopyButtonProps extends React.HTMLAttributes<HTMLSpanElement> {
   value: string
   resetDelay?: number
   children: React.ReactNode
 }
 
-function Root({ value, resetDelay, children, ...props }: RootProps) {
-  const clipboardState = useCopyToClipboard({ resetDelay })
+function CopyButton({ value, resetDelay, children, ...props }: CopyButtonProps) {
+  const clipboardState = useCopyButton({ resetDelay })
   const contextValue = { ...clipboardState, value }
 
   return (
@@ -47,25 +47,24 @@ function Root({ value, resetDelay, children, ...props }: RootProps) {
 }
 
 /**
- * @name CopyButton.Tooltip
+ * @name CopyTooltip
  * @description Wraps its child with a Tooltip that reacts to the copy state.
  * Accepts all props of TooltipContent from ShadCN/UI.
  */
-interface TooltipWrapperProps
-  extends Omit<React.ComponentProps<typeof TooltipContent>, 'children'> {
+interface CopyTooltipProps extends Omit<React.ComponentProps<typeof TooltipContent>, 'children'> {
   tooltip?: string
   copiedTooltip?: string
   children: React.ReactNode
   className?: string
 }
 
-function TooltipWrapper({
+function CopyTooltip({
   tooltip = 'Copy',
   copiedTooltip = 'Copied!',
   children,
   className,
   ...props
-}: TooltipWrapperProps) {
+}: CopyTooltipProps) {
   const { isCopied, isHovered, setIsHovered } = useCopyButtonContext()
   const tooltipText = isCopied ? copiedTooltip : tooltip
 
@@ -98,7 +97,7 @@ function TooltipWrapper({
 }
 
 /**
- * @name CopyButton.Trigger
+ * @name CopyTrigger
  * @description The button that triggers the copy action.
  * Accepts all props of a Button from ShadCN/UI.
  */
@@ -119,10 +118,10 @@ const Trigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof 
     )
   },
 )
-Trigger.displayName = 'CopyButton.Trigger'
+Trigger.displayName = 'CopyTrigger'
 
 /**
- * @name CopyButton.AnimatedIcon
+ * @name CopyAnimatedIcon
  * @description
  * Shows an icon that animates from 'Copy' to a custom icon (defaults to 'Check')
  * when the state changes to copied.
@@ -161,9 +160,4 @@ function AnimatedIcon({ copiedIcon: CopiedIcon = Check, ...props }: AnimatedIcon
   )
 }
 
-export const CopyButton = {
-  Root,
-  Tooltip: TooltipWrapper,
-  Trigger,
-  AnimatedIcon,
-}
+export { CopyButton, CopyTooltip, Trigger as CopyTrigger, AnimatedIcon as CopyAnimatedIcon }

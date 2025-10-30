@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useCopyToClipboard as useCopyToClipboardHook } from 'usehooks-ts'
+import { useCopyToClipboard } from 'usehooks-ts'
 
 interface UseCopyToClipboardProps {
   resetDelay?: number
 }
-export function useCopyToClipboard({ resetDelay = 2000 }: UseCopyToClipboardProps = {}) {
-  const [, copy] = useCopyToClipboardHook()
+export function useCopyButton({ resetDelay = 2000 }: UseCopyToClipboardProps = {}) {
+  const [, copy] = useCopyToClipboard()
   const [isCopied, setIsCopied] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [error, setError] = useState<Error | null>(null)

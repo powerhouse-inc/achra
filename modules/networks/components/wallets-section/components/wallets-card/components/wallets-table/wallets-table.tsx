@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpDown, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CopyButton } from '@/modules/shared/components/copy-butoon'
+import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,
@@ -100,13 +100,13 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
                     {wallet.shortAddress}
                   </Link>
                 </div>
-                <CopyButton.Root value={wallet.address}>
-                  <CopyButton.Tooltip side="bottom" tooltip="Copy Address" copiedTooltip="Copied!">
-                    <CopyButton.Trigger variant="icon" size="iconXsm">
+                <CopyButton value={wallet.address}>
+                  <CopyTooltip side="bottom" tooltip="Copy Address" copiedTooltip="Copied!">
+                    <CopyTrigger variant="icon" size="iconXsm">
                       <Copy />
-                    </CopyButton.Trigger>
-                  </CopyButton.Tooltip>
-                </CopyButton.Root>
+                    </CopyTrigger>
+                  </CopyTooltip>
+                </CopyButton>
               </div>
             </TableCell>
             <TableCell className="inline-block h-fit w-[24%] p-0! text-right">
