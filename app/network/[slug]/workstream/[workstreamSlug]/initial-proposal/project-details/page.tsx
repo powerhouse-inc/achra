@@ -1,7 +1,9 @@
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { AvatarTitle, MetricCard, ProgressCard, TotalCostField } from '@/modules/project/components'
+import { DeliverablesCard } from '@/modules/project/components/deliverables-card'
 
 import { ButtonTriggerKeyResult } from '@/modules/project/components/metric-card/button-trigger-key-result'
+import { mockDeliverables } from '@/modules/project/mock/deliverable'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
@@ -97,13 +99,10 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               </div>
             </div>
           </div>
-          <div className="bg-accent flex h-32 flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4 sm:pb-0">
+          <div className="bg-accent flex flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4 sm:pb-0">
             <p className="text-base/6 font-semibold">Deliverables</p>
             <div className="flex flex-col gap-2">
-              <div className="flex flex-col gap-2">
-                <p className="text-foreground/50 text-sm/5.5 font-medium">Deliverable 1</p>
-                <p className="text-foreground/50 text-sm/5.5 font-medium">Deliverable 2</p>
-              </div>
+              <DeliverablesCard deliverables={mockDeliverables} />
             </div>
           </div>
           <div className="flex w-full flex-col gap-2 self-end px-4 pt-4 pb-3 sm:pb-4">

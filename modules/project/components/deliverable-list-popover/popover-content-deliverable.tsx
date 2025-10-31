@@ -1,13 +1,13 @@
 'use client'
 import { ArrowUpRight } from 'lucide-react'
+import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { cn } from '@/modules/shared/lib/utils'
-import type { KeyResult } from '../../types'
 
 interface PopoverContentDeliverableProps {
   title: string
   code: string
-  keyResults: KeyResult[]
+  keyResults: ScopeOfWork_KeyResult[]
   count?: number
   className?: string
 }
@@ -36,9 +36,9 @@ export function PopoverContentDeliverable({
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="text-foreground/50 text-xs/4.5 font-medium">
-                    {keyResult.url}
+                    {keyResult.link}
                   </span>
-                  <CopyButton value={keyResult.url}>
+                  <CopyButton value={keyResult.link}>
                     <CopyTrigger>
                       <CopyAnimatedIcon className="size-3" />
                     </CopyTrigger>
