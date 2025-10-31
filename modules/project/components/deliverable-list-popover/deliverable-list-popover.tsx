@@ -1,14 +1,14 @@
 import { Link } from 'lucide-react'
+import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shared/components/ui/popover'
 import { cn } from '@/modules/shared/lib/utils'
 import { PopoverContentDeliverable } from './popover-content-deliverable'
-import type { KeyResult } from '../../types'
 
 interface DeliverableListPopoverProps {
   title: string
   code: string
-  keyResults: KeyResult[]
+  keyResults: ScopeOfWork_KeyResult[]
   count?: number
   className?: string
 }

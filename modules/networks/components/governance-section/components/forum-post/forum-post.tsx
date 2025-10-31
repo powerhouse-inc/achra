@@ -4,20 +4,18 @@ import type { Topic } from '@/modules/networks/lib/fetch-forum-posts'
 import { Button } from '@/modules/shared/components/ui/button'
 import ForumInfoChip from '../forum-info-chip/forum-info-chip'
 import { Dot, forumCategories } from '../forum-overview/categories'
-import type { MeasureChipParams } from '../forum-list/forum-list'
 
 interface ForumPostProps {
   post: Topic
   isPopular?: boolean
-  onMeasureChip?: (params: MeasureChipParams) => void
 }
 
-function ForumPost({ post, isPopular = false, onMeasureChip }: ForumPostProps) {
+function ForumPost({ post, isPopular = false }: ForumPostProps) {
   const date = DateTime.utc().diff(DateTime.fromISO(post.created_at), 'days').days
   const category = forumCategories.find((c) => c.id === post.category_id)
 
   return (
-    <div className="bg-popover border-border grid grid-cols-1 gap-2 rounded-xl border p-2 md:grid-cols-[1fr_49%] md:gap-0 md:shadow-none lg:py-4 xl:pl-4 xl:md:grid-cols-[1fr_41%] 2xl:px-4">
+    <div className="bg-popover border-border grid grid-cols-1 gap-2 rounded-xl border p-2 md:grid-cols-[1fr_1fr] md:shadow-none lg:grid-cols-[1fr_46%] lg:py-4 xl:pl-4 xl:md:grid-cols-[1fr_41%] 2xl:px-4">
       <div className="flex w-full flex-col gap-2 pb-2 md:pb-0">
         <div className="text-foreground text-xs/4.5 font-medium lg:text-sm/5.5 lg:font-semibold xl:text-base/6">
           {post.title}
@@ -46,23 +44,14 @@ function ForumPost({ post, isPopular = false, onMeasureChip }: ForumPostProps) {
         </div>
       </div>
       <div className="flex w-full items-center gap-2 pt-2 md:justify-end md:pt-0 lg:gap-4">
-        <div className="w-full md:w-fit md:py-2">
-          <ForumInfoChip
-            type="likes"
-            value={post.like_count}
-            popular={isPopular}
-            onMeasureChip={onMeasureChip}
-          />
+        <div className="min-w-23.5 flex-1 md:w-fit md:py-2 lg:min-w-[110px]">
+          <ForumInfoChip type="likes" value={post.like_count} popular={isPopular} />
         </div>
-        <div className="w-full md:w-fit md:py-2 xl:px-2">
-          <ForumInfoChip
-            type="replies"
-            value={post.posts_count - 1}
-            onMeasureChip={onMeasureChip}
-          />
+        <div className="flex-1 md:w-fit md:py-2 lg:min-w-[110px] xl:px-2">
+          <ForumInfoChip type="replies" value={post.posts_count - 1} />
         </div>
-        <div className="w-full md:w-fit md:py-2 xl:px-2">
-          <ForumInfoChip type="date" value={`${Math.floor(date)}d`} onMeasureChip={onMeasureChip} />
+        <div className="flex-1 md:w-fit md:py-2 lg:min-w-[110px] xl:px-2">
+          <ForumInfoChip type="date" value={`${Math.floor(date)}d`} />
         </div>
         <div className="flex w-fit justify-end">
           <Button variant="outline" size="icon" asChild>

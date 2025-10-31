@@ -21,14 +21,12 @@ export const Basic: Story = {
       {
         id: '1',
         title: 'RWA Portfolio conceptuual wireframes ',
-        url: 'www.examplelink.com',
-        status: true,
+        link: 'RWA Portfolio conceptuual wireframes ',
       },
       {
         id: '2',
         title: 'Technical demo of RWA Portfolio - Feb 21',
-        url: 'www.celestia-portfolio.com',
-        status: true,
+        link: 'Technical demo of RWA Portfolio - Feb 21',
       },
     ],
   },

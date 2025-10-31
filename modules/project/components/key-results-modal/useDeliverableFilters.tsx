@@ -1,10 +1,12 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryState } from 'nuqs'
 import { useCallback, useMemo } from 'react'
-import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import type { Deliverable } from '@/modules/project/types'
+import {
+  type ScopeOfWork_Deliverable,
+  ScopeOfWork_DeliverableStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 
 interface UseDeliverableFiltersProps {
-  deliverables: Deliverable[]
+  deliverables: ScopeOfWork_Deliverable[]
 }
 
 export default function useDeliverableFilters({ deliverables = [] }: UseDeliverableFiltersProps) {
@@ -27,7 +29,7 @@ export default function useDeliverableFilters({ deliverables = [] }: UseDelivera
           const searchMatch =
             search === '' ||
             keyResult.title.toLowerCase().includes(search.toLowerCase()) ||
-            keyResult.url.toLowerCase().includes(search.toLowerCase())
+            keyResult.link.toLowerCase().includes(search.toLowerCase())
 
           return searchMatch
         })
