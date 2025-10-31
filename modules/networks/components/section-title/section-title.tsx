@@ -29,6 +29,7 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
             onClick={() => {
               void handleCopyUrl(hash)
             }}
+            aria-label={`Copy link to ${title} section`}
           >
             <Link className="size-6" />
           </Button>

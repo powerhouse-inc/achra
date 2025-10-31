@@ -51,7 +51,7 @@ export default function LargeItem({ team, className, profileUpdateDate }: LargeI
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
         <span className="text-foreground/50 text-sm/5.5 font-semibold">{profileUpdateDate}</span>
       </div>
-      <Button variant="outline" size="icon">
+      <Button variant="outline" size="icon" aria-label="View builder team details">
         <ArrowRight className="size-4" />
       </Button>
     </div>

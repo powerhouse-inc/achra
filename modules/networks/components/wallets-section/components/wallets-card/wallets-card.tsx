@@ -51,6 +51,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
               'rotate-180': toogleWalletTable,
             })}
             onClick={handleToogleWalletTable}
+            aria-label="Toggle wallets table"
           >
             <ChevronUp className="size-6" />
           </Button>

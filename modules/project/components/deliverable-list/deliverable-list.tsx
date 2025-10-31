@@ -54,6 +54,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
                 <ProgressComponent
                   progress={getProgressPercentage(deliverable.workProgress ?? undefined)}
                   className="flex sm:flex"
+                  aria-label={`Work progress for ${deliverable.title}: ${getProgressPercentage(deliverable.workProgress ?? undefined)}%`}
                 />
               </div>
             </div>
@@ -68,6 +69,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
           <ProgressComponent
             progress={getProgressPercentage(deliverable.workProgress ?? undefined)}
             className="flex sm:hidden"
+            aria-label={`Work progress for ${deliverable.title}: ${getProgressPercentage(deliverable.workProgress ?? undefined)}%`}
           />
           <Separator className="text-border my-2 hidden w-full sm:flex" />
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
