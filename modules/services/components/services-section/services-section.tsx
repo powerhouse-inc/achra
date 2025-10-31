@@ -1,4 +1,4 @@
-import ServicesFilters from './components/services-filters'
+import ServicesFilters from './components/services-filters/services-filters'
 
 export function ServicesSection() {
   return (
