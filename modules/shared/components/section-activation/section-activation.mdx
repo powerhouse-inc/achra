@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Shared/Components/Section Activation" />
+
+# SectionActivation
+
+Logic-only component that automatically updates URL hash based on scroll position using Intersection Observer API. Enables deep linking, shareable URLs, and smooth scroll restoration.
+
+## How It Works
+
+Monitors section elements with `IntersectionObserver`. When a section's top edge crosses a threshold (default: 20% from viewport top), it becomes "active" and the URL hash updates. On page load, automatically scrolls to hash-targeted section.
+
+## Props
+
+### `sections` (required)
+Array of encoded section IDs. Use `encodeSectionId` utility.
+
+**Type:** `string[]`
+
+```tsx
+import { encodeSectionId } from '@/modules/shared/components/section-activation'
+
+const sections = ['proposals', 'roadmap', 'finances'].map(encodeSectionId)
+```
+
+### `options` (optional)
+
+- **`threshold`** (`number`, default: `20`): Percentage from viewport top (0-100) when section becomes active
+- **`skipSection`** (`string`, default: `undefined`): Section ID that clears hash instead of setting it when active. Useful for the first section to keep URLs clean
+
+## Usage
+
+```tsx
+import { SectionActivation, encodeSectionId } from '@/modules/shared/components/section-activation'
+
+export default function Page() {
+  const sections = ['section-1', 'section-2'].map(encodeSectionId)
+
+  return (
+    <>
+      <section id={encodeSectionId('section-1')} className="scroll-mt-22">
+        {/* Content */}
+      </section>
+      <section id={encodeSectionId('section-2')} className="scroll-mt-22">
+        {/* Content */}
+      </section>
+      
+      <SectionActivation 
+        sections={sections}
+        options={{ threshold: 25, skipSection: 'section-1' }}
+      />
+    </>
+  )
+}
+```
+
+## Important Notes
+
+- **Always encode section IDs** with `encodeSectionId` (prevents browser auto-scroll)
+- Section elements must have matching `id` attribute and be in DOM on mount
+- Use `scroll-mt-*` classes for fixed headers/navbars
+- **Use `skipSection` for the first section** to keep URLs clean (no hash when at top of page)
+- Client-side only (returns `null` on server)
+- Uses Intersection Observer for performance (no scroll event listeners)
+
+## Related Utilities
+
+- `encodeSectionId(sectionId: string)`: Encode section ID
+- `decodeSectionId(sectionId: string)`: Decode section ID
+- `useSectionActivation`: Underlying hook (for direct use)
