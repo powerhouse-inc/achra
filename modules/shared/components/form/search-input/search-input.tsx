@@ -28,6 +28,7 @@ export default function SearchInput({
   value,
   onChange,
   placeholder = 'Search...',
+  className,
   ...props
 }: SearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -47,7 +48,12 @@ export default function SearchInput({
   }, [])
 
   return (
-    <div className="bg-accent flex w-full items-center justify-between rounded-md pr-1 pl-3">
+    <div
+      className={cn(
+        'bg-accent flex w-full items-center justify-between rounded-md pr-1 pl-3',
+        className,
+      )}
+    >
       <div className="flex flex-1 items-center gap-3">
         <div className="h-4 w-4 shrink-0">
           <Search className="text-accent-foreground/30 h-4 w-4" />
