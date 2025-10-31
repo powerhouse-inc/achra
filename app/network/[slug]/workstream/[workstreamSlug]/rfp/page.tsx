@@ -63,12 +63,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
               </div>
             </div>
 
-            <div className="grid max-w-4xl grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-4">
-              <ProposalKeyValueElement
-                keyValue="Budget Range"
-                keyIcon={HandCoins}
-                value="10K - 25K USD"
-              />
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-[auto_1fr] lg:gap-4">
               <ProposalKeyValueElement
                 keyValue={
                   <div>
@@ -78,6 +73,12 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
                 }
                 keyIcon={CalendarClock}
                 value="12 SEP 2025 @ 12:00 CET"
+              />
+              <ProposalKeyValueElement
+                keyValue="Budget Range"
+                keyIcon={HandCoins}
+                value="10K - 25K USD"
+                className="lg:max-w-85.5 xl:max-w-100"
               />
             </div>
 
