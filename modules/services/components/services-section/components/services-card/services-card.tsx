@@ -42,13 +42,32 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
-            {service.title}
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {service.entities.map((entity) => (
-              <ServicesEntitiesChip key={entity} entity={entity} />
+          <div className="flex flex-col gap-2">
+            <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
+              {service.title}
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {service.entities.map((entity) => (
+                <ServicesEntitiesChip key={entity} entity={entity} />
+              ))}
+            </div>
+          </div>
+          <div className="text-foreground flex flex-col text-xs/4.5 sm:text-sm/5.5">
+            {service.description.map((description) => (
+              <p key={description} className="text-foreground">
+                {description}
+              </p>
             ))}
+            {service.descriptionItems && service.descriptionItems.length > 0 && (
+              <ul className="text-foreground space-y-1">
+                {service.descriptionItems.map((descriptionItem) => (
+                  <li key={descriptionItem} className="mb-0 ml-2 flex items-center gap-2">
+                    <div className="bg-foreground size-1 min-w-1 rounded-full" />
+                    <span>{descriptionItem}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </CardContent>
