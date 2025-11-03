@@ -1,9 +1,11 @@
 import { ArrowRight } from 'lucide-react'
+import { Suspense } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType, type TeamCategory } from '@/modules/shared/types/types'
+import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
 import CategoryBadge from '../category-badge/category-badge'
 import ItemProfile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
@@ -12,11 +14,10 @@ import { useCompactItem } from './use-compact-item'
 
 export interface CompactItemProps {
   team: Team
-  profileUpdateDate: string
   className?: string
 }
 
-export default function CompactItem({ team, className, profileUpdateDate }: CompactItemProps) {
+export default function CompactItem({ team, className }: CompactItemProps) {
   const { scopeSizeVariant } = useCompactItem({ team })
   return (
     <div
@@ -60,7 +61,12 @@ export default function CompactItem({ team, className, profileUpdateDate }: Comp
       </div>
       <div className="bg-background border-border absolute bottom-0 left-0 flex h-7.5 w-full items-center justify-between border-t px-4">
         <span className="text-foreground text-xs/4.5 font-medium">Profile Updated</span>
-        <span className="text-foreground/50 text-sm/5.5 font-semibold">{profileUpdateDate}</span>
+        <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
+          <ProfileUpdatedDate
+            className="text-foreground/50 text-sm/5.5 font-semibold"
+            team={team}
+          />
+        </Suspense>
       </div>
     </div>
   )
