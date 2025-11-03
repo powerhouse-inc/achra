@@ -1,6 +1,7 @@
+import { Suspense } from 'react'
 import { AchraNav } from './components/achra-nav'
 import { NetworkBrand } from './components/network-brand'
-import { NetworksNav } from './components/networks-nav'
+import { NetworksNav, NetworksNavSkeleton } from './components/networks-nav'
 import { ThemeToggle, ThemeToggleOption } from './components/theme-toggle'
 import { UserButton, UserOption } from './components/user-button'
 import * as NavbarPrimitives from './primitives'
@@ -12,11 +13,15 @@ function Navbar() {
         <NavbarPrimitives.AchraBrand />
         <NetworkBrand />
 
-        <NavbarPrimitives.MobileNav />
+        <Suspense fallback={<NavbarPrimitives.MobileNavSkeleton />}>
+          <NavbarPrimitives.MobileNav />
+        </Suspense>
       </NavbarPrimitives.BrandArea>
 
       <AchraNav />
-      <NetworksNav />
+      <Suspense fallback={<NetworksNavSkeleton />}>
+        <NetworksNav />
+      </Suspense>
 
       <NavbarPrimitives.ActionsArea>
         <NavbarPrimitives.ActionWithOptions className="flex md:hidden">

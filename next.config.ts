@@ -3,6 +3,7 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
+  cacheComponents: false,
   images: {
     qualities: [100, 75],
   },
