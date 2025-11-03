@@ -8,8 +8,10 @@ import { cn } from '@/modules/shared/lib/utils'
 import { Button } from '../ui/button'
 import { useCopyButton } from './useCopyButton'
 
+type Value = string | (() => string)
+
 interface CopyButtonContextValue extends ReturnType<typeof useCopyButton> {
-  value: string
+  value: Value
 }
 
 const CopyButtonContext = createContext<CopyButtonContextValue | null>(null)
@@ -28,7 +30,7 @@ function useCopyButtonContext() {
  * Initializes the state and provides the context for its subcomponents.
  */
 interface CopyButtonProps extends React.HTMLAttributes<HTMLSpanElement> {
-  value: string
+  value: Value
   resetDelay?: number
   children: React.ReactNode
 }
@@ -107,7 +109,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof 
 
     const onCopy = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation()
-      void handleCopy(value)
+      void handleCopy(typeof value === 'function' ? value() : value)
       onClick?.(e)
     }
 

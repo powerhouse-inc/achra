@@ -1,7 +1,11 @@
+import { Suspense } from 'react'
 import { BuildersSection } from '@/modules/networks/components/builders-section/builders-section'
 import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
 import { GovernanceSection } from '@/modules/networks/components/governance-section/governance-section'
-import { HomepageBanner } from '@/modules/networks/components/homepage-banner'
+import {
+  HomepageBanner,
+  HomepageBannerSkeleton,
+} from '@/modules/networks/components/homepage-banner'
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import { ProposalsSection } from '@/modules/networks/components/proposals-section/proposals-section'
 import { RoadmapSection } from '@/modules/networks/components/roadmap-section'
@@ -19,7 +23,9 @@ export default function NetworkPage() {
   return (
     <PageBackground>
       <PageContent className="gap-8">
-        <HomepageBanner />
+        <Suspense fallback={<HomepageBannerSkeleton />}>
+          <HomepageBanner />
+        </Suspense>
         <ProposalsSection proposals={PROPOSALS} />
         <RoadmapSection roadmaps={mockedRoadmaps} />
         <FinancesSection />
