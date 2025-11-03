@@ -87,7 +87,7 @@ export default async function RequesForProposalPage({ params }: RequesForProposa
             </div>
           </div>
 
-          <div className="bg-accent flex flex-col gap-4 border border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+          <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
             <p className="text-sm/5.5 font-normal xl:text-base/6">
               Creation of the roadmap proposal for the Start Teams onboarding to Achra platform,
               including full SoW and payment terms.
