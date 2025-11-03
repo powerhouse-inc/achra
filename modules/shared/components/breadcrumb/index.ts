@@ -6,3 +6,4 @@ export type {
   BreadcrumbItemProps,
   DotsSegmentProps,
 } from './types'
+export { BreadcrumbSkeleton } from './breadcrumb-skeleton'

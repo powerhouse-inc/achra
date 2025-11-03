@@ -1,12 +1,12 @@
 import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SectionTitle } from '../section-title'
-import { Timeline } from '../timeline'
+import { Timeline, TimelineSkeleton } from '../timeline'
 
 interface OverviewSectionProps {
   roadmap: ScopeOfWork_Roadmap | undefined
 }
 
-export default function OverviewSection({ roadmap }: OverviewSectionProps) {
+function OverviewSection({ roadmap }: OverviewSectionProps) {
   return (
     <div className="flex flex-col gap-6">
       <SectionTitle
@@ -19,3 +19,15 @@ export default function OverviewSection({ roadmap }: OverviewSectionProps) {
     </div>
   )
 }
+
+function OverviewSectionSkeleton() {
+  return (
+    <div className="flex flex-col gap-6">
+      <SectionTitle title="Milestones Roadmap Overview" />
+
+      <TimelineSkeleton />
+    </div>
+  )
+}
+
+export { OverviewSection, OverviewSectionSkeleton }

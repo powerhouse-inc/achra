@@ -1,1 +1,1 @@
-export { default as RoadmapDetailsContent } from './roadmap-details-content'
+export { RoadmapDetailsContent, RoadmapDetailsContentSkeleton } from './roadmap-details-content'
