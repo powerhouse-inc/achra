@@ -98,6 +98,8 @@ export function ExecutiveProposalItem({
             <Link
               href={`https://vote.sky.money/executive/${executiveProposal.key}`}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View executive proposal"
             >
               <span className="hidden lg:block">View</span>
               <ExternalLinkIcon className="size-4" />

@@ -12,7 +12,7 @@ import {
 import { cn } from '@/shared/lib/utils'
 import { useHomepageBanner } from './use-homepage-banner'
 
-export function HomepageBanner() {
+function HomepageBanner() {
   const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner()
   const isAuthenticated = true as boolean // placeholder for authentication
 
@@ -30,13 +30,17 @@ export function HomepageBanner() {
         alt="Header card background"
         fill
         priority
+        fetchPriority="high"
         quality={75}
         sizes="100vw"
         style={{ objectFit: 'cover' }}
         className="absolute z-0"
       />
       <CollapsibleTrigger asChild className="absolute top-3 right-3 z-1">
-        <Button className="hover:bg-secondary-foreground/30 h-6 w-6 bg-transparent shadow-none [&:has(>svg)]:p-1">
+        <Button
+          className="hover:bg-secondary-foreground/30 h-6 w-6 bg-transparent shadow-none [&:has(>svg)]:p-1"
+          aria-label="Toggle homepage banner"
+        >
           {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
         </Button>
       </CollapsibleTrigger>
@@ -69,3 +73,5 @@ export function HomepageBanner() {
     </Collapsible>
   )
 }
+
+export { HomepageBanner }

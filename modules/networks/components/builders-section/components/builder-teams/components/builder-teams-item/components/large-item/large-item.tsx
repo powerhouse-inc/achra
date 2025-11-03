@@ -1,8 +1,10 @@
 import { ArrowRight } from 'lucide-react'
+import { Suspense } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType, type TeamCategory } from '@/modules/shared/types/types'
+import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
 import BadgeGroup from '../badge-group/badge-group'
 import CategoryBadge from '../category-badge/category-badge'
 import ItemProfile from '../profile/profile'
@@ -11,11 +13,10 @@ import ScopeBadge from '../scope-badge/scope-badge'
 
 export interface LargeItemProps {
   team: Team
-  profileUpdateDate: string
   className?: string
 }
 
-export default function LargeItem({ team, className, profileUpdateDate }: LargeItemProps) {
+export default function LargeItem({ team, className }: LargeItemProps) {
   return (
     <div
       className={cn(
@@ -49,9 +50,14 @@ export default function LargeItem({ team, className, profileUpdateDate }: LargeI
       <RoleBadge type={team.type} />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
-        <span className="text-foreground/50 text-sm/5.5 font-semibold">{profileUpdateDate}</span>
+        <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
+          <ProfileUpdatedDate
+            className="text-foreground/50 text-sm/5.5 font-semibold"
+            team={team}
+          />
+        </Suspense>
       </div>
-      <Button variant="outline" size="icon">
+      <Button variant="outline" size="icon" aria-label="View builder team details">
         <ArrowRight className="size-4" />
       </Button>
     </div>

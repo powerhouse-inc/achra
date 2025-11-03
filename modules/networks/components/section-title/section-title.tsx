@@ -1,10 +1,5 @@
-'use client'
-
-import { Link } from 'lucide-react'
 import { cn } from '@/modules/shared/lib/utils'
-import { Button } from '@/shared/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
-import { useSectionTitle } from './use-section-title'
+import { CopySectionUrl } from './copy-section-url'
 
 export interface SectionTitleProps {
   title: string
@@ -13,35 +8,11 @@ export interface SectionTitleProps {
 }
 
 export default function SectionTitle({ title, hash, className }: SectionTitleProps) {
-  const { handleCopyUrl, handleLinkMouseEnter, handleLinkMouseLeave, tooltip, showTooltip } =
-    useSectionTitle()
-
   return (
-    <div className={cn('flex w-fit items-center gap-4', className)} data-hash={hash}>
+    <div className={cn('flex w-fit items-center gap-4', className)}>
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
-      <Tooltip open={showTooltip}>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            className="text-muted-foreground hover:text-muted-foreground/50 h-fit p-0! hover:bg-transparent dark:hover:bg-transparent"
-            onMouseEnter={handleLinkMouseEnter}
-            onMouseLeave={handleLinkMouseLeave}
-            onClick={() => {
-              void handleCopyUrl(hash)
-            }}
-          >
-            <Link className="size-6" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent
-          className="pointer-events-none max-w-66"
-          side="bottom"
-          align="start"
-          arrowPadding={16}
-        >
-          {tooltip}
-        </TooltipContent>
-      </Tooltip>
+
+      <CopySectionUrl hash={hash} />
     </div>
   )
 }

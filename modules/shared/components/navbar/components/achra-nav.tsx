@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { ACHRA_NAVBAR_LINKS } from '../../../config/navbar-config'
 import * as NavbarPrimitives from '../primitives'
 
@@ -9,9 +10,9 @@ function AchraNav({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <NavbarPrimitives.Nav data-nav="achra" {...props}>
       {ACHRA_NAVBAR_LINKS.map((link) => (
-        <NavbarPrimitives.NavItem key={link.href} href={link.href}>
-          {link.label}
-        </NavbarPrimitives.NavItem>
+        <Suspense fallback={<NavbarPrimitives.NavItemSkeleton />} key={link.href}>
+          <NavbarPrimitives.NavItem href={link.href}>{link.label}</NavbarPrimitives.NavItem>
+        </Suspense>
       ))}
     </NavbarPrimitives.Nav>
   )

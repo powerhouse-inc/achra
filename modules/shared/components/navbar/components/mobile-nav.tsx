@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
+import { Skeleton } from '../../ui/skeleton'
 import { useNavbarProvider } from '../primitives/root-provider'
 import { isActive } from '../utils'
 
@@ -69,6 +70,19 @@ function MobileNav() {
 MobileNav.displayName = 'MobileNav'
 
 /**
+ * Skeleton for the mobile navigation dropdown
+ * @returns A skeleton for the mobile navigation
+ */
+function MobileNavSkeleton() {
+  return (
+    <div className="h-9 w-37.5 xl:hidden">
+      <Skeleton className="h-9 w-37.5" />
+    </div>
+  )
+}
+MobileNavSkeleton.displayName = 'MobileNavSkeleton'
+
+/**
  * Individual mobile navigation item
  * Consolidates item rendering logic (DRY principle)
  */
@@ -93,4 +107,4 @@ function MobileNavItem({ link, pathname }: { link: NavbarLink; pathname: string 
   )
 }
 
-export { MobileNav }
+export { MobileNav, MobileNavSkeleton }

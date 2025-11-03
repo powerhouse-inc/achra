@@ -59,6 +59,7 @@ function ForumPost({ post, isPopular = false }: ForumPostProps) {
               href={`https://forum.makerdao.com/t/${post.slug}/${post.id}`}
               target="_blank"
               rel="noreferrer"
+              aria-label="View forum post"
             >
               <span className="hidden">View</span>
               <ExternalLinkIcon className="size-4" />

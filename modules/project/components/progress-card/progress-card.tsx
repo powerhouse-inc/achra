@@ -19,6 +19,7 @@ export function ProgressCard({ status, progress }: ProgressCardProps) {
       <div className="relative">
         <Progress
           value={progress}
+          aria-label={`Status progress: ${progress}%`}
           className={cn(
             'bg-accent [&>div]:bg-status-progress h-4 rounded',
             progress === 100 && '[&>div]:bg-status-success',
@@ -29,6 +30,7 @@ export function ProgressCard({ status, progress }: ProgressCardProps) {
             'absolute inset-0 z-10 flex items-center justify-end pr-2 text-xs font-bold',
             progress === 100 ? 'text-primary-foreground' : 'text-accent-foreground/30',
           )}
+          aria-hidden="true"
         >
           {progress}%
         </div>

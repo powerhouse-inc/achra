@@ -9,5 +9,5 @@ export {
   ActionOptionSeparator,
 } from './actions'
 export { Nav } from './nav'
-export { MobileNav } from '../components/mobile-nav'
-export { NavItem } from './nav-item'
+export { MobileNav, MobileNavSkeleton } from '../components/mobile-nav'
+export { NavItem, NavItemSkeleton } from './nav-item'
