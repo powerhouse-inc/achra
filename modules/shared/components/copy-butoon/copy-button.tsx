@@ -112,7 +112,14 @@ const Trigger = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof 
     }
 
     return (
-      <Button ref={ref} onClick={onCopy} variant="icon" size="iconXsm" {...props}>
+      <Button
+        ref={ref}
+        onClick={onCopy}
+        variant="icon"
+        size="iconXsm"
+        aria-label="Copy to clipboard"
+        {...props}
+      >
         {children}
       </Button>
     )

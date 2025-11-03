@@ -3,9 +3,11 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
+  cacheComponents: false,
   images: {
     qualities: [100, 75],
   },
+  productionBrowserSourceMaps: true,
   async rewrites() {
     if (!process.env.HOMEPAGE_REMOTE_URL) {
       return []
@@ -29,6 +31,9 @@ const nextConfig: NextConfig = {
         as: '*.js',
       },
     },
+  },
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
   },
 }
 

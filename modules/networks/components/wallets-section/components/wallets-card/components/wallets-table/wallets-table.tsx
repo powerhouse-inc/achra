@@ -49,6 +49,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
             >
               <Button
                 variant="ghost"
+                aria-label={`Sort ${column.header} column`}
                 onClick={() => {
                   handleSortClick(index)
                 }}
@@ -76,6 +77,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
             onClick={(event) => {
               handleRowClick(event, wallet.address)
             }}
+            aria-label={`View ${wallet.name} wallet`}
           >
             <TableCell className="inline-block h-fit w-[24%] p-0!">
               <span className="text-wrap">{wallet.name}</span>
@@ -102,7 +104,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
                 </div>
                 <CopyButton value={wallet.address}>
                   <CopyTooltip side="bottom" tooltip="Copy Address" copiedTooltip="Copied!">
-                    <CopyTrigger variant="icon" size="iconXsm">
+                    <CopyTrigger variant="icon" size="iconXsm" aria-label="Copy address">
                       <Copy />
                     </CopyTrigger>
                   </CopyTooltip>
@@ -117,7 +119,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
             </TableCell>
             <TableCell className="inline-block size-9 h-fit p-0! text-right">
               <Button variant="outline" size="icon" asChild>
-                <Link href="/network/powerhouse#wallets" target="_blank">
+                <Link href="/network/powerhouse#wallets" target="_blank" aria-label="View wallet">
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>

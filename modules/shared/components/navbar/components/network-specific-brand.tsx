@@ -62,7 +62,17 @@ NetworkSpecificBrand.displayName = 'NetworkSpecificBrand'
 function NetworkIcon({ icon, name }: { icon: string | null | undefined; name: string }) {
   const iconSrc = icon ?? '/networks/logos/unknown.png'
 
-  return <Image src={iconSrc} alt={name} width={36} height={36} className="min-w-8 lg:hidden" />
+  return (
+    <Image
+      src={iconSrc}
+      alt={name}
+      width={36}
+      height={36}
+      priority
+      fetchPriority="high"
+      className="min-w-8 lg:hidden"
+    />
+  )
 }
 
 /**
@@ -73,13 +83,27 @@ function NetworkLogo({ logo, name }: { logo: string | null | undefined; name: st
     return (
       // We need to use img to avoid Image unknown size issues with dynamic logos
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={logo} alt={name} width="auto" height={32} className="hidden lg:flex" />
+      <img
+        src={logo}
+        alt={name}
+        width="auto"
+        height={32}
+        fetchPriority="high"
+        className="hidden lg:flex"
+      />
     )
   }
 
   return (
     <div className="hidden items-center justify-center gap-2 lg:flex">
-      <Image src="/networks/logos/unknown.png" alt={name} width={32} height={32} />
+      <Image
+        src="/networks/logos/unknown.png"
+        alt={name}
+        width={32}
+        height={32}
+        priority
+        fetchPriority="high"
+      />
       <span className="font-bold">{name}</span>
     </div>
   )

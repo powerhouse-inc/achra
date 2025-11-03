@@ -46,7 +46,7 @@ export function WalletsList({ wallets, className }: WalletsListProps) {
                     <Link
                       href="/network/powerhouse#wallets"
                       target="_blank"
-                      className="font-normal text-(--status-progress)"
+                      className="text-status-progress font-normal"
                     >
                       {wallet.shortAddress}
                     </Link>
@@ -61,7 +61,7 @@ export function WalletsList({ wallets, className }: WalletsListProps) {
                 </div>
               </div>
             </div>
-            <Button variant="outline" size="icon" asChild>
+            <Button variant="outline" size="icon" asChild aria-label="View wallet details">
               <Link href="/network/powerhouse#wallets" target="_blank">
                 <ArrowRight className="size-4" />
               </Link>

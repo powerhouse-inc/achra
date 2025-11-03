@@ -30,4 +30,20 @@ function NetworksNav({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
 }
 NetworksNav.displayName = 'NetworksNav'
 
-export { NetworksNav }
+/**
+ * Skeleton for the networks navigation
+ * @returns A skeleton for the networks navigation
+ */
+function NetworksNavSkeleton() {
+  return (
+    <NavbarPrimitives.Nav data-nav="network">
+      <NavbarPrimitives.NavItemSkeleton />
+      <NavbarPrimitives.NavItemSkeleton />
+      <NavbarPrimitives.NavItemSkeleton />
+      <NavbarPrimitives.NavItemSkeleton />
+    </NavbarPrimitives.Nav>
+  )
+}
+NetworksNavSkeleton.displayName = 'NetworksNavSkeleton'
+
+export { NetworksNav, NetworksNavSkeleton }

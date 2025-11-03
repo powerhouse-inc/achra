@@ -32,7 +32,7 @@ export default function CompactItem({ team, className, profileUpdateDate }: Comp
           status={team.status}
           image={team.image}
         />
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" aria-label="View builder team details">
           <ArrowRight className="size-4" />
         </Button>
       </div>
