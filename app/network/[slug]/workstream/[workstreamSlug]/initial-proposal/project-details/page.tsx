@@ -1,10 +1,22 @@
+import { Suspense } from 'react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { AvatarTitle, MetricCard, ProgressCard, TotalCostField } from '@/modules/project/components'
+import {
+  AvatarTitle,
+  MetricCard,
+  MetricCardSkeleton,
+  ProgressCard,
+  TotalCostField,
+} from '@/modules/project/components'
+import { AvatarTitleSkeleton } from '@/modules/project/components/avatar-title/avatar-title-skeleton'
 import { DeliverablesCard } from '@/modules/project/components/deliverables-card'
 
 import { ButtonTriggerKeyResult } from '@/modules/project/components/metric-card/button-trigger-key-result'
 import { mockDeliverables } from '@/modules/project/mock/deliverable'
-import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+import {
+  Breadcrumb,
+  BreadcrumbSkeleton,
+  PageBreadcrumbContainer,
+} from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -15,11 +27,19 @@ import type { Route } from 'next'
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
 }
+async function ProjectDetailsAvatarTitle({ params }: ProjectDetailsPageProps) {
+  const { slug } = await params
+  return (
+    <AvatarTitle
+      avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+      title="Powerhouse OH"
+      href={`/network/${slug}/builders` as Route}
+    />
+  )
+}
 
-export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
+async function ProjectDetailsBreadcrumb({ params }: ProjectDetailsPageProps) {
   const { slug, workstreamSlug } = await params
-
-  const totalBudget = 100000
   const items = [
     { label: 'Powerhouse', href: `/network/${slug}` as Route },
     { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
@@ -32,10 +52,18 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
       href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project` as Route,
     },
   ]
+  return <Breadcrumb items={items} />
+}
+
+export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
+  const totalBudget = 100000
+
   return (
     <main>
       <PageBreadcrumbContainer>
-        <Breadcrumb items={items} />
+        <Suspense fallback={<BreadcrumbSkeleton />}>
+          <ProjectDetailsBreadcrumb params={params} />
+        </Suspense>
       </PageBreadcrumbContainer>
       <PageContent className="gap-6" variant="with-breadcrumb">
         <Card className="gap-0 p-0">
@@ -53,11 +81,9 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                       </div>
                     </div>
                     <div className="hidden sm:block">
-                      <AvatarTitle
-                        avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
-                        title="Powerhouse OH"
-                        href={`/network/${slug}/builders` as Route}
-                      />
+                      <Suspense fallback={<AvatarTitleSkeleton />}>
+                        <ProjectDetailsAvatarTitle params={params} />
+                      </Suspense>
                     </div>
                   </div>
                   <div className="text-primary-foreground hidden w-[calc(100%-48px)] max-w-64 sm:flex sm:justify-end">
@@ -65,11 +91,9 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                   </div>
                 </div>
                 <div className="block sm:hidden">
-                  <AvatarTitle
-                    avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
-                    title="Powerhouse OH"
-                    href={`/network/${slug}/builders` as Route}
-                  />
+                  <Suspense fallback={<AvatarTitleSkeleton />}>
+                    <ProjectDetailsAvatarTitle params={params} />
+                  </Suspense>
                 </div>
 
                 <div className="mt-1 flex w-full sm:mt-0">
@@ -86,20 +110,23 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               <div className="flex shrink grow flex-col gap-2 sm:w-full sm:flex-row sm:gap-2 lg:basis-[35%] lg:flex-col">
                 <MetricCard label="Budget" value="100K" unit="USD" footer="CAPEX" />
                 <ProgressCard progress={50} status={ScopeOfWork_DeliverableSetStatus.Todo} />
-                <MetricCard
-                  label="Key Results"
-                  value={
-                    <>
-                      <span>5</span>
-                      <span className="text-foreground/50"> / 12</span>
-                    </>
-                  }
-                  action={<ButtonTriggerKeyResult />}
-                />
+
+                <Suspense fallback={<MetricCardSkeleton />}>
+                  <MetricCard
+                    label="Key Results"
+                    value={
+                      <>
+                        <span>5</span>
+                        <span className="text-foreground/50"> / 12</span>
+                      </>
+                    }
+                    action={<ButtonTriggerKeyResult />}
+                  />
+                </Suspense>
               </div>
             </div>
           </div>
-          <div className="bg-accent flex flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4 sm:pb-0">
+          <div className="bg-accent flex flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4">
             <p className="text-base/6 font-semibold">Deliverables</p>
             <div className="flex flex-col gap-2">
               <DeliverablesCard deliverables={mockDeliverables} />

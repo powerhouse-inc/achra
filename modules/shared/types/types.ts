@@ -50,3 +50,10 @@ export enum ProgressStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   FINISHED = 'FINISHED',
 }
+
+export enum SortEnum {
+  Neutral = 'neutral',
+  Asc = 'asc',
+  Desc = 'desc',
+  Disabled = 'disabled',
+}
