@@ -1,9 +1,3 @@
-import ServiceCover1 from '@/modules/shared/components/svgs/service-cover-01.svg'
-import ServiceCover2 from '@/modules/shared/components/svgs/service-cover-02.svg'
-import ServiceCover3 from '@/modules/shared/components/svgs/service-cover-03.svg'
-import ServiceCover4 from '@/modules/shared/components/svgs/service-cover-04.svg'
-import ServiceCover5 from '@/modules/shared/components/svgs/service-cover-05.svg'
-import ServiceCover6 from '@/modules/shared/components/svgs/service-cover-06.svg'
 import { type Service, ServiceEntityEnum } from '@/modules/shared/types/services'
 
 export const SERVICES_CARDS_MOCK: Service[] = [
@@ -42,7 +36,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover1,
+    cover: '/services/covers/service-cover-01.svg',
     unavailable: false,
   },
   {
@@ -74,7 +68,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover2,
+    cover: '/services/covers/service-cover-02.svg',
     unavailable: false,
   },
   {
@@ -110,7 +104,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover3,
+    cover: '/services/covers/service-cover-03.svg',
     unavailable: true,
   },
   {
@@ -145,7 +139,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover4,
+    cover: '/services/covers/service-cover-04.svg',
     unavailable: true,
   },
   {
@@ -180,7 +174,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover5,
+    cover: '/services/covers/service-cover-05.svg',
     unavailable: true,
   },
   {
@@ -218,7 +212,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
         ],
       },
     ],
-    cover: ServiceCover6,
+    cover: '/services/covers/service-cover-06.svg',
     unavailable: true,
   },
 ]
