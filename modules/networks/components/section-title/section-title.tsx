@@ -17,8 +17,9 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
     useSectionTitle()
 
   return (
-    <div className={cn('flex w-fit items-center gap-4', className)} data-hash={hash}>
+    <div className={cn('flex w-fit items-center gap-4', className)}>
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
+
       <Tooltip open={showTooltip}>
         <TooltipTrigger asChild>
           <Button
