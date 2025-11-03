@@ -12,7 +12,7 @@ import {
 import { cn } from '@/shared/lib/utils'
 import { useHomepageBanner } from './use-homepage-banner'
 
-export function HomepageBanner() {
+function HomepageBanner() {
   const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner()
   const isAuthenticated = true as boolean // placeholder for authentication
 
@@ -73,3 +73,5 @@ export function HomepageBanner() {
     </Collapsible>
   )
 }
+
+export { HomepageBanner }

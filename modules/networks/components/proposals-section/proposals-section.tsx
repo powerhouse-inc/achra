@@ -1,5 +1,3 @@
-'use client'
-
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/shared/types/routes'

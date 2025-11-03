@@ -54,9 +54,10 @@ export default function RootLayout({
               <Navbar />
               <div className="pt-18 md:pt-21">{children}</div>
               {ff.FEATURE_WHITELIST_OVERLAY && <WhitelistOverlay />}
+
+              <Footer />
             </NuqsAdapter>
           </QueryClientProvider>
-          <Footer />
         </ThemeProvider>
       </body>
     </html>
