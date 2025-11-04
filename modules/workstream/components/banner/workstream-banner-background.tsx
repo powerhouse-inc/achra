@@ -1,23 +1,24 @@
 import { FolderGit2, FolderKanban } from 'lucide-react'
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface WorkstreamBannerBackgroundProps {
   isNetworkBanner: boolean
-  network?: string
 }
 
 export default function WorkstreamBannerBackground({
   isNetworkBanner,
-  network,
 }: WorkstreamBannerBackgroundProps) {
+  const { slug: networkSlug } = useParams<{ slug?: string }>()
+
   if (isNetworkBanner) {
     return (
       <div className="pointer-events-none absolute inset-0 z-0">
         <div className="relative h-full w-full">
           <Image
-            src={`/networks/backgrounds/${network}.png`}
-            alt={`${network} network background`}
+            src={`/networks/backgrounds/${networkSlug}.png`}
+            alt={`${networkSlug} network background`}
             fill
             sizes="100vw"
             className="object-cover"

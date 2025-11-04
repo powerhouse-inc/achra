@@ -1,17 +1,20 @@
 import { FilePenLine } from 'lucide-react'
+import { Suspense } from 'react'
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
-import { InternalLink } from '@/modules/shared/components/internal-link'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
+import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
+import { RfpDetailsLink } from '@/modules/workstream/components/workstream-card/rfp-details-link'
 import StatCards from '@/modules/workstream/components/workstream-card/stat-cards'
+import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
-import type { Route } from 'next'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
@@ -29,22 +32,15 @@ interface Props {
   params: Promise<{ slug: string; workstreamSlug: string }>
 }
 
-export default async function WorkstreamDetailsPage({ params }: Props) {
-  const { slug, workstreamSlug } = await params
-
+export default function WorkstreamDetailsPage({ params }: Props) {
   return (
     <PageBackground>
       <PageBreadcrumbContainer>
-        <Breadcrumb
-          items={[
-            { label: 'Powerhouse', href: '/network/powerhouse' },
-            {
-              label: 'Vetra Beta Launch',
-              href: `/network/${slug}/workstream/${workstreamSlug}` as Route,
-            },
-          ]}
-        />
+        <Suspense fallback={<BreadcrumbSkeleton segments={2} />}>
+          <WorkstreamDetailsBreadcrumb params={params} />
+        </Suspense>
       </PageBreadcrumbContainer>
+
       <PageContent className="gap-6" variant="with-breadcrumb">
         <div className="flex justify-between gap-2 md:items-start">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
@@ -53,12 +49,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
             </h1>
             <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
           </div>
-          <InternalLink
-            href={`/network/${slug}/workstream/${workstreamSlug}/rfp` as Route}
-            variant="outline"
-          >
-            RFP Details
-          </InternalLink>
+          <RfpDetailsLink />
         </div>
 
         <WorkstreamStats />
@@ -72,13 +63,9 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
 
           <StatCards />
 
-          <InternalLink
-            href={`/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route}
-            className="ml-auto max-w-fit sm:hidden"
-            variant="outline"
-          >
-            View Proposal
-          </InternalLink>
+          <Suspense fallback={<Skeleton className="h-9 w-36" />}>
+            <ViewProposalLink />
+          </Suspense>
 
           <Separator />
 

@@ -9,18 +9,12 @@ import WorkstreamBannerBackground from './workstream-banner-background'
 import WorkstreamBannerContent from './workstream-banner-content'
 import WorkstreamBannerOverlay from './workstream-banner-overlay'
 
-interface WorkstreamBannerProps {
-  network?: string
-}
-
-export default function WorkstreamBanner({ network }: WorkstreamBannerProps) {
-  const { isNetworkBanner, handleHide, animationProps } = useWorkstreamBanner({
-    network,
-  })
+export default function WorkstreamBanner() {
+  const { isNetworkBanner, handleHide, animationProps } = useWorkstreamBanner()
 
   return (
     <motion.div className="shadow-primary relative overflow-hidden rounded-xl" {...animationProps}>
-      <WorkstreamBannerBackground isNetworkBanner={isNetworkBanner} network={network} />
+      <WorkstreamBannerBackground isNetworkBanner={isNetworkBanner} />
 
       <WorkstreamBannerContent isNetworkBanner={isNetworkBanner} />
 
