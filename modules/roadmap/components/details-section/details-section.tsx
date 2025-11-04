@@ -4,7 +4,7 @@ import type {
   ScopeOfWork_Roadmap,
   ScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MilestoneDetailsCard } from '../milestone-details-card'
+import { MilestoneDetailsCard, MilestoneDetailsCardSkeleton } from '../milestone-details-card'
 import { SectionTitle } from '../section-title'
 
 interface DetailsSectionProps {
@@ -12,7 +12,7 @@ interface DetailsSectionProps {
   roadmap: ScopeOfWork_Roadmap | undefined
 }
 
-export default function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
+function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
   return (
     <div className="flex flex-col gap-6">
       <SectionTitle title="Milestones Roadmap Details" />
@@ -40,3 +40,15 @@ export default function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSec
     </div>
   )
 }
+
+function DetailsSectionSkeleton() {
+  return (
+    <div className="flex flex-col gap-6">
+      <SectionTitle title="Milestones Roadmap Details" />
+
+      <MilestoneDetailsCardSkeleton />
+    </div>
+  )
+}
+
+export { DetailsSection, DetailsSectionSkeleton }

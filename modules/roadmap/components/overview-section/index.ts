@@ -1,1 +1,1 @@
-export { default as OverviewSection } from './overview-section'
+export { OverviewSection, OverviewSectionSkeleton } from './overview-section'
