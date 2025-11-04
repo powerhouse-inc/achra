@@ -22,9 +22,9 @@ function MilestoneDetailsCardSkeleton() {
             // Responsive widths and spacing
             'w-full',
             'md:w-1/2',
-            'lg:w-[304px] lg:gap-4 lg:px-4 lg:pt-4 lg:pb-6',
-            'xl:w-[379px] xl:px-6',
-            '2xl:w-[416px]',
+            'lg:w-76 lg:gap-4 lg:px-4 lg:pt-4 lg:pb-6',
+            'xl:w-94.5 xl:px-6',
+            '2xl:w-104',
           )}
         >
           <Skeleton className="inline-flex h-9.5 w-16 rounded-md px-2 py-1" />
