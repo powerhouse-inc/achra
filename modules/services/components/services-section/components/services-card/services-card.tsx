@@ -1,5 +1,3 @@
-'use client'
-
 import { ArrowRight, Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,7 +9,6 @@ import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
 import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Service } from '@/modules/shared/types/services'
 import { ServicesCardListSection } from './components/services-card-list-section/services-card-list-section'
@@ -22,15 +19,13 @@ interface ServicesCardProps {
 }
 
 export default function ServicesCard({ service }: ServicesCardProps) {
-  const isMobile = useMediaQuery({ to: 'sm' })
-  const cover = isMobile ? service.cover.mobile : service.cover.desktop
   return (
     <Card className="bg-accent p-2 sm:p-3">
       <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_35%] xl:grid-cols-[120px_1fr_50%]">
         <div className="flex flex-col gap-2 sm:gap-4">
           <div className="relative h-32 w-full sm:h-30">
             <Image
-              src={cover}
+              src={service.cover}
               alt={service.title}
               fill
               className="absolute rounded-lg"

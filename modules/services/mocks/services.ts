@@ -28,10 +28,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-01-desktop.svg',
-      mobile: '/services/covers/service-cover-01-mobile.svg',
-    },
+    cover: '/services/covers/cover-01.jpg',
     unavailable: false,
   },
   {
@@ -55,10 +52,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-02-desktop.svg',
-      mobile: '/services/covers/service-cover-02-mobile.svg',
-    },
+    cover: '/services/covers/cover-02.jpg',
     unavailable: false,
   },
   {
@@ -86,10 +80,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-03-desktop.svg',
-      mobile: '/services/covers/service-cover-03-mobile.svg',
-    },
+    cover: '/services/covers/cover-03.jpg',
     unavailable: true,
   },
   {
@@ -116,10 +107,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-04-desktop.svg',
-      mobile: '/services/covers/service-cover-04-mobile.svg',
-    },
+    cover: '/services/covers/cover-04.jpg',
     unavailable: true,
   },
   {
@@ -146,10 +134,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-05-desktop.svg',
-      mobile: '/services/covers/service-cover-05-mobile.svg',
-    },
+    cover: '/services/covers/cover-05.jpg',
     unavailable: true,
   },
   {
@@ -179,10 +164,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: {
-      desktop: '/services/covers/service-cover-06-desktop.svg',
-      mobile: '/services/covers/service-cover-06-mobile.svg',
-    },
+    cover: '/services/covers/cover-06.jpg',
     unavailable: true,
   },
 ]
