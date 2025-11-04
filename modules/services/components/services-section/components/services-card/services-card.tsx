@@ -12,6 +12,7 @@ import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { cn } from '@/modules/shared/lib/utils'
 import type { Service } from '@/modules/shared/types/services'
 import { ServicesCardListSection } from './components/services-card-list-section/services-card-list-section'
 import type { Route } from 'next'
@@ -43,7 +44,12 @@ export default function ServicesCard({ service }: ServicesCardProps) {
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <Button size="lg" asChild>
+            <Button
+              size="lg"
+              asChild
+              disabled={service.unavailable}
+              className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+            >
               <Link href={`/services/${service.id}` as Route}>
                 <span>Purchase</span>
                 <ArrowRight className="size-4" />
