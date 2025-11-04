@@ -5,11 +5,7 @@ import { WorkstreamCard } from '@/modules/workstream/components/workstream-card'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
 import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
 
-interface WorkstreamsPageProps {
-  params: Promise<{ slug: string; workstreamSlug: string }>
-}
-export default async function WorkstreamsPage({ params }: WorkstreamsPageProps) {
-  const { slug, workstreamSlug } = await params
+export default function WorkstreamsPage() {
   return (
     <PageBackground>
       <PageContent>
@@ -21,8 +17,8 @@ export default async function WorkstreamsPage({ params }: WorkstreamsPageProps) 
           </Suspense>
 
           <div className="flex flex-col gap-8">
-            <WorkstreamCard slug={slug} workstreamSlug={workstreamSlug} />
-            <WorkstreamCard slug={slug} workstreamSlug={workstreamSlug} />
+            <WorkstreamCard />
+            <WorkstreamCard />
           </div>
         </div>
       </PageContent>

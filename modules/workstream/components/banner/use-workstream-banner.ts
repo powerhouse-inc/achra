@@ -1,15 +1,16 @@
+import { useParams } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY } from '../../config/constants'
 import type { HTMLMotionProps } from 'motion/react'
 
-interface UseWorkstreamBannerProps {
-  network?: string
-}
+export function useWorkstreamBanner() {
+  const { slug: networkSlug } = useParams<{ slug?: string }>()
 
-export function useWorkstreamBanner({ network }: UseWorkstreamBannerProps) {
-  const bannerVisibleStorageKey = network
-    ? `${network}-${WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY}`
+  console.log('networkSlug', networkSlug)
+
+  const bannerVisibleStorageKey = networkSlug
+    ? `${networkSlug}-${WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY}`
     : WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY
 
   const [isVisible, setIsVisible] = useLocalStorage(bannerVisibleStorageKey, true, {
@@ -18,7 +19,7 @@ export function useWorkstreamBanner({ network }: UseWorkstreamBannerProps) {
     },
   })
 
-  const isNetworkBanner = !!network
+  const isNetworkBanner = !!networkSlug
 
   const handleHide = useCallback(() => {
     setIsVisible(false)
