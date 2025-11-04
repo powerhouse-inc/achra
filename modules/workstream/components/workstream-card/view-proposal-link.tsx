@@ -1,11 +1,9 @@
-'use client'
-
-import { useParams } from 'next/navigation'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import type { Route } from 'next'
 
 function ViewProposalLink() {
-  const { slug, workstreamSlug } = useParams<{ slug: string; workstreamSlug: string }>()
+  const slug = 'powerhouse'
+  const workstreamSlug = 'vetra-beta-launch'
 
   return (
     <InternalLink

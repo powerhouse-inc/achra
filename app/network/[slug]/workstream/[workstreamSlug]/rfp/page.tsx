@@ -1,38 +1,28 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
+import { Suspense } from 'react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-
-import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
-
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { WorkstreamRfpBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import { BriefingMarkdown, CriteriaMarkdown } from '@/modules/workstream/mocks/markdown'
-import type { Route } from 'next'
 
-interface RequesForProposalPageProps {
+interface RequestForProposalPageProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
 }
 
-export default async function RequesForProposalPage({ params }: RequesForProposalPageProps) {
-  const { slug, workstreamSlug } = await params
-
-  const items = [
-    { label: 'Powerhouse', href: `/network/${slug}` as Route },
-    { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
-    {
-      label: 'Request For Proposal',
-      href: `/network/${slug}/workstream/${workstreamSlug}/rfp` as Route,
-    },
-  ]
-
+export default function RequestForProposalPage({ params }: RequestForProposalPageProps) {
   return (
     <main>
       <PageBreadcrumbContainer>
-        <Breadcrumb items={items} />
+        <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
+          <WorkstreamRfpBreadcrumb params={params} />
+        </Suspense>
       </PageBreadcrumbContainer>
 
       <PageContent className="gap-6" variant="with-breadcrumb">
