@@ -15,7 +15,7 @@ export default function TimelineSwiper({ milestones }: TimelineSwiperProps) {
   const { adjustCardHeights, swiperRef } = useRoadmapSwiper()
 
   return (
-    <div className="mt-6 hidden flex-col md:flex lg:hidden">
+    <div className="hidden flex-col md:flex lg:hidden">
       <div className="relative -mx-2">
         <Swiper
           ref={swiperRef}

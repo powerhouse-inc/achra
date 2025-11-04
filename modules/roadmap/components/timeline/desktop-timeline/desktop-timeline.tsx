@@ -8,6 +8,7 @@ import { Circle, CircleWithDot } from '@/shared/components/svgs'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
 import useDesktopTimeline from './use-desktop-timeline'
+
 const containerBaseClasses = 'flex items-stretch gap-10 xl:gap-18.25 2xl:gap-25.75'
 const spacingUpClasses = 'pr-32.5 xl:pr-45 2xl:pr-48.75'
 const spacingDownClasses = 'pl-32.5 xl:pl-45 2xl:pl-48.75'
