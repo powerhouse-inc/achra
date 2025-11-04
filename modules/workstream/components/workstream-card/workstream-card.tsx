@@ -46,7 +46,7 @@ export default function WorkstreamCard() {
       </div>
 
       <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-        <InitialProposalHeader />
+        <InitialProposalHeader slug="powerhouse" workstreamSlug="vetra-beta-launch" />
 
         <StatCards />
 
