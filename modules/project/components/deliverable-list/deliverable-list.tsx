@@ -20,7 +20,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
       {deliverables.map((deliverable) => (
         <div
           key={deliverable.id}
-          className="flex cursor-default flex-col gap-2 rounded-xl p-2 shadow-xs sm:gap-0"
+          className="bg-popover flex cursor-default flex-col gap-2 rounded-xl p-2 shadow-xs sm:gap-0"
         >
           <div className="flex justify-between">
             <div className="flex flex-col">

@@ -11,7 +11,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       project: 'rwa-project',
       margin: 0.1,
       quantity: 1,
-      unitCost: 100000,
+      unitCost: 300000,
       unit: null,
     },
     code: 'D1',
@@ -66,8 +66,8 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
     budgetAnchor: {
       project: 'rwa-project',
       margin: 0.1,
-      quantity: 1,
-      unitCost: 100000,
+      quantity: 2,
+      unitCost: 230000,
       unit: null,
     },
     keyResults: [
@@ -111,8 +111,8 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
     budgetAnchor: {
       project: 'rwa-project',
       margin: 0.1,
-      quantity: 1,
-      unitCost: 100000,
+      quantity: 2,
+      unitCost: 250000,
       unit: null,
     },
     keyResults: [
@@ -136,8 +136,8 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
     budgetAnchor: {
       project: 'rwa-project',
       margin: 0.1,
-      quantity: 1,
-      unitCost: 100000,
+      quantity: 4,
+      unitCost: 250_600,
       unit: null,
     },
     keyResults: [
@@ -171,8 +171,8 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
     budgetAnchor: {
       project: 'rwa-project',
       margin: 0.1,
-      quantity: 1,
-      unitCost: 100000,
+      quantity: 3,
+      unitCost: 150000,
       unit: null,
     },
     keyResults: [

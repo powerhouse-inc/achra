@@ -1,3 +1,4 @@
+'use client'
 import { Link } from 'lucide-react'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
