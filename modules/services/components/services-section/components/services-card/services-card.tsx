@@ -35,8 +35,12 @@ export default function ServicesCard({ service }: ServicesCardProps) {
               className="absolute rounded-lg"
               style={{ objectFit: 'cover' }}
             />
-            <ComingSoonTagDesktop className="absolute top-2 -left-2 hidden sm:block" />
-            <ComingSoonTagMobile className="absolute top-5.75 -left-1 sm:hidden" />
+            {service.unavailable && (
+              <>
+                <ComingSoonTagDesktop className="absolute top-2 -left-2 hidden sm:block" />
+                <ComingSoonTagMobile className="absolute top-5.75 -left-1 sm:hidden" />
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <Button size="lg" asChild>
