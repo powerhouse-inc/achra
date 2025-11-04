@@ -1,6 +1,5 @@
 export { Breadcrumb } from './breadcrumb'
 export { PageBreadcrumbContainer } from './page-breadcrumb-container'
-export { BreadcrumbSkeleton } from './breadcrumb-skeleton'
 export type {
   BreadcrumbItemNavigation,
   BreadcrumbItemExtended,
