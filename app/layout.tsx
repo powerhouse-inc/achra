@@ -1,6 +1,7 @@
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
-import './globals.css'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Navbar } from '@/modules/shared/components/navbar'
 import ff from '@/modules/shared/lib/feature-flags'
@@ -9,6 +10,8 @@ import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overl
 import { Footer } from '@/shared/components/footer/footer'
 import { QueryClientProvider } from '@/shared/providers/query-client'
 import type { Metadata } from 'next'
+
+import './globals.css'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -59,6 +62,9 @@ export default function RootLayout({
             </NuqsAdapter>
           </QueryClientProvider>
         </ThemeProvider>
+
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
