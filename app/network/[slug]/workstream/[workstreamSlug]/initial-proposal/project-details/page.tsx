@@ -61,7 +61,7 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
   return (
     <main>
       <PageBreadcrumbContainer>
-        <Suspense fallback={<BreadcrumbSkeleton />}>
+        <Suspense fallback={<BreadcrumbSkeleton segments={4} />}>
           <ProjectDetailsBreadcrumb params={params} />
         </Suspense>
       </PageBreadcrumbContainer>

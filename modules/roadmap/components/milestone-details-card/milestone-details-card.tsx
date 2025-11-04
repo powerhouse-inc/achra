@@ -61,9 +61,9 @@ export default function MilestoneDetailsCard({
             // Responsive widths and spacing
             'w-full',
             'md:w-1/2',
-            'lg:w-[304px] lg:gap-4 lg:px-4 lg:pt-4 lg:pb-6',
-            'xl:w-[379px] xl:px-6',
-            '2xl:w-[416px]',
+            'lg:w-76 lg:gap-4 lg:px-4 lg:pt-4 lg:pb-6',
+            'xl:w-94.5 xl:px-6',
+            '2xl:w-104',
           )}
         >
           <div className="text-foreground/30 inline-flex max-w-fit items-center gap-1 rounded-md border px-2 py-1 text-xl font-bold">

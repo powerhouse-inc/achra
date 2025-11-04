@@ -1,15 +1,80 @@
+import { ChevronRight } from 'lucide-react'
 import { Skeleton } from '../ui/skeleton'
 
-export function BreadcrumbSkeleton() {
+interface BreadcrumbSkeletonProps {
+  segments: number
+}
+
+function Separator() {
+  return <ChevronRight className="text-foreground/30 size-6 pr-1" />
+}
+function Segment({ width = 'w-20' }: { width?: string }) {
+  return <Skeleton className={`h-6 ${width}`} />
+}
+
+function MobileSkeleton({ segments }: BreadcrumbSkeletonProps) {
+  if (segments > 1) {
+    return (
+      <>
+        <Segment width="w-8" />
+        <Separator />
+        <Segment />
+      </>
+    )
+  }
+
+  return <Segment />
+}
+
+function DesktopSkeleton({ segments }: BreadcrumbSkeletonProps) {
+  if (segments === 1) return <Segment />
+  if (segments === 2) {
+    return (
+      <>
+        <Segment />
+        <Separator />
+        <Segment />
+      </>
+    )
+  }
+  if (segments === 3) {
+    return (
+      <>
+        <Segment />
+        <Separator />
+        <Segment />
+        <Separator />
+        <Segment />
+      </>
+    )
+  }
   return (
-    <div className="flex items-center gap-2">
-      <Skeleton className="h-5 w-24" />
-      <span className="text-muted-foreground">/</span>
-      <Skeleton className="h-5 w-6" />
-      <span className="text-muted-foreground">/</span>
-      <Skeleton className="h-5 w-32" />
-      <span className="text-muted-foreground">/</span>
-      <Skeleton className="h-5 w-40" />
+    <>
+      <Segment />
+      <Separator />
+      <Segment width="w-8" />
+      <Separator />
+      <Segment />
+      <Separator />
+      <Segment />
+    </>
+  )
+}
+
+function BreadcrumbSkeleton({ segments }: BreadcrumbSkeletonProps) {
+  return (
+    <div>
+      {/* Mobile */}
+      <div className="flex items-center gap-2.5 lg:hidden">
+        <MobileSkeleton segments={segments} />
+      </div>
+
+      {/* Desktop */}
+      <div className="hidden items-center gap-2.5 lg:flex">
+        <DesktopSkeleton segments={segments} />
+      </div>
     </div>
   )
 }
+
+export { BreadcrumbSkeleton }
