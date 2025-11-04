@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { RoadmapLinks } from '@/modules/roadmap/components/roadmap-links'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -12,9 +13,8 @@ const items = [
   { label: 'Powerhouse', href: '/network/powerhouse' as Route },
   { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as Route },
 ]
-export default async function RoadmapPage({ params }: RoadmapPageProps) {
-  const { slug } = await params
 
+export default function RoadmapPage({ params }: RoadmapPageProps) {
   return (
     <main>
       <PageBreadcrumbContainer>
@@ -28,7 +28,9 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
           </h1>
 
           <div className="flex h-9 w-full justify-center py-32">
-            <RoadmapLinks slug={slug} />
+            <Suspense fallback={<div>Loading roadmaps...</div>}>
+              <RoadmapLinks slug={params.then((params) => params.slug)} />
+            </Suspense>
           </div>
         </div>
       </PageContent>

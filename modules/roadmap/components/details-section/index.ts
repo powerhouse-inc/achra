@@ -1,1 +1,1 @@
-export { default as DetailsSection } from './details-section'
+export { DetailsSection, DetailsSectionSkeleton } from './details-section'
