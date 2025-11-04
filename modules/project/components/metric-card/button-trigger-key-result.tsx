@@ -13,6 +13,8 @@ export function ButtonTriggerKeyResult() {
       <Button
         variant="outline"
         size="icon"
+        aria-label="View key results"
+        aria-expanded={isOpen}
         onClick={() => {
           setIsOpen(true)
         }}

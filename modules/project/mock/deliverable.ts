@@ -24,7 +24,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr1',
         title: 'RWA Portfolio conceptual wireframes',
-        link: '',
+        link: 'www.examplelink.com',
       },
       {
         id: 'kr2',
@@ -44,7 +44,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr5',
         title: 'Source code on Powerhouse Github repo',
-        link: '',
+        link: 'www.examplelink.com',
       },
       {
         id: 'kr6',
@@ -84,7 +84,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr9',
         title: 'Expense dashboard on-going work',
-        link: '',
+        link: 'www.examplelink.com',
       },
       {
         id: 'kr10',
@@ -94,7 +94,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr11',
         title: 'Custom MakerDAO domain name configured',
-        link: '',
+        link: 'www.examplelink.com',
       },
     ],
   },
@@ -149,7 +149,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr14',
         title: 'Source code on Powerhouse Github repo',
-        link: '',
+        link: 'www.examplelink.com',
       },
       {
         id: 'kr15',
@@ -189,7 +189,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       {
         id: 'kr18',
         title: 'Expense dashboard on-going work',
-        link: '',
+        link: 'www.examplelink.com',
       },
       {
         id: 'kr19',
