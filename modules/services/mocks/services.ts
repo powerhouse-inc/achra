@@ -28,7 +28,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-01.svg',
+    cover: '/services/covers/cover-01.jpg',
     unavailable: false,
   },
   {
@@ -52,7 +52,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-02.svg',
+    cover: '/services/covers/cover-02.jpg',
     unavailable: false,
   },
   {
@@ -80,7 +80,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-03.svg',
+    cover: '/services/covers/cover-03.jpg',
     unavailable: true,
   },
   {
@@ -107,7 +107,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-04.svg',
+    cover: '/services/covers/cover-04.jpg',
     unavailable: true,
   },
   {
@@ -134,7 +134,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-05.svg',
+    cover: '/services/covers/cover-05.jpg',
     unavailable: true,
   },
   {
@@ -164,7 +164,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Transparency reporting',
       'Tax administration & filing',
     ],
-    cover: '/services/covers/service-cover-06.svg',
+    cover: '/services/covers/cover-06.jpg',
     unavailable: true,
   },
 ]

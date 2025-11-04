@@ -3,10 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
+import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
+import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
 import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
 import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import { cn } from '@/modules/shared/lib/utils'
 import type { Service } from '@/modules/shared/types/services'
 import { ServicesCardListSection } from './components/services-card-list-section/services-card-list-section'
 import type { Route } from 'next'
@@ -20,17 +23,28 @@ export default function ServicesCard({ service }: ServicesCardProps) {
     <Card className="bg-accent p-2 sm:p-3">
       <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_35%] xl:grid-cols-[120px_1fr_50%]">
         <div className="flex flex-col gap-2 sm:gap-4">
-          <div className="relative h-32 w-full overflow-hidden rounded-lg sm:h-30">
+          <div className="relative h-32 w-full sm:h-30">
             <Image
               src={service.cover}
               alt={service.title}
               fill
-              className="absolute"
+              className="absolute rounded-lg"
               style={{ objectFit: 'cover' }}
             />
+            {service.unavailable && (
+              <>
+                <ComingSoonTagDesktop className="absolute top-2 -left-2 hidden sm:block" />
+                <ComingSoonTagMobile className="absolute top-5.75 -left-1 sm:hidden" />
+              </>
+            )}
           </div>
           <div className="flex flex-col gap-2">
-            <Button size="lg" asChild>
+            <Button
+              size="lg"
+              asChild
+              disabled={service.unavailable}
+              className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+            >
               <Link href={`/services/${service.id}` as Route}>
                 <span>Purchase</span>
                 <ArrowRight className="size-4" />
