@@ -6,10 +6,6 @@ export enum ServiceEntityEnum {
   'SNO Governors' = 'SNO Governors',
 }
 
-export interface ServiceSection {
-  title: string
-  items: string[]
-}
 export interface Service {
   id: string
   cover: string
@@ -17,6 +13,7 @@ export interface Service {
   description: string[]
   descriptionItems?: string[]
   entities: ServiceEntityEnum[]
-  sections: ServiceSection[]
+  formationAndSetup: string[]
+  recurringServices: string[]
   unavailable: boolean
 }

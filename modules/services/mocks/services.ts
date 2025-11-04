@@ -15,26 +15,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Legal Protection',
     ],
     entities: [ServiceEntityEnum.Founders, ServiceEntityEnum['SNO Governors']],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-01.svg',
     unavailable: false,
@@ -47,26 +39,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Offers protection for liability risk and conflict resolution with strong privacy protection.',
     ],
     entities: [ServiceEntityEnum.Builders, ServiceEntityEnum.Operators],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-02.svg',
     unavailable: false,
@@ -83,26 +67,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Social Media accounts',
     ],
     entities: [ServiceEntityEnum['SNO Governors']],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-03.svg',
     unavailable: true,
@@ -118,26 +94,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Software Patents',
     ],
     entities: [ServiceEntityEnum['SNO Governors']],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-04.svg',
     unavailable: true,
@@ -153,26 +121,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'Branded Content',
     ],
     entities: [ServiceEntityEnum['SNO Governors']],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-05.svg',
     unavailable: true,
@@ -191,26 +151,18 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'ISRC and treasury buffer integration',
     ],
     entities: [ServiceEntityEnum['SNO Governors']],
-    sections: [
-      {
-        title: 'Formation & Setup',
-        items: [
-          'Legal needs analysis',
-          'Entity incorporation',
-          'Payment processor setup',
-          'Contributor on-boarding',
-          'Wind-down planning',
-        ],
-      },
-      {
-        title: 'Recurring Services',
-        items: [
-          'Contracts administration',
-          'Payment processing',
-          'Transparency reporting',
-          'Tax administration & filing',
-        ],
-      },
+    formationAndSetup: [
+      'Legal needs analysis',
+      'Entity incorporation',
+      'Payment processor setup',
+      'Contributor on-boarding',
+      'Wind-down planning',
+    ],
+    recurringServices: [
+      'Contracts administration',
+      'Payment processing',
+      'Transparency reporting',
+      'Tax administration & filing',
     ],
     cover: '/services/covers/service-cover-06.svg',
     unavailable: true,
