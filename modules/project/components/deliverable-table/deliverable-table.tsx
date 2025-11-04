@@ -16,11 +16,10 @@ import {
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum } from '@/modules/shared/types'
-import { AvatarTitle } from '../avatar-title/avatar-title'
+import { AvatarTitleAvatar, AvatarTitleRoot, AvatarTitleText } from '../avatar-title/avatar-title'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { ProgressComponent } from '../progress-component/progress-component'
 import { useDeliverableTable } from './use-deliverable-table'
-import type { Route } from 'next'
 
 export interface DeliverableTableProps {
   deliverables: ScopeOfWork_Deliverable[]
@@ -86,14 +85,14 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
           >
             <TableCell className="h-fit w-[22.9%] shrink-0 p-0! lg:w-[22.9%] xl:w-[22.3%]">
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1">
-                  <AvatarTitle
-                    avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/DEWIZ/DEWIZ_logo.png"
-                    title={deliverable.title}
+                <AvatarTitleRoot>
+                  <AvatarTitleAvatar
+                    src="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+                    alt="Powerhouse OH"
                     className="size-8"
-                    href={'/network/powerhouse/builders' as Route}
                   />
-                </div>
+                  <AvatarTitleText>{deliverable.title}</AvatarTitleText>
+                </AvatarTitleRoot>
               </div>
             </TableCell>
             <TableCell className="h-fit w-[16.9%] shrink-0 p-0! text-left lg:w-[16.9%] xl:w-[14.9%]">

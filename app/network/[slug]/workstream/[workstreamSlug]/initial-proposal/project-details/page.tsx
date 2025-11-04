@@ -1,58 +1,27 @@
 import { Suspense } from 'react'
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
-  AvatarTitle,
   MetricCard,
   MetricCardSkeleton,
   ProgressCard,
   TotalCostField,
 } from '@/modules/project/components'
 import { AvatarTitleSkeleton } from '@/modules/project/components/avatar-title/avatar-title-skeleton'
+import { AvatarTitleProjectDetails } from '@/modules/project/components/avatar-title/project-details-avatar-title'
+import { ProjectDetailsBreadcrumb } from '@/modules/project/components/breadcrumb-project/breadcrumb-project'
 import { DeliverablesCard } from '@/modules/project/components/deliverables-card'
 
 import { ButtonTriggerKeyResult } from '@/modules/project/components/metric-card/button-trigger-key-result'
 import { mockDeliverables } from '@/modules/project/mock/deliverable'
-import {
-  Breadcrumb,
-  BreadcrumbSkeleton,
-  PageBreadcrumbContainer,
-} from '@/modules/shared/components/breadcrumb'
+import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 import { Card } from '@/modules/shared/components/ui/card'
-import type { Route } from 'next'
 
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
-}
-async function ProjectDetailsAvatarTitle({ params }: ProjectDetailsPageProps) {
-  const { slug } = await params
-  return (
-    <AvatarTitle
-      avatar="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
-      title="Powerhouse OH"
-      href={`/network/${slug}/builders` as Route}
-    />
-  )
-}
-
-async function ProjectDetailsBreadcrumb({ params }: ProjectDetailsPageProps) {
-  const { slug, workstreamSlug } = await params
-  const items = [
-    { label: 'Powerhouse', href: `/network/${slug}` as Route },
-    { label: 'Vetra Beta Launch', href: `/network/${slug}/workstream/${workstreamSlug}` as Route },
-    {
-      label: 'Initiative Proposal',
-      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route,
-    },
-    {
-      label: 'PRJ-1 - Front-end Development',
-      href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project` as Route,
-    },
-  ]
-  return <Breadcrumb items={items} />
 }
 
 export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
@@ -82,7 +51,11 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                     </div>
                     <div className="hidden sm:block">
                       <Suspense fallback={<AvatarTitleSkeleton />}>
-                        <ProjectDetailsAvatarTitle params={params} />
+                        <AvatarTitleProjectDetails
+                          src="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+                          title="Powerhouse OH"
+                          params={params}
+                        />
                       </Suspense>
                     </div>
                   </div>
@@ -92,7 +65,11 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                 </div>
                 <div className="block sm:hidden">
                   <Suspense fallback={<AvatarTitleSkeleton />}>
-                    <ProjectDetailsAvatarTitle params={params} />
+                    <AvatarTitleProjectDetails
+                      src="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+                      title="Powerhouse OH"
+                      params={params}
+                    />
                   </Suspense>
                 </div>
 
