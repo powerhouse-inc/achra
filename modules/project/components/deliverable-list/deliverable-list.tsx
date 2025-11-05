@@ -37,7 +37,9 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-start">
-                    <span className="truncate text-sm/5.5 font-semibold">{deliverable.title}</span>
+                    <span className="max-w-56 truncate text-sm font-semibold sm:max-w-36 md:max-w-50">
+                      {deliverable.title}
+                    </span>
                     <div className="flex sm:hidden">
                       <DeliverableStatusChip status={deliverable.status} />
                     </div>

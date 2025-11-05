@@ -91,7 +91,9 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
                     alt="Powerhouse OH"
                     className="size-8"
                   />
-                  <AvatarTitleText>{deliverable.title}</AvatarTitleText>
+                  <AvatarTitleText className="max-w-40 truncate xl:max-w-50 2xl:max-w-56">
+                    {deliverable.title}
+                  </AvatarTitleText>
                 </AvatarTitleRoot>
               </div>
             </TableCell>
