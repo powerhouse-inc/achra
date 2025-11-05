@@ -7,8 +7,8 @@ import { Badge } from '../../ui/badge'
 const buildersScopesChipVariants = cva('box-border border-2', {
   variants: {
     size: {
-      small: 'h-6 w-8.5 text-xs/4.5 font-medium',
-      medium: 'px-2 py-0 text-sm/5.5 font-semibold',
+      small: 'h-6 w-8.5 p-0 text-xs/4.5 font-medium',
+      medium: 'h-6 w-12 p-0 text-sm/5.5 font-semibold',
       large: 'h-6 px-1.5 py-0.25 text-sm/5.5 font-semibold',
       extraLarge: 'px-2 py-1 text-sm/5.5 font-semibold',
     },
@@ -40,7 +40,8 @@ interface BuildersScopesChipProps {
 }
 
 export function BuildersScopesChip({ scope, size = 'large', className }: BuildersScopesChipProps) {
-  const chipLabel = size === 'small' || size === 'medium' ? scope.code : scope.name
+  const chipLabel =
+    size === 'small' || size === 'medium' ? scope.name.slice(0, 3).toUpperCase() : scope.name
 
   return (
     <Badge
