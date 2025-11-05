@@ -8,17 +8,12 @@ import type { NetworkProfile_NetworkProfileState } from '@/modules/__generated__
 import { fetchNetworkProfile } from '@/modules/networks/lib/fetch-networks'
 
 /**
- * Module-level cache ensures Promise stability across renders
- * Required for proper functionality with React's use() hook
+ * Module-level cache for stable Promise references
  */
 const networkCache = new Map<string, Promise<NetworkProfile_NetworkProfileState | undefined>>()
 
 /**
  * Cached network profile fetcher with stable Promise references
- * The use() hook requires the same Promise instance across renders
- *
- * @param slug - Network slug to fetch profile for
- * @returns Promise that resolves to network profile or undefined
  */
 // we expect this to return a promise, and we need it this way
 // eslint-disable-next-line @typescript-eslint/promise-function-async
@@ -30,12 +25,11 @@ function getCachedNetworkProfile(slug: string) {
 }
 
 /**
- * Network-specific brand component that displays network logo and icon
+ * Network logo and icon display
  */
 function NetworkSpecificBrand() {
   const slug = useParams().slug?.toString() ?? ''
 
-  // Memoize the promise to ensure stability across renders (we expect this to return a promise)
   // eslint-disable-next-line @typescript-eslint/promise-function-async
   const networkProfilePromise = useMemo(() => getCachedNetworkProfile(slug), [slug])
 
@@ -57,7 +51,7 @@ function NetworkSpecificBrand() {
 NetworkSpecificBrand.displayName = 'NetworkSpecificBrand'
 
 /**
- * Renders network icon with fallback for mobile view
+ * Network icon for mobile view
  */
 function NetworkIcon({ icon, name }: { icon: string | null | undefined; name: string }) {
   const iconSrc = icon ?? '/networks/logos/unknown.png'
@@ -76,7 +70,7 @@ function NetworkIcon({ icon, name }: { icon: string | null | undefined; name: st
 }
 
 /**
- * Renders network logo with fallback for desktop view
+ * Network logo for desktop view
  */
 function NetworkLogo({ logo, name }: { logo: string | null | undefined; name: string }) {
   if (logo) {

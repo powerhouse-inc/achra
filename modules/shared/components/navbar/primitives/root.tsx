@@ -2,27 +2,20 @@ import { Suspense } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { NAVBAR_BLUR_BACKGROUND_ROUTES } from '../../../config/navbar-config'
 import { RootPositioning } from './root-positioning'
-import { RootProvider } from './root-provider'
 
-/**
- * Props for Root component
- */
 export interface RootProps {
   children: React.ReactNode
 }
 
 /**
- * Root container for the navbar
- * Provides context and positioning for all navbar elements
+ * Root navbar container
  */
 function Root({ children }: RootProps) {
   return (
     <Suspense fallback={<RootContent>{children}</RootContent>}>
-      <RootProvider>
-        <RootPositioning routesWithBlurBackground={NAVBAR_BLUR_BACKGROUND_ROUTES}>
-          <RootContent>{children}</RootContent>
-        </RootPositioning>
-      </RootProvider>
+      <RootPositioning routesWithBlurBackground={NAVBAR_BLUR_BACKGROUND_ROUTES}>
+        <RootContent>{children}</RootContent>
+      </RootPositioning>
     </Suspense>
   )
 }

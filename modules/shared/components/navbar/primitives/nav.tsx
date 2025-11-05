@@ -1,8 +1,5 @@
 import { cn } from '@/modules/shared/lib/utils'
 
-/**
- * Props for Nav component
- */
 export interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   className?: string
@@ -10,7 +7,6 @@ export interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Navigation container for navbar items (desktop only)
- * Automatically adjusts spacing based on number of items
  */
 function Nav({ children, className, ...props }: NavProps) {
   const hasManyItems = Array.isArray(children) && children.length > 3

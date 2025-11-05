@@ -7,8 +7,7 @@ import { buildNetworkNavbarLinks } from '../../../config/navbar-config'
 import * as NavbarPrimitives from '../primitives'
 
 /**
- * Network-specific navigation component
- * Dynamically builds navigation links based on the current network
+ * Network-specific navigation links
  */
 function NetworksNav({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const { slug: networkSlug } = useParams()
@@ -31,8 +30,7 @@ function NetworksNav({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
 NetworksNav.displayName = 'NetworksNav'
 
 /**
- * Skeleton for the networks navigation
- * @returns A skeleton for the networks navigation
+ * Skeleton for networks navigation
  */
 function NetworksNavSkeleton() {
   return (

@@ -3,7 +3,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import { Navbar } from '@/modules/shared/components/navbar'
 import ff from '@/modules/shared/lib/feature-flags'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
@@ -54,8 +53,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
             <NuqsAdapter>
-              <Navbar />
-              <div className="pt-18 md:pt-21">{children}</div>
+              {children}
+
               {ff.FEATURE_WHITELIST_OVERLAY && <WhitelistOverlay />}
 
               <Footer />
