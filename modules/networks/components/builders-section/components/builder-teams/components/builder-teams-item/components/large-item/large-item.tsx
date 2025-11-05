@@ -1,16 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
-import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
-import { ResourceType } from '@/modules/shared/types/types'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import CategoryBadge from '../category-badge/category-badge'
-import CategoryBadgeGroup from '../category-badge-group/category-badge-group'
-import ItemProfile from '../profile/profile'
+import Domain from '../domain/domain'
+import Profile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
-import ScopeBadgeGroup from '../scope-badge-group/scope-badge-group'
 
 export interface LargeItemProps {
   team: Team
@@ -25,33 +21,13 @@ export default function LargeItem({ team, className }: LargeItemProps) {
         className,
       )}
     >
-      <ItemProfile
+      <Profile
         name={team.name}
         shortCode={team.shortCode}
         status={team.status}
         image={team.image}
       />
-      <div className="flex justify-between">
-        {team.type === ResourceType.EcosystemActor ? (
-          team.scopes.length > 2 ? (
-            <ScopeBadgeGroup items={team.scopes} />
-          ) : team.scopes.length === 0 ? null : (
-            <div className="flex flex-col gap-1">
-              {team.scopes.map((scope) => (
-                <BuildersScopesChip key={scope.id} scope={scope} size="large" />
-              ))}
-            </div>
-          )
-        ) : team.categories.length > 2 ? (
-          <CategoryBadgeGroup items={team.categories} />
-        ) : team.categories.length === 0 ? null : (
-          <div className="flex flex-col gap-1">
-            {team.categories.map((category) => (
-              <CategoryBadge key={category} category={category} />
-            ))}
-          </div>
-        )}
-      </div>
+      <Domain team={team} />
       <RoleBadge type={team.type} />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
