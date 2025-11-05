@@ -1,1 +1,2 @@
-export { Navbar } from './navbar'
+export { AchraNavbar } from './achra-navbar'
+export { NetworkNavbar } from './network-navbar'

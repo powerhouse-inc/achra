@@ -7,7 +7,7 @@ import * as NavbarPrimitives from '../primitives'
 import { useAuth } from '../primitives/use-auth'
 
 /**
- * Renders authenticated user avatar or login button for desktop
+ * User avatar or login button for desktop
  */
 function UserButton() {
   const { isAuthenticated } = useAuth()
@@ -25,7 +25,7 @@ function UserButton() {
 UserButton.displayName = 'NavbarUserButton'
 
 /**
- * Renders user option in dropdown menu for mobile
+ * User option in mobile dropdown menu
  */
 function UserOption() {
   const { isAuthenticated } = useAuth()
@@ -47,8 +47,7 @@ function UserOption() {
 }
 
 /**
- * Shared authenticated user avatar component
- * Consolidates duplicate rendering logic (DRY principle)
+ * Authenticated user avatar
  */
 function AuthenticatedUserAvatar({ className }: { className?: string }) {
   return (

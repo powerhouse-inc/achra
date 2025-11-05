@@ -1,24 +1,13 @@
 /**
- * Type for defining when a navigation item should be considered active
- * Can be a string pattern or array of string patterns
- * Strings can contain regex patterns (using regex.source for serialization)
+ * Pattern(s) to match against pathname (string, regex string, or array)
  */
 export type ActiveWhen = string | string[]
 
 /**
- * Determines if a navigation item should be active based on the current pathname
- * Supports string patterns (path prefix or regex string) and arrays of patterns
- *
+ * Checks if a navigation item should be active based on current pathname
  * @param pathname - Current URL pathname
- * @param activeWhen - Pattern(s) to match against pathname
- * @returns true if the item should be active
- *
- * @example
- * ```ts
- * isActive('/network/powerhouse', '/network') // true (startsWith)
- * isActive('/network/powerhouse', /\/network\/\w+/.source) // true (regex string)
- * isActive('/network/powerhouse', ['/network', '/networks']) // true (array)
- * ```
+ * @param activeWhen - Pattern(s) to match (prefix, regex string, or array)
+ * @example isActive('/network/powerhouse', '/network') // true
  */
 export function isActive(pathname: string, activeWhen: ActiveWhen): boolean {
   // Handle string pattern (startsWith or regex string)

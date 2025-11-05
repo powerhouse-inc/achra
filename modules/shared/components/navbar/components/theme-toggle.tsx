@@ -7,8 +7,7 @@ import { Button } from '@/shared/components/ui/button'
 import * as NavbarPrimitives from '../primitives'
 
 /**
- * Shared hook for theme toggle functionality
- * Centralizes theme switching logic (DRY principle)
+ * Theme toggle hook
  */
 function useThemeToggle() {
   const { setTheme, theme } = useTheme()
@@ -21,8 +20,7 @@ function useThemeToggle() {
 }
 
 /**
- * Theme toggle button for desktop view
- * Displays animated sun/moon icons
+ * Theme toggle button for desktop
  */
 function ThemeToggle() {
   const { handleThemeToggle } = useThemeToggle()
@@ -38,8 +36,7 @@ function ThemeToggle() {
 ThemeToggle.displayName = 'NavbarThemeToggle'
 
 /**
- * Theme toggle option for mobile dropdown menu
- * Shows theme label with icon
+ * Theme toggle option for mobile menu
  */
 function ThemeToggleOption() {
   const { theme, handleThemeToggle } = useThemeToggle()
@@ -53,8 +50,7 @@ function ThemeToggleOption() {
 }
 
 /**
- * Animated theme toggle icons (sun/moon) for button
- * Consolidates icon rendering logic (DRY principle)
+ * Animated sun/moon icons
  */
 function ThemeToggleIcons() {
   return (
@@ -67,7 +63,6 @@ function ThemeToggleIcons() {
 
 /**
  * Theme icon for dropdown menu label
- * Shows opposite theme icon (sun in dark mode, moon in light mode)
  */
 function ThemeLabelIcon({ theme }: { theme: string | undefined }) {
   return theme === 'dark' ? <Sun className="mr-2 h-4 w-4" /> : <Moon className="mr-2 h-4 w-4" />

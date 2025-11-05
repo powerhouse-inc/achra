@@ -5,7 +5,7 @@ import { NetworkSpecificBrand } from './network-specific-brand'
 import { NetworkSpecificBrandSkeleton } from './network-specific-brand-skeleton'
 
 /**
- * Network brand area that displays Achra logo and network-specific branding
+ * Brand area with Achra logo and network-specific branding
  */
 function NetworkBrand() {
   return (

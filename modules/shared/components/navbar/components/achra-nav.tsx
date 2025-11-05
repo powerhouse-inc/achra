@@ -3,8 +3,7 @@ import { ACHRA_NAVBAR_LINKS } from '../../../config/navbar-config'
 import * as NavbarPrimitives from '../primitives'
 
 /**
- * Main Achra navigation component
- * Displays primary navigation links for the Achra platform
+ * Primary navigation links for Achra platform
  */
 function AchraNav({ ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (

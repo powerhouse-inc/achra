@@ -3,9 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { cn } from '@/modules/shared/lib/utils'
 
-/**
- * Props for RootPositioning component
- */
 export interface RootPositioningProps {
   children: React.ReactNode
   /** Routes where the navbar should have a blur background effect */
@@ -13,8 +10,7 @@ export interface RootPositioningProps {
 }
 
 /**
- * Handles navbar positioning and background effects
- * Conditionally applies blur background based on current route
+ * Handles navbar positioning and conditional blur background
  */
 function RootPositioning({ children, routesWithBlurBackground }: RootPositioningProps) {
   const pathname = usePathname()

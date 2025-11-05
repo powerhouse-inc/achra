@@ -1,9 +1,22 @@
-import { Navbar } from './navbar'
+import { AchraNavbar } from './achra-navbar'
+import { NetworkNavbar } from './network-navbar'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Shared/Components/Navbar',
-  component: Navbar,
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
+} satisfies Meta
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Achra: Story = {
+  name: 'Navbar (Achra)',
+  render: () => <AchraNavbar />,
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -12,17 +25,11 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Navbar>
-
-export default meta
-type Story = StoryObj<typeof meta>
-
-export const Basic: Story = {
-  name: 'Navbar (Achra)',
 }
 
-export const WithPowerhousePathname: Story = {
+export const NetworkPowerhouse: Story = {
   name: 'Navbar (Powerhouse)',
+  render: () => <NetworkNavbar />,
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -34,8 +41,9 @@ export const WithPowerhousePathname: Story = {
   },
 }
 
-export const WithSkyPathname: Story = {
+export const NetworkSky: Story = {
   name: 'Navbar (Sky)',
+  render: () => <NetworkNavbar />,
   parameters: {
     nextjs: {
       appDirectory: true,

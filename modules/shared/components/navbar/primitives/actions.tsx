@@ -9,31 +9,25 @@ import {
   DropdownMenuTrigger,
 } from '../../ui/dropdown-menu'
 
-/**
- * Props for ActionsArea component
- */
 export interface ActionsAreaProps {
   children: React.ReactNode
 }
 
 /**
- * Container for navbar action items (right side of navbar)
+ * Container for navbar action items (right side)
  */
 function ActionsArea({ children }: ActionsAreaProps) {
   return <div>{children}</div>
 }
 ActionsArea.displayName = 'NavbarActionsArea'
 
-/**
- * Props for ActionsGroup component
- */
 export interface ActionsGroupProps {
   children: React.ReactNode
   className?: string
 }
 
 /**
- * Groups related action items together with consistent spacing
+ * Groups related action items with consistent spacing
  */
 function ActionsGroup({ children, className }: ActionsGroupProps) {
   return <div className={cn('flex items-center gap-4', className)}>{children}</div>
@@ -48,16 +42,13 @@ function ActionSeparator() {
 }
 ActionSeparator.displayName = 'NavbarActionSeparator'
 
-/**
- * Props for ActionWithOptions component
- */
 export interface ActionWithOptionsProps {
   children: React.ReactNode
   className?: string
 }
 
 /**
- * Dropdown menu container for action options (mobile menu)
+ * Dropdown menu container for action options (mobile)
  */
 function ActionWithOptions({ children, className }: ActionWithOptionsProps) {
   return (
@@ -78,13 +69,10 @@ function ActionWithOptions({ children, className }: ActionWithOptionsProps) {
 }
 ActionWithOptions.displayName = 'NavbarActionWithOptions'
 
-/**
- * Props for ActionOption component
- */
 export type ActionOptionProps = React.ComponentProps<typeof DropdownMenuItem>
 
 /**
- * Individual action option in the dropdown menu
+ * Individual action option in dropdown menu
  */
 function ActionOption({ children, className, ...props }: ActionOptionProps) {
   return (
