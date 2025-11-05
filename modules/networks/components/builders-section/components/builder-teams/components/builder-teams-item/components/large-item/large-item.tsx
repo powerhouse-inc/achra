@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
+import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
@@ -9,7 +10,6 @@ import BadgeGroup from '../badge-group/badge-group'
 import CategoryBadge from '../category-badge/category-badge'
 import ItemProfile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
-import ScopeBadge from '../scope-badge/scope-badge'
 
 export interface LargeItemProps {
   team: Team
@@ -35,7 +35,7 @@ export default function LargeItem({ team, className }: LargeItemProps) {
           team.scopes.length > 1 ? (
             <BadgeGroup items={team.scopes} />
           ) : team.scopes.length === 0 ? null : (
-            <ScopeBadge key={team.scopes[0].id} scope={team.scopes[0]} size="large" />
+            <BuildersScopesChip key={team.scopes[0].id} scope={team.scopes[0]} size="large" />
           )
         ) : team.category.length > 2 ? (
           <BadgeGroup items={team.category as TeamCategory[]} />

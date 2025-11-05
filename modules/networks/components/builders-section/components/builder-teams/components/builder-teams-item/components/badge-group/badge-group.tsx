@@ -1,8 +1,8 @@
+import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import type { Scope } from '@/modules/shared/types/scopes'
 import type { TeamCategory } from '@/modules/shared/types/types'
 import CategoryBadge from '../category-badge/category-badge'
-import ScopeBadge from '../scope-badge/scope-badge'
 
 export interface BadgeGroupProps {
   items: Scope[] | TeamCategory[]
@@ -15,7 +15,7 @@ export default function BadgeGroup({ items }: BadgeGroupProps) {
     <Tooltip>
       <TooltipTrigger>
         {isScope(items[0]) ? (
-          <ScopeBadge key={items[0].id} scope={items[0]} size="large" />
+          <BuildersScopesChip key={items[0].id} scope={items[0]} size="large" />
         ) : (
           <div className="flex flex-col gap-1">
             <CategoryBadge category={items[0]} />
@@ -27,7 +27,7 @@ export default function BadgeGroup({ items }: BadgeGroupProps) {
         <div className="flex flex-col gap-1">
           {items.map((scope) =>
             isScope(scope) ? (
-              <ScopeBadge key={scope.id} scope={scope} size="large" />
+              <BuildersScopesChip key={scope.id} scope={scope} size="large" />
             ) : (
               <CategoryBadge key={scope} category={scope} />
             ),
