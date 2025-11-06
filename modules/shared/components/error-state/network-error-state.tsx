@@ -1,8 +1,7 @@
-import { CheckIcon, RefreshCcwIcon, WifiOffIcon } from 'lucide-react'
-import { useErrorBoundary } from 'react-error-boundary'
+import { CheckIcon, WifiOffIcon } from 'lucide-react'
 import { useNetworkState } from 'react-use'
+import { cn } from '../../lib/utils'
 import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
 import {
   Empty,
   EmptyContent,
@@ -13,12 +12,20 @@ import {
 } from '../ui/empty'
 import { Spinner } from '../ui/spinner'
 
-function NetworkErrorState() {
-  const { resetBoundary } = useErrorBoundary()
+interface NetworkErrorStateProps {
+  showBorder?: boolean
+}
+
+function NetworkErrorState({ showBorder = true }: NetworkErrorStateProps) {
   const { online } = useNetworkState()
 
   return (
-    <Empty className="bg-background mx-auto w-full max-w-sm border border-solid md:p-6">
+    <Empty
+      className={cn(
+        'bg-background mx-auto w-full max-w-sm md:p-6',
+        showBorder && 'border border-solid',
+      )}
+    >
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <WifiOffIcon />
@@ -31,9 +38,6 @@ function NetworkErrorState() {
           {online ? <CheckIcon className="color-status-success" /> : <Spinner />}
           {online ? 'Your connection is back!' : 'Checking your connection...'}
         </Badge>
-        <Button onClick={resetBoundary}>
-          <RefreshCcwIcon /> Try again
-        </Button>
       </EmptyContent>
     </Empty>
   )

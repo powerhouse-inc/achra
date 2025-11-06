@@ -1,4 +1,5 @@
 'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -87,7 +88,9 @@ function ForumOverview() {
               <ForumList
                 posts={posts}
                 biggerLikes={biggerLikes}
-                error={error}
+                error={
+                  error ?? (typeof data === 'undefined' && !isLoading ? new Error('No data') : null)
+                }
                 isLoading={isLoading}
               />
             </StripedCardContent>

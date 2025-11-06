@@ -1,15 +1,27 @@
 import { type LucideIcon, ServerCrash } from 'lucide-react'
+import { cn } from '../../lib/utils'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../ui/empty'
 
 interface GenericErrorStateProps {
   icon?: LucideIcon
   title?: string
   description?: string
+  showBorder?: boolean
 }
 
-function GenericErrorState({ icon: Icon, title, description }: GenericErrorStateProps) {
+function GenericErrorState({
+  icon: Icon,
+  title,
+  description,
+  showBorder = true,
+}: GenericErrorStateProps) {
   return (
-    <Empty className="bg-background mx-auto w-full max-w-sm border border-solid md:p-6">
+    <Empty
+      className={cn(
+        'bg-background mx-auto w-full max-w-sm md:p-6',
+        showBorder && 'border border-solid',
+      )}
+    >
       <EmptyHeader>
         <EmptyMedia variant="icon">{Icon ? <Icon /> : <ServerCrash />}</EmptyMedia>
         <EmptyTitle>{title ?? 'Something went wrong'}</EmptyTitle>
