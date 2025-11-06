@@ -22,9 +22,9 @@ export function WalletSection({ groupedWallets }: WalletSectionProps) {
   return (
     <PageContent>
       <section className="flex flex-col gap-6">
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col justify-end gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="m-0 text-xl/[120%] font-bold">Wallets</h2>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-end gap-4 sm:justify-start">
             <TotalDisplay primaryValue={primaryValue} secondaryValue={secondaryValue} />
           </div>
         </div>
