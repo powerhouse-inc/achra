@@ -32,7 +32,11 @@ export default function ServicesFilters() {
       <Tabs defaultValue="all" className="hidden sm:flex md:order-1">
         <TabsList className="h-10 rounded-md p-1">
           {SERVICES_TABS.map((tab) => (
-            <TabsTrigger key={tab.id} value={tab.id} className="border-none px-3 py-1.5 leading-5">
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              className="text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
+            >
               {tab.label}
             </TabsTrigger>
           ))}
