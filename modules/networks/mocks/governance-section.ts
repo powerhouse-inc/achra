@@ -93,7 +93,7 @@ export const mockedExecutiveProposals: ExecutiveProposal[] = [
       nextCastTime: '',
       datePassed: '2024-10-09T16:00:00Z',
       dateExecuted: '2024-10-10T10:00:00Z',
-      skySupport: '68000000000000',
+      skySupport: 'false',
       executiveHash: '0xffeeddccbbaa99887766554433221100ffeeddccbbaa998877665544332211',
       officeHours: true,
     },

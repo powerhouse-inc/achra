@@ -23,8 +23,8 @@ export const formatValueScientificNotation = (value: number) => {
   }
 }
 
-export const threeDigitsPrecisionHumanization = (num = 0, isHasAbsoluteValue = false) => {
-  const absNum = isHasAbsoluteValue ? Math.abs(num) : num
+export const threeDigitsPrecisionHumanization = (num = 0, hasAbsoluteValue = false) => {
+  const absNum = hasAbsoluteValue ? Math.abs(num) : num
   let value, suffix
 
   if (absNum >= 1_000_000_000_000_000) {
