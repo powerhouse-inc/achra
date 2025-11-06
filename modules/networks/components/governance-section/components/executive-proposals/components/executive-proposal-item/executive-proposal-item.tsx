@@ -17,7 +17,7 @@ export interface ExecutiveProposalItemProps {
   className?: string
 }
 
-export function ExecutiveProposalItem({
+function ExecutiveProposalItem({
   executiveProposal,
   className,
   isHat,
@@ -110,3 +110,5 @@ export function ExecutiveProposalItem({
     </div>
   )
 }
+
+export { ExecutiveProposalItem }

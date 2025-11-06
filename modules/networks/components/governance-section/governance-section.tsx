@@ -1,9 +1,10 @@
 import { Suspense } from 'react'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '../section-title'
-import { ErrorBoundary } from './components/error-boundary/error-boundary'
+import { ExecutiveProposalsListSkeleton } from './components/executive-proposals'
 import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
 import { ExternalLinks } from './components/external-links/external-links'
 import ForumOverview from './components/forum-overview/forum-overview'
@@ -22,11 +23,13 @@ export function GovernanceSection() {
         </span>
       </div>
       <ExternalLinks />
-      <ErrorBoundary>
-        <Suspense fallback={<div>Loading...</div>}>
+
+      <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the executive proposals. Please try again later.">
+        <Suspense fallback={<ExecutiveProposalsListSkeleton />}>
           <ExecutiveProposals />
         </Suspense>
-      </ErrorBoundary>
+      </ErrorBoundaryWithPresets>
+
       <ForumOverview />
     </section>
   )
