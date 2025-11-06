@@ -7,8 +7,6 @@ import type { HTMLMotionProps } from 'motion/react'
 export function useWorkstreamBanner() {
   const { slug: networkSlug } = useParams<{ slug?: string }>()
 
-  console.log('networkSlug', networkSlug)
-
   const bannerVisibleStorageKey = networkSlug
     ? `${networkSlug}-${WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY}`
     : WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY

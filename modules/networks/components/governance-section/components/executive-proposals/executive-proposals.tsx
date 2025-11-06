@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache'
 import { fetchGovernanceProposals } from '@/modules/networks/lib/fetch-governance-proposals'
 import { groupGovernanceProposals } from '@/modules/networks/lib/group-governance-proposals'
 import { getChiefHat } from '@/modules/web3/api/governance'
@@ -7,7 +8,14 @@ interface ExecutiveProposalsProps {
   className?: string
 }
 
-export async function ExecutiveProposals({ className }: ExecutiveProposalsProps) {
+async function ExecutiveProposals({ className }: ExecutiveProposalsProps) {
+  'use cache'
+  cacheLife({
+    stale: 300, // 5 min
+    revalidate: 600, // 10 min
+    expire: 86400, // 1 day
+  })
+
   const [executiveProposals, hatAddress] = await Promise.all([
     fetchGovernanceProposals(),
     getChiefHat(),
@@ -27,3 +35,5 @@ export async function ExecutiveProposals({ className }: ExecutiveProposalsProps)
     />
   )
 }
+
+export { ExecutiveProposals }

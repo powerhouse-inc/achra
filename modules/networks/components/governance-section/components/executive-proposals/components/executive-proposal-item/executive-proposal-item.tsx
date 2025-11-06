@@ -22,7 +22,7 @@ interface HumanizedSkySupport {
   suffix: string
 }
 
-export function ExecutiveProposalItem({
+function ExecutiveProposalItem({
   executiveProposal,
   className,
   isHat,
@@ -112,3 +112,5 @@ export function ExecutiveProposalItem({
     </div>
   )
 }
+
+export { ExecutiveProposalItem }

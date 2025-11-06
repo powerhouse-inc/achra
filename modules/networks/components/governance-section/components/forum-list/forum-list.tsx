@@ -1,4 +1,5 @@
 import type { Topic } from '@/modules/networks/lib/fetch-forum-posts'
+import { SmartErrorState } from '@/modules/shared/components/error-state'
 import {
   Empty,
   EmptyDescription,
@@ -34,9 +35,11 @@ export function ForumList({ posts, biggerLikes, error, isLoading }: ForumListPro
         </>
       )}
       {error && (
-        <div className="text-foreground/50 text-sm/5.5 font-semibold">
-          Error fetching forum posts
-        </div>
+        <SmartErrorState
+          title="Error loading forum posts"
+          description="We ran into an unexpected error while loading the forum posts. Please try again later."
+          showBorder={false}
+        />
       )}
       {!isLoading && !error && posts.length === 0 ? (
         <Empty>
