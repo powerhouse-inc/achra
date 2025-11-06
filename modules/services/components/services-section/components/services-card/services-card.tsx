@@ -40,7 +40,6 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           </div>
           <div className="flex flex-col gap-2">
             <Button
-              size="lg"
               asChild
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
@@ -50,7 +49,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button variant="outline" asChild>
               <Link href={`/services/${service.id}` as Route}>
                 <span>More Info</span>
                 <Info className="size-4" />
@@ -58,7 +57,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
             </Button>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 sm:gap-4">
           <div className="flex flex-col gap-2">
             <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
               {service.title}
