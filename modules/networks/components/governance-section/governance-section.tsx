@@ -4,8 +4,10 @@ import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/con
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '../section-title'
-import { ExecutiveProposalsListSkeleton } from './components/executive-proposals'
-import { ExecutiveProposals } from './components/executive-proposals/executive-proposals'
+import {
+  ExecutiveProposals,
+  ExecutiveProposalsListSkeleton,
+} from './components/executive-proposals'
 import { ExternalLinks } from './components/external-links/external-links'
 import ForumOverview from './components/forum-overview/forum-overview'
 
