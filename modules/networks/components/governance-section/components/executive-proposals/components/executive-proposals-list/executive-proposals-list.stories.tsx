@@ -2,6 +2,7 @@ import {
   getMockedExtendedProposals,
   mockedHatAddress,
 } from '@/modules/networks/mocks/governance-section'
+import { isNumeric } from '@/modules/shared/lib/utils'
 import { ExecutiveProposalsList } from './executive-proposals-list'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -32,15 +33,14 @@ type Story = StoryObj<typeof meta>
 
 const ALL = getMockedExtendedProposals()
 const OPEN = ALL.filter(
-  (p) =>
-    p.active && !p.spellData.hasBeenCast && Number.isFinite(parseFloat(p.spellData.skySupport)),
+  (p) => p.active && !p.spellData.hasBeenCast && isNumeric(parseFloat(p.spellData.skySupport)),
 )
 const ACTIVE = ALL.filter(
-  (p) => p.active && p.spellData.hasBeenCast && Number.isFinite(parseFloat(p.spellData.skySupport)),
+  (p) => p.active && p.spellData.hasBeenCast && isNumeric(parseFloat(p.spellData.skySupport)),
 )
-const PASSED = ALL.filter((p) => !p.active && Number.isFinite(parseFloat(p.spellData.skySupport)))
+const PASSED = ALL.filter((p) => !p.active && isNumeric(parseFloat(p.spellData.skySupport)))
 const PASSED_WITHOUT_SKY_SUPPORT = ALL.filter(
-  (p) => !p.active && !Number.isFinite(parseFloat(p.spellData.skySupport)),
+  (p) => !p.active && !isNumeric(parseFloat(p.spellData.skySupport)),
 )
 
 export const Default: Story = {

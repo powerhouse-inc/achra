@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { Button } from '@/modules/shared/components/ui/button'
 import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
+import { cn, isNumeric } from '@/modules/shared/lib/utils'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 
 export interface ExecutiveProposalItemProps {
@@ -28,7 +28,7 @@ export function ExecutiveProposalItem({
   isHat,
 }: ExecutiveProposalItemProps) {
   const skySupportEth = parseFloat(executiveProposal.spellData.skySupport)
-  const { value: skySupportValue, suffix: skySupportSuffix }: HumanizedSkySupport = Number.isFinite(
+  const { value: skySupportValue, suffix: skySupportSuffix }: HumanizedSkySupport = isNumeric(
     skySupportEth,
   )
     ? threeDigitsPrecisionHumanization(skySupportEth)
@@ -86,20 +86,12 @@ export function ExecutiveProposalItem({
           <span className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base/6">
             SKY Support
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex w-fit items-center gap-1">
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
               {`${skySupportValue}${skySupportSuffix}`}
             </span>
             {skySupportValue !== 'N/A' && (
-              <div className="relative size-5">
-                <Image
-                  src="/networks/logos/sky-vote.png"
-                  alt="Sky Vote"
-                  fill
-                  className="absolute"
-                  sizes="100%"
-                />
-              </div>
+              <Image src="/networks/logos/sky-vote.png" alt="Sky Vote" width={20} height={20} />
             )}
           </div>
         </div>
