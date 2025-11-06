@@ -17,14 +17,22 @@ export interface ExecutiveProposalItemProps {
   className?: string
 }
 
+interface HumanizedSkySupport {
+  value: string
+  suffix: string
+}
+
 export function ExecutiveProposalItem({
   executiveProposal,
   className,
   isHat,
 }: ExecutiveProposalItemProps) {
   const skySupportEth = parseFloat(executiveProposal.spellData.skySupport)
-  const { value: skySupportValue, suffix: skySupportSuffix } =
-    threeDigitsPrecisionHumanization(skySupportEth)
+  const { value: skySupportValue, suffix: skySupportSuffix }: HumanizedSkySupport = Number.isFinite(
+    skySupportEth,
+  )
+    ? threeDigitsPrecisionHumanization(skySupportEth)
+    : { value: 'N/A', suffix: '' }
 
   return (
     <div
@@ -82,15 +90,17 @@ export function ExecutiveProposalItem({
             <span className="text-foreground text-sm/5.5 font-semibold xl:text-base/6">
               {`${skySupportValue}${skySupportSuffix}`}
             </span>
-            <div className="relative size-5">
-              <Image
-                src="/networks/logos/sky-vote.png"
-                alt="Sky Vote"
-                fill
-                className="absolute"
-                sizes="100%"
-              />
-            </div>
+            {skySupportValue !== 'N/A' && (
+              <div className="relative size-5">
+                <Image
+                  src="/networks/logos/sky-vote.png"
+                  alt="Sky Vote"
+                  fill
+                  className="absolute"
+                  sizes="100%"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="flex w-fit justify-end sm:min-w-30 md:min-w-fit">
