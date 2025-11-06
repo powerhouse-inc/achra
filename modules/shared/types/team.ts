@@ -3,7 +3,7 @@ import type { BudgetStatement } from './budgetStatement'
 import type { ContributorCommitment, CuGithubContribution } from './contributor'
 import type { Scope } from './scopes'
 import type { SocialMediaChannels } from './socialMedia'
-import type { ResourceType, TeamStatus } from './types'
+import type { ResourceType, TeamCategory, TeamStatus } from './types'
 import type { Auditor } from './users'
 
 export interface TeamUpdate {
@@ -22,7 +22,7 @@ export interface Team {
   status: TeamStatus
   image: string
   budgetPath: string
-  category: string[]
+  categories: TeamCategory[]
   sentenceDescription: string
   paragraphDescription: string
   paragraphImage: string

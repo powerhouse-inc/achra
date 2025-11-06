@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
+import type { ScopeSizeVariant } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import type { Team } from '@/modules/shared/types/team'
-import type { ScopeSizeVariant } from '../scope-badge/use-scope-badge'
 
 interface UseCompactItemProps {
   team: Team
