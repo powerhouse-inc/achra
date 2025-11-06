@@ -21,6 +21,7 @@ export function SelectYear({ selectedYear, years, onYearChange }: SelectYearProp
         <SelectTrigger
           size="sm"
           className="dark:border-input [&_svg]:text-foreground! border! shadow-none [&_svg]:opacity-100"
+          aria-label="Select year"
         >
           <SelectValue>{selectedYear}</SelectValue>
         </SelectTrigger>
