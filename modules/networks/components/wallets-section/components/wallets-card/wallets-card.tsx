@@ -1,3 +1,4 @@
+'use client'
 import { ChevronUp } from 'lucide-react'
 import { motion } from 'motion/react'
 import {
@@ -18,9 +19,10 @@ import type { Wallet } from '../../wallets-section'
 export interface WalletsCardProps {
   wallets: Wallet[]
   className?: string
+  title?: string
 }
 
-export function WalletsCard({ wallets, className }: WalletsCardProps) {
+export function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCardProps) {
   const {
     toogleWalletTable,
     usdsTotalBalance,
@@ -31,7 +33,7 @@ export function WalletsCard({ wallets, className }: WalletsCardProps) {
   return (
     <StripedCard className={cn('w-full', className)}>
       <StripedCardHeader className="items-center px-4">
-        <StripedCardTitle className="text-sm/5.5 md:text-base/6">{`Wallets: ${wallets.length || 0}`}</StripedCardTitle>
+        <StripedCardTitle className="text-sm/5.5 md:text-base/6">{`${title}: ${wallets.length || 0}`}</StripedCardTitle>
         <StripedCardAction className="flex items-center justify-between gap-6 md:gap-8 lg:gap-10">
           <div className="flex flex-col items-end gap-0 text-sm/5.5 md:flex-row md:items-center md:gap-2 xl:gap-3.5 xl:text-base/6">
             <div className="flex items-center gap-2">

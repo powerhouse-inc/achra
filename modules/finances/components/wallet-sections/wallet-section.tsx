@@ -1,10 +1,16 @@
 import { useMemo } from 'react'
+import { WalletsCard } from '@/modules/networks/components/wallets-section/components/wallets-card/wallets-card'
 import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { calculateTotalBalance } from '../../utils'
 import { TotalDisplay } from '../total-display'
+import type { WalletGroup } from '../../types'
 
-export function WalletSection() {
+interface WalletSectionProps {
+  groupedWallets: WalletGroup[]
+}
+
+export function WalletSection({ groupedWallets }: WalletSectionProps) {
   const primaryValue = useMemo(() => calculateTotalBalance(WALLETS, 'usdsBalance'), [])
   const secondaryValue = useMemo(() => calculateTotalBalance(WALLETS, 'skyBalance'), [])
 
@@ -16,6 +22,12 @@ export function WalletSection() {
           <div className="flex items-center gap-4">
             <TotalDisplay primaryValue={primaryValue} secondaryValue={secondaryValue} />
           </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          {groupedWallets.length > 0 &&
+            groupedWallets.map((group) => (
+              <WalletsCard key={group.id} wallets={group.wallets} title={group.name} />
+            ))}
         </div>
       </section>
     </PageContent>
