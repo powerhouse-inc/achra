@@ -20,8 +20,8 @@ interface ServicesCardProps {
 
 export default function ServicesCard({ service }: ServicesCardProps) {
   return (
-    <Card className="bg-accent p-2 sm:p-3">
-      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_35%] xl:grid-cols-[120px_1fr_50%]">
+    <Card className="bg-accent p-2 sm:p-3 md:p-4">
+      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_328px] xl:grid-cols-[120px_1fr_520px] 2xl:grid-cols-[120px_1fr_632px]">
         <div className="flex flex-col gap-2 sm:gap-4">
           <div className="relative h-32 w-full sm:h-30">
             <Image
@@ -40,7 +40,6 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           </div>
           <div className="flex flex-col gap-2">
             <Button
-              size="lg"
               asChild
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
@@ -50,7 +49,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button variant="outline" asChild>
               <Link href={`/services/${service.id}` as Route}>
                 <span>More Info</span>
                 <Info className="size-4" />
@@ -58,7 +57,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
             </Button>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 sm:gap-4">
           <div className="flex flex-col gap-2">
             <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
               {service.title}

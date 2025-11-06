@@ -2,6 +2,7 @@ import {
   getMockedExtendedProposals,
   mockedHatAddress,
 } from '@/modules/networks/mocks/governance-section'
+import { isNumeric } from '@/modules/shared/lib/utils'
 import { ExecutiveProposalsList } from './executive-proposals-list'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -31,9 +32,16 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const ALL = getMockedExtendedProposals()
-const OPEN = ALL.filter((p) => p.active && !p.spellData.hasBeenCast)
-const ACTIVE = ALL.filter((p) => p.active && p.spellData.hasBeenCast)
-const PASSED = ALL.filter((p) => !p.active)
+const OPEN = ALL.filter(
+  (p) => p.active && !p.spellData.hasBeenCast && isNumeric(parseFloat(p.spellData.skySupport)),
+)
+const ACTIVE = ALL.filter(
+  (p) => p.active && p.spellData.hasBeenCast && isNumeric(parseFloat(p.spellData.skySupport)),
+)
+const PASSED = ALL.filter((p) => !p.active && isNumeric(parseFloat(p.spellData.skySupport)))
+const PASSED_WITHOUT_SKY_SUPPORT = ALL.filter(
+  (p) => !p.active && !isNumeric(parseFloat(p.spellData.skySupport)),
+)
 
 export const Default: Story = {
   args: {
@@ -71,6 +79,16 @@ export const OnlyPassed: Story = {
     activeProposals: [],
     passedProposals: PASSED,
     slicedPassedProposals: PASSED.slice(0, 2),
+    hatAddress: null,
+  },
+}
+
+export const OnlyPassedWithoutSkySupport: Story = {
+  args: {
+    openProposals: [],
+    activeProposals: [],
+    passedProposals: PASSED_WITHOUT_SKY_SUPPORT,
+    slicedPassedProposals: PASSED_WITHOUT_SKY_SUPPORT.slice(0, 2),
     hatAddress: null,
   },
 }

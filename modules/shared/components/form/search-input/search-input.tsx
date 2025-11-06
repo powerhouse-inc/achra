@@ -21,6 +21,7 @@ const OsCommandKeyboardShortcut = dynamic(
 
 interface SearchInputProps extends Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange'> {
   value: string
+  showKeyboardShortcut?: boolean
   onChange: (value: string) => void
 }
 
@@ -28,6 +29,7 @@ export default function SearchInput({
   value,
   onChange,
   placeholder = 'Search...',
+  showKeyboardShortcut = true,
   className,
   ...props
 }: SearchInputProps) {
@@ -50,11 +52,11 @@ export default function SearchInput({
   return (
     <div
       className={cn(
-        'bg-accent flex w-full items-center justify-between rounded-md pr-1 pl-3',
+        'bg-accent flex h-9 w-full items-center justify-between rounded-md pr-1 pl-3',
         className,
       )}
     >
-      <div className="flex flex-1 items-center gap-3">
+      <div className="flex h-full flex-1 items-center gap-3">
         <div className="h-4 w-4 shrink-0">
           <Search className="text-accent-foreground/30 h-4 w-4" />
         </div>
@@ -68,9 +70,9 @@ export default function SearchInput({
           placeholder={placeholder}
           className={cn(
             // Layout & spacing
-            'flex-1 p-0',
+            'h-full flex-1 p-0',
             // Borders & background
-            'border-0 bg-transparent shadow-none',
+            'border-0 bg-transparent shadow-none dark:bg-transparent',
             // Typography & color
             'placeholder:text-accent-foreground/30 text-sm',
             // Focus
@@ -81,14 +83,16 @@ export default function SearchInput({
           {...props}
         />
       </div>
-      <div className="text-foreground/30 flex shrink-0 items-center gap-1 text-sm/4.5 font-medium">
-        <div className="bg-background rounded-md border px-2 py-1">
-          <OsCommandKeyboardShortcut />
+      {showKeyboardShortcut && (
+        <div className="text-foreground/30 flex shrink-0 items-center gap-1 text-sm/4.5 font-medium">
+          <div className="bg-background rounded-md border px-2 py-1">
+            <OsCommandKeyboardShortcut />
+          </div>
+          <div className="bg-background rounded-md border px-2 py-1">
+            <span>K</span>
+          </div>
         </div>
-        <div className="bg-background rounded-md border px-2 py-1">
-          <span>K</span>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

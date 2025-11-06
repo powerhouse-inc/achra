@@ -28,11 +28,20 @@ const SERVICES_TABS = [
 export default function ServicesFilters() {
   return (
     <div className="grid grid-cols-[1fr_auto] grid-rows-1 gap-4 sm:grid-cols-1 sm:grid-rows-2 md:flex md:items-center md:justify-between lg:gap-6">
-      <SearchInput value="" onChange={() => {}} className="h-9 w-full md:order-2 md:max-w-80" />
+      <SearchInput
+        value=""
+        onChange={() => {}}
+        showKeyboardShortcut={false}
+        className="h-7 w-full md:order-2 md:max-w-80"
+      />
       <Tabs defaultValue="all" className="hidden sm:flex md:order-1">
         <TabsList className="h-10 rounded-md p-1">
           {SERVICES_TABS.map((tab) => (
-            <TabsTrigger key={tab.id} value={tab.id} className="border-none px-3 py-1.5 leading-5">
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              className="text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
+            >
               {tab.label}
             </TabsTrigger>
           ))}
