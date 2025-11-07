@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { Fragment, useMemo, useRef, useState } from 'react'
+import { Fragment, Suspense, useMemo, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useResizeObserver } from 'usehooks-ts'
 import { cn } from '@/shared/lib/utils'
@@ -13,6 +13,7 @@ import {
   BreadcrumbSeparator,
 } from '../ui/breadcrumb'
 import DotsSegment from './components/dot-segments'
+import { EllipsisSkeleton } from './components/ellipsis-skeleton'
 import { MAX_ALLOWED_WIDTH, MAX_SEGMENT_WIDTH_MOBILE_DEFAULT, THREE_DOTS_WIDTH } from './constants'
 import { getTextWidth, mobileRecommendedSegmentWidth } from './utils'
 import type { BreadcrumbItemExtended, BreadcrumbItemNavigation } from './types'
@@ -94,7 +95,9 @@ function Breadcrumb({
                 {itemsExtended.length > 1 && (
                   <>
                     <BreadcrumbItem>
-                      <DotsSegment items={items} defaultOpen={defaultOpen} />
+                      <Suspense fallback={<EllipsisSkeleton />}>
+                        <DotsSegment items={items} defaultOpen={defaultOpen} />
+                      </Suspense>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator className="text-foreground/30 [&>svg]:size-6" />
                   </>
@@ -138,7 +141,12 @@ function Breadcrumb({
                         }
                       >
                         {item.label === '...' ? (
-                          <DotsSegment items={item.attachedItems ?? []} defaultOpen={defaultOpen} />
+                          <Suspense fallback={<EllipsisSkeleton />}>
+                            <DotsSegment
+                              items={item.attachedItems ?? []}
+                              defaultOpen={defaultOpen}
+                            />
+                          </Suspense>
                         ) : isLastItem ? (
                           <BreadcrumbPage className="block w-full min-w-0 overflow-hidden text-base font-semibold text-ellipsis whitespace-nowrap">
                             {item.label}
