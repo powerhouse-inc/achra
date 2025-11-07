@@ -29,6 +29,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   const itemsToRender = isMobileOrTablet ? items.slice(0, -1) : items
 
   const currentItemLabel = items[items.length - 1].label
+
   if (isMobile && isMounted()) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
