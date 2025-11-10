@@ -291,3 +291,12 @@
 .swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
   background-color: var(--primary);
 }
+
+html body[data-scroll-locked] {
+  margin-right: 0 !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+:root {
+  scrollbar-gutter: stable;
+}
