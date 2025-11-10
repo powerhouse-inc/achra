@@ -1,7 +1,7 @@
 'use client'
 
 import SearchInput from '@/modules/shared/components/form/search-input'
-import { ScrollableTabs } from '@/modules/shared/components/scrollable-tabs'
+import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
 import { TabsTrigger } from '@/modules/shared/components/ui/tabs'
 
 const SERVICES_TABS = [
@@ -34,7 +34,7 @@ export default function ServicesFilters() {
         className="h-7 w-full md:order-2 md:max-w-80"
       />
       <ScrollableTabs defaultValue="all" className="md:order-1">
-        <ScrollableTabs.List>
+        <ScrollableTabsList>
           <div className="flex w-fit">
             {SERVICES_TABS.map((tab) => (
               <TabsTrigger
@@ -46,7 +46,7 @@ export default function ServicesFilters() {
               </TabsTrigger>
             ))}
           </div>
-        </ScrollableTabs.List>
+        </ScrollableTabsList>
       </ScrollableTabs>
       {/* <div className="flex items-center gap-4 sm:hidden">
         <Separator orientation="vertical" className="h-7!" />

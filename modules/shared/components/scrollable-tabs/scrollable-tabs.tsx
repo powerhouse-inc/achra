@@ -41,8 +41,8 @@ interface ScrollableTabsRootProps extends ComponentProps<typeof Tabs> {
 
 const baseIndicatorClasses =
   'from-background pointer-events-none absolute top-0 z-10 h-10.5 w-16 to-transparent md:hidden'
-const DEFAULT_START_INDICATOR_CLASSES = `${baseIndicatorClasses} left-0 rounded-tl-lg bg-linear-to-r`
-const DEFAULT_END_INDICATOR_CLASSES = `${baseIndicatorClasses} right-0 rounded-tr-lg bg-linear-to-l`
+const DEFAULT_START_INDICATOR_CLASSES = `${baseIndicatorClasses} left-0 rounded-l-md bg-linear-to-r`
+const DEFAULT_END_INDICATOR_CLASSES = `${baseIndicatorClasses} right-0 rounded-r-md bg-linear-to-l`
 
 function ScrollableTabsRoot({
   className,
