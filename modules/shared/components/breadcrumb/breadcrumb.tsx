@@ -86,7 +86,7 @@ function Breadcrumb({
   }, [isMounted, groupedItems])
 
   return (
-    <BreadcrumbPrimitive className={`w-ful ${className}`}>
+    <BreadcrumbPrimitive className={cn('w-full', className)}>
       <div className="w-[calc(100%-32px)] max-md:mx-4 max-md:rounded-xl md:w-full">
         <div>
           <div ref={contentRef} className="flex items-center justify-between max-md:-mx-2">
