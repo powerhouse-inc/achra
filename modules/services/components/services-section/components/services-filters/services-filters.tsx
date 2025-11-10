@@ -1,9 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-
 import SearchInput from '@/modules/shared/components/form/search-input'
-import { Tabs, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { ScrollableTabs } from '@/modules/shared/components/scrollable-tabs'
+import { TabsTrigger } from '@/modules/shared/components/ui/tabs'
 
 const SERVICES_TABS = [
   {
@@ -26,43 +25,6 @@ const SERVICES_TABS = [
 ]
 
 export default function ServicesFilters() {
-  const tabsListRef = useRef<HTMLDivElement>(null)
-  const [showLeftGradient, setShowLeftGradient] = useState(false)
-  const [showRightGradient, setShowRightGradient] = useState(false)
-
-  const updateGradients = useCallback(() => {
-    const element = tabsListRef.current
-
-    if (!element) {
-      return
-    }
-
-    const { scrollLeft, scrollWidth, clientWidth } = element
-
-    setShowLeftGradient(scrollLeft > 0)
-    setShowRightGradient(scrollLeft + clientWidth < scrollWidth - 1)
-  }, [])
-
-  useEffect(() => {
-    updateGradients()
-  }, [updateGradients])
-
-  useEffect(() => {
-    const element = tabsListRef.current
-
-    if (!element) {
-      return
-    }
-
-    element.addEventListener('scroll', updateGradients)
-    window.addEventListener('resize', updateGradients)
-
-    return () => {
-      element.removeEventListener('scroll', updateGradients)
-      window.removeEventListener('resize', updateGradients)
-    }
-  }, [updateGradients])
-
   return (
     <div className="grid grid-cols-1 grid-rows-2 gap-4 md:flex md:items-center md:justify-between lg:gap-6">
       <SearchInput
@@ -71,17 +33,8 @@ export default function ServicesFilters() {
         showKeyboardShortcut={false}
         className="h-7 w-full md:order-2 md:max-w-80"
       />
-      <Tabs defaultValue="all" className="relative overflow-hidden md:order-1">
-        {showLeftGradient && (
-          <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-10.5 w-16 rounded-tl-lg bg-linear-to-r to-transparent md:hidden" />
-        )}
-        {showRightGradient && (
-          <div className="from-background pointer-events-none absolute top-0 right-0 z-10 h-10.5 w-16 rounded-tr-lg bg-linear-to-l to-transparent md:hidden" />
-        )}
-        <TabsList
-          ref={tabsListRef}
-          className="no-scrollbar h-10 w-full justify-start overflow-x-auto rounded-md p-1"
-        >
+      <ScrollableTabs defaultValue="all" className="md:order-1">
+        <ScrollableTabs.List>
           <div className="flex w-fit">
             {SERVICES_TABS.map((tab) => (
               <TabsTrigger
@@ -93,8 +46,8 @@ export default function ServicesFilters() {
               </TabsTrigger>
             ))}
           </div>
-        </TabsList>
-      </Tabs>
+        </ScrollableTabs.List>
+      </ScrollableTabs>
       {/* <div className="flex items-center gap-4 sm:hidden">
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer>
