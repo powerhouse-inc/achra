@@ -1,7 +1,9 @@
+'use client'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-import { useState } from 'react'
+import { startTransition, useEffect, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
@@ -22,6 +24,8 @@ interface DotsSegmentProps {
 
 function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   const [open, setOpen] = useState(defaultOpen)
+  const pathname = usePathname()
+  const prevPathnameRef = useRef(pathname)
   const isMounted = useMountedState()
   const isMobile = useMediaQuery({ to: 'md' })
   const isMobileOrTablet = useMediaQuery({ to: 'lg' })
@@ -29,6 +33,19 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   const itemsToRender = isMobileOrTablet ? items.slice(0, -1) : items
 
   const currentItemLabel = items[items.length - 1].label
+
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname
+      startTransition(() => {
+        setOpen(false)
+      })
+    }
+  }, [pathname])
+
+  const handleOpenChange = () => {
+    setOpen(false)
+  }
   if (isMobile && isMounted()) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
@@ -46,6 +63,7 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
                 key={item.label}
                 item={item}
                 isCurrent={item.label === currentItemLabel}
+                onClick={handleOpenChange}
               />
             ))}
           </div>
