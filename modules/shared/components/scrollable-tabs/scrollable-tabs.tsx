@@ -41,8 +41,6 @@ interface ScrollableTabsRootProps extends ComponentProps<typeof Tabs> {
 
 const baseIndicatorClasses =
   'from-background pointer-events-none absolute top-0 z-10 h-10.5 w-16 to-transparent md:hidden'
-const DEFAULT_START_INDICATOR_CLASSES = `${baseIndicatorClasses} left-0 rounded-l-md bg-linear-to-r`
-const DEFAULT_END_INDICATOR_CLASSES = `${baseIndicatorClasses} right-0 rounded-r-md bg-linear-to-l`
 
 function ScrollableTabsRoot({
   className,
@@ -67,13 +65,19 @@ function ScrollableTabsRoot({
         {showStartIndicator && (
           <div
             aria-hidden="true"
-            className={cn(DEFAULT_START_INDICATOR_CLASSES, startIndicatorClassName)}
+            className={cn(
+              `${baseIndicatorClasses} left-0 rounded-l-md bg-linear-to-r`,
+              startIndicatorClassName,
+            )}
           />
         )}
         {showEndIndicator && (
           <div
             aria-hidden="true"
-            className={cn(DEFAULT_END_INDICATOR_CLASSES, endIndicatorClassName)}
+            className={cn(
+              `${baseIndicatorClasses} right-0 rounded-r-md bg-linear-to-l`,
+              endIndicatorClassName,
+            )}
           />
         )}
         {children}
@@ -141,7 +145,7 @@ const ScrollableTabsList = forwardRef<ComponentRef<typeof TabsList>, ScrollableT
         ref={setRefs}
         {...props}
         className={cn(
-          'no-scrollbar h-10 w-full justify-start overflow-x-auto rounded-md p-1',
+          'no-scrollbar h-10 w-full max-w-fit justify-start overflow-x-auto rounded-md p-1',
           className,
         )}
       />

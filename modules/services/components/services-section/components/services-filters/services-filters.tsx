@@ -26,12 +26,12 @@ const SERVICES_TABS = [
 
 export default function ServicesFilters() {
   return (
-    <div className="grid grid-cols-1 grid-rows-2 gap-4 md:flex md:items-center md:justify-between lg:gap-6">
+    <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-[auto_1fr] md:grid-rows-1 md:items-center lg:gap-6">
       <SearchInput
         value=""
         onChange={() => {}}
         showKeyboardShortcut={false}
-        className="h-7 w-full md:order-2 md:max-w-80"
+        className="h-7 w-full md:order-2 md:max-w-63.25 md:justify-self-end lg:max-w-80"
       />
       <ScrollableTabs defaultValue="all" className="md:order-1">
         <ScrollableTabsList>
@@ -48,24 +48,6 @@ export default function ServicesFilters() {
           </div>
         </ScrollableTabsList>
       </ScrollableTabs>
-      {/* <div className="flex items-center gap-4 sm:hidden">
-        <Separator orientation="vertical" className="h-7!" />
-        <FilterDrawer>
-          <Tabs defaultValue="all" orientation="vertical">
-            <TabsList className="h-auto w-full rounded-md p-1 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch">
-              {SERVICES_TABS.map((tab) => (
-                <TabsTrigger
-                  key={tab.id}
-                  value={tab.id}
-                  className="justify-start border-none px-3 py-1.5 leading-5"
-                >
-                  {tab.label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-        </FilterDrawer>
-      </div> */}
     </div>
   )
 }

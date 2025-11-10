@@ -16,7 +16,7 @@ interface RoadmapSectionProps {
 export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
   return (
     <section
-      className={cn('flex flex-col', SCROLL_MT_CLASSES)}
+      className={cn('flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />
