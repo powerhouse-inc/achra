@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import {
   Select,
   SelectContent,
@@ -8,16 +10,17 @@ import {
   SelectValue,
 } from '@/modules/shared/components/ui/select'
 
-interface SelectYearProps {
-  selectedYear: string
-  years: string[]
-  onYearChange: (year: string) => void
-}
+export function YearSelect() {
+  const [selectedYear, setSelectedYear] = useState('2025')
+  const years = ['2023', '2024', '2025']
 
-export function YearSelect({ selectedYear, years, onYearChange }: SelectYearProps) {
+  const handleYearSelect = (year: string) => {
+    setSelectedYear(year)
+  }
+
   return (
     <div className="flex items-center gap-4">
-      <Select value={selectedYear} onValueChange={onYearChange}>
+      <Select value={selectedYear} onValueChange={handleYearSelect}>
         <SelectTrigger
           size="sm"
           className="dark:border-input [&_svg]:text-foreground! focus-visible:border-input w-32 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180"
