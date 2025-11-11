@@ -1,9 +1,11 @@
 import { BreadcrumbSelectYear } from '@/modules/finances/components/breadcrumb-select-year'
+import { NavigationCard } from '@/modules/finances/components/navigation-section'
 import { SummarySection } from '@/modules/finances/components/summary-section'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
 import { WALLET_GROUPS } from '@/modules/finances/mocks/group'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
+import type { Route } from 'next'
 
 interface FinancesPageProps {
   params: Promise<{
@@ -22,6 +24,33 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           *All values are converted to USDS
         </div>
         <SummarySection />
+        <div className="flex flex-row flex-wrap gap-2">
+          {/* TODO: replace with the actual data  and swipper*/}
+          <NavigationCard
+            image="https://raw.githubusercontent.com/makerdao-ses/makerdao-ses.github.io/16f73df6917a57915cd07e79f7a42e55293b8225/ecosystem-dashboard/budgets/endgame_atlas_budgets.svg"
+            title="Powerhouse"
+            description="Powerhouse is a network of power plants that produce electricity."
+            href={'/network/powerhouse' as Route}
+            code="atlas/immutable"
+            isCompact={false}
+          />
+          <NavigationCard
+            image="https://raw.githubusercontent.com/makerdao-ses/makerdao-ses.github.io/16f73df6917a57915cd07e79f7a42e55293b8225/ecosystem-dashboard/budgets/endgame_atlas_budgets.svg"
+            title="Powerhouse"
+            description="Powerhouse is a network of power plants that produce electricity."
+            href={'/network/powerhouse' as Route}
+            code="atlas/immutable"
+            isCompact={false}
+          />
+          <NavigationCard
+            image="https://raw.githubusercontent.com/makerdao-ses/makerdao-ses.github.io/16f73df6917a57915cd07e79f7a42e55293b8225/ecosystem-dashboard/budgets/endgame_atlas_budgets.svg"
+            title="Powerhouse"
+            description="Powerhouse is a network of power plants that produce electricity."
+            href={'/network/powerhouse' as Route}
+            code="atlas/immutable"
+            isCompact={false}
+          />
+        </div>
       </PageContent>
     </main>
   )
