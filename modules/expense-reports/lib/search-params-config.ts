@@ -1,4 +1,4 @@
-import { AuditorTabSection, CommonTabSection, DefaultTabSection, ViewMode } from '../types'
+import { TabSection } from '../types'
 
 /**
  * Shared configuration for search parameter parsers.
@@ -6,14 +6,8 @@ import { AuditorTabSection, CommonTabSection, DefaultTabSection, ViewMode } from
  * server-side and client-side parsers to maintain consistency.
  */
 export const searchParamsConfigValues = {
-  viewMode: {
-    values: Object.values(ViewMode),
-    defaultValue: ViewMode.DEFAULT,
-  },
   section: {
-    defaultValue: CommonTabSection.ACCOUNT_SNAPSHOT,
-    commonValues: Object.values(CommonTabSection),
-    defaultValues: Object.values(DefaultTabSection),
-    auditorValues: Object.values(AuditorTabSection),
+    defaultValue: TabSection.ACCOUNT_SNAPSHOT,
+    values: Object.values(TabSection),
   },
 } as const
