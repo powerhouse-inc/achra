@@ -1,12 +1,23 @@
+import { Suspense } from 'react'
+import { BuilderBreadcrumb } from '@/modules/builders/components/builder-breadcrumb/builder-breadcrumb'
+import { BuilderHeader } from '@/modules/builders/components/builder-header'
+import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
+import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
+
 export default function BuildersProfileLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-4">
-      {/* TODO: implement the builder header/breadcrumbs */}
-      <div className="bg-accent text-accent-foreground container flex h-26 items-center justify-center text-center">
-        Builder header
-      </div>
+    <div>
+      <PageBreadcrumbContainer>
+        <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
+          <BuilderBreadcrumb />
+        </Suspense>
+      </PageBreadcrumbContainer>
 
-      {children}
+      <Suspense fallback={<div className="mt-14">Loading header...</div>}>
+        <BuilderHeader />
+      </Suspense>
+
+      <div className="mt-4">{children}</div>
     </div>
   )
 }
