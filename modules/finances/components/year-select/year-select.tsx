@@ -10,9 +10,9 @@ import {
   SelectValue,
 } from '@/modules/shared/components/ui/select'
 
+const years = ['2023', '2024', '2025']
 export function YearSelect() {
   const [selectedYear, setSelectedYear] = useState('2025')
-  const years = ['2023', '2024', '2025']
 
   const handleYearSelect = (year: string) => {
     setSelectedYear(year)

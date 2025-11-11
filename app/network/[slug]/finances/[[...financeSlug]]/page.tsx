@@ -5,10 +5,16 @@ import { WALLET_GROUPS } from '@/modules/finances/mocks/group'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
 
-export default function FinancesPage() {
+interface FinancesPageProps {
+  params: Promise<{
+    slug: string
+  }>
+}
+
+export default function FinancesPage({ params }: FinancesPageProps) {
   return (
     <main>
-      <BreadcrumbSelectYear />
+      <BreadcrumbSelectYear params={params} />
       <PageContent variant="with-breadcrumb" as="div" className="flex flex-col gap-4">
         <WalletSection groupedWallets={WALLET_GROUPS} />
         <div className="mt-2 flex items-center justify-end gap-2 text-xs/5 font-semibold xl:text-sm">
