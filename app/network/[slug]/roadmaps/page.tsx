@@ -1,12 +1,9 @@
 import { Suspense } from 'react'
-import { RoadmapLinks } from '@/modules/roadmap/components/roadmap-links'
+import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
+import RoadmapFiltersSkeleton from '@/modules/roadmap/components/roadmap-filters/workstream-filters-skeleton'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import { PageContent } from '@/modules/shared/components/page-containers'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
-
-interface RoadmapPageProps {
-  params: Promise<{ slug: string }>
-}
 
 const items = [
   { label: 'Networks', href: '/networks' as Route },
@@ -14,26 +11,17 @@ const items = [
   { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as Route },
 ]
 
-export default function RoadmapPage({ params }: RoadmapPageProps) {
+export default function RoadmapPage() {
   return (
-    <main>
+    <PageBackground>
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
-
-      <PageContent className="gap-6" variant="with-breadcrumb">
-        <div className="flex flex-col">
-          <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
-            Powerhouse All Roadmaps
-          </h1>
-
-          <div className="flex h-9 w-full justify-center py-32">
-            <Suspense fallback={<div>Loading roadmaps...</div>}>
-              <RoadmapLinks slug={params.then((params) => params.slug)} />
-            </Suspense>
-          </div>
-        </div>
+      <PageContent variant="with-breadcrumb">
+        <Suspense fallback={<RoadmapFiltersSkeleton />}>
+          <RoadmapFilters />
+        </Suspense>
       </PageContent>
-    </main>
+    </PageBackground>
   )
 }
