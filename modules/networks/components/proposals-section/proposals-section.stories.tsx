@@ -6,7 +6,7 @@ const meta = {
   title: 'Modules/Networks/Components/ProposalsSection',
   component: ProposalsSection,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     proposals: {
