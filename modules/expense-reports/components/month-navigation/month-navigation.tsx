@@ -78,18 +78,22 @@ function MonthNavigation() {
 
   return (
     <div className="flex items-center gap-2">
-      <Button asChild variant="outline" size="icon" aria-label="Previous month">
-        <Link href={createUrl(formatMonthString(previousMonth))}>
-          <ChevronLeft className="size-4" />
-        </Link>
-      </Button>
-      <Button asChild variant="outline" size="icon" aria-label="Next month">
-        <Link href={createUrl(formatMonthString(nextMonth))}>
-          <ChevronRight className="size-4" />
-        </Link>
-      </Button>
+      <div className="flex gap-0.5">
+        <Button asChild variant="ghost" size="icon" aria-label="Previous month">
+          <Link href={createUrl(formatMonthString(previousMonth))}>
+            <ChevronLeft className="text-foreground/50 size-4" />
+          </Link>
+        </Button>
+        <Button asChild variant="ghost" size="icon" aria-label="Next month">
+          <Link href={createUrl(formatMonthString(nextMonth))}>
+            <ChevronRight className="text-foreground/50 size-4" />
+          </Link>
+        </Button>
+      </div>
 
-      <div>{formatMonthDisplay(currentMonth)}</div>
+      <div className="text-foreground/50 text-xl leading-[120%] font-bold">
+        {formatMonthDisplay(currentMonth)}
+      </div>
     </div>
   )
 }
