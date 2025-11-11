@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import { cn } from '@/modules/shared/lib/utils'
+import type { Route } from 'next'
 
-function NavigationHeader() {
+interface NavigationHeaderProps {
+  title: string
+  href: Route
+}
+
+export function NavigationHeader({ title, href }: NavigationHeaderProps) {
   return (
     <div className="bg-secondary flex w-fit items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
       <div className="relative flex items-center self-stretch pr-7 sm:pr-8 md:pr-9">
@@ -39,12 +45,10 @@ function NavigationHeader() {
       </div>
       <Link
         className="truncate text-sm/5.5 font-semibold sm:text-base/6 md:text-xl md:leading-[120%] md:font-bold"
-        href="/network/powerhouse/workstream/vetra-beta-launch"
+        href={href}
       >
-        Vetra Beta Launch
+        {title}
       </Link>
     </div>
   )
 }
-
-export { NavigationHeader }

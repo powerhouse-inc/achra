@@ -1,6 +1,8 @@
 import { Suspense } from 'react'
 import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
-import RoadmapFiltersSkeleton from '@/modules/roadmap/components/roadmap-filters/workstream-filters-skeleton'
+import RoadmapFiltersSkeleton from '@/modules/roadmap/components/roadmap-filters/roadmap-filters-skeleton'
+import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roadmap-section'
+import { mockedRoadmaps } from '@/modules/roadmap/mocks/roadmap'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
@@ -17,10 +19,15 @@ export default function RoadmapPage() {
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
-      <PageContent variant="with-breadcrumb">
+      <PageContent variant="with-breadcrumb" className="gap-6">
         <Suspense fallback={<RoadmapFiltersSkeleton />}>
           <RoadmapFilters />
         </Suspense>
+        <div className="flex flex-col gap-14">
+          {mockedRoadmaps.map((roadmap) => (
+            <RoadmapSection key={roadmap.id} roadmap={roadmap} />
+          ))}
+        </div>
       </PageContent>
     </PageBackground>
   )
