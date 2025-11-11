@@ -2,7 +2,8 @@ import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switch
 import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
+import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
@@ -15,24 +16,24 @@ interface RoadmapSectionProps {
 export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
   return (
     <section
-      className={cn('flex flex-col', SCROLL_MT_CLASSES)}
+      className={cn('flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />
-      <Tabs defaultValue="phase-1" className="gap-0">
-        <TabsList className="text-foreground/50 no-scrollbar -mx-2 h-fit w-full justify-start overflow-x-auto bg-transparent p-0">
-          <div className="flex w-fit gap-2 py-4 pl-2 xl:py-6">
+      <ScrollableTabs defaultValue="phase-1" className="md:order-1">
+        <ScrollableTabsList>
+          <div className="flex w-fit">
             {ROADMAP_TABS_CONFIG.map((tab) => (
               <TabsTrigger
                 key={tab.id}
                 value={tab.id}
-                className="data-[state=active]:bg-accent! h-fit rounded-t-lg rounded-b-none border-0 px-4 text-sm/5.5 font-semibold shadow-lg data-[state=active]:shadow-lg lg:text-base/6"
+                className="dark:data-[state=active]:bg-background text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
               >
                 {tab.label}
               </TabsTrigger>
             ))}
           </div>
-        </TabsList>
+        </ScrollableTabsList>
         {roadmaps.map((roadmap, index) => (
           <TabsContent
             key={roadmap.id}
@@ -51,7 +52,7 @@ export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
             <RoadmapSwiper milestones={roadmap.milestones} />
           </TabsContent>
         ))}
-      </Tabs>
+      </ScrollableTabs>
     </section>
   )
 }
