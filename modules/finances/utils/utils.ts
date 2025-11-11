@@ -11,3 +11,8 @@ export function calculateTotalBalance(
     return acc + groupTotal
   }, 0)
 }
+
+export function percentageRespectTo(value: number, total: number): number {
+  if (total === 0) return 0
+  return (value / total) * 100
+}

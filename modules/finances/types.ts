@@ -11,3 +11,16 @@ export interface WalletGroup {
   name: string
   wallets: Wallet[]
 }
+
+export interface HorizontalBudgetBarProps {
+  actuals: number
+  prediction: number
+  budgetCap: number
+  className?: string
+  maxPercentage?: number
+}
+
+export interface QuarterCardProps {
+  paymentsOnChain: number
+  budgetCap: number
+}

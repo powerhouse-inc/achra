@@ -1,4 +1,5 @@
 import { BreadcrumbSelectYear } from '@/modules/finances/components/breadcrumb-select-year'
+import { SummarySection } from '@/modules/finances/components/summary-section'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
 import { WALLET_GROUPS } from '@/modules/finances/mocks/group'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -20,6 +21,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           <UsdsIcon className="size-5 md:size-6" />
           *All values are converted to USDS
         </div>
+        <SummarySection />
       </PageContent>
     </main>
   )
