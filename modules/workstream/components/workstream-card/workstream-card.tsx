@@ -3,15 +3,16 @@ import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-ge
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
+import { NavigationHeader } from '@/modules/shared/components/navigation-header'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
 import WorkstreamStats from '../workstream-stats/workstream-stats'
-import { NavigationHeader } from './navigation-header'
 import ProposalCardsGrid from './proposal-cards-grid'
 import { RfpDetailsLink } from './rfp-details-link'
 import StatCards from './stat-cards'
+import type { Route } from 'next'
 
 // TODO: remove this once the component is integrated with the API
 const proposalDescriptionMarkdown = `
@@ -30,7 +31,10 @@ export default function WorkstreamCard() {
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <NavigationHeader />
+          <NavigationHeader
+            title="Vetra Beta Launch"
+            href={'/network/powerhouse/workstream/vetra-beta-launch' as Route}
+          />
           <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
         </div>
 
