@@ -11,7 +11,11 @@ export default function RoadmapFilters() {
 
   return (
     <div className="grid grid-cols-[1fr_auto] grid-rows-1 gap-4 sm:grid-cols-1 sm:grid-rows-2 md:flex lg:gap-6">
-      <SearchInput value={search} onChange={(value) => void setSearch(value)} />
+      <SearchInput
+        value={search}
+        onChange={(value) => void setSearch(value)}
+        placeholder="Search by Roadmap name, code, coordinators..."
+      />
       <div className="hidden items-center gap-4 sm:flex lg:gap-6">
         <StatusSelect
           statuses={statuses}
