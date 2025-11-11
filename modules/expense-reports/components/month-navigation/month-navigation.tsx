@@ -1,5 +1,6 @@
 'use client'
 
+import { parse } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -28,21 +29,11 @@ function parseMonthString(monthString: string | null): Date {
     return new Date()
   }
 
-  // Parse format: MonYear (e.g., "Jan2025", "Feb2024")
-  const match = monthString.match(/^([A-Za-z]{3})(\d{4})$/)
-  if (!match) {
+  try {
+    return parse(monthString, 'MMMyyyy', new Date())
+  } catch {
     return new Date()
   }
-
-  const [, monthName, yearStr] = match
-  const monthIndex = MONTH_NAMES.findIndex((m) => m.toLowerCase() === monthName.toLowerCase())
-  const year = parseInt(yearStr, 10)
-
-  if (monthIndex === -1 || isNaN(year)) {
-    return new Date()
-  }
-
-  return new Date(year, monthIndex, 1)
 }
 
 function formatMonthString(date: Date): string {
