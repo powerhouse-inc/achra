@@ -11,8 +11,8 @@ export function LegendItem({ children, color = 'bg-status-success', className }:
     <div
       data-slot="legend-item"
       className={cn(
-        'text-foreground relative flex h-fit items-start pl-3 text-xs leading-[18px] font-bold',
-        'xl:text-sm xl:leading-[22px] xl:font-semibold',
+        'text-foreground relative flex h-fit items-start pl-3 text-xs/4.5 font-bold',
+        'xl:text-sm/5.5 xl:font-semibold',
         className,
       )}
     >
