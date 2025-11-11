@@ -40,7 +40,7 @@ export default function ServicesFilters() {
               <TabsTrigger
                 key={tab.id}
                 value={tab.id}
-                className="text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
+                className="text-muted-foreground data-[state=active]:text-foreground dark:data-[state=active]:bg-background border-none px-3 py-1.5 leading-5"
               >
                 {tab.label}
               </TabsTrigger>

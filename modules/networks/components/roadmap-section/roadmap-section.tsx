@@ -27,7 +27,7 @@ export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
               <TabsTrigger
                 key={tab.id}
                 value={tab.id}
-                className="text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
+                className="dark:data-[state=active]:bg-background text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
               >
                 {tab.label}
               </TabsTrigger>
