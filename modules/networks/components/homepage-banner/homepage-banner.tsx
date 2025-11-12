@@ -13,7 +13,8 @@ import { cn } from '@/shared/lib/utils'
 import { useHomepageBanner } from './use-homepage-banner'
 
 function HomepageBanner() {
-  const { isExpanded, collapsibleElement, handleIsExpanded } = useHomepageBanner()
+  const { isExpanded, collapsibleElement, handleIsExpanded, showWhitelistOverlay } =
+    useHomepageBanner()
   const isAuthenticated = true as boolean // placeholder for authentication
 
   return (
@@ -36,14 +37,16 @@ function HomepageBanner() {
         style={{ objectFit: 'cover' }}
         className="absolute z-0"
       />
-      <CollapsibleTrigger asChild className="absolute top-3 right-3 z-1">
-        <Button
-          className="hover:bg-secondary-foreground/30 h-6 w-6 bg-transparent shadow-none [&:has(>svg)]:p-1"
-          aria-label="Toggle homepage banner"
-        >
-          {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
-        </Button>
-      </CollapsibleTrigger>
+      {!showWhitelistOverlay && (
+        <CollapsibleTrigger asChild className="absolute top-3 right-3 z-1">
+          <Button
+            className="hover:bg-secondary-foreground/30 h-6 w-6 bg-transparent shadow-none [&:has(>svg)]:p-1"
+            aria-label="Toggle homepage banner"
+          >
+            {isExpanded ? <Minimize2 className="size-4" /> : <Maximize2 className="size-4" />}
+          </Button>
+        </CollapsibleTrigger>
+      )}
       <span
         className={cn(
           'z-1 pb-4 text-xl leading-[120%] font-bold transition-all duration-300 ease-out sm:text-2xl xl:text-3xl',
@@ -67,7 +70,12 @@ function HomepageBanner() {
             !isExpanded && 'right-11 bottom-4! sm:right-15!',
           )}
         >
-          <ConnectLink />
+          <ConnectLink
+            disabled={true}
+            href="https://connect.achra.network"
+            action="edit"
+            driveName="Sky Network Admin"
+          />
         </div>
       )}
     </Collapsible>
