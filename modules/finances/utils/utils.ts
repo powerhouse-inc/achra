@@ -17,11 +17,10 @@ export function percentageRespectTo(value: number, total: number): number {
   return (value / total) * 100
 }
 
-export function truncateDescription(description: string): string {
-  // Simple truncation - can be enhanced with word boundaries if needed
-  const maxLength = 100
-  if (description.length <= maxLength) {
-    return description
+export const truncateDescription = (description: string, wordLimit = 100) => {
+  const words = description.split(' ')
+  if (words.length > wordLimit) {
+    return `${words.slice(0, wordLimit).join(' ')}...`
   }
-  return `${description.slice(0, maxLength)}...`
+  return description
 }

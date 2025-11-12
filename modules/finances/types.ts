@@ -24,3 +24,17 @@ export interface QuarterCardProps {
   paymentsOnChain: number
   budgetCap: number
 }
+
+export interface FiancesNavigationCard {
+  image: string
+  title: string
+  description?: string
+  href: string
+  totalDai?: number
+  valueDai?: number
+  budgetCapValue?: number
+  color: string
+  code: string
+  codePath?: string
+  percent: number
+}
