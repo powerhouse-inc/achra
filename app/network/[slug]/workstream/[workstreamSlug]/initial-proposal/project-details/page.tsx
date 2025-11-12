@@ -60,7 +60,11 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                     </div>
                   </div>
                   <div className="text-primary-foreground hidden w-[calc(100%-48px)] max-w-64 sm:flex sm:justify-end">
-                    <ConnectLink />
+                    <ConnectLink
+                      href="https://connect.achra.network"
+                      action="edit"
+                      driveName="Sky Network Admin"
+                    />
                   </div>
                 </div>
                 <div className="block sm:hidden">
@@ -80,7 +84,11 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                   Convallis.
                 </div>
                 <div className="text-primary-foreground mt-1 block sm:mt-0 sm:hidden">
-                  <ConnectLink />
+                  <ConnectLink
+                    href="https://connect.achra.network"
+                    action="edit"
+                    driveName="Sky Network Admin"
+                  />
                 </div>
               </div>
 

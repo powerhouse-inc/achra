@@ -33,8 +33,8 @@ export function WhitelistForm({ onSuccess }: WhitelistFormProps) {
         Join the Waitlist
       </h2>
       <p className="text-md text-muted-foreground mx-auto max-w-xl text-center lg:text-lg">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua.
+        Get early access to Achra, the operations marketplace for open networks. Scope work, choose
+        providers, pay in stablecoins, and track results in one place.
       </p>
       <form action={formAction} className="relative z-20 mt-10 w-full max-w-md">
         <Field data-invalid={!!state.error}>
