@@ -1,10 +1,7 @@
 import { ExternalLinkIcon, LinkIcon } from 'lucide-react'
-import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
-import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
+import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
-import { ServiceEntityEnum } from '@/modules/shared/types/services'
 import { BuilderHeaderDescription } from './builder-header-description'
 
 function BuilderHeader() {
@@ -33,7 +30,9 @@ function BuilderHeader() {
 
                 {/* builder status */}
                 <div className="ml-3 flex items-center gap-1">
-                  <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.Delivered} />
+                  <GenericChip variant="filled" color="green">
+                    Accepted
+                  </GenericChip>
 
                   <Button variant="ghost" className="h-6">
                     Since 25-MAY-2021 <ExternalLinkIcon />
@@ -42,9 +41,18 @@ function BuilderHeader() {
               </div>
 
               <div className="flex gap-2">
-                <ServicesEntitiesChip entity={ServiceEntityEnum.Founders} />
-                <ServicesEntitiesChip entity={ServiceEntityEnum.Operators} />
-                <ServicesEntitiesChip entity={ServiceEntityEnum.Builders} />
+                <GenericChip variant="compact" color="blue">
+                  Technical
+                </GenericChip>
+                <GenericChip variant="compact" color="red">
+                  Growth
+                </GenericChip>
+                <GenericChip variant="compact" color="yellow">
+                  Support
+                </GenericChip>
+                <GenericChip variant="compact" color="purple">
+                  Operational
+                </GenericChip>
               </div>
             </div>
           </div>
