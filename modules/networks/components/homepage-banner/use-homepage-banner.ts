@@ -23,5 +23,6 @@ export function useHomepageBanner() {
     isExpanded: showWhitelistOverlay ? false : isExpanded,
     collapsibleElement,
     handleIsExpanded,
+    showWhitelistOverlay,
   }
 }

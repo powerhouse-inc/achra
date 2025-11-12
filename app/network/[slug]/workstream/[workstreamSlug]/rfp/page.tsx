@@ -48,7 +48,11 @@ export default function RequestForProposalPage({ params }: RequestForProposalPag
                   <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
                 </div>
                 <div className="text-primary-foreground hidden md:flex">
-                  <ConnectLink />
+                  <ConnectLink
+                    href="https://connect.achra.network"
+                    action="edit"
+                    driveName="Sky Network Admin"
+                  />
                 </div>
               </div>
             </div>
@@ -73,7 +77,11 @@ export default function RequestForProposalPage({ params }: RequestForProposalPag
             </div>
 
             <div className="text-primary-foreground sm:flex sm:justify-end md:hidden">
-              <ConnectLink />
+              <ConnectLink
+                href="https://connect.achra.network"
+                action="edit"
+                driveName="Sky Network Admin"
+              />
             </div>
           </div>
 

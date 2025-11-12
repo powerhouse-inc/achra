@@ -3,6 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Suspense } from 'react'
 import ff from '@/modules/shared/lib/feature-flags'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
@@ -55,7 +56,11 @@ export default function RootLayout({
             <NuqsAdapter>
               {children}
 
-              {ff.FEATURE_WHITELIST_OVERLAY && <WhitelistOverlay />}
+              {ff.FEATURE_WHITELIST_OVERLAY && (
+                <Suspense>
+                  <WhitelistOverlay />
+                </Suspense>
+              )}
 
               <Footer />
             </NuqsAdapter>

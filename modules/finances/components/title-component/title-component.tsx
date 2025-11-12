@@ -1,0 +1,56 @@
+import { cn } from '@/shared/lib/utils'
+import IconTitleWithCode from './icon-title'
+
+interface TitleComponentProps {
+  levelNumber: number
+  icon?: string
+  title: string
+  code: string
+  description: string
+}
+
+export function TitleComponent({
+  levelNumber,
+  icon,
+  title,
+  code,
+  description,
+}: TitleComponentProps) {
+  return (
+    <div className={cn('flex flex-col', levelNumber === 1 ? 'gap-2' : 'gap-0')}>
+      {levelNumber === 1 ? (
+        <h1
+          data-slot="first-level-title"
+          className="text-foreground m-0 text-lg/[120%] font-bold md:text-xl xl:text-2xl"
+        >
+          Sky Ecosystem Finances
+        </h1>
+      ) : (
+        <h1 data-slot="nth-title-box" className="m-0 md:text-3xl">
+          <IconTitleWithCode
+            icon={icon ?? '/default-icon-cards-budget.svg'}
+            title={title}
+            code={code}
+          />
+        </h1>
+      )}
+      <div
+        data-slot="title-description"
+        className={cn(
+          'text-muted-foreground m-0 flex flex-col gap-2 text-sm leading-6 font-normal xl:text-base',
+          levelNumber === 1 ? 'ml-0' : 'ml-10 md:ml-14',
+          '[&_p]:m-0',
+        )}
+      >
+        {levelNumber === 1 ? (
+          <p>
+            The Sky finances section offers a complete breakdown of budget and expenditure data for
+            contributor teams since the DAO&apos;s launch in 2021.
+          </p>
+        ) : (
+          description
+        )}
+      </div>
+    </div>
+  )
+}
