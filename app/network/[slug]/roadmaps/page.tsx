@@ -5,6 +5,7 @@ import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roa
 import { mockedRoadmaps } from '@/modules/roadmap/mocks/roadmap'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { Button } from '@/modules/shared/components/ui/button'
 import type { Route } from 'next'
 
 const items = [
@@ -28,6 +29,9 @@ export default function RoadmapPage() {
             <RoadmapSection key={roadmap.id} roadmap={roadmap} />
           ))}
         </div>
+        <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
+          Load More
+        </Button>
       </PageContent>
     </PageBackground>
   )
