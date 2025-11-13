@@ -1,22 +1,12 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
-import { useLocalStorage } from 'usehooks-ts'
-import { WHITELIST_OVERLAY_STORAGE_KEY } from '@/modules/whitelist/config/constants'
+import { useEffect } from 'react'
 import { useWhitelistOverlay } from '@/modules/whitelist/hooks/use-whitelist-overlay'
 import { cn } from '@/shared/lib/utils'
-import { SuccessView } from '../success-view'
 import { WhitelistForm } from '../whitelist-form'
 
 function WhitelistOverlay() {
   const shouldShow = useWhitelistOverlay()
-  const [isSubmitted, setIsSubmitted] = useLocalStorage<boolean>(
-    WHITELIST_OVERLAY_STORAGE_KEY,
-    false,
-    {
-      initializeWithValue: false,
-    },
-  )
 
   useEffect(() => {
     if (typeof window === 'undefined' || !shouldShow) return
@@ -28,10 +18,6 @@ function WhitelistOverlay() {
       body.style.overflow = 'auto'
     }
   }, [shouldShow])
-
-  const handleSuccess = useCallback(() => {
-    setIsSubmitted(true)
-  }, [setIsSubmitted])
 
   /**
    * The whitelist overlay should not be rendered for the current route or it
@@ -48,7 +34,7 @@ function WhitelistOverlay() {
         )}
       >
         <div className="container flex h-full w-full flex-col items-center justify-center px-4">
-          {isSubmitted ? <SuccessView /> : <WhitelistForm onSuccess={handleSuccess} />}
+          <WhitelistForm />
         </div>
       </div>
     </div>
