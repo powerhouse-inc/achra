@@ -1,6 +1,5 @@
 import {
   type ScopeOfWork_Agent,
-  ScopeOfWork_AgentType,
   type ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableSetStatus,
   ScopeOfWork_DeliverableStatus,
@@ -18,36 +17,26 @@ export const mockedContributors: ScopeOfWork_Agent[] = [
     __typename: 'ScopeOfWork_Agent',
     id: '93RF8qO5',
     name: 'Powerhouse',
-    code: 'PH',
-    agentType: ScopeOfWork_AgentType.Group,
   },
   {
     __typename: 'ScopeOfWork_Agent',
     id: '0454KB3p',
     name: 'Prometheus',
-    code: 'Prometheus',
-    agentType: ScopeOfWork_AgentType.Human,
   },
   {
     __typename: 'ScopeOfWork_Agent',
     id: '5Q4UrTDg',
     name: 'teep',
-    code: 'teep',
-    agentType: ScopeOfWork_AgentType.Human,
   },
   {
     __typename: 'ScopeOfWork_Agent',
     id: '11F2ho3q',
     name: 'meraki',
-    code: 'meraki',
-    agentType: ScopeOfWork_AgentType.Human,
   },
   {
     __typename: 'ScopeOfWork_Agent',
     id: 'p7026973',
     name: 'callmeT',
-    code: 'callmeT',
-    agentType: ScopeOfWork_AgentType.Human,
   },
 ]
 

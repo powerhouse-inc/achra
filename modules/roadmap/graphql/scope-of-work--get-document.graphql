@@ -28,8 +28,6 @@ query ScopeOfWork($docId: PHID!) {
           }
         }
         contributors {
-          agentType
-          code
           id
           name
         }
