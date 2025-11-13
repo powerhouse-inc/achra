@@ -1,7 +1,16 @@
-import React from 'react'
-import { FINANCES_NAVIGATION_CARDS } from '../../mocks/group'
+import { getCardsNavigationData } from '../../utils'
 import { CardsNavigationSwipper } from './cards-navigation-swipper'
 
-export function NavigationSection() {
-  return <CardsNavigationSwipper cardsNavigationInformation={FINANCES_NAVIGATION_CARDS} />
+interface NavigationSectionProps {
+  params: Promise<{
+    slug: string
+    financeSlug?: string[]
+  }>
+}
+
+export async function NavigationSection({ params }: NavigationSectionProps) {
+  const { slug, financeSlug } = await params
+  const cardsNavigation = getCardsNavigationData(slug, financeSlug)
+
+  return <CardsNavigationSwipper cardsNavigationInformation={cardsNavigation} />
 }

@@ -2,19 +2,19 @@ import { cn } from '@/shared/lib/utils'
 import IconTitleWithCode from './icon-title'
 
 interface TitleComponentProps {
-  levelNumber: number
-  icon?: string
   title: string
+  description?: string
+  icon?: string
   code: string
-  description: string
+  levelNumber: number
 }
 
 export function TitleComponent({
-  levelNumber,
-  icon,
   title,
-  code,
   description,
+  icon,
+  code,
+  levelNumber,
 }: TitleComponentProps) {
   return (
     <div className={cn('flex flex-col', levelNumber === 1 ? 'gap-2' : 'gap-0')}>
@@ -28,7 +28,7 @@ export function TitleComponent({
       ) : (
         <h1 data-slot="nth-title-box" className="m-0 md:text-3xl">
           <IconTitleWithCode
-            icon={icon ?? '/default-icon-cards-budget.svg'}
+            icon={icon || '/default-icon-cards-budget.svg'}
             title={title}
             code={code}
           />

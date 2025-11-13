@@ -1,17 +1,16 @@
-import { Breadcrumb } from '@/modules/shared/components/breadcrumb'
-import type { Route } from 'next'
+import { getBreadcrumbItems } from '../../utils'
+import { BreadcrumbSelectYear } from './breadcrumb-select-year'
 
 interface FinancesBreadcrumbProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{
+    slug: string
+    financeSlug?: string[]
+  }>
 }
 
 export async function FinancesBreadcrumb({ params }: FinancesBreadcrumbProps) {
-  const { slug } = await params
+  const { slug, financeSlug } = await params
+  const items = getBreadcrumbItems(slug, financeSlug)
 
-  const networkName = slug.charAt(0).toUpperCase() + slug.slice(1)
-  const items = [
-    { label: 'Networks', href: '/networks' as Route },
-    { label: networkName, href: `network/${slug}` as Route },
-  ]
-  return <Breadcrumb items={items} className="w-full" />
+  return <BreadcrumbSelectYear items={items} />
 }
