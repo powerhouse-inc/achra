@@ -57,7 +57,7 @@ export function useCardsNavigationSwiper({ cardsCount }: UseCardsNavigationSwipe
 
     window.addEventListener('resize', handleResize)
 
-    if (showSwiper && isSwiperReady) {
+    if (isSwiperReady) {
       adjustHeights()
     }
 
