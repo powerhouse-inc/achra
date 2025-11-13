@@ -37,6 +37,7 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
   EmailAddress: { input: any; output: any; }
   EthereumAddress: { input: any; output: any; }
+  JSON: { input: any; output: any; }
   JSONObject: { input: any; output: any; }
   OID: { input: any; output: any; }
   OLabel: { input: any; output: any; }
@@ -54,25 +55,12 @@ export type AddDriveResult = {
   slug: Scalars['String']['output'];
 };
 
-export type Agent = {
-  __typename?: 'Agent';
-  agentType: AgentType;
-  code?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
+export type AllNetworks = {
+  __typename?: 'AllNetworks';
+  documentType?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['PHID']['output']>;
+  network?: Maybe<Network>;
 };
-
-export enum AgentType {
-  Ai = 'AI',
-  Group = 'GROUP',
-  Human = 'HUMAN'
-}
-
-export enum AgentTypeInput {
-  Ai = 'AI',
-  Group = 'GROUP',
-  Human = 'HUMAN'
-}
 
 export type AnalyticsFilter = {
   currency?: InputMaybe<Scalars['String']['input']>;
@@ -148,89 +136,11 @@ export type AnalyticsSeriesDimension = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
-export type AppModule = IDocument & {
-  __typename?: 'AppModule';
-  created: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  initialState: AppModule_AppModuleState;
-  lastModified: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  operations: Array<Operation>;
-  revision: Scalars['Int']['output'];
-  state: AppModule_AppModuleState;
-  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-
-export type AppModuleOperationsArgs = {
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Queries: AppModule */
-export type AppModuleQueries = {
-  __typename?: 'AppModuleQueries';
-  getDocument?: Maybe<AppModule>;
-  getDocuments?: Maybe<Array<AppModule>>;
-};
-
-
-/** Queries: AppModule */
-export type AppModuleQueriesGetDocumentArgs = {
-  docId: Scalars['PHID']['input'];
-  driveId?: InputMaybe<Scalars['PHID']['input']>;
-};
-
-
-/** Queries: AppModule */
-export type AppModuleQueriesGetDocumentsArgs = {
-  driveId: Scalars['String']['input'];
-};
-
-/** Subgraph definition for AppModule (powerhouse/app) */
-export type AppModuleState = {
-  __typename?: 'AppModuleState';
-  name: Scalars['String']['output'];
-  status: StatusType;
-};
-
-export type AppModule_AppModuleState = {
-  __typename?: 'AppModule_AppModuleState';
-  name: Scalars['String']['output'];
-  status: AppModule_StatusType;
-};
-
-/** Module: BaseOperations */
-export type AppModule_SetAppNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type AppModule_SetAppStatusInput = {
-  status: StatusType;
-};
-
-export enum AppModule_StatusType {
-  Confirmed = 'CONFIRMED',
-  Draft = 'DRAFT'
-}
-
-export type Author = {
-  __typename?: 'Author';
-  name?: Maybe<Scalars['String']['output']>;
-  website?: Maybe<Scalars['URL']['output']>;
-};
-
 export enum BillingFrequency {
   Biweekly = 'BIWEEKLY',
   Monthly = 'MONTHLY',
   Weekly = 'WEEKLY'
 }
-
-export type Binary = {
-  __typename?: 'Binary';
-  done?: Maybe<Scalars['Boolean']['output']>;
-};
 
 export type BonusClause = {
   __typename?: 'BonusClause';
@@ -238,22 +148,6 @@ export type BonusClause = {
   comment?: Maybe<Scalars['String']['output']>;
   condition: Scalars['String']['output'];
   id: Scalars['OID']['output'];
-};
-
-export type BudgetAnchorProject = {
-  __typename?: 'BudgetAnchorProject';
-  margin: Scalars['Float']['output'];
-  project?: Maybe<Scalars['OID']['output']>;
-  quantity: Scalars['Float']['output'];
-  unit?: Maybe<Unit>;
-  unitCost: Scalars['Float']['output'];
-};
-
-export type BudgetExpenditure = {
-  __typename?: 'BudgetExpenditure';
-  actuals: Scalars['Float']['output'];
-  cap: Scalars['Float']['output'];
-  percentage: Scalars['Float']['output'];
 };
 
 export type BudgetRange = {
@@ -268,13 +162,6 @@ export type BudgetRangeInput = {
   max?: InputMaybe<Scalars['Float']['input']>;
   min?: InputMaybe<Scalars['Float']['input']>;
 };
-
-export enum BudgetType {
-  Capex = 'CAPEX',
-  Contingency = 'CONTINGENCY',
-  Opex = 'OPEX',
-  Overhead = 'OVERHEAD'
-}
 
 export type ClientInfo = {
   __typename?: 'ClientInfo';
@@ -302,64 +189,6 @@ export type CurrencyConversion = {
   sourceCurrency: Scalars['String']['input'];
 };
 
-export type Deliverable = {
-  __typename?: 'Deliverable';
-  budgetAnchor?: Maybe<BudgetAnchorProject>;
-  code: Scalars['String']['output'];
-  description: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-  keyResults: Array<KeyResult>;
-  owner?: Maybe<Scalars['ID']['output']>;
-  status: DeliverableStatus;
-  title: Scalars['String']['output'];
-  workProgress?: Maybe<Progress>;
-};
-
-export enum DeliverableSetStatus {
-  Canceled = 'CANCELED',
-  Draft = 'DRAFT',
-  Finished = 'FINISHED',
-  InProgress = 'IN_PROGRESS',
-  Todo = 'TODO'
-}
-
-export enum DeliverableSetStatusInput {
-  Canceled = 'CANCELED',
-  Draft = 'DRAFT',
-  Finished = 'FINISHED',
-  InProgress = 'IN_PROGRESS',
-  Todo = 'TODO'
-}
-
-export enum DeliverableStatus {
-  Blocked = 'BLOCKED',
-  Canceled = 'CANCELED',
-  Delivered = 'DELIVERED',
-  Draft = 'DRAFT',
-  InProgress = 'IN_PROGRESS',
-  Todo = 'TODO',
-  WontDo = 'WONT_DO'
-}
-
-export type DeliverablesCompleted = {
-  __typename?: 'DeliverablesCompleted';
-  completed: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type DeliverablesCompletedInput = {
-  completed: Scalars['Int']['input'];
-  total: Scalars['Int']['input'];
-};
-
-export type DeliverablesSet = {
-  __typename?: 'DeliverablesSet';
-  deliverables: Array<Scalars['OID']['output']>;
-  deliverablesCompleted: DeliverablesCompleted;
-  progress: Progress;
-  status: DeliverableSetStatus;
-};
-
 export type Dimension = {
   __typename?: 'Dimension';
   name?: Maybe<Scalars['String']['output']>;
@@ -368,14 +197,16 @@ export type Dimension = {
 
 export type DocumentDrive = IDocument & {
   __typename?: 'DocumentDrive';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: DocumentDrive_DocumentDriveState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  meta?: Maybe<DriveMeta>;
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
+  slug: Scalars['String']['output'];
   state: DocumentDrive_DocumentDriveState;
   stateJSON?: Maybe<Scalars['JSONObject']['output']>;
 };
@@ -481,96 +312,12 @@ export enum DocumentDrive_TriggerType {
   PullResponder = 'PullResponder'
 }
 
-export type DocumentEditor = IDocument & {
-  __typename?: 'DocumentEditor';
-  created: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  initialState: DocumentEditor_DocumentEditorState;
-  lastModified: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  operations: Array<Operation>;
-  revision: Scalars['Int']['output'];
-  state: DocumentEditor_DocumentEditorState;
-  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-
-export type DocumentEditorOperationsArgs = {
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Queries: DocumentEditor */
-export type DocumentEditorQueries = {
-  __typename?: 'DocumentEditorQueries';
-  getDocument?: Maybe<DocumentEditor>;
-  getDocuments?: Maybe<Array<DocumentEditor>>;
-};
-
-
-/** Queries: DocumentEditor */
-export type DocumentEditorQueriesGetDocumentArgs = {
-  docId: Scalars['PHID']['input'];
-  driveId?: InputMaybe<Scalars['PHID']['input']>;
-};
-
-
-/** Queries: DocumentEditor */
-export type DocumentEditorQueriesGetDocumentsArgs = {
-  driveId: Scalars['String']['input'];
-};
-
-/** Subgraph definition for DocumentEditor (powerhouse/document-editor) */
-export type DocumentEditorState = {
-  __typename?: 'DocumentEditorState';
-  documentTypes: Array<DocumentTypeItem>;
-  name: Scalars['String']['output'];
-  status: StatusType;
-};
-
-export type DocumentEditor_AddDocumentTypeInput = {
-  documentType: Scalars['String']['input'];
-  id: Scalars['OID']['input'];
-};
-
-export type DocumentEditor_DocumentEditorState = {
-  __typename?: 'DocumentEditor_DocumentEditorState';
-  documentTypes: Array<DocumentEditor_DocumentTypeItem>;
-  name: Scalars['String']['output'];
-  status: DocumentEditor_StatusType;
-};
-
-export type DocumentEditor_DocumentTypeItem = {
-  __typename?: 'DocumentEditor_DocumentTypeItem';
-  documentType: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-};
-
-export type DocumentEditor_RemoveDocumentTypeInput = {
-  id: Scalars['OID']['input'];
-};
-
-/** Module: BaseOperations */
-export type DocumentEditor_SetEditorNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type DocumentEditor_SetEditorStatusInput = {
-  status: StatusType;
-};
-
-export enum DocumentEditor_StatusType {
-  Confirmed = 'CONFIRMED',
-  Draft = 'DRAFT'
-}
-
 export type DocumentModel = IDocument & {
   __typename?: 'DocumentModel';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -595,8 +342,8 @@ export type DocumentModel_CodeExample = {
   value: Scalars['String']['output'];
 };
 
-export type DocumentModel_DocumentModelState = {
-  __typename?: 'DocumentModel_DocumentModelState';
+export type DocumentModel_DocumentModelGlobalState = {
+  __typename?: 'DocumentModel_DocumentModelGlobalState';
   author: DocumentModel_Author;
   description: Scalars['String']['output'];
   extension: Scalars['String']['output'];
@@ -656,18 +403,12 @@ export type DocumentModel_State = {
   schema: Scalars['String']['output'];
 };
 
-export type DocumentTypeItem = {
-  __typename?: 'DocumentTypeItem';
-  documentType: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-};
-
 export type DriveDocument = IDocument & {
   __typename?: 'DriveDocument';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -678,6 +419,11 @@ export type DriveDocument = IDocument & {
 export type DriveDocumentOperationsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DriveMeta = {
+  __typename?: 'DriveMeta';
+  preferredEditor?: Maybe<Scalars['String']['output']>;
 };
 
 export type Escrow = {
@@ -704,11 +450,53 @@ export type EvaluationTerms = {
   impactsReputation: Scalars['Boolean']['output'];
 };
 
-export type IDocument = {
-  created: Scalars['DateTime']['output'];
+export type FullProposal = {
+  __typename?: 'FullProposal';
+  author: ProposalAuthor;
+  id: Scalars['OID']['output'];
+  paymentTerms?: Maybe<Pt_PaymentTermsState>;
+  sow?: Maybe<Sow_ScopeOfWorkState>;
+  status: ProposalStatus;
+};
+
+/** Detailed Workstream hydrated from DB + documents */
+export type FullQueryWorkstream = {
+  __typename?: 'FullQueryWorkstream';
+  alternativeProposals: Array<FullProposal>;
+  client?: Maybe<ClientInfo>;
+  code?: Maybe<Scalars['String']['output']>;
+  initialProposal?: Maybe<FullProposal>;
+  paymentRequests: Array<Scalars['PHID']['output']>;
+  paymentTerms?: Maybe<Pt_PaymentTermsState>;
+  rfp?: Maybe<Rfp>;
+  sow?: Maybe<Sow_ScopeOfWorkState>;
+  status?: Maybe<WorkstreamStatus>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type GqlDocument = IDocument & {
+  __typename?: 'GqlDocument';
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type GqlDocumentOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type IDocument = {
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -721,34 +509,20 @@ export type IDocumentOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type KeyResult = {
-  __typename?: 'KeyResult';
-  id: Scalars['OID']['output'];
-  link: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
-export type Keyword = {
-  __typename?: 'Keyword';
-  id: Scalars['OID']['output'];
-  label: Scalars['String']['output'];
+export type LinkedDocument = {
+  __typename?: 'LinkedDocument';
+  id: Scalars['PHID']['output'];
+  stateJSON?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type Milestone = {
   __typename?: 'Milestone';
   amount: Scalars['Amount']['output'];
-  budget?: Maybe<Scalars['Float']['output']>;
-  coordinators: Array<Scalars['ID']['output']>;
-  deliveryTarget: Scalars['String']['output'];
-  description: Scalars['String']['output'];
   expectedCompletionDate?: Maybe<Scalars['Date']['output']>;
   id: Scalars['OID']['output'];
   name: Scalars['String']['output'];
   payoutStatus: MilestonePayoutStatus;
   requiresApproval: Scalars['Boolean']['output'];
-  scope?: Maybe<DeliverablesSet>;
-  sequenceCode: Scalars['String']['output'];
-  title: Scalars['String']['output'];
 };
 
 export enum MilestonePayoutStatus {
@@ -772,17 +546,9 @@ export type MultiCurrencyConversions = {
   start?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type Mutation = {
   __typename?: 'Mutation';
-  AppModule_createDocument?: Maybe<Scalars['String']['output']>;
-  AppModule_setAppName?: Maybe<Scalars['Int']['output']>;
-  AppModule_setAppStatus?: Maybe<Scalars['Int']['output']>;
-  DocumentEditor_addDocumentType?: Maybe<Scalars['Int']['output']>;
-  DocumentEditor_createDocument?: Maybe<Scalars['String']['output']>;
-  DocumentEditor_removeDocumentType?: Maybe<Scalars['Int']['output']>;
-  DocumentEditor_setEditorName?: Maybe<Scalars['Int']['output']>;
-  DocumentEditor_setEditorStatus?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_createDocument?: Maybe<Scalars['String']['output']>;
   NetworkProfile_setCategory?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_setDescription?: Maybe<Scalars['Int']['output']>;
@@ -813,12 +579,6 @@ export type Mutation = {
   PaymentTerms_updateMilestoneStatus?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_updatePenaltyClause?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_updateStatus?: Maybe<Scalars['Int']['output']>;
-  ProcessorModule_addDocumentType?: Maybe<Scalars['Int']['output']>;
-  ProcessorModule_createDocument?: Maybe<Scalars['String']['output']>;
-  ProcessorModule_removeDocumentType?: Maybe<Scalars['Int']['output']>;
-  ProcessorModule_setProcessorName?: Maybe<Scalars['Int']['output']>;
-  ProcessorModule_setProcessorStatus?: Maybe<Scalars['Int']['output']>;
-  ProcessorModule_setProcessorType?: Maybe<Scalars['Int']['output']>;
   RequestForProposals_addContextDocument?: Maybe<Scalars['Int']['output']>;
   RequestForProposals_addProposal?: Maybe<Scalars['Int']['output']>;
   RequestForProposals_changeProposalStatus?: Maybe<Scalars['Int']['output']>;
@@ -860,20 +620,6 @@ export type Mutation = {
   ScopeOfWork_setProjectTotalBudget?: Maybe<Scalars['Int']['output']>;
   ScopeOfWork_updateProject?: Maybe<Scalars['Int']['output']>;
   ScopeOfWork_updateProjectOwner?: Maybe<Scalars['Int']['output']>;
-  SubgraphModule_createDocument?: Maybe<Scalars['String']['output']>;
-  SubgraphModule_setSubgraphName?: Maybe<Scalars['Int']['output']>;
-  SubgraphModule_setSubgraphStatus?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_addPackageKeyword?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_createDocument?: Maybe<Scalars['String']['output']>;
-  VetraPackage_removePackageKeyword?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageAuthor?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageAuthorName?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageAuthorWebsite?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageCategory?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageDescription?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageGithubUrl?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageName?: Maybe<Scalars['Int']['output']>;
-  VetraPackage_setPackageNpmUrl?: Maybe<Scalars['Int']['output']>;
   Workstream_addAlternativeProposal?: Maybe<Scalars['Int']['output']>;
   Workstream_addPaymentRequest?: Maybe<Scalars['Int']['output']>;
   Workstream_createDocument?: Maybe<Scalars['String']['output']>;
@@ -891,76 +637,14 @@ export type Mutation = {
 };
 
 
-/** Mutations: AppModule */
-export type MutationAppModule_CreateDocumentArgs = {
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-};
-
-
-/** Mutations: AppModule */
-export type MutationAppModule_SetAppNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<AppModule_SetAppNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationAppModule_SetAppStatusArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<AppModule_SetAppStatusInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationDocumentEditor_AddDocumentTypeArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<DocumentEditor_AddDocumentTypeInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationDocumentEditor_CreateDocumentArgs = {
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-};
-
-
-/** Mutations: AppModule */
-export type MutationDocumentEditor_RemoveDocumentTypeArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<DocumentEditor_RemoveDocumentTypeInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationDocumentEditor_SetEditorNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<DocumentEditor_SetEditorNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationDocumentEditor_SetEditorStatusArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<DocumentEditor_SetEditorStatusInput>;
-};
-
-
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetCategoryArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -968,7 +652,7 @@ export type MutationNetworkProfile_SetCategoryArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetDescriptionArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -976,7 +660,7 @@ export type MutationNetworkProfile_SetDescriptionArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetDiscordArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -984,7 +668,7 @@ export type MutationNetworkProfile_SetDiscordArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetGithubArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -992,7 +676,7 @@ export type MutationNetworkProfile_SetGithubArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetIconArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1000,7 +684,7 @@ export type MutationNetworkProfile_SetIconArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetLogoArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1008,7 +692,7 @@ export type MutationNetworkProfile_SetLogoArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetLogoBigArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1016,7 +700,7 @@ export type MutationNetworkProfile_SetLogoBigArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetProfileNameArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1024,7 +708,7 @@ export type MutationNetworkProfile_SetProfileNameArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetWebsiteArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1032,7 +716,7 @@ export type MutationNetworkProfile_SetWebsiteArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetXArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1040,7 +724,7 @@ export type MutationNetworkProfile_SetXArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationNetworkProfile_SetYoutubeArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1048,7 +732,7 @@ export type MutationNetworkProfile_SetYoutubeArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_AddBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1056,7 +740,7 @@ export type MutationPaymentTerms_AddBonusClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_AddMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1064,7 +748,7 @@ export type MutationPaymentTerms_AddMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_AddPenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1072,14 +756,14 @@ export type MutationPaymentTerms_AddPenaltyClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_DeleteBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1087,7 +771,7 @@ export type MutationPaymentTerms_DeleteBonusClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_DeleteMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1095,7 +779,7 @@ export type MutationPaymentTerms_DeleteMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_DeletePenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1103,7 +787,7 @@ export type MutationPaymentTerms_DeletePenaltyClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_ReorderMilestonesArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1111,7 +795,7 @@ export type MutationPaymentTerms_ReorderMilestonesArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetBasicTermsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1119,7 +803,7 @@ export type MutationPaymentTerms_SetBasicTermsArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetCostAndMaterialsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1127,7 +811,7 @@ export type MutationPaymentTerms_SetCostAndMaterialsArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetEscrowDetailsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1135,7 +819,7 @@ export type MutationPaymentTerms_SetEscrowDetailsArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetEvaluationTermsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1143,7 +827,7 @@ export type MutationPaymentTerms_SetEvaluationTermsArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetRetainerDetailsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1151,7 +835,7 @@ export type MutationPaymentTerms_SetRetainerDetailsArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_UpdateBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1159,7 +843,7 @@ export type MutationPaymentTerms_UpdateBonusClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_UpdateMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1167,7 +851,7 @@ export type MutationPaymentTerms_UpdateMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_UpdateMilestoneStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1175,7 +859,7 @@ export type MutationPaymentTerms_UpdateMilestoneStatusArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_UpdatePenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1183,7 +867,7 @@ export type MutationPaymentTerms_UpdatePenaltyClauseArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_UpdateStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1191,54 +875,7 @@ export type MutationPaymentTerms_UpdateStatusArgs = {
 };
 
 
-/** Mutations: AppModule */
-export type MutationProcessorModule_AddDocumentTypeArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ProcessorModule_AddDocumentTypeInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationProcessorModule_CreateDocumentArgs = {
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-};
-
-
-/** Mutations: AppModule */
-export type MutationProcessorModule_RemoveDocumentTypeArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ProcessorModule_RemoveDocumentTypeInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationProcessorModule_SetProcessorNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ProcessorModule_SetProcessorNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationProcessorModule_SetProcessorStatusArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ProcessorModule_SetProcessorStatusInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationProcessorModule_SetProcessorTypeArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ProcessorModule_SetProcessorTypeInput>;
-};
-
-
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_AddContextDocumentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1246,7 +883,7 @@ export type MutationRequestForProposals_AddContextDocumentArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_AddProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1254,7 +891,7 @@ export type MutationRequestForProposals_AddProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_ChangeProposalStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1262,14 +899,14 @@ export type MutationRequestForProposals_ChangeProposalStatusArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_EditRfpArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1277,7 +914,7 @@ export type MutationRequestForProposals_EditRfpArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_RemoveContextDocumentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1285,7 +922,7 @@ export type MutationRequestForProposals_RemoveContextDocumentArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationRequestForProposals_RemoveProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1293,7 +930,7 @@ export type MutationRequestForProposals_RemoveProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1301,7 +938,7 @@ export type MutationScopeOfWork_AddAgentArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddCoordinatorArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1309,7 +946,7 @@ export type MutationScopeOfWork_AddCoordinatorArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1317,7 +954,7 @@ export type MutationScopeOfWork_AddDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddDeliverableInSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1325,7 +962,7 @@ export type MutationScopeOfWork_AddDeliverableInSetArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1333,7 +970,7 @@ export type MutationScopeOfWork_AddKeyResultArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1341,7 +978,7 @@ export type MutationScopeOfWork_AddMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddMilestoneDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1349,7 +986,7 @@ export type MutationScopeOfWork_AddMilestoneDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1357,7 +994,7 @@ export type MutationScopeOfWork_AddProjectArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddProjectDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1365,7 +1002,7 @@ export type MutationScopeOfWork_AddProjectDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_AddRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1373,14 +1010,14 @@ export type MutationScopeOfWork_AddRoadmapArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1388,7 +1025,7 @@ export type MutationScopeOfWork_EditAgentArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1396,7 +1033,7 @@ export type MutationScopeOfWork_EditDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditDeliverablesSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1404,7 +1041,7 @@ export type MutationScopeOfWork_EditDeliverablesSetArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1412,7 +1049,7 @@ export type MutationScopeOfWork_EditKeyResultArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1420,7 +1057,7 @@ export type MutationScopeOfWork_EditMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1428,7 +1065,7 @@ export type MutationScopeOfWork_EditRoadmapArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_EditScopeOfWorkArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1436,7 +1073,7 @@ export type MutationScopeOfWork_EditScopeOfWorkArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1444,7 +1081,7 @@ export type MutationScopeOfWork_RemoveAgentArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveCoordinatorArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1452,7 +1089,7 @@ export type MutationScopeOfWork_RemoveCoordinatorArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1460,7 +1097,7 @@ export type MutationScopeOfWork_RemoveDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveDeliverableInSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1468,7 +1105,7 @@ export type MutationScopeOfWork_RemoveDeliverableInSetArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1476,7 +1113,7 @@ export type MutationScopeOfWork_RemoveKeyResultArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1484,7 +1121,7 @@ export type MutationScopeOfWork_RemoveMilestoneArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveMilestoneDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1492,7 +1129,7 @@ export type MutationScopeOfWork_RemoveMilestoneDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1500,7 +1137,7 @@ export type MutationScopeOfWork_RemoveProjectArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveProjectDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1508,7 +1145,7 @@ export type MutationScopeOfWork_RemoveProjectDeliverableArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_RemoveRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1516,7 +1153,7 @@ export type MutationScopeOfWork_RemoveRoadmapArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_SetDeliverableBudgetAnchorProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1524,7 +1161,7 @@ export type MutationScopeOfWork_SetDeliverableBudgetAnchorProjectArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_SetDeliverableProgressArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1532,7 +1169,7 @@ export type MutationScopeOfWork_SetDeliverableProgressArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_SetProjectMarginArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1540,7 +1177,7 @@ export type MutationScopeOfWork_SetProjectMarginArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_SetProjectTotalBudgetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1548,7 +1185,7 @@ export type MutationScopeOfWork_SetProjectTotalBudgetArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_UpdateProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1556,7 +1193,7 @@ export type MutationScopeOfWork_UpdateProjectArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationScopeOfWork_UpdateProjectOwnerArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1564,117 +1201,7 @@ export type MutationScopeOfWork_UpdateProjectOwnerArgs = {
 };
 
 
-/** Mutations: AppModule */
-export type MutationSubgraphModule_CreateDocumentArgs = {
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-};
-
-
-/** Mutations: AppModule */
-export type MutationSubgraphModule_SetSubgraphNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<SubgraphModule_SetSubgraphNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationSubgraphModule_SetSubgraphStatusArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<SubgraphModule_SetSubgraphStatusInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_AddPackageKeywordArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_AddPackageKeywordInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_CreateDocumentArgs = {
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_RemovePackageKeywordArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_RemovePackageKeywordInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageAuthorArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageAuthorInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageAuthorNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageAuthorNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageAuthorWebsiteArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageAuthorWebsiteInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageCategoryArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageCategoryInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageDescriptionArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageDescriptionInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageGithubUrlArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageGithubUrlInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageNameArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageNameInput>;
-};
-
-
-/** Mutations: AppModule */
-export type MutationVetraPackage_SetPackageNpmUrlArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<VetraPackage_SetPackageNpmUrlInput>;
-};
-
-
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_AddAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1682,7 +1209,7 @@ export type MutationWorkstream_AddAlternativeProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_AddPaymentRequestArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1690,14 +1217,14 @@ export type MutationWorkstream_AddPaymentRequestArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_EditAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1705,7 +1232,7 @@ export type MutationWorkstream_EditAlternativeProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_EditClientInfoArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1713,7 +1240,7 @@ export type MutationWorkstream_EditClientInfoArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_EditInitialProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1721,7 +1248,7 @@ export type MutationWorkstream_EditInitialProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_EditWorkstreamArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1729,7 +1256,7 @@ export type MutationWorkstream_EditWorkstreamArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_RemoveAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1737,7 +1264,7 @@ export type MutationWorkstream_RemoveAlternativeProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_RemovePaymentRequestArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1745,7 +1272,7 @@ export type MutationWorkstream_RemovePaymentRequestArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationWorkstream_SetRequestForProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1753,7 +1280,7 @@ export type MutationWorkstream_SetRequestForProposalArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationAddDriveArgs = {
   icon?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1763,26 +1290,40 @@ export type MutationAddDriveArgs = {
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationDeleteDriveArgs = {
   id: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationSetDriveIconArgs = {
   icon: Scalars['String']['input'];
   id: Scalars['String']['input'];
 };
 
 
-/** Mutations: AppModule */
+/** Mutations: NetworkProfile */
 export type MutationSetDriveNameArgs = {
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
 };
 
-/** Subgraph definition for NetworkProfile (powerhouse/network-profile) */
+export type Network = {
+  __typename?: 'Network';
+  category: Array<NetworkCategory>;
+  description: Scalars['String']['output'];
+  discord?: Maybe<Scalars['String']['output']>;
+  github?: Maybe<Scalars['String']['output']>;
+  icon: Scalars['String']['output'];
+  logo: Scalars['String']['output'];
+  logoBig: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  website?: Maybe<Scalars['String']['output']>;
+  x?: Maybe<Scalars['String']['output']>;
+  youtube?: Maybe<Scalars['String']['output']>;
+};
+
 export enum NetworkCategory {
   Charity = 'CHARITY',
   Crypto = 'CRYPTO',
@@ -1793,11 +1334,11 @@ export enum NetworkCategory {
 
 export type NetworkProfile = IDocument & {
   __typename?: 'NetworkProfile';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: NetworkProfile_NetworkProfileState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -1811,7 +1352,7 @@ export type NetworkProfileOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Queries: NetworkProfile */
+/** Queries: NetworkProfile Document */
 export type NetworkProfileQueries = {
   __typename?: 'NetworkProfileQueries';
   getDocument?: Maybe<NetworkProfile>;
@@ -1819,31 +1360,16 @@ export type NetworkProfileQueries = {
 };
 
 
-/** Queries: NetworkProfile */
+/** Queries: NetworkProfile Document */
 export type NetworkProfileQueriesGetDocumentArgs = {
   docId: Scalars['PHID']['input'];
   driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 
-/** Queries: NetworkProfile */
+/** Queries: NetworkProfile Document */
 export type NetworkProfileQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
-};
-
-export type NetworkProfileState = {
-  __typename?: 'NetworkProfileState';
-  category: Array<NetworkCategory>;
-  description: Scalars['String']['output'];
-  discord?: Maybe<Scalars['String']['output']>;
-  github?: Maybe<Scalars['String']['output']>;
-  icon: Scalars['String']['output'];
-  logo: Scalars['String']['output'];
-  logoBig: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  website?: Maybe<Scalars['String']['output']>;
-  x?: Maybe<Scalars['String']['output']>;
-  youtube?: Maybe<Scalars['String']['output']>;
 };
 
 export enum NetworkProfile_NetworkCategory {
@@ -1870,7 +1396,7 @@ export type NetworkProfile_NetworkProfileState = {
 };
 
 export type NetworkProfile_SetCategoryInput = {
-  category: Array<NetworkCategory>;
+  category: Array<NetworkProfile_NetworkCategory>;
 };
 
 export type NetworkProfile_SetDescriptionInput = {
@@ -1932,36 +1458,123 @@ export type PhOperationContext = {
   signer?: Maybe<Signer>;
 };
 
-export enum PmBudgetTypeInput {
-  Capex = 'CAPEX',
-  Contingency = 'CONTINGENCY',
-  Opex = 'OPEX',
-  Overhead = 'OVERHEAD'
+export enum Pt_BillingFrequency {
+  Biweekly = 'BIWEEKLY',
+  Monthly = 'MONTHLY',
+  Weekly = 'WEEKLY'
 }
 
-export enum PmCurrency {
-  Dai = 'DAI',
+export type Pt_BonusClause = {
+  __typename?: 'PT_BonusClause';
+  bonusAmount: Scalars['Amount']['output'];
+  comment?: Maybe<Scalars['String']['output']>;
+  condition: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+};
+
+export type Pt_CostAndMaterials = {
+  __typename?: 'PT_CostAndMaterials';
+  billingFrequency: Pt_BillingFrequency;
+  hourlyRate?: Maybe<Scalars['Amount']['output']>;
+  timesheetRequired: Scalars['Boolean']['output'];
+  variableCap?: Maybe<Scalars['Amount']['output']>;
+};
+
+export type Pt_Escrow = {
+  __typename?: 'PT_Escrow';
+  amountHeld: Scalars['Amount']['output'];
+  escrowProvider?: Maybe<Scalars['String']['output']>;
+  proofOfFundsDocumentId?: Maybe<Scalars['String']['output']>;
+  releaseConditions: Scalars['String']['output'];
+};
+
+export enum Pt_EvaluationFrequency {
+  Monthly = 'MONTHLY',
+  PerMilestone = 'PER_MILESTONE',
+  Weekly = 'WEEKLY'
+}
+
+export type Pt_EvaluationTerms = {
+  __typename?: 'PT_EvaluationTerms';
+  commentsVisibleToClient: Scalars['Boolean']['output'];
+  criteria: Array<Scalars['String']['output']>;
+  evaluationFrequency: Pt_EvaluationFrequency;
+  evaluatorTeam: Scalars['String']['output'];
+  impactsPayout: Scalars['Boolean']['output'];
+  impactsReputation: Scalars['Boolean']['output'];
+};
+
+export type Pt_Milestone = {
+  __typename?: 'PT_Milestone';
+  amount: Scalars['Amount']['output'];
+  expectedCompletionDate?: Maybe<Scalars['Date']['output']>;
+  id: Scalars['OID']['output'];
+  name: Scalars['String']['output'];
+  payoutStatus: Pt_MilestonePayoutStatus;
+  requiresApproval: Scalars['Boolean']['output'];
+};
+
+export enum Pt_MilestonePayoutStatus {
+  Approved = 'APPROVED',
+  Paid = 'PAID',
+  Pending = 'PENDING',
+  ReadyForReview = 'READY_FOR_REVIEW',
+  Rejected = 'REJECTED'
+}
+
+export enum Pt_PaymentCurrency {
   Eur = 'EUR',
-  Usd = 'USD',
-  Usds = 'USDS'
+  Gbp = 'GBP',
+  Usd = 'USD'
 }
 
-export enum PmCurrencyInput {
-  Dai = 'DAI',
-  Eur = 'EUR',
-  Usd = 'USD',
-  Usds = 'USDS'
+export enum Pt_PaymentModel {
+  CostAndMaterials = 'COST_AND_MATERIALS',
+  Milestone = 'MILESTONE',
+  Retainer = 'RETAINER'
 }
 
-export enum PmDeliverableStatusInput {
-  Blocked = 'BLOCKED',
-  Canceled = 'CANCELED',
-  Delivered = 'DELIVERED',
+export type Pt_PaymentTermsState = {
+  __typename?: 'PT_PaymentTermsState';
+  bonusClauses: Array<Pt_BonusClause>;
+  costAndMaterials?: Maybe<Pt_CostAndMaterials>;
+  currency: Pt_PaymentCurrency;
+  escrowDetails?: Maybe<Pt_Escrow>;
+  evaluation?: Maybe<Pt_EvaluationTerms>;
+  milestoneSchedule: Array<Pt_Milestone>;
+  payer: Scalars['String']['output'];
+  paymentModel: Pt_PaymentModel;
+  penaltyClauses: Array<Pt_PenaltyClause>;
+  proposer: Scalars['String']['output'];
+  retainerDetails?: Maybe<Pt_Retainer>;
+  status: Pt_PaymentTermsStatus;
+  totalAmount?: Maybe<Scalars['Amount']['output']>;
+};
+
+export enum Pt_PaymentTermsStatus {
+  Accepted = 'ACCEPTED',
+  Cancelled = 'CANCELLED',
   Draft = 'DRAFT',
-  InProgress = 'IN_PROGRESS',
-  Todo = 'TODO',
-  WontDo = 'WONT_DO'
+  Submitted = 'SUBMITTED'
 }
+
+export type Pt_PenaltyClause = {
+  __typename?: 'PT_PenaltyClause';
+  comment?: Maybe<Scalars['String']['output']>;
+  condition: Scalars['String']['output'];
+  deductionAmount: Scalars['Amount']['output'];
+  id: Scalars['OID']['output'];
+};
+
+export type Pt_Retainer = {
+  __typename?: 'PT_Retainer';
+  autoRenew: Scalars['Boolean']['output'];
+  billingFrequency: Pt_BillingFrequency;
+  endDate?: Maybe<Scalars['Date']['output']>;
+  retainerAmount: Scalars['Amount']['output'];
+  servicesIncluded: Scalars['String']['output'];
+  startDate: Scalars['Date']['output'];
+};
 
 export enum PaymentCurrency {
   Eur = 'EUR',
@@ -1977,11 +1590,11 @@ export enum PaymentModel {
 
 export type PaymentTerms = IDocument & {
   __typename?: 'PaymentTerms';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: PaymentTerms_PaymentTermsState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -2078,14 +1691,6 @@ export type PaymentTerms_BonusClause = {
   id: Scalars['OID']['output'];
 };
 
-export type PaymentTerms_CostAndMaterials = {
-  __typename?: 'PaymentTerms_CostAndMaterials';
-  billingFrequency: PaymentTerms_BillingFrequency;
-  hourlyRate?: Maybe<Scalars['Amount']['output']>;
-  timesheetRequired: Scalars['Boolean']['output'];
-  variableCap?: Maybe<Scalars['Amount']['output']>;
-};
-
 export type PaymentTerms_DeleteBonusClauseInput = {
   id: Scalars['OID']['input'];
 };
@@ -2147,15 +1752,13 @@ export enum PaymentTerms_PaymentCurrency {
 }
 
 export enum PaymentTerms_PaymentModel {
-  CostAndMaterials = 'COST_AND_MATERIALS',
   Milestone = 'MILESTONE',
-  Retainer = 'RETAINER'
+  TimeAndMaterials = 'TIME_AND_MATERIALS'
 }
 
 export type PaymentTerms_PaymentTermsState = {
   __typename?: 'PaymentTerms_PaymentTermsState';
   bonusClauses: Array<PaymentTerms_BonusClause>;
-  costAndMaterials?: Maybe<PaymentTerms_CostAndMaterials>;
   currency: PaymentTerms_PaymentCurrency;
   escrowDetails?: Maybe<PaymentTerms_Escrow>;
   evaluation?: Maybe<PaymentTerms_EvaluationTerms>;
@@ -2164,8 +1767,8 @@ export type PaymentTerms_PaymentTermsState = {
   paymentModel: PaymentTerms_PaymentModel;
   penaltyClauses: Array<PaymentTerms_PenaltyClause>;
   proposer: Scalars['String']['output'];
-  retainerDetails?: Maybe<PaymentTerms_Retainer>;
   status: PaymentTerms_PaymentTermsStatus;
+  timeAndMaterials?: Maybe<PaymentTerms_TimeAndMaterials>;
   totalAmount?: Maybe<Scalars['Amount']['output']>;
 };
 
@@ -2186,16 +1789,6 @@ export type PaymentTerms_PenaltyClause = {
 
 export type PaymentTerms_ReorderMilestonesInput = {
   order: Array<Scalars['OID']['input']>;
-};
-
-export type PaymentTerms_Retainer = {
-  __typename?: 'PaymentTerms_Retainer';
-  autoRenew: Scalars['Boolean']['output'];
-  billingFrequency: PaymentTerms_BillingFrequency;
-  endDate?: Maybe<Scalars['Date']['output']>;
-  retainerAmount: Scalars['Amount']['output'];
-  servicesIncluded: Scalars['String']['output'];
-  startDate: Scalars['Date']['output'];
 };
 
 /** Module: Terms */
@@ -2239,6 +1832,15 @@ export type PaymentTerms_SetRetainerDetailsInput = {
   startDate: Scalars['Date']['input'];
 };
 
+export type PaymentTerms_TimeAndMaterials = {
+  __typename?: 'PaymentTerms_TimeAndMaterials';
+  billingFrequency: PaymentTerms_BillingFrequency;
+  hourlyRate?: Maybe<Scalars['Amount']['output']>;
+  retainerAmount?: Maybe<Scalars['Amount']['output']>;
+  timesheetRequired: Scalars['Boolean']['output'];
+  variableCap?: Maybe<Scalars['Amount']['output']>;
+};
+
 export type PaymentTerms_UpdateBonusClauseInput = {
   bonusAmount?: InputMaybe<Scalars['Amount']['input']>;
   comment?: InputMaybe<Scalars['String']['input']>;
@@ -2278,128 +1880,25 @@ export type PenaltyClause = {
   id: Scalars['OID']['output'];
 };
 
-export type Percentage = {
-  __typename?: 'Percentage';
-  value: Scalars['Float']['output'];
-};
-
-export type ProcessorModule = IDocument & {
-  __typename?: 'ProcessorModule';
-  created: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  initialState: ProcessorModule_ProcessorModuleState;
-  lastModified: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  operations: Array<Operation>;
-  revision: Scalars['Int']['output'];
-  state: ProcessorModule_ProcessorModuleState;
-  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-
-export type ProcessorModuleOperationsArgs = {
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Queries: ProcessorModule */
-export type ProcessorModuleQueries = {
-  __typename?: 'ProcessorModuleQueries';
-  getDocument?: Maybe<ProcessorModule>;
-  getDocuments?: Maybe<Array<ProcessorModule>>;
-};
-
-
-/** Queries: ProcessorModule */
-export type ProcessorModuleQueriesGetDocumentArgs = {
-  docId: Scalars['PHID']['input'];
-  driveId?: InputMaybe<Scalars['PHID']['input']>;
-};
-
-
-/** Queries: ProcessorModule */
-export type ProcessorModuleQueriesGetDocumentsArgs = {
-  driveId: Scalars['String']['input'];
-};
-
-/** Subgraph definition for ProcessorModule (powerhouse/processor) */
-export type ProcessorModuleState = {
-  __typename?: 'ProcessorModuleState';
-  documentTypes: Array<DocumentTypeItem>;
-  name: Scalars['String']['output'];
-  status: StatusType;
-  type: Scalars['String']['output'];
-};
-
-export type ProcessorModule_AddDocumentTypeInput = {
-  documentType: Scalars['String']['input'];
-  id: Scalars['OID']['input'];
-};
-
-export type ProcessorModule_DocumentTypeItem = {
-  __typename?: 'ProcessorModule_DocumentTypeItem';
-  documentType: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-};
-
-export type ProcessorModule_ProcessorModuleState = {
-  __typename?: 'ProcessorModule_ProcessorModuleState';
-  documentTypes: Array<ProcessorModule_DocumentTypeItem>;
-  name: Scalars['String']['output'];
-  status: ProcessorModule_StatusType;
-  type: Scalars['String']['output'];
-};
-
-export type ProcessorModule_RemoveDocumentTypeInput = {
-  id: Scalars['OID']['input'];
-};
-
-/** Module: BaseOperations */
-export type ProcessorModule_SetProcessorNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type ProcessorModule_SetProcessorStatusInput = {
-  status: StatusType;
-};
-
-export type ProcessorModule_SetProcessorTypeInput = {
-  type: Scalars['String']['input'];
-};
-
-export enum ProcessorModule_StatusType {
-  Confirmed = 'CONFIRMED',
-  Draft = 'DRAFT'
-}
-
-export type Progress = Binary | Percentage | StoryPoint;
-
-export type ProgressInput = {
-  done?: InputMaybe<Scalars['Boolean']['input']>;
-  percentage?: InputMaybe<Scalars['Float']['input']>;
-  storyPoints?: InputMaybe<StoryPointInput>;
-};
-
-export type Project = {
-  __typename?: 'Project';
-  abstract?: Maybe<Scalars['String']['output']>;
-  budget?: Maybe<Scalars['Float']['output']>;
-  budgetType?: Maybe<BudgetType>;
-  code: Scalars['String']['output'];
-  currency?: Maybe<PmCurrency>;
-  expenditure?: Maybe<BudgetExpenditure>;
-  id: Scalars['OID']['output'];
-  imageUrl?: Maybe<Scalars['URL']['output']>;
-  projectOwner?: Maybe<Scalars['ID']['output']>;
-  scope?: Maybe<DeliverablesSet>;
-  title: Scalars['String']['output'];
+export type ProcessorWorkstream = {
+  __typename?: 'ProcessorWorkstream';
+  final_milestone_target?: Maybe<Scalars['DateTime']['output']>;
+  initial_proposal_author?: Maybe<Scalars['PHID']['output']>;
+  initial_proposal_status?: Maybe<ProposalStatus>;
+  network_phid?: Maybe<Scalars['PHID']['output']>;
+  network_slug?: Maybe<Scalars['String']['output']>;
+  roadmap_oid?: Maybe<Scalars['PHID']['output']>;
+  sow_phid?: Maybe<Scalars['PHID']['output']>;
+  workstream_phid?: Maybe<Scalars['PHID']['output']>;
+  workstream_slug?: Maybe<Scalars['String']['output']>;
+  workstream_status?: Maybe<WorkstreamStatus>;
+  workstream_title?: Maybe<Scalars['String']['output']>;
 };
 
 export type Proposal = {
   __typename?: 'Proposal';
   author: ProposalAuthor;
-  id: Scalars['ID']['output'];
+  id: Scalars['OID']['output'];
   paymentTerms: Scalars['PHID']['output'];
   sow: Scalars['PHID']['output'];
   status: ProposalStatus;
@@ -2418,6 +1917,12 @@ export type ProposalAuthorInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum ProposalRole {
+  Alternative = 'ALTERNATIVE',
+  Awarded = 'AWARDED',
+  Initial = 'INITIAL'
+}
+
 export enum ProposalStatus {
   Accepted = 'ACCEPTED',
   Draft = 'DRAFT',
@@ -2432,31 +1937,76 @@ export enum ProposalStatusInput {
   Submitted = 'SUBMITTED'
 }
 
+/** Subgraph definition */
 export type Query = {
   __typename?: 'Query';
-  AppModule?: Maybe<AppModuleQueries>;
-  DocumentEditor?: Maybe<DocumentEditorQueries>;
   NetworkProfile?: Maybe<NetworkProfileQueries>;
   PaymentTerms?: Maybe<PaymentTermsQueries>;
-  ProcessorModule?: Maybe<ProcessorModuleQueries>;
   RequestForProposals?: Maybe<RequestForProposalsQueries>;
   ScopeOfWork?: Maybe<ScopeOfWorkQueries>;
-  SubgraphModule?: Maybe<SubgraphModuleQueries>;
-  VetraPackage?: Maybe<VetraPackageQueries>;
   Workstream?: Maybe<WorkstreamQueries>;
+  allNetworks: Array<AllNetworks>;
   analytics?: Maybe<AnalyticsQuery>;
+  driveDocument?: Maybe<DocumentDrive>;
+  driveDocuments: Array<DocumentDrive>;
   driveIdBySlug?: Maybe<Scalars['String']['output']>;
   drives: Array<Scalars['String']['output']>;
+  processorWorkstreams: Array<ProcessorWorkstream>;
+  rfpByWorkstream: Array<WorkstreamRfp>;
+  scopeOfWorkByNetworkOrStatus: Array<Sow_ScopeOfWorkState>;
+  workstream?: Maybe<FullQueryWorkstream>;
+  workstreams: Array<FullQueryWorkstream>;
 };
 
 
+/** Subgraph definition */
+export type QueryDriveDocumentArgs = {
+  idOrSlug: Scalars['String']['input'];
+};
+
+
+/** Subgraph definition */
 export type QueryDriveIdBySlugArgs = {
   slug: Scalars['String']['input'];
 };
 
+
+/** Subgraph definition */
+export type QueryRfpByWorkstreamArgs = {
+  filter: WorkstreamFilter;
+};
+
+
+/** Subgraph definition */
+export type QueryScopeOfWorkByNetworkOrStatusArgs = {
+  filter: ScopeOfWorkByNetworkOrStatusFilter;
+};
+
+
+/** Subgraph definition */
+export type QueryWorkstreamArgs = {
+  filter: WorkstreamFilter;
+};
+
+
+/** Subgraph definition */
+export type QueryWorkstreamsArgs = {
+  filter?: InputMaybe<WorkstreamsFilter>;
+};
+
 export type Rfp = {
   __typename?: 'RFP';
+  briefing?: Maybe<Scalars['String']['output']>;
+  budgetCurrency?: Maybe<Scalars['String']['output']>;
+  budgetMax?: Maybe<Scalars['Float']['output']>;
+  budgetMin?: Maybe<Scalars['Float']['output']>;
+  code?: Maybe<Scalars['String']['output']>;
+  eligibilityCriteria?: Maybe<Scalars['String']['output']>;
+  evaluationCriteria?: Maybe<Scalars['String']['output']>;
   id: Scalars['PHID']['output'];
+  status?: Maybe<RfpStatus>;
+  submissionDeadline?: Maybe<Scalars['DateTime']['output']>;
+  summary?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
 };
 
@@ -2487,11 +2037,11 @@ export enum RfpStatusInput {
 
 export type RequestForProposals = IDocument & {
   __typename?: 'RequestForProposals';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: RequestForProposals_RequestForProposalsState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -2762,22 +2312,183 @@ export enum RfpProposalStatusInput {
   Withdrawn = 'WITHDRAWN'
 }
 
-export type Roadmap = {
-  __typename?: 'Roadmap';
+export type Sow_Agent = {
+  __typename?: 'SOW_Agent';
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['URL']['output']>;
+  id: Scalars['PHID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type Sow_Binary = {
+  __typename?: 'SOW_Binary';
+  done?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type Sow_BudgetAnchorProject = {
+  __typename?: 'SOW_BudgetAnchorProject';
+  margin: Scalars['Float']['output'];
+  project?: Maybe<Scalars['OID']['output']>;
+  quantity: Scalars['Float']['output'];
+  unit?: Maybe<Sow_Unit>;
+  unitCost: Scalars['Float']['output'];
+};
+
+export type Sow_BudgetExpenditure = {
+  __typename?: 'SOW_BudgetExpenditure';
+  actuals: Scalars['Float']['output'];
+  cap: Scalars['Float']['output'];
+  percentage: Scalars['Float']['output'];
+};
+
+export enum Sow_BudgetType {
+  Capex = 'CAPEX',
+  Contingency = 'CONTINGENCY',
+  Opex = 'OPEX',
+  Overhead = 'OVERHEAD'
+}
+
+export type Sow_Deliverable = {
+  __typename?: 'SOW_Deliverable';
+  budgetAnchor?: Maybe<Sow_BudgetAnchorProject>;
+  code: Scalars['String']['output'];
   description: Scalars['String']['output'];
   id: Scalars['OID']['output'];
-  milestones: Array<Milestone>;
+  keyResults: Array<Sow_KeyResult>;
+  owner?: Maybe<Scalars['ID']['output']>;
+  status: Sow_DeliverableStatus;
+  title: Scalars['String']['output'];
+  workProgress?: Maybe<Sow_Progress>;
+};
+
+export enum Sow_DeliverableSetStatus {
+  Canceled = 'CANCELED',
+  Draft = 'DRAFT',
+  Finished = 'FINISHED',
+  InProgress = 'IN_PROGRESS',
+  Todo = 'TODO'
+}
+
+export enum Sow_DeliverableStatus {
+  Blocked = 'BLOCKED',
+  Canceled = 'CANCELED',
+  Delivered = 'DELIVERED',
+  Draft = 'DRAFT',
+  InProgress = 'IN_PROGRESS',
+  Todo = 'TODO',
+  WontDo = 'WONT_DO'
+}
+
+export type Sow_DeliverablesCompleted = {
+  __typename?: 'SOW_DeliverablesCompleted';
+  completed: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type Sow_DeliverablesSet = {
+  __typename?: 'SOW_DeliverablesSet';
+  deliverables: Array<Scalars['OID']['output']>;
+  deliverablesCompleted: Sow_DeliverablesCompleted;
+  progress: Sow_Progress;
+  status: Sow_DeliverableSetStatus;
+};
+
+export type Sow_KeyResult = {
+  __typename?: 'SOW_KeyResult';
+  id: Scalars['OID']['output'];
+  link: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type Sow_Milestone = {
+  __typename?: 'SOW_Milestone';
+  budget?: Maybe<Scalars['Float']['output']>;
+  coordinators: Array<Scalars['ID']['output']>;
+  deliveryTarget: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  scope?: Maybe<Sow_DeliverablesSet>;
+  sequenceCode: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export enum Sow_PmCurrency {
+  Dai = 'DAI',
+  Eur = 'EUR',
+  Usd = 'USD',
+  Usds = 'USDS'
+}
+
+export type Sow_Percentage = {
+  __typename?: 'SOW_Percentage';
+  value: Scalars['Float']['output'];
+};
+
+export type Sow_Progress = Sow_Binary | Sow_Percentage | Sow_StoryPoint;
+
+export type Sow_Project = {
+  __typename?: 'SOW_Project';
+  abstract?: Maybe<Scalars['String']['output']>;
+  budget?: Maybe<Scalars['Float']['output']>;
+  budgetType?: Maybe<Sow_BudgetType>;
+  code: Scalars['String']['output'];
+  currency?: Maybe<Sow_PmCurrency>;
+  expenditure?: Maybe<Sow_BudgetExpenditure>;
+  id: Scalars['OID']['output'];
+  imageUrl?: Maybe<Scalars['URL']['output']>;
+  projectOwner?: Maybe<Scalars['ID']['output']>;
+  scope?: Maybe<Sow_DeliverablesSet>;
+  title: Scalars['String']['output'];
+};
+
+export type Sow_Roadmap = {
+  __typename?: 'SOW_Roadmap';
+  description: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  milestones: Array<Sow_Milestone>;
   slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
+export type Sow_ScopeOfWorkState = {
+  __typename?: 'SOW_ScopeOfWorkState';
+  contributors: Array<Sow_Agent>;
+  deliverables: Array<Sow_Deliverable>;
+  description: Scalars['String']['output'];
+  projects: Array<Sow_Project>;
+  roadmaps: Array<Sow_Roadmap>;
+  status: Sow_ScopeOfWorkStatus;
+  title: Scalars['String']['output'];
+};
+
+export enum Sow_ScopeOfWorkStatus {
+  Approved = 'APPROVED',
+  Canceled = 'CANCELED',
+  Delivered = 'DELIVERED',
+  Draft = 'DRAFT',
+  InProgress = 'IN_PROGRESS',
+  Rejected = 'REJECTED',
+  Submitted = 'SUBMITTED'
+}
+
+export type Sow_StoryPoint = {
+  __typename?: 'SOW_StoryPoint';
+  completed: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum Sow_Unit {
+  Hours = 'Hours',
+  StoryPoints = 'StoryPoints'
+}
+
 export type ScopeOfWork = IDocument & {
   __typename?: 'ScopeOfWork';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: ScopeOfWork_ScopeOfWorkState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -2791,7 +2502,7 @@ export type ScopeOfWorkOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Queries: ScopeOfWork */
+/** Queries: ScopeOfWork Document */
 export type ScopeOfWorkQueries = {
   __typename?: 'ScopeOfWorkQueries';
   getDocument?: Maybe<ScopeOfWork>;
@@ -2799,56 +2510,23 @@ export type ScopeOfWorkQueries = {
 };
 
 
-/** Queries: ScopeOfWork */
+/** Queries: ScopeOfWork Document */
 export type ScopeOfWorkQueriesGetDocumentArgs = {
   docId: Scalars['PHID']['input'];
   driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 
-/** Queries: ScopeOfWork */
+/** Queries: ScopeOfWork Document */
 export type ScopeOfWorkQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
 };
 
-/** Subgraph definition for ScopeOfWork (powerhouse/scopeofwork) */
-export type ScopeOfWorkState = {
-  __typename?: 'ScopeOfWorkState';
-  contributors: Array<Agent>;
-  deliverables: Array<Deliverable>;
-  description: Scalars['String']['output'];
-  projects: Array<Project>;
-  roadmaps: Array<Roadmap>;
-  status: ScopeOfWorkStatus;
-  title: Scalars['String']['output'];
-};
-
-export enum ScopeOfWorkStatus {
-  Approved = 'APPROVED',
-  Canceled = 'CANCELED',
-  Delivered = 'DELIVERED',
-  Draft = 'DRAFT',
-  InProgress = 'IN_PROGRESS',
-  Rejected = 'REJECTED',
-  Submitted = 'SUBMITTED'
-}
-
-export enum ScopeOfWorkStatusInput {
-  Approved = 'APPROVED',
-  Canceled = 'CANCELED',
-  Delivered = 'DELIVERED',
-  Draft = 'DRAFT',
-  InProgress = 'IN_PROGRESS',
-  Rejected = 'REJECTED',
-  Submitted = 'SUBMITTED'
-}
-
 /** Module: Contributors */
 export type ScopeOfWork_AddAgentInput = {
-  agentType?: InputMaybe<AgentTypeInput>;
-  code?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
-  imageUrl?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['URL']['input']>;
+  id: Scalars['PHID']['input'];
   name: Scalars['String']['input'];
 };
 
@@ -2869,7 +2547,7 @@ export type ScopeOfWork_AddDeliverableInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['OID']['input'];
   owner?: InputMaybe<Scalars['ID']['input']>;
-  status?: InputMaybe<PmDeliverableStatusInput>;
+  status?: InputMaybe<ScopeOfWork_PmDeliverableStatusInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -2906,9 +2584,9 @@ export type ScopeOfWork_AddProjectDeliverableInput = {
 export type ScopeOfWork_AddProjectInput = {
   abstract?: InputMaybe<Scalars['String']['input']>;
   budget?: InputMaybe<Scalars['Float']['input']>;
-  budgetType?: InputMaybe<PmBudgetTypeInput>;
+  budgetType?: InputMaybe<ScopeOfWork_PmBudgetTypeInput>;
   code: Scalars['String']['input'];
-  currency?: InputMaybe<PmCurrencyInput>;
+  currency?: InputMaybe<ScopeOfWork_PmCurrencyInput>;
   id: Scalars['OID']['input'];
   imageUrl?: InputMaybe<Scalars['URL']['input']>;
   projectOwner?: InputMaybe<Scalars['ID']['input']>;
@@ -2925,17 +2603,11 @@ export type ScopeOfWork_AddRoadmapInput = {
 
 export type ScopeOfWork_Agent = {
   __typename?: 'ScopeOfWork_Agent';
-  agentType: ScopeOfWork_AgentType;
-  code?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['URL']['output']>;
+  id: Scalars['PHID']['output'];
   name: Scalars['String']['output'];
 };
-
-export enum ScopeOfWork_AgentType {
-  Ai = 'AI',
-  Group = 'GROUP',
-  Human = 'HUMAN'
-}
 
 export type ScopeOfWork_Binary = {
   __typename?: 'ScopeOfWork_Binary';
@@ -2986,6 +2658,14 @@ export enum ScopeOfWork_DeliverableSetStatus {
   Todo = 'TODO'
 }
 
+export enum ScopeOfWork_DeliverableSetStatusInput {
+  Canceled = 'CANCELED',
+  Draft = 'DRAFT',
+  Finished = 'FINISHED',
+  InProgress = 'IN_PROGRESS',
+  Todo = 'TODO'
+}
+
 export enum ScopeOfWork_DeliverableStatus {
   Blocked = 'BLOCKED',
   Canceled = 'CANCELED',
@@ -3002,6 +2682,11 @@ export type ScopeOfWork_DeliverablesCompleted = {
   total: Scalars['Int']['output'];
 };
 
+export type ScopeOfWork_DeliverablesCompletedInput = {
+  completed: Scalars['Int']['input'];
+  total: Scalars['Int']['input'];
+};
+
 export type ScopeOfWork_DeliverablesSet = {
   __typename?: 'ScopeOfWork_DeliverablesSet';
   deliverables: Array<Scalars['OID']['output']>;
@@ -3011,10 +2696,9 @@ export type ScopeOfWork_DeliverablesSet = {
 };
 
 export type ScopeOfWork_EditAgentInput = {
-  agentType?: InputMaybe<AgentTypeInput>;
-  code?: InputMaybe<Scalars['String']['input']>;
-  id: Scalars['ID']['input'];
-  imageUrl?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['URL']['input']>;
+  id: Scalars['PHID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3023,16 +2707,16 @@ export type ScopeOfWork_EditDeliverableInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['OID']['input'];
   owner?: InputMaybe<Scalars['ID']['input']>;
-  status?: InputMaybe<PmDeliverableStatusInput>;
+  status?: InputMaybe<ScopeOfWork_PmDeliverableStatusInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Module: DeliverablesSet */
 export type ScopeOfWork_EditDeliverablesSetInput = {
-  deliverablesCompleted?: InputMaybe<DeliverablesCompletedInput>;
+  deliverablesCompleted?: InputMaybe<ScopeOfWork_DeliverablesCompletedInput>;
   milestoneId?: InputMaybe<Scalars['ID']['input']>;
   projectId?: InputMaybe<Scalars['ID']['input']>;
-  status?: InputMaybe<DeliverableSetStatusInput>;
+  status?: InputMaybe<ScopeOfWork_DeliverableSetStatusInput>;
 };
 
 export type ScopeOfWork_EditKeyResultInput = {
@@ -3061,7 +2745,7 @@ export type ScopeOfWork_EditRoadmapInput = {
 /** Module: ScopeOfWork */
 export type ScopeOfWork_EditScopeOfWorkInput = {
   description?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<ScopeOfWorkStatusInput>;
+  status?: InputMaybe<ScopeOfWork_ScopeOfWorkStatusInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3084,11 +2768,35 @@ export type ScopeOfWork_Milestone = {
   title: Scalars['String']['output'];
 };
 
+export enum ScopeOfWork_PmBudgetTypeInput {
+  Capex = 'CAPEX',
+  Contingency = 'CONTINGENCY',
+  Opex = 'OPEX',
+  Overhead = 'OVERHEAD'
+}
+
 export enum ScopeOfWork_PmCurrency {
   Dai = 'DAI',
   Eur = 'EUR',
   Usd = 'USD',
   Usds = 'USDS'
+}
+
+export enum ScopeOfWork_PmCurrencyInput {
+  Dai = 'DAI',
+  Eur = 'EUR',
+  Usd = 'USD',
+  Usds = 'USDS'
+}
+
+export enum ScopeOfWork_PmDeliverableStatusInput {
+  Blocked = 'BLOCKED',
+  Canceled = 'CANCELED',
+  Delivered = 'DELIVERED',
+  Draft = 'DRAFT',
+  InProgress = 'IN_PROGRESS',
+  Todo = 'TODO',
+  WontDo = 'WONT_DO'
 }
 
 export type ScopeOfWork_Percentage = {
@@ -3097,6 +2805,12 @@ export type ScopeOfWork_Percentage = {
 };
 
 export type ScopeOfWork_Progress = ScopeOfWork_Binary | ScopeOfWork_Percentage | ScopeOfWork_StoryPoint;
+
+export type ScopeOfWork_ProgressInput = {
+  done?: InputMaybe<Scalars['Boolean']['input']>;
+  percentage?: InputMaybe<Scalars['Float']['input']>;
+  storyPoints?: InputMaybe<ScopeOfWork_StoryPointInput>;
+};
 
 export type ScopeOfWork_Project = {
   __typename?: 'ScopeOfWork_Project';
@@ -3114,7 +2828,7 @@ export type ScopeOfWork_Project = {
 };
 
 export type ScopeOfWork_RemoveAgentInput = {
-  id: Scalars['OID']['input'];
+  id: Scalars['PHID']['input'];
 };
 
 export type ScopeOfWork_RemoveCoordinatorInput = {
@@ -3190,18 +2904,28 @@ export enum ScopeOfWork_ScopeOfWorkStatus {
   Submitted = 'SUBMITTED'
 }
 
+export enum ScopeOfWork_ScopeOfWorkStatusInput {
+  Approved = 'APPROVED',
+  Canceled = 'CANCELED',
+  Delivered = 'DELIVERED',
+  Draft = 'DRAFT',
+  InProgress = 'IN_PROGRESS',
+  Rejected = 'REJECTED',
+  Submitted = 'SUBMITTED'
+}
+
 export type ScopeOfWork_SetDeliverableBudgetAnchorProjectInput = {
   deliverableId: Scalars['ID']['input'];
   margin?: InputMaybe<Scalars['Float']['input']>;
   project?: InputMaybe<Scalars['OID']['input']>;
   quantity?: InputMaybe<Scalars['Float']['input']>;
-  unit?: InputMaybe<Unit>;
+  unit?: InputMaybe<ScopeOfWork_Unit>;
   unitCost?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type ScopeOfWork_SetDeliverableProgressInput = {
   id: Scalars['OID']['input'];
-  workProgress?: InputMaybe<ProgressInput>;
+  workProgress?: InputMaybe<ScopeOfWork_ProgressInput>;
 };
 
 export type ScopeOfWork_SetProjectMarginInput = {
@@ -3220,6 +2944,11 @@ export type ScopeOfWork_StoryPoint = {
   total: Scalars['Int']['output'];
 };
 
+export type ScopeOfWork_StoryPointInput = {
+  completed: Scalars['Int']['input'];
+  total: Scalars['Int']['input'];
+};
+
 export enum ScopeOfWork_Unit {
   Hours = 'Hours',
   StoryPoints = 'StoryPoints'
@@ -3228,9 +2957,9 @@ export enum ScopeOfWork_Unit {
 export type ScopeOfWork_UpdateProjectInput = {
   abstract?: InputMaybe<Scalars['String']['input']>;
   budget?: InputMaybe<Scalars['Float']['input']>;
-  budgetType?: InputMaybe<PmBudgetTypeInput>;
+  budgetType?: InputMaybe<ScopeOfWork_PmBudgetTypeInput>;
   code?: InputMaybe<Scalars['String']['input']>;
-  currency?: InputMaybe<PmCurrencyInput>;
+  currency?: InputMaybe<ScopeOfWork_PmCurrencyInput>;
   id: Scalars['OID']['input'];
   imageUrl?: InputMaybe<Scalars['URL']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -3261,94 +2990,6 @@ export type SignerUser = {
   networkId: Scalars['String']['output'];
 };
 
-export enum StatusType {
-  Confirmed = 'CONFIRMED',
-  Draft = 'DRAFT'
-}
-
-export type StoryPoint = {
-  __typename?: 'StoryPoint';
-  completed: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
-};
-
-export type StoryPointInput = {
-  completed: Scalars['Int']['input'];
-  total: Scalars['Int']['input'];
-};
-
-export type SubgraphModule = IDocument & {
-  __typename?: 'SubgraphModule';
-  created: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  initialState: SubgraphModule_SubgraphModuleState;
-  lastModified: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  operations: Array<Operation>;
-  revision: Scalars['Int']['output'];
-  state: SubgraphModule_SubgraphModuleState;
-  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-
-export type SubgraphModuleOperationsArgs = {
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Queries: SubgraphModule */
-export type SubgraphModuleQueries = {
-  __typename?: 'SubgraphModuleQueries';
-  getDocument?: Maybe<SubgraphModule>;
-  getDocuments?: Maybe<Array<SubgraphModule>>;
-};
-
-
-/** Queries: SubgraphModule */
-export type SubgraphModuleQueriesGetDocumentArgs = {
-  docId: Scalars['PHID']['input'];
-  driveId?: InputMaybe<Scalars['PHID']['input']>;
-};
-
-
-/** Queries: SubgraphModule */
-export type SubgraphModuleQueriesGetDocumentsArgs = {
-  driveId: Scalars['String']['input'];
-};
-
-/** Subgraph definition for SubgraphModule (powerhouse/subgraph) */
-export type SubgraphModuleState = {
-  __typename?: 'SubgraphModuleState';
-  name: Scalars['String']['output'];
-  status: StatusType;
-};
-
-/** Module: BaseOperations */
-export type SubgraphModule_SetSubgraphNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type SubgraphModule_SetSubgraphStatusInput = {
-  status: StatusType;
-};
-
-export enum SubgraphModule_StatusType {
-  Confirmed = 'CONFIRMED',
-  Draft = 'DRAFT'
-}
-
-export type SubgraphModule_SubgraphModuleState = {
-  __typename?: 'SubgraphModule_SubgraphModuleState';
-  name: Scalars['String']['output'];
-  status: SubgraphModule_StatusType;
-};
-
-export enum Unit {
-  Hours = 'Hours',
-  StoryPoints = 'StoryPoints'
-}
-
 export type Value = {
   __typename?: 'Value';
   description?: Maybe<Scalars['String']['output']>;
@@ -3357,125 +2998,13 @@ export type Value = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
-export type VetraPackage = IDocument & {
-  __typename?: 'VetraPackage';
-  created: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  initialState: VetraPackage_VetraPackageState;
-  lastModified: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  operations: Array<Operation>;
-  revision: Scalars['Int']['output'];
-  state: VetraPackage_VetraPackageState;
-  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-
-export type VetraPackageOperationsArgs = {
-  first?: InputMaybe<Scalars['Int']['input']>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** Queries: VetraPackage */
-export type VetraPackageQueries = {
-  __typename?: 'VetraPackageQueries';
-  getDocument?: Maybe<VetraPackage>;
-  getDocuments?: Maybe<Array<VetraPackage>>;
-};
-
-
-/** Queries: VetraPackage */
-export type VetraPackageQueriesGetDocumentArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** Subgraph definition for VetraPackage (powerhouse/package) */
-export type VetraPackageState = {
-  __typename?: 'VetraPackageState';
-  author: Author;
-  category?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  githubUrl?: Maybe<Scalars['URL']['output']>;
-  keywords: Array<Keyword>;
-  name?: Maybe<Scalars['String']['output']>;
-  npmUrl?: Maybe<Scalars['URL']['output']>;
-};
-
-export type VetraPackage_AddPackageKeywordInput = {
-  id: Scalars['String']['input'];
-  label: Scalars['String']['input'];
-};
-
-export type VetraPackage_Author = {
-  __typename?: 'VetraPackage_Author';
-  name?: Maybe<Scalars['String']['output']>;
-  website?: Maybe<Scalars['URL']['output']>;
-};
-
-export type VetraPackage_Keyword = {
-  __typename?: 'VetraPackage_Keyword';
-  id: Scalars['OID']['output'];
-  label: Scalars['String']['output'];
-};
-
-export type VetraPackage_RemovePackageKeywordInput = {
-  id: Scalars['String']['input'];
-};
-
-export type VetraPackage_SetPackageAuthorInput = {
-  name?: InputMaybe<Scalars['OID']['input']>;
-  website?: InputMaybe<Scalars['URL']['input']>;
-};
-
-export type VetraPackage_SetPackageAuthorNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type VetraPackage_SetPackageAuthorWebsiteInput = {
-  website: Scalars['URL']['input'];
-};
-
-export type VetraPackage_SetPackageCategoryInput = {
-  category: Scalars['String']['input'];
-};
-
-export type VetraPackage_SetPackageDescriptionInput = {
-  description: Scalars['String']['input'];
-};
-
-export type VetraPackage_SetPackageGithubUrlInput = {
-  url: Scalars['URL']['input'];
-};
-
-/** Module: BaseOperations */
-export type VetraPackage_SetPackageNameInput = {
-  name: Scalars['String']['input'];
-};
-
-export type VetraPackage_SetPackageNpmUrlInput = {
-  url: Scalars['URL']['input'];
-};
-
-export type VetraPackage_VetraPackageState = {
-  __typename?: 'VetraPackage_VetraPackageState';
-  author: VetraPackage_Author;
-  category?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  githubUrl?: Maybe<Scalars['URL']['output']>;
-  keywords: Array<VetraPackage_Keyword>;
-  name?: Maybe<Scalars['String']['output']>;
-  npmUrl?: Maybe<Scalars['URL']['output']>;
-};
-
 export type Workstream = IDocument & {
   __typename?: 'Workstream';
-  created: Scalars['DateTime']['output'];
+  createdAtUtcIso: Scalars['DateTime']['output'];
   documentType: Scalars['String']['output'];
   id: Scalars['String']['output'];
   initialState: Workstream_WorkstreamState;
-  lastModified: Scalars['DateTime']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   name: Scalars['String']['output'];
   operations: Array<Operation>;
   revision: Scalars['Int']['output'];
@@ -3487,6 +3016,17 @@ export type Workstream = IDocument & {
 export type WorkstreamOperationsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Filter to fetch a single workstream */
+export type WorkstreamFilter = {
+  networkId?: InputMaybe<Scalars['PHID']['input']>;
+  networkName?: InputMaybe<Scalars['String']['input']>;
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
+  workstreamId?: InputMaybe<Scalars['PHID']['input']>;
+  workstreamSlug?: InputMaybe<Scalars['String']['input']>;
+  workstreamStatus?: InputMaybe<WorkstreamStatus>;
+  workstreamStatuses?: InputMaybe<Array<WorkstreamStatus>>;
 };
 
 /** Queries: Workstream */
@@ -3507,6 +3047,14 @@ export type WorkstreamQueriesGetDocumentArgs = {
 /** Queries: Workstream */
 export type WorkstreamQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
+};
+
+export type WorkstreamRfp = {
+  __typename?: 'WorkstreamRfp';
+  code?: Maybe<Scalars['String']['output']>;
+  rfp?: Maybe<Rfp>;
+  status?: Maybe<WorkstreamStatus>;
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Subgraph definition for Workstream (powerhouse/workstream) */
@@ -3667,6 +3215,24 @@ export enum Workstream_WorkstreamStatus {
   RfpDraft = 'RFP_DRAFT'
 }
 
+export type WorkstreamsFilter = {
+  networkId?: InputMaybe<Scalars['PHID']['input']>;
+  networkName?: InputMaybe<Scalars['String']['input']>;
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
+  workstreamStatus?: InputMaybe<WorkstreamStatus>;
+  workstreamStatuses?: InputMaybe<Array<WorkstreamStatus>>;
+};
+
+export type ScopeOfWorkByNetworkOrStatusFilter = {
+  networkId?: InputMaybe<Scalars['PHID']['input']>;
+  networkName?: InputMaybe<Scalars['String']['input']>;
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
+  proposalRole?: InputMaybe<ProposalRole>;
+  workstreamId?: InputMaybe<Scalars['PHID']['input']>;
+  workstreamSlug?: InputMaybe<Scalars['String']['input']>;
+  workstreamStatus?: InputMaybe<WorkstreamStatus>;
+};
+
 export type NetworkProfileQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3679,7 +3245,7 @@ export type ScopeOfWorkQueryVariables = Exact<{
 }>;
 
 
-export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', agentType: ScopeOfWork_AgentType, code?: string | null, id: string, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
+export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
 
 
 
@@ -3775,8 +3341,6 @@ export const ScopeOfWorkDocument = `
           }
         }
         contributors {
-          agentType
-          code
           id
           name
         }
