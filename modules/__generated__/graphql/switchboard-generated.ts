@@ -3240,6 +3240,13 @@ export type NetworkProfileQueryVariables = Exact<{
 
 export type NetworkProfileQuery = { __typename?: 'Query', NetworkProfile?: { __typename?: 'NetworkProfileQueries', getDocument?: { __typename?: 'NetworkProfile', state: { __typename?: 'NetworkProfile_NetworkProfileState', category: Array<NetworkProfile_NetworkCategory>, description: string, discord?: string | null, github?: string | null, icon: string, logo: string, logoBig: string, name: string, website?: string | null, x?: string | null, youtube?: string | null } } | null } | null };
 
+export type RoadmapListQueryVariables = Exact<{
+  filter: ScopeOfWorkByNetworkOrStatusFilter;
+}>;
+
+
+export type RoadmapListQuery = { __typename?: 'Query', scopeOfWorkByNetworkOrStatus: Array<{ __typename?: 'SOW_ScopeOfWorkState', title: string, status: Sow_ScopeOfWorkStatus, roadmaps: Array<{ __typename?: 'SOW_Roadmap', description: string, id: any, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', title: string, sequenceCode: string, id: any }> }> }> };
+
 export type ScopeOfWorkQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3309,6 +3316,65 @@ useSuspenseNetworkProfileQuery.getKey = (variables: NetworkProfileQueryVariables
 
 
 useNetworkProfileQuery.fetcher = (variables: NetworkProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables, options);
+
+export const RoadmapListDocument = `
+    query RoadmapList($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    title
+    status
+    roadmaps {
+      description
+      id
+      slug
+      title
+      milestones {
+        title
+        sequenceCode
+        id
+      }
+    }
+  }
+}
+    `;
+
+export const useRoadmapListQuery = <
+      TData = RoadmapListQuery,
+      TError = unknown
+    >(
+      variables: RoadmapListQueryVariables,
+      options?: Omit<UseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<RoadmapListQuery, TError, TData>(
+      {
+    queryKey: ['RoadmapList', variables],
+    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
+    ...options
+  }
+    )};
+
+useRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapList', variables];
+
+export const useSuspenseRoadmapListQuery = <
+      TData = RoadmapListQuery,
+      TError = unknown
+    >(
+      variables: RoadmapListQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<RoadmapListQuery, TError, TData>(
+      {
+    queryKey: ['RoadmapListSuspense', variables],
+    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapListSuspense', variables];
+
+
+useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
 
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($docId: PHID!) {

@@ -1,0 +1,17 @@
+query RoadmapList($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    title
+    status
+    roadmaps {
+      description
+      id
+      slug
+      title
+      milestones {
+        title
+        sequenceCode
+        id
+      }
+    }
+  }
+}
