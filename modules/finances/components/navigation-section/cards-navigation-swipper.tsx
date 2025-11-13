@@ -1,5 +1,4 @@
 'use client'
-
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { cn } from '@/shared/lib/utils'
@@ -115,7 +114,7 @@ export function CardsNavigationSwipper({
             {...swiperOptions}
           >
             {cardsNavigationInformation.map((card) => (
-              <SwiperSlide key={card.code} className="flex">
+              <SwiperSlide key={card.id} className="flex">
                 <div
                   data-slot="card-wrapper"
                   className={cn('box-border flex w-full min-w-full', 'pt-1 pb-1 pl-4', 'xl:pl-6')}
@@ -123,7 +122,7 @@ export function CardsNavigationSwipper({
                   <NavigationCard
                     href={card.href as Route}
                     image={card.image}
-                    title={card.title}
+                    title={card.name}
                     description={card.description ?? ''}
                     code={card.code}
                     isCompact={isDeepLevel}
@@ -141,7 +140,7 @@ export function CardsNavigationSwipper({
               key={card.code}
               href={card.href as Route}
               image={card.image}
-              title={card.title}
+              title={card.name}
               description={card.description ?? ''}
               code={card.code}
               isCompact={isDeepLevel}

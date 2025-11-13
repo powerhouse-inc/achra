@@ -27,13 +27,14 @@ export interface QuarterCardProps {
 
 export interface FiancesNavigationCard {
   image: string
-  title: string
+  id: string
+  name: string
   description?: string
-  href: string
+  href?: string
   totalUSDS?: number
   valueUSDS?: number
   budgetCapValue?: number
-  color: string
+  color?: string
   code: string
   codePath?: string
   percent: number

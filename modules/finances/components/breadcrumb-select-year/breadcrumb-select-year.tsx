@@ -1,26 +1,18 @@
-import { Suspense } from 'react'
-import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
-import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
+import { Breadcrumb, type BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb'
 import { YearSelect } from '../year-select'
-import { FinancesBreadcrumb } from './finances-breadcrumb'
-
 interface BreadcrumbSelectYearProps {
-  params: Promise<{ slug: string }>
+  items: BreadcrumbItemNavigation[]
 }
 
-export function BreadcrumbSelectYear({ params }: BreadcrumbSelectYearProps) {
+export function BreadcrumbSelectYear({ items }: BreadcrumbSelectYearProps) {
   return (
-    <PageBreadcrumbContainer>
-      <div className="flex w-full items-center gap-4">
-        <div className="min-w-0 flex-1">
-          <Suspense fallback={<BreadcrumbSkeleton segments={2} />}>
-            <FinancesBreadcrumb params={params} />
-          </Suspense>
-        </div>
-        <div className="shrink-0">
-          <YearSelect />
-        </div>
+    <div className="flex w-full items-center gap-4">
+      <div className="min-w-0 flex-1">
+        <Breadcrumb items={items} />
       </div>
-    </PageBreadcrumbContainer>
+      <div className="shrink-0">
+        <YearSelect />
+      </div>
+    </div>
   )
 }
