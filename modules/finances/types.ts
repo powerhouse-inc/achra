@@ -30,8 +30,8 @@ export interface FiancesNavigationCard {
   title: string
   description?: string
   href: string
-  totalDai?: number
-  valueDai?: number
+  totalUSDS?: number
+  valueUSDS?: number
   budgetCapValue?: number
   color: string
   code: string

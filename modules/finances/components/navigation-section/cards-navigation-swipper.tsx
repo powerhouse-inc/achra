@@ -2,7 +2,6 @@
 
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
 import { NavigationCard } from './navigation-card'
 import { useCardsNavigationSwiper } from './use-cards-navigation-swiper'
@@ -17,20 +16,17 @@ interface CardsNavigationSwipperProps {
 export function CardsNavigationSwipper({
   cardsNavigationInformation,
 }: CardsNavigationSwipperProps) {
-  const isMobile = useMediaQuery({ to: 'md' })
-  const isTabletOrDesktop1024 = useMediaQuery({ from: 'md', to: 'xl' })
-
-  const MAX_ITEMS = isMobile ? 2 : isTabletOrDesktop1024 ? 3 : 5
-  const showSwiper = cardsNavigationInformation.length > MAX_ITEMS
-  const isDeepLevel = cardsNavigationInformation.length > 6
-  const itemsCount = cardsNavigationInformation.length
-
-  const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useCardsNavigationSwiper(
-    {
-      showSwiper,
-      cardsCount: itemsCount,
-    },
-  )
+  const {
+    handleAfterInit,
+    adjustCardHeights,
+    swiperRef,
+    isSwiperReady,
+    showSwiper,
+    isDeepLevel,
+    itemsCount,
+  } = useCardsNavigationSwiper({
+    cardsCount: cardsNavigationInformation.length,
+  })
 
   const swiperOptions: SwiperOptions = {
     pagination: {
@@ -100,15 +96,9 @@ export function CardsNavigationSwipper({
             modules={[Pagination, Navigation]}
             centerInsufficientSlides
             pagination={true}
-            onAfterInit={() => {
-              handleAfterInit()
-            }}
-            onResize={() => {
-              adjustCardHeights()
-            }}
-            onBreakpoint={() => {
-              adjustCardHeights()
-            }}
+            onAfterInit={handleAfterInit}
+            onResize={adjustCardHeights}
+            onBreakpoint={adjustCardHeights}
             ref={swiperRef}
             className={cn(
               'pb-10!',

@@ -10,8 +10,6 @@ export function adjustElementHeights(className: string): void {
       element.style.minHeight = 'auto'
     })
 
-    void elements[0]?.offsetHeight
-
     let maxHeight = 0
     elements.forEach((element) => {
       const height = element.getBoundingClientRect().height

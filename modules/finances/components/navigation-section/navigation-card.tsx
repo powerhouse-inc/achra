@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from '@/modules/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
-import { truncateDescription } from '../../utils'
 import type { Route } from 'next'
 
 interface NavigationCardProps {
@@ -31,8 +30,6 @@ export function NavigationCard({
   isCompact,
   className,
 }: NavigationCardProps) {
-  const truncatedDescription = truncateDescription(description)
-
   return (
     <Card
       data-slot="navigation-card"
@@ -97,9 +94,9 @@ export function NavigationCard({
         {!isCompact && (
           <CardDescription
             data-slot="description"
-            className={cn('text-foreground/50 text-xs/4.5 font-normal')}
+            className={cn('text-foreground/50 line-clamp-3 text-xs/4.5 font-normal')}
           >
-            {truncatedDescription}
+            {description}
           </CardDescription>
         )}
       </CardContent>
