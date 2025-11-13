@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from '@/modules/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
-import { truncateDescription } from '../../utils'
 import type { Route } from 'next'
 
 interface NavigationCardProps {
@@ -19,6 +18,7 @@ interface NavigationCardProps {
   href: Route
   code?: string
   isCompact: boolean
+  className?: string
 }
 
 export function NavigationCard({
@@ -28,17 +28,16 @@ export function NavigationCard({
   href,
   code,
   isCompact,
+  className,
 }: NavigationCardProps) {
-  const truncatedDescription = truncateDescription(description)
-
   return (
     <Card
       data-slot="navigation-card"
       className={cn(
-        'flex w-full flex-col gap-2',
+        'flex h-full w-full flex-col gap-2',
         isCompact ? 'p-2' : 'p-2 px-4 pb-4',
-        'md:flex-1',
         'xl:p-2 xl:px-4 xl:pb-4',
+        className,
       )}
     >
       <CardHeader
@@ -79,12 +78,11 @@ export function NavigationCard({
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-1 p-0">
+      <CardContent className="flex flex-1 flex-col gap-1 p-0">
         <CardTitle
           data-slot="title"
           className={cn(
             'text-base leading-6 font-semibold',
-
             isCompact
               ? 'overflow-hidden text-ellipsis whitespace-nowrap'
               : 'lg:text-base lg:leading-6',
@@ -96,16 +94,20 @@ export function NavigationCard({
         {!isCompact && (
           <CardDescription
             data-slot="description"
-            className={cn('text-foreground/50 text-xs/4.5 font-normal')}
+            className={cn('text-foreground/50 line-clamp-3 text-xs/4.5 font-normal')}
           >
-            {truncatedDescription}
+            {description}
           </CardDescription>
         )}
       </CardContent>
-      <CardFooter className="p-0">
+
+      <CardFooter className="hidden p-0 md:flex">
         <div
           data-slot="button-container"
-          className={cn('hidden md:mt-auto md:flex', isCompact && 'sm:flex sm:justify-center')}
+          className={cn(
+            'h-full items-end justify-end md:mt-auto',
+            isCompact && 'sm:flex sm:justify-center',
+          )}
         >
           <InternalLink href={href}>Explore</InternalLink>
         </div>
