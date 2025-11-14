@@ -1,9 +1,11 @@
+import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 export default function Loading() {
   return (
     <PageContent as="div">
-      <div className="w-full">
+      <BreadcrumbSkeleton segments={3} />
+      <div className="mt-4 w-full">
         {/* Header Section */}
         <div className="border-border bg-accent border-b p-4 sm:p-6 md:p-8">
           <div className="mx-auto max-w-5xl space-y-4">
@@ -36,7 +38,7 @@ export default function Loading() {
         </div>
 
         {/* Main Content */}
-        <div className="mx-auto max-w-5xl space-y-6 p-4 sm:p-6 md:p-8">
+        <div className="space-y-6 p-4 sm:p-6 md:p-8">
           {/* Description */}
           <div className="space-y-3">
             <Skeleton className="h-5 w-full" />
