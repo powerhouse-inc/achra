@@ -39,7 +39,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
   })()
 
   // TODO: Check with the team or client if it is expected to have multiple scope of work per network
-  const roadmaps = data.scopeOfWorkByNetworkOrStatus[0].roadmaps
+  const roadmaps = data.scopeOfWorkByNetworkOrStatus[0]?.roadmaps ?? []
 
   if (roadmaps.length === 0) {
     return (
