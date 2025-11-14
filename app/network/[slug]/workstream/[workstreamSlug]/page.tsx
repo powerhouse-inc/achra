@@ -2,6 +2,7 @@ import { FilePenLine } from 'lucide-react'
 import { Suspense } from 'react'
 import { Streamdown } from 'streamdown'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { RfpDetailsLinkWrapper } from '@/modules/rfp/rfp-details-link-wrapper'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
@@ -11,7 +12,6 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
-import { RfpDetailsLink } from '@/modules/workstream/components/workstream-card/rfp-details-link'
 import StatCards from '@/modules/workstream/components/workstream-card/stat-cards'
 import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
@@ -49,7 +49,9 @@ export default function WorkstreamDetailsPage({ params }: Props) {
             </h1>
             <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
           </div>
-          <RfpDetailsLink />
+          <Suspense fallback={<Skeleton className="h-9 w-36" />}>
+            <RfpDetailsLinkWrapper params={params} />
+          </Suspense>
         </div>
 
         <WorkstreamStats />
