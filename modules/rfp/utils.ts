@@ -7,11 +7,7 @@ export const formatDeadline = (rfp?: Rfp | null) => {
   const date = new Date(rfp.submissionDeadline)
   let formatted = format(date, 'd MMM yyyy @ HH:mm zzz')
 
-  // Convert month abbreviation to uppercase (e.g., "sep" -> "SEP")
-  // Pattern: number, space, 3-letter month, space, 4-digit year
-  formatted = formatted.replace(/(\d+)\s+([a-z]{3})\s+(\d{4})/i, (_, day, month, year) => {
-    return `${day} ${month.toUpperCase()} ${year}`
-  })
+  formatted = formatted.toLocaleUpperCase()
   // Remove timezone offset digits (e.g., "GMT-3" -> "GMT", "CET+1" -> "CET")
   formatted = formatted.replace(/([A-Z]{2,4})[+-]\d+$/, '$1')
   return formatted
