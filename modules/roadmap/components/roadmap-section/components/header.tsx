@@ -9,9 +9,15 @@ import type { Route } from 'next'
 interface RoadmapSectionHeaderProps {
   title: string
   description: string
-  id: string
+  roadmapSlug: string
+  networkSlug: string
 }
-export function Header({ title, description, id }: RoadmapSectionHeaderProps) {
+export function Header({
+  title,
+  description,
+  roadmapSlug,
+  networkSlug,
+}: RoadmapSectionHeaderProps) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2 md:flex-row md:justify-between">
@@ -20,10 +26,13 @@ export function Header({ title, description, id }: RoadmapSectionHeaderProps) {
             <span className="text-foreground text-lg/5.5 font-bold">{title}</span>
             <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
           </div>
-          <NavigationHeader title={title} href={`/network/powerhouse/roadmap/${id}` as Route} />
+          <NavigationHeader
+            title={title}
+            href={`/network/${networkSlug}/roadmap/${roadmapSlug}` as Route}
+          />
         </div>
         <Button variant="outline" asChild className="w-fit">
-          <Link href={`/network/powerhouse/roadmap/${id}` as Route}>
+          <Link href={`/network/${networkSlug}/roadmap/${roadmapSlug}`}>
             Roadmap Details
             <ArrowRight className="size-4" />
           </Link>

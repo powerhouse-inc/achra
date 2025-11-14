@@ -3240,6 +3240,13 @@ export type NetworkProfileQueryVariables = Exact<{
 
 export type NetworkProfileQuery = { __typename?: 'Query', NetworkProfile?: { __typename?: 'NetworkProfileQueries', getDocument?: { __typename?: 'NetworkProfile', state: { __typename?: 'NetworkProfile_NetworkProfileState', category: Array<NetworkProfile_NetworkCategory>, description: string, discord?: string | null, github?: string | null, icon: string, logo: string, logoBig: string, name: string, website?: string | null, x?: string | null, youtube?: string | null } } | null } | null };
 
+export type RoadmapsListQueryVariables = Exact<{
+  filter: ScopeOfWorkByNetworkOrStatusFilter;
+}>;
+
+
+export type RoadmapsListQuery = { __typename?: 'Query', scopeOfWorkByNetworkOrStatus: Array<{ __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', description: string, slug: string, title: string, id: any, milestones: Array<{ __typename?: 'SOW_Milestone', id: any, sequenceCode: string, title: string, description: string, deliveryTarget: string, budget?: number | null, coordinators: Array<string>, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> }> };
+
 export type ScopeOfWorkQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3309,6 +3316,87 @@ useSuspenseNetworkProfileQuery.getKey = (variables: NetworkProfileQueryVariables
 
 
 useNetworkProfileQuery.fetcher = (variables: NetworkProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables, options);
+
+export const RoadmapsListDocument = `
+    query roadmapsList($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    roadmaps {
+      description
+      slug
+      title
+      id
+      milestones {
+        id
+        sequenceCode
+        title
+        description
+        deliveryTarget
+        budget
+        coordinators
+        scope {
+          deliverables
+          status
+          deliverablesCompleted {
+            completed
+            total
+          }
+          progress {
+            ... on SOW_Binary {
+              done
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_StoryPoint {
+              completed
+              total
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useRoadmapsListQuery = <
+      TData = RoadmapsListQuery,
+      TError = unknown
+    >(
+      variables: RoadmapsListQueryVariables,
+      options?: Omit<UseQueryOptions<RoadmapsListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapsListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<RoadmapsListQuery, TError, TData>(
+      {
+    queryKey: ['roadmapsList', variables],
+    queryFn: switchboardFetcher<RoadmapsListQuery, RoadmapsListQueryVariables>(RoadmapsListDocument, variables),
+    ...options
+  }
+    )};
+
+useRoadmapsListQuery.getKey = (variables: RoadmapsListQueryVariables) => ['roadmapsList', variables];
+
+export const useSuspenseRoadmapsListQuery = <
+      TData = RoadmapsListQuery,
+      TError = unknown
+    >(
+      variables: RoadmapsListQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<RoadmapsListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapsListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<RoadmapsListQuery, TError, TData>(
+      {
+    queryKey: ['roadmapsListSuspense', variables],
+    queryFn: switchboardFetcher<RoadmapsListQuery, RoadmapsListQueryVariables>(RoadmapsListDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseRoadmapsListQuery.getKey = (variables: RoadmapsListQueryVariables) => ['roadmapsListSuspense', variables];
+
+
+useRoadmapsListQuery.fetcher = (variables: RoadmapsListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapsListQuery, RoadmapsListQueryVariables>(RoadmapsListDocument, variables, options);
 
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($docId: PHID!) {

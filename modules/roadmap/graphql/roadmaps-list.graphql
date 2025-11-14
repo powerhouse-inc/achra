@@ -1,0 +1,39 @@
+query roadmapsList($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    roadmaps {
+      description
+      slug
+      title
+      id
+      milestones {
+        id
+        sequenceCode
+        title
+        description
+        deliveryTarget
+        budget
+        coordinators
+        scope {
+          deliverables
+          status
+          deliverablesCompleted {
+            completed
+            total
+          }
+          progress {
+            ... on SOW_Binary {
+              done
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_StoryPoint {
+              completed
+              total
+            }
+          }
+        }
+      }
+    }
+  }
+}

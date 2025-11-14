@@ -1,55 +1,65 @@
 import { useMemo } from 'react'
-import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface StatusSelectProps {
-  statuses: ScopeOfWork_DeliverableSetStatus[]
-  setStatuses: (statuses: ScopeOfWork_DeliverableSetStatus[]) => Promise<URLSearchParams>
+  statuses: WorkstreamStatus[]
+  setStatuses: (statuses: WorkstreamStatus[]) => Promise<URLSearchParams>
   className?: string
 }
 
+// TODO: Check with the designer the colors for the rest of the statuses
+
 const statusOptions: Option[] = [
   {
-    value: ScopeOfWork_DeliverableSetStatus.Draft,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />,
+    value: WorkstreamStatus.RfpDraft,
+    label: (
+      <GenericChip variant="filled" color="blue">
+        DRAFT
+      </GenericChip>
+    ),
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.InProgress,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.InProgress} />,
+    value: WorkstreamStatus.InProgress,
+    label: (
+      <GenericChip variant="filled" color="blue">
+        IN PROGRESS
+      </GenericChip>
+    ),
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.Finished,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Finished} />,
+    value: WorkstreamStatus.Finished,
+    label: (
+      <GenericChip variant="filled" color="green">
+        FINISHED
+      </GenericChip>
+    ),
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.Canceled,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Canceled} />,
-    group: 'Statuses',
-  },
-  {
-    value: ScopeOfWork_DeliverableSetStatus.Todo,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Todo} />,
+    value: WorkstreamStatus.RfpCancelled,
+    label: (
+      <GenericChip variant="filled" color="red">
+        CANCELLED
+      </GenericChip>
+    ),
     group: 'Statuses',
   },
 ]
 
 function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
   const selectedOptions = useMemo(
-    () =>
-      statusOptions.filter((option) =>
-        statuses.includes(option.value as ScopeOfWork_DeliverableSetStatus),
-      ),
+    () => statusOptions.filter((option) => statuses.includes(option.value as WorkstreamStatus)),
     [statuses],
   )
 
   const handleChange = (options: Option[]) => {
-    const values = options.map((option) => option.value as ScopeOfWork_DeliverableSetStatus)
+    const values = options.map((option) => option.value as WorkstreamStatus)
     void setStatuses(values)
   }
 
@@ -67,16 +77,14 @@ function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
       commandProps={{
         className,
       }}
-      customItemRenderer={(option) => (
-        <DeliverableSetStatusChip status={option.value as ScopeOfWork_DeliverableSetStatus} />
-      )}
+      customItemRenderer={(option): React.ReactNode => option.label}
     />
   )
 }
 
 function StatusSelectDrawer({ statuses, setStatuses }: StatusSelectProps) {
   const handleChange = (values: string[]) => {
-    void setStatuses(values as ScopeOfWork_DeliverableSetStatus[])
+    void setStatuses(values as WorkstreamStatus[])
   }
 
   return (
