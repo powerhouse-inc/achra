@@ -1,5 +1,4 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
-import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import {
   ScopeOfWork_DeliverableSetStatus,
@@ -15,7 +14,6 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { isValidNetworkSlug } from '@/modules/shared/lib/utils'
 import { WorkstreamRfpBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 
 interface RequestForProposalPageProps {
@@ -24,11 +22,6 @@ interface RequestForProposalPageProps {
 
 export default async function RequestForProposalPage({ params }: RequestForProposalPageProps) {
   const { slug } = await params
-
-  // Validate that the slug is a valid NetworkSlug
-  if (!isValidNetworkSlug(slug)) {
-    notFound()
-  }
 
   const data = await useRfpByWorkstreamQuery.fetcher({
     filter: {
