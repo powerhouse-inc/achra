@@ -1,0 +1,21 @@
+query RfpByWorkstream($filter: WorkstreamFilter!) {
+  rfpByWorkstream(filter: $filter) {
+    code
+    rfp {
+      briefing
+      budgetCurrency
+      budgetMax
+      budgetMin
+      code
+      eligibilityCriteria
+      evaluationCriteria
+      status
+      id
+      summary
+      submissionDeadline
+      title
+    }
+    title
+    status
+  }
+}
