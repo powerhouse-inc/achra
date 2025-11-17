@@ -50,7 +50,6 @@ function SimpleStatCard({
             {value !== undefined ? (
               <>
                 {dynamicChanges ? (
-                  // <CountUp to={Math.round(value)} separator="," />
                   <DynamicCountUpPresets value={Math.round(value)} />
                 ) : (
                   usLocalizedNumber(Math.round(value))
