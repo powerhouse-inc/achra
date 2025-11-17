@@ -1,4 +1,4 @@
-import { CalendarClock, HandCoins } from 'lucide-react'
+import { CalendarClock, FileQuestion, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
 import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
@@ -11,6 +11,13 @@ import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { WorkstreamRfpBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 
@@ -28,7 +35,6 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
   })()
 
   const rfpData = data.rfpByWorkstream
-
   if (rfpData.length === 0) {
     return (
       <PageContent className="h-screen">
@@ -37,9 +43,9 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     )
   }
 
-  const workstreamRfp = rfpData[0]
+  const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
-
+  const hasBudgetRange = rfp?.budgetMin != null && rfp.budgetMax != null
   return (
     <main>
       <PageBreadcrumbContainer>
@@ -90,22 +96,26 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </div>
 
               <div className="grid grid-cols-1 gap-2 lg:grid-cols-[auto_1fr] lg:gap-4">
-                <ProposalKeyValueElement
-                  keyValue={
-                    <div>
-                      <span className="sm:hidden">Deadline</span>
-                      <span className="hidden sm:block">Submission Deadline</span>
-                    </div>
-                  }
-                  keyIcon={CalendarClock}
-                  value={formatDeadline(rfp)}
-                />
-                <ProposalKeyValueElement
-                  keyValue="Budget Range"
-                  keyIcon={HandCoins}
-                  value={formatBudgetRange(rfp)}
-                  className="lg:max-w-85.5 xl:max-w-100"
-                />
+                {rfp?.submissionDeadline && (
+                  <ProposalKeyValueElement
+                    keyValue={
+                      <div>
+                        <span className="sm:hidden">Deadline</span>
+                        <span className="hidden sm:block">Submission Deadline</span>
+                      </div>
+                    }
+                    keyIcon={CalendarClock}
+                    value={formatDeadline(rfp)}
+                  />
+                )}
+                {hasBudgetRange && (
+                  <ProposalKeyValueElement
+                    keyValue="Budget Range"
+                    keyIcon={HandCoins}
+                    value={formatBudgetRange(rfp)}
+                    className="lg:max-w-85.5 xl:max-w-100"
+                  />
+                )}
               </div>
 
               <div className="text-primary-foreground sm:flex sm:justify-end md:hidden">
@@ -117,42 +127,58 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </div>
             </div>
 
-            <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-              {rfp?.summary && (
-                <p className="text-sm/5.5 font-normal xl:text-base/6">{rfp.summary}</p>
-              )}
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {rfp?.eligibilityCriteria && (
-                  <div className="bg-background rounded-lg p-3 transition-all">
-                    <div className="flex flex-col gap-2">
-                      <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
-                        Eligibility Criteria
-                      </h2>
-                      <Markdown>{rfp.eligibilityCriteria}</Markdown>
-                    </div>
-                  </div>
-                )}
-                {rfp?.evaluationCriteria && (
-                  <div className="bg-background rounded-lg p-3 transition-all">
-                    <div className="flex flex-col gap-2">
-                      <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
-                        Evaluation Criteria
-                      </h2>
-                      <Markdown>{rfp.evaluationCriteria}</Markdown>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            {rfp?.briefing && (
-              <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
-                <div className="flex flex-col rounded-lg transition-all">
-                  <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
-                  <Separator className="text-border mt-1" />
-                  <div className="px-4 sm:px-3 md:px-2">
-                    <Markdown>{rfp.briefing}</Markdown>
+            {rfp ? (
+              <>
+                <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+                  {rfp.summary && (
+                    <p className="text-sm/5.5 font-normal xl:text-base/6">{rfp.summary}</p>
+                  )}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {rfp.eligibilityCriteria && (
+                      <div className="bg-background rounded-lg p-3 transition-all">
+                        <div className="flex flex-col gap-2">
+                          <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
+                            Eligibility Criteria
+                          </h2>
+                          <Markdown>{rfp.eligibilityCriteria}</Markdown>
+                        </div>
+                      </div>
+                    )}
+                    {rfp.evaluationCriteria && (
+                      <div className="bg-background rounded-lg p-3 transition-all">
+                        <div className="flex flex-col gap-2">
+                          <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
+                            Evaluation Criteria
+                          </h2>
+                          <Markdown>{rfp.evaluationCriteria}</Markdown>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
+                {rfp.briefing && (
+                  <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
+                    <div className="flex flex-col rounded-lg transition-all">
+                      <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
+                      <Separator className="text-border mt-1" />
+                      <div className="px-4 sm:px-3 md:px-2">
+                        <Markdown>{rfp.briefing}</Markdown>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+                <Empty className="border-0 bg-transparent p-6 md:p-12">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <FileQuestion />
+                    </EmptyMedia>
+                    <EmptyTitle>Not found data</EmptyTitle>
+                    <EmptyDescription>No RFP data available for this workstream.</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
               </div>
             )}
           </Card>
