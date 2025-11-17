@@ -1,5 +1,7 @@
 import { FilePenLine } from 'lucide-react'
+import { Suspense } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { RfpDetailsLinkWrapper } from '@/modules/rfp/rfp-details-link-wrapper'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -7,10 +9,10 @@ import { NavigationHeader } from '@/modules/shared/components/navigation-header'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
 import WorkstreamStats from '../workstream-stats/workstream-stats'
 import ProposalCardsGrid from './proposal-cards-grid'
-import { RfpDetailsLink } from './rfp-details-link'
 import StatCards from './stat-cards'
 import type { Route } from 'next'
 
@@ -26,7 +28,10 @@ The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, 
 This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
 `
 
-export default function WorkstreamCard() {
+interface WorkstreamCardProps {
+  params: Promise<{ slug: string }>
+}
+export default function WorkstreamCard({ params }: WorkstreamCardProps) {
   return (
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
@@ -45,7 +50,9 @@ export default function WorkstreamCard() {
             {proposalDescriptionMarkdown}
           </Markdown>
 
-          <RfpDetailsLink />
+          <Suspense fallback={<Skeleton className="h-9 w-36" />}>
+            <RfpDetailsLinkWrapper params={params} />
+          </Suspense>
         </div>
       </div>
 

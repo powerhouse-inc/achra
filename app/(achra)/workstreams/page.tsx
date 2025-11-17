@@ -5,7 +5,11 @@ import { WorkstreamCard } from '@/modules/workstream/components/workstream-card'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
 import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
 
-export default function WorkstreamsPage() {
+interface WorkstreamsPageProps {
+  params: Promise<{ slug: string }>
+}
+
+export default function WorkstreamsPage({ params }: WorkstreamsPageProps) {
   return (
     <PageBackground>
       <PageContent>
@@ -17,8 +21,8 @@ export default function WorkstreamsPage() {
           </Suspense>
 
           <div className="flex flex-col gap-8">
-            <WorkstreamCard />
-            <WorkstreamCard />
+            <WorkstreamCard params={params} />
+            <WorkstreamCard params={params} />
           </div>
         </div>
       </PageContent>

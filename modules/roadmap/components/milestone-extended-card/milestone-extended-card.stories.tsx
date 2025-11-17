@@ -16,6 +16,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     milestone: mockedMilestones[0],
+    networkSlug: 'powerhouse',
+    roadmapSlug: 'roadmap-1',
     className: 'max-w-79',
   },
 }

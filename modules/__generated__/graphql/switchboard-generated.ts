@@ -3240,6 +3240,13 @@ export type NetworkProfileQueryVariables = Exact<{
 
 export type NetworkProfileQuery = { __typename?: 'Query', NetworkProfile?: { __typename?: 'NetworkProfileQueries', getDocument?: { __typename?: 'NetworkProfile', state: { __typename?: 'NetworkProfile_NetworkProfileState', category: Array<NetworkProfile_NetworkCategory>, description: string, discord?: string | null, github?: string | null, icon: string, logo: string, logoBig: string, name: string, website?: string | null, x?: string | null, youtube?: string | null } } | null } | null };
 
+export type RfpByWorkstreamQueryVariables = Exact<{
+  filter: WorkstreamFilter;
+}>;
+
+
+export type RfpByWorkstreamQuery = { __typename?: 'Query', rfpByWorkstream: Array<{ __typename?: 'WorkstreamRfp', code?: string | null, title?: string | null, status?: WorkstreamStatus | null, rfp?: { __typename?: 'RFP', briefing?: string | null, budgetCurrency?: string | null, budgetMax?: number | null, budgetMin?: number | null, code?: string | null, eligibilityCriteria?: string | null, evaluationCriteria?: string | null, status?: RfpStatus | null, id: any, summary?: string | null, submissionDeadline?: any | null, title: string } | null }> };
+
 export type ScopeOfWorkQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3316,6 +3323,69 @@ useSuspenseNetworkProfileQuery.getKey = (variables: NetworkProfileQueryVariables
 
 
 useNetworkProfileQuery.fetcher = (variables: NetworkProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables, options);
+
+export const RfpByWorkstreamDocument = `
+    query RfpByWorkstream($filter: WorkstreamFilter!) {
+  rfpByWorkstream(filter: $filter) {
+    code
+    rfp {
+      briefing
+      budgetCurrency
+      budgetMax
+      budgetMin
+      code
+      eligibilityCriteria
+      evaluationCriteria
+      status
+      id
+      summary
+      submissionDeadline
+      title
+    }
+    title
+    status
+  }
+}
+    `;
+
+export const useRfpByWorkstreamQuery = <
+      TData = RfpByWorkstreamQuery,
+      TError = unknown
+    >(
+      variables: RfpByWorkstreamQueryVariables,
+      options?: Omit<UseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<RfpByWorkstreamQuery, TError, TData>(
+      {
+    queryKey: ['RfpByWorkstream', variables],
+    queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
+    ...options
+  }
+    )};
+
+useRfpByWorkstreamQuery.getKey = (variables: RfpByWorkstreamQueryVariables) => ['RfpByWorkstream', variables];
+
+export const useSuspenseRfpByWorkstreamQuery = <
+      TData = RfpByWorkstreamQuery,
+      TError = unknown
+    >(
+      variables: RfpByWorkstreamQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<RfpByWorkstreamQuery, TError, TData>(
+      {
+    queryKey: ['RfpByWorkstreamSuspense', variables],
+    queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseRfpByWorkstreamQuery.getKey = (variables: RfpByWorkstreamQueryVariables) => ['RfpByWorkstreamSuspense', variables];
+
+
+useRfpByWorkstreamQuery.fetcher = (variables: RfpByWorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables, options);
 
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($docId: PHID!) {

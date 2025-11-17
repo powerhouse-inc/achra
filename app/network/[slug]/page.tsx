@@ -19,7 +19,11 @@ import { mockedRoadmaps } from '@/modules/roadmap/mocks'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
 
-export default function NetworkPage() {
+interface NetworkPageProps {
+  params: Promise<{ slug: string }>
+}
+
+export default function NetworkPage({ params }: NetworkPageProps) {
   return (
     <PageBackground>
       <PageContent className="gap-8">
@@ -27,7 +31,7 @@ export default function NetworkPage() {
           <HomepageBanner />
         </Suspense>
         <ProposalsSection proposals={PROPOSALS} />
-        <RoadmapSection roadmaps={mockedRoadmaps} />
+        <RoadmapSection roadmaps={mockedRoadmaps} params={params} />
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
         <BuildersSection />
