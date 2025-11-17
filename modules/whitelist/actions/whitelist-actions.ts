@@ -1,6 +1,7 @@
 'use server'
 
 import { z } from 'zod'
+import { addToWhitelist } from '../lib/add-to-whitelist'
 import type { WhitelistFormState } from '../config/types'
 import 'server-only'
 
@@ -26,16 +27,20 @@ export async function submitWhitelistEmailAction(
       }
     }
 
-    // Here you would typically save to a database
-    // For now, we'll simulate a successful submission
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    const whitelistResult = await addToWhitelist(email)
 
-    // TODO: save the email somewhere
-
-    return {
-      success: true,
-      message: 'Successfully joined the waitlist!',
-      email,
+    if (whitelistResult) {
+      return {
+        success: true,
+        message: 'Successfully joined the waitlist!',
+        email,
+      }
+    } else {
+      return {
+        success: false,
+        error: 'Failed to join the waitlist. Please try again.',
+        email,
+      }
     }
   } catch (_error) {
     return {
