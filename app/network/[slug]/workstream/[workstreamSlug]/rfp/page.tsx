@@ -32,7 +32,11 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
   const rfpData = data.rfpByWorkstream
 
   if (rfpData.length === 0) {
-    return <RfpEmpty />
+    return (
+      <PageContent className="h-screen">
+        <RfpEmpty />
+      </PageContent>
+    )
   }
 
   const workstreamRfp = rfpData[0]
