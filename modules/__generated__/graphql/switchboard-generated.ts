@@ -3254,6 +3254,13 @@ export type ScopeOfWorkQueryVariables = Exact<{
 
 export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
 
+export type WorkstreamQueryVariables = Exact<{
+  filter: WorkstreamFilter;
+}>;
+
+
+export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
+
 
 
 export const NetworkProfileDocument = `
@@ -3505,3 +3512,88 @@ useSuspenseScopeOfWorkQuery.getKey = (variables: ScopeOfWorkQueryVariables) => [
 
 
 useScopeOfWorkQuery.fetcher = (variables: ScopeOfWorkQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables, options);
+
+export const WorkstreamDocument = `
+    query Workstream($filter: WorkstreamFilter!) {
+  workstream(filter: $filter) {
+    title
+    code
+    sow {
+      roadmaps {
+        id
+        description
+        slug
+        title
+        milestones {
+          budget
+          coordinators
+          deliveryTarget
+          description
+          id
+          sequenceCode
+          title
+          scope {
+            deliverables
+            deliverablesCompleted {
+              completed
+              total
+            }
+            progress {
+              ... on SOW_StoryPoint {
+                completed
+                total
+              }
+              ... on SOW_Percentage {
+                value
+              }
+              ... on SOW_Binary {
+                done
+              }
+            }
+            status
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useWorkstreamQuery = <
+      TData = WorkstreamQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamQueryVariables,
+      options?: Omit<UseQueryOptions<WorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<WorkstreamQuery, TError, TData>(
+      {
+    queryKey: ['Workstream', variables],
+    queryFn: switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables),
+    ...options
+  }
+    )};
+
+useWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['Workstream', variables];
+
+export const useSuspenseWorkstreamQuery = <
+      TData = WorkstreamQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<WorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<WorkstreamQuery, TError, TData>(
+      {
+    queryKey: ['WorkstreamSuspense', variables],
+    queryFn: switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['WorkstreamSuspense', variables];
+
+
+useWorkstreamQuery.fetcher = (variables: WorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables, options);

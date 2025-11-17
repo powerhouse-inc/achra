@@ -20,7 +20,7 @@ const meta = {
         pathname: '/roadmap',
         query: {
           search: '',
-          statuses: 'DRAFT',
+          statuses: 'RFP_DRAFT',
         },
       },
     },

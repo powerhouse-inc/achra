@@ -1,0 +1,43 @@
+query Workstream($filter: WorkstreamFilter!) {
+  workstream(filter: $filter) {
+    title
+    code
+    sow {
+      roadmaps {
+        id
+        description
+        slug
+        title
+        milestones {
+          budget
+          coordinators
+          deliveryTarget
+          description
+          id
+          sequenceCode
+          title
+          scope {
+            deliverables
+            deliverablesCompleted {
+              completed
+              total
+            }
+            progress {
+              ... on SOW_StoryPoint {
+                completed
+                total
+              }
+              ... on SOW_Percentage {
+                value
+              }
+              ... on SOW_Binary {
+                done
+              }
+            }
+            status
+          }
+        }
+      }
+    }
+  }
+}
