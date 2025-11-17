@@ -9,9 +9,15 @@ import useRoadmapSwiper from './use-roadmap-swiper'
 
 interface RoadmapSwiperProps {
   milestones: ScopeOfWork_Milestone[]
+  networkSlug: string
+  roadmapSlug: string
 }
 
-export default function RoadmapSwiper({ milestones }: RoadmapSwiperProps) {
+export default function RoadmapSwiper({
+  milestones,
+  networkSlug,
+  roadmapSlug,
+}: RoadmapSwiperProps) {
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
@@ -64,7 +70,12 @@ export default function RoadmapSwiper({ milestones }: RoadmapSwiperProps) {
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id} className="flex">
               <div className="mx-2 flex h-full">
-                <MilestoneExtendedCard milestone={milestone} className="swiper-milestone-card" />
+                <MilestoneExtendedCard
+                  milestone={milestone}
+                  className="swiper-milestone-card"
+                  networkSlug={networkSlug}
+                  roadmapSlug={roadmapSlug}
+                />
               </div>
             </SwiperSlide>
           ))}
@@ -79,6 +90,8 @@ export default function RoadmapSwiper({ milestones }: RoadmapSwiperProps) {
                 <MilestoneExtendedCard
                   milestone={milestone}
                   className="swiper-milestone-card mb-2"
+                  networkSlug={networkSlug}
+                  roadmapSlug={roadmapSlug}
                 />
               </div>
             ))}
