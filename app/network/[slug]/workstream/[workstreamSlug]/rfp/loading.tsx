@@ -14,7 +14,7 @@ export default function RfpLoading() {
       <div className="py-2">
         <Card className="border-input gap-0 overflow-hidden border p-0">
           {/* Header Section - Title, Code, Status, Button */}
-          <div className="border-input flex flex-col gap-4 border-b p-2 pb-4 sm:gap-4 sm:p-3 sm:pb-2 md:p-4">
+          <div className="border-input flex flex-col gap-4 p-2 pb-4 sm:gap-4 sm:p-3 sm:pb-2 md:p-4">
             <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
               {/* Left: Title and Code */}
               <div className="flex flex-col gap-2">
@@ -55,7 +55,7 @@ export default function RfpLoading() {
           </div>
 
           {/* Summary and Criteria Section - Accent Background */}
-          <div className="border-input bg-accent space-y-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+          <div className="border-input bg-accent space-y-4 border-t p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
             {/* Two Column Criteria */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {/* Eligibility Criteria */}
@@ -95,7 +95,7 @@ export default function RfpLoading() {
           </div>
 
           {/* Briefing Section */}
-          <div className="border-input flex flex-col border-b px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
+          <div className="border-input flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
             <div className="flex flex-col rounded-lg">
               <Skeleton className="h-5 w-24" />
               <Separator className="text-border mt-1" />
