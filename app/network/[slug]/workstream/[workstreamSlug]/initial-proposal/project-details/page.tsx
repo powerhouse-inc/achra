@@ -36,7 +36,7 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
         </Suspense>
       </PageBreadcrumbContainer>
       <PageContent className="gap-6" variant="with-breadcrumb">
-        <Card className="gap-0 p-0">
+        <Card className="bg-background gap-0 border-none p-0 sm:-mt-3">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 px-4 pt-3 pb-4 lg:flex-row">
               <div className="flex shrink grow-2 basis-[62.3%] flex-col gap-1 sm:gap-2">

@@ -14,7 +14,10 @@ interface MetricCardProps {
 export function MetricCard({ label, value, unit, footer, action, className }: MetricCardProps) {
   return (
     <Card
-      className={cn('relative flex w-full flex-col justify-between gap-0 px-4 py-2', className)}
+      className={cn(
+        'bg-popover relative flex w-full flex-col justify-between gap-0 border px-4 py-2 shadow-none',
+        className,
+      )}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="w-full space-y-1">
