@@ -1,6 +1,6 @@
 import { createLoader, parseAsArrayOf, parseAsString, parseAsStringEnum } from 'nuqs/server'
 import {
-  useRoadmapsListQuery,
+  useWorkstreamQuery,
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roadmap-section'
@@ -30,7 +30,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
 
   const filters = await filtersParser(searchParams)
 
-  const data = await useRoadmapsListQuery.fetcher({
+  const data = await useWorkstreamQuery.fetcher({
     filter: {
       networkSlug: slug,
       // TODO: Handle multiple statuses (should be implemented in the api)
@@ -38,8 +38,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
     },
   })()
 
-  // TODO: Check with the team or client if it is expected to have multiple scope of work per network
-  const roadmaps = data.scopeOfWorkByNetworkOrStatus[0]?.roadmaps ?? []
+  const roadmaps = data.workstream?.sow?.roadmaps ?? []
 
   if (roadmaps.length === 0) {
     return (
