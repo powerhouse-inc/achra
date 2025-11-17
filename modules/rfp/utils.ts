@@ -1,23 +1,30 @@
 import { format } from 'date-fns'
-import { formatValueScientificNotation } from '../shared/lib/humanization'
+import { threeDigitsPrecisionHumanization } from '../shared/lib/humanization'
 import type { Rfp } from '../__generated__/graphql/switchboard-generated'
 
-// Format deadline
 export const formatDeadline = (rfp?: Rfp | null) => {
   if (!rfp?.submissionDeadline) return 'Not specified'
   const date = new Date(rfp.submissionDeadline)
-  return format(date, 'd MMM yyyy, hh:mm a zzz')
+  const formatted = format(date, 'd MMM yyyy @ HH:mm zzz')
+
+  return formatted.toLocaleUpperCase()
 }
 
+const formatValue = (value: number) => {
+  const { value: formatted, suffix } = threeDigitsPrecisionHumanization(value)
+  const cleanedValue = formatted.replace(/\.0+$/, '')
+  return `${cleanedValue}${suffix}`
+}
 // Format budget range
 export const formatBudgetRange = (rfp?: Rfp | null) => {
-  if (!rfp?.submissionDeadline) return 'Not specified'
-  if (!rfp.budgetMin && !rfp.budgetMax) return 'Not specified'
+  if (!rfp?.budgetMin && !rfp?.budgetMax) return 'Not specified'
   const currency = rfp.budgetCurrency ?? 'USD'
-  const min = rfp.budgetMin ? formatValueScientificNotation(rfp.budgetMin) : ''
-  const max = rfp.budgetMax ? formatValueScientificNotation(rfp.budgetMax) : ''
-  if (min && max) return `${min} - ${max} ${currency}`
-  if (min) return `${min}+ ${currency}`
-  if (max) return `Up to ${max} ${currency}`
+
+  const minFormatted = rfp.budgetMin ? formatValue(rfp.budgetMin) : '0'
+  const maxFormatted = rfp.budgetMax ? formatValue(rfp.budgetMax) : ''
+
+  if (minFormatted && maxFormatted) return `${minFormatted} - ${maxFormatted} ${currency}`
+  if (minFormatted) return `${minFormatted}  ${currency}`
+  if (maxFormatted) return `Up to ${maxFormatted} ${currency}`
   return 'Not specified'
 }
