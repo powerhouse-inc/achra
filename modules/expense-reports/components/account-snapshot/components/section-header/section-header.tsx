@@ -33,7 +33,7 @@ function SectionHeader({ title, subtitle, tooltip, level = 'h1' }: SectionHeader
         {tooltip && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <InfoIcon className="size-4" />
+              <InfoIcon className="text-foreground/50 size-4" />
             </TooltipTrigger>
             <TooltipContent side="bottom" align="start" className="max-w-70" arrowPadding={16}>
               {tooltip}

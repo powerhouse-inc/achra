@@ -30,23 +30,52 @@ function FundingOverview() {
         className={cn(
           'flex w-full flex-wrap gap-2',
 
-          '[&>div:nth-of-type(1)]:width-[calc(50%-4px)] [&>div:nth-of-type(1)]:order-1',
-          '[&>div:nth-of-type(2)]:order-3',
-          '[&>div:nth-of-type(3)]:width-[calc(50%-4px)] [&>div:nth-of-type(3)]:order-2',
+          '[&>:nth-of-type(1)]:order-1 [&>:nth-of-type(1)]:w-[calc(50%-4px)]',
+          '[&>:nth-of-type(2)]:order-3',
+          '[&>:nth-of-type(3)]:order-2 [&>:nth-of-type(3)]:w-[calc(50%-4px)]',
           // md
           'md:flex-nowrap md:gap-6',
-          '[&>div:nth-of-type(1)]:order-1 [&>div:nth-of-type(1)]:min-w-40',
-          '[&>div:nth-of-type(2)]:order-2',
-          '[&>div:nth-of-type(3)]:order-3 [&>div:nth-of-type(3)]:min-w-40',
+          'md:[&>:nth-of-type(1)]:w-full md:[&>:nth-of-type(1)]:min-w-[158px]',
+          'md:[&>:nth-of-type(2)]:order-2',
+          'md:[&>:nth-of-type(3)]:order-3 md:[&>:nth-of-type(3)]:w-full md:[&>:nth-of-type(3)]:min-w-[158px]',
           // xl
           'xl:gap-8',
         )}
       >
-        <SimpleStatCard caption="Initial Lifetime Balance" />
+        <SimpleStatCard
+          date="2025-04-08T21:11:07+00:00"
+          value={2924160}
+          caption="Initial Lifetime Balance"
+          mobileCaption="Initial L.T. Balance"
+        />
         <div className="w-full md:max-w-85 md:min-w-85 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
-          <FundChangeRate />
+          <FundChangeRate
+            netChange={-791666}
+            leftValue={500000}
+            leftText={
+              <>
+                <span className="inline lg:hidden">Extra Funds Available</span>
+                <span className="hidden lg:inline">Extra Funds Made Available</span>
+              </>
+            }
+            rightValue={291666}
+            rightValueColor="green"
+            rightText={
+              <>
+                <span className="inline lg:hidden">Funds R. via DSSBlow</span>
+                <span className="hidden lg:inline xl:hidden">Funds Rtnd via DSSBlow</span>
+                <span className="hidden xl:inline">Funds Returned via DSSBlow</span>
+              </>
+            }
+          />
         </div>
-        <SimpleStatCard caption="New Lifetime Balance" />
+        <SimpleStatCard
+          date="2025-05-16T21:11:07+00:00"
+          value={3215826}
+          hasEqualSign
+          caption="New Lifetime Balance"
+          mobileCaption="New L.T. Balance"
+        />
       </div>
     </>
   )
