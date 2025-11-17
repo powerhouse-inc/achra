@@ -1,10 +1,13 @@
+'use client'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import type { Route } from 'next'
 
-function RfpDetailsLink() {
-  const slug = 'powerhouse'
-  const workstreamSlug = 'vetra-beta-launch'
+interface RfpDetailsLinkProps {
+  slug: string
+}
 
+function RfpDetailsLink({ slug }: RfpDetailsLinkProps) {
+  const workstreamSlug = 'vetra-beta-launch'
   return (
     <InternalLink
       href={`/network/${slug}/workstream/${workstreamSlug}/rfp` as Route}
