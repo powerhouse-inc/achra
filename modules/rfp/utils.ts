@@ -5,12 +5,9 @@ import type { Rfp } from '../__generated__/graphql/switchboard-generated'
 export const formatDeadline = (rfp?: Rfp | null) => {
   if (!rfp?.submissionDeadline) return 'Not specified'
   const date = new Date(rfp.submissionDeadline)
-  let formatted = format(date, 'd MMM yyyy @ HH:mm zzz')
+  const formatted = format(date, 'd MMM yyyy @ HH:mm zzz')
 
-  formatted = formatted.toLocaleUpperCase()
-  // Remove timezone offset digits (e.g., "GMT-3" -> "GMT", "CET+1" -> "CET")
-  formatted = formatted.replace(/([A-Z]{2,4})[+-]\d+$/, '$1')
-  return formatted
+  return formatted.toLocaleUpperCase()
 }
 
 const formatValue = (value: number) => {
