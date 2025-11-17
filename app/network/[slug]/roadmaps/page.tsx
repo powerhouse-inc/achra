@@ -31,7 +31,7 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
       <PageContent variant="with-breadcrumb" className="gap-6">
         <RoadmapFilters />
         <ErrorBoundaryWithPresets>
-          <Suspense fallback={<div>Loading...</div>} key={JSON.stringify(searchParamsString)}>
+          <Suspense fallback={<div>Loading...</div>} key={searchParamsString}>
             <RoadmapList params={params} searchParams={searchParams} />
           </Suspense>
         </ErrorBoundaryWithPresets>
