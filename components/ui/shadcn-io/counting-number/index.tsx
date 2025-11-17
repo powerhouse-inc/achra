@@ -1,13 +1,13 @@
 'use client'
 
-import * as React from 'react'
 import {
   type SpringOptions,
-  type UseInViewOptions,
   useInView,
+  type UseInViewOptions,
   useMotionValue,
   useSpring,
 } from 'motion/react'
+import * as React from 'react'
 
 type CountingNumberProps = React.ComponentProps<'span'> & {
   number: number
@@ -70,21 +70,23 @@ function CountingNumber({
         if (padStart) {
           const finalIntLength = Math.floor(Math.abs(number)).toString().length
           const [intPart, fracPart] = formatted.split(decimalSeparator)
-          const paddedInt = intPart?.padStart(finalIntLength, '0') ?? ''
+          const paddedInt = intPart.padStart(finalIntLength, '0')
           formatted = fracPart ? `${paddedInt}${decimalSeparator}${fracPart}` : paddedInt
         }
 
         localRef.current.textContent = formatted
       }
     })
-    return () => unsubscribe()
+    return () => {
+      unsubscribe()
+    }
   }, [springVal, decimals, padStart, number, decimalSeparator])
 
   const finalIntLength = Math.floor(Math.abs(number)).toString().length
   const initialText = padStart
     ? '0'.padStart(finalIntLength, '0') +
       (decimals > 0 ? decimalSeparator + '0'.repeat(decimals) : '')
-    : '0' + (decimals > 0 ? decimalSeparator + '0'.repeat(decimals) : '')
+    : `0${decimals > 0 ? decimalSeparator + '0'.repeat(decimals) : ''}`
 
   return (
     <span ref={localRef} data-slot="counting-number" className={className} {...props}>
