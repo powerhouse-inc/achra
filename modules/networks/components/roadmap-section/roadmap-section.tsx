@@ -11,9 +11,12 @@ import { ROADMAP_TABS_CONFIG } from './constants'
 
 interface RoadmapSectionProps {
   roadmaps: ScopeOfWork_Roadmap[]
+  params: Promise<{ slug: string }>
 }
 
-export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
+export default async function RoadmapSection({ roadmaps, params }: RoadmapSectionProps) {
+  const { slug } = await params
+
   return (
     <section
       className={cn('flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
@@ -46,10 +49,19 @@ export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
             <div className="relative z-10 flex flex-col gap-6 sm:hidden">
               <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />
               {roadmap.milestones.map((milestone) => (
-                <MilestoneExtendedCard key={milestone.id} milestone={milestone} />
+                <MilestoneExtendedCard
+                  key={milestone.id}
+                  milestone={milestone}
+                  networkSlug={slug}
+                  roadmapSlug={roadmap.slug}
+                />
               ))}
             </div>
-            <RoadmapSwiper milestones={roadmap.milestones} />
+            <RoadmapSwiper
+              milestones={roadmap.milestones}
+              networkSlug={slug}
+              roadmapSlug={roadmap.slug}
+            />
           </TabsContent>
         ))}
       </ScrollableTabs>

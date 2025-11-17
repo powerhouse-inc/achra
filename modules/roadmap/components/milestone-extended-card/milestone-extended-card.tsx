@@ -17,11 +17,15 @@ import LatestKeyResults from './latest-key-results'
 interface MilestoneExtendedCardProps {
   milestone: ScopeOfWork_Milestone
   className?: string
+  networkSlug: string
+  roadmapSlug: string
 }
 
 export default function MilestoneExtendedCard({
   milestone,
   className,
+  networkSlug,
+  roadmapSlug,
 }: MilestoneExtendedCardProps) {
   const progress = useMemo(() => {
     return getProgressPercentage(milestone.scope?.progress)
@@ -47,7 +51,10 @@ export default function MilestoneExtendedCard({
           {milestone.sequenceCode}
         </div>
         <Button variant="ghost" asChild>
-          <Link href="/network/powerhouse">
+          <Link
+            href={`/network/${networkSlug}/roadmap/${roadmapSlug}#${milestone.sequenceCode}`}
+            target="_blank"
+          >
             Details
             <ArrowRight className="size-4" />
           </Link>

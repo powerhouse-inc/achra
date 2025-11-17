@@ -7,6 +7,7 @@ import type {
   ScopeOfWork_Milestone,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
 import Coordinators from './coordinators'
@@ -46,7 +47,7 @@ export default function MilestoneDetailsCard({
 
   return (
     <article
-      id={milestone.sequenceCode}
+      id={encodeSectionId(milestone.sequenceCode)}
       className="relative scroll-mt-[155px] md:flex md:flex-col md:gap-6 lg:flex-row lg:gap-8"
     >
       <div className="flex flex-col gap-4 md:flex-row md:gap-6 lg:sticky lg:top-[160px] lg:h-fit">

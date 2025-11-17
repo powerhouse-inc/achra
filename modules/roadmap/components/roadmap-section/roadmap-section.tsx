@@ -39,10 +39,16 @@ export function RoadmapSection({
           <MilestoneExtendedCard
             key={milestone.id}
             milestone={milestone as ScopeOfWork_Milestone}
+            networkSlug={networkSlug}
+            roadmapSlug={roadmap.slug}
           />
         ))}
       </div>
-      <RoadmapSwiper milestones={roadmap.milestones as ScopeOfWork_Milestone[]} />
+      <RoadmapSwiper
+        milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
+        networkSlug={networkSlug}
+        roadmapSlug={roadmap.slug}
+      />
     </div>
   )
 }
