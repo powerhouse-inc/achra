@@ -11,7 +11,7 @@ interface ProgressCardProps {
 
 export function ProgressCard({ status, progress }: ProgressCardProps) {
   return (
-    <div className="bg-popover flex w-full flex-col gap-2 rounded-xl border p-2">
+    <div className="bg-popover flex w-full flex-col gap-2 rounded-xl border p-2 lg:px-4">
       <div className="flex items-center justify-between">
         <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
         {status && <DeliverableSetStatusChip status={status} />}

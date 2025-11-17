@@ -64,6 +64,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
               title={deliverable.title}
               code="DEL 001"
               keyResults={deliverable.keyResults}
+              count={deliverable.keyResults.length}
               className="flex justify-end sm:min-w-34"
             />
           </div>
