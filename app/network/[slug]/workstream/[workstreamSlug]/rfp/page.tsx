@@ -1,13 +1,10 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  useRfpByWorkstreamQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
 import { formatBudgetRange, formatDeadline } from '@/modules/rfp/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -58,9 +55,9 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                    {rfp?.title && (
+                    {workstreamRfp.title && (
                       <div className="text-base/6 font-bold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl md:leading-[120%] xl:text-2xl xl:leading-[120%] xl:font-bold">
-                        {rfp.title}
+                        {workstreamRfp.title}
                       </div>
                     )}
                     {workstreamRfp.code && (
@@ -71,7 +68,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   </div>
                   {workstreamRfp.status && (
                     <div className="hidden md:flex">
-                      <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
+                      <WorkstreamStatusChip status={workstreamRfp.status} />
                     </div>
                   )}
                 </div>
@@ -79,7 +76,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   {workstreamRfp.code && <div className="flex sm:hidden">{workstreamRfp.code}</div>}
                   {workstreamRfp.status && (
                     <div className="flex md:hidden">
-                      <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
+                      <WorkstreamStatusChip status={workstreamRfp.status} />
                     </div>
                   )}
                   <div className="text-primary-foreground hidden md:flex">
