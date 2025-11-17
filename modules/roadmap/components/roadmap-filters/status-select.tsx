@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
+import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip/workstream-status-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
@@ -11,43 +11,50 @@ interface StatusSelectProps {
   className?: string
 }
 
-// TODO: Check with the designer the colors for the rest of the statuses
-
 const statusOptions: Option[] = [
   {
     value: WorkstreamStatus.RfpDraft,
-    label: (
-      <GenericChip variant="filled" color="blue">
-        DRAFT
-      </GenericChip>
-    ),
+    label: <WorkstreamStatusChip status={WorkstreamStatus.RfpDraft} />,
     group: 'Statuses',
   },
   {
     value: WorkstreamStatus.InProgress,
-    label: (
-      <GenericChip variant="filled" color="blue">
-        IN PROGRESS
-      </GenericChip>
-    ),
+    label: <WorkstreamStatusChip status={WorkstreamStatus.InProgress} />,
     group: 'Statuses',
   },
   {
     value: WorkstreamStatus.Finished,
-    label: (
-      <GenericChip variant="filled" color="green">
-        FINISHED
-      </GenericChip>
-    ),
+    label: <WorkstreamStatusChip status={WorkstreamStatus.Finished} />,
     group: 'Statuses',
   },
   {
     value: WorkstreamStatus.RfpCancelled,
-    label: (
-      <GenericChip variant="filled" color="red">
-        CANCELLED
-      </GenericChip>
-    ),
+    label: <WorkstreamStatusChip status={WorkstreamStatus.RfpCancelled} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.NotAwarded,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.NotAwarded} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.PreworkRfc,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.PreworkRfc} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.ProposalSubmitted,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.ProposalSubmitted} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.Awarded,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.Awarded} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.OpenForProposals,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />,
     group: 'Statuses',
   },
 ]
