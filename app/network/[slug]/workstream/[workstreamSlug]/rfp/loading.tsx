@@ -8,14 +8,13 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 export default function RfpLoading() {
   return (
-    <PageContent className="gap-6" as="div">
-      <PageBreadcrumbContainer>
+    <main>
+      <PageBreadcrumbContainer className="**:data-[slot='page-breadcrumb-container-wrapper']:bg-secondary/20 sm:**:data-[slot='page-breadcrumb-container-wrapper']:bg-background">
         <BreadcrumbSkeleton segments={3} />
       </PageBreadcrumbContainer>
-
       {/* Page Content */}
-      <div className="py-2">
-        <Card className="border-input gap-0 overflow-hidden border p-0">
+      <PageContent className="gap-6" as="div" variant="with-breadcrumb">
+        <Card className="border-input gap-0 overflow-hidden border p-0 sm:mt-4 md:mt-0">
           {/* Header Section - Title, Code, Status, Button */}
           <div className="border-input flex flex-col gap-4 p-2 pb-4 sm:gap-4 sm:p-3 sm:pb-2 md:p-4">
             <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
@@ -154,7 +153,7 @@ export default function RfpLoading() {
             </div>
           </div>
         </Card>
-      </div>
-    </PageContent>
+      </PageContent>
+    </main>
   )
 }
