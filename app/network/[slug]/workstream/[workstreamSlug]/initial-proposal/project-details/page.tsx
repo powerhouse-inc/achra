@@ -26,6 +26,7 @@ interface ProjectDetailsPageProps {
 
 export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
   const totalBudget = 100000
+  const builderId = 'builder-1'
 
   return (
     <main>
@@ -55,6 +56,7 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                           src="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
                           title="Powerhouse OH"
                           params={params}
+                          builderId={builderId}
                         />
                       </Suspense>
                     </div>
@@ -73,6 +75,7 @@ export default function ProjectDetailsPage({ params }: ProjectDetailsPageProps) 
                       src="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
                       title="Powerhouse OH"
                       params={params}
+                      builderId={builderId}
                     />
                   </Suspense>
                 </div>
