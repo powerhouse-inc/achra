@@ -1,4 +1,5 @@
 import { ProposalKeyValueElementSkeleton } from '@/modules/rfp/skeleton/proposal-key-value-skeleton'
+import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb/breadcrumb-skeleton'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card } from '@/modules/shared/components/ui/card'
@@ -8,7 +9,9 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 export default function RfpLoading() {
   return (
     <PageContent className="gap-6" as="div">
-      <BreadcrumbSkeleton segments={3} />
+      <PageBreadcrumbContainer>
+        <BreadcrumbSkeleton segments={3} />
+      </PageBreadcrumbContainer>
 
       {/* Page Content */}
       <div className="py-2">
