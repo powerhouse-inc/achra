@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
 import { RoadmapList } from '@/modules/roadmap/components/roadmaps-list/roadmap-list'
+import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list/roadmaps-list-skeleton'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
@@ -31,7 +32,7 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
       <PageContent variant="with-breadcrumb" className="gap-6">
         <RoadmapFilters />
         <ErrorBoundaryWithPresets>
-          <Suspense fallback={<div>Loading...</div>} key={searchParamsString}>
+          <Suspense fallback={<RoadmapsListSkeleton />} key={searchParamsString}>
             <RoadmapList params={params} searchParams={searchParams} />
           </Suspense>
         </ErrorBoundaryWithPresets>
