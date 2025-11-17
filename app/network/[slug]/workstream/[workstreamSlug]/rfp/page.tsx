@@ -1,4 +1,4 @@
-import { CalendarClock, FileQuestion, HandCoins } from 'lucide-react'
+import { CalendarClock, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
 import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
@@ -11,13 +11,6 @@ import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { WorkstreamRfpBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 
@@ -170,15 +163,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </>
             ) : (
               <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-                <Empty className="border-0 bg-transparent p-6 md:p-12">
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <FileQuestion />
-                    </EmptyMedia>
-                    <EmptyTitle>Not found data</EmptyTitle>
-                    <EmptyDescription>No RFP data available for this workstream.</EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
+                <RfpEmpty />
               </div>
             )}
           </Card>
