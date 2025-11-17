@@ -14,8 +14,15 @@ import { Header } from './components/header'
 interface RoadmapSectionProps {
   roadmap: Sow_Roadmap
   networkSlug: string
+  workstreamCode: string
+  workstreamTitle: string
 }
-export function RoadmapSection({ roadmap, networkSlug }: RoadmapSectionProps) {
+export function RoadmapSection({
+  roadmap,
+  networkSlug,
+  workstreamCode,
+  workstreamTitle,
+}: RoadmapSectionProps) {
   return (
     <div className="flex flex-col gap-6">
       <Header
@@ -23,6 +30,8 @@ export function RoadmapSection({ roadmap, networkSlug }: RoadmapSectionProps) {
         description={roadmap.description}
         networkSlug={networkSlug}
         roadmapSlug={roadmap.slug}
+        workstreamCode={workstreamCode}
+        workstreamTitle={workstreamTitle}
       />
       <div className="relative z-10 flex flex-col gap-6 sm:hidden">
         <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />

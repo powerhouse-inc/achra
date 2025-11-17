@@ -11,12 +11,16 @@ interface RoadmapSectionHeaderProps {
   description: string
   roadmapSlug: string
   networkSlug: string
+  workstreamCode: string
+  workstreamTitle: string
 }
 export function Header({
   title,
   description,
   roadmapSlug,
   networkSlug,
+  workstreamCode,
+  workstreamTitle,
 }: RoadmapSectionHeaderProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -24,11 +28,12 @@ export function Header({
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <span className="text-foreground text-lg/5.5 font-bold">{title}</span>
+            {/* TODO: integrate with the roadmaps general status, currently not available in the workstream query */}
             <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
           </div>
           <NavigationHeader
-            title={title}
-            href={`/network/${networkSlug}/roadmap/${roadmapSlug}` as Route}
+            title={workstreamTitle}
+            href={`/network/${networkSlug}/workstream/${workstreamCode}` as Route}
           />
         </div>
         <Button variant="outline" asChild className="w-fit">

@@ -3252,7 +3252,7 @@ export type WorkstreamQueryVariables = Exact<{
 }>;
 
 
-export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
+export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
 
 
 
@@ -3446,6 +3446,8 @@ useScopeOfWorkQuery.fetcher = (variables: ScopeOfWorkQueryVariables, options?: R
 export const WorkstreamDocument = `
     query Workstream($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
+    title
+    code
     sow {
       roadmaps {
         id

@@ -1,5 +1,7 @@
 query Workstream($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
+    title
+    code
     sow {
       roadmaps {
         id

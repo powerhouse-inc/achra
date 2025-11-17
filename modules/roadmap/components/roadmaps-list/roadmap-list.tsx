@@ -55,7 +55,13 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
     <>
       <div className="flex flex-col gap-14">
         {roadmaps.map((roadmap) => (
-          <RoadmapSection key={roadmap.id} roadmap={roadmap} networkSlug={slug} />
+          <RoadmapSection
+            key={roadmap.id}
+            roadmap={roadmap}
+            networkSlug={slug}
+            workstreamCode={data.workstream?.code ?? ''}
+            workstreamTitle={data.workstream?.title ?? ''}
+          />
         ))}
       </div>
       <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
