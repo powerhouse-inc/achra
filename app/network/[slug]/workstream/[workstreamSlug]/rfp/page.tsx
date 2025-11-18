@@ -30,7 +30,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
   const rfpData = data.rfpByWorkstream
   if (rfpData.length === 0) {
     return (
-      <PageContent className="h-screen">
+      <PageContent className="flex h-[calc(100vh-14rem)] items-center justify-center overflow-hidden">
         <RfpEmpty />
       </PageContent>
     )
