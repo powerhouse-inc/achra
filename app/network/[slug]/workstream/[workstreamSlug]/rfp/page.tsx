@@ -126,7 +126,10 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
 
             {isRfpContentEmpty ? (
               <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-                <RfpEmpty />
+                <RfpEmpty
+                  title="No details found"
+                  description="No details, briefing or other information found for this workstream."
+                />
               </div>
             ) : (
               <>
