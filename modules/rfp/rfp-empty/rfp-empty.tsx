@@ -8,7 +8,6 @@ import {
 } from '@/modules/shared/components/ui/empty'
 
 interface RfpEmptyProps {
-  className?: string
   title?: string
   description?: string
 }
