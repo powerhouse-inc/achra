@@ -17,16 +17,21 @@ export function TitleComponent({
   levelNumber,
 }: TitleComponentProps) {
   return (
-    <div className={cn('flex flex-col', levelNumber === 1 ? 'gap-2' : 'gap-0')}>
+    <div
+      className={cn(
+        'mt-2 mb-6 flex flex-col sm:mt-0.25 md:-mt-[3px]',
+        levelNumber === 1 ? 'gap-2' : 'gap-0',
+      )}
+    >
       {levelNumber === 1 ? (
         <h1
           data-slot="first-level-title"
-          className="text-foreground m-0 text-lg/[120%] font-bold md:text-xl xl:text-2xl"
+          className="text-foreground m-0 text-lg/[120%] font-bold sm:mt-4 md:mt-0 md:text-xl xl:text-2xl"
         >
           Sky Ecosystem Finances
         </h1>
       ) : (
-        <h1 data-slot="nth-title-box" className="m-0 md:text-3xl">
+        <h1 data-slot="nth-title-box" className="m-0 sm:mt-4 md:mt-0 md:text-3xl">
           <IconTitleWithCode
             icon={icon || '/default-icon-cards-budget.svg'}
             title={title}

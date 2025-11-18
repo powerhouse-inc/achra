@@ -1,11 +1,11 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-import type { NetworkProfile_NetworkCategory } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { NetworkCategory } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
 
 export interface NetworkChip extends VariantProps<typeof networkCategoryVariants> {
-  category: NetworkProfile_NetworkCategory
+  category: NetworkCategory
 }
 
 const networkCategoryVariants = cva('border-2 px-2 py-0 text-sm font-extrabold', {

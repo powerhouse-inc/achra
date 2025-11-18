@@ -4,13 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { use, useMemo } from 'react'
-import type { NetworkProfile_NetworkProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
 import { fetchNetworkProfile } from '@/modules/networks/lib/fetch-networks'
 
 /**
  * Module-level cache for stable Promise references
  */
-const networkCache = new Map<string, Promise<NetworkProfile_NetworkProfileState | undefined>>()
+const networkCache = new Map<string, Promise<Network | undefined>>()
 
 /**
  * Cached network profile fetcher with stable Promise references

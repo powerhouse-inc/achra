@@ -57,6 +57,7 @@ export type AddDriveResult = {
 
 export type AllNetworks = {
   __typename?: 'AllNetworks';
+  builders: Array<Builder>;
   documentType?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['PHID']['output']>;
   network?: Maybe<Network>;
@@ -134,6 +135,126 @@ export type AnalyticsSeriesDimension = {
   label?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   path?: Maybe<Scalars['String']['output']>;
+};
+
+export type Builder = {
+  __typename?: 'Builder';
+  description: Scalars['String']['output'];
+  icon: Scalars['String']['output'];
+  id?: Maybe<Scalars['PHID']['output']>;
+  name: Scalars['String']['output'];
+};
+
+export type BuilderProfile = IDocument & {
+  __typename?: 'BuilderProfile';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: BuilderProfile_BuilderProfileState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: BuilderProfile_BuilderProfileState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type BuilderProfileOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: BuilderProfile Document */
+export type BuilderProfileQueries = {
+  __typename?: 'BuilderProfileQueries';
+  getDocument?: Maybe<BuilderProfile>;
+  getDocuments?: Maybe<Array<BuilderProfile>>;
+};
+
+
+/** Queries: BuilderProfile Document */
+export type BuilderProfileQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
+
+/** Queries: BuilderProfile Document */
+export type BuilderProfileQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
+};
+
+export type BuilderProfile_BuilderProfileState = {
+  __typename?: 'BuilderProfile_BuilderProfileState';
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['URL']['output']>;
+  id?: Maybe<Scalars['PHID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+};
+
+/** Module: Builder */
+export type BuilderProfile_UpdateProfileInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['URL']['input']>;
+  id?: InputMaybe<Scalars['PHID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Builders = IDocument & {
+  __typename?: 'Builders';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Builders_BuildersState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Builders_BuildersState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type BuildersOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: Builders Document */
+export type BuildersQueries = {
+  __typename?: 'BuildersQueries';
+  getDocument?: Maybe<Builders>;
+  getDocuments?: Maybe<Array<Builders>>;
+};
+
+
+/** Queries: Builders Document */
+export type BuildersQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
+
+/** Queries: Builders Document */
+export type BuildersQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
+};
+
+/** Module: Builders */
+export type Builders_AddBuilderInput = {
+  builderPhid: Scalars['PHID']['input'];
+};
+
+export type Builders_BuildersState = {
+  __typename?: 'Builders_BuildersState';
+  builders: Array<Scalars['PHID']['output']>;
+};
+
+export type Builders_RemoveBuilderInput = {
+  builderPhid: Scalars['PHID']['input'];
 };
 
 export type ClientInfo = {
@@ -463,9 +584,14 @@ export type MultiCurrencyConversions = {
   start?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type Mutation = {
   __typename?: 'Mutation';
+  BuilderProfile_createDocument?: Maybe<Scalars['String']['output']>;
+  BuilderProfile_updateProfile?: Maybe<Scalars['Int']['output']>;
+  Builders_addBuilder?: Maybe<Scalars['Int']['output']>;
+  Builders_createDocument?: Maybe<Scalars['String']['output']>;
+  Builders_removeBuilder?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_createDocument?: Maybe<Scalars['String']['output']>;
   NetworkProfile_setCategory?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_setDescription?: Maybe<Scalars['Int']['output']>;
@@ -553,14 +679,52 @@ export type Mutation = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_UpdateProfileArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_UpdateProfileInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilders_AddBuilderArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Builders_AddBuilderInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilders_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilders_RemoveBuilderArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Builders_RemoveBuilderInput>;
+};
+
+
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetCategoryArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -568,7 +732,7 @@ export type MutationNetworkProfile_SetCategoryArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetDescriptionArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -576,7 +740,7 @@ export type MutationNetworkProfile_SetDescriptionArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetDiscordArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -584,7 +748,7 @@ export type MutationNetworkProfile_SetDiscordArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetGithubArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -592,7 +756,7 @@ export type MutationNetworkProfile_SetGithubArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetIconArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -600,7 +764,7 @@ export type MutationNetworkProfile_SetIconArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetLogoArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -608,7 +772,7 @@ export type MutationNetworkProfile_SetLogoArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetLogoBigArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -616,7 +780,7 @@ export type MutationNetworkProfile_SetLogoBigArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetProfileNameArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -624,7 +788,7 @@ export type MutationNetworkProfile_SetProfileNameArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetWebsiteArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -632,7 +796,7 @@ export type MutationNetworkProfile_SetWebsiteArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetXArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -640,7 +804,7 @@ export type MutationNetworkProfile_SetXArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationNetworkProfile_SetYoutubeArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -648,7 +812,7 @@ export type MutationNetworkProfile_SetYoutubeArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_AddBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -656,7 +820,7 @@ export type MutationPaymentTerms_AddBonusClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_AddMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -664,7 +828,7 @@ export type MutationPaymentTerms_AddMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_AddPenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -672,14 +836,14 @@ export type MutationPaymentTerms_AddPenaltyClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_DeleteBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -687,7 +851,7 @@ export type MutationPaymentTerms_DeleteBonusClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_DeleteMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -695,7 +859,7 @@ export type MutationPaymentTerms_DeleteMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_DeletePenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -703,7 +867,7 @@ export type MutationPaymentTerms_DeletePenaltyClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_ReorderMilestonesArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -711,7 +875,7 @@ export type MutationPaymentTerms_ReorderMilestonesArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_SetBasicTermsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -719,7 +883,7 @@ export type MutationPaymentTerms_SetBasicTermsArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_SetEscrowDetailsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -727,7 +891,7 @@ export type MutationPaymentTerms_SetEscrowDetailsArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_SetEvaluationTermsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -735,7 +899,7 @@ export type MutationPaymentTerms_SetEvaluationTermsArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_SetTimeAndMaterialsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -743,7 +907,7 @@ export type MutationPaymentTerms_SetTimeAndMaterialsArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_UpdateBonusClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -751,7 +915,7 @@ export type MutationPaymentTerms_UpdateBonusClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_UpdateMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -759,7 +923,7 @@ export type MutationPaymentTerms_UpdateMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_UpdateMilestoneStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -767,7 +931,7 @@ export type MutationPaymentTerms_UpdateMilestoneStatusArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_UpdatePenaltyClauseArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -775,7 +939,7 @@ export type MutationPaymentTerms_UpdatePenaltyClauseArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationPaymentTerms_UpdateStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -783,7 +947,7 @@ export type MutationPaymentTerms_UpdateStatusArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_AddContextDocumentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -791,7 +955,7 @@ export type MutationRequestForProposals_AddContextDocumentArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_AddProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -799,7 +963,7 @@ export type MutationRequestForProposals_AddProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_ChangeProposalStatusArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -807,14 +971,14 @@ export type MutationRequestForProposals_ChangeProposalStatusArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_EditRfpArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -822,7 +986,7 @@ export type MutationRequestForProposals_EditRfpArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_RemoveContextDocumentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -830,7 +994,7 @@ export type MutationRequestForProposals_RemoveContextDocumentArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationRequestForProposals_RemoveProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -838,7 +1002,7 @@ export type MutationRequestForProposals_RemoveProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -846,7 +1010,7 @@ export type MutationScopeOfWork_AddAgentArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddCoordinatorArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -854,7 +1018,7 @@ export type MutationScopeOfWork_AddCoordinatorArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -862,7 +1026,7 @@ export type MutationScopeOfWork_AddDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddDeliverableInSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -870,7 +1034,7 @@ export type MutationScopeOfWork_AddDeliverableInSetArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -878,7 +1042,7 @@ export type MutationScopeOfWork_AddKeyResultArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -886,7 +1050,7 @@ export type MutationScopeOfWork_AddMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddMilestoneDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -894,7 +1058,7 @@ export type MutationScopeOfWork_AddMilestoneDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -902,7 +1066,7 @@ export type MutationScopeOfWork_AddProjectArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddProjectDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -910,7 +1074,7 @@ export type MutationScopeOfWork_AddProjectDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_AddRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -918,14 +1082,14 @@ export type MutationScopeOfWork_AddRoadmapArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -933,7 +1097,7 @@ export type MutationScopeOfWork_EditAgentArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -941,7 +1105,7 @@ export type MutationScopeOfWork_EditDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditDeliverablesSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -949,7 +1113,7 @@ export type MutationScopeOfWork_EditDeliverablesSetArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -957,7 +1121,7 @@ export type MutationScopeOfWork_EditKeyResultArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -965,7 +1129,7 @@ export type MutationScopeOfWork_EditMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -973,7 +1137,7 @@ export type MutationScopeOfWork_EditRoadmapArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_EditScopeOfWorkArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -981,7 +1145,7 @@ export type MutationScopeOfWork_EditScopeOfWorkArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveAgentArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -989,7 +1153,7 @@ export type MutationScopeOfWork_RemoveAgentArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveCoordinatorArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -997,7 +1161,7 @@ export type MutationScopeOfWork_RemoveCoordinatorArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1005,7 +1169,7 @@ export type MutationScopeOfWork_RemoveDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveDeliverableInSetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1013,7 +1177,7 @@ export type MutationScopeOfWork_RemoveDeliverableInSetArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveKeyResultArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1021,7 +1185,7 @@ export type MutationScopeOfWork_RemoveKeyResultArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveMilestoneArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1029,7 +1193,7 @@ export type MutationScopeOfWork_RemoveMilestoneArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveMilestoneDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1037,7 +1201,7 @@ export type MutationScopeOfWork_RemoveMilestoneDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1045,7 +1209,7 @@ export type MutationScopeOfWork_RemoveProjectArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveProjectDeliverableArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1053,7 +1217,7 @@ export type MutationScopeOfWork_RemoveProjectDeliverableArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_RemoveRoadmapArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1061,7 +1225,7 @@ export type MutationScopeOfWork_RemoveRoadmapArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_SetDeliverableBudgetAnchorProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1069,7 +1233,7 @@ export type MutationScopeOfWork_SetDeliverableBudgetAnchorProjectArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_SetDeliverableProgressArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1077,7 +1241,7 @@ export type MutationScopeOfWork_SetDeliverableProgressArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_SetProjectMarginArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1085,7 +1249,7 @@ export type MutationScopeOfWork_SetProjectMarginArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_SetProjectTotalBudgetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1093,7 +1257,7 @@ export type MutationScopeOfWork_SetProjectTotalBudgetArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_UpdateProjectArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1101,7 +1265,7 @@ export type MutationScopeOfWork_UpdateProjectArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationScopeOfWork_UpdateProjectOwnerArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1109,7 +1273,7 @@ export type MutationScopeOfWork_UpdateProjectOwnerArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_AddAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1117,7 +1281,7 @@ export type MutationWorkstream_AddAlternativeProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_AddPaymentRequestArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1125,14 +1289,14 @@ export type MutationWorkstream_AddPaymentRequestArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_EditAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1140,7 +1304,7 @@ export type MutationWorkstream_EditAlternativeProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_EditClientInfoArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1148,7 +1312,7 @@ export type MutationWorkstream_EditClientInfoArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_EditInitialProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1156,7 +1320,7 @@ export type MutationWorkstream_EditInitialProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_EditWorkstreamArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1164,7 +1328,7 @@ export type MutationWorkstream_EditWorkstreamArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_RemoveAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1172,7 +1336,7 @@ export type MutationWorkstream_RemoveAlternativeProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_RemovePaymentRequestArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1180,7 +1344,7 @@ export type MutationWorkstream_RemovePaymentRequestArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationWorkstream_SetRequestForProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -1188,7 +1352,7 @@ export type MutationWorkstream_SetRequestForProposalArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationAddDriveArgs = {
   icon?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -1198,20 +1362,20 @@ export type MutationAddDriveArgs = {
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationDeleteDriveArgs = {
   id: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationSetDriveIconArgs = {
   icon: Scalars['String']['input'];
   id: Scalars['String']['input'];
 };
 
 
-/** Mutations: NetworkProfile */
+/** Mutations: BuilderProfile */
 export type MutationSetDriveNameArgs = {
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -1220,6 +1384,8 @@ export type MutationSetDriveNameArgs = {
 export type Network = {
   __typename?: 'Network';
   category: Array<NetworkCategory>;
+  darkThemeIcon: Scalars['String']['output'];
+  darkThemeLogo: Scalars['String']['output'];
   description: Scalars['String']['output'];
   discord?: Maybe<Scalars['String']['output']>;
   github?: Maybe<Scalars['String']['output']>;
@@ -1291,6 +1457,8 @@ export enum NetworkProfile_NetworkCategory {
 export type NetworkProfile_NetworkProfileState = {
   __typename?: 'NetworkProfile_NetworkProfileState';
   category: Array<NetworkProfile_NetworkCategory>;
+  darkThemeIcon: Scalars['String']['output'];
+  darkThemeLogo: Scalars['String']['output'];
   description: Scalars['String']['output'];
   discord?: Maybe<Scalars['String']['output']>;
   github?: Maybe<Scalars['String']['output']>;
@@ -1321,7 +1489,8 @@ export type NetworkProfile_SetGithubInput = {
 
 /** Module: NetworkProfileManagement */
 export type NetworkProfile_SetIconInput = {
-  icon: Scalars['String']['input'];
+  darkThemeIcon?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NetworkProfile_SetLogoBigInput = {
@@ -1329,7 +1498,8 @@ export type NetworkProfile_SetLogoBigInput = {
 };
 
 export type NetworkProfile_SetLogoInput = {
-  logo: Scalars['String']['input'];
+  darkThemeLogo?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NetworkProfile_SetProfileNameInput = {
@@ -1782,6 +1952,8 @@ export enum ProposalStatus {
 /** Subgraph definition */
 export type Query = {
   __typename?: 'Query';
+  BuilderProfile?: Maybe<BuilderProfileQueries>;
+  Builders?: Maybe<BuildersQueries>;
   NetworkProfile?: Maybe<NetworkProfileQueries>;
   PaymentTerms?: Maybe<PaymentTermsQueries>;
   RequestForProposals?: Maybe<RequestForProposalsQueries>;
@@ -2998,6 +3170,11 @@ export type ScopeOfWorkByNetworkOrStatusFilter = {
   workstreamStatus?: InputMaybe<WorkstreamStatus>;
 };
 
+export type AllNetworksQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name: string, description: string, category: Array<NetworkCategory>, logo: string, logoBig: string, icon: string } | null }> };
+
 export type NetworkProfileQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3034,6 +3211,60 @@ export type WorkstreamsQueryVariables = Exact<{
 export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, client?: { __typename?: 'ClientInfo', name?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 
+
+export const AllNetworksDocument = `
+    query AllNetworks {
+  allNetworks {
+    network {
+      name
+      description
+      category
+      logo
+      logoBig
+      icon
+    }
+  }
+}
+    `;
+
+export const useAllNetworksQuery = <
+      TData = AllNetworksQuery,
+      TError = unknown
+    >(
+      variables?: AllNetworksQueryVariables,
+      options?: Omit<UseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<AllNetworksQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AllNetworks'] : ['AllNetworks', variables],
+    queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
+    ...options
+  }
+    )};
+
+useAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => variables === undefined ? ['AllNetworks'] : ['AllNetworks', variables];
+
+export const useSuspenseAllNetworksQuery = <
+      TData = AllNetworksQuery,
+      TError = unknown
+    >(
+      variables?: AllNetworksQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<AllNetworksQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AllNetworksSuspense'] : ['AllNetworksSuspense', variables],
+    queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => variables === undefined ? ['AllNetworksSuspense'] : ['AllNetworksSuspense', variables];
+
+
+useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
 
 export const NetworkProfileDocument = `
     query NetworkProfile($docId: PHID!) {

@@ -7,15 +7,23 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 
-export function RfpEmpty() {
+interface RfpEmptyProps {
+  title?: string
+  description?: string
+}
+
+export function RfpEmpty({
+  title = 'No request for proposal found',
+  description = 'No request for proposal found for this workstream.',
+}: RfpEmptyProps) {
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <Folder />
         </EmptyMedia>
-        <EmptyTitle>No request for proposal found </EmptyTitle>
-        <EmptyDescription>No request for proposal found for this workstream.</EmptyDescription>
+        <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
     </Empty>
   )

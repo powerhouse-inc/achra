@@ -1,0 +1,12 @@
+query AllNetworks {
+  allNetworks {
+    network {
+      name
+      description
+      category
+      logo
+      logoBig
+      icon
+    }
+  }
+}

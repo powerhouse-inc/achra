@@ -1,13 +1,10 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  useRfpByWorkstreamQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
 import { formatBudgetRange, formatDeadline } from '@/modules/rfp/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -31,17 +28,23 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
   })()
 
   const rfpData = data.rfpByWorkstream
-
   if (rfpData.length === 0) {
     return (
-      <PageContent className="h-screen">
+      <PageContent className="flex h-[calc(100vh-14rem)] items-center justify-center overflow-hidden">
         <RfpEmpty />
       </PageContent>
     )
   }
 
-  const workstreamRfp = rfpData[0]
+  const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
+
+  const isRfpContentEmpty =
+    !rfp ||
+    ((!rfp.briefing || rfp.briefing.trim() === '') &&
+      rfp.budgetCurrency == null &&
+      (!rfp.eligibilityCriteria || rfp.eligibilityCriteria.trim() === '') &&
+      (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === ''))
 
   return (
     <main>
@@ -58,9 +61,9 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                    {rfp?.title && (
+                    {workstreamRfp.title && (
                       <div className="text-base/6 font-bold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl md:leading-[120%] xl:text-2xl xl:leading-[120%] xl:font-bold">
-                        {rfp.title}
+                        {workstreamRfp.title}
                       </div>
                     )}
                     {workstreamRfp.code && (
@@ -71,7 +74,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   </div>
                   {workstreamRfp.status && (
                     <div className="hidden md:flex">
-                      <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
+                      <WorkstreamStatusChip status={workstreamRfp.status} />
                     </div>
                   )}
                 </div>
@@ -79,7 +82,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   {workstreamRfp.code && <div className="flex sm:hidden">{workstreamRfp.code}</div>}
                   {workstreamRfp.status && (
                     <div className="flex md:hidden">
-                      <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />
+                      <WorkstreamStatusChip status={workstreamRfp.status} />
                     </div>
                   )}
                   <div className="text-primary-foreground hidden md:flex">
@@ -103,6 +106,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   keyIcon={CalendarClock}
                   value={formatDeadline(rfp)}
                 />
+
                 <ProposalKeyValueElement
                   keyValue="Budget Range"
                   keyIcon={HandCoins}
@@ -120,43 +124,54 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </div>
             </div>
 
-            <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-              {rfp?.summary && (
-                <p className="text-sm/5.5 font-normal xl:text-base/6">{rfp.summary}</p>
-              )}
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {rfp?.eligibilityCriteria && (
-                  <div className="bg-background rounded-lg p-3 transition-all">
-                    <div className="flex flex-col gap-2">
-                      <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
-                        Eligibility Criteria
-                      </h2>
-                      <Markdown>{rfp.eligibilityCriteria}</Markdown>
-                    </div>
-                  </div>
-                )}
-                {rfp?.evaluationCriteria && (
-                  <div className="bg-background rounded-lg p-3 transition-all">
-                    <div className="flex flex-col gap-2">
-                      <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
-                        Evaluation Criteria
-                      </h2>
-                      <Markdown>{rfp.evaluationCriteria}</Markdown>
-                    </div>
-                  </div>
-                )}
+            {isRfpContentEmpty ? (
+              <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+                <RfpEmpty
+                  title="No details found"
+                  description="No details, briefing or other information found for this workstream."
+                />
               </div>
-            </div>
-            {rfp?.briefing && (
-              <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
-                <div className="flex flex-col rounded-lg transition-all">
-                  <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
-                  <Separator className="text-border mt-1" />
-                  <div className="px-4 sm:px-3 md:px-2">
-                    <Markdown>{rfp.briefing}</Markdown>
+            ) : (
+              <>
+                <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+                  {rfp.summary && (
+                    <p className="text-sm/5.5 font-normal xl:text-base/6">{rfp.summary}</p>
+                  )}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {rfp.eligibilityCriteria && (
+                      <div className="bg-background rounded-lg p-3 transition-all">
+                        <div className="flex flex-col gap-2">
+                          <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
+                            Eligibility Criteria
+                          </h2>
+                          <Markdown>{rfp.eligibilityCriteria}</Markdown>
+                        </div>
+                      </div>
+                    )}
+                    {rfp.evaluationCriteria && (
+                      <div className="bg-background rounded-lg p-3 transition-all">
+                        <div className="flex flex-col gap-2">
+                          <h2 className="text-sm/5.5 font-semibold xl:text-base/6">
+                            Evaluation Criteria
+                          </h2>
+                          <Markdown>{rfp.evaluationCriteria}</Markdown>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
+                {rfp.briefing && (
+                  <div className="flex flex-col px-2 pt-2 pb-4 sm:px-3 sm:pt-3 sm:pb-4 md:p-4">
+                    <div className="flex flex-col rounded-lg transition-all">
+                      <div className="text-sm/5.5 font-semibold xl:text-base/6">Briefing</div>
+                      <Separator className="text-border mt-1" />
+                      <div className="px-4 sm:px-3 md:px-2">
+                        <Markdown>{rfp.briefing}</Markdown>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </Card>
         </ErrorBoundaryWithPresets>
