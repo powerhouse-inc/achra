@@ -10,7 +10,7 @@ import { NetworkCard } from '../network-card'
 export async function NetworkGrid() {
   const data = await useAllNetworksQuery.fetcher()()
 
-  const networks = data?.allNetworks ?? []
+  const networks = data.allNetworks
 
   if (networks.length === 0) {
     return (
@@ -25,7 +25,7 @@ export async function NetworkGrid() {
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      {networks?.map((network) => {
+      {networks.map((network) => {
         if (!network.network) return null
         return <NetworkCard key={network.network.name} profile={network.network} />
       })}
