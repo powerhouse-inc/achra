@@ -19,7 +19,7 @@ export function TitleComponent({
   return (
     <div
       className={cn(
-        'mt-2 mb-6 flex flex-col sm:mt-0.25 md:-mt-[3px]',
+        'mb-6 flex flex-col sm:mt-0.25 md:-mt-[3px]',
         levelNumber === 1 ? 'gap-2' : 'gap-0',
       )}
     >
