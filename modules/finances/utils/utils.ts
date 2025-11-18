@@ -95,7 +95,7 @@ export function getBreadcrumbItems(
       // it is the first level
       items.push({
         label: networkName,
-        href: `/network/${slug}/finances?year=${year}` as Route,
+        href: `/network/${slug}` as Route,
       })
     } else {
       // it is a deeper level
@@ -108,6 +108,10 @@ export function getBreadcrumbItems(
         href: `/network/${slug}/finances/${segmentedCodePath.slice(1, index + 1).join('/')}?year=${year}` as Route,
       })
     }
+  })
+  items.push({
+    label: 'Finances',
+    href: `/network/${slug}/finances` as Route,
   })
 
   return items
