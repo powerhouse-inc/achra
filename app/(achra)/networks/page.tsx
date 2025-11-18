@@ -4,6 +4,7 @@ import {
   NetworkGridHydration,
   NetworkGridSkeleton,
 } from '@/modules/networks/components/network-grid'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function NetworksPage() {
@@ -13,11 +14,13 @@ export default function NetworksPage() {
         Networks
       </h1>
 
-      <Suspense fallback={<NetworkGridSkeleton />}>
-        <NetworkGridHydration>
-          <NetworkGrid />
-        </NetworkGridHydration>
-      </Suspense>
+      <ErrorBoundaryWithPresets>
+        <Suspense fallback={<NetworkGridSkeleton />}>
+          <NetworkGridHydration>
+            <NetworkGrid />
+          </NetworkGridHydration>
+        </Suspense>
+      </ErrorBoundaryWithPresets>
     </PageContent>
   )
 }

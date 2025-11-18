@@ -1,5 +1,5 @@
 import {
-  type NetworkProfile_NetworkProfileState,
+  type Network,
   NetworkProfileDocument,
   type NetworkProfileQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -14,9 +14,7 @@ export async function fetchPowerhouseNetworkProfile(): Promise<NetworkProfileQue
   })() as Promise<NetworkProfileQuery>
 }
 
-export async function fetchNetworkProfile(
-  networkSlug: string,
-): Promise<NetworkProfile_NetworkProfileState | undefined> {
+export async function fetchNetworkProfile(networkSlug: string): Promise<Network | undefined> {
   if (!networkSlug) {
     return undefined
   }

@@ -1,14 +1,14 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { NetworkProfile_NetworkProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 import { slugify } from '@/modules/shared/lib/slug'
 import NetworkChip from './network-category'
 
 interface NetworkCardProps {
-  profile: NetworkProfile_NetworkProfileState
+  profile: Network
 }
 
 export function NetworkCard({ profile }: NetworkCardProps) {
