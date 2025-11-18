@@ -1,7 +1,5 @@
 import { FilePenLine } from 'lucide-react'
-import { Suspense } from 'react'
-import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { RfpDetailsLinkWrapper } from '@/modules/rfp/rfp-details-link-wrapper'
+import type { FullQueryWorkstream } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -9,59 +7,77 @@ import { NavigationHeader } from '@/modules/shared/components/navigation-header'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { slugify } from '@/modules/shared/lib/slug'
+import { countRoadmapStats } from '../../lib/roadmap-stats'
 import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
 import WorkstreamStats from '../workstream-stats/workstream-stats'
 import ProposalCardsGrid from './proposal-cards-grid'
-import StatCards from './stat-cards'
+
+import { StatCards } from './stat-cards'
 import type { Route } from 'next'
 
-// TODO: remove this once the component is integrated with the API
-const proposalDescriptionMarkdown = `
-The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, which aims to enhance community engagement through innovative digital solutions. Key milestones include:
-
-1. **Project Kickoff**: Scheduled for January 15, 2025, where team roles and responsibilities will be defined.
-2. **Phase 1 - Research & Development**: From February to April 2025, focusing on user feedback and prototype testing.
-3. **Phase 2 - Implementation**: Expected to begin in May 2025, where the developed solutions will be integrated into the existing platform.
-4. **Final Review & Launch**: Set for September 12, 2025, culminating in a community event to showcase the new features and gather further input.
-
-This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
-`
-
 interface WorkstreamCardProps {
-  params: Promise<{ slug: string }>
+  workstream: FullQueryWorkstream
 }
-export default function WorkstreamCard({ params }: WorkstreamCardProps) {
+
+export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
+  const networkSlug = slugify(workstream.client?.name ?? 'Unknown')
+  const workstreamSlug = slugify(workstream.title ?? 'Unknown')
+
+  const { milestones, deliverables } = countRoadmapStats(workstream)
+
   return (
     <Card className="gap-0 p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <NavigationHeader
-            title="Vetra Beta Launch"
-            href={'/network/powerhouse/workstream/vetra-beta-launch' as Route}
+            title={workstream.title ?? 'Unknown'}
+            href={`/network/${networkSlug}/workstream/${workstreamSlug}` as Route}
           />
-          <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
+
+          {workstream.status && <WorkstreamStatusChip status={workstream.status} />}
         </div>
 
-        <WorkstreamStats />
+        <WorkstreamStats
+          issuer="Not specified"
+          budgetMin={workstream.rfp?.budgetMin}
+          budgetMax={workstream.rfp?.budgetMax}
+          budgetCurrency={workstream.rfp?.budgetCurrency}
+          submissionDeadline={workstream.rfp?.submissionDeadline}
+        />
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-          <Markdown className="line-clamp-6 sm:line-clamp-4">
-            {proposalDescriptionMarkdown}
-          </Markdown>
+          {workstream.rfp?.summary ? (
+            <Markdown className="line-clamp-6 sm:line-clamp-4">{workstream.rfp.summary}</Markdown>
+          ) : (
+            <div className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">No summary available</div>
+          )}
 
-          <Suspense fallback={<Skeleton className="h-9 w-36" />}>
-            <RfpDetailsLinkWrapper params={params} />
-          </Suspense>
+          <InternalLink
+            href={'/network/powerhouse/workstream/wp25/rfp' as Route}
+            className="ml-auto max-w-fit"
+            variant="outline"
+          >
+            RFP Details
+          </InternalLink>
         </div>
       </div>
 
       <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-        <InitialProposalHeader slug="powerhouse" workstreamSlug="vetra-beta-launch" />
+        <InitialProposalHeader
+          networkSlug={networkSlug}
+          workstreamSlug={workstreamSlug}
+          proposalStatus={workstream.initialProposal?.status}
+          proposalAuthor={workstream.initialProposal?.author.name}
+        />
 
-        <StatCards />
+        <StatCards milestones={milestones} deliverables={deliverables} />
 
-        <InternalLink href="#" className="ml-auto max-w-fit sm:hidden" variant="outline">
+        <InternalLink
+          href={`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal` as Route}
+          className="ml-auto max-w-fit sm:hidden"
+          variant="outline"
+        >
           View Proposal
         </InternalLink>
 

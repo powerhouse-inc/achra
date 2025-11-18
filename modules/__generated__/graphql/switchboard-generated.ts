@@ -136,52 +136,11 @@ export type AnalyticsSeriesDimension = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
-export enum BillingFrequency {
-  Biweekly = 'BIWEEKLY',
-  Monthly = 'MONTHLY',
-  Weekly = 'WEEKLY'
-}
-
-export type BonusClause = {
-  __typename?: 'BonusClause';
-  bonusAmount: Scalars['Amount']['output'];
-  comment?: Maybe<Scalars['String']['output']>;
-  condition: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-};
-
-export type BudgetRange = {
-  __typename?: 'BudgetRange';
-  currency?: Maybe<Scalars['String']['output']>;
-  max?: Maybe<Scalars['Float']['output']>;
-  min?: Maybe<Scalars['Float']['output']>;
-};
-
-export type BudgetRangeInput = {
-  currency?: InputMaybe<Scalars['String']['input']>;
-  max?: InputMaybe<Scalars['Float']['input']>;
-  min?: InputMaybe<Scalars['Float']['input']>;
-};
-
 export type ClientInfo = {
   __typename?: 'ClientInfo';
   icon?: Maybe<Scalars['URL']['output']>;
   id: Scalars['PHID']['output'];
   name?: Maybe<Scalars['String']['output']>;
-};
-
-export type ContextDocument = {
-  __typename?: 'ContextDocument';
-  name: Scalars['String']['output'];
-  url: Scalars['URL']['output'];
-};
-
-export type CostAndMaterials = {
-  __typename?: 'CostAndMaterials';
-  billingFrequency: BillingFrequency;
-  hourlyRate?: Maybe<Scalars['Amount']['output']>;
-  timesheetRequired: Scalars['Boolean']['output'];
-  variableCap?: Maybe<Scalars['Amount']['output']>;
 };
 
 export type CurrencyConversion = {
@@ -426,30 +385,6 @@ export type DriveMeta = {
   preferredEditor?: Maybe<Scalars['String']['output']>;
 };
 
-export type Escrow = {
-  __typename?: 'Escrow';
-  amountHeld: Scalars['Amount']['output'];
-  escrowProvider?: Maybe<Scalars['String']['output']>;
-  proofOfFundsDocumentId?: Maybe<Scalars['String']['output']>;
-  releaseConditions: Scalars['String']['output'];
-};
-
-export enum EvaluationFrequency {
-  Monthly = 'MONTHLY',
-  PerMilestone = 'PER_MILESTONE',
-  Weekly = 'WEEKLY'
-}
-
-export type EvaluationTerms = {
-  __typename?: 'EvaluationTerms';
-  commentsVisibleToClient: Scalars['Boolean']['output'];
-  criteria: Array<Scalars['String']['output']>;
-  evaluationFrequency: EvaluationFrequency;
-  evaluatorTeam: Scalars['String']['output'];
-  impactsPayout: Scalars['Boolean']['output'];
-  impactsReputation: Scalars['Boolean']['output'];
-};
-
 export type FullProposal = {
   __typename?: 'FullProposal';
   author: ProposalAuthor;
@@ -515,24 +450,6 @@ export type LinkedDocument = {
   stateJSON?: Maybe<Scalars['JSON']['output']>;
 };
 
-export type Milestone = {
-  __typename?: 'Milestone';
-  amount: Scalars['Amount']['output'];
-  expectedCompletionDate?: Maybe<Scalars['Date']['output']>;
-  id: Scalars['OID']['output'];
-  name: Scalars['String']['output'];
-  payoutStatus: MilestonePayoutStatus;
-  requiresApproval: Scalars['Boolean']['output'];
-};
-
-export enum MilestonePayoutStatus {
-  Approved = 'APPROVED',
-  Paid = 'PAID',
-  Pending = 'PENDING',
-  ReadyForReview = 'READY_FOR_REVIEW',
-  Rejected = 'REJECTED'
-}
-
 export type MultiCurrencyConversions = {
   conversions: Array<InputMaybe<CurrencyConversion>>;
   currency?: InputMaybe<Scalars['String']['input']>;
@@ -570,10 +487,9 @@ export type Mutation = {
   PaymentTerms_deletePenaltyClause?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_reorderMilestones?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_setBasicTerms?: Maybe<Scalars['Int']['output']>;
-  PaymentTerms_setCostAndMaterials?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_setEscrowDetails?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_setEvaluationTerms?: Maybe<Scalars['Int']['output']>;
-  PaymentTerms_setRetainerDetails?: Maybe<Scalars['Int']['output']>;
+  PaymentTerms_setTimeAndMaterials?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_updateBonusClause?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_updateMilestone?: Maybe<Scalars['Int']['output']>;
   PaymentTerms_updateMilestoneStatus?: Maybe<Scalars['Int']['output']>;
@@ -804,14 +720,6 @@ export type MutationPaymentTerms_SetBasicTermsArgs = {
 
 
 /** Mutations: NetworkProfile */
-export type MutationPaymentTerms_SetCostAndMaterialsArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<PaymentTerms_SetCostAndMaterialsInput>;
-};
-
-
-/** Mutations: NetworkProfile */
 export type MutationPaymentTerms_SetEscrowDetailsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -828,10 +736,10 @@ export type MutationPaymentTerms_SetEvaluationTermsArgs = {
 
 
 /** Mutations: NetworkProfile */
-export type MutationPaymentTerms_SetRetainerDetailsArgs = {
+export type MutationPaymentTerms_SetTimeAndMaterialsArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<PaymentTerms_SetRetainerDetailsInput>;
+  input?: InputMaybe<PaymentTerms_SetTimeAndMaterialsInput>;
 };
 
 
@@ -1576,18 +1484,6 @@ export type Pt_Retainer = {
   startDate: Scalars['Date']['output'];
 };
 
-export enum PaymentCurrency {
-  Eur = 'EUR',
-  Gbp = 'GBP',
-  Usd = 'USD'
-}
-
-export enum PaymentModel {
-  CostAndMaterials = 'COST_AND_MATERIALS',
-  Milestone = 'MILESTONE',
-  Retainer = 'RETAINER'
-}
-
 export type PaymentTerms = IDocument & {
   __typename?: 'PaymentTerms';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -1608,7 +1504,7 @@ export type PaymentTermsOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Queries: PaymentTerms */
+/** Queries: PaymentTerms Document */
 export type PaymentTermsQueries = {
   __typename?: 'PaymentTermsQueries';
   getDocument?: Maybe<PaymentTerms>;
@@ -1616,42 +1512,17 @@ export type PaymentTermsQueries = {
 };
 
 
-/** Queries: PaymentTerms */
+/** Queries: PaymentTerms Document */
 export type PaymentTermsQueriesGetDocumentArgs = {
   docId: Scalars['PHID']['input'];
   driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 
-/** Queries: PaymentTerms */
+/** Queries: PaymentTerms Document */
 export type PaymentTermsQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
 };
-
-export type PaymentTermsState = {
-  __typename?: 'PaymentTermsState';
-  bonusClauses: Array<BonusClause>;
-  costAndMaterials?: Maybe<CostAndMaterials>;
-  currency: PaymentCurrency;
-  escrowDetails?: Maybe<Escrow>;
-  evaluation?: Maybe<EvaluationTerms>;
-  milestoneSchedule: Array<Milestone>;
-  payer: Scalars['String']['output'];
-  paymentModel: PaymentModel;
-  penaltyClauses: Array<PenaltyClause>;
-  proposer: Scalars['String']['output'];
-  retainerDetails?: Maybe<Retainer>;
-  status: PaymentTermsStatus;
-  totalAmount?: Maybe<Scalars['Amount']['output']>;
-};
-
-/** Subgraph definition for PaymentTerms (payment-terms) */
-export enum PaymentTermsStatus {
-  Accepted = 'ACCEPTED',
-  Cancelled = 'CANCELLED',
-  Draft = 'DRAFT',
-  Submitted = 'SUBMITTED'
-}
 
 /** Module: Clauses */
 export type PaymentTerms_AddBonusClauseInput = {
@@ -1793,18 +1664,11 @@ export type PaymentTerms_ReorderMilestonesInput = {
 
 /** Module: Terms */
 export type PaymentTerms_SetBasicTermsInput = {
-  currency: PaymentCurrency;
+  currency: PaymentTerms_PaymentCurrency;
   payer: Scalars['String']['input'];
-  paymentModel: PaymentModel;
+  paymentModel: PaymentTerms_PaymentModel;
   proposer: Scalars['String']['input'];
   totalAmount?: InputMaybe<Scalars['Amount']['input']>;
-};
-
-export type PaymentTerms_SetCostAndMaterialsInput = {
-  billingFrequency: BillingFrequency;
-  hourlyRate?: InputMaybe<Scalars['Amount']['input']>;
-  timesheetRequired: Scalars['Boolean']['input'];
-  variableCap?: InputMaybe<Scalars['Amount']['input']>;
 };
 
 export type PaymentTerms_SetEscrowDetailsInput = {
@@ -1817,19 +1681,18 @@ export type PaymentTerms_SetEscrowDetailsInput = {
 export type PaymentTerms_SetEvaluationTermsInput = {
   commentsVisibleToClient: Scalars['Boolean']['input'];
   criteria: Array<Scalars['String']['input']>;
-  evaluationFrequency: EvaluationFrequency;
+  evaluationFrequency: PaymentTerms_EvaluationFrequency;
   evaluatorTeam: Scalars['String']['input'];
   impactsPayout: Scalars['Boolean']['input'];
   impactsReputation: Scalars['Boolean']['input'];
 };
 
-export type PaymentTerms_SetRetainerDetailsInput = {
-  autoRenew: Scalars['Boolean']['input'];
-  billingFrequency: BillingFrequency;
-  endDate?: InputMaybe<Scalars['Date']['input']>;
-  retainerAmount: Scalars['Amount']['input'];
-  servicesIncluded: Scalars['String']['input'];
-  startDate: Scalars['Date']['input'];
+export type PaymentTerms_SetTimeAndMaterialsInput = {
+  billingFrequency: PaymentTerms_BillingFrequency;
+  hourlyRate?: InputMaybe<Scalars['Amount']['input']>;
+  retainerAmount?: InputMaybe<Scalars['Amount']['input']>;
+  timesheetRequired: Scalars['Boolean']['input'];
+  variableCap?: InputMaybe<Scalars['Amount']['input']>;
 };
 
 export type PaymentTerms_TimeAndMaterials = {
@@ -1858,7 +1721,7 @@ export type PaymentTerms_UpdateMilestoneInput = {
 
 export type PaymentTerms_UpdateMilestoneStatusInput = {
   id: Scalars['OID']['input'];
-  payoutStatus: MilestonePayoutStatus;
+  payoutStatus: PaymentTerms_MilestonePayoutStatus;
 };
 
 export type PaymentTerms_UpdatePenaltyClauseInput = {
@@ -1869,15 +1732,7 @@ export type PaymentTerms_UpdatePenaltyClauseInput = {
 };
 
 export type PaymentTerms_UpdateStatusInput = {
-  status: PaymentTermsStatus;
-};
-
-export type PenaltyClause = {
-  __typename?: 'PenaltyClause';
-  comment?: Maybe<Scalars['String']['output']>;
-  condition: Scalars['String']['output'];
-  deductionAmount: Scalars['Amount']['output'];
-  id: Scalars['OID']['output'];
+  status: PaymentTerms_PaymentTermsStatus;
 };
 
 export type ProcessorWorkstream = {
@@ -1911,12 +1766,6 @@ export type ProposalAuthor = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
-export type ProposalAuthorInput = {
-  icon?: InputMaybe<Scalars['URL']['input']>;
-  id: Scalars['PHID']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
 export enum ProposalRole {
   Alternative = 'ALTERNATIVE',
   Awarded = 'AWARDED',
@@ -1924,13 +1773,6 @@ export enum ProposalRole {
 }
 
 export enum ProposalStatus {
-  Accepted = 'ACCEPTED',
-  Draft = 'DRAFT',
-  Rejected = 'REJECTED',
-  Submitted = 'SUBMITTED'
-}
-
-export enum ProposalStatusInput {
   Accepted = 'ACCEPTED',
   Draft = 'DRAFT',
   Rejected = 'REJECTED',
@@ -2010,22 +1852,7 @@ export type Rfp = {
   title: Scalars['String']['output'];
 };
 
-export enum RfpCommentatorType {
-  External = 'EXTERNAL',
-  Internal = 'INTERNAL'
-}
-
 export enum RfpStatus {
-  Awarded = 'AWARDED',
-  Canceled = 'CANCELED',
-  Closed = 'CLOSED',
-  Draft = 'DRAFT',
-  NotAwarded = 'NOT_AWARDED',
-  OpenForProposals = 'OPEN_FOR_PROPOSALS',
-  RequestForCommments = 'REQUEST_FOR_COMMMENTS'
-}
-
-export enum RfpStatusInput {
   Awarded = 'AWARDED',
   Canceled = 'CANCELED',
   Closed = 'CLOSED',
@@ -2055,7 +1882,7 @@ export type RequestForProposalsOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Queries: RequestForProposals */
+/** Queries: RequestForProposals Document */
 export type RequestForProposalsQueries = {
   __typename?: 'RequestForProposalsQueries';
   getDocument?: Maybe<RequestForProposals>;
@@ -2063,35 +1890,16 @@ export type RequestForProposalsQueries = {
 };
 
 
-/** Queries: RequestForProposals */
+/** Queries: RequestForProposals Document */
 export type RequestForProposalsQueriesGetDocumentArgs = {
   docId: Scalars['PHID']['input'];
   driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 
-/** Queries: RequestForProposals */
+/** Queries: RequestForProposals Document */
 export type RequestForProposalsQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
-};
-
-/** Subgraph definition for RequestForProposals (powerhouse/rfp) */
-export type RequestForProposalsState = {
-  __typename?: 'RequestForProposalsState';
-  briefing: Scalars['String']['output'];
-  budgetRange: BudgetRange;
-  code?: Maybe<Scalars['String']['output']>;
-  contextDocuments: Array<ContextDocument>;
-  deadline?: Maybe<Scalars['DateTime']['output']>;
-  eligibilityCriteria: Scalars['String']['output'];
-  evaluationCriteria: Scalars['String']['output'];
-  issuer: Scalars['ID']['output'];
-  proposals: Array<RfpProposal>;
-  rfpCommenter: Array<RfpCommenter>;
-  status: RfpStatus;
-  summary: Scalars['String']['output'];
-  tags?: Maybe<Array<Scalars['String']['output']>>;
-  title: Scalars['String']['output'];
 };
 
 /** Module: ContexDocument */
@@ -2105,8 +1913,8 @@ export type RequestForProposals_AddContextDocumentInput = {
 export type RequestForProposals_AddProposalInput = {
   budgetEstimate: Scalars['String']['input'];
   id: Scalars['OID']['input'];
-  paymentTerms: RfpPaymentTermInput;
-  proposalStatus: RfpProposalStatusInput;
+  paymentTerms: RequestForProposals_RfpPaymentTermInput;
+  proposalStatus: RequestForProposals_RfpProposalStatusInput;
   rfpId: Scalars['OID']['input'];
   submittedby?: InputMaybe<Scalars['OID']['input']>;
   summary: Scalars['String']['input'];
@@ -2120,9 +1928,15 @@ export type RequestForProposals_BudgetRange = {
   min?: Maybe<Scalars['Float']['output']>;
 };
 
+export type RequestForProposals_BudgetRangeInput = {
+  currency?: InputMaybe<Scalars['String']['input']>;
+  max?: InputMaybe<Scalars['Float']['input']>;
+  min?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type RequestForProposals_ChangeProposalStatusInput = {
   proposalId: Scalars['OID']['input'];
-  status: RfpProposalStatusInput;
+  status: RequestForProposals_RfpProposalStatusInput;
 };
 
 export type RequestForProposals_ContextDocument = {
@@ -2134,12 +1948,12 @@ export type RequestForProposals_ContextDocument = {
 /** Module: RfpState */
 export type RequestForProposals_EditRfpInput = {
   briefing?: InputMaybe<Scalars['String']['input']>;
-  budgetRange?: InputMaybe<BudgetRangeInput>;
+  budgetRange?: InputMaybe<RequestForProposals_BudgetRangeInput>;
   code?: InputMaybe<Scalars['String']['input']>;
   deadline?: InputMaybe<Scalars['DateTime']['input']>;
   eligibilityCriteria?: InputMaybe<Scalars['String']['input']>;
   evaluationCriteria?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<RfpStatusInput>;
+  status?: InputMaybe<RequestForProposals_RfpStatusInput>;
   summary?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<Array<Scalars['String']['input']>>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -2151,6 +1965,16 @@ export enum RequestForProposals_RfpCommentatorType {
 }
 
 export enum RequestForProposals_RfpStatus {
+  Awarded = 'AWARDED',
+  Canceled = 'CANCELED',
+  Closed = 'CLOSED',
+  Draft = 'DRAFT',
+  NotAwarded = 'NOT_AWARDED',
+  OpenForProposals = 'OPEN_FOR_PROPOSALS',
+  RequestForCommments = 'REQUEST_FOR_COMMMENTS'
+}
+
+export enum RequestForProposals_RfpStatusInput {
   Awarded = 'AWARDED',
   Canceled = 'CANCELED',
   Closed = 'CLOSED',
@@ -2212,6 +2036,14 @@ export enum RequestForProposals_RfpPaymentTerm {
   VariableCost = 'VARIABLE_COST'
 }
 
+export enum RequestForProposals_RfpPaymentTermInput {
+  Escrow = 'ESCROW',
+  MilestoneBasedAdvancePayment = 'MILESTONE_BASED_ADVANCE_PAYMENT',
+  MilestoneBasedFixedPrice = 'MILESTONE_BASED_FIXED_PRICE',
+  RetainerBased = 'RETAINER_BASED',
+  VariableCost = 'VARIABLE_COST'
+}
+
 export type RequestForProposals_RfpProposal = {
   __typename?: 'RequestForProposals_RfpProposal';
   budgetEstimate: Scalars['String']['output'];
@@ -2235,72 +2067,7 @@ export enum RequestForProposals_RfpProposalStatus {
   Withdrawn = 'WITHDRAWN'
 }
 
-export type Retainer = {
-  __typename?: 'Retainer';
-  autoRenew: Scalars['Boolean']['output'];
-  billingFrequency: BillingFrequency;
-  endDate?: Maybe<Scalars['Date']['output']>;
-  retainerAmount: Scalars['Amount']['output'];
-  servicesIncluded: Scalars['String']['output'];
-  startDate: Scalars['Date']['output'];
-};
-
-export enum RfpAgentType {
-  Ai = 'AI',
-  Group = 'GROUP',
-  Human = 'HUMAN'
-}
-
-export type RfpCommenter = {
-  __typename?: 'RfpCommenter';
-  agentType: RfpAgentType;
-  code: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  imageUrl?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
-  rfpCommentatorType: RfpCommentatorType;
-};
-
-export enum RfpPaymentTerm {
-  Escrow = 'ESCROW',
-  MilestoneBasedAdvancePayment = 'MILESTONE_BASED_ADVANCE_PAYMENT',
-  MilestoneBasedFixedPrice = 'MILESTONE_BASED_FIXED_PRICE',
-  RetainerBased = 'RETAINER_BASED',
-  VariableCost = 'VARIABLE_COST'
-}
-
-export enum RfpPaymentTermInput {
-  Escrow = 'ESCROW',
-  MilestoneBasedAdvancePayment = 'MILESTONE_BASED_ADVANCE_PAYMENT',
-  MilestoneBasedFixedPrice = 'MILESTONE_BASED_FIXED_PRICE',
-  RetainerBased = 'RETAINER_BASED',
-  VariableCost = 'VARIABLE_COST'
-}
-
-export type RfpProposal = {
-  __typename?: 'RfpProposal';
-  budgetEstimate: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
-  paymentTerms: RfpPaymentTerm;
-  proposalStatus: RfpProposalStatus;
-  submittedby?: Maybe<Scalars['OID']['output']>;
-  summary: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
-export enum RfpProposalStatus {
-  Approved = 'APPROVED',
-  ConditionallyApproved = 'CONDITIONALLY_APPROVED',
-  NeedsRevision = 'NEEDS_REVISION',
-  Opened = 'OPENED',
-  Rejected = 'REJECTED',
-  Revised = 'REVISED',
-  Submitted = 'SUBMITTED',
-  UnderReview = 'UNDER_REVIEW',
-  Withdrawn = 'WITHDRAWN'
-}
-
-export enum RfpProposalStatusInput {
+export enum RequestForProposals_RfpProposalStatusInput {
   Approved = 'APPROVED',
   ConditionallyApproved = 'CONDITIONALLY_APPROVED',
   NeedsRevision = 'NEEDS_REVISION',
@@ -3029,7 +2796,7 @@ export type WorkstreamFilter = {
   workstreamStatuses?: InputMaybe<Array<WorkstreamStatus>>;
 };
 
-/** Queries: Workstream */
+/** Queries: Workstream Document */
 export type WorkstreamQueries = {
   __typename?: 'WorkstreamQueries';
   getDocument?: Maybe<Workstream>;
@@ -3037,14 +2804,14 @@ export type WorkstreamQueries = {
 };
 
 
-/** Queries: Workstream */
+/** Queries: Workstream Document */
 export type WorkstreamQueriesGetDocumentArgs = {
   docId: Scalars['PHID']['input'];
   driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 
-/** Queries: Workstream */
+/** Queries: Workstream Document */
 export type WorkstreamQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
 };
@@ -3054,21 +2821,6 @@ export type WorkstreamRfp = {
   code?: Maybe<Scalars['String']['output']>;
   rfp?: Maybe<Rfp>;
   status?: Maybe<WorkstreamStatus>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-/** Subgraph definition for Workstream (powerhouse/workstream) */
-export type WorkstreamState = {
-  __typename?: 'WorkstreamState';
-  alternativeProposals: Array<Proposal>;
-  client?: Maybe<ClientInfo>;
-  code?: Maybe<Scalars['String']['output']>;
-  initialProposal?: Maybe<Proposal>;
-  paymentRequests: Array<Scalars['PHID']['output']>;
-  paymentTerms?: Maybe<Scalars['PHID']['output']>;
-  rfp?: Maybe<Rfp>;
-  sow?: Maybe<Scalars['PHID']['output']>;
-  status: WorkstreamStatus;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3084,24 +2836,12 @@ export enum WorkstreamStatus {
   RfpDraft = 'RFP_DRAFT'
 }
 
-export enum WorkstreamStatusInput {
-  Awarded = 'AWARDED',
-  Finished = 'FINISHED',
-  InProgress = 'IN_PROGRESS',
-  NotAwarded = 'NOT_AWARDED',
-  OpenForProposals = 'OPEN_FOR_PROPOSALS',
-  PreworkRfc = 'PREWORK_RFC',
-  ProposalSubmitted = 'PROPOSAL_SUBMITTED',
-  RfpCancelled = 'RFP_CANCELLED',
-  RfpDraft = 'RFP_DRAFT'
-}
-
 export type Workstream_AddAlternativeProposalInput = {
   id: Scalars['ID']['input'];
   paymentTermsId?: InputMaybe<Scalars['PHID']['input']>;
-  proposalAuthor?: InputMaybe<ProposalAuthorInput>;
+  proposalAuthor?: InputMaybe<Workstream_ProposalAuthorInput>;
   sowId?: InputMaybe<Scalars['PHID']['input']>;
-  status?: InputMaybe<ProposalStatusInput>;
+  status?: InputMaybe<Workstream_ProposalStatusInput>;
 };
 
 export type Workstream_AddPaymentRequestInput = {
@@ -3118,9 +2858,9 @@ export type Workstream_ClientInfo = {
 export type Workstream_EditAlternativeProposalInput = {
   id: Scalars['ID']['input'];
   paymentTermsId?: InputMaybe<Scalars['PHID']['input']>;
-  proposalAuthor?: InputMaybe<ProposalAuthorInput>;
+  proposalAuthor?: InputMaybe<Workstream_ProposalAuthorInput>;
   sowId?: InputMaybe<Scalars['PHID']['input']>;
-  status?: InputMaybe<ProposalStatusInput>;
+  status?: InputMaybe<Workstream_ProposalStatusInput>;
 };
 
 export type Workstream_EditClientInfoInput = {
@@ -3133,9 +2873,9 @@ export type Workstream_EditClientInfoInput = {
 export type Workstream_EditInitialProposalInput = {
   id: Scalars['ID']['input'];
   paymentTermsId?: InputMaybe<Scalars['PHID']['input']>;
-  proposalAuthor?: InputMaybe<ProposalAuthorInput>;
+  proposalAuthor?: InputMaybe<Workstream_ProposalAuthorInput>;
   sowId?: InputMaybe<Scalars['PHID']['input']>;
-  status?: InputMaybe<ProposalStatusInput>;
+  status?: InputMaybe<Workstream_ProposalStatusInput>;
 };
 
 /** Module: Workstream */
@@ -3143,7 +2883,7 @@ export type Workstream_EditWorkstreamInput = {
   code?: InputMaybe<Scalars['String']['input']>;
   paymentTerms?: InputMaybe<Scalars['PHID']['input']>;
   sowId?: InputMaybe<Scalars['PHID']['input']>;
-  status?: InputMaybe<WorkstreamStatusInput>;
+  status?: InputMaybe<Workstream_WorkstreamStatusInput>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3163,7 +2903,20 @@ export type Workstream_ProposalAuthor = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type Workstream_ProposalAuthorInput = {
+  icon?: InputMaybe<Scalars['URL']['input']>;
+  id: Scalars['PHID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
 export enum Workstream_ProposalStatus {
+  Accepted = 'ACCEPTED',
+  Draft = 'DRAFT',
+  Rejected = 'REJECTED',
+  Submitted = 'SUBMITTED'
+}
+
+export enum Workstream_ProposalStatusInput {
   Accepted = 'ACCEPTED',
   Draft = 'DRAFT',
   Rejected = 'REJECTED',
@@ -3204,6 +2957,18 @@ export type Workstream_WorkstreamState = {
 };
 
 export enum Workstream_WorkstreamStatus {
+  Awarded = 'AWARDED',
+  Finished = 'FINISHED',
+  InProgress = 'IN_PROGRESS',
+  NotAwarded = 'NOT_AWARDED',
+  OpenForProposals = 'OPEN_FOR_PROPOSALS',
+  PreworkRfc = 'PREWORK_RFC',
+  ProposalSubmitted = 'PROPOSAL_SUBMITTED',
+  RfpCancelled = 'RFP_CANCELLED',
+  RfpDraft = 'RFP_DRAFT'
+}
+
+export enum Workstream_WorkstreamStatusInput {
   Awarded = 'AWARDED',
   Finished = 'FINISHED',
   InProgress = 'IN_PROGRESS',
@@ -3260,6 +3025,13 @@ export type WorkstreamQueryVariables = Exact<{
 
 
 export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
+
+export type WorkstreamsQueryVariables = Exact<{
+  filter?: InputMaybe<WorkstreamsFilter>;
+}>;
+
+
+export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, client?: { __typename?: 'ClientInfo', name?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 
 
@@ -3597,3 +3369,98 @@ useSuspenseWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['W
 
 
 useWorkstreamQuery.fetcher = (variables: WorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables, options);
+
+export const WorkstreamsDocument = `
+    query Workstreams($filter: WorkstreamsFilter) {
+  workstreams(filter: $filter) {
+    title
+    status
+    client {
+      name
+    }
+    initialProposal {
+      status
+      author {
+        name
+      }
+      paymentTerms {
+        proposer
+        currency
+        totalAmount
+        paymentModel
+      }
+      sow {
+        roadmaps {
+          milestones {
+            budget
+            scope {
+              deliverables
+            }
+          }
+        }
+      }
+    }
+    rfp {
+      title
+      summary
+      budgetMax
+      budgetMin
+      budgetCurrency
+      briefing
+      submissionDeadline
+    }
+    sow {
+      projects {
+        title
+      }
+      roadmaps {
+        milestones {
+          id
+        }
+      }
+    }
+    alternativeProposals {
+      id
+    }
+  }
+}
+    `;
+
+export const useWorkstreamsQuery = <
+      TData = WorkstreamsQuery,
+      TError = unknown
+    >(
+      variables?: WorkstreamsQueryVariables,
+      options?: Omit<UseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<WorkstreamsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['Workstreams'] : ['Workstreams', variables],
+    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+    ...options
+  }
+    )};
+
+useWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['Workstreams'] : ['Workstreams', variables];
+
+export const useSuspenseWorkstreamsQuery = <
+      TData = WorkstreamsQuery,
+      TError = unknown
+    >(
+      variables?: WorkstreamsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<WorkstreamsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables],
+    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables];
+
+
+useWorkstreamsQuery.fetcher = (variables?: WorkstreamsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables, options);
