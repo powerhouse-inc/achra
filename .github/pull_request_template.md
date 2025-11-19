@@ -16,4 +16,10 @@
 - [ ] I have added new test cases (if it applies)
 - [ ] I have not introduced any linting issues or warnings
 
+## Reviewer Checklist:
+
+- [ ] I have reviewed the code
+- [ ] I have reviewed the preview environment
+- [ ] I have reviewed Chromatic (if there are changes)
+
 ## Screenshots (if apply)
