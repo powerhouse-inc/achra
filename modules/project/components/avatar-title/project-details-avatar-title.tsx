@@ -15,7 +15,10 @@ export async function AvatarTitleProjectDetails({
 }: ProjectDetailsAvatarTitlePageProps) {
   const { slug } = await params
   return (
-    <AvatarTitleRoot href={`/network/${slug}/builders/${builderId}` as Route}>
+    <AvatarTitleRoot
+      href={`/network/${slug}/builders/${builderId}` as Route}
+      className="w-fit hover:opacity-80"
+    >
       <AvatarTitleAvatar src={src} alt={title} className="size-6" />
       <AvatarTitleText>{title}</AvatarTitleText>
     </AvatarTitleRoot>
