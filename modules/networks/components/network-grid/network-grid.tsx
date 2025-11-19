@@ -1,4 +1,7 @@
-import { useAllNetworksQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  type Network,
+  useAllNetworksQuery,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   Empty,
   EmptyDescription,
@@ -27,7 +30,7 @@ export async function NetworkGrid() {
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {networks.map((network) => {
         if (!network.network) return null
-        return <NetworkCard key={network.network.name} profile={network.network} />
+        return <NetworkCard key={network.network.name} profile={network.network as Network} />
       })}
     </div>
   )

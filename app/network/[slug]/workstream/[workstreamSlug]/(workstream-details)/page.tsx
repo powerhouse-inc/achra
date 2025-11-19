@@ -1,43 +1,47 @@
 import { FilePenLine } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { Streamdown } from 'streamdown'
-import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { RfpDetailsLinkWrapper } from '@/modules/rfp/rfp-details-link-wrapper'
+import {
+  type FullQueryWorkstream,
+  useWorkstreamsQuery,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { slugify } from '@/modules/shared/lib/slug'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
-import StatCards from '@/modules/workstream/components/workstream-card/stat-cards'
+import { StatCards } from '@/modules/workstream/components/workstream-card/stat-cards'
 import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
-
-// TODO: remove this once the component is integrated with the API
-const proposalDescriptionMarkdown = `
-The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, which aims to enhance community engagement through innovative digital solutions. Key milestones include:
-
-1. **Project Kickoff**: Scheduled for January 15, 2025, where team roles and responsibilities will be defined.
-2. **Phase 1 - Research & Development**: From February to April 2025, focusing on user feedback and prototype testing.
-3. **Phase 2 - Implementation**: Expected to begin in May 2025, where the developed solutions will be integrated into the existing platform.
-4. **Final Review & Launch**: Set for September 12, 2025, culminating in a community event to showcase the new features and gather further input.
-
-This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
-`
+import { countRoadmapStats } from '@/modules/workstream/lib/roadmap-stats'
 
 interface Props {
   params: Promise<{ slug: string; workstreamSlug: string }>
 }
 
-export default function WorkstreamDetailsPage({ params }: Props) {
+export default async function WorkstreamDetailsPage({ params }: Props) {
+  const data = await useWorkstreamsQuery.fetcher({})()
+  const workstream = data.workstreams[0] as FullQueryWorkstream | undefined
+
+  if (!workstream) {
+    notFound()
+  }
+
+  const networkSlug = slugify(workstream.client?.name ?? 'Unknown')
+  const workstreamSlug = slugify(workstream.title ?? 'Unknown')
+  const { milestones, deliverables } = countRoadmapStats(workstream)
+
   return (
     <PageBackground>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={2} />}>
-          <WorkstreamDetailsBreadcrumb params={params} />
+          <WorkstreamDetailsBreadcrumb params={params} workstream={workstream} />
         </Suspense>
       </PageBreadcrumbContainer>
 
@@ -45,28 +49,38 @@ export default function WorkstreamDetailsPage({ params }: Props) {
         <div className="flex justify-between gap-2 md:items-start">
           <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
             <h1 className="leading-6 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl xl:text-2xl">
-              Vetra Beta Launch
+              {workstream.title ?? 'Unknown'}
             </h1>
-            <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
+            {workstream.status && <WorkstreamStatusChip status={workstream.status} />}
           </div>
-          <Suspense fallback={<Skeleton className="h-9 w-36" />}>
-            <RfpDetailsLinkWrapper params={params} />
-          </Suspense>
         </div>
 
-        <WorkstreamStats />
+        <WorkstreamStats
+          issuer="Not specified"
+          budgetMin={workstream.rfp?.budgetMin}
+          budgetMax={workstream.rfp?.budgetMax}
+          budgetCurrency={workstream.rfp?.budgetCurrency}
+          submissionDeadline={workstream.rfp?.submissionDeadline}
+        />
 
-        <Streamdown className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
-          {proposalDescriptionMarkdown}
-        </Streamdown>
+        {workstream.rfp?.summary && (
+          <Streamdown className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
+            {workstream.rfp.summary}
+          </Streamdown>
+        )}
 
         <div className="bg-accent flex flex-col gap-4 rounded-xl p-2 pb-4 shadow-sm sm:p-4 sm:pb-6">
-          <InitialProposalHeader />
+          <InitialProposalHeader
+            networkSlug={networkSlug}
+            workstreamSlug={workstreamSlug}
+            proposalStatus={workstream.initialProposal?.status}
+            proposalAuthor={workstream.initialProposal?.author.name}
+          />
 
-          <StatCards />
+          <StatCards milestones={milestones} deliverables={deliverables} />
 
           <Suspense fallback={<Skeleton className="h-9 w-36" />}>
-            <ViewProposalLink />
+            <ViewProposalLink networkSlug={networkSlug} workstreamSlug={workstreamSlug} />
           </Suspense>
 
           <Separator />
@@ -89,10 +103,9 @@ export default function WorkstreamDetailsPage({ params }: Props) {
             </Button>
           </div>
 
-          <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
-            Help us empower our community with data. This project involves creating a real-time
-            GraphQL endpoing to provide powerful insight into network activity.
-          </p>
+          {workstream.rfp?.briefing && (
+            <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">{workstream.rfp.briefing}</p>
+          )}
 
           <ProposalCardsGrid />
         </div>

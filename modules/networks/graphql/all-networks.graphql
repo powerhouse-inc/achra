@@ -4,9 +4,11 @@ query AllNetworks {
       name
       description
       category
-      logo
-      logoBig
       icon
+      darkThemeIcon
+      logo
+      darkThemeLogo
+      logoBig
     }
   }
 }

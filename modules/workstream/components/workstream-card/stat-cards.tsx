@@ -5,23 +5,28 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ProposalCardOutline from './proposal-card-outline'
 
-export default function StatCards() {
+interface StatCardsProps {
+  milestones: number
+  deliverables: number
+}
+
+function StatCards({ milestones, deliverables }: StatCardsProps) {
   const card1 = useMemo(
     () => (
       <ProposalCardOutline title="Roadmap">
         <div className="flex gap-2 text-center">
           <div className="flex flex-1 flex-col">
-            <div className="text-3xl font-bold">5</div>
+            <div className="text-3xl font-bold">{milestones}</div>
             <div className="text-foreground/50">Milestones</div>
           </div>
           <div className="flex flex-1 flex-col">
-            <div className="text-3xl font-bold">37</div>
+            <div className="text-3xl font-bold">{deliverables}</div>
             <div className="text-foreground/50">Deliverables</div>
           </div>
         </div>
       </ProposalCardOutline>
     ),
-    [],
+    [milestones, deliverables],
   )
   const card2 = useMemo(
     () => (
@@ -85,3 +90,5 @@ export default function StatCards() {
     </>
   )
 }
+
+export { StatCards }
