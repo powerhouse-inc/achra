@@ -17,12 +17,7 @@ export function TitleComponent({
   levelNumber,
 }: TitleComponentProps) {
   return (
-    <div
-      className={cn(
-        'mt-2 mb-6 flex flex-col sm:mt-0.25 md:-mt-[3px]',
-        levelNumber === 1 ? 'gap-2' : 'gap-0',
-      )}
-    >
+    <div className={cn('mt-2 mb-2 flex flex-col sm:mt-0.25 md:-mt-[3px]', 'gap-2')}>
       {levelNumber === 1 ? (
         <h1
           data-slot="first-level-title"
