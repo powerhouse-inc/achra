@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Scope } from '@/modules/shared/types/scopes'
 import { Badge } from '../../ui/badge'
 
 const buildersScopesChipVariants = cva('box-border border-2', {
@@ -34,20 +33,16 @@ type BuildersScopesChipVariants = VariantProps<typeof buildersScopesChipVariants
 export type ScopeSizeVariant = NonNullable<BuildersScopesChipVariants['size']>
 
 interface BuildersScopesChipProps {
-  scope: Scope
+  scope: TeamScopeEnum
   size?: ScopeSizeVariant
   className?: string
 }
 
 export function BuildersScopesChip({ scope, size = 'large', className }: BuildersScopesChipProps) {
-  const chipLabel =
-    size === 'small' || size === 'medium' ? scope.name.slice(0, 3).toUpperCase() : scope.name
+  const chipLabel = size === 'small' || size === 'medium' ? scope.slice(0, 3).toUpperCase() : scope
 
   return (
-    <Badge
-      variant="outline"
-      className={cn(buildersScopesChipVariants({ size, scope: scope.name }), className)}
-    >
+    <Badge variant="outline" className={cn(buildersScopesChipVariants({ size, scope }), className)}>
       {chipLabel}
     </Badge>
   )

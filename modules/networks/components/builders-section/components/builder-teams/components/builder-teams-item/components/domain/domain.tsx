@@ -18,7 +18,7 @@ export default function Domain({ team }: DomainProps) {
         ) : team.scopes.length === 0 ? null : (
           <div className="flex flex-col gap-1">
             {team.scopes.map((scope) => (
-              <BuildersScopesChip key={scope.id} scope={scope} size="large" />
+              <BuildersScopesChip key={scope.id} scope={scope.name} size="large" />
             ))}
           </div>
         )
