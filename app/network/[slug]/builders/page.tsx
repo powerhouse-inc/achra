@@ -1,19 +1,41 @@
-import Link from 'next/link'
-import { PageContent } from '@/modules/shared/components/page-containers'
-import { Button } from '@/modules/shared/components/ui/button'
+import { Suspense } from 'react'
+import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
+import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import type { Route } from 'next'
 
-export default function BuildersPage() {
+interface BuildersPageProps {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{
+    search: string
+    scopes: string[]
+    actorRoles: string[]
+  }>
+}
+
+const items = [
+  { label: 'Networks', href: '/networks' as Route },
+  { label: 'Powerhouse', href: '/network/powerhouse' as Route },
+  { label: 'Builders', href: '/network/powerhouse/builders' as Route },
+]
+
+export default async function BuildersPage({ searchParams }: BuildersPageProps) {
+  const searchParamsString = JSON.stringify(await searchParams)
+
   return (
-    <PageContent>
-      <div className="container flex h-screen flex-col items-center justify-center gap-4">
-        <h1 className="m-0 text-lg font-bold text-gray-900 md:text-xl md:leading-6 xl:text-2xl">
-          Builders
-        </h1>
-
-        <Button>
-          <Link href="/network/powerhouse/builders/builder-1">Go to builder profile</Link>
-        </Button>
-      </div>
-    </PageContent>
+    <PageBackground>
+      <PageBreadcrumbContainer>
+        <Breadcrumb items={items} />
+      </PageBreadcrumbContainer>
+      <PageContent variant="with-breadcrumb" className="gap-6">
+        <ErrorBoundaryWithPresets>
+          {/* TODO: Ask the designer for the skeleton of these components */}
+          <Suspense fallback="Loading..." key={searchParamsString}>
+            <BuildersHeader />
+          </Suspense>
+        </ErrorBoundaryWithPresets>
+      </PageContent>
+    </PageBackground>
   )
 }
