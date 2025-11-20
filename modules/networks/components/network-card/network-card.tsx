@@ -4,7 +4,6 @@ import Link from 'next/link'
 import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
-import { slugify } from '@/modules/shared/lib/slug'
 import NetworkChip from './network-category'
 
 interface NetworkCardProps {
@@ -13,7 +12,7 @@ interface NetworkCardProps {
 
 export function NetworkCard({ profile }: NetworkCardProps) {
   return (
-    <Link href={`/network/${slugify(profile.name)}`} className="h-full">
+    <Link href={`/network/${profile.slug}`} className="h-full">
       <Card
         className="flex h-64 flex-col gap-0 border-none bg-cover bg-center bg-no-repeat p-4 shadow-sm sm:p-6"
         style={{
@@ -46,7 +45,9 @@ export function NetworkCard({ profile }: NetworkCardProps) {
               )}
             </CardTitle>
             {/* categories are represented as an array but it is going to have at most one category */}
-            {profile.category.length > 0 && <NetworkChip category={profile.category[0]} />}
+            {profile.category && profile.category.length > 0 && (
+              <NetworkChip category={profile.category[0]} />
+            )}
           </div>
         </CardHeader>
 

@@ -2,6 +2,7 @@ query AllNetworks {
   allNetworks {
     network {
       name
+      slug
       description
       category
       icon

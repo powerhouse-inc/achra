@@ -1,4 +1,4 @@
-query Workstream($filter: WorkstreamFilter!) {
+query RoadmapList($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
     title
     code
