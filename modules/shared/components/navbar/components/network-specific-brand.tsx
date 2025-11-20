@@ -42,8 +42,8 @@ function NetworkSpecificBrand() {
   return (
     <Link href={`/network/${slug}`} className="cursor-pointer hover:opacity-80">
       <div className="flex items-center gap-2">
-        <NetworkIcon icon={networkProfile.icon} name={networkProfile.name} />
-        <NetworkLogo logo={networkProfile.logo} name={networkProfile.name} />
+        <NetworkIcon icon={networkProfile.icon} name={networkProfile.name ?? ''} />
+        <NetworkLogo logo={networkProfile.logo} name={networkProfile.name ?? ''} />
       </div>
     </Link>
   )

@@ -22,7 +22,7 @@ export async function fetchNetworkProfile(networkSlug: string): Promise<Network 
   // TODO: replace with actual network profile fetch
   await new Promise((resolve) => setTimeout(resolve, 200))
 
-  const network = mockedNetworks.find((network) => slugify(network.name) === networkSlug)
+  const network = mockedNetworks.find((network) => slugify(network.name ?? '') === networkSlug)
 
   return network
 }

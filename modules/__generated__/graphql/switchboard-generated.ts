@@ -522,9 +522,11 @@ export type FullQueryWorkstream = {
   client?: Maybe<ClientInfo>;
   code?: Maybe<Scalars['String']['output']>;
   initialProposal?: Maybe<FullProposal>;
+  network?: Maybe<Network>;
   paymentRequests: Array<Scalars['PHID']['output']>;
   paymentTerms?: Maybe<Pt_PaymentTermsState>;
   rfp?: Maybe<Rfp>;
+  slug?: Maybe<Scalars['String']['output']>;
   sow?: Maybe<Sow_ScopeOfWorkState>;
   status?: Maybe<WorkstreamStatus>;
   title?: Maybe<Scalars['String']['output']>;
@@ -1383,16 +1385,17 @@ export type MutationSetDriveNameArgs = {
 
 export type Network = {
   __typename?: 'Network';
-  category: Array<NetworkCategory>;
-  darkThemeIcon: Scalars['String']['output'];
-  darkThemeLogo: Scalars['String']['output'];
-  description: Scalars['String']['output'];
+  category?: Maybe<Array<NetworkCategory>>;
+  darkThemeIcon?: Maybe<Scalars['String']['output']>;
+  darkThemeLogo?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   discord?: Maybe<Scalars['String']['output']>;
   github?: Maybe<Scalars['String']['output']>;
-  icon: Scalars['String']['output'];
-  logo: Scalars['String']['output'];
-  logoBig: Scalars['String']['output'];
-  name: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  logo?: Maybe<Scalars['String']['output']>;
+  logoBig?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
   website?: Maybe<Scalars['String']['output']>;
   x?: Maybe<Scalars['String']['output']>;
   youtube?: Maybe<Scalars['String']['output']>;
@@ -1968,8 +1971,14 @@ export type Query = {
   processorWorkstreams: Array<ProcessorWorkstream>;
   rfpByWorkstream: Array<WorkstreamRfp>;
   scopeOfWorkByNetworkOrStatus: Array<Sow_ScopeOfWorkState>;
-  workstream?: Maybe<FullQueryWorkstream>;
+  workstream: Array<FullQueryWorkstream>;
   workstreams: Array<FullQueryWorkstream>;
+};
+
+
+/** Subgraph definition */
+export type QueryAllNetworksArgs = {
+  filter?: InputMaybe<NetworkFilter>;
 };
 
 
@@ -3155,9 +3164,15 @@ export enum Workstream_WorkstreamStatusInput {
 export type WorkstreamsFilter = {
   networkId?: InputMaybe<Scalars['PHID']['input']>;
   networkName?: InputMaybe<Scalars['String']['input']>;
+  networkNames?: InputMaybe<Array<Scalars['String']['input']>>;
   networkSlug?: InputMaybe<Scalars['String']['input']>;
   workstreamStatus?: InputMaybe<WorkstreamStatus>;
   workstreamStatuses?: InputMaybe<Array<WorkstreamStatus>>;
+  workstreamTitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NetworkFilter = {
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ScopeOfWorkByNetworkOrStatusFilter = {
@@ -3173,7 +3188,7 @@ export type ScopeOfWorkByNetworkOrStatusFilter = {
 export type AllNetworksQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name: string, description: string, category: Array<NetworkCategory>, logo: string, logoBig: string, icon: string } | null }> };
+export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, description?: string | null, category?: Array<NetworkCategory> | null, icon?: string | null, darkThemeIcon?: string | null, logo?: string | null, darkThemeLogo?: string | null, logoBig?: string | null } | null }> };
 
 export type NetworkProfileQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
@@ -3196,12 +3211,12 @@ export type ScopeOfWorkQueryVariables = Exact<{
 
 export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
 
-export type WorkstreamQueryVariables = Exact<{
+export type RoadmapListQueryVariables = Exact<{
   filter: WorkstreamFilter;
 }>;
 
 
-export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
+export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null }> };
 
 export type WorkstreamsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -3217,11 +3232,14 @@ export const AllNetworksDocument = `
   allNetworks {
     network {
       name
+      slug
       description
       category
-      logo
-      logoBig
       icon
+      darkThemeIcon
+      logo
+      darkThemeLogo
+      logoBig
     }
   }
 }
@@ -3516,8 +3534,8 @@ useSuspenseScopeOfWorkQuery.getKey = (variables: ScopeOfWorkQueryVariables) => [
 
 useScopeOfWorkQuery.fetcher = (variables: ScopeOfWorkQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables, options);
 
-export const WorkstreamDocument = `
-    query Workstream($filter: WorkstreamFilter!) {
+export const RoadmapListDocument = `
+    query RoadmapList($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
     title
     code
@@ -3562,44 +3580,44 @@ export const WorkstreamDocument = `
 }
     `;
 
-export const useWorkstreamQuery = <
-      TData = WorkstreamQuery,
+export const useRoadmapListQuery = <
+      TData = RoadmapListQuery,
       TError = unknown
     >(
-      variables: WorkstreamQueryVariables,
-      options?: Omit<UseQueryOptions<WorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamQuery, TError, TData>['queryKey'] }
+      variables: RoadmapListQueryVariables,
+      options?: Omit<UseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
     ) => {
     
-    return useQuery<WorkstreamQuery, TError, TData>(
+    return useQuery<RoadmapListQuery, TError, TData>(
       {
-    queryKey: ['Workstream', variables],
-    queryFn: switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables),
+    queryKey: ['RoadmapList', variables],
+    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
     ...options
   }
     )};
 
-useWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['Workstream', variables];
+useRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapList', variables];
 
-export const useSuspenseWorkstreamQuery = <
-      TData = WorkstreamQuery,
+export const useSuspenseRoadmapListQuery = <
+      TData = RoadmapListQuery,
       TError = unknown
     >(
-      variables: WorkstreamQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<WorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamQuery, TError, TData>['queryKey'] }
+      variables: RoadmapListQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
     ) => {
     
-    return useSuspenseQuery<WorkstreamQuery, TError, TData>(
+    return useSuspenseQuery<RoadmapListQuery, TError, TData>(
       {
-    queryKey: ['WorkstreamSuspense', variables],
-    queryFn: switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables),
+    queryKey: ['RoadmapListSuspense', variables],
+    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
     ...options
   }
     )};
 
-useSuspenseWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['WorkstreamSuspense', variables];
+useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapListSuspense', variables];
 
 
-useWorkstreamQuery.fetcher = (variables: WorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables, options);
+useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
 
 export const WorkstreamsDocument = `
     query Workstreams($filter: WorkstreamsFilter) {

@@ -1,6 +1,6 @@
 import { createLoader, parseAsArrayOf, parseAsString, parseAsStringEnum } from 'nuqs/server'
 import {
-  useWorkstreamQuery,
+  useRoadmapListQuery,
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roadmap-section'
@@ -30,7 +30,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
 
   const filters = await filtersParser(searchParams)
 
-  const data = await useWorkstreamQuery.fetcher({
+  const data = await useRoadmapListQuery.fetcher({
     filter: {
       networkSlug: slug,
       // TODO: Handle multiple statuses (should be implemented in the api)
@@ -38,9 +38,11 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
     },
   })()
 
-  const roadmaps = data.workstream?.sow?.roadmaps ?? []
+  const hasRoadmaps = data.workstream.some((workstream) => {
+    return (workstream.sow?.roadmaps.length ?? 0) > 0
+  })
 
-  if (roadmaps.length === 0) {
+  if (!hasRoadmaps) {
     return (
       <Empty>
         <EmptyHeader>
@@ -54,15 +56,17 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
   return (
     <>
       <div className="flex flex-col gap-14">
-        {roadmaps.map((roadmap) => (
-          <RoadmapSection
-            key={roadmap.id}
-            roadmap={roadmap}
-            networkSlug={slug}
-            workstreamCode={data.workstream?.code ?? ''}
-            workstreamTitle={data.workstream?.title ?? ''}
-          />
-        ))}
+        {data.workstream.map((workstream) =>
+          workstream.sow?.roadmaps.map((roadmap) => (
+            <RoadmapSection
+              key={roadmap.id}
+              roadmap={roadmap}
+              networkSlug={slug}
+              workstreamCode={workstream?.code ?? ''}
+              workstreamTitle={workstream?.title ?? ''}
+            />
+          )),
+        )}
       </div>
       <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
         Load More

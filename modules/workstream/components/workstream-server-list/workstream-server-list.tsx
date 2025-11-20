@@ -35,6 +35,7 @@ async function WorkstreamServerList({ params, searchParams }: WorkstreamServerLi
       networkSlug: networkFilter[0] ? networkFilter[0] : undefined,
       // Use workstreamStatuses for multiple statuses support
       workstreamStatuses: statuses.length > 0 ? statuses : undefined,
+      workstreamTitle: undefined,
     },
   })()
 
