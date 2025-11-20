@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { useEffect } from 'react'
+import AchraLayout from '@/app/(achra)/layout'
 import RootLayout from '@/app/layout'
+import NetworkLayout from '@/app/network/[slug]/layout'
 import type { StoryContext } from '@storybook/nextjs'
 
 const inter = Inter({
@@ -35,9 +37,15 @@ const openSansCondensed = localFont({
  */
 export const withNextjsExtras = (Story: React.ComponentType, context: StoryContext) => {
   if (context.parameters.includeLayout) {
+    const pathname = context.parameters.nextjs?.navigation?.pathname
+    const isNetworkRoute = pathname?.startsWith('/network/')
+    const NestedLayout = isNetworkRoute ? NetworkLayout : AchraLayout
+
     return (
       <RootLayout>
-        <Story />
+        <NestedLayout>
+          <Story />
+        </NestedLayout>
       </RootLayout>
     )
   }

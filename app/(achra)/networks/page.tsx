@@ -1,9 +1,5 @@
 import { Suspense } from 'react'
-import {
-  NetworkGrid,
-  NetworkGridHydration,
-  NetworkGridSkeleton,
-} from '@/modules/networks/components/network-grid'
+import { NetworkGrid, NetworkGridSkeleton } from '@/modules/networks/components/network-grid'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
@@ -16,9 +12,7 @@ export default function NetworksPage() {
 
       <ErrorBoundaryWithPresets>
         <Suspense fallback={<NetworkGridSkeleton />}>
-          <NetworkGridHydration>
-            <NetworkGrid />
-          </NetworkGridHydration>
+          <NetworkGrid />
         </Suspense>
       </ErrorBoundaryWithPresets>
     </PageContent>
