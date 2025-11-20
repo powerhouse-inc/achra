@@ -2,7 +2,8 @@ import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
-import { SummarySection } from '@/modules/finances/components/summary-section'
+import { DoughnutChartSkeleton } from '@/modules/finances/components/summary-section/doughnut-chart/doughnut-chart-skeleton'
+import { SummarySectionWrapper } from '@/modules/finances/components/summary-section/summary-section-wrapper'
 import { TitleComponentSkeleton } from '@/modules/finances/components/title-component/title-component-skeleton'
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
@@ -36,7 +37,9 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           <UsdsIcon className="size-5 md:size-6" />
           *All values are converted to USDS
         </div>
-        <SummarySection />
+        <Suspense fallback={<DoughnutChartSkeleton />}>
+          <SummarySectionWrapper params={params} />
+        </Suspense>
         <Suspense fallback={<NavigationCardSkeletons />}>
           <NavigationSection params={params} />
         </Suspense>

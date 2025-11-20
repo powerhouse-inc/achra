@@ -27,15 +27,60 @@ export interface QuarterCardProps {
 
 export interface FiancesNavigationCard {
   image: string
-  id: string
-  name: string
-  description?: string
-  href?: string
-  totalUSDS?: number
-  valueUSDS?: number
-  budgetCapValue?: number
-  color?: string
+  codePath: string
+  title: string
+  description: string
+  href: string
+  valueDai: number
+  totalDai: number
+  budgetCapValue: number
   code: string
-  codePath?: string
+  color: string
   percent: number
+}
+export interface ValueAndUnit {
+  value: number
+  unit: string
+}
+
+export interface BudgetMetric {
+  actuals: ValueAndUnit
+  budget: ValueAndUnit
+  forecast: ValueAndUnit
+  paymentsOnChain: ValueAndUnit
+  paymentsOffChainIncluded: ValueAndUnit
+  protocolNetOutflow: ValueAndUnit
+}
+
+export type BreakdownBudgetAnalytic = Record<string, BudgetMetric[]>
+
+export interface Budget {
+  parentId: string | null
+  name: string
+  image: string
+  idPath: string
+  id: string
+  description: string
+  codePath: string
+  code: string
+}
+
+export type AnalyticMetric =
+  | 'Budget'
+  | 'Forecast'
+  | 'PaymentsOnChain'
+  | 'ProtocolNetOutflow'
+  | 'Actuals'
+
+export interface BudgetMetricWithName extends BudgetMetric {
+  name: string
+  code?: string
+}
+
+export interface MetricValues {
+  Budget: number
+  Forecast: number
+  ProtocolNetOutflow: number
+  PaymentsOnChain: number
+  Actuals: number
 }
