@@ -38,7 +38,14 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
 
   const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
-  const hasBudgetRange = rfp?.budgetMin != null && rfp.budgetMax != null
+
+  const isRfpContentEmpty =
+    !rfp ||
+    ((!rfp.briefing || rfp.briefing.trim() === '') &&
+      rfp.budgetCurrency == null &&
+      (!rfp.eligibilityCriteria || rfp.eligibilityCriteria.trim() === '') &&
+      (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === ''))
+
   return (
     <main>
       <PageBreadcrumbContainer>
@@ -89,26 +96,23 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </div>
 
               <div className="grid grid-cols-1 gap-2 lg:grid-cols-[auto_1fr] lg:gap-4">
-                {rfp?.submissionDeadline && (
-                  <ProposalKeyValueElement
-                    keyValue={
-                      <div>
-                        <span className="sm:hidden">Deadline</span>
-                        <span className="hidden sm:block">Submission Deadline</span>
-                      </div>
-                    }
-                    keyIcon={CalendarClock}
-                    value={formatDeadline(rfp)}
-                  />
-                )}
-                {hasBudgetRange && (
-                  <ProposalKeyValueElement
-                    keyValue="Budget Range"
-                    keyIcon={HandCoins}
-                    value={formatBudgetRange(rfp)}
-                    className="lg:max-w-85.5 xl:max-w-100"
-                  />
-                )}
+                <ProposalKeyValueElement
+                  keyValue={
+                    <div>
+                      <span className="sm:hidden">Deadline</span>
+                      <span className="hidden sm:block">Submission Deadline</span>
+                    </div>
+                  }
+                  keyIcon={CalendarClock}
+                  value={formatDeadline(rfp)}
+                />
+
+                <ProposalKeyValueElement
+                  keyValue="Budget Range"
+                  keyIcon={HandCoins}
+                  value={formatBudgetRange(rfp)}
+                  className="lg:max-w-85.5 xl:max-w-100"
+                />
               </div>
 
               <div className="text-primary-foreground sm:flex sm:justify-end md:hidden">
@@ -120,7 +124,14 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               </div>
             </div>
 
-            {rfp ? (
+            {isRfpContentEmpty ? (
+              <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+                <RfpEmpty
+                  title="No details found"
+                  description="No details, briefing or other information found for this workstream."
+                />
+              </div>
+            ) : (
               <>
                 <div className="border-input bg-accent flex flex-col gap-4 border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
                   {rfp.summary && (
@@ -161,10 +172,6 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   </div>
                 )}
               </>
-            ) : (
-              <div className="border-input bg-accent flex flex-col rounded-b-xl border-t border-b p-2 pb-3 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-                <RfpEmpty />
-              </div>
             )}
           </Card>
         </ErrorBoundaryWithPresets>

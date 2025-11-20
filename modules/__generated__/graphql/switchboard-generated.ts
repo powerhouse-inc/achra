@@ -1384,6 +1384,8 @@ export type MutationSetDriveNameArgs = {
 export type Network = {
   __typename?: 'Network';
   category: Array<NetworkCategory>;
+  darkThemeIcon: Scalars['String']['output'];
+  darkThemeLogo: Scalars['String']['output'];
   description: Scalars['String']['output'];
   discord?: Maybe<Scalars['String']['output']>;
   github?: Maybe<Scalars['String']['output']>;
@@ -1455,6 +1457,8 @@ export enum NetworkProfile_NetworkCategory {
 export type NetworkProfile_NetworkProfileState = {
   __typename?: 'NetworkProfile_NetworkProfileState';
   category: Array<NetworkProfile_NetworkCategory>;
+  darkThemeIcon: Scalars['String']['output'];
+  darkThemeLogo: Scalars['String']['output'];
   description: Scalars['String']['output'];
   discord?: Maybe<Scalars['String']['output']>;
   github?: Maybe<Scalars['String']['output']>;
@@ -1485,7 +1489,8 @@ export type NetworkProfile_SetGithubInput = {
 
 /** Module: NetworkProfileManagement */
 export type NetworkProfile_SetIconInput = {
-  icon: Scalars['String']['input'];
+  darkThemeIcon?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NetworkProfile_SetLogoBigInput = {
@@ -1493,7 +1498,8 @@ export type NetworkProfile_SetLogoBigInput = {
 };
 
 export type NetworkProfile_SetLogoInput = {
-  logo: Scalars['String']['input'];
+  darkThemeLogo?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NetworkProfile_SetProfileNameInput = {
@@ -3197,6 +3203,13 @@ export type WorkstreamQueryVariables = Exact<{
 
 export type WorkstreamQuery = { __typename?: 'Query', workstream?: { __typename?: 'FullQueryWorkstream', title?: string | null, code?: string | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null } | null };
 
+export type WorkstreamsQueryVariables = Exact<{
+  filter?: InputMaybe<WorkstreamsFilter>;
+}>;
+
+
+export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, client?: { __typename?: 'ClientInfo', name?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+
 
 
 export const AllNetworksDocument = `
@@ -3587,3 +3600,98 @@ useSuspenseWorkstreamQuery.getKey = (variables: WorkstreamQueryVariables) => ['W
 
 
 useWorkstreamQuery.fetcher = (variables: WorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamQuery, WorkstreamQueryVariables>(WorkstreamDocument, variables, options);
+
+export const WorkstreamsDocument = `
+    query Workstreams($filter: WorkstreamsFilter) {
+  workstreams(filter: $filter) {
+    title
+    status
+    client {
+      name
+    }
+    initialProposal {
+      status
+      author {
+        name
+      }
+      paymentTerms {
+        proposer
+        currency
+        totalAmount
+        paymentModel
+      }
+      sow {
+        roadmaps {
+          milestones {
+            budget
+            scope {
+              deliverables
+            }
+          }
+        }
+      }
+    }
+    rfp {
+      title
+      summary
+      budgetMax
+      budgetMin
+      budgetCurrency
+      briefing
+      submissionDeadline
+    }
+    sow {
+      projects {
+        title
+      }
+      roadmaps {
+        milestones {
+          id
+        }
+      }
+    }
+    alternativeProposals {
+      id
+    }
+  }
+}
+    `;
+
+export const useWorkstreamsQuery = <
+      TData = WorkstreamsQuery,
+      TError = unknown
+    >(
+      variables?: WorkstreamsQueryVariables,
+      options?: Omit<UseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<WorkstreamsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['Workstreams'] : ['Workstreams', variables],
+    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+    ...options
+  }
+    )};
+
+useWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['Workstreams'] : ['Workstreams', variables];
+
+export const useSuspenseWorkstreamsQuery = <
+      TData = WorkstreamsQuery,
+      TError = unknown
+    >(
+      variables?: WorkstreamsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<WorkstreamsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables],
+    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables];
+
+
+useWorkstreamsQuery.fetcher = (variables?: WorkstreamsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables, options);

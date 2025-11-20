@@ -3,14 +3,42 @@ import { useCallback } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export default function useWorkstreamFilters() {
-  const [search, setSearch] = useQueryState('search', parseAsString.withDefault(''))
+  const [search, setSearch] = useQueryState(
+    'search',
+    parseAsString.withDefault('').withOptions({
+      shallow: false,
+      history: 'replace',
+      limitUrlUpdates: {
+        method: 'debounce',
+        timeMs: 300,
+      },
+    }),
+  )
   const [statuses, setStatuses] = useQueryState(
     'statuses',
-    parseAsArrayOf(parseAsStringEnum(Object.values(WorkstreamStatus))).withDefault([]),
+    parseAsArrayOf(parseAsStringEnum(Object.values(WorkstreamStatus)))
+      .withDefault([])
+      .withOptions({
+        shallow: false,
+        history: 'replace',
+        limitUrlUpdates: {
+          method: 'debounce',
+          timeMs: 100,
+        },
+      }),
   )
   const [networks, setNetworks] = useQueryState(
     'networks',
-    parseAsArrayOf(parseAsString).withDefault([]),
+    parseAsArrayOf(parseAsString)
+      .withDefault([])
+      .withOptions({
+        shallow: false,
+        history: 'replace',
+        limitUrlUpdates: {
+          method: 'debounce',
+          timeMs: 100,
+        },
+      }),
   )
 
   const onReset = useCallback(() => {
