@@ -16,14 +16,14 @@ export default function ScopeBadgeGroup({ items }: ScopeBadgeGroupProps) {
       <HoverPopoverTrigger asChild>
         <div className="grid grid-cols-2 gap-1">
           {items.map((scope: Scope) => (
-            <BuildersScopesChip key={scope.id} scope={scope} size="medium" />
+            <BuildersScopesChip key={scope.id} scope={scope.name} size="medium" />
           ))}
         </div>
       </HoverPopoverTrigger>
       <HoverPopoverContent className="w-fit p-2" align="start">
         <div className="flex flex-col gap-1">
           {items.map((scope) => (
-            <BuildersScopesChip key={scope.id} scope={scope} size="large" />
+            <BuildersScopesChip key={scope.id} scope={scope.name} size="large" />
           ))}
         </div>
       </HoverPopoverContent>

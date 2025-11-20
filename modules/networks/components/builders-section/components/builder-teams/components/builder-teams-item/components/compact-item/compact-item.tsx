@@ -43,7 +43,7 @@ export default function CompactItem({ team, className }: CompactItemProps) {
           <>
             <div className="flex gap-1">
               {team.scopes.map((scope) => (
-                <BuildersScopesChip key={scope.id} scope={scope} size={scopeSizeVariant} />
+                <BuildersScopesChip key={scope.id} scope={scope.name} size={scopeSizeVariant} />
               ))}
             </div>
             <RoleBadge type={team.type} />

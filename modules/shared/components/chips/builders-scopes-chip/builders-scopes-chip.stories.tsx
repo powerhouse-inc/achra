@@ -60,14 +60,14 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    scope: MOCK_SCOPES[TeamScopeEnum.SupportScope],
+    scope: MOCK_SCOPES[TeamScopeEnum.SupportScope].name,
     size: 'large',
   },
 }
 
 export const Sizes: Story = {
   args: {
-    scope: MOCK_SCOPES[TeamScopeEnum.GovernanceScope],
+    scope: MOCK_SCOPES[TeamScopeEnum.GovernanceScope].name,
   },
   render: ({ scope }) => (
     <div className="flex flex-col gap-2">
@@ -83,7 +83,7 @@ export const AllScopes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
       {(Object.values(TeamScopeEnum) as TeamScopeEnum[]).map((scopeName) => (
-        <BuildersScopesChip key={scopeName} scope={MOCK_SCOPES[scopeName]} />
+        <BuildersScopesChip key={scopeName} scope={MOCK_SCOPES[scopeName].name} />
       ))}
     </div>
   ),
