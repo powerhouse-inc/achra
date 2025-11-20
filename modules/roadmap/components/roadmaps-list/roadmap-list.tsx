@@ -1,5 +1,7 @@
 import { createLoader, parseAsArrayOf, parseAsString, parseAsStringEnum } from 'nuqs/server'
 import {
+  type ClientInfo,
+  type Maybe,
   useRoadmapListQuery,
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -61,9 +63,9 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
             <RoadmapSection
               key={roadmap.id}
               roadmap={roadmap}
-              networkSlug={slug}
-              workstreamCode={workstream.code ?? ''}
               workstreamTitle={workstream.title ?? ''}
+              workstreamSlug={workstream.slug ?? ''}
+              client={workstream.client as Maybe<ClientInfo>}
             />
           )),
         )}
