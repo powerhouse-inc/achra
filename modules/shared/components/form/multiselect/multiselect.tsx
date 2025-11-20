@@ -377,7 +377,7 @@ function MultipleSelector({
           className={cn(
             'text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute end-6 top-0 z-10 flex size-9 items-center justify-center rounded-md border border-transparent transition-[color,box-shadow] outline-none focus-visible:ring-[3px]',
             (hideClearAllButton ||
-              (disabled && selected.length < 1) ||
+              disabled ||
               selected.filter((s) => s.fixed).length === selected.length) &&
               'hidden',
           )}
