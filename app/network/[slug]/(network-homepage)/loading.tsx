@@ -1,5 +1,11 @@
-function NetworkLoading() {
-  return <div>Loading...</div>
-}
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 
-export default NetworkLoading
+export default function NetworkPageLoading() {
+  return (
+    <PageBackground>
+      <PageContent className="gap-8">
+        <div>Loading...</div>
+      </PageContent>
+    </PageBackground>
+  )
+}
