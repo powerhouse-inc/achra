@@ -2,9 +2,11 @@ import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
+import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card/workstream-card-skeleton'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
 import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
 import { WorkstreamServerList } from '@/modules/workstream/components/workstream-server-list/workstream-server-list'
+import { WorkstreamServerListSkeleton } from '@/modules/workstream/components/workstream-server-list/workstream-server-list-skeleton'
 
 interface WorkstreamsPageProps {
   searchParams: Promise<{
@@ -28,7 +30,15 @@ export default async function WorkstreamsPage({ searchParams }: WorkstreamsPageP
           </Suspense>
 
           <ErrorBoundaryWithPresets>
-            <Suspense fallback={<div>loading...</div>} key={searchParamsString}>
+            <Suspense
+              fallback={
+                <WorkstreamServerListSkeleton>
+                  <WorkstreamCardSkeleton />
+                  <WorkstreamCardSkeleton />
+                </WorkstreamServerListSkeleton>
+              }
+              key={searchParamsString}
+            >
               <WorkstreamServerList searchParams={searchParams} />
             </Suspense>
           </ErrorBoundaryWithPresets>

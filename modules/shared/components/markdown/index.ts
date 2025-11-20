@@ -1,1 +1,2 @@
-export * from './markdown'
+export { Markdown } from './markdown'
+export { MarkdownSkeleton } from './markdown-skeleton'

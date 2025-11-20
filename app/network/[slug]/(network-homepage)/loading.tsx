@@ -3,7 +3,7 @@ import { PageBackground, PageContent } from '@/modules/shared/components/page-co
 export default function NetworkPageLoading() {
   return (
     <PageBackground>
-      <PageContent className="gap-6">
+      <PageContent className="gap-8">
         <div>Loading...</div>
       </PageContent>
     </PageBackground>

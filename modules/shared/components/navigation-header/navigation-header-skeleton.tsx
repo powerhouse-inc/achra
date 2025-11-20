@@ -3,9 +3,9 @@ import { cn } from '@/modules/shared/lib/utils'
 
 export function NavigationHeaderSkeleton() {
   return (
-    <div className="bg-secondary flex w-full max-w-121 items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
-      <div className="relative flex w-full max-w-60.75 items-center self-stretch pr-7 sm:pr-8 md:pr-9">
-        <Skeleton className="bg-border h-6 w-full" />
+    <div className="bg-secondary flex w-fit items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
+      <div className="relative flex items-center self-stretch pr-7 sm:pr-8 md:pr-9">
+        <Skeleton className="bg-border h-4 w-25 sm:h-4.5 md:h-6 md:w-32" />
         <div
           className={cn(
             'absolute -top-1 right-0 -bottom-1 sm:-top-2 sm:-bottom-2 md:-top-3 md:-bottom-3',
@@ -25,7 +25,7 @@ export function NavigationHeaderSkeleton() {
           </svg>
         </div>
       </div>
-      <Skeleton className="bg-border h-6 w-full max-w-51.25" />
+      <Skeleton className="bg-border h-5 w-28 sm:h-6 sm:w-44 md:w-64" />
     </div>
   )
 }
