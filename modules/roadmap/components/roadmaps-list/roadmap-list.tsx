@@ -62,8 +62,8 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
               key={roadmap.id}
               roadmap={roadmap}
               networkSlug={slug}
-              workstreamCode={workstream?.code ?? ''}
-              workstreamTitle={workstream?.title ?? ''}
+              workstreamCode={workstream.code ?? ''}
+              workstreamTitle={workstream.title ?? ''}
             />
           )),
         )}
