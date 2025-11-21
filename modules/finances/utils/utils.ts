@@ -94,14 +94,21 @@ export function getBreadcrumbItems(
   const items: BreadcrumbItemNavigation[] = []
   const segmentedCodePath = codePath.split('/')
 
+  // Add network name first
+  items.push({
+    label: networkName,
+    href: `/network/${slug}` as Route,
+  })
+
+  // Add Finances after network name (only once)
+  items.push({
+    label: 'Finances',
+    href: `/network/${slug}/finances` as Route,
+  })
+
+  // Add budget items (skip 'atlas' as it's already handled)
   segmentedCodePath.forEach((item, index) => {
-    if (item === 'atlas') {
-      // it is the first level
-      items.push({
-        label: networkName,
-        href: `/network/${slug}` as Route,
-      })
-    } else {
+    if (item !== 'atlas') {
       // it is a deeper level
       items.push({
         label: formatBudgetName(
@@ -112,10 +119,6 @@ export function getBreadcrumbItems(
         href: `/network/${slug}/finances/${segmentedCodePath.slice(1, index + 1).join('/')}?year=${year}` as Route,
       })
     }
-  })
-  items.push({
-    label: 'Finances',
-    href: `/network/${slug}/finances` as Route,
   })
 
   return items
