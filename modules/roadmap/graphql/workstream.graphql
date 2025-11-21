@@ -1,7 +1,11 @@
 query RoadmapList($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
     title
-    code
+    slug
+    client {
+      name
+      icon
+    }
     sow {
       roadmaps {
         id
