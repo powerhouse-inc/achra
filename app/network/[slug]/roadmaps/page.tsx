@@ -7,12 +7,6 @@ import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-stat
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
 
-const items = [
-  { label: 'Networks', href: '/networks' as Route },
-  { label: 'Powerhouse', href: '/network/powerhouse' as Route },
-  { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as Route },
-]
-
 interface RoadmapPageProps {
   params: Promise<{ slug: string }>
   searchParams: Promise<{
@@ -23,6 +17,14 @@ interface RoadmapPageProps {
 
 export default async function RoadmapPage({ params, searchParams }: RoadmapPageProps) {
   const searchParamsString = JSON.stringify(await searchParams)
+
+  const { slug } = await params
+
+  const items = [
+    { label: 'Networks', href: '/networks' as Route },
+    { label: slug.charAt(0).toUpperCase() + slug.slice(1), href: `/network/${slug}` as Route },
+    { label: 'Roadmaps', href: `/network/${slug}/roadmaps` as Route },
+  ]
 
   return (
     <PageBackground>
