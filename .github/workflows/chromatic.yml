@@ -40,5 +40,3 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_DSPOT_PROJECT_TOKEN }}
           exitZeroOnChanges: false # fail on changes
           onlyChanged: true # enable TurboSnap https://www.chromatic.com/docs/turbosnap
-        env:
-          NEXT_PUBLIC_SWITCHBOARD_URL: 'https://switchboard.example.com/graphql' # it doesn't matter what the value is, as long as it's a valid URL
