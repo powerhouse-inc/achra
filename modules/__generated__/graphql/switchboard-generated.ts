@@ -3218,6 +3218,13 @@ export type RoadmapListQueryVariables = Exact<{
 
 export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null }> };
 
+export type WorkstreamDetailsQueryVariables = Exact<{
+  filter: WorkstreamFilter;
+}>;
+
+
+export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+
 export type WorkstreamsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
 }>;
@@ -3622,6 +3629,103 @@ useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => [
 
 
 useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
+
+export const WorkstreamDetailsDocument = `
+    query WorkstreamDetails($filter: WorkstreamFilter!) {
+  workstream(filter: $filter) {
+    title
+    status
+    slug
+    client {
+      name
+      icon
+    }
+    initialProposal {
+      status
+      author {
+        name
+      }
+      paymentTerms {
+        proposer
+        currency
+        totalAmount
+        paymentModel
+      }
+      sow {
+        roadmaps {
+          milestones {
+            budget
+            scope {
+              deliverables
+            }
+          }
+        }
+      }
+    }
+    rfp {
+      title
+      summary
+      budgetMax
+      budgetMin
+      budgetCurrency
+      briefing
+      submissionDeadline
+    }
+    sow {
+      projects {
+        title
+      }
+      roadmaps {
+        milestones {
+          id
+        }
+      }
+    }
+    alternativeProposals {
+      id
+    }
+  }
+}
+    `;
+
+export const useWorkstreamDetailsQuery = <
+      TData = WorkstreamDetailsQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamDetailsQueryVariables,
+      options?: Omit<UseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<WorkstreamDetailsQuery, TError, TData>(
+      {
+    queryKey: ['WorkstreamDetails', variables],
+    queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useWorkstreamDetailsQuery.getKey = (variables: WorkstreamDetailsQueryVariables) => ['WorkstreamDetails', variables];
+
+export const useSuspenseWorkstreamDetailsQuery = <
+      TData = WorkstreamDetailsQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamDetailsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<WorkstreamDetailsQuery, TError, TData>(
+      {
+    queryKey: ['WorkstreamDetailsSuspense', variables],
+    queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseWorkstreamDetailsQuery.getKey = (variables: WorkstreamDetailsQueryVariables) => ['WorkstreamDetailsSuspense', variables];
+
+
+useWorkstreamDetailsQuery.fetcher = (variables: WorkstreamDetailsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables, options);
 
 export const WorkstreamsDocument = `
     query Workstreams($filter: WorkstreamsFilter) {

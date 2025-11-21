@@ -51,7 +51,7 @@ export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
       activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
     },
     {
-      label: 'Roadmap',
+      label: 'Roadmaps',
       href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
       activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
     },

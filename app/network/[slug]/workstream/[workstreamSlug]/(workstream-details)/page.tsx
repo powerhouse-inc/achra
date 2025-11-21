@@ -1,18 +1,17 @@
 import { FilePenLine } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import { Streamdown } from 'streamdown'
 import {
   type FullQueryWorkstream,
-  useWorkstreamsQuery,
+  useWorkstreamDetailsQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { Markdown } from '@/modules/shared/components/markdown'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { slugify } from '@/modules/shared/lib/slug'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
@@ -26,15 +25,19 @@ interface Props {
 }
 
 export default async function WorkstreamDetailsPage({ params }: Props) {
-  const data = await useWorkstreamsQuery.fetcher({})()
-  const workstream = data.workstreams[0] as FullQueryWorkstream | undefined
+  const { slug, workstreamSlug } = await params
+  const data = await useWorkstreamDetailsQuery.fetcher({
+    filter: {
+      networkSlug: slug,
+      workstreamSlug,
+    },
+  })()
+  const workstream = data.workstream[0] as unknown as FullQueryWorkstream | undefined
 
   if (!workstream) {
     notFound()
   }
 
-  const networkSlug = slugify(workstream.client?.name ?? 'Unknown')
-  const workstreamSlug = slugify(workstream.title ?? 'Unknown')
   const { milestones, deliverables } = countRoadmapStats(workstream)
 
   return (
@@ -63,15 +66,11 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
           submissionDeadline={workstream.rfp?.submissionDeadline}
         />
 
-        {workstream.rfp?.summary && (
-          <Streamdown className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
-            {workstream.rfp.summary}
-          </Streamdown>
-        )}
+        {workstream.rfp?.summary && <Markdown>{workstream.rfp.summary}</Markdown>}
 
         <div className="bg-accent flex flex-col gap-4 rounded-xl p-2 pb-4 shadow-sm sm:p-4 sm:pb-6">
           <InitialProposalHeader
-            networkSlug={networkSlug}
+            networkSlug={slug}
             workstreamSlug={workstreamSlug}
             proposalStatus={workstream.initialProposal?.status}
             proposalAuthor={workstream.initialProposal?.author.name}
@@ -80,7 +79,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
           <StatCards milestones={milestones} deliverables={deliverables} />
 
           <Suspense fallback={<Skeleton className="h-9 w-36" />}>
-            <ViewProposalLink networkSlug={networkSlug} workstreamSlug={workstreamSlug} />
+            <ViewProposalLink networkSlug={slug} workstreamSlug={workstreamSlug} />
           </Suspense>
 
           <Separator />
