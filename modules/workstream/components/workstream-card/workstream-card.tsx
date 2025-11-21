@@ -55,7 +55,7 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
           )}
 
           <InternalLink
-            href={'/network/powerhouse/workstream/wp25/rfp' as Route}
+            href={`/network/${networkSlug}/workstream/${workstreamSlug}/rfp` as Route}
             className="ml-auto max-w-fit"
             variant="outline"
           >
