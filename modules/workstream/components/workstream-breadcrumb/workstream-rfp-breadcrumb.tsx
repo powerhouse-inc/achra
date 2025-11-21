@@ -3,9 +3,10 @@ import type { Route } from 'next'
 
 interface WorkstreamRfpBreadcrumbProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
+  workstreamName: string
 }
 
-async function WorkstreamRfpBreadcrumb({ params }: WorkstreamRfpBreadcrumbProps) {
+async function WorkstreamRfpBreadcrumb({ params, workstreamName }: WorkstreamRfpBreadcrumbProps) {
   const { slug, workstreamSlug } = await params
 
   return (
@@ -13,7 +14,7 @@ async function WorkstreamRfpBreadcrumb({ params }: WorkstreamRfpBreadcrumbProps)
       items={[
         { label: 'Powerhouse', href: `/network/${slug}` as Route },
         {
-          label: 'Vetra Beta Launch',
+          label: workstreamName,
           href: `/network/${slug}/workstream/${workstreamSlug}` as Route,
         },
         {
