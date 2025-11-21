@@ -6,7 +6,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { ActorRolesSelect, ActorRolesSelectDrawer } from './actor-roles-select'
 import { ScopesSelect, ScopesSelectDrawer } from './scopes-select'
-import useBuilderFilters from './useBuilderFilters'
+import useBuilderFilters from './useBuildersFilters'
 
 export default function BuilderFilters() {
   const { search, scopes, actorRoles, setSearch, setScopes, setActorRoles, onReset } =

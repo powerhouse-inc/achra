@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
-import BuilderFilters from '@/modules/builders/components/builder-filters'
+import { Builders } from '@/modules/builders/components/builders/builders'
+import BuilderFilters from '@/modules/builders/components/builders-filters'
 import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
@@ -35,7 +36,7 @@ export default async function BuildersPage({ searchParams }: BuildersPageProps) 
         <BuilderFilters />
         <ErrorBoundaryWithPresets>
           <Suspense fallback="Loading..." key={searchParamsString}>
-            Builders list
+            <Builders />
           </Suspense>
         </ErrorBoundaryWithPresets>
       </PageContent>

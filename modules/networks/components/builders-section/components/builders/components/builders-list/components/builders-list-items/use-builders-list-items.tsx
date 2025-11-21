@@ -3,11 +3,11 @@ import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import type { Team } from '@/modules/shared/types/team'
 import type SimpleBar from 'simplebar-react'
 
-interface UseBuilderTeamsListProps {
-  mockBuilderTeams: Team[]
+interface UseBuildersListItemsProps {
+  builders: Team[]
 }
 
-export const useBuilderTeamsList = ({ mockBuilderTeams }: UseBuilderTeamsListProps) => {
+export const useBuildersListItems = ({ builders }: UseBuildersListItemsProps) => {
   const simpleBarRef = useRef<React.ComponentRef<typeof SimpleBar>>(null)
   const cardContentRef = useRef<HTMLDivElement>(null)
   const itemsWrapperRef = useRef<HTMLDivElement>(null)
@@ -23,7 +23,7 @@ export const useBuilderTeamsList = ({ mockBuilderTeams }: UseBuilderTeamsListPro
 
     if (!simpleBarEl || !cardContentEl || !itemsWrapperEl) return
 
-    const teamsCount = mockBuilderTeams.length
+    const teamsCount = builders.length
 
     let config: { maxHeight: string; maxItems: number } | null = null
     if (isLargeMobile) {
@@ -46,7 +46,7 @@ export const useBuilderTeamsList = ({ mockBuilderTeams }: UseBuilderTeamsListPro
       cardContentEl.style.paddingRight = '4px'
       itemsWrapperEl.style.paddingRight = '12px'
     }
-  }, [isLargeMobile, isTablet, isDesktop, mockBuilderTeams.length])
+  }, [isLargeMobile, isTablet, isDesktop, builders.length])
 
   return { simpleBarRef, cardContentRef, itemsWrapperRef }
 }

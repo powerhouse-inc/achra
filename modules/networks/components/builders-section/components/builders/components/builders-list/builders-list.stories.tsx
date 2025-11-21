@@ -1,9 +1,10 @@
-import { BuilderTeamsList } from './builder-teams-list'
+import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
+import { BuildersList } from './builders-list'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Modules/Networks/Components/BuildersSection/BuilderTeamsList',
-  component: BuilderTeamsList,
+  component: BuildersList,
   parameters: {
     layout: 'padded',
     docs: {
@@ -12,9 +13,13 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof BuilderTeamsList>
+} satisfies Meta<typeof BuildersList>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    builders: mockBuilderTeams,
+  },
+}

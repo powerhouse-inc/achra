@@ -1,7 +1,4 @@
-'use client'
 import Link from 'next/link'
-import SimpleBar from 'simplebar-react'
-import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
 import {
   StripedCard,
   StripedCardAction,
@@ -11,17 +8,15 @@ import {
 } from '@/modules/shared/components/striped-card/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-import { BuilderTeamsItem } from '../builder-teams-item/builder-teams-item'
-import { useBuilderTeamsList } from './use-builder-teams-list'
+import type { Team } from '@/modules/shared/types/team'
+import { BuildersListItems } from './components/builders-list-items/builders-list-items'
 
-export interface ExecutiveProposalsListProps {
+export interface BuildersListProps {
+  builders: Team[]
   className?: string
 }
 
-export function BuilderTeamsList({ className }: ExecutiveProposalsListProps) {
-  const { simpleBarRef, cardContentRef, itemsWrapperRef } = useBuilderTeamsList({
-    mockBuilderTeams,
-  })
+export function BuildersList({ className, builders }: BuildersListProps) {
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>
       <StripedCard className={cn('w-full', className)}>
@@ -45,18 +40,10 @@ export function BuilderTeamsList({ className }: ExecutiveProposalsListProps) {
             </Button>
           </StripedCardAction>
         </StripedCardHeader>
-        <StripedCardContent ref={cardContentRef} className="p-0">
-          <SimpleBar ref={simpleBarRef} autoHide={false}>
-            <div ref={itemsWrapperRef} className="flex flex-col gap-2 p-2">
-              {mockBuilderTeams.map((team) => (
-                <BuilderTeamsItem key={team.id} team={team} />
-              ))}
-            </div>
-          </SimpleBar>
+        <StripedCardContent className="p-0">
+          <BuildersListItems builders={builders} />
         </StripedCardContent>
       </StripedCard>
     </div>
   )
 }
-
-// 210
