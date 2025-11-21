@@ -8,14 +8,16 @@ import {
 } from '@/modules/networks/components/homepage-banner'
 import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import { ProposalsSection } from '@/modules/networks/components/proposals-section/proposals-section'
-import { RoadmapSection } from '@/modules/networks/components/roadmap-section'
+import {
+  RoadmapSection,
+  RoadmapSectionSkeleton,
+} from '@/modules/networks/components/roadmap-section'
 import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { WalletsSection } from '@/modules/networks/components/wallets-section/wallets-section'
 import {
   NETWORK_HOMEPAGE_SECTIONS_ENCODED,
   NETWORK_HOMEPAGE_SKIP_SECTION,
 } from '@/modules/networks/config/constants'
-import { mockedRoadmaps } from '@/modules/roadmap/mocks'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
 
@@ -31,7 +33,9 @@ export default function NetworkPage({ params }: NetworkPageProps) {
           <HomepageBanner />
         </Suspense>
         <ProposalsSection proposals={PROPOSALS} />
-        <RoadmapSection roadmaps={mockedRoadmaps} params={params} />
+        <Suspense fallback={<RoadmapSectionSkeleton />}>
+          <RoadmapSection params={params} />
+        </Suspense>
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
         <BuildersSection />

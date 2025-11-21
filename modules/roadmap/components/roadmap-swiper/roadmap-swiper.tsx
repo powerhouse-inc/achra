@@ -21,8 +21,8 @@ export default function RoadmapSwiper({
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
-    <div className="hidden flex-col sm:flex">
-      <div className="relative -mx-2">
+    <div className="-mx-2 hidden flex-col sm:flex">
+      <div className="relative">
         <Swiper
           ref={swiperRef}
           modules={[Pagination]}
@@ -62,14 +62,15 @@ export default function RoadmapSwiper({
           }}
           centerInsufficientSlides
           className={cn(
-            '!pb-10',
+            isSwiperReady && 'pb-10!',
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
-            !isSwiperReady && '!hidden',
+            // Hide the swiper until it is ready using invisible! and h-0 to avoid layout flickering
+            !isSwiperReady && 'invisible! h-0',
           )}
         >
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id} className="flex">
-              <div className="mx-2 flex h-full">
+              <div className="mx-2 flex h-full pt-2">
                 <MilestoneExtendedCard
                   milestone={milestone}
                   className="swiper-milestone-card"
@@ -85,7 +86,7 @@ export default function RoadmapSwiper({
             {milestones.map((milestone) => (
               <div
                 key={milestone.id}
-                className="mx-2 flex h-full w-full sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
+                className="mx-2 flex h-full w-full pt-2 sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
               >
                 <MilestoneExtendedCard
                   milestone={milestone}
