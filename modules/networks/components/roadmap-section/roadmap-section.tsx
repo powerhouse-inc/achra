@@ -6,12 +6,6 @@ import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
@@ -35,14 +29,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
   })
 
   if (!hasRoadmaps) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyTitle>No roadmaps found</EmptyTitle>
-          <EmptyDescription>There are no roadmaps to display at this time.</EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    )
+    return null
   }
   const roadmaps = data.workstream.flatMap((workstream) => workstream.sow?.roadmaps ?? [])
 
