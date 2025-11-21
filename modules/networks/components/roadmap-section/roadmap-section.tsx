@@ -1,21 +1,50 @@
-import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  type ScopeOfWork_Milestone,
+  useRoadmapListQuery,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { ROADMAP_TABS_CONFIG } from './constants'
 
 interface RoadmapSectionProps {
-  roadmaps: ScopeOfWork_Roadmap[]
   params: Promise<{ slug: string }>
 }
 
-export default async function RoadmapSection({ roadmaps, params }: RoadmapSectionProps) {
+export default async function RoadmapSection({ params }: RoadmapSectionProps) {
   const { slug } = await params
+
+  const data = await useRoadmapListQuery.fetcher({
+    filter: {
+      networkSlug: slug,
+    },
+  })()
+
+  const hasRoadmaps = data.workstream.some((workstream) => {
+    return (workstream.sow?.roadmaps.length ?? 0) > 0
+  })
+
+  if (!hasRoadmaps) {
+    return (
+      <Empty>
+        <EmptyHeader>
+          <EmptyTitle>No roadmaps found</EmptyTitle>
+          <EmptyDescription>There are no roadmaps to display at this time.</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    )
+  }
+  const roadmaps = data.workstream.flatMap((workstream) => workstream.sow?.roadmaps ?? [])
 
   return (
     <section
@@ -23,26 +52,22 @@ export default async function RoadmapSection({ roadmaps, params }: RoadmapSectio
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />
-      <ScrollableTabs defaultValue="phase-1" className="md:order-1">
+      <ScrollableTabs defaultValue={roadmaps[0].id} className="overflow-visible md:order-1">
         <ScrollableTabsList>
           <div className="flex w-fit">
-            {ROADMAP_TABS_CONFIG.map((tab) => (
+            {roadmaps.map((roadmap) => (
               <TabsTrigger
-                key={tab.id}
-                value={tab.id}
+                key={roadmap.id}
+                value={roadmap.id}
                 className="dark:data-[state=active]:bg-background text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
               >
-                {tab.label}
+                {roadmap.title}
               </TabsTrigger>
             ))}
           </div>
         </ScrollableTabsList>
-        {roadmaps.map((roadmap, index) => (
-          <TabsContent
-            key={roadmap.id}
-            value={`phase-${index + 1}`}
-            className="flex flex-col gap-4 xl:gap-6"
-          >
+        {roadmaps.map((roadmap) => (
+          <TabsContent key={roadmap.id} value={roadmap.id} className="flex flex-col gap-2 xl:gap-4">
             <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
               {roadmap.description}
             </div>
@@ -51,14 +76,14 @@ export default async function RoadmapSection({ roadmaps, params }: RoadmapSectio
               {roadmap.milestones.map((milestone) => (
                 <MilestoneExtendedCard
                   key={milestone.id}
-                  milestone={milestone}
+                  milestone={milestone as ScopeOfWork_Milestone}
                   networkSlug={slug}
                   roadmapSlug={roadmap.slug}
                 />
               ))}
             </div>
             <RoadmapSwiper
-              milestones={roadmap.milestones}
+              milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
               networkSlug={slug}
               roadmapSlug={roadmap.slug}
             />
