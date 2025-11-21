@@ -13,12 +13,13 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
+import { NoDeliverables } from '@/modules/workstream/components/no-deliverables'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
 import { StatCards } from '@/modules/workstream/components/workstream-card/stat-cards'
 import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
-import { countRoadmapStats } from '@/modules/workstream/lib/roadmap-stats'
+import { calculateTotalBudget, countRoadmapStats } from '@/modules/workstream/lib/roadmap-stats'
 
 interface Props {
   params: Promise<{ slug: string; workstreamSlug: string }>
@@ -39,6 +40,9 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
   }
 
   const { milestones, deliverables } = countRoadmapStats(workstream)
+  const totalBudget = calculateTotalBudget(workstream)
+
+  const initialProposalDeliverables = workstream.initialProposal?.sow?.deliverables ?? []
 
   return (
     <PageBackground>
@@ -59,7 +63,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
         </div>
 
         <WorkstreamStats
-          issuer="Not specified"
+          issuer={workstream.client?.name ?? 'Unknown'}
           budgetMin={workstream.rfp?.budgetMin}
           budgetMax={workstream.rfp?.budgetMax}
           budgetCurrency={workstream.rfp?.budgetCurrency}
@@ -76,7 +80,11 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
             proposalAuthor={workstream.initialProposal?.author.name}
           />
 
-          <StatCards milestones={milestones} deliverables={deliverables} />
+          <StatCards
+            milestones={milestones}
+            deliverables={deliverables}
+            totalBudget={totalBudget}
+          />
 
           <Suspense fallback={<Skeleton className="h-9 w-36" />}>
             <ViewProposalLink networkSlug={slug} workstreamSlug={workstreamSlug} />
@@ -84,29 +92,38 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
 
           <Separator />
 
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
-            <div className="flex w-full flex-col gap-2">
-              <div className="text-foreground/50 text-sm/5.5 font-semibold uppercase xl:text-base/6">
-                Join this proposal
-              </div>
-              <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
-                <span className="whitespace-nowrap">Application Deadline:</span>
-                <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
-                  31 SEP 2025
+          {initialProposalDeliverables.length > 0 ? (
+            <>
+              <div className="flex flex-col items-start gap-4 sm:flex-row sm:justify-between">
+                <div className="flex w-full flex-col gap-2">
+                  <div className="text-foreground/50 text-sm/5.5 font-semibold uppercase xl:text-base/6">
+                    Join this proposal
+                  </div>
+                  <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
+                    <span className="whitespace-nowrap">Application Deadline:</span>
+                    <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
+                      31 SEP 2025
+                    </div>
+                  </div>
                 </div>
+
+                <Button>
+                  Create Alternative Proposal <FilePenLine className="size-4" />
+                </Button>
               </div>
-            </div>
-
-            <Button>
-              Create Alternative Proposal <FilePenLine className="size-4" />
-            </Button>
-          </div>
-
-          {workstream.rfp?.briefing && (
-            <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">{workstream.rfp.briefing}</p>
+              {workstream.initialProposal?.sow?.description && (
+                <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
+                  {workstream.initialProposal.sow.description}
+                </p>
+              )}
+              <ProposalCardsGrid
+                deliverables={initialProposalDeliverables}
+                shouldUsePagination={false}
+              />
+            </>
+          ) : (
+            <NoDeliverables />
           )}
-
-          <ProposalCardsGrid />
         </div>
       </PageContent>
     </PageBackground>
