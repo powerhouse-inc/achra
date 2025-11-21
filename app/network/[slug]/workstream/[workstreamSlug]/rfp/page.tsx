@@ -51,7 +51,11 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     <PageBackground>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
-          <WorkstreamRfpBreadcrumb params={params} workstreamName={workstreamName} />
+          <WorkstreamRfpBreadcrumb
+            params={params}
+            workstreamName={workstreamName}
+            networkSlug={slug}
+          />
         </Suspense>
       </PageBreadcrumbContainer>
 
