@@ -8,7 +8,7 @@ import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-s
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Markdown } from '@/modules/shared/components/markdown'
-import { PageContent } from '@/modules/shared/components/page-containers'
+import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -19,11 +19,12 @@ interface RequestForProposalPageProps {
 }
 
 export default async function RequestForProposalPage({ params }: RequestForProposalPageProps) {
-  const { slug } = await params
+  const { slug, workstreamSlug } = await params
 
   const data = await useRfpByWorkstreamQuery.fetcher({
     filter: {
       networkSlug: slug,
+      workstreamSlug,
     },
   })()
 
@@ -38,7 +39,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
 
   const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
-
+  const workstreamName = workstreamRfp.title ?? 'Unknown'
   const isRfpContentEmpty =
     !rfp ||
     ((!rfp.briefing || rfp.briefing.trim() === '') &&
@@ -47,10 +48,10 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
       (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === ''))
 
   return (
-    <main>
+    <PageBackground>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
-          <WorkstreamRfpBreadcrumb params={params} />
+          <WorkstreamRfpBreadcrumb params={params} workstreamName={workstreamName} />
         </Suspense>
       </PageBreadcrumbContainer>
 
@@ -176,6 +177,6 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
           </Card>
         </ErrorBoundaryWithPresets>
       </PageContent>
-    </main>
+    </PageBackground>
   )
 }

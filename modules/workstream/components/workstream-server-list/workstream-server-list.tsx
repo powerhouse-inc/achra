@@ -5,6 +5,7 @@ import {
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { WorkstreamCard } from '../workstream-card'
+import { WorkstreamEmpty } from '../workstream-empty'
 
 const filtersParser = createLoader({
   search: parseAsString.withDefault(''),
@@ -23,31 +24,33 @@ interface WorkstreamServerListProps {
 
 async function WorkstreamServerList({ params, searchParams }: WorkstreamServerListProps) {
   const slug = (await params)?.slug
-  // TODO: add search filter once it is enabled in the api
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { search, statuses, networks } = await filtersParser(searchParams)
 
+  // in the contribute page there're no networks filter as it is filtered by the network slug from the URL
   const networkFilter = slug ? [slug] : networks
+  const searchFilter = search.trim().length > 0 ? search : undefined
 
   const data = await useWorkstreamsQuery.fetcher({
     filter: {
-      // TODO: Handle multiple network slugs (should be implemented in the api)
-      networkSlug: networkFilter[0] ? networkFilter[0] : undefined,
-      // Use workstreamStatuses for multiple statuses support
-      workstreamStatuses: statuses.length > 0 ? statuses : undefined,
-      workstreamTitle: undefined,
+      networkNames: networkFilter,
+      workstreamStatuses: statuses,
+      workstreamTitle: searchFilter,
     },
   })()
 
+  const hasActiveFilters =
+    searchFilter !== undefined ||
+    statuses.length > 0 ||
+    (networkFilter.length > 0 && slug === undefined)
+
   if (data.workstreams.length === 0) {
-    return <div>No workstreams found</div>
+    return <WorkstreamEmpty hasActiveFilters={hasActiveFilters} />
   }
 
   return (
     <div className="flex flex-col gap-8">
-      {data.workstreams.map((workstream, index) => (
-        // TODO: replace the key with the workstream slug once it is available
-        <WorkstreamCard key={index} workstream={workstream as FullQueryWorkstream} />
+      {data.workstreams.map((workstream) => (
+        <WorkstreamCard key={workstream.slug} workstream={workstream as FullQueryWorkstream} />
       ))}
     </div>
   )

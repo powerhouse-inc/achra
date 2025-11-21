@@ -2,8 +2,10 @@ query Workstreams($filter: WorkstreamsFilter) {
   workstreams(filter: $filter) {
     title
     status
+    slug
     client {
       name
+      icon
     }
     initialProposal {
       status

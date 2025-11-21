@@ -47,5 +47,13 @@ export default function useWorkstreamFilters() {
     void setNetworks([])
   }, [setSearch, setStatuses, setNetworks])
 
-  return { search, statuses, networks, setSearch, setStatuses, setNetworks, onReset }
+  return {
+    search,
+    statuses,
+    networks,
+    setSearch,
+    setStatuses,
+    setNetworks,
+    onReset,
+  }
 }

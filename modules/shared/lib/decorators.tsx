@@ -1,9 +1,11 @@
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { useEffect } from 'react'
 import AchraLayout from '@/app/(achra)/layout'
 import RootLayout from '@/app/layout'
 import NetworkLayout from '@/app/network/[slug]/layout'
+import { QueryClientProvider } from '@/shared/providers/query-client'
 import type { StoryContext } from '@storybook/nextjs'
 
 const inter = Inter({
@@ -88,3 +90,21 @@ export const withPortalFontStyles = (Story: React.ComponentType) => {
     </PortalFontProvider>
   )
 }
+
+/**
+ * Storybook decorator to apply the Nuqs adapter to the page stories
+ */
+export const withNuqsAdapter = (Story: React.ComponentType) => (
+  <NuqsAdapter>
+    <Story />
+  </NuqsAdapter>
+)
+
+/**
+ * Storybook decorator to apply the React Query provider to the page stories
+ */
+export const withReactQueryProvider = (Story: React.ComponentType) => (
+  <QueryClientProvider>
+    <Story />
+  </QueryClientProvider>
+)
