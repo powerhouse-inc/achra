@@ -11,7 +11,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { cn } from '@/modules/shared/lib/utils'
-import CardLegend from './card-legend'
+import { CardLegend } from './card-legend'
 import { DoughnutChartSkeleton } from './doughnut-chart-skeleton'
 import { UsdsTooltip } from './usds-tooltip'
 import { chunkArray, getCorrectMetricValuesOverViewChart, sortDoughnutSeriesByValue } from './utils'
@@ -295,7 +295,6 @@ export function DesktopChart({
             {Array.from(doughnutSeriesChunks.entries()).map(([index, dataChunk]) => (
               <SwiperSlide key={index}>
                 <CardLegend
-                  key={index}
                   changeAlignment={changeAlignment}
                   doughnutSeriesData={dataChunk}
                   toggleSeriesVisibility={toggleSeriesVisibility}
@@ -308,7 +307,6 @@ export function DesktopChart({
           </Swiper>
         </div>
       ) : (
-        // === NO SWIPER CONTAINER ===
         <div className={cn('relative flex max-w-full items-center justify-center')}>
           <CardLegend
             changeAlignment={changeAlignment}

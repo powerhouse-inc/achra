@@ -2,7 +2,7 @@ import React from 'react'
 import type { DoughnutSeries } from '@/modules/finances/components/summary-section/doughnut-chart/types'
 import { sortDoughnutSeriesByValue } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
 import { cn } from '@/modules/shared/lib/utils'
-import { ItemLegendDoughnut } from './card-legend/card-legend-item'
+import { ItemLegendDoughnut } from './card-legend-item'
 
 interface CardLegendProps {
   isDeepLevel?: boolean
@@ -27,9 +27,9 @@ export function CardLegend({
     <div
       className={cn(
         'flex flex-col flex-wrap',
-        'max-h-[155px] w-auto max-w-full',
+        'max-h-38.75 w-auto max-w-full',
         isDeepLevel ? 'gap-1' : 'gap-2',
-        isDeepLevel ? 'xl:gap-y-[10px]' : 'xl:gap-y-2',
+        isDeepLevel ? 'xl:gap-y-2.5' : 'xl:gap-y-2',
 
         changeAlignment || isDeepLevel ? 'justify-start' : 'justify-center',
         'xl:gap-x-6',
