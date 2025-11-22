@@ -1,80 +1,53 @@
-'use client'
-
-import { cn } from '@/shared/lib/utils'
-import type { DoughnutSeries } from './types'
+import React from 'react'
+import type { DoughnutSeries } from '@/modules/finances/components/summary-section/doughnut-chart/types'
+import { sortDoughnutSeriesByValue } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
+import { cn } from '@/modules/shared/lib/utils'
+import { ItemLegendDoughnut } from './card-legend/card-legend-item'
 
 interface CardLegendProps {
+  isDeepLevel?: boolean
+  changeAlignment: boolean
   doughnutSeriesData: DoughnutSeries[]
   toggleSeriesVisibility: (seriesName: string) => void
-  onLegendItemHover: (legendName: string) => void
   onLegendItemLeave: (legendName: string) => void
-  isDeepLevel: boolean
-  changeAlignment: boolean
+  onLegendItemHover: (legendName: string) => void
 }
 
 export function CardLegend({
+  changeAlignment,
+  isDeepLevel = true,
   doughnutSeriesData,
-  toggleSeriesVisibility,
   onLegendItemHover,
   onLegendItemLeave,
-  isDeepLevel,
-  changeAlignment,
+  toggleSeriesVisibility,
 }: CardLegendProps) {
+  const sortedDoughnutSeries = sortDoughnutSeriesByValue(doughnutSeriesData)
+
   return (
     <div
-      data-slot="card-legend"
       className={cn(
-        'relative flex max-w-full flex-col flex-wrap gap-3.5',
-        isDeepLevel && changeAlignment
-          ? 'justify-start'
-          : changeAlignment
-            ? 'justify-start'
-            : 'justify-center',
-        'xl:gap-4',
+        'flex flex-col flex-wrap',
+        'max-h-[155px] w-auto max-w-full',
+        isDeepLevel ? 'gap-1' : 'gap-2',
+        isDeepLevel ? 'xl:gap-y-[10px]' : 'xl:gap-y-2',
+
+        changeAlignment || isDeepLevel ? 'justify-start' : 'justify-center',
+        'xl:gap-x-6',
       )}
     >
-      {doughnutSeriesData.map((item) => {
-        const isVisible = item.isVisible !== false
-        const displayColor = isVisible ? item.color : 'rgb(204, 204, 204)'
-
-        return (
-          <button
-            key={item.name}
-            data-slot="legend-item"
-            type="button"
-            onClick={() => {
-              toggleSeriesVisibility(item.name)
-            }}
-            onMouseEnter={() => {
-              onLegendItemHover(item.name)
-            }}
-            onMouseLeave={() => {
-              onLegendItemLeave(item.name)
-            }}
-            className={cn(
-              'flex cursor-pointer items-center gap-2 transition-opacity',
-              'focus-visible:ring-ring rounded hover:opacity-80 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-              !isVisible && 'opacity-50',
-            )}
-            aria-label={`Toggle ${item.name} visibility`}
-          >
-            <div
-              data-slot="legend-color-indicator"
-              className="size-3 shrink-0 rounded-full"
-              style={{ backgroundColor: displayColor }}
-            />
-            <span
-              data-slot="legend-label"
-              className={cn(
-                'text-foreground truncate text-sm font-medium',
-                !isVisible && 'text-muted-foreground',
-              )}
-            >
-              {item.name}
-            </span>
-          </button>
-        )
-      })}
+      {sortedDoughnutSeries.map((data) => (
+        <ItemLegendDoughnut
+          key={data.name}
+          changeAlignment={changeAlignment}
+          doughnutData={data}
+          onLegendItemHover={onLegendItemHover}
+          onLegendItemLeave={onLegendItemLeave}
+          toggleSeriesVisibility={toggleSeriesVisibility}
+          isDeepLevel={isDeepLevel}
+        />
+      ))}
     </div>
   )
 }
+
+export default CardLegend
