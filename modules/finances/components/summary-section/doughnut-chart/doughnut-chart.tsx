@@ -6,10 +6,6 @@ import { Swiper, type SwiperProps, type SwiperRef, SwiperSlide } from 'swiper/re
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
 import { cn } from '@/modules/shared/lib/utils'
 import { CardLegend } from './card-legend'
 import { DoughnutChartSkeleton } from './doughnut-chart-skeleton'
@@ -233,8 +229,8 @@ export function DesktopChart({
   return (
     <div
       className={cn(
-        'hidden w-full',
-        'md:flex md:flex-row md:justify-center md:gap-5',
+        'flex w-full',
+        'md:flex-row md:justify-center md:gap-5',
         'lg:gap-4',
         '2xl:gap-6',
         isDeepLevel ? 'xl:gap-10' : 'xl:gap-8',
@@ -265,7 +261,6 @@ export function DesktopChart({
       {showSwiper ? (
         <div
           className={cn(
-            'hidden',
             'md:relative md:flex md:w-[200px]',
             'lg:flex lg:w-[250px] lg:min-w-[250px]',
             isDeepLevel ? 'lg:mt-0' : 'lg:mt-4',
