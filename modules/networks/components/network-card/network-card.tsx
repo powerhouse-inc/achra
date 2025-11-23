@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/compo
 import NetworkChip from './network-category'
 
 interface NetworkCardProps {
-  profile: Network
+  profile: Pick<Network, 'name' | 'slug' | 'logo' | 'logoBig' | 'category' | 'description'>
 }
 
 export function NetworkCard({ profile }: NetworkCardProps) {
