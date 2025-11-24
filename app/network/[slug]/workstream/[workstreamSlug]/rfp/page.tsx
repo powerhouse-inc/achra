@@ -39,7 +39,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
 
   const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
-  const workstreamName = workstreamRfp.title ?? 'Unknown'
+  const workstreamName = workstreamRfp.title ?? ''
   const isRfpContentEmpty =
     !rfp ||
     ((!rfp.briefing || rfp.briefing.trim() === '') &&
@@ -68,12 +68,12 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
                     {workstreamRfp.title && (
                       <div className="text-base/6 font-bold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl md:leading-[120%] xl:text-2xl xl:leading-[120%] xl:font-bold">
-                        {workstreamRfp.title}
+                        {rfp?.title ?? 'Unknown'}
                       </div>
                     )}
                     {workstreamRfp.code && (
                       <div className="text-foreground/50 hidden items-center justify-between text-xs/4.5 font-medium uppercase sm:flex sm:self-end md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
-                        {workstreamRfp.code}
+                        {rfp?.code ?? 'Unknown'}
                       </div>
                     )}
                   </div>
