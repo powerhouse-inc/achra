@@ -1,3 +1,5 @@
+import type { BudgetMetricWithName } from '@/modules/finances/types'
+
 export type AnalyticMetric =
   | 'Budget'
   | 'Forecast'
@@ -23,10 +25,12 @@ export interface BudgetMetric {
 export interface DoughnutSeries {
   name: string
   value: number
-  originalValue?: number
+  percent: number
+  metrics: BudgetMetricWithName
   color: string
-  originalColor?: string
+  code?: string
   isVisible?: boolean
-  percent?: number
-  metrics: BudgetMetric
+  originalColor?: string
+  originalValue?: number
+  actuals?: number
 }
