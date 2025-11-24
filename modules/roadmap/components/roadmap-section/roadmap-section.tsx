@@ -1,6 +1,5 @@
 import type {
-  ClientInfo,
-  Maybe,
+  Network,
   ScopeOfWork_Milestone,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -16,23 +15,23 @@ import { Header } from './components/header'
 // TODO: Ask the client to reuse the already existing type for roadmaps so we do not need to instantiate the data to the original type
 interface RoadmapSectionProps {
   roadmap: Sow_Roadmap
-  client?: Maybe<ClientInfo>
+  network?: Pick<Network, 'name' | 'logo'>
   workstreamSlug: string
   workstreamTitle: string
 }
 export function RoadmapSection({
   roadmap,
-  client,
+  network,
   workstreamSlug,
   workstreamTitle,
 }: RoadmapSectionProps) {
   // TODO: replace with the actual network slug once available in the API
-  const networkSlug = slugify(client?.name ?? '')
+  const networkSlug = slugify(network?.name ?? '')
 
   return (
     <div className="flex flex-col gap-6">
       <Header
-        client={client}
+        network={network}
         workstreamSlug={workstreamSlug}
         title={roadmap.title}
         description={roadmap.description}
