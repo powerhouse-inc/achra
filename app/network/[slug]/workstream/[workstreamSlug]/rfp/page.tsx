@@ -1,10 +1,11 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
 import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
 import { formatBudgetRange, formatDeadline } from '@/modules/rfp/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { RfpStatusChip } from '@/modules/shared/components/chips/rfp-status-chip'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -28,8 +29,14 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     },
   })()
 
+  const networkData = await getNetworkBySlug(slug)
+
+  const networkName = networkData?.name ?? ''
+
   const rfpData = data.rfpByWorkstream
-  if (rfpData.length === 0) {
+  const workstreamRfp = rfpData[0] ?? []
+
+  if (rfpData.length === 0 || !workstreamRfp.rfp) {
     return (
       <PageContent className="flex h-[calc(100vh-14rem)] items-center justify-center overflow-hidden">
         <RfpEmpty />
@@ -37,15 +44,12 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     )
   }
 
-  const workstreamRfp = rfpData[0] ?? []
   const rfp = workstreamRfp.rfp
-  const workstreamName = workstreamRfp.title ?? 'Unknown'
+  const workstreamName = workstreamRfp.title ?? ''
   const isRfpContentEmpty =
-    !rfp ||
-    ((!rfp.briefing || rfp.briefing.trim() === '') &&
-      rfp.budgetCurrency == null &&
-      (!rfp.eligibilityCriteria || rfp.eligibilityCriteria.trim() === '') &&
-      (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === ''))
+    (!rfp.briefing || rfp.briefing.trim() === '') &&
+    (!rfp.eligibilityCriteria || rfp.eligibilityCriteria.trim() === '') &&
+    (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === '')
 
   return (
     <PageBackground>
@@ -54,7 +58,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
           <WorkstreamRfpBreadcrumb
             params={params}
             workstreamName={workstreamName}
-            networkSlug={slug}
+            networkSlug={networkName}
           />
         </Suspense>
       </PageBreadcrumbContainer>
@@ -66,28 +70,28 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
               <div className="flex flex-col gap-1 sm:flex-row sm:justify-between">
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
-                    {workstreamRfp.title && (
+                    {rfp.title && (
                       <div className="text-base/6 font-bold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl md:leading-[120%] xl:text-2xl xl:leading-[120%] xl:font-bold">
-                        {workstreamRfp.title}
+                        {rfp.title}
                       </div>
                     )}
-                    {workstreamRfp.code && (
+                    {rfp.code && (
                       <div className="text-foreground/50 hidden items-center justify-between text-xs/4.5 font-medium uppercase sm:flex sm:self-end md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
-                        {workstreamRfp.code}
+                        {rfp.code}
                       </div>
                     )}
                   </div>
-                  {workstreamRfp.status && (
+                  {rfp.status && (
                     <div className="hidden md:flex">
-                      <WorkstreamStatusChip status={workstreamRfp.status} />
+                      <RfpStatusChip status={rfp.status} />
                     </div>
                   )}
                 </div>
                 <div className="text-foreground/50 flex items-center justify-between text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
-                  {workstreamRfp.code && <div className="flex sm:hidden">{workstreamRfp.code}</div>}
-                  {workstreamRfp.status && (
+                  {rfp.code && <div className="flex sm:hidden">{rfp.code}</div>}
+                  {rfp.status && (
                     <div className="flex md:hidden">
-                      <WorkstreamStatusChip status={workstreamRfp.status} />
+                      <RfpStatusChip status={rfp.status} />
                     </div>
                   )}
                   <div className="text-primary-foreground hidden md:flex">
