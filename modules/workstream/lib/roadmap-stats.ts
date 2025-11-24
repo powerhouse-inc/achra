@@ -1,11 +1,11 @@
-import type { FullQueryWorkstream } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 
 /**
  * Counts the number of milestones and deliverables in the initial proposal's roadmap
  * @param workstream The workstream to count the milestones and deliverables for
  * @returns An object with the number of milestones and deliverables
  */
-export function countRoadmapStats(workstream: FullQueryWorkstream) {
+export function countRoadmapStats(workstream: WorkstreamDetailsQuery['workstream'][0]) {
   let milestones = 0
   let deliverables = 0
 
@@ -28,7 +28,7 @@ export function countRoadmapStats(workstream: FullQueryWorkstream) {
  * @param workstream The workstream to calculate the total budget for
  * @returns The total budget of the workstream in USD
  */
-export function calculateTotalBudget(workstream: FullQueryWorkstream): number {
+export function calculateTotalBudget(workstream: WorkstreamDetailsQuery['workstream'][0]): number {
   return (
     workstream.initialProposal?.sow?.roadmaps.reduce<number>((acc, roadmap) => {
       return (
