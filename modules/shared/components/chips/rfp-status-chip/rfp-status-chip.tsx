@@ -11,7 +11,7 @@ export function RfpStatusChip({ status }: RfpStatusChipProps) {
     switch (status) {
       case RfpStatus.Draft:
         return {
-          label: 'RFP Draft',
+          label: 'Draft',
           color: 'gray',
         }
       case RfpStatus.RequestForCommments:
@@ -21,7 +21,7 @@ export function RfpStatusChip({ status }: RfpStatusChipProps) {
         }
       case RfpStatus.Canceled:
         return {
-          label: 'RFP Cancelled',
+          label: 'Cancelled',
           color: 'red',
         }
       case RfpStatus.OpenForProposals:
