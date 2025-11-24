@@ -70,15 +70,16 @@ export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
       data-slot="filter-tabs-wrapper"
       className={cn(
         // Base styles
-        'bg-background relative max-w-full overflow-hidden rounded-t-xl shadow-sm',
+        'bg-background/25 relative max-w-full overflow-hidden rounded-t-xl shadow-xs md:shadow-sm',
         // Responsive styles
         'md:min-w-48 md:rounded-l-xl md:rounded-tr-none',
+
         // Left smoke gradient
         hasSmoke[0] &&
-          "from-muted before:to-muted/0 before:pointer-events-none before:absolute before:top-0 before:left-0 before:h-full before:w-[59px] before:touch-none before:bg-linear-to-r before:content-['']",
+          "from-muted before:to-muted/0 before:pointer-events-none before:absolute before:top-0 before:left-0 before:h-full before:w-15 before:touch-none before:bg-linear-to-r before:content-['']",
         // Right smoke gradient
         hasSmoke[1] &&
-          "after:from-muted after:to-muted/0 after:pointer-events-none after:absolute after:top-0 after:right-0 after:h-full after:w-[59px] after:touch-none after:bg-linear-to-l after:content-['']",
+          "after:from-muted after:to-muted/0 after:pointer-events-none after:absolute after:top-0 after:right-0 after:h-full after:w-15 after:touch-none after:bg-linear-to-l after:content-['']",
       )}
     >
       <div

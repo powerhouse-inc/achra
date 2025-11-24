@@ -203,7 +203,7 @@ export function getCardsNavigationData(
       const budgetMetric = MOCK_BUDGETS_ANALYTICS[item.codePath] ?? [newBudgetMetric()]
 
       return {
-        image: item.image || '/assets/img/default-icon-cards-budget.svg',
+        image: item.image || '/default-icon-cards-budget.svg',
         codePath: item.codePath,
         title: formatBudgetName(item.name),
         description: item.description,

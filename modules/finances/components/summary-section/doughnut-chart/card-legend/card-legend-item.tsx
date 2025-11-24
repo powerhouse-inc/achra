@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  getPercentdoughnutDataItem,
+  getPercentDisplay,
   getShortCode,
   threeDigitsPrecisionHumanization,
 } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
@@ -26,7 +26,7 @@ export function ItemLegendDoughnut({
 }: ItemLegendDoughnutProps) {
   const valueRounded = threeDigitsPrecisionHumanization(doughnutData.value, true)
 
-  const percentDisplay = getPercentdoughnutDataItem(doughnutData)
+  const percentDisplay = getPercentDisplay(doughnutData.percent)
 
   return (
     <div

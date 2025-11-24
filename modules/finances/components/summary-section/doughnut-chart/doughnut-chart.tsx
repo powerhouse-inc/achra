@@ -10,7 +10,12 @@ import { cn } from '@/modules/shared/lib/utils'
 import { CardLegend } from './card-legend'
 import { DoughnutChartSkeleton } from './doughnut-chart-skeleton'
 import { UsdsTooltip } from './usds-tooltip'
-import { chunkArray, getCorrectMetricValuesOverViewChart, sortDoughnutSeriesByValue } from './utils'
+import {
+  chunkArray,
+  getCorrectMetricValuesOverViewChart,
+  getPercentDisplay,
+  sortDoughnutSeriesByValue,
+} from './utils'
 import type { AnalyticMetric, BudgetMetric, DoughnutSeries } from './types'
 
 interface DesktopChartProps {
@@ -33,7 +38,6 @@ export function DesktopChart({
   const [isLoading, setIsLoading] = useState(true)
   const [visibleSeries, setVisibleSeries] = useState<DoughnutSeries[]>(seriesData)
   const [legends, setLegends] = useState<DoughnutSeries[]>(seriesData)
-
   const isDeepLevel = seriesData.length > 6
 
   useEffect(() => {
@@ -91,7 +95,7 @@ export function DesktopChart({
         label: { show: false, position: 'center' },
         emphasis: { width: 40 },
         padding: 0,
-        borderWidth: 0,
+        borderWidth: 1,
         formatter(params: DoughnutSeries) {
           const index = visibleSeries.findIndex((data) => data.name === params.name)
           const itemRender = visibleSeries[index]
@@ -99,26 +103,39 @@ export function DesktopChart({
             selectedMetric,
           ) as keyof BudgetMetric
 
-          // Tooltip HTML actualizado para usar variables CSS globales (var(--variable))
-          return `
-          <div style="background-color:var(--popover); border: 1px solid var(--border); padding:7px 15px; min-width:194px;">
-            <div style="color:var(--foreground); font-size: 18px; font-weight: 700; line-height: 120%;">
-              ${itemRender.percent < 1 ? usLocalizedNumber(itemRender.percent, 2) : usLocalizedNumber(itemRender.percent, 1)}%
-            </div>
-            <div style="margin-bottom:8px; color:var(--muted-foreground); font-size: 14px; font-weight: 600; line-height: 22px; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              ${itemRender.name}
-            </div>
-            <div style="display:flex; flex-direction:row; gap:32px">
-                <div style="display:flex; flex-direction:column">
-                  <div style="margin-bottom:4px; color:var(--foreground); font-size: 16px; font-weight: 600; line-height: 24px;">
-                    ${usLocalizedNumber(itemRender.metrics[selectedMetricKey === 'budget' ? 'paymentsOnChain' : selectedMetricKey].value, 2)}
-                  </div>
-                  <div style="color:var(--muted-foreground); font-size: 12px; font-weight: 500; line-height: 18px;">
-                    ${selectedMetric === 'Budget' ? 'Net Expenses On-Chain' : tooltipSelectedMetricLabel}
-                  </div>
+          const customTooltip = `
+          <div style="background-color:var(--popover);padding:7px 15px;min-width:194px;">
+            <div style="color:var(--foreground);font-size: 18px;font-weight: 700;line-height: 120%;">${getPercentDisplay(
+              itemRender.percent,
+            )}%</div>
+            <div style="margin-bottom:8px;color:var(--muted-foreground);font-size: 14px;font-weight: 600;line-height: 22px;max-width: 300px; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">${
+              itemRender.name
+            }</div>
+            <div style="display:flex;flex-direction:row;gap:32px">
+                <div style="display:flex;flex-direction:column">
+                  <div style="margin-bottom:4;color:var(--foreground);font-size: 16px;font-weight: 600;line-height: 24px;">${usLocalizedNumber(
+                    itemRender.metrics[
+                      selectedMetricKey === 'budget' ? 'paymentsOnChain' : selectedMetricKey
+                    ].value,
+                    2,
+                  )}</div>
+                  <div style="color:var(--muted-foreground);font-size: 12px;font-weight: 500;line-height: 18px;">${
+                    selectedMetric === 'Budget'
+                      ? 'Net Expenses On-Chain'
+                      : tooltipSelectedMetricLabel
+                  }</div>
+               </div>
+                <div style="display:flex;flex-direction:column">
+                  <div style="margin-bottom:4;color:var(--foreground);font-size: 16px;font-weight: 600;line-height: 24px;">${usLocalizedNumber(
+                    itemRender.metrics.budget.value,
+                    2,
+                  )}</div>
+                  <div style="color:var(--muted-foreground);font-size: 12px;font-weight: 500;line-height: 18px;">Budget Cap</div>
                </div>
             </div>
-          </div>`
+          </div>
+          `
+          return customTooltip
         },
       },
       series: [
@@ -129,7 +146,11 @@ export function DesktopChart({
           center: ['50%', '50%'],
           label: { normal: { show: false } },
           labelLine: { normal: { show: false } },
-          data: visibleSeries.map((data) => ({ ...data, value: Math.abs(data.value) })),
+          data: visibleSeries.map((data) => ({
+            ...data,
+            // transform negative values to positive to avoid hidden values on the chart
+            value: Math.abs(data.value),
+          })),
         },
       ],
     }),

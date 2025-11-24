@@ -40,7 +40,10 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
         className={cn('flex w-full flex-col gap-0 p-0', 'md:flex-row')}
       >
         <div data-slot="content" className="md:flex md:w-[29%]">
-          <FilterTabs selectedMetric="Budget" onChangeTab={() => {}} />
+          <FilterTabs
+            selectedMetric={cardOverViewSectionData.selectedMetric}
+            onChangeTab={cardOverViewSectionData.handleSelectedMetric}
+          />
         </div>
 
         <div data-slot="chart-container" className="hidden pt-4 pr-6 pb-4 md:flex md:w-[71%]">

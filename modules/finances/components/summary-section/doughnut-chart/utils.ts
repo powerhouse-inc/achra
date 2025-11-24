@@ -1,5 +1,5 @@
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import type { DoughnutSeries } from './types'
+import type { AnalyticMetric, DoughnutSeries } from './types'
 
 /**
  * Chunks an array into smaller arrays of specified size
@@ -82,9 +82,26 @@ export const threeDigitsPrecisionHumanization = (num = 0, isHasAbsoluteValue = f
   }
 }
 
-export const getPercentdoughnutDataItem = (doughnutData: DoughnutSeries) => {
-  if (doughnutData.percent === 0) return 0
-  if (doughnutData.percent < 0.1) return '<0.1'
-  if (doughnutData.percent < 1) return usLocalizedNumber(doughnutData.percent, 2)
-  return usLocalizedNumber(doughnutData.percent, 1)
+export const getPercentDisplay = (percent: number) => {
+  if (percent === 0) return 0
+  if (percent < 0.1) return '<0.1'
+  if (percent < 1) return usLocalizedNumber(percent, 2)
+  return usLocalizedNumber(percent, 1)
+}
+
+export function getTooltipSelectedMetricLabel(selectedMetric: AnalyticMetric) {
+  switch (selectedMetric) {
+    case 'PaymentsOnChain':
+      return 'Net Expenses On-Chain'
+    case 'ProtocolNetOutflow':
+      return 'Net Protocol Outflow'
+    case 'Budget':
+      return 'Budget'
+    case 'Forecast':
+      return 'Forecast'
+    case 'Actuals':
+      return 'Actuals'
+    default:
+      return 'Budget'
+  }
 }
