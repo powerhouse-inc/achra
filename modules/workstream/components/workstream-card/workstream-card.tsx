@@ -1,5 +1,8 @@
 import { FilePenLine } from 'lucide-react'
-import type { FullQueryWorkstream } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  FullQueryWorkstream,
+  Network,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -21,7 +24,7 @@ interface WorkstreamCardProps {
 }
 
 export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
-  const networkSlug = slugify(workstream.client?.name ?? 'Unknown')
+  const networkSlug = slugify(workstream.network?.name ?? 'Unknown')
   const workstreamSlug = workstream.slug ?? 'unknown'
 
   const { milestones, deliverables } = countRoadmapStats(workstream)
@@ -34,7 +37,7 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <NavigationHeader
-            client={workstream.client}
+            network={workstream.network as Pick<Network, 'name' | 'logo'>}
             title={workstream.title ?? 'Unknown'}
             workstreamSlug={workstreamSlug}
           />
