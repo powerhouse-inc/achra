@@ -3185,7 +3185,9 @@ export type ScopeOfWorkByNetworkOrStatusFilter = {
   workstreamStatus?: InputMaybe<WorkstreamStatus>;
 };
 
-export type AllNetworksQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllNetworksQueryVariables = Exact<{
+  filter?: InputMaybe<NetworkFilter>;
+}>;
 
 
 export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, description?: string | null, category?: Array<NetworkCategory> | null, icon?: string | null, darkThemeIcon?: string | null, logo?: string | null, darkThemeLogo?: string | null, logoBig?: string | null } | null }> };
@@ -3235,8 +3237,8 @@ export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __ty
 
 
 export const AllNetworksDocument = `
-    query AllNetworks {
-  allNetworks {
+    query AllNetworks($filter: networkFilter) {
+  allNetworks(filter: $filter) {
     network {
       name
       slug
