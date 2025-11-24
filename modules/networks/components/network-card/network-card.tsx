@@ -7,7 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/compo
 import NetworkChip from './network-category'
 
 interface NetworkCardProps {
-  profile: Pick<Network, 'name' | 'slug' | 'logo' | 'logoBig' | 'category' | 'description'>
+  profile: Pick<
+    Network,
+    'name' | 'slug' | 'logo' | 'darkThemeLogo' | 'logoBig' | 'category' | 'description'
+  >
 }
 
 export function NetworkCard({ profile }: NetworkCardProps) {
@@ -22,15 +25,26 @@ export function NetworkCard({ profile }: NetworkCardProps) {
         <CardHeader className="gap-0 p-0">
           <div className="flex h-8 items-center justify-between sm:h-8 md:h-10">
             <CardTitle className="flex w-full items-center gap-2">
-              {profile.logo ? (
+              {profile.logo || profile.darkThemeLogo ? (
                 <div className="relative h-10 w-full items-center">
-                  <Image
-                    src={profile.logo}
-                    fill
-                    alt={`${profile.name} Logo`}
-                    unoptimized
-                    className="object-contain object-left"
-                  />
+                  {profile.logo && (
+                    <Image
+                      src={profile.logo}
+                      fill
+                      unoptimized
+                      alt={`${profile.name} Logo`}
+                      className={`object-contain object-left ${profile.darkThemeLogo ? 'dark:hidden' : ''}`}
+                    />
+                  )}
+                  {profile.darkThemeLogo && (
+                    <Image
+                      src={profile.darkThemeLogo}
+                      fill
+                      unoptimized
+                      alt={`${profile.name} Logo`}
+                      className="hidden object-contain object-left dark:block"
+                    />
+                  )}
                 </div>
               ) : (
                 <div className="text-accent-foreground md:text-lead flex w-full items-center gap-2 text-2xl">
@@ -59,7 +73,7 @@ export function NetworkCard({ profile }: NetworkCardProps) {
           </div>
 
           <div className="flex h-9 w-full justify-end">
-            <Button className="text-primary-foreground bg-primary hover:bg-primary/90 inline-flex cursor-pointer items-center justify-center rounded-md !px-4 py-2">
+            <Button className="text-primary-foreground bg-primary hover:bg-primary/90 inline-flex cursor-pointer items-center justify-center rounded-md px-4! py-2">
               Explore {profile.name}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
