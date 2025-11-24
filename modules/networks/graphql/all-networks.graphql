@@ -3,13 +3,18 @@ query AllNetworks($filter: networkFilter) {
     network {
       name
       slug
-      description
-      category
       icon
-      darkThemeIcon
       logo
+      darkThemeIcon
       darkThemeLogo
+      category
+      description
+      discord
+      github
       logoBig
+      website
+      x
+      youtube
     }
   }
 }

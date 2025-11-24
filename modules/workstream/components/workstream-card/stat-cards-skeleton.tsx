@@ -34,13 +34,14 @@ function StatCardsSkeleton() {
             <Skeleton className="h-4 w-8" />
           </div>
         </div>
-        <div className="flex flex-1 items-end justify-center gap-2">
+        {/* TODO: enable this once it is available in the UI again (POWTS data) */}
+        {/* <div className="flex flex-1 items-end justify-center gap-2">
           <Skeleton className="h-9.5 w-10" />
           <div className="flex flex-col gap-1">
             <Skeleton className="h-4 w-4" />
             <Skeleton className="h-4 w-12" />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

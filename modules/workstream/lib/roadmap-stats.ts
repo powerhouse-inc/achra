@@ -22,3 +22,21 @@ export function countRoadmapStats(workstream: FullQueryWorkstream) {
     deliverables,
   }
 }
+
+/**
+ * Calculates the total budget of the workstream
+ * @param workstream The workstream to calculate the total budget for
+ * @returns The total budget of the workstream in USD
+ */
+export function calculateTotalBudget(workstream: FullQueryWorkstream): number {
+  return (
+    workstream.initialProposal?.sow?.roadmaps.reduce<number>((acc, roadmap) => {
+      return (
+        acc +
+        roadmap.milestones.reduce<number>((acc, milestone) => {
+          return acc + (milestone.budget ?? 0)
+        }, 0)
+      )
+    }, 0) ?? 0
+  )
+}

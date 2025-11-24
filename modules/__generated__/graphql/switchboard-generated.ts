@@ -3190,14 +3190,7 @@ export type AllNetworksQueryVariables = Exact<{
 }>;
 
 
-export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, description?: string | null, category?: Array<NetworkCategory> | null, icon?: string | null, darkThemeIcon?: string | null, logo?: string | null, darkThemeLogo?: string | null, logoBig?: string | null } | null }> };
-
-export type NetworkProfileQueryVariables = Exact<{
-  docId: Scalars['PHID']['input'];
-}>;
-
-
-export type NetworkProfileQuery = { __typename?: 'Query', NetworkProfile?: { __typename?: 'NetworkProfileQueries', getDocument?: { __typename?: 'NetworkProfile', state: { __typename?: 'NetworkProfile_NetworkProfileState', category: Array<NetworkProfile_NetworkCategory>, description: string, discord?: string | null, github?: string | null, icon: string, logo: string, logoBig: string, name: string, website?: string | null, x?: string | null, youtube?: string | null } } | null } | null };
+export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, icon?: string | null, logo?: string | null, darkThemeIcon?: string | null, darkThemeLogo?: string | null, category?: Array<NetworkCategory> | null, description?: string | null, discord?: string | null, github?: string | null, logoBig?: string | null, website?: string | null, x?: string | null, youtube?: string | null } | null }> };
 
 export type RfpByWorkstreamQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -3225,14 +3218,14 @@ export type WorkstreamDetailsQueryVariables = Exact<{
 }>;
 
 
-export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 export type WorkstreamsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
 }>;
 
 
-export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 
 
@@ -3242,13 +3235,18 @@ export const AllNetworksDocument = `
     network {
       name
       slug
-      description
-      category
       icon
-      darkThemeIcon
       logo
+      darkThemeIcon
       darkThemeLogo
+      category
+      description
+      discord
+      github
       logoBig
+      website
+      x
+      youtube
     }
   }
 }
@@ -3292,67 +3290,6 @@ useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => 
 
 
 useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
-
-export const NetworkProfileDocument = `
-    query NetworkProfile($docId: PHID!) {
-  NetworkProfile {
-    getDocument(docId: $docId) {
-      state {
-        category
-        description
-        discord
-        github
-        icon
-        logo
-        logoBig
-        name
-        website
-        x
-        youtube
-      }
-    }
-  }
-}
-    `;
-
-export const useNetworkProfileQuery = <
-      TData = NetworkProfileQuery,
-      TError = unknown
-    >(
-      variables: NetworkProfileQueryVariables,
-      options?: Omit<UseQueryOptions<NetworkProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<NetworkProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<NetworkProfileQuery, TError, TData>(
-      {
-    queryKey: ['NetworkProfile', variables],
-    queryFn: switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables),
-    ...options
-  }
-    )};
-
-useNetworkProfileQuery.getKey = (variables: NetworkProfileQueryVariables) => ['NetworkProfile', variables];
-
-export const useSuspenseNetworkProfileQuery = <
-      TData = NetworkProfileQuery,
-      TError = unknown
-    >(
-      variables: NetworkProfileQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<NetworkProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<NetworkProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<NetworkProfileQuery, TError, TData>(
-      {
-    queryKey: ['NetworkProfileSuspense', variables],
-    queryFn: switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables),
-    ...options
-  }
-    )};
-
-useSuspenseNetworkProfileQuery.getKey = (variables: NetworkProfileQueryVariables) => ['NetworkProfileSuspense', variables];
-
-
-useNetworkProfileQuery.fetcher = (variables: NetworkProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<NetworkProfileQuery, NetworkProfileQueryVariables>(NetworkProfileDocument, variables, options);
 
 export const RfpByWorkstreamDocument = `
     query RfpByWorkstream($filter: WorkstreamFilter!) {
@@ -3654,6 +3591,7 @@ export const WorkstreamDetailsDocument = `
         paymentModel
       }
       sow {
+        description
         roadmaps {
           milestones {
             budget
@@ -3661,6 +3599,12 @@ export const WorkstreamDetailsDocument = `
               deliverables
             }
           }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
         }
       }
     }
@@ -3751,6 +3695,7 @@ export const WorkstreamsDocument = `
         paymentModel
       }
       sow {
+        description
         roadmaps {
           milestones {
             budget
@@ -3758,6 +3703,12 @@ export const WorkstreamsDocument = `
               deliverables
             }
           }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
         }
       }
     }

@@ -29,6 +29,7 @@ export const useCardChartOverview = (
   const isTable = useMediaQuery({ from: 'sm', to: 'lg' })
   const isDesk1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesk1280 = useMediaQuery({ from: 'xl', to: '2xl' })
+  const isUpDesktop1536 = useMediaQuery({ from: '2xl' })
 
   const isHasSubLevels = hasSubLevels(codePath, allBudgets)
 
@@ -259,14 +260,15 @@ export const useCardChartOverview = (
   const changeAlignment = numberItems > 4
 
   const showSwiper =
-    ((isTable || isDesk1024) && numberItems >= 4) || (isDesk1280 && numberItems >= 10)
+    ((isTable || isDesk1024) && numberItems >= 4) ||
+    ((isDesk1280 || isUpDesktop1536) && numberItems >= 10)
   const isDeepLevel = doughnutSeriesData.length > 6
 
   const numberSliderPerLevel = (() => {
     if (isTable || isDesk1024) {
       return isDeepLevel ? 5 : 3
     }
-    if (isDesk1280) {
+    if (isDesk1280 || isUpDesktop1536) {
       return numberItems >= 10 ? 12 : 5
     }
     return 5

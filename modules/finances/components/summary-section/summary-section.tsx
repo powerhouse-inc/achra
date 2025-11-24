@@ -37,25 +37,19 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
 
       <Card
         data-slot="card-container"
-        className={cn(
-          // Base styles
-          'flex w-full flex-col p-0',
-          // Responsive styles
-          'md:flex-row',
-        )}
+        className={cn('flex w-full flex-col gap-0 p-0', 'md:flex-row')}
       >
         <div data-slot="content" className="md:flex md:w-[29%]">
           <FilterTabs selectedMetric="Budget" onChangeTab={() => {}} />
         </div>
 
-        <div data-slot="chart-container" className="pt-4 pr-6 pb-4 md:flex md:w-[71%]">
-          {/* Improve the swipper part */}
+        <div data-slot="chart-container" className="hidden pt-4 pr-6 pb-4 md:flex md:w-[71%]">
           <DesktopChart
             seriesData={cardOverViewSectionData.doughnutSeriesData}
             selectedMetric="Budget"
-            changeAlignment={false}
-            showSwiper={true}
-            numberSliderPerLevel={5}
+            changeAlignment={cardOverViewSectionData.changeAlignment}
+            showSwiper={cardOverViewSectionData.showSwiper}
+            numberSliderPerLevel={cardOverViewSectionData.numberSliderPerLevel}
           />
         </div>
       </Card>

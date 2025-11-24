@@ -10,6 +10,10 @@ export const usLocalizedNumber = (num: number, decimalPlace = 0): string => {
 }
 
 export const formatValueScientificNotation = (value: number) => {
+  if (value === 0) {
+    return '0.00'
+  }
+
   // Truncate to 3 significant digits without rounding up
   const multiplier = Math.pow(10, 2 - Math.floor(Math.log10(Math.abs(value))))
   const truncated = Math.floor(value * multiplier) / multiplier
@@ -25,7 +29,7 @@ export const formatValueScientificNotation = (value: number) => {
 
 export const threeDigitsPrecisionHumanization = (num = 0, hasAbsoluteValue = false) => {
   const absNum = hasAbsoluteValue ? Math.abs(num) : num
-  let value, suffix
+  let value: number, suffix: string
 
   if (absNum >= 1_000_000_000_000_000) {
     value = num / 1_000_000_000_000_000
@@ -48,7 +52,7 @@ export const threeDigitsPrecisionHumanization = (num = 0, hasAbsoluteValue = fal
   }
 
   // Formatter values for scientific notation
-  const formattedValue = formatValueScientificNotation(value)
+  const formattedValue: string = formatValueScientificNotation(value)
 
   return {
     value: formattedValue,

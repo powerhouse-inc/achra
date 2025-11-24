@@ -1,3 +1,5 @@
+import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
+
 /**
  * Pattern(s) to match against pathname (string, regex string, or array)
  */
@@ -31,4 +33,12 @@ export function isActive(pathname: string, activeWhen: ActiveWhen): boolean {
   }
 
   return false
+}
+
+/**
+ * Checks if an image field is empty
+ * @param image - The image field to check
+ */
+export function isImageFieldEmpty(image: Maybe<string> | undefined): boolean {
+  return typeof image !== 'string' || image.trim().length === 0
 }
