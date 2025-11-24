@@ -15,7 +15,7 @@ import { Header } from './components/header'
 // TODO: Ask the client to reuse the already existing type for roadmaps so we do not need to instantiate the data to the original type
 interface RoadmapSectionProps {
   roadmap: Sow_Roadmap
-  network?: Pick<Network, 'name' | 'logo'>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
   workstreamSlug: string
   workstreamTitle: string
 }

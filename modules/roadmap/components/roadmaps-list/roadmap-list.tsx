@@ -64,7 +64,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
               roadmap={roadmap}
               workstreamTitle={workstream.title ?? ''}
               workstreamSlug={workstream.slug ?? ''}
-              network={workstream.network as Pick<Network, 'name' | 'logo'>}
+              network={workstream.network as Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>}
             />
           )),
         )}

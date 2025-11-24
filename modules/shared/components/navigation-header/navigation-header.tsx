@@ -5,7 +5,7 @@ import { slugify } from '../../lib/slug'
 import type { Route } from 'next'
 
 interface NavigationHeaderProps {
-  network?: Pick<Network, 'name' | 'logo'>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
   title: string
   workstreamSlug: string
 }
@@ -27,7 +27,20 @@ export function NavigationHeader({ network, title, workstreamSlug }: NavigationH
                 // Note: Here we don't use Nextjs Image component because it doesn't work well with unknown image sizes
                 // and the existing workarounds doesn't work well in all the devices/browsers
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={network.logo} alt={network.name ?? 'Network'} className="h-full" />
+                <img
+                  src={network.logo}
+                  alt={network.name ?? 'Network'}
+                  className="h-full dark:hidden"
+                />
+              )}
+
+              {network.darkThemeLogo && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={network.darkThemeLogo}
+                  alt={network.name ?? 'Network'}
+                  className="hidden h-full dark:block"
+                />
               )}
             </Link>
 

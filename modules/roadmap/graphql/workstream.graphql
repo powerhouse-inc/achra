@@ -5,6 +5,7 @@ query RoadmapList($filter: WorkstreamFilter!) {
     network {
       name
       logo
+      darkThemeLogo
     }
     sow {
       roadmaps {

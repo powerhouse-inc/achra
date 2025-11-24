@@ -37,7 +37,7 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <NavigationHeader
-            network={workstream.network as Pick<Network, 'name' | 'logo'>}
+            network={workstream.network as Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>}
             title={workstream.title ?? 'Unknown'}
             workstreamSlug={workstreamSlug}
           />

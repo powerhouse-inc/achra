@@ -9,7 +9,7 @@ import { NavigationHeader } from '@/modules/shared/components/navigation-header'
 import { Button } from '@/modules/shared/components/ui/button'
 
 interface RoadmapSectionHeaderProps {
-  network?: Pick<Network, 'name' | 'logo'>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
   workstreamSlug: string
   title: string
   description: string
