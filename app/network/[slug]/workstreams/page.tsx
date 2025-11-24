@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
@@ -22,12 +23,14 @@ export default async function NetworkWorkstreamsPage({
   searchParams,
 }: NetworkWorkstreamsPageProps) {
   const searchParamsString = JSON.stringify(await searchParams)
+  const { slug } = await params
+  const networkProfile = await getNetworkBySlug(slug)
 
   return (
     <PageBackground>
       <PageContent>
         <Suspense>
-          <WorkstreamBanner />
+          <WorkstreamBanner backgroundImage={networkProfile?.logoBig ?? undefined} />
         </Suspense>
 
         <div className="flex flex-col gap-8">

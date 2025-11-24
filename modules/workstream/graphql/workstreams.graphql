@@ -19,6 +19,7 @@ query Workstreams($filter: WorkstreamsFilter) {
         paymentModel
       }
       sow {
+        description
         roadmaps {
           milestones {
             budget
@@ -26,6 +27,12 @@ query Workstreams($filter: WorkstreamsFilter) {
               deliverables
             }
           }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
         }
       }
     }
