@@ -10,6 +10,8 @@ import { NetworkCard } from '../network-card'
 export async function NetworkGrid() {
   const allNetworks = await getAllNetworks()
 
+  console.log('allNetworks', allNetworks)
+
   if (allNetworks.length === 0) {
     return (
       <Empty>
