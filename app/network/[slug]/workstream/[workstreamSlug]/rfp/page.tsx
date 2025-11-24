@@ -1,9 +1,7 @@
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { Suspense } from 'react'
-import {
-  useAllNetworksQuery,
-  useRfpByWorkstreamQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useRfpByWorkstreamQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { RfpEmpty } from '@/modules/rfp/rfp-empty/rfp-empty'
 import { formatBudgetRange, formatDeadline } from '@/modules/rfp/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
@@ -31,13 +29,9 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     },
   })()
 
-  const networksData = await useAllNetworksQuery.fetcher({
-    filter: {
-      networkSlug: slug,
-    },
-  })()
+  const networkData = await getNetworkBySlug(slug)
 
-  const networkName = networksData.allNetworks[0]?.network?.name ?? ''
+  const networkName = networkData?.name ?? ''
 
   const rfpData = data.rfpByWorkstream
   const workstreamRfp = rfpData[0] ?? []
