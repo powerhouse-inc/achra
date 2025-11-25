@@ -5,11 +5,11 @@ import { ResourceType } from '@/modules/shared/types/types'
 import CompactItem from './components/compact-item/compact-item'
 import LargeItem from './components/large-item/large-item'
 
-export interface BuilderTeamsItemProps {
+export interface BuildersItemProps {
   team: Team
 }
 
-export function BuilderTeamsItem({ team }: BuilderTeamsItemProps) {
+export function BuildersItem({ team }: BuildersItemProps) {
   const isEcosystemActor = team.type === ResourceType.EcosystemActor
 
   const href = (

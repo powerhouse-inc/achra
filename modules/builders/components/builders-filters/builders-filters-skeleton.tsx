@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export default function BuilderFiltersSkeleton() {
+export default function BuildersFiltersSkeleton() {
   return (
     <div className="grid grid-cols-[1fr_auto] grid-rows-1 gap-4 sm:grid-cols-1 sm:grid-rows-2 md:flex lg:gap-6">
       {/* Search Input Skeleton */}

@@ -1,5 +1,5 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import BuilderFilters from './builder-filters'
+import BuilderFilters from './builders-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const withNuqsAdapter = (Story: React.ComponentType) => (

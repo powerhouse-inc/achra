@@ -1,4 +1,4 @@
-import BuilderFiltersSkeleton from '@/modules/builders/components/builder-filters/builder-filters-skeleton'
+import BuildersFiltersSkeleton from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 
@@ -9,7 +9,7 @@ export default function BuildersLoading() {
         <BreadcrumbSkeleton segments={3} />
       </PageBreadcrumbContainer>
       <PageContent variant="with-breadcrumb" className="gap-6">
-        <BuilderFiltersSkeleton />
+        <BuildersFiltersSkeleton />
         Loading...
       </PageContent>
     </PageBackground>
