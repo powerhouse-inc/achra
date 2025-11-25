@@ -30,13 +30,13 @@ export default function LegendItemMobile({
       data-slot="legend-item"
       className={cn(
         'relative flex pl-3.5',
-        inline ? 'flex-row gap-1 leading-[15px]' : 'flex-col gap-1 leading-[18px]',
+        inline ? 'flex-row gap-1 leading-3.75' : 'flex-col gap-1 leading-4.5',
       )}
     >
       {/* Dot indicator */}
       <span
         data-slot="legend-dot"
-        className={cn('absolute left-0 h-2 w-2 rounded-full', inline ? 'top-[3.5px]' : 'top-2')}
+        className={cn('absolute left-0 h-2 w-2 rounded-full', inline ? 'top-1' : 'top-2')}
         style={{ backgroundColor: color }}
       />
 
