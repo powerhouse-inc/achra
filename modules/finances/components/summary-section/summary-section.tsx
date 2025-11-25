@@ -32,7 +32,7 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
       data-slot="main-content-section"
       className="flex min-w-0 flex-col gap-4 md:gap-6 lg:flex-row lg:gap-6 xl:gap-8"
     >
-      <div className="min-w-0 lg:w-1/3 lg:shrink-0">
+      <div className="min-w-0 lg:w-[31.75%] lg:shrink-0">
         <BudgetUtilizationCard
           paymentsOnChain={cardOverViewSectionData.paymentsOnChain}
           budgetCap={cardOverViewSectionData.budgetCap}

@@ -2,8 +2,9 @@ import type { QuarterCardProps } from '@/modules/finances/types'
 import { percentageRespectTo } from '@/modules/finances/utils'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Card } from '@/shared/components/ui/card'
-import { threeDigitsPrecisionHumanization, usLocalizedNumber } from '@/shared/lib/humanization'
+import { threeDigitsPrecisionHumanization } from '@/shared/lib/humanization'
 import { cn } from '@/shared/lib/utils'
+import { getPercentDisplay } from '../doughnut-chart'
 import { MetricDisplay } from './horizontal-budgetbar'
 import { HorizontalBudgetBar } from './horizontal-budgetbar/horizontal-budget-bar'
 import { LegendItem } from './horizontal-budgetbar/legend-item'
@@ -15,31 +16,23 @@ export function BudgetUtilizationCard({ paymentsOnChain, budgetCap }: QuarterCar
 
   const isRightPartZero = budgetCap === 0
 
-  const percentDisplay =
-    budgetCap === 0
-      ? '-- '
-      : percent === 0
-        ? 0
-        : percent < 0.1
-          ? '<0.1'
-          : percent < 1
-            ? usLocalizedNumber(percent, 2)
-            : usLocalizedNumber(percent, 1)
+  const percentDisplay = budgetCap === 0 ? '-- ' : getPercentDisplay(percent)
 
   return (
     <Card data-slot="budget-utilization-card" className="flex w-full flex-col gap-0 px-8 py-4">
-      <div className="flex flex-row justify-center gap-2">
+      <div className="flex flex-row justify-center gap-2.5">
         <MetricDisplay
           amount={humanizedActuals.value}
           currency="USD"
           unit={humanizedActuals.suffix}
         />
-        <div
+        <Separator
           data-slot="divider-actuals-budget-cap"
-          className={cn('text-3xl leading-normal font-semibold', 'lining-nums tabular-nums')}
-        >
-          /
-        </div>
+          orientation="vertical"
+          className={cn(
+            'bg-foreground origin-center rotate-12 self-center text-2xl font-semibold data-[orientation=vertical]:h-8! data-[orientation=vertical]:w-1!',
+          )}
+        />
         <MetricDisplay
           amount={humanizedBudgetCap.value}
           currency="USD"

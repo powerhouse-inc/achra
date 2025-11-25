@@ -134,7 +134,7 @@ export function CardsNavigationSwipper({
           </Swiper>
         </div>
       ) : (
-        <div className="flex flex-1 gap-4">
+        <div className="flex flex-1 gap-6 xl:gap-8">
           {cardsNavigationInformation.map((card) => (
             <NavigationCard
               key={card.code}

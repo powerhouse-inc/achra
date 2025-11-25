@@ -6,7 +6,7 @@ export interface MetricDisplayProps {
 
 export function MetricDisplay({ amount, currency, unit }: MetricDisplayProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2">
       <span className="text-3xl/[120%] font-bold">{amount}</span>
 
       <div className="flex flex-col gap-0">
