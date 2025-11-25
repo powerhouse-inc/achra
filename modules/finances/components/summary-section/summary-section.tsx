@@ -6,6 +6,7 @@ import { MOCK_BUDGETS_ANALYTICS } from '../../mocks/analytics'
 import { getBudgetsByCodePath, getCodePathFromParams, getLevelOfDetail } from '../../utils'
 import { BudgetUtilizationCard } from './butget-utilization-card'
 import { DesktopChart } from './doughnut-chart'
+import { MobileChart } from './doughnut-chart/mobile-chart'
 import { FilterTabs } from './filter-tabs'
 import { useCardChartOverview } from './useCardChartOverview'
 
@@ -32,7 +33,10 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
       className="flex min-w-0 flex-col gap-4 md:gap-6 lg:flex-row lg:gap-6 xl:gap-8"
     >
       <div className="min-w-0 lg:w-1/3 lg:shrink-0">
-        <BudgetUtilizationCard paymentsOnChain={500000} budgetCap={1000000} />
+        <BudgetUtilizationCard
+          paymentsOnChain={cardOverViewSectionData.paymentsOnChain}
+          budgetCap={cardOverViewSectionData.budgetCap}
+        />
       </div>
 
       <Card
@@ -54,6 +58,9 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
             showSwiper={cardOverViewSectionData.showSwiper}
             numberSliderPerLevel={cardOverViewSectionData.numberSliderPerLevel}
           />
+        </div>
+        <div data-slot="mobile-chart" className="md:hidden">
+          <MobileChart seriesData={cardOverViewSectionData.doughnutSeriesData} />
         </div>
       </Card>
     </div>

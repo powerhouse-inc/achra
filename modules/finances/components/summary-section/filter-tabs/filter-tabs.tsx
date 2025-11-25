@@ -70,7 +70,7 @@ export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
       data-slot="filter-tabs-wrapper"
       className={cn(
         // Base styles
-        'bg-background/25 relative max-w-full overflow-hidden rounded-t-xl shadow-xs md:shadow-sm',
+        'bg-background/25 relative max-w-full overflow-hidden rounded-t-xl shadow-xs',
         // Responsive styles
         'md:min-w-48 md:rounded-l-xl md:rounded-tr-none',
 
