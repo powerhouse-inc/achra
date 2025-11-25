@@ -62,6 +62,7 @@ query Workstreams($filter: WorkstreamsFilter) {
       name
       logo
       darkThemeLogo
+      slug
     }
   }
 }

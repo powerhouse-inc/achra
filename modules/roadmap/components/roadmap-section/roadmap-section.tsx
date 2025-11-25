@@ -3,7 +3,6 @@ import type {
   ScopeOfWork_Milestone,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { slugify } from '@/modules/shared/lib/slug'
 import { MilestoneExtendedCard } from '../milestone-extended-card'
 import { RoadmapSwiper } from '../roadmap-swiper'
 import { Header } from './components/header'
@@ -15,7 +14,7 @@ import { Header } from './components/header'
 // TODO: Ask the client to reuse the already existing type for roadmaps so we do not need to instantiate the data to the original type
 interface RoadmapSectionProps {
   roadmap: Sow_Roadmap
-  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
   workstreamSlug: string
   workstreamTitle: string
 }
@@ -25,9 +24,6 @@ export function RoadmapSection({
   workstreamSlug,
   workstreamTitle,
 }: RoadmapSectionProps) {
-  // TODO: replace with the actual network slug once available in the API
-  const networkSlug = slugify(network?.name ?? '')
-
   return (
     <div className="flex flex-col gap-6">
       <Header
@@ -35,7 +31,7 @@ export function RoadmapSection({
         workstreamSlug={workstreamSlug}
         title={roadmap.title}
         description={roadmap.description}
-        networkSlug={networkSlug}
+        networkSlug={network?.slug ?? ''}
         roadmapSlug={roadmap.slug}
         workstreamTitle={workstreamTitle}
       />
@@ -45,14 +41,14 @@ export function RoadmapSection({
           <MilestoneExtendedCard
             key={milestone.id}
             milestone={milestone as ScopeOfWork_Milestone}
-            networkSlug={networkSlug}
+            networkSlug={network?.slug ?? ''}
             roadmapSlug={roadmap.slug}
           />
         ))}
       </div>
       <RoadmapSwiper
         milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
-        networkSlug={networkSlug}
+        networkSlug={network?.slug ?? ''}
         roadmapSlug={roadmap.slug}
       />
     </div>

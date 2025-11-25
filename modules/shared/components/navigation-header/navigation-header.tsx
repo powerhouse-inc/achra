@@ -1,17 +1,23 @@
 import Link from 'next/link'
 import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
-import { slugify } from '../../lib/slug'
 import type { Route } from 'next'
 
 interface NavigationHeaderProps {
-  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
   title: string
   workstreamSlug: string
 }
 
 export function NavigationHeader({ network, title, workstreamSlug }: NavigationHeaderProps) {
-  const href = `/network/${slugify(network?.name ?? '')}/workstream/${workstreamSlug}` as Route
+  const href = `/network/${network?.slug ?? ''}/workstream/${workstreamSlug}` as Route
+
+  // Light theme now falls back to darkThemeLogo automatically when no regular logo exists,
+  // so a logo always renders regardless of theme.
+  const lightLogoSrc = network?.logo ?? network?.darkThemeLogo ?? null
+  const darkLogoSrc = network?.darkThemeLogo ?? network?.logo ?? null
+  const shouldRenderLightLogo = Boolean(lightLogoSrc)
+  const shouldRenderDarkLogo = Boolean(darkLogoSrc && lightLogoSrc !== darkLogoSrc)
 
   return (
     <div className="bg-secondary flex w-fit items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
@@ -19,25 +25,24 @@ export function NavigationHeader({ network, title, workstreamSlug }: NavigationH
         {network && (
           <>
             <Link
-              // TODO: replace the slugify with the actual network slug once available in the API
-              href={`/network/${slugify(network.name ?? '')}` as Route}
+              href={`/network/${network.slug ?? ''}` as Route}
               className="relative flex h-4 w-full items-center gap-2 sm:h-4.5 md:h-6"
             >
-              {network.logo && (
+              {shouldRenderLightLogo && (
                 // Note: Here we don't use Nextjs Image component because it doesn't work well with unknown image sizes
                 // and the existing workarounds doesn't work well in all the devices/browsers
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={network.logo}
+                  src={lightLogoSrc!}
                   alt={network.name ?? 'Network'}
-                  className="h-full dark:hidden"
+                  className={cn('h-full', shouldRenderDarkLogo && 'dark:hidden')}
                 />
               )}
 
-              {network.darkThemeLogo && (
+              {shouldRenderDarkLogo && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={network.darkThemeLogo}
+                  src={darkLogoSrc!}
                   alt={network.name ?? 'Network'}
                   className="hidden h-full dark:block"
                 />
