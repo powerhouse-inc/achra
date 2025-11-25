@@ -1,10 +1,6 @@
 import { FilePenLine } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
-import {
-  type FullQueryWorkstream,
-  useWorkstreamDetailsQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -20,6 +16,7 @@ import { StatCards } from '@/modules/workstream/components/workstream-card/stat-
 import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
 import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
 import { calculateTotalBudget, countRoadmapStats } from '@/modules/workstream/lib/roadmap-stats'
+import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-service'
 
 interface Props {
   params: Promise<{ slug: string; workstreamSlug: string }>
@@ -27,13 +24,7 @@ interface Props {
 
 export default async function WorkstreamDetailsPage({ params }: Props) {
   const { slug, workstreamSlug } = await params
-  const data = await useWorkstreamDetailsQuery.fetcher({
-    filter: {
-      networkSlug: slug,
-      workstreamSlug,
-    },
-  })()
-  const workstream = data.workstream[0] as unknown as FullQueryWorkstream | undefined
+  const workstream = await getWorkstreamDetails(slug, workstreamSlug)
 
   if (!workstream) {
     notFound()
@@ -48,7 +39,12 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
     <PageBackground>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={2} />}>
-          <WorkstreamDetailsBreadcrumb params={params} workstream={workstream} />
+          <WorkstreamDetailsBreadcrumb
+            networkName={workstream.network?.name ?? 'Unknown'}
+            networkSlug={workstream.network?.slug ?? 'Unknown'}
+            workstreamName={workstream.title ?? 'Unknown'}
+            workstreamSlug={workstreamSlug}
+          />
         </Suspense>
       </PageBreadcrumbContainer>
 

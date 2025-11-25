@@ -7,6 +7,12 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
       name
       icon
     }
+    network {
+      name
+      slug
+      logo
+      darkThemeLogo
+    }
     initialProposal {
       status
       author {
