@@ -1,8 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import {
-  type ClientInfo,
-  type Maybe,
+  type Network,
   ScopeOfWork_DeliverableStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
@@ -10,7 +9,7 @@ import { NavigationHeader } from '@/modules/shared/components/navigation-header'
 import { Button } from '@/modules/shared/components/ui/button'
 
 interface RoadmapSectionHeaderProps {
-  client?: Maybe<ClientInfo>
+  network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo'>
   workstreamSlug: string
   title: string
   description: string
@@ -19,7 +18,7 @@ interface RoadmapSectionHeaderProps {
   workstreamTitle: string
 }
 export function Header({
-  client,
+  network,
   workstreamSlug,
   title,
   description,
@@ -37,7 +36,7 @@ export function Header({
             <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
           </div>
           <NavigationHeader
-            client={client}
+            network={network}
             title={workstreamTitle}
             workstreamSlug={workstreamSlug}
           />

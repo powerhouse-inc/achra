@@ -58,5 +58,11 @@ query Workstreams($filter: WorkstreamsFilter) {
     alternativeProposals {
       id
     }
+    network {
+      name
+      logo
+      darkThemeLogo
+      slug
+    }
   }
 }

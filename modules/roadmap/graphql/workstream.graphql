@@ -2,9 +2,11 @@ query RoadmapList($filter: WorkstreamFilter!) {
   workstream(filter: $filter) {
     title
     slug
-    client {
+    network {
       name
-      icon
+      logo
+      darkThemeLogo
+      slug
     }
     sow {
       roadmaps {

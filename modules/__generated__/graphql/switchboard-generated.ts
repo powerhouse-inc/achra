@@ -3211,7 +3211,7 @@ export type RoadmapListQueryVariables = Exact<{
 }>;
 
 
-export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null }> };
+export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }> } | null }> };
 
 export type WorkstreamDetailsQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -3225,7 +3225,7 @@ export type WorkstreamsQueryVariables = Exact<{
 }>;
 
 
-export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }>, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null }> };
 
 
 
@@ -3485,9 +3485,11 @@ export const RoadmapListDocument = `
   workstream(filter: $filter) {
     title
     slug
-    client {
+    network {
       name
-      icon
+      logo
+      darkThemeLogo
+      slug
     }
     sow {
       roadmaps {
@@ -3739,6 +3741,12 @@ export const WorkstreamsDocument = `
     }
     alternativeProposals {
       id
+    }
+    network {
+      name
+      logo
+      darkThemeLogo
+      slug
     }
   }
 }
