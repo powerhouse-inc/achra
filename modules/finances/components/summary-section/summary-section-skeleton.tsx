@@ -35,13 +35,7 @@ export function SummarySectionSkeleton() {
               )}
             >
               {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    'h-5.5 flex items-center pl-6',
-                    'py-1 md:py-0',
-                  )}
-                >
+                <div key={i} className={cn('flex h-5.5 items-center pl-6', 'py-1 md:py-0')}>
                   <Skeleton className="h-4 w-24 rounded" />
                 </div>
               ))}
@@ -49,7 +43,10 @@ export function SummarySectionSkeleton() {
           </div>
         </div>
 
-        <div data-slot="chart-container" className="hidden pt-4 pb-4 md:flex md:justify-center md:w-[71%]">
+        <div
+          data-slot="chart-container"
+          className="hidden pt-4 pb-4 md:flex md:w-[71%] md:justify-center"
+        >
           <DoughnutChartSkeleton />
         </div>
 
@@ -57,22 +54,22 @@ export function SummarySectionSkeleton() {
           {/* MobileChart Skeleton */}
           <div className="flex gap-4 px-4 pt-2 pb-4">
             {/* Bar Container */}
-            <div className="bg-muted flex min-h-48 w-8 min-w-8 flex-col self-stretch overflow-hidden rounded-lg p-1 gap-1">
-               <Skeleton className="w-full h-1/3 rounded-sm" />
-               <Skeleton className="w-full h-1/4 rounded-sm" />
-               <Skeleton className="w-full h-1/5 rounded-sm" />
+            <div className="bg-muted flex min-h-48 w-8 min-w-8 flex-col gap-1 self-stretch overflow-hidden rounded-lg p-1">
+              <Skeleton className="h-1/3 w-full rounded-sm" />
+              <Skeleton className="h-1/4 w-full rounded-sm" />
+              <Skeleton className="h-1/5 w-full rounded-sm" />
             </div>
 
             {/* Legends Container */}
             <div className="bg-muted flex min-h-48 w-full flex-col items-center justify-center rounded-xl p-4">
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex w-full flex-col gap-2">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="flex items-center justify-between w-full">
-                     <div className="flex items-center gap-2">
-                        <Skeleton className="h-3 w-3 rounded-full" />
-                        <Skeleton className="h-4 w-24 rounded" />
-                     </div>
-                     <Skeleton className="h-4 w-16 rounded" />
+                  <div key={i} className="flex w-full items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Skeleton className="h-3 w-3 rounded-full" />
+                      <Skeleton className="h-4 w-24 rounded" />
+                    </div>
+                    <Skeleton className="h-4 w-16 rounded" />
                   </div>
                 ))}
               </div>

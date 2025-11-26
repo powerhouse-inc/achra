@@ -5,21 +5,19 @@ import { cn } from '@/shared/lib/utils'
 
 export function BudgetUtilizationCardSkeleton() {
   return (
-    <Card className="w-full shadow-sm px-8 py-3.25 lg:py-4 flex flex-col gap-0">
+    <Card className="flex w-full flex-col gap-0 px-8 py-3.25 shadow-sm lg:py-4">
       {/* Top Section: Numbers */}
-      <div className="flex flex-row justify-center gap-2.5 items-center">
+      <div className="flex flex-row items-center justify-center gap-2.5">
         <Skeleton className="h-9 w-24 rounded-lg sm:w-32" />
         <Separator
           orientation="vertical"
-          className={cn(
-            'origin-center rotate-12 self-center h-8! w-0.5!',
-          )}
+          className={cn('h-8! w-0.5! origin-center rotate-12 self-center')}
         />
         <Skeleton className="h-9 w-24 rounded-lg sm:w-32" />
       </div>
 
       {/* Description */}
-      <div className="flex justify-center mt-0.25">
+      <div className="mt-0.25 flex justify-center">
         <Skeleton className="h-4 w-40 rounded" />
       </div>
 
