@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import BuildersCategoryChip from '@/modules/shared/components/chips/builders-category-chip/builders-category-chip'
 import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -8,7 +9,6 @@ import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType } from '@/modules/shared/types/types'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import CategoryBadge from '../category-badge/category-badge'
 import RoleBadge from '../role-badge/role-badge'
 import { useCompactItem } from './use-compact-item'
 
@@ -52,7 +52,7 @@ export default function CompactItem({ team, className }: CompactItemProps) {
           <>
             <div className="flex gap-1">
               {team.categories.map((category) => (
-                <CategoryBadge key={category} category={category} />
+                <BuildersCategoryChip key={category} category={category} />
               ))}
             </div>
             <RoleBadge type={team.type} />

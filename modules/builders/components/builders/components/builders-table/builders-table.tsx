@@ -1,7 +1,7 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
-import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
-import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import BuilderDomain from '@/modules/shared/components/builder-domain'
+import BuilderProfile from '@/modules/shared/components/builder-profile'
 import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
