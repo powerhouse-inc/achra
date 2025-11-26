@@ -63,7 +63,7 @@ export default function BuildersCategoryChip({ category }: BuildersCategoryChipP
   }, [category])
 
   return (
-    <GenericChip variant="filled" color={color}>
+    <GenericChip variant="compact" color={color}>
       {label}
     </GenericChip>
   )
