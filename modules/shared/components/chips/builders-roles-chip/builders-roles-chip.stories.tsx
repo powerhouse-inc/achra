@@ -1,4 +1,4 @@
-import { TeamRole } from '@/modules/shared/enums/teamRole'
+import { TeamRole } from '@/modules/shared/types'
 import BuildersRolesChip from './builders-roles-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 

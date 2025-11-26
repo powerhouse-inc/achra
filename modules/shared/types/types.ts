@@ -38,10 +38,17 @@ export enum TeamCategory {
   All = 'All',
 }
 
-export enum ActorCategory {
-  AdvisoryCouncilMember = 'AdvisoryCouncilMember',
+export enum TeamRole {
   ActiveEcosystemActor = 'ActiveEcosystemActor',
   ScopeFacilitator = 'ScopeFacilitator',
+  AdvisoryCouncilMember = 'AdvisoryCouncilMember',
+  Facilitator = 'Facilitator',
+  ResearchExpert = 'ResearchExpert',
+  ProjectLead = 'ProjectLead',
+  DataExpert = 'DataExpert',
+  TechExpert = 'TechExpert',
+  TeamLead = 'TeamLead',
+  All = 'All',
 }
 
 export enum ProgressStatus {

@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
-import { TeamRole } from '@/modules/shared/enums/teamRole'
 import { cn } from '@/modules/shared/lib/utils'
+import { TeamRole } from '@/modules/shared/types'
 
 interface ActorRolesSelectProps {
   actorRoles: TeamRole[]

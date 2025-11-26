@@ -1,10 +1,9 @@
 import { Avatar, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
 import type { TeamStatus } from '@/modules/shared/types/types'
-import { useProfile } from './use-profile'
+import { BuildersStatusChip } from '../chips/builders-status-chip'
 
-export interface ProfileProps {
+export interface BuilderProfileProps {
   name: string
   shortCode: string
   status: TeamStatus
@@ -12,8 +11,13 @@ export interface ProfileProps {
   className?: string
 }
 
-export default function Profile({ name, shortCode, status, image, className }: ProfileProps) {
-  const { statusBadgeStyles } = useProfile()
+export default function BuilderProfile({
+  name,
+  shortCode,
+  status,
+  image,
+  className,
+}: BuilderProfileProps) {
   return (
     <div className={cn('flex items-center gap-2', className)}>
       <Avatar className="size-8">
@@ -23,9 +27,7 @@ export default function Profile({ name, shortCode, status, image, className }: P
         <p className="text-foreground/30 line-clamp-1 w-full text-sm/5.5 font-semibold">
           {shortCode} <span className="text-foreground">{name}</span>
         </p>
-        <Badge variant="default" className={cn(statusBadgeStyles[status], 'px-3 leading-4.5')}>
-          {status.toUpperCase()}
-        </Badge>
+        <BuildersStatusChip status={status} />
       </div>
     </div>
   )

@@ -1,15 +1,15 @@
+import { BuildersCategoryChip } from '@/modules/shared/components/chips/builders-category-chip'
 import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import type { Team } from '@/modules/shared/types/team'
 import { ResourceType } from '@/modules/shared/types/types'
-import CategoryBadge from '../category-badge/category-badge'
-import CategoryBadgeGroup from '../category-badge-group/category-badge-group'
-import ScopeBadgeGroup from '../scope-badge-group/scope-badge-group'
+import CategoryBadgeGroup from './components/category-badge-group/category-badge-group'
+import ScopeBadgeGroup from './components/scope-badge-group/scope-badge-group'
 
-interface DomainProps {
+interface BuilderDomainProps {
   team: Team
 }
 
-export default function Domain({ team }: DomainProps) {
+export default function BuilderDomain({ team }: BuilderDomainProps) {
   return (
     <div className="flex justify-between">
       {team.type === ResourceType.EcosystemActor ? (
@@ -27,7 +27,7 @@ export default function Domain({ team }: DomainProps) {
       ) : team.categories.length === 0 ? null : (
         <div className="flex flex-col gap-1">
           {team.categories.map((category) => (
-            <CategoryBadge key={category} category={category} />
+            <BuildersCategoryChip key={category} category={category} />
           ))}
         </div>
       )}

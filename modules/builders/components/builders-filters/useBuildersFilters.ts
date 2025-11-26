@@ -1,7 +1,7 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryState } from 'nuqs'
 import { useCallback } from 'react'
 import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
-import { TeamRole } from '@/modules/shared/enums/teamRole'
+import { TeamRole } from '@/modules/shared/types'
 
 export default function useBuilderFilters() {
   const [search, setSearch] = useQueryState(
