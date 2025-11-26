@@ -12,6 +12,7 @@ import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
+import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
 
 interface FinancesPageProps {
   params: Promise<{
@@ -37,7 +38,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           <UsdsIcon className="size-5 md:size-6" />
           *All values are converted to USDS
         </div>
-        <Suspense fallback={<DoughnutChartSkeleton />}>
+        <Suspense fallback={<SummarySectionSkeleton />}>
           <SummarySectionWrapper params={params} />
         </Suspense>
         <Suspense fallback={<NavigationCardSkeletons />}>
