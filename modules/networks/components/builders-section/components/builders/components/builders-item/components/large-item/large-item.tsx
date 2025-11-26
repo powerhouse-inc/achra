@@ -1,11 +1,11 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
+import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
+import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import Domain from '../domain/domain'
-import Profile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
 
 export interface LargeItemProps {
@@ -21,13 +21,13 @@ export default function LargeItem({ team, className }: LargeItemProps) {
         className,
       )}
     >
-      <Profile
+      <BuilderProfile
         name={team.name}
         shortCode={team.shortCode}
         status={team.status}
         image={team.image}
       />
-      <Domain team={team} />
+      <BuilderDomain team={team} />
       <RoleBadge type={team.type} />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>

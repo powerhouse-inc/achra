@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
+import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
 import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -8,7 +9,6 @@ import type { Team } from '@/modules/shared/types/team'
 import { ResourceType } from '@/modules/shared/types/types'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
 import CategoryBadge from '../category-badge/category-badge'
-import ItemProfile from '../profile/profile'
 import RoleBadge from '../role-badge/role-badge'
 import { useCompactItem } from './use-compact-item'
 
@@ -27,7 +27,7 @@ export default function CompactItem({ team, className }: CompactItemProps) {
       )}
     >
       <div className="flex justify-between">
-        <ItemProfile
+        <BuilderProfile
           name={team.name}
           shortCode={team.shortCode}
           status={team.status}

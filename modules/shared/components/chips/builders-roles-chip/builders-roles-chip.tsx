@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { TeamRole } from '@/modules/shared/enums/teamRole'
+import { TeamRole } from '@/modules/shared/types'
 import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersRolesChipProps {

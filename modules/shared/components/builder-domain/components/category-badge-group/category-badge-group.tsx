@@ -4,7 +4,7 @@ import {
   HoverPopoverTrigger,
 } from '@/modules/shared/components/hover-popover'
 import type { TeamCategory } from '@/modules/shared/types/types'
-import CategoryBadge from '../category-badge/category-badge'
+import CategoryBadge from '../../../../../networks/components/builders-section/components/builders/components/builders-item/components/category-badge/category-badge'
 
 export interface CategoryBadgeGroupProps {
   items: TeamCategory[]

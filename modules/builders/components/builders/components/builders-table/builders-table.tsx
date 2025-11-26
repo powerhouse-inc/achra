@@ -1,7 +1,17 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
+import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
+import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
 import { Button } from '@/modules/shared/components/ui/button'
-import { Table, TableHead, TableHeader, TableRow } from '@/modules/shared/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { SortEnum, useBuildersTable } from './use-builders-table'
@@ -12,9 +22,10 @@ export interface BuildersTableProps {
 }
 
 export function BuildersTable({ builders, className }: BuildersTableProps) {
-  const { headersSort, proccesedBuildersTableColumns, handleSortClick } = useBuildersTable({
-    builders,
-  })
+  const { headersSort, sortedBuilders, proccesedBuildersTableColumns, handleSortClick } =
+    useBuildersTable({
+      builders,
+    })
 
   return (
     <Table variant="pills" className={cn('w-full', className)}>
@@ -26,8 +37,8 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
               className={cn(
                 'inline-block h-fit p-0!',
                 column.isNumeric && 'text-right',
-                index === 0 && 'w-[24%]',
-                index === 1 && 'w-[16%]',
+                index === 0 && 'w-[25%]',
+                index === 1 && 'w-[20%]',
                 index === 2 && 'w-[18%]',
                 index === 3 && 'w-[13%]',
               )}
@@ -51,10 +62,37 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
               </Button>
             </TableHead>
           ))}
-          <TableHead className="size-9 h-fit p-0! text-right" />
           <TableHead className="h-fit w-23 p-0! text-right" />
+          <TableHead className="size-9 h-fit p-0! text-right" />
         </TableRow>
       </TableHeader>
+      <TableBody className="flex flex-col gap-2">
+        {sortedBuilders.map((builder) => (
+          <TableRow
+            key={builder.id}
+            className="flex h-fit w-full cursor-pointer items-center justify-between border-b-0! p-4 xl:px-6"
+            aria-label={`View ${builder.name} builder`}
+          >
+            <TableCell className="inline-block h-fit w-[25%] p-0!">
+              <BuilderProfile
+                name={builder.name}
+                shortCode={builder.shortCode}
+                status={builder.status}
+                image={builder.image}
+              />
+            </TableCell>
+            <TableCell className="inline-block h-fit w-[20%] p-0!">
+              <BuildersRolesChip role={builder.role} />
+            </TableCell>
+            <TableCell className="inline-block h-fit w-[18%] p-0!">
+              <BuilderDomain team={builder} />
+            </TableCell>
+            <TableCell className="inline-block h-fit w-[13%] p-0!">In progress</TableCell>
+            <TableCell className="inline-block h-fit w-23 p-0! text-right">-</TableCell>
+            <TableCell className="inline-block size-9 h-fit p-0! text-right">-</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
     </Table>
   )
 }

@@ -3,7 +3,7 @@ import type { BudgetStatement } from './budgetStatement'
 import type { ContributorCommitment, CuGithubContribution } from './contributor'
 import type { Scope } from './scopes'
 import type { SocialMediaChannels } from './socialMedia'
-import type { ResourceType, TeamCategory, TeamStatus } from './types'
+import type { ResourceType, TeamCategory, TeamRole, TeamStatus } from './types'
 import type { Auditor } from './users'
 
 export interface TeamUpdate {
@@ -30,6 +30,7 @@ export interface Team {
   legacyBudgetStatementUrl: string
   budgetId: string
   type: ResourceType
+  role: TeamRole
   auditors: Auditor[]
   socialMediaChannels: SocialMediaChannels[]
   contributorCommitment: ContributorCommitment[]
