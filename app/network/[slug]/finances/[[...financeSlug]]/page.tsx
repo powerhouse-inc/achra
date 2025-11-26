@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
+import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
 import { SummarySectionWrapper } from '@/modules/finances/components/summary-section/summary-section-wrapper'
 import { TitleComponentSkeleton } from '@/modules/finances/components/title-component/title-component-skeleton'
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
@@ -11,7 +12,6 @@ import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
-import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
 
 interface FinancesPageProps {
   params: Promise<{
