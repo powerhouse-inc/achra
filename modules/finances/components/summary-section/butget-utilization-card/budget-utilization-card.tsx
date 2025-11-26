@@ -21,7 +21,7 @@ export function BudgetUtilizationCard({ paymentsOnChain, budgetCap }: QuarterCar
   return (
     <Card
       data-slot="budget-utilization-card"
-      className="flex w-full flex-col gap-0 px-8 py-3.25 lg:py-4"
+      className="bg-popover flex w-full flex-col gap-0 border-none px-8 py-3.25 lg:py-4"
     >
       <div className="flex flex-row justify-center gap-2.5">
         <MetricDisplay
