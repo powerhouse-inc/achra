@@ -21,7 +21,7 @@ export function MobileChart({ seriesData }: MobileChartProps) {
       {/* Bar Container */}
       <div
         data-slot="chart-track"
-        className="bg-muted flex min-h-48 w-8 min-w-8 flex-col self-stretch overflow-hidden rounded-lg"
+        className="bg-accent flex min-h-48 w-8 min-w-8 flex-col self-stretch overflow-hidden rounded-lg"
       >
         {series.map((item, index) => (
           // it is okay to use index as key here because the chart is static
@@ -41,7 +41,7 @@ export function MobileChart({ seriesData }: MobileChartProps) {
       {/* Legends Container */}
       <div
         data-slot="legends-wrapper"
-        className="bg-muted flex min-h-48 w-full flex-col items-center justify-center rounded-xl p-4"
+        className="bg-accent flex min-h-48 w-full flex-col items-center justify-center rounded-xl p-4"
       >
         <div data-slot="legend-list" className="flex flex-col gap-2">
           {seriesData.map((item) => (
