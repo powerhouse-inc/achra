@@ -17,12 +17,12 @@ export default function BuildersCategoryChip({ category }: BuildersCategoryChipP
       case TeamCategory.Support:
         return {
           label: 'Support',
-          color: 'yellow',
+          color: 'orange',
         }
       case TeamCategory.Operational:
         return {
           label: 'Operational',
-          color: 'blue',
+          color: 'purple',
         }
       case TeamCategory.Business:
         return {
