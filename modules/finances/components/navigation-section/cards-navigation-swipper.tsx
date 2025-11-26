@@ -62,7 +62,7 @@ export function CardsNavigationSwipper({
       1440: {
         slidesPerView: isDeepLevel ? 6 : 5,
         slidesPerGroup: isDeepLevel ? 6 : 5,
-        spaceBetween: 8,
+        spaceBetween: isDeepLevel ? 32 : 8,
       },
     },
   }
@@ -71,11 +71,9 @@ export function CardsNavigationSwipper({
     <div
       data-slot="container-cards-navigation"
       className={cn(
-        'flex flex-row flex-nowrap',
+        'flex w-full flex-row flex-nowrap',
         !showSwiper && 'gap-4 md:gap-6 xl:gap-8',
-        showSwiper && '-mx-2',
         itemsCount === 1 && !showSwiper && 'lg:[&>div:nth-of-type(1)]:max-w-[calc(100%/3-24px)]',
-
         itemsCount === 1 &&
           !showSwiper &&
           'xl:[&>div:nth-of-type(1)]:max-w-[calc(100%/3-32px)] xl:[&>div:nth-of-type(1)]:min-w-[calc(100%/3-32px)]',
@@ -84,16 +82,11 @@ export function CardsNavigationSwipper({
       {showSwiper ? (
         <div
           data-slot="swiper-wrapper"
-          className={cn(
-            'relative w-full',
-
-            isDeepLevel ? '-mx-2 xl:-mx-4' : '-mx-2',
-          )}
+          className={cn('relative w-full min-w-0 flex-1', '-my-2 py-2')}
         >
           <Swiper
             direction="horizontal"
             modules={[Pagination, Navigation]}
-            centerInsufficientSlides
             pagination={true}
             onAfterInit={handleAfterInit}
             onResize={adjustCardHeights}
@@ -101,23 +94,19 @@ export function CardsNavigationSwipper({
             ref={swiperRef}
             className={cn(
               'pb-10!',
-              '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
-              // Pagination styling
+              '[&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
               '[&_.swiper-pagination-horizontal]:relative [&_.swiper-pagination-horizontal]:mt-6',
-              // Bullet sizing: 12px mobile, 16px tablet+
               '[&_.swiper-pagination-bullet]:h-3 [&_.swiper-pagination-bullet]:w-3',
               '[&_.swiper-pagination-bullet]:md:h-4 [&_.swiper-pagination-bullet]:md:w-4',
-              // Active slide margin
-              '[&_.swiper-slide-active]:-ml-2',
               !isSwiperReady && 'hidden!',
             )}
             {...swiperOptions}
           >
             {cardsNavigationInformation.map((card) => (
-              <SwiperSlide key={card.code} className="flex">
+              <SwiperSlide key={card.code}>
                 <div
                   data-slot="card-wrapper"
-                  className={cn('box-border flex w-full min-w-full', 'pt-1 pb-1 pl-4', 'xl:pl-6')}
+                  className={cn('box-border flex h-full w-full', 'p-1')}
                 >
                   <NavigationCard
                     href={card.href as Route}
@@ -126,7 +115,7 @@ export function CardsNavigationSwipper({
                     description={card.description}
                     code={card.code}
                     isCompact={isDeepLevel}
-                    className="swiper-milestone-card"
+                    className="swiper-milestone-card h-full"
                   />
                 </div>
               </SwiperSlide>
