@@ -142,7 +142,7 @@ export function DesktopChart({
         {
           name: 'Overview Card',
           type: 'pie',
-          radius: isTable || isDesktop1024 ? [32, 64] : [37, 73],
+          radius: isTable || isDesktop1024 ? [32, 64] : [35, 70],
           center: ['50%', '50%'],
           label: { normal: { show: false } },
           labelLine: { normal: { show: false } },
