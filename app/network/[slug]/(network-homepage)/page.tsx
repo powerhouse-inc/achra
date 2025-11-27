@@ -18,6 +18,7 @@ import {
   NETWORK_HOMEPAGE_SECTIONS_ENCODED,
   NETWORK_HOMEPAGE_SKIP_SECTION,
 } from '@/modules/networks/config/constants'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
 
@@ -33,9 +34,11 @@ export default function NetworkPage({ params }: NetworkPageProps) {
           <HomepageBanner />
         </Suspense>
         <ProposalsSection proposals={PROPOSALS} />
-        <Suspense fallback={<RoadmapSectionSkeleton />}>
-          <RoadmapSection params={params} />
-        </Suspense>
+        <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
+          <Suspense fallback={<RoadmapSectionSkeleton />}>
+            <RoadmapSection params={params} />
+          </Suspense>
+        </ErrorBoundaryWithPresets>
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
         <BuildersSection />

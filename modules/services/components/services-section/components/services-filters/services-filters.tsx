@@ -37,11 +37,7 @@ export default function ServicesFilters() {
         <ScrollableTabsList>
           <div className="flex w-fit">
             {SERVICES_TABS.map((tab) => (
-              <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className="text-muted-foreground data-[state=active]:text-foreground dark:data-[state=active]:bg-background border-none px-3 py-1.5 leading-5"
-              >
+              <TabsTrigger key={tab.id} value={tab.id}>
                 {tab.label}
               </TabsTrigger>
             ))}

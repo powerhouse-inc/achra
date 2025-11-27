@@ -44,11 +44,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
         <ScrollableTabsList>
           <div className="flex w-fit">
             {roadmaps.map((roadmap) => (
-              <TabsTrigger
-                key={roadmap.id}
-                value={roadmap.id}
-                className="dark:data-[state=active]:bg-background text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
-              >
+              <TabsTrigger key={roadmap.id} value={roadmap.id}>
                 {roadmap.title}
               </TabsTrigger>
             ))}

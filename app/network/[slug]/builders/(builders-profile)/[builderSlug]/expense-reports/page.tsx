@@ -34,7 +34,7 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
   // TODO: fetch the actual builder data and if it doesn't exist, return a 404 page
 
   return (
-    <PageContent as="div">
+    <PageContent as="div" className="mt-4 md:mt-6">
       <Suspense fallback={<MonthNavigationSkeleton />}>
         <MonthNavigation />
       </Suspense>
