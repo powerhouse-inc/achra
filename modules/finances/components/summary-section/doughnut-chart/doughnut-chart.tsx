@@ -252,10 +252,9 @@ export function DesktopChart({
       className={cn(
         'flex w-full',
         'md:flex-row md:justify-center md:gap-5',
-        'lg:gap-4',
-        '2xl:gap-6',
+        'lg:gap-7.5',
         isDeepLevel ? 'xl:gap-10' : 'xl:gap-8',
-        haveMoreThanThreeItems && 'xl:ml-0 xl:justify-start',
+        haveMoreThanThreeItems && 'xl:ml-4 xl:justify-start',
         haveMoreThanThreeItems && '2xl:ml-0',
       )}
     >
