@@ -34,10 +34,13 @@ function FundingOverview() {
           '[&>:nth-of-type(2)]:order-3',
           '[&>:nth-of-type(3)]:order-2 [&>:nth-of-type(3)]:w-[calc(50%-4px)]',
           // md
-          'md:flex-nowrap md:gap-6',
-          'md:[&>:nth-of-type(1)]:w-full md:[&>:nth-of-type(1)]:min-w-[158px]',
-          'md:[&>:nth-of-type(2)]:order-2',
-          'md:[&>:nth-of-type(3)]:order-3 md:[&>:nth-of-type(3)]:w-full md:[&>:nth-of-type(3)]:min-w-[158px]',
+          'md:gap-4',
+          'md:[&>:nth-of-type(1)]:w-[calc(50%-8px)] md:[&>:nth-of-type(3)]:w-[calc(50%-8px)]',
+          // lg
+          'lg:flex-nowrap lg:gap-8',
+          'lg:[&>:nth-of-type(1)]:w-full lg:[&>:nth-of-type(1)]:min-w-[158px]',
+          'lg:[&>:nth-of-type(2)]:order-2',
+          'lg:[&>:nth-of-type(3)]:order-3 lg:[&>:nth-of-type(3)]:w-full lg:[&>:nth-of-type(3)]:min-w-[158px]',
           // xl
           'xl:gap-8',
         )}
@@ -48,7 +51,7 @@ function FundingOverview() {
           caption="Initial Lifetime Balance"
           mobileCaption="Initial L.T. Balance"
         />
-        <div className="w-full md:max-w-85 md:min-w-85 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
+        <div className="w-full lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
           <FundChangeRate
             netChange={-791666}
             leftValue={500000}
