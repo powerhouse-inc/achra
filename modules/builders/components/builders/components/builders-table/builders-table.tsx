@@ -1,5 +1,5 @@
 'use client'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import BuilderDomain from '@/modules/shared/components/builder-domain'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
 import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
@@ -14,6 +14,8 @@ import {
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
+import { LastModified } from '../last-modified'
+import { Links } from '../links'
 import { SortEnum, useBuildersTable } from './use-builders-table'
 
 export interface BuildersTableProps {
@@ -87,9 +89,17 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
             <TableCell className="inline-block h-fit w-[18%] p-0!">
               <BuilderDomain team={builder} />
             </TableCell>
-            <TableCell className="inline-block h-fit w-[13%] p-0!">In progress</TableCell>
-            <TableCell className="inline-block h-fit w-23 p-0! text-right">-</TableCell>
-            <TableCell className="inline-block size-9 h-fit p-0! text-right">-</TableCell>
+            <TableCell className="inline-block h-fit w-[13%] p-0!">
+              <LastModified team={builder} />
+            </TableCell>
+            <TableCell className="inline-block h-fit w-23 p-0! text-right">
+              <Links />
+            </TableCell>
+            <TableCell className="inline-block size-9 h-fit p-0! text-right">
+              <Button variant="outline" size="icon" aria-label="View builder team details">
+                <ArrowRight className="size-4" />
+              </Button>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
