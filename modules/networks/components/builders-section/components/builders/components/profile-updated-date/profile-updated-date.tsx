@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { getProfileUpdateDate } from '@/modules/networks/lib/get-profile-update-date'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { getProfileUpdateDate } from '@/modules/shared/lib/get-profile-update-date'
 import type { Team } from '@/modules/shared/types/team'
 
 type ProfileUpdatedDateProps<E extends React.ElementType> = React.ComponentProps<E> & {
