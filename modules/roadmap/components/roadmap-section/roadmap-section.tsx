@@ -1,6 +1,7 @@
 import type {
   Network,
   ScopeOfWork_Milestone,
+  Sow_Deliverable,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneExtendedCard } from '../milestone-extended-card'
@@ -17,12 +18,14 @@ interface RoadmapSectionProps {
   network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
   workstreamSlug: string
   workstreamTitle: string
+  deliverables: Sow_Deliverable[]
 }
 export function RoadmapSection({
   roadmap,
   network,
   workstreamSlug,
   workstreamTitle,
+  deliverables,
 }: RoadmapSectionProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -43,6 +46,7 @@ export function RoadmapSection({
             milestone={milestone as ScopeOfWork_Milestone}
             networkSlug={network?.slug ?? ''}
             roadmapSlug={roadmap.slug}
+            deliverables={deliverables}
           />
         ))}
       </div>
@@ -50,6 +54,7 @@ export function RoadmapSection({
         milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
         networkSlug={network?.slug ?? ''}
         roadmapSlug={roadmap.slug}
+        deliverables={deliverables}
       />
     </div>
   )

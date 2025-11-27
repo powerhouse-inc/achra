@@ -2,7 +2,10 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  ScopeOfWork_Milestone,
+  Sow_Deliverable,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { cn } from '@/shared/lib/utils'
 import useRoadmapSwiper from './use-roadmap-swiper'
@@ -11,12 +14,14 @@ interface RoadmapSwiperProps {
   milestones: ScopeOfWork_Milestone[]
   networkSlug: string
   roadmapSlug: string
+  deliverables: Sow_Deliverable[]
 }
 
 export default function RoadmapSwiper({
   milestones,
   networkSlug,
   roadmapSlug,
+  deliverables,
 }: RoadmapSwiperProps) {
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
@@ -76,6 +81,7 @@ export default function RoadmapSwiper({
                   className="swiper-milestone-card"
                   networkSlug={networkSlug}
                   roadmapSlug={roadmapSlug}
+                  deliverables={deliverables}
                 />
               </div>
             </SwiperSlide>
@@ -93,6 +99,7 @@ export default function RoadmapSwiper({
                   className="swiper-milestone-card mb-2"
                   networkSlug={networkSlug}
                   roadmapSlug={roadmapSlug}
+                  deliverables={deliverables}
                 />
               </div>
             ))}

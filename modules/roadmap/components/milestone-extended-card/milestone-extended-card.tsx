@@ -3,11 +3,13 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  ScopeOfWork_Milestone,
+  Sow_Deliverable,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
-import { mockedDeliverables } from '@/modules/roadmap/mocks/roadmap'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
@@ -19,6 +21,7 @@ interface MilestoneExtendedCardProps {
   className?: string
   networkSlug: string
   roadmapSlug: string
+  deliverables: Sow_Deliverable[]
 }
 
 export default function MilestoneExtendedCard({
@@ -26,6 +29,7 @@ export default function MilestoneExtendedCard({
   className,
   networkSlug,
   roadmapSlug,
+  deliverables,
 }: MilestoneExtendedCardProps) {
   const progress = useMemo(() => {
     return getProgressPercentage(milestone.scope?.progress)
@@ -35,12 +39,12 @@ export default function MilestoneExtendedCard({
     if (!milestone.scope?.deliverables) return []
 
     const allKeyResults = milestone.scope.deliverables.flatMap((deliverableId) => {
-      const deliverable = mockedDeliverables.find((d) => d.id === deliverableId)
-      return deliverable?.keyResults ?? []
+      const milestoneDeliverable = deliverables.find((d) => d.id === deliverableId)
+      return milestoneDeliverable?.keyResults ?? []
     })
 
     return allKeyResults.slice(0, 3)
-  }, [milestone.scope])
+  }, [milestone.scope, deliverables])
 
   return (
     <Card

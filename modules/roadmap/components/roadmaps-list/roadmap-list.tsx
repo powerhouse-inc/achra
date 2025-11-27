@@ -43,6 +43,8 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
     return (workstream.sow?.roadmaps.length ?? 0) > 0
   })
 
+  const deliverables = data.workstream.flatMap((workstream) => workstream.sow?.deliverables ?? [])
+
   if (!hasRoadmaps) {
     return (
       <Empty>
@@ -67,6 +69,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
               network={
                 workstream.network as Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
               }
+              deliverables={deliverables}
             />
           )),
         )}

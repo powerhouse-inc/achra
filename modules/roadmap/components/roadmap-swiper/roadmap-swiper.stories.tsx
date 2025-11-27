@@ -1,4 +1,5 @@
-import { mockedMilestones } from '@/modules/roadmap/mocks'
+import type { Sow_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import { mockedDeliverables, mockedMilestones } from '@/modules/roadmap/mocks'
 import RoadmapSwiper from './roadmap-swiper'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -28,5 +29,6 @@ export const Default: Story = {
     milestones: mockedMilestones,
     networkSlug: 'powerhouse',
     roadmapSlug: 'roadmap-1',
+    deliverables: mockedDeliverables as unknown as Sow_Deliverable[],
   },
 }
