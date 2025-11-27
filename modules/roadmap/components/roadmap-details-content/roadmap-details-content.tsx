@@ -24,6 +24,7 @@ function RoadmapDetailsContent() {
       refetchInterval: FAST_REFRESH_INTERVAL,
     },
   )
+
   const roadmap = data && getRoadmapFromScopeOfWork(data, roadmapSlug as string)
 
   const sections = roadmap?.milestones.map((milestone) => milestone.sequenceCode)

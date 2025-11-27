@@ -32,6 +32,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
     return null
   }
   const roadmaps = data.workstream.flatMap((workstream) => workstream.sow?.roadmaps ?? [])
+  const deliverables = data.workstream.flatMap((workstream) => workstream.sow?.deliverables ?? [])
 
   return (
     <section
@@ -66,6 +67,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
                   milestone={milestone as ScopeOfWork_Milestone}
                   networkSlug={slug}
                   roadmapSlug={roadmap.slug}
+                  deliverables={deliverables}
                 />
               ))}
             </div>
@@ -73,6 +75,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
               milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
               networkSlug={slug}
               roadmapSlug={roadmap.slug}
+              deliverables={deliverables}
             />
           </TabsContent>
         ))}
