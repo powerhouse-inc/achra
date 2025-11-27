@@ -55,7 +55,7 @@ export function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCa
             onClick={handleToogleWalletTable}
             aria-label="Toggle wallets table"
           >
-            <ChevronUp className="size-6" />
+            <ChevronUp className="size-6 rotate-180" />
           </Button>
         </StripedCardAction>
       </StripedCardHeader>
