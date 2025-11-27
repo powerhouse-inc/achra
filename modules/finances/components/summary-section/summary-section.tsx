@@ -41,7 +41,7 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
 
       <Card
         data-slot="card-container"
-        className={cn('flex w-full flex-col gap-0 p-0', 'md:flex-row')}
+        className={cn('flex w-full flex-col gap-0 p-0', 'bg-popover border-none md:flex-row')}
       >
         <div data-slot="content" className="md:flex md:w-[29%]">
           <FilterTabs
