@@ -255,7 +255,7 @@ export function DesktopChart({
         'lg:gap-7.5',
         isDeepLevel ? 'xl:gap-10' : 'xl:gap-8',
         haveMoreThanThreeItems && 'xl:ml-4 xl:justify-start',
-        haveMoreThanThreeItems && '2xl:ml-40',
+        haveMoreThanThreeItems && '2xl:ml-0',
       )}
     >
       {/* ContainerChart */}
