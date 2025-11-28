@@ -12,6 +12,7 @@ interface SimpleStatCardProps {
   mobileCaption?: string
   hasEqualSign?: boolean
   dynamicChanges?: boolean
+  className?: string
 }
 
 function SimpleStatCard({
@@ -21,9 +22,15 @@ function SimpleStatCard({
   mobileCaption,
   hasEqualSign = false,
   dynamicChanges = false,
+  className,
 }: SimpleStatCardProps) {
   return (
-    <Card className="bg-popover w-full gap-2 border-none p-2 md:p-4 lg:p-4 xl:px-8 xl:py-4">
+    <Card
+      className={cn(
+        'bg-popover w-full gap-2 border-none p-2 md:p-4 lg:p-4 xl:px-8 xl:py-4',
+        className,
+      )}
+    >
       <div className="text-foreground/30 text-xs leading-4.5 uppercase md:font-medium">
         {date ? format(parseISO(date), 'd MMM y') : 'N/A'}
       </div>

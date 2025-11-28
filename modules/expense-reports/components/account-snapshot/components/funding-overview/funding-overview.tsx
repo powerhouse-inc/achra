@@ -1,4 +1,3 @@
-import { cn } from '@/modules/shared/lib/utils'
 import { ConversionNotice } from '../conversion-notice'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
@@ -26,32 +25,15 @@ function FundingOverview() {
         <ConversionNotice className="md:absolute md:top-0 md:right-0" />
       </div>
 
-      <div
-        className={cn(
-          'flex w-full flex-wrap gap-2',
-
-          '[&>:nth-of-type(1)]:order-1 [&>:nth-of-type(1)]:w-[calc(50%-4px)]',
-          '[&>:nth-of-type(2)]:order-3',
-          '[&>:nth-of-type(3)]:order-2 [&>:nth-of-type(3)]:w-[calc(50%-4px)]',
-          // md
-          'md:gap-4',
-          'md:[&>:nth-of-type(1)]:w-[calc(50%-8px)] md:[&>:nth-of-type(3)]:w-[calc(50%-8px)]',
-          // lg
-          'lg:flex-nowrap lg:gap-8',
-          'lg:[&>:nth-of-type(1)]:w-full lg:[&>:nth-of-type(1)]:min-w-[158px]',
-          'lg:[&>:nth-of-type(2)]:order-2',
-          'lg:[&>:nth-of-type(3)]:order-3 lg:[&>:nth-of-type(3)]:w-full lg:[&>:nth-of-type(3)]:min-w-[158px]',
-          // xl
-          'xl:gap-8',
-        )}
-      >
+      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-8 xl:gap-8">
         <SimpleStatCard
           date="2025-04-08T21:11:07+00:00"
           value={2924160}
           caption="Initial Lifetime Balance"
           mobileCaption="Initial L.T. Balance"
+          className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
         />
-        <div className="w-full lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
+        <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
           <FundChangeRate
             netChange={-791666}
             leftValue={500000}
@@ -78,6 +60,7 @@ function FundingOverview() {
           hasEqualSign
           caption="New Lifetime Balance"
           mobileCaption="New L.T. Balance"
+          className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
         />
       </div>
     </>
