@@ -16,13 +16,15 @@ interface BuildersPageProps {
   }>
 }
 
-const items = [
-  { label: 'Powerhouse', href: '/network/powerhouse' as Route },
-  { label: 'Builders', href: '/network/powerhouse/builders' as Route },
-]
-
-export default async function BuildersPage({ searchParams }: BuildersPageProps) {
+export default async function BuildersPage({ params, searchParams }: BuildersPageProps) {
   const searchParamsString = JSON.stringify(await searchParams)
+
+  const { slug } = await params
+
+  const items = [
+    { label: slug.charAt(0).toUpperCase() + slug.slice(1), href: `/network/${slug}` as Route },
+    { label: 'Builders', href: '/network/powerhouse/builders' as Route },
+  ]
 
   return (
     <PageBackground>
