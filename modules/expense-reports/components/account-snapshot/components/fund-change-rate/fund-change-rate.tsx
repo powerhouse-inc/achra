@@ -28,7 +28,7 @@ function FundChangeRate({
   dynamicChanges = false,
 }: FundChangeRateProps) {
   return (
-    <Card className="w-full gap-0 border-none p-2 md:px-2 md:py-4 lg:px-4 lg:py-4 xl:px-8 xl:py-4">
+    <Card className="bg-popover w-full gap-0 border-none p-2 md:px-4 md:pt-2 md:pb-4 lg:px-4 lg:py-4 xl:px-8 xl:py-4">
       {/* Change Container with Arrows */}
       <div className="flex w-full">
         {/* Left Arrow Container */}
@@ -48,7 +48,7 @@ function FundChangeRate({
 
         {/* Center Net Change Content */}
         <div className="flex flex-col items-center px-2 pb-2 md:px-0 md:pb-2">
-          <div className="text-foreground/30 flex items-baseline gap-1 text-base/6 font-medium">
+          <div className="text-foreground/30 flex items-baseline gap-1 text-base/6 font-semibold md:font-medium">
             {netChange !== undefined ? (
               <>
                 {netChange > 0 && '+'}
@@ -65,7 +65,7 @@ function FundChangeRate({
               'N/A'
             )}
           </div>
-          <div className="text-foreground/30 text-xs/4.5 font-medium whitespace-nowrap lg:text-sm/5.5">
+          <div className="text-foreground/30 text-xs/4.5 whitespace-nowrap md:font-medium lg:text-sm/5.5">
             Net Change
           </div>
         </div>
@@ -87,7 +87,7 @@ function FundChangeRate({
       </div>
 
       {/* Values Container */}
-      <div className="mt-2 flex w-full flex-row gap-2 lg:gap-6 xl:gap-8">
+      <div className="mt-2 flex w-full flex-row gap-2 md:gap-8 lg:gap-6 xl:gap-8">
         <NumberWithSignCard
           dynamicChanges={dynamicChanges}
           value={leftValue}

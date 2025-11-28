@@ -22,7 +22,7 @@ function NumberWithSignCard({
   return (
     <div className="flex w-full">
       {/* Sign Container */}
-      <div className="mr-1 flex items-center lg:mr-2">
+      <div className="mr-1 flex items-center md:mr-4 lg:mr-2">
         {sign === 'positive' ? (
           <svg
             className="size-4 lg:size-6"
@@ -62,7 +62,7 @@ function NumberWithSignCard({
       {/* Card */}
       <div
         className={cn(
-          'flex w-full flex-col items-start rounded-xl border px-0.75 py-0.75 pb-1.75',
+          'flex w-full flex-col items-start rounded-xl border px-1.75 pt-0.75 pb-1.75',
           'border-border bg-background',
           'lg:min-w-44 xl:px-3.75 xl:py-0.75 xl:pb-1.75',
         )}
