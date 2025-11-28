@@ -17,7 +17,6 @@ interface BuildersPageProps {
 }
 
 const items = [
-  { label: 'Networks', href: '/networks' as Route },
   { label: 'Powerhouse', href: '/network/powerhouse' as Route },
   { label: 'Builders', href: '/network/powerhouse/builders' as Route },
 ]

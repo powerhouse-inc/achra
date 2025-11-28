@@ -55,10 +55,7 @@ export default function MilestoneExtendedCard({
           {milestone.sequenceCode}
         </div>
         <Button variant="ghost" asChild>
-          <Link
-            href={`/network/${networkSlug}/roadmap/${roadmapSlug}#${milestone.sequenceCode}`}
-            target="_blank"
-          >
+          <Link href={`/network/${networkSlug}/roadmap/${roadmapSlug}#${milestone.sequenceCode}`}>
             Details
             <ArrowRight className="size-4" />
           </Link>

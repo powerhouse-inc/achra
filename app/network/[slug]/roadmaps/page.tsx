@@ -21,7 +21,6 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
   const { slug } = await params
 
   const items = [
-    { label: 'Networks', href: '/networks' as Route },
     { label: slug.charAt(0).toUpperCase() + slug.slice(1), href: `/network/${slug}` as Route },
     { label: 'Roadmaps', href: `/network/${slug}/roadmaps` as Route },
   ]
