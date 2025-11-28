@@ -243,7 +243,12 @@ export function DesktopChart({
     })
   }, [])
 
-  if (isLoading) return <DoughnutChartSkeleton />
+  if (isLoading)
+    return (
+      <div className="flex w-full justify-center">
+        <DoughnutChartSkeleton />
+      </div>
+    )
 
   const haveMoreThanThreeItems = seriesData.length > 3
 
@@ -262,8 +267,8 @@ export function DesktopChart({
       <div
         className={cn(
           'relative flex justify-start',
-          'md:w-[138px] md:min-w-[138px]',
-          'xl:w-[158px] xl:min-w-[158px]',
+          'md:w-34.5 md:min-w-34.5',
+          'xl:w-39.5 xl:min-w-39.5',
         )}
       >
         <ReactECharts
@@ -281,15 +286,15 @@ export function DesktopChart({
       {showSwiper ? (
         <div
           className={cn(
-            'md:relative md:flex md:w-[200px]',
-            'lg:flex lg:w-[250px] lg:min-w-[250px]',
+            'md:relative md:flex md:w-50',
+            'lg:flex lg:w-62.5 lg:min-w-62.5',
             isDeepLevel ? 'lg:mt-0' : 'lg:mt-4',
             'xl:relative xl:flex',
-            numberSliderPerLevel === 12 && 'xl:min-w-[300px]',
-            numberSliderPerLevel === 12 && '2xl:min-w-[410px]',
+            numberSliderPerLevel === 12 && 'xl:min-w-75',
+            numberSliderPerLevel === 12 && '2xl:min-w-102.5',
             '[&_.swiper-pagination-horizontal]:flex [&_.swiper-pagination-horizontal]:justify-center',
 
-            '[&_.swiper-pagination-horizontal]:bottom-0! [&_.swiper-pagination-horizontal]:-translate-x-[24px]!',
+            '[&_.swiper-pagination-horizontal]:bottom-0! [&_.swiper-pagination-horizontal]:-translate-x-6!',
 
             '[&_.swiper-pagination-horizontal]:z-8',
             '[&_.swiper-pagination-bullet]:bg-muted! [&_.swiper-pagination-bullet]:h-2! [&_.swiper-pagination-bullet]:w-2! [&_.swiper-pagination-bullet]:rounded-full',
