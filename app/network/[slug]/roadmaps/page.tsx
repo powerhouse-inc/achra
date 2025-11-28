@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
 import { RoadmapList } from '@/modules/roadmap/components/roadmaps-list/roadmap-list'
 import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list/roadmaps-list-skeleton'
@@ -20,9 +21,12 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
 
   const { slug } = await params
 
+  const networkData = await getNetworkBySlug(slug)
+
+  const networkName = networkData?.name ?? ''
+
   const items = [
-    { label: 'Networks', href: '/networks' as Route },
-    { label: slug.charAt(0).toUpperCase() + slug.slice(1), href: `/network/${slug}` as Route },
+    { label: networkName, href: `/network/${slug}` as Route },
     { label: 'Roadmaps', href: `/network/${slug}/roadmaps` as Route },
   ]
 
