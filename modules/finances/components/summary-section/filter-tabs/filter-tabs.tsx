@@ -105,10 +105,10 @@ export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
               }}
               className={cn(
                 // Base styles
-                'h-5.5 cursor-pointer justify-start pl-6 text-left text-sm whitespace-nowrap transition-colors',
+                'h-5.5 cursor-pointer justify-start pl-6 text-left text-xs whitespace-nowrap transition-colors md:text-sm',
                 // Active state (mobile)
                 isActive
-                  ? 'bg-accent text-foreground rounded-r-none py-2 leading-4.5 font-semibold'
+                  ? 'bg-accent text-foreground rounded-r-none py-2 leading-4.5 font-bold'
                   : 'text-muted-foreground py-1 leading-5.5 font-medium',
                 // Tablet and up base styles
                 'relative rounded-r-none md:py-0 md:leading-5.5',
