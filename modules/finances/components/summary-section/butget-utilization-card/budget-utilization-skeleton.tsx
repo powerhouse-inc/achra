@@ -37,12 +37,12 @@ export function BudgetUtilizationCardSkeleton() {
       <div className="flex justify-between pl-px md:mt-px 2xl:mt-0">
         <div className="flex items-center gap-2">
           <Skeleton className="h-3 w-3 shrink-0 rounded-full" />
-          <Skeleton className="h-4 w-32 rounded sm:w-40" />
+          <Skeleton className="h-4 w-20 rounded md:w-22" />
         </div>
 
         <div className="flex items-center gap-2">
           <Skeleton className="h-3 w-3 shrink-0 rounded-full" />
-          <Skeleton className="h-4 w-20 rounded sm:w-24" />
+          <Skeleton className="h-4 w-20 rounded md:w-22" />
         </div>
       </div>
     </Card>

@@ -105,20 +105,21 @@ export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
               }}
               className={cn(
                 // Base styles
-                'h-5.5 cursor-pointer justify-start pl-6 text-left text-xs whitespace-nowrap transition-colors',
+                'h-5.5 cursor-pointer justify-start pl-6 text-left text-sm whitespace-nowrap transition-colors',
                 // Active state (mobile)
                 isActive
-                  ? 'bg-accent text-foreground rounded-r-none py-2 leading-[18px] font-bold'
-                  : 'text-muted-foreground py-1 leading-[22px] font-medium',
+                  ? 'bg-accent text-foreground rounded-r-none py-2 leading-4.5 font-semibold'
+                  : 'text-muted-foreground py-1 leading-5.5 font-medium',
                 // Tablet and up base styles
-                'relative rounded-r-none md:py-0 md:leading-[22px]',
+                'relative rounded-r-none md:py-0 md:leading-5.5',
                 'md:before:absolute md:before:top-0 md:before:left-0 md:before:h-full md:before:w-1 md:before:rounded-r md:before:content-[""]',
                 // Active state (tablet and up)
                 isActive
                   ? 'md:bg-accent md:text-foreground md:before:bg-foreground'
                   : 'md:bg-transparent md:before:bg-transparent',
                 // Hover state (tablet and up, only when not active)
-                !isActive && 'md:hover:bg-accent md:hover:before:bg-muted-foreground/50',
+                !isActive &&
+                  'md:hover:text-muted-foreground md:hover:bg-accent md:hover:before:bg-muted-foreground/50',
               )}
             >
               {tab.label}
