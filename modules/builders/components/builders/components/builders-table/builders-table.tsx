@@ -87,7 +87,7 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
               <BuildersRolesChip role={builder.role} />
             </TableCell>
             <TableCell className="inline-block h-fit w-[18%] p-0!">
-              <BuilderDomain team={builder} />
+              <BuilderDomain team={builder} domain="scope" />
             </TableCell>
             <TableCell className="inline-block h-fit w-[13%] p-0!">
               <LastModified team={builder} />
