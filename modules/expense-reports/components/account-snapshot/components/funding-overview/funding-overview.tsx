@@ -3,8 +3,14 @@ import { ConversionNotice } from '../conversion-notice'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
+import { TransactionHistory } from '../transaction-history'
+import type { SnapshotAccountTransaction } from '../../types'
 
-function FundingOverview() {
+interface FundingOverviewProps {
+  transactionHistory: SnapshotAccountTransaction[]
+}
+
+function FundingOverview({ transactionHistory }: FundingOverviewProps) {
   return (
     <>
       <div className="relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
@@ -77,6 +83,8 @@ function FundingOverview() {
           mobileCaption="New L.T. Balance"
         />
       </div>
+
+      <TransactionHistory transactionHistory={transactionHistory} />
     </>
   )
 }
