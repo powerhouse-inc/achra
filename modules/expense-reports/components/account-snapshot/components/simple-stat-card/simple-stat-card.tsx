@@ -31,13 +31,13 @@ function SimpleStatCard({
         className,
       )}
     >
-      <div className="text-foreground/30 text-xs leading-4.5 uppercase md:font-medium">
+      <div className="text-foreground/30 text-xs leading-4.5 uppercase">
         {date ? format(parseISO(date), 'd MMM y') : 'N/A'}
       </div>
 
       <div className="flex items-center md:mt-auto md:gap-4 lg:gap-0">
         {hasEqualSign && (
-          <div className="-mt-0.75 mr-1 md:mt-0 md:mr-auto lg:mt-1.75 lg:mr-4">
+          <div className="-mt-0.75 mr-1 md:mt-0 md:mr-auto lg:mt-1.75 lg:mr-2 xl:mr-4">
             <EqualSign className="text-border h-2.5 w-4 md:h-2.5 md:w-4 lg:h-3.75 lg:w-6" />
           </div>
         )}
@@ -53,7 +53,7 @@ function SimpleStatCard({
               {caption}
             </span>
           </div>
-          <div className="text-foreground flex items-baseline text-base/6 font-semibold lg:text-xl lg:font-bold xl:text-2xl xl:leading-[120%]">
+          <div className="text-foreground flex items-baseline text-base/6 font-semibold xl:text-lg/6">
             {value !== undefined ? (
               <>
                 {dynamicChanges ? (
@@ -61,7 +61,7 @@ function SimpleStatCard({
                 ) : (
                   usLocalizedNumber(Math.round(value))
                 )}
-                <span className="text-foreground/30 ml-1 text-sm/5.5 font-semibold lg:text-base/6">
+                <span className="text-foreground/30 ml-1 text-sm/5.5 font-semibold xl:text-base/6">
                   USD
                 </span>
               </>
