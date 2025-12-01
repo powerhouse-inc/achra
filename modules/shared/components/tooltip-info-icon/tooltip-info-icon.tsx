@@ -1,15 +1,11 @@
 'use client'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { InfoIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MobileDialogContent } from '@/modules/networks/components/card-bar-chart/tooltips/mobile-tooltip-modal'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/modules/shared/components/ui/hover-card'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface TooltipInfoIconProps {
@@ -70,27 +66,33 @@ export function TooltipInfoIcon({ tooltipContent, className }: TooltipInfoIconPr
         </DialogPrimitive.Root>
       </div>
       <div className="hidden md:block">
-        <HoverCard openDelay={200} closeDelay={100} onOpenChange={handleOpenChange}>
-          <HoverCardTrigger asChild>
-            <button
-              ref={triggerRef}
-              type="button"
-              aria-label="View more information"
-              className="flex cursor-pointer items-center"
-            >
-              <InfoIcon className="text-muted-foreground h-4 w-4" />
-            </button>
-          </HoverCardTrigger>
-          <HoverCardContent
-            side="bottom"
-            sideOffset={10}
-            collisionPadding={16}
-            align={alignment}
-            className="bg-popover w-80 rounded-xl border p-4 shadow-md"
-          >
-            <div className="text-sm">{tooltipContent}</div>
-          </HoverCardContent>
-        </HoverCard>
+        <TooltipPrimitive.Provider delayDuration={200}>
+          <TooltipPrimitive.Root onOpenChange={handleOpenChange}>
+            <TooltipPrimitive.Trigger asChild>
+              <button
+                ref={triggerRef}
+                type="button"
+                aria-label="View more information"
+                className="flex cursor-pointer items-center"
+              >
+                <InfoIcon className="text-muted-foreground h-4 w-4" />
+              </button>
+            </TooltipPrimitive.Trigger>
+            <TooltipPrimitive.Portal>
+              <TooltipPrimitive.Content
+                side="bottom"
+                sideOffset={10}
+                collisionPadding={16}
+                align={alignment}
+                className={cn(
+                  'bg-popover text-popover-foreground animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-80 origin-(--radix-tooltip-content-transform-origin) rounded-xl border p-4 shadow-md',
+                )}
+              >
+                <div className="text-sm">{tooltipContent}</div>
+              </TooltipPrimitive.Content>
+            </TooltipPrimitive.Portal>
+          </TooltipPrimitive.Root>
+        </TooltipPrimitive.Provider>
       </div>
     </div>
   )
