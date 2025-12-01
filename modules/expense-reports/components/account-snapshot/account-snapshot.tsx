@@ -2,6 +2,7 @@
 
 import { accountSnapshotMock } from '../../mocks/account-snapshot-mocks'
 import { FundingOverview } from './components/funding-overview'
+import { ReservesSnapshot } from './components/reserves-snapshot'
 import useAccountsSnapshot from './useAccountsSnapshot'
 
 interface AccountSnapshotProps {
@@ -14,6 +15,7 @@ function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
   return (
     <div className="flex flex-col gap-8">
       <FundingOverview transactionHistory={transactionHistory} />
+      <ReservesSnapshot teamName="Powerhouse" />
     </div>
   )
 }

@@ -8,8 +8,7 @@ import EqualSign from '../svgs/equal.svg'
 interface SimpleStatCardProps {
   date?: string
   value?: number
-  caption: string
-  mobileCaption?: string
+  caption: string | React.ReactNode
   hasEqualSign?: boolean
   dynamicChanges?: boolean
   className?: string
@@ -19,7 +18,6 @@ function SimpleStatCard({
   date,
   value,
   caption,
-  mobileCaption,
   hasEqualSign = false,
   dynamicChanges = false,
   className,
@@ -42,17 +40,7 @@ function SimpleStatCard({
           </div>
         )}
         <div className="border-border bg-background flex w-full flex-col rounded-xl border px-1.75 py-0.75 pb-1.75 lg:gap-2 xl:px-3.75">
-          <div className="text-foreground text-xs/4.5 font-medium">
-            {mobileCaption && <span className="inline-block md:hidden">{mobileCaption}</span>}
-            <span
-              className={cn({
-                'hidden md:inline-block': mobileCaption,
-                'inline-block md:hidden': !mobileCaption,
-              })}
-            >
-              {caption}
-            </span>
-          </div>
+          <div className="text-foreground text-xs/4.5 font-medium">{caption}</div>
           <div className="text-foreground flex items-baseline text-base/6 font-semibold lg:text-xl lg:font-bold xl:text-2xl xl:leading-[120%]">
             {value !== undefined ? (
               <>

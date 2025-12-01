@@ -35,8 +35,12 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
         <SimpleStatCard
           date="2025-04-08T21:11:07+00:00"
           value={2924160}
-          caption="Initial Lifetime Balance"
-          mobileCaption="Initial L.T. Balance"
+          caption={
+            <>
+              <span className="inline-block md:hidden">Initial L.T. Balance</span>
+              <span className="hidden md:inline-block">Initial Lifetime Balance</span>
+            </>
+          }
           className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
         />
         <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
@@ -64,8 +68,12 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
           date="2025-05-16T21:11:07+00:00"
           value={3215826}
           hasEqualSign
-          caption="New Lifetime Balance"
-          mobileCaption="New L.T. Balance"
+          caption={
+            <>
+              <span className="inline-block md:hidden">New L.T. Balance</span>
+              <span className="hidden md:inline-block">New Lifetime Balance</span>
+            </>
+          }
           className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
         />
       </div>
