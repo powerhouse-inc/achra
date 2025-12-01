@@ -31,7 +31,7 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
         <ConversionNotice className="md:absolute md:top-0 md:right-0" />
       </div>
 
-      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-8 xl:gap-8">
+      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-6 xl:gap-8">
         <SimpleStatCard
           date="2025-04-08T21:11:07+00:00"
           value={2924160}

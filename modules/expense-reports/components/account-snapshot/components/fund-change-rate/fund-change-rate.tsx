@@ -28,7 +28,7 @@ function FundChangeRate({
   dynamicChanges = false,
 }: FundChangeRateProps) {
   return (
-    <Card className="bg-popover w-full gap-0 border-none p-2 md:px-4 md:pt-2 md:pb-4 lg:px-4 lg:py-4 xl:px-8 xl:py-4">
+    <Card className="bg-popover w-full gap-0 border-none p-2 md:px-4 md:pt-2 md:pb-4 xl:px-8">
       {/* Change Container with Arrows */}
       <div className="flex w-full">
         {/* Left Arrow Container */}
@@ -48,7 +48,7 @@ function FundChangeRate({
 
         {/* Center Net Change Content */}
         <div className="flex flex-col items-center px-2 pb-2 md:px-0 md:pb-2">
-          <div className="text-foreground/30 flex items-baseline gap-1 text-base/6 font-semibold md:font-medium">
+          <div className="text-foreground/30 flex items-baseline gap-1 text-base font-semibold md:font-medium lg:leading-4.5">
             {netChange !== undefined ? (
               <>
                 {netChange > 0 && '+'}
@@ -57,7 +57,7 @@ function FundChangeRate({
                 ) : (
                   usLocalizedNumber(Math.round(netChange))
                 )}
-                <div className="text-foreground/30 text-sm/5.5 font-semibold lg:text-base/6">
+                <div className="text-foreground/30 text-sm/5.5 font-semibold lg:text-base/4.5">
                   USD
                 </div>
               </>
@@ -65,7 +65,7 @@ function FundChangeRate({
               'N/A'
             )}
           </div>
-          <div className="text-foreground/30 text-xs/4.5 whitespace-nowrap md:font-medium lg:text-sm/5.5">
+          <div className="text-foreground/30 text-xs/4.5 whitespace-nowrap md:font-medium lg:text-sm/4.5">
             Net Change
           </div>
         </div>
