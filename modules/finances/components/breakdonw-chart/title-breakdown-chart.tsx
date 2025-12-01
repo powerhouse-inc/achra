@@ -1,4 +1,6 @@
+import { LinkIcon } from 'lucide-react'
 import { CopySectionUrl } from '@/modules/networks/components/section-title/copy-section-url'
+import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import { TooltipInfoIcon } from './tooltip-info-icon'
 
@@ -18,7 +20,9 @@ export default function TitleBreakdownChart({ title, hash, className }: TitleBre
         <span className="text-xl leading-[120%] font-bold">{title}</span>
         <TooltipInfoIcon tooltipContent={<div>{TOOLTIP_CONTENT}</div>} />
 
-        <CopySectionUrl hash={hash} className="[&_svg]:size-4" />
+        <CopySectionUrl hash={hash}>
+          <LinkIcon className="size-4" />
+        </CopySectionUrl>
       </div>
       <div className="text-base/6 font-semibold opacity-30">Jan - Dec 2023</div>
     </div>

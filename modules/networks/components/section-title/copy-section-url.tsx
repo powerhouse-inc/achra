@@ -1,14 +1,13 @@
 'use client'
 
-import { LinkIcon } from 'lucide-react'
 import React from 'react'
 import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-butoon'
-import { cn } from '@/modules/shared/lib/utils'
-interface CopySectionUrlProps extends React.ComponentProps<typeof CopyTrigger> {
+interface CopySectionUrlProps {
   hash: string
+  children: React.ReactNode
 }
 
-function CopySectionUrl({ hash, className, children, ...props }: CopySectionUrlProps) {
+function CopySectionUrl({ hash, children }: CopySectionUrlProps) {
   const getUrlWithHash = React.useCallback(() => {
     if (typeof window === 'undefined') return ''
     const url = new URL(window.location.href)
@@ -19,9 +18,7 @@ function CopySectionUrl({ hash, className, children, ...props }: CopySectionUrlP
   return (
     <CopyButton value={getUrlWithHash}>
       <CopyTooltip tooltip="Copy link" side="bottom">
-        <CopyTrigger className={cn(className)} {...props}>
-          {children ?? <LinkIcon className="size-6" />}
-        </CopyTrigger>
+        <CopyTrigger asChild>{children}</CopyTrigger>
       </CopyTooltip>
     </CopyButton>
   )
