@@ -48,7 +48,7 @@ export function Header({
           </Link>
         </Button>
       </div>
-      <p className="text-foreground/50 text-sm/5.5 font-medium">{description}</p>
+      {description && <p className="text-foreground/50 text-sm/5.5 font-medium">{description}</p>}
     </div>
   )
 }
