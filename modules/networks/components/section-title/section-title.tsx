@@ -1,3 +1,4 @@
+import { LinkIcon } from 'lucide-react'
 import { cn } from '@/modules/shared/lib/utils'
 import { CopySectionUrl } from './copy-section-url'
 
@@ -12,7 +13,9 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
     <div className={cn('flex w-fit items-center gap-4', className)}>
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
 
-      <CopySectionUrl hash={hash} />
+      <CopySectionUrl hash={hash}>
+        <LinkIcon className="size-6" />
+      </CopySectionUrl>
     </div>
   )
 }
