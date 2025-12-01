@@ -1,6 +1,5 @@
 import { LinkIcon } from 'lucide-react'
 import { CopySectionUrl } from '@/modules/networks/components/section-title/copy-section-url'
-import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import { TooltipInfoIcon } from './tooltip-info-icon'
 
