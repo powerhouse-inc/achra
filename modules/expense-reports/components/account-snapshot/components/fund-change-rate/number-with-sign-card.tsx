@@ -73,9 +73,7 @@ function NumberWithSignCard({
         {/* Value */}
         <div
           className={cn(
-            'flex items-baseline text-center text-base/6 font-semibold',
-            'lg:text-xl lg:leading-[120%] lg:font-bold',
-            'xl:text-2xl',
+            'flex items-baseline text-center text-base/6 font-semibold xl:text-lg/6',
             valueColor === 'green' ? 'text-green-500' : 'text-foreground',
           )}
         >
