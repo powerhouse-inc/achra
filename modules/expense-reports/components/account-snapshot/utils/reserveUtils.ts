@@ -1,9 +1,4 @@
-import type {
-  SnapshotAccountTransaction,
-  Snapshots,
-  Token,
-  UIReservesData,
-} from '@ses/core/models/dto/snapshotAccountDTO'
+import type { SnapshotAccountTransaction, Snapshots, Token, UIReservesData } from '../types'
 
 export const transactionSort = (a: SnapshotAccountTransaction, b: SnapshotAccountTransaction) =>
   new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
@@ -20,10 +15,10 @@ export const getReserveAccounts = (
       account.groupAccountId === groupId &&
       account.upstreamAccountId === upstreamId &&
       !!account.offChain === isOffChain,
-  )?.[0]
+  )[0]
 
   return snapshot.snapshotAccount
-    .filter((account) => account.groupAccountId === accounts?.id)
+    .filter((account) => account.groupAccountId === accounts.id)
     .map(
       (account) =>
         ({
@@ -51,5 +46,5 @@ export const getReserveAccounts = (
             })),
         }) as UIReservesData,
     )
-    .sort((a, b) => parseInt(b.upstreamAccountId) - parseInt(a.upstreamAccountId))
+    .sort((a, b) => parseInt(b.upstreamAccountId ?? '') - parseInt(a.upstreamAccountId ?? ''))
 }
