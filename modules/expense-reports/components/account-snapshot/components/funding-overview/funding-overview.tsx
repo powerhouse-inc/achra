@@ -2,8 +2,14 @@ import { ConversionNotice } from '../conversion-notice'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
+import { TransactionHistory } from '../transaction-history'
+import type { SnapshotAccountTransaction } from '../../types'
 
-function FundingOverview() {
+interface FundingOverviewProps {
+  transactionHistory: SnapshotAccountTransaction[]
+}
+
+function FundingOverview({ transactionHistory }: FundingOverviewProps) {
   return (
     <>
       <div className="relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
@@ -25,12 +31,16 @@ function FundingOverview() {
         <ConversionNotice className="md:absolute md:top-0 md:right-0" />
       </div>
 
-      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-8 xl:gap-8">
+      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-6 xl:gap-8">
         <SimpleStatCard
           date="2025-04-08T21:11:07+00:00"
           value={2924160}
-          caption="Initial Lifetime Balance"
-          mobileCaption="Initial L.T. Balance"
+          caption={
+            <>
+              <span className="inline-block md:hidden">Initial L.T. Balance</span>
+              <span className="hidden md:inline-block">Initial Lifetime Balance</span>
+            </>
+          }
           className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
         />
         <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
@@ -58,11 +68,17 @@ function FundingOverview() {
           date="2025-05-16T21:11:07+00:00"
           value={3215826}
           hasEqualSign
-          caption="New Lifetime Balance"
-          mobileCaption="New L.T. Balance"
+          caption={
+            <>
+              <span className="inline-block md:hidden">New L.T. Balance</span>
+              <span className="hidden md:inline-block">New Lifetime Balance</span>
+            </>
+          }
           className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
         />
       </div>
+
+      <TransactionHistory transactionHistory={transactionHistory} />
     </>
   )
 }

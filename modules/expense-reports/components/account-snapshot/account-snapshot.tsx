@@ -1,16 +1,21 @@
+'use client'
+
+import { accountSnapshotMock } from '../../mocks/account-snapshot-mocks'
 import { FundingOverview } from './components/funding-overview'
+import { ReservesSnapshot } from './components/reserves-snapshot'
+import useAccountsSnapshot from './useAccountsSnapshot'
 
 interface AccountSnapshotProps {
   month: Date | null
 }
 
-async function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
-  // simulate api call
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
+  const { transactionHistory } = useAccountsSnapshot(accountSnapshotMock)
 
   return (
     <div className="flex flex-col gap-8">
-      <FundingOverview />
+      <FundingOverview transactionHistory={transactionHistory} />
+      <ReservesSnapshot teamName="Powerhouse" />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
+import BreakdownChartCard from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
@@ -43,6 +44,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
         <Suspense fallback={<NavigationCardSkeletons />}>
           <NavigationSection params={params} />
         </Suspense>
+        <BreakdownChartCard />
       </PageContent>
     </main>
   )
