@@ -261,34 +261,50 @@
 /* SWIPER PAGINATION */
 .swiper-pagination.swiper-pagination-bullets {
   bottom: 0;
+  right: 0;
+  width: fit-content;
+  height: calc(var(--spacing) * 8);
+  margin: 0 auto;
   z-index: 10;
 }
 
-.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet {
-  height: calc(var(--spacing) * 4);
-  width: calc(var(--spacing) * 4);
-  margin-left: calc(var(--spacing) * 2);
-  margin-right: calc(var(--spacing) * 2);
-  background-color: var(--muted);
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet {
+  position: relative;
+  height: calc(var(--spacing) * 8);
+  width: calc(var(--spacing) * 8);
+  margin: 0;
+  background-color: transparent;
   opacity: 1;
 }
 
-.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:first-child {
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  height: calc(var(--spacing) * 4);
+  width: calc(var(--spacing) * 4);
+  background-color: var(--muted);
+  box-shadow: var(--shadow-md);
+  transition: opacity 0.2s ease-in-out;
+  border-radius: 50%;
+}
+
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:first-child::after {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:last-child {
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:last-child::after {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets
-  > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active):hover {
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:not(.swiper-pagination-bullet-active)::after:hover {
   background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
-.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active {
+.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet-active::after {
   background-color: var(--primary);
 }
 

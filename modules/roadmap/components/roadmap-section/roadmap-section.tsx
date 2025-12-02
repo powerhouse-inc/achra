@@ -4,6 +4,7 @@ import type {
   Sow_Deliverable,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { cn } from '@/modules/shared/lib/utils'
 import { MilestoneExtendedCard } from '../milestone-extended-card'
 import { RoadmapSwiper } from '../roadmap-swiper'
 import { Header } from './components/header'
@@ -19,6 +20,7 @@ interface RoadmapSectionProps {
   workstreamSlug: string
   workstreamTitle: string
   deliverables: Sow_Deliverable[]
+  className?: string
 }
 export function RoadmapSection({
   roadmap,
@@ -26,9 +28,10 @@ export function RoadmapSection({
   workstreamSlug,
   workstreamTitle,
   deliverables,
+  className,
 }: RoadmapSectionProps) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className={cn('flex flex-col gap-6', className)}>
       <Header
         network={network}
         workstreamSlug={workstreamSlug}

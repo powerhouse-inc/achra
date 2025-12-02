@@ -12,6 +12,7 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
+import { cn } from '@/modules/shared/lib/utils'
 
 const filtersParser = createLoader({
   search: parseAsString.withDefault(''),
@@ -60,7 +61,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
     <>
       <div className="flex flex-col gap-14">
         {data.workstream.map((workstream) =>
-          workstream.sow?.roadmaps.map((roadmap) => (
+          workstream.sow?.roadmaps.map((roadmap, index) => (
             <RoadmapSection
               key={roadmap.id}
               roadmap={roadmap}
@@ -70,6 +71,7 @@ async function RoadmapList({ params, searchParams }: RoadmapListProps) {
                 workstream.network as Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
               }
               deliverables={deliverables}
+              className={cn({ '-mt-2': index !== 0 })}
             />
           )),
         )}
