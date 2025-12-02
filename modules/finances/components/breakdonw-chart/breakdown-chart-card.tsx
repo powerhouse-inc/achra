@@ -1,4 +1,3 @@
-'use client'
 import { Card } from '@/shared/components/ui/card'
 import TitleFilterSection from './title-filter-section'
 

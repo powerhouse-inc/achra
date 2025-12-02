@@ -1,36 +1,48 @@
+'use client'
+
 import { ListFilter } from 'lucide-react'
+import { useQueryState } from 'nuqs'
+import { useCallback } from 'react'
+import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/modules/shared/components/ui/select'
+import { granularityParser, metricParser } from './lib/search-params-server'
+import { GRANULARITY_OPTIONS, type GranularityType, METRIC_OPTIONS, type MetricType } from './types'
 
 export default function FilterChart() {
+  const [metric, setMetric] = useQueryState('metric', metricParser)
+  const [granularity, setGranularity] = useQueryState('granularity', granularityParser)
+
+  const onReset = useCallback(() => {
+    void setMetric(null)
+    void setGranularity(null)
+  }, [setGranularity, setMetric])
+
   return (
     <div className="row flex gap-4">
       <div className="hidden items-center gap-4 md:flex">
-        <Button variant="ghost" className="text-muted-foreground">
+        <Button variant="ghost" className="text-muted-foreground" onClick={onReset}>
           Reset Filters
         </Button>
-        <Select value="timeframe" onValueChange={() => {}}>
-          <SelectTrigger>
-            <SelectValue placeholder="Budget" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="timeframe">Budget</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value="metric" onValueChange={() => {}}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Metric" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="metric">Metric</SelectItem>
-          </SelectContent>
-        </Select>
+        <BasicSelect
+          key={`metric-${metric ?? 'empty'}`}
+          value={metric ?? undefined}
+          label="Metric"
+          onValueChange={(value) => {
+            void setMetric(value as MetricType)
+          }}
+          options={METRIC_OPTIONS as unknown as string[]}
+          placeholder="Budget"
+        />
+        <BasicSelect
+          key={`granularity-${granularity ?? 'empty'}`}
+          label="Granularity"
+          value={granularity ?? undefined}
+          onValueChange={(value) => {
+            void setGranularity(value as GranularityType)
+          }}
+          options={GRANULARITY_OPTIONS as unknown as string[]}
+          placeholder="Monthly"
+        />
       </div>
       <div className="flex items-center gap-4 md:hidden">
         <button type="button" aria-label="Filter" onClick={() => {}} className="cursor-pointer">
