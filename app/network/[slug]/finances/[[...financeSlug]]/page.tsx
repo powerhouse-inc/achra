@@ -44,9 +44,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
         <Suspense fallback={<NavigationCardSkeletons />}>
           <NavigationSection params={params} />
         </Suspense>
-        <div>
-          <BreakdownChartCard />
-        </div>
+        <BreakdownChartCard />
       </PageContent>
     </main>
   )
