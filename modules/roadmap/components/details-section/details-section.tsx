@@ -1,18 +1,20 @@
-import type {
-  ScopeOfWork_Deliverable,
-  ScopeOfWork_Project,
-  ScopeOfWork_Roadmap,
-  ScopeOfWorkQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneDetailsCard, MilestoneDetailsCardSkeleton } from '../milestone-details-card'
 import { SectionTitle } from '../section-title'
+import type {
+  RoadmapDetails,
+  RoadmapDetails_Contributor,
+  RoadmapDetails_Deliverable,
+  RoadmapDetails_Project,
+} from '../../types'
 
 interface DetailsSectionProps {
-  scopeOfWorkQuery: ScopeOfWorkQuery | undefined
-  roadmap: ScopeOfWork_Roadmap | undefined
+  roadmap: RoadmapDetails | undefined
+  deliverables: RoadmapDetails_Deliverable[]
+  contributors: RoadmapDetails_Contributor[]
+  projects: RoadmapDetails_Project[]
 }
 
-function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
+function DetailsSection({ deliverables, contributors, projects, roadmap }: DetailsSectionProps) {
   return (
     <div className="flex flex-col gap-6">
       <SectionTitle title="Milestones Roadmap Details" />
@@ -22,18 +24,13 @@ function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
           <MilestoneDetailsCard
             key={milestone.id}
             milestone={milestone}
-            deliverables={(
-              scopeOfWorkQuery?.ScopeOfWork?.getDocument?.stateJSON?.deliverables ?? []
-            ).filter((deliverable: ScopeOfWork_Deliverable) =>
+            deliverables={deliverables.filter((deliverable) =>
               milestone.scope?.deliverables.some(
                 (deliverableId) => deliverableId === deliverable.id,
               ),
             )}
-            contributors={scopeOfWorkQuery?.ScopeOfWork?.getDocument?.state.contributors ?? []}
-            projects={
-              (scopeOfWorkQuery?.ScopeOfWork?.getDocument?.state.projects ??
-                []) as ScopeOfWork_Project[]
-            }
+            contributors={contributors}
+            projects={projects}
           />
         ))}
       </div>

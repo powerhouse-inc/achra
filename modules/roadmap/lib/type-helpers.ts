@@ -1,45 +1,30 @@
-import type {
-  ScopeOfWork_Binary,
-  ScopeOfWork_Percentage,
-  ScopeOfWork_Progress,
-  ScopeOfWork_StoryPoint,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Progress } from '@/modules/__generated__/graphql/switchboard-generated'
 
-/**
- * Type guard to check if a progress object represents percentage-based progress
- * @param progress - The progress object to check
- * @returns True if the progress is percentage-based, false otherwise
- */
-export function isPercentageProgress(
-  progress: ScopeOfWork_Progress | undefined,
-): progress is ScopeOfWork_Percentage {
-  return !!progress && (progress.__typename === 'ScopeOfWork_Percentage' || 'value' in progress)
-}
+type RoadmapDetailsWorkProgress =
+  | { __typename?: 'SOW_Binary'; done?: boolean | null }
+  | { __typename?: 'SOW_Percentage'; value: number }
+  | { __typename?: 'SOW_StoryPoint'; total: number; completed: number }
 
-/**
- * Type guard to check if a progress object represents binary (done/not done) progress
- * @param progress - The progress object to check
- * @returns True if the progress is binary-based, false otherwise
- */
-export function isBinaryProgress(
-  progress: ScopeOfWork_Progress | undefined,
-): progress is ScopeOfWork_Binary {
-  return !!progress && (progress.__typename === 'ScopeOfWork_Binary' || 'done' in progress)
-}
-
-/**
- * Type guard to check if a progress object represents story point-based progress
- * @param progress - The progress object to check
- * @returns True if the progress is story point-based, false otherwise
- */
+// Type guard helpers for RoadmapDetails workProgress
 export function isStoryPointProgress(
-  progress: ScopeOfWork_Progress | undefined,
-): progress is ScopeOfWork_StoryPoint {
+  progress: RoadmapDetailsWorkProgress | null | undefined,
+): progress is Extract<RoadmapDetailsWorkProgress, { total: number; completed: number }> {
   return (
     !!progress &&
-    (progress.__typename === 'ScopeOfWork_StoryPoint' ||
-      ('completed' in progress && 'total' in progress))
+    (progress.__typename === 'SOW_StoryPoint' || ('completed' in progress && 'total' in progress))
   )
+}
+
+export function isBinaryProgress(
+  progress: RoadmapDetailsWorkProgress | null | undefined,
+): progress is Extract<RoadmapDetailsWorkProgress, { done?: boolean | null }> {
+  return !!progress && (progress.__typename === 'SOW_Binary' || 'done' in progress)
+}
+
+export function isPercentageProgress(
+  progress: RoadmapDetailsWorkProgress | null | undefined,
+): progress is Extract<RoadmapDetailsWorkProgress, { value: number }> {
+  return !!progress && (progress.__typename === 'SOW_Percentage' || 'value' in progress)
 }
 
 /**
@@ -47,17 +32,22 @@ export function isStoryPointProgress(
  * @param progress - The progress object to calculate percentage from
  * @returns The progress percentage as a number (0-100), rounded to nearest integer
  */
-export function getProgressPercentage(progress: ScopeOfWork_Progress | undefined): number {
+export function getProgressPercentage(
+  progress: RoadmapDetailsWorkProgress | ScopeOfWork_Progress | null | undefined,
+): number {
   if (!progress) return 0
 
+  // @ts-expect-error - progress may not have value on all types, use guard
   if (isPercentageProgress(progress)) {
     return Math.round(progress.value || 0)
   }
 
+  // @ts-expect-error - progress may not have done on all types, use guard
   if (isBinaryProgress(progress)) {
     return progress.done ? 100 : 0
   }
 
+  // @ts-expect-error - progress may not have completed or total on all types, use guard
   if (isStoryPointProgress(progress)) {
     if (!progress.completed || !progress.total) return 0
     return Math.round((progress.completed / progress.total) * 100)

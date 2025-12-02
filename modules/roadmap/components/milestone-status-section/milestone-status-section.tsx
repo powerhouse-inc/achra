@@ -1,10 +1,13 @@
-import type { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  ScopeOfWork_DeliverableSetStatus,
+  Sow_DeliverableSetStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { Progress } from '@/shared/components/ui/progress'
 import { cn } from '@/shared/lib/utils'
 
 interface MilestoneStatusSectionProps {
-  status?: ScopeOfWork_DeliverableSetStatus
+  status?: ScopeOfWork_DeliverableSetStatus | Sow_DeliverableSetStatus
   progress: number
 }
 

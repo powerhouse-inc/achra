@@ -1,12 +1,6 @@
 'use client'
 
 import { useMemo } from 'react'
-import type {
-  ScopeOfWork_Agent,
-  ScopeOfWork_Deliverable,
-  ScopeOfWork_Milestone,
-  ScopeOfWork_Project,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { cn } from '@/modules/shared/lib/utils'
 import Contributors from './contributors'
@@ -15,12 +9,18 @@ import DeliverablesSection from './deliverables-section'
 import MilestoneProgress from './milestone-progress'
 import TargetData from './target-data'
 import TitleAndDescription from './title-and-description'
+import type {
+  RoadmapDetails_Contributor,
+  RoadmapDetails_Deliverable,
+  RoadmapDetails_Milestone,
+  RoadmapDetails_Project,
+} from '../../types'
 
 interface MilestoneDetailsCardProps {
-  milestone: ScopeOfWork_Milestone
-  deliverables: ScopeOfWork_Deliverable[]
-  contributors: ScopeOfWork_Agent[]
-  projects: ScopeOfWork_Project[]
+  milestone: RoadmapDetails_Milestone
+  deliverables: RoadmapDetails_Deliverable[]
+  contributors: RoadmapDetails_Contributor[]
+  projects: RoadmapDetails_Project[]
 }
 
 export default function MilestoneDetailsCard({
@@ -30,7 +30,7 @@ export default function MilestoneDetailsCard({
   projects,
 }: MilestoneDetailsCardProps) {
   const milestoneContributors = useMemo(() => {
-    const uniqueContributors: Record<string, ScopeOfWork_Agent> = {}
+    const uniqueContributors: Record<string, Pick<RoadmapDetails_Contributor, 'id' | 'name'>> = {}
     deliverables.forEach((deliverable) => {
       if (
         deliverable.owner &&
@@ -71,7 +71,7 @@ export default function MilestoneDetailsCard({
             {milestone.sequenceCode}
           </div>
 
-          <MilestoneProgress scope={milestone.scope!} />
+          <MilestoneProgress scope={milestone.scope} />
           <TargetData targetDate={milestone.deliveryTarget} />
           <Coordinators coordinators={milestone.coordinators} />
           <Contributors contributors={milestoneContributors} />

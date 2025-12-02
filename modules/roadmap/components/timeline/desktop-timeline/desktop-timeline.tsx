@@ -1,9 +1,7 @@
 'use client'
 
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  type ScopeOfWork_Milestone,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { Sow_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RoadmapDetails_Milestone } from '@/modules/roadmap/types'
 import { Circle, CircleWithDot } from '@/shared/components/svgs'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
@@ -18,7 +16,7 @@ const lineBaseClasses =
 const dotBaseClasses = 'absolute left-1/2 z-10 h-4 w-4 -translate-x-1/2'
 
 interface DesktopTimelineProps {
-  milestones: ScopeOfWork_Milestone[]
+  milestones: RoadmapDetails_Milestone[]
 }
 
 export default function DesktopTimeline({ milestones }: DesktopTimelineProps) {
@@ -42,7 +40,7 @@ export default function DesktopTimeline({ milestones }: DesktopTimelineProps) {
               <div className={cn(dotBaseClasses, '-bottom-2')}>
                 {/* TODO: the following line is the real one, it should be enabled once the progress is fixed in the API */}
                 {/* {milestone.progress === 0 ? ( */}
-                {milestone.scope?.status === ScopeOfWork_DeliverableSetStatus.Draft ? (
+                {milestone.scope?.status === Sow_DeliverableSetStatus.Draft ? (
                   <Circle className="text-accent-foreground" />
                 ) : (
                   <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />
@@ -69,7 +67,7 @@ export default function DesktopTimeline({ milestones }: DesktopTimelineProps) {
                 <div className={cn(dotBaseClasses, '-top-2')}>
                   {/* TODO: the following line is the real one, it should be enabled once the progress is fixed in the API */}
                   {/* {milestone.progress === 0 ? ( */}
-                  {milestone.scope?.status === ScopeOfWork_DeliverableSetStatus.Draft ? (
+                  {milestone.scope?.status === Sow_DeliverableSetStatus.Draft ? (
                     <Circle className="text-accent-foreground" />
                   ) : (
                     <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />

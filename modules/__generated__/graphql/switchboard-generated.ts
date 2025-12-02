@@ -264,6 +264,86 @@ export type ClientInfo = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type Contributor = IDocument & {
+  __typename?: 'Contributor';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Contributor_ContributorState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Contributor_ContributorState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type ContributorOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: Contributor Document */
+export type ContributorQueries = {
+  __typename?: 'ContributorQueries';
+  getDocument?: Maybe<Contributor>;
+  getDocuments?: Maybe<Array<Contributor>>;
+};
+
+
+/** Queries: Contributor Document */
+export type ContributorQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
+
+/** Queries: Contributor Document */
+export type ContributorQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
+};
+
+export type Contributor_ContributorState = {
+  __typename?: 'Contributor_ContributorState';
+  description?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['EmailAddress']['output']>;
+  ens?: Maybe<Scalars['String']['output']>;
+  iconUrl?: Maybe<Scalars['URL']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
+  walletAddress?: Maybe<Scalars['EthereumAddress']['output']>;
+};
+
+export type Contributor_SetDescriptionInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Contributor_SetEmailInput = {
+  email: Scalars['EmailAddress']['input'];
+};
+
+export type Contributor_SetEnsInput = {
+  ens?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Contributor_SetIconUrlInput = {
+  iconUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type Contributor_SetRoleInput = {
+  role: Scalars['String']['input'];
+};
+
+/** Module: Contributor */
+export type Contributor_SetUsernameInput = {
+  username: Scalars['String']['input'];
+};
+
+export type Contributor_SetWalletAddressInput = {
+  walletAddress: Scalars['EthereumAddress']['input'];
+};
+
 export type CurrencyConversion = {
   metric: Scalars['String']['input'];
   sourceCurrency: Scalars['String']['input'];
@@ -594,6 +674,14 @@ export type Mutation = {
   Builders_addBuilder?: Maybe<Scalars['Int']['output']>;
   Builders_createDocument?: Maybe<Scalars['String']['output']>;
   Builders_removeBuilder?: Maybe<Scalars['Int']['output']>;
+  Contributor_createDocument?: Maybe<Scalars['String']['output']>;
+  Contributor_setDescription?: Maybe<Scalars['Int']['output']>;
+  Contributor_setEmail?: Maybe<Scalars['Int']['output']>;
+  Contributor_setEns?: Maybe<Scalars['Int']['output']>;
+  Contributor_setIconUrl?: Maybe<Scalars['Int']['output']>;
+  Contributor_setRole?: Maybe<Scalars['Int']['output']>;
+  Contributor_setUsername?: Maybe<Scalars['Int']['output']>;
+  Contributor_setWalletAddress?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_createDocument?: Maybe<Scalars['String']['output']>;
   NetworkProfile_setCategory?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_setDescription?: Maybe<Scalars['Int']['output']>;
@@ -716,6 +804,69 @@ export type MutationBuilders_RemoveBuilderArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<Builders_RemoveBuilderInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetDescriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetDescriptionInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetEmailArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetEmailInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetEnsArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetEnsInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetIconUrlArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetIconUrlInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetRoleArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetRoleInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetUsernameArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetUsernameInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetWalletAddressArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetWalletAddressInput>;
 };
 
 
@@ -1534,6 +1685,31 @@ export type Operation = {
   type: Scalars['String']['output'];
 };
 
+export type Owners = IDocument & {
+  __typename?: 'Owners';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Owners_OwnersState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Owners_OwnersState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type OwnersOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Owners_OwnersState = {
+  __typename?: 'Owners_OwnersState';
+  owners: Array<Scalars['EthereumAddress']['output']>;
+};
+
 export type PhOperationContext = {
   __typename?: 'PHOperationContext';
   signer?: Maybe<Signer>;
@@ -1957,6 +2133,7 @@ export type Query = {
   __typename?: 'Query';
   BuilderProfile?: Maybe<BuilderProfileQueries>;
   Builders?: Maybe<BuildersQueries>;
+  Contributor?: Maybe<ContributorQueries>;
   NetworkProfile?: Maybe<NetworkProfileQueries>;
   PaymentTerms?: Maybe<PaymentTermsQueries>;
   RequestForProposals?: Maybe<RequestForProposalsQueries>;
@@ -2259,6 +2436,44 @@ export enum RequestForProposals_RfpProposalStatusInput {
   UnderReview = 'UNDER_REVIEW',
   Withdrawn = 'WITHDRAWN'
 }
+
+export type Retrospective = IDocument & {
+  __typename?: 'Retrospective';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Retrospective_RetrospectiveState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Retrospective_RetrospectiveState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type RetrospectiveOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Retrospective_RetrospectiveEntry = {
+  __typename?: 'Retrospective_RetrospectiveEntry';
+  id: Scalars['OID']['output'];
+  negativePoints: Scalars['String']['output'];
+  positivePoints: Scalars['String']['output'];
+  userAddress: Scalars['EthereumAddress']['output'];
+  username: Scalars['String']['output'];
+};
+
+export type Retrospective_RetrospectiveState = {
+  __typename?: 'Retrospective_RetrospectiveState';
+  allowedUsers: Array<Scalars['EthereumAddress']['output']>;
+  description: Scalars['String']['output'];
+  entries: Array<Retrospective_RetrospectiveEntry>;
+  owner?: Maybe<Scalars['EthereumAddress']['output']>;
+  title: Scalars['String']['output'];
+};
 
 export type Sow_Agent = {
   __typename?: 'SOW_Agent';
@@ -3199,6 +3414,13 @@ export type RfpByWorkstreamQueryVariables = Exact<{
 
 export type RfpByWorkstreamQuery = { __typename?: 'Query', rfpByWorkstream: Array<{ __typename?: 'WorkstreamRfp', code?: string | null, title?: string | null, status?: WorkstreamStatus | null, rfp?: { __typename?: 'RFP', briefing?: string | null, budgetCurrency?: string | null, budgetMax?: number | null, budgetMin?: number | null, code?: string | null, eligibilityCriteria?: string | null, evaluationCriteria?: string | null, status?: RfpStatus | null, id: any, summary?: string | null, submissionDeadline?: any | null, title: string } | null }> };
 
+export type RoadmapDetailsQueryVariables = Exact<{
+  filter: ScopeOfWorkByNetworkOrStatusFilter;
+}>;
+
+
+export type RoadmapDetailsQuery = { __typename?: 'Query', scopeOfWorkByNetworkOrStatus: Array<{ __typename?: 'SOW_ScopeOfWorkState', title: string, status: Sow_ScopeOfWorkStatus, description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, title: string, slug: string, description: string, milestones: Array<{ __typename?: 'SOW_Milestone', id: any, title: string, description: string, sequenceCode: string, budget?: number | null, deliveryTarget: string, coordinators: Array<string>, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } } | null }> }>, contributors: Array<{ __typename?: 'SOW_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, owner?: string | null, status: Sow_DeliverableStatus, title: string, code: string, description: string, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: Sow_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename: 'SOW_Binary', done?: boolean | null } | { __typename: 'SOW_Percentage', value: number } | { __typename: 'SOW_StoryPoint', total: number, completed: number } | null }>, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, budget?: number | null, budgetType?: Sow_BudgetType | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'SOW_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
+
 export type ScopeOfWorkQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -3353,6 +3575,153 @@ useSuspenseRfpByWorkstreamQuery.getKey = (variables: RfpByWorkstreamQueryVariabl
 
 
 useRfpByWorkstreamQuery.fetcher = (variables: RfpByWorkstreamQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables, options);
+
+export const RoadmapDetailsDocument = `
+    query RoadmapDetails($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    title
+    status
+    description
+    roadmaps {
+      id
+      title
+      slug
+      description
+      milestones {
+        id
+        title
+        description
+        sequenceCode
+        budget
+        deliveryTarget
+        coordinators
+        scope {
+          deliverables
+          deliverablesCompleted {
+            completed
+            total
+          }
+          status
+          progress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+        }
+      }
+    }
+    contributors {
+      id
+      name
+    }
+    deliverables {
+      id
+      owner
+      status
+      title
+      code
+      description
+      budgetAnchor {
+        margin
+        project
+        quantity
+        unit
+        unitCost
+      }
+      keyResults {
+        id
+        link
+        title
+      }
+      workProgress {
+        ... on SOW_StoryPoint {
+          __typename
+          total
+          completed
+        }
+        ... on SOW_Percentage {
+          __typename
+          value
+        }
+        ... on SOW_Binary {
+          __typename
+          done
+        }
+      }
+    }
+    projects {
+      abstract
+      budget
+      budgetType
+      code
+      currency
+      expenditure {
+        actuals
+        cap
+        percentage
+      }
+      id
+      imageUrl
+      projectOwner
+      title
+      scope {
+        status
+        deliverablesCompleted {
+          completed
+          total
+        }
+        deliverables
+      }
+    }
+  }
+}
+    `;
+
+export const useRoadmapDetailsQuery = <
+      TData = RoadmapDetailsQuery,
+      TError = unknown
+    >(
+      variables: RoadmapDetailsQueryVariables,
+      options?: Omit<UseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<RoadmapDetailsQuery, TError, TData>(
+      {
+    queryKey: ['RoadmapDetails', variables],
+    queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useRoadmapDetailsQuery.getKey = (variables: RoadmapDetailsQueryVariables) => ['RoadmapDetails', variables];
+
+export const useSuspenseRoadmapDetailsQuery = <
+      TData = RoadmapDetailsQuery,
+      TError = unknown
+    >(
+      variables: RoadmapDetailsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<RoadmapDetailsQuery, TError, TData>(
+      {
+    queryKey: ['RoadmapDetailsSuspense', variables],
+    queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseRoadmapDetailsQuery.getKey = (variables: RoadmapDetailsQueryVariables) => ['RoadmapDetailsSuspense', variables];
+
+
+useRoadmapDetailsQuery.fetcher = (variables: RoadmapDetailsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables, options);
 
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($docId: PHID!) {

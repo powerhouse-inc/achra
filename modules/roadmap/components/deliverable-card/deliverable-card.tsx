@@ -1,12 +1,12 @@
 'use client'
 
 import { useCallback, useState } from 'react'
-import {
-  type ScopeOfWork_Agent,
-  type ScopeOfWork_Deliverable,
-  ScopeOfWork_DeliverableStatus,
-  type ScopeOfWork_Project,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { Sow_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  RoadmapDetails_Contributor,
+  RoadmapDetails_Deliverable,
+  RoadmapDetails_Project,
+} from '@/modules/roadmap/types'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
@@ -21,9 +21,9 @@ import ProjectLink from './project-link'
 export type DeliverableViewMode = 'compacted' | 'detailed'
 
 interface DeliverableCardProps {
-  deliverable: ScopeOfWork_Deliverable
-  contributors: ScopeOfWork_Agent[]
-  projects: ScopeOfWork_Project[]
+  deliverable: RoadmapDetails_Deliverable
+  contributors: RoadmapDetails_Contributor[]
+  projects: RoadmapDetails_Project[]
   viewMode: DeliverableViewMode
   maxKeyResultsOnRow: number
   isProjectCard?: boolean
@@ -88,7 +88,7 @@ export default function DeliverableCard({
       {/* progress */}
       <div className="flex w-full items-center gap-2">
         <DeliverableStatusChip status={deliverable.status} />
-        {deliverable.status === ScopeOfWork_DeliverableStatus.InProgress &&
+        {deliverable.status === Sow_DeliverableStatus.InProgress &&
           deliverable.workProgress &&
           (isStoryPointProgress(deliverable.workProgress) ? (
             <DeliverableStoryPointBar

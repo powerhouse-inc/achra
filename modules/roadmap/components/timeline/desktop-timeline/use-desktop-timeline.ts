@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RoadmapDetails_Milestone } from '@/modules/roadmap/types'
 
 interface UseDesktopTimelineOptions {
-  milestones: ScopeOfWork_Milestone[]
+  milestones: RoadmapDetails_Milestone[]
 }
 
 export default function useDesktopTimeline({ milestones }: UseDesktopTimelineOptions) {

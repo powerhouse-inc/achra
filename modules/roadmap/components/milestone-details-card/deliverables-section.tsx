@@ -1,16 +1,16 @@
-import type {
-  ScopeOfWork_Agent,
-  ScopeOfWork_Deliverable,
-  ScopeOfWork_Project,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'
 import { DeliverableCard } from '../deliverable-card'
+import type {
+  RoadmapDetails_Contributor,
+  RoadmapDetails_Deliverable,
+  RoadmapDetails_Project,
+} from '../../types'
 
 interface DeliverablesSectionProps {
-  deliverables: ScopeOfWork_Deliverable[]
-  contributors: ScopeOfWork_Agent[]
-  projects: ScopeOfWork_Project[]
+  deliverables: RoadmapDetails_Deliverable[]
+  contributors: RoadmapDetails_Contributor[]
+  projects: RoadmapDetails_Project[]
 }
 
 export default function DeliverablesSection({

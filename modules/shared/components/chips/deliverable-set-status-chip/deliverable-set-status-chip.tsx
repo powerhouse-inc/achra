@@ -1,33 +1,41 @@
 import { useMemo } from 'react'
-import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  ScopeOfWork_DeliverableSetStatus,
+  Sow_DeliverableSetStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableSetStatusChipProps {
-  status: ScopeOfWork_DeliverableSetStatus
+  status: ScopeOfWork_DeliverableSetStatus | Sow_DeliverableSetStatus
 }
 
 export default function DeliverableSetStatusChip({ status }: DeliverableSetStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
     switch (status) {
+      case Sow_DeliverableSetStatus.Draft:
       case ScopeOfWork_DeliverableSetStatus.Draft:
+      case Sow_DeliverableSetStatus.InProgress:
       case ScopeOfWork_DeliverableSetStatus.InProgress:
         return {
           label: status === ScopeOfWork_DeliverableSetStatus.Draft ? 'Draft' : 'In Progress',
           bgColor: 'bg-status-progress/30',
           textColor: 'text-status-progress',
         }
+      case Sow_DeliverableSetStatus.Finished:
       case ScopeOfWork_DeliverableSetStatus.Finished:
         return {
           label: 'Finished',
           bgColor: 'bg-status-success/30',
           textColor: 'text-status-success',
         }
+      case Sow_DeliverableSetStatus.Canceled:
       case ScopeOfWork_DeliverableSetStatus.Canceled:
         return {
           label: 'Canceled',
           bgColor: 'bg-slate-50', // TODO: replace colors
           textColor: 'text-gray-500',
         }
+      case Sow_DeliverableSetStatus.Todo:
       case ScopeOfWork_DeliverableSetStatus.Todo:
         return {
           label: 'To do',

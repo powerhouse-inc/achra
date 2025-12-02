@@ -3,17 +3,17 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
+import type { RoadmapDetails_Milestone } from '@/modules/roadmap/types'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
 import { formatDateStringToQuarter } from './utils'
 
 interface MilestoneCardProps {
-  milestone: ScopeOfWork_Milestone
+  milestone: RoadmapDetails_Milestone
   className?: string
 }
 

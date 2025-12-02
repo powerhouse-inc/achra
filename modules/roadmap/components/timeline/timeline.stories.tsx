@@ -1,5 +1,6 @@
 import { mockedMilestones } from '@/modules/roadmap/mocks'
 import Timeline from './timeline'
+import type { RoadmapDetails_Milestone } from '../../types'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
@@ -25,6 +26,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    milestones: mockedMilestones,
+    milestones: mockedMilestones as unknown as RoadmapDetails_Milestone[],
   },
 }

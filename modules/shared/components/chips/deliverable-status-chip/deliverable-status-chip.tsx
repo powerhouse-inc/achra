@@ -1,38 +1,47 @@
 import { useMemo } from 'react'
-import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  ScopeOfWork_DeliverableStatus,
+  Sow_DeliverableStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableStatusChipProps {
-  status: ScopeOfWork_DeliverableStatus
+  status: ScopeOfWork_DeliverableStatus | Sow_DeliverableStatus
 }
 
 export default function DeliverableStatusChip({ status }: DeliverableStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
     switch (status) {
+      case Sow_DeliverableStatus.InProgress:
       case ScopeOfWork_DeliverableStatus.InProgress:
         return {
           label: 'In Progress',
           bgColor: 'bg-status-progress/30',
           textColor: 'text-status-progress',
         }
+      case Sow_DeliverableStatus.Delivered:
       case ScopeOfWork_DeliverableStatus.Delivered:
         return {
           label: 'Delivered',
           bgColor: 'bg-status-success/30',
           textColor: 'text-status-success',
         }
+      case Sow_DeliverableStatus.Blocked:
       case ScopeOfWork_DeliverableStatus.Blocked:
         return {
           label: 'Blocked',
           bgColor: 'bg-destructive/30',
           textColor: 'text-destructive',
         }
+      case Sow_DeliverableStatus.Canceled:
       case ScopeOfWork_DeliverableStatus.Canceled:
         return {
           label: 'Canceled',
           bgColor: 'bg-destructive/30',
           textColor: 'text-destructive',
         }
+      case Sow_DeliverableStatus.Draft:
+      case Sow_DeliverableStatus.Todo:
       case ScopeOfWork_DeliverableStatus.Draft:
       case ScopeOfWork_DeliverableStatus.Todo:
         return {
@@ -40,6 +49,7 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
           bgColor: 'bg-status-warning/30',
           textColor: 'text-status-warning',
         }
+      case Sow_DeliverableStatus.WontDo:
       case ScopeOfWork_DeliverableStatus.WontDo:
         return {
           label: "Won't do",
@@ -48,7 +58,7 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
         }
       default:
         return {
-          label: 'To do',
+          label: status,
           bgColor: 'bg-status-warning/30',
           textColor: 'text-status-warning',
         }
