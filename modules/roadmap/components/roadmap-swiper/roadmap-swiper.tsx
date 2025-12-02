@@ -20,32 +20,20 @@ interface RoadmapSwiperProps {
   deliverables: Sow_Deliverable[]
 }
 
-/**
- * We do extra state tracking so the first and last cards of each snap group get breathing room.
- * Without that per-snap margin, their drop shadows would be clipped by the container edges.
- */
 export default function RoadmapSwiper({
   milestones,
   networkSlug,
   roadmapSlug,
   deliverables,
 }: RoadmapSwiperProps) {
-  const {
-    handleAfterInit,
-    adjustCardHeights,
-    updateSlidesPerView,
-    updateSnapIndex,
-    swiperRef,
-    isSwiperReady,
-    snapStartIndex,
-    snapEndIndex,
-  } = useRoadmapSwiper({ milestones })
+  const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
     <div className="-mx-4 hidden flex-col sm:flex">
       <div className="relative">
         <Swiper
           ref={swiperRef}
+          watchSlidesProgress
           modules={[Pagination]}
           pagination={{
             clickable: true,
@@ -53,18 +41,11 @@ export default function RoadmapSwiper({
           onAfterInit={() => {
             handleAfterInit()
           }}
-          onSlideChange={() => {
-            updateSnapIndex()
-          }}
           onResize={() => {
             adjustCardHeights()
-            updateSlidesPerView()
-            updateSnapIndex()
           }}
           onBreakpoint={() => {
             adjustCardHeights()
-            updateSlidesPerView()
-            updateSnapIndex()
           }}
           breakpoints={{
             640: {
@@ -94,36 +75,26 @@ export default function RoadmapSwiper({
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
             // Hide the swiper until it is ready using invisible! and h-0 to avoid layout flickering
             !isSwiperReady && 'invisible! h-0',
+            'px-2!',
           )}
         >
-          {milestones.map((milestone, index) => {
-            const isSnapFirst = index === snapStartIndex
-            const isSnapLast = index === snapEndIndex
-            const isPreviousSnapLast = index + 1 === snapStartIndex
-            const isNextSnapFirst = index - 1 === snapEndIndex
-
-            return (
-              <SwiperSlide key={milestone.id} className="flex">
-                <div
-                  className={cn(
-                    'mx-2 flex h-full pt-2',
-                    isSnapFirst && 'ml-4',
-                    isSnapLast && 'mr-4',
-                    isPreviousSnapLast && 'mr-4',
-                    isNextSnapFirst && 'ml-4',
-                  )}
-                >
-                  <MilestoneExtendedCard
-                    milestone={milestone}
-                    className="swiper-milestone-card"
-                    networkSlug={networkSlug}
-                    roadmapSlug={roadmapSlug}
-                    deliverables={deliverables}
-                  />
-                </div>
-              </SwiperSlide>
-            )
-          })}
+          {milestones.map((milestone) => (
+            <SwiperSlide key={milestone.id} className="flex">
+              {({ isVisible }) => {
+                return (
+                  <div className={cn('mx-2 flex h-full pt-2')} data-visible={isVisible}>
+                    <MilestoneExtendedCard
+                      milestone={milestone}
+                      className={cn('swiper-milestone-card', { 'shadow-none': !isVisible })}
+                      networkSlug={networkSlug}
+                      roadmapSlug={roadmapSlug}
+                      deliverables={deliverables}
+                    />
+                  </div>
+                )
+              }}
+            </SwiperSlide>
+          ))}
         </Swiper>
         <div className={cn('flex gap-2', isSwiperReady && 'hidden')}>
           <MilestoneExtendedCardSkeleton />
