@@ -268,7 +268,7 @@
   z-index: 10;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet {
   position: relative;
   height: calc(var(--spacing) * 8);
   width: calc(var(--spacing) * 8);
@@ -277,7 +277,7 @@
   opacity: 1;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet::after {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet::after {
   content: '';
   position: absolute;
   top: 8px;
@@ -290,21 +290,22 @@
   border-radius: 50%;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:first-child::after {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:first-child::after {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:last-child::after {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet:last-child::after {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet:not(.swiper-pagination-bullet-active)::after:hover {
+.swiper-pagination.swiper-pagination-bullets
+  > .swiper-pagination-bullet:not(.swiper-pagination-bullet-active)::after:hover {
   background-color: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
-.swiper-pagination.swiper-pagination-bullets>.swiper-pagination-bullet-active::after {
+.swiper-pagination.swiper-pagination-bullets > .swiper-pagination-bullet-active::after {
   background-color: var(--primary);
 }
 
