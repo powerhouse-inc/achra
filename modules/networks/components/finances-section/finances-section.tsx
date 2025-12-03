@@ -10,7 +10,8 @@ import SectionTitle from '../section-title/section-title'
 export function FinancesSection() {
   return (
     <div
-      className={cn('flex flex-col gap-2 sm:gap-6', SCROLL_MT_CLASSES)}
+      // Note: The -mt-2 is to compensate for the swiper pagination dots height
+      className={cn('-mt-2 flex flex-col gap-2 sm:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Finances)}
     >
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">

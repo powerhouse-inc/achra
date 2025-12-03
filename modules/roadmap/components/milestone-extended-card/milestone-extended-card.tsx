@@ -48,7 +48,10 @@ export default function MilestoneExtendedCard({
 
   return (
     <Card
-      className={cn('w-full gap-0 overflow-hidden rounded-xl border-0 px-0 pt-0 pb-2', className)}
+      className={cn(
+        'w-full gap-0 overflow-hidden rounded-xl border-0 px-0 pt-0 pb-2 shadow-lg',
+        className,
+      )}
     >
       <CardHeader className="bg-accent flex items-center justify-between gap-0 rounded-t-xl rounded-b-none px-2 py-0.5">
         <div className="text-accent-foreground/30 flex items-center gap-1 text-base/6 font-semibold">

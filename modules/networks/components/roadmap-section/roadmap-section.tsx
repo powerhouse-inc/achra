@@ -36,7 +36,8 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
 
   return (
     <section
-      className={cn('flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
+      // Note: The -mt-2 is to compensate for the swiper pagination dots height
+      className={cn('-mt-2 flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />

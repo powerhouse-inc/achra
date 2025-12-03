@@ -27,7 +27,7 @@ function PageBreadcrumbContainer<E extends ElementType = 'div'>({
         data-slot="page-breadcrumb-container-wrapper"
         className={cn(
           'bg-secondary rounded-xl p-2', // mobile classes
-          'sm:bg-background border-accent sm:rounded-none sm:border-b sm:px-0 sm:py-3',
+          'sm:bg-background border-accent sm:h-12 sm:rounded-none sm:border-b sm:px-0 sm:py-3',
         )}
       >
         <div data-slot="page-breadcrumb-container-content" className="sm:container">

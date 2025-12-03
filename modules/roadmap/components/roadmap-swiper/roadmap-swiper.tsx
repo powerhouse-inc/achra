@@ -6,7 +6,10 @@ import type {
   ScopeOfWork_Milestone,
   Sow_Deliverable,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
+import {
+  MilestoneExtendedCard,
+  MilestoneExtendedCardSkeleton,
+} from '@/modules/roadmap/components/milestone-extended-card'
 import { cn } from '@/shared/lib/utils'
 import useRoadmapSwiper from './use-roadmap-swiper'
 
@@ -26,10 +29,11 @@ export default function RoadmapSwiper({
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
-    <div className="-mx-2 hidden flex-col sm:flex">
+    <div className="-mx-4 hidden flex-col sm:flex">
       <div className="relative">
         <Swiper
           ref={swiperRef}
+          watchSlidesProgress
           modules={[Pagination]}
           pagination={{
             clickable: true,
@@ -71,39 +75,32 @@ export default function RoadmapSwiper({
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
             // Hide the swiper until it is ready using invisible! and h-0 to avoid layout flickering
             !isSwiperReady && 'invisible! h-0',
+            'px-2!',
           )}
         >
           {milestones.map((milestone) => (
             <SwiperSlide key={milestone.id} className="flex">
-              <div className="mx-2 flex h-full pt-2">
-                <MilestoneExtendedCard
-                  milestone={milestone}
-                  className="swiper-milestone-card"
-                  networkSlug={networkSlug}
-                  roadmapSlug={roadmapSlug}
-                  deliverables={deliverables}
-                />
-              </div>
+              {({ isVisible }) => {
+                return (
+                  <div className={cn('mx-2 flex h-full pt-2')} data-visible={isVisible}>
+                    <MilestoneExtendedCard
+                      milestone={milestone}
+                      className={cn('swiper-milestone-card', { 'shadow-none': !isVisible })}
+                      networkSlug={networkSlug}
+                      roadmapSlug={roadmapSlug}
+                      deliverables={deliverables}
+                    />
+                  </div>
+                )
+              }}
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="grid grid-cols-1">
-          <div className={cn('flex h-full overflow-hidden pb-10', isSwiperReady && 'hidden')}>
-            {milestones.map((milestone) => (
-              <div
-                key={milestone.id}
-                className="mx-2 flex h-full w-full pt-2 sm:min-w-[calc(100%/2-16px)] lg:min-w-[calc(100%/3-16px)] xl:min-w-[calc(100%/4-16px)]"
-              >
-                <MilestoneExtendedCard
-                  milestone={milestone}
-                  className="swiper-milestone-card mb-2"
-                  networkSlug={networkSlug}
-                  roadmapSlug={roadmapSlug}
-                  deliverables={deliverables}
-                />
-              </div>
-            ))}
-          </div>
+        <div className={cn('flex gap-2', isSwiperReady && 'hidden')}>
+          <MilestoneExtendedCardSkeleton />
+          <MilestoneExtendedCardSkeleton className="hidden sm:flex" />
+          <MilestoneExtendedCardSkeleton className="hidden lg:flex" />
+          <MilestoneExtendedCardSkeleton className="hidden xl:flex" />
         </div>
       </div>
     </div>
