@@ -78,15 +78,15 @@ function MonthNavigation() {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="flex gap-0.5">
+      <div className="flex gap-2">
         <Button asChild variant="ghost" size="icon" aria-label="Previous month">
           <Link href={createUrl(formatMonthString(previousMonth))}>
-            <ChevronLeft className="text-foreground/50 size-4" />
+            <ChevronLeft className="text-foreground size-4" />
           </Link>
         </Button>
         <Button asChild variant="ghost" size="icon" aria-label="Next month">
           <Link href={createUrl(formatMonthString(nextMonth))}>
-            <ChevronRight className="text-foreground/50 size-4" />
+            <ChevronRight className="text-foreground size-4" />
           </Link>
         </Button>
       </div>
