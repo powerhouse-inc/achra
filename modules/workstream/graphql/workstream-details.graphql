@@ -26,6 +26,31 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
       }
       sow {
         description
+        title
+        status
+        projects {
+          id
+          code
+          abstract
+          code
+          title
+          projectOwner
+          imageUrl
+          budget
+          currency
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+           deliverables
+          }
+        }
         roadmaps {
           milestones {
             budget
@@ -39,6 +64,11 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
           code
           title
           description
+          keyResults {
+          title
+          id
+          link
+          }
         }
       }
     }

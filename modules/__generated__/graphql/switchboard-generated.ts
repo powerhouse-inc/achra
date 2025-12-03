@@ -264,6 +264,86 @@ export type ClientInfo = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type Contributor = IDocument & {
+  __typename?: 'Contributor';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Contributor_ContributorState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Contributor_ContributorState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type ContributorOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: Contributor Document */
+export type ContributorQueries = {
+  __typename?: 'ContributorQueries';
+  getDocument?: Maybe<Contributor>;
+  getDocuments?: Maybe<Array<Contributor>>;
+};
+
+
+/** Queries: Contributor Document */
+export type ContributorQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
+
+/** Queries: Contributor Document */
+export type ContributorQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
+};
+
+export type Contributor_ContributorState = {
+  __typename?: 'Contributor_ContributorState';
+  description?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['EmailAddress']['output']>;
+  ens?: Maybe<Scalars['String']['output']>;
+  iconUrl?: Maybe<Scalars['URL']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
+  walletAddress?: Maybe<Scalars['EthereumAddress']['output']>;
+};
+
+export type Contributor_SetDescriptionInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Contributor_SetEmailInput = {
+  email: Scalars['EmailAddress']['input'];
+};
+
+export type Contributor_SetEnsInput = {
+  ens?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Contributor_SetIconUrlInput = {
+  iconUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type Contributor_SetRoleInput = {
+  role: Scalars['String']['input'];
+};
+
+/** Module: Contributor */
+export type Contributor_SetUsernameInput = {
+  username: Scalars['String']['input'];
+};
+
+export type Contributor_SetWalletAddressInput = {
+  walletAddress: Scalars['EthereumAddress']['input'];
+};
+
 export type CurrencyConversion = {
   metric: Scalars['String']['input'];
   sourceCurrency: Scalars['String']['input'];
@@ -594,6 +674,14 @@ export type Mutation = {
   Builders_addBuilder?: Maybe<Scalars['Int']['output']>;
   Builders_createDocument?: Maybe<Scalars['String']['output']>;
   Builders_removeBuilder?: Maybe<Scalars['Int']['output']>;
+  Contributor_createDocument?: Maybe<Scalars['String']['output']>;
+  Contributor_setDescription?: Maybe<Scalars['Int']['output']>;
+  Contributor_setEmail?: Maybe<Scalars['Int']['output']>;
+  Contributor_setEns?: Maybe<Scalars['Int']['output']>;
+  Contributor_setIconUrl?: Maybe<Scalars['Int']['output']>;
+  Contributor_setRole?: Maybe<Scalars['Int']['output']>;
+  Contributor_setUsername?: Maybe<Scalars['Int']['output']>;
+  Contributor_setWalletAddress?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_createDocument?: Maybe<Scalars['String']['output']>;
   NetworkProfile_setCategory?: Maybe<Scalars['Int']['output']>;
   NetworkProfile_setDescription?: Maybe<Scalars['Int']['output']>;
@@ -716,6 +804,69 @@ export type MutationBuilders_RemoveBuilderArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<Builders_RemoveBuilderInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetDescriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetDescriptionInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetEmailArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetEmailInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetEnsArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetEnsInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetIconUrlArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetIconUrlInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetRoleArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetRoleInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetUsernameArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetUsernameInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationContributor_SetWalletAddressArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<Contributor_SetWalletAddressInput>;
 };
 
 
@@ -1534,6 +1685,31 @@ export type Operation = {
   type: Scalars['String']['output'];
 };
 
+export type Owners = IDocument & {
+  __typename?: 'Owners';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Owners_OwnersState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Owners_OwnersState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type OwnersOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Owners_OwnersState = {
+  __typename?: 'Owners_OwnersState';
+  owners: Array<Scalars['EthereumAddress']['output']>;
+};
+
 export type PhOperationContext = {
   __typename?: 'PHOperationContext';
   signer?: Maybe<Signer>;
@@ -1957,6 +2133,7 @@ export type Query = {
   __typename?: 'Query';
   BuilderProfile?: Maybe<BuilderProfileQueries>;
   Builders?: Maybe<BuildersQueries>;
+  Contributor?: Maybe<ContributorQueries>;
   NetworkProfile?: Maybe<NetworkProfileQueries>;
   PaymentTerms?: Maybe<PaymentTermsQueries>;
   RequestForProposals?: Maybe<RequestForProposalsQueries>;
@@ -2259,6 +2436,44 @@ export enum RequestForProposals_RfpProposalStatusInput {
   UnderReview = 'UNDER_REVIEW',
   Withdrawn = 'WITHDRAWN'
 }
+
+export type Retrospective = IDocument & {
+  __typename?: 'Retrospective';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: Retrospective_RetrospectiveState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: Retrospective_RetrospectiveState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type RetrospectiveOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Retrospective_RetrospectiveEntry = {
+  __typename?: 'Retrospective_RetrospectiveEntry';
+  id: Scalars['OID']['output'];
+  negativePoints: Scalars['String']['output'];
+  positivePoints: Scalars['String']['output'];
+  userAddress: Scalars['EthereumAddress']['output'];
+  username: Scalars['String']['output'];
+};
+
+export type Retrospective_RetrospectiveState = {
+  __typename?: 'Retrospective_RetrospectiveState';
+  allowedUsers: Array<Scalars['EthereumAddress']['output']>;
+  description: Scalars['String']['output'];
+  entries: Array<Retrospective_RetrospectiveEntry>;
+  owner?: Maybe<Scalars['EthereumAddress']['output']>;
+  title: Scalars['String']['output'];
+};
 
 export type Sow_Agent = {
   __typename?: 'SOW_Agent';
@@ -3218,7 +3433,7 @@ export type WorkstreamDetailsQueryVariables = Exact<{
 }>;
 
 
-export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, network?: { __typename?: 'Network', name?: string | null, slug?: string | null, logo?: string | null, darkThemeLogo?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, network?: { __typename?: 'Network', name?: string | null, slug?: string | null, logo?: string | null, darkThemeLogo?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', id: any, code: string, abstract?: string | null, title: string, projectOwner?: string | null, imageUrl?: any | null, budget?: number | null, currency?: Sow_PmCurrency | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, keyResults: Array<{ __typename?: 'SOW_KeyResult', title: string, id: any, link: string }> }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 export type WorkstreamsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -3612,6 +3827,31 @@ export const WorkstreamDetailsDocument = `
       }
       sow {
         description
+        title
+        status
+        projects {
+          id
+          code
+          abstract
+          code
+          title
+          projectOwner
+          imageUrl
+          budget
+          currency
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+            deliverables
+          }
+        }
         roadmaps {
           milestones {
             budget
@@ -3625,6 +3865,11 @@ export const WorkstreamDetailsDocument = `
           code
           title
           description
+          keyResults {
+            title
+            id
+            link
+          }
         }
       }
     }
