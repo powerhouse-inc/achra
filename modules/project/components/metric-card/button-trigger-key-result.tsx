@@ -2,10 +2,15 @@
 
 import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
+import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { KeyResultsModal } from '@/modules/project/components/key-results-modal/key-results-modal'
 import { Button } from '@/modules/shared/components/ui/button'
 
-export function ButtonTriggerKeyResult() {
+interface ButtonTriggerKeyResultProps {
+  deliverables: ScopeOfWork_Deliverable[]
+}
+
+export function ButtonTriggerKeyResult({ deliverables }: ButtonTriggerKeyResultProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -23,6 +28,7 @@ export function ButtonTriggerKeyResult() {
       </Button>
 
       <KeyResultsModal
+        deliverables={deliverables}
         isOpen={isOpen}
         onClose={() => {
           setIsOpen(false)

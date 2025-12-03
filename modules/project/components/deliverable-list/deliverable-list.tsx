@@ -62,7 +62,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
             </div>
             <DeliverableListPopover
               title={deliverable.title}
-              code="DEL 001"
+              code={deliverable.code}
               keyResults={deliverable.keyResults}
               count={deliverable.keyResults.length}
               className="flex justify-end sm:min-w-34"
@@ -76,7 +76,10 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
           />
           <Separator className="text-border my-2 hidden w-full sm:flex" />
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
-            <DescriptionItem label="QTY" value={`${deliverable.budgetAnchor?.quantity} USD`} />
+            <DescriptionItem
+              label="QTY"
+              value={`${deliverable.budgetAnchor?.quantity ?? 0}  USD`}
+            />
             <DescriptionItem
               label="Unit Budget"
               value={`${deliverable.budgetAnchor?.unitCost.toLocaleString() ?? 0} USD`}

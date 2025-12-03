@@ -110,7 +110,7 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
               </div>
             </TableCell>
             <TableCell className="text-foreground h-fit w-[5.9%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[5.9%] xl:w-[8.2%]">
-              {deliverable.budgetAnchor?.quantity} USD
+              {deliverable.budgetAnchor?.quantity ?? 0} USD
             </TableCell>
             <TableCell className="text-foreground h-fit w-[15.3%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[15.3%] xl:w-[13.4%]">
               {deliverable.budgetAnchor?.unitCost.toLocaleString() ?? 0} USD
@@ -128,7 +128,7 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
                 keyResults={deliverable.keyResults}
                 title="Deliverables"
                 count={deliverable.keyResults.length}
-                code="DR"
+                code={deliverable.code}
               />
             </TableCell>
           </TableRow>
