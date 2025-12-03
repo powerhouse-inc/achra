@@ -7,7 +7,6 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { WorkstreamInitialProposalBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 import type { Route } from 'next'
-
 interface ProjectDetailsButtonProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
 }
