@@ -32,7 +32,6 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
           id
           code
           abstract
-          code
           title
           projectOwner
           imageUrl

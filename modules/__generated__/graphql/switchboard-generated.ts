@@ -3833,7 +3833,6 @@ export const WorkstreamDetailsDocument = `
           id
           code
           abstract
-          code
           title
           projectOwner
           imageUrl
