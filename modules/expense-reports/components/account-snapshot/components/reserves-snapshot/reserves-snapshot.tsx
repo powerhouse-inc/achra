@@ -1,5 +1,9 @@
+'use client'
+
+import { useState } from 'react'
 import { Checkbox } from '@/modules/shared/components/ui/checkbox'
 import { Label } from '@/modules/shared/components/ui/label'
+import { cn } from '@/modules/shared/lib/utils'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
@@ -9,6 +13,12 @@ interface ReservesSnapshotProps {
 }
 
 function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
+  const [includeOffChain, setIncludeOffChain] = useState<boolean>(false)
+
+  const toggleIncludeOffChain = () => {
+    setIncludeOffChain(!includeOffChain)
+  }
+
   return (
     <div>
       <div className="mb-4 flex flex-col justify-between gap-1 md:flex-row md:items-end md:gap-2">
@@ -23,7 +33,11 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
           level="h2"
         />
         <div className="ml-auto flex items-center gap-2">
-          <Checkbox id="off-chain-reserves" />
+          <Checkbox
+            id="off-chain-reserves"
+            checked={includeOffChain}
+            onCheckedChange={toggleIncludeOffChain}
+          />
           <Label htmlFor="off-chain-reserves">Include Off-Chain Reserves</Label>
         </div>
       </div>
@@ -53,6 +67,39 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
           caption="New Reserves"
           className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
         />
+      </div>
+
+      {/* on chain sub-section */}
+      <div className="mt-6">
+        <SectionHeader
+          title="On Chain Reserves"
+          subtitle={`Unspent On-Chain reserves to the ${teamName} Team.`}
+          tooltip={
+            <>
+              Track and analyze the movement of <br /> On-Chain assets.
+            </>
+          }
+          level="h3"
+        />
+
+        <div className="flex flex-col gap-2">Reserve cards</div>
+      </div>
+
+      {/* off chain sub-section */}
+      <div className={cn('mt-6', { 'opacity-30': !includeOffChain })}>
+        <SectionHeader
+          title="Off Chain Reserves"
+          subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
+          tooltip={
+            <>
+              Discover essential details about the <br />
+              off-chain balances.
+            </>
+          }
+          level="h3"
+        />
+
+        <div className="flex flex-col gap-2">Reserve cards</div>
       </div>
     </div>
   )
