@@ -1,5 +1,6 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { ArrowLeft, Search, X } from 'lucide-react'
+import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -12,7 +13,6 @@ import {
 } from '@/modules/shared/components/ui/dialog'
 import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
-import { mockDeliverables } from '../../mock/deliverable'
 import { StatusSelectDelivarableDrawer, StatusSelectDeliverable } from './key-result-filters'
 import { KeyResultItem } from './key-result-item'
 import useDeliverableFilters from './useDeliverableFilters'
@@ -20,12 +20,13 @@ import useDeliverableFilters from './useDeliverableFilters'
 interface KeyResultsModalProps {
   isOpen: boolean
   onClose: () => void
+  deliverables: ScopeOfWork_Deliverable[]
 }
 
-export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
+export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsModalProps) {
   const { search, statuses, onReset, setSearch, setStatuses, filteredDeliverables } =
     useDeliverableFilters({
-      deliverables: mockDeliverables,
+      deliverables,
     })
 
   const handleClose = () => {
@@ -123,7 +124,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                     <div className="bg-accent mb-3 flex items-center justify-between rounded-md p-2">
                       <div className="flex items-center gap-1">
                         <span className="text-foreground/30 text-sm/4.5 font-semibold">
-                          {deliverable.id}
+                          {deliverable.code}
                         </span>
                         <h3 className="text-foreground text-sm/5.5 font-semibold">
                           {deliverable.title}
