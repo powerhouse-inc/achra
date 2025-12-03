@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import type {
   ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableSetStatus,
-  ScopeOfWork_Progress,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
@@ -35,16 +34,11 @@ export function ProjectCardItem({
   builderId,
   params,
 }: ProjectCardItemProps) {
-  const projectTitle = project.title
-  const projectCode = project.code
-  const projectAbstract = project.abstract
-  const projectImageUrl = project.imageUrl
-  const projectBudget = project.budget ?? 0
-  const projectBudgetCurrency = project.currency
-  const projectCapex = project.expenditure?.cap
-  const projectStatus = project.scope?.status
+  const { title, code, abstract, imageUrl, budget = 0, currency, expenditure, scope } = project
+  const status = scope?.status
+  const capex = expenditure?.cap
 
-  const projectProgress = getProgressPercentage(project.scope?.progress as ScopeOfWork_Progress)
+  const projectProgress = getProgressPercentage(scope?.progress)
 
   return (
     <Card className="bg-background gap-0 border-none p-0 sm:mt-2.25 md:-mt-2.75">
@@ -55,17 +49,17 @@ export function ProjectCardItem({
               <div className="flex w-full flex-col gap-1">
                 <div className="flex w-full flex-row items-center gap-1 sm:items-center sm:gap-2">
                   <div className="max-w-100 truncate text-base/6 font-bold sm:text-lg sm:leading-[120%] sm:font-bold md:text-xl md:leading-[120%] xl:text-2xl xl:leading-[120%] xl:font-bold">
-                    {projectTitle}
+                    {title}
                   </div>
                   <div className="text-foreground/50 items-center justify-between text-xs/4.5 font-medium uppercase sm:flex sm:self-end md:text-sm/5.5 md:font-semibold xl:text-base/6 xl:font-semibold">
-                    {projectCode}
+                    {code}
                   </div>
                 </div>
 
                 <div className="hidden sm:block">
                   <Suspense fallback={<AvatarTitleSkeleton />}>
                     <AvatarTitleProjectDetails
-                      src={projectImageUrl}
+                      src={imageUrl}
                       title={builderName}
                       params={params}
                       builderId={builderId}
@@ -85,7 +79,7 @@ export function ProjectCardItem({
             <div className="block sm:hidden">
               <Suspense fallback={<AvatarTitleSkeleton />}>
                 <AvatarTitleProjectDetails
-                  src={projectImageUrl}
+                  src={imageUrl}
                   title={builderName}
                   params={params}
                   builderId={builderId}
@@ -93,7 +87,7 @@ export function ProjectCardItem({
               </Suspense>
             </div>
 
-            <div className="mt-1 flex w-full sm:mt-0">{projectAbstract}</div>
+            <div className="mt-1 flex w-full sm:mt-0">{abstract}</div>
 
             <div className="text-primary-foreground mt-1 block sm:mt-0 sm:hidden">
               <ConnectLink
@@ -105,15 +99,10 @@ export function ProjectCardItem({
           </div>
 
           <div className="flex shrink grow flex-col gap-2 sm:w-full sm:flex-row sm:gap-2 lg:basis-[35%] lg:flex-col">
-            <MetricCard
-              label="Budget"
-              value={projectCapex}
-              unit={projectBudgetCurrency ?? undefined}
-              footer="CAPEX"
-            />
+            <MetricCard label="Budget" value={capex} unit={currency ?? undefined} footer="CAPEX" />
             <ProgressCard
               progress={projectProgress}
-              status={projectStatus as ScopeOfWork_DeliverableSetStatus}
+              status={status as ScopeOfWork_DeliverableSetStatus}
             />
 
             <Suspense fallback={<MetricCardSkeleton />}>
@@ -146,7 +135,7 @@ export function ProjectCardItem({
       </div>
 
       <div className="flex w-full flex-col gap-2 self-end px-4 pt-4 pb-3 sm:pb-4">
-        <TotalCostField label="Total Budget" value={projectBudget} />
+        <TotalCostField label="Total Budget" value={budget ?? 0} />
       </div>
     </Card>
   )
