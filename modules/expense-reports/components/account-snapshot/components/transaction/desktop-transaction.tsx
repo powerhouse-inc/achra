@@ -22,8 +22,6 @@ function DesktopTransaction({
     ? `${format(parseISO(date), 'dd-MMM-yyyy', { in: utc })} to ${format(parseISO(toDate), 'dd-MMM-yyyy', { in: utc })}`
     : `${format(parseISO(date), 'dd-MMM-yyyy HH:mm', { in: utc })} UTC`
 
-  console.log('isIncomingTransaction', isIncomingTransaction, amount)
-
   return (
     <div
       className={cn(
