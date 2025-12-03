@@ -48,7 +48,7 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
                 value
               }
             }
-           deliverables
+            deliverables
           }
         }
         roadmaps {
@@ -65,9 +65,9 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
           title
           description
           keyResults {
-          title
-          id
-          link
+            title
+            id
+            link
           }
         }
       }
