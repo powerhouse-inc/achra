@@ -4,7 +4,7 @@ export default function NetworkLayout({ children }: { children: React.ReactNode 
   return (
     <>
       <NetworkNavbar />
-      <div className="pt-18 md:pt-21">{children}</div>
+      <div className="pt-18 md:pt-23">{children}</div>
     </>
   )
 }

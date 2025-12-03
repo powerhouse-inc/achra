@@ -9,7 +9,7 @@ interface PageBackgroundProps {
 
 export function PageBackground({ children, className, as: Element = 'div' }: PageBackgroundProps) {
   return (
-    <div className="relative -mt-18 pt-18 md:-mt-21 md:pt-21">
+    <div className="relative -mt-18 pt-18 md:-mt-23 md:pt-23">
       <div
         className={cn(
           'fixed inset-0 -z-1 max-h-[100vh] w-full',
