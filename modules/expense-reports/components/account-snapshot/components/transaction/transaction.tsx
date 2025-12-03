@@ -1,4 +1,5 @@
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { DesktopTransaction } from './desktop-transaction'
 import { MobileTransaction } from './mobile-transaction'
 
 export interface TransactionProps {
@@ -23,7 +24,6 @@ function Transaction({
   highlightPositiveAmounts = false,
 }: TransactionProps) {
   const isMobile = useMediaQuery({ to: 'md' })
-  const isIncomingTransaction = amount > 0
 
   return isMobile ? (
     <MobileTransaction
@@ -37,7 +37,15 @@ function Transaction({
       highlightPositiveAmounts={highlightPositiveAmounts}
     />
   ) : (
-    <div className="h-20">Desktop transaction {isIncomingTransaction}</div>
+    <DesktopTransaction
+      name={name}
+      date={date}
+      toDate={toDate}
+      amount={amount}
+      txHash={txHash}
+      counterPartyName={counterPartyName}
+      counterPartyAddress={counterPartyAddress}
+    />
   )
 }
 

@@ -5,7 +5,7 @@ interface ExpenseArrowProps extends React.SVGProps<SVGSVGElement> {
   isIncoming?: boolean
 }
 
-function ExpenseArrow({ isIncoming = false, ...props }: ExpenseArrowProps) {
+function ExpenseArrow({ isIncoming = false, className, ...props }: ExpenseArrowProps) {
   return (
     <svg
       width="16"
@@ -16,7 +16,7 @@ function ExpenseArrow({ isIncoming = false, ...props }: ExpenseArrowProps) {
       className={cn(
         'size-4 opacity-30',
         isIncoming ? 'text-status-success' : 'text-destructive',
-        props.className,
+        className,
         { 'rotate-180': !isIncoming },
       )}
       {...props}

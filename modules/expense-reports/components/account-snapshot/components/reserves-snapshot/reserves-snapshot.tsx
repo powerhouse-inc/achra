@@ -11,7 +11,7 @@ interface ReservesSnapshotProps {
 function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
   return (
     <div>
-      <div className="mb-4 flex flex-col items-end justify-between md:flex-row md:items-start md:gap-2 lg:items-end">
+      <div className="mb-4 flex flex-col justify-between gap-1 md:flex-row md:items-end md:gap-2">
         <SectionHeader
           title="Total Reserves"
           subtitle={`On-Chain and off-chain reserves accessible to the ${teamName} Team.`}
@@ -22,7 +22,7 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
           }
           level="h2"
         />
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <Checkbox id="off-chain-reserves" />
           <Label htmlFor="off-chain-reserves">Include Off-Chain Reserves</Label>
         </div>
