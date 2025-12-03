@@ -8,10 +8,6 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import type { Route } from 'next'
 
-interface LinksProps {
-  isMobile?: boolean
-}
-
 const links = [
   {
     href: 'https://app.aave.com/',
@@ -40,20 +36,17 @@ const links = [
   },
 ]
 
-export function Links({ isMobile }: LinksProps) {
+export function Links() {
   return (
     <HoverPopover>
       <HoverPopoverTrigger asChild>
-        {isMobile ? (
-          <Button variant="secondary" size="icon">
-            <LinkIcon />
-          </Button>
-        ) : (
-          <Button variant="secondary" size="lg" className="focus-visible:ring-0">
-            <LinkIcon />
-            Links
-          </Button>
-        )}
+        <Button
+          variant="secondary"
+          className="size-9 focus-visible:ring-0 lg:h-10 lg:w-fit lg:rounded-md lg:px-6"
+        >
+          <LinkIcon />
+          <span className="hidden lg:block">Links</span>
+        </Button>
       </HoverPopoverTrigger>
       <HoverPopoverContent className="w-fit p-2" align="end">
         <div className="flex flex-col gap-2">
