@@ -6,6 +6,7 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   ButtonTriggerKeyResult,
+  DeliverablesCard,
   MetricCard,
   MetricCardSkeleton,
   ProgressCard,
@@ -127,10 +128,15 @@ export function ProjectCardItem({
 
       <CardContent className="bg-accent flex flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4">
         <p className="text-base/6 font-semibold">Deliverables</p>
-        {/* TODO: Add deliverables card  */}
-        <div className="flex flex-col gap-2">
-          <DeliverablesEmpty />
-        </div>
+        {deliverables.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            <DeliverablesCard deliverables={deliverables} />
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <DeliverablesEmpty />
+          </div>
+        )}
       </CardContent>
 
       <CardFooter className="flex w-full flex-col gap-2 self-end px-4 pt-4 pb-3 sm:pb-4">

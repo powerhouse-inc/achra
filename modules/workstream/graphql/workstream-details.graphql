@@ -80,6 +80,11 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
               done
             }
           }
+          budgetAnchor {
+            unitCost
+            unit
+            quantity
+          }
           status
         }
       }
