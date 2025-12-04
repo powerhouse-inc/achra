@@ -29,7 +29,7 @@ export default function RoadmapSwiper({
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
-    <div className="-mx-4 hidden flex-col sm:flex">
+    <div className="-mx-4 -mt-2 hidden flex-col sm:flex">
       <div className="relative">
         <Swiper
           ref={swiperRef}
@@ -69,7 +69,6 @@ export default function RoadmapSwiper({
               spaceBetween: 0,
             },
           }}
-          centerInsufficientSlides
           className={cn(
             isSwiperReady && 'pb-10!',
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',

@@ -24,7 +24,7 @@ function RootContent({ children }: RootProps) {
   return (
     <div
       className={cn(
-        'bg-muted/30 fixed top-0 right-0 left-0 z-150 rounded-3xl p-0 shadow-lg',
+        'bg-muted/30 fixed top-0 right-0 left-0 z-150 rounded-3xl p-0 shadow-lg sm:top-1.5',
         'sm:mx-4 sm:p-2.5 sm:shadow-none',
         'xl:mx-auto xl:max-w-[calc(var(--spacing)*300+20px)] xl:px-2.5',
         '2xl:max-w-[calc(var(--spacing)*328+20px)]',
