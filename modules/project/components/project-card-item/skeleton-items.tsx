@@ -34,11 +34,11 @@ export function ProgressCardSkeleton() {
   return (
     <div className="bg-popover flex h-[74px] w-full flex-col justify-center gap-2 rounded-xl border p-2 lg:px-4">
       <div className="flex items-center justify-between">
-        <Skeleton className="h-3 w-12" /> {/* Label */}
-        <Skeleton className="h-5 w-20 rounded-full" /> {/* Status Chip */}
+        <Skeleton className="h-3 w-12" />
+        <Skeleton className="h-5 w-20 rounded-full" />
       </div>
       <div className="relative w-full">
-        <Skeleton className="h-4 w-full rounded" /> {/* Progress Bar */}
+        <Skeleton className="h-4 w-full rounded" />
       </div>
     </div>
   )
@@ -52,10 +52,10 @@ export function DeliverableListSkeleton() {
         <div key={i} className="bg-popover flex w-full flex-col gap-2 rounded-xl p-2 shadow-xs">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
-              <Skeleton className="size-8 rounded-full" /> {/* Avatar */}
+              <Skeleton className="size-8 rounded-full" />
               <div className="flex flex-col gap-1">
-                <Skeleton className="h-4 w-32" /> {/* Title */}
-                <Skeleton className="h-3 w-16 sm:hidden" /> {/* Status mobile */}
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-3 w-16 sm:hidden" />
               </div>
             </div>
             {/* Desktop Status/Progress section hidden on mobile */}
@@ -94,13 +94,9 @@ export function DeliverableListSkeleton() {
 // Simula DeliverableTable (Desktop View)
 export function DeliverableTableSkeleton() {
   return (
-    // CAMBIO 1: Agregamos [&_table]:flex [&_table]:flex-col para que la tabla use flexbox internamente
     <Table className="w-full [&_table]:flex [&_table]:flex-col">
-      {/* CAMBIO 2: TableHeader debe ser block w-full */}
       <TableHeader className="block w-full">
-        {/* CAMBIO 3: TableRow debe ser flex w-full */}
         <TableRow className="flex w-full border-b-0!">
-          {/* Ajustamos los anchos de los headers para coincidir con las celdas */}
           <TableHead className="h-fit w-[22.9%] py-4 lg:w-[22.9%] xl:w-[22.3%]">
             <Skeleton className="h-4 w-20" />
           </TableHead>
