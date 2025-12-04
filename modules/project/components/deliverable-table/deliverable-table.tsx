@@ -19,6 +19,7 @@ import { SortEnum } from '@/modules/shared/types'
 import { AvatarTitleAvatar, AvatarTitleRoot, AvatarTitleText } from '../avatar-title/avatar-title'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { ProgressComponent } from '../progress-component/progress-component'
+import { calculateDeliverableSubtotal } from '../utils'
 import { useDeliverableTable } from './use-deliverable-table'
 
 export interface DeliverableTableProps {
@@ -116,12 +117,7 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
               {deliverable.budgetAnchor?.unitCost.toLocaleString() ?? 0} USD
             </TableCell>
             <TableCell className="text-foreground h-fit w-[15.3%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[15.3%] xl:w-[13.4%]">
-              {deliverable.budgetAnchor?.quantity && deliverable.budgetAnchor.unitCost
-                ? (
-                    deliverable.budgetAnchor.quantity * deliverable.budgetAnchor.unitCost
-                  ).toLocaleString()
-                : 0}
-              USD
+              {calculateDeliverableSubtotal(deliverable).toLocaleString()} USD
             </TableCell>
             <TableCell className="flex h-fit w-[10%] shrink-0 justify-end p-0!">
               <DeliverableListPopover

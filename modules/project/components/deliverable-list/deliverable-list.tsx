@@ -7,14 +7,14 @@ import { cn } from '@/modules/shared/lib/utils'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { DescriptionItem } from '../description-item/description-item'
 import { ProgressComponent } from '../progress-component/progress-component'
+import { calculateDeliverableSubtotal } from '../utils'
 
 export interface DeliverableListProps {
   deliverables: ScopeOfWork_Deliverable[]
   className?: string
-  totalBalance: string
 }
 
-export function DeliverableList({ deliverables, className, totalBalance }: DeliverableListProps) {
+export function DeliverableList({ deliverables, className }: DeliverableListProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       {deliverables.map((deliverable) => (
@@ -86,7 +86,7 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
             />
             <DescriptionItem
               label="Subtotal"
-              value={`${totalBalance} USD`}
+              value={`${calculateDeliverableSubtotal(deliverable).toLocaleString()} USD`}
               className="sm:justify-end"
             />
           </div>
