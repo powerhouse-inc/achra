@@ -33,6 +33,7 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
   }
   const roadmaps = data.workstream.flatMap((workstream) => workstream.sow?.roadmaps ?? [])
   const deliverables = data.workstream.flatMap((workstream) => workstream.sow?.deliverables ?? [])
+  const hasMoreThanOneRoadmap = roadmaps.length > 1
 
   return (
     <section
@@ -41,19 +42,33 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />
-      <ScrollableTabs defaultValue={roadmaps[0].id} className="overflow-visible md:order-1">
-        <ScrollableTabsList>
+      <ScrollableTabs
+        defaultValue={roadmaps[0].id}
+        className="gap-4 overflow-visible md:order-1 xl:gap-6"
+      >
+        <ScrollableTabsList className={cn({ 'h-fit bg-transparent p-0': !hasMoreThanOneRoadmap })}>
           <div className="flex w-fit">
             {roadmaps.map((roadmap) => (
-              <TabsTrigger key={roadmap.id} value={roadmap.id}>
+              <TabsTrigger
+                key={roadmap.id}
+                value={roadmap.id}
+                className={cn({
+                  'data-[state=active]:text-foreground/50 dark:text-foreground/50 border-none bg-transparent p-0 text-xl/6 data-[state=active]:font-bold dark:data-[state=active]:bg-transparent':
+                    !hasMoreThanOneRoadmap,
+                })}
+              >
                 {roadmap.title}
               </TabsTrigger>
             ))}
           </div>
         </ScrollableTabsList>
         {roadmaps.map((roadmap) => (
-          <TabsContent key={roadmap.id} value={roadmap.id} className="flex flex-col gap-2 xl:gap-4">
-            <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
+          <TabsContent key={roadmap.id} value={roadmap.id} className="flex flex-col gap-4 xl:gap-6">
+            <div
+              className={cn('text-foreground/50 text-sm/5.5 font-semibold xl:text-base', {
+                hidden: !roadmap.description,
+              })}
+            >
               {roadmap.description}
             </div>
             <div className="relative z-10 flex flex-col gap-6 sm:hidden">

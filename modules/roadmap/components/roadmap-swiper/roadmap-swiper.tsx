@@ -29,7 +29,7 @@ export default function RoadmapSwiper({
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
-    <div className="-mx-4 hidden flex-col sm:flex">
+    <div className="-mx-4 -mt-2 hidden flex-col sm:flex">
       <div className="relative">
         <Swiper
           ref={swiperRef}
