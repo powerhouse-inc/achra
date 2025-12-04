@@ -5,7 +5,7 @@ const pageContentVariants = cva('container flex flex-col mb-8', {
   variants: {
     variant: {
       default: 'mt-8 mb-8',
-      'with-breadcrumb': 'mt-20 sm:mt-20.5',
+      'with-breadcrumb': 'mt-20 sm:mt-19',
     },
   },
   defaultVariants: {
