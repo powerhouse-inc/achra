@@ -69,7 +69,6 @@ export default function RoadmapSwiper({
               spaceBetween: 0,
             },
           }}
-          centerInsufficientSlides
           className={cn(
             isSwiperReady && 'pb-10!',
             '[&_.swiper-slide]:mb-2 [&_.swiper-slide]:box-border [&_.swiper-slide]:flex [&_.swiper-slide]:h-auto',
