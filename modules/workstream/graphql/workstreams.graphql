@@ -54,7 +54,7 @@ query Workstreams($filter: WorkstreamsFilter) {
                 value
               }
             }
-           deliverables
+            deliverables
           }
         }
       }
