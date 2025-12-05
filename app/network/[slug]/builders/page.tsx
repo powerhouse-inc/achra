@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { Builders } from '@/modules/builders/components/builders/builders'
+import { BuildersSkeleton } from '@/modules/builders/components/builders/builders-skeleton'
 import BuilderFilters from '@/modules/builders/components/builders-filters'
 import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
@@ -37,11 +38,10 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
       <PageContent variant="with-breadcrumb" className="gap-6">
-        {/* TODO: Ask the designer for the skeleton of these components */}
         <BuildersHeader />
         <BuilderFilters />
         <ErrorBoundaryWithPresets>
-          <Suspense fallback="Loading..." key={searchParamsString}>
+          <Suspense fallback={<BuildersSkeleton />} key={searchParamsString}>
             <Builders />
           </Suspense>
         </ErrorBoundaryWithPresets>
