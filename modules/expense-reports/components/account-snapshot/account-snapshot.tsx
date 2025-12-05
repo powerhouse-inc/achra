@@ -10,12 +10,30 @@ interface AccountSnapshotProps {
 }
 
 function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
-  const { transactionHistory } = useAccountsSnapshot(accountSnapshotMock)
+  const {
+    transactionHistory,
+    includeOffChain,
+    toggleIncludeOffChain,
+    startDate,
+    endDate,
+    cuReservesBalance,
+    onChainData,
+    offChainData,
+  } = useAccountsSnapshot(accountSnapshotMock)
 
   return (
     <div className="flex flex-col gap-8">
       <FundingOverview transactionHistory={transactionHistory} />
-      <ReservesSnapshot teamName="Powerhouse" />
+      <ReservesSnapshot
+        teamName="Powerhouse"
+        includeOffChain={includeOffChain}
+        toggleIncludeOffChain={toggleIncludeOffChain}
+        startDate={startDate}
+        endDate={endDate}
+        balance={cuReservesBalance}
+        onChainData={onChainData}
+        offChainData={offChainData}
+      />
     </div>
   )
 }
