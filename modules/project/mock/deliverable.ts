@@ -1,6 +1,7 @@
 import {
   type ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableStatus,
+  type ScopeOfWork_Unit,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 export const mockDeliverables: ScopeOfWork_Deliverable[] = [
   {
@@ -12,7 +13,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       margin: 0.1,
       quantity: 1,
       unitCost: 300000,
-      unit: null,
+      unit: 'Hours' as ScopeOfWork_Unit,
     },
     code: 'D1',
     description: 'Deliverable 1',
@@ -20,6 +21,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
     workProgress: {
       value: 10,
     },
+
     keyResults: [
       {
         id: 'kr1',
@@ -68,7 +70,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       margin: 0.1,
       quantity: 2,
       unitCost: 230000,
-      unit: null,
+      unit: 'Hours' as ScopeOfWork_Unit,
     },
     keyResults: [
       {
@@ -113,7 +115,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       margin: 0.1,
       quantity: 2,
       unitCost: 250000,
-      unit: null,
+      unit: 'Hours' as ScopeOfWork_Unit,
     },
     keyResults: [
       {
@@ -138,7 +140,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       margin: 0.1,
       quantity: 4,
       unitCost: 250_600,
-      unit: null,
+      unit: 'Hours' as ScopeOfWork_Unit,
     },
     keyResults: [
       {
@@ -173,7 +175,7 @@ export const mockDeliverables: ScopeOfWork_Deliverable[] = [
       margin: 0.1,
       quantity: 3,
       unitCost: 150000,
-      unit: null,
+      unit: 'Hours' as ScopeOfWork_Unit,
     },
     keyResults: [
       {

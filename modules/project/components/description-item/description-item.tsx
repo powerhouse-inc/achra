@@ -1,9 +1,10 @@
 import React from 'react'
+import type { Maybe, ScopeOfWork_Unit } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 export interface DescriptionItemProps {
   label: string
-  value: string
+  value: Maybe<ScopeOfWork_Unit> | string | undefined
   className?: string
 }
 
