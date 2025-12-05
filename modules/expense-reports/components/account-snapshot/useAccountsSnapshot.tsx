@@ -1,7 +1,7 @@
+import { differenceInMonths, format, parse } from 'date-fns'
 import { useMemo, useState } from 'react'
 import { getReserveAccounts, transactionSort } from './utils/reserveUtils'
 import type { ExpenseComparisonLineItem, Snapshots, Token } from './types'
-import { differenceInMonths, format, parse } from 'date-fns'
 
 const useAccountsSnapshot = (snapshot: Snapshots) => {
   // TODO: the `setSelectedTo` is not used yet, but it will be used to filter the data
@@ -122,10 +122,7 @@ const useAccountsSnapshot = (snapshot: Snapshots) => {
 
     const totalReportedActuals = lineItems.reduce((acc, item) => acc + item.reportedActuals, 0)
     const totalOnChainOnly = lineItems.reduce((acc, item) => acc + item.onChainOnly, 0)
-    const totalOffChainIncluded = lineItems.reduce(
-      (acc, item) => acc + (item.offChainIncluded ?? 0),
-      0,
-    )
+    const totalOffChainIncluded = lineItems.reduce((acc, item) => acc + item.offChainIncluded, 0)
 
     const totalOnChainDifference =
       totalReportedActuals === 0 || totalOnChainOnly === 0
