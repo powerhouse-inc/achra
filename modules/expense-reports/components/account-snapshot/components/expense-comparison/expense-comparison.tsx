@@ -1,5 +1,3 @@
-'use client'
-
 import { SectionHeader } from '../section-header'
 import { ExpenseComparisonDesktop } from './expense-comparison-desktop'
 import { ExpenseComparisonMobile } from './expense-comparison-mobile'
@@ -10,9 +8,6 @@ interface ExpenseComparisonProps {
 }
 
 function ExpenseComparison({ lineItems }: ExpenseComparisonProps) {
-  // TODO: Replace with actual data from props/API
-  // const data = expenseComparisonMockWithOffChain
-
   return (
     <div className="space-y-4">
       <SectionHeader
