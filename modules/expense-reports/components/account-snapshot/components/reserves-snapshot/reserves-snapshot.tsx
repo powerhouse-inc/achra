@@ -1,24 +1,36 @@
 'use client'
 
-import { useState } from 'react'
 import { Checkbox } from '@/modules/shared/components/ui/checkbox'
 import { Label } from '@/modules/shared/components/ui/label'
 import { cn } from '@/modules/shared/lib/utils'
 import { FundChangeRate } from '../fund-change-rate'
+import { ReserveCard } from '../reserve-card'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
+import type { SnapshotAccountBalance, UIReservesData } from '../../types'
 
 interface ReservesSnapshotProps {
   teamName: string
+
+  includeOffChain: boolean
+  toggleIncludeOffChain: () => void
+  startDate?: string
+  endDate?: string
+  balance?: SnapshotAccountBalance
+  onChainData?: UIReservesData[]
+  offChainData?: UIReservesData[]
 }
 
-function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
-  const [includeOffChain, setIncludeOffChain] = useState<boolean>(false)
-
-  const toggleIncludeOffChain = () => {
-    setIncludeOffChain(!includeOffChain)
-  }
-
+function ReservesSnapshot({
+  teamName,
+  includeOffChain,
+  toggleIncludeOffChain,
+  startDate,
+  endDate,
+  balance,
+  onChainData,
+  offChainData,
+}: ReservesSnapshotProps) {
   return (
     <div>
       <div className="mb-4 flex flex-col justify-between gap-1 md:flex-row md:items-end md:gap-2">
@@ -44,28 +56,34 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
 
       <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-8 xl:gap-8">
         <SimpleStatCard
-          date="2025-04-08T21:11:07+00:00"
-          value={2924160}
+          date={startDate}
+          value={balance?.initialBalance}
           caption="Initial Reserves"
           className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
+          dynamicChanges
         />
         <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
           <FundChangeRate
-            netChange={-791666}
-            leftValue={500000}
+            netChange={
+              typeof balance?.inflow === 'number' && typeof balance.outflow === 'number'
+                ? balance.outflow - balance.inflow * -1
+                : undefined
+            }
+            leftValue={balance?.inflow}
             leftText="Inflow"
-            rightValue={291666}
+            rightValue={typeof balance?.outflow === 'number' ? balance.outflow * -1 : undefined}
             rightValueColor="normal"
             rightText="Outflow"
             dynamicChanges={true}
           />
         </div>
         <SimpleStatCard
-          date="2025-05-16T21:11:07+00:00"
-          value={3215826}
+          date={endDate}
+          value={balance?.newBalance}
           hasEqualSign
           caption="New Reserves"
           className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
+          dynamicChanges
         />
       </div>
 
@@ -82,7 +100,11 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
           level="h3"
         />
 
-        <div className="flex flex-col gap-2">Reserve cards</div>
+        <div className="flex flex-col gap-2">
+          {onChainData?.map((account) => (
+            <ReserveCard key={account.id} account={account} currency="USD" />
+          ))}
+        </div>
       </div>
 
       {/* off chain sub-section */}
@@ -99,7 +121,11 @@ function ReservesSnapshot({ teamName }: ReservesSnapshotProps) {
           level="h3"
         />
 
-        <div className="flex flex-col gap-2">Reserve cards</div>
+        <div className="flex flex-col gap-2">
+          {offChainData?.map((account) => (
+            <ReserveCard key={account.id} account={account} currency="USD" />
+          ))}
+        </div>
       </div>
     </div>
   )
