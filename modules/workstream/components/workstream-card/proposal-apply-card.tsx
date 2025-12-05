@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useCallback } from 'react'
 import type { ScopeOfWork_Project } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
-import { Button } from '@/modules/shared/components/ui/button'
+import { buttonVariants } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { slugify } from '@/modules/shared/lib/slug'
@@ -114,7 +114,7 @@ export default function ProposalApplyCard({
               />
             </div>
           </div>
-          <Button>Apply</Button>
+          <span className={cn(buttonVariants())}>Apply</span>
         </CardContent>
       </Card>
     </Link>
