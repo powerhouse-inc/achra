@@ -34,6 +34,29 @@ query Workstreams($filter: WorkstreamsFilter) {
           title
           description
         }
+        projects {
+          id
+          code
+          abstract
+          code
+          title
+          projectOwner
+          imageUrl
+          budget
+          currency
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+           deliverables
+          }
+        }
       }
     }
     rfp {

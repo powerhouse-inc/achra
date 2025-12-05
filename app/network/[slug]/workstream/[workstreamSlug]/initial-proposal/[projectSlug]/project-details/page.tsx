@@ -6,6 +6,7 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProjectDetailsBreadcrumb } from '@/modules/project/components'
 import { ProjectCardItem } from '@/modules/project/components/project-card-item/project-card-item'
+import { findProjectBySlug, resolveProjectDeliverables } from '@/modules/project/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-service'
@@ -13,24 +14,29 @@ import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-s
 const BUILDER_ID = 'builder-1'
 
 interface ProjectDetailsPageProps {
-  params: Promise<{ slug: string; workstreamSlug: string }>
+  params: Promise<{ slug: string; workstreamSlug: string; projectSlug: string }>
 }
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
-  const { slug, workstreamSlug } = await params
-
+  const { slug, workstreamSlug, projectSlug } = await params
   const workstream = await getWorkstreamDetails(slug, workstreamSlug)
 
-  if (!workstream) {
-    notFound()
-  }
+  if (!workstream) notFound()
 
-  const proposal = workstream.initialProposal
-  const projects = proposal?.sow?.projects ?? []
-  const builderName = proposal?.author.name ?? 'Unknown'
-  const rawDeliverables = proposal?.sow?.deliverables ?? []
+  const { initialProposal } = workstream
+  const sowProjects = (initialProposal?.sow?.projects ?? []) as ScopeOfWork_Project[]
+  const sowDeliverables = (initialProposal?.sow?.deliverables ??
+    []) as unknown as ScopeOfWork_Deliverable[]
+  const builderName = initialProposal?.author.name ?? 'Unknown'
 
-  const deliverablesMap = new Map(rawDeliverables.map((d) => [d.id, d]))
+  const project = findProjectBySlug(sowProjects, projectSlug)
+
+  if (!project) notFound()
+
+  const projectDeliverables = resolveProjectDeliverables(
+    sowDeliverables,
+    project.scope?.deliverables,
+  )
 
   return (
     <main>
@@ -41,25 +47,13 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
       </PageBreadcrumbContainer>
 
       <PageContent className="gap-8" variant="with-breadcrumb">
-        {projects.map((project) => {
-          const projectDeliverableIds = project.scope?.deliverables ?? []
-
-          const projectDeliverables = projectDeliverableIds.flatMap((id) => {
-            const deliverable = deliverablesMap.get(id)
-            return deliverable ? [deliverable] : []
-          })
-
-          return (
-            <ProjectCardItem
-              key={project.id}
-              project={project as ScopeOfWork_Project}
-              deliverables={projectDeliverables as unknown as ScopeOfWork_Deliverable[]}
-              builderName={builderName}
-              builderId={BUILDER_ID}
-              params={params}
-            />
-          )
-        })}
+        <ProjectCardItem
+          project={project}
+          deliverables={projectDeliverables as unknown as ScopeOfWork_Deliverable[]}
+          builderName={builderName}
+          builderId={BUILDER_ID}
+          params={params}
+        />
       </PageContent>
     </main>
   )

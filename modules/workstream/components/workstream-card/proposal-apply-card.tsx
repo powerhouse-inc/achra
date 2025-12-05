@@ -1,17 +1,24 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
+import Link from 'next/link'
 import { useCallback } from 'react'
+import type { ScopeOfWork_Project } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
+import { slugify } from '@/modules/shared/lib/slug'
 import { cn } from '@/modules/shared/lib/utils'
+import type { Route } from 'next'
 
 interface ProposalApplyCardProps {
+  project?: ScopeOfWork_Project
   title: string
   description: string
   tags: string[]
+  networkSlug: string
+  workstreamSlug: string
 }
 
 const tagVariants = cva(
@@ -41,7 +48,18 @@ function getVariant(tag: string) {
   ]
 }
 
-export default function ProposalApplyCard({ title, description, tags }: ProposalApplyCardProps) {
+export default function ProposalApplyCard({
+  networkSlug,
+  workstreamSlug,
+  title,
+  description,
+  tags,
+  project,
+}: ProposalApplyCardProps) {
+  const projectSlug = slugify(project?.title ?? 'Unknown')
+  const href =
+    `/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route
+
   const itemRenderer = useCallback(
     (tag: string) => (
       <div
@@ -80,23 +98,25 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
   )
 
   return (
-    <Card className="rounded-lg p-0 shadow-sm">
-      <CardContent className="flex gap-4 p-2 sm:p-3">
-        <div className="w-full max-w-[calc(100%-86px)]">
-          <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
-            {title}
+    <Link href={href} className="block">
+      <Card className="cursor-pointer rounded-lg p-0 shadow-sm transition-all hover:shadow-md">
+        <CardContent className="flex gap-4 p-2 sm:p-3">
+          <div className="w-full max-w-[calc(100%-86px)]">
+            <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
+              {title}
+            </div>
+            <div className="line-clamp-2 text-sm/5.5 md:line-clamp-3">{description}</div>
+            <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
+              <OverflowList
+                items={tags}
+                itemRenderer={itemRenderer}
+                overflowRenderer={overflowRenderer}
+              />
+            </div>
           </div>
-          <div className="line-clamp-2 text-sm/5.5 md:line-clamp-3">{description}</div>
-          <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
-            <OverflowList
-              items={tags}
-              itemRenderer={itemRenderer}
-              overflowRenderer={overflowRenderer}
-            />
-          </div>
-        </div>
-        <Button>Apply</Button>
-      </CardContent>
-    </Card>
+          <Button>Apply</Button>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }

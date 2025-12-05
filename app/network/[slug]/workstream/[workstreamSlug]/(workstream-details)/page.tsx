@@ -1,6 +1,7 @@
 import { FilePenLine } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import type { ScopeOfWork_Project } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -34,6 +35,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
   const totalBudget = calculateTotalBudget(workstream)
 
   const initialProposalDeliverables = workstream.initialProposal?.sow?.deliverables ?? []
+  const projects = workstream.initialProposal?.sow?.projects ?? []
 
   return (
     <PageBackground>
@@ -115,6 +117,9 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
               <ProposalCardsGrid
                 deliverables={initialProposalDeliverables}
                 shouldUsePagination={false}
+                projects={projects as ScopeOfWork_Project[]}
+                networkSlug={slug}
+                workstreamSlug={workstreamSlug}
               />
             </>
           ) : (

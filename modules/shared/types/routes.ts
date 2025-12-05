@@ -21,5 +21,5 @@ export type RouteWithDynamicPages = Route<
   | `/network/${NetworkSlug}/builders/ecosystem-actors/${string}`
   | `/network/${NetworkSlug}/builders/core-units/${string}`
   | `/network/${NetworkSlug}/workstream/${string}/initial-proposal`
-  | `/network/${NetworkSlug}/workstream/${string}/initial-proposal/project-details`
+  | `/network/${NetworkSlug}/workstream/${string}/initial-proposal/${string}/project-details`
 >
