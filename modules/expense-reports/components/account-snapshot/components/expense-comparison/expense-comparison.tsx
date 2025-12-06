@@ -9,7 +9,7 @@ interface ExpenseComparisonProps {
 
 function ExpenseComparison({ lineItems }: ExpenseComparisonProps) {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-6 md:gap-4">
       <SectionHeader
         title="Reported Expenses Comparison"
         subtitle="Reported actuals compared to expense and revenue transactions."
@@ -19,6 +19,7 @@ function ExpenseComparison({ lineItems }: ExpenseComparisonProps) {
         }
         level="h2"
       />
+
       <div className="md:hidden">
         <ExpenseComparisonMobile lineItems={lineItems} />
       </div>

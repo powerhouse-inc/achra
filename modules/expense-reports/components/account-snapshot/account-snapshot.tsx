@@ -25,7 +25,7 @@ function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
   } = useAccountsSnapshot(accountSnapshotMock)
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 md:gap-8">
       <FundingOverview transactionHistory={transactionHistory} />
       <ReservesSnapshot
         teamName="Powerhouse"
