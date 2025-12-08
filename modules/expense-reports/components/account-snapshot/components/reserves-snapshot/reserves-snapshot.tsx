@@ -32,8 +32,8 @@ function ReservesSnapshot({
   offChainData,
 }: ReservesSnapshotProps) {
   return (
-    <div>
-      <div className="mb-4 flex flex-col justify-between gap-1 md:flex-row md:items-end md:gap-2">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
         <SectionHeader
           title="Total Reserves"
           subtitle={`On-Chain and off-chain reserves accessible to the ${teamName} Team.`}
@@ -54,77 +54,79 @@ function ReservesSnapshot({
         </div>
       </div>
 
-      <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-8 xl:gap-8">
-        <SimpleStatCard
-          date={startDate}
-          value={balance?.initialBalance}
-          caption="Initial Reserves"
-          className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
-          dynamicChanges
-        />
-        <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
-          <FundChangeRate
-            netChange={
-              typeof balance?.inflow === 'number' && typeof balance.outflow === 'number'
-                ? balance.outflow - balance.inflow * -1
-                : undefined
-            }
-            leftValue={balance?.inflow}
-            leftText="Inflow"
-            rightValue={typeof balance?.outflow === 'number' ? balance.outflow * -1 : undefined}
-            rightValueColor="normal"
-            rightText="Outflow"
-            dynamicChanges={true}
+      <div className="flex flex-col gap-8 md:gap-4">
+        <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-6 xl:gap-8">
+          <SimpleStatCard
+            date={startDate}
+            value={balance?.initialBalance}
+            caption="Initial Reserves"
+            className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
+            dynamicChanges
+          />
+          <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
+            <FundChangeRate
+              netChange={
+                typeof balance?.inflow === 'number' && typeof balance.outflow === 'number'
+                  ? balance.outflow - balance.inflow * -1
+                  : undefined
+              }
+              leftValue={balance?.inflow}
+              leftText="Inflow"
+              rightValue={typeof balance?.outflow === 'number' ? balance.outflow * -1 : undefined}
+              rightValueColor="normal"
+              rightText="Outflow"
+              dynamicChanges={true}
+            />
+          </div>
+          <SimpleStatCard
+            date={endDate}
+            value={balance?.newBalance}
+            hasEqualSign
+            caption="New Reserves"
+            className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
+            dynamicChanges
           />
         </div>
-        <SimpleStatCard
-          date={endDate}
-          value={balance?.newBalance}
-          hasEqualSign
-          caption="New Reserves"
-          className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
-          dynamicChanges
-        />
-      </div>
 
-      {/* on chain sub-section */}
-      <div className="mt-6">
-        <SectionHeader
-          title="On Chain Reserves"
-          subtitle={`Unspent On-Chain reserves to the ${teamName} Team.`}
-          tooltip={
-            <>
-              Track and analyze the movement of <br /> On-Chain assets.
-            </>
-          }
-          level="h3"
-        />
+        {/* on chain sub-section */}
+        <div className="flex flex-col gap-6 md:gap-4">
+          <SectionHeader
+            title="On Chain Reserves"
+            subtitle={`Unspent On-Chain reserves to the ${teamName} Team.`}
+            tooltip={
+              <>
+                Track and analyze the movement of <br /> On-Chain assets.
+              </>
+            }
+            level="h3"
+          />
 
-        <div className="flex flex-col gap-2">
-          {onChainData?.map((account) => (
-            <ReserveCard key={account.id} account={account} currency="USD" />
-          ))}
+          <div className="flex flex-col gap-2">
+            {onChainData?.map((account) => (
+              <ReserveCard key={account.id} account={account} currency="USD" />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* off chain sub-section */}
-      <div className={cn('mt-6', { 'opacity-30': !includeOffChain })}>
-        <SectionHeader
-          title="Off Chain Reserves"
-          subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
-          tooltip={
-            <>
-              Discover essential details about the <br />
-              off-chain balances.
-            </>
-          }
-          level="h3"
-        />
+        {/* off chain sub-section */}
+        <div className={cn('flex flex-col gap-6 md:gap-4', { 'opacity-30': !includeOffChain })}>
+          <SectionHeader
+            title="Off Chain Reserves"
+            subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
+            tooltip={
+              <>
+                Discover essential details about the <br />
+                off-chain balances.
+              </>
+            }
+            level="h3"
+          />
 
-        <div className="flex flex-col gap-2">
-          {offChainData?.map((account) => (
-            <ReserveCard key={account.id} account={account} currency="USD" />
-          ))}
+          <div className="flex flex-col gap-2">
+            {offChainData?.map((account) => (
+              <ReserveCard key={account.id} account={account} currency="USD" />
+            ))}
+          </div>
         </div>
       </div>
     </div>
