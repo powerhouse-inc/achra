@@ -34,7 +34,7 @@ query Workstreams($filter: WorkstreamsFilter) {
           title
           description
         }
-            projects {
+        projects {
           id
           code
           abstract
