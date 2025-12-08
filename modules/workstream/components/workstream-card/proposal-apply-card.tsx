@@ -3,7 +3,7 @@
 import { cva } from 'class-variance-authority'
 import Link from 'next/link'
 import { useCallback } from 'react'
-import type { ScopeOfWork_Project } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
 import { buttonVariants } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -13,7 +13,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 interface ProposalApplyCardProps {
-  project?: ScopeOfWork_Project
+  project?: WorkstreamDetailsProject
   title: string
   description: string
   tags: string[]

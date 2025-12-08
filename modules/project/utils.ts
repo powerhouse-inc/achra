@@ -16,6 +16,7 @@ export const formatSlugToTitle = (slug: string): string => {
 /**
  * Finds a specific project within the list based on the title slug.
  */
+// TODO: Remove this function, once the projectSlug from api is ready to filter the project
 export function findProjectBySlug(
   projects: ScopeOfWork_Project[] | undefined | null,
   targetSlug: string,

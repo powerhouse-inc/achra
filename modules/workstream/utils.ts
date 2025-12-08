@@ -1,4 +1,4 @@
-import type { ScopeOfWork_Project } from '../__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '../project/types'
 
 /**
  * Finds the project that contains the deliverable ID
@@ -6,6 +6,9 @@ import type { ScopeOfWork_Project } from '../__generated__/graphql/switchboard-g
  * @param projects The list of projects
  * @returns The project that contains the deliverable ID
  */
-export function getProjectByDeliverableId(deliverableId: string, projects: ScopeOfWork_Project[]) {
+export function getProjectByDeliverableId(
+  deliverableId: string,
+  projects: WorkstreamDetailsProject[],
+) {
   return projects.find((project) => project.scope?.deliverables.includes(deliverableId))
 }

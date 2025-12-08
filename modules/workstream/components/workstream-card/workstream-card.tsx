@@ -2,7 +2,6 @@ import { FilePenLine } from 'lucide-react'
 import type {
   FullQueryWorkstream,
   Network,
-  ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
@@ -113,7 +112,7 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
 
             <ProposalCardsGrid
               deliverables={initialProposalDeliverables}
-              projects={projects as ScopeOfWork_Project[]}
+              projects={projects}
               networkSlug={networkSlug}
               workstreamSlug={workstreamSlug}
             />

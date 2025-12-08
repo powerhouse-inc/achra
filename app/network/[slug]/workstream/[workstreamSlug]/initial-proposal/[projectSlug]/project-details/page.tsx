@@ -6,10 +6,10 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProjectDetailsBreadcrumb } from '@/modules/project/components'
 import { ProjectCardItem } from '@/modules/project/components/project-card-item/project-card-item'
+import { getWorkstreamProjects } from '@/modules/project/services/workstream-projects-services'
 import { findProjectBySlug, resolveProjectDeliverables } from '@/modules/project/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-service'
 // Improve this when its ready to be used
 const BUILDER_ID = 'builder-1'
 
@@ -19,7 +19,7 @@ interface ProjectDetailsPageProps {
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
   const { slug, workstreamSlug, projectSlug } = await params
-  const workstream = await getWorkstreamDetails(slug, workstreamSlug)
+  const workstream = await getWorkstreamProjects(slug, workstreamSlug)
 
   if (!workstream) notFound()
 

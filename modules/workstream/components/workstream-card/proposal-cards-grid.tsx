@@ -3,10 +3,8 @@
 import { useState } from 'react'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type {
-  ScopeOfWork_Project,
-  Sow_Deliverable,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import { createDeliverableTitle } from '../../lib/deliverable-helpers'
@@ -16,7 +14,7 @@ import ProposalApplyCard from './proposal-apply-card'
 interface ProposalCardsGridProps {
   deliverables: Array<Pick<Sow_Deliverable, 'id' | 'code' | 'title' | 'description'>>
   shouldUsePagination?: boolean
-  projects: ScopeOfWork_Project[]
+  projects: WorkstreamDetailsProject[]
   networkSlug: string
   workstreamSlug: string
 }

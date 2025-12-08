@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import type {
   ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableSetStatus,
+  ScopeOfWork_KeyResult,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
@@ -44,7 +45,9 @@ export function ProjectCardItem({
 
   const totalKeyResults = allKeyResults.length
 
-  const completedKeyResults = allKeyResults.filter((kr) => kr.link && kr.link.trim() !== '').length
+  const completedKeyResults = allKeyResults.filter(
+    (kr: ScopeOfWork_KeyResult) => kr.link && kr.link.trim() !== '',
+  ).length
 
   return (
     <Card className="bg-background gap-0 border-none p-0 sm:mt-2.25 md:-mt-2.75">
