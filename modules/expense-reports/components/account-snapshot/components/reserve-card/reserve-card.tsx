@@ -56,11 +56,18 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
             )}
             asChild
           >
-            <div className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:py-2 md:pr-4 md:pl-2 lg:px-4">
+            <div className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:gap-0 md:px-0 md:py-2">
               {/* name area */}
-              <div className="flex w-full items-center justify-between pt-3 md:w-42 md:px-2 lg:w-50 lg:pl-4 xl:w-75">
+              <div
+                className={cn(
+                  'flex w-full items-center justify-between md:w-42 md:min-w-42 md:px-2 lg:w-70 lg:min-w-70 lg:px-4',
+                  {
+                    'py-2.5': isGroup,
+                  },
+                )}
+              >
                 {isGroup ? (
-                  <div className="text-popover-foreground text-sm/5.5 font-semibold">
+                  <div className="text-popover-foreground text-sm/5.5 font-semibold lg:text-base/6">
                     {account.accountLabel}
                   </div>
                 ) : (
@@ -82,12 +89,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 label="Initial Balance"
                 value={initialBalance}
                 currency={currency}
-                className={cn(
-                  isGroup ? 'mt-6' : 'mt-4',
-                  'md:mt-0 md:w-[14%] md:px-0.5 md:py-3',
-                  'lg:w-[18.6%] lg:px-4 lg:py-2',
-                  'xl:w-[16.6%] 2xl:w-[17.3%]',
-                )}
+                className={cn('mt-2', 'md:mt-0 md:w-25 lg:w-40 lg:min-w-40 xl:w-50 xl:min-w-50')}
               />
 
               {/* inflow */}
@@ -96,11 +98,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 variant="outline"
                 value={inflow}
                 currency={currency}
-                className={cn(
-                  'md:mt-0 md:w-[14%] md:px-0.5 md:py-3',
-                  'lg:w-[18.6%] lg:px-4 lg:py-2',
-                  'xl:w-[16.6%] 2xl:w-[17.3%]',
-                )}
+                className={cn('md:w-full')}
               />
 
               {/* outflow */}
@@ -109,11 +107,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 variant="outline"
                 value={outflow}
                 currency={currency}
-                className={cn(
-                  'md:mt-0 md:w-[14%] md:px-0.5 md:py-3',
-                  'lg:w-[18.6%] lg:px-4 lg:py-2',
-                  'xl:w-[16.6%] 2xl:w-[17.3%]',
-                )}
+                className={cn('md:w-full')}
               />
 
               {/* new balance */}
@@ -121,14 +115,10 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 label="New Balance"
                 value={newBalance}
                 currency={currency}
-                className={cn(
-                  'md:mt-0 md:w-[14%] md:px-0.5 md:py-3',
-                  'lg:w-[18.6%] lg:px-4 lg:py-2',
-                  'xl:w-[16.6%] 2xl:w-[17.3%]',
-                )}
+                className={cn('md:w-full md:items-end')}
               />
 
-              <div className="hidden w-12 items-center px-2 py-4.5 md:flex lg:w-auto lg:px-4.75 lg:py-2">
+              <div className="hidden w-12 items-center justify-center px-2 py-4.5 md:flex md:px-4 lg:w-16 lg:min-w-16 xl:w-26 xl:min-w-26">
                 <ChevronDownIcon
                   data-type="icon"
                   className="text-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200"
