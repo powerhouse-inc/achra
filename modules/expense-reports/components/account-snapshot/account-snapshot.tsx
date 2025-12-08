@@ -1,6 +1,7 @@
 'use client'
 
 import { accountSnapshotMock } from '../../mocks/account-snapshot-mocks'
+import { ExpenseComparison } from './components/expense-comparison'
 import { FundingOverview } from './components/funding-overview'
 import { ReservesSnapshot } from './components/reserves-snapshot'
 import useAccountsSnapshot from './useAccountsSnapshot'
@@ -10,12 +11,33 @@ interface AccountSnapshotProps {
 }
 
 function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
-  const { transactionHistory } = useAccountsSnapshot(accountSnapshotMock)
+  const {
+    transactionHistory,
+    includeOffChain,
+    toggleIncludeOffChain,
+    startDate,
+    endDate,
+    cuReservesBalance,
+    onChainData,
+    offChainData,
+    hasActualsComparison,
+    expenseComparisonLineItems,
+  } = useAccountsSnapshot(accountSnapshotMock)
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 md:gap-8">
       <FundingOverview transactionHistory={transactionHistory} />
-      <ReservesSnapshot teamName="Powerhouse" />
+      <ReservesSnapshot
+        teamName="Powerhouse"
+        includeOffChain={includeOffChain}
+        toggleIncludeOffChain={toggleIncludeOffChain}
+        startDate={startDate}
+        endDate={endDate}
+        balance={cuReservesBalance}
+        onChainData={onChainData}
+        offChainData={offChainData}
+      />
+      {hasActualsComparison && <ExpenseComparison lineItems={expenseComparisonLineItems} />}
     </div>
   )
 }

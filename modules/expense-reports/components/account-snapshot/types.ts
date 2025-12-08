@@ -74,3 +74,11 @@ export interface Snapshots {
 export interface UIReservesData extends SnapshotAccount {
   children?: SnapshotAccount[]
 }
+
+export type ExpenseComparisonLineItem = {
+  reportedActuals: number
+  onChainOnly: number
+  onChainDifference: number
+  offChainIncluded?: number
+  offChainDifference?: number
+} & ({ isTotals: true } | { isTotals?: false; month: string })
