@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
-// import { TeamRole } from '@/modules/shared/types'
 import { OperatorChipEnum } from '../types'
 
 interface OperatorChipProps {

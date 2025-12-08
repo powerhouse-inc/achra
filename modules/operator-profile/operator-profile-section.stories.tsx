@@ -3,7 +3,7 @@ import { OperatorProfileSection } from './operator-profile-section'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Modules/OperatorProfile/OperatorProfileSection',
+  title: 'Modules/Services/Section/OperatorProfileSection',
   component: OperatorProfileSection,
   parameters: { layout: 'centered' },
 } satisfies Meta<typeof OperatorProfileSection>
