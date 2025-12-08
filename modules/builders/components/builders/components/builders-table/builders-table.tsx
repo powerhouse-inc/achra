@@ -24,10 +24,15 @@ export interface BuildersTableProps {
 }
 
 export function BuildersTable({ builders, className }: BuildersTableProps) {
-  const { headersSort, sortedBuilders, proccesedBuildersTableColumns, handleSortClick } =
-    useBuildersTable({
-      builders,
-    })
+  const {
+    headersSort,
+    sortedBuilders,
+    proccesedBuildersTableColumns,
+    handleSortClick,
+    handleRowClick,
+  } = useBuildersTable({
+    builders,
+  })
 
   return (
     <Table variant="pills" className={cn('w-full', className)}>
@@ -73,6 +78,9 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
           <TableRow
             key={builder.id}
             className="flex h-fit w-full cursor-pointer items-center justify-between border-b-0! p-4 xl:px-6"
+            onClick={(event) => {
+              handleRowClick(event, builder.id)
+            }}
             aria-label={`View ${builder.name} builder`}
           >
             <TableCell className="inline-block h-fit w-[25%] p-0!">

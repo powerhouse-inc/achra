@@ -1,4 +1,8 @@
+'use client'
+
 import { ArrowRight } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { type MouseEvent, useCallback } from 'react'
 import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
 import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip'
@@ -9,6 +13,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import type { Team } from '@/modules/shared/types/team'
 import { LastModified } from '../last-modified/last-modified'
 import { Links } from '../links'
+import type { Route } from 'next'
 
 export interface BuildersListProps {
   builders: Team[]
@@ -16,10 +21,31 @@ export interface BuildersListProps {
 }
 
 export function BuildersList({ builders, className }: BuildersListProps) {
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleCardClick = useCallback(
+    (event: MouseEvent<HTMLElement>, id: string) => {
+      const target = event.target as HTMLElement
+
+      if (target.closest('a')) return
+
+      const nextPath = `${pathname.replace(/\/$/, '')}/${id}` as Route
+      router.push(nextPath)
+    },
+    [pathname, router],
+  )
+
   return (
     <div className={cn('flex w-full flex-col gap-2', className)}>
       {builders.map((builder) => (
-        <Card key={builder.id} className="w-full gap-2 overflow-hidden border-none pt-2 pb-1">
+        <Card
+          key={builder.id}
+          className="w-full gap-2 overflow-hidden border-none pt-2 pb-1"
+          onClick={(event) => {
+            handleCardClick(event, builder.id)
+          }}
+        >
           <CardContent className="flex items-end justify-between px-2 md:grid md:grid-cols-[30%_17%_28%_80px]">
             <BuilderProfile
               name={builder.name}
