@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 
 export function BuildersHeader() {
-  const [showFullDescription, setShowFullDescription] = useState(true)
+  const [showFullDescription, setShowFullDescription] = useState(false)
 
   const handleToogleDescription = () => {
     setShowFullDescription(!showFullDescription)
