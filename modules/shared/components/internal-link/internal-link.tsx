@@ -1,16 +1,12 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { Button, type buttonVariants } from '@/shared/components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
-import type { VariantProps } from 'class-variance-authority'
 import type { Route } from 'next'
 
-interface InternalLinkProps {
+interface InternalLinkProps extends React.ComponentProps<typeof Button> {
   href: Route
-  children?: React.ReactNode
-  className?: string
-  variant?: VariantProps<typeof buttonVariants>['variant']
 }
 
 export function InternalLink({
