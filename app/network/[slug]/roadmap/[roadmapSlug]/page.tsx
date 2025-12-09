@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { RoadmapDetailsContent } from '@/modules/roadmap/components/roadmap-details-content'
 import { getRoadmapDetailsData } from '@/modules/roadmap/services/roadmaps'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import type { Route } from 'next'
 
 interface RoadmapPageProps {
   params: Promise<{ slug: string; roadmapSlug: string }>
@@ -11,6 +13,8 @@ interface RoadmapPageProps {
 
 export default async function RoadmapPage({ params }: RoadmapPageProps) {
   const { slug: networkSlug, roadmapSlug } = await params
+  const networkData = await getNetworkBySlug(networkSlug)
+  const networkName = networkData?.name ?? 'Unknown'
 
   const { roadmap, deliverables, contributors, projects } = await getRoadmapDetailsData(
     networkSlug,
@@ -22,12 +26,11 @@ export default async function RoadmapPage({ params }: RoadmapPageProps) {
   }
 
   const items: BreadcrumbItemNavigation[] = [
-    { label: 'Networks', href: '/networks' },
-    { label: 'Powerhouse', href: '/network/powerhouse' },
-    { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
+    { label: networkName, href: `/network/${networkSlug}` as Route },
+    { label: 'Roadmaps', href: `/network/${networkSlug}/roadmaps` as Route },
     {
       label: roadmap.title,
-      href: `/network/powerhouse/roadmap/${roadmapSlug}`,
+      href: `/network/${networkSlug}/roadmap/${roadmapSlug}` as Route,
     },
   ]
 
