@@ -41,7 +41,7 @@ export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsMod
         <DialogPrimitive.Content
           className={cn(
             // mobile
-            'no-scrollbar top-0 left-0 z-180 mb-0 h-screen max-h-full! w-screen max-w-full translate-x-0 translate-y-0 content-start items-start gap-0 overflow-hidden overflow-y-auto rounded-none p-0',
+            'no-scrollbar top-0 left-0 z-180 mb-0 h-screen max-h-full! w-screen max-w-full translate-x-0 translate-y-0 content-start items-start gap-0 overflow-hidden overscroll-contain rounded-none p-0',
             'sm:top-[50%] sm:left-[50%] sm:mb-12 sm:h-auto sm:w-full sm:max-w-xl! sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!',
             // Base styles from DialogContent
             'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed grid border shadow-lg duration-200',
