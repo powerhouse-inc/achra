@@ -42,7 +42,7 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
         <BuilderFilters />
         <ErrorBoundaryWithPresets>
           <Suspense fallback={<BuildersSkeleton />} key={searchParamsString}>
-            <Builders />
+            <Builders networkSlug={slug} />
           </Suspense>
         </ErrorBoundaryWithPresets>
       </PageContent>
