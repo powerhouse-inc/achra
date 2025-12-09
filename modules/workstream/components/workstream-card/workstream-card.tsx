@@ -3,6 +3,7 @@ import type {
   FullQueryWorkstream,
   Network,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
@@ -21,9 +22,10 @@ import type { Route } from 'next'
 
 interface WorkstreamCardProps {
   workstream: FullQueryWorkstream
+  projects: WorkstreamDetailsProject[]
 }
 
-export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
+export default function WorkstreamCard({ workstream, projects }: WorkstreamCardProps) {
   const networkSlug = slugify(workstream.network?.name ?? 'Unknown')
   const workstreamSlug = workstream.slug ?? 'unknown'
 
@@ -31,7 +33,6 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
   const totalBudget = calculateTotalBudget(workstream)
 
   const initialProposalDeliverables = workstream.initialProposal?.sow?.deliverables ?? []
-
   return (
     <Card className="gap-0 overflow-hidden p-0">
       <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
@@ -110,7 +111,12 @@ export default function WorkstreamCard({ workstream }: WorkstreamCardProps) {
               </p>
             )}
 
-            <ProposalCardsGrid deliverables={initialProposalDeliverables} />
+            <ProposalCardsGrid
+              deliverables={initialProposalDeliverables}
+              projects={projects}
+              networkSlug={networkSlug}
+              workstreamSlug={workstreamSlug}
+            />
           </>
         ) : (
           <NoDeliverables />

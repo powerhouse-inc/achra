@@ -3,6 +3,7 @@ import {
   type FullQueryWorkstream,
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getWorkstreamsProjects } from '@/modules/project/services/workstream-projects-services'
 import { getWorkstreams } from '../../services/workstream-service'
 import { WorkstreamCard } from '../workstream-card'
 import { WorkstreamEmpty } from '../workstream-empty'
@@ -45,10 +46,28 @@ async function WorkstreamServerList({ params, searchParams }: WorkstreamServerLi
     return <WorkstreamEmpty hasActiveFilters={hasActiveFilters} />
   }
 
+  const projectsMap = await getWorkstreamsProjects({
+    networkSlugs: networkFilter,
+  })
+
+  const workstreamsWithProjects = workstreams.map((workstream) => {
+    const workstreamSlug = workstream.slug ?? 'unknown'
+    const projects = projectsMap.get(workstreamSlug) ?? []
+
+    return {
+      workstream,
+      projects,
+    }
+  })
+
   return (
     <div className="flex flex-col gap-8">
-      {workstreams.map((workstream) => (
-        <WorkstreamCard key={workstream.slug} workstream={workstream as FullQueryWorkstream} />
+      {workstreamsWithProjects.map(({ workstream, projects }) => (
+        <WorkstreamCard
+          key={workstream.slug}
+          workstream={workstream as FullQueryWorkstream}
+          projects={projects}
+        />
       ))}
     </div>
   )
