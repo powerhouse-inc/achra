@@ -1,5 +1,6 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { ArrowLeft, Search, X } from 'lucide-react'
+import SimpleBar from 'simplebar-react'
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
@@ -112,7 +113,7 @@ export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsMod
             </div>
           </DialogHeader>
 
-          <div className="no-scrollbar overflow-y-auto px-4 py-3 sm:h-150 sm:px-4 sm:py-3">
+          <SimpleBar className="px-4 py-3 sm:h-150 sm:px-4 sm:py-3" autoHide={false}>
             {filteredDeliverables.length === 0 ? (
               <div className="flex h-full items-center justify-center">
                 <p className="text-muted-foreground text-lg">Results not found...</p>
@@ -143,7 +144,7 @@ export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsMod
                 ))}
               </div>
             )}
-          </div>
+          </SimpleBar>
         </DialogPrimitive.Content>
       </DialogPortal>
     </Dialog>
