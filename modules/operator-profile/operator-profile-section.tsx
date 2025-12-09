@@ -30,7 +30,7 @@ export function OperatorProfileSection() {
 
       <div className="flex flex-col gap-4 lg:flex-1">
         <h3 className="text-lg leading-[120%] font-bold">Who we are</h3>
-        <p>
+        <p className="text-sm/5.5 font-normal xl:text-base/6">
           Lorem ipsum dolor sit amet consectetur. Ac proin mi netus dui tempus mi massa duis nam.
           Turpis rhoncus viverra eget urna eleifend senectus massa sit. Netus felis amet ipsum
           hendrerit diam arcu. Sed amet quam pellentesque neque massa lectus. Tortor nisl a nec odio
