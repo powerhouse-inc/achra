@@ -89,7 +89,7 @@ type HoverPopoverTriggerProps = ComponentProps<typeof PopoverTrigger>
 const HoverPopoverTrigger = forwardRef<
   ComponentRef<typeof PopoverTrigger>,
   HoverPopoverTriggerProps
->(({ onMouseEnter, onMouseLeave, ...props }, ref) => {
+>(({ onMouseEnter, onMouseLeave, onClick, ...props }, ref) => {
   const { handleMouseEnter, handleMouseLeave } = useHoverPopoverContext('HoverPopover.Trigger')
 
   const handleTriggerMouseEnter: HoverPopoverTriggerProps['onMouseEnter'] = (event) => {
@@ -106,12 +106,19 @@ const HoverPopoverTrigger = forwardRef<
     }
   }
 
+  const handleTriggerClick: HoverPopoverTriggerProps['onClick'] = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    onClick?.(event)
+  }
+
   return (
     <PopoverTrigger
       ref={ref}
       {...props}
       onMouseEnter={handleTriggerMouseEnter}
       onMouseLeave={handleTriggerMouseLeave}
+      onClick={handleTriggerClick}
     />
   )
 })
@@ -123,7 +130,7 @@ type HoverPopoverContentProps = ComponentProps<typeof PopoverContent>
 const HoverPopoverContent = forwardRef<
   ComponentRef<typeof PopoverContent>,
   HoverPopoverContentProps
->(({ onMouseEnter, onMouseLeave, ...props }, ref) => {
+>(({ onMouseEnter, onMouseLeave, onClick, ...props }, ref) => {
   const { handleMouseEnter, handleMouseLeave } = useHoverPopoverContext('HoverPopover.Content')
 
   const handleContentMouseEnter: HoverPopoverContentProps['onMouseEnter'] = (event) => {
@@ -140,12 +147,19 @@ const HoverPopoverContent = forwardRef<
     }
   }
 
+  const handleContentClick: HoverPopoverContentProps['onClick'] = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    onClick?.(event)
+  }
+
   return (
     <PopoverContent
       ref={ref}
       {...props}
       onMouseEnter={handleContentMouseEnter}
       onMouseLeave={handleContentMouseLeave}
+      onClick={handleContentClick}
     />
   )
 })

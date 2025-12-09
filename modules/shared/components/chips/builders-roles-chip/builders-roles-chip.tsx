@@ -4,9 +4,10 @@ import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersRolesChipProps {
   role: TeamRole
+  className?: string
 }
 
-export default function BuildersRolesChip({ role }: BuildersRolesChipProps) {
+export default function BuildersRolesChip({ role, className }: BuildersRolesChipProps) {
   const { label, color } = useMemo(() => {
     switch (role) {
       case TeamRole.ActiveEcosystemActor:
@@ -63,7 +64,7 @@ export default function BuildersRolesChip({ role }: BuildersRolesChipProps) {
   }, [role])
 
   return (
-    <GenericChip variant="underline" color={color}>
+    <GenericChip variant="underline" color={color} className={className}>
       {label}
     </GenericChip>
   )

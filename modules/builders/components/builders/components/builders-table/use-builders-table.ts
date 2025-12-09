@@ -1,9 +1,7 @@
-import { usePathname, useRouter } from 'next/navigation'
-import { type MouseEvent, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import type { Team } from '@/modules/shared/types/team'
 import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
-import type { Route } from 'next'
 
 interface UseBuildersTableProps {
   builders: Team[]
@@ -24,8 +22,6 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
   const isDesktop = useMediaQuery({ from: 'lg' })
-  const pathname = usePathname()
-  const router = useRouter()
 
   const proccesedBuildersTableColumns: Array<Omit<BuildersTableColumn, 'shortHeader'>> =
     useMemo(() => {
@@ -105,21 +101,10 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
 
   const sortedBuilders = useMemo(() => sortBuilders(builders), [builders, sortBuilders])
 
-  const handleRowClick = useCallback(
-    (event: MouseEvent<HTMLTableRowElement>, id: string) => {
-      if (event.target instanceof HTMLAnchorElement) return
-
-      const nextPath = `${pathname.replace(/\/$/, '')}/${id}` as Route
-      router.push(nextPath)
-    },
-    [pathname, router],
-  )
-
   return {
     proccesedBuildersTableColumns,
     headersSort,
     sortedBuilders,
     handleSortClick,
-    handleRowClick,
   }
 }

@@ -12,6 +12,7 @@ import Website from '@/modules/shared/components/svgs/website.svg'
 import Twitter from '@/modules/shared/components/svgs/x.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import type { Route } from 'next'
+import type { MouseEvent } from 'react'
 
 const links = [
   {
@@ -42,6 +43,10 @@ const links = [
 ]
 
 export function Links() {
+  const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.stopPropagation()
+  }
+
   return (
     <HoverPopover>
       <HoverPopoverTrigger asChild>
@@ -62,6 +67,7 @@ export function Links() {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:bg-accent text-foreground flex items-center gap-2 rounded-sm p-2 text-sm/5.5"
+              onClick={handleLinkClick}
             >
               {link.icon}
               {link.label}
