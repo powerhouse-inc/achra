@@ -3407,6 +3407,20 @@ export type AllNetworksQueryVariables = Exact<{
 
 export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, icon?: string | null, logo?: string | null, darkThemeIcon?: string | null, darkThemeLogo?: string | null, category?: Array<NetworkCategory> | null, description?: string | null, discord?: string | null, github?: string | null, logoBig?: string | null, website?: string | null, x?: string | null, youtube?: string | null } | null }> };
 
+export type ProjectsQueryVariables = Exact<{
+  filter?: InputMaybe<WorkstreamsFilter>;
+}>;
+
+
+export type ProjectsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
+
+export type WorkstreamProjectQueryVariables = Exact<{
+  filter: WorkstreamFilter;
+}>;
+
+
+export type WorkstreamProjectQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
+
 export type RfpByWorkstreamQueryVariables = Exact<{
   filter: WorkstreamFilter;
 }>;
@@ -3512,6 +3526,228 @@ useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => 
 
 
 useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
+
+export const ProjectsDocument = `
+    query Projects($filter: WorkstreamsFilter) {
+  workstreams(filter: $filter) {
+    slug
+    initialProposal {
+      status
+      author {
+        id
+        name
+      }
+      sow {
+        description
+        title
+        status
+        projects {
+          abstract
+          code
+          currency
+          id
+          imageUrl
+          projectOwner
+          title
+          budget
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+            deliverables
+          }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
+          status
+          keyResults {
+            id
+            link
+            title
+          }
+          workProgress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+          budgetAnchor {
+            unitCost
+            unit
+            quantity
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useProjectsQuery = <
+      TData = ProjectsQuery,
+      TError = unknown
+    >(
+      variables?: ProjectsQueryVariables,
+      options?: Omit<UseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ProjectsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['Projects'] : ['Projects', variables],
+    queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
+    ...options
+  }
+    )};
+
+useProjectsQuery.getKey = (variables?: ProjectsQueryVariables) => variables === undefined ? ['Projects'] : ['Projects', variables];
+
+export const useSuspenseProjectsQuery = <
+      TData = ProjectsQuery,
+      TError = unknown
+    >(
+      variables?: ProjectsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ProjectsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ProjectsSuspense'] : ['ProjectsSuspense', variables],
+    queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseProjectsQuery.getKey = (variables?: ProjectsQueryVariables) => variables === undefined ? ['ProjectsSuspense'] : ['ProjectsSuspense', variables];
+
+
+useProjectsQuery.fetcher = (variables?: ProjectsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables, options);
+
+export const WorkstreamProjectDocument = `
+    query WorkstreamProject($filter: WorkstreamFilter!) {
+  workstream(filter: $filter) {
+    title
+    status
+    slug
+    initialProposal {
+      status
+      author {
+        id
+        name
+      }
+      sow {
+        description
+        title
+        status
+        projects {
+          abstract
+          code
+          currency
+          id
+          imageUrl
+          projectOwner
+          title
+          budget
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+            deliverables
+          }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
+          status
+          keyResults {
+            id
+            link
+            title
+          }
+          workProgress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+          budgetAnchor {
+            unitCost
+            unit
+            quantity
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useWorkstreamProjectQuery = <
+      TData = WorkstreamProjectQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamProjectQueryVariables,
+      options?: Omit<UseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<WorkstreamProjectQuery, TError, TData>(
+      {
+    queryKey: ['WorkstreamProject', variables],
+    queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
+    ...options
+  }
+    )};
+
+useWorkstreamProjectQuery.getKey = (variables: WorkstreamProjectQueryVariables) => ['WorkstreamProject', variables];
+
+export const useSuspenseWorkstreamProjectQuery = <
+      TData = WorkstreamProjectQuery,
+      TError = unknown
+    >(
+      variables: WorkstreamProjectQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<WorkstreamProjectQuery, TError, TData>(
+      {
+    queryKey: ['WorkstreamProjectSuspense', variables],
+    queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseWorkstreamProjectQuery.getKey = (variables: WorkstreamProjectQueryVariables) => ['WorkstreamProjectSuspense', variables];
+
+
+useWorkstreamProjectQuery.fetcher = (variables: WorkstreamProjectQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables, options);
 
 export const RfpByWorkstreamDocument = `
     query RfpByWorkstream($filter: WorkstreamFilter!) {

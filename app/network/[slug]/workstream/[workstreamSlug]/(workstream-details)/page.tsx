@@ -34,6 +34,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
   const totalBudget = calculateTotalBudget(workstream)
 
   const initialProposalDeliverables = workstream.initialProposal?.sow?.deliverables ?? []
+  const projects = workstream.initialProposal?.sow?.projects ?? []
 
   return (
     <PageBackground>
@@ -115,6 +116,9 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
               <ProposalCardsGrid
                 deliverables={initialProposalDeliverables}
                 shouldUsePagination={false}
+                projects={projects}
+                networkSlug={slug}
+                workstreamSlug={workstreamSlug}
               />
             </>
           ) : (
