@@ -1,7 +1,7 @@
+import { differenceInMonths, format, parse } from 'date-fns'
 import { useMemo, useState } from 'react'
-// import { buildExpensesComparisonRows } from './utils/expenseComparisonUtils'
 import { getReserveAccounts, transactionSort } from './utils/reserveUtils'
-import type { Snapshots, Token } from './types'
+import type { ExpenseComparisonLineItem, Snapshots, Token } from './types'
 
 const useAccountsSnapshot = (snapshot: Snapshots) => {
   // TODO: the `setSelectedTo` is not used yet, but it will be used to filter the data
@@ -88,32 +88,65 @@ const useAccountsSnapshot = (snapshot: Snapshots) => {
   const hasOffChainData = offChainData.length > 0
 
   const hasActualsComparison = snapshot.actualsComparison.length > 0
-  // const actualsComparison = useMemo(
-  //   () =>
-  //     snapshot.actualsComparison
-  //       .filter((comparison) => comparison.currency === selectedToken)
-  //       .sort(
-  //         (a, b) =>
-  //           DateTime.fromFormat(a.month, 'yyyy/MM').diff(DateTime.fromFormat(b.month, 'yyyy/MM'))
-  //             .months,
-  //       ),
-  //   [selectedToken, snapshot.actualsComparison],
-  // )
+  const actualsComparison = useMemo(
+    () =>
+      snapshot.actualsComparison
+        .filter((comparison) => comparison.currency === selectedToken)
+        .sort(
+          (a, b) =>
+            differenceInMonths(
+              parse(a.month, 'yyyy/MM', new Date()),
+              parse(b.month, 'yyyy/MM', new Date()),
+            ) * -1,
+        ),
+    [selectedToken, snapshot.actualsComparison],
+  )
 
-  // const isTablet = useMediaQuery({ to: 'lg' })
-  // const expensesComparisonRows = useMemo(
-  //   () =>
-  //     buildExpensesComparisonRows(
-  //       actualsComparison,
-  //       selectedToken,
-  //       snapshot.period,
-  //       hasOffChainData,
-  //       {
-  //         isTablet,
-  //       },
-  //     ),
-  //   [actualsComparison, hasOffChainData, isTablet, selectedToken, snapshot.period],
-  // )
+  // calculate the expense comparison line items
+  const expenseComparisonLineItems: ExpenseComparisonLineItem[] = useMemo(() => {
+    const lineItems = actualsComparison.map((comparison) => {
+      return {
+        isTotals: false,
+        month: format(parse(comparison.month, 'yyyy/MM', new Date()), 'MMM-yyyy'),
+        reportedActuals: comparison.reportedActuals ?? 0,
+        onChainOnly: comparison.netExpenses.onChainOnly.amount ?? 0,
+        onChainDifference: (comparison.netExpenses.onChainOnly.difference ?? 0) * 100,
+        offChainIncluded: comparison.netExpenses.offChainIncluded.amount ?? 0,
+        offChainDifference: (comparison.netExpenses.offChainIncluded.difference ?? 0) * 100,
+      }
+    })
+
+    if (lineItems.length <= 1) {
+      return lineItems
+    }
+
+    const totalReportedActuals = lineItems.reduce((acc, item) => acc + item.reportedActuals, 0)
+    const totalOnChainOnly = lineItems.reduce((acc, item) => acc + item.onChainOnly, 0)
+    const totalOffChainIncluded = lineItems.reduce((acc, item) => acc + item.offChainIncluded, 0)
+
+    const totalOnChainDifference =
+      totalReportedActuals === 0 || totalOnChainOnly === 0
+        ? 0
+        : (Math.abs(totalOnChainOnly) / Math.abs(totalReportedActuals) - 1) * 100
+
+    const totalOffChainDifference =
+      totalReportedActuals === 0 || totalOffChainIncluded === 0
+        ? 0
+        : (Math.abs(totalOffChainIncluded) / Math.abs(totalReportedActuals) - 1) * 100
+
+    return [
+      ...lineItems,
+      {
+        isTotals: true,
+        reportedActuals: totalReportedActuals,
+        onChainOnly: totalOnChainOnly,
+        onChainDifference: totalOnChainDifference,
+        offChainIncluded: totalOffChainIncluded,
+        offChainDifference: totalOffChainDifference,
+      },
+    ]
+  }, [actualsComparison])
+
   const isCoreUnit = snapshot.ownerType === 'CoreUnit'
   return {
     includeOffChain,
@@ -128,7 +161,7 @@ const useAccountsSnapshot = (snapshot: Snapshots) => {
     hasOffChainData,
     // expenses comparison
     hasActualsComparison,
-    // expensesComparisonRows,
+    expenseComparisonLineItems,
     isCoreUnit,
   }
 }

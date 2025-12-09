@@ -1,22 +1,22 @@
 import type { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { Progress } from '@/modules/shared/components/ui/progress'
+import { cn } from '@/modules/shared/lib/utils'
+import { MetricCard, MetricCardLabel } from '../metric-card/metric-card'
 
-import { Progress } from '@/shared/components/ui/progress'
-import { cn } from '@/shared/lib/utils'
-
-interface ProgressCardProps {
+interface StatusMetricCardProps {
   status?: ScopeOfWork_DeliverableSetStatus
   progress: number
 }
 
-export function ProgressCard({ status, progress }: ProgressCardProps) {
+function StatusMetricCard({ status, progress }: StatusMetricCardProps) {
   return (
-    <div className="bg-popover flex w-full flex-col gap-2 rounded-xl border p-2 lg:px-4">
-      <div className="flex items-center justify-between">
-        <span className="text-card-foreground text-xs leading-4.5 font-medium">Status</span>
+    <MetricCard className="[&>div]:flex-col">
+      <div className="flex w-full items-center justify-between">
+        <MetricCardLabel>Status</MetricCardLabel>
         {status && <DeliverableSetStatusChip status={status} />}
       </div>
-      <div className="relative">
+      <div className="relative w-full">
         <Progress
           value={progress}
           aria-label={`Status progress: ${progress}%`}
@@ -35,6 +35,8 @@ export function ProgressCard({ status, progress }: ProgressCardProps) {
           {progress}%
         </div>
       </div>
-    </div>
+    </MetricCard>
   )
 }
+
+export { StatusMetricCard }

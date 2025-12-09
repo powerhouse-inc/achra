@@ -1,24 +1,18 @@
 import { Suspense } from 'react'
 import type {
   ScopeOfWork_Deliverable,
-  ScopeOfWork_DeliverableSetStatus,
-  ScopeOfWork_KeyResult,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  ButtonTriggerKeyResult,
-  DeliverablesCard,
-  MetricCard,
-  MetricCardSkeleton,
-  ProgressCard,
-  TotalCostField,
-} from '@/modules/project/components'
+import { DeliverablesCard, TotalCostField } from '@/modules/project/components'
 import { AvatarTitleSkeleton } from '@/modules/project/components/avatar-title/avatar-title-skeleton'
 import { AvatarTitleProjectDetails } from '@/modules/project/components/avatar-title/project-details-avatar-title'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
+import { BudgetMetricCard } from '../budget-metric-card'
 import { DeliverablesEmpty } from '../deliverables-empty/deliverables-empty'
+import { KeyResultsMetricCard } from '../key-results-metric-card'
+import { StatusMetricCard } from '../status-metric-card'
 
 interface ProjectCardItemProps {
   project: ScopeOfWork_Project
@@ -45,9 +39,7 @@ export function ProjectCardItem({
 
   const totalKeyResults = allKeyResults.length
 
-  const completedKeyResults = allKeyResults.filter(
-    (kr: ScopeOfWork_KeyResult) => kr.link && kr.link.trim() !== '',
-  ).length
+  const completedKeyResults = allKeyResults.filter((kr) => kr.link && kr.link.trim() !== '').length
 
   return (
     <Card className="bg-background gap-0 border-none p-0 sm:mt-2.25 md:-mt-2.75">
@@ -108,24 +100,13 @@ export function ProjectCardItem({
         </div>
 
         <div className="flex w-full shrink grow flex-col gap-2 sm:gap-2 lg:basis-[35%] lg:flex-col">
-          <MetricCard label="Budget" value={capex} unit={currency ?? undefined} footer="CAPEX" />
-          <ProgressCard
-            progress={projectProgress}
-            status={status as ScopeOfWork_DeliverableSetStatus}
+          <BudgetMetricCard value={capex} unit={currency as string | undefined} />
+          <StatusMetricCard status={status} progress={projectProgress} />
+          <KeyResultsMetricCard
+            completed={completedKeyResults}
+            total={totalKeyResults}
+            deliverables={deliverables}
           />
-
-          <Suspense fallback={<MetricCardSkeleton />}>
-            <MetricCard
-              label="Key Results"
-              value={
-                <>
-                  <span>{completedKeyResults}</span>
-                  <span className="text-foreground/50"> / {totalKeyResults}</span>
-                </>
-              }
-              action={<ButtonTriggerKeyResult deliverables={deliverables} />}
-            />
-          </Suspense>
         </div>
       </CardHeader>
 
