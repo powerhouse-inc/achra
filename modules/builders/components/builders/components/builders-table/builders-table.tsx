@@ -1,5 +1,6 @@
 'use client'
 import { ArrowRight, ArrowUpDown } from 'lucide-react'
+import Link from 'next/link'
 import BuilderDomain from '@/modules/shared/components/builder-domain'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
 import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
@@ -17,13 +18,15 @@ import type { Team } from '@/modules/shared/types/team'
 import { LastModified } from '../last-modified'
 import { Links } from '../links'
 import { SortEnum, useBuildersTable } from './use-builders-table'
+import type { Route } from 'next'
 
 export interface BuildersTableProps {
   builders: Team[]
   className?: string
+  networkSlug: string
 }
 
-export function BuildersTable({ builders, className }: BuildersTableProps) {
+export function BuildersTable({ builders, className, networkSlug }: BuildersTableProps) {
   const { headersSort, sortedBuilders, proccesedBuildersTableColumns, handleSortClick } =
     useBuildersTable({
       builders,
@@ -32,17 +35,17 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
   return (
     <Table variant="pills" className={cn('w-full', className)}>
       <TableHeader className="mb-2 inline-block w-full">
-        <TableRow className="flex h-fit w-full justify-between border-b-0! p-4 xl:px-6">
+        <TableRow className="flex h-fit w-full border-b-0! py-4">
           {proccesedBuildersTableColumns.map((column, index) => (
             <TableHead
               key={column.accessorKey}
               className={cn(
                 'inline-block h-fit p-0!',
                 column.isNumeric && 'text-right',
-                index === 0 && 'w-[25%]',
-                index === 1 && 'w-[20%]',
-                index === 2 && 'w-[18%]',
-                index === 3 && 'w-[13%]',
+                index === 0 && 'w-[27%] pl-4! xl:pl-6!',
+                index === 1 && 'w-[22%]',
+                index === 2 && 'w-[20%]',
+                index === 3 && 'flex-1',
               )}
             >
               <Button
@@ -64,44 +67,59 @@ export function BuildersTable({ builders, className }: BuildersTableProps) {
               </Button>
             </TableHead>
           ))}
-          <TableHead className="h-fit w-23 p-0! text-right" />
-          <TableHead className="size-9 h-fit p-0! text-right" />
+          <TableHead className="h-fit flex-1 p-0!" />
+          <TableHead className="h-fit p-0!" />
         </TableRow>
       </TableHeader>
       <TableBody className="flex flex-col gap-2">
-        {sortedBuilders.map((builder) => (
-          <TableRow
-            key={builder.id}
-            className="flex h-fit w-full cursor-pointer items-center justify-between border-b-0! p-4 xl:px-6"
-            aria-label={`View ${builder.name} builder`}
-          >
-            <TableCell className="inline-block h-fit w-[25%] p-0!">
-              <BuilderProfile
-                name={builder.name}
-                shortCode={builder.shortCode}
-                status={builder.status}
-                image={builder.image}
-              />
-            </TableCell>
-            <TableCell className="inline-block h-fit w-[20%] p-0!">
-              <BuildersRolesChip role={builder.role} />
-            </TableCell>
-            <TableCell className="inline-block h-fit w-[18%] p-0!">
-              <BuilderDomain team={builder} domain="scope" />
-            </TableCell>
-            <TableCell className="inline-block h-fit w-[13%] p-0!">
-              <LastModified team={builder} />
-            </TableCell>
-            <TableCell className="inline-block h-fit w-23 p-0! text-right">
-              <Links />
-            </TableCell>
-            <TableCell className="inline-block size-9 h-fit p-0! text-right">
-              <Button variant="outline" size="icon" aria-label="View builder team details">
-                <ArrowRight className="size-4" />
-              </Button>
-            </TableCell>
-          </TableRow>
-        ))}
+        {sortedBuilders.map((builder) => {
+          const builderLink = `/network/${networkSlug}/builders/${builder.id}` as Route
+          return (
+            <TableRow
+              key={builder.id}
+              className="flex h-fit w-full cursor-pointer items-center border-b-0!"
+              aria-label={`View ${builder.name} builder`}
+            >
+              <TableCell className="inline-flex h-21.5 min-w-[27%] p-0!">
+                <Link href={builderLink} className="w-full py-4! pr-0! pl-4! xl:pl-6!">
+                  <BuilderProfile
+                    name={builder.name}
+                    shortCode={builder.shortCode}
+                    status={builder.status}
+                    image={builder.image}
+                  />
+                </Link>
+              </TableCell>
+              <TableCell className="inline-flex h-21.5 min-w-[22%] items-center p-0!">
+                <Link href={builderLink} className="w-full px-0! py-4!">
+                  <BuildersRolesChip role={builder.role} className="h-fit" />
+                </Link>
+              </TableCell>
+              <TableCell className="inline-flex h-21.5 min-w-[20%] items-center p-0!">
+                <Link href={builderLink} className="w-full px-0! py-4!">
+                  <BuilderDomain team={builder} domain="scope" />
+                </Link>
+              </TableCell>
+              <TableCell className="inline-flex h-21.5 flex-1 items-center p-0!">
+                <Link href={builderLink} className="w-full px-0! py-4!">
+                  <LastModified team={builder} />
+                </Link>
+              </TableCell>
+              <TableCell className="inline-flex h-21.5 w-fit items-center justify-end p-0! text-right">
+                <Link href={builderLink} className="py-4! pr-4! pl-0!">
+                  <Links />
+                </Link>
+              </TableCell>
+              <TableCell className="inline-flex h-21.5 w-fit items-center p-0! text-right">
+                <Link href={builderLink} className="py-4! pr-4! pl-0! xl:pr-6!">
+                  <Button variant="outline" size="icon" aria-label="View builder team details">
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Link>
+              </TableCell>
+            </TableRow>
+          )
+        })}
       </TableBody>
     </Table>
   )

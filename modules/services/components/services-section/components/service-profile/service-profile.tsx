@@ -76,6 +76,12 @@ export default function ServiceProfile() {
             </div>
           </div>
         </div>
+        <Button asChild variant="default" className="w-fit">
+          <Link href={'/services/sno-embryonic-hub/operator-team-profile' as Route}>
+            SNO Embryonic Hub
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
       </CardContent>
     </Card>
   )

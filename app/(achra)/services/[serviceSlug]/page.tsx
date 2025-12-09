@@ -3,7 +3,7 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function ServicesPage() {
   return (
-    <PageContent>
+    <PageContent className="gap-6">
       <ServiceProfile />
     </PageContent>
   )
