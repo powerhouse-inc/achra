@@ -1,2 +1,2 @@
-export * from './metric-card'
-export * from './metric-card-skeleton'
+export { MetricCard, MetricCardLabel } from './metric-card'
+export { MetricCardSkeleton } from './metric-card-skeleton'

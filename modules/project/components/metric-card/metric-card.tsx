@@ -1,42 +1,30 @@
 import { Card } from '@/modules/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
-import type { ReactNode } from 'react'
+import { cn } from '@/modules/shared/lib/utils'
 
-interface MetricCardProps {
-  label: string
-  value: ReactNode
-  unit?: string
-  footer?: ReactNode
-  action?: ReactNode
-  className?: string
-}
-
-export function MetricCard({ label, value, unit, footer, action, className }: MetricCardProps) {
+function MetricCard({ children, className, ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card
       className={cn(
         'bg-popover relative flex w-full flex-col justify-between gap-0 border px-4 py-2 shadow-none',
         className,
       )}
+      {...props}
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="w-full space-y-1">
-          <p className={cn('text-card-foreground text-xs font-medium')}>{label}</p>
-          <div className="flex w-full justify-between">
-            <div className="flex items-baseline gap-2">
-              <p className={cn('text-base font-semibold tracking-tight')}>{value}</p>
-              {unit && <span className="text-foreground/50 text-base font-semibold">{unit}</span>}
-            </div>
-
-            {footer && (
-              <div className={cn('flex items-end')}>
-                <span className="text-muted-foreground text-xs uppercase">{footer}</span>
-              </div>
-            )}
-          </div>
-        </div>
-        {action && <div className="flex self-center">{action}</div>}
-      </div>
+      <div className="flex items-start justify-between gap-2">{children}</div>
     </Card>
   )
 }
+
+interface MetricCardLabelProps extends React.ComponentProps<'div'> {
+  children: React.ReactNode
+}
+
+function MetricCardLabel({ children, className, ...props }: MetricCardLabelProps) {
+  return (
+    <div className={cn('text-card-foreground text-xs font-medium', className)} {...props}>
+      {children}
+    </div>
+  )
+}
+
+export { MetricCard, MetricCardLabel }
