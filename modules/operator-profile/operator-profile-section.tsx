@@ -1,5 +1,4 @@
 import ServicesList from '../services/components/services-section/components/services-list/services-list'
-import { SERVICES_CARDS_MOCK } from '../services/mocks/services'
 import { HeaderTitleOperatorProfile } from './components/header-title-operator-profile'
 import { OperationalMetrics } from './components/operational-metrics'
 import { OperatorChipEnum } from './types'
@@ -44,7 +43,7 @@ export function OperatorProfileSection() {
       </div>
       <div className="flex flex-col gap-4 lg:flex-1">
         <h3 className="text-lg leading-[120%] font-bold">What we offer</h3>
-        <ServicesList services={SERVICES_CARDS_MOCK.slice(0, 2)} />
+        <ServicesList />
       </div>
     </div>
   )
