@@ -1,4 +1,4 @@
-import ServicesList from '../services/components/services-list/services-list'
+import ServicesList from '@/modules/services/components/services-list'
 import { HeaderTitleOperatorProfile } from './components/header-title-operator-profile'
 import { OperationalMetrics } from './components/operational-metrics'
 import { OperatorChipEnum } from './types'
