@@ -16,7 +16,7 @@ export function OperatorProfileSection() {
               OperatorChipEnum.Forecasting,
             ]}
           />
-          <p className="text-sm/5.5 font-normal">
+          <p className="ml-16 text-sm/5.5 font-normal">
             Empowering you business with reliable bookkeeping, payroll, and tax solutions.
           </p>
         </div>
@@ -28,7 +28,7 @@ export function OperatorProfileSection() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 lg:flex-1">
+      <div className="flex flex-col gap-2 lg:flex-1">
         <h3 className="text-lg leading-[120%] font-bold">Who we are</h3>
         <p className="text-sm/5.5 font-normal xl:text-base/6">
           Lorem ipsum dolor sit amet consectetur. Ac proin mi netus dui tempus mi massa duis nam.
