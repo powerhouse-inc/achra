@@ -2,7 +2,6 @@
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WalletIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Drawer,
@@ -10,25 +9,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/modules/shared/components/ui/drawer'
+import { useBuilderDrawerState } from '../../hooks/use-builder-drawer-state'
 import { ProfileFinancesCardContent } from '../profile-card-content'
 
 function ProfileFinancesDrawer() {
-  const [open, setOpen] = useState<boolean>(false)
-
-  // close the drawer if the screen is resized
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px)')
-    const listener = (event: MediaQueryListEvent) => {
-      if (event.matches) {
-        setOpen(false)
-      }
-    }
-    mediaQuery.addEventListener('change', listener)
-
-    return () => {
-      mediaQuery.removeEventListener('change', listener)
-    }
-  }, [])
+  const [open, setOpen] = useBuilderDrawerState()
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>

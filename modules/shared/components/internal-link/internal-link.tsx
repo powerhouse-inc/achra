@@ -14,9 +14,10 @@ export function InternalLink({
   children,
   className,
   variant = 'secondary',
+  ...buttonProps
 }: InternalLinkProps) {
   return (
-    <Button variant={variant} asChild className={cn('group/link', className)}>
+    <Button variant={variant} asChild className={cn('group/link', className)} {...buttonProps}>
       <Link href={href}>
         {children}{' '}
         <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
