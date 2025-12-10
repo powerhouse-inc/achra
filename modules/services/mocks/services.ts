@@ -1,3 +1,4 @@
+import { OperatorChipEnum } from '@/modules/operator-profile/types'
 import { type Service, ServiceEntityEnum } from '@/modules/shared/types/services'
 
 export const SERVICES_CARDS_MOCK: Service[] = [
@@ -166,5 +167,38 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     ],
     cover: '/services/covers/cover-06.jpg',
     unavailable: true,
+  },
+]
+
+export const OPERATORS_MOCK = [
+  {
+    id: 'accountable-opc',
+    title: 'Accountable OPC',
+    description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
+    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    activeSince: 'JUL 2022',
+    minEngagement: '3 month',
+    teamSize: '12 FTEs',
+    setupTime: '7 days',
+  },
+  {
+    id: 'powerhouse-genesis-oh',
+    title: 'Powerhouse Genesis OH',
+    description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
+    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    activeSince: 'JUL 2022',
+    minEngagement: '3 month',
+    teamSize: '12 FTEs',
+    setupTime: '7 days',
+  },
+  {
+    id: 'accountable-opc-1',
+    title: 'Accountable OPC',
+    description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
+    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    activeSince: 'JUL 2022',
+    minEngagement: '3 month',
+    teamSize: '12 FTEs',
+    setupTime: '7 days',
   },
 ]
