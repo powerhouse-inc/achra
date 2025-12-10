@@ -11,7 +11,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Service } from '@/modules/shared/types/services'
-import { ServicesCardListSection } from './components/services-card-list-section/services-card-list-section'
+import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import type { Route } from 'next'
 
 interface ServicesCardProps {
@@ -43,13 +43,14 @@ export default function ServicesCard({ service }: ServicesCardProps) {
               asChild
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+              size="lg"
             >
               <Link href={`/services/${service.id}` as Route}>
                 <span>Purchase</span>
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild size="lg">
               <Link href={`/services/${service.id}` as Route}>
                 <span>More Info</span>
                 <Info className="size-4" />
@@ -87,12 +88,12 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           </div>
         </div>
         <div className="text-foreground flex flex-col gap-2 text-xs/4.5 sm:col-span-2 sm:flex-row sm:text-sm/5.5 lg:col-span-1 lg:flex-col xl:flex-row">
-          <ServicesCardListSection
+          <ServiceSectionsCard
             icon={SettingsIcon}
             title="Formation & Setup"
             items={service.formationAndSetup}
           />
-          <ServicesCardListSection
+          <ServiceSectionsCard
             icon={RecursiveIcon}
             title="Recurring Services"
             items={service.recurringServices}
