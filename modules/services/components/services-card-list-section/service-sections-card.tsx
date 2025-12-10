@@ -27,7 +27,7 @@ export function ServiceSectionsCard({
       )}
     >
       <CardHeader className="gap-y-0 p-0">
-        <div className="flex h-10 items-center gap-2">
+        <div className={cn('flex items-center gap-2', { 'h-10': showDetailsButton })}>
           <Icon className="[&_path]:stroke-foreground size-4" />
           <span className="font-medium sm:font-semibold">{title}</span>
         </div>
