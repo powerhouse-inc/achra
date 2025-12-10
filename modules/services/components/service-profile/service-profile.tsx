@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -6,9 +7,12 @@ import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
+import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
+import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
+import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import type { Route } from 'next'
 
 export default function ServiceProfile() {
@@ -16,7 +20,7 @@ export default function ServiceProfile() {
   const service = SERVICES_CARDS_MOCK[0]
 
   return (
-    <Card className="border-none bg-transparent p-2 shadow-none sm:p-3 md:p-4">
+    <Card className="border-none bg-transparent p-0 shadow-none">
       <CardContent className="flex flex-col gap-4 px-0">
         <div className="flex flex-col gap-2">
           <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
@@ -49,6 +53,7 @@ export default function ServiceProfile() {
               asChild
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+              size="lg"
             >
               <Link href={`/services/${service.id}` as Route}>
                 <span>Purchase</span>
@@ -82,6 +87,38 @@ export default function ServiceProfile() {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
+        <div className="flex flex-col gap-2 sm:flex-row md:gap-4 lg:gap-6">
+          <ServiceSectionsCard
+            icon={SettingsIcon}
+            title="Formation & Setup"
+            items={service.formationAndSetup}
+            showDetailsButton
+            className="p-3!"
+          />
+          <ServiceSectionsCard
+            icon={RecursiveIcon}
+            title="Recurring Services"
+            items={service.recurringServices}
+            showDetailsButton
+            className="p-3!"
+          />
+        </div>
+      </CardContent>
+      <CardContent className="flex flex-col gap-4 p-0">
+        <span className="text-foreground text-sm/5.5 font-semibold sm:text-base/5.5 sm:font-bold">
+          Operators
+        </span>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-2 md:gap-4 lg:gap-6 xl:grid-cols-3">
+          <Card>
+            <CardContent>in progress</CardContent>
+          </Card>
+          <Card>
+            <CardContent>in progress</CardContent>
+          </Card>
+          <Card>
+            <CardContent>in progress</CardContent>
+          </Card>
+        </div>
       </CardContent>
     </Card>
   )
