@@ -30,6 +30,7 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
         status
         projects {
           id
+          slug
           code
           abstract
           title

@@ -1,7 +1,9 @@
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { Breadcrumb } from '@/modules/shared/components/breadcrumb'
-import { getWorkstreamProjects } from '../../services/workstream-projects-services'
-import { formatSlugToTitle } from '../../utils'
+import {
+  getWorkstreamProjectBySlug,
+  getWorkstreamProjects,
+} from '../../services/workstream-projects-services'
 import type { Route } from 'next'
 
 interface ProjectDetailsBreadcrumbProps {
@@ -9,10 +11,11 @@ interface ProjectDetailsBreadcrumbProps {
 }
 
 export async function ProjectDetailsBreadcrumb({ params }: ProjectDetailsBreadcrumbProps) {
-  // TODO: Remove the formatSlugToTitle, once the projectSlug from api is ready to filter the project
   const { slug, workstreamSlug, projectSlug } = await params
   const networkData = await getNetworkBySlug(slug)
   const workstreamData = await getWorkstreamProjects(slug, workstreamSlug)
+  const projectData = await getWorkstreamProjectBySlug(slug, workstreamSlug, projectSlug ?? '')
+  const projectName = projectData?.title ?? ''
   const networkName = networkData?.name ?? ''
   const workstreamName = workstreamData?.title ?? ''
   const items = [
@@ -23,7 +26,7 @@ export async function ProjectDetailsBreadcrumb({ params }: ProjectDetailsBreadcr
       href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route,
     },
     {
-      label: formatSlugToTitle(projectSlug ?? ''),
+      label: projectName,
       href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/project` as Route,
     },
   ]

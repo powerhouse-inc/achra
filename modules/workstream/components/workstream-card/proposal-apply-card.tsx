@@ -8,7 +8,6 @@ import { OverflowList } from '@/modules/shared/components/overflow-list'
 import { buttonVariants } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { slugify } from '@/modules/shared/lib/slug'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
@@ -56,7 +55,7 @@ export default function ProposalApplyCard({
   tags,
   project,
 }: ProposalApplyCardProps) {
-  const projectSlug = slugify(project?.title ?? 'Unknown')
+  const projectSlug = project?.slug ?? ''
   const href =
     `/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route
 

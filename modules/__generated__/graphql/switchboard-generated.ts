@@ -139,10 +139,26 @@ export type AnalyticsSeriesDimension = {
 
 export type Builder = {
   __typename?: 'Builder';
+  code?: Maybe<Scalars['String']['output']>;
+  contributors: Array<Builder>;
   description: Scalars['String']['output'];
   icon: Scalars['String']['output'];
   id?: Maybe<Scalars['PHID']['output']>;
+  lastModified?: Maybe<Scalars['DateTime']['output']>;
+  links: Array<BuilderLink>;
   name: Scalars['String']['output'];
+  scopes: Array<BuilderScope>;
+  skilss: Array<BuilderSkill>;
+  slug?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<BuilderStatus>;
+  type: TeamType;
+};
+
+export type BuilderLink = {
+  __typename?: 'BuilderLink';
+  id: Scalars['OID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  url: Scalars['URL']['output'];
 };
 
 export type BuilderProfile = IDocument & {
@@ -185,23 +201,184 @@ export type BuilderProfileQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
 };
 
+export type BuilderProfile_AddContributorInput = {
+  contributorPHID: Scalars['PHID']['input'];
+};
+
+export type BuilderProfile_AddLinkInput = {
+  id: Scalars['OID']['input'];
+  label?: InputMaybe<Scalars['String']['input']>;
+  url: Scalars['URL']['input'];
+};
+
+export type BuilderProfile_AddScopeInput = {
+  scope?: InputMaybe<BuilderProfile_BuilderScopeInput>;
+};
+
+export type BuilderProfile_AddSkillInput = {
+  skill?: InputMaybe<BuilderProfile_BuilderSkillInput>;
+};
+
+export type BuilderProfile_BuilderLink = {
+  __typename?: 'BuilderProfile_BuilderLink';
+  id: Scalars['OID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  url: Scalars['URL']['output'];
+};
+
 export type BuilderProfile_BuilderProfileState = {
   __typename?: 'BuilderProfile_BuilderProfileState';
+  code?: Maybe<Scalars['String']['output']>;
+  contributors: Array<Scalars['PHID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   icon?: Maybe<Scalars['URL']['output']>;
   id?: Maybe<Scalars['PHID']['output']>;
+  lastModified?: Maybe<Scalars['DateTime']['output']>;
+  links: Array<BuilderProfile_BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
+  scopes: Array<BuilderProfile_BuilderScope>;
+  skilss: Array<BuilderProfile_BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<BuilderProfile_BuilderStatus>;
+  type: BuilderProfile_TeamType;
 };
 
-/** Module: Builder */
+export enum BuilderProfile_BuilderScope {
+  Acc = 'ACC',
+  GovernanceScope = 'GOVERNANCE_SCOPE',
+  ProtocolScope = 'PROTOCOL_SCOPE',
+  Sta = 'STA',
+  StabilityScope = 'STABILITY_SCOPE',
+  Sup = 'SUP',
+  SupportScope = 'SUPPORT_SCOPE'
+}
+
+export enum BuilderProfile_BuilderScopeInput {
+  Acc = 'ACC',
+  GovernanceScope = 'GOVERNANCE_SCOPE',
+  ProtocolScope = 'PROTOCOL_SCOPE',
+  Sta = 'STA',
+  StabilityScope = 'STABILITY_SCOPE',
+  Sup = 'SUP',
+  SupportScope = 'SUPPORT_SCOPE'
+}
+
+export enum BuilderProfile_BuilderSkill {
+  BackendDevelopment = 'BACKEND_DEVELOPMENT',
+  DataEngineering = 'DATA_ENGINEERING',
+  DevopsEngineering = 'DEVOPS_ENGINEERING',
+  FrontendDevelopment = 'FRONTEND_DEVELOPMENT',
+  FullStackDevelopment = 'FULL_STACK_DEVELOPMENT',
+  QaTesting = 'QA_TESTING',
+  SecurityEngineering = 'SECURITY_ENGINEERING',
+  SmartContractDevelopment = 'SMART_CONTRACT_DEVELOPMENT',
+  TechnicalWriting = 'TECHNICAL_WRITING',
+  UiUxDesign = 'UI_UX_DESIGN'
+}
+
+export enum BuilderProfile_BuilderSkillInput {
+  BackendDevelopment = 'BACKEND_DEVELOPMENT',
+  DataEngineering = 'DATA_ENGINEERING',
+  DevopsEngineering = 'DEVOPS_ENGINEERING',
+  FrontendDevelopment = 'FRONTEND_DEVELOPMENT',
+  FullStackDevelopment = 'FULL_STACK_DEVELOPMENT',
+  QaTesting = 'QA_TESTING',
+  SecurityEngineering = 'SECURITY_ENGINEERING',
+  SmartContractDevelopment = 'SMART_CONTRACT_DEVELOPMENT',
+  TechnicalWriting = 'TECHNICAL_WRITING',
+  UiUxDesign = 'UI_UX_DESIGN'
+}
+
+export enum BuilderProfile_BuilderStatus {
+  Active = 'ACTIVE',
+  Archived = 'ARCHIVED',
+  Completed = 'COMPLETED',
+  Inactive = 'INACTIVE',
+  OnHold = 'ON_HOLD'
+}
+
+export enum BuilderProfile_BuilderStatusInput {
+  Active = 'ACTIVE',
+  Archived = 'ARCHIVED',
+  Completed = 'COMPLETED',
+  Inactive = 'INACTIVE',
+  OnHold = 'ON_HOLD'
+}
+
+export type BuilderProfile_EditLinkInput = {
+  id: Scalars['OID']['input'];
+  label?: InputMaybe<Scalars['String']['input']>;
+  url: Scalars['URL']['input'];
+};
+
+export type BuilderProfile_RemoveContributorInput = {
+  contributorPHID: Scalars['PHID']['input'];
+};
+
+export type BuilderProfile_RemoveLinkInput = {
+  id: Scalars['OID']['input'];
+};
+
+export type BuilderProfile_RemoveScopeInput = {
+  scope?: InputMaybe<BuilderProfile_BuilderScopeInput>;
+};
+
+export type BuilderProfile_RemoveSkillInput = {
+  skill?: InputMaybe<BuilderProfile_BuilderSkillInput>;
+};
+
+/** Module: Builders */
 export type BuilderProfile_UpdateProfileInput = {
+  code?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['URL']['input']>;
   id?: InputMaybe<Scalars['PHID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BuilderProfile_BuilderStatusInput>;
+  type?: InputMaybe<BuilderProfile_TeamTypeInput>;
 };
+
+export enum BuilderProfile_TeamType {
+  Individual = 'INDIVIDUAL',
+  Team = 'TEAM'
+}
+
+export enum BuilderProfile_TeamTypeInput {
+  Individual = 'INDIVIDUAL',
+  Team = 'TEAM'
+}
+
+export enum BuilderScope {
+  Acc = 'ACC',
+  GovernanceScope = 'GOVERNANCE_SCOPE',
+  ProtocolScope = 'PROTOCOL_SCOPE',
+  Sta = 'STA',
+  StabilityScope = 'STABILITY_SCOPE',
+  Sup = 'SUP',
+  SupportScope = 'SUPPORT_SCOPE'
+}
+
+export enum BuilderSkill {
+  BackendDevelopment = 'BACKEND_DEVELOPMENT',
+  DataEngineering = 'DATA_ENGINEERING',
+  DevopsEngineering = 'DEVOPS_ENGINEERING',
+  FrontendDevelopment = 'FRONTEND_DEVELOPMENT',
+  FullStackDevelopment = 'FULL_STACK_DEVELOPMENT',
+  QaTesting = 'QA_TESTING',
+  SecurityEngineering = 'SECURITY_ENGINEERING',
+  SmartContractDevelopment = 'SMART_CONTRACT_DEVELOPMENT',
+  TechnicalWriting = 'TECHNICAL_WRITING',
+  UiUxDesign = 'UI_UX_DESIGN'
+}
+
+export enum BuilderStatus {
+  Active = 'ACTIVE',
+  Archived = 'ARCHIVED',
+  Completed = 'COMPLETED',
+  Inactive = 'INACTIVE',
+  OnHold = 'ON_HOLD'
+}
 
 export type Builders = IDocument & {
   __typename?: 'Builders';
@@ -669,7 +846,16 @@ export type MultiCurrencyConversions = {
 /** Mutations: BuilderProfile */
 export type Mutation = {
   __typename?: 'Mutation';
+  BuilderProfile_addContributor?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_addLink?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_addScope?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_addSkill?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_createDocument?: Maybe<Scalars['String']['output']>;
+  BuilderProfile_editLink?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_removeContributor?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_removeLink?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_removeScope?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_removeSkill?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_updateProfile?: Maybe<Scalars['Int']['output']>;
   Builders_addBuilder?: Maybe<Scalars['Int']['output']>;
   Builders_createDocument?: Maybe<Scalars['String']['output']>;
@@ -770,9 +956,81 @@ export type Mutation = {
 
 
 /** Mutations: BuilderProfile */
+export type MutationBuilderProfile_AddContributorArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_AddContributorInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_AddLinkArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_AddLinkInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_AddScopeArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_AddScopeInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_AddSkillArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_AddSkillInput>;
+};
+
+
+/** Mutations: BuilderProfile */
 export type MutationBuilderProfile_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_EditLinkArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_EditLinkInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_RemoveContributorArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_RemoveContributorInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_RemoveLinkArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_RemoveLinkInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_RemoveScopeArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_RemoveScopeInput>;
+};
+
+
+/** Mutations: BuilderProfile */
+export type MutationBuilderProfile_RemoveSkillArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_RemoveSkillInput>;
 };
 
 
@@ -2601,6 +2859,7 @@ export type Sow_Project = {
   imageUrl?: Maybe<Scalars['URL']['output']>;
   projectOwner?: Maybe<Scalars['ID']['output']>;
   scope?: Maybe<Sow_DeliverablesSet>;
+  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -2615,7 +2874,7 @@ export type Sow_Roadmap = {
 
 export type Sow_ScopeOfWorkState = {
   __typename?: 'SOW_ScopeOfWorkState';
-  contributors: Array<Sow_Agent>;
+  contributors: Array<Builder>;
   deliverables: Array<Sow_Deliverable>;
   description: Scalars['String']['output'];
   projects: Array<Sow_Project>;
@@ -2753,6 +3012,7 @@ export type ScopeOfWork_AddProjectInput = {
   id: Scalars['OID']['input'];
   imageUrl?: InputMaybe<Scalars['URL']['input']>;
   projectOwner?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
 };
 
@@ -2987,6 +3247,7 @@ export type ScopeOfWork_Project = {
   imageUrl?: Maybe<Scalars['URL']['output']>;
   projectOwner?: Maybe<Scalars['ID']['output']>;
   scope?: Maybe<ScopeOfWork_DeliverablesSet>;
+  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -3125,6 +3386,7 @@ export type ScopeOfWork_UpdateProjectInput = {
   currency?: InputMaybe<ScopeOfWork_PmCurrencyInput>;
   id: Scalars['OID']['input'];
   imageUrl?: InputMaybe<Scalars['URL']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3400,6 +3662,11 @@ export type ScopeOfWorkByNetworkOrStatusFilter = {
   workstreamStatus?: InputMaybe<WorkstreamStatus>;
 };
 
+export enum TeamType {
+  Individual = 'INDIVIDUAL',
+  Team = 'TEAM'
+}
+
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
 }>;
@@ -3412,14 +3679,14 @@ export type ProjectsQueryVariables = Exact<{
 }>;
 
 
-export type ProjectsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
+export type ProjectsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, slug: string, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
 
 export type WorkstreamProjectQueryVariables = Exact<{
   filter: WorkstreamFilter;
 }>;
 
 
-export type WorkstreamProjectQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
+export type WorkstreamProjectQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', id: any, name?: string | null }, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, contributors: Array<{ __typename?: 'Builder', id?: any | null, icon: string, slug?: string | null, name: string }>, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, slug: string, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, budget?: number | null, budgetType?: Sow_BudgetType | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null }> };
 
 export type RfpByWorkstreamQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -3433,7 +3700,7 @@ export type RoadmapDetailsQueryVariables = Exact<{
 }>;
 
 
-export type RoadmapDetailsQuery = { __typename?: 'Query', scopeOfWorkByNetworkOrStatus: Array<{ __typename?: 'SOW_ScopeOfWorkState', title: string, status: Sow_ScopeOfWorkStatus, description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, title: string, slug: string, description: string, milestones: Array<{ __typename?: 'SOW_Milestone', id: any, title: string, description: string, sequenceCode: string, budget?: number | null, deliveryTarget: string, coordinators: Array<string>, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } } | null }> }>, contributors: Array<{ __typename?: 'SOW_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, owner?: string | null, status: Sow_DeliverableStatus, title: string, code: string, description: string, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: Sow_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename: 'SOW_Binary', done?: boolean | null } | { __typename: 'SOW_Percentage', value: number } | { __typename: 'SOW_StoryPoint', total: number, completed: number } | null }>, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, budget?: number | null, budgetType?: Sow_BudgetType | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'SOW_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
+export type RoadmapDetailsQuery = { __typename?: 'Query', scopeOfWorkByNetworkOrStatus: Array<{ __typename?: 'SOW_ScopeOfWorkState', title: string, status: Sow_ScopeOfWorkStatus, description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, title: string, slug: string, description: string, milestones: Array<{ __typename?: 'SOW_Milestone', id: any, title: string, description: string, sequenceCode: string, budget?: number | null, deliveryTarget: string, coordinators: Array<string>, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } } | null }> }>, contributors: Array<{ __typename?: 'Builder', id?: any | null, name: string }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, owner?: string | null, status: Sow_DeliverableStatus, title: string, code: string, description: string, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: Sow_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }>, workProgress?: { __typename: 'SOW_Binary', done?: boolean | null } | { __typename: 'SOW_Percentage', value: number } | { __typename: 'SOW_StoryPoint', total: number, completed: number } | null }>, projects: Array<{ __typename?: 'SOW_Project', abstract?: string | null, budget?: number | null, budgetType?: Sow_BudgetType | null, code: string, currency?: Sow_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'SOW_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
 
 export type ScopeOfWorkQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
@@ -3454,7 +3721,7 @@ export type WorkstreamDetailsQueryVariables = Exact<{
 }>;
 
 
-export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, network?: { __typename?: 'Network', name?: string | null, slug?: string | null, logo?: string | null, darkThemeLogo?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', id: any, code: string, abstract?: string | null, title: string, projectOwner?: string | null, imageUrl?: any | null, budget?: number | null, currency?: Sow_PmCurrency | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', title: string, id: any, link: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
+export type WorkstreamDetailsQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, network?: { __typename?: 'Network', name?: string | null, slug?: string | null, logo?: string | null, darkThemeLogo?: string | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, title: string, status: Sow_ScopeOfWorkStatus, projects: Array<{ __typename?: 'SOW_Project', id: any, slug: string, code: string, abstract?: string | null, title: string, projectOwner?: string | null, imageUrl?: any | null, budget?: number | null, currency?: Sow_PmCurrency | null, expenditure?: { __typename?: 'SOW_BudgetExpenditure', cap: number } | null, scope?: { __typename?: 'SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, deliverables: Array<any>, progress: { __typename?: 'SOW_Binary' } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint' } } | null }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', title: string, id: any, link: string }>, workProgress?: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', total: number, completed: number } | null, budgetAnchor?: { __typename?: 'SOW_BudgetAnchorProject', unitCost: number, unit?: Sow_Unit | null, quantity: number } | null }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }> }> };
 
 export type WorkstreamsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -3543,6 +3810,7 @@ export const ProjectsDocument = `
         status
         projects {
           abstract
+          slug
           code
           currency
           id
@@ -3650,11 +3918,18 @@ export const WorkstreamProjectDocument = `
         name
       }
       sow {
+        contributors {
+          id
+          icon
+          slug
+          name
+        }
         description
         title
         status
         projects {
           abstract
+          slug
           code
           currency
           id
@@ -3662,6 +3937,7 @@ export const WorkstreamProjectDocument = `
           projectOwner
           title
           budget
+          budgetType
           expenditure {
             cap
           }
@@ -4221,6 +4497,7 @@ export const WorkstreamDetailsDocument = `
         status
         projects {
           id
+          slug
           code
           abstract
           title
