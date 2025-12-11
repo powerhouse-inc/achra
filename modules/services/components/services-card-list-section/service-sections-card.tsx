@@ -1,6 +1,4 @@
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
-import { Button } from '@/modules/shared/components/ui/button'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Card, CardAction, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import type { ComponentType, SVGProps } from 'react'
@@ -33,12 +31,9 @@ export function ServiceSectionsCard({
         </div>
         {showDetailsButton && (
           <CardAction>
-            <Button variant="outline" asChild size="lg">
-              <Link href="/services">
-                Details
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+            <InternalLink href="/services" size="lg" variant="outline">
+              Purchase
+            </InternalLink>
           </CardAction>
         )}
       </CardHeader>

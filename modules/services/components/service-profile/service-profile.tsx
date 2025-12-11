@@ -3,8 +3,9 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
+import { OPERATORS_MOCK, SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
 import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
@@ -13,6 +14,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
+import OperatorCard from './components/operator-card'
 import type { Route } from 'next'
 
 export default function ServiceProfile() {
@@ -49,17 +51,15 @@ export default function ServiceProfile() {
                 </>
               )}
             </div>
-            <Button
-              asChild
+            <InternalLink
+              href={`/services/${service.id}` as Route}
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
               size="lg"
+              variant="default"
             >
-              <Link href={`/services/${service.id}` as Route}>
-                <span>Purchase</span>
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+              Purchase
+            </InternalLink>
           </div>
           <div className="flex flex-col gap-2 sm:gap-4">
             <div className="text-foreground flex flex-col text-xs/4.5 sm:text-sm/5.5">
@@ -81,6 +81,7 @@ export default function ServiceProfile() {
             </div>
           </div>
         </div>
+        {/* TODO: Temporary link, remove when Ale says it's ok to remove it. */}
         <Button asChild variant="default" className="w-fit">
           <Link href={'/services/sno-embryonic-hub/operator-team-profile' as Route}>
             SNO Embryonic Hub
@@ -109,15 +110,19 @@ export default function ServiceProfile() {
           Operators
         </span>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-2 md:gap-4 lg:gap-6 xl:grid-cols-3">
-          <Card>
-            <CardContent>in progress</CardContent>
-          </Card>
-          <Card>
-            <CardContent>in progress</CardContent>
-          </Card>
-          <Card>
-            <CardContent>in progress</CardContent>
-          </Card>
+          {OPERATORS_MOCK.map((operator) => (
+            <OperatorCard
+              key={operator.id}
+              id={operator.id}
+              title={operator.title}
+              description={operator.description}
+              roles={operator.roles}
+              activeSince={operator.activeSince}
+              minEngagement={operator.minEngagement}
+              teamSize={operator.teamSize}
+              setupTime={operator.setupTime}
+            />
+          ))}
         </div>
       </CardContent>
     </Card>

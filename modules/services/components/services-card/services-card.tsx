@@ -1,8 +1,9 @@
-import { ArrowRight, Info } from 'lucide-react'
+import { Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
 import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
@@ -39,17 +40,15 @@ export default function ServicesCard({ service }: ServicesCardProps) {
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <Button
-              asChild
+            <InternalLink
+              href={`/services/${service.id}` as Route}
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
               size="lg"
+              variant="default"
             >
-              <Link href={`/services/${service.id}` as Route}>
-                <span>Purchase</span>
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+              Purchase
+            </InternalLink>
             <Button variant="outline" asChild size="lg">
               <Link href={`/services/${service.id}` as Route}>
                 <span>More Info</span>
