@@ -1,80 +1,63 @@
 import { Link as LinkIcon } from 'lucide-react'
-import Link from 'next/link'
 import {
-  HoverPopover,
-  HoverPopoverContent,
-  HoverPopoverTrigger,
-} from '@/modules/shared/components/hover-popover'
-import Discord from '@/modules/shared/components/svgs/discord.svg'
-import Forum from '@/modules/shared/components/svgs/forum.svg'
-import Github from '@/modules/shared/components/svgs/github.svg'
-import Website from '@/modules/shared/components/svgs/website.svg'
-import Twitter from '@/modules/shared/components/svgs/x.svg'
+  LinksPopover,
+  LinksPopoverItem,
+  type MediaElement,
+} from '@/modules/shared/components/links-popover'
 import { Button } from '@/modules/shared/components/ui/button'
-import type { Route } from 'next'
 import type { MouseEvent } from 'react'
 
-const links = [
+const mediaElements: MediaElement[] = [
   {
+    type: 'website',
     href: 'https://app.aave.com/',
-    label: 'Website',
-    icon: <Website className="size-4" />,
   },
   {
+    type: 'forum',
     href: 'https://governance.aave.com/t/arc-spark-lend-profit-share-proposal/11615/',
-    label: 'Forum',
-    icon: <Forum className="size-4" />,
   },
   {
+    type: 'discord',
     href: 'https://discord.com',
-    label: 'Discord',
-    icon: <Discord className="size-4" />,
   },
   {
+    type: 'twitter',
     href: 'https://twitter.com',
-    label: 'Twitter',
-    icon: <Twitter className="size-4" />,
   },
   {
+    type: 'github',
     href: 'https://github.com',
-    label: 'Github',
-    icon: <Github className="size-4" />,
   },
 ]
 
 export function Links() {
-  const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handlePopoverItemClick = (event: MouseEvent<HTMLElement>) => {
+    // prevent the event to bubble up to the parent link to stop navigation to the builder page
     event.stopPropagation()
   }
 
+  const handleTriggerClick = (event: MouseEvent<HTMLElement>) => {
+    // prevent the event to bubble up to the parent link to stop navigation to the builder page
+    event.preventDefault()
+  }
+
   return (
-    <HoverPopover>
-      <HoverPopoverTrigger asChild>
-        <Button
-          variant="secondary"
-          className="size-9 focus-visible:ring-0 lg:h-10 lg:w-fit lg:rounded-md lg:px-6"
-        >
-          <LinkIcon />
-          <span className="hidden lg:block">Links</span>
-        </Button>
-      </HoverPopoverTrigger>
-      <HoverPopoverContent className="w-fit p-2" align="end">
-        <div className="flex flex-col gap-2">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href as Route}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:bg-accent text-foreground flex items-center gap-2 rounded-sm p-2 text-sm/5.5"
-              onClick={handleLinkClick}
-            >
-              {link.icon}
-              {link.label}
-            </Link>
-          ))}
+    <LinksPopover
+      links={mediaElements}
+      renderLinkItem={(link) => (
+        <LinksPopoverItem
+          key={`${link.href}-${'type' in link ? link.type : link.label}`}
+          link={link}
+          onClick={handlePopoverItemClick}
+        />
+      )}
+    >
+      <Button variant="secondary" onClick={handleTriggerClick} asChild>
+        {/* Render the button as a div to comply with HTML standard (buttons can not be nested in links) */}
+        <div>
+          <LinkIcon /> <span className="hidden lg:inline">Links</span>
         </div>
-      </HoverPopoverContent>
-    </HoverPopover>
+      </Button>
+    </LinksPopover>
   )
 }

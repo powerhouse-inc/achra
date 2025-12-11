@@ -86,6 +86,9 @@ function HoverPopoverRoot({
 
 type HoverPopoverTriggerProps = ComponentProps<typeof PopoverTrigger>
 
+/**
+ * @deprecated Use HoverCard instead
+ */
 const HoverPopoverTrigger = forwardRef<
   ComponentRef<typeof PopoverTrigger>,
   HoverPopoverTriggerProps
@@ -127,6 +130,9 @@ HoverPopoverTrigger.displayName = 'HoverPopoverTrigger'
 
 type HoverPopoverContentProps = ComponentProps<typeof PopoverContent>
 
+/**
+ * @deprecated Use HoverCard instead
+ */
 const HoverPopoverContent = forwardRef<
   ComponentRef<typeof PopoverContent>,
   HoverPopoverContentProps
@@ -166,6 +172,9 @@ const HoverPopoverContent = forwardRef<
 
 HoverPopoverContent.displayName = 'HoverPopoverContent'
 
+/**
+ * @deprecated Use HoverCard instead
+ */
 const HoverPopover = Object.assign(HoverPopoverRoot, {
   Trigger: HoverPopoverTrigger,
   Content: HoverPopoverContent,
