@@ -55,6 +55,7 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     imageUrl: null,
     projectOwner: '93RF8qO5',
     scope: null,
+    slug: 'rwa-project',
   },
   {
     __typename: 'ScopeOfWork_Project',
@@ -69,6 +70,7 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     imageUrl: null,
     projectOwner: '93RF8qO5',
     scope: null,
+    slug: 'php-project',
   },
   {
     __typename: 'ScopeOfWork_Project',
@@ -83,6 +85,7 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     imageUrl: null,
     projectOwner: '93RF8qO5',
     scope: null,
+    slug: 'pea-project',
   },
 ]
 
