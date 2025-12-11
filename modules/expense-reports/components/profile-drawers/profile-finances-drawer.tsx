@@ -18,7 +18,12 @@ function ProfileFinancesDrawer() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="View finances links">
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="View finances links"
+          className="sm:bg-secondary sm:size-13.5 sm:rounded-xl sm:border-2"
+        >
           <WalletIcon className="size-4" />
         </Button>
       </DrawerTrigger>
