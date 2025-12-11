@@ -1,6 +1,8 @@
 import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
 import BreakdownChartCard from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card'
+import BudgetStatementsSection from '@/modules/finances/components/budget-statements-section/budget-statements-section'
+import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
@@ -12,6 +14,7 @@ import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
 
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import { SectionActivation } from '@/modules/shared/components/section-activation'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
 
 interface FinancesPageProps {
@@ -45,6 +48,8 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           <NavigationSection params={params} />
         </Suspense>
         <BreakdownChartCard />
+        <BudgetStatementsSection />
+        <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
       </PageContent>
     </main>
   )

@@ -1,11 +1,19 @@
 import { Suspense } from 'react'
+import TitleSectionFinances from '../title-section-finances'
 import FilterChart from './filter-chart'
-import TitleBreakdownChart from './title-breakdown-chart'
 
 export default function TitleFilterSection() {
+  const TOOLTIP_CONTENT =
+    "Explore MakerDAO's financial distribution across the 'MakerDAO Legacy', 'Atlas Immutable', and 'Scope Framework' budgets from 2021-2024. This tool helps track allocation efficiency, identify funding fluctuations, and pinpoint transitions between legacy and endgame budgets."
+  const RANGE = 'Jan - Dec 2023'
   return (
     <div className="flex flex-row flex-wrap items-start justify-between">
-      <TitleBreakdownChart title="Breakdown Chart" hash="breakdown-chart" />
+      <TitleSectionFinances
+        title="Breakdown Chart"
+        hash="breakdown-chart"
+        tooltipContent={TOOLTIP_CONTENT}
+        range={RANGE}
+      />
       <Suspense fallback={<div>Loading...</div>}>
         <FilterChart />
       </Suspense>
