@@ -52,6 +52,7 @@ interface LinksPopoverProps {
   links: Array<MediaElement | LinkElement>
   children?: React.ReactNode
   renderLinkItem?: (link: MediaElement | LinkElement) => React.ReactElement
+  defaultOpen?: boolean
 }
 
 function defaultRenderLinkItem(link: MediaElement | LinkElement) {
@@ -78,13 +79,15 @@ function defaultRenderLinkItem(link: MediaElement | LinkElement) {
  * @param links - Array of links to display in the popover
  * @param children - Trigger element that opens the popover on hover
  * @param renderLinkItem - Function to render a link item
+ * @param defaultOpen - Whether the popover should be open by default (useful for testing purposes)
  */
 function LinksPopover({
   links,
   children,
   renderLinkItem = defaultRenderLinkItem,
+  defaultOpen = false,
 }: LinksPopoverProps) {
-  const [open, setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(defaultOpen)
 
   const handleMouseLeave = useDebounceCallback(() => {
     setOpen(false)

@@ -75,6 +75,9 @@ const meta = {
       control: false,
     },
   },
+  args: {
+    defaultOpen: true,
+  },
 } satisfies Meta<typeof LinksPopover>
 
 export default meta
