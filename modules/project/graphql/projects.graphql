@@ -13,6 +13,7 @@ query Projects($filter: WorkstreamsFilter) {
         status
         projects {
           abstract
+          slug
           code
           currency
           id

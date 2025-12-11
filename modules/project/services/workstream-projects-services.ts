@@ -37,3 +37,26 @@ export async function getWorkstreamsProjects(options: {
 
   return projectsMap
 }
+
+export async function getWorkstreamProjectBySlug(
+  networkSlug: string,
+  workstreamSlug: string,
+  projectSlug: string,
+) {
+  const data = await useWorkstreamProjectQuery.fetcher({
+    filter: {
+      networkSlug,
+      workstreamSlug,
+    },
+  })()
+
+  if (!data.workstream[0]) {
+    return null
+  }
+
+  const project = data.workstream[0].initialProposal?.sow?.projects.find(
+    (p) => p.slug === projectSlug,
+  )
+
+  return project ?? null
+}

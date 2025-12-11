@@ -6,12 +6,13 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProjectDetailsBreadcrumb } from '@/modules/project/components'
 import { ProjectCardItem } from '@/modules/project/components/project-card-item/project-card-item'
-import { getWorkstreamProjects } from '@/modules/project/services/workstream-projects-services'
-import { findProjectBySlug, resolveProjectDeliverables } from '@/modules/project/utils'
+import {
+  getWorkstreamProjectBySlug,
+  getWorkstreamProjects,
+} from '@/modules/project/services/workstream-projects-services'
+import { resolveProjectDeliverables } from '@/modules/project/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
-// Improve this when its ready to be used
-const BUILDER_ID = 'builder-1'
 
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string; workstreamSlug: string; projectSlug: string }>
@@ -20,16 +21,19 @@ interface ProjectDetailsPageProps {
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
   const { slug, workstreamSlug, projectSlug } = await params
   const workstream = await getWorkstreamProjects(slug, workstreamSlug)
+  const project = await getWorkstreamProjectBySlug(slug, workstreamSlug, projectSlug)
 
   if (!workstream) notFound()
 
   const { initialProposal } = workstream
-  const sowProjects = (initialProposal?.sow?.projects ?? []) as ScopeOfWork_Project[]
+
   const sowDeliverables = (initialProposal?.sow?.deliverables ??
     []) as unknown as ScopeOfWork_Deliverable[]
-  const builderName = initialProposal?.author.name ?? 'Unknown'
 
-  const project = findProjectBySlug(sowProjects, projectSlug)
+  const firstContributor = initialProposal?.sow?.contributors[0]
+  const builderIcon = firstContributor?.icon
+  const builderName = firstContributor?.name
+  const builderId = firstContributor?.slug
 
   if (!project) notFound()
 
@@ -48,11 +52,12 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
 
       <PageContent className="gap-8" variant="with-breadcrumb">
         <ProjectCardItem
-          project={project}
+          project={project as ScopeOfWork_Project}
           deliverables={projectDeliverables as unknown as ScopeOfWork_Deliverable[]}
-          builderName={builderName}
-          builderId={BUILDER_ID}
+          builderName={builderName ?? 'Unknown'}
+          builderId={builderId ?? ''}
           params={params}
+          builderIcon={builderIcon ?? ''}
         />
       </PageContent>
     </main>

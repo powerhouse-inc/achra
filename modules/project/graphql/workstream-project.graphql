@@ -11,11 +11,18 @@ query WorkstreamProject($filter: WorkstreamFilter!) {
         name
       }
       sow {
+        contributors {
+          id
+          icon
+          slug
+          name
+        }
         description
         title
         status
         projects {
           abstract
+          slug
           code
           currency
           id
@@ -23,6 +30,7 @@ query WorkstreamProject($filter: WorkstreamFilter!) {
           projectOwner
           title
           budget
+          budgetType
           expenditure {
             cap
           }

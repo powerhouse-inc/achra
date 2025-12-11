@@ -1,12 +1,17 @@
+import type {
+  Maybe,
+  ScopeOfWork_BudgetType,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { MetricCard, MetricCardLabel } from '../metric-card/metric-card'
 
 interface BudgetMetricCardProps {
   value?: number
   unit?: string
+  budgetType?: Maybe<ScopeOfWork_BudgetType>
 }
 
-function BudgetMetricCard({ value, unit }: BudgetMetricCardProps) {
+function BudgetMetricCard({ value, unit, budgetType }: BudgetMetricCardProps) {
   return (
     <MetricCard>
       <div className="w-full space-y-1">
@@ -18,7 +23,7 @@ function BudgetMetricCard({ value, unit }: BudgetMetricCardProps) {
           </div>
 
           <div className={cn('flex items-end')}>
-            <span className="text-muted-foreground text-xs uppercase">CAPEX</span>
+            <span className="text-muted-foreground text-xs uppercase">{budgetType ?? 'CAPEX'}</span>
           </div>
         </div>
       </div>

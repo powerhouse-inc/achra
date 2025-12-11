@@ -20,6 +20,7 @@ interface ProjectCardItemProps {
   builderName: string
   builderId: string
   params: Promise<{ slug: string; workstreamSlug: string }>
+  builderIcon: string
 }
 
 export function ProjectCardItem({
@@ -28,8 +29,9 @@ export function ProjectCardItem({
   builderName,
   builderId,
   params,
+  builderIcon,
 }: ProjectCardItemProps) {
-  const { title, code, abstract, imageUrl, budget = 0, currency, expenditure, scope } = project
+  const { title, code, abstract, budget = 0, currency, expenditure, scope, budgetType } = project
   const status = scope?.status
   const capex = expenditure?.cap
 
@@ -59,7 +61,7 @@ export function ProjectCardItem({
               <div className="hidden sm:block">
                 <Suspense fallback={<AvatarTitleSkeleton />}>
                   <AvatarTitleProjectDetails
-                    src={imageUrl}
+                    src={builderIcon}
                     title={builderName}
                     params={params}
                     builderId={builderId}
@@ -79,7 +81,7 @@ export function ProjectCardItem({
           <div className="block sm:hidden">
             <Suspense fallback={<AvatarTitleSkeleton />}>
               <AvatarTitleProjectDetails
-                src={imageUrl}
+                src={builderIcon}
                 title={builderName}
                 params={params}
                 builderId={builderId}
@@ -100,7 +102,11 @@ export function ProjectCardItem({
         </div>
 
         <div className="flex w-full shrink grow flex-col gap-2 sm:gap-2 lg:basis-[35%] lg:flex-col">
-          <BudgetMetricCard value={capex} unit={currency as string | undefined} />
+          <BudgetMetricCard
+            value={capex}
+            unit={currency as string | undefined}
+            budgetType={budgetType}
+          />
           <StatusMetricCard status={status} progress={projectProgress} />
           <KeyResultsMetricCard
             completed={completedKeyResults}
