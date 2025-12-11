@@ -30,9 +30,10 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
   const sowDeliverables = (initialProposal?.sow?.deliverables ??
     []) as unknown as ScopeOfWork_Deliverable[]
 
-  const builderIcon = initialProposal?.sow?.contributors?.[0]?.icon
-  const builderName = initialProposal?.sow?.contributors?.[0]?.name
-  const builderId = initialProposal?.sow?.contributors?.[0].slug ?? ''
+  const firstContributor = initialProposal?.sow?.contributors[0]
+  const builderIcon = firstContributor?.icon
+  const builderName = firstContributor?.name
+  const builderId = firstContributor?.slug
 
   if (!project) notFound()
 
