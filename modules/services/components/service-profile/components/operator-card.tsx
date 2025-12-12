@@ -1,5 +1,4 @@
 import { FileText, Info } from 'lucide-react'
-
 import Link from 'next/link'
 import OperatorChip from '@/modules/operator-profile/components/operator-chip'
 import type { OperatorChipEnum } from '@/modules/operator-profile/types'
@@ -9,7 +8,6 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/comp
 import type { Route } from 'next'
 
 interface OperatorCardProps {
-  id: string
   title: string
   description: string
   roles: OperatorChipEnum[]
@@ -20,7 +18,6 @@ interface OperatorCardProps {
 }
 
 function OperatorCard({
-  id,
   title,
   description,
   roles,
@@ -63,7 +60,7 @@ function OperatorCard({
       </CardContent>
       <CardFooter className="mt-2 flex-col gap-2 p-0">
         <InternalLink
-          href={`/operators/${id}` as Route}
+          href={'/services/sno-embryonic-hub' as Route}
           size="lg"
           variant="default"
           className="w-full"

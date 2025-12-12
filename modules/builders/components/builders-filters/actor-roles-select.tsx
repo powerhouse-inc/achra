@@ -15,52 +15,52 @@ const actorRolesOptions: Option[] = [
   {
     value: TeamRole.ActiveEcosystemActor,
     label: <BuildersRolesChip role={TeamRole.ActiveEcosystemActor} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.ScopeFacilitator,
     label: <BuildersRolesChip role={TeamRole.ScopeFacilitator} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.AdvisoryCouncilMember,
     label: <BuildersRolesChip role={TeamRole.AdvisoryCouncilMember} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.Facilitator,
     label: <BuildersRolesChip role={TeamRole.Facilitator} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.ResearchExpert,
     label: <BuildersRolesChip role={TeamRole.ResearchExpert} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.ProjectLead,
     label: <BuildersRolesChip role={TeamRole.ProjectLead} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.DataExpert,
     label: <BuildersRolesChip role={TeamRole.DataExpert} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.TechExpert,
     label: <BuildersRolesChip role={TeamRole.TechExpert} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.TeamLead,
     label: <BuildersRolesChip role={TeamRole.TeamLead} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
   {
     value: TeamRole.All,
     label: <BuildersRolesChip role={TeamRole.All} />,
-    group: 'Actor Roles',
+    group: 'Skills',
   },
 ]
 
@@ -83,8 +83,8 @@ function ActorRolesSelect({ actorRoles, setActorRoles, className }: ActorRolesSe
       enableSearch={false}
       groupBy="group"
       enableSelectAll={true}
-      selectAllGroup="Actor Roles"
-      placeholder="Actor Roles"
+      selectAllGroup="Skills"
+      placeholder="Skills"
       className={cn('bg-background dark:bg-background')}
       commandProps={{
         className,
@@ -103,7 +103,7 @@ function ActorRolesSelectDrawer({ actorRoles, setActorRoles }: ActorRolesSelectP
     <DrawerSelect
       value={actorRoles}
       onChange={handleChange}
-      label="Actor Roles"
+      label="Skills"
       options={actorRolesOptions}
       multiselect={true}
       enableSelectAll={true}

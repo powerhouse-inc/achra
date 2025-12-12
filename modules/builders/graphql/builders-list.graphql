@@ -1,0 +1,22 @@
+query BuildersList($filter: networkFilter) {
+  allNetworks(filter: $filter) {
+    builders {
+      code
+      description
+      icon
+      id
+      lastModified
+      links {
+        id
+        label
+        url
+      }
+      name
+      scopes
+      skilss
+      slug
+      status
+      type
+    }
+  }
+}

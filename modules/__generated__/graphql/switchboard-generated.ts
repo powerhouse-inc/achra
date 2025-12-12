@@ -3667,6 +3667,13 @@ export enum TeamType {
   Team = 'TEAM'
 }
 
+export type BuildersListQueryVariables = Exact<{
+  filter?: InputMaybe<NetworkFilter>;
+}>;
+
+
+export type BuildersListQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', builders: Array<{ __typename?: 'Builder', code?: string | null, description: string, icon: string, id?: any | null, lastModified?: any | null, name: string, scopes: Array<BuilderScope>, skilss: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> }> };
+
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
 }>;
@@ -3731,6 +3738,70 @@ export type WorkstreamsQueryVariables = Exact<{
 export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title: string, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }>, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null }> };
 
 
+
+export const BuildersListDocument = `
+    query BuildersList($filter: networkFilter) {
+  allNetworks(filter: $filter) {
+    builders {
+      code
+      description
+      icon
+      id
+      lastModified
+      links {
+        id
+        label
+        url
+      }
+      name
+      scopes
+      skilss
+      slug
+      status
+      type
+    }
+  }
+}
+    `;
+
+export const useBuildersListQuery = <
+      TData = BuildersListQuery,
+      TError = unknown
+    >(
+      variables?: BuildersListQueryVariables,
+      options?: Omit<UseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BuildersListQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BuildersList'] : ['BuildersList', variables],
+    queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
+    ...options
+  }
+    )};
+
+useBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) => variables === undefined ? ['BuildersList'] : ['BuildersList', variables];
+
+export const useSuspenseBuildersListQuery = <
+      TData = BuildersListQuery,
+      TError = unknown
+    >(
+      variables?: BuildersListQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BuildersListQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BuildersListSuspense'] : ['BuildersListSuspense', variables],
+    queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) => variables === undefined ? ['BuildersListSuspense'] : ['BuildersListSuspense', variables];
+
+
+useBuildersListQuery.fetcher = (variables?: BuildersListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables, options);
 
 export const AllNetworksDocument = `
     query AllNetworks($filter: networkFilter) {

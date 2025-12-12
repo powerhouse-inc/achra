@@ -67,25 +67,35 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
         return builders
       }
 
-      const getSortableValue = (value: Team[keyof Team]): string | number => {
-        if (value === null) {
+      return [...builders].sort((a, b) => {
+        const getSortableValue = (team: Team): string | number => {
+          const value = team[column.accessorKey as keyof Team]
+          if (column.accessorKey === 'lastActivity') {
+            const activity = value as Team['lastActivity']
+            const dateString = activity.update_at ?? activity.created_at
+            return dateString ? new Date(dateString).getTime() : ''
+          }
+
+          if (value === null) {
+            return ''
+          }
+          if (typeof value === 'string') {
+            return value.toLowerCase()
+          }
+          if (typeof value === 'number') {
+            return value
+          }
+          if (Array.isArray(value)) {
+            return value.length
+          }
+          if (value instanceof Date) {
+            return value.getTime()
+          }
           return ''
         }
-        if (typeof value === 'string' || typeof value === 'number') {
-          return value
-        }
-        if (Array.isArray(value)) {
-          return value.length
-        }
-        if (value instanceof Date) {
-          return value.getTime()
-        }
-        return ''
-      }
 
-      return [...builders].sort((a, b) => {
-        const aValue = getSortableValue(a[column.accessorKey as keyof Team])
-        const bValue = getSortableValue(b[column.accessorKey as keyof Team])
+        const aValue = getSortableValue(a)
+        const bValue = getSortableValue(b)
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1
