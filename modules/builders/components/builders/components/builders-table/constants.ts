@@ -10,30 +10,30 @@ export interface BuildersTableColumn {
 export const BUILDERS_TABLE_COLUMNS: BuildersTableColumn[] = [
   {
     header: 'Builders',
-    accessorKey: 'builders',
+    accessorKey: 'name',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
   },
   {
     header: 'Skills',
-    accessorKey: 'skills',
+    accessorKey: 'role',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
   },
   {
     header: 'Scope',
-    accessorKey: 'scope',
+    accessorKey: 'scopes',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
   },
   {
     header: 'Last Modified',
-    accessorKey: 'lastModified',
+    accessorKey: 'lastActivity',
     hasSort: true,
-    sortReverse: false,
+    sortReverse: true,
     isNumeric: false,
   },
 ]
