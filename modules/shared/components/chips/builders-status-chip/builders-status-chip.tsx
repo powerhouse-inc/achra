@@ -11,27 +11,27 @@ export default function BuildersStatusChip({ status }: BuildersStatusChipProps) 
     switch (status) {
       case BuilderStatus.Active:
         return {
-          label: 'Progress',
+          label: 'Active',
           color: 'blue',
         }
       case BuilderStatus.Inactive:
         return {
-          label: 'To Do',
+          label: 'Inactive',
           color: 'yellow',
         }
       case BuilderStatus.OnHold:
         return {
-          label: 'Canceled',
+          label: 'On Hold',
           color: 'red',
         }
       case BuilderStatus.Completed:
         return {
-          label: 'Accepted',
+          label: 'Completed',
           color: 'green',
         }
       case BuilderStatus.Archived:
         return {
-          label: 'Obsolete',
+          label: 'Archived',
           color: 'gray',
         }
     }
