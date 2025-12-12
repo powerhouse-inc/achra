@@ -15,52 +15,52 @@ const actorRolesOptions: Option[] = [
   {
     value: TeamRole.ActiveEcosystemActor,
     label: <BuildersRolesChip role={TeamRole.ActiveEcosystemActor} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.ScopeFacilitator,
     label: <BuildersRolesChip role={TeamRole.ScopeFacilitator} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.AdvisoryCouncilMember,
     label: <BuildersRolesChip role={TeamRole.AdvisoryCouncilMember} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.Facilitator,
     label: <BuildersRolesChip role={TeamRole.Facilitator} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.ResearchExpert,
     label: <BuildersRolesChip role={TeamRole.ResearchExpert} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.ProjectLead,
     label: <BuildersRolesChip role={TeamRole.ProjectLead} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.DataExpert,
     label: <BuildersRolesChip role={TeamRole.DataExpert} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.TechExpert,
     label: <BuildersRolesChip role={TeamRole.TechExpert} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.TeamLead,
     label: <BuildersRolesChip role={TeamRole.TeamLead} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
   {
     value: TeamRole.All,
     label: <BuildersRolesChip role={TeamRole.All} />,
-    group: 'Skills',
+    group: 'Actor Skills',
   },
 ]
 
@@ -83,8 +83,8 @@ function ActorRolesSelect({ actorRoles, setActorRoles, className }: ActorRolesSe
       enableSearch={false}
       groupBy="group"
       enableSelectAll={true}
-      selectAllGroup="Skills"
-      placeholder="Skills"
+      selectAllGroup="Actor Skills"
+      placeholder="Actor Skills"
       className={cn('bg-background dark:bg-background')}
       commandProps={{
         className,
@@ -103,7 +103,7 @@ function ActorRolesSelectDrawer({ actorRoles, setActorRoles }: ActorRolesSelectP
     <DrawerSelect
       value={actorRoles}
       onChange={handleChange}
-      label="Skills"
+      label="Actor Skills"
       options={actorRolesOptions}
       multiselect={true}
       enableSelectAll={true}
