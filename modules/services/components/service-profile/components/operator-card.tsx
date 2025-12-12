@@ -63,7 +63,7 @@ function OperatorCard({
       </CardContent>
       <CardFooter className="mt-2 flex-col gap-2 p-0">
         <InternalLink
-          href={`/operators/${id}` as Route}
+          href={`/services/operators/${id}` as Route}
           size="lg"
           variant="default"
           className="w-full"
@@ -71,7 +71,7 @@ function OperatorCard({
           Engage
         </InternalLink>
         <Button variant="outline" asChild size="lg" className="w-full">
-          <Link href={'/services/sno-embryonic-hub/operator-team-profile' as Route}>
+          <Link href={`/services/operators/${id}` as Route}>
             <span>More Info</span>
             <Info className="size-4" />
           </Link>
