@@ -12,17 +12,16 @@ export interface BudgetStamentTableItemProps {
   builder: Team
 }
 
-// px-2 py-3 xl:p-3 xl:pr-4 2xl:py-3 2xl:pr-4 2xl:pl-4
 export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps) {
   return (
     <TableRow
       key={builder.id}
-      className="flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0! px-2 xl:pr-4 2xl:pl-4"
+      className="flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!"
     >
-      <TableCell className="inline-block h-full w-[27%] p-0! py-3">
+      <TableCell className="flex h-full w-[27%] p-0!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
-          className="flex h-full w-full items-center"
+          className="flex h-full w-full items-center pl-4 xl:pl-3 2xl:pl-3.5"
         >
           <ContributorProfileInfo
             name={builder.name}
@@ -53,7 +52,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
       <TableCell className="inline-block h-full w-[14%] p-0! text-right">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
-          className="flex h-full w-full items-center justify-start  "
+          className="flex h-full w-full items-center justify-start"
         >
           <BuildersStatusChip status={builder.status} />
         </Link>
@@ -72,11 +71,11 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
       <TableCell className="inline-flex h-full w-[10%] p-0! text-right">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
-          className="group/link flex h-full w-full items-center justify-end"
+          className="group/link flex h-full w-full items-center justify-end pr-4"
         >
           <Button variant="outline" asChild className="pointer-events-none">
             <div>
-              View
+              <span className="hidden xl:block">View</span>
               <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
             </div>
           </Button>
