@@ -8,7 +8,6 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/comp
 import type { Route } from 'next'
 
 interface OperatorCardProps {
-  id: string
   title: string
   description: string
   roles: OperatorChipEnum[]
@@ -19,7 +18,6 @@ interface OperatorCardProps {
 }
 
 function OperatorCard({
-  id,
   title,
   description,
   roles,
@@ -69,9 +67,8 @@ function OperatorCard({
         >
           Engage
         </InternalLink>
-
         <Button variant="outline" asChild size="lg" className="w-full">
-          <Link href={`/operators/${id}` as Route}>
+          <Link href={'/services/sno-embryonic-hub' as Route}>
             <span>More Info</span>
             <Info className="size-4" />
           </Link>
