@@ -113,7 +113,6 @@ export default function ServiceProfile() {
           {OPERATORS_MOCK.map((operator) => (
             <OperatorCard
               key={operator.id}
-              id={operator.id}
               title={operator.title}
               description={operator.description}
               roles={operator.roles}
