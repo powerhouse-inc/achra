@@ -1,8 +1,4 @@
-import { ArrowRight } from 'lucide-react'
-
 import Image from 'next/image'
-import Link from 'next/link'
-
 import { OPERATORS_MOCK, SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
@@ -10,7 +6,6 @@ import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-t
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
 import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
 import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
-import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
@@ -81,13 +76,6 @@ export default function ServiceProfile() {
             </div>
           </div>
         </div>
-        {/* TODO: Temporary link, remove when Ale says it's ok to remove it. */}
-        <Button asChild variant="default" className="w-fit">
-          <Link href={'/services/sno-embryonic-hub/operator-team-profile' as Route}>
-            SNO Embryonic Hub
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
         <div className="flex flex-col gap-2 sm:flex-row md:gap-4 lg:gap-6">
           <ServiceSectionsCard
             icon={SettingsIcon}
