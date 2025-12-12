@@ -62,7 +62,7 @@ function OperatorCard({
       </CardContent>
       <CardFooter className="mt-2 flex-col gap-2 p-0">
         <InternalLink
-          href={`/operators/${id}` as Route}
+          href={'/services/sno-embryonic-hub' as Route}
           size="lg"
           variant="default"
           className="w-full"
