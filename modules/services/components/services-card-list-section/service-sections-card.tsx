@@ -32,7 +32,7 @@ export function ServiceSectionsCard({
         {showDetailsButton && (
           <CardAction>
             <InternalLink href="/services" size="lg" variant="outline">
-              Purchase
+              Details
             </InternalLink>
           </CardAction>
         )}
