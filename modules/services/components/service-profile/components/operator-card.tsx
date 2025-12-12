@@ -69,6 +69,7 @@ function OperatorCard({
         >
           Engage
         </InternalLink>
+
         <Button variant="outline" asChild size="lg" className="w-full">
           <Link href={`/operators/${id}` as Route}>
             <span>More Info</span>
