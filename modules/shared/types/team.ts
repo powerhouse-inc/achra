@@ -1,9 +1,10 @@
+import type { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { ChangeTrackingEvent } from './activity'
 import type { BudgetStatement } from './budgetStatement'
 import type { ContributorCommitment, CuGithubContribution } from './contributor'
 import type { Scope } from './scopes'
 import type { SocialMediaChannels } from './socialMedia'
-import type { ResourceType, TeamCategory, TeamRole, TeamStatus } from './types'
+import type { ResourceType, TeamCategory, TeamRole } from './types'
 import type { Auditor } from './users'
 
 export interface TeamUpdate {
@@ -19,7 +20,7 @@ export interface Team {
   code: string
   shortCode: string
   name: string
-  status: TeamStatus
+  status: BuilderStatus
   image: string
   budgetPath: string
   categories: TeamCategory[]

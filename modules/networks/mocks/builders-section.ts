@@ -1,7 +1,8 @@
+import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
 import type { SocialMediaChannels } from '@/modules/shared/types/socialMedia'
 import type { Team } from '@/modules/shared/types/team'
-import { ResourceType, TeamCategory, TeamRole, TeamStatus } from '@/modules/shared/types/types'
+import { ResourceType, TeamCategory, TeamRole } from '@/modules/shared/types/types'
 
 export const mockBuilderTeams: Team[] = [
   {
@@ -9,7 +10,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'DEW-001',
     shortCode: 'DE',
     name: 'Dewiz',
-    status: TeamStatus.Accepted,
+    status: BuilderStatus.Completed,
     type: ResourceType.EcosystemActor,
     role: TeamRole.ActiveEcosystemActor,
     image:
@@ -72,7 +73,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'PW-002',
     shortCode: 'PO',
     name: 'Powerhouse Inc.',
-    status: TeamStatus.Canceled,
+    status: BuilderStatus.OnHold,
     type: ResourceType.EcosystemActor,
     role: TeamRole.ScopeFacilitator,
     image:
@@ -130,7 +131,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'Development & UX',
     shortCode: 'UX',
     name: 'Development & UX',
-    status: TeamStatus.Obsolete,
+    status: BuilderStatus.Archived,
     type: ResourceType.CoreUnit,
     role: TeamRole.Facilitator,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
@@ -182,7 +183,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'Development & UX',
     shortCode: 'UX',
     name: 'Development & UX',
-    status: TeamStatus.Progress,
+    status: BuilderStatus.Active,
     type: ResourceType.CoreUnit,
     role: TeamRole.AdvisoryCouncilMember,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
@@ -234,7 +235,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'POW-004',
     shortCode: 'PW',
     name: 'Powerhouse Inc.',
-    status: TeamStatus['To Do'],
+    status: BuilderStatus.Inactive,
     type: ResourceType.EcosystemActor,
     role: TeamRole.ResearchExpert,
     image:
@@ -287,7 +288,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'DEW-001',
     shortCode: 'DE',
     name: 'Dewiz',
-    status: TeamStatus.Accepted,
+    status: BuilderStatus.Completed,
     type: ResourceType.EcosystemActor,
     role: TeamRole.ProjectLead,
     image:
@@ -340,7 +341,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'PW-002',
     shortCode: 'PO',
     name: 'Powerhouse Inc.',
-    status: TeamStatus.Accepted,
+    status: BuilderStatus.Completed,
     type: ResourceType.EcosystemActor,
     role: TeamRole.DataExpert,
     image:
@@ -393,7 +394,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'Development & UX',
     shortCode: 'UX',
     name: 'Development & UX',
-    status: TeamStatus.Obsolete,
+    status: BuilderStatus.Archived,
     type: ResourceType.CoreUnit,
     role: TeamRole.TechExpert,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
@@ -445,7 +446,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'Development & UX',
     shortCode: 'UX',
     name: 'Development & UX',
-    status: TeamStatus.Accepted,
+    status: BuilderStatus.Completed,
     type: ResourceType.CoreUnit,
     role: TeamRole.TeamLead,
     image: 'https://makerdao-ses.github.io/ecosystem-dashboard/core-units/dux-001/dux_logo.png',
@@ -497,7 +498,7 @@ export const mockBuilderTeams: Team[] = [
     code: 'POW-004',
     shortCode: 'PW',
     name: 'Powerhouse Inc.',
-    status: TeamStatus.Accepted,
+    status: BuilderStatus.Completed,
     type: ResourceType.EcosystemActor,
     role: TeamRole.All,
     image:

@@ -1,12 +1,12 @@
+import type { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Avatar, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { cn } from '@/modules/shared/lib/utils'
-import type { TeamStatus } from '@/modules/shared/types/types'
 import { BuildersStatusChip } from '../chips/builders-status-chip'
 
 export interface BuilderProfileProps {
   name: string
   shortCode: string
-  status: TeamStatus
+  status: BuilderStatus
   image: string
   className?: string
 }
