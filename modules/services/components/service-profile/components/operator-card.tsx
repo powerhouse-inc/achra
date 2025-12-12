@@ -1,5 +1,4 @@
 import { FileText, Info } from 'lucide-react'
-
 import Link from 'next/link'
 import OperatorChip from '@/modules/operator-profile/components/operator-chip'
 import type { OperatorChipEnum } from '@/modules/operator-profile/types'
@@ -9,7 +8,6 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/comp
 import type { Route } from 'next'
 
 interface OperatorCardProps {
-  id: string
   title: string
   description: string
   roles: OperatorChipEnum[]
@@ -17,10 +15,10 @@ interface OperatorCardProps {
   minEngagement: string
   teamSize: string
   setupTime: string
+  id: string
 }
 
 function OperatorCard({
-  id,
   title,
   description,
   roles,
@@ -28,6 +26,7 @@ function OperatorCard({
   minEngagement,
   teamSize,
   setupTime,
+  id,
 }: OperatorCardProps) {
   return (
     <Card className="gap-2 border-none p-3 shadow-lg">
