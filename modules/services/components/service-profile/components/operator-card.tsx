@@ -1,5 +1,4 @@
 import { FileText, Info } from 'lucide-react'
-
 import Link from 'next/link'
 import OperatorChip from '@/modules/operator-profile/components/operator-chip'
 import type { OperatorChipEnum } from '@/modules/operator-profile/types'

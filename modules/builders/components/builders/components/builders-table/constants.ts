@@ -16,8 +16,8 @@ export const BUILDERS_TABLE_COLUMNS: BuildersTableColumn[] = [
     isNumeric: false,
   },
   {
-    header: 'Role',
-    accessorKey: 'role',
+    header: 'Skills',
+    accessorKey: 'skills',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
