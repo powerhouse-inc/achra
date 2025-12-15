@@ -13,7 +13,7 @@ function WalletInfo({ name, address }: WalletInfoProps) {
       <Identicon value={address || name} className="size-6 min-w-6 md:size-8 md:min-w-8" />
       <div>
         <div className="flex">
-          <div className="text-xs/4.5 font-medium">{name}</div>
+          <div className="text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">{name}</div>
         </div>
         <div className="flex gap-4">
           <Link
