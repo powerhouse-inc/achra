@@ -1,21 +1,21 @@
 import { useMemo } from 'react'
-import type { ScopeSizeVariant } from '@/modules/shared/components/chips/builders-scopes-chip'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeChipSizeVariant } from '@/modules/shared/components/chips/builders-scopes-chip'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import type { Team } from '@/modules/shared/types/team'
 
 interface UseCompactItemProps {
-  team: Team
+  builder: Builder
 }
 
-export function useCompactItem({ team }: UseCompactItemProps) {
+export function useCompactItem({ builder }: UseCompactItemProps) {
   const isDesktop = useMediaQuery({ from: 'lg' })
   const isMobile = useMediaQuery({ to: 'sm' })
 
-  const scopeSizeVariant: ScopeSizeVariant = useMemo(() => {
+  const scopeSizeVariant: ScopeChipSizeVariant = useMemo(() => {
     if (isMobile) return 'small'
-    if (!isDesktop && team.scopes.length > 1) return 'small'
+    if (!isDesktop && builder.scopes.length > 1) return 'small'
     return 'large'
-  }, [isDesktop, isMobile, team])
+  }, [isDesktop, isMobile, builder])
 
   return {
     scopeSizeVariant,

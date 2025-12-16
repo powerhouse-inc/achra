@@ -1,57 +1,57 @@
 import { useMemo } from 'react'
-import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip/builders-scopes-chip'
+import { BuilderScope } from '@/modules/__generated__/graphql/switchboard-generated'
+import BuildersScopesChip from '@/modules/shared/components/chips/builders-scopes-chip/builders-scopes-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
-import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface ScopesSelectProps {
-  scopes: TeamScopeEnum[]
-  setScopes: (scopes: TeamScopeEnum[]) => Promise<URLSearchParams>
+  scopes: BuilderScope[]
+  setScopes: (scopes: BuilderScope[]) => Promise<URLSearchParams>
   className?: string
 }
 
 const scopesOptions: Option[] = [
   {
-    value: TeamScopeEnum.SupportScope,
-    label: <BuildersScopesChip scope={TeamScopeEnum.SupportScope} />,
+    value: BuilderScope.SupportScope,
+    label: <BuildersScopesChip scope={BuilderScope.SupportScope} />,
     group: 'Scopes',
   },
   {
-    value: TeamScopeEnum.StabilityScope,
-    label: <BuildersScopesChip scope={TeamScopeEnum.StabilityScope} />,
+    value: BuilderScope.StabilityScope,
+    label: <BuildersScopesChip scope={BuilderScope.StabilityScope} />,
     group: 'Scopes',
   },
   {
-    value: TeamScopeEnum.AccessibilityScope,
-    label: <BuildersScopesChip scope={TeamScopeEnum.AccessibilityScope} />,
+    value: BuilderScope.Acc,
+    label: <BuildersScopesChip scope={BuilderScope.Acc} />,
     group: 'Scopes',
   },
   {
-    value: TeamScopeEnum.ProtocolScope,
-    label: <BuildersScopesChip scope={TeamScopeEnum.ProtocolScope} />,
+    value: BuilderScope.Sta,
+    label: <BuildersScopesChip scope={BuilderScope.Sta} />,
     group: 'Scopes',
   },
   {
-    value: TeamScopeEnum.GovernanceScope,
-    label: <BuildersScopesChip scope={TeamScopeEnum.GovernanceScope} />,
+    value: BuilderScope.ProtocolScope,
+    label: <BuildersScopesChip scope={BuilderScope.ProtocolScope} />,
     group: 'Scopes',
   },
   {
-    value: TeamScopeEnum.All,
-    label: <BuildersScopesChip scope={TeamScopeEnum.All} />,
+    value: BuilderScope.GovernanceScope,
+    label: <BuildersScopesChip scope={BuilderScope.GovernanceScope} />,
     group: 'Scopes',
   },
 ]
 
 function ScopesSelect({ scopes, setScopes, className }: ScopesSelectProps) {
   const selectedOptions = useMemo(
-    () => scopesOptions.filter((option) => scopes.includes(option.value as TeamScopeEnum)),
+    () => scopesOptions.filter((option) => scopes.includes(option.value as BuilderScope)),
     [scopes],
   )
 
   const handleChange = (options: Option[]) => {
-    const values = options.map((option) => option.value as TeamScopeEnum)
+    const values = options.map((option) => option.value as BuilderScope)
     void setScopes(values)
   }
 
@@ -76,7 +76,7 @@ function ScopesSelect({ scopes, setScopes, className }: ScopesSelectProps) {
 
 function ScopesSelectDrawer({ scopes, setScopes }: ScopesSelectProps) {
   const handleChange = (values: string[]) => {
-    void setScopes(values as TeamScopeEnum[])
+    void setScopes(values as BuilderScope[])
   }
 
   return (

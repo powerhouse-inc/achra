@@ -1,51 +1,67 @@
-import { cva, type VariantProps } from 'class-variance-authority'
-import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
-import { cn } from '@/modules/shared/lib/utils'
-import { Badge } from '../../ui/badge'
+import { useMemo } from 'react'
+import { BuilderScope } from '@/modules/__generated__/graphql/switchboard-generated'
+import { GenericChip } from '../generic-chip/generic-chip'
 
-const buildersScopesChipVariants = cva('box-border border-2', {
-  variants: {
-    size: {
-      small: 'h-6 w-8.5 p-0 text-xs/4.5 font-medium',
-      medium: 'h-6 w-12 p-0 text-sm/5.5 font-semibold',
-      large: 'h-6 px-1.5 py-0.25 text-sm/5.5 font-semibold',
-      extraLarge: 'px-2 py-1 text-sm/5.5 font-semibold',
-    },
-    scope: {
-      [TeamScopeEnum.SupportScope]:
-        'border-status-progress bg-status-progress/30 text-status-progress',
-      [TeamScopeEnum.StabilityScope]: 'border-destructive bg-destructive/30 text-destructive',
-      [TeamScopeEnum.AccessibilityScope]:
-        'border-status-success bg-status-success/30 text-status-success',
-      [TeamScopeEnum.ProtocolScope]: 'border-to-do bg-to-do/30 text-to-do',
-      [TeamScopeEnum.GovernanceScope]: 'border-primary bg-primary/30 text-primary',
-      [TeamScopeEnum.All]: 'border-muted-foreground bg-muted text-muted-foreground',
-    },
-  },
-  defaultVariants: {
-    size: 'large',
-    scope: TeamScopeEnum.SupportScope,
-  },
-})
-
-type BuildersScopesChipVariants = VariantProps<typeof buildersScopesChipVariants>
-
-export type ScopeSizeVariant = NonNullable<BuildersScopesChipVariants['size']>
+export type ScopeChipSizeVariant = 'small' | 'medium' | 'large'
 
 interface BuildersScopesChipProps {
-  scope: TeamScopeEnum
-  size?: ScopeSizeVariant
+  scope: BuilderScope
+  size?: ScopeChipSizeVariant
   className?: string
 }
 
-export function BuildersScopesChip({ scope, size = 'large', className }: BuildersScopesChipProps) {
-  const chipLabel = size === 'small' || size === 'medium' ? scope.slice(0, 3).toUpperCase() : scope
+export default function BuildersScopesChip({
+  scope,
+  size = 'large',
+  className,
+}: BuildersScopesChipProps) {
+  const chipLabel = useMemo(() => {
+    return size === 'small' || size === 'medium' ? scope.slice(0, 3).toUpperCase() : scope
+  }, [scope, size])
+
+  const { label, color } = useMemo(() => {
+    switch (scope) {
+      case BuilderScope.Acc:
+        return {
+          label: 'Accessibility',
+          color: 'blue',
+        }
+      case BuilderScope.GovernanceScope:
+        return {
+          label: 'Governance',
+          color: 'red',
+        }
+      case BuilderScope.ProtocolScope:
+        return {
+          label: 'Protocol',
+          color: 'green',
+        }
+      case BuilderScope.Sta:
+        return {
+          label: 'Stability',
+          color: 'red',
+        }
+      case BuilderScope.StabilityScope:
+        return {
+          label: 'Stability',
+          color: 'red',
+        }
+      case BuilderScope.Sup:
+        return {
+          label: 'Support',
+          color: 'blue',
+        }
+      case BuilderScope.SupportScope:
+        return {
+          label: 'Support',
+          color: 'blue',
+        }
+    }
+  }, [scope])
 
   return (
-    <Badge variant="outline" className={cn(buildersScopesChipVariants({ size, scope }), className)}>
-      {chipLabel}
-    </Badge>
+    <GenericChip variant="bordered" color={color} className={className}>
+      {size === 'small' || size === 'medium' ? chipLabel : label}
+    </GenericChip>
   )
 }
-
-export { buildersScopesChipVariants }

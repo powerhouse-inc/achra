@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { BuildersSection } from '@/modules/networks/components/builders-section/builders-section'
 import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
 import { GovernanceSection } from '@/modules/networks/components/governance-section/governance-section'
 import {
@@ -41,7 +40,9 @@ export default function NetworkPage({ params }: NetworkPageProps) {
         </ErrorBoundaryWithPresets>
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
-        <BuildersSection />
+        {/* Note: This section is waiting for backend integration */}
+        {/* TODO: Implement builders section backend integration */}
+        {/* <BuildersSection /> */}
         <GovernanceSection />
 
         <SectionActivation

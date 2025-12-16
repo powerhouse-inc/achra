@@ -1,26 +1,23 @@
 import { useMemo } from 'react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { getProfileUpdateDate } from '@/modules/shared/lib/get-profile-update-date'
-import type { Team } from '@/modules/shared/types/team'
 
 type ProfileUpdatedDateProps<E extends React.ElementType> = React.ComponentProps<E> & {
   as?: E
-  team: Team
+  lastModified: string
 }
 
 function ProfileUpdatedDate<E extends React.ElementType = 'span'>({
   as,
-  team,
+  lastModified,
   ...props
 }: ProfileUpdatedDateProps<E>) {
   const Element = as ?? 'span'
   const profileUpdateDate = useMemo(() => {
-    const date = getProfileUpdateDate(team)
-    if (date?.isValid) {
-      return date.toUTC().toFormat('dd.MM.yyyy')
+    if (lastModified?.isValid) {
+      return lastModified.toUTC().toFormat('dd.MM.yyyy')
     }
     return 'No data'
-  }, [team])
+  }, [lastModified])
 
   return <Element {...props}>{profileUpdateDate}</Element>
 }
