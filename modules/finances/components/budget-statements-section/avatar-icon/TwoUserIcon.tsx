@@ -1,7 +1,6 @@
-import type { SVGProps } from 'react'
-import { useId } from 'react'
+import { type SVGProps, useId } from 'react'
 
-const TwoUserIcon = (props: SVGProps<SVGSVGElement>) => {
+function TwoUserIcon(props: SVGProps<SVGSVGElement>) {
   const filterId = useId()
 
   return (
@@ -61,11 +60,7 @@ const TwoUserIcon = (props: SVGProps<SVGSVGElement>) => {
             type="matrix"
             values="0 0 0 0 0.478431 0 0 0 0 0.227451 0 0 0 0 1 0 0 0 0.2 0"
           />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow_3523_60500"
-          />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3523_60500" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
