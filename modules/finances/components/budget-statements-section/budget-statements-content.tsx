@@ -1,6 +1,16 @@
 import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
+import { Button } from '@/modules/shared/components/ui/button'
 import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
 
-export default function BudgetStatementsContent() {
-  return <BudgetStatementsItem builders={mockBuilderTeams} />
+export default async function BudgetStatementsContent() {
+  // TODO: This simulaty fetch data from API
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  return (
+    <div className="flex h-fit flex-col gap-6">
+      <BudgetStatementsItem builders={mockBuilderTeams} />
+      <Button variant="outline" size="lg" className="w-58 self-center md:mt-0">
+        Load More
+      </Button>
+    </div>
+  )
 }

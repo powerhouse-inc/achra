@@ -10,7 +10,7 @@ export interface BudgetStatementsItemProps {
   builders: Builder[]
 }
 
-export function BudgetStatementsItem({ builders }: BudgetStatementsItemProps) {
+export function BudgetStatementsItem({ builders }: Readonly<BudgetStatementsItemProps>) {
   const { buildersProcessed } = useBudgetStamentData({ builders })
 
   return (

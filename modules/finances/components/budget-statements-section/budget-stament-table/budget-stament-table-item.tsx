@@ -12,12 +12,9 @@ export interface BudgetStamentTableItemProps {
   builder: Builder
 }
 
-export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps) {
+export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableItemProps>) {
   return (
-    <TableRow
-      key={builder.id}
-      className="flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!"
-    >
+    <TableRow className="flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!">
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
