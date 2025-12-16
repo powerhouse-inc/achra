@@ -38,10 +38,11 @@ export function BudgetStamentTable({ builders, className }: BudgetStamentTablePr
                 column.isNumeric && 'text-right',
                 index === 0 && 'w-[27%]',
                 index === 1 && 'w-[17%]',
-                index === 2 && 'w-[15%]',
+                index === 2 && 'w-[15%] lg:pl-3!',
                 index === 3 && 'w-[15%]',
                 index === 4 && 'w-[19%]',
               )}
+
             >
               <Button
                 variant="ghost"
@@ -52,9 +53,9 @@ export function BudgetStamentTable({ builders, className }: BudgetStamentTablePr
                 className={cn(
                   '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6 dark:hover:bg-transparent',
                   headersSort[index] === SortEnum.Asc &&
-                    '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
+                  '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
                   headersSort[index] === SortEnum.Desc &&
-                    '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
+                  '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
                 )}
               >
                 {column.header}
