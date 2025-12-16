@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
 import BreakdownChartCard from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card'
 import BudgetStatementsSection from '@/modules/finances/components/budget-statements-section/budget-statements-section'
+import { BudgetStatementsSectionSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-section-skeleton'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
@@ -48,7 +49,9 @@ export default function FinancesPage({ params }: FinancesPageProps) {
           <NavigationSection params={params} />
         </Suspense>
         <BreakdownChartCard />
-        <BudgetStatementsSection />
+        <Suspense fallback={<BudgetStatementsSectionSkeleton />}>
+          <BudgetStatementsSection />
+        </Suspense>
         <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
       </PageContent>
     </main>
