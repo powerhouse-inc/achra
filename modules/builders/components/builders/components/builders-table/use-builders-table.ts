@@ -71,9 +71,11 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
         const getSortableValue = (builder: Builder): string | number => {
           const value = builder[column.accessorKey as keyof Builder]
           if (column.accessorKey === 'lastModified') {
-            const activity = value
-            const dateString = activity.update_at ?? activity.created_at
-            return dateString ? new Date(dateString).getTime() : ''
+            if (typeof value === 'string') {
+              const timestamp = new Date(value).getTime()
+              return Number.isNaN(timestamp) ? 0 : timestamp
+            }
+            return 0
           }
 
           if (value === null) {
