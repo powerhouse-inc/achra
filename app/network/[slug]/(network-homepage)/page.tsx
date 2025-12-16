@@ -41,6 +41,7 @@ export default function NetworkPage({ params }: NetworkPageProps) {
         </ErrorBoundaryWithPresets>
         <FinancesSection />
         <WalletsSection wallets={WALLETS} />
+        {/* TODO: Implement builders section backend integration */}
         <BuildersSection />
         <GovernanceSection />
 

@@ -1,9 +1,10 @@
 'use client'
 import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Link from 'next/link'
-import BuilderDomain from '@/modules/shared/components/builder-domain'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
-import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip/builders-roles-chip'
+import BuilderScopes from '@/modules/shared/components/builder-scopes'
+import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,
@@ -14,14 +15,13 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { LastModified } from '../last-modified'
 import { Links } from '../links'
 import { SortEnum, useBuildersTable } from './use-builders-table'
 import type { Route } from 'next'
 
 export interface BuildersTableProps {
-  builders: Team[]
+  builders: Builder[]
   className?: string
   networkSlug: string
 }
@@ -84,25 +84,25 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
                 <Link href={builderLink} className="w-full py-4! pr-0! pl-4! xl:pl-6!">
                   <BuilderProfile
                     name={builder.name}
-                    shortCode={builder.shortCode}
+                    code={builder.code}
                     status={builder.status}
-                    image={builder.image}
+                    image={builder.icon}
                   />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 min-w-[22%] items-center p-0!">
                 <Link href={builderLink} className="w-full px-0! py-4!">
-                  <BuildersRolesChip role={builder.role} className="h-fit" />
+                  <BuilderSkills skills={builder.skilss} className="h-fit" />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 min-w-[20%] items-center p-0!">
                 <Link href={builderLink} className="w-full px-0! py-4!">
-                  <BuilderDomain team={builder} domain="scope" />
+                  <BuilderScopes scopes={builder.scopes} />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 flex-1 items-center p-0!">
                 <Link href={builderLink} className="w-full px-0! py-4!">
-                  <LastModified team={builder} />
+                  <LastModified lastModified={builder.lastModified} />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 w-fit items-center justify-end p-0! text-right">

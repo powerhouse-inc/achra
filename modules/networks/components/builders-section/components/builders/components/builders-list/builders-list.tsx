@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   StripedCard,
   StripedCardAction,
@@ -8,11 +9,10 @@ import {
 } from '@/modules/shared/components/striped-card/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { BuildersListItems } from './components/builders-list-items/builders-list-items'
 
 export interface BuildersListProps {
-  builders: Team[]
+  builders: Builder[]
   className?: string
 }
 

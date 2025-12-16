@@ -2,20 +2,20 @@
 
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
-import BuildersRolesChip from '@/modules/shared/components/chips/builders-roles-chip'
+import BuilderScopes from '@/modules/shared/components/builder-scopes'
+import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { LastModified } from '../last-modified/last-modified'
 import { Links } from '../links'
 import type { Route } from 'next'
 
 export interface BuildersListProps {
-  builders: Team[]
+  builders: Builder[]
   networkSlug: string
   className?: string
 }
@@ -29,17 +29,17 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
             <CardContent className="flex items-end justify-between px-2 md:grid md:grid-cols-[30%_17%_28%_80px]">
               <BuilderProfile
                 name={builder.name}
-                shortCode={builder.shortCode}
+                code={builder.code}
                 status={builder.status}
-                image={builder.image}
+                image={builder.icon}
               />
               <div className="hidden flex-col gap-0.5 md:flex">
                 <span className="text-foreground/30 text-sm/5.5 font-semibold">Scope</span>
-                <BuilderDomain team={builder} domain="scope" isMobile />
+                <BuilderScopes scopes={builder.scopes} />
               </div>
               <div className="hidden flex-col gap-0.5 md:flex">
                 <span className="text-foreground/30 text-sm/5.5 font-semibold">Skills</span>
-                <BuildersRolesChip role={builder.role} />
+                <BuilderSkills skills={builder.skilss} isMobile />
               </div>
               <div className="flex gap-4 md:gap-2">
                 <Links />
@@ -53,18 +53,18 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
                 <span className="text-foreground/30 text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">
                   Skills
                 </span>
-                <BuildersRolesChip role={builder.role} />
+                <BuilderSkills skills={builder.skilss} isMobile />
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-foreground/30 text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">
                   Scope
                 </span>
-                <BuilderDomain team={builder} domain="scope" isMobile />
+                <BuilderScopes scopes={builder.scopes} />
               </div>
             </CardContent>
             <Separator className="-mt-0.25" />
             <CardFooter className="bg-background -mt-1 w-full px-2">
-              <LastModified team={builder} isMobile />
+              <LastModified lastModified={builder.lastModified} isMobile />
             </CardFooter>
           </Card>
         </Link>

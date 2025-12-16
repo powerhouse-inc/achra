@@ -31,10 +31,10 @@ export const AllStatuses: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">
         <BuildersStatusChip status={BuilderStatus.Active} />
+        <BuildersStatusChip status={BuilderStatus.Archived} />
+        <BuildersStatusChip status={BuilderStatus.Completed} />
         <BuildersStatusChip status={BuilderStatus.Inactive} />
         <BuildersStatusChip status={BuilderStatus.OnHold} />
-        <BuildersStatusChip status={BuilderStatus.Completed} />
-        <BuildersStatusChip status={BuilderStatus.Archived} />
       </div>
     </div>
   ),

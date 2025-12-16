@@ -4,12 +4,12 @@ import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-d
 import SearchInput from '@/modules/shared/components/form/search-input'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { ActorRolesSelect, ActorRolesSelectDrawer } from './actor-roles-select'
+import { ActorSkillsSelect, ActorSkillsSelectDrawer } from './actor-skills-select'
 import { ScopesSelect, ScopesSelectDrawer } from './scopes-select'
 import useBuilderFilters from './useBuildersFilters'
 
 export default function BuilderFilters() {
-  const { search, scopes, actorRoles, setSearch, setScopes, setActorRoles, onReset } =
+  const { search, scopes, actorSkills, setSearch, setScopes, setActorSkills, onReset } =
     useBuilderFilters()
 
   return (
@@ -21,7 +21,11 @@ export default function BuilderFilters() {
       />
       <div className="hidden items-center gap-4 sm:flex">
         <ScopesSelect scopes={scopes} setScopes={setScopes} className="w-46" />
-        <ActorRolesSelect actorRoles={actorRoles} setActorRoles={setActorRoles} className="w-46" />
+        <ActorSkillsSelect
+          actorSkills={actorSkills}
+          setActorSkills={setActorSkills}
+          className="w-46"
+        />
         <Button
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
           variant="ghost"
@@ -35,7 +39,7 @@ export default function BuilderFilters() {
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer onReset={onReset}>
           <ScopesSelectDrawer scopes={scopes} setScopes={setScopes} />
-          <ActorRolesSelectDrawer actorRoles={actorRoles} setActorRoles={setActorRoles} />
+          <ActorSkillsSelectDrawer actorSkills={actorSkills} setActorSkills={setActorSkills} />
         </FilterDrawer>
       </div>
     </div>

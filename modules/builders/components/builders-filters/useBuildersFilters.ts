@@ -1,7 +1,6 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryStates } from 'nuqs'
 import { useCallback } from 'react'
-import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
-import { TeamRole } from '@/modules/shared/types'
+import { BuilderScope, BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 
 const filtersConfig = {
   search: parseAsString.withDefault('').withOptions({
@@ -12,7 +11,7 @@ const filtersConfig = {
       timeMs: 300,
     },
   }),
-  scopes: parseAsArrayOf(parseAsStringEnum(Object.values(TeamScopeEnum)))
+  scopes: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderScope)))
     .withDefault([])
     .withOptions({
       shallow: false,
@@ -22,7 +21,7 @@ const filtersConfig = {
         timeMs: 100,
       },
     }),
-  actorRoles: parseAsArrayOf(parseAsStringEnum(Object.values(TeamRole)))
+  actorSkills: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderSkill)))
     .withDefault([])
     .withOptions({
       shallow: false,
@@ -69,26 +68,26 @@ export default function useBuilderFilters() {
       setFilterValue('scopes', value, options),
     [setFilterValue],
   )
-  const setActorRoles = useCallback(
-    async (value: StateUpdater<FiltersState['actorRoles']>, options?: FilterOptions) =>
-      setFilterValue('actorRoles', value, options),
+  const setActorSkills = useCallback(
+    async (value: StateUpdater<FiltersState['actorSkills']>, options?: FilterOptions) =>
+      setFilterValue('actorSkills', value, options),
     [setFilterValue],
   )
   const onReset = useCallback(() => {
     void setFilters({
       search: '',
       scopes: [],
-      actorRoles: [],
+      actorSkills: [],
     })
   }, [setFilters])
 
   return {
     search: filters.search,
     scopes: filters.scopes,
-    actorRoles: filters.actorRoles,
+    actorSkills: filters.actorSkills,
     setSearch,
     setScopes,
-    setActorRoles,
+    setActorSkills,
     onReset,
   }
 }

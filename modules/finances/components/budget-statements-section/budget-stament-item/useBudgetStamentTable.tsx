@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import type { Team } from '@/modules/shared/types/team'
 import { BUDGET_STATEMENTS_TABLE_COLUMNS, type BudgetStatementsTableColumn } from '../const'
 
 interface UseBudgetStamentTableProps {
-  builders: Team[]
+  builders: Builder[]
 }
 
 export enum SortEnum {
@@ -58,7 +58,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
   )
 
   const sortBuilders = useCallback(
-    (builders: Team[]) => {
+    (builders: Builder[]) => {
       if (sortColumn === -1) return builders
 
       const column = BUDGET_STATEMENTS_TABLE_COLUMNS[sortColumn]
@@ -68,7 +68,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
         return builders
       }
 
-      const getSortableValue = (value: Team[keyof Team]): string | number => {
+      const getSortableValue = (value: Builder[keyof Builder]): string | number => {
         if (value === null) {
           return ''
         }
@@ -85,8 +85,8 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
       }
 
       return [...builders].sort((a, b) => {
-        const aValue = getSortableValue(a[column.accessorKey as keyof Team])
-        const bValue = getSortableValue(b[column.accessorKey as keyof Team])
+        const aValue = getSortableValue(a[column.accessorKey as keyof Builder])
+        const bValue = getSortableValue(b[column.accessorKey as keyof Builder])
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1

@@ -1,4 +1,4 @@
-import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
+import { getBuilders } from '../../services/builders'
 import { BuildersList } from './components/builders-list/builders-list'
 import { BuildersTable } from './components/builders-table/builders-table'
 
@@ -7,19 +7,12 @@ export interface BuildersProps {
   networkSlug: string
 }
 
-export function Builders({ className, networkSlug }: BuildersProps) {
+export async function Builders({ className, networkSlug }: BuildersProps) {
+  const builders = await getBuilders({ networkSlug })
   return (
     <div className={className}>
-      <BuildersTable
-        builders={mockBuilderTeams}
-        networkSlug={networkSlug}
-        className="hidden lg:block"
-      />
-      <BuildersList
-        builders={mockBuilderTeams}
-        networkSlug={networkSlug}
-        className="flex lg:hidden"
-      />
+      <BuildersTable builders={builders} networkSlug={networkSlug} className="hidden lg:block" />
+      <BuildersList builders={builders} networkSlug={networkSlug} className="flex lg:hidden" />
     </div>
   )
 }

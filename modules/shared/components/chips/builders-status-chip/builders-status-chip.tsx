@@ -1,13 +1,14 @@
 import { useMemo } from 'react'
-import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BuilderStatus, type Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersStatusChipProps {
-  status: BuilderStatus
+  status: Maybe<BuilderStatus> | undefined
 }
 
 export default function BuildersStatusChip({ status }: BuildersStatusChipProps) {
   const { label, color } = useMemo(() => {
+    if (!status) return { label: 'Unknown', color: 'gray' }
     switch (status) {
       case BuilderStatus.Active:
         return {
@@ -17,12 +18,12 @@ export default function BuildersStatusChip({ status }: BuildersStatusChipProps) 
       case BuilderStatus.Inactive:
         return {
           label: 'Inactive',
-          color: 'yellow',
+          color: 'gray',
         }
       case BuilderStatus.OnHold:
         return {
           label: 'On Hold',
-          color: 'red',
+          color: 'orange',
         }
       case BuilderStatus.Completed:
         return {
