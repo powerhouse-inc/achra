@@ -18,18 +18,23 @@ const scopesOptions: Option[] = [
     group: 'Scopes',
   },
   {
+    value: BuilderScope.Sup,
+    label: <BuildersScopesChip scope={BuilderScope.Sup} />,
+    group: 'Scopes',
+  },
+  {
     value: BuilderScope.StabilityScope,
     label: <BuildersScopesChip scope={BuilderScope.StabilityScope} />,
     group: 'Scopes',
   },
   {
-    value: BuilderScope.Acc,
-    label: <BuildersScopesChip scope={BuilderScope.Acc} />,
+    value: BuilderScope.Sta,
+    label: <BuildersScopesChip scope={BuilderScope.Sta} />,
     group: 'Scopes',
   },
   {
-    value: BuilderScope.Sta,
-    label: <BuildersScopesChip scope={BuilderScope.Sta} />,
+    value: BuilderScope.Acc,
+    label: <BuildersScopesChip scope={BuilderScope.Acc} />,
     group: 'Scopes',
   },
   {

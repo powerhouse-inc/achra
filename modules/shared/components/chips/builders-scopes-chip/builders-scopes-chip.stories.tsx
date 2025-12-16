@@ -1,40 +1,6 @@
-import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
-import type { Scope } from '@/modules/shared/types/scopes'
-import { BuildersScopesChip } from './builders-scopes-chip'
+import { BuilderScope } from '@/modules/__generated__/graphql/switchboard-generated'
+import BuildersScopesChip from './builders-scopes-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs'
-
-const MOCK_SCOPES: Record<TeamScopeEnum, Scope> = {
-  [TeamScopeEnum.SupportScope]: {
-    id: 'support-scope',
-    code: 'SUP',
-    name: TeamScopeEnum.SupportScope,
-  },
-  [TeamScopeEnum.StabilityScope]: {
-    id: 'stability-scope',
-    code: 'STB',
-    name: TeamScopeEnum.StabilityScope,
-  },
-  [TeamScopeEnum.AccessibilityScope]: {
-    id: 'accessibility-scope',
-    code: 'ACC',
-    name: TeamScopeEnum.AccessibilityScope,
-  },
-  [TeamScopeEnum.ProtocolScope]: {
-    id: 'protocol-scope',
-    code: 'PRT',
-    name: TeamScopeEnum.ProtocolScope,
-  },
-  [TeamScopeEnum.GovernanceScope]: {
-    id: 'governance-scope',
-    code: 'GOV',
-    name: TeamScopeEnum.GovernanceScope,
-  },
-  [TeamScopeEnum.All]: {
-    id: 'all-scope',
-    code: 'ALL',
-    name: TeamScopeEnum.All,
-  },
-}
 
 const meta: Meta<typeof BuildersScopesChip> = {
   title: 'Shared/Components/Chips/BuildersScopesChip',
@@ -60,18 +26,17 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    scope: MOCK_SCOPES[TeamScopeEnum.SupportScope].name,
+    scope: BuilderScope.SupportScope,
     size: 'large',
   },
 }
 
 export const Sizes: Story = {
   args: {
-    scope: MOCK_SCOPES[TeamScopeEnum.GovernanceScope].name,
+    scope: BuilderScope.GovernanceScope,
   },
   render: ({ scope }) => (
     <div className="flex flex-col gap-2">
-      <BuildersScopesChip scope={scope} size="extraLarge" />
       <BuildersScopesChip scope={scope} size="large" />
       <BuildersScopesChip scope={scope} size="medium" />
       <BuildersScopesChip scope={scope} size="small" />
@@ -82,8 +47,8 @@ export const Sizes: Story = {
 export const AllScopes: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      {(Object.values(TeamScopeEnum) as TeamScopeEnum[]).map((scopeName) => (
-        <BuildersScopesChip key={scopeName} scope={MOCK_SCOPES[scopeName].name} />
+      {(Object.values(BuilderScope) as BuilderScope[]).map((scope) => (
+        <BuildersScopesChip key={scope} scope={scope} />
       ))}
     </div>
   ),

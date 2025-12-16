@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon'
 import { useMemo } from 'react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
@@ -13,10 +14,10 @@ function ProfileUpdatedDate<E extends React.ElementType = 'span'>({
 }: ProfileUpdatedDateProps<E>) {
   const Element = as ?? 'span'
   const profileUpdateDate = useMemo(() => {
-    if (lastModified?.isValid) {
-      return lastModified.toUTC().toFormat('dd.MM.yyyy')
-    }
-    return 'No data'
+    if (!lastModified) return 'No data'
+
+    const parsed = DateTime.fromISO(lastModified, { zone: 'utc' })
+    return parsed.isValid ? parsed.toFormat('dd.MM.yyyy') : 'No data'
   }, [lastModified])
 
   return <Element {...props}>{profileUpdateDate}</Element>
