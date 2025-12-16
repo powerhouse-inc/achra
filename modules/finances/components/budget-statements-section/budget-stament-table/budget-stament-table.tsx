@@ -37,9 +37,9 @@ export function BudgetStamentTable({ builders, className }: BudgetStamentTablePr
                 'inline-block h-fit p-0!',
                 column.isNumeric && 'text-right',
                 index === 0 && 'w-[27%]',
-                index === 1 && 'w-[15%]',
+                index === 1 && 'w-[17%]',
                 index === 2 && 'w-[15%]',
-                index === 3 && 'w-[14%]',
+                index === 3 && 'w-[15%]',
                 index === 4 && 'w-[19%]',
               )}
             >
