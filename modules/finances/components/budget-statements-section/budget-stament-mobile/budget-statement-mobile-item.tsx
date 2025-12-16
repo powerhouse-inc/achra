@@ -3,6 +3,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import type { AnalyticMetric } from '@/modules/finances/types'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
@@ -11,12 +12,11 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/comp
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { LabeledValue } from '../labeled-value'
 
 export interface BudgetStatementMobileItemProps {
-  builder: Team
+  builder: Builder
   selectedMetric: AnalyticMetric
   className?: string
 }
@@ -100,7 +100,7 @@ export function BudgetStatementMobileItem({
 
         <Separator className="-mt-1 md:mt-2" />
         <CardFooter className="bg-background w-full overflow-x-hidden rounded-b-xl px-4 py-1">
-          <LastModified team={builder} isMobile />
+          <LastModified lastModified={builder.lastModified} isMobile />
         </CardFooter>
       </Card>
     </Link>

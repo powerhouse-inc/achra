@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import type { Team } from '@/modules/shared/types/team'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBuildersListItemsProps {
-  builders: Team[]
+  builders: Builder[]
 }
 
 export const useBuildersListItems = ({ builders }: UseBuildersListItemsProps) => {

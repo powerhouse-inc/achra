@@ -1,12 +1,13 @@
 'use client'
-import type { Team } from '@/modules/shared/types/team'
+
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BudgetStatementListMobile } from '../budget-stament-mobile/budget-statement-list-mobile'
 import { BudgetStamentTable } from '../budget-stament-table/budget-stament-table'
 
 import { useBudgetStamentData } from './useBudgetStamentData'
 
 export interface BudgetStatementsItemProps {
-  builders: Team[]
+  builders: Builder[]
 }
 
 export function BudgetStatementsItem({ builders }: BudgetStatementsItemProps) {

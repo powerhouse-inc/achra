@@ -17,7 +17,7 @@ export const BUILDERS_TABLE_COLUMNS: BuildersTableColumn[] = [
   },
   {
     header: 'Skills',
-    accessorKey: 'role',
+    accessorKey: 'skilss',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
@@ -31,7 +31,7 @@ export const BUILDERS_TABLE_COLUMNS: BuildersTableColumn[] = [
   },
   {
     header: 'Last Modified',
-    accessorKey: 'lastActivity',
+    accessorKey: 'lastModified',
     hasSort: true,
     sortReverse: true,
     isNumeric: false,

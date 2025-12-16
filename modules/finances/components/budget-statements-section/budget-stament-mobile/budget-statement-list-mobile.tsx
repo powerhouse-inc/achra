@@ -1,9 +1,9 @@
-import type { Team } from '@/modules/shared/types/team'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BudgetStatementMobileItem } from './budget-statement-mobile-item'
 import type { AnalyticMetric } from '../../summary-section/filter-tabs'
 
 interface BudgetStatementListMobileProps {
-  builders: Team[]
+  builders: Builder[]
   selectedMetric: AnalyticMetric
   className?: string
 }

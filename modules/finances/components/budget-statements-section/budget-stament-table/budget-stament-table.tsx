@@ -1,5 +1,6 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SortEnum } from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/use-wallets-table'
 
 import { Button } from '@/modules/shared/components/ui/button'
@@ -11,12 +12,11 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { useBudgetStamentTable } from '../budget-stament-item/useBudgetStamentTable'
 import { BudgetStamentTableItem } from './budget-stament-table-item'
 
 export interface BudgetStamentTableProps {
-  builders: Team[]
+  builders: Builder[]
   className?: string
 }
 

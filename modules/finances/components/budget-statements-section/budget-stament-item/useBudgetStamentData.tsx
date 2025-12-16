@@ -1,7 +1,7 @@
-import type { Team } from '@/modules/shared/types/team'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 
 interface BuildersStamentProps {
-  builders: Team[]
+  builders: Builder[]
 }
 
 // TODO: Implement this hook to process correct data

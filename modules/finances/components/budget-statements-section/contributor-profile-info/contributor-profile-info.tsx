@@ -1,14 +1,14 @@
-import type { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderStatus, Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { cn } from '@/modules/shared/lib/utils'
 import { AvatarWithIcon } from '../avatar-icon'
 
 interface ContributorProfileInfoProps {
   name: string
-  code: string
+  code?: Maybe<string>
   isCoreUnit: boolean
   icon: boolean
-  status: BuilderStatus
+  status?: Maybe<BuilderStatus>
   className?: string
 }
 
