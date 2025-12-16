@@ -1,3 +1,6 @@
+import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
+import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
+
 export default function BudgetStatementsContent() {
-  return <div className="rounded-lg border p-4">BudgetStatementsContent</div>
+  return <BudgetStatementsItem builders={mockBuilderTeams} />
 }
