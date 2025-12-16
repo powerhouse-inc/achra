@@ -1,7 +1,7 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { BudgetStatementsDesktopSkeleton } from './budget-statements-desktop-skeleton'
 import { BudgetStatementsMobileSkeleton } from './budget-statements-mobile-skeleton'
 import { BudgetStatementsTabletSkeleton } from './budget-statements-tablet-skeleton'
-import { BudgetStatementsDesktopSkeleton } from './budget-statements-desktop-skeleton'
 
 export function BudgetStatementsSectionSkeleton() {
   return (
