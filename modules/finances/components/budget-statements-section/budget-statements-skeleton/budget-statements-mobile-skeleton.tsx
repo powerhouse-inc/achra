@@ -5,6 +5,8 @@ export function BudgetStatementsMobileSkeleton() {
   return (
     <div className="space-y-4 md:hidden">
       {Array.from({ length: 3 }).map((_, index) => (
+        // it is okay to use index as key here because the skeleton is static
+        // eslint-disable-next-line react/no-array-index-key
         <Card key={index} className="p-4">
           <div className="mb-4 flex items-start gap-3">
             <Skeleton className="h-10 w-10 shrink-0 rounded-lg" />

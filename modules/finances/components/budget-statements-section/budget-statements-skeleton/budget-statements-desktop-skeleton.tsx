@@ -25,6 +25,8 @@ export function BudgetStatementsDesktopSkeleton() {
 
       {Array.from({ length: 5 }).map((_, index) => (
         <div
+          // it is okay to use index as key here because the skeleton is static
+          // eslint-disable-next-line react/no-array-index-key
           key={index}
           className="bg-card border-border flex items-center justify-between gap-3 rounded-lg border p-4 shadow-sm"
         >
