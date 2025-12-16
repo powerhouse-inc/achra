@@ -102,12 +102,10 @@ function MobileTransaction({
             <Separator className="my-2" />
 
             <div className="flex justify-between pr-4 pb-2 pl-2">
-              <div className="text-foreground/50 flex w-full items-center justify-center pr-3.5 text-xs/4.5 font-medium">
+              <div className="text-foreground/50 flex items-center justify-center pr-3.5 text-xs/4.5 font-medium">
                 {isIncomingTransaction ? 'Sender Address' : 'Recipient Address'}
               </div>
-              <div className="min-w-fit">
-                <WalletInfo name={counterPartyName} address={counterPartyAddress} />
-              </div>
+              <WalletInfo name={counterPartyName} address={counterPartyAddress} />
             </div>
           </div>
         </AccordionContent>

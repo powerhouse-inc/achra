@@ -15,6 +15,7 @@ interface OperatorCardProps {
   minEngagement: string
   teamSize: string
   setupTime: string
+  id: string
 }
 
 function OperatorCard({
@@ -25,6 +26,7 @@ function OperatorCard({
   minEngagement,
   teamSize,
   setupTime,
+  id,
 }: OperatorCardProps) {
   return (
     <Card className="gap-2 border-none p-3 shadow-lg">
@@ -60,7 +62,7 @@ function OperatorCard({
       </CardContent>
       <CardFooter className="mt-2 flex-col gap-2 p-0">
         <InternalLink
-          href={'/services/sno-embryonic-hub' as Route}
+          href={`/services/operators/${id}` as Route}
           size="lg"
           variant="default"
           className="w-full"
@@ -68,7 +70,7 @@ function OperatorCard({
           Engage
         </InternalLink>
         <Button variant="outline" asChild size="lg" className="w-full">
-          <Link href={'/services/sno-embryonic-hub/operator-team-profile' as Route}>
+          <Link href={`/services/operators/${id}` as Route}>
             <span>More Info</span>
             <Info className="size-4" />
           </Link>
