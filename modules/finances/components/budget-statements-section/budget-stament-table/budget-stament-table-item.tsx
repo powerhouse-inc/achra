@@ -1,15 +1,15 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import type { Team } from '@/modules/shared/types/team'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 
 export interface BudgetStamentTableItemProps {
-  builder: Team
+  builder: Builder
 }
 
 export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps) {
@@ -25,7 +25,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
         >
           <ContributorProfileInfo
             name={builder.name}
-            code={builder.code}
+            code={builder.code ?? ''}
             isCoreUnit={true}
             icon={true}
           />
@@ -64,7 +64,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
           className="flex h-full w-full items-center justify-start"
         >
           <span className="text-foreground text-sm/5.5 font-semibold">
-            <LastModified team={builder} />
+            <LastModified lastModified={builder.lastModified} />
           </span>
         </Link>
       </TableCell>
