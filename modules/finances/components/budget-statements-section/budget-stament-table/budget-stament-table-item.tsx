@@ -25,7 +25,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
         >
           <ContributorProfileInfo
             name={builder.name}
-            code={builder.code ?? ''}
+            code={builder.code}
             isCoreUnit={true}
             icon={true}
             status={builder.status}
@@ -40,10 +40,10 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
           <div>March 2023</div>
         </Link>
       </TableCell>
-      <TableCell className="inline-block h-full w-[15%] p-0! text-right">
+      <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-6!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
-          className="flex h-full w-full items-center justify-start pl-2!"
+          className="flex h-full w-full items-center justify-start"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">
             {usLocalizedNumber(1245555)} USD
