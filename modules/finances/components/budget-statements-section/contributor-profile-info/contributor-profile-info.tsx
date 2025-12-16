@@ -30,7 +30,7 @@ export function ContributorProfileInfo({
         isCoreUnit={isCoreUnit}
       />
       <div className="flex flex-col gap-1">
-        <div className="flex-start md:flex-center md:50 flex gap-2 lg:w-50">
+        <div className="flex-start md:flex-center md:50 flex gap-2 md:w-50">
           <div className="text-foreground/30 text-sm/5.5 font-semibold">{code}</div>
           <div className="truncate text-sm/5.5 font-semibold">{name}</div>
         </div>

@@ -7,7 +7,7 @@ import { ResourceType, TeamCategory, TeamRole } from '@/modules/shared/types/typ
 export const mockBuilderTeams: Team[] = [
   {
     id: '55',
-    code: 'DEW-001',
+    code: 'DEW',
     shortCode: 'DE',
     name: 'Dewiz',
     status: BuilderStatus.Completed,
@@ -70,7 +70,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '56',
-    code: 'PW-002',
+    code: 'PW',
     shortCode: 'PO',
     name: 'Powerhouse Inc.',
     status: BuilderStatus.OnHold,
@@ -128,7 +128,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '73',
-    code: 'Development & UX',
+    code: 'UX',
     shortCode: 'UX',
     name: 'Development & UX',
     status: BuilderStatus.Archived,
@@ -180,7 +180,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '573',
-    code: 'Development & UX',
+    code: 'UX',
     shortCode: 'UX',
     name: 'Development & UX',
     status: BuilderStatus.Active,
@@ -232,7 +232,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '58',
-    code: 'POW-004',
+    code: 'POW',
     shortCode: 'PW',
     name: 'Powerhouse Inc.',
     status: BuilderStatus.Inactive,
@@ -285,7 +285,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '01',
-    code: 'DEW-001',
+    code: 'DEW',
     shortCode: 'DE',
     name: 'Dewiz',
     status: BuilderStatus.Completed,
@@ -338,7 +338,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '02',
-    code: 'PW-002',
+    code: 'PW',
     shortCode: 'PO',
     name: 'Powerhouse Inc.',
     status: BuilderStatus.Completed,
@@ -391,7 +391,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '03',
-    code: 'Development & UX',
+    code: 'UX',
     shortCode: 'UX',
     name: 'Development & UX',
     status: BuilderStatus.Archived,
@@ -443,7 +443,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '04',
-    code: 'Development & UX',
+    code: 'UX',
     shortCode: 'UX',
     name: 'Development & UX',
     status: BuilderStatus.Completed,
@@ -495,7 +495,7 @@ export const mockBuilderTeams: Team[] = [
   },
   {
     id: '05',
-    code: 'POW-004',
+    code: 'POW',
     shortCode: 'PW',
     name: 'Powerhouse Inc.',
     status: BuilderStatus.Completed,
