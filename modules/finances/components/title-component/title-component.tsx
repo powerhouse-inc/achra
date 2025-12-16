@@ -28,7 +28,7 @@ export function TitleComponent({
       ) : (
         <h1 data-slot="nth-title-box" className="m-0 sm:mt-4 md:mt-0 md:text-3xl">
           <IconTitleWithCode
-            icon={icon || '/default-icon-cards-budget.svg'}
+            icon={icon ?? '/default-icon-cards-budget.svg'}
             title={title}
             code={code}
           />

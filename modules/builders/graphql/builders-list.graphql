@@ -13,7 +13,7 @@ query BuildersList($filter: networkFilter) {
       }
       name
       scopes
-      skilss
+      skils
       slug
       status
       type

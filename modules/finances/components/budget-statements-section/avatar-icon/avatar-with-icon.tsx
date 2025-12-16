@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { TwoUserIcon } from '@/modules/shared/components/svgs'
 import { Avatar, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { cn } from '@/modules/shared/lib/utils'
+import TwoUserIcon from './TwoUserIcon'
 
 export interface CircleAvatarWithIconProps extends React.ComponentProps<typeof Avatar> {
   icon: boolean
@@ -30,11 +30,11 @@ export function AvatarWithIcon({
         <div
           data-slot="circle-avatar-with-icon-icon"
           className={cn(
-            'absolute top-2.5 left-2 z-10 flex h-11 w-11',
+            'absolute top-2.5 left-2 z-20 flex h-11 w-11',
             isCoreUnit ? 'text-status-progress' : 'text-status-success',
           )}
         >
-          <TwoUserIcon />
+          <TwoUserIcon className="size-full" />
         </div>
       )}
     </div>

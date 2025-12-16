@@ -1,3 +1,4 @@
+import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ContributorProfileInfo } from './contributor-profile-info'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -19,6 +20,7 @@ export const Default: Story = {
     code: 'SES',
     isCoreUnit: false,
     icon: true,
+    status: BuilderStatus.Active,
   },
 }
 
@@ -29,5 +31,6 @@ export const CoreUnit: Story = {
     code: 'SES',
     isCoreUnit: true,
     icon: true,
+    status: BuilderStatus.Active,
   },
 }

@@ -28,6 +28,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
             code={builder.code ?? ''}
             isCoreUnit={true}
             icon={true}
+            status={builder.status}
           />
         </Link>
       </TableCell>
