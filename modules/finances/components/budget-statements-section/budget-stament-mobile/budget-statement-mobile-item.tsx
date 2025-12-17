@@ -48,7 +48,7 @@ export function BudgetStatementMobileItem({
     <Link href={`/network/powerhouse/builders/${builder.id}`} key={builder.id}>
       <Card
         className={cn(
-          'bg-background border-border gap:0 flex w-full flex-col rounded-xl border p-0 shadow-sm transition-all hover:shadow-md',
+          'bg-background gap:0 flex w-full flex-col rounded-xl p-0 shadow-sm transition-all hover:shadow-sm',
           'gap-0',
           className,
         )}
