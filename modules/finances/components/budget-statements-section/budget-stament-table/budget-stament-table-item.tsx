@@ -76,7 +76,7 @@ export function BudgetStamentTableItem({ builder }: BudgetStamentTableItemProps)
         >
           <Button variant="outline" asChild className="pointer-events-none">
             <div>
-              <span className="hidden xl:block">View</span>
+              <span className="hidden lg:block">View</span>
               <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
             </div>
           </Button>
