@@ -23,13 +23,6 @@ export const BUILDERS_TABLE_COLUMNS: BuildersTableColumn[] = [
     isNumeric: false,
   },
   {
-    header: 'Scope',
-    accessorKey: 'scopes',
-    hasSort: true,
-    sortReverse: false,
-    isNumeric: false,
-  },
-  {
     header: 'Last Modified',
     accessorKey: 'lastModified',
     hasSort: true,

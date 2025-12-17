@@ -4,7 +4,6 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
-import BuilderScopes from '@/modules/shared/components/builder-scopes'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/modules/shared/components/ui/card'
@@ -26,7 +25,7 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
       {builders.map((builder) => (
         <Link href={`/network/${networkSlug}/builders/${builder.id}` as Route} key={builder.id}>
           <Card className="bg-background w-full gap-2 overflow-hidden border-none pt-2 pb-1">
-            <CardContent className="flex items-end justify-between px-2 md:grid md:grid-cols-[30%_17%_28%_80px]">
+            <CardContent className="flex items-end justify-between px-2 md:grid md:grid-cols-[38%_37%_80px]">
               <BuilderProfile
                 name={builder.name}
                 code={builder.code}
@@ -34,12 +33,8 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
                 image={builder.icon}
               />
               <div className="hidden flex-col gap-0.5 md:flex">
-                <span className="text-foreground/30 text-sm/5.5 font-semibold">Scope</span>
-                <BuilderScopes scopes={builder.scopes} />
-              </div>
-              <div className="hidden flex-col gap-0.5 md:flex">
                 <span className="text-foreground/30 text-sm/5.5 font-semibold">Skills</span>
-                <BuilderSkills skills={builder.skils} isMobile />
+                <BuilderSkills skills={builder.skils} />
               </div>
               <div className="flex gap-4 md:gap-2">
                 <Links />
@@ -48,18 +43,12 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
                 </Button>
               </div>
             </CardContent>
-            <CardContent className="flex items-end justify-between px-2 md:hidden">
+            <CardContent className="flex items-end px-2 md:hidden">
               <div className="flex flex-col gap-1">
                 <span className="text-foreground/30 text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">
                   Skills
                 </span>
-                <BuilderSkills skills={builder.skils} isMobile />
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-foreground/30 text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">
-                  Scope
-                </span>
-                <BuilderScopes scopes={builder.scopes} />
+                <BuilderSkills skills={builder.skils} />
               </div>
             </CardContent>
             <Separator className="-mt-0.25" />
