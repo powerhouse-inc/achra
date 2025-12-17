@@ -44,7 +44,11 @@ query RoadmapDetails($filter: scopeOfWorkByNetworkOrStatusFilter!) {
     }
     deliverables {
       id
-      owner
+      owner {
+        id
+        code
+        icon
+      }
       status
       title
       code
@@ -90,7 +94,11 @@ query RoadmapDetails($filter: scopeOfWorkByNetworkOrStatusFilter!) {
       }
       id
       imageUrl
-      projectOwner
+      projectOwner {
+        id
+        code
+        name
+      }
       title
       scope {
         status

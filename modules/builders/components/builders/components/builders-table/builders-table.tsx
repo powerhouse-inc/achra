@@ -92,7 +92,7 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
               </TableCell>
               <TableCell className="inline-flex h-21.5 min-w-[22%] items-center p-0!">
                 <Link href={builderLink} className="w-full px-0! py-4!">
-                  <BuilderSkills skills={builder.skilss} className="h-fit" />
+                  <BuilderSkills skills={builder.skils} className="h-fit" />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 min-w-[20%] items-center p-0!">

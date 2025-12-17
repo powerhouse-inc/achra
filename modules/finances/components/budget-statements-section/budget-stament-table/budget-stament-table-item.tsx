@@ -22,7 +22,7 @@ export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableI
         >
           <ContributorProfileInfo
             name={builder.name}
-            code={builder.code ?? ''}
+            code={builder.code}
             isCoreUnit={true}
             icon={true}
             status={builder.status}
@@ -37,7 +37,7 @@ export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableI
           <div>March 2023</div>
         </Link>
       </TableCell>
-      <TableCell className="inline-block h-full w-[15%] p-0! text-right">
+      <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-4.5! xl:pl-6!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
           className="flex h-full w-full items-center justify-start"
@@ -56,7 +56,7 @@ export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableI
         </Link>
       </TableCell>
 
-      <TableCell className="inline-block h-full w-[19%] p-0! text-right">
+      <TableCell className="inline-block h-full w-[19%] p-0! text-right lg:pl-1!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}
           className="flex h-full w-full items-center justify-start"
@@ -73,7 +73,7 @@ export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableI
         >
           <Button variant="outline" asChild className="pointer-events-none">
             <div>
-              <span className="hidden xl:block">View</span>
+              <span className="hidden lg:block">View</span>
               <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
             </div>
           </Button>
