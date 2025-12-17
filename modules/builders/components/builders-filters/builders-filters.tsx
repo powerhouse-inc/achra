@@ -5,22 +5,19 @@ import SearchInput from '@/modules/shared/components/form/search-input'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { ActorSkillsSelect, ActorSkillsSelectDrawer } from './actor-skills-select'
-import { ScopesSelect, ScopesSelectDrawer } from './scopes-select'
 import useBuilderFilters from './useBuildersFilters'
 
 export default function BuilderFilters() {
-  const { search, scopes, actorSkills, setSearch, setScopes, setActorSkills, onReset } =
-    useBuilderFilters()
+  const { search, actorSkills, setSearch, setActorSkills, onReset } = useBuilderFilters()
 
   return (
-    <div className="grid grid-cols-[1fr_auto] gap-4 sm:grid-cols-1 lg:grid-cols-[1fr_508px] lg:gap-6">
+    <div className="grid grid-cols-[1fr_auto] gap-4 sm:grid-cols-[1fr_308px] lg:gap-6">
       <SearchInput
         value={search}
         onChange={(value) => void setSearch(value)}
         placeholder="Search..."
       />
       <div className="hidden items-center gap-4 sm:flex">
-        <ScopesSelect scopes={scopes} setScopes={setScopes} className="w-46" />
         <ActorSkillsSelect
           actorSkills={actorSkills}
           setActorSkills={setActorSkills}
@@ -38,7 +35,6 @@ export default function BuilderFilters() {
       <div className="flex items-center gap-4 sm:hidden">
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer onReset={onReset}>
-          <ScopesSelectDrawer scopes={scopes} setScopes={setScopes} />
           <ActorSkillsSelectDrawer actorSkills={actorSkills} setActorSkills={setActorSkills} />
         </FilterDrawer>
       </div>
