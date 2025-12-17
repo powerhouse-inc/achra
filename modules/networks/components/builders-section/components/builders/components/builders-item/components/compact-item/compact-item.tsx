@@ -33,7 +33,7 @@ export default function CompactItem({ builder, className }: CompactItemProps) {
         </Button>
       </div>
       <Separator className="sm:hidden" />
-      <BuilderSkills skills={builder.skils} isMobile />
+      <BuilderSkills skills={builder.skils} />
       <div className="bg-background border-border -ml-2 flex h-7.5 w-[calc(100%+16px)] items-center justify-between border-t px-4">
         <span className="text-foreground text-xs/4.5 font-medium">Profile Updated</span>
         <Suspense fallback={<ProfileUpdatedDateSkeleton />}>

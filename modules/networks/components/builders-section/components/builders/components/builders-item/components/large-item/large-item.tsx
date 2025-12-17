@@ -26,7 +26,7 @@ export default function LargeItem({ builder, className }: LargeItemProps) {
         status={builder.status}
         image={builder.icon}
       />
-      <BuilderSkills skills={builder.skils} isMobile />
+      <BuilderSkills skills={builder.skils} />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
         <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
