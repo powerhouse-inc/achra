@@ -2,7 +2,6 @@ import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
-import BuilderScopes from '@/modules/shared/components/builder-scopes'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
@@ -17,7 +16,7 @@ export default function LargeItem({ builder, className }: LargeItemProps) {
   return (
     <div
       className={cn(
-        'bg-popover hover:bg-accent grid w-full grid-cols-[25%_17%_17%_14%_auto] items-center justify-between rounded-xl px-2 py-3 shadow-xs hover:shadow-sm',
+        'bg-popover hover:bg-accent grid w-full grid-cols-[32%_22%_19%_auto] items-center justify-between rounded-xl px-2 py-3 shadow-xs hover:shadow-sm',
         className,
       )}
     >
@@ -27,7 +26,6 @@ export default function LargeItem({ builder, className }: LargeItemProps) {
         status={builder.status}
         image={builder.icon}
       />
-      <BuilderScopes scopes={builder.scopes} />
       <BuilderSkills skills={builder.skils} isMobile />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>

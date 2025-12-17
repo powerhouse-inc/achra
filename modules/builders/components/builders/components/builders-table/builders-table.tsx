@@ -3,7 +3,6 @@ import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Link from 'next/link'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
-import BuilderScopes from '@/modules/shared/components/builder-scopes'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
@@ -42,9 +41,9 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
               className={cn(
                 'inline-block h-fit p-0!',
                 column.isNumeric && 'text-right',
-                index === 0 && 'w-[27%] pl-4! xl:pl-6!',
-                index === 1 && 'w-[22%]',
-                index === 2 && 'w-[20%]',
+                index === 0 && 'w-[35%] pl-4! xl:pl-6!',
+                index === 1 && 'w-[30%]',
+                index === 2 && 'w-[24%]',
                 index === 3 && 'flex-1',
               )}
             >
@@ -80,7 +79,7 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
               className="flex h-fit w-full cursor-pointer items-center border-b-0!"
               aria-label={`View ${builder.name} builder`}
             >
-              <TableCell className="inline-flex h-21.5 min-w-[27%] p-0!">
+              <TableCell className="inline-flex h-21.5 min-w-[35%] p-0!">
                 <Link href={builderLink} className="w-full py-4! pr-0! pl-4! xl:pl-6!">
                   <BuilderProfile
                     name={builder.name}
@@ -90,14 +89,9 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
                   />
                 </Link>
               </TableCell>
-              <TableCell className="inline-flex h-21.5 min-w-[22%] items-center p-0!">
+              <TableCell className="inline-flex h-21.5 min-w-[30%] items-center p-0!">
                 <Link href={builderLink} className="w-full px-0! py-4!">
                   <BuilderSkills skills={builder.skils} className="h-fit" />
-                </Link>
-              </TableCell>
-              <TableCell className="inline-flex h-21.5 min-w-[20%] items-center p-0!">
-                <Link href={builderLink} className="w-full px-0! py-4!">
-                  <BuilderScopes scopes={builder.scopes} />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 flex-1 items-center p-0!">

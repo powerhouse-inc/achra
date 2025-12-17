@@ -3,12 +3,10 @@ import { Suspense } from 'react'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
-import BuildersScopesChip from '@/modules/shared/components/chips/builders-scopes-chip/builders-scopes-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/modules/shared/lib/utils'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import { useCompactItem } from './use-compact-item'
 
 export interface CompactItemProps {
   builder: Builder
@@ -16,7 +14,6 @@ export interface CompactItemProps {
 }
 
 export default function CompactItem({ builder, className }: CompactItemProps) {
-  const { scopeSizeVariant } = useCompactItem({ builder })
   return (
     <div
       className={cn(
@@ -36,14 +33,7 @@ export default function CompactItem({ builder, className }: CompactItemProps) {
         </Button>
       </div>
       <Separator className="sm:hidden" />
-      <div className="flex flex-wrap justify-between gap-1 sm:mt-2">
-        <div className="flex gap-1">
-          {builder.scopes.map((scope) => (
-            <BuildersScopesChip key={scope} scope={scope} size={scopeSizeVariant} />
-          ))}
-        </div>
-        <BuilderSkills skills={builder.skils} isMobile />
-      </div>
+      <BuilderSkills skills={builder.skils} isMobile />
       <div className="bg-background border-border -ml-2 flex h-7.5 w-[calc(100%+16px)] items-center justify-between border-t px-4">
         <span className="text-foreground text-xs/4.5 font-medium">Profile Updated</span>
         <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
