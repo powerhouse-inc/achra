@@ -5,86 +5,91 @@ import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-d
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
 
-interface ActorSkillsSelectProps {
-  actorSkills: BuilderSkill[]
-  setActorSkills: (actorSkills: BuilderSkill[]) => Promise<URLSearchParams>
+interface BuilderSkillsSelectProps {
+  builderSkills: BuilderSkill[]
+  setBuilderSkills: (builderSkills: BuilderSkill[]) => Promise<URLSearchParams>
   className?: string
 }
 
-const actorSkillsOptions: Option[] = [
+const builderSkillsOptions: Option[] = [
   {
     value: BuilderSkill.BackendDevelopment,
     label: <BuildersSkillsChip skill={BuilderSkill.BackendDevelopment} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.DataEngineering,
     label: <BuildersSkillsChip skill={BuilderSkill.DataEngineering} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.DevopsEngineering,
     label: <BuildersSkillsChip skill={BuilderSkill.DevopsEngineering} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.FrontendDevelopment,
     label: <BuildersSkillsChip skill={BuilderSkill.FrontendDevelopment} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.FullStackDevelopment,
     label: <BuildersSkillsChip skill={BuilderSkill.FullStackDevelopment} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.QaTesting,
     label: <BuildersSkillsChip skill={BuilderSkill.QaTesting} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.SecurityEngineering,
     label: <BuildersSkillsChip skill={BuilderSkill.SecurityEngineering} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.SmartContractDevelopment,
     label: <BuildersSkillsChip skill={BuilderSkill.SmartContractDevelopment} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.TechnicalWriting,
     label: <BuildersSkillsChip skill={BuilderSkill.TechnicalWriting} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
   {
     value: BuilderSkill.UiUxDesign,
     label: <BuildersSkillsChip skill={BuilderSkill.UiUxDesign} />,
-    group: 'Actor Skills',
+    group: 'Builder Skills',
   },
 ]
 
-function ActorSkillsSelect({ actorSkills, setActorSkills, className }: ActorSkillsSelectProps) {
+function BuilderSkillsSelect({
+  builderSkills,
+  setBuilderSkills,
+  className,
+}: BuilderSkillsSelectProps) {
   const selectedOptions = useMemo(
-    () => actorSkillsOptions.filter((option) => actorSkills.includes(option.value as BuilderSkill)),
-    [actorSkills],
+    () =>
+      builderSkillsOptions.filter((option) => builderSkills.includes(option.value as BuilderSkill)),
+    [builderSkills],
   )
 
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value as BuilderSkill)
-    void setActorSkills(values)
+    void setBuilderSkills(values)
   }
 
   return (
     <MultipleSelector
       value={selectedOptions}
       onChange={handleChange}
-      options={actorSkillsOptions}
+      options={builderSkillsOptions}
       enableSearch={false}
       groupBy="group"
       enableSelectAll={true}
-      selectAllGroup="Actor Skills"
-      placeholder="Actor Skills"
+      selectAllGroup="Builder Skills"
+      placeholder="Builder Skills"
       className={cn('bg-background dark:bg-background')}
       commandProps={{
         className,
@@ -94,17 +99,17 @@ function ActorSkillsSelect({ actorSkills, setActorSkills, className }: ActorSkil
   )
 }
 
-function ActorSkillsSelectDrawer({ actorSkills, setActorSkills }: ActorSkillsSelectProps) {
+function BuilderSkillsSelectDrawer({ builderSkills, setBuilderSkills }: BuilderSkillsSelectProps) {
   const handleChange = (values: string[]) => {
-    void setActorSkills(values as BuilderSkill[])
+    void setBuilderSkills(values as BuilderSkill[])
   }
 
   return (
     <DrawerSelect
-      value={actorSkills}
+      value={builderSkills}
       onChange={handleChange}
-      label="Actor Skills"
-      options={actorSkillsOptions}
+      label="Builder Skills"
+      options={builderSkillsOptions}
       multiselect={true}
       enableSelectAll={true}
       selectAllLabel="Select All"
@@ -112,4 +117,4 @@ function ActorSkillsSelectDrawer({ actorSkills, setActorSkills }: ActorSkillsSel
   )
 }
 
-export { ActorSkillsSelect, ActorSkillsSelectDrawer }
+export { BuilderSkillsSelect, BuilderSkillsSelectDrawer }
