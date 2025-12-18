@@ -6,15 +6,25 @@ import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-s
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { cn } from '@/modules/shared/lib/utils'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 
 export interface BudgetStamentTableItemProps {
   builder: Builder
+  className?: string
 }
 
-export function BudgetStamentTableItem({ builder }: Readonly<BudgetStamentTableItemProps>) {
+export function BudgetStamentTableItem({
+  builder,
+  className,
+}: Readonly<BudgetStamentTableItemProps>) {
   return (
-    <TableRow className="flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!">
+    <TableRow
+      className={cn(
+        'flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!',
+        className,
+      )}
+    >
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
           href={`/network/powerhouse/builders/${builder.id}`}

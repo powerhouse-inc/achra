@@ -20,7 +20,7 @@ export interface BudgetStamentTableProps {
   className?: string
 }
 
-export function BudgetStamentTable({ builders, className }: BudgetStamentTableProps) {
+export function BudgetStamentTable({ builders, className }: Readonly<BudgetStamentTableProps>) {
   const { headersSort, sortedBuilders, proccesedBudgetStatementsTableColumns, handleSortClick } =
     useBudgetStamentTable({
       builders,
@@ -67,7 +67,11 @@ export function BudgetStamentTable({ builders, className }: BudgetStamentTablePr
       </TableHeader>
       <TableBody className="flex flex-col gap-2">
         {sortedBuilders.map((builder) => (
-          <BudgetStamentTableItem key={builder.id} builder={builder} />
+          <BudgetStamentTableItem
+            key={builder.id}
+            builder={builder}
+            className="last:rounded-b-xl!"
+          />
         ))}
       </TableBody>
     </Table>
