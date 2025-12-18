@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
+import { DateTime } from 'luxon'
 import Link from 'next/link'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+// import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -8,9 +9,10 @@ import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
+import type { BudgetStatementExpenseReport } from '../type'
 
 export interface BudgetStamentTableItemProps {
-  builder: Builder
+  builder: BudgetStatementExpenseReport
   className?: string
 }
 
@@ -18,6 +20,9 @@ export function BudgetStamentTableItem({
   builder,
   className,
 }: Readonly<BudgetStamentTableItemProps>) {
+  const reportMonth = builder.month
+    ? DateTime.fromFormat(builder.month, 'yyyy-LL-dd').toFormat('LLL yyyy')
+    : 'No date'
   return (
     <TableRow
       className={cn(
@@ -44,7 +49,7 @@ export function BudgetStamentTableItem({
           href={`/network/powerhouse/builders/${builder.id}`}
           className="flex h-full w-full items-center"
         >
-          <div>March 2023</div>
+          <div className="text-foreground text-sm/5.5 font-semibold">{reportMonth}</div>
         </Link>
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-4.5! xl:pl-6!">

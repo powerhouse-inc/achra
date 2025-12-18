@@ -10,14 +10,14 @@ export interface BudgetStatementsTableColumn {
 export const BUDGET_STATEMENTS_TABLE_COLUMNS: BudgetStatementsTableColumn[] = [
   {
     header: 'Contributors',
-    accessorKey: 'contributors',
+    accessorKey: 'name',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,
   },
   {
     header: 'Reporting Month',
-    accessorKey: 'reportingMonth',
+    accessorKey: 'month',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,

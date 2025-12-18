@@ -1,7 +1,7 @@
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BudgetStatementExpenseReport } from '../type'
 
 interface BuildersStamentProps {
-  builders: Builder[]
+  builders: BudgetStatementExpenseReport[]
 }
 
 // TODO: Implement this hook to process correct data
