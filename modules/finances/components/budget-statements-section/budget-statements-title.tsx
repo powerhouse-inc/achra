@@ -1,12 +1,16 @@
 'use client'
 import TitleSection from '../title-section-finances'
+import BudgetStatementFilters from './budget-stament-filters/budget-stament-filters'
 
 interface BudgetStatementsTitleProps {
   range: string
   hash: string
 }
 
-export default function BudgetStatementsTitle({ range, hash }: BudgetStatementsTitleProps) {
+export default function BudgetStatementsTitle({
+  range,
+  hash,
+}: Readonly<BudgetStatementsTitleProps>) {
   return (
     <div className="flex flex-row flex-wrap items-start justify-between">
       <TitleSection
@@ -26,7 +30,9 @@ export default function BudgetStatementsTitle({ range, hash }: BudgetStatementsT
         }
         range={range}
       />
-      <div>Filters</div>
+      <div>
+        <BudgetStatementFilters />
+      </div>
     </div>
   )
 }
