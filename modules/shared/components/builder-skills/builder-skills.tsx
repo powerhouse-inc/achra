@@ -43,7 +43,13 @@ export default function BuilderSkills({ skills, className }: BuilderSkillsProps)
       {skills.slice(0, 2).map((skill, index) => (
         <div key={skill} className={cn('flex gap-1', { 'hidden lg:flex': index === 1 })}>
           <BuildersSkillsChip key={skill} skill={skill} />
-          <div className={cn({ 'lg:hidden': index === 0 })} onClick={handlePopoverClick}>
+          <div
+            className={cn({
+              'lg:hidden': index === 0 || (index === 1 && skills.length === 2),
+              hidden: skills.length === 1,
+            })}
+            onClick={handlePopoverClick}
+          >
             <SkillsPopover skills={skills} />
           </div>
         </div>
