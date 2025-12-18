@@ -1,13 +1,12 @@
 'use client'
-
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BudgetStatementListMobile } from '../budget-stament-mobile/budget-statement-list-mobile'
 import { BudgetStamentTable } from '../budget-stament-table/budget-stament-table'
 
 import { useBudgetStamentData } from './useBudgetStamentData'
+import type { BudgetStatementExpenseReport } from '../type'
 
 export interface BudgetStatementsItemProps {
-  builders: Builder[]
+  builders: BudgetStatementExpenseReport[]
 }
 
 export function BudgetStatementsItem({ builders }: Readonly<BudgetStatementsItemProps>) {

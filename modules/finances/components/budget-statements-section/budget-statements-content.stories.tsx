@@ -1,5 +1,5 @@
-import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
 import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
+import { mockBudgetStatements } from './mock/budget-stament-mock'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
@@ -20,6 +20,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    builders: mockBuilderTeams,
+    builders: mockBudgetStatements,
   },
 }

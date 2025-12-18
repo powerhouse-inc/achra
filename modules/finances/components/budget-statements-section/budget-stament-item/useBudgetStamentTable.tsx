@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { BUDGET_STATEMENTS_TABLE_COLUMNS, type BudgetStatementsTableColumn } from '../const'
+import type { BudgetStatementExpenseReport } from '../type'
 
 interface UseBudgetStamentTableProps {
-  builders: Builder[]
+  builders: BudgetStatementExpenseReport[]
 }
 
 export enum SortEnum {
@@ -58,7 +59,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
   )
 
   const sortBuilders = useCallback(
-    (builders: Builder[]) => {
+    (builders: BudgetStatementExpenseReport[]) => {
       if (sortColumn === -1) return builders
 
       const column = BUDGET_STATEMENTS_TABLE_COLUMNS[sortColumn]
@@ -68,7 +69,9 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
         return builders
       }
 
-      const getSortableValue = (value: Builder[keyof Builder]): string | number => {
+      const getSortableValue = (
+        value: BudgetStatementExpenseReport[keyof BudgetStatementExpenseReport],
+      ): string | number => {
         if (value === null) {
           return ''
         }
@@ -85,8 +88,8 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
       }
 
       return [...builders].sort((a, b) => {
-        const aValue = getSortableValue(a[column.accessorKey as keyof Builder])
-        const bValue = getSortableValue(b[column.accessorKey as keyof Builder])
+        const aValue = getSortableValue(a[column.accessorKey as keyof BudgetStatementExpenseReport])
+        const bValue = getSortableValue(b[column.accessorKey as keyof BudgetStatementExpenseReport])
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1
@@ -102,10 +105,16 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
 
   const sortedBuilders = useMemo(() => sortBuilders(builders), [builders, sortBuilders])
 
+  const handleSortClickHeader = (index: number) => {
+    if (proccesedBudgetStatementsTableColumns[index].hasSort) {
+      handleSortClick(index)
+    }
+  }
+
   return {
     proccesedBudgetStatementsTableColumns,
     headersSort,
     sortedBuilders,
-    handleSortClick,
+    handleSortClickHeader,
   }
 }

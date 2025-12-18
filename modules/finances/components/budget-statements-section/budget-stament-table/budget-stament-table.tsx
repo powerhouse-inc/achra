@@ -1,6 +1,5 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SortEnum } from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/use-wallets-table'
 
 import { Button } from '@/modules/shared/components/ui/button'
@@ -14,17 +13,22 @@ import {
 import { cn } from '@/modules/shared/lib/utils'
 import { useBudgetStamentTable } from '../budget-stament-item/useBudgetStamentTable'
 import { BudgetStamentTableItem } from './budget-stament-table-item'
+import type { BudgetStatementExpenseReport } from '../type'
 
 export interface BudgetStamentTableProps {
-  builders: Builder[]
+  builders: BudgetStatementExpenseReport[]
   className?: string
 }
 
 export function BudgetStamentTable({ builders, className }: Readonly<BudgetStamentTableProps>) {
-  const { headersSort, sortedBuilders, proccesedBudgetStatementsTableColumns, handleSortClick } =
-    useBudgetStamentTable({
-      builders,
-    })
+  const {
+    headersSort,
+    sortedBuilders,
+    proccesedBudgetStatementsTableColumns,
+    handleSortClickHeader,
+  } = useBudgetStamentTable({
+    builders,
+  })
 
   return (
     <Table variant="pills" className={cn('w-full border-none!', className)}>
@@ -47,7 +51,7 @@ export function BudgetStamentTable({ builders, className }: Readonly<BudgetStame
                 variant="ghost"
                 aria-label={`Sort ${column.header} column`}
                 onClick={() => {
-                  handleSortClick(index)
+                  handleSortClickHeader(index)
                 }}
                 className={cn(
                   '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6 dark:hover:bg-transparent',
