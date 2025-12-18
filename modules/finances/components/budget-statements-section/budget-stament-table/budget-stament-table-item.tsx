@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
-// import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
