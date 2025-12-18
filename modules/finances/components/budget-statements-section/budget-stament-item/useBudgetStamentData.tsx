@@ -5,7 +5,7 @@ interface BuildersStamentProps {
 }
 
 // TODO: Implement this hook to process correct data
-export function useBudgetStamentData({ builders }: BuildersStamentProps) {
+export function useBudgetStamentData({ builders }: Readonly<BuildersStamentProps>) {
   return {
     buildersProcessed: builders,
   }
