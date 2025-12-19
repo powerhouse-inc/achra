@@ -8,7 +8,7 @@ import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills
 import useBuildersFilters from './useBuildersFilters'
 
 export default function BuilderFilters() {
-  const { search, builderSkills, setSearch, setBuilderSkills, onReset } = useBuildersFilters()
+  const { search, skills, setSearch, setSkills, onReset } = useBuildersFilters()
 
   return (
     <div className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_400px] lg:gap-6">
@@ -18,11 +18,7 @@ export default function BuilderFilters() {
         placeholder="Search..."
       />
       <div className="hidden items-center gap-2 md:flex lg:gap-4">
-        <BuilderSkillsSelect
-          builderSkills={builderSkills}
-          setBuilderSkills={setBuilderSkills}
-          className="w-69"
-        />
+        <BuilderSkillsSelect skills={skills} setSkills={setSkills} className="w-69" />
         <Button
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
           variant="ghost"
@@ -35,10 +31,7 @@ export default function BuilderFilters() {
       <div className="flex items-center gap-4 md:hidden">
         <Separator orientation="vertical" className="h-7!" />
         <FilterDrawer onReset={onReset}>
-          <BuilderSkillsSelectDrawer
-            builderSkills={builderSkills}
-            setBuilderSkills={setBuilderSkills}
-          />
+          <BuilderSkillsSelectDrawer skills={skills} setSkills={setSkills} />
         </FilterDrawer>
       </div>
     </div>

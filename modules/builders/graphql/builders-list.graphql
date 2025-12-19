@@ -1,22 +1,20 @@
-query BuildersList($filter: networkFilter) {
-  allNetworks(filter: $filter) {
-    builders {
-      code
-      description
-      icon
+query BuildersList($filter: buildersFilter) {
+  builders(filter: $filter) {
+    code
+    description
+    id
+    icon
+    lastModified
+    links {
       id
-      lastModified
-      links {
-        id
-        label
-        url
-      }
-      name
-      scopes
-      skils
-      slug
-      status
-      type
+      label
+      url
     }
+    name
+    scopes
+    skils
+    slug
+    status
+    type
   }
 }

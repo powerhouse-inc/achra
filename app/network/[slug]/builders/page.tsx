@@ -12,9 +12,8 @@ import type { Route } from 'next'
 interface BuildersPageProps {
   params: Promise<{ slug: string }>
   searchParams: Promise<{
-    search: string
-    scopes: string[]
-    actorRoles: string[]
+    search?: string
+    skills?: string[]
   }>
 }
 
@@ -42,7 +41,7 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
         <BuilderFilters />
         <ErrorBoundaryWithPresets>
           <Suspense fallback={<BuildersSkeleton />} key={searchParamsString}>
-            <Builders networkSlug={slug} />
+            <Builders networkSlug={slug} searchParams={searchParams} />
           </Suspense>
         </ErrorBoundaryWithPresets>
       </PageContent>
