@@ -201,6 +201,24 @@ export type BuilderProfileQueriesGetDocumentsArgs = {
   driveId: Scalars['String']['input'];
 };
 
+export type BuilderProfileState = {
+  __typename?: 'BuilderProfileState';
+  code?: Maybe<Scalars['String']['output']>;
+  contributors: Array<Scalars['PHID']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['URL']['output']>;
+  id?: Maybe<Scalars['PHID']['output']>;
+  lastModified?: Maybe<Scalars['DateTime']['output']>;
+  links: Array<BuilderLink>;
+  name?: Maybe<Scalars['String']['output']>;
+  projects: Array<BuilderProject>;
+  scopes: Array<BuilderScope>;
+  skils: Array<BuilderSkill>;
+  slug?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<BuilderStatus>;
+  type: TeamType;
+};
+
 export type BuilderProfile_AddContributorInput = {
   contributorPHID: Scalars['PHID']['input'];
 };
@@ -349,6 +367,34 @@ export enum BuilderProfile_TeamTypeInput {
   Team = 'TEAM'
 }
 
+export type BuilderProject = {
+  __typename?: 'BuilderProject';
+  abstract?: Maybe<Scalars['String']['output']>;
+  budget?: Maybe<Scalars['Float']['output']>;
+  budgetType?: Maybe<Sow_BudgetType>;
+  code: Scalars['String']['output'];
+  currency?: Maybe<Sow_PmCurrency>;
+  expenditure?: Maybe<Sow_BudgetExpenditure>;
+  id: Scalars['OID']['output'];
+  imageUrl?: Maybe<Scalars['URL']['output']>;
+  scope?: Maybe<Builder_Sow_DeliverablesSet>;
+  slug: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type BuilderSow_Deliverable = {
+  __typename?: 'BuilderSOW_Deliverable';
+  budgetAnchor?: Maybe<Sow_BudgetAnchorProject>;
+  code: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  keyResults: Array<Sow_KeyResult>;
+  status: Sow_DeliverableStatus;
+  title: Scalars['String']['output'];
+  workProgress?: Maybe<Sow_Progress>;
+};
+
 export enum BuilderScope {
   Acc = 'ACC',
   GovernanceScope = 'GOVERNANCE_SCOPE',
@@ -379,6 +425,14 @@ export enum BuilderStatus {
   Inactive = 'INACTIVE',
   OnHold = 'ON_HOLD'
 }
+
+export type Builder_Sow_DeliverablesSet = {
+  __typename?: 'Builder_SOW_DeliverablesSet';
+  deliverables: Array<BuilderSow_Deliverable>;
+  deliverablesCompleted: Sow_DeliverablesCompleted;
+  progress: Sow_Progress;
+  status: Sow_DeliverableSetStatus;
+};
 
 export type Builders = IDocument & {
   __typename?: 'Builders';
@@ -2399,6 +2453,7 @@ export type Query = {
   Workstream?: Maybe<WorkstreamQueries>;
   allNetworks: Array<AllNetworks>;
   analytics?: Maybe<AnalyticsQuery>;
+  builders: Array<BuilderProfileState>;
   driveDocument?: Maybe<DocumentDrive>;
   driveDocuments: Array<DocumentDrive>;
   driveIdBySlug?: Maybe<Scalars['String']['output']>;
@@ -2414,6 +2469,12 @@ export type Query = {
 /** Subgraph definition */
 export type QueryAllNetworksArgs = {
   filter?: InputMaybe<NetworkFilter>;
+};
+
+
+/** Subgraph definition */
+export type QueryBuildersArgs = {
+  filter?: InputMaybe<BuildersFilter>;
 };
 
 
@@ -2774,6 +2835,7 @@ export type Sow_Deliverable = {
   budgetAnchor?: Maybe<Sow_BudgetAnchorProject>;
   code: Scalars['String']['output'];
   description: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['OID']['output'];
   keyResults: Array<Sow_KeyResult>;
   owner?: Maybe<Builder>;
@@ -3065,6 +3127,7 @@ export type ScopeOfWork_Deliverable = {
   budgetAnchor?: Maybe<ScopeOfWork_BudgetAnchorProject>;
   code: Scalars['String']['output'];
   description: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
   id: Scalars['OID']['output'];
   keyResults: Array<ScopeOfWork_KeyResult>;
   owner?: Maybe<Scalars['ID']['output']>;
@@ -3128,6 +3191,7 @@ export type ScopeOfWork_EditAgentInput = {
 export type ScopeOfWork_EditDeliverableInput = {
   code?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['OID']['input'];
   owner?: InputMaybe<Scalars['ID']['input']>;
   status?: InputMaybe<ScopeOfWork_PmDeliverableStatusInput>;
@@ -3648,6 +3712,17 @@ export type WorkstreamsFilter = {
   workstreamTitle?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type BuildersFilter = {
+  code?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['PHID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<BuilderScope>>;
+  skills?: InputMaybe<Array<BuilderSkill>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<BuilderStatus>;
+  type?: InputMaybe<TeamType>;
+};
+
 export type NetworkFilter = {
   networkSlug?: InputMaybe<Scalars['String']['input']>;
 };
@@ -3668,11 +3743,11 @@ export enum TeamType {
 }
 
 export type BuildersListQueryVariables = Exact<{
-  filter?: InputMaybe<NetworkFilter>;
+  filter?: InputMaybe<BuildersFilter>;
 }>;
 
 
-export type BuildersListQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', builders: Array<{ __typename?: 'Builder', code?: string | null, description: string, icon: string, id?: any | null, lastModified?: any | null, name: string, scopes: Array<BuilderScope>, skils: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> }> };
+export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skils: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> };
 
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
@@ -3740,26 +3815,24 @@ export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __ty
 
 
 export const BuildersListDocument = `
-    query BuildersList($filter: networkFilter) {
-  allNetworks(filter: $filter) {
-    builders {
-      code
-      description
-      icon
+    query BuildersList($filter: buildersFilter) {
+  builders(filter: $filter) {
+    code
+    description
+    id
+    icon
+    lastModified
+    links {
       id
-      lastModified
-      links {
-        id
-        label
-        url
-      }
-      name
-      scopes
-      skils
-      slug
-      status
-      type
+      label
+      url
     }
+    name
+    scopes
+    skils
+    slug
+    status
+    type
   }
 }
     `;

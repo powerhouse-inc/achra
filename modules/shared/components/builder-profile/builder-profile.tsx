@@ -4,7 +4,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import { BuildersStatusChip } from '../chips/builders-status-chip'
 
 export interface BuilderProfileProps {
-  name: string
+  name: Maybe<string> | undefined
   code: Maybe<string> | undefined
   status: Maybe<BuilderStatus> | undefined
   image: string

@@ -1,7 +1,7 @@
 'use client'
 import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Link from 'next/link'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -20,7 +20,7 @@ import { SortEnum, useBuildersTable } from './use-builders-table'
 import type { Route } from 'next'
 
 export interface BuildersTableProps {
-  builders: Builder[]
+  builders: BuilderProfileState[]
   className?: string
   networkSlug: string
 }

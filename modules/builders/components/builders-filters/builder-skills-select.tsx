@@ -6,12 +6,12 @@ import { MultipleSelector, type Option } from '@/modules/shared/components/form/
 import { cn } from '@/modules/shared/lib/utils'
 
 interface BuilderSkillsSelectProps {
-  builderSkills: BuilderSkill[]
-  setBuilderSkills: (builderSkills: BuilderSkill[]) => Promise<URLSearchParams>
+  skills: BuilderSkill[]
+  setSkills: (skills: BuilderSkill[]) => Promise<URLSearchParams>
   className?: string
 }
 
-const builderSkillsOptions: Option[] = [
+const skillsOptions: Option[] = [
   {
     value: BuilderSkill.BackendDevelopment,
     label: <BuildersSkillsChip skill={BuilderSkill.BackendDevelopment} />,
@@ -64,27 +64,22 @@ const builderSkillsOptions: Option[] = [
   },
 ]
 
-function BuilderSkillsSelect({
-  builderSkills,
-  setBuilderSkills,
-  className,
-}: BuilderSkillsSelectProps) {
+function BuilderSkillsSelect({ skills, setSkills, className }: BuilderSkillsSelectProps) {
   const selectedOptions = useMemo(
-    () =>
-      builderSkillsOptions.filter((option) => builderSkills.includes(option.value as BuilderSkill)),
-    [builderSkills],
+    () => skillsOptions.filter((option) => skills.includes(option.value as BuilderSkill)),
+    [skills],
   )
 
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value as BuilderSkill)
-    void setBuilderSkills(values)
+    void setSkills(values)
   }
 
   return (
     <MultipleSelector
       value={selectedOptions}
       onChange={handleChange}
-      options={builderSkillsOptions}
+      options={skillsOptions}
       enableSearch={false}
       groupBy="group"
       enableSelectAll={true}
@@ -99,17 +94,17 @@ function BuilderSkillsSelect({
   )
 }
 
-function BuilderSkillsSelectDrawer({ builderSkills, setBuilderSkills }: BuilderSkillsSelectProps) {
+function BuilderSkillsSelectDrawer({ skills, setSkills }: BuilderSkillsSelectProps) {
   const handleChange = (values: string[]) => {
-    void setBuilderSkills(values as BuilderSkill[])
+    void setSkills(values as BuilderSkill[])
   }
 
   return (
     <DrawerSelect
-      value={builderSkills}
+      value={skills}
       onChange={handleChange}
       label="Builder Skills"
-      options={builderSkillsOptions}
+      options={skillsOptions}
       multiselect={true}
       enableSelectAll={true}
       selectAllLabel="Select All"
