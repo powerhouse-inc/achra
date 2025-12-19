@@ -1,11 +1,12 @@
 'use client'
 import TitleSection from '../title-section-finances'
 import BudgetStatementFilters from './budget-stament-filters/budget-stament-filters'
+import type { MetricWithoutBudget } from './type'
 
 interface BudgetStatementsTitleProps {
   range: string
   hash: string
-  setBudgetMetric: (value: string) => Promise<URLSearchParams>
+  setBudgetMetric: (value: MetricWithoutBudget) => Promise<URLSearchParams>
 }
 
 export default function BudgetStatementsTitle({

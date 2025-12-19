@@ -11,10 +11,12 @@ import useBudgetStamentFilters from './useBudgetStamentFilters'
 import type { MetricWithoutBudget } from '../type'
 
 interface BudgetStatementFiltersProps {
-  setBudgetMetric: (value: string) => Promise<URLSearchParams>
+  setBudgetMetric: (value: MetricWithoutBudget) => Promise<URLSearchParams>
 }
 
-export default function BudgetStatementFilters({ setBudgetMetric }: BudgetStatementFiltersProps) {
+export default function BudgetStatementFilters({
+  setBudgetMetric,
+}: Readonly<BudgetStatementFiltersProps>) {
   const {
     open,
     setOpen,
