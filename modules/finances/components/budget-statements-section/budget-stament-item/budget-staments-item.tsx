@@ -1,13 +1,12 @@
-import type { METRIC_OPTIONS } from '@/modules/finances/types'
 import { BudgetStatementListMobile } from '../budget-stament-mobile/budget-statement-list-mobile'
 import { BudgetStamentTable } from '../budget-stament-table/budget-stament-table'
 
 import { useBudgetStamentData } from './useBudgetStamentData'
-import type { BudgetStatementExpenseReport } from '../type'
+import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
 
 export interface BudgetStatementsItemProps {
   builders: BudgetStatementExpenseReport[]
-  budgetMetric: string
+  budgetMetric: MetricWithoutBudget
 }
 
 export function BudgetStatementsItem({
@@ -25,7 +24,7 @@ export function BudgetStatementsItem({
       />
       <BudgetStatementListMobile
         builders={buildersProcessed}
-        selectedMetric={budgetMetric as METRIC_OPTIONS}
+        selectedMetric={budgetMetric}
         className="lg:hidden"
       />
     </>
