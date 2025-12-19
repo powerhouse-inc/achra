@@ -1,5 +1,11 @@
 import { createLoader, parseAsArrayOf, parseAsString, parseAsStringEnum } from 'nuqs/server'
 import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import { getBuilders } from '../../services/builders'
 import { BuildersList } from './components/builders-list/builders-list'
 import { BuildersTable } from './components/builders-table/builders-table'
@@ -25,6 +31,18 @@ export async function Builders({ className, networkSlug, searchParams }: Builder
     skills,
     name: search,
   })
+
+  if (builders.length === 0) {
+    return (
+      <Empty>
+        <EmptyHeader>
+          <EmptyTitle>No builders found</EmptyTitle>
+          <EmptyDescription>There are no builders to display at this time.</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    )
+  }
+
   return (
     <div className={className}>
       <BuildersTable builders={builders} networkSlug={networkSlug} className="hidden lg:block" />
