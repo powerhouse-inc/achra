@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { BUDGET_STATEMENTS_TABLE_COLUMNS, type BudgetStatementsTableColumn } from '../const'
-import type { BudgetStatementExpenseReport } from '../type'
+import { getMetricLabel } from '../utils'
+import type { BudgetStatementsTableColumn } from '../const'
+import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
 
 interface UseBudgetStamentTableProps {
   builders: BudgetStatementExpenseReport[]
+  budgetMetric: MetricWithoutBudget
 }
 
 export enum SortEnum {
@@ -15,7 +17,48 @@ export enum SortEnum {
   Disabled = 'disabled',
 }
 
-export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) {
+export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStamentTableProps) {
+  const isDesktopLg = useMediaQuery({ from: 'lg', to: 'xl' })
+  const BUDGET_STATEMENTS_TABLE_COLUMNS: BudgetStatementsTableColumn[] = useMemo(() => {
+    return [
+      {
+        header: 'Contributors',
+        accessorKey: 'name',
+        hasSort: true,
+        sortReverse: false,
+        isNumeric: false,
+      },
+      {
+        header: 'Reporting Month',
+        accessorKey: 'month',
+        hasSort: true,
+        sortReverse: false,
+        isNumeric: false,
+      },
+      {
+        header: getMetricLabel(budgetMetric, isDesktopLg),
+        accessorKey: '',
+        hasSort: false,
+        sortReverse: false,
+        isNumeric: false,
+      },
+      {
+        header: 'Status',
+        accessorKey: 'status',
+        hasSort: false,
+        sortReverse: false,
+        isNumeric: false,
+      },
+      {
+        header: 'Last Modified',
+        accessorKey: 'lastModified',
+        hasSort: true,
+        sortReverse: false,
+        isNumeric: false,
+      },
+    ]
+  }, [budgetMetric, isDesktopLg])
+
   const [headersSort, setHeadersSort] = useState<SortEnum[]>(
     BUDGET_STATEMENTS_TABLE_COLUMNS.map((column: BudgetStatementsTableColumn) =>
       column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
@@ -23,7 +66,6 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
   const isDesktop = useMediaQuery({ from: 'lg' })
-
   const proccesedBudgetStatementsTableColumns: Array<
     Omit<BudgetStatementsTableColumn, 'shortHeader'>
   > = useMemo(() => {
@@ -34,7 +76,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
       isNumeric: column.isNumeric,
       header: !isDesktop && column.shortHeader ? column.shortHeader : column.header,
     }))
-  }, [isDesktop])
+  }, [BUDGET_STATEMENTS_TABLE_COLUMNS, isDesktop])
 
   const handleSortClick = useCallback(
     (index: number) => {
@@ -55,7 +97,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
       setHeadersSort(sortNeutralState)
       setSortColumn(index)
     },
-    [headersSort],
+    [BUDGET_STATEMENTS_TABLE_COLUMNS, headersSort],
   )
 
   const sortBuilders = useCallback(
@@ -100,7 +142,7 @@ export function useBudgetStamentTable({ builders }: UseBudgetStamentTableProps) 
         return 0
       })
     },
-    [sortColumn, headersSort],
+    [sortColumn, BUDGET_STATEMENTS_TABLE_COLUMNS, headersSort],
   )
 
   const sortedBuilders = useMemo(() => sortBuilders(builders), [builders, sortBuilders])

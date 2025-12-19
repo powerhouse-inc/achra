@@ -1,3 +1,4 @@
+import { METRIC_OPTIONS } from '../../types'
 import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
 import { mockBudgetStatements } from './mock/budget-stament-mock'
 import type { Meta, StoryObj } from '@storybook/nextjs'
@@ -21,5 +22,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     builders: mockBudgetStatements,
+    budgetMetric: METRIC_OPTIONS.Actuals,
   },
 }

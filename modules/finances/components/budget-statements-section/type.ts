@@ -1,4 +1,5 @@
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { METRIC_OPTIONS } from '../../types'
 
 export enum MetricOption {
   Budget = 'Budget',
@@ -23,3 +24,5 @@ export interface BudgetStatementExpenseReport extends Builder {
   netProtocolOutflow: number | null
   month: string
 }
+
+export type MetricWithoutBudget = Exclude<METRIC_OPTIONS, METRIC_OPTIONS.Budget>

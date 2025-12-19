@@ -13,14 +13,19 @@ import {
 import { cn } from '@/modules/shared/lib/utils'
 import { useBudgetStamentTable } from '../budget-stament-item/useBudgetStamentTable'
 import { BudgetStamentTableItem } from './budget-stament-table-item'
-import type { BudgetStatementExpenseReport } from '../type'
+import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableProps {
   builders: BudgetStatementExpenseReport[]
+  budgetMetric: MetricWithoutBudget
   className?: string
 }
 
-export function BudgetStamentTable({ builders, className }: Readonly<BudgetStamentTableProps>) {
+export function BudgetStamentTable({
+  builders,
+  budgetMetric,
+  className,
+}: Readonly<BudgetStamentTableProps>) {
   const {
     headersSort,
     sortedBuilders,
@@ -28,6 +33,7 @@ export function BudgetStamentTable({ builders, className }: Readonly<BudgetStame
     handleSortClickHeader,
   } = useBudgetStamentTable({
     builders,
+    budgetMetric,
   })
 
   return (
@@ -74,6 +80,7 @@ export function BudgetStamentTable({ builders, className }: Readonly<BudgetStame
           <BudgetStamentTableItem
             key={builder.id}
             builder={builder}
+            budgetMetric={budgetMetric}
             className="last:rounded-b-xl!"
           />
         ))}
