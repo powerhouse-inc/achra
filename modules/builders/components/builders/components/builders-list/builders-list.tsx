@@ -2,7 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
 import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -14,7 +14,7 @@ import { Links } from '../links'
 import type { Route } from 'next'
 
 export interface BuildersListProps {
-  builders: Builder[]
+  builders: BuilderProfileState[]
   networkSlug: string
   className?: string
 }

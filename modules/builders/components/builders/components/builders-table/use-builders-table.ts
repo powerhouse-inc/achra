@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
 
 interface UseBuildersTableProps {
-  builders: Builder[]
+  builders: BuilderProfileState[]
 }
 
 export enum SortEnum {
@@ -57,7 +57,7 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
   )
 
   const sortBuilders = useCallback(
-    (builders: Builder[]) => {
+    (builders: BuilderProfileState[]) => {
       if (sortColumn === -1) return builders
 
       const column = BUILDERS_TABLE_COLUMNS[sortColumn]
@@ -68,8 +68,8 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
       }
 
       return [...builders].sort((a, b) => {
-        const getSortableValue = (builder: Builder): string | number => {
-          const value = builder[column.accessorKey as keyof Builder]
+        const getSortableValue = (builder: BuilderProfileState): string | number => {
+          const value = builder[column.accessorKey as keyof BuilderProfileState]
           if (column.accessorKey === 'lastModified') {
             if (typeof value === 'string') {
               const timestamp = new Date(value).getTime()

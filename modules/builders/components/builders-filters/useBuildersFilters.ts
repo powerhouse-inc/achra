@@ -11,7 +11,7 @@ const filtersConfig = {
       timeMs: 300,
     },
   }),
-  builderSkills: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderSkill)))
+  skills: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderSkill)))
     .withDefault([])
     .withOptions({
       shallow: false,
@@ -53,23 +53,23 @@ export default function useBuildersFilters() {
       setFilterValue('search', value, options),
     [setFilterValue],
   )
-  const setBuilderSkills = useCallback(
-    async (value: StateUpdater<FiltersState['builderSkills']>, options?: FilterOptions) =>
-      setFilterValue('builderSkills', value, options),
+  const setSkills = useCallback(
+    async (value: StateUpdater<FiltersState['skills']>, options?: FilterOptions) =>
+      setFilterValue('skills', value, options),
     [setFilterValue],
   )
   const onReset = useCallback(() => {
     void setFilters({
       search: '',
-      builderSkills: [],
+      skills: [],
     })
   }, [setFilters])
 
   return {
     search: filters.search,
-    builderSkills: filters.builderSkills,
+    skills: filters.skills,
     setSearch,
-    setBuilderSkills,
+    setSkills,
     onReset,
   }
 }
