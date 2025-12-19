@@ -22,6 +22,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     builders: mockBudgetStatements,
-    budgetMetric: METRIC_OPTIONS.Forecast,
+    budgetMetric: METRIC_OPTIONS.Actuals,
   },
 }
