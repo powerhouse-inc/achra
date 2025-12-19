@@ -8,8 +8,13 @@ import { MetricSelectDrawer } from '../metric-budget-filters/metric-select-drawe
 import { BudgetStatementPopover } from './budget-stament-popover'
 import { StatusSelectBudget, StatusSelectDrawer } from './budget-stament-status'
 import useBudgetStamentFilters from './useBudgetStamentFilters'
+import type { MetricWithoutBudget } from '../type'
 
-export default function BudgetStatementFilters() {
+interface BudgetStatementFiltersProps {
+  setBudgetMetric: (value: string) => Promise<URLSearchParams>
+}
+
+export default function BudgetStatementFilters({ setBudgetMetric }: BudgetStatementFiltersProps) {
   const {
     open,
     setOpen,
@@ -21,7 +26,6 @@ export default function BudgetStatementFilters() {
     onReset,
     handleOnMetricSelect,
   } = useBudgetStamentFilters()
-
   return (
     <div className="row flex w-full justify-end gap-4">
       <div className="hidden w-full items-center justify-end gap-4 md:flex">
@@ -37,7 +41,8 @@ export default function BudgetStatementFilters() {
           value={metric}
           label="Metric"
           onValueChange={(value) => {
-            void setMetric(value as Exclude<METRIC_OPTIONS, METRIC_OPTIONS.Budget>)
+            void setMetric(value as MetricWithoutBudget)
+            void setBudgetMetric(value as MetricWithoutBudget)
           }}
           options={Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget')}
           placeholder="Budget"

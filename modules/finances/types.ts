@@ -92,7 +92,6 @@ export enum METRIC_OPTIONS {
   NetProtocolOutflow = 'Net Protocol Outflow',
   NetExpensesOnChain = 'Net Expenses On-Chain',
 }
-
 export enum GRANULARITY_OPTIONS {
   Monthly = 'Monthly',
   Quarterly = 'Quarterly',

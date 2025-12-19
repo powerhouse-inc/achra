@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
+import { useMemo } from 'react'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -8,20 +9,26 @@ import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
-import type { BudgetStatementExpenseReport } from '../type'
+import { getAmountByMetric } from '../utils'
+import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableItemProps {
   builder: BudgetStatementExpenseReport
+  budgetMetric: MetricWithoutBudget
   className?: string
 }
 
 export function BudgetStamentTableItem({
   builder,
+  budgetMetric,
   className,
 }: Readonly<BudgetStamentTableItemProps>) {
   const reportMonth = builder.month
     ? DateTime.fromFormat(builder.month, 'yyyy-LL-dd').toFormat('LLL yyyy')
     : 'No date'
+
+  const amount = useMemo(() => getAmountByMetric(budgetMetric, builder), [budgetMetric, builder])
+
   return (
     <TableRow
       className={cn(
@@ -57,7 +64,7 @@ export function BudgetStamentTableItem({
           className="flex h-full w-full items-center justify-start"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">
-            {usLocalizedNumber(1245555)} USD
+            {usLocalizedNumber(amount ?? 0)} USD
           </div>
         </Link>
       </TableCell>

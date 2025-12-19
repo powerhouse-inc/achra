@@ -5,11 +5,13 @@ import BudgetStatementFilters from './budget-stament-filters/budget-stament-filt
 interface BudgetStatementsTitleProps {
   range: string
   hash: string
+  setBudgetMetric: (value: string) => Promise<URLSearchParams>
 }
 
 export default function BudgetStatementsTitle({
   range,
   hash,
+  setBudgetMetric,
 }: Readonly<BudgetStatementsTitleProps>) {
   return (
     <div className="flex flex-row flex-wrap items-start justify-between">
@@ -31,7 +33,7 @@ export default function BudgetStatementsTitle({
         range={range}
       />
       <div>
-        <BudgetStatementFilters />
+        <BudgetStatementFilters setBudgetMetric={setBudgetMetric} />
       </div>
     </div>
   )

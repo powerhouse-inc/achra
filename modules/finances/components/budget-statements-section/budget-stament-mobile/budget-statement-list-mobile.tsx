@@ -1,11 +1,10 @@
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementMobileItem } from './budget-statement-mobile-item'
-import type { AnalyticMetric } from '../../summary-section/filter-tabs'
+import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
 
 interface BudgetStatementListMobileProps {
-  builders: Builder[]
-  selectedMetric: AnalyticMetric
+  builders: BudgetStatementExpenseReport[]
+  selectedMetric: MetricWithoutBudget
   className?: string
 }
 
