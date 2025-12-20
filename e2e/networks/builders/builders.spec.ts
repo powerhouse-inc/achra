@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse/builders');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders`);
 });
 
 test('should have the main elements', async ({ page }) => {
@@ -196,9 +196,9 @@ test('should reset all sorting of builders', async ({ page }) => {
     await page.getByPlaceholder('Search...').fill('Dewiz');
     await page.getByText('Builder Skills').click();
     await page.getByText('Select All').click();
-    await expect(page).toHaveURL(`https://staging.achra.com/network/powerhouse/builders?search=Dewiz&builderSkills=BACKEND_DEVELOPMENT,DATA_ENGINEERING,DEVOPS_ENGINEERING,FRONTEND_DEVELOPMENT,FULL_STACK_DEVELOPMENT,QA_TESTING,SECURITY_ENGINEERING,SMART_CONTRACT_DEVELOPMENT,TECHNICAL_WRITING,UI_UX_DESIGN`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders?search=Dewiz&builderSkills=BACKEND_DEVELOPMENT,DATA_ENGINEERING,DEVOPS_ENGINEERING,FRONTEND_DEVELOPMENT,FULL_STACK_DEVELOPMENT,QA_TESTING,SECURITY_ENGINEERING,SMART_CONTRACT_DEVELOPMENT,TECHNICAL_WRITING,UI_UX_DESIGN`);
 
     await page.getByText('Reset Filter').click();
     await page.waitForTimeout(1000);
-    await expect(page).toHaveURL(`https://staging.achra.com/network/powerhouse/builders`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders`);
 });

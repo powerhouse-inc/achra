@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse/builders/builder-1');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/builder-1`);
 });
 
 test('should load the builder info', async ({ page }) => {
