@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/`);
 
     await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
@@ -27,6 +27,7 @@ test('has a link for Explore Achra', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
+    // TODO: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://achra.com/workstreams');
 });
 
@@ -38,13 +39,14 @@ test('has a link for Explore Vetra', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
+    // TODO: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://staging.vetra.io/');
 });
 
 test('has a link for Use Cases', async ({ page }) => {
     await page.getByText('Use Cases').last().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/cases');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/cases`);
 });
 
 test('has a link for About us', async ({ page }) => {
@@ -66,5 +68,6 @@ test('has a link for Academy', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
+    // TODO: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://staging.powerhouse.academy/');
 });
