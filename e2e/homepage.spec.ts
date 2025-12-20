@@ -1,35 +1,35 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/`);
 });
 
 test('has a link to the Networks page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-11lmli7.framer-122cz0u').getByText('Networks').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/networks');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/networks`);
 });
 
 test('has a link to the Workstreams page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-1rjqhys.framer-122cz0u').getByText('Workstreams').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/workstreams');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams`);
 });
 
 test('has a link to the Services page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-18lak58.framer-122cz0u').getByText('Services').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/services');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services`);
 });
 
 test('has a link to the Use Cases page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-1cgu14x.framer-122cz0u').getByText('Use Cases').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/cases');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/cases`);
 });
 
 test('has a link to the Networks page in the "For Organizations" section', async ({ page }) => {
@@ -37,7 +37,7 @@ test('has a link to the Networks page in the "For Organizations" section', async
 
     await page.getByText('View networks').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/networks');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/networks`);
 });
 
 test('has a link to the Networks page from the button "Create your own"', async ({ page }) => {
@@ -45,7 +45,7 @@ test('has a link to the Networks page from the button "Create your own"', async 
 
     await page.getByText('Create your own').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/networks');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/networks`);
 });
 
 test('has a link to the Workstreams page in the "For Builders" section', async ({ page }) => {
@@ -69,7 +69,7 @@ test('has a link to the Workstreams page for Open From Proposals from the button
 
     await page.getByText('Sign up').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/workstreams?statuses=OPEN_FOR_PROPOSALS');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=OPEN_FOR_PROPOSALS`);
 });
 
 test('has a link to the Services page in the "For Operators" section', async ({ page }) => {
@@ -103,7 +103,7 @@ test('has a link to the Use Cases page from the link "View Use Cases"', async ({
     await page.waitForLoadState('networkidle');
     await page.getByText('View Use Cases').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/cases');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/cases`);
 });
 
 test('has a link to the Vetra page from the button "Start Building"', async ({ page }) => {
