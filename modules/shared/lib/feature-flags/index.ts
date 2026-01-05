@@ -1,6 +1,15 @@
-import { ffDev } from './ff-dev'
-import { ffProduction } from './ff-production'
+import { ENVIRONMENT } from '@/modules/shared/config/constants'
+import { ffDev } from './ff.dev'
+import { ffProduction } from './ff.production'
+import { ffStaging } from './ff.staging'
 
-const featureFlags = process.env.NODE_ENV === 'development' ? ffDev : ffProduction
+export const allFeatureFlags = {
+  dev: ffDev,
+  staging: ffStaging,
+  production: ffProduction,
+}
 
-export default featureFlags
+const ff =
+  ENVIRONMENT === 'development' ? ffDev : ENVIRONMENT === 'staging' ? ffStaging : ffProduction
+
+export default ff

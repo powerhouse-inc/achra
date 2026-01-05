@@ -2,7 +2,8 @@ import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
 import type { FeatureFlags } from './types'
 
 const ffDev: FeatureFlags = {
-  FEATURE_WHITELIST_OVERLAY: SHOW_WHITELIST_OVERLAY,
+  WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
+  WORKSTREAMS_ENABLED: true,
 }
 
 export { ffDev }

@@ -1,0 +1,9 @@
+import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
+import type { FeatureFlags } from './types'
+
+const ffStaging: FeatureFlags = {
+  WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
+  WORKSTREAMS_ENABLED: false,
+}
+
+export { ffStaging }

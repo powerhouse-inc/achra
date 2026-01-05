@@ -10,7 +10,7 @@ import { OMIT_WHITELIST_OVERLAY_FROM_ROUTES } from '../config/constants'
 function useWhitelistOverlay() {
   const pathname = usePathname()
   const shouldShow = useMemo(
-    () => !OMIT_WHITELIST_OVERLAY_FROM_ROUTES.includes(pathname) && ff.FEATURE_WHITELIST_OVERLAY,
+    () => !OMIT_WHITELIST_OVERLAY_FROM_ROUTES.includes(pathname) && ff.WHITELIST_OVERLAY_ENABLED,
     [pathname],
   )
 

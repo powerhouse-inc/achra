@@ -1,6 +1,8 @@
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card/workstream-card-skeleton'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
@@ -17,6 +19,10 @@ interface WorkstreamsPageProps {
 }
 
 export default async function WorkstreamsPage({ searchParams }: WorkstreamsPageProps) {
+  if (!ff.WORKSTREAMS_ENABLED) {
+    return notFound()
+  }
+
   const searchParamsString = JSON.stringify(await searchParams)
 
   return (

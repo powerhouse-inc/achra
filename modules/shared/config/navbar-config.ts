@@ -1,3 +1,4 @@
+import ff from '../lib/feature-flags'
 import type { RouteWithDynamicPages } from '../types/routes'
 
 /**
@@ -18,10 +19,14 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     label: 'Networks',
     href: '/networks',
   },
-  {
-    label: 'Workstreams',
-    href: '/workstreams',
-  },
+  ...(ff.WORKSTREAMS_ENABLED
+    ? [
+        {
+          label: 'Workstreams',
+          href: '/workstreams',
+        } satisfies NavbarLink,
+      ]
+    : []),
   {
     label: 'Services',
     href: '/services',
@@ -45,11 +50,15 @@ export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
  */
 export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
   return [
-    {
-      label: 'Contribute',
-      href: `/network/${network}/workstreams` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
-    },
+    ...(ff.WORKSTREAMS_ENABLED
+      ? [
+          {
+            label: 'Contribute',
+            href: `/network/${network}/workstreams` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
+          },
+        ]
+      : []),
     {
       label: 'Roadmaps',
       href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
