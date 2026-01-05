@@ -8,4 +8,9 @@ export interface FeatureFlags {
    * Whether the workstream pages are enabled or not
    */
   WORKSTREAMS_ENABLED: boolean
+
+  /**
+   * Whether to use builders as the network homepage
+   */
+  USE_BUILDERS_AS_NETWORK_HOMEPAGE: boolean
 }
