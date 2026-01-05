@@ -1,3 +1,4 @@
+import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
 import { compareDate, compareString } from '../utils'
 import type { SortOptionValue } from '../budget-stament-filters/popover-filter-content'
@@ -19,13 +20,23 @@ const SORTERS: Record<
 }
 
 export function useBudgetStamentData({ builders, sortOption }: Readonly<BuildersStamentProps>) {
+  const [selectedStatuses] = useQueryState('status', parseAsArrayOf(parseAsString))
+
   const buildersProcessed = useMemo(() => {
-    if (!sortOption || !builders.length) return builders
+    let result = builders
+    if (selectedStatuses && selectedStatuses.length > 0) {
+      result = result.filter((builder) => {
+        return selectedStatuses.includes(builder.status ?? '')
+      })
+    }
 
-    const sortFn = SORTERS[sortOption]
+    if (sortOption && result.length > 0) {
+      const sortFn = SORTERS[sortOption]
+      return [...result].sort(sortFn)
+    }
 
-    return [...builders].sort(sortFn)
-  }, [builders, sortOption])
+    return result
+  }, [builders, selectedStatuses, sortOption])
 
   return {
     buildersProcessed,
