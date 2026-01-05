@@ -74,10 +74,14 @@ export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
       href: `/network/${network}/builders` as RouteWithDynamicPages,
       activeWhen: /\/network\/[a-z]+\/builders?(\/.*)?/.source,
     },
-    {
-      label: 'Governance',
-      href: 'https://governance.achra.network',
-      isExternal: true,
-    },
+    ...(ff.GOVERNANCE_LINK_ENABLED
+      ? [
+          {
+            label: 'Governance',
+            href: 'https://governance.achra.network',
+            isExternal: true,
+          } satisfies NavbarLink,
+        ]
+      : []),
   ]
 }

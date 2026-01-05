@@ -3,6 +3,7 @@ import type { FeatureFlags } from './types'
 
 const ffDev: FeatureFlags = {
   WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
+  GOVERNANCE_LINK_ENABLED: true,
   WORKSTREAMS_ENABLED: true,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: false,
 

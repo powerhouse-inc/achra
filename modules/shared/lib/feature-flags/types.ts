@@ -5,6 +5,11 @@ export interface FeatureFlags {
   WHITELIST_OVERLAY_ENABLED: boolean
 
   /**
+   * Whether to show the governance link in the network navigation
+   */
+  GOVERNANCE_LINK_ENABLED: boolean
+
+  /**
    * Whether the workstream pages are enabled or not
    */
   WORKSTREAMS_ENABLED: boolean

@@ -3,6 +3,7 @@ import type { FeatureFlags } from './types'
 
 const ffStaging: FeatureFlags = {
   WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
+  GOVERNANCE_LINK_ENABLED: false,
   WORKSTREAMS_ENABLED: false,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: true,
 
