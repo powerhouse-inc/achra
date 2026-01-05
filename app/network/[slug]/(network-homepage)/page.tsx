@@ -41,16 +41,24 @@ export default async function NetworkPage({ params }: NetworkPageProps) {
         <Suspense fallback={<HomepageBannerSkeleton />}>
           <HomepageBanner />
         </Suspense>
+
         <ProposalsSection proposals={PROPOSALS} />
-        <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
-          <Suspense fallback={<RoadmapSectionSkeleton />}>
-            <RoadmapSection params={params} />
-          </Suspense>
-        </ErrorBoundaryWithPresets>
+
+        {ff.ROADMAPS_ENABLED && (
+          <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
+            <Suspense fallback={<RoadmapSectionSkeleton />}>
+              <RoadmapSection params={params} />
+            </Suspense>
+          </ErrorBoundaryWithPresets>
+        )}
+
         <FinancesSection />
+
         <WalletsSection wallets={WALLETS} />
+
         {/* TODO: Implement builders section backend integration */}
         <BuildersSection />
+
         <GovernanceSection />
 
         <SectionActivation
