@@ -3,14 +3,17 @@ import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import BudgetEmptyState from './budget-empty-state'
 import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
 import { mockBudgetStatements } from './mock/budget-stament-mock'
+import type { SortOptionValue } from './budget-stament-filters/popover-filter-content'
 import type { MetricWithoutBudget } from './type'
 
 interface BudgetStatementsContentProps {
   budgetMetric: MetricWithoutBudget
+  sortOption?: SortOptionValue
 }
 
 export default function BudgetStatementsContent({
   budgetMetric,
+  sortOption,
 }: Readonly<BudgetStatementsContentProps>) {
   const { visibleItems, hasMore, loadMore } = useInfiniteArray(mockBudgetStatements, {
     firstPageSize: 10,
@@ -22,7 +25,11 @@ export default function BudgetStatementsContent({
   return (
     <div className="flex h-fit flex-col gap-6">
       {!showEmptyState && (
-        <BudgetStatementsItem builders={visibleItems} budgetMetric={budgetMetric} />
+        <BudgetStatementsItem
+          builders={visibleItems}
+          budgetMetric={budgetMetric}
+          sortOption={sortOption}
+        />
       )}
       {showEmptyState && <BudgetEmptyState />}
       {!showEmptyState && hasMore && (

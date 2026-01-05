@@ -1,5 +1,6 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
+import { useState } from 'react'
 import { METRIC_OPTIONS } from '@/modules/finances/types'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
@@ -7,6 +8,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { MetricSelectDrawer } from '../metric-budget-filters/metric-select-drawer'
 import { BudgetStatementPopover } from './budget-stament-popover'
 import { StatusSelectBudget, StatusSelectDrawer } from './budget-stament-status'
+import { MetricItemFilter } from './metric-item-filter'
 import useBudgetStamentFilters from './useBudgetStamentFilters'
 import type { MetricWithoutBudget } from '../type'
 
@@ -17,17 +19,9 @@ interface BudgetStatementFiltersProps {
 export default function BudgetStatementFilters({
   setBudgetMetric,
 }: Readonly<BudgetStatementFiltersProps>) {
-  const {
-    open,
-    setOpen,
-    status,
-    setStatus,
-    metricSort,
-    metric,
-    setMetric,
-    onReset,
-    handleOnMetricSelect,
-  } = useBudgetStamentFilters()
+  const [open, setOpen] = useState(false)
+  const { status, setStatus, metricSort, metric, setMetric, onReset, handleOnMetricSelect } =
+    useBudgetStamentFilters()
   return (
     <div className="row flex w-full justify-end gap-4">
       <div className="hidden w-full items-center justify-end gap-4 md:flex">
@@ -70,7 +64,55 @@ export default function BudgetStatementFilters({
           />
           <div className="flex md:hidden">
             <FilterDrawer onReset={onReset} filterTrigger={<ArrowUpDown className="size-4.5" />}>
-              <MetricSelectDrawer metric={metric} setMetric={setMetric} />
+              <div className="border-input flex flex-col gap-1 rounded-xl border p-2">
+                <div className="flex items-center justify-between px-2 pt-2 pb-1">
+                  <span className="text-foreground text-sm font-semibold">Sort by</span>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      handleOnMetricSelect('modified_newest')
+                    }}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors outline-none"
+                  >
+                    Reset
+                  </Button>
+                </div>
+                <div className="text-muted-foreground/80 px-2 py-1.5 text-xs font-semibold">
+                  Reporting Month
+                </div>
+                <MetricItemFilter
+                  label="Newest First"
+                  isSelected={metricSort === 'reporting_newest'}
+                  onClick={() => {
+                    handleOnMetricSelect('reporting_newest')
+                  }}
+                />
+                <MetricItemFilter
+                  label="Oldest First"
+                  isSelected={metricSort === 'reporting_oldest'}
+                  onClick={() => {
+                    handleOnMetricSelect('reporting_oldest')
+                  }}
+                />
+
+                <div className="text-muted-foreground/80 mt-2 px-2 py-1.5 text-xs font-semibold">
+                  Last Modified
+                </div>
+                <MetricItemFilter
+                  label="Newest First"
+                  isSelected={metricSort === 'modified_newest'}
+                  onClick={() => {
+                    handleOnMetricSelect('modified_newest')
+                  }}
+                />
+                <MetricItemFilter
+                  label="Oldest First"
+                  isSelected={metricSort === 'modified_oldest'}
+                  onClick={() => {
+                    handleOnMetricSelect('modified_oldest')
+                  }}
+                />
+              </div>
             </FilterDrawer>
           </div>
         </div>
