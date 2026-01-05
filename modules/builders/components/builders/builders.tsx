@@ -27,7 +27,7 @@ export interface BuildersProps {
 export async function Builders({ className, networkSlug, searchParams }: BuildersProps) {
   const { search, skills } = await filtersParser(searchParams)
   const builders = await getBuilders({
-    slug: networkSlug,
+    networkSlug,
     skills,
     name: search,
   })

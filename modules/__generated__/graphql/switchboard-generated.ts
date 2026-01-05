@@ -3716,6 +3716,7 @@ export type BuildersFilter = {
   code?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['PHID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
   scopes?: InputMaybe<Array<BuilderScope>>;
   skills?: InputMaybe<Array<BuilderSkill>>;
   slug?: InputMaybe<Scalars['String']['input']>;
