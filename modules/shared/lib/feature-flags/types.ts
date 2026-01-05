@@ -15,6 +15,11 @@ export interface FeatureFlags {
   WORKSTREAMS_ENABLED: boolean
 
   /**
+   * Whether to enable the roadmap pages
+   */
+  ROADMAPS_ENABLED: boolean
+
+  /**
    * Whether to use builders as the network homepage
    */
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: boolean

@@ -59,11 +59,15 @@ export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
           },
         ]
       : []),
-    {
-      label: 'Roadmaps',
-      href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
-    },
+    ...(ff.ROADMAPS_ENABLED
+      ? [
+          {
+            label: 'Roadmaps',
+            href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
+          },
+        ]
+      : []),
     {
       label: 'Finances',
       href: `/network/${network}/finances` as RouteWithDynamicPages,
