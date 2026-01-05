@@ -51,5 +51,7 @@ chromatic-diagnostics.json
 # cursor
 .cursor
 
-# Antigravity
-.agent
+# Ignore .agent for git but allow Gemini to read
+.agent/
+!.agent/rules/
+!.agent/workflows/
