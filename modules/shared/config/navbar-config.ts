@@ -19,7 +19,7 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     label: 'Networks',
     href: '/networks',
   },
-  ...(ff.WORKSTREAMS_ENABLED
+  ...(ff.workstreams.WORKSTREAMS_ENABLED
     ? [
         {
           label: 'Workstreams',
@@ -50,7 +50,7 @@ export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
  */
 export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
   return [
-    ...(ff.WORKSTREAMS_ENABLED
+    ...(ff.workstreams.WORKSTREAMS_ENABLED
       ? [
           {
             label: 'Contribute',

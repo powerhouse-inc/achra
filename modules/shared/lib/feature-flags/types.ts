@@ -10,11 +10,6 @@ export interface FeatureFlags {
   GOVERNANCE_LINK_ENABLED: boolean
 
   /**
-   * Whether the workstream pages are enabled or not
-   */
-  WORKSTREAMS_ENABLED: boolean
-
-  /**
    * Whether to enable the roadmap pages
    */
   ROADMAPS_ENABLED: boolean
@@ -23,6 +18,18 @@ export interface FeatureFlags {
    * Whether to use builders as the network homepage
    */
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: boolean
+
+  workstreams: {
+    /**
+     * Whether the workstream pages are enabled or not
+     */
+    WORKSTREAMS_ENABLED: boolean
+
+    /**
+     * Whether the project details page is enabled or not
+     */
+    PROJECT_DETAILS_ENABLED: boolean
+  }
 
   finances: {
     /**

@@ -19,7 +19,7 @@ interface WorkstreamsPageProps {
 }
 
 export default async function WorkstreamsPage({ searchParams }: WorkstreamsPageProps) {
-  if (!ff.WORKSTREAMS_ENABLED) {
+  if (!ff.workstreams.WORKSTREAMS_ENABLED) {
     return notFound()
   }
 

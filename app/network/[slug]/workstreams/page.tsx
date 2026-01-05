@@ -24,7 +24,7 @@ export default async function NetworkWorkstreamsPage({
   params,
   searchParams,
 }: NetworkWorkstreamsPageProps) {
-  if (!ff.WORKSTREAMS_ENABLED) {
+  if (!ff.workstreams.WORKSTREAMS_ENABLED) {
     return notFound()
   }
 

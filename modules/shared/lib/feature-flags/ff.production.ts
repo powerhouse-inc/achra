@@ -4,9 +4,13 @@ import type { FeatureFlags } from './types'
 const ffProduction: FeatureFlags = {
   WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
   GOVERNANCE_LINK_ENABLED: false,
-  WORKSTREAMS_ENABLED: false,
   ROADMAPS_ENABLED: false,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: true,
+
+  workstreams: {
+    WORKSTREAMS_ENABLED: false,
+    PROJECT_DETAILS_ENABLED: false,
+  },
 
   finances: {
     WALLETS_ENABLED: false,

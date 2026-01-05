@@ -24,7 +24,7 @@ interface Props {
 }
 
 export default async function WorkstreamDetailsPage({ params }: Props) {
-  if (!ff.WORKSTREAMS_ENABLED) {
+  if (!ff.workstreams.WORKSTREAMS_ENABLED) {
     return notFound()
   }
 
