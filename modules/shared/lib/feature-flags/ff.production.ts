@@ -5,6 +5,13 @@ const ffProduction: FeatureFlags = {
   WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
   WORKSTREAMS_ENABLED: false,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: true,
+
+  finances: {
+    WALLETS_ENABLED: false,
+    SUMMARY_SECTION_ENABLED: false,
+    NAVIGATION_SECTION_ENABLED: false,
+    BREAKDOWN_CHART_SECTION_ENABLED: false,
+  },
 }
 
 export { ffProduction }

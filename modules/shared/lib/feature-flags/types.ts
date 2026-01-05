@@ -13,4 +13,26 @@ export interface FeatureFlags {
    * Whether to use builders as the network homepage
    */
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: boolean
+
+  finances: {
+    /**
+     * Whether to show the wallets section
+     */
+    WALLETS_ENABLED: boolean
+
+    /**
+     * Whether to show the summary section
+     */
+    SUMMARY_SECTION_ENABLED: boolean
+
+    /**
+     * Whether to show the navigation section
+     */
+    NAVIGATION_SECTION_ENABLED: boolean
+
+    /**
+     * Whether to show the breakdown chart section
+     */
+    BREAKDOWN_CHART_SECTION_ENABLED: boolean
+  }
 }
