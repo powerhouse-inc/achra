@@ -37,7 +37,7 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
                 <BuilderSkills skills={builder.skils} />
               </div>
               <div className="flex gap-4 md:gap-2">
-                <Links />
+                <Links links={builder.links} />
                 <Button variant="outline" size="icon" aria-label="View builder team details">
                   <ArrowRight className="size-4" />
                 </Button>

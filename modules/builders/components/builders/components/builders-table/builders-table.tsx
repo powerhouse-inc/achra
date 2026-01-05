@@ -101,7 +101,7 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
               </TableCell>
               <TableCell className="inline-flex h-21.5 w-fit items-center justify-end p-0! text-right">
                 <Link href={builderLink} className="py-4! pr-4! pl-0!">
-                  <Links />
+                  <Links links={builder.links} />
                 </Link>
               </TableCell>
               <TableCell className="inline-flex h-21.5 w-fit items-center p-0! text-right">
