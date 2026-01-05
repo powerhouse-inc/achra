@@ -25,6 +25,10 @@ export function Links({ links }: { links: BuilderLink[] }) {
     event.preventDefault()
   }
 
+  if (mediaElements.length === 0) {
+    return null
+  }
+
   return (
     <LinksPopover
       links={mediaElements}
