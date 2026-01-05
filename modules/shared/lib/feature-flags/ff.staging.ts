@@ -10,6 +10,8 @@ const ffStaging: FeatureFlags = {
   workstreams: {
     WORKSTREAMS_ENABLED: false,
     PROJECT_DETAILS_ENABLED: false,
+    INITIAL_PROPOSAL_ENABLED: false,
+    RFP_ENABLED: false,
   },
 
   finances: {

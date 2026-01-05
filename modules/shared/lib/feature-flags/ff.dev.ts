@@ -10,6 +10,8 @@ const ffDev: FeatureFlags = {
   workstreams: {
     WORKSTREAMS_ENABLED: true,
     PROJECT_DETAILS_ENABLED: true,
+    INITIAL_PROPOSAL_ENABLED: true,
+    RFP_ENABLED: true,
   },
 
   finances: {

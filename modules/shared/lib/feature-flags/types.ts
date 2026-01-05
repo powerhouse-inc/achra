@@ -29,6 +29,16 @@ export interface FeatureFlags {
      * Whether the project details page is enabled or not
      */
     PROJECT_DETAILS_ENABLED: boolean
+
+    /**
+     * Whether the initial proposal page is enabled or not
+     */
+    INITIAL_PROPOSAL_ENABLED: boolean
+
+    /**
+     * Whether the RFP page is enabled or not
+     */
+    RFP_ENABLED: boolean
   }
 
   finances: {
