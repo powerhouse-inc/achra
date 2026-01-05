@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    // await page.goto('https://staging.achra.com/services/sno-embryonic-hub');
-    await page.goto('https://achra-git-fix-serviceprofilepagebuttonstexts-powerhouse-dao.vercel.app/services/sno-embryonic-hub');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub`);
 });
 
 test('should contain all elements', async ({ page }) => {

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 // TODO: Check if the title and description will change depending on the network

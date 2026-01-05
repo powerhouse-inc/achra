@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse/roadmaps');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmaps`);
 });
 
 test('has a breadcrumb to go back to the network page', async ({ page }) => {
     // TODO: refactor locator
     await page.locator('li[data-slot="breadcrumb-item"]').getByText("Powerhouse").click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('can search for a roadmap', async ({ page }) => {
@@ -27,28 +27,28 @@ test('the logo navigates to the network page', async ({ page }) => {
     // TODO: refactor locator
     await page.locator('.bg-secondary > div.flex').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('the workstream name navigates to the workstream page', async ({ page }) => {
     // TODO: refactor locator
     await page.locator('.bg-secondary > a').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse/workstream/powerhouse-workstream-24');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-24`);
 });
 
 test('navigates to the Roadmap details page', async ({ page }) => {
     // TODO: refactor locator
     await page.locator('a[href*="powerhouse-team-2024-roadmap-af7da134"]').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134`);
 });
 
 test('navigates to the milenstone details in the Roadmap details page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('div.hidden *> a[href*="#PROD"]').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134#PROD');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134#PROD`);
 });
 
 test('should display hidden members', async ({ page }) => {

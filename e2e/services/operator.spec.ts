@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/services/operators/accountable-opc');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/operators/accountable-opc`);
 });
 
 test('should contain main elements', async ({ page }) => {
@@ -40,5 +40,5 @@ test('should contain services or resource links to resource items', async ({ pag
 test('should navigate to resource page by clicking on the "More Info" button', async ({ page }) => {
     page.getByRole('link', { name: 'More Info' }).first().click();
 
-    await expect(page).toHaveURL(`https://staging.achra.com/services/sno-embryonic-hub`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub`);
 });

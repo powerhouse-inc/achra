@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('should save in clipboard the roadmap link', async ({ page }) => {
@@ -9,7 +9,7 @@ test('should save in clipboard the roadmap link', async ({ page }) => {
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
 
-    expect(clipboardContent).toContain('https://staging.achra.com/network/powerhouse#roadmap');
+    expect(clipboardContent).toContain(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse#roadmap`);
 });
 
 test('should display second roadmap after clicking on the second tab', async ({ page }) => {
@@ -25,7 +25,7 @@ test('should navigate to the network details page by clicking on the Details lin
     // TODO: refactor locator
     await page.locator('div.swiper-wrapper *> div[data-slot="card-header"] > a').getByText('Details').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134#DOP');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134#DOP`);
 });
 
 test('should display hidden members', async ({ page }) => {

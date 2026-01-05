@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('should save in clipboard the finances link', async ({ page }) => {
@@ -9,7 +9,7 @@ test('should save in clipboard the finances link', async ({ page }) => {
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
 
-    expect(clipboardContent).toContain('https://staging.achra.com/network/powerhouse#finances');
+    expect(clipboardContent).toContain(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse#finances`);
 });
 
 test('should display stats for Sky Ecosystem Finances', async ({ page }) => {

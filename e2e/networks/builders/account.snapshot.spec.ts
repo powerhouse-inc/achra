@@ -27,15 +27,15 @@ test('should load the builder links', async ({ page }) => {
 });
 
 test('should navigate to the previous month', async ({ page }) => {
-    await expect(page.getByText('DEC 2025')).toBeVisible();
+    await expect(page.getByText('JAN 2026')).toBeVisible();
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
-    await expect(page.getByText('NOV 2025')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toBeVisible();
 });
 
 test('should navigate to the next month', async ({ page }) => {
-    await expect(page.getByText('DEC 2025')).toBeVisible();
-    await page.locator('div.flex.gap-2 > a:nth-child(2)').click();
     await expect(page.getByText('JAN 2026')).toBeVisible();
+    await page.locator('div.flex.gap-2 > a:nth-child(2)').click();
+    await expect(page.getByText('FEB 2026')).toBeVisible();
 });
 
 test('should load the MakerDAO Funding Overview', async ({ page }) => {

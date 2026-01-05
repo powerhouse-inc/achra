@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse/finances');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances`);
 });
 
 test('should save in clipboard the finances link', async ({ page }) => {
@@ -9,11 +9,11 @@ test('should save in clipboard the finances link', async ({ page }) => {
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
 
-    expect(clipboardContent).toContain('https://staging.achra.com/network/powerhouse/finances#budget-statements');
+    expect(clipboardContent).toContain(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances#budget-statements`);
 });
 
 test('should load all builder statuses', async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse/finances#budget-statements');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances#budget-statements`);
     await expect(page.getByText('COMPLETED')).toHaveCount(0);
     await expect(page.getByText('ON HOLD')).toHaveCount(12);
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
@@ -22,9 +22,8 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('10 Days Ago')).toHaveCount(4);
-    await expect(page.getByText('28 Days Ago')).toHaveCount(2);
-    await expect(page.getByText('25 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('26 Days Ago')).toHaveCount(4);
+    await expect(page.getByText('1 Month Ago')).toHaveCount(4);
     await expect(page.getByText('1 year ago')).toHaveCount(12);
     await expect(page.getByText('09-DEC-2025')).toHaveCount(2);
     await expect(page.getByText('21-NOV-2025')).toHaveCount(1);
@@ -112,7 +111,7 @@ test('should filter by status all builder statuses', async ({ page }) => {
     await page.getByText('Status').first().click();
     await page.getByRole('option', { name: 'Select All' }).click();
 
-    await expect(page).toHaveURL(`https://staging.achra.com/network/powerhouse/finances?status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
@@ -120,11 +119,11 @@ test('should reset all sorting of builders', async ({ page }) => {
     await page.getByRole('option', { name: 'Net Protocol Outflow' }).click();
     await page.locator('#___SECTION___budget-statements').getByText('Status').first().click();
     await page.locator('#___SECTION___budget-statements').getByRole('option', { name: 'Select All' }).click();
-    await expect(page).toHaveURL(`https://staging.achra.com/network/powerhouse/finances?budgetMetric=Net+Protocol+Outflow&status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?budgetMetric=Net+Protocol+Outflow&status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
 
     await page.locator('#___SECTION___budget-statements').getByText('Reset Filter').first().click();
     await page.waitForTimeout(1000);
-    await expect(page).toHaveURL(`https://staging.achra.com/network/powerhouse/finances`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances`);
 });
 
 test('should filter with other options in iPad Mini resolution', async ({ page }) => {

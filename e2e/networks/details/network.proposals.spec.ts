@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('https://staging.achra.com/network/powerhouse');
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('should save in clipboard the proposals link', async ({ page }) => {
@@ -9,7 +9,7 @@ test('should save in clipboard the proposals link', async ({ page }) => {
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
 
-    expect(clipboardContent).toContain('https://staging.achra.com/network/powerhouse#proposals');
+    expect(clipboardContent).toContain(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse#proposals`);
 });
 
 test('should paginate proposals', async ({ page }) => {
@@ -30,5 +30,5 @@ test.skip('should navigate to the prposal after clicking on the Details button',
     // find the first proposal and click on the Details button
     await page.locator('#___SECTION___proposals *> .swiper *> .swiper-slide').first().click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/network/powerhouse/proposal/2.3-user-dashboard');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/proposal/2.3-user-dashboard`);
 });
