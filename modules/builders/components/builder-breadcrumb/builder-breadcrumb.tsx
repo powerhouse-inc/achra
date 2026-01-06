@@ -1,30 +1,37 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useMemo } from 'react'
 import { Breadcrumb } from '@/modules/shared/components/breadcrumb'
 import type { Route } from 'next'
 
-function BuilderBreadcrumb() {
+interface BuilderBreadcrumbProps {
+  networkSlug: string
+  builderSlug: string
+  networkName: string
+  builderName: string
+}
+
+function BuilderBreadcrumb({
+  networkName,
+  networkSlug,
+  builderName,
+  builderSlug,
+}: BuilderBreadcrumbProps) {
   const pathname = usePathname()
   const isExpenseReports = pathname.includes('expense-reports')
 
-  const items = useMemo(() => {
-    const breadcrumbItems = [
-      { label: 'Powerhouse', href: '/network/powerhouse' as Route },
-      { label: 'Builders', href: '/network/powerhouse/builders' as Route },
-      { label: 'Powerhouse', href: '/network/powerhouse/builders/powerhouse' as Route },
-    ]
+  const items = [
+    { label: networkName, href: `/network/${networkSlug}` as Route },
+    { label: 'Builders', href: `/network/${networkSlug}/builders` as Route },
+    { label: builderName, href: `/network/${networkSlug}/builders/${builderSlug}` as Route },
+  ]
 
-    if (isExpenseReports) {
-      breadcrumbItems.push({
-        label: 'Expense reports',
-        href: '/network/powerhouse/builders/powerhouse/expense-reports' as Route,
-      })
-    }
-
-    return breadcrumbItems
-  }, [isExpenseReports])
+  if (isExpenseReports) {
+    items.push({
+      label: 'Expense reports',
+      href: `/network/${networkSlug}/builders/${builderSlug}/expense-reports` as Route,
+    })
+  }
 
   return (
     <div>
