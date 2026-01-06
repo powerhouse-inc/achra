@@ -23,7 +23,7 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
   return (
     <div className={cn('flex w-full flex-col gap-2', className)}>
       {builders.map((builder) => (
-        <Link href={`/network/${networkSlug}/builders/${builder.id}` as Route} key={builder.id}>
+        <Link href={`/network/${networkSlug}/builders/${builder.slug}` as Route} key={builder.id}>
           <Card className="bg-background w-full gap-2 overflow-hidden border-none pt-2 pb-1">
             <CardContent className="flex items-end justify-between px-2 md:grid md:grid-cols-[38%_37%_80px]">
               <BuilderProfile
