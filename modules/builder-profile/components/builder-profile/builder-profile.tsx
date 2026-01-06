@@ -11,6 +11,7 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
+import ff from '@/modules/shared/lib/feature-flags'
 import { getBuilderProfile } from '../../services/builder-profile'
 
 interface BuilderProfileProps {
@@ -79,15 +80,16 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col gap-6">
-          {builder.projects.map((project, index) => (
-            // TODO: We are currently using the project id plus the index as the key because there are projects with the same id in the current data.
-            // We need to notify the backend team about it and remove the index once the data is fixed.
-            // eslint-disable-next-line react/no-array-index-key
-            <ProjectCard key={`${project.id}-${index}`} project={project} />
-          ))}
-        </div>
+        {ff.builders.PROJECTS_SECTION_ENABLED && (
+          <div className="flex flex-col gap-6">
+            {builder.projects.map((project, index) => (
+              // TODO: We are currently using the project id plus the index as the key because there are projects with the same id in the current data.
+              // We need to notify the backend team about it and remove the index once the data is fixed.
+              // eslint-disable-next-line react/no-array-index-key
+              <ProjectCard key={`${project.id}-${index}`} project={project} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   )
