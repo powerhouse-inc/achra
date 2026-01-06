@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { BuildersSection } from '@/modules/networks/components/builders-section/builders-section'
 import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
@@ -21,28 +22,43 @@ import {
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
+import ff from '@/modules/shared/lib/feature-flags'
 
 interface NetworkPageProps {
   params: Promise<{ slug: string }>
 }
 
-export default function NetworkPage({ params }: NetworkPageProps) {
+export default async function NetworkPage({ params }: NetworkPageProps) {
+  const { slug } = await params
+
+  if (ff.USE_BUILDERS_AS_NETWORK_HOMEPAGE) {
+    return redirect(`/network/${slug}/builders`)
+  }
+
   return (
     <PageBackground>
       <PageContent className="gap-8">
         <Suspense fallback={<HomepageBannerSkeleton />}>
           <HomepageBanner />
         </Suspense>
+
         <ProposalsSection proposals={PROPOSALS} />
-        <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
-          <Suspense fallback={<RoadmapSectionSkeleton />}>
-            <RoadmapSection params={params} />
-          </Suspense>
-        </ErrorBoundaryWithPresets>
+
+        {ff.ROADMAPS_ENABLED && (
+          <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
+            <Suspense fallback={<RoadmapSectionSkeleton />}>
+              <RoadmapSection params={params} />
+            </Suspense>
+          </ErrorBoundaryWithPresets>
+        )}
+
         <FinancesSection />
+
         <WalletsSection wallets={WALLETS} />
+
         {/* TODO: Implement builders section backend integration */}
         <BuildersSection />
+
         <GovernanceSection />
 
         <SectionActivation

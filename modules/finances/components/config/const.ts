@@ -1,4 +1,5 @@
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
+import ff from '@/modules/shared/lib/feature-flags'
 
 export enum FinancesSections {
   BudgetStatements = 'budget-statements',
@@ -10,5 +11,8 @@ export enum FinancesSections {
  */
 export const FINANCES_SECTIONS_ENCODED = [
   encodeSectionId(FinancesSections.BudgetStatements),
-  encodeSectionId(FinancesSections.BreakdownChart),
+
+  ...(ff.finances.BREAKDOWN_CHART_SECTION_ENABLED
+    ? [encodeSectionId(FinancesSections.BreakdownChart)]
+    : []),
 ]

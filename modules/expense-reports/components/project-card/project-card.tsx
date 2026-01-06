@@ -4,6 +4,7 @@ import { KeyResultsMetricCard } from '@/modules/project/components/key-results-m
 import { StatusMetricCard } from '@/modules/project/components/status-metric-card'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
+import ff from '@/modules/shared/lib/feature-flags'
 
 function ProjectCard() {
   return (
@@ -16,10 +17,14 @@ function ProjectCard() {
           </div>
         </div>
 
-        <InternalLink href="#" size="icon" className="sm:hidden" />
-        <InternalLink href="#" className="hidden sm:flex">
-          View Project
-        </InternalLink>
+        {ff.workstreams.PROJECT_DETAILS_ENABLED && (
+          <>
+            <InternalLink href="#" size="icon" className="sm:hidden" />
+            <InternalLink href="#" className="hidden sm:flex">
+              View Project
+            </InternalLink>
+          </>
+        )}
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
         <p className="text-sm/5.5 lg:text-base/6">
