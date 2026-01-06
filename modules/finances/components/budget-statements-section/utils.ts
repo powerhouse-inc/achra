@@ -32,3 +32,17 @@ export const getMetricLabel = (selectedMetric: MetricWithoutBudget, isDesktopLg 
       return selectedMetric
   }
 }
+
+export const compareString = (a: string | null | undefined, b: string | null | undefined) => {
+  if (!a && !b) return 0
+  if (!a) return 1
+  if (!b) return -1
+  return a.localeCompare(b)
+}
+
+export const compareDate = (a: string | null | undefined, b: string | null | undefined) => {
+  if (!a && !b) return 0
+  if (!a) return 1
+  if (!b) return -1
+  return new Date(a).getTime() - new Date(b).getTime()
+}

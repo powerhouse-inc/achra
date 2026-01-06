@@ -5,6 +5,7 @@ import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { METRIC_OPTIONS } from '../../types'
 import { FinancesSections } from '../config/const'
+import useBudgetStamentFilters from './budget-stament-filters/useBudgetStamentFilters'
 import BudgetStatementsContent from './budget-statements-content'
 import BudgetStatementsTitle from './budget-statements-title'
 
@@ -16,6 +17,7 @@ export default function BudgetStatementsSection() {
       Object.values(METRIC_OPTIONS).filter((m) => m !== METRIC_OPTIONS.Budget),
     ).withDefault(METRIC_OPTIONS.Actuals),
   )
+  const { metricSort } = useBudgetStamentFilters()
   return (
     <section
       className={cn('flex w-full flex-col gap-4', SCROLL_MT_CLASSES)}
@@ -26,7 +28,7 @@ export default function BudgetStatementsSection() {
         hash="budget-statements"
         setBudgetMetric={setBudgetMetric}
       />
-      <BudgetStatementsContent budgetMetric={budgetMetric} />
+      <BudgetStatementsContent budgetMetric={budgetMetric} sortOption={metricSort} />
     </section>
   )
 }

@@ -1,5 +1,5 @@
-import { parseAsArrayOf, parseAsStringEnum, useQueryStates } from 'nuqs'
-import { useCallback, useState } from 'react'
+import { parseAsArrayOf, parseAsStringEnum, parseAsStringLiteral, useQueryStates } from 'nuqs'
+import { useCallback } from 'react'
 import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { METRIC_OPTIONS } from '@/modules/finances/types'
 import type { SortOptionValue } from './popover-filter-content'
@@ -27,18 +27,31 @@ const filtersConfig = {
         timeMs: 100,
       },
     }),
+  sort: parseAsStringLiteral([
+    'reporting_newest',
+    'reporting_oldest',
+    'modified_newest',
+    'modified_oldest',
+  ] as const)
+    .withDefault('modified_newest')
+    .withOptions({
+      shallow: false,
+      history: 'replace',
+    }),
 } as const
 
 export default function useBudgetStamentFilters() {
-  const [open, setOpen] = useState(false)
   const [filters, setFilters] = useQueryStates(filtersConfig)
-  const [metricSort, setMetricSort] = useState<SortOptionValue>('reporting_newest')
+  const { sort: metricSort } = filters
+  const setMetricSort = useCallback(
+    async (value: SortOptionValue | null) => setFilters({ sort: value }),
+    [setFilters],
+  )
   const handleOnMetricSelect = useCallback(
     (value: SortOptionValue) => {
-      setMetricSort(value)
-      setOpen(false)
+      void setMetricSort(value)
     },
-    [setMetricSort, setOpen],
+    [setMetricSort],
   )
 
   type FiltersState = typeof filters
@@ -80,7 +93,8 @@ export default function useBudgetStamentFilters() {
       budgetMetric: METRIC_OPTIONS.Actuals,
     })
     void setStatus(null)
-  }, [setFilters, setStatus])
+    void setMetricSort('modified_newest')
+  }, [setFilters, setStatus, setMetricSort])
 
   return {
     status: filters.status,
@@ -90,8 +104,6 @@ export default function useBudgetStamentFilters() {
     metricSort,
     setMetricSort,
     setMetric,
-    open,
-    setOpen,
     handleOnMetricSelect,
   }
 }
