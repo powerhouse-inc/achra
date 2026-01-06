@@ -10,6 +10,7 @@ const meta = {
   decorators: [withNuqsAdapter],
   parameters: {
     layout: 'padded',
+    date: new Date('2026-01-06T04:14:00.000Z'),
     docs: {
       description: {
         component: 'Displays a placeholder list for Builder Teams within the Builders section.',
