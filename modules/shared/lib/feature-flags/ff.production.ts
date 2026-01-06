@@ -7,6 +7,11 @@ const ffProduction: FeatureFlags = {
   ROADMAPS_ENABLED: false,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: true,
 
+  builders: {
+    FINANCES_LINK_ENABLED: false,
+    PROJECTS_SECTION_ENABLED: false,
+  },
+
   workstreams: {
     WORKSTREAMS_ENABLED: false,
     PROJECT_DETAILS_ENABLED: false,

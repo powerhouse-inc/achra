@@ -19,6 +19,18 @@ export interface FeatureFlags {
    */
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: boolean
 
+  builders: {
+    /**
+     * Whether to show the finances link in the builders section
+     */
+    FINANCES_LINK_ENABLED: boolean
+
+    /**
+     * Whether to show the projects section in the builders section
+     */
+    PROJECTS_SECTION_ENABLED: boolean
+  }
+
   workstreams: {
     /**
      * Whether the workstream pages are enabled or not

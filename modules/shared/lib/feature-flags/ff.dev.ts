@@ -7,6 +7,11 @@ const ffDev: FeatureFlags = {
   ROADMAPS_ENABLED: true,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: false,
 
+  builders: {
+    FINANCES_LINK_ENABLED: true,
+    PROJECTS_SECTION_ENABLED: true,
+  },
+
   workstreams: {
     WORKSTREAMS_ENABLED: true,
     PROJECT_DETAILS_ENABLED: true,
