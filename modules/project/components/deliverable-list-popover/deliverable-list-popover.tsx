@@ -20,7 +20,7 @@ export function DeliverableListPopover({
   count,
   code,
   className,
-}: DeliverableListPopoverProps) {
+}: Readonly<DeliverableListPopoverProps>) {
   return (
     <div className={cn('max-w-fit', className)}>
       <Popover>

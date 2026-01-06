@@ -1,31 +1,31 @@
+import { DateTime } from 'luxon'
 import { useMemo } from 'react'
-import { getProfileUpdateDate } from '@/modules/shared/lib/get-profile-update-date'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 
 export interface LastModifiedProps {
-  team: Team
+  lastModified?: string | null
   isMobile?: boolean
   className?: string
 }
 
-export function LastModified({ team, isMobile, className }: LastModifiedProps) {
+export function LastModified({ lastModified, isMobile, className }: LastModifiedProps) {
+  const parsedDate = useMemo(() => {
+    if (!lastModified) return undefined
+    const date = DateTime.fromISO(lastModified)
+    return date.isValid ? date : undefined
+  }, [lastModified])
+
   const formattedDate = useMemo(() => {
-    const date = getProfileUpdateDate(team)
-    if (date?.isValid) {
-      return date.toUTC().toFormat('dd-MMM-yyyy').toUpperCase()
+    if (parsedDate?.isValid) {
+      return parsedDate.toUTC().toFormat('dd-MMM-yyyy').toUpperCase()
     }
     return 'No data'
-  }, [team])
+  }, [parsedDate])
 
   const relativeDate = useMemo(() => {
-    const date = getProfileUpdateDate(team)
-    if (date?.isValid) {
-      const relative = date.toRelative({ style: 'long' })
-      return relative ?? 'No data'
-    }
-    return 'No data'
-  }, [team])
+    const relative = parsedDate?.toRelative({ style: 'long' })
+    return relative ?? 'No data'
+  }, [parsedDate])
 
   return (
     <div

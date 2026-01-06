@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
@@ -6,6 +7,7 @@ import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
 interface RoadmapPageProps {
@@ -17,6 +19,10 @@ interface RoadmapPageProps {
 }
 
 export default async function RoadmapPage({ params, searchParams }: RoadmapPageProps) {
+  if (!ff.ROADMAPS_ENABLED) {
+    return notFound()
+  }
+
   const searchParamsString = JSON.stringify(await searchParams)
 
   const { slug } = await params

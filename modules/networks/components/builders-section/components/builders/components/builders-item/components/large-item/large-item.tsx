@@ -1,40 +1,38 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
-import BuilderDomain from '@/modules/shared/components/builder-domain/builder-domain'
-import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import BuilderProfile from '@/modules/shared/components/builder-profile'
+import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import RoleBadge from '../role-badge/role-badge'
 
 export interface LargeItemProps {
-  team: Team
+  builder: Builder
   className?: string
 }
 
-export default function LargeItem({ team, className }: LargeItemProps) {
+export default function LargeItem({ builder, className }: LargeItemProps) {
   return (
     <div
       className={cn(
-        'bg-popover hover:bg-accent grid w-full grid-cols-[25%_17%_17%_14%_auto] items-center justify-between rounded-xl px-2 py-3 shadow-xs hover:shadow-sm',
+        'bg-popover hover:bg-accent grid w-full grid-cols-[32%_22%_19%_auto] items-center justify-between rounded-xl px-2 py-3 shadow-xs hover:shadow-sm',
         className,
       )}
     >
       <BuilderProfile
-        name={team.name}
-        shortCode={team.shortCode}
-        status={team.status}
-        image={team.image}
+        name={builder.name}
+        code={builder.code}
+        status={builder.status}
+        image={builder.icon}
       />
-      <BuilderDomain team={team} />
-      <RoleBadge type={team.type} />
+      <BuilderSkills skills={builder.skils} />
       <div className="flex flex-col">
         <span className="text-foreground text-sm/5.5 font-semibold">Profile Updated</span>
         <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
           <ProfileUpdatedDate
             className="text-foreground/50 text-sm/5.5 font-semibold"
-            team={team}
+            lastModified={builder.lastModified}
           />
         </Suspense>
       </div>

@@ -84,3 +84,16 @@ export interface MetricValues {
   PaymentsOnChain: number
   Actuals: number
 }
+
+export enum METRIC_OPTIONS {
+  Budget = 'Budget',
+  Forecast = 'Forecast',
+  Actuals = 'Actuals',
+  NetProtocolOutflow = 'Net Protocol Outflow',
+  NetExpensesOnChain = 'Net Expenses On-Chain',
+}
+export enum GRANULARITY_OPTIONS {
+  Monthly = 'Monthly',
+  Quarterly = 'Quarterly',
+  Annually = 'Annually',
+}

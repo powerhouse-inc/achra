@@ -5,9 +5,8 @@ import { useQueryState } from 'nuqs'
 import { useCallback } from 'react'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { Button } from '@/modules/shared/components/ui/button'
+import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '../../types'
 import { granularityParser, metricParser } from './lib/search-params-server'
-import { GRANULARITY_OPTIONS, type GranularityType, METRIC_OPTIONS, type MetricType } from './types'
-
 export default function FilterChart() {
   const [metric, setMetric] = useQueryState('metric', metricParser)
   const [granularity, setGranularity] = useQueryState('granularity', granularityParser)
@@ -28,9 +27,9 @@ export default function FilterChart() {
           value={metric ?? undefined}
           label="Metric"
           onValueChange={(value) => {
-            void setMetric(value as MetricType)
+            void setMetric(value as METRIC_OPTIONS)
           }}
-          options={METRIC_OPTIONS as unknown as string[]}
+          options={Object.values(METRIC_OPTIONS)}
           placeholder="Budget"
         />
         <BasicSelect
@@ -38,9 +37,9 @@ export default function FilterChart() {
           label="Granularity"
           value={granularity ?? undefined}
           onValueChange={(value) => {
-            void setGranularity(value as GranularityType)
+            void setGranularity(value as GRANULARITY_OPTIONS)
           }}
-          options={GRANULARITY_OPTIONS as unknown as string[]}
+          options={Object.values(GRANULARITY_OPTIONS)}
           placeholder="Monthly"
         />
       </div>

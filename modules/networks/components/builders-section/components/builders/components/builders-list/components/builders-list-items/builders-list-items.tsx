@@ -1,13 +1,13 @@
 'use client'
 
 import SimpleBar from 'simplebar-react'
-import type { Team } from '@/modules/shared/types/team'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersItem } from '../../../builders-item/builders-item'
 import { useBuildersListItems } from './use-builders-list-items'
 
 interface BuildersListItemsProps {
   className?: string
-  builders: Team[]
+  builders: Builder[]
 }
 
 export function BuildersListItems({ className, builders }: BuildersListItemsProps) {
@@ -18,8 +18,8 @@ export function BuildersListItems({ className, builders }: BuildersListItemsProp
     <div ref={cardContentRef} className={className}>
       <SimpleBar ref={simpleBarRef} autoHide={false}>
         <div ref={itemsWrapperRef} className="flex flex-col gap-2 p-2">
-          {builders.map((team) => (
-            <BuildersItem key={team.id} team={team} />
+          {builders.map((builder) => (
+            <BuildersItem key={builder.id} builder={builder} />
           ))}
         </div>
       </SimpleBar>

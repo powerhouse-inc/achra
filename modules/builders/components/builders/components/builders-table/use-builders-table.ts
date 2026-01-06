@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import type { Team } from '@/modules/shared/types/team'
 import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
 
 interface UseBuildersTableProps {
-  builders: Team[]
+  builders: BuilderProfileState[]
 }
 
 export enum SortEnum {
@@ -57,7 +57,7 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
   )
 
   const sortBuilders = useCallback(
-    (builders: Team[]) => {
+    (builders: BuilderProfileState[]) => {
       if (sortColumn === -1) return builders
 
       const column = BUILDERS_TABLE_COLUMNS[sortColumn]
@@ -68,12 +68,14 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
       }
 
       return [...builders].sort((a, b) => {
-        const getSortableValue = (team: Team): string | number => {
-          const value = team[column.accessorKey as keyof Team]
-          if (column.accessorKey === 'lastActivity') {
-            const activity = value as Team['lastActivity']
-            const dateString = activity.update_at ?? activity.created_at
-            return dateString ? new Date(dateString).getTime() : ''
+        const getSortableValue = (builder: BuilderProfileState): string | number => {
+          const value = builder[column.accessorKey as keyof BuilderProfileState]
+          if (column.accessorKey === 'lastModified') {
+            if (typeof value === 'string') {
+              const timestamp = new Date(value).getTime()
+              return Number.isNaN(timestamp) ? 0 : timestamp
+            }
+            return 0
           }
 
           if (value === null) {

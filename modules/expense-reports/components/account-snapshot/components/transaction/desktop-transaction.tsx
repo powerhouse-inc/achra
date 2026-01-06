@@ -26,27 +26,26 @@ function DesktopTransaction({
     <div
       className={cn(
         'grid py-[6px] pr-6 pb-[5px] pl-3',
-        'grid-cols-[172px_15.7%_max-content_1fr]',
+        'grid-cols-[172px_1fr_max-content]',
         'not-first-of-type:border-border not-first-of-type:border-t',
         'hover:bg-muted',
-        'md:grid-cols-[150px_15.7%_max-content_1fr] md:py-[6px] md:pr-10 md:pb-[5px] md:pl-3',
-        'lg:grid-cols-[218px_15.7%_max-content_1fr] lg:py-2 lg:pr-4 lg:pb-[7px] lg:pl-5',
-        'xl:grid-cols-[275px_16.1%_max-content_1fr] xl:py-2 xl:pr-20 xl:pb-[7px] xl:pl-5',
-        '2xl:grid-cols-[295px_16.4%_max-content_1fr]',
+        'md:grid-cols-[calc(var(--spacing)*63)_1fr_max-content] md:py-[6px] md:pr-10 md:pb-[5px] md:pl-2',
+        'lg:grid-cols-[calc(var(--spacing)*99)_1fr_max-content] lg:py-2 lg:pr-4 lg:pb-[7px] lg:pl-5',
+        'xl:grid-cols-[calc(var(--spacing)*101.5)_1fr_max-content] xl:py-2 xl:pb-[7px] xl:pl-5',
       )}
     >
       {/* transaction header */}
-      <div className="col-span-2 flex gap-2 lg:gap-4">
+      <div className="flex gap-2 lg:gap-4">
         <ExpenseArrow isIncoming={isIncomingTransaction} className="mt-1.25 size-6 min-w-6" />
         <div className="flex flex-col">
-          <div className="text-sm/5.5 font-medium">{name}</div>
+          <div className="text-sm/5.5 font-medium md:font-semibold">{name}</div>
           <div className="text-foreground/30 text-xs/4.5 uppercase">{formattedDate}</div>
           <TxHash txHash={txHash} />
         </div>
       </div>
 
       {/* transaction counter party */}
-      <div className="flex flex-col gap-1 pr-2.5">
+      <div className="flex flex-col gap-0.5 pr-2.5 lg:ml-4">
         <div className="text-foreground/50 text-xs/4.5">
           {isIncomingTransaction ? 'Sender Address' : 'Recipient Address'}
         </div>
@@ -54,7 +53,7 @@ function DesktopTransaction({
       </div>
 
       {/* transaction amount */}
-      <div className="flex flex-col items-end justify-start gap-4">
+      <div className="flex flex-col items-end justify-start gap-4 lg:justify-center lg:gap-2 lg:pr-10 xl:pr-12">
         <div className="text-foreground/50 text-xs/4.5">Amount</div>
         <div
           className={cn(

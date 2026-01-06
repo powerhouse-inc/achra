@@ -8,6 +8,7 @@ import { PageBackground, PageContent } from '@/modules/shared/components/page-co
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import ff from '@/modules/shared/lib/feature-flags'
 import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import { NoDeliverables } from '@/modules/workstream/components/no-deliverables'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
@@ -23,6 +24,10 @@ interface Props {
 }
 
 export default async function WorkstreamDetailsPage({ params }: Props) {
+  if (!ff.workstreams.WORKSTREAMS_ENABLED) {
+    return notFound()
+  }
+
   const { slug, workstreamSlug } = await params
   const workstream = await getWorkstreamDetails(slug, workstreamSlug)
 

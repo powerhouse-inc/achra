@@ -40,10 +40,9 @@ function GroupItem({
       <div
         className={cn(
           'mb-2.75',
-          'md:mb-0 md:w-[calc(151px+16.1%)]',
-          'lg:w-[calc(216px+16.4%)]',
-          'xl:w-[calc(276px+16.4%)]',
-          '2xl:w-[calc(295px+16.7%)]',
+          'md:mb-0 md:w-63 md:min-w-63',
+          'lg:w-100 lg:min-w-100',
+          'xl:w-102.5 xl:min-w-102.5',
         )}
       >
         <WalletInfo name={name} address={address} />
@@ -66,10 +65,8 @@ function GroupItem({
       <div
         className={cn(
           'mt-2 mb-1 flex justify-between',
-          'w-[21.6%] md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5',
-          'lg:w-[21%]',
-          'xl:w-[23%]',
-          '2xl:w-[22%]',
+          'w-full md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5',
+          'lg:ml-4',
         )}
       >
         <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">
@@ -92,10 +89,8 @@ function GroupItem({
       <div
         className={cn(
           'mt-2.75 mb-2 flex justify-between',
-          'w-[21.6%] md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5',
-          'lg:w-[21%]',
-          'xl:w-[23%]',
-          '2xl:w-[22%]',
+          'w-full md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5 md:pl-3',
+          'lg:pl-6 xl:pl-5',
         )}
       >
         <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">
@@ -118,7 +113,8 @@ function GroupItem({
       <div
         className={cn(
           'flex justify-between',
-          'ml-auto md:flex md:flex-col md:items-end md:justify-normal md:gap-1.5',
+          'md:ml-auto md:flex md:flex-col md:items-end md:justify-normal md:gap-1.5',
+          'md:w-full md:pr-8 lg:pr-10 xl:pr-12',
         )}
       >
         <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">

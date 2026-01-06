@@ -18,7 +18,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
  * <LinksPopover
  *   links={[
  *     { type: 'website', href: 'https://example.com' },
- *     { type: 'twitter', href: 'https://twitter.com/example' },
+ *     { type: 'x', href: 'https://x.com/example' },
  *     { type: 'github', href: 'https://github.com/example' },
  *   ]}
  * />
@@ -29,7 +29,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
  * <LinksPopover
  *   links={[
  *     { type: 'website', href: 'https://example.com' },
- *     { type: 'twitter', href: 'https://twitter.com/example' },
+ *     { type: 'x', href: 'https://x.com/example' },
  *   ]}
  * >
  *   <Button variant="outline">Links</Button>
@@ -87,7 +87,7 @@ export const Default: Story = {
   args: {
     links: [
       { type: 'website', href: 'https://example.com' },
-      { type: 'twitter', href: 'https://twitter.com/example' },
+      { type: 'x', href: 'https://x.com/example' },
       { type: 'github', href: 'https://github.com/example' },
     ] as MediaElement[],
   },
@@ -100,7 +100,7 @@ export const AllSocialMedia: Story = {
       { type: 'website', href: 'https://example.com' },
       { type: 'forum', href: 'https://forum.example.com' },
       { type: 'discord', href: 'https://discord.gg/example' },
-      { type: 'twitter', href: 'https://twitter.com/example' },
+      { type: 'x', href: 'https://x.com/example' },
       { type: 'github', href: 'https://github.com/example' },
     ] as MediaElement[],
   },
@@ -143,7 +143,7 @@ export const MixedLinks: Story = {
   args: {
     links: [
       { type: 'website', href: 'https://example.com' },
-      { type: 'twitter', href: 'https://twitter.com/example' },
+      { type: 'x', href: 'https://x.com/example' },
       {
         href: '/network/powerhouse',
         label: 'Network Profile',

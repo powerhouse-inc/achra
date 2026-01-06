@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+.scannerwork
 
 # next.js
 /.next/
@@ -50,3 +51,8 @@ chromatic-diagnostics.json
 
 # cursor
 .cursor
+
+# Ignore .agent for git but allow Gemini to read
+.agent/
+!.agent/rules/
+!.agent/workflows/

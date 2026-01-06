@@ -19,11 +19,11 @@ export default function TitleSectionFinances({
   className,
   tooltipContent,
   range,
-}: TitleBreakdownChartProps) {
+}: Readonly<TitleBreakdownChartProps>) {
   return (
     <div className="flex flex-col">
       <div className={cn('flex w-fit items-center gap-2', className)}>
-        <span className="text-xl leading-[120%] font-bold">{title}</span>
+        <span className="text-base leading-[120%] font-bold lg:text-lg 2xl:text-xl">{title}</span>
         <TooltipInfoIcon tooltipContent={<div>{tooltipContent}</div>} />
 
         <CopySectionUrl hash={hash}>

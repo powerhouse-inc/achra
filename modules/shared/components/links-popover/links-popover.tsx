@@ -18,13 +18,13 @@ import {
 } from '../ui/dropdown-menu'
 import type { Route } from 'next'
 
-type SocialMedia = 'website' | 'forum' | 'discord' | 'twitter' | 'github'
+type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github'
 
 const MEDIA_ICON_MAP: Record<SocialMedia, React.ReactNode> = {
   website: <WebsiteSVG className="size-4" />,
   forum: <ForumSVG className="size-4" />,
   discord: <DiscordSVG className="size-4" />,
-  twitter: <TwitterSVG className="size-4" />,
+  x: <TwitterSVG className="size-4" />,
   github: <GithubSVG className="size-4" />,
 }
 
@@ -32,7 +32,7 @@ const MEDIA_LABEL_MAP: Record<SocialMedia, string> = {
   website: 'Website',
   forum: 'Forum',
   discord: 'Discord',
-  twitter: 'Twitter',
+  x: 'Twitter',
   github: 'Github',
 }
 

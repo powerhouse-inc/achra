@@ -1,19 +1,20 @@
 import {
-  type Builder,
+  type BuilderProfileState,
   type BuildersListQueryVariables,
   useBuildersListQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export async function getBuilders(
   filter: BuildersListQueryVariables['filter'],
-): Promise<Builder[]> {
+): Promise<BuilderProfileState[]> {
   const data = await useBuildersListQuery.fetcher({ filter })()
-  const builders = data.allNetworks.flatMap((network) => network.builders)
+  const builders = data.builders.flatMap((builder) => builder)
 
-  // BuildersList query doesn't return contributors; provide an empty array to satisfy Builder.
-  // There is an infinite loop when trying to fetch contributors.
-  return builders.map<Builder>((builder) => ({
+  // Note: contributors and projects are not needed for the builders list, but are required to satisfy the BuilderProfileState type.
+  // We could omit them, but I prefer to keep using the original type.
+  return builders.map<BuilderProfileState>((builder) => ({
     contributors: [],
+    projects: [],
     ...builder,
   }))
 }

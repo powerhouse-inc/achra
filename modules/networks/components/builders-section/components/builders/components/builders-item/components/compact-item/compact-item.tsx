@@ -1,24 +1,19 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
-import BuildersCategoryChip from '@/modules/shared/components/chips/builders-category-chip/builders-category-chip'
-import { BuildersScopesChip } from '@/modules/shared/components/chips/builders-scopes-chip'
+import BuilderSkills from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Team } from '@/modules/shared/types/team'
-import { ResourceType } from '@/modules/shared/types/types'
 import { ProfileUpdatedDate, ProfileUpdatedDateSkeleton } from '../../../profile-updated-date'
-import RoleBadge from '../role-badge/role-badge'
-import { useCompactItem } from './use-compact-item'
 
 export interface CompactItemProps {
-  team: Team
+  builder: Builder
   className?: string
 }
 
-export default function CompactItem({ team, className }: CompactItemProps) {
-  const { scopeSizeVariant } = useCompactItem({ team })
+export default function CompactItem({ builder, className }: CompactItemProps) {
   return (
     <div
       className={cn(
@@ -28,43 +23,23 @@ export default function CompactItem({ team, className }: CompactItemProps) {
     >
       <div className="flex justify-between">
         <BuilderProfile
-          name={team.name}
-          shortCode={team.shortCode}
-          status={team.status}
-          image={team.image}
+          name={builder.name}
+          code={builder.code}
+          status={builder.status}
+          image={builder.icon}
         />
         <Button variant="outline" size="icon" aria-label="View builder team details">
           <ArrowRight className="size-4" />
         </Button>
       </div>
       <Separator className="sm:hidden" />
-      <div className="flex flex-wrap justify-between gap-1 sm:mt-2">
-        {team.type === ResourceType.EcosystemActor ? (
-          <>
-            <div className="flex gap-1">
-              {team.scopes.map((scope) => (
-                <BuildersScopesChip key={scope.id} scope={scope.name} size={scopeSizeVariant} />
-              ))}
-            </div>
-            <RoleBadge type={team.type} />
-          </>
-        ) : (
-          <>
-            <div className="flex gap-1">
-              {team.categories.map((category) => (
-                <BuildersCategoryChip key={category} category={category} />
-              ))}
-            </div>
-            <RoleBadge type={team.type} />
-          </>
-        )}
-      </div>
+      <BuilderSkills skills={builder.skils} />
       <div className="bg-background border-border -ml-2 flex h-7.5 w-[calc(100%+16px)] items-center justify-between border-t px-4">
         <span className="text-foreground text-xs/4.5 font-medium">Profile Updated</span>
         <Suspense fallback={<ProfileUpdatedDateSkeleton />}>
           <ProfileUpdatedDate
             className="text-foreground/50 text-sm/5.5 font-semibold"
-            team={team}
+            lastModified={builder.lastModified}
           />
         </Suspense>
       </div>

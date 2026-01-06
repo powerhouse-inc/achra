@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/modules/shared/components/ui/accordion'
+import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
@@ -14,6 +15,14 @@ import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonMobileProps {
   lineItems: ExpenseComparisonLineItem[]
+}
+
+function ExpenseComparisonLabel({ children }: { children: React.ReactNode }) {
+  return <span className="text-foreground/30 text-base/6 font-semibold">{children}</span>
+}
+
+function ExpenseComparisonValue({ children }: { children: React.ReactNode }) {
+  return <span className="text-foreground/50 text-sm/5.5 font-semibold">{children}</span>
 }
 
 function ExpenseComparisonContent({
@@ -27,76 +36,86 @@ function ExpenseComparisonContent({
     <div className="px-4 pb-4">
       {/* Reported Actuals */}
       <div className="flex items-center justify-between py-2">
-        <span className="text-foreground/50 text-xs/4.5">Reported Actuals</span>
-        <span className="text-foreground text-sm/5.5 font-semibold">
+        <ExpenseComparisonLabel>Reported Actuals</ExpenseComparisonLabel>
+        <ExpenseComparisonValue>
           {usLocalizedNumber(item.reportedActuals, 2)} USD
-        </span>
+        </ExpenseComparisonValue>
       </div>
 
-      <Separator className="my-2" />
-
       {/* Net Expense Transactions Header */}
-      <div className="text-foreground py-2 text-center text-sm font-semibold">
+      <div className="text-foreground pb-2 text-center text-sm/5.5 font-semibold">
         Net Expense Transactions
       </div>
 
-      {/* On-chain only */}
-      <div className="flex items-center justify-between py-1">
-        <div className="flex items-center gap-1">
-          <span className="text-foreground/50 text-xs/4.5">On-chain only</span>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <InfoIcon className="text-foreground/50 size-3.5" />
-            </TooltipTrigger>
-            <TooltipContent side="bottom" align="start" className="max-w-70">
-              Net expense transactions from on-chain data only.
-            </TooltipContent>
-          </Tooltip>
+      <div className="-mx-2 flex flex-col gap-1 rounded-lg border p-2">
+        {/* On-chain only */}
+        <div className="flex items-center justify-between py-1">
+          <div className="flex items-center gap-1">
+            <ExpenseComparisonLabel>On-chain only</ExpenseComparisonLabel>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <InfoIcon className="text-foreground/30 size-4" />
+              </TooltipTrigger>
+              <TooltipContent side="bottom" align="start" className="max-w-70">
+                Net expense transactions from on-chain data only.
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <ExpenseComparisonValue>
+            {usLocalizedNumber(item.onChainOnly, 2)} USD
+          </ExpenseComparisonValue>
         </div>
-        <span className="text-foreground text-sm/5.5 font-semibold">
-          {usLocalizedNumber(item.onChainOnly, 2)} USD
-        </span>
-      </div>
 
-      {/* On-chain Difference */}
-      <div className="flex items-center justify-between py-1">
-        <span className="text-foreground/50 text-xs/4.5">Difference</span>
-        <span className="text-foreground text-sm/5.5 font-semibold">
-          {usLocalizedNumber(item.onChainDifference, 2)}%
-        </span>
-      </div>
+        <div className="-mx-2">
+          <Separator className="border-accent border" />
+        </div>
 
-      {/* Off-chain Section */}
-      {hasOffChain && item.offChainIncluded !== undefined && (
-        <>
-          <Separator className="my-2" />
-          <div className="flex items-center justify-between py-1">
-            <div className="flex items-center gap-1">
-              <span className="text-foreground/50 text-xs/4.5">Including off-chain</span>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <InfoIcon className="text-foreground/50 size-3.5" />
-                </TooltipTrigger>
-                <TooltipContent side="bottom" align="start" className="max-w-70">
-                  Net expense transactions including both on-chain and off-chain data.
-                </TooltipContent>
-              </Tooltip>
+        {/* On-chain Difference */}
+        <div className="flex items-center justify-between py-1">
+          <ExpenseComparisonLabel>Difference</ExpenseComparisonLabel>
+          <ExpenseComparisonValue>
+            {usLocalizedNumber(item.onChainDifference, 2)}%
+          </ExpenseComparisonValue>
+        </div>
+
+        {/* Off-chain Section */}
+        {hasOffChain && item.offChainIncluded !== undefined && (
+          <>
+            <div className="-mx-2">
+              <Separator />
             </div>
-            <span className="text-foreground text-sm/5.5 font-semibold">
-              {usLocalizedNumber(item.offChainIncluded, 2)} USD
-            </span>
-          </div>
+            <div className="flex items-center justify-between py-1">
+              <div className="flex items-center gap-1">
+                <ExpenseComparisonLabel>Including off-chain</ExpenseComparisonLabel>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <InfoIcon className="text-foreground/30 size-4" />
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" align="start" className="max-w-70">
+                    Net expense transactions including both on-chain and off-chain data.
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              <ExpenseComparisonValue>
+                {usLocalizedNumber(item.offChainIncluded, 2)} USD
+              </ExpenseComparisonValue>
+            </div>
 
-          <div className="flex items-center justify-between py-1">
-            <span className="text-foreground/50 text-xs/4.5">Difference</span>
-            <span className="text-foreground text-sm/5.5 font-semibold">
-              {item.offChainDifference !== undefined
-                ? `${usLocalizedNumber(item.offChainDifference, 2)}%`
-                : '-'}
-            </span>
-          </div>
-        </>
-      )}
+            <div className="-mx-2">
+              <Separator className="border-accent border" />
+            </div>
+
+            <div className="flex items-center justify-between py-1">
+              <ExpenseComparisonLabel>Difference</ExpenseComparisonLabel>
+              <ExpenseComparisonValue>
+                {item.offChainDifference !== undefined
+                  ? `${usLocalizedNumber(item.offChainDifference, 2)}%`
+                  : '-'}
+              </ExpenseComparisonValue>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }
@@ -110,12 +129,15 @@ function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
   return (
     <div className="space-y-2">
       {/* First Item - Always Expanded */}
-      <div className="bg-background rounded-lg border">
-        <div className="px-4 py-4 text-sm font-semibold">
-          {firstItem.isTotals ? '3 Month Totals' : firstItem.month}
-        </div>
-        <ExpenseComparisonContent item={firstItem} hasOffChain={hasOffChain} />
-      </div>
+      <Card className="gap-2 border-none py-2">
+        <CardContent className="px-0">
+          <div className="px-4 text-sm/5.5 font-semibold">
+            {firstItem.isTotals ? '3 Month Totals' : firstItem.month}
+          </div>
+
+          <ExpenseComparisonContent item={firstItem} hasOffChain={hasOffChain} />
+        </CardContent>
+      </Card>
 
       {/* Remaining Items - Accordion */}
       {restItems.length > 0 && (

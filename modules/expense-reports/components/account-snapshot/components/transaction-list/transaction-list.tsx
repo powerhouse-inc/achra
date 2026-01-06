@@ -31,7 +31,10 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
         {!items?.length && <TransactionEmpty />}
         {items?.map((item) =>
           isAccountSnapshot(item) ? (
-            <div key={item.id} className="flex flex-col gap-2 md:gap-0">
+            <div
+              key={item.id}
+              className="flex flex-col gap-2 md:gap-0 md:not-last-of-type:border-b"
+            >
               <GroupItem
                 name={item.accountLabel}
                 address={item.accountAddress ?? ''}

@@ -1,37 +1,38 @@
 import { useMemo } from 'react'
-import { TeamStatus } from '@/modules/shared/types/types'
+import { BuilderStatus, type Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersStatusChipProps {
-  status: TeamStatus
+  status: Maybe<BuilderStatus> | undefined
 }
 
 export default function BuildersStatusChip({ status }: BuildersStatusChipProps) {
   const { label, color } = useMemo(() => {
+    if (!status) return { label: 'Unknown', color: 'gray' }
     switch (status) {
-      case TeamStatus.Progress:
+      case BuilderStatus.Active:
         return {
-          label: 'Progress',
+          label: 'Active',
           color: 'blue',
         }
-      case TeamStatus['To Do']:
+      case BuilderStatus.Inactive:
         return {
-          label: 'To Do',
-          color: 'yellow',
+          label: 'Inactive',
+          color: 'gray',
         }
-      case TeamStatus.Canceled:
+      case BuilderStatus.OnHold:
         return {
-          label: 'Canceled',
-          color: 'red',
+          label: 'On Hold',
+          color: 'orange',
         }
-      case TeamStatus.Accepted:
+      case BuilderStatus.Completed:
         return {
-          label: 'Accepted',
+          label: 'Completed',
           color: 'green',
         }
-      case TeamStatus.Obsolete:
+      case BuilderStatus.Archived:
         return {
-          label: 'Obsolete',
+          label: 'Archived',
           color: 'gray',
         }
     }

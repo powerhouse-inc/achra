@@ -1,27 +1,23 @@
 import Link from 'next/link'
+import { useMemo } from 'react'
+import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
-import type { Team } from '@/modules/shared/types/team'
-import { ResourceType } from '@/modules/shared/types/types'
 import CompactItem from './components/compact-item/compact-item'
 import LargeItem from './components/large-item/large-item'
 
 export interface BuildersItemProps {
-  team: Team
+  builder: Builder
 }
 
-export function BuildersItem({ team }: BuildersItemProps) {
-  const isEcosystemActor = team.type === ResourceType.EcosystemActor
-
-  const href = (
-    isEcosystemActor
-      ? `/network/powerhouse/builders/ecosystem-actors/${team.code}`
-      : `/network/powerhouse/builders/core-units/${team.shortCode}`
-  ) as RouteWithDynamicPages
+export function BuildersItem({ builder }: BuildersItemProps) {
+  const href = useMemo(() => {
+    return `/network/powerhouse/builders/ecosystem-actors/${builder.code}` as RouteWithDynamicPages
+  }, [builder.code])
 
   return (
     <Link href={href}>
-      <CompactItem className="min-h-33 lg:hidden" team={team} />
-      <LargeItem className="hidden min-h-19.5 lg:grid" team={team} />
+      <CompactItem className="min-h-33 lg:hidden" builder={builder} />
+      <LargeItem className="hidden min-h-19.5 lg:grid" builder={builder} />
     </Link>
   )
 }

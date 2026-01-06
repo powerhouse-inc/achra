@@ -1,5 +1,6 @@
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { NetworkHomepageSections } from '@/modules/shared/config/constants'
+import ff from '@/modules/shared/lib/feature-flags'
 
 /**
  * Storage key for the homepage banner expanded state
@@ -11,7 +12,7 @@ export const HOME_BANNER_EXPANDED_STORAGE_KEY = 'home-banner-expanded'
  */
 export const NETWORK_HOMEPAGE_SECTIONS = [
   NetworkHomepageSections.Proposals,
-  NetworkHomepageSections.Roadmap,
+  ...(ff.ROADMAPS_ENABLED ? [NetworkHomepageSections.Roadmap] : []),
   NetworkHomepageSections.Finances,
   NetworkHomepageSections.Wallets,
   NetworkHomepageSections.Builders,

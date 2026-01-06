@@ -1,7 +1,6 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryStates } from 'nuqs'
 import { useCallback } from 'react'
-import { TeamScopeEnum } from '@/modules/shared/enums/actorScopeEnum'
-import { TeamRole } from '@/modules/shared/types'
+import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 
 const filtersConfig = {
   search: parseAsString.withDefault('').withOptions({
@@ -12,17 +11,7 @@ const filtersConfig = {
       timeMs: 300,
     },
   }),
-  scopes: parseAsArrayOf(parseAsStringEnum(Object.values(TeamScopeEnum)))
-    .withDefault([])
-    .withOptions({
-      shallow: false,
-      history: 'replace',
-      limitUrlUpdates: {
-        method: 'debounce',
-        timeMs: 100,
-      },
-    }),
-  actorRoles: parseAsArrayOf(parseAsStringEnum(Object.values(TeamRole)))
+  skills: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderSkill)))
     .withDefault([])
     .withOptions({
       shallow: false,
@@ -34,7 +23,7 @@ const filtersConfig = {
     }),
 } as const
 
-export default function useBuilderFilters() {
+export default function useBuildersFilters() {
   // Keep all filter params in a single query-state object so resetting or updating one key
   // happens in a single URL mutation, eliminating the flicker we saw with multiple setters.
   const [filters, setFilters] = useQueryStates(filtersConfig)
@@ -64,31 +53,23 @@ export default function useBuilderFilters() {
       setFilterValue('search', value, options),
     [setFilterValue],
   )
-  const setScopes = useCallback(
-    async (value: StateUpdater<FiltersState['scopes']>, options?: FilterOptions) =>
-      setFilterValue('scopes', value, options),
-    [setFilterValue],
-  )
-  const setActorRoles = useCallback(
-    async (value: StateUpdater<FiltersState['actorRoles']>, options?: FilterOptions) =>
-      setFilterValue('actorRoles', value, options),
+  const setSkills = useCallback(
+    async (value: StateUpdater<FiltersState['skills']>, options?: FilterOptions) =>
+      setFilterValue('skills', value, options),
     [setFilterValue],
   )
   const onReset = useCallback(() => {
     void setFilters({
       search: '',
-      scopes: [],
-      actorRoles: [],
+      skills: [],
     })
   }, [setFilters])
 
   return {
     search: filters.search,
-    scopes: filters.scopes,
-    actorRoles: filters.actorRoles,
+    skills: filters.skills,
     setSearch,
-    setScopes,
-    setActorRoles,
+    setSkills,
     onReset,
   }
 }

@@ -27,7 +27,11 @@ query WorkstreamProject($filter: WorkstreamFilter!) {
           currency
           id
           imageUrl
-          projectOwner
+          projectOwner {
+            id
+            code
+            name
+          }
           title
           budget
           budgetType
