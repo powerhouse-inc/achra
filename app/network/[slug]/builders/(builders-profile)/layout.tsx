@@ -6,7 +6,7 @@ import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
 
 interface BuildersProfileLayoutProps {
-  params: Promise<{ slug: string; builderSlug: string }>
+  params: Promise<{ slug: string; builderSlug?: string }>
   children: React.ReactNode
 }
 export default async function BuildersProfileLayout({
@@ -17,7 +17,7 @@ export default async function BuildersProfileLayout({
 
   const networkData = await getNetworkBySlug(slug)
   const networkName = networkData?.name ?? ''
-  const builderData = await getBuilderProfile({ slug: builderSlug })
+  const builderData = builderSlug ? await getBuilderProfile({ slug: builderSlug }) : undefined
   const builderName = builderData?.name ?? ''
   return (
     <>
@@ -25,7 +25,7 @@ export default async function BuildersProfileLayout({
         <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
           <BuilderBreadcrumb
             networkSlug={slug}
-            builderSlug={builderSlug}
+            builderSlug={builderSlug ?? ''}
             networkName={networkName}
             builderName={builderName}
           />
