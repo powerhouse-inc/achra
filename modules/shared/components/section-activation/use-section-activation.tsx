@@ -90,10 +90,10 @@ const useSectionActivation = (
 
             // If this is the skip section, clear the hash
             if (initializedOptions.skipSection && topSection === initializedOptions.skipSection) {
-              const basePath = window.location.pathname
+              const basePath = window.location.pathname + window.location.search
               window.history.replaceState(null, '', basePath)
             } else {
-              const basePath = window.location.pathname
+              const basePath = window.location.pathname + window.location.search
               const newUrl = `${basePath}#${topSection}`
               window.history.replaceState(null, '', newUrl)
             }
