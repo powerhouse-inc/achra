@@ -1,4 +1,9 @@
 /**
+ * Application environment
+ */
+export const ENVIRONMENT = process.env.NEXT_PUBLIC_ENVIRONMENT
+
+/**
  * Fast refresh interval for UseQuery to refetch data every X interval
  */
 export const FAST_REFRESH_INTERVAL = 5000 // 5 seconds

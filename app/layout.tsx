@@ -56,7 +56,7 @@ export default function RootLayout({
             <NuqsAdapter>
               {children}
 
-              {ff.FEATURE_WHITELIST_OVERLAY && (
+              {ff.WHITELIST_OVERLAY_ENABLED && (
                 <Suspense>
                   <WhitelistOverlay />
                 </Suspense>

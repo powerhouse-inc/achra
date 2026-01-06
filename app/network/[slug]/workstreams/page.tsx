@@ -1,7 +1,9 @@
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card/workstream-card-skeleton'
 import WorkstreamFilters from '@/modules/workstream/components/workstream-filters'
@@ -22,6 +24,10 @@ export default async function NetworkWorkstreamsPage({
   params,
   searchParams,
 }: NetworkWorkstreamsPageProps) {
+  if (!ff.workstreams.WORKSTREAMS_ENABLED) {
+    return notFound()
+  }
+
   const searchParamsString = JSON.stringify(await searchParams)
   const { slug } = await params
   const networkProfile = await getNetworkBySlug(slug)

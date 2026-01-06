@@ -1,3 +1,4 @@
+import ff from '../lib/feature-flags'
 import type { RouteWithDynamicPages } from '../types/routes'
 
 /**
@@ -18,10 +19,14 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     label: 'Networks',
     href: '/networks',
   },
-  {
-    label: 'Workstreams',
-    href: '/workstreams',
-  },
+  ...(ff.workstreams.WORKSTREAMS_ENABLED
+    ? [
+        {
+          label: 'Workstreams',
+          href: '/workstreams',
+        } satisfies NavbarLink,
+      ]
+    : []),
   {
     label: 'Services',
     href: '/services',
@@ -45,16 +50,24 @@ export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
  */
 export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
   return [
-    {
-      label: 'Contribute',
-      href: `/network/${network}/workstreams` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
-    },
-    {
-      label: 'Roadmaps',
-      href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
-    },
+    ...(ff.workstreams.WORKSTREAMS_ENABLED
+      ? [
+          {
+            label: 'Contribute',
+            href: `/network/${network}/workstreams` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
+          },
+        ]
+      : []),
+    ...(ff.ROADMAPS_ENABLED
+      ? [
+          {
+            label: 'Roadmaps',
+            href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
+          },
+        ]
+      : []),
     {
       label: 'Finances',
       href: `/network/${network}/finances` as RouteWithDynamicPages,
@@ -65,10 +78,14 @@ export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
       href: `/network/${network}/builders` as RouteWithDynamicPages,
       activeWhen: /\/network\/[a-z]+\/builders?(\/.*)?/.source,
     },
-    {
-      label: 'Governance',
-      href: 'https://governance.achra.network',
-      isExternal: true,
-    },
+    ...(ff.GOVERNANCE_LINK_ENABLED
+      ? [
+          {
+            label: 'Governance',
+            href: 'https://governance.achra.network',
+            isExternal: true,
+          } satisfies NavbarLink,
+        ]
+      : []),
   ]
 }
