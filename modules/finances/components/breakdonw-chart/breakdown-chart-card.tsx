@@ -22,7 +22,6 @@ export default function BreakdownChartCard({
   const codePath = getCodePathFromParams(params)
 
   const budgets = getBudgetsByCodePath(codePath, BUDGETS)
-  // const levelNumber = getLevelOfDetail(codePath)
   const { series } = useBreakdownChart({
     budgetsAnalytics,
     budgets,

@@ -39,7 +39,6 @@ export default function BreakdownChart({
   const isLessMobile = useMediaQuery({ to: 'sm' })
   const isMobile = useMediaQuery({ from: 'sm', to: 'md' })
   const isTablet = useMediaQuery({ from: 'md', to: 'lg' })
-  // const upTable = useMediaQuery({ from: 'md' })
   const isDesktop1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesktop1280 = useMediaQuery({ from: 'xl', to: '2xl' })
   const isDesktop1440 = useMediaQuery({ from: '2xl' })
