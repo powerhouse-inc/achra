@@ -22,12 +22,12 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
 
   return (
     <Table variant="default" className="bg-popover w-full border-collapse rounded-xl shadow-lg">
-      <TableHeader>
+      <TableHeader className="lg:[&_th]:p-4! lg:[&_th]:text-base/6">
         <TableRow className="border-b hover:bg-transparent">
           <TableHead
             colSpan={2}
             rowSpan={hasOffChain ? 2 : 1}
-            className="align-center border-r py-3 text-right"
+            className="align-center text-foreground/30 border-r py-3 text-right text-base/6"
           >
             Reported Actuals
           </TableHead>
@@ -51,7 +51,9 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
                   </Tooltip>
                 </div>
               </TableHead>
-              <TableHead className="py-3 text-right">Difference</TableHead>
+              <TableHead className="text-foreground/30 py-3 text-right text-base/6">
+                Difference
+              </TableHead>
             </>
           )}
         </TableRow>
@@ -59,10 +61,10 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
           <TableRow className="border-b hover:bg-transparent">
             <TableHead className="py-3 text-right">
               <div className="flex items-center justify-end gap-1">
-                <span>On-chain only</span>
+                <span className="text-foreground/30 text-base/6">On-chain only</span>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <InfoIcon className="text-foreground/50 size-4" />
+                    <InfoIcon className="text-foreground/30 size-4" />
                   </TooltipTrigger>
                   <TooltipContent side="bottom" align="end" className="max-w-64">
                     On-Chain view offers valuable insights into On-Chain dynamics, but excludes
@@ -71,15 +73,19 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
                 </Tooltip>
               </div>
             </TableHead>
-            <TableHead className="text-foreground/50 border-r py-3 text-right">
-              Difference
+            <TableHead className="text-foreground/30 border-r py-3 text-right text-base/6">
+              <span className="hidden lg:inline">Difference</span>
+              <span className="lg:hidden">Diff</span>
             </TableHead>
             <TableHead className="py-3 text-right">
               <div className="flex items-center justify-end gap-1">
-                <span>Including off-chain</span>
+                <div className="text-foreground/30 text-base/6">
+                  <span className="hidden lg:inline">Including off-chain</span>
+                  <span className="lg:hidden">Inc. off-chain</span>
+                </div>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <InfoIcon className="text-foreground/50 size-4" />
+                    <InfoIcon className="text-foreground/30 size-4" />
                   </TooltipTrigger>
                   <TooltipContent side="bottom" align="end" className="max-w-60">
                     Enhance financial tracking and expense analysis by including off-chain
@@ -88,7 +94,10 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
                 </Tooltip>
               </div>
             </TableHead>
-            <TableHead className="text-foreground/50 py-3 text-right">Difference</TableHead>
+            <TableHead className="text-foreground/30 py-3 text-right text-base/6">
+              <span className="hidden lg:inline">Difference</span>
+              <span className="lg:hidden">Diff</span>
+            </TableHead>
           </TableRow>
         )}
       </TableHeader>
@@ -101,34 +110,47 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
             <TableRow
               key={isTotals ? 'totals' : item.month}
               className={cn(
-                'border-b',
-                isFirstMonth && 'bg-muted/30',
+                '**:data-[type="value"]:text-foreground/50 border-b [&_td]:text-sm/5.5 [&_td]:font-semibold lg:[&_td]:p-4 lg:[&_td]:text-base/6',
+                isFirstMonth && 'bg-accent',
                 isTotals && 'font-semibold',
                 !isTotals && !lineItems[index + 1]?.isTotals && 'border-b-transparent',
               )}
             >
-              <TableCell className={cn('border-r py-3', isTotals && 'font-semibold')}>
+              <TableCell className={cn('text-foregound border-r py-3', !isTotals && 'uppercase')}>
                 {isTotals ? 'Totals' : item.month}
               </TableCell>
-              <TableCell className={cn('border-r py-3 text-right', isTotals && 'font-semibold')}>
+              <TableCell
+                data-type={isTotals ? 'totals' : 'value'}
+                className={cn('border-r py-3 text-right', isTotals && 'font-semibold')}
+              >
                 {usLocalizedNumber(item.reportedActuals, 2)} USD
               </TableCell>
               {hasOffChain ? (
                 <>
-                  <TableCell className={cn('py-3 text-right', isTotals && 'font-semibold')}>
+                  <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
+                    className={cn('py-3 text-right', isTotals && 'font-semibold')}
+                  >
                     {usLocalizedNumber(item.onChainOnly, 2)} USD
                   </TableCell>
                   <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
                     className={cn('border-r py-3 text-right', isTotals && 'font-semibold')}
                   >
                     {usLocalizedNumber(item.onChainDifference, 2)}%
                   </TableCell>
-                  <TableCell className={cn('py-3 text-right', isTotals && 'font-semibold')}>
+                  <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
+                    className={cn('py-3 text-right', isTotals && 'font-semibold')}
+                  >
                     {item.offChainIncluded !== undefined
                       ? `${usLocalizedNumber(item.offChainIncluded, 2)} USD`
                       : `${usLocalizedNumber(item.onChainOnly, 2)} USD`}
                   </TableCell>
-                  <TableCell className={cn('py-3 text-right', isTotals && 'font-semibold')}>
+                  <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
+                    className={cn('py-3 text-right', isTotals && 'font-semibold')}
+                  >
                     {item.offChainDifference !== undefined
                       ? `${usLocalizedNumber(item.offChainDifference, 2)}%`
                       : `${usLocalizedNumber(item.onChainDifference, 2)}%`}
@@ -136,10 +158,16 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
                 </>
               ) : (
                 <>
-                  <TableCell className={cn('py-3 text-right', isTotals && 'font-semibold')}>
+                  <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
+                    className={cn('py-3 text-right', isTotals && 'font-semibold')}
+                  >
                     {usLocalizedNumber(item.onChainOnly, 2)} USD
                   </TableCell>
-                  <TableCell className={cn('py-3 text-right', isTotals && 'font-semibold')}>
+                  <TableCell
+                    data-type={isTotals ? 'totals' : 'value'}
+                    className={cn('py-3 text-right', isTotals && 'font-semibold')}
+                  >
                     {usLocalizedNumber(item.onChainDifference, 2)}%
                   </TableCell>
                 </>
