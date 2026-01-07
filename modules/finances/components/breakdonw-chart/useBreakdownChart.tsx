@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   getBarWidth,
@@ -6,6 +6,7 @@ import {
   setBorderRadiusForSeries,
 } from './utils'
 import type { BreakdownBudgetAnalytic, Budget } from '../../types'
+import type { EChartsOption } from 'echarts-for-react'
 interface BreakdownChartProps {
   budgetsAnalytics: BreakdownBudgetAnalytic | undefined
   budgets: Budget[]
@@ -24,16 +25,16 @@ export default function useBreakdownChart({
   // This is a work still in progress this values are need when API is ready
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   codePath,
-}: BreakdownChartProps) {
+}: Readonly<BreakdownChartProps>) {
+  const refBreakDownChart = useRef<EChartsOption>(null)
+  const [isChecked, setIsChecked] = useState(true)
   const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
   const isDesktop1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesktop1280 = useMediaQuery({ from: 'xl', to: '2xl' })
 
-  // Its okay this WIP and will implementent when the legend is ready
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [inactiveSeries, setInactiveSeries] = useState<string[]>([])
-
+  const levelNumber = codePath.split('/').length
   const barBorderRadius = isMobile ? 2 : 4
 
   // get this from the url using nuqs
@@ -89,7 +90,49 @@ export default function useBreakdownChart({
     return setBorderRadiusForSeries(parsedSeries, barBorderRadius)
   }, [allSeries, barBorderRadius, inactiveSeries])
 
+  const handleToggleSeries = (toggleSeries: string) => {
+    setInactiveSeries(
+      inactiveSeries.includes(toggleSeries)
+        ? inactiveSeries.filter((series) => series !== toggleSeries)
+        : [...inactiveSeries, toggleSeries],
+    )
+  }
+  const handleChangeSwitch = () => {
+    if (!isChecked && inactiveSeries.length > 0) {
+      setInactiveSeries([])
+    } else {
+      setInactiveSeries([...allSeries.map((series) => series.name)])
+    }
+    setIsChecked(!isChecked)
+  }
+
+  const onLegendItemHover = (legendName: string) => {
+    const chartInstance = refBreakDownChart.current?.getEchartsInstance()
+    chartInstance?.dispatchAction({
+      type: 'highlight',
+      seriesName: legendName,
+    })
+  }
+
+  const onLegendItemLeave = (legendName: string) => {
+    const chartInstance = refBreakDownChart.current?.getEchartsInstance()
+    chartInstance?.dispatchAction({
+      type: 'downplay',
+      seriesName: legendName,
+    })
+  }
+
+  const showScrollAndToggle = isMobile ? series.length > 6 : series.length > 8
+  const showLegendValue = levelNumber <= 2
   return {
     series,
+    showScrollAndToggle,
+    handleToggleSeries,
+    handleChangeSwitch,
+    isChecked,
+    onLegendItemHover,
+    onLegendItemLeave,
+    refBreakDownChart,
+    showLegendValue,
   }
 }
