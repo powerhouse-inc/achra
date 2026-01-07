@@ -128,7 +128,7 @@ export function getBreadcrumbItems(
  * Sets the metric value and unit
  */
 
-const setMetric = (value: number, unit: string) =>
+export const setMetric = (value: number, unit: string) =>
   ({
     value,
     unit,
