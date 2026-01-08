@@ -9,6 +9,7 @@ const ffDev: FeatureFlags = {
 
   builders: {
     FINANCES_LINK_ENABLED: true,
+    CONNECT_LINK_ENABLED: true,
     PROJECTS_SECTION_ENABLED: true,
   },
 

@@ -45,14 +45,18 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
               </div>
             </div>
 
-            <div className="sm:w-57 sm:min-w-57 lg:hidden">{connectButton}</div>
+            {ff.builders.CONNECT_LINK_ENABLED && (
+              <div className="sm:w-57 sm:min-w-57 lg:hidden">{connectButton}</div>
+            )}
           </div>
 
           <Markdown>{builder.description ?? ''}</Markdown>
         </div>
 
         <div className="sticky top-43.5 hidden h-fit w-full flex-col gap-6 lg:flex lg:w-96 xl:w-104 xl:min-w-104">
-          <div className="flex justify-end">{connectButton}</div>
+          {ff.builders.CONNECT_LINK_ENABLED && (
+            <div className="flex justify-end">{connectButton}</div>
+          )}
 
           <div className="flex flex-col gap-2">
             <h2 className="text-xl leading-[120%] font-bold">Finances</h2>
