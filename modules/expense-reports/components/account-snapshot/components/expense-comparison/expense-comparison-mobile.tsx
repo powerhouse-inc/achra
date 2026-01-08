@@ -11,6 +11,7 @@ import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { cn } from '@/modules/shared/lib/utils'
 import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonMobileProps {
@@ -21,23 +22,37 @@ function ExpenseComparisonLabel({ children }: { children: React.ReactNode }) {
   return <span className="text-foreground/30 text-base/6 font-semibold">{children}</span>
 }
 
-function ExpenseComparisonValue({ children }: { children: React.ReactNode }) {
-  return <span className="text-foreground/50 text-sm/5.5 font-semibold">{children}</span>
+function ExpenseComparisonValue({
+  children,
+  isTotals = false,
+}: {
+  children: React.ReactNode
+  isTotals: boolean
+}) {
+  return (
+    <span
+      className={cn('text-foreground/50 text-sm/5.5 font-semibold', isTotals && 'text-foreground')}
+    >
+      {children}
+    </span>
+  )
 }
 
 function ExpenseComparisonContent({
   item,
   hasOffChain,
+  isTotals = false,
 }: {
   item: ExpenseComparisonLineItem
   hasOffChain: boolean
+  isTotals: boolean
 }) {
   return (
     <div className="px-4 pb-4">
       {/* Reported Actuals */}
       <div className="flex items-center justify-between py-2">
         <ExpenseComparisonLabel>Reported Actuals</ExpenseComparisonLabel>
-        <ExpenseComparisonValue>
+        <ExpenseComparisonValue isTotals={isTotals}>
           {usLocalizedNumber(item.reportedActuals, 2)} USD
         </ExpenseComparisonValue>
       </div>
@@ -61,7 +76,7 @@ function ExpenseComparisonContent({
               </TooltipContent>
             </Tooltip>
           </div>
-          <ExpenseComparisonValue>
+          <ExpenseComparisonValue isTotals={isTotals}>
             {usLocalizedNumber(item.onChainOnly, 2)} USD
           </ExpenseComparisonValue>
         </div>
@@ -73,7 +88,7 @@ function ExpenseComparisonContent({
         {/* On-chain Difference */}
         <div className="flex items-center justify-between py-1">
           <ExpenseComparisonLabel>Difference</ExpenseComparisonLabel>
-          <ExpenseComparisonValue>
+          <ExpenseComparisonValue isTotals={isTotals}>
             {usLocalizedNumber(item.onChainDifference, 2)}%
           </ExpenseComparisonValue>
         </div>
@@ -96,7 +111,7 @@ function ExpenseComparisonContent({
                   </TooltipContent>
                 </Tooltip>
               </div>
-              <ExpenseComparisonValue>
+              <ExpenseComparisonValue isTotals={isTotals}>
                 {usLocalizedNumber(item.offChainIncluded, 2)} USD
               </ExpenseComparisonValue>
             </div>
@@ -107,7 +122,7 @@ function ExpenseComparisonContent({
 
             <div className="flex items-center justify-between py-1">
               <ExpenseComparisonLabel>Difference</ExpenseComparisonLabel>
-              <ExpenseComparisonValue>
+              <ExpenseComparisonValue isTotals={isTotals}>
                 {item.offChainDifference !== undefined
                   ? `${usLocalizedNumber(item.offChainDifference, 2)}%`
                   : '-'}
@@ -135,7 +150,11 @@ function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
             {firstItem.isTotals ? '3 Month Totals' : firstItem.month}
           </div>
 
-          <ExpenseComparisonContent item={firstItem} hasOffChain={hasOffChain} />
+          <ExpenseComparisonContent
+            item={firstItem}
+            hasOffChain={hasOffChain}
+            isTotals={firstItem.isTotals ?? false}
+          />
         </CardContent>
       </Card>
 
@@ -146,16 +165,16 @@ function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
             const id = item.isTotals ? `totals-${index}` : item.month
 
             return (
-              <AccordionItem
-                key={id}
-                value={id}
-                className="bg-background rounded-lg border last:border-b"
-              >
-                <AccordionTrigger className="px-4 py-4 text-sm font-semibold hover:no-underline">
+              <AccordionItem key={id} value={id} className="bg-popover rounded-lg shadow-xl">
+                <AccordionTrigger className="[&>svg]:text-foreground px-4 py-4 text-sm font-semibold hover:no-underline">
                   {item.isTotals ? '3 Month Totals' : item.month}
                 </AccordionTrigger>
                 <AccordionContent className="p-0">
-                  <ExpenseComparisonContent item={item} hasOffChain={hasOffChain} />
+                  <ExpenseComparisonContent
+                    item={item}
+                    hasOffChain={hasOffChain}
+                    isTotals={item.isTotals ?? false}
+                  />
                 </AccordionContent>
               </AccordionItem>
             )
