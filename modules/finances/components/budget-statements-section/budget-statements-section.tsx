@@ -10,7 +10,8 @@ import BudgetStatementsContent from './budget-statements-content'
 import BudgetStatementsTitle from './budget-statements-title'
 
 export default function BudgetStatementsSection() {
-  const RANGE = 'Jan - Dec 2023'
+  const [year] = useQueryState('year')
+  const RANGE = `Jan - Dec ${year}`
   const [budgetMetric, setBudgetMetric] = useQueryState(
     'budgetMetric',
     parseAsStringEnum(

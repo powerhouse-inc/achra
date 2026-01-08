@@ -4,7 +4,7 @@ interface BreadcrumbSelectYearProps {
   items: BreadcrumbItemNavigation[]
 }
 
-export function BreadcrumbSelectYear({ items }: BreadcrumbSelectYearProps) {
+export function BreadcrumbSelectYear({ items }: Readonly<BreadcrumbSelectYearProps>) {
   return (
     <div className="flex w-full items-center gap-4">
       <div className="min-w-0 flex-1">
