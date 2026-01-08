@@ -1,5 +1,6 @@
 'use client'
 import { Card } from '@/shared/components/ui/card'
+import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { ATLAS_BUDGETS, BUDGETS } from '../../mocks'
 import { getBudgetsByCodePath, getCodePathFromParams } from '../../utils'
 import BreakdownChart from './breakdown-chart'
@@ -19,6 +20,7 @@ export default function BreakdownChartCard({
 }: Readonly<BreakdownChartCardProps>) {
   const codePath = getCodePathFromParams(params)
   const budgets = getBudgetsByCodePath(codePath, BUDGETS)
+  const { year } = useFinancesYear()
   const {
     series,
     showScrollAndToggle,
@@ -33,7 +35,7 @@ export default function BreakdownChartCard({
     budgetsAnalytics,
     budgets,
     allBudgets: ATLAS_BUDGETS,
-    year: '2025',
+    year,
     codePath,
   })
 
@@ -44,7 +46,7 @@ export default function BreakdownChartCard({
         <div className="flex min-w-0 flex-1">
           <BreakdownChart
             refBreakDownChart={refBreakDownChart}
-            year="2025"
+            year={year}
             selectedGranularity="monthly"
             series={series}
             selectedMetric="Budget"
