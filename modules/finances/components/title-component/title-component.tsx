@@ -15,7 +15,7 @@ export function TitleComponent({
   icon,
   code,
   levelNumber,
-}: TitleComponentProps) {
+}: Readonly<TitleComponentProps>) {
   return (
     <div className={cn('mt-2 mb-2 flex flex-col sm:mt-0.25 md:-mt-[3px]', 'gap-2')}>
       {levelNumber === 1 ? (
@@ -27,11 +27,7 @@ export function TitleComponent({
         </h1>
       ) : (
         <h1 data-slot="nth-title-box" className="m-0 sm:mt-4 md:mt-0 md:text-3xl">
-          <IconTitleWithCode
-            icon={icon ?? '/default-icon-cards-budget.svg'}
-            title={title}
-            code={code}
-          />
+          <IconTitleWithCode icon={icon} title={title} code={code} />
         </h1>
       )}
       <div

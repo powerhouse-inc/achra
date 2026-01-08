@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
-import BreakdownChartCard from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card'
+import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card-wrapper'
 import BudgetStatementsSection from '@/modules/finances/components/budget-statements-section/budget-statements-section'
 import { BudgetStatementsSectionSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-skeleton/budget-statements-section-skeleton'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
@@ -17,6 +17,7 @@ import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/co
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
+import ff from '@/modules/shared/lib/feature-flags'
 
 interface FinancesPageProps {
   params: Promise<{
@@ -37,21 +38,37 @@ export default function FinancesPage({ params }: FinancesPageProps) {
         <Suspense fallback={<TitleComponentSkeleton />}>
           <TitleComponentWrapper params={params} />
         </Suspense>
-        <WalletSection groupedWallets={WALLET_GROUPS} />
-        <div className="mt-2 flex items-center justify-end gap-2 text-xs/5 font-semibold xl:text-sm">
-          <UsdsIcon className="size-5 md:size-6" />
-          *All values are converted to USDS
-        </div>
-        <Suspense fallback={<SummarySectionSkeleton />}>
-          <SummarySectionWrapper params={params} />
-        </Suspense>
-        <Suspense fallback={<NavigationCardSkeletons />}>
-          <NavigationSection params={params} />
-        </Suspense>
-        <BreakdownChartCard />
+
+        {ff.finances.WALLETS_ENABLED && <WalletSection groupedWallets={WALLET_GROUPS} />}
+
+        {ff.finances.SUMMARY_SECTION_ENABLED && (
+          <>
+            <div className="mt-2 flex items-center justify-end gap-2 text-xs/5 font-semibold xl:text-sm">
+              <UsdsIcon className="size-5 md:size-6" />
+              *All values are converted to USDS
+            </div>
+            <Suspense fallback={<SummarySectionSkeleton />}>
+              <SummarySectionWrapper params={params} />
+            </Suspense>
+          </>
+        )}
+
+        {ff.finances.NAVIGATION_SECTION_ENABLED && (
+          <Suspense fallback={<NavigationCardSkeletons />}>
+            <NavigationSection params={params} />
+          </Suspense>
+        )}
+
+        {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
+          <Suspense fallback={<div>loading....</div>}>
+            <BreakdownChartCardWrapper params={params} />
+          </Suspense>
+        )}
+
         <Suspense fallback={<BudgetStatementsSectionSkeleton />}>
           <BudgetStatementsSection />
         </Suspense>
+
         <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
       </PageContent>
     </main>

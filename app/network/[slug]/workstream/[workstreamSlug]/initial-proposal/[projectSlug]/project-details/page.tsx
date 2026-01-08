@@ -13,12 +13,17 @@ import {
 import { resolveProjectDeliverables } from '@/modules/project/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 
 interface ProjectDetailsPageProps {
   params: Promise<{ slug: string; workstreamSlug: string; projectSlug: string }>
 }
 
 export default async function ProjectDetailsPage({ params }: ProjectDetailsPageProps) {
+  if (!ff.workstreams.PROJECT_DETAILS_ENABLED) {
+    return notFound()
+  }
+
   const { slug, workstreamSlug, projectSlug } = await params
   const workstream = await getWorkstreamProjects(slug, workstreamSlug)
   const project = await getWorkstreamProjectBySlug(slug, workstreamSlug, projectSlug)

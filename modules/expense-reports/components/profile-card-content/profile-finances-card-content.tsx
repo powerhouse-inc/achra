@@ -1,6 +1,7 @@
 import { User } from 'lucide-react'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
+import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
 function ProfileFinancesCardContent() {
@@ -14,9 +15,11 @@ function ProfileFinancesCardContent() {
         <InternalLink href={'/network/powerhouse/builders/builder-1/expense-reports' as Route}>
           Budget Statements
         </InternalLink>
-        <InternalLink href={'/network/powerhouse/builders/builder-1/expense-reports' as Route}>
-          Finances
-        </InternalLink>
+        {ff.builders.FINANCES_LINK_ENABLED && (
+          <InternalLink href={'/network/powerhouse/builders/builder-1/expense-reports' as Route}>
+            Finances
+          </InternalLink>
+        )}
       </div>
 
       <div className="bg-background relative mt-2 flex flex-wrap gap-6 rounded-lg border p-4">

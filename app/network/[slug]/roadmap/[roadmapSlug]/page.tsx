@@ -5,6 +5,7 @@ import { getRoadmapDetailsData } from '@/modules/roadmap/services/roadmaps'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
 interface RoadmapPageProps {
@@ -12,6 +13,10 @@ interface RoadmapPageProps {
 }
 
 export default async function RoadmapPage({ params }: RoadmapPageProps) {
+  if (!ff.ROADMAPS_ENABLED) {
+    return notFound()
+  }
+
   const { slug: networkSlug, roadmapSlug } = await params
   const networkData = await getNetworkBySlug(networkSlug)
   const networkName = networkData?.name ?? 'Unknown'

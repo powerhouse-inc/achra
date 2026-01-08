@@ -5,6 +5,7 @@ import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import ff from '@/modules/shared/lib/feature-flags'
 
 const markdown =
   '# **About Us** #\n\nThe new Powerhouse team uses its extensive knowledge and experience from its SES Core Unit and Maker Foundation days to contribute to the development of efficient and scalable decentralized organizations. It aims to work not just for Sky and its subDAOs, but as a fully independent service provider for the wider industry.\n\n### Services Offered ### \nAs an Ecosystem Actor, Powerhouse offers three categories of paid consultancy services. These services span various operational areas, from project management, to finances and transparency reporting, to legal-operational matters.\n\n### Decentralized Org Design and Business Process Analysis ### \nOpen and decentralized organizations are an emerging paradigm that can be difficult to get right at first. Sky has been one of the biggest pioneering experiments so far, achieving some successes but also laying bare the various challenges that these organizations may face.\n\n### Open-Source Software Development ### \nTo be successful, these organizations essentially need to trade traditional management oversight and extensive training programs with automated processes on their operational platform.\n\n### Operational Support and Coordination ### \nOne of the challenges of decentralized organizations is that they can introduce a lot of inefficiencies by forcing the contributor teams to take care of operational overhead tasks outside of their core competencies.\n'
@@ -55,11 +56,13 @@ export default function BuildersProfilePage() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-      </div>
+      {ff.builders.PROJECTS_SECTION_ENABLED && (
+        <div className="flex flex-col gap-6">
+          <ProjectCard />
+          <ProjectCard />
+          <ProjectCard />
+        </div>
+      )}
     </PageContent>
   )
 }
