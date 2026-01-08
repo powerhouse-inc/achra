@@ -27,8 +27,8 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
     return 'No data'
   }, [parsedDate])
   return (
-    <div className="border-input w-full border-b">
-      <div className="relative container flex flex-col gap-2 pt-2 pb-2 md:gap-6 xl:gap-4">
+    <div className="border-input mt-16 w-full border-b">
+      <div className="relative container flex flex-col gap-2 pt-3 pb-2 md:gap-6 xl:gap-4">
         <div className="flex justify-between gap-4">
           <div className="flex w-full gap-2 lg:gap-4">
             <Avatar className="size-12 md:size-14">

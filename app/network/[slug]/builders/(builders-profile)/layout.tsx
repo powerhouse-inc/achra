@@ -1,5 +1,8 @@
 import { Suspense } from 'react'
-import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header'
+import {
+  BuilderProfileHeader,
+  BuilderProfileHeaderSkeleton,
+} from '@/modules/builder-profile/components/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { BuilderBreadcrumb } from '@/modules/builders/components/builder-breadcrumb/builder-breadcrumb'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
@@ -32,8 +35,11 @@ export default async function BuildersProfileLayout({
           />
         </Suspense>
       </PageBreadcrumbContainer>
-      {builderData && <BuilderProfileHeader builder={builderData} />}
-      <div className="mt-4">{children}</div>
+
+      <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
+        {builderData && <BuilderProfileHeader builder={builderData} />}
+      </Suspense>
+      {children}
     </>
   )
 }

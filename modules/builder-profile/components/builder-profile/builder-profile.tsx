@@ -43,7 +43,7 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
   )
 
   return (
-    <div className="mt-3 flex flex-col gap-6 md:gap-8">
+    <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-4 md:flex-row md:gap-8">
         <div className="w-full">
           <div className="flex flex-col justify-between gap-4 sm:flex-row">

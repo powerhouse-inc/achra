@@ -11,7 +11,7 @@ export default async function BuildersProfilePage({ params }: BuildersProfilePag
   const { builderSlug } = await params
 
   return (
-    <PageContent variant="with-breadcrumb">
+    <PageContent className="mt-3 sm:mt-4">
       {/* TODO: implement the missing skeletons components for the builder profile page */}
       <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
         <BuilderProfile builderSlug={builderSlug} />
