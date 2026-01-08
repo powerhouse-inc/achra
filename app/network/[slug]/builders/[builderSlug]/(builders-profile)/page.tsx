@@ -9,7 +9,6 @@ interface BuildersProfilePageProps {
 
 export default async function BuildersProfilePage({ params }: BuildersProfilePageProps) {
   const { builderSlug } = await params
-
   return (
     <PageContent className="mt-3 sm:mt-4">
       {/* TODO: implement the missing skeletons components for the builder profile page */}

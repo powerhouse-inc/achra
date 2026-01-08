@@ -1,15 +1,10 @@
+import { notFound } from 'next/navigation'
 import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-card-content'
 import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/profile-drawers'
 import { ProjectCard } from '@/modules/expense-reports/components/project-card'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import ff from '@/modules/shared/lib/feature-flags'
 import { getBuilderProfile } from '../../services/builder-profile'
 interface BuilderProfileProps {
@@ -22,14 +17,7 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
   })
 
   if (!builder) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyTitle>Builder not found</EmptyTitle>
-          <EmptyDescription>The builder you are looking for does not exist.</EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    )
+    notFound()
   }
 
   const connectButton = (
