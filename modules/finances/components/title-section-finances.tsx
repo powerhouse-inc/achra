@@ -21,7 +21,7 @@ export default function TitleSectionFinances({
   range,
 }: Readonly<TitleBreakdownChartProps>) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-1">
       <div className={cn('flex w-fit items-center gap-2', className)}>
         <span className="text-base leading-[120%] font-bold lg:text-lg 2xl:text-xl">{title}</span>
         <TooltipInfoIcon tooltipContent={<div>{tooltipContent}</div>} />
