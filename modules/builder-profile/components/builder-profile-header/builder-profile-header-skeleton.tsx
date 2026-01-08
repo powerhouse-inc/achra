@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { BuilderHeaderDescriptionSkeleton } from './builder-header-description-skeleton'
+import { BuilderHeaderDescriptionSkeleton } from './builder-profile-header-description-skeleton'
 
-function BuilderHeaderSkeleton() {
+function BuilderProfileHeaderSkeleton() {
   return (
     <div className="bg-background border-input mt-13 w-full border-b">
       <div className="container flex flex-col gap-4 pt-4 pb-2">
@@ -54,4 +54,4 @@ function BuilderHeaderSkeleton() {
   )
 }
 
-export { BuilderHeaderSkeleton }
+export { BuilderProfileHeaderSkeleton }

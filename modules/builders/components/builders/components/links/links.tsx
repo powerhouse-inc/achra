@@ -1,3 +1,5 @@
+'use client'
+
 import { Link as LinkIcon } from 'lucide-react'
 import type { BuilderLink } from '@/modules/__generated__/graphql/switchboard-generated'
 import {

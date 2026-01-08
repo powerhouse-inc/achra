@@ -1,12 +1,13 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import type { Maybe, Scalars } from '@/modules/__generated__/graphql/switchboard-generated'
 
-interface BuilderHeaderDescriptionProps {
-  description: string
+interface BuilderProfileHeaderDescriptionProps {
+  description?: Maybe<Scalars['String']['output']>
 }
 
-function BuilderHeaderDescription({ description }: BuilderHeaderDescriptionProps) {
+function BuilderProfileHeaderDescription({ description }: BuilderProfileHeaderDescriptionProps) {
   const pathname = usePathname()
   const isExpenseReports = pathname.includes('expense-reports')
 
@@ -21,4 +22,4 @@ function BuilderHeaderDescription({ description }: BuilderHeaderDescriptionProps
   )
 }
 
-export { BuilderHeaderDescription }
+export { BuilderProfileHeaderDescription }

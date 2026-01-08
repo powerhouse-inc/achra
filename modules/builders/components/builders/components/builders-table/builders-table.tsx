@@ -72,7 +72,7 @@ export function BuildersTable({ builders, className, networkSlug }: BuildersTabl
       </TableHeader>
       <TableBody className="flex flex-col gap-2">
         {sortedBuilders.map((builder) => {
-          const builderLink = `/network/${networkSlug}/builders/${builder.id}` as Route
+          const builderLink = `/network/${networkSlug}/builders/${builder.slug ?? ''}` as Route
           return (
             <TableRow
               key={builder.id}
