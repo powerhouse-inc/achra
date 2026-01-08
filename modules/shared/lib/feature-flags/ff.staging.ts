@@ -9,6 +9,7 @@ const ffStaging: FeatureFlags = {
 
   builders: {
     FINANCES_LINK_ENABLED: false,
+    CONNECT_LINK_ENABLED: false,
     PROJECTS_SECTION_ENABLED: false,
   },
 

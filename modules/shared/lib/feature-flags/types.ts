@@ -26,6 +26,11 @@ export interface FeatureFlags {
     FINANCES_LINK_ENABLED: boolean
 
     /**
+     * Whether to show the connect link in the builders section
+     */
+    CONNECT_LINK_ENABLED: boolean
+
+    /**
      * Whether to show the projects section in the builders section
      */
     PROJECTS_SECTION_ENABLED: boolean
