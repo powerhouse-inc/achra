@@ -32,7 +32,7 @@ export function BudgetStamentTableItem({
   return (
     <TableRow
       className={cn(
-        'flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0!',
+        'flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0! shadow-sm!',
         className,
       )}
     >
