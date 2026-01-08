@@ -64,7 +64,7 @@ export function BarSkeletonItems() {
             key={index}
             height={item.height}
             heightRelative={item.heightRelative}
-            className="w-[23px] lg:w-[30px]"
+            className="w-6 lg:w-7.5"
           />
         ))}
       </div>
@@ -102,7 +102,7 @@ function BarWrapper({
     >
       {heightRelative && (
         <div
-          className="bg-border absolute top-0 flex h-full w-4 rounded-t-lg md:w-[23px] md:rounded-t-lg lg:w-[30px] xl:w-10"
+          className="bg-border absolute top-0 flex h-full w-4 rounded-t-lg md:w-6 md:rounded-t-lg lg:w-7.5 xl:w-10"
           style={{ height: heightRelative }}
         />
       )}
