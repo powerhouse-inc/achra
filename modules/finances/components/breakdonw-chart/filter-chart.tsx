@@ -27,8 +27,8 @@ export default function FilterChart() {
           Reset Filters
         </Button>
         <BasicSelect
-          key={`metric-${metric ?? 'empty'}`}
-          value={metric ?? undefined}
+          key={`metric-${metric}`}
+          value={metric}
           label="Metric"
           onValueChange={(value) => {
             void setMetric(value as METRIC_OPTIONS)
@@ -37,9 +37,9 @@ export default function FilterChart() {
           placeholder="Budget"
         />
         <BasicSelect
-          key={`granularity-${granularity ?? 'empty'}`}
+          key={`granularity-${granularity}`}
           label="Granularity"
-          value={granularity ?? undefined}
+          value={granularity}
           onValueChange={(value) => {
             void setGranularity(value as GRANULARITY_OPTIONS)
           }}
