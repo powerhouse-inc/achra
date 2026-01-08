@@ -3,6 +3,7 @@ import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
+import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { METRIC_OPTIONS } from '../../types'
 import { FinancesSections } from '../config/const'
 import useBudgetStamentFilters from './budget-stament-filters/useBudgetStamentFilters'
@@ -10,7 +11,7 @@ import BudgetStatementsContent from './budget-statements-content'
 import BudgetStatementsTitle from './budget-statements-title'
 
 export default function BudgetStatementsSection() {
-  const [year] = useQueryState('year')
+  const { year } = useFinancesYear()
   const RANGE = `Jan - Dec ${year}`
   const [budgetMetric, setBudgetMetric] = useQueryState(
     'budgetMetric',

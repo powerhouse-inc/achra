@@ -1,5 +1,4 @@
 'use client'
-import { parseAsString, useQueryState } from 'nuqs'
 import {
   Select,
   SelectContent,
@@ -9,18 +8,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/modules/shared/components/ui/select'
+import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { getYearsRange } from '../../utils'
 
 export function YearSelect() {
   const yearsRange = getYearsRange()
-  const [year, setSelectedYear] = useQueryState('year', parseAsString.withDefault('2025'))
+  const { year, setSelectedYear } = useFinancesYear()
   const handleYearSelect = (year: string) => {
     void setSelectedYear(year)
   }
 
   return (
     <div className="flex items-center gap-4">
-      <Select value={year} onValueChange={handleYearSelect}>
+      <Select value={year.toString()} onValueChange={handleYearSelect}>
         <SelectTrigger
           size="sm"
           className="dark:border-input [&_svg]:text-foreground! focus-visible:border-input w-32 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180"
