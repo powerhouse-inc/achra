@@ -17,7 +17,7 @@ export default async function BuildersProfileLayout({
 
   const networkData = await getNetworkBySlug(slug)
   const networkName = networkData?.name ?? ''
-  const builderData = builderSlug ? await getBuilderProfile({ slug: builderSlug }) : undefined
+  const builderData = await getBuilderProfile({ slug: builderSlug })
   const builderName = builderData?.name ?? ''
   return (
     <>
