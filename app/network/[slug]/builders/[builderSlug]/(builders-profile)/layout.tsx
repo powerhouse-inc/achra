@@ -1,13 +1,8 @@
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
-import {
-  BuilderProfileHeader,
-  BuilderProfileHeaderSkeleton,
-} from '@/modules/builder-profile/components/builder-profile-header'
+import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { BuilderBreadcrumb } from '@/modules/builders/components/builder-breadcrumb/builder-breadcrumb'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
-import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
 
 interface BuildersProfileLayoutProps {
@@ -33,19 +28,15 @@ export default async function BuildersProfileLayout({
   return (
     <>
       <PageBreadcrumbContainer>
-        <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
-          <BuilderBreadcrumb
-            networkSlug={slug}
-            builderSlug={builderSlug}
-            networkName={networkName}
-            builderName={builderName}
-          />
-        </Suspense>
+        <BuilderBreadcrumb
+          networkSlug={slug}
+          builderSlug={builderSlug}
+          networkName={networkName}
+          builderName={builderName}
+        />
       </PageBreadcrumbContainer>
 
-      <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
-        <BuilderProfileHeader builder={builder} />
-      </Suspense>
+      <BuilderProfileHeader builder={builder} />
       {children}
     </>
   )
