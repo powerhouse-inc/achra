@@ -1,5 +1,4 @@
 import { Suspense } from 'react'
-import { BuilderProfileHeaderSkeleton } from '@/modules/builder-profile/components/builder-profile-header'
 import {
   AccountSnapshot,
   AccountSnapshotSkeleton,
@@ -36,10 +35,6 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
 
   return (
     <PageContent as="div" className="mt-4 md:mt-6">
-      <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
-        {/* TODO: uncomment and populate when working on this page integration */}
-        {/* <BuilderProfileHeader /> */}
-      </Suspense>
       <Suspense fallback={<MonthNavigationSkeleton />}>
         <MonthNavigation />
       </Suspense>
