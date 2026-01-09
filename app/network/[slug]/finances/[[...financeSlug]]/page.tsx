@@ -24,9 +24,12 @@ interface FinancesPageProps {
     slug: string
     financeSlug?: string[]
   }>
+  searchParams: Promise<{
+    year: string
+  }>
 }
 
-export default function FinancesPage({ params }: FinancesPageProps) {
+export default function FinancesPage({ params, searchParams }: FinancesPageProps) {
   return (
     <main>
       <PageBreadcrumbContainer>
@@ -60,9 +63,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
         )}
 
         {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
-          <Suspense fallback={<div>loading....</div>}>
-            <BreakdownChartCardWrapper params={params} />
-          </Suspense>
+          <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
         <Suspense fallback={<BudgetStatementsSectionSkeleton />}>

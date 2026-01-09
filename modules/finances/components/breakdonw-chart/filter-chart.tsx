@@ -1,11 +1,15 @@
 'use client'
 
-import { ListFilter } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 import { useCallback } from 'react'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
+import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { Button } from '@/modules/shared/components/ui/button'
 import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '../../types'
+import {
+  BreakdownGranularitySelectDrawer,
+  BreakdownMetricSelectDrawer,
+} from './filter-metric-breakdown-chart'
 import { granularityParser, metricParser } from './lib/search-params-server'
 export default function FilterChart() {
   const [metric, setMetric] = useQueryState('metric', metricParser)
@@ -23,8 +27,8 @@ export default function FilterChart() {
           Reset Filters
         </Button>
         <BasicSelect
-          key={`metric-${metric ?? 'empty'}`}
-          value={metric ?? undefined}
+          key={`metric-${metric}`}
+          value={metric}
           label="Metric"
           onValueChange={(value) => {
             void setMetric(value as METRIC_OPTIONS)
@@ -33,9 +37,9 @@ export default function FilterChart() {
           placeholder="Budget"
         />
         <BasicSelect
-          key={`granularity-${granularity ?? 'empty'}`}
+          key={`granularity-${granularity}`}
           label="Granularity"
-          value={granularity ?? undefined}
+          value={granularity}
           onValueChange={(value) => {
             void setGranularity(value as GRANULARITY_OPTIONS)
           }}
@@ -44,9 +48,13 @@ export default function FilterChart() {
         />
       </div>
       <div className="flex items-center gap-4 md:hidden">
-        <button type="button" aria-label="Filter" onClick={() => {}} className="cursor-pointer">
-          <ListFilter className="size-5" />
-        </button>
+        <FilterDrawer onReset={onReset}>
+          <BreakdownMetricSelectDrawer metric={metric} setMetric={setMetric} />
+          <BreakdownGranularitySelectDrawer
+            granularity={granularity}
+            setGranularity={setGranularity}
+          />
+        </FilterDrawer>
       </div>
     </div>
   )

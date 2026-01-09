@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb'
 import { BUDGETS } from '../mocks'
 import { MOCK_BUDGETS_ANALYTICS } from '../mocks/analytics'
@@ -298,4 +299,12 @@ export function getBudgetsByCodePath(codePath: string, budgets: Budget[]): Budge
     const levelBudget = BUDGETS.find((budget) => budget.codePath === codePath)
     return BUDGETS.filter((budget) => budget.parentId === levelBudget?.id)
   }
+}
+
+export const getYearsRange = () => {
+  const year = DateTime.utc().year
+  const yearsRange = Array(1 + year - 2021)
+    .fill('')
+    .map((_, i) => (year - i).toString())
+  return yearsRange
 }

@@ -39,7 +39,7 @@ export function BudgetStamentTable({
   return (
     <Table variant="pills" className={cn('w-full border-none!', className)}>
       <TableHeader className="mb-2 inline-block w-full border-b-0!">
-        <TableRow className="bg-accent! flex h-fit w-full justify-between rounded-none! rounded-tl-xl! rounded-tr-xl! border-none! px-2 py-4 shadow-none! outline-none! xl:p-4 xl:pl-3 2xl:p-4">
+        <TableRow className="bg-accent! flex h-fit w-full justify-between rounded-none! rounded-tl-xl! rounded-tr-xl! border-none! px-2 py-4 shadow-sm! outline-none! xl:p-4 xl:pl-3 2xl:p-4">
           {proccesedBudgetStatementsTableColumns.map((column, index) => (
             <TableHead
               key={column.accessorKey}

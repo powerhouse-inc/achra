@@ -1,4 +1,5 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
+import { project } from '../../mocks/project'
 import { ProjectCard } from './project-card'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -20,4 +21,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    project,
+  },
+}
