@@ -34,23 +34,27 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
   // TODO: fetch the actual builder data and if it doesn't exist, return a 404 page
 
   return (
-    <PageContent as="div" className="mt-4 md:mt-6">
-      <Suspense fallback={<MonthNavigationSkeleton />}>
-        <MonthNavigation />
-      </Suspense>
-
-      <div className="my-6">
-        <Suspense fallback={<ExpenseReportTabsSkeleton />}>
-          <ExpenseReportTabs />
+    <>
+      <PageContent as="div" className="mt-4 mb-0 md:mt-6">
+        <Suspense fallback={<MonthNavigationSkeleton />}>
+          <MonthNavigation />
         </Suspense>
-      </div>
+
+        <div className="my-6">
+          <Suspense fallback={<ExpenseReportTabsSkeleton />}>
+            <ExpenseReportTabs />
+          </Suspense>
+        </div>
+      </PageContent>
 
       {/* CONTENT 👇 */}
 
       {section === TabSection.ACCOUNT_SNAPSHOT && (
-        <Suspense fallback={<AccountSnapshotSkeleton />} key={`${section}-${viewMonth}`}>
-          <AccountSnapshot month={viewMonth ? new Date(viewMonth) : null} />
-        </Suspense>
+        <div className="container">
+          <Suspense fallback={<AccountSnapshotSkeleton />} key={`${section}-${viewMonth}`}>
+            <AccountSnapshot month={viewMonth ? new Date(viewMonth) : null} />
+          </Suspense>
+        </div>
       )}
 
       {section === TabSection.EXPENSE_REPORTS && (
@@ -58,6 +62,10 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
           <ExpenseReportsSection month={viewMonth ? new Date(viewMonth) : null} />
         </Suspense>
       )}
-    </PageContent>
+
+      <div className="container mt-6 mb-8">
+        <h3>Additional Notes</h3>
+      </div>
+    </>
   )
 }
