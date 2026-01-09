@@ -25,14 +25,7 @@ function TotalWalletSection({
         items={mainTableItems}
         cardsTotalPosition="top"
         longCode="longCode"
-        tablePlaceholder={
-          // <BudgetStatementsPlaceholder
-          //   longCode={longCode}
-          //   shortCode={shortCode}
-          //   resource={resource}
-          // />
-          <div>table placeholder here...</div>
-        }
+        tablePlaceholder={<div>table placeholder here...</div>}
       />
     </div>
   )

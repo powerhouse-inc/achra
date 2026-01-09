@@ -1,6 +1,4 @@
 import React, { useId } from 'react'
-// import { OpenModalTransparency } from '@/views/CoreUnitBudgetStatement/BudgetStatementtUtils'
-// import { TransparencyEmptyTable } from '@/views/CoreUnitBudgetStatement/components/Placeholders/TransparencyEmptyTable'
 import { cn } from '@/modules/shared/lib/utils'
 import { OpenModalTransparency } from '../open-modal-transparency'
 import { NumberCell } from './number-cell'

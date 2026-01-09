@@ -57,14 +57,7 @@ function BreakdownActualsSection({
             items={breakdownItemsForActiveTab}
             longCode="longCode"
             cardSpacingSize="small"
-            tablePlaceholder={
-              // <BudgetStatementsPlaceholder
-              //   longCode={longCode}
-              //   shortCode={shortCode}
-              //   resource={resource}
-              // />
-              <div>placeholder here...</div>
-            }
+            tablePlaceholder={<div>placeholder here...</div>}
           />
         </div>
       )}
