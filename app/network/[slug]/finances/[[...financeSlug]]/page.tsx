@@ -63,9 +63,7 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
         )}
 
         {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
-          <Suspense fallback={<div>loading....</div>}>
-            <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
-          </Suspense>
+          <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
         <Suspense fallback={<BudgetStatementsSectionSkeleton />}>
