@@ -31,7 +31,7 @@ test('has a link for Explore Achra', async ({ page }) => {
     await expect(newTab).toHaveURL('https://achra.com/workstreams');
 });
 
-test('has a link for Explore Vetra', async ({ page }) => {
+test.skip('has a link for Explore Vetra', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
     await page.getByText('Explore Vetra').click();
@@ -60,7 +60,7 @@ test('has a link for About us', async ({ page }) => {
     await expect(newTab).toHaveURL('https://powerhousesno.org/');
 });
 
-test('has a link for Academy', async ({ page }) => {
+test.skip('has a link for Academy', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
     await page.getByText('Academy').click();

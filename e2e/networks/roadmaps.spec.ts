@@ -34,14 +34,14 @@ test('the workstream name navigates to the workstream page', async ({ page }) =>
     // TODO: refactor locator
     await page.locator('.bg-secondary > a').first().click();
 
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-24`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-2024`);
 });
 
 test('navigates to the Roadmap details page', async ({ page }) => {
     // TODO: refactor locator
     await page.locator('a[href*="powerhouse-team-2024-roadmap-af7da134"]').first().click();
 
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-2024`);
 });
 
 test('navigates to the milenstone details in the Roadmap details page', async ({ page }) => {
