@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
+// import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card-content'
 import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdonw-chart/breakdown-chart-card-wrapper'
 import BudgetStatementsSection from '@/modules/finances/components/budget-statements-section/budget-statements-section'
 import { BudgetStatementsSectionSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-skeleton/budget-statements-section-skeleton'
@@ -24,9 +25,12 @@ interface FinancesPageProps {
     slug: string
     financeSlug?: string[]
   }>
+  searchParams: Promise<{
+    year: string
+  }>
 }
 
-export default function FinancesPage({ params }: FinancesPageProps) {
+export default function FinancesPage({ params, searchParams }: FinancesPageProps) {
   return (
     <main>
       <PageBreadcrumbContainer>
@@ -61,7 +65,7 @@ export default function FinancesPage({ params }: FinancesPageProps) {
 
         {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
           <Suspense fallback={<div>loading....</div>}>
-            <BreakdownChartCardWrapper params={params} />
+            <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
           </Suspense>
         )}
 

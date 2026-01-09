@@ -8,15 +8,22 @@ interface SummarySectionProps {
     slug: string
     financeSlug?: string[]
   }>
+  searchParams: Promise<{
+    year: string
+  }>
 }
 
-export async function BreakdownChartCardWrapper({ params }: Readonly<SummarySectionProps>) {
+export async function BreakdownChartCardWrapper({
+  params,
+  searchParams,
+}: Readonly<SummarySectionProps>) {
   const { financeSlug } = await params
+  const year = (await searchParams).year
   const codePath = getCodePathFromParams(financeSlug)
   const levelNumber = getLevelOfDetail(codePath)
   const budgetsAnalytics = await getBudgetsAnalytics({
     granularity: 'monthly',
-    year: '2025',
+    year,
     select: 'budget',
     lod: levelNumber.levelOfDetail,
     budgets: BUDGETS,
