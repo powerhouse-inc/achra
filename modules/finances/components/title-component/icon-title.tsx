@@ -24,7 +24,7 @@ export default function IconTitleWithCode({ icon, title, className, code }: Read
         )}
       >
         <Image
-          src={icon || '/default-icon-cards-budget.svg'}
+          src={icon ?? '/default-icon-cards-budget.svg'}
           width={42}
           height={42}
           alt="Picture"

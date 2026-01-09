@@ -28,7 +28,7 @@ const hasVariablesTypeGuard = <TQuery extends QueryWithKey>(
 ): variables is {
   variables: QueryParams<TQuery>[0]
   next?: NextFetchRequestConfig
-} => !!Object.keys(variables || {}).length
+} => !!Object.keys(variables ?? {}).length
 
 type ServerPreFetchOptions<TQuery extends QueryWithKey> = Parameters<TQuery>[0] extends
   | Exact<Record<string, never>>

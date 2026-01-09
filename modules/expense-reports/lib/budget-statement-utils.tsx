@@ -21,7 +21,7 @@ export const hasGroupExpenses = (
   isHeadcount = true,
 ) =>
   wallet.budgetStatementLineItem
-    ?.filter(
+    .filter(
       (item) =>
         !!item.headcountExpense === isHeadcount &&
         (item.group === group || (!item.group && !group)),
@@ -31,7 +31,7 @@ export const hasGroupExpenses = (
 export const getGroupActual = (group: BudgetStatementLineItem[], month: string) =>
   sumBy(
     group.filter((item) => item.month === month),
-    (item) => item.actual ?? 0,
+    (item) => item.actual,
   )
 
 export const getWalletMonthlyBudget = (wallet: BudgetStatementWallet, month: string) =>
@@ -42,8 +42,8 @@ export const getWalletMonthlyBudget = (wallet: BudgetStatementWallet, month: str
 
 export const getWalletActual = (wallet: BudgetStatementWallet, month: string) =>
   sumBy(
-    wallet?.budgetStatementLineItem.filter((item) => item.month === month),
-    (i) => i.actual ?? 0,
+    wallet.budgetStatementLineItem.filter((item) => item.month === month),
+    (i) => i.actual,
   )
 
 export const getGroupMonthlyBudget = (group: BudgetStatementLineItem[], month: string) =>
@@ -78,7 +78,7 @@ export const getGroupPayment = (group: BudgetStatementLineItem[], month: string)
 
 export const getWalletPayment = (wallet: BudgetStatementWallet, month: string) =>
   sumBy(
-    wallet?.budgetStatementLineItem.filter((item) => item.month === month),
+    wallet.budgetStatementLineItem.filter((item) => item.month === month),
     (i) => i.payment ?? 0,
   )
 
@@ -118,7 +118,7 @@ export const hasExpensesInRange = (
   return lineItems.some((item) => {
     if (!!item.headcountExpense !== isHeadcount) return false
     if (item.month === formattedCurrentMonth) return !!item.budgetCap
-    return formattedMonths.includes(item.month ?? '') && (item.budgetCap || item.forecast)
+    return formattedMonths.includes(item.month ?? '') && (item.budgetCap ?? item.forecast)
   })
 }
 
@@ -129,19 +129,19 @@ export const getForecastForMonthOnWalletOnBudgetStatement = (
   month: DateTime,
 ) => {
   const budgetStatement =
-    budgetStatements?.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
+    budgetStatements.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
 
   if (!budgetStatement || !walletAddress) return 0
 
   const wallet =
-    budgetStatement?.budgetStatementWallet?.find(
-      (x) => x.address?.toLowerCase() === walletAddress?.toLowerCase(),
+    budgetStatement.budgetStatementWallet.find(
+      (x) => x.address.toLowerCase() === walletAddress.toLowerCase(),
     ) ?? null
 
   if (!wallet) return 0
 
   return sumBy(
-    wallet?.budgetStatementLineItem.filter(
+    wallet.budgetStatementLineItem.filter(
       (item) => item.month === month.toFormat(API_MONTH_TO_FORMAT),
     ),
     (i) => i.forecast ?? 0,
@@ -155,20 +155,20 @@ export const getBudgetCapForMonthOnWalletOnBudgetStatement = (
   month: DateTime,
 ) => {
   const budgetStatement =
-    budgetStatements?.find((x) => x.month === currentMonth?.toFormat(API_MONTH_TO_FORMAT)) ?? null
+    budgetStatements.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
 
   if (!budgetStatement || !walletAddress) return 0
 
   const wallet =
-    budgetStatement?.budgetStatementWallet?.find(
-      (x) => x.address?.toLowerCase() === walletAddress?.toLowerCase(),
+    budgetStatement.budgetStatementWallet.find(
+      (x) => x.address.toLowerCase() === walletAddress.toLowerCase(),
     ) ?? null
 
   if (!wallet) return 0
 
   return sumBy(
-    wallet?.budgetStatementLineItem.filter(
-      (item) => item.month === month?.toFormat(API_MONTH_TO_FORMAT),
+    wallet.budgetStatementLineItem.filter(
+      (item) => item.month === month.toFormat(API_MONTH_TO_FORMAT),
     ),
     (i) => i.budgetCap ?? 0,
   )
@@ -224,11 +224,11 @@ export const getForecastSumForMonth = (
   month: DateTime,
 ) => {
   const budgetStatement =
-    budgetStatements?.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
+    budgetStatements.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
 
   return sumBy(budgetStatement?.budgetStatementWallet, (wallet) =>
     sumBy(
-      wallet?.budgetStatementLineItem?.filter(
+      wallet.budgetStatementLineItem.filter(
         (item) => item.month === month.toFormat(API_MONTH_TO_FORMAT),
       ),
       (item) => item.forecast ?? 0,
@@ -256,11 +256,11 @@ export const getBudgetCapForMonthOnBudgetStatement = (
   month: DateTime,
 ) => {
   const budgetStatement =
-    budgetStatements?.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
+    budgetStatements.find((x) => x.month === currentMonth.toFormat(API_MONTH_TO_FORMAT)) ?? null
 
   return sumBy(budgetStatement?.budgetStatementWallet, (wallet) =>
     sumBy(
-      wallet?.budgetStatementLineItem?.filter(
+      wallet.budgetStatementLineItem.filter(
         (item) => item.month === month.toFormat(API_MONTH_TO_FORMAT),
       ),
       (item) => item.budgetCap ?? 0,
@@ -279,7 +279,7 @@ export const getTotalQuarterlyBudgetCapOnBudgetStatement = (
   wallets.forEach((wallet) => {
     result += getBudgetCapSumOfMonthsOnWallet(
       budgetStatements,
-      wallet?.address?.toLowerCase() || '',
+      wallet.address.toLowerCase(),
       currentMonth,
       months,
     )
@@ -294,7 +294,7 @@ export const getLineItemsForWalletOnMonth = (
   month: DateTime,
   walletAddress: string,
 ) => {
-  const budgetStatement = budgetStatements?.find(
+  const budgetStatement = budgetStatements.find(
     (bs) => bs.month === currentMonth.toFormat(API_MONTH_TO_FORMAT),
   )
 
@@ -302,7 +302,7 @@ export const getLineItemsForWalletOnMonth = (
 
   return (
     budgetStatement.budgetStatementWallet
-      ?.find((wallet) => wallet.address?.toLowerCase() === walletAddress?.toLowerCase())
+      .find((wallet) => wallet.address.toLowerCase() === walletAddress.toLowerCase())
       ?.budgetStatementLineItem.filter(
         (item) => item.month === month.toFormat(API_MONTH_TO_FORMAT),
       ) ?? []
@@ -377,8 +377,8 @@ export const getTransferRequestTargetBalanceColumn = (wallet: BudgetStatementWal
     'target' | 'walletBalanceTimeStamp'
   > = {} as BudgetStatementTransferRequest
 
-  const lastIndex = (wallet?.budgetStatementTransferRequest ?? []).length - 1
-  if (wallet?.budgetStatementTransferRequest && wallet.budgetStatementTransferRequest.length > 0) {
+  const lastIndex = wallet.budgetStatementTransferRequest.length - 1
+  if (wallet.budgetStatementTransferRequest.length > 0) {
     targetWithTimeSpan.target = wallet.budgetStatementTransferRequest[lastIndex].target
     targetWithTimeSpan.walletBalanceTimeStamp =
       wallet.budgetStatementTransferRequest[lastIndex]?.walletBalanceTimeStamp
