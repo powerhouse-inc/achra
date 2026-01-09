@@ -1,7 +1,7 @@
 'use client'
+import { type ReactNode, Suspense } from 'react'
 import { Card } from '@/shared/components/ui/card'
 import TitleFilterSection from './title-filter-section'
-import type { ReactNode } from 'react'
 
 interface BreakdownChartCardProps {
   children: ReactNode
@@ -10,7 +10,9 @@ interface BreakdownChartCardProps {
 export default function BreakdownChartCard({ children }: Readonly<BreakdownChartCardProps>) {
   return (
     <Card className="bg-popover flex w-full flex-col gap-4 border-none p-2 pb-4 shadow-xs md:p-4 lg:p-6">
-      <TitleFilterSection />
+      <Suspense fallback={<div className="h-20 animate-pulse" />}>
+        <TitleFilterSection />
+      </Suspense>
       {children}
     </Card>
   )
