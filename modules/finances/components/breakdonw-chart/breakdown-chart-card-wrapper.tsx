@@ -1,26 +1,24 @@
-import { BUDGETS } from '../../mocks'
-import { getCodePathFromParams, getLevelOfDetail } from '../../utils'
+import { Suspense } from 'react'
 import BreakdownChartCard from './breakdown-chart-card'
-import { getBudgetsAnalytics } from './service/service'
+import { BreakdownChartDataFetcher } from './breakdown-data-fetcher'
+import BreakdownChartSkeleton from './skeleton/BreakdownChartSkeleton'
 
 interface SummarySectionProps {
   params: Promise<{
     slug: string
     financeSlug?: string[]
   }>
+  searchParams: Promise<{
+    year: string
+  }>
 }
 
-export async function BreakdownChartCardWrapper({ params }: Readonly<SummarySectionProps>) {
-  const { financeSlug } = await params
-  const codePath = getCodePathFromParams(financeSlug)
-  const levelNumber = getLevelOfDetail(codePath)
-  const budgetsAnalytics = await getBudgetsAnalytics({
-    granularity: 'monthly',
-    year: '2025',
-    select: 'budget',
-    lod: levelNumber.levelOfDetail,
-    budgets: BUDGETS,
-  })
-
-  return <BreakdownChartCard params={financeSlug} budgetsAnalytics={budgetsAnalytics} />
+export function BreakdownChartCardWrapper({ params, searchParams }: Readonly<SummarySectionProps>) {
+  return (
+    <BreakdownChartCard>
+      <Suspense fallback={<BreakdownChartSkeleton />}>
+        <BreakdownChartDataFetcher params={params} searchParams={searchParams} />
+      </Suspense>
+    </BreakdownChartCard>
+  )
 }
