@@ -19,7 +19,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2025-12-09T15:08:29.855Z',
     scopes: [BuilderScope.SupportScope],
-    skils: [
+    skills: [
       BuilderSkill.FullStackDevelopment,
       BuilderSkill.DataEngineering,
       BuilderSkill.TechnicalWriting,
@@ -46,7 +46,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Individual,
     lastModified: '2025-11-21T18:06:41.930Z',
     scopes: [],
-    skils: [BuilderSkill.FrontendDevelopment, BuilderSkill.TechnicalWriting],
+    skills: [BuilderSkill.FrontendDevelopment, BuilderSkill.TechnicalWriting],
     links: [{ id: 'link-teep-twitter', label: 'Twitter', url: 'https://twitter.com/teep' }],
     contributors: [],
   },
@@ -61,7 +61,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Individual,
     lastModified: '2025-12-09T15:08:06.862Z',
     scopes: [BuilderScope.SupportScope],
-    skils: [
+    skills: [
       BuilderSkill.FullStackDevelopment,
       BuilderSkill.UiUxDesign,
       BuilderSkill.QaTesting,
@@ -81,7 +81,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Individual,
     lastModified: '2025-11-24T12:09:57.444Z',
     scopes: [],
-    skils: [BuilderSkill.DevopsEngineering],
+    skills: [BuilderSkill.DevopsEngineering],
     links: [{ id: 'link-apeiron-profile', label: 'Profile', url: 'https://twitter.com/apeiron' }],
     contributors: [],
   },
@@ -96,7 +96,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-12-01T12:00:00.000Z',
     scopes: [BuilderScope.ProtocolScope, BuilderScope.StabilityScope],
-    skils: [
+    skills: [
       BuilderSkill.SmartContractDevelopment,
       BuilderSkill.SecurityEngineering,
       BuilderSkill.DevopsEngineering,
@@ -115,7 +115,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-11-02T09:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
-    skils: [
+    skills: [
       BuilderSkill.DataEngineering,
       BuilderSkill.BackendDevelopment,
       BuilderSkill.FrontendDevelopment,
@@ -134,7 +134,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-10-01T09:00:00.000Z',
     scopes: [BuilderScope.StabilityScope, BuilderScope.SupportScope],
-    skils: [
+    skills: [
       BuilderSkill.DevopsEngineering,
       BuilderSkill.BackendDevelopment,
       BuilderSkill.QaTesting,
@@ -153,7 +153,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-09-12T10:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
-    skils: [BuilderSkill.TechnicalWriting, BuilderSkill.DataEngineering],
+    skills: [BuilderSkill.TechnicalWriting, BuilderSkill.DataEngineering],
     links: [
       { id: 'link-governguard-report', label: 'Reports', url: 'https://govern-guard.example.com' },
     ],
@@ -170,7 +170,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-08-05T14:30:00.000Z',
     scopes: [BuilderScope.Acc],
-    skils: [
+    skills: [
       BuilderSkill.UiUxDesign,
       BuilderSkill.FrontendDevelopment,
       BuilderSkill.TechnicalWriting,
@@ -191,7 +191,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-07-18T11:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
-    skils: [BuilderSkill.SecurityEngineering, BuilderSkill.BackendDevelopment],
+    skills: [BuilderSkill.SecurityEngineering, BuilderSkill.BackendDevelopment],
     links: [
       { id: 'link-rwascouts-briefs', label: 'Briefs', url: 'https://rwa-scouts.example.com' },
     ],
@@ -208,7 +208,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Team,
     lastModified: '2024-06-22T08:00:00.000Z',
     scopes: [BuilderScope.ProtocolScope],
-    skils: [
+    skills: [
       BuilderSkill.DataEngineering,
       BuilderSkill.BackendDevelopment,
       BuilderSkill.SmartContractDevelopment,
@@ -227,7 +227,7 @@ export const mockBuilderTeams: Builder[] = [
     type: TeamType.Individual,
     lastModified: '2024-05-10T16:45:00.000Z',
     scopes: [BuilderScope.SupportScope],
-    skils: [BuilderSkill.TechnicalWriting, BuilderSkill.UiUxDesign],
+    skills: [BuilderSkill.TechnicalWriting, BuilderSkill.UiUxDesign],
     links: [{ id: 'link-docuhub-docs', label: 'Docs', url: 'https://docu-hub.example.com' }],
     contributors: [],
   },

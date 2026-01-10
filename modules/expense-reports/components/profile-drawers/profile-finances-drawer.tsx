@@ -12,7 +12,11 @@ import {
 import { useBuilderDrawerState } from '../../hooks/use-builder-drawer-state'
 import { ProfileFinancesCardContent } from '../profile-card-content'
 
-function ProfileFinancesDrawer() {
+interface ProfileFinancesDrawerProps {
+  builderSlug: string
+}
+
+function ProfileFinancesDrawer({ builderSlug }: ProfileFinancesDrawerProps) {
   const [open, setOpen] = useBuilderDrawerState()
 
   return (
@@ -32,7 +36,7 @@ function ProfileFinancesDrawer() {
           <DrawerTitle>Finances</DrawerTitle>
         </VisuallyHidden>
         <div className="px-4 pb-8">
-          <ProfileFinancesCardContent />
+          <ProfileFinancesCardContent builderSlug={builderSlug} />
         </div>
       </DrawerContent>
     </Drawer>

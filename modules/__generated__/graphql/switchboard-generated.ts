@@ -148,7 +148,7 @@ export type Builder = {
   links: Array<BuilderLink>;
   name: Scalars['String']['output'];
   scopes: Array<BuilderScope>;
-  skils: Array<BuilderSkill>;
+  skills: Array<BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderStatus>;
   type: TeamType;
@@ -213,7 +213,7 @@ export type BuilderProfileState = {
   name?: Maybe<Scalars['String']['output']>;
   projects: Array<BuilderProject>;
   scopes: Array<BuilderScope>;
-  skils: Array<BuilderSkill>;
+  skills: Array<BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderStatus>;
   type: TeamType;
@@ -246,6 +246,7 @@ export type BuilderProfile_BuilderLink = {
 
 export type BuilderProfile_BuilderProfileState = {
   __typename?: 'BuilderProfile_BuilderProfileState';
+  about?: Maybe<Scalars['String']['output']>;
   code?: Maybe<Scalars['String']['output']>;
   contributors: Array<Scalars['PHID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -255,7 +256,7 @@ export type BuilderProfile_BuilderProfileState = {
   links: Array<BuilderProfile_BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
   scopes: Array<BuilderProfile_BuilderScope>;
-  skils: Array<BuilderProfile_BuilderSkill>;
+  skills: Array<BuilderProfile_BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderProfile_BuilderStatus>;
   type: BuilderProfile_TeamType;
@@ -347,6 +348,7 @@ export type BuilderProfile_RemoveSkillInput = {
 
 /** Module: Builders */
 export type BuilderProfile_UpdateProfileInput = {
+  about?: InputMaybe<Scalars['String']['input']>;
   code?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['URL']['input']>;
@@ -2403,7 +2405,6 @@ export type ProcessorWorkstream = {
   initial_proposal_status?: Maybe<ProposalStatus>;
   network_phid?: Maybe<Scalars['PHID']['output']>;
   network_slug?: Maybe<Scalars['String']['output']>;
-  roadmap_oid?: Maybe<Scalars['PHID']['output']>;
   sow_phid?: Maybe<Scalars['PHID']['output']>;
   workstream_phid?: Maybe<Scalars['PHID']['output']>;
   workstream_slug?: Maybe<Scalars['String']['output']>;
@@ -3748,14 +3749,14 @@ export type BuilderProfileQueryVariables = Exact<{
 }>;
 
 
-export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skils: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
+export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
 
 export type BuildersListQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
 }>;
 
 
-export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skils: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> };
+export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> };
 
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
@@ -3837,7 +3838,7 @@ export const BuilderProfileDocument = `
     }
     name
     scopes
-    skils
+    skills
     slug
     status
     type
@@ -3927,7 +3928,7 @@ export const BuildersListDocument = `
     }
     name
     scopes
-    skils
+    skills
     slug
     status
     type
