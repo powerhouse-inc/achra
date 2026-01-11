@@ -61,7 +61,7 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
               <div className="hidden gap-2 md:flex">
                 {/* NOTE: There is a misspelling of skills in the builder profile state. The backend
                 team is aware of this issue. */}
-                {builder.skils.map((skill) => (
+                {builder.skills.map((skill) => (
                   <BuildersSkillsChip key={`${skill}-mobile`} skill={skill} />
                 ))}
               </div>
@@ -74,7 +74,7 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
         </div>
 
         <div className="block md:hidden">
-          {builder.skils.map((skill) => (
+          {builder.skills.map((skill) => (
             <BuildersSkillsChip key={`${skill}-desktop`} skill={skill} />
           ))}
         </div>

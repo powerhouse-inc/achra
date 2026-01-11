@@ -4,7 +4,11 @@ import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
-function ProfileFinancesCardContent() {
+interface ProfileFinancesCardContentProps {
+  builderSlug: string
+}
+
+function ProfileFinancesCardContent({ builderSlug }: ProfileFinancesCardContentProps) {
   return (
     <div className="flex flex-col gap-4">
       <p className="text-foreground/50 text-sm/4.5 font-semibold">
@@ -12,11 +16,13 @@ function ProfileFinancesCardContent() {
       </p>
 
       <div className="flex gap-4">
-        <InternalLink href={'/network/powerhouse/builders/builder-1/expense-reports' as Route}>
+        <InternalLink href={`/network/powerhouse/builders/${builderSlug}/expense-reports` as Route}>
           Budget Statements
         </InternalLink>
         {ff.builders.FINANCES_LINK_ENABLED && (
-          <InternalLink href={'/network/powerhouse/builders/builder-1/expense-reports' as Route}>
+          <InternalLink
+            href={`/network/powerhouse/builders/${builderSlug}/expense-reports` as Route}
+          >
             Finances
           </InternalLink>
         )}
