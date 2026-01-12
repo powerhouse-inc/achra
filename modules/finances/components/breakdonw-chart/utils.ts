@@ -422,7 +422,6 @@ export const parseAnalyticsToSeriesBreakDownChart = (
       }
     })
   }
-  // console.log('>>>>>series>>>>>>>', series)
   return series
 }
 
@@ -491,4 +490,14 @@ export const setBorderRadiusForSeries = (
   }
 
   return series
+}
+
+export const getMetricValue = (stringMetric: string): AnalyticMetric => {
+  const getMetric =
+    stringMetric === 'Net Protocol Outflow'
+      ? 'ProtocolNetOutflow'
+      : stringMetric === 'Net Expenses On-Chain'
+        ? 'PaymentsOnChain'
+        : stringMetric
+  return getMetric as AnalyticMetric
 }

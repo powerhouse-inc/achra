@@ -1,9 +1,15 @@
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { useMemo, useRef, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { type BreakdownBudgetAnalytic, type Budget, GRANULARITY_OPTIONS } from '../../types'
+import {
+  type BreakdownBudgetAnalytic,
+  type Budget,
+  GRANULARITY_OPTIONS,
+  METRIC_OPTIONS,
+} from '../../types'
 import {
   getBarWidth,
+  getMetricValue,
   parseAnalyticsToSeriesBreakDownChart,
   setBorderRadiusForSeries,
 } from './utils'
@@ -27,6 +33,11 @@ export default function useBreakdownChart({
     'granularity',
     parseAsStringEnum(Object.values(GRANULARITY_OPTIONS)).withDefault(GRANULARITY_OPTIONS.Monthly),
   )
+  const [selectedMetric] = useQueryState(
+    'metric',
+    parseAsStringEnum(Object.values(METRIC_OPTIONS)).withDefault(METRIC_OPTIONS.Budget),
+  )
+
   const [isChecked, setIsChecked] = useState(true)
   const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
@@ -45,15 +56,15 @@ export default function useBreakdownChart({
     isDesktop1280 || isDesktop1536Plus,
     selectedGranularity,
   )
-  // get this from the url using nuqs
-  const selectedMetric = 'Budget'
+
+  const getMetric = getMetricValue(selectedMetric)
 
   const allSeries = useMemo(() => {
     const seriesWithoutBorder = parseAnalyticsToSeriesBreakDownChart(
       budgetsAnalytics,
       budgets,
       barWidth,
-      selectedMetric,
+      getMetric,
       allBudgets,
     )
 
@@ -64,7 +75,7 @@ export default function useBreakdownChart({
       const sumB = b.data.reduce((acc, cur) => acc + (cur.value ?? 0), 0)
       return sumB - sumA
     })
-  }, [allBudgets, barBorderRadius, barWidth, budgets, budgetsAnalytics, selectedMetric])
+  }, [allBudgets, barBorderRadius, barWidth, budgets, budgetsAnalytics, getMetric])
 
   const series = useMemo(() => {
     const parsedSeries = allSeries.map((item) => {

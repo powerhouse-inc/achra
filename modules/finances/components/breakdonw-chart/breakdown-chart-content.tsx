@@ -37,7 +37,6 @@ export default function BreakdownChartContent({
     year,
     codePath,
   })
-  console.log('selectedGranularity', selectedGranularity)
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-6 md:flex-row 2xl:gap-8">
       <div className="flex min-w-0 flex-1">
