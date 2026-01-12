@@ -6,36 +6,35 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
+import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { formatBudgetName, removeBudgetWord } from '../../utils'
 import {
   formatterBreakdownChart,
   getChartAxisLabelByGranularity,
+  getCorrectGranularity,
   getMonthAbbreviationToolTip,
   getSelectMetricText,
   replaceAllNumberLetOneBeforeDot,
 } from './utils'
-import type {
-  AnalyticGranularityForBreakdownChart,
-  BarChartSeries,
-  BreakdownChartSeriesData,
-} from './types'
-import type { AnalyticMetric } from '../../types'
+import type { BarChartSeries, BreakdownChartSeriesData } from './types'
+import type { AnalyticMetric, GRANULARITY_OPTIONS } from '../../types'
 
 interface BreakdownChartProps {
   year: string
-  selectedGranularity: AnalyticGranularityForBreakdownChart
+  selectedGranularity: GRANULARITY_OPTIONS
   series: BreakdownChartSeriesData[]
   refBreakDownChart: React.RefObject<EChartsOption>
   selectedMetric?: AnalyticMetric
 }
 
 export default function BreakdownChart({
-  year,
   refBreakDownChart,
   series,
   selectedGranularity,
   selectedMetric,
 }: Readonly<BreakdownChartProps>) {
+  const { year } = useFinancesYear()
+  const granularity = getCorrectGranularity(selectedGranularity)
   const isLessMobile = useMediaQuery({ to: 'sm' })
   const isMobile = useMediaQuery({ from: 'sm', to: 'md' })
   const isTablet = useMediaQuery({ from: 'md', to: 'lg' })
@@ -45,8 +44,7 @@ export default function BreakdownChart({
 
   const isMobileOrLess = isMobile || isLessMobile
   const showLineYear =
-    (isMobile || isLessMobile) &&
-    (selectedGranularity === 'monthly' || selectedGranularity === 'quarterly')
+    (isMobile || isLessMobile) && (granularity === 'monthly' || granularity === 'quarterly')
 
   // Values for the grid
   const getHeightGrid = useCallback(() => {
@@ -224,7 +222,7 @@ export default function BreakdownChart({
       xAxis: {
         show: true,
         type: 'category',
-        data: getChartAxisLabelByGranularity(selectedGranularity, isMobileOrLess, false, true),
+        data: getChartAxisLabelByGranularity(granularity, isMobileOrLess, false, true),
         splitLine: {
           show: false,
         },
@@ -249,7 +247,7 @@ export default function BreakdownChart({
           interval: 0,
           formatter(value: string) {
             const formatted = formatterBreakdownChart(
-              selectedGranularity,
+              granularity,
               isMobile,
               year,
               value,
@@ -298,22 +296,23 @@ export default function BreakdownChart({
       series,
     }),
     [
-      getHeightGrid,
-      getMarginXAxis,
-      getMarginYAxis,
-      getRightGrid,
-      getTopGrid,
-      getYAxisFontSize,
-      isDesktop1024,
-      isLessMobile,
       isMobile,
+      getHeightGrid,
+      getTopGrid,
+      getRightGrid,
+      granularity,
       isMobileOrLess,
-      isTablet,
-      selectedGranularity,
-      selectedMetric,
-      series,
+      getMarginXAxis,
       xAxisStyles,
+      series,
+      getMarginYAxis,
+      getYAxisFontSize,
+      isTablet,
+      isDesktop1024,
+      selectedGranularity,
       year,
+      selectedMetric,
+      isLessMobile,
     ],
   )
 
