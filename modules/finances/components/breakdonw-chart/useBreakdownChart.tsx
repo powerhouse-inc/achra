@@ -1,11 +1,18 @@
+import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { useMemo, useRef, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
+  type BreakdownBudgetAnalytic,
+  type Budget,
+  GRANULARITY_OPTIONS,
+  METRIC_OPTIONS,
+} from '../../types'
+import {
   getBarWidth,
+  getMetricValue,
   parseAnalyticsToSeriesBreakDownChart,
   setBorderRadiusForSeries,
 } from './utils'
-import type { BreakdownBudgetAnalytic, Budget } from '../../types'
 import type { EChartsOption } from 'echarts-for-react'
 interface BreakdownChartProps {
   budgetsAnalytics: BreakdownBudgetAnalytic | undefined
@@ -19,42 +26,45 @@ export default function useBreakdownChart({
   budgetsAnalytics,
   budgets,
   allBudgets,
-  // This is a work still in progress this values are need when API is ready
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  year,
-  // This is a work still in progress this values are need when API is ready
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   codePath,
 }: Readonly<BreakdownChartProps>) {
   const refBreakDownChart = useRef<EChartsOption>(null)
+  const [selectedGranularity] = useQueryState(
+    'granularity',
+    parseAsStringEnum(Object.values(GRANULARITY_OPTIONS)).withDefault(GRANULARITY_OPTIONS.Monthly),
+  )
+  const [selectedMetric] = useQueryState(
+    'metric',
+    parseAsStringEnum(Object.values(METRIC_OPTIONS)).withDefault(METRIC_OPTIONS.Budget),
+  )
+
   const [isChecked, setIsChecked] = useState(true)
   const isMobile = useMediaQuery({ to: 'sm' })
   const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
   const isDesktop1024 = useMediaQuery({ from: 'lg', to: 'xl' })
   const isDesktop1280 = useMediaQuery({ from: 'xl', to: '2xl' })
+  const isDesktop1536Plus = useMediaQuery({ from: '2xl' })
 
   const [inactiveSeries, setInactiveSeries] = useState<string[]>([])
   const levelNumber = codePath.split('/').length
   const barBorderRadius = isMobile ? 2 : 4
 
-  // get this from the url using nuqs
-  const selectedGranularity = 'monthly'
   const barWidth = getBarWidth(
     isMobile,
     isTablet,
     isDesktop1024,
-    isDesktop1280,
+    isDesktop1280 || isDesktop1536Plus,
     selectedGranularity,
   )
-  // get this from the url using nuqs
-  const selectedMetric = 'Budget'
+
+  const getMetric = getMetricValue(selectedMetric)
 
   const allSeries = useMemo(() => {
     const seriesWithoutBorder = parseAnalyticsToSeriesBreakDownChart(
       budgetsAnalytics,
       budgets,
       barWidth,
-      selectedMetric,
+      getMetric,
       allBudgets,
     )
 
@@ -65,7 +75,7 @@ export default function useBreakdownChart({
       const sumB = b.data.reduce((acc, cur) => acc + (cur.value ?? 0), 0)
       return sumB - sumA
     })
-  }, [allBudgets, barBorderRadius, barWidth, budgets, budgetsAnalytics, selectedMetric])
+  }, [allBudgets, barBorderRadius, barWidth, budgets, budgetsAnalytics, getMetric])
 
   const series = useMemo(() => {
     const parsedSeries = allSeries.map((item) => {
@@ -134,5 +144,6 @@ export default function useBreakdownChart({
     onLegendItemLeave,
     refBreakDownChart,
     showLegendValue,
+    selectedGranularity,
   }
 }

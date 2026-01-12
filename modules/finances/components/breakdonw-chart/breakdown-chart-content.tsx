@@ -9,11 +9,13 @@ import type { BreakdownBudgetAnalytic } from './types'
 interface BreakdownChartContentProps {
   params?: string[]
   budgetsAnalytics: BreakdownBudgetAnalytic
+  year: string
 }
 
 export default function BreakdownChartContent({
   params,
   budgetsAnalytics,
+  year,
 }: Readonly<BreakdownChartContentProps>) {
   const codePath = getCodePathFromParams(params)
   const budgets = getBudgetsByCodePath(codePath, BUDGETS)
@@ -27,21 +29,21 @@ export default function BreakdownChartContent({
     onLegendItemHover,
     onLegendItemLeave,
     showLegendValue,
+    selectedGranularity,
   } = useBreakdownChart({
     budgetsAnalytics,
     budgets,
     allBudgets: ATLAS_BUDGETS,
-    year: '2025',
+    year,
     codePath,
   })
-
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-6 md:flex-row 2xl:gap-8">
       <div className="flex min-w-0 flex-1">
         <BreakdownChart
           refBreakDownChart={refBreakDownChart}
-          year="2025"
-          selectedGranularity="monthly"
+          year={year}
+          selectedGranularity={selectedGranularity}
           series={series}
           selectedMetric="Budget"
         />

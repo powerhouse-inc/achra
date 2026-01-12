@@ -1,6 +1,7 @@
 import { BUDGETS } from '../../mocks'
 import { getCodePathFromParams, getLevelOfDetail } from '../../utils'
 import BreakdownChartContent from './breakdown-chart-content'
+import { breakdownChartSearchParamsCache } from './lib'
 import { getBudgetsAnalytics } from './service/service'
 
 interface SummarySectionProps {
@@ -8,9 +9,7 @@ interface SummarySectionProps {
     slug: string
     financeSlug?: string[]
   }>
-  searchParams: Promise<{
-    year: string
-  }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
 export async function BreakdownChartDataFetcher({
@@ -18,17 +17,18 @@ export async function BreakdownChartDataFetcher({
   searchParams,
 }: Readonly<SummarySectionProps>) {
   const { financeSlug } = await params
-  const year = (await searchParams).year
-
+  const { metric, year, granularity } = breakdownChartSearchParamsCache.parse(await searchParams)
   const codePath = getCodePathFromParams(financeSlug)
   const levelNumber = getLevelOfDetail(codePath)
   const budgetsAnalytics = await getBudgetsAnalytics({
-    granularity: 'monthly',
+    granularity,
     year,
-    select: 'budget',
+    select: metric,
     lod: levelNumber.levelOfDetail,
     budgets: BUDGETS,
   })
 
-  return <BreakdownChartContent params={financeSlug} budgetsAnalytics={budgetsAnalytics} />
+  return (
+    <BreakdownChartContent params={financeSlug} budgetsAnalytics={budgetsAnalytics} year={year} />
+  )
 }
