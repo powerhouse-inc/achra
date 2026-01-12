@@ -1,9 +1,14 @@
 import { notFound } from 'next/navigation'
-import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header'
+import { Suspense } from 'react'
+import {
+  BuilderProfileHeader,
+  BuilderProfileHeaderSkeleton,
+} from '@/modules/builder-profile/components/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { BuilderBreadcrumb } from '@/modules/builders/components/builder-breadcrumb/builder-breadcrumb'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 
 interface BuildersProfileLayoutProps {
   params: Promise<{ slug: string; builderSlug: string }>
@@ -35,8 +40,11 @@ export default async function BuildersProfileLayout({
           builderName={builderName}
         />
       </PageBreadcrumbContainer>
-
-      <BuilderProfileHeader builder={builder} />
+      <ErrorBoundaryWithPresets>
+        <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
+          <BuilderProfileHeader builder={builder} />
+        </Suspense>
+      </ErrorBoundaryWithPresets>
       {children}
     </>
   )
