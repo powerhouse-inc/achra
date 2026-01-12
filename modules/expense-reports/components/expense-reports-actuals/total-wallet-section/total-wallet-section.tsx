@@ -14,7 +14,7 @@ function TotalWalletSection({
   mainTableItems,
 }: TotalWalletSectionProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4">
       <h2 className="text-lg/[120%] font-bold">
         Actuals - {currentMonth.toFormat('MMM yyyy')} Totals
       </h2>

@@ -27,38 +27,38 @@ function BreakdownActualsSection({
   onActualAccountTabChange,
 }: BreakdownActualsSectionProps) {
   return (
-    <div className="">
+    <div className="flex flex-col gap-4">
       {mainTableItems.length > 0 && (
-        <h2 className="mt-6 text-base/6 font-bold" ref={breakdownTitleRef}>
+        <h2 className="text-lg/[120%] font-bold" ref={breakdownTitleRef}>
           {currentMonth.toFormat('MMM yyyy')} Breakdown
         </h2>
       )}
 
       {mainTableItems.length > 0 && (
-        <Tabs
-          value={actualAccountTab ?? headerIds[0]}
-          onValueChange={onActualAccountTabChange}
-          className="w-[400px]"
-        >
-          <TabsList>
-            {breakdownTabs.map((header, index) => (
-              <TabsTrigger key={headerIds[index]} value={headerIds[index]}>
-                {header}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-      )}
+        <div className="flex flex-col gap-6">
+          <Tabs
+            value={actualAccountTab ?? headerIds[0]}
+            onValueChange={onActualAccountTabChange}
+            className="w-[400px]"
+          >
+            <TabsList>
+              {breakdownTabs.map((header, index) => (
+                <TabsTrigger key={headerIds[index]} value={headerIds[index]}>
+                  {header}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
 
-      {mainTableItems.length > 0 && (
-        <div>
-          <AdvancedInnerTable
-            columns={breakdownColumnsForActiveTab}
-            items={breakdownItemsForActiveTab}
-            longCode="longCode"
-            cardSpacingSize="small"
-            tablePlaceholder={<div>placeholder here...</div>}
-          />
+          <div>
+            <AdvancedInnerTable
+              columns={breakdownColumnsForActiveTab}
+              items={breakdownItemsForActiveTab}
+              longCode="longCode"
+              cardSpacingSize="small"
+              tablePlaceholder={<div>placeholder here...</div>}
+            />
+          </div>
         </div>
       )}
     </div>

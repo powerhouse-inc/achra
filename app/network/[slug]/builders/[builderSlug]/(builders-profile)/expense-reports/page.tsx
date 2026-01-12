@@ -63,9 +63,8 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
         </Suspense>
       )}
 
-      <div className="container mt-6 mb-8">
-        <h3>Additional Notes</h3>
-      </div>
+      {/* simulate the margin bottom of 32px */}
+      <div className="h-8" />
     </>
   )
 }
