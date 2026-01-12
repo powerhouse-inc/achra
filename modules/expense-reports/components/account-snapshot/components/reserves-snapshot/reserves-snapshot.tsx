@@ -92,7 +92,7 @@ function ReservesSnapshot({
         <div className="flex flex-col gap-6 md:gap-4">
           <SectionHeader
             title="On Chain Reserves"
-            subtitle={`Unspent On-Chain reserves to the ${teamName} Team.`}
+            subtitle={`Unspent on-chain reserves to the ${teamName} Team.`}
             tooltip={
               <>
                 Track and analyze the movement of <br /> On-Chain assets.
