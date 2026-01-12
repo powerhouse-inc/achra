@@ -8,9 +8,7 @@ interface SummarySectionProps {
     slug: string
     financeSlug?: string[]
   }>
-  searchParams: Promise<{
-    year: string
-  }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
 export function BreakdownChartCardWrapper({ params, searchParams }: Readonly<SummarySectionProps>) {

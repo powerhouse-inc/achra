@@ -1,4 +1,10 @@
 import {
+  type AnalyticMetric,
+  type Budget,
+  type BudgetMetric,
+  GRANULARITY_OPTIONS,
+} from '../../types'
+import {
   existingColors,
   newBudgetMetric,
   removePatternAfterSlash,
@@ -15,7 +21,6 @@ import type {
   BreakdownChartSeriesData,
   ValuesDataWithBorder,
 } from './types'
-import type { AnalyticMetric, Budget, BudgetMetric } from '../../types'
 
 export const removeBudgetWord = (name: string) => {
   const wordToRemove = /Budget\s*$/i
@@ -184,11 +189,11 @@ export const getBarWidth = (
   isTablet: boolean,
   isDesktop1024: boolean,
   isDesktop1280: boolean,
-  selectedGranularity: AnalyticGranularity,
+  selectedGranularity: GRANULARITY_OPTIONS,
 ) => {
   if (isMobile) {
-    if (selectedGranularity === 'quarterly') return 16
-    if (selectedGranularity === 'annual') return 96
+    if (selectedGranularity === 'Quarterly') return 16
+    if (selectedGranularity === 'Annually') return 96
     return 16
   } else if (isTablet) {
     return 23.8
@@ -197,8 +202,8 @@ export const getBarWidth = (
   } else if (isDesktop1280) {
     return 40
   } else {
-    if (selectedGranularity === 'annual') return 168
-    if (selectedGranularity === 'quarterly') return 64
+    if (selectedGranularity === 'Annually') return 168
+    if (selectedGranularity === 'Quarterly') return 64
     return 40
   }
 }
@@ -285,12 +290,27 @@ export const getCorrectMetric = (
   }
 }
 
+export const getCorrectGranularity = (granularity: GRANULARITY_OPTIONS) => {
+  switch (granularity) {
+    case GRANULARITY_OPTIONS.Monthly:
+      return 'monthly'
+    case GRANULARITY_OPTIONS.Quarterly:
+      return 'quarterly'
+    case GRANULARITY_OPTIONS.Annually:
+      return 'annual'
+    default:
+      return 'monthly'
+  }
+}
+
 export const getBreakdownAnalytics = (
   analytics: Analytic,
   budgets: Budget[],
-  granularity: AnalyticGranularityForBreakdownChart,
+  granularity: GRANULARITY_OPTIONS,
 ): BreakdownBudgetAnalytic => {
   const budgetsAnalytics: BreakdownBudgetAnalytic = {}
+
+  const analyticGranularity = getCorrectGranularity(granularity)
 
   if (Array.isArray(analytics.series) && analytics.series.length > 0) {
     // add all the data to budget analytics
@@ -299,7 +319,7 @@ export const getBreakdownAnalytics = (
         const codePath = row.dimensions[0].path
         if (!Object.hasOwn(budgetsAnalytics, codePath)) {
           // set empty values for the current code path
-          budgetsAnalytics[codePath] = getArrayAnalytic(granularity)
+          budgetsAnalytics[codePath] = getArrayAnalytic(analyticGranularity)
         }
 
         const budgetMetric = budgetsAnalytics[codePath][index] ?? newBudgetMetric()
@@ -331,7 +351,7 @@ export const getBreakdownAnalytics = (
   // in that case we need to add them with empty values
   budgets.forEach((budget) => {
     if (!Object.hasOwn(budgetsAnalytics, budget.codePath)) {
-      budgetsAnalytics[budget.codePath] = getArrayAnalytic(granularity)
+      budgetsAnalytics[budget.codePath] = getArrayAnalytic(analyticGranularity)
     }
   })
 
@@ -402,7 +422,6 @@ export const parseAnalyticsToSeriesBreakDownChart = (
       }
     })
   }
-  // console.log('>>>>>series>>>>>>>', series)
   return series
 }
 
@@ -471,4 +490,14 @@ export const setBorderRadiusForSeries = (
   }
 
   return series
+}
+
+export const getMetricValue = (stringMetric: string): AnalyticMetric => {
+  const getMetric =
+    stringMetric === 'Net Protocol Outflow'
+      ? 'ProtocolNetOutflow'
+      : stringMetric === 'Net Expenses On-Chain'
+        ? 'PaymentsOnChain'
+        : stringMetric
+  return getMetric as AnalyticMetric
 }
