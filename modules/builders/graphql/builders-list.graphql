@@ -12,7 +12,7 @@ query BuildersList($filter: buildersFilter) {
     }
     name
     scopes
-    skils
+    skills
     slug
     status
     type

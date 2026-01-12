@@ -34,7 +34,7 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
               />
               <div className="hidden flex-col gap-0.5 md:flex">
                 <span className="text-foreground/30 text-sm/5.5 font-semibold">Skills</span>
-                <BuilderSkills skills={builder.skils} />
+                <BuilderSkills skills={builder.skills} />
               </div>
               <div className="flex gap-4 md:gap-2">
                 <Links links={builder.links} />
@@ -48,7 +48,7 @@ export function BuildersList({ builders, networkSlug, className }: BuildersListP
                 <span className="text-foreground/30 text-xs/4.5 font-medium md:text-sm/5.5 md:font-semibold">
                   Skills
                 </span>
-                <BuilderSkills skills={builder.skils} />
+                <BuilderSkills skills={builder.skills} />
               </div>
             </CardContent>
             <Separator className="-mt-0.25" />
