@@ -1,4 +1,3 @@
-// Create a stroy for the Footer component
 import { Footer } from './footer'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
