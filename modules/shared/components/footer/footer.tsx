@@ -30,7 +30,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Visit Powerhouse website"
-            className="group text-foreground/50 bg-popover hover:bg-accent hover:text-accent-foreground dark:border-input dark:hover:bg-input/5 flex min-h-10 items-center gap-2 rounded-md border px-4 py-2 transition-colors"
+            className="group text-foreground/50 bg-popover hover:bg-accent hover:text-accent-foreground dark:border-input dark:hover:bg-input/5 flex min-h-10 min-w-64.5 items-center gap-2 rounded-md border px-4 py-2 transition-colors"
           >
             <span className="text-foreground/50 group-hover:text-foreground text-sm leading-normal font-medium transition-colors">
               Powered by
