@@ -16,6 +16,7 @@ import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonMobileProps {
   lineItems: ExpenseComparisonLineItem[]
+  hasOffChainData: boolean
 }
 
 function ExpenseComparisonLabel({ children }: { children: React.ReactNode }) {
@@ -40,11 +41,11 @@ function ExpenseComparisonValue({
 
 function ExpenseComparisonContent({
   item,
-  hasOffChain,
+  hasOffChainData,
   isTotals = false,
 }: {
   item: ExpenseComparisonLineItem
-  hasOffChain: boolean
+  hasOffChainData: boolean
   isTotals: boolean
 }) {
   return (
@@ -58,15 +59,19 @@ function ExpenseComparisonContent({
       </div>
 
       {/* Net Expense Transactions Header */}
-      <div className="text-foreground pb-2 text-center text-sm/5.5 font-semibold">
-        Net Expense Transactions
-      </div>
+      {hasOffChainData && (
+        <div className="text-foreground pb-2 text-center text-sm/5.5 font-semibold">
+          Net Expense Transactions
+        </div>
+      )}
 
       <div className="-mx-2 flex flex-col gap-1 rounded-lg border p-2">
         {/* On-chain only */}
         <div className="flex items-center justify-between py-1">
           <div className="flex items-center gap-1">
-            <ExpenseComparisonLabel>On-chain only</ExpenseComparisonLabel>
+            <ExpenseComparisonLabel>
+              {hasOffChainData ? 'On-chain only' : 'Net Exp Transactions'}
+            </ExpenseComparisonLabel>
             <Tooltip>
               <TooltipTrigger asChild>
                 <InfoIcon className="text-foreground/30 size-4" />
@@ -94,7 +99,7 @@ function ExpenseComparisonContent({
         </div>
 
         {/* Off-chain Section */}
-        {hasOffChain && item.offChainIncluded !== undefined && (
+        {hasOffChainData && item.offChainIncluded !== undefined && (
           <>
             <div className="-mx-2">
               <Separator />
@@ -135,10 +140,9 @@ function ExpenseComparisonContent({
   )
 }
 
-function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
+function ExpenseComparisonMobile({ lineItems, hasOffChainData }: ExpenseComparisonMobileProps) {
   if (!lineItems.length) return null
 
-  const hasOffChain = lineItems.some((item) => item.offChainIncluded !== undefined)
   const [firstItem, ...restItems] = lineItems
 
   return (
@@ -152,7 +156,7 @@ function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
 
           <ExpenseComparisonContent
             item={firstItem}
-            hasOffChain={hasOffChain}
+            hasOffChainData={hasOffChainData}
             isTotals={firstItem.isTotals ?? false}
           />
         </CardContent>
@@ -172,7 +176,7 @@ function ExpenseComparisonMobile({ lineItems }: ExpenseComparisonMobileProps) {
                 <AccordionContent className="p-0">
                   <ExpenseComparisonContent
                     item={item}
-                    hasOffChain={hasOffChain}
+                    hasOffChainData={hasOffChainData}
                     isTotals={item.isTotals ?? false}
                   />
                 </AccordionContent>

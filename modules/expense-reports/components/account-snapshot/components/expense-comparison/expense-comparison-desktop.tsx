@@ -14,10 +14,10 @@ import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonDesktopProps {
   lineItems: ExpenseComparisonLineItem[]
+  hasOffChainData: boolean
 }
 
-function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) {
-  const hasOffChain = lineItems.some((item) => item.offChainIncluded !== undefined)
+function ExpenseComparisonDesktop({ lineItems, hasOffChainData }: ExpenseComparisonDesktopProps) {
   const firstMonthIndex = lineItems.findIndex((item) => !item.isTotals)
 
   return (
@@ -26,23 +26,23 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
         <TableRow className="border-b hover:bg-transparent">
           <TableHead
             colSpan={2}
-            rowSpan={hasOffChain ? 2 : 1}
+            rowSpan={hasOffChainData ? 2 : 1}
             className="align-center text-foreground/30 border-r py-3 text-right text-base/6"
           >
             Reported Actuals
           </TableHead>
-          {hasOffChain ? (
-            <TableHead colSpan={4} className="py-3 text-center">
+          {hasOffChainData ? (
+            <TableHead colSpan={4} className={cn('py-3 text-center')}>
               Net Expense Transactions
             </TableHead>
           ) : (
             <>
               <TableHead className="py-3 text-right">
                 <div className="flex items-center justify-end gap-1">
-                  <span>Net Expense Transactions</span>
+                  <span className="text-foreground/30 text-base/6">Net Expense Transactions</span>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <InfoIcon className="text-foreground/50 size-4" />
+                      <InfoIcon className="text-foreground/30 size-4" />
                     </TooltipTrigger>
                     <TooltipContent side="bottom" align="end" className="max-w-70">
                       On-Chain view offers valuable insights into On-Chain dynamics, but excludes
@@ -57,7 +57,7 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
             </>
           )}
         </TableRow>
-        {hasOffChain && (
+        {hasOffChainData && (
           <TableRow className="border-b hover:bg-transparent">
             <TableHead className="py-3 text-right">
               <div className="flex items-center justify-end gap-1">
@@ -125,7 +125,7 @@ function ExpenseComparisonDesktop({ lineItems }: ExpenseComparisonDesktopProps) 
               >
                 {usLocalizedNumber(item.reportedActuals, 2)} USD
               </TableCell>
-              {hasOffChain ? (
+              {hasOffChainData ? (
                 <>
                   <TableCell
                     data-type={isTotals ? 'totals' : 'value'}

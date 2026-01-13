@@ -5,9 +5,10 @@ import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonProps {
   lineItems: ExpenseComparisonLineItem[]
+  hasOffChainData: boolean
 }
 
-function ExpenseComparison({ lineItems }: ExpenseComparisonProps) {
+function ExpenseComparison({ lineItems, hasOffChainData }: ExpenseComparisonProps) {
   return (
     <div className="flex flex-col gap-6 md:gap-4">
       <SectionHeader
@@ -21,10 +22,10 @@ function ExpenseComparison({ lineItems }: ExpenseComparisonProps) {
       />
 
       <div className="md:hidden">
-        <ExpenseComparisonMobile lineItems={lineItems} />
+        <ExpenseComparisonMobile lineItems={lineItems} hasOffChainData={hasOffChainData} />
       </div>
       <div className="hidden md:block">
-        <ExpenseComparisonDesktop lineItems={lineItems} />
+        <ExpenseComparisonDesktop lineItems={lineItems} hasOffChainData={hasOffChainData} />
       </div>
     </div>
   )

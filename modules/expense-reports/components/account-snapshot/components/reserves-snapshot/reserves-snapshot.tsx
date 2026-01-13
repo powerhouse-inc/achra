@@ -31,6 +31,8 @@ function ReservesSnapshot({
   onChainData,
   offChainData,
 }: ReservesSnapshotProps) {
+  const haveOffChainData = !!offChainData?.length
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
@@ -44,14 +46,16 @@ function ReservesSnapshot({
           }
           level="h2"
         />
-        <div className="ml-auto flex items-center gap-2">
-          <Checkbox
-            id="off-chain-reserves"
-            checked={includeOffChain}
-            onCheckedChange={toggleIncludeOffChain}
-          />
-          <Label htmlFor="off-chain-reserves">Include Off-Chain Reserves</Label>
-        </div>
+        {haveOffChainData && (
+          <div className="ml-auto flex items-center gap-2">
+            <Checkbox
+              id="off-chain-reserves"
+              checked={includeOffChain}
+              onCheckedChange={toggleIncludeOffChain}
+            />
+            <Label htmlFor="off-chain-reserves">Include Off-Chain Reserves</Label>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col gap-8 md:gap-4">
@@ -61,7 +65,7 @@ function ReservesSnapshot({
             value={balance?.initialBalance}
             caption="Initial Reserves"
             className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
-            dynamicChanges
+            dynamicChanges={haveOffChainData}
           />
           <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
             <FundChangeRate
@@ -75,7 +79,7 @@ function ReservesSnapshot({
               rightValue={typeof balance?.outflow === 'number' ? balance.outflow * -1 : undefined}
               rightValueColor="normal"
               rightText="Outflow"
-              dynamicChanges={true}
+              dynamicChanges={haveOffChainData}
             />
           </div>
           <SimpleStatCard
@@ -84,7 +88,7 @@ function ReservesSnapshot({
             hasEqualSign
             caption="New Reserves"
             className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
-            dynamicChanges
+            dynamicChanges={haveOffChainData}
           />
         </div>
 
@@ -109,25 +113,27 @@ function ReservesSnapshot({
         </div>
 
         {/* off chain sub-section */}
-        <div className={cn('flex flex-col gap-6 md:gap-4', { 'opacity-30': !includeOffChain })}>
-          <SectionHeader
-            title="Off Chain Reserves"
-            subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
-            tooltip={
-              <>
-                Discover essential details about the <br />
-                off-chain balances.
-              </>
-            }
-            level="h3"
-          />
+        {haveOffChainData && (
+          <div className={cn('flex flex-col gap-6 md:gap-4', { 'opacity-30': !includeOffChain })}>
+            <SectionHeader
+              title="Off Chain Reserves"
+              subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
+              tooltip={
+                <>
+                  Discover essential details about the <br />
+                  off-chain balances.
+                </>
+              }
+              level="h3"
+            />
 
-          <div className="flex flex-col gap-2">
-            {offChainData?.map((account) => (
-              <ReserveCard key={account.id} account={account} currency="USD" />
-            ))}
+            <div className="flex flex-col gap-2">
+              {offChainData.map((account) => (
+                <ReserveCard key={account.id} account={account} currency="USD" />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
