@@ -6,7 +6,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     id: 'sno-embryonic-hub',
     title: 'SNO Embryonic Hub',
     description: [
-      'Embryonic legal entity for early-stage networks with coverage of all the major functions. Embryonic legal entity for early-stage networks with coverage of all the major functions.',
+      'Embryonic legal entity for early-stage networks with coverage of all the major functions.',
     ],
     descriptionItems: [
       'Contributor Operations',
