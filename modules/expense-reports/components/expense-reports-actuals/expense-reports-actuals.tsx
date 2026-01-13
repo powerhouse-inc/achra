@@ -35,7 +35,7 @@ function ExpenseReportsActuals({ month }: ExpenseReportsActualsProps) {
   )
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <TotalWalletSection
         currentMonth={currentMonth}
         mainTableColumns={mainTableColumns}

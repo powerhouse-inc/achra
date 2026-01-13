@@ -4,7 +4,6 @@ import type { RowType } from '../types'
 
 interface NumberCellProps {
   value: number
-  bold?: boolean
   className?: string
   isIncome?: boolean
   rowType?: RowType
@@ -12,7 +11,6 @@ interface NumberCellProps {
 
 export function NumberCell({
   value,
-  bold,
   className,
   isIncome = false,
   rowType = 'normal',
@@ -22,21 +20,18 @@ export function NumberCell({
 
   const color = negative
     ? isIncome
-      ? 'text-green-500'
-      : 'text-red-700'
+      ? isTotal
+        ? 'text-status-success'
+        : 'text-status-success/30'
+      : isTotal
+        ? 'text-destructive'
+        : 'text-destructive/30'
     : isTotal
-      ? 'text-gray-900'
-      : 'text-gray-500'
+      ? 'text-foreground'
+      : 'text-foreground/50'
 
   return (
-    <div
-      className={cn(
-        'py-2.5 text-sm/4.5 md:px-4 md:py-2 lg:text-base/6',
-        bold ? 'font-bold' : 'font-semibold',
-        color,
-        className,
-      )}
-    >
+    <div className={cn('px-4 py-2 text-base/6 font-semibold', color, className)}>
       {formatNumber(value)}
     </div>
   )
