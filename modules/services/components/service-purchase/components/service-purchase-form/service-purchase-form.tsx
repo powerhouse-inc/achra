@@ -58,7 +58,7 @@ export default function ServicePurchaseForm() {
                 <TabsTrigger
                   key={step.value}
                   value={step.value}
-                  className="group flex flex-col items-center gap-2 px-6 py-0 data-[state=active]:shadow-none"
+                  className="group flex flex-col items-center gap-2 px-6 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
                 >
                   <div className="group-data-[state=active]:bg-primary border-primary border-width-2 size-6 rounded-full border" />
                   <span className="text-foreground/50 group-data-[state=active]:text-foreground text-xl/6 font-bold">
