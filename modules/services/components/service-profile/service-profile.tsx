@@ -47,7 +47,7 @@ export default function ServiceProfile() {
               )}
             </div>
             <InternalLink
-              href={`/services/${service.id}` as Route}
+              href={`/services/${service.id}/purchase` as Route}
               disabled={service.unavailable}
               className={cn(service.unavailable && 'pointer-events-none opacity-50')}
               size="lg"
