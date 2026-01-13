@@ -2,6 +2,7 @@ query BuilderProfile($filter: buildersFilter) {
   builders(filter: $filter) {
     code
     description
+    about
     id
     icon
     lastModified

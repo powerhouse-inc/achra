@@ -203,6 +203,7 @@ export type BuilderProfileQueriesGetDocumentsArgs = {
 
 export type BuilderProfileState = {
   __typename?: 'BuilderProfileState';
+  about?: Maybe<Scalars['String']['output']>;
   code?: Maybe<Scalars['String']['output']>;
   contributors: Array<Scalars['PHID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
@@ -3749,7 +3750,7 @@ export type BuilderProfileQueryVariables = Exact<{
 }>;
 
 
-export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
+export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, about?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
 
 export type BuildersListQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
@@ -3828,6 +3829,7 @@ export const BuilderProfileDocument = `
   builders(filter: $filter) {
     code
     description
+    about
     id
     icon
     lastModified

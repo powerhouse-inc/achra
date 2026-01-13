@@ -50,7 +50,7 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
             )}
           </div>
 
-          <Markdown>{builder.description ?? ''}</Markdown>
+          <Markdown>{builder.about ?? ''}</Markdown>
         </div>
 
         <div className="sticky top-43.5 hidden h-fit w-full flex-col gap-6 lg:flex lg:w-96 xl:w-104 xl:min-w-104">
