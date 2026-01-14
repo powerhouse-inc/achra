@@ -18,7 +18,7 @@ export function PlanSelectorItem({
   const inputId = id ?? value
 
   return (
-    <div className="flex flex-col items-center py-4">
+    <div className="flex flex-col items-center">
       <div className="flex flex-col items-center gap-2">
         <RadioGroupItem
           value={value}

@@ -7,9 +7,10 @@ function ServicePurchaseSelects() {
   const [snoFunction, setSnoFunction] = useState<string>()
   const [legalEntity, setLegalEntity] = useState<string>()
   const [teamStructure, setTeamStructure] = useState<string>()
+  const [anonymityLevel, setAnonymityLevel] = useState<string>()
 
   return (
-    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
+    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-4">
       <LabeledSelect
         label="SNO Function"
         value={snoFunction}
@@ -33,6 +34,14 @@ function ServicePurchaseSelects() {
         value={teamStructure}
         onValueChange={setTeamStructure}
         options={['Remote Team', 'Hybrid Team', 'On-site Team']}
+        placeholder="Remote Team"
+        className="w-full"
+      />
+      <LabeledSelect
+        label="Anonymity Level"
+        value={anonymityLevel}
+        onValueChange={setAnonymityLevel}
+        options={['High', 'Medium', 'Low']}
         placeholder="Remote Team"
         className="w-full"
       />
