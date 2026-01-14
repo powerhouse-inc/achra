@@ -3,48 +3,43 @@
 import { useState } from 'react'
 import { LabeledSelect } from '@/modules/services/components/service-purchase/components/labeled-select'
 
-function ServicePurchaseSelects() {
-  const [snoFunction, setSnoFunction] = useState<string>()
-  const [legalEntity, setLegalEntity] = useState<string>()
-  const [teamStructure, setTeamStructure] = useState<string>()
-  const [anonymityLevel, setAnonymityLevel] = useState<string>()
+// Improve this when UI its ready
+const SELECT_FIELDS = [
+  {
+    key: 'snoFunction',
+    label: 'SNO Function',
+    options: ['Operational Hub', 'Technical Hub', 'Strategy Hub'],
+  },
+  { key: 'legalEntity', label: 'Legal Entity', options: ['Swiss Association', 'US LLC', 'UK Ltd'] },
+  {
+    key: 'teamStructure',
+    label: 'Team Structure',
+    options: ['Remote Team', 'Hybrid Team', 'On-site Team'],
+  },
+  { key: 'anonymityLevel', label: 'Anonymity Level', options: ['High', 'Medium', 'Low'] },
+] as const
 
+function ServicePurchaseSelects() {
+  const [formData, setFormData] = useState<Record<string, string>>({})
+
+  const handleChange = (key: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [key]: value }))
+  }
   return (
     <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-4">
-      <LabeledSelect
-        label="SNO Function"
-        value={snoFunction}
-        onValueChange={setSnoFunction}
-        options={['Operational Hub', 'Technical Hub', 'Strategy Hub']}
-        placeholder="Operational Hub"
-        className="w-full"
-      />
-
-      <LabeledSelect
-        label="Legal Entity"
-        value={legalEntity}
-        onValueChange={setLegalEntity}
-        options={['Swiss Association', 'US LLC', 'UK Ltd']}
-        placeholder="Swiss Association"
-        className="w-full"
-      />
-
-      <LabeledSelect
-        label="Team Structure"
-        value={teamStructure}
-        onValueChange={setTeamStructure}
-        options={['Remote Team', 'Hybrid Team', 'On-site Team']}
-        placeholder="Remote Team"
-        className="w-full"
-      />
-      <LabeledSelect
-        label="Anonymity Level"
-        value={anonymityLevel}
-        onValueChange={setAnonymityLevel}
-        options={['High', 'Medium', 'Low']}
-        placeholder="Remote Team"
-        className="w-full"
-      />
+      {SELECT_FIELDS.map((field) => (
+        <LabeledSelect
+          key={field.key}
+          label={field.label}
+          value={formData[field.key]}
+          onValueChange={(val) => {
+            handleChange(field.key, val)
+          }}
+          options={[...field.options]}
+          placeholder={field.options[0]}
+          className="w-full"
+        />
+      ))}
     </div>
   )
 }
