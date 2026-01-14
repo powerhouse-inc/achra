@@ -16,7 +16,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 export const Selected: Story = {
-  name: 'Generic - Selected',
+  name: 'Generic - UnSelected',
   args: {
     value: 'basic',
     label: 'Basic Plan',
