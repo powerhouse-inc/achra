@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import BuilderProfile from '@/modules/builder-profile/components/builder-profile/builder-profile'
+import { BuilderProfileSkeleton } from '@/modules/builder-profile/components/builder-profile/builder-profile-skeleton'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
@@ -13,8 +14,7 @@ export default async function BuildersProfilePage({ params }: BuildersProfilePag
   return (
     <PageContent className="mt-3 sm:mt-4">
       <ErrorBoundaryWithPresets>
-        {/* TODO: implement the missing skeletons components for the builder profile page */}
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<BuilderProfileSkeleton />}>
           <BuilderProfile builderSlug={builderSlug} />
         </Suspense>
       </ErrorBoundaryWithPresets>
