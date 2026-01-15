@@ -34,7 +34,6 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
 
   // TODO: fetch the actual builder data and if it doesn't exist, return a 404 page
 
-  // throw new Error('test')
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
