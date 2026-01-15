@@ -28,6 +28,10 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
       ]
     : []),
   {
+    label: 'Operational Hub',
+    href: 'https://v0-operational-hub-landing-page.vercel.app/opshub',
+  },
+  {
     label: 'Services',
     href: '/services',
   },
