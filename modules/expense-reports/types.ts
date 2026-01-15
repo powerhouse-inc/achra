@@ -212,3 +212,19 @@ export interface BudgetStatement {
   paymentsOnChain: number | null
   netProtocolOutflow: number | null
 }
+
+export interface Category {
+  id: string
+  parentId: string | null
+  order: number
+  name: string
+  headcountExpense: boolean
+}
+
+export interface ExtendedCategory extends Category {
+  isCollapsed: boolean
+}
+
+export interface CategoryTree extends ExtendedCategory {
+  children: Array<Omit<CategoryTree, 'children'>>
+}

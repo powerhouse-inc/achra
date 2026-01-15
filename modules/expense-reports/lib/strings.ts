@@ -1,5 +1,8 @@
 import type { BudgetStatementWallet } from '../types'
 
+export const pascalCaseToNormalString = (str: string): string =>
+  str.replace(/([a-z])([A-Z])/g, '$1 $2')
+
 export const toKebabCase = (str: string): string =>
   str
     .replace(/-/g, ' ')

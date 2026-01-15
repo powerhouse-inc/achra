@@ -16,6 +16,7 @@ import {
   MonthNavigationSkeleton,
 } from '@/modules/expense-reports/components/month-navigation'
 import { expenseReportsSearchParamsCache } from '@/modules/expense-reports/lib/search-params-server'
+import { ModalCategoriesProvider } from '@/modules/expense-reports/providers/categories-provider'
 import { TabSection } from '@/modules/expense-reports/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import type { SearchParams } from 'nuqs/server'
@@ -33,6 +34,7 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
 
   // TODO: fetch the actual builder data and if it doesn't exist, return a 404 page
 
+  // throw new Error('test')
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
@@ -59,7 +61,9 @@ export default async function ExpenseReportsPage({ searchParams }: ExpenseReport
 
       {section === TabSection.EXPENSE_REPORTS && (
         <Suspense fallback={<ExpenseReportsSectionSkeleton />} key={`${section}-${viewMonth}`}>
-          <ExpenseReportsSection month={viewMonth ? new Date(viewMonth) : null} />
+          <ModalCategoriesProvider>
+            <ExpenseReportsSection month={viewMonth ? new Date(viewMonth) : null} />
+          </ModalCategoriesProvider>
         </Suspense>
       )}
 
