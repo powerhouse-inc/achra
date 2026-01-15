@@ -108,6 +108,7 @@ function CategoriesModal() {
                 variant="ghost"
                 size="icon"
                 onClick={closeModal}
+                aria-label="Close dialog"
                 className="text-popover-foreground hover:text-popover-foreground/80 absolute top-0 right-0"
               >
                 <X className="h-5 w-5" />

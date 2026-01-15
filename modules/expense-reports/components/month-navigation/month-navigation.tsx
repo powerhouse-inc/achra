@@ -77,7 +77,7 @@ function MonthNavigation() {
   const nextMonth = getNextMonth(currentMonth)
 
   return (
-    <div className="flex items-center gap-2">
+    <nav className="flex items-center gap-2" aria-label="Month navigation">
       <div className="flex gap-2">
         <Button asChild variant="ghost" size="icon" aria-label="Previous month">
           <Link href={createUrl(formatMonthString(previousMonth))}>
@@ -91,10 +91,14 @@ function MonthNavigation() {
         </Button>
       </div>
 
-      <div className="text-foreground/50 text-xl leading-[120%] font-bold">
+      <time
+        className="text-foreground/50 text-xl leading-[120%] font-bold"
+        dateTime={`${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, '0')}`}
+        aria-live="polite"
+      >
         {formatMonthDisplay(currentMonth)}
-      </div>
-    </div>
+      </time>
+    </nav>
   )
 }
 

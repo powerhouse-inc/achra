@@ -33,7 +33,13 @@ function SectionHeader({ title, subtitle, tooltip, level = 'h1' }: SectionHeader
         {tooltip && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <InfoIcon className="text-foreground/50 size-4" />
+              <button
+                type="button"
+                aria-label={`Information about ${title}`}
+                className="flex cursor-pointer items-center"
+              >
+                <InfoIcon className="text-foreground/50 size-4" />
+              </button>
             </TooltipTrigger>
             <TooltipContent side="bottom" align="start" className="max-w-70" arrowPadding={16}>
               {tooltip}

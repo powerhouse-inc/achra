@@ -28,7 +28,7 @@ function ExpenseReportTabs() {
 
   return (
     <Tabs value={section}>
-      <TabsList>
+      <TabsList aria-label="Expense report sections">
         <TabsTrigger value={TabSection.ACCOUNT_SNAPSHOT} asChild>
           <Link href={createUrl(TabSection.ACCOUNT_SNAPSHOT)}>Account Snapshot</Link>
         </TabsTrigger>
