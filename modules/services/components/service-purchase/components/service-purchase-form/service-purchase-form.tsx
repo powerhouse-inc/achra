@@ -1,11 +1,12 @@
 'use client'
-
+import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import SelectServices from '../select-services/select-services'
+import SelectServices from '../../select-services-purchase/select-services/select-services'
+import type { PricingPlan } from '../../select-services-purchase/types'
 
 const STEPS = [
   { value: 'product-info', label: 'Product Info' },
@@ -30,10 +31,30 @@ export default function ServicePurchaseForm() {
     defaultValues: { step: STEPS[0].value },
   })
 
+  // Shared state for PricingCalculator selections
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
+  const [enabledSections, setEnabledSections] = useState<Record<string, boolean>>({
+    'legal-setup': true,
+    'recurring-operational': true,
+    'finance-pack': true,
+    'hosting-suite': false,
+  })
+
   const activeStep = useWatch({
     control: form.control,
     name: 'step',
   })
+
+  const handlePlanChange = (plan: PricingPlan) => {
+    setSelectedPlan(plan)
+  }
+
+  const handleSectionToggle = (sectionId: string, enabled: boolean) => {
+    setEnabledSections((prev) => ({
+      ...prev,
+      [sectionId]: enabled,
+    }))
+  }
 
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler
@@ -71,7 +92,14 @@ export default function ServicePurchaseForm() {
 
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-                {step.value === 'select-services' && <SelectServices />}
+                {step.value === 'select-services' && (
+                  <SelectServices
+                    selectedPlan={selectedPlan}
+                    enabledSections={enabledSections}
+                    onPlanChange={handlePlanChange}
+                    onSectionToggle={handleSectionToggle}
+                  />
+                )}
                 {step.value !== 'select-services' && (
                   <>
                     <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
