@@ -12,7 +12,6 @@ export function PlanSelectorItem({
   value,
   label,
   description,
-
   id,
 }: Readonly<PlanSelectorItemProps>) {
   const inputId = id ?? value

@@ -1,11 +1,12 @@
 'use client'
-
+import { useCallback, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import SelectServices from '../select-services/select-services'
+import SelectServices from '../../select-services-purchase/select-services/select-services'
+import type { PricingPlan } from '../../select-services-purchase/types'
 
 const STEPS = [
   { value: 'product-info', label: 'Product Info' },
@@ -25,15 +26,45 @@ const STEP_NUMBER_MAP: Record<StepValue, number> = {
   confirmation: 5,
 }
 
+export const SECTION_IDS = {
+  LEGAL_SETUP: 'legal-setup',
+  RECURRING_OPERATIONAL: 'recurring-operational',
+  FINANCE_PACK: 'finance-pack',
+  HOSTING_SUITE: 'hosting-suite',
+} as const
+
+const INITIAL_ENABLED_SECTIONS: Record<string, boolean> = {
+  [SECTION_IDS.LEGAL_SETUP]: true,
+  [SECTION_IDS.RECURRING_OPERATIONAL]: true,
+  [SECTION_IDS.FINANCE_PACK]: true,
+  [SECTION_IDS.HOSTING_SUITE]: false,
+}
+
 export default function ServicePurchaseForm() {
   const form = useForm<{ step: StepValue }>({
     defaultValues: { step: STEPS[0].value },
   })
 
+  // Shared state for PricingCalculator selections
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
+  const [enabledSections, setEnabledSections] =
+    useState<Record<string, boolean>>(INITIAL_ENABLED_SECTIONS)
+
   const activeStep = useWatch({
     control: form.control,
     name: 'step',
   })
+
+  const handlePlanChange = useCallback((plan: PricingPlan) => {
+    setSelectedPlan(plan)
+  }, [])
+
+  const handleSectionToggle = useCallback((sectionId: string, enabled: boolean) => {
+    setEnabledSections((prev) => ({
+      ...prev,
+      [sectionId]: enabled,
+    }))
+  }, [])
 
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler
@@ -71,7 +102,14 @@ export default function ServicePurchaseForm() {
 
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-                {step.value === 'select-services' && <SelectServices />}
+                {step.value === 'select-services' && (
+                  <SelectServices
+                    selectedPlan={selectedPlan}
+                    enabledSections={enabledSections}
+                    onPlanChange={handlePlanChange}
+                    onSectionToggle={handleSectionToggle}
+                  />
+                )}
                 {step.value !== 'select-services' && (
                   <>
                     <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
