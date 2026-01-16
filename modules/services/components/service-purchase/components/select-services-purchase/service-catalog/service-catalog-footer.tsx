@@ -1,6 +1,6 @@
 'use client'
 
-import PricingCatalogSubtotal from '../pricing-catalog-subtotal/pricing-catalog-subtotal'
+import PricingCatalogSubtotal from '../../../select-services-purchase/pricing-catalog-subtotal/pricing-catalog-subtotal'
 import { useServiceCatalogContext } from './service-catalog-root'
 import type { ServiceSectionCatalog } from '../types'
 

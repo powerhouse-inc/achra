@@ -1,7 +1,7 @@
 'use client'
 
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
-import { LabeledSelect } from '@/modules/services/components/service-purchase/select-services-purchase/labeled-select'
+import { LabeledSelect } from '@/modules/services/components/service-purchase/components/select-services-purchase/labeled-select'
 
 // Improve this when UI its ready
 const SNO_FUNCTION_OPTIONS = ['Operational Hub', 'Technical Hub', 'Strategy Hub'] as const
