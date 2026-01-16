@@ -22,8 +22,7 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('27 Days Ago')).toHaveCount(4);
-    await expect(page.getByText('1 Month Ago')).toHaveCount(4);
+    await expect(page.getByText('1 Month Ago')).toHaveCount(8);
     await expect(page.getByText('1 year ago')).toHaveCount(12);
     await expect(page.getByText('09-DEC-2025')).toHaveCount(2);
     await expect(page.getByText('21-NOV-2025')).toHaveCount(1);
@@ -99,12 +98,13 @@ test('should load all columns', async ({ page }) => {
 
 test('should load info tooltip', async ({ page }) => {
     await page.locator('#___SECTION___budget-statements *> div.cursor-pointer > div.hidden').hover();
+    await page.waitForTimeout(1000);
     await expect(page.getByText('Access detailed insights into budget reporting activities, including contributors, reporting month, actual expenditures, status, and recent modifications.')).toHaveCount(2);
     await expect(page.getByText('Click "View" to dive into specific financial data by department, enabling effective monitoring and management of fiscal operations.')).toHaveCount(2);
 });
 
 test('should load budget statements period', async ({ page }) => {
-    await expect(page.locator('#___SECTION___budget-statements').getByText('JAN - DEC 2023')).toBeVisible();
+    await expect(page.locator('#___SECTION___budget-statements').getByText('JAN - DEC 2025')).toBeVisible();
 });
 
 test('should filter by status all builder statuses', async ({ page }) => {

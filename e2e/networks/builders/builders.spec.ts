@@ -24,26 +24,32 @@ test('should have the main elements', async ({ page }) => {
 
 test('should load all builder names', async ({ page }) => {
     await expect(page.getByText('PW Powerhouse')).toHaveCount(2);
-    //await expect(page.getByText('BAI BAI')).toHaveCount(2);
-    await expect(page.getByText('TP teep')).toHaveCount(2);
-    await expect(page.getByText('LIB liberuum')).toHaveCount(2);
-    await expect(page.getByText('AP apeiron')).toHaveCount(2);
+    await expect(page.getByText('BAI BAI')).toHaveCount(2);
+    await expect(page.getByText('TP teep')).toHaveCount(0);
+    await expect(page.getByText('LIB liberuum')).toHaveCount(0);
+    await expect(page.getByText('AP apeiron')).toHaveCount(0);
 });
 
 test('should load all builder statuses', async ({ page }) => {
     await expect(page.getByText('COMPLETED')).toHaveCount(0);
     await expect(page.getByText('ON HOLD')).toHaveCount(0);
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
-    await expect(page.getByText('ACTIVE')).toHaveCount(10);
-    await expect(page.getByText('INACTIVE')).toHaveCount(2);
+    await expect(page.getByText('ACTIVE')).toHaveCount(6);
+    await expect(page.getByText('INACTIVE')).toHaveCount(0);
 });
 
 test('should load all builder skills', async ({ page }) => {
-    await expect(page.getByText('Full Stack Development')).toHaveCount(6);
-    await expect(page.getByText('Data Engineering')).toHaveCount(6);
-
+    await expect(page.getByText('Facilitator')).toHaveCount(6);
+    await expect(page.getByText('Backend Development')).toHaveCount(6);
+    await expect(page.getByText('Full Stack Development')).toHaveCount(0);
+    await expect(page.getByText('Devops Engineering')).toHaveCount(0);
+    await expect(page.getByText('Smart Contract Development')).toHaveCount(0);
+    await expect(page.getByText('UI/UX Design')).toHaveCount(0);
+    await expect(page.getByText('Technical Writing')).toHaveCount(0);
     await expect(page.getByText('QA Testing')).toHaveCount(0);
-    await expect(page.getByText('Technical Writing')).toHaveCount(3);
+    await expect(page.getByText('Data Engineering')).toHaveCount(0);
+    await expect(page.getByText('Security Engineering')).toHaveCount(0);
+    await expect(page.getByText('Technical Writing')).toHaveCount(0);
 
     await page.locator('table > tbody > tr:nth-child(1) > td > a > div > div.hidden > div:nth-child(2) > div').click();
     await expect(page.getByText('UI/UX Design')).toHaveCount(1);
@@ -61,22 +67,22 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('2 Days Ago')).toHaveCount(8);
-    await expect(page.getByText('2 Days Ago')).toHaveCount(8);
-    await expect(page.getByText('16-DEC-2025')).toHaveCount(4);
-    await expect(page.getByText('18-DEC-2025')).toHaveCount(1);
+    await expect(page.getByText('3 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('6 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('12-JAN-2026')).toHaveCount(1);
+    await expect(page.getByText('09-JAN-2026')).toHaveCount(1);
 });
 
 test('should load all builder links', async ({ page }) => {
-    await expect(page.getByText('Links')).toHaveCount(10);
+    await expect(page.getByText('Links')).toHaveCount(2);
 
     await page.getByText('Links').first().hover();
     await page.waitForTimeout(1000);
 
     await expect(page.getByText('Website')).toBeVisible();
     await expect(page.getByText('Forum')).toBeVisible();
-    await expect(page.getByText('Discord')).toBeVisible();
-    await expect(page.getByText('Twitter')).toBeVisible();
+    await expect(page.getByText('Discord').first()).toBeVisible();
+    await expect(page.getByText('Twitter').first()).toBeVisible();
     await expect(page.getByText('GitHub')).toBeVisible();
 });
 
@@ -90,7 +96,7 @@ test('should redirect to the link of the builder website', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    await expect(newTab).toHaveURL('https://app.aave.com/');
+    await expect(newTab).toHaveURL('https://www.powerhouse.inc/');
 });
 
 test('should redirect to the link of the builder forum', async ({ page }) => {
@@ -101,22 +107,18 @@ test('should redirect to the link of the builder forum', async ({ page }) => {
     await page.getByText('Forum').first().click();
 
     const newTab = await newTabPromise;
-    await newTab.waitForLoadState();
-
-    await expect(newTab).toHaveURL('https://governance.aave.com/t/arc-spark-lend-profit-share-proposal/11615/');
+    await expect(newTab).toHaveURL('https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057');
 });
 
 test('should redirect to the link of the builder discord', async ({ page }) => {
-    const newTabPromise = page.waitForEvent("popup");
-
     await page.getByText('Links').first().hover();
     await page.waitForTimeout(1000);
-    await page.getByText('Discord').first().click();
 
-    const newTab = await newTabPromise;
-    await newTab.waitForLoadState();
-
-    await expect(newTab).toHaveURL('https://discord.com/');
+    // The link was verified in this way because the framework was opening the Discord application
+    // instead of a new tab in the browser.
+    await page.getByText('Discord').first().getAttribute('href').then(href => {
+        expect(href).toBe('https://discord.com/invite/pwQJwgaQKd');
+    });
 });
 
 test('should redirect to the link of the builder twitter', async ({ page }) => {
@@ -129,7 +131,7 @@ test('should redirect to the link of the builder twitter', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    await expect(newTab).toHaveURL('https://x.com/');
+    await expect(newTab).toHaveURL('https://x.com/PowerhouseDAO');
 });
 
 test('should redirect to the link of the builder github', async ({ page }) => {
@@ -142,29 +144,29 @@ test('should redirect to the link of the builder github', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    await expect(newTab).toHaveURL('https://github.com/');
+    await expect(newTab).toHaveURL('https://github.com/powerhouse-inc');
 });
 
 test('should sort builders by name in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Builders' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('AP apeiron')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('BAI BAI')).toBeVisible();
 });
 
 test('should sort builders by name in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Builders' }).click();
     await page.getByRole('button', { name: 'Builders' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('TP teep')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('PW Powerhouse')).toBeVisible();
 });
 
 test('should sort builders by skills in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Skills' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1) > td:nth-child(2)')).toBeEmpty();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('Facilitator')).toBeVisible();
 });
 
 test('should sort builders by skills in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Skills' }).click();
     await page.getByRole('button', { name: 'Skills' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('Full Stack Development')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('Facilitator')).toBeVisible();
 });
 
 test.skip('should sort builders by scope in ascending order', async ({ page }) => {
@@ -182,21 +184,21 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('14 Hours Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('4 Days Ago')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('2 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('6 Days Ago')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
     await page.getByPlaceholder('Search...').fill('Dewiz');
     await page.getByText('Builder Skills').click();
     await page.getByText('Select All').click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders?search=Dewiz&builderSkills=BACKEND_DEVELOPMENT,DATA_ENGINEERING,DEVOPS_ENGINEERING,FRONTEND_DEVELOPMENT,FULL_STACK_DEVELOPMENT,QA_TESTING,SECURITY_ENGINEERING,SMART_CONTRACT_DEVELOPMENT,TECHNICAL_WRITING,UI_UX_DESIGN`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders?search=Dewiz&skills=BACKEND_DEVELOPMENT,DATA_ENGINEERING,DEVOPS_ENGINEERING,FRONTEND_DEVELOPMENT,FULL_STACK_DEVELOPMENT,QA_TESTING,SECURITY_ENGINEERING,SMART_CONTRACT_DEVELOPMENT,TECHNICAL_WRITING,UI_UX_DESIGN`);
 
     await page.getByText('Reset Filter').click();
     await page.waitForTimeout(1000);
