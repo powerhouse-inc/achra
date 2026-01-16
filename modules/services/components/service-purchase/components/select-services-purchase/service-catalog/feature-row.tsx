@@ -21,7 +21,7 @@ export function FeatureRow({
   return (
     <div
       className={cn(
-        'grid items-center gap-4 border-b px-6 py-3 last:border-b-0',
+        'grid items-center gap-4 border-b px-6 last:border-b-0',
         showAllPlans ? 'grid-cols-[2fr_repeat(4,1fr)]' : 'grid-cols-[2fr_1fr]',
       )}
     >
@@ -48,15 +48,15 @@ export function FeatureRow({
           <div
             key={plan}
             className={cn(
-              'flex items-center justify-center rounded-md py-2 transition-colors',
-              activePlan === plan && 'bg-primary/5',
+              'flex h-14 items-center justify-center transition-colors',
+              activePlan === plan && 'bg-border/10',
             )}
           >
             <ServiceCatalogoCell value={values[plan]} isActive={activePlan === plan} />
           </div>
         ))
       ) : (
-        <div className="bg-primary/5 flex items-center justify-center rounded-md py-2">
+        <div className="bg-border/10 flex h-14 items-center justify-center">
           <ServiceCatalogoCell value={values[activePlan]} isActive={true} />
         </div>
       )}

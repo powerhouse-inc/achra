@@ -1,0 +1,18 @@
+'use client'
+
+import PricingCatalogSubtotal from '../../../select-services-purchase/pricing-catalog-subtotal/pricing-catalog-subtotal'
+import { useServiceCatalogContext } from './service-catalog-root'
+import type { ServiceSectionCatalog } from '../types'
+
+export interface ServiceCatalogFooterProps {
+  section: ServiceSectionCatalog
+}
+
+function ServiceCatalogFooter({ section }: Readonly<ServiceCatalogFooterProps>) {
+  const { activePlan, showAllPlans } = useServiceCatalogContext()
+
+  return (
+    <PricingCatalogSubtotal section={section} activePlan={activePlan} showAllPlans={showAllPlans} />
+  )
+}
+export { ServiceCatalogFooter }

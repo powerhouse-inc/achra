@@ -13,7 +13,7 @@ export function ServiceCatalogoCell({ value, isActive }: Readonly<FeatureCellPro
     return (
       <div className="flex items-center justify-center">
         {value ? (
-          <Check className={cn('size-4', isActive ? 'text-primary' : 'text-muted-foreground')} />
+          <Check className={cn('size-4', 'text-status-success')} />
         ) : (
           <span className="text-muted-foreground">—</span>
         )}
