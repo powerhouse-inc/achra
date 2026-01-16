@@ -1,4 +1,5 @@
 import groupBy from 'lodash/groupBy'
+import { CategoryTableHeader } from '../components/category-table-header'
 import {
   getCommentsFromCategory,
   getGroupActual,
@@ -124,7 +125,7 @@ export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet) => {
 
   return [
     {
-      header: 'Expense Category',
+      header: <CategoryTableHeader />,
       align: 'left',
       type: 'text',
       isCardHeader: true,

@@ -56,7 +56,11 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
             )}
             asChild
           >
-            <div className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:gap-0 md:px-0 md:py-2">
+            <div
+              role="button"
+              aria-label={`Open reserve card ${account.accountLabel}`}
+              className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:gap-0 md:px-0 md:py-2"
+            >
               {/* name area */}
               <div
                 className={cn(

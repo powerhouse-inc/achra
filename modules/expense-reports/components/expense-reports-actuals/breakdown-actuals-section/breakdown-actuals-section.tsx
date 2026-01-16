@@ -41,7 +41,7 @@ function BreakdownActualsSection({
             onValueChange={onActualAccountTabChange}
             className="w-[400px]"
           >
-            <TabsList>
+            <TabsList aria-label="Breakdown categories">
               {breakdownTabs.map((header, index) => (
                 <TabsTrigger key={headerIds[index]} value={headerIds[index]}>
                   {header}
