@@ -1,5 +1,5 @@
 'use client'
-import { MarketplaceHeader } from '@/modules/services/components/service-purchase/select-services-purchase/marketplace-header'
+import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/select-services-purchase/marketplace-header'
 import { PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
 import type { PricingPlan } from '../types'
