@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import { Form } from '@/modules/shared/components/ui/form'
@@ -26,6 +26,20 @@ const STEP_NUMBER_MAP: Record<StepValue, number> = {
   confirmation: 5,
 }
 
+export const SECTION_IDS = {
+  LEGAL_SETUP: 'legal-setup',
+  RECURRING_OPERATIONAL: 'recurring-operational',
+  FINANCE_PACK: 'finance-pack',
+  HOSTING_SUITE: 'hosting-suite',
+} as const
+
+const INITIAL_ENABLED_SECTIONS: Record<string, boolean> = {
+  [SECTION_IDS.LEGAL_SETUP]: true,
+  [SECTION_IDS.RECURRING_OPERATIONAL]: true,
+  [SECTION_IDS.FINANCE_PACK]: true,
+  [SECTION_IDS.HOSTING_SUITE]: false,
+}
+
 export default function ServicePurchaseForm() {
   const form = useForm<{ step: StepValue }>({
     defaultValues: { step: STEPS[0].value },
@@ -33,28 +47,24 @@ export default function ServicePurchaseForm() {
 
   // Shared state for PricingCalculator selections
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
-  const [enabledSections, setEnabledSections] = useState<Record<string, boolean>>({
-    'legal-setup': true,
-    'recurring-operational': true,
-    'finance-pack': true,
-    'hosting-suite': false,
-  })
+  const [enabledSections, setEnabledSections] =
+    useState<Record<string, boolean>>(INITIAL_ENABLED_SECTIONS)
 
   const activeStep = useWatch({
     control: form.control,
     name: 'step',
   })
 
-  const handlePlanChange = (plan: PricingPlan) => {
+  const handlePlanChange = useCallback((plan: PricingPlan) => {
     setSelectedPlan(plan)
-  }
+  }, [])
 
-  const handleSectionToggle = (sectionId: string, enabled: boolean) => {
+  const handleSectionToggle = useCallback((sectionId: string, enabled: boolean) => {
     setEnabledSections((prev) => ({
       ...prev,
       [sectionId]: enabled,
     }))
-  }
+  }, [])
 
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler

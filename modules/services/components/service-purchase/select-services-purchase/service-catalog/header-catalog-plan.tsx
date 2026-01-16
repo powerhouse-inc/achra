@@ -2,14 +2,13 @@ import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../mock/mock-data'
 import { PlanSelectorItem } from './plan-selector'
-import type { PricingData, PricingPlan } from '../types'
+import type { PricingPlan } from '../types'
 
 interface HeaderCatalogPlanProps {
   selectedPlan?: PricingPlan
   handlePlanChange: (plan: PricingPlan) => void
   readOnly?: boolean
   showAllPlans?: boolean
-  pricingData?: PricingData[]
 }
 
 export default function HeaderCatalogPlan({

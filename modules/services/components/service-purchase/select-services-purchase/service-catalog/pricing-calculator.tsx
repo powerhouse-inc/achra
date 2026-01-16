@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback, useMemo } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { PRICING_DATA } from '../mock/mock-data'
 import HeaderCatalogPlan from './header-catalog-plan'
@@ -17,30 +18,36 @@ export interface PricingCalculatorProps {
 }
 
 export function PricingCalculator({
-  selectedPlan,
+  selectedPlan = 'team',
   enabledSections = {},
   onPlanChange,
   onSectionToggle,
   readOnly = false,
   showAllPlans = true,
 }: PricingCalculatorProps = {}) {
-  const handlePlanChange = (plan: PricingPlan) => {
-    if (readOnly) return
-    if (onPlanChange) {
+  const handlePlanChange = useCallback(
+    (plan: PricingPlan) => {
+      if (readOnly || !onPlanChange) return
       onPlanChange(plan)
-    }
-  }
+    },
+    [readOnly, onPlanChange],
+  )
 
-  const toggleSection = (sectionId: string, enabled: boolean) => {
-    if (readOnly) return
-    if (onSectionToggle) {
+  const toggleSection = useCallback(
+    (sectionId: string, enabled: boolean) => {
+      if (readOnly || !onSectionToggle) return
       onSectionToggle(sectionId, enabled)
-    }
-  }
+    },
+    [readOnly, onSectionToggle],
+  )
 
-  const visibleSections = readOnly
-    ? PRICING_DATA.sections?.filter((section) => enabledSections[section.id])
-    : PRICING_DATA.sections
+  const visibleSections = useMemo(
+    () =>
+      readOnly
+        ? PRICING_DATA.sections?.filter((section) => enabledSections[section.id])
+        : PRICING_DATA.sections,
+    [readOnly, enabledSections],
+  )
 
   return (
     <Card className="flex flex-col gap-6 border-none! py-0!">
@@ -57,7 +64,7 @@ export function PricingCalculator({
             <PricingSection
               key={section.id}
               section={section}
-              activePlan={selectedPlan!}
+              activePlan={selectedPlan}
               isEnabled={enabledSections[section.id]}
               showAllPlans={showAllPlans}
               readOnly={readOnly}
