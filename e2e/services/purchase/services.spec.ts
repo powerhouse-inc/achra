@@ -89,6 +89,16 @@ test('should contain the hosting suite in the step', async ({ page }) => {
     await expect(page.getByText('$550/mo')).toBeVisible();
 });
 
+test('should contain the back button in the step', async ({ page }) => {
+    await page.getByText('Back').click();
+    await expect(page.getByText('Step 2 of 5')).toBeVisible();
+});
+
+test('should contain the continue button in the step', async ({ page }) => {
+    await page.getByText('Continue').click();
+    await expect(page.getByText('Step 4 of 5')).toBeVisible();
+});
+
 test('should contain the step indicator in the step', async ({ page }) => {
     await expect(page.getByText('Step 3 of 5')).toBeVisible();
 });
