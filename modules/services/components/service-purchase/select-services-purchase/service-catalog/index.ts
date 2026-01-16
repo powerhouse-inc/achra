@@ -1,12 +1,8 @@
 export * from './pricing-calculator'
 export * from '../types'
-
 // Composable ServiceCatalog components
-export { ServiceCatalogRoot } from './service-catalog-root'
-export type { ServiceCatalogRootProps } from './service-catalog-root'
-export { ServiceCatalogHeader } from './service-catalog-header'
-export type { ServiceCatalogHeaderProps } from './service-catalog-header'
-export { ServiceCatalogBody } from './service-catalog-body'
-export type { ServiceCatalogBodyProps } from './service-catalog-body'
-export { ServiceCatalogRow } from './service-catalog-row'
-export type { ServiceCatalogRowProps } from './service-catalog-row'
+export * from './service-catalog-root'
+export * from './service-catalog-header'
+export * from './service-catalog-body'
+export * from './service-catalog-row'
+export * from './service-catalog-footer'

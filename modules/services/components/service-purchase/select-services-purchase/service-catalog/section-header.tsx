@@ -35,6 +35,7 @@ export function SectionHeader({
               checked={toggleEnabled}
               onCheckedChange={onToggleChange}
               id={`toggle-${title}`}
+              className="data-[state=checked]:bg-status-progress"
             />
             <label
               htmlFor={`toggle-${title}`}

@@ -3,8 +3,15 @@
 import { useCallback, useMemo } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { PRICING_DATA } from '../mock/mock-data'
+import { GrandTotalRowCatalog } from './grand-total-row-catalog'
 import HeaderCatalogPlan from './header-catalog-plan'
-import { PricingSection } from './pricing-section'
+import {
+  ServiceCatalogBody,
+  ServiceCatalogFooter,
+  ServiceCatalogHeader,
+  ServiceCatalogRoot,
+  ServiceCatalogRow,
+} from '.'
 
 import type { PricingPlan } from '../types'
 
@@ -16,7 +23,6 @@ export interface PricingCalculatorProps {
   readOnly?: boolean
   showAllPlans?: boolean
 }
-
 export function PricingCalculator({
   selectedPlan = 'team',
   enabledSections = {},
@@ -32,7 +38,6 @@ export function PricingCalculator({
     },
     [readOnly, onPlanChange],
   )
-
   const toggleSection = useCallback(
     (sectionId: string, enabled: boolean) => {
       if (readOnly || !onSectionToggle) return
@@ -52,26 +57,57 @@ export function PricingCalculator({
   return (
     <Card className="flex flex-col gap-6 border-none! py-0!">
       <div>
+        {/* Header with Plan Selectors */}
         <HeaderCatalogPlan
           selectedPlan={selectedPlan}
           handlePlanChange={handlePlanChange}
           readOnly={readOnly}
           showAllPlans={showAllPlans}
         />
-
+        {/* Service Sections */}
         <div className="flex flex-col">
           {visibleSections?.map((section) => (
-            <PricingSection
+            <ServiceCatalogRoot
               key={section.id}
-              section={section}
               activePlan={selectedPlan}
               isEnabled={enabledSections[section.id]}
               showAllPlans={showAllPlans}
-              readOnly={readOnly}
-              onToggle={toggleSection}
-            />
+            >
+              <ServiceCatalogHeader
+                title={section.title}
+                badge={section.badge}
+                hasToggle={section.hasToggle}
+                toggleLabel={section.toggleLabel}
+                toggleEnabled={enabledSections[section.id]}
+                onToggleChange={
+                  section.hasToggle && !readOnly
+                    ? (enabled: boolean) => {
+                        toggleSection(section.id, enabled)
+                      }
+                    : undefined
+                }
+                oneTimeFee={section.oneTimeFee}
+                oneTimeFeeVariant={section.oneTimeFeeVariant}
+              />
+
+              <ServiceCatalogBody>
+                {section.rows.map((row) => (
+                  <ServiceCatalogRow
+                    key={row.id}
+                    id={row.id}
+                    label={row.label}
+                    sublabel={row.sublabel}
+                    values={row.values}
+                  />
+                ))}
+              </ServiceCatalogBody>
+
+              <ServiceCatalogFooter section={section} />
+            </ServiceCatalogRoot>
           ))}
         </div>
+        {/* Grand Total */}
+        <GrandTotalRowCatalog showAllPlans={showAllPlans} selectedPlan={selectedPlan} />
       </div>
     </Card>
   )
