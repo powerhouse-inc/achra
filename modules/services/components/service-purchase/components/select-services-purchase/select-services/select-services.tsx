@@ -1,5 +1,6 @@
 'use client'
 import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/select-services-purchase/marketplace-header'
+import { Button } from '@/modules/shared/components/ui/button'
 import { PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
 import type { PricingPlan } from '../types'
@@ -9,6 +10,8 @@ export interface SelectServicesProps {
   enabledSections?: Record<string, boolean>
   onPlanChange?: (plan: PricingPlan) => void
   onSectionToggle?: (sectionId: string, enabled: boolean) => void
+  onBack?: () => void
+  onContinue?: () => void
 }
 
 export default function SelectServices({
@@ -16,6 +19,8 @@ export default function SelectServices({
   enabledSections,
   onPlanChange,
   onSectionToggle,
+  onBack,
+  onContinue,
 }: Readonly<SelectServicesProps>) {
   return (
     <div className="mt-6 flex flex-col gap-6">
@@ -27,6 +32,14 @@ export default function SelectServices({
         onPlanChange={onPlanChange}
         onSectionToggle={onSectionToggle}
       />
+      <div className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          Back
+        </Button>
+        <Button variant="default" onClick={onContinue}>
+          Continue
+        </Button>
+      </div>
     </div>
   )
 }

@@ -67,6 +67,11 @@ export default function ServicePurchaseForm() {
     }))
   }, [])
 
+  // Navigation handlers
+  const navigateToStep = (stepValue: StepValue) => {
+    form.setValue('step', stepValue)
+  }
+
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler
   })
@@ -110,6 +115,12 @@ export default function ServicePurchaseForm() {
                     enabledSections={enabledSections}
                     onPlanChange={handlePlanChange}
                     onSectionToggle={handleSectionToggle}
+                    onBack={() => {
+                      navigateToStep('select-operator')
+                    }}
+                    onContinue={() => {
+                      navigateToStep('summary')
+                    }}
                   />
                 )}
                 {!['product-info', 'select-services'].includes(step.value) && (
