@@ -47,6 +47,7 @@ export default function ExpandableSection({ title, description }: ExpandableSect
           ease: 'easeInOut',
           height: { duration: 0.3, ease: 'easeInOut' },
           marginBottom: { duration: 0.3, ease: 'easeInOut' },
+          opacity: { duration: isOpen ? 0.5 : 0.1, ease: 'easeInOut' },
         }}
       >
         <span className="text-foreground text-base/6">{description}</span>
