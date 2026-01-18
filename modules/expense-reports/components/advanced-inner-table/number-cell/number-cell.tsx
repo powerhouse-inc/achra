@@ -31,7 +31,14 @@ export function NumberCell({
       : 'text-foreground/50'
 
   return (
-    <div className={cn('px-4 py-2 text-base/6 font-semibold', color, className)}>
+    <div
+      data-type="number-cell"
+      className={cn(
+        'text-base/6 font-semibold md:px-2 md:py-2 md:text-sm/4.5 lg:px-4 lg:text-base/6',
+        color,
+        className,
+      )}
+    >
       {formatNumber(value)}
     </div>
   )

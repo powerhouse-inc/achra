@@ -1,6 +1,7 @@
 import { sortBy, sumBy } from 'lodash'
 import { useQueryState } from 'nuqs'
 import { useMemo, useRef } from 'react'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   getActualsBreakdownColumns,
   getActualsBreakdownItemsForWallet,
@@ -129,6 +130,8 @@ export const useBudgetStatementActuals = (
 
   const breakdownTitleRef = useRef<HTMLDivElement>(null)
 
+  const isTablet = useMediaQuery({ from: 'md', to: 'lg' })
+
   const mainTableColumns = useMemo(() => {
     const mainTableColumns: InnerTableColumn[] = [
       {
@@ -137,8 +140,8 @@ export const useBudgetStatementActuals = (
         type: 'custom',
         cellRender: renderWallet,
         isCardHeader: true,
-        width: getWalletWidthForWallets(wallets),
-        minWidth: getWalletWidthForWallets(wallets),
+        width: getWalletWidthForWallets(wallets, isTablet),
+        minWidth: getWalletWidthForWallets(wallets, isTablet),
       },
       {
         header: 'Mthly Budget',
@@ -171,7 +174,7 @@ export const useBudgetStatementActuals = (
       },
     ]
     return mainTableColumns
-  }, [wallets])
+  }, [wallets, isTablet])
 
   const mainTableItems = useMemo(() => {
     const result: InnerTableRow[] = []
@@ -274,11 +277,11 @@ export const useBudgetStatementActuals = (
   const [breakdownColumnsForActiveTab, allBreakdownColumns] = useMemo(() => {
     const allBreakdownColumns: Record<string, InnerTableColumn[]> = {}
     for (const wallet of wallets) {
-      allBreakdownColumns[wallet.name] = getActualsBreakdownColumns(wallet)
+      allBreakdownColumns[wallet.name] = getActualsBreakdownColumns(wallet, isTablet)
     }
 
     return [allBreakdownColumns[currentWallet.name], allBreakdownColumns]
-  }, [currentWallet.name, wallets])
+  }, [currentWallet.name, wallets, isTablet])
 
   const allBreakdownItems = useMemo(() => {
     const result: Record<string, InnerTableRow[]> = {}

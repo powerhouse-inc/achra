@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/modules/shared/lib/utils'
+import { OpenModalTransparency } from '../open-modal-transparency'
 import { CELL_VALUES, COLUMN_HEADERS } from './constants'
 import { NumberCell } from './number-cell'
 import { TextCell } from './text-cell'
@@ -133,14 +134,46 @@ function renderTextCell(
 
   if (rowType === 'groupTitle') {
     return (
-      <TextCell key={cellKey} variant="header">
+      <TextCell data-type="text-groupTitle" key={cellKey} variant="header">
         <div className={cn('table-groupTitle')}>{stringValue}</div>
       </TextCell>
     )
   }
 
+  if (column.header === COLUMN_HEADERS.COMMENTS) {
+    return (
+      <TextCell data-type="text-category" key={cellKey} variant="comment">
+        {stringValue}
+      </TextCell>
+    )
+  }
+
+  if (variant === 'header') {
+    return (
+      <TextCell data-type="text-header" key={cellKey} variant="header">
+        {stringValue}
+      </TextCell>
+    )
+  }
+
+  if (rowType === 'category') {
+    return (
+      <div key={cellKey}>
+        <div className="block px-6 pt-2 pb-4 md:hidden">
+          <OpenModalTransparency
+            name={stringValue}
+            className="font-base/6 w-full justify-between font-semibold"
+          />
+        </div>
+        <TextCell data-type="text-cell" variant={variant} className="hidden md:block">
+          {stringValue}
+        </TextCell>
+      </div>
+    )
+  }
+
   return (
-    <TextCell key={cellKey} variant={variant}>
+    <TextCell data-type="text-cell" key={cellKey} variant={variant}>
       {stringValue}
     </TextCell>
   )

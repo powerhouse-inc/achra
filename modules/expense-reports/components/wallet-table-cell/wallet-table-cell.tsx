@@ -15,13 +15,15 @@ interface WalletTableCellProps {
 
 export function WalletTableCell({ className, address, name, wallet }: WalletTableCellProps) {
   return (
-    <div className={cn('flex items-center gap-2 px-4 py-2', className)}>
+    <div className={cn('flex items-center gap-2 px-2 py-2 lg:px-4', className)}>
       <Identicon value={address ?? ''} className="size-8 min-w-8" />
       <div>
-        <div className="text-base/6 font-semibold">{capitalizeSentence(name)}</div>
+        <div className="text-base/6 font-semibold md:text-sm/5.5 lg:text-base/6">
+          {capitalizeSentence(name)}
+        </div>
         <div className="flex items-center gap-0.5">
           <Link
-            className="text-status-progress text-sm/5.5 font-semibold"
+            className="text-status-progress text-sm/5.5 font-semibold md:text-xs/4.5 lg:text-sm/5.5"
             href={`https://etherscan.io/address/${address}`}
           >
             {wallet.toLowerCase()}

@@ -14,7 +14,6 @@ interface Props {
   subHeader: string
   showSubHeader: boolean
   category?: string
-  spaceEachCards?: number
 }
 
 export function TransparencyCard({
@@ -28,30 +27,26 @@ export function TransparencyCard({
   separators,
   showSubHeader,
   category = 'General',
-  spaceEachCards = 0,
 }: Props) {
   if (itemType === 'section') return null
 
   return (
     <div
       className={cn(
-        'bg-card mb-4 flex flex-col pb-2 shadow-lg last:mb-0',
+        'bg-card flex flex-col overflow-hidden rounded-xl pb-2 shadow-lg',
         `advance-table--transparency-card ${
           itemType === 'total'
             ? 'advance-table--transparency-card_total'
             : 'advance-table--transparency_item'
         }`,
       )}
-      style={{ marginBottom: spaceEachCards }}
     >
-      <div className={cn('rounded-t-xl pt-2', { 'bg-slate-50': showSubHeader })}>
-        {showSubHeader && (
-          <div className="px-6 pb-2 text-xs/4.5 font-semibold md:pl-4">{category}</div>
-        )}
-        {showSubHeader && (
-          <div className="px-6 pb-2 text-xs/4.5 font-semibold md:pl-4">{subHeader}</div>
-        )}
-      </div>
+      {showSubHeader && (
+        <div className={cn('bg-accent flex flex-col gap-2 px-6 py-2')}>
+          <div className="text-base/6 font-semibold">{category}</div>
+          <div className="text-sm/5.5 font-semibold">{subHeader}</div>
+        </div>
+      )}
       {header}
 
       {headers.map((header, i) => {
@@ -74,27 +69,27 @@ export function TransparencyCard({
             >
               <div
                 className={cn(
-                  'flex h-[37px] min-w-[132px] items-center text-base/6 font-semibold',
-                  isTotal ? 'text-gray-900' : 'text-slate-100',
+                  'flex min-w-[132px] items-center text-base/6 font-semibold',
+                  isTotal ? 'text-foreground' : 'text-foreground/30',
                 )}
               >
                 {header}
               </div>
               <div
-                style={{
-                  display: itemType === 'total' ? 'flex' : undefined,
-                  justifyContent: 'flex-end',
-                  width:
-                    header === 'Target Balance' ||
-                    (header === 'Target Balance' && itemType !== 'total')
-                      ? '100%'
-                      : undefined,
-                }}
+                className={cn(
+                  'justify-end',
+                  { flex: itemType === 'total' },
+                  {
+                    'w-full':
+                      header === 'Target Balance' ||
+                      (header === 'Target Balance' && itemType !== 'total'),
+                  },
+                )}
               >
                 {items?.[i] ?? ''}
               </div>
             </div>
-            {separators?.[i] && <div className={cn('my-1.5 flex flex-1 border-t')} />}
+            {separators?.[i] && <div className={cn('my-2 flex flex-1 border-t')} />}
           </div>
         )
       })}
