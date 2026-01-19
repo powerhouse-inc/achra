@@ -16,15 +16,13 @@ function ProfileFinancesCardContent({ builderSlug }: ProfileFinancesCardContentP
       </p>
 
       <div className="flex gap-4">
-        <InternalLink href={`/network/powerhouse/builders/${builderSlug}/expense-reports` as Route}>
+        <InternalLink
+          href={`/network/powerhouse/builders/${builderSlug}/budget-statements` as Route}
+        >
           Budget Statements
         </InternalLink>
         {ff.builders.FINANCES_LINK_ENABLED && (
-          <InternalLink
-            href={`/network/powerhouse/builders/${builderSlug}/expense-reports` as Route}
-          >
-            Finances
-          </InternalLink>
+          <InternalLink href={'/network/powerhouse/finances' as Route}>Finances</InternalLink>
         )}
       </div>
 

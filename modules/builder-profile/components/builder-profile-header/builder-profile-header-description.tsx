@@ -9,9 +9,9 @@ interface BuilderProfileHeaderDescriptionProps {
 
 function BuilderProfileHeaderDescription({ description }: BuilderProfileHeaderDescriptionProps) {
   const pathname = usePathname()
-  const isExpenseReports = pathname.includes('expense-reports')
+  const isBudgetStatements = pathname.includes('budget-statements')
 
-  if (isExpenseReports) {
+  if (isBudgetStatements) {
     return null
   }
 
