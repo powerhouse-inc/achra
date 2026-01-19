@@ -18,7 +18,7 @@ function BuilderBreadcrumb({
   builderSlug,
 }: BuilderBreadcrumbProps) {
   const pathname = usePathname()
-  const isExpenseReports = pathname.includes('expense-reports')
+  const isBudgetStatements = pathname.includes('budget-statements')
 
   const items = [
     { label: networkName, href: `/network/${networkSlug}` as Route },
@@ -26,10 +26,10 @@ function BuilderBreadcrumb({
     { label: builderName, href: `/network/${networkSlug}/builders/${builderSlug}` as Route },
   ]
 
-  if (isExpenseReports) {
+  if (isBudgetStatements) {
     items.push({
-      label: 'Expense reports',
-      href: `/network/${networkSlug}/builders/${builderSlug}/expense-reports` as Route,
+      label: 'Budget Statements',
+      href: `/network/${networkSlug}/builders/${builderSlug}/budget-statements` as Route,
     })
   }
 
