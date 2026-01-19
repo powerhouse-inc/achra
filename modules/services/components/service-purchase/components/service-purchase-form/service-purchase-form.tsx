@@ -34,7 +34,9 @@ export const SECTION_IDS = {
   HOSTING_SUITE: 'hosting-suite',
 } as const
 
-const INITIAL_ENABLED_SECTIONS: Record<string, boolean> = {
+export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS]
+
+const INITIAL_ENABLED_SECTIONS: Record<SectionId, boolean> = {
   [SECTION_IDS.LEGAL_SETUP]: true,
   [SECTION_IDS.RECURRING_OPERATIONAL]: true,
   [SECTION_IDS.FINANCE_PACK]: true,
@@ -49,7 +51,7 @@ export default function ServicePurchaseForm() {
   // Shared state for PricingCalculator selections
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
   const [enabledSections, setEnabledSections] =
-    useState<Record<string, boolean>>(INITIAL_ENABLED_SECTIONS)
+    useState<Record<SectionId, boolean>>(INITIAL_ENABLED_SECTIONS)
 
   const activeStep = useWatch({
     control: form.control,
@@ -60,7 +62,7 @@ export default function ServicePurchaseForm() {
     setSelectedPlan(plan)
   }, [])
 
-  const handleSectionToggle = useCallback((sectionId: string, enabled: boolean) => {
+  const handleSectionToggle = useCallback((sectionId: SectionId, enabled: boolean) => {
     setEnabledSections((prev) => ({
       ...prev,
       [sectionId]: enabled,
