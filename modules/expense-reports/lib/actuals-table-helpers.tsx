@@ -120,7 +120,7 @@ export const getActualsBreakdownItems = (
   return result
 }
 
-export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet) => {
+export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet, isTablet: boolean) => {
   const hasGroups = hasWalletGroups(wallet)
 
   return [
@@ -132,7 +132,7 @@ export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet) => {
       width: hasGroups ? '220px' : '240px',
     },
     {
-      header: 'Mthly Budget',
+      header: isTablet ? 'Mthly B.' : 'Mthly Budget',
       align: 'right',
       type: 'number',
       hasBorderBottomOnCard: true,
@@ -150,7 +150,7 @@ export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet) => {
       hasBorderBottomOnCard: true,
     },
     {
-      header: 'Difference',
+      header: isTablet ? 'Diff.' : 'Difference',
       align: 'right',
       type: 'number',
       hasBorderBottomOnCard: true,

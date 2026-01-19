@@ -14,7 +14,6 @@ export function AdvancedInnerTable({
   className,
   tablePlaceholder,
   cardSpacingSize = 'large',
-  spaceEachCards,
 }: AdvancedInnerTableProps) {
   const visibleColumns = useMemo(() => columns.filter((x) => !x.hidden), [columns])
 
@@ -52,7 +51,7 @@ export function AdvancedInnerTable({
                     // eslint-disable-next-line react/no-array-index-key
                     key={`header-${columnIndex}`}
                     className={cn(
-                      'text-foreground/30 overflow-hidden px-4 py-2 text-base/6 font-semibold',
+                      'text-foreground/30 overflow-hidden px-2 py-2 text-base/6 font-semibold lg:px-4',
                       {
                         'border-r': column.hasBorderRight,
                       },
@@ -88,6 +87,9 @@ export function AdvancedInnerTable({
                         // columns order does not change, so we can use row/column indexes as key
                         // eslint-disable-next-line react/no-array-index-key
                         key={`row-${rowIndex}-column-${columnIndex}`}
+                        colSpan={
+                          row.type === 'groupTitle' || row.type === 'section' ? 3 : undefined
+                        }
                         className={cn({
                           'border-r': item.column.hasBorderRight,
                           'text-left': item.column.align === 'left',
@@ -107,7 +109,7 @@ export function AdvancedInnerTable({
       </div>
       <div
         className={cn(
-          'block md:hidden',
+          'flex flex-col gap-4 md:hidden',
           '[&_.advance-table--transparency\\_item_.advance-table--transparency-card\\_icon\\_hidden]:hidden',
         )}
       >
@@ -129,7 +131,6 @@ export function AdvancedInnerTable({
 
           return (
             <TransparencyCard
-              spaceEachCards={spaceEachCards}
               category={item.category}
               showSubHeader={item.showHeader ?? false}
               itemType={item.type}

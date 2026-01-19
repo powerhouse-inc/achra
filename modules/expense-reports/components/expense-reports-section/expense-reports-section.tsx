@@ -14,6 +14,7 @@ async function ExpenseReportsSection({ month }: ExpenseReportsSectionProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="container">
+        {/* TODO: replace this text once the new one is provided */}
         <Button variant="link" asChild className="text-foreground">
           <Link href="#" target="_blank">
             CES Core Unit on-chain transaction history <ExternalLinkIcon />
