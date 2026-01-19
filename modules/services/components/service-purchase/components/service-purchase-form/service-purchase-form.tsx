@@ -5,6 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { Summary } from '../../select-services-purchase/summary'
 import ProductInfo from '../product-info/product-info'
 import SelectServices from '../select-services-purchase/select-services/select-services'
 import type { PricingPlan } from '../select-services-purchase/types'
@@ -128,6 +129,15 @@ export default function ServicePurchaseForm() {
                     }}
                     onContinue={() => {
                       navigateToStep('summary')
+                    }}
+                  />
+                )}
+                {step.value === 'summary' && (
+                  <Summary
+                    selectedPlan={selectedPlan}
+                    enabledSections={enabledSections}
+                    onBack={() => {
+                      navigateToStep('select-services')
                     }}
                   />
                 )}

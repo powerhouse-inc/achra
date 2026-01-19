@@ -45,3 +45,10 @@ export enum CatalogStatus {
   Optional = 'Optional',
   Excluded = 'Excluded',
 }
+
+export interface ConfigurationData {
+  snoFunction: string
+  legalEntity: string
+  teamStructure: string
+  anonymityLevel: string
+}
