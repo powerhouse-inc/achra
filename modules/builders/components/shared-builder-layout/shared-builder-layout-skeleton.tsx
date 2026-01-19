@@ -2,7 +2,7 @@ import { BuilderProfileHeaderSkeleton } from '@/modules/builder-profile/componen
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
-export default function BuilderLayoutLoading() {
+function SharedBuilderLayoutSkeleton() {
   return (
     <>
       <PageBreadcrumbContainer>
@@ -14,3 +14,5 @@ export default function BuilderLayoutLoading() {
     </>
   )
 }
+
+export { SharedBuilderLayoutSkeleton }
