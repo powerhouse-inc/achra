@@ -12,20 +12,21 @@ import {
   ServiceCatalogRoot,
   ServiceCatalogRow,
 } from '.'
+import type { SectionId } from '../../service-purchase-form/service-purchase-form'
 
 import type { PricingPlan } from '../types'
 
 export interface PricingCalculatorProps {
   selectedPlan?: PricingPlan
-  enabledSections?: Record<string, boolean>
+  enabledSections?: Record<SectionId, boolean>
   onPlanChange?: (plan: PricingPlan) => void
-  onSectionToggle?: (sectionId: string, enabled: boolean) => void
+  onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   readOnly?: boolean
   showAllPlans?: boolean
 }
 export function PricingCalculator({
   selectedPlan = 'team',
-  enabledSections = {},
+  enabledSections,
   onPlanChange,
   onSectionToggle,
   readOnly = false,
@@ -39,7 +40,7 @@ export function PricingCalculator({
     [readOnly, onPlanChange],
   )
   const toggleSection = useCallback(
-    (sectionId: string, enabled: boolean) => {
+    (sectionId: SectionId, enabled: boolean) => {
       if (readOnly || !onSectionToggle) return
       onSectionToggle(sectionId, enabled)
     },
@@ -49,7 +50,7 @@ export function PricingCalculator({
   const visibleSections = useMemo(
     () =>
       readOnly
-        ? PRICING_DATA.sections?.filter((section) => enabledSections[section.id])
+        ? PRICING_DATA.sections?.filter((section) => enabledSections?.[section.id as SectionId])
         : PRICING_DATA.sections,
     [readOnly, enabledSections],
   )
@@ -70,7 +71,7 @@ export function PricingCalculator({
             <ServiceCatalogRoot
               key={section.id}
               activePlan={selectedPlan}
-              isEnabled={enabledSections[section.id]}
+              isEnabled={enabledSections?.[section.id as SectionId] ?? false}
               showAllPlans={showAllPlans}
             >
               <ServiceCatalogHeader
@@ -78,11 +79,11 @@ export function PricingCalculator({
                 badge={section.badge}
                 hasToggle={section.hasToggle}
                 toggleLabel={section.toggleLabel}
-                toggleEnabled={enabledSections[section.id]}
+                toggleEnabled={enabledSections?.[section.id as SectionId]}
                 onToggleChange={
                   section.hasToggle && !readOnly
                     ? (enabled: boolean) => {
-                        toggleSection(section.id, enabled)
+                        toggleSection(section.id as SectionId, enabled)
                       }
                     : undefined
                 }
