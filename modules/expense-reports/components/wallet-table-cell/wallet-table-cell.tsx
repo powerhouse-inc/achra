@@ -15,7 +15,12 @@ interface WalletTableCellProps {
 
 export function WalletTableCell({ className, address, name, wallet }: WalletTableCellProps) {
   return (
-    <div className={cn('flex items-center gap-2 px-2 py-2 lg:px-4', className)}>
+    <div
+      className={cn(
+        'flex items-center gap-4 px-6 pt-4 pb-2 md:gap-2 md:px-2 md:py-2 lg:px-4',
+        className,
+      )}
+    >
       <Identicon value={address ?? ''} className="size-8 min-w-8" />
       <div>
         <div className="text-base/6 font-semibold md:text-sm/5.5 lg:text-base/6">
