@@ -141,7 +141,7 @@ export default function ServicePurchaseForm() {
                     }}
                   />
                 )}
-                {!['product-info', 'select-services'].includes(step.value) && (
+                {!['product-info', 'select-services', 'summary'].includes(step.value) && (
                   <>
                     <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
                     <span className="text-foreground text-base/6">In progress...</span>
