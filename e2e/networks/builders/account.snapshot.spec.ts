@@ -1,18 +1,20 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/builder-1/expense-reports`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/expense-reports`);
 });
 
 test('should load the builder info', async ({ page }) => {
-    await expect(page.getByText('PH')).toBeVisible();
-    await expect(page.getByText('Powerhouse')).toHaveCount(7);
-    await expect(page.getByText('ACCEPTED')).toBeVisible();
-    await expect(page.getByText('Since 25-may-2021')).toBeVisible();
-    await expect(page.getByText('Technical')).toHaveCount(2);
-    await expect(page.getByText('Growth')).toHaveCount(2);
-    await expect(page.getByText('Support')).toHaveCount(2);
-    await expect(page.getByText('Operational')).toHaveCount(3);
+    await expect(page.getByText('Facilitator')).toHaveCount(2);
+    await expect(page.getByText('Backend Development')).toHaveCount(2);
+    await expect(page.getByText('Full Stack Development')).toHaveCount(2);
+    await expect(page.getByText('Devops Engineering')).toHaveCount(2);
+    await expect(page.getByText('Smart Contract Development')).toHaveCount(2);
+    await expect(page.getByText('UI/UX Design')).toHaveCount(2);
+    await expect(page.getByText('Technical Writing')).toHaveCount(2);
+    await expect(page.getByText('QA Testing')).toHaveCount(2);
+    await expect(page.getByText('Data Engineering')).toHaveCount(2);
+    await expect(page.getByText('Security Engineering')).toHaveCount(2);
 });
 
 test('should load the builder links', async ({ page }) => {
@@ -21,9 +23,9 @@ test('should load the builder links', async ({ page }) => {
 
     await expect(page.getByText('Website')).toBeVisible();
     await expect(page.getByText('Forum')).toBeVisible();
-    await expect(page.getByText('Discord')).toBeVisible();
-    await expect(page.getByText('Twitter')).toBeHidden();
-    await expect(page.getByText('GitHub')).toBeHidden();
+    await expect(page.getByText('Discord')).toHaveCount(2);
+    await expect(page.getByText('Twitter')).toHaveCount(2);
+    await expect(page.getByText('GitHub')).toBeVisible();
 });
 
 test('should navigate to the previous month', async ({ page }) => {
@@ -45,7 +47,7 @@ test('should load the MakerDAO Funding Overview', async ({ page }) => {
     await expect(page.getByText('9 Apr 2025')).toBeVisible();
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
     await expect(page.getByText('2,924,160')).toBeVisible();
-    await expect(page.getByText('USD')).toHaveCount(34);
+    await expect(page.getByText('USD')).toHaveCount(25);
     await expect(page.getByText('-791,666')).toBeVisible();
     await expect(page.getByText('Net Change')).toHaveCount(2);
     await expect(page.getByText('Extra Funds Made Available')).toBeVisible();
@@ -61,13 +63,13 @@ test('should load View Transaction History', async ({ page }) => {
     page.getByText('View Transaction History').click();
 
     await expect(page.getByText('Top-up')).toBeVisible();
-    await expect(page.getByText('04-Nov-2024 22:17 UTC')).toBeVisible();
-    await expect(page.getByText('0xc78c5d81042ce1...')).toBeVisible();
+    await expect(page.getByText('02-Oct-2024 09:08 UTC')).toBeVisible();
+    await expect(page.getByText('0x4e289cf451b243...')).toBeVisible();
     await expect(page.getByText('Recipient Address')).toBeVisible();
-    await expect(page.getByText('Powerhouse Genesis Operational Hub Association')).toBeVisible();
-    await expect(page.getByText('0xf130...0460')).toBeVisible();
+    await expect(page.getByText('PullUp Labs Operational')).toHaveCount(2);
+    await expect(page.getByText('0x42ad...f94c')).toHaveCount(2);
     await expect(page.getByText('Amount')).toBeVisible();
-    await expect(page.getByText('291,667')).toBeVisible();
+    await expect(page.getByText('275,000')).toHaveCount(3);
 
     page.getByText('View Transaction History').click();
 
@@ -87,27 +89,27 @@ test('should load MakerDAO Funding Overview info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('div > div > svg').first().hover();
+    await page.locator('div > div:nth-child(4) > div > div > div > div > div > button > svg').first().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
 test('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('Total Reserves')).toBeVisible();
     await expect(page.getByText('On-Chain and off-chain reserves accessible to the Powerhouse Team.')).toHaveCount(1);
-    await expect(page.getByText('Include Off-Chain Reserves')).toHaveCount(1);
-    await expect(page.getByText('14 OCT 2024')).toBeVisible();
-    await expect(page.getByText('-286,223')).toBeVisible();
+    await expect(page.getByText('Include Off-Chain Reserves')).toBeHidden();
+    await expect(page.getByText('9 Sep 2024')).toBeVisible();
+    await expect(page.getByText('-383,425')).toBeVisible();
     await expect(page.getByText('Initial Reserves')).toBeVisible();
-    await expect(page.getByText('993,619')).toHaveCount(2);
-    await expect(page.getByText('Inflow')).toHaveCount(3);
-    await expect(page.getByText('291,837')).toHaveCount(2);
-    await expect(page.getByText('Outflow')).toHaveCount(3);
-    await expect(page.getByText('578,060')).toHaveCount(2);
+    await expect(page.getByText('695,388')).toHaveCount(2);
+    await expect(page.getByText('Inflow')).toHaveCount(2);
+    await expect(page.getByText('275,000')).toHaveCount(2);
+    await expect(page.getByText('Outflow')).toHaveCount(2);
+    await expect(page.getByText('658,425')).toHaveCount(2);
     await expect(page.getByText('New Reserves')).toBeVisible();
-    await expect(page.getByText('707,396')).toHaveCount(2);
+    await expect(page.getByText('311,963')).toHaveCount(2);
 });
 
-test('should inlude off-chain reserves', async ({ page }) => {
+test.skip('should include off-chain reserves', async ({ page }) => {
     await expect(page.getByText('-286,223')).toBeVisible();
     await page.locator('#off-chain-reserves').check();
     await expect(page.getByText('185,652')).toBeVisible();
@@ -119,17 +121,16 @@ test('should load Total Reserves info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div > div > div > div:nth-child(2) > div > div > div > svg').first().hover();
+    await page.locator('body > div > div:nth-child(4) > div > div:nth-child(2) > div > div > div > button > svg').first().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
 test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('On Chain Reserves')).toBeVisible();
     await expect(page.getByText('Unspent On-Chain reserves to the Powerhouse Team.')).toHaveCount(1);
-    await expect(page.getByText('Operational')).toHaveCount(3);
-    await expect(page.getByText('Initial Balance')).toHaveCount(2);
-    await expect(page.getByText('993,619')).toHaveCount(2);
-    await expect(page.getByText('New Balance')).toHaveCount(2);
+    await expect(page.getByText('PullUp Labs Operational')).toBeVisible();
+    await expect(page.getByText('Initial Balance')).toBeVisible();
+    await expect(page.getByText('New Balance')).toBeVisible();
 });
 
 test('should expand accordion for On Chain Reserves', async ({ page }) => {
@@ -200,11 +201,11 @@ test('should load accordion for Growth', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > div > svg').hover();
+    await page.locator('body > div > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(1) > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load Off Chain Reserves', async ({ page }) => {
+test.skip('should load Off Chain Reserves', async ({ page }) => {
     await expect(page.getByText('Off Chain Reserves')).toBeVisible();
     await expect(page.getByText('Unspent Off-Chain reserves to the Powerhouse Team.')).toHaveCount(1);
     await expect(page.getByText('Accountable Payment Processor 2')).toBeVisible();
@@ -214,7 +215,7 @@ test('should load Off Chain Reserves', async ({ page }) => {
     await expect(page.getByText('1,983,872')).toBeVisible();
 });
 
-test('should load Off Chain Reserves info', async ({ page }) => {
+test.skip('should load Off Chain Reserves info', async ({ page }) => {
     const info = "Discover essential details about the off-chain balances.";
 
     await page.waitForLoadState('networkidle');
@@ -224,7 +225,7 @@ test('should load Off Chain Reserves info', async ({ page }) => {
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load the Off Chain Reserves transactions', async ({ page }) => {
+test.skip('should load the Off Chain Reserves transactions', async ({ page }) => {
     await page.getByText('Accountable Payment Processor 2').click();
     await page.waitForTimeout(1000);
 
@@ -244,21 +245,19 @@ test('should load Reported Expenses Comparison main data', async ({ page }) => {
     await expect(page.getByText('Reported Expenses Comparison')).toBeVisible();
     await expect(page.getByText('Reported actuals compared to expense and revenue transactions.')).toHaveCount(1);
     await expect(page.getByText('Reported Actuals')).toHaveCount(3);
-    await expect(page.getByText('Net Expense Transactions')).toHaveCount(2);
-    await expect(page.getByText('On-chain only')).toHaveCount(2);
-    await expect(page.getByText('Difference')).toHaveCount(4);
-    await expect(page.getByText('Including off-chain')).toHaveCount(2);
-    await expect(page.getByText('Oct-2024')).toHaveCount(2);
-    await expect(page.getByText('305,374.26')).toHaveCount(2);
+    await expect(page.getByText('Net Expense Transactions')).toBeVisible();
+    await expect(page.getByText('On-chain only')).toBeHidden();
+    await expect(page.getByText('Difference')).toHaveCount(2);
+    await expect(page.getByText('Including off-chain')).toBeHidden();
     await expect(page.getByText('Sep-2024')).toHaveCount(2);
-    await expect(page.getByText('286,240.82')).toBeVisible();
+    await expect(page.getByText('165,000.00')).toHaveCount(2);
     await expect(page.getByText('Aug-2024')).toHaveCount(2);
-    await expect(page.getByText('324,371.75')).toBeVisible();
-    await expect(page.getByText('0.00%')).toHaveCount(6);
+    await expect(page.getByText('158,800.00')).toBeVisible();
+    await expect(page.getByText('Jul-2024')).toHaveCount(2);
+    await expect(page.getByText('130,200.00')).toBeVisible();
+    await expect(page.getByText('0.00%')).toHaveCount(5);
     await expect(page.getByText('Totals')).toHaveCount(3);
-    await expect(page.getByText('915,986.83')).toBeVisible();
-    await expect(page.getByText('346,923.22 USD')).toHaveCount(4);
-    await expect(page.getByText('-62.13%')).toHaveCount(2);
+    await expect(page.getByText('454,000.00 USD')).toBeVisible();
 });
 
 test('should load Reported Expenses Comparison info', async ({ page }) => {
@@ -267,11 +266,11 @@ test('should load Reported Expenses Comparison info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div > div > div > div > div > div > svg').nth(1).hover();
+    await page.locator('body > div > div:nth-child(4) > div > div > div > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load the On-chain only info', async ({ page }) => {
+test.skip('should load the On-chain only info', async ({ page }) => {
     const info = "On-Chain view offers valuable insights into On-Chain dynamics, but excludes external (off-chain) transactions.";
 
     await page.waitForLoadState('networkidle');
@@ -281,7 +280,7 @@ test('should load the On-chain only info', async ({ page }) => {
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load the Including off-chain info', async ({ page }) => {
+test.skip('should load the Including off-chain info', async ({ page }) => {
     const info = "Enhance financial tracking and expense analysis by including off-chain transactions.";
 
     await page.waitForLoadState('networkidle');

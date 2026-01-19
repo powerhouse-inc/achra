@@ -67,8 +67,8 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('3 Days Ago')).toHaveCount(2);
     await expect(page.getByText('6 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('9 Days Ago')).toHaveCount(2);
     await expect(page.getByText('12-JAN-2026')).toHaveCount(1);
     await expect(page.getByText('09-JAN-2026')).toHaveCount(1);
 });
@@ -184,14 +184,14 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('4 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('6 Days Ago')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('6 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('9 Days Ago')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
