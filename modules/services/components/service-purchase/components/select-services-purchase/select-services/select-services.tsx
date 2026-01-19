@@ -3,13 +3,14 @@ import { MarketplaceHeader } from '@/modules/services/components/service-purchas
 import { Button } from '@/modules/shared/components/ui/button'
 import { PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
+import type { SectionId } from '../../service-purchase-form/service-purchase-form'
 import type { PricingPlan } from '../types'
 
 export interface SelectServicesProps {
   selectedPlan?: PricingPlan
-  enabledSections?: Record<string, boolean>
+  enabledSections?: Record<SectionId, boolean>
   onPlanChange?: (plan: PricingPlan) => void
-  onSectionToggle?: (sectionId: string, enabled: boolean) => void
+  onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   onBack?: () => void
   onContinue?: () => void
 }

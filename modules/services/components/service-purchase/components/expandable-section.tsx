@@ -12,7 +12,7 @@ interface ExpandableSectionProps {
 }
 
 export default function ExpandableSection({ title, description }: ExpandableSectionProps) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggleSection = () => {
     setIsOpen((prev) => !prev)
