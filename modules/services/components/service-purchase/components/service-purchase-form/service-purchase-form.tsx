@@ -74,6 +74,10 @@ export default function ServicePurchaseForm() {
     form.setValue('step', stepValue)
   }
 
+  const handleSelectAnOperator = () => {
+    navigateToStep('select-operator')
+  }
+
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler
   })
@@ -110,7 +114,9 @@ export default function ServicePurchaseForm() {
 
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-                {step.value === 'product-info' && <ProductInfo />}
+                {step.value === 'product-info' && (
+                  <ProductInfo onSelectAnOperator={handleSelectAnOperator} />
+                )}
                 {step.value === 'select-services' && (
                   <SelectServices
                     selectedPlan={selectedPlan}
