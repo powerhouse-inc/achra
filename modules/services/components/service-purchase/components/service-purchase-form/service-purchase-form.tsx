@@ -8,6 +8,7 @@ import {
   type StepValue,
   useServicePurchaseStep,
 } from '@/modules/services/context/service-purchase-step-context'
+import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
@@ -44,7 +45,7 @@ export default function ServicePurchaseForm() {
       operatorId: undefined,
     },
   })
-  const { activeStep, goToStep } = useServicePurchaseStep()
+  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
   // Shared state for PricingCalculator selections
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
@@ -76,6 +77,10 @@ export default function ServicePurchaseForm() {
     navigateToStep('select-services')
   }
 
+  const handleGoBack = () => {
+    goBack()
+  }
+
   const onSubmit = form.handleSubmit(() => {
     // TODO: replace with real submit handler
   })
@@ -88,7 +93,13 @@ export default function ServicePurchaseForm() {
         }}
       >
         <div className="flex flex-col gap-6">
-          {activeStep === 'product-info' && <ServiceInfo />}
+          {activeStep === 'product-info' ? (
+            <ServiceInfo />
+          ) : (
+            <Button variant="secondary" onClick={handleGoBack} className="mt-2.5 w-fit">
+              Back
+            </Button>
+          )}
           <div className="flex flex-col gap-10">
             <Tabs
               value={activeStep}
