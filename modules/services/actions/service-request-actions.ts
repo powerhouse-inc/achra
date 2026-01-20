@@ -1,0 +1,89 @@
+'use server'
+
+import 'server-only'
+import { z } from 'zod'
+
+import { sendServiceRequest } from '../lib/send-service-request'
+import type { PricingPlan } from '../components/service-purchase/components/select-services-purchase/types'
+import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
+import type { ServiceRequestFormState } from '../config/types'
+
+const serviceRequestSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  email: z.email({ message: 'Please enter a valid email address.' }),
+  selectedPlan: z.enum(['basic', 'team', 'premium', 'enterprise']),
+  enabledSections: z.string(),
+  configuration: z.string(),
+})
+
+// Add the correct data once that type is available
+export async function submitServiceRequestAction(
+  _prevState: ServiceRequestFormState,
+  formData: FormData,
+): Promise<ServiceRequestFormState> {
+  try {
+    const rawData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      selectedPlan: formData.get('selectedPlan') as string,
+      enabledSections: formData.get('enabledSections') as string,
+      configuration: formData.get('configuration') as string,
+    }
+
+    // Validate the form data
+    const result = serviceRequestSchema.safeParse(rawData)
+
+    if (!result.success) {
+      const fieldErrors: ServiceRequestFormState['fieldErrors'] = {}
+
+      for (const issue of result.error.issues) {
+        const field = issue.path[0]
+        if (field === 'name' || field === 'email') {
+          fieldErrors[field] = issue.message
+        }
+      }
+
+      return {
+        success: false,
+        error: 'Please fix the errors below.',
+        fieldErrors,
+      }
+    }
+
+    // Parse the JSON strings back to objects
+    const enabledSections = JSON.parse(result.data.enabledSections) as Record<SectionId, boolean>
+    const configuration = JSON.parse(result.data.configuration) as {
+      legalEntity: string
+      teamStructure: string
+      anonymityLevel: string
+    }
+
+    const sendResult = await sendServiceRequest({
+      name: result.data.name,
+      email: result.data.email,
+      selectedPlan: result.data.selectedPlan as PricingPlan,
+      enabledSections,
+      configuration,
+    })
+
+    if (sendResult) {
+      return {
+        success: true,
+        message:
+          'Your request has been submitted! We will send a PDF summary to your email shortly.',
+      }
+    }
+
+    return {
+      success: false,
+      error: 'Failed to submit your request. Please try again.',
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Service request submission error:', error)
+    return {
+      success: false,
+      error: 'An unexpected error occurred. Please try again.',
+    }
+  }
+}

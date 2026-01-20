@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/ca
 import { LabeledSelect } from '../../components/select-services-purchase/labeled-select'
 import { MarketplaceHeader } from '../../components/select-services-purchase/marketplace-header'
 import { ServiceBreakdownItem } from './service-breakdown-item'
+import { SummaryForm } from './summary-form'
 import type { ConfigurationData, PricingPlan } from '../types'
 
 // Mock configuration data
@@ -60,7 +61,7 @@ function Summary({ selectedPlan, enabledSections, onBack }: Readonly<SummaryProp
   return (
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader />
-      <Card className="mx-auto w-full max-w-[874px] p-6 py-6!">
+      <Card className="mx-auto w-full max-w-218.5 p-6 py-6!">
         <CardHeader className="flex flex-row items-start justify-between gap-4 p-0! pb-6">
           <div className="flex items-start gap-2">
             <div className="bg-primary flex size-16 items-center justify-center rounded-2xl">
@@ -160,6 +161,16 @@ function Summary({ selectedPlan, enabledSections, onBack }: Readonly<SummaryProp
           </div>
         </CardContent>
       </Card>
+
+      <SummaryForm
+        selectedPlan={selectedPlan}
+        enabledSections={enabledSections}
+        configuration={{
+          legalEntity,
+          teamStructure,
+          anonymityLevel,
+        }}
+      />
       <div className="mx-auto flex w-full max-w-[874px] justify-between">
         <Button variant="outline" onClick={onBack}>
           Back
