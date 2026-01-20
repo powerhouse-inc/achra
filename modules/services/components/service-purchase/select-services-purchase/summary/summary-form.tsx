@@ -1,7 +1,8 @@
 'use client'
 
 import { Link, SendHorizontal } from 'lucide-react'
-import { startTransition, useActionState, useState } from 'react'
+import { startTransition, useActionState } from 'react'
+import { useForm } from 'react-hook-form'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -42,13 +43,22 @@ export function SummaryForm({
   onShareConfiguration,
 }: Readonly<SummaryFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
 
-  const handleSubmit = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+    },
+  })
+
+  const onSubmit = (data: { name: string; email: string }) => {
     const formData = new FormData()
-    formData.append('name', name)
-    formData.append('email', email)
+    formData.append('name', data.name)
+    formData.append('email', data.email)
     formData.append('selectedPlan', selectedPlan)
     formData.append('enabledSections', JSON.stringify(enabledSections))
     formData.append('configuration', JSON.stringify(configuration))
@@ -65,78 +75,95 @@ export function SummaryForm({
           <div className="flex flex-col gap-6">
             {/* Success Message */}
             {state.success && state.message && (
-              <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950">
-                <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                  {state.message}
-                </p>
+              <div className="border-status-success/20 bg-status-success/10 rounded-lg border p-4">
+                <p className="text-status-success text-sm font-medium">{state.message}</p>
               </div>
             )}
 
-            {/* Error Message */}
             {!state.success && state.error && (
-              <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950">
-                <p className="text-sm font-medium text-red-800 dark:text-red-200">{state.error}</p>
+              <div className="border-destructive/20 bg-destructive/10 rounded-lg border p-4">
+                <p className="text-destructive text-sm font-medium">{state.error}</p>
               </div>
             )}
-
-            {/* Name Field */}
             <div className="flex flex-col gap-2">
               <Label htmlFor="summary-name">
                 Name <span>*</span>
               </Label>
               <Input
                 id="summary-name"
-                name="name"
+                {...register('name', { required: 'Name is required' })}
                 placeholder="Your name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value)
-                }}
                 disabled={isPending}
                 autoComplete="name"
-                aria-describedby={state.fieldErrors?.name ? 'summary-name-error' : undefined}
-                className={state.fieldErrors?.name ? 'border-red-500' : ''}
+                aria-describedby={
+                  errors.name
+                    ? 'summary-name-error'
+                    : state.fieldErrors?.name
+                      ? 'summary-name-server-error'
+                      : undefined
+                }
+                className={errors.name || state.fieldErrors?.name ? 'border-destructive' : ''}
               />
+              {errors.name && (
+                <p id="summary-name-error" className="text-destructive text-sm">
+                  {errors.name.message}
+                </p>
+              )}
               {state.fieldErrors?.name && (
-                <p id="summary-name-error" className="text-sm text-red-500">
+                <p id="summary-name-server-error" className="text-destructive text-sm">
                   {state.fieldErrors.name}
                 </p>
               )}
             </div>
 
-            {/* Email Field */}
             <div className="flex flex-col gap-2">
               <Label htmlFor="summary-email">
                 Email <span>*</span>
               </Label>
               <Input
                 id="summary-email"
-                name="email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
                 type="email"
                 placeholder="your@email.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value)
-                }}
                 disabled={isPending}
                 autoComplete="email"
                 aria-describedby={
-                  state.fieldErrors?.email ? 'summary-email-error' : 'summary-email-description'
+                  errors.email
+                    ? 'summary-email-error'
+                    : state.fieldErrors?.email
+                      ? 'summary-email-server-error'
+                      : 'summary-email-description'
                 }
-                className={state.fieldErrors?.email ? 'border-red-500' : ''}
+                className={errors.email || state.fieldErrors?.email ? 'border-destructive' : ''}
               />
               <p id="summary-email-description" className="text-muted-foreground text-sm">
                 We&apos;ll send a PDF summary and next steps to this address.
               </p>
+              {errors.email && (
+                <p id="summary-email-error" className="text-destructive text-sm">
+                  {errors.email.message}
+                </p>
+              )}
               {state.fieldErrors?.email && (
-                <p id="summary-email-error" className="text-sm text-red-500">
+                <p id="summary-email-server-error" className="text-destructive text-sm">
                   {state.fieldErrors.email}
                 </p>
               )}
             </div>
 
             {/* Submit Button */}
-            <Button type="button" onClick={handleSubmit} disabled={isPending} className="w-full">
+            <Button
+              type="button"
+              onClick={(e) => void handleSubmit(onSubmit)(e)}
+              disabled={isPending}
+              className="w-full"
+            >
               {isPending ? (
                 'Submitting...'
               ) : (
