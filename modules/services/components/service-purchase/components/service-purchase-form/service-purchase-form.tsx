@@ -1,32 +1,23 @@
 'use client'
 import { useCallback, useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
+import {
+  STEP_NUMBER_MAP,
+  STEPS,
+  type StepValue,
+  useServicePurchaseStep,
+} from '@/modules/services/context/service-purchase-step-context'
+import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { Summary } from '../../select-services-purchase/summary'
-import ProductInfo from '../product-info/product-info'
 import SelectServices from '../select-services-purchase/select-services/select-services'
+import ProductInfo from './components/product-info/product-info'
+import SelectOperator from './components/select-operator/select-operator'
+import ServiceInfo from './components/service-info/service-info'
 import type { PricingPlan } from '../select-services-purchase/types'
-
-const STEPS = [
-  { value: 'product-info', label: 'Product Info' },
-  { value: 'select-operator', label: 'Select Operator' },
-  { value: 'select-services', label: 'Select Services' },
-  { value: 'summary', label: 'Summary' },
-  { value: 'confirmation', label: 'Confirmation' },
-] as const
-
-type StepValue = (typeof STEPS)[number]['value']
-
-const STEP_NUMBER_MAP: Record<StepValue, number> = {
-  'product-info': 1,
-  'select-operator': 2,
-  'select-services': 3,
-  summary: 4,
-  confirmation: 5,
-}
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
@@ -44,20 +35,22 @@ const INITIAL_ENABLED_SECTIONS: Record<SectionId, boolean> = {
   [SECTION_IDS.HOSTING_SUITE]: false,
 }
 
+interface ServicePurchaseFormValues {
+  operatorId?: string
+}
+
 export default function ServicePurchaseForm() {
-  const form = useForm<{ step: StepValue }>({
-    defaultValues: { step: STEPS[0].value },
+  const form = useForm<ServicePurchaseFormValues>({
+    defaultValues: {
+      operatorId: undefined,
+    },
   })
+  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
   // Shared state for PricingCalculator selections
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
   const [enabledSections, setEnabledSections] =
     useState<Record<SectionId, boolean>>(INITIAL_ENABLED_SECTIONS)
-
-  const activeStep = useWatch({
-    control: form.control,
-    name: 'step',
-  })
 
   const handlePlanChange = useCallback((plan: PricingPlan) => {
     setSelectedPlan(plan)
@@ -72,11 +65,20 @@ export default function ServicePurchaseForm() {
 
   // Navigation handlers
   const navigateToStep = (stepValue: StepValue) => {
-    form.setValue('step', stepValue)
+    goToStep(stepValue)
   }
 
   const handleSelectAnOperator = () => {
     navigateToStep('select-operator')
+  }
+
+  const handleSelectServices = (operatorId: string) => {
+    form.setValue('operatorId', operatorId)
+    navigateToStep('select-services')
+  }
+
+  const handleGoBack = () => {
+    goBack()
   }
 
   const onSubmit = form.handleSubmit(() => {
@@ -90,72 +92,90 @@ export default function ServicePurchaseForm() {
           void onSubmit(event)
         }}
       >
-        <div className="flex flex-col gap-10">
-          <Tabs
-            value={activeStep}
-            onValueChange={(value) => {
-              form.setValue('step', value as StepValue)
-            }}
-            className="w-full"
-          >
-            <TabsList className="h-fit w-full bg-transparent px-18">
+        <div className="flex flex-col gap-6">
+          {activeStep === 'product-info' ? (
+            <ServiceInfo />
+          ) : (
+            <Button variant="secondary" onClick={handleGoBack} className="mt-2.5 w-fit">
+              Back
+            </Button>
+          )}
+          <div className="flex flex-col gap-10">
+            <Tabs
+              value={activeStep}
+              onValueChange={(value) => {
+                goToStep(value as StepValue)
+              }}
+              className="w-full"
+            >
+              <TabsList className="h-fit w-full bg-transparent px-18">
+                {STEPS.map((step) => (
+                  <TabsTrigger
+                    key={step.value}
+                    value={step.value}
+                    className="group flex flex-col items-center gap-2 px-6 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                  >
+                    <div className="group-data-[state=active]:bg-primary border-primary border-width-2 size-6 rounded-full border" />
+                    <span className="text-foreground/50 group-data-[state=active]:text-foreground text-xl/6 font-bold">
+                      {step.label}
+                    </span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
               {STEPS.map((step) => (
-                <TabsTrigger
+                <TabsContent
                   key={step.value}
                   value={step.value}
-                  className="group flex flex-col items-center gap-2 px-6 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                  className="m-0 flex flex-col gap-2"
                 >
-                  <div className="group-data-[state=active]:bg-primary border-primary border-width-2 size-6 rounded-full border" />
-                  <span className="text-foreground/50 group-data-[state=active]:text-foreground text-xl/6 font-bold">
-                    {step.label}
-                  </span>
-                </TabsTrigger>
+                  {step.value === 'product-info' && (
+                    <ProductInfo onSelectAnOperator={handleSelectAnOperator} />
+                  )}
+                  {step.value === 'select-operator' && (
+                    <SelectOperator onSelectServices={handleSelectServices} />
+                  )}
+                  {step.value === 'select-services' && (
+                    <SelectServices
+                      selectedPlan={selectedPlan}
+                      enabledSections={enabledSections}
+                      onPlanChange={handlePlanChange}
+                      onSectionToggle={handleSectionToggle}
+                      onBack={() => {
+                        navigateToStep('select-operator')
+                      }}
+                      onContinue={() => {
+                        navigateToStep('summary')
+                      }}
+                    />
+                  )}
+                  {step.value === 'summary' && (
+                    <Summary
+                      selectedPlan={selectedPlan}
+                      enabledSections={enabledSections}
+                      onBack={() => {
+                        navigateToStep('select-services')
+                      }}
+                    />
+                  )}
+                  {!['product-info', 'select-services', 'summary', 'select-operator'].includes(
+                    step.value,
+                  ) && (
+                    <>
+                      <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
+                      <span className="text-foreground text-base/6">In progress...</span>
+                    </>
+                  )}
+                </TabsContent>
               ))}
-            </TabsList>
-
-            {STEPS.map((step) => (
-              <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-                {step.value === 'product-info' && (
-                  <ProductInfo onSelectAnOperator={handleSelectAnOperator} />
-                )}
-                {step.value === 'select-services' && (
-                  <SelectServices
-                    selectedPlan={selectedPlan}
-                    enabledSections={enabledSections}
-                    onPlanChange={handlePlanChange}
-                    onSectionToggle={handleSectionToggle}
-                    onBack={() => {
-                      navigateToStep('select-operator')
-                    }}
-                    onContinue={() => {
-                      navigateToStep('summary')
-                    }}
-                  />
-                )}
-                {step.value === 'summary' && (
-                  <Summary
-                    selectedPlan={selectedPlan}
-                    enabledSections={enabledSections}
-                    onBack={() => {
-                      navigateToStep('select-services')
-                    }}
-                  />
-                )}
-                {!['product-info', 'select-services', 'summary'].includes(step.value) && (
-                  <>
-                    <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
-                    <span className="text-foreground text-base/6">In progress...</span>
-                  </>
-                )}
-              </TabsContent>
-            ))}
-          </Tabs>
-          <div className="flex w-full flex-col gap-2 px-16 pt-2">
-            <span className="text-foreground/50 h-fit self-center text-lg/6 font-bold">
-              Step <span className="text-foreground">{STEP_NUMBER_MAP[activeStep]}</span> of{' '}
-              {STEPS.length}
-            </span>
-            <Separator />
+            </Tabs>
+            <div className="flex w-full flex-col gap-2 px-16 pt-2">
+              <span className="text-foreground/50 h-fit self-center text-lg/6 font-bold">
+                Step <span className="text-foreground">{STEP_NUMBER_MAP[activeStep]}</span> of{' '}
+                {STEPS.length}
+              </span>
+              <Separator />
+            </div>
           </div>
         </div>
       </form>

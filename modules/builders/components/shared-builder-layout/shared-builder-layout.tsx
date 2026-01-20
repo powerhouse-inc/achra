@@ -1,23 +1,16 @@
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
-import {
-  BuilderProfileHeader,
-  BuilderProfileHeaderSkeleton,
-} from '@/modules/builder-profile/components/builder-profile-header'
+import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
-import { BuilderBreadcrumb } from '@/modules/builders/components/builder-breadcrumb/builder-breadcrumb'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
+import { BuilderBreadcrumb } from '../builder-breadcrumb/builder-breadcrumb'
 
-interface BuildersProfileLayoutProps {
+interface SharedBuilderLayoutProps {
   params: Promise<{ slug: string; builderSlug: string }>
-  children: React.ReactNode
 }
-export default async function BuildersProfileLayout({
-  params,
-  children,
-}: BuildersProfileLayoutProps) {
+
+async function SharedBuilderLayout({ params }: SharedBuilderLayoutProps) {
   const { slug, builderSlug } = await params
 
   const network = await getNetworkBySlug(slug)
@@ -41,11 +34,10 @@ export default async function BuildersProfileLayout({
         />
       </PageBreadcrumbContainer>
       <ErrorBoundaryWithPresets>
-        <Suspense fallback={<BuilderProfileHeaderSkeleton />}>
-          <BuilderProfileHeader builder={builder} />
-        </Suspense>
+        <BuilderProfileHeader builder={builder} />
       </ErrorBoundaryWithPresets>
-      {children}
     </>
   )
 }
+
+export { SharedBuilderLayout }
