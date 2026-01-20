@@ -1,8 +1,7 @@
 'use client'
 
-import ExpandableSection from '@/modules/services/components/service-purchase/components/expandable-section'
+import ExpandableSection from '@/modules/services/components/service-purchase/components/service-purchase-form/components/product-info/components/expandable-section'
 import { Button } from '@/modules/shared/components/ui/button'
-
 export interface ProductInfoProps {
   onSelectAnOperator: () => void
 }
