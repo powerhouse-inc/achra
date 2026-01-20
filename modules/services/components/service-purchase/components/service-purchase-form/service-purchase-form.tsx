@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/compo
 import { Summary } from '../../select-services-purchase/summary'
 import SelectServices from '../select-services-purchase/select-services/select-services'
 import ProductInfo from './components/product-info/product-info'
+import SelectOperator from './components/select-operator/select-operator'
 import ServiceInfo from './components/service-info/service-info'
 import type { PricingPlan } from '../select-services-purchase/types'
 
@@ -33,8 +34,16 @@ const INITIAL_ENABLED_SECTIONS: Record<SectionId, boolean> = {
   [SECTION_IDS.HOSTING_SUITE]: false,
 }
 
+interface ServicePurchaseFormValues {
+  operatorId?: string
+}
+
 export default function ServicePurchaseForm() {
-  const form = useForm()
+  const form = useForm<ServicePurchaseFormValues>({
+    defaultValues: {
+      operatorId: undefined,
+    },
+  })
   const { activeStep, goToStep } = useServicePurchaseStep()
 
   // Shared state for PricingCalculator selections
@@ -60,6 +69,11 @@ export default function ServicePurchaseForm() {
 
   const handleSelectAnOperator = () => {
     navigateToStep('select-operator')
+  }
+
+  const handleSelectServices = (operatorId: string) => {
+    form.setValue('operatorId', operatorId)
+    navigateToStep('select-services')
   }
 
   const onSubmit = form.handleSubmit(() => {
@@ -107,6 +121,9 @@ export default function ServicePurchaseForm() {
                   {step.value === 'product-info' && (
                     <ProductInfo onSelectAnOperator={handleSelectAnOperator} />
                   )}
+                  {step.value === 'select-operator' && (
+                    <SelectOperator onSelectServices={handleSelectServices} />
+                  )}
                   {step.value === 'select-services' && (
                     <SelectServices
                       selectedPlan={selectedPlan}
@@ -130,7 +147,9 @@ export default function ServicePurchaseForm() {
                       }}
                     />
                   )}
-                  {!['product-info', 'select-services', 'summary'].includes(step.value) && (
+                  {!['product-info', 'select-services', 'summary', 'select-operator'].includes(
+                    step.value,
+                  ) && (
                     <>
                       <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
                       <span className="text-foreground text-base/6">In progress...</span>
