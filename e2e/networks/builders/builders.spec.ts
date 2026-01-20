@@ -67,10 +67,10 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('6 Days Ago')).toHaveCount(2);
-    await expect(page.getByText('9 Days Ago')).toHaveCount(2);
-    await expect(page.getByText('12-JAN-2026')).toHaveCount(1);
+    await expect(page.getByText('10 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('14 Hours Ago')).toHaveCount(2);
     await expect(page.getByText('09-JAN-2026')).toHaveCount(1);
+    await expect(page.getByText('19-JAN-2026')).toHaveCount(1);
 });
 
 test('should load all builder links', async ({ page }) => {
