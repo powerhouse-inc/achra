@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/expense-reports`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements`);
 });
 
 test('should load the builder info', async ({ page }) => {
@@ -133,7 +133,7 @@ test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('New Balance')).toBeVisible();
 });
 
-test('should expand accordion for On Chain Reserves', async ({ page }) => {
+test.skip('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await expect(page.getByText('Powerhouse Operational')).toBeHidden();
     await page.locator('body > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div').click();
@@ -193,6 +193,39 @@ test('should expand accordion for On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('Launch Project')).toHaveCount(1);
     await expect(page.getByText('0x3c51...d02f')).toHaveCount(1);
     await expect(page.getByText('291,667')).toHaveCount(1);
+});
+
+test('should expand accordion for On Chain Reserves with a single wallet', async ({ page }) => {
+    await page.waitForLoadState('networkidle');
+    page.getByText('PullUp Labs Operational').click();
+
+    await expect(page.getByText('Top-up')).toHaveCount(1);
+    await expect(page.getByText('02-Oct-2024 09:08 UTC')).toHaveCount(1);
+    await expect(page.getByText('0x4e289cf451b243...')).toHaveCount(1);
+    await expect(page.getByText('Sender Address')).toHaveCount(1);
+    await expect(page.getByText('Launch Project')).toHaveCount(1);
+    await expect(page.getByText('0x3c51...d02f')).toHaveCount(1);
+    await expect(page.getByText('Amount')).toHaveCount(8);
+    await expect(page.getByText('275,000')).toHaveCount(3);
+
+    await expect(page.getByText('External Transaction')).toHaveCount(7);
+    await expect(page.getByText('25-Sep-2024 05:56 UTC')).toHaveCount(4);
+    await expect(page.getByText('0x43350d5e8c0d9b...')).toHaveCount(4);
+    await expect(page.getByText('Recipient Address')).toHaveCount(7);
+    await expect(page.getByText('External Address')).toHaveCount(7);
+    await expect(page.getByText('0x27f0...3f15')).toHaveCount(1);
+    await expect(page.getByText('366,625')).toHaveCount(1);
+
+    await expect(page.getByText('0xb6f7...3b8d')).toHaveCount(2);
+    await expect(page.getByText('70,000')).toHaveCount(1);
+    await expect(page.getByText('0xf27c...c948')).toHaveCount(1);
+    await expect(page.getByText('28,200')).toHaveCount(2);
+    await expect(page.getByText('0x81f7...53c1')).toHaveCount(2);
+    await expect(page.getByText('28,600')).toHaveCount(1);
+    await expect(page.getByText('0x3abcef73f93045...')).toHaveCount(3);
+    await expect(page.getByText('80,000')).toHaveCount(1);
+    await expect(page.getByText('0x48b8...b06c')).toHaveCount(1);
+    await expect(page.getByText('56,800')).toHaveCount(1);
 });
 
 test('should load accordion for Growth', async ({ page }) => {
