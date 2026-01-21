@@ -22,7 +22,6 @@ export interface PricingCalculatorProps {
   onPlanChange?: (plan: PricingPlan) => void
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   readOnly?: boolean
-  showAllPlans?: boolean
 }
 export function PricingCalculator({
   selectedPlan = 'team',
@@ -30,7 +29,6 @@ export function PricingCalculator({
   onPlanChange,
   onSectionToggle,
   readOnly = false,
-  showAllPlans = true,
 }: PricingCalculatorProps = {}) {
   const handlePlanChange = useCallback(
     (plan: PricingPlan) => {
@@ -63,7 +61,6 @@ export function PricingCalculator({
           selectedPlan={selectedPlan}
           handlePlanChange={handlePlanChange}
           readOnly={readOnly}
-          showAllPlans={showAllPlans}
         />
         {/* Service Sections */}
         <div className="flex flex-col">
@@ -72,7 +69,6 @@ export function PricingCalculator({
               key={section.id}
               activePlan={selectedPlan}
               isEnabled={enabledSections?.[section.id as SectionId] ?? false}
-              showAllPlans={showAllPlans}
             >
               <ServiceCatalogHeader
                 title={section.title}
@@ -108,7 +104,7 @@ export function PricingCalculator({
           ))}
         </div>
         {/* Grand Total */}
-        <GrandTotalRowCatalog showAllPlans={showAllPlans} selectedPlan={selectedPlan} />
+        <GrandTotalRowCatalog selectedPlan={selectedPlan} />
       </div>
     </Card>
   )

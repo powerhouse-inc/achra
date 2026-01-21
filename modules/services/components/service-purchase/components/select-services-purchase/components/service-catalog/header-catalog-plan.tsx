@@ -8,24 +8,17 @@ interface HeaderCatalogPlanProps {
   selectedPlan?: PricingPlan
   handlePlanChange: (plan: PricingPlan) => void
   readOnly?: boolean
-  showAllPlans?: boolean
 }
 
 export default function HeaderCatalogPlan({
   selectedPlan,
   handlePlanChange,
   readOnly = false,
-  showAllPlans = true,
 }: Readonly<HeaderCatalogPlanProps>) {
   return (
-    <div
-      className={cn(
-        'item-center grid h-21',
-        showAllPlans ? 'grid-cols-[2fr_repeat(4,1fr)]' : 'grid-cols-[2fr_1fr]',
-      )}
-    >
+    <div className={cn('grid h-21 items-center gap-4 px-6', 'grid-cols-[2fr_repeat(4,1fr)]')}>
       {/* Header cell - takes 2fr (first column) */}
-      <div className="flex items-center pl-6">
+      <div className="flex items-center">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
           SERVICE CATALOG
         </span>
@@ -37,32 +30,25 @@ export default function HeaderCatalogPlan({
         onValueChange={(value) => {
           handlePlanChange(value as PricingPlan)
         }}
-        className={cn('contents', showAllPlans ? 'col-span-4' : 'col-span-1')}
+        className={cn('contents', 'col-span-4')}
         disabled={readOnly}
       >
-        {showAllPlans
-          ? PRICING_DATA.tiers.map((tier) => (
-              <div key={tier.id} className="flex items-center justify-center">
-                <PlanSelectorItem
-                  value={tier.id}
-                  label={tier.name}
-                  description={tier.price}
-                  id={tier.id}
-                />
-              </div>
-            ))
-          : PRICING_DATA.tiers
-              .filter((tier) => tier.id === selectedPlan)
-              .map((tier) => (
-                <div key={tier.id} className="border-border border-b">
-                  <PlanSelectorItem
-                    value={tier.id}
-                    label={tier.name}
-                    description={tier.price}
-                    id={tier.id}
-                  />
-                </div>
-              ))}
+        {PRICING_DATA.tiers.map((tier) => (
+          <div
+            key={tier.id}
+            className={cn(
+              'flex h-full items-center justify-center transition-colors',
+              selectedPlan === tier.id && 'bg-primary/15',
+            )}
+          >
+            <PlanSelectorItem
+              value={tier.id}
+              label={tier.name}
+              description={tier.price}
+              id={tier.id}
+            />
+          </div>
+        ))}
       </RadioGroup>
     </div>
   )

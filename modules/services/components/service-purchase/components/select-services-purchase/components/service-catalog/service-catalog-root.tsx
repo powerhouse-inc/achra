@@ -7,7 +7,6 @@ import type { PricingPlan } from '../types'
 interface ServiceCatalogContextValue {
   activePlan: PricingPlan
   isEnabled: boolean
-  showAllPlans: boolean
 }
 
 const ServiceCatalogContext = createContext<ServiceCatalogContextValue | undefined>(undefined)
@@ -23,21 +22,16 @@ export function useServiceCatalogContext() {
 export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {
   activePlan: PricingPlan
   isEnabled: boolean
-  showAllPlans?: boolean
 }
 
 export function ServiceCatalogRoot({
   children,
   activePlan,
   isEnabled,
-  showAllPlans = true,
   className,
   ...props
 }: Readonly<ServiceCatalogRootProps>) {
-  const contextValue = useMemo(
-    () => ({ activePlan, isEnabled, showAllPlans }),
-    [activePlan, isEnabled, showAllPlans],
-  )
+  const contextValue = useMemo(() => ({ activePlan, isEnabled }), [activePlan, isEnabled])
 
   return (
     <ServiceCatalogContext.Provider value={contextValue}>
