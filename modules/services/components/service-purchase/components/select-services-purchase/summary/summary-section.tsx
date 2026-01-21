@@ -7,10 +7,9 @@ import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 
-import { ServiceBreakdownItem } from '../../summary'
+import { ServiceBreakdownItem, Summary } from '../../summary'
 import { LabeledSelect } from '../components/labeled-select'
 import { MarketplaceHeader } from '../components/marketplace-header'
-import { Summary } from './summary'
 import type { PricingPlan } from '../components/types'
 
 const additionalCosts = {
