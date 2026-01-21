@@ -65,8 +65,8 @@ function FinancesSkeleton() {
   return (
     <div className="flex flex-col gap-2">
       <Skeleton className="h-6 w-22.25" />
-      <div className="bg-popover flex w-full flex-col gap-4 rounded-xl p-4 shadow-sm sm:w-104">
-        <Skeleton className="h-5.5 w-full sm:w-94" />
+      <div className="bg-popover flex w-full flex-col gap-4 rounded-xl p-4 shadow-sm">
+        <Skeleton className="h-5.5 w-full" />
         <div className="flex gap-4">
           <Skeleton className="h-9 w-46.5" />
           <Skeleton className="h-9 w-29.25" />
@@ -142,7 +142,7 @@ function ProjectSkeleton() {
 function BuilderProfileSkeleton() {
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[65%_1fr]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[55%_1fr] xl:grid-cols-[65%_1fr]">
         <AboutUsSkeleton />
         <div className="flex flex-col gap-6">
           <div className="flex justify-end">

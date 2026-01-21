@@ -103,7 +103,7 @@ export default function ServicePurchaseForm() {
     // Improve this once real data its available
     const formData = new FormData()
     formData.append('name', data.name)
-    formData.append('operatorId', data.operatorId || '')
+    formData.append('operatorId', data.operatorId ?? '')
     formData.append('email', data.email)
     formData.append('selectedPlan', selectedPlan)
     formData.append('enabledSections', JSON.stringify(enabledSections))
