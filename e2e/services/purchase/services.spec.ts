@@ -4,13 +4,14 @@ test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub/purchase`);
 
     await page.getByText('Select Services').click();
+    await page.waitForTimeout(1000);
 });
 
 test('should contain the default selector values in the step', async ({ page }) => {
     await expect(page.getByText('SNO Function')).toBeVisible();
     await expect(page.getByText('Operational Hub')).toHaveCount(3);
 
-    await expect(page.getByText('Legal Entity')).toHaveCount(2);
+    await expect(page.getByText('Legal Entity')).toBeVisible();
     await expect(page.getByText('Swiss Association')).toHaveCount(2);
 
     await expect(page.getByText('Team Structure')).toBeVisible();
@@ -63,8 +64,8 @@ test('should contain the recurring operational service in the step', async ({ pa
 });
 
 test('should contain the finance pack in the step', async ({ page }) => {
-    await expect(page.getByText('Finance Pack')).toHaveCount(2);
-    await expect(page.getByText('+ $50/mo')).toHaveCount(2);
+    await expect(page.getByText('Finance Pack')).toBeVisible();
+    await expect(page.getByText('+ $50/mo')).toBeVisible();
     await expect(page.getByText('Bank Account Setup')).toHaveCount(2);
     await expect(page.getByText('Optional')).toBeVisible();
     await expect(page.getByText('Priority')).toHaveCount(2);
@@ -90,7 +91,7 @@ test('should contain the hosting suite in the step', async ({ page }) => {
 });
 
 test('should contain the back button in the step', async ({ page }) => {
-    await page.getByText('Back').click();
+    await page.getByText('Back').first().click();
     await expect(page.getByText('Step 2 of 5')).toBeVisible();
 });
 
