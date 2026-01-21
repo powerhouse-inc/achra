@@ -45,3 +45,7 @@ export enum CatalogStatus {
   Optional = 'Optional',
   Excluded = 'Excluded',
 }
+
+// Improve this when UI its ready
+export const TEAM_STRUCTURE_OPTIONS = ['Remote Team', 'Hybrid Team', 'Local Team'] as const
+export const ANONYMITY_LEVEL_OPTIONS = ['High (Standard)', 'Higher'] as const
