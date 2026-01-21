@@ -1,14 +1,16 @@
 'use client'
 
 import { Landmark } from 'lucide-react'
+
+import { Controller, useFormContext } from 'react-hook-form'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
-import { MarketplaceHeader } from '../select-services-purchase/components/marketplace-header'
-import { LabeledTextField } from './components/labeled-text-field'
-import { ServiceBreakdownItem } from './components/service-breakdown-item/service-breakdown-item'
-import { Summary } from './components/summary'
-import type { PricingPlan } from '../select-services-purchase/components/types'
+
+import { ServiceBreakdownItem, Summary } from '../../summary'
+import { LabeledSelect } from '../components/labeled-select'
+import { MarketplaceHeader } from '../components/marketplace-header'
+import type { PricingPlan } from '../components/types'
 
 const additionalCosts = {
   'finance-pack': 50,
@@ -43,6 +45,8 @@ function SummarySection({
   actionState,
   isPending,
 }: Readonly<SummaryProps>) {
+  const { control } = useFormContext()
+
   const basePrice = planPrices[selectedPlan].monthly
   const setupFee = planPrices[selectedPlan].setup
   let recurringTotal = basePrice
@@ -89,8 +93,48 @@ function SummarySection({
                 Configuration
               </h3>
               <div className="flex flex-col gap-4">
-                <LabeledTextField label="Legal Entity" value="Swiss Association" />
-                <LabeledTextField label="Anonymity Level" value="High (Standard)" />
+                <Controller
+                  control={control}
+                  name="legalEntity"
+                  render={({ field }) => (
+                    <LabeledSelect
+                      label="Legal Entity"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      options={['Swiss Association', 'US LLC', 'Cayman Foundation', 'UK LTD']}
+                      placeholder="Select entity"
+                      className="w-full"
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name="teamStructure"
+                  render={({ field }) => (
+                    <LabeledSelect
+                      label="Team Structure"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      options={['Remote Team', 'Hybrid Team', 'On-site Team']}
+                      placeholder="Select structure"
+                      className="w-full"
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name="anonymityLevel"
+                  render={({ field }) => (
+                    <LabeledSelect
+                      label="Anonymity Level"
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      options={['High (Standard)', 'Medium', 'Low', 'Public']}
+                      placeholder="Select level"
+                      className="w-full"
+                    />
+                  )}
+                />
               </div>
             </div>
 

@@ -14,12 +14,12 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import SelectServices from '../select-services-purchase/select-services/select-services'
+import SelectServices from '../select-services-purchase/components/select-services/select-services'
 import { SummarySection } from '../summary/summary-section'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import ServiceInfo from './components/service-info/service-info'
-import type { PricingPlan } from '../select-services-purchase/types'
+import type { PricingPlan } from '../select-services-purchase/components/types'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
