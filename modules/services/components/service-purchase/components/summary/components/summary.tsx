@@ -10,7 +10,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { cn } from '@/shared/lib/utils'
 
-import type { ServicePurchaseFormValues } from '../../components/service-purchase-form/service-purchase-form'
+import type { ServicePurchaseFormValues } from '../../service-purchase-form/service-purchase-form'
 
 export interface SummaryFormProps {
   className?: string
