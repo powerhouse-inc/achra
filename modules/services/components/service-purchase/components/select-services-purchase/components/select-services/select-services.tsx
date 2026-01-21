@@ -1,9 +1,9 @@
 'use client'
-import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/select-services-purchase/marketplace-header'
+import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/select-services-purchase/components/marketplace-header'
 import { Button } from '@/modules/shared/components/ui/button'
 import { PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
-import type { SectionId } from '../../service-purchase-form/service-purchase-form'
+import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 import type { PricingPlan } from '../types'
 
 export interface SelectServicesProps {

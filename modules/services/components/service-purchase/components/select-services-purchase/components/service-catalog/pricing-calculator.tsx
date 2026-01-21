@@ -12,7 +12,7 @@ import {
   ServiceCatalogRoot,
   ServiceCatalogRow,
 } from '.'
-import type { SectionId } from '../../service-purchase-form/service-purchase-form'
+import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
 import type { PricingPlan } from '../types'
 
