@@ -1,6 +1,8 @@
 'use client'
-import { useCallback, useState } from 'react'
+import { startTransition, useActionState, useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
+import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
 import {
   STEP_NUMBER_MAP,
@@ -12,7 +14,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import { Summary } from '../../select-services-purchase/summary'
+import { SummarySection } from '../../select-services-purchase/summary'
 import SelectServices from '../select-services-purchase/select-services/select-services'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
@@ -35,14 +37,30 @@ const INITIAL_ENABLED_SECTIONS: Record<SectionId, boolean> = {
   [SECTION_IDS.HOSTING_SUITE]: false,
 }
 
-interface ServicePurchaseFormValues {
+const initialState: ServiceRequestFormState = {
+  success: false,
+}
+
+export interface ServicePurchaseFormValues {
   operatorId?: string
+  name: string
+  email: string
+  legalEntity: string
+  teamStructure: string
+  anonymityLevel: string
 }
 
 export default function ServicePurchaseForm() {
+  const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
+
   const form = useForm<ServicePurchaseFormValues>({
     defaultValues: {
       operatorId: undefined,
+      name: '',
+      email: '',
+      legalEntity: 'Swiss Association',
+      teamStructure: 'Remote Team',
+      anonymityLevel: 'High (Standard)',
     },
   })
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
@@ -81,15 +99,34 @@ export default function ServicePurchaseForm() {
     goBack()
   }
 
-  const onSubmit = form.handleSubmit(() => {
-    // TODO: replace with real submit handler
-  })
+  const onSubmit = (data: ServicePurchaseFormValues) => {
+    // Improve this once real data its available
+    const formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('operatorId', data.operatorId || '')
+    formData.append('email', data.email)
+    formData.append('selectedPlan', selectedPlan)
+    formData.append('enabledSections', JSON.stringify(enabledSections))
+    formData.append(
+      'configuration',
+      JSON.stringify({
+        legalEntity: data.legalEntity,
+        teamStructure: data.teamStructure,
+        anonymityLevel: data.anonymityLevel,
+        snoFunction: 'Operational Hub',
+      }),
+    )
+
+    startTransition(() => {
+      formAction(formData)
+    })
+  }
 
   return (
     <Form {...form}>
       <form
         onSubmit={(event) => {
-          void onSubmit(event)
+          void form.handleSubmit(onSubmit)(event)
         }}
       >
         <div className="flex flex-col gap-6">
@@ -150,12 +187,14 @@ export default function ServicePurchaseForm() {
                     />
                   )}
                   {step.value === 'summary' && (
-                    <Summary
+                    <SummarySection
                       selectedPlan={selectedPlan}
                       enabledSections={enabledSections}
                       onBack={() => {
                         navigateToStep('select-services')
                       }}
+                      actionState={state}
+                      isPending={isPending}
                     />
                   )}
                   {!['product-info', 'select-services', 'summary', 'select-operator'].includes(
