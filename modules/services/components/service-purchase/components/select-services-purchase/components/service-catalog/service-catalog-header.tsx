@@ -1,6 +1,7 @@
 'use client'
 
 import { SectionHeader } from './section-header'
+import { useServiceCatalogContext } from './service-catalog-root'
 import type { CatalogStatus } from '../types'
 
 export interface ServiceCatalogHeaderProps {
@@ -24,6 +25,7 @@ export function ServiceCatalogHeader({
   oneTimeFee,
   oneTimeFeeVariant = 'muted',
 }: Readonly<ServiceCatalogHeaderProps>) {
+  const { activePlan } = useServiceCatalogContext()
   return (
     <SectionHeader
       title={title}
@@ -34,6 +36,7 @@ export function ServiceCatalogHeader({
       onToggleChange={onToggleChange}
       oneTimeFee={oneTimeFee}
       oneTimeFeeVariant={oneTimeFeeVariant}
+      activePlan={activePlan}
     />
   )
 }

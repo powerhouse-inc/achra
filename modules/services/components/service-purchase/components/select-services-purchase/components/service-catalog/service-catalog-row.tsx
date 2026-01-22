@@ -17,7 +17,7 @@ export function ServiceCatalogRow({
   sublabel,
   values,
 }: Readonly<ServiceCatalogRowProps>) {
-  const { activePlan, showAllPlans } = useServiceCatalogContext()
+  const { activePlan } = useServiceCatalogContext()
 
   return (
     <FeatureRow
@@ -26,7 +26,6 @@ export function ServiceCatalogRow({
       sublabel={sublabel}
       values={values}
       activePlan={activePlan}
-      showAllPlans={showAllPlans}
     />
   )
 }

@@ -7,7 +7,6 @@ interface PricingSectionProps {
   readonly section: ServiceSectionCatalog
   readonly activePlan: PricingPlan
   readonly isEnabled: boolean
-  readonly showAllPlans: boolean
   readonly readOnly: boolean
   readonly onToggle: (sectionId: string, enabled: boolean) => void
 }
@@ -16,7 +15,6 @@ export function PricingSection({
   section,
   activePlan,
   isEnabled,
-  showAllPlans,
   readOnly,
   onToggle,
 }: PricingSectionProps) {
@@ -28,7 +26,7 @@ export function PricingSection({
       : undefined
 
   return (
-    <ServiceCatalogRoot activePlan={activePlan} isEnabled={isEnabled} showAllPlans={showAllPlans}>
+    <ServiceCatalogRoot activePlan={activePlan} isEnabled={isEnabled}>
       <ServiceCatalogHeader
         title={section.title}
         badge={section.badge}

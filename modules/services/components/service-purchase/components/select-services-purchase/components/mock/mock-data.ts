@@ -99,13 +99,14 @@ export const PRICING_DATA: PricingData = {
       toggleLabel: 'Finance Pack',
       oneTimeFee: '+ $50/mo',
       oneTimeFeeVariant: 'primary',
+      badge: CatalogStatus.Optional,
       rows: [
         {
           id: 'bank-account-setup',
           label: 'Bank Account Setup',
           sublabel: 'Swiss Association',
           values: {
-            basic: CatalogStatus.Optional,
+            basic: 'LABEL',
             team: true,
             premium: 'PRIORITY',
             enterprise: 'CUSTOM',
@@ -139,6 +140,7 @@ export const PRICING_DATA: PricingData = {
       hasToggle: true,
       toggleLabel: 'Hosting Suite',
       oneTimeFeeVariant: 'primary',
+      badge: CatalogStatus.Optional,
       rows: [
         {
           id: 'secure-email',

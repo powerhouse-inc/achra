@@ -9,10 +9,8 @@ export interface ServiceCatalogFooterProps {
 }
 
 function ServiceCatalogFooter({ section }: Readonly<ServiceCatalogFooterProps>) {
-  const { activePlan, showAllPlans } = useServiceCatalogContext()
+  const { activePlan } = useServiceCatalogContext()
 
-  return (
-    <PricingCatalogSubtotal section={section} activePlan={activePlan} showAllPlans={showAllPlans} />
-  )
+  return <PricingCatalogSubtotal section={section} activePlan={activePlan} />
 }
 export { ServiceCatalogFooter }
