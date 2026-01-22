@@ -3,15 +3,15 @@
 import 'server-only'
 import { z } from 'zod'
 
+import { Plan } from '../components/service-purchase/components/select-services-purchase/components/types'
 import { sendServiceRequest } from '../lib/send-service-request'
-import type { Plan } from '../components/service-purchase/components/select-services-purchase/components/types'
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 import type { ServiceRequestFormState } from '../config/types'
 
 const serviceRequestSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.email({ message: 'Please enter a valid email address.' }),
-  selectedPlan: z.enum(['basic', 'team', 'premium', 'enterprise']),
+  selectedPlan: z.enum([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]),
   enabledSections: z.string(),
   configuration: z.string(),
 })

@@ -1,7 +1,7 @@
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
+import { type FeatureValue, type Plan, PRICING_PLANS } from '../types'
 import { ServiceCatalogoCell } from './service-catalogo-cell'
-import type { FeatureValue, Plan } from '../types'
 
 interface FeatureRowProps {
   label: string
@@ -35,7 +35,7 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
         )}
       </div>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as Plan[]).map((plan) => (
+      {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(

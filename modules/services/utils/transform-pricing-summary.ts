@@ -11,6 +11,9 @@ export interface SummaryFeature {
   label: string
   value: string
   sublabel?: string
+  sublabelVariant?: 'badge' | 'default'
+  hasOneTimeFee?: boolean
+  showApproxSymbol?: boolean
 }
 
 /**
@@ -37,65 +40,70 @@ export interface PricingSummary {
 }
 
 /**
- * BFF (Backend for Frontend) transformation function
- * Converts complex PRICING_DATA into a clean, simplified JSON for rendering summary cards
  *
- * @param pricingData - The raw pricing configuration data
- * @param selectedTierId - The selected tier ID (e.g., "team")
- * @param activeAddons - Array of active addon section IDs (e.g., ["finance-pack"])
- * @returns Simplified pricing summary object
+ * Takes the full pricing catalog and extracts only what the user selected,
+ * returning a clean, flat structure optimized for display in the summary card.
+ *
+ * @param pricingData
+ * @param selectedTierId
+ * @param activeAddons
+ * @returns PricingSummary pricing summary object ready for display
  */
 export function transformPricingSummary(
   pricingData: PricingData,
   selectedTierId: Plan,
   activeAddons: string[] = [],
 ): PricingSummary {
-  // Find selected tier
   const selectedTier = pricingData.tiers.find((t) => t.id === selectedTierId)
 
   if (!selectedTier) {
     throw new Error(`Tier "${selectedTierId}" not found in pricing data`)
   }
 
-  // Extract base pricing
   const monthlyBasePrice = selectedTier.monthlyPrice
   const oneTimeFee = selectedTier.setupFee
 
-  // Initialize result arrays
   const mainFeatures: SummaryFeature[] = []
   const addons: SummaryAddon[] = []
   let totalMonthlyPrice = monthlyBasePrice
 
-  // Process sections
   pricingData.sections?.forEach((section) => {
-    // Check if section is a toggle (addon)
     if (section.hasToggle) {
-      // Only process if this addon is active
       if (activeAddons.includes(section.id)) {
         const addonFeatures: SummaryFeature[] = []
 
-        // Process addon rows
         section.rows.forEach((row) => {
-          const feature = processFeatureRow(row.label, row.values[selectedTierId], row.sublabel)
+          const feature = processFeatureRow(
+            row.label,
+            row.values[selectedTierId],
+            row.sublabel,
+            row.sublabelVariant,
+            row.hasOneTimeFee,
+            row.showApproxSymbol,
+          )
           if (feature) {
             addonFeatures.push(feature)
           }
         })
 
-        // Add addon to list
         addons.push({
           name: section.title,
           price: section.price ?? 0,
           features: addonFeatures,
         })
 
-        // Add addon price to total
         totalMonthlyPrice += section.price ?? 0
       }
     } else {
-      // Fixed section - flatten rows directly into main features
       section.rows.forEach((row) => {
-        const feature = processFeatureRow(row.label, row.values[selectedTierId], row.sublabel)
+        const feature = processFeatureRow(
+          row.label,
+          row.values[selectedTierId],
+          row.sublabel,
+          row.sublabelVariant,
+          row.hasOneTimeFee,
+          row.showApproxSymbol,
+        )
         if (feature) {
           mainFeatures.push(feature)
         }
@@ -117,36 +125,50 @@ export function transformPricingSummary(
 
 /**
  * Helper function to process a single feature row
- * Filters out excluded values and transforms boolean/string values
  *
- * @param label - Feature label
- * @param value - Feature value from the tier
- * @param sublabel - Optional sublabel
- * @returns SummaryFeature or null if value should be excluded
+ * Filters out unavailable features and normalizes values for display.
+ * Returns null for features not available in the selected tier.
+ *
+ * @param label - Feature label (e.g., "Users", "Storage")
+ * @param value - Feature value from the tier (can be boolean, string, or number)
+ * @param sublabel - Optional sublabel text
+ * @param sublabelVariant - Optional sublabel styling variant
+ * @param hasOneTimeFee - Whether the feature has a one-time fee
+ * @param showApproxSymbol - Whether to show "~" for approximate values
+ * @returns SummaryFeature object or null if feature is unavailable
  */
 function processFeatureRow(
   label: string,
   value: FeatureValue,
   sublabel?: string,
+  sublabelVariant?: 'badge' | 'default',
+  hasOneTimeFee?: boolean,
+  showApproxSymbol?: boolean,
 ): SummaryFeature | null {
-  // Exclude falsy values, empty strings, and dashes
+  // Skip features that aren't available (false, empty, or dash means "not included")
   if (value === false || value === '' || value === '—') {
     return null
   }
 
-  // Transform boolean true to "Included"
+  // Convert boolean true to the display text "Included"
   if (value === true) {
     return {
       label,
       value: 'Included',
       ...(sublabel && { sublabel }),
+      ...(sublabelVariant && { sublabelVariant }),
+      ...(hasOneTimeFee && { hasOneTimeFee }),
+      ...(showApproxSymbol && { showApproxSymbol }),
     }
   }
 
-  // Keep text/number values as-is
+  // For all other values (numbers, strings), convert to string and pass through
   return {
     label,
     value: String(value),
     ...(sublabel && { sublabel }),
+    ...(sublabelVariant && { sublabelVariant }),
+    ...(hasOneTimeFee && { hasOneTimeFee }),
+    ...(showApproxSymbol && { showApproxSymbol }),
   }
 }

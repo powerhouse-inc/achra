@@ -1,4 +1,5 @@
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
+import { Plan } from '../types'
 import { PlanSelectorItem } from './plan-selector'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -18,7 +19,7 @@ type Story = StoryObj<typeof meta>
 export const Selected: Story = {
   name: 'Generic - UnSelected',
   args: {
-    value: 'basic',
+    value: Plan.Basic,
     label: 'Basic Plan',
     description: '$29/month',
   },
@@ -32,7 +33,7 @@ export const Selected: Story = {
 export const Unselected: Story = {
   name: 'Generic - Selected',
   args: {
-    value: 'premium',
+    value: Plan.Premium,
     label: 'Pro Plan',
     description: '$59/month',
   },

@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
-import type { CatalogStatus, Plan } from '../types'
+import { type CatalogStatus, type Plan, PRICING_PLANS } from '../types'
 
 interface SectionHeaderProps {
   title: string
@@ -62,7 +62,7 @@ export function SectionHeader({
         {badge && <ServiceCatalogStatus catalogStatus={badge} />}
       </div>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as Plan[]).map((plan) => (
+      {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(

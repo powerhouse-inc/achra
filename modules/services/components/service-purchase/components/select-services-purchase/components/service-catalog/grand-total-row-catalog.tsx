@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
-import { Plan } from '../types'
+import { Plan, PRICING_PLANS } from '../types'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
 interface GrandTotalRowCatalogProps {
@@ -15,15 +15,13 @@ export function GrandTotalRowCatalog({
 }: Readonly<GrandTotalRowCatalogProps>) {
   const planTotals = useMemo(() => {
     const totals: Record<Plan, string> = {
-      basic: '$0',
-      team: '$0',
-      premium: '$0',
-      enterprise: '$0',
+      [Plan.Basic]: '$0',
+      [Plan.Team]: '$0',
+      [Plan.Premium]: '$0',
+      [Plan.Enterprise]: '$0',
     }
 
-    const plans: Plan[] = [Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]
-
-    plans.forEach((plan) => {
+    PRICING_PLANS.forEach((plan) => {
       const tier = PRICING_DATA.tiers.find((t) => t.id === plan)
       if (!tier) return
 
@@ -37,7 +35,7 @@ export function GrandTotalRowCatalog({
       })
 
       // Format total - handle "Custom" case for enterprise
-      if (plan === 'enterprise' && tier.monthlyPrice === 0) {
+      if (plan === Plan.Enterprise && tier.monthlyPrice === 0) {
         totals[plan] = total > 0 ? `$${total}/mo` : 'Custom'
       } else {
         totals[plan] = `$${total}/mo`
@@ -58,7 +56,7 @@ export function GrandTotalRowCatalog({
         {PRICING_DATA.grandTotal?.label}
       </span>
 
-      {([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise] as Plan[]).map((plan) => (
+      {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(

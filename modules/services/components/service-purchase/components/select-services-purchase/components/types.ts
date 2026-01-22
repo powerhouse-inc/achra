@@ -7,6 +7,8 @@ export enum Plan {
   Enterprise = 'enterprise',
 }
 
+export const PRICING_PLANS = [Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise] as const
+
 export type FeatureValue = boolean | string | CatalogStatus
 
 export interface PricingTier {
@@ -22,7 +24,9 @@ export interface FeatureRow {
   id: string
   label: string
   sublabel?: string
+  sublabelVariant?: 'badge' | 'default'
   hasOneTimeFee?: boolean
+  showApproxSymbol?: boolean
   values: Record<Plan, FeatureValue>
 }
 

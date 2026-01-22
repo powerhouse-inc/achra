@@ -48,8 +48,8 @@ export function PricingDetailCard({
     return <span className="text-sm font-medium">{value}</span>
   }
 
-  const formatSublabel = (sublabel: string): React.ReactNode => {
-    if (sublabel === 'Swiss Association') {
+  const formatSublabel = (sublabel: string, variant?: 'badge' | 'default'): React.ReactNode => {
+    if (variant === 'badge') {
       return (
         <Badge
           variant="outline"
@@ -92,20 +92,19 @@ export function PricingDetailCard({
                 <div className="flex flex-col">
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">{feature.label}</span>
-                    {feature.sublabel && formatSublabel(feature.sublabel)}
+                    {feature.sublabel && formatSublabel(feature.sublabel, feature.sublabelVariant)}
                   </div>
-                  {feature.label === 'Incorporation Docs' && (
+                  {feature.hasOneTimeFee && (
                     <span className="text-muted-foreground text-xs">One-time fee</span>
                   )}
                 </div>
                 <div className="flex flex-col items-end">
-                  {/* Special cases for one-time fees */}
-                  {feature.label === 'Incorporation Docs' ? (
+                  {feature.hasOneTimeFee ? (
                     <>
                       <span className="text-sm font-bold">~</span>
                       <span className="font-bold">${summary.one_time_fee}</span>
                     </>
-                  ) : feature.label === 'Needs Analysis' ? (
+                  ) : feature.showApproxSymbol ? (
                     <span className="text-sm font-bold">~</span>
                   ) : (
                     formatValue(feature.value)
@@ -136,11 +135,11 @@ export function PricingDetailCard({
                 <div key={feature.label} className="flex items-center justify-between">
                   <div className="flex gap-2">
                     <span className="text-sm font-medium">{feature.label}</span>
-                    {feature.sublabel && formatSublabel(feature.sublabel)}
+                    {feature.sublabel && formatSublabel(feature.sublabel, feature.sublabelVariant)}
                   </div>
                   <div className="flex flex-col items-end">
                     {formatValue(feature.value)}
-                    {feature.label === 'Bank Account Setup' && <span className="font-bold">~</span>}
+                    {feature.showApproxSymbol && <span className="font-bold">~</span>}
                   </div>
                 </div>
               ))}
