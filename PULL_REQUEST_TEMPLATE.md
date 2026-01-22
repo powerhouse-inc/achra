@@ -10,6 +10,7 @@ https://trello.com/c/HZLjZlUj/1347-create-the-content-of-the-select-services-ste
 - Reorganized mock data for better maintainability.
 
 ## PR Author Checklist:
+
 - [ ] I have performed a self-review of my own code
 - [ ] I have performed a self-review of my own chromatic changes and everything is expected
 - [ ] I have removed any unnecessary console messages and alerts
@@ -19,6 +20,7 @@ https://trello.com/c/HZLjZlUj/1347-create-the-content-of-the-select-services-ste
 - [ ] I have not introduced any linting issues or warnings
 
 ## Reviewer Checklist:
+
 - [ ] I have reviewed the code
 - [ ] I have reviewed the preview environment
 - [ ] I have reviewed Chromatic (if there are changes)
