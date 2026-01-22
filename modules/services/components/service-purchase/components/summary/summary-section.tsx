@@ -7,10 +7,10 @@ import { MarketplaceHeader } from '../select-services-purchase/components/market
 import { LabeledTextField } from './components/labeled-text-field'
 import { ServiceBreakdownItem } from './components/service-breakdown-item/service-breakdown-item'
 import { Summary } from './components/summary'
-import type { PricingPlan } from '../select-services-purchase/components/types'
+import type { Plan } from '../select-services-purchase/components/types'
 
 export interface SummaryProps {
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<string, boolean>
   onBack?: () => void
   actionState: ServiceRequestFormState

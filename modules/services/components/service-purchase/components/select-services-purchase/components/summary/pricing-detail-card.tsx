@@ -6,10 +6,10 @@ import { Badge } from '@/modules/shared/components/ui/badge'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
-import type { PricingPlan } from '../types'
+import type { Plan } from '../types'
 
 interface PricingDetailCardProps {
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<string, boolean>
   className?: string
 }

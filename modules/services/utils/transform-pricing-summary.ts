@@ -1,7 +1,7 @@
 import type {
   FeatureValue,
+  Plan,
   PricingData,
-  PricingPlan,
 } from '../components/service-purchase/components/select-services-purchase/components/types'
 
 /**
@@ -47,7 +47,7 @@ export interface PricingSummary {
  */
 export function transformPricingSummary(
   pricingData: PricingData,
-  selectedTierId: PricingPlan,
+  selectedTierId: Plan,
   activeAddons: string[] = [],
 ): PricingSummary {
   // Find selected tier

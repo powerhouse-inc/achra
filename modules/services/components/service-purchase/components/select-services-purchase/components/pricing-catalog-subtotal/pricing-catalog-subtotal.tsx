@@ -1,12 +1,12 @@
 import { cn } from '@/modules/shared/lib/utils'
-import type { PricingPlan, ServiceSectionCatalog } from '../types'
+import { Plan, type ServiceSectionCatalog } from '../types'
 
 interface PricingCatalogSubtotalProps {
   section: ServiceSectionCatalog
-  activePlan: PricingPlan
+  activePlan: Plan
 }
 
-const PRICING_PLANS: PricingPlan[] = ['basic', 'team', 'premium', 'enterprise']
+const PRICING_PLANS: Plan[] = [Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]
 
 export default function PricingCatalogSubtotal({
   section,
@@ -44,7 +44,7 @@ export default function PricingCatalogSubtotal({
         <span className="text-foreground/50 text-base/6 font-semibold uppercase">
           {section.subtotal?.label}
         </span>
-        {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
+        {PRICING_PLANS.map((plan) => (
           <div
             key={plan}
             className={cn(

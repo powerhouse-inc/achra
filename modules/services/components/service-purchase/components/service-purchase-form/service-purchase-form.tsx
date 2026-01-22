@@ -16,12 +16,12 @@ import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 import SelectServices from '../select-services-purchase/components/select-services/select-services'
+import { Plan } from '../select-services-purchase/components/types'
 import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import ServiceInfo from './components/service-info/service-info'
-import type { PricingPlan } from '../select-services-purchase/components/types'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
@@ -68,11 +68,11 @@ export default function ServicePurchaseForm() {
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
   // Shared state for PricingCalculator selections
-  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
+  const [selectedPlan, setSelectedPlan] = useState<Plan>(Plan.Team)
   const [enabledSections, setEnabledSections] =
     useState<Record<SectionId, boolean>>(INITIAL_ENABLED_SECTIONS)
 
-  const handlePlanChange = useCallback((plan: PricingPlan) => {
+  const handlePlanChange = useCallback((plan: Plan) => {
     setSelectedPlan(plan)
   }, [])
 

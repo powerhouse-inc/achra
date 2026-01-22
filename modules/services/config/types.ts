@@ -1,4 +1,4 @@
-import type { PricingPlan } from '../components/service-purchase/components/select-services-purchase/components/types'
+import type { Plan } from '../components/service-purchase/components/select-services-purchase/components/types'
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 
 /**
@@ -16,7 +16,7 @@ export interface ServiceConfiguration {
 export interface ServiceRequestData {
   name: string
   email: string
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<SectionId, boolean>
   configuration: ServiceConfiguration
 }

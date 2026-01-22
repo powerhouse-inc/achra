@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { PRICING_DATA } from '../../../../mock/mock-data'
+import { Plan } from '../types'
 import { GrandTotalRowCatalog } from './grand-total-row-catalog'
 import HeaderCatalogPlan from './header-catalog-plan'
 import {
@@ -14,24 +15,22 @@ import {
 } from '.'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
-import type { PricingPlan } from '../types'
-
 export interface PricingCalculatorProps {
-  selectedPlan?: PricingPlan
+  selectedPlan?: Plan
   enabledSections?: Record<SectionId, boolean>
-  onPlanChange?: (plan: PricingPlan) => void
+  onPlanChange?: (plan: Plan) => void
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   readOnly?: boolean
 }
 export function PricingCalculator({
-  selectedPlan = 'team',
+  selectedPlan = Plan.Team,
   enabledSections,
   onPlanChange,
   onSectionToggle,
   readOnly = false,
 }: PricingCalculatorProps = {}) {
   const handlePlanChange = useCallback(
-    (plan: PricingPlan) => {
+    (plan: Plan) => {
       if (readOnly || !onPlanChange) return
       onPlanChange(plan)
     },

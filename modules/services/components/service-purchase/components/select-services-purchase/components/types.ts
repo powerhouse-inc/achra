@@ -1,9 +1,16 @@
-export type PricingPlan = 'basic' | 'team' | 'premium' | 'enterprise'
+// Plan
+
+export enum Plan {
+  Basic = 'basic',
+  Team = 'team',
+  Premium = 'premium',
+  Enterprise = 'enterprise',
+}
 
 export type FeatureValue = boolean | string | CatalogStatus
 
 export interface PricingTier {
-  id: PricingPlan
+  id: Plan
   name: string
   price: string
   monthlyPrice: number
@@ -16,7 +23,7 @@ export interface FeatureRow {
   label: string
   sublabel?: string
   hasOneTimeFee?: boolean
-  values: Record<PricingPlan, FeatureValue>
+  values: Record<Plan, FeatureValue>
 }
 
 export interface ServiceSectionCatalog {
@@ -31,7 +38,7 @@ export interface ServiceSectionCatalog {
   rows: FeatureRow[]
   subtotal?: {
     label: string
-    values: Record<PricingPlan, string>
+    values: Record<Plan, string>
   }
 }
 
@@ -40,7 +47,7 @@ export interface PricingData {
   sections?: ServiceSectionCatalog[]
   grandTotal?: {
     label: string
-    values: Record<PricingPlan, string>
+    values: Record<Plan, string>
   }
 }
 

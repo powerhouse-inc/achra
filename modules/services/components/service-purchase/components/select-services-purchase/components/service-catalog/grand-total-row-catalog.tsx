@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
+import { Plan } from '../types'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
-import type { PricingPlan } from '../types'
 
 interface GrandTotalRowCatalogProps {
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections?: Record<SectionId, boolean>
 }
 
@@ -14,14 +14,14 @@ export function GrandTotalRowCatalog({
   enabledSections,
 }: Readonly<GrandTotalRowCatalogProps>) {
   const planTotals = useMemo(() => {
-    const totals: Record<PricingPlan, string> = {
+    const totals: Record<Plan, string> = {
       basic: '$0',
       team: '$0',
       premium: '$0',
       enterprise: '$0',
     }
 
-    const plans: PricingPlan[] = ['basic', 'team', 'premium', 'enterprise']
+    const plans: Plan[] = [Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]
 
     plans.forEach((plan) => {
       const tier = PRICING_DATA.tiers.find((t) => t.id === plan)
@@ -58,7 +58,7 @@ export function GrandTotalRowCatalog({
         {PRICING_DATA.grandTotal?.label}
       </span>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
+      {([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise] as Plan[]).map((plan) => (
         <div
           key={plan}
           className={cn(

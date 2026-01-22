@@ -1,21 +1,22 @@
 import {
   CatalogStatus,
+  Plan,
   type PricingData,
 } from '../components/select-services-purchase/components/types'
 
 export const PRICING_DATA: PricingData = {
   tiers: [
-    { id: 'basic', name: 'Basic', price: '$200/mo', monthlyPrice: 200, setupFee: 3000 },
+    { id: Plan.Basic, name: 'Basic', price: '$200/mo', monthlyPrice: 200, setupFee: 3000 },
     {
-      id: 'team',
+      id: Plan.Team,
       name: 'Team',
       price: '$300/mo',
       isPopular: true,
       monthlyPrice: 300,
       setupFee: 3000,
     },
-    { id: 'premium', name: 'Premium', price: '$500/mo', monthlyPrice: 500, setupFee: 3000 },
-    { id: 'enterprise', name: 'Enterprise', price: 'Custom', monthlyPrice: 0, setupFee: 3000 },
+    { id: Plan.Premium, name: 'Premium', price: '$500/mo', monthlyPrice: 500, setupFee: 3000 },
+    { id: Plan.Enterprise, name: 'Enterprise', price: 'Custom', monthlyPrice: 0, setupFee: 3000 },
   ],
   sections: [
     {

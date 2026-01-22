@@ -4,7 +4,7 @@ import 'server-only'
 import { z } from 'zod'
 
 import { sendServiceRequest } from '../lib/send-service-request'
-import type { PricingPlan } from '../components/service-purchase/components/select-services-purchase/components/types'
+import type { Plan } from '../components/service-purchase/components/select-services-purchase/components/types'
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 import type { ServiceRequestFormState } from '../config/types'
 
@@ -61,7 +61,7 @@ export async function submitServiceRequestAction(
     const sendResult = await sendServiceRequest({
       name: result.data.name,
       email: result.data.email,
-      selectedPlan: result.data.selectedPlan as PricingPlan,
+      selectedPlan: result.data.selectedPlan as Plan,
       enabledSections,
       configuration,
     })

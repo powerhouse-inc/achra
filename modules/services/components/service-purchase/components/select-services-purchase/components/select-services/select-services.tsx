@@ -4,13 +4,13 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
 import { PricingDetailCard } from '../summary/pricing-detail-card'
+import { Plan } from '../types'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
-import type { PricingPlan } from '../types'
 
 export interface SelectServicesProps {
-  selectedPlan?: PricingPlan
+  selectedPlan?: Plan
   enabledSections?: Record<SectionId, boolean>
-  onPlanChange?: (plan: PricingPlan) => void
+  onPlanChange?: (plan: Plan) => void
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   onBack?: () => void
   onContinue?: () => void
@@ -38,7 +38,7 @@ export default function SelectServices({
 
         <div className="w-full shrink-0 lg:w-102.75">
           <PricingDetailCard
-            selectedPlan={selectedPlan ?? 'team'}
+            selectedPlan={selectedPlan ?? Plan.Team}
             enabledSections={enabledSections ?? {}}
           />
         </div>

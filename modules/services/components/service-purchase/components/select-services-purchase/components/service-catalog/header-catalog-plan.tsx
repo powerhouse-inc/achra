@@ -2,11 +2,11 @@ import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
 import { PlanSelectorItem } from './plan-selector'
-import type { PricingPlan } from '../types'
+import type { Plan } from '../types'
 
 interface HeaderCatalogPlanProps {
-  selectedPlan?: PricingPlan
-  handlePlanChange: (plan: PricingPlan) => void
+  selectedPlan?: Plan
+  handlePlanChange: (plan: Plan) => void
   readOnly?: boolean
 }
 
@@ -25,7 +25,7 @@ export default function HeaderCatalogPlan({
       <RadioGroup
         value={selectedPlan}
         onValueChange={(value) => {
-          handlePlanChange(value as PricingPlan)
+          handlePlanChange(value as Plan)
         }}
         className={cn('contents', 'col-span-4')}
         disabled={readOnly}

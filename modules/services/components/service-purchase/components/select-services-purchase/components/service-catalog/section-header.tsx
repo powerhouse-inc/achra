@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
-import type { CatalogStatus, PricingPlan } from '../types'
+import type { CatalogStatus, Plan } from '../types'
 
 interface SectionHeaderProps {
   title: string
@@ -15,7 +15,7 @@ interface SectionHeaderProps {
   onToggleChange?: (enabled: boolean) => void
   oneTimeFee?: string
   oneTimeFeeVariant?: 'primary' | 'muted'
-  activePlan?: PricingPlan
+  activePlan?: Plan
 }
 
 export function SectionHeader({
@@ -62,7 +62,7 @@ export function SectionHeader({
         {badge && <ServiceCatalogStatus catalogStatus={badge} />}
       </div>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
+      {(['basic', 'team', 'premium', 'enterprise'] as Plan[]).map((plan) => (
         <div
           key={plan}
           className={cn(
