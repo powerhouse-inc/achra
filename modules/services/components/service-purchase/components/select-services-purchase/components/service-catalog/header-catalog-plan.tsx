@@ -16,7 +16,12 @@ export default function HeaderCatalogPlan({
   readOnly = false,
 }: Readonly<HeaderCatalogPlanProps>) {
   return (
-    <div className={cn('grid h-21 items-center gap-4 px-6', 'grid-cols-[4fr_repeat(4,1fr)]')}>
+    <div
+      className={cn(
+        'border-input grid h-21 items-center gap-4 border-b pl-6',
+        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
+      )}
+    >
       <div className="flex items-center">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
           SERVICE CATALOG
@@ -27,15 +32,16 @@ export default function HeaderCatalogPlan({
         onValueChange={(value) => {
           handlePlanChange(value as Plan)
         }}
-        className={cn('contents', 'col-span-4')}
+        className="contents"
         disabled={readOnly}
       >
         {PRICING_DATA.tiers.map((tier) => (
           <div
             key={tier.id}
             className={cn(
-              'flex h-full items-center justify-center transition-colors',
+              'flex h-full min-w-0 items-center justify-center transition-colors',
               selectedPlan === tier.id && 'bg-primary/15',
+              tier.id === 'enterprise' && 'pr-6',
             )}
           >
             <PlanSelectorItem

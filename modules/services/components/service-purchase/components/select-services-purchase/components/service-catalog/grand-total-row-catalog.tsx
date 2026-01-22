@@ -48,11 +48,11 @@ export function GrandTotalRowCatalog({
   return (
     <div
       className={cn(
-        'border-border grid items-stretch gap-4 border px-6',
-        'grid-cols-[4fr_repeat(4,1fr)]',
+        'grid items-center gap-4 pl-6',
+        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
       )}
     >
-      <span className="text-foreground flex items-center py-4 text-sm font-bold uppercase">
+      <span className="text-foreground flex h-14 items-center text-sm font-bold uppercase">
         {PRICING_DATA.grandTotal?.label}
       </span>
 
@@ -60,8 +60,9 @@ export function GrandTotalRowCatalog({
         <div
           key={plan}
           className={cn(
-            'flex items-center justify-center transition-colors',
+            'flex h-14 min-w-0 items-center justify-center px-2 transition-colors',
             selectedPlan === plan && 'bg-primary/30 font-bold',
+            plan === 'enterprise' && 'pr-6',
           )}
         >
           <span className="text-base font-bold">{planTotals[plan]}</span>
