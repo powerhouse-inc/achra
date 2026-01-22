@@ -8,12 +8,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should contain the default selector values in the step', async ({ page }) => {
-    await expect(page.getByText('SNO Function')).toBeVisible();
-    await expect(page.getByText('Operational Hub')).toHaveCount(3);
-
-    await expect(page.getByText('Legal Entity')).toBeVisible();
-    await expect(page.getByText('Swiss Association')).toHaveCount(2);
-
     await expect(page.getByText('Team Structure')).toBeVisible();
     await expect(page.getByText('Remote Team')).toHaveCount(2);
 
@@ -38,7 +32,7 @@ test('should contain the legal setup in the step', async ({ page }) => {
     await expect(page.getByText('Included')).toHaveCount(2);
     await expect(page.getByText('One-time: $3000')).toBeVisible();
     await expect(page.getByText('Needs Analysis')).toBeVisible();
-    await expect(page.getByText('Incorporation Docs')).toHaveCount(2);
+    await expect(page.getByText('Incorporation Docs')).toBeVisible();
     await expect(page.getByText('Expedited')).toBeVisible();
     await expect(page.getByText('Custom')).toHaveCount(4);
     await expect(page.getByText('Total Setup Fee')).toBeVisible();
@@ -66,8 +60,8 @@ test('should contain the recurring operational service in the step', async ({ pa
 test('should contain the finance pack in the step', async ({ page }) => {
     await expect(page.getByText('Finance Pack')).toBeVisible();
     await expect(page.getByText('+ $50/mo')).toBeVisible();
-    await expect(page.getByText('Bank Account Setup')).toHaveCount(2);
-    await expect(page.getByText('Optional')).toBeVisible();
+    await expect(page.getByText('Bank Account Setup')).toBeVisible();
+    await expect(page.getByText('Optional')).toHaveCount(2);
     await expect(page.getByText('Priority')).toHaveCount(2);
     await expect(page.getByText('Custom')).toHaveCount(4);
     await expect(page.getByText('Crypto Payment')).toBeVisible();

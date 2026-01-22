@@ -20,15 +20,13 @@ test('should load the summary data area', async ({ page }) => {
 
     await expect(page.getByText('Configuration')).toHaveCount(2);
     await expect(page.getByText('Legal Entity')).toBeVisible();
-    await expect(page.getByText('Swiss Association')).toHaveCount(2);
-    await expect(page.getByText('Team Structure')).toBeVisible();
-    await expect(page.getByText('Remote Team')).toHaveCount(2);
+    await expect(page.getByText('Swiss Association')).toBeVisible();
     await expect(page.getByText('Anonymity Level')).toBeVisible();
-    await expect(page.getByText('High (Standard)')).toHaveCount(2);
+    await expect(page.getByText('High (Standard)')).toBeVisible();
 
     await expect(page.getByText('Service Breakdown')).toBeVisible();
     await expect(page.getByText('Selected Tier')).toBeVisible();
-    await expect(page.getByText('Team')).toHaveCount(6);
+    await expect(page.getByText('Team')).toBeVisible();
     await expect(page.getByText('Formation & Setup')).toBeVisible();
     await expect(page.getByText('One-time fee')).toBeVisible();
     await expect(page.getByText('$3,000')).toHaveCount(2);

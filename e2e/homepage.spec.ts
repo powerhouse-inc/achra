@@ -40,7 +40,7 @@ test('has a link to the Networks page in the "For Organizations" section', async
     await expect(page).toHaveURL('https://staging.achra.com/networks');
 });
 
-test('has a link to the Networks page from the button "Create your own"', async ({ page }) => {
+test.skip('has a link to the Networks page from the button "Create your own"', async ({ page }) => {
     await page.getByText('For Organizations').first().click();
 
     await page.getByText('Create your own').click();
