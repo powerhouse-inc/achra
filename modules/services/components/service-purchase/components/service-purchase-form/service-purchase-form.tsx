@@ -14,8 +14,10 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { cn } from '@/modules/shared/lib/utils'
 import SelectServices from '../select-services-purchase/components/select-services/select-services'
 import { SummarySection } from '../summary/summary-section'
+import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import ServiceInfo from './components/service-info/service-info'
@@ -130,13 +132,16 @@ export default function ServicePurchaseForm() {
         }}
       >
         <div className="flex flex-col gap-6">
-          {activeStep === 'product-info' ? (
-            <ServiceInfo />
-          ) : (
-            <Button variant="secondary" onClick={handleGoBack} className="mt-2.5 w-fit">
+          <div className={cn('flex flex-col gap-8', activeStep === 'product-info' && 'gap-0')}>
+            <Button
+              variant="secondary"
+              onClick={handleGoBack}
+              className={cn('mt-2.5 w-fit', activeStep === 'product-info' && 'hidden')}
+            >
               Back
             </Button>
-          )}
+            <ServiceInfo light={activeStep !== 'product-info'} />
+          </div>
           <div className="flex flex-col gap-10">
             <Tabs
               value={activeStep}
@@ -197,14 +202,7 @@ export default function ServicePurchaseForm() {
                       isPending={isPending}
                     />
                   )}
-                  {!['product-info', 'select-services', 'summary', 'select-operator'].includes(
-                    step.value,
-                  ) && (
-                    <>
-                      <p className="text-foreground text-lg/6 font-bold">{step.label}</p>
-                      <span className="text-foreground text-base/6">In progress...</span>
-                    </>
-                  )}
+                  {step.value === 'confirmation' && <Confirmation />}
                 </TabsContent>
               ))}
             </Tabs>
