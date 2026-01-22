@@ -32,7 +32,7 @@ test('should load the builder description', async ({ page }) => {
     await expect(page.getByText('One of the challenges of decentralized organizations is that they can introduce a lot of inefficiencies by forcing the contributor teams to take care of operational overhead tasks outside of their core competencies.')).toHaveCount(1);
 });
 
-test('should load the builder projects', async ({ page }) => {
+test.skip('should load the builder projects', async ({ page }) => {
     await expect(page.getByText('Achra MVP dSpot Work')).toHaveCount(1);
     await expect(page.getByText('Achra MVP RGH Work')).toHaveCount(1);
     await expect(page.getByText('Achra MVP Sky Teams Work')).toHaveCount(1);
@@ -44,11 +44,28 @@ test('should load the builder projects', async ({ page }) => {
     await expect(page.getByText('Key Results')).toHaveCount(3);
 });
 
-test('should load the builder key results', async ({ page }) => {
+test('should not load the builder projects for MVP', async ({ page }) => {
+    await expect(page.getByText('Achra MVP dSpot Work')).toBeHidden();
+    await expect(page.getByText('Achra MVP RGH Work')).toBeHidden();
+    await expect(page.getByText('Achra MVP Sky Teams Work')).toBeHidden();
+    await expect(page.getByText('View Project')).toBeHidden();
+    await expect(page.getByText('Budget')).toBeVisible();
+    await expect(page.getByText('USD')).toBeHidden();
+    await expect(page.getByText('Status')).toBeHidden();
+    await expect(page.getByText('DRAFT')).toBeHidden();
+    await expect(page.getByText('Key Results')).toBeHidden();
+});
+
+test.skip('should load the builder key results', async ({ page }) => {
     await page.waitForTimeout(1000);
     await page.getByText('Key Results').first().click();
 
     await expect(page.getByPlaceholder('Search...')).toBeVisible();
     await expect(page.getByText('All Statuses')).toBeVisible();
     await expect(page.getByText('Results not found...')).toBeVisible();
+});
+
+test('should not load the builder key results for MVP', async ({ page }) => {
+    await page.waitForTimeout(1000);
+    await expect(page.getByText('Key Results')).toBeHidden();
 });
