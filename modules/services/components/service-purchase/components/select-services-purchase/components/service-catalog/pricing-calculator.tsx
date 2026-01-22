@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
-import { PRICING_DATA } from '../mock/mock-data'
+import { PRICING_DATA } from '../../../../mock/mock-data'
 import { GrandTotalRowCatalog } from './grand-total-row-catalog'
 import HeaderCatalogPlan from './header-catalog-plan'
 import {
@@ -54,7 +54,7 @@ export function PricingCalculator({
   )
 
   return (
-    <Card className="flex flex-col gap-6 border-none! py-0!">
+    <Card className="flex w-full flex-col gap-6 border-none! py-0!">
       <div>
         {/* Header with Plan Selectors */}
         <HeaderCatalogPlan
@@ -104,7 +104,7 @@ export function PricingCalculator({
           ))}
         </div>
         {/* Grand Total */}
-        <GrandTotalRowCatalog selectedPlan={selectedPlan} />
+        <GrandTotalRowCatalog selectedPlan={selectedPlan} enabledSections={enabledSections} />
       </div>
     </Card>
   )

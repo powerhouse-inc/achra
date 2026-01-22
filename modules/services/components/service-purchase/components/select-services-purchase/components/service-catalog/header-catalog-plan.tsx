@@ -1,6 +1,6 @@
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_DATA } from '../mock/mock-data'
+import { PRICING_DATA } from '../../../../mock/mock-data'
 import { PlanSelectorItem } from './plan-selector'
 import type { PricingPlan } from '../types'
 
@@ -16,15 +16,12 @@ export default function HeaderCatalogPlan({
   readOnly = false,
 }: Readonly<HeaderCatalogPlanProps>) {
   return (
-    <div className={cn('grid h-21 items-center gap-4 px-6', 'grid-cols-[2fr_repeat(4,1fr)]')}>
-      {/* Header cell - takes 2fr (first column) */}
+    <div className={cn('grid h-21 items-center gap-4 px-6', 'grid-cols-[4fr_repeat(4,1fr)]')}>
       <div className="flex items-center">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
           SERVICE CATALOG
         </span>
       </div>
-
-      {/* Plan selectors with RadioGroup */}
       <RadioGroup
         value={selectedPlan}
         onValueChange={(value) => {
