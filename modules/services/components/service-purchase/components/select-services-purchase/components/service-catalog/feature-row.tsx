@@ -15,7 +15,7 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
     <div
       className={cn(
         'grid items-center gap-4 border-b px-6 last:border-b-0',
-        'grid-cols-[2fr_repeat(4,1fr)]',
+        'grid-cols-[4fr_repeat(4,1fr)]',
       )}
     >
       <div className="flex flex-col gap-0.5">

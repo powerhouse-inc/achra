@@ -6,6 +6,8 @@ export interface PricingTier {
   id: PricingPlan
   name: string
   price: string
+  monthlyPrice: number
+  setupFee: number
   isPopular?: boolean
 }
 
@@ -13,6 +15,7 @@ export interface FeatureRow {
   id: string
   label: string
   sublabel?: string
+  hasOneTimeFee?: boolean
   values: Record<PricingPlan, FeatureValue>
 }
 
@@ -23,6 +26,7 @@ export interface ServiceSectionCatalog {
   hasToggle?: boolean
   toggleLabel?: string
   oneTimeFee?: string
+  price?: number
   oneTimeFeeVariant?: 'primary' | 'muted'
   rows: FeatureRow[]
   subtotal?: {
@@ -49,3 +53,12 @@ export enum CatalogStatus {
 // Improve this when UI its ready
 export const TEAM_STRUCTURE_OPTIONS = ['Remote Team', 'Hybrid Team', 'Local Team'] as const
 export const ANONYMITY_LEVEL_OPTIONS = ['High (Standard)', 'Higher'] as const
+
+export interface ServiceRequestFormState {
+  message?: string
+  errors?: {
+    email?: string[]
+    name?: string[]
+    [key: string]: string[] | undefined
+  }
+}

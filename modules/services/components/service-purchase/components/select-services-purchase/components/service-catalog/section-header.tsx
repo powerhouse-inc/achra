@@ -33,7 +33,7 @@ export function SectionHeader({
     <div
       className={cn(
         'bg-accent relative grid items-stretch gap-4 border-b px-6',
-        'grid-cols-[2fr_repeat(4,1fr)]',
+        'grid-cols-[4fr_repeat(4,1fr)]',
       )}
     >
       <div className="flex items-center gap-3 py-3">

@@ -1,11 +1,21 @@
-import { CatalogStatus, type PricingData } from '../types'
+import {
+  CatalogStatus,
+  type PricingData,
+} from '../components/select-services-purchase/components/types'
 
 export const PRICING_DATA: PricingData = {
   tiers: [
-    { id: 'basic', name: 'Basic', price: '$200/mo' },
-    { id: 'team', name: 'Team', price: '$300/mo', isPopular: true },
-    { id: 'premium', name: 'Premium', price: '$500/mo' },
-    { id: 'enterprise', name: 'Enterprise', price: 'Custom' },
+    { id: 'basic', name: 'Basic', price: '$200/mo', monthlyPrice: 200, setupFee: 3000 },
+    {
+      id: 'team',
+      name: 'Team',
+      price: '$300/mo',
+      isPopular: true,
+      monthlyPrice: 300,
+      setupFee: 3000,
+    },
+    { id: 'premium', name: 'Premium', price: '$500/mo', monthlyPrice: 500, setupFee: 3000 },
+    { id: 'enterprise', name: 'Enterprise', price: 'Custom', monthlyPrice: 0, setupFee: 3000 },
   ],
   sections: [
     {
@@ -28,6 +38,7 @@ export const PRICING_DATA: PricingData = {
           id: 'incorporation-docs',
           label: 'Incorporation Docs',
           sublabel: 'Swiss Association',
+          hasOneTimeFee: true,
           values: {
             basic: true,
             team: true,
@@ -98,6 +109,7 @@ export const PRICING_DATA: PricingData = {
       hasToggle: true,
       toggleLabel: 'Finance Pack',
       oneTimeFee: '+ $50/mo',
+      price: 50,
       oneTimeFeeVariant: 'primary',
       badge: CatalogStatus.Optional,
       rows: [
@@ -136,6 +148,7 @@ export const PRICING_DATA: PricingData = {
     {
       id: 'hosting-suite',
       oneTimeFee: '+ $200/mo',
+      price: 200,
       title: 'Hosting Suite',
       hasToggle: true,
       toggleLabel: 'Hosting Suite',
