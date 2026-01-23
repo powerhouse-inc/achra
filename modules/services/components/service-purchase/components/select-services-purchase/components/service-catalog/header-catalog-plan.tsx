@@ -18,11 +18,11 @@ export default function HeaderCatalogPlan({
   return (
     <div
       className={cn(
-        'border-input grid h-21 items-center gap-4 border-b pl-6',
+        'border-input grid h-21 items-center border-b',
         'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
       )}
     >
-      <div className="flex items-center">
+      <div className="flex items-center px-6">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
           SERVICE CATALOG
         </span>
@@ -39,9 +39,8 @@ export default function HeaderCatalogPlan({
           <div
             key={tier.id}
             className={cn(
-              'flex h-full min-w-0 items-center justify-center transition-colors',
+              'flex h-full min-w-0 items-center justify-center px-6 transition-colors',
               selectedPlan === tier.id && 'bg-primary/15',
-              tier.id === 'enterprise' && 'pr-6',
             )}
           >
             <PlanSelectorItem

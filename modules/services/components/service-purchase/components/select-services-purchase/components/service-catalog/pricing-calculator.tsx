@@ -54,7 +54,7 @@ export function PricingCalculator({
 
   return (
     <Card className="flex w-full flex-col gap-6 border-none! py-0!">
-      <div className="border-border overflow-hidden rounded-xl border">
+      <div className="overflow-hidden rounded-xl">
         {/* Header with Plan Selectors */}
         <HeaderCatalogPlan
           selectedPlan={selectedPlan}

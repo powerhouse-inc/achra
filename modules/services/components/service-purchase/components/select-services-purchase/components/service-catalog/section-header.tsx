@@ -32,11 +32,11 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        'bg-accent grid items-center gap-4 border-b pl-6',
+        'bg-accent grid items-center border-b',
         'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
       )}
     >
-      <div className="flex h-14 items-center gap-3">
+      <div className="flex h-14 items-center gap-2 px-6">
         {hasToggle ? (
           <div className="flex items-center gap-2">
             <Switch
@@ -66,15 +66,15 @@ export function SectionHeader({
         <div
           key={plan}
           className={cn(
-            'pointer-events-none flex h-14 min-w-0 items-center justify-center px-2 transition-colors',
+            'pointer-events-none flex h-14 min-w-0 items-center justify-center px-6 transition-colors',
             activePlan === plan && 'bg-primary/30',
-            plan === 'enterprise' && 'relative pr-6',
+            plan === 'enterprise' && oneTimeFee && 'relative',
           )}
         >
           {plan === 'enterprise' && oneTimeFee && (
             <span
               className={cn(
-                'absolute right-6 text-xs font-medium whitespace-nowrap',
+                'absolute right-6 min-w-0 text-xs font-medium whitespace-nowrap',
                 oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
               )}
             >

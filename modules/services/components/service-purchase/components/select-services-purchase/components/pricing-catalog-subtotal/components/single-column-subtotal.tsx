@@ -10,15 +10,18 @@ export function SingleColumnSubtotal({ value, activePlan }: Readonly<SingleColum
   return (
     <>
       {PRICING_PLANS.slice(0, 3).map((plan) => (
-        <div key={plan} className={cn('h-14 min-w-0', activePlan === plan && 'bg-primary/10')} />
+        <div
+          key={plan}
+          className={cn('h-14 min-w-0 px-6', activePlan === plan && 'bg-primary/10')}
+        />
       ))}
       <div
         className={cn(
-          'relative flex h-14 min-w-0 items-center justify-end pr-6',
+          'relative flex h-14 min-w-0 items-center justify-end',
           activePlan === 'enterprise' && 'bg-primary/10',
         )}
       >
-        <span className="text-foreground/50 absolute right-6 text-sm font-medium whitespace-nowrap">
+        <span className="text-foreground/50 absolute right-6 min-w-0 text-sm font-medium whitespace-nowrap">
           {value}
         </span>
       </div>
