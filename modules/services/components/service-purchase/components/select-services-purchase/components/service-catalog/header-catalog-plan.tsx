@@ -1,12 +1,12 @@
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_DATA } from '../mock/mock-data'
+import { PRICING_DATA } from '../../../../mock/mock-data'
 import { PlanSelectorItem } from './plan-selector'
-import type { PricingPlan } from '../types'
+import type { Plan } from '../types'
 
 interface HeaderCatalogPlanProps {
-  selectedPlan?: PricingPlan
-  handlePlanChange: (plan: PricingPlan) => void
+  selectedPlan?: Plan
+  handlePlanChange: (plan: Plan) => void
   readOnly?: boolean
 }
 
@@ -16,28 +16,30 @@ export default function HeaderCatalogPlan({
   readOnly = false,
 }: Readonly<HeaderCatalogPlanProps>) {
   return (
-    <div className={cn('grid h-21 items-center gap-4 px-6', 'grid-cols-[2fr_repeat(4,1fr)]')}>
-      {/* Header cell - takes 2fr (first column) */}
-      <div className="flex items-center">
+    <div
+      className={cn(
+        'border-input grid h-21 items-center border-b',
+        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
+      )}
+    >
+      <div className="flex items-center px-6">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">
           SERVICE CATALOG
         </span>
       </div>
-
-      {/* Plan selectors with RadioGroup */}
       <RadioGroup
         value={selectedPlan}
         onValueChange={(value) => {
-          handlePlanChange(value as PricingPlan)
+          handlePlanChange(value as Plan)
         }}
-        className={cn('contents', 'col-span-4')}
+        className="contents"
         disabled={readOnly}
       >
         {PRICING_DATA.tiers.map((tier) => (
           <div
             key={tier.id}
             className={cn(
-              'flex h-full items-center justify-center transition-colors',
+              'flex h-full min-w-0 items-center justify-center px-6 transition-colors',
               selectedPlan === tier.id && 'bg-primary/15',
             )}
           >

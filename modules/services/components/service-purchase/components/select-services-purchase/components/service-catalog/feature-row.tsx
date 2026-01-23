@@ -1,24 +1,24 @@
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
+import { type FeatureValue, type Plan, PRICING_PLANS } from '../types'
 import { ServiceCatalogoCell } from './service-catalogo-cell'
-import type { FeatureValue, PricingPlan } from '../types'
 
 interface FeatureRowProps {
   label: string
   sublabel?: string
-  values: Record<PricingPlan, FeatureValue>
-  activePlan: PricingPlan
+  values: Record<Plan, FeatureValue>
+  activePlan: Plan
 }
 
 export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<FeatureRowProps>) {
   return (
     <div
       className={cn(
-        'grid items-center gap-4 border-b px-6 last:border-b-0',
-        'grid-cols-[2fr_repeat(4,1fr)]',
+        'grid items-center border-b last:border-b-0',
+        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
       )}
     >
-      <div className="flex flex-col gap-0.5">
+      <div className="flex min-h-14 flex-col justify-center gap-0.5 px-6">
         <span className="text-foreground text-base font-semibold">{label}</span>
         {sublabel && (
           <span className="text-muted-foreground inline-flex items-center gap-1 text-xs">
@@ -35,11 +35,11 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
         )}
       </div>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
+      {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'flex h-14 items-center justify-center transition-colors',
+            'flex h-14 min-w-0 items-center justify-center px-6 transition-colors',
             activePlan === plan && 'bg-primary/10 font-bold',
           )}
         >

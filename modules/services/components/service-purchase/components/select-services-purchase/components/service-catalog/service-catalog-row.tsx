@@ -2,13 +2,13 @@
 
 import { FeatureRow } from './feature-row'
 import { useServiceCatalogContext } from './service-catalog-root'
-import type { FeatureValue, PricingPlan } from '../types'
+import type { FeatureValue, Plan } from '../types'
 
 export interface ServiceCatalogRowProps {
   id: string
   label: string
   sublabel?: string
-  values: Record<PricingPlan, FeatureValue>
+  values: Record<Plan, FeatureValue>
 }
 
 export function ServiceCatalogRow({

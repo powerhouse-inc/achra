@@ -1,35 +1,16 @@
-'use client'
-
 import { Landmark } from 'lucide-react'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
+import { PRICING_DATA } from '../../mock/mock-data'
 import { MarketplaceHeader } from '../select-services-purchase/components/marketplace-header'
 import { LabeledTextField } from './components/labeled-text-field'
 import { ServiceBreakdownItem } from './components/service-breakdown-item/service-breakdown-item'
 import { Summary } from './components/summary'
-import type { PricingPlan } from '../select-services-purchase/components/types'
+import type { Plan } from '../select-services-purchase/components/types'
 
-const additionalCosts = {
-  'finance-pack': 50,
-  'hosting-suite': 200,
-}
-// Mock plan prices
-const planPrices: Record<PricingPlan, { monthly: number; setup: number }> = {
-  basic: { monthly: 200, setup: 3000 },
-  team: { monthly: 300, setup: 3000 },
-  premium: { monthly: 500, setup: 3000 },
-  enterprise: { monthly: 0, setup: 3000 },
-}
-// Mock tier names
-const tierNames: Record<PricingPlan, string> = {
-  basic: 'Basic',
-  team: 'Team',
-  premium: 'Premium',
-  enterprise: 'Enterprise',
-}
 export interface SummaryProps {
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<string, boolean>
   onBack?: () => void
   actionState: ServiceRequestFormState
@@ -43,16 +24,20 @@ function SummarySection({
   actionState,
   isPending,
 }: Readonly<SummaryProps>) {
-  const basePrice = planPrices[selectedPlan].monthly
-  const setupFee = planPrices[selectedPlan].setup
-  let recurringTotal = basePrice
+  const currentTier = PRICING_DATA.tiers.find((tier) => tier.id === selectedPlan)
+  const basePrice = currentTier?.monthlyPrice ?? 0
+  const setupFee = currentTier?.setupFee ?? 0
 
-  // Calculate additional costs from enabled sections improve this API its ready
-  Object.entries(enabledSections).forEach(([key, enabled]) => {
-    if (enabled && key in additionalCosts) {
-      recurringTotal += additionalCosts[key as keyof typeof additionalCosts]
-    }
-  })
+  // Calculate additional costs from enabled sections
+  const selectedAddons = PRICING_DATA.sections
+    ?.filter((section) => enabledSections[section.id] && section.price)
+    .map((section) => ({
+      ...section,
+      price: section.price ?? 0,
+    }))
+
+  const addonsTotal = selectedAddons?.reduce((acc, section) => acc + section.price, 0) ?? 0
+  const recurringTotal = basePrice + addonsTotal
 
   return (
     <div className="mt-6 flex flex-col gap-6">
@@ -101,7 +86,7 @@ function SummarySection({
               <div className="flex h-full flex-col gap-4">
                 <div className="flex h-16 items-end justify-between">
                   <span className="text-foreground text-sm font-medium">Selected Tier</span>
-                  <span className="text-primary text-sm font-bold">{tierNames[selectedPlan]}</span>
+                  <span className="text-primary text-sm font-bold">{currentTier?.name}</span>
                 </div>
 
                 <div className="flex h-full flex-col justify-between">
@@ -117,18 +102,13 @@ function SummarySection({
                     value={`$${basePrice}`}
                   />
 
-                  {enabledSections['finance-pack'] && (
+                  {selectedAddons?.map((section) => (
                     <ServiceBreakdownItem
-                      title="Finance Pack"
-                      value={`+$${additionalCosts['finance-pack']}`}
+                      key={section.id}
+                      title={section.title}
+                      value={`+$${section.price}`}
                     />
-                  )}
-                  {enabledSections['hosting-suite'] && (
-                    <ServiceBreakdownItem
-                      title="Hosting Suite"
-                      value={`+$${additionalCosts['hosting-suite']}`}
-                    />
-                  )}
+                  ))}
                 </div>
               </div>
             </div>

@@ -1,11 +1,11 @@
 'use client'
 
 import { ServiceCatalogBody, ServiceCatalogHeader, ServiceCatalogRoot, ServiceCatalogRow } from '.'
-import type { PricingPlan, ServiceSectionCatalog } from '../types'
+import type { Plan, ServiceSectionCatalog } from '../types'
 
 interface PricingSectionProps {
   readonly section: ServiceSectionCatalog
-  readonly activePlan: PricingPlan
+  readonly activePlan: Plan
   readonly isEnabled: boolean
   readonly readOnly: boolean
   readonly onToggle: (sectionId: string, enabled: boolean) => void

@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
-import type { CatalogStatus, PricingPlan } from '../types'
+import { type CatalogStatus, type Plan, PRICING_PLANS } from '../types'
 
 interface SectionHeaderProps {
   title: string
@@ -15,7 +15,7 @@ interface SectionHeaderProps {
   onToggleChange?: (enabled: boolean) => void
   oneTimeFee?: string
   oneTimeFeeVariant?: 'primary' | 'muted'
-  activePlan?: PricingPlan
+  activePlan?: Plan
 }
 
 export function SectionHeader({
@@ -32,11 +32,11 @@ export function SectionHeader({
   return (
     <div
       className={cn(
-        'bg-accent relative grid items-stretch gap-4 border-b px-6',
-        'grid-cols-[2fr_repeat(4,1fr)]',
+        'bg-accent grid items-center border-b',
+        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
       )}
     >
-      <div className="flex items-center gap-3 py-3">
+      <div className="flex h-14 items-center gap-2 px-6">
         {hasToggle ? (
           <div className="flex items-center gap-2">
             <Switch
@@ -62,26 +62,27 @@ export function SectionHeader({
         {badge && <ServiceCatalogStatus catalogStatus={badge} />}
       </div>
 
-      {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
+      {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'pointer-events-none flex items-center justify-center transition-colors',
+            'pointer-events-none flex h-14 min-w-0 items-center justify-center px-6 transition-colors',
             activePlan === plan && 'bg-primary/30',
-          )}
-        />
-      ))}
-
-      {oneTimeFee && (
-        <span
-          className={cn(
-            'absolute top-1/2 right-6 -translate-y-1/2 text-xs font-medium',
-            oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
+            plan === 'enterprise' && oneTimeFee && 'relative',
           )}
         >
-          {oneTimeFee}
-        </span>
-      )}
+          {plan === 'enterprise' && oneTimeFee && (
+            <span
+              className={cn(
+                'absolute right-6 min-w-0 text-xs font-medium whitespace-nowrap',
+                oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
+              )}
+            >
+              {oneTimeFee}
+            </span>
+          )}
+        </div>
+      ))}
     </div>
   )
 }

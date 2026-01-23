@@ -14,12 +14,12 @@ import { Form } from '@/modules/shared/components/ui/form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 import SelectServices from '../select-services-purchase/components/select-services/select-services'
+import { Plan } from '../select-services-purchase/components/types'
 import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import ServiceInfo from './components/service-info/service-info'
-import type { PricingPlan } from '../select-services-purchase/components/types'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
@@ -48,7 +48,7 @@ export interface ServicePurchaseFormValues {
   legalEntity: string
   teamStructure: string
   anonymityLevel: string
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<SectionId, boolean>
 }
 
@@ -63,7 +63,7 @@ export default function ServicePurchaseForm() {
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
-      selectedPlan: 'team',
+      selectedPlan: Plan.Team,
       enabledSections: INITIAL_ENABLED_SECTIONS,
     },
   })
@@ -77,7 +77,7 @@ export default function ServicePurchaseForm() {
   const enabledSections = useWatch({ control, name: 'enabledSections' })
 
   const handlePlanChange = useCallback(
-    (plan: PricingPlan) => {
+    (plan: Plan) => {
       setValue('selectedPlan', plan)
     },
     [setValue],

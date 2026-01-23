@@ -10,28 +10,28 @@ import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/ca
 import { ServiceBreakdownItem, Summary } from '../../summary'
 import { LabeledSelect } from '../components/labeled-select'
 import { MarketplaceHeader } from '../components/marketplace-header'
-import type { PricingPlan } from '../components/types'
+import type { Plan } from '../components/types'
 
 const additionalCosts = {
   'finance-pack': 50,
   'hosting-suite': 200,
 }
 // Mock plan prices
-const planPrices: Record<PricingPlan, { monthly: number; setup: number }> = {
+const planPrices: Record<Plan, { monthly: number; setup: number }> = {
   basic: { monthly: 200, setup: 3000 },
   team: { monthly: 300, setup: 3000 },
   premium: { monthly: 500, setup: 3000 },
   enterprise: { monthly: 0, setup: 3000 },
 }
 // Mock tier names
-const tierNames: Record<PricingPlan, string> = {
+const tierNames: Record<Plan, string> = {
   basic: 'Basic',
   team: 'Team',
   premium: 'Premium',
   enterprise: 'Enterprise',
 }
 export interface SummaryProps {
-  selectedPlan: PricingPlan
+  selectedPlan: Plan
   enabledSections: Record<string, boolean>
   onBack?: () => void
   actionState: ServiceRequestFormState

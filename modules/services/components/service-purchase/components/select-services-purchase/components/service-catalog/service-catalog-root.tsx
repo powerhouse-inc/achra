@@ -2,10 +2,10 @@
 
 import { createContext, useContext, useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import type { PricingPlan } from '../types'
+import type { Plan } from '../types'
 
 interface ServiceCatalogContextValue {
-  activePlan: PricingPlan
+  activePlan: Plan
   isEnabled: boolean
 }
 
@@ -20,7 +20,7 @@ export function useServiceCatalogContext() {
 }
 
 export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {
-  activePlan: PricingPlan
+  activePlan: Plan
   isEnabled: boolean
 }
 
@@ -35,7 +35,7 @@ export function ServiceCatalogRoot({
 
   return (
     <ServiceCatalogContext.Provider value={contextValue}>
-      <div className={cn('border-border overflow-hidden border', className)} {...props}>
+      <div className={cn(className)} {...props}>
         <div className={cn(!isEnabled && 'opacity-50')}>{children}</div>
       </div>
     </ServiceCatalogContext.Provider>

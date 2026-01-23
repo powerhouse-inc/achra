@@ -1,39 +1,37 @@
-import { cn } from '@/modules/shared/lib/utils'
-import type { PricingPlan, ServiceSectionCatalog } from '../types'
+import { type Plan, PRICING_PLANS, type ServiceSectionCatalog } from '../types'
+import { MultiColumnSubtotal, SingleColumnSubtotal } from './components'
 
 interface PricingCatalogSubtotalProps {
   section: ServiceSectionCatalog
-  activePlan: PricingPlan
+  activePlan: Plan
 }
 
 export default function PricingCatalogSubtotal({
   section,
   activePlan,
 }: Readonly<PricingCatalogSubtotalProps>) {
+  const { subtotal } = section
+
+  if (!subtotal) return null
+
+  const plansWithValues = PRICING_PLANS.filter((plan) => subtotal.values[plan])
+  const isSingleColumnSubtotal = plansWithValues.length === 1
+
   return (
-    <div className={cn('border-t px-6')}>
-      <div className={cn('grid items-center gap-4', 'grid-cols-[2fr_repeat(4,1fr)]')}>
-        <span className="text-foreground/50 text-base/6 font-semibold uppercase">
-          {section.subtotal?.label}
+    <div className="border-input border-t border-b">
+      <div className="grid grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))] items-center">
+        <span className="text-foreground/50 flex h-14 items-center px-6 text-base/6 font-semibold uppercase">
+          {subtotal.label}
         </span>
-        {(['basic', 'team', 'premium', 'enterprise'] as PricingPlan[]).map((plan) => (
-          <div
-            key={plan}
-            className={cn(
-              'flex h-14 items-center justify-center',
-              activePlan === plan && 'bg-primary/10 font-bold',
-            )}
-          >
-            <span
-              className={cn(
-                'text-sm',
-                activePlan === plan ? 'text-primary font-bold' : 'text-foreground font-medium',
-              )}
-            >
-              {section.subtotal?.values[plan]}
-            </span>
-          </div>
-        ))}
+
+        {isSingleColumnSubtotal ? (
+          <SingleColumnSubtotal
+            value={subtotal.values[plansWithValues[0]]}
+            activePlan={activePlan}
+          />
+        ) : (
+          <MultiColumnSubtotal subtotal={subtotal} activePlan={activePlan} />
+        )}
       </div>
     </div>
   )
