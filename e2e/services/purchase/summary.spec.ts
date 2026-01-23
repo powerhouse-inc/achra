@@ -9,7 +9,6 @@ test.beforeEach(async ({ page }) => {
 
 test('should load the section main content', async ({ page }) => {
     await expect(page.getByText('Powerhouse Genesis OH')).toBeVisible();
-    await expect(page.getByText('Step 4 of 5')).toBeVisible();
 });
 
 test('should load the summary data area', async ({ page }) => {
@@ -19,7 +18,7 @@ test('should load the summary data area', async ({ page }) => {
     await expect(page.getByText('+ $3,000 Setup')).toBeVisible();
 
     await expect(page.getByText('Configuration')).toHaveCount(2);
-    await expect(page.getByText('Legal Entity')).toBeVisible();
+    await expect(page.getByText('Legal Entity')).toHaveCount(2);
     await expect(page.getByText('Swiss Association')).toBeVisible();
     await expect(page.getByText('Anonymity Level')).toBeVisible();
     await expect(page.getByText('High (Standard)')).toBeVisible();

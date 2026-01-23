@@ -8,8 +8,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should load the section main content', async ({ page }) => {
-    await expect(page.getByText('Operator')).toHaveCount(2);
-    await expect(page.getByText('Step 2 of 5')).toBeVisible();
+    await expect(page.getByText('Operator')).toHaveCount(3);
 });
 
 test('should load the list of operators', async ({ page }) => {

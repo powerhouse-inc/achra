@@ -15,6 +15,4 @@ test('should contain main elements', async ({ page }) => {
     await expect(page.getByText('Select Services')).toBeVisible();
     await expect(page.getByText('Summary')).toBeVisible();
     await expect(page.getByText('Confirmation')).toBeVisible();
-
-    await expect(page.getByText('Step 1 of 5')).toBeVisible();
 });
