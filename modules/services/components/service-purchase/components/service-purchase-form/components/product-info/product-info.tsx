@@ -1,12 +1,8 @@
 'use client'
 
 import ExpandableSection from '@/modules/services/components/service-purchase/components/service-purchase-form/components/product-info/components/expandable-section'
-import { Button } from '@/modules/shared/components/ui/button'
-export interface ProductInfoProps {
-  onSelectAnOperator: () => void
-}
 
-export default function ProductInfo({ onSelectAnOperator }: ProductInfoProps) {
+export default function ProductInfo() {
   return (
     <div className="flex flex-col gap-6">
       <span className="text-foreground text-base/6">
@@ -47,11 +43,6 @@ export default function ProductInfo({ onSelectAnOperator }: ProductInfoProps) {
           title="Why establishing your own Operational Hub is the most rational next step?"
           description="Auctor senectus fermentum amet aliquet sed urna pulvinar. Nulla eu nisi risus consequat ut. Aenean mi dictum vel egestas est nunc. Nunc viverra nunc tempus ipsum. Fames ut at in tincidunt viverra hendrerit dui diam. Viverra morbi tellus aliquet in dui metus. Sit proin ullamcorper vitae mauris tempor ante volutpat arcu. Purus imperdiet at placerat elementum risus urna donec. Vitae odio cras in sodales. Mauris orci gravida vitae arcu ornare nunc. Lorem tellus in lorem odio lobortis. Turpis platea morbi et viverra tellus bibendum. Facilisis vel sapien imperdiet nunc congue quisque auctor eu purus. Lorem diam pretium bibendum neque viverra sem nisl adipiscing. Ornare enim lacinia pellentesque fringilla quis. Et donec sodales in consequat morbi. Cursus vulputate tellus neque eu orci ac congue. Gravida nibh non lectus leo tristique diam."
         />
-      </div>
-      <div className="z-1 mt-4 flex w-full justify-end">
-        <Button variant="default" onClick={onSelectAnOperator}>
-          Select an operator
-        </Button>
       </div>
     </div>
   )
