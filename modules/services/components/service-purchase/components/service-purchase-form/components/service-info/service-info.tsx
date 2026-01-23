@@ -19,7 +19,7 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
         <div className={cn('flex flex-col gap-4', light && 'gap-0')}>
           <div
             className={cn(
-              'relative size-64 min-w-64',
+              'relative size-64 min-w-64 transition-[width,height,border-radius] duration-300 ease-out',
               light &&
                 'border-background size-14 min-w-14 overflow-hidden rounded-full border-2 shadow-sm',
             )}

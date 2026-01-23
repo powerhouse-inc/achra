@@ -156,7 +156,7 @@ export default function ServicePurchaseForm() {
             <Button
               variant="secondary"
               onClick={handleGoBack}
-              className={cn('mt-2.5 w-fit', activeStep === 'product-info' && 'hidden')}
+              className={cn('w-fit', activeStep === 'product-info' && 'hidden')}
             >
               Back
             </Button>
