@@ -9,10 +9,10 @@ function FundChangeRateSkeleton() {
       <div className="flex w-full">
         {/* Left Arrow Container */}
         <div className="flex w-full md:mr-2">
-          <div className="min-w-[85px] md:min-w-[85px] lg:min-w-[118px] 2xl:min-w-[155px]" />
+          <div className="min-w-21.25 md:min-w-21.25 lg:min-w-29.5 2xl:min-w-38.75" />
           <div className="border-border relative mt-6 h-[calc(100%-24px)] w-full rounded-tl-[20px] border-t-2 border-l-2">
             <div className="border-border absolute bottom-px left-[-7.4px] size-3.25 rotate-225 rounded-tl border-t-2 border-l-2" />
-            <div className="bg-border absolute top-[-8px] right-0 h-3.5 w-0.5 rounded-sm" />
+            <div className="bg-border absolute -top-2 right-0 h-3.5 w-0.5 rounded-sm" />
           </div>
         </div>
 
@@ -31,7 +31,7 @@ function FundChangeRateSkeleton() {
             <div className="border-border absolute right-[-7.4px] bottom-px size-3.25 rotate-225 rounded-tl border-t-2 border-l-2" />
             <div className="bg-border absolute top-[-8px] left-0 h-3.5 w-0.5 rounded-sm" />
           </div>
-          <div className="min-w-[65px] md:min-w-[65px] lg:min-w-[85px] 2xl:min-w-[120px]" />
+          <div className="min-w-16.25 md:min-w-16.25 lg:min-w-21.25 2xl:min-w-30" />
         </div>
       </div>
 
