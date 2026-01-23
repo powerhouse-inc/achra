@@ -1,6 +1,6 @@
 'use client'
-import { startTransition, useActionState, useCallback, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { startTransition, useActionState, useCallback } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
@@ -50,6 +50,8 @@ export interface ServicePurchaseFormValues {
   legalEntity: string
   teamStructure: string
   anonymityLevel: string
+  selectedPlan: PricingPlan
+  enabledSections: Record<SectionId, boolean>
 }
 
 export default function ServicePurchaseForm() {
@@ -63,25 +65,35 @@ export default function ServicePurchaseForm() {
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
+      selectedPlan: 'team',
+      enabledSections: INITIAL_ENABLED_SECTIONS,
     },
   })
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
-  // Shared state for PricingCalculator selections
-  const [selectedPlan, setSelectedPlan] = useState<PricingPlan>('team')
-  const [enabledSections, setEnabledSections] =
-    useState<Record<SectionId, boolean>>(INITIAL_ENABLED_SECTIONS)
+  const { control, setValue } = form
 
-  const handlePlanChange = useCallback((plan: PricingPlan) => {
-    setSelectedPlan(plan)
-  }, [])
+  const name = useWatch({ control, name: 'name' })
+  const email = useWatch({ control, name: 'email' })
+  const selectedPlan = useWatch({ control, name: 'selectedPlan' })
+  const enabledSections = useWatch({ control, name: 'enabledSections' })
 
-  const handleSectionToggle = useCallback((sectionId: SectionId, enabled: boolean) => {
-    setEnabledSections((prev) => ({
-      ...prev,
-      [sectionId]: enabled,
-    }))
-  }, [])
+  const handlePlanChange = useCallback(
+    (plan: PricingPlan) => {
+      setValue('selectedPlan', plan)
+    },
+    [setValue],
+  )
+
+  const handleSectionToggle = useCallback(
+    (sectionId: SectionId, enabled: boolean) => {
+      setValue('enabledSections', {
+        ...enabledSections,
+        [sectionId]: enabled,
+      })
+    },
+    [enabledSections, setValue],
+  )
 
   // Navigation handlers
   const navigateToStep = (stepValue: StepValue) => {
@@ -93,7 +105,7 @@ export default function ServicePurchaseForm() {
   }
 
   const handleSelectServices = (operatorId: string) => {
-    form.setValue('operatorId', operatorId)
+    setValue('operatorId', operatorId)
     navigateToStep('select-services')
   }
 
@@ -202,7 +214,7 @@ export default function ServicePurchaseForm() {
                       isPending={isPending}
                     />
                   )}
-                  {step.value === 'confirmation' && <Confirmation />}
+                  {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
                 </TabsContent>
               ))}
             </Tabs>
