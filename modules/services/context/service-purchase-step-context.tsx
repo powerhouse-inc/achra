@@ -12,14 +12,6 @@ export const STEPS = [
 
 export type StepValue = (typeof STEPS)[number]['value']
 
-export const STEP_NUMBER_MAP: Record<StepValue, number> = {
-  'product-info': 1,
-  'select-operator': 2,
-  'select-services': 3,
-  summary: 4,
-  confirmation: 5,
-}
-
 interface ServicePurchaseStepContextValues {
   activeStep: StepValue
   goToStep: (step: StepValue) => void
