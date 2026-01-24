@@ -2,17 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub/purchase`);
-
-
 });
 
-test('should load the section main content', async ({ page }) => {
+test('should load the section main content without provided data', async ({ page }) => {
     await page.getByText('Confirmation').click();
     await page.waitForTimeout(1000);
 
     await expect(page.getByText('Request Successfully Sent!')).toBeVisible();
     await expect(page.getByText('Thank you !')).toBeVisible();
-    await expect(page.getByText('We have emailed the summary to email@powerhouse.inc*')).toBeVisible();
+    await expect(page.getByText('We have emailed the summary to ')).toBeVisible();
     await expect(page.getByText('We will contact you shortly to schedule an introduction meeting!')).toBeVisible();
 });
 
