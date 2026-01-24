@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    //await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub/purchase`);
-    await page.goto("https://achra-git-feat-implementconfirmationstepn-84ae00-powerhouse-dao.vercel.app/services/sno-embryonic-hub/purchase");
-    https://achra-git-feat-implementconfirmationstepn-84ae00-powerhouse-dao.vercel.app/services/sno-embryonic-hub/purchase
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub/purchase`);
 
     await page.getByText('Confirmation').click();
     await page.waitForTimeout(1000);
