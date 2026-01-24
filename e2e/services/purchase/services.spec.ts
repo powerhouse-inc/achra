@@ -112,3 +112,90 @@ test('should contain the back button in the step', async ({ page }) => {
 test('should contain the continue button in the step', async ({ page }) => {
     await page.getByText('Continue').click();
 });
+
+test('should contain the tier with only included options', async ({ page }) => {
+    page.getByText('Finance Pack').nth(0).click();
+    await page.waitForTimeout(1000);
+
+    await expect(page.getByText('Tier')).toHaveCount(2);
+    await expect(page.getByText('Team')).toHaveCount(7);
+    await expect(page.getByText('Price Includes')).toBeVisible();
+    await expect(page.getByText('$300/mo')).toHaveCount(3);
+    await expect(page.getByText('Needs Analysis')).toHaveCount(2);
+    await expect(page.getByText('Incorporation Docs')).toHaveCount(2);
+    await expect(page.getByText('Swiss Association')).toHaveCount(3);
+    await expect(page.getByText('One-time fee')).toBeVisible();
+    await expect(page.getByText('$3000')).toHaveCount(3);
+    await expect(page.getByText('~')).toHaveCount(2);
+    await expect(page.getByText('Contributor Contracting')).toHaveCount(2);
+    await expect(page.getByText('Up to 6')).toHaveCount(2);
+    await expect(page.getByText('Tax Administration')).toHaveCount(2);
+    await expect(page.getByText('Included')).toHaveCount(3);
+    await expect(page.getByText('Monthly Total')).toBeVisible();
+    await expect(page.getByText('$300')).toHaveCount(8);
+});
+
+test('should contain the tier with the first optional service', async ({ page }) => {
+    await expect(page.getByText('Tier')).toHaveCount(2);
+    await expect(page.getByText('Team')).toHaveCount(7);
+    await expect(page.getByText('Price Includes')).toHaveCount(2);
+    await expect(page.getByText('$300/mo')).toHaveCount(2);
+    await expect(page.getByText('Needs Analysis')).toHaveCount(2);
+    await expect(page.getByText('Incorporation Docs')).toHaveCount(2);
+    await expect(page.getByText('Swiss Association')).toHaveCount(4);
+    await expect(page.getByText('One-time fee')).toBeVisible();
+    await expect(page.getByText('$3000')).toHaveCount(3);
+    await expect(page.getByText('~')).toHaveCount(3);
+    await expect(page.getByText('Contributor Contracting')).toHaveCount(2);
+    await expect(page.getByText('Up to 6')).toHaveCount(2);
+    await expect(page.getByText('Tax Administration')).toHaveCount(2);
+    await expect(page.getByText('Included')).toHaveCount(4);
+
+    await expect(page.getByText('Recurring Services')).toBeVisible();
+    await expect(page.getByText('Finance Pack')).toHaveCount(2);
+    await expect(page.getByText('Price Includes')).toHaveCount(2);
+    await expect(page.getByText('+$50')).toBeVisible();
+    await expect(page.getByText('Bank Account Setup')).toHaveCount(2);
+    await expect(page.getByText('Crypto Payment')).toHaveCount(2);
+    await expect(page.getByText('3 Accounts')).toHaveCount(3);
+
+    await expect(page.getByText('Monthly Total')).toBeVisible();
+    await expect(page.getByText('$350')).toHaveCount(2);
+});
+
+test('should contain the tier with both optional services', async ({ page }) => {
+    page.getByText('Hosting Suite').nth(0).click();
+    await page.waitForTimeout(1000);
+
+    await expect(page.getByText('Tier')).toHaveCount(2);
+    await expect(page.getByText('Team')).toHaveCount(7);
+    await expect(page.getByText('Price Includes')).toHaveCount(3);
+    await expect(page.getByText('$300/mo')).toHaveCount(2);
+    await expect(page.getByText('Needs Analysis')).toHaveCount(2);
+    await expect(page.getByText('Incorporation Docs')).toHaveCount(2);
+    await expect(page.getByText('Swiss Association')).toHaveCount(4);
+    await expect(page.getByText('One-time fee')).toBeVisible();
+    await expect(page.getByText('$3000')).toHaveCount(3);
+    await expect(page.getByText('~')).toHaveCount(3);
+    await expect(page.getByText('Contributor Contracting')).toHaveCount(2);
+    await expect(page.getByText('Up to 6')).toHaveCount(2);
+    await expect(page.getByText('Tax Administration')).toHaveCount(2);
+    await expect(page.getByText('Included')).toHaveCount(4);
+
+    await expect(page.getByText('Recurring Services')).toHaveCount(2);
+    await expect(page.getByText('Finance Pack')).toHaveCount(2);
+    await expect(page.getByText('+$50')).toBeVisible();
+    await expect(page.getByText('Bank Account Setup')).toHaveCount(2);
+    await expect(page.getByText('Crypto Payment')).toHaveCount(2);
+    await expect(page.getByText('3 Accounts')).toHaveCount(3);
+
+    await expect(page.getByText('Hosting Suite')).toHaveCount(2);
+    await expect(page.getByText('+$200')).toBeVisible();
+    await expect(page.getByText('Secure Email')).toHaveCount(2);
+    await expect(page.getByText('10 Accounts')).toHaveCount(2);
+    await expect(page.getByText('Web Hosting')).toHaveCount(2);
+    await expect(page.getByText('Pro')).toHaveCount(3);
+
+    await expect(page.getByText('Monthly Total')).toBeVisible();
+    await expect(page.getByText('$550')).toHaveCount(2);
+});
