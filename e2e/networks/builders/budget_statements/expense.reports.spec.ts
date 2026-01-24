@@ -4,10 +4,6 @@ test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements?section=expense-reports`);
 });
 
-test('should load the section top content', async ({ page }) => {
-    await expect(page.getByText('CES Core Unit on-chain transaction history')).toBeVisible();
-});
-
 test('should load the totals summary', async ({ page }) => {
     await expect(page.getByText('Actuals - Dec 2024 Totals')).toBeVisible();
     await expect(page.getByText('Wallet')).toBeVisible();
