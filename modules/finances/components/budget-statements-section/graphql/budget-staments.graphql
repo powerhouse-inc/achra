@@ -1,0 +1,26 @@
+query BudgetStatements($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    owner {
+      name
+      code
+      id
+      logo
+    }
+    month
+    expenseReport {
+      periodStart
+      periodEnd
+      wallets {
+        name
+        address
+        totals {
+          groupLabel
+          totalActuals
+          totalForecast
+          totalPayments
+        }
+      }
+    }
+  }
+}

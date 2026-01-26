@@ -63,7 +63,14 @@ export default function BudgetStatementFilters({
             setOpen={setOpen}
           />
           <div className="flex md:hidden">
-            <FilterDrawer onReset={onReset} filterTrigger={<ArrowUpDown className="size-4.5" />}>
+            <FilterDrawer
+              onReset={onReset}
+              filterTrigger={
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <ArrowUpDown className="size-4.5" />
+                </Button>
+              }
+            >
               <div className="border-input flex flex-col gap-1 rounded-xl border p-2">
                 <div className="flex items-center justify-between px-2 pt-2 pb-1">
                   <span className="text-foreground text-sm font-semibold">Sort by</span>

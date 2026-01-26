@@ -9,9 +9,17 @@ import { FinancesSections } from '../config/const'
 import useBudgetStamentFilters from './budget-stament-filters/useBudgetStamentFilters'
 import BudgetStatementsContent from './budget-statements-content'
 import BudgetStatementsTitle from './budget-statements-title'
+import type { BudgetStatement } from './type'
 
-export default function BudgetStatementsSection() {
+interface BudgetStatementsSectionProps {
+  budgetStatements: BudgetStatement[]
+}
+
+export default function BudgetStatementsSection({
+  budgetStatements,
+}: BudgetStatementsSectionProps) {
   const { year } = useFinancesYear()
+
   const RANGE = `Jan - Dec ${year}`
   const [budgetMetric, setBudgetMetric] = useQueryState(
     'budgetMetric',
@@ -20,6 +28,7 @@ export default function BudgetStatementsSection() {
     ).withDefault(METRIC_OPTIONS.Actuals),
   )
   const { metricSort } = useBudgetStamentFilters()
+
   return (
     <section
       className={cn('flex w-full flex-col gap-4', SCROLL_MT_CLASSES)}
@@ -30,7 +39,11 @@ export default function BudgetStatementsSection() {
         hash="budget-statements"
         setBudgetMetric={setBudgetMetric}
       />
-      <BudgetStatementsContent budgetMetric={budgetMetric} sortOption={metricSort} />
+      <BudgetStatementsContent
+        budgetMetric={budgetMetric}
+        sortOption={metricSort}
+        budgetStatements={budgetStatements}
+      />
     </section>
   )
 }

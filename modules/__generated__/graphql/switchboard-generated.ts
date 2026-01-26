@@ -7672,6 +7672,13 @@ export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
 
 export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string }> };
 
+export type BudgetStatementsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, owner: { __typename?: 'BudgetStatementOwner', name: string, code: string, id: any, logo: any }, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> } }> };
+
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
 }>;
@@ -8013,6 +8020,74 @@ useSuspenseBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStat
 
 
 useBudgetStatementsAvailableMonthsQuery.fetcher = (variables?: BudgetStatementsAvailableMonthsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables, options);
+
+export const BudgetStatementsDocument = `
+    query BudgetStatements($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    owner {
+      name
+      code
+      id
+      logo
+    }
+    month
+    expenseReport {
+      periodStart
+      periodEnd
+      wallets {
+        name
+        address
+        totals {
+          groupLabel
+          totalActuals
+          totalForecast
+          totalPayments
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useBudgetStatementsQuery = <
+      TData = BudgetStatementsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables],
+    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables];
+
+export const useSuspenseBudgetStatementsQuery = <
+      TData = BudgetStatementsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables];
+
+
+useBudgetStatementsQuery.fetcher = (variables?: BudgetStatementsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables, options);
 
 export const AllNetworksDocument = `
     query AllNetworks($filter: networkFilter) {

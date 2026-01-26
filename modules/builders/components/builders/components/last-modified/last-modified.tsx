@@ -36,7 +36,10 @@ export function LastModified({ lastModified, isMobile, className }: LastModified
       )}
     >
       <span
-        className={cn('text-foreground/30 text-xs/4.5', isMobile && 'text-foreground font-medium')}
+        className={cn(
+          'text-foreground/30 flex items-start text-xs/4.5',
+          isMobile && 'text-foreground font-medium',
+        )}
       >
         {isMobile ? 'Last modified' : formattedDate}
       </span>
