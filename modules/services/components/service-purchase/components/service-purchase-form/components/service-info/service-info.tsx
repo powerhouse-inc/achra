@@ -33,11 +33,7 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
             />
           </div>
           <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
-            <Link
-              href="mailto:powerhousetest@gmail.com?subject=Book%20a%20call&body=I%20would%20like%20to%20book%20a%20call"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
               Book a Call
               <Phone className="size-4" />
             </Link>
