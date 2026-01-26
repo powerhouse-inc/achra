@@ -21,7 +21,7 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
             className={cn(
               'relative size-64 min-w-64 transition-[width,height,border-radius] duration-300 ease-out',
               light &&
-                'border-background size-14 min-w-14 overflow-hidden rounded-full border-2 shadow-sm',
+                'border-background shadow-primary size-14 min-w-14 overflow-hidden rounded-full border-2',
             )}
           >
             <Image
