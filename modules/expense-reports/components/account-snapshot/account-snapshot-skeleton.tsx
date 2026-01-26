@@ -1,11 +1,13 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { ExpenseComparisonSkeleton } from './components/expense-comparison'
+import { FundingOverviewSkeleton } from './components/funding-overview'
+import { ReservesSnapshotSkeleton } from './components/reserves-snapshot'
 
 function AccountSnapshotSkeleton() {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="border-border align-center flex justify-between rounded-xl border p-8">
-        <Skeleton className="h-10 w-full" />
-      </div>
+    <div className="flex flex-col gap-6 md:gap-8">
+      <FundingOverviewSkeleton />
+      <ReservesSnapshotSkeleton />
+      <ExpenseComparisonSkeleton hasOffChainData={false} />
     </div>
   )
 }
