@@ -14,6 +14,7 @@ export type StepValue = (typeof STEPS)[number]['value']
 
 interface ServicePurchaseStepContextValues {
   activeStep: StepValue
+  visitedSteps: StepValue[]
   goToStep: (step: StepValue) => void
   goBack: () => void
   goNext: () => void
@@ -27,9 +28,13 @@ const getStepIndex = (step: StepValue) => STEPS.findIndex((item) => item.value =
 
 export function ServicePurchaseStepProvider({ children }: { children: React.ReactNode }) {
   const [activeStep, setActiveStep] = useState<StepValue>(STEPS[0].value)
+  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => [activeStep])
 
   const goToStep = useCallback((step: StepValue) => {
     setActiveStep(step)
+    setVisitedSteps((previousSteps) =>
+      previousSteps.includes(step) ? previousSteps : [...previousSteps, step],
+    )
   }, [])
 
   const goBack = useCallback(() => {
@@ -55,11 +60,12 @@ export function ServicePurchaseStepProvider({ children }: { children: React.Reac
   const values = useMemo(
     () => ({
       activeStep,
+      visitedSteps,
       goToStep,
       goBack,
       goNext,
     }),
-    [activeStep, goBack, goNext, goToStep],
+    [activeStep, visitedSteps, goBack, goNext, goToStep],
   )
 
   return (

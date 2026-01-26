@@ -1,6 +1,6 @@
 'use client'
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment, startTransition, useActionState, useCallback, useState } from 'react'
+import { Fragment, startTransition, useActionState, useCallback } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
@@ -77,8 +77,7 @@ export default function ServicePurchaseForm() {
       enabledSections: INITIAL_ENABLED_SECTIONS,
     },
   })
-  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
-  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => [activeStep])
+  const { activeStep, visitedSteps, goToStep, goBack } = useServicePurchaseStep()
 
   const { control, setValue } = form
 
@@ -104,15 +103,8 @@ export default function ServicePurchaseForm() {
     [enabledSections, setValue],
   )
 
-  const markStepAsVisited = useCallback((stepValue: StepValue) => {
-    setVisitedSteps((previousSteps) =>
-      previousSteps.includes(stepValue) ? previousSteps : [...previousSteps, stepValue],
-    )
-  }, [])
-
   // Navigation handlers
   const navigateToStep = (stepValue: StepValue) => {
-    markStepAsVisited(stepValue)
     goToStep(stepValue)
   }
 
@@ -192,9 +184,6 @@ export default function ServicePurchaseForm() {
                     <TabsTrigger
                       value={step.value}
                       className="flex h-12 w-fit flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
-                      onClick={() => {
-                        navigateToStep(step.value)
-                      }}
                     >
                       <div
                         className={cn(
