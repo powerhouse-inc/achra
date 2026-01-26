@@ -158,13 +158,32 @@ export default function ServicePurchaseForm() {
             </Button>
           </div>
           <div className={cn('flex flex-col gap-8', activeStep === 'product-info' && 'gap-0')}>
-            <Button
-              variant="secondary"
-              onClick={handleGoBack}
-              className={cn('w-fit', activeStep === 'product-info' && 'hidden')}
-            >
-              Back
-            </Button>
+            <div className="flex">
+              <Button
+                variant="secondary"
+                onClick={handleGoBack}
+                className={cn('w-fit', activeStep === 'product-info' && 'hidden')}
+              >
+                Back
+              </Button>
+
+              <div
+                className={cn(
+                  'flex w-full items-start justify-end',
+                  activeStep !== 'select-services' && 'hidden',
+                )}
+              >
+                <Button
+                  variant="default"
+                  onClick={() => {
+                    navigateToStep('summary')
+                  }}
+                >
+                  Continue
+                </Button>
+              </div>
+            </div>
+
             <ServiceInfo light={activeStep !== 'product-info'} />
           </div>
           <Tabs
@@ -231,12 +250,6 @@ export default function ServicePurchaseForm() {
                     enabledSections={enabledSections}
                     onPlanChange={handlePlanChange}
                     onSectionToggle={handleSectionToggle}
-                    onBack={() => {
-                      navigateToStep('select-operator')
-                    }}
-                    onContinue={() => {
-                      navigateToStep('summary')
-                    }}
                   />
                 )}
                 {step.value === 'summary' && (
