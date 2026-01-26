@@ -1,0 +1,28 @@
+import { parse } from 'date-fns'
+import { cacheLife } from 'next/cache'
+import { useBudgetStatementsAvailableMonthsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+
+/**
+ * Fetches the available months for a given team
+ *
+ * @param teamId - The team ID to get the available months for
+ * @returns An array of dates representing the available months
+ */
+export async function getBudgetStatementsAvailableMonths(teamId: string): Promise<Date[]> {
+  'use cache'
+  cacheLife('minutes')
+
+  const data = await useBudgetStatementsAvailableMonthsQuery.fetcher({
+    filter: {
+      teamId,
+    },
+  })()
+
+  if (data.budgetStatements.length === 0) {
+    return []
+  }
+
+  return data.budgetStatements
+    .map((month) => parse(month.month, 'MMMyyyy', new Date()))
+    .sort((a, b) => a.getTime() - b.getTime())
+}

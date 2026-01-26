@@ -4,7 +4,7 @@ import { BuilderHeaderDescriptionSkeleton } from './builder-profile-header-descr
 
 function BuilderProfileHeaderSkeleton() {
   return (
-    <div className="border-input w-full border-b">
+    <div className="border-input mt-16 w-full border-b">
       <div className="container flex flex-col gap-4 pt-4 pb-2">
         <div className="flex justify-between gap-4">
           <div className="flex gap-4">
