@@ -1,33 +1,33 @@
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
-import { compareDate, compareString } from '../utils'
+import { compareString } from '../utils'
 import type { SortOptionValue } from '../budget-stament-filters/popover-filter-content'
-import type { BudgetStatementExpenseReport } from '../type'
+import type { BudgetStatement } from '../type'
 
 interface BuildersStamentProps {
-  builders: BudgetStatementExpenseReport[]
+  builders: BudgetStatement[]
   sortOption?: SortOptionValue
 }
 
-const SORTERS: Record<
-  SortOptionValue,
-  (a: BudgetStatementExpenseReport, b: BudgetStatementExpenseReport) => number
-> = {
+const SORTERS: Record<SortOptionValue, (a: BudgetStatement, b: BudgetStatement) => number> = {
   reporting_newest: (a, b) => compareString(b.month, a.month),
   reporting_oldest: (a, b) => compareString(a.month, b.month),
-  modified_newest: (a, b) => compareDate(b.lastModified, a.lastModified),
-  modified_oldest: (a, b) => compareDate(a.lastModified, b.lastModified),
+  // TODO: Add lastModified field from API when available
+  modified_newest: (a, b) => compareString(b.month, a.month),
+  modified_oldest: (a, b) => compareString(a.month, b.month),
 }
 
 export function useBudgetStamentData({ builders, sortOption }: Readonly<BuildersStamentProps>) {
   const [selectedStatuses] = useQueryState('status', parseAsArrayOf(parseAsString))
 
   const buildersProcessed = useMemo(() => {
-    let result = builders
+    const result = builders
+    // TODO: Add status filter when status field is available from API
     if (selectedStatuses && selectedStatuses.length > 0) {
-      result = result.filter((builder) => {
-        return selectedStatuses.includes(builder.status ?? '')
-      })
+      // Status filter temporarily disabled until API provides status field
+      // result = result.filter((builder) => {
+      //   return selectedStatuses.includes(builder.status ?? '')
+      // })
     }
 
     if (sortOption && result.length > 0) {

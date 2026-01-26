@@ -3,10 +3,10 @@ import { BudgetStamentTable } from '../budget-stament-table/budget-stament-table
 
 import { useBudgetStamentData } from './useBudgetStamentData'
 import type { SortOptionValue } from '../budget-stament-filters/popover-filter-content'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStatementsItemProps {
-  builders: BudgetStatementExpenseReport[]
+  builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   sortOption?: SortOptionValue
 }

@@ -3,10 +3,10 @@ import { useCallback, useMemo, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { getMetricLabel } from '../utils'
 import type { BudgetStatementsTableColumn } from '../const'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 interface UseBudgetStamentTableProps {
-  builders: BudgetStatementExpenseReport[]
+  builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
 }
 
@@ -52,7 +52,8 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
       {
         header: 'Last Modified',
         accessorKey: 'lastModified',
-        hasSort: true,
+        // Disabled until API provides lastModified field
+        hasSort: false,
         sortReverse: false,
         isNumeric: false,
       },
@@ -100,8 +101,21 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
     [BUDGET_STATEMENTS_TABLE_COLUMNS, headersSort],
   )
 
+  const getNestedValue = (obj: BudgetStatement, path: string): string | number | null => {
+    const keys = path.split('.')
+    let result: unknown = obj
+    for (const key of keys) {
+      if (result === null || result === undefined) return null
+      result = (result as Record<string, unknown>)[key]
+    }
+    if (typeof result === 'string' || typeof result === 'number') {
+      return result
+    }
+    return null
+  }
+
   const sortBuilders = useCallback(
-    (builders: BudgetStatementExpenseReport[]) => {
+    (builders: BudgetStatement[]) => {
       if (sortColumn === -1) return builders
 
       const column = BUDGET_STATEMENTS_TABLE_COLUMNS[sortColumn]
@@ -111,27 +125,9 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
         return builders
       }
 
-      const getSortableValue = (
-        value: BudgetStatementExpenseReport[keyof BudgetStatementExpenseReport],
-      ): string | number => {
-        if (value === null) {
-          return ''
-        }
-        if (typeof value === 'string' || typeof value === 'number') {
-          return value
-        }
-        if (Array.isArray(value)) {
-          return value.length
-        }
-        if (value instanceof Date) {
-          return value.getTime()
-        }
-        return ''
-      }
-
       return [...builders].sort((a, b) => {
-        const aValue = getSortableValue(a[column.accessorKey as keyof BudgetStatementExpenseReport])
-        const bValue = getSortableValue(b[column.accessorKey as keyof BudgetStatementExpenseReport])
+        const aValue = getNestedValue(a, column.accessorKey) ?? ''
+        const bValue = getNestedValue(b, column.accessorKey) ?? ''
 
         if (aValue < bValue) {
           return sortDirection === SortEnum.Asc ? -1 : 1

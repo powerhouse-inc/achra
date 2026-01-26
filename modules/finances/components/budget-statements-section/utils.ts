@@ -1,21 +1,88 @@
+import { DateTime } from 'luxon'
 import { METRIC_OPTIONS } from '../../types'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from './type'
+import type { BudgetStatement, MetricWithoutBudget } from './type'
 
-export const getAmountByMetric = (
-  budgetMetric: MetricWithoutBudget,
-  builder: BudgetStatementExpenseReport,
-) => {
-  switch (budgetMetric) {
-    case METRIC_OPTIONS.Forecast:
-      return builder.forecastExpenses
-    case METRIC_OPTIONS.NetProtocolOutflow:
-      return builder.netProtocolOutflow
-    case METRIC_OPTIONS.NetExpensesOnChain:
-      return builder.paymentsOnChain
-    case METRIC_OPTIONS.Actuals:
-    default:
-      return builder.actualExpenses
+/**
+ * Formats the month from API format "NOV2025" to display format "Nov 2025"
+ * @param month - Month string in format "MMMYYYY" (e.g., "NOV2025")
+ * @returns Formatted month string (e.g., "Nov 2025") or "No date" if invalid
+ */
+export const formatReportingMonth = (month: string | null | undefined): string => {
+  if (!month) return 'No date'
+
+  // API returns format like "NOV2025"
+  const parsed = DateTime.fromFormat(month.toUpperCase(), 'LLLyyyy')
+  if (parsed.isValid) {
+    return parsed.toFormat('LLL yyyy')
   }
+
+  // Fallback: try other formats if the above doesn't work
+  // Try "yyyy-LL-dd" format (old mock format)
+  const parsedDate = DateTime.fromFormat(month, 'yyyy-LL-dd')
+  if (parsedDate.isValid) {
+    return parsedDate.toFormat('LLL yyyy')
+  }
+
+  return month
+}
+
+/**
+ * Extracts numeric value from Amount_Currency object
+ * API returns: { unit: "USDS", value: "206262.8" }
+ */
+const getAmountValue = (amount: unknown): number => {
+  if (amount === null || amount === undefined) return 0
+
+  if (typeof amount === 'number') return amount
+
+  if (typeof amount === 'string') return Number(amount) || 0
+
+  if (typeof amount === 'object' && 'value' in amount) {
+    const value = (amount as { value: string | number }).value
+    return typeof value === 'number' ? value : Number(value) || 0
+  }
+
+  return 0
+}
+
+/**
+ * Maps metric options to the corresponding API field name in totals
+ * TODO: Confirm correct API field mapping for NetExpensesOnChain and NetProtocolOutflow
+ */
+type TotalsFieldKey = 'totalActuals' | 'totalForecast' | 'totalPayments'
+
+const METRIC_TO_FIELD: Record<MetricWithoutBudget, TotalsFieldKey | null> = {
+  [METRIC_OPTIONS.Actuals]: 'totalActuals',
+  [METRIC_OPTIONS.Forecast]: 'totalForecast',
+  // TODO: Confirm correct field for NetExpensesOnChain
+  [METRIC_OPTIONS.NetExpensesOnChain]: null,
+  // TODO: Confirm correct field for NetProtocolOutflow
+  [METRIC_OPTIONS.NetProtocolOutflow]: null,
+}
+
+/**
+ * Calculates the total amount for a specific metric from all wallets in a budget statement
+ * @param metric - The metric to calculate (Actuals, Forecast, NetExpensesOnChain, NetProtocolOutflow)
+ * @param builder - The budget statement containing wallet data
+ * @returns The total sum for the specified metric (returns 0 if field mapping not available)
+ */
+export const getAmountByMetric = (
+  metric: MetricWithoutBudget,
+  builder: BudgetStatement,
+): number => {
+  const fieldKey = METRIC_TO_FIELD[metric]
+
+  if (fieldKey === null) {
+    return 0
+  }
+
+  return builder.expenseReport.wallets.reduce((total, wallet) => {
+    const walletTotal = wallet.totals.reduce((sum, t) => {
+      const fieldValue = t[fieldKey as keyof typeof t]
+      return sum + getAmountValue(fieldValue)
+    }, 0)
+    return total + walletTotal
+  }, 0)
 }
 
 export const getMetricLabel = (selectedMetric: MetricWithoutBudget, isDesktopLg = false) => {

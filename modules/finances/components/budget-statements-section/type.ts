@@ -1,4 +1,4 @@
-import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BudgetStatementsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { METRIC_OPTIONS } from '../../types'
 
 export enum MetricOption {
@@ -16,13 +16,7 @@ export enum SortOptionValue {
   ModifiedOldest = 'modified_oldest',
 }
 
-// TODO :Delete this when Api its ready
-export interface BudgetStatementExpenseReport extends Builder {
-  actualExpenses: number | null
-  forecastExpenses: number | null
-  paymentsOnChain: number | null
-  netProtocolOutflow: number | null
-  month: string
-}
+// Type from the GraphQL API
+export type BudgetStatement = BudgetStatementsQuery['budgetStatements'][number]
 
 export type MetricWithoutBudget = Exclude<METRIC_OPTIONS, METRIC_OPTIONS.Budget>
