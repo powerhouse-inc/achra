@@ -13,10 +13,10 @@ import {
 import { cn } from '@/modules/shared/lib/utils'
 import { useBudgetStamentTable } from '../budget-stament-item/useBudgetStamentTable'
 import { BudgetStamentTableItem } from './budget-stament-table-item'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableProps {
-  builders: BudgetStatementExpenseReport[]
+  builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   className?: string
 }

@@ -1,9 +1,9 @@
 import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementMobileItem } from './budget-statement-mobile-item'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 interface BudgetStatementListMobileProps {
-  builders: BudgetStatementExpenseReport[]
+  builders: BudgetStatement[]
   selectedMetric: MetricWithoutBudget
   className?: string
 }

@@ -1,19 +1,17 @@
 import { ArrowRight } from 'lucide-react'
-import { DateTime } from 'luxon'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
-import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
-import { getAmountByMetric } from '../utils'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import { formatReportingMonth, getAmountByMetric } from '../utils'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableItemProps {
-  builder: BudgetStatementExpenseReport
+  builder: BudgetStatement
   budgetMetric: MetricWithoutBudget
   className?: string
 }
@@ -23,11 +21,9 @@ export function BudgetStamentTableItem({
   budgetMetric,
   className,
 }: Readonly<BudgetStamentTableItemProps>) {
-  const reportMonth = builder.month
-    ? DateTime.fromFormat(builder.month, 'yyyy-LL-dd').toFormat('LLL yyyy')
-    : 'No date'
-
+  const reportMonth = formatReportingMonth(builder.month)
   const amount = useMemo(() => getAmountByMetric(budgetMetric, builder), [budgetMetric, builder])
+  const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
 
   return (
     <TableRow
@@ -38,21 +34,20 @@ export function BudgetStamentTableItem({
     >
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builder.owner.code}`}
           className="flex h-full w-full items-center pl-4 xl:pl-3 2xl:pl-3.5"
         >
           <ContributorProfileInfo
-            name={builder.name}
-            code={builder.code}
+            name={builder.owner.name}
+            code={builder.owner.code}
             isCoreUnit={true}
             icon={true}
-            status={builder.status}
           />
         </Link>
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
           className="flex h-full w-full items-center"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">{reportMonth}</div>
@@ -60,36 +55,40 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-4.5! xl:pl-6!">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
           className="flex h-full w-full items-center justify-start"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">
-            {usLocalizedNumber(amount ?? 0)} USD
+            {usLocalizedNumber(amount)} USD
           </div>
         </Link>
       </TableCell>
       <TableCell className="inline-block h-full w-[14%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
           className="flex h-full w-full items-center justify-start"
         >
-          <BuildersStatusChip status={builder.status} />
+          {/* TODO: Add status chip when API provides status field */}
+          {/* <BuildersStatusChip status={builder.status} /> */}
+          <span className="text-muted-foreground text-sm">-</span>
         </Link>
       </TableCell>
 
       <TableCell className="inline-block h-full w-[19%] p-0! text-right lg:pl-1!">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
           className="flex h-full w-full items-center justify-start"
         >
           <span className="text-foreground text-sm/5.5 font-semibold">
-            <LastModified lastModified={builder.lastModified} />
+            {/* TODO: Add last modified when API provides the field */}
+            <LastModified lastModified={undefined} />
+            {/* <span className="text-muted-foreground">-</span> */}
           </span>
         </Link>
       </TableCell>
       <TableCell className="inline-flex h-full w-[10%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builder.id}`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
           className="group/link flex h-full w-full items-center justify-end pr-4"
         >
           <Button variant="outline" asChild className="pointer-events-none">

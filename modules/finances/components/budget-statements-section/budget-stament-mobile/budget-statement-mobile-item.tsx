@@ -1,8 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import { DateTime } from 'luxon'
 import Link from 'next/link'
-import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
-import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -10,11 +7,11 @@ import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { LabeledValue } from '../labeled-value'
-import { getAmountByMetric, getMetricLabel } from '../utils'
-import type { BudgetStatementExpenseReport, MetricWithoutBudget } from '../type'
+import { formatReportingMonth, getAmountByMetric, getMetricLabel } from '../utils'
+import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStatementMobileItemProps {
-  builder: BudgetStatementExpenseReport
+  builder: BudgetStatement
   selectedMetric: MetricWithoutBudget
   className?: string
 }
@@ -25,15 +22,12 @@ export function BudgetStatementMobileItem({
 
   className,
 }: Readonly<BudgetStatementMobileItemProps>) {
-  const reportMonth = builder.month
-    ? DateTime.fromFormat(builder.month, 'yyyy-LL-dd').toFormat('LLL yyyy')
-    : 'No date'
-
+  const reportMonth = formatReportingMonth(builder.month)
   const amount = getAmountByMetric(selectedMetric, builder)
   const metricLabel = getMetricLabel(selectedMetric)
 
   return (
-    <Link href={`/network/powerhouse/builders/${builder.id}`} key={builder.id}>
+    <Link href={`/network/powerhouse/builders/${builder.owner.id}`} key={builder.id}>
       <Card
         className={cn(
           'bg-background gap:0 flex w-full flex-col rounded-xl p-0 shadow-sm transition-all hover:shadow-sm',
@@ -48,11 +42,10 @@ export function BudgetStatementMobileItem({
             </div>
 
             <ContributorProfileInfo
-              name={builder.name}
-              code={builder.code}
+              name={builder.owner.name}
+              code={builder.owner.code}
               isCoreUnit={true}
               icon={true}
-              status={builder.status}
             />
           </div>
 
@@ -63,12 +56,14 @@ export function BudgetStatementMobileItem({
           />
           <LabeledValue
             label={metricLabel}
-            value={`${usLocalizedNumber(amount ?? 0)} USD`}
+            value={`${usLocalizedNumber(amount)} USD`}
             className="hidden min-w-30 md:flex lg:hidden"
           />
           <div className="hidden flex-col gap-1.5 text-sm md:flex lg:hidden">
             <span className="text-muted-foreground/60 font-medium">Status:</span>
-            <BuildersStatusChip status={builder.status} />
+            {/* TODO: Add status chip when API provides status field */}
+            <span className="text-muted-foreground">-</span>
+            {/* <BuildersStatusChip status={builder.status} /> */}
           </div>
 
           <Button variant="outline" size="icon" aria-label="View builder team details">
@@ -83,12 +78,14 @@ export function BudgetStatementMobileItem({
         <CardContent className="mb-2 flex items-center justify-between px-10 md:hidden">
           <LabeledValue label="Reporting Month" value={reportMonth} />
 
-          <LabeledValue label={metricLabel} value={`${usLocalizedNumber(amount ?? 0)} USD`} />
+          <LabeledValue label={metricLabel} value={`${usLocalizedNumber(amount)} USD`} />
         </CardContent>
 
         <Separator className="-mt-1 md:mt-2" />
         <CardFooter className="bg-background w-full overflow-x-hidden rounded-b-xl px-4 py-1">
-          <LastModified lastModified={builder.lastModified} isMobile />
+          {/* TODO: Add last modified when API provides the field */}
+          <span className="text-muted-foreground text-sm">-</span>
+          {/* <LastModified lastModified={builder.lastModified} isMobile /> */}
         </CardFooter>
       </Card>
     </Link>
