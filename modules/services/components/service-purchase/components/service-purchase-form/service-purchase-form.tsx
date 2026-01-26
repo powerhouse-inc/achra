@@ -1,5 +1,6 @@
 'use client'
-import { startTransition, useActionState, useCallback } from 'react'
+import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
+import { Fragment, startTransition, useActionState, useCallback, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
@@ -11,6 +12,7 @@ import {
 } from '@/modules/services/context/service-purchase-step-context'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
+import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 import SelectServices from '../select-services-purchase/components/select-services/select-services'
@@ -41,6 +43,14 @@ const initialState: ServiceRequestFormState = {
   success: false,
 }
 
+const STEP_ICONS = {
+  'product-info': <InfoIcon className="size-6" />,
+  'select-operator': <FileText className="size-6" />,
+  'select-services': <BookOpenCheck className="size-6" />,
+  summary: <BookOpenText className="size-6" />,
+  confirmation: <CheckCheck className="size-6" />,
+}
+
 export interface ServicePurchaseFormValues {
   operatorId?: string
   name: string
@@ -68,6 +78,7 @@ export default function ServicePurchaseForm() {
     },
   })
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
+  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => [activeStep])
 
   const { control, setValue } = form
 
@@ -93,8 +104,15 @@ export default function ServicePurchaseForm() {
     [enabledSections, setValue],
   )
 
+  const markStepAsVisited = useCallback((stepValue: StepValue) => {
+    setVisitedSteps((previousSteps) =>
+      previousSteps.includes(stepValue) ? previousSteps : [...previousSteps, stepValue],
+    )
+  }, [])
+
   // Navigation handlers
   const navigateToStep = (stepValue: StepValue) => {
+    markStepAsVisited(stepValue)
     goToStep(stepValue)
   }
 
@@ -141,13 +159,8 @@ export default function ServicePurchaseForm() {
           void form.handleSubmit(onSubmit)(event)
         }}
       >
-        <div className="flex flex-col gap-6">
-          <div
-            className={cn(
-              'mb-2 flex w-full justify-end',
-              activeStep !== 'product-info' && 'hidden',
-            )}
-          >
+        <div className="flex flex-col gap-8">
+          <div className={cn('flex w-full justify-end', activeStep !== 'product-info' && 'hidden')}>
             <Button variant="default" onClick={handleSelectAnOperator}>
               Select an operator
             </Button>
@@ -167,21 +180,54 @@ export default function ServicePurchaseForm() {
             onValueChange={(value) => {
               goToStep(value as StepValue)
             }}
-            className="w-full"
+            className="w-full gap-8"
           >
-            <TabsList className="h-fit w-full bg-transparent px-18">
-              {STEPS.map((step) => (
-                <TabsTrigger
-                  key={step.value}
-                  value={step.value}
-                  className="group flex flex-col items-center gap-2 px-6 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
-                >
-                  <div className="group-data-[state=active]:bg-primary border-primary border-width-2 size-6 rounded-full border" />
-                  <span className="text-foreground/50 group-data-[state=active]:text-foreground text-xl/6 font-bold">
-                    {step.label}
-                  </span>
-                </TabsTrigger>
-              ))}
+            <TabsList className="h-fit w-full justify-between bg-transparent p-0">
+              {STEPS.map((step, index) => {
+                const isActive = activeStep === step.value
+                const isVisited = visitedSteps.includes(step.value)
+
+                return (
+                  <Fragment key={step.value}>
+                    <TabsTrigger
+                      value={step.value}
+                      className="flex h-12 w-fit flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                      onClick={() => {
+                        navigateToStep(step.value)
+                      }}
+                    >
+                      <div
+                        className={cn(
+                          'bg-border text-foreground/50 w-fit rounded-l-xl p-3 text-center text-lg/6 font-semibold',
+                          isActive && 'bg-primary text-primary-foreground',
+                          isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
+                        )}
+                      >
+                        {index + 1}
+                      </div>
+                      <div
+                        className={cn(
+                          'text-foreground/50 border-border flex h-full items-center gap-2 rounded-r-xl border px-3',
+                          isActive && 'text-primary border-primary dark:border-primary',
+                          isVisited && !isActive && 'text-primary/70 border-primary/30',
+                        )}
+                      >
+                        {STEP_ICONS[step.value]}
+                        <span className="text-xl/6 font-bold">{step.label}</span>
+                      </div>
+                    </TabsTrigger>
+                    {index < STEPS.length - 1 && (
+                      <Separator
+                        orientation="horizontal"
+                        className={cn(
+                          'bg-border h-0.5! w-8!',
+                          visitedSteps.includes(STEPS[index + 1].value) && 'bg-primary',
+                        )}
+                      />
+                    )}
+                  </Fragment>
+                )
+              })}
             </TabsList>
 
             {STEPS.map((step) => (
