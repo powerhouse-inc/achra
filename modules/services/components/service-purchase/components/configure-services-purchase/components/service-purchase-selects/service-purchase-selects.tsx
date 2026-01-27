@@ -1,7 +1,7 @@
 'use client'
 
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
-import { LabeledSelect } from '@/modules/services/components/service-purchase/components/select-services-purchase/components/labeled-select'
+import { LabeledSelect } from '@/modules/services/components/service-purchase/components/configure-services-purchase/components/labeled-select'
 import { ANONYMITY_LEVEL_OPTIONS, TEAM_STRUCTURE_OPTIONS } from '../types'
 
 const SELECT_FIELDS = [

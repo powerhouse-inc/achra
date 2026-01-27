@@ -1,4 +1,4 @@
-import type { Plan } from '../components/service-purchase/components/select-services-purchase/components/types'
+import type { Plan } from '../components/service-purchase/components/configure-services-purchase/components/types'
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 
 /**

@@ -11,6 +11,7 @@ export interface Service {
   cover: string
   title: string
   description: string[]
+  extendedDescription?: string
   descriptionItems?: string[]
   entities: ServiceEntityEnum[]
   formationAndSetup: string[]

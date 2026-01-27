@@ -2,7 +2,7 @@ import {
   CatalogStatus,
   Plan,
   type PricingData,
-} from '../components/select-services-purchase/components/types'
+} from '../components/configure-services-purchase/components/types'
 
 export const PRICING_DATA: PricingData = {
   tiers: [
