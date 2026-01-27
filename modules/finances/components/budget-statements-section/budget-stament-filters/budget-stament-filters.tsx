@@ -12,19 +12,13 @@ import { MetricItemFilter } from './metric-item-filter'
 import useBudgetStamentFilters from './useBudgetStamentFilters'
 import type { MetricWithoutBudget } from '../type'
 
-interface BudgetStatementFiltersProps {
-  setBudgetMetric: (value: MetricWithoutBudget) => Promise<URLSearchParams>
-}
-
-export default function BudgetStatementFilters({
-  setBudgetMetric,
-}: Readonly<BudgetStatementFiltersProps>) {
+export default function BudgetStatementFilters() {
   const [open, setOpen] = useState(false)
   const { status, setStatus, metricSort, metric, setMetric, onReset, handleOnMetricSelect } =
     useBudgetStamentFilters()
   return (
-    <div className="row flex w-full justify-end gap-4">
-      <div className="hidden w-full items-center justify-end gap-4 md:flex">
+    <div className="row flex gap-4">
+      <div className="hidden items-center gap-4 md:flex">
         <Button
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
           variant="ghost"
@@ -38,7 +32,6 @@ export default function BudgetStatementFilters({
           label="Metric"
           onValueChange={(value) => {
             void setMetric(value as MetricWithoutBudget)
-            void setBudgetMetric(value as MetricWithoutBudget)
           }}
           options={Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget')}
           placeholder="Budget"
@@ -46,7 +39,7 @@ export default function BudgetStatementFilters({
         />
         <StatusSelectBudget status={status} setStatus={setStatus} className="md:w-25.5 lg:w-46" />
       </div>
-      <div className="flex w-full gap-4 lg:hidden">
+      <div className="flex gap-4 lg:hidden">
         <div className="flex items-center gap-4 md:hidden">
           <FilterDrawer onReset={onReset}>
             <StatusSelectDrawer status={status} setStatus={setStatus} />

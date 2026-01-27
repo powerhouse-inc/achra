@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import BudgetEmptyState from './budget-empty-state'
