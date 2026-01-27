@@ -7658,6 +7658,20 @@ export type BuildersListQueryVariables = Exact<{
 
 export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> };
 
+export type BudgetStatementsDetailsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsDetailsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }> } }> };
+
+export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string }> };
+
 export type BudgetStatementsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
 }>;
@@ -7882,6 +7896,130 @@ useSuspenseBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) =
 
 
 useBuildersListQuery.fetcher = (variables?: BuildersListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables, options);
+
+export const BudgetStatementsDetailsDocument = `
+    query BudgetStatementsDetails($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    expenseReport {
+      periodStart
+      periodEnd
+      wallets {
+        name
+        address
+        billingStatementIds
+        totals {
+          group
+          groupLabel
+          totalBudget
+          totalForecast
+          totalActuals
+          totalPayments
+        }
+        lineItems {
+          id
+          label
+          groupId
+          groupLabel
+          actuals
+          budget
+          comments
+          forecast
+          payments
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useBudgetStatementsDetailsQuery = <
+      TData = BudgetStatementsDetailsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsDetailsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsDetailsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables],
+    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables];
+
+export const useSuspenseBudgetStatementsDetailsQuery = <
+      TData = BudgetStatementsDetailsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsDetailsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsDetailsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables];
+
+
+useBudgetStatementsDetailsQuery.fetcher = (variables?: BudgetStatementsDetailsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables, options);
+
+export const BudgetStatementsAvailableMonthsDocument = `
+    query BudgetStatementsAvailableMonths($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+  }
+}
+    `;
+
+export const useBudgetStatementsAvailableMonthsQuery = <
+      TData = BudgetStatementsAvailableMonthsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsAvailableMonthsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables],
+    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables];
+
+export const useSuspenseBudgetStatementsAvailableMonthsQuery = <
+      TData = BudgetStatementsAvailableMonthsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsAvailableMonthsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables];
+
+
+useBudgetStatementsAvailableMonthsQuery.fetcher = (variables?: BudgetStatementsAvailableMonthsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables, options);
 
 export const BudgetStatementsDocument = `
     query BudgetStatements($filter: budgetStatementsFilter) {
