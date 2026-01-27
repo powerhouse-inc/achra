@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 export const STEPS = [
   { value: 'product-info', label: 'Product Info' },
   { value: 'select-operator', label: 'Select Operator' },
-  { value: 'select-services', label: 'Select Services' },
+  { value: 'configure-services', label: 'Configure Services' },
   { value: 'summary', label: 'Summary' },
   { value: 'confirmation', label: 'Confirmation' },
 ] as const

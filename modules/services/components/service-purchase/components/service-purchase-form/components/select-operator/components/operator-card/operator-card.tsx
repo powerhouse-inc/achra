@@ -36,7 +36,7 @@ export default function OperatorCard({ operator, onSelectServices }: OperatorCar
           onSelectServices(operator.id)
         }}
       >
-        Select Services
+        Configure Services
         <ArrowRight className="size-4" />
       </Button>
     </Card>

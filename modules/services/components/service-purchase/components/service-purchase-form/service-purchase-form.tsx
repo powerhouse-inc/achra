@@ -15,8 +15,8 @@ import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
-import SelectServices from '../select-services-purchase/components/select-services/select-services'
-import { Plan } from '../select-services-purchase/components/types'
+import SelectServices from '../configure-services-purchase/components/configure-services/configure-services'
+import { Plan } from '../configure-services-purchase/components/types'
 import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
@@ -46,7 +46,7 @@ const initialState: ServiceRequestFormState = {
 const STEP_ICONS = {
   'product-info': <InfoIcon className="size-6" />,
   'select-operator': <FileText className="size-6" />,
-  'select-services': <BookOpenCheck className="size-6" />,
+  'configure-services': <BookOpenCheck className="size-6" />,
   summary: <BookOpenText className="size-6" />,
   confirmation: <CheckCheck className="size-6" />,
 }
@@ -114,7 +114,7 @@ export default function ServicePurchaseForm() {
 
   const handleSelectServices = (operatorId: string) => {
     setValue('operatorId', operatorId)
-    navigateToStep('select-services')
+    navigateToStep('configure-services')
   }
 
   const handleGoBack = () => {
@@ -170,7 +170,7 @@ export default function ServicePurchaseForm() {
               <div
                 className={cn(
                   'flex w-full items-start justify-end',
-                  activeStep !== 'select-services' && 'hidden',
+                  activeStep !== 'configure-services' && 'hidden',
                 )}
               >
                 <Button
@@ -244,7 +244,7 @@ export default function ServicePurchaseForm() {
                 {step.value === 'select-operator' && (
                   <SelectOperator onSelectServices={handleSelectServices} />
                 )}
-                {step.value === 'select-services' && (
+                {step.value === 'configure-services' && (
                   <SelectServices
                     selectedPlan={selectedPlan}
                     enabledSections={enabledSections}
@@ -257,7 +257,7 @@ export default function ServicePurchaseForm() {
                     selectedPlan={selectedPlan}
                     enabledSections={enabledSections}
                     onBack={() => {
-                      navigateToStep('select-services')
+                      navigateToStep('configure-services')
                     }}
                     actionState={state}
                     isPending={isPending}

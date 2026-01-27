@@ -8,6 +8,8 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     description: [
       'Embryonic legal entity for early-stage networks with coverage of all the major functions.',
     ],
+    extendedDescription:
+      'The Operational Hub is a turnkey Swiss Association structure that gives new projects and teams a legal shield, private operations, and a compliant bridge to the real world, without corporate bloat.',
     descriptionItems: [
       'Contributor Operations',
       'Proof of Work tickets',

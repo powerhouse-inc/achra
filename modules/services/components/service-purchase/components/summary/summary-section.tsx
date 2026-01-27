@@ -3,11 +3,11 @@ import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { PRICING_DATA } from '../../mock/mock-data'
-import { MarketplaceHeader } from '../select-services-purchase/components/marketplace-header'
+import { MarketplaceHeader } from '../configure-services-purchase/components/marketplace-header'
 import { LabeledTextField } from './components/labeled-text-field'
 import { ServiceBreakdownItem } from './components/service-breakdown-item/service-breakdown-item'
 import { Summary } from './components/summary'
-import type { Plan } from '../select-services-purchase/components/types'
+import type { Plan } from '../configure-services-purchase/components/types'
 
 export interface SummaryProps {
   selectedPlan: Plan
