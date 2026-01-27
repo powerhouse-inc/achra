@@ -34,8 +34,16 @@ interface SelectOperatorProps {
 
 export default function SelectOperator({ onSelectServices }: SelectOperatorProps) {
   return (
-    <div className="flex flex-col gap-4">
-      <span className="text-foreground text-lg/5.5 font-bold">Operator</span>
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <span className="text-foreground text-lg/5.5 font-bold">Operator</span>
+        <span className="text-foreground text-base/6">
+          Lorem ipsum dolor sit amet consectetur. Massa id vitae turpis viverra tortor. Posuere non
+          tempor volutpat purus arcu pulvinar viverra. Sed praesent in leo in. Mattis adipiscing
+          proin lobortis facilisi etiam tellus. Pharetra scelerisque ornare lacus dolor consectetur.
+          Quis pulvinar nam massa tristique tortor dui vitae lectus.
+        </span>
+      </div>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
         {OPERATORS_MOCK.map((operator) => (
           <OperatorCard
