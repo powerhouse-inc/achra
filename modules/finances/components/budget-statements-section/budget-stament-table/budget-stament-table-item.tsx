@@ -22,6 +22,7 @@ export function BudgetStamentTableItem({
   className,
 }: Readonly<BudgetStamentTableItemProps>) {
   const reportMonth = formatReportingMonth(builder.month)
+  const reportMonthTrimmed = reportMonth.replaceAll(/\s+/g, '')
   const amount = useMemo(() => getAmountByMetric(budgetMetric, builder), [budgetMetric, builder])
   const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
 
@@ -47,7 +48,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">{reportMonth}</div>
@@ -55,7 +56,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-4.5! xl:pl-6!">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">
@@ -65,7 +66,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[14%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
           {/* TODO: Add status chip when API provides status field */}
@@ -76,7 +77,7 @@ export function BudgetStamentTableItem({
 
       <TableCell className="inline-block h-full w-[19%] p-0! text-right lg:pl-1!">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
           <span className="text-foreground text-sm/5.5 font-semibold">
@@ -88,7 +89,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-flex h-full w-[10%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements`}
+          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="group/link flex h-full w-full items-center justify-end pr-4"
         >
           <Button variant="outline" asChild className="pointer-events-none">

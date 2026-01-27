@@ -25,9 +25,13 @@ export function BudgetStatementMobileItem({
   const reportMonth = formatReportingMonth(builder.month)
   const amount = getAmountByMetric(selectedMetric, builder)
   const metricLabel = getMetricLabel(selectedMetric)
-
+  const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
+  const reportMonthTrimmed = reportMonth.replaceAll(/\s+/g, '')
   return (
-    <Link href={`/network/powerhouse/builders/${builder.owner.id}`} key={builder.id}>
+    <Link
+      href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+      key={builder.id}
+    >
       <Card
         className={cn(
           'bg-background gap:0 flex w-full flex-col rounded-xl p-0 shadow-sm transition-all hover:shadow-sm',

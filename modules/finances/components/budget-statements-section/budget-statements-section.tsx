@@ -22,7 +22,7 @@ export default function BudgetStatementsSection({
 
   const RANGE = `Jan - Dec ${year}`
   const [budgetMetric, setBudgetMetric] = useQueryState(
-    'budgetMetric',
+    'metricbs',
     parseAsStringEnum(
       Object.values(METRIC_OPTIONS).filter((m) => m !== METRIC_OPTIONS.Budget),
     ).withDefault(METRIC_OPTIONS.Actuals),
