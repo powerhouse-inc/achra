@@ -62,6 +62,15 @@ export const Default: Story = {
   render: (args) => <ControlledSearchInput {...args} />,
 }
 
+export const Loading: Story = {
+  args: {
+    value: '',
+    placeholder: 'Search placeholder...',
+    isLoading: true,
+  },
+  render: (args) => <ControlledSearchInput {...args} />,
+}
+
 export const PrefilledQuery: Story = {
   args: {
     value: 'Powerhouse',
