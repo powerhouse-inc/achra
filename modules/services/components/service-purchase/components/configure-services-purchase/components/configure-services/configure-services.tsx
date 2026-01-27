@@ -6,19 +6,19 @@ import { PricingDetailCard } from '../summary/pricing-detail-card'
 import { Plan } from '../types'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
-export interface SelectServicesProps {
+export interface ConfigureServicesProps {
   selectedPlan?: Plan
   enabledSections?: Record<SectionId, boolean>
   onPlanChange?: (plan: Plan) => void
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
 }
 
-export default function SelectServices({
+export default function ConfigureServices({
   selectedPlan,
   enabledSections,
   onPlanChange,
   onSectionToggle,
-}: Readonly<SelectServicesProps>) {
+}: Readonly<ConfigureServicesProps>) {
   return (
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader />
