@@ -1,6 +1,4 @@
-import { Suspense } from 'react'
 import { Builders } from '@/modules/builders/components/builders/builders'
-import { BuildersSkeleton } from '@/modules/builders/components/builders/builders-skeleton'
 import BuilderFilters from '@/modules/builders/components/builders-filters'
 import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
@@ -18,8 +16,6 @@ interface BuildersPageProps {
 }
 
 export default async function BuildersPage({ params, searchParams }: BuildersPageProps) {
-  const searchParamsString = JSON.stringify(await searchParams)
-
   const { slug } = await params
 
   const networkData = await getNetworkBySlug(slug)
@@ -40,9 +36,7 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
         <BuildersHeader />
         <BuilderFilters />
         <ErrorBoundaryWithPresets>
-          <Suspense fallback={<BuildersSkeleton />} key={searchParamsString}>
-            <Builders networkSlug={slug} searchParams={searchParams} />
-          </Suspense>
+          <Builders networkSlug={slug} searchParams={searchParams} />
         </ErrorBoundaryWithPresets>
       </PageContent>
     </PageBackground>

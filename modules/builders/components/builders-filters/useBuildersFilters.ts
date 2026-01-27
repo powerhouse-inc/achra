@@ -1,5 +1,5 @@
 import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryStates } from 'nuqs'
-import { useCallback } from 'react'
+import { useCallback, useMemo, useTransition } from 'react'
 import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 
 const filtersConfig = {
@@ -27,6 +27,9 @@ export default function useBuildersFilters() {
   // Keep all filter params in a single query-state object so resetting or updating one key
   // happens in a single URL mutation, eliminating the flicker we saw with multiple setters.
   const [filters, setFilters] = useQueryStates(filtersConfig)
+  const [isSearchPending, startSearchTransition] = useTransition()
+  const [isSkillsPending, startSkillsTransition] = useTransition()
+  const [isResetPending, startResetTransition] = useTransition()
 
   type FiltersState = typeof filters
   type FilterKey = keyof FiltersState
@@ -49,25 +52,46 @@ export default function useBuildersFilters() {
     [setFilters],
   )
   const setSearch = useCallback(
-    async (value: StateUpdater<FiltersState['search']>, options?: FilterOptions) =>
-      setFilterValue('search', value, options),
-    [setFilterValue],
+    (value: StateUpdater<FiltersState['search']>, options?: FilterOptions) => {
+      startSearchTransition(async () => {
+        await setFilterValue('search', value, options)
+      })
+    },
+    [setFilterValue, startSearchTransition],
   )
   const setSkills = useCallback(
-    async (value: StateUpdater<FiltersState['skills']>, options?: FilterOptions) =>
-      setFilterValue('skills', value, options),
-    [setFilterValue],
+    (value: StateUpdater<FiltersState['skills']>, options?: FilterOptions) => {
+      startSkillsTransition(async () => {
+        await setFilterValue('skills', value, options)
+      })
+    },
+    [setFilterValue, startSkillsTransition],
   )
   const onReset = useCallback(() => {
-    void setFilters({
-      search: '',
-      skills: [],
+    startResetTransition(async () => {
+      await setFilters({
+        search: '',
+        skills: [],
+      })
     })
-  }, [setFilters])
+  }, [setFilters, startResetTransition])
+
+  const isResetDisabled = useMemo(
+    () =>
+      isSearchPending ||
+      isSkillsPending ||
+      isResetPending ||
+      (filters.search === '' && filters.skills.length === 0),
+    [isSearchPending, isSkillsPending, isResetPending, filters.search, filters.skills],
+  )
 
   return {
     search: filters.search,
     skills: filters.skills,
+    isSearchPending,
+    isSkillsPending,
+    isResetPending,
+    isResetDisabled,
     setSearch,
     setSkills,
     onReset,

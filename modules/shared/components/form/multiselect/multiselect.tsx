@@ -1,7 +1,7 @@
 'use client'
 
 import { Command as CommandPrimitive } from 'cmdk'
-import { Check, ChevronDown, XIcon } from 'lucide-react'
+import { Check, ChevronDown, Loader2, XIcon } from 'lucide-react'
 import * as React from 'react'
 import { useEffect } from 'react'
 import { OverflowList } from '@/shared/components/overflow-list'
@@ -70,6 +70,7 @@ function renderOverflow(
 }
 
 interface MultipleSelectorProps {
+  isLoading?: boolean
   value?: Option[]
   defaultOptions?: Option[]
   /** manually controlled options */
@@ -148,6 +149,7 @@ function MultipleSelector({
   commandProps,
   inputProps,
   hideClearAllButton = false,
+  isLoading = false,
 }: MultipleSelectorProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
@@ -378,12 +380,22 @@ function MultipleSelector({
             'text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute end-6 top-0 z-10 flex size-9 items-center justify-center rounded-md border border-transparent transition-[color,box-shadow] outline-none focus-visible:ring-[3px]',
             (hideClearAllButton ||
               disabled ||
+              isLoading ||
               selected.filter((s) => s.fixed).length === selected.length) &&
               'hidden',
           )}
           aria-label="Clear all"
         >
           <XIcon size={16} aria-hidden="true" />
+        </div>
+        <div
+          className={cn(
+            'text-muted-foreground/80 absolute end-6 top-0 z-10 flex size-9 items-center justify-center',
+            !isLoading && 'hidden',
+          )}
+          aria-label="Loading"
+        >
+          <Loader2 size={16} aria-hidden="true" className="animate-spin" />
         </div>
         <div className="text-muted-foreground/80 pointer-events-none absolute end-0 top-0 flex size-9 items-center justify-center">
           <ChevronDown size={16} aria-hidden="true" />
