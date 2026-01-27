@@ -284,6 +284,33 @@ export const Disabled: Story = {
 }
 
 /**
+ * MultipleSelector in loading state.
+ * Shows the loading indicator while options are being fetched.
+ */
+export const Loading: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Option[]>([])
+
+    return (
+      <div className="w-80">
+        <MultipleSelector
+          value={selected}
+          onChange={setSelected}
+          options={basicOptions}
+          isLoading
+          placeholder="Loading technologies..."
+          emptyIndicator={
+            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+              No results found.
+            </p>
+          }
+        />
+      </div>
+    )
+  },
+}
+
+/**
  * MultipleSelector with many selections.
  * Demonstrates overflow handling when many options are selected.
  */
