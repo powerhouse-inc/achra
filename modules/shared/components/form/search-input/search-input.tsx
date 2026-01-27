@@ -28,7 +28,7 @@ interface SearchInputProps extends Omit<React.ComponentProps<typeof Input>, 'val
 
 export default function SearchInput({
   value,
-  isLoading = true,
+  isLoading = false,
   onChange,
   placeholder = 'Search...',
   showKeyboardShortcut = true,
