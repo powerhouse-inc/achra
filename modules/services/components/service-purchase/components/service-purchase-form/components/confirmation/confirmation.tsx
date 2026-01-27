@@ -1,7 +1,9 @@
 import { CheckIcon } from 'lucide-react'
 import Link from 'next/link'
+import AchraLarge from '@/modules/shared/components/svgs/achra-large.svg'
 import AchraRounded from '@/modules/shared/components/svgs/achra-rounded.svg'
 import BookCall from '@/modules/shared/components/svgs/book-call.svg'
+import PhoneLarge from '@/modules/shared/components/svgs/phone-large.svg'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import ActionCard from './components/action-card/action-card'
@@ -36,6 +38,7 @@ export default function Confirmation({ name, email }: ConfirmationProps) {
               icon={<BookCall className="size-6 min-w-6 rounded-md" />}
               title="Book a Call"
               description="Schedule a call to get started"
+              bgImage={<PhoneLarge className="absolute top-0 right-0 h-full" />}
             />
           </Link>
           <Link href="/services">
@@ -43,6 +46,7 @@ export default function Confirmation({ name, email }: ConfirmationProps) {
               icon={<AchraRounded className="size-6 min-w-6 rounded-md" />}
               title="Explore ACHRA"
               description="Learn more about the ecosystem and other available"
+              bgImage={<AchraLarge className="absolute top-0 right-0 h-full" />}
             />
           </Link>
         </div>
