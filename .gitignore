@@ -56,3 +56,7 @@ chromatic-diagnostics.json
 .agent/
 !.agent/rules/
 !.agent/workflows/
+
+# Serena
+.serena
+CLAUDE.md
