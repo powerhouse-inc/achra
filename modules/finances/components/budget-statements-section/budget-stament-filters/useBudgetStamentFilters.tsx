@@ -15,9 +15,7 @@ const filtersConfig = {
         timeMs: 100,
       },
     }),
-  budgetMetric: parseAsStringEnum(
-    Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget'),
-  )
+  metricbs: parseAsStringEnum(Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget'))
     .withDefault(METRIC_OPTIONS.Actuals)
     .withOptions({
       shallow: false,
@@ -82,15 +80,15 @@ export default function useBudgetStamentFilters() {
   )
 
   const setMetric = useCallback(
-    async (value: StateUpdater<FiltersState['budgetMetric']>, options?: FilterOptions) =>
-      setFilterValue('budgetMetric', value, options),
+    async (value: StateUpdater<FiltersState['metricbs']>, options?: FilterOptions) =>
+      setFilterValue('metricbs', value, options),
     [setFilterValue],
   )
 
   const onReset = useCallback(() => {
     void setFilters({
       status: [],
-      budgetMetric: METRIC_OPTIONS.Actuals,
+      metricbs: METRIC_OPTIONS.Actuals,
     })
     void setStatus(null)
     void setMetricSort('modified_newest')
@@ -98,7 +96,7 @@ export default function useBudgetStamentFilters() {
 
   return {
     status: filters.status,
-    metric: filters.budgetMetric,
+    metric: filters.metricbs,
     setStatus,
     onReset,
     metricSort,
