@@ -12,6 +12,7 @@ interface LabeledSelectProps {
   className?: string
   selectClassName?: string
   'aria-label'?: string
+  matchTriggerWidth?: boolean
 }
 
 export function LabeledSelect({
@@ -22,6 +23,7 @@ export function LabeledSelect({
   placeholder,
   className,
   'aria-label': ariaLabel,
+  matchTriggerWidth,
 }: Readonly<LabeledSelectProps>) {
   return (
     <div className={cn('flex w-full flex-col gap-3', className)}>
@@ -33,6 +35,7 @@ export function LabeledSelect({
         placeholder={placeholder}
         className={className}
         aria-label={ariaLabel ?? label}
+        matchTriggerWidth={matchTriggerWidth}
       />
     </div>
   )

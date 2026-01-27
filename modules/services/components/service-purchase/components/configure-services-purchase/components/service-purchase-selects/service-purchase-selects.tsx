@@ -66,6 +66,7 @@ function ServicePurchaseSelects() {
             options={field.options as unknown as string[]}
             placeholder={field.defaultValue}
             className="w-full"
+            matchTriggerWidth={true}
           />
         )
       })}

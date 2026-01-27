@@ -18,6 +18,12 @@ interface BasicSelectProps {
   placeholder?: string
   className?: string
   'aria-label'?: string
+  /**
+   * When true, dropdown width matches trigger exactly.
+   * When false, dropdown can grow to fit content.
+   * @default false
+   */
+  matchTriggerWidth?: boolean
 }
 
 export function BasicSelect({
@@ -28,6 +34,7 @@ export function BasicSelect({
   placeholder,
   className,
   'aria-label': ariaLabel,
+  matchTriggerWidth = false,
 }: BasicSelectProps) {
   // Only use value if it's in the options list, otherwise show placeholder
   const validValue = value && options.includes(value) ? value : undefined
@@ -49,7 +56,12 @@ export function BasicSelect({
         side="bottom"
         align="end"
         data-slot="single-select-content"
-        className="rounded-xl p-2"
+        className={cn(
+          'rounded-xl p-2',
+          matchTriggerWidth
+            ? 'w-[var(--radix-select-trigger-width)]'
+            : 'min-w-[var(--radix-select-trigger-width)]',
+        )}
       >
         <SelectGroup>
           {label && (
