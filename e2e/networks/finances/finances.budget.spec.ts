@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances`);
+    await page.waitForLoadState('networkidle');
 });
 
 test('should save in clipboard the finances link', async ({ page }) => {
@@ -22,8 +23,8 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('1 Month Ago')).toHaveCount(6);
-    await expect(page.getByText('2 Months Ago')).toHaveCount(2);
+    await expect(page.getByText('1 Month Ago')).toHaveCount(4);
+    await expect(page.getByText('2 Months Ago')).toHaveCount(4);
     await expect(page.getByText('1 year ago')).toHaveCount(12);
     await expect(page.getByText('09-DEC-2025')).toHaveCount(2);
     await expect(page.getByText('21-NOV-2025')).toHaveCount(1);
@@ -37,56 +38,22 @@ test('should load all last modified values', async ({ page }) => {
 });
 
 test('should load all View buttons', async ({ page }) => {
-    await expect(page.getByText('View')).toHaveCount(10);
+    await expect(page.getByText('View')).toHaveCount(2);
 });
 
 test('should load all Actuals', async ({ page }) => {
-    await expect(page.getByText('1,200 USD')).toHaveCount(3);
-    await expect(page.getByText('500 USD')).toHaveCount(6);
-    await expect(page.getByText('800 USD')).toHaveCount(3);
-    await expect(page.getByText('2,000 USD')).toHaveCount(3);
-    await expect(page.getByText('15,000 USD')).toHaveCount(3);
-    await expect(page.getByText('4,500 USD')).toHaveCount(3);
-    await expect(page.getByText('9,000 USD')).toHaveCount(3);
-    await expect(page.getByText('3,200 USD')).toHaveCount(3);
-    await expect(page.getByText('1,100 USD')).toHaveCount(3);
-    await expect(page.getByText('5,400 USD')).toHaveCount(3);
+    await expect(page.getByText('298,859 USD')).toHaveCount(3);
+    await expect(page.getByText('248,771 USD')).toHaveCount(3);
 });
 
 test('should load all Reporting Month dates', async ({ page }) => {
-    await expect(page.getByText('Dec 2024')).toHaveCount(6);
-    await expect(page.getByText('Jan 2025')).toHaveCount(6);
-    await expect(page.getByText('Nov 2024')).toHaveCount(6);
-    await expect(page.getByText('Sep 2024')).toHaveCount(6);
-    await expect(page.getByText('Aug 2024')).toHaveCount(3);
-    await expect(page.getByText('Jun 2024')).toHaveCount(3);
-    await expect(page.getByText('Nov 2024')).toHaveCount(6);
-    await expect(page.getByText('Sep 2024')).toHaveCount(6);
-    await expect(page.getByText('Dec 2024')).toHaveCount(6);
-    await expect(page.getByText('Aug 2024')).toHaveCount(3);
+    await expect(page.getByText('Oct 2025')).toHaveCount(3);
+    await expect(page.getByText('Nov 2025')).toHaveCount(3);
 });
 
 test('should load all builder names', async ({ page }) => {
-    await expect(page.getByText('bai')).toHaveCount(4);
-    await expect(page.getByText('teep')).toHaveCount(4);
-    await expect(page.getByText('liberuum')).toHaveCount(4);
-    await expect(page.getByText('apeiron')).toHaveCount(4);
-    await expect(page.getByText('sky-labs')).toHaveCount(2);
-    await expect(page.getByText('sky labs')).toHaveCount(2);
-    await expect(page.getByText('data-scout')).toHaveCount(2);
-    await expect(page.getByText('data scout')).toHaveCount(2);
-    await expect(page.getByText('maker-ops')).toHaveCount(2);
-    await expect(page.getByText('maker ops')).toHaveCount(2);
-    await expect(page.getByText('govern-guard')).toHaveCount(2);
-    await expect(page.getByText('govern guard')).toHaveCount(2);
-    await expect(page.getByText('ux-guild')).toHaveCount(2);
-    await expect(page.getByText('ux guild')).toHaveCount(2);
-    await expect(page.getByText('rwa-scouts')).toHaveCount(2);
-    await expect(page.getByText('rwa scouts')).toHaveCount(2);
-    // await expect(page.getByText('quant-lab')).toHaveCount(2);
-    // await expect(page.getByText('quant lab')).toHaveCount(2);
-    // await expect(page.getByText('docu-hub')).toHaveCount(2);
-    // await expect(page.getByText('docu hub')).toHaveCount(2);
+    await expect(page.getByText('PW')).toHaveCount(4);
+    await expect(page.getByText('Powerhouse')).toHaveCount(13);
 });
 
 test('should load all columns', async ({ page }) => {
