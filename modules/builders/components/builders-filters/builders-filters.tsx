@@ -8,21 +8,45 @@ import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills
 import useBuildersFilters from './useBuildersFilters'
 
 export default function BuilderFilters() {
-  const { search, skills, setSearch, setSkills, onReset } = useBuildersFilters()
+  const {
+    search,
+    skills,
+    isSearchPending,
+    isSkillsPending,
+    isResetPending,
+    isResetDisabled,
+    setSearch,
+    setSkills,
+    onReset,
+  } = useBuildersFilters()
 
   return (
-    <div className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_400px] lg:gap-6">
+    <div
+      className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_400px] lg:gap-6"
+      aria-busy={isResetPending || isSearchPending || isSkillsPending}
+    >
       <SearchInput
         value={search}
-        onChange={(value) => void setSearch(value)}
+        onChange={(value) => {
+          setSearch(value)
+        }}
         placeholder="Search..."
+        isLoading={isSearchPending}
+        disabled={isResetPending}
       />
       <div className="hidden items-center gap-2 md:flex lg:gap-4">
-        <BuilderSkillsSelect skills={skills} setSkills={setSkills} className="w-69" />
+        <BuilderSkillsSelect
+          skills={skills}
+          setSkills={setSkills}
+          className="w-69"
+          isLoading={isSkillsPending}
+          disabled={isResetPending}
+        />
         <Button
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
           variant="ghost"
           onClick={onReset}
+          disabled={isResetDisabled}
         >
           Reset Filter
         </Button>

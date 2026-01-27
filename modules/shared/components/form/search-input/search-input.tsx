@@ -1,6 +1,6 @@
 'use client'
 
-import { Search } from 'lucide-react'
+import { Loader2, Search } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import { Input } from '@/shared/components/ui/input'
@@ -21,12 +21,14 @@ const OsCommandKeyboardShortcut = dynamic(
 
 interface SearchInputProps extends Omit<React.ComponentProps<typeof Input>, 'value' | 'onChange'> {
   value: string
+  isLoading?: boolean
   showKeyboardShortcut?: boolean
   onChange: (value: string) => void
 }
 
 export default function SearchInput({
   value,
+  isLoading = true,
   onChange,
   placeholder = 'Search...',
   showKeyboardShortcut = true,
@@ -58,7 +60,11 @@ export default function SearchInput({
     >
       <div className="flex h-full flex-1 items-center gap-3">
         <div className="h-4 w-4 shrink-0">
-          <Search className="text-accent-foreground/30 h-4 w-4" />
+          {isLoading ? (
+            <Loader2 className="text-accent-foreground/30 h-4 w-4 animate-spin" />
+          ) : (
+            <Search className="text-accent-foreground/30 h-4 w-4" />
+          )}
         </div>
         <Input
           ref={inputRef}

@@ -7,8 +7,10 @@ import { cn } from '@/modules/shared/lib/utils'
 
 interface BuilderSkillsSelectProps {
   skills: BuilderSkill[]
-  setSkills: (skills: BuilderSkill[]) => Promise<URLSearchParams>
+  setSkills: (skills: BuilderSkill[]) => void
   className?: string
+  isLoading?: boolean
+  disabled?: boolean
 }
 
 const skillsOptions: Option[] = [
@@ -64,7 +66,13 @@ const skillsOptions: Option[] = [
   },
 ]
 
-function BuilderSkillsSelect({ skills, setSkills, className }: BuilderSkillsSelectProps) {
+function BuilderSkillsSelect({
+  skills,
+  isLoading = false,
+  setSkills,
+  className,
+  disabled = false,
+}: BuilderSkillsSelectProps) {
   const selectedOptions = useMemo(
     () => skillsOptions.filter((option) => skills.includes(option.value as BuilderSkill)),
     [skills],
@@ -72,7 +80,7 @@ function BuilderSkillsSelect({ skills, setSkills, className }: BuilderSkillsSele
 
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value as BuilderSkill)
-    void setSkills(values)
+    setSkills(values)
   }
 
   return (
@@ -90,13 +98,15 @@ function BuilderSkillsSelect({ skills, setSkills, className }: BuilderSkillsSele
         className,
       }}
       customItemRenderer={(option): React.ReactNode => option.label}
+      isLoading={isLoading}
+      disabled={disabled}
     />
   )
 }
 
 function BuilderSkillsSelectDrawer({ skills, setSkills }: BuilderSkillsSelectProps) {
   const handleChange = (values: string[]) => {
-    void setSkills(values as BuilderSkill[])
+    setSkills(values as BuilderSkill[])
   }
 
   return (
