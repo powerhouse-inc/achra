@@ -50,11 +50,13 @@ export default function RootLayout({
 }>) {
   return (
     <html className="scroll-smooth" lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} ${openSansCondensed.variable} antialiased`}>
+      <body
+        className={`${inter.className} ${openSansCondensed.variable} flex min-h-screen flex-col antialiased`}
+      >
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
             <NuqsAdapter>
-              {children}
+              <main className="flex-1">{children}</main>
 
               {ff.WHITELIST_OVERLAY_ENABLED && (
                 <Suspense>
