@@ -67,7 +67,7 @@ export function PricingDetailCard({
 
   return (
     <Card className={cn('w-full gap-3! border-none py-0! shadow-lg', className)}>
-      <CardHeader className="bg-accent! flex flex-row items-center justify-between px-3 py-2">
+      <CardHeader className="bg-accent! flex flex-row items-center justify-between px-3">
         <h3 className="text-base/6 font-bold tracking-tight">Tier</h3>
         <span className="text-primary text-base/6 font-bold capitalize">{summary.tier_name}</span>
       </CardHeader>
