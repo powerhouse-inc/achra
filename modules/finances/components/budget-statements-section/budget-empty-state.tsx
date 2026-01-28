@@ -17,7 +17,7 @@ export default function BudgetEmptyState() {
           </EmptyMedia>
           <EmptyTitle>No budget statements found</EmptyTitle>
           <EmptyDescription>
-            No Results Found There are no contributors available with this combination of filters
+            There are no contributors available with this combination of filters
           </EmptyDescription>
         </EmptyHeader>
       </Empty>
