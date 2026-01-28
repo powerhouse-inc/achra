@@ -32,6 +32,7 @@ export default function ExpandableSection({ title, description }: ExpandableSect
         </Button>
       </div>
       <motion.div
+        className="overflow-hidden"
         initial={{
           opacity: 0,
           height: 0,
