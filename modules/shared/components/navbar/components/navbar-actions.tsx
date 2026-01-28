@@ -1,3 +1,4 @@
+import ff from '@/modules/shared/lib/feature-flags'
 import * as NavbarPrimitives from '../primitives'
 import { ThemeToggle, ThemeToggleOption } from './theme-toggle'
 import { UserButton, UserOption } from './user-button'
@@ -9,15 +10,23 @@ function NavbarActions() {
   return (
     <NavbarPrimitives.ActionsArea>
       <NavbarPrimitives.ActionWithOptions className="flex md:hidden">
-        <UserOption />
-        <NavbarPrimitives.ActionOptionSeparator />
+        {ff.NAV_BAR_LOGIN_BUTTON_ENABLED && (
+          <>
+            <UserOption />
+            <NavbarPrimitives.ActionOptionSeparator />
+          </>
+        )}
         <ThemeToggleOption />
       </NavbarPrimitives.ActionWithOptions>
 
       <NavbarPrimitives.ActionsGroup className="hidden md:flex">
         <ThemeToggle />
-        <NavbarPrimitives.ActionSeparator />
-        <UserButton />
+        {ff.NAV_BAR_LOGIN_BUTTON_ENABLED && (
+          <>
+            <NavbarPrimitives.ActionSeparator />
+            <UserButton />
+          </>
+        )}
       </NavbarPrimitives.ActionsGroup>
     </NavbarPrimitives.ActionsArea>
   )
