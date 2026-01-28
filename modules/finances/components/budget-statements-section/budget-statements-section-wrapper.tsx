@@ -6,6 +6,7 @@ import { BudgetStatementsSectionSkeleton } from '@/modules/finances/components/b
 import BudgetStatementsTitle from '@/modules/finances/components/budget-statements-section/budget-statements-title'
 import { BudgetStatementsTitleSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-title-skeleton'
 import { FinancesSections } from '@/modules/finances/components/config/const'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
@@ -37,9 +38,11 @@ export function BudgetStatementsSectionWrapper({
           <BudgetStatementFilters />
         </Suspense>
       </div>
-      <Suspense fallback={<BudgetStatementsSectionSkeleton />}>
-        <BudgetStatementsContentWrapper params={params} searchParams={searchParams} />
-      </Suspense>
+      <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the budget statements. Please try again later.">
+        <Suspense fallback={<BudgetStatementsSectionSkeleton />}>
+          <BudgetStatementsContentWrapper params={params} searchParams={searchParams} />
+        </Suspense>
+      </ErrorBoundaryWithPresets>
     </section>
   )
 }
