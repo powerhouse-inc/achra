@@ -12,22 +12,19 @@ interface BuildersStamentProps {
 const SORTERS: Record<SortOptionValue, (a: BudgetStatement, b: BudgetStatement) => number> = {
   reporting_newest: (a, b) => compareString(b.month, a.month),
   reporting_oldest: (a, b) => compareString(a.month, b.month),
-  // TODO: Add lastModified field from API when available
-  modified_newest: (a, b) => compareString(b.month, a.month),
-  modified_oldest: (a, b) => compareString(a.month, b.month),
+  modified_newest: (a, b) => compareString(b.lastModifiedAtUtcIso, a.lastModifiedAtUtcIso),
+  modified_oldest: (a, b) => compareString(a.lastModifiedAtUtcIso, b.lastModifiedAtUtcIso),
 }
 
 export function useBudgetStamentData({ builders, sortOption }: Readonly<BuildersStamentProps>) {
   const [selectedStatuses] = useQueryState('status', parseAsArrayOf(parseAsString))
 
   const buildersProcessed = useMemo(() => {
-    const result = builders
-    // TODO: Add status filter when status field is available from API
+    let result = builders
     if (selectedStatuses && selectedStatuses.length > 0) {
-      // Status filter temporarily disabled until API provides status field
-      // result = result.filter((builder) => {
-      //   return selectedStatuses.includes(builder.status ?? '')
-      // })
+      result = result.filter((builder) => {
+        return selectedStatuses.includes(builder.status)
+      })
     }
 
     if (sortOption && result.length > 0) {
