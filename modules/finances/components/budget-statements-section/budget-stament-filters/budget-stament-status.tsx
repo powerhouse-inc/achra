@@ -5,7 +5,7 @@ import { MultipleSelector, type Option } from '@/modules/shared/components/form/
 import { cn } from '@/modules/shared/lib/utils'
 import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 
-interface BuilderStatusProps {
+interface BudgetStatusBudgetProps {
   status: ExpenseReport_ExpenseReportStatus[]
   setStatus: (scopes: ExpenseReport_ExpenseReportStatus[]) => Promise<URLSearchParams>
   className?: string
@@ -29,7 +29,7 @@ const statusOptions: Option[] = [
   },
 ]
 
-function StatusSelectBudget({ status, setStatus, className }: Readonly<BuilderStatusProps>) {
+function StatusSelectBudget({ status, setStatus, className }: Readonly<BudgetStatusBudgetProps>) {
   const selectedOptions = useMemo(
     () =>
       statusOptions.filter((option) =>
@@ -62,7 +62,7 @@ function StatusSelectBudget({ status, setStatus, className }: Readonly<BuilderSt
   )
 }
 
-function StatusSelectDrawer({ status, setStatus }: Readonly<BuilderStatusProps>) {
+function StatusSelectDrawer({ status, setStatus }: Readonly<BudgetStatusBudgetProps>) {
   const handleChange = (values: string[]) => {
     void setStatus(values as ExpenseReport_ExpenseReportStatus[])
   }
