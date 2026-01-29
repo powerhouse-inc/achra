@@ -79,4 +79,8 @@ export interface FeatureFlags {
      */
     BREAKDOWN_CHART_SECTION_ENABLED: boolean
   }
+  /**
+   * Whether to enable the login button in the nav bar
+   */
+  NAV_BAR_LOGIN_BUTTON_ENABLED: boolean
 }
