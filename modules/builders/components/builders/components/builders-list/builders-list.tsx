@@ -23,16 +23,16 @@ export interface BuildersListProps {
 }
 
 export function BuildersList({ builders, networkSlug, className }: BuildersListProps) {
-  const { isResetPending } = useBuildersFiltersContext()
+  const { isResetPending, isSkillsPending } = useBuildersFiltersContext()
 
   return (
     <div className={cn('w-full', className)}>
-      {isResetPending ? (
+      {isResetPending || isSkillsPending ? (
         <BuildersSkeleton />
       ) : builders.length === 0 ? (
         <NoBuildersFound />
       ) : (
-        <div className={cn('flex w-full flex-col gap-2', className)}>
+        <div className="flex w-full flex-col gap-2">
           {builders.map((builder) => (
             <Link
               href={`/network/${networkSlug}/builders/${builder.slug}` as Route}

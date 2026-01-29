@@ -54,7 +54,11 @@ export default function BuilderFilters() {
 
       <div className="flex items-center gap-4 md:hidden">
         <Separator orientation="vertical" className="h-7!" />
-        <FilterDrawer onReset={onReset}>
+        <FilterDrawer
+          onReset={onReset}
+          isResetDisabled={isResetDisabled}
+          isResetPending={isResetPending}
+        >
           <BuilderSkillsSelectDrawer skills={skills} setSkills={setSkills} />
         </FilterDrawer>
       </div>
