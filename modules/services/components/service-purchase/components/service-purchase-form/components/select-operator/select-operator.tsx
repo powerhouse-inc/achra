@@ -34,10 +34,12 @@ interface SelectOperatorProps {
 
 export default function SelectOperator({ onSelectServices }: SelectOperatorProps) {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-2">
-        <span className="text-foreground text-lg/5.5 font-bold">Operator</span>
-        <span className="text-foreground text-base/6">
+        <span className="text-foreground text-base/6 font-semibold lg:text-lg/5.5 lg:font-bold">
+          Operator
+        </span>
+        <span className="text-foreground text-xs/4.5 lg:text-base/6">
           Lorem ipsum dolor sit amet consectetur. Massa id vitae turpis viverra tortor. Posuere non
           tempor volutpat purus arcu pulvinar viverra. Sed praesent in leo in. Mattis adipiscing
           proin lobortis facilisi etiam tellus. Pharetra scelerisque ornare lacus dolor consectetur.

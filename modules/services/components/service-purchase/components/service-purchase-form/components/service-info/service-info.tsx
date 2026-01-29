@@ -50,7 +50,7 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
           <span
             className={cn(
               'text-foreground hidden text-xl/6 font-bold sm:block',
-              light && 'block text-2xl/7',
+              light && 'block text-base/5 lg:text-2xl/7',
             )}
           >
             {service.title}
