@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { useBuildersFiltersContext } from '../../../builders-filters/builders-filters-context'
 import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
 
 interface UseBuildersTableProps {
@@ -22,6 +23,7 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
   const isDesktop = useMediaQuery({ from: 'lg' })
+  const { isResetPending } = useBuildersFiltersContext()
 
   const proccesedBuildersTableColumns: Array<Omit<BuildersTableColumn, 'shortHeader'>> =
     useMemo(() => {
@@ -117,6 +119,7 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
     proccesedBuildersTableColumns,
     headersSort,
     sortedBuilders,
+    isResetPending,
     handleSortClick,
   }
 }

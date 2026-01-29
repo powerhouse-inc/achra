@@ -5,7 +5,7 @@ import SearchInput from '@/modules/shared/components/form/search-input'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills-select'
-import useBuildersFilters from './useBuildersFilters'
+import { useBuildersFiltersContext } from './builders-filters-context'
 
 export default function BuilderFilters() {
   const {
@@ -18,7 +18,7 @@ export default function BuilderFilters() {
     setSearch,
     setSkills,
     onReset,
-  } = useBuildersFilters()
+  } = useBuildersFiltersContext()
 
   return (
     <div
@@ -54,7 +54,11 @@ export default function BuilderFilters() {
 
       <div className="flex items-center gap-4 md:hidden">
         <Separator orientation="vertical" className="h-7!" />
-        <FilterDrawer onReset={onReset}>
+        <FilterDrawer
+          onReset={onReset}
+          isResetDisabled={isResetDisabled}
+          isResetPending={isResetPending}
+        >
           <BuilderSkillsSelectDrawer skills={skills} setSkills={setSkills} />
         </FilterDrawer>
       </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-import { BrushCleaning, CheckIcon, FilterIcon } from 'lucide-react'
+import { BrushCleaning, CheckIcon, FilterIcon, Loader2 } from 'lucide-react'
 import {
   Drawer,
   DrawerContent,
@@ -16,9 +16,18 @@ interface FilterDrawerProps extends React.PropsWithChildren {
   filterTrigger?: React.ReactNode
   onReset?: () => void
   className?: string
+  isResetDisabled?: boolean
+  isResetPending?: boolean
 }
 
-function FilterDrawer({ children, onReset, filterTrigger, className }: FilterDrawerProps) {
+function FilterDrawer({
+  children,
+  onReset,
+  filterTrigger,
+  className,
+  isResetDisabled,
+  isResetPending,
+}: FilterDrawerProps) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -42,8 +51,13 @@ function FilterDrawer({ children, onReset, filterTrigger, className }: FilterDra
         {typeof onReset === 'function' && (
           <DrawerFooter className="pt-4 pb-8">
             <div className="mx-auto w-full max-w-150">
-              <Button variant="secondary" onClick={onReset} className="w-full">
-                <BrushCleaning /> Reset
+              <Button
+                variant="secondary"
+                onClick={onReset}
+                className="w-full"
+                disabled={isResetDisabled ?? isResetPending}
+              >
+                {isResetPending ? <Loader2 className="animate-spin" /> : <BrushCleaning />} Reset
               </Button>
             </div>
           </DrawerFooter>
