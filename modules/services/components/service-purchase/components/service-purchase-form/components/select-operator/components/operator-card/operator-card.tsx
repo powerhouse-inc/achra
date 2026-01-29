@@ -40,7 +40,6 @@ export default function OperatorCard({
       </CardContent>
       <Button
         // TODO: temporary variant based on operator id
-        // variant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
         variant={configureVariant}
         className="w-full"
         onClick={() => {
