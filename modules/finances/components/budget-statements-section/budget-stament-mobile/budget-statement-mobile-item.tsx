@@ -1,10 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import type { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
+import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { LabeledValue } from '../labeled-value'
 import { formatReportingMonth, getAmountByMetric, getMetricLabel } from '../utils'
@@ -50,6 +53,7 @@ export function BudgetStatementMobileItem({
               code={builder.owner.code}
               isCoreUnit={true}
               icon={true}
+              status={builder.status as ExpenseReport_ExpenseReportStatus}
             />
           </div>
 
@@ -65,9 +69,7 @@ export function BudgetStatementMobileItem({
           />
           <div className="hidden flex-col gap-1.5 text-sm md:flex lg:hidden">
             <span className="text-muted-foreground/60 font-medium">Status:</span>
-            {/* TODO: Add status chip when API provides status field */}
-            <span className="text-muted-foreground">-</span>
-            {/* <BuildersStatusChip status={builder.status} /> */}
+            <BudgetStatementsStatus status={builder.status as ExpenseReport_ExpenseReportStatus} />
           </div>
 
           <Button variant="outline" size="icon" aria-label="View builder team details">
@@ -87,9 +89,7 @@ export function BudgetStatementMobileItem({
 
         <Separator className="-mt-1 md:mt-2" />
         <CardFooter className="bg-background w-full overflow-x-hidden rounded-b-xl px-4 py-1">
-          {/* TODO: Add last modified when API provides the field */}
-          <span className="text-muted-foreground text-sm">-</span>
-          {/* <LastModified lastModified={builder.lastModified} isMobile /> */}
+          <LastModified lastModified={builder.lastModifiedAtUtcIso} isMobile />
         </CardFooter>
       </Card>
     </Link>

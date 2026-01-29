@@ -1,3 +1,4 @@
+import BudgetEmptyState from '../budget-empty-state'
 import { BudgetStatementListMobile } from '../budget-stament-mobile/budget-statement-list-mobile'
 import { BudgetStamentTable } from '../budget-stament-table/budget-stament-table'
 
@@ -17,6 +18,10 @@ export function BudgetStatementsItem({
   sortOption,
 }: Readonly<BudgetStatementsItemProps>) {
   const { buildersProcessed } = useBudgetStamentData({ builders, sortOption })
+
+  if (buildersProcessed.length === 0) {
+    return <BudgetEmptyState />
+  }
 
   return (
     <>

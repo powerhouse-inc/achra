@@ -5,6 +5,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
     __typename: 'BudgetStatement',
     id: 'e4934aab-197c-4db4-8c2f-9aacfb28a0ee',
     month: 'DEC2024',
+    lastModifiedAtUtcIso: '2024-12-05T14:30:00.000Z',
+    status: 'FINAL',
     owner: {
       __typename: 'BudgetStatementOwner',
       name: 'BAI',
@@ -38,6 +40,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
     __typename: 'BudgetStatement',
     id: '79d54930-e6dd-4cd5-adf7-17a42fc774eb',
     month: 'JAN2025',
+    lastModifiedAtUtcIso: '2025-01-10T12:00:00.000Z',
+    status: 'DRAFT',
     owner: {
       __typename: 'BudgetStatementOwner',
       name: 'Teep',
@@ -71,6 +75,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
     __typename: 'BudgetStatement',
     id: '112c80c9-ccfe-4902-bbd6-a991c83d6119',
     month: 'NOV2024',
+    status: 'FINAL',
+    lastModifiedAtUtcIso: '2024-11-15T10:30:00.000Z',
     owner: {
       __typename: 'BudgetStatementOwner',
       name: 'Liberuum',
@@ -102,6 +108,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
   },
   {
     __typename: 'BudgetStatement',
+    lastModifiedAtUtcIso: '2024-09-20T09:15:00.000Z',
+    status: 'FINAL',
     id: '4a7596a6-9ff1-4ffb-b205-6a8be375fd99',
     month: 'SEP2024',
     owner: {
@@ -136,6 +144,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
   {
     __typename: 'BudgetStatement',
     id: '0c12e19a-bd55-41fc-890a-3ae0e935ac45',
+    lastModifiedAtUtcIso: '2024-08-15T11:45:00.000Z',
+    status: 'DRAFT',
     month: 'AUG2024',
     owner: {
       __typename: 'BudgetStatementOwner',
@@ -170,6 +180,8 @@ export const mockBudgetStatements: BudgetStatement[] = [
     __typename: 'BudgetStatement',
     id: 'fb3ab2c7-48aa-4acb-a5c1-2b847ef98aaf',
     month: 'JUN2024',
+    status: 'DRAFT',
+    lastModifiedAtUtcIso: '2024-06-25T16:20:00.000Z',
     owner: {
       __typename: 'BudgetStatementOwner',
       name: 'Data Scout',

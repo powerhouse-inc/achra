@@ -38,7 +38,7 @@ export const BUDGET_STATEMENTS_TABLE_COLUMNS: BudgetStatementsTableColumn[] = [
   },
   {
     header: 'Last Modified',
-    accessorKey: 'lastModified',
+    accessorKey: 'lastModifiedAtUtcIso',
     hasSort: true,
     sortReverse: false,
     isNumeric: false,

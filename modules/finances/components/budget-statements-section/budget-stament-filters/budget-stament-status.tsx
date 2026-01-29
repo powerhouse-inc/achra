@@ -1,52 +1,45 @@
 import { useMemo } from 'react'
-import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
+import { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
+import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 
-interface BuilderStatusProps {
-  status: BuilderStatus[]
-  setStatus: (scopes: BuilderStatus[]) => Promise<URLSearchParams>
+interface BudgetStatusBudgetProps {
+  status: ExpenseReport_ExpenseReportStatus[]
+  setStatus: (scopes: ExpenseReport_ExpenseReportStatus[]) => Promise<URLSearchParams>
   className?: string
 }
 
 const statusOptions: Option[] = [
   {
-    value: BuilderStatus.Active,
-    label: <BuildersStatusChip status={BuilderStatus.Active} />,
+    value: ExpenseReport_ExpenseReportStatus.Draft,
+    label: <BudgetStatementsStatus status={ExpenseReport_ExpenseReportStatus.Draft} />,
     group: 'Status',
   },
   {
-    value: BuilderStatus.Archived,
-    label: <BuildersStatusChip status={BuilderStatus.Archived} />,
+    value: ExpenseReport_ExpenseReportStatus.Final,
+    label: <BudgetStatementsStatus status={ExpenseReport_ExpenseReportStatus.Final} />,
     group: 'Status',
   },
   {
-    value: BuilderStatus.Completed,
-    label: <BuildersStatusChip status={BuilderStatus.Completed} />,
-    group: 'Status',
-  },
-  {
-    value: BuilderStatus.Inactive,
-    label: <BuildersStatusChip status={BuilderStatus.Inactive} />,
-    group: 'Status',
-  },
-  {
-    value: BuilderStatus.OnHold,
-    label: <BuildersStatusChip status={BuilderStatus.OnHold} />,
+    value: ExpenseReport_ExpenseReportStatus.Review,
+    label: <BudgetStatementsStatus status={ExpenseReport_ExpenseReportStatus.Review} />,
     group: 'Status',
   },
 ]
 
-function StatusSelectBudget({ status, setStatus, className }: Readonly<BuilderStatusProps>) {
+function StatusSelectBudget({ status, setStatus, className }: Readonly<BudgetStatusBudgetProps>) {
   const selectedOptions = useMemo(
-    () => statusOptions.filter((option) => status.includes(option.value as BuilderStatus)),
+    () =>
+      statusOptions.filter((option) =>
+        status.includes(option.value as ExpenseReport_ExpenseReportStatus),
+      ),
     [status],
   )
 
   const handleChange = (options: Option[]) => {
-    const values = options.map((option) => option.value as BuilderStatus)
+    const values = options.map((option) => option.value as ExpenseReport_ExpenseReportStatus)
     void setStatus(values)
   }
 
@@ -69,16 +62,16 @@ function StatusSelectBudget({ status, setStatus, className }: Readonly<BuilderSt
   )
 }
 
-function StatusSelectDrawer({ status, setStatus }: Readonly<BuilderStatusProps>) {
+function StatusSelectDrawer({ status, setStatus }: Readonly<BudgetStatusBudgetProps>) {
   const handleChange = (values: string[]) => {
-    void setStatus(values as BuilderStatus[])
+    void setStatus(values as ExpenseReport_ExpenseReportStatus[])
   }
 
   return (
     <DrawerSelect
       value={status}
       onChange={handleChange}
-      label="Scopes"
+      label="Status"
       options={statusOptions}
       multiselect={true}
       enableSelectAll={true}

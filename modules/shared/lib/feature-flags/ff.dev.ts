@@ -26,6 +26,7 @@ const ffDev: FeatureFlags = {
     NAVIGATION_SECTION_ENABLED: true,
     BREAKDOWN_CHART_SECTION_ENABLED: true,
   },
+  NAV_BAR_LOGIN_BUTTON_ENABLED: true,
 }
 
 export { ffDev }

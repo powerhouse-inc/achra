@@ -6,7 +6,6 @@ const ffStaging: FeatureFlags = {
   GOVERNANCE_LINK_ENABLED: false,
   ROADMAPS_ENABLED: false,
   USE_BUILDERS_AS_NETWORK_HOMEPAGE: true,
-
   builders: {
     FINANCES_LINK_ENABLED: false,
     CONNECT_LINK_ENABLED: false,
@@ -26,6 +25,7 @@ const ffStaging: FeatureFlags = {
     NAVIGATION_SECTION_ENABLED: false,
     BREAKDOWN_CHART_SECTION_ENABLED: false,
   },
+  NAV_BAR_LOGIN_BUTTON_ENABLED: false,
 }
 
 export { ffStaging }

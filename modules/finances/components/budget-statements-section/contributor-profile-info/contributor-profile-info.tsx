@@ -1,14 +1,17 @@
-import type { BuilderStatus, Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
+import type {
+  ExpenseReport_ExpenseReportStatus,
+  Maybe,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { AvatarWithIcon } from '../avatar-icon'
+import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 
 interface ContributorProfileInfoProps {
   name: string
   code?: Maybe<string>
   isCoreUnit: boolean
   icon: boolean
-  status?: Maybe<BuilderStatus>
+  status?: Maybe<ExpenseReport_ExpenseReportStatus>
   className?: string
 }
 
@@ -35,7 +38,7 @@ export function ContributorProfileInfo({
           <div className="truncate text-sm/5.5 font-semibold">{name}</div>
         </div>
         <div className="flex md:hidden">
-          <BuildersStatusChip status={status} />
+          <BudgetStatementsStatus status={status as ExpenseReport_ExpenseReportStatus} />
         </div>
       </div>
     </div>

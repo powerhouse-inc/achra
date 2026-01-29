@@ -1,6 +1,6 @@
 'use client'
 
-import { Link, SendHorizontal } from 'lucide-react'
+import { Link, Send } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
@@ -44,9 +44,9 @@ export function Summary({
 
   return (
     <Card className="mx-auto w-full max-w-218.5 py-0!">
-      <CardContent className="p-6">
+      <CardContent className="p-3 lg:p-6">
         <div className={cn('flex flex-col gap-6', className)}>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             {/* Success Message */}
             {actionState.success && actionState.message && (
               <div className="border-status-success/20 bg-status-success/10 rounded-lg border p-4">
@@ -59,8 +59,8 @@ export function Summary({
                 <p className="text-destructive text-sm font-medium">{actionState.error}</p>
               </div>
             )}
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="summary-name">
+            <div className="flex flex-col gap-2.5">
+              <Label htmlFor="summary-name" className="text-sm/3.5 font-medium">
                 Name <span>*</span>
               </Label>
               <Input
@@ -84,8 +84,8 @@ export function Summary({
               )}
             </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="summary-email">
+            <div className="flex flex-col gap-2.5">
+              <Label htmlFor="summary-email" className="text-sm/3.5 font-medium">
                 Email <span>*</span>
               </Label>
               <Input
@@ -106,7 +106,10 @@ export function Summary({
                   errors.email || actionState.fieldErrors?.email ? 'border-destructive' : ''
                 }
               />
-              <p id="summary-email-description" className="text-muted-foreground text-sm">
+              <p
+                id="summary-email-description"
+                className="text-foreground/50 text-sm/5 font-normal"
+              >
                 We&apos;ll send a PDF summary and next steps to this address.
               </p>
               {errors.email && (
@@ -120,29 +123,30 @@ export function Summary({
                 </p>
               )}
             </div>
-
+          </div>
+          <div className="flex flex-col gap-4">
             <Button type="submit" disabled={isPending} className="w-full">
               {isPending ? (
                 'Submitting...'
               ) : (
                 <>
                   Submit Request
-                  <SendHorizontal className="ml-2 h-4 w-4" aria-hidden="true" />
+                  <Send className="h-4 w-4" aria-hidden="true" />
                 </>
               )}
             </Button>
-          </div>
 
-          <Button
-            type="button"
-            variant="outline"
-            onClick={onShareConfiguration}
-            disabled={isPending}
-            className="w-full"
-          >
-            Share Configuration
-            <Link className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onShareConfiguration}
+              disabled={isPending}
+              className="w-full"
+            >
+              Share Configuration
+              <Link className="h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

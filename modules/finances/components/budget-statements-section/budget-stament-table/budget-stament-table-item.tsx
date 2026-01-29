@@ -1,11 +1,13 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import type { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
+import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { formatReportingMonth, getAmountByMetric } from '../utils'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
@@ -69,9 +71,7 @@ export function BudgetStamentTableItem({
           href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
-          {/* TODO: Add status chip when API provides status field */}
-          {/* <BuildersStatusChip status={builder.status} /> */}
-          <span className="text-muted-foreground text-sm">-</span>
+          <BudgetStatementsStatus status={builder.status as ExpenseReport_ExpenseReportStatus} />
         </Link>
       </TableCell>
 
@@ -81,9 +81,7 @@ export function BudgetStamentTableItem({
           className="flex h-full w-full items-center justify-start"
         >
           <span className="text-foreground text-sm/5.5 font-semibold">
-            {/* TODO: Add last modified when API provides the field */}
-            <LastModified lastModified={undefined} />
-            {/* <span className="text-muted-foreground">-</span> */}
+            <LastModified lastModified={builder.lastModifiedAtUtcIso} />
           </span>
         </Link>
       </TableCell>

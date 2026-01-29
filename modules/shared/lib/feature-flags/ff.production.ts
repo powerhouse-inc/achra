@@ -26,6 +26,7 @@ const ffProduction: FeatureFlags = {
     NAVIGATION_SECTION_ENABLED: false,
     BREAKDOWN_CHART_SECTION_ENABLED: false,
   },
+  NAV_BAR_LOGIN_BUTTON_ENABLED: false,
 }
 
 export { ffProduction }

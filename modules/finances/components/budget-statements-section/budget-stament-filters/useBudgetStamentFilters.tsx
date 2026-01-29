@@ -1,11 +1,12 @@
 import { parseAsArrayOf, parseAsStringEnum, parseAsStringLiteral, useQueryStates } from 'nuqs'
 import { useCallback } from 'react'
-import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+
+import { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { METRIC_OPTIONS } from '@/modules/finances/types'
 import type { SortOptionValue } from './popover-filter-content'
 
 const filtersConfig = {
-  status: parseAsArrayOf(parseAsStringEnum(Object.values(BuilderStatus)))
+  status: parseAsArrayOf(parseAsStringEnum(Object.values(ExpenseReport_ExpenseReportStatus)))
     .withDefault([])
     .withOptions({
       shallow: false,
