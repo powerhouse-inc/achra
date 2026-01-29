@@ -44,11 +44,11 @@ const initialState: ServiceRequestFormState = {
 }
 
 const STEP_ICONS = {
-  'product-info': <InfoIcon className="size-6" />,
-  'select-operator': <FileText className="size-6" />,
-  'configure-services': <BookOpenCheck className="size-6" />,
-  summary: <BookOpenText className="size-6" />,
-  confirmation: <CheckCheck className="size-6" />,
+  'product-info': <InfoIcon className="size-4 lg:size-6" />,
+  'select-operator': <FileText className="size-4 lg:size-6" />,
+  'configure-services': <BookOpenCheck className="size-4 lg:size-6" />,
+  summary: <BookOpenText className="size-4 lg:size-6" />,
+  confirmation: <CheckCheck className="size-4 lg:size-6" />,
 }
 
 export interface ServicePurchaseFormValues {
@@ -151,7 +151,7 @@ export default function ServicePurchaseForm() {
           void form.handleSubmit(onSubmit)(event)
         }}
       >
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6 lg:gap-8">
           <div className={cn('flex w-full justify-end', activeStep !== 'product-info' && 'hidden')}>
             <Button variant="default" onClick={handleSelectAnOperator}>
               Select an operator
@@ -193,7 +193,7 @@ export default function ServicePurchaseForm() {
             }}
             className="w-full gap-8"
           >
-            <TabsList className="h-fit w-full justify-between bg-transparent p-0">
+            <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">
               {STEPS.map((step, index) => {
                 const isActive = activeStep === step.value
                 const isVisited = visitedSteps.includes(step.value)
@@ -202,11 +202,11 @@ export default function ServicePurchaseForm() {
                   <Fragment key={step.value}>
                     <TabsTrigger
                       value={step.value}
-                      className="flex h-12 w-fit flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                      className="flex h-8 w-8 flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit lg:h-12 dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
                     >
                       <div
                         className={cn(
-                          'bg-border text-foreground/50 w-fit rounded-l-xl p-3 text-center text-lg/6 font-semibold',
+                          'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold md:w-fit md:rounded-l-lg md:rounded-r-none lg:rounded-l-xl lg:p-3 lg:text-lg/6',
                           isActive && 'bg-primary text-primary-foreground',
                           isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
                         )}
@@ -215,20 +215,22 @@ export default function ServicePurchaseForm() {
                       </div>
                       <div
                         className={cn(
-                          'text-foreground/50 border-border flex h-full items-center gap-2 rounded-r-xl border px-3',
+                          'text-foreground/50 border-border hidden h-full items-center gap-1 rounded-r-lg border px-1 md:flex lg:gap-2 lg:rounded-r-xl lg:px-3',
                           isActive && 'text-primary border-primary dark:border-primary',
                           isVisited && !isActive && 'text-primary/70 border-primary/30',
                         )}
                       >
                         {STEP_ICONS[step.value]}
-                        <span className="text-xl/6 font-bold">{step.label}</span>
+                        <span className="text-xs/4.5 font-medium lg:text-xl/6 lg:font-bold">
+                          {step.label}
+                        </span>
                       </div>
                     </TabsTrigger>
                     {index < STEPS.length - 1 && (
                       <Separator
                         orientation="horizontal"
                         className={cn(
-                          'bg-border h-0.5! w-8!',
+                          'bg-border mx-1 h-0.5! max-w-8! flex-1',
                           visitedSteps.includes(STEPS[index + 1].value) && 'bg-primary',
                         )}
                       />
