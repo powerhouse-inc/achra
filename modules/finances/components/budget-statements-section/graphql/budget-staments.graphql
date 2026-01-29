@@ -1,13 +1,15 @@
 query BudgetStatements($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
     id
+    month
+    lastModifiedAtUtcIso
+    status
     owner {
       name
       code
       id
       logo
     }
-    month
     expenseReport {
       periodStart
       periodEnd

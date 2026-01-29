@@ -51,9 +51,8 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
       },
       {
         header: 'Last Modified',
-        accessorKey: 'lastModified',
-        // Disabled until API provides lastModified field
-        hasSort: false,
+        accessorKey: 'lastModifiedAtUtcIso',
+        hasSort: true,
         sortReverse: false,
         isNumeric: false,
       },
