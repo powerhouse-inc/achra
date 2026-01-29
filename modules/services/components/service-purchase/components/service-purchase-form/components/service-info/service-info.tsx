@@ -39,7 +39,7 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
             </Link>
           </Button>
         </div>
-        <div className={cn('flex flex-col gap-6', light && 'gap-0')}>
+        <div className={cn('flex flex-col gap-4 lg:gap-6', light && 'gap-0')}>
           <div className={cn('flex flex-col gap-2', light && 'gap-0')}>
             <span className={cn('text-foreground text-xl/6 font-bold', light && 'text-2xl/7')}>
               {service.title}
@@ -50,12 +50,17 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
               ))}
             </div>
           </div>
-          <div className={cn('text-foreground text-xl/6 font-bold', light && 'hidden')}>
+          <div
+            className={cn(
+              'text-foreground text-base/6 font-semibold lg:text-xl/6 lg:font-bold',
+              light && 'hidden',
+            )}
+          >
             {service.description.map((description) => (
               <p key={description}>{description}</p>
             ))}
           </div>
-          <div className={cn('text-foreground text-base/6', light && 'hidden')}>
+          <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
             {service.extendedDescription}
           </div>
         </div>

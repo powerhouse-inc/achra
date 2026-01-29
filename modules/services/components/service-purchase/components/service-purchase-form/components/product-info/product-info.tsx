@@ -5,7 +5,7 @@ import ExpandableSection from '@/modules/services/components/service-purchase/co
 export default function ProductInfo() {
   return (
     <div className="flex flex-col gap-6">
-      <span className="text-foreground text-base/6">
+      <span className="text-foreground text-sm/5.5 lg:text-base/6">
         Lorem ipsum dolor sit amet consectetur. At risus ipsum tincidunt proin feugiat elit amet.
         Iaculis adipiscing semper sit ac gravida odio. Turpis faucibus magna eu vel velit. Eleifend
         rhoncus amet urna in nascetur tellus est tellus proin. Ultrices habitasse viverra turpis

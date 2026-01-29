@@ -3,6 +3,7 @@
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
+import { Markdown } from '@/modules/shared/components/markdown/markdown'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -19,9 +20,11 @@ export default function ExpandableSection({ title, description }: ExpandableSect
   }
 
   return (
-    <div className="bg-popover flex flex-col rounded-lg px-3 py-2 shadow-lg">
-      <div className="flex items-center justify-between">
-        <span className="text-ring text-base/6 font-semibold">{title}</span>
+    <div className="flex flex-col gap-2">
+      <div className="bg-popover flex items-center justify-between rounded-lg px-3 py-2 shadow-lg">
+        <span className="text-ring text-sm/5.5 font-medium lg:text-base/6 lg:font-semibold">
+          {title}
+        </span>
         <Button variant="icon" size="iconXsm" onClick={toggleSection}>
           <ChevronDown
             className={cn('text-foreground size-4 transition-transform duration-300 ease-out', {
@@ -41,17 +44,17 @@ export default function ExpandableSection({ title, description }: ExpandableSect
         animate={{
           opacity: isOpen ? 1 : 0,
           height: isOpen ? 'auto' : 0,
-          margin: isOpen ? 'calc(var(--spacing) * 2)' : 0,
+          marginTop: isOpen ? 'calc(var(--spacing) * 2)' : 0,
         }}
         transition={{
           duration: 0.3,
           ease: 'easeInOut',
           height: { duration: 0.3, ease: 'easeInOut' },
-          marginBottom: { duration: 0.3, ease: 'easeInOut' },
+          marginTop: { duration: 0.3, ease: 'easeInOut' },
           opacity: { duration: isOpen ? 0.5 : 0.1, ease: 'easeInOut' },
         }}
       >
-        <span className="text-foreground text-base/6">{description}</span>
+        <Markdown className="text-foreground">{description}</Markdown>
       </motion.div>
     </div>
   )

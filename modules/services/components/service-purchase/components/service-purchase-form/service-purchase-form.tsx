@@ -44,11 +44,11 @@ const initialState: ServiceRequestFormState = {
 }
 
 const STEP_ICONS = {
-  'product-info': <InfoIcon className="size-6" />,
-  'select-operator': <FileText className="size-6" />,
-  'configure-services': <BookOpenCheck className="size-6" />,
-  summary: <BookOpenText className="size-6" />,
-  confirmation: <CheckCheck className="size-6" />,
+  'product-info': <InfoIcon className="size-4 lg:size-6" />,
+  'select-operator': <FileText className="size-4 lg:size-6" />,
+  'configure-services': <BookOpenCheck className="size-4 lg:size-6" />,
+  summary: <BookOpenText className="size-4 lg:size-6" />,
+  confirmation: <CheckCheck className="size-4 lg:size-6" />,
 }
 
 export interface ServicePurchaseFormValues {
@@ -202,11 +202,11 @@ export default function ServicePurchaseForm() {
                   <Fragment key={step.value}>
                     <TabsTrigger
                       value={step.value}
-                      className="flex h-12 w-fit flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                      className="flex h-6.5 w-fit flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none lg:h-12 dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
                     >
                       <div
                         className={cn(
-                          'bg-border text-foreground/50 w-fit rounded-l-xl p-3 text-center text-lg/6 font-semibold',
+                          'bg-border text-foreground/50 w-fit rounded-l-lg p-1 text-center text-xs/5.5 font-semibold lg:rounded-l-xl lg:p-3 lg:text-lg/6',
                           isActive && 'bg-primary text-primary-foreground',
                           isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
                         )}
@@ -215,20 +215,22 @@ export default function ServicePurchaseForm() {
                       </div>
                       <div
                         className={cn(
-                          'text-foreground/50 border-border flex h-full items-center gap-2 rounded-r-xl border px-3',
+                          'text-foreground/50 border-border flex h-full items-center gap-1 rounded-r-lg border px-1 lg:gap-2 lg:rounded-r-xl lg:px-3',
                           isActive && 'text-primary border-primary dark:border-primary',
                           isVisited && !isActive && 'text-primary/70 border-primary/30',
                         )}
                       >
                         {STEP_ICONS[step.value]}
-                        <span className="text-xl/6 font-bold">{step.label}</span>
+                        <span className="text-xs/4.5 font-medium lg:text-xl/6 lg:font-bold">
+                          {step.label}
+                        </span>
                       </div>
                     </TabsTrigger>
                     {index < STEPS.length - 1 && (
                       <Separator
                         orientation="horizontal"
                         className={cn(
-                          'bg-border h-0.5! w-8!',
+                          'bg-border mx-1 h-0.5! flex-1',
                           visitedSteps.includes(STEPS[index + 1].value) && 'bg-primary',
                         )}
                       />
