@@ -1,5 +1,5 @@
 import { FileText } from 'lucide-react'
-import { InternalLink } from '@/modules/shared/components/internal-link/internal-link'
+import { ArrowButton } from '@/modules/shared/components/arrow-button/arrow-button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
 import type { Operator } from '../../select-operator'
@@ -28,7 +28,7 @@ export default function OperatorCard({ operator, onSelectServices }: OperatorCar
           <OperatorKeyPoint label="Recurring Cost" value={operator.recurringCost} />
         </div>
       </CardContent>
-      <InternalLink
+      <ArrowButton
         // TODO: temporary variant based on operator id
         variant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
         className="w-full"
@@ -37,7 +37,7 @@ export default function OperatorCard({ operator, onSelectServices }: OperatorCar
         }}
       >
         Configure Services
-      </InternalLink>
+      </ArrowButton>
     </Card>
   )
 }
