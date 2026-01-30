@@ -1,6 +1,6 @@
-'use client'
-import { ArrowRight, FileText, Info } from 'lucide-react'
+import { FileText, Info } from 'lucide-react'
 import Link from 'next/link'
+import { ArrowButton } from '@/modules/shared/components/arrow-button/arrow-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
@@ -39,7 +39,7 @@ export default function OperatorCard({
           <OperatorKeyPoint label="Recurring Cost" value={operator.recurringCost} />
         </div>
       </CardContent>
-      <Button
+      <ArrowButton
         // TODO: temporary variant based on operator id
         variant={configureVariant}
         className="w-full"
@@ -48,8 +48,7 @@ export default function OperatorCard({
         }}
       >
         Configure Services
-        <ArrowRight className="size-4" />
-      </Button>
+      </ArrowButton>
       {showMoreInfo && (
         <Button variant="outline" asChild size="lg">
           <Link href={`/services/operators/${operator.id}` as Route}>
