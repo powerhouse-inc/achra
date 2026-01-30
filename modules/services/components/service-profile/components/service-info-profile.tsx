@@ -82,7 +82,7 @@ export default function ServiceInfoProfile({ light }: Readonly<ServiceInfoProps>
             {service.extendedDescription}
           </div>
         </div>
-        <div className="flex items-end justify-end gap-6">
+        <div className="flex items-end justify-end gap-6 sm:hidden lg:flex">
           <Button variant="outline" asChild>
             <Link href="#">
               Self Assessment Checklist
@@ -94,6 +94,17 @@ export default function ServiceInfoProfile({ light }: Readonly<ServiceInfoProps>
           </Button>
         </div>
       </CardContent>
+      <div className="hidden items-end justify-end gap-6 sm:flex lg:hidden">
+        <Button variant="outline" asChild>
+          <Link href="#">
+            Self Assessment Checklist
+            <Download className="size-4" />
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link href="#">FQA</Link>
+        </Button>
+      </div>
     </Card>
   )
 }

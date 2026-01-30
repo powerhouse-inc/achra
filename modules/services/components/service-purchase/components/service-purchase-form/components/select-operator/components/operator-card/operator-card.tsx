@@ -5,6 +5,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
 import type { Operator } from '../../select-operator'
+import type { Route } from 'next'
 
 interface OperatorCardProps {
   operator: Operator
@@ -51,7 +52,7 @@ export default function OperatorCard({
       </Button>
       {showMoreInfo && (
         <Button variant="outline" asChild size="lg">
-          <Link href="#">
+          <Link href={`/services/operators/${operator.id}` as Route}>
             <span>More Info</span>
             <Info className="size-4" />
           </Link>
