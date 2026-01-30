@@ -104,17 +104,19 @@ export default function ServiceInfo({
           </div>
         )}
       </CardContent>
-      <div className="hidden items-end justify-end gap-6 sm:flex lg:hidden">
-        <Button variant="outline" asChild>
-          <Link href="#">
-            Self Assessment Checklist
-            <Download className="size-4" />
-          </Link>
-        </Button>
-        <Button variant="outline" asChild>
-          <Link href="#">FQA</Link>
-        </Button>
-      </div>
+      {showActionButtons && (
+        <div className="hidden items-end justify-end gap-6 sm:flex lg:hidden">
+          <Button variant="outline" asChild>
+            <Link href="#">
+              Self Assessment Checklist
+              <Download className="size-4" />
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="#">FQA</Link>
+          </Button>
+        </div>
+      )}
     </Card>
   )
 }
