@@ -10,6 +10,7 @@ import {
   type StepValue,
   useServicePurchaseStep,
 } from '@/modules/services/context/service-purchase-step-context'
+import { ServiceInfo } from '@/modules/shared/components/service-info'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -21,7 +22,6 @@ import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
-import ServiceInfo from './components/service-info/service-info'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
