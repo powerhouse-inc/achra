@@ -2,7 +2,7 @@ import { ArrowButton } from './arrow-button'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
-  title: 'Shared/Components/Buttons/Internal Link',
+  title: 'Shared/Components/Buttons/Arrow Button',
   component: ArrowButton,
   parameters: {
     nextjs: {
