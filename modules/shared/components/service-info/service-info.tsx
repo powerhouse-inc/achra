@@ -76,16 +76,6 @@ export default function ServiceInfo({
           >
             {service.title}
           </span>
-          <div
-            className={cn(
-              'text-foreground text-base/6 font-semibold lg:text-xl/6 lg:font-bold',
-              light && 'hidden',
-            )}
-          >
-            {service.description.map((description) => (
-              <p key={description}>{description}</p>
-            ))}
-          </div>
           <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
             {service.extendedDescription}
           </div>
