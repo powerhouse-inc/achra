@@ -9,7 +9,7 @@ export interface Operator {
   recurringCost: string
 }
 
-const OPERATORS_MOCK: Operator[] = [
+export const OPERATORS_MOCK: Operator[] = [
   {
     id: 'powerhouse-genesis-oh',
     name: 'Powerhouse Genesis OH',
@@ -32,7 +32,7 @@ interface SelectOperatorProps {
   onSelectServices: (operatorId: string) => void
 }
 
-export default function SelectOperator({ onSelectServices }: SelectOperatorProps) {
+export default function SelectOperator({ onSelectServices }: Readonly<SelectOperatorProps>) {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-2">
@@ -52,6 +52,7 @@ export default function SelectOperator({ onSelectServices }: SelectOperatorProps
             key={operator.name}
             operator={operator}
             onSelectServices={onSelectServices}
+            configureVariant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
           />
         ))}
       </div>

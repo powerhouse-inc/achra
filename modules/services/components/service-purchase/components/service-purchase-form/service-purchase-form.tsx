@@ -10,6 +10,7 @@ import {
   type StepValue,
   useServicePurchaseStep,
 } from '@/modules/services/context/service-purchase-step-context'
+import { ServiceInfo } from '@/modules/shared/components/service-info'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -21,7 +22,6 @@ import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
-import ServiceInfo from './components/service-info/service-info'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
@@ -202,11 +202,11 @@ export default function ServicePurchaseForm() {
                   <Fragment key={step.value}>
                     <TabsTrigger
                       value={step.value}
-                      className="flex h-8 w-8 flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit lg:h-12 dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                      className="flex h-8 w-8 flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit lg:h-10 2xl:h-12 dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
                     >
                       <div
                         className={cn(
-                          'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold md:w-fit md:rounded-l-lg md:rounded-r-none lg:rounded-l-xl lg:p-3 lg:text-lg/6',
+                          'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold md:w-fit md:rounded-l-lg md:rounded-r-none lg:p-2.75 lg:text-base/6 2xl:rounded-l-xl 2xl:p-3 2xl:text-lg/6',
                           isActive && 'bg-primary text-primary-foreground',
                           isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
                         )}
@@ -215,13 +215,13 @@ export default function ServicePurchaseForm() {
                       </div>
                       <div
                         className={cn(
-                          'text-foreground/50 border-border hidden h-full items-center gap-1 rounded-r-lg border px-1 md:flex lg:gap-2 lg:rounded-r-xl lg:px-3',
+                          'text-foreground/50 border-border hidden h-full items-center gap-1 rounded-r-lg border px-1 md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
                           isActive && 'text-primary border-primary dark:border-primary',
                           isVisited && !isActive && 'text-primary/70 border-primary/30',
                         )}
                       >
                         {STEP_ICONS[step.value]}
-                        <span className="text-xs/4.5 font-medium lg:text-xl/6 lg:font-bold">
+                        <span className="text-xs/4.5 font-medium lg:text-base/6 lg:font-semibold 2xl:text-xl/6 2xl:font-bold">
                           {step.label}
                         </span>
                       </div>
