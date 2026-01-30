@@ -1,4 +1,6 @@
-import { ArrowRight, FileText } from 'lucide-react'
+'use client'
+import { ArrowRight, FileText, Info } from 'lucide-react'
+import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
@@ -7,9 +9,17 @@ import type { Operator } from '../../select-operator'
 interface OperatorCardProps {
   operator: Operator
   onSelectServices: (operatorId: string) => void
+  showMoreInfo?: boolean
+  onMoreInfo?: () => void
+  configureVariant?: 'default' | 'outline'
 }
 
-export default function OperatorCard({ operator, onSelectServices }: OperatorCardProps) {
+export default function OperatorCard({
+  operator,
+  onSelectServices,
+  showMoreInfo = false,
+  configureVariant = 'default',
+}: Readonly<OperatorCardProps>) {
   return (
     <Card className="gap-4 border-none p-3 shadow-lg">
       <CardHeader className="gap-0 p-0">
@@ -30,7 +40,7 @@ export default function OperatorCard({ operator, onSelectServices }: OperatorCar
       </CardContent>
       <Button
         // TODO: temporary variant based on operator id
-        variant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
+        variant={configureVariant}
         className="w-full"
         onClick={() => {
           onSelectServices(operator.id)
@@ -39,6 +49,14 @@ export default function OperatorCard({ operator, onSelectServices }: OperatorCar
         Configure Services
         <ArrowRight className="size-4" />
       </Button>
+      {showMoreInfo && (
+        <Button variant="outline" asChild size="lg">
+          <Link href="#">
+            <span>More Info</span>
+            <Info className="size-4" />
+          </Link>
+        </Button>
+      )}
     </Card>
   )
 }

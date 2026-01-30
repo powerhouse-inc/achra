@@ -1,16 +1,24 @@
-import { Phone } from 'lucide-react'
+import { Download, Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
+import type { Route } from 'next'
 
 interface ServiceInfoProps {
   light?: boolean
+  showPurchaseButton?: boolean
+  showActionButtons?: boolean
 }
 
-export default function ServiceInfo({ light }: ServiceInfoProps) {
+export default function ServiceInfo({
+  light,
+  showPurchaseButton,
+  showActionButtons,
+}: Readonly<ServiceInfoProps>) {
   const service = SERVICES_CARDS_MOCK[0]
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">
@@ -39,12 +47,25 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
               style={{ objectFit: 'cover' }}
             />
           </div>
-          <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
-            <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
-              Book a Call
-              <Phone className="size-4" />
-            </Link>
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
+              <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
+                Book a Call
+                <Phone className="size-4" />
+              </Link>
+            </Button>
+            {showPurchaseButton && (
+              <InternalLink
+                href={`/services/${service.id}/purchase` as Route}
+                disabled={service.unavailable}
+                className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+                size="lg"
+                variant="default"
+              >
+                Purchase
+              </InternalLink>
+            )}
+          </div>
         </div>
         <div className={cn('flex flex-col gap-4 lg:gap-6', light && 'gap-0')}>
           <span
@@ -69,6 +90,19 @@ export default function ServiceInfo({ light }: ServiceInfoProps) {
             {service.extendedDescription}
           </div>
         </div>
+        {showActionButtons && (
+          <div className="flex items-end justify-end gap-6">
+            <Button variant="outline" asChild>
+              <Link href="#">
+                Self Assessment Checklist
+                <Download className="size-4" />
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="#">FQA</Link>
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
