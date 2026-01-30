@@ -1,5 +1,6 @@
 import { Builders } from '@/modules/builders/components/builders/builders'
 import BuilderFilters from '@/modules/builders/components/builders-filters'
+import { BuildersFiltersProvider } from '@/modules/builders/components/builders-filters/builders-filters-context'
 import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
@@ -34,10 +35,12 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
       </PageBreadcrumbContainer>
       <PageContent variant="with-breadcrumb" className="gap-6">
         <BuildersHeader />
-        <BuilderFilters />
-        <ErrorBoundaryWithPresets>
-          <Builders networkSlug={slug} searchParams={searchParams} />
-        </ErrorBoundaryWithPresets>
+        <BuildersFiltersProvider>
+          <BuilderFilters />
+          <ErrorBoundaryWithPresets>
+            <Builders networkSlug={slug} searchParams={searchParams} />
+          </ErrorBoundaryWithPresets>
+        </BuildersFiltersProvider>
       </PageContent>
     </PageBackground>
   )

@@ -34,6 +34,14 @@ const meta = {
       description: 'Function called when the reset button is clicked',
       action: 'reset',
     },
+    isResetDisabled: {
+      description: 'Disable the reset button',
+      control: 'boolean',
+    },
+    isResetPending: {
+      description: 'Show loading state for the reset button',
+      control: 'boolean',
+    },
     filterTrigger: {
       description: 'Custom trigger element to replace the default filter button',
       control: false,
@@ -182,6 +190,102 @@ export const WithoutReset: Story = {
             { label: 'Feature', value: 'feature' },
             { label: 'Bug Fix', value: 'bug' },
             { label: 'Enhancement', value: 'enhancement' },
+          ]}
+        />
+      </FilterDrawer>
+    )
+  },
+}
+
+/**
+ * FilterDrawer with a disabled reset button.
+ * Demonstrates the disabled state while filters are unchanged.
+ */
+export const ResetDisabled: Story = {
+  render: () => {
+    const [filters, setFilters] = useState({
+      status: 'all',
+      network: 'all',
+    })
+
+    const handleReset = () => {
+      setFilters({ status: 'all', network: 'all' })
+    }
+
+    return (
+      <FilterDrawer onReset={handleReset} isResetDisabled>
+        <DrawerSelect
+          label="Status"
+          value={filters.status}
+          onChange={(value: string) => {
+            setFilters((prev) => ({ ...prev, status: value }))
+          }}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Active', value: 'active' },
+            { label: 'Completed', value: 'completed' },
+            { label: 'Paused', value: 'paused' },
+          ]}
+        />
+        <DrawerSelect
+          label="Network"
+          value={filters.network}
+          onChange={(value: string) => {
+            setFilters((prev) => ({ ...prev, network: value }))
+          }}
+          options={[
+            { label: 'All Networks', value: 'all' },
+            { label: 'Grove', value: 'grove' },
+            { label: 'Sky', value: 'sky' },
+            { label: 'Spark', value: 'spark' },
+          ]}
+        />
+      </FilterDrawer>
+    )
+  },
+}
+
+/**
+ * FilterDrawer with a pending reset state.
+ * Demonstrates the loading icon when reset is in progress.
+ */
+export const ResetPending: Story = {
+  render: () => {
+    const [filters, setFilters] = useState({
+      status: 'all',
+      network: 'all',
+    })
+
+    const handleReset = () => {
+      setFilters({ status: 'all', network: 'all' })
+    }
+
+    return (
+      <FilterDrawer onReset={handleReset} isResetPending>
+        <DrawerSelect
+          label="Status"
+          value={filters.status}
+          onChange={(value: string) => {
+            setFilters((prev) => ({ ...prev, status: value }))
+          }}
+          options={[
+            { label: 'All', value: 'all' },
+            { label: 'Active', value: 'active' },
+            { label: 'Completed', value: 'completed' },
+            { label: 'Paused', value: 'paused' },
+          ]}
+        />
+        <DrawerSelect
+          label="Network"
+          value={filters.network}
+          onChange={(value: string) => {
+            setFilters((prev) => ({ ...prev, network: value }))
+          }}
+          options={[
+            { label: 'All Networks', value: 'all' },
+            { label: 'Grove', value: 'grove' },
+            { label: 'Sky', value: 'sky' },
+            { label: 'Spark', value: 'spark' },
           ]}
         />
       </FilterDrawer>

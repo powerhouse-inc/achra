@@ -1,10 +1,13 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import BuilderFilters from './builders-filters'
+import { BuildersFiltersProvider } from './builders-filters-context'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const withNuqsAdapter = (Story: React.ComponentType) => (
   <NuqsAdapter>
-    <Story />
+    <BuildersFiltersProvider>
+      <Story />
+    </BuildersFiltersProvider>
   </NuqsAdapter>
 )
 
