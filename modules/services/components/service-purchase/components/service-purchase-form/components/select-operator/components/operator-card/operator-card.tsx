@@ -1,4 +1,5 @@
-import { FileText, Info, Link } from 'lucide-react'
+import { FileText, Info } from 'lucide-react'
+import Link from 'next/link'
 import { ArrowButton } from '@/modules/shared/components/arrow-button/arrow-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
