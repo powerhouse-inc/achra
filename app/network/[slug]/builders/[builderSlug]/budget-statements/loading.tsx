@@ -1,5 +1,5 @@
-import { AccountSnapshotSkeleton } from '@/modules/expense-reports/components/account-snapshot'
 import { ExpenseReportTabsSkeleton } from '@/modules/expense-reports/components/expense-report-tabs'
+import { ExpenseReportsSectionSkeleton } from '@/modules/expense-reports/components/expense-reports-section'
 import { MonthNavigationSkeleton } from '@/modules/expense-reports/components/month-navigation'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
@@ -12,7 +12,7 @@ export default function ExpenseReportsLoading() {
         <ExpenseReportTabsSkeleton />
       </div>
 
-      <AccountSnapshotSkeleton />
+      <ExpenseReportsSectionSkeleton />
     </PageContent>
   )
 }

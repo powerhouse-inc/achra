@@ -7,7 +7,7 @@ import { TabSection } from '../types'
  */
 export const searchParamsConfigValues = {
   section: {
-    defaultValue: TabSection.ACCOUNT_SNAPSHOT,
+    defaultValue: TabSection.EXPENSE_REPORTS,
     values: Object.values(TabSection),
   },
   // actualAccountTab param uses dynamic wallet names, so no enum validation

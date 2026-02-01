@@ -1,48 +1,50 @@
-'use client'
-
-import { DateTime } from 'luxon'
-import { useCallback, useMemo } from 'react'
-import { useBudgetStatementActuals } from '../../hooks/useBudgetStatementActuals'
-import { BUDGET_STATEMENTS_MOCKS } from '../../mocks/budget-statements-mocks'
-import { BreakdownActualsSection } from './breakdown-actuals-section'
+import {
+  getActualsTableData,
+  getWalletsFromBudgetStatement,
+} from '../../lib/budget-statement-utils'
+import { getBudgetStatementForMonth } from '../../services/expense-reports-service'
 import { TotalWalletSection } from './total-wallet-section'
 
 interface ExpenseReportsActualsProps {
-  month: Date | null
+  teamId: string
+  month: Date
 }
 
 // TODO: use the month from the param once we integrate the actual api
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function ExpenseReportsActuals({ month }: ExpenseReportsActualsProps) {
-  const currentMonth = useMemo(() => DateTime.fromISO('2024-12-01'), [])
-  const {
-    headerIds,
-    breakdownTitleRef,
-    breakdownColumnsForActiveTab,
-    breakdownItemsForActiveTab,
-    mainTableColumns,
-    mainTableItems,
-    breakdownTabs,
-    actualAccountTab,
-    setActualAccountTab,
-  } = useBudgetStatementActuals(currentMonth, BUDGET_STATEMENTS_MOCKS)
 
-  const handleActualAccountTabChange = useCallback(
-    (value: string | null) => {
-      void setActualAccountTab(value)
-    },
-    [setActualAccountTab],
-  )
+async function ExpenseReportsActuals({ teamId, month }: ExpenseReportsActualsProps) {
+  const budgetStatements = await getBudgetStatementForMonth(teamId, month)
+  // extract wallets from budget statements
+  const wallets = getWalletsFromBudgetStatement(budgetStatements?.expenseReport)
+  const { columns, items } = getActualsTableData(wallets)
+
+  // TODO: this commented code will be used in the next step of the migration
+
+  // const currentMonth = useMemo(() => DateTime.fromISO('2024-12-01'), [])
+  // const {
+  //   headerIds,
+  //   breakdownTitleRef,
+  //   breakdownColumnsForActiveTab,
+  //   breakdownItemsForActiveTab,
+  //   mainTableColumns,
+  //   mainTableItems,
+  //   breakdownTabs,
+  //   actualAccountTab,
+  //   setActualAccountTab,
+  // } = useBudgetStatementActuals(currentMonth, BUDGET_STATEMENTS_MOCKS)
+
+  // const handleActualAccountTabChange = useCallback(
+  //   (value: string | null) => {
+  //     void setActualAccountTab(value)
+  //   },
+  //   [setActualAccountTab],
+  // )
 
   return (
     <div className="flex flex-col gap-8">
-      <TotalWalletSection
-        currentMonth={currentMonth}
-        mainTableColumns={mainTableColumns}
-        mainTableItems={mainTableItems}
-      />
+      <TotalWalletSection currentMonth={month} mainTableColumns={columns} mainTableItems={items} />
 
-      <BreakdownActualsSection
+      {/* <BreakdownActualsSection
         currentMonth={currentMonth}
         mainTableItems={mainTableItems}
         breakdownTitleRef={breakdownTitleRef as React.RefObject<HTMLDivElement>}
@@ -52,7 +54,7 @@ function ExpenseReportsActuals({ month }: ExpenseReportsActualsProps) {
         breakdownItemsForActiveTab={breakdownItemsForActiveTab}
         actualAccountTab={actualAccountTab}
         onActualAccountTabChange={handleActualAccountTabChange}
-      />
+      /> */}
     </div>
   )
 }

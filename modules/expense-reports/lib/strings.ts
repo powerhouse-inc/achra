@@ -1,5 +1,3 @@
-import type { BudgetStatementWallet } from '../types'
-
 export const pascalCaseToNormalString = (str: string): string =>
   str.replace(/([a-z])([A-Z])/g, '$1 $2')
 
@@ -10,16 +8,6 @@ export const toKebabCase = (str: string): string =>
     .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
     .replace(/[^a-zA-Z0-9-]/g, '') // Remove any non-alphanumeric characters (except hyphens)
     .toLowerCase() // Convert all characters to lowercase
-
-export const getWalletWidthForWallets = (wallets: BudgetStatementWallet[], isTablet: boolean) => {
-  for (const wallet of wallets) {
-    if (wallet.name.length > 25) {
-      return isTablet ? '200px' : '230px'
-    }
-  }
-
-  return isTablet ? '190px' : '220px'
-}
 
 export const formatNumber = (number: number) =>
   number.toLocaleString('en-US', {

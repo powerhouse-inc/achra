@@ -7,10 +7,6 @@ import {
   getGroupForecast,
   getGroupMonthlyBudget,
   getGroupPayment,
-  getWalletActual,
-  getWalletDifference,
-  getWalletForecast,
-  getWalletMonthlyBudget,
   getWalletPayment,
   hasGroupExpenses,
   hasWalletGroups,
@@ -335,19 +331,23 @@ export const getActualsBreakdownItemsForWallet = (
         },
         {
           column: breakdownColumns[1],
-          value: getWalletMonthlyBudget(wallet, month),
+          // value: getWalletMonthlyBudget(wallet, month),
+          value: 0,
         },
         {
           column: breakdownColumns[2],
-          value: getWalletForecast(wallet, month),
+          // value: getWalletForecast(wallet, month),
+          value: 0,
         },
         {
           column: breakdownColumns[3],
-          value: getWalletActual(wallet, month),
+          // value: getWalletActual(wallet, month),
+          value: 0,
         },
         {
           column: breakdownColumns[4],
-          value: getWalletDifference(wallet, month),
+          // value: getWalletDifference(wallet, month),
+          value: 0,
         },
         {
           column: breakdownColumns[5],

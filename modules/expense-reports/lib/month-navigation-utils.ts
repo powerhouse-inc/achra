@@ -1,5 +1,9 @@
-import { parse } from 'date-fns'
-import { formatMonthString, isMonthAvailable, normalizeMonth } from './month-utils'
+import {
+  formatMonthString,
+  isMonthAvailable,
+  normalizeMonth,
+  parseMonthString,
+} from './month-utils'
 
 export function getSelectedMonth(
   availableMonths: Date[],
@@ -9,11 +13,9 @@ export function getSelectedMonth(
     return normalizeMonth(new Date())
   }
 
-  if (
-    (typeof viewMonthParam === 'string' && viewMonthParam.trim() !== '') ||
-    (viewMonthParam !== null && viewMonthParam !== undefined)
-  ) {
-    const parsedMonth = parse(viewMonthParam, 'MMMyyyy', new Date())
+  const parsedMonth = parseMonthString(viewMonthParam)
+
+  if (parsedMonth !== null) {
     const normalizedMonth = normalizeMonth(parsedMonth)
 
     if (isMonthAvailable(normalizedMonth, availableMonths)) {
