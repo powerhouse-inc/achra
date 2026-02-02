@@ -1,26 +1,47 @@
-import { FileText, Info } from 'lucide-react'
+import { ArrowRight, FileText, Info } from 'lucide-react'
 import Link from 'next/link'
-import { ArrowButton } from '@/modules/shared/components/arrow-button/arrow-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
-import type { Operator } from '../../select-operator'
 import type { Route } from 'next'
 
-interface OperatorCardProps {
-  operator: Operator
-  onSelectServices: (operatorId: string) => void
-  showMoreInfo?: boolean
-  onMoreInfo?: () => void
-  configureVariant?: 'default' | 'outline'
+export interface Operator {
+  id: string
+  name: string
+  description: string
+  activeSince: string
+  setupTime: string
+  recurringCost: string
 }
+
+interface ConfigureWithCallback {
+  onConfigureServices: (operatorId: string) => void
+  configureServicesHref?: never
+}
+interface ConfigureWithHref {
+  onConfigureServices?: never
+  configureServicesHref: Route
+}
+
+interface BaseOperatorCardProps {
+  operator: Operator
+  configureVariant?: 'default' | 'outline'
+  showMoreInfo?: boolean
+  moreInfoHref?: Route
+}
+
+export type OperatorCardProps = BaseOperatorCardProps & (ConfigureWithCallback | ConfigureWithHref)
 
 export default function OperatorCard({
   operator,
-  onSelectServices,
-  showMoreInfo = false,
+  onConfigureServices,
+  configureServicesHref,
   configureVariant = 'default',
+  showMoreInfo = false,
+  moreInfoHref,
 }: Readonly<OperatorCardProps>) {
+  const resolvedMoreInfoHref = moreInfoHref ?? (`/services/operators/${operator.id}` as Route)
+
   return (
     <Card className="gap-4 border-none p-3 shadow-lg">
       <CardHeader className="gap-0 p-0">
@@ -39,19 +60,28 @@ export default function OperatorCard({
           <OperatorKeyPoint label="Recurring Cost" value={operator.recurringCost} />
         </div>
       </CardContent>
-      <ArrowButton
-        // TODO: temporary variant based on operator id
-        variant={configureVariant}
-        className="w-full"
-        onClick={() => {
-          onSelectServices(operator.id)
-        }}
-      >
-        Configure Services
-      </ArrowButton>
+      {onConfigureServices ? (
+        <Button
+          variant={configureVariant}
+          className="w-full"
+          onClick={() => {
+            onConfigureServices(operator.id)
+          }}
+        >
+          Configure Services
+          <ArrowRight className="size-4" />
+        </Button>
+      ) : (
+        <Button variant={configureVariant} className="w-full" asChild>
+          <Link href={configureServicesHref}>
+            Configure Services
+            <ArrowRight className="size-4" />
+          </Link>
+        </Button>
+      )}
       {showMoreInfo && (
         <Button variant="outline" asChild size="lg">
-          <Link href={`/services/operators/${operator.id}` as Route}>
+          <Link href={resolvedMoreInfoHref}>
             <span>More Info</span>
             <Info className="size-4" />
           </Link>

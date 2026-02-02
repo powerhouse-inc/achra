@@ -1,6 +1,6 @@
-'use client'
-import OperatorCard from '../../service-purchase/components/service-purchase-form/components/select-operator/components/operator-card/operator-card'
+import { OperatorCard } from '@/modules/shared/components/operator-card'
 import { OPERATORS_MOCK } from '../../service-purchase/components/service-purchase-form/components/select-operator/select-operator'
+import type { Route } from 'next'
 
 export function PurchaseSection() {
   return (
@@ -11,9 +11,10 @@ export function PurchaseSection() {
           <OperatorCard
             key={operator.name}
             operator={operator}
-            onSelectServices={() => {}}
+            configureServicesHref={
+              `/services/${operator.id}/purchase?step=configure-services` as Route
+            }
             showMoreInfo
-            onMoreInfo={() => {}}
           />
         ))}
       </div>

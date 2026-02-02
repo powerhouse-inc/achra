@@ -1,13 +1,6 @@
-import OperatorCard from './components/operator-card/operator-card'
+import { type Operator, OperatorCard } from '@/modules/shared/components/operator-card'
 
-export interface Operator {
-  id: string
-  name: string
-  description: string
-  activeSince: string
-  setupTime: string
-  recurringCost: string
-}
+export type { Operator }
 
 export const OPERATORS_MOCK: Operator[] = [
   {
@@ -51,7 +44,7 @@ export default function SelectOperator({ onSelectServices }: Readonly<SelectOper
           <OperatorCard
             key={operator.name}
             operator={operator}
-            onSelectServices={onSelectServices}
+            onConfigureServices={onSelectServices}
             configureVariant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
           />
         ))}
