@@ -20,7 +20,7 @@ import {
   NETWORK_HOMEPAGE_SKIP_SECTION,
 } from '@/modules/networks/config/constants'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
 import ff from '@/modules/shared/lib/feature-flags'
 
@@ -36,38 +36,36 @@ export default async function NetworkPage({ params }: NetworkPageProps) {
   }
 
   return (
-    <PageBackground>
-      <PageContent className="gap-8">
-        <Suspense fallback={<HomepageBannerSkeleton />}>
-          <HomepageBanner />
-        </Suspense>
+    <PageContent className="gap-8">
+      <Suspense fallback={<HomepageBannerSkeleton />}>
+        <HomepageBanner />
+      </Suspense>
 
-        <ProposalsSection proposals={PROPOSALS} />
+      <ProposalsSection proposals={PROPOSALS} />
 
-        {ff.ROADMAPS_ENABLED && (
-          <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
-            <Suspense fallback={<RoadmapSectionSkeleton />}>
-              <RoadmapSection params={params} />
-            </Suspense>
-          </ErrorBoundaryWithPresets>
-        )}
+      {ff.ROADMAPS_ENABLED && (
+        <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
+          <Suspense fallback={<RoadmapSectionSkeleton />}>
+            <RoadmapSection params={params} />
+          </Suspense>
+        </ErrorBoundaryWithPresets>
+      )}
 
-        <FinancesSection />
+      <FinancesSection />
 
-        <WalletsSection wallets={WALLETS} />
+      <WalletsSection wallets={WALLETS} />
 
-        {/* TODO: Implement builders section backend integration */}
-        <BuildersSection />
+      {/* TODO: Implement builders section backend integration */}
+      <BuildersSection />
 
-        <GovernanceSection />
+      <GovernanceSection />
 
-        <SectionActivation
-          sections={NETWORK_HOMEPAGE_SECTIONS_ENCODED}
-          options={{
-            skipSection: NETWORK_HOMEPAGE_SKIP_SECTION,
-          }}
-        />
-      </PageContent>
-    </PageBackground>
+      <SectionActivation
+        sections={NETWORK_HOMEPAGE_SECTIONS_ENCODED}
+        options={{
+          skipSection: NETWORK_HOMEPAGE_SKIP_SECTION,
+        }}
+      />
+    </PageContent>
   )
 }

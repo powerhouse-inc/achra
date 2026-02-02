@@ -4,7 +4,7 @@ import { Suspense } from 'react'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
 import { Markdown } from '@/modules/shared/components/markdown'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
@@ -42,7 +42,7 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
   const projects = workstream.initialProposal?.sow?.projects ?? []
 
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={2} />}>
           <WorkstreamDetailsBreadcrumb
@@ -131,6 +131,6 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
           )}
         </div>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

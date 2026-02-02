@@ -1,6 +1,6 @@
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { MarkdownSkeleton } from '@/modules/shared/components/markdown'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { InitialProposalHeaderSkeleton } from '@/modules/workstream/components/initial-proposal-header'
@@ -10,7 +10,7 @@ import { WorkstreamStatsSkeleton } from '@/modules/workstream/components/workstr
 
 export default function WorkstreamDetailsLoading() {
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <BreadcrumbSkeleton segments={2} />
       </PageBreadcrumbContainer>
@@ -64,6 +64,6 @@ export default function WorkstreamDetailsLoading() {
           <ProposalCardsGridSkeleton />
         </div>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

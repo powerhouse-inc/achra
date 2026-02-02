@@ -10,7 +10,7 @@ import { RfpStatusChip } from '@/modules/shared/components/chips/rfp-status-chip
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Markdown } from '@/modules/shared/components/markdown'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -58,7 +58,7 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
     (!rfp.evaluationCriteria || rfp.evaluationCriteria.trim() === '')
 
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
           <WorkstreamRfpBreadcrumb
@@ -191,6 +191,6 @@ export default async function RequestForProposalPage({ params }: RequestForPropo
           </Card>
         </ErrorBoundaryWithPresets>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

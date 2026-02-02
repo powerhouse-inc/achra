@@ -1,4 +1,4 @@
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card'
 import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
@@ -11,19 +11,17 @@ export default function WorkstreamPageSkeleton({
   showNetworkFilter = true,
 }: WorkstreamPageSkeletonProps) {
   return (
-    <PageBackground>
-      <PageContent>
-        <Skeleton className="mb-8 h-55 w-full" />
+    <PageContent>
+      <Skeleton className="mb-8 h-55 w-full" />
 
-        <div className="flex flex-col gap-8">
-          <WorkstreamFiltersSkeleton showNetworkFilter={showNetworkFilter} />
+      <div className="flex flex-col gap-8">
+        <WorkstreamFiltersSkeleton showNetworkFilter={showNetworkFilter} />
 
-          <WorkstreamServerListSkeleton>
-            <WorkstreamCardSkeleton />
-            <WorkstreamCardSkeleton />
-          </WorkstreamServerListSkeleton>
-        </div>
-      </PageContent>
-    </PageBackground>
+        <WorkstreamServerListSkeleton>
+          <WorkstreamCardSkeleton />
+          <WorkstreamCardSkeleton />
+        </WorkstreamServerListSkeleton>
+      </div>
+    </PageContent>
   )
 }
