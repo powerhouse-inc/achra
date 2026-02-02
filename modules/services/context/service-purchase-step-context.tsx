@@ -37,19 +37,26 @@ const ServicePurchaseStepContext = createContext<ServicePurchaseStepContextValue
 
 const getStepIndex = (step: StepValue) => STEPS.findIndex((item) => item.value === step)
 
+const getStepsUpTo = (step: StepValue): StepValue[] => {
+  const index = getStepIndex(step)
+  return STEPS.slice(0, index + 1).map((s) => s.value)
+}
+
 export function ServicePurchaseStepProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [activeStep, setActiveStep] = useQueryState(
     'step',
     parseAsStringLiteral(STEP_VALUES).withDefault(DEFAULT_STEP),
   )
-  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => [activeStep])
+  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => getStepsUpTo(activeStep))
 
   const goToStep = useCallback(
     (step: StepValue) => {
       void setActiveStep(step)
-      setVisitedSteps((previousSteps) =>
-        previousSteps.includes(step) ? previousSteps : [...previousSteps, step],
-      )
+      setVisitedSteps((previousSteps) => {
+        const stepsUpTo = getStepsUpTo(step)
+        const merged = new Set([...previousSteps, ...stepsUpTo])
+        return Array.from(merged)
+      })
     },
     [setActiveStep],
   )
