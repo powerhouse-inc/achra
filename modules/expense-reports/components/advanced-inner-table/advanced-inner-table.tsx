@@ -55,6 +55,7 @@ export function AdvancedInnerTable({
                       {
                         'border-r': column.hasBorderRight,
                       },
+                      column.className,
                     )}
                     style={{
                       textAlign: (column.headerAlign ?? column.align ?? 'left') as Alignment,
@@ -90,12 +91,15 @@ export function AdvancedInnerTable({
                         colSpan={
                           row.type === 'groupTitle' || row.type === 'section' ? 3 : undefined
                         }
-                        className={cn({
-                          'border-r': item.column.hasBorderRight,
-                          'text-left': item.column.align === 'left',
-                          'text-center': item.column.align === 'center',
-                          'text-right': item.column.align === 'right',
-                        })}
+                        className={cn(
+                          {
+                            'border-r': item.column.hasBorderRight,
+                            'text-left': item.column.align === 'left',
+                            'text-center': item.column.align === 'center',
+                            'text-right': item.column.align === 'right',
+                          },
+                          item.column.className,
+                        )}
                       >
                         {getRenderedCell(item.column, row.type, item.value, rowIndex, columnIndex)}
                       </td>

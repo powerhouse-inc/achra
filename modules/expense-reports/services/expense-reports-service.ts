@@ -1,6 +1,11 @@
-import { parse } from 'date-fns'
+import { format, parse } from 'date-fns'
 import { cacheLife } from 'next/cache'
-import { useBudgetStatementsAvailableMonthsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  type BudgetStatementsDetailsQuery,
+  useBudgetStatementsAvailableMonthsQuery,
+  useBudgetStatementsDetailsQuery,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import 'server-only'
 
 /**
  * Fetches the available months for a given team
@@ -25,4 +30,22 @@ export async function getBudgetStatementsAvailableMonths(teamId: string): Promis
   return data.budgetStatements
     .map((month) => parse(month.month, 'MMMyyyy', new Date()))
     .sort((a, b) => a.getTime() - b.getTime())
+}
+
+export async function getBudgetStatementForMonth(
+  teamId: string,
+  month: Date,
+): Promise<BudgetStatementsDetailsQuery['budgetStatements'][number] | null> {
+  'use cache'
+  cacheLife('minutes')
+
+  const data = await useBudgetStatementsDetailsQuery.fetcher({
+    filter: {
+      teamId,
+    },
+  })()
+
+  const monthString = format(month, 'MMMyyyy').toUpperCase()
+
+  return data.budgetStatements.find((bs) => bs.month === monthString) ?? null
 }

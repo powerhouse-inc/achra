@@ -16,7 +16,7 @@ function ExpenseReportTabs() {
   const createUrl = (sectionValue: string): Route => {
     const params = new URLSearchParams(searchParams.toString())
 
-    if (sectionValue == TabSection.ACCOUNT_SNAPSHOT) {
+    if (sectionValue == TabSection.EXPENSE_REPORTS) {
       // we don't show the first tab in the url to keep it cleaner
       params.delete('section')
     } else {
@@ -37,19 +37,6 @@ function ExpenseReportTabs() {
         )}
       >
         <Link
-          href={createUrl(TabSection.ACCOUNT_SNAPSHOT)}
-          aria-current={isAccountSnapshotActive ? 'page' : undefined}
-          className={cn(
-            'text-foreground dark:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1',
-            isAccountSnapshotActive
-              ? 'dark:border-input dark:bg-input/30 bg-background text-accent-foreground shadow-sm'
-              : 'cursor-pointer',
-          )}
-        >
-          Account Snapshot
-        </Link>
-
-        <Link
           href={createUrl(TabSection.EXPENSE_REPORTS)}
           aria-current={isExpenseReportsActive ? 'page' : undefined}
           className={cn(
@@ -60,6 +47,19 @@ function ExpenseReportTabs() {
           )}
         >
           Expense Reports
+        </Link>
+
+        <Link
+          href={createUrl(TabSection.ACCOUNT_SNAPSHOT)}
+          aria-current={isAccountSnapshotActive ? 'page' : undefined}
+          className={cn(
+            'text-foreground dark:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1',
+            isAccountSnapshotActive
+              ? 'dark:border-input dark:bg-input/30 bg-background text-accent-foreground shadow-sm'
+              : 'cursor-pointer',
+          )}
+        >
+          Account Snapshot
         </Link>
       </div>
     </nav>

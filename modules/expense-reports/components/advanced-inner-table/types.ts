@@ -11,6 +11,7 @@ export interface InnerTableColumn {
   isCardFooter?: boolean
   width?: string
   minWidth?: string
+  className?: string
   hidden?: boolean
   hasBorderRight?: boolean
   hasBorderBottomOnCard?: boolean
