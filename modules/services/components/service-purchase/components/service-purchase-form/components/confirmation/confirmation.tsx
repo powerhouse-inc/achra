@@ -15,7 +15,7 @@ interface ConfirmationProps {
 
 export default function Confirmation({ name, email }: ConfirmationProps) {
   return (
-    <Card className="bg-background border-border mt-16 w-full max-w-156 self-center rounded-lg p-6 shadow-xs">
+    <Card className="bg-background border-border mt-16 w-full self-center rounded-lg p-6 shadow-xs md:max-w-156">
       <CardContent className={cn('flex flex-col items-center gap-6 px-0')}>
         <div className="flex flex-col items-center gap-4">
           <div className="bg-muted w-fit rounded-lg p-2">
@@ -32,7 +32,7 @@ export default function Confirmation({ name, email }: ConfirmationProps) {
             </span>
           </div>
         </div>
-        <div className="grid w-full grid-cols-2 gap-4">
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
           <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
             <ActionCard
               icon={<BookCall className="size-6 min-w-6 rounded-md" />}
