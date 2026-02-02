@@ -43,7 +43,7 @@ export default function ServiceInfo({
               src={service.cover}
               alt={service.title}
               fill
-              className="absolute rounded-lg"
+              className="absolute rounded-lg md:rounded-2xl"
               style={{ objectFit: 'cover' }}
             />
           </div>
