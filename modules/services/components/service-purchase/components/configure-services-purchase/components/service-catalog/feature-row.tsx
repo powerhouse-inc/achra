@@ -56,7 +56,7 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
       {/* Mobile: Show only current plan */}
       <div
         className={cn(
-          'border-input flex min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors group-last/row:border-b-0 lg:hidden',
+          'border-input flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors group-last/row:border-b-0 lg:hidden',
           activePlan === currentMobilePlan && 'bg-primary/10 font-bold',
         )}
       >

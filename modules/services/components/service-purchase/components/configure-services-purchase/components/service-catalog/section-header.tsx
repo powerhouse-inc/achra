@@ -90,7 +90,7 @@ export function SectionHeader({
       {/* Mobile: Show only current plan column */}
       <div
         className={cn(
-          'border-input pointer-events-none flex min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
+          'border-input pointer-events-none flex  h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
           currentMobilePlan === 'enterprise' && oneTimeFee && 'relative',
         )}
