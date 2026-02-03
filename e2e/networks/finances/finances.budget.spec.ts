@@ -16,29 +16,23 @@ test('should save in clipboard the finances link', async ({ page }) => {
 test('should load all builder statuses', async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances#budget-statements`);
     await expect(page.getByText('COMPLETED')).toHaveCount(0);
-    await expect(page.getByText('ON HOLD')).toHaveCount(12);
+    await expect(page.getByText('ON HOLD')).toHaveCount(0);
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
-    await expect(page.getByText('ACTIVE')).toHaveCount(28);
-    await expect(page.getByText('INACTIVE')).toHaveCount(4);
+    await expect(page.getByText('ACTIVE')).toHaveCount(0);
+    await expect(page.getByText('INACTIVE')).toHaveCount(0);
+    await expect(page.getByText('DRAFT')).toHaveCount(6);
+    await expect(page.getByText('FINAL')).toHaveCount(3);
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('1 Month Ago')).toHaveCount(4);
-    await expect(page.getByText('2 Months Ago')).toHaveCount(4);
-    await expect(page.getByText('1 year ago')).toHaveCount(12);
-    await expect(page.getByText('09-DEC-2025')).toHaveCount(2);
-    await expect(page.getByText('21-NOV-2025')).toHaveCount(1);
-    await expect(page.getByText('24-NOV-2025')).toHaveCount(1);
-    await expect(page.getByText('01-DEC-2024')).toHaveCount(1);
-    await expect(page.getByText('02-NOV-2024')).toHaveCount(1);
-    await expect(page.getByText('01-OCT-2024')).toHaveCount(1);
-    await expect(page.getByText('12-SEP-2024')).toHaveCount(1);
-    await expect(page.getByText('05-AUG-2024')).toHaveCount(1);
-    await expect(page.getByText('18-JUL-2024')).toHaveCount(1);
+    await expect(page.getByText('16 Hours Ago')).toHaveCount(2);
+    await expect(page.getByText('7 Days Ago')).toHaveCount(4);
+    await expect(page.getByText('28-JAN-2026')).toHaveCount(1);
+    await expect(page.getByText('21-JAN-2026')).toHaveCount(2);
 });
 
 test('should load all View buttons', async ({ page }) => {
-    await expect(page.getByText('View')).toHaveCount(2);
+    await expect(page.getByText('View')).toHaveCount(3);
 });
 
 test('should load all Actuals', async ({ page }) => {
