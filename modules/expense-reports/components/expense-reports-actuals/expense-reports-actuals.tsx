@@ -1,8 +1,11 @@
+import { getActualsBreakdownItemsForTable } from '../../lib/actuals-table-helpers'
 import {
   getActualsTableData,
   getWalletsFromBudgetStatement,
 } from '../../lib/budget-statement-utils'
+import { GroupTree } from '../../lib/group-tree'
 import { getBudgetStatementForMonth } from '../../services/expense-reports-service'
+import { BreakdownActualsSection } from './breakdown-actuals-section'
 import { TotalWalletSection } from './total-wallet-section'
 
 interface ExpenseReportsActualsProps {
@@ -10,51 +13,36 @@ interface ExpenseReportsActualsProps {
   month: Date
 }
 
-// TODO: use the month from the param once we integrate the actual api
-
 async function ExpenseReportsActuals({ teamId, month }: ExpenseReportsActualsProps) {
   const budgetStatements = await getBudgetStatementForMonth(teamId, month)
   // extract wallets from budget statements
   const wallets = getWalletsFromBudgetStatement(budgetStatements?.expenseReport)
+
+  if (wallets.length === 0) {
+    // TODO: add empty state component
+    return <div>No wallets found</div>
+  }
+
   const { columns, items } = getActualsTableData(wallets)
 
-  // TODO: this commented code will be used in the next step of the migration
+  const breakdownTabs = wallets.map((wallet) => wallet.name ?? '')
 
-  // const currentMonth = useMemo(() => DateTime.fromISO('2024-12-01'), [])
-  // const {
-  //   headerIds,
-  //   breakdownTitleRef,
-  //   breakdownColumnsForActiveTab,
-  //   breakdownItemsForActiveTab,
-  //   mainTableColumns,
-  //   mainTableItems,
-  //   breakdownTabs,
-  //   actualAccountTab,
-  //   setActualAccountTab,
-  // } = useBudgetStatementActuals(currentMonth, BUDGET_STATEMENTS_MOCKS)
+  const groupTree = new GroupTree(budgetStatements?.expenseReport.groups ?? [])
+  const breakdownItems = getActualsBreakdownItemsForTable(wallets[0], groupTree)
 
-  // const handleActualAccountTabChange = useCallback(
-  //   (value: string | null) => {
-  //     void setActualAccountTab(value)
-  //   },
-  //   [setActualAccountTab],
-  // )
+  // TODO: implement the breakdown tabs change. Now it is hardcoded to the first wallet.
 
   return (
     <div className="flex flex-col gap-8">
       <TotalWalletSection currentMonth={month} mainTableColumns={columns} mainTableItems={items} />
 
-      {/* <BreakdownActualsSection
-        currentMonth={currentMonth}
-        mainTableItems={mainTableItems}
-        breakdownTitleRef={breakdownTitleRef as React.RefObject<HTMLDivElement>}
+      <BreakdownActualsSection
+        currentMonth={month}
+        mainTableItems={items}
         breakdownTabs={breakdownTabs}
-        headerIds={headerIds}
-        breakdownColumnsForActiveTab={breakdownColumnsForActiveTab}
-        breakdownItemsForActiveTab={breakdownItemsForActiveTab}
-        actualAccountTab={actualAccountTab}
-        onActualAccountTabChange={handleActualAccountTabChange}
-      /> */}
+        breakdownItemsForActiveTab={breakdownItems}
+        actualAccountTab={null}
+      />
     </div>
   )
 }

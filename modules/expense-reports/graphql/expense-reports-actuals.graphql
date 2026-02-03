@@ -29,6 +29,11 @@ query BudgetStatementsDetails($filter: budgetStatementsFilter) {
           payments
         }
       }
+      groups {
+        id
+        label
+        parentId
+      }
     }
   }
 }
