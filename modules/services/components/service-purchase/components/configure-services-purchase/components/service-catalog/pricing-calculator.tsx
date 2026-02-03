@@ -23,6 +23,9 @@ export interface PricingCalculatorProps {
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   readOnly?: boolean
 }
+/** Default plan index (Team) for mobile carousel */
+const DEFAULT_PLAN_INDEX = PRICING_PLANS.indexOf(Plan.Team)
+
 export function PricingCalculator({
   selectedPlan = Plan.Team,
   enabledSections,
@@ -33,8 +36,11 @@ export function PricingCalculator({
   // Mobile carousel state - track which plan is visible on mobile
   const [mobilePlanIndex, setMobilePlanIndex] = useState(() => {
     const index = PRICING_PLANS.indexOf(selectedPlan)
-    return index >= 0 ? index : 1 // Default to Team (index 1)
+    return index >= 0 ? index : DEFAULT_PLAN_INDEX
   })
+
+  // Derived state: current plan shown in mobile carousel
+  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
 
   const handlePlanChange = useCallback(
     (plan: Plan) => {
@@ -79,12 +85,13 @@ export function PricingCalculator({
   const contextValue = useMemo(
     () => ({
       activePlan: selectedPlan,
+      currentMobilePlan,
       mobilePlanIndex,
       onPrevPlan: handlePrevPlan,
       onNextPlan: handleNextPlan,
       readOnly,
     }),
-    [selectedPlan, mobilePlanIndex, handlePrevPlan, handleNextPlan, readOnly],
+    [selectedPlan, currentMobilePlan, mobilePlanIndex, handlePrevPlan, handleNextPlan, readOnly],
   )
 
   return (

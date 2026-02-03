@@ -5,7 +5,7 @@ import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
 import { type CatalogStatus, type Plan, PRICING_PLANS } from '../types'
-import { usePricingCalculatorContext } from './pricing-calculator-context'
+import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
 
 interface SectionHeaderProps {
   title: string
@@ -30,19 +30,10 @@ export function SectionHeader({
   oneTimeFeeVariant = 'muted',
   activePlan,
 }: Readonly<SectionHeaderProps>) {
-  const { mobilePlanIndex } = usePricingCalculatorContext()
-  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+  const { currentMobilePlan } = usePricingCalculatorContext()
 
   return (
-    <div
-      className={cn(
-        'grid items-center',
-        // Desktop: 5 columns (label + 4 plans)
-        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-        // Mobile: 2 columns (sticky label + current plan)
-        'grid-cols-[minmax(0,1fr)_minmax(0,1fr)]',
-      )}
-    >
+    <div className={cn('grid items-center', PRICING_GRID.responsive)}>
       {/* Label column - sticky on mobile */}
       <div
         className={cn(
@@ -90,7 +81,7 @@ export function SectionHeader({
       {/* Mobile: Show only current plan column */}
       <div
         className={cn(
-          'border-input pointer-events-none flex  h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
+          'border-input pointer-events-none flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
           currentMobilePlan === 'enterprise' && oneTimeFee && 'relative',
         )}

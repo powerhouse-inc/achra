@@ -7,6 +7,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
 import { type Plan, PRICING_PLANS } from '../types'
 import { PlanSelectorItem } from './plan-selector'
+import { PRICING_GRID } from './pricing-calculator-context'
 
 interface HeaderCatalogPlanProps {
   selectedPlan?: Plan
@@ -29,15 +30,7 @@ export default function HeaderCatalogPlan({
   const currentMobileTier = PRICING_DATA.tiers.find((t) => t.id === currentMobilePlan)
 
   return (
-    <div
-      className={cn(
-        'border-input grid h-21 items-center border-b',
-        // Desktop: 5 columns (label + 4 plans)
-        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-        // Mobile/Tablet: 2 columns (label + carousel)
-        'grid-cols-[1fr_1fr]',
-      )}
-    >
+    <div className={cn('border-input grid h-21 items-center border-b', PRICING_GRID.responsive)}>
       {/* SERVICE CATALOG label - visible on all screen sizes */}
       <div className="flex items-center px-6">
         <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase">

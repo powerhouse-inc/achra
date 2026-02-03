@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_DATA } from '../../../../mock/mock-data'
 import { Plan, PRICING_PLANS } from '../types'
-import { usePricingCalculatorContext } from './pricing-calculator-context'
+import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
 interface GrandTotalRowCatalogProps {
@@ -16,8 +16,7 @@ export function GrandTotalRowCatalog({
   selectedPlan,
   enabledSections,
 }: Readonly<GrandTotalRowCatalogProps>) {
-  const { mobilePlanIndex } = usePricingCalculatorContext()
-  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+  const { currentMobilePlan } = usePricingCalculatorContext()
 
   const planTotals = useMemo(() => {
     const totals: Record<Plan, string> = {
@@ -52,15 +51,7 @@ export function GrandTotalRowCatalog({
   }, [enabledSections])
 
   return (
-    <div
-      className={cn(
-        'grid items-center',
-        // Desktop: 5 columns (label + 4 plans)
-        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-        // Mobile: 2 columns (sticky label + current plan)
-        'grid-cols-[minmax(0,1fr)_minmax(0,1fr)]',
-      )}
-    >
+    <div className={cn('grid items-center', PRICING_GRID.responsive)}>
       {/* Label column - sticky on mobile */}
       <span
         className={cn(

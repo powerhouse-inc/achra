@@ -3,7 +3,7 @@
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
 import { type FeatureValue, type Plan, PRICING_PLANS } from '../types'
-import { usePricingCalculatorContext } from './pricing-calculator-context'
+import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
 import { ServiceCatalogoCell } from './service-catalogo-cell'
 
 interface FeatureRowProps {
@@ -14,19 +14,10 @@ interface FeatureRowProps {
 }
 
 export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<FeatureRowProps>) {
-  const { mobilePlanIndex } = usePricingCalculatorContext()
-  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+  const { currentMobilePlan } = usePricingCalculatorContext()
 
   return (
-    <div
-      className={cn(
-        'group/row grid items-center',
-        // Desktop: 5 columns (label + 4 plans)
-        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-        // Mobile: 2 columns (sticky label + current plan)
-        'grid-cols-[minmax(0,1fr)_minmax(0,1fr)]',
-      )}
-    >
+    <div className={cn('group/row grid items-center', PRICING_GRID.responsive)}>
       {/* Label column - sticky on mobile */}
       <div
         className={cn(

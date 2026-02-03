@@ -1,7 +1,10 @@
 'use client'
 
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '../service-catalog/pricing-calculator-context'
+import {
+  PRICING_GRID,
+  usePricingCalculatorContext,
+} from '../service-catalog/pricing-calculator-context'
 import { type Plan, PRICING_PLANS, type ServiceSectionCatalog } from '../types'
 import { MultiColumnSubtotal, SingleColumnSubtotal } from './components'
 
@@ -14,8 +17,7 @@ export default function PricingCatalogSubtotal({
   section,
   activePlan,
 }: Readonly<PricingCatalogSubtotalProps>) {
-  const { mobilePlanIndex } = usePricingCalculatorContext()
-  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+  const { currentMobilePlan } = usePricingCalculatorContext()
   const { subtotal } = section
 
   if (!subtotal) return null
@@ -24,15 +26,7 @@ export default function PricingCatalogSubtotal({
   const isSingleColumnSubtotal = plansWithValues.length === 1
 
   return (
-    <div
-      className={cn(
-        'grid items-center',
-        // Desktop: 5 columns (label + 4 plans)
-        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-        // Mobile: 2 columns (sticky label + current plan)
-        'grid-cols-[minmax(0,1fr)_minmax(0,1fr)]',
-      )}
-    >
+    <div className={cn('grid items-center', PRICING_GRID.responsive)}>
       {/* Label column - sticky on mobile */}
       <span
         className={cn(
