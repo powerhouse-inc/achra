@@ -5,6 +5,7 @@ import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
 import { type CatalogStatus, type Plan, PRICING_PLANS } from '../types'
+import { usePricingCalculatorContext } from './pricing-calculator-context'
 
 interface SectionHeaderProps {
   title: string
@@ -29,14 +30,27 @@ export function SectionHeader({
   oneTimeFeeVariant = 'muted',
   activePlan,
 }: Readonly<SectionHeaderProps>) {
+  const { mobilePlanIndex } = usePricingCalculatorContext()
+  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+
   return (
     <div
       className={cn(
-        'bg-accent grid items-center border-b',
-        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
+        'grid items-center',
+        // Desktop: 5 columns (label + 4 plans)
+        'lg:grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
+        // Mobile: 2 columns (sticky label + current plan)
+        'grid-cols-[minmax(0,1fr)_minmax(0,1fr)]',
       )}
     >
-      <div className="flex h-14 items-center gap-2 px-6">
+      {/* Label column - sticky on mobile */}
+      <div
+        className={cn(
+          'border-input bg-accent flex min-h-14 items-center gap-2 border-b px-4 lg:px-6',
+          // Sticky positioning for mobile
+          'sticky left-0 z-10 lg:static',
+        )}
+      >
         {hasToggle ? (
           <div className="flex items-center gap-2">
             <Switch
@@ -47,27 +61,59 @@ export function SectionHeader({
             />
             <label
               htmlFor={`toggle-${title}`}
-              className="text-foreground cursor-pointer text-sm font-semibold"
+              className="text-foreground cursor-pointer text-xs font-semibold lg:text-sm"
             >
               {toggleLabel ?? title}
             </label>
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <Lock className="text-muted-foreground size-4" />
-            <span className="text-foreground text-sm font-semibold">{title}</span>
+            <Lock className="text-muted-foreground size-4 shrink-0" />
+            <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
+              <span>{title}</span>
+              {badge && (
+                <span className="ml-1 inline-block align-middle lg:hidden">
+                  <ServiceCatalogStatus catalogStatus={badge} />
+                </span>
+              )}
+            </div>
           </div>
         )}
 
-        {badge && <ServiceCatalogStatus catalogStatus={badge} />}
+        {badge && (
+          <div className="hidden lg:block">
+            <ServiceCatalogStatus catalogStatus={badge} />
+          </div>
+        )}
       </div>
 
+      {/* Mobile: Show only current plan column */}
+      <div
+        className={cn(
+          'border-input pointer-events-none flex min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
+          activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
+          currentMobilePlan === 'enterprise' && oneTimeFee && 'relative',
+        )}
+      >
+        {currentMobilePlan === 'enterprise' && oneTimeFee && (
+          <span
+            className={cn(
+              'min-w-0 text-xs font-medium whitespace-nowrap',
+              oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
+            )}
+          >
+            {oneTimeFee}
+          </span>
+        )}
+      </div>
+
+      {/* Desktop: Show all plan columns */}
       {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'pointer-events-none flex h-14 min-w-0 items-center justify-center px-6 transition-colors',
-            activePlan === plan && 'bg-primary/30',
+            'border-input pointer-events-none hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
+            activePlan === plan ? 'bg-primary/30' : 'bg-accent',
             plan === 'enterprise' && oneTimeFee && 'relative',
           )}
         >

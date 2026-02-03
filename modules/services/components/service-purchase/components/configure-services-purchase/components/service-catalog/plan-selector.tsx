@@ -22,7 +22,7 @@ export function PlanSelectorItem({
         <RadioGroupItem
           value={value}
           id={inputId}
-          className="[&_svg]:fill-foreground text-foreground"
+          className="border-foreground [&_svg]:fill-foreground text-foreground"
         />
         <label
           htmlFor={inputId}

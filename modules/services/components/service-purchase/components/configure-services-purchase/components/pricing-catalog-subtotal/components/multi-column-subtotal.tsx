@@ -16,8 +16,8 @@ export function MultiColumnSubtotal({ subtotal, activePlan }: Readonly<MultiColu
           <div
             key={plan}
             className={cn(
-              'flex h-14 min-w-0 items-center justify-center px-6',
-              isActive && 'bg-primary/10',
+              'border-input hidden min-h-14 min-w-0 items-center justify-center border-y px-6 lg:flex',
+              isActive && 'bg-primary/30',
             )}
           >
             <span

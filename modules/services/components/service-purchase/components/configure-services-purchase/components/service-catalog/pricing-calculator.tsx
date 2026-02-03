@@ -1,11 +1,12 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { PRICING_DATA } from '../../../../mock/mock-data'
-import { Plan } from '../types'
+import { Plan, PRICING_PLANS } from '../types'
 import { GrandTotalRowCatalog } from './grand-total-row-catalog'
 import HeaderCatalogPlan from './header-catalog-plan'
+import { PricingCalculatorProvider } from './pricing-calculator-context'
 import {
   ServiceCatalogBody,
   ServiceCatalogFooter,
@@ -29,13 +30,25 @@ export function PricingCalculator({
   onSectionToggle,
   readOnly = false,
 }: PricingCalculatorProps = {}) {
+  // Mobile carousel state - track which plan is visible on mobile
+  const [mobilePlanIndex, setMobilePlanIndex] = useState(() => {
+    const index = PRICING_PLANS.indexOf(selectedPlan)
+    return index >= 0 ? index : 1 // Default to Team (index 1)
+  })
+
   const handlePlanChange = useCallback(
     (plan: Plan) => {
       if (readOnly || !onPlanChange) return
       onPlanChange(plan)
+      // Sync mobile carousel to selected plan
+      const newIndex = PRICING_PLANS.indexOf(plan)
+      if (newIndex >= 0) {
+        setMobilePlanIndex(newIndex)
+      }
     },
     [readOnly, onPlanChange],
   )
+
   const toggleSection = useCallback(
     (sectionId: SectionId, enabled: boolean) => {
       if (readOnly || !onSectionToggle) return
@@ -43,6 +56,18 @@ export function PricingCalculator({
     },
     [readOnly, onSectionToggle],
   )
+
+  // Carousel navigation handlers
+  // Carousel navigation handlers
+  const handlePrevPlan = useCallback(() => {
+    const newIndex = mobilePlanIndex > 0 ? mobilePlanIndex - 1 : PRICING_PLANS.length - 1
+    handlePlanChange(PRICING_PLANS[newIndex])
+  }, [handlePlanChange, mobilePlanIndex])
+
+  const handleNextPlan = useCallback(() => {
+    const newIndex = mobilePlanIndex < PRICING_PLANS.length - 1 ? mobilePlanIndex + 1 : 0
+    handlePlanChange(PRICING_PLANS[newIndex])
+  }, [handlePlanChange, mobilePlanIndex])
 
   const visibleSections = useMemo(
     () =>
@@ -52,59 +77,75 @@ export function PricingCalculator({
     [readOnly, enabledSections],
   )
 
+  const contextValue = useMemo(
+    () => ({
+      activePlan: selectedPlan,
+      mobilePlanIndex,
+      onPrevPlan: handlePrevPlan,
+      onNextPlan: handleNextPlan,
+      readOnly,
+    }),
+    [selectedPlan, mobilePlanIndex, handlePrevPlan, handleNextPlan, readOnly],
+  )
+
   return (
-    <Card className="flex w-full flex-col gap-6 border-none! py-0!">
-      <div className="overflow-hidden rounded-xl">
-        {/* Header with Plan Selectors */}
-        <HeaderCatalogPlan
-          selectedPlan={selectedPlan}
-          handlePlanChange={handlePlanChange}
-          readOnly={readOnly}
-        />
-        {/* Service Sections */}
-        <div className="flex flex-col">
-          {visibleSections?.map((section) => (
-            <ServiceCatalogRoot
-              key={section.id}
-              activePlan={selectedPlan}
-              isEnabled={enabledSections?.[section.id as SectionId] ?? false}
-            >
-              <ServiceCatalogHeader
-                title={section.title}
-                badge={section.badge}
-                hasToggle={section.hasToggle}
-                toggleLabel={section.toggleLabel}
-                toggleEnabled={enabledSections?.[section.id as SectionId]}
-                onToggleChange={
-                  section.hasToggle && !readOnly
-                    ? (enabled: boolean) => {
+    <PricingCalculatorProvider value={contextValue}>
+      <Card className="flex w-full flex-col gap-6 border-none! py-0!">
+        <div className="overflow-hidden rounded-xl">
+          {/* Header with Plan Selectors */}
+          <HeaderCatalogPlan
+            selectedPlan={selectedPlan}
+            handlePlanChange={handlePlanChange}
+            readOnly={readOnly}
+            mobilePlanIndex={mobilePlanIndex}
+            onPrevPlan={handlePrevPlan}
+            onNextPlan={handleNextPlan}
+          />
+          {/* Service Sections */}
+          <div className="flex flex-col">
+            {visibleSections?.map((section) => (
+              <ServiceCatalogRoot
+                key={section.id}
+                activePlan={selectedPlan}
+                isEnabled={enabledSections?.[section.id as SectionId] ?? false}
+              >
+                <ServiceCatalogHeader
+                  title={section.title}
+                  badge={section.badge}
+                  hasToggle={section.hasToggle}
+                  toggleLabel={section.toggleLabel}
+                  toggleEnabled={enabledSections?.[section.id as SectionId]}
+                  onToggleChange={
+                    section.hasToggle && !readOnly
+                      ? (enabled: boolean) => {
                         toggleSection(section.id as SectionId, enabled)
                       }
-                    : undefined
-                }
-                oneTimeFee={section.oneTimeFee}
-                oneTimeFeeVariant={section.oneTimeFeeVariant}
-              />
+                      : undefined
+                  }
+                  oneTimeFee={section.oneTimeFee}
+                  oneTimeFeeVariant={section.oneTimeFeeVariant}
+                />
 
-              <ServiceCatalogBody>
-                {section.rows.map((row) => (
-                  <ServiceCatalogRow
-                    key={row.id}
-                    id={row.id}
-                    label={row.label}
-                    sublabel={row.sublabel}
-                    values={row.values}
-                  />
-                ))}
-              </ServiceCatalogBody>
+                <ServiceCatalogBody>
+                  {section.rows.map((row) => (
+                    <ServiceCatalogRow
+                      key={row.id}
+                      id={row.id}
+                      label={row.label}
+                      sublabel={row.sublabel}
+                      values={row.values}
+                    />
+                  ))}
+                </ServiceCatalogBody>
 
-              <ServiceCatalogFooter section={section} />
-            </ServiceCatalogRoot>
-          ))}
+                <ServiceCatalogFooter section={section} />
+              </ServiceCatalogRoot>
+            ))}
+          </div>
+          {/* Grand Total */}
+          <GrandTotalRowCatalog selectedPlan={selectedPlan} enabledSections={enabledSections} />
         </div>
-        {/* Grand Total */}
-        <GrandTotalRowCatalog selectedPlan={selectedPlan} enabledSections={enabledSections} />
-      </div>
-    </Card>
+      </Card>
+    </PricingCalculatorProvider>
   )
 }
