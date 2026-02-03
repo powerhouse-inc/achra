@@ -1,7 +1,8 @@
 'use client'
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment, startTransition, useActionState, useCallback } from 'react'
+import { Fragment, startTransition, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
@@ -64,8 +65,10 @@ export interface ServicePurchaseFormValues {
 
 export default function ServicePurchaseForm() {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
+  const { activeStep, visitedSteps, goToStep, goBack } = useServicePurchaseStep()
 
   const form = useForm<ServicePurchaseFormValues>({
+    mode: 'onChange',
     defaultValues: {
       operatorId: undefined,
       name: '',
@@ -77,7 +80,16 @@ export default function ServicePurchaseForm() {
       enabledSections: INITIAL_ENABLED_SECTIONS,
     },
   })
-  const { activeStep, visitedSteps, goToStep, goBack } = useServicePurchaseStep()
+
+  // Handle server response: navigate on success, reset dirty state on error
+  useEffect(() => {
+    if (state.success) {
+      goToStep('confirmation')
+    } else if (state.error || state.fieldErrors) {
+      // Reset dirty state after failed submission so dirtyFields tracks changes since this submission
+      form.reset(form.getValues(), { keepValues: true, keepErrors: true, keepDirty: false })
+    }
+  }, [state, goToStep, form])
 
   const { control, setValue } = form
 
@@ -147,6 +159,7 @@ export default function ServicePurchaseForm() {
   return (
     <Form {...form}>
       <form
+        noValidate
         onSubmit={(event) => {
           void form.handleSubmit(onSubmit)(event)
         }}
