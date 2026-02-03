@@ -8,15 +8,25 @@ import { sendServiceRequest } from '../lib/send-service-request'
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 import type { ServiceRequestFormState } from '../config/types'
 
+/**
+ * Email validation using standard pattern
+ * Matches client-side validation in summary.tsx
+ * Validates basic email structure: local@domain.tld
+ */
+const emailSchema = z
+  .string()
+  .min(1, { message: 'Email is required.' })
+  .max(254, { message: 'Email is too long.' })
+  .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'Please enter a valid email address.' })
+
 const serviceRequestSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.email({ message: 'Please enter a valid email address.' }),
+  email: emailSchema,
   selectedPlan: z.enum([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]),
   enabledSections: z.string(),
   configuration: z.string(),
 })
 
-// Add the correct data once that type is available
 export async function submitServiceRequestAction(
   _prevState: ServiceRequestFormState,
   formData: FormData,
@@ -30,7 +40,6 @@ export async function submitServiceRequestAction(
       configuration: formData.get('configuration') as string,
     }
 
-    // Validate the form data
     const result = serviceRequestSchema.safeParse(rawData)
 
     if (!result.success) {
@@ -50,7 +59,6 @@ export async function submitServiceRequestAction(
       }
     }
 
-    // Parse the JSON strings back to objects
     const enabledSections = JSON.parse(result.data.enabledSections) as Record<SectionId, boolean>
     const configuration = JSON.parse(result.data.configuration) as {
       legalEntity: string
@@ -66,17 +74,11 @@ export async function submitServiceRequestAction(
       configuration,
     })
 
-    if (sendResult) {
+    if (!sendResult) {
       return {
-        success: true,
-        message:
-          'Your request has been submitted! We will send a PDF summary to your email shortly.',
+        success: false,
+        error: 'Failed to submit your request. Please try again.',
       }
-    }
-
-    return {
-      success: false,
-      error: 'Failed to submit your request. Please try again.',
     }
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -85,5 +87,10 @@ export async function submitServiceRequestAction(
       success: false,
       error: 'An unexpected error occurred. Please try again.',
     }
+  }
+
+  return {
+    success: true,
+    message: 'Request submitted successfully.',
   }
 }
