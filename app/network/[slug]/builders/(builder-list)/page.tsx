@@ -5,7 +5,7 @@ import { BuildersHeader } from '@/modules/builders/components/builders-header/bu
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
 
 interface BuildersPageProps {
@@ -29,7 +29,7 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
   ]
 
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
@@ -42,6 +42,6 @@ export default async function BuildersPage({ params, searchParams }: BuildersPag
           </ErrorBoundaryWithPresets>
         </BuildersFiltersProvider>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

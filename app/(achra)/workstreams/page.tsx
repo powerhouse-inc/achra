@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card/workstream-card-skeleton'
@@ -26,30 +26,28 @@ export default async function WorkstreamsPage({ searchParams }: WorkstreamsPageP
   const searchParamsString = JSON.stringify(await searchParams)
 
   return (
-    <PageBackground>
-      <PageContent>
-        <WorkstreamBanner />
+    <PageContent>
+      <WorkstreamBanner />
 
-        <div className="flex flex-col gap-8">
-          <Suspense fallback={<WorkstreamFiltersSkeleton />}>
-            <WorkstreamFilters />
+      <div className="flex flex-col gap-8">
+        <Suspense fallback={<WorkstreamFiltersSkeleton />}>
+          <WorkstreamFilters />
+        </Suspense>
+
+        <ErrorBoundaryWithPresets>
+          <Suspense
+            fallback={
+              <WorkstreamServerListSkeleton>
+                <WorkstreamCardSkeleton />
+                <WorkstreamCardSkeleton />
+              </WorkstreamServerListSkeleton>
+            }
+            key={searchParamsString}
+          >
+            <WorkstreamServerList searchParams={searchParams} />
           </Suspense>
-
-          <ErrorBoundaryWithPresets>
-            <Suspense
-              fallback={
-                <WorkstreamServerListSkeleton>
-                  <WorkstreamCardSkeleton />
-                  <WorkstreamCardSkeleton />
-                </WorkstreamServerListSkeleton>
-              }
-              key={searchParamsString}
-            >
-              <WorkstreamServerList searchParams={searchParams} />
-            </Suspense>
-          </ErrorBoundaryWithPresets>
-        </div>
-      </PageContent>
-    </PageBackground>
+        </ErrorBoundaryWithPresets>
+      </div>
+    </PageContent>
   )
 }

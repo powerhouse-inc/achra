@@ -6,7 +6,7 @@ import { RoadmapList } from '@/modules/roadmap/components/roadmaps-list/roadmap-
 import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list/roadmaps-list-skeleton'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
@@ -37,7 +37,7 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
   ]
 
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
@@ -49,6 +49,6 @@ export default async function RoadmapPage({ params, searchParams }: RoadmapPageP
           </Suspense>
         </ErrorBoundaryWithPresets>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

@@ -2,11 +2,11 @@ import { BuildersSkeleton } from '@/modules/builders/components/builders/builder
 import BuildersFiltersSkeleton from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
 import { BuildersHeaderSkeleton } from '@/modules/builders/components/builders-header/builders-header-skeleton'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function BuildersLoading() {
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <BreadcrumbSkeleton segments={3} />
       </PageBreadcrumbContainer>
@@ -15,6 +15,6 @@ export default function BuildersLoading() {
         <BuildersFiltersSkeleton />
         <BuildersSkeleton />
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

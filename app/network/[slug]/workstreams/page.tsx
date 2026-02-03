@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
+import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'
 import WorkstreamBanner from '@/modules/workstream/components/banner/workstream-banner'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card/workstream-card-skeleton'
@@ -33,32 +33,30 @@ export default async function NetworkWorkstreamsPage({
   const networkProfile = await getNetworkBySlug(slug)
 
   return (
-    <PageBackground>
-      <PageContent>
-        <Suspense>
-          <WorkstreamBanner backgroundImage={networkProfile?.logoBig ?? undefined} />
+    <PageContent>
+      <Suspense>
+        <WorkstreamBanner backgroundImage={networkProfile?.logoBig ?? undefined} />
+      </Suspense>
+
+      <div className="flex flex-col gap-8">
+        <Suspense fallback={<WorkstreamFiltersSkeleton showNetworkFilter={false} />}>
+          <WorkstreamFilters showNetworkFilter={false} />
         </Suspense>
 
-        <div className="flex flex-col gap-8">
-          <Suspense fallback={<WorkstreamFiltersSkeleton showNetworkFilter={false} />}>
-            <WorkstreamFilters showNetworkFilter={false} />
+        <ErrorBoundaryWithPresets>
+          <Suspense
+            fallback={
+              <WorkstreamServerListSkeleton>
+                <WorkstreamCardSkeleton />
+                <WorkstreamCardSkeleton />
+              </WorkstreamServerListSkeleton>
+            }
+            key={searchParamsString}
+          >
+            <WorkstreamServerList params={params} searchParams={searchParams} />
           </Suspense>
-
-          <ErrorBoundaryWithPresets>
-            <Suspense
-              fallback={
-                <WorkstreamServerListSkeleton>
-                  <WorkstreamCardSkeleton />
-                  <WorkstreamCardSkeleton />
-                </WorkstreamServerListSkeleton>
-              }
-              key={searchParamsString}
-            >
-              <WorkstreamServerList params={params} searchParams={searchParams} />
-            </Suspense>
-          </ErrorBoundaryWithPresets>
-        </div>
-      </PageContent>
-    </PageBackground>
+        </ErrorBoundaryWithPresets>
+      </div>
+    </PageContent>
   )
 }
