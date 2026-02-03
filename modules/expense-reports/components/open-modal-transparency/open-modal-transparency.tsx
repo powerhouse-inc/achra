@@ -1,3 +1,5 @@
+'use client'
+
 import { CircleArrowOutUpRightIcon } from 'lucide-react'
 import { cn } from '@/modules/shared/lib/utils'
 import { useModalCategories } from '../../providers/categories-provider'

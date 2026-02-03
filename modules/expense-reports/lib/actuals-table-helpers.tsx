@@ -1,381 +1,163 @@
-import groupBy from 'lodash/groupBy'
-import { CategoryTableHeader } from '../components/category-table-header'
-import {
-  getCommentsFromCategory,
-  getGroupActual,
-  getGroupDifference,
-  getGroupForecast,
-  getGroupMonthlyBudget,
-  getGroupPayment,
-  getWalletPayment,
-  hasGroupExpenses,
-  hasWalletGroups,
-  reduceLineItemsToTotals,
-} from './budget-statement-utils'
 import type {
-  InnerTableColumn,
-  InnerTableRow,
-  RowType,
-} from '../components/advanced-inner-table/types'
-import type { BudgetStatementLineItem, BudgetStatementWallet } from '../types'
+  ExpenseReportLineItem,
+  ExpenseReportWallet,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { BREAKDOWN_COLUMNS } from '../components/expense-reports-actuals/breakdown-actuals-section/breakdown-columns'
+import { getCurrencyValue } from './budget-statement-utils'
+import { type GroupTree, HEADCOUNT_GROUP_LABEL, NON_HEADCOUNT_GROUP_LABEL } from './group-tree'
+import type { InnerTableRow } from '../components/advanced-inner-table/types'
 
-export const filterRowsByNonZeroValue = (rows: InnerTableRow[]): InnerTableRow[] =>
-  rows.filter((row) =>
-    row.items.some((item) => {
-      if (typeof item.value === 'number') {
-        return item.value !== 0
-      } else {
-        return false
-      }
-    }),
-  )
-
-export const getActualsBreakdownItems = (
-  items: BudgetStatementLineItem[],
-  month: string,
-  breakdownColumns: InnerTableColumn[],
-  type?: RowType,
-) => {
-  const result: InnerTableRow[] = []
-  const grouped = groupBy(items, (item) => item.group)
-
-  for (const groupedKey in grouped) {
-    if (
-      getGroupForecast(grouped[groupedKey], month) === 0 &&
-      getGroupActual(grouped[groupedKey], month) === 0 &&
-      getGroupMonthlyBudget(grouped[groupedKey], month) === 0 &&
-      getGroupDifference(grouped[groupedKey], month) === 0 &&
-      getGroupPayment(grouped[groupedKey], month) === 0
-    ) {
-      continue
-    }
-
-    const groupedCategory = groupBy(grouped[groupedKey], (item) => item.budgetCategory)
-
-    for (const groupedCatKey in groupedCategory) {
-      if (
-        getGroupForecast(groupedCategory[groupedCatKey], month) === 0 &&
-        getGroupActual(groupedCategory[groupedCatKey], month) === 0 &&
-        getGroupMonthlyBudget(grouped[groupedKey], month) === 0 &&
-        getGroupDifference(grouped[groupedKey], month) === 0 &&
-        getGroupPayment(grouped[groupedKey], month) === 0
-      ) {
-        continue
-      }
-
-      result.push({
-        showHeader: !(type === 'subTotal' || type === 'total'),
-        subHeader: groupedCategory[groupedCatKey][0].headcountExpense
-          ? 'Headcount Expenses'
-          : 'Non-Headcount Expenses',
-        category: ['', 'null'].includes(groupedCategory[groupedCatKey][0].group ?? '')
-          ? 'General'
-          : groupedCategory[groupedCatKey][0].group,
-        type: type ?? 'normal',
-
-        ...(type === 'subTotal'
-          ? {
-              borderTop: true,
-              borderBottom: true,
-            }
-          : {}),
-        items: [
-          {
-            column: breakdownColumns[0],
-            value: groupedCategory[groupedCatKey][0].budgetCategory,
-          },
-          {
-            column: breakdownColumns[1],
-            value: getGroupMonthlyBudget(groupedCategory[groupedCatKey], month),
-          },
-          {
-            column: breakdownColumns[2],
-            value: getGroupForecast(groupedCategory[groupedCatKey], month),
-          },
-          {
-            column: breakdownColumns[3],
-            value: getGroupActual(groupedCategory[groupedCatKey], month),
-          },
-          {
-            column: breakdownColumns[4],
-            value: getGroupDifference(groupedCategory[groupedCatKey], month),
-          },
-          {
-            column: breakdownColumns[5],
-            value: getCommentsFromCategory(groupedCategory[groupedCatKey], month),
-          },
-          {
-            column: breakdownColumns[6],
-            value: getGroupPayment(groupedCategory[groupedCatKey], month),
-          },
-        ],
-      })
-    }
-  }
-
-  return result
+const COLUMNS_MAP = {
+  label: BREAKDOWN_COLUMNS[0],
+  budget: BREAKDOWN_COLUMNS[1],
+  forecast: BREAKDOWN_COLUMNS[2],
+  actuals: BREAKDOWN_COLUMNS[3],
+  difference: BREAKDOWN_COLUMNS[4],
+  comments: BREAKDOWN_COLUMNS[5],
+  payments: BREAKDOWN_COLUMNS[6],
 }
 
-export const getActualsBreakdownColumns = (wallet: BudgetStatementWallet, isTablet: boolean) => {
-  const hasGroups = hasWalletGroups(wallet)
+/** Indices of numeric columns (budget, forecast, actuals, difference, payments). */
+const NUMERIC_COLUMN_INDICES = [1, 2, 3, 4, 6] as const
+
+export interface BreakdownTotals {
+  budget: number
+  forecast: number
+  actuals: number
+  payments: number
+}
+
+function buildRowCells(
+  item: ExpenseReportLineItem | BreakdownTotals,
+): InnerTableRow['items'] | null {
+  const rowItems: InnerTableRow['items'] = [
+    {
+      column: COLUMNS_MAP.label,
+      value: 'label' in item ? item.label : 'Total',
+    },
+    {
+      column: COLUMNS_MAP.budget,
+      value: getCurrencyValue(item.budget),
+    },
+    {
+      column: COLUMNS_MAP.forecast,
+      value: getCurrencyValue(item.forecast),
+    },
+    {
+      column: COLUMNS_MAP.actuals,
+      value: getCurrencyValue(item.actuals),
+    },
+    {
+      column: COLUMNS_MAP.difference,
+      value: getCurrencyValue(item.forecast) - getCurrencyValue(item.actuals),
+    },
+    {
+      column: COLUMNS_MAP.comments,
+      value: 'comments' in item ? item.comments : '',
+    },
+    {
+      column: COLUMNS_MAP.payments,
+      value: getCurrencyValue(item.payments),
+    },
+  ]
+
+  // Return null when all numeric columns are 0 (except the label and non-numeric columns)
+  const allNumericZero = NUMERIC_COLUMN_INDICES.every((i) => (rowItems[i].value as number) === 0)
+  if (allNumericZero) {
+    return null
+  }
+
+  return rowItems
+}
+
+interface SectionConfig {
+  filter: (item: ExpenseReportLineItem) => boolean
+  sectionTitle: string
+  subHeader: string
+}
+
+function buildSectionRows(
+  wallet: ExpenseReportWallet,
+  sectionConfig: SectionConfig,
+): InnerTableRow[] {
+  const categoryRows: InnerTableRow[] = []
+
+  wallet.lineItems.filter(sectionConfig.filter).forEach((item) => {
+    const rowCells = buildRowCells(item)
+    if (rowCells) {
+      categoryRows.push({
+        type: 'category',
+        showHeader: true,
+        subHeader: sectionConfig.subHeader,
+        category: 'General',
+        items: rowCells,
+      })
+    }
+  })
+
+  if (categoryRows.length === 0) {
+    return []
+  }
 
   return [
     {
-      header: <CategoryTableHeader />,
-      align: 'left',
-      type: 'text',
-      isCardHeader: true,
-      width: hasGroups ? '220px' : '240px',
-    },
-    {
-      header: isTablet ? 'Mthly B.' : 'Mthly Budget',
-      align: 'right',
-      type: 'number',
-      hasBorderBottomOnCard: true,
-    },
-    {
-      header: 'Forecast',
-      align: 'right',
-      type: 'incomeNumber',
-      hasBorderBottomOnCard: true,
-    },
-    {
-      header: 'Actuals',
-      align: 'right',
-      type: 'incomeNumber',
-      hasBorderBottomOnCard: true,
-    },
-    {
-      header: isTablet ? 'Diff.' : 'Difference',
-      align: 'right',
-      type: 'number',
-      hasBorderBottomOnCard: true,
-    },
-    {
-      header: 'Comments',
-      align: 'left',
-      type: 'text',
-      width: '300px',
-      hasBorderBottomOnCard: true,
-    },
-    {
-      header: 'Payments',
-      align: 'right',
-      type: 'number',
-    },
-  ] as InnerTableColumn[]
-}
-
-export const getActualsBreakdownItemsForWallet = (
-  wallet: BudgetStatementWallet,
-  breakdownColumns: InnerTableColumn[],
-  month: string,
-) => {
-  const hasGroups = hasWalletGroups(wallet)
-  const grouped = groupBy(wallet.budgetStatementLineItem, (item) =>
-    item.group?.trim() ? item.group : '',
-  )
-
-  const result: InnerTableRow[] = []
-
-  for (const groupedKey in grouped) {
-    const hasHeadcount = hasGroupExpenses(wallet, groupedKey, month, true)
-    const hasNonHeadcount = hasGroupExpenses(wallet, groupedKey, month, false)
-    if (!hasHeadcount && !hasNonHeadcount) {
-      continue
-    }
-    let groupItemsCount = 0
-
-    if (hasGroups) {
-      // it is a project group
-      result.push({
-        type: 'groupTitle',
-        categoryGroup: groupedKey === '' ? 'General' : groupedKey,
-        borderTop: true,
-        items: [
-          {
-            column: breakdownColumns[0],
-            value: groupedKey === '' ? 'General' : groupedKey,
-          },
-        ],
-      })
-    }
-
-    if (hasHeadcount) {
-      result.push({
-        items: [
-          {
-            column: breakdownColumns[0],
-            value: 'Headcount Expenses',
-          },
-        ],
-        type: 'section',
-      })
-
-      const items = getActualsBreakdownItems(
-        wallet.budgetStatementLineItem.filter(
-          (item) =>
-            item.headcountExpense && (item.group === groupedKey || (!item.group && !groupedKey)),
-        ),
-        month,
-        breakdownColumns,
-        'category',
-      )
-      groupItemsCount += items.length
-      const newItemsNoZroValues = filterRowsByNonZeroValue(items)
-      result.push(...newItemsNoZroValues)
-      if (!hasGroups && newItemsNoZroValues.length > 1) {
-        // subtotal when it is a headcount without a group
-        result.push(
-          ...getActualsBreakdownItems(
-            [
-              {
-                ...reduceLineItemsToTotals(
-                  wallet.budgetStatementLineItem.filter(
-                    (item) =>
-                      item.month === month &&
-                      ['', 'null', null].includes(item.group?.trim() ?? '') &&
-                      item.headcountExpense,
-                  ),
-                ),
-                budgetCategory: 'Subtotal',
-              },
-            ],
-            month,
-            breakdownColumns,
-            'subTotal',
-          ),
-        )
-      }
-    }
-
-    if (hasNonHeadcount) {
-      result.push({
-        items: [
-          {
-            column: breakdownColumns[0],
-            value: 'Non-Headcount Expenses',
-          },
-        ],
-        type: 'section',
-      })
-
-      const items = getActualsBreakdownItems(
-        wallet.budgetStatementLineItem.filter(
-          (item) =>
-            !item.headcountExpense && (item.group === groupedKey || (!item.group && !groupedKey)),
-        ),
-        month,
-        breakdownColumns,
-        'category',
-      )
-      groupItemsCount += items.length
-      const newItemsNoZroValues = filterRowsByNonZeroValue(items)
-      result.push(...newItemsNoZroValues)
-
-      if (!hasGroups && newItemsNoZroValues.length > 1) {
-        // subtotal when it is a non headcount without a group
-        result.push(
-          ...getActualsBreakdownItems(
-            [
-              {
-                ...reduceLineItemsToTotals(
-                  wallet.budgetStatementLineItem.filter(
-                    (item) =>
-                      item.month === month &&
-                      ['', undefined, null].includes(item.group?.trim() ?? '') &&
-                      !item.headcountExpense,
-                  ),
-                ),
-                budgetCategory: 'Subtotal',
-              },
-            ],
-            month,
-            breakdownColumns,
-            'subTotal',
-          ),
-        )
-      }
-    }
-
-    if ((hasHeadcount || hasNonHeadcount) && hasGroups && groupItemsCount > 1) {
-      // subtotal of the whole group (headcount and non headcount)
-      result.push(
-        ...getActualsBreakdownItems(
-          [
-            {
-              ...reduceLineItemsToTotals(
-                wallet.budgetStatementLineItem.filter(
-                  (item) => item.month === month && item.group === groupedKey,
-                ),
-              ),
-              budgetCategory: 'Subtotal',
-            },
-          ],
-          month,
-          breakdownColumns,
-          'subTotal',
-        ),
-      )
-    }
-  }
-
-  if (result.length > 0) {
-    result.push({
-      type: 'total',
-      showHeader: false,
+      type: 'section',
       items: [
         {
-          column: breakdownColumns[0],
-          value: 'Total',
-        },
-        {
-          column: breakdownColumns[1],
-          // value: getWalletMonthlyBudget(wallet, month),
-          value: 0,
-        },
-        {
-          column: breakdownColumns[2],
-          // value: getWalletForecast(wallet, month),
-          value: 0,
-        },
-        {
-          column: breakdownColumns[3],
-          // value: getWalletActual(wallet, month),
-          value: 0,
-        },
-        {
-          column: breakdownColumns[4],
-          // value: getWalletDifference(wallet, month),
-          value: 0,
-        },
-        {
-          column: breakdownColumns[5],
-          value: '',
-        },
-        {
-          column: breakdownColumns[6],
-          value: getWalletPayment(wallet, month),
+          column: BREAKDOWN_COLUMNS[0],
+          value: sectionConfig.sectionTitle,
         },
       ],
+    } satisfies InnerTableRow,
+    ...categoryRows,
+  ]
+}
+
+/**
+ * Builds table rows for the actuals breakdown UI from a wallet and group tree.
+ * Returns section rows (headcount / non-headcount) plus a total row when there is data.
+ */
+export function getActualsBreakdownItemsForTable(
+  wallet: ExpenseReportWallet,
+  groupTree: GroupTree,
+): InnerTableRow[] {
+  const rows: InnerTableRow[] = []
+
+  const headcountRows = buildSectionRows(wallet, {
+    filter: (item) => groupTree.isGroupIdHeadcountExpense(item.groupId),
+    sectionTitle: HEADCOUNT_GROUP_LABEL,
+    subHeader: HEADCOUNT_GROUP_LABEL,
+  })
+  if (headcountRows.length > 0) {
+    rows.push(...headcountRows)
+  }
+
+  const nonHeadcountRows = buildSectionRows(wallet, {
+    filter: (item) => groupTree.isGroupIdNonHeadcountExpense(item.groupId),
+    sectionTitle: NON_HEADCOUNT_GROUP_LABEL,
+    subHeader: NON_HEADCOUNT_GROUP_LABEL,
+  })
+  if (nonHeadcountRows.length > 0) {
+    rows.push(...nonHeadcountRows)
+  }
+
+  if (rows.length > 0) {
+    const { budget, forecast, actuals, payments } = wallet.lineItems.reduce(
+      (acc, item) => ({
+        budget: acc.budget + getCurrencyValue(item.budget),
+        forecast: acc.forecast + getCurrencyValue(item.forecast),
+        actuals: acc.actuals + getCurrencyValue(item.actuals),
+        payments: acc.payments + getCurrencyValue(item.payments),
+      }),
+      { budget: 0, forecast: 0, actuals: 0, payments: 0 } satisfies BreakdownTotals,
+    )
+
+    rows.push({
+      type: 'total',
+      showHeader: false,
+      items: buildRowCells({ budget, forecast, actuals, payments }) ?? [],
     })
   }
 
-  return result
+  return rows
 }
-
-export const replacePaymentTopup = (breakdownItems: InnerTableRow[]): InnerTableRow[] =>
-  breakdownItems.map((innerRow) => ({
-    ...innerRow,
-    category: innerRow.category,
-    items: innerRow.items.map((item) => {
-      if (item.value === 'payment topup') {
-        return {
-          ...item,
-          value: <div style={{ fontStyle: 'italic' }}>Uncategorised</div>,
-        }
-      } else {
-        return item
-      }
-    }),
-  }))

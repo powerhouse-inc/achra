@@ -5516,8 +5516,10 @@ export type Query = {
   jobStatus?: Maybe<JobInfo>;
   pollSyncEnvelopes: Array<SyncEnvelope>;
   processorWorkstreams: Array<ProcessorWorkstream>;
+  resourceTemplates: Array<RsResourceTemplate>;
   rfpByWorkstream: Array<WorkstreamRfp>;
   scopeOfWorkByNetworkOrStatus: Array<Sow_ScopeOfWorkState>;
+  serviceOfferings: Array<RsServiceOffering>;
   workstream: Array<FullQueryWorkstream>;
   workstreams: Array<FullQueryWorkstream>;
 };
@@ -5605,6 +5607,12 @@ export type QueryPollSyncEnvelopesArgs = {
 
 
 /** Subgraph definition */
+export type QueryResourceTemplatesArgs = {
+  filter?: InputMaybe<RsResourceTemplatesFilter>;
+};
+
+
+/** Subgraph definition */
 export type QueryRfpByWorkstreamArgs = {
   filter: WorkstreamFilter;
 };
@@ -5613,6 +5621,12 @@ export type QueryRfpByWorkstreamArgs = {
 /** Subgraph definition */
 export type QueryScopeOfWorkByNetworkOrStatusArgs = {
   filter: ScopeOfWorkByNetworkOrStatusFilter;
+};
+
+
+/** Subgraph definition */
+export type QueryServiceOfferingsArgs = {
+  filter?: InputMaybe<RsServiceOfferingsFilter>;
 };
 
 
@@ -5652,6 +5666,236 @@ export enum RfpStatus {
   OpenForProposals = 'OPEN_FOR_PROPOSALS',
   RequestForCommments = 'REQUEST_FOR_COMMMENTS'
 }
+
+export enum RsBillingCycle {
+  Annual = 'ANNUAL',
+  Monthly = 'MONTHLY',
+  OneTime = 'ONE_TIME',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL'
+}
+
+export type RsContentSection = {
+  __typename?: 'RSContentSection';
+  content: Scalars['String']['output'];
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type RsFacetTarget = {
+  __typename?: 'RSFacetTarget';
+  categoryKey: Scalars['String']['output'];
+  categoryLabel: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  selectedOptions: Array<Scalars['String']['output']>;
+};
+
+export type RsFaqField = {
+  __typename?: 'RSFaqField';
+  answer?: Maybe<Scalars['String']['output']>;
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+export type RsOfferingService = {
+  __typename?: 'RSOfferingService';
+  description?: Maybe<Scalars['String']['output']>;
+  displayOrder?: Maybe<Scalars['Int']['output']>;
+  facetBindings: Array<RsResourceFacetBinding>;
+  id: Scalars['OID']['output'];
+  isPremiumExclusive: Scalars['Boolean']['output'];
+  isSetupFormation: Scalars['Boolean']['output'];
+  optionGroupId?: Maybe<Scalars['OID']['output']>;
+  parentServiceId?: Maybe<Scalars['OID']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type RsOptionGroup = {
+  __typename?: 'RSOptionGroup';
+  defaultSelected: Scalars['Boolean']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  isAddOn: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+};
+
+export enum RsResetPeriod {
+  Annual = 'ANNUAL',
+  Daily = 'DAILY',
+  Hourly = 'HOURLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
+  Weekly = 'WEEKLY'
+}
+
+export type RsResourceFacetBinding = {
+  __typename?: 'RSResourceFacetBinding';
+  facetName: Scalars['String']['output'];
+  facetType: Scalars['PHID']['output'];
+  id: Scalars['OID']['output'];
+  supportedOptions: Array<Scalars['OID']['output']>;
+};
+
+export type RsResourceService = {
+  __typename?: 'RSResourceService';
+  description?: Maybe<Scalars['String']['output']>;
+  displayOrder?: Maybe<Scalars['Int']['output']>;
+  facetBindings: Array<RsResourceFacetBinding>;
+  id: Scalars['OID']['output'];
+  isSetupFormation: Scalars['Boolean']['output'];
+  optionGroupId?: Maybe<Scalars['OID']['output']>;
+  parentServiceId?: Maybe<Scalars['OID']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type RsResourceTemplate = {
+  __typename?: 'RSResourceTemplate';
+  contentSections: Array<RsContentSection>;
+  description?: Maybe<Scalars['String']['output']>;
+  facetTargets: Array<RsFacetTarget>;
+  faqFields: Array<RsFaqField>;
+  id: Scalars['PHID']['output'];
+  infoLink?: Maybe<Scalars['URL']['output']>;
+  lastModified: Scalars['DateTime']['output'];
+  operatorId: Scalars['PHID']['output'];
+  optionGroups: Array<RsOptionGroup>;
+  recurringServices: Array<Scalars['String']['output']>;
+  services: Array<RsResourceService>;
+  setupServices: Array<Scalars['String']['output']>;
+  status: RsTemplateStatus;
+  summary: Scalars['String']['output'];
+  targetAudiences: Array<RsTargetAudience>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type RsResourceTemplatesFilter = {
+  id?: InputMaybe<Scalars['PHID']['input']>;
+  operatorId?: InputMaybe<Scalars['PHID']['input']>;
+  status?: InputMaybe<Array<RsTemplateStatus>>;
+};
+
+export enum RsServiceLevel {
+  Custom = 'CUSTOM',
+  Included = 'INCLUDED',
+  NotApplicable = 'NOT_APPLICABLE',
+  NotIncluded = 'NOT_INCLUDED',
+  Optional = 'OPTIONAL',
+  Variable = 'VARIABLE'
+}
+
+export type RsServiceLevelBinding = {
+  __typename?: 'RSServiceLevelBinding';
+  annexes?: Maybe<Scalars['String']['output']>;
+  customValue?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  level: RsServiceLevel;
+  optionGroupId?: Maybe<Scalars['OID']['output']>;
+  serviceId: Scalars['OID']['output'];
+  setupFee?: Maybe<Scalars['Amount_Money']['output']>;
+  variations?: Maybe<Scalars['String']['output']>;
+};
+
+export type RsServiceOffering = {
+  __typename?: 'RSServiceOffering';
+  description?: Maybe<Scalars['String']['output']>;
+  facetTargets: Array<RsFacetTarget>;
+  id: Scalars['PHID']['output'];
+  infoLink?: Maybe<Scalars['URL']['output']>;
+  lastModified: Scalars['DateTime']['output'];
+  operatorId: Scalars['PHID']['output'];
+  optionGroups: Array<RsOptionGroup>;
+  recurringServices: Array<Scalars['String']['output']>;
+  resourceTemplateId?: Maybe<Scalars['PHID']['output']>;
+  services: Array<RsOfferingService>;
+  setupServices: Array<Scalars['String']['output']>;
+  status: RsServiceStatus;
+  summary: Scalars['String']['output'];
+  targetAudiences: Array<RsTargetAudience>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+  tiers: Array<RsServiceSubscriptionTier>;
+  title: Scalars['String']['output'];
+};
+
+export type RsServiceOfferingsFilter = {
+  id?: InputMaybe<Scalars['PHID']['input']>;
+  operatorId?: InputMaybe<Scalars['PHID']['input']>;
+  resourceTemplateId?: InputMaybe<Scalars['PHID']['input']>;
+  status?: InputMaybe<Array<RsServiceStatus>>;
+};
+
+export type RsServicePricing = {
+  __typename?: 'RSServicePricing';
+  amount?: Maybe<Scalars['Amount_Money']['output']>;
+  billingCycle: RsBillingCycle;
+  currency: Scalars['Currency']['output'];
+  perSeatAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  perSeatBillingCycle?: Maybe<RsBillingCycle>;
+  perSeatCurrency?: Maybe<Scalars['Currency']['output']>;
+  perSeatLabel?: Maybe<Scalars['String']['output']>;
+  setupFee?: Maybe<Scalars['Amount_Money']['output']>;
+};
+
+export enum RsServiceStatus {
+  Active = 'ACTIVE',
+  ComingSoon = 'COMING_SOON',
+  Deprecated = 'DEPRECATED',
+  Draft = 'DRAFT'
+}
+
+export type RsServiceSubscriptionTier = {
+  __typename?: 'RSServiceSubscriptionTier';
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  isCustomPricing: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  pricing: RsServicePricing;
+  pricingOptions: Array<RsTierPricingOption>;
+  serviceLevels: Array<RsServiceLevelBinding>;
+  usageLimits: Array<RsServiceUsageLimit>;
+};
+
+export type RsServiceUsageLimit = {
+  __typename?: 'RSServiceUsageLimit';
+  id: Scalars['OID']['output'];
+  limit?: Maybe<Scalars['Int']['output']>;
+  metric: Scalars['String']['output'];
+  notes?: Maybe<Scalars['String']['output']>;
+  resetPeriod?: Maybe<RsResetPeriod>;
+  serviceId: Scalars['OID']['output'];
+  unitName?: Maybe<Scalars['String']['output']>;
+  unitPrice?: Maybe<Scalars['Amount_Money']['output']>;
+  unitPriceBillingCycle?: Maybe<RsBillingCycle>;
+  unitPriceCurrency?: Maybe<Scalars['Currency']['output']>;
+};
+
+export type RsTargetAudience = {
+  __typename?: 'RSTargetAudience';
+  color?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  label: Scalars['String']['output'];
+};
+
+export enum RsTemplateStatus {
+  Active = 'ACTIVE',
+  ComingSoon = 'COMING_SOON',
+  Deprecated = 'DEPRECATED',
+  Draft = 'DRAFT'
+}
+
+export type RsTierPricingOption = {
+  __typename?: 'RSTierPricingOption';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: RsBillingCycle;
+  currency: Scalars['Currency']['output'];
+  id: Scalars['OID']['output'];
+  isDefault: Scalars['Boolean']['output'];
+  perSeatAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  setupFee?: Maybe<Scalars['Amount_Money']['output']>;
+};
 
 export type ReactorOperation = {
   __typename?: 'ReactorOperation';
@@ -8290,7 +8534,7 @@ export type BudgetStatementsDetailsQueryVariables = Exact<{
 }>;
 
 
-export type BudgetStatementsDetailsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }> } }> };
+export type BudgetStatementsDetailsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }>, groups: Array<{ __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string }> } }> };
 
 export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -8555,6 +8799,11 @@ export const BudgetStatementsDetailsDocument = `
           forecast
           payments
         }
+      }
+      groups {
+        id
+        label
+        parentId
       }
     }
   }

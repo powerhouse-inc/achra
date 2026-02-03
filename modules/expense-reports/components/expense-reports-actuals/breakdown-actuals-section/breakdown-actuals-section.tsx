@@ -1,46 +1,38 @@
+import { format } from 'date-fns'
+import { toKebabCase } from '@/modules/expense-reports/lib/strings'
 import { Tabs, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { AdvancedInnerTable } from '../../advanced-inner-table/advanced-inner-table'
-import type { InnerTableColumn, InnerTableRow } from '../../advanced-inner-table/types'
-import type { DateTime } from 'luxon'
+import { BREAKDOWN_COLUMNS } from './breakdown-columns'
+import type { InnerTableRow } from '../../advanced-inner-table/types'
 
 interface BreakdownActualsSectionProps {
-  currentMonth: DateTime
+  currentMonth: Date
   mainTableItems: InnerTableRow[]
-  breakdownTitleRef: React.RefObject<HTMLDivElement>
   breakdownTabs: string[]
-  headerIds: string[]
-  breakdownColumnsForActiveTab: InnerTableColumn[]
   breakdownItemsForActiveTab: InnerTableRow[]
   actualAccountTab: string | null
-  onActualAccountTabChange: (value: string | null) => void
 }
 
 function BreakdownActualsSection({
   currentMonth,
   mainTableItems,
-  breakdownTitleRef,
   breakdownTabs,
-  headerIds,
-  breakdownColumnsForActiveTab,
   breakdownItemsForActiveTab,
   actualAccountTab,
-  onActualAccountTabChange,
 }: BreakdownActualsSectionProps) {
+  const headerIds = breakdownTabs.map((header: string) => toKebabCase(header))
+
   return (
     <div className="flex flex-col gap-4">
       {mainTableItems.length > 0 && (
-        <h2 className="text-lg/[120%] font-bold" ref={breakdownTitleRef}>
-          {currentMonth.toFormat('MMM yyyy')} Breakdown
+        <h2 className="text-lg/[120%] font-bold">
+          Actuals - {format(currentMonth, 'MMM yyyy')} Breakdown
         </h2>
       )}
 
       {mainTableItems.length > 0 && (
         <div className="flex flex-col gap-6">
-          <Tabs
-            value={actualAccountTab ?? headerIds[0]}
-            onValueChange={onActualAccountTabChange}
-            className="w-[400px]"
-          >
+          <Tabs value={actualAccountTab ?? headerIds[0]} className="w-[400px]">
             <TabsList aria-label="Breakdown categories">
               {breakdownTabs.map((header, index) => (
                 <TabsTrigger key={headerIds[index]} value={headerIds[index]}>
@@ -52,7 +44,7 @@ function BreakdownActualsSection({
 
           <div>
             <AdvancedInnerTable
-              columns={breakdownColumnsForActiveTab}
+              columns={BREAKDOWN_COLUMNS}
               items={breakdownItemsForActiveTab}
               longCode="longCode"
               cardSpacingSize="small"
