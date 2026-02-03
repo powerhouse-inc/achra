@@ -6,6 +6,7 @@ import { Links } from '@/modules/builders/components/builders/components/links/l
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
+import ff from '@/modules/shared/lib/feature-flags'
 import { BuilderProfileHeaderDescription } from './builder-profile-header-description'
 
 interface BuilderProfileHeaderProps {
@@ -28,7 +29,7 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
 
   return (
     <div className="border-input mt-16 w-full border-b">
-      <div className="container flex flex-col gap-2 pt-3 pb-2 xl:gap-4">
+      <div className="container flex flex-col gap-2 pt-3 pb-2">
         <div className="relative flex w-full gap-2 lg:items-center lg:gap-4">
           <Avatar className="size-12 sm:size-10">
             <AvatarImage src={builder.icon} alt={builder.name ?? ''} />
@@ -47,9 +48,11 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
             {/* builder status */}
             <div className="flex flex-col gap-1 sm:flex-row">
               <BuildersStatusChip status={builder.status} />
-              <Button variant="ghost" className="max-w-fit px-2 sm:h-6">
-                Since {formattedDate} <ExternalLinkIcon />
-              </Button>
+              {ff.GOVERNANCE_LINK_ENABLED && (
+                <Button variant="ghost" className="max-w-fit px-2 sm:h-6">
+                  Since {formattedDate} <ExternalLinkIcon />
+                </Button>
+              )}
             </div>
           </div>
           <div className="absolute right-0 bottom-0 sm:top-0">
