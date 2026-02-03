@@ -28,7 +28,7 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
 
   return (
     <div className="border-input mt-16 w-full border-b">
-      <div className="container flex flex-col gap-2 pt-3 pb-2 xl:gap-4">
+      <div className="container flex flex-col gap-2 pt-3 pb-2">
         <div className="relative flex w-full gap-2 lg:items-center lg:gap-4">
           <Avatar className="size-12 sm:size-10">
             <AvatarImage src={builder.icon} alt={builder.name ?? ''} />

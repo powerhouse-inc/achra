@@ -16,7 +16,7 @@ function BuilderProfileHeaderDescription({ description }: BuilderProfileHeaderDe
   }
 
   return (
-    <div className="text-foreground/50 text-xs/4.5 sm:text-sm/5.5 md:pl-16 lg:pl-18 lg:text-base/6">
+    <div className="text-foreground/50 text-xs/4.5 sm:text-sm/5.5 md:pl-12 lg:pl-14 lg:text-base/6">
       {description}
     </div>
   )

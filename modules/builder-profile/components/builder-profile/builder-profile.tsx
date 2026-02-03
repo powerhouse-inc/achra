@@ -7,6 +7,7 @@ import { Markdown } from '@/modules/shared/components/markdown'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import ff from '@/modules/shared/lib/feature-flags'
 import { getBuilderProfile } from '../../services/builder-profile'
+import { SkillsAccordion } from './components/skills-accordion/skills-accordion'
 interface BuilderProfileProps {
   builderSlug: string
 }
@@ -66,8 +67,10 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
               </CardContent>
             </Card>
           </div>
+          <SkillsAccordion skills={builder.skills} className="hidden lg:flex" />
         </div>
       </div>
+      <SkillsAccordion skills={builder.skills} className="lg:hidden" />
       {ff.builders.PROJECTS_SECTION_ENABLED && (
         <div className="flex flex-col gap-6">
           {builder.projects.map((project, index) => (
