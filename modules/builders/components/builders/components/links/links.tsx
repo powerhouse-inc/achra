@@ -45,7 +45,7 @@ export function Links({ links }: { links: BuilderLink[] }) {
       <Button variant="secondary" onClick={handleTriggerClick} asChild>
         {/* Render the button as a div to comply with HTML standard (buttons can not be nested in links) */}
         <div role="button" aria-label="Open links popover">
-          <LinkIcon /> <span className="hidden lg:inline">Links</span>
+          <LinkIcon /> <span className="inline sm:hidden md:inline">Links</span>
         </div>
       </Button>
     </LinksPopover>
