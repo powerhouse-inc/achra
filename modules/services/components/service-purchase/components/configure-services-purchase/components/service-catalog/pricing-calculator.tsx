@@ -118,8 +118,8 @@ export function PricingCalculator({
                   onToggleChange={
                     section.hasToggle && !readOnly
                       ? (enabled: boolean) => {
-                        toggleSection(section.id as SectionId, enabled)
-                      }
+                          toggleSection(section.id as SectionId, enabled)
+                        }
                       : undefined
                   }
                   oneTimeFee={section.oneTimeFee}
