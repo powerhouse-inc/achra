@@ -58,7 +58,6 @@ export function PricingCalculator({
   )
 
   // Carousel navigation handlers
-  // Carousel navigation handlers
   const handlePrevPlan = useCallback(() => {
     const newIndex = mobilePlanIndex > 0 ? mobilePlanIndex - 1 : PRICING_PLANS.length - 1
     handlePlanChange(PRICING_PLANS[newIndex])

@@ -48,7 +48,7 @@ export default function PricingCatalogSubtotal({
       <div
         className={cn(
           'border-input flex min-h-14 min-w-0 items-center justify-center border-y px-4 lg:hidden',
-          activePlan === currentMobilePlan && 'bg-primary/30',
+          activePlan === currentMobilePlan && 'bg-primary/10',
         )}
       >
         <span
