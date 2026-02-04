@@ -4,7 +4,7 @@ import { FaqItem } from './faq-item'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta: Meta<typeof FaqSection> = {
-  title: 'Shared/FaqSection',
+  title: 'Modules/Services/Components/FaqSection',
   component: FaqSection,
   parameters: {
     layout: 'padded',
