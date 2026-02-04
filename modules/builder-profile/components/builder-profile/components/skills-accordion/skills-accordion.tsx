@@ -21,8 +21,13 @@ export function SkillsAccordion({ skills, className }: SkillsAccordionProps) {
   }
 
   return (
-    <div className={cn('flex w-full flex-col rounded-lg px-4 pt-2 pb-4 shadow-sm', className)}>
-      <div className="bg-popover flex items-center justify-between gap-4">
+    <div
+      className={cn(
+        'bg-popover flex w-full flex-col rounded-lg px-4 pt-2 pb-4 shadow-sm',
+        className,
+      )}
+    >
+      <div className="flex items-center justify-between gap-4">
         <span className="text-ring text-sm/5.5 font-medium lg:text-base/6 lg:font-semibold">
           Skills
         </span>
