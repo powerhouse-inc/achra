@@ -1,6 +1,7 @@
 import { Download, Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ScrollToSectionButton } from '@/modules/services/components/service-profile/components/scroll-to-section-button'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -88,9 +89,9 @@ export default function ServiceInfo({
                 <Download className="size-4" />
               </Link>
             </Button>
-            <Button variant="outline" asChild>
-              <Link href="#">FQA</Link>
-            </Button>
+            <ScrollToSectionButton variant="outline" sectionId="faq">
+              FAQ
+            </ScrollToSectionButton>
           </div>
         )}
       </CardContent>
@@ -102,9 +103,9 @@ export default function ServiceInfo({
               <Download className="size-4" />
             </Link>
           </Button>
-          <Button variant="outline" asChild>
-            <Link href="#">FQA</Link>
-          </Button>
+          <ScrollToSectionButton variant="outline" sectionId="faq">
+            FAQ
+          </ScrollToSectionButton>
         </div>
       )}
     </Card>
