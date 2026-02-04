@@ -1,5 +1,6 @@
 import { HelpCircle } from 'lucide-react'
-import { FaqItem, FaqSection } from './faq'
+import { FaqSection } from './faq'
+import { FaqItem } from './faq-item'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta: Meta<typeof FaqSection> = {
