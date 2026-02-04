@@ -74,7 +74,7 @@ function ServicePurchaseSelects() {
   }
 
   return (
-    <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-4">
+    <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-4">
       {SELECT_FIELDS.map((field) => {
         let value: string
         switch (field.key) {
