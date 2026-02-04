@@ -128,7 +128,11 @@ export default async function ExpenseReportsPage({
           key={`${section}-${formatMonthString(selectedMonth)}`}
         >
           <ModalCategoriesProvider>
-            <ExpenseReportsSection teamId={builder.id} month={selectedMonth} />
+            <ExpenseReportsSection
+              teamId={builder.id}
+              month={selectedMonth}
+              builderLabel={builder.name ?? builder.code ?? 'this builder'}
+            />
           </ModalCategoriesProvider>
         </Suspense>
       )}

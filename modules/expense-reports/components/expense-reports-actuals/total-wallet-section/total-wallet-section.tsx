@@ -1,17 +1,20 @@
 import { format } from 'date-fns'
 import { AdvancedInnerTable } from '../../advanced-inner-table/advanced-inner-table'
+import { EmptyTablePlaceholder } from '../../advanced-inner-table/empty-table-placeholder'
 import type { InnerTableColumn, InnerTableRow } from '../../advanced-inner-table/types'
 
 interface TotalWalletSectionProps {
   currentMonth: Date
   mainTableColumns: InnerTableColumn[]
   mainTableItems: InnerTableRow[]
+  builderLabel: string
 }
 
 function TotalWalletSection({
   currentMonth,
   mainTableColumns,
   mainTableItems,
+  builderLabel,
 }: TotalWalletSectionProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -24,8 +27,8 @@ function TotalWalletSection({
         cardSpacingSize="small"
         items={mainTableItems}
         cardsTotalPosition="top"
-        longCode="longCode"
-        tablePlaceholder={<div>table placeholder here...</div>}
+        longCode={builderLabel}
+        tablePlaceholder={<EmptyTablePlaceholder actorName={builderLabel} />}
       />
     </div>
   )
