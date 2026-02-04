@@ -1,6 +1,9 @@
+'use client'
+
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
 import { type FeatureValue, type Plan, PRICING_PLANS } from '../types'
+import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
 import { ServiceCatalogoCell } from './service-catalogo-cell'
 
 interface FeatureRowProps {
@@ -11,35 +14,55 @@ interface FeatureRowProps {
 }
 
 export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<FeatureRowProps>) {
+  const { currentMobilePlan } = usePricingCalculatorContext()
+
   return (
-    <div
-      className={cn(
-        'grid items-center border-b last:border-b-0',
-        'grid-cols-[minmax(0,4fr)_repeat(4,minmax(0,1fr))]',
-      )}
-    >
-      <div className="flex min-h-14 flex-col justify-center gap-0.5 px-6">
-        <span className="text-foreground text-base font-semibold">{label}</span>
-        {sublabel && (
-          <span className="text-muted-foreground inline-flex items-center gap-1 text-xs">
-            <Badge
-              variant="outline"
-              className={cn(
-                'rounded-md border-2 px-1 py-0 text-sm/5.5 font-semibold',
-                'bg-purple/30 text-primary border-purple',
-              )}
-            >
-              {sublabel}
-            </Badge>
-          </span>
+    <div className={cn('group/row grid items-center', PRICING_GRID.responsive)}>
+      {/* Label column - sticky on mobile */}
+      <div
+        className={cn(
+          'border-input bg-background flex min-h-14 flex-col justify-center gap-0.5 border-b px-4 group-last/row:border-b-0 lg:px-6',
+          // Sticky positioning for mobile
+          'sticky left-0 z-10 lg:static',
         )}
+      >
+        <div className="flex flex-col md:flex-row md:items-center md:gap-1">
+          <span className="text-foreground text-sm font-semibold lg:text-base">{label}</span>
+          {sublabel && (
+            <span className="text-muted-foreground md:flex-start inline-flex items-center gap-1 text-xs md:items-start">
+              <Badge
+                variant="outline"
+                className={cn(
+                  'rounded-md border-2 px-1 py-0 text-sm/5.5 font-semibold',
+                  'bg-purple/30 text-primary border-purple',
+                )}
+              >
+                {sublabel}
+              </Badge>
+            </span>
+          )}
+        </div>
       </div>
 
+      {/* Mobile: Show only current plan */}
+      <div
+        className={cn(
+          'border-input flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors group-last/row:border-b-0 lg:hidden',
+          activePlan === currentMobilePlan && 'bg-primary/10 font-bold',
+        )}
+      >
+        <ServiceCatalogoCell
+          value={values[currentMobilePlan]}
+          isActive={activePlan === currentMobilePlan}
+        />
+      </div>
+
+      {/* Desktop: Show all plans */}
       {PRICING_PLANS.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'flex h-14 min-w-0 items-center justify-center px-6 transition-colors',
+            'border-input hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors group-last/row:border-b-0 lg:flex',
             activePlan === plan && 'bg-primary/10 font-bold',
           )}
         >

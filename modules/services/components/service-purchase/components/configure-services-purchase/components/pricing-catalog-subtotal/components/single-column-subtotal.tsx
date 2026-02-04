@@ -12,12 +12,15 @@ export function SingleColumnSubtotal({ value, activePlan }: Readonly<SingleColum
       {PRICING_PLANS.slice(0, 3).map((plan) => (
         <div
           key={plan}
-          className={cn('h-14 min-w-0 px-6', activePlan === plan && 'bg-primary/10')}
+          className={cn(
+            'border-input hidden min-h-14 min-w-0 border-y px-6 lg:block',
+            activePlan === plan && 'bg-primary/10',
+          )}
         />
       ))}
       <div
         className={cn(
-          'relative flex h-14 min-w-0 items-center justify-end',
+          'border-input relative hidden min-h-14 min-w-0 items-center justify-end border-y lg:flex',
           activePlan === 'enterprise' && 'bg-primary/10',
         )}
       >

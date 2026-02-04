@@ -1,9 +1,7 @@
 'use client'
 import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/configure-services-purchase/components/marketplace-header'
-import { PricingCalculator } from '../service-catalog'
+import { type Plan, PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
-import { PricingDetailCard } from '../summary/pricing-detail-card'
-import { Plan } from '../types'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
 export interface ConfigureServicesProps {
@@ -30,13 +28,6 @@ export default function ConfigureServices({
           onPlanChange={onPlanChange}
           onSectionToggle={onSectionToggle}
         />
-
-        <div className="w-full shrink-0 lg:w-102.75">
-          <PricingDetailCard
-            selectedPlan={selectedPlan ?? Plan.Team}
-            enabledSections={enabledSections ?? {}}
-          />
-        </div>
       </div>
     </div>
   )
