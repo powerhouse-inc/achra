@@ -44,7 +44,7 @@ export function BasicSelect({
       <SelectTrigger
         size="sm"
         className={cn(
-          '[&_svg]:text-foreground! focus-visible:border-input min-w-46 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180',
+          'bg-background dark:bg-background [&_svg]:text-foreground! focus-visible:border-input min-w-46 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180',
           className,
         )}
         aria-label={ariaLabel ?? label ?? 'Select option'}
@@ -57,7 +57,7 @@ export function BasicSelect({
         align="end"
         data-slot="single-select-content"
         className={cn(
-          'rounded-xl p-2',
+          'rounded-xl',
           matchTriggerWidth
             ? 'w-[var(--radix-select-trigger-width)]'
             : 'min-w-[var(--radix-select-trigger-width)]',
@@ -72,13 +72,13 @@ export function BasicSelect({
               {label}
             </SelectLabel>
           )}
-          <SelectGroup className="bg-background gap-0.5 rounded-xl px-0!">
+          <SelectGroup className="bg-background gap-0.5 rounded-xl px-1! py-1!">
             {options.map((option) => (
               <SelectItem
                 key={option}
                 value={option}
                 data-slot="single-select-item"
-                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-none py-2.5 transition-colors first:rounded-t-md first:rounded-b-none last:rounded-t-none last:rounded-b-md data-[state=checked]:font-medium [&>span:first-child]:hidden"
+                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-sm py-2.5 transition-colors data-[state=checked]:font-medium [&>span:first-child]:hidden"
               >
                 {option}
               </SelectItem>
