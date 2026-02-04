@@ -7,41 +7,32 @@ function BuilderProfileHeaderSkeleton() {
     <div className="border-input mt-16 w-full border-b">
       <div className="container flex flex-col gap-4 pt-4 pb-2">
         <div className="flex justify-between gap-4">
-          <div className="flex gap-4">
+          <div className="flex gap-4 lg:items-center">
             {/* Avatar skeleton */}
-            <Skeleton className="size-14 rounded-full" />
+            <Skeleton className="size-12 rounded-full sm:size-10" />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 lg:flex-row lg:items-center">
+              {/* Builder name section */}
               <div className="flex items-center gap-1">
-                {/* Builder name section */}
-                <div className="flex items-center gap-1">
-                  {/* Builder initials skeleton */}
-                  <Skeleton className="h-4 w-8" />
-                  {/* Builder name skeleton */}
-                  <Skeleton className="h-5 w-24" />
-                </div>
-
-                {/* Builder status section */}
-                <div className="ml-3 flex items-center gap-1">
-                  {/* Status chip skeleton */}
-                  <Skeleton className="h-6 w-20" />
-                  {/* Date button skeleton */}
-                  <Skeleton className="h-6 w-32" />
-                </div>
+                {/* Builder initials skeleton */}
+                <Skeleton className="h-4 w-8" />
+                {/* Builder name skeleton */}
+                <Skeleton className="h-5 w-24" />
               </div>
 
-              {/* Service entity chips skeleton */}
-              <div className="flex gap-2">
+              {/* Builder status section */}
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-center lg:ml-3">
+                {/* Status chip skeleton */}
                 <Skeleton className="h-6 w-20" />
-                <Skeleton className="h-6 w-24" />
-                <Skeleton className="h-6 w-20" />
+                {/* Date button skeleton */}
+                <Skeleton className="h-6 w-32" />
               </div>
             </div>
           </div>
 
           {/* Links button skeleton */}
-          <div>
-            <Skeleton className="h-9 w-20" />
+          <div className="self-end sm:self-start">
+            <Skeleton className="h-9 w-20 sm:w-9 md:w-20" />
           </div>
         </div>
 

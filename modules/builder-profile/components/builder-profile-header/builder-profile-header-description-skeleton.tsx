@@ -12,7 +12,7 @@ function BuilderHeaderDescriptionSkeleton() {
   }
 
   return (
-    <div className="flex flex-col gap-1 pl-18">
+    <div className="flex flex-col gap-1 md:pl-14">
       <Skeleton className="h-5 w-full" />
       <Skeleton className="h-5 w-1/3" />
     </div>
