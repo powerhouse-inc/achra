@@ -44,7 +44,7 @@ export function BasicSelect({
       <SelectTrigger
         size="sm"
         className={cn(
-          '[&_svg]:text-foreground! focus-visible:border-input min-w-46 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180',
+          'bg-background dark:bg-background [&_svg]:text-foreground! focus-visible:border-input min-w-46 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180',
           className,
         )}
         aria-label={ariaLabel ?? label ?? 'Select option'}
