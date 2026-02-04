@@ -1,6 +1,6 @@
 'use client'
 
-import { Link, Send } from 'lucide-react'
+import { Send } from 'lucide-react'
 import { type FieldError, useFormContext } from 'react-hook-form'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -79,17 +79,12 @@ function AlertBanner({ variant, message }: Readonly<AlertBannerProps>) {
 
 export interface SummaryFormProps {
   className?: string
-  onShareConfiguration?: () => void
+
   actionState: ServiceRequestFormState
   isPending: boolean
 }
 
-export function Summary({
-  className,
-  onShareConfiguration,
-  actionState,
-  isPending,
-}: Readonly<SummaryFormProps>) {
+export function Summary({ className, actionState, isPending }: Readonly<SummaryFormProps>) {
   const {
     register,
     trigger,
@@ -184,17 +179,6 @@ export function Summary({
             <Button type="submit" disabled={isPending || !isValid} className="w-full">
               {isPending ? 'Submitting...' : 'Submit Request'}
               {!isPending && <Send className="size-4" aria-hidden="true" />}
-            </Button>
-
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onShareConfiguration}
-              disabled={isPending}
-              className="w-full"
-            >
-              Share Configuration
-              <Link className="size-4" aria-hidden="true" />
             </Button>
           </div>
         </div>
