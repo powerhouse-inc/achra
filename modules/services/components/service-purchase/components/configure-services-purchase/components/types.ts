@@ -62,8 +62,10 @@ export enum CatalogStatus {
 }
 
 // Improve this when UI its ready
-export const TEAM_STRUCTURE_OPTIONS = ['Remote Team', 'Hybrid Team', 'Local Team'] as const
-export const ANONYMITY_LEVEL_OPTIONS = ['High (Standard)', 'Higher'] as const
+export const TEAM_STRUCTURE_OPTIONS = ['Remote'] as const
+export const ANONYMITY_LEVEL_OPTIONS = ['Higher'] as const
+export const LEGAL_ENTITY_OPTIONS = ['Swiss Association'] as const
+export const SNO_FUNCTION_OPTIONS = ['Operational Hub'] as const
 
 export interface ServiceRequestFormState {
   message?: string

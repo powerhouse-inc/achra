@@ -10,7 +10,6 @@ interface LabeledSelectProps {
   options: string[]
   placeholder?: string
   className?: string
-  selectClassName?: string
   'aria-label'?: string
   matchTriggerWidth?: boolean
 }
