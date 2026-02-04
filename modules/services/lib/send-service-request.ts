@@ -15,6 +15,7 @@ async function sendServiceRequest(data: ServiceRequestData): Promise<boolean> {
     // Keep for testing and  Remove this once actual implementation is done
     console.log('📧 Service Request Submitted:', {
       name: data.name,
+      teamName: data.teamName,
       email: data.email,
       selectedPlan: data.selectedPlan,
       enabledSections: data.enabledSections,

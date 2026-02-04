@@ -20,7 +20,8 @@ const emailSchema = z
   .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'Please enter a valid email address.' })
 
 const serviceRequestSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+  name: z.string().optional().default(''),
+  teamName: z.string().min(2, { message: 'Team name must be at least 2 characters.' }),
   email: emailSchema,
   selectedPlan: z.enum([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]),
   enabledSections: z.string(),
@@ -34,6 +35,7 @@ export async function submitServiceRequestAction(
   try {
     const rawData = {
       name: formData.get('name') as string,
+      teamName: formData.get('teamName') as string,
       email: formData.get('email') as string,
       selectedPlan: formData.get('selectedPlan') as string,
       enabledSections: formData.get('enabledSections') as string,
@@ -47,7 +49,7 @@ export async function submitServiceRequestAction(
 
       for (const issue of result.error.issues) {
         const field = issue.path[0]
-        if (field === 'name' || field === 'email') {
+        if (field === 'teamName' || field === 'email') {
           fieldErrors[field] = issue.message
         }
       }
@@ -68,6 +70,7 @@ export async function submitServiceRequestAction(
 
     const sendResult = await sendServiceRequest({
       name: result.data.name,
+      teamName: result.data.teamName,
       email: result.data.email,
       selectedPlan: result.data.selectedPlan as Plan,
       enabledSections,
