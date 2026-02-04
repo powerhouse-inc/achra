@@ -1,2 +1,2 @@
 export { SectionActivation } from './section-activation'
-export { encodeSectionId, decodeSectionId } from './section-id-utils'
+export { encodeSectionId, decodeSectionId, scrollToSection } from './section-id-utils'
