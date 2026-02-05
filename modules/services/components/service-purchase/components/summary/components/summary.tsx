@@ -91,9 +91,6 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
     formState: { errors, dirtyFields, isValid },
   } = useFormContext<ServicePurchaseFormValues>()
 
-  // Trigger validation on input - handles browser autocomplete
-  const triggerValidation = (field: 'teamName' | 'email') => void trigger(field)
-
   // Server errors clear when user starts editing the field (dirtyFields becomes true)
   const teamNameServerError = dirtyFields.teamName ? undefined : actionState.fieldErrors?.teamName
   const emailServerError = dirtyFields.email ? undefined : actionState.fieldErrors?.email
@@ -135,12 +132,13 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
               </Label>
               <Input
                 id="summary-team-name"
-                {...register('teamName', VALIDATION_RULES.teamName)}
+                {...register('teamName', {
+                  ...VALIDATION_RULES.teamName,
+                  // Custom onChange runs after internal state update - handles autocomplete
+                  onChange: () => void trigger('teamName'),
+                })}
                 placeholder="Your team name"
                 autoComplete="organization"
-                onInput={() => {
-                  triggerValidation('teamName')
-                }}
                 aria-invalid={Boolean(showTeamNameError)}
                 aria-describedby={showTeamNameError ? 'team-name-error' : undefined}
                 className={cn(showTeamNameError && 'border-destructive')}
@@ -162,12 +160,13 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
               <Input
                 id="summary-email"
                 type="email"
-                {...register('email', VALIDATION_RULES.email)}
+                {...register('email', {
+                  ...VALIDATION_RULES.email,
+                  // Custom onChange runs after internal state update - handles autocomplete
+                  onChange: () => void trigger('email'),
+                })}
                 placeholder="your@email.com"
                 autoComplete="email"
-                onInput={() => {
-                  triggerValidation('email')
-                }}
                 aria-invalid={Boolean(showEmailError)}
                 aria-describedby={
                   showEmailError ? 'email-description email-error' : 'email-description'
