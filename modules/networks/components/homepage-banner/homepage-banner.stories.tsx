@@ -12,6 +12,10 @@ const meta = {
       control: 'text',
       description: 'The main title displayed in the banner',
     },
+    backgroundImage: {
+      control: 'text',
+      description: 'The background image URL for the banner',
+    },
     description: {
       control: 'text',
       description: 'The description text shown when expanded',
@@ -26,6 +30,7 @@ const meta = {
     },
   },
   args: {
+    backgroundImage: '/networks/backgrounds/sky.png',
     title: 'Sky DAO Dashboard',
     description:
       "Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans.",
@@ -36,9 +41,3 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
-
-export const Authenticated: Story = {
-  args: {
-    isLoggedIn: true,
-  },
-}

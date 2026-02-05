@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { BuildersSection } from '@/modules/networks/components/builders-section/builders-section'
+
 import { FinancesSection } from '@/modules/networks/components/finances-section/finances-section'
 import { GovernanceSection } from '@/modules/networks/components/governance-section/governance-section'
 import {
@@ -38,7 +39,11 @@ export default async function NetworkPage({ params }: NetworkPageProps) {
   return (
     <PageContent className="gap-8">
       <Suspense fallback={<HomepageBannerSkeleton />}>
-        <HomepageBanner />
+        <HomepageBanner
+          backgroundImage="/networks/backgrounds/sky.png"
+          title="Sky DAO Dashboard"
+          description="Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
+        />
       </Suspense>
 
       <ProposalsSection proposals={PROPOSALS} />
