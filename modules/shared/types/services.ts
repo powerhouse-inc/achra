@@ -17,4 +17,6 @@ export interface Service {
   formationAndSetup: string[]
   recurringServices: string[]
   unavailable: boolean
+  // TODO: Remove this once the filtering by entity is implemented
+  isBuilders?: boolean
 }

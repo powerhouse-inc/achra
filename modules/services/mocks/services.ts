@@ -1,6 +1,11 @@
 import { OperatorChipEnum } from '@/modules/operator-profile/types'
 import { type Service, ServiceEntityEnum } from '@/modules/shared/types/services'
 
+/**
+ * TODO: [API Integration] This mock data will be replaced by API calls.
+ * The `isBuilders` field is a temporary solution for filtering services by category.
+ * Once the API is ready, filtering should be done server-side using the `entities` field.
+ */
 export const SERVICES_CARDS_MOCK: Service[] = [
   {
     id: 'sno-embryonic-hub',
@@ -33,6 +38,8 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     ],
     cover: '/services/covers/cover-01.jpg',
     unavailable: false,
+    // Remove this once the filtering by entity is implemented
+    isBuilders: true,
   },
   {
     id: 'swiss-association-operational-hub',
@@ -57,6 +64,8 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     ],
     cover: '/services/covers/cover-02.jpg',
     unavailable: false,
+    // Remove this once the filtering by entity is implemented
+    isBuilders: true,
   },
   {
     id: 'ip-spv',
