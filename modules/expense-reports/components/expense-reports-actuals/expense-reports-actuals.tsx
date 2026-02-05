@@ -4,6 +4,7 @@ import {
   getWalletsFromBudgetStatement,
 } from '../../lib/budget-statement-utils'
 import { GroupTree } from '../../lib/group-tree'
+import { ModalCategoriesProvider } from '../../providers/categories-provider'
 import { getBudgetStatementForMonth } from '../../services/expense-reports-service'
 import { EmptyTablePlaceholder } from '../advanced-inner-table/empty-table-placeholder'
 import { BreakdownActualsSection } from './breakdown-actuals-section'
@@ -38,22 +39,26 @@ async function ExpenseReportsActuals({ teamId, month, builderLabel }: ExpenseRep
   )
 
   return (
-    <div className="flex flex-col gap-8">
-      <TotalWalletSection
-        currentMonth={month}
-        mainTableColumns={columns}
-        mainTableItems={items}
-        builderLabel={builderLabel}
-      />
+    <ModalCategoriesProvider
+      categoriesTree={{ headcount: groupTree.headcount, nonHeadcount: groupTree.nonHeadcount }}
+    >
+      <div className="flex flex-col gap-8">
+        <TotalWalletSection
+          currentMonth={month}
+          mainTableColumns={columns}
+          mainTableItems={items}
+          builderLabel={builderLabel}
+        />
 
-      <BreakdownActualsSection
-        currentMonth={month}
-        hasMainTableItems={items.length > 0}
-        breakdownTabs={breakdownTabs}
-        breakdownItemsByWallet={breakdownItemsByWallet}
-        builderLabel={builderLabel}
-      />
-    </div>
+        <BreakdownActualsSection
+          currentMonth={month}
+          hasMainTableItems={items.length > 0}
+          breakdownTabs={breakdownTabs}
+          breakdownItemsByWallet={breakdownItemsByWallet}
+          builderLabel={builderLabel}
+        />
+      </div>
+    </ModalCategoriesProvider>
   )
 }
 

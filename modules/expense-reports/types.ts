@@ -22,5 +22,5 @@ export interface ExtendedCategory extends Category {
 }
 
 export interface CategoryTree extends ExtendedCategory {
-  children: Array<Omit<CategoryTree, 'children'>>
+  children: CategoryTree[]
 }
