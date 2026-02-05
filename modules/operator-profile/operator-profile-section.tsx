@@ -1,9 +1,14 @@
 import ServicesList from '@/modules/services/components/services-list'
+import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
+import { Button } from '../shared/components/ui/button'
 import { HeaderTitleOperatorProfile } from './components/header-title-operator-profile'
 import { OperationalMetrics } from './components/operational-metrics'
 import { OperatorChipEnum } from './types'
 
 export function OperatorProfileSection() {
+  // TODO: [API Integration] Replace mock data with API call for operator's services
+  const services = SERVICES_CARDS_MOCK
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex w-full flex-col gap-4 lg:flex-row">
@@ -43,7 +48,13 @@ export function OperatorProfileSection() {
       </div>
       <div className="flex flex-col gap-4 lg:flex-1">
         <h3 className="text-lg leading-[120%] font-bold">What we offer</h3>
-        <ServicesList />
+        <div className="flex w-full flex-col gap-6">
+          <ServicesList services={services} />
+
+          <Button variant="outline" size="lg" className="w-58 self-center">
+            Load More
+          </Button>
+        </div>
       </div>
     </div>
   )
