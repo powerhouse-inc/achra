@@ -3,7 +3,7 @@ import type {
   ExpenseReportWallet,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BREAKDOWN_COLUMNS } from '../components/expense-reports-actuals/breakdown-actuals-section/breakdown-columns'
-import { getCurrencyValue } from './budget-statement-utils'
+import { getCurrencyValue, isUsdsLineItem } from './budget-statement-utils'
 import { type GroupTree, HEADCOUNT_GROUP_LABEL, NON_HEADCOUNT_GROUP_LABEL } from './group-tree'
 import type { InnerTableRow } from '../components/advanced-inner-table/types'
 
@@ -82,18 +82,20 @@ function buildSectionRows(
 ): InnerTableRow[] {
   const categoryRows: InnerTableRow[] = []
 
-  wallet.lineItems.filter(sectionConfig.filter).forEach((item) => {
-    const rowCells = buildRowCells(item)
-    if (rowCells) {
-      categoryRows.push({
-        type: 'category',
-        showHeader: true,
-        subHeader: sectionConfig.subHeader,
-        category: 'General',
-        items: rowCells,
-      })
-    }
-  })
+  wallet.lineItems
+    .filter((item) => isUsdsLineItem(item) && sectionConfig.filter(item))
+    .forEach((item) => {
+      const rowCells = buildRowCells(item)
+      if (rowCells) {
+        categoryRows.push({
+          type: 'category',
+          showHeader: true,
+          subHeader: sectionConfig.subHeader,
+          category: 'General',
+          items: rowCells,
+        })
+      }
+    })
 
   if (categoryRows.length === 0) {
     return []
@@ -142,7 +144,7 @@ export function getActualsBreakdownItemsForTable(
   }
 
   if (rows.length > 0) {
-    const { budget, forecast, actuals, payments } = wallet.lineItems.reduce(
+    const { budget, forecast, actuals, payments } = wallet.lineItems.filter(isUsdsLineItem).reduce(
       (acc, item) => ({
         budget: acc.budget + getCurrencyValue(item.budget),
         forecast: acc.forecast + getCurrencyValue(item.forecast),

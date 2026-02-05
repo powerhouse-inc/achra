@@ -1,6 +1,7 @@
 import { sortBy, sumBy } from 'lodash'
 import type {
   BudgetStatementExpenseReport,
+  ExpenseReportLineItem,
   ExpenseReportWallet,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { WalletTableCell } from '../components/wallet-table-cell'
@@ -51,6 +52,31 @@ export function getCurrencyValue(amount: unknown): number {
   return isNaN(num) ? 0 : num
 }
 
+export function isUsdsLineItem(item: ExpenseReportLineItem): boolean {
+  const currencyFields = [item.budget, item.actuals, item.forecast, item.payments]
+
+  return currencyFields.every((field) => {
+    // If field is null, undefined, or empty, assume it's USDS
+    if (!field) {
+      return true
+    }
+
+    // If field is an object, check its unit property
+    if (typeof field === 'object') {
+      const unit = (field as { unit?: string }).unit
+      // If unit is missing, undefined, or empty, assume it's USDS
+      if (unit === undefined || unit === '') {
+        return true
+      }
+      // If unit exists, it must be 'USDS'
+      return unit === 'USDS'
+    }
+
+    // For other types, assume it's USDS
+    return true
+  })
+}
+
 export function getActualsTableData(wallets: ExpenseReportWallet[]): {
   columns: InnerTableColumn[]
   items: InnerTableRow[]
@@ -99,18 +125,17 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
 
   const mainTableItems: InnerTableRow[] = []
 
-  // TODO: filter values by USDS only
-
   // add wallet rows
   wallets.forEach((wallet) => {
-    const actuals = sumBy(wallet.lineItems, (item) => getCurrencyValue(item.actuals))
-    const forecast = sumBy(wallet.lineItems, (item) => getCurrencyValue(item.forecast))
+    const usdsItems = wallet.lineItems.filter(isUsdsLineItem)
+    const actuals = sumBy(usdsItems, (item) => getCurrencyValue(item.actuals))
+    const forecast = sumBy(usdsItems, (item) => getCurrencyValue(item.forecast))
     const numberCellData = [
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.budget)),
+      sumBy(usdsItems, (item) => getCurrencyValue(item.budget)),
       forecast,
       actuals,
       forecast - actuals,
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.payments)),
+      sumBy(usdsItems, (item) => getCurrencyValue(item.payments)),
     ]
 
     if (numberCellData.some((n) => n !== 0)) {
@@ -150,17 +175,17 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
   // add total rows if there are at least one wallet row
   if (mainTableItems.length > 0) {
     const totalBudget = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.budget)),
+      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.budget)),
     )
     const totalForecast = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.forecast)),
+      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.forecast)),
     )
     const totalActual = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.actuals)),
+      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.actuals)),
     )
     const totalDifference = totalForecast - totalActual
     const totalPayment = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems, (item) => getCurrencyValue(item.payments)),
+      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.payments)),
     )
 
     mainTableItems.push({
