@@ -2,6 +2,11 @@ import type { Plan } from '../components/service-purchase/components/configure-s
 import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 
 /**
+ * Service filter tabs
+ */
+export type ServiceTab = 'all' | 'builders' | 'networks'
+
+/**
  * Configuration data for service purchase
  */
 export interface ServiceConfiguration {
