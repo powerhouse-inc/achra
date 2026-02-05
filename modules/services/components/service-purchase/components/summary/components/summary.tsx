@@ -134,8 +134,9 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
                 id="summary-team-name"
                 {...register('teamName', {
                   ...VALIDATION_RULES.teamName,
-                  // Custom onChange runs after internal state update - handles autocomplete
-                  onChange: () => void trigger('teamName'),
+                  // Trigger full form validation to ensure isValid updates correctly
+                  onChange: () => void trigger(),
+                  onBlur: () => void trigger(),
                 })}
                 placeholder="Your team name"
                 autoComplete="organization"
@@ -162,8 +163,9 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
                 type="email"
                 {...register('email', {
                   ...VALIDATION_RULES.email,
-                  // Custom onChange runs after internal state update - handles autocomplete
-                  onChange: () => void trigger('email'),
+                  // Trigger full form validation to ensure isValid updates correctly
+                  onChange: () => void trigger(),
+                  onBlur: () => void trigger(),
                 })}
                 placeholder="your@email.com"
                 autoComplete="email"
