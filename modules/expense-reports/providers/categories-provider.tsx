@@ -1,18 +1,21 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { CategoriesModal } from '../components/categories-modal'
-import { categoriesMock } from '../mocks/categories-mocks'
-import type { Category, CategoryTree, ExtendedCategory } from '../types'
+import { groupTreeNodesToCategoryTrees } from '../lib/group-tree-to-category-tree'
+import type { CategoryTree, GroupTreeNode } from '../types'
 
 interface ModalCategoriesContextValues {
   headcountCategories: CategoryTree[]
   nonHeadcountCategories: CategoryTree[]
-  isLoadingCategories: boolean
+
+  hasNoCategories: boolean
+  hasNestedCategories: boolean
 
   areAllExpanded: boolean
   toggleAllCategories: () => void
-  setCategoryExpandedValue: (categoryId: string, isCollapsed: boolean) => void
+  handleHeadcountValueChange: (newValue: string[]) => void
+  handleNonHeadcountValueChange: (newValue: string[]) => void
 
   isModalOpen: boolean
   openModal: () => void
@@ -21,82 +24,113 @@ interface ModalCategoriesContextValues {
 
 const ModalCategoriesContext = createContext<ModalCategoriesContextValues | undefined>(undefined)
 
-export function ModalCategoriesProvider({ children }: { children: React.ReactNode }) {
-  const [categories, setCategories] = useState<Category[]>([])
+export interface CategoriesTreeShape {
+  headcount: GroupTreeNode[]
+  nonHeadcount: GroupTreeNode[]
+}
+
+interface ModalCategoriesProviderProps {
+  children: React.ReactNode
+  categoriesTree: CategoriesTreeShape
+}
+
+export function ModalCategoriesProvider({
+  children,
+  categoriesTree,
+}: ModalCategoriesProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isLoadingCategories, setIsLoadingCategories] = useState(false)
+  const [expandedState, setExpandedState] = useState<Record<string, boolean>>({})
 
-  // replace with react query once the query is implemented
-  useEffect(() => {
-    const simulateCategoriesFetch = async () => {
-      setIsLoadingCategories(true)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+  const expandedStateMap = useMemo(
+    () =>
+      new Map(Object.entries(expandedState).map(([id, isExpanded]) => [id, !isExpanded] as const)),
+    [expandedState],
+  )
 
-      setCategories(categoriesMock)
-      setIsLoadingCategories(false)
-    }
-    void simulateCategoriesFetch()
-  }, [])
+  const headcountCategories = useMemo(
+    () => groupTreeNodesToCategoryTrees(categoriesTree.headcount, true, expandedStateMap),
+    [categoriesTree.headcount, expandedStateMap],
+  )
 
-  // build the category tree
-  const categoryTree: CategoryTree[] = useMemo(() => {
-    return categories
-      .filter((category) => category.parentId === null)
-      .map(
-        (category) =>
-          ({
-            ...category,
-            isCollapsed: true,
-            children: categories
-              .filter((subcategory) => subcategory.parentId === category.id)
-              .map(
-                (subcategory) =>
-                  ({
-                    ...subcategory,
-                    isCollapsed: true,
-                  }) satisfies ExtendedCategory,
-              )
-              .sort((a, b) => a.order - b.order),
-          }) satisfies CategoryTree,
-      )
-      .sort((a, b) => a.order - b.order)
-  }, [categories])
+  const nonHeadcountCategories = useMemo(
+    () => groupTreeNodesToCategoryTrees(categoriesTree.nonHeadcount, false, expandedStateMap),
+    [categoriesTree.nonHeadcount, expandedStateMap],
+  )
 
-  const [allCategories, setAllCategories] = useState<CategoryTree[]>(categoryTree)
-  useEffect(() => {
-    setAllCategories(categoryTree)
-  }, [categoryTree])
+  const hasNoCategories = useMemo(
+    () => headcountCategories.length === 0 && nonHeadcountCategories.length === 0,
+    [headcountCategories.length, nonHeadcountCategories.length],
+  )
 
-  const headcountCategories = allCategories.filter((category) => category.headcountExpense)
-  const nonHeadcountCategories = allCategories.filter((category) => !category.headcountExpense)
+  const hasNestedCategories = useMemo(
+    () =>
+      !hasNoCategories &&
+      (headcountCategories.some((category) => category.children.length > 0) ||
+        nonHeadcountCategories.some((category) => category.children.length > 0)),
+    [hasNoCategories, headcountCategories, nonHeadcountCategories],
+  )
+
+  const expandableCategoryIds = useMemo(
+    () => [
+      ...categoriesTree.headcount.filter((n) => n.children.length > 0).map((n) => n.id),
+      ...categoriesTree.nonHeadcount.filter((n) => n.children.length > 0).map((n) => n.id),
+    ],
+    [categoriesTree.headcount, categoriesTree.nonHeadcount],
+  )
+
+  const areAllExpanded = useMemo(
+    () =>
+      expandableCategoryIds.length > 0 && expandableCategoryIds.every((id) => expandedState[id]),
+    [expandableCategoryIds, expandedState],
+  )
 
   const setCategoryExpandedValue = useCallback((categoryId: string, isCollapsed: boolean) => {
-    setAllCategories((prev) =>
-      prev.map((category) =>
-        category.id === categoryId ? { ...category, isCollapsed } : category,
-      ),
-    )
+    setExpandedState((prev) => ({ ...prev, [categoryId]: !isCollapsed }))
   }, [])
 
-  const areAllExpanded = useMemo(() => {
-    return allCategories.every((category) => !category.isCollapsed)
-  }, [allCategories])
-
   const toggleAllCategories = useCallback(() => {
-    setAllCategories((prev) =>
-      prev.map((category) => ({ ...category, isCollapsed: areAllExpanded })),
-    )
-  }, [areAllExpanded])
+    const nextExpanded = !areAllExpanded
+    setExpandedState((prev) => {
+      const next = { ...prev }
+      for (const id of expandableCategoryIds) {
+        next[id] = nextExpanded
+      }
+      return next
+    })
+  }, [areAllExpanded, expandableCategoryIds])
+
+  const handleHeadcountValueChange = useCallback(
+    (newValue: string[]) => {
+      headcountCategories.forEach((category) => {
+        const isOpen = newValue.includes(category.id)
+        setCategoryExpandedValue(category.id, !isOpen)
+      })
+    },
+    [headcountCategories, setCategoryExpandedValue],
+  )
+
+  const handleNonHeadcountValueChange = useCallback(
+    (newValue: string[]) => {
+      nonHeadcountCategories.forEach((category) => {
+        const isOpen = newValue.includes(category.id)
+        setCategoryExpandedValue(category.id, !isOpen)
+      })
+    },
+    [nonHeadcountCategories, setCategoryExpandedValue],
+  )
 
   const values = useMemo(
     () => ({
       headcountCategories,
       nonHeadcountCategories,
-      isLoadingCategories,
+
+      hasNoCategories,
+      hasNestedCategories,
 
       areAllExpanded,
       toggleAllCategories,
-      setCategoryExpandedValue,
+      handleHeadcountValueChange,
+      handleNonHeadcountValueChange,
 
       isModalOpen,
       openModal: () => {
@@ -109,10 +143,12 @@ export function ModalCategoriesProvider({ children }: { children: React.ReactNod
     [
       headcountCategories,
       nonHeadcountCategories,
-      isLoadingCategories,
+      hasNoCategories,
+      hasNestedCategories,
       areAllExpanded,
       toggleAllCategories,
-      setCategoryExpandedValue,
+      handleHeadcountValueChange,
+      handleNonHeadcountValueChange,
       isModalOpen,
     ],
   )
