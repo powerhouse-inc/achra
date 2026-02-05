@@ -14,8 +14,8 @@ import type { ServicePurchaseFormValues } from '../../service-purchase-form/serv
  * Validation constants for form fields
  */
 const VALIDATION_RULES = {
-  name: {
-    required: 'Name is required',
+  teamName: {
+    required: 'Team name is required',
   },
   email: {
     required: 'Email is required',
@@ -91,20 +91,17 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
     formState: { errors, dirtyFields, isValid },
   } = useFormContext<ServicePurchaseFormValues>()
 
-  // Trigger validation on input - handles browser autocomplete
-  const triggerValidation = (field: 'name' | 'email') => void trigger(field)
-
   // Server errors clear when user starts editing the field (dirtyFields becomes true)
-  const nameServerError = dirtyFields.name ? undefined : actionState.fieldErrors?.name
+  const teamNameServerError = dirtyFields.teamName ? undefined : actionState.fieldErrors?.teamName
   const emailServerError = dirtyFields.email ? undefined : actionState.fieldErrors?.email
 
   // Show error if: has client error OR has server error (not yet edited)
   // Client errors from react-hook-form, server errors from actionState
-  const showNameError = errors.name || nameServerError
+  const showTeamNameError = errors.teamName || teamNameServerError
   const showEmailError = errors.email || emailServerError
 
   // Hide general error banner if user has started fixing (any field is dirty)
-  const hasStartedFixing = dirtyFields.name || dirtyFields.email
+  const hasStartedFixing = dirtyFields.teamName || dirtyFields.email
   const showErrorBanner = actionState.error && !hasStartedFixing
 
   return (
@@ -118,26 +115,40 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
 
             <div className="flex flex-col gap-2.5">
               <Label htmlFor="summary-name" className="text-sm/3.5 font-medium">
-                Name <span aria-hidden="true">*</span>
-                <span className="sr-only">(required)</span>
+                Name
               </Label>
               <Input
                 id="summary-name"
-                {...register('name', VALIDATION_RULES.name)}
+                {...register('name')}
                 placeholder="Your name"
                 autoComplete="name"
-                onInput={() => {
-                  triggerValidation('name')
-                }}
-                aria-invalid={Boolean(showNameError)}
-                aria-describedby={showNameError ? 'name-error' : undefined}
-                className={cn(showNameError && 'border-destructive')}
               />
-              {showNameError && (
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              <Label htmlFor="summary-team-name" className="text-sm/3.5 font-medium">
+                Team Name <span aria-hidden="true">*</span>
+                <span className="sr-only">(required)</span>
+              </Label>
+              <Input
+                id="summary-team-name"
+                {...register('teamName', {
+                  ...VALIDATION_RULES.teamName,
+                  // Trigger full form validation to ensure isValid updates correctly
+                  onChange: () => void trigger(),
+                  onBlur: () => void trigger(),
+                })}
+                placeholder="Your team name"
+                autoComplete="organization"
+                aria-invalid={Boolean(showTeamNameError)}
+                aria-describedby={showTeamNameError ? 'team-name-error' : undefined}
+                className={cn(showTeamNameError && 'border-destructive')}
+              />
+              {showTeamNameError && (
                 <FormFieldError
-                  id="name-error"
-                  clientError={errors.name}
-                  serverError={nameServerError}
+                  id="team-name-error"
+                  clientError={errors.teamName}
+                  serverError={teamNameServerError}
                 />
               )}
             </div>
@@ -150,12 +161,14 @@ export function Summary({ className, actionState, isPending }: Readonly<SummaryF
               <Input
                 id="summary-email"
                 type="email"
-                {...register('email', VALIDATION_RULES.email)}
+                {...register('email', {
+                  ...VALIDATION_RULES.email,
+                  // Trigger full form validation to ensure isValid updates correctly
+                  onChange: () => void trigger(),
+                  onBlur: () => void trigger(),
+                })}
                 placeholder="your@email.com"
                 autoComplete="email"
-                onInput={() => {
-                  triggerValidation('email')
-                }}
                 aria-invalid={Boolean(showEmailError)}
                 aria-describedby={
                   showEmailError ? 'email-description email-error' : 'email-description'

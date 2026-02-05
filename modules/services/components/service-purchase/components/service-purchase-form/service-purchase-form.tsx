@@ -55,6 +55,7 @@ const STEP_ICONS = {
 export interface ServicePurchaseFormValues {
   operatorId?: string
   name: string
+  teamName: string
   email: string
   legalEntity: string
   teamStructure: string
@@ -72,6 +73,7 @@ export default function ServicePurchaseForm() {
     defaultValues: {
       operatorId: undefined,
       name: '',
+      teamName: '',
       email: '',
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
@@ -137,6 +139,7 @@ export default function ServicePurchaseForm() {
     // Improve this once real data its available
     const formData = new FormData()
     formData.append('name', data.name)
+    formData.append('teamName', data.teamName)
     formData.append('operatorId', data.operatorId ?? '')
     formData.append('email', data.email)
     formData.append('selectedPlan', selectedPlan)

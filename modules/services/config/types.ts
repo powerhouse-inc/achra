@@ -15,6 +15,7 @@ export interface ServiceConfiguration {
  */
 export interface ServiceRequestData {
   name: string
+  teamName: string
   email: string
   selectedPlan: Plan
   enabledSections: Record<SectionId, boolean>
@@ -29,7 +30,7 @@ export interface ServiceRequestFormState {
   message?: string
   error?: string
   fieldErrors?: {
-    name?: string
+    teamName?: string
     email?: string
   }
 }

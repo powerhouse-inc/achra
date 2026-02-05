@@ -54,6 +54,7 @@ chromatic-diagnostics.json
 
 # Ignore .agent for git but allow Gemini to read
 .agent/
+.agents/
 !.agent/rules/
 !.agent/workflows/
 
