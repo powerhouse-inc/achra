@@ -1,18 +1,5 @@
 import type { CategoryTree, GroupTreeNode } from '../types'
 
-/** Collects all node ids from a tree (for expand-all / collapse-all). */
-export function collectGroupTreeNodeIds(nodes: GroupTreeNode[]): string[] {
-  const ids: string[] = []
-  function walk(nodes: GroupTreeNode[]) {
-    for (const node of nodes) {
-      ids.push(node.id)
-      if (node.children.length > 0) walk(node.children)
-    }
-  }
-  walk(nodes)
-  return ids
-}
-
 export interface GroupTreeNodeToCategoryTreeOptions {
   headcountExpense: boolean
   order: number
