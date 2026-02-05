@@ -1,5 +1,4 @@
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
-import { Button } from '@/modules/shared/components/ui/button'
 import { PRICING_DATA } from '../../mock/mock-data'
 import { MarketplaceHeader } from '../configure-services-purchase/components/marketplace-header'
 import { OperationSummaryCard } from './components/operation-summary-card'
@@ -9,7 +8,6 @@ import type { Plan } from '../configure-services-purchase/components/types'
 export interface SummaryProps {
   selectedPlan: Plan
   enabledSections: Record<string, boolean>
-  onBack?: () => void
   actionState: ServiceRequestFormState
   isPending: boolean
 }
@@ -17,7 +15,6 @@ export interface SummaryProps {
 function SummarySection({
   selectedPlan,
   enabledSections,
-  onBack,
   actionState,
   isPending,
 }: Readonly<SummaryProps>) {
@@ -35,12 +32,6 @@ function SummarySection({
         selectedPlan={selectedPlan}
         selectedAddons={selectedAddons}
       />
-
-      <div className="mx-auto flex w-full max-w-[874px] justify-between">
-        <Button variant="outline" onClick={onBack}>
-          Back
-        </Button>
-      </div>
     </div>
   )
 }
