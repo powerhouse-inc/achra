@@ -1,9 +1,7 @@
 import { Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
@@ -12,8 +10,7 @@ import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Service, ServiceEntityEnum } from '@/modules/shared/types/services'
-import { mapLabelToEntity } from '../../utils/utils'
+import type { Service } from '@/modules/shared/types/services'
 import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import type { Route } from 'next'
 
@@ -27,11 +24,6 @@ const DEFAULT_COVER = '/services/covers/cover-01.jpg'
 export default function ServicesCard({ service }: ServicesCardProps) {
   const isUnavailable = service.status !== RsTemplateStatus.Active
   const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
-
-  // Map targetAudiences to ServiceEntityEnum for chip display
-  const entities = service.targetAudiences
-    .map((audience) => mapLabelToEntity(audience.label))
-    .filter((entity): entity is ServiceEntityEnum => entity !== null)
 
   return (
     <Card className="bg-accent p-2 sm:p-3 md:p-4">
@@ -75,11 +67,6 @@ export default function ServicesCard({ service }: ServicesCardProps) {
             <span className="text-foreground text-base/6 font-semibold sm:text-xl/6 sm:font-bold">
               {service.title}
             </span>
-            <div className="flex flex-wrap gap-2">
-              {entities.map((entity) => (
-                <ServicesEntitiesChip key={entity} entity={entity} />
-              ))}
-            </div>
           </div>
           <div className="text-foreground flex flex-col text-xs/4.5 sm:text-sm/5.5">
             <p className="text-foreground">{service.summary}</p>
