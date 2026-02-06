@@ -1,5 +1,4 @@
 import { format, parse } from 'date-fns'
-import { cacheLife } from 'next/cache'
 import {
   type BudgetStatementsDetailsQuery,
   useBudgetStatementsAvailableMonthsQuery,
@@ -33,9 +32,6 @@ export async function getBudgetStatementForMonth(
   teamId: string,
   month: Date,
 ): Promise<BudgetStatementsDetailsQuery['budgetStatements'][number] | null> {
-  'use cache'
-  cacheLife('minutes')
-
   const data = await useBudgetStatementsDetailsQuery.fetcher({
     filter: {
       teamId,
