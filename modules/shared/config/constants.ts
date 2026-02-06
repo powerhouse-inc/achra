@@ -25,6 +25,10 @@ export enum NetworkHomepageSections {
   Governance = 'governance',
 }
 
+export enum NetworkDashboardSections {
+  Builders = 'builders',
+}
+
 /**
  * Scroll margin classes for sections, taking in consideration the navbar height
  */

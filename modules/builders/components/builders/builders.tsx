@@ -11,6 +11,7 @@ const filtersParser = createLoader({
 
 export interface BuildersProps {
   className?: string
+  asSectionContent?: boolean
   networkSlug: string
   searchParams: Promise<{
     search?: string
@@ -18,7 +19,12 @@ export interface BuildersProps {
   }>
 }
 
-export async function Builders({ className, networkSlug, searchParams }: BuildersProps) {
+export async function Builders({
+  className,
+  networkSlug,
+  searchParams,
+  asSectionContent = false,
+}: BuildersProps) {
   const { search, skills } = await filtersParser(searchParams)
   const builders = await getBuilders({
     networkSlug,
@@ -26,10 +32,29 @@ export async function Builders({ className, networkSlug, searchParams }: Builder
     name: search,
   })
 
+  const extendedBuilders = [
+    ...builders.flatMap((builder) => builder),
+    ...builders.flatMap((builder) => builder),
+    ...builders.flatMap((builder) => builder),
+    ...builders.flatMap((builder) => builder),
+    ...builders.flatMap((builder) => builder),
+    ...builders.flatMap((builder) => builder),
+  ]
+
   return (
     <div className={className}>
-      <BuildersTable builders={builders} networkSlug={networkSlug} className="hidden lg:block" />
-      <BuildersList builders={builders} networkSlug={networkSlug} className="block lg:hidden" />
+      <BuildersTable
+        builders={extendedBuilders}
+        networkSlug={networkSlug}
+        className="hidden lg:block"
+        asSectionContent={asSectionContent}
+      />
+      <BuildersList
+        builders={extendedBuilders}
+        networkSlug={networkSlug}
+        className="block lg:hidden"
+        asSectionContent={asSectionContent}
+      />
     </div>
   )
 }

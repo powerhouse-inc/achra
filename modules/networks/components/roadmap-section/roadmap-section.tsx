@@ -2,7 +2,7 @@ import {
   type ScopeOfWork_Milestone,
   useRoadmapListQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { SectionTitle } from '@/modules/networks/components/section-title'
+import { SectionTitle } from '@/modules/shared/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
