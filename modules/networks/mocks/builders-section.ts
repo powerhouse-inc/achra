@@ -3,7 +3,6 @@ import {
   BuilderScope,
   BuilderSkill,
   BuilderStatus,
-  TeamType,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export const mockBuilderTeams: Builder[] = [
@@ -16,7 +15,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'bai',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2025-12-09T15:08:29.855Z',
     scopes: [BuilderScope.SupportScope],
     skills: [
@@ -34,6 +33,8 @@ export const mockBuilderTeams: Builder[] = [
       },
     ],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '79d54930-e6dd-4cd5-adf7-17a42fc774eb',
@@ -43,12 +44,14 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg',
     slug: 'teep',
     status: BuilderStatus.Inactive,
-    type: TeamType.Individual,
+
     lastModified: '2025-11-21T18:06:41.930Z',
     scopes: [],
     skills: [BuilderSkill.FrontendDevelopment, BuilderSkill.TechnicalWriting],
     links: [{ id: 'link-teep-twitter', label: 'Twitter', url: 'https://twitter.com/teep' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '112c80c9-ccfe-4902-bbd6-a991c83d6119',
@@ -58,7 +61,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://pbs.twimg.com/profile_images/1578398330278871041/YfZgMhQW_400x400.jpg',
     slug: 'liberuum',
     status: BuilderStatus.Active,
-    type: TeamType.Individual,
+
     lastModified: '2025-12-09T15:08:06.862Z',
     scopes: [BuilderScope.SupportScope],
     skills: [
@@ -69,6 +72,8 @@ export const mockBuilderTeams: Builder[] = [
     ],
     links: [{ id: 'link-liberuum-portfolio', label: 'Portfolio', url: 'https://liberuum.dev' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '4a7596a6-9ff1-4ffb-b205-6a8be375fd99',
@@ -78,12 +83,14 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://pbs.twimg.com/profile_images/1859264281323167745/ku3nlrHH_400x400.jpg',
     slug: 'apeiron',
     status: BuilderStatus.OnHold,
-    type: TeamType.Individual,
+
     lastModified: '2025-11-24T12:09:57.444Z',
     scopes: [],
     skills: [BuilderSkill.DevopsEngineering],
     links: [{ id: 'link-apeiron-profile', label: 'Profile', url: 'https://twitter.com/apeiron' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '0c12e19a-bd55-41fc-890a-3ae0e935ac45',
@@ -93,7 +100,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'sky-labs',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2024-12-01T12:00:00.000Z',
     scopes: [BuilderScope.ProtocolScope, BuilderScope.StabilityScope],
     skills: [
@@ -103,6 +110,8 @@ export const mockBuilderTeams: Builder[] = [
     ],
     links: [{ id: 'link-skylabs-site', label: 'Website', url: 'https://sky-labs.example.com' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: 'fb3ab2c7-48aa-4acb-a5c1-2b847ef98aaf',
@@ -112,7 +121,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'data-scout',
     status: BuilderStatus.OnHold,
-    type: TeamType.Team,
+
     lastModified: '2024-11-02T09:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
     skills: [
@@ -122,6 +131,8 @@ export const mockBuilderTeams: Builder[] = [
     ],
     links: [{ id: 'link-datascout-site', label: 'Website', url: 'https://data-scout.example.com' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: 'd1a0e8ac-3f84-4c1d-8a8a-9f4dc4a5f1b3',
@@ -131,7 +142,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'maker-ops',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2024-10-01T09:00:00.000Z',
     scopes: [BuilderScope.StabilityScope, BuilderScope.SupportScope],
     skills: [
@@ -141,6 +152,8 @@ export const mockBuilderTeams: Builder[] = [
     ],
     links: [{ id: 'link-makerops-site', label: 'Website', url: 'https://maker-ops.example.com' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: 'c9b8b3ef-7d2c-4c7e-9b4f-8ed4c7b0c2d4',
@@ -150,7 +163,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'govern-guard',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2024-09-12T10:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
     skills: [BuilderSkill.TechnicalWriting, BuilderSkill.DataEngineering],
@@ -158,6 +171,8 @@ export const mockBuilderTeams: Builder[] = [
       { id: 'link-governguard-report', label: 'Reports', url: 'https://govern-guard.example.com' },
     ],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '6f5d1a8e-1d9a-4f5e-b2e1-3a7b8d9c2f4e',
@@ -167,7 +182,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'ux-guild',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2024-08-05T14:30:00.000Z',
     scopes: [BuilderScope.Acc],
     skills: [
@@ -179,6 +194,8 @@ export const mockBuilderTeams: Builder[] = [
       { id: 'link-uxguild-showcase', label: 'Showcase', url: 'https://ux-guild.example.com' },
     ],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: 'a3e7c4b5-9d2e-4f1c-8c6b-2d7f9e1c3a4b',
@@ -188,7 +205,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'rwa-scouts',
     status: BuilderStatus.OnHold,
-    type: TeamType.Team,
+
     lastModified: '2024-07-18T11:00:00.000Z',
     scopes: [BuilderScope.GovernanceScope],
     skills: [BuilderSkill.SecurityEngineering, BuilderSkill.BackendDevelopment],
@@ -196,6 +213,8 @@ export const mockBuilderTeams: Builder[] = [
       { id: 'link-rwascouts-briefs', label: 'Briefs', url: 'https://rwa-scouts.example.com' },
     ],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: '9e4492bd-8a2d-4e3b-9f5c-1d2a3b4c5e6f',
@@ -205,7 +224,7 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'quant-lab',
     status: BuilderStatus.Active,
-    type: TeamType.Team,
+
     lastModified: '2024-06-22T08:00:00.000Z',
     scopes: [BuilderScope.ProtocolScope],
     skills: [
@@ -215,6 +234,8 @@ export const mockBuilderTeams: Builder[] = [
     ],
     links: [{ id: 'link-quantlab-lab', label: 'Lab notes', url: 'https://quant-lab.example.com' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
   {
     id: 'b2d1c3e4-f5a6-4b7c-8d9e-0f1a2b3c4d5e',
@@ -224,11 +245,13 @@ export const mockBuilderTeams: Builder[] = [
     icon: 'https://i.postimg.cc/Dy4QT8Y9/baiicon.png',
     slug: 'docu-hub',
     status: BuilderStatus.Completed,
-    type: TeamType.Individual,
+
     lastModified: '2024-05-10T16:45:00.000Z',
     scopes: [BuilderScope.SupportScope],
     skills: [BuilderSkill.TechnicalWriting, BuilderSkill.UiUxDesign],
     links: [{ id: 'link-docuhub-docs', label: 'Docs', url: 'https://docu-hub.example.com' }],
     contributors: [],
+    isOperator: false,
+    operationalHubMember: { name: null, phid: null },
   },
 ]

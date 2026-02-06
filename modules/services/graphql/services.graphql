@@ -1,0 +1,38 @@
+query ResourceTemplates {
+  resourceTemplates {
+    contentSections {
+      id
+      title
+      content
+      displayOrder
+    }
+    description
+    facetTargets {
+      id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    faqFields {
+      id
+      question
+      answer
+      displayOrder
+    }
+    infoLink
+    lastModified
+    title
+    thumbnailUrl
+    targetAudiences {
+      id
+      label
+      color
+    }
+    operatorId
+    recurringServices
+    status
+    summary
+    setupServices
+    id
+  }
+}

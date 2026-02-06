@@ -1,10 +1,7 @@
+import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorChipEnum } from '@/modules/operator-profile/types'
 import type { Service } from '@/modules/shared/types/services'
 
-/**
- * Mock data matching the API resourceTemplates response structure.
- * TODO: [API Integration] This mock data will be replaced by actual API calls.
- */
 export const SERVICES_CARDS_MOCK: Service[] = [
   {
     id: '5299be53-0808-4599-af16-40f986e43a96',
@@ -14,7 +11,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     description:
       'A ready-to-use operational setup that gives open-source and public-goods builder teams the legal and financial infrastructure to receive funding, pay contributors, and operate compliantly from day one.\n\nStructured as a Swiss Association — a cost-efficient, privacy-preserving legal form with strong international recognition — the Operational Hub reduces personal liability for contributors, simplifies compliance, and provides a professional foundation for teams that are already doing the work.',
     thumbnailUrl: '/services/covers/cover-02.jpg',
-    status: 'COMING_SOON',
+    status: RsTemplateStatus.ComingSoon,
     targetAudiences: [
       { id: '02aad85b-88d4-4d55-b841-d9e739c54a77', label: 'Builders', color: '#0ea5e9' },
       { id: '2a9d36ae-000d-4a61-8361-8f85d34edf5f', label: 'Networks', color: '#10b981' },
@@ -136,7 +133,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
     summary: '',
     description: null,
     thumbnailUrl: null,
-    status: 'COMING_SOON',
+    status: RsTemplateStatus.ComingSoon,
     targetAudiences: [
       { id: '15f4bc1a-27d5-42cb-93a2-ca0b8117dba9', label: 'Networks', color: '#10b981' },
       { id: 'e13ea974-b9ed-4b0c-aa5a-7c9a97916efc', label: 'Builders', color: '#0ea5e9' },

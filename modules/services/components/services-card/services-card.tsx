@@ -2,6 +2,7 @@ import { Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ServicesEntitiesChip } from '@/modules/shared/components/chips/services-entities-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
@@ -12,8 +13,8 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Service, ServiceEntityEnum } from '@/modules/shared/types/services'
-import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import { mapLabelToEntity } from '../../utils/utils'
+import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import type { Route } from 'next'
 
 interface ServicesCardProps {
@@ -24,7 +25,7 @@ interface ServicesCardProps {
 const DEFAULT_COVER = '/services/covers/cover-01.jpg'
 
 export default function ServicesCard({ service }: ServicesCardProps) {
-  const isUnavailable = service.status === 'COMING_SOON'
+  const isUnavailable = service.status !== RsTemplateStatus.Active
   const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
 
   // Map targetAudiences to ServiceEntityEnum for chip display

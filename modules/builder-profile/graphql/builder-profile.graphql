@@ -16,7 +16,11 @@ query BuilderProfile($filter: buildersFilter) {
     skills
     slug
     status
-    type
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
     projects {
       scope {
         status
