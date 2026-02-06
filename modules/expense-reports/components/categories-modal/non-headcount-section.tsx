@@ -18,7 +18,9 @@ function NonHeadcountSection({ categories, onValueChange }: NonHeadcountSectionP
   }, [categories])
 
   const values = useMemo(() => {
-    return categories.filter((category) => !category.isCollapsed).map((category) => category.id)
+    return categories
+      .filter((category) => category.children.length > 0 && !category.isCollapsed)
+      .map((category) => category.id)
   }, [categories])
 
   if (categories.length === 0) return null

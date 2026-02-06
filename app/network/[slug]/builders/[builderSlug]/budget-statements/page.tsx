@@ -25,7 +25,6 @@ import {
 } from '@/modules/expense-reports/lib/month-navigation-utils'
 import { formatMonthString } from '@/modules/expense-reports/lib/month-utils'
 import { expenseReportsSearchParamsCache } from '@/modules/expense-reports/lib/search-params-server'
-import { ModalCategoriesProvider } from '@/modules/expense-reports/providers/categories-provider'
 import { getBudgetStatementsAvailableMonths } from '@/modules/expense-reports/services/expense-reports-service'
 import { TabSection } from '@/modules/expense-reports/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -127,13 +126,11 @@ export default async function ExpenseReportsPage({
           fallback={<ExpenseReportsSectionSkeleton />}
           key={`${section}-${formatMonthString(selectedMonth)}`}
         >
-          <ModalCategoriesProvider>
-            <ExpenseReportsSection
-              teamId={builder.id}
-              month={selectedMonth}
-              builderLabel={builder.name ?? builder.code ?? 'this builder'}
-            />
-          </ModalCategoriesProvider>
+          <ExpenseReportsSection
+            teamId={builder.id}
+            month={selectedMonth}
+            builderLabel={builder.name ?? builder.code ?? 'this builder'}
+          />
         </Suspense>
       )}
 
