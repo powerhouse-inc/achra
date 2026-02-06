@@ -32,6 +32,7 @@ export default async function NetworkDashboardPage({
           backgroundImage="/networks/backgrounds/powerhouse.png"
           title="Powerhouse Dashboard"
           description="Lorem ipsum dolor sit amet consectetur. In et sed malesuada ornare bibendum nisl egestas. Tellus semper facilisis elit mauris aliquam. Venenatis nunc sapien duis adipiscing proin mauris. Amet sed mauris natoque nisi porttitor montes. Elit vel euismod quis."
+          isLoggedIn={false}
         />
       </Suspense>
       <BuildersSection networkSlug={slug} searchParams={searchParams} networkName={networkName} />
