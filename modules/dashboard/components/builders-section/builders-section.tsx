@@ -45,8 +45,7 @@ export function BuildersSection({ networkSlug, searchParams, networkName }: Buil
               className="px-3 leading-5"
               aria-label="See more builder teams"
             >
-              {/* TODO: replace with the correct link once the target page is created */}
-              <Link href={`/network/${networkSlug}/builders`} target="_blank">
+              <Link href={`/network/${networkSlug}/builders`}>
                 See More
                 <span className="sr-only">See more builder teams</span>
               </Link>
