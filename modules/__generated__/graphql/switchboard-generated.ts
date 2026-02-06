@@ -368,36 +368,6 @@ export type Accounts_UpdateKycStatusInput = {
   id: Scalars['OID']['input'];
 };
 
-export type Action = {
-  __typename?: 'Action';
-  attachments?: Maybe<Array<Attachment>>;
-  context?: Maybe<ActionContext>;
-  id: Scalars['String']['output'];
-  input: Scalars['JSONObject']['output'];
-  scope: Scalars['String']['output'];
-  timestampUtcMs: Scalars['String']['output'];
-  type: Scalars['String']['output'];
-};
-
-export type ActionContext = {
-  __typename?: 'ActionContext';
-  signer?: Maybe<ReactorSigner>;
-};
-
-export type ActionContextInput = {
-  signer?: InputMaybe<ReactorSignerInput>;
-};
-
-export type ActionInput = {
-  attachments?: InputMaybe<Array<AttachmentInput>>;
-  context?: InputMaybe<ActionContextInput>;
-  id: Scalars['String']['input'];
-  input: Scalars['JSONObject']['input'];
-  scope: Scalars['String']['input'];
-  timestampUtcMs: Scalars['String']['input'];
-  type: Scalars['String']['input'];
-};
-
 export type AddDriveResult = {
   __typename?: 'AddDriveResult';
   icon?: Maybe<Scalars['String']['output']>;
@@ -487,23 +457,6 @@ export type AnalyticsSeriesDimension = {
   label?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   path?: Maybe<Scalars['String']['output']>;
-};
-
-export type Attachment = {
-  __typename?: 'Attachment';
-  data: Scalars['String']['output'];
-  extension?: Maybe<Scalars['String']['output']>;
-  fileName?: Maybe<Scalars['String']['output']>;
-  hash: Scalars['String']['output'];
-  mimeType: Scalars['String']['output'];
-};
-
-export type AttachmentInput = {
-  data: Scalars['String']['input'];
-  extension?: InputMaybe<Scalars['String']['input']>;
-  fileName?: InputMaybe<Scalars['String']['input']>;
-  hash: Scalars['String']['input'];
-  mimeType: Scalars['String']['input'];
 };
 
 export type BillingStatement = IDocument & {
@@ -701,14 +654,15 @@ export type Builder = {
   description: Scalars['String']['output'];
   icon: Scalars['String']['output'];
   id?: Maybe<Scalars['PHID']['output']>;
+  isOperator: Scalars['Boolean']['output'];
   lastModified?: Maybe<Scalars['DateTime']['output']>;
   links: Array<BuilderLink>;
   name: Scalars['String']['output'];
+  operationalHubMember: OpHubMember;
   scopes: Array<BuilderScope>;
   skills: Array<BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderStatus>;
-  type: TeamType;
 };
 
 export type BuilderLink = {
@@ -766,15 +720,16 @@ export type BuilderProfileState = {
   description?: Maybe<Scalars['String']['output']>;
   icon?: Maybe<Scalars['URL']['output']>;
   id?: Maybe<Scalars['PHID']['output']>;
+  isOperator: Scalars['Boolean']['output'];
   lastModified?: Maybe<Scalars['DateTime']['output']>;
   links: Array<BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
+  operationalHubMember: OpHubMember;
   projects: Array<BuilderProject>;
   scopes: Array<BuilderScope>;
   skills: Array<BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderStatus>;
-  type: TeamType;
 };
 
 export type BuilderProfile_AddContributorInput = {
@@ -814,6 +769,7 @@ export type BuilderProfile_BuilderProfileState = {
   lastModified?: Maybe<Scalars['DateTime']['output']>;
   links: Array<BuilderProfile_BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
+  operationalHubMember: BuilderProfile_OpHubMember;
   scopes: Array<BuilderProfile_BuilderScope>;
   skills: Array<BuilderProfile_BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
@@ -888,6 +844,12 @@ export type BuilderProfile_EditLinkInput = {
   url: Scalars['URL']['input'];
 };
 
+export type BuilderProfile_OpHubMember = {
+  __typename?: 'BuilderProfile_OpHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
+};
+
 export type BuilderProfile_RemoveContributorInput = {
   contributorPHID: Scalars['PHID']['input'];
 };
@@ -902,6 +864,11 @@ export type BuilderProfile_RemoveScopeInput = {
 
 export type BuilderProfile_RemoveSkillInput = {
   skill?: InputMaybe<BuilderProfile_BuilderSkillInput>;
+};
+
+export type BuilderProfile_SetOpHubMemberInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  phid?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 export type BuilderProfile_SetOperatorInput = {
@@ -1041,15 +1008,6 @@ export type Builders_RemoveBuilderInput = {
   builderPhid: Scalars['PHID']['input'];
 };
 
-export type ChannelMeta = {
-  __typename?: 'ChannelMeta';
-  id: Scalars['String']['output'];
-};
-
-export type ChannelMetaInput = {
-  id: Scalars['String']['input'];
-};
-
 export type ClientInfo = {
   __typename?: 'ClientInfo';
   icon?: Maybe<Scalars['URL']['output']>;
@@ -1075,29 +1033,6 @@ export type Dimension = {
   name?: Maybe<Scalars['String']['output']>;
   values?: Maybe<Array<Maybe<Value>>>;
 };
-
-export type DocumentChangeContext = {
-  __typename?: 'DocumentChangeContext';
-  childId?: Maybe<Scalars['String']['output']>;
-  parentId?: Maybe<Scalars['String']['output']>;
-};
-
-export type DocumentChangeEvent = {
-  __typename?: 'DocumentChangeEvent';
-  context?: Maybe<DocumentChangeContext>;
-  documents: Array<PhDocument>;
-  type: DocumentChangeType;
-};
-
-export enum DocumentChangeType {
-  ChildAdded = 'CHILD_ADDED',
-  ChildRemoved = 'CHILD_REMOVED',
-  Created = 'CREATED',
-  Deleted = 'DELETED',
-  ParentAdded = 'PARENT_ADDED',
-  ParentRemoved = 'PARENT_REMOVED',
-  Updated = 'UPDATED'
-}
 
 export type DocumentDrive = IDocument & {
   __typename?: 'DocumentDrive';
@@ -1234,24 +1169,6 @@ export type DocumentModelOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type DocumentModelGlobalState = {
-  __typename?: 'DocumentModelGlobalState';
-  id: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  namespace?: Maybe<Scalars['String']['output']>;
-  specification: Scalars['JSONObject']['output'];
-  version?: Maybe<Scalars['String']['output']>;
-};
-
-export type DocumentModelResultPage = {
-  __typename?: 'DocumentModelResultPage';
-  cursor?: Maybe<Scalars['String']['output']>;
-  hasNextPage: Scalars['Boolean']['output'];
-  hasPreviousPage: Scalars['Boolean']['output'];
-  items: Array<DocumentModelGlobalState>;
-  totalCount: Scalars['Int']['output'];
-};
-
 export type DocumentModel_Author = {
   __typename?: 'DocumentModel_Author';
   name: Scalars['String']['output'];
@@ -1323,12 +1240,6 @@ export type DocumentModel_State = {
   examples: Array<DocumentModel_CodeExample>;
   initialValue: Scalars['String']['output'];
   schema: Scalars['String']['output'];
-};
-
-export type DocumentWithChildren = {
-  __typename?: 'DocumentWithChildren';
-  childIds: Array<Scalars['String']['output']>;
-  document: PhDocument;
 };
 
 export type DriveDocument = IDocument & {
@@ -2149,34 +2060,10 @@ export type Invoice_Token = {
   symbol?: Maybe<Scalars['String']['output']>;
 };
 
-export type JobChangeEvent = {
-  __typename?: 'JobChangeEvent';
-  error?: Maybe<Scalars['String']['output']>;
-  jobId: Scalars['String']['output'];
-  result: Scalars['JSONObject']['output'];
-  status: Scalars['String']['output'];
-};
-
-export type JobInfo = {
-  __typename?: 'JobInfo';
-  completedAt?: Maybe<Scalars['DateTime']['output']>;
-  createdAt: Scalars['DateTime']['output'];
-  error?: Maybe<Scalars['String']['output']>;
-  id: Scalars['String']['output'];
-  result: Scalars['JSONObject']['output'];
-  status: Scalars['String']['output'];
-};
-
 export type LinkedDocument = {
   __typename?: 'LinkedDocument';
   id: Scalars['PHID']['output'];
   stateJSON?: Maybe<Scalars['JSONObject']['output']>;
-};
-
-export type MoveChildrenResult = {
-  __typename?: 'MoveChildrenResult';
-  source: PhDocument;
-  target: PhDocument;
 };
 
 export type MultiCurrencyConversions = {
@@ -2229,6 +2116,7 @@ export type Mutation = {
   BuilderProfile_removeLink?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_removeScope?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_removeSkill?: Maybe<Scalars['Int']['output']>;
+  BuilderProfile_setOpHubMember?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_setOperator?: Maybe<Scalars['Int']['output']>;
   BuilderProfile_updateProfile?: Maybe<Scalars['Int']['output']>;
   Builders_addBuilder?: Maybe<Scalars['Int']['output']>;
@@ -2326,6 +2214,26 @@ export type Mutation = {
   RequestForProposals_editRfp?: Maybe<Scalars['Int']['output']>;
   RequestForProposals_removeContextDocument?: Maybe<Scalars['Int']['output']>;
   RequestForProposals_removeProposal?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_activateInstance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_applyConfigurationChanges?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_confirmInstance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_createDocument?: Maybe<Scalars['String']['output']>;
+  ResourceInstance_initializeInstance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_removeInstanceFacet?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_reportProvisioningCompleted?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_reportProvisioningFailed?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_reportProvisioningStarted?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_resumeAfterMaintenance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_resumeAfterPayment?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_setInstanceFacet?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_setResourceProfile?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_suspendForMaintenance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_suspendForNonPayment?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_suspendInstance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_terminateInstance?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_updateInstanceFacet?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_updateInstanceInfo?: Maybe<Scalars['Int']['output']>;
+  ResourceInstance_updateInstanceStatus?: Maybe<Scalars['Int']['output']>;
   ResourceTemplate_addContentSection?: Maybe<Scalars['Int']['output']>;
   ResourceTemplate_addFacetBinding?: Maybe<Scalars['Int']['output']>;
   ResourceTemplate_addFacetOption?: Maybe<Scalars['Int']['output']>;
@@ -2458,6 +2366,58 @@ export type Mutation = {
   SnapshotReport_setStartingBalance?: Maybe<Scalars['Int']['output']>;
   SnapshotReport_updateSnapshotAccountType?: Maybe<Scalars['Int']['output']>;
   SnapshotReport_updateTransactionFlowType?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_activateSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addCommunicationChannel?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addInvoiceLineItem?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addService?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addServiceGroup?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addServiceMetric?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addServiceToGroup?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_cancelInvoice?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_cancelSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_createDocument?: Maybe<Scalars['String']['output']>;
+  SubscriptionInstance_createInvoice?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_decrementMetricUsage?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_incrementMetricUsage?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_initializeSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_markInvoiceOverdue?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_pauseSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_recordInvoicePayment?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_refundInvoice?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeBudgetCategory?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeCommunicationChannel?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeInvoiceLineItem?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeService?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeServiceFromGroup?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeServiceGroup?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeServiceMetric?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_renewExpiringSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_reportRecurringPayment?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_reportSetupPayment?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_resumeSubscription?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_sendInvoice?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setAutoRenew?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setBudgetCategory?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setCustomerType?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setExpiring?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setInvoiceTax?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setOperatorNotes?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setPrimaryCommunicationChannel?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setRenewalDate?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_setResourceDocument?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateCustomerInfo?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateCustomerWallet?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateInvoiceStatus?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateKycStatus?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateMetric?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateMetricUsage?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateServiceInfo?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateServiceRecurringCost?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateServiceSetupCost?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateSubscriptionStatus?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateTeamMemberCount?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateTierInfo?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_verifyCommunicationChannel?: Maybe<Scalars['Int']['output']>;
   Workstream_addAlternativeProposal?: Maybe<Scalars['Int']['output']>;
   Workstream_addPaymentRequest?: Maybe<Scalars['Int']['output']>;
   Workstream_createDocument?: Maybe<Scalars['String']['output']>;
@@ -2468,22 +2428,11 @@ export type Mutation = {
   Workstream_removeAlternativeProposal?: Maybe<Scalars['Int']['output']>;
   Workstream_removePaymentRequest?: Maybe<Scalars['Int']['output']>;
   Workstream_setRequestForProposal?: Maybe<Scalars['Int']['output']>;
-  addChildren: PhDocument;
   addDrive?: Maybe<AddDriveResult>;
-  createDocument: PhDocument;
-  createEmptyDocument: PhDocument;
-  deleteDocument: Scalars['Boolean']['output'];
-  deleteDocuments: Scalars['Boolean']['output'];
+  deleteDocument?: Maybe<Scalars['Boolean']['output']>;
   deleteDrive?: Maybe<Scalars['Boolean']['output']>;
-  moveChildren: MoveChildrenResult;
-  mutateDocument: PhDocument;
-  mutateDocumentAsync: Scalars['String']['output'];
-  pushSyncEnvelope: Scalars['Boolean']['output'];
-  removeChildren: PhDocument;
-  renameDocument: PhDocument;
   setDriveIcon?: Maybe<Scalars['Boolean']['output']>;
   setDriveName?: Maybe<Scalars['Boolean']['output']>;
-  touchChannel: Scalars['Boolean']['output'];
 };
 
 
@@ -2751,6 +2700,14 @@ export type MutationBuilderProfile_RemoveSkillArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<BuilderProfile_RemoveSkillInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationBuilderProfile_SetOpHubMemberArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<BuilderProfile_SetOpHubMemberInput>;
 };
 
 
@@ -3520,6 +3477,165 @@ export type MutationRequestForProposals_RemoveProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<RequestForProposals_RemoveProposalInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ActivateInstanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ActivateInstanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ApplyConfigurationChangesArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ApplyConfigurationChangesInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ConfirmInstanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ConfirmInstanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_InitializeInstanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_InitializeInstanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_RemoveInstanceFacetArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_RemoveInstanceFacetInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ReportProvisioningCompletedArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ReportProvisioningCompletedInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ReportProvisioningFailedArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ReportProvisioningFailedInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ReportProvisioningStartedArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ReportProvisioningStartedInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ResumeAfterMaintenanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ResumeAfterMaintenanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_ResumeAfterPaymentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_ResumeAfterPaymentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_SetInstanceFacetArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_SetInstanceFacetInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_SetResourceProfileArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_SetResourceProfileInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_SuspendForMaintenanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_SuspendForMaintenanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_SuspendForNonPaymentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_SuspendForNonPaymentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_SuspendInstanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_SuspendInstanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_TerminateInstanceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_TerminateInstanceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_UpdateInstanceFacetArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_UpdateInstanceFacetInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_UpdateInstanceInfoArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_UpdateInstanceInfoInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationResourceInstance_UpdateInstanceStatusArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ResourceInstance_UpdateInstanceStatusInput>;
 };
 
 
@@ -4575,6 +4691,421 @@ export type MutationSnapshotReport_UpdateTransactionFlowTypeArgs = {
 
 
 /** Subgraph definition */
+export type MutationSubscriptionInstance_ActivateSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_ActivateSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddCommunicationChannelArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddCommunicationChannelInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddInvoiceLineItemArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddInvoiceLineItemInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddServiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddServiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddServiceGroupArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddServiceGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddServiceMetricArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddServiceMetricInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_AddServiceToGroupArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddServiceToGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_CancelInvoiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_CancelInvoiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_CancelSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_CancelSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_CreateDocumentArgs = {
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_CreateInvoiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_CreateInvoiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_DecrementMetricUsageArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_DecrementMetricUsageInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_IncrementMetricUsageArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_IncrementMetricUsageInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_InitializeSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_InitializeSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_MarkInvoiceOverdueArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_MarkInvoiceOverdueInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_PauseSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_PauseSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RecordInvoicePaymentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RecordInvoicePaymentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RefundInvoiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RefundInvoiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveBudgetCategoryArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveBudgetCategoryInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveCommunicationChannelArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveCommunicationChannelInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveInvoiceLineItemArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveInvoiceLineItemInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveServiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveServiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveServiceFromGroupArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveServiceFromGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveServiceGroupArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveServiceGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveServiceMetricArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveServiceMetricInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RenewExpiringSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RenewExpiringSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_ReportRecurringPaymentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_ReportRecurringPaymentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_ReportSetupPaymentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_ReportSetupPaymentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_ResumeSubscriptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_ResumeSubscriptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SendInvoiceArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SendInvoiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetAutoRenewArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetAutoRenewInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetBudgetCategoryArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetBudgetCategoryInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetCustomerTypeArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetCustomerTypeInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetExpiringArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetExpiringInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetInvoiceTaxArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetInvoiceTaxInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetOperatorNotesArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetOperatorNotesInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetPrimaryCommunicationChannelArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetPrimaryCommunicationChannelInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetRenewalDateArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetRenewalDateInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_SetResourceDocumentArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_SetResourceDocumentInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateCustomerInfoArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateCustomerInfoInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateCustomerWalletArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateCustomerWalletInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateInvoiceStatusArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateInvoiceStatusInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateKycStatusArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateKycStatusInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateMetricArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateMetricInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateMetricUsageArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateMetricUsageInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateServiceInfoArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateServiceInfoInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateServiceRecurringCostArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateServiceRecurringCostInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateServiceSetupCostArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateServiceSetupCostInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateSubscriptionStatusArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateSubscriptionStatusInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateTeamMemberCountArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateTeamMemberCountInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateTierInfoArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateTierInfoInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_VerifyCommunicationChannelArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_VerifyCommunicationChannelInput>;
+};
+
+
+/** Subgraph definition */
 export type MutationWorkstream_AddAlternativeProposalArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -4654,14 +5185,6 @@ export type MutationWorkstream_SetRequestForProposalArgs = {
 
 
 /** Subgraph definition */
-export type MutationAddChildrenArgs = {
-  branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
-  parentIdentifier: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
 export type MutationAddDriveArgs = {
   icon?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
@@ -4672,83 +5195,14 @@ export type MutationAddDriveArgs = {
 
 
 /** Subgraph definition */
-export type MutationCreateDocumentArgs = {
-  document: Scalars['JSONObject']['input'];
-  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** Subgraph definition */
-export type MutationCreateEmptyDocumentArgs = {
-  documentType: Scalars['String']['input'];
-  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-/** Subgraph definition */
 export type MutationDeleteDocumentArgs = {
-  identifier: Scalars['String']['input'];
-  propagate?: InputMaybe<PropagationMode>;
-};
-
-
-/** Subgraph definition */
-export type MutationDeleteDocumentsArgs = {
-  identifiers: Array<Scalars['String']['input']>;
-  propagate?: InputMaybe<PropagationMode>;
+  id: Scalars['PHID']['input'];
 };
 
 
 /** Subgraph definition */
 export type MutationDeleteDriveArgs = {
   id: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type MutationMoveChildrenArgs = {
-  branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
-  sourceParentIdentifier: Scalars['String']['input'];
-  targetParentIdentifier: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type MutationMutateDocumentArgs = {
-  actions: Array<Scalars['JSONObject']['input']>;
-  documentIdentifier: Scalars['String']['input'];
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
-export type MutationMutateDocumentAsyncArgs = {
-  actions: Array<Scalars['JSONObject']['input']>;
-  documentIdentifier: Scalars['String']['input'];
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
-export type MutationPushSyncEnvelopeArgs = {
-  envelope: SyncEnvelopeInput;
-};
-
-
-/** Subgraph definition */
-export type MutationRemoveChildrenArgs = {
-  branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
-  parentIdentifier: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type MutationRenameDocumentArgs = {
-  branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifier: Scalars['String']['input'];
-  name: Scalars['String']['input'];
 };
 
 
@@ -4763,12 +5217,6 @@ export type MutationSetDriveIconArgs = {
 export type MutationSetDriveNameArgs = {
   id: Scalars['String']['input'];
   name: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type MutationTouchChannelArgs = {
-  input: TouchChannelInput;
 };
 
 export type Network = {
@@ -4909,6 +5357,12 @@ export type NetworkProfile_SetYoutubeInput = {
   youtube?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type OpHubMember = {
+  __typename?: 'OpHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
+};
+
 export type Operation = {
   __typename?: 'Operation';
   context?: Maybe<PhOperationContext>;
@@ -4920,42 +5374,6 @@ export type Operation = {
   skip?: Maybe<Scalars['Int']['output']>;
   timestampUtcMs: Scalars['DateTime']['output'];
   type: Scalars['String']['output'];
-};
-
-export type OperationContext = {
-  __typename?: 'OperationContext';
-  branch: Scalars['String']['output'];
-  documentId: Scalars['String']['output'];
-  documentType: Scalars['String']['output'];
-  scope: Scalars['String']['output'];
-};
-
-export type OperationContextInput = {
-  branch: Scalars['String']['input'];
-  documentId: Scalars['String']['input'];
-  documentType: Scalars['String']['input'];
-  scope: Scalars['String']['input'];
-};
-
-export type OperationInput = {
-  action: ActionInput;
-  error?: InputMaybe<Scalars['String']['input']>;
-  hash: Scalars['String']['input'];
-  id?: InputMaybe<Scalars['String']['input']>;
-  index: Scalars['Int']['input'];
-  skip: Scalars['Int']['input'];
-  timestampUtcMs: Scalars['String']['input'];
-};
-
-export type OperationWithContext = {
-  __typename?: 'OperationWithContext';
-  context: OperationContext;
-  operation: ReactorOperation;
-};
-
-export type OperationWithContextInput = {
-  context: OperationContextInput;
-  operation: OperationInput;
 };
 
 export type OperationalHubProfile = IDocument & {
@@ -5020,28 +5438,6 @@ export type OperationalHubProfile_SetOperationalHubNameInput = {
 
 export type OperationalHubProfile_SetOperatorTeamInput = {
   operatorTeam?: InputMaybe<Scalars['PHID']['input']>;
-};
-
-export type PhDocument = {
-  __typename?: 'PHDocument';
-  createdAtUtcIso: Scalars['DateTime']['output'];
-  documentType: Scalars['String']['output'];
-  id: Scalars['String']['output'];
-  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
-  name: Scalars['String']['output'];
-  parentId?: Maybe<Scalars['String']['output']>;
-  revisionsList: Array<Revision>;
-  slug?: Maybe<Scalars['String']['output']>;
-  state: Scalars['JSONObject']['output'];
-};
-
-export type PhDocumentResultPage = {
-  __typename?: 'PHDocumentResultPage';
-  cursor?: Maybe<Scalars['String']['output']>;
-  hasNextPage: Scalars['Boolean']['output'];
-  hasPreviousPage: Scalars['Boolean']['output'];
-  items: Array<PhDocument>;
-  totalCount: Scalars['Int']['output'];
 };
 
 export type PhOperationContext = {
@@ -5165,12 +5561,6 @@ export type Pt_Retainer = {
   retainerAmount: Scalars['Amount']['output'];
   servicesIncluded: Scalars['String']['output'];
   startDate: Scalars['Date']['output'];
-};
-
-export type PagingInput = {
-  cursor?: InputMaybe<Scalars['String']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PaymentTerms = IDocument & {
@@ -5446,11 +5836,6 @@ export type ProcessorWorkstream = {
   workstream_title?: Maybe<Scalars['String']['output']>;
 };
 
-export enum PropagationMode {
-  Cascade = 'CASCADE',
-  Orphan = 'ORPHAN'
-}
-
 export type Proposal = {
   __typename?: 'Proposal';
   author: ProposalAuthor;
@@ -5494,27 +5879,22 @@ export type Query = {
   OperationalHubProfile?: Maybe<OperationalHubProfileQueries>;
   PaymentTerms?: Maybe<PaymentTermsQueries>;
   RequestForProposals?: Maybe<RequestForProposalsQueries>;
+  ResourceInstance?: Maybe<ResourceInstanceQueries>;
   ResourceTemplate?: Maybe<ResourceTemplateQueries>;
   ScopeOfWork?: Maybe<ScopeOfWorkQueries>;
   ServiceOffering?: Maybe<ServiceOfferingQueries>;
   ServiceSubscriptions?: Maybe<ServiceSubscriptionsQueries>;
   SnapshotReport?: Maybe<SnapshotReportQueries>;
+  SubscriptionInstance?: Maybe<SubscriptionInstanceQueries>;
   Workstream?: Maybe<WorkstreamQueries>;
   allNetworks: Array<AllNetworks>;
   analytics?: Maybe<AnalyticsQuery>;
   budgetStatements: Array<BudgetStatement>;
   builders: Array<BuilderProfileState>;
-  document?: Maybe<DocumentWithChildren>;
-  documentChildren: PhDocumentResultPage;
-  documentModels: DocumentModelResultPage;
-  documentParents: PhDocumentResultPage;
   driveDocument?: Maybe<DocumentDrive>;
   driveDocuments: Array<DocumentDrive>;
   driveIdBySlug?: Maybe<Scalars['String']['output']>;
   drives: Array<Scalars['String']['output']>;
-  findDocuments: PhDocumentResultPage;
-  jobStatus?: Maybe<JobInfo>;
-  pollSyncEnvelopes: Array<SyncEnvelope>;
   processorWorkstreams: Array<ProcessorWorkstream>;
   resourceTemplates: Array<RsResourceTemplate>;
   rfpByWorkstream: Array<WorkstreamRfp>;
@@ -5544,36 +5924,6 @@ export type QueryBuildersArgs = {
 
 
 /** Subgraph definition */
-export type QueryDocumentArgs = {
-  identifier: Scalars['String']['input'];
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
-export type QueryDocumentChildrenArgs = {
-  paging?: InputMaybe<PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
-export type QueryDocumentModelsArgs = {
-  namespace?: InputMaybe<Scalars['String']['input']>;
-  paging?: InputMaybe<PagingInput>;
-};
-
-
-/** Subgraph definition */
-export type QueryDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
-  paging?: InputMaybe<PagingInput>;
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
 export type QueryDriveDocumentArgs = {
   idOrSlug: Scalars['String']['input'];
 };
@@ -5582,27 +5932,6 @@ export type QueryDriveDocumentArgs = {
 /** Subgraph definition */
 export type QueryDriveIdBySlugArgs = {
   slug: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type QueryFindDocumentsArgs = {
-  paging?: InputMaybe<PagingInput>;
-  search: SearchFilterInput;
-  view?: InputMaybe<ViewFilterInput>;
-};
-
-
-/** Subgraph definition */
-export type QueryJobStatusArgs = {
-  jobId: Scalars['String']['input'];
-};
-
-
-/** Subgraph definition */
-export type QueryPollSyncEnvelopesArgs = {
-  channelId: Scalars['String']['input'];
-  cursorOrdinal: Scalars['Int']['input'];
 };
 
 
@@ -5761,9 +6090,7 @@ export type RsResourceTemplate = {
   infoLink?: Maybe<Scalars['URL']['output']>;
   lastModified: Scalars['DateTime']['output'];
   operatorId: Scalars['PHID']['output'];
-  optionGroups: Array<RsOptionGroup>;
   recurringServices: Array<Scalars['String']['output']>;
-  services: Array<RsResourceService>;
   setupServices: Array<Scalars['String']['output']>;
   status: RsTemplateStatus;
   summary: Scalars['String']['output'];
@@ -5895,73 +6222,6 @@ export type RsTierPricingOption = {
   isDefault: Scalars['Boolean']['output'];
   perSeatAmount?: Maybe<Scalars['Amount_Money']['output']>;
   setupFee?: Maybe<Scalars['Amount_Money']['output']>;
-};
-
-export type ReactorOperation = {
-  __typename?: 'ReactorOperation';
-  action: Action;
-  error?: Maybe<Scalars['String']['output']>;
-  hash: Scalars['String']['output'];
-  id?: Maybe<Scalars['String']['output']>;
-  index: Scalars['Int']['output'];
-  skip: Scalars['Int']['output'];
-  timestampUtcMs: Scalars['String']['output'];
-};
-
-export type ReactorSigner = {
-  __typename?: 'ReactorSigner';
-  app?: Maybe<ReactorSignerApp>;
-  signatures: Array<Scalars['String']['output']>;
-  user?: Maybe<ReactorSignerUser>;
-};
-
-export type ReactorSignerApp = {
-  __typename?: 'ReactorSignerApp';
-  key: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type ReactorSignerAppInput = {
-  key: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-};
-
-export type ReactorSignerInput = {
-  app?: InputMaybe<ReactorSignerAppInput>;
-  signatures: Array<Scalars['String']['input']>;
-  user?: InputMaybe<ReactorSignerUserInput>;
-};
-
-export type ReactorSignerUser = {
-  __typename?: 'ReactorSignerUser';
-  address: Scalars['String']['output'];
-  chainId: Scalars['Int']['output'];
-  networkId: Scalars['String']['output'];
-};
-
-export type ReactorSignerUserInput = {
-  address: Scalars['String']['input'];
-  chainId: Scalars['Int']['input'];
-  networkId: Scalars['String']['input'];
-};
-
-export type RemoteCursor = {
-  __typename?: 'RemoteCursor';
-  cursorOrdinal: Scalars['Int']['output'];
-  lastSyncedAtUtcMs?: Maybe<Scalars['String']['output']>;
-  remoteName: Scalars['String']['output'];
-};
-
-export type RemoteCursorInput = {
-  cursorOrdinal: Scalars['Int']['input'];
-  lastSyncedAtUtcMs?: InputMaybe<Scalars['String']['input']>;
-  remoteName: Scalars['String']['input'];
-};
-
-export type RemoteFilterInput = {
-  branch: Scalars['String']['input'];
-  documentId: Array<Scalars['String']['input']>;
-  scope: Array<Scalars['String']['input']>;
 };
 
 export type RequestForProposals = IDocument & {
@@ -6180,6 +6440,205 @@ export enum RequestForProposals_RfpProposalStatusInput {
   UnderReview = 'UNDER_REVIEW',
   Withdrawn = 'WITHDRAWN'
 }
+
+export type ResourceInstance = IDocument & {
+  __typename?: 'ResourceInstance';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: ResourceInstance_ResourceInstanceState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: ResourceInstance_ResourceInstanceState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type ResourceInstanceOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: ResourceInstance Document */
+export type ResourceInstanceQueries = {
+  __typename?: 'ResourceInstanceQueries';
+  getDocument?: Maybe<ResourceInstance>;
+  getDocuments?: Maybe<Array<ResourceInstance>>;
+};
+
+
+/** Queries: ResourceInstance Document */
+export type ResourceInstanceQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
+
+/** Queries: ResourceInstance Document */
+export type ResourceInstanceQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
+};
+
+export type ResourceInstance_ActivateInstanceInput = {
+  activatedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_ApplyConfigurationChangesInput = {
+  addFacets?: InputMaybe<Array<ResourceInstance_SetInstanceFacetInput>>;
+  appliedAt: Scalars['DateTime']['input'];
+  changeDescription?: InputMaybe<Scalars['String']['input']>;
+  removeFacetKeys?: InputMaybe<Array<Scalars['String']['input']>>;
+  updateFacets?: InputMaybe<Array<ResourceInstance_UpdateInstanceFacetInput>>;
+};
+
+export type ResourceInstance_ConfirmInstanceInput = {
+  confirmedAt: Scalars['DateTime']['input'];
+};
+
+/** Module: InstanceManagement */
+export type ResourceInstance_InitializeInstanceInput = {
+  customerId?: InputMaybe<Scalars['PHID']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  infoLink?: InputMaybe<Scalars['URL']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  profileDocumentType: Scalars['String']['input'];
+  profileId: Scalars['PHID']['input'];
+  resourceTemplateId?: InputMaybe<Scalars['PHID']['input']>;
+  thumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type ResourceInstance_InstanceFacet = {
+  __typename?: 'ResourceInstance_InstanceFacet';
+  categoryKey: Scalars['String']['output'];
+  categoryLabel: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  selectedOption: Scalars['String']['output'];
+};
+
+export enum ResourceInstance_InstanceStatus {
+  Active = 'ACTIVE',
+  Draft = 'DRAFT',
+  Provisioning = 'PROVISIONING',
+  Suspended = 'SUSPENDED',
+  Terminated = 'TERMINATED'
+}
+
+export type ResourceInstance_RemoveInstanceFacetInput = {
+  categoryKey: Scalars['String']['input'];
+};
+
+export type ResourceInstance_ReportProvisioningCompletedInput = {
+  completedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_ReportProvisioningFailedInput = {
+  failedAt: Scalars['DateTime']['input'];
+  failureReason: Scalars['String']['input'];
+};
+
+export type ResourceInstance_ReportProvisioningStartedInput = {
+  startedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_ResourceInstanceState = {
+  __typename?: 'ResourceInstance_ResourceInstanceState';
+  activatedAt?: Maybe<Scalars['DateTime']['output']>;
+  configuration: Array<ResourceInstance_InstanceFacet>;
+  confirmedAt?: Maybe<Scalars['DateTime']['output']>;
+  customerId?: Maybe<Scalars['PHID']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  infoLink?: Maybe<Scalars['URL']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  profile?: Maybe<ResourceInstance_ResourceProfile>;
+  provisioningCompletedAt?: Maybe<Scalars['DateTime']['output']>;
+  provisioningFailureReason?: Maybe<Scalars['String']['output']>;
+  provisioningStartedAt?: Maybe<Scalars['DateTime']['output']>;
+  resourceTemplateId?: Maybe<Scalars['PHID']['output']>;
+  resumedAt?: Maybe<Scalars['DateTime']['output']>;
+  status: ResourceInstance_InstanceStatus;
+  suspendedAt?: Maybe<Scalars['DateTime']['output']>;
+  suspensionDetails?: Maybe<Scalars['String']['output']>;
+  suspensionReason?: Maybe<Scalars['String']['output']>;
+  suspensionType?: Maybe<ResourceInstance_SuspensionType>;
+  terminatedAt?: Maybe<Scalars['DateTime']['output']>;
+  terminationReason?: Maybe<Scalars['String']['output']>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+};
+
+export type ResourceInstance_ResourceProfile = {
+  __typename?: 'ResourceInstance_ResourceProfile';
+  documentType: Scalars['String']['output'];
+  id: Scalars['PHID']['output'];
+};
+
+export type ResourceInstance_ResumeAfterMaintenanceInput = {
+  resumedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_ResumeAfterPaymentInput = {
+  paymentReference?: InputMaybe<Scalars['String']['input']>;
+  resumedAt: Scalars['DateTime']['input'];
+};
+
+/** Module: ConfigurationManagement */
+export type ResourceInstance_SetInstanceFacetInput = {
+  categoryKey: Scalars['String']['input'];
+  categoryLabel: Scalars['String']['input'];
+  id: Scalars['OID']['input'];
+  selectedOption: Scalars['String']['input'];
+};
+
+export type ResourceInstance_SetResourceProfileInput = {
+  profileDocumentType: Scalars['String']['input'];
+  profileId: Scalars['PHID']['input'];
+};
+
+export type ResourceInstance_SuspendForMaintenanceInput = {
+  estimatedDuration?: InputMaybe<Scalars['String']['input']>;
+  maintenanceType?: InputMaybe<Scalars['String']['input']>;
+  suspendedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_SuspendForNonPaymentInput = {
+  daysPastDue?: InputMaybe<Scalars['Int']['input']>;
+  outstandingAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  suspendedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_SuspendInstanceInput = {
+  reason?: InputMaybe<Scalars['String']['input']>;
+  suspendedAt: Scalars['DateTime']['input'];
+};
+
+export enum ResourceInstance_SuspensionType {
+  Maintenance = 'MAINTENANCE',
+  NonPayment = 'NON_PAYMENT',
+  Other = 'OTHER'
+}
+
+export type ResourceInstance_TerminateInstanceInput = {
+  reason: Scalars['String']['input'];
+  terminatedAt: Scalars['DateTime']['input'];
+};
+
+export type ResourceInstance_UpdateInstanceFacetInput = {
+  categoryKey: Scalars['String']['input'];
+  categoryLabel?: InputMaybe<Scalars['String']['input']>;
+  selectedOption?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ResourceInstance_UpdateInstanceInfoInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  infoLink?: InputMaybe<Scalars['URL']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  thumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type ResourceInstance_UpdateInstanceStatusInput = {
+  status: ResourceInstance_InstanceStatus;
+};
 
 export type ResourceTemplate = IDocument & {
   __typename?: 'ResourceTemplate';
@@ -6498,12 +6957,6 @@ export type ResourceTemplate_UpdateTemplateInfoInput = {
 export type ResourceTemplate_UpdateTemplateStatusInput = {
   lastModified: Scalars['DateTime']['input'];
   status: ResourceTemplate_TemplateStatus;
-};
-
-export type Revision = {
-  __typename?: 'Revision';
-  revision: Scalars['Int']['output'];
-  scope: Scalars['String']['output'];
 };
 
 export type Sow_Agent = {
@@ -7169,12 +7622,6 @@ export type ScopeOfWork_UpdateProjectInput = {
 export type ScopeOfWork_UpdateProjectOwnerInput = {
   id: Scalars['OID']['input'];
   projectOwner: Scalars['ID']['input'];
-};
-
-export type SearchFilterInput = {
-  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
-  parentId?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ServiceOffering = IDocument & {
@@ -8177,54 +8624,587 @@ export type SnapshotReport_UpdateTransactionFlowTypeInput = {
   id: Scalars['OID']['input'];
 };
 
-export type Subscription = {
-  __typename?: 'Subscription';
-  documentChanges: DocumentChangeEvent;
-  jobChanges: JobChangeEvent;
+export type SubscriptionInstance = IDocument & {
+  __typename?: 'SubscriptionInstance';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: SubscriptionInstance_SubscriptionInstanceState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: SubscriptionInstance_SubscriptionInstanceState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
 };
 
 
-export type SubscriptionDocumentChangesArgs = {
-  search: SearchFilterInput;
-  view?: InputMaybe<ViewFilterInput>;
+export type SubscriptionInstanceOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** Queries: SubscriptionInstance Document */
+export type SubscriptionInstanceQueries = {
+  __typename?: 'SubscriptionInstanceQueries';
+  getDocument?: Maybe<SubscriptionInstance>;
+  getDocuments?: Maybe<Array<SubscriptionInstance>>;
 };
 
 
-export type SubscriptionJobChangesArgs = {
-  jobId: Scalars['String']['input'];
+/** Queries: SubscriptionInstance Document */
+export type SubscriptionInstanceQueriesGetDocumentArgs = {
+  docId: Scalars['PHID']['input'];
+  driveId?: InputMaybe<Scalars['PHID']['input']>;
 };
 
-export type SyncEnvelope = {
-  __typename?: 'SyncEnvelope';
-  channelMeta: ChannelMeta;
-  cursor?: Maybe<RemoteCursor>;
-  operations?: Maybe<Array<OperationWithContext>>;
-  type: SyncEnvelopeType;
+
+/** Queries: SubscriptionInstance Document */
+export type SubscriptionInstanceQueriesGetDocumentsArgs = {
+  driveId: Scalars['String']['input'];
 };
 
-export type SyncEnvelopeInput = {
-  channelMeta: ChannelMetaInput;
-  cursor?: InputMaybe<RemoteCursorInput>;
-  operations?: InputMaybe<Array<OperationWithContextInput>>;
-  type: SyncEnvelopeType;
+export type SubscriptionInstance_ActivateSubscriptionInput = {
+  activatedSince: Scalars['DateTime']['input'];
 };
 
-export enum SyncEnvelopeType {
-  Ack = 'ACK',
-  Operations = 'OPERATIONS'
+export type SubscriptionInstance_AddCommunicationChannelInput = {
+  channelId: Scalars['OID']['input'];
+  identifier: Scalars['String']['input'];
+  isPrimary: Scalars['Boolean']['input'];
+  type: SubscriptionInstance_CommunicationChannelType;
+  verifiedAt?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type SubscriptionInstance_AddInvoiceLineItemInput = {
+  description: Scalars['String']['input'];
+  invoiceId: Scalars['OID']['input'];
+  lineItemId: Scalars['OID']['input'];
+  metricId?: InputMaybe<Scalars['OID']['input']>;
+  quantity: Scalars['Int']['input'];
+  serviceId?: InputMaybe<Scalars['OID']['input']>;
+  unitPrice: Scalars['Amount_Money']['input'];
+};
+
+/** Module: ServiceGroup */
+export type SubscriptionInstance_AddServiceGroupInput = {
+  groupId: Scalars['OID']['input'];
+  name: Scalars['String']['input'];
+  optional: Scalars['Boolean']['input'];
+};
+
+/** Module: Service */
+export type SubscriptionInstance_AddServiceInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+  recurringNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+/** Module: Metrics */
+export type SubscriptionInstance_AddServiceMetricInput = {
+  currentUsage: Scalars['Int']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  metricId: Scalars['OID']['input'];
+  name: Scalars['String']['input'];
+  nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+  unitCostAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  unitCostBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  unitCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  unitCostLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+  unitCostNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  unitName: Scalars['String']['input'];
+  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
+};
+
+export type SubscriptionInstance_AddServiceToGroupInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  groupId: Scalars['OID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+  recurringNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export enum SubscriptionInstance_BillingCycle {
+  Annual = 'ANNUAL',
+  Monthly = 'MONTHLY',
+  OneTime = 'ONE_TIME',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL'
 }
+
+export type SubscriptionInstance_BudgetCategory = {
+  __typename?: 'SubscriptionInstance_BudgetCategory';
+  id: Scalars['OID']['output'];
+  label: Scalars['String']['output'];
+};
+
+export type SubscriptionInstance_CancelInvoiceInput = {
+  invoiceId: Scalars['OID']['input'];
+  reason?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubscriptionInstance_CancelSubscriptionInput = {
+  cancellationReason?: InputMaybe<Scalars['String']['input']>;
+  cancelledSince: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_CommunicationChannel = {
+  __typename?: 'SubscriptionInstance_CommunicationChannel';
+  id: Scalars['OID']['output'];
+  identifier: Scalars['String']['output'];
+  isPrimary: Scalars['Boolean']['output'];
+  type: SubscriptionInstance_CommunicationChannelType;
+  verifiedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export enum SubscriptionInstance_CommunicationChannelType {
+  Discord = 'DISCORD',
+  Email = 'EMAIL',
+  Slack = 'SLACK',
+  Telegram = 'TELEGRAM',
+  Whatsapp = 'WHATSAPP'
+}
+
+/** Module: Billing */
+export type SubscriptionInstance_CreateInvoiceInput = {
+  currency: Scalars['Currency']['input'];
+  dueDate: Scalars['DateTime']['input'];
+  invoiceId: Scalars['OID']['input'];
+  invoiceNumber: Scalars['String']['input'];
+  issueDate: Scalars['DateTime']['input'];
+  notes?: InputMaybe<Scalars['String']['input']>;
+  periodEnd: Scalars['DateTime']['input'];
+  periodStart: Scalars['DateTime']['input'];
+};
+
+export enum SubscriptionInstance_CustomerType {
+  Individual = 'INDIVIDUAL',
+  Team = 'TEAM'
+}
+
+export type SubscriptionInstance_DecrementMetricUsageInput = {
+  currentTime: Scalars['DateTime']['input'];
+  decrementBy: Scalars['Int']['input'];
+  metricId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_IncrementMetricUsageInput = {
+  currentTime: Scalars['DateTime']['input'];
+  incrementBy: Scalars['Int']['input'];
+  metricId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+/** Module: Subscription */
+export type SubscriptionInstance_InitializeSubscriptionInput = {
+  autoRenew?: InputMaybe<Scalars['Boolean']['input']>;
+  createdAt: Scalars['DateTime']['input'];
+  customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
+  customerId?: InputMaybe<Scalars['PHID']['input']>;
+  customerName?: InputMaybe<Scalars['String']['input']>;
+  resourceId?: InputMaybe<Scalars['PHID']['input']>;
+  resourceLabel?: InputMaybe<Scalars['String']['input']>;
+  resourceThumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
+  serviceOfferingId?: InputMaybe<Scalars['PHID']['input']>;
+  tierName?: InputMaybe<Scalars['String']['input']>;
+  tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
+};
+
+export type SubscriptionInstance_Invoice = {
+  __typename?: 'SubscriptionInstance_Invoice';
+  currency: Scalars['Currency']['output'];
+  dueDate: Scalars['DateTime']['output'];
+  id: Scalars['OID']['output'];
+  invoiceNumber: Scalars['String']['output'];
+  issueDate: Scalars['DateTime']['output'];
+  lineItems: Array<SubscriptionInstance_InvoiceLineItem>;
+  notes?: Maybe<Scalars['String']['output']>;
+  paidDate?: Maybe<Scalars['DateTime']['output']>;
+  payments: Array<SubscriptionInstance_InvoicePayment>;
+  periodEnd: Scalars['DateTime']['output'];
+  periodStart: Scalars['DateTime']['output'];
+  status: SubscriptionInstance_InvoiceStatus;
+  subtotal: Scalars['Amount_Money']['output'];
+  tax?: Maybe<Scalars['Amount_Money']['output']>;
+  total: Scalars['Amount_Money']['output'];
+};
+
+export type SubscriptionInstance_InvoiceLineItem = {
+  __typename?: 'SubscriptionInstance_InvoiceLineItem';
+  description: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  metricId?: Maybe<Scalars['OID']['output']>;
+  quantity: Scalars['Int']['output'];
+  serviceId?: Maybe<Scalars['OID']['output']>;
+  total: Scalars['Amount_Money']['output'];
+  unitPrice: Scalars['Amount_Money']['output'];
+};
+
+export type SubscriptionInstance_InvoicePayment = {
+  __typename?: 'SubscriptionInstance_InvoicePayment';
+  amount: Scalars['Amount_Money']['output'];
+  currency: Scalars['Currency']['output'];
+  id: Scalars['OID']['output'];
+  paymentDate: Scalars['DateTime']['output'];
+  paymentMethod: SubscriptionInstance_PaymentMethod;
+  reference?: Maybe<Scalars['String']['output']>;
+  transactionHash?: Maybe<Scalars['String']['output']>;
+  walletAddress?: Maybe<Scalars['EthereumAddress']['output']>;
+};
+
+export enum SubscriptionInstance_InvoiceStatus {
+  Cancelled = 'CANCELLED',
+  Draft = 'DRAFT',
+  Overdue = 'OVERDUE',
+  Paid = 'PAID',
+  PartiallyPaid = 'PARTIALLY_PAID',
+  Refunded = 'REFUNDED',
+  Sent = 'SENT'
+}
+
+export enum SubscriptionInstance_KycStatus {
+  NotRequired = 'NOT_REQUIRED',
+  NotStarted = 'NOT_STARTED',
+  Pending = 'PENDING',
+  Rejected = 'REJECTED',
+  Verified = 'VERIFIED'
+}
+
+export type SubscriptionInstance_MarkInvoiceOverdueInput = {
+  invoiceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_PauseSubscriptionInput = {
+  pausedSince: Scalars['DateTime']['input'];
+};
+
+export enum SubscriptionInstance_PaymentMethod {
+  BankTransfer = 'BANK_TRANSFER',
+  CreditCard = 'CREDIT_CARD',
+  Crypto = 'CRYPTO',
+  Other = 'OTHER',
+  Paypal = 'PAYPAL'
+}
+
+export type SubscriptionInstance_RecordInvoicePaymentInput = {
+  amount: Scalars['Amount_Money']['input'];
+  currency: Scalars['Currency']['input'];
+  invoiceId: Scalars['OID']['input'];
+  paymentDate: Scalars['DateTime']['input'];
+  paymentId: Scalars['OID']['input'];
+  paymentMethod: SubscriptionInstance_PaymentMethod;
+  reference?: InputMaybe<Scalars['String']['input']>;
+  transactionHash?: InputMaybe<Scalars['String']['input']>;
+  walletAddress?: InputMaybe<Scalars['EthereumAddress']['input']>;
+};
+
+export type SubscriptionInstance_RecurringCost = {
+  __typename?: 'SubscriptionInstance_RecurringCost';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: SubscriptionInstance_BillingCycle;
+  currency: Scalars['Currency']['output'];
+  lastPaymentDate?: Maybe<Scalars['DateTime']['output']>;
+  nextBillingDate?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type SubscriptionInstance_RefundInvoiceInput = {
+  invoiceId: Scalars['OID']['input'];
+  reason?: InputMaybe<Scalars['String']['input']>;
+  refundDate: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_RemoveBudgetCategoryInput = {
+  budgetId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveCommunicationChannelInput = {
+  channelId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveInvoiceLineItemInput = {
+  invoiceId: Scalars['OID']['input'];
+  lineItemId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveServiceFromGroupInput = {
+  groupId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveServiceGroupInput = {
+  groupId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveServiceInput = {
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveServiceMetricInput = {
+  metricId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RenewExpiringSubscriptionInput = {
+  newRenewalDate?: InputMaybe<Scalars['DateTime']['input']>;
+  timestamp: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_ReportRecurringPaymentInput = {
+  paymentDate: Scalars['DateTime']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_ReportSetupPaymentInput = {
+  paymentDate: Scalars['DateTime']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export enum SubscriptionInstance_ResetPeriod {
+  Annual = 'ANNUAL',
+  Daily = 'DAILY',
+  Hourly = 'HOURLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
+  Weekly = 'WEEKLY'
+}
+
+export type SubscriptionInstance_ResourceDocument = {
+  __typename?: 'SubscriptionInstance_ResourceDocument';
+  id: Scalars['PHID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+};
+
+export type SubscriptionInstance_ResumeSubscriptionInput = {
+  timestamp: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_SendInvoiceInput = {
+  invoiceId: Scalars['OID']['input'];
+  sentDate: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_Service = {
+  __typename?: 'SubscriptionInstance_Service';
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  metrics: Array<SubscriptionInstance_ServiceMetric>;
+  name?: Maybe<Scalars['String']['output']>;
+  recurringCost?: Maybe<SubscriptionInstance_RecurringCost>;
+  setupCost?: Maybe<SubscriptionInstance_SetupCost>;
+};
+
+export type SubscriptionInstance_ServiceGroup = {
+  __typename?: 'SubscriptionInstance_ServiceGroup';
+  id: Scalars['OID']['output'];
+  name: Scalars['String']['output'];
+  optional: Scalars['Boolean']['output'];
+  services: Array<SubscriptionInstance_Service>;
+};
+
+export type SubscriptionInstance_ServiceMetric = {
+  __typename?: 'SubscriptionInstance_ServiceMetric';
+  currentUsage: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  limit?: Maybe<Scalars['Int']['output']>;
+  name: Scalars['String']['output'];
+  nextUsageReset?: Maybe<Scalars['DateTime']['output']>;
+  unitCost?: Maybe<SubscriptionInstance_RecurringCost>;
+  unitName: Scalars['String']['output'];
+  usageResetPeriod?: Maybe<SubscriptionInstance_ResetPeriod>;
+};
+
+export type SubscriptionInstance_SetAutoRenewInput = {
+  autoRenew: Scalars['Boolean']['input'];
+};
+
+export type SubscriptionInstance_SetBudgetCategoryInput = {
+  budgetId: Scalars['OID']['input'];
+  budgetLabel: Scalars['String']['input'];
+};
+
+export type SubscriptionInstance_SetCustomerTypeInput = {
+  customerType: SubscriptionInstance_CustomerType;
+  teamMemberCount?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type SubscriptionInstance_SetExpiringInput = {
+  expiringSince: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_SetInvoiceTaxInput = {
+  invoiceId: Scalars['OID']['input'];
+  tax: Scalars['Amount_Money']['input'];
+};
+
+export type SubscriptionInstance_SetOperatorNotesInput = {
+  operatorNotes?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubscriptionInstance_SetPrimaryCommunicationChannelInput = {
+  channelId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_SetRenewalDateInput = {
+  renewalDate: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_SetResourceDocumentInput = {
+  resourceId: Scalars['PHID']['input'];
+  resourceLabel?: InputMaybe<Scalars['String']['input']>;
+  resourceThumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type SubscriptionInstance_SetupCost = {
+  __typename?: 'SubscriptionInstance_SetupCost';
+  amount: Scalars['Amount_Money']['output'];
+  billingDate?: Maybe<Scalars['DateTime']['output']>;
+  currency: Scalars['Currency']['output'];
+  paymentDate?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type SubscriptionInstance_SubscriptionInstanceState = {
+  __typename?: 'SubscriptionInstance_SubscriptionInstanceState';
+  activatedSince?: Maybe<Scalars['DateTime']['output']>;
+  autoRenew: Scalars['Boolean']['output'];
+  budget?: Maybe<SubscriptionInstance_BudgetCategory>;
+  cancellationReason?: Maybe<Scalars['String']['output']>;
+  cancelledSince?: Maybe<Scalars['DateTime']['output']>;
+  communications: Array<SubscriptionInstance_CommunicationChannel>;
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  customerEmail?: Maybe<Scalars['EmailAddress']['output']>;
+  customerId?: Maybe<Scalars['PHID']['output']>;
+  customerName?: Maybe<Scalars['String']['output']>;
+  customerType?: Maybe<SubscriptionInstance_CustomerType>;
+  customerWalletAddress?: Maybe<Scalars['EthereumAddress']['output']>;
+  expiringSince?: Maybe<Scalars['DateTime']['output']>;
+  invoices: Array<SubscriptionInstance_Invoice>;
+  kycStatus?: Maybe<SubscriptionInstance_KycStatus>;
+  operatorId?: Maybe<Scalars['PHID']['output']>;
+  operatorNotes?: Maybe<Scalars['String']['output']>;
+  pausedSince?: Maybe<Scalars['DateTime']['output']>;
+  renewalDate?: Maybe<Scalars['DateTime']['output']>;
+  resource?: Maybe<SubscriptionInstance_ResourceDocument>;
+  serviceGroups: Array<SubscriptionInstance_ServiceGroup>;
+  serviceOfferingId?: Maybe<Scalars['PHID']['output']>;
+  services: Array<SubscriptionInstance_Service>;
+  status: SubscriptionInstance_SubscriptionStatus;
+  teamMemberCount?: Maybe<Scalars['Int']['output']>;
+  tierName?: Maybe<Scalars['String']['output']>;
+  tierPricingOptionId?: Maybe<Scalars['OID']['output']>;
+};
+
+export enum SubscriptionInstance_SubscriptionStatus {
+  Active = 'ACTIVE',
+  Cancelled = 'CANCELLED',
+  Expiring = 'EXPIRING',
+  Paused = 'PAUSED',
+  Pending = 'PENDING'
+}
+
+export type SubscriptionInstance_UpdateCustomerInfoInput = {
+  customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
+  customerId?: InputMaybe<Scalars['PHID']['input']>;
+  customerName?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: Customer */
+export type SubscriptionInstance_UpdateCustomerWalletInput = {
+  walletAddress?: InputMaybe<Scalars['EthereumAddress']['input']>;
+};
+
+export type SubscriptionInstance_UpdateInvoiceStatusInput = {
+  invoiceId: Scalars['OID']['input'];
+  paidDate?: InputMaybe<Scalars['DateTime']['input']>;
+  status: SubscriptionInstance_InvoiceStatus;
+};
+
+export type SubscriptionInstance_UpdateKycStatusInput = {
+  kycStatus: SubscriptionInstance_KycStatus;
+};
+
+export type SubscriptionInstance_UpdateMetricInput = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  metricId: Scalars['OID']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+  unitName?: InputMaybe<Scalars['String']['input']>;
+  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
+};
+
+export type SubscriptionInstance_UpdateMetricUsageInput = {
+  currentTime: Scalars['DateTime']['input'];
+  currentUsage: Scalars['Int']['input'];
+  metricId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_UpdateServiceInfoInput = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_UpdateServiceRecurringCostInput = {
+  amount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  billingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  lastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+  nextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_UpdateServiceSetupCostInput = {
+  amount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  billingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  paymentDate?: InputMaybe<Scalars['DateTime']['input']>;
+  serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_UpdateSubscriptionStatusInput = {
+  status: SubscriptionInstance_SubscriptionStatus;
+};
+
+export type SubscriptionInstance_UpdateTeamMemberCountInput = {
+  teamMemberCount: Scalars['Int']['input'];
+};
+
+export type SubscriptionInstance_UpdateTierInfoInput = {
+  tierName?: InputMaybe<Scalars['String']['input']>;
+  tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
+};
+
+export type SubscriptionInstance_VerifyCommunicationChannelInput = {
+  channelId: Scalars['OID']['input'];
+  verifiedAt: Scalars['DateTime']['input'];
+};
 
 export type Token = {
   __typename?: 'Token';
   contractAddress: Scalars['EthereumAddress']['output'];
   symbol: Scalars['String']['output'];
-};
-
-export type TouchChannelInput = {
-  collectionId: Scalars['String']['input'];
-  filter: RemoteFilterInput;
-  id: Scalars['String']['input'];
-  name: Scalars['String']['input'];
 };
 
 export type TxAmount = {
@@ -8247,11 +9227,6 @@ export type Value = {
   icon?: Maybe<Scalars['String']['output']>;
   label?: Maybe<Scalars['String']['output']>;
   path?: Maybe<Scalars['String']['output']>;
-};
-
-export type ViewFilterInput = {
-  branch?: InputMaybe<Scalars['String']['input']>;
-  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type Workstream = IDocument & {
@@ -8493,7 +9468,6 @@ export type BuildersFilter = {
   skills?: InputMaybe<Array<BuilderSkill>>;
   slug?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BuilderStatus>;
-  type?: InputMaybe<TeamType>;
 };
 
 export type NetworkFilter = {
@@ -8510,24 +9484,19 @@ export type ScopeOfWorkByNetworkOrStatusFilter = {
   workstreamStatus?: InputMaybe<WorkstreamStatus>;
 };
 
-export enum TeamType {
-  Individual = 'INDIVIDUAL',
-  Team = 'TEAM'
-}
-
 export type BuilderProfileQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
 }>;
 
 
-export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, about?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
+export type BuilderProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, about?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, isOperator: boolean, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null, phid?: any | null }, projects: Array<{ __typename?: 'BuilderProject', budget?: number | null, title: string, code: string, slug: string, currency?: Sow_PmCurrency | null, abstract?: string | null, id: any, scope?: { __typename?: 'Builder_SOW_DeliverablesSet', status: Sow_DeliverableSetStatus, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number }, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number } } | null }> }> };
 
 export type BuildersListQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
 }>;
 
 
-export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, type: TeamType, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }> }> };
+export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, isOperator: boolean, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null, phid?: any | null } }> };
 
 export type BudgetStatementsDetailsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -8599,6 +9568,11 @@ export type RoadmapListQueryVariables = Exact<{
 
 export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }> }> } | null }> };
 
+export type ResourceTemplatesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ResourceTemplatesQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', description?: string | null, infoLink?: any | null, lastModified: any, title: string, thumbnailUrl?: any | null, operatorId: any, recurringServices: Array<string>, status: RsTemplateStatus, summary: string, setupServices: Array<string>, id: any, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }>, facetTargets: Array<{ __typename?: 'RSFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, faqFields: Array<{ __typename?: 'RSFaqField', id: any, question?: string | null, answer?: string | null, displayOrder: number }>, targetAudiences: Array<{ __typename?: 'RSTargetAudience', id: any, label: string, color?: string | null }> }> };
+
 export type WorkstreamDetailsQueryVariables = Exact<{
   filter: WorkstreamFilter;
 }>;
@@ -8634,7 +9608,11 @@ export const BuilderProfileDocument = `
     skills
     slug
     status
-    type
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
     projects {
       scope {
         status
@@ -8724,7 +9702,11 @@ export const BuildersListDocument = `
     skills
     slug
     status
-    type
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
   }
 }
     `;
@@ -9714,6 +10696,86 @@ useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => [
 
 
 useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
+
+export const ResourceTemplatesDocument = `
+    query ResourceTemplates {
+  resourceTemplates {
+    contentSections {
+      id
+      title
+      content
+      displayOrder
+    }
+    description
+    facetTargets {
+      id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    faqFields {
+      id
+      question
+      answer
+      displayOrder
+    }
+    infoLink
+    lastModified
+    title
+    thumbnailUrl
+    targetAudiences {
+      id
+      label
+      color
+    }
+    operatorId
+    recurringServices
+    status
+    summary
+    setupServices
+    id
+  }
+}
+    `;
+
+export const useResourceTemplatesQuery = <
+      TData = ResourceTemplatesQuery,
+      TError = unknown
+    >(
+      variables?: ResourceTemplatesQueryVariables,
+      options?: Omit<UseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ResourceTemplatesQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ResourceTemplates'] : ['ResourceTemplates', variables],
+    queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
+    ...options
+  }
+    )};
+
+useResourceTemplatesQuery.getKey = (variables?: ResourceTemplatesQueryVariables) => variables === undefined ? ['ResourceTemplates'] : ['ResourceTemplates', variables];
+
+export const useSuspenseResourceTemplatesQuery = <
+      TData = ResourceTemplatesQuery,
+      TError = unknown
+    >(
+      variables?: ResourceTemplatesQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ResourceTemplatesQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ResourceTemplatesSuspense'] : ['ResourceTemplatesSuspense', variables],
+    queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseResourceTemplatesQuery.getKey = (variables?: ResourceTemplatesQueryVariables) => variables === undefined ? ['ResourceTemplatesSuspense'] : ['ResourceTemplatesSuspense', variables];
+
+
+useResourceTemplatesQuery.fetcher = (variables?: ResourceTemplatesQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables, options);
 
 export const WorkstreamDetailsDocument = `
     query WorkstreamDetails($filter: WorkstreamFilter!) {

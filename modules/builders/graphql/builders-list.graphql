@@ -15,6 +15,10 @@ query BuildersList($filter: buildersFilter) {
     skills
     slug
     status
-    type
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
   }
 }
