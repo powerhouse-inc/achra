@@ -14,9 +14,6 @@ import 'server-only'
  * @returns An array of dates representing the available months
  */
 export async function getBudgetStatementsAvailableMonths(teamId: string): Promise<Date[]> {
-  'use cache'
-  cacheLife('minutes')
-
   const data = await useBudgetStatementsAvailableMonthsQuery.fetcher({
     filter: {
       teamId,
