@@ -5,7 +5,7 @@ import { PageContent } from '@/modules/shared/components/page-containers'
 export default function ServicesPage() {
   return (
     <PageContent className="gap-6">
-      <Suspense fallback={<div>Loadgin</div>}>
+      <Suspense fallback={<div>Loading....</div>}>
         <ServicesListSection />
       </Suspense>
     </PageContent>
