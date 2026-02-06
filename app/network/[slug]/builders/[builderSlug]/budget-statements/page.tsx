@@ -101,6 +101,15 @@ export default async function ExpenseReportsPage({
           <MonthNavigation availableMonths={availableMonths} defaultMonth={selectedMonth} />
         </Suspense>
 
+        <div>
+          <div>Testing:</div>
+          <div className="flex gap-2">
+            {availableMonths.map((month) => (
+              <div key={month.toISOString()}>{formatMonthString(month)}</div>
+            ))}
+          </div>
+        </div>
+
         <div className="my-6">
           <Suspense fallback={<ExpenseReportTabsSkeleton />}>
             <ExpenseReportTabs />
