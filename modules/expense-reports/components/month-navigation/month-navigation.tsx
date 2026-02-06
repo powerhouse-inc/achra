@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
+import { formatMonthString } from '../../lib/month-utils'
 import { useMonthNavigation } from './use-month-navigation'
 
 interface MonthNavigationProps {
@@ -16,6 +17,20 @@ function MonthNavigation({ availableMonths, defaultMonth }: MonthNavigationProps
 
   return (
     <nav className="flex items-center gap-2" aria-label="Month navigation">
+      <div>
+        <div>Default Month: {formatMonthString(defaultMonth)}</div>
+        <div>Selected Month: {selectedMonthDisplay}</div>
+        <div>Available Months: </div>
+        <div className="flex gap-2">
+          {availableMonths.map((month) => (
+            <div key={month.toISOString()}>{formatMonthString(month)}</div>
+          ))}
+        </div>
+
+        <div>Previous Month: {previousMonth ? formatMonthString(previousMonth) : 'None'}</div>
+        <div>Next Month: {nextMonth ? formatMonthString(nextMonth) : 'None'}</div>
+      </div>
+
       <div className="flex gap-2">
         {previousMonth ? (
           <Button asChild variant="ghost" size="icon" aria-label="Previous month">
