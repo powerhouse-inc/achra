@@ -2,10 +2,10 @@ import {
   type ScopeOfWork_Milestone,
   useRoadmapListQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { SectionTitle } from '@/modules/networks/components/section-title'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
+import { SectionTitle } from '@/modules/shared/components/section-title'
 import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'

@@ -1,7 +1,8 @@
+import { encodeSectionId } from '@/modules/shared/components/section-activation'
+import { SectionTitle } from '@/modules/shared/components/section-title'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { SectionTitle } from '../section-title'
+
 import { Builders } from './components/builders/builders'
 
 export function BuildersSection() {

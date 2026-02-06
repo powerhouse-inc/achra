@@ -23,7 +23,7 @@ export default function BuilderProfile({
       <Avatar className="size-8">
         <AvatarImage src={image} alt={name ?? 'Wallet'} />
       </Avatar>
-      <div className="flex flex-col lg:gap-2">
+      <div className="flex flex-col">
         <p className="text-foreground/30 line-clamp-1 w-full text-sm/5.5 font-semibold">
           {code?.toUpperCase()} <span className="text-foreground">{name}</span>
         </p>

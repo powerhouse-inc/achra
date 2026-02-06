@@ -1,7 +1,7 @@
 'use client'
 
 import { LinkIcon } from 'lucide-react'
-import { CopySectionUrl } from '@/modules/networks/components/section-title/copy-section-url'
+import { CopySectionUrl } from '@/modules/shared/components/section-title/copy-section-url'
 import { TooltipInfoIcon } from '@/modules/shared/components/tooltip-info-icon/tooltip-info-icon'
 import { cn } from '@/modules/shared/lib/utils'
 

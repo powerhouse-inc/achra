@@ -7,8 +7,8 @@ function AboutUsSkeleton() {
       <div className="flex items-center justify-between">
         <Skeleton className="h-6 w-62" />
         <div className="flex items-center gap-2 lg:hidden">
-          <Skeleton className="size-4 sm:size-13.5" />
-          <Skeleton className="size-4 sm:hidden" />
+          <Skeleton className="hidden size-13.5 sm:block" />
+          <Skeleton className="mr-2.5 size-4 sm:hidden" />
           <ConnectButtonSkeleton className="hidden sm:flex" />
         </div>
       </div>
@@ -52,7 +52,7 @@ interface ActionsSkeletonProps {
 
 function ConnectButtonSkeleton({ className }: ActionsSkeletonProps) {
   return (
-    <div className={cn('bg-accent flex w-56.25 max-w-85 gap-6 rounded-md', className)}>
+    <div className={cn('bg-accent flex w-56.25 gap-6 rounded-md', className)}>
       <div className="flex items-center gap-4 py-2 pr-2 pl-4">
         <Skeleton className="bg-border size-7.5 rounded-full" />
         <div className="flex flex-col gap-1">
