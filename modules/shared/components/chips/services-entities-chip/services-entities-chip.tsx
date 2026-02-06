@@ -9,11 +9,13 @@ const servicesEntitiesChipVariants = cva(
     variants: {
       entity: {
         [ServiceEntityEnum.Builders]: 'border-primary bg-primary/30 text-primary',
+        [ServiceEntityEnum.Networks]:
+          'border-status-success bg-status-success/30 text-status-success',
         [ServiceEntityEnum.Operators]: 'border-to-do bg-to-do/30 text-to-do',
         [ServiceEntityEnum.Founders]:
           'border-status-progress bg-status-progress/30 text-status-progress',
         [ServiceEntityEnum['SNO Governors']]:
-          'border-status-success bg-status-success/30 text-status-success',
+          'border-status-warning bg-status-warning/30 text-status-warning',
       },
     },
     defaultVariants: {

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { ServiceTab } from '@/modules/services/config/types'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { Button } from '@/modules/shared/components/ui/button'
+import { isBuilderService, isNetworkService } from '@/modules/shared/types/services'
 import ServicesFilters from '../services-filters'
 import ServicesList from '../services-list'
 
@@ -14,10 +15,9 @@ export function ServicesPageContent() {
   // This will allow users to share filtered views via URL (e.g., /services?tab=builders)
   const [activeTab, setActiveTab] = useState<ServiceTab>('all')
 
-  // TODO: [API Integration] This client-side filtering should be replaced with server-side filtering
-  // The `isBuilders` field is temporary - replace with proper entity-based filtering once API is ready
-  const builderServices = services.filter((service) => service.isBuilders)
-  const networkServices = services.filter((service) => !service.isBuilders)
+  // Filter services by target audience using helper functions
+  const builderServices = services.filter(isBuilderService)
+  const networkServices = services.filter(isNetworkService)
 
   const showBuilders = activeTab === 'all' || activeTab === 'builders'
   const showNetworks = activeTab === 'all' || activeTab === 'networks'

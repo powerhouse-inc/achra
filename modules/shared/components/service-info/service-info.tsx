@@ -15,12 +15,17 @@ interface ServiceInfoProps {
   showActionButtons?: boolean
 }
 
+// Default cover image when thumbnailUrl is not available
+const DEFAULT_COVER = '/services/covers/cover-01.jpg'
+
 export default function ServiceInfo({
   light,
   showPurchaseButton,
   showActionButtons,
 }: Readonly<ServiceInfoProps>) {
   const service = SERVICES_CARDS_MOCK[0]
+  const isUnavailable = service.status === 'COMING_SOON'
+  const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">
       <CardContent
@@ -41,7 +46,7 @@ export default function ServiceInfo({
             )}
           >
             <Image
-              src={service.cover}
+              src={coverImage}
               alt={service.title}
               fill
               className="absolute rounded-lg md:rounded-2xl"
@@ -58,8 +63,8 @@ export default function ServiceInfo({
             {showPurchaseButton && (
               <InternalLink
                 href={`/services/${service.id}/purchase` as Route}
-                disabled={service.unavailable}
-                className={cn(service.unavailable && 'pointer-events-none opacity-50')}
+                disabled={isUnavailable}
+                className={cn(isUnavailable && 'pointer-events-none opacity-50')}
                 size="lg"
                 variant="default"
               >
@@ -78,7 +83,7 @@ export default function ServiceInfo({
             {service.title}
           </span>
           <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
-            {service.extendedDescription}
+            {service.description ?? service.summary}
           </div>
         </div>
         {showActionButtons && (
