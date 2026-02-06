@@ -1,6 +1,7 @@
 import { FileX } from 'lucide-react'
 import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import {
   AccountSnapshot,
   AccountSnapshotSkeleton,
@@ -32,7 +33,6 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
-import { Suspense } from 'react'
 import type { Route } from 'next'
 
 interface AvailableMonthsFetcherProps {
