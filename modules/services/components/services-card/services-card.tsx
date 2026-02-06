@@ -12,8 +12,8 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Service, ServiceEntityEnum } from '@/modules/shared/types/services'
-import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import { mapLabelToEntity } from '../../utils/utils'
+import { ServiceSectionsCard } from '../services-card-list-section/service-sections-card'
 import type { Route } from 'next'
 
 interface ServicesCardProps {
