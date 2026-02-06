@@ -15,7 +15,7 @@ const servicesEntitiesChipVariants = cva(
         [ServiceEntityEnum.Founders]:
           'border-status-progress bg-status-progress/30 text-status-progress',
         [ServiceEntityEnum['SNO Governors']]:
-          'border-status-warning bg-status-warning/30 text-status-warning',
+          'border-status-success bg-status-success/30 text-status-success',
       },
     },
     defaultVariants: {

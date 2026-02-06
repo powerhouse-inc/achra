@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   images: {
     qualities: [100, 75],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.achra.com',
+      },
+    ],
   },
   productionBrowserSourceMaps: true,
   async rewrites() {
