@@ -1,19 +1,25 @@
-import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
-import { Button } from '@/modules/shared/components/ui/button'
+import type { Service } from '@/modules/shared/types/services'
 import ServicesCard from '../services-card/services-card'
 
-export default function ServicesList() {
-  // TODO: Replace with API call, it is out of scope for now, I will ask for a task to be created for this.
-  const services = SERVICES_CARDS_MOCK
+interface ServicesListProps {
+  services: Service[]
+  title?: string
+}
+
+export default function ServicesList({ services, title }: Readonly<ServicesListProps>) {
+  if (services.length === 0) {
+    // Add empty state handling if needed
+    return null
+  }
 
   return (
-    <div className="flex w-full flex-col gap-6">
-      {services.map((service) => (
-        <ServicesCard key={service.id} service={service} />
-      ))}
-      <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
-        Load More
-      </Button>
-    </div>
+    <section className="flex flex-col gap-6">
+      {title && <h2 className="text-xl leading-[120%] font-bold">{title}</h2>}
+      <div className="flex flex-col gap-6">
+        {services.map((service) => (
+          <ServicesCard key={service.id} service={service} />
+        ))}
+      </div>
+    </section>
   )
 }

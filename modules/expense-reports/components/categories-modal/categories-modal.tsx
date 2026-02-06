@@ -1,7 +1,7 @@
 'use client'
 
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { X } from 'lucide-react'
+import { FolderOpen, X } from 'lucide-react'
 import SimpleBar from 'simplebar-react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Checkbox } from '@/modules/shared/components/ui/checkbox'
@@ -13,38 +13,31 @@ import {
   DialogPortal,
   DialogTitle,
 } from '@/modules/shared/components/ui/dialog'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import { cn } from '@/modules/shared/lib/utils'
 import { useModalCategories } from '../../providers/categories-provider'
 import { HeadcountSection } from './headcount-section'
 import { NonHeadcountSection } from './non-headcount-section'
-import type { CategoryTree } from '../../types'
 
 function CategoriesModal() {
   const {
     headcountCategories,
     nonHeadcountCategories,
+    hasNoCategories,
+    hasNestedCategories,
     areAllExpanded,
     toggleAllCategories,
-    setCategoryExpandedValue,
+    handleHeadcountValueChange,
+    handleNonHeadcountValueChange,
     isModalOpen,
     closeModal,
   } = useModalCategories()
-
-  // Handle Accordion value change
-  const handleAccordionValueChange = (categories: CategoryTree[], newValue: string[]) => {
-    categories.forEach((category) => {
-      const isOpen = newValue.includes(category.id)
-      setCategoryExpandedValue(category.id, !isOpen)
-    })
-  }
-
-  const handleHeadcountValueChange = (newValue: string[]) => {
-    handleAccordionValueChange(headcountCategories, newValue)
-  }
-
-  const handleNonHeadcountValueChange = (newValue: string[]) => {
-    handleAccordionValueChange(nonHeadcountCategories, newValue)
-  }
 
   return (
     <Dialog open={isModalOpen} onOpenChange={closeModal}>
@@ -89,19 +82,21 @@ function CategoriesModal() {
                     Canonical Expense Categories are standardised classifications of expenses
                     tailored for managing a Team or Networks operational costs.
                   </DialogDescription>
-                  <div className="flex flex-row-reverse items-center gap-2.5 sm:mr-2.5 sm:flex-row">
-                    <label
-                      htmlFor="expand-all"
-                      className="cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Expand All Categories
-                    </label>
-                    <Checkbox
-                      id="expand-all"
-                      checked={areAllExpanded}
-                      onCheckedChange={toggleAllCategories}
-                    />
-                  </div>
+                  {hasNestedCategories && (
+                    <div className="flex flex-row-reverse items-center gap-2.5 sm:mr-2.5 sm:flex-row">
+                      <label
+                        htmlFor="expand-all"
+                        className="cursor-pointer text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        Expand All Categories
+                      </label>
+                      <Checkbox
+                        id="expand-all"
+                        checked={areAllExpanded}
+                        onCheckedChange={toggleAllCategories}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
               <Button
@@ -121,17 +116,33 @@ function CategoriesModal() {
             autoHide={false}
           >
             <div className="space-y-6 pb-3">
-              {/* Headcount Expense Categories */}
-              <HeadcountSection
-                categories={headcountCategories}
-                onValueChange={handleHeadcountValueChange}
-              />
+              {hasNoCategories ? (
+                <Empty className="border-border bg-muted/30 w-full border border-solid py-12">
+                  <EmptyHeader>
+                    <EmptyMedia variant="icon">
+                      <FolderOpen className="text-muted-foreground size-10" />
+                    </EmptyMedia>
+                    <EmptyTitle>No expense categories</EmptyTitle>
+                    <EmptyDescription>
+                      No expense categories are available for this team.
+                    </EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
+              ) : (
+                <>
+                  {/* Headcount Expense Categories */}
+                  <HeadcountSection
+                    categories={headcountCategories}
+                    onValueChange={handleHeadcountValueChange}
+                  />
 
-              {/* Non-Headcount Expense Categories */}
-              <NonHeadcountSection
-                categories={nonHeadcountCategories}
-                onValueChange={handleNonHeadcountValueChange}
-              />
+                  {/* Non-Headcount Expense Categories */}
+                  <NonHeadcountSection
+                    categories={nonHeadcountCategories}
+                    onValueChange={handleNonHeadcountValueChange}
+                  />
+                </>
+              )}
             </div>
           </SimpleBar>
         </DialogPrimitive.Content>

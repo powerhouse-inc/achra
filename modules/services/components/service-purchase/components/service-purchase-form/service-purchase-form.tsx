@@ -277,9 +277,6 @@ export default function ServicePurchaseForm() {
                   <SummarySection
                     selectedPlan={selectedPlan}
                     enabledSections={enabledSections}
-                    onBack={() => {
-                      navigateToStep('configure-services')
-                    }}
                     actionState={state}
                     isPending={isPending}
                   />
