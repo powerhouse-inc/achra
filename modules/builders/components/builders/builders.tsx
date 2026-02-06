@@ -32,25 +32,16 @@ export async function Builders({
     name: search,
   })
 
-  const extendedBuilders = [
-    ...builders.flatMap((builder) => builder),
-    ...builders.flatMap((builder) => builder),
-    ...builders.flatMap((builder) => builder),
-    ...builders.flatMap((builder) => builder),
-    ...builders.flatMap((builder) => builder),
-    ...builders.flatMap((builder) => builder),
-  ]
-
   return (
     <div className={className}>
       <BuildersTable
-        builders={extendedBuilders}
+        builders={builders}
         networkSlug={networkSlug}
         className="hidden lg:block"
         asSectionContent={asSectionContent}
       />
       <BuildersList
-        builders={extendedBuilders}
+        builders={builders}
         networkSlug={networkSlug}
         className="block lg:hidden"
         asSectionContent={asSectionContent}
