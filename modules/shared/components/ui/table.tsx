@@ -24,12 +24,8 @@ function Table({
   ...props
 }: React.ComponentProps<'table'> & VariantProps<typeof tableVariants>) {
   return (
-    <div data-slot="table-container" className={cn(tableVariants({ variant }))}>
-      <table
-        data-slot="table"
-        className={cn('w-full caption-bottom text-sm', className)}
-        {...props}
-      />
+    <div data-slot="table-container" className={cn(tableVariants({ variant }), className)}>
+      <table data-slot="table" className="w-full caption-bottom text-sm" {...props} />
     </div>
   )
 }

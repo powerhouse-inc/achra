@@ -57,7 +57,10 @@ export function BuildersTable({
         <NoBuildersFound />
       ) : (
         <div className="w-full">
-          <Table variant="pills" className={cn('block w-full', asSectionContent && 'px-2')}>
+          <Table
+            variant="pills"
+            className={cn('[&_table]:block [&_table]:w-full', asSectionContent && 'px-2')}
+          >
             <TableHeader className="mb-2 inline-block w-full">
               <TableRow className="flex h-fit w-full border-b-0! py-4">
                 {proccesedBuildersTableColumns.map((column, index) => (
@@ -107,7 +110,7 @@ export function BuildersTable({
               autoHide={false}
             >
               <div ref={itemsWrapperRef}>
-                <Table variant="pills" className="block w-full">
+                <Table variant="pills" className="[&_table]:block [&_table]:w-full">
                   <TableBody className="flex flex-col gap-2">
                     {sortedBuilders.map((builder) => {
                       const builderLink =
