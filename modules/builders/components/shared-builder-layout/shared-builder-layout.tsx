@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache'
 import { notFound } from 'next/navigation'
 import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
@@ -11,6 +12,8 @@ interface SharedBuilderLayoutProps {
 }
 
 async function SharedBuilderLayout({ params }: SharedBuilderLayoutProps) {
+  'use cache'
+  cacheLife('hours')
   const { slug, builderSlug } = await params
 
   const network = await getNetworkBySlug(slug)

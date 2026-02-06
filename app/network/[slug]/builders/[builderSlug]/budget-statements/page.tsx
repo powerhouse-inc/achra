@@ -1,24 +1,11 @@
 import { FileX } from 'lucide-react'
 import { headers } from 'next/headers'
 import { notFound, redirect } from 'next/navigation'
-import { Suspense } from 'react'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
-import {
-  AccountSnapshot,
-  AccountSnapshotSkeleton,
-} from '@/modules/expense-reports/components/account-snapshot'
-import {
-  ExpenseReportTabs,
-  ExpenseReportTabsSkeleton,
-} from '@/modules/expense-reports/components/expense-report-tabs'
-import {
-  ExpenseReportsSection,
-  ExpenseReportsSectionSkeleton,
-} from '@/modules/expense-reports/components/expense-reports-section'
-import {
-  MonthNavigation,
-  MonthNavigationSkeleton,
-} from '@/modules/expense-reports/components/month-navigation'
+import { AccountSnapshot } from '@/modules/expense-reports/components/account-snapshot'
+import { ExpenseReportTabs } from '@/modules/expense-reports/components/expense-report-tabs'
+import { ExpenseReportsSection } from '@/modules/expense-reports/components/expense-reports-section'
+import { MonthNavigation } from '@/modules/expense-reports/components/month-navigation'
 import {
   getSelectedMonth,
   shouldRedirectToCleanUrl,
@@ -97,14 +84,10 @@ export default async function ExpenseReportsPage({
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
-        <Suspense fallback={<MonthNavigationSkeleton />}>
-          <MonthNavigation availableMonths={availableMonths} defaultMonth={selectedMonth} />
-        </Suspense>
+        <MonthNavigation availableMonths={availableMonths} defaultMonth={selectedMonth} />
 
         <div className="my-6">
-          <Suspense fallback={<ExpenseReportTabsSkeleton />}>
-            <ExpenseReportTabs />
-          </Suspense>
+          <ExpenseReportTabs />
         </div>
       </PageContent>
 
@@ -112,26 +95,17 @@ export default async function ExpenseReportsPage({
 
       {section === TabSection.ACCOUNT_SNAPSHOT && (
         <div className="container">
-          <Suspense
-            fallback={<AccountSnapshotSkeleton />}
-            key={`${section}-${formatMonthString(selectedMonth)}`}
-          >
-            <AccountSnapshot month={selectedMonth} />
-          </Suspense>
+          <AccountSnapshot month={selectedMonth} />
         </div>
       )}
 
       {section === TabSection.EXPENSE_REPORTS && (
-        <Suspense
-          fallback={<ExpenseReportsSectionSkeleton />}
+        <ExpenseReportsSection
           key={`${section}-${formatMonthString(selectedMonth)}`}
-        >
-          <ExpenseReportsSection
-            teamId={builder.id}
-            month={selectedMonth}
-            builderLabel={builder.name ?? builder.code ?? 'this builder'}
-          />
-        </Suspense>
+          teamId={builder.id}
+          monthKey={formatMonthString(selectedMonth)}
+          builderLabel={builder.name ?? builder.code ?? 'this builder'}
+        />
       )}
 
       {/* simulate the margin bottom of 32px */}
