@@ -5,32 +5,77 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should load the totals summary', async ({ page }) => {
-    await expect(page.getByText('Actuals - Dec 2024 Totals')).toBeVisible();
+    await expect(page.getByText('Actuals - Dec 2025 Totals')).toBeVisible();
     await expect(page.getByText('Wallet')).toBeVisible();
-    await expect(page.getByText('Mthly Budget')).toHaveCount(13);
-    await expect(page.getByText('Forecast')).toHaveCount(15);
+    await expect(page.getByText('Mthly Budget')).toHaveCount(2);
+    await expect(page.getByText('Forecast')).toHaveCount(12);
     await expect(page.getByText('Actuals')).toHaveCount(14);
-    await expect(page.getByText('Difference')).toHaveCount(15);
-    await expect(page.getByText('Payments')).toHaveCount(13);
+    await expect(page.getByText('Difference')).toHaveCount(12);
+    await expect(page.getByText('Payments')).toHaveCount(12);
 
-    await expect(page.getByText('Powerhouse (Dai)')).toHaveCount(3);
-    await expect(page.getByText('0x8ec..80260')).toHaveCount(2);
-    await expect(page.getByText('0.00')).toHaveCount(46);
-    await expect(page.getByText('192,296.66')).toHaveCount(6);
-    await expect(page.getByText('202,877.05')).toHaveCount(6);
-    await expect(page.getByText('-10,580.39')).toHaveCount(6);
-    await expect(page.getByText('170,050.71')).toHaveCount(4);
+    await expect(page.getByText('Powerhouse Genesis Operational Hub')).toHaveCount(3);
+    await expect(page.getByText('0xF13..A0460')).toHaveCount(2);
+    await expect(page.getByText('424,477.00')).toHaveCount(5);
+    await expect(page.getByText('396,985.55')).toHaveCount(5);
+    await expect(page.getByText('208,421.50')).toHaveCount(10);
+    await expect(page.getByText('188,564.05')).toHaveCount(5);
+    await expect(page.getByText('208,421.50')).toHaveCount(10);
 
-    await expect(page.getByText('Ph-genesis Ops Hub (Dai)')).toHaveCount(3);
-    await expect(page.getByText('0xf13..a0460')).toHaveCount(2);
-    await expect(page.getByText('291,666.67')).toHaveCount(4);
-    await expect(page.getByText('165,070.01')).toHaveCount(2);
-    await expect(page.getByText('158,505.97')).toHaveCount(4);
-    await expect(page.getByText('6,564.04')).toHaveCount(2);
+    await expect(page.getByText('Total')).toHaveCount(4);
+});
 
-    await expect(page.getByText('Total')).toHaveCount(7);
-    await expect(page.getByText('357,366.67')).toHaveCount(2);
-    await expect(page.getByText('361,383.02')).toHaveCount(2);
-    await expect(page.getByText('-4,016.35')).toHaveCount(2);
-    await expect(page.getByText('328,556.68')).toHaveCount(2);
+test('should load the breakdown', async ({ page }) => {
+    await expect(page.getByText('Actuals - Dec 2025 Breakdown')).toBeVisible();
+
+    await expect(page.getByText('Expense Category')).toBeVisible();
+    await expect(page.getByText('Budget Allocation')).toHaveCount(10);
+    await expect(page.getByText('Forecast')).toHaveCount(12);
+    await expect(page.getByText('Actuals')).toHaveCount(14);
+    await expect(page.getByText('Difference')).toHaveCount(12);
+    await expect(page.getByText('Comments')).toHaveCount(10);
+    await expect(page.getByText('Payments')).toHaveCount(12);
+
+    await expect(page.getByText('Headcount Expenses')).toHaveCount(10);
+    await expect(page.getByText('Compensation & Benefits')).toHaveCount(4);
+    await expect(page.getByText('Travel & Entertainment')).toHaveCount(4);
+    await expect(page.getByText('Non-Headcount Expenses')).toHaveCount(7);
+    await expect(page.getByText('Professional Services')).toHaveCount(4);
+    await expect(page.getByText('Admin Expense')).toHaveCount(4);
+    await expect(page.getByText('Software Development Expense')).toHaveCount(4);
+    await expect(page.getByText('Marketing Expense')).toHaveCount(4);
+    await expect(page.getByText('Gas Expense')).toHaveCount(4);
+    await expect(page.getByText('Software Expense')).toHaveCount(4);
+    await expect(page.getByText('Total')).toHaveCount(4);
+
+    await expect(page.getByText('225,600.00')).toHaveCount(2);
+    await expect(page.getByText('11,000.00')).toHaveCount(2);
+    await expect(page.getByText('50,000.00')).toHaveCount(2);
+    await expect(page.getByText('1,500.00')).toHaveCount(2);
+    await expect(page.getByText('120,677.00')).toHaveCount(2);
+    await expect(page.getByText('9,000.00')).toHaveCount(2);
+    await expect(page.getByText('200.00')).toHaveCount(2);
+    await expect(page.getByText('6,500.00')).toHaveCount(2);
+    await expect(page.getByText('424,477.00')).toHaveCount(5);
+
+    await expect(page.getByText('215,463.23')).toHaveCount(2);
+    await expect(page.getByText('12,052.32')).toHaveCount(4);
+    await expect(page.getByText('34,920.00')).toHaveCount(4);
+    await expect(page.getByText('2,050.00')).toHaveCount(2);
+    await expect(page.getByText('30,000.00')).toHaveCount(4);
+    await expect(page.getByText('0.00')).toHaveCount(60);
+    await expect(page.getByText('102,500.00')).toHaveCount(4);
+    await expect(page.getByText('396,985.55')).toHaveCount(5);
+
+    await expect(page.getByText('206,262.80')).toHaveCount(4);
+    await expect(page.getByText('2,158.70')).toHaveCount(4);
+    await expect(page.getByText('208,421.50')).toHaveCount(10);
+
+    await expect(page.getByText('9,200.43')).toHaveCount(2);
+    await expect(page.getByText('12,052.32')).toHaveCount(4);
+    await expect(page.getByText('-108.70')).toHaveCount(2);
+    await expect(page.getByText('30,000.00')).toHaveCount(4);
+    await expect(page.getByText('102,500.00')).toHaveCount(4);
+    await expect(page.getByText('188,564.05')).toHaveCount(5);
+
+    await expect(page.getByText('206,262.80')).toHaveCount(4);
 });
