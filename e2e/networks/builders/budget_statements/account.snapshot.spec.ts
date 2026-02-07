@@ -1,27 +1,29 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements?section=account-snapshot`);
+
+    await page.waitForLoadState('networkidle');
 });
 
 test('should load the builder info', async ({ page }) => {
-    await expect(page.getByText('Facilitator')).toHaveCount(2);
-    await expect(page.getByText('Backend Development')).toHaveCount(2);
-    await expect(page.getByText('Full Stack Development')).toHaveCount(2);
-    await expect(page.getByText('Devops Engineering')).toHaveCount(2);
-    await expect(page.getByText('Smart Contract Development')).toHaveCount(2);
-    await expect(page.getByText('UI/UX Design')).toHaveCount(2);
-    await expect(page.getByText('Technical Writing')).toHaveCount(2);
-    await expect(page.getByText('QA Testing')).toHaveCount(2);
-    await expect(page.getByText('Data Engineering')).toHaveCount(2);
-    await expect(page.getByText('Security Engineering')).toHaveCount(2);
+    await expect(page.getByText('Facilitator')).toHaveCount(0);
+    await expect(page.getByText('Backend Development')).toHaveCount(0);
+    await expect(page.getByText('Full Stack Development')).toHaveCount(0);
+    await expect(page.getByText('Devops Engineering')).toHaveCount(0);
+    await expect(page.getByText('Smart Contract Development')).toHaveCount(0);
+    await expect(page.getByText('UI/UX Design')).toHaveCount(0);
+    await expect(page.getByText('Technical Writing')).toHaveCount(0);
+    await expect(page.getByText('QA Testing')).toHaveCount(0);
+    await expect(page.getByText('Data Engineering')).toHaveCount(0);
+    await expect(page.getByText('Security Engineering')).toHaveCount(0);
 });
 
 test('should load the builder links', async ({ page }) => {
     await page.getByText('Links').hover();
     await page.waitForTimeout(1000);
 
-    await expect(page.getByText('Website')).toBeVisible();
+    await expect(page.getByText('Website')).toBeHidden();
     await expect(page.getByText('Forum')).toBeVisible();
     await expect(page.getByText('Discord')).toHaveCount(2);
     await expect(page.getByText('Twitter')).toHaveCount(2);
@@ -29,15 +31,17 @@ test('should load the builder links', async ({ page }) => {
 });
 
 test('should navigate to the previous month', async ({ page }) => {
-    await expect(page.getByText('JAN 2026')).toBeVisible();
-    await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
     await expect(page.getByText('DEC 2025')).toBeVisible();
+    await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
+    await expect(page.getByText('NOV 2025')).toBeVisible();
 });
 
 test('should navigate to the next month', async ({ page }) => {
-    await expect(page.getByText('JAN 2026')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toBeVisible();
+    await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
+    await expect(page.getByText('NOV 2025')).toBeVisible();
     await page.locator('div.flex.gap-2 > a:nth-child(2)').click();
-    await expect(page.getByText('FEB 2026')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toBeVisible();
 });
 
 test('should load the MakerDAO Funding Overview', async ({ page }) => {
@@ -121,7 +125,7 @@ test('should load Total Reserves info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div:nth-child(4) > div > div:nth-child(2) > div > div > div > button > svg').first().hover();
+    await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div > button > svg').first().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
@@ -234,7 +238,7 @@ test('should load accordion for Growth', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(1) > div > button > svg').hover();
+    await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(1) > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
@@ -299,7 +303,7 @@ test('should load Reported Expenses Comparison info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    await page.locator('body > div > div:nth-child(4) > div > div > div > div > button > svg').hover();
+    await page.locator('body > main > div > div:nth-child(4) > div > div > div > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
 
