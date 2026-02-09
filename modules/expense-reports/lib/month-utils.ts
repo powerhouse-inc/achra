@@ -19,47 +19,46 @@ export const MONTH_NAMES = [
 ] as const
 
 /**
- * Normalizes a date to the first day of the month at midnight for accurate comparison
+ * Normalizes a date to the first day of the month at 00:00 UTC for timezone-safe comparison
  */
 export function normalizeMonth(date: Date): Date {
-  const normalized = new Date(date)
-  normalized.setDate(1)
-  normalized.setHours(0, 0, 0, 0)
-  return normalized
+  const year = date.getUTCFullYear()
+  const month = date.getUTCMonth()
+  return new Date(Date.UTC(year, month, 1, 0, 0, 0, 0))
 }
 
 /**
- * Checks if two dates represent the same month (same year and month)
+ * Checks if two dates represent the same month (same year and month, UTC)
  */
 export function isSameMonth(date1: Date, date2: Date): boolean {
   const normalized1 = normalizeMonth(date1)
   const normalized2 = normalizeMonth(date2)
   return (
-    normalized1.getFullYear() === normalized2.getFullYear() &&
-    normalized1.getMonth() === normalized2.getMonth()
+    normalized1.getUTCFullYear() === normalized2.getUTCFullYear() &&
+    normalized1.getUTCMonth() === normalized2.getUTCMonth()
   )
 }
 
 /**
- * Formats a Date to MMMyyyy format (e.g., "Nov2025")
+ * Formats a Date to MMMyyyy format (e.g., "Nov2025") using UTC month/year
  */
 export function formatMonthString(date: Date): string {
-  const month = MONTH_NAMES[date.getMonth()]
-  const year = date.getFullYear()
+  const month = MONTH_NAMES[date.getUTCMonth()]
+  const year = date.getUTCFullYear()
   return `${month}${year}`
 }
 
 /**
- * Formats a Date for display (e.g., "NOV 2025")
+ * Formats a Date for display (e.g., "NOV 2025") using UTC month/year
  */
 export function formatMonthDisplay(date: Date): string {
-  const month = MONTH_NAMES[date.getMonth()].toUpperCase()
-  const year = date.getFullYear()
+  const month = MONTH_NAMES[date.getUTCMonth()].toUpperCase()
+  const year = date.getUTCFullYear()
   return `${month} ${year}`
 }
 
 /**
- * Parses a month string in MMMyyyy format (e.g., "Nov2025") to a Date
+ * Parses a month string in MMMyyyy format (e.g., "Nov2025") to a Date at 00:00 UTC
  * Returns null if parsing fails
  */
 export function parseMonthString(monthString: string | null | undefined): Date | null {
@@ -68,7 +67,8 @@ export function parseMonthString(monthString: string | null | undefined): Date |
   }
 
   try {
-    return parse(monthString, 'MMMyyyy', new Date())
+    const parsed = parse(monthString, 'MMMyyyy', new Date())
+    return new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), 1, 0, 0, 0, 0))
   } catch {
     return null
   }
