@@ -1,7 +1,6 @@
 'use client'
 
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
-import { Button } from '@/modules/shared/components/ui/button'
 import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
 import EmptyStateService from '../empty-state-service/empty-state-service'
 import ServicesFilters from '../services-filters'
@@ -34,10 +33,6 @@ export function ServicesPageContent({ services }: Readonly<ServicesPageContentPr
         <>
           {showBuilders && <ServicesList title="Builders" services={builderServices} />}
           {showNetworks && <ServicesList title="Networks" services={networkServices} />}
-
-          <Button variant="outline" size="lg" className="w-58 self-center">
-            Load More
-          </Button>
         </>
       ) : (
         <EmptyStateService />
