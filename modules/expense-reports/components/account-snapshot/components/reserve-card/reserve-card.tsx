@@ -10,7 +10,6 @@ import {
 } from '@/modules/shared/components/ui/accordion'
 import { cn } from '@/modules/shared/lib/utils'
 import { WalletInfo } from '../transaction/wallet-info'
-import { TransactionList } from '../transaction-list'
 import { KeyValuePair } from './key-value-pair'
 import type { Token, UIReservesData } from '../../types'
 
@@ -133,9 +132,10 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
         </AccordionPrimitive.Header>
         {hasTransactions && (
           <AccordionContent>
-            <TransactionList
+            {/* TODO: commented this out due TS issues (integration coming soon) */}
+            {/* <TransactionList
               items={isGroup ? account.children : account.snapshotAccountTransaction}
-            />
+            /> */}
           </AccordionContent>
         )}
       </AccordionItem>

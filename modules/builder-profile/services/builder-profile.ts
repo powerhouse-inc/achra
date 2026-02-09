@@ -23,6 +23,7 @@ export async function getBuilderProfile(
 
   return {
     contributors: [],
+    products: [], // TODO: add the actual values if this is really needed (added empty to avoid type errors)
     ...builder,
     projects,
   }
