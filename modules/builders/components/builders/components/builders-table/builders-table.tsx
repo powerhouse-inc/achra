@@ -109,7 +109,7 @@ export function BuildersTable({
               )}
               autoHide={false}
             >
-              <div ref={itemsWrapperRef}>
+              <div ref={itemsWrapperRef} className={cn(asSectionContent && 'px-2 pb-2')}>
                 <Table variant="pills" className="[&_table]:block [&_table]:w-full">
                   <TableBody className="flex flex-col gap-2">
                     {sortedBuilders.map((builder) => {

@@ -27,10 +27,7 @@ export function useMonthNavigation({ availableMonths, defaultMonth }: UseMonthNa
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const [viewMonth] = useQueryState(
-    'viewMonth',
-    viewMonthSearchParamParser.withDefault(formatMonthString(defaultMonth)),
-  )
+  const [viewMonth] = useQueryState('viewMonth', viewMonthSearchParamParser)
 
   // Determine the selected month
   const selectedMonth = useMemo(() => {

@@ -151,8 +151,6 @@ export function useBuildersTable({ builders, asSectionContent = false }: UseBuil
       simpleBarEl.style.maxHeight = config.maxHeight
       cardContentEl.style.paddingRight = '4px'
       itemsWrapperEl.style.paddingRight = '12px'
-      itemsWrapperEl.style.paddingLeft = '8px'
-      itemsWrapperEl.style.paddingBottom = '8px'
     }
   }, [isDesktop, builders.length, asSectionContent])
 
