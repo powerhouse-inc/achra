@@ -10,12 +10,14 @@ export interface BudgetStatementsItemProps {
   builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   sortOption?: SortOptionValue
+  asSectionContent?: boolean
 }
 
 export function BudgetStatementsItem({
   builders,
   budgetMetric,
   sortOption,
+  asSectionContent = false,
 }: Readonly<BudgetStatementsItemProps>) {
   const { buildersProcessed } = useBudgetStamentData({ builders, sortOption })
 
@@ -29,6 +31,7 @@ export function BudgetStatementsItem({
         builders={buildersProcessed}
         className="hidden lg:block"
         budgetMetric={budgetMetric}
+        asSectionContent={asSectionContent}
       />
       <BudgetStatementListMobile
         builders={buildersProcessed}

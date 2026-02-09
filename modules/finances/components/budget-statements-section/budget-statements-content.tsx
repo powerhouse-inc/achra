@@ -10,12 +10,14 @@ interface BudgetStatementsContentProps {
   budgetMetric: MetricWithoutBudget
   sortOption?: SortOptionValue
   budgetStatements: BudgetStatement[]
+  asSectionContent?: boolean
 }
 
 export default function BudgetStatementsContent({
   budgetMetric,
   sortOption,
   budgetStatements,
+  asSectionContent = false,
 }: Readonly<BudgetStatementsContentProps>) {
   const { visibleItems, hasMore, loadMore } = useInfiniteArray(budgetStatements, {
     firstPageSize: 10,
@@ -29,6 +31,7 @@ export default function BudgetStatementsContent({
         builders={visibleItems}
         budgetMetric={budgetMetric}
         sortOption={sortOption}
+        asSectionContent={asSectionContent}
       />
       {hasMore && (
         <Button variant="outline" size="lg" className="w-58 self-center md:mt-0" onClick={loadMore}>

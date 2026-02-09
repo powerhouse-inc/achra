@@ -103,10 +103,7 @@ export function BuildersTable({
           <div ref={cardContentRef}>
             <SimpleBar
               ref={simpleBarRef}
-              className={cn(
-                asSectionContent && 'max-h-157',
-                !asSectionContent && '-mx-2 px-2 pb-3',
-              )}
+              className={cn(!asSectionContent && '-mx-2 px-2 pb-3')}
               autoHide={false}
             >
               <div ref={itemsWrapperRef} className={cn(asSectionContent && 'px-2 pb-2')}>

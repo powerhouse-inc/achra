@@ -1,13 +1,15 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { getMetricLabel } from '../utils'
 import type { BudgetStatementsTableColumn } from '../const'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
+import type SimpleBar from 'simplebar-react'
 
 interface UseBudgetStamentTableProps {
   builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
+  asSectionContent?: boolean
 }
 
 export enum SortEnum {
@@ -17,8 +19,17 @@ export enum SortEnum {
   Disabled = 'disabled',
 }
 
-export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStamentTableProps) {
+export function useBudgetStamentTable({
+  builders,
+  budgetMetric,
+  asSectionContent = false,
+}: UseBudgetStamentTableProps) {
   const isDesktopLg = useMediaQuery({ from: 'lg', to: 'xl' })
+  const isDesktop = useMediaQuery({ from: 'lg' })
+  const simpleBarRef = useRef<React.ComponentRef<typeof SimpleBar>>(null)
+  const cardContentRef = useRef<HTMLDivElement>(null)
+  const itemsWrapperRef = useRef<HTMLDivElement>(null)
+
   const BUDGET_STATEMENTS_TABLE_COLUMNS: BudgetStatementsTableColumn[] = useMemo(() => {
     return [
       {
@@ -59,13 +70,44 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
     ]
   }, [budgetMetric, isDesktopLg])
 
+  useEffect(() => {
+    if (!asSectionContent) return
+
+    const simpleBarEl = simpleBarRef.current?.el
+    const cardContentEl = cardContentRef.current
+    const itemsWrapperEl = itemsWrapperRef.current
+
+    if (!simpleBarEl || !cardContentEl || !itemsWrapperEl) return
+
+    const teamsCount = builders.length
+
+    let config: { maxHeight: string; maxItems: number } | null = null
+    if (isDesktop) {
+      config = { maxHeight: '630px', maxItems: 9 }
+    }
+
+    if (!config) {
+      simpleBarEl.style.maxHeight = ''
+      cardContentEl.style.paddingRight = ''
+      itemsWrapperEl.style.paddingRight = ''
+      itemsWrapperEl.style.paddingLeft = ''
+      itemsWrapperEl.style.paddingBottom = ''
+      return
+    }
+
+    if (teamsCount > config.maxItems) {
+      simpleBarEl.style.maxHeight = config.maxHeight
+      cardContentEl.style.paddingRight = '4px'
+      itemsWrapperEl.style.paddingRight = '12px'
+    }
+  }, [isDesktop, builders.length, asSectionContent])
+
   const [headersSort, setHeadersSort] = useState<SortEnum[]>(
     BUDGET_STATEMENTS_TABLE_COLUMNS.map((column: BudgetStatementsTableColumn) =>
       column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
     ),
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
-  const isDesktop = useMediaQuery({ from: 'lg' })
   const proccesedBudgetStatementsTableColumns: Array<
     Omit<BudgetStatementsTableColumn, 'shortHeader'>
   > = useMemo(() => {
@@ -152,6 +194,9 @@ export function useBudgetStamentTable({ builders, budgetMetric }: UseBudgetStame
     proccesedBudgetStatementsTableColumns,
     headersSort,
     sortedBuilders,
+    simpleBarRef,
+    cardContentRef,
+    itemsWrapperRef,
     handleSortClickHeader,
   }
 }
