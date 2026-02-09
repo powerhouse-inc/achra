@@ -2,6 +2,7 @@
 
 import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
+import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
 import type { SortOptionValue } from './budget-stament-filters/popover-filter-content'
 import type { BudgetStatement, MetricWithoutBudget } from './type'
@@ -26,7 +27,7 @@ export default function BudgetStatementsContent({
   })
 
   return (
-    <div className="flex h-fit flex-col gap-6">
+    <div className={cn('flex h-fit flex-col', hasMore && 'gap-6')}>
       <BudgetStatementsItem
         builders={visibleItems}
         budgetMetric={budgetMetric}

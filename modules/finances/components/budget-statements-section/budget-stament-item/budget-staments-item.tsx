@@ -37,6 +37,7 @@ export function BudgetStatementsItem({
         builders={buildersProcessed}
         selectedMetric={budgetMetric}
         className="lg:hidden"
+        asSectionContent={asSectionContent}
       />
     </>
   )
