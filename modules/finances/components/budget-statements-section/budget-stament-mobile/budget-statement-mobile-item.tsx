@@ -16,14 +16,11 @@ import type { BudgetStatement, MetricWithoutBudget } from '../type'
 export interface BudgetStatementMobileItemProps {
   builder: BudgetStatement
   selectedMetric: MetricWithoutBudget
-  className?: string
 }
 
 export function BudgetStatementMobileItem({
   builder,
   selectedMetric,
-
-  className,
 }: Readonly<BudgetStatementMobileItemProps>) {
   const reportMonth = formatReportingMonth(builder.month)
   const amount = getAmountByMetric(selectedMetric, builder)
@@ -39,7 +36,6 @@ export function BudgetStatementMobileItem({
         className={cn(
           'bg-background gap:0 flex w-full flex-col rounded-xl p-0 shadow-sm transition-all hover:shadow-sm',
           'gap-0',
-          className,
         )}
       >
         <CardHeader className="flex items-start justify-between px-4 pt-4 pb-2 md:pt-2">

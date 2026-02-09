@@ -11,11 +11,13 @@ interface BudgetStatementsContentWrapperProps {
     financeSlug?: string[]
   }>
   searchParams: Promise<SearchParams>
+  asSectionContent?: boolean
 }
 
 export async function BudgetStatementsContentWrapper({
   params,
   searchParams,
+  asSectionContent = false,
 }: Readonly<BudgetStatementsContentWrapperProps>) {
   const { slug } = await params
   const searchParamsResolved = await searchParams
@@ -28,6 +30,7 @@ export async function BudgetStatementsContentWrapper({
       budgetMetric={metricbs as MetricWithoutBudget}
       sortOption={sort as SortOptionValue}
       budgetStatements={budgetStatements}
+      asSectionContent={asSectionContent}
     />
   )
 }

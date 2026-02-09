@@ -24,12 +24,16 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
       href={`/network/${slug}/finances` as Route}
     >
       <>
-        <StripedCardContent className="px-2 py-0">
+        <StripedCardContent className="flex justify-end px-2 py-0">
           <BudgetStatementFilters />
         </StripedCardContent>
         <StripedCardContent className="p-0">
           <ErrorBoundaryWithPresets>
-            <BudgetStatementsContentWrapper params={params} searchParams={searchParams} />
+            <BudgetStatementsContentWrapper
+              params={params}
+              searchParams={searchParams}
+              asSectionContent
+            />
           </ErrorBoundaryWithPresets>
         </StripedCardContent>
       </>

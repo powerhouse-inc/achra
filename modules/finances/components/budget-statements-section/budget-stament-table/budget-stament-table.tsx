@@ -1,5 +1,6 @@
 'use client'
 import { ArrowUpDown } from 'lucide-react'
+import SimpleBar from 'simplebar-react'
 import { SortEnum } from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/use-wallets-table'
 
 import { Button } from '@/modules/shared/components/ui/button'
@@ -19,75 +20,106 @@ export interface BudgetStamentTableProps {
   builders: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   className?: string
+  asSectionContent?: boolean
 }
 
 export function BudgetStamentTable({
   builders,
   budgetMetric,
   className,
+  asSectionContent = false,
 }: Readonly<BudgetStamentTableProps>) {
   const {
     headersSort,
     sortedBuilders,
     proccesedBudgetStatementsTableColumns,
     handleSortClickHeader,
+    simpleBarRef,
+    cardContentRef,
+    itemsWrapperRef,
   } = useBudgetStamentTable({
     builders,
     budgetMetric,
+    asSectionContent,
   })
 
   return (
-    <Table
-      variant="pills"
-      className={cn('border-none! [&_table]:block [&_table]:w-full', className)}
-    >
-      <TableHeader className="mb-2 inline-block w-full border-b-0!">
-        <TableRow className="bg-accent! flex h-fit w-full justify-between rounded-none! rounded-tl-xl! rounded-tr-xl! border-none! px-2 py-4 shadow-sm! outline-none! xl:p-4 xl:pl-3 2xl:p-4">
-          {proccesedBudgetStatementsTableColumns.map((column, index) => (
-            <TableHead
-              key={column.accessorKey}
-              className={cn(
-                'inline-block h-fit p-0!',
-                column.isNumeric && 'text-right',
-                index === 0 && 'w-[27%]',
-                index === 1 && 'w-[17%]',
-                index === 2 && 'w-[15%] lg:pl-3!',
-                index === 3 && 'w-[15%]',
-                index === 4 && 'w-[19%]',
-              )}
-            >
-              <Button
-                variant="ghost"
-                aria-label={`Sort ${column.header} column`}
-                onClick={() => {
-                  handleSortClickHeader(index)
-                }}
+    <div className={cn('w-full', className)}>
+      <Table
+        variant="pills"
+        className={cn('[&_table]:block [&_table]:w-full', asSectionContent && 'px-2')}
+      >
+        <TableHeader className={cn('mb-2 inline-block w-full', !asSectionContent && 'border-b-0!')}>
+          <TableRow
+            className={cn(
+              !asSectionContent &&
+                'bg-accent! flex h-fit w-full justify-between rounded-none! rounded-tl-xl! rounded-tr-xl! border-none! py-4 shadow-sm! outline-none! xl:py-4 2xl:py-4',
+              asSectionContent && 'flex h-fit w-full border-b-0! py-4',
+            )}
+          >
+            {proccesedBudgetStatementsTableColumns.map((column, index) => (
+              <TableHead
+                key={column.accessorKey}
                 className={cn(
-                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6 dark:hover:bg-transparent',
-                  headersSort[index] === SortEnum.Asc &&
-                    '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
-                  headersSort[index] === SortEnum.Desc &&
-                    '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
+                  'inline-block h-fit p-0!',
+                  column.isNumeric && 'text-right',
+                  index === 0 && 'w-[27%] pl-4!',
+                  index === 1 && 'w-[17%]',
+                  index === 2 && 'w-[15%]',
+                  index === 3 && 'w-[14%]',
+                  index === 4 && 'flex-1',
                 )}
               >
-                {column.header}
-                {column.hasSort && <ArrowUpDown className="size-4" />}
-              </Button>
-            </TableHead>
-          ))}
-          <TableHead className="h-fit w-[10%] p-0! text-right" />
-        </TableRow>
-      </TableHeader>
-      <TableBody className="flex flex-col gap-2">
-        {sortedBuilders.map((builder) => (
-          <BudgetStamentTableItem
-            key={builder.id}
-            builder={builder}
-            budgetMetric={budgetMetric}
-            className="last:rounded-b-xl!"
-          />
-        ))}
-      </TableBody>
-    </Table>
+                <Button
+                  variant="ghost"
+                  aria-label={`Sort ${column.header} column`}
+                  onClick={() => {
+                    handleSortClickHeader(index)
+                  }}
+                  className={cn(
+                    '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6 dark:hover:bg-transparent',
+                    headersSort[index] === SortEnum.Asc &&
+                      '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
+                    headersSort[index] === SortEnum.Desc &&
+                      '[&_path:nth-child(1)]:stroke-foreground [&_path:nth-child(2)]:stroke-foreground hover:[&_path:nth-child(1)]:stroke-foreground/50 hover:[&_path:nth-child(2)]:stroke-foreground/50 hover:[&_path:nth-child(3)]:stroke-foreground/30 hover:[&_path:nth-child(4)]:stroke-foreground/30',
+                  )}
+                >
+                  {column.header}
+                  {column.hasSort && <ArrowUpDown className="size-4" />}
+                </Button>
+              </TableHead>
+            ))}
+            <TableHead className="h-fit w-[10%] p-0! text-right" />
+          </TableRow>
+        </TableHeader>
+      </Table>
+
+      <div ref={cardContentRef}>
+        <SimpleBar
+          ref={simpleBarRef}
+          className={cn(!asSectionContent && '-mx-2 px-2 pb-3')}
+          autoHide={false}
+        >
+          <div ref={itemsWrapperRef} className={cn(asSectionContent && 'px-2 pb-2')}>
+            <Table variant="pills" className="[&_table]:block [&_table]:w-full">
+              <TableBody className="flex flex-col gap-2">
+                {sortedBuilders.map((builder) => (
+                  <BudgetStamentTableItem
+                    key={builder.id}
+                    builder={builder}
+                    budgetMetric={budgetMetric}
+                    className={cn(
+                      'flex h-15.5! w-full cursor-pointer items-center border-b-0!',
+                      !asSectionContent &&
+                        'justify-between rounded-none! shadow-sm! last:rounded-b-xl!',
+                    )}
+                  />
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </SimpleBar>
+      </div>
+    </div>
   )
 }
