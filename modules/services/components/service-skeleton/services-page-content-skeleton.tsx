@@ -1,7 +1,7 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import ServicesCardSkeleton from './service-card-skeleton'
 
-export function ServicesPageContentSkeleton() {
+export function ServicesContentSkeleton() {
   return (
     <>
       {/* Section title */}
