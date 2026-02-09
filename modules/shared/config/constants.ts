@@ -27,6 +27,7 @@ export enum NetworkHomepageSections {
 
 export enum NetworkDashboardSections {
   Builders = 'builders',
+  Finances = 'finances',
 }
 
 /**
