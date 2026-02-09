@@ -1,18 +1,18 @@
 'use client'
 
+import type { BudgetStatementSnapshotReport } from '@/modules/__generated__/graphql/switchboard-generated'
 import { accountSnapshotMockWithoutActualsComparison } from '../../mocks/account-snapshot-mocks'
 import { ExpenseComparison } from './components/expense-comparison'
-import { FundingOverview } from './components/funding-overview'
 import { ReservesSnapshot } from './components/reserves-snapshot'
 import useAccountsSnapshot from './useAccountsSnapshot'
 
 interface AccountSnapshotProps {
-  month: Date | null
+  expenseReport: Partial<BudgetStatementSnapshotReport>
 }
 
-function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
+// TODO: remove this component in favor of the SSR version once the integration is complete
+function AccountSnapshot({ expenseReport: _ }: AccountSnapshotProps) {
   const {
-    transactionHistory,
     includeOffChain,
     toggleIncludeOffChain,
     startDate,
@@ -27,7 +27,6 @@ function AccountSnapshot({ month: _ }: AccountSnapshotProps) {
 
   return (
     <div className="flex flex-col gap-6 md:gap-8">
-      <FundingOverview transactionHistory={transactionHistory} />
       <ReservesSnapshot
         teamName="Powerhouse"
         includeOffChain={includeOffChain}

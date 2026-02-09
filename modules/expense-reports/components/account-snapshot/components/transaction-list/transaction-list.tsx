@@ -1,9 +1,11 @@
+import type { SnapshotAccountTransaction } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getCurrencyValue } from '@/modules/expense-reports/lib/budget-statement-utils'
 import { isAccountSnapshot } from '../../utils/typesHelpers'
 import { Transaction } from '../transaction'
 import { GroupItem } from './group-item'
 import { InitialBalanceRow } from './initial-balance-row'
 import { TransactionEmpty } from './transaction-empty'
-import type { SnapshotAccount, SnapshotAccountTransaction } from '../../types'
+import type { SnapshotAccount } from '../../types'
 
 interface TransactionListProps {
   items?: Array<SnapshotAccountTransaction | SnapshotAccount>
@@ -14,14 +16,15 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
   const renderTransaction = (transaction: SnapshotAccountTransaction) => (
     <Transaction
       key={transaction.id}
-      name={transaction.txLabel ?? 'N/A'}
-      date={transaction.timestamp}
+      label="N/A"
+      date={transaction.datetime}
       toDate={null}
       txHash={transaction.txHash}
-      counterPartyName={transaction.counterPartyName ?? 'N/A'}
+      counterPartyName={transaction.counterPartyName.trim() || 'N/A'}
       counterPartyAddress={transaction.counterParty}
-      amount={transaction.amount}
+      amount={getCurrencyValue(transaction.amount.value)}
       highlightPositiveAmounts={highlightPositiveAmounts}
+      direction={transaction.direction}
     />
   )
 
@@ -45,7 +48,7 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
                 currency="USD"
               />
 
-              {item.snapshotAccountTransaction.map(renderTransaction)}
+              {/* {item.snapshotAccountTransaction.map(renderTransaction)} */}
 
               <InitialBalanceRow
                 initialBalance={item.snapshotAccountBalance[0]?.initialBalance ?? 0}

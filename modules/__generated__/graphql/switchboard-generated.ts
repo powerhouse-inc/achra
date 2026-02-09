@@ -459,6 +459,73 @@ export type AnalyticsSeriesDimension = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
+export type BContentSection = {
+  __typename?: 'BContentSection';
+  content: Scalars['String']['output'];
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type BFacetTarget = {
+  __typename?: 'BFacetTarget';
+  categoryKey: Scalars['String']['output'];
+  categoryLabel: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  selectedOptions: Array<Scalars['String']['output']>;
+};
+
+export type BFaqField = {
+  __typename?: 'BFaqField';
+  answer?: Maybe<Scalars['String']['output']>;
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+export type BOptionGroup = {
+  __typename?: 'BOptionGroup';
+  defaultSelected: Scalars['Boolean']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  isAddOn: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type BResourceFacetBinding = {
+  __typename?: 'BResourceFacetBinding';
+  facetName: Scalars['String']['output'];
+  facetType: Scalars['PHID']['output'];
+  id: Scalars['OID']['output'];
+  supportedOptions: Array<Scalars['OID']['output']>;
+};
+
+export type BService = {
+  __typename?: 'BService';
+  description?: Maybe<Scalars['String']['output']>;
+  displayOrder?: Maybe<Scalars['Int']['output']>;
+  facetBindings: Array<BResourceFacetBinding>;
+  id: Scalars['OID']['output'];
+  isSetupFormation: Scalars['Boolean']['output'];
+  optionGroupId?: Maybe<Scalars['OID']['output']>;
+  parentServiceId?: Maybe<Scalars['OID']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type BTargetAudience = {
+  __typename?: 'BTargetAudience';
+  color?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  label: Scalars['String']['output'];
+};
+
+export enum BTemplateStatus {
+  Active = 'ACTIVE',
+  ComingSoon = 'COMING_SOON',
+  Deprecated = 'DEPRECATED',
+  Draft = 'DRAFT'
+}
+
 export type BillingStatement = IDocument & {
   __typename?: 'BillingStatement';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -672,6 +739,27 @@ export type BuilderLink = {
   url: Scalars['URL']['output'];
 };
 
+export type BuilderProduct = {
+  __typename?: 'BuilderProduct';
+  contentSections: Array<BContentSection>;
+  description?: Maybe<Scalars['String']['output']>;
+  facetTargets: Array<BFacetTarget>;
+  faqFields?: Maybe<Array<BFaqField>>;
+  id: Scalars['PHID']['output'];
+  infoLink?: Maybe<Scalars['URL']['output']>;
+  lastModified: Scalars['DateTime']['output'];
+  operatorId: Scalars['PHID']['output'];
+  optionGroups: Array<BOptionGroup>;
+  recurringServices: Array<Scalars['String']['output']>;
+  services: Array<BService>;
+  setupServices: Array<Scalars['String']['output']>;
+  status: BTemplateStatus;
+  summary: Scalars['String']['output'];
+  targetAudiences: Array<BTargetAudience>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+  title: Scalars['String']['output'];
+};
+
 export type BuilderProfile = IDocument & {
   __typename?: 'BuilderProfile';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -725,6 +813,7 @@ export type BuilderProfileState = {
   links: Array<BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
   operationalHubMember: OpHubMember;
+  products: Array<BuilderProduct>;
   projects: Array<BuilderProject>;
   scopes: Array<BuilderScope>;
   skills: Array<BuilderSkill>;
@@ -9462,6 +9551,7 @@ export type BudgetStatementsFilter = {
 export type BuildersFilter = {
   code?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['PHID']['input']>;
+  isOperator?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   networkSlug?: InputMaybe<Scalars['String']['input']>;
   scopes?: InputMaybe<Array<BuilderScope>>;
@@ -9497,6 +9587,13 @@ export type BuildersListQueryVariables = Exact<{
 
 
 export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, isOperator: boolean, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null, phid?: any | null } }> };
+
+export type AccountSnapshotsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
 
 export type BudgetStatementsDetailsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -9749,6 +9846,84 @@ useSuspenseBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) =
 
 
 useBuildersListQuery.fetcher = (variables?: BuildersListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables, options);
+
+export const AccountSnapshotsDocument = `
+    query AccountSnapshots($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    snapshotReport {
+      startDate
+      endDate
+      accounts {
+        id
+        name
+        type
+        address
+        transactions {
+          id
+          amount {
+            unit
+            value
+          }
+          counterParty
+          counterPartyName
+          datetime
+          direction
+          txHash
+        }
+        balances {
+          endingBalance
+          startingBalance
+          token {
+            symbol
+            contractAddress
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export const useAccountSnapshotsQuery = <
+      TData = AccountSnapshotsQuery,
+      TError = unknown
+    >(
+      variables?: AccountSnapshotsQueryVariables,
+      options?: Omit<UseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<AccountSnapshotsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables],
+    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+    ...options
+  }
+    )};
+
+useAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables];
+
+export const useSuspenseAccountSnapshotsQuery = <
+      TData = AccountSnapshotsQuery,
+      TError = unknown
+    >(
+      variables?: AccountSnapshotsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<AccountSnapshotsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables],
+    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables];
+
+
+useAccountSnapshotsQuery.fetcher = (variables?: AccountSnapshotsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables, options);
 
 export const BudgetStatementsDetailsDocument = `
     query BudgetStatementsDetails($filter: budgetStatementsFilter) {

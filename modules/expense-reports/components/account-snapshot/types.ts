@@ -1,3 +1,11 @@
+export interface CalculatedBalance {
+  startingBalance: number
+  endingBalance: number
+  inflow: number
+  outflow: number
+}
+
+// TODO: do we need any of these types? 👇
 export type Token = 'DAI' | 'ETH' | 'MKR' | 'USD' | 'USDC'
 
 export type AccountType = 'singular' | 'group'

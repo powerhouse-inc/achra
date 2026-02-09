@@ -1,0 +1,37 @@
+query AccountSnapshots($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    snapshotReport {
+      startDate
+      endDate
+      accounts {
+        id
+        name
+        type
+        address
+        transactions {
+          id
+          amount {
+            unit
+            value
+          }
+          counterParty
+          counterPartyName
+          datetime
+          direction
+          # flowType
+          txHash
+        }
+        balances {
+          endingBalance
+          startingBalance
+          token {
+            symbol
+            contractAddress
+          }
+        }
+      }
+    }
+  }
+}

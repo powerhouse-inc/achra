@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { getReserveAccounts, transactionSort } from './utils/reserveUtils'
 import type { ExpenseComparisonLineItem, Snapshots, Token } from './types'
 
+// TODO: remove this hook in favor of the SSR version once the integration is complete
 const useAccountsSnapshot = (snapshot: Snapshots) => {
   // TODO: the `setSelectedTo` is not used yet, but it will be used to filter the data
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

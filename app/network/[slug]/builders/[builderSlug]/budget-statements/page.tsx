@@ -4,7 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import {
-  AccountSnapshot,
+  AccountSnapshotContainer,
   AccountSnapshotSkeleton,
 } from '@/modules/expense-reports/components/account-snapshot'
 import {
@@ -116,7 +116,7 @@ export default async function ExpenseReportsPage({
             fallback={<AccountSnapshotSkeleton />}
             key={`${section}-${formatMonthString(selectedMonth)}`}
           >
-            <AccountSnapshot month={selectedMonth} />
+            <AccountSnapshotContainer teamId={builder.id} month={selectedMonth} />
           </Suspense>
         </div>
       )}

@@ -2,6 +2,8 @@ import { format, parse } from 'date-fns'
 import { cacheLife } from 'next/cache'
 import {
   type BudgetStatementsDetailsQuery,
+  type BudgetStatementSnapshotReport,
+  useAccountSnapshotsQuery,
   useBudgetStatementsAvailableMonthsQuery,
   useBudgetStatementsDetailsQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -48,4 +50,25 @@ export async function getBudgetStatementForMonth(
   const monthString = format(month, 'MMMyyyy').toUpperCase()
 
   return data.budgetStatements.find((bs) => bs.month === monthString) ?? null
+}
+
+export async function getAccountSnapshotForMonth(
+  teamId: string,
+  month: Date,
+): Promise<Partial<BudgetStatementSnapshotReport> | null> {
+  'use cache'
+  cacheLife('minutes')
+
+  const data = await useAccountSnapshotsQuery.fetcher({
+    filter: {
+      teamId,
+    },
+  })()
+
+  const monthString = format(month, 'MMMyyyy').toUpperCase()
+
+  return (
+    (data.budgetStatements.find((bs) => bs.month === monthString)
+      ?.snapshotReport as Partial<BudgetStatementSnapshotReport> | null) ?? null
+  )
 }
