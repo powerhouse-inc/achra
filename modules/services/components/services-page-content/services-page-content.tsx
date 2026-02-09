@@ -4,7 +4,6 @@ import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import { Button } from '@/modules/shared/components/ui/button'
 import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
 import EmptyStateService from '../empty-state-service/empty-state-service'
-import ServicesFilters from '../services-filters'
 import ServicesList from '../services-list'
 
 interface ServicesPageContentProps {
@@ -12,7 +11,7 @@ interface ServicesPageContentProps {
 }
 
 export function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
-  const [activeTab, setActiveTab] = useQueryState(
+  const [activeTab] = useQueryState(
     'tab',
     parseAsStringLiteral(['all', 'builders', 'networks'] as const).withDefault('all'),
   )
@@ -27,9 +26,7 @@ export function ServicesPageContent({ services }: Readonly<ServicesPageContentPr
     (showBuilders && builderServices.length > 0) || (showNetworks && networkServices.length > 0)
 
   return (
-    <div className="flex w-full flex-col gap-6">
-      <ServicesFilters activeTab={activeTab} onTabChange={(tab) => void setActiveTab(tab)} />
-
+    <>
       {hasVisibleServices ? (
         <>
           {showBuilders && <ServicesList title="Builders" services={builderServices} />}
@@ -42,6 +39,6 @@ export function ServicesPageContent({ services }: Readonly<ServicesPageContentPr
       ) : (
         <EmptyStateService />
       )}
-    </div>
+    </>
   )
 }

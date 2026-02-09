@@ -1,9 +1,11 @@
+import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import ServicesFilters from './services-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Modules/Services/Components/ServicesFilters',
   component: ServicesFilters,
+  decorators: [withNuqsAdapter],
   parameters: {
     layout: 'centered',
     nextjs: {
@@ -18,9 +20,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    activeTab: 'all',
-    onTabChange: () => {},
-  },
-}
+export const Default: Story = {}
