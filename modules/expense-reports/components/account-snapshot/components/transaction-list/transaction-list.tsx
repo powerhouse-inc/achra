@@ -48,6 +48,7 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
                 currency="USD"
               />
 
+              {/* TODO: uncomment this and implement it once the integration of reserve snapshot details is complete */}
               {/* {item.snapshotAccountTransaction.map(renderTransaction)} */}
 
               <InitialBalanceRow
