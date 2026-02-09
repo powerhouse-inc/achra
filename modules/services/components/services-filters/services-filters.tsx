@@ -1,5 +1,6 @@
 'use client'
 
+import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import type { ServiceTab } from '@/modules/services/config/types'
 import SearchInput from '@/modules/shared/components/form/search-input'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
@@ -11,15 +12,12 @@ const SERVICES_TABS: Array<{ id: ServiceTab; label: string }> = [
   { id: 'networks', label: 'Networks' },
 ]
 
-interface ServicesFiltersProps {
-  activeTab: ServiceTab
-  onTabChange: (tab: ServiceTab) => void
-}
+export default function ServicesFilters() {
+  const [activeTab, setActiveTab] = useQueryState(
+    'tab',
+    parseAsStringLiteral(['all', 'builders', 'networks'] as const).withDefault('all'),
+  )
 
-export default function ServicesFilters({
-  activeTab,
-  onTabChange,
-}: Readonly<ServicesFiltersProps>) {
   return (
     <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-[auto_1fr] md:grid-rows-1 md:items-center lg:gap-6">
       <SearchInput
@@ -31,7 +29,7 @@ export default function ServicesFilters({
       <ScrollableTabs
         value={activeTab}
         onValueChange={(value) => {
-          onTabChange(value as ServiceTab)
+          void setActiveTab(value as ServiceTab)
         }}
         className="md:order-1"
       >
