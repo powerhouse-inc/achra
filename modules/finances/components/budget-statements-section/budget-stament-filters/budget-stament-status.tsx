@@ -7,8 +7,10 @@ import BudgetStatementsStatus from '../budget-staments-status/budget-statments-s
 
 interface BudgetStatusBudgetProps {
   status: ExpenseReport_ExpenseReportStatus[]
-  setStatus: (scopes: ExpenseReport_ExpenseReportStatus[]) => Promise<URLSearchParams>
+  setStatus: (scopes: ExpenseReport_ExpenseReportStatus[]) => void
   className?: string
+  isLoading?: boolean
+  disabled?: boolean
 }
 
 const statusOptions: Option[] = [
@@ -29,7 +31,13 @@ const statusOptions: Option[] = [
   },
 ]
 
-function StatusSelectBudget({ status, setStatus, className }: Readonly<BudgetStatusBudgetProps>) {
+function StatusSelectBudget({
+  status,
+  setStatus,
+  className,
+  isLoading,
+  disabled,
+}: Readonly<BudgetStatusBudgetProps>) {
   const selectedOptions = useMemo(
     () =>
       statusOptions.filter((option) =>
@@ -40,7 +48,7 @@ function StatusSelectBudget({ status, setStatus, className }: Readonly<BudgetSta
 
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value as ExpenseReport_ExpenseReportStatus)
-    void setStatus(values)
+    setStatus(values)
   }
 
   return (
@@ -58,13 +66,15 @@ function StatusSelectBudget({ status, setStatus, className }: Readonly<BudgetSta
         className,
       }}
       customItemRenderer={(option): React.ReactNode => option.label}
+      isLoading={isLoading}
+      disabled={disabled}
     />
   )
 }
 
 function StatusSelectDrawer({ status, setStatus }: Readonly<BudgetStatusBudgetProps>) {
   const handleChange = (values: string[]) => {
-    void setStatus(values as ExpenseReport_ExpenseReportStatus[])
+    setStatus(values as ExpenseReport_ExpenseReportStatus[])
   }
 
   return (
