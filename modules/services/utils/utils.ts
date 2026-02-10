@@ -1,4 +1,4 @@
-import { ServiceEntityEnum } from '@/modules/shared/types/services'
+import { type Service, ServiceEntityEnum } from '@/modules/shared/types/services'
 
 /**
  * Maps targetAudience label to ServiceEntityEnum
@@ -16,3 +16,10 @@ function mapLabelToEntity(label: string): ServiceEntityEnum | null {
 }
 
 export { mapLabelToEntity }
+
+export function filterBySearch(services: Service[], search: string): Service[] {
+  if (!search) return services
+
+  const query = search.toLowerCase()
+  return services.filter((service) => service.title.toLowerCase().includes(query))
+}
