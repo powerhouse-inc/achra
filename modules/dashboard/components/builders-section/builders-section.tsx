@@ -30,7 +30,7 @@ export function BuildersSection({ networkSlug, searchParams, networkName }: Buil
           <BuilderFilters />
         </StripedCardContent>
         <StripedCardContent className="p-0">
-          <ErrorBoundaryWithPresets>
+          <ErrorBoundaryWithPresets className="mb-2">
             <Builders networkSlug={networkSlug} searchParams={searchParams} asSectionContent />
           </ErrorBoundaryWithPresets>
         </StripedCardContent>

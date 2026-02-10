@@ -9,6 +9,7 @@ interface ErrorBoundaryWithPresetsProps {
   icon?: LucideIcon
   title?: string
   description?: string
+  className?: string
 }
 
 function ErrorBoundaryWithPresets({
@@ -16,10 +17,18 @@ function ErrorBoundaryWithPresets({
   icon,
   title,
   description,
+  className,
 }: ErrorBoundaryWithPresetsProps) {
   return (
     <ErrorBoundary
-      fallback={<SmartErrorState icon={icon} title={title} description={description} />}
+      fallback={
+        <SmartErrorState
+          icon={icon}
+          title={title}
+          description={description}
+          className={className}
+        />
+      }
     >
       {children}
     </ErrorBoundary>

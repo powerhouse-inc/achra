@@ -28,7 +28,7 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
           <BudgetStatementFilters />
         </StripedCardContent>
         <StripedCardContent className="p-0">
-          <ErrorBoundaryWithPresets>
+          <ErrorBoundaryWithPresets className="mb-2">
             <BudgetStatementsContentWrapper
               params={params}
               searchParams={searchParams}
