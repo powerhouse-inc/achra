@@ -7,7 +7,15 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 
-export default function EmptyStateService() {
+interface EmptyStateServiceProps {
+  title: string
+  description: string
+}
+
+export default function EmptyStateService({
+  title,
+  description,
+}: Readonly<EmptyStateServiceProps>) {
   return (
     <div className="flex h-fit flex-col gap-6">
       <Empty>
@@ -15,10 +23,8 @@ export default function EmptyStateService() {
           <EmptyMedia variant="icon">
             <Folder />
           </EmptyMedia>
-          <EmptyTitle>No services found</EmptyTitle>
-          <EmptyDescription>
-            There are no services available for this combination of filters
-          </EmptyDescription>
+          <EmptyTitle>{title}</EmptyTitle>
+          <EmptyDescription>{description}</EmptyDescription>
         </EmptyHeader>
       </Empty>
     </div>
