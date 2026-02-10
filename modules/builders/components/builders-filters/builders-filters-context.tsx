@@ -1,28 +1,14 @@
 'use client'
 
-import { createContext, type ReactNode, useContext } from 'react'
+import { createFiltersContext } from '@/modules/shared/lib/create-filters-context'
 import useBuildersFilters from './use-builders-filters'
 
-type BuildersFiltersContextValue = ReturnType<typeof useBuildersFilters>
+const { FiltersProvider, useFiltersContext } = createFiltersContext(
+  useBuildersFilters,
+  'BuildersFiltersProvider',
+)
 
-const BuildersFiltersContext = createContext<BuildersFiltersContextValue | null>(null)
-
-interface BuildersFiltersProviderProps {
-  children: ReactNode
-}
-
-export function BuildersFiltersProvider({ children }: BuildersFiltersProviderProps) {
-  const value = useBuildersFilters()
-
-  return <BuildersFiltersContext.Provider value={value}>{children}</BuildersFiltersContext.Provider>
-}
-
-export function useBuildersFiltersContext() {
-  const context = useContext(BuildersFiltersContext)
-
-  if (!context) {
-    throw new Error('useBuildersFiltersContext must be used within BuildersFiltersProvider')
-  }
-
-  return context
+export {
+  FiltersProvider as BuildersFiltersProvider,
+  useFiltersContext as useBuildersFiltersContext,
 }

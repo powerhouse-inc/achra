@@ -1,5 +1,6 @@
 import { BudgetStatementsContentWrapper } from '@/modules/finances/components/budget-statements-section'
 import BudgetStatementFilters from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-stament-filters'
+import { BudgetStamentFiltersProvider } from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-statement-filters-context'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { StripedCardContent } from '@/modules/shared/components/striped-card'
 import { NetworkDashboardSections } from '@/modules/shared/config/constants'
@@ -23,7 +24,7 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
       cardTitle="Lorem ipsum dolor sit amet consectetur. Sed."
       href={`/network/${slug}/finances` as Route}
     >
-      <>
+      <BudgetStamentFiltersProvider>
         <StripedCardContent className="flex justify-end px-2 py-0">
           <BudgetStatementFilters />
         </StripedCardContent>
@@ -36,7 +37,7 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
             />
           </ErrorBoundaryWithPresets>
         </StripedCardContent>
-      </>
+      </BudgetStamentFiltersProvider>
     </DashboardSectionWrapper>
   )
 }

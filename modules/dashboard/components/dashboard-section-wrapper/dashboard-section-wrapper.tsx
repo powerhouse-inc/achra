@@ -35,7 +35,7 @@ export function DashboardSectionWrapper({
       id={encodeSectionId(id)}
     >
       <SectionTitle title={title} hash={hash} />
-      <StripedCard className="w-full gap-4">
+      <StripedCard className="w-full gap-4 overflow-visible">
         <StripedCardHeader className="items-center gap-x-2 px-4">
           <StripedCardTitle className="text-sm leading-5.5 font-semibold sm:text-base/6">
             {cardTitle}

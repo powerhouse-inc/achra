@@ -24,6 +24,8 @@ interface BasicSelectProps {
    * @default false
    */
   matchTriggerWidth?: boolean
+  isLoading?: boolean
+  disabled?: boolean
 }
 
 export function BasicSelect({
@@ -35,12 +37,14 @@ export function BasicSelect({
   className,
   'aria-label': ariaLabel,
   matchTriggerWidth = false,
+  isLoading = false,
+  disabled = false,
 }: BasicSelectProps) {
   // Only use value if it's in the options list, otherwise show placeholder
   const validValue = value && options.includes(value) ? value : undefined
 
   return (
-    <Select value={validValue} onValueChange={onValueChange}>
+    <Select value={validValue} onValueChange={onValueChange} disabled={disabled}>
       <SelectTrigger
         size="sm"
         className={cn(
@@ -49,6 +53,7 @@ export function BasicSelect({
         )}
         aria-label={ariaLabel ?? label ?? 'Select option'}
         data-slot="single-select-trigger"
+        isLoading={isLoading}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

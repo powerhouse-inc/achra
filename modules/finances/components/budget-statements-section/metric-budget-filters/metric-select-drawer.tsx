@@ -4,7 +4,7 @@ import type { Option } from '@/modules/shared/components/form/multiselect'
 
 interface MetricSelectProps {
   metric: Exclude<METRIC_OPTIONS, 'Budget'> | null
-  setMetric: (metric: Exclude<METRIC_OPTIONS, 'Budget'>) => Promise<URLSearchParams>
+  setMetric: (metric: Exclude<METRIC_OPTIONS, 'Budget'>) => void
   className?: string
 }
 
@@ -33,7 +33,7 @@ const metricOptions: Option[] = [
 
 function MetricSelectDrawer({ metric, setMetric }: Readonly<MetricSelectProps>) {
   const handleChange = (value: string) => {
-    void setMetric(value as Exclude<METRIC_OPTIONS, 'Budget'>)
+    setMetric(value as Exclude<METRIC_OPTIONS, 'Budget'>)
   }
 
   return (

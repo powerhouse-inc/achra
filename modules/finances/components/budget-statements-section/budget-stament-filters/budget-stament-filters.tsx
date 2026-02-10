@@ -10,13 +10,24 @@ import { MetricSelectDrawer } from '../metric-budget-filters/metric-select-drawe
 import { BudgetStatementPopover } from './budget-stament-popover'
 import { StatusSelectBudget, StatusSelectDrawer } from './budget-stament-status'
 import { MetricItemFilter } from './metric-item-filter'
-import useBudgetStamentFilters from './useBudgetStamentFilters'
+import useBudgetStamentFilters from './use-budget-stament-filters'
 import type { MetricWithoutBudget } from '../type'
 
 export default function BudgetStatementFilters() {
   const [open, setOpen] = useState(false)
-  const { status, setStatus, metricSort, metric, setMetric, onReset, handleOnMetricSelect } =
-    useBudgetStamentFilters()
+  const {
+    status,
+    setStatus,
+    metricSort,
+    metric,
+    setMetric,
+    onReset,
+    handleOnMetricSelect,
+    isStatusPending,
+    isMetricPending,
+    isResetPending,
+    isResetDisabled,
+  } = useBudgetStamentFilters()
   return (
     <div className="row flex gap-4">
       <div className="hidden items-center gap-4 md:flex">
@@ -24,6 +35,7 @@ export default function BudgetStatementFilters() {
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
           variant="ghost"
           onClick={onReset}
+          disabled={isResetDisabled}
         >
           Reset Filter
         </Button>
@@ -32,13 +44,21 @@ export default function BudgetStatementFilters() {
           value={metric}
           label="Metric"
           onValueChange={(value) => {
-            void setMetric(value as MetricWithoutBudget)
+            setMetric(value as MetricWithoutBudget)
           }}
           options={Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget')}
           placeholder="Budget"
           className="md:min-w-25.5 lg:min-w-46"
+          isLoading={isMetricPending}
+          disabled={isResetPending}
         />
-        <StatusSelectBudget status={status} setStatus={setStatus} className="md:w-25.5 lg:w-46" />
+        <StatusSelectBudget
+          status={status}
+          setStatus={setStatus}
+          className="md:w-25.5 lg:w-46"
+          isLoading={isStatusPending}
+          disabled={isResetPending}
+        />
       </div>
       <div className="flex gap-4 lg:hidden">
         <div className="flex items-center gap-4 md:hidden">

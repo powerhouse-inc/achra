@@ -1,5 +1,5 @@
 import { parseAsArrayOf, parseAsStringEnum, parseAsStringLiteral, useQueryStates } from 'nuqs'
-import { useCallback } from 'react'
+import { useCallback, useMemo, useTransition } from 'react'
 
 import { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { METRIC_OPTIONS } from '@/modules/finances/types'
@@ -41,6 +41,11 @@ const filtersConfig = {
 
 export default function useBudgetStamentFilters() {
   const [filters, setFilters] = useQueryStates(filtersConfig)
+
+  const [isStatusPending, startStatusTransition] = useTransition()
+  const [isMetricPending, startMetricTransition] = useTransition()
+  const [isResetPending, startResetTransition] = useTransition()
+
   const { sort: metricSort } = filters
   const setMetricSort = useCallback(
     async (value: SortOptionValue | null) => setFilters({ sort: value }),
@@ -75,29 +80,48 @@ export default function useBudgetStamentFilters() {
   )
 
   const setStatus = useCallback(
-    async (value: StateUpdater<FiltersState['status']>, options?: FilterOptions) =>
-      setFilterValue('status', value, options),
-    [setFilterValue],
+    (value: StateUpdater<FiltersState['status']>, options?: FilterOptions) => {
+      startStatusTransition(async () => {
+        await setFilterValue('status', value, options)
+      })
+    },
+    [setFilterValue, startStatusTransition],
   )
 
   const setMetric = useCallback(
-    async (value: StateUpdater<FiltersState['metricbs']>, options?: FilterOptions) =>
-      setFilterValue('metricbs', value, options),
-    [setFilterValue],
+    (value: StateUpdater<FiltersState['metricbs']>, options?: FilterOptions) => {
+      startMetricTransition(async () => {
+        await setFilterValue('metricbs', value, options)
+      })
+    },
+    [setFilterValue, startMetricTransition],
   )
 
   const onReset = useCallback(() => {
-    void setFilters({
-      status: [],
-      metricbs: METRIC_OPTIONS.Actuals,
+    startResetTransition(async () => {
+      await setFilters({
+        status: [],
+        metricbs: METRIC_OPTIONS.Actuals,
+      })
     })
-    void setStatus(null)
-    void setMetricSort('modified_newest')
-  }, [setFilters, setStatus, setMetricSort])
+  }, [setFilters, startResetTransition])
+
+  const isResetDisabled = useMemo(
+    () =>
+      isStatusPending ||
+      isMetricPending ||
+      isResetPending ||
+      (filters.status.length === 0 && filters.metricbs === METRIC_OPTIONS.Actuals),
+    [isStatusPending, isMetricPending, isResetPending, filters.status, filters.metricbs],
+  )
 
   return {
     status: filters.status,
     metric: filters.metricbs,
+    isStatusPending,
+    isMetricPending,
+    isResetPending,
+    isResetDisabled,
     setStatus,
     onReset,
     metricSort,
