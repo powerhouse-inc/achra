@@ -3,7 +3,7 @@ import BudgetStatementFilters from '@/modules/finances/components/budget-stateme
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { StripedCardContent } from '@/modules/shared/components/striped-card'
 import { NetworkDashboardSections } from '@/modules/shared/config/constants'
-import { DashboardSectionWrapper } from '../dashboard-section/dashboard-section-wrapper'
+import { DashboardSectionWrapper } from '../dashboard-section-wrapper/dashboard-section-wrapper'
 import type { Route } from 'next'
 import type { SearchParams } from 'nuqs/server'
 
@@ -28,7 +28,7 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
           <BudgetStatementFilters />
         </StripedCardContent>
         <StripedCardContent className="p-0">
-          <ErrorBoundaryWithPresets>
+          <ErrorBoundaryWithPresets className="mb-2">
             <BudgetStatementsContentWrapper
               params={params}
               searchParams={searchParams}

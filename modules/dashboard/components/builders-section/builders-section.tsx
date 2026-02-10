@@ -4,7 +4,7 @@ import { BuildersFiltersProvider } from '@/modules/builders/components/builders-
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { StripedCardContent } from '@/modules/shared/components/striped-card'
 import { NetworkDashboardSections } from '@/modules/shared/config/constants'
-import { DashboardSectionWrapper } from '../dashboard-section/dashboard-section-wrapper'
+import { DashboardSectionWrapper } from '../dashboard-section-wrapper/dashboard-section-wrapper'
 import type { Route } from 'next'
 
 interface BuildersSectionProps {
@@ -30,7 +30,7 @@ export function BuildersSection({ networkSlug, searchParams, networkName }: Buil
           <BuilderFilters />
         </StripedCardContent>
         <StripedCardContent className="p-0">
-          <ErrorBoundaryWithPresets>
+          <ErrorBoundaryWithPresets className="mb-2">
             <Builders networkSlug={networkSlug} searchParams={searchParams} asSectionContent />
           </ErrorBoundaryWithPresets>
         </StripedCardContent>
