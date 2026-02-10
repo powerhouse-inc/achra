@@ -1,10 +1,10 @@
 'use client'
 
-import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import type { ServiceTab } from '@/modules/services/config/types'
 import SearchInput from '@/modules/shared/components/form/search-input'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
 import { TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { useServicesFiltersContext } from './services-filters-context'
 
 const SERVICES_TABS: Array<{ id: ServiceTab; label: string }> = [
   { id: 'all', label: 'All' },
@@ -13,31 +13,36 @@ const SERVICES_TABS: Array<{ id: ServiceTab; label: string }> = [
 ]
 
 export default function ServicesFilters() {
-  const [activeTab, setActiveTab] = useQueryState(
-    'tab',
-    parseAsStringLiteral(['all', 'builders', 'networks'] as const).withDefault('all'),
-  )
+  const { search, tab, isSearchPending, isTabPending, isResetPending, setSearch, setTab } =
+    useServicesFiltersContext()
 
   return (
-    <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-[auto_1fr] md:grid-rows-1 md:items-center lg:gap-6">
+    <div
+      className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-[auto_1fr] md:grid-rows-1 md:items-center lg:gap-6"
+      aria-busy={isResetPending || isSearchPending || isTabPending}
+    >
       <SearchInput
-        value=""
-        onChange={() => {}}
+        value={search}
+        onChange={(value) => {
+          setSearch(value)
+        }}
+        isLoading={isSearchPending}
+        disabled={isResetPending}
         showKeyboardShortcut={false}
         className="h-7 w-full md:order-2 md:max-w-63.25 md:justify-self-end lg:max-w-80"
       />
       <ScrollableTabs
-        value={activeTab}
+        value={tab}
         onValueChange={(value) => {
-          void setActiveTab(value as ServiceTab)
+          setTab(value as ServiceTab)
         }}
         className="md:order-1"
       >
         <ScrollableTabsList>
           <div className="flex w-fit">
-            {SERVICES_TABS.map((tab) => (
-              <TabsTrigger key={tab.id} value={tab.id}>
-                {tab.label}
+            {SERVICES_TABS.map((serviceTab) => (
+              <TabsTrigger key={serviceTab.id} value={serviceTab.id}>
+                {serviceTab.label}
               </TabsTrigger>
             ))}
           </div>

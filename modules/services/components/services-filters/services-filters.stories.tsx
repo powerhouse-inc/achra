@@ -1,11 +1,20 @@
-import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
+import { NuqsAdapter } from 'nuqs/adapters/react'
 import ServicesFilters from './services-filters'
+import { ServicesFiltersProvider } from './services-filters-context'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Modules/Services/Components/ServicesFilters',
   component: ServicesFilters,
-  decorators: [withNuqsAdapter],
+  decorators: [
+    (Story) => (
+      <NuqsAdapter>
+        <ServicesFiltersProvider>
+          <Story />
+        </ServicesFiltersProvider>
+      </NuqsAdapter>
+    ),
+  ],
   parameters: {
     layout: 'centered',
     nextjs: {

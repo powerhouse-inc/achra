@@ -1,5 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import ServicesCardSkeleton from './service-card-skeleton'
+import ServicesFiltersSkeleton from './service-filter-skeleton'
 
 export function ServicesContentSkeleton() {
   return (
@@ -9,6 +10,15 @@ export function ServicesContentSkeleton() {
       {/* Cards */}
       <ServicesCardSkeleton />
       <ServicesCardSkeleton />
+    </>
+  )
+}
+
+export function ServicesPageSkeleton() {
+  return (
+    <>
+      <ServicesFiltersSkeleton />
+      <ServicesContentSkeleton />
     </>
   )
 }
