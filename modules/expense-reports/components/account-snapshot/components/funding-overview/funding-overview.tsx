@@ -55,8 +55,8 @@ function FundingOverview({
           />
           <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
             <FundChangeRate
-              netChange={balance.outflow * -1 - balance.inflow}
-              leftValue={balance.outflow * -1}
+              netChange={balance.outflow - balance.inflow}
+              leftValue={balance.outflow}
               leftText={
                 <>
                   <span className="inline lg:hidden">Extra Funds Available</span>
@@ -76,7 +76,7 @@ function FundingOverview({
           </div>
           <SimpleStatCard
             date={endDate}
-            value={balance.endingBalance * -1}
+            value={balance.endingBalance}
             hasEqualSign
             caption={
               <>

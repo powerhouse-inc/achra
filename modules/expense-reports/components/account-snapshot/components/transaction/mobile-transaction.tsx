@@ -59,7 +59,7 @@ function MobileTransaction({
             )}
           >
             <div className="pt-2 pr-2">
-              <ExpenseArrow isIncoming={isIncomingTransaction} />
+              <ExpenseArrow isIncoming={isIncomingTransaction} isSwap={label === 'Swap'} />
             </div>
             <div className="flex w-full items-start justify-between">
               <div className="flex flex-col text-left text-xs/4.5 font-medium">

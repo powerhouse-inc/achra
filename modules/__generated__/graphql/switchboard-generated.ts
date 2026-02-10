@@ -54,6 +54,7 @@ export enum AccountTransactionFlowType {
   External = 'External',
   Internal = 'Internal',
   Return = 'Return',
+  Swap = 'Swap',
   TopUp = 'TopUp'
 }
 
@@ -1109,6 +1110,19 @@ export type CreateRequestFinancePaymentOutput = {
   __typename?: 'CreateRequestFinancePaymentOutput';
   data?: Maybe<Scalars['JSONObject']['output']>;
   error?: Maybe<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
+};
+
+export type CreateResourceInstancesInput = {
+  name: Scalars['String']['input'];
+  resourceTemplateId: Scalars['PHID']['input'];
+  teamName: Scalars['String']['input'];
+};
+
+export type CreateResourceInstancesOutput = {
+  __typename?: 'CreateResourceInstancesOutput';
+  data?: Maybe<Scalars['JSONObject']['output']>;
+  errors: Array<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
 
@@ -2518,6 +2532,7 @@ export type Mutation = {
   Workstream_removePaymentRequest?: Maybe<Scalars['Int']['output']>;
   Workstream_setRequestForProposal?: Maybe<Scalars['Int']['output']>;
   addDrive?: Maybe<AddDriveResult>;
+  createResourceInstances?: Maybe<CreateResourceInstancesOutput>;
   deleteDocument?: Maybe<Scalars['Boolean']['output']>;
   deleteDrive?: Maybe<Scalars['Boolean']['output']>;
   setDriveIcon?: Maybe<Scalars['Boolean']['output']>;
@@ -5280,6 +5295,12 @@ export type MutationAddDriveArgs = {
   name: Scalars['String']['input'];
   preferredEditor?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Subgraph definition */
+export type MutationCreateResourceInstancesArgs = {
+  input: CreateResourceInstancesInput;
 };
 
 
@@ -9593,7 +9614,7 @@ export type AccountSnapshotsQueryVariables = Exact<{
 }>;
 
 
-export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
+export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
 
 export type BudgetStatementsDetailsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -9870,6 +9891,7 @@ export const AccountSnapshotsDocument = `
           counterPartyName
           datetime
           direction
+          flowType
           txHash
         }
         balances {

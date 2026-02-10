@@ -38,7 +38,11 @@ function DesktopTransaction({
     >
       {/* transaction header */}
       <div className="flex gap-2 lg:gap-4">
-        <ExpenseArrow isIncoming={isIncomingTransaction} className="mt-1.25 size-6 min-w-6" />
+        <ExpenseArrow
+          isIncoming={isIncomingTransaction}
+          isSwap={label === 'Swap'}
+          className="mt-1.25 size-6 min-w-6"
+        />
         <div className="flex flex-col">
           <div className="text-sm/5.5 font-medium md:font-semibold">{label}</div>
           <div className="text-foreground/30 text-xs/4.5 uppercase">{formattedDate}</div>

@@ -16,7 +16,7 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
   const renderTransaction = (transaction: SnapshotAccountTransaction) => (
     <Transaction
       key={transaction.id}
-      label="N/A"
+      label={transaction.flowType}
       date={transaction.datetime}
       toDate={null}
       txHash={transaction.txHash}
