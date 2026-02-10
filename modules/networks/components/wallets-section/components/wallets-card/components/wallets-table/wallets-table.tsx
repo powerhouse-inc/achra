@@ -32,7 +32,7 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
   })
 
   return (
-    <Table variant="pills" className={cn('w-full', className)}>
+    <Table variant="pills" className={cn('[&_table]:block [&_table]:w-full', className)}>
       <TableHeader className="mb-2 inline-block w-full">
         <TableRow className="flex h-fit w-full justify-between border-b-0! px-2 py-4 xl:p-4 xl:pl-3 2xl:p-4">
           {proccesedWalletsTableColumns.map((column, index) => (

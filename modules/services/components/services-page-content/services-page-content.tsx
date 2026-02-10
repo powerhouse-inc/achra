@@ -1,9 +1,9 @@
 'use client'
-
-import { parseAsStringLiteral, useQueryState } from 'nuqs'
-import { Button } from '@/modules/shared/components/ui/button'
+import { useMemo } from 'react'
 import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
-import ServicesFilters from '../services-filters'
+import { filterBySearch } from '../../utils/utils'
+import EmptyStateService from '../empty-state-service/empty-state-service'
+import { useServicesFiltersContext } from '../services-filters/services-filters-context'
 import ServicesList from '../services-list'
 
 interface ServicesPageContentProps {
@@ -11,27 +11,41 @@ interface ServicesPageContentProps {
 }
 
 export function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
-  const [activeTab, setActiveTab] = useQueryState(
-    'tab',
-    parseAsStringLiteral(['all', 'builders', 'networks'] as const).withDefault('all'),
+  const { search, tab } = useServicesFiltersContext()
+
+  const filteredServices = useMemo(() => filterBySearch(services, search), [services, search])
+
+  const builderServices = useMemo(
+    () => filteredServices.filter(isBuilderService),
+    [filteredServices],
+  )
+  const networkServices = useMemo(
+    () => filteredServices.filter(isNetworkService),
+    [filteredServices],
   )
 
-  const builderServices = services.filter(isBuilderService)
-  const networkServices = services.filter(isNetworkService)
+  const shouldShowBuilders = (tab === 'all' || tab === 'builders') && builderServices.length > 0
+  const shouldShowNetworks = (tab === 'all' || tab === 'networks') && networkServices.length > 0
 
-  const showBuilders = activeTab === 'all' || activeTab === 'builders'
-  const showNetworks = activeTab === 'all' || activeTab === 'networks'
+  // Only show empty state if the selected tab has not services
+  const isTabEmpty =
+    (tab === 'builders' && builderServices.length === 0) ||
+    (tab === 'networks' && networkServices.length === 0) ||
+    (tab === 'all' && builderServices.length === 0 && networkServices.length === 0)
+
+  if (isTabEmpty) {
+    return (
+      <EmptyStateService
+        title="No services found"
+        description="There are no services available for this combination of filters"
+      />
+    )
+  }
 
   return (
-    <div className="flex w-full flex-col gap-6">
-      <ServicesFilters activeTab={activeTab} onTabChange={(tab) => void setActiveTab(tab)} />
-
-      {showBuilders && <ServicesList title="Builders" services={builderServices} />}
-      {showNetworks && <ServicesList title="Networks" services={networkServices} />}
-
-      <Button variant="outline" size="lg" className="w-58 self-center">
-        Load More
-      </Button>
+    <div className="flex flex-col gap-8">
+      {shouldShowBuilders && <ServicesList title="Builders" services={builderServices} />}
+      {shouldShowNetworks && <ServicesList title="Networks" services={networkServices} />}
     </div>
   )
 }

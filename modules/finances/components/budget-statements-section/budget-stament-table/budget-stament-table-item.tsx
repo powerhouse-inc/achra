@@ -6,7 +6,6 @@ import { LastModified } from '@/modules/builders/components/builders/components/
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { formatReportingMonth, getAmountByMetric } from '../utils'
@@ -29,16 +28,11 @@ export function BudgetStamentTableItem({
   const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
 
   return (
-    <TableRow
-      className={cn(
-        'flex h-15.5! w-full cursor-pointer items-center justify-between rounded-none! border-b-0! shadow-sm!',
-        className,
-      )}
-    >
+    <TableRow className={className}>
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
           href={`/network/powerhouse/builders/${builder.owner.code}`}
-          className="flex h-full w-full items-center pl-4 xl:pl-3 2xl:pl-3.5"
+          className="flex h-full w-full items-center pl-4"
         >
           <ContributorProfileInfo
             name={builder.owner.name}
@@ -48,7 +42,7 @@ export function BudgetStamentTableItem({
           />
         </Link>
       </TableCell>
-      <TableCell className="inline-block h-full w-[15%] p-0!">
+      <TableCell className="inline-block h-full w-[17%] p-0!">
         <Link
           href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center"
@@ -56,7 +50,7 @@ export function BudgetStamentTableItem({
           <div className="text-foreground text-sm/5.5 font-semibold">{reportMonth}</div>
         </Link>
       </TableCell>
-      <TableCell className="inline-block h-full w-[15%] p-0! text-right lg:pl-4.5! xl:pl-6!">
+      <TableCell className="inline-block h-full w-[15%] p-0! text-right">
         <Link
           href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
@@ -75,7 +69,7 @@ export function BudgetStamentTableItem({
         </Link>
       </TableCell>
 
-      <TableCell className="inline-block h-full w-[19%] p-0! text-right lg:pl-1!">
+      <TableCell className="inline-block h-full flex-1 p-0! text-right">
         <Link
           href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
@@ -85,7 +79,7 @@ export function BudgetStamentTableItem({
           </span>
         </Link>
       </TableCell>
-      <TableCell className="inline-flex h-full w-[10%] p-0! text-right">
+      <TableCell className="inline-flex h-full w-fit p-0! text-right">
         <Link
           href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="group/link flex h-full w-full items-center justify-end pr-4"

@@ -218,7 +218,10 @@ export default function ServicePurchaseForm() {
                   <Fragment key={step.value}>
                     <TabsTrigger
                       value={step.value}
-                      className="flex h-8 w-8 flex-none items-center gap-0 overflow-hidden px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit lg:h-10 2xl:h-12 dark:data-[state=active]:border-none dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none"
+                      className={cn(
+                        'md:border-border md:data-[state=active]:border-primary dark:md:data-[state=active]:border-primary flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none',
+                        isVisited && !isActive && 'md:border-primary/70 dark:md:border-primary/70',
+                      )}
                     >
                       <div
                         className={cn(
@@ -231,9 +234,9 @@ export default function ServicePurchaseForm() {
                       </div>
                       <div
                         className={cn(
-                          'text-foreground/50 border-border hidden h-full items-center gap-1 rounded-r-lg border px-1 md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
-                          isActive && 'text-primary border-primary dark:border-primary',
-                          isVisited && !isActive && 'text-primary/70 border-primary/30',
+                          'text-foreground/50 hidden h-full items-center gap-1 rounded-r-lg px-1 md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
+                          isActive && 'text-primary',
+                          isVisited && !isActive && 'text-primary/70',
                         )}
                       >
                         {STEP_ICONS[step.value]}

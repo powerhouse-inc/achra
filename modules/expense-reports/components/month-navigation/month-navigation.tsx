@@ -43,7 +43,7 @@ function MonthNavigation({ availableMonths, defaultMonth }: MonthNavigationProps
 
       <time
         className="text-foreground/50 text-xl leading-[120%] font-bold"
-        dateTime={`${selectedMonth.getFullYear()}-${String(selectedMonth.getMonth() + 1).padStart(2, '0')}`}
+        dateTime={`${selectedMonth.getUTCFullYear()}-${String(selectedMonth.getUTCMonth() + 1).padStart(2, '0')}`}
         aria-live="polite"
       >
         {selectedMonthDisplay}

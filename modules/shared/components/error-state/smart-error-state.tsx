@@ -10,9 +10,16 @@ interface SmartErrorStateProps {
   title?: string
   description?: string
   showBorder?: boolean
+  className?: string
 }
 
-function SmartErrorState({ icon, title, description, showBorder = true }: SmartErrorStateProps) {
+function SmartErrorState({
+  icon,
+  title,
+  description,
+  showBorder = true,
+  className,
+}: SmartErrorStateProps) {
   const isOnline = useMemo(() => {
     if (typeof window === 'undefined') return true
 
@@ -20,7 +27,7 @@ function SmartErrorState({ icon, title, description, showBorder = true }: SmartE
   }, [])
 
   if (!isOnline) {
-    return <NetworkErrorState showBorder={showBorder} />
+    return <NetworkErrorState showBorder={showBorder} className={className} />
   }
 
   return (
@@ -29,6 +36,7 @@ function SmartErrorState({ icon, title, description, showBorder = true }: SmartE
       title={title}
       description={description}
       showBorder={showBorder}
+      className={className}
     />
   )
 }

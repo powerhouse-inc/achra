@@ -3,7 +3,7 @@ import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-stat
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { SectionTitle } from '../section-title'
+import { SectionTitle } from '../../../shared/components/section-title'
 import {
   ExecutiveProposals,
   ExecutiveProposalsListSkeleton,

@@ -1,11 +1,13 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useBuildersFiltersContext } from '../../../builders-filters/builders-filters-context'
 import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
+import type SimpleBar from 'simplebar-react'
 
 interface UseBuildersTableProps {
   builders: BuilderProfileState[]
+  asSectionContent?: boolean
 }
 
 export enum SortEnum {
@@ -15,15 +17,20 @@ export enum SortEnum {
   Disabled = 'disabled',
 }
 
-export function useBuildersTable({ builders }: UseBuildersTableProps) {
+export function useBuildersTable({ builders, asSectionContent = false }: UseBuildersTableProps) {
   const [headersSort, setHeadersSort] = useState<SortEnum[]>(
     BUILDERS_TABLE_COLUMNS.map((column: BuildersTableColumn) =>
       column.hasSort ? SortEnum.Neutral : SortEnum.Disabled,
     ),
   )
   const [sortColumn, setSortColumn] = useState<number>(-1)
-  const isDesktop = useMediaQuery({ from: 'lg' })
   const { isResetPending } = useBuildersFiltersContext()
+
+  const simpleBarRef = useRef<React.ComponentRef<typeof SimpleBar>>(null)
+  const cardContentRef = useRef<HTMLDivElement>(null)
+  const itemsWrapperRef = useRef<HTMLDivElement>(null)
+
+  const isDesktop = useMediaQuery({ from: 'lg' })
 
   const proccesedBuildersTableColumns: Array<Omit<BuildersTableColumn, 'shortHeader'>> =
     useMemo(() => {
@@ -115,11 +122,46 @@ export function useBuildersTable({ builders }: UseBuildersTableProps) {
 
   const sortedBuilders = useMemo(() => sortBuilders(builders), [builders, sortBuilders])
 
+  useEffect(() => {
+    if (!asSectionContent) return
+
+    const simpleBarEl = simpleBarRef.current?.el
+    const cardContentEl = cardContentRef.current
+    const itemsWrapperEl = itemsWrapperRef.current
+
+    if (!simpleBarEl || !cardContentEl || !itemsWrapperEl) return
+
+    const teamsCount = builders.length
+
+    let config: { maxHeight: string; maxItems: number } | null = null
+    if (isDesktop) {
+      config = { maxHeight: '630px', maxItems: 7 }
+    }
+
+    if (!config) {
+      simpleBarEl.style.maxHeight = ''
+      cardContentEl.style.paddingRight = ''
+      itemsWrapperEl.style.paddingRight = ''
+      itemsWrapperEl.style.paddingLeft = ''
+      itemsWrapperEl.style.paddingBottom = ''
+      return
+    }
+
+    if (teamsCount > config.maxItems) {
+      simpleBarEl.style.maxHeight = config.maxHeight
+      cardContentEl.style.paddingRight = '4px'
+      itemsWrapperEl.style.paddingRight = '12px'
+    }
+  }, [isDesktop, builders.length, asSectionContent])
+
   return {
     proccesedBuildersTableColumns,
     headersSort,
     sortedBuilders,
     isResetPending,
+    simpleBarRef,
+    cardContentRef,
+    itemsWrapperRef,
     handleSortClick,
   }
 }

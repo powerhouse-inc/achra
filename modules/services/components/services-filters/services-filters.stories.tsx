@@ -1,9 +1,20 @@
+import { NuqsAdapter } from 'nuqs/adapters/react'
 import ServicesFilters from './services-filters'
+import { ServicesFiltersProvider } from './services-filters-context'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Modules/Services/Components/ServicesFilters',
   component: ServicesFilters,
+  decorators: [
+    (Story) => (
+      <NuqsAdapter>
+        <ServicesFiltersProvider>
+          <Story />
+        </ServicesFiltersProvider>
+      </NuqsAdapter>
+    ),
+  ],
   parameters: {
     layout: 'centered',
     nextjs: {
@@ -18,9 +29,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    activeTab: 'all',
-    onTabChange: () => {},
-  },
-}
+export const Default: Story = {}

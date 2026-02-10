@@ -5,7 +5,7 @@ import { UsdsIcon } from '@/modules/shared/components/svgs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../section-title/section-title'
+import SectionTitle from '../../../shared/components/section-title/section-title'
 
 export function FinancesSection() {
   return (
