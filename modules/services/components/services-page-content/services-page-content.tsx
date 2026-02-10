@@ -24,22 +24,28 @@ export function ServicesPageContent({ services }: Readonly<ServicesPageContentPr
     [filteredServices],
   )
 
-  const showBuilders = tab === 'all' || tab === 'builders'
-  const showNetworks = tab === 'all' || tab === 'networks'
+  const shouldShowBuilders = (tab === 'all' || tab === 'builders') && builderServices.length > 0
+  const shouldShowNetworks = (tab === 'all' || tab === 'networks') && networkServices.length > 0
 
-  const hasVisibleServices =
-    (showBuilders && builderServices.length > 0) || (showNetworks && networkServices.length > 0)
+  // Only show empty state if the selected tab has not services
+  const isTabEmpty =
+    (tab === 'builders' && builderServices.length === 0) ||
+    (tab === 'networks' && networkServices.length === 0) ||
+    (tab === 'all' && builderServices.length === 0 && networkServices.length === 0)
+
+  if (isTabEmpty) {
+    return (
+      <EmptyStateService
+        title="No services found"
+        description="There are no services available for this combination of filters"
+      />
+    )
+  }
 
   return (
-    <>
-      {hasVisibleServices ? (
-        <>
-          {showBuilders && <ServicesList title="Builders" services={builderServices} />}
-          {showNetworks && <ServicesList title="Networks" services={networkServices} />}
-        </>
-      ) : (
-        <EmptyStateService />
-      )}
-    </>
+    <div className="flex flex-col gap-8">
+      {shouldShowBuilders && <ServicesList title="Builders" services={builderServices} />}
+      {shouldShowNetworks && <ServicesList title="Networks" services={networkServices} />}
+    </div>
   )
 }
