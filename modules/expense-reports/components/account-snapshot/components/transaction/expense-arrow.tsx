@@ -3,9 +3,34 @@ import { cn } from '@/modules/shared/lib/utils'
 
 interface ExpenseArrowProps extends React.SVGProps<SVGSVGElement> {
   isIncoming?: boolean
+  isSwap?: boolean
 }
 
-function ExpenseArrow({ isIncoming = false, className, ...props }: ExpenseArrowProps) {
+function ExpenseArrow({
+  isIncoming = false,
+  isSwap = false,
+  className,
+  ...props
+}: ExpenseArrowProps) {
+  if (isSwap) {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={cn('text-status-progress size-4 opacity-30', className)}
+        {...props}
+      >
+        <path
+          d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM9.65137 11.7607C9.07671 11.2221 8.14494 11.2221 7.57031 11.7607L4.43066 14.7031C3.85658 15.2417 3.8565 16.1148 4.43066 16.6533L7.57031 19.5957C8.14498 20.1342 9.07678 20.1343 9.65137 19.5957C10.2256 19.0571 10.2257 18.1841 9.65137 17.6455L9.02344 17.0576H18.0283C18.8408 17.0574 19.5 16.4394 19.5 15.6777C19.4997 14.9163 18.8406 14.299 18.0283 14.2988H9.02441L9.65137 13.7109C10.2257 13.1724 10.2256 12.2994 9.65137 11.7607ZM15.9297 4.4043C15.355 3.86563 14.4233 3.86563 13.8486 4.4043C13.2741 4.94297 13.274 5.81587 13.8486 6.35449L14.4766 6.94238H5.47168C4.659 6.94238 4 7.56048 4 8.32227C4.00026 9.08385 4.65916 9.70117 5.47168 9.70117H14.4756L13.8486 10.2891C13.2742 10.8277 13.2742 11.7006 13.8486 12.2393C14.4233 12.7779 15.355 12.7779 15.9297 12.2393L19.0693 9.29785C19.6438 8.75934 19.6435 7.88538 19.0693 7.34668L15.9297 4.4043Z"
+          fill="currentColor"
+        />
+      </svg>
+    )
+  }
+
   return (
     <svg
       width="16"

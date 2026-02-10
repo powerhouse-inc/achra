@@ -1,38 +1,25 @@
-'use client'
-
-import { Checkbox } from '@/modules/shared/components/ui/checkbox'
-import { Label } from '@/modules/shared/components/ui/label'
-import { cn } from '@/modules/shared/lib/utils'
+import type { SnapshotAccount } from '@/modules/__generated__/graphql/switchboard-generated'
 import { FundChangeRate } from '../fund-change-rate'
 import { ReserveCard } from '../reserve-card'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
-import type { SnapshotAccountBalance, UIReservesData } from '../../types'
+import type { CalculatedBalance } from '../../types'
 
 interface ReservesSnapshotProps {
   teamName: string
-
-  includeOffChain: boolean
-  toggleIncludeOffChain: () => void
-  startDate?: string
-  endDate?: string
-  balance?: SnapshotAccountBalance
-  onChainData?: UIReservesData[]
-  offChainData?: UIReservesData[]
+  startDate: string
+  endDate: string
+  balance: CalculatedBalance
+  accounts: SnapshotAccount[]
 }
 
 function ReservesSnapshot({
   teamName,
-  includeOffChain,
-  toggleIncludeOffChain,
   startDate,
   endDate,
   balance,
-  onChainData,
-  offChainData,
+  accounts,
 }: ReservesSnapshotProps) {
-  const haveOffChainData = !!offChainData?.length
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
@@ -46,49 +33,35 @@ function ReservesSnapshot({
           }
           level="h2"
         />
-        {haveOffChainData && (
-          <div className="ml-auto flex items-center gap-2">
-            <Checkbox
-              id="off-chain-reserves"
-              checked={includeOffChain}
-              onCheckedChange={toggleIncludeOffChain}
-            />
-            <Label htmlFor="off-chain-reserves">Include Off-Chain Reserves</Label>
-          </div>
-        )}
       </div>
 
       <div className="flex flex-col gap-8 md:gap-4">
         <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-6 xl:gap-8">
           <SimpleStatCard
             date={startDate}
-            value={balance?.initialBalance}
+            value={balance.startingBalance}
             caption="Initial Reserves"
             className="order-1 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:w-full lg:min-w-39.5"
-            dynamicChanges={haveOffChainData}
+            dynamicChanges={false}
           />
           <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
             <FundChangeRate
-              netChange={
-                typeof balance?.inflow === 'number' && typeof balance.outflow === 'number'
-                  ? balance.outflow - balance.inflow * -1
-                  : undefined
-              }
-              leftValue={balance?.inflow}
+              netChange={balance.outflow - balance.inflow}
+              leftValue={balance.inflow}
               leftText="Inflow"
-              rightValue={typeof balance?.outflow === 'number' ? balance.outflow * -1 : undefined}
+              rightValue={balance.outflow}
               rightValueColor="normal"
               rightText="Outflow"
-              dynamicChanges={haveOffChainData}
+              dynamicChanges={false}
             />
           </div>
           <SimpleStatCard
             date={endDate}
-            value={balance?.newBalance}
+            value={balance.endingBalance}
             hasEqualSign
             caption="New Reserves"
             className="order-2 w-[calc(50%-var(--spacing))] md:w-[calc(50%-var(--spacing)*2)] lg:order-3 lg:w-full lg:min-w-39.5"
-            dynamicChanges={haveOffChainData}
+            dynamicChanges={false}
           />
         </div>
 
@@ -106,34 +79,11 @@ function ReservesSnapshot({
           />
 
           <div className="flex flex-col gap-2">
-            {onChainData?.map((account) => (
+            {accounts.map((account) => (
               <ReserveCard key={account.id} account={account} currency="USD" />
             ))}
           </div>
         </div>
-
-        {/* off chain sub-section */}
-        {haveOffChainData && (
-          <div className={cn('flex flex-col gap-6 md:gap-4', { 'opacity-30': !includeOffChain })}>
-            <SectionHeader
-              title="Off Chain Reserves"
-              subtitle={`Unspent Off-Chain reserves to the ${teamName} Team.`}
-              tooltip={
-                <>
-                  Discover essential details about the <br />
-                  off-chain balances.
-                </>
-              }
-              level="h3"
-            />
-
-            <div className="flex flex-col gap-2">
-              {offChainData.map((account) => (
-                <ReserveCard key={account.id} account={account} currency="USD" />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   )

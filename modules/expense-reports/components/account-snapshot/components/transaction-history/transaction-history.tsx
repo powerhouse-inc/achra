@@ -1,3 +1,4 @@
+import type { SnapshotAccountTransaction } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   Accordion,
   AccordionContent,
@@ -5,7 +6,6 @@ import {
   AccordionTrigger,
 } from '@/modules/shared/components/ui/accordion'
 import { TransactionList } from '../transaction-list'
-import type { SnapshotAccountTransaction } from '../../types'
 
 interface TransactionHistoryProps {
   transactionHistory: SnapshotAccountTransaction[]

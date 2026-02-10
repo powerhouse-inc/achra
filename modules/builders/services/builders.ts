@@ -15,6 +15,7 @@ export async function getBuilders(
   return builders.map<BuilderProfileState>((builder) => ({
     contributors: [],
     projects: [],
+    products: [], // TODO: add the actual values if this is really needed (added empty to avoid type errors)
     ...builder,
   }))
 }

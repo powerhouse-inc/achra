@@ -1,15 +1,24 @@
+import type { SnapshotAccountTransaction } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ConversionNotice } from '../conversion-notice'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
 import { TransactionHistory } from '../transaction-history'
-import type { SnapshotAccountTransaction } from '../../types'
+import type { CalculatedBalance } from '../../types'
 
 interface FundingOverviewProps {
+  startDate: string
+  endDate: string
+  balance: CalculatedBalance
   transactionHistory: SnapshotAccountTransaction[]
 }
 
-function FundingOverview({ transactionHistory }: FundingOverviewProps) {
+function FundingOverview({
+  startDate,
+  endDate,
+  balance,
+  transactionHistory,
+}: FundingOverviewProps) {
   return (
     <div className="flex flex-col gap-4 md:gap-6">
       <div className="relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
@@ -34,8 +43,8 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
       <div className="flex flex-col gap-4 lg:gap-6 xl:gap-8">
         <div className="flex w-full flex-wrap gap-2 md:gap-4 lg:flex-nowrap lg:gap-6 xl:gap-8">
           <SimpleStatCard
-            date="2025-04-08T21:11:07+00:00"
-            value={2924160}
+            date={startDate}
+            value={Math.abs(balance.startingBalance)}
             caption={
               <>
                 <span className="inline-block md:hidden">Initial L.T. Balance</span>
@@ -46,15 +55,15 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
           />
           <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
             <FundChangeRate
-              netChange={-791666}
-              leftValue={500000}
+              netChange={balance.outflow - balance.inflow}
+              leftValue={balance.outflow}
               leftText={
                 <>
                   <span className="inline lg:hidden">Extra Funds Available</span>
                   <span className="hidden lg:inline">Extra Funds Made Available</span>
                 </>
               }
-              rightValue={291666}
+              rightValue={balance.inflow}
               rightValueColor="green"
               rightText={
                 <>
@@ -66,8 +75,8 @@ function FundingOverview({ transactionHistory }: FundingOverviewProps) {
             />
           </div>
           <SimpleStatCard
-            date="2025-05-16T21:11:07+00:00"
-            value={3215826}
+            date={endDate}
+            value={balance.endingBalance}
             hasEqualSign
             caption={
               <>

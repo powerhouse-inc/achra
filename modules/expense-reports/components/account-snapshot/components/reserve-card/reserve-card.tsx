@@ -1,8 +1,10 @@
-'use client'
-
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronDownIcon } from 'lucide-react'
-import { useId } from 'react'
+import {
+  AccountTransactionDirection,
+  type SnapshotAccount,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { getCurrencyValue } from '@/modules/expense-reports/lib/budget-statement-utils'
 import {
   Accordion,
   AccordionContent,
@@ -12,30 +14,67 @@ import { cn } from '@/modules/shared/lib/utils'
 import { WalletInfo } from '../transaction/wallet-info'
 import { TransactionList } from '../transaction-list'
 import { KeyValuePair } from './key-value-pair'
-import type { Token, UIReservesData } from '../../types'
+import type { CalculatedBalance, Token } from '../../types'
 
 interface ReserveCardProps {
-  account: UIReservesData
+  account: SnapshotAccount
   currency?: Token
 
   // intended to be use in the stories
   defaultExpanded?: boolean
 }
 
+// TODO: move this to a separate file once the integration is complete
+const STABLECOIN_UNITS = ['USDC', 'USDT', 'USDS', 'DAI']
+
+function getBalance(account: SnapshotAccount): CalculatedBalance {
+  const balance: CalculatedBalance = {
+    startingBalance: 0,
+    endingBalance: 0,
+    inflow: 0,
+    outflow: 0,
+  }
+
+  account.balances.forEach((balance) => {
+    if (STABLECOIN_UNITS.includes(balance.token.symbol)) {
+      balance.startingBalance += getCurrencyValue(balance.startingBalance)
+      balance.endingBalance += getCurrencyValue(balance.endingBalance)
+    }
+  })
+
+  account.transactions.forEach((transaction) => {
+    if (STABLECOIN_UNITS.includes(transaction.amount.unit)) {
+      if (transaction.direction === AccountTransactionDirection.Inflow) {
+        balance.inflow += getCurrencyValue(transaction.amount.value)
+      } else {
+        // if it is not an inflow, it is an outflow (there are no other options)
+        balance.outflow += getCurrencyValue(transaction.amount.value)
+      }
+    }
+  })
+
+  return balance
+}
+
 function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCardProps) {
-  const id = useId()
+  const id = account.id
 
-  const isGroup = account.accountType === 'group'
-  const initialBalance = account.snapshotAccountBalance[0]?.initialBalance ?? 0
-  const inflow = account.snapshotAccountBalance[0]?.inflow ?? 0
-  const outflow = account.snapshotAccountBalance[0]?.outflow
-    ? account.snapshotAccountBalance[0]?.outflow * -1
-    : account.snapshotAccountBalance[0]?.outflow
-  const newBalance = account.snapshotAccountBalance[0]?.newBalance ?? 0
+  // TODO: uncomment this once the integration is complete
+  // const isGroup = account.accountType === 'group'
+  // const initialBalance = account.snapshotAccountBalance[0]?.initialBalance ?? 0
+  // const inflow = account.snapshotAccountBalance[0]?.inflow ?? 0
+  // const outflow = account.snapshotAccountBalance[0]?.outflow
+  //   ? account.snapshotAccountBalance[0]?.outflow * -1
+  //   : account.snapshotAccountBalance[0]?.outflow
+  // const newBalance = account.snapshotAccountBalance[0]?.newBalance ?? 0
 
-  const hasTransactions = isGroup
-    ? !!account.children?.length
-    : !!account.snapshotAccountTransaction.length
+  // const hasTransactions = isGroup
+  //   ? !!account.children?.length
+  //   : !!account.snapshotAccountTransaction.length
+
+  const isGroup = false as boolean // TODO: should we support groups?
+  const hasTransactions = account.transactions.length > 0
+  const balance = getBalance(account)
 
   return (
     <Accordion
@@ -58,7 +97,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
           >
             <div
               role="button"
-              aria-label={`Open reserve card ${account.accountLabel}`}
+              aria-label={`Open reserve card ${account.name}`}
               className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:gap-0 md:px-0 md:py-2"
             >
               {/* name area */}
@@ -72,14 +111,11 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               >
                 {isGroup ? (
                   <div className="text-popover-foreground text-sm/5.5 font-semibold lg:text-base/6">
-                    {account.accountLabel}
+                    {account.name}
                   </div>
                 ) : (
                   <div>
-                    <WalletInfo
-                      name={account.accountLabel}
-                      address={account.accountAddress ?? ''}
-                    />
+                    <WalletInfo name={account.name || 'N/A'} address={account.address || 'N/A'} />
                   </div>
                 )}
                 <ChevronDownIcon
@@ -91,7 +127,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               {/* initial balance */}
               <KeyValuePair
                 label="Initial Balance"
-                value={initialBalance}
+                value={balance.startingBalance}
                 currency={currency}
                 className={cn('mt-2', 'md:mt-0 md:w-25 lg:w-40 lg:min-w-40 xl:w-50 xl:min-w-50')}
               />
@@ -100,7 +136,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               <KeyValuePair
                 label="Inflow"
                 variant="outline"
-                value={inflow}
+                value={balance.inflow}
                 currency={currency}
                 className={cn('md:w-full')}
               />
@@ -109,7 +145,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               <KeyValuePair
                 label="Outflow"
                 variant="outline"
-                value={outflow}
+                value={balance.outflow}
                 currency={currency}
                 className={cn('md:w-full')}
               />
@@ -117,7 +153,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               {/* new balance */}
               <KeyValuePair
                 label="New Balance"
-                value={newBalance}
+                value={balance.endingBalance}
                 currency={currency}
                 className={cn('md:w-full md:items-end')}
               />
@@ -133,9 +169,11 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
         </AccordionPrimitive.Header>
         {hasTransactions && (
           <AccordionContent>
-            <TransactionList
+            {/* TODO: commented this out due TS issues (integration coming soon) */}
+            {/* <TransactionList
               items={isGroup ? account.children : account.snapshotAccountTransaction}
-            />
+            /> */}
+            <TransactionList items={account.transactions} />
           </AccordionContent>
         )}
       </AccordionItem>

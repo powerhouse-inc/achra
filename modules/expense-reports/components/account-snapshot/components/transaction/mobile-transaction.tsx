@@ -4,6 +4,7 @@ import { utc } from '@date-fns/utc'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { format, parseISO } from 'date-fns'
 import { useId } from 'react'
+import { AccountTransactionDirection } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   Accordion,
   AccordionContent,
@@ -23,7 +24,7 @@ interface MobileTransactionProps extends TransactionProps {
 }
 
 function MobileTransaction({
-  name,
+  label,
   date,
   toDate,
   txHash,
@@ -32,9 +33,10 @@ function MobileTransaction({
   amount,
   defaultExpanded = false,
   highlightPositiveAmounts,
+  direction,
 }: MobileTransactionProps) {
   const id = useId()
-  const isIncomingTransaction = amount > 0
+  const isIncomingTransaction = direction === AccountTransactionDirection.Inflow
   const formattedDate = toDate ? (
     <>
       from {format(parseISO(date), 'dd-MMM-yyyy', { in: utc })}
@@ -57,11 +59,11 @@ function MobileTransaction({
             )}
           >
             <div className="pt-2 pr-2">
-              <ExpenseArrow isIncoming={isIncomingTransaction} />
+              <ExpenseArrow isIncoming={isIncomingTransaction} isSwap={label === 'Swap'} />
             </div>
             <div className="flex w-full items-start justify-between">
               <div className="flex flex-col text-left text-xs/4.5 font-medium">
-                <div>{name}</div>
+                <div>{label}</div>
                 <div className="text-foreground/30">{formattedDate}</div>
               </div>
               <div
@@ -72,8 +74,8 @@ function MobileTransaction({
                     : 'text-foreground',
                 )}
               >
-                <span>{amount < 0 ? '-' : '+'}</span>
-                {usLocalizedNumber(Math.abs(amount))}
+                <span>{isIncomingTransaction ? '+' : '-'}</span>
+                {usLocalizedNumber(amount)}
                 <span className="text-foreground/30 text-xs/4.5 font-medium">USD</span>
               </div>
             </div>
