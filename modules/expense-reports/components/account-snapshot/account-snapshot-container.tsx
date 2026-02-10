@@ -1,5 +1,6 @@
 import { getAccountSnapshotForMonth } from '../../services/expense-reports-service'
 import { AccountSnapshot } from './account-snapshot'
+import { SnapshotEmptyState } from './components/snapshot-empty-state'
 
 interface AccountSnapshotContainerProps {
   teamId: string
@@ -10,8 +11,7 @@ async function AccountSnapshotContainer({ teamId, month }: AccountSnapshotContai
   const snapshotReport = await getAccountSnapshotForMonth(teamId, month)
 
   if (!snapshotReport || snapshotReport.accounts?.length === 0) {
-    // TODO: add a proper empty state component UI
-    return <div>No snapshot report available for this month</div>
+    return <SnapshotEmptyState />
   }
 
   return <AccountSnapshot expenseReport={snapshotReport} />
