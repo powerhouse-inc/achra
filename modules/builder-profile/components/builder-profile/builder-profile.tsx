@@ -42,7 +42,10 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
               </h1>
 
               <div className="lg:hidden">
-                <ProfileFinancesDrawer builderSlug={builder.slug ?? ''} />
+                <ProfileFinancesDrawer
+                  builderSlug={builder.slug ?? ''}
+                  operationalHub={builder.operationalHubMember}
+                />
               </div>
             </div>
 
