@@ -4,12 +4,12 @@ import type { BudgetStatement } from '../type'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBudgetStatementListProps {
-  builders: BudgetStatement[]
+  budgetStatements: BudgetStatement[]
   asSectionContent?: boolean
 }
 
 export function useBudgetStatementList({
-  builders,
+  budgetStatements,
   asSectionContent = false,
 }: UseBudgetStatementListProps) {
   const simpleBarRef = useRef<React.ComponentRef<typeof SimpleBar>>(null)
@@ -28,7 +28,7 @@ export function useBudgetStatementList({
 
     if (!simpleBarEl || !cardContentEl || !itemsWrapperEl) return
 
-    const teamsCount = builders.length
+    const teamsCount = budgetStatements.length
 
     let config: { maxHeight: string; maxItems: number } | null = null
     if (isTablet) {
@@ -48,7 +48,7 @@ export function useBudgetStatementList({
       cardContentEl.style.paddingRight = '4px'
       itemsWrapperEl.style.paddingRight = '12px'
     }
-  }, [isTablet, isLargeMobile, builders.length, asSectionContent])
+  }, [isTablet, isLargeMobile, budgetStatements.length, asSectionContent])
 
   return {
     simpleBarRef,

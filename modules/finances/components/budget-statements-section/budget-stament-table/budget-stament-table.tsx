@@ -17,28 +17,28 @@ import { BudgetStamentTableItem } from './budget-stament-table-item'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableProps {
-  builders: BudgetStatement[]
+  budgetStatements: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   className?: string
   asSectionContent?: boolean
 }
 
 export function BudgetStamentTable({
-  builders,
+  budgetStatements,
   budgetMetric,
   className,
   asSectionContent = false,
 }: Readonly<BudgetStamentTableProps>) {
   const {
     headersSort,
-    sortedBuilders,
+    sortedBudgetStatements,
     proccesedBudgetStatementsTableColumns,
     handleSortClickHeader,
     simpleBarRef,
     cardContentRef,
     itemsWrapperRef,
   } = useBudgetStamentTable({
-    builders,
+    budgetStatements,
     budgetMetric,
     asSectionContent,
   })
@@ -103,10 +103,10 @@ export function BudgetStamentTable({
           <div ref={itemsWrapperRef} className={cn(asSectionContent && 'px-2 pb-2')}>
             <Table variant="pills" className="[&_table]:block [&_table]:w-full">
               <TableBody className="flex flex-col gap-2">
-                {sortedBuilders.map((builder) => (
+                {sortedBudgetStatements.map((budgetStatement) => (
                   <BudgetStamentTableItem
-                    key={builder.id}
-                    builder={builder}
+                    key={budgetStatement.id}
+                    budgetStatement={budgetStatement}
                     budgetMetric={budgetMetric}
                     className={cn(
                       'flex h-15.5! w-full cursor-pointer items-center border-b-0!',

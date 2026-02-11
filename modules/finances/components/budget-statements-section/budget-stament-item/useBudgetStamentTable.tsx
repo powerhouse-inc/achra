@@ -7,7 +7,7 @@ import type { BudgetStatement, MetricWithoutBudget } from '../type'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBudgetStamentTableProps {
-  builders: BudgetStatement[]
+  budgetStatements: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   asSectionContent?: boolean
 }
@@ -20,7 +20,7 @@ export enum SortEnum {
 }
 
 export function useBudgetStamentTable({
-  builders,
+  budgetStatements,
   budgetMetric,
   asSectionContent = false,
 }: UseBudgetStamentTableProps) {
@@ -79,7 +79,7 @@ export function useBudgetStamentTable({
 
     if (!simpleBarEl || !cardContentEl || !itemsWrapperEl) return
 
-    const teamsCount = builders.length
+    const teamsCount = budgetStatements.length
 
     let config: { maxHeight: string; maxItems: number } | null = null
     if (isDesktop) {
@@ -100,7 +100,7 @@ export function useBudgetStamentTable({
       cardContentEl.style.paddingRight = '4px'
       itemsWrapperEl.style.paddingRight = '12px'
     }
-  }, [isDesktop, builders.length, asSectionContent])
+  }, [isDesktop, budgetStatements.length, asSectionContent])
 
   const [headersSort, setHeadersSort] = useState<SortEnum[]>(
     BUDGET_STATEMENTS_TABLE_COLUMNS.map((column: BudgetStatementsTableColumn) =>
@@ -155,18 +155,18 @@ export function useBudgetStamentTable({
     return null
   }
 
-  const sortBuilders = useCallback(
-    (builders: BudgetStatement[]) => {
-      if (sortColumn === -1) return builders
+  const sortBudgetStatements = useCallback(
+    (statements: BudgetStatement[]) => {
+      if (sortColumn === -1) return statements
 
       const column = BUDGET_STATEMENTS_TABLE_COLUMNS[sortColumn]
       const sortDirection = headersSort[sortColumn]
 
       if (sortDirection === SortEnum.Neutral || sortDirection === SortEnum.Disabled) {
-        return builders
+        return statements
       }
 
-      return [...builders].sort((a, b) => {
+      return [...statements].sort((a, b) => {
         const aValue = getNestedValue(a, column.accessorKey) ?? ''
         const bValue = getNestedValue(b, column.accessorKey) ?? ''
 
@@ -182,7 +182,10 @@ export function useBudgetStamentTable({
     [sortColumn, BUDGET_STATEMENTS_TABLE_COLUMNS, headersSort],
   )
 
-  const sortedBuilders = useMemo(() => sortBuilders(builders), [builders, sortBuilders])
+  const sortedBudgetStatements = useMemo(
+    () => sortBudgetStatements(budgetStatements),
+    [budgetStatements, sortBudgetStatements],
+  )
 
   const handleSortClickHeader = (index: number) => {
     if (proccesedBudgetStatementsTableColumns[index].hasSort) {
@@ -193,7 +196,7 @@ export function useBudgetStamentTable({
   return {
     proccesedBudgetStatementsTableColumns,
     headersSort,
-    sortedBuilders,
+    sortedBudgetStatements,
     simpleBarRef,
     cardContentRef,
     itemsWrapperRef,

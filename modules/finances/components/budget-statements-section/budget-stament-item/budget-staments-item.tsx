@@ -7,34 +7,34 @@ import type { SortOptionValue } from '../budget-stament-filters/popover-filter-c
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStatementsItemProps {
-  builders: BudgetStatement[]
+  budgetStatements: BudgetStatement[]
   budgetMetric: MetricWithoutBudget
   sortOption?: SortOptionValue
   asSectionContent?: boolean
 }
 
 export function BudgetStatementsItem({
-  builders,
+  budgetStatements,
   budgetMetric,
   sortOption,
   asSectionContent = false,
 }: Readonly<BudgetStatementsItemProps>) {
-  const { buildersProcessed } = useBudgetStamentData({ builders, sortOption })
+  const { processedBudgetStatements } = useBudgetStamentData({ budgetStatements, sortOption })
 
-  if (buildersProcessed.length === 0) {
+  if (processedBudgetStatements.length === 0) {
     return <BudgetEmptyState />
   }
 
   return (
     <>
       <BudgetStamentTable
-        builders={buildersProcessed}
+        budgetStatements={processedBudgetStatements}
         className="hidden lg:block"
         budgetMetric={budgetMetric}
         asSectionContent={asSectionContent}
       />
       <BudgetStatementListMobile
-        builders={buildersProcessed}
+        budgetStatements={processedBudgetStatements}
         selectedMetric={budgetMetric}
         className="lg:hidden"
         asSectionContent={asSectionContent}
