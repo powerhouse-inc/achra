@@ -52,6 +52,9 @@ chromatic-diagnostics.json
 # cursor
 .cursor
 
+# skills (npx skills add)
+.commandcode
+
 # Ignore .agent for git but allow Gemini to read
 .agent/
 .agents/
