@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>
 export const Basic: Story = {
   args: {
     levelNumber: 1,
+    networkName: 'Powerhouse',
     icon: '/default-icon-cards-budget.svg',
     title: 'Atlas Immutable Budget',
     code: 'atlas/immutable',
@@ -26,6 +27,7 @@ export const Basic: Story = {
 export const SecondLevel: Story = {
   args: {
     levelNumber: 2,
+    networkName: 'Powerhouse',
     icon: '/default-icon-cards-budget.svg',
     title: 'Atlas Immutable Budget',
     code: 'atlas/immutable',

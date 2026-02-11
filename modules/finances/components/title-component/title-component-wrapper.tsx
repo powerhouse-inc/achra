@@ -19,6 +19,7 @@ export async function TitleComponentWrapper({ params }: FinancesPageProps) {
       icon={titleData.icon}
       code={titleData.code}
       levelNumber={titleData.levelNumber}
+      networkName={titleData.networkName}
     />
   )
 }

@@ -69,6 +69,7 @@ export function getTitleComponentData(slug: string, financeSlug?: string | strin
   const icon = currentBudget?.image
   const code = currentBudget?.code ?? ''
   const levelNumber = codePath.split('/').length
+  const networkName = slug.charAt(0).toUpperCase() + slug.slice(1)
 
   return {
     title,
@@ -76,6 +77,7 @@ export function getTitleComponentData(slug: string, financeSlug?: string | strin
     icon,
     code,
     levelNumber,
+    networkName,
   }
 }
 

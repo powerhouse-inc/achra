@@ -7,6 +7,7 @@ interface TitleComponentProps {
   icon?: string
   code: string
   levelNumber: number
+  networkName: string
 }
 
 export function TitleComponent({
@@ -15,6 +16,7 @@ export function TitleComponent({
   icon,
   code,
   levelNumber,
+  networkName,
 }: Readonly<TitleComponentProps>) {
   return (
     <div className={cn('mt-2 mb-2 flex flex-col sm:mt-0.25 md:-mt-[3px]', 'gap-2')}>
@@ -23,7 +25,7 @@ export function TitleComponent({
           data-slot="first-level-title"
           className="text-foreground m-0 text-lg/[120%] font-bold sm:mt-4 md:mt-0 md:text-xl xl:text-2xl"
         >
-          Sky Ecosystem Finances
+          {networkName} Ecosystem Finances
         </h1>
       ) : (
         <h1 data-slot="nth-title-box" className="m-0 sm:mt-4 md:mt-0 md:text-3xl">
@@ -40,8 +42,8 @@ export function TitleComponent({
       >
         {levelNumber === 1 ? (
           <p>
-            The Sky finances section offers a complete breakdown of budget and expenditure data for
-            contributor teams since the DAO&apos;s launch in 2021.
+            The {networkName} finances section offers a complete breakdown of budget and expenditure
+            data for contributor teams contributing to the {networkName} Network.
           </p>
         ) : (
           description
