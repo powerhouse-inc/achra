@@ -4,8 +4,8 @@ import { compareString } from '../utils'
 import type { SortOptionValue } from '../budget-stament-filters/popover-filter-content'
 import type { BudgetStatement } from '../type'
 
-interface BuildersStamentProps {
-  builders: BudgetStatement[]
+interface UseBudgetStatementDataProps {
+  budgetStatements: BudgetStatement[]
   sortOption?: SortOptionValue
 }
 
@@ -16,14 +16,17 @@ const SORTERS: Record<SortOptionValue, (a: BudgetStatement, b: BudgetStatement) 
   modified_oldest: (a, b) => compareString(a.lastModifiedAtUtcIso, b.lastModifiedAtUtcIso),
 }
 
-export function useBudgetStamentData({ builders, sortOption }: Readonly<BuildersStamentProps>) {
+export function useBudgetStamentData({
+  budgetStatements,
+  sortOption,
+}: Readonly<UseBudgetStatementDataProps>) {
   const [selectedStatuses] = useQueryState('status', parseAsArrayOf(parseAsString))
 
-  const buildersProcessed = useMemo(() => {
-    let result = builders
+  const processedBudgetStatements = useMemo(() => {
+    let result = budgetStatements
     if (selectedStatuses && selectedStatuses.length > 0) {
-      result = result.filter((builder) => {
-        return selectedStatuses.includes(builder.status)
+      result = result.filter((statement) => {
+        return selectedStatuses.includes(statement.status)
       })
     }
 
@@ -33,9 +36,9 @@ export function useBudgetStamentData({ builders, sortOption }: Readonly<Builders
     }
 
     return result
-  }, [builders, selectedStatuses, sortOption])
+  }, [budgetStatements, selectedStatuses, sortOption])
 
   return {
-    buildersProcessed,
+    processedBudgetStatements,
   }
 }

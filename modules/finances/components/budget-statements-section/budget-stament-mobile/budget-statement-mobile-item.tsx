@@ -14,23 +14,23 @@ import { formatReportingMonth, getAmountByMetric, getMetricLabel } from '../util
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStatementMobileItemProps {
-  builder: BudgetStatement
+  budgetStatement: BudgetStatement
   selectedMetric: MetricWithoutBudget
 }
 
 export function BudgetStatementMobileItem({
-  builder,
+  budgetStatement,
   selectedMetric,
 }: Readonly<BudgetStatementMobileItemProps>) {
-  const reportMonth = formatReportingMonth(builder.month)
-  const amount = getAmountByMetric(selectedMetric, builder)
+  const reportMonth = formatReportingMonth(budgetStatement.month)
+  const amount = getAmountByMetric(selectedMetric, budgetStatement)
   const metricLabel = getMetricLabel(selectedMetric)
-  const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
+  const ownerNameForNavigation = budgetStatement.owner.name.toLocaleLowerCase()
   const reportMonthTrimmed = reportMonth.replaceAll(/\s+/g, '')
   return (
     <Link
-      href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
-      key={builder.id}
+      href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+      key={budgetStatement.id}
     >
       <Card
         className={cn(
@@ -45,11 +45,11 @@ export function BudgetStatementMobileItem({
             </div>
 
             <ContributorProfileInfo
-              name={builder.owner.name}
-              code={builder.owner.code}
+              name={budgetStatement.owner.name}
+              code={budgetStatement.owner.code}
               isCoreUnit={true}
               icon={true}
-              status={builder.status as ExpenseReport_ExpenseReportStatus}
+              status={budgetStatement.status as ExpenseReport_ExpenseReportStatus}
             />
           </div>
 
@@ -65,7 +65,9 @@ export function BudgetStatementMobileItem({
           />
           <div className="hidden flex-col gap-1.5 text-sm md:flex lg:hidden">
             <span className="text-muted-foreground/60 font-medium">Status:</span>
-            <BudgetStatementsStatus status={builder.status as ExpenseReport_ExpenseReportStatus} />
+            <BudgetStatementsStatus
+              status={budgetStatement.status as ExpenseReport_ExpenseReportStatus}
+            />
           </div>
 
           <Button variant="outline" size="icon" aria-label="View builder team details">
@@ -85,7 +87,7 @@ export function BudgetStatementMobileItem({
 
         <Separator className="-mt-1 md:mt-2" />
         <CardFooter className="bg-background w-full overflow-x-hidden rounded-b-xl px-4 py-1">
-          <LastModified lastModified={builder.lastModifiedAtUtcIso} isMobile />
+          <LastModified lastModified={budgetStatement.lastModifiedAtUtcIso} isMobile />
         </CardFooter>
       </Card>
     </Link>

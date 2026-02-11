@@ -16,5 +16,5 @@ export async function getBudgetStatements(networkSlug: string) {
     },
   })()
 
-  return data.budgetStatements
+  return data.budgetStatements.filter((statement) => statement.expenseReport.wallets.length > 0)
 }

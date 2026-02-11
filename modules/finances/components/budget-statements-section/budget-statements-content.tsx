@@ -29,7 +29,7 @@ export default function BudgetStatementsContent({
   return (
     <div className={cn('flex h-fit flex-col', hasMore && 'gap-6')}>
       <BudgetStatementsItem
-        builders={visibleItems}
+        budgetStatements={visibleItems}
         budgetMetric={budgetMetric}
         sortOption={sortOption}
         asSectionContent={asSectionContent}

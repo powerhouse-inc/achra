@@ -5,20 +5,20 @@ import { useBudgetStatementList } from './use-budget-statement-list'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 interface BudgetStatementListMobileProps {
-  builders: BudgetStatement[]
+  budgetStatements: BudgetStatement[]
   selectedMetric: MetricWithoutBudget
   className?: string
   asSectionContent?: boolean
 }
 
 export function BudgetStatementListMobile({
-  builders,
+  budgetStatements,
   selectedMetric,
   asSectionContent = false,
   className,
 }: Readonly<BudgetStatementListMobileProps>) {
   const { simpleBarRef, cardContentRef, itemsWrapperRef } = useBudgetStatementList({
-    builders,
+    budgetStatements,
     asSectionContent,
   })
   return (
@@ -32,10 +32,10 @@ export function BudgetStatementListMobile({
           ref={itemsWrapperRef}
           className={cn('flex w-full flex-col gap-2', asSectionContent && 'px-2 pb-2')}
         >
-          {builders.map((builder) => (
+          {budgetStatements.map((budgetStatement) => (
             <BudgetStatementMobileItem
-              key={builder.id}
-              builder={builder}
+              key={budgetStatement.id}
+              budgetStatement={budgetStatement}
               selectedMetric={selectedMetric}
             />
           ))}

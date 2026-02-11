@@ -12,31 +12,34 @@ import { formatReportingMonth, getAmountByMetric } from '../utils'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 
 export interface BudgetStamentTableItemProps {
-  builder: BudgetStatement
+  budgetStatement: BudgetStatement
   budgetMetric: MetricWithoutBudget
   className?: string
 }
 
 export function BudgetStamentTableItem({
-  builder,
+  budgetStatement,
   budgetMetric,
   className,
 }: Readonly<BudgetStamentTableItemProps>) {
-  const reportMonth = formatReportingMonth(builder.month)
+  const reportMonth = formatReportingMonth(budgetStatement.month)
   const reportMonthTrimmed = reportMonth.replaceAll(/\s+/g, '')
-  const amount = useMemo(() => getAmountByMetric(budgetMetric, builder), [budgetMetric, builder])
-  const builderNameForNavigation = builder.owner.name.toLocaleLowerCase()
+  const amount = useMemo(
+    () => getAmountByMetric(budgetMetric, budgetStatement),
+    [budgetMetric, budgetStatement],
+  )
+  const ownerNameForNavigation = budgetStatement.owner.name.toLocaleLowerCase()
 
   return (
     <TableRow className={className}>
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${builder.owner.code}`}
+          href={`/network/powerhouse/builders/${budgetStatement.owner.code}`}
           className="flex h-full w-full items-center pl-4"
         >
           <ContributorProfileInfo
-            name={builder.owner.name}
-            code={builder.owner.code}
+            name={budgetStatement.owner.name}
+            code={budgetStatement.owner.code}
             isCoreUnit={true}
             icon={true}
           />
@@ -44,7 +47,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[17%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">{reportMonth}</div>
@@ -52,7 +55,7 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[15%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
           <div className="text-foreground text-sm/5.5 font-semibold">
@@ -62,26 +65,28 @@ export function BudgetStamentTableItem({
       </TableCell>
       <TableCell className="inline-block h-full w-[14%] p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
-          <BudgetStatementsStatus status={builder.status as ExpenseReport_ExpenseReportStatus} />
+          <BudgetStatementsStatus
+            status={budgetStatement.status as ExpenseReport_ExpenseReportStatus}
+          />
         </Link>
       </TableCell>
 
       <TableCell className="inline-block h-full flex-1 p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center justify-start"
         >
           <span className="text-foreground text-sm/5.5 font-semibold">
-            <LastModified lastModified={builder.lastModifiedAtUtcIso} />
+            <LastModified lastModified={budgetStatement.lastModifiedAtUtcIso} />
           </span>
         </Link>
       </TableCell>
       <TableCell className="inline-flex h-full w-fit p-0! text-right">
         <Link
-          href={`/network/powerhouse/builders/${builderNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="group/link flex h-full w-full items-center justify-end pr-4"
         >
           <Button variant="outline" asChild className="pointer-events-none">
