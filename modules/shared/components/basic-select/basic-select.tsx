@@ -71,7 +71,7 @@ export function BasicSelect({
         <SelectGroup>
           {label && (
             <SelectLabel
-              className="text-foreground mb-1 px-0! py-2 text-xs font-bold tracking-wide"
+              className="text-foreground mb-1 px-2! py-2 text-xs font-bold tracking-wide"
               data-slot="single-select-label"
             >
               {label}
