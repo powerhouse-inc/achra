@@ -9,16 +9,14 @@ function ServicesCardSkeleton() {
         {/* Cover image + buttons */}
         <div className="flex flex-col gap-2 sm:gap-4">
           <Skeleton className="bg-border h-32 w-full rounded-lg sm:h-30" />
-          <Skeleton className="bg-border h-9 w-full rounded-md" />
-          <Skeleton className="bg-border h-9 w-full rounded-md" />
+          <div className="flex flex-col gap-2">
+            <Skeleton className="bg-border h-9 w-full rounded-md" />
+            <Skeleton className="bg-border h-9 w-full rounded-md" />
+          </div>
         </div>
-        {/* Title + chips + description */}
+        {/* Title + description */}
         <div className="flex flex-col gap-2 sm:gap-4">
           <Skeleton className="bg-border h-6 w-48" />
-          <div className="flex gap-2">
-            <Skeleton className="bg-border h-6 w-20 rounded-full" />
-            <Skeleton className="bg-border h-6 w-20 rounded-full" />
-          </div>
           <div className="flex flex-col gap-1">
             <Skeleton className="bg-border h-4 w-full" />
             <Skeleton className="bg-border h-4 w-full" />
