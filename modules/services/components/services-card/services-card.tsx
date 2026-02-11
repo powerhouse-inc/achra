@@ -18,11 +18,19 @@ interface ServicesCardProps {
   service: Service
 }
 
-// Default cover image when thumbnailUrl is not available
 const DEFAULT_COVER = '/services/covers/cover-01.jpg'
 
 export default function ServicesCard({ service }: ServicesCardProps) {
-  const isUnavailable = service.status !== RsTemplateStatus.Active
+  //  If the status is DRAFT or DEPRECATED, we don't show the service at all
+  const isHidden =
+    service.status === RsTemplateStatus.Draft || service.status === RsTemplateStatus.Deprecated
+
+  if (isHidden) return null
+
+  const isActive = service.status === RsTemplateStatus.Active
+
+  const isComingSoon = service.status === RsTemplateStatus.ComingSoon
+
   const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
 
   return (
@@ -37,7 +45,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
               className="absolute rounded-lg"
               style={{ objectFit: 'cover' }}
             />
-            {isUnavailable && (
+            {isComingSoon && (
               <>
                 <ComingSoonTagDesktop className="absolute top-2 -left-2 hidden sm:block" />
                 <ComingSoonTagMobile className="absolute top-5.75 -left-1 sm:hidden" />
@@ -47,8 +55,8 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           <div className="flex flex-col gap-2">
             <InternalLink
               href={`/services/${service.id}/purchase` as Route}
-              disabled={isUnavailable}
-              className={cn(isUnavailable && 'pointer-events-none opacity-50')}
+              disabled={!isActive}
+              className={cn(!isActive && 'pointer-events-none opacity-50')}
               size="lg"
               variant="default"
             >
