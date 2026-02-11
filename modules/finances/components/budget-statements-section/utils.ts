@@ -63,12 +63,12 @@ const METRIC_TO_FIELD: Record<MetricWithoutBudget, TotalsFieldKey | null> = {
 /**
  * Calculates the total amount for a specific metric from all wallets in a budget statement
  * @param metric - The metric to calculate (Actuals, Forecast, NetExpensesOnChain, NetProtocolOutflow)
- * @param builder - The budget statement containing wallet data
+ * @param budgetStatement - The budget statement containing wallet data
  * @returns The total sum for the specified metric (returns 0 if field mapping not available)
  */
 export const getAmountByMetric = (
   metric: MetricWithoutBudget,
-  builder: BudgetStatement,
+  budgetStatement: BudgetStatement,
 ): number => {
   const fieldKey = METRIC_TO_FIELD[metric]
 
@@ -76,7 +76,7 @@ export const getAmountByMetric = (
     return 0
   }
 
-  return builder.expenseReport.wallets.reduce((total, wallet) => {
+  return budgetStatement.expenseReport.wallets.reduce((total, wallet) => {
     const walletTotal = wallet.totals.reduce((sum, t) => {
       const fieldValue = t[fieldKey as keyof typeof t]
       return sum + getAmountValue(fieldValue)
