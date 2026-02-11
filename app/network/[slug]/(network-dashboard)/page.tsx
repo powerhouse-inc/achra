@@ -35,7 +35,7 @@ export default async function NetworkDashboardPage({
         />
       </Suspense>
       <BuildersSection networkSlug={slug} searchParams={searchParams} networkName={networkName} />
-      <FinancesSection params={params} searchParams={searchParams} />
+      <FinancesSection params={params} searchParams={searchParams} networkName={networkName} />
     </PageContent>
   )
 }
