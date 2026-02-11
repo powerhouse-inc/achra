@@ -79,16 +79,9 @@ function FinancesSkeleton({ className }: ActionsSkeletonProps) {
         </div>
         <div className="border-border bg-background relative mt-2 flex w-full gap-6 rounded-lg border p-4">
           <div className="border-popover absolute -top-2.5 left-4 h-4.5 border-x-8">
-            <Skeleton className="h-4.5 w-12.5" />
+            <Skeleton className="h-4.5 w-31" />
           </div>
-          <div className="flex items-center gap-2">
-            <Skeleton className="size-6 rounded-full" />
-            <Skeleton className="h-4 w-10.75" />
-          </div>
-          <div className="flex items-center gap-2">
-            <Skeleton className="size-6 rounded-full" />
-            <Skeleton className="h-4 w-15" />
-          </div>
+          <Skeleton className="h-6 w-[75%]" />
         </div>
       </div>
     </div>
