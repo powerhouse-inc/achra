@@ -30,7 +30,7 @@ const SELECT_FIELDS = [
   },
   {
     key: 'snoFunction',
-    label: 'SNO Function',
+    label: 'Organizational Function',
     options: SNO_FUNCTION_OPTIONS,
     defaultValue: 'Operational Hub' as const,
   },

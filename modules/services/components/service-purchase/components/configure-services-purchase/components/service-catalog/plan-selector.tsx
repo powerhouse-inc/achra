@@ -17,27 +17,25 @@ export function PlanSelectorItem({
   const inputId = id ?? value
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-col items-center gap-2">
+    <label
+      htmlFor={inputId}
+      className="flex h-full w-full cursor-pointer flex-col items-center justify-center px-6"
+    >
+      <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
           value={value}
           id={inputId}
-          className="border-foreground [&_svg]:fill-foreground text-foreground"
+          className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
         />
-        <label
-          htmlFor={inputId}
-          className={cn(
-            'text-foreground cursor-pointer text-sm/5.5 font-semibold transition-colors',
-          )}
-        >
+        <span className={cn('text-foreground text-sm/5.5 font-semibold transition-colors')}>
           {label}
-        </label>
+        </span>
       </div>
       {description && (
         <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
           {description}
         </span>
       )}
-    </div>
+    </label>
   )
 }
