@@ -63,7 +63,10 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
             <h2 className="text-xl leading-[120%] font-bold">Finances</h2>
             <Card className="border-none py-0">
               <CardContent className="p-4">
-                <ProfileFinancesCardContent builderSlug={builder.slug ?? ''} />
+                <ProfileFinancesCardContent
+                  builderSlug={builder.slug ?? ''}
+                  operationalHub={builder.operationalHubMember}
+                />
               </CardContent>
             </Card>
           </div>
