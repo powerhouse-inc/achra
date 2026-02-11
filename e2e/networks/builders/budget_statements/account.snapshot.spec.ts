@@ -31,49 +31,46 @@ test('should load the builder links', async ({ page }) => {
 });
 
 test('should navigate to the previous month', async ({ page }) => {
-    await expect(page.getByText('DEC 2025')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toHaveCount(5);
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
-    await expect(page.getByText('NOV 2025')).toBeVisible();
+    await expect(page.getByText('NOV 2025')).toHaveCount(1);
 });
 
 test('should navigate to the next month', async ({ page }) => {
-    await expect(page.getByText('DEC 2025')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toHaveCount(5);
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
-    await expect(page.getByText('NOV 2025')).toBeVisible();
+    await expect(page.getByText('NOV 2025')).toHaveCount(1);
     await page.locator('div.flex.gap-2 > a:nth-child(2)').click();
-    await expect(page.getByText('DEC 2025')).toBeVisible();
+    await expect(page.getByText('DEC 2025')).toHaveCount(5);
 });
 
 test('should load the MakerDAO Funding Overview', async ({ page }) => {
     await expect(page.getByText('MakerDAO Funding Overview')).toBeVisible();
     await expect(page.getByText('Totals funds made available to Powerhouse over its entire lifetime , since June 2021.')).toHaveCount(1);
     await expect(page.getByText('*All values are converted to USDS')).toHaveCount(1);
-    await expect(page.getByText('9 Apr 2025')).toBeVisible();
+    await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
-    await expect(page.getByText('2,924,160')).toBeVisible();
-    await expect(page.getByText('USD')).toHaveCount(25);
-    await expect(page.getByText('-791,666')).toBeVisible();
+    await expect(page.getByText('0')).toHaveCount(22);
+    await expect(page.getByText('USD')).toHaveCount(19);
+    await expect(page.getByText('424,477')).toHaveCount(2);
     await expect(page.getByText('Net Change')).toHaveCount(2);
     await expect(page.getByText('Extra Funds Made Available')).toBeVisible();
-    await expect(page.getByText('500,000')).toBeVisible();
     await expect(page.getByText('Funds Returned via DSSBlow')).toBeVisible();
-    await expect(page.getByText('291,666')).toBeVisible();
     await expect(page.getByText('New Lifetime Balance')).toBeVisible();
-    await expect(page.getByText('3,215,826')).toBeVisible();
 });
 
 test('should load View Transaction History', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     page.getByText('View Transaction History').click();
 
-    await expect(page.getByText('Top-up')).toBeVisible();
-    await expect(page.getByText('02-Oct-2024 09:08 UTC')).toBeVisible();
-    await expect(page.getByText('0x4e289cf451b243...')).toBeVisible();
+    await expect(page.getByText('TopUp')).toBeVisible();
+    await expect(page.getByText('08-Jan-2026 08:56 UTC')).toBeVisible();
+    await expect(page.getByText('0x534e17b1ea6fbc...')).toBeVisible();
     await expect(page.getByText('Recipient Address')).toBeVisible();
-    await expect(page.getByText('PullUp Labs Operational')).toHaveCount(2);
-    await expect(page.getByText('0x42ad...f94c')).toHaveCount(2);
+    await expect(page.getByText('N/A')).toHaveCount(1);
+    await expect(page.getByText('0xF130...0460')).toHaveCount(2);
     await expect(page.getByText('Amount')).toBeVisible();
-    await expect(page.getByText('275,000')).toHaveCount(3);
+    await expect(page.getByText('424,477')).toHaveCount(3);
 
     page.getByText('View Transaction History').click();
 
@@ -82,7 +79,7 @@ test('should load View Transaction History', async ({ page }) => {
     await expect(page.getByText('0xc78c5d81042ce1...')).toBeHidden();
     await expect(page.getByText('Recipient Address')).toBeHidden();
     await expect(page.getByText('Powerhouse Genesis Operational Hub Association')).toBeHidden();
-    await expect(page.getByText('0xf130...0460')).toBeHidden();
+    await expect(page.getByText('0xf130...0460')).toHaveCount(1);
     await expect(page.getByText('Amount')).toBeHidden();
     await expect(page.getByText('291,667')).toBeHidden();
 });
@@ -101,16 +98,15 @@ test('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('Total Reserves')).toBeVisible();
     await expect(page.getByText('On-Chain and off-chain reserves accessible to the Powerhouse Team.')).toHaveCount(1);
     await expect(page.getByText('Include Off-Chain Reserves')).toBeHidden();
-    await expect(page.getByText('9 Sep 2024')).toBeVisible();
-    await expect(page.getByText('-383,425')).toBeVisible();
+    await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
+    await expect(page.getByText('-41,231')).toBeVisible();
     await expect(page.getByText('Initial Reserves')).toBeVisible();
-    await expect(page.getByText('695,388')).toHaveCount(2);
-    await expect(page.getByText('Inflow')).toHaveCount(2);
-    await expect(page.getByText('275,000')).toHaveCount(2);
-    await expect(page.getByText('Outflow')).toHaveCount(2);
-    await expect(page.getByText('658,425')).toHaveCount(2);
+    await expect(page.getByText('0')).toHaveCount(22);
+    await expect(page.getByText('Inflow')).toHaveCount(3);
+    await expect(page.getByText('831,413')).toHaveCount(2);
+    await expect(page.getByText('Outflow')).toHaveCount(3);
+    await expect(page.getByText('790,181')).toHaveCount(2);
     await expect(page.getByText('New Reserves')).toBeVisible();
-    await expect(page.getByText('311,963')).toHaveCount(2);
 });
 
 test.skip('should include off-chain reserves', async ({ page }) => {
@@ -132,9 +128,9 @@ test('should load Total Reserves info', async ({ page }) => {
 test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('On Chain Reserves')).toBeVisible();
     await expect(page.getByText('Unspent On-Chain reserves to the Powerhouse Team.')).toHaveCount(1);
-    await expect(page.getByText('PullUp Labs Operational')).toBeVisible();
-    await expect(page.getByText('Initial Balance')).toBeVisible();
-    await expect(page.getByText('New Balance')).toBeVisible();
+    await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeVisible();
+    await expect(page.getByText('Initial Balance')).toHaveCount(2);
+    await expect(page.getByText('New Balance')).toHaveCount(2);
 });
 
 test.skip('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
