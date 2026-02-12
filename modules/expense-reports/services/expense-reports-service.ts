@@ -44,7 +44,7 @@ export async function getBudgetStatementsAvailableMonths(
       const month = new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), 1, 0, 0, 0, 0))
       return {
         month,
-        status: bs.status ?? null,
+        status: bs.status,
         lastUpdate: bs.lastModifiedAtUtcIso ?? null,
       }
     })
