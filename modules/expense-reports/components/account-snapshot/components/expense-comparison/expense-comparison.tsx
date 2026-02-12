@@ -1,7 +1,7 @@
+import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
 import { SectionHeader } from '../section-header'
 import { ExpenseComparisonDesktop } from './expense-comparison-desktop'
 import { ExpenseComparisonMobile } from './expense-comparison-mobile'
-import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonProps {
   lineItems: ExpenseComparisonLineItem[]

@@ -1,6 +1,7 @@
 'use client'
 
 import { InfoIcon } from 'lucide-react'
+import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
 import {
   Accordion,
   AccordionContent,
@@ -12,7 +13,6 @@ import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonMobileProps {
   lineItems: ExpenseComparisonLineItem[]

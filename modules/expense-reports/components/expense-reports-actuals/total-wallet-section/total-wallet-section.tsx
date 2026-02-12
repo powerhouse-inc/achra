@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
+import type { InnerTableColumn, InnerTableRow } from '@/modules/expense-reports/types'
 import { AdvancedInnerTable } from '../../advanced-inner-table/advanced-inner-table'
 import { EmptyTablePlaceholder } from '../../advanced-inner-table/empty-table-placeholder'
-import type { InnerTableColumn, InnerTableRow } from '../../advanced-inner-table/types'
 
 interface TotalWalletSectionProps {
   currentMonth: Date

@@ -1,5 +1,5 @@
+import type { InnerTableColumn } from '@/modules/expense-reports/types'
 import { CategoryTableHeader } from '../../category-table-header'
-import type { InnerTableColumn } from '../../advanced-inner-table/types'
 
 export const BREAKDOWN_COLUMNS: InnerTableColumn[] = [
   {

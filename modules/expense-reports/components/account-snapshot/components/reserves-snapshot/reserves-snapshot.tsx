@@ -1,11 +1,10 @@
 import type { SnapshotAccount } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getBalance } from '@/modules/expense-reports/lib/balance'
+import type { CalculatedBalance, OperationalGroup } from '@/modules/expense-reports/types'
 import { FundChangeRate } from '../fund-change-rate'
 import { ReserveCard } from '../reserve-card'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
-import type { OperationalGroup } from '../../reserve-account-types'
-import type { CalculatedBalance } from '../../types'
 
 interface ReservesSnapshotProps {
   teamName: string
@@ -107,7 +106,7 @@ function ReservesSnapshot({
           />
 
           <div className="flex flex-col gap-2">
-            <ReserveCard account={operationalGroup} currency="USD" />
+            <ReserveCard account={operationalGroup} />
           </div>
         </div>
       </div>

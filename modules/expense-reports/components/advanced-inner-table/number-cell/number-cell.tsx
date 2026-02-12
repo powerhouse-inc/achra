@@ -1,6 +1,6 @@
 import { formatNumber } from '@/modules/expense-reports/lib/strings'
+import type { RowType } from '@/modules/expense-reports/types'
 import { cn } from '@/modules/shared/lib/utils'
-import type { RowType } from '../types'
 
 interface NumberCellProps {
   value: number
