@@ -2,6 +2,7 @@
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WalletIcon } from 'lucide-react'
+import type { OpHubMember } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Drawer,
@@ -14,9 +15,10 @@ import { ProfileFinancesCardContent } from '../profile-card-content'
 
 interface ProfileFinancesDrawerProps {
   builderSlug: string
+  operationalHub: OpHubMember
 }
 
-function ProfileFinancesDrawer({ builderSlug }: ProfileFinancesDrawerProps) {
+function ProfileFinancesDrawer({ builderSlug, operationalHub }: ProfileFinancesDrawerProps) {
   const [open, setOpen] = useBuilderDrawerState()
 
   return (
@@ -36,7 +38,7 @@ function ProfileFinancesDrawer({ builderSlug }: ProfileFinancesDrawerProps) {
           <DrawerTitle>Finances</DrawerTitle>
         </VisuallyHidden>
         <div className="px-4 pb-8">
-          <ProfileFinancesCardContent builderSlug={builderSlug} />
+          <ProfileFinancesCardContent builderSlug={builderSlug} operationalHub={operationalHub} />
         </div>
       </DrawerContent>
     </Drawer>

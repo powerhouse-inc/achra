@@ -11,9 +11,10 @@ import type { SearchParams } from 'nuqs/server'
 interface FinancesSectionProps {
   params: Promise<{ slug: string }>
   searchParams: Promise<SearchParams>
+  networkName: string
 }
 
-export async function FinancesSection({ params, searchParams }: FinancesSectionProps) {
+export async function FinancesSection({ params, searchParams, networkName }: FinancesSectionProps) {
   const { slug } = await params
 
   return (
@@ -21,7 +22,7 @@ export async function FinancesSection({ params, searchParams }: FinancesSectionP
       id={NetworkDashboardSections.Finances}
       title="Finances"
       hash="finances"
-      cardTitle="Lorem ipsum dolor sit amet consectetur. Sed."
+      cardTitle={`All financial reports for Builders in the ${networkName} network`}
       href={`/network/${slug}/finances` as Route}
     >
       <BudgetStamentFiltersProvider>
