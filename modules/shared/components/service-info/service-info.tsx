@@ -1,6 +1,10 @@
 import { Download, Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  type Maybe,
+  ResourceTemplate_TemplateStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { ScrollToSectionButton } from '@/modules/services/components/service-profile/components/scroll-to-section-button'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { InternalLink } from '@/modules/shared/components/internal-link'
@@ -13,6 +17,10 @@ interface ServiceInfoProps {
   light?: boolean
   showPurchaseButton?: boolean
   showActionButtons?: boolean
+  title?: string
+  description?: Maybe<string>
+  thumbnailUrl?: string
+  status?: ResourceTemplate_TemplateStatus
 }
 
 // Default cover image when thumbnailUrl is not available
@@ -22,10 +30,15 @@ export default function ServiceInfo({
   light,
   showPurchaseButton,
   showActionButtons,
+  title,
+  description,
+  thumbnailUrl,
+  status,
 }: Readonly<ServiceInfoProps>) {
+  // TODO: Remove this mock once the service info is populated
   const service = SERVICES_CARDS_MOCK[0]
-  const isUnavailable = service.status === 'COMING_SOON'
-  const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
+  const isUnavailable = status === ResourceTemplate_TemplateStatus.ComingSoon
+  const coverImage = thumbnailUrl ?? DEFAULT_COVER
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">
       <CardContent
@@ -35,7 +48,7 @@ export default function ServiceInfo({
         )}
       >
         <span className={cn('text-foreground text-lg/5 font-bold sm:hidden', light && 'hidden')}>
-          {service.title}
+          {title ?? service.title}
         </span>
         <div className={cn('flex flex-col gap-2 sm:gap-4', light && 'gap-0')}>
           <div
@@ -46,8 +59,8 @@ export default function ServiceInfo({
             )}
           >
             <Image
-              src={coverImage}
-              alt={service.title}
+              src={thumbnailUrl ?? coverImage}
+              alt={title ?? service.title}
               fill
               className="absolute rounded-lg md:rounded-2xl"
               style={{ objectFit: 'cover' }}
@@ -80,10 +93,10 @@ export default function ServiceInfo({
               light && 'block text-base/5 lg:text-2xl/7',
             )}
           >
-            {service.title}
+            {title ?? service.title}
           </span>
           <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
-            {service.description ?? service.summary}
+            {description ?? service.description ?? service.summary}
           </div>
         </div>
         {showActionButtons && (

@@ -1,7 +1,7 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
 import { use } from 'react'
-import { MarketplaceHeader } from '@/modules/services/components/service-purchase/components/configure-services-purchase/components/marketplace-header'
+import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
 import { SERVICES_DATA } from '../../../../mock/mock-data'
 import { type Plan, PricingCalculator } from '../service-catalog'
 import { ServicePurchaseSelects } from '../service-purchase-selects'

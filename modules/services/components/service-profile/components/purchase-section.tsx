@@ -1,5 +1,5 @@
 import { OperatorCard } from '@/modules/shared/components/operator-card'
-import { OPERATORS_MOCK } from '../../service-purchase/components/service-purchase-form/components/select-operator/select-operator'
+import { OPERATORS_MOCK } from '../../../../service-purchase/components/service-purchase-form/components/select-operator/select-operator'
 import type { Route } from 'next'
 
 export function PurchaseSection() {

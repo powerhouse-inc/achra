@@ -1,5 +1,5 @@
-import type { Plan } from '../components/service-purchase/components/configure-services-purchase/components/types'
-import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
+import type { Plan } from '@/modules/service-purchase/components/configure-services-purchase/components/types'
+import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 
 /**
  * Service filter tabs
