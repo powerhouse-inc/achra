@@ -4,8 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_DATA } from '../../../../mock/mock-data'
-import { type Plan, PRICING_PLANS } from '../types'
+import { type Plan, PRICING_PLANS, type PricingData } from '../types'
 import { PlanSelectorItem } from './plan-selector'
 import { PRICING_GRID } from './pricing-calculator-context'
 
@@ -16,6 +15,7 @@ interface HeaderCatalogPlanProps {
   mobilePlanIndex: number
   onPrevPlan: () => void
   onNextPlan: () => void
+  servicesData: PricingData
 }
 
 export default function HeaderCatalogPlan({
@@ -25,9 +25,10 @@ export default function HeaderCatalogPlan({
   mobilePlanIndex,
   onPrevPlan,
   onNextPlan,
+  servicesData,
 }: Readonly<HeaderCatalogPlanProps>) {
   const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
-  const currentMobileTier = PRICING_DATA.tiers.find((t) => t.id === currentMobilePlan)
+  const currentMobileTier = servicesData.tiers.find((t) => t.id === currentMobilePlan)
 
   return (
     <div className={cn('border-input grid h-21 items-center border-b', PRICING_GRID.responsive)}>
@@ -89,7 +90,7 @@ export default function HeaderCatalogPlan({
         className="hidden lg:contents"
         disabled={readOnly}
       >
-        {PRICING_DATA.tiers.map((tier) => (
+        {servicesData.tiers.map((tier) => (
           <div
             key={tier.id}
             className={cn(

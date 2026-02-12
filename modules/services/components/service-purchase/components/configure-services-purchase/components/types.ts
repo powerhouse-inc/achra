@@ -1,4 +1,4 @@
-// Plan
+import type { RsOfferingFacetTarget } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export enum Plan {
   Basic = 'basic',
@@ -49,6 +49,7 @@ export interface ServiceSectionCatalog {
 export interface PricingData {
   tiers: PricingTier[]
   sections?: ServiceSectionCatalog[]
+  facetTargets: RsOfferingFacetTarget[]
   grandTotal?: {
     label: string
     values: Record<Plan, string>
@@ -60,12 +61,6 @@ export enum CatalogStatus {
   Optional = 'Optional',
   Excluded = 'Excluded',
 }
-
-// Improve this when UI its ready
-export const TEAM_STRUCTURE_OPTIONS = ['Remote'] as const
-export const ANONYMITY_LEVEL_OPTIONS = ['Higher'] as const
-export const LEGAL_ENTITY_OPTIONS = ['Swiss Association'] as const
-export const SNO_FUNCTION_OPTIONS = ['Operational Hub'] as const
 
 export interface ServiceRequestFormState {
   message?: string

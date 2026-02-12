@@ -1,6 +1,6 @@
 'use client'
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment, startTransition, useActionState, useCallback, useEffect } from 'react'
+import { Fragment, startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
@@ -17,6 +17,7 @@ import { Form } from '@/modules/shared/components/ui/form'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
+import { SERVICES_DATA } from '../../mock/mock-data'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
 import { Plan } from '../configure-services-purchase/components/types'
 import { SummarySection } from '../summary/summary-section'
@@ -266,12 +267,14 @@ export default function ServicePurchaseForm() {
                   <SelectOperator onSelectServices={handleSelectServices} />
                 )}
                 {step.value === 'configure-services' && (
-                  <ConfigureServices
-                    selectedPlan={selectedPlan}
-                    enabledSections={enabledSections}
-                    onPlanChange={handlePlanChange}
-                    onSectionToggle={handleSectionToggle}
-                  />
+                  <Suspense fallback={<div>Loading configure services...</div>}>
+                    <ConfigureServices
+                      selectedPlan={selectedPlan}
+                      enabledSections={enabledSections}
+                      onPlanChange={handlePlanChange}
+                      onSectionToggle={handleSectionToggle}
+                    />
+                  </Suspense>
                 )}
                 {step.value === 'summary' && (
                   <SummarySection
@@ -279,6 +282,7 @@ export default function ServicePurchaseForm() {
                     enabledSections={enabledSections}
                     actionState={state}
                     isPending={isPending}
+                    servicesData={SERVICES_DATA}
                   />
                 )}
                 {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
