@@ -1,0 +1,27 @@
+query ResourceTemplate($docId: PHID!) {
+  ResourceTemplate {
+    getDocument(docId: $docId) {
+      id
+      state {
+        id
+        title
+        description
+        thumbnailUrl
+        summary
+        status
+        faqFields {
+          answer
+          displayOrder
+          id
+          question
+        }
+        contentSections {
+          content
+          displayOrder
+          id
+          title
+        }
+      }
+    }
+  }
+}

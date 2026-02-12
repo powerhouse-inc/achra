@@ -3,6 +3,7 @@ import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'luc
 import { Fragment, startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
+import type { ResourceTemplate_ResourceTemplateState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
@@ -65,7 +66,11 @@ export interface ServicePurchaseFormValues {
   enabledSections: Record<SectionId, boolean>
 }
 
-export default function ServicePurchaseForm() {
+export interface ServicePurchaseFormProps {
+  resourceTemplate: ResourceTemplate_ResourceTemplateState
+}
+
+export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchaseFormProps) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, visitedSteps, goToStep, goBack } = useServicePurchaseStep()
 
@@ -200,8 +205,13 @@ export default function ServicePurchaseForm() {
                 </Button>
               </div>
             </div>
-
-            <ServiceInfo light={activeStep !== 'product-info'} />
+            <ServiceInfo
+              light={activeStep !== 'product-info'}
+              title={resourceTemplate.title}
+              description={resourceTemplate.description}
+              thumbnailUrl={resourceTemplate.thumbnailUrl}
+              status={resourceTemplate.status}
+            />
           </div>
           <Tabs
             value={activeStep}
@@ -262,7 +272,9 @@ export default function ServicePurchaseForm() {
 
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-                {step.value === 'product-info' && <ProductInfo />}
+                {step.value === 'product-info' && (
+                  <ProductInfo summary={resourceTemplate.summary} />
+                )}
                 {step.value === 'select-operator' && (
                   <SelectOperator onSelectServices={handleSelectServices} />
                 )}

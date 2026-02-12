@@ -2,7 +2,7 @@ import type {
   FeatureValue,
   Plan,
   PricingData,
-} from '../components/service-purchase/components/configure-services-purchase/components/types'
+} from '@/modules/service-purchase/components/configure-services-purchase/components/types'
 
 /**
  * Summary feature item structure
