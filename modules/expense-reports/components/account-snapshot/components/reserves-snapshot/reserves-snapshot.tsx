@@ -1,8 +1,10 @@
 import type { SnapshotAccount } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getBalance } from '../../utils/balance'
 import { FundChangeRate } from '../fund-change-rate'
 import { ReserveCard } from '../reserve-card'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
+import type { OperationalGroup } from '../../reserve-account-types'
 import type { CalculatedBalance } from '../../types'
 
 interface ReservesSnapshotProps {
@@ -13,6 +15,30 @@ interface ReservesSnapshotProps {
   accounts: SnapshotAccount[]
 }
 
+// TODO: move this to the utils file
+function buildOperationalGroup(accounts: SnapshotAccount[]): OperationalGroup {
+  const aggregated: CalculatedBalance = {
+    startingBalance: 0,
+    endingBalance: 0,
+    inflow: 0,
+    outflow: 0,
+  }
+  accounts.forEach((account) => {
+    const b = getBalance(account)
+    aggregated.startingBalance += b.startingBalance
+    aggregated.endingBalance += b.endingBalance
+    aggregated.inflow += b.inflow
+    aggregated.outflow += b.outflow
+  })
+  return {
+    type: 'group',
+    id: 'operational',
+    label: 'Operational',
+    balance: aggregated,
+    children: accounts,
+  }
+}
+
 function ReservesSnapshot({
   teamName,
   startDate,
@@ -20,6 +46,8 @@ function ReservesSnapshot({
   balance,
   accounts,
 }: ReservesSnapshotProps) {
+  const operationalGroup = buildOperationalGroup(accounts)
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
@@ -79,9 +107,7 @@ function ReservesSnapshot({
           />
 
           <div className="flex flex-col gap-2">
-            {accounts.map((account) => (
-              <ReserveCard key={account.id} account={account} currency="USD" />
-            ))}
+            <ReserveCard account={operationalGroup} currency="USD" />
           </div>
         </div>
       </div>

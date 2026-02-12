@@ -2,7 +2,6 @@ import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 import { ExpenseArrow } from '../transaction/expense-arrow'
 import { WalletInfo } from '../transaction/wallet-info'
-import type { Token } from '../../types'
 
 interface GroupItemProps {
   name: string
@@ -11,18 +10,9 @@ interface GroupItemProps {
   inflow: number
   outflow: number
   newBalance: number
-  currency: Token
 }
 
-function GroupItem({
-  name,
-  address,
-  initialBalance,
-  inflow,
-  outflow,
-  newBalance,
-  currency,
-}: GroupItemProps) {
+function GroupItem({ name, address, initialBalance, inflow, outflow, newBalance }: GroupItemProps) {
   return (
     <div
       className={cn(
@@ -55,9 +45,7 @@ function GroupItem({
         </div>
         <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold">
           {usLocalizedNumber(initialBalance)}{' '}
-          <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase">
-            {currency}
-          </span>
+          <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase">USD</span>
         </div>
       </div>
 
@@ -79,7 +67,7 @@ function GroupItem({
             <span className="text-sm leading-5.5 font-semibold">+</span>
             {usLocalizedNumber(inflow)}{' '}
             <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
-              {currency}
+              USD
             </span>
           </div>
         </div>
@@ -103,7 +91,7 @@ function GroupItem({
             <span className="text-sm leading-5.5 font-semibold">-</span>
             {usLocalizedNumber(Math.abs(outflow))}{' '}
             <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
-              {currency}
+              USD
             </span>
           </div>
         </div>
@@ -123,7 +111,7 @@ function GroupItem({
         <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold lg:text-base lg:leading-5">
           <span>{usLocalizedNumber(Math.abs(newBalance))}</span>{' '}
           <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
-            {currency}
+            USD
           </span>
         </div>
       </div>
