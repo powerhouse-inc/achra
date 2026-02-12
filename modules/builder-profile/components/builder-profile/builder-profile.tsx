@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-card-content'
-import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/profile-drawers'
+import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-finances-card-content'
+import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/profile-finances-drawer'
 import { ProjectCard } from '@/modules/expense-reports/components/project-card'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'

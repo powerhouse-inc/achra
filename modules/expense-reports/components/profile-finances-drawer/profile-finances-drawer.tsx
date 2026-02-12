@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
 } from '@/modules/shared/components/ui/drawer'
 import { useBuilderDrawerState } from '../../hooks/use-builder-drawer-state'
-import { ProfileFinancesCardContent } from '../profile-card-content'
+import { ProfileFinancesCardContent } from '../profile-finances-card-content'
 
 interface ProfileFinancesDrawerProps {
   builderSlug: string
