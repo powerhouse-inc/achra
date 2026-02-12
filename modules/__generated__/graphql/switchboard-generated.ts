@@ -460,6 +460,73 @@ export type AnalyticsSeriesDimension = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
+export type BContentSection = {
+  __typename?: 'BContentSection';
+  content: Scalars['String']['output'];
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type BFacetTarget = {
+  __typename?: 'BFacetTarget';
+  categoryKey: Scalars['String']['output'];
+  categoryLabel: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  selectedOptions: Array<Scalars['String']['output']>;
+};
+
+export type BFaqField = {
+  __typename?: 'BFaqField';
+  answer?: Maybe<Scalars['String']['output']>;
+  displayOrder: Scalars['Int']['output'];
+  id: Scalars['OID']['output'];
+  question?: Maybe<Scalars['String']['output']>;
+};
+
+export type BOptionGroup = {
+  __typename?: 'BOptionGroup';
+  defaultSelected: Scalars['Boolean']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  isAddOn: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type BResourceFacetBinding = {
+  __typename?: 'BResourceFacetBinding';
+  facetName: Scalars['String']['output'];
+  facetType: Scalars['PHID']['output'];
+  id: Scalars['OID']['output'];
+  supportedOptions: Array<Scalars['OID']['output']>;
+};
+
+export type BService = {
+  __typename?: 'BService';
+  description?: Maybe<Scalars['String']['output']>;
+  displayOrder?: Maybe<Scalars['Int']['output']>;
+  facetBindings: Array<BResourceFacetBinding>;
+  id: Scalars['OID']['output'];
+  isSetupFormation: Scalars['Boolean']['output'];
+  optionGroupId?: Maybe<Scalars['OID']['output']>;
+  parentServiceId?: Maybe<Scalars['OID']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type BTargetAudience = {
+  __typename?: 'BTargetAudience';
+  color?: Maybe<Scalars['String']['output']>;
+  id: Scalars['OID']['output'];
+  label: Scalars['String']['output'];
+};
+
+export enum BTemplateStatus {
+  Active = 'ACTIVE',
+  ComingSoon = 'COMING_SOON',
+  Deprecated = 'DEPRECATED',
+  Draft = 'DRAFT'
+}
+
 export type BillingStatement = IDocument & {
   __typename?: 'BillingStatement';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -673,6 +740,27 @@ export type BuilderLink = {
   url: Scalars['URL']['output'];
 };
 
+export type BuilderProduct = {
+  __typename?: 'BuilderProduct';
+  contentSections: Array<BContentSection>;
+  description?: Maybe<Scalars['String']['output']>;
+  facetTargets: Array<BFacetTarget>;
+  faqFields?: Maybe<Array<BFaqField>>;
+  id: Scalars['PHID']['output'];
+  infoLink?: Maybe<Scalars['URL']['output']>;
+  lastModified: Scalars['DateTime']['output'];
+  operatorId: Scalars['PHID']['output'];
+  optionGroups: Array<BOptionGroup>;
+  recurringServices: Array<Scalars['String']['output']>;
+  services: Array<BService>;
+  setupServices: Array<Scalars['String']['output']>;
+  status: BTemplateStatus;
+  summary: Scalars['String']['output'];
+  targetAudiences: Array<BTargetAudience>;
+  thumbnailUrl?: Maybe<Scalars['URL']['output']>;
+  title: Scalars['String']['output'];
+};
+
 export type BuilderProfile = IDocument & {
   __typename?: 'BuilderProfile';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -726,6 +814,7 @@ export type BuilderProfileState = {
   links: Array<BuilderLink>;
   name?: Maybe<Scalars['String']['output']>;
   operationalHubMember: OpHubMember;
+  products: Array<BuilderProduct>;
   projects: Array<BuilderProject>;
   scopes: Array<BuilderScope>;
   skills: Array<BuilderSkill>;
@@ -9364,6 +9453,7 @@ export type BudgetStatementsFilter = {
 export type BuildersFilter = {
   code?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['PHID']['input']>;
+  isOperator?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   networkSlug?: InputMaybe<Scalars['String']['input']>;
   scopes?: InputMaybe<Array<BuilderScope>>;
@@ -9419,7 +9509,7 @@ export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
 }>;
 
 
-export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string }> };
+export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string }> };
 
 export type BudgetStatementsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -9831,6 +9921,8 @@ export const BudgetStatementsAvailableMonthsDocument = `
   budgetStatements(filter: $filter) {
     id
     month
+    lastModifiedAtUtcIso
+    status
   }
 }
     `;
