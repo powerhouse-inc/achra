@@ -1,4 +1,3 @@
-import { FileX } from 'lucide-react'
 import { headers } from 'next/headers'
 import { notFound, redirect } from 'next/navigation'
 import { Suspense } from 'react'
@@ -7,6 +6,8 @@ import {
   AccountSnapshotContainer,
   AccountSnapshotSkeleton,
 } from '@/modules/expense-reports/components/account-snapshot'
+import { BudgetStatementsEmptyState } from '@/modules/expense-reports/components/budget-statements-empty-state'
+import { BudgetStatementsPageHeader } from '@/modules/expense-reports/components/budget-statements-page-header'
 import {
   ExpenseReportTabs,
   ExpenseReportTabsSkeleton,
@@ -16,10 +17,6 @@ import {
   ExpenseReportsSectionSkeleton,
 } from '@/modules/expense-reports/components/expense-reports-section'
 import {
-  MonthNavigation,
-  MonthNavigationSkeleton,
-} from '@/modules/expense-reports/components/month-navigation'
-import {
   getSelectedMonth,
   shouldRedirectToCleanUrl,
 } from '@/modules/expense-reports/lib/month-navigation-utils'
@@ -28,13 +25,6 @@ import { expenseReportsSearchParamsCache } from '@/modules/expense-reports/lib/s
 import { getBudgetStatementsAvailableMonths } from '@/modules/expense-reports/services/expense-reports-service'
 import { TabSection } from '@/modules/expense-reports/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import type { Route } from 'next'
 import type { SearchParams } from 'nuqs/server'
 
@@ -59,26 +49,17 @@ export default async function ExpenseReportsPage({
     return notFound()
   }
 
-  const availableMonths = await getBudgetStatementsAvailableMonths(builder.id)
+  const availableMonthsWithMetadata = await getBudgetStatementsAvailableMonths(builder.id)
 
-  if (availableMonths.length === 0) {
+  if (availableMonthsWithMetadata.length === 0) {
     return (
       <div className="container my-6">
-        <Empty>
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <FileX />
-            </EmptyMedia>
-            <EmptyTitle>No Expense Reports Data</EmptyTitle>
-            <EmptyDescription>
-              There&apos;s no Expense reports data for this builder.
-            </EmptyDescription>
-          </EmptyHeader>
-        </Empty>
+        <BudgetStatementsEmptyState />
       </div>
     )
   }
 
+  const availableMonths = availableMonthsWithMetadata.map((m) => m.month)
   const selectedMonth = getSelectedMonth(availableMonths, viewMonthParam)
   const shouldRedirectToClean = shouldRedirectToCleanUrl(selectedMonth, viewMonthParam)
 
@@ -97,9 +78,14 @@ export default async function ExpenseReportsPage({
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
-        <Suspense fallback={<MonthNavigationSkeleton />}>
-          <MonthNavigation availableMonths={availableMonths} defaultMonth={selectedMonth} />
-        </Suspense>
+        <BudgetStatementsPageHeader
+          availableMonthsWithMetadata={availableMonthsWithMetadata.map((m) => ({
+            month: m.month.toISOString(),
+            status: m.status,
+            lastUpdate: m.lastUpdate,
+          }))}
+          defaultMonthIso={selectedMonth.toISOString()}
+        />
 
         <div className="my-6">
           <Suspense fallback={<ExpenseReportTabsSkeleton />}>

@@ -9509,7 +9509,7 @@ export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
 }>;
 
 
-export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string }> };
+export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string }> };
 
 export type BudgetStatementsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -9928,6 +9928,8 @@ export const BudgetStatementsAvailableMonthsDocument = `
   budgetStatements(filter: $filter) {
     id
     month
+    lastModifiedAtUtcIso
+    status
   }
 }
     `;

@@ -10,13 +10,21 @@ import {
 import { formatMonthString } from '@/modules/expense-reports/lib/month-utils'
 import 'server-only'
 
+export interface BudgetStatementMonthMeta {
+  month: Date
+  status: string | null
+  lastUpdate: string | null
+}
+
 /**
- * Fetches the available months for a given team
+ * Fetches the available months for a given team with status and last update per month.
  *
  * @param teamId - The team ID to get the available months for
- * @returns An array of dates representing the available months
+ * @returns An array of month metadata (month, status, lastUpdate) sorted by month
  */
-export async function getBudgetStatementsAvailableMonths(teamId: string): Promise<Date[]> {
+export async function getBudgetStatementsAvailableMonths(
+  teamId: string,
+): Promise<BudgetStatementMonthMeta[]> {
   'use cache'
   cacheLife('minutes')
 
@@ -30,12 +38,38 @@ export async function getBudgetStatementsAvailableMonths(teamId: string): Promis
     return []
   }
 
-  return data.budgetStatements
-    .map((month) => {
-      const parsed = parse(month.month, 'MMMyyyy', new Date())
-      return new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), 1, 0, 0, 0, 0))
+  const sorted = data.budgetStatements
+    .map((bs) => {
+      const parsed = parse(bs.month, 'MMMyyyy', new Date())
+      const month = new Date(Date.UTC(parsed.getFullYear(), parsed.getMonth(), 1, 0, 0, 0, 0))
+      return {
+        month,
+        status: bs.status,
+        lastUpdate: bs.lastModifiedAtUtcIso ?? null,
+      }
     })
-    .sort((a, b) => a.getTime() - b.getTime())
+    .sort((a, b) => a.month.getTime() - b.month.getTime())
+
+  // fill missing month. The list should cover all months between the first and last month present in the list
+  const byMonth = new Map<number, BudgetStatementMonthMeta>()
+  for (const entry of sorted) {
+    byMonth.set(entry.month.getTime(), entry)
+  }
+
+  const minMonth = sorted[0].month
+  const maxMonth = sorted[sorted.length - 1].month
+  const result: BudgetStatementMonthMeta[] = []
+
+  for (
+    let current = new Date(minMonth.getTime());
+    current.getTime() <= maxMonth.getTime();
+    current = new Date(Date.UTC(current.getUTCFullYear(), current.getUTCMonth() + 1, 1, 0, 0, 0, 0))
+  ) {
+    const key = current.getTime()
+    result.push(byMonth.get(key) ?? { month: current, status: null, lastUpdate: null })
+  }
+
+  return result
 }
 
 export async function getBudgetStatementForMonth(
