@@ -5,19 +5,20 @@ import { transformPricingSummary } from '@/modules/services/utils/transform-pric
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_DATA } from '../../../../mock/mock-data'
-import type { Plan } from '../types'
+import type { Plan, PricingData } from '../types'
 
 interface PricingDetailCardProps {
   selectedPlan: Plan
   enabledSections: Record<string, boolean>
   className?: string
+  servicesData: PricingData
 }
 
 export function PricingDetailCard({
   selectedPlan,
   enabledSections,
   className,
+  servicesData,
 }: Readonly<PricingDetailCardProps>) {
   // Get active addons from enabledSections
   const activeAddons = useMemo(
@@ -27,8 +28,8 @@ export function PricingDetailCard({
 
   // Transform pricing data using BFF function
   const pricingSummary = useMemo(
-    () => transformPricingSummary(PRICING_DATA, selectedPlan, activeAddons),
-    [selectedPlan, activeAddons],
+    () => transformPricingSummary(servicesData, selectedPlan, activeAddons),
+    [servicesData, selectedPlan, activeAddons],
   )
 
   const { summary } = pricingSummary

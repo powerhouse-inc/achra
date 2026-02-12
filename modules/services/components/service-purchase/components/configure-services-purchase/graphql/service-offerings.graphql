@@ -1,0 +1,78 @@
+query ServiceOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
+    summary
+    operatorId
+    title
+    status
+    id
+    infoLink
+    description
+    lastModified
+    resourceTemplateId
+    facetTargets {
+      categoryKey
+      categoryLabel
+      selectedOptions
+      id
+    }
+    optionGroups {
+      defaultSelected
+      description
+      isAddOn
+      name
+      id
+    }
+    services {
+      description
+      displayOrder
+      facetBindings {
+        facetName
+        facetType
+        id
+        supportedOptions
+      }
+      id
+      isSetupFormation
+      optionGroupId
+      title
+    }
+    tiers {
+      description
+      id
+      isCustomPricing
+      name
+      pricing {
+        amount
+        currency
+      }
+      pricingOptions {
+        amount
+        currency
+        id
+        isDefault
+      }
+      serviceLevels {
+        customValue
+        id
+        level
+        optionGroupId
+        serviceId
+      }
+      usageLimits {
+        id
+        metric
+        notes
+        serviceId
+        unitName
+        unitPrice
+        unitPriceCurrency
+      }
+    }
+    thumbnailUrl
+    targetAudiences {
+      label
+      color
+      id
+    }
+  }
+}

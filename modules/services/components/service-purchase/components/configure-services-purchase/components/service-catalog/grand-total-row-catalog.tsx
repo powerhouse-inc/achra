@@ -2,19 +2,20 @@
 
 import { useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_DATA } from '../../../../mock/mock-data'
-import { Plan, PRICING_PLANS } from '../types'
+import { Plan, PRICING_PLANS, type PricingData } from '../types'
 import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
 import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan: Plan
   enabledSections?: Record<SectionId, boolean>
+  servicesData: PricingData
 }
 
 export function GrandTotalRowCatalog({
   selectedPlan,
   enabledSections,
+  servicesData,
 }: Readonly<GrandTotalRowCatalogProps>) {
   const { currentMobilePlan } = usePricingCalculatorContext()
 
@@ -27,13 +28,13 @@ export function GrandTotalRowCatalog({
     }
 
     PRICING_PLANS.forEach((plan) => {
-      const tier = PRICING_DATA.tiers.find((t) => t.id === plan)
+      const tier = servicesData.tiers.find((t) => t.id === plan)
       if (!tier) return
 
       let total = tier.monthlyPrice
 
       // Add prices from enabled toggle sections
-      PRICING_DATA.sections?.forEach((section) => {
+      servicesData.sections?.forEach((section) => {
         if (section.hasToggle && enabledSections?.[section.id as SectionId]) {
           total += section.price ?? 0
         }
@@ -48,7 +49,7 @@ export function GrandTotalRowCatalog({
     })
 
     return totals
-  }, [enabledSections])
+  }, [enabledSections, servicesData.sections, servicesData.tiers])
 
   return (
     <div className={cn('grid items-center', PRICING_GRID.responsive)}>
@@ -60,7 +61,7 @@ export function GrandTotalRowCatalog({
           'sticky left-0 z-10 lg:static',
         )}
       >
-        {PRICING_DATA.grandTotal?.label}
+        {servicesData.grandTotal?.label}
       </span>
 
       {/* Mobile: Show only current plan */}

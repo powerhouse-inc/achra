@@ -1,15 +1,15 @@
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
-import { PRICING_DATA } from '../../mock/mock-data'
 import { MarketplaceHeader } from '../configure-services-purchase/components/marketplace-header'
 import { OperationSummaryCard } from './components/operation-summary-card'
 import { Summary } from './components/summary'
-import type { Plan } from '../configure-services-purchase/components/types'
+import type { Plan, PricingData } from '../configure-services-purchase/components/types'
 
 export interface SummaryProps {
   selectedPlan: Plan
   enabledSections: Record<string, boolean>
   actionState: ServiceRequestFormState
   isPending: boolean
+  servicesData: PricingData
 }
 
 function SummarySection({
@@ -17,6 +17,7 @@ function SummarySection({
   enabledSections,
   actionState,
   isPending,
+  servicesData,
 }: Readonly<SummaryProps>) {
   // Get selected addon section IDs
   const selectedAddons = Object.entries(enabledSections)
@@ -28,7 +29,7 @@ function SummarySection({
       <MarketplaceHeader />
       <Summary actionState={actionState} isPending={isPending} />
       <OperationSummaryCard
-        pricingData={PRICING_DATA}
+        pricingData={servicesData}
         selectedPlan={selectedPlan}
         selectedAddons={selectedAddons}
       />

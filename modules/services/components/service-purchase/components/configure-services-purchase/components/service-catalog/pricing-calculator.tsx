@@ -2,8 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
-import { PRICING_DATA } from '../../../../mock/mock-data'
-import { Plan, PRICING_PLANS } from '../types'
+import { Plan, PRICING_PLANS, type PricingData } from '../types'
 import { GrandTotalRowCatalog } from './grand-total-row-catalog'
 import HeaderCatalogPlan from './header-catalog-plan'
 import { PricingCalculatorProvider } from './pricing-calculator-context'
@@ -22,6 +21,7 @@ export interface PricingCalculatorProps {
   onPlanChange?: (plan: Plan) => void
   onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
   readOnly?: boolean
+  servicesData: PricingData
 }
 /** Default plan index (Team) for mobile carousel */
 const DEFAULT_PLAN_INDEX = PRICING_PLANS.indexOf(Plan.Team)
@@ -32,7 +32,8 @@ export function PricingCalculator({
   onPlanChange,
   onSectionToggle,
   readOnly = false,
-}: PricingCalculatorProps = {}) {
+  servicesData,
+}: Readonly<PricingCalculatorProps>) {
   // Mobile carousel state - track which plan is visible on mobile
   const [mobilePlanIndex, setMobilePlanIndex] = useState(() => {
     const index = PRICING_PLANS.indexOf(selectedPlan)
@@ -77,9 +78,9 @@ export function PricingCalculator({
   const visibleSections = useMemo(
     () =>
       readOnly
-        ? PRICING_DATA.sections?.filter((section) => enabledSections?.[section.id as SectionId])
-        : PRICING_DATA.sections,
-    [readOnly, enabledSections],
+        ? servicesData.sections?.filter((section) => enabledSections?.[section.id as SectionId])
+        : servicesData.sections,
+    [readOnly, servicesData.sections, enabledSections],
   )
 
   const contextValue = useMemo(
@@ -106,6 +107,7 @@ export function PricingCalculator({
             mobilePlanIndex={mobilePlanIndex}
             onPrevPlan={handlePrevPlan}
             onNextPlan={handleNextPlan}
+            servicesData={servicesData}
           />
           {/* Service Sections */}
           <div className="flex flex-col">
@@ -149,7 +151,11 @@ export function PricingCalculator({
             ))}
           </div>
           {/* Grand Total */}
-          <GrandTotalRowCatalog selectedPlan={selectedPlan} enabledSections={enabledSections} />
+          <GrandTotalRowCatalog
+            selectedPlan={selectedPlan}
+            enabledSections={enabledSections}
+            servicesData={servicesData}
+          />
         </div>
       </Card>
     </PricingCalculatorProvider>

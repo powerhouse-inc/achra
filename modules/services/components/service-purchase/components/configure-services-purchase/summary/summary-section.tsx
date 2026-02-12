@@ -51,7 +51,7 @@ function SummarySection({
   const setupFee = planPrices[selectedPlan].setup
   let recurringTotal = basePrice
 
-  // Calculate additional costs from enabled sections improve this API its ready
+  // Calculate additional costs from enabled sections improve this API is ready
   Object.entries(enabledSections).forEach(([key, enabled]) => {
     if (enabled && key in additionalCosts) {
       recurringTotal += additionalCosts[key as keyof typeof additionalCosts]

@@ -4,7 +4,33 @@ import {
   type PricingData,
 } from '../components/configure-services-purchase/components/types'
 
-export const PRICING_DATA: PricingData = {
+export const SERVICES_DATA: PricingData = {
+  facetTargets: [
+    {
+      id: 'b634af4b-f6eb-4591-957b-fa64316434d4',
+      categoryKey: 'anonymity',
+      categoryLabel: 'Anonymity',
+      selectedOptions: ['High'],
+    },
+    {
+      id: '64550601-0d87-4160-b9fe-5f50ec98e440',
+      categoryKey: 'legal-entity',
+      categoryLabel: 'Legal Entity',
+      selectedOptions: ['Swiss Association'],
+    },
+    {
+      id: '6f7b8b0c-7f8a-4fa5-b288-f2b076de47ce',
+      categoryKey: 'team',
+      categoryLabel: 'Team',
+      selectedOptions: ['Remote'],
+    },
+    {
+      id: 'fbddf8ba-bc6e-47a0-8947-84f9b6a944cb',
+      categoryKey: 'sno-function',
+      categoryLabel: 'SNO Function',
+      selectedOptions: ['Operational Hub for Open Source Builders'],
+    },
+  ],
   tiers: [
     { id: Plan.Basic, name: 'Basic', price: '$200/mo', monthlyPrice: 200, setupFee: 3000 },
     {
