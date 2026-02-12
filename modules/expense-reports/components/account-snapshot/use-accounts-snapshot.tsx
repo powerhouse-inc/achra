@@ -1,6 +1,6 @@
 import { differenceInMonths, format, parse } from 'date-fns'
 import { useMemo, useState } from 'react'
-import { getReserveAccounts, transactionSort } from './utils/reserveUtils'
+import { getReserveAccounts, transactionSort } from './utils/reserve-utils'
 import type { ExpenseComparisonLineItem, Snapshots, Token } from './types'
 
 // TODO: remove this hook in favor of the SSR version once the integration is complete

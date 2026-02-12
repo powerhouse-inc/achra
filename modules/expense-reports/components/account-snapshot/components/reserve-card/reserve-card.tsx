@@ -1,10 +1,10 @@
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronDownIcon } from 'lucide-react'
 import {
-  AccountTransactionDirection,
-  type SnapshotAccount,
-} from '@/modules/__generated__/graphql/switchboard-generated'
-import { getCurrencyValue } from '@/modules/expense-reports/lib/budget-statement-utils'
+  isOperationalGroup,
+  type ReserveAccount,
+} from '@/modules/expense-reports/components/account-snapshot/reserve-account-types'
+import { getBalance } from '@/modules/expense-reports/components/account-snapshot/utils/balance'
 import {
   Accordion,
   AccordionContent,
@@ -14,67 +14,22 @@ import { cn } from '@/modules/shared/lib/utils'
 import { WalletInfo } from '../transaction/wallet-info'
 import { TransactionList } from '../transaction-list'
 import { KeyValuePair } from './key-value-pair'
-import type { CalculatedBalance, Token } from '../../types'
+import type { Token } from '../../types'
 
 interface ReserveCardProps {
-  account: SnapshotAccount
+  account: ReserveAccount
   currency?: Token
 
   // intended to be use in the stories
   defaultExpanded?: boolean
 }
 
-// TODO: move this to a separate file once the integration is complete
-const STABLECOIN_UNITS = ['USDC', 'USDT', 'USDS', 'DAI']
-
-function getBalance(account: SnapshotAccount): CalculatedBalance {
-  const balance: CalculatedBalance = {
-    startingBalance: 0,
-    endingBalance: 0,
-    inflow: 0,
-    outflow: 0,
-  }
-
-  account.balances.forEach((balance) => {
-    if (STABLECOIN_UNITS.includes(balance.token.symbol)) {
-      balance.startingBalance += getCurrencyValue(balance.startingBalance)
-      balance.endingBalance += getCurrencyValue(balance.endingBalance)
-    }
-  })
-
-  account.transactions.forEach((transaction) => {
-    if (STABLECOIN_UNITS.includes(transaction.amount.unit)) {
-      if (transaction.direction === AccountTransactionDirection.Inflow) {
-        balance.inflow += getCurrencyValue(transaction.amount.value)
-      } else {
-        // if it is not an inflow, it is an outflow (there are no other options)
-        balance.outflow += getCurrencyValue(transaction.amount.value)
-      }
-    }
-  })
-
-  return balance
-}
-
 function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCardProps) {
+  const isGroup = isOperationalGroup(account)
   const id = account.id
-
-  // TODO: uncomment this once the integration is complete
-  // const isGroup = account.accountType === 'group'
-  // const initialBalance = account.snapshotAccountBalance[0]?.initialBalance ?? 0
-  // const inflow = account.snapshotAccountBalance[0]?.inflow ?? 0
-  // const outflow = account.snapshotAccountBalance[0]?.outflow
-  //   ? account.snapshotAccountBalance[0]?.outflow * -1
-  //   : account.snapshotAccountBalance[0]?.outflow
-  // const newBalance = account.snapshotAccountBalance[0]?.newBalance ?? 0
-
-  // const hasTransactions = isGroup
-  //   ? !!account.children?.length
-  //   : !!account.snapshotAccountTransaction.length
-
-  const isGroup = false as boolean // TODO: should we support groups?
-  const hasTransactions = account.transactions.length > 0
-  const balance = getBalance(account)
+  const balance = isGroup ? account.balance : getBalance(account)
+  const hasTransactions = isGroup ? account.children.length > 0 : account.transactions.length > 0
+  const displayName = isGroup ? account.label : account.name
 
   return (
     <Accordion
@@ -97,7 +52,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
           >
             <div
               role="button"
-              aria-label={`Open reserve card ${account.name}`}
+              aria-label={`Open reserve card ${displayName}`}
               className="bg-popover flex flex-col gap-2 rounded-xl px-6 pt-2 pb-4 shadow-lg md:flex-row md:gap-0 md:px-0 md:py-2"
             >
               {/* name area */}
@@ -111,7 +66,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               >
                 {isGroup ? (
                   <div className="text-popover-foreground text-sm/5.5 font-semibold lg:text-base/6">
-                    {account.name}
+                    {account.label}
                   </div>
                 ) : (
                   <div>
@@ -169,11 +124,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
         </AccordionPrimitive.Header>
         {hasTransactions && (
           <AccordionContent>
-            {/* TODO: commented this out due TS issues (integration coming soon) */}
-            {/* <TransactionList
-              items={isGroup ? account.children : account.snapshotAccountTransaction}
-            /> */}
-            <TransactionList items={account.transactions} />
+            <TransactionList items={isGroup ? account.children : account.transactions} />
           </AccordionContent>
         )}
       </AccordionItem>
