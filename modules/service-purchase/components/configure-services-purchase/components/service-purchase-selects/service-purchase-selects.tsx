@@ -2,7 +2,7 @@
 
 import { parseAsString, useQueryState } from 'nuqs'
 import type { RsOfferingFacetTarget } from '@/modules/__generated__/graphql/switchboard-generated'
-import { LabeledSelect } from '@/modules/services/components/service-purchase/components/configure-services-purchase/components/labeled-select'
+import { LabeledSelect } from '@/modules/service-purchase/components/configure-services-purchase/components/labeled-select'
 
 interface FacetSelectProps {
   facet: RsOfferingFacetTarget

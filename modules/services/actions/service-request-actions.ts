@@ -3,9 +3,9 @@
 import 'server-only'
 import { z } from 'zod'
 
-import { Plan } from '../components/service-purchase/components/configure-services-purchase/components/types'
+import { Plan } from '@/modules/service-purchase/components/configure-services-purchase/components/types'
+import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { sendServiceRequest } from '../lib/send-service-request'
-import type { SectionId } from '../components/service-purchase/components/service-purchase-form/service-purchase-form'
 import type { ServiceRequestFormState } from '../config/types'
 
 /**
