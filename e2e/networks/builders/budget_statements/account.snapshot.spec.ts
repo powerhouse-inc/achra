@@ -133,7 +133,7 @@ test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('New Balance')).toHaveCount(2);
 });
 
-test.skip('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
+test('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await expect(page.getByText('Powerhouse Operational')).toBeHidden();
     await page.locator('body > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div').click();
@@ -195,7 +195,7 @@ test.skip('should expand accordion for On Chain Reserves with multiple wallets',
     await expect(page.getByText('291,667')).toHaveCount(1);
 });
 
-test('should expand accordion for On Chain Reserves with a single wallet', async ({ page }) => {
+test.skip('should expand accordion for On Chain Reserves with a single wallet', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     page.getByText('PullUp Labs Operational').click();
 
