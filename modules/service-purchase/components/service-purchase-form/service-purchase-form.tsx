@@ -206,6 +206,7 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
               </div>
             </div>
             <ServiceInfo
+              id={resourceTemplate.id}
               light={activeStep !== 'product-info'}
               title={resourceTemplate.title}
               description={resourceTemplate.description}
@@ -273,7 +274,10 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
                 {step.value === 'product-info' && (
-                  <ProductInfo summary={resourceTemplate.summary} />
+                  <ProductInfo
+                    summary={resourceTemplate.summary}
+                    contentSections={resourceTemplate.contentSections}
+                  />
                 )}
                 {step.value === 'select-operator' && (
                   <SelectOperator onSelectServices={handleSelectServices} />
