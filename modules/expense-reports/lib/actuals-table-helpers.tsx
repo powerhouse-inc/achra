@@ -2,10 +2,10 @@ import type {
   ExpenseReportLineItem,
   ExpenseReportWallet,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BreakdownTotals, InnerTableRow } from '@/modules/expense-reports/types'
 import { BREAKDOWN_COLUMNS } from '../components/expense-reports-actuals/breakdown-actuals-section/breakdown-columns'
 import { getCurrencyValue, isUsdsLineItem } from './budget-statement-utils'
 import { type GroupTree, HEADCOUNT_GROUP_LABEL, NON_HEADCOUNT_GROUP_LABEL } from './group-tree'
-import type { InnerTableRow } from '../components/advanced-inner-table/types'
 
 const COLUMNS_MAP = {
   label: BREAKDOWN_COLUMNS[0],
@@ -19,13 +19,6 @@ const COLUMNS_MAP = {
 
 /** Indices of numeric columns (budget, forecast, actuals, difference, payments). */
 const NUMERIC_COLUMN_INDICES = [1, 2, 3, 4, 6] as const
-
-export interface BreakdownTotals {
-  budget: number
-  forecast: number
-  actuals: number
-  payments: number
-}
 
 function buildRowCells(
   item: ExpenseReportLineItem | BreakdownTotals,

@@ -1,11 +1,8 @@
-import type { CategoryTree, GroupTreeNode } from '../types'
-
-export interface GroupTreeNodeToCategoryTreeOptions {
-  headcountExpense: boolean
-  order: number
-  parentId: string | null
-  expandedState: Map<string, boolean>
-}
+import type {
+  CategoryTree,
+  GroupTreeNode,
+  GroupTreeNodeToCategoryTreeOptions,
+} from '@/modules/expense-reports/types'
 
 /**
  * Converts a GroupTreeNode (API shape) to CategoryTree (modal shape).

@@ -1,4 +1,5 @@
 import { InfoIcon } from 'lucide-react'
+import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
 import {
   Table,
   TableBody,
@@ -10,7 +11,6 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import type { ExpenseComparisonLineItem } from '../../types'
 
 interface ExpenseComparisonDesktopProps {
   lineItems: ExpenseComparisonLineItem[]

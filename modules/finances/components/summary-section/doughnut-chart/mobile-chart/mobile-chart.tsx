@@ -24,9 +24,9 @@ export function MobileChart({ seriesData }: MobileChartProps) {
         className="bg-accent flex min-h-48 w-8 min-w-8 flex-col self-stretch overflow-hidden rounded-lg"
       >
         {series.map((item, index) => (
-          // it is okay to use index as key here because the chart is static
-          // eslint-disable-next-line react/no-array-index-key
           <div
+            // it is okay to use index as key here because the chart is static
+            // eslint-disable-next-line react/no-array-index-key
             key={index}
             data-slot="chart-bar"
             className="w-full"

@@ -1,10 +1,8 @@
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronDownIcon } from 'lucide-react'
-import {
-  isOperationalGroup,
-  type ReserveAccount,
-} from '@/modules/expense-reports/components/account-snapshot/reserve-account-types'
 import { getBalance } from '@/modules/expense-reports/lib/balance'
+import { isOperationalGroup } from '@/modules/expense-reports/lib/reserve-account-types'
+import type { ReserveAccount } from '@/modules/expense-reports/types'
 import {
   Accordion,
   AccordionContent,
@@ -14,17 +12,15 @@ import { cn } from '@/modules/shared/lib/utils'
 import { WalletInfo } from '../transaction/wallet-info'
 import { TransactionList } from '../transaction-list'
 import { KeyValuePair } from './key-value-pair'
-import type { Token } from '../../types'
 
 interface ReserveCardProps {
   account: ReserveAccount
-  currency?: Token
 
   // intended to be use in the stories
   defaultExpanded?: boolean
 }
 
-function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCardProps) {
+function ReserveCard({ account, defaultExpanded = false }: ReserveCardProps) {
   const isGroup = isOperationalGroup(account)
   const id = account.id
   const balance = isGroup ? account.balance : getBalance(account)
@@ -83,7 +79,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               <KeyValuePair
                 label="Initial Balance"
                 value={balance.startingBalance}
-                currency={currency}
+                currency="USD"
                 className={cn('mt-2', 'md:mt-0 md:w-25 lg:w-40 lg:min-w-40 xl:w-50 xl:min-w-50')}
               />
 
@@ -92,7 +88,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 label="Inflow"
                 variant="outline"
                 value={balance.inflow}
-                currency={currency}
+                currency="USD"
                 className={cn('md:w-full')}
               />
 
@@ -101,7 +97,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
                 label="Outflow"
                 variant="outline"
                 value={balance.outflow}
-                currency={currency}
+                currency="USD"
                 className={cn('md:w-full')}
               />
 
@@ -109,7 +105,7 @@ function ReserveCard({ account, currency, defaultExpanded = false }: ReserveCard
               <KeyValuePair
                 label="New Balance"
                 value={balance.endingBalance}
-                currency={currency}
+                currency="USD"
                 className={cn('md:w-full md:items-end')}
               />
 

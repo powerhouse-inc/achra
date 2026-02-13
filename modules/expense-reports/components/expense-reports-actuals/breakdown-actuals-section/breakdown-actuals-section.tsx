@@ -5,11 +5,11 @@ import { useQueryState } from 'nuqs'
 import { useMemo } from 'react'
 import { actualAccountTabSearchParamParser } from '@/modules/expense-reports/lib/search-params-client'
 import { toKebabCase } from '@/modules/expense-reports/lib/strings'
+import type { InnerTableRow } from '@/modules/expense-reports/types'
 import { Tabs, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { AdvancedInnerTable } from '../../advanced-inner-table/advanced-inner-table'
 import { EmptyTablePlaceholder } from '../../advanced-inner-table/empty-table-placeholder'
 import { BREAKDOWN_COLUMNS } from './breakdown-columns'
-import type { InnerTableRow } from '../../advanced-inner-table/types'
 
 const ACTUALS_ACCOUNT_PARAM = 'actuals-account'
 

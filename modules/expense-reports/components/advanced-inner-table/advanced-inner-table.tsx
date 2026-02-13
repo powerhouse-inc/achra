@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
+import type { AdvancedInnerTableProps, Alignment } from '@/modules/expense-reports/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_MIN_WIDTH } from './constants'
 import { EmptyTablePlaceholder } from './empty-table-placeholder'
 import { generateCellKey, renderCell, transformCardItems } from './helpers'
 import { TransparencyCard } from './transparency-card/transparency-card'
-import type { AdvancedInnerTableProps, Alignment } from './types'
 
 export function AdvancedInnerTable({
   cardsTotalPosition = 'bottom',

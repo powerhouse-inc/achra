@@ -8,13 +8,8 @@ import {
   useBudgetStatementsDetailsQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { formatMonthString } from '@/modules/expense-reports/lib/month-utils'
+import type { BudgetStatementMonthMeta } from '@/modules/expense-reports/types'
 import 'server-only'
-
-export interface BudgetStatementMonthMeta {
-  month: Date
-  status: string | null
-  lastUpdate: string | null
-}
 
 /**
  * Fetches the available months for a given team with status and last update per month.

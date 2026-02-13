@@ -5,7 +5,7 @@ import {
   type SnapshotAccount,
   type SnapshotAccountTransaction,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import type { CalculatedBalance } from '@/modules/expense-reports/components/account-snapshot/types'
+import type { CalculatedBalance } from '@/modules/expense-reports/types'
 import { getCurrencyValue } from './budget-statement-utils'
 import { STABLECOIN_UNITS } from './constants'
 

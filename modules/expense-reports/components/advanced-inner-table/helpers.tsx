@@ -1,10 +1,10 @@
 import React from 'react'
+import type { InnerTableColumn, RowType } from '@/modules/expense-reports/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { OpenModalTransparency } from '../open-modal-transparency'
 import { CELL_VALUES, COLUMN_HEADERS } from './constants'
 import { NumberCell } from './number-cell'
 import { TextCell } from './text-cell'
-import type { InnerTableColumn, RowType } from './types'
 
 /**
  * Checks if a value should be considered empty (excluding 0)

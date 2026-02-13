@@ -4,9 +4,9 @@ import type {
   ExpenseReportLineItem,
   ExpenseReportWallet,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { InnerTableColumn, InnerTableRow } from '@/modules/expense-reports/types'
 import { WalletTableCell } from '../components/wallet-table-cell'
 import { capitalizeSentence, formatAddressForOutput } from './strings'
-import type { InnerTableColumn, InnerTableRow } from '../components/advanced-inner-table/types'
 
 function renderWallet(wallet: ExpenseReportWallet) {
   return (

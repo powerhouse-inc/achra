@@ -1,10 +1,10 @@
 import type { SnapshotAccountTransaction } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { CalculatedBalance } from '@/modules/expense-reports/types'
 import { ConversionNotice } from '../conversion-notice'
 import { FundChangeRate } from '../fund-change-rate'
 import { SectionHeader } from '../section-header'
 import { SimpleStatCard } from '../simple-stat-card'
 import { TransactionHistory } from '../transaction-history'
-import type { CalculatedBalance } from '../../types'
 
 interface FundingOverviewProps {
   startDate: string
