@@ -2,7 +2,7 @@ import { createSearchParamsCache, parseAsStringEnum, parseAsStringLiteral } from
 import { METRIC_OPTIONS } from '@/modules/finances/types'
 
 export const budgetStatementsSearchParamsCache = createSearchParamsCache({
-  metricbs: parseAsStringEnum(
+  metrics: parseAsStringEnum(
     Object.values(METRIC_OPTIONS).filter((m) => m !== METRIC_OPTIONS.Budget),
   ).withDefault(METRIC_OPTIONS.Actuals),
   sort: parseAsStringLiteral([

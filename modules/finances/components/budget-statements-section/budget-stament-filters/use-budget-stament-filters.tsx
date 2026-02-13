@@ -16,7 +16,7 @@ const filtersConfig = {
         timeMs: 100,
       },
     }),
-  metricbs: parseAsStringEnum(Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget'))
+  metrics: parseAsStringEnum(Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget'))
     .withDefault(METRIC_OPTIONS.Actuals)
     .withOptions({
       shallow: false,
@@ -89,9 +89,9 @@ export default function useBudgetStamentFilters() {
   )
 
   const setMetric = useCallback(
-    (value: StateUpdater<FiltersState['metricbs']>, options?: FilterOptions) => {
+    (value: StateUpdater<FiltersState['metrics']>, options?: FilterOptions) => {
       startMetricTransition(async () => {
-        await setFilterValue('metricbs', value, options)
+        await setFilterValue('metrics', value, options)
       })
     },
     [setFilterValue, startMetricTransition],
@@ -101,7 +101,7 @@ export default function useBudgetStamentFilters() {
     startResetTransition(async () => {
       await setFilters({
         status: [],
-        metricbs: METRIC_OPTIONS.Actuals,
+        metrics: METRIC_OPTIONS.Actuals,
       })
     })
   }, [setFilters, startResetTransition])
@@ -111,13 +111,13 @@ export default function useBudgetStamentFilters() {
       isStatusPending ||
       isMetricPending ||
       isResetPending ||
-      (filters.status.length === 0 && filters.metricbs === METRIC_OPTIONS.Actuals),
-    [isStatusPending, isMetricPending, isResetPending, filters.status, filters.metricbs],
+      (filters.status.length === 0 && filters.metrics === METRIC_OPTIONS.Actuals),
+    [isStatusPending, isMetricPending, isResetPending, filters.status, filters.metrics],
   )
 
   return {
     status: filters.status,
-    metric: filters.metricbs,
+    metric: filters.metrics,
     isStatusPending,
     isMetricPending,
     isResetPending,
