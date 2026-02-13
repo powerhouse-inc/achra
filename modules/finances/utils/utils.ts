@@ -87,9 +87,9 @@ export function getTitleComponentData(slug: string, financeSlug?: string | strin
 export function getBreadcrumbItems(
   slug: string,
   financeSlug?: string | string[],
-  year = 2025,
+  networkName?: string,
 ): BreadcrumbItemNavigation[] {
-  const networkName = slug.charAt(0).toUpperCase() + slug.slice(1)
+  const resolvedNetworkName = networkName ?? slug.charAt(0).toUpperCase() + slug.slice(1)
   const urlPath = Array.isArray(financeSlug) ? financeSlug.join('/') : financeSlug
   const codePath = urlPath ? `atlas/${urlPath}` : 'atlas'
   const allBudgets = ATLAS_BUDGETS
@@ -99,7 +99,7 @@ export function getBreadcrumbItems(
 
   // Add network name first
   items.push({
-    label: networkName,
+    label: resolvedNetworkName,
     href: `/network/${slug}` as Route,
   })
 
@@ -119,7 +119,7 @@ export function getBreadcrumbItems(
             (budget) => budget.codePath === segmentedCodePath.slice(0, index + 1).join('/'),
           )?.name ?? codePath,
         ),
-        href: `/network/${slug}/finances/${segmentedCodePath.slice(1, index + 1).join('/')}?year=${year}` as Route,
+        href: `/network/${slug}/finances/${segmentedCodePath.slice(1, index + 1).join('/')}` as Route,
       })
     }
   })
