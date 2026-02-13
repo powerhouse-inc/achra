@@ -24,6 +24,7 @@ const ffStaging: FeatureFlags = {
     SUMMARY_SECTION_ENABLED: false,
     NAVIGATION_SECTION_ENABLED: false,
     BREAKDOWN_CHART_SECTION_ENABLED: false,
+    YEAR_SELECTOR_ENABLED: false,
   },
   NAV_BAR_LOGIN_BUTTON_ENABLED: false,
 }
