@@ -29,8 +29,8 @@ export default async function NetworkDashboardPage({
       <Suspense fallback={<HomepageBannerSkeleton />}>
         <HomepageBanner
           backgroundImage="/networks/backgrounds/powerhouse.png"
-          title="Powerhouse Dashboard"
-          description="The Powerhouse dashboard provides an overview of the builder teams and their financial data within the Powerhouse network. This portal tracks technical expertise, team information, and monthly financial reporting to maintain transparency across all active workstreams. It serves as the primary tool for monitoring team capabilities and fiscal oversight for every project operating under the Powerhouse network."
+          title={`${networkName} Dashboard`}
+          description={`The ${networkName} dashboard provides an overview of the builder teams and their financial data within the ${networkName} network. This portal tracks technical expertise, team information, and monthly financial reporting to maintain transparency across all active workstreams. It serves as the primary tool for monitoring team capabilities and fiscal oversight for every project operating under the ${networkName} network.`}
           isLoggedIn={false}
         />
       </Suspense>
