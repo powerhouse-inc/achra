@@ -21,13 +21,13 @@ export async function BudgetStatementsContentWrapper({
 }: Readonly<BudgetStatementsContentWrapperProps>) {
   const { slug } = await params
   const searchParamsResolved = await searchParams
-  const { metricbs, sort } = budgetStatementsSearchParamsCache.parse(searchParamsResolved)
+  const { metrics, sort } = budgetStatementsSearchParamsCache.parse(searchParamsResolved)
 
   const budgetStatements = await getBudgetStatements(slug)
 
   return (
     <BudgetStatementsContent
-      budgetMetric={metricbs as MetricWithoutBudget}
+      budgetMetric={metrics as MetricWithoutBudget}
       sortOption={sort as SortOptionValue}
       budgetStatements={budgetStatements}
       asSectionContent={asSectionContent}
