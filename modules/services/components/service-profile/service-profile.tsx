@@ -1,3 +1,7 @@
+import type {
+  ResourceTemplate_ContentSection,
+  ResourceTemplate_TemplateStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import ProductInfo from '@/modules/service-purchase/components/service-purchase-form/components/product-info/product-info'
 import { FaqSection } from '@/modules/services/components/service-profile/components/faq'
 import { ServiceInfo } from '@/modules/shared/components/service-info'
@@ -15,9 +19,12 @@ export default function ServiceProfile() {
         title={service.title}
         description={service.description}
         thumbnailUrl={service.thumbnailUrl}
-        status={service.status}
+        status={service.status as unknown as ResourceTemplate_TemplateStatus}
       />
-      <ProductInfo summary={service.summary} contentSections={service.contentSections} />
+      <ProductInfo
+        summary={service.summary}
+        contentSections={service.contentSections as unknown as ResourceTemplate_ContentSection[]}
+      />
       <PurchaseSection />
       <FaqSection />
     </div>
