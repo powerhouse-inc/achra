@@ -1,8 +1,8 @@
-import { useResourceTemplatesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getServices } from '../../services/services-service'
 import { ServicesPageContent } from './services-page-content'
 
 export async function ServicesListSection() {
-  const data = await useResourceTemplatesQuery.fetcher()()
+  const services = await getServices()
 
-  return <ServicesPageContent services={data.resourceTemplates} />
+  return <ServicesPageContent services={services} />
 }
