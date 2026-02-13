@@ -30,7 +30,7 @@ export default async function NetworkDashboardPage({
         <HomepageBanner
           backgroundImage="/networks/backgrounds/powerhouse.png"
           title="Powerhouse Dashboard"
-          description="Lorem ipsum dolor sit amet consectetur. In et sed malesuada ornare bibendum nisl egestas. Tellus semper facilisis elit mauris aliquam. Venenatis nunc sapien duis adipiscing proin mauris. Amet sed mauris natoque nisi porttitor montes. Elit vel euismod quis."
+          description="The Powerhouse dashboard provides an overview of the builder teams and their financial data within the Powerhouse network. This portal tracks technical expertise, team information, and monthly financial reporting to maintain transparency across all active workstreams. It serves as the primary tool for monitoring team capabilities and fiscal oversight for every project operating under the Powerhouse network."
           isLoggedIn={false}
         />
       </Suspense>
