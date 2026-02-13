@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { getMetricLabel } from '../utils'
+import { compareMonth, getMetricLabel } from '../utils'
 import type { BudgetStatementsTableColumn } from '../const'
 import type { BudgetStatement, MetricWithoutBudget } from '../type'
 import type SimpleBar from 'simplebar-react'
@@ -167,6 +167,11 @@ export function useBudgetStamentTable({
       }
 
       return [...statements].sort((a, b) => {
+        if (column.accessorKey === 'month') {
+          const result = compareMonth(a.month, b.month)
+          return sortDirection === SortEnum.Asc ? result : -result
+        }
+
         const aValue = getNestedValue(a, column.accessorKey) ?? ''
         const bValue = getNestedValue(b, column.accessorKey) ?? ''
 

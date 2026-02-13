@@ -32,7 +32,7 @@ const filtersConfig = {
     'modified_newest',
     'modified_oldest',
   ] as const)
-    .withDefault('modified_newest')
+    .withDefault('reporting_newest')
     .withOptions({
       shallow: false,
       history: 'replace',
