@@ -2,7 +2,7 @@ import type {
   SnapshotAccount as GeneratedSnapshotAccount,
   SnapshotAccountTransaction,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { getBalance } from '@/modules/expense-reports/components/account-snapshot/utils/balance'
+import { getBalance } from '@/modules/expense-reports/lib/balance'
 import { getCurrencyValue } from '@/modules/expense-reports/lib/budget-statement-utils'
 import { isGeneratedSnapshotAccount } from '../../utils/types-helpers'
 import { Transaction } from '../transaction'

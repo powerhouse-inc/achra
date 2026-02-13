@@ -1,3 +1,5 @@
+export const STABLECOIN_UNITS: readonly string[] = ['USDC', 'USDT', 'USDS', 'DAI']
+
 export const ACTUALS_BREAKDOWN_QUERY_PARAM = 'actual-account'
 
 export const FORECAST_BREAKDOWN_QUERY_PARAM = 'forecast-account'

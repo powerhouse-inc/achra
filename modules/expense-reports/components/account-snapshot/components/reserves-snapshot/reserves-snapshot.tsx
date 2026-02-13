@@ -1,5 +1,5 @@
 import type { SnapshotAccount } from '@/modules/__generated__/graphql/switchboard-generated'
-import { getBalance } from '../../utils/balance'
+import { getBalance } from '@/modules/expense-reports/lib/balance'
 import { FundChangeRate } from '../fund-change-rate'
 import { ReserveCard } from '../reserve-card'
 import { SectionHeader } from '../section-header'

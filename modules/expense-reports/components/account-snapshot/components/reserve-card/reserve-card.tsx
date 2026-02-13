@@ -4,7 +4,7 @@ import {
   isOperationalGroup,
   type ReserveAccount,
 } from '@/modules/expense-reports/components/account-snapshot/reserve-account-types'
-import { getBalance } from '@/modules/expense-reports/components/account-snapshot/utils/balance'
+import { getBalance } from '@/modules/expense-reports/lib/balance'
 import {
   Accordion,
   AccordionContent,
