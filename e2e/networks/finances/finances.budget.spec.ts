@@ -21,18 +21,16 @@ test('should load all builder statuses', async ({ page }) => {
     await expect(page.getByText('ACTIVE')).toHaveCount(0);
     await expect(page.getByText('INACTIVE')).toHaveCount(0);
     await expect(page.getByText('DRAFT')).toHaveCount(6);
-    await expect(page.getByText('FINAL')).toHaveCount(3);
+    await expect(page.getByText('FINAL')).toHaveCount(9);
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('16 Hours Ago')).toHaveCount(2);
-    await expect(page.getByText('7 Days Ago')).toHaveCount(4);
-    await expect(page.getByText('28-JAN-2026')).toHaveCount(1);
-    await expect(page.getByText('21-JAN-2026')).toHaveCount(2);
+    await expect(page.getByText('6 Days Ago')).toHaveCount(10);
+    await expect(page.getByText('06-FEB-2026')).toHaveCount(5);
 });
 
 test('should load all View buttons', async ({ page }) => {
-    await expect(page.getByText('View')).toHaveCount(3);
+    await expect(page.getByText('View')).toHaveCount(5);
 });
 
 test('should load all Actuals', async ({ page }) => {
@@ -46,8 +44,8 @@ test('should load all Reporting Month dates', async ({ page }) => {
 });
 
 test('should load all builder names', async ({ page }) => {
-    await expect(page.getByText('PW')).toHaveCount(4);
-    await expect(page.getByText('Powerhouse')).toHaveCount(13);
+    await expect(page.getByText('PW')).toHaveCount(10);
+    await expect(page.getByText('Powerhouse')).toHaveCount(21);
 });
 
 test('should load all columns', async ({ page }) => {
@@ -73,7 +71,7 @@ test('should filter by status all builder statuses', async ({ page }) => {
     await page.getByText('Status').first().click();
     await page.getByRole('option', { name: 'Select All' }).click();
 
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?status=DRAFT,FINAL,REVIEW`);
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
@@ -81,7 +79,7 @@ test('should reset all sorting of builders', async ({ page }) => {
     await page.getByRole('option', { name: 'Net Protocol Outflow' }).click();
     await page.locator('#___SECTION___budget-statements').getByText('Status').first().click();
     await page.locator('#___SECTION___budget-statements').getByRole('option', { name: 'Select All' }).click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?budgetMetric=Net+Protocol+Outflow&status=ACTIVE,ARCHIVED,COMPLETED,INACTIVE,ON_HOLD`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?metricbs=Net+Protocol+Outflow&status=DRAFT,FINAL,REVIEW`);
 
     await page.locator('#___SECTION___budget-statements').getByText('Reset Filter').first().click();
     await page.waitForTimeout(1000);
@@ -91,13 +89,14 @@ test('should reset all sorting of builders', async ({ page }) => {
 test('should filter with other options in iPad Mini resolution', async ({ page }) => {
     // iPad Mini resolution
     await page.setViewportSize({ width: 768, height: 1024 });
+    await page.waitForTimeout(1000);
 
-    await page.locator('#___SECTION___budget-statements > div > div:nth-child(2) > div > div > div > div > button').click();
+    await page.locator('#___SECTION___budget-statements > div > div > div > div > div.max-w-fit.hidden > button').click();
 
     await expect(page.getByText('Sort')).toBeVisible();
     await expect(page.getByText('Reset')).toHaveCount(3);
-    await expect(page.getByText('Reporting Month')).toHaveCount(22);
+    await expect(page.getByText('Reporting Month')).toHaveCount(12);
     await expect(page.getByText('Newest First')).toHaveCount(2);
     await expect(page.getByText('Oldest First')).toHaveCount(2);
-    await expect(page.getByText('Last Modified')).toHaveCount(12);
+    await expect(page.getByText('Last Modified')).toHaveCount(7);
 });

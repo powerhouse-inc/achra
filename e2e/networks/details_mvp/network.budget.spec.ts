@@ -25,7 +25,7 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('6 Days Ago')).toHaveCount(12);
+    await expect(page.getByText('6 Days Ago')).toHaveCount(10);
     await expect(page.getByText('06-FEB-2026')).toHaveCount(6);
 });
 
