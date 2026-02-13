@@ -107,6 +107,22 @@ export const compareString = (a: string | null | undefined, b: string | null | u
   return a.localeCompare(b)
 }
 
+/**
+ * Parses a month string (e.g., "NOV2025") into a timestamp for chronological comparison.
+ */
+function parseMonthToTimestamp(month: string | null | undefined): number {
+  if (!month) return 0
+  const parsed = DateTime.fromFormat(month.toUpperCase(), 'LLLyyyy')
+  if (parsed.isValid) return parsed.toMillis()
+  const parsedDate = DateTime.fromFormat(month, 'yyyy-LL-dd')
+  if (parsedDate.isValid) return parsedDate.toMillis()
+  return 0
+}
+
+export const compareMonth = (a: string | null | undefined, b: string | null | undefined) => {
+  return parseMonthToTimestamp(a) - parseMonthToTimestamp(b)
+}
+
 export const compareDate = (a: string | null | undefined, b: string | null | undefined) => {
   if (!a && !b) return 0
   if (!a) return 1

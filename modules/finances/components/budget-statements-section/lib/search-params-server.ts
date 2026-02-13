@@ -10,5 +10,5 @@ export const budgetStatementsSearchParamsCache = createSearchParamsCache({
     'reporting_oldest',
     'modified_newest',
     'modified_oldest',
-  ] as const).withDefault('modified_newest'),
+  ] as const).withDefault('reporting_newest'),
 })

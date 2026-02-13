@@ -1,6 +1,6 @@
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
-import { compareString } from '../utils'
+import { compareMonth, compareString } from '../utils'
 import type { SortOptionValue } from '../budget-stament-filters/popover-filter-content'
 import type { BudgetStatement } from '../type'
 
@@ -10,8 +10,8 @@ interface UseBudgetStatementDataProps {
 }
 
 const SORTERS: Record<SortOptionValue, (a: BudgetStatement, b: BudgetStatement) => number> = {
-  reporting_newest: (a, b) => compareString(b.month, a.month),
-  reporting_oldest: (a, b) => compareString(a.month, b.month),
+  reporting_newest: (a, b) => compareMonth(b.month, a.month),
+  reporting_oldest: (a, b) => compareMonth(a.month, b.month),
   modified_newest: (a, b) => compareString(b.lastModifiedAtUtcIso, a.lastModifiedAtUtcIso),
   modified_oldest: (a, b) => compareString(a.lastModifiedAtUtcIso, b.lastModifiedAtUtcIso),
 }

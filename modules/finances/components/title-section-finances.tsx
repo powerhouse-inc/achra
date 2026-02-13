@@ -3,6 +3,7 @@
 import { LinkIcon } from 'lucide-react'
 import { CopySectionUrl } from '@/modules/shared/components/section-title/copy-section-url'
 import { TooltipInfoIcon } from '@/modules/shared/components/tooltip-info-icon/tooltip-info-icon'
+import ff from '@/modules/shared/lib/feature-flags'
 import { cn } from '@/modules/shared/lib/utils'
 
 export interface TitleBreakdownChartProps {
@@ -30,7 +31,9 @@ export default function TitleSectionFinances({
           <LinkIcon className="size-4" />
         </CopySectionUrl>
       </div>
-      <div className="text-base/6 font-semibold opacity-30">{range}</div>
+      {ff.finances.YEAR_SELECTOR_ENABLED && (
+        <div className="text-base/6 font-semibold opacity-30">{range}</div>
+      )}
     </div>
   )
 }
