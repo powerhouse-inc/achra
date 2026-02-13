@@ -10,8 +10,7 @@ export const SERVICES_CARDS_MOCK: Service[] = [
       'A turnkey legal and operational setup for open-source builder teams — entity formation, invoicing, payouts, and compliance bundled under one roof.',
     description:
       'A ready-to-use operational setup that gives open-source and public-goods builder teams the legal and financial infrastructure to receive funding, pay contributors, and operate compliantly from day one.\n\nStructured as a Swiss Association — a cost-efficient, privacy-preserving legal form with strong international recognition — the Operational Hub reduces personal liability for contributors, simplifies compliance, and provides a professional foundation for teams that are already doing the work.',
-    thumbnailUrl:
-      'https://staging.achra.com/_next/image?url=%2Fservices%2Fcovers%2Fcover-02.jpg&w=3840&q=75&dpl=dpl_FjkVSKv1rrWGpfaa2yG8PPxLE1Na',
+    thumbnailUrl: '/services/covers/cover-02.jpg',
     status: RsTemplateStatus.Active,
     targetAudiences: [
       { id: '02aad85b-88d4-4d55-b841-d9e739c54a77', label: 'Builders', color: '#0ea5e9' },
