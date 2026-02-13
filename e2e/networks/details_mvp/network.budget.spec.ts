@@ -25,8 +25,8 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('5 Days Ago')).toHaveCount(14);
-    await expect(page.getByText('06-FEB-2026')).toHaveCount(7);
+    await expect(page.getByText('6 Days Ago')).toHaveCount(12);
+    await expect(page.getByText('06-FEB-2026')).toHaveCount(6);
 });
 
 test('should load all View buttons', async ({ page }) => {
@@ -86,5 +86,5 @@ test('should filter with other options in iPad Mini resolution', async ({ page }
     await expect(page.getByText('Reporting Month')).toHaveCount(12);
     await expect(page.getByText('Newest First')).toHaveCount(2);
     await expect(page.getByText('Oldest First')).toHaveCount(2);
-    await expect(page.getByText('Last Modified')).toHaveCount(10);
+    await expect(page.getByText('Last Modified')).toHaveCount(11);
 });
