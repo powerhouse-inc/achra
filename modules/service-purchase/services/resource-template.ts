@@ -23,6 +23,7 @@ export async function getResourceTemplate(
     services: [],
     setupServices: [],
     targetAudiences: [],
+    faqFields: [],
     ...state,
   }
 }

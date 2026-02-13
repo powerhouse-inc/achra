@@ -9,12 +9,6 @@ query ResourceTemplate($docId: PHID!) {
         thumbnailUrl
         summary
         status
-        faqFields {
-          answer
-          displayOrder
-          id
-          question
-        }
         contentSections {
           content
           displayOrder

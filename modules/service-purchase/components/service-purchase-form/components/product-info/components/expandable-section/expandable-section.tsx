@@ -21,11 +21,14 @@ export default function ExpandableSection({ title, description }: ExpandableSect
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-popover flex items-center justify-between gap-4 rounded-lg px-3 py-2 shadow-lg">
+      <div
+        className="bg-popover flex cursor-pointer items-center justify-between gap-4 rounded-lg px-3 py-2 shadow-lg"
+        onClick={toggleSection}
+      >
         <span className="text-ring text-sm/5.5 font-medium lg:text-base/6 lg:font-semibold">
           {title}
         </span>
-        <Button variant="icon" size="iconXsm" onClick={toggleSection}>
+        <Button variant="icon" size="iconXsm">
           <ChevronDown
             className={cn('text-foreground size-4 transition-transform duration-300 ease-out', {
               'rotate-180': isOpen,

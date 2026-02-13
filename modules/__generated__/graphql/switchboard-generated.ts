@@ -9579,7 +9579,7 @@ export type ResourceTemplateQueryVariables = Exact<{
 }>;
 
 
-export type ResourceTemplateQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, faqFields?: Array<{ __typename?: 'ResourceTemplate_FaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }> } } | null } | null };
+export type ResourceTemplateQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }> } } | null } | null };
 
 export type ResourceTemplatesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -10923,12 +10923,6 @@ export const ResourceTemplateDocument = `
         thumbnailUrl
         summary
         status
-        faqFields {
-          answer
-          displayOrder
-          id
-          question
-        }
         contentSections {
           content
           displayOrder

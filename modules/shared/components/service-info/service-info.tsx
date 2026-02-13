@@ -6,7 +6,6 @@ import {
   ResourceTemplate_TemplateStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ScrollToSectionButton } from '@/modules/services/components/service-profile/components/scroll-to-section-button'
-import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -21,6 +20,7 @@ interface ServiceInfoProps {
   description?: Maybe<string>
   thumbnailUrl?: string
   status?: ResourceTemplate_TemplateStatus
+  id: string
 }
 
 // Default cover image when thumbnailUrl is not available
@@ -34,9 +34,9 @@ export default function ServiceInfo({
   description,
   thumbnailUrl,
   status,
+  id,
 }: Readonly<ServiceInfoProps>) {
   // TODO: Remove this mock once the service info is populated
-  const service = SERVICES_CARDS_MOCK[0]
   const isUnavailable = status === ResourceTemplate_TemplateStatus.ComingSoon
   const coverImage = thumbnailUrl ?? DEFAULT_COVER
   return (
@@ -48,7 +48,7 @@ export default function ServiceInfo({
         )}
       >
         <span className={cn('text-foreground text-lg/5 font-bold sm:hidden', light && 'hidden')}>
-          {title ?? service.title}
+          {title}
         </span>
         <div className={cn('flex flex-col gap-2 sm:gap-4', light && 'gap-0')}>
           <div
@@ -60,7 +60,7 @@ export default function ServiceInfo({
           >
             <Image
               src={thumbnailUrl ?? coverImage}
-              alt={title ?? service.title}
+              alt={title ?? ''}
               fill
               className="absolute rounded-lg md:rounded-2xl"
               style={{ objectFit: 'cover' }}
@@ -75,7 +75,7 @@ export default function ServiceInfo({
             </Button>
             {showPurchaseButton && (
               <InternalLink
-                href={`/services/${service.id}/purchase` as Route}
+                href={`/services/${id}/purchase` as Route}
                 disabled={isUnavailable}
                 className={cn(isUnavailable && 'pointer-events-none opacity-50')}
                 size="lg"
@@ -93,10 +93,10 @@ export default function ServiceInfo({
               light && 'block text-base/5 lg:text-2xl/7',
             )}
           >
-            {title ?? service.title}
+            {title}
           </span>
           <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
-            {description ?? service.description ?? service.summary}
+            {description}
           </div>
         </div>
         {showActionButtons && (
