@@ -7,6 +7,7 @@ import { SimpleStatCard } from '../simple-stat-card'
 import { TransactionHistory } from '../transaction-history'
 
 interface FundingOverviewProps {
+  builderName: string
   startDate: string
   endDate: string
   balance: CalculatedBalance
@@ -14,6 +15,7 @@ interface FundingOverviewProps {
 }
 
 function FundingOverview({
+  builderName,
   startDate,
   endDate,
   balance,
@@ -21,15 +23,10 @@ function FundingOverview({
 }: FundingOverviewProps) {
   return (
     <div className="flex flex-col gap-4 md:gap-6">
-      <div className="relative flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+      <div className="relative flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
         <SectionHeader
-          title="MakerDAO Funding Overview"
-          subtitle={
-            <>
-              Totals funds made available to Powerhouse over its entire lifetime , since{' '}
-              <b>June 2021</b>.
-            </>
-          }
+          title={`${builderName} Funding Overview`}
+          subtitle={`Monitor funds made available, track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in ${builderName} Lifetime Balances.`}
           tooltip={
             "Monitor funds made available to Ecosystem Actors, track spending, returns, \
           and reserves, differentiate internal/external transactions, and gain insights into changes in MakerDAO's\
@@ -37,7 +34,7 @@ function FundingOverview({
           }
         />
 
-        <ConversionNotice className="md:absolute md:top-0 md:right-0" />
+        <ConversionNotice className="lg:absolute lg:top-0 lg:right-0" />
       </div>
 
       <div className="flex flex-col gap-4 lg:gap-6 xl:gap-8">
