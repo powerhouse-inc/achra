@@ -1,0 +1,21 @@
+query OperatorProfile($filter: buildersFilter) {
+  builders(filter: $filter) {
+    isOperator
+    id
+    name
+    code
+    slug
+    icon
+    description
+    operationalHubMember {
+      name
+    }
+    products {
+      id
+      title
+      thumbnailUrl
+      summary
+      description
+    }
+  }
+}

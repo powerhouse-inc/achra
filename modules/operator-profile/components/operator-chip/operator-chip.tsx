@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
+import { OperatorChipEnum } from '@/modules/operator-profile/types'
 import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
-import { OperatorChipEnum } from '../types'
 
 interface OperatorChipProps {
   opc: OperatorChipEnum
 }
 
-export default function OperatorChip({ opc }: OperatorChipProps) {
+function OperatorChip({ opc }: OperatorChipProps) {
   const { label, color } = useMemo(() => {
     switch (opc) {
       case OperatorChipEnum.Accountable:
@@ -33,3 +33,5 @@ export default function OperatorChip({ opc }: OperatorChipProps) {
     </GenericChip>
   )
 }
+
+export { OperatorChip }

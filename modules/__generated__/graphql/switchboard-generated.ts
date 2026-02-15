@@ -9525,6 +9525,13 @@ export type AllNetworksQueryVariables = Exact<{
 
 export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, icon?: string | null, logo?: string | null, darkThemeIcon?: string | null, darkThemeLogo?: string | null, category?: Array<NetworkCategory> | null, description?: string | null, discord?: string | null, github?: string | null, logoBig?: string | null, website?: string | null, x?: string | null, youtube?: string | null } | null }> };
 
+export type OperatorProfileQueryVariables = Exact<{
+  filter?: InputMaybe<BuildersFilter>;
+}>;
+
+
+export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, code?: string | null, slug?: string | null, icon?: any | null, description?: string | null, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null }, products: Array<{ __typename?: 'BuilderProduct', id: any, title: string, thumbnailUrl?: any | null, summary: string, description?: string | null }> }> };
+
 export type ProjectsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
 }>;
@@ -10104,6 +10111,69 @@ useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => 
 
 
 useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
+
+export const OperatorProfileDocument = `
+    query OperatorProfile($filter: buildersFilter) {
+  builders(filter: $filter) {
+    isOperator
+    id
+    name
+    code
+    slug
+    icon
+    description
+    operationalHubMember {
+      name
+    }
+    products {
+      id
+      title
+      thumbnailUrl
+      summary
+      description
+    }
+  }
+}
+    `;
+
+export const useOperatorProfileQuery = <
+      TData = OperatorProfileQuery,
+      TError = unknown
+    >(
+      variables?: OperatorProfileQueryVariables,
+      options?: Omit<UseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<OperatorProfileQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['OperatorProfile'] : ['OperatorProfile', variables],
+    queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
+    ...options
+  }
+    )};
+
+useOperatorProfileQuery.getKey = (variables?: OperatorProfileQueryVariables) => variables === undefined ? ['OperatorProfile'] : ['OperatorProfile', variables];
+
+export const useSuspenseOperatorProfileQuery = <
+      TData = OperatorProfileQuery,
+      TError = unknown
+    >(
+      variables?: OperatorProfileQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<OperatorProfileQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['OperatorProfileSuspense'] : ['OperatorProfileSuspense', variables],
+    queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseOperatorProfileQuery.getKey = (variables?: OperatorProfileQueryVariables) => variables === undefined ? ['OperatorProfileSuspense'] : ['OperatorProfileSuspense', variables];
+
+
+useOperatorProfileQuery.fetcher = (variables?: OperatorProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables, options);
 
 export const ProjectsDocument = `
     query Projects($filter: WorkstreamsFilter) {

@@ -1,11 +1,12 @@
+import { OperatorChipEnum } from '@/modules/operator-profile/types'
 import ServicesList from '@/modules/services/components/services-list'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
-import { Button } from '../shared/components/ui/button'
-import { HeaderTitleOperatorProfile } from './components/header-title-operator-profile'
-import { OperationalMetrics } from './components/operational-metrics'
-import { OperatorChipEnum } from './types'
+import { Button } from '@/modules/shared/components/ui/button'
+import { HeaderTitleOperatorProfile } from '../header-title-operator-profile'
+import { OperationalMetrics } from '../operational-metric'
 
-export function OperatorProfileSection() {
+// TODO: remove this component
+function OperatorProfileSection() {
   // TODO: [API Integration] Replace mock data with API call for operator's services
   const services = SERVICES_CARDS_MOCK
 
@@ -59,3 +60,5 @@ export function OperatorProfileSection() {
     </div>
   )
 }
+
+export { OperatorProfileSection }
