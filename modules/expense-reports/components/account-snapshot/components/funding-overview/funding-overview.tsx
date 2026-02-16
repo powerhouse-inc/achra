@@ -26,12 +26,8 @@ function FundingOverview({
       <div className="relative flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
         <SectionHeader
           title={`${builderName} Funding Overview`}
-          subtitle={`Monitor funds made available, track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in ${builderName} Lifetime Balances.`}
-          tooltip={
-            "Monitor funds made available to Ecosystem Actors, track spending, returns, \
-          and reserves, differentiate internal/external transactions, and gain insights into changes in MakerDAO's\
-          Lifetime Balances."
-          }
+          subtitle={`Totals funds made available to ${builderName} over its entire lifetime`}
+          tooltip={`Monitor funds made available to track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in ${builderName} Lifetime Balances.`}
         />
 
         <ConversionNotice className="lg:absolute lg:top-0 lg:right-0" />
@@ -52,7 +48,7 @@ function FundingOverview({
           />
           <div className="order-3 w-full lg:order-2 lg:max-w-117 lg:min-w-117 xl:max-w-146 xl:min-w-146 2xl:max-w-160 2xl:min-w-160">
             <FundChangeRate
-              netChange={balance.outflow - balance.inflow}
+              netChange={balance.inflow - balance.outflow}
               leftValue={balance.outflow}
               leftText={
                 <>
