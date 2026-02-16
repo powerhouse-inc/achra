@@ -25,7 +25,7 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('6 Days Ago')).toHaveCount(10);
+    await expect(page.getByText('9 Days Ago')).toHaveCount(10);
     await expect(page.getByText('06-FEB-2026')).toHaveCount(5);
 });
 
@@ -45,7 +45,7 @@ test('should load all Reporting Month dates', async ({ page }) => {
 
 test('should load all builder names', async ({ page }) => {
     await expect(page.getByText('PW')).toHaveCount(10);
-    await expect(page.getByText('Powerhouse')).toHaveCount(21);
+    await expect(page.getByText('Powerhouse')).toHaveCount(13);
 });
 
 test('should load all columns', async ({ page }) => {
@@ -63,8 +63,8 @@ test('should load info tooltip', async ({ page }) => {
     await expect(page.getByText('Click "View" to dive into specific financial data by department, enabling effective monitoring and management of fiscal operations.')).toHaveCount(2);
 });
 
-test('should load budget statements period', async ({ page }) => {
-    await expect(page.locator('#___SECTION___budget-statements').getByText('JAN - DEC 2025')).toBeVisible();
+test('should not load budget statements period', async ({ page }) => {
+    await expect(page.locator('#___SECTION___budget-statements').getByText('JAN - DEC 2025')).toBeHidden();
 });
 
 test('should filter by status all builder statuses', async ({ page }) => {
@@ -79,7 +79,7 @@ test('should reset all sorting of builders', async ({ page }) => {
     await page.getByRole('option', { name: 'Net Protocol Outflow' }).click();
     await page.locator('#___SECTION___budget-statements').getByText('Status').first().click();
     await page.locator('#___SECTION___budget-statements').getByRole('option', { name: 'Select All' }).click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?metricbs=Net+Protocol+Outflow&status=DRAFT,FINAL,REVIEW`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/finances?metrics=Net+Protocol+Outflow&status=DRAFT,FINAL,REVIEW`);
 
     await page.locator('#___SECTION___budget-statements').getByText('Reset Filter').first().click();
     await page.waitForTimeout(1000);
@@ -94,7 +94,7 @@ test('should filter with other options in iPad Mini resolution', async ({ page }
     await page.locator('#___SECTION___budget-statements > div > div > div > div > div.max-w-fit.hidden > button').click();
 
     await expect(page.getByText('Sort')).toBeVisible();
-    await expect(page.getByText('Reset')).toHaveCount(3);
+    await expect(page.getByText('Reset')).toHaveCount(2);
     await expect(page.getByText('Reporting Month')).toHaveCount(12);
     await expect(page.getByText('Newest First')).toHaveCount(2);
     await expect(page.getByText('Oldest First')).toHaveCount(2);
