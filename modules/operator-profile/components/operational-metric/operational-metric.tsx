@@ -1,9 +1,9 @@
-interface OperationalMetricsProps {
+interface OperationalMetricProps {
   label: string
   value: string
 }
 
-function OperationalMetric({ label, value }: OperationalMetricsProps) {
+function OperationalMetric({ label, value }: OperationalMetricProps) {
   return (
     <div className="bg-popover border-input flex w-full items-center justify-between rounded-xl border p-2 sm:gap-2">
       <span className="text-foreground text-xs/4.5 font-medium">{label}</span>

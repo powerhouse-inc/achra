@@ -1,5 +1,6 @@
 import { HeaderTitleOperatorProfileSkeleton } from '@/modules/operator-profile/components/header-title-operator-profile'
 import { OperationalMetricSkeleton } from '@/modules/operator-profile/components/operational-metric'
+import ServicesCardSkeleton from '@/modules/services/components/service-skeleton/service-card-skeleton'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
@@ -36,6 +37,15 @@ export default function OperatorProfileLoading() {
             <Skeleton className="h-5 w-full" />
             <Skeleton className="h-5 w-full" />
             <Skeleton className="h-5 w-full max-w-4/5" />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 lg:flex-1">
+          <Skeleton className="h-5.5 w-full max-w-48" />
+
+          <div className="flex flex-col gap-6">
+            <ServicesCardSkeleton />
+            <ServicesCardSkeleton />
           </div>
         </div>
       </div>

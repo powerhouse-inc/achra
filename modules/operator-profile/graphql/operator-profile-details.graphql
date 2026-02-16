@@ -3,19 +3,13 @@ query OperatorProfile($filter: buildersFilter) {
     isOperator
     id
     name
-    code
     slug
     icon
+    skills
     description
+    about
     operationalHubMember {
       name
-    }
-    products {
-      id
-      title
-      thumbnailUrl
-      summary
-      description
     }
   }
 }

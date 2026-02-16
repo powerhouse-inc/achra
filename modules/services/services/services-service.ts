@@ -9,8 +9,10 @@ const STATUS_PRIORITY: Record<string, number> = {
   [RsTemplateStatus.ComingSoon]: 1,
 }
 
-export async function getServices(): Promise<Service[]> {
-  const data = await useResourceTemplatesQuery.fetcher()()
+export async function getServices(operatorId?: string): Promise<Service[]> {
+  const data = await useResourceTemplatesQuery.fetcher({
+    filter: operatorId ? { operatorId } : undefined,
+  })()
 
   return data.resourceTemplates
     .filter(
