@@ -1,5 +1,7 @@
-import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { OperatorChipEnum } from '@/modules/operator-profile/types'
+import {
+  BuilderSkill,
+  RsTemplateStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import type { Service } from '@/modules/shared/types/services'
 
 export const SERVICES_CARDS_MOCK: Service[] = [
@@ -154,7 +156,11 @@ export const OPERATORS_MOCK = [
     id: 'accountable-opc',
     title: 'Accountable OPC',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    roles: [
+      BuilderSkill.BackendDevelopment,
+      BuilderSkill.DataEngineering,
+      BuilderSkill.DevopsEngineering,
+    ],
     activeSince: 'JUL 2022',
     minEngagement: '3 month',
     teamSize: '12 FTEs',
@@ -164,7 +170,11 @@ export const OPERATORS_MOCK = [
     id: 'powerhouse-genesis-oh',
     title: 'Powerhouse Genesis OH',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    roles: [
+      BuilderSkill.BackendDevelopment,
+      BuilderSkill.DataEngineering,
+      BuilderSkill.DevopsEngineering,
+    ],
     activeSince: 'JUL 2022',
     minEngagement: '3 month',
     teamSize: '12 FTEs',
@@ -174,7 +184,11 @@ export const OPERATORS_MOCK = [
     id: 'accountable-opc-1',
     title: 'Accountable OPC',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    roles: [OperatorChipEnum.Accountable, OperatorChipEnum.Budgeting, OperatorChipEnum.Forecasting],
+    roles: [
+      BuilderSkill.BackendDevelopment,
+      BuilderSkill.DataEngineering,
+      BuilderSkill.DevopsEngineering,
+    ],
     activeSince: 'JUL 2022',
     minEngagement: '3 month',
     teamSize: '12 FTEs',

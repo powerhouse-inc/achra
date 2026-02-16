@@ -1,7 +1,7 @@
 import { FileText, Info } from 'lucide-react'
 import Link from 'next/link'
-import { OperatorChip } from '@/modules/operator-profile/components/operator-chip'
-import type { OperatorChipEnum } from '@/modules/operator-profile/types'
+import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
+import BuildersSkillsChip from '@/modules/shared/components/chips/builders-skills-chip/builders-skills-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
@@ -10,7 +10,7 @@ import type { Route } from 'next'
 interface OperatorCardProps {
   title: string
   description: string
-  roles: OperatorChipEnum[]
+  roles: BuilderSkill[]
   activeSince: string
   minEngagement: string
   teamSize: string
@@ -37,7 +37,7 @@ function OperatorCard({
       <CardContent className="flex flex-col gap-4 p-0">
         <div className="flex flex-wrap gap-2">
           {roles.map((role) => (
-            <OperatorChip key={role} opc={role} />
+            <BuildersSkillsChip key={role} skill={role} />
           ))}
         </div>
         <p className="text-foreground text-sm/5.5">{description}</p>

@@ -1,5 +1,5 @@
-query ResourceTemplates {
-  resourceTemplates {
+query ResourceTemplates($filter: RSResourceTemplatesFilter) {
+  resourceTemplates(filter: $filter) {
     contentSections {
       id
       title

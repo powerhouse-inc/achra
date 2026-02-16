@@ -9530,7 +9530,7 @@ export type OperatorProfileQueryVariables = Exact<{
 }>;
 
 
-export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, code?: string | null, slug?: string | null, icon?: any | null, description?: string | null, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null }, products: Array<{ __typename?: 'BuilderProduct', id: any, title: string, thumbnailUrl?: any | null, summary: string, description?: string | null }> }> };
+export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
 
 export type ProjectsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -9588,7 +9588,9 @@ export type ResourceTemplateQueryVariables = Exact<{
 
 export type ResourceTemplateQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }> } } | null } | null };
 
-export type ResourceTemplatesQueryVariables = Exact<{ [key: string]: never; }>;
+export type ResourceTemplatesQueryVariables = Exact<{
+  filter?: InputMaybe<RsResourceTemplatesFilter>;
+}>;
 
 
 export type ResourceTemplatesQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', description?: string | null, infoLink?: any | null, lastModified: any, title: string, thumbnailUrl?: any | null, operatorId: any, recurringServices: Array<string>, status: RsTemplateStatus, summary: string, setupServices: Array<string>, id: any, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }>, facetTargets: Array<{ __typename?: 'RSFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, question?: string | null, answer?: string | null, displayOrder: number }> | null, targetAudiences: Array<{ __typename?: 'RSTargetAudience', id: any, label: string, color?: string | null }> }> };
@@ -10118,19 +10120,13 @@ export const OperatorProfileDocument = `
     isOperator
     id
     name
-    code
     slug
     icon
+    skills
     description
+    about
     operationalHubMember {
       name
-    }
-    products {
-      id
-      title
-      thumbnailUrl
-      summary
-      description
     }
   }
 }
@@ -11045,8 +11041,8 @@ useSuspenseResourceTemplateQuery.getKey = (variables: ResourceTemplateQueryVaria
 useResourceTemplateQuery.fetcher = (variables: ResourceTemplateQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables, options);
 
 export const ResourceTemplatesDocument = `
-    query ResourceTemplates {
-  resourceTemplates {
+    query ResourceTemplates($filter: RSResourceTemplatesFilter) {
+  resourceTemplates(filter: $filter) {
     contentSections {
       id
       title
