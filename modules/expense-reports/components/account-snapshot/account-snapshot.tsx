@@ -26,7 +26,7 @@ function AccountSnapshot({ expenseReport, builderName }: AccountSnapshotProps) {
         balance={overviewBalance}
       />
       <ReservesSnapshot
-        teamName="Powerhouse"
+        builderName={builderName}
         startDate={expenseReport.startDate}
         endDate={expenseReport.endDate}
         balance={reservesBalance}
