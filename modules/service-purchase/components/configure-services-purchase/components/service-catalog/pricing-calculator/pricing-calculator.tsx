@@ -2,18 +2,18 @@
 
 import { useCallback, useMemo, useState } from 'react'
 import { Card } from '@/modules/shared/components/ui/card'
-import { Plan, PRICING_PLANS, type PricingData } from '../types'
-import { GrandTotalRowCatalog } from './grand-total-row-catalog'
-import HeaderCatalogPlan from './header-catalog-plan'
-import { PricingCalculatorProvider } from './pricing-calculator-context'
 import {
   ServiceCatalogBody,
   ServiceCatalogFooter,
   ServiceCatalogHeader,
   ServiceCatalogRoot,
   ServiceCatalogRow,
-} from '.'
-import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
+} from '..'
+import { Plan, PRICING_PLANS, type PricingData } from '../../types'
+import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
+import { HeaderCatalogPlan } from '../header-catalog-plan'
+import { PricingCalculatorProvider } from '../pricing-calculator-context'
+import type { SectionId } from '../../../../service-purchase-form/service-purchase-form'
 
 export interface PricingCalculatorProps {
   selectedPlan?: Plan

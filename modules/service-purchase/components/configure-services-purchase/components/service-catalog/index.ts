@@ -1,4 +1,4 @@
-export * from './pricing-calculator'
+export * from './pricing-calculator/pricing-calculator'
 export * from '../types'
 // Composable ServiceCatalog components
 export * from './service-catalog-root'
