@@ -34,14 +34,14 @@ test('should load all builder statuses', async ({ page }) => {
     await expect(page.getByText('COMPLETED')).toHaveCount(0);
     await expect(page.getByText('ON HOLD')).toHaveCount(0);
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
-    await expect(page.getByText('ACTIVE')).toHaveCount(6);
+    await expect(page.getByText('ACTIVE')).toHaveCount(8);
     await expect(page.getByText('INACTIVE')).toHaveCount(0);
 });
 
 test('should load all builder skills', async ({ page }) => {
-    await expect(page.getByText('Facilitator')).toHaveCount(6);
+    await expect(page.getByText('Facilitator')).toHaveCount(9);
     await expect(page.getByText('Backend Development')).toHaveCount(3);
-    await expect(page.getByText('Full Stack Development')).toHaveCount(3);
+    await expect(page.getByText('Full Stack Development')).toHaveCount(6);
     await expect(page.getByText('Devops Engineering')).toHaveCount(0);
     await expect(page.getByText('Smart Contract Development')).toHaveCount(0);
     await expect(page.getByText('UI/UX Design')).toHaveCount(0);
@@ -67,8 +67,10 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('5 Days Ago')).toHaveCount(4);
-    await expect(page.getByText('06-FEB-2026')).toHaveCount(2);
+    await expect(page.getByText('9 Days Ago')).toHaveCount(2);
+    await expect(page.getByText('3 Days Ago')).toHaveCount(4);
+    await expect(page.getByText('06-FEB-2026')).toHaveCount(1);
+    await expect(page.getByText('12-FEB-2026')).toHaveCount(2);
 });
 
 test('should load all builder links', async ({ page }) => {
@@ -177,14 +179,14 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('5 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('3 Days Ago')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('5 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('9 Days Ago')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
