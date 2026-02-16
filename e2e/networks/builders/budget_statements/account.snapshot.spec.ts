@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements?section=account-snapshot`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements?section=account-snapshot&viewMonth=Dec2025`);
 
     await page.waitForLoadState('networkidle');
 });
@@ -50,8 +50,8 @@ test('should load the MakerDAO Funding Overview', async ({ page }) => {
     await expect(page.getByText('*All values are converted to USDS')).toHaveCount(1);
     await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
-    await expect(page.getByText('0')).toHaveCount(22);
-    await expect(page.getByText('USD')).toHaveCount(19);
+    await expect(page.getByText('0')).toHaveCount(11);
+    await expect(page.getByText('USD')).toHaveCount(15);
     await expect(page.getByText('424,477')).toHaveCount(2);
     await expect(page.getByText('Net Change')).toHaveCount(2);
     await expect(page.getByText('Extra Funds Made Available')).toBeVisible();
@@ -68,7 +68,7 @@ test('should load View Transaction History', async ({ page }) => {
     await expect(page.getByText('0x534e17b1ea6fbc...')).toBeVisible();
     await expect(page.getByText('Recipient Address')).toBeVisible();
     await expect(page.getByText('N/A')).toHaveCount(1);
-    await expect(page.getByText('0xF130...0460')).toHaveCount(2);
+    await expect(page.getByText('0xF130...0460')).toHaveCount(1);
     await expect(page.getByText('Amount')).toBeVisible();
     await expect(page.getByText('424,477')).toHaveCount(3);
 
@@ -79,7 +79,7 @@ test('should load View Transaction History', async ({ page }) => {
     await expect(page.getByText('0xc78c5d81042ce1...')).toBeHidden();
     await expect(page.getByText('Recipient Address')).toBeHidden();
     await expect(page.getByText('Powerhouse Genesis Operational Hub Association')).toBeHidden();
-    await expect(page.getByText('0xf130...0460')).toHaveCount(1);
+    await expect(page.getByText('0xf130...0460')).toHaveCount(0);
     await expect(page.getByText('Amount')).toBeHidden();
     await expect(page.getByText('291,667')).toBeHidden();
 });
@@ -101,10 +101,10 @@ test('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
     await expect(page.getByText('-41,231')).toBeVisible();
     await expect(page.getByText('Initial Reserves')).toBeVisible();
-    await expect(page.getByText('0')).toHaveCount(22);
-    await expect(page.getByText('Inflow')).toHaveCount(3);
+    await expect(page.getByText('0')).toHaveCount(11);
+    await expect(page.getByText('Inflow')).toHaveCount(2);
     await expect(page.getByText('831,413')).toHaveCount(2);
-    await expect(page.getByText('Outflow')).toHaveCount(3);
+    await expect(page.getByText('Outflow')).toHaveCount(2);
     await expect(page.getByText('790,181')).toHaveCount(2);
     await expect(page.getByText('New Reserves')).toBeVisible();
 });
