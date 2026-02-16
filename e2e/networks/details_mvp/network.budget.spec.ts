@@ -25,12 +25,12 @@ test('should load all builder statuses', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('6 Days Ago')).toHaveCount(10);
-    await expect(page.getByText('06-FEB-2026')).toHaveCount(6);
+    await expect(page.getByText('9 Days Ago')).toHaveCount(12);
+    await expect(page.getByText('06-FEB-2026')).toHaveCount(5);
 });
 
 test('should load all View buttons', async ({ page }) => {
-    await expect(page.getByText('View')).toHaveCount(5);
+    await expect(page.getByText('View')).toHaveCount(6);
 });
 
 test('should load all Actuals', async ({ page }) => {
@@ -45,7 +45,7 @@ test('should load all Reporting Month dates', async ({ page }) => {
 
 test('should load all builder names', async ({ page }) => {
     await expect(page.getByText('PW')).toHaveCount(12);
-    await expect(page.getByText('Powerhouse')).toHaveCount(15);
+    await expect(page.getByText('Powerhouse')).toHaveCount(16);
 });
 
 test('should load all columns', async ({ page }) => {
@@ -68,7 +68,7 @@ test('should reset all sorting of builders', async ({ page }) => {
     await page.getByRole('option', { name: 'Net Protocol Outflow' }).click();
     await page.locator('#___SECTION___finances').getByText('Status').first().click();
     await page.locator('#___SECTION___finances').getByRole('option', { name: 'Select All' }).click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse?metricbs=Net+Protocol+Outflow&status=DRAFT,FINAL,REVIEW`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse?metrics=Net+Protocol+Outflow&status=DRAFT,FINAL,REVIEW`);
 
     await page.locator('#___SECTION___finances').getByText('Reset Filter').first().click();
     await page.waitForTimeout(1000);
