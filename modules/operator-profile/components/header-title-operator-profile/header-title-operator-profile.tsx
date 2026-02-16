@@ -1,16 +1,13 @@
 import { FileText } from 'lucide-react'
-import OperatorChip from './operator-chip'
-import type { OperatorChipEnum } from '../types'
+import type { OperatorChipEnum } from '@/modules/operator-profile/types'
+import { OperatorChip } from '../operator-chip'
 
 interface HeaderTitleOperatorProfileProps {
   title: string
   operatorChips: OperatorChipEnum[]
 }
 
-export function HeaderTitleOperatorProfile({
-  title,
-  operatorChips,
-}: HeaderTitleOperatorProfileProps) {
+function HeaderTitleOperatorProfile({ title, operatorChips }: HeaderTitleOperatorProfileProps) {
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-2">
@@ -27,3 +24,5 @@ export function HeaderTitleOperatorProfile({
     </div>
   )
 }
+
+export { HeaderTitleOperatorProfile }

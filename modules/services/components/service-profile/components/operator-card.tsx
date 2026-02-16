@@ -1,6 +1,6 @@
 import { FileText, Info } from 'lucide-react'
 import Link from 'next/link'
-import OperatorChip from '@/modules/operator-profile/components/operator-chip'
+import { OperatorChip } from '@/modules/operator-profile/components/operator-chip'
 import type { OperatorChipEnum } from '@/modules/operator-profile/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
