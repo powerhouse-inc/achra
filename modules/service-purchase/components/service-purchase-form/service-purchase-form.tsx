@@ -200,7 +200,7 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
               id={resourceTemplate.id}
               light={activeStep !== 'product-info'}
               title={resourceTemplate.title}
-              description={resourceTemplate.description}
+              summary={resourceTemplate.summary}
               thumbnailUrl={resourceTemplate.thumbnailUrl}
               status={resourceTemplate.status}
             />
@@ -217,7 +217,7 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
                 {step.value === 'product-info' && (
                   <ProductInfo
-                    summary={resourceTemplate.summary}
+                    description={resourceTemplate.description}
                     contentSections={resourceTemplate.contentSections}
                   />
                 )}
