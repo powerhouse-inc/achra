@@ -27,7 +27,7 @@ export const SERVICES_DATA: PricingData = {
     {
       id: 'fbddf8ba-bc6e-47a0-8947-84f9b6a944cb',
       categoryKey: 'sno-function',
-      categoryLabel: 'SNO Function',
+      categoryLabel: 'Organizational Function',
       selectedOptions: ['Operational Hub for Open Source Builders'],
     },
   ],
