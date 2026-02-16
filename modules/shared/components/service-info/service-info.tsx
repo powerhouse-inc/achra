@@ -17,7 +17,7 @@ interface ServiceInfoProps {
   showPurchaseButton?: boolean
   showActionButtons?: boolean
   title?: string
-  description?: Maybe<string>
+  summary?: Maybe<string>
   thumbnailUrl?: string
   status?: ResourceTemplate_TemplateStatus
   id: string
@@ -31,7 +31,7 @@ export default function ServiceInfo({
   showPurchaseButton,
   showActionButtons,
   title,
-  description,
+  summary,
   thumbnailUrl,
   status,
   id,
@@ -96,7 +96,7 @@ export default function ServiceInfo({
             {title}
           </span>
           <div className={cn('text-foreground text-sm/5.5 lg:text-base/6', light && 'hidden')}>
-            {description}
+            {summary}
           </div>
         </div>
         {showActionButtons && (

@@ -17,12 +17,12 @@ export default function ServiceProfile() {
         showPurchaseButton
         showActionButtons
         title={service.title}
-        description={service.description}
+        summary={service.summary}
         thumbnailUrl={service.thumbnailUrl}
         status={service.status as unknown as ResourceTemplate_TemplateStatus}
       />
       <ProductInfo
-        summary={service.summary}
+        description={service.description}
         contentSections={service.contentSections as unknown as ResourceTemplate_ContentSection[]}
       />
       <PurchaseSection />

@@ -1,6 +1,5 @@
 'use client'
-import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment, startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
+import { startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import type { ResourceTemplate_ResourceTemplateState } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -15,8 +14,7 @@ import {
 import { ServiceInfo } from '@/modules/shared/components/service-info'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 import { SERVICES_DATA } from '../../mock/mock-data'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
@@ -25,6 +23,7 @@ import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
+import { StepsTriggersList } from './components/steps-trigger/steps-triggers-list'
 
 export const SECTION_IDS = {
   LEGAL_SETUP: 'legal-setup',
@@ -46,14 +45,6 @@ const initialState: ServiceRequestFormState = {
   success: false,
 }
 
-const STEP_ICONS = {
-  'product-info': <InfoIcon className="size-4 lg:size-6" />,
-  'select-operator': <FileText className="size-4 lg:size-6" />,
-  'configure-services': <BookOpenCheck className="size-4 lg:size-6" />,
-  summary: <BookOpenText className="size-4 lg:size-6" />,
-  confirmation: <CheckCheck className="size-4 lg:size-6" />,
-}
-
 export interface ServicePurchaseFormValues {
   operatorId?: string
   name: string
@@ -72,7 +63,7 @@ export interface ServicePurchaseFormProps {
 
 export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchaseFormProps) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
-  const { activeStep, visitedSteps, goToStep, goBack } = useServicePurchaseStep()
+  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -209,7 +200,7 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
               id={resourceTemplate.id}
               light={activeStep !== 'product-info'}
               title={resourceTemplate.title}
-              description={resourceTemplate.description}
+              summary={resourceTemplate.summary}
               thumbnailUrl={resourceTemplate.thumbnailUrl}
               status={resourceTemplate.status}
             />
@@ -221,61 +212,12 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
             }}
             className="w-full gap-8"
           >
-            <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">
-              {STEPS.map((step, index) => {
-                const isActive = activeStep === step.value
-                const isVisited = visitedSteps.includes(step.value)
-
-                return (
-                  <Fragment key={step.value}>
-                    <TabsTrigger
-                      value={step.value}
-                      className={cn(
-                        'md:border-border md:data-[state=active]:border-primary dark:md:data-[state=active]:border-primary flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none',
-                        isVisited && !isActive && 'md:border-primary/70 dark:md:border-primary/70',
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold md:w-fit md:rounded-l-lg md:rounded-r-none lg:p-2.75 lg:text-base/6 2xl:rounded-l-xl 2xl:p-3 2xl:text-lg/6',
-                          isActive && 'bg-primary text-primary-foreground',
-                          isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
-                        )}
-                      >
-                        {index + 1}
-                      </div>
-                      <div
-                        className={cn(
-                          'text-foreground/50 hidden h-full items-center gap-1 rounded-r-lg px-1 md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
-                          isActive && 'text-primary',
-                          isVisited && !isActive && 'text-primary/70',
-                        )}
-                      >
-                        {STEP_ICONS[step.value]}
-                        <span className="text-xs/4.5 font-medium lg:text-base/6 lg:font-semibold 2xl:text-xl/6 2xl:font-bold">
-                          {step.label}
-                        </span>
-                      </div>
-                    </TabsTrigger>
-                    {index < STEPS.length - 1 && (
-                      <Separator
-                        orientation="horizontal"
-                        className={cn(
-                          'bg-border mx-1 h-0.5! max-w-8! flex-1',
-                          visitedSteps.includes(STEPS[index + 1].value) && 'bg-primary',
-                        )}
-                      />
-                    )}
-                  </Fragment>
-                )
-              })}
-            </TabsList>
-
+            <StepsTriggersList />
             {STEPS.map((step) => (
               <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
                 {step.value === 'product-info' && (
                   <ProductInfo
-                    summary={resourceTemplate.summary}
+                    description={resourceTemplate.description}
                     contentSections={resourceTemplate.contentSections}
                   />
                 )}

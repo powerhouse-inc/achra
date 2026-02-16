@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import ServicePurchase from '@/modules/service-purchase'
+import { StepOneSkeleton } from '@/modules/service-purchase/components/service-purchase-form/components/step-one-skeleton/step-one-skeleton'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
@@ -13,8 +14,8 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
   return (
     <PageContent className="gap-6">
       <ErrorBoundaryWithPresets>
-        {/* TODO: Implement the missing skeletons components for the service purchase page */}
-        <Suspense fallback={<div>Loading...</div>}>
+        {/* TODO: The loading state will depend on the step the user lands on */}
+        <Suspense fallback={<StepOneSkeleton />}>
           <ServicePurchase docId={serviceSlug} />
         </Suspense>
       </ErrorBoundaryWithPresets>
