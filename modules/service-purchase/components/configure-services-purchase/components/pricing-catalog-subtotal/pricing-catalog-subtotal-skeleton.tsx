@@ -6,14 +6,14 @@ import { PRICING_GRID } from '../service-catalog/pricing-calculator-context'
 function PricingCatalogSubtotalSkeleton() {
   return (
     <div className={cn('grid', PRICING_GRID.responsive, 'items-center')}>
-      <span
+      <div
         className={cn(
           'border-input bg-background flex min-h-14 items-center border-y px-4 lg:px-6',
           'sticky left-0 z-10 lg:static',
         )}
       >
         <Skeleton className="bg-border h-3.5 w-20" />
-      </span>
+      </div>
 
       {/* Mobile: single column */}
       <div className="border-input flex min-h-14 min-w-0 items-center justify-center border-y px-4 lg:hidden">

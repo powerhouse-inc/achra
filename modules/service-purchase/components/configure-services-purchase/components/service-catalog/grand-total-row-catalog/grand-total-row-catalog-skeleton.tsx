@@ -6,14 +6,14 @@ import { PRICING_GRID } from '../pricing-calculator-context'
 function GrandTotalRowCatalogSkeleton() {
   return (
     <div className={cn('grid', PRICING_GRID.responsive, 'items-center')}>
-      <span
+      <div
         className={cn(
           'bg-background flex min-h-14 items-center px-4 lg:px-6',
           'sticky left-0 z-10 lg:static',
         )}
       >
         <Skeleton className="bg-border h-4 w-40" />
-      </span>
+      </div>
 
       {/* Mobile: single column */}
       <div className="flex min-h-14 min-w-0 items-center justify-center px-4 lg:hidden">

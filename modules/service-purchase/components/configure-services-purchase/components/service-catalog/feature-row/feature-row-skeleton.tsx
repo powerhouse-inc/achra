@@ -1,6 +1,6 @@
+import { Check } from 'lucide-react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { CheckSkeleton } from '../header-catalog-plan'
 import { PRICING_GRID } from '../pricing-calculator-context'
 
 interface FeatureRowSkeletonProps {
@@ -23,7 +23,7 @@ function FeatureRowSkeleton({ labelWidth = 'w-36' }: Readonly<FeatureRowSkeleton
 
       {/* Mobile: single value column */}
       <div className="border-input flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 lg:hidden">
-        <CheckSkeleton />
+        <Check className="text-border size-4" />
       </div>
 
       {/* Desktop: 4 value columns */}
@@ -34,7 +34,7 @@ function FeatureRowSkeleton({ labelWidth = 'w-36' }: Readonly<FeatureRowSkeleton
           key={i}
           className="border-input hidden min-h-14 min-w-0 items-center justify-center border-b px-6 lg:flex"
         >
-          <CheckSkeleton />
+          <Check className="text-border size-4" />
         </div>
       ))}
     </div>
