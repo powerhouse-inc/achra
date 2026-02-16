@@ -75,6 +75,9 @@ export default async function ExpenseReportsPage({
     return redirect(urlObject.toString() as Route)
   }
 
+  const accountSnapshotBuilderName =
+    builder.operationalHubMember.name ?? builder.name ?? builder.slug ?? builder.code ?? ''
+
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
@@ -102,7 +105,11 @@ export default async function ExpenseReportsPage({
             fallback={<AccountSnapshotSkeleton />}
             key={`${section}-${formatMonthString(selectedMonth)}`}
           >
-            <AccountSnapshotContainer teamId={builder.id} month={selectedMonth} />
+            <AccountSnapshotContainer
+              teamId={builder.id}
+              builderName={accountSnapshotBuilderName}
+              month={selectedMonth}
+            />
           </Suspense>
         </div>
       )}

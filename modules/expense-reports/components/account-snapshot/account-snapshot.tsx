@@ -8,9 +8,10 @@ import { ReservesSnapshot } from './components/reserves-snapshot'
 
 interface AccountSnapshotProps {
   expenseReport: Partial<BudgetStatementSnapshotReport>
+  builderName: string
 }
 
-function AccountSnapshot({ expenseReport }: AccountSnapshotProps) {
+function AccountSnapshot({ expenseReport, builderName }: AccountSnapshotProps) {
   const overviewBalance = getBalance(expenseReport, SnapAccountType.Source)
   const reservesBalance = getBalance(expenseReport, SnapAccountType.Internal)
   const transactionHistory = getTransactionHistory(expenseReport)
@@ -18,6 +19,7 @@ function AccountSnapshot({ expenseReport }: AccountSnapshotProps) {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <FundingOverview
+        builderName={builderName}
         transactionHistory={transactionHistory}
         startDate={expenseReport.startDate}
         endDate={expenseReport.endDate}
