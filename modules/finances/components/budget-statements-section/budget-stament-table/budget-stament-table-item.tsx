@@ -34,7 +34,7 @@ export function BudgetStamentTableItem({
     <TableRow className={className}>
       <TableCell className="flex h-full w-[27%] p-0!">
         <Link
-          href={`/network/powerhouse/builders/${budgetStatement.owner.code}`}
+          href={`/network/powerhouse/builders/${ownerNameForNavigation}/budget-statements?viewMonth=${reportMonthTrimmed}`}
           className="flex h-full w-full items-center pl-4"
         >
           <ContributorProfileInfo
