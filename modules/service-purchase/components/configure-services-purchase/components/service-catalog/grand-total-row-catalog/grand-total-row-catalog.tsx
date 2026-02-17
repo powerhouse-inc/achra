@@ -1,15 +1,15 @@
 'use client'
 
 import { useMemo } from 'react'
-import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
+import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import { computeGrandTotals } from '@/modules/service-purchase/utils/utils'
 import { cn } from '@/modules/shared/lib/utils'
-import { Plan, PRICING_PLANS, type PricingData } from '../../types'
-import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
+import { usePricingCalculatorContext } from '../pricing-calculator-context'
 
 interface GrandTotalRowCatalogProps {
-  selectedPlan: Plan
-  enabledSections?: Record<SectionId, boolean>
-  servicesData: PricingData
+  selectedPlan?: string
+  enabledSections?: Record<string, boolean>
+  servicesData: RsServiceOffering
 }
 
 export function GrandTotalRowCatalog({
@@ -17,75 +17,69 @@ export function GrandTotalRowCatalog({
   enabledSections,
   servicesData,
 }: Readonly<GrandTotalRowCatalogProps>) {
-  const { currentMobilePlan } = usePricingCalculatorContext()
+  const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
 
-  const planTotals = useMemo(() => {
-    const totals: Record<Plan, string> = {
-      [Plan.Basic]: '$0',
-      [Plan.Team]: '$0',
-      [Plan.Premium]: '$0',
-      [Plan.Enterprise]: '$0',
-    }
-
-    PRICING_PLANS.forEach((plan) => {
-      const tier = servicesData.tiers.find((t) => t.id === plan)
-      if (!tier) return
-
-      let total = tier.monthlyPrice
-
-      // Add prices from enabled toggle sections
-      servicesData.sections?.forEach((section) => {
-        if (section.hasToggle && enabledSections?.[section.id as SectionId]) {
-          total += section.price ?? 0
-        }
-      })
-
-      // Format total - handle "Custom" case for enterprise
-      if (plan === Plan.Enterprise && tier.monthlyPrice === 0) {
-        totals[plan] = total > 0 ? `$${total}/mo` : 'Custom'
-      } else {
-        totals[plan] = `$${total}/mo`
-      }
-    })
-
-    return totals
-  }, [enabledSections, servicesData.sections, servicesData.tiers])
+  const planTotals = useMemo(
+    () => computeGrandTotals(servicesData.tiers, servicesData.optionGroups, enabledSections),
+    [servicesData.tiers, servicesData.optionGroups, enabledSections],
+  )
 
   return (
-    <div className={cn('grid items-center', PRICING_GRID.responsive)}>
+    <div
+      className={cn('items-center', 'grid grid-cols-2 lg:grid-cols-[var(--grid-cols)]')}
+      style={
+        {
+          '--grid-cols': `4fr repeat(${tierNames.length}, 1fr)`,
+        } as React.CSSProperties
+      }
+    >
       {/* Label column - sticky on mobile */}
       <span
         className={cn(
           'bg-background text-foreground flex min-h-14 items-center px-4 text-xs font-bold uppercase lg:px-6 lg:text-sm',
-          // Sticky positioning for mobile
           'sticky left-0 z-10 lg:static',
         )}
       >
-        {servicesData.grandTotal?.label}
+        Grand Total (Recurring)
       </span>
 
       {/* Mobile: Show only current plan */}
       <div
         className={cn(
           'flex min-h-14 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
-          selectedPlan === currentMobilePlan && 'bg-primary/30 font-bold',
+          selectedPlan === currentMobilePlan && 'bg-primary/10',
         )}
       >
-        <span className="text-sm font-bold lg:text-base">{planTotals[currentMobilePlan]}</span>
+        <span
+          className={cn(
+            'text-sm font-bold',
+            selectedPlan === currentMobilePlan ? 'text-primary' : 'text-foreground',
+          )}
+        >
+          {planTotals[currentMobilePlan]}
+        </span>
       </div>
 
       {/* Desktop: Show all plans */}
-      {PRICING_PLANS.map((plan) => (
-        <div
-          key={plan}
-          className={cn(
-            'hidden min-h-14 min-w-0 items-center justify-center px-6 transition-colors lg:flex',
-            selectedPlan === plan && 'bg-primary/30 font-bold',
-          )}
-        >
-          <span className="text-base font-bold">{planTotals[plan]}</span>
-        </div>
-      ))}
+      {tierNames.map((plan) => {
+        const isActive = selectedPlan === plan
+
+        return (
+          <div
+            key={plan}
+            className={cn(
+              'hidden min-h-14 min-w-0 items-center justify-center px-6 transition-colors lg:flex',
+              isActive && 'bg-primary/10',
+            )}
+          >
+            <span
+              className={cn('text-sm font-bold', isActive ? 'text-primary' : 'text-foreground')}
+            >
+              {planTotals[plan]}
+            </span>
+          </div>
+        )
+      })}
     </div>
   )
 }

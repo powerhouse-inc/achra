@@ -3,8 +3,6 @@
 import 'server-only'
 import { z } from 'zod'
 
-import { Plan } from '@/modules/service-purchase/components/configure-services-purchase/components/types'
-import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { sendServiceRequest } from '../lib/send-service-request'
 import type { ServiceRequestFormState } from '../config/types'
 
@@ -23,7 +21,7 @@ const serviceRequestSchema = z.object({
   name: z.string().optional().default(''),
   teamName: z.string().min(2, { message: 'Team name must be at least 2 characters.' }),
   email: emailSchema,
-  selectedPlan: z.enum([Plan.Basic, Plan.Team, Plan.Premium, Plan.Enterprise]),
+  selectedPlan: z.string().min(1, { message: 'Please select a plan.' }),
   enabledSections: z.string(),
   configuration: z.string(),
 })
@@ -61,7 +59,7 @@ export async function submitServiceRequestAction(
       }
     }
 
-    const enabledSections = JSON.parse(result.data.enabledSections) as Record<SectionId, boolean>
+    const enabledSections = JSON.parse(result.data.enabledSections) as Record<string, boolean>
     const configuration = JSON.parse(result.data.configuration) as {
       legalEntity: string
       teamStructure: string
@@ -72,7 +70,7 @@ export async function submitServiceRequestAction(
       name: result.data.name,
       teamName: result.data.teamName,
       email: result.data.email,
-      selectedPlan: result.data.selectedPlan as Plan,
+      selectedPlan: result.data.selectedPlan,
       enabledSections,
       configuration,
     })

@@ -2,10 +2,9 @@
 
 import { createContext, useContext, useMemo } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Plan } from '../types'
 
 interface ServiceCatalogContextValue {
-  activePlan: Plan
+  activePlan?: string
   isEnabled: boolean
 }
 
@@ -20,7 +19,7 @@ export function useServiceCatalogContext() {
 }
 
 export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {
-  activePlan: Plan
+  activePlan?: string
   isEnabled: boolean
 }
 

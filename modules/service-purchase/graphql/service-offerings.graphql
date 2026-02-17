@@ -9,6 +9,13 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
     description
     lastModified
     resourceTemplateId
+    serviceGroups {
+      billingCycle
+      description
+      displayOrder
+      id
+      name
+    }
     facetTargets {
       categoryKey
       categoryLabel
@@ -36,6 +43,7 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       optionGroupId
       title
     }
+
     tiers {
       description
       id
@@ -60,11 +68,14 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       }
       usageLimits {
         id
+
         metric
         notes
+
         serviceId
         unitName
         unitPrice
+
         unitPriceCurrency
       }
     }

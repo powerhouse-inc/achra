@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_GRID } from '../pricing-calculator-context'
+import { PRICING_GRID } from '../feature-row/feature-row-skeleton'
 
 /** Skeleton for the grand total row at the bottom */
 function GrandTotalRowCatalogSkeleton() {

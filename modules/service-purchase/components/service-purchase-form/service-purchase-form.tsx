@@ -5,6 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import type {
   BuilderProfile_BuilderProfileState,
   ResourceTemplate_ResourceTemplateState,
+  RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
@@ -19,31 +20,13 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Form } from '@/modules/shared/components/ui/form'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
-import { SERVICES_DATA } from '../../mock/mock-data'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
 import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
-import { Plan } from '../configure-services-purchase/components/types'
-import { SummarySection } from '../summary/summary-section'
+import { SummarySection } from '../summary'
 import Confirmation from './components/confirmation/confirmation'
 import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import { StepsTriggersList } from './components/steps-trigger/steps-triggers-list'
-
-export const SECTION_IDS = {
-  LEGAL_SETUP: 'legal-setup',
-  RECURRING_OPERATIONAL: 'recurring-operational',
-  FINANCE_PACK: 'finance-pack',
-  HOSTING_SUITE: 'hosting-suite',
-} as const
-
-export type SectionId = (typeof SECTION_IDS)[keyof typeof SECTION_IDS]
-
-const INITIAL_ENABLED_SECTIONS: Record<SectionId, boolean> = {
-  [SECTION_IDS.LEGAL_SETUP]: true,
-  [SECTION_IDS.RECURRING_OPERATIONAL]: true,
-  [SECTION_IDS.FINANCE_PACK]: true,
-  [SECTION_IDS.HOSTING_SUITE]: false,
-}
 
 const initialState: ServiceRequestFormState = {
   success: false,
@@ -57,19 +40,21 @@ export interface ServicePurchaseFormValues {
   legalEntity: string
   teamStructure: string
   anonymityLevel: string
-  selectedPlan: Plan
-  enabledSections: Record<SectionId, boolean>
+  selectedPlan?: string
+  enabledSections: Record<string, boolean>
 }
 
 export interface ServicePurchaseFormProps {
   resourceTemplate: ResourceTemplate_ResourceTemplateState
   operator: BuilderProfile_BuilderProfileState
+  services: RsServiceOffering[]
 }
 
 export default function ServicePurchaseForm({
   resourceTemplate,
   operator,
-}: ServicePurchaseFormProps) {
+  services,
+}: Readonly<ServicePurchaseFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
@@ -83,8 +68,8 @@ export default function ServicePurchaseForm({
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
-      selectedPlan: Plan.Team,
-      enabledSections: INITIAL_ENABLED_SECTIONS,
+      selectedPlan: '',
+      enabledSections: {},
     },
   })
 
@@ -106,14 +91,14 @@ export default function ServicePurchaseForm({
   const enabledSections = useWatch({ control, name: 'enabledSections' })
 
   const handlePlanChange = useCallback(
-    (plan: Plan) => {
+    (plan: string) => {
       setValue('selectedPlan', plan)
     },
     [setValue],
   )
 
   const handleSectionToggle = useCallback(
-    (sectionId: SectionId, enabled: boolean) => {
+    (sectionId: string, enabled: boolean) => {
       setValue('enabledSections', {
         ...enabledSections,
         [sectionId]: enabled,
@@ -147,7 +132,7 @@ export default function ServicePurchaseForm({
     formData.append('teamName', data.teamName)
     formData.append('operatorId', data.operatorId ?? '')
     formData.append('email', data.email)
-    formData.append('selectedPlan', selectedPlan)
+    formData.append('selectedPlan', data.selectedPlan ?? '')
     formData.append('enabledSections', JSON.stringify(enabledSections))
     formData.append(
       'configuration',
@@ -239,6 +224,7 @@ export default function ServicePurchaseForm({
                       enabledSections={enabledSections}
                       onPlanChange={handlePlanChange}
                       onSectionToggle={handleSectionToggle}
+                      servicesData={services[0]}
                     />
                   </Suspense>
                 )}
@@ -248,7 +234,7 @@ export default function ServicePurchaseForm({
                     enabledSections={enabledSections}
                     actionState={state}
                     isPending={isPending}
-                    servicesData={SERVICES_DATA}
+                    servicesData={services[0]}
                   />
                 )}
                 {step.value === 'confirmation' && <Confirmation name={name} email={email} />}

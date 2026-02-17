@@ -1,15 +1,17 @@
 import {
-  CatalogStatus,
-  type FeatureRow,
-  type FeatureValue,
-  type Plan,
-  type PricingData,
-  type PricingTier,
-} from '../configure-services-purchase/components/types'
+  RsGroupCostType,
+  type RsOfferingOptionGroup,
+  RsServiceLevel,
+  type RsServiceOffering,
+  type RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 
 export type ValueType = 'price' | 'symbol' | 'label' | 'check' | 'none'
 
-export interface FormattedValue {
+export interface SummaryServiceRow {
+  id: string
+  label: string
+  sublabel?: string
   displayValue: string
   valueType: ValueType
 }
@@ -19,94 +21,130 @@ export interface SummaryGroup {
   title: string
   selectedValue: string
   priceLabel: string
-  rows: FeatureRow[]
+  rows: SummaryServiceRow[]
 }
 
-export function formatRowValue(
-  value: FeatureValue,
-  showApproxSymbol?: boolean,
-  hasOneTimeFee?: boolean,
-  setupFee?: number,
-): FormattedValue {
-  if (value === true) {
-    if (hasOneTimeFee && setupFee) {
-      return { displayValue: `$${setupFee.toLocaleString()}`, valueType: 'price' }
-    }
-    if (showApproxSymbol) {
-      return { displayValue: '~', valueType: 'symbol' }
-    }
-    return { displayValue: '✓', valueType: 'check' }
+function formatGroupPrice(group: RsOfferingOptionGroup): string {
+  if (group.price == null) return ''
+  if (group.costType === RsGroupCostType.Setup) {
+    return `$${group.price.toLocaleString()} one-time`
   }
-
-  if (value === false) {
-    return { displayValue: '—', valueType: 'none' }
-  }
-
-  if (typeof value === 'string') {
-    const upperValue = value.toUpperCase()
-    if (['LABEL', 'EXPEDITED', 'CUSTOM', 'PRIORITY'].includes(upperValue)) {
-      return { displayValue: value.toUpperCase(), valueType: 'label' }
-    }
-    return { displayValue: value, valueType: 'label' }
-  }
-
-  return { displayValue: String(value), valueType: 'label' }
+  return `$${group.price}/mo`
 }
 
 export function buildSummaryGroups(
-  pricingData: PricingData,
-  currentTier: PricingTier,
-  selectedPlan: Plan,
+  data: RsServiceOffering,
+  currentTier: RsServiceSubscriptionTier,
   selectedAddons: string[],
 ): SummaryGroup[] {
   const groups: SummaryGroup[] = []
 
-  // 1. "Tier" group: merge all Included sections' rows
-  const includedSections =
-    pricingData.sections?.filter((s) => s.badge === CatalogStatus.Included) ?? []
-  const tierRows = includedSections.flatMap((s) => s.rows)
+  // Build lookup: serviceId → service level for the selected tier
+  const serviceLevelMap = new Map(currentTier.serviceLevels.map((sl) => [sl.serviceId, sl.level]))
 
-  if (tierRows.length > 0) {
+  // Build lookup: serviceId → usage limit for the selected tier
+  const usageLimitMap = new Map(currentTier.usageLimits.map((ul) => [ul.serviceId, ul]))
+
+  // Group services by optionGroupId
+  const servicesByGroup = new Map<string, typeof data.services>()
+  for (const service of data.services) {
+    if (service.optionGroupId) {
+      const existing = servicesByGroup.get(service.optionGroupId) ?? []
+      existing.push(service)
+      servicesByGroup.set(service.optionGroupId, existing)
+    }
+  }
+
+  // Process non-add-on option groups (always included)
+  for (const group of data.optionGroups.filter((g) => !g.isAddOn)) {
+    const groupServices = servicesByGroup.get(group.id) ?? []
+    const includedServices = groupServices.filter(
+      (s) => serviceLevelMap.get(s.id) === RsServiceLevel.Included,
+    )
+
+    if (includedServices.length === 0) continue
+
+    const rows: SummaryServiceRow[] = includedServices.map((service) => {
+      const usageLimit = usageLimitMap.get(service.id)
+
+      if (usageLimit?.notes) {
+        return {
+          id: service.id,
+          label: service.title,
+          sublabel: usageLimit.notes,
+          displayValue: '✓',
+          valueType: 'check' as ValueType,
+        }
+      }
+
+      return {
+        id: service.id,
+        label: service.title,
+        displayValue: '✓',
+        valueType: 'check' as ValueType,
+      }
+    })
+
     groups.push({
-      id: 'tier',
-      title: 'Tier',
+      id: group.id,
+      title: group.name,
       selectedValue: currentTier.name,
-      priceLabel: `$${currentTier.monthlyPrice}/mo`,
-      rows: tierRows,
+      priceLabel: formatGroupPrice(group),
+      rows,
     })
   }
 
-  // 2. "Recurring Services" group: one per selected optional addon
-  const optionalSections =
-    pricingData.sections?.filter(
-      (s) => s.badge === CatalogStatus.Optional && selectedAddons.includes(s.id),
-    ) ?? []
+  // Process add-on option groups
+  for (const group of data.optionGroups.filter((g) => g.isAddOn)) {
+    if (!selectedAddons.includes(group.id)) continue
 
-  for (const section of optionalSections) {
+    const groupServices = servicesByGroup.get(group.id) ?? []
+    const includedServices = groupServices.filter(
+      (s) => serviceLevelMap.get(s.id) === RsServiceLevel.Included,
+    )
+
+    if (includedServices.length === 0) continue
+
+    const rows: SummaryServiceRow[] = includedServices.map((service) => {
+      const usageLimit = usageLimitMap.get(service.id)
+      const price = usageLimit?.unitPrice
+
+      if (price != null) {
+        return {
+          id: service.id,
+          label: service.title,
+          sublabel: usageLimit?.notes ?? undefined,
+          displayValue: `$${price.toLocaleString()}`,
+          valueType: 'price' as ValueType,
+        }
+      }
+
+      return {
+        id: service.id,
+        label: service.title,
+        displayValue: '✓',
+        valueType: 'check' as ValueType,
+      }
+    })
+
     groups.push({
-      id: section.id,
-      title: 'Recurring Services',
-      selectedValue: section.toggleLabel ?? section.title,
-      priceLabel: section.oneTimeFee ?? `+$${section.price ?? 0}`,
-      rows: section.rows,
+      id: group.id,
+      title: group.name,
+      selectedValue: currentTier.name,
+      priceLabel: formatGroupPrice(group),
+      rows,
     })
   }
 
   return groups
 }
 
-export function calculateRecurringTotal(
-  pricingData: PricingData,
-  currentTier: PricingTier,
-  selectedAddons: string[],
-): number {
-  const basePrice = currentTier.monthlyPrice
-  const addonsTotal =
-    pricingData.sections
-      ?.filter(
-        (section) =>
-          section.badge === CatalogStatus.Optional && selectedAddons.includes(section.id),
-      )
-      .reduce((sum, section) => sum + (section.price ?? 0), 0) ?? 0
-  return basePrice + addonsTotal
+export function calculateRecurringTotal(currentTier: RsServiceSubscriptionTier): number {
+  return currentTier.pricing.amount ?? 0
+}
+
+export function getSetupFee(data: RsServiceOffering): number {
+  return data.optionGroups
+    .filter((g) => g.costType === RsGroupCostType.Setup)
+    .reduce((sum, g) => sum + (g.price ?? 0), 0)
 }

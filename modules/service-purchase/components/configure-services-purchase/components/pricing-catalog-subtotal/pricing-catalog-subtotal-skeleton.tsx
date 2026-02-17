@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_GRID } from '../service-catalog/pricing-calculator-context'
+import { PRICING_GRID } from '../service-catalog/feature-row/feature-row-skeleton'
 
 /** Skeleton for a subtotal row */
 function PricingCatalogSubtotalSkeleton() {

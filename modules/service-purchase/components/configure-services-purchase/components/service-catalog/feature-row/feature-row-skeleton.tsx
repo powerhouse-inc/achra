@@ -1,7 +1,18 @@
 import { Check } from 'lucide-react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { PRICING_GRID } from '../pricing-calculator-context'
+
+/**
+ * Static grid classes for the pricing table layout.
+ * Used by skeleton components that don't have access to dynamic tier count.
+ * Assumes 4 tiers (the most common case).
+ *
+ * Mobile: 2 columns (label + 1 visible plan)
+ * Desktop: 5 columns (4fr label + 4× 1fr tier)
+ */
+export const PRICING_GRID = {
+  responsive: 'grid-cols-2 lg:grid-cols-[4fr_1fr_1fr_1fr_1fr]',
+} as const
 
 interface FeatureRowSkeletonProps {
   labelWidth?: string
