@@ -57,8 +57,6 @@ export default function ServicePurchaseForm({
 }: Readonly<ServicePurchaseFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
-  // const { data: services, isLoading } = useServiceOfferingsQuery()
-  // const servicesData = services?.serviceOfferings[0] as RsServiceOffering | undefined
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
