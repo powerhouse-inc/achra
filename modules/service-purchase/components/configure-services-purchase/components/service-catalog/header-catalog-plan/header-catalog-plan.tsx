@@ -80,7 +80,7 @@ function HeaderCatalogPlan({
             <div
               key={tier.id}
               className={cn(
-                'flex h-full min-w-0 items-center justify-center px-6 transition-colors',
+                'flex h-full min-w-0 items-center justify-center transition-colors',
                 isActive && 'bg-primary/10',
               )}
             >
