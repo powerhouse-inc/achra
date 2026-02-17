@@ -2,9 +2,9 @@
 
 import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
-import { type FeatureValue, type Plan, PRICING_PLANS } from '../types'
-import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
-import { ServiceCatalogoCell } from './service-catalogo-cell'
+import { type FeatureValue, type Plan, PRICING_PLANS } from '../../types'
+import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
+import { ServiceCatalogoCell } from '../service-catalogo-cell'
 
 interface FeatureRowProps {
   label: string

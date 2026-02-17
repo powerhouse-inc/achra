@@ -4,9 +4,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { type Plan, PRICING_PLANS, type PricingData } from '../types'
-import { PlanSelectorItem } from './plan-selector'
-import { PRICING_GRID } from './pricing-calculator-context'
+import { type Plan, PRICING_PLANS, type PricingData } from '../../types'
+import { PlanSelectorItem } from '../plan-selector'
+import { PRICING_GRID } from '../pricing-calculator-context'
 
 interface HeaderCatalogPlanProps {
   selectedPlan?: Plan
@@ -18,7 +18,7 @@ interface HeaderCatalogPlanProps {
   servicesData: PricingData
 }
 
-export default function HeaderCatalogPlan({
+function HeaderCatalogPlan({
   selectedPlan,
   handlePlanChange,
   readOnly = false,
@@ -110,3 +110,5 @@ export default function HeaderCatalogPlan({
     </div>
   )
 }
+
+export { HeaderCatalogPlan }

@@ -21,6 +21,7 @@ import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 import { SERVICES_DATA } from '../../mock/mock-data'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
+import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
 import { Plan } from '../configure-services-purchase/components/types'
 import { SummarySection } from '../summary/summary-section'
 import Confirmation from './components/confirmation/confirmation'
@@ -232,7 +233,7 @@ export default function ServicePurchaseForm({
                   <SelectOperator onSelectServices={handleSelectServices} operator={operator} />
                 )}
                 {step.value === 'configure-services' && (
-                  <Suspense fallback={<div>Loading configure services...</div>}>
+                  <Suspense fallback={<PricingCalculatorSkeleton />}>
                     <ConfigureServices
                       selectedPlan={selectedPlan}
                       enabledSections={enabledSections}

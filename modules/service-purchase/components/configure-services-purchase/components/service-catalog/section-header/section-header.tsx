@@ -3,9 +3,9 @@
 import { Lock } from 'lucide-react'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
-import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
-import { type CatalogStatus, type Plan, PRICING_PLANS } from '../types'
-import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
+import ServiceCatalogStatus from '../../service-catalog-status/service-catalog-status'
+import { type CatalogStatus, type Plan, PRICING_PLANS } from '../../types'
+import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
 
 interface SectionHeaderProps {
   title: string

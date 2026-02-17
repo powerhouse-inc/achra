@@ -1,10 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
+import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { cn } from '@/modules/shared/lib/utils'
-import { Plan, PRICING_PLANS, type PricingData } from '../types'
-import { PRICING_GRID, usePricingCalculatorContext } from './pricing-calculator-context'
-import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
+import { Plan, PRICING_PLANS, type PricingData } from '../../types'
+import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan: Plan
