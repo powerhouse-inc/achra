@@ -19,7 +19,6 @@ import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { PricingCalculatorProvider } from '../pricing-calculator-context'
 import type { FeatureValue } from '../../types'
-// import type { SectionId } from '../../../../service-purchase-form/service-purchase-form'
 export interface PricingCalculatorProps {
   selectedPlan?: string
   enabledSections?: Record<string, boolean>
@@ -66,7 +65,6 @@ export function PricingCalculator({
   enabledSections,
   onPlanChange,
   onSectionToggle,
-  // readOnly = false,
   servicesData,
 }: Readonly<PricingCalculatorProps>) {
   /** Tier names derived from API data, used for column iteration and carousel */
@@ -116,13 +114,6 @@ export function PricingCalculator({
     handlePlanChange(tierNames[newIndex])
   }, [handlePlanChange, mobilePlanIndex, tierNames])
 
-  // const visibleSections = useMemo(
-  //   () => servicesData.optionGroups
-
-  //       : ,
-  //   [readOnly, enabledSections, servicesData.optionGroups],
-  // )
-
   const contextValue = useMemo(
     () => ({
       activePlan: selectedPlan,
@@ -154,7 +145,6 @@ export function PricingCalculator({
           <HeaderCatalogPlan
             selectedPlan={selectedPlan}
             handlePlanChange={handlePlanChange}
-            // readOnly={readOnly}
             mobilePlanIndex={mobilePlanIndex}
             onPrevPlan={handlePrevPlan}
             onNextPlan={handleNextPlan}
