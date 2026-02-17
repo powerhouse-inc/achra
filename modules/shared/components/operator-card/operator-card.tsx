@@ -58,7 +58,7 @@ export default function OperatorCard({
       <CardHeader className="gap-0 p-0">
         <div className="flex items-center gap-2">
           <FileText className="size-4" />
-          <span className="text-foreground text-base/6 font-semibold">{operator.name}</span>
+          <span className="text-foreground text-base/6 font-semibold">{`${operator.name} ${operator.code}`}</span>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
