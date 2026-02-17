@@ -1,1 +1,2 @@
-export { default } from './builder-skills'
+export { BuilderSkills } from './builder-skills'
+export { SkillsPopover } from './skills-popover'

@@ -1,38 +1,16 @@
-import { Ellipsis } from 'lucide-react'
+'use client'
+
 import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '../../lib/utils'
-import BuildersSkillsChip from '../chips/builders-skills-chip'
-import { GenericChip } from '../chips/generic-chip/generic-chip'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import BuildersSkillsChip from '@/modules/shared/components/chips/builders-skills-chip'
+import { cn } from '@/modules/shared/lib/utils'
+import { SkillsPopover } from './skills-popover'
 
-interface SkillsPopoverProps {
-  skills: BuilderSkill[]
-}
-
-function SkillsPopover({ skills }: SkillsPopoverProps) {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <GenericChip variant="underline" color="gray" className="h-full w-8 justify-center">
-          <Ellipsis className="size-4" />
-        </GenericChip>
-      </PopoverTrigger>
-      <PopoverContent className="w-fit p-2" align="start">
-        <div className="flex flex-col gap-1">
-          {skills.map((skill) => (
-            <BuildersSkillsChip key={skill} skill={skill} />
-          ))}
-        </div>
-      </PopoverContent>
-    </Popover>
-  )
-}
 export interface BuilderSkillsProps {
   skills: BuilderSkill[]
   className?: string
 }
 
-export default function BuilderSkills({ skills, className }: BuilderSkillsProps) {
+function BuilderSkills({ skills, className }: BuilderSkillsProps) {
   const handlePopoverClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
     e.stopPropagation()
@@ -57,3 +35,5 @@ export default function BuilderSkills({ skills, className }: BuilderSkillsProps)
     </div>
   )
 }
+
+export { BuilderSkills }

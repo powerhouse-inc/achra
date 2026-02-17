@@ -5,8 +5,10 @@ import { getOperatorProfile } from '@/modules/operator-profile/services/operator
 import EmptyStateService from '@/modules/services/components/empty-state-service/empty-state-service'
 import ServicesList from '@/modules/services/components/services-list/services-list'
 import { getServices } from '@/modules/services/services/services-service'
+import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import { formatMonthYear } from '@/modules/shared/lib/date'
 
 interface OperatorTeamProfilePageProps {
   params: Promise<{ operatorSlug: string }>
@@ -29,12 +31,9 @@ export default async function OperatorTeamProfilePage({ params }: OperatorTeamPr
         <div className="flex w-full flex-col gap-4 lg:flex-row">
           <div className="flex flex-col gap-2 lg:flex-2">
             <HeaderTitleOperatorProfile
-              title={
-                operatorProfile.operationalHubMember.name ??
-                operatorProfile.name ??
-                'Unknown Operator'
-              }
+              title={operatorProfile.name ?? 'Unknown Operator'}
               skills={operatorProfile.skills}
+              logo={operatorProfile.icon}
             />
 
             {operatorProfile.description && (
@@ -42,13 +41,30 @@ export default async function OperatorTeamProfilePage({ params }: OperatorTeamPr
             )}
           </div>
 
-          <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-2 lg:w-86 lg:flex-col xl:w-108">
-            {/* TODO: add value once available in the API, value will have format "JUL 2022" */}
-            <OperationalMetric label="Active Since" value="-" />
-            {/* TODO: add value once available in the API, value will have format "3 month" */}
-            <OperationalMetric label="Min Engagement" value="-" />
-            {/* TODO: add value once available in the API, value will have format "12 FTEs" */}
-            <OperationalMetric label="Team Size" value="-" />
+          <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:w-86 lg:grid-cols-1 xl:w-108">
+            <OperationalMetric
+              label="Last Active"
+              value={formatMonthYear(operatorProfile.lastModified)}
+            />
+            <OperationalMetric
+              className="h-10"
+              label="Status"
+              value={
+                operatorProfile.status ? (
+                  <BuildersStatusChip status={operatorProfile.status} />
+                ) : (
+                  '-'
+                )
+              }
+            />
+            <OperationalMetric
+              label="OpHub Member"
+              value={operatorProfile.operationalHubMember.name ?? '-'}
+            />
+            <OperationalMetric
+              label="Team Size"
+              value={`${operatorProfile.contributors.length} contributors`}
+            />
           </div>
         </div>
 
