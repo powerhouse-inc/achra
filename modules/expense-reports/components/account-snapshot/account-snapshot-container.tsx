@@ -13,13 +13,20 @@ async function AccountSnapshotContainer({
   builderName,
   month,
 }: AccountSnapshotContainerProps) {
-  const snapshotReport = await getAccountSnapshotForMonth(teamId, month)
+  const { snapshotReport, budgetStatements } = await getAccountSnapshotForMonth(teamId, month)
 
   if (!snapshotReport || snapshotReport.accounts?.length === 0) {
     return <SnapshotEmptyState />
   }
 
-  return <AccountSnapshot expenseReport={snapshotReport} builderName={builderName} />
+  return (
+    <AccountSnapshot
+      expenseReport={snapshotReport}
+      builderName={builderName}
+      budgetStatements={budgetStatements}
+      currentMonth={month}
+    />
+  )
 }
 
 export { AccountSnapshotContainer }

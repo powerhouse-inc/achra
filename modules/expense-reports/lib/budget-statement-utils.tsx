@@ -3,9 +3,13 @@ import type {
   BudgetStatementExpenseReport,
   ExpenseReportLineItem,
   ExpenseReportWallet,
+  SnapshotAccount,
+  SnapshotAccountTransaction,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { InnerTableColumn, InnerTableRow } from '@/modules/expense-reports/types'
+import { isGeneratedSnapshotAccount } from '../components/account-snapshot/utils/types-helpers'
 import { WalletTableCell } from '../components/wallet-table-cell'
+import { STABLECOIN_UNITS } from './constants'
 import { capitalizeSentence, formatAddressForOutput } from './strings'
 
 function renderWallet(wallet: ExpenseReportWallet) {
@@ -52,24 +56,22 @@ export function getCurrencyValue(amount: unknown): number {
   return isNaN(num) ? 0 : num
 }
 
-export function isUsdsLineItem(item: ExpenseReportLineItem): boolean {
+export function isStablecoinLineItem(item: ExpenseReportLineItem): boolean {
   const currencyFields = [item.budget, item.actuals, item.forecast, item.payments]
 
   return currencyFields.every((field) => {
-    // If field is null, undefined, or empty, assume it's USDS
     if (!field) {
       return true
     }
 
-    // If field is an object, check its unit property
     if (typeof field === 'object') {
       const unit = (field as { unit?: string }).unit
       // If unit is missing, undefined, or empty, assume it's USDS
       if (unit === undefined || unit === '') {
         return true
       }
-      // If unit exists, it must be 'USDS'
-      return unit === 'USDS'
+      // If unit exists, it must be a stablecoin
+      return STABLECOIN_UNITS.includes(unit)
     }
 
     // For other types, assume it's USDS
@@ -127,15 +129,15 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
 
   // add wallet rows
   wallets.forEach((wallet) => {
-    const usdsItems = wallet.lineItems.filter(isUsdsLineItem)
-    const actuals = sumBy(usdsItems, (item) => getCurrencyValue(item.actuals))
-    const forecast = sumBy(usdsItems, (item) => getCurrencyValue(item.forecast))
+    const stablecoinItems = wallet.lineItems.filter(isStablecoinLineItem)
+    const actuals = sumBy(stablecoinItems, (item) => getCurrencyValue(item.actuals))
+    const forecast = sumBy(stablecoinItems, (item) => getCurrencyValue(item.forecast))
     const numberCellData = [
-      sumBy(usdsItems, (item) => getCurrencyValue(item.budget)),
+      sumBy(stablecoinItems, (item) => getCurrencyValue(item.budget)),
       forecast,
       actuals,
       forecast - actuals,
-      sumBy(usdsItems, (item) => getCurrencyValue(item.payments)),
+      sumBy(stablecoinItems, (item) => getCurrencyValue(item.payments)),
     ]
 
     if (numberCellData.some((n) => n !== 0)) {
@@ -175,17 +177,23 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
   // add total rows if there are at least one wallet row
   if (mainTableItems.length > 0) {
     const totalBudget = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.budget)),
+      sumBy(wallet.lineItems.filter(isStablecoinLineItem), (item) => getCurrencyValue(item.budget)),
     )
     const totalForecast = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.forecast)),
+      sumBy(wallet.lineItems.filter(isStablecoinLineItem), (item) =>
+        getCurrencyValue(item.forecast),
+      ),
     )
     const totalActual = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.actuals)),
+      sumBy(wallet.lineItems.filter(isStablecoinLineItem), (item) =>
+        getCurrencyValue(item.actuals),
+      ),
     )
     const totalDifference = totalForecast - totalActual
     const totalPayment = sumBy(wallets, (wallet) =>
-      sumBy(wallet.lineItems.filter(isUsdsLineItem), (item) => getCurrencyValue(item.payments)),
+      sumBy(wallet.lineItems.filter(isStablecoinLineItem), (item) =>
+        getCurrencyValue(item.payments),
+      ),
     )
 
     mainTableItems.push({
@@ -226,4 +234,24 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
     columns: mainTableColumns,
     items: mainTableItems,
   }
+}
+
+export function filterAccountAndTransactions(
+  items: Array<SnapshotAccountTransaction | SnapshotAccount>,
+): Array<SnapshotAccountTransaction | SnapshotAccount> {
+  const filteredItems: Array<SnapshotAccountTransaction | SnapshotAccount> = []
+  items.forEach((item) => {
+    if (isGeneratedSnapshotAccount(item)) {
+      filteredItems.push({
+        ...item,
+        transactions: item.transactions
+          .filter((transaction) => STABLECOIN_UNITS.includes(transaction.amount.unit))
+          .sort((a, b) => new Date(b.datetime).getTime() - new Date(a.datetime).getTime()),
+      })
+    } else if (STABLECOIN_UNITS.includes(item.amount.unit)) {
+      filteredItems.push(item)
+    }
+  })
+
+  return filteredItems
 }

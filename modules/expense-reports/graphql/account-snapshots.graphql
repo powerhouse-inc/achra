@@ -2,6 +2,8 @@ query AccountSnapshots($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
     id
     month
+    netExpenseTxns
+    reportedActuals
     snapshotReport {
       startDate
       endDate

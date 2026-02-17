@@ -4,7 +4,7 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { BreakdownTotals, InnerTableRow } from '@/modules/expense-reports/types'
 import { BREAKDOWN_COLUMNS } from '../components/expense-reports-actuals/breakdown-actuals-section/breakdown-columns'
-import { getCurrencyValue, isUsdsLineItem } from './budget-statement-utils'
+import { getCurrencyValue, isStablecoinLineItem } from './budget-statement-utils'
 import { type GroupTree, HEADCOUNT_GROUP_LABEL, NON_HEADCOUNT_GROUP_LABEL } from './group-tree'
 
 const COLUMNS_MAP = {
@@ -76,7 +76,7 @@ function buildSectionRows(
   const categoryRows: InnerTableRow[] = []
 
   wallet.lineItems
-    .filter((item) => isUsdsLineItem(item) && sectionConfig.filter(item))
+    .filter((item) => isStablecoinLineItem(item) && sectionConfig.filter(item))
     .forEach((item) => {
       const rowCells = buildRowCells(item)
       if (rowCells) {
@@ -137,15 +137,17 @@ export function getActualsBreakdownItemsForTable(
   }
 
   if (rows.length > 0) {
-    const { budget, forecast, actuals, payments } = wallet.lineItems.filter(isUsdsLineItem).reduce(
-      (acc, item) => ({
-        budget: acc.budget + getCurrencyValue(item.budget),
-        forecast: acc.forecast + getCurrencyValue(item.forecast),
-        actuals: acc.actuals + getCurrencyValue(item.actuals),
-        payments: acc.payments + getCurrencyValue(item.payments),
-      }),
-      { budget: 0, forecast: 0, actuals: 0, payments: 0 } satisfies BreakdownTotals,
-    )
+    const { budget, forecast, actuals, payments } = wallet.lineItems
+      .filter(isStablecoinLineItem)
+      .reduce(
+        (acc, item) => ({
+          budget: acc.budget + getCurrencyValue(item.budget),
+          forecast: acc.forecast + getCurrencyValue(item.forecast),
+          actuals: acc.actuals + getCurrencyValue(item.actuals),
+          payments: acc.payments + getCurrencyValue(item.payments),
+        }),
+        { budget: 0, forecast: 0, actuals: 0, payments: 0 } satisfies BreakdownTotals,
+      )
 
     rows.push({
       type: 'total',

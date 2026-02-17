@@ -1,6 +1,7 @@
 import { format, parse } from 'date-fns'
 import { cacheLife } from 'next/cache'
 import {
+  type AccountSnapshotsQuery,
   type BudgetStatementsDetailsQuery,
   type BudgetStatementSnapshotReport,
   useAccountSnapshotsQuery,
@@ -85,10 +86,15 @@ export async function getBudgetStatementForMonth(
   return data.budgetStatements.find((bs) => bs.month === monthString) ?? null
 }
 
+export interface AccountSnapshotResult {
+  snapshotReport: Partial<BudgetStatementSnapshotReport> | null
+  budgetStatements: AccountSnapshotsQuery['budgetStatements']
+}
+
 export async function getAccountSnapshotForMonth(
   teamId: string,
   month: Date,
-): Promise<Partial<BudgetStatementSnapshotReport> | null> {
+): Promise<AccountSnapshotResult> {
   'use cache'
   cacheLife('minutes')
 
@@ -99,9 +105,12 @@ export async function getAccountSnapshotForMonth(
   })()
 
   const monthString = format(month, 'MMMyyyy').toUpperCase()
-
-  return (
+  const snapshotReport =
     (data.budgetStatements.find((bs) => bs.month === monthString)
       ?.snapshotReport as Partial<BudgetStatementSnapshotReport> | null) ?? null
-  )
+
+  return {
+    snapshotReport,
+    budgetStatements: data.budgetStatements,
+  }
 }

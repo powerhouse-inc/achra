@@ -687,7 +687,10 @@ export type BudgetStatement = {
   id: Scalars['OID']['output'];
   lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   month: Scalars['String']['output'];
+  netExpenseTxns: Scalars['Amount_Currency']['output'];
+  operationalHubMember?: Maybe<OperationalHubMember>;
   owner: BudgetStatementOwner;
+  reportedActuals: Scalars['Amount_Currency']['output'];
   snapshotReport: BudgetStatementSnapshotReport;
   status: Scalars['String']['output'];
 };
@@ -2148,16 +2151,10 @@ export type Invoice_LegalEntity = {
   paymentRouting?: Maybe<Invoice_PaymentRouting>;
 };
 
-export type Invoice_LegalEntityCorporateRegistrationId = {
-  __typename?: 'Invoice_LegalEntityCorporateRegistrationId';
-  corpRegId: Scalars['String']['output'];
-};
-
-export type Invoice_LegalEntityId = Invoice_LegalEntityCorporateRegistrationId | Invoice_LegalEntityTaxId;
-
-export type Invoice_LegalEntityTaxId = {
-  __typename?: 'Invoice_LegalEntityTaxId';
-  taxId: Scalars['String']['output'];
+export type Invoice_LegalEntityId = {
+  __typename?: 'Invoice_LegalEntityId';
+  corpRegId?: Maybe<Scalars['String']['output']>;
+  taxId?: Maybe<Scalars['String']['output']>;
 };
 
 export type Invoice_Payment = {
@@ -5518,6 +5515,12 @@ export type Operation = {
   skip?: Maybe<Scalars['Int']['output']>;
   timestampUtcMs: Scalars['DateTime']['output'];
   type: Scalars['String']['output'];
+};
+
+export type OperationalHubMember = {
+  __typename?: 'OperationalHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
 };
 
 export type OperationalHubProfile = IDocument & {
@@ -9495,7 +9498,7 @@ export type AccountSnapshotsQueryVariables = Exact<{
 }>;
 
 
-export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
+export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, netExpenseTxns: any, reportedActuals: any, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
 
 export type BudgetStatementsDetailsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -9784,6 +9787,8 @@ export const AccountSnapshotsDocument = `
   budgetStatements(filter: $filter) {
     id
     month
+    netExpenseTxns
+    reportedActuals
     snapshotReport {
       startDate
       endDate
