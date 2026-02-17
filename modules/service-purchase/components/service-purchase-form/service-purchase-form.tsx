@@ -2,7 +2,10 @@
 import { startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
-import type { ResourceTemplate_ResourceTemplateState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  BuilderProfile_BuilderProfileState,
+  ResourceTemplate_ResourceTemplateState,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 
@@ -59,9 +62,13 @@ export interface ServicePurchaseFormValues {
 
 export interface ServicePurchaseFormProps {
   resourceTemplate: ResourceTemplate_ResourceTemplateState
+  operator: BuilderProfile_BuilderProfileState
 }
 
-export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchaseFormProps) {
+export default function ServicePurchaseForm({
+  resourceTemplate,
+  operator,
+}: ServicePurchaseFormProps) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
@@ -222,7 +229,7 @@ export default function ServicePurchaseForm({ resourceTemplate }: ServicePurchas
                   />
                 )}
                 {step.value === 'select-operator' && (
-                  <SelectOperator onSelectServices={handleSelectServices} />
+                  <SelectOperator onSelectServices={handleSelectServices} operator={operator} />
                 )}
                 {step.value === 'configure-services' && (
                   <Suspense fallback={<div>Loading configure services...</div>}>

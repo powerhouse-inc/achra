@@ -17,7 +17,6 @@ export async function getResourceTemplate(
     facetTargets: [],
     infoLink: null,
     lastModified: '',
-    operatorId: '',
     optionGroups: [],
     recurringServices: [],
     services: [],

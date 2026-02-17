@@ -1,0 +1,16 @@
+query ResourceOperator($docId: PHID!) {
+  BuilderProfile {
+    getDocument(docId: $docId) {
+      state {
+        id
+        description
+        code
+        name
+        lastModified
+        status
+        contributors
+        isOperator
+      }
+    }
+  }
+}
