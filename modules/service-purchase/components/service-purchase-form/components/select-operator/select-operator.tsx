@@ -1,24 +1,35 @@
-import type { BuilderProfile_BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { type Operator, OperatorCard } from '@/modules/shared/components/operator-card'
+import {
+  type BuilderProfile_BuilderProfileState,
+  BuilderProfile_BuilderStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { OperatorCard } from '@/modules/shared/components/operator-card'
 
-export type { Operator }
-
-export const OPERATORS_MOCK: Operator[] = [
+export const OPERATORS_MOCK: BuilderProfile_BuilderProfileState[] = [
   {
     id: 'powerhouse-genesis-oh',
     name: 'Powerhouse Genesis OH',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    activeSince: 'JUL 2022',
-    setupTime: '7 days',
-    recurringCost: 'From $800/Month',
+    lastModified: '2024-07-01T00:00:00Z',
+    status: BuilderProfile_BuilderStatus.Active,
+    contributors: ['phid-contributor-1', 'phid-contributor-2'],
+    links: [],
+    operationalHubMember: { name: 'Powerhouse Genesis OH', phid: 'powerhouse-genesis-oh' },
+    scopes: [],
+    skills: [],
+    isOperator: true,
   },
   {
     id: 'accountable-opc',
     name: 'Accountable OPC',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    activeSince: 'JUL 2022',
-    setupTime: '7 days',
-    recurringCost: 'From $500/Month',
+    lastModified: '2024-07-01T00:00:00Z',
+    status: BuilderProfile_BuilderStatus.Active,
+    contributors: ['phid-contributor-1'],
+    links: [],
+    operationalHubMember: { name: 'Accountable OPC', phid: 'accountable-opc' },
+    scopes: [],
+    skills: [],
+    isOperator: true,
   },
 ]
 
