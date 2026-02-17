@@ -8,6 +8,9 @@ query OperatorProfile($filter: buildersFilter) {
     skills
     description
     about
+    lastModified
+    status
+    contributors
     operationalHubMember {
       name
     }

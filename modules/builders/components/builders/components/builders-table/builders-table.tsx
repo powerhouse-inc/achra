@@ -4,7 +4,7 @@ import Link from 'next/link'
 import SimpleBar from 'simplebar-react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuilderProfile from '@/modules/shared/components/builder-profile'
-import BuilderSkills from '@/modules/shared/components/builder-skills'
+import { BuilderSkills } from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,

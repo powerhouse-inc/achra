@@ -687,7 +687,10 @@ export type BudgetStatement = {
   id: Scalars['OID']['output'];
   lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   month: Scalars['String']['output'];
+  netExpenseTxns: Scalars['Amount_Currency']['output'];
+  operationalHubMember?: Maybe<OperationalHubMember>;
   owner: BudgetStatementOwner;
+  reportedActuals: Scalars['Amount_Currency']['output'];
   snapshotReport: BudgetStatementSnapshotReport;
   status: Scalars['String']['output'];
 };
@@ -2148,16 +2151,10 @@ export type Invoice_LegalEntity = {
   paymentRouting?: Maybe<Invoice_PaymentRouting>;
 };
 
-export type Invoice_LegalEntityCorporateRegistrationId = {
-  __typename?: 'Invoice_LegalEntityCorporateRegistrationId';
-  corpRegId: Scalars['String']['output'];
-};
-
-export type Invoice_LegalEntityId = Invoice_LegalEntityCorporateRegistrationId | Invoice_LegalEntityTaxId;
-
-export type Invoice_LegalEntityTaxId = {
-  __typename?: 'Invoice_LegalEntityTaxId';
-  taxId: Scalars['String']['output'];
+export type Invoice_LegalEntityId = {
+  __typename?: 'Invoice_LegalEntityId';
+  corpRegId?: Maybe<Scalars['String']['output']>;
+  taxId?: Maybe<Scalars['String']['output']>;
 };
 
 export type Invoice_Payment = {
@@ -5518,6 +5515,12 @@ export type Operation = {
   skip?: Maybe<Scalars['Int']['output']>;
   timestampUtcMs: Scalars['DateTime']['output'];
   type: Scalars['String']['output'];
+};
+
+export type OperationalHubMember = {
+  __typename?: 'OperationalHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
 };
 
 export type OperationalHubProfile = IDocument & {
@@ -9530,7 +9533,7 @@ export type OperatorProfileQueryVariables = Exact<{
 }>;
 
 
-export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
+export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, lastModified?: any | null, status?: BuilderStatus | null, contributors: Array<any>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
 
 export type ProjectsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -10132,6 +10135,9 @@ export const OperatorProfileDocument = `
     skills
     description
     about
+    lastModified
+    status
+    contributors
     operationalHubMember {
       name
     }

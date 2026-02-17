@@ -21,10 +21,11 @@ export default function OperatorProfileLoading() {
           </div>
 
           {/* OperationalMetrics */}
-          <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-2 lg:w-86 lg:flex-col xl:w-108">
+          <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 lg:w-86 lg:grid-cols-1 xl:w-108">
             <OperationalMetricSkeleton labelClassName="max-w-18" />
-            <OperationalMetricSkeleton />
-            <OperationalMetricSkeleton labelClassName="max-w-14.5" />
+            <OperationalMetricSkeleton labelClassName="max-w-14" />
+            <OperationalMetricSkeleton labelClassName="max-w-20" />
+            <OperationalMetricSkeleton labelClassName="max-w-16" />
           </div>
         </div>
 
