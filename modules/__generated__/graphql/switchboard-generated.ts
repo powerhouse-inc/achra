@@ -687,7 +687,10 @@ export type BudgetStatement = {
   id: Scalars['OID']['output'];
   lastModifiedAtUtcIso: Scalars['DateTime']['output'];
   month: Scalars['String']['output'];
+  netExpenseTxns: Scalars['Amount_Currency']['output'];
+  operationalHubMember?: Maybe<OperationalHubMember>;
   owner: BudgetStatementOwner;
+  reportedActuals: Scalars['Amount_Currency']['output'];
   snapshotReport: BudgetStatementSnapshotReport;
   status: Scalars['String']['output'];
 };
@@ -2148,16 +2151,10 @@ export type Invoice_LegalEntity = {
   paymentRouting?: Maybe<Invoice_PaymentRouting>;
 };
 
-export type Invoice_LegalEntityCorporateRegistrationId = {
-  __typename?: 'Invoice_LegalEntityCorporateRegistrationId';
-  corpRegId: Scalars['String']['output'];
-};
-
-export type Invoice_LegalEntityId = Invoice_LegalEntityCorporateRegistrationId | Invoice_LegalEntityTaxId;
-
-export type Invoice_LegalEntityTaxId = {
-  __typename?: 'Invoice_LegalEntityTaxId';
-  taxId: Scalars['String']['output'];
+export type Invoice_LegalEntityId = {
+  __typename?: 'Invoice_LegalEntityId';
+  corpRegId?: Maybe<Scalars['String']['output']>;
+  taxId?: Maybe<Scalars['String']['output']>;
 };
 
 export type Invoice_Payment = {
@@ -5518,6 +5515,12 @@ export type Operation = {
   skip?: Maybe<Scalars['Int']['output']>;
   timestampUtcMs: Scalars['DateTime']['output'];
   type: Scalars['String']['output'];
+};
+
+export type OperationalHubMember = {
+  __typename?: 'OperationalHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
 };
 
 export type OperationalHubProfile = IDocument & {
@@ -9574,19 +9577,19 @@ export type RoadmapListQueryVariables = Exact<{
 
 export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }> }> } | null }> };
 
-export type ServiceOfferingsQueryVariables = Exact<{
-  filter?: InputMaybe<RsServiceOfferingsFilter>;
-}>;
-
-
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', summary: string, operatorId: any, title: string, status: RsServiceStatus, id: any, infoLink?: any | null, description?: string | null, lastModified: any, resourceTemplateId?: any | null, thumbnailUrl?: any | null, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', categoryKey: string, categoryLabel: string, selectedOptions: Array<string>, id: any }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', defaultSelected: boolean, description?: string | null, isAddOn: boolean, name: string, id: any }>, services: Array<{ __typename?: 'RSOfferingService', description?: string | null, displayOrder?: number | null, id: any, isSetupFormation: boolean, optionGroupId?: any | null, title: string, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', facetName: string, facetType: any, id: any, supportedOptions: Array<any> }> }>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', description?: string | null, id: any, isCustomPricing: boolean, name: string, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', amount: any, currency: any, id: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', customValue?: string | null, id: any, level: RsServiceLevel, optionGroupId?: any | null, serviceId: any }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, metric: string, notes?: string | null, serviceId: any, unitName?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', label: string, color?: string | null, id: any }> }> };
-
 export type ResourceOperatorQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
 
 
 export type ResourceOperatorQuery = { __typename?: 'Query', BuilderProfile?: { __typename?: 'BuilderProfileQueries', getDocument?: { __typename?: 'BuilderProfile', state: { __typename?: 'BuilderProfile_BuilderProfileState', id?: any | null, description?: string | null, code?: string | null, name?: string | null, lastModified?: any | null, status?: BuilderProfile_BuilderStatus | null, contributors: Array<any>, isOperator: boolean } } | null } | null };
+
+export type ServiceOfferingsQueryVariables = Exact<{
+  filter?: InputMaybe<RsServiceOfferingsFilter>;
+}>;
+
+
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', summary: string, operatorId: any, title: string, status: RsServiceStatus, id: any, infoLink?: any | null, description?: string | null, lastModified: any, resourceTemplateId?: any | null, thumbnailUrl?: any | null, serviceGroups: Array<{ __typename?: 'RSServiceGroup', billingCycle: RsBillingCycle, description?: string | null, displayOrder?: number | null, id: any, name: string }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', categoryKey: string, categoryLabel: string, selectedOptions: Array<string>, id: any }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', defaultSelected: boolean, description?: string | null, isAddOn: boolean, name: string, id: any }>, services: Array<{ __typename?: 'RSOfferingService', description?: string | null, displayOrder?: number | null, id: any, isSetupFormation: boolean, optionGroupId?: any | null, title: string, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', facetName: string, facetType: any, id: any, supportedOptions: Array<any> }> }>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', description?: string | null, id: any, isCustomPricing: boolean, name: string, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', amount: any, currency: any, id: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', customValue?: string | null, id: any, level: RsServiceLevel, optionGroupId?: any | null, serviceId: any }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, metric: string, notes?: string | null, serviceId: any, unitName?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', label: string, color?: string | null, id: any }> }> };
 
 export type ResourceTemplateQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
@@ -10864,6 +10867,64 @@ useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => [
 
 useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
 
+export const ResourceOperatorDocument = `
+    query ResourceOperator($docId: PHID!) {
+  BuilderProfile {
+    getDocument(docId: $docId) {
+      state {
+        id
+        description
+        code
+        name
+        lastModified
+        status
+        contributors
+        isOperator
+      }
+    }
+  }
+}
+    `;
+
+export const useResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables: ResourceOperatorQueryVariables,
+      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: ['ResourceOperator', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperator', variables];
+
+export const useSuspenseResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables: ResourceOperatorQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: ['ResourceOperatorSuspense', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperatorSuspense', variables];
+
+
+useResourceOperatorQuery.fetcher = (variables: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
+
 export const ServiceOfferingsDocument = `
     query ServiceOfferings($filter: RSServiceOfferingsFilter) {
   serviceOfferings(filter: $filter) {
@@ -10876,6 +10937,13 @@ export const ServiceOfferingsDocument = `
     description
     lastModified
     resourceTemplateId
+    serviceGroups {
+      billingCycle
+      description
+      displayOrder
+      id
+      name
+    }
     facetTargets {
       categoryKey
       categoryLabel
@@ -10983,64 +11051,6 @@ useSuspenseServiceOfferingsQuery.getKey = (variables?: ServiceOfferingsQueryVari
 
 
 useServiceOfferingsQuery.fetcher = (variables?: ServiceOfferingsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables, options);
-
-export const ResourceOperatorDocument = `
-    query ResourceOperator($docId: PHID!) {
-  BuilderProfile {
-    getDocument(docId: $docId) {
-      state {
-        id
-        description
-        code
-        name
-        lastModified
-        status
-        contributors
-        isOperator
-      }
-    }
-  }
-}
-    `;
-
-export const useResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables: ResourceOperatorQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: ['ResourceOperator', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
-
-useResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperator', variables];
-
-export const useSuspenseResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables: ResourceOperatorQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: ['ResourceOperatorSuspense', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
-
-useSuspenseResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperatorSuspense', variables];
-
-
-useResourceOperatorQuery.fetcher = (variables: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
 
 export const ResourceTemplateDocument = `
     query ResourceTemplate($docId: PHID!) {

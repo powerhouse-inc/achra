@@ -1,5 +1,4 @@
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
-import { Plan } from '../types'
 import { PlanSelectorItem } from './plan-selector'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
@@ -19,9 +18,19 @@ type Story = StoryObj<typeof meta>
 export const Selected: Story = {
   name: 'Generic - UnSelected',
   args: {
-    value: Plan.Basic,
-    label: 'Basic Plan',
-    description: '$29/month',
+    tier: {
+      description: '',
+      id: '1',
+      name: 'Pro Plan',
+      isCustomPricing: false,
+      pricing: {
+        amount: 59,
+        currency: 'USD',
+      },
+      pricingOptions: [],
+      usageLimits: [],
+      serviceLevels: [],
+    },
   },
   render: (args) => (
     <RadioGroup value="" className="inline-flex">
@@ -33,12 +42,22 @@ export const Selected: Story = {
 export const Unselected: Story = {
   name: 'Generic - Selected',
   args: {
-    value: Plan.Premium,
-    label: 'Pro Plan',
-    description: '$59/month',
+    tier: {
+      description: '',
+      id: '1',
+      name: 'Pro Plan',
+      isCustomPricing: false,
+      pricing: {
+        amount: 59,
+        currency: 'USD',
+      },
+      pricingOptions: [],
+      usageLimits: [],
+      serviceLevels: [],
+    },
   },
   render: (args) => (
-    <RadioGroup value={args.value} className="inline-flex">
+    <RadioGroup value={args.tier.name} className="inline-flex">
       <PlanSelectorItem {...args} />
     </RadioGroup>
   ),

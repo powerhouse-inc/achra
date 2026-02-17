@@ -1,23 +1,27 @@
 'use client'
-
-import { Badge } from '@/modules/shared/components/ui/badge'
 import { cn } from '@/modules/shared/lib/utils'
-import { type FeatureValue, type Plan, PRICING_PLANS } from '../../types'
-import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
+import { usePricingCalculatorContext } from '../pricing-calculator-context'
 import { ServiceCatalogoCell } from '../service-catalogo-cell'
+import type { FeatureValue } from '../../types'
 
 interface FeatureRowProps {
   label: string
   sublabel?: string
-  values: Record<Plan, FeatureValue>
-  activePlan: Plan
+  values: Record<string, FeatureValue>
 }
 
-export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<FeatureRowProps>) {
-  const { currentMobilePlan } = usePricingCalculatorContext()
+export function FeatureRow({ label, sublabel: _sublabel, values }: Readonly<FeatureRowProps>) {
+  const { activePlan, currentMobilePlan, tierNames } = usePricingCalculatorContext()
 
   return (
-    <div className={cn('group/row grid items-center', PRICING_GRID.responsive)}>
+    <div
+      className={cn('group/row items-center', 'grid grid-cols-2 lg:grid-cols-[var(--grid-cols)]')}
+      style={
+        {
+          '--grid-cols': `4fr repeat(${tierNames.length}, 1fr)`,
+        } as React.CSSProperties
+      }
+    >
       {/* Label column - sticky on mobile */}
       <div
         className={cn(
@@ -28,19 +32,6 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
       >
         <div className="flex flex-col md:flex-row md:items-center md:gap-1">
           <span className="text-foreground text-sm font-semibold lg:text-base">{label}</span>
-          {sublabel && (
-            <span className="text-muted-foreground md:flex-start inline-flex items-center gap-1 text-xs md:items-start">
-              <Badge
-                variant="outline"
-                className={cn(
-                  'rounded-md border-2 px-1 py-0 text-sm/5.5 font-semibold',
-                  'bg-purple/30 text-primary border-purple',
-                )}
-              >
-                {sublabel}
-              </Badge>
-            </span>
-          )}
         </div>
       </div>
 
@@ -58,7 +49,7 @@ export function FeatureRow({ label, sublabel, values, activePlan }: Readonly<Fea
       </div>
 
       {/* Desktop: Show all plans */}
-      {PRICING_PLANS.map((plan) => (
+      {tierNames.map((plan) => (
         <div
           key={plan}
           className={cn(

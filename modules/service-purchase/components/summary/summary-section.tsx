@@ -1,15 +1,16 @@
+import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { MarketplaceHeader } from '../configure-services-purchase/components/marketplace-header'
 import { OperationSummaryCard } from './components/operation-summary-card'
 import { Summary } from './components/summary'
-import type { Plan, PricingData } from '../configure-services-purchase/components/types'
 
 export interface SummaryProps {
-  selectedPlan: Plan
+  selectedPlan?: string
   enabledSections: Record<string, boolean>
   actionState: ServiceRequestFormState
   isPending: boolean
-  servicesData: PricingData
+  servicesData?: RsServiceOffering
+  isLoading?: boolean
 }
 
 function SummarySection({
@@ -19,10 +20,12 @@ function SummarySection({
   isPending,
   servicesData,
 }: Readonly<SummaryProps>) {
-  // Get selected addon section IDs
+  // Get enabled section IDs (option group IDs)
   const selectedAddons = Object.entries(enabledSections)
     .filter(([, isEnabled]) => isEnabled)
     .map(([sectionId]) => sectionId)
+
+  if (!servicesData) return null
 
   return (
     <div className="mt-6 flex flex-col gap-6">

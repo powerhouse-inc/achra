@@ -1,25 +1,18 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
-import { use } from 'react'
+import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
-import { SERVICES_DATA } from '../../../../mock/mock-data'
-import { type Plan, PricingCalculator } from '../service-catalog'
+import { PricingCalculator } from '../service-catalog'
+import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator/pricing-calculator-skeleton'
 import { ServicePurchaseSelects } from '../service-purchase-selects'
-import type { SectionId } from '../../../service-purchase-form/service-purchase-form'
 
-// TODO: Remove once the api is ready
-const delay = async (ms: number) =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      resolve('Data loaded')
-    }, ms),
-  )
-const mockApiPromise = delay(2000)
 export interface ConfigureServicesProps {
-  selectedPlan?: Plan
-  enabledSections?: Record<SectionId, boolean>
-  onPlanChange?: (plan: Plan) => void
-  onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
+  selectedPlan?: string
+  enabledSections?: Record<string, boolean>
+  onPlanChange?: (plan: string) => void
+  onSectionToggle?: (sectionId: string, enabled: boolean) => void
+  servicesData?: RsServiceOffering
+  isLoading?: boolean
 }
 
 export default function ConfigureServices({
@@ -27,12 +20,16 @@ export default function ConfigureServices({
   enabledSections,
   onPlanChange,
   onSectionToggle,
+  isLoading,
+  servicesData,
 }: Readonly<ConfigureServicesProps>) {
-  use(mockApiPromise)
   const searchParams = useSearchParams()
 
-  const facetTargets = SERVICES_DATA.facetTargets
+  if (isLoading || !servicesData) {
+    return <PricingCalculatorSkeleton />
+  }
 
+  const facetTargets = servicesData.facetTargets
   // TODO: This will be needed in the table once the API is ready
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const facetSelections = Object.fromEntries(
@@ -52,7 +49,7 @@ export default function ConfigureServices({
           enabledSections={enabledSections}
           onPlanChange={onPlanChange}
           onSectionToggle={onSectionToggle}
-          servicesData={SERVICES_DATA}
+          servicesData={servicesData}
         />
       </div>
     </div>

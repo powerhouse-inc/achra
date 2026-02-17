@@ -1,6 +1,3 @@
-import type { Plan } from '@/modules/service-purchase/components/configure-services-purchase/components/types'
-import type { SectionId } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
-
 /**
  * Service filter tabs
  */
@@ -22,8 +19,8 @@ export interface ServiceRequestData {
   name: string
   teamName: string
   email: string
-  selectedPlan: Plan
-  enabledSections: Record<SectionId, boolean>
+  selectedPlan: string
+  enabledSections: Record<string, boolean>
   configuration: ServiceConfiguration
 }
 

@@ -4,8 +4,8 @@ import { Lock } from 'lucide-react'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../../service-catalog-status/service-catalog-status'
-import { type CatalogStatus, type Plan, PRICING_PLANS } from '../../types'
-import { PRICING_GRID, usePricingCalculatorContext } from '../pricing-calculator-context'
+import { usePricingCalculatorContext } from '../pricing-calculator-context'
+import type { CatalogStatus } from '../../types'
 
 interface SectionHeaderProps {
   title: string
@@ -16,7 +16,7 @@ interface SectionHeaderProps {
   onToggleChange?: (enabled: boolean) => void
   oneTimeFee?: string
   oneTimeFeeVariant?: 'primary' | 'muted'
-  activePlan?: Plan
+  activePlan?: string
 }
 
 export function SectionHeader({
@@ -30,10 +30,21 @@ export function SectionHeader({
   oneTimeFeeVariant = 'muted',
   activePlan,
 }: Readonly<SectionHeaderProps>) {
-  const { currentMobilePlan } = usePricingCalculatorContext()
+  const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
+  const lastTierName = tierNames[tierNames.length - 1]
 
   return (
-    <div className={cn('grid items-center', PRICING_GRID.responsive)}>
+    <div
+      className={cn(
+        'text-foreground items-center',
+        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols)]',
+      )}
+      style={
+        {
+          '--grid-cols': `4fr repeat(${tierNames.length}, 1fr)`,
+        } as React.CSSProperties
+      }
+    >
       {/* Label column - sticky on mobile */}
       <div
         className={cn(
@@ -83,10 +94,10 @@ export function SectionHeader({
         className={cn(
           'border-input pointer-events-none flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
-          currentMobilePlan === 'enterprise' && oneTimeFee && 'relative',
+          currentMobilePlan === lastTierName && oneTimeFee && 'relative',
         )}
       >
-        {currentMobilePlan === 'enterprise' && oneTimeFee && (
+        {currentMobilePlan === lastTierName && oneTimeFee && (
           <span
             className={cn(
               'min-w-0 text-xs font-medium whitespace-nowrap',
@@ -99,16 +110,16 @@ export function SectionHeader({
       </div>
 
       {/* Desktop: Show all plan columns */}
-      {PRICING_PLANS.map((plan) => (
+      {tierNames.map((plan) => (
         <div
           key={plan}
           className={cn(
             'border-input pointer-events-none hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
-            plan === 'enterprise' && oneTimeFee && 'relative',
+            plan === lastTierName && oneTimeFee && 'relative',
           )}
         >
-          {plan === 'enterprise' && oneTimeFee && (
+          {plan === lastTierName && oneTimeFee && (
             <span
               className={cn(
                 'absolute right-6 min-w-0 text-xs font-medium whitespace-nowrap',

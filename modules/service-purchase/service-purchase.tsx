@@ -4,6 +4,7 @@ import { ServicePurchaseStepProvider } from '@/modules/services/context/service-
 import ServicePurchaseForm from './components/service-purchase-form/service-purchase-form'
 import { getResourceOperator } from './services/resource-operator'
 import { getResourceTemplate } from './services/resource-template'
+import { getServiceOfferings } from './services/service-offerings'
 
 interface ServicePurchaseProps {
   docId: string
@@ -11,6 +12,7 @@ interface ServicePurchaseProps {
 
 export default async function ServicePurchase({ docId }: ServicePurchaseProps) {
   const resourceTemplate = await getResourceTemplate(docId)
+  const services = await getServiceOfferings()
 
   const operatorId = resourceTemplate?.operatorId
 
@@ -22,7 +24,11 @@ export default async function ServicePurchase({ docId }: ServicePurchaseProps) {
 
   return (
     <ServicePurchaseStepProvider>
-      <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
+      <ServicePurchaseForm
+        resourceTemplate={resourceTemplate}
+        operator={operator}
+        services={services}
+      />
     </ServicePurchaseStepProvider>
   )
 }

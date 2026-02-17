@@ -1,87 +1,127 @@
 'use client'
 
 import { useCallback, useMemo, useState } from 'react'
+import {
+  RsServiceLevel,
+  type RsServiceOffering,
+  type RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
+  CatalogStatus,
   ServiceCatalogBody,
   ServiceCatalogFooter,
   ServiceCatalogHeader,
   ServiceCatalogRoot,
   ServiceCatalogRow,
 } from '..'
-import { Plan, PRICING_PLANS, type PricingData } from '../../types'
 import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { PricingCalculatorProvider } from '../pricing-calculator-context'
-import type { SectionId } from '../../../../service-purchase-form/service-purchase-form'
-
+import type { FeatureValue } from '../../types'
+// import type { SectionId } from '../../../../service-purchase-form/service-purchase-form'
 export interface PricingCalculatorProps {
-  selectedPlan?: Plan
-  enabledSections?: Record<SectionId, boolean>
-  onPlanChange?: (plan: Plan) => void
-  onSectionToggle?: (sectionId: SectionId, enabled: boolean) => void
-  readOnly?: boolean
-  servicesData: PricingData
+  selectedPlan?: string
+  enabledSections?: Record<string, boolean>
+  onPlanChange?: (plan: string) => void
+  onSectionToggle?: (sectionId: string, enabled: boolean) => void
+  servicesData: RsServiceOffering
 }
-/** Default plan index (Team) for mobile carousel */
-const DEFAULT_PLAN_INDEX = PRICING_PLANS.indexOf(Plan.Team)
+
+/** Default plan index for mobile carousel */
+const DEFAULT_PLAN_INDEX = 1
+
+/** Maps an API service level to a UI-renderable FeatureValue */
+function mapServiceLevel(level: RsServiceLevel, customValue?: string | null): FeatureValue {
+  switch (level) {
+    case RsServiceLevel.Included:
+      return true
+    case RsServiceLevel.NotIncluded:
+    case RsServiceLevel.NotApplicable:
+      return false
+    case RsServiceLevel.Custom:
+      return customValue ?? 'Custom'
+    case RsServiceLevel.Optional:
+      return customValue ?? 'Optional'
+    case RsServiceLevel.Variable:
+      return customValue ?? 'Variable'
+  }
+}
+
+/** Builds a Record<tierName, FeatureValue> for a given service across all tiers */
+function buildServiceValues(
+  serviceId: string,
+  tiers: readonly RsServiceSubscriptionTier[],
+): Record<string, FeatureValue> {
+  const values: Record<string, FeatureValue> = {}
+  for (const tier of tiers) {
+    const binding = tier.serviceLevels.find((sl) => sl.serviceId === serviceId)
+    values[tier.name] = binding ? mapServiceLevel(binding.level, binding.customValue) : false
+  }
+  return values
+}
 
 export function PricingCalculator({
-  selectedPlan = Plan.Team,
+  selectedPlan,
   enabledSections,
   onPlanChange,
   onSectionToggle,
-  readOnly = false,
+  // readOnly = false,
   servicesData,
 }: Readonly<PricingCalculatorProps>) {
+  /** Tier names derived from API data, used for column iteration and carousel */
+  const tierNames = useMemo(() => servicesData.tiers.map((t) => t.name), [servicesData.tiers])
+
   // Mobile carousel state - track which plan is visible on mobile
+
   const [mobilePlanIndex, setMobilePlanIndex] = useState(() => {
-    const index = PRICING_PLANS.indexOf(selectedPlan)
+    const index = tierNames.indexOf(selectedPlan ?? '')
     return index >= 0 ? index : DEFAULT_PLAN_INDEX
   })
 
   // Derived state: current plan shown in mobile carousel
-  const currentMobilePlan = PRICING_PLANS[mobilePlanIndex]
+  const currentMobilePlan = tierNames[mobilePlanIndex]
 
   const handlePlanChange = useCallback(
-    (plan: Plan) => {
-      if (readOnly || !onPlanChange) return
+    (plan: string) => {
+      if (!onPlanChange) return
       onPlanChange(plan)
       // Sync mobile carousel to selected plan
-      const newIndex = PRICING_PLANS.indexOf(plan)
+      const newIndex = tierNames.indexOf(plan)
       if (newIndex >= 0) {
         setMobilePlanIndex(newIndex)
       }
     },
-    [readOnly, onPlanChange],
+    [onPlanChange, tierNames],
   )
 
   const toggleSection = useCallback(
-    (sectionId: SectionId, enabled: boolean) => {
-      if (readOnly || !onSectionToggle) return
+    (sectionId: string, enabled: boolean) => {
+      if (!onSectionToggle) return
       onSectionToggle(sectionId, enabled)
     },
-    [readOnly, onSectionToggle],
+    [onSectionToggle],
   )
 
   // Carousel navigation handlers
   const handlePrevPlan = useCallback(() => {
-    const newIndex = mobilePlanIndex > 0 ? mobilePlanIndex - 1 : PRICING_PLANS.length - 1
-    handlePlanChange(PRICING_PLANS[newIndex])
-  }, [handlePlanChange, mobilePlanIndex])
+    const newIndex = mobilePlanIndex > 0 ? mobilePlanIndex - 1 : tierNames.length - 1
+    setMobilePlanIndex(newIndex)
+    handlePlanChange(tierNames[newIndex])
+  }, [handlePlanChange, mobilePlanIndex, tierNames])
 
   const handleNextPlan = useCallback(() => {
-    const newIndex = mobilePlanIndex < PRICING_PLANS.length - 1 ? mobilePlanIndex + 1 : 0
-    handlePlanChange(PRICING_PLANS[newIndex])
-  }, [handlePlanChange, mobilePlanIndex])
+    const newIndex = mobilePlanIndex < tierNames.length - 1 ? mobilePlanIndex + 1 : 0
+    setMobilePlanIndex(newIndex)
+    handlePlanChange(tierNames[newIndex])
+  }, [handlePlanChange, mobilePlanIndex, tierNames])
 
-  const visibleSections = useMemo(
-    () =>
-      readOnly
-        ? servicesData.sections?.filter((section) => enabledSections?.[section.id as SectionId])
-        : servicesData.sections,
-    [readOnly, servicesData.sections, enabledSections],
-  )
+  // const visibleSections = useMemo(
+  //   () => servicesData.optionGroups
+
+  //       : ,
+  //   [readOnly, enabledSections, servicesData.optionGroups],
+  // )
 
   const contextValue = useMemo(
     () => ({
@@ -90,9 +130,20 @@ export function PricingCalculator({
       mobilePlanIndex,
       onPrevPlan: handlePrevPlan,
       onNextPlan: handleNextPlan,
-      readOnly,
+
+      tierNames,
+      tiers: servicesData.tiers,
     }),
-    [selectedPlan, currentMobilePlan, mobilePlanIndex, handlePrevPlan, handleNextPlan, readOnly],
+    [
+      selectedPlan,
+      currentMobilePlan,
+      mobilePlanIndex,
+      handlePrevPlan,
+      handleNextPlan,
+
+      tierNames,
+      servicesData.tiers,
+    ],
   )
 
   return (
@@ -103,7 +154,7 @@ export function PricingCalculator({
           <HeaderCatalogPlan
             selectedPlan={selectedPlan}
             handlePlanChange={handlePlanChange}
-            readOnly={readOnly}
+            // readOnly={readOnly}
             mobilePlanIndex={mobilePlanIndex}
             onPrevPlan={handlePrevPlan}
             onNextPlan={handleNextPlan}
@@ -111,44 +162,44 @@ export function PricingCalculator({
           />
           {/* Service Sections */}
           <div className="flex flex-col">
-            {visibleSections?.map((section) => (
-              <ServiceCatalogRoot
-                key={section.id}
-                activePlan={selectedPlan}
-                isEnabled={enabledSections?.[section.id as SectionId] ?? false}
-              >
-                <ServiceCatalogHeader
-                  title={section.title}
-                  badge={section.badge}
-                  hasToggle={section.hasToggle}
-                  toggleLabel={section.toggleLabel}
-                  toggleEnabled={enabledSections?.[section.id as SectionId]}
-                  onToggleChange={
-                    section.hasToggle && !readOnly
-                      ? (enabled: boolean) => {
-                          toggleSection(section.id as SectionId, enabled)
-                        }
-                      : undefined
-                  }
-                  oneTimeFee={section.oneTimeFee}
-                  oneTimeFeeVariant={section.oneTimeFeeVariant}
-                />
+            {servicesData.optionGroups.map((section) => {
+              const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)
+              return (
+                <ServiceCatalogRoot
+                  key={section.id}
+                  activePlan={selectedPlan}
+                  isEnabled={!section.isAddOn || (enabledSections?.[section.id] ?? false)}
+                >
+                  <ServiceCatalogHeader
+                    title={section.name}
+                    badge={section.isAddOn ? CatalogStatus.Optional : CatalogStatus.Included}
+                    hasToggle={section.isAddOn}
+                    toggleLabel={section.name}
+                    toggleEnabled={enabledSections?.[section.id]}
+                    onToggleChange={
+                      section.isAddOn
+                        ? (enabled: boolean) => {
+                            toggleSection(section.id, enabled)
+                          }
+                        : undefined
+                    }
+                  />
 
-                <ServiceCatalogBody>
-                  {section.rows.map((row) => (
-                    <ServiceCatalogRow
-                      key={row.id}
-                      id={row.id}
-                      label={row.label}
-                      sublabel={row.sublabel}
-                      values={row.values}
-                    />
-                  ))}
-                </ServiceCatalogBody>
+                  <ServiceCatalogBody>
+                    {rowBody.map((row) => (
+                      <ServiceCatalogRow
+                        key={row.id}
+                        label={row.title}
+                        sublabel={row.description ?? undefined}
+                        values={buildServiceValues(row.id, servicesData.tiers)}
+                      />
+                    ))}
+                  </ServiceCatalogBody>
 
-                <ServiceCatalogFooter section={section} />
-              </ServiceCatalogRoot>
-            ))}
+                  <ServiceCatalogFooter optionGroup={section} tiers={servicesData.tiers} />
+                </ServiceCatalogRoot>
+              )
+            })}
           </div>
           {/* Grand Total */}
           <GrandTotalRowCatalog
