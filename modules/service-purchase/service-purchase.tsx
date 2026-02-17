@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { ServicePurchaseStepProvider } from '@/modules/services/context/service-purchase-step-context'
 
 import ServicePurchaseForm from './components/service-purchase-form/service-purchase-form'
+import { getResourceOperator } from './services/resource-operator'
 import { getResourceTemplate } from './services/resource-template'
 
 interface ServicePurchaseProps {
@@ -11,13 +12,17 @@ interface ServicePurchaseProps {
 export default async function ServicePurchase({ docId }: ServicePurchaseProps) {
   const resourceTemplate = await getResourceTemplate(docId)
 
-  if (!resourceTemplate) {
+  const operatorId = resourceTemplate?.operatorId
+
+  const operator = await getResourceOperator(operatorId)
+
+  if (!resourceTemplate || !operator) {
     notFound()
   }
 
   return (
     <ServicePurchaseStepProvider>
-      <ServicePurchaseForm resourceTemplate={resourceTemplate} />
+      <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
     </ServicePurchaseStepProvider>
   )
 }

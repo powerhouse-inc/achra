@@ -9,6 +9,7 @@ query ResourceTemplate($docId: PHID!) {
         thumbnailUrl
         summary
         status
+        operatorId
         contentSections {
           content
           displayOrder

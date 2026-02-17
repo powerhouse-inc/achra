@@ -1,31 +1,47 @@
-import { type Operator, OperatorCard } from '@/modules/shared/components/operator-card'
+import {
+  type BuilderProfile_BuilderProfileState,
+  BuilderProfile_BuilderStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { OperatorCard } from '@/modules/shared/components/operator-card'
 
-export type { Operator }
-
-export const OPERATORS_MOCK: Operator[] = [
+export const OPERATORS_MOCK: BuilderProfile_BuilderProfileState[] = [
   {
     id: 'powerhouse-genesis-oh',
     name: 'Powerhouse Genesis OH',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    activeSince: 'JUL 2022',
-    setupTime: '7 days',
-    recurringCost: 'From $800/Month',
+    lastModified: '2024-07-01T00:00:00Z',
+    status: BuilderProfile_BuilderStatus.Active,
+    contributors: ['phid-contributor-1', 'phid-contributor-2'],
+    links: [],
+    operationalHubMember: { name: 'Powerhouse Genesis OH', phid: 'powerhouse-genesis-oh' },
+    scopes: [],
+    skills: [],
+    isOperator: true,
   },
   {
     id: 'accountable-opc',
     name: 'Accountable OPC',
     description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    activeSince: 'JUL 2022',
-    setupTime: '7 days',
-    recurringCost: 'From $500/Month',
+    lastModified: '2024-07-01T00:00:00Z',
+    status: BuilderProfile_BuilderStatus.Active,
+    contributors: ['phid-contributor-1'],
+    links: [],
+    operationalHubMember: { name: 'Accountable OPC', phid: 'accountable-opc' },
+    scopes: [],
+    skills: [],
+    isOperator: true,
   },
 ]
 
 interface SelectOperatorProps {
   onSelectServices: (operatorId: string) => void
+  operator: BuilderProfile_BuilderProfileState
 }
 
-export default function SelectOperator({ onSelectServices }: Readonly<SelectOperatorProps>) {
+export default function SelectOperator({
+  onSelectServices,
+  operator,
+}: Readonly<SelectOperatorProps>) {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-2">
@@ -33,21 +49,13 @@ export default function SelectOperator({ onSelectServices }: Readonly<SelectOper
           Operator
         </span>
         <span className="text-foreground text-xs/4.5 lg:text-base/6">
-          Lorem ipsum dolor sit amet consectetur. Massa id vitae turpis viverra tortor. Posuere non
-          tempor volutpat purus arcu pulvinar viverra. Sed praesent in leo in. Mattis adipiscing
-          proin lobortis facilisi etiam tellus. Pharetra scelerisque ornare lacus dolor consectetur.
-          Quis pulvinar nam massa tristique tortor dui vitae lectus.
+          Choose the operator that will manage your subscription. Your selected operator will handle
+          day-to-day service administration, including billing adjustments and usage limit changes.
+          Click &quot;Configure Services&quot; to proceed with your preferred operator.
         </span>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        {OPERATORS_MOCK.map((operator) => (
-          <OperatorCard
-            key={operator.name}
-            operator={operator}
-            onConfigureServices={onSelectServices}
-            configureVariant={operator.id === 'powerhouse-genesis-oh' ? 'default' : 'outline'}
-          />
-        ))}
+        <OperatorCard operator={operator} onConfigureServices={onSelectServices} />
       </div>
     </div>
   )

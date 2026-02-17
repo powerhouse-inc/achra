@@ -9581,12 +9581,19 @@ export type ServiceOfferingsQueryVariables = Exact<{
 
 export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', summary: string, operatorId: any, title: string, status: RsServiceStatus, id: any, infoLink?: any | null, description?: string | null, lastModified: any, resourceTemplateId?: any | null, thumbnailUrl?: any | null, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', categoryKey: string, categoryLabel: string, selectedOptions: Array<string>, id: any }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', defaultSelected: boolean, description?: string | null, isAddOn: boolean, name: string, id: any }>, services: Array<{ __typename?: 'RSOfferingService', description?: string | null, displayOrder?: number | null, id: any, isSetupFormation: boolean, optionGroupId?: any | null, title: string, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', facetName: string, facetType: any, id: any, supportedOptions: Array<any> }> }>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', description?: string | null, id: any, isCustomPricing: boolean, name: string, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', amount: any, currency: any, id: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', customValue?: string | null, id: any, level: RsServiceLevel, optionGroupId?: any | null, serviceId: any }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, metric: string, notes?: string | null, serviceId: any, unitName?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', label: string, color?: string | null, id: any }> }> };
 
+export type ResourceOperatorQueryVariables = Exact<{
+  docId: Scalars['PHID']['input'];
+}>;
+
+
+export type ResourceOperatorQuery = { __typename?: 'Query', BuilderProfile?: { __typename?: 'BuilderProfileQueries', getDocument?: { __typename?: 'BuilderProfile', state: { __typename?: 'BuilderProfile_BuilderProfileState', id?: any | null, description?: string | null, code?: string | null, name?: string | null, lastModified?: any | null, status?: BuilderProfile_BuilderStatus | null, contributors: Array<any>, isOperator: boolean } } | null } | null };
+
 export type ResourceTemplateQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
 
 
-export type ResourceTemplateQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }> } } | null } | null };
+export type ResourceTemplateQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }> } } | null } | null };
 
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
@@ -10977,6 +10984,64 @@ useSuspenseServiceOfferingsQuery.getKey = (variables?: ServiceOfferingsQueryVari
 
 useServiceOfferingsQuery.fetcher = (variables?: ServiceOfferingsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables, options);
 
+export const ResourceOperatorDocument = `
+    query ResourceOperator($docId: PHID!) {
+  BuilderProfile {
+    getDocument(docId: $docId) {
+      state {
+        id
+        description
+        code
+        name
+        lastModified
+        status
+        contributors
+        isOperator
+      }
+    }
+  }
+}
+    `;
+
+export const useResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables: ResourceOperatorQueryVariables,
+      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: ['ResourceOperator', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperator', variables];
+
+export const useSuspenseResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables: ResourceOperatorQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: ['ResourceOperatorSuspense', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperatorSuspense', variables];
+
+
+useResourceOperatorQuery.fetcher = (variables: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
+
 export const ResourceTemplateDocument = `
     query ResourceTemplate($docId: PHID!) {
   ResourceTemplate {
@@ -10989,6 +11054,7 @@ export const ResourceTemplateDocument = `
         thumbnailUrl
         summary
         status
+        operatorId
         contentSections {
           content
           displayOrder
