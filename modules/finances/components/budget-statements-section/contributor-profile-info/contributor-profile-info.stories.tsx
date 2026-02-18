@@ -13,13 +13,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const SAMPLE_LOGO_URL =
+  'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png'
+
 export const Default: Story = {
   render: (args) => <ContributorProfileInfo {...args} />,
   args: {
     name: 'Sustainable Ecosystem Scaling',
     code: 'SES',
     isCoreUnit: false,
-    icon: true,
+    logoUrl: SAMPLE_LOGO_URL,
     status: ExpenseReport_ExpenseReportStatus.Draft,
   },
 }
@@ -30,7 +33,18 @@ export const CoreUnit: Story = {
     name: 'Sustainable Ecosystem Scaling',
     code: 'SES',
     isCoreUnit: true,
-    icon: true,
+    logoUrl: SAMPLE_LOGO_URL,
     status: ExpenseReport_ExpenseReportStatus.Review,
+  },
+}
+
+export const MissingLogo: Story = {
+  render: (args) => <ContributorProfileInfo {...args} />,
+  args: {
+    name: 'Builder Without Logo',
+    code: 'BWL',
+    isCoreUnit: false,
+    logoUrl: undefined,
+    status: ExpenseReport_ExpenseReportStatus.Draft,
   },
 }

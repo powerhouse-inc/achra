@@ -9533,7 +9533,7 @@ export type OperatorProfileQueryVariables = Exact<{
 }>;
 
 
-export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, lastModified?: any | null, status?: BuilderStatus | null, contributors: Array<any>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
+export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, code?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, lastModified?: any | null, status?: BuilderStatus | null, contributors: Array<any>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
 
 export type ProjectsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -10132,6 +10132,7 @@ export const OperatorProfileDocument = `
     isOperator
     id
     name
+    code
     slug
     icon
     skills

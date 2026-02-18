@@ -1,18 +1,20 @@
+import Image from 'next/image'
 import * as React from 'react'
-import { Avatar, AvatarImage } from '@/modules/shared/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { cn } from '@/modules/shared/lib/utils'
-import TwoUserIcon from './TwoUserIcon'
 
 export interface CircleAvatarWithIconProps extends React.ComponentProps<typeof Avatar> {
-  icon: boolean
-  image: string
+  iconUrl?: string | null
+  image?: string | null
+  fallbackText: string
   isCoreUnit?: boolean
 }
 
 export function AvatarWithIcon({
   image,
+  fallbackText,
   className,
-  icon,
+  iconUrl,
   isCoreUnit = false,
   ...avatarProps
 }: CircleAvatarWithIconProps) {
@@ -23,10 +25,11 @@ export function AvatarWithIcon({
         className={cn('h-8.5 w-8.5 shrink-0')}
         {...avatarProps}
       >
-        <AvatarImage src={image} alt="" />
+        {image ? <AvatarImage src={image} alt="" /> : null}
+        <AvatarFallback>{fallbackText}</AvatarFallback>
       </Avatar>
 
-      {icon && (
+      {iconUrl && (
         <div
           data-slot="circle-avatar-with-icon-icon"
           className={cn(
@@ -34,7 +37,7 @@ export function AvatarWithIcon({
             isCoreUnit ? 'text-status-progress' : 'text-status-success',
           )}
         >
-          <TwoUserIcon className="size-full" />
+          <Image src={iconUrl} alt="" fill sizes="44px" unoptimized className="object-contain" />
         </div>
       )}
     </div>

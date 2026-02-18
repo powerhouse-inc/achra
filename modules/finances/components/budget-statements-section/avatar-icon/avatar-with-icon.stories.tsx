@@ -12,20 +12,41 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const SAMPLE_IMAGE_URL =
+  'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png'
+
 export const Default: Story = {
   render: (args) => <AvatarWithIcon {...args} />,
   args: {
-    image:
-      'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
-    icon: true,
+    image: SAMPLE_IMAGE_URL,
+    fallbackText: 'P',
+    iconUrl: SAMPLE_IMAGE_URL,
   },
 }
 
 export const CoreUnit: Story = {
   render: (args) => <AvatarWithIcon {...args} isCoreUnit />,
   args: {
-    image:
-      'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
-    icon: true,
+    image: SAMPLE_IMAGE_URL,
+    fallbackText: 'P',
+    iconUrl: SAMPLE_IMAGE_URL,
+  },
+}
+
+export const WithoutOverlay: Story = {
+  render: (args) => <AvatarWithIcon {...args} />,
+  args: {
+    image: SAMPLE_IMAGE_URL,
+    fallbackText: 'P',
+    iconUrl: undefined,
+  },
+}
+
+export const FallbackOnly: Story = {
+  render: (args) => <AvatarWithIcon {...args} />,
+  args: {
+    image: undefined,
+    fallbackText: 'S',
+    iconUrl: undefined,
   },
 }
