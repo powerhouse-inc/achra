@@ -11,8 +11,6 @@ export interface ServiceCatalogHeaderProps {
   toggleLabel?: string
   toggleEnabled?: boolean
   onToggleChange?: (enabled: boolean) => void
-  oneTimeFee?: string
-  oneTimeFeeVariant?: 'primary' | 'muted'
 }
 
 export function ServiceCatalogHeader({
@@ -22,8 +20,6 @@ export function ServiceCatalogHeader({
   toggleLabel,
   toggleEnabled = false,
   onToggleChange,
-  oneTimeFee,
-  oneTimeFeeVariant = 'muted',
 }: Readonly<ServiceCatalogHeaderProps>) {
   const { activePlan } = useServiceCatalogContext()
   return (
@@ -34,8 +30,6 @@ export function ServiceCatalogHeader({
       toggleLabel={toggleLabel}
       toggleEnabled={toggleEnabled}
       onToggleChange={onToggleChange}
-      oneTimeFee={oneTimeFee}
-      oneTimeFeeVariant={oneTimeFeeVariant}
       activePlan={activePlan}
     />
   )

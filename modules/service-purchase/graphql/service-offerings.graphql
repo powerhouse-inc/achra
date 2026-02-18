@@ -1,89 +1,91 @@
-query ServiceOfferings($filter: RSServiceOfferingsFilter) {
-  serviceOfferings(filter: $filter) {
-    summary
-    operatorId
-    title
-    status
+query ServiceOfferings {
+  serviceOfferings {
     id
-    infoLink
-    description
-    lastModified
+    operatorId
     resourceTemplateId
-    serviceGroups {
-      billingCycle
-      description
-      displayOrder
-      id
-      name
-    }
-    facetTargets {
-      categoryKey
-      categoryLabel
-      selectedOptions
-      id
-    }
-    optionGroups {
-      defaultSelected
-      description
-      isAddOn
-      name
-      id
-    }
-    services {
-      description
-      displayOrder
-      facetBindings {
-        facetName
-        facetType
-        id
-        supportedOptions
-      }
-      id
-      isSetupFormation
-      optionGroupId
-      title
-    }
-
+    title
+    summary
+    description
+    thumbnailUrl
+    infoLink
+    status
+    lastModified
     tiers {
-      description
       id
-      isCustomPricing
       name
+      description
+      isCustomPricing
       pricing {
         amount
         currency
       }
       pricingOptions {
+        id
         amount
         currency
-        id
         isDefault
       }
       serviceLevels {
-        customValue
         id
-        level
-        optionGroupId
         serviceId
+        level
+        customValue
+        optionGroupId
       }
       usageLimits {
         id
-
-        metric
-        notes
-
         serviceId
+        metric
         unitName
-        unitPrice
 
+        notes
+        unitPrice
         unitPriceCurrency
       }
     }
-    thumbnailUrl
     targetAudiences {
+      id
       label
       color
+    }
+
+    facetTargets {
       id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    services {
+      id
+      title
+      description
+      displayOrder
+      isSetupFormation
+      optionGroupId
+      facetBindings {
+        id
+        facetName
+        facetType
+        supportedOptions
+      }
+    }
+    optionGroups {
+      id
+      name
+      description
+      costType
+      isAddOn
+      defaultSelected
+      price
+      currency
+      billingCycle
+    }
+    serviceGroups {
+      id
+      name
+      description
+      billingCycle
+      displayOrder
     }
   }
 }
