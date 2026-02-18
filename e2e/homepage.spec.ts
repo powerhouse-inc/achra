@@ -8,7 +8,7 @@ test('has a link to the Networks page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-11lmli7.framer-122cz0u').getByText('Networks').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/networks');
+    await expect(page).toHaveURL('https://achra.com/networks');
 });
 
 test.skip('has a link to the Workstreams page', async ({ page }) => {
@@ -22,7 +22,7 @@ test('has a link to the Services page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-18lak58.framer-122cz0u').getByText('Services').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/services');
+    await expect(page).toHaveURL('https://achra.com/services');
 });
 
 test('has a link to the Use Cases page', async ({ page }) => {
@@ -37,7 +37,7 @@ test('has a link to the Networks page in the "For Organizations" section', async
 
     await page.getByText('View networks').click();
 
-    await expect(page).toHaveURL('https://staging.achra.com/networks');
+    await expect(page).toHaveURL('https://achra.com/networks');
 });
 
 test.skip('has a link to the Networks page from the button "Create your own"', async ({ page }) => {
