@@ -10,7 +10,8 @@ interface ContributorProfileInfoProps {
   name: string
   code?: Maybe<string>
   isCoreUnit: boolean
-  icon: boolean
+  icon?: boolean
+  logoUrl?: Maybe<string>
   status?: Maybe<ExpenseReport_ExpenseReportStatus>
   className?: string
 }
@@ -19,16 +20,21 @@ export function ContributorProfileInfo({
   name,
   code,
   isCoreUnit,
-  icon,
+  icon = true,
+  logoUrl,
   status,
   className,
 }: ContributorProfileInfoProps) {
+  const hasLogo = logoUrl != null && logoUrl.trim() !== ''
+  const fallbackText = name.charAt(0).toUpperCase() || '?'
+
   return (
     <div
       className={cn('flex flex-wrap items-center gap-2 md:flex-nowrap md:items-center', className)}
     >
       <AvatarWithIcon
-        image="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+        image={hasLogo ? logoUrl : undefined}
+        fallbackText={fallbackText}
         icon={icon}
         isCoreUnit={isCoreUnit}
       />

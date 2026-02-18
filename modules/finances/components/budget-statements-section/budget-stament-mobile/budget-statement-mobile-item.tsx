@@ -48,7 +48,7 @@ export function BudgetStatementMobileItem({
               name={budgetStatement.owner.name}
               code={budgetStatement.owner.code}
               isCoreUnit={true}
-              icon={true}
+              logoUrl={budgetStatement.owner.logo}
               status={budgetStatement.status as ExpenseReport_ExpenseReportStatus}
             />
           </div>
