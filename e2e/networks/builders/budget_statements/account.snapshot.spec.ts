@@ -44,9 +44,9 @@ test('should navigate to the next month', async ({ page }) => {
     await expect(page.getByText('DEC 2025')).toHaveCount(5);
 });
 
-test('should load the MakerDAO Funding Overview', async ({ page }) => {
-    await expect(page.getByText('MakerDAO Funding Overview')).toBeVisible();
-    await expect(page.getByText('Totals funds made available to Powerhouse over its entire lifetime , since June 2021.')).toHaveCount(1);
+test('should load the Funding Overview', async ({ page }) => {
+    await expect(page.getByText('Powerhouse Genesis Operational Hub Funding Overview')).toBeVisible();
+    await expect(page.getByText('Totals funds made available to Powerhouse Genesis Operational Hub over its entire lifetime')).toHaveCount(1);
     await expect(page.getByText('*All values are converted to USDS')).toHaveCount(1);
     await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
@@ -84,8 +84,8 @@ test('should load View Transaction History', async ({ page }) => {
     await expect(page.getByText('291,667')).toBeHidden();
 });
 
-test('should load MakerDAO Funding Overview info', async ({ page }) => {
-    const info = "Monitor funds made available to Ecosystem Actors, track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in MakerDAO's Lifetime Balances.";
+test('should load Funding Overview info', async ({ page }) => {
+    const info = "Monitor funds made available to track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in Powerhouse Genesis Operational Hub Lifetime Balances.";
 
     await page.waitForLoadState('networkidle');
 
@@ -96,10 +96,10 @@ test('should load MakerDAO Funding Overview info', async ({ page }) => {
 
 test('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('Total Reserves')).toBeVisible();
-    await expect(page.getByText('On-Chain and off-chain reserves accessible to the Powerhouse Team.')).toHaveCount(1);
+    await expect(page.getByText('On-Chain and off-chain reserves accessible to the Powerhouse Genesis Operational Hub Team.')).toHaveCount(1);
     await expect(page.getByText('Include Off-Chain Reserves')).toBeHidden();
     await expect(page.getByText('1 Dec 2025')).toHaveCount(4);
-    await expect(page.getByText('-41,231')).toBeVisible();
+    await expect(page.getByText('-424,477')).toBeVisible();
     await expect(page.getByText('Initial Reserves')).toBeVisible();
     await expect(page.getByText('0')).toHaveCount(11);
     await expect(page.getByText('Inflow')).toHaveCount(2);
@@ -116,7 +116,7 @@ test.skip('should include off-chain reserves', async ({ page }) => {
 });
 
 test('should load Total Reserves info', async ({ page }) => {
-    const info = "Explore on and off-chain balances in DAI and other currencies, identify the flow of funds and track the total inflow from the Maker Protocol to internal operational wallets, as well as the outflow to external wallets (e.g., Payment Processor) wallets.";
+    const info = "Explore on and off-chain balances USD related cryptocurrencies, identify the flow of funds and track the total inflow from source to internal operational wallets, as well as the outflow to external wallets (e.g., Payment Processor) wallets."
 
     await page.waitForLoadState('networkidle');
 
@@ -127,72 +127,60 @@ test('should load Total Reserves info', async ({ page }) => {
 
 test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('On Chain Reserves')).toBeVisible();
-    await expect(page.getByText('Unspent On-Chain reserves to the Powerhouse Team.')).toHaveCount(1);
-    await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeVisible();
-    await expect(page.getByText('Initial Balance')).toHaveCount(2);
-    await expect(page.getByText('New Balance')).toHaveCount(2);
+    await expect(page.getByText('Unspent on-chain reserves to the Powerhouse Genesis Operational Hub Team.')).toHaveCount(1);
+    await expect(page.getByText('Operational')).toHaveCount(5);
+    await expect(page.getByText('Initial Balance')).toHaveCount(1);
+    await expect(page.getByText('New Balance')).toHaveCount(1);
 });
 
 test('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
     await page.waitForLoadState('networkidle');
-    await expect(page.getByText('Powerhouse Operational')).toBeHidden();
-    await page.locator('body > div > div > div > div > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(2) > div').click();
+    await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeHidden();
+    await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div[data-state="closed"]').click();
 
-    await expect(page.getByText('Powerhouse Operational')).toBeVisible();
-    await expect(page.getByText('0x8ec6...0260')).toBeVisible();
-    await expect(page.getByText('Inflow')).toHaveCount(5);
-    await expect(page.getByText('491,569')).toHaveCount(1);
-    await expect(page.getByText('New Balance')).toHaveCount(4);
-    await expect(page.getByText('502,050')).toHaveCount(1);
+    // First wallet
+    await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeVisible();
+    await expect(page.getByText('0xA065...Ae41')).toBeVisible();
+    await expect(page.getByText('Inflow')).toHaveCount(4);
+    await expect(page.getByText('0')).toHaveCount(127);
+    await expect(page.getByText('New Balance')).toHaveCount(3);
 
-    await expect(page.getByText('Internal Transaction')).toHaveCount(2);
-    await expect(page.getByText('16-Nov-2024 09:53 UTC')).toHaveCount(1);
-    await expect(page.getByText('0xa10f5ed561ada6...')).toHaveCount(1);
-    await expect(page.getByText('Recipient Address')).toHaveCount(6);
-    await expect(page.getByText('Accountable Payment Processor 2')).toHaveCount(3);
-    await expect(page.getByText('0x62da...b8b2')).toHaveCount(3);
-    await expect(page.getByText('Amount')).toHaveCount(8);
-    await expect(page.getByText('228,125')).toHaveCount(1);
+    await expect(page.getByText('External')).toHaveCount(15);
+    await expect(page.getByText('26-Jan-2026 12:57 UTC')).toHaveCount(1);
+    await expect(page.getByText('0x41579afa91631f...')).toHaveCount(1);
+    await expect(page.getByText('Recipient Address')).toHaveCount(25);
+    await expect(page.getByText('N/A')).toHaveCount(31);
+    await expect(page.getByText('0xc8d8...4efd')).toHaveCount(1);
+    await expect(page.getByText('Amount')).toHaveCount(31);
+    await expect(page.getByText('1,921,440')).toHaveCount(1);
 
-    await expect(page.getByText('14-Oct-2024 19:20 UTC')).toHaveCount(1);
-    await expect(page.getByText('0x59128979788351...')).toHaveCount(1);
-    await expect(page.getByText('243,751')).toHaveCount(1);
+    // Second wallet
+    await expect(page.getByText('Powerhouse Genesis Operational Hub')).toHaveCount(6);
+    await expect(page.getByText('0xF130...0460')).toBeVisible();
+    await expect(page.getByText('Inflow')).toHaveCount(4);
+    await expect(page.getByText('831,413')).toHaveCount(3);
+    await expect(page.getByText('Outflow')).toHaveCount(4);
+    await expect(page.getByText('790,181')).toHaveCount(3);
+    await expect(page.getByText('New Balance')).toHaveCount(3);
+    await expect(page.getByText('686,844')).toHaveCount(3);
 
-    await expect(page.getByText('External Transaction')).toHaveCount(5);
-    await expect(page.getByText('14-Oct-2024 19:15 UTC')).toHaveCount(1);
-    await expect(page.getByText('0x81c3f30e119211...')).toHaveCount(1);
-    await expect(page.getByText('External Address')).toHaveCount(5);
-    await expect(page.getByText('0x0b83...8b4f')).toHaveCount(1);
-    await expect(page.getByText('19,693')).toHaveCount(1);
+    await expect(page.getByText('External')).toHaveCount(15);
+    await expect(page.getByText('14-Jan-2026 07:52 UTC')).toHaveCount(1);
+    await expect(page.getByText('0x5036764a8be008...')).toHaveCount(1);
+    await expect(page.getByText('Recipient Address')).toHaveCount(25);
+    await expect(page.getByText('N/A')).toHaveCount(31);
+    await expect(page.getByText('0x8f7b...19a4')).toHaveCount(1);
+    await expect(page.getByText('Amount')).toHaveCount(31);
+    await expect(page.getByText('16,630')).toHaveCount(1);
 
-    await expect(page.getByText('Initial Balance')).toHaveCount(6);
-    await expect(page.getByText('993,619')).toHaveCount(4);
-
-    await expect(page.getByText('Powerhouse Genesis Operational Hub Association')).toHaveCount(1);
-    await expect(page.getByText('0xf130...0460')).toHaveCount(1);
-    await expect(page.getByText('291,837')).toHaveCount(3);
-    await expect(page.getByText('86,491')).toHaveCount(1);
-    await expect(page.getByText('205,345')).toHaveCount(1);
-
-    await expect(page.getByText('16-Nov-2024 09:58 UTC')).toHaveCount(3);
-    await expect(page.getByText('0x36768ccc471879...')).toHaveCount(3);
-    await expect(page.getByText('0x3cf6...c03f')).toHaveCount(4);
-    await expect(page.getByText('19,668')).toHaveCount(1);
-
-    await expect(page.getByText('Sender Address')).toHaveCount(2);
-    await expect(page.getByText('170')).toHaveCount(1);
-    await expect(page.getByText('17,377')).toHaveCount(1);
-
-    await expect(page.getByText('16-Nov-2024 09:57 UTC')).toHaveCount(1);
-    await expect(page.getByText('0xaab6a679188b84...')).toHaveCount(1);
-    await expect(page.getByText('49,446')).toHaveCount(1);
-
-    await expect(page.getByText('Top-up')).toHaveCount(1);
-    await expect(page.getByText('04-Nov-2024 22:17 UTC')).toHaveCount(1);
-    await expect(page.getByText('0xc78c5d81042ce1...')).toHaveCount(1);
-    await expect(page.getByText('Launch Project')).toHaveCount(1);
-    await expect(page.getByText('0x3c51...d02f')).toHaveCount(1);
-    await expect(page.getByText('291,667')).toHaveCount(1);
+    await expect(page.getByText('External')).toHaveCount(15);
+    await expect(page.getByText('15-Jan-2026 14:19 UTC')).toHaveCount(1);
+    await expect(page.getByText('0x3c9c91cce462a2...')).toHaveCount(1);
+    await expect(page.getByText('Recipient Address')).toHaveCount(25);
+    await expect(page.getByText('N/A')).toHaveCount(31);
+    await expect(page.getByText('0x04f3...6572')).toHaveCount(1);
+    await expect(page.getByText('Amount')).toHaveCount(31);
+    await expect(page.getByText('1,331')).toHaveCount(1);
 });
 
 test.skip('should expand accordion for On Chain Reserves with a single wallet', async ({ page }) => {
