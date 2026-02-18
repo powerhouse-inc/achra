@@ -13,6 +13,7 @@ interface ContributorProfileInfoProps {
   icon: boolean
   status?: Maybe<ExpenseReport_ExpenseReportStatus>
   className?: string
+  logo?: string
 }
 
 export function ContributorProfileInfo({
@@ -22,13 +23,17 @@ export function ContributorProfileInfo({
   icon,
   status,
   className,
+  logo,
 }: ContributorProfileInfoProps) {
   return (
     <div
       className={cn('flex flex-wrap items-center gap-2 md:flex-nowrap md:items-center', className)}
     >
       <AvatarWithIcon
-        image="https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png"
+        image={
+          logo ??
+          'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png'
+        }
         icon={icon}
         isCoreUnit={isCoreUnit}
       />

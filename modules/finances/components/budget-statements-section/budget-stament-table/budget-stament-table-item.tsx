@@ -40,6 +40,7 @@ export function BudgetStamentTableItem({
           <ContributorProfileInfo
             name={budgetStatement.owner.name}
             code={budgetStatement.owner.code}
+            logo={budgetStatement.owner.logo}
             isCoreUnit={true}
             icon={true}
           />
