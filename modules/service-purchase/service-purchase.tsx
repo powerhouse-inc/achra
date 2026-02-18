@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ServicePurchaseStepProvider } from '@/modules/services/context/service-purchase-step-context'
-
+import { getResourceOperator } from '@/modules/shared/services/resource-operator'
 import ServicePurchaseForm from './components/service-purchase-form/service-purchase-form'
-import { getResourceOperator } from './services/resource-operator'
 import { getResourceTemplate } from './services/resource-template'
 import { getServiceOfferings } from './services/service-offerings'
 

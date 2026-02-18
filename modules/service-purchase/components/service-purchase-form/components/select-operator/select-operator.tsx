@@ -34,12 +34,12 @@ export const OPERATORS_MOCK: BuilderProfile_BuilderProfileState[] = [
 ]
 
 interface SelectOperatorProps {
-  onSelectServices: (operatorId: string) => void
+  onConfigureServices: (operatorId: string) => void
   operator: BuilderProfile_BuilderProfileState
 }
 
 export default function SelectOperator({
-  onSelectServices,
+  onConfigureServices,
   operator,
 }: Readonly<SelectOperatorProps>) {
   return (
@@ -55,7 +55,7 @@ export default function SelectOperator({
         </span>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        <OperatorCard operator={operator} onConfigureServices={onSelectServices} />
+        <OperatorCard operator={operator} onConfigureServices={onConfigureServices} />
       </div>
     </div>
   )

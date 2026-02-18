@@ -5,11 +5,11 @@ import {
   type Maybe,
   ResourceTemplate_TemplateStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ScrollToSectionButton } from '@/modules/services/components/service-profile/components/scroll-to-section-button'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
+import { ScrollToSectionButton } from './scroll-to-section-button'
 import type { Route } from 'next'
 
 interface ServiceInfoProps {

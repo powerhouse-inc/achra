@@ -1,4 +1,5 @@
 'use client'
+import { useSearchParams } from 'next/navigation'
 import { startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
@@ -57,6 +58,7 @@ export default function ServicePurchaseForm({
 }: Readonly<ServicePurchaseFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
+  const operatorIdFromUrl = useSearchParams().get('operatorId')
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -73,6 +75,8 @@ export default function ServicePurchaseForm({
     },
   })
 
+  const { control, setValue } = form
+
   // Handle server response: navigate on success, reset dirty state on error
   useEffect(() => {
     if (state.success) {
@@ -83,7 +87,12 @@ export default function ServicePurchaseForm({
     }
   }, [state, goToStep, form])
 
-  const { control, setValue } = form
+  // Sync operatorId from URL only when it changes (primitive dependency to avoid render loop)
+  useEffect(() => {
+    if (!operatorIdFromUrl) return
+    setValue('operatorId', operatorIdFromUrl)
+    goToStep('configure-services')
+  }, [operatorIdFromUrl, setValue, goToStep])
 
   const name = useWatch({ control, name: 'name' })
   const email = useWatch({ control, name: 'email' })
@@ -116,7 +125,7 @@ export default function ServicePurchaseForm({
     navigateToStep('select-operator')
   }
 
-  const handleSelectServices = (operatorId: string) => {
+  const handleConfigureServices = (operatorId: string) => {
     setValue('operatorId', operatorId)
     navigateToStep('configure-services')
   }
@@ -215,7 +224,10 @@ export default function ServicePurchaseForm({
                   />
                 )}
                 {step.value === 'select-operator' && (
-                  <SelectOperator onSelectServices={handleSelectServices} operator={operator} />
+                  <SelectOperator
+                    onConfigureServices={handleConfigureServices}
+                    operator={operator}
+                  />
                 )}
                 {step.value === 'configure-services' && (
                   <Suspense fallback={<PricingCalculatorSkeleton />}>
