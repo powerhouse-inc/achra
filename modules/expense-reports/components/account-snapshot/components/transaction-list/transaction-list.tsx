@@ -3,7 +3,10 @@ import type {
   SnapshotAccountTransaction,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getBalance } from '@/modules/expense-reports/lib/balance'
-import { getCurrencyValue } from '@/modules/expense-reports/lib/budget-statement-utils'
+import {
+  filterAccountAndTransactions,
+  getCurrencyValue,
+} from '@/modules/expense-reports/lib/budget-statement-utils'
 import { isGeneratedSnapshotAccount } from '../../utils/types-helpers'
 import { Transaction } from '../transaction'
 import { GroupItem } from './group-item'
@@ -31,12 +34,19 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
     />
   )
 
+  const filteredItems = filterAccountAndTransactions(items ?? [])
+
   return (
     <div className="relative p-0 md:px-4 lg:px-6 xl:px-14">
       <div className="bg-secondary md:bg-background flex flex-col gap-8 rounded-xl p-2 md:gap-0 md:rounded-t-none md:p-0 md:shadow-xl">
-        {!items?.length && <TransactionEmpty />}
-        {items?.map((item) => {
+        {!filteredItems.length && <TransactionEmpty />}
+        {filteredItems.map((item) => {
           if (isGeneratedSnapshotAccount(item)) {
+            if (item.transactions.length === 0) {
+              // do not render account with no transactions
+              return null
+            }
+
             const balance = getBalance(item)
             return (
               <div
@@ -51,7 +61,9 @@ function TransactionList({ items, highlightPositiveAmounts = false }: Transactio
                   outflow={balance.outflow}
                   newBalance={balance.endingBalance}
                 />
-                {item.transactions.map(renderTransaction)}
+                {item.transactions
+                  .sort((a, b) => new Date(b.datetime).getTime() - new Date(a.datetime).getTime())
+                  .map(renderTransaction)}
                 <InitialBalanceRow initialBalance={balance.startingBalance} />
               </div>
             )
