@@ -10,6 +10,7 @@ interface ContributorProfileInfoProps {
   name: string
   code?: Maybe<string>
   isCoreUnit: boolean
+  icon?: boolean
   logoUrl?: Maybe<string>
   status?: Maybe<ExpenseReport_ExpenseReportStatus>
   className?: string
@@ -19,6 +20,7 @@ export function ContributorProfileInfo({
   name,
   code,
   isCoreUnit,
+  icon = true,
   logoUrl,
   status,
   className,
@@ -33,6 +35,7 @@ export function ContributorProfileInfo({
       <AvatarWithIcon
         image={hasLogo ? logoUrl : undefined}
         fallbackText={fallbackText}
+        icon={icon}
         isCoreUnit={isCoreUnit}
       />
       <div className="flex flex-col gap-1">

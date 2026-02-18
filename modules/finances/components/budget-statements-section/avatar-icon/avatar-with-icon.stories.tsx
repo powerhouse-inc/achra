@@ -20,7 +20,7 @@ export const Default: Story = {
   args: {
     image: SAMPLE_IMAGE_URL,
     fallbackText: 'P',
-    iconUrl: SAMPLE_IMAGE_URL,
+    icon: true,
   },
 }
 
@@ -29,7 +29,7 @@ export const CoreUnit: Story = {
   args: {
     image: SAMPLE_IMAGE_URL,
     fallbackText: 'P',
-    iconUrl: SAMPLE_IMAGE_URL,
+    icon: true,
   },
 }
 
@@ -38,7 +38,7 @@ export const WithoutOverlay: Story = {
   args: {
     image: SAMPLE_IMAGE_URL,
     fallbackText: 'P',
-    iconUrl: undefined,
+    icon: false,
   },
 }
 
@@ -47,6 +47,6 @@ export const FallbackOnly: Story = {
   args: {
     image: undefined,
     fallbackText: 'S',
-    iconUrl: undefined,
+    icon: false,
   },
 }
