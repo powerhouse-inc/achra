@@ -66,7 +66,7 @@ export function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricR
         )}
       >
         {isOneTime ? (
-          activePlan === lastTierName && oneTimeValue ? (
+          oneTimeValue ? (
             <span className="text-primary min-w-0 truncate text-xs font-bold uppercase">
               {oneTimeValue}
             </span>
