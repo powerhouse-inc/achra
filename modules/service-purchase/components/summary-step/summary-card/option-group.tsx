@@ -160,7 +160,7 @@ interface OptionGroupSubtotalProps {
 
 function OptionGroupSubtotal({ children, label = 'SUBTOTAL' }: OptionGroupSubtotalProps) {
   return (
-    <div className="flex items-center justify-between border-t px-3 py-2 lg:px-6">
+    <div className="bg-accent flex items-center justify-between border-t px-3 py-2 lg:px-6">
       <span className="text-foreground text-sm font-bold tracking-wide uppercase lg:text-base/6">
         {label}
       </span>
@@ -229,7 +229,7 @@ function OptionGroupOneTimeSection({ children }: { children: React.ReactNode }) 
 
 function OptionGroupTotalSetup({ label, children }: OptionGroupTotalProps) {
   return (
-    <div className="flex items-center justify-between px-4 py-3 lg:px-6">
+    <div className="bg-accent flex items-center justify-between px-4 py-3 lg:px-6">
       <span className="text-foreground text-sm font-bold tracking-wide uppercase lg:text-base/6">
         {label}
       </span>
