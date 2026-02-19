@@ -1,15 +1,16 @@
 import {
-  type BuilderProfile_BuilderProfileState,
+  type BuilderProfileState,
+  type BuildersFilter,
   useResourceOperatorQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export async function getResourceOperator(
-  docId: string,
-): Promise<BuilderProfile_BuilderProfileState | undefined> {
-  const data = await useResourceOperatorQuery.fetcher({ docId })()
-  const state = data.BuilderProfile?.getDocument?.state
+  filter: BuildersFilter,
+): Promise<BuilderProfileState | undefined> {
+  const data = await useResourceOperatorQuery.fetcher({ filter })()
+  const operator = data.builders.at(0)
 
-  if (!state) {
+  if (!operator) {
     return undefined
   }
 
@@ -18,9 +19,12 @@ export async function getResourceOperator(
       name: '',
       phid: '',
     },
+    isOperator: true,
     links: [],
-    scopes: [],
+    products: [],
+    projects: [],
     skills: [],
-    ...state,
+    scopes: [],
+    ...operator,
   }
 }

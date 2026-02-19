@@ -1,0 +1,17 @@
+query ResourceTemplate($filter: RSResourceTemplatesFilter) {
+  resourceTemplates(filter: $filter) {
+    id
+    title
+    description
+    thumbnailUrl
+    summary
+    status
+    operatorId
+    contentSections {
+      content
+      displayOrder
+      id
+      title
+    }
+  }
+}

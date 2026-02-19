@@ -1,10 +1,11 @@
 'use client'
+import { parseAsString, useQueryState } from 'nuqs'
 import { startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import type {
-  BuilderProfile_BuilderProfileState,
-  ResourceTemplate_ResourceTemplateState,
+  BuilderProfileState,
+  RsResourceTemplate,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
@@ -45,8 +46,8 @@ export interface ServicePurchaseFormValues {
 }
 
 export interface ServicePurchaseFormProps {
-  resourceTemplate: ResourceTemplate_ResourceTemplateState
-  operator: BuilderProfile_BuilderProfileState
+  resourceTemplate: RsResourceTemplate
+  operator: BuilderProfileState
   services: RsServiceOffering[]
 }
 
@@ -57,6 +58,10 @@ export default function ServicePurchaseForm({
 }: Readonly<ServicePurchaseFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
+  const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
+    'operatorId',
+    parseAsString.withDefault(''),
+  )
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -73,6 +78,8 @@ export default function ServicePurchaseForm({
     },
   })
 
+  const { control, setValue } = form
+
   // Handle server response: navigate on success, reset dirty state on error
   useEffect(() => {
     if (state.success) {
@@ -83,7 +90,13 @@ export default function ServicePurchaseForm({
     }
   }, [state, goToStep, form])
 
-  const { control, setValue } = form
+  // Sync operatorId from URL query state
+  useEffect(() => {
+    if (!operatorIdFromUrl) return
+    setValue('operatorId', operatorIdFromUrl)
+    goToStep('configure-services')
+    void setOperatorIdFromUrl(null)
+  }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
   const name = useWatch({ control, name: 'name' })
   const email = useWatch({ control, name: 'email' })
@@ -116,7 +129,7 @@ export default function ServicePurchaseForm({
     navigateToStep('select-operator')
   }
 
-  const handleSelectServices = (operatorId: string) => {
+  const handleConfigureServices = (operatorId: string) => {
     setValue('operatorId', operatorId)
     navigateToStep('configure-services')
   }
@@ -215,7 +228,10 @@ export default function ServicePurchaseForm({
                   />
                 )}
                 {step.value === 'select-operator' && (
-                  <SelectOperator onSelectServices={handleSelectServices} operator={operator} />
+                  <SelectOperator
+                    onConfigureServices={handleConfigureServices}
+                    operator={operator}
+                  />
                 )}
                 {step.value === 'configure-services' && (
                   <Suspense fallback={<PricingCalculatorSkeleton />}>

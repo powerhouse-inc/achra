@@ -51,14 +51,15 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
 
   const goToStep = useCallback(
     (step: StepValue) => {
-      void setActiveStep(step)
-      setVisitedSteps((previousSteps) => {
+      if (step !== activeStep) {
+        void setActiveStep(step)
+      }
+      setVisitedSteps((prev) => {
         const stepsUpTo = getStepsUpTo(step)
-        const merged = new Set([...previousSteps, ...stepsUpTo])
-        return Array.from(merged)
+        return Array.from(new Set([...prev, ...stepsUpTo]))
       })
     },
-    [setActiveStep],
+    [activeStep, setActiveStep, setVisitedSteps],
   )
 
   const goBack = useCallback(() => {

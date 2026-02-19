@@ -16,7 +16,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
       <ErrorBoundaryWithPresets>
         {/* TODO: The loading state will depend on the step the user lands on */}
         <Suspense fallback={<StepOneSkeleton />}>
-          <ServicePurchase docId={serviceSlug} />
+          <ServicePurchase serviceSlug={serviceSlug} />
         </Suspense>
       </ErrorBoundaryWithPresets>
     </PageContent>

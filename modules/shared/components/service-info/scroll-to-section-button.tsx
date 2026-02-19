@@ -1,7 +1,7 @@
 'use client'
 
+import { scrollToSection } from '@/modules/shared/components/section-activation/section-id-utils'
 import { Button } from '@/modules/shared/components/ui/button'
-import { scrollToSection } from '../../../../shared/components/section-activation/section-id-utils'
 import type { ComponentProps } from 'react'
 
 interface ScrollToSectionButtonProps extends Omit<ComponentProps<typeof Button>, 'onClick'> {
