@@ -91,7 +91,9 @@ export default function ServicePurchaseForm({
   const handleSectionToggle = useCallback((sectionId: string, enabled: boolean) => {
     setEnabledSections((prev) => ({ ...prev, [sectionId]: enabled }))
   }, [])
-
+  // TODO: this will calculate all summary needs
+  //  Its  ok its a WIP and the data will be consume by the summaryStep
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const summaryData = useMemo(
     () => buildSummaryStepData(services[0], selectedPlan, enabledSections),
     [services, selectedPlan, enabledSections],
