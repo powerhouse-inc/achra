@@ -1,0 +1,7 @@
+mutation CreateResourceInstances($input: CreateResourceInstancesInput!) {
+  createResourceInstances(input: $input) {
+    success
+    errors
+    data
+  }
+}

@@ -7,7 +7,7 @@ import type { ServiceRequestFormState } from '@/modules/services/config/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 
-import { ServiceBreakdownItem, Summary } from '../../summary'
+import { ServiceBreakdownItem, Summary } from '../../summary-step'
 import { LabeledSelect } from '../components/labeled-select'
 import { MarketplaceHeader } from '../components/marketplace-header'
 

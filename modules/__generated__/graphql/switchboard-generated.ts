@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { useQuery, useSuspenseQuery, UseQueryOptions, UseSuspenseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery, useMutation, UseQueryOptions, UseSuspenseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { switchboardFetcher } from '@/shared/lib/fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -9584,6 +9584,13 @@ export type ResourceProfileQueryVariables = Exact<{
 
 export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
 
+export type CreateResourceInstancesMutationVariables = Exact<{
+  input: CreateResourceInstancesInput;
+}>;
+
+
+export type CreateResourceInstancesMutation = { __typename?: 'Mutation', createResourceInstances?: { __typename?: 'CreateResourceInstancesOutput', success: boolean, errors: Array<string>, data?: any | null } | null };
+
 export type ResourceOperatorQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
 }>;
@@ -10942,6 +10949,32 @@ useSuspenseResourceProfileQuery.getKey = (variables?: ResourceProfileQueryVariab
 
 
 useResourceProfileQuery.fetcher = (variables?: ResourceProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables, options);
+
+export const CreateResourceInstancesDocument = `
+    mutation CreateResourceInstances($input: CreateResourceInstancesInput!) {
+  createResourceInstances(input: $input) {
+    success
+    errors
+    data
+  }
+}
+    `;
+
+export const useCreateResourceInstancesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>) => {
+    
+    return useMutation<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>(
+      {
+    mutationKey: ['CreateResourceInstances'],
+    mutationFn: (variables?: CreateResourceInstancesMutationVariables) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables)(),
+    ...options
+  }
+    )};
+
+
+useCreateResourceInstancesMutation.fetcher = (variables: CreateResourceInstancesMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables, options);
 
 export const ResourceOperatorDocument = `
     query ResourceOperator($filter: buildersFilter) {
