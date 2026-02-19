@@ -34,7 +34,7 @@ export function SectionHeader({
   groupCurrency,
   groupCostType,
 }: Readonly<SectionHeaderProps>) {
-  const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
+  const { tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
 
   const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
@@ -103,10 +103,10 @@ export function SectionHeader({
       <div
         className={cn(
           'border-input pointer-events-none relative flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
-          activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
+          activePlan ? 'bg-primary/30' : 'bg-accent',
         )}
       >
-        {currentMobilePlan === lastTierName && priceLabel && (
+        {priceLabel && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
           </span>
@@ -122,7 +122,7 @@ export function SectionHeader({
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
-          {plan === lastTierName && priceLabel && isSetup && (
+          {plan === lastTierName && priceLabel && (isSetup || hasToggle) && (
             <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
               {priceLabel}
             </span>

@@ -1,7 +1,9 @@
 'use client'
 
+import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { usePricingCalculatorContext } from './pricing-calculator-context'
 import { SectionHeader } from './section-header'
-import { useServiceCatalogContext } from './service-catalog-root'
+// import { useServiceCatalogContext } from './service-catalog-root'
 import type { CatalogStatus } from '../types'
 
 export interface ServiceCatalogHeaderProps {
@@ -11,6 +13,9 @@ export interface ServiceCatalogHeaderProps {
   toggleLabel?: string
   toggleEnabled?: boolean
   onToggleChange?: (enabled: boolean) => void
+  groupPrice?: number | null
+  groupCurrency?: string | null
+  groupCostType?: RsGroupCostType | null
 }
 
 export function ServiceCatalogHeader({
@@ -20,8 +25,12 @@ export function ServiceCatalogHeader({
   toggleLabel,
   toggleEnabled = false,
   onToggleChange,
+  groupPrice,
+  groupCurrency,
+  groupCostType,
 }: Readonly<ServiceCatalogHeaderProps>) {
-  const { activePlan } = useServiceCatalogContext()
+  const { activePlan } = usePricingCalculatorContext()
+
   return (
     <SectionHeader
       title={title}
@@ -31,6 +40,9 @@ export function ServiceCatalogHeader({
       toggleEnabled={toggleEnabled}
       onToggleChange={onToggleChange}
       activePlan={activePlan}
+      groupPrice={groupPrice}
+      groupCurrency={groupCurrency}
+      groupCostType={groupCostType}
     />
   )
 }

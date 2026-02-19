@@ -6,10 +6,6 @@ import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/
 interface PricingCalculatorContextValue {
   /** The currently selected/active plan */
   activePlan?: string
-  /** The plan currently visible in mobile carousel */
-  currentMobilePlan: string
-  /** Index of the plan shown in mobile carousel (0-3) */
-  mobilePlanIndex: number
   /** Navigate to previous plan in carousel */
   onPrevPlan: () => void
   /** Navigate to next plan in carousel */

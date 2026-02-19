@@ -17,7 +17,7 @@ export function GrandTotalRowCatalog({
   enabledSections,
   servicesData,
 }: Readonly<GrandTotalRowCatalogProps>) {
-  const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
+  const { tierNames } = usePricingCalculatorContext()
 
   const planTotals = useMemo(
     () => computeGrandTotals(servicesData.tiers, servicesData.optionGroups, enabledSections),
@@ -47,16 +47,13 @@ export function GrandTotalRowCatalog({
       <div
         className={cn(
           'flex min-h-14 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
-          selectedPlan === currentMobilePlan && 'bg-primary/10',
+          !!selectedPlan && 'bg-primary/10',
         )}
       >
         <span
-          className={cn(
-            'text-sm font-bold',
-            selectedPlan === currentMobilePlan ? 'text-primary' : 'text-foreground',
-          )}
+          className={cn('text-sm font-bold', selectedPlan ? 'text-primary' : 'text-foreground')}
         >
-          {planTotals[currentMobilePlan]}
+          {(selectedPlan && planTotals[selectedPlan]) ?? '—'}
         </span>
       </div>
 
