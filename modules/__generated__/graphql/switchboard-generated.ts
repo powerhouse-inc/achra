@@ -9584,6 +9584,13 @@ export type ResourceProfileQueryVariables = Exact<{
 
 export type ResourceProfileQuery = { __typename?: 'Query', ResourceTemplate?: { __typename?: 'ResourceTemplateQueries', getDocument?: { __typename?: 'ResourceTemplate', id: string, state: { __typename?: 'ResourceTemplate_ResourceTemplateState', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: ResourceTemplate_TemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'ResourceTemplate_ContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'ResourceTemplate_FaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null } } | null } | null };
 
+export type ResourceOperatorQueryVariables = Exact<{
+  filter?: InputMaybe<BuildersFilter>;
+}>;
+
+
+export type ResourceOperatorQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', id?: any | null, description?: string | null, name?: string | null, icon?: any | null, lastModified?: any | null, contributors: Array<any>, code?: string | null, status?: BuilderStatus | null }> };
+
 export type ResourceTemplateQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -9604,13 +9611,6 @@ export type ResourceTemplatesQueryVariables = Exact<{
 
 
 export type ResourceTemplatesQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', description?: string | null, infoLink?: any | null, lastModified: any, title: string, thumbnailUrl?: any | null, operatorId: any, recurringServices: Array<string>, status: RsTemplateStatus, summary: string, setupServices: Array<string>, id: any, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }>, facetTargets: Array<{ __typename?: 'RSFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, question?: string | null, answer?: string | null, displayOrder: number }> | null, targetAudiences: Array<{ __typename?: 'RSTargetAudience', id: any, label: string, color?: string | null }> }> };
-
-export type ResourceOperatorQueryVariables = Exact<{
-  docId: Scalars['PHID']['input'];
-}>;
-
-
-export type ResourceOperatorQuery = { __typename?: 'Query', BuilderProfile?: { __typename?: 'BuilderProfileQueries', getDocument?: { __typename?: 'BuilderProfile', state: { __typename?: 'BuilderProfile_BuilderProfileState', id?: any | null, description?: string | null, code?: string | null, name?: string | null, lastModified?: any | null, status?: BuilderProfile_BuilderStatus | null, contributors: Array<any>, isOperator: boolean } } | null } | null };
 
 export type WorkstreamDetailsQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -10949,6 +10949,60 @@ useSuspenseResourceProfileQuery.getKey = (variables: ResourceProfileQueryVariabl
 
 useResourceProfileQuery.fetcher = (variables: ResourceProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables, options);
 
+export const ResourceOperatorDocument = `
+    query ResourceOperator($filter: buildersFilter) {
+  builders(filter: $filter) {
+    id
+    description
+    name
+    icon
+    lastModified
+    contributors
+    code
+    status
+  }
+}
+    `;
+
+export const useResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables?: ResourceOperatorQueryVariables,
+      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ResourceOperator'] : ['ResourceOperator', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useResourceOperatorQuery.getKey = (variables?: ResourceOperatorQueryVariables) => variables === undefined ? ['ResourceOperator'] : ['ResourceOperator', variables];
+
+export const useSuspenseResourceOperatorQuery = <
+      TData = ResourceOperatorQuery,
+      TError = unknown
+    >(
+      variables?: ResourceOperatorQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ResourceOperatorSuspense'] : ['ResourceOperatorSuspense', variables],
+    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseResourceOperatorQuery.getKey = (variables?: ResourceOperatorQueryVariables) => variables === undefined ? ['ResourceOperatorSuspense'] : ['ResourceOperatorSuspense', variables];
+
+
+useResourceOperatorQuery.fetcher = (variables?: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
+
 export const ResourceTemplateDocument = `
     query ResourceTemplate($docId: PHID!) {
   ResourceTemplate {
@@ -11219,64 +11273,6 @@ useSuspenseResourceTemplatesQuery.getKey = (variables?: ResourceTemplatesQueryVa
 
 
 useResourceTemplatesQuery.fetcher = (variables?: ResourceTemplatesQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables, options);
-
-export const ResourceOperatorDocument = `
-    query ResourceOperator($docId: PHID!) {
-  BuilderProfile {
-    getDocument(docId: $docId) {
-      state {
-        id
-        description
-        code
-        name
-        lastModified
-        status
-        contributors
-        isOperator
-      }
-    }
-  }
-}
-    `;
-
-export const useResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables: ResourceOperatorQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: ['ResourceOperator', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
-
-useResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperator', variables];
-
-export const useSuspenseResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables: ResourceOperatorQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: ['ResourceOperatorSuspense', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
-
-useSuspenseResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVariables) => ['ResourceOperatorSuspense', variables];
-
-
-useResourceOperatorQuery.fetcher = (variables: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
 
 export const WorkstreamDetailsDocument = `
     query WorkstreamDetails($filter: WorkstreamFilter!) {

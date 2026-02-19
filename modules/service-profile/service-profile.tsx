@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import { FaqSection } from '@/modules/service-profile/components/faq'
 import ProductInfo from '@/modules/service-purchase/components/service-purchase-form/components/product-info/product-info'
+import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
 import { ServiceInfo } from '@/modules/shared/components/service-info'
-import { getResourceOperator } from '@/modules/shared/services/resource-operator'
 import { PurchaseSection } from './components/purchase-section'
 import { getResourceProfile } from './services/resource-profile'
 
@@ -14,7 +14,7 @@ export default async function ServiceProfile({ docId }: ServiceProfileProps) {
   const resourceProfile = await getResourceProfile(docId)
   const operatorId = resourceProfile?.operatorId
 
-  const operator = await getResourceOperator(operatorId)
+  const operator = await getResourceOperator({ id: operatorId })
 
   if (!resourceProfile || !operator) {
     notFound()

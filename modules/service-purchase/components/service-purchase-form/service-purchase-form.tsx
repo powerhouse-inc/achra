@@ -1,10 +1,10 @@
 'use client'
-import { useSearchParams } from 'next/navigation'
+import { parseAsString, useQueryState } from 'nuqs'
 import { startTransition, Suspense, useActionState, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import type {
-  BuilderProfile_BuilderProfileState,
+  BuilderProfileState,
   ResourceTemplate_ResourceTemplateState,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -47,7 +47,7 @@ export interface ServicePurchaseFormValues {
 
 export interface ServicePurchaseFormProps {
   resourceTemplate: ResourceTemplate_ResourceTemplateState
-  operator: BuilderProfile_BuilderProfileState
+  operator: BuilderProfileState
   services: RsServiceOffering[]
 }
 
@@ -58,7 +58,10 @@ export default function ServicePurchaseForm({
 }: Readonly<ServicePurchaseFormProps>) {
   const [state, formAction, isPending] = useActionState(submitServiceRequestAction, initialState)
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
-  const operatorIdFromUrl = useSearchParams().get('operatorId')
+  const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
+    'operatorId',
+    parseAsString.withDefault(''),
+  )
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -87,12 +90,13 @@ export default function ServicePurchaseForm({
     }
   }, [state, goToStep, form])
 
-  // Sync operatorId from URL only when it changes (primitive dependency to avoid render loop)
+  // Sync operatorId from URL query state
   useEffect(() => {
     if (!operatorIdFromUrl) return
     setValue('operatorId', operatorIdFromUrl)
     goToStep('configure-services')
-  }, [operatorIdFromUrl, setValue, goToStep])
+    void setOperatorIdFromUrl(null)
+  }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
   const name = useWatch({ control, name: 'name' })
   const email = useWatch({ control, name: 'email' })

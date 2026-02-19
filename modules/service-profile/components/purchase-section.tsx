@@ -1,9 +1,9 @@
-import type { BuilderProfile_BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorCard } from '@/modules/shared/components/operator-card'
 import type { Route } from 'next'
 
 interface PurchaseSectionProps {
-  operator: BuilderProfile_BuilderProfileState
+  operator: BuilderProfileState
   docId: string
 }
 
