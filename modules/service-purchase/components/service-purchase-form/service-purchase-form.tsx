@@ -1,13 +1,14 @@
 'use client'
 
 import { parseAsString, useQueryState } from 'nuqs'
-import { Suspense, useCallback, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import type {
   BuilderProfileState,
   RsResourceTemplate,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { buildSummaryStepData } from '@/modules/service-purchase/lib/build-summary-step-data'
 import {
   STEPS,
   type StepValue,
@@ -33,8 +34,6 @@ export interface ServicePurchaseFormValues {
   legalEntity: string
   teamStructure: string
   anonymityLevel: string
-  selectedPlan?: string
-  enabledSections: Record<string, boolean>
 }
 
 export interface ServicePurchaseFormProps {
@@ -55,6 +54,10 @@ export default function ServicePurchaseForm({
     parseAsString.withDefault(''),
   )
 
+  // Plan and sections are UI configuration state — not form submission fields
+  const [selectedPlan, setSelectedPlan] = useState<string>(defaultActivePlan)
+  const [enabledSections, setEnabledSections] = useState<Record<string, boolean>>({})
+
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
     defaultValues: {
@@ -65,8 +68,6 @@ export default function ServicePurchaseForm({
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
-      selectedPlan: defaultActivePlan,
-      enabledSections: {},
     },
   })
 
@@ -82,24 +83,18 @@ export default function ServicePurchaseForm({
 
   const name = useWatch({ control, name: 'name' })
   const email = useWatch({ control, name: 'email' })
-  const selectedPlan = useWatch({ control, name: 'selectedPlan' })
-  const enabledSections = useWatch({ control, name: 'enabledSections' })
 
-  const handlePlanChange = useCallback(
-    (plan: string) => {
-      setValue('selectedPlan', plan)
-    },
-    [setValue],
-  )
+  const handlePlanChange = useCallback((plan: string) => {
+    setSelectedPlan(plan)
+  }, [])
 
-  const handleSectionToggle = useCallback(
-    (sectionId: string, enabled: boolean) => {
-      setValue('enabledSections', {
-        ...enabledSections,
-        [sectionId]: enabled,
-      })
-    },
-    [enabledSections, setValue],
+  const handleSectionToggle = useCallback((sectionId: string, enabled: boolean) => {
+    setEnabledSections((prev) => ({ ...prev, [sectionId]: enabled }))
+  }, [])
+
+  const summaryData = useMemo(
+    () => buildSummaryStepData(services[0], selectedPlan, enabledSections),
+    [services, selectedPlan, enabledSections],
   )
 
   // Navigation handlers
@@ -192,7 +187,7 @@ export default function ServicePurchaseForm({
                 />
               </Suspense>
             )}
-            {step.value === 'summary' && <SummaryStep />}
+            {step.value === 'summary' && <SummaryStep data={summaryData} />}
             {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
           </TabsContent>
         ))}
