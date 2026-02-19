@@ -1,28 +1,27 @@
 import {
-  type ResourceTemplate_ResourceTemplateState,
+  type RsResourceTemplate,
+  type RsResourceTemplatesFilter,
   useResourceTemplateQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export async function getResourceTemplate(
-  docId: string,
-): Promise<ResourceTemplate_ResourceTemplateState | undefined> {
-  const data = await useResourceTemplateQuery.fetcher({ docId })()
-  const state = data.ResourceTemplate?.getDocument?.state
+  filter: RsResourceTemplatesFilter,
+): Promise<RsResourceTemplate | undefined> {
+  const data = await useResourceTemplateQuery.fetcher({ filter })()
+  const template = data.resourceTemplates.at(0)
 
-  if (!state) {
+  if (!template) {
     return undefined
   }
 
   return {
     facetTargets: [],
-    infoLink: null,
     lastModified: '',
     optionGroups: [],
     recurringServices: [],
-    services: [],
     setupServices: [],
     targetAudiences: [],
-    faqFields: [],
-    ...state,
+    services: [],
+    ...template,
   }
 }

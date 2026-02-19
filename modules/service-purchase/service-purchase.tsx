@@ -6,16 +6,13 @@ import { getResourceTemplate } from './services/resource-template'
 import { getServiceOfferings } from './services/service-offerings'
 
 interface ServicePurchaseProps {
-  docId: string
+  serviceSlug: string
 }
 
-export default async function ServicePurchase({ docId }: ServicePurchaseProps) {
-  const resourceTemplate = await getResourceTemplate(docId)
+export default async function ServicePurchase({ serviceSlug }: ServicePurchaseProps) {
+  const resourceTemplate = await getResourceTemplate({ id: serviceSlug })
+  const operator = await getResourceOperator({ id: resourceTemplate?.operatorId })
   const services = await getServiceOfferings()
-
-  const operatorId = resourceTemplate?.operatorId
-
-  const operator = await getResourceOperator({ id: operatorId })
 
   if (!resourceTemplate || !operator) {
     notFound()

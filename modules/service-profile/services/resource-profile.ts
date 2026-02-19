@@ -1,15 +1,16 @@
 import {
-  type ResourceTemplate_ResourceTemplateState,
+  type RsResourceTemplate,
+  type RsResourceTemplatesFilter,
   useResourceProfileQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export async function getResourceProfile(
-  docId: string,
-): Promise<ResourceTemplate_ResourceTemplateState | undefined> {
-  const data = await useResourceProfileQuery.fetcher({ docId })()
-  const state = data.ResourceTemplate?.getDocument?.state
+  filter: RsResourceTemplatesFilter,
+): Promise<RsResourceTemplate | undefined> {
+  const data = await useResourceProfileQuery.fetcher({ filter })()
+  const resourceProfile = data.resourceTemplates.at(0)
 
-  if (!state) {
+  if (!resourceProfile) {
     return undefined
   }
 
@@ -22,6 +23,6 @@ export async function getResourceProfile(
     services: [],
     setupServices: [],
     targetAudiences: [],
-    ...state,
+    ...resourceProfile,
   }
 }

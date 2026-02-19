@@ -1,11 +1,11 @@
 import { HelpCircle } from 'lucide-react'
-import type { ResourceTemplate_FaqField } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RsFaqField } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '../../../shared/lib/utils'
 import { FaqItem } from './faq-item'
 
 interface FaqSectionProps extends React.ComponentProps<'section'> {
   title?: string
-  faqFields?: ResourceTemplate_FaqField[]
+  faqFields?: RsFaqField[]
 }
 
 function FaqSection({ title = 'FAQ', faqFields, className }: Readonly<FaqSectionProps>) {

@@ -14,7 +14,7 @@ export default async function ServiceProfilePage({ params }: ServiceProfilePageP
     <PageContent className="gap-6">
       <ErrorBoundaryWithPresets>
         <Suspense fallback={<span>Loading...</span>}>
-          <ServiceProfile docId={serviceSlug} />
+          <ServiceProfile serviceSlug={serviceSlug} />
         </Suspense>
       </ErrorBoundaryWithPresets>
     </PageContent>

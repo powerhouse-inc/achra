@@ -1,22 +1,17 @@
-query ResourceTemplate($docId: PHID!) {
-  ResourceTemplate {
-    getDocument(docId: $docId) {
+query ResourceTemplate($filter: RSResourceTemplatesFilter) {
+  resourceTemplates(filter: $filter) {
+    id
+    title
+    description
+    thumbnailUrl
+    summary
+    status
+    operatorId
+    contentSections {
+      content
+      displayOrder
       id
-      state {
-        id
-        title
-        description
-        thumbnailUrl
-        summary
-        status
-        operatorId
-        contentSections {
-          content
-          displayOrder
-          id
-          title
-        }
-      }
+      title
     }
   }
 }

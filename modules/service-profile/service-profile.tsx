@@ -7,11 +7,11 @@ import { PurchaseSection } from './components/purchase-section'
 import { getResourceProfile } from './services/resource-profile'
 
 interface ServiceProfileProps {
-  docId: string
+  serviceSlug: string
 }
 
-export default async function ServiceProfile({ docId }: ServiceProfileProps) {
-  const resourceProfile = await getResourceProfile(docId)
+export default async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
+  const resourceProfile = await getResourceProfile({ id: serviceSlug })
   const operatorId = resourceProfile?.operatorId
 
   const operator = await getResourceOperator({ id: operatorId })
@@ -25,7 +25,7 @@ export default async function ServiceProfile({ docId }: ServiceProfileProps) {
   return (
     <div className="flex flex-col gap-6">
       <ServiceInfo
-        id={docId}
+        id={serviceSlug}
         showPurchaseButton
         showActionButtons
         title={resourceProfile.title}
@@ -37,7 +37,7 @@ export default async function ServiceProfile({ docId }: ServiceProfileProps) {
         description={resourceProfile.description}
         contentSections={resourceProfile.contentSections}
       />
-      <PurchaseSection operator={operator} docId={docId} />
+      <PurchaseSection operator={operator} serviceSlug={serviceSlug} />
       {faqFields.length > 0 && <FaqSection faqFields={faqFields} />}
     </div>
   )

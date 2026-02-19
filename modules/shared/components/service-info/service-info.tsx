@@ -1,10 +1,7 @@
 import { Download, Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  type Maybe,
-  ResourceTemplate_TemplateStatus,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { type Maybe, RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -19,7 +16,7 @@ interface ServiceInfoProps {
   title?: string
   summary?: Maybe<string>
   thumbnailUrl?: string
-  status?: ResourceTemplate_TemplateStatus
+  status?: RsTemplateStatus
   id: string
 }
 
@@ -37,7 +34,7 @@ export default function ServiceInfo({
   id,
 }: Readonly<ServiceInfoProps>) {
   // TODO: Remove this mock once the service info is populated
-  const isUnavailable = status === ResourceTemplate_TemplateStatus.ComingSoon
+  const isUnavailable = status === RsTemplateStatus.ComingSoon
   const coverImage = thumbnailUrl ?? DEFAULT_COVER
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">

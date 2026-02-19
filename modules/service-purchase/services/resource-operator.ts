@@ -8,19 +8,23 @@ export async function getResourceOperator(
   filter: BuildersFilter,
 ): Promise<BuilderProfileState | undefined> {
   const data = await useResourceOperatorQuery.fetcher({ filter })()
-  const operator = data.builders[0]
-  if (!operator) return undefined
+  const operator = data.builders.at(0)
+
+  if (!operator) {
+    return undefined
+  }
+
   return {
-    isOperator: true,
-    links: [],
     operationalHubMember: {
       name: '',
       phid: '',
     },
+    isOperator: true,
+    links: [],
     products: [],
     projects: [],
-    scopes: [],
     skills: [],
+    scopes: [],
     ...operator,
   }
 }

@@ -52,7 +52,7 @@ export default function OperatorCard({
   showMoreInfo = false,
   moreInfoHref,
 }: Readonly<OperatorCardProps>) {
-  const resolvedMoreInfoHref = moreInfoHref ?? (`/services/operators/${operator.id}` as Route)
+  const resolvedMoreInfoHref = moreInfoHref ?? (`/services/operators/${operator.slug}` as Route)
 
   return (
     <Card className="gap-4 border-none p-3 shadow-lg">

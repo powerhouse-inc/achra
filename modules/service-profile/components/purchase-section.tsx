@@ -4,10 +4,10 @@ import type { Route } from 'next'
 
 interface PurchaseSectionProps {
   operator: BuilderProfileState
-  docId: string
+  serviceSlug: string
 }
 
-export function PurchaseSection({ operator, docId }: PurchaseSectionProps) {
+export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-lg leading-[120%] font-bold">Purchase</h2>
@@ -16,7 +16,7 @@ export function PurchaseSection({ operator, docId }: PurchaseSectionProps) {
           key={operator.name}
           operator={operator}
           configureServicesHref={
-            `/services/${docId}/purchase?step=configure-services&operatorId=${operator.id}` as Route
+            `/services/${serviceSlug}/purchase?step=configure-services&operatorId=${operator.id}` as Route
           }
           showMoreInfo
         />

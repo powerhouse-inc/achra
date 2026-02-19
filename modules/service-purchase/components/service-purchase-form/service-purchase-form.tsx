@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 
 import type {
   BuilderProfileState,
-  ResourceTemplate_ResourceTemplateState,
+  RsResourceTemplate,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitServiceRequestAction } from '@/modules/services/actions/service-request-actions'
@@ -46,7 +46,7 @@ export interface ServicePurchaseFormValues {
 }
 
 export interface ServicePurchaseFormProps {
-  resourceTemplate: ResourceTemplate_ResourceTemplateState
+  resourceTemplate: RsResourceTemplate
   operator: BuilderProfileState
   services: RsServiceOffering[]
 }
