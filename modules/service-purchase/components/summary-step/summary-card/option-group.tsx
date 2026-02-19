@@ -2,63 +2,6 @@ import { ArrowRightLeft } from 'lucide-react'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/modules/shared/lib/utils'
 
-/* -----------------------------------------------------------------------------
- * Compound Component: OptionGroup
- *
- * Composable API for service/tier option groups. Use subcomponents to build
- * exactly the layout you need—no boolean props. Each variant composes the
- * pieces it needs.
- *
- * @example Tier (price in body)
- * <OptionGroup.Root>
- *   <OptionGroup.Header>
- *     <OptionGroup.HeaderLeading>
- *       <OptionGroup.Title>Tier</OptionGroup.Title>
- *     </OptionGroup.HeaderLeading>
- *     <OptionGroup.HeaderTrailing>
- *       <OptionGroup.Subtitle>Team</OptionGroup.Subtitle>
- *     </OptionGroup.HeaderTrailing>
- *   </OptionGroup.Header>
- *   <OptionGroup.PriceIncludes priceLabel="$300/mo">
- *     <ServiceLineItem ... />
- *   </OptionGroup.PriceIncludes>
- *   <OptionGroup.Subtotal>$300/mo</OptionGroup.Subtotal>
- * </OptionGroup.Root>
- *
- * @example Add-on (icon + price in header)
- * <OptionGroup.Root>
- *   <OptionGroup.Header>
- *     <OptionGroup.HeaderLeading>
- *       <OptionGroup.AddOnIcon />
- *       <OptionGroup.Title>Finance Pack</OptionGroup.Title>
- *     </OptionGroup.HeaderLeading>
- *     <OptionGroup.HeaderTrailing>
- *       <OptionGroup.Subtitle>SELECTED</OptionGroup.Subtitle>
- *       <OptionGroup.HeaderPrice>+ $50/mo</OptionGroup.HeaderPrice>
- *     </OptionGroup.HeaderTrailing>
- *   </OptionGroup.Header>
- *   <OptionGroup.PriceIncludes>
- *     <ServiceLineItem ... />
- *   </OptionGroup.PriceIncludes>
- *   <OptionGroup.Subtotal>+ $50/mo</OptionGroup.Subtotal>
- * </OptionGroup.Root>
- *
- * @example Pricing Breakdown
- * <OptionGroup.Root variant="pricing">
- *   <OptionGroup.PricingHeader>
- *     <span>PRICING SUMMARY</span>
- *     <span>RECURRING</span>
- *   </OptionGroup.PricingHeader>
- *   <OptionGroup.PricingLineItem label="Tier (Team)" value="$300/mo" />
- *   <OptionGroup.PricingLineItem label="Hosting Suite" value="$200/mo" showBorder={false} />
- *   <OptionGroup.Total label="TOTAL RECURRING">$550/mo</OptionGroup.Total>
- *   <OptionGroup.OneTimeSection>
- *     <OptionGroup.PricingLineItem label="Incorporation Docs" sublabel="One-time fee" value="$3000" />
- *   </OptionGroup.OneTimeSection>
- *   <OptionGroup.TotalSetup label="TOTAL SETUP">$3000</OptionGroup.TotalSetup>
- * </OptionGroup.Root>
- * ----------------------------------------------------------------------------- */
-
 interface OptionGroupRootProps {
   children: React.ReactNode
   variant?: 'default' | 'pricing'
