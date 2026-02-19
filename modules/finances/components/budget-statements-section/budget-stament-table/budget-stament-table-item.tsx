@@ -42,7 +42,7 @@ export function BudgetStamentTableItem({
             name={budgetStatement.owner.name}
             code={budgetStatement.owner.code}
             isCoreUnit={true}
-            icon={true}
+            logoUrl={budgetStatement.owner.logo}
           />
         </Link>
       </TableCell>

@@ -9533,7 +9533,7 @@ export type OperatorProfileQueryVariables = Exact<{
 }>;
 
 
-export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, lastModified?: any | null, status?: BuilderStatus | null, contributors: Array<any>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
+export type OperatorProfileQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', isOperator: boolean, id?: any | null, name?: string | null, code?: string | null, slug?: string | null, icon?: any | null, skills: Array<BuilderSkill>, description?: string | null, about?: string | null, lastModified?: any | null, status?: BuilderStatus | null, contributors: Array<any>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null } }> };
 
 export type ProjectsQueryVariables = Exact<{
   filter?: InputMaybe<WorkstreamsFilter>;
@@ -9584,12 +9584,10 @@ export type ResourceOperatorQueryVariables = Exact<{
 
 export type ResourceOperatorQuery = { __typename?: 'Query', BuilderProfile?: { __typename?: 'BuilderProfileQueries', getDocument?: { __typename?: 'BuilderProfile', state: { __typename?: 'BuilderProfile_BuilderProfileState', id?: any | null, description?: string | null, code?: string | null, name?: string | null, lastModified?: any | null, status?: BuilderProfile_BuilderStatus | null, contributors: Array<any>, isOperator: boolean } } | null } | null };
 
-export type ServiceOfferingsQueryVariables = Exact<{
-  filter?: InputMaybe<RsServiceOfferingsFilter>;
-}>;
+export type ServiceOfferingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', summary: string, operatorId: any, title: string, status: RsServiceStatus, id: any, infoLink?: any | null, description?: string | null, lastModified: any, resourceTemplateId?: any | null, thumbnailUrl?: any | null, serviceGroups: Array<{ __typename?: 'RSServiceGroup', billingCycle: RsBillingCycle, description?: string | null, displayOrder?: number | null, id: any, name: string }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', categoryKey: string, categoryLabel: string, selectedOptions: Array<string>, id: any }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', defaultSelected: boolean, description?: string | null, isAddOn: boolean, name: string, id: any }>, services: Array<{ __typename?: 'RSOfferingService', description?: string | null, displayOrder?: number | null, id: any, isSetupFormation: boolean, optionGroupId?: any | null, title: string, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', facetName: string, facetType: any, id: any, supportedOptions: Array<any> }> }>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', description?: string | null, id: any, isCustomPricing: boolean, name: string, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', amount: any, currency: any, id: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', customValue?: string | null, id: any, level: RsServiceLevel, optionGroupId?: any | null, serviceId: any }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, metric: string, notes?: string | null, serviceId: any, unitName?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', label: string, color?: string | null, id: any }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, operatorId: any, resourceTemplateId?: any | null, title: string, summary: string, description?: string | null, thumbnailUrl?: any | null, infoLink?: any | null, status: RsServiceStatus, lastModified: any, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', id: any, amount: any, currency: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', id: any, label: string, color?: string | null }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', id: any, facetName: string, facetType: any, supportedOptions: Array<any> }> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, costType?: RsGroupCostType | null, isAddOn: boolean, defaultSelected: boolean, price?: any | null, currency?: any | null, billingCycle?: RsBillingCycle | null }>, serviceGroups: Array<{ __typename?: 'RSServiceGroup', id: any, name: string, description?: string | null, billingCycle: RsBillingCycle, displayOrder?: number | null }> }> };
 
 export type ResourceTemplateQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
@@ -10132,6 +10130,7 @@ export const OperatorProfileDocument = `
     isOperator
     id
     name
+    code
     slug
     icon
     skills
@@ -10931,88 +10930,92 @@ useSuspenseResourceOperatorQuery.getKey = (variables: ResourceOperatorQueryVaria
 useResourceOperatorQuery.fetcher = (variables: ResourceOperatorQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables, options);
 
 export const ServiceOfferingsDocument = `
-    query ServiceOfferings($filter: RSServiceOfferingsFilter) {
-  serviceOfferings(filter: $filter) {
-    summary
-    operatorId
-    title
-    status
+    query ServiceOfferings {
+  serviceOfferings {
     id
-    infoLink
-    description
-    lastModified
+    operatorId
     resourceTemplateId
-    serviceGroups {
-      billingCycle
-      description
-      displayOrder
-      id
-      name
-    }
-    facetTargets {
-      categoryKey
-      categoryLabel
-      selectedOptions
-      id
-    }
-    optionGroups {
-      defaultSelected
-      description
-      isAddOn
-      name
-      id
-    }
-    services {
-      description
-      displayOrder
-      facetBindings {
-        facetName
-        facetType
-        id
-        supportedOptions
-      }
-      id
-      isSetupFormation
-      optionGroupId
-      title
-    }
+    title
+    summary
+    description
+    thumbnailUrl
+    infoLink
+    status
+    lastModified
     tiers {
-      description
       id
-      isCustomPricing
       name
+      description
+      isCustomPricing
       pricing {
         amount
         currency
       }
       pricingOptions {
+        id
         amount
         currency
-        id
         isDefault
       }
       serviceLevels {
-        customValue
         id
-        level
-        optionGroupId
         serviceId
+        level
+        customValue
+        optionGroupId
       }
       usageLimits {
         id
-        metric
-        notes
         serviceId
+        metric
         unitName
+        notes
         unitPrice
         unitPriceCurrency
       }
     }
-    thumbnailUrl
     targetAudiences {
+      id
       label
       color
+    }
+    facetTargets {
       id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    services {
+      id
+      title
+      description
+      displayOrder
+      isSetupFormation
+      optionGroupId
+      facetBindings {
+        id
+        facetName
+        facetType
+        supportedOptions
+      }
+    }
+    optionGroups {
+      id
+      name
+      description
+      costType
+      isAddOn
+      defaultSelected
+      price
+      currency
+      billingCycle
+    }
+    serviceGroups {
+      id
+      name
+      description
+      billingCycle
+      displayOrder
     }
   }
 }
