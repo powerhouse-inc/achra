@@ -187,7 +187,7 @@ export default function ServicePurchaseForm({
                 />
               </Suspense>
             )}
-            {step.value === 'summary' && <SummaryStep data={summaryData} />}
+            {step.value === 'summary' && <SummaryStep />}
             {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
           </TabsContent>
         ))}
