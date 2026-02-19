@@ -13,7 +13,7 @@ export interface MetricRowProps {
 }
 
 export function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps>) {
-  const { activePlan, currentMobilePlan, tierNames } = usePricingCalculatorContext()
+  const { activePlan, tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
   // For one-time metrics, find the value from any tier (may not exist on the last tier)
   const oneTimeValue = isOneTime
@@ -62,20 +62,17 @@ export function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricR
         className={cn(
           'flex h-full min-h-10 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
           isLast && 'border-input border-b',
-          activePlan === currentMobilePlan && 'bg-primary/10',
+          !!activePlan && 'bg-primary/10',
         )}
       >
         {isOneTime ? (
-          currentMobilePlan === lastTierName && oneTimeValue ? (
+          activePlan === lastTierName && oneTimeValue ? (
             <span className="text-primary min-w-0 truncate text-xs font-bold uppercase">
               {oneTimeValue}
             </span>
           ) : null
         ) : (
-          <ServiceCatalogoCell
-            value={values[currentMobilePlan]}
-            isActive={activePlan === currentMobilePlan}
-          />
+          <ServiceCatalogoCell value={values[activePlan ?? '']} isActive={!!activePlan} />
         )}
       </div>
 

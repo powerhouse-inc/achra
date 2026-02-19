@@ -98,14 +98,12 @@ export function buildSummaryGroups(
   for (const group of data.optionGroups.filter((g) => g.isAddOn)) {
     if (!selectedAddons.includes(group.id)) continue
 
+    // Add-on services are not listed in tier serviceLevels — show all services in the group
     const groupServices = servicesByGroup.get(group.id) ?? []
-    const includedServices = groupServices.filter(
-      (s) => serviceLevelMap.get(s.id) === RsServiceLevel.Included,
-    )
 
-    if (includedServices.length === 0) continue
+    if (groupServices.length === 0) continue
 
-    const rows: SummaryServiceRow[] = includedServices.map((service) => {
+    const rows: SummaryServiceRow[] = groupServices.map((service) => {
       const usageLimit = usageLimitMap.get(service.id)
       const price = usageLimit?.unitPrice
 
@@ -139,8 +137,22 @@ export function buildSummaryGroups(
   return groups
 }
 
-export function calculateRecurringTotal(currentTier: RsServiceSubscriptionTier): number {
-  return currentTier.pricing.amount ?? 0
+export function calculateRecurringTotal(
+  currentTier: RsServiceSubscriptionTier,
+  optionGroups: RsOfferingOptionGroup[],
+  selectedAddons: string[],
+): number {
+  const base = currentTier.pricing.amount ?? 0
+  const addonTotal = optionGroups
+    .filter(
+      (g) =>
+        g.isAddOn &&
+        g.costType === RsGroupCostType.Recurring &&
+        selectedAddons.includes(g.id) &&
+        g.price != null,
+    )
+    .reduce((sum, g) => sum + (g.price ?? 0), 0)
+  return base + addonTotal
 }
 
 export function getSetupFee(data: RsServiceOffering): number {
