@@ -22,7 +22,11 @@ export function OperationSummaryCard({
   }
 
   const summaryGroups = buildSummaryGroups(pricingData, currentTier, selectedAddons)
-  const recurringTotal = calculateRecurringTotal(currentTier, pricingData.optionGroups, selectedAddons)
+  const recurringTotal = calculateRecurringTotal(
+    currentTier,
+    pricingData.optionGroups,
+    selectedAddons,
+  )
   const setupFee = getSetupFee(pricingData)
 
   return (
