@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { useQuery, useSuspenseQuery, UseQueryOptions, UseSuspenseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery, useMutation, UseQueryOptions, UseSuspenseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 import { switchboardFetcher } from '@/shared/lib/fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -9577,6 +9577,13 @@ export type RoadmapListQueryVariables = Exact<{
 
 export type RoadmapListQuery = { __typename?: 'Query', workstream: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, slug?: string | null, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', roadmaps: Array<{ __typename?: 'SOW_Roadmap', id: any, description: string, slug: string, title: string, milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, coordinators: Array<string>, deliveryTarget: string, description: string, id: any, sequenceCode: string, title: string, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any>, status: Sow_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'SOW_DeliverablesCompleted', completed: number, total: number }, progress: { __typename?: 'SOW_Binary', done?: boolean | null } | { __typename?: 'SOW_Percentage', value: number } | { __typename?: 'SOW_StoryPoint', completed: number, total: number } } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string, status: Sow_DeliverableStatus, keyResults: Array<{ __typename?: 'SOW_KeyResult', id: any, link: string, title: string }> }> } | null }> };
 
+export type CreateResourceInstancesMutationVariables = Exact<{
+  input: CreateResourceInstancesInput;
+}>;
+
+
+export type CreateResourceInstancesMutation = { __typename?: 'Mutation', createResourceInstances?: { __typename?: 'CreateResourceInstancesOutput', success: boolean, errors: Array<string>, data?: any | null } | null };
+
 export type ResourceOperatorQueryVariables = Exact<{
   docId: Scalars['PHID']['input'];
 }>;
@@ -10872,6 +10879,32 @@ useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => [
 
 
 useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables, options);
+
+export const CreateResourceInstancesDocument = `
+    mutation CreateResourceInstances($input: CreateResourceInstancesInput!) {
+  createResourceInstances(input: $input) {
+    success
+    errors
+    data
+  }
+}
+    `;
+
+export const useCreateResourceInstancesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>) => {
+    
+    return useMutation<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>(
+      {
+    mutationKey: ['CreateResourceInstances'],
+    mutationFn: (variables?: CreateResourceInstancesMutationVariables) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables)(),
+    ...options
+  }
+    )};
+
+
+useCreateResourceInstancesMutation.fetcher = (variables: CreateResourceInstancesMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables, options);
 
 export const ResourceOperatorDocument = `
     query ResourceOperator($docId: PHID!) {

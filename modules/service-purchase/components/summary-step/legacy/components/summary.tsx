@@ -8,7 +8,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { cn } from '@/shared/lib/utils'
-import type { ServicePurchaseFormValues } from '../../service-purchase-form/service-purchase-form'
+import type { ServicePurchaseFormValues } from '../../../service-purchase-form/service-purchase-form'
 
 /**
  * Validation constants for form fields
