@@ -31,25 +31,25 @@ export function computeRecurringSubtotals(
   optionGroup: RsOfferingOptionGroup,
   tiers: readonly RsServiceSubscriptionTier[],
 ): Record<string, string | null> {
+  const { id: groupId, price, currency } = optionGroup
   const result: Record<string, string | null> = {}
 
-  for (const tier of tiers) {
-    if (tier.isCustomPricing) {
-      result[tier.name] = 'CUSTOM'
+  for (const { isCustomPricing, name, serviceLevels } of tiers) {
+    if (isCustomPricing) {
+      result[name] = 'CUSTOM'
       continue
     }
 
-    const hasIncludedService = tier.serviceLevels.some(
-      (sl) => sl.optionGroupId === optionGroup.id && INCLUDED_LEVELS.has(sl.level),
+    const hasIncludedService = serviceLevels.some(
+      ({ optionGroupId, level }) => optionGroupId === groupId && INCLUDED_LEVELS.has(level),
     )
 
-    if (hasIncludedService && optionGroup.price != null) {
-      result[tier.name] = formatPrice(optionGroup.price, optionGroup.currency)
+    if (hasIncludedService && price != null) {
+      result[name] = formatPrice(price, currency)
     } else {
-      result[tier.name] = null
+      result[name] = null
     }
   }
-
   return result
 }
 
@@ -77,30 +77,36 @@ export function computeGrandTotals(
 ): Record<string, string> {
   const totals: Record<string, string> = {}
 
-  // Filter to only recurring groups that are enabled
-  const activeRecurringGroups = optionGroups.filter((group) => {
-    if (group.costType !== RsGroupCostType.Recurring) return false
-    // Non-addon sections are always enabled; addon sections check enabledSections
-    if (group.isAddOn && !enabledSections?.[group.id]) return false
+  const activeRecurringGroups = optionGroups.filter(({ costType, isAddOn, id }) => {
+    if (costType !== RsGroupCostType.Recurring) return false
+    if (isAddOn && !enabledSections?.[id]) return false
     return true
   })
 
-  for (const tier of tiers) {
-    if (tier.isCustomPricing) {
-      totals[tier.name] = 'Custom'
+  for (const { isCustomPricing, name, pricing } of tiers) {
+    if (isCustomPricing) {
+      totals[name] = 'Custom'
       continue
     }
 
-    let total = tier.pricing.amount ?? 0
+    const { amount, currency: tierCurrency } = pricing
+    let total = amount ?? 0
+
     for (const group of activeRecurringGroups) {
-      if (group.price != null && tierHasGroupServices(tier, group)) {
+      if (
+        group.price != null &&
+        tierHasGroupServices(
+          { serviceLevels: [], isCustomPricing, name, pricing, usageLimits: [] } as any,
+          group,
+        )
+      ) {
         total += group.price
       }
     }
 
-    const currency = tier.pricing.currency ?? activeRecurringGroups[0]?.currency ?? 'USD'
+    const currency = tierCurrency ?? activeRecurringGroups[0]?.currency ?? 'USD'
     const symbol = currency === 'USD' || !currency ? '$' : currency
-    totals[tier.name] = `${symbol}${Math.round(total).toLocaleString()}/mo`
+    totals[name] = `${symbol}${Math.round(total).toLocaleString()}/mo`
   }
 
   return totals
@@ -145,9 +151,15 @@ export function buildServiceValues(
   tiers: readonly RsServiceSubscriptionTier[],
 ): Record<string, FeatureValue> {
   const values: Record<string, FeatureValue> = {}
-  for (const tier of tiers) {
-    const binding = tier.serviceLevels.find((sl) => sl.serviceId === serviceId)
-    values[tier.name] = binding ? mapServiceLevel(binding.level, binding.customValue) : false
+  for (const { serviceLevels, name } of tiers) {
+    const binding = serviceLevels.find((sl) => sl.serviceId === serviceId)
+
+    if (binding) {
+      const { level, customValue } = binding
+      values[name] = mapServiceLevel(level, customValue)
+    } else {
+      values[name] = false
+    }
   }
   return values
 }
@@ -162,16 +174,17 @@ export function buildServiceValues(
 export function formatUsageLimit(
   limit: RsServiceSubscriptionTier['usageLimits'][number],
 ): FeatureValue {
-  const currency =
-    limit.unitPriceCurrency === 'USD' || !limit.unitPriceCurrency ? '$' : limit.unitPriceCurrency
-  if (limit.unitPrice != null && limit.notes) {
-    return `${currency}${limit.unitPrice.toLocaleString()} (${limit.notes})`
+  const { unitPrice, unitPriceCurrency, notes } = limit
+  const currency = unitPriceCurrency === 'USD' || !unitPriceCurrency ? '$' : unitPriceCurrency
+
+  if (unitPrice != null && notes) {
+    return `${currency}${unitPrice.toLocaleString()} (${notes})`
   }
-  if (limit.unitPrice != null) {
-    return `${currency}${limit.unitPrice.toLocaleString()}`
+  if (unitPrice != null) {
+    return `${currency}${unitPrice.toLocaleString()}`
   }
-  if (limit.notes) {
-    return limit.notes
+  if (notes) {
+    return notes
   }
   return false
 }
@@ -183,9 +196,12 @@ export function buildServiceMetrics(
 ): Array<{ metric: string; values: Record<string, FeatureValue>; isOneTime?: boolean }> {
   // Collect all unique metric names for this service across tiers
   const metricNames = new Set<string>()
-  for (const tier of tiers) {
-    for (const ul of tier.usageLimits) {
-      if (ul.serviceId === serviceId) metricNames.add(ul.metric)
+
+  for (const { usageLimits } of tiers) {
+    for (const { serviceId: ulServiceId, metric } of usageLimits) {
+      if (ulServiceId === serviceId) {
+        metricNames.add(metric)
+      }
     }
   }
 
@@ -193,17 +209,24 @@ export function buildServiceMetrics(
   return Array.from(metricNames).map((metric) => {
     const values: Record<string, FeatureValue> = {}
     let isOneTime = false
-    for (const tier of tiers) {
-      const limit = tier.usageLimits.find(
-        (ul) => ul.serviceId === serviceId && ul.metric === metric,
+
+    for (const { usageLimits, name: tierName } of tiers) {
+      const limit = usageLimits.find(
+        ({ serviceId: ulServiceId, metric: ulMetric }) =>
+          ulServiceId === serviceId && ulMetric === metric,
       )
+
       if (limit) {
-        values[tier.name] = formatUsageLimit(limit)
-        if (limit.unitName === 'setup') isOneTime = true
+        const { unitName } = limit
+        values[tierName] = formatUsageLimit(limit)
+        if (unitName === 'setup') {
+          isOneTime = true
+        }
       } else {
-        values[tier.name] = false
+        values[tierName] = false
       }
     }
+
     return { metric, values, isOneTime }
   })
 }
