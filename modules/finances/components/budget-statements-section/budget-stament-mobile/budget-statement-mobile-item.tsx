@@ -6,6 +6,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { slugify } from '@/modules/shared/lib/slug'
 import { cn } from '@/modules/shared/lib/utils'
 import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
@@ -25,7 +26,7 @@ export function BudgetStatementMobileItem({
   const reportMonth = formatReportingMonth(budgetStatement.month)
   const amount = getAmountByMetric(selectedMetric, budgetStatement)
   const metricLabel = getMetricLabel(selectedMetric)
-  const ownerNameForNavigation = budgetStatement.owner.name.toLocaleLowerCase()
+  const ownerNameForNavigation = slugify(budgetStatement.owner.name.toLocaleLowerCase())
   const reportMonthTrimmed = reportMonth.replaceAll(/\s+/g, '')
   return (
     <Link
