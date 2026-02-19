@@ -66,7 +66,7 @@ function SubmitRequestForm() {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-218.5 py-0!">
+    <Card className="mx-auto w-full max-w-218.5 border-none py-0!">
       <CardContent className="p-3 lg:p-6">
         <Form {...form}>
           <form
