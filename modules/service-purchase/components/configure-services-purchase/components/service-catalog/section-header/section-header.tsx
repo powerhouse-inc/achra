@@ -1,6 +1,8 @@
 'use client'
 
 import { Lock } from 'lucide-react'
+import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../../service-catalog-status/service-catalog-status'
@@ -14,9 +16,10 @@ interface SectionHeaderProps {
   toggleLabel?: string
   toggleEnabled?: boolean
   onToggleChange?: (enabled: boolean) => void
-  oneTimeFee?: string
-  oneTimeFeeVariant?: 'primary' | 'muted'
   activePlan?: string
+  groupPrice?: number | null
+  groupCurrency?: string | null
+  groupCostType?: RsGroupCostType | null
 }
 
 export function SectionHeader({
@@ -26,12 +29,17 @@ export function SectionHeader({
   toggleLabel,
   toggleEnabled = false,
   onToggleChange,
-  oneTimeFee,
-  oneTimeFeeVariant = 'muted',
   activePlan,
+  groupPrice,
+  groupCurrency,
+  groupCostType,
 }: Readonly<SectionHeaderProps>) {
   const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
+
+  const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
+
+  const isSetup = groupCostType === RsGroupCostType.Setup
 
   return (
     <div
@@ -48,85 +56,75 @@ export function SectionHeader({
       {/* Label column - sticky on mobile */}
       <div
         className={cn(
-          'border-input bg-accent flex min-h-14 items-center gap-2 border-b px-4 lg:px-6',
-          // Sticky positioning for mobile
+          'border-input bg-accent flex min-h-14 flex-col justify-center gap-1.5 border-b px-4 lg:px-6',
           'sticky left-0 z-10 lg:static',
         )}
       >
-        {hasToggle ? (
-          <div className="flex items-center gap-2">
-            <Switch
-              checked={toggleEnabled}
-              onCheckedChange={onToggleChange}
-              id={`toggle-${title}`}
-              className="data-[state=checked]:bg-status-progress"
-            />
-            <label
-              htmlFor={`toggle-${title}`}
-              className="text-foreground cursor-pointer text-xs font-semibold lg:text-sm"
-            >
-              {toggleLabel ?? title}
-            </label>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <Lock className="text-muted-foreground size-4 shrink-0" />
-            <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
-              <span>{title}</span>
-              {badge && (
-                <span className="ml-1 inline-block align-middle lg:hidden">
-                  <ServiceCatalogStatus catalogStatus={badge} />
-                </span>
-              )}
+        {/* Title row */}
+        <div className="flex items-center gap-2">
+          {hasToggle ? (
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={toggleEnabled}
+                onCheckedChange={onToggleChange}
+                id={`toggle-${title}`}
+                className="data-[state=checked]:bg-status-progress"
+              />
+              <label
+                htmlFor={`toggle-${title}`}
+                className="text-foreground cursor-pointer text-xs font-semibold lg:text-sm"
+              >
+                {toggleLabel ?? title}
+              </label>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="flex items-center gap-2">
+              <Lock className="text-muted-foreground size-4 shrink-0" />
+              <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
+                <span>{title}</span>
+                {badge && (
+                  <span className="ml-1 inline-block align-middle lg:hidden">
+                    <ServiceCatalogStatus catalogStatus={badge} />
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
 
-        {badge && (
-          <div className="hidden lg:block">
-            <ServiceCatalogStatus catalogStatus={badge} />
-          </div>
-        )}
+          {badge && (
+            <div className="hidden lg:block">
+              <ServiceCatalogStatus catalogStatus={badge} />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Mobile: Show only current plan column */}
+      {/* Mobile: show price label when on last plan */}
       <div
         className={cn(
-          'border-input pointer-events-none flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
+          'border-input pointer-events-none relative flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan === currentMobilePlan ? 'bg-primary/30' : 'bg-accent',
-          currentMobilePlan === lastTierName && oneTimeFee && 'relative',
         )}
       >
-        {currentMobilePlan === lastTierName && oneTimeFee && (
-          <span
-            className={cn(
-              'min-w-0 text-xs font-medium whitespace-nowrap',
-              oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
-            )}
-          >
-            {oneTimeFee}
+        {currentMobilePlan === lastTierName && priceLabel && (
+          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+            {priceLabel}
           </span>
         )}
       </div>
 
-      {/* Desktop: Show all plan columns */}
+      {/* Desktop: one cell per plan, price label anchored to the last column */}
       {tierNames.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'border-input pointer-events-none hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
+            'border-input pointer-events-none relative hidden min-h-14 min-w-0 items-center border-b px-6 transition-colors lg:flex',
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
-            plan === lastTierName && oneTimeFee && 'relative',
           )}
         >
-          {plan === lastTierName && oneTimeFee && (
-            <span
-              className={cn(
-                'absolute right-6 min-w-0 text-xs font-medium whitespace-nowrap',
-                oneTimeFeeVariant === 'primary' ? 'text-primary' : 'text-muted-foreground',
-              )}
-            >
-              {oneTimeFee}
+          {plan === lastTierName && priceLabel && isSetup && (
+            <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+              {priceLabel}
             </span>
           )}
         </div>

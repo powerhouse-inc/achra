@@ -3,6 +3,7 @@ query OperatorProfile($filter: buildersFilter) {
     isOperator
     id
     name
+    code
     slug
     icon
     skills

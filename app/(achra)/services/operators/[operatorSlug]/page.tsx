@@ -31,7 +31,8 @@ export default async function OperatorTeamProfilePage({ params }: OperatorTeamPr
         <div className="flex w-full flex-col gap-4 lg:flex-row">
           <div className="flex flex-col gap-2 lg:flex-2">
             <HeaderTitleOperatorProfile
-              title={operatorProfile.name ?? 'Unknown Operator'}
+              code={operatorProfile.code ?? undefined}
+              name={operatorProfile.name ?? 'Unknown Operator'}
               skills={operatorProfile.skills}
               logo={operatorProfile.icon}
             />

@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
-import { computeGrandTotals } from '@/modules/service-purchase/utils/utils'
+import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from '../pricing-calculator-context'
 

@@ -6,7 +6,7 @@ import {
   type RsOfferingOptionGroup,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { computeRecurringSubtotals, formatPrice } from '@/modules/service-purchase/utils/utils'
+import { computeRecurringSubtotals, formatPrice } from '@/modules/service-purchase/lib/utils'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from './pricing-calculator-context'
 import { useServiceCatalogContext } from './service-catalog-root'
