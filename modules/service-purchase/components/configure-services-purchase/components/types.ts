@@ -5,3 +5,9 @@ export enum CatalogStatus {
   Optional = 'Optional',
   Excluded = 'Excluded',
 }
+
+export interface ServiceMetric {
+  metric: string
+  values: Record<string, FeatureValue>
+  isOneTime?: boolean
+}

@@ -22,7 +22,11 @@ import {
 } from '@/modules/expense-reports/lib/month-navigation-utils'
 import { formatMonthString } from '@/modules/expense-reports/lib/month-utils'
 import { expenseReportsSearchParamsCache } from '@/modules/expense-reports/lib/search-params-server'
-import { getBudgetStatementsAvailableMonths } from '@/modules/expense-reports/services/expense-reports-service'
+import {
+  getAccountSnapshotForMonth,
+  getBudgetStatementForMonth,
+  getBudgetStatementsAvailableMonths,
+} from '@/modules/expense-reports/services/expense-reports-service'
 import { TabSection } from '@/modules/expense-reports/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import type { Route } from 'next'
@@ -78,6 +82,14 @@ export default async function ExpenseReportsPage({
   const accountSnapshotBuilderName =
     builder.operationalHubMember.name ?? builder.name ?? builder.slug ?? builder.code ?? ''
 
+  const [budgetStatement, { snapshotReport }] = await Promise.all([
+    getBudgetStatementForMonth(builder.id, selectedMonth),
+    getAccountSnapshotForMonth(builder.id, selectedMonth),
+  ])
+  const areBothDataEmpty =
+    (budgetStatement === null || budgetStatement.expenseReport.wallets.length === 0) &&
+    snapshotReport?.accounts?.length === 0
+
   return (
     <>
       <PageContent as="div" className="mt-4 mb-0 md:mt-6">
@@ -90,41 +102,49 @@ export default async function ExpenseReportsPage({
           defaultMonthIso={selectedMonth.toISOString()}
         />
 
-        <div className="my-6">
-          <Suspense fallback={<ExpenseReportTabsSkeleton />}>
-            <ExpenseReportTabs />
-          </Suspense>
-        </div>
+        {!areBothDataEmpty && (
+          <div className="my-6">
+            <Suspense fallback={<ExpenseReportTabsSkeleton />}>
+              <ExpenseReportTabs />
+            </Suspense>
+          </div>
+        )}
       </PageContent>
 
       {/* CONTENT 👇 */}
 
-      {section === TabSection.ACCOUNT_SNAPSHOT && (
-        <div className="container">
-          <Suspense
-            fallback={<AccountSnapshotSkeleton />}
-            key={`${section}-${formatMonthString(selectedMonth)}`}
-          >
-            <AccountSnapshotContainer
-              teamId={builder.id}
-              builderName={accountSnapshotBuilderName}
-              month={selectedMonth}
-            />
-          </Suspense>
-        </div>
-      )}
+      {areBothDataEmpty ? (
+        <BudgetStatementsEmptyState />
+      ) : (
+        <>
+          {section === TabSection.ACCOUNT_SNAPSHOT && (
+            <div className="container">
+              <Suspense
+                fallback={<AccountSnapshotSkeleton />}
+                key={`${section}-${formatMonthString(selectedMonth)}`}
+              >
+                <AccountSnapshotContainer
+                  teamId={builder.id}
+                  builderName={accountSnapshotBuilderName}
+                  month={selectedMonth}
+                />
+              </Suspense>
+            </div>
+          )}
 
-      {section === TabSection.EXPENSE_REPORTS && (
-        <Suspense
-          fallback={<ExpenseReportsSectionSkeleton />}
-          key={`${section}-${formatMonthString(selectedMonth)}`}
-        >
-          <ExpenseReportsSection
-            teamId={builder.id}
-            month={selectedMonth}
-            builderLabel={builder.name ?? builder.code ?? 'this builder'}
-          />
-        </Suspense>
+          {section === TabSection.EXPENSE_REPORTS && (
+            <Suspense
+              fallback={<ExpenseReportsSectionSkeleton />}
+              key={`${section}-${formatMonthString(selectedMonth)}`}
+            >
+              <ExpenseReportsSection
+                teamId={builder.id}
+                month={selectedMonth}
+                builderLabel={builder.name ?? builder.code ?? 'this builder'}
+              />
+            </Suspense>
+          )}
+        </>
       )}
 
       {/* simulate the margin bottom of 32px */}

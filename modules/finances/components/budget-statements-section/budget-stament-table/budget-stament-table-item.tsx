@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
+import slugify from 'slugify'
 import type { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -28,7 +29,7 @@ export function BudgetStamentTableItem({
     () => getAmountByMetric(budgetMetric, budgetStatement),
     [budgetMetric, budgetStatement],
   )
-  const ownerNameForNavigation = budgetStatement.owner.name.toLocaleLowerCase()
+  const ownerNameForNavigation = slugify(budgetStatement.owner.name.toLocaleLowerCase())
 
   return (
     <TableRow className={className}>

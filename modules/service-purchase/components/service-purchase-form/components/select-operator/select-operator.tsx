@@ -1,45 +1,13 @@
-import {
-  type BuilderProfile_BuilderProfileState,
-  BuilderProfile_BuilderStatus,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorCard } from '@/modules/shared/components/operator-card'
 
-export const OPERATORS_MOCK: BuilderProfile_BuilderProfileState[] = [
-  {
-    id: 'powerhouse-genesis-oh',
-    name: 'Powerhouse Genesis OH',
-    description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    lastModified: '2024-07-01T00:00:00Z',
-    status: BuilderProfile_BuilderStatus.Active,
-    contributors: ['phid-contributor-1', 'phid-contributor-2'],
-    links: [],
-    operationalHubMember: { name: 'Powerhouse Genesis OH', phid: 'powerhouse-genesis-oh' },
-    scopes: [],
-    skills: [],
-    isOperator: true,
-  },
-  {
-    id: 'accountable-opc',
-    name: 'Accountable OPC',
-    description: 'Empowering you business with reliable bookkeeping, payroll, and tax solutions.',
-    lastModified: '2024-07-01T00:00:00Z',
-    status: BuilderProfile_BuilderStatus.Active,
-    contributors: ['phid-contributor-1'],
-    links: [],
-    operationalHubMember: { name: 'Accountable OPC', phid: 'accountable-opc' },
-    scopes: [],
-    skills: [],
-    isOperator: true,
-  },
-]
-
 interface SelectOperatorProps {
-  onSelectServices: (operatorId: string) => void
-  operator: BuilderProfile_BuilderProfileState
+  onConfigureServices: (operatorId: string) => void
+  operator: BuilderProfileState
 }
 
 export default function SelectOperator({
-  onSelectServices,
+  onConfigureServices,
   operator,
 }: Readonly<SelectOperatorProps>) {
   return (
@@ -55,7 +23,7 @@ export default function SelectOperator({
         </span>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        <OperatorCard operator={operator} onConfigureServices={onSelectServices} />
+        <OperatorCard operator={operator} onConfigureServices={onConfigureServices} />
       </div>
     </div>
   )

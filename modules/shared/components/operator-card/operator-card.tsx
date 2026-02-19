@@ -1,9 +1,10 @@
-import { ArrowRight, FileText, Info } from 'lucide-react'
+import { ArrowRight, Info } from 'lucide-react'
 import Link from 'next/link'
 import {
-  type BuilderProfile_BuilderProfileState,
-  BuilderProfile_BuilderStatus,
+  type BuilderProfileState,
+  BuilderStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { formatMonthYear } from '@/modules/shared/lib/date'
@@ -29,19 +30,19 @@ interface ConfigureWithHref {
 }
 
 interface BaseOperatorCardProps {
-  operator: BuilderProfile_BuilderProfileState
+  operator: BuilderProfileState
   showMoreInfo?: boolean
   moreInfoHref?: Route
 }
 
 export type OperatorCardProps = BaseOperatorCardProps & (ConfigureWithCallback | ConfigureWithHref)
 
-const OPERATOR_STATUS_LABELS_MAP: Record<BuilderProfile_BuilderStatus, string> = {
-  [BuilderProfile_BuilderStatus.Active]: 'Active',
-  [BuilderProfile_BuilderStatus.Inactive]: 'Inactive',
-  [BuilderProfile_BuilderStatus.OnHold]: 'On Hold',
-  [BuilderProfile_BuilderStatus.Completed]: 'Completed',
-  [BuilderProfile_BuilderStatus.Archived]: 'Archived',
+const OPERATOR_STATUS_LABELS_MAP: Record<BuilderStatus, string> = {
+  [BuilderStatus.Active]: 'Active',
+  [BuilderStatus.Inactive]: 'Inactive',
+  [BuilderStatus.OnHold]: 'On Hold',
+  [BuilderStatus.Completed]: 'Completed',
+  [BuilderStatus.Archived]: 'Archived',
 }
 
 export default function OperatorCard({
@@ -51,14 +52,20 @@ export default function OperatorCard({
   showMoreInfo = false,
   moreInfoHref,
 }: Readonly<OperatorCardProps>) {
-  const resolvedMoreInfoHref = moreInfoHref ?? (`/services/operators/${operator.id}` as Route)
+  const resolvedMoreInfoHref = moreInfoHref ?? (`/services/operators/${operator.slug}` as Route)
 
   return (
     <Card className="gap-4 border-none p-3 shadow-lg">
       <CardHeader className="gap-0 p-0">
         <div className="flex items-center gap-2">
-          <FileText className="size-4" />
-          <span className="text-foreground text-base/6 font-semibold">{`${operator.name} ${operator.code}`}</span>
+          <Avatar className="size-12 sm:size-10">
+            <AvatarImage src={operator.icon} alt={operator.name ?? ''} />
+            <AvatarFallback>{operator.name?.charAt(0).toUpperCase() ?? 'U'}</AvatarFallback>
+          </Avatar>
+          <div className="flex gap-1 text-base/6 font-semibold">
+            <span className="text-foreground/30">{operator.code}</span>
+            <span className="text-foreground">{operator.name}</span>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-4 p-0">
@@ -68,9 +75,7 @@ export default function OperatorCard({
             <OperatorKeyPoint label="Last Active" value={formatMonthYear(operator.lastModified)} />
             <OperatorKeyPoint
               label="Status"
-              value={
-                OPERATOR_STATUS_LABELS_MAP[operator.status ?? BuilderProfile_BuilderStatus.Active]
-              }
+              value={OPERATOR_STATUS_LABELS_MAP[operator.status ?? BuilderStatus.Active]}
             />
           </div>
           <OperatorKeyPoint
