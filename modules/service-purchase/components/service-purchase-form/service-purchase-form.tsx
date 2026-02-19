@@ -48,6 +48,7 @@ export default function ServicePurchaseForm({
   operator,
   services,
 }: Readonly<ServicePurchaseFormProps>) {
+  const defaultActivePlan = services[0].tiers[1].name
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
@@ -64,7 +65,7 @@ export default function ServicePurchaseForm({
       legalEntity: 'Swiss Association',
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
-      selectedPlan: '',
+      selectedPlan: defaultActivePlan,
       enabledSections: {},
     },
   })

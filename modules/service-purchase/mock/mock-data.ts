@@ -333,7 +333,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         id: 'd7e4176f-0813-476b-80f5-3168fb3e747e',
         name: 'Custom',
         description: 'Enterprise grade',
-        isCustomPricing: false,
+        isCustomPricing: true,
         pricing: { amount: 500, currency: 'USD' },
         pricingOptions: [],
         serviceLevels: [
@@ -371,7 +371,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         defaultSelected: true,
         costType: RsGroupCostType.Recurring,
         billingCycle: RsBillingCycle.Monthly,
-        price: null,
+        price: 300,
         currency: 'USD',
       },
       {

@@ -1,11 +1,14 @@
 'use client'
 
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   buildServiceMetrics,
   buildServiceValues,
   DEFAULT_PLAN_INDEX,
+  getBillingCycleValue,
+  getConstTpe,
+  getCurrency,
 } from '@/modules/service-purchase/lib/utils'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
@@ -38,26 +41,18 @@ export function PricingCalculator({
   /** Tier names derived from API data, used for column iteration and carousel */
   const tierNames = useMemo(() => servicesData.tiers.map((t) => t.name), [servicesData.tiers])
 
-  // Mobile carousel state - track which plan is visible on mobile
-  const [mobilePlanIndex, setMobilePlanIndex] = useState(() => {
-    const index = tierNames.indexOf(selectedPlan ?? '')
-    return index >= 0 ? index : DEFAULT_PLAN_INDEX
-  })
-
-  // Derived state: current plan shown in mobile carousel
-  const currentMobilePlan = tierNames[mobilePlanIndex]
+  // Carousel index is always derived from selectedPlan — single source of truth
+  const mobilePlanIndex = useMemo(() => {
+    const idx = tierNames.indexOf(selectedPlan ?? '')
+    return idx >= 0 ? idx : DEFAULT_PLAN_INDEX
+  }, [selectedPlan, tierNames])
 
   const handlePlanChange = useCallback(
     (plan: string) => {
       if (!onPlanChange) return
       onPlanChange(plan)
-      // Sync mobile carousel to selected plan
-      const newIndex = tierNames.indexOf(plan)
-      if (newIndex >= 0) {
-        setMobilePlanIndex(newIndex)
-      }
     },
-    [onPlanChange, tierNames],
+    [onPlanChange],
   )
 
   const toggleSection = useCallback(
@@ -68,38 +63,26 @@ export function PricingCalculator({
     [onSectionToggle],
   )
 
-  // Carousel navigation handlers
+  // Carousel navigation: compute next index from current, then select that plan
   const handlePrevPlan = useCallback(() => {
     const newIndex = mobilePlanIndex > 0 ? mobilePlanIndex - 1 : tierNames.length - 1
-    setMobilePlanIndex(newIndex)
     handlePlanChange(tierNames[newIndex])
   }, [handlePlanChange, mobilePlanIndex, tierNames])
 
   const handleNextPlan = useCallback(() => {
     const newIndex = mobilePlanIndex < tierNames.length - 1 ? mobilePlanIndex + 1 : 0
-    setMobilePlanIndex(newIndex)
     handlePlanChange(tierNames[newIndex])
   }, [handlePlanChange, mobilePlanIndex, tierNames])
 
   const contextValue = useMemo(
     () => ({
       activePlan: selectedPlan,
-      currentMobilePlan,
-      mobilePlanIndex,
       onPrevPlan: handlePrevPlan,
       onNextPlan: handleNextPlan,
       tierNames,
       tiers: servicesData.tiers,
     }),
-    [
-      selectedPlan,
-      currentMobilePlan,
-      mobilePlanIndex,
-      handlePrevPlan,
-      handleNextPlan,
-      tierNames,
-      servicesData.tiers,
-    ],
+    [selectedPlan, handlePrevPlan, handleNextPlan, tierNames, servicesData.tiers],
   )
 
   return (
@@ -125,7 +108,6 @@ export function PricingCalculator({
                 return (
                   <ServiceCatalogRoot
                     key={section.id}
-                    activePlan={selectedPlan}
                     isEnabled={!section.isAddOn || (enabledSections?.[section.id] ?? false)}
                   >
                     <ServiceCatalogHeader
@@ -141,6 +123,9 @@ export function PricingCalculator({
                             }
                           : undefined
                       }
+                      groupPrice={getBillingCycleValue(section)}
+                      groupCurrency={getCurrency(section)}
+                      groupCostType={getConstTpe(section)}
                     />
 
                     <ServiceCatalogBody>
@@ -155,7 +140,11 @@ export function PricingCalculator({
                       ))}
                     </ServiceCatalogBody>
 
-                    <ServiceCatalogFooter optionGroup={section} tiers={servicesData.tiers} />
+                    <ServiceCatalogFooter
+                      optionGroup={section}
+                      tiers={servicesData.tiers}
+                      services={servicesData.services}
+                    />
                   </ServiceCatalogRoot>
                 )
               })}

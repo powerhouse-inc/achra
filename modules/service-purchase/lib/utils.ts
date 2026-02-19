@@ -83,33 +83,60 @@ export function computeGrandTotals(
     return true
   })
 
-  for (const { isCustomPricing, name, pricing } of tiers) {
-    if (isCustomPricing) {
-      totals[name] = 'Custom'
+  for (const tier of tiers) {
+    if (tier.isCustomPricing) {
+      totals[tier.name] = 'Custom'
       continue
     }
 
-    const { amount, currency: tierCurrency } = pricing
-    let total = amount ?? 0
+    let total = tier.pricing.amount ?? 0
 
     for (const group of activeRecurringGroups) {
-      if (
-        group.price != null &&
-        tierHasGroupServices(
-          { serviceLevels: [], isCustomPricing, name, pricing, usageLimits: [] } as any,
-          group,
-        )
-      ) {
+      if (group.price == null) continue
+      // Add-ons apply a flat rate to all tiers (they use usageLimits, not serviceLevels).
+      // Non-add-ons only apply if the tier actually includes services from that group.
+      if (group.isAddOn || tierHasGroupServices(tier, group)) {
         total += group.price
       }
     }
 
-    const currency = tierCurrency ?? activeRecurringGroups[0]?.currency ?? 'USD'
+    const currency = tier.pricing.currency ?? activeRecurringGroups[0]?.currency ?? 'USD'
     const symbol = currency === 'USD' || !currency ? '$' : currency
-    totals[name] = `${symbol}${Math.round(total).toLocaleString()}/mo`
+    totals[tier.name] = `${symbol}${Math.round(total).toLocaleString()}/mo`
   }
 
   return totals
+}
+
+/**
+ * Computes per-tier subtotal values for an add-on optionGroup.
+ * For each tier:
+ * - If tier.isCustomPricing → "CUSTOM"
+ * - base = optionGroup.price + Σ usageLimits.unitPrice for services in this group
+ * - If total > 0 → formatted price, otherwise null
+ */
+export function computeAddonSubtotals(
+  optionGroup: RsOfferingOptionGroup,
+  services: ReadonlyArray<{ id: string; optionGroupId?: string | null }>,
+  tiers: readonly RsServiceSubscriptionTier[],
+): Record<string, string | null> {
+  const groupServiceIds = new Set(
+    services.filter((s) => s.optionGroupId === optionGroup.id).map((s) => s.id),
+  )
+  const result: Record<string, string | null> = {}
+  for (const tier of tiers) {
+    if (tier.isCustomPricing) {
+      result[tier.name] = 'CUSTOM'
+      continue
+    }
+    const base = optionGroup.price ?? 0
+    const usageTotal = tier.usageLimits
+      .filter((ul) => groupServiceIds.has(ul.serviceId))
+      .reduce((sum, ul) => sum + (ul.unitPrice ?? 0), 0)
+    const total = base + usageTotal
+    result[tier.name] = total > 0 ? formatPrice(total, optionGroup.currency) : null
+  }
+  return result
 }
 
 export function getPriceLabel(
@@ -229,4 +256,19 @@ export function buildServiceMetrics(
 
     return { metric, values, isOneTime }
   })
+}
+
+export const getBillingCycleValue = (section: RsOfferingOptionGroup) => {
+  return section.isAddOn || section.costType === RsGroupCostType.Setup ? section.price : undefined
+}
+
+export const getCurrency = (section: RsOfferingOptionGroup) => {
+  return section.isAddOn || section.costType === RsGroupCostType.Setup
+    ? section.currency
+    : undefined
+}
+export const getConstTpe = (section: RsOfferingOptionGroup) => {
+  return section.isAddOn || section.costType === RsGroupCostType.Setup
+    ? section.costType
+    : undefined
 }

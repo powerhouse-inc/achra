@@ -6,25 +6,36 @@ import {
   type RsOfferingOptionGroup,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { computeRecurringSubtotals, formatPrice } from '@/modules/service-purchase/lib/utils'
+import {
+  computeAddonSubtotals,
+  computeRecurringSubtotals,
+  formatPrice,
+} from '@/modules/service-purchase/lib/utils'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from './pricing-calculator-context'
-import { useServiceCatalogContext } from './service-catalog-root'
 
 export interface ServiceCatalogFooterProps {
   optionGroup: RsOfferingOptionGroup
   tiers: readonly RsServiceSubscriptionTier[]
+  services?: ReadonlyArray<{ id: string; optionGroupId?: string | null }>
 }
 
-function ServiceCatalogFooter({ optionGroup, tiers }: Readonly<ServiceCatalogFooterProps>) {
-  const { activePlan } = useServiceCatalogContext()
-  const { currentMobilePlan, tierNames } = usePricingCalculatorContext()
+function ServiceCatalogFooter({
+  optionGroup,
+  tiers,
+  services,
+}: Readonly<ServiceCatalogFooterProps>) {
+  const { activePlan } = usePricingCalculatorContext()
+  const { tierNames } = usePricingCalculatorContext()
   const isSetup = optionGroup.costType === RsGroupCostType.Setup
 
-  const subtotalValues = useMemo(
-    () => (isSetup ? null : computeRecurringSubtotals(optionGroup, tiers)),
-    [isSetup, optionGroup, tiers],
-  )
+  const subtotalValues = useMemo(() => {
+    if (isSetup) return null
+    if (optionGroup.isAddOn) {
+      return computeAddonSubtotals(optionGroup, services ?? [], tiers)
+    }
+    return computeRecurringSubtotals(optionGroup, tiers)
+  }, [isSetup, optionGroup, services, tiers])
 
   const label = isSetup ? 'TOTAL SETUP FEE' : 'SUBTOTAL'
   const setupFeeText =
@@ -57,7 +68,7 @@ function ServiceCatalogFooter({ optionGroup, tiers }: Readonly<ServiceCatalogFoo
           <div
             className={cn(
               'border-input flex min-h-14 min-w-0 items-center justify-center border-y px-4 lg:hidden',
-              activePlan === currentMobilePlan && 'bg-primary/10',
+              !!activePlan && 'bg-primary/10',
             )}
           >
             {setupFeeText && (
@@ -94,18 +105,16 @@ function ServiceCatalogFooter({ optionGroup, tiers }: Readonly<ServiceCatalogFoo
           <div
             className={cn(
               'border-input flex min-h-14 min-w-0 items-center justify-center border-y px-4 lg:hidden',
-              activePlan === currentMobilePlan && 'bg-primary/10',
+              !!activePlan && 'bg-primary/10',
             )}
           >
             <span
               className={cn(
                 'text-sm',
-                activePlan === currentMobilePlan
-                  ? 'text-primary font-bold'
-                  : 'text-foreground font-medium',
+                activePlan ? 'text-primary font-bold' : 'text-foreground font-medium',
               )}
             >
-              {subtotalValues?.[currentMobilePlan] ?? '—'}
+              {(activePlan && subtotalValues?.[activePlan]) ?? '—'}
             </span>
           </div>
 

@@ -14,7 +14,7 @@ interface FeatureRowProps {
 }
 
 export function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
-  const { activePlan, currentMobilePlan, tierNames } = usePricingCalculatorContext()
+  const { activePlan, tierNames } = usePricingCalculatorContext()
   const hasMetrics = metrics && metrics.length > 0
 
   return (
@@ -46,13 +46,10 @@ export function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>
         <div
           className={cn(
             'border-input flex h-14 min-h-full min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
-            activePlan === currentMobilePlan && 'bg-primary/10 font-bold',
+            !!activePlan && 'bg-primary/10 font-bold',
           )}
         >
-          <ServiceCatalogoCell
-            value={values[currentMobilePlan]}
-            isActive={activePlan === currentMobilePlan}
-          />
+          <ServiceCatalogoCell value={values[activePlan ?? '']} isActive={!!activePlan} />
         </div>
 
         {/* Desktop: Show all plans */}
