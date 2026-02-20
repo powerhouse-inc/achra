@@ -14,8 +14,10 @@ function BudgetStatementsEmptyState() {
         <EmptyMedia variant="icon">
           <FileX />
         </EmptyMedia>
-        <EmptyTitle>No Expense Reports Data</EmptyTitle>
-        <EmptyDescription>There&apos;s no Expense reports data for this builder.</EmptyDescription>
+        <EmptyTitle>No Budget Statements Data</EmptyTitle>
+        <EmptyDescription>
+          There&apos;s no Budget Statements data for this builder.
+        </EmptyDescription>
       </EmptyHeader>
     </Empty>
   )
