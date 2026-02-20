@@ -32,6 +32,7 @@ async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
         summary={resourceProfile.summary}
         thumbnailUrl={resourceProfile.thumbnailUrl}
         status={resourceProfile.status}
+        infoLink={resourceProfile.infoLink}
       />
       <ProductInfo
         description={resourceProfile.description}

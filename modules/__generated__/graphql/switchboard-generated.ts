@@ -9582,7 +9582,7 @@ export type ResourceProfileQueryVariables = Exact<{
 }>;
 
 
-export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
+export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
 
 export type CreateResourceInstancesMutationVariables = Exact<{
   input: CreateResourceInstancesInput;
@@ -10889,6 +10889,7 @@ export const ResourceProfileDocument = `
     query ResourceProfile($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
     id
+    infoLink
     title
     description
     thumbnailUrl
