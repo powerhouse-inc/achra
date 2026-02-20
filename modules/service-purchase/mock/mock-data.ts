@@ -1,5 +1,4 @@
 import {
-  RsBillingCycle,
   RsGroupCostType,
   RsServiceLevel,
   type RsServiceOffering,
@@ -185,7 +184,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Essential entity setup',
         isCustomPricing: false,
         pricing: { amount: 200, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
           // Checks para Core Tools
           {
@@ -290,7 +289,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Full suite for teams',
         isCustomPricing: false,
         pricing: { amount: 300, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
           {
             id: 'sl-s1',
@@ -335,7 +334,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Enterprise grade',
         isCustomPricing: true,
         pricing: { amount: 500, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
           // EJEMPLO DE "PRIORITY" EN FIGMA
           {
@@ -358,10 +357,16 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'One-time entity formation',
         isAddOn: false,
         defaultSelected: true,
-        costType: RsGroupCostType.Setup,
-        billingCycle: RsBillingCycle.OneTime,
+
         price: 3000, // Este es el "$3000 flat fee" de la imagen
-        currency: 'USD',
+        pricingMode: null,
+        standalonePricing: null,
+        tierDependentPricing: [],
+        costType: RsGroupCostType.Setup,
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: '0254ba10-3f40-48dc-91e1-cc67100bd909',
@@ -370,9 +375,13 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: false,
         defaultSelected: true,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
+
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
+
         price: 300,
-        currency: 'USD',
       },
       {
         id: 'f9f35025-0fe8-481d-9033-6aeee784e636',
@@ -381,9 +390,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
         price: 200, // El "+ $200/mo" de la imagen
-        currency: 'USD',
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: 'c594dad8-a700-45bc-b78c-44df166e39e8',
@@ -392,9 +403,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
-        price: 50, // El "+ $50/mo" de la imagen
-        currency: 'USD',
+        price: 200, // El "+ $200/mo" de la imagen
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: '4fefc061-33e3-4468-abe6-7c47de21e2c7',
@@ -403,9 +416,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
-        price: null, // Subtotal dinámico basado en usageLimits
-        currency: 'USD',
+        price: 200, // El "+ $200/mo" de la imagen
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
     ],
   },
