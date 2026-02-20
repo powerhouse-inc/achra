@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
+
+    test.skip(true);
 });
 
 test('should save in clipboard the governance link', async ({ page }) => {

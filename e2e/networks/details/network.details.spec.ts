@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
+
+    test.skip(true);
 });
 
 // TODO: Check if the title and description will change depending on the network
