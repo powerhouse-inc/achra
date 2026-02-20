@@ -68,7 +68,7 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
         }
       }
     }
-   
+
     optionGroups {
       id
       name
