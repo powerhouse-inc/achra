@@ -31,7 +31,7 @@ test('has a link for Explore Achra', async ({ page }) => {
     await expect(newTab).toHaveURL('https://achra.com/workstreams');
 });
 
-test.skip('has a link for Explore Vetra', async ({ page }) => {
+test('has a link for Explore Vetra', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
     await page.getByText('Explore Vetra').click();
@@ -40,7 +40,7 @@ test.skip('has a link for Explore Vetra', async ({ page }) => {
     await newTab.waitForLoadState();
 
     // TODO: Check if this should redirect to the staging environment.
-    await expect(newTab).toHaveURL('https://staging.vetra.io/');
+    await expect(newTab).toHaveURL('https://vetra.io/');
 });
 
 test('has a link for Use Cases', async ({ page }) => {
@@ -57,10 +57,10 @@ test('has a link for About us', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    await expect(newTab).toHaveURL('https://powerhousesno.org/');
+    await expect(newTab).toHaveURL('https://powerhouse.io/');
 });
 
-test.skip('has a link for Academy', async ({ page }) => {
+test('has a link for Academy', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
     await page.getByText('Academy').click();
@@ -69,5 +69,5 @@ test.skip('has a link for Academy', async ({ page }) => {
     await newTab.waitForLoadState();
 
     // TODO: Check if this should redirect to the staging environment.
-    await expect(newTab).toHaveURL('https://staging.powerhouse.academy/');
+    await expect(newTab).toHaveURL('https://academy.vetra.io/');
 });
