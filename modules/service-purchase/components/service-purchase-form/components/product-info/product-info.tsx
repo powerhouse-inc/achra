@@ -1,8 +1,8 @@
 'use client'
 
 import type { Maybe, RsContentSection } from '@/modules/__generated__/graphql/switchboard-generated'
-import ExpandableSection from '@/modules/service-purchase/components/service-purchase-form/components/product-info/components/expandable-section'
 import { Markdown } from '@/modules/shared/components/markdown/markdown'
+import ExpandableSection from './components/expandable-section/expandable-section'
 
 export interface ProductInfoProps {
   description?: Maybe<string>
