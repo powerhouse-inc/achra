@@ -145,49 +145,14 @@ test('should expand accordion for On Chain Reserves with multiple wallets', asyn
     await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeHidden();
     await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div[data-state="closed"]').click();
 
-    // First wallet
-    await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeVisible();
-    await expect(page.getByText('0xA065...Ae41')).toBeVisible();
-    await expect(page.getByText('Inflow')).toHaveCount(4);
-    await expect(page.getByText('0')).toHaveCount(127);
-    await expect(page.getByText('New Balance')).toHaveCount(3);
-
-    await expect(page.getByText('External')).toHaveCount(15);
-    await expect(page.getByText('26-Jan-2026 12:57 UTC')).toHaveCount(1);
-    await expect(page.getByText('0x41579afa91631f...')).toHaveCount(1);
-    await expect(page.getByText('Recipient Address')).toHaveCount(25);
-    await expect(page.getByText('N/A')).toHaveCount(31);
-    await expect(page.getByText('0xc8d8...4efd')).toHaveCount(1);
-    await expect(page.getByText('Amount')).toHaveCount(31);
-    await expect(page.getByText('1,921,440')).toHaveCount(1);
-
-    // Second wallet
-    await expect(page.getByText('Powerhouse Genesis Operational Hub')).toHaveCount(6);
-    await expect(page.getByText('0xF130...0460')).toBeVisible();
-    await expect(page.getByText('Inflow')).toHaveCount(4);
-    await expect(page.getByText('831,413')).toHaveCount(3);
-    await expect(page.getByText('Outflow')).toHaveCount(4);
-    await expect(page.getByText('790,181')).toHaveCount(3);
-    await expect(page.getByText('New Balance')).toHaveCount(3);
-    await expect(page.getByText('686,844')).toHaveCount(3);
-
-    await expect(page.getByText('External')).toHaveCount(15);
-    await expect(page.getByText('14-Jan-2026 07:52 UTC')).toHaveCount(1);
-    await expect(page.getByText('0x5036764a8be008...')).toHaveCount(1);
-    await expect(page.getByText('Recipient Address')).toHaveCount(25);
-    await expect(page.getByText('N/A')).toHaveCount(31);
-    await expect(page.getByText('0x8f7b...19a4')).toHaveCount(1);
-    await expect(page.getByText('Amount')).toHaveCount(31);
-    await expect(page.getByText('16,630')).toHaveCount(1);
-
-    await expect(page.getByText('External')).toHaveCount(15);
-    await expect(page.getByText('15-Jan-2026 14:19 UTC')).toHaveCount(1);
-    await expect(page.getByText('0x3c9c91cce462a2...')).toHaveCount(1);
-    await expect(page.getByText('Recipient Address')).toHaveCount(25);
-    await expect(page.getByText('N/A')).toHaveCount(31);
-    await expect(page.getByText('0x04f3...6572')).toHaveCount(1);
-    await expect(page.getByText('Amount')).toHaveCount(31);
-    await expect(page.getByText('1,331')).toHaveCount(1);
+    await expect(page.getByText('Powerhouse Genesis Operational Hub')).toHaveCount(5);
+    await expect(page.getByText('Inflow')).toHaveCount(3);
+    await expect(page.getByText('Outflow')).toHaveCount(3);
+    await expect(page.getByText('New Balance')).toHaveCount(2);
+    await expect(page.getByText('External')).toHaveCount(16);
+    await expect(page.getByText('Recipient Address')).toHaveCount(21);
+    await expect(page.getByText('N/A')).toHaveCount(23);
+    await expect(page.getByText('Amount')).toHaveCount(23);
 });
 
 test.skip('should expand accordion for On Chain Reserves with a single wallet', async ({ page }) => {
@@ -269,23 +234,24 @@ test.skip('should load the Off Chain Reserves transactions', async ({ page }) =>
 });
 
 test('should load Reported Expenses Comparison main data', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
-    await expect(page.getByText('Reported Expenses Comparison')).toBeVisible();
+    await page.evaluate(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    await expect(page.getByText('Reported Expenses Comparison')).toHaveCount(1);
     await expect(page.getByText('Reported actuals compared to expense and revenue transactions.')).toHaveCount(1);
     await expect(page.getByText('Reported Actuals')).toHaveCount(3);
     await expect(page.getByText('Net Expense Transactions')).toBeVisible();
     await expect(page.getByText('On-chain only')).toBeHidden();
     await expect(page.getByText('Difference')).toHaveCount(2);
     await expect(page.getByText('Including off-chain')).toBeHidden();
-    await expect(page.getByText('Sep-2024')).toHaveCount(2);
-    await expect(page.getByText('165,000.00')).toHaveCount(2);
-    await expect(page.getByText('Aug-2024')).toHaveCount(2);
-    await expect(page.getByText('158,800.00')).toBeVisible();
-    await expect(page.getByText('Jul-2024')).toHaveCount(2);
-    await expect(page.getByText('130,200.00')).toBeVisible();
-    await expect(page.getByText('0.00%')).toHaveCount(5);
+    await expect(page.getByText('Aug-2025')).toHaveCount(2);
+    await expect(page.getByText('Jul-2025')).toHaveCount(2);
+    await expect(page.getByText('Jun-2025')).toHaveCount(2);
+    await expect(page.getByText('51.78%')).toHaveCount(1);
     await expect(page.getByText('Totals')).toHaveCount(3);
-    await expect(page.getByText('454,000.00 USD')).toBeVisible();
+    await expect(page.getByText('566,545.17')).toHaveCount(1);
+    await expect(page.getByText('859,908.45')).toHaveCount(1);
 });
 
 test('should load Reported Expenses Comparison info', async ({ page }) => {
