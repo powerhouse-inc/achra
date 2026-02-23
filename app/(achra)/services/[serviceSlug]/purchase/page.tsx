@@ -28,13 +28,9 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     notFound()
   }
 
-  const service = services[0]
-
-  const facets = service.facetTargets
-
   return (
     <PageContent className="gap-6">
-      <ServicePurchaseStoreProvider facets={facets}>
+      <ServicePurchaseStoreProvider facets={services.facetTargets}>
         <ServicePurchaseStepProvider>
           <div className="flex flex-col gap-6 lg:gap-8">
             <ServiceHeader resourceTemplate={resourceTemplate} />
