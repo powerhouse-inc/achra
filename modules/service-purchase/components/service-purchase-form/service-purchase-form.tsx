@@ -189,10 +189,11 @@ export default function ServicePurchaseForm({
                   onPlanChange={handlePlanChange}
                   onSectionToggle={handleSectionToggle}
                   servicesData={services[0]}
+                  operator={operator}
                 />
               </Suspense>
             )}
-            {step.value === 'summary' && <SummaryStep />}
+            {step.value === 'summary' && <SummaryStep operator={operator} />}
             {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
           </TabsContent>
         ))}

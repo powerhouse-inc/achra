@@ -1,5 +1,4 @@
 import {
-  RsBillingCycle,
   RsGroupCostType,
   RsServiceLevel,
   type RsServiceOffering,
@@ -38,9 +37,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
     ],
     serviceGroups: [],
 
-    // --- LISTA MAESTRA DE SERVICIOS (ROWS) ---
     services: [
-      // LEGAL SETUP
       {
         id: '0f96c2f6-285d-4411-83c9-9c65ce64554b',
         title: 'Swiss association setup',
@@ -118,7 +115,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         facetBindings: [],
       },
 
-      // ADD-ONS (CORREGIDO CON IDS DE LA API)
       {
         id: '2306ef45-545d-487e-8be3-e48d77b1aff4',
         title: 'Exchange account setup',
@@ -185,9 +181,8 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Essential entity setup',
         isCustomPricing: false,
         pricing: { amount: 200, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
-          // Checks para Core Tools
           {
             id: 'sl-1',
             serviceId: '65201869-4dbe-45ef-8d0e-ff511c1059b1',
@@ -217,7 +212,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
             optionGroupId: '0254ba10-3f40-48dc-91e1-cc67100bd909',
           },
         ],
-        // PRECIOS DINÁMICOS POR FILA (ADD-ONS)
+
         usageLimits: [
           {
             id: 'ul-1',
@@ -290,7 +285,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Full suite for teams',
         isCustomPricing: false,
         pricing: { amount: 300, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
           {
             id: 'sl-s1',
@@ -308,7 +303,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
           },
         ],
         usageLimits: [
-          // Precios iguales para Standard
           {
             id: 'ul-s1',
             serviceId: '2306ef45-545d-487e-8be3-e48d77b1aff4',
@@ -335,9 +329,8 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Enterprise grade',
         isCustomPricing: true,
         pricing: { amount: 500, currency: 'USD' },
-        pricingOptions: [],
+        billingCycleDiscounts: [],
         serviceLevels: [
-          // EJEMPLO DE "PRIORITY" EN FIGMA
           {
             id: 'sl-c1',
             serviceId: 'ed02a1bb-7d90-4486-8875-98025c5c35b1',
@@ -350,7 +343,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
       },
     ],
 
-    // --- GRUPOS (SECCIONES DE LA TABLA) ---
     optionGroups: [
       {
         id: '40a0a71e-a35d-40a9-a9b7-a90fe937baa7',
@@ -358,10 +350,16 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'One-time entity formation',
         isAddOn: false,
         defaultSelected: true,
+
+        price: 3000,
+        pricingMode: null,
+        standalonePricing: null,
+        tierDependentPricing: [],
         costType: RsGroupCostType.Setup,
-        billingCycle: RsBillingCycle.OneTime,
-        price: 3000, // Este es el "$3000 flat fee" de la imagen
-        currency: 'USD',
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: '0254ba10-3f40-48dc-91e1-cc67100bd909',
@@ -370,9 +368,13 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: false,
         defaultSelected: true,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
+
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
+
         price: 300,
-        currency: 'USD',
       },
       {
         id: 'f9f35025-0fe8-481d-9033-6aeee784e636',
@@ -381,9 +383,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
-        price: 200, // El "+ $200/mo" de la imagen
-        currency: 'USD',
+        price: 200,
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: 'c594dad8-a700-45bc-b78c-44df166e39e8',
@@ -392,9 +396,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
-        price: 50, // El "+ $50/mo" de la imagen
-        currency: 'USD',
+        price: 200,
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
       {
         id: '4fefc061-33e3-4468-abe6-7c47de21e2c7',
@@ -403,9 +409,11 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
-        billingCycle: RsBillingCycle.Monthly,
-        price: null, // Subtotal dinámico basado en usageLimits
-        currency: 'USD',
+        price: 200,
+        availableBillingCycles: [],
+        billingCycleDiscounts: [],
+        discountMode: null,
+        currency: null,
       },
     ],
   },

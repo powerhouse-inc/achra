@@ -1,6 +1,7 @@
 query ResourceProfile($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
     id
+    infoLink
     title
     description
     thumbnailUrl
