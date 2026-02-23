@@ -44,7 +44,7 @@ const meta = {
   },
   args: {
     operator: baseOperator,
-    onConfigureServices: (operatorId: string) => {
+    onSelectOperator: (operatorId: string) => {
       console.log(`Configure services for: ${operatorId}`)
     },
   },
@@ -65,7 +65,7 @@ export const WithMoreInfo: Story = {
 export const ConfigureWithHref: Story = {
   args: {
     configureServicesHref: '/service-purchase?operator=PHID-BLD-operator-001' as Route,
-    onConfigureServices: undefined,
+    onSelectOperator: undefined,
     showMoreInfo: true,
   },
 }
