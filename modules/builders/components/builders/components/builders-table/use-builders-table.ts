@@ -71,6 +71,14 @@ export function useBuildersTable({ builders, asSectionContent = false }: UseBuil
 
       const column = BUILDERS_TABLE_COLUMNS[sortColumn]
       const sortDirection = headersSort[sortColumn]
+      const effectiveSortDirection =
+        column.sortReverse &&
+        sortDirection !== SortEnum.Neutral &&
+        sortDirection !== SortEnum.Disabled
+          ? sortDirection === SortEnum.Asc
+            ? SortEnum.Desc
+            : SortEnum.Asc
+          : sortDirection
 
       if (sortDirection === SortEnum.Neutral || sortDirection === SortEnum.Disabled) {
         return builders
@@ -78,14 +86,13 @@ export function useBuildersTable({ builders, asSectionContent = false }: UseBuil
 
       return [...builders].sort((a, b) => {
         const getSortableValue = (builder: BuilderProfileState): string | number => {
-          const value = builder[column.accessorKey as keyof BuilderProfileState]
           if (column.accessorKey === 'lastModified') {
-            if (typeof value === 'string') {
-              const timestamp = new Date(value).getTime()
-              return Number.isNaN(timestamp) ? 0 : timestamp
-            }
-            return 0
+            if (!builder.lastModified) return -1
+
+            const timestamp = new Date(builder.lastModified).getTime()
+            return Number.isNaN(timestamp) ? -1 : timestamp
           }
+          const value = builder[column.accessorKey as keyof BuilderProfileState]
 
           if (value === null) {
             return ''
@@ -109,10 +116,10 @@ export function useBuildersTable({ builders, asSectionContent = false }: UseBuil
         const bValue = getSortableValue(b)
 
         if (aValue < bValue) {
-          return sortDirection === SortEnum.Asc ? -1 : 1
+          return effectiveSortDirection === SortEnum.Asc ? -1 : 1
         }
         if (aValue > bValue) {
-          return sortDirection === SortEnum.Asc ? 1 : -1
+          return effectiveSortDirection === SortEnum.Asc ? 1 : -1
         }
         return 0
       })
