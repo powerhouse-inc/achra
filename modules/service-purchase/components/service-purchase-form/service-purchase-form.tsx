@@ -126,20 +126,16 @@ export default function ServicePurchaseForm({
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <Suspense fallback={<PricingCalculatorSkeleton />}>
-              {step.value === ServicePurchaseStep.ConfigureServices && (
-                <Suspense fallback={<PricingCalculatorSkeleton />}>
-                  <ConfigureServices
-                    selectedPlan={selectedPlan}
-                    enabledSections={enabledSections}
-                    onPlanChange={handlePlanChange}
-                    onSectionToggle={handleSectionToggle}
-                    billingPeriod={billingPeriod}
-                    setBillingPeriod={setBillingPeriod}
-                    servicesData={services[0]}
-                    operator={operator}
-                  />
-                </Suspense>
-              )}
+              <ConfigureServices
+                selectedPlan={selectedPlan}
+                enabledSections={enabledSections}
+                onPlanChange={handlePlanChange}
+                onSectionToggle={handleSectionToggle}
+                billingPeriod={billingPeriod}
+                setBillingPeriod={setBillingPeriod}
+                servicesData={services[0]}
+                operator={operator}
+              />
             </Suspense>
           )}
           {step.value === ServicePurchaseStep.Summary && <SummaryStep operator={operator} />}
