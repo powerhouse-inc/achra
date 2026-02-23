@@ -6,14 +6,14 @@ import BookCall from '@/modules/shared/components/svgs/book-call.svg'
 import PhoneLarge from '@/modules/shared/components/svgs/phone-large.svg'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import ActionCard from './components/action-card/action-card'
+import { OPERATIONAL_HUB_URL } from '../../config/constants'
+import { ActionCard } from './action-card'
 
-interface ConfirmationProps {
-  name: string
-  email: string
-}
+function ConfirmationStep() {
+  // TODO: get the name and email
+  const name = 'John Doe'
+  const email = 'john.doe@example.com'
 
-export default function Confirmation({ name, email }: ConfirmationProps) {
   return (
     <Card className="bg-background border-border mt-16 w-full self-center rounded-lg p-6 shadow-xs md:max-w-156">
       <CardContent className={cn('flex flex-col items-center gap-6 px-0')}>
@@ -33,7 +33,8 @@ export default function Confirmation({ name, email }: ConfirmationProps) {
           </div>
         </div>
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-          <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
+          {/* TODO: extract link to a constant file */}
+          <Link href={OPERATIONAL_HUB_URL}>
             <ActionCard
               icon={<BookCall className="size-6 min-w-6 rounded-md" />}
               title="Book a Call"
@@ -54,3 +55,5 @@ export default function Confirmation({ name, email }: ConfirmationProps) {
     </Card>
   )
 }
+
+export { ConfirmationStep }

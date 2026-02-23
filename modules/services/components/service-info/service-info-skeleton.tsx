@@ -1,6 +1,6 @@
-import { Skeleton } from '../ui/skeleton'
+import { Skeleton } from '../../../shared/components/ui/skeleton'
 
-export default function ServiceInfoSkeleton() {
+function ServiceInfoSkeleton() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-[auto_1fr] lg:gap-6">
       <div className="flex flex-col gap-2 sm:gap-4">
@@ -28,3 +28,5 @@ export default function ServiceInfoSkeleton() {
     </div>
   )
 }
+
+export { ServiceInfoSkeleton }

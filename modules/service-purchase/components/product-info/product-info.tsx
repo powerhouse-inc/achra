@@ -9,7 +9,7 @@ export interface ProductInfoProps {
   contentSections: RsContentSection[]
 }
 
-export default function ProductInfo({ description, contentSections }: ProductInfoProps) {
+function ProductInfo({ description, contentSections }: ProductInfoProps) {
   return (
     <div className="flex flex-col gap-6">
       <Markdown className="text-foreground">{description ?? ''}</Markdown>
@@ -21,3 +21,5 @@ export default function ProductInfo({ description, contentSections }: ProductInf
     </div>
   )
 }
+
+export { ProductInfo }

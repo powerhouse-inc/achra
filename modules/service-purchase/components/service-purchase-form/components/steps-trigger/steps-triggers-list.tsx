@@ -1,22 +1,20 @@
 'use client'
 
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment } from 'react'
-
-import {
-  STEPS,
-  useServicePurchaseStep,
-} from '@/modules/services/context/service-purchase-step-context'
+import { Fragment, type ReactNode } from 'react'
+import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/config/constants'
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { cn } from '@/modules/shared/lib/utils'
 
-const STEP_ICONS = {
-  'product-info': <InfoIcon className="size-4 lg:size-6" />,
-  'select-operator': <FileText className="size-4 lg:size-6" />,
-  'configure-services': <BookOpenCheck className="size-4 lg:size-6" />,
-  summary: <BookOpenText className="size-4 lg:size-6" />,
-  confirmation: <CheckCheck className="size-4 lg:size-6" />,
+const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
+  [ServicePurchaseStep.ProductInfo]: <InfoIcon className="size-4 lg:size-6" />,
+  [ServicePurchaseStep.SelectOperator]: <FileText className="size-4 lg:size-6" />,
+  [ServicePurchaseStep.ConfigureServices]: <BookOpenCheck className="size-4 lg:size-6" />,
+  [ServicePurchaseStep.Summary]: <BookOpenText className="size-4 lg:size-6" />,
+  [ServicePurchaseStep.Confirmation]: <CheckCheck className="size-4 lg:size-6" />,
 }
 
 export function StepsTriggersList() {
@@ -24,7 +22,7 @@ export function StepsTriggersList() {
 
   return (
     <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">
-      {STEPS.map((step, index) => {
+      {SERVICE_PURCHASE_STEPS_ENTRIES.map((step, index) => {
         const isActive = activeStep === step.value
         const isVisited = visitedSteps.includes(step.value)
 
@@ -59,12 +57,13 @@ export function StepsTriggersList() {
                 </span>
               </div>
             </TabsTrigger>
-            {index < STEPS.length - 1 && (
+            {index < SERVICE_PURCHASE_STEPS_ENTRIES.length - 1 && (
               <Separator
                 orientation="horizontal"
                 className={cn(
                   'bg-border mx-1 h-0.5! max-w-8! flex-1',
-                  visitedSteps.includes(STEPS[index + 1].value) && 'bg-primary',
+                  visitedSteps.includes(SERVICE_PURCHASE_STEPS_ENTRIES[index + 1].value) &&
+                    'bg-primary',
                 )}
               />
             )}

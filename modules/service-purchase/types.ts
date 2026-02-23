@@ -1,6 +1,14 @@
 import type { submitRequestSchema } from './lib/submit-request-schema'
 import type { z } from 'zod'
 
+export enum ServicePurchaseStep {
+  ProductInfo = 'product-info',
+  SelectOperator = 'select-operator',
+  ConfigureServices = 'configure-services',
+  Summary = 'summary',
+  Confirmation = 'confirmation',
+}
+
 export interface CreateResourceInstancesResult {
   data: Record<string, unknown> | null
 }

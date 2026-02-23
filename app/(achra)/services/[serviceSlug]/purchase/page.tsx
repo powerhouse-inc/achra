@@ -1,7 +1,10 @@
-import { Suspense } from 'react'
-import ServicePurchase from '@/modules/service-purchase'
-import { StepOneSkeleton } from '@/modules/service-purchase/components/service-purchase-form/components/step-one-skeleton/step-one-skeleton'
-import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
+import { notFound } from 'next/navigation'
+import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
+import ServicePurchaseForm from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
+import { ServicePurchaseStepProvider } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
+import { getResourceTemplate } from '@/modules/service-purchase/services/resource-template'
+import { getServiceOfferings } from '@/modules/service-purchase/services/service-offerings'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 interface ServicePurchasePageProps {
@@ -10,15 +13,29 @@ interface ServicePurchasePageProps {
 
 export default async function ServicePurchasePage({ params }: ServicePurchasePageProps) {
   const { serviceSlug } = await params
+  const resourceTemplate = await getResourceTemplate({ id: serviceSlug })
+
+  const [operator, services] = await Promise.all([
+    getResourceOperator({ id: resourceTemplate?.operatorId }),
+    getServiceOfferings(),
+  ])
+
+  if (!resourceTemplate || !operator) {
+    notFound()
+  }
 
   return (
     <PageContent className="gap-6">
-      <ErrorBoundaryWithPresets>
-        {/* TODO: The loading state will depend on the step the user lands on */}
-        <Suspense fallback={<StepOneSkeleton />}>
-          <ServicePurchase serviceSlug={serviceSlug} />
-        </Suspense>
-      </ErrorBoundaryWithPresets>
+      <ServicePurchaseStepProvider>
+        <div className="flex flex-col gap-6 lg:gap-8">
+          <ServiceHeader resourceTemplate={resourceTemplate} />
+          <ServicePurchaseForm
+            resourceTemplate={resourceTemplate}
+            operator={operator}
+            services={services}
+          />
+        </div>
+      </ServicePurchaseStepProvider>
     </PageContent>
   )
 }

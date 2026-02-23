@@ -8,7 +8,7 @@ interface ActionCardProps {
   bgImage: React.ReactNode
 }
 
-export default function ActionCard({ icon, title, description, bgImage }: ActionCardProps) {
+function ActionCard({ icon, title, description, bgImage }: ActionCardProps) {
   return (
     <Card className="hover:bg-accent bg-background border-border relative min-h-23 w-full rounded-lg p-3 shadow-none">
       <CardContent className={cn('flex flex-col items-center gap-2 px-0')}>
@@ -24,3 +24,5 @@ export default function ActionCard({ icon, title, description, bgImage }: Action
     </Card>
   )
 }
+
+export { ActionCard }

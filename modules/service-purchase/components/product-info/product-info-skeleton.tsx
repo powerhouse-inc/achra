@@ -37,7 +37,7 @@ function ExpandableInfoSkeleton({ isFirst }: ExpandableInfoSkeletonProps) {
   )
 }
 
-export function ProductInfoSkeleton() {
+function ProductInfoSkeleton() {
   return (
     <div className="flex w-full flex-col gap-6">
       <DescriptionSkeleton />
@@ -48,3 +48,5 @@ export function ProductInfoSkeleton() {
     </div>
   )
 }
+
+export { ProductInfoSkeleton }

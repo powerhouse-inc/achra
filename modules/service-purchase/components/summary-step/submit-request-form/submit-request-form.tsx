@@ -7,11 +7,12 @@ import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
 import { submitRequestSchema } from '@/modules/service-purchase/lib/submit-request-schema'
-import type {
-  SubmitRequestFormState,
-  SubmitRequestFormValues,
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import {
+  ServicePurchaseStep,
+  type SubmitRequestFormState,
+  type SubmitRequestFormValues,
 } from '@/modules/service-purchase/types'
-import { useServicePurchaseStep } from '@/modules/services/context/service-purchase-step-context'
 import { Alert, AlertDescription, AlertTitle } from '@/modules/shared/components/ui/alert'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -49,7 +50,7 @@ function SubmitRequestForm() {
   useEffect(() => {
     if (state.success) {
       // TODO: add the driver link so we can use it in the confirmation step
-      goToStep('confirmation')
+      goToStep(ServicePurchaseStep.Confirmation)
     }
   }, [state.success, goToStep])
 
