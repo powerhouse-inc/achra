@@ -1,10 +1,23 @@
 import {
+  RsBillingCycle,
+  type RsBillingCycleDiscount,
+  RsDiscountMode,
+  RsDiscountType,
   RsGroupCostType,
+  type RsOfferingFacetTarget,
   type RsOfferingOptionGroup,
+  type RsOfferingService,
   RsServiceLevel,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { FeatureValue } from '../components/configure-services-purchase/components/types'
+
+/** Safe coercion — Amount_Money scalar is typed `any` in codegen */
+function toNum(raw: unknown): number {
+  if (raw === null || raw === undefined) return 0
+  const n = Number(raw)
+  return Number.isNaN(n) ? 0 : n
+}
 
 const INCLUDED_LEVELS = new Set([
   RsServiceLevel.Included,
@@ -20,12 +33,21 @@ export function formatPrice(amount: number, currency?: string | null): string {
 }
 
 /**
+ * Applies a discount rule to a base amount.
+ * (Movido arriba para evitar duplicación y cumplir con DRY)
+ */
+function applyDiscountRule(
+  amount: number,
+  rule: { discountType: RsDiscountType; discountValue: number },
+): number {
+  if (rule.discountType === RsDiscountType.Percentage) {
+    return amount * (1 - rule.discountValue / 100)
+  }
+  return Math.max(0, amount - rule.discountValue)
+}
+
+/**
  * Computes per-tier subtotal values for a recurring optionGroup.
- * For each tier:
- * - If tier.isCustomPricing → "CUSTOM"
- * - If the tier has at least one service for this group with level != NotIncluded/NotApplicable
- *   → formatted group.price
- * - Otherwise → null (displayed as "—")
  */
 export function computeRecurringSubtotals(
   optionGroup: RsOfferingOptionGroup,
@@ -55,7 +77,6 @@ export function computeRecurringSubtotals(
 
 /**
  * Checks whether a tier has at least one service with an "included" level
- * for the given option group.
  */
 function tierHasGroupServices(
   tier: RsServiceSubscriptionTier,
@@ -66,6 +87,32 @@ function tierHasGroupServices(
   )
 }
 
+const CYCLE_SUFFIX: Record<RsBillingCycle, string> = {
+  [RsBillingCycle.Monthly]: '/mo',
+  [RsBillingCycle.Quarterly]: '/qtr',
+  [RsBillingCycle.SemiAnnual]: '/6mo',
+  [RsBillingCycle.Annual]: '/yr',
+  [RsBillingCycle.OneTime]: '',
+}
+
+function applyBillingCycleDiscount(
+  amount: number,
+  discounts: RsServiceSubscriptionTier['billingCycleDiscounts'],
+  billingCycle: RsBillingCycle,
+): number {
+  const discount = discounts.find((d) => d.billingCycle === billingCycle)
+  return discount ? applyDiscountRule(amount, discount.discountRule) : amount
+}
+
+function applyGroupBillingCycleDiscount(
+  amount: number,
+  discounts: RsBillingCycleDiscount[],
+  billingCycle: RsBillingCycle,
+): number {
+  const discount = discounts.find((d) => d.billingCycle === billingCycle)
+  return discount ? applyDiscountRule(amount, discount.discountRule) : amount
+}
+
 /**
  * Computes the grand total per tier by summing the prices of all enabled
  * RECURRING option groups that have services for that tier.
@@ -74,11 +121,13 @@ export function computeGrandTotals(
   tiers: readonly RsServiceSubscriptionTier[],
   optionGroups: readonly RsOfferingOptionGroup[],
   enabledSections?: Record<string, boolean>,
+  selectedBillingCycle: RsBillingCycle = RsBillingCycle.Monthly,
 ): Record<string, string> {
   const totals: Record<string, string> = {}
+  const suffix = CYCLE_SUFFIX[selectedBillingCycle]
 
   const activeRecurringGroups = optionGroups.filter(({ costType, isAddOn, id }) => {
-    if (costType !== RsGroupCostType.Recurring) return false
+    if (costType === RsGroupCostType.Setup) return false
     if (isAddOn && !enabledSections?.[id]) return false
     return true
   })
@@ -89,32 +138,78 @@ export function computeGrandTotals(
       continue
     }
 
-    let total = tier.pricing.amount ?? 0
+    const tierBase = tier.pricing.amount ?? 0
+    let total = applyBillingCycleDiscount(
+      tierBase,
+      tier.billingCycleDiscounts,
+      selectedBillingCycle,
+    )
 
     for (const group of activeRecurringGroups) {
-      if (group.price == null) continue
-      // Add-ons apply a flat rate to all tiers (they use usageLimits, not serviceLevels).
-      // Non-add-ons only apply if the tier actually includes services from that group.
-      if (group.isAddOn || tierHasGroupServices(tier, group)) {
-        total += group.price
+      let groupBasePrice: number | null = null
+
+      const spEntries = group.standalonePricing?.recurringPricing
+      if (spEntries?.length) {
+        const exactEntry = spEntries.find((rp) => rp.billingCycle === selectedBillingCycle)
+        if (exactEntry) {
+          groupBasePrice = toNum(exactEntry.amount)
+        } else {
+          const monthlyEntry = spEntries.find((rp) => rp.billingCycle === RsBillingCycle.Monthly)
+          if (monthlyEntry) groupBasePrice = toNum(monthlyEntry.amount)
+        }
+      } else if (group.price !== null && group.price !== undefined) {
+        groupBasePrice = toNum(group.price)
+      } else {
+        const tierEntry = (group.tierDependentPricing ?? []).find((tp) => tp.tierId === tier.id)
+        if (tierEntry) {
+          const exactCycle = tierEntry.recurringPricing.find(
+            (rp) => rp.billingCycle === selectedBillingCycle,
+          )
+          if (exactCycle) {
+            groupBasePrice = toNum(exactCycle.amount)
+          } else {
+            const monthly = tierEntry.recurringPricing.find(
+              (rp) => rp.billingCycle === RsBillingCycle.Monthly,
+            )
+            if (monthly) groupBasePrice = toNum(monthly.amount)
+          }
+        }
+      }
+
+      if (groupBasePrice === null) continue
+      if (!group.isAddOn && !tierHasGroupServices(tier, group)) continue
+
+      if (!group.isAddOn) {
+        total += applyGroupBillingCycleDiscount(
+          groupBasePrice,
+          group.billingCycleDiscounts,
+          selectedBillingCycle,
+        )
+      } else if (group.discountMode === RsDiscountMode.Independent) {
+        total += applyGroupBillingCycleDiscount(
+          groupBasePrice,
+          group.billingCycleDiscounts,
+          selectedBillingCycle,
+        )
+      } else if (group.discountMode === RsDiscountMode.InheritTier) {
+        total += applyBillingCycleDiscount(
+          groupBasePrice,
+          tier.billingCycleDiscounts,
+          selectedBillingCycle,
+        )
+      } else {
+        total += groupBasePrice
       }
     }
 
     const currency = tier.pricing.currency ?? activeRecurringGroups[0]?.currency ?? 'USD'
     const symbol = currency === 'USD' || !currency ? '$' : currency
-    totals[tier.name] = `${symbol}${Math.round(total).toLocaleString()}/mo`
+    totals[tier.name] = `${symbol}${Math.round(total).toLocaleString()}${suffix}`
   }
 
   return totals
 }
 
-/**
- * Computes per-tier subtotal values for an add-on optionGroup.
- * For each tier:
- * - If tier.isCustomPricing → "CUSTOM"
- * - base = optionGroup.price + Σ usageLimits.unitPrice for services in this group
- * - If total > 0 → formatted price, otherwise null
- */
 export function computeAddonSubtotals(
   optionGroup: RsOfferingOptionGroup,
   services: ReadonlyArray<{ id: string; optionGroupId?: string | null }>,
@@ -148,14 +243,11 @@ export function getPriceLabel(
   const symbol = currency === 'USD' || !currency ? '$' : currency
   const formatted = `${symbol}${price.toLocaleString()}`
   if (costType === RsGroupCostType.Setup) return `One-time: ${formatted}`
-  if (costType === RsGroupCostType.Recurring) return `+ ${formatted}/mo`
-  return null
+  return `+ ${formatted}/mo`
 }
 
-/** Default plan index for mobile carousel */
 export const DEFAULT_PLAN_INDEX = 1
 
-/** Maps an API service level to a UI-renderable FeatureValue */
 function mapServiceLevel(level: RsServiceLevel, customValue?: string | null): FeatureValue {
   switch (level) {
     case RsServiceLevel.Included:
@@ -172,7 +264,6 @@ function mapServiceLevel(level: RsServiceLevel, customValue?: string | null): Fe
   }
 }
 
-/** Builds a Record<tierName, FeatureValue> for a given service across all tiers */
 export function buildServiceValues(
   serviceId: string,
   tiers: readonly RsServiceSubscriptionTier[],
@@ -180,24 +271,11 @@ export function buildServiceValues(
   const values: Record<string, FeatureValue> = {}
   for (const { serviceLevels, name } of tiers) {
     const binding = serviceLevels.find((sl) => sl.serviceId === serviceId)
-
-    if (binding) {
-      const { level, customValue } = binding
-      values[name] = mapServiceLevel(level, customValue)
-    } else {
-      values[name] = false
-    }
+    values[name] = binding ? mapServiceLevel(binding.level, binding.customValue) : false
   }
   return values
 }
 
-/**
- * Formats a usage limit into a display string.
- * - unitPrice + notes → "$500 (One-time setup fee)"
- * - unitPrice only   → "$500"
- * - notes only        → "5 invoices included per month"
- * - neither           → false (renders as —)
- */
 export function formatUsageLimit(
   limit: RsServiceSubscriptionTier['usageLimits'][number],
 ): FeatureValue {
@@ -210,29 +288,21 @@ export function formatUsageLimit(
   if (unitPrice != null) {
     return `${currency}${unitPrice.toLocaleString()}`
   }
-  if (notes) {
-    return notes
-  }
-  return false
+  return notes ?? false
 }
 
-/** Collects unique metric names for a service and builds per-tier values */
 export function buildServiceMetrics(
   serviceId: string,
   tiers: readonly RsServiceSubscriptionTier[],
 ): Array<{ metric: string; values: Record<string, FeatureValue>; isOneTime?: boolean }> {
-  // Collect all unique metric names for this service across tiers
   const metricNames = new Set<string>()
 
   for (const { usageLimits } of tiers) {
     for (const { serviceId: ulServiceId, metric } of usageLimits) {
-      if (ulServiceId === serviceId) {
-        metricNames.add(metric)
-      }
+      if (ulServiceId === serviceId) metricNames.add(metric)
     }
   }
 
-  // Build per-tier values for each metric
   return Array.from(metricNames).map((metric) => {
     const values: Record<string, FeatureValue> = {}
     let isOneTime = false
@@ -244,11 +314,8 @@ export function buildServiceMetrics(
       )
 
       if (limit) {
-        const { unitName } = limit
         values[tierName] = formatUsageLimit(limit)
-        if (unitName === 'setup') {
-          isOneTime = true
-        }
+        if (limit.unitName === 'setup') isOneTime = true
       } else {
         values[tierName] = false
       }
@@ -256,6 +323,72 @@ export function buildServiceMetrics(
 
     return { metric, values, isOneTime }
   })
+}
+
+export function resolveAddOnDisplayPrice(
+  group: RsOfferingOptionGroup,
+  selectedTierId: string,
+  selectedBillingCycle: RsBillingCycle,
+  tierBillingCycleDiscounts: RsServiceSubscriptionTier['billingCycleDiscounts'],
+): { basePrice: number | null; discountedPrice: number | null } {
+  let basePrice: number | null = null
+  let inlineDiscount: { discountType: RsDiscountType; discountValue: number } | null = null
+
+  const spEntries = group.standalonePricing?.recurringPricing
+  if (spEntries?.length) {
+    const exactEntry = spEntries.find((rp) => rp.billingCycle === selectedBillingCycle)
+    if (exactEntry) {
+      basePrice = exactEntry.amount == null ? null : Number(exactEntry.amount)
+      inlineDiscount = exactEntry.discount ?? null
+    } else {
+      const monthlyEntry = spEntries.find((rp) => rp.billingCycle === RsBillingCycle.Monthly)
+      if (monthlyEntry) basePrice = monthlyEntry.amount == null ? null : Number(monthlyEntry.amount)
+    }
+  } else if (group.price !== null && group.price !== undefined) {
+    basePrice = Number(group.price)
+  } else {
+    const tierEntry = (group.tierDependentPricing ?? []).find((tp) => tp.tierId === selectedTierId)
+    if (tierEntry) {
+      const exactCycle = tierEntry.recurringPricing.find(
+        (rp) => rp.billingCycle === selectedBillingCycle,
+      )
+      if (exactCycle) {
+        basePrice = exactCycle.amount == null ? null : Number(exactCycle.amount)
+        inlineDiscount = exactCycle.discount ?? null
+      } else {
+        const monthly = tierEntry.recurringPricing.find(
+          (rp) => rp.billingCycle === RsBillingCycle.Monthly,
+        )
+        if (monthly) basePrice = monthly.amount == null ? null : Number(monthly.amount)
+      }
+    }
+  }
+
+  if (basePrice === null) return { basePrice: null, discountedPrice: null }
+
+  let discountedPrice: number | null = null
+
+  if (group.discountMode === RsDiscountMode.Independent) {
+    const rule =
+      inlineDiscount ??
+      group.billingCycleDiscounts.find((d) => d.billingCycle === selectedBillingCycle)
+        ?.discountRule ??
+      null
+    if (rule) {
+      const result = applyDiscountRule(basePrice, rule)
+      if (result < basePrice) discountedPrice = result
+    }
+  } else if (group.discountMode === RsDiscountMode.InheritTier) {
+    const tierDiscount = tierBillingCycleDiscounts.find(
+      (d) => d.billingCycle === selectedBillingCycle,
+    )
+    if (tierDiscount) {
+      const result = applyDiscountRule(basePrice, tierDiscount.discountRule)
+      if (result < basePrice) discountedPrice = result
+    }
+  }
+
+  return { basePrice, discountedPrice }
 }
 
 export const getBillingCycleValue = (section: RsOfferingOptionGroup) => {
@@ -267,8 +400,27 @@ export const getCurrency = (section: RsOfferingOptionGroup) => {
     ? section.currency
     : undefined
 }
+
 export const getConstTpe = (section: RsOfferingOptionGroup) => {
   return section.isAddOn || section.costType === RsGroupCostType.Setup
     ? section.costType
     : undefined
+}
+
+export function isServiceVisibleForFacets(
+  service: RsOfferingService,
+  facetSelections: Record<string, string>,
+  facetTargets: RsOfferingFacetTarget[],
+): boolean {
+  if (service.facetBindings.length === 0) return true
+
+  return service.facetBindings.every((binding) => {
+    const target = facetTargets.find((ft) => ft.id === binding.facetType)
+    if (!target) return true
+
+    const userSelection = facetSelections[target.categoryKey]
+    if (!userSelection) return true
+
+    return binding.supportedOptions.includes(userSelection)
+  })
 }

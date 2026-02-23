@@ -14,6 +14,7 @@ export interface ServiceCatalogHeaderProps {
   toggleEnabled?: boolean
   onToggleChange?: (enabled: boolean) => void
   groupPrice?: number | null
+  groupDiscountedPrice?: number | null
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
 }
@@ -26,6 +27,7 @@ export function ServiceCatalogHeader({
   toggleEnabled = false,
   onToggleChange,
   groupPrice,
+  groupDiscountedPrice,
   groupCurrency,
   groupCostType,
 }: Readonly<ServiceCatalogHeaderProps>) {
@@ -41,6 +43,7 @@ export function ServiceCatalogHeader({
       onToggleChange={onToggleChange}
       activePlan={activePlan}
       groupPrice={groupPrice}
+      groupDiscountedPrice={groupDiscountedPrice}
       groupCurrency={groupCurrency}
       groupCostType={groupCostType}
     />

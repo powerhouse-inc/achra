@@ -1,7 +1,7 @@
 'use client'
 
 import { Lock } from 'lucide-react'
-import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
@@ -18,6 +18,7 @@ interface SectionHeaderProps {
   onToggleChange?: (enabled: boolean) => void
   activePlan?: string
   groupPrice?: number | null
+  groupDiscountedPrice?: number | null
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
 }
@@ -31,6 +32,7 @@ export function SectionHeader({
   onToggleChange,
   activePlan,
   groupPrice,
+  groupDiscountedPrice,
   groupCurrency,
   groupCostType,
 }: Readonly<SectionHeaderProps>) {
@@ -38,8 +40,7 @@ export function SectionHeader({
   const lastTierName = tierNames[tierNames.length - 1]
 
   const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
-
-  const isSetup = groupCostType === RsGroupCostType.Setup
+  const discountedPriceLabel = getPriceLabel(groupCostType, groupDiscountedPrice, groupCurrency)
 
   return (
     <div
@@ -106,9 +107,19 @@ export function SectionHeader({
           activePlan ? 'bg-primary/30' : 'bg-accent',
         )}
       >
-        {priceLabel && (
+        {priceLabel && !discountedPriceLabel && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
+          </span>
+        )}
+        {priceLabel && discountedPriceLabel && (
+          <span className="flex min-w-0 flex-col items-center gap-0.5">
+            <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+              {priceLabel}
+            </span>
+            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+              {discountedPriceLabel}
+            </span>
           </span>
         )}
       </div>
@@ -122,9 +133,19 @@ export function SectionHeader({
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
-          {plan === lastTierName && priceLabel && (isSetup || hasToggle) && (
+          {plan === lastTierName && priceLabel && !discountedPriceLabel && (
             <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
               {priceLabel}
+            </span>
+          )}
+          {plan === lastTierName && priceLabel && discountedPriceLabel && (
+            <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
+              <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+                {priceLabel}
+              </span>
+              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+                {discountedPriceLabel}
+              </span>
             </span>
           )}
         </div>
