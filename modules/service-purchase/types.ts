@@ -32,13 +32,22 @@ export interface ServiceRequestEntityData {
   driveUrl: string | null
 }
 
-export interface ServicePurchaseState {
+// submit-request slice
+export interface SubmitRequestSliceState {
   requestEntityData: ServiceRequestEntityData | null
 }
 
-export interface ServicePurchaseActions {
+export interface SubmitRequestSliceActions {
   setRequestEntityData: (requestEntityData: ServiceRequestEntityData) => void
 }
+
+export interface SubmitRequestSlice extends SubmitRequestSliceState {
+  actions: SubmitRequestSliceActions
+}
+
+// store (composed from slices)
+export type ServicePurchaseState = SubmitRequestSliceState // & otherSliceLater
+export type ServicePurchaseActions = SubmitRequestSliceActions // & otherActionsSliceLater
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
   actions: ServicePurchaseActions
