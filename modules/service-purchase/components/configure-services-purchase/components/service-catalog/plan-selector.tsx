@@ -25,7 +25,7 @@ export function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   const { selectedBillingCycle } = usePricingCalculatorContext()
 
   const baseAmount = tier.pricing.amount ?? 0
-  const cycleDiscount = (tier.billingCycleDiscounts ?? []).find(
+  const cycleDiscount = tier.billingCycleDiscounts.find(
     (d) => d.billingCycle === selectedBillingCycle,
   )
 
@@ -34,12 +34,12 @@ export function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
     const { discountType, discountValue } = cycleDiscount.discountRule
     if (discountType === RsDiscountType.Percentage) {
       displayPrice = baseAmount * (1 - discountValue / 100)
-    } else if (discountType === RsDiscountType.FlatAmount) {
+    } else {
       displayPrice = Math.max(0, baseAmount - discountValue)
     }
   }
 
-  const suffix = CYCLE_SUFFIX[selectedBillingCycle] ?? '/mo'
+  const suffix = CYCLE_SUFFIX[selectedBillingCycle]
   const hasDiscount = cycleDiscount && displayPrice < baseAmount
 
   return (

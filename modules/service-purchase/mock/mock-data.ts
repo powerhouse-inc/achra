@@ -1,9 +1,7 @@
 import {
   RsBillingCycle,
-  RsDiscountMode,
   RsDiscountType,
   RsGroupCostType,
-  RsServiceLevel,
   type RsServiceOffering,
   RsServiceStatus,
   RsTierPricingMode,
@@ -85,7 +83,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
             unitName: 'Registered Zug Address',
             freeLimit: 1,
             paidLimit: 2,
-            resetCycle: 'NONE',
+            resetCycle: null,
             unitPrice: 500,
             unitPriceCurrency: 'USD',
             notes: null,
