@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
 import { submitRequestSchema } from '@/modules/service-purchase/lib/submit-request-schema'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { useServicePurchaseActions } from '@/modules/service-purchase/stores/service-purchase-store'
 import {
   ServicePurchaseStep,
   type SubmitRequestFormState,
@@ -39,6 +40,8 @@ const formDefaultValues: SubmitRequestFormValues = {
 function SubmitRequestForm() {
   const { serviceSlug = '' } = useParams<{ serviceSlug?: string }>()
   const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
+  const { setRequestEntityData } = useServicePurchaseActions()
+
   const { goToStep } = useServicePurchaseStep()
 
   const form = useForm<SubmitRequestFormValues>({
@@ -49,10 +52,17 @@ function SubmitRequestForm() {
 
   useEffect(() => {
     if (state.success) {
+      setRequestEntityData({
+        name: state.data?.name ?? '',
+        teamName: state.data?.teamName ?? '',
+        email: state.data?.email ?? '',
+        driveUrl: state.data?.driveUrl ?? null,
+      })
+
       // TODO: add the driver link so we can use it in the confirmation step
       goToStep(ServicePurchaseStep.Confirmation)
     }
-  }, [state.success, goToStep])
+  }, [state, goToStep, setRequestEntityData])
 
   function onSubmit(data: SubmitRequestFormValues) {
     const formData = new FormData()
