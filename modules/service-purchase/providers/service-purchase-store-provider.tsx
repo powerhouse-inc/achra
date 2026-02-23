@@ -21,6 +21,7 @@ export function ServicePurchaseStoreProvider({
   facets,
 }: Readonly<ServicePurchaseStoreProviderProps>) {
   const [store] = useState(() => createServicePurchaseStore({ facets }))
+
   return (
     <ServicePurchaseStoreContext.Provider value={store}>
       {children}
