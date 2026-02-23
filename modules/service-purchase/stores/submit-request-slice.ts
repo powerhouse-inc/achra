@@ -1,8 +1,6 @@
-import type { SubmitRequestSlice } from '../types'
+import type { ServicePurchaseStoreSet, SubmitRequestSlice } from '../types'
 
-export function createSubmitRequestSlice(
-  set: (partial: Partial<SubmitRequestSlice>) => void,
-): SubmitRequestSlice {
+function createSubmitRequestSlice(set: ServicePurchaseStoreSet): SubmitRequestSlice {
   return {
     requestEntityData: null,
     actions: {
@@ -12,3 +10,5 @@ export function createSubmitRequestSlice(
     },
   }
 }
+
+export { createSubmitRequestSlice }

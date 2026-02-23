@@ -10,7 +10,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { OPERATIONAL_HUB_URL } from '../../config/constants'
-import { useServicePurchaseState } from '../../stores/service-purchase-store'
+import { useServicePurchaseState } from '../../providers/service-purchase-store-provider'
 import { ActionCard } from './action-card'
 import type { Route } from 'next'
 

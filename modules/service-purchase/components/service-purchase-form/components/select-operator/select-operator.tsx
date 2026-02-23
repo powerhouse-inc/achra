@@ -2,12 +2,12 @@ import type { BuilderProfileState } from '@/modules/__generated__/graphql/switch
 import { OperatorCard } from '@/modules/shared/components/operator-card'
 
 interface SelectOperatorProps {
-  onConfigureServices: (operatorId: string) => void
+  onSelectOperator: (operatorId: string) => void
   operator: BuilderProfileState
 }
 
 export default function SelectOperator({
-  onConfigureServices,
+  onSelectOperator,
   operator,
 }: Readonly<SelectOperatorProps>) {
   return (
@@ -23,7 +23,7 @@ export default function SelectOperator({
         </span>
       </div>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-        <OperatorCard operator={operator} onConfigureServices={onConfigureServices} />
+        <OperatorCard operator={operator} onSelectOperator={onSelectOperator} />
       </div>
     </div>
   )
