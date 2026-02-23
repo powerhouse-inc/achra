@@ -53,7 +53,7 @@ export function BillingPeriodSelector({
   if (availableCycles.length === 0) return null
 
   return (
-    <div className="mb-6">
+    <div className="mb-2">
       <p className="text-muted-foreground mb-3 text-sm font-medium">Billing Period</p>
       <div
         className="flex flex-wrap items-center gap-2"

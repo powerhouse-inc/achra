@@ -17,7 +17,9 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
 
   const [operator, services] = await Promise.all([
     getResourceOperator({ id: resourceTemplate?.operatorId }),
-    getServiceOfferings(),
+    getServiceOfferings({
+      operatorId: resourceTemplate?.operatorId,
+    }),
   ])
 
   if (!resourceTemplate || !operator) {
