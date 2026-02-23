@@ -26,7 +26,9 @@ export const STEPS: ReadonlyArray<{ value: StepValue; label: string }> = [
 interface ServicePurchaseStepContextValues {
   activeStep: StepValue
   visitedSteps: StepValue[]
+  disabledSteps: StepValue[]
   goToStep: (step: StepValue) => void
+  resetPostConfigureSteps: () => void
   goBack: () => void
   goNext: () => void
 }
@@ -48,19 +50,28 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
     parseAsStringLiteral(STEP_VALUES).withDefault(DEFAULT_STEP),
   )
   const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => getStepsUpTo(activeStep))
+  const [disabledSteps, setDisabledSteps] = useState<StepValue[]>(['summary', 'confirmation'])
 
   const goToStep = useCallback(
     (step: StepValue) => {
       if (step !== activeStep) {
         void setActiveStep(step)
       }
+
       setVisitedSteps((prev) => {
         const stepsUpTo = getStepsUpTo(step)
         return Array.from(new Set([...prev, ...stepsUpTo]))
       })
+
+      setDisabledSteps((prev) => prev.filter((disabledStep) => disabledStep !== step))
     },
-    [activeStep, setActiveStep, setVisitedSteps],
+    [activeStep, setActiveStep, setDisabledSteps, setVisitedSteps],
   )
+
+  const resetPostConfigureSteps = useCallback(() => {
+    setDisabledSteps(['summary', 'confirmation'])
+    setVisitedSteps((prev) => prev.filter((step) => step !== 'summary' && step !== 'confirmation'))
+  }, [setDisabledSteps, setVisitedSteps])
 
   const goBack = useCallback(() => {
     void setActiveStep((prev) => {
@@ -86,11 +97,13 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
     () => ({
       activeStep,
       visitedSteps,
+      disabledSteps,
       goToStep,
+      resetPostConfigureSteps,
       goBack,
       goNext,
     }),
-    [activeStep, visitedSteps, goBack, goNext, goToStep],
+    [activeStep, visitedSteps, disabledSteps, goBack, goNext, goToStep, resetPostConfigureSteps],
   )
 
   return (

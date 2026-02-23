@@ -49,7 +49,8 @@ export default function ServicePurchaseForm({
   services,
 }: Readonly<ServicePurchaseFormProps>) {
   const defaultActivePlan = services[0].tiers[1].name
-  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
+  const { activeStep, visitedSteps, goToStep, resetPostConfigureSteps, goBack } =
+    useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
@@ -84,6 +85,7 @@ export default function ServicePurchaseForm({
   const email = useWatch({ control, name: 'email' })
   const selectedPlan = useWatch({ control, name: 'selectedPlan' })
   const enabledSections = useWatch({ control, name: 'enabledSections' })
+  const selectedOperatorId = useWatch({ control, name: 'operatorId' })
 
   const handlePlanChange = useCallback(
     (plan: string) => {
@@ -102,23 +104,43 @@ export default function ServicePurchaseForm({
     [enabledSections, setValue],
   )
 
-  // Navigation handlers
-  const navigateToStep = (stepValue: StepValue) => {
-    goToStep(stepValue)
-  }
-
   const handleSelectAnOperator = () => {
-    navigateToStep('select-operator')
+    goToStep('select-operator')
   }
 
   const handleConfigureServices = (operatorId: string) => {
+    const hasPreviousOperator = selectedOperatorId !== undefined
+    const isDifferentOperator = selectedOperatorId !== operatorId
+
+    const hasVisitedSummaryOrConfirmation =
+      visitedSteps.includes('summary') || visitedSteps.includes('confirmation')
+
+    if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
+      resetPostConfigureSteps()
+    }
+
     setValue('operatorId', operatorId)
-    navigateToStep('configure-services')
+    goToStep('configure-services')
+  }
+
+  const handleGoToSummary = () => {
+    goToStep('summary')
   }
 
   const handleGoBack = () => {
     goBack()
   }
+
+  // Note: In the near future there will be more than one operator, by then we will need to modify this function accordingly, selecting the operator by default if none is selected.
+  const handleTabsNavigation = useCallback(
+    (value: string) => {
+      if (!selectedOperatorId) {
+        setValue('operatorId', operator.id)
+      }
+      goToStep(value as StepValue)
+    },
+    [selectedOperatorId, setValue, goToStep, operator.id],
+  )
 
   return (
     <div className="flex flex-col gap-6 lg:gap-8">
@@ -143,12 +165,7 @@ export default function ServicePurchaseForm({
               activeStep !== 'configure-services' && 'hidden',
             )}
           >
-            <Button
-              variant="default"
-              onClick={() => {
-                navigateToStep('summary')
-              }}
-            >
+            <Button variant="default" onClick={handleGoToSummary}>
               Continue
             </Button>
           </div>
@@ -162,13 +179,7 @@ export default function ServicePurchaseForm({
           status={resourceTemplate.status}
         />
       </div>
-      <Tabs
-        value={activeStep}
-        onValueChange={(value) => {
-          goToStep(value as StepValue)
-        }}
-        className="w-full gap-8"
-      >
+      <Tabs value={activeStep} onValueChange={handleTabsNavigation} className="w-full gap-8">
         <StepsTriggersList />
         {STEPS.map((step) => (
           <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
