@@ -22,6 +22,10 @@ export async function submitResourceRequest(
   }
 
   return {
-    data: output.data ?? null,
+    name: input.name,
+    teamName: input.teamName,
+    // TODO: add email to the input once we have it in the API input
+    email: 'example@example.com',
+    driveUrl: output.data?.linkToDrive ?? null,
   }
 }
