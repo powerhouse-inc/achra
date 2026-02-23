@@ -18,6 +18,7 @@ interface ServiceInfoProps {
   thumbnailUrl?: string
   status?: RsTemplateStatus
   id: string
+  infoLink?: string
 }
 
 // Default cover image when thumbnailUrl is not available
@@ -32,10 +33,12 @@ export default function ServiceInfo({
   thumbnailUrl,
   status,
   id,
+  infoLink,
 }: Readonly<ServiceInfoProps>) {
   // TODO: Remove this mock once the service info is populated
   const isUnavailable = status === RsTemplateStatus.ComingSoon
   const coverImage = thumbnailUrl ?? DEFAULT_COVER
+  const hasInfoLink = Boolean(infoLink)
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">
       <CardContent
@@ -97,13 +100,20 @@ export default function ServiceInfo({
           </div>
         </div>
         {showActionButtons && (
-          <div className="flex flex-1 items-end justify-end gap-6 sm:hidden lg:flex">
-            <Button variant="outline" asChild>
-              <Link href="#">
+          <div className="flex items-end justify-end gap-6 sm:hidden lg:flex">
+            {hasInfoLink ? (
+              <Button variant="outline" asChild>
+                <Link href={infoLink as Route} download target="_blank" rel="noreferrer">
+                  Self Assessment Checklist
+                  <Download className="size-4" />
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="outline" disabled>
                 Self Assessment Checklist
                 <Download className="size-4" />
-              </Link>
-            </Button>
+              </Button>
+            )}
             <ScrollToSectionButton variant="outline" sectionId="faq">
               FAQ
             </ScrollToSectionButton>
@@ -112,12 +122,19 @@ export default function ServiceInfo({
       </CardContent>
       {showActionButtons && (
         <div className="hidden items-end justify-end gap-6 sm:flex lg:hidden">
-          <Button variant="outline" asChild>
-            <Link href="#">
+          {hasInfoLink ? (
+            <Button variant="outline" asChild>
+              <Link href={infoLink as Route} download target="_blank" rel="noreferrer">
+                Self Assessment Checklist
+                <Download className="size-4" />
+              </Link>
+            </Button>
+          ) : (
+            <Button variant="outline" disabled>
               Self Assessment Checklist
               <Download className="size-4" />
-            </Link>
-          </Button>
+            </Button>
+          )}
           <ScrollToSectionButton variant="outline" sectionId="faq">
             FAQ
           </ScrollToSectionButton>

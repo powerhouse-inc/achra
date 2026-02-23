@@ -1,6 +1,6 @@
 import { ServiceInfoSkeleton } from '@/modules/shared/components/service-info'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { ProductInfoSkeleton } from '../product-info/components/product-info-skeleton'
+import { ProductInfoSkeleton } from '../product-info/product-info-skeleton'
 import { StepsTriggerListSkeleton } from '../steps-trigger/steps-trigger-list-skeleton'
 
 export function StepOneSkeleton() {

@@ -1,6 +1,9 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  BuilderProfileState,
+  RsServiceOffering,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
 import { PricingCalculator } from '../service-catalog'
 import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator/pricing-calculator-skeleton'
@@ -13,6 +16,7 @@ export interface ConfigureServicesProps {
   onSectionToggle?: (sectionId: string, enabled: boolean) => void
   servicesData?: RsServiceOffering
   isLoading?: boolean
+  operator: BuilderProfileState
 }
 
 export default function ConfigureServices({
@@ -22,6 +26,7 @@ export default function ConfigureServices({
   onSectionToggle,
   isLoading,
   servicesData,
+  operator,
 }: Readonly<ConfigureServicesProps>) {
   const searchParams = useSearchParams()
 
@@ -41,7 +46,7 @@ export default function ConfigureServices({
 
   return (
     <div className="mt-6 flex flex-col gap-6">
-      <MarketplaceHeader />
+      <MarketplaceHeader operator={operator} />
       <ServicePurchaseSelects facetTargets={facetTargets} />
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <PricingCalculator

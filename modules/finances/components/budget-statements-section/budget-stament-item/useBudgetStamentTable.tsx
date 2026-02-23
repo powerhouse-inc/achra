@@ -34,7 +34,7 @@ export function useBudgetStamentTable({
     return [
       {
         header: 'Contributors',
-        accessorKey: 'name',
+        accessorKey: 'owner.name',
         hasSort: true,
         sortReverse: false,
         isNumeric: false,

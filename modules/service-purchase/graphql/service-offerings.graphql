@@ -1,29 +1,216 @@
-query ServiceOfferings {
-  serviceOfferings {
+query ServiceOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
     id
-    operatorId
-    resourceTemplateId
-    title
-    summary
     description
-    thumbnailUrl
     infoLink
-    status
     lastModified
+    operatorId
+    facetTargets {
+      id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    finalConfiguration {
+      selectedTierId
+      selectedBillingCycle
+      tierBasePrice
+      tierCurrency
+      tierDiscount {
+        discountType
+        discountValue
+        originalAmount
+        discountedAmount
+      }
+      optionGroupConfigs {
+        id
+        optionGroupId
+        effectiveBillingCycle
+        billingCycleOverridden
+        discountStripped
+        recurringAmount
+        currency
+        discount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+        setupCost
+        setupCostCurrency
+        setupCostDiscount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+      }
+      lastModified
+      addOnConfigs {
+        id
+        optionGroupId
+        selectedBillingCycle
+        recurringAmount
+        currency
+        discount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+        setupCost
+        setupCostCurrency
+        setupCostDiscount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+      }
+    }
+
+    optionGroups {
+      id
+      name
+      description
+      isAddOn
+      defaultSelected
+      pricingMode
+      standalonePricing {
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      tierDependentPricing {
+        id
+        tierId
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        setupCostDiscounts {
+          billingCycle
+          discountRule {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      costType
+      availableBillingCycles
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
+      discountMode
+      price
+      currency
+    }
+    serviceGroups {
+      id
+      name
+      description
+      billingCycle
+      displayOrder
+      discountMode
+      tierPricing {
+        id
+        tierId
+        setupCostsPerCycle {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+    }
+    resourceTemplateId
+    services {
+      id
+      title
+      description
+      displayOrder
+      serviceGroupId
+      isSetupFormation
+      optionGroupId
+      facetBindings {
+        id
+        facetName
+        facetType
+        supportedOptions
+      }
+    }
+    status
+    summary
+    targetAudiences {
+      id
+      label
+      color
+    }
+    title
     tiers {
       id
       name
       description
       isCustomPricing
+      pricingMode
       pricing {
         amount
         currency
       }
-      pricingOptions {
-        id
-        amount
-        currency
-        isDefault
+      defaultBillingCycle
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
       }
       serviceLevels {
         id
@@ -37,55 +224,14 @@ query ServiceOfferings {
         serviceId
         metric
         unitName
-
+        freeLimit
+        paidLimit
+        resetCycle
         notes
         unitPrice
         unitPriceCurrency
       }
     }
-    targetAudiences {
-      id
-      label
-      color
-    }
-
-    facetTargets {
-      id
-      categoryKey
-      categoryLabel
-      selectedOptions
-    }
-    services {
-      id
-      title
-      description
-      displayOrder
-      isSetupFormation
-      optionGroupId
-      facetBindings {
-        id
-        facetName
-        facetType
-        supportedOptions
-      }
-    }
-    optionGroups {
-      id
-      name
-      description
-      costType
-      isAddOn
-      defaultSelected
-      price
-      currency
-      billingCycle
-    }
-    serviceGroups {
-      id
-      name
-      description
-      billingCycle
-      displayOrder
-    }
+    thumbnailUrl
   }
 }

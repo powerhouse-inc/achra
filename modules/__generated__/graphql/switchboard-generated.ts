@@ -2505,14 +2505,17 @@ export type Mutation = {
   ServiceOffering_addFacetBinding?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addFacetOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addOptionGroup?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_addOptionGroupTierPricing?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_addRecurringPriceOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addService?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addServiceGroup?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_addServiceGroupTierPricing?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addServiceLevel?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addTargetAudience?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addTier?: Maybe<Scalars['Int']['output']>;
-  ServiceOffering_addTierPricingOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addUsageLimit?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_changeResourceTemplate?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_clearFinalConfiguration?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_createDocument?: Maybe<Scalars['String']['output']>;
   ServiceOffering_deleteOptionGroup?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_deleteService?: Maybe<Scalars['Int']['output']>;
@@ -2521,24 +2524,35 @@ export type Mutation = {
   ServiceOffering_removeFacetBinding?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_removeFacetOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_removeFacetTarget?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_removeOptionGroupTierPricing?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_removeRecurringPriceOption?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_removeServiceGroupSetupCost?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_removeServiceGroupTierPricing?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_removeServiceLevel?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_removeTargetAudience?: Maybe<Scalars['Int']['output']>;
-  ServiceOffering_removeTierPricingOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_removeUsageLimit?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_reorderServiceGroups?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_selectResourceTemplate?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setFacetTarget?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setFinalConfiguration?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setOfferingId?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setOperator?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setOptionGroupDiscountMode?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setOptionGroupStandalonePricing?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setServiceGroupSetupCost?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setTierBillingCycleDiscounts?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setTierDefaultBillingCycle?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_setTierPricingMode?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateOfferingInfo?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateOfferingStatus?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateOptionGroup?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_updateOptionGroupTierPricing?: Maybe<Scalars['Int']['output']>;
+  ServiceOffering_updateRecurringPriceOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateService?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateServiceGroup?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateServiceLevel?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateTier?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateTierPricing?: Maybe<Scalars['Int']['output']>;
-  ServiceOffering_updateTierPricingOption?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_updateUsageLimit?: Maybe<Scalars['Int']['output']>;
   ServiceSubscription_activateSubscription?: Maybe<Scalars['Int']['output']>;
   ServiceSubscription_addAddon?: Maybe<Scalars['Int']['output']>;
@@ -2574,6 +2588,7 @@ export type Mutation = {
   SnapshotReport_updateTransactionFlowType?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_activateSubscription?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_addService?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_addServiceFacetSelection?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_addServiceGroup?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_addServiceMetric?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_addServiceToGroup?: Maybe<Scalars['Int']['output']>;
@@ -2585,6 +2600,7 @@ export type Mutation = {
   SubscriptionInstance_pauseSubscription?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_removeBudgetCategory?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_removeService?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_removeServiceFacetSelection?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_removeServiceFromGroup?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_removeServiceGroup?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_removeServiceMetric?: Maybe<Scalars['Int']['output']>;
@@ -2603,6 +2619,7 @@ export type Mutation = {
   SubscriptionInstance_updateCustomerInfo?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_updateMetric?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_updateMetricUsage?: Maybe<Scalars['Int']['output']>;
+  SubscriptionInstance_updateServiceGroupCost?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_updateServiceInfo?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_updateServiceRecurringCost?: Maybe<Scalars['Int']['output']>;
   SubscriptionInstance_updateServiceSetupCost?: Maybe<Scalars['Int']['output']>;
@@ -4413,6 +4430,22 @@ export type MutationServiceOffering_AddOptionGroupArgs = {
 
 
 /** Subgraph definition */
+export type MutationServiceOffering_AddOptionGroupTierPricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_AddOptionGroupTierPricingInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_AddRecurringPriceOptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_AddRecurringPriceOptionInput>;
+};
+
+
+/** Subgraph definition */
 export type MutationServiceOffering_AddServiceArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -4425,6 +4458,14 @@ export type MutationServiceOffering_AddServiceGroupArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_AddServiceGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_AddServiceGroupTierPricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_AddServiceGroupTierPricingInput>;
 };
 
 
@@ -4453,14 +4494,6 @@ export type MutationServiceOffering_AddTierArgs = {
 
 
 /** Subgraph definition */
-export type MutationServiceOffering_AddTierPricingOptionArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ServiceOffering_AddTierPricingOptionInput>;
-};
-
-
-/** Subgraph definition */
 export type MutationServiceOffering_AddUsageLimitArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -4473,6 +4506,14 @@ export type MutationServiceOffering_ChangeResourceTemplateArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_ChangeResourceTemplateInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_ClearFinalConfigurationArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_ClearFinalConfigurationInput>;
 };
 
 
@@ -4540,6 +4581,38 @@ export type MutationServiceOffering_RemoveFacetTargetArgs = {
 
 
 /** Subgraph definition */
+export type MutationServiceOffering_RemoveOptionGroupTierPricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_RemoveOptionGroupTierPricingInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_RemoveRecurringPriceOptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_RemoveRecurringPriceOptionInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_RemoveServiceGroupSetupCostArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_RemoveServiceGroupSetupCostInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_RemoveServiceGroupTierPricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_RemoveServiceGroupTierPricingInput>;
+};
+
+
+/** Subgraph definition */
 export type MutationServiceOffering_RemoveServiceLevelArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -4552,14 +4625,6 @@ export type MutationServiceOffering_RemoveTargetAudienceArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_RemoveTargetAudienceInput>;
-};
-
-
-/** Subgraph definition */
-export type MutationServiceOffering_RemoveTierPricingOptionArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ServiceOffering_RemoveTierPricingOptionInput>;
 };
 
 
@@ -4596,6 +4661,14 @@ export type MutationServiceOffering_SetFacetTargetArgs = {
 
 
 /** Subgraph definition */
+export type MutationServiceOffering_SetFinalConfigurationArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetFinalConfigurationInput>;
+};
+
+
+/** Subgraph definition */
 export type MutationServiceOffering_SetOfferingIdArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -4608,6 +4681,54 @@ export type MutationServiceOffering_SetOperatorArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_SetOperatorInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetOptionGroupDiscountModeArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetOptionGroupDiscountModeInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetOptionGroupStandalonePricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetOptionGroupStandalonePricingInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetServiceGroupSetupCostArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetServiceGroupSetupCostInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetTierBillingCycleDiscountsArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetTierBillingCycleDiscountsInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetTierDefaultBillingCycleArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetTierDefaultBillingCycleInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_SetTierPricingModeArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_SetTierPricingModeInput>;
 };
 
 
@@ -4632,6 +4753,22 @@ export type MutationServiceOffering_UpdateOptionGroupArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_UpdateOptionGroupInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_UpdateOptionGroupTierPricingArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_UpdateOptionGroupTierPricingInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationServiceOffering_UpdateRecurringPriceOptionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<ServiceOffering_UpdateRecurringPriceOptionInput>;
 };
 
 
@@ -4672,14 +4809,6 @@ export type MutationServiceOffering_UpdateTierPricingArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_UpdateTierPricingInput>;
-};
-
-
-/** Subgraph definition */
-export type MutationServiceOffering_UpdateTierPricingOptionArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ServiceOffering_UpdateTierPricingOptionInput>;
 };
 
 
@@ -4962,6 +5091,14 @@ export type MutationSubscriptionInstance_AddServiceArgs = {
 
 
 /** Subgraph definition */
+export type MutationSubscriptionInstance_AddServiceFacetSelectionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_AddServiceFacetSelectionInput>;
+};
+
+
+/** Subgraph definition */
 export type MutationSubscriptionInstance_AddServiceGroupArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
@@ -5045,6 +5182,14 @@ export type MutationSubscriptionInstance_RemoveServiceArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<SubscriptionInstance_RemoveServiceInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_RemoveServiceFacetSelectionArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_RemoveServiceFacetSelectionInput>;
 };
 
 
@@ -5189,6 +5334,14 @@ export type MutationSubscriptionInstance_UpdateMetricUsageArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<SubscriptionInstance_UpdateMetricUsageInput>;
+};
+
+
+/** Subgraph definition */
+export type MutationSubscriptionInstance_UpdateServiceGroupCostArgs = {
+  docId?: InputMaybe<Scalars['PHID']['input']>;
+  driveId?: InputMaybe<Scalars['String']['input']>;
+  input?: InputMaybe<SubscriptionInstance_UpdateServiceGroupCostInput>;
 };
 
 
@@ -6144,6 +6297,11 @@ export enum RfpStatus {
   RequestForCommments = 'REQUEST_FOR_COMMMENTS'
 }
 
+export enum RsAddOnPricingMode {
+  Standalone = 'STANDALONE',
+  TierDependent = 'TIER_DEPENDENT'
+}
+
 export enum RsBillingCycle {
   Annual = 'ANNUAL',
   Monthly = 'MONTHLY',
@@ -6152,6 +6310,12 @@ export enum RsBillingCycle {
   SemiAnnual = 'SEMI_ANNUAL'
 }
 
+export type RsBillingCycleDiscount = {
+  __typename?: 'RSBillingCycleDiscount';
+  billingCycle: RsBillingCycle;
+  discountRule: RsDiscountRule;
+};
+
 export type RsContentSection = {
   __typename?: 'RSContentSection';
   content: Scalars['String']['output'];
@@ -6159,6 +6323,22 @@ export type RsContentSection = {
   id: Scalars['OID']['output'];
   title: Scalars['String']['output'];
 };
+
+export enum RsDiscountMode {
+  Independent = 'INDEPENDENT',
+  InheritTier = 'INHERIT_TIER'
+}
+
+export type RsDiscountRule = {
+  __typename?: 'RSDiscountRule';
+  discountType: RsDiscountType;
+  discountValue: Scalars['Float']['output'];
+};
+
+export enum RsDiscountType {
+  FlatAmount = 'FLAT_AMOUNT',
+  Percentage = 'PERCENTAGE'
+}
 
 export type RsFacetTarget = {
   __typename?: 'RSFacetTarget';
@@ -6176,6 +6356,46 @@ export type RsFaqField = {
   question?: Maybe<Scalars['String']['output']>;
 };
 
+export type RsFinalAddOnConfig = {
+  __typename?: 'RSFinalAddOnConfig';
+  currency?: Maybe<Scalars['Currency']['output']>;
+  discount?: Maybe<RsResolvedDiscount>;
+  id: Scalars['OID']['output'];
+  optionGroupId: Scalars['OID']['output'];
+  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  selectedBillingCycle: RsBillingCycle;
+  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
+  setupCostDiscount?: Maybe<RsResolvedDiscount>;
+};
+
+export type RsFinalConfiguration = {
+  __typename?: 'RSFinalConfiguration';
+  addOnConfigs: Array<RsFinalAddOnConfig>;
+  lastModified: Scalars['DateTime']['output'];
+  optionGroupConfigs: Array<RsFinalOptionGroupConfig>;
+  selectedBillingCycle: RsBillingCycle;
+  selectedTierId: Scalars['OID']['output'];
+  tierBasePrice?: Maybe<Scalars['Amount_Money']['output']>;
+  tierCurrency: Scalars['Currency']['output'];
+  tierDiscount?: Maybe<RsResolvedDiscount>;
+};
+
+export type RsFinalOptionGroupConfig = {
+  __typename?: 'RSFinalOptionGroupConfig';
+  billingCycleOverridden: Scalars['Boolean']['output'];
+  currency?: Maybe<Scalars['Currency']['output']>;
+  discount?: Maybe<RsResolvedDiscount>;
+  discountStripped: Scalars['Boolean']['output'];
+  effectiveBillingCycle: RsBillingCycle;
+  id: Scalars['OID']['output'];
+  optionGroupId: Scalars['OID']['output'];
+  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
+  setupCostDiscount?: Maybe<RsResolvedDiscount>;
+};
+
 export enum RsGroupCostType {
   Recurring = 'RECURRING',
   Setup = 'SETUP'
@@ -6191,28 +6411,30 @@ export type RsOfferingFacetTarget = {
 
 export type RsOfferingOptionGroup = {
   __typename?: 'RSOfferingOptionGroup';
-  billingCycle?: Maybe<RsBillingCycle>;
+  availableBillingCycles: Array<RsBillingCycle>;
+  billingCycleDiscounts: Array<RsBillingCycleDiscount>;
   costType?: Maybe<RsGroupCostType>;
   currency?: Maybe<Scalars['Currency']['output']>;
   defaultSelected: Scalars['Boolean']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  discountMode?: Maybe<RsDiscountMode>;
   id: Scalars['OID']['output'];
   isAddOn: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   price?: Maybe<Scalars['Amount_Money']['output']>;
+  pricingMode?: Maybe<RsAddOnPricingMode>;
+  standalonePricing?: Maybe<RsStandalonePricing>;
+  tierDependentPricing?: Maybe<Array<RsOptionGroupTierPricing>>;
 };
 
 export type RsOfferingService = {
   __typename?: 'RSOfferingService';
-  costType?: Maybe<RsServiceCostType>;
-  currency?: Maybe<Scalars['Currency']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   displayOrder?: Maybe<Scalars['Int']['output']>;
   facetBindings: Array<RsResourceFacetBinding>;
   id: Scalars['OID']['output'];
   isSetupFormation: Scalars['Boolean']['output'];
   optionGroupId?: Maybe<Scalars['OID']['output']>;
-  price?: Maybe<Scalars['Amount_Money']['output']>;
   serviceGroupId?: Maybe<Scalars['OID']['output']>;
   title: Scalars['String']['output'];
 };
@@ -6231,6 +6453,32 @@ export type RsOptionGroup = {
   id: Scalars['OID']['output'];
   isAddOn: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
+};
+
+export type RsOptionGroupTierPricing = {
+  __typename?: 'RSOptionGroupTierPricing';
+  id: Scalars['OID']['output'];
+  recurringPricing: Array<RsRecurringPriceOption>;
+  setupCost?: Maybe<RsSetupCost>;
+  setupCostDiscounts: Array<RsBillingCycleDiscount>;
+  tierId: Scalars['OID']['output'];
+};
+
+export type RsRecurringPriceOption = {
+  __typename?: 'RSRecurringPriceOption';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: RsBillingCycle;
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<RsDiscountRule>;
+  id: Scalars['OID']['output'];
+};
+
+export type RsResolvedDiscount = {
+  __typename?: 'RSResolvedDiscount';
+  discountType: RsDiscountType;
+  discountValue: Scalars['Float']['output'];
+  discountedAmount: Scalars['Amount_Money']['output'];
+  originalAmount: Scalars['Amount_Money']['output'];
 };
 
 export type RsResourceFacetBinding = {
@@ -6280,18 +6528,23 @@ export type RsService = {
   title: Scalars['String']['output'];
 };
 
-export enum RsServiceCostType {
-  Recurring = 'RECURRING',
-  Setup = 'SETUP'
-}
-
 export type RsServiceGroup = {
   __typename?: 'RSServiceGroup';
   billingCycle: RsBillingCycle;
   description?: Maybe<Scalars['String']['output']>;
+  discountMode?: Maybe<RsDiscountMode>;
   displayOrder?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
   name: Scalars['String']['output'];
+  tierPricing: Array<RsServiceGroupTierPricing>;
+};
+
+export type RsServiceGroupTierPricing = {
+  __typename?: 'RSServiceGroupTierPricing';
+  id: Scalars['OID']['output'];
+  recurringPricing: Array<RsRecurringPriceOption>;
+  setupCostsPerCycle: Array<RsSetupCostPerCycle>;
+  tierId: Scalars['OID']['output'];
 };
 
 export enum RsServiceLevel {
@@ -6316,6 +6569,7 @@ export type RsServiceOffering = {
   __typename?: 'RSServiceOffering';
   description?: Maybe<Scalars['String']['output']>;
   facetTargets: Array<RsOfferingFacetTarget>;
+  finalConfiguration?: Maybe<RsFinalConfiguration>;
   id: Scalars['PHID']['output'];
   infoLink?: Maybe<Scalars['URL']['output']>;
   lastModified: Scalars['DateTime']['output'];
@@ -6354,12 +6608,14 @@ export enum RsServiceStatus {
 
 export type RsServiceSubscriptionTier = {
   __typename?: 'RSServiceSubscriptionTier';
+  billingCycleDiscounts: Array<RsBillingCycleDiscount>;
+  defaultBillingCycle?: Maybe<RsBillingCycle>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['OID']['output'];
   isCustomPricing: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   pricing: RsServicePricing;
-  pricingOptions: Array<RsTierPricingOption>;
+  pricingMode?: Maybe<RsTierPricingMode>;
   serviceLevels: Array<RsServiceLevelBinding>;
   usageLimits: Array<RsServiceUsageLimit>;
 };
@@ -6376,6 +6632,28 @@ export type RsServiceUsageLimit = {
   unitName?: Maybe<Scalars['String']['output']>;
   unitPrice?: Maybe<Scalars['Amount_Money']['output']>;
   unitPriceCurrency?: Maybe<Scalars['Currency']['output']>;
+};
+
+export type RsSetupCost = {
+  __typename?: 'RSSetupCost';
+  amount: Scalars['Amount_Money']['output'];
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<RsDiscountRule>;
+};
+
+export type RsSetupCostPerCycle = {
+  __typename?: 'RSSetupCostPerCycle';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: RsBillingCycle;
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<RsDiscountRule>;
+  id: Scalars['OID']['output'];
+};
+
+export type RsStandalonePricing = {
+  __typename?: 'RSStandalonePricing';
+  recurringPricing: Array<RsRecurringPriceOption>;
+  setupCost?: Maybe<RsSetupCost>;
 };
 
 export type RsTargetAudience = {
@@ -6399,17 +6677,19 @@ export enum RsTemplateStatusInput {
   Draft = 'DRAFT'
 }
 
-export type RsTierPricingOption = {
-  __typename?: 'RSTierPricingOption';
-  amount: Scalars['Amount_Money']['output'];
-  currency: Scalars['Currency']['output'];
-  id: Scalars['OID']['output'];
-  isDefault: Scalars['Boolean']['output'];
-};
+export enum RsTierPricingMode {
+  Calculated = 'CALCULATED',
+  ManualOverride = 'MANUAL_OVERRIDE'
+}
 
 export enum RsUsageResetCycle {
+  Annual = 'ANNUAL',
   Daily = 'DAILY',
+  Hourly = 'HOURLY',
   Monthly = 'MONTHLY',
+  None = 'NONE',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
   Weekly = 'WEEKLY'
 }
 
@@ -7868,9 +8148,14 @@ export type ServiceOffering_AddFacetOptionInput = {
   optionId: Scalars['String']['input'];
 };
 
-/** Module: OptionGroupManagement */
+export enum ServiceOffering_AddOnPricingMode {
+  Standalone = 'STANDALONE',
+  TierDependent = 'TIER_DEPENDENT'
+}
+
+/** Module: OptionGroups */
 export type ServiceOffering_AddOptionGroupInput = {
-  billingCycle?: InputMaybe<ServiceOffering_BillingCycle>;
+  availableBillingCycles?: InputMaybe<Array<ServiceOffering_BillingCycle>>;
   costType?: InputMaybe<ServiceOffering_GroupCostType>;
   currency?: InputMaybe<Scalars['Currency']['input']>;
   defaultSelected: Scalars['Boolean']['input'];
@@ -7882,27 +8167,52 @@ export type ServiceOffering_AddOptionGroupInput = {
   price?: InputMaybe<Scalars['Amount_Money']['input']>;
 };
 
-/** Module: ServiceGroupManagement */
+export type ServiceOffering_AddOptionGroupTierPricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  recurringPricing: Array<ServiceOffering_RecurringPriceOptionInput>;
+  setupCost?: InputMaybe<ServiceOffering_SetupCostInput>;
+  setupCostDiscounts?: InputMaybe<Array<ServiceOffering_BillingCycleDiscountInput>>;
+  tierId: Scalars['OID']['input'];
+  tierPricingId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_AddRecurringPriceOptionInput = {
+  amount: Scalars['Amount_Money']['input'];
+  billingCycle: ServiceOffering_BillingCycle;
+  currency: Scalars['Currency']['input'];
+  lastModified: Scalars['DateTime']['input'];
+  priceOptionId: Scalars['OID']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+/** Module: ServiceGroups */
 export type ServiceOffering_AddServiceGroupInput = {
   billingCycle: ServiceOffering_BillingCycle;
   description?: InputMaybe<Scalars['String']['input']>;
+  discountMode?: InputMaybe<ServiceOffering_DiscountMode>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['OID']['input'];
   lastModified: Scalars['DateTime']['input'];
   name: Scalars['String']['input'];
 };
 
-/** Module: ServiceManagement */
+export type ServiceOffering_AddServiceGroupTierPricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+  tierPricingId: Scalars['OID']['input'];
+};
+
+/** Module: Services */
 export type ServiceOffering_AddServiceInput = {
-  costType?: InputMaybe<ServiceOffering_ServiceCostType>;
-  currency?: InputMaybe<Scalars['Currency']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['OID']['input'];
   isSetupFormation?: InputMaybe<Scalars['Boolean']['input']>;
   lastModified: Scalars['DateTime']['input'];
   optionGroupId?: InputMaybe<Scalars['OID']['input']>;
-  price?: InputMaybe<Scalars['Amount_Money']['input']>;
   serviceGroupId?: InputMaybe<Scalars['OID']['input']>;
   title: Scalars['String']['input'];
 };
@@ -7924,7 +8234,7 @@ export type ServiceOffering_AddTargetAudienceInput = {
   lastModified: Scalars['DateTime']['input'];
 };
 
-/** Module: TierManagement */
+/** Module: Tiers */
 export type ServiceOffering_AddTierInput = {
   amount?: InputMaybe<Scalars['Amount_Money']['input']>;
   currency: Scalars['Currency']['input'];
@@ -7933,15 +8243,6 @@ export type ServiceOffering_AddTierInput = {
   isCustomPricing?: InputMaybe<Scalars['Boolean']['input']>;
   lastModified: Scalars['DateTime']['input'];
   name: Scalars['String']['input'];
-};
-
-export type ServiceOffering_AddTierPricingOptionInput = {
-  amount: Scalars['Amount_Money']['input'];
-  currency: Scalars['Currency']['input'];
-  isDefault?: InputMaybe<Scalars['Boolean']['input']>;
-  lastModified: Scalars['DateTime']['input'];
-  pricingOptionId: Scalars['OID']['input'];
-  tierId: Scalars['OID']['input'];
 };
 
 export type ServiceOffering_AddUsageLimitInput = {
@@ -7967,10 +8268,25 @@ export enum ServiceOffering_BillingCycle {
   SemiAnnual = 'SEMI_ANNUAL'
 }
 
+export type ServiceOffering_BillingCycleDiscount = {
+  __typename?: 'ServiceOffering_BillingCycleDiscount';
+  billingCycle: ServiceOffering_BillingCycle;
+  discountRule: ServiceOffering_DiscountRule;
+};
+
+export type ServiceOffering_BillingCycleDiscountInput = {
+  billingCycle: ServiceOffering_BillingCycle;
+  discountRule: ServiceOffering_DiscountRuleInput;
+};
+
 export type ServiceOffering_ChangeResourceTemplateInput = {
   lastModified: Scalars['DateTime']['input'];
   newTemplateId: Scalars['PHID']['input'];
   previousTemplateId: Scalars['PHID']['input'];
+};
+
+export type ServiceOffering_ClearFinalConfigurationInput = {
+  lastModified: Scalars['DateTime']['input'];
 };
 
 export type ServiceOffering_DeleteOptionGroupInput = {
@@ -7993,12 +8309,99 @@ export type ServiceOffering_DeleteTierInput = {
   lastModified: Scalars['DateTime']['input'];
 };
 
+export enum ServiceOffering_DiscountMode {
+  Independent = 'INDEPENDENT',
+  InheritTier = 'INHERIT_TIER'
+}
+
+export type ServiceOffering_DiscountRule = {
+  __typename?: 'ServiceOffering_DiscountRule';
+  discountType: ServiceOffering_DiscountType;
+  discountValue: Scalars['Float']['output'];
+};
+
+export type ServiceOffering_DiscountRuleInput = {
+  discountType: ServiceOffering_DiscountType;
+  discountValue: Scalars['Float']['input'];
+};
+
+export enum ServiceOffering_DiscountType {
+  FlatAmount = 'FLAT_AMOUNT',
+  Percentage = 'PERCENTAGE'
+}
+
 export type ServiceOffering_FacetTarget = {
   __typename?: 'ServiceOffering_FacetTarget';
   categoryKey: Scalars['String']['output'];
   categoryLabel: Scalars['String']['output'];
   id: Scalars['OID']['output'];
   selectedOptions: Array<Scalars['String']['output']>;
+};
+
+export type ServiceOffering_FinalAddOnConfig = {
+  __typename?: 'ServiceOffering_FinalAddOnConfig';
+  currency?: Maybe<Scalars['Currency']['output']>;
+  discount?: Maybe<ServiceOffering_ResolvedDiscount>;
+  id: Scalars['OID']['output'];
+  optionGroupId: Scalars['OID']['output'];
+  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  selectedBillingCycle: ServiceOffering_BillingCycle;
+  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
+  setupCostDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
+};
+
+export type ServiceOffering_FinalAddOnConfigInput = {
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  discount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
+  id: Scalars['OID']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  selectedBillingCycle: ServiceOffering_BillingCycle;
+  setupCost?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupCostDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
+};
+
+export type ServiceOffering_FinalConfiguration = {
+  __typename?: 'ServiceOffering_FinalConfiguration';
+  addOnConfigs: Array<ServiceOffering_FinalAddOnConfig>;
+  lastModified: Scalars['DateTime']['output'];
+  optionGroupConfigs: Array<ServiceOffering_FinalOptionGroupConfig>;
+  selectedBillingCycle: ServiceOffering_BillingCycle;
+  selectedTierId: Scalars['OID']['output'];
+  tierBasePrice?: Maybe<Scalars['Amount_Money']['output']>;
+  tierCurrency: Scalars['Currency']['output'];
+  tierDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
+};
+
+export type ServiceOffering_FinalOptionGroupConfig = {
+  __typename?: 'ServiceOffering_FinalOptionGroupConfig';
+  billingCycleOverridden: Scalars['Boolean']['output'];
+  currency?: Maybe<Scalars['Currency']['output']>;
+  discount?: Maybe<ServiceOffering_ResolvedDiscount>;
+  discountStripped: Scalars['Boolean']['output'];
+  effectiveBillingCycle: ServiceOffering_BillingCycle;
+  id: Scalars['OID']['output'];
+  optionGroupId: Scalars['OID']['output'];
+  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
+  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
+  setupCostDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
+};
+
+export type ServiceOffering_FinalOptionGroupConfigInput = {
+  billingCycleOverridden: Scalars['Boolean']['input'];
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  discount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
+  discountStripped: Scalars['Boolean']['input'];
+  effectiveBillingCycle: ServiceOffering_BillingCycle;
+  id: Scalars['OID']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupCost?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupCostDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
 };
 
 export enum ServiceOffering_GroupCostType {
@@ -8008,15 +8411,46 @@ export enum ServiceOffering_GroupCostType {
 
 export type ServiceOffering_OptionGroup = {
   __typename?: 'ServiceOffering_OptionGroup';
-  billingCycle?: Maybe<ServiceOffering_BillingCycle>;
+  availableBillingCycles: Array<ServiceOffering_BillingCycle>;
+  billingCycleDiscounts: Array<ServiceOffering_BillingCycleDiscount>;
   costType?: Maybe<ServiceOffering_GroupCostType>;
   currency?: Maybe<Scalars['Currency']['output']>;
   defaultSelected: Scalars['Boolean']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  discountMode?: Maybe<ServiceOffering_DiscountMode>;
   id: Scalars['OID']['output'];
   isAddOn: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   price?: Maybe<Scalars['Amount_Money']['output']>;
+  pricingMode?: Maybe<ServiceOffering_AddOnPricingMode>;
+  standalonePricing?: Maybe<ServiceOffering_StandalonePricing>;
+  tierDependentPricing?: Maybe<Array<ServiceOffering_OptionGroupTierPricing>>;
+};
+
+export type ServiceOffering_OptionGroupTierPricing = {
+  __typename?: 'ServiceOffering_OptionGroupTierPricing';
+  id: Scalars['OID']['output'];
+  recurringPricing: Array<ServiceOffering_RecurringPriceOption>;
+  setupCost?: Maybe<ServiceOffering_SetupCost>;
+  setupCostDiscounts: Array<ServiceOffering_BillingCycleDiscount>;
+  tierId: Scalars['OID']['output'];
+};
+
+export type ServiceOffering_RecurringPriceOption = {
+  __typename?: 'ServiceOffering_RecurringPriceOption';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: ServiceOffering_BillingCycle;
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<ServiceOffering_DiscountRule>;
+  id: Scalars['OID']['output'];
+};
+
+export type ServiceOffering_RecurringPriceOptionInput = {
+  amount: Scalars['Amount_Money']['input'];
+  billingCycle: ServiceOffering_BillingCycle;
+  currency: Scalars['Currency']['input'];
+  discount?: InputMaybe<ServiceOffering_DiscountRuleInput>;
+  id: Scalars['OID']['input'];
 };
 
 export type ServiceOffering_RemoveFacetBindingInput = {
@@ -8036,6 +8470,31 @@ export type ServiceOffering_RemoveFacetTargetInput = {
   lastModified: Scalars['DateTime']['input'];
 };
 
+export type ServiceOffering_RemoveOptionGroupTierPricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_RemoveRecurringPriceOptionInput = {
+  lastModified: Scalars['DateTime']['input'];
+  priceOptionId: Scalars['OID']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_RemoveServiceGroupSetupCostInput = {
+  lastModified: Scalars['DateTime']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_RemoveServiceGroupTierPricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
 export type ServiceOffering_RemoveServiceLevelInput = {
   lastModified: Scalars['DateTime']['input'];
   serviceLevelId: Scalars['OID']['input'];
@@ -8047,12 +8506,6 @@ export type ServiceOffering_RemoveTargetAudienceInput = {
   lastModified: Scalars['DateTime']['input'];
 };
 
-export type ServiceOffering_RemoveTierPricingOptionInput = {
-  lastModified: Scalars['DateTime']['input'];
-  pricingOptionId: Scalars['OID']['input'];
-  tierId: Scalars['OID']['input'];
-};
-
 export type ServiceOffering_RemoveUsageLimitInput = {
   lastModified: Scalars['DateTime']['input'];
   limitId: Scalars['OID']['input'];
@@ -8062,6 +8515,22 @@ export type ServiceOffering_RemoveUsageLimitInput = {
 export type ServiceOffering_ReorderServiceGroupsInput = {
   lastModified: Scalars['DateTime']['input'];
   order: Array<Scalars['OID']['input']>;
+};
+
+export type ServiceOffering_ResolvedDiscount = {
+  __typename?: 'ServiceOffering_ResolvedDiscount';
+  discountType: ServiceOffering_DiscountType;
+  discountValue: Scalars['Float']['output'];
+  discountedAmount: Scalars['Amount_Money']['output'];
+  originalAmount: Scalars['Amount_Money']['output'];
+};
+
+/** Module: Configuration */
+export type ServiceOffering_ResolvedDiscountInput = {
+  discountType: ServiceOffering_DiscountType;
+  discountValue: Scalars['Float']['input'];
+  discountedAmount: Scalars['Amount_Money']['input'];
+  originalAmount: Scalars['Amount_Money']['input'];
 };
 
 export type ServiceOffering_ResourceFacetBinding = {
@@ -8079,31 +8548,33 @@ export type ServiceOffering_SelectResourceTemplateInput = {
 
 export type ServiceOffering_Service = {
   __typename?: 'ServiceOffering_Service';
-  costType?: Maybe<ServiceOffering_ServiceCostType>;
-  currency?: Maybe<Scalars['Currency']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   displayOrder?: Maybe<Scalars['Int']['output']>;
   facetBindings: Array<ServiceOffering_ResourceFacetBinding>;
   id: Scalars['OID']['output'];
   isSetupFormation: Scalars['Boolean']['output'];
   optionGroupId?: Maybe<Scalars['OID']['output']>;
-  price?: Maybe<Scalars['Amount_Money']['output']>;
   serviceGroupId?: Maybe<Scalars['OID']['output']>;
   title: Scalars['String']['output'];
 };
-
-export enum ServiceOffering_ServiceCostType {
-  Recurring = 'RECURRING',
-  Setup = 'SETUP'
-}
 
 export type ServiceOffering_ServiceGroup = {
   __typename?: 'ServiceOffering_ServiceGroup';
   billingCycle: ServiceOffering_BillingCycle;
   description?: Maybe<Scalars['String']['output']>;
+  discountMode?: Maybe<ServiceOffering_DiscountMode>;
   displayOrder?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
   name: Scalars['String']['output'];
+  tierPricing: Array<ServiceOffering_ServiceGroupTierPricing>;
+};
+
+export type ServiceOffering_ServiceGroupTierPricing = {
+  __typename?: 'ServiceOffering_ServiceGroupTierPricing';
+  id: Scalars['OID']['output'];
+  recurringPricing: Array<ServiceOffering_RecurringPriceOption>;
+  setupCostsPerCycle: Array<ServiceOffering_SetupCostPerCycle>;
+  tierId: Scalars['OID']['output'];
 };
 
 export enum ServiceOffering_ServiceLevel {
@@ -8128,6 +8599,7 @@ export type ServiceOffering_ServiceOfferingState = {
   __typename?: 'ServiceOffering_ServiceOfferingState';
   description?: Maybe<Scalars['String']['output']>;
   facetTargets: Array<ServiceOffering_FacetTarget>;
+  finalConfiguration?: Maybe<ServiceOffering_FinalConfiguration>;
   id: Scalars['PHID']['output'];
   infoLink?: Maybe<Scalars['URL']['output']>;
   lastModified: Scalars['DateTime']['output'];
@@ -8159,12 +8631,14 @@ export enum ServiceOffering_ServiceStatus {
 
 export type ServiceOffering_ServiceSubscriptionTier = {
   __typename?: 'ServiceOffering_ServiceSubscriptionTier';
+  billingCycleDiscounts: Array<ServiceOffering_BillingCycleDiscount>;
+  defaultBillingCycle?: Maybe<ServiceOffering_BillingCycle>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['OID']['output'];
   isCustomPricing: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   pricing: ServiceOffering_ServicePricing;
-  pricingOptions: Array<ServiceOffering_TierPricingOption>;
+  pricingMode?: Maybe<ServiceOffering_TierPricingMode>;
   serviceLevels: Array<ServiceOffering_ServiceLevelBinding>;
   usageLimits: Array<ServiceOffering_ServiceUsageLimit>;
 };
@@ -8191,6 +8665,17 @@ export type ServiceOffering_SetFacetTargetInput = {
   selectedOptions: Array<Scalars['String']['input']>;
 };
 
+export type ServiceOffering_SetFinalConfigurationInput = {
+  addOnConfigs: Array<ServiceOffering_FinalAddOnConfigInput>;
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupConfigs: Array<ServiceOffering_FinalOptionGroupConfigInput>;
+  selectedBillingCycle: ServiceOffering_BillingCycle;
+  selectedTierId: Scalars['OID']['input'];
+  tierBasePrice?: InputMaybe<Scalars['Amount_Money']['input']>;
+  tierCurrency: Scalars['Currency']['input'];
+  tierDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
+};
+
 export type ServiceOffering_SetOfferingIdInput = {
   id: Scalars['PHID']['input'];
   lastModified: Scalars['DateTime']['input'];
@@ -8201,6 +8686,75 @@ export type ServiceOffering_SetOperatorInput = {
   operatorId: Scalars['PHID']['input'];
 };
 
+export type ServiceOffering_SetOptionGroupDiscountModeInput = {
+  discountMode: ServiceOffering_DiscountMode;
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_SetOptionGroupStandalonePricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  recurringPricing: Array<ServiceOffering_RecurringPriceOptionInput>;
+  setupCost?: InputMaybe<ServiceOffering_SetupCostInput>;
+};
+
+export type ServiceOffering_SetServiceGroupSetupCostInput = {
+  amount: Scalars['Amount_Money']['input'];
+  currency: Scalars['Currency']['input'];
+  discountType?: InputMaybe<ServiceOffering_DiscountType>;
+  discountValue?: InputMaybe<Scalars['Float']['input']>;
+  lastModified: Scalars['DateTime']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_SetTierBillingCycleDiscountsInput = {
+  discounts: Array<ServiceOffering_BillingCycleDiscountInput>;
+  lastModified: Scalars['DateTime']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_SetTierDefaultBillingCycleInput = {
+  defaultBillingCycle: ServiceOffering_BillingCycle;
+  lastModified: Scalars['DateTime']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_SetTierPricingModeInput = {
+  lastModified: Scalars['DateTime']['input'];
+  pricingMode: ServiceOffering_TierPricingMode;
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_SetupCost = {
+  __typename?: 'ServiceOffering_SetupCost';
+  amount: Scalars['Amount_Money']['output'];
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<ServiceOffering_DiscountRule>;
+};
+
+export type ServiceOffering_SetupCostInput = {
+  amount: Scalars['Amount_Money']['input'];
+  currency: Scalars['Currency']['input'];
+  discount?: InputMaybe<ServiceOffering_DiscountRuleInput>;
+};
+
+export type ServiceOffering_SetupCostPerCycle = {
+  __typename?: 'ServiceOffering_SetupCostPerCycle';
+  amount: Scalars['Amount_Money']['output'];
+  billingCycle: ServiceOffering_BillingCycle;
+  currency: Scalars['Currency']['output'];
+  discount?: Maybe<ServiceOffering_DiscountRule>;
+  id: Scalars['OID']['output'];
+};
+
+export type ServiceOffering_StandalonePricing = {
+  __typename?: 'ServiceOffering_StandalonePricing';
+  recurringPricing: Array<ServiceOffering_RecurringPriceOption>;
+  setupCost?: Maybe<ServiceOffering_SetupCost>;
+};
+
 export type ServiceOffering_TargetAudience = {
   __typename?: 'ServiceOffering_TargetAudience';
   color?: Maybe<Scalars['String']['output']>;
@@ -8208,15 +8762,12 @@ export type ServiceOffering_TargetAudience = {
   label: Scalars['String']['output'];
 };
 
-export type ServiceOffering_TierPricingOption = {
-  __typename?: 'ServiceOffering_TierPricingOption';
-  amount: Scalars['Amount_Money']['output'];
-  currency: Scalars['Currency']['output'];
-  id: Scalars['OID']['output'];
-  isDefault: Scalars['Boolean']['output'];
-};
+export enum ServiceOffering_TierPricingMode {
+  Calculated = 'CALCULATED',
+  ManualOverride = 'MANUAL_OVERRIDE'
+}
 
-/** Module: OfferingManagement */
+/** Module: Offering */
 export type ServiceOffering_UpdateOfferingInfoInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   infoLink?: InputMaybe<Scalars['URL']['input']>;
@@ -8232,7 +8783,7 @@ export type ServiceOffering_UpdateOfferingStatusInput = {
 };
 
 export type ServiceOffering_UpdateOptionGroupInput = {
-  billingCycle?: InputMaybe<ServiceOffering_BillingCycle>;
+  availableBillingCycles?: InputMaybe<Array<ServiceOffering_BillingCycle>>;
   costType?: InputMaybe<ServiceOffering_GroupCostType>;
   currency?: InputMaybe<Scalars['Currency']['input']>;
   defaultSelected?: InputMaybe<Scalars['Boolean']['input']>;
@@ -8244,9 +8795,30 @@ export type ServiceOffering_UpdateOptionGroupInput = {
   price?: InputMaybe<Scalars['Amount_Money']['input']>;
 };
 
+export type ServiceOffering_UpdateOptionGroupTierPricingInput = {
+  lastModified: Scalars['DateTime']['input'];
+  optionGroupId: Scalars['OID']['input'];
+  recurringPricing?: InputMaybe<Array<ServiceOffering_RecurringPriceOptionInput>>;
+  setupCost?: InputMaybe<ServiceOffering_SetupCostInput>;
+  setupCostDiscounts?: InputMaybe<Array<ServiceOffering_BillingCycleDiscountInput>>;
+  tierId: Scalars['OID']['input'];
+};
+
+export type ServiceOffering_UpdateRecurringPriceOptionInput = {
+  amount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  billingCycle?: InputMaybe<ServiceOffering_BillingCycle>;
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  discount?: InputMaybe<ServiceOffering_DiscountRuleInput>;
+  lastModified: Scalars['DateTime']['input'];
+  priceOptionId: Scalars['OID']['input'];
+  serviceGroupId: Scalars['OID']['input'];
+  tierId: Scalars['OID']['input'];
+};
+
 export type ServiceOffering_UpdateServiceGroupInput = {
   billingCycle?: InputMaybe<ServiceOffering_BillingCycle>;
   description?: InputMaybe<Scalars['String']['input']>;
+  discountMode?: InputMaybe<ServiceOffering_DiscountMode>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['OID']['input'];
   lastModified: Scalars['DateTime']['input'];
@@ -8254,15 +8826,12 @@ export type ServiceOffering_UpdateServiceGroupInput = {
 };
 
 export type ServiceOffering_UpdateServiceInput = {
-  costType?: InputMaybe<ServiceOffering_ServiceCostType>;
-  currency?: InputMaybe<Scalars['Currency']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   displayOrder?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['OID']['input'];
   isSetupFormation?: InputMaybe<Scalars['Boolean']['input']>;
   lastModified: Scalars['DateTime']['input'];
   optionGroupId?: InputMaybe<Scalars['OID']['input']>;
-  price?: InputMaybe<Scalars['Amount_Money']['input']>;
   serviceGroupId?: InputMaybe<Scalars['OID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -8291,15 +8860,6 @@ export type ServiceOffering_UpdateTierPricingInput = {
   tierId: Scalars['OID']['input'];
 };
 
-export type ServiceOffering_UpdateTierPricingOptionInput = {
-  amount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  currency?: InputMaybe<Scalars['Currency']['input']>;
-  isDefault?: InputMaybe<Scalars['Boolean']['input']>;
-  lastModified: Scalars['DateTime']['input'];
-  pricingOptionId: Scalars['OID']['input'];
-  tierId: Scalars['OID']['input'];
-};
-
 export type ServiceOffering_UpdateUsageLimitInput = {
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   lastModified: Scalars['DateTime']['input'];
@@ -8315,8 +8875,13 @@ export type ServiceOffering_UpdateUsageLimitInput = {
 };
 
 export enum ServiceOffering_UsageResetCycle {
+  Annual = 'ANNUAL',
   Daily = 'DAILY',
+  Hourly = 'HOURLY',
   Monthly = 'MONTHLY',
+  None = 'NONE',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
   Weekly = 'WEEKLY'
 }
 
@@ -8841,20 +9406,36 @@ export type SubscriptionInstance_ActivateSubscriptionInput = {
   activatedSince: Scalars['DateTime']['input'];
 };
 
-/** Module: ServiceGroup */
+export type SubscriptionInstance_AddServiceFacetSelectionInput = {
+  facetName: Scalars['String']['input'];
+  facetSelectionId: Scalars['OID']['input'];
+  selectedOption: Scalars['String']['input'];
+  serviceId: Scalars['OID']['input'];
+};
+
 export type SubscriptionInstance_AddServiceGroupInput = {
+  costType?: InputMaybe<SubscriptionInstance_GroupCostType>;
   groupId: Scalars['OID']['input'];
   name: Scalars['String']['input'];
   optional: Scalars['Boolean']['input'];
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountServiceInfoInput>;
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
 };
 
 /** Module: Service */
 export type SubscriptionInstance_AddServiceInput = {
+  customValue?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
   recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountServiceInfoInput>;
   recurringLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
   recurringNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   serviceId: Scalars['OID']['input'];
@@ -8867,10 +9448,12 @@ export type SubscriptionInstance_AddServiceInput = {
 /** Module: Metrics */
 export type SubscriptionInstance_AddServiceMetricInput = {
   currentUsage: Scalars['Int']['input'];
+  freeLimit?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   metricId: Scalars['OID']['input'];
   name: Scalars['String']['input'];
   nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
+  paidLimit?: InputMaybe<Scalars['Int']['input']>;
   serviceId: Scalars['OID']['input'];
   unitCostAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
   unitCostBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
@@ -8882,6 +9465,7 @@ export type SubscriptionInstance_AddServiceMetricInput = {
 };
 
 export type SubscriptionInstance_AddServiceToGroupInput = {
+  customValue?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   groupId: Scalars['OID']['input'];
   name?: InputMaybe<Scalars['String']['input']>;
@@ -8928,6 +9512,45 @@ export type SubscriptionInstance_DecrementMetricUsageInput = {
   serviceId: Scalars['OID']['input'];
 };
 
+export type SubscriptionInstance_DiscountInfo = {
+  __typename?: 'SubscriptionInstance_DiscountInfo';
+  discountType: SubscriptionInstance_DiscountType;
+  discountValue: Scalars['Float']['output'];
+  originalAmount: Scalars['Amount_Money']['output'];
+  source: SubscriptionInstance_DiscountSource;
+};
+
+export type SubscriptionInstance_DiscountInfoInitInput = {
+  discountType: SubscriptionInstance_DiscountType;
+  discountValue: Scalars['Float']['input'];
+  originalAmount: Scalars['Amount_Money']['input'];
+  source: SubscriptionInstance_DiscountSource;
+};
+
+/** Module: ServiceGroup */
+export type SubscriptionInstance_DiscountServiceInfoInput = {
+  discountType: SubscriptionInstance_DiscountType;
+  discountValue: Scalars['Float']['input'];
+  originalAmount: Scalars['Amount_Money']['input'];
+  source: SubscriptionInstance_DiscountSource;
+};
+
+export enum SubscriptionInstance_DiscountSource {
+  Bundle = 'BUNDLE',
+  GroupIndependent = 'GROUP_INDEPENDENT',
+  TierInherited = 'TIER_INHERITED'
+}
+
+export enum SubscriptionInstance_DiscountType {
+  FlatAmount = 'FLAT_AMOUNT',
+  Percentage = 'PERCENTAGE'
+}
+
+export enum SubscriptionInstance_GroupCostType {
+  Recurring = 'RECURRING',
+  Setup = 'SETUP'
+}
+
 export type SubscriptionInstance_IncrementMetricUsageInput = {
   currentTime: Scalars['DateTime']['input'];
   incrementBy: Scalars['Int']['input'];
@@ -8936,17 +9559,74 @@ export type SubscriptionInstance_IncrementMetricUsageInput = {
 };
 
 /** Module: Subscription */
+export type SubscriptionInstance_InitializeFacetSelectionInput = {
+  facetName: Scalars['String']['input'];
+  id: Scalars['OID']['input'];
+  selectedOption: Scalars['String']['input'];
+};
+
+export type SubscriptionInstance_InitializeMetricInput = {
+  currentUsage: Scalars['Int']['input'];
+  freeLimit?: InputMaybe<Scalars['Int']['input']>;
+  id: Scalars['OID']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  name: Scalars['String']['input'];
+  paidLimit?: InputMaybe<Scalars['Int']['input']>;
+  unitCostAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  unitCostBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  unitCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  unitName: Scalars['String']['input'];
+  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
+};
+
+export type SubscriptionInstance_InitializeServiceGroupInput = {
+  costType?: InputMaybe<SubscriptionInstance_GroupCostType>;
+  id: Scalars['OID']['input'];
+  name: Scalars['String']['input'];
+  optional: Scalars['Boolean']['input'];
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountInfoInitInput>;
+  services?: InputMaybe<Array<SubscriptionInstance_InitializeServiceInput>>;
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+};
+
+export type SubscriptionInstance_InitializeServiceInput = {
+  customValue?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  facetSelections?: InputMaybe<Array<SubscriptionInstance_InitializeFacetSelectionInput>>;
+  id: Scalars['OID']['input'];
+  metrics?: InputMaybe<Array<SubscriptionInstance_InitializeMetricInput>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountInfoInitInput>;
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+};
+
 export type SubscriptionInstance_InitializeSubscriptionInput = {
   autoRenew?: InputMaybe<Scalars['Boolean']['input']>;
   createdAt: Scalars['DateTime']['input'];
   customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
   customerId?: InputMaybe<Scalars['PHID']['input']>;
   customerName?: InputMaybe<Scalars['String']['input']>;
+  globalCurrency?: InputMaybe<Scalars['Currency']['input']>;
   resourceId?: InputMaybe<Scalars['PHID']['input']>;
   resourceLabel?: InputMaybe<Scalars['String']['input']>;
   resourceThumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
+  selectedBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  serviceGroups?: InputMaybe<Array<SubscriptionInstance_InitializeServiceGroupInput>>;
   serviceOfferingId?: InputMaybe<Scalars['PHID']['input']>;
+  services?: InputMaybe<Array<SubscriptionInstance_InitializeServiceInput>>;
+  tierCurrency?: InputMaybe<Scalars['Currency']['input']>;
   tierName?: InputMaybe<Scalars['String']['input']>;
+  tierPrice?: InputMaybe<Scalars['Amount_Money']['input']>;
+  tierPricingMode?: InputMaybe<SubscriptionInstance_TierPricingMode>;
   tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
 };
 
@@ -8959,12 +9639,18 @@ export type SubscriptionInstance_RecurringCost = {
   amount: Scalars['Amount_Money']['output'];
   billingCycle: SubscriptionInstance_BillingCycle;
   currency: Scalars['Currency']['output'];
+  discount?: Maybe<SubscriptionInstance_DiscountInfo>;
   lastPaymentDate?: Maybe<Scalars['DateTime']['output']>;
   nextBillingDate?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type SubscriptionInstance_RemoveBudgetCategoryInput = {
   budgetId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_RemoveServiceFacetSelectionInput = {
+  facetSelectionId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
 };
 
 export type SubscriptionInstance_RemoveServiceFromGroupInput = {
@@ -9023,7 +9709,9 @@ export type SubscriptionInstance_ResumeSubscriptionInput = {
 
 export type SubscriptionInstance_Service = {
   __typename?: 'SubscriptionInstance_Service';
+  customValue?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  facetSelections: Array<SubscriptionInstance_ServiceFacetSelection>;
   id: Scalars['OID']['output'];
   metrics: Array<SubscriptionInstance_ServiceMetric>;
   name?: Maybe<Scalars['String']['output']>;
@@ -9031,21 +9719,33 @@ export type SubscriptionInstance_Service = {
   setupCost?: Maybe<SubscriptionInstance_SetupCost>;
 };
 
+export type SubscriptionInstance_ServiceFacetSelection = {
+  __typename?: 'SubscriptionInstance_ServiceFacetSelection';
+  facetName: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  selectedOption: Scalars['String']['output'];
+};
+
 export type SubscriptionInstance_ServiceGroup = {
   __typename?: 'SubscriptionInstance_ServiceGroup';
+  costType?: Maybe<SubscriptionInstance_GroupCostType>;
   id: Scalars['OID']['output'];
   name: Scalars['String']['output'];
   optional: Scalars['Boolean']['output'];
+  recurringCost?: Maybe<SubscriptionInstance_RecurringCost>;
   services: Array<SubscriptionInstance_Service>;
+  setupCost?: Maybe<SubscriptionInstance_SetupCost>;
 };
 
 export type SubscriptionInstance_ServiceMetric = {
   __typename?: 'SubscriptionInstance_ServiceMetric';
   currentUsage: Scalars['Int']['output'];
+  freeLimit?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
   limit?: Maybe<Scalars['Int']['output']>;
   name: Scalars['String']['output'];
   nextUsageReset?: Maybe<Scalars['DateTime']['output']>;
+  paidLimit?: Maybe<Scalars['Int']['output']>;
   unitCost?: Maybe<SubscriptionInstance_RecurringCost>;
   unitName: Scalars['String']['output'];
   usageResetPeriod?: Maybe<SubscriptionInstance_ResetPeriod>;
@@ -9105,6 +9805,7 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   customerName?: Maybe<Scalars['String']['output']>;
   customerType?: Maybe<SubscriptionInstance_CustomerType>;
   expiringSince?: Maybe<Scalars['DateTime']['output']>;
+  globalCurrency?: Maybe<Scalars['Currency']['output']>;
   nextBillingDate?: Maybe<Scalars['DateTime']['output']>;
   operatorId?: Maybe<Scalars['PHID']['output']>;
   operatorNotes?: Maybe<Scalars['String']['output']>;
@@ -9113,12 +9814,16 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   projectedBillCurrency?: Maybe<Scalars['Currency']['output']>;
   renewalDate?: Maybe<Scalars['DateTime']['output']>;
   resource?: Maybe<SubscriptionInstance_ResourceDocument>;
+  selectedBillingCycle?: Maybe<SubscriptionInstance_BillingCycle>;
   serviceGroups: Array<SubscriptionInstance_ServiceGroup>;
   serviceOfferingId?: Maybe<Scalars['PHID']['output']>;
   services: Array<SubscriptionInstance_Service>;
   status: SubscriptionInstance_SubscriptionStatus;
   teamMemberCount?: Maybe<Scalars['Int']['output']>;
+  tierCurrency?: Maybe<Scalars['Currency']['output']>;
   tierName?: Maybe<Scalars['String']['output']>;
+  tierPrice?: Maybe<Scalars['Amount_Money']['output']>;
+  tierPricingMode?: Maybe<SubscriptionInstance_TierPricingMode>;
   tierPricingOptionId?: Maybe<Scalars['OID']['output']>;
 };
 
@@ -9128,6 +9833,11 @@ export enum SubscriptionInstance_SubscriptionStatus {
   Expiring = 'EXPIRING',
   Paused = 'PAUSED',
   Pending = 'PENDING'
+}
+
+export enum SubscriptionInstance_TierPricingMode {
+  Calculated = 'CALCULATED',
+  ManualOverride = 'MANUAL_OVERRIDE'
 }
 
 export type SubscriptionInstance_UpdateBillingProjectionInput = {
@@ -9159,7 +9869,18 @@ export type SubscriptionInstance_UpdateMetricUsageInput = {
   serviceId: Scalars['OID']['input'];
 };
 
+export type SubscriptionInstance_UpdateServiceGroupCostInput = {
+  groupId: Scalars['OID']['input'];
+  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
+  setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+};
+
 export type SubscriptionInstance_UpdateServiceInfoInput = {
+  customValue?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   serviceId: Scalars['OID']['input'];
@@ -9191,7 +9912,10 @@ export type SubscriptionInstance_UpdateTeamMemberCountInput = {
 };
 
 export type SubscriptionInstance_UpdateTierInfoInput = {
+  tierCurrency?: InputMaybe<Scalars['Currency']['input']>;
   tierName?: InputMaybe<Scalars['String']['input']>;
+  tierPrice?: InputMaybe<Scalars['Amount_Money']['input']>;
+  tierPricingMode?: InputMaybe<SubscriptionInstance_TierPricingMode>;
   tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
 };
 
@@ -9582,7 +10306,7 @@ export type ResourceProfileQueryVariables = Exact<{
 }>;
 
 
-export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
+export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
 
 export type CreateResourceInstancesMutationVariables = Exact<{
   input: CreateResourceInstancesInput;
@@ -9605,10 +10329,12 @@ export type ResourceTemplateQueryVariables = Exact<{
 
 export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
 
-export type ServiceOfferingsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ServiceOfferingsQueryVariables = Exact<{
+  filter?: InputMaybe<RsServiceOfferingsFilter>;
+}>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, operatorId: any, resourceTemplateId?: any | null, title: string, summary: string, description?: string | null, thumbnailUrl?: any | null, infoLink?: any | null, status: RsServiceStatus, lastModified: any, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, pricingOptions: Array<{ __typename?: 'RSTierPricingOption', id: any, amount: any, currency: any, isDefault: boolean }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', id: any, label: string, color?: string | null }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', id: any, facetName: string, facetType: any, supportedOptions: Array<any> }> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, costType?: RsGroupCostType | null, isAddOn: boolean, defaultSelected: boolean, price?: any | null, currency?: any | null, billingCycle?: RsBillingCycle | null }>, serviceGroups: Array<{ __typename?: 'RSServiceGroup', id: any, name: string, description?: string | null, billingCycle: RsBillingCycle, displayOrder?: number | null }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, title: string, thumbnailUrl?: any | null, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, finalConfiguration?: { __typename?: 'RSFinalConfiguration', selectedTierId: any, selectedBillingCycle: RsBillingCycle, tierBasePrice?: any | null, tierCurrency: any, lastModified: any, tierDiscount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null, optionGroupConfigs: Array<{ __typename?: 'RSFinalOptionGroupConfig', id: any, optionGroupId: any, effectiveBillingCycle: RsBillingCycle, billingCycleOverridden: boolean, discountStripped: boolean, recurringAmount?: any | null, currency?: any | null, setupCost?: any | null, setupCostCurrency?: any | null, discount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null, setupCostDiscount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null }>, addOnConfigs: Array<{ __typename?: 'RSFinalAddOnConfig', id: any, optionGroupId: any, selectedBillingCycle: RsBillingCycle, recurringAmount?: any | null, currency?: any | null, setupCost?: any | null, setupCostCurrency?: any | null, discount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null, setupCostDiscount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null }> } | null, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, discountMode?: RsDiscountMode | null, price?: any | null, currency?: any | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, serviceGroups: Array<{ __typename?: 'RSServiceGroup', id: any, name: string, description?: string | null, billingCycle: RsBillingCycle, displayOrder?: number | null, discountMode?: RsDiscountMode | null, tierPricing: Array<{ __typename?: 'RSServiceGroupTierPricing', id: any, tierId: any, setupCostsPerCycle: Array<{ __typename?: 'RSSetupCostPerCycle', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, serviceGroupId?: any | null, isSetupFormation: boolean, optionGroupId?: any | null, facetBindings: Array<{ __typename?: 'RSResourceFacetBinding', id: any, facetName: string, facetType: any, supportedOptions: Array<any> }> }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', id: any, label: string, color?: string | null }>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, defaultBillingCycle?: RsBillingCycle | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }> }> };
 
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
@@ -10889,6 +11615,7 @@ export const ResourceProfileDocument = `
     query ResourceProfile($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
     id
+    infoLink
     title
     description
     thumbnailUrl
@@ -11091,32 +11818,218 @@ useSuspenseResourceTemplateQuery.getKey = (variables?: ResourceTemplateQueryVari
 useResourceTemplateQuery.fetcher = (variables?: ResourceTemplateQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables, options);
 
 export const ServiceOfferingsDocument = `
-    query ServiceOfferings {
-  serviceOfferings {
+    query ServiceOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
     id
-    operatorId
-    resourceTemplateId
-    title
-    summary
     description
-    thumbnailUrl
     infoLink
-    status
     lastModified
+    operatorId
+    facetTargets {
+      id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    finalConfiguration {
+      selectedTierId
+      selectedBillingCycle
+      tierBasePrice
+      tierCurrency
+      tierDiscount {
+        discountType
+        discountValue
+        originalAmount
+        discountedAmount
+      }
+      optionGroupConfigs {
+        id
+        optionGroupId
+        effectiveBillingCycle
+        billingCycleOverridden
+        discountStripped
+        recurringAmount
+        currency
+        discount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+        setupCost
+        setupCostCurrency
+        setupCostDiscount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+      }
+      lastModified
+      addOnConfigs {
+        id
+        optionGroupId
+        selectedBillingCycle
+        recurringAmount
+        currency
+        discount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+        setupCost
+        setupCostCurrency
+        setupCostDiscount {
+          discountType
+          discountValue
+          originalAmount
+          discountedAmount
+        }
+      }
+    }
+    optionGroups {
+      id
+      name
+      description
+      isAddOn
+      defaultSelected
+      pricingMode
+      standalonePricing {
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      tierDependentPricing {
+        id
+        tierId
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        setupCostDiscounts {
+          billingCycle
+          discountRule {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      costType
+      availableBillingCycles
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
+      discountMode
+      price
+      currency
+    }
+    serviceGroups {
+      id
+      name
+      description
+      billingCycle
+      displayOrder
+      discountMode
+      tierPricing {
+        id
+        tierId
+        setupCostsPerCycle {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+    }
+    resourceTemplateId
+    services {
+      id
+      title
+      description
+      displayOrder
+      serviceGroupId
+      isSetupFormation
+      optionGroupId
+      facetBindings {
+        id
+        facetName
+        facetType
+        supportedOptions
+      }
+    }
+    status
+    summary
+    targetAudiences {
+      id
+      label
+      color
+    }
+    title
     tiers {
       id
       name
       description
       isCustomPricing
+      pricingMode
       pricing {
         amount
         currency
       }
-      pricingOptions {
-        id
-        amount
-        currency
-        isDefault
+      defaultBillingCycle
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
       }
       serviceLevels {
         id
@@ -11130,54 +12043,15 @@ export const ServiceOfferingsDocument = `
         serviceId
         metric
         unitName
+        freeLimit
+        paidLimit
+        resetCycle
         notes
         unitPrice
         unitPriceCurrency
       }
     }
-    targetAudiences {
-      id
-      label
-      color
-    }
-    facetTargets {
-      id
-      categoryKey
-      categoryLabel
-      selectedOptions
-    }
-    services {
-      id
-      title
-      description
-      displayOrder
-      isSetupFormation
-      optionGroupId
-      facetBindings {
-        id
-        facetName
-        facetType
-        supportedOptions
-      }
-    }
-    optionGroups {
-      id
-      name
-      description
-      costType
-      isAddOn
-      defaultSelected
-      price
-      currency
-      billingCycle
-    }
-    serviceGroups {
-      id
-      name
-      description
-      billingCycle
-      displayOrder
-    }
+    thumbnailUrl
   }
 }
     `;

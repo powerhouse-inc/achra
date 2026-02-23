@@ -1,5 +1,11 @@
-import { Table2 } from 'lucide-react'
-import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/modules/shared/components/ui/empty'
+import { FileX } from 'lucide-react'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface EmptyTablePlaceholderProps {
@@ -14,9 +20,12 @@ function EmptyTablePlaceholder({ actorName, showBorder = true }: EmptyTablePlace
     <Empty className={cn('bg-background w-full md:p-6', showBorder && 'border border-solid')}>
       <EmptyHeader>
         <EmptyMedia variant="icon">
-          <Table2 />
+          <FileX />
         </EmptyMedia>
-        <EmptyTitle>No data reported by {actorName}</EmptyTitle>
+        <EmptyTitle>No Expense Reports Data</EmptyTitle>
+        <EmptyDescription>
+          There&apos;s no Expense Reports data reported by {actorName}.
+        </EmptyDescription>
       </EmptyHeader>
     </Empty>
   )
