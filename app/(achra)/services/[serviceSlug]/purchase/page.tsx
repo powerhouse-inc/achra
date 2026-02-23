@@ -22,7 +22,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     }),
   ])
 
-  if (!resourceTemplate || !operator) {
+  if (!resourceTemplate || !operator || !services) {
     notFound()
   }
 
