@@ -97,7 +97,7 @@ export default function ServiceInfo({
           </div>
         </div>
         {showActionButtons && (
-          <div className="flex items-end justify-end gap-6 sm:hidden lg:flex">
+          <div className="flex flex-1 items-end justify-end gap-6 sm:hidden lg:flex">
             <Button variant="outline" asChild>
               <Link href="#">
                 Self Assessment Checklist
