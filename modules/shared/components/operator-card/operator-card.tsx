@@ -21,11 +21,11 @@ export interface Operator {
 }
 
 interface ConfigureWithCallback {
-  onConfigureServices: (operatorId: string) => void
+  onSelectOperator: (operatorId: string) => void
   configureServicesHref?: never
 }
 interface ConfigureWithHref {
-  onConfigureServices?: never
+  onSelectOperator?: never
   configureServicesHref: Route
 }
 
@@ -47,7 +47,7 @@ const OPERATOR_STATUS_LABELS_MAP: Record<BuilderStatus, string> = {
 
 export default function OperatorCard({
   operator,
-  onConfigureServices,
+  onSelectOperator,
   configureServicesHref,
   showMoreInfo = false,
   moreInfoHref,
@@ -84,12 +84,12 @@ export default function OperatorCard({
           />
         </div>
       </CardContent>
-      {onConfigureServices ? (
+      {onSelectOperator ? (
         <Button
           variant="default"
           className="w-full"
           onClick={() => {
-            onConfigureServices(operator.id)
+            onSelectOperator(operator.id)
           }}
         >
           Configure Services

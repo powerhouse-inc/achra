@@ -11,13 +11,13 @@ export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> =
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 
 type FetchOptions = {
-cache?: RequestCache;
-next?: NextFetchRequestConfig;
+  cache?: RequestCache;
+  next?: NextFetchRequestConfig;
 };
 
-            type RequestInit = {
-              headers: (HeadersInit & FetchOptions) | FetchOptions;
-            };
+type RequestInit = {
+  headers: (HeadersInit & FetchOptions) | FetchOptions;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -10416,38 +10416,40 @@ export const BuilderProfileDocument = `
     `;
 
 export const useBuilderProfileQuery = <
-      TData = BuilderProfileQuery,
-      TError = unknown
-    >(
-      variables?: BuilderProfileQueryVariables,
-      options?: Omit<UseQueryOptions<BuilderProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BuilderProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<BuilderProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BuilderProfile'] : ['BuilderProfile', variables],
-    queryFn: switchboardFetcher<BuilderProfileQuery, BuilderProfileQueryVariables>(BuilderProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = BuilderProfileQuery,
+  TError = unknown
+>(
+  variables?: BuilderProfileQueryVariables,
+  options?: Omit<UseQueryOptions<BuilderProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BuilderProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<BuilderProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BuilderProfile'] : ['BuilderProfile', variables],
+      queryFn: switchboardFetcher<BuilderProfileQuery, BuilderProfileQueryVariables>(BuilderProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useBuilderProfileQuery.getKey = (variables?: BuilderProfileQueryVariables) => variables === undefined ? ['BuilderProfile'] : ['BuilderProfile', variables];
 
 export const useSuspenseBuilderProfileQuery = <
-      TData = BuilderProfileQuery,
-      TError = unknown
-    >(
-      variables?: BuilderProfileQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<BuilderProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BuilderProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<BuilderProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BuilderProfileSuspense'] : ['BuilderProfileSuspense', variables],
-    queryFn: switchboardFetcher<BuilderProfileQuery, BuilderProfileQueryVariables>(BuilderProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = BuilderProfileQuery,
+  TError = unknown
+>(
+  variables?: BuilderProfileQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<BuilderProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BuilderProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<BuilderProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BuilderProfileSuspense'] : ['BuilderProfileSuspense', variables],
+      queryFn: switchboardFetcher<BuilderProfileQuery, BuilderProfileQueryVariables>(BuilderProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseBuilderProfileQuery.getKey = (variables?: BuilderProfileQueryVariables) => variables === undefined ? ['BuilderProfileSuspense'] : ['BuilderProfileSuspense', variables];
 
@@ -10482,38 +10484,40 @@ export const BuildersListDocument = `
     `;
 
 export const useBuildersListQuery = <
-      TData = BuildersListQuery,
-      TError = unknown
-    >(
-      variables?: BuildersListQueryVariables,
-      options?: Omit<UseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<BuildersListQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BuildersList'] : ['BuildersList', variables],
-    queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
-    ...options
-  }
-    )};
+  TData = BuildersListQuery,
+  TError = unknown
+>(
+  variables?: BuildersListQueryVariables,
+  options?: Omit<UseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<BuildersListQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BuildersList'] : ['BuildersList', variables],
+      queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
+      ...options
+    }
+  )
+};
 
 useBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) => variables === undefined ? ['BuildersList'] : ['BuildersList', variables];
 
 export const useSuspenseBuildersListQuery = <
-      TData = BuildersListQuery,
-      TError = unknown
-    >(
-      variables?: BuildersListQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<BuildersListQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BuildersListSuspense'] : ['BuildersListSuspense', variables],
-    queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
-    ...options
-  }
-    )};
+  TData = BuildersListQuery,
+  TError = unknown
+>(
+  variables?: BuildersListQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<BuildersListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BuildersListQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<BuildersListQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BuildersListSuspense'] : ['BuildersListSuspense', variables],
+      queryFn: switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) => variables === undefined ? ['BuildersListSuspense'] : ['BuildersListSuspense', variables];
 
@@ -10563,38 +10567,40 @@ export const AccountSnapshotsDocument = `
     `;
 
 export const useAccountSnapshotsQuery = <
-      TData = AccountSnapshotsQuery,
-      TError = unknown
-    >(
-      variables?: AccountSnapshotsQueryVariables,
-      options?: Omit<UseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<AccountSnapshotsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables],
-    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
-    ...options
-  }
-    )};
+  TData = AccountSnapshotsQuery,
+  TError = unknown
+>(
+  variables?: AccountSnapshotsQueryVariables,
+  options?: Omit<UseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<AccountSnapshotsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables],
+      queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables];
 
 export const useSuspenseAccountSnapshotsQuery = <
-      TData = AccountSnapshotsQuery,
-      TError = unknown
-    >(
-      variables?: AccountSnapshotsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<AccountSnapshotsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables],
-    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
-    ...options
-  }
-    )};
+  TData = AccountSnapshotsQuery,
+  TError = unknown
+>(
+  variables?: AccountSnapshotsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<AccountSnapshotsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables],
+      queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables];
 
@@ -10644,38 +10650,40 @@ export const BudgetStatementsDetailsDocument = `
     `;
 
 export const useBudgetStatementsDetailsQuery = <
-      TData = BudgetStatementsDetailsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsDetailsQueryVariables,
-      options?: Omit<UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<BudgetStatementsDetailsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables],
-    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsDetailsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsDetailsQueryVariables,
+  options?: Omit<UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<BudgetStatementsDetailsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables],
+      queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables];
 
 export const useSuspenseBudgetStatementsDetailsQuery = <
-      TData = BudgetStatementsDetailsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsDetailsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<BudgetStatementsDetailsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables],
-    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsDetailsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsDetailsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<BudgetStatementsDetailsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables],
+      queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables];
 
@@ -10694,38 +10702,40 @@ export const BudgetStatementsAvailableMonthsDocument = `
     `;
 
 export const useBudgetStatementsAvailableMonthsQuery = <
-      TData = BudgetStatementsAvailableMonthsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsAvailableMonthsQueryVariables,
-      options?: Omit<UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables],
-    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsAvailableMonthsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsAvailableMonthsQueryVariables,
+  options?: Omit<UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables],
+      queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables];
 
 export const useSuspenseBudgetStatementsAvailableMonthsQuery = <
-      TData = BudgetStatementsAvailableMonthsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsAvailableMonthsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables],
-    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsAvailableMonthsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsAvailableMonthsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables],
+      queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables];
 
@@ -10764,38 +10774,40 @@ export const BudgetStatementsDocument = `
     `;
 
 export const useBudgetStatementsQuery = <
-      TData = BudgetStatementsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsQueryVariables,
-      options?: Omit<UseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<BudgetStatementsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables],
-    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsQueryVariables,
+  options?: Omit<UseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<BudgetStatementsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables],
+      queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables];
 
 export const useSuspenseBudgetStatementsQuery = <
-      TData = BudgetStatementsQuery,
-      TError = unknown
-    >(
-      variables?: BudgetStatementsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<BudgetStatementsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables],
-    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
-    ...options
-  }
-    )};
+  TData = BudgetStatementsQuery,
+  TError = unknown
+>(
+  variables?: BudgetStatementsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<BudgetStatementsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables],
+      queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables];
 
@@ -10826,38 +10838,40 @@ export const AllNetworksDocument = `
     `;
 
 export const useAllNetworksQuery = <
-      TData = AllNetworksQuery,
-      TError = unknown
-    >(
-      variables?: AllNetworksQueryVariables,
-      options?: Omit<UseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<AllNetworksQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['AllNetworks'] : ['AllNetworks', variables],
-    queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
-    ...options
-  }
-    )};
+  TData = AllNetworksQuery,
+  TError = unknown
+>(
+  variables?: AllNetworksQueryVariables,
+  options?: Omit<UseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<AllNetworksQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['AllNetworks'] : ['AllNetworks', variables],
+      queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
+      ...options
+    }
+  )
+};
 
 useAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => variables === undefined ? ['AllNetworks'] : ['AllNetworks', variables];
 
 export const useSuspenseAllNetworksQuery = <
-      TData = AllNetworksQuery,
-      TError = unknown
-    >(
-      variables?: AllNetworksQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<AllNetworksQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['AllNetworksSuspense'] : ['AllNetworksSuspense', variables],
-    queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
-    ...options
-  }
-    )};
+  TData = AllNetworksQuery,
+  TError = unknown
+>(
+  variables?: AllNetworksQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AllNetworksQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<AllNetworksQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['AllNetworksSuspense'] : ['AllNetworksSuspense', variables],
+      queryFn: switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => variables === undefined ? ['AllNetworksSuspense'] : ['AllNetworksSuspense', variables];
 
@@ -10887,38 +10901,40 @@ export const OperatorProfileDocument = `
     `;
 
 export const useOperatorProfileQuery = <
-      TData = OperatorProfileQuery,
-      TError = unknown
-    >(
-      variables?: OperatorProfileQueryVariables,
-      options?: Omit<UseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<OperatorProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['OperatorProfile'] : ['OperatorProfile', variables],
-    queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = OperatorProfileQuery,
+  TError = unknown
+>(
+  variables?: OperatorProfileQueryVariables,
+  options?: Omit<UseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<OperatorProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['OperatorProfile'] : ['OperatorProfile', variables],
+      queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useOperatorProfileQuery.getKey = (variables?: OperatorProfileQueryVariables) => variables === undefined ? ['OperatorProfile'] : ['OperatorProfile', variables];
 
 export const useSuspenseOperatorProfileQuery = <
-      TData = OperatorProfileQuery,
-      TError = unknown
-    >(
-      variables?: OperatorProfileQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<OperatorProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['OperatorProfileSuspense'] : ['OperatorProfileSuspense', variables],
-    queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = OperatorProfileQuery,
+  TError = unknown
+>(
+  variables?: OperatorProfileQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<OperatorProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<OperatorProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['OperatorProfileSuspense'] : ['OperatorProfileSuspense', variables],
+      queryFn: switchboardFetcher<OperatorProfileQuery, OperatorProfileQueryVariables>(OperatorProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseOperatorProfileQuery.getKey = (variables?: OperatorProfileQueryVariables) => variables === undefined ? ['OperatorProfileSuspense'] : ['OperatorProfileSuspense', variables];
 
@@ -11002,38 +11018,40 @@ export const ProjectsDocument = `
     `;
 
 export const useProjectsQuery = <
-      TData = ProjectsQuery,
-      TError = unknown
-    >(
-      variables?: ProjectsQueryVariables,
-      options?: Omit<UseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ProjectsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['Projects'] : ['Projects', variables],
-    queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
-    ...options
-  }
-    )};
+  TData = ProjectsQuery,
+  TError = unknown
+>(
+  variables?: ProjectsQueryVariables,
+  options?: Omit<UseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ProjectsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['Projects'] : ['Projects', variables],
+      queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useProjectsQuery.getKey = (variables?: ProjectsQueryVariables) => variables === undefined ? ['Projects'] : ['Projects', variables];
 
 export const useSuspenseProjectsQuery = <
-      TData = ProjectsQuery,
-      TError = unknown
-    >(
-      variables?: ProjectsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ProjectsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ProjectsSuspense'] : ['ProjectsSuspense', variables],
-    queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
-    ...options
-  }
-    )};
+  TData = ProjectsQuery,
+  TError = unknown
+>(
+  variables?: ProjectsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ProjectsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ProjectsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ProjectsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ProjectsSuspense'] : ['ProjectsSuspense', variables],
+      queryFn: switchboardFetcher<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseProjectsQuery.getKey = (variables?: ProjectsQueryVariables) => variables === undefined ? ['ProjectsSuspense'] : ['ProjectsSuspense', variables];
 
@@ -11126,38 +11144,40 @@ export const WorkstreamProjectDocument = `
     `;
 
 export const useWorkstreamProjectQuery = <
-      TData = WorkstreamProjectQuery,
-      TError = unknown
-    >(
-      variables: WorkstreamProjectQueryVariables,
-      options?: Omit<UseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<WorkstreamProjectQuery, TError, TData>(
-      {
-    queryKey: ['WorkstreamProject', variables],
-    queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamProjectQuery,
+  TError = unknown
+>(
+  variables: WorkstreamProjectQueryVariables,
+  options?: Omit<UseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<WorkstreamProjectQuery, TError, TData>(
+    {
+      queryKey: ['WorkstreamProject', variables],
+      queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
+      ...options
+    }
+  )
+};
 
 useWorkstreamProjectQuery.getKey = (variables: WorkstreamProjectQueryVariables) => ['WorkstreamProject', variables];
 
 export const useSuspenseWorkstreamProjectQuery = <
-      TData = WorkstreamProjectQuery,
-      TError = unknown
-    >(
-      variables: WorkstreamProjectQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<WorkstreamProjectQuery, TError, TData>(
-      {
-    queryKey: ['WorkstreamProjectSuspense', variables],
-    queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamProjectQuery,
+  TError = unknown
+>(
+  variables: WorkstreamProjectQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamProjectQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<WorkstreamProjectQuery, TError, TData>(
+    {
+      queryKey: ['WorkstreamProjectSuspense', variables],
+      queryFn: switchboardFetcher<WorkstreamProjectQuery, WorkstreamProjectQueryVariables>(WorkstreamProjectDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseWorkstreamProjectQuery.getKey = (variables: WorkstreamProjectQueryVariables) => ['WorkstreamProjectSuspense', variables];
 
@@ -11189,38 +11209,40 @@ export const RfpByWorkstreamDocument = `
     `;
 
 export const useRfpByWorkstreamQuery = <
-      TData = RfpByWorkstreamQuery,
-      TError = unknown
-    >(
-      variables: RfpByWorkstreamQueryVariables,
-      options?: Omit<UseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<RfpByWorkstreamQuery, TError, TData>(
-      {
-    queryKey: ['RfpByWorkstream', variables],
-    queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
-    ...options
-  }
-    )};
+  TData = RfpByWorkstreamQuery,
+  TError = unknown
+>(
+  variables: RfpByWorkstreamQueryVariables,
+  options?: Omit<UseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<RfpByWorkstreamQuery, TError, TData>(
+    {
+      queryKey: ['RfpByWorkstream', variables],
+      queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
+      ...options
+    }
+  )
+};
 
 useRfpByWorkstreamQuery.getKey = (variables: RfpByWorkstreamQueryVariables) => ['RfpByWorkstream', variables];
 
 export const useSuspenseRfpByWorkstreamQuery = <
-      TData = RfpByWorkstreamQuery,
-      TError = unknown
-    >(
-      variables: RfpByWorkstreamQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<RfpByWorkstreamQuery, TError, TData>(
-      {
-    queryKey: ['RfpByWorkstreamSuspense', variables],
-    queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
-    ...options
-  }
-    )};
+  TData = RfpByWorkstreamQuery,
+  TError = unknown
+>(
+  variables: RfpByWorkstreamQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RfpByWorkstreamQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<RfpByWorkstreamQuery, TError, TData>(
+    {
+      queryKey: ['RfpByWorkstreamSuspense', variables],
+      queryFn: switchboardFetcher<RfpByWorkstreamQuery, RfpByWorkstreamQueryVariables>(RfpByWorkstreamDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseRfpByWorkstreamQuery.getKey = (variables: RfpByWorkstreamQueryVariables) => ['RfpByWorkstreamSuspense', variables];
 
@@ -11344,38 +11366,40 @@ export const RoadmapDetailsDocument = `
     `;
 
 export const useRoadmapDetailsQuery = <
-      TData = RoadmapDetailsQuery,
-      TError = unknown
-    >(
-      variables: RoadmapDetailsQueryVariables,
-      options?: Omit<UseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<RoadmapDetailsQuery, TError, TData>(
-      {
-    queryKey: ['RoadmapDetails', variables],
-    queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = RoadmapDetailsQuery,
+  TError = unknown
+>(
+  variables: RoadmapDetailsQueryVariables,
+  options?: Omit<UseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<RoadmapDetailsQuery, TError, TData>(
+    {
+      queryKey: ['RoadmapDetails', variables],
+      queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useRoadmapDetailsQuery.getKey = (variables: RoadmapDetailsQueryVariables) => ['RoadmapDetails', variables];
 
 export const useSuspenseRoadmapDetailsQuery = <
-      TData = RoadmapDetailsQuery,
-      TError = unknown
-    >(
-      variables: RoadmapDetailsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<RoadmapDetailsQuery, TError, TData>(
-      {
-    queryKey: ['RoadmapDetailsSuspense', variables],
-    queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = RoadmapDetailsQuery,
+  TError = unknown
+>(
+  variables: RoadmapDetailsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<RoadmapDetailsQuery, TError, TData>(
+    {
+      queryKey: ['RoadmapDetailsSuspense', variables],
+      queryFn: switchboardFetcher<RoadmapDetailsQuery, RoadmapDetailsQueryVariables>(RoadmapDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseRoadmapDetailsQuery.getKey = (variables: RoadmapDetailsQueryVariables) => ['RoadmapDetailsSuspense', variables];
 
@@ -11470,38 +11494,40 @@ export const ScopeOfWorkDocument = `
     `;
 
 export const useScopeOfWorkQuery = <
-      TData = ScopeOfWorkQuery,
-      TError = unknown
-    >(
-      variables: ScopeOfWorkQueryVariables,
-      options?: Omit<UseQueryOptions<ScopeOfWorkQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ScopeOfWorkQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ScopeOfWorkQuery, TError, TData>(
-      {
-    queryKey: ['ScopeOfWork', variables],
-    queryFn: switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables),
-    ...options
-  }
-    )};
+  TData = ScopeOfWorkQuery,
+  TError = unknown
+>(
+  variables: ScopeOfWorkQueryVariables,
+  options?: Omit<UseQueryOptions<ScopeOfWorkQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ScopeOfWorkQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ScopeOfWorkQuery, TError, TData>(
+    {
+      queryKey: ['ScopeOfWork', variables],
+      queryFn: switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables),
+      ...options
+    }
+  )
+};
 
 useScopeOfWorkQuery.getKey = (variables: ScopeOfWorkQueryVariables) => ['ScopeOfWork', variables];
 
 export const useSuspenseScopeOfWorkQuery = <
-      TData = ScopeOfWorkQuery,
-      TError = unknown
-    >(
-      variables: ScopeOfWorkQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ScopeOfWorkQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ScopeOfWorkQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ScopeOfWorkQuery, TError, TData>(
-      {
-    queryKey: ['ScopeOfWorkSuspense', variables],
-    queryFn: switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables),
-    ...options
-  }
-    )};
+  TData = ScopeOfWorkQuery,
+  TError = unknown
+>(
+  variables: ScopeOfWorkQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ScopeOfWorkQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ScopeOfWorkQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ScopeOfWorkQuery, TError, TData>(
+    {
+      queryKey: ['ScopeOfWorkSuspense', variables],
+      queryFn: switchboardFetcher<ScopeOfWorkQuery, ScopeOfWorkQueryVariables>(ScopeOfWorkDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseScopeOfWorkQuery.getKey = (variables: ScopeOfWorkQueryVariables) => ['ScopeOfWorkSuspense', variables];
 
@@ -11573,38 +11599,40 @@ export const RoadmapListDocument = `
     `;
 
 export const useRoadmapListQuery = <
-      TData = RoadmapListQuery,
-      TError = unknown
-    >(
-      variables: RoadmapListQueryVariables,
-      options?: Omit<UseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<RoadmapListQuery, TError, TData>(
-      {
-    queryKey: ['RoadmapList', variables],
-    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
-    ...options
-  }
-    )};
+  TData = RoadmapListQuery,
+  TError = unknown
+>(
+  variables: RoadmapListQueryVariables,
+  options?: Omit<UseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<RoadmapListQuery, TError, TData>(
+    {
+      queryKey: ['RoadmapList', variables],
+      queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
+      ...options
+    }
+  )
+};
 
 useRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapList', variables];
 
 export const useSuspenseRoadmapListQuery = <
-      TData = RoadmapListQuery,
-      TError = unknown
-    >(
-      variables: RoadmapListQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<RoadmapListQuery, TError, TData>(
-      {
-    queryKey: ['RoadmapListSuspense', variables],
-    queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
-    ...options
-  }
-    )};
+  TData = RoadmapListQuery,
+  TError = unknown
+>(
+  variables: RoadmapListQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<RoadmapListQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<RoadmapListQuery, TError, TData>(
+    {
+      queryKey: ['RoadmapListSuspense', variables],
+      queryFn: switchboardFetcher<RoadmapListQuery, RoadmapListQueryVariables>(RoadmapListDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseRoadmapListQuery.getKey = (variables: RoadmapListQueryVariables) => ['RoadmapListSuspense', variables];
 
@@ -11639,38 +11667,40 @@ export const ResourceProfileDocument = `
     `;
 
 export const useResourceProfileQuery = <
-      TData = ResourceProfileQuery,
-      TError = unknown
-    >(
-      variables?: ResourceProfileQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceProfile'] : ['ResourceProfile', variables],
-    queryFn: switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceProfileQuery,
+  TError = unknown
+>(
+  variables?: ResourceProfileQueryVariables,
+  options?: Omit<UseQueryOptions<ResourceProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ResourceProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceProfile'] : ['ResourceProfile', variables],
+      queryFn: switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useResourceProfileQuery.getKey = (variables?: ResourceProfileQueryVariables) => variables === undefined ? ['ResourceProfile'] : ['ResourceProfile', variables];
 
 export const useSuspenseResourceProfileQuery = <
-      TData = ResourceProfileQuery,
-      TError = unknown
-    >(
-      variables?: ResourceProfileQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceProfileQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceProfileQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceProfileSuspense'] : ['ResourceProfileSuspense', variables],
-    queryFn: switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceProfileQuery,
+  TError = unknown
+>(
+  variables?: ResourceProfileQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ResourceProfileQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceProfileQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ResourceProfileQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceProfileSuspense'] : ['ResourceProfileSuspense', variables],
+      queryFn: switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseResourceProfileQuery.getKey = (variables?: ResourceProfileQueryVariables) => variables === undefined ? ['ResourceProfileSuspense'] : ['ResourceProfileSuspense', variables];
 
@@ -11688,17 +11718,18 @@ export const CreateResourceInstancesDocument = `
     `;
 
 export const useCreateResourceInstancesMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>) => {
-    
-    return useMutation<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>(
-      {
-    mutationKey: ['CreateResourceInstances'],
-    mutationFn: (variables?: CreateResourceInstancesMutationVariables) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables)(),
-    ...options
-  }
-    )};
+  TError = unknown,
+  TContext = unknown
+>(options?: UseMutationOptions<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>) => {
+
+  return useMutation<CreateResourceInstancesMutation, TError, CreateResourceInstancesMutationVariables, TContext>(
+    {
+      mutationKey: ['CreateResourceInstances'],
+      mutationFn: (variables?: CreateResourceInstancesMutationVariables) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables)(),
+      ...options
+    }
+  )
+};
 
 
 useCreateResourceInstancesMutation.fetcher = (variables: CreateResourceInstancesMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateResourceInstancesMutation, CreateResourceInstancesMutationVariables>(CreateResourceInstancesDocument, variables, options);
@@ -11720,38 +11751,40 @@ export const ResourceOperatorDocument = `
     `;
 
 export const useResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables?: ResourceOperatorQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceOperator'] : ['ResourceOperator', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceOperatorQuery,
+  TError = unknown
+>(
+  variables?: ResourceOperatorQueryVariables,
+  options?: Omit<UseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ResourceOperatorQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceOperator'] : ['ResourceOperator', variables],
+      queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+      ...options
+    }
+  )
+};
 
 useResourceOperatorQuery.getKey = (variables?: ResourceOperatorQueryVariables) => variables === undefined ? ['ResourceOperator'] : ['ResourceOperator', variables];
 
 export const useSuspenseResourceOperatorQuery = <
-      TData = ResourceOperatorQuery,
-      TError = unknown
-    >(
-      variables?: ResourceOperatorQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceOperatorSuspense'] : ['ResourceOperatorSuspense', variables],
-    queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceOperatorQuery,
+  TError = unknown
+>(
+  variables?: ResourceOperatorQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceOperatorQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ResourceOperatorQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceOperatorSuspense'] : ['ResourceOperatorSuspense', variables],
+      queryFn: switchboardFetcher<ResourceOperatorQuery, ResourceOperatorQueryVariables>(ResourceOperatorDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseResourceOperatorQuery.getKey = (variables?: ResourceOperatorQueryVariables) => variables === undefined ? ['ResourceOperatorSuspense'] : ['ResourceOperatorSuspense', variables];
 
@@ -11779,38 +11812,40 @@ export const ResourceTemplateDocument = `
     `;
 
 export const useResourceTemplateQuery = <
-      TData = ResourceTemplateQuery,
-      TError = unknown
-    >(
-      variables?: ResourceTemplateQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceTemplateQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceTemplateQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceTemplateQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceTemplate'] : ['ResourceTemplate', variables],
-    queryFn: switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceTemplateQuery,
+  TError = unknown
+>(
+  variables?: ResourceTemplateQueryVariables,
+  options?: Omit<UseQueryOptions<ResourceTemplateQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceTemplateQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ResourceTemplateQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceTemplate'] : ['ResourceTemplate', variables],
+      queryFn: switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables),
+      ...options
+    }
+  )
+};
 
 useResourceTemplateQuery.getKey = (variables?: ResourceTemplateQueryVariables) => variables === undefined ? ['ResourceTemplate'] : ['ResourceTemplate', variables];
 
 export const useSuspenseResourceTemplateQuery = <
-      TData = ResourceTemplateQuery,
-      TError = unknown
-    >(
-      variables?: ResourceTemplateQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceTemplateQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceTemplateQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceTemplateQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceTemplateSuspense'] : ['ResourceTemplateSuspense', variables],
-    queryFn: switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceTemplateQuery,
+  TError = unknown
+>(
+  variables?: ResourceTemplateQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ResourceTemplateQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceTemplateQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ResourceTemplateQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceTemplateSuspense'] : ['ResourceTemplateSuspense', variables],
+      queryFn: switchboardFetcher<ResourceTemplateQuery, ResourceTemplateQueryVariables>(ResourceTemplateDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseResourceTemplateQuery.getKey = (variables?: ResourceTemplateQueryVariables) => variables === undefined ? ['ResourceTemplateSuspense'] : ['ResourceTemplateSuspense', variables];
 
@@ -12057,38 +12092,40 @@ export const ServiceOfferingsDocument = `
     `;
 
 export const useServiceOfferingsQuery = <
-      TData = ServiceOfferingsQuery,
-      TError = unknown
-    >(
-      variables?: ServiceOfferingsQueryVariables,
-      options?: Omit<UseQueryOptions<ServiceOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ServiceOfferingsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ServiceOfferingsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ServiceOfferings'] : ['ServiceOfferings', variables],
-    queryFn: switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables),
-    ...options
-  }
-    )};
+  TData = ServiceOfferingsQuery,
+  TError = unknown
+>(
+  variables?: ServiceOfferingsQueryVariables,
+  options?: Omit<UseQueryOptions<ServiceOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ServiceOfferingsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ServiceOfferingsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ServiceOfferings'] : ['ServiceOfferings', variables],
+      queryFn: switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useServiceOfferingsQuery.getKey = (variables?: ServiceOfferingsQueryVariables) => variables === undefined ? ['ServiceOfferings'] : ['ServiceOfferings', variables];
 
 export const useSuspenseServiceOfferingsQuery = <
-      TData = ServiceOfferingsQuery,
-      TError = unknown
-    >(
-      variables?: ServiceOfferingsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ServiceOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ServiceOfferingsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ServiceOfferingsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ServiceOfferingsSuspense'] : ['ServiceOfferingsSuspense', variables],
-    queryFn: switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables),
-    ...options
-  }
-    )};
+  TData = ServiceOfferingsQuery,
+  TError = unknown
+>(
+  variables?: ServiceOfferingsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ServiceOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ServiceOfferingsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ServiceOfferingsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ServiceOfferingsSuspense'] : ['ServiceOfferingsSuspense', variables],
+      queryFn: switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseServiceOfferingsQuery.getKey = (variables?: ServiceOfferingsQueryVariables) => variables === undefined ? ['ServiceOfferingsSuspense'] : ['ServiceOfferingsSuspense', variables];
 
@@ -12137,38 +12174,40 @@ export const ResourceTemplatesDocument = `
     `;
 
 export const useResourceTemplatesQuery = <
-      TData = ResourceTemplatesQuery,
-      TError = unknown
-    >(
-      variables?: ResourceTemplatesQueryVariables,
-      options?: Omit<UseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<ResourceTemplatesQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceTemplates'] : ['ResourceTemplates', variables],
-    queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceTemplatesQuery,
+  TError = unknown
+>(
+  variables?: ResourceTemplatesQueryVariables,
+  options?: Omit<UseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<ResourceTemplatesQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceTemplates'] : ['ResourceTemplates', variables],
+      queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
+      ...options
+    }
+  )
+};
 
 useResourceTemplatesQuery.getKey = (variables?: ResourceTemplatesQueryVariables) => variables === undefined ? ['ResourceTemplates'] : ['ResourceTemplates', variables];
 
 export const useSuspenseResourceTemplatesQuery = <
-      TData = ResourceTemplatesQuery,
-      TError = unknown
-    >(
-      variables?: ResourceTemplatesQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<ResourceTemplatesQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['ResourceTemplatesSuspense'] : ['ResourceTemplatesSuspense', variables],
-    queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
-    ...options
-  }
-    )};
+  TData = ResourceTemplatesQuery,
+  TError = unknown
+>(
+  variables?: ResourceTemplatesQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ResourceTemplatesQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<ResourceTemplatesQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['ResourceTemplatesSuspense'] : ['ResourceTemplatesSuspense', variables],
+      queryFn: switchboardFetcher<ResourceTemplatesQuery, ResourceTemplatesQueryVariables>(ResourceTemplatesDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseResourceTemplatesQuery.getKey = (variables?: ResourceTemplatesQueryVariables) => variables === undefined ? ['ResourceTemplatesSuspense'] : ['ResourceTemplatesSuspense', variables];
 
@@ -12299,38 +12338,40 @@ export const WorkstreamDetailsDocument = `
     `;
 
 export const useWorkstreamDetailsQuery = <
-      TData = WorkstreamDetailsQuery,
-      TError = unknown
-    >(
-      variables: WorkstreamDetailsQueryVariables,
-      options?: Omit<UseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<WorkstreamDetailsQuery, TError, TData>(
-      {
-    queryKey: ['WorkstreamDetails', variables],
-    queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamDetailsQuery,
+  TError = unknown
+>(
+  variables: WorkstreamDetailsQueryVariables,
+  options?: Omit<UseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<WorkstreamDetailsQuery, TError, TData>(
+    {
+      queryKey: ['WorkstreamDetails', variables],
+      queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useWorkstreamDetailsQuery.getKey = (variables: WorkstreamDetailsQueryVariables) => ['WorkstreamDetails', variables];
 
 export const useSuspenseWorkstreamDetailsQuery = <
-      TData = WorkstreamDetailsQuery,
-      TError = unknown
-    >(
-      variables: WorkstreamDetailsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<WorkstreamDetailsQuery, TError, TData>(
-      {
-    queryKey: ['WorkstreamDetailsSuspense', variables],
-    queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamDetailsQuery,
+  TError = unknown
+>(
+  variables: WorkstreamDetailsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamDetailsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<WorkstreamDetailsQuery, TError, TData>(
+    {
+      queryKey: ['WorkstreamDetailsSuspense', variables],
+      queryFn: switchboardFetcher<WorkstreamDetailsQuery, WorkstreamDetailsQueryVariables>(WorkstreamDetailsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseWorkstreamDetailsQuery.getKey = (variables: WorkstreamDetailsQueryVariables) => ['WorkstreamDetailsSuspense', variables];
 
@@ -12409,38 +12450,40 @@ export const WorkstreamsDocument = `
     `;
 
 export const useWorkstreamsQuery = <
-      TData = WorkstreamsQuery,
-      TError = unknown
-    >(
-      variables?: WorkstreamsQueryVariables,
-      options?: Omit<UseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<WorkstreamsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['Workstreams'] : ['Workstreams', variables],
-    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamsQuery,
+  TError = unknown
+>(
+  variables?: WorkstreamsQueryVariables,
+  options?: Omit<UseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useQuery<WorkstreamsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['Workstreams'] : ['Workstreams', variables],
+      queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['Workstreams'] : ['Workstreams', variables];
 
 export const useSuspenseWorkstreamsQuery = <
-      TData = WorkstreamsQuery,
-      TError = unknown
-    >(
-      variables?: WorkstreamsQueryVariables,
-      options?: Omit<UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useSuspenseQuery<WorkstreamsQuery, TError, TData>(
-      {
-    queryKey: variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables],
-    queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
-    ...options
-  }
-    )};
+  TData = WorkstreamsQuery,
+  TError = unknown
+>(
+  variables?: WorkstreamsQueryVariables,
+  options?: Omit<UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<WorkstreamsQuery, TError, TData>['queryKey'] }
+) => {
+
+  return useSuspenseQuery<WorkstreamsQuery, TError, TData>(
+    {
+      queryKey: variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables],
+      queryFn: switchboardFetcher<WorkstreamsQuery, WorkstreamsQueryVariables>(WorkstreamsDocument, variables),
+      ...options
+    }
+  )
+};
 
 useSuspenseWorkstreamsQuery.getKey = (variables?: WorkstreamsQueryVariables) => variables === undefined ? ['WorkstreamsSuspense'] : ['WorkstreamsSuspense', variables];
 

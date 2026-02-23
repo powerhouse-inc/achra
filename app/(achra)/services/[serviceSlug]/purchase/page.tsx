@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
 import ServicePurchaseForm from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { ServicePurchaseStepProvider } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
 import { getResourceTemplate } from '@/modules/service-purchase/services/resource-template'
 import { getServiceOfferings } from '@/modules/service-purchase/services/service-offerings'
@@ -19,6 +20,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     getResourceOperator({ id: resourceTemplate?.operatorId }),
     getServiceOfferings({
       operatorId: resourceTemplate?.operatorId,
+      resourceTemplateId: resourceTemplate?.id,
     }),
   ])
 
@@ -26,18 +28,24 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     notFound()
   }
 
+  const service = services[0]
+
+  const facets = service.facetTargets
+
   return (
     <PageContent className="gap-6">
-      <ServicePurchaseStepProvider>
-        <div className="flex flex-col gap-6 lg:gap-8">
-          <ServiceHeader resourceTemplate={resourceTemplate} />
-          <ServicePurchaseForm
-            resourceTemplate={resourceTemplate}
-            operator={operator}
-            services={services}
-          />
-        </div>
-      </ServicePurchaseStepProvider>
+      <ServicePurchaseStoreProvider facets={facets}>
+        <ServicePurchaseStepProvider>
+          <div className="flex flex-col gap-6 lg:gap-8">
+            <ServiceHeader resourceTemplate={resourceTemplate} />
+            <ServicePurchaseForm
+              resourceTemplate={resourceTemplate}
+              operator={operator}
+              services={services}
+            />
+          </div>
+        </ServicePurchaseStepProvider>
+      </ServicePurchaseStoreProvider>
     </PageContent>
   )
 }

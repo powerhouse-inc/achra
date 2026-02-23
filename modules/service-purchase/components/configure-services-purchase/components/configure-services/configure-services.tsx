@@ -7,9 +7,9 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
 import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
+import { FacetSelectionSection } from '../facet-selection-section'
 import { PricingCalculator } from '../service-catalog'
 import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator/pricing-calculator-skeleton'
-import { ServicePurchaseSelects } from '../service-purchase-selects'
 
 export interface ConfigureServicesProps {
   selectedPlan?: string
@@ -52,7 +52,7 @@ export default function ConfigureServices({
   return (
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader operator={operator} />
-      <ServicePurchaseSelects facetTargets={facetTargets} />
+      <FacetSelectionSection />
       <BillingPeriodSelector
         value={billingPeriod}
         onValueChange={setBillingPeriod}

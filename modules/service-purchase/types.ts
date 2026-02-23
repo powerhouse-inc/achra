@@ -1,5 +1,7 @@
 import type { submitRequestSchema } from './lib/submit-request-schema'
+import type { RsOfferingFacetTarget } from '../__generated__/graphql/switchboard-generated'
 import type { z } from 'zod'
+import type { StoreApi } from 'zustand'
 
 export enum ServicePurchaseStep {
   ProductInfo = 'product-info',
@@ -45,10 +47,33 @@ export interface SubmitRequestSlice extends SubmitRequestSliceState {
   actions: SubmitRequestSliceActions
 }
 
+// facets slice
+export interface FacetsSliceState {
+  facets: Array<{
+    originalFacet: RsOfferingFacetTarget
+    selectedOption: string
+  }>
+}
+
+export interface FacetsSliceActions {
+  selectedFacetOption: (categoryKey: string, selectedOption: string) => void
+}
+
+export interface FacetsSlice extends FacetsSliceState {
+  actions: FacetsSliceActions
+}
+
+// store init props (for dependency injection from page)
+export interface ServicePurchaseStoreProps {
+  facets?: RsOfferingFacetTarget[]
+}
+
 // store (composed from slices)
-export type ServicePurchaseState = SubmitRequestSliceState // & otherSliceLater
-export type ServicePurchaseActions = SubmitRequestSliceActions // & otherActionsSliceLater
+export type ServicePurchaseState = SubmitRequestSliceState & FacetsSliceState
+export type ServicePurchaseActions = SubmitRequestSliceActions & FacetsSliceActions // & otherActionsSliceLater
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
   actions: ServicePurchaseActions
 }
+
+export type ServicePurchaseStoreSet = StoreApi<ServicePurchaseStore>['setState']

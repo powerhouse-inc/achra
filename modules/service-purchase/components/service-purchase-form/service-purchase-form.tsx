@@ -99,7 +99,7 @@ export default function ServicePurchaseForm({
     [enabledSections, setValue],
   )
 
-  const handleConfigureServices = (operatorId: string) => {
+  const handleOnSelectOperator = (operatorId: string) => {
     setValue('operatorId', operatorId)
     goToStep(ServicePurchaseStep.ConfigureServices)
   }
@@ -122,7 +122,7 @@ export default function ServicePurchaseForm({
             />
           )}
           {step.value === ServicePurchaseStep.SelectOperator && (
-            <SelectOperator onConfigureServices={handleConfigureServices} operator={operator} />
+            <SelectOperator onSelectOperator={handleOnSelectOperator} operator={operator} />
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <Suspense fallback={<PricingCalculatorSkeleton />}>

@@ -1,25 +1,30 @@
-import { create } from 'zustand'
+import { createStore } from 'zustand'
+import { createFacetsSlice } from './facets-store-slice'
 import { createSubmitRequestSlice } from './submit-request-slice'
-import type { ServicePurchaseActions, ServicePurchaseState, ServicePurchaseStore } from '../types'
+import type { ServicePurchaseStore, ServicePurchaseStoreProps } from '../types'
 
-const useServicePurchaseStore = create<ServicePurchaseStore>((set) => {
-  const submitRequestSlice = createSubmitRequestSlice(set)
-  return {
-    ...submitRequestSlice,
-
-    actions: {
-      ...submitRequestSlice.actions,
-    },
-  }
-})
-
-function useServicePurchaseState(): ServicePurchaseState {
-  const { actions: _, ...state } = useServicePurchaseStore((state) => state)
-  return state
+const DEFAULT_PROPS: ServicePurchaseStoreProps = {
+  facets: [],
 }
 
-function useServicePurchaseActions(): ServicePurchaseActions {
-  return useServicePurchaseStore((state) => state.actions)
+function createServicePurchaseStore(initProps?: Partial<ServicePurchaseStoreProps>) {
+  const props = { ...DEFAULT_PROPS, ...initProps }
+
+  return createStore<ServicePurchaseStore>()((set) => {
+    const submitRequestSlice = createSubmitRequestSlice(set)
+    const facetsSlice = createFacetsSlice(set, props.facets)
+
+    return {
+      ...submitRequestSlice,
+      ...facetsSlice,
+
+      actions: {
+        ...submitRequestSlice.actions,
+        ...facetsSlice.actions,
+      },
+    }
+  })
 }
 
-export { useServicePurchaseState, useServicePurchaseActions }
+export { createServicePurchaseStore }
+export type ServicePurchaseStoreApi = ReturnType<typeof createServicePurchaseStore>

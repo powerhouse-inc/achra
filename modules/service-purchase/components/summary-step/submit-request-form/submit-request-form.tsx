@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
 import { submitRequestSchema } from '@/modules/service-purchase/lib/submit-request-schema'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
-import { useServicePurchaseActions } from '@/modules/service-purchase/stores/service-purchase-store'
+import { useServicePurchaseActions } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import {
   ServicePurchaseStep,
   type SubmitRequestFormState,
