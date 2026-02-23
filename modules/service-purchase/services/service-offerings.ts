@@ -8,7 +8,7 @@ export type ServiceOffering = ServiceOfferingsQuery['serviceOfferings'][number]
 
 export async function getServiceOfferings(
   filter?: RsServiceOfferingsFilter,
-): Promise<ServiceOffering[]> {
+): Promise<ServiceOffering | undefined> {
   const data = await useServiceOfferingsQuery.fetcher({ filter })()
-  return data.serviceOfferings
+  return data.serviceOfferings[0]
 }

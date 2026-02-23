@@ -36,7 +36,7 @@ export interface ServicePurchaseFormValues {
 export interface ServicePurchaseFormProps {
   resourceTemplate: RsResourceTemplate
   operator: BuilderProfileState
-  services: RsServiceOffering[]
+  services: RsServiceOffering
 }
 
 export default function ServicePurchaseForm({
@@ -44,7 +44,7 @@ export default function ServicePurchaseForm({
   operator,
   services,
 }: Readonly<ServicePurchaseFormProps>) {
-  const defaultActivePlan = services[0].tiers[0].name
+  const defaultActivePlan = services.tiers[0].name
   const { activeStep, goToStep } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
@@ -133,7 +133,7 @@ export default function ServicePurchaseForm({
                 onSectionToggle={handleSectionToggle}
                 billingPeriod={billingPeriod}
                 setBillingPeriod={setBillingPeriod}
-                servicesData={services[0]}
+                servicesData={services}
                 operator={operator}
               />
             </Suspense>
