@@ -1,5 +1,7 @@
+import { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { PlanSelectorItem } from './plan-selector'
+import { PricingCalculatorProvider } from './pricing-calculator-context'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
@@ -11,10 +13,27 @@ const meta = {
       appDirectory: true,
     },
   },
+  decorators: [
+    (Story) => (
+      <PricingCalculatorProvider
+        value={{
+          activePlan: undefined,
+          onPrevPlan: () => {},
+          onNextPlan: () => {},
+          tierNames: ['Pro Plan'],
+          tiers: [],
+          selectedBillingCycle: RsBillingCycle.Monthly,
+        }}
+      >
+        <Story />
+      </PricingCalculatorProvider>
+    ),
+  ],
 } satisfies Meta<typeof PlanSelectorItem>
 
 export default meta
 type Story = StoryObj<typeof meta>
+
 export const Selected: Story = {
   name: 'Generic - UnSelected',
   args: {
