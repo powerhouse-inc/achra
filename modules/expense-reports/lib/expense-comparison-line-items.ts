@@ -1,8 +1,9 @@
+import { UTCDate } from '@date-fns/utc'
 import { subMonths } from 'date-fns'
 import type { BudgetStatement } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
 import { getCurrencyValue } from './budget-statement-utils'
-import { formatMonthString, MONTH_NAMES } from './month-utils'
+import { formatMonthString, MONTH_NAMES, normalizeMonth } from './month-utils'
 
 type BudgetStatementForComparison = Pick<
   BudgetStatement,
@@ -28,9 +29,12 @@ export function getExpenseComparisonLineItems(
   currentMonth: Date,
   budgetStatements: BudgetStatementForComparison[],
 ): ExpenseComparisonLineItem[] {
+  const normalized = normalizeMonth(currentMonth)
+  const utcCurrent = new UTCDate(normalized.getUTCFullYear(), normalized.getUTCMonth(), 1)
+
   const byMonthKey = new Map(budgetStatements.map((bs) => [bs.month.toUpperCase(), bs]))
 
-  const months: Date[] = [currentMonth, subMonths(currentMonth, 1), subMonths(currentMonth, 2)]
+  const months: Date[] = [utcCurrent, subMonths(utcCurrent, 1), subMonths(utcCurrent, 2)]
 
   const lineItems: ExpenseComparisonLineItem[] = []
   let totalReportedActuals = 0
