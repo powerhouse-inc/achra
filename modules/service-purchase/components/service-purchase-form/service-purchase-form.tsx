@@ -1,12 +1,13 @@
 'use client'
 
 import { parseAsString, useQueryState } from 'nuqs'
-import { Suspense, useCallback, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import type {
-  BuilderProfileState,
-  RsResourceTemplate,
-  RsServiceOffering,
+import {
+  type BuilderProfileState,
+  RsBillingCycle,
+  type RsResourceTemplate,
+  type RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
@@ -43,12 +44,14 @@ export default function ServicePurchaseForm({
   operator,
   services,
 }: Readonly<ServicePurchaseFormProps>) {
-  const defaultActivePlan = services[0].tiers[1].name
+  const defaultActivePlan = services[0].tiers[0].name
   const { activeStep, goToStep } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
   )
+
+  const [billingPeriod, setBillingPeriod] = useState<RsBillingCycle>(RsBillingCycle.Monthly)
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -128,6 +131,8 @@ export default function ServicePurchaseForm({
                 enabledSections={enabledSections}
                 onPlanChange={handlePlanChange}
                 onSectionToggle={handleSectionToggle}
+                billingPeriod={billingPeriod}
+                setBillingPeriod={setBillingPeriod}
                 servicesData={services[0]}
                 operator={operator}
               />
