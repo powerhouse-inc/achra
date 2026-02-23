@@ -6,15 +6,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   images: {
     qualities: [100, 75],
-    // Service assets can come from dynamic third-party URLs, so allow all remote hosts.
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
+        hostname: '**.achra.com',
       },
     ],
   },
