@@ -126,7 +126,7 @@ export default function ServicePurchaseForm({
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <Suspense fallback={<PricingCalculatorSkeleton />}>
-              {step.value === 'configure-services' && (
+              {step.value === ServicePurchaseStep.ConfigureServices && (
                 <Suspense fallback={<PricingCalculatorSkeleton />}>
                   <ConfigureServices
                     selectedPlan={selectedPlan}
