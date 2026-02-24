@@ -19,9 +19,6 @@ export default async function OperatorTeamProfilePage({ params }: OperatorTeamPr
 
   const operatorProfile = await getOperatorProfile(operatorSlug)
 
-  console.log('operatorSlug', operatorSlug)
-  console.log('operatorProfile', operatorProfile)
-
   if (!operatorProfile) {
     notFound()
   }

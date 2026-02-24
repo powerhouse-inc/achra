@@ -7,12 +7,14 @@ import {
   SERVICE_PURCHASE_STEP_VALUES,
   SERVICE_PURCHASE_STEPS_ENTRIES,
 } from '../config/constants'
-import type { ServicePurchaseStep } from '../types'
+import { ServicePurchaseStep } from '../types'
 
 interface ServicePurchaseStepContextValues {
   activeStep: ServicePurchaseStep
   visitedSteps: ServicePurchaseStep[]
+  disabledSteps: ServicePurchaseStep[]
   goToStep: (step: ServicePurchaseStep) => void
+  resetPostConfigureSteps: () => void
   goBack: () => void
   goNext: () => void
 }
@@ -37,19 +39,35 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
   const [visitedSteps, setVisitedSteps] = useState<ServicePurchaseStep[]>(() =>
     getStepsUpTo(activeStep),
   )
+  const [disabledSteps, setDisabledSteps] = useState<ServicePurchaseStep[]>([
+    ServicePurchaseStep.Summary,
+    ServicePurchaseStep.Confirmation,
+  ])
 
   const goToStep = useCallback(
     (step: ServicePurchaseStep) => {
       if (step !== activeStep) {
         void setActiveStep(step)
       }
+
       setVisitedSteps((prev) => {
         const stepsUpTo = getStepsUpTo(step)
         return Array.from(new Set([...prev, ...stepsUpTo]))
       })
+
+      setDisabledSteps((prev) => prev.filter((disabledStep) => disabledStep !== step))
     },
-    [activeStep, setActiveStep],
+    [activeStep, setActiveStep, setDisabledSteps, setVisitedSteps],
   )
+
+  const resetPostConfigureSteps = useCallback(() => {
+    setDisabledSteps([ServicePurchaseStep.Summary, ServicePurchaseStep.Confirmation])
+    setVisitedSteps((prev) =>
+      prev.filter(
+        (step) => step !== ServicePurchaseStep.Summary && step !== ServicePurchaseStep.Confirmation,
+      ),
+    )
+  }, [setDisabledSteps, setVisitedSteps])
 
   const goBack = useCallback(() => {
     void setActiveStep((prev) => {
@@ -75,11 +93,13 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
     () => ({
       activeStep,
       visitedSteps,
+      disabledSteps,
       goToStep,
+      resetPostConfigureSteps,
       goBack,
       goNext,
     }),
-    [activeStep, visitedSteps, goBack, goNext, goToStep],
+    [activeStep, visitedSteps, disabledSteps, goBack, goNext, goToStep, resetPostConfigureSteps],
   )
 
   return (

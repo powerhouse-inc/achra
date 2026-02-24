@@ -45,7 +45,7 @@ export default function ServicePurchaseForm({
   services,
 }: Readonly<ServicePurchaseFormProps>) {
   const defaultActivePlan = services.tiers[0].name
-  const { activeStep, goToStep } = useServicePurchaseStep()
+  const { activeStep, goToStep, visitedSteps, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
@@ -71,6 +71,7 @@ export default function ServicePurchaseForm({
   const { control, setValue } = form
 
   // TODO: the operatorId is not in the URL, is this necessary?
+  // Note: It is when the user clicks on the "Configure Services" button in an operator card from another page.
   // Sync operatorId from URL query state
   useEffect(() => {
     if (!operatorIdFromUrl) return
@@ -81,6 +82,7 @@ export default function ServicePurchaseForm({
 
   const selectedPlan = useWatch({ control, name: 'selectedPlan' })
   const enabledSections = useWatch({ control, name: 'enabledSections' })
+  const selectedOperatorId = useWatch({ control, name: 'operatorId' })
 
   const handlePlanChange = useCallback(
     (plan: string) => {
@@ -100,18 +102,33 @@ export default function ServicePurchaseForm({
   )
 
   const handleOnSelectOperator = (operatorId: string) => {
+    const hasPreviousOperator = selectedOperatorId !== undefined
+    const isDifferentOperator = selectedOperatorId !== operatorId
+
+    const hasVisitedSummaryOrConfirmation =
+      visitedSteps.includes(ServicePurchaseStep.Summary) ||
+      visitedSteps.includes(ServicePurchaseStep.Confirmation)
+
+    if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
+      resetPostConfigureSteps()
+    }
     setValue('operatorId', operatorId)
     goToStep(ServicePurchaseStep.ConfigureServices)
   }
 
+  // Note: In the near future there will be more than one operator, by then we will need to modify this function accordingly, selecting the operator by default if none is selected.
+  const handleTabsNavigation = useCallback(
+    (value: string) => {
+      if (!selectedOperatorId) {
+        setValue('operatorId', operator.id)
+      }
+      goToStep(value as ServicePurchaseStep)
+    },
+    [selectedOperatorId, setValue, goToStep, operator.id],
+  )
+
   return (
-    <Tabs
-      value={activeStep}
-      onValueChange={(value) => {
-        goToStep(value as ServicePurchaseStep)
-      }}
-      className="w-full gap-8"
-    >
+    <Tabs value={activeStep} onValueChange={handleTabsNavigation} className="w-full gap-8">
       <StepsTriggersList />
       {SERVICE_PURCHASE_STEPS_ENTRIES.map((step) => (
         <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
