@@ -64,7 +64,7 @@ export function useBudgetStamentTable({
         header: 'Last Modified',
         accessorKey: 'lastModifiedAtUtcIso',
         hasSort: true,
-        sortReverse: false,
+        sortReverse: true,
         isNumeric: false,
       },
     ]
@@ -161,25 +161,53 @@ export function useBudgetStamentTable({
 
       const column = BUDGET_STATEMENTS_TABLE_COLUMNS[sortColumn]
       const sortDirection = headersSort[sortColumn]
+      const effectiveSortDirection =
+        column.sortReverse &&
+        sortDirection !== SortEnum.Neutral &&
+        sortDirection !== SortEnum.Disabled
+          ? sortDirection === SortEnum.Asc
+            ? SortEnum.Desc
+            : SortEnum.Asc
+          : sortDirection
 
       if (sortDirection === SortEnum.Neutral || sortDirection === SortEnum.Disabled) {
         return statements
       }
 
       return [...statements].sort((a, b) => {
+        const getSortableValue = (statement: BudgetStatement): string | number => {
+          if (column.accessorKey === 'lastModifiedAtUtcIso') {
+            if (!statement.lastModifiedAtUtcIso) return -1
+
+            const timestamp = new Date(statement.lastModifiedAtUtcIso).getTime()
+            return Number.isNaN(timestamp) ? -1 : timestamp
+          }
+
+          const value = getNestedValue(statement, column.accessorKey)
+
+          if (value === null) {
+            return ''
+          }
+          if (typeof value === 'string') {
+            return value.toLowerCase()
+          }
+
+          return value
+        }
+
         if (column.accessorKey === 'month') {
           const result = compareMonth(a.month, b.month)
-          return sortDirection === SortEnum.Asc ? result : -result
+          return effectiveSortDirection === SortEnum.Asc ? result : -result
         }
 
-        const aValue = getNestedValue(a, column.accessorKey) ?? ''
-        const bValue = getNestedValue(b, column.accessorKey) ?? ''
+        const aValue = getSortableValue(a)
+        const bValue = getSortableValue(b)
 
         if (aValue < bValue) {
-          return sortDirection === SortEnum.Asc ? -1 : 1
+          return effectiveSortDirection === SortEnum.Asc ? -1 : 1
         }
         if (aValue > bValue) {
-          return sortDirection === SortEnum.Asc ? 1 : -1
+          return effectiveSortDirection === SortEnum.Asc ? 1 : -1
         }
         return 0
       })
