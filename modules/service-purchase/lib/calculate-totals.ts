@@ -7,6 +7,7 @@ import {
   type RsServiceOffering,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getMonths } from './utils'
 
 // ─── Public types ─────────────────────────────────────────────────────────────
 
@@ -65,14 +66,31 @@ function toNumber(raw: unknown): number | null {
   return isNaN(n) ? null : n
 }
 
-function applyDiscountRule(baseAmount: number, rule?: DiscountRule): number {
-  if (rule?.discountType === RsDiscountType.Percentage) {
-    return baseAmount * (1 - rule.discountValue / 100)
+/**
+ * Applies a discount rule to a monthly base price using period-based math.
+ *
+ * Golden rule: discounts are applied to the PERIOD TOTAL, not the monthly base.
+ *   grossTotal  = monthlyBase × months
+ *   PERCENTAGE  → netTotal = grossTotal × (1 − value/100)
+ *   FLAT_AMOUNT → netTotal = grossTotal − value
+ *
+ * Returns the period net total (invoice amount) and the total period saving.
+ */
+function applyDiscountRule(
+  monthlyBase: number,
+  rule: DiscountRule,
+  billingCycle: RsBillingCycle,
+): { discountedPeriodTotal: number; savedAmount: number } {
+  const months = getMonths(billingCycle)
+  const grossTotal = monthlyBase * months
+  const netTotal =
+    rule.discountType === RsDiscountType.Percentage
+      ? grossTotal * (1 - rule.discountValue / 100)
+      : Math.max(0, grossTotal - rule.discountValue)
+  return {
+    discountedPeriodTotal: netTotal,
+    savedAmount: grossTotal - netTotal,
   }
-  if (rule?.discountType === RsDiscountType.FlatAmount) {
-    return Math.max(0, baseAmount - rule.discountValue)
-  }
-  return baseAmount
 }
 
 /**
@@ -221,10 +239,12 @@ export function calculateTotals({
 }: CalculateTotalsInput): CalculateTotalsResult {
   const appliedDiscounts: AppliedDiscount[] = []
   let isPending = false
+  // Both subtotal and total accumulate PERIOD amounts (invoice values), not monthly bases
   let recurringSubtotal = 0
   let recurringTotal = 0
   let setupTotal = 0
   const currency = 'USD'
+  const months = getMonths(selectedBillingCycle)
 
   // ── 1. Tier base price ─────────────────────────────────────────────────────
   const selectedTier = offering.tiers.find((t) => t.id === selectedTierId)
@@ -243,31 +263,32 @@ export function calculateTotals({
       )
       isPending = true
     } else {
-      recurringSubtotal += tierBaseAmount
+      const tierGross = tierBaseAmount * months
+      recurringSubtotal += tierGross
 
       const tierBillingCycleDiscount = selectedTier.billingCycleDiscounts.find(
         (d) => d.billingCycle === selectedBillingCycle,
       )
 
       if (tierBillingCycleDiscount) {
-        const discountedTierAmount = applyDiscountRule(
+        const { discountedPeriodTotal, savedAmount } = applyDiscountRule(
           tierBaseAmount,
           tierBillingCycleDiscount.discountRule,
+          selectedBillingCycle,
         )
-        const tierSavedAmount = tierBaseAmount - discountedTierAmount
-        recurringTotal += discountedTierAmount
-        if (tierSavedAmount > 0) {
+        recurringTotal += discountedPeriodTotal
+        if (savedAmount > 0) {
           appliedDiscounts.push({
             sourceId: selectedTier.id,
             sourceName: selectedTier.name,
             source: 'tier',
             discountType: tierBillingCycleDiscount.discountRule.discountType,
             discountValue: tierBillingCycleDiscount.discountRule.discountValue,
-            savedAmount: tierSavedAmount,
+            savedAmount,
           })
         }
       } else {
-        recurringTotal += tierBaseAmount
+        recurringTotal += tierGross
       }
     }
   }
@@ -278,7 +299,7 @@ export function calculateTotals({
 
   for (const group of activeOptionGroups) {
     if (group.costType === RsGroupCostType.Setup) {
-      // ── SETUP: one-time fee, no billing-cycle discount ─────────────────────
+      // ── SETUP: one-time fee, never affected by billing cycle ───────────────
       const setupPrice = toNumber(group.price)
 
       if (setupPrice === null) {
@@ -307,24 +328,28 @@ export function calculateTotals({
         continue
       }
 
-      recurringSubtotal += baseAmount
+      const groupGross = baseAmount * months
+      recurringSubtotal += groupGross
 
       if (discountRule) {
-        const discountedGroupAmount = applyDiscountRule(baseAmount, discountRule)
-        const groupSavedAmount = baseAmount - discountedGroupAmount
-        recurringTotal += discountedGroupAmount
-        if (groupSavedAmount > 0) {
+        const { discountedPeriodTotal, savedAmount } = applyDiscountRule(
+          baseAmount,
+          discountRule,
+          selectedBillingCycle,
+        )
+        recurringTotal += discountedPeriodTotal
+        if (savedAmount > 0) {
           appliedDiscounts.push({
             sourceId: group.id,
             sourceName: group.name,
             source: 'option-group',
             discountType: discountRule.discountType,
             discountValue: discountRule.discountValue,
-            savedAmount: groupSavedAmount,
+            savedAmount,
           })
         }
       } else {
-        recurringTotal += baseAmount
+        recurringTotal += groupGross
       }
     }
   }

@@ -54,7 +54,6 @@ export function BillingPeriodSelector({
 
   return (
     <div className="mb-2">
-      <p className="text-muted-foreground mb-3 text-sm font-medium">Billing Period</p>
       <div
         className="flex flex-wrap items-center gap-2"
         role="radiogroup"
@@ -62,7 +61,6 @@ export function BillingPeriodSelector({
       >
         {availableCycles.map((cycle) => {
           const label = PERIOD_LABELS[cycle]
-          // const discount = getMaxDiscount(cycle, tiers)
           const isSelected = value === cycle
 
           return (
@@ -74,11 +72,11 @@ export function BillingPeriodSelector({
                 onValueChange(cycle)
               }}
               className={cn(
-                'inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all',
+                'inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-base font-medium transition-all',
                 'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
                 isSelected
-                  ? 'border-violet-300 bg-violet-100 text-violet-700 shadow-sm'
-                  : 'bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground',
+                  ? 'border-border bg-background text-foreground'
+                  : 'border-border bg-accent/50 text-muted-foreground hover:bg-muted hover:text-foreground',
               )}
             >
               {label}

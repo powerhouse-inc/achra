@@ -15,6 +15,10 @@ import {
   isServiceVisibleForFacets,
   resolveAddOnDisplayPrice,
 } from '@/modules/service-purchase/lib/utils'
+import {
+  useAllOptionGroups,
+  useServicePurchaseActions,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
   CatalogStatus,
@@ -29,9 +33,7 @@ import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { PricingCalculatorProvider } from '../pricing-calculator-context'
 export interface PricingCalculatorProps {
   selectedPlan?: string
-  enabledSections?: Record<string, boolean>
   onPlanChange?: (plan: string) => void
-  onSectionToggle?: (sectionId: string, enabled: boolean) => void
   servicesData: RsServiceOffering
   billingPeriod: RsBillingCycle
   /** Current facet selections: categoryKey → selected option value */
@@ -40,13 +42,13 @@ export interface PricingCalculatorProps {
 
 export function PricingCalculator({
   selectedPlan,
-  enabledSections,
   onPlanChange,
-  onSectionToggle,
   servicesData,
   billingPeriod,
   facetSelections,
 }: Readonly<PricingCalculatorProps>) {
+  const storeOptionGroups = useAllOptionGroups()
+  const { setOptionGroupSelected } = useServicePurchaseActions()
   /** Tier names derived from API data, used for column iteration and carousel */
   const tierNames = useMemo(() => servicesData.tiers.map((t) => t.name), [servicesData.tiers])
 
@@ -96,14 +98,6 @@ export function PricingCalculator({
       onPlanChange(plan)
     },
     [onPlanChange],
-  )
-
-  const toggleSection = useCallback(
-    (sectionId: string, enabled: boolean) => {
-      if (!onSectionToggle) return
-      onSectionToggle(sectionId, enabled)
-    },
-    [onSectionToggle],
   )
 
   // Carousel navigation: compute next index from current, then select that plan
@@ -160,21 +154,24 @@ export function PricingCalculator({
                     )
                   : null
 
+                const isAddOnSelected =
+                  storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
+
                 return (
                   <ServiceCatalogRoot
                     key={section.id}
-                    isEnabled={!section.isAddOn || (enabledSections?.[section.id] ?? false)}
+                    isEnabled={!section.isAddOn || isAddOnSelected}
                   >
                     <ServiceCatalogHeader
                       title={section.name}
                       badge={section.isAddOn ? CatalogStatus.Optional : CatalogStatus.Included}
                       hasToggle={section.isAddOn}
                       toggleLabel={section.name}
-                      toggleEnabled={enabledSections?.[section.id]}
+                      toggleEnabled={isAddOnSelected}
                       onToggleChange={
                         section.isAddOn
                           ? (enabled: boolean) => {
-                              toggleSection(section.id, enabled)
+                              setOptionGroupSelected(section.id, enabled)
                             }
                           : undefined
                       }
@@ -214,7 +211,6 @@ export function PricingCalculator({
           {/* Grand Total — receives only the facet-visible option groups */}
           <GrandTotalRowCatalog
             selectedPlan={selectedPlan}
-            enabledSections={enabledSections}
             tiers={servicesData.tiers}
             optionGroups={visibleOptionGroups}
           />

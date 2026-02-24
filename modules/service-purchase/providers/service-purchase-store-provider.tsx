@@ -3,9 +3,19 @@
 import { createContext, useContext, useState } from 'react'
 import { useStore } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
-import type { RsOfferingFacetTarget } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  RsBillingCycle,
+  RsOfferingFacetTarget,
+  RsServiceOffering,
+  RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { createServicePurchaseStore } from '../stores/service-purchase-store'
-import type { ServicePurchaseActions, ServicePurchaseState } from '../types'
+import type {
+  PurchaseOptionGroup,
+  PurchaseTotals,
+  ServicePurchaseActions,
+  ServicePurchaseState,
+} from '../types'
 
 export const ServicePurchaseStoreContext = createContext<ReturnType<
   typeof createServicePurchaseStore
@@ -14,14 +24,15 @@ export const ServicePurchaseStoreContext = createContext<ReturnType<
 export interface ServicePurchaseStoreProviderProps {
   children: React.ReactNode
   facets?: RsOfferingFacetTarget[]
+  services: RsServiceOffering
 }
 
 export function ServicePurchaseStoreProvider({
   children,
   facets,
+  services,
 }: Readonly<ServicePurchaseStoreProviderProps>) {
-  const [store] = useState(() => createServicePurchaseStore({ facets }))
-
+  const [store] = useState(() => createServicePurchaseStore({ facets, services }))
   return (
     <ServicePurchaseStoreContext.Provider value={store}>
       {children}
@@ -53,4 +64,48 @@ export function useServicePurchaseState(): ServicePurchaseState {
 export function useServicePurchaseActions(): ServicePurchaseActions {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.actions)
+}
+
+export function useSelectedTier(): RsServiceSubscriptionTier {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.selectedTier)
+}
+
+export function useSelectedBillingCycle(): RsBillingCycle {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.selectedBillingCycle)
+}
+
+export function useComputedTiers(): RsServiceSubscriptionTier[] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.tiers)
+}
+
+export function useOptionGroups(): PurchaseOptionGroup[] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(
+    store,
+    useShallow((state) => state.optionGroups.filter((g) => !g.isAddOn)),
+  )
+}
+
+export function useSelectedAddOns(): PurchaseOptionGroup[] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(
+    store,
+    useShallow((state) => state.optionGroups.filter((g) => g.isAddOn && g.isSelected)),
+  )
+}
+
+export function useAllOptionGroups(): PurchaseOptionGroup[] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(
+    store,
+    useShallow((state) => state.optionGroups),
+  )
+}
+
+export function usePurchaseTotals(): PurchaseTotals {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.totals)
 }

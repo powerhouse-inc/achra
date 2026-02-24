@@ -2,10 +2,13 @@
 import { useSearchParams } from 'next/navigation'
 import type {
   BuilderProfileState,
-  RsBillingCycle,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
+import {
+  useServicePurchaseActions,
+  useServicePurchaseState,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
 import { FacetSelectionSection } from '../facet-selection-section'
 import { PricingCalculator } from '../service-catalog'
@@ -13,27 +16,21 @@ import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator
 
 export interface ConfigureServicesProps {
   selectedPlan?: string
-  enabledSections?: Record<string, boolean>
   onPlanChange?: (plan: string) => void
-  onSectionToggle?: (sectionId: string, enabled: boolean) => void
   servicesData?: RsServiceOffering
   isLoading?: boolean
   operator: BuilderProfileState
-  billingPeriod: RsBillingCycle
-  setBillingPeriod: (bP: RsBillingCycle) => void
 }
 
 export default function ConfigureServices({
   selectedPlan,
-  enabledSections,
   onPlanChange,
-  onSectionToggle,
   isLoading,
   servicesData,
   operator,
-  billingPeriod,
-  setBillingPeriod,
 }: Readonly<ConfigureServicesProps>) {
+  const { selectedBillingCycle } = useServicePurchaseState()
+  const { setSelectedBillingCycle } = useServicePurchaseActions()
   const searchParams = useSearchParams()
 
   if (isLoading || !servicesData) {
@@ -54,18 +51,16 @@ export default function ConfigureServices({
       <MarketplaceHeader operator={operator} />
       <FacetSelectionSection />
       <BillingPeriodSelector
-        value={billingPeriod}
-        onValueChange={setBillingPeriod}
+        value={selectedBillingCycle}
+        onValueChange={setSelectedBillingCycle}
         tiers={servicesData.tiers}
       />
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <PricingCalculator
           selectedPlan={selectedPlan}
-          enabledSections={enabledSections}
           onPlanChange={onPlanChange}
-          onSectionToggle={onSectionToggle}
           servicesData={servicesData}
-          billingPeriod={billingPeriod}
+          billingPeriod={selectedBillingCycle}
           facetSelections={facetSelections}
         />
       </div>
