@@ -48,7 +48,12 @@ export async function submitRequestAction(
 
     return {
       success: true,
-      data: mutationResult.data,
+      data: {
+        name: result.data.name,
+        teamName: result.data.teamName,
+        email: result.data.email,
+        driveUrl: mutationResult.driveUrl,
+      },
     }
   } catch (error) {
     const message =

@@ -1,4 +1,4 @@
-import { Download, Phone } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { type Maybe, RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -6,7 +6,7 @@ import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import { ScrollToSectionButton } from './scroll-to-section-button'
+import { ActionButtons } from './action-buttons'
 import type { Route } from 'next'
 
 interface ServiceInfoProps {
@@ -24,7 +24,7 @@ interface ServiceInfoProps {
 // Default cover image when thumbnailUrl is not available
 const DEFAULT_COVER = '/services/covers/cover-01.jpg'
 
-export default function ServiceInfo({
+function ServiceInfo({
   light,
   showPurchaseButton,
   showActionButtons,
@@ -35,10 +35,9 @@ export default function ServiceInfo({
   id,
   infoLink,
 }: Readonly<ServiceInfoProps>) {
-  // TODO: Remove this mock once the service info is populated
   const isUnavailable = status === RsTemplateStatus.ComingSoon
   const coverImage = thumbnailUrl ?? DEFAULT_COVER
-  const hasInfoLink = Boolean(infoLink)
+
   return (
     <Card className="border-none bg-transparent p-0 shadow-none">
       <CardContent
@@ -62,12 +61,15 @@ export default function ServiceInfo({
               src={thumbnailUrl ?? coverImage}
               alt={title ?? ''}
               fill
+              // services images can be stored anywhere, so we can't predict the URL to optimize them
+              unoptimized
               className="absolute rounded-lg md:rounded-2xl"
               style={{ objectFit: 'cover' }}
             />
           </div>
           <div className="flex flex-col gap-2">
             <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
+              {/* TODO: extract link to a constant file */}
               <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
                 Book a Call
                 <Phone className="size-4" />
@@ -86,7 +88,7 @@ export default function ServiceInfo({
             )}
           </div>
         </div>
-        <div className={cn('flex flex-col gap-4 lg:gap-6', light && 'gap-0')}>
+        <div className={cn('flex w-full flex-col gap-4 lg:gap-6', light && 'gap-0')}>
           <span
             className={cn(
               'text-foreground hidden text-xl/6 font-bold sm:block',
@@ -99,47 +101,13 @@ export default function ServiceInfo({
             {summary}
           </div>
         </div>
-        {showActionButtons && (
-          <div className="flex items-end justify-end gap-6 sm:hidden lg:flex">
-            {hasInfoLink ? (
-              <Button variant="outline" asChild>
-                <Link href={infoLink as Route} download target="_blank" rel="noreferrer">
-                  Self Assessment Checklist
-                  <Download className="size-4" />
-                </Link>
-              </Button>
-            ) : (
-              <Button variant="outline" disabled>
-                Self Assessment Checklist
-                <Download className="size-4" />
-              </Button>
-            )}
-            <ScrollToSectionButton variant="outline" sectionId="faq">
-              FAQ
-            </ScrollToSectionButton>
-          </div>
-        )}
+        {showActionButtons && <ActionButtons infoLink={infoLink} className="sm:hidden lg:flex" />}
       </CardContent>
       {showActionButtons && (
-        <div className="hidden items-end justify-end gap-6 sm:flex lg:hidden">
-          {hasInfoLink ? (
-            <Button variant="outline" asChild>
-              <Link href={infoLink as Route} download target="_blank" rel="noreferrer">
-                Self Assessment Checklist
-                <Download className="size-4" />
-              </Link>
-            </Button>
-          ) : (
-            <Button variant="outline" disabled>
-              Self Assessment Checklist
-              <Download className="size-4" />
-            </Button>
-          )}
-          <ScrollToSectionButton variant="outline" sectionId="faq">
-            FAQ
-          </ScrollToSectionButton>
-        </div>
+        <ActionButtons infoLink={infoLink} className="hidden sm:flex lg:hidden" />
       )}
     </Card>
   )
 }
+
+export { ServiceInfo }

@@ -1,5 +1,5 @@
-import { ProductInfoSkeleton } from '@/modules/service-purchase/components/service-purchase-form/components/product-info/product-info-skeleton'
-import ServiceInfoSkeleton from '@/modules/shared/components/service-info/service-info-skeleton'
+import { ProductInfoSkeleton } from '@/modules/service-purchase/components/product-info/product-info-skeleton'
+import { ServiceInfoSkeleton } from '@/modules/services/components/service-info'
 import { FaqSectionSkeleton } from '../faq'
 import { PurchaseSectionSkeleton } from '../purchase-section'
 

@@ -1,7 +1,10 @@
 'use client'
 
 import { createContext, type ReactNode, useContext } from 'react'
-import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  RsBillingCycle,
+  RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 
 interface PricingCalculatorContextValue {
   /** The currently selected/active plan */
@@ -13,6 +16,8 @@ interface PricingCalculatorContextValue {
   /** Tier names derived from API data */
   tierNames: string[]
   tiers: RsServiceSubscriptionTier[]
+  /** The billing cycle selected by the user */
+  selectedBillingCycle: RsBillingCycle
 }
 
 const PricingCalculatorContext = createContext<PricingCalculatorContextValue | null>(null)

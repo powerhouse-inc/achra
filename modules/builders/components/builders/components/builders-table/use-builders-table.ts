@@ -87,10 +87,10 @@ export function useBuildersTable({ builders, asSectionContent = false }: UseBuil
       return [...builders].sort((a, b) => {
         const getSortableValue = (builder: BuilderProfileState): string | number => {
           if (column.accessorKey === 'lastModified') {
-            if (!builder.lastModified) return Number.NEGATIVE_INFINITY
+            if (!builder.lastModified) return -1
 
             const timestamp = new Date(builder.lastModified).getTime()
-            return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp
+            return Number.isNaN(timestamp) ? -1 : timestamp
           }
           const value = builder[column.accessorKey as keyof BuilderProfileState]
 

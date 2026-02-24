@@ -2,12 +2,14 @@
 import { useSearchParams } from 'next/navigation'
 import type {
   BuilderProfileState,
+  RsBillingCycle,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
+import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
+import { FacetSelectionSection } from '../facet-selection-section'
 import { PricingCalculator } from '../service-catalog'
 import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator/pricing-calculator-skeleton'
-import { ServicePurchaseSelects } from '../service-purchase-selects'
 
 export interface ConfigureServicesProps {
   selectedPlan?: string
@@ -17,6 +19,8 @@ export interface ConfigureServicesProps {
   servicesData?: RsServiceOffering
   isLoading?: boolean
   operator: BuilderProfileState
+  billingPeriod: RsBillingCycle
+  setBillingPeriod: (bP: RsBillingCycle) => void
 }
 
 export default function ConfigureServices({
@@ -27,6 +31,8 @@ export default function ConfigureServices({
   isLoading,
   servicesData,
   operator,
+  billingPeriod,
+  setBillingPeriod,
 }: Readonly<ConfigureServicesProps>) {
   const searchParams = useSearchParams()
 
@@ -35,8 +41,7 @@ export default function ConfigureServices({
   }
 
   const facetTargets = servicesData.facetTargets
-  // TODO: This will be needed in the table once the API is ready
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const facetSelections = Object.fromEntries(
     facetTargets.map((facet) => [
       facet.categoryKey,
@@ -47,7 +52,12 @@ export default function ConfigureServices({
   return (
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader operator={operator} />
-      <ServicePurchaseSelects facetTargets={facetTargets} />
+      <FacetSelectionSection />
+      <BillingPeriodSelector
+        value={billingPeriod}
+        onValueChange={setBillingPeriod}
+        tiers={servicesData.tiers}
+      />
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <PricingCalculator
           selectedPlan={selectedPlan}
@@ -55,6 +65,8 @@ export default function ConfigureServices({
           onPlanChange={onPlanChange}
           onSectionToggle={onSectionToggle}
           servicesData={servicesData}
+          billingPeriod={billingPeriod}
+          facetSelections={facetSelections}
         />
       </div>
     </div>
