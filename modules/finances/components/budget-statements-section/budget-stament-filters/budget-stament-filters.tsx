@@ -31,14 +31,6 @@ export default function BudgetStatementFilters() {
   return (
     <div className="row flex gap-4">
       <div className="hidden items-center gap-4 md:flex">
-        <Button
-          className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
-          variant="ghost"
-          onClick={onReset}
-          disabled={isResetDisabled}
-        >
-          Reset Filter
-        </Button>
         <BasicSelect
           key={metric}
           value={metric}
@@ -48,17 +40,26 @@ export default function BudgetStatementFilters() {
           }}
           options={Object.values(METRIC_OPTIONS).filter((metric) => metric !== 'Budget')}
           placeholder="Budget"
-          className="md:min-w-25.5 lg:min-w-46"
+          className="md:w-48 lg:w-65"
           isLoading={isMetricPending}
           disabled={isResetPending}
+          matchTriggerWidth
         />
         <StatusSelectBudget
           status={status}
           setStatus={setStatus}
-          className="md:w-25.5 lg:w-46"
+          className="md:w-27 lg:w-46"
           isLoading={isStatusPending}
           disabled={isResetPending}
         />
+        <Button
+          className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
+          variant="ghost"
+          onClick={onReset}
+          disabled={isResetDisabled}
+        >
+          Reset Filter
+        </Button>
       </div>
       <div className="flex gap-4 lg:hidden">
         <div className="flex items-center gap-4 md:hidden">

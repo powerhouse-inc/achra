@@ -47,43 +47,41 @@ export function BasicSelect({
     <Select value={validValue} onValueChange={onValueChange} disabled={disabled}>
       <SelectTrigger
         size="sm"
-        className={cn(
-          'bg-background dark:bg-background [&_svg]:text-foreground! focus-visible:border-input min-w-46 border! shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 [&_svg]:opacity-100 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180',
-          className,
-        )}
         aria-label={ariaLabel ?? label ?? 'Select option'}
         data-slot="single-select-trigger"
+        className={cn(
+          'bg-background dark:bg-background focus-visible:border-input focus-visible:ring-0 focus-visible:ring-offset-0',
+          className,
+        )}
         isLoading={isLoading}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent
-        side="bottom"
-        align="end"
         data-slot="single-select-content"
         className={cn(
-          'rounded-xl',
+          'border-input shadow-xl',
           matchTriggerWidth
-            ? 'w-[var(--radix-select-trigger-width)]'
-            : 'min-w-[var(--radix-select-trigger-width)]',
+            ? 'w-(--radix-select-trigger-width)'
+            : 'min-w-(--radix-select-trigger-width)',
         )}
       >
         <SelectGroup>
           {label && (
             <SelectLabel
-              className="text-foreground mb-1 px-2! py-2 text-xs font-bold tracking-wide"
               data-slot="single-select-label"
+              className="text-muted-foreground text-xs font-medium"
             >
               {label}
             </SelectLabel>
           )}
-          <SelectGroup className="bg-background gap-0.5 rounded-xl px-1! py-1!">
+          <SelectGroup className="bg-background">
             {options.map((option) => (
               <SelectItem
                 key={option}
                 value={option}
                 data-slot="single-select-item"
-                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-sm py-2.5 transition-colors data-[state=checked]:font-medium [&>span:first-child]:hidden"
+                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-sm px-2 py-1.5 transition-colors data-[state=checked]:font-medium [&>span:first-child]:hidden"
               >
                 {option}
               </SelectItem>
