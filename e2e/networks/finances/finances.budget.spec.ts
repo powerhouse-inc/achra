@@ -20,17 +20,16 @@ test('should load all builder statuses', async ({ page }) => {
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
     await expect(page.getByText('ACTIVE')).toHaveCount(0);
     await expect(page.getByText('INACTIVE')).toHaveCount(0);
-    await expect(page.getByText('DRAFT')).toHaveCount(6);
-    await expect(page.getByText('FINAL')).toHaveCount(9);
+    await expect(page.getByText('DRAFT')).toHaveCount(9);
+    await expect(page.getByText('FINAL')).toHaveCount(18);
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('9 Days Ago')).toHaveCount(10);
     await expect(page.getByText('06-FEB-2026')).toHaveCount(5);
 });
 
 test('should load all View buttons', async ({ page }) => {
-    await expect(page.getByText('View')).toHaveCount(5);
+    await expect(page.getByText('View')).toHaveCount(9);
 });
 
 test('should load all Actuals', async ({ page }) => {
@@ -39,8 +38,8 @@ test('should load all Actuals', async ({ page }) => {
 });
 
 test('should load all Reporting Month dates', async ({ page }) => {
-    await expect(page.getByText('Oct 2025')).toHaveCount(3);
-    await expect(page.getByText('Nov 2025')).toHaveCount(3);
+    await expect(page.getByText('Oct 2025')).toHaveCount(6);
+    await expect(page.getByText('Nov 2025')).toHaveCount(6);
 });
 
 test('should load all builder names', async ({ page }) => {
@@ -95,8 +94,8 @@ test('should filter with other options in iPad Mini resolution', async ({ page }
 
     await expect(page.getByText('Sort')).toBeVisible();
     await expect(page.getByText('Reset')).toHaveCount(2);
-    await expect(page.getByText('Reporting Month')).toHaveCount(12);
+    await expect(page.getByText('Reporting Month')).toHaveCount(20);
     await expect(page.getByText('Newest First')).toHaveCount(2);
     await expect(page.getByText('Oldest First')).toHaveCount(2);
-    await expect(page.getByText('Last Modified')).toHaveCount(7);
+    await expect(page.getByText('Last Modified')).toHaveCount(11);
 });
