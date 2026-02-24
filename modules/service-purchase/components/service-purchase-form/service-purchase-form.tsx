@@ -105,7 +105,8 @@ export default function ServicePurchaseForm({
     const isDifferentOperator = selectedOperatorId !== operatorId
 
     const hasVisitedSummaryOrConfirmation =
-      visitedSteps.includes('summary') || visitedSteps.includes('confirmation')
+      visitedSteps.includes(ServicePurchaseStep.Summary) ||
+      visitedSteps.includes(ServicePurchaseStep.Confirmation)
 
     if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
       resetPostConfigureSteps()
