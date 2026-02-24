@@ -50,7 +50,7 @@ export function BasicSelect({
         aria-label={ariaLabel ?? label ?? 'Select option'}
         data-slot="single-select-trigger"
         className={cn(
-          'bg-background dark:bg-background focus-visible:border-input focus-visible:ring-0 focus-visible:ring-offset-0',
+          'bg-background dark:bg-background focus-visible:border-input min-w-46 focus-visible:ring-0 focus-visible:ring-offset-0',
           className,
         )}
         isLoading={isLoading}
