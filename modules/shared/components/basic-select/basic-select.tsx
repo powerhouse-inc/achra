@@ -50,7 +50,7 @@ export function BasicSelect({
         aria-label={ariaLabel ?? label ?? 'Select option'}
         data-slot="single-select-trigger"
         className={cn(
-          'bg-background dark:bg-background focus-visible:border-input min-w-46 focus-visible:ring-0 focus-visible:ring-offset-0',
+          'bg-background dark:bg-background focus-visible:border-input min-w-46 focus-visible:ring-0 focus-visible:ring-offset-0 [&_[data-slot=select-value]]:block [&_[data-slot=select-value]]:truncate',
           className,
         )}
         isLoading={isLoading}
@@ -81,7 +81,7 @@ export function BasicSelect({
                 key={option}
                 value={option}
                 data-slot="single-select-item"
-                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-sm px-2 py-1.5 transition-colors data-[state=checked]:font-medium [&>span:first-child]:hidden"
+                className="hover:bg-accent/40 data-[state=checked]:bg-accent cursor-pointer rounded-sm px-2 py-1.5 transition-colors data-[state=checked]:font-medium [&_[data-slot=select-value]]:block [&_[data-slot=select-value]]:truncate [&>span:first-child]:hidden"
               >
                 {option}
               </SelectItem>
