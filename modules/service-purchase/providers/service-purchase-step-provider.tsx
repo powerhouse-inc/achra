@@ -2,32 +2,18 @@
 
 import { parseAsStringLiteral, useQueryState } from 'nuqs'
 import { createContext, useCallback, useContext, useMemo, useState } from 'react'
-
-const STEP_VALUES = [
-  'product-info',
-  'select-operator',
-  'configure-services',
-  'summary',
-  'confirmation',
-] as const
-
-export type StepValue = (typeof STEP_VALUES)[number]
-
-const DEFAULT_STEP = STEP_VALUES[0]
-
-export const STEPS: ReadonlyArray<{ value: StepValue; label: string }> = [
-  { value: 'product-info', label: 'Product Info' },
-  { value: 'select-operator', label: 'Select Operator' },
-  { value: 'configure-services', label: 'Configure Services' },
-  { value: 'summary', label: 'Summary' },
-  { value: 'confirmation', label: 'Confirmation' },
-]
+import {
+  SERVICE_PURCHASE_DEFAULT_STEP,
+  SERVICE_PURCHASE_STEP_VALUES,
+  SERVICE_PURCHASE_STEPS_ENTRIES,
+} from '../config/constants'
+import { ServicePurchaseStep } from '../types'
 
 interface ServicePurchaseStepContextValues {
-  activeStep: StepValue
-  visitedSteps: StepValue[]
-  disabledSteps: StepValue[]
-  goToStep: (step: StepValue) => void
+  activeStep: ServicePurchaseStep
+  visitedSteps: ServicePurchaseStep[]
+  disabledSteps: ServicePurchaseStep[]
+  goToStep: (step: ServicePurchaseStep) => void
   resetPostConfigureSteps: () => void
   goBack: () => void
   goNext: () => void
@@ -37,23 +23,29 @@ const ServicePurchaseStepContext = createContext<ServicePurchaseStepContextValue
   undefined,
 )
 
-const getStepIndex = (step: StepValue) => STEPS.findIndex((item) => item.value === step)
+const getStepIndex = (step: ServicePurchaseStep) =>
+  SERVICE_PURCHASE_STEPS_ENTRIES.findIndex((item) => item.value === step)
 
-const getStepsUpTo = (step: StepValue): StepValue[] => {
+const getStepsUpTo = (step: ServicePurchaseStep): ServicePurchaseStep[] => {
   const index = getStepIndex(step)
-  return STEPS.slice(0, index + 1).map((s) => s.value)
+  return SERVICE_PURCHASE_STEPS_ENTRIES.slice(0, index + 1).map((s) => s.value)
 }
 
 export function ServicePurchaseStepProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [activeStep, setActiveStep] = useQueryState(
     'step',
-    parseAsStringLiteral(STEP_VALUES).withDefault(DEFAULT_STEP),
+    parseAsStringLiteral(SERVICE_PURCHASE_STEP_VALUES).withDefault(SERVICE_PURCHASE_DEFAULT_STEP),
   )
-  const [visitedSteps, setVisitedSteps] = useState<StepValue[]>(() => getStepsUpTo(activeStep))
-  const [disabledSteps, setDisabledSteps] = useState<StepValue[]>(['summary', 'confirmation'])
+  const [visitedSteps, setVisitedSteps] = useState<ServicePurchaseStep[]>(() =>
+    getStepsUpTo(activeStep),
+  )
+  const [disabledSteps, setDisabledSteps] = useState<ServicePurchaseStep[]>([
+    ServicePurchaseStep.Summary,
+    ServicePurchaseStep.Confirmation,
+  ])
 
   const goToStep = useCallback(
-    (step: StepValue) => {
+    (step: ServicePurchaseStep) => {
       if (step !== activeStep) {
         void setActiveStep(step)
       }
@@ -69,8 +61,12 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
   )
 
   const resetPostConfigureSteps = useCallback(() => {
-    setDisabledSteps(['summary', 'confirmation'])
-    setVisitedSteps((prev) => prev.filter((step) => step !== 'summary' && step !== 'confirmation'))
+    setDisabledSteps([ServicePurchaseStep.Summary, ServicePurchaseStep.Confirmation])
+    setVisitedSteps((prev) =>
+      prev.filter(
+        (step) => step !== ServicePurchaseStep.Summary && step !== ServicePurchaseStep.Confirmation,
+      ),
+    )
   }, [setDisabledSteps, setVisitedSteps])
 
   const goBack = useCallback(() => {
@@ -79,17 +75,17 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
       if (currentIndex <= 0) {
         return prev
       }
-      return STEPS[currentIndex - 1].value
+      return SERVICE_PURCHASE_STEPS_ENTRIES[currentIndex - 1].value
     })
   }, [setActiveStep])
 
   const goNext = useCallback(() => {
     void setActiveStep((prev) => {
       const currentIndex = getStepIndex(prev)
-      if (currentIndex === -1 || currentIndex >= STEPS.length - 1) {
+      if (currentIndex === -1 || currentIndex >= SERVICE_PURCHASE_STEPS_ENTRIES.length - 1) {
         return prev
       }
-      return STEPS[currentIndex + 1].value
+      return SERVICE_PURCHASE_STEPS_ENTRIES[currentIndex + 1].value
     })
   }, [setActiveStep])
 

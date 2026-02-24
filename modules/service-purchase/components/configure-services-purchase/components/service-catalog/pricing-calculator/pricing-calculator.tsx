@@ -1,7 +1,10 @@
 'use client'
 
 import { useCallback, useMemo } from 'react'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  RsBillingCycle,
+  RsServiceOffering,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   buildServiceMetrics,
   buildServiceValues,
@@ -9,6 +12,8 @@ import {
   getBillingCycleValue,
   getConstTpe,
   getCurrency,
+  isServiceVisibleForFacets,
+  resolveAddOnDisplayPrice,
 } from '@/modules/service-purchase/lib/utils'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
@@ -22,13 +27,15 @@ import {
 import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { PricingCalculatorProvider } from '../pricing-calculator-context'
-
 export interface PricingCalculatorProps {
   selectedPlan?: string
   enabledSections?: Record<string, boolean>
   onPlanChange?: (plan: string) => void
   onSectionToggle?: (sectionId: string, enabled: boolean) => void
   servicesData: RsServiceOffering
+  billingPeriod: RsBillingCycle
+  /** Current facet selections: categoryKey → selected option value */
+  facetSelections?: Record<string, string>
 }
 
 export function PricingCalculator({
@@ -37,9 +44,45 @@ export function PricingCalculator({
   onPlanChange,
   onSectionToggle,
   servicesData,
+  billingPeriod,
+  facetSelections,
 }: Readonly<PricingCalculatorProps>) {
   /** Tier names derived from API data, used for column iteration and carousel */
   const tierNames = useMemo(() => servicesData.tiers.map((t) => t.name), [servicesData.tiers])
+
+  /**
+   * Services that pass the current facet filter.
+   * When no facetSelections are provided, all services are visible.
+   */
+  const visibleServices = useMemo(() => {
+    if (!facetSelections) return servicesData.services
+    return servicesData.services.filter((service) =>
+      isServiceVisibleForFacets(service, facetSelections, servicesData.facetTargets),
+    )
+  }, [facetSelections, servicesData.services, servicesData.facetTargets])
+
+  /**
+   * Option groups that still have at least one visible service.
+   * Groups with no services assigned are always shown (not affected by facet filter).
+   * Hidden groups are also excluded from grand-total calculations.
+   */
+  const visibleOptionGroups = useMemo(() => {
+    if (!facetSelections) return servicesData.optionGroups
+
+    const visibleServiceIds = new Set(visibleServices.map((s) => s.optionGroupId).filter(Boolean))
+
+    return servicesData.optionGroups.filter((group) => {
+      const groupHasServices = servicesData.services.some((s) => s.optionGroupId === group.id)
+      if (!groupHasServices) return true // no services → always visible
+      return visibleServiceIds.has(group.id)
+    })
+  }, [facetSelections, visibleServices, servicesData.optionGroups, servicesData.services])
+
+  /** Currently selected tier object, used to resolve add-on display prices */
+  const selectedTier = useMemo(
+    () => servicesData.tiers.find((t) => t.name === (selectedPlan ?? '')) ?? null,
+    [servicesData.tiers, selectedPlan],
+  )
 
   // Carousel index is always derived from selectedPlan — single source of truth
   const mobilePlanIndex = useMemo(() => {
@@ -81,8 +124,9 @@ export function PricingCalculator({
       onNextPlan: handleNextPlan,
       tierNames,
       tiers: servicesData.tiers,
+      selectedBillingCycle: billingPeriod,
     }),
-    [selectedPlan, handlePrevPlan, handleNextPlan, tierNames, servicesData.tiers],
+    [selectedPlan, handlePrevPlan, handleNextPlan, tierNames, servicesData.tiers, billingPeriod],
   )
 
   return (
@@ -100,10 +144,21 @@ export function PricingCalculator({
           />
           {/* Service Sections */}
           <div className="flex flex-col">
-            {[...servicesData.optionGroups]
+            {[...visibleOptionGroups]
               .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
               .map((section) => {
-                const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)
+                const rowBody = visibleServices.filter((s) => s.optionGroupId === section.id)
+
+                // For add-ons, resolve both the base price and the discounted price
+                // (accounting for billing cycle and discountMode).
+                const addOnDisplayPrice = section.isAddOn
+                  ? resolveAddOnDisplayPrice(
+                      section,
+                      selectedTier?.id ?? '',
+                      billingPeriod,
+                      selectedTier?.billingCycleDiscounts ?? [],
+                    )
+                  : null
 
                 return (
                   <ServiceCatalogRoot
@@ -123,7 +178,14 @@ export function PricingCalculator({
                             }
                           : undefined
                       }
-                      groupPrice={getBillingCycleValue(section)}
+                      groupPrice={
+                        section.isAddOn
+                          ? addOnDisplayPrice?.basePrice
+                          : getBillingCycleValue(section)
+                      }
+                      groupDiscountedPrice={
+                        section.isAddOn ? addOnDisplayPrice?.discountedPrice : undefined
+                      }
                       groupCurrency={getCurrency(section)}
                       groupCostType={getConstTpe(section)}
                     />
@@ -149,11 +211,12 @@ export function PricingCalculator({
                 )
               })}
           </div>
-          {/* Grand Total */}
+          {/* Grand Total — receives only the facet-visible option groups */}
           <GrandTotalRowCatalog
             selectedPlan={selectedPlan}
             enabledSections={enabledSections}
-            servicesData={servicesData}
+            tiers={servicesData.tiers}
+            optionGroups={visibleOptionGroups}
           />
         </div>
       </Card>

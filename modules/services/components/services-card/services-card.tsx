@@ -42,6 +42,8 @@ export default function ServicesCard({ service }: ServicesCardProps) {
               src={coverImage}
               alt={service.title}
               fill
+              // services images can be stored anywhere, so we can't predict the URL to optimize them
+              unoptimized
               className="absolute rounded-lg"
               style={{ objectFit: 'cover' }}
             />

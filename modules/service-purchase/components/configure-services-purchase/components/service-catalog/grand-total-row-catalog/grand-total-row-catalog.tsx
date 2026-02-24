@@ -1,7 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  RsOfferingOptionGroup,
+  RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from '../pricing-calculator-context'
@@ -9,19 +12,23 @@ import { usePricingCalculatorContext } from '../pricing-calculator-context'
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string
   enabledSections?: Record<string, boolean>
-  servicesData: RsServiceOffering
+  /** Tier list from the service offering */
+  tiers: RsServiceSubscriptionTier[]
+  /** Pre-filtered option groups (facet-invisible groups must already be excluded) */
+  optionGroups: RsOfferingOptionGroup[]
 }
 
 export function GrandTotalRowCatalog({
   selectedPlan,
   enabledSections,
-  servicesData,
+  tiers,
+  optionGroups,
 }: Readonly<GrandTotalRowCatalogProps>) {
-  const { tierNames } = usePricingCalculatorContext()
+  const { tierNames, selectedBillingCycle } = usePricingCalculatorContext()
 
   const planTotals = useMemo(
-    () => computeGrandTotals(servicesData.tiers, servicesData.optionGroups, enabledSections),
-    [servicesData.tiers, servicesData.optionGroups, enabledSections],
+    () => computeGrandTotals(tiers, optionGroups, enabledSections, selectedBillingCycle),
+    [tiers, optionGroups, enabledSections, selectedBillingCycle],
   )
 
   return (

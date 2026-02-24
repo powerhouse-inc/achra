@@ -1,27 +1,23 @@
 'use client'
 
 import { parseAsString, useQueryState } from 'nuqs'
-import { Suspense, useCallback, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import type {
-  BuilderProfileState,
-  RsResourceTemplate,
-  RsServiceOffering,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import {
-  STEPS,
-  type StepValue,
-  useServicePurchaseStep,
-} from '@/modules/services/context/service-purchase-step-context'
-import { ServiceInfo } from '@/modules/shared/components/service-info'
-import { Button } from '@/modules/shared/components/ui/button'
+  type BuilderProfileState,
+  RsBillingCycle,
+  type RsResourceTemplate,
+  type RsServiceOffering,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
-import { cn } from '@/modules/shared/lib/utils'
+import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
 import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
+import { ConfirmationStep } from '../confirmation-step'
+import { ProductInfo } from '../product-info'
 import { SummaryStep } from '../summary-step'
-import Confirmation from './components/confirmation/confirmation'
-import ProductInfo from './components/product-info/product-info'
 import SelectOperator from './components/select-operator/select-operator'
 import { StepsTriggersList } from './components/steps-trigger/steps-triggers-list'
 
@@ -40,7 +36,7 @@ export interface ServicePurchaseFormValues {
 export interface ServicePurchaseFormProps {
   resourceTemplate: RsResourceTemplate
   operator: BuilderProfileState
-  services: RsServiceOffering[]
+  services: RsServiceOffering
 }
 
 export default function ServicePurchaseForm({
@@ -48,13 +44,14 @@ export default function ServicePurchaseForm({
   operator,
   services,
 }: Readonly<ServicePurchaseFormProps>) {
-  const defaultActivePlan = services[0].tiers[1].name
-  const { activeStep, visitedSteps, goToStep, resetPostConfigureSteps, goBack } =
-    useServicePurchaseStep()
+  const defaultActivePlan = services.tiers[0].name
+  const { activeStep, goToStep, visitedSteps, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
   )
+
+  const [billingPeriod, setBillingPeriod] = useState<RsBillingCycle>(RsBillingCycle.Monthly)
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -73,16 +70,15 @@ export default function ServicePurchaseForm({
 
   const { control, setValue } = form
 
+  // TODO: the operatorId is not in the URL, is this necessary?
   // Sync operatorId from URL query state
   useEffect(() => {
     if (!operatorIdFromUrl) return
     setValue('operatorId', operatorIdFromUrl)
-    goToStep('configure-services')
+    goToStep(ServicePurchaseStep.ConfigureServices)
     void setOperatorIdFromUrl(null)
   }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
-  const name = useWatch({ control, name: 'name' })
-  const email = useWatch({ control, name: 'email' })
   const selectedPlan = useWatch({ control, name: 'selectedPlan' })
   const enabledSections = useWatch({ control, name: 'enabledSections' })
   const selectedOperatorId = useWatch({ control, name: 'operatorId' })
@@ -104,11 +100,7 @@ export default function ServicePurchaseForm({
     [enabledSections, setValue],
   )
 
-  const handleSelectAnOperator = () => {
-    goToStep('select-operator')
-  }
-
-  const handleConfigureServices = (operatorId: string) => {
+  const handleOnSelectOperator = (operatorId: string) => {
     const hasPreviousOperator = selectedOperatorId !== undefined
     const isDifferentOperator = selectedOperatorId !== operatorId
 
@@ -118,17 +110,8 @@ export default function ServicePurchaseForm({
     if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
       resetPostConfigureSteps()
     }
-
     setValue('operatorId', operatorId)
-    goToStep('configure-services')
-  }
-
-  const handleGoToSummary = () => {
-    goToStep('summary')
-  }
-
-  const handleGoBack = () => {
-    goBack()
+    goToStep(ServicePurchaseStep.ConfigureServices)
   }
 
   // Note: In the near future there will be more than one operator, by then we will need to modify this function accordingly, selecting the operator by default if none is selected.
@@ -137,78 +120,43 @@ export default function ServicePurchaseForm({
       if (!selectedOperatorId) {
         setValue('operatorId', operator.id)
       }
-      goToStep(value as StepValue)
+      goToStep(value as ServicePurchaseStep)
     },
     [selectedOperatorId, setValue, goToStep, operator.id],
   )
 
   return (
-    <div className="flex flex-col gap-6 lg:gap-8">
-      <div className={cn('flex w-full justify-end', activeStep !== 'product-info' && 'hidden')}>
-        <Button variant="default" onClick={handleSelectAnOperator}>
-          Select an operator
-        </Button>
-      </div>
-      <div className={cn('flex flex-col gap-8', activeStep === 'product-info' && 'gap-0')}>
-        <div className="flex">
-          <Button
-            variant="secondary"
-            onClick={handleGoBack}
-            className={cn('w-fit', activeStep === 'product-info' && 'hidden')}
-          >
-            Back
-          </Button>
-
-          <div
-            className={cn(
-              'flex w-full items-start justify-end',
-              activeStep !== 'configure-services' && 'hidden',
-            )}
-          >
-            <Button variant="default" onClick={handleGoToSummary}>
-              Continue
-            </Button>
-          </div>
-        </div>
-        <ServiceInfo
-          id={resourceTemplate.id}
-          light={activeStep !== 'product-info'}
-          title={resourceTemplate.title}
-          summary={resourceTemplate.summary}
-          thumbnailUrl={resourceTemplate.thumbnailUrl}
-          status={resourceTemplate.status}
-        />
-      </div>
-      <Tabs value={activeStep} onValueChange={handleTabsNavigation} className="w-full gap-8">
-        <StepsTriggersList />
-        {STEPS.map((step) => (
-          <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
-            {step.value === 'product-info' && (
-              <ProductInfo
-                description={resourceTemplate.description}
-                contentSections={resourceTemplate.contentSections}
+    <Tabs value={activeStep} onValueChange={handleTabsNavigation} className="w-full gap-8">
+      <StepsTriggersList />
+      {SERVICE_PURCHASE_STEPS_ENTRIES.map((step) => (
+        <TabsContent key={step.value} value={step.value} className="m-0 flex flex-col gap-2">
+          {step.value === ServicePurchaseStep.ProductInfo && (
+            <ProductInfo
+              description={resourceTemplate.description}
+              contentSections={resourceTemplate.contentSections}
+            />
+          )}
+          {step.value === ServicePurchaseStep.SelectOperator && (
+            <SelectOperator onSelectOperator={handleOnSelectOperator} operator={operator} />
+          )}
+          {step.value === ServicePurchaseStep.ConfigureServices && (
+            <Suspense fallback={<PricingCalculatorSkeleton />}>
+              <ConfigureServices
+                selectedPlan={selectedPlan}
+                enabledSections={enabledSections}
+                onPlanChange={handlePlanChange}
+                onSectionToggle={handleSectionToggle}
+                billingPeriod={billingPeriod}
+                setBillingPeriod={setBillingPeriod}
+                servicesData={services}
+                operator={operator}
               />
-            )}
-            {step.value === 'select-operator' && (
-              <SelectOperator onConfigureServices={handleConfigureServices} operator={operator} />
-            )}
-            {step.value === 'configure-services' && (
-              <Suspense fallback={<PricingCalculatorSkeleton />}>
-                <ConfigureServices
-                  selectedPlan={selectedPlan}
-                  enabledSections={enabledSections}
-                  onPlanChange={handlePlanChange}
-                  onSectionToggle={handleSectionToggle}
-                  servicesData={services[0]}
-                  operator={operator}
-                />
-              </Suspense>
-            )}
-            {step.value === 'summary' && <SummaryStep operator={operator} />}
-            {step.value === 'confirmation' && <Confirmation name={name} email={email} />}
-          </TabsContent>
-        ))}
-      </Tabs>
-    </div>
+            </Suspense>
+          )}
+          {step.value === ServicePurchaseStep.Summary && <SummaryStep operator={operator} />}
+          {step.value === ServicePurchaseStep.Confirmation && <ConfirmationStep />}
+        </TabsContent>
+      ))}
+    </Tabs>
   )
 }

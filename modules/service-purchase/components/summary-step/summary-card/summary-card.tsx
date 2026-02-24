@@ -1,4 +1,7 @@
+'use client'
+
 import { Landmark } from 'lucide-react'
+import { useServicePurchaseState } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { KeyValueCard } from './key-value-card'
 import { OptionGroup } from './option-group'
@@ -6,6 +9,8 @@ import { ServiceLineItem } from './service-line-item'
 import { SummarySectionHeader } from './summary-section-header'
 
 function SummaryCard() {
+  const { facets } = useServicePurchaseState()
+
   return (
     <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
       <CardHeader className="flex flex-row items-start justify-between gap-4 px-3 pt-3 lg:px-6 lg:pt-6">
@@ -31,10 +36,13 @@ function SummaryCard() {
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">
         {/* Key Information */}
         <div className="bg-accent grid grid-cols-1 gap-2 px-3 py-3 sm:grid-cols-2 md:grid-cols-4 lg:px-6 lg:py-4">
-          <KeyValueCard label="Anonymity" value="High" />
-          <KeyValueCard label="Legal Entity" value="Swiss Association" />
-          <KeyValueCard label="Team" value="Remote" />
-          <KeyValueCard label="SNO Function" value="Operational Hub for OS Builders" />
+          {facets.map((facet) => (
+            <KeyValueCard
+              key={facet.originalFacet.id}
+              label={facet.originalFacet.categoryLabel}
+              value={facet.selectedOption}
+            />
+          ))}
         </div>
 
         {/* Tier & Included Services */}

@@ -1,0 +1,91 @@
+'use client'
+import {
+  RsBillingCycle,
+  type RsServiceSubscriptionTier,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { cn } from '@/modules/shared/lib/utils'
+
+const PERIOD_ORDER: RsBillingCycle[] = [
+  RsBillingCycle.Monthly,
+  RsBillingCycle.Quarterly,
+  RsBillingCycle.SemiAnnual,
+  RsBillingCycle.Annual,
+  RsBillingCycle.OneTime,
+]
+
+const PERIOD_LABELS: Record<RsBillingCycle, string> = {
+  [RsBillingCycle.Monthly]: 'Monthly',
+  [RsBillingCycle.Quarterly]: 'Quarterly',
+  [RsBillingCycle.SemiAnnual]: 'Semi-Annual',
+  [RsBillingCycle.Annual]: 'Annual',
+  [RsBillingCycle.OneTime]: 'One-Time',
+}
+
+function getAvailableCycles(tiers: RsServiceSubscriptionTier[]): RsBillingCycle[] {
+  const cyclesSet = new Set<RsBillingCycle>()
+
+  for (const tier of tiers) {
+    if (tier.defaultBillingCycle) {
+      cyclesSet.add(tier.defaultBillingCycle)
+    }
+    for (const { billingCycle } of tier.billingCycleDiscounts) {
+      cyclesSet.add(billingCycle)
+    }
+  }
+
+  return PERIOD_ORDER.filter((cycle) => cyclesSet.has(cycle))
+}
+
+interface BillingPeriodSelectorProps {
+  value: RsBillingCycle
+  onValueChange: (value: RsBillingCycle) => void
+  // TODO: replace with API data once endpoint is stable — currently using SERVICES_DATA mock
+  tiers: RsServiceSubscriptionTier[]
+}
+
+export function BillingPeriodSelector({
+  value,
+  onValueChange,
+  tiers,
+}: Readonly<BillingPeriodSelectorProps>) {
+  const availableCycles = getAvailableCycles(tiers)
+
+  if (availableCycles.length === 0) return null
+
+  return (
+    <div className="mb-2">
+      <p className="text-muted-foreground mb-3 text-sm font-medium">Billing Period</p>
+      <div
+        className="flex flex-wrap items-center gap-2"
+        role="radiogroup"
+        aria-label="Billing period"
+      >
+        {availableCycles.map((cycle) => {
+          const label = PERIOD_LABELS[cycle]
+          // const discount = getMaxDiscount(cycle, tiers)
+          const isSelected = value === cycle
+
+          return (
+            <button
+              key={cycle}
+              role="radio"
+              aria-checked={isSelected}
+              onClick={() => {
+                onValueChange(cycle)
+              }}
+              className={cn(
+                'inline-flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all',
+                'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+                isSelected
+                  ? 'border-violet-300 bg-violet-100 text-violet-700 shadow-sm'
+                  : 'bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground',
+              )}
+            >
+              {label}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
