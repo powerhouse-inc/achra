@@ -6,7 +6,6 @@ import { useForm, useWatch } from 'react-hook-form'
 import type {
   BuilderProfileState,
   RsResourceTemplate,
-  RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
@@ -33,23 +32,20 @@ export interface ServicePurchaseFormValues {
   legalEntity: string
   teamStructure: string
   anonymityLevel: string
-  selectedPlan?: string
 }
 
 export interface ServicePurchaseFormProps {
   resourceTemplate: RsResourceTemplate
   operator: BuilderProfileState
-  services: RsServiceOffering
 }
 
-export default function ServicePurchaseForm({
+export function ServicePurchaseForm({
   resourceTemplate,
   operator,
-  services,
 }: Readonly<ServicePurchaseFormProps>) {
+  const tiers = useComputedTiers()
   const { setSelectedTier } = useServicePurchaseActions()
   const selectedTier = useSelectedTier()
-  const defaultActivePlan = selectedTier.name
   const { activeStep, goToStep, visitedSteps, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
@@ -63,16 +59,10 @@ export default function ServicePurchaseForm({
       name: '',
       teamName: '',
       email: '',
-      legalEntity: 'Swiss Association',
-      teamStructure: 'Remote Team',
-      anonymityLevel: 'High (Standard)',
-      selectedPlan: defaultActivePlan,
     },
   })
 
   const { control, setValue } = form
-
-  const tiers = useComputedTiers()
 
   // TODO: the operatorId is not in the URL, is this necessary?
   // Note: It is when the user clicks on the "Configure Services" button in an operator card from another page.
@@ -84,17 +74,16 @@ export default function ServicePurchaseForm({
     void setOperatorIdFromUrl(null)
   }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
-  const selectedPlan = useWatch({ control, name: 'selectedPlan' })
+  const selectedPlan = selectedTier.name
   const selectedOperatorId = useWatch({ control, name: 'operatorId' })
 
   const handlePlanChange = useCallback(
     (planName: string) => {
       const tier = tiers.find((t) => t.name === planName)
       if (!tier) return
-      setValue('selectedPlan', planName)
       setSelectedTier(tier.id)
     },
-    [tiers, setSelectedTier, setValue],
+    [tiers, setSelectedTier],
   )
 
   const handleOnSelectOperator = (operatorId: string) => {
@@ -142,7 +131,6 @@ export default function ServicePurchaseForm({
               <ConfigureServices
                 selectedPlan={selectedPlan}
                 onPlanChange={handlePlanChange}
-                servicesData={services}
                 operator={operator}
               />
             </Suspense>

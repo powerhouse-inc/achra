@@ -50,7 +50,7 @@ function HeaderCatalogPlan({
       </div>
 
       {/* MOBILE CAROUSEL */}
-      <div className="bg-primary/10 flex h-full w-full items-center justify-between px-1 lg:hidden">
+      <div className="bg-primary/10 flex h-full w-full items-center justify-between px-1 py-2 lg:hidden">
         <Button variant="ghost" size="icon" onClick={onPrevPlan} className="size-8">
           <ChevronLeft className="size-5" />
         </Button>

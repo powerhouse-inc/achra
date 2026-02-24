@@ -109,3 +109,8 @@ export function usePurchaseTotals(): PurchaseTotals {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.totals)
 }
+
+export function useServiceOffering(): RsServiceOffering {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.services)
+}

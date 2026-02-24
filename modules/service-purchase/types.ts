@@ -161,6 +161,8 @@ export type ServicePurchaseActions = SubmitRequestSliceActions &
   TotalsSliceActions
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
+  /** Raw service offering data — static, set once at store initialization */
+  services: RsServiceOffering
   actions: ServicePurchaseActions
 }
 

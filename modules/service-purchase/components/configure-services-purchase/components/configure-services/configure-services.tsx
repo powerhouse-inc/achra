@@ -1,40 +1,28 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
-import type {
-  BuilderProfileState,
-  RsServiceOffering,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
+import { useServiceOffering } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
 import { FacetSelectionSection } from '../facet-selection-section'
 import { PricingCalculator } from '../service-catalog'
-import { PricingCalculatorSkeleton } from '../service-catalog/pricing-calculator/pricing-calculator-skeleton'
 
 export interface ConfigureServicesProps {
   selectedPlan?: string
   onPlanChange?: (plan: string) => void
-  servicesData?: RsServiceOffering
-  isLoading?: boolean
   operator: BuilderProfileState
 }
 
 export default function ConfigureServices({
   selectedPlan,
   onPlanChange,
-  isLoading,
-  servicesData,
   operator,
 }: Readonly<ConfigureServicesProps>) {
+  const servicesData = useServiceOffering()
   const searchParams = useSearchParams()
 
-  if (isLoading || !servicesData) {
-    return <PricingCalculatorSkeleton />
-  }
-
-  const facetTargets = servicesData.facetTargets
-
   const facetSelections = Object.fromEntries(
-    facetTargets.map((facet) => [
+    servicesData.facetTargets.map((facet) => [
       facet.categoryKey,
       searchParams.get(facet.categoryKey) ?? facet.selectedOptions[0],
     ]),

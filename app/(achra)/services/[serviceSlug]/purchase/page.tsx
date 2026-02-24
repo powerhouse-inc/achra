@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
-import ServicePurchaseForm from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
+import { ServicePurchaseForm } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { ServicePurchaseStepProvider } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
@@ -34,11 +34,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
         <ServicePurchaseStepProvider>
           <div className="flex flex-col gap-6 lg:gap-8">
             <ServiceHeader resourceTemplate={resourceTemplate} />
-            <ServicePurchaseForm
-              resourceTemplate={resourceTemplate}
-              operator={operator}
-              services={services}
-            />
+            <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
           </div>
         </ServicePurchaseStepProvider>
       </ServicePurchaseStoreProvider>
