@@ -70,7 +70,7 @@ export function TransparencyCard({
               <div
                 className={cn(
                   'flex min-w-[132px] items-center text-base/6 font-semibold',
-                  isTotal ? 'text-foreground' : 'text-foreground/30',
+                  isTotal ? 'text-foreground' : 'text-foreground/50',
                 )}
               >
                 {header}

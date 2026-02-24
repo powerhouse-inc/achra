@@ -20,15 +20,13 @@ export function NumberCell({
 
   const color = negative
     ? isIncome
-      ? isTotal
-        ? 'text-status-success'
-        : 'text-status-success/30'
+      ? 'text-status-success'
       : isTotal
         ? 'text-destructive'
-        : 'text-destructive/30'
+        : 'text-destructive/50'
     : isTotal
       ? 'text-foreground'
-      : 'text-foreground/50'
+      : 'text-foreground/70'
 
   return (
     <div
