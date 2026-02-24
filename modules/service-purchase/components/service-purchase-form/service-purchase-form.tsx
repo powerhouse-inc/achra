@@ -71,6 +71,7 @@ export default function ServicePurchaseForm({
   const { control, setValue } = form
 
   // TODO: the operatorId is not in the URL, is this necessary?
+  // Note: It is when the user clicks on the "Configure Services" button in an operator card from another page.
   // Sync operatorId from URL query state
   useEffect(() => {
     if (!operatorIdFromUrl) return
