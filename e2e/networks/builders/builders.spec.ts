@@ -148,7 +148,7 @@ test('should sort builders by name in ascending order', async ({ page }) => {
 test('should sort builders by name in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Builders' }).click();
     await page.getByRole('button', { name: 'Builders' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('PW Powerhouse')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('RGH Revenue Generating Hub')).toBeVisible();
 });
 
 test('should sort builders by skills in ascending order', async ({ page }) => {
@@ -177,14 +177,14 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('3 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('5 Days Ago')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('9 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('11 Days Ago')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
