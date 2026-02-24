@@ -1,15 +1,12 @@
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorCard } from '@/modules/shared/components/operator-card'
 
-interface SelectOperatorProps {
+interface SelectOperatorStepProps {
   onSelectOperator: (operatorId: string) => void
   operator: BuilderProfileState
 }
 
-export default function SelectOperator({
-  onSelectOperator,
-  operator,
-}: Readonly<SelectOperatorProps>) {
+function SelectOperatorStep({ onSelectOperator, operator }: Readonly<SelectOperatorStepProps>) {
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <div className="flex flex-col gap-2">
@@ -28,3 +25,5 @@ export default function SelectOperator({
     </div>
   )
 }
+
+export { SelectOperatorStep }

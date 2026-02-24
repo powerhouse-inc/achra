@@ -88,7 +88,7 @@ export default async function ExpenseReportsPage({
   ])
   const areBothDataEmpty =
     (budgetStatement === null || budgetStatement.expenseReport.wallets.length === 0) &&
-    snapshotReport?.accounts?.length === 0
+    (snapshotReport?.accounts?.length ?? 0) === 0
 
   return (
     <>

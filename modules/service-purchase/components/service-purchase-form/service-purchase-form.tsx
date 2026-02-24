@@ -17,8 +17,8 @@ import ConfigureServices from '../configure-services-purchase/components/configu
 import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
 import { ConfirmationStep } from '../confirmation-step'
 import { ProductInfo } from '../product-info'
+import { SelectOperatorStep } from '../select-operator-step'
 import { SummaryStep } from '../summary-step'
-import SelectOperator from './components/select-operator/select-operator'
 import { StepsTriggersList } from './components/steps-trigger/steps-triggers-list'
 
 export interface ServicePurchaseFormValues {
@@ -138,7 +138,7 @@ export default function ServicePurchaseForm({
             />
           )}
           {step.value === ServicePurchaseStep.SelectOperator && (
-            <SelectOperator onSelectOperator={handleOnSelectOperator} operator={operator} />
+            <SelectOperatorStep onSelectOperator={handleOnSelectOperator} operator={operator} />
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <Suspense fallback={<PricingCalculatorSkeleton />}>

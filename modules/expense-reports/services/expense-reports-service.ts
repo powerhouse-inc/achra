@@ -1,4 +1,4 @@
-import { format, parse } from 'date-fns'
+import { parse } from 'date-fns'
 import { cacheLife } from 'next/cache'
 import {
   type AccountSnapshotsQuery,
@@ -104,7 +104,8 @@ export async function getAccountSnapshotForMonth(
     },
   })()
 
-  const monthString = format(month, 'MMMyyyy').toUpperCase()
+  const monthString = formatMonthString(month).toUpperCase()
+
   const snapshotReport =
     (data.budgetStatements.find((bs) => bs.month === monthString)
       ?.snapshotReport as Partial<BudgetStatementSnapshotReport> | null) ?? null
