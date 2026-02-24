@@ -52,7 +52,7 @@ export function AdvancedInnerTable({
                     // eslint-disable-next-line react/no-array-index-key
                     key={`header-${columnIndex}`}
                     className={cn(
-                      'text-foreground/30 overflow-hidden px-2 py-2 text-base/6 font-semibold lg:px-4',
+                      'text-foreground/50 overflow-hidden px-2 py-2 text-base/6 font-semibold lg:px-4',
                       {
                         'border-r': column.hasBorderRight,
                       },
