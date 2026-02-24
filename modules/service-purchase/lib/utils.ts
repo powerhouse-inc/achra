@@ -49,7 +49,7 @@ export function getMonths(cycle: RsBillingCycle): number {
     case RsBillingCycle.OneTime:
       return 1
     default:
-      return 1 // Monthly, OneTime, or unknown
+      throw new Error(`Unhandled billing cycle: ${String(cycle)}`)
   }
 }
 

@@ -18,7 +18,7 @@ const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
 }
 
 export function StepsTriggersList() {
-  const { activeStep, visitedSteps } = useServicePurchaseStep()
+  const { activeStep, visitedSteps, disabledSteps } = useServicePurchaseStep()
 
   return (
     <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">
@@ -34,6 +34,7 @@ export function StepsTriggersList() {
                 'md:border-border md:data-[state=active]:border-primary dark:md:data-[state=active]:border-primary flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none',
                 isVisited && !isActive && 'md:border-primary/70 dark:md:border-primary/70',
               )}
+              disabled={disabledSteps.includes(step.value)}
             >
               <div
                 className={cn(

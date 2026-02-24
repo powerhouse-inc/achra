@@ -1,10 +1,7 @@
 'use client'
 
 import { useCallback, useMemo } from 'react'
-import type {
-  RsBillingCycle,
-  RsServiceOffering,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   buildServiceMetrics,
   buildServiceValues,
@@ -18,6 +15,7 @@ import {
 import {
   useAllOptionGroups,
   useServicePurchaseActions,
+  useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
@@ -35,7 +33,6 @@ export interface PricingCalculatorProps {
   selectedPlan?: string
   onPlanChange?: (plan: string) => void
   servicesData: RsServiceOffering
-  billingPeriod: RsBillingCycle
   /** Current facet selections: categoryKey → selected option value */
   facetSelections?: Record<string, string>
 }
@@ -44,11 +41,11 @@ export function PricingCalculator({
   selectedPlan,
   onPlanChange,
   servicesData,
-  billingPeriod,
   facetSelections,
 }: Readonly<PricingCalculatorProps>) {
   const storeOptionGroups = useAllOptionGroups()
   const { setOptionGroupSelected } = useServicePurchaseActions()
+  const { selectedBillingCycle: billingPeriod } = useServicePurchaseState()
   /** Tier names derived from API data, used for column iteration and carousel */
   const tierNames = useMemo(() => servicesData.tiers.map((t) => t.name), [servicesData.tiers])
 

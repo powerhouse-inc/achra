@@ -3,6 +3,10 @@ import {
   RsBillingCycle,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  useServicePurchaseActions,
+  useServicePurchaseState,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
 
 const PERIOD_ORDER: RsBillingCycle[] = [
@@ -37,17 +41,13 @@ function getAvailableCycles(tiers: RsServiceSubscriptionTier[]): RsBillingCycle[
 }
 
 interface BillingPeriodSelectorProps {
-  value: RsBillingCycle
-  onValueChange: (value: RsBillingCycle) => void
   // TODO: replace with API data once endpoint is stable — currently using SERVICES_DATA mock
   tiers: RsServiceSubscriptionTier[]
 }
 
-export function BillingPeriodSelector({
-  value,
-  onValueChange,
-  tiers,
-}: Readonly<BillingPeriodSelectorProps>) {
+export function BillingPeriodSelector({ tiers }: Readonly<BillingPeriodSelectorProps>) {
+  const { selectedBillingCycle } = useServicePurchaseState()
+  const { setSelectedBillingCycle } = useServicePurchaseActions()
   const availableCycles = getAvailableCycles(tiers)
 
   if (availableCycles.length === 0) return null
@@ -61,7 +61,7 @@ export function BillingPeriodSelector({
       >
         {availableCycles.map((cycle) => {
           const label = PERIOD_LABELS[cycle]
-          const isSelected = value === cycle
+          const isSelected = selectedBillingCycle === cycle
 
           return (
             <button
@@ -69,7 +69,7 @@ export function BillingPeriodSelector({
               role="radio"
               aria-checked={isSelected}
               onClick={() => {
-                onValueChange(cycle)
+                setSelectedBillingCycle(cycle)
               }}
               className={cn(
                 'inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-base font-medium transition-all',

@@ -5,10 +5,6 @@ import type {
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
-import {
-  useServicePurchaseActions,
-  useServicePurchaseState,
-} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
 import { FacetSelectionSection } from '../facet-selection-section'
 import { PricingCalculator } from '../service-catalog'
@@ -29,8 +25,6 @@ export default function ConfigureServices({
   servicesData,
   operator,
 }: Readonly<ConfigureServicesProps>) {
-  const { selectedBillingCycle } = useServicePurchaseState()
-  const { setSelectedBillingCycle } = useServicePurchaseActions()
   const searchParams = useSearchParams()
 
   if (isLoading || !servicesData) {
@@ -50,17 +44,12 @@ export default function ConfigureServices({
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader operator={operator} />
       <FacetSelectionSection />
-      <BillingPeriodSelector
-        value={selectedBillingCycle}
-        onValueChange={setSelectedBillingCycle}
-        tiers={servicesData.tiers}
-      />
+      <BillingPeriodSelector tiers={servicesData.tiers} />
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <PricingCalculator
           selectedPlan={selectedPlan}
           onPlanChange={onPlanChange}
           servicesData={servicesData}
-          billingPeriod={selectedBillingCycle}
           facetSelections={facetSelections}
         />
       </div>
