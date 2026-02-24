@@ -25,8 +25,7 @@ function ServiceCatalogFooter({
   tiers,
   services,
 }: Readonly<ServiceCatalogFooterProps>) {
-  const { activePlan } = usePricingCalculatorContext()
-  const { tierNames } = usePricingCalculatorContext()
+  const { activePlan, tierNames, selectedBillingCycle } = usePricingCalculatorContext()
   const isSetup = optionGroup.costType === RsGroupCostType.Setup
 
   const subtotalValues = useMemo(() => {
@@ -34,8 +33,8 @@ function ServiceCatalogFooter({
     if (optionGroup.isAddOn) {
       return computeAddonSubtotals(optionGroup, services ?? [], tiers)
     }
-    return computeRecurringSubtotals(optionGroup, tiers)
-  }, [isSetup, optionGroup, services, tiers])
+    return computeRecurringSubtotals(optionGroup, tiers, selectedBillingCycle)
+  }, [isSetup, optionGroup, services, tiers, selectedBillingCycle])
 
   const label = isSetup ? 'TOTAL SETUP FEE' : 'SUBTOTAL'
   const setupFeeText =

@@ -1,5 +1,11 @@
 import type { submitRequestSchema } from './lib/submit-request-schema'
-import type { RsOfferingFacetTarget } from '../__generated__/graphql/switchboard-generated'
+import type {
+  RsBillingCycle,
+  RsGroupCostType,
+  RsOfferingFacetTarget,
+  RsServiceOffering,
+  RsServiceSubscriptionTier,
+} from '../__generated__/graphql/switchboard-generated'
 import type { z } from 'zod'
 import type { StoreApi } from 'zustand'
 
@@ -63,17 +69,100 @@ export interface FacetsSlice extends FacetsSliceState {
   actions: FacetsSliceActions
 }
 
+// ─── tiers slice ─
+export interface TiersSliceState {
+  tiers: RsServiceSubscriptionTier[]
+  selectedTier: RsServiceSubscriptionTier
+  selectedBillingCycle: RsBillingCycle
+}
+
+export interface TiersSliceActions {
+  setSelectedTier: (id: string) => void
+  setSelectedBillingCycle: (cycle: RsBillingCycle) => void
+}
+
+export interface TiersSlice extends TiersSliceState {
+  actions: TiersSliceActions
+}
+
+// ─── option groups slice ─
+export interface PurchaseOptionGroupServiceMetric {
+  label: string
+  value: string
+}
+
+export interface PurchaseOptionGroupService {
+  id: string
+  title: string
+  resolvedValue: string | null
+  metrics: PurchaseOptionGroupServiceMetric[]
+}
+
+export interface PurchaseOptionGroup {
+  id: string
+  name: string
+  costType: RsGroupCostType | null
+  isAddOn: boolean
+  isSelected: boolean
+  originalPrice: number
+  resolvedPrice: number
+  services: PurchaseOptionGroupService[]
+}
+
+export interface OptionGroupsSliceState {
+  optionGroups: PurchaseOptionGroup[]
+}
+
+export interface OptionGroupsSliceActions {
+  setOptionGroupSelected: (id: string, isSelected: boolean) => void
+}
+
+export interface OptionGroupsSlice extends OptionGroupsSliceState {
+  actions: OptionGroupsSliceActions
+}
+
+// ─── totals slice ─────────────────────────────────────────────────────────────
+
+export interface PurchaseTotals {
+  /** Monthly equivalent of (tier + active recurring groups + active add-ons) after discounts */
+  recurringTotal: number
+  /** Sum of all active SETUP fees */
+  setupTotal: number
+}
+
+export interface TotalsSliceState {
+  totals: PurchaseTotals
+}
+
+export interface TotalsSliceActions {
+  recomputeTotals: () => void
+}
+
+export interface TotalsSlice extends TotalsSliceState {
+  actions: TotalsSliceActions
+}
+
+// ─── store composition
 // store init props (for dependency injection from page)
 export interface ServicePurchaseStoreProps {
   facets?: RsOfferingFacetTarget[]
+  services: RsServiceOffering
 }
 
-// store (composed from slices)
-export type ServicePurchaseState = SubmitRequestSliceState & FacetsSliceState
-export type ServicePurchaseActions = SubmitRequestSliceActions & FacetsSliceActions // & otherActionsSliceLater
+export type ServicePurchaseState = SubmitRequestSliceState &
+  FacetsSliceState &
+  TiersSliceState &
+  OptionGroupsSliceState &
+  TotalsSliceState
+export type ServicePurchaseActions = SubmitRequestSliceActions &
+  FacetsSliceActions &
+  TiersSliceActions &
+  OptionGroupsSliceActions &
+  TotalsSliceActions
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
   actions: ServicePurchaseActions
 }
 
 export type ServicePurchaseStoreSet = StoreApi<ServicePurchaseStore>['setState']
+export type ServicePurchaseStoreGet = StoreApi<ServicePurchaseStore>['getState']

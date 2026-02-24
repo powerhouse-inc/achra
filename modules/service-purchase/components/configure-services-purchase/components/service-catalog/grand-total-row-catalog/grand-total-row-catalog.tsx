@@ -6,12 +6,12 @@ import type {
   RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
+import { useAllOptionGroups } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from '../pricing-calculator-context'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string
-  enabledSections?: Record<string, boolean>
   /** Tier list from the service offering */
   tiers: RsServiceSubscriptionTier[]
   /** Pre-filtered option groups (facet-invisible groups must already be excluded) */
@@ -20,11 +20,16 @@ interface GrandTotalRowCatalogProps {
 
 export function GrandTotalRowCatalog({
   selectedPlan,
-  enabledSections,
   tiers,
   optionGroups,
 }: Readonly<GrandTotalRowCatalogProps>) {
   const { tierNames, selectedBillingCycle } = usePricingCalculatorContext()
+  const storeOptionGroups = useAllOptionGroups()
+
+  const enabledSections = useMemo(
+    () => Object.fromEntries(storeOptionGroups.map((g) => [g.id, g.isSelected])),
+    [storeOptionGroups],
+  )
 
   const planTotals = useMemo(
     () => computeGrandTotals(tiers, optionGroups, enabledSections, selectedBillingCycle),

@@ -1,18 +1,22 @@
 'use client'
 
 import { parseAsString, useQueryState } from 'nuqs'
-import { Suspense, useCallback, useEffect, useState } from 'react'
+import { Suspense, useCallback, useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import {
-  type BuilderProfileState,
-  RsBillingCycle,
-  type RsResourceTemplate,
-  type RsServiceOffering,
+import type {
+  BuilderProfileState,
+  RsResourceTemplate,
+  RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
+import {
+  useComputedTiers,
+  useSelectedTier,
+  useServicePurchaseActions,
+} from '../../providers/service-purchase-store-provider'
 import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
 import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
 import { ConfirmationStep } from '../confirmation-step'
@@ -30,7 +34,6 @@ export interface ServicePurchaseFormValues {
   teamStructure: string
   anonymityLevel: string
   selectedPlan?: string
-  enabledSections: Record<string, boolean>
 }
 
 export interface ServicePurchaseFormProps {
@@ -44,14 +47,14 @@ export default function ServicePurchaseForm({
   operator,
   services,
 }: Readonly<ServicePurchaseFormProps>) {
-  const defaultActivePlan = services.tiers[0].name
+  const { setSelectedTier } = useServicePurchaseActions()
+  const selectedTier = useSelectedTier()
+  const defaultActivePlan = selectedTier.name
   const { activeStep, goToStep, visitedSteps, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
   )
-
-  const [billingPeriod, setBillingPeriod] = useState<RsBillingCycle>(RsBillingCycle.Monthly)
 
   const form = useForm<ServicePurchaseFormValues>({
     mode: 'onChange',
@@ -64,11 +67,12 @@ export default function ServicePurchaseForm({
       teamStructure: 'Remote Team',
       anonymityLevel: 'High (Standard)',
       selectedPlan: defaultActivePlan,
-      enabledSections: {},
     },
   })
 
   const { control, setValue } = form
+
+  const tiers = useComputedTiers()
 
   // TODO: the operatorId is not in the URL, is this necessary?
   // Note: It is when the user clicks on the "Configure Services" button in an operator card from another page.
@@ -81,24 +85,16 @@ export default function ServicePurchaseForm({
   }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
   const selectedPlan = useWatch({ control, name: 'selectedPlan' })
-  const enabledSections = useWatch({ control, name: 'enabledSections' })
   const selectedOperatorId = useWatch({ control, name: 'operatorId' })
 
   const handlePlanChange = useCallback(
-    (plan: string) => {
-      setValue('selectedPlan', plan)
+    (planName: string) => {
+      const tier = tiers.find((t) => t.name === planName)
+      if (!tier) return
+      setValue('selectedPlan', planName)
+      setSelectedTier(tier.id)
     },
-    [setValue],
-  )
-
-  const handleSectionToggle = useCallback(
-    (sectionId: string, enabled: boolean) => {
-      setValue('enabledSections', {
-        ...enabledSections,
-        [sectionId]: enabled,
-      })
-    },
-    [enabledSections, setValue],
+    [tiers, setSelectedTier, setValue],
   )
 
   const handleOnSelectOperator = (operatorId: string) => {
@@ -145,11 +141,7 @@ export default function ServicePurchaseForm({
             <Suspense fallback={<PricingCalculatorSkeleton />}>
               <ConfigureServices
                 selectedPlan={selectedPlan}
-                enabledSections={enabledSections}
                 onPlanChange={handlePlanChange}
-                onSectionToggle={handleSectionToggle}
-                billingPeriod={billingPeriod}
-                setBillingPeriod={setBillingPeriod}
                 servicesData={services}
                 operator={operator}
               />
