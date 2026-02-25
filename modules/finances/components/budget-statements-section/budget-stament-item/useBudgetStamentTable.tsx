@@ -33,7 +33,7 @@ export function useBudgetStamentTable({
   const BUDGET_STATEMENTS_TABLE_COLUMNS: BudgetStatementsTableColumn[] = useMemo(() => {
     return [
       {
-        header: 'Contributors',
+        header: 'Builders',
         accessorKey: 'owner.name',
         hasSort: true,
         sortReverse: false,
