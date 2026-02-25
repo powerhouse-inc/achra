@@ -9,6 +9,7 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
 import {
@@ -127,13 +128,15 @@ export function ServicePurchaseForm({
             <SelectOperatorStep onSelectOperator={handleOnSelectOperator} operator={operator} />
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
-            <Suspense fallback={<PricingCalculatorSkeleton />}>
-              <ConfigureServices
-                selectedPlan={selectedPlan}
-                onPlanChange={handlePlanChange}
-                operator={operator}
-              />
-            </Suspense>
+            <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the service configuration. Please try again later.">
+              <Suspense fallback={<PricingCalculatorSkeleton />}>
+                <ConfigureServices
+                  selectedPlan={selectedPlan}
+                  onPlanChange={handlePlanChange}
+                  operator={operator}
+                />
+              </Suspense>
+            </ErrorBoundaryWithPresets>
           )}
           {step.value === ServicePurchaseStep.Summary && <SummaryStep operator={operator} />}
           {step.value === ServicePurchaseStep.Confirmation && <ConfirmationStep />}
