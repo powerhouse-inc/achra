@@ -12,13 +12,14 @@ interface ServiceProfileProps {
 
 async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
   const resourceProfile = await getResourceProfile({ id: serviceSlug })
-  const operatorId = resourceProfile?.operatorId
 
-  const operator = await getResourceOperator({ id: operatorId })
-
-  if (!resourceProfile || !operator) {
+  if (!resourceProfile) {
     notFound()
   }
+
+  const operatorId = resourceProfile.operatorId
+
+  const operator = operatorId ? await getResourceOperator({ id: operatorId }) : undefined
 
   const faqFields = resourceProfile.faqFields ?? []
 
@@ -38,7 +39,7 @@ async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
         description={resourceProfile.description}
         contentSections={resourceProfile.contentSections}
       />
-      <PurchaseSection operator={operator} serviceSlug={serviceSlug} />
+      {operator && <PurchaseSection operator={operator} serviceSlug={serviceSlug} />}
       {faqFields.length > 0 && <FaqSection faqFields={faqFields} />}
     </div>
   )

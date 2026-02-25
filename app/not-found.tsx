@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-[calc(100dvh-5rem)] items-center justify-center px-6">
+    <main className="flex min-h-[calc(100dvh-13.875rem)] items-center justify-center px-6">
       <AchraNavbar />
       <Empty>
         <EmptyHeader>
