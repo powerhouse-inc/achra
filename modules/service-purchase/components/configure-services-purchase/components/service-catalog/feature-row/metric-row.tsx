@@ -12,7 +12,7 @@ export interface MetricRowProps {
   isOneTime?: boolean
 }
 
-export function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps>) {
+function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps>) {
   const { activePlan, tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
   // For one-time metrics, find the value from any tier (may not exist on the last tier)
@@ -101,3 +101,5 @@ export function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricR
     </div>
   )
 }
+
+export { MetricRow }

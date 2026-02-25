@@ -8,7 +8,7 @@ interface FeatureCellProps {
   isActive: boolean
 }
 
-export function ServiceCatalogoCell({ value, isActive }: Readonly<FeatureCellProps>) {
+function ServiceCatalogoCell({ value, isActive }: Readonly<FeatureCellProps>) {
   if (typeof value === 'boolean') {
     return (
       <div className="flex items-center justify-center">
@@ -44,3 +44,5 @@ export function ServiceCatalogoCell({ value, isActive }: Readonly<FeatureCellPro
 
   return null
 }
+
+export { ServiceCatalogoCell }

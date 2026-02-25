@@ -10,7 +10,7 @@ export interface ServiceCatalogRowProps {
   metrics?: ServiceMetric[]
 }
 
-export function ServiceCatalogRow({
+function ServiceCatalogRow({
   label,
   sublabel,
   values,
@@ -18,3 +18,5 @@ export function ServiceCatalogRow({
 }: Readonly<ServiceCatalogRowProps>) {
   return <FeatureRow label={label} sublabel={sublabel} values={values} metrics={metrics} />
 }
+
+export { ServiceCatalogRow }

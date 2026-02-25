@@ -18,7 +18,7 @@ export interface ServiceCatalogHeaderProps {
   groupCostType?: RsGroupCostType | null
 }
 
-export function ServiceCatalogHeader({
+function ServiceCatalogHeader({
   title,
   badge,
   hasToggle,
@@ -48,3 +48,5 @@ export function ServiceCatalogHeader({
     />
   )
 }
+
+export { ServiceCatalogHeader }

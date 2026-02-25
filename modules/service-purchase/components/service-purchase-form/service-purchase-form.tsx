@@ -40,10 +40,7 @@ export interface ServicePurchaseFormProps {
   operator: BuilderProfileState
 }
 
-export function ServicePurchaseForm({
-  resourceTemplate,
-  operator,
-}: Readonly<ServicePurchaseFormProps>) {
+function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePurchaseFormProps>) {
   const tiers = useComputedTiers()
   const { setSelectedTier } = useServicePurchaseActions()
   const selectedTier = useSelectedTier()
@@ -145,3 +142,5 @@ export function ServicePurchaseForm({
     </Tabs>
   )
 }
+
+export { ServicePurchaseForm }

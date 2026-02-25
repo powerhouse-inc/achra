@@ -31,7 +31,7 @@ const getStepsUpTo = (step: ServicePurchaseStep): ServicePurchaseStep[] => {
   return SERVICE_PURCHASE_STEPS_ENTRIES.slice(0, index + 1).map((s) => s.value)
 }
 
-export function ServicePurchaseStepProvider({ children }: Readonly<{ children: React.ReactNode }>) {
+function ServicePurchaseStepProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [activeStep, setActiveStep] = useQueryState(
     'step',
     parseAsStringLiteral(SERVICE_PURCHASE_STEP_VALUES).withDefault(SERVICE_PURCHASE_DEFAULT_STEP),
@@ -109,10 +109,12 @@ export function ServicePurchaseStepProvider({ children }: Readonly<{ children: R
   )
 }
 
-export function useServicePurchaseStep() {
+function useServicePurchaseStep() {
   const context = useContext(ServicePurchaseStepContext)
   if (!context) {
     throw new Error('useServicePurchaseStep must be used within a ServicePurchaseStepProvider')
   }
   return context
 }
+
+export { ServicePurchaseStepProvider, useServicePurchaseStep }

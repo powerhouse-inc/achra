@@ -14,7 +14,7 @@ interface LabeledSelectProps {
   matchTriggerWidth?: boolean
 }
 
-export function LabeledSelect({
+function LabeledSelect({
   label,
   value,
   onValueChange,
@@ -39,3 +39,5 @@ export function LabeledSelect({
     </div>
   )
 }
+
+export { LabeledSelect }

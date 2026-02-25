@@ -25,7 +25,7 @@ export interface ServicePurchaseStoreProviderProps {
   services: RsServiceOffering
 }
 
-export function ServicePurchaseStoreProvider({
+function ServicePurchaseStoreProvider({
   children,
   services,
 }: Readonly<ServicePurchaseStoreProviderProps>) {
@@ -48,7 +48,7 @@ function useServicePurchaseStoreContext() {
   return store
 }
 
-export function useServicePurchaseState(): ServicePurchaseState {
+function useServicePurchaseState(): ServicePurchaseState {
   const store = useServicePurchaseStoreContext()
   return useStore(
     store,
@@ -59,27 +59,27 @@ export function useServicePurchaseState(): ServicePurchaseState {
   )
 }
 
-export function useServicePurchaseActions(): ServicePurchaseActions {
+function useServicePurchaseActions(): ServicePurchaseActions {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.actions)
 }
 
-export function useSelectedTier(): RsServiceSubscriptionTier {
+function useSelectedTier(): RsServiceSubscriptionTier {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.selectedTier)
 }
 
-export function useSelectedBillingCycle(): RsBillingCycle {
+function useSelectedBillingCycle(): RsBillingCycle {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.selectedBillingCycle)
 }
 
-export function useComputedTiers(): RsServiceSubscriptionTier[] {
+function useComputedTiers(): RsServiceSubscriptionTier[] {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.tiers)
 }
 
-export function useOptionGroups(): PurchaseOptionGroup[] {
+function useOptionGroups(): PurchaseOptionGroup[] {
   const store = useServicePurchaseStoreContext()
   return useStore(
     store,
@@ -87,7 +87,7 @@ export function useOptionGroups(): PurchaseOptionGroup[] {
   )
 }
 
-export function useSelectedAddOns(): PurchaseOptionGroup[] {
+function useSelectedAddOns(): PurchaseOptionGroup[] {
   const store = useServicePurchaseStoreContext()
   return useStore(
     store,
@@ -95,7 +95,7 @@ export function useSelectedAddOns(): PurchaseOptionGroup[] {
   )
 }
 
-export function useAllOptionGroups(): PurchaseOptionGroup[] {
+function useAllOptionGroups(): PurchaseOptionGroup[] {
   const store = useServicePurchaseStoreContext()
   return useStore(
     store,
@@ -103,12 +103,26 @@ export function useAllOptionGroups(): PurchaseOptionGroup[] {
   )
 }
 
-export function usePurchaseTotals(): PurchaseTotals {
+function usePurchaseTotals(): PurchaseTotals {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.totals)
 }
 
-export function useServiceOffering(): RsServiceOffering {
+function useServiceOffering(): RsServiceOffering {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.services)
+}
+
+export {
+  ServicePurchaseStoreProvider,
+  useServicePurchaseState,
+  useServicePurchaseActions,
+  useSelectedTier,
+  useSelectedBillingCycle,
+  useComputedTiers,
+  useOptionGroups,
+  useSelectedAddOns,
+  useAllOptionGroups,
+  usePurchaseTotals,
+  useServiceOffering,
 }
