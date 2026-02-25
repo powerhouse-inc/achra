@@ -50,7 +50,7 @@ test('should load the Funding Overview', async ({ page }) => {
     await expect(page.getByText('*All values are converted to USDS')).toHaveCount(1);
     await expect(page.getByText('1 Aug 2025')).toHaveCount(4);
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
-    await expect(page.getByText('0')).toHaveCount(29);
+    await expect(page.getByText('0')).toHaveCount(30);
     await expect(page.getByText('USD')).toHaveCount(25);
     await expect(page.getByText('Net Change')).toHaveCount(2);
     await expect(page.getByText('Extra Funds Made Available')).toBeVisible();
