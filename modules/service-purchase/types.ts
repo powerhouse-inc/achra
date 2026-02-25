@@ -122,6 +122,24 @@ export interface OptionGroupsSlice extends OptionGroupsSliceState {
   actions: OptionGroupsSliceActions
 }
 
+// ─── step slice ───────────────────────────────────────────────────────────────
+
+export interface StepSliceState {
+  activeStep: ServicePurchaseStep
+  visitedSteps: ServicePurchaseStep[]
+  disabledSteps: ServicePurchaseStep[]
+}
+
+export interface StepSliceActions {
+  goToStep: (step: ServicePurchaseStep) => void
+  goBack: () => void
+  resetPostConfigureSteps: () => void
+}
+
+export interface StepSlice extends StepSliceState {
+  actions: StepSliceActions
+}
+
 // ─── totals slice ─────────────────────────────────────────────────────────────
 
 export interface PurchaseTotals {
@@ -150,6 +168,9 @@ export interface PersistedServicePurchaseState {
   selectedFacetOptions: Record<string, string>
   optionGroupSelections: Record<string, boolean>
   requestEntityData: ServiceRequestEntityData | null
+  activeStep: ServicePurchaseStep
+  visitedSteps: ServicePurchaseStep[]
+  disabledSteps: ServicePurchaseStep[]
 }
 
 // ─── store composition
@@ -162,12 +183,14 @@ export type ServicePurchaseState = SubmitRequestSliceState &
   FacetsSliceState &
   TiersSliceState &
   OptionGroupsSliceState &
-  TotalsSliceState
+  TotalsSliceState &
+  StepSliceState
 export type ServicePurchaseActions = SubmitRequestSliceActions &
   FacetsSliceActions &
   TiersSliceActions &
   OptionGroupsSliceActions &
-  TotalsSliceActions
+  TotalsSliceActions &
+  StepSliceActions
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
   /** Raw service offering data — static, set once at store initialization */

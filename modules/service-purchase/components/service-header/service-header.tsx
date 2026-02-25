@@ -1,7 +1,7 @@
 'use client'
 
 import type { RsResourceTemplate } from '@/modules/__generated__/graphql/switchboard-generated'
-import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ServiceInfo } from '@/modules/services/components/service-info'
 import { Button } from '@/modules/shared/components/ui/button'
