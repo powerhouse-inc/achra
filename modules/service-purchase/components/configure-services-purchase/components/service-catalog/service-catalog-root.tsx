@@ -5,7 +5,7 @@ export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {
   isEnabled: boolean
 }
 
-export function ServiceCatalogRoot({
+function ServiceCatalogRoot({
   children,
   className,
   isEnabled,
@@ -17,3 +17,5 @@ export function ServiceCatalogRoot({
     </div>
   )
 }
+
+export { ServiceCatalogRoot }

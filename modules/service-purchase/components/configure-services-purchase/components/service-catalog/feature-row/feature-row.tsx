@@ -13,7 +13,7 @@ interface FeatureRowProps {
   metrics?: ServiceMetric[]
 }
 
-export function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
+function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
   const { activePlan, tierNames } = usePricingCalculatorContext()
   const hasMetrics = metrics && metrics.length > 0
 
@@ -80,3 +80,5 @@ export function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>
     </>
   )
 }
+
+export { FeatureRow }

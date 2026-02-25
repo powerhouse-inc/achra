@@ -31,7 +31,7 @@ function StepTriggerSkeleton({ active }: StepTriggerSkeletonProps) {
   )
 }
 
-export function StepsTriggerListSkeleton() {
+function StepsTriggerListSkeleton() {
   return (
     <div className="flex h-fit w-full items-center justify-center bg-transparent p-0 md:justify-between">
       {Array.from({ length: 5 }).map((_, index) => (
@@ -47,3 +47,5 @@ export function StepsTriggerListSkeleton() {
     </div>
   )
 }
+
+export { StepsTriggerListSkeleton }

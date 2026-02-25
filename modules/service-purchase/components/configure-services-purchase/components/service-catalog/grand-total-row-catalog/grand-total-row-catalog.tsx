@@ -18,7 +18,7 @@ interface GrandTotalRowCatalogProps {
   optionGroups: RsOfferingOptionGroup[]
 }
 
-export function GrandTotalRowCatalog({
+function GrandTotalRowCatalog({
   selectedPlan,
   tiers,
   optionGroups,
@@ -92,3 +92,5 @@ export function GrandTotalRowCatalog({
     </div>
   )
 }
+
+export { GrandTotalRowCatalog }

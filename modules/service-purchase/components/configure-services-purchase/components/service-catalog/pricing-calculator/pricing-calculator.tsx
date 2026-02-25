@@ -37,7 +37,7 @@ export interface PricingCalculatorProps {
   facetSelections?: Record<string, string>
 }
 
-export function PricingCalculator({
+function PricingCalculator({
   selectedPlan,
   onPlanChange,
   servicesData,
@@ -216,3 +216,5 @@ export function PricingCalculator({
     </PricingCalculatorProvider>
   )
 }
+
+export { PricingCalculator }

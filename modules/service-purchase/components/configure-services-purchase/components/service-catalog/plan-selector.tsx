@@ -21,7 +21,7 @@ interface PlanSelectorItemProps {
   tier: RsServiceSubscriptionTier
 }
 
-export function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
+function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   const inputId = tier.id ?? tier.name
   const { selectedBillingCycle } = usePricingCalculatorContext()
 
@@ -87,3 +87,5 @@ export function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
     </label>
   )
 }
+
+export { PlanSelectorItem }

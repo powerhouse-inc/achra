@@ -4,56 +4,18 @@ import {
   RsDiscountType,
   RsGroupCostType,
   type RsOfferingOptionGroup,
-  type RsServiceOffering,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getMonths } from './utils'
+import type { AppliedDiscount, CalculateTotalsInput, CalculateTotalsResult } from '../types'
 
-// ─── Public types ─────────────────────────────────────────────────────────────
-
-export interface AppliedDiscount {
-  sourceId: string
-  sourceName: string
-  source: 'tier' | 'option-group'
-  discountType: RsDiscountType
-  discountValue: number
-  /** Positive amount saved (base − discounted) */
-  savedAmount: number
-}
-
-export interface CalculateTotalsResult {
-  /** Tier price + active recurring groups, before billing-cycle discounts */
-  recurringSubtotal: number
-  /** recurringSubtotal after all billing-cycle discounts are applied */
-  recurringTotal: number
-  /** Sum of active SETUP groups — one-time, never affected by billing cycle */
-  setupTotal: number
-  appliedDiscounts: AppliedDiscount[]
-  /** True if at least one group or tier was missing price data */
-  isPending: boolean
-  currency: string
-}
-
-export interface CalculateTotalsInput {
-  offering: RsServiceOffering
-  selectedTierId: string
-  selectedBillingCycle: RsBillingCycle
-  /** IDs of every option group the user currently has enabled */
-  activeGroupIds: Set<string>
-}
-
-// ─── Internal types ───────────────────────────────────────────────────────────
-
-/** Locally-typed discount rule to avoid the any-tainted generated RsDiscountRule */
 interface DiscountRule {
   discountType: RsDiscountType
   discountValue: number
 }
 
 interface ResolvedGroupPrice {
-  /** Pre-discount base amount; null → caller marks isPending */
   baseAmount: number | null
-  /** Discount to apply to baseAmount, if any */
   discountRule: DiscountRule | null
 }
 
@@ -175,19 +137,13 @@ function resolveOptionGroupRecurringPrice(
         inlineEntryDiscount = matchingCycleDiscount?.discountRule ?? null
       }
     }
-  }
-
-  // ── Path 2: legacy flat price ──────────────────────────────────────────────
-  else if (group.price !== null && group.price !== undefined) {
+  } else if (group.price !== null && group.price !== undefined) {
     baseAmount = toNumber(group.price)
     const matchingCycleDiscount = group.billingCycleDiscounts.find(
       (d) => d.billingCycle === selectedBillingCycle,
     )
     inlineEntryDiscount = matchingCycleDiscount?.discountRule ?? null
-  }
-
-  // ── Path 3: tier-dependent pricing ────────────────────────────────────────
-  else {
+  } else {
     const matchingTierPricing = (group.tierDependentPricing ?? []).find(
       (tp) => tp.tierId === selectedTierId,
     )
@@ -229,8 +185,6 @@ function resolveOptionGroupRecurringPrice(
   return { baseAmount, discountRule }
 }
 
-// ─── Engine ───────────────────────────────────────────────────────────────────
-
 export function calculateTotals({
   offering,
   selectedTierId,
@@ -239,14 +193,12 @@ export function calculateTotals({
 }: CalculateTotalsInput): CalculateTotalsResult {
   const appliedDiscounts: AppliedDiscount[] = []
   let isPending = false
-  // Both subtotal and total accumulate PERIOD amounts (invoice values), not monthly bases
   let recurringSubtotal = 0
   let recurringTotal = 0
   let setupTotal = 0
   const currency = 'USD'
   const months = getMonths(selectedBillingCycle)
 
-  // ── 1. Tier base price ─────────────────────────────────────────────────────
   const selectedTier = offering.tiers.find((t) => t.id === selectedTierId)
 
   if (!selectedTier) {
@@ -293,7 +245,6 @@ export function calculateTotals({
     }
   }
 
-  // ── 2. Active option groups ────────────────────────────────────────────────
   const tierBillingCycleDiscounts = selectedTier?.billingCycleDiscounts ?? []
   const activeOptionGroups = offering.optionGroups.filter((g) => activeGroupIds.has(g.id))
 
@@ -312,7 +263,6 @@ export function calculateTotals({
 
       setupTotal += setupPrice
     } else {
-      // ── RECURRING (or costType: null treated as recurring) ─────────────────
       const { baseAmount, discountRule } = resolveOptionGroupRecurringPrice(
         group,
         selectedTierId,

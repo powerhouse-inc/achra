@@ -23,7 +23,7 @@ interface SectionHeaderProps {
   groupCostType?: RsGroupCostType | null
 }
 
-export function SectionHeader({
+function SectionHeader({
   title,
   badge,
   hasToggle,
@@ -153,3 +153,5 @@ export function SectionHeader({
     </div>
   )
 }
+
+export { SectionHeader }

@@ -17,7 +17,7 @@ const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
   [ServicePurchaseStep.Confirmation]: <CheckCheck className="size-4 lg:size-6" />,
 }
 
-export function StepsTriggersList() {
+function StepsTriggersList() {
   const { activeStep, visitedSteps, disabledSteps } = useServicePurchaseStep()
 
   return (
@@ -74,3 +74,5 @@ export function StepsTriggersList() {
     </TabsList>
   )
 }
+
+export { StepsTriggersList }

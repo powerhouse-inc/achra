@@ -22,7 +22,7 @@ interface PricingCalculatorContextValue {
 
 const PricingCalculatorContext = createContext<PricingCalculatorContextValue | null>(null)
 
-export function usePricingCalculatorContext() {
+function usePricingCalculatorContext() {
   const context = useContext(PricingCalculatorContext)
   if (!context) {
     throw new Error('usePricingCalculatorContext must be used within PricingCalculatorProvider')
@@ -35,11 +35,10 @@ interface PricingCalculatorProviderProps {
   value: PricingCalculatorContextValue
 }
 
-export function PricingCalculatorProvider({
-  children,
-  value,
-}: Readonly<PricingCalculatorProviderProps>) {
+function PricingCalculatorProvider({ children, value }: Readonly<PricingCalculatorProviderProps>) {
   return (
     <PricingCalculatorContext.Provider value={value}>{children}</PricingCalculatorContext.Provider>
   )
 }
+
+export { usePricingCalculatorContext, PricingCalculatorProvider }
