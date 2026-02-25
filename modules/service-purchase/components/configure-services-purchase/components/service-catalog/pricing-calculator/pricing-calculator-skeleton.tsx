@@ -1,7 +1,7 @@
 import { FileText } from 'lucide-react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { PricingCatalogSubtotalSkeleton } from '../../pricing-catalog-subtotal/pricing-catalog-subtotal-skeleton'
+import { PricingCatalogSubtotalSkeleton } from '../pricing-catalog-subtotal-skeleton'
 import { FeatureRowSkeleton } from '../feature-row'
 import { GrandTotalRowCatalogSkeleton } from '../grand-total-row-catalog'
 import { HeaderCatalogPlanSkeleton } from '../header-catalog-plan'

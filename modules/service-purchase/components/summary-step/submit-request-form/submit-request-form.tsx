@@ -6,12 +6,15 @@ import { useParams } from 'next/navigation'
 import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
-import { submitRequestSchema } from '@/modules/service-purchase/lib/submit-request-schema'
+import {
+  formDefaultValues,
+  initialActionState,
+  submitRequestSchema,
+} from '@/modules/service-purchase/lib/submit-request-schema'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
 import { useServicePurchaseActions } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import {
   ServicePurchaseStep,
-  type SubmitRequestFormState,
   type SubmitRequestFormValues,
 } from '@/modules/service-purchase/types'
 import { Alert, AlertDescription, AlertTitle } from '@/modules/shared/components/ui/alert'
@@ -26,16 +29,6 @@ import {
   FormMessage,
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
-
-const initialActionState: SubmitRequestFormState = {
-  success: false,
-}
-
-const formDefaultValues: SubmitRequestFormValues = {
-  name: '',
-  teamName: '',
-  email: '',
-}
 
 function SubmitRequestForm() {
   const { serviceSlug = '' } = useParams<{ serviceSlug?: string }>()
