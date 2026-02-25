@@ -1,10 +1,9 @@
 'use client'
 
 import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { CatalogStatus } from '@/modules/service-purchase/types'
 import { usePricingCalculatorContext } from './pricing-calculator-context'
 import { SectionHeader } from './section-header'
-// import { useServiceCatalogContext } from './service-catalog-root'
-import type { CatalogStatus } from '../types'
 
 export interface ServiceCatalogHeaderProps {
   title: string

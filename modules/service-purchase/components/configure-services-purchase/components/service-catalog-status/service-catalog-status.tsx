@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
+import { CatalogStatus } from '@/modules/service-purchase/types'
 import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
-import { CatalogStatus } from '../types'
 
 interface CatalogStatusProps {
   catalogStatus: CatalogStatus

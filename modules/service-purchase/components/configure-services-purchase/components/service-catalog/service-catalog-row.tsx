@@ -1,7 +1,7 @@
 'use client'
 
+import type { FeatureValue, ServiceMetric } from '@/modules/service-purchase/types'
 import { FeatureRow } from './feature-row'
-import type { FeatureValue, ServiceMetric } from '../types'
 
 export interface ServiceCatalogRowProps {
   label: string
