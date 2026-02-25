@@ -14,5 +14,3 @@ export const SERVICE_PURCHASE_STEPS_ENTRIES: ReadonlyArray<{
   { value: ServicePurchaseStep.Summary, label: 'Summary' },
   { value: ServicePurchaseStep.Confirmation, label: 'Confirmation' },
 ]
-
-export const OPERATIONAL_HUB_URL = 'https://v0-operational-hub-landing-page.vercel.app/opshub'
