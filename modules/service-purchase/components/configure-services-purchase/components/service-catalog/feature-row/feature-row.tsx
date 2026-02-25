@@ -1,9 +1,9 @@
 'use client'
 
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import type { FeatureValue, ServiceMetric } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '../pricing-calculator-context'
-import { ServiceCatalogoCell } from '../service-catalogo-cell'
+import { ServiceCatalogCell } from '../service-catalog-cell'
 import { MetricRow } from './metric-row'
 
 interface FeatureRowProps {
@@ -49,7 +49,7 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
             !!activePlan && 'bg-primary/10 font-bold',
           )}
         >
-          <ServiceCatalogoCell value={values[activePlan ?? '']} isActive={!!activePlan} />
+          <ServiceCatalogCell value={values[activePlan ?? '']} isActive={!!activePlan} />
         </div>
 
         {/* Desktop: Show all plans */}
@@ -61,7 +61,7 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
               activePlan === plan && 'bg-primary/10 font-bold',
             )}
           >
-            <ServiceCatalogoCell value={values[plan]} isActive={activePlan === plan} />
+            <ServiceCatalogCell value={values[plan]} isActive={activePlan === plan} />
           </div>
         ))}
       </div>
