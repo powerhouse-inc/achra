@@ -20,6 +20,7 @@ function createServicePurchaseStore(initProps: ServicePurchaseStoreProps) {
       ...tiersSlice,
       ...optionGroupsSlice,
       ...totalsSlice,
+      services: initProps.services,
 
       actions: {
         ...submitRequestSlice.actions,

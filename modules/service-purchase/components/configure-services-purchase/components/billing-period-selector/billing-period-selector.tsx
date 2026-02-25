@@ -7,7 +7,7 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { cn } from '@/modules/shared/lib/utils'
+import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/toggle-group'
 
 const PERIOD_ORDER: RsBillingCycle[] = [
   RsBillingCycle.Monthly,
@@ -23,6 +23,13 @@ const PERIOD_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.SemiAnnual]: 'Semi-Annual',
   [RsBillingCycle.Annual]: 'Annual',
   [RsBillingCycle.OneTime]: 'One-Time',
+}
+
+// TODO: replace with real discount data from API once endpoint is stable
+const PERIOD_DISCOUNTS: Partial<Record<RsBillingCycle, string>> = {
+  [RsBillingCycle.Quarterly]: '5%',
+  [RsBillingCycle.SemiAnnual]: '10%',
+  [RsBillingCycle.Annual]: '20%',
 }
 
 function getAvailableCycles(tiers: RsServiceSubscriptionTier[]): RsBillingCycle[] {
@@ -53,37 +60,36 @@ export function BillingPeriodSelector({ tiers }: Readonly<BillingPeriodSelectorP
   if (availableCycles.length === 0) return null
 
   return (
-    <div className="mb-2">
-      <div
-        className="flex flex-wrap items-center gap-2"
-        role="radiogroup"
+    <div className="mb-2 flex justify-center">
+      <ToggleGroup
+        type="single"
+        value={selectedBillingCycle}
+        onValueChange={(value) => {
+          // Prevent deselection — a billing cycle must always be selected
+          if (value) setSelectedBillingCycle(value as RsBillingCycle)
+        }}
         aria-label="Billing period"
+        className="flex w-fit flex-wrap gap-2"
       >
         {availableCycles.map((cycle) => {
-          const label = PERIOD_LABELS[cycle]
-          const isSelected = selectedBillingCycle === cycle
+          const discount = PERIOD_DISCOUNTS[cycle]
 
           return (
-            <button
+            <ToggleGroupItem
               key={cycle}
-              role="radio"
-              aria-checked={isSelected}
-              onClick={() => {
-                setSelectedBillingCycle(cycle)
-              }}
-              className={cn(
-                'inline-flex items-center justify-center rounded-xl border px-4 py-2.5 text-base font-medium transition-all',
-                'focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
-                isSelected
-                  ? 'border-border bg-background text-foreground'
-                  : 'border-border bg-accent/50 text-muted-foreground hover:bg-muted hover:text-foreground',
-              )}
+              value={cycle}
+              className="border-border data-[state=off]:bg-background data-[state=off]:text-foreground data-[state=on]:bg-accent data-[state=on]:text-foreground h-auto flex-none rounded-md border px-3! py-2.5! text-base font-medium first:rounded-xl last:rounded-xl"
             >
-              {label}
-            </button>
+              {PERIOD_LABELS[cycle]}
+              {discount && (
+                <span className="bg-primary text-primary-foreground border-primary-foreground/30 ml-1.5 rounded-full border px-2 py-0.5 text-xs font-semibold">
+                  Save {discount}
+                </span>
+              )}
+            </ToggleGroupItem>
           )
         })}
-      </div>
+      </ToggleGroup>
     </div>
   )
 }

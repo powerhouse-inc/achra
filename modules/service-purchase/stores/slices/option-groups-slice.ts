@@ -15,11 +15,9 @@ import type {
   ServicePurchaseStoreSet,
 } from '../../types'
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
 function toAmount(raw: unknown): number {
   const n = Number(raw)
-  return isNaN(n) ? 0 : n
+  return Number.isNaN(n) ? 0 : n
 }
 
 function resolveServiceValue(serviceId: string, tier: RsServiceSubscriptionTier): string | null {
@@ -42,9 +40,9 @@ function resolveMetrics(
       label: ul.metric,
       value:
         ul.notes ??
-        (ul.freeLimit != null
-          ? `${ul.freeLimit}${ul.unitName ? ` ${ul.unitName}` : ''}`
-          : 'Unlimited'),
+        (ul.freeLimit == null
+          ? 'Unlimited'
+          : `${ul.freeLimit}${ul.unitName ? ` ${ul.unitName}` : ''}`),
     }))
 }
 
@@ -84,8 +82,6 @@ function isGroupSelected(
   return finalConfiguration.addOnConfigs.some((c) => c.optionGroupId === group.id)
 }
 
-// ─── Pure computation ─────────────────────────────────────────────────────────
-
 export function computeOptionGroups(
   services: RsServiceOffering,
   selectedTier: RsServiceSubscriptionTier,
@@ -115,8 +111,6 @@ export function computeOptionGroups(
     }
   })
 }
-
-// ─── Slice factory ────────────────────────────────────────────────────────────
 
 export function createOptionGroupsSlice(
   set: ServicePurchaseStoreSet,

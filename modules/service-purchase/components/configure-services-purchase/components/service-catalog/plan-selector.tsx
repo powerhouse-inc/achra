@@ -1,5 +1,6 @@
 'use client'
 import {
+  RsBillingCycle,
   RsDiscountType,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -7,6 +8,14 @@ import { computeMonthlyEquivalent } from '@/modules/service-purchase/lib/utils'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from './pricing-calculator-context'
+
+const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
+  [RsBillingCycle.Monthly]: 'Billed Monthly',
+  [RsBillingCycle.Quarterly]: 'Billed Quarterly',
+  [RsBillingCycle.SemiAnnual]: 'Billed Semi-Annually',
+  [RsBillingCycle.Annual]: 'Billed Annually',
+  [RsBillingCycle.OneTime]: 'One-time payment',
+}
 
 interface PlanSelectorItemProps {
   tier: RsServiceSubscriptionTier
@@ -54,17 +63,25 @@ export function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
         </span>
       </div>
       {tier.isCustomPricing ? (
-        <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
-          Custom
-        </span>
+        <div className="flex flex-col items-center gap-0.5">
+          <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
+            Custom
+          </span>
+          <span className="text-foreground text-xs leading-4.5 font-normal">
+            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+          </span>
+        </div>
       ) : (
         <div className="flex flex-col items-center gap-0.5">
           <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
             ${Math.round(displayPrice).toLocaleString()}/mo
           </span>
           {hasDiscount && savingsLabel && (
-            <span className="text-status-progress text-[10px] font-semibold">{savingsLabel}</span>
+            <span className="text-status-progress text-xs font-semibold">save {savingsLabel}</span>
           )}
+          <span className="text-foreground text-xs leading-4.5 font-normal">
+            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+          </span>
         </div>
       )}
     </label>
