@@ -1,5 +1,5 @@
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MarketplaceHeader } from '../configure-services-purchase/components/marketplace-header'
+import { MarketplaceHeader } from '../configure-services-step/marketplace-header'
 import { SubmitRequestForm } from './submit-request-form'
 import { SummaryCard } from './summary-card'
 

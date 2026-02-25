@@ -17,13 +17,13 @@ import {
   useSelectedTier,
   useServicePurchaseActions,
 } from '../../providers/service-purchase-store-provider'
-import { ConfigureServices } from '../configure-services-purchase/components/configure-services'
-import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
+import { ConfigureServices } from '../configure-services-step/configure-services'
+import { PricingCalculatorSkeleton } from '../configure-services-step/service-catalog/pricing-calculator'
 import { ConfirmationStep } from '../confirmation-step'
 import { ProductInfo } from '../product-info'
 import { SelectOperatorStep } from '../select-operator-step'
 import { SummaryStep } from '../summary-step'
-import { StepsTriggersList } from './components/steps-trigger/steps-triggers-list'
+import { StepsTriggersList } from './steps-trigger/steps-triggers-list'
 
 export interface ServicePurchaseFormValues {
   operatorId?: string
