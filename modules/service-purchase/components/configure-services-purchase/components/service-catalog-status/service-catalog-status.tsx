@@ -7,7 +7,7 @@ interface CatalogStatusProps {
   className?: string
 }
 
-export default function ServiceCatalogStatus({
+function ServiceCatalogStatus({
   catalogStatus,
   className,
 }: Readonly<CatalogStatusProps>) {
@@ -37,3 +37,5 @@ export default function ServiceCatalogStatus({
     </GenericChip>
   )
 }
+
+export { ServiceCatalogStatus }

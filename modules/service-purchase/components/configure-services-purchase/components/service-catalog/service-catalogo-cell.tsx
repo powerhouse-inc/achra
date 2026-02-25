@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react'
 import { CatalogStatus, type FeatureValue } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
-import ServiceCatalogStatus from '../service-catalog-status/service-catalog-status'
+import { ServiceCatalogStatus } from '../service-catalog-status'
 
 interface FeatureCellProps {
   value: FeatureValue
