@@ -28,7 +28,7 @@ import {
 } from '..'
 import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
-import { PricingCalculatorProvider } from '../pricing-calculator-context'
+import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 export interface PricingCalculatorProps {
   selectedPlan?: string
   onPlanChange?: (plan: string) => void

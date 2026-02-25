@@ -12,7 +12,7 @@ import {
   formatPrice,
 } from '@/modules/service-purchase/lib/utils'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from './pricing-calculator-context'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 
 export interface ServiceCatalogFooterProps {
   optionGroup: RsOfferingOptionGroup

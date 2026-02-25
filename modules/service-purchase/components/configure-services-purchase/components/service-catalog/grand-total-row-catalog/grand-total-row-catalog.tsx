@@ -8,7 +8,7 @@ import type {
 import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
 import { useAllOptionGroups } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '../pricing-calculator-context'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string

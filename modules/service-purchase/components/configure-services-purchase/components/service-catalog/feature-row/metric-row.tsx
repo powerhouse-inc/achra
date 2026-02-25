@@ -2,8 +2,8 @@
 
 import type { FeatureValue } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '../pricing-calculator-context'
-import { ServiceCatalogoCell } from '../service-catalogo-cell'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { ServiceCatalogCell } from '../service-catalog-cell'
 
 export interface MetricRowProps {
   label: string
@@ -72,7 +72,7 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
             </span>
           ) : null
         ) : (
-          <ServiceCatalogoCell value={values[activePlan ?? '']} isActive={!!activePlan} />
+          <ServiceCatalogCell value={values[activePlan ?? '']} isActive={!!activePlan} />
         )}
       </div>
 
@@ -94,7 +94,7 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
               </span>
             ) : null
           ) : (
-            <ServiceCatalogoCell value={values[plan]} isActive={activePlan === plan} />
+            <ServiceCatalogCell value={values[plan]} isActive={activePlan === plan} />
           )}
         </div>
       ))}

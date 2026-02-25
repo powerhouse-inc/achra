@@ -7,7 +7,7 @@ import type { CatalogStatus } from '@/modules/service-purchase/types'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogStatus } from '../../service-catalog-status'
-import { usePricingCalculatorContext } from '../pricing-calculator-context'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 
 interface SectionHeaderProps {
   title: string

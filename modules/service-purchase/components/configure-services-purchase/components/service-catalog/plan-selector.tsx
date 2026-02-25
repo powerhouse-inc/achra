@@ -7,7 +7,7 @@ import {
 import { computeMonthlyEquivalent } from '@/modules/service-purchase/lib/utils'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from './pricing-calculator-context'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 
 const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.Monthly]: 'Billed Monthly',
