@@ -28,6 +28,7 @@ const ffDev: FeatureFlags = {
     YEAR_SELECTOR_ENABLED: true,
   },
   NAV_BAR_LOGIN_BUTTON_ENABLED: true,
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: true,
 }
 
 export { ffDev }

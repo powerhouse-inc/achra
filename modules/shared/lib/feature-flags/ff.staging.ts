@@ -27,6 +27,7 @@ const ffStaging: FeatureFlags = {
     YEAR_SELECTOR_ENABLED: false,
   },
   NAV_BAR_LOGIN_BUTTON_ENABLED: false,
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: true,
 }
 
 export { ffStaging }

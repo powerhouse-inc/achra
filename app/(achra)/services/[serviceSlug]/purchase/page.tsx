@@ -30,7 +30,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
 
   return (
     <PageContent className="gap-6">
-      <ServicePurchaseStoreProvider facets={services.facetTargets} services={services}>
+      <ServicePurchaseStoreProvider services={services}>
         <ServicePurchaseStepProvider>
           <div className="flex flex-col gap-6 lg:gap-8">
             <ServiceHeader resourceTemplate={resourceTemplate} />
