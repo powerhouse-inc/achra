@@ -2,7 +2,7 @@
 
 import type { Maybe, RsContentSection } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Markdown } from '@/modules/shared/components/markdown/markdown'
-import { ExpandableSection } from './components/expandable-section'
+import { ExpandableSection } from './expandable-section'
 
 export interface ProductInfoProps {
   description?: Maybe<string>
