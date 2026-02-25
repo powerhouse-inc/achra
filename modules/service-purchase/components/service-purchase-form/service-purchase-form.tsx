@@ -7,7 +7,7 @@ import type {
   BuilderProfileState,
   RsResourceTemplate,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
@@ -44,7 +44,7 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
   const tiers = useComputedTiers()
   const { setSelectedTier } = useServicePurchaseActions()
   const selectedTier = useSelectedTier()
-  const { activeStep, goToStep, visitedSteps, resetPostConfigureSteps } = useServicePurchaseStep()
+  const { activeStep, goToStep, hasVisitedStep, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
     parseAsString.withDefault(''),
@@ -89,8 +89,8 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
     const isDifferentOperator = selectedOperatorId !== operatorId
 
     const hasVisitedSummaryOrConfirmation =
-      visitedSteps.includes(ServicePurchaseStep.Summary) ||
-      visitedSteps.includes(ServicePurchaseStep.Confirmation)
+      hasVisitedStep(ServicePurchaseStep.Summary) ||
+      hasVisitedStep(ServicePurchaseStep.Confirmation)
 
     if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
       resetPostConfigureSteps()

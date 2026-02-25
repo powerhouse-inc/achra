@@ -3,7 +3,7 @@
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
 import { Fragment, type ReactNode } from 'react'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/config/constants'
-import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
@@ -18,13 +18,13 @@ const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
 }
 
 function StepsTriggersList() {
-  const { activeStep, visitedSteps, disabledSteps } = useServicePurchaseStep()
+  const { activeStep, hasVisitedStep, isStepDisabled } = useServicePurchaseStep()
 
   return (
     <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">
       {SERVICE_PURCHASE_STEPS_ENTRIES.map((step, index) => {
         const isActive = activeStep === step.value
-        const isVisited = visitedSteps.includes(step.value)
+        const isVisited = hasVisitedStep(step.value)
 
         return (
           <Fragment key={step.value}>
@@ -34,7 +34,7 @@ function StepsTriggersList() {
                 'md:border-border md:data-[state=active]:border-primary dark:md:data-[state=active]:border-primary flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none',
                 isVisited && !isActive && 'md:border-primary/70 dark:md:border-primary/70',
               )}
-              disabled={disabledSteps.includes(step.value)}
+              disabled={isStepDisabled(step.value)}
             >
               <div
                 className={cn(
@@ -63,8 +63,7 @@ function StepsTriggersList() {
                 orientation="horizontal"
                 className={cn(
                   'bg-border mx-1 h-0.5! max-w-8! flex-1',
-                  visitedSteps.includes(SERVICE_PURCHASE_STEPS_ENTRIES[index + 1].value) &&
-                    'bg-primary',
+                  hasVisitedStep(SERVICE_PURCHASE_STEPS_ENTRIES[index + 1].value) && 'bg-primary',
                 )}
               />
             )}

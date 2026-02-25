@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useMemo, useState } from 'react'
 import { useStore } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 import type {
@@ -14,6 +14,7 @@ import type {
   PurchaseTotals,
   ServicePurchaseActions,
   ServicePurchaseState,
+  ServicePurchaseStep,
 } from '../types'
 
 export const ServicePurchaseStoreContext = createContext<ReturnType<
@@ -113,6 +114,51 @@ function useServiceOffering(): RsServiceOffering {
   return useStore(store, (state) => state.services)
 }
 
+function useServicePurchaseStep() {
+  const store = useServicePurchaseStoreContext()
+  const activeStep = useStore(store, (state) => state.activeStep)
+  const visitedSteps = useStore(
+    store,
+    useShallow((state) => state.visitedSteps),
+  )
+  const disabledSteps = useStore(
+    store,
+    useShallow((state) => state.disabledSteps),
+  )
+  const actions = useStore(store, (state) => state.actions)
+
+  const visitedSet = useMemo(() => new Set(visitedSteps), [visitedSteps])
+  const disabledSet = useMemo(() => new Set(disabledSteps), [disabledSteps])
+
+  const hasVisitedStep = useCallback(
+    (step: ServicePurchaseStep) => visitedSet.has(step),
+    [visitedSet],
+  )
+  const isStepDisabled = useCallback(
+    (step: ServicePurchaseStep) => disabledSet.has(step),
+    [disabledSet],
+  )
+
+  return useMemo(
+    () => ({
+      activeStep,
+      hasVisitedStep,
+      isStepDisabled,
+      goToStep: actions.goToStep,
+      goBack: actions.goBack,
+      resetPostConfigureSteps: actions.resetPostConfigureSteps,
+    }),
+    [
+      activeStep,
+      hasVisitedStep,
+      isStepDisabled,
+      actions.goToStep,
+      actions.goBack,
+      actions.resetPostConfigureSteps,
+    ],
+  )
+}
+
 export {
   ServicePurchaseStoreProvider,
   useServicePurchaseState,
@@ -125,4 +171,5 @@ export {
   useAllOptionGroups,
   usePurchaseTotals,
   useServiceOffering,
+  useServicePurchaseStep,
 }

@@ -3,10 +3,12 @@ import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ENVIRONMENT } from '@/modules/shared/config/constants'
 import ff from '@/modules/shared/lib/feature-flags'
+import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
 import { createFacetsSlice } from './slices/facets-store-slice'
 import { createOptionGroupsSlice } from './slices/option-groups-slice'
+import { createStepSlice } from './slices/step-slice'
 import { createSubmitRequestSlice } from './slices/submit-request-slice'
 import { createTiersSlice } from './slices/tiers-slice'
 import { createTotalsSlice } from './slices/totals-slice'
@@ -27,6 +29,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
       const tiersSlice = createTiersSlice(set, get, services)
       const optionGroupsSlice = createOptionGroupsSlice(set, get, services)
       const totalsSlice = createTotalsSlice(set, get, services)
+      const stepSlice = createStepSlice(set, get)
 
       return {
         ...submitRequestSlice,
@@ -34,6 +37,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
         ...tiersSlice,
         ...optionGroupsSlice,
         ...totalsSlice,
+        ...stepSlice,
         services,
 
         actions: {
@@ -42,6 +46,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
           ...tiersSlice.actions,
           ...optionGroupsSlice.actions,
           ...totalsSlice.actions,
+          ...stepSlice.actions,
 
           // Override actions that affect totals — atomic: set once per action
           setSelectedTier: (id) => {
@@ -79,6 +84,9 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               state.optionGroups.map((g) => [g.id, g.isSelected]),
             ),
             requestEntityData: state.requestEntityData,
+            activeStep: state.activeStep,
+            visitedSteps: state.visitedSteps,
+            disabledSteps: state.disabledSteps,
           }),
           // merge the persisted state with the hydrated current state
           merge: (persistedState, currentState) => {
@@ -126,6 +134,21 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               activeGroupIds,
             )
 
+            const isValidStep =
+              persisted.activeStep != null &&
+              SERVICE_PURCHASE_STEP_VALUES.includes(persisted.activeStep)
+            const activeStep: (typeof currentState)['activeStep'] = isValidStep
+              ? (persisted.activeStep as (typeof currentState)['activeStep'])
+              : currentState.activeStep
+            const visitedSteps =
+              Array.isArray(persisted.visitedSteps) && persisted.visitedSteps.length > 0
+                ? persisted.visitedSteps.filter((s) => SERVICE_PURCHASE_STEP_VALUES.includes(s))
+                : currentState.visitedSteps
+            const disabledSteps =
+              Array.isArray(persisted.disabledSteps) && persisted.disabledSteps.length > 0
+                ? persisted.disabledSteps.filter((s) => SERVICE_PURCHASE_STEP_VALUES.includes(s))
+                : currentState.disabledSteps
+
             return {
               ...currentState,
               selectedTier,
@@ -134,6 +157,9 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               optionGroups: mergedOptionGroups,
               requestEntityData: persisted.requestEntityData ?? currentState.requestEntityData,
               totals,
+              activeStep,
+              visitedSteps,
+              disabledSteps,
             }
           },
         }),

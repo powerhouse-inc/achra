@@ -11,8 +11,10 @@ import {
   initialActionState,
   submitRequestSchema,
 } from '@/modules/service-purchase/lib/submit-request-schema'
-import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-step-provider'
-import { useServicePurchaseActions } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import {
+  useServicePurchaseActions,
+  useServicePurchaseStep,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep, type SubmitRequestFormValues } from '@/modules/service-purchase/types'
 import { Alert, AlertDescription, AlertTitle } from '@/modules/shared/components/ui/alert'
 import { Button } from '@/modules/shared/components/ui/button'
