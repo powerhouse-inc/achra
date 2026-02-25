@@ -6,9 +6,9 @@ import type {
   RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { useAllOptionGroups } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '../pricing-calculator-context'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string
