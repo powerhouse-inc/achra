@@ -17,9 +17,9 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import { CatalogStatus } from '@/modules/service-purchase/types'
 import { Card } from '@/modules/shared/components/ui/card'
 import {
-  CatalogStatus,
   ServiceCatalogBody,
   ServiceCatalogFooter,
   ServiceCatalogHeader,

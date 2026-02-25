@@ -249,7 +249,7 @@ function MultipleSelector({
   useEffect(() => {
     if (value) {
       // disabled to keep the component as it come form shadcn
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+
       setSelected(value)
     }
   }, [value])
