@@ -142,10 +142,18 @@ export interface TotalsSlice extends TotalsSliceState {
   actions: TotalsSliceActions
 }
 
+export interface PersistedServicePurchaseState {
+  apiChecksum: string
+  selectedTierId: string
+  selectedBillingCycle: RsBillingCycle
+  selectedFacetOptions: Record<string, string>
+  optionGroupSelections: Record<string, boolean>
+  requestEntityData: ServiceRequestEntityData | null
+}
+
 // ─── store composition
 // store init props (for dependency injection from page)
 export interface ServicePurchaseStoreProps {
-  facets?: RsOfferingFacetTarget[]
   services: RsServiceOffering
 }
 

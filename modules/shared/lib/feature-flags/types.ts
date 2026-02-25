@@ -87,4 +87,9 @@ export interface FeatureFlags {
    * Whether to enable the login button in the nav bar
    */
   NAV_BAR_LOGIN_BUTTON_ENABLED: boolean
+
+  /**
+   * Whether to persist the service purchase store to localStorage
+   */
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: boolean
 }

@@ -5,7 +5,6 @@ import { useStore } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 import type {
   RsBillingCycle,
-  RsOfferingFacetTarget,
   RsServiceOffering,
   RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -23,16 +22,15 @@ export const ServicePurchaseStoreContext = createContext<ReturnType<
 
 export interface ServicePurchaseStoreProviderProps {
   children: React.ReactNode
-  facets?: RsOfferingFacetTarget[]
   services: RsServiceOffering
 }
 
 export function ServicePurchaseStoreProvider({
   children,
-  facets,
   services,
 }: Readonly<ServicePurchaseStoreProviderProps>) {
-  const [store] = useState(() => createServicePurchaseStore({ facets, services }))
+  const [store] = useState(() => createServicePurchaseStore({ services }))
+
   return (
     <ServicePurchaseStoreContext.Provider value={store}>
       {children}

@@ -1,4 +1,4 @@
-import type { ServicePurchaseStoreSet, SubmitRequestSlice } from '../types'
+import type { ServicePurchaseStoreSet, SubmitRequestSlice } from '../../types'
 
 function createSubmitRequestSlice(set: ServicePurchaseStoreSet): SubmitRequestSlice {
   return {

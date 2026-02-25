@@ -2,33 +2,8 @@ import {
   RsBillingCycle,
   type RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { calculateTotals } from '../../lib/calculate-totals'
-import { getMonths } from '../../lib/utils'
-import type {
-  PurchaseTotals,
-  ServicePurchaseStoreGet,
-  ServicePurchaseStoreSet,
-  TotalsSlice,
-} from '../../types'
-
-function computeTotals(
-  services: RsServiceOffering,
-  selectedTierId: string,
-  selectedBillingCycle: RsBillingCycle,
-  activeGroupIds: Set<string>,
-): PurchaseTotals {
-  const result = calculateTotals({
-    offering: services,
-    selectedTierId,
-    selectedBillingCycle,
-    activeGroupIds,
-  })
-  const months = getMonths(selectedBillingCycle)
-  return {
-    recurringTotal: result.recurringTotal / months,
-    setupTotal: result.setupTotal,
-  }
-}
+import { computeTotals } from '../../lib/compute-totals'
+import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TotalsSlice } from '../../types'
 
 export function createTotalsSlice(
   set: ServicePurchaseStoreSet,
