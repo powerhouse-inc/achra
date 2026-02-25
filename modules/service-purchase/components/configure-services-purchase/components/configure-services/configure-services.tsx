@@ -32,7 +32,7 @@ export default function ConfigureServices({
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader operator={operator} />
       <FacetSelectionSection />
-      <BillingPeriodSelector tiers={servicesData.tiers} />
+      <BillingPeriodSelector />
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <PricingCalculator
           selectedPlan={selectedPlan}
