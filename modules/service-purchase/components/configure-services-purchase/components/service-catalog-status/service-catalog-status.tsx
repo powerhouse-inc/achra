@@ -7,10 +7,7 @@ interface CatalogStatusProps {
   className?: string
 }
 
-function ServiceCatalogStatus({
-  catalogStatus,
-  className,
-}: Readonly<CatalogStatusProps>) {
+function ServiceCatalogStatus({ catalogStatus, className }: Readonly<CatalogStatusProps>) {
   const { label, color } = useMemo(() => {
     switch (catalogStatus) {
       case CatalogStatus.Optional:
