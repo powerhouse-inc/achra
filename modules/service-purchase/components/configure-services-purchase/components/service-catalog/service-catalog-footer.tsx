@@ -11,8 +11,8 @@ import {
   computeRecurringSubtotals,
   formatPrice,
 } from '@/modules/service-purchase/lib/utils'
-import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { cn } from '@/modules/shared/lib/utils'
 
 export interface ServiceCatalogFooterProps {
   optionGroup: RsOfferingOptionGroup

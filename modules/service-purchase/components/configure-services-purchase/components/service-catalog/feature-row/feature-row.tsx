@@ -1,8 +1,8 @@
 'use client'
 
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import type { FeatureValue, ServiceMetric } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { ServiceCatalogCell } from '../service-catalog-cell'
 import { MetricRow } from './metric-row'
 

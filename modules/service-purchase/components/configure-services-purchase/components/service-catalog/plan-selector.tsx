@@ -5,9 +5,9 @@ import {
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeMonthlyEquivalent } from '@/modules/service-purchase/lib/utils'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 
 const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.Monthly]: 'Billed Monthly',
