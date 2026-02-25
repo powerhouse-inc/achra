@@ -1,9 +1,9 @@
 'use client'
 
+import type { FeatureValue } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { usePricingCalculatorContext } from '../pricing-calculator-context'
 import { ServiceCatalogoCell } from '../service-catalogo-cell'
-import type { FeatureValue } from '../../types'
 
 export interface MetricRowProps {
   label: string

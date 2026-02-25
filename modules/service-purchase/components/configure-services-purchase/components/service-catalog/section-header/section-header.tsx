@@ -3,11 +3,11 @@
 import { Lock } from 'lucide-react'
 import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
+import type { CatalogStatus } from '@/modules/service-purchase/types'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
 import ServiceCatalogStatus from '../../service-catalog-status/service-catalog-status'
 import { usePricingCalculatorContext } from '../pricing-calculator-context'
-import type { CatalogStatus } from '../../types'
 
 interface SectionHeaderProps {
   title: string

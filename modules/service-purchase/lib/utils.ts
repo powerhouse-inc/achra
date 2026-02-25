@@ -10,7 +10,7 @@ import {
   RsServiceLevel,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import type { FeatureValue } from '../components/configure-services-purchase/components/types'
+import type { FeatureValue } from '../types'
 
 /** Safe coercion — Amount_Money scalar is typed `any` in codegen */
 function toNum(raw: unknown): number {
