@@ -1,3 +1,4 @@
+import { OPERATIONAL_HUB_URL } from '../config/constants'
 import ff from '../lib/feature-flags'
 import type { RouteWithDynamicPages } from '../types/routes'
 
@@ -29,7 +30,7 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     : []),
   {
     label: 'Operational Hub',
-    href: 'https://v0-operational-hub-landing-page.vercel.app/opshub',
+    href: OPERATIONAL_HUB_URL,
   },
   {
     label: 'Services',

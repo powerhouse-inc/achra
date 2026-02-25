@@ -6,6 +6,7 @@ import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
+import { OPERATIONAL_HUB_URL } from '@/shared/config/constants'
 import { ActionButtons } from './action-buttons'
 import type { Route } from 'next'
 
@@ -69,8 +70,7 @@ function ServiceInfo({
           </div>
           <div className="flex flex-col gap-2">
             <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
-              {/* TODO: extract link to a constant file */}
-              <Link href="https://v0-operational-hub-landing-page.vercel.app/opshub">
+              <Link href={OPERATIONAL_HUB_URL}>
                 Book a Call
                 <Phone className="size-4" />
               </Link>

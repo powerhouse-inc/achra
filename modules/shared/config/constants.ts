@@ -14,6 +14,11 @@ export const FAST_REFRESH_INTERVAL = 5000 // 5 seconds
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://achra.com'
 
 /**
+ * URL for the Operational Hub
+ */
+export const OPERATIONAL_HUB_URL = 'https://www.operationalhub.io/opshub'
+
+/**
  * Network homepage sections IDs for hash navigation
  */
 export enum NetworkHomepageSections {

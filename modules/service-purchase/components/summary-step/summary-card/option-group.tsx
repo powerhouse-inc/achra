@@ -153,14 +153,14 @@ function OptionGroupPricingLineItem({
         <span className="text-foreground text-sm/5.5 lg:text-base/6">{label}</span>
         {sublabel && <span className="text-muted-foreground text-xs">{sublabel}</span>}
       </div>
-      <span className="text-foreground text-sm/5.5 font-normal lg:text-base/6">{value}</span>
+      <span className="text-foreground text-sm/5.5 font-semibold lg:text-base/6">{value}</span>
     </div>
   )
 }
 
 function OptionGroupPricingHeader({ children }: { children: React.ReactNode }) {
   return (
-    <div className="dark:border-border dark:bg-accent flex items-center justify-between border-b border-[#EEEEEE] bg-[#F8F8F8] px-4 py-3 lg:px-6">
+    <div className="dark:border-border bg-accent flex items-center justify-between px-4 py-3 lg:px-6">
       {children}
     </div>
   )
