@@ -1,7 +1,7 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-purchase/components/marketplace-header'
+import { MarketplaceHeader } from '@/modules/service-purchase/components/configure-services-step/marketplace-header'
 import { useServiceOffering } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { BillingPeriodSelector } from '../billing-period-selector/billing-period-selector'
 import { FacetSelectionSection } from '../facet-selection-section'
