@@ -17,7 +17,7 @@ import {
   useSelectedTier,
   useServicePurchaseActions,
 } from '../../providers/service-purchase-store-provider'
-import ConfigureServices from '../configure-services-purchase/components/configure-services/configure-services'
+import { ConfigureServices } from '../configure-services-purchase/components/configure-services'
 import { PricingCalculatorSkeleton } from '../configure-services-purchase/components/service-catalog/pricing-calculator'
 import { ConfirmationStep } from '../confirmation-step'
 import { ProductInfo } from '../product-info'

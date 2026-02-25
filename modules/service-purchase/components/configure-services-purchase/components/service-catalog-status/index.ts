@@ -1,1 +1,1 @@
-export { default as ServiceCatalogStatus } from './service-catalog-status'
+export { ServiceCatalogStatus } from './service-catalog-status'

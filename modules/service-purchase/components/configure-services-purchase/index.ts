@@ -1,1 +1,1 @@
-export { default as ConfigureServices } from './components/configure-services/configure-services'
+export { ConfigureServices } from './components/configure-services/configure-services'

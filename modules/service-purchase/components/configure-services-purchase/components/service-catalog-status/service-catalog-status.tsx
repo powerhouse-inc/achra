@@ -7,10 +7,7 @@ interface CatalogStatusProps {
   className?: string
 }
 
-export default function ServiceCatalogStatus({
-  catalogStatus,
-  className,
-}: Readonly<CatalogStatusProps>) {
+function ServiceCatalogStatus({ catalogStatus, className }: Readonly<CatalogStatusProps>) {
   const { label, color } = useMemo(() => {
     switch (catalogStatus) {
       case CatalogStatus.Optional:
@@ -37,3 +34,5 @@ export default function ServiceCatalogStatus({
     </GenericChip>
   )
 }
+
+export { ServiceCatalogStatus }

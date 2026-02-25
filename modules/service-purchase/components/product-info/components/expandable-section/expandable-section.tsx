@@ -12,7 +12,7 @@ interface ExpandableSectionProps {
   description: string
 }
 
-export default function ExpandableSection({ title, description }: ExpandableSectionProps) {
+function ExpandableSection({ title, description }: ExpandableSectionProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleSection = () => {
@@ -62,3 +62,5 @@ export default function ExpandableSection({ title, description }: ExpandableSect
     </div>
   )
 }
+
+export { ExpandableSection }

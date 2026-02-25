@@ -13,7 +13,7 @@ export interface ConfigureServicesProps {
   operator: BuilderProfileState
 }
 
-export default function ConfigureServices({
+function ConfigureServices({
   selectedPlan,
   onPlanChange,
   operator,
@@ -44,3 +44,5 @@ export default function ConfigureServices({
     </div>
   )
 }
+
+export { ConfigureServices }
