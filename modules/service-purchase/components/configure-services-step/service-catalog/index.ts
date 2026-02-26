@@ -1,5 +1,4 @@
 export { PricingCalculator } from './pricing-calculator/pricing-calculator'
-export type { PricingCalculatorProps } from './pricing-calculator/pricing-calculator'
 // Composable ServiceCatalog components
 export { ServiceCatalogRoot } from './service-catalog-root'
 export type { ServiceCatalogRootProps } from './service-catalog-root'
