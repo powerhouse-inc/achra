@@ -8,14 +8,14 @@ test('has a link to the Networks page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-11lmli7.framer-122cz0u').getByText('Networks').click();
 
-    await expect(page).toHaveURL('https://achra.com/networks');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/networks`);
 });
 
 test('has a link to the Services page', async ({ page }) => {
     //TODO: refactor locator
     await page.locator('a.framer-18lak58.framer-122cz0u').getByText('Services').click();
 
-    await expect(page).toHaveURL('https://achra.com/services');
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services`);
 });
 
 test('has a link to the Use Cases page', async ({ page }) => {
