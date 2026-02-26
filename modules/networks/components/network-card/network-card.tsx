@@ -24,25 +24,29 @@ export function NetworkCard({ profile }: NetworkCardProps) {
       >
         <CardHeader className="gap-0 p-0">
           <div className="flex h-8 items-center justify-between sm:h-8 md:h-10">
-            <CardTitle className="flex w-full items-center gap-2">
+            <CardTitle className="flex h-full w-full items-center gap-2">
               {profile.logo || profile.darkThemeLogo ? (
-                <div className="relative h-10 w-full items-center">
+                <div className="flex h-full max-w-full items-center overflow-hidden">
                   {profile.logo && (
+                    // Keep Next/Image intrinsic sizing minimal; actual display size is controlled by Tailwind
+                    // (`h-full w-auto max-w-full`) so height is fixed by the row and width follows aspect ratio.
                     <Image
                       src={profile.logo}
-                      fill
+                      width={1}
+                      height={1}
                       unoptimized
                       alt={`${profile.name} Logo`}
-                      className={`object-contain object-left ${profile.darkThemeLogo ? 'dark:hidden' : ''}`}
+                      className={`h-full w-auto max-w-full object-contain object-left ${profile.darkThemeLogo ? 'dark:hidden' : ''}`}
                     />
                   )}
                   {profile.darkThemeLogo && (
                     <Image
                       src={profile.darkThemeLogo}
-                      fill
+                      width={1}
+                      height={1}
                       unoptimized
                       alt={`${profile.name} Logo`}
-                      className="hidden object-contain object-left dark:block"
+                      className="hidden h-full w-auto max-w-full object-contain object-left dark:block"
                     />
                   )}
                 </div>
