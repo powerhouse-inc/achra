@@ -88,12 +88,12 @@ export function computeRecurringSubtotals(
 
   for (const tier of tiers) {
     if (tier.isCustomPricing) {
-      result[tier.name] = 'CUSTOM'
+      result[tier.id] = 'CUSTOM'
       continue
     }
 
     if (!tierHasGroupServices(tier, optionGroup)) {
-      result[tier.name] = null
+      result[tier.id] = null
       continue
     }
 
@@ -134,7 +134,7 @@ export function computeRecurringSubtotals(
     }
 
     if (basePrice === null) {
-      result[tier.name] = null
+      result[tier.id] = null
       continue
     }
 
@@ -147,7 +147,7 @@ export function computeRecurringSubtotals(
 
     const symbol =
       optionGroup.currency === 'USD' || !optionGroup.currency ? '$' : optionGroup.currency
-    result[tier.name] = `${symbol}${Math.round(monthlyEquivalent).toLocaleString()}`
+    result[tier.id] = `${symbol}${Math.round(monthlyEquivalent).toLocaleString()}`
   }
 
   return result
@@ -197,7 +197,7 @@ export function computeGrandTotals(
 
   for (const tier of tiers) {
     if (tier.isCustomPricing) {
-      totals[tier.name] = 'Custom'
+      totals[tier.id] = 'Custom'
       continue
     }
 
@@ -267,7 +267,7 @@ export function computeGrandTotals(
 
     const currency = tier.pricing.currency ?? activeRecurringGroups[0]?.currency ?? 'USD'
     const symbol = currency === 'USD' || !currency ? '$' : currency
-    totals[tier.name] = `${symbol}${Math.round(total).toLocaleString()}${suffix}`
+    totals[tier.id] = `${symbol}${Math.round(total).toLocaleString()}${suffix}`
   }
 
   return totals
@@ -284,7 +284,7 @@ export function computeAddonSubtotals(
   const result: Record<string, string | null> = {}
   for (const tier of tiers) {
     if (tier.isCustomPricing) {
-      result[tier.name] = 'CUSTOM'
+      result[tier.id] = 'CUSTOM'
       continue
     }
     const base = optionGroup.price ?? 0
@@ -292,7 +292,7 @@ export function computeAddonSubtotals(
       .filter((ul) => groupServiceIds.has(ul.serviceId))
       .reduce((sum, ul) => sum + (ul.unitPrice ?? 0), 0)
     const total = base + usageTotal
-    result[tier.name] = total > 0 ? formatPrice(total, optionGroup.currency) : null
+    result[tier.id] = total > 0 ? formatPrice(total, optionGroup.currency) : null
   }
   return result
 }
@@ -332,9 +332,9 @@ export function buildServiceValues(
   tiers: readonly RsServiceSubscriptionTier[],
 ): Record<string, FeatureValue> {
   const values: Record<string, FeatureValue> = {}
-  for (const { serviceLevels, name } of tiers) {
+  for (const { serviceLevels, id } of tiers) {
     const binding = serviceLevels.find((sl) => sl.serviceId === serviceId)
-    values[name] = binding ? mapServiceLevel(binding.level, binding.customValue) : false
+    values[id] = binding ? mapServiceLevel(binding.level, binding.customValue) : false
   }
   return values
 }
@@ -370,17 +370,17 @@ export function buildServiceMetrics(
     const values: Record<string, FeatureValue> = {}
     let isOneTime = false
 
-    for (const { usageLimits, name: tierName } of tiers) {
+    for (const { usageLimits, id: tierId } of tiers) {
       const limit = usageLimits.find(
         ({ serviceId: ulServiceId, metric: ulMetric }) =>
           ulServiceId === serviceId && ulMetric === metric,
       )
 
       if (limit) {
-        values[tierName] = formatUsageLimit(limit)
+        values[tierId] = formatUsageLimit(limit)
         if (limit.unitName === 'setup') isOneTime = true
       } else {
-        values[tierName] = false
+        values[tierId] = false
       }
     }
 

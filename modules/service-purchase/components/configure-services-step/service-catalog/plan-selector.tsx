@@ -22,7 +22,7 @@ interface PlanSelectorItemProps {
 }
 
 function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
-  const inputId = tier.id ?? tier.name
+  const inputId = tier.id
   const { selectedBillingCycle } = usePricingCalculatorContext()
 
   const baseAmount = Number(tier.pricing.amount ?? 0)
@@ -54,7 +54,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
     >
       <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
-          value={tier.name}
+          value={tier.id}
           id={inputId}
           className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
         />

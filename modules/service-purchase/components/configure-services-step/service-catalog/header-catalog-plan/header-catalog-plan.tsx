@@ -74,7 +74,7 @@ function HeaderCatalogPlan({
         className="hidden lg:contents"
       >
         {tiers.map((tier) => {
-          const isActive = selectedPlan === tier.name
+          const isActive = selectedPlan === tier.id
 
           return (
             <div
