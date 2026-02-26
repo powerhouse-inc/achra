@@ -17,10 +17,10 @@ const meta = {
     (Story) => (
       <PricingCalculatorProvider
         value={{
-          activePlan: undefined,
+          activePlan: '',
           onPrevPlan: () => {},
           onNextPlan: () => {},
-          tierNames: ['Pro Plan'],
+          tierNames: ['1'],
           tiers: [],
           selectedBillingCycle: RsBillingCycle.Monthly,
         }}
@@ -76,7 +76,7 @@ export const Unselected: Story = {
     },
   },
   render: (args) => (
-    <RadioGroup value={args.tier.name} className="inline-flex">
+    <RadioGroup value={args.tier.id} className="inline-flex">
       <PlanSelectorItem {...args} />
     </RadioGroup>
   ),
