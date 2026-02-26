@@ -12,11 +12,6 @@ import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
-import {
-  useComputedTiers,
-  useSelectedTier,
-  useServicePurchaseActions,
-} from '../../providers/service-purchase-store-provider'
 import { ConfigureServices } from '../configure-services-step/configure-services'
 import { PricingCalculatorSkeleton } from '../configure-services-step/service-catalog/pricing-calculator'
 import { ConfirmationStep } from '../confirmation-step'
@@ -30,9 +25,6 @@ export interface ServicePurchaseFormValues {
   name: string
   teamName: string
   email: string
-  legalEntity: string
-  teamStructure: string
-  anonymityLevel: string
 }
 
 export interface ServicePurchaseFormProps {
@@ -41,9 +33,6 @@ export interface ServicePurchaseFormProps {
 }
 
 function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePurchaseFormProps>) {
-  const tiers = useComputedTiers()
-  const { setSelectedTier } = useServicePurchaseActions()
-  const selectedTier = useSelectedTier()
   const { activeStep, goToStep, hasVisitedStep, resetPostConfigureSteps } = useServicePurchaseStep()
   const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
     'operatorId',
@@ -72,17 +61,7 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
     void setOperatorIdFromUrl(null)
   }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
 
-  const selectedPlan = selectedTier.name
   const selectedOperatorId = useWatch({ control, name: 'operatorId' })
-
-  const handlePlanChange = useCallback(
-    (planName: string) => {
-      const tier = tiers.find((t) => t.name === planName)
-      if (!tier) return
-      setSelectedTier(tier.id)
-    },
-    [tiers, setSelectedTier],
-  )
 
   const handleOnSelectOperator = (operatorId: string) => {
     const hasPreviousOperator = selectedOperatorId !== undefined
@@ -127,11 +106,7 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the service configuration. Please try again later.">
               <Suspense fallback={<PricingCalculatorSkeleton />}>
-                <ConfigureServices
-                  selectedPlan={selectedPlan}
-                  onPlanChange={handlePlanChange}
-                  operator={operator}
-                />
+                <ConfigureServices operator={operator} />
               </Suspense>
             </ErrorBoundaryWithPresets>
           )}
