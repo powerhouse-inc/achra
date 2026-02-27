@@ -54,7 +54,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
             ${Math.round(displayPrice).toLocaleString()}/mo
           </span>
-          TODO: add this one its api fixed
+          {/* TODO: add this one its api fixed */}
           {/* <span className="text-status-progress text-xs font-semibold">save {savingsLabel}</span> */}
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
