@@ -4,6 +4,7 @@ import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard
 import { ENVIRONMENT } from '@/modules/shared/config/constants'
 import ff from '@/modules/shared/lib/feature-flags'
 import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
+import { getAvailableCycles } from '../lib/billing-period'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
 import { createFacetsSlice } from './slices/facets-store-slice'
@@ -102,7 +103,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               currentState.tiers.find((t) => t.id === persisted.selectedTierId) ??
               currentState.selectedTier
             const validBillingCycles = new Set(
-              selectedTier.billingCycleDiscounts.map((d) => d.billingCycle),
+              getAvailableCycles(currentState.services.optionGroups),
             )
             const selectedBillingCycle: RsBillingCycle =
               persisted.selectedBillingCycle != null &&

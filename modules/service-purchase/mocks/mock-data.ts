@@ -58,22 +58,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Essential entity setup for small teams',
         isCustomPricing: false,
         pricingMode: RsTierPricingMode.Calculated,
-        defaultBillingCycle: RsBillingCycle.Monthly,
         pricing: { amount: 99, currency: 'USD' },
-        billingCycleDiscounts: [
-          {
-            billingCycle: RsBillingCycle.Quarterly,
-            discountRule: { discountType: RsDiscountType.FlatAmount, discountValue: 10 },
-          },
-          {
-            billingCycle: RsBillingCycle.SemiAnnual,
-            discountRule: { discountType: RsDiscountType.FlatAmount, discountValue: 40 },
-          },
-          {
-            billingCycle: RsBillingCycle.Annual,
-            discountRule: { discountType: RsDiscountType.FlatAmount, discountValue: 120 },
-          },
-        ],
         serviceLevels: [],
         usageLimits: [
           {
@@ -96,14 +81,9 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Full operations suite',
         isCustomPricing: false,
         pricingMode: RsTierPricingMode.Calculated,
-        defaultBillingCycle: RsBillingCycle.Monthly,
+
         pricing: { amount: 299, currency: 'USD' },
-        billingCycleDiscounts: [
-          {
-            billingCycle: RsBillingCycle.Annual,
-            discountRule: { discountType: RsDiscountType.FlatAmount, discountValue: 350 },
-          },
-        ],
+
         serviceLevels: [],
         usageLimits: [],
       },
@@ -113,9 +93,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Custom pricing for enterprises',
         isCustomPricing: true,
         pricingMode: RsTierPricingMode.ManualOverride,
-        defaultBillingCycle: null,
         pricing: { amount: null, currency: 'USD' },
-        billingCycleDiscounts: [],
         serviceLevels: [],
         usageLimits: [],
       },
@@ -264,7 +242,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         price: 5000,
         currency: 'USD',
         availableBillingCycles: [RsBillingCycle.OneTime],
-        billingCycleDiscounts: [],
         tierDependentPricing: [
           {
             id: 'tp-1',
@@ -305,7 +282,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
           },
         ],
         availableBillingCycles: [RsBillingCycle.Monthly, RsBillingCycle.Annual],
-        billingCycleDiscounts: [],
       },
       {
         id: 'b1254371-0838-4a83-b00c-2c834b79b994',
@@ -332,7 +308,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
           },
         ],
         availableBillingCycles: [RsBillingCycle.Monthly, RsBillingCycle.Annual],
-        billingCycleDiscounts: [],
       },
       {
         id: '0d55f6e9-e6eb-4989-ac59-b5b079f32fc5',
@@ -360,7 +335,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
           ],
         },
         availableBillingCycles: [RsBillingCycle.Monthly, RsBillingCycle.Annual],
-        billingCycleDiscounts: [],
+
         tierDependentPricing: [],
       },
       {
@@ -382,7 +357,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
           ],
         },
         availableBillingCycles: [RsBillingCycle.Monthly, RsBillingCycle.Annual],
-        billingCycleDiscounts: [],
+
         tierDependentPricing: [],
       },
       {
@@ -394,7 +369,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         price: 200,
         currency: 'USD',
         availableBillingCycles: [RsBillingCycle.OneTime],
-        billingCycleDiscounts: [],
+
         tierDependentPricing: [],
       },
     ],
@@ -405,12 +380,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
       selectedBillingCycle: RsBillingCycle.Quarterly,
       tierBasePrice: 297,
       tierCurrency: 'USD',
-      tierDiscount: {
-        discountType: RsDiscountType.FlatAmount,
-        discountValue: 10,
-        originalAmount: 297,
-        discountedAmount: 287,
-      },
+
       optionGroupConfigs: [],
       addOnConfigs: [],
       lastModified: '2026-02-23T12:56:35.359Z',

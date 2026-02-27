@@ -1,0 +1,7 @@
+mutation CreateProductInstances($input: CreateProductInstancesInput!) {
+  createProductInstances(input: $input) {
+    data
+    errors
+    success
+  }
+}
