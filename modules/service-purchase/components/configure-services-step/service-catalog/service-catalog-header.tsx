@@ -16,6 +16,7 @@ export interface ServiceCatalogHeaderProps {
   groupDiscountedPrice?: number | null
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
+  perTierPrices?: Record<string, string | null> | null
 }
 
 function ServiceCatalogHeader({
@@ -29,6 +30,7 @@ function ServiceCatalogHeader({
   groupDiscountedPrice,
   groupCurrency,
   groupCostType,
+  perTierPrices,
 }: Readonly<ServiceCatalogHeaderProps>) {
   const { activePlan } = usePricingCalculatorContext()
 
@@ -45,6 +47,7 @@ function ServiceCatalogHeader({
       groupDiscountedPrice={groupDiscountedPrice}
       groupCurrency={groupCurrency}
       groupCostType={groupCostType}
+      perTierPrices={perTierPrices}
     />
   )
 }
