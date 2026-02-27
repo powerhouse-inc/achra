@@ -28,6 +28,16 @@ export const envSchema = z
       .optional()
       .default('false'),
 
+    NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED: z
+      .enum(['true', 'false'] as const)
+      .optional()
+      .default('true'),
+
+    NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: z
+      .enum(['true', 'false'] as const)
+      .optional()
+      .default('true'),
+
     // Mailchimp env variables (required only when whitelist overlay is enabled)
     MAILCHIMP_API_KEY: z.string().optional(),
     MAILCHIMP_AUDIENCE_ID: z.string().optional(),

@@ -1,3 +1,5 @@
+import debounce from 'lodash/debounce'
+import { toast } from 'sonner'
 import { createStore } from 'zustand'
 import { createJSONStorage, devtools, persist } from 'zustand/middleware'
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -19,9 +21,27 @@ import type {
   ServicePurchaseStoreProps,
 } from '../types'
 
+const showRestorationToast = debounce((result: 'restored' | 'discarded') => {
+  if (result === 'restored') {
+    toast.success('Your previous configuration was restored.')
+  } else {
+    toast.info(
+      "We couldn't restore your previous configuration because the service options have changed.",
+    )
+  }
+}, 1000)
+
 function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
   const storageKey = `service-${services.id}`
   const currentApiChecksum = computeApiChecksum(services)
+
+  /**
+   * Tracks the result of the restoration process.
+   * null: not restored yet
+   * 'restored': restored successfully
+   * 'discarded': discarded because the data in the API has changed since the last time the store was persisted
+   */
+  let restorationResult: 'restored' | 'discarded' | null = null
 
   const innerStore = devtools<ServicePurchaseStore>(
     (set, get) => {
@@ -95,10 +115,17 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               | Partial<PersistedServicePurchaseState>
               | null
               | undefined
-            if (persisted?.apiChecksum !== currentApiChecksum) {
+            if (persisted == null) {
+              restorationResult = null
+              return currentState
+            }
+            if (persisted.apiChecksum !== currentApiChecksum) {
+              restorationResult = 'discarded'
               // ignore the persisted data if the data in the API has changed since the last time the store was persisted
               return currentState
             }
+            restorationResult = 'restored'
+
             const selectedTier =
               currentState.tiers.find((t) => t.id === persisted.selectedTierId) ??
               currentState.selectedTier
@@ -162,6 +189,11 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               visitedSteps,
               disabledSteps,
             }
+          },
+          onRehydrateStorage: () => (_state, error) => {
+            if (error) return
+            if (restorationResult === null) return
+            showRestorationToast(restorationResult)
           },
         }),
       )
