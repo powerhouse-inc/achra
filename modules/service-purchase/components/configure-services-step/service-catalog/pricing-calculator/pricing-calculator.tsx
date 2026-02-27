@@ -1,12 +1,12 @@
 'use client'
 
 import { useCallback, useMemo } from 'react'
+import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
 import {
   buildServiceMetrics,
   buildServiceValues,
-  DEFAULT_PLAN_INDEX,
   getBillingCycleValue,
-  getConstTpe,
+  getCostType,
   getCurrency,
   resolveAddOnDisplayPrice,
 } from '@/modules/service-purchase/lib/utils'
@@ -95,12 +95,7 @@ function PricingCalculator() {
                 // For add-ons, resolve both the base price and the discounted price
                 // (accounting for billing cycle and discountMode).
                 const addOnDisplayPrice = section.isAddOn
-                  ? resolveAddOnDisplayPrice(
-                      section,
-                      tier.id,
-                      billingPeriod,
-                      tier.billingCycleDiscounts,
-                    )
+                  ? resolveAddOnDisplayPrice(section, tier.id, billingPeriod)
                   : null
 
                 const isAddOnSelected =
@@ -133,7 +128,7 @@ function PricingCalculator() {
                         section.isAddOn ? addOnDisplayPrice?.discountedPrice : undefined
                       }
                       groupCurrency={getCurrency(section)}
-                      groupCostType={getConstTpe(section)}
+                      groupCostType={getCostType(section)}
                     />
 
                     <ServiceCatalogBody>

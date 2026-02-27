@@ -2,11 +2,12 @@
 
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
+  computePeriodDiscountLabel,
   getAvailableCycles,
-  PERIOD_DISCOUNTS,
   PERIOD_LABELS,
 } from '@/modules/service-purchase/lib/billing-period'
 import {
+  useSelectedTier,
   useServiceOffering,
   useServicePurchaseActions,
   useServicePurchaseState,
@@ -15,9 +16,10 @@ import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/tog
 
 function BillingPeriodSelector() {
   const servicesData = useServiceOffering()
+  const selectedTier = useSelectedTier()
   const { selectedBillingCycle } = useServicePurchaseState()
   const { setSelectedBillingCycle } = useServicePurchaseActions()
-  const availableCycles = getAvailableCycles(servicesData.tiers)
+  const availableCycles = getAvailableCycles(servicesData.optionGroups)
 
   if (availableCycles.length === 0) return null
 
@@ -33,7 +35,7 @@ function BillingPeriodSelector() {
         className="gap-1"
       >
         {availableCycles.map((cycle) => {
-          const discount = PERIOD_DISCOUNTS[cycle]
+          const discount = computePeriodDiscountLabel(selectedTier, cycle)
 
           return (
             <ToggleGroupItem

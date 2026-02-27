@@ -1,5 +1,6 @@
 import {
   RsBillingCycle,
+  type RsOfferingOptionGroup,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
@@ -19,24 +20,21 @@ export const PERIOD_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.OneTime]: 'One-Time',
 }
 
-// TODO: replace with real discount data from API once endpoint is stable
-export const PERIOD_DISCOUNTS: Partial<Record<RsBillingCycle, string>> = {
-  [RsBillingCycle.Quarterly]: '5%',
-  [RsBillingCycle.SemiAnnual]: '10%',
-  [RsBillingCycle.Annual]: '20%',
+/** Billing-cycle discounts are not available on RS tiers — always returns null. */
+export function computePeriodDiscountLabel(
+  _tier: RsServiceSubscriptionTier,
+  _cycle: RsBillingCycle,
+): string | null {
+  return null
 }
 
-export function getAvailableCycles(tiers: RsServiceSubscriptionTier[]): RsBillingCycle[] {
+/** Derives available billing cycles from the union of all option-group availableBillingCycles. */
+export function getAvailableCycles(optionGroups: RsOfferingOptionGroup[]): RsBillingCycle[] {
   const cyclesSet = new Set<RsBillingCycle>()
-
-  for (const tier of tiers) {
-    if (tier.defaultBillingCycle) {
-      cyclesSet.add(tier.defaultBillingCycle)
-    }
-    for (const { billingCycle } of tier.billingCycleDiscounts) {
-      cyclesSet.add(billingCycle)
+  for (const group of optionGroups) {
+    for (const cycle of group.availableBillingCycles) {
+      cyclesSet.add(cycle)
     }
   }
-
   return PERIOD_ORDER.filter((cycle) => cyclesSet.has(cycle))
 }

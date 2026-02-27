@@ -1,19 +1,18 @@
 import {
-  type CreateResourceInstancesInput,
-  useCreateResourceInstancesMutation,
+  type CreateProductInstancesInput,
+  useCreateProductInstancesMutation,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-
 import type { CreateResourceInstancesResult } from '../types'
 
 export async function submitResourceRequest(
-  input: CreateResourceInstancesInput,
+  input: CreateProductInstancesInput,
 ): Promise<CreateResourceInstancesResult> {
-  const result = await useCreateResourceInstancesMutation.fetcher({ input })()
+  const result = await useCreateProductInstancesMutation.fetcher({ input })()
 
-  const output = result.createResourceInstances
+  const output = result.createProductInstances
 
   if (!output) {
-    throw new Error('No response from createResourceInstances mutation')
+    throw new Error('No response from createProductInstances mutation')
   }
 
   if (!output.success) {

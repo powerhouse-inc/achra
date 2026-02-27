@@ -1,7 +1,7 @@
 'use server'
 
 import { submitRequestSchema } from '../lib/submit-request-schema'
-import { submitResourceRequest } from '../services/create-resource-instances'
+import { submitResourceRequest } from '../services/create-product-instances'
 import type { SubmitRequestFormState } from '../types'
 import 'server-only'
 
@@ -43,7 +43,7 @@ export async function submitRequestAction(
     const mutationResult = await submitResourceRequest({
       name: result.data.name,
       teamName: result.data.teamName,
-      resourceTemplateId: serviceSlug,
+      serviceOfferingId: serviceSlug,
     })
 
     return {

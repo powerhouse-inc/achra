@@ -1,10 +1,8 @@
 import {
   RsBillingCycle,
-  RsDiscountMode,
   RsDiscountType,
   RsGroupCostType,
   type RsOfferingOptionGroup,
-  type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getMonths } from './utils'
 import type { AppliedDiscount, CalculateTotalsInput, CalculateTotalsResult } from '../types'
@@ -12,11 +10,6 @@ import type { AppliedDiscount, CalculateTotalsInput, CalculateTotalsResult } fro
 interface DiscountRule {
   discountType: RsDiscountType
   discountValue: number
-}
-
-interface ResolvedGroupPrice {
-  baseAmount: number | null
-  discountRule: DiscountRule | null
 }
 
 // ─── Internal helpers ─────────────────────────────────────────────────────────
@@ -29,7 +22,7 @@ function toNumber(raw: unknown): number | null {
 }
 
 /**
- * Applies a discount rule to a monthly base price using period-based math.
+ * Applies an inline discount rule to a monthly base price using period-based math.
  *
  * Golden rule: discounts are applied to the PERIOD TOTAL, not the monthly base.
  *   grossTotal  = monthlyBase × months
@@ -56,53 +49,15 @@ function applyDiscountRule(
 }
 
 /**
- * Given an add-on group's discountMode and the available discount sources,
- * returns the effective discount rule to apply.
- *
- * - Independent → group's own billingCycleDiscounts (or inline entry discount)
- * - InheritTier → mirror the selected tier's billing-cycle discount
- * - null        → no discount (add-ons without a discountMode are never discounted)
- */
-function resolveAddOnDiscountRule(
-  group: RsOfferingOptionGroup,
-  inlineEntryDiscount: DiscountRule | null,
-  selectedBillingCycle: RsBillingCycle,
-  tierBillingCycleDiscounts: RsServiceSubscriptionTier['billingCycleDiscounts'],
-): DiscountRule | null {
-  if (group.discountMode === RsDiscountMode.Independent) {
-    // Prefer the inline discount on the price entry; fall back to the group-level discount
-    if (inlineEntryDiscount) return inlineEntryDiscount
-    const matchingGroupDiscount = group.billingCycleDiscounts.find(
-      (d) => d.billingCycle === selectedBillingCycle,
-    )
-    return matchingGroupDiscount?.discountRule ?? null
-  }
-
-  if (group.discountMode === RsDiscountMode.InheritTier) {
-    const matchingTierDiscount = tierBillingCycleDiscounts.find(
-      (d) => d.billingCycle === selectedBillingCycle,
-    )
-    return matchingTierDiscount?.discountRule ?? null
-  }
-
-  // discountMode is null → no discount for this add-on
-  return null
-}
-
-/**
  * Resolves the recurring price for an option group given the active tier and
  * billing cycle.
  *
  * Price resolution priority:
  *  1. `group.standalonePricing.recurringPricing` — per-cycle entries with inline discounts
- *     (fallback within: Monthly entry + group.billingCycleDiscounts)
- *  2. `group.price` (legacy flat) + `group.billingCycleDiscounts`
+ *     (fallback within: Monthly entry)
+ *  2. `group.price` (legacy flat)
  *  3. `group.tierDependentPricing` → matching tier → exact billingCycle entry
- *     (fallback within: Monthly entry + group.billingCycleDiscounts)
- *
- * Discount resolution (applied after price is found):
- *  - Non-add-on groups: use inline entry discount or group.billingCycleDiscounts
- *  - Add-on groups: determined by `discountMode` via resolveAddOnDiscountRule
+ *     (fallback within: Monthly entry)
  *
  * Returns `{ baseAmount: null }` when data is insufficient → caller marks isPending.
  */
@@ -110,10 +65,9 @@ function resolveOptionGroupRecurringPrice(
   group: RsOfferingOptionGroup,
   selectedTierId: string,
   selectedBillingCycle: RsBillingCycle,
-  tierBillingCycleDiscounts: RsServiceSubscriptionTier['billingCycleDiscounts'],
-): ResolvedGroupPrice {
+): { baseAmount: number | null; discountRule: DiscountRule | null } {
   let baseAmount: number | null = null
-  let inlineEntryDiscount: DiscountRule | null = null
+  let discountRule: DiscountRule | null = null
 
   // ── Path 1: standalonePricing.recurringPricing (per-cycle, newest API shape) ──
   const standalonePricingEntries = group.standalonePricing?.recurringPricing
@@ -123,26 +77,17 @@ function resolveOptionGroupRecurringPrice(
     )
     if (exactCycleEntry) {
       baseAmount = toNumber(exactCycleEntry.amount)
-      inlineEntryDiscount = exactCycleEntry.discount ?? null
+      discountRule = exactCycleEntry.discount ?? null
     } else {
-      // Fallback: use Monthly base + group-level billing-cycle discount
       const monthlyFallbackEntry = standalonePricingEntries.find(
         (rp) => rp.billingCycle === RsBillingCycle.Monthly,
       )
       if (monthlyFallbackEntry) {
         baseAmount = toNumber(monthlyFallbackEntry.amount)
-        const matchingCycleDiscount = group.billingCycleDiscounts.find(
-          (d) => d.billingCycle === selectedBillingCycle,
-        )
-        inlineEntryDiscount = matchingCycleDiscount?.discountRule ?? null
       }
     }
   } else if (group.price !== null && group.price !== undefined) {
     baseAmount = toNumber(group.price)
-    const matchingCycleDiscount = group.billingCycleDiscounts.find(
-      (d) => d.billingCycle === selectedBillingCycle,
-    )
-    inlineEntryDiscount = matchingCycleDiscount?.discountRule ?? null
   } else {
     const matchingTierPricing = (group.tierDependentPricing ?? []).find(
       (tp) => tp.tierId === selectedTierId,
@@ -154,33 +99,15 @@ function resolveOptionGroupRecurringPrice(
     )
     if (exactCyclePricing) {
       baseAmount = toNumber(exactCyclePricing.amount)
-      inlineEntryDiscount = exactCyclePricing.discount ?? null
+      discountRule = exactCyclePricing.discount ?? null
     } else {
-      // Fallback: Monthly base + group-level billing-cycle discount
       const monthlyFallbackPricing = matchingTierPricing.recurringPricing.find(
         (rp) => rp.billingCycle === RsBillingCycle.Monthly,
       )
       if (!monthlyFallbackPricing) return { baseAmount: null, discountRule: null }
-
       baseAmount = toNumber(monthlyFallbackPricing.amount)
-      const matchingCycleDiscount = group.billingCycleDiscounts.find(
-        (d) => d.billingCycle === selectedBillingCycle,
-      )
-      inlineEntryDiscount = matchingCycleDiscount?.discountRule ?? null
     }
   }
-
-  if (baseAmount === null) return { baseAmount: null, discountRule: null }
-
-  // ── Discount resolution ────────────────────────────────────────────────────
-  const discountRule = group.isAddOn
-    ? resolveAddOnDiscountRule(
-        group,
-        inlineEntryDiscount,
-        selectedBillingCycle,
-        tierBillingCycleDiscounts,
-      )
-    : inlineEntryDiscount
 
   return { baseAmount, discountRule }
 }
@@ -217,35 +144,10 @@ export function calculateTotals({
     } else {
       const tierGross = tierBaseAmount * months
       recurringSubtotal += tierGross
-
-      const tierBillingCycleDiscount = selectedTier.billingCycleDiscounts.find(
-        (d) => d.billingCycle === selectedBillingCycle,
-      )
-
-      if (tierBillingCycleDiscount) {
-        const { discountedPeriodTotal, savedAmount } = applyDiscountRule(
-          tierBaseAmount,
-          tierBillingCycleDiscount.discountRule,
-          selectedBillingCycle,
-        )
-        recurringTotal += discountedPeriodTotal
-        if (savedAmount > 0) {
-          appliedDiscounts.push({
-            sourceId: selectedTier.id,
-            sourceName: selectedTier.name,
-            source: 'tier',
-            discountType: tierBillingCycleDiscount.discountRule.discountType,
-            discountValue: tierBillingCycleDiscount.discountRule.discountValue,
-            savedAmount,
-          })
-        }
-      } else {
-        recurringTotal += tierGross
-      }
+      recurringTotal += tierGross
     }
   }
 
-  const tierBillingCycleDiscounts = selectedTier?.billingCycleDiscounts ?? []
   const activeOptionGroups = offering.optionGroups.filter((g) => activeGroupIds.has(g.id))
 
   for (const group of activeOptionGroups) {
@@ -267,7 +169,6 @@ export function calculateTotals({
         group,
         selectedTierId,
         selectedBillingCycle,
-        tierBillingCycleDiscounts,
       )
 
       if (baseAmount === null) {

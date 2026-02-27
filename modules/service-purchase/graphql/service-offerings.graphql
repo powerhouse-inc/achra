@@ -5,6 +5,38 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
     infoLink
     lastModified
     operatorId
+    title
+    thumbnailUrl
+    tiers {
+      id
+      name
+      description
+      isCustomPricing
+      pricingMode
+      pricing {
+        amount
+        currency
+      }
+      serviceLevels {
+        id
+        serviceId
+        level
+        customValue
+        optionGroupId
+      }
+      usageLimits {
+        id
+        serviceId
+        metric
+        unitName
+        freeLimit
+        paidLimit
+        resetCycle
+        notes
+        unitPrice
+        unitPriceCurrency
+      }
+    }
     facetTargets {
       id
       categoryKey
@@ -16,12 +48,6 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       selectedBillingCycle
       tierBasePrice
       tierCurrency
-      tierDiscount {
-        discountType
-        discountValue
-        originalAmount
-        discountedAmount
-      }
       optionGroupConfigs {
         id
         optionGroupId
@@ -127,14 +153,6 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       }
       costType
       availableBillingCycles
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-      discountMode
       price
       currency
     }
@@ -144,7 +162,6 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       description
       billingCycle
       displayOrder
-      discountMode
       tierPricing {
         id
         tierId
@@ -193,45 +210,5 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       label
       color
     }
-    title
-    tiers {
-      id
-      name
-      description
-      isCustomPricing
-      pricingMode
-      pricing {
-        amount
-        currency
-      }
-      defaultBillingCycle
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-      serviceLevels {
-        id
-        serviceId
-        level
-        customValue
-        optionGroupId
-      }
-      usageLimits {
-        id
-        serviceId
-        metric
-        unitName
-        freeLimit
-        paidLimit
-        resetCycle
-        notes
-        unitPrice
-        unitPriceCurrency
-      }
-    }
-    thumbnailUrl
   }
 }
