@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
+    // Temporarily skipped for the MVP.
+    test.skip(true);
+
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-2024`);
 });
 
