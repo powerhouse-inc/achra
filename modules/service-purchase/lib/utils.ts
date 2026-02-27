@@ -78,33 +78,6 @@ export function computeMonthlyEquivalent(
   return netTotal / months
 }
 
-function computeTierSubtotal(
-  tier: RsServiceSubscriptionTier,
-  optionGroup: RsOfferingOptionGroup,
-  selectedBillingCycle: RsBillingCycle,
-): string | null {
-  if (tier.isCustomPricing) return CUSTOM_PRICING_LABEL
-  if (!tierHasGroupServices(tier, optionGroup)) return null
-
-  const { basePrice } = resolveAddOnBasePrice(optionGroup, tier.id, selectedBillingCycle)
-  if (basePrice === null) return null
-
-  return `${getCurrencySymbol(optionGroup.currency)}${Math.round(basePrice).toLocaleString()}`
-}
-
-/**
- * Computes per-tier subtotal values for a recurring optionGroup.
- */
-export function computeRecurringSubtotals(
-  optionGroup: RsOfferingOptionGroup,
-  tiers: readonly RsServiceSubscriptionTier[],
-  selectedBillingCycle: RsBillingCycle = RsBillingCycle.Monthly,
-): Record<string, string | null> {
-  return Object.fromEntries(
-    tiers.map((tier) => [tier.id, computeTierSubtotal(tier, optionGroup, selectedBillingCycle)]),
-  )
-}
-
 /**
  * Checks whether a tier has at least one service with an "included" level
  */
@@ -162,27 +135,6 @@ export function computeGrandTotals(
         tier.id,
         `${getCurrencySymbol(currency)}${Math.round(total).toLocaleString()}${suffix}`,
       ]
-    }),
-  )
-}
-
-export function computeAddonSubtotals(
-  optionGroup: RsOfferingOptionGroup,
-  services: ReadonlyArray<{ id: string; optionGroupId?: string | null }>,
-  tiers: readonly RsServiceSubscriptionTier[],
-): Record<string, string | null> {
-  const groupServiceIds = new Set(
-    services.filter((s) => s.optionGroupId === optionGroup.id).map((s) => s.id),
-  )
-  return Object.fromEntries(
-    tiers.map((tier) => {
-      if (tier.isCustomPricing) return [tier.id, CUSTOM_PRICING_LABEL]
-      const basePrice = optionGroup.price ?? 0
-      const usageTotal = tier.usageLimits
-        .filter((ul) => groupServiceIds.has(ul.serviceId))
-        .reduce((sum, ul) => sum + (ul.unitPrice ?? 0), 0)
-      const total = basePrice + usageTotal
-      return [tier.id, total > 0 ? formatPrice(total, optionGroup.currency) : null]
     }),
   )
 }
@@ -355,21 +307,53 @@ export const getCurrency = (section: RsOfferingOptionGroup) => {
 export const getCostType = (section: RsOfferingOptionGroup) => {
   return isAddOnOrSetup(section) ? section.costType : undefined
 }
-// TODO: fix when the api is back
-// export function isServiceVisibleForFacets(
-//   service: RsOfferingService,
-//   facetSelections: Record<string, string>,
-//   facetTargets: RsOfferingFacetTarget[],
-// ): boolean {
-//   if (service.facetBindings.length === 0) return true
-//
-//   return service.facetBindings.every((binding) => {
-//     const target = facetTargets.find((ft) => ft.id === binding.facetType)
-//     if (!target) return true
-//
-//     const userSelection = facetSelections[target.categoryKey]
-//     if (!userSelection) return true
-//
-//     return binding.supportedOptions.includes(userSelection)
-//   })
-// }
+
+/**
+ * Computes the price label for a single tier in a non-add-on recurring
+ * option group header cell.
+ * - Custom pricing tiers → "Custom" (rendered uppercase via CSS)
+ * - Tiers with explicit pricing → "$X"
+ * - Tiers with no pricing entry → "$0"
+ */
+function computeOptionGroupHeaderPriceForTier(
+  group: RsOfferingOptionGroup,
+  tier: RsServiceSubscriptionTier,
+  selectedBillingCycle: RsBillingCycle,
+): string | null {
+  if (tier.isCustomPricing) return CUSTOM_PRICING_LABEL
+
+  const tierPricing = (group.tierDependentPricing ?? []).find((tp) => tp.tierId === tier.id)
+  if (!tierPricing) return formatPrice(0, group.currency)
+
+  const entry =
+    tierPricing.recurringPricing.find((rp) => rp.billingCycle === selectedBillingCycle) ??
+    tierPricing.recurringPricing.find((rp) => rp.billingCycle === RsBillingCycle.Monthly)
+
+  const amount = entry?.amount == null ? 0 : Math.round(Number(entry.amount))
+  return formatPrice(amount, group.currency)
+}
+
+/**
+ * Returns per-tier price labels for non-add-on recurring option group headers.
+ * Returns null for setup or add-on groups — those use a single flat-price display.
+ */
+export function computeOptionGroupHeaderPrices(
+  group: RsOfferingOptionGroup,
+  tiers: readonly RsServiceSubscriptionTier[],
+  selectedBillingCycle: RsBillingCycle,
+): Record<string, string | null> | null {
+  if (group.costType === RsGroupCostType.Setup) return null
+  return Object.fromEntries(
+    tiers.map((tier) => {
+      if (group.isAddOn) {
+        if (tier.isCustomPricing) return [tier.id, CUSTOM_PRICING_LABEL]
+        const { basePrice } = resolveAddOnDisplayPrice(group, tier.id, selectedBillingCycle)
+        return [
+          tier.id,
+          basePrice == null ? null : formatPrice(Math.round(basePrice), group.currency),
+        ]
+      }
+      return [tier.id, computeOptionGroupHeaderPriceForTier(group, tier, selectedBillingCycle)]
+    }),
+  )
+}

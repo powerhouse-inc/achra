@@ -1,14 +1,12 @@
 import { FileText } from 'lucide-react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { FeatureRowSkeleton } from '../feature-row'
-import { GrandTotalRowCatalogSkeleton } from '../grand-total-row-catalog'
-import { HeaderCatalogPlanSkeleton } from '../header-catalog-plan'
-import { PricingCatalogSubtotalSkeleton } from '../pricing-catalog-subtotal-skeleton'
-import { SectionHeaderSkeleton } from '../section-header'
+import { FeatureRowSkeleton } from '../service-catalog/feature-row'
+import { HeaderCatalogPlanSkeleton } from '../service-catalog/header-catalog-plan'
+import { SectionHeaderSkeleton } from '../service-catalog/section-header'
 
-/** Full skeleton for the PricingCalculator service catalog table */
-function PricingCalculatorSkeleton() {
+/** Full skeleton for the ConfigureServices step (Suspense fallback) */
+function ConfigureServicesSkeleton() {
   return (
     <div className="mt-6 flex flex-col gap-6">
       {/* Marketplace Header */}
@@ -29,6 +27,28 @@ function PricingCalculatorSkeleton() {
         ))}
       </div>
 
+      {/* Billing Period Selector */}
+      <div className="flex justify-center">
+        <div className="flex gap-1">
+          <div className="border-border flex h-9.5 items-center gap-2 rounded-md border px-3 py-2">
+            <Skeleton className="bg-border h-3.5 w-14" />
+            <Skeleton className="bg-border h-5 w-14 rounded-full" />
+          </div>
+          <div className="border-border flex h-9.5 items-center gap-2 rounded-md border px-3 py-2">
+            <Skeleton className="bg-border h-3.5 w-16" />
+            <Skeleton className="bg-border h-5 w-14 rounded-full" />
+          </div>
+          <div className="border-border flex h-9.5 items-center gap-2 rounded-md border px-3 py-2">
+            <Skeleton className="bg-border h-3.5 w-20" />
+            <Skeleton className="bg-border h-5 w-14 rounded-full" />
+          </div>
+          <div className="border-border flex h-9.5 items-center gap-2 rounded-md border px-3 py-2">
+            <Skeleton className="bg-border h-3.5 w-12" />
+            <Skeleton className="bg-border h-5 w-14 rounded-full" />
+          </div>
+        </div>
+      </div>
+
       <div className="flex w-full flex-col gap-6 lg:flex-row lg:items-start">
         <Card className="flex w-full flex-col gap-6 border-none! py-0!">
           <div className="overflow-hidden rounded-xl">
@@ -42,7 +62,6 @@ function PricingCalculatorSkeleton() {
                 <FeatureRowSkeleton labelWidth="w-36" />
                 <FeatureRowSkeleton labelWidth="w-48" />
                 <FeatureRowSkeleton labelWidth="w-28" />
-                <PricingCatalogSubtotalSkeleton />
               </div>
 
               {/* Section 2: Core Tools & Documentation */}
@@ -50,7 +69,6 @@ function PricingCalculatorSkeleton() {
                 <SectionHeaderSkeleton hasOneTimeFee oneTimeFeeSkeletonClassName="w-24" />
                 <FeatureRowSkeleton labelWidth="w-32" />
                 <FeatureRowSkeleton labelWidth="w-44" />
-                <PricingCatalogSubtotalSkeleton />
               </div>
 
               {/* Section 3: Advanced & Scale */}
@@ -60,7 +78,6 @@ function PricingCalculatorSkeleton() {
                 <FeatureRowSkeleton labelWidth="w-48" />
                 <FeatureRowSkeleton labelWidth="w-24" />
                 <FeatureRowSkeleton labelWidth="w-52" />
-                <PricingCatalogSubtotalSkeleton />
               </div>
 
               {/* Section 4: Operational Services */}
@@ -68,12 +85,8 @@ function PricingCalculatorSkeleton() {
                 <SectionHeaderSkeleton hasToggle />
                 <FeatureRowSkeleton labelWidth="w-56" />
                 <FeatureRowSkeleton labelWidth="w-44" />
-                <PricingCatalogSubtotalSkeleton />
               </div>
             </div>
-
-            {/* Grand Total */}
-            <GrandTotalRowCatalogSkeleton />
           </div>
         </Card>
       </div>
@@ -81,4 +94,4 @@ function PricingCalculatorSkeleton() {
   )
 }
 
-export { PricingCalculatorSkeleton }
+export { ConfigureServicesSkeleton }

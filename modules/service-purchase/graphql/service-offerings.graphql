@@ -196,12 +196,12 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       serviceGroupId
       isSetupFormation
       optionGroupId
-      facetBindings {
-        id
-        facetName
-        facetType
-        supportedOptions
-      }
+      #facetBindings {
+      #  id
+      #  facetName
+      #  facetType
+      #  supportedOptions
+      #}
     }
     status
     summary
