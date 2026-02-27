@@ -30,7 +30,7 @@ function GenericError({ error, reset }: GenericErrorProps) {
   }, [error])
 
   return (
-    <main className="flex min-h-[calc(100dvh-10rem)] items-center justify-center px-6">
+    <main className="flex min-h-[calc(100dvh-13.875rem)] items-center justify-center px-6">
       <Empty className="bg-background mx-auto w-full max-w-sm border border-solid md:p-6">
         <EmptyHeader>
           <EmptyMedia variant="icon">
