@@ -39,7 +39,6 @@ test('has a link for Explore Vetra', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    // TODO: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://vetra.io/');
 });
 
@@ -68,6 +67,5 @@ test('has a link for Academy', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    // TODO: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://academy.vetra.io/');
 });
