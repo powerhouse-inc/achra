@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from '@/modules/shared/components/ui/dialog'
 import ff from '@/modules/shared/lib/feature-flags'
-import { buttonVariants } from '@/shared/components/ui/button'
+import { Button } from '@/shared/components/ui/button'
 import { useServicePurchaseState } from '../../providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '../../types'
 import type { Route } from 'next'
@@ -99,10 +99,12 @@ function LeavePageGuard() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <DialogClose className={buttonVariants({ variant: 'outline' })}>Cancel</DialogClose>
-          <button type="button" className={buttonVariants()} onClick={handleConfirmLeave}>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button type="button" onClick={handleConfirmLeave}>
             {isPersisted ? 'Leave' : 'Leave anyway'}
-          </button>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
