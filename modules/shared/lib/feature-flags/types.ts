@@ -92,4 +92,9 @@ export interface FeatureFlags {
    * Whether to persist the service purchase store to localStorage
    */
   ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: boolean
+
+  /**
+   * Whether to enable the leave page guard on the service purchase flow
+   */
+  LEAVE_PAGE_GUARD_ENABLED: boolean
 }
