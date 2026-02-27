@@ -21,6 +21,7 @@ interface SectionHeaderProps {
   groupDiscountedPrice?: number | null
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
+  perTierPrices?: Record<string, string | null> | null
 }
 
 function SectionHeader({
@@ -35,6 +36,7 @@ function SectionHeader({
   groupDiscountedPrice,
   groupCurrency,
   groupCostType,
+  perTierPrices,
 }: Readonly<SectionHeaderProps>) {
   const { tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
@@ -100,19 +102,24 @@ function SectionHeader({
         </div>
       </div>
 
-      {/* Mobile: show price label when on last plan */}
+      {/* Mobile: show active plan price */}
       <div
         className={cn(
           'border-input pointer-events-none relative flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan ? 'bg-primary/30' : 'bg-accent',
         )}
       >
-        {priceLabel && !discountedPriceLabel && (
+        {perTierPrices && activePlan && perTierPrices[activePlan] && (
+          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+            {perTierPrices[activePlan]}
+          </span>
+        )}
+        {!perTierPrices && priceLabel && !discountedPriceLabel && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
           </span>
         )}
-        {priceLabel && discountedPriceLabel && (
+        {!perTierPrices && priceLabel && discountedPriceLabel && (
           <span className="flex min-w-0 flex-col items-center gap-0.5">
             <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
               {priceLabel}
@@ -124,21 +131,31 @@ function SectionHeader({
         )}
       </div>
 
-      {/* Desktop: one cell per plan, price label anchored to the last column */}
+      {/* Desktop: one cell per plan */}
       {tierNames.map((plan) => (
         <div
           key={plan}
           className={cn(
-            'border-input pointer-events-none relative hidden min-h-14 min-w-0 items-center border-b px-6 transition-colors lg:flex',
+            'border-input pointer-events-none relative hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
-          {plan === lastTierName && priceLabel && !discountedPriceLabel && (
+          {perTierPrices?.[plan] && (
+            <span
+              className={cn(
+                'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
+                activePlan === plan ? 'text-primary' : 'text-foreground/50',
+              )}
+            >
+              {perTierPrices[plan]}
+            </span>
+          )}
+          {!perTierPrices && plan === lastTierName && priceLabel && !discountedPriceLabel && (
             <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
               {priceLabel}
             </span>
           )}
-          {plan === lastTierName && priceLabel && discountedPriceLabel && (
+          {!perTierPrices && plan === lastTierName && priceLabel && discountedPriceLabel && (
             <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
               <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
                 {priceLabel}

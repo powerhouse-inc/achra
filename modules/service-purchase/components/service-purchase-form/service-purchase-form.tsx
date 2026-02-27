@@ -12,8 +12,10 @@ import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
-import { ConfigureServices } from '../configure-services-step/configure-services'
-import { PricingCalculatorSkeleton } from '../configure-services-step/service-catalog/pricing-calculator'
+import {
+  ConfigureServices,
+  ConfigureServicesSkeleton,
+} from '../configure-services-step/configure-services'
 import { ConfirmationStep } from '../confirmation-step'
 import { ProductInfo } from '../product-info'
 import { SelectOperatorStep } from '../select-operator-step'
@@ -105,7 +107,7 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
           )}
           {step.value === ServicePurchaseStep.ConfigureServices && (
             <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the service configuration. Please try again later.">
-              <Suspense fallback={<PricingCalculatorSkeleton />}>
+              <Suspense fallback={<ConfigureServicesSkeleton />}>
                 <ConfigureServices operator={operator} />
               </Suspense>
             </ErrorBoundaryWithPresets>

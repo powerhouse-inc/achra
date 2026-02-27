@@ -5,6 +5,7 @@ import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
 import {
   buildServiceMetrics,
   buildServiceValues,
+  computeOptionGroupHeaderPrices,
   getBillingCycleValue,
   getCostType,
   getCurrency,
@@ -21,14 +22,7 @@ import {
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { CatalogStatus } from '@/modules/service-purchase/types'
 import { Card } from '@/modules/shared/components/ui/card'
-import {
-  ServiceCatalogBody,
-  ServiceCatalogFooter,
-  ServiceCatalogHeader,
-  ServiceCatalogRoot,
-  ServiceCatalogRow,
-} from '..'
-import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
+import { ServiceCatalogBody, ServiceCatalogHeader, ServiceCatalogRoot, ServiceCatalogRow } from '..'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 
 function PricingCalculator() {
@@ -98,6 +92,9 @@ function PricingCalculator() {
                   ? resolveAddOnDisplayPrice(section, tier.id, billingPeriod)
                   : null
 
+                // For non-add-on recurring groups, show per-tier prices in the header.
+                const perTierPrices = computeOptionGroupHeaderPrices(section, tiers, billingPeriod)
+
                 const isAddOnSelected =
                   storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
 
@@ -129,6 +126,7 @@ function PricingCalculator() {
                       }
                       groupCurrency={getCurrency(section)}
                       groupCostType={getCostType(section)}
+                      perTierPrices={perTierPrices}
                     />
 
                     <ServiceCatalogBody>
@@ -142,21 +140,10 @@ function PricingCalculator() {
                         />
                       ))}
                     </ServiceCatalogBody>
-
-                    <ServiceCatalogFooter
-                      optionGroup={section}
-                      tiers={tiers}
-                      services={servicesData.services}
-                    />
                   </ServiceCatalogRoot>
                 )
               })}
           </div>
-          <GrandTotalRowCatalog
-            selectedPlan={selectedPlan}
-            tiers={tiers}
-            optionGroups={servicesData.optionGroups}
-          />
         </div>
       </Card>
     </PricingCalculatorProvider>
