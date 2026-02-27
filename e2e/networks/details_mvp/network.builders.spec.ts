@@ -5,6 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should save in clipboard the builders link', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___builders > div.flex.w-fit.items-center.gap-4 > span.inline-flex').first().click();
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());

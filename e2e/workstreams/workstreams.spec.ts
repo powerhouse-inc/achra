@@ -25,6 +25,7 @@ test.skip('should display an existing workstream by title', async ({ page }) => 
 
 test.skip('should display workstreams by status RFP DRAFT', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-slot="command-group"]').getByText('RFP DRAFT').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=RFP_DRAFT`);
@@ -36,6 +37,7 @@ test.skip('should display workstreams by status RFP DRAFT', async ({ page }) => 
 // A new test should be created to display an empty state.
 test.skip('should display workstreams by status PREWORK RFC', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-slot="command-group"]').getByText('PREWORK RFC').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=PREWORK_RFC`);
@@ -53,6 +55,7 @@ test('should not display any workstreams by status RFP CANCELLED', async ({ page
 
 test.skip('should display workstreams by status OPEN FOR PROPOSALS', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-slot="command-group"]').getByText('OPEN FOR PROPOSALS').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=OPEN_FOR_PROPOSALS`);
@@ -64,6 +67,7 @@ test.skip('should display workstreams by status OPEN FOR PROPOSALS', async ({ pa
 // A new test should be created to display an empty state.
 test.skip('should display workstreams by status PROPOSAL SUBMITTED', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-slot="command-group"]').getByText('PROPOSAL SUBMITTED').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=PROPOSAL_SUBMITTED`);
@@ -73,6 +77,7 @@ test.skip('should display workstreams by status PROPOSAL SUBMITTED', async ({ pa
 
 test.skip('should display workstreams by status AWARDED', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="AWARDED"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=AWARDED`);
@@ -89,6 +94,7 @@ test('should not display any workstreams by status IN PROGRESS', async ({ page }
 
 test('should not display any workstreams by status FINISHED', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="FINISHED"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=FINISHED`);
@@ -97,6 +103,7 @@ test('should not display any workstreams by status FINISHED', async ({ page }) =
 
 test('should not display any workstreams by status NOT AWARDED', async ({ page }) => {
     await page.getByText('All Statuses').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="NOT_AWARDED"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?statuses=NOT_AWARDED`);
@@ -112,6 +119,7 @@ test('should display all workstreams by status', async ({ page }) => {
 
 test('should display workstreams by network Powerhouse', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=powerhouse`);
@@ -120,6 +128,7 @@ test('should display workstreams by network Powerhouse', async ({ page }) => {
 
 test.skip('should display workstreams by network Spark', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="spark"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=spark`);
@@ -128,6 +137,7 @@ test.skip('should display workstreams by network Spark', async ({ page }) => {
 
 test.skip('should display workstreams by network Grove', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="grove"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=grove`);
@@ -136,6 +146,7 @@ test.skip('should display workstreams by network Grove', async ({ page }) => {
 
 test.skip('should display workstreams by network Sky', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="sky"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=sky`);
@@ -144,6 +155,7 @@ test.skip('should display workstreams by network Sky', async ({ page }) => {
 
 test.skip('should not display any workstreams by network DeFi Legal Commons (DLC)', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="defi-legal-commons-(dlc)"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=defi-legal-commons-(dlc)`);
@@ -153,6 +165,7 @@ test.skip('should not display any workstreams by network DeFi Legal Commons (DLC
 // TODO: This network was removed in the staging environment.
 test.skip('should display workstreams by network Liberuum network', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="liberuum-network"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=liberuum-network`);
@@ -162,6 +175,7 @@ test.skip('should display workstreams by network Liberuum network', async ({ pag
 // TODO: This network was removed in the staging environment.
 test.skip('should not display any workstreams by network Willow', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="willow"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=willow`);
@@ -171,6 +185,7 @@ test.skip('should not display any workstreams by network Willow', async ({ page 
 // TODO: This network was removed in the staging environment.
 test.skip('should not display any workstreams by network Teeps Global Network of Talented Consultants', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.getByText('Teeps Global Network of Talented Consultants').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=teeps-global-network-of-talented-consultants`);
@@ -179,6 +194,7 @@ test.skip('should not display any workstreams by network Teeps Global Network of
 
 test('should display all workstreams by network', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="__select_all__"]').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/workstreams?networks=powerhouse`);
@@ -186,6 +202,7 @@ test('should display all workstreams by network', async ({ page }) => {
 
 test('should navigate to the network page by clicking on the logo', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
     await page.locator('a[href="/network/powerhouse"]').click();
 
@@ -194,6 +211,7 @@ test('should navigate to the network page by clicking on the logo', async ({ pag
 
 test('should navigate to the workstream page by clicking on the workstream name', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
     await page.getByText('Powerhouse Workstream 2024').click();
 
@@ -202,6 +220,7 @@ test('should navigate to the workstream page by clicking on the workstream name'
 
 test('should navigate to the RFP page by clicking on the RFP link', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
     await expect(page.getByText('Spark Workstream 2025')).toBeHidden();
 
@@ -213,6 +232,7 @@ test('should navigate to the RFP page by clicking on the RFP link', async ({ pag
 
 test('should navigate to the Initial Proposal page by clicking on the Initial Proposal link', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
     await expect(page.getByText('Spark Workstream 2025')).toBeHidden();
 
@@ -224,6 +244,7 @@ test('should navigate to the Initial Proposal page by clicking on the Initial Pr
 
 test('should display more workstreams by clicking on the Load More button', async ({ page }) => {
     await page.getByText('All Networks').click();
+    //TODO: refactor locator
     await page.locator('div[data-value="powerhouse"]').click();
     await expect(page.getByText('Spark Workstream 2025')).toBeHidden();
 

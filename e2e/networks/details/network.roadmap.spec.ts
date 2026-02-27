@@ -8,6 +8,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should save in clipboard the roadmap link', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___roadmap *> span.inline-flex').click();
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
@@ -53,6 +54,7 @@ test('should redirect to the link of the key result', async ({ page }) => {
 
 test('should paginate roadmaps', async ({ page }) => {
     await expect(page.locator('div.swiper-wrapper').getByText('PMC')).toBeHidden();
+    //TODO: refactor locator
     await page.locator('section[id="___SECTION___roadmap"] *> .swiper-pagination-bullet').last().click();
 
     await expect(page.locator('div.swiper-wrapper').getByText('PMC')).toBeVisible();
@@ -60,6 +62,7 @@ test('should paginate roadmaps', async ({ page }) => {
 
 test('should contain the required data for a roadmap', async ({ page }) => {
     const roadmapDescription = "Make Achra the official transparency reporting platform for Powerhouse, SKY, and its Prime Agents as required by the Atlas. The expectation is from launch day onwards, all the network administration teams, the project/product managers, the builders and the finance operators are using Achra and the associated Connect apps on a daily basis to keep track of work and finances. "
+    //TODO: refactor locator
     await page.locator('#___SECTION___roadmap *> button:nth-child(2)').click();
     await expect(page.getByText(roadmapDescription)).toBeVisible();
 });

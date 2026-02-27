@@ -7,6 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should save in clipboard the wallets link', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___wallets > div > span.inline-flex').first().click();
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());

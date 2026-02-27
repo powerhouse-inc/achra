@@ -6,6 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should save in clipboard the finances link', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___budget-statements *> span.inline-flex').click();
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
@@ -56,6 +57,7 @@ test('should load all columns', async ({ page }) => {
 });
 
 test('should load info tooltip', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___budget-statements *> div.cursor-pointer > div.hidden').hover();
     await page.waitForTimeout(1000);
     await expect(page.getByText('Access detailed insights into budget reporting activities, including contributors, reporting month, actual expenditures, status, and recent modifications.')).toHaveCount(2);
@@ -74,6 +76,7 @@ test('should filter by status all builder statuses', async ({ page }) => {
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___budget-statements *> div.hidden > button:nth-child(2)').click();
     await page.getByRole('option', { name: 'Net Protocol Outflow' }).click();
     await page.locator('#___SECTION___budget-statements').getByText('Status').first().click();
@@ -90,6 +93,7 @@ test('should filter with other options in iPad Mini resolution', async ({ page }
     await page.setViewportSize({ width: 768, height: 1024 });
     await page.waitForTimeout(1000);
 
+    //TODO: refactor locator
     await page.locator('#___SECTION___budget-statements > div > div > div > div > div.max-w-fit.hidden > button').click();
 
     await expect(page.getByText('Sort')).toBeVisible();

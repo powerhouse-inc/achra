@@ -8,6 +8,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should save in clipboard the proposals link', async ({ page }) => {
+    //TODO: refactor locator
     await page.locator('#___SECTION___proposals *> div > span.inline-flex').click();
 
     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
@@ -17,6 +18,8 @@ test('should save in clipboard the proposals link', async ({ page }) => {
 
 test('should paginate proposals', async ({ page }) => {
     await expect(page.getByText('2.3: User Dashboard').first()).toBeVisible();
+
+    //TODO: refactor locator
     await page.locator('section[id="___SECTION___proposals"] *> .swiper-pagination-bullet').last().click();
 
     await expect(page.getByText('2.3: User Dashboard').first()).toBeVisible();
@@ -31,6 +34,7 @@ test('should contain 6 proposals', async ({ page }) => {
 // TODO: Check what is the correct proposal details page
 test.skip('should navigate to the prposal after clicking on the Details button', async ({ page }) => {
     // find the first proposal and click on the Details button
+    //TODO: refactor locator
     await page.locator('#___SECTION___proposals *> .swiper *> .swiper-slide').first().click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/proposal/2.3-user-dashboard`);

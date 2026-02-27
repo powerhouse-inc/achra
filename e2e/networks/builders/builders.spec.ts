@@ -50,6 +50,7 @@ test('should load all builder skills', async ({ page }) => {
     await expect(page.getByText('Data Engineering')).toHaveCount(0);
     await expect(page.getByText('Security Engineering')).toHaveCount(0);
 
+    //TODO: refactor locator
     await page.locator('table > tbody > tr:nth-child(1) > td > a > div > div.hidden > div:nth-child(2) > div').click();
     await expect(page.getByText('UI/UX Design')).toHaveCount(4);
 });
