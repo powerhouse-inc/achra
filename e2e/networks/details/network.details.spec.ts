@@ -1,15 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    // Temporarily skipped for the MVP.
-    test.skip(true);
-
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
-// TODO: Check if the title and description will change depending on the network
 test('should contract the top banner', async ({ page }) => {
-    const description = "Welcome to the Sky Fusion Dashboard, your hub for key insights into Sky Ecosystem's finances, governance, teams, and roadmaps. Get up-to-date data and explore strategic developments to stay informed about Sky's progress and plans."
+    const description = "The Powerhouse dashboard provides an overview of the builder teams and their financial data within the Powerhouse network. This portal tracks technical expertise, team information, and monthly financial reporting to maintain transparency across all active workstreams. It serves as the primary tool for monitoring team capabilities and fiscal oversight for every project operating under the Powerhouse network."
     await expect(page.getByText(description)).toBeVisible();
 
     //TODO: refactor locator
