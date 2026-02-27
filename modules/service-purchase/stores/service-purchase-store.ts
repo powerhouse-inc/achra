@@ -6,6 +6,7 @@ import ff from '@/modules/shared/lib/feature-flags'
 import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
+import { getAvailableCycles } from '../lib/billing-period'
 import { createFacetsSlice } from './slices/facets-store-slice'
 import { createOptionGroupsSlice } from './slices/option-groups-slice'
 import { createStepSlice } from './slices/step-slice'
@@ -102,7 +103,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               currentState.tiers.find((t) => t.id === persisted.selectedTierId) ??
               currentState.selectedTier
             const validBillingCycles = new Set(
-              selectedTier.billingCycleDiscounts.map((d) => d.billingCycle),
+              getAvailableCycles(currentState.services.optionGroups),
             )
             const selectedBillingCycle: RsBillingCycle =
               persisted.selectedBillingCycle != null &&
