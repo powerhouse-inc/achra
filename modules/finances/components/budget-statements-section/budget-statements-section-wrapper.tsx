@@ -1,15 +1,15 @@
 import { Suspense } from 'react'
-import BudgetStatementFilters from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-stament-filters'
-import { BudgetStatementFiltersSkeleton } from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-statement-filters-skeleton'
 import { BudgetStatementsContentWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-content-wrapper'
 import { BudgetStatementsSectionSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-skeleton/budget-statements-section-skeleton'
-import BudgetStatementsTitle from '@/modules/finances/components/budget-statements-section/budget-statements-title'
+import { BudgetStatementsTitle } from '@/modules/finances/components/budget-statements-section/budget-statements-title'
 import { BudgetStatementsTitleSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-title-skeleton'
 import { FinancesSections } from '@/modules/finances/components/config/const'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
+import { BudgetStatementFilters } from './budget-statement-filters/budget-statement-filters'
+import { BudgetStatementFiltersSkeleton } from './budget-statement-filters/budget-statement-filters-skeleton'
 
 interface BudgetStatementsSectionWrapperProps {
   params: Promise<{

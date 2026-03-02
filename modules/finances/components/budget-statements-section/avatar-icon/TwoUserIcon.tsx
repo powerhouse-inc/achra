@@ -73,4 +73,4 @@ function TwoUserIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export default TwoUserIcon
+export { TwoUserIcon }

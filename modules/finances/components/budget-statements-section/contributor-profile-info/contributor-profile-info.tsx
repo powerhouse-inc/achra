@@ -4,7 +4,7 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { AvatarWithIcon } from '../avatar-icon'
-import BudgetStatementsStatus from '../budget-staments-status/budget-statments-status'
+import { BudgetStatementsStatus } from '../budget-statements-status/budget-statements-status'
 
 interface ContributorProfileInfoProps {
   name: string

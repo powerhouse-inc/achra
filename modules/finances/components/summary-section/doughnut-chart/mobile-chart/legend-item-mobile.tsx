@@ -14,7 +14,7 @@ interface LegendItemProps {
   percentage: number
 }
 
-export default function LegendItemMobile({
+function LegendItemMobile({
   inline = false,
   name,
   code,
@@ -71,3 +71,5 @@ export default function LegendItemMobile({
     </div>
   )
 }
+
+export { LegendItemMobile }

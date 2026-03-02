@@ -3,6 +3,7 @@ import { startTransition, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, type SwiperProps, type SwiperRef, SwiperSlide } from 'swiper/react'
 
+import type { AnalyticMetric, DoughnutBudgetMetric, DoughnutSeries } from '@/modules/finances/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 
@@ -16,7 +17,6 @@ import {
   getPercentDisplay,
   sortDoughnutSeriesByValue,
 } from './utils'
-import type { AnalyticMetric, BudgetMetric, DoughnutSeries } from './types'
 
 interface DesktopChartProps {
   seriesData: DoughnutSeries[]
@@ -26,7 +26,7 @@ interface DesktopChartProps {
   numberSliderPerLevel?: number
 }
 
-export function DesktopChart({
+function DesktopChart({
   seriesData,
   selectedMetric,
   changeAlignment,
@@ -101,7 +101,7 @@ export function DesktopChart({
           const itemRender = visibleSeries[index]
           const selectedMetricKey = getCorrectMetricValuesOverViewChart(
             selectedMetric,
-          ) as keyof BudgetMetric
+          ) as keyof DoughnutBudgetMetric
 
           const customTooltip = `
           <div style="background-color:var(--popover);padding:7px 15px;min-width:194px;">
@@ -342,4 +342,4 @@ export function DesktopChart({
   )
 }
 
-export default DesktopChart
+export { DesktopChart }

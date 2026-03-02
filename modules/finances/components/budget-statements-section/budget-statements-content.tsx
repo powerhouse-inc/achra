@@ -1,11 +1,14 @@
 'use client'
 
+import type {
+  BudgetStatement,
+  MetricWithoutBudget,
+  SortOptionValue,
+} from '@/modules/finances/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import { cn } from '@/modules/shared/lib/utils'
-import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
-import type { SortOptionValue } from './budget-stament-filters/popover-filter-content'
-import type { BudgetStatement, MetricWithoutBudget } from './type'
+import { BudgetStatementsItem } from './budget-statement-item/budget-statement-item'
 
 interface BudgetStatementsContentProps {
   budgetMetric: MetricWithoutBudget
@@ -14,7 +17,7 @@ interface BudgetStatementsContentProps {
   asSectionContent?: boolean
 }
 
-export default function BudgetStatementsContent({
+function BudgetStatementsContent({
   budgetMetric,
   sortOption,
   budgetStatements,
@@ -42,3 +45,5 @@ export default function BudgetStatementsContent({
     </div>
   )
 }
+
+export { BudgetStatementsContent }

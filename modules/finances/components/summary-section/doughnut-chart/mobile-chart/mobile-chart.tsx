@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import type { DoughnutSeries } from '@/modules/finances/components/summary-section/doughnut-chart/types'
-import LegendItemMobile from './legend-item-mobile'
+import type { DoughnutSeries } from '@/modules/finances/types'
+import { LegendItemMobile } from './legend-item-mobile'
 
 interface MobileChartProps {
   seriesData: DoughnutSeries[]

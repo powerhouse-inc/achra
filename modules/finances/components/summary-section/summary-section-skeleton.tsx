@@ -1,7 +1,7 @@
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/shared/lib/utils'
-import { BudgetUtilizationCardSkeleton } from './butget-utilization-card/budget-utilization-skeleton'
+import { BudgetUtilizationCardSkeleton } from './budget-utilization-card/budget-utilization-skeleton'
 import { DoughnutChartSkeleton } from './doughnut-chart/doughnut-chart-skeleton'
 
 export function SummarySectionSkeleton() {

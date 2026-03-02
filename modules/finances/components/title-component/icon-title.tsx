@@ -9,7 +9,7 @@ interface Props {
   code: string
 }
 
-export default function IconTitleWithCode({ icon, title, className, code }: Readonly<Props>) {
+function IconTitleWithCode({ icon, title, className, code }: Readonly<Props>) {
   return (
     <div
       data-slot="icon-title-container"
@@ -51,3 +51,5 @@ export default function IconTitleWithCode({ icon, title, className, code }: Read
     </div>
   )
 }
+
+export { IconTitleWithCode }

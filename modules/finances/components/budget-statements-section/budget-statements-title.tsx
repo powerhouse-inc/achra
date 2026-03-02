@@ -1,9 +1,9 @@
 'use client'
 
 import { useFinancesYear } from '../../hooks/use-finaces-year'
-import TitleSection from '../title-section-finances'
+import { TitleSectionFinances as TitleSection } from '../title-section-finances'
 
-export default function BudgetStatementsTitle() {
+function BudgetStatementsTitle() {
   const { year } = useFinancesYear()
   const range = `Jan - Dec ${year}`
 
@@ -27,3 +27,5 @@ export default function BudgetStatementsTitle() {
     />
   )
 }
+
+export { BudgetStatementsTitle }
