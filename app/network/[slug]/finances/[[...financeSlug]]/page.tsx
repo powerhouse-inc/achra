@@ -3,6 +3,7 @@ import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-sel
 import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdown-chart/breakdown-chart-card-wrapper'
 import { BudgetStatementsSectionWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
+import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
@@ -63,6 +64,10 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
 
         {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
           <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
+        )}
+
+        {ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED && (
+          <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
         <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />

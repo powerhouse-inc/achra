@@ -82,6 +82,11 @@ export interface FeatureFlags {
      * Whether to show the year selector in the finances section
      */
     YEAR_SELECTOR_ENABLED?: boolean
+
+    /**
+     * Whether to show the expenses metric chart section
+     */
+    EXPENSES_METRIC_CHART_SECTION_ENABLED?: boolean
   }
   /**
    * Whether to enable the login button in the nav bar
