@@ -1,3 +1,7 @@
+import {
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
+  LEAVE_PAGE_GUARD_ENABLED,
+} from '@/modules/service-purchase/config/constants'
 import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
 import type { FeatureFlags } from './types'
 
@@ -28,7 +32,8 @@ const ffDev: FeatureFlags = {
     YEAR_SELECTOR_ENABLED: true,
   },
   NAV_BAR_LOGIN_BUTTON_ENABLED: true,
-  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: true,
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
+  LEAVE_PAGE_GUARD_ENABLED,
 }
 
 export { ffDev }

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
+import { Toaster } from '@/modules/shared/components/ui/sonner'
 import ff from '@/modules/shared/lib/feature-flags'
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
@@ -65,6 +66,7 @@ export default function RootLayout({
               )}
 
               <Footer />
+              <Toaster />
             </NuqsAdapter>
           </QueryClientProvider>
         </ThemeProvider>
