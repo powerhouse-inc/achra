@@ -121,6 +121,8 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
             }
             if (persisted.apiChecksum !== currentApiChecksum) {
               restorationResult = 'discarded'
+              // remove the obsolete persisted data
+              localStorage.removeItem(storageKey)
               // ignore the persisted data if the data in the API has changed since the last time the store was persisted
               return currentState
             }

@@ -3,7 +3,7 @@ interface OperatorKeyPointProps {
   value: string
 }
 
-export default function OperatorKeyPoint({ label, value }: OperatorKeyPointProps) {
+function OperatorKeyPoint({ label, value }: OperatorKeyPointProps) {
   return (
     <div className="border-border bg-popover flex flex-col gap-2 rounded-lg border p-2">
       <span className="text-foreground text-xs/4.5 font-medium">{label}</span>
@@ -11,3 +11,5 @@ export default function OperatorKeyPoint({ label, value }: OperatorKeyPointProps
     </div>
   )
 }
+
+export { OperatorKeyPoint }

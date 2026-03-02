@@ -40,7 +40,10 @@ function ServiceInfo({
   const coverImage = thumbnailUrl ?? DEFAULT_COVER
 
   return (
-    <Card className="border-none bg-transparent p-0 shadow-none">
+    <Card
+      className="border-none bg-transparent p-0 shadow-none"
+      data-mode={light ? 'light' : 'dense'}
+    >
       <CardContent
         className={cn(
           'flex flex-col gap-4 px-0 sm:flex-row lg:gap-6',
@@ -68,25 +71,27 @@ function ServiceInfo({
               style={{ objectFit: 'cover' }}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <Button variant="outline" className={cn('w-full', light && 'hidden')} asChild>
-              <Link href={OPERATIONAL_HUB_URL}>
-                Book a Call
-                <Phone className="size-4" />
-              </Link>
-            </Button>
-            {showPurchaseButton && (
-              <InternalLink
-                href={`/services/${id}/purchase` as Route}
-                disabled={isUnavailable}
-                className={cn(isUnavailable && 'pointer-events-none opacity-50')}
-                size="lg"
-                variant="default"
-              >
-                Purchase
-              </InternalLink>
-            )}
-          </div>
+          {!light && (
+            <div className="flex flex-col gap-2">
+              <Button variant="outline" className="w-full" asChild>
+                <Link href={OPERATIONAL_HUB_URL}>
+                  Book a Call
+                  <Phone className="size-4" />
+                </Link>
+              </Button>
+              {showPurchaseButton && (
+                <InternalLink
+                  href={`/services/${id}/purchase` as Route}
+                  disabled={isUnavailable}
+                  className={cn(isUnavailable && 'pointer-events-none opacity-50')}
+                  size="lg"
+                  variant="default"
+                >
+                  Purchase
+                </InternalLink>
+              )}
+            </div>
+          )}
         </div>
         <div className={cn('flex w-full flex-col gap-4 lg:gap-6', light && 'gap-0')}>
           <span

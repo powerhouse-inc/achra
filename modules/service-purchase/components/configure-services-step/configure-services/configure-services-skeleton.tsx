@@ -1,4 +1,3 @@
-import { FileText } from 'lucide-react'
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { FeatureRowSkeleton } from '../service-catalog/feature-row'
@@ -11,7 +10,7 @@ function ConfigureServicesSkeleton() {
     <div className="mt-6 flex flex-col gap-6">
       {/* Marketplace Header */}
       <div className="border-border flex items-center gap-3 border-b pb-2">
-        <FileText className="text-muted-foreground size-6" />
+        <Skeleton className="size-6 shrink-0" />
         <Skeleton className="bg-border h-5 w-52" />
       </div>
 

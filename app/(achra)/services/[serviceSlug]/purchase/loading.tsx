@@ -1,10 +1,15 @@
-import { StepOneSkeleton } from '@/modules/service-purchase/components/service-purchase-form/step-one-skeleton/step-one-skeleton'
-import { PageContent } from '@/modules/shared/components/page-containers'
+'use client'
+
+import { Suspense } from 'react'
+import {
+  PurchaseLoadingFallbackSkeleton,
+  PurchaseLoadingSkeleton,
+} from '@/modules/service-purchase/components/purchase-loading-skeleton'
 
 export default function ServicePurchaseLoading() {
   return (
-    <PageContent className="gap-6">
-      <StepOneSkeleton />
-    </PageContent>
+    <Suspense fallback={<PurchaseLoadingFallbackSkeleton />}>
+      <PurchaseLoadingSkeleton />
+    </Suspense>
   )
 }

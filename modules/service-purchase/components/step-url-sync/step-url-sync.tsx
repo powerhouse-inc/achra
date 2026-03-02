@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import { SERVICE_PURCHASE_STEP_VALUES } from '../../config/constants'
 import { useServicePurchaseStep } from '../../providers/service-purchase-store-provider'
 
-function StepUrlSync({ children }: React.PropsWithChildren) {
+function StepUrlSync() {
   const { activeStep, goToStep } = useServicePurchaseStep()
   const [stepFromUrl, setStepFromUrl] = useQueryState(
     'step',
@@ -35,7 +35,7 @@ function StepUrlSync({ children }: React.PropsWithChildren) {
     void setStepFromUrl(activeStep)
   }, [activeStep, stepFromUrl, setStepFromUrl])
 
-  return <>{children}</>
+  return null
 }
 
 export { StepUrlSync }
