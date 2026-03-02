@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { formatMonthYear } from '@/modules/shared/lib/date'
-import OperatorKeyPoint from './components/operator-key-point/operator-key-point'
+import { OperatorKeyPoint } from './operator-key-point'
 import type { Route } from 'next'
 
 export interface Operator {

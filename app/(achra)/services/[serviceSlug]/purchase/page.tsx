@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LeavePageGuard } from '@/modules/service-purchase/components/leave-page-guard'
+import { NavigationButtons } from '@/modules/service-purchase/components/navigation-buttons'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
 import { ServicePurchaseForm } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
 import { StepUrlSync } from '@/modules/service-purchase/components/step-url-sync'
@@ -19,29 +20,36 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
   const { serviceSlug } = await params
   const resourceTemplate = await getResourceTemplate({ id: serviceSlug })
 
+  if (!resourceTemplate) {
+    notFound()
+  }
+
   const [operator, services] = await Promise.all([
-    getResourceOperator({ id: resourceTemplate?.operatorId }),
+    getResourceOperator({ id: resourceTemplate.operatorId }),
     getServiceOfferings({
-      operatorId: resourceTemplate?.operatorId,
-      resourceTemplateId: resourceTemplate?.id,
+      operatorId: resourceTemplate.operatorId,
+      resourceTemplateId: resourceTemplate.id,
     }),
   ])
 
-  if (!resourceTemplate || !operator || !services) {
+  if (!operator || !services) {
     notFound()
   }
 
   return (
     <PageContent className="gap-6">
-      {/* TODO:Remove this cast as when the api its ready */}
+      {/* TODO: Remove this cast as when the api its ready */}
       <ServicePurchaseStoreProvider services={services as unknown as RsServiceOffering}>
-        {ff.LEAVE_PAGE_GUARD_ENABLED && <LeavePageGuard />}
-        <StepUrlSync>
-          <div className="flex flex-col gap-6 lg:gap-8">
+        <div className="flex flex-col gap-6 lg:gap-8">
+          <div>
+            <NavigationButtons />
             <ServiceHeader resourceTemplate={resourceTemplate} />
-            <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
           </div>
-        </StepUrlSync>
+          <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
+        </div>
+
+        {ff.LEAVE_PAGE_GUARD_ENABLED && <LeavePageGuard />}
+        <StepUrlSync />
       </ServicePurchaseStoreProvider>
     </PageContent>
   )
