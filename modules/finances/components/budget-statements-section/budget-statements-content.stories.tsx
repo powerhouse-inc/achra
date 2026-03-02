@@ -1,7 +1,7 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import { METRIC_OPTIONS } from '../../types'
-import { BudgetStatementsItem } from './budget-stament-item/budget-staments-item'
-import { mockBudgetStatements } from './mock/budget-stament-mock'
+import { BudgetStatementsItem } from './budget-statement-item/budget-statement-item'
+import { mockBudgetStatements } from './mock/budget-statement-mock'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {

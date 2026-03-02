@@ -43,6 +43,73 @@ export interface ValueAndUnit {
   unit: string
 }
 
+export interface ValuesDataWithBorder {
+  value: number | null | undefined
+  itemStyle: {
+    borderRadius: number[]
+  }
+}
+
+export interface BreakdownChartSeriesData {
+  name: string
+  data: ValuesDataWithBorder[]
+  dataOriginal: ValuesDataWithBorder[]
+  type: 'bar'
+  stack: 'x'
+  barWidth: number
+  showBackground: boolean
+  itemStyle: {
+    color: string
+    colorOriginal: string
+  }
+  isVisible: boolean
+}
+
+export type AnalyticGranularity =
+  | 'total'
+  | 'annual'
+  | 'semiAnnual'
+  | 'quarterly'
+  | 'monthly'
+  | 'weekly'
+  | 'daily'
+  | 'hourly'
+
+export type AnalyticGranularityForBreakdownChart = Extract<
+  AnalyticGranularity,
+  'monthly' | 'quarterly' | 'annual'
+>
+
+export interface BarChartSeries {
+  name: string
+  seriesName: string
+  color: string
+  value: number
+  dataIndex: number
+}
+
+export interface AnalyticSeriesRow {
+  dimensions: Array<{
+    name: 'budget'
+    path: string
+  }>
+  metric: AnalyticMetric
+  unit: 'DAI'
+  value: number
+  sum: number
+}
+
+export interface AnalyticSeries {
+  period: string
+  start: string
+  end: string
+  rows: AnalyticSeriesRow[]
+}
+
+export interface Analytic {
+  series: AnalyticSeries[]
+}
+
 export interface BudgetMetric {
   actuals: ValueAndUnit
   budget: ValueAndUnit
@@ -96,4 +163,50 @@ export enum GRANULARITY_OPTIONS {
   Monthly = 'Monthly',
   Quarterly = 'Quarterly',
   Annually = 'Annually',
+}
+
+// Budget Statements types
+export enum MetricOption {
+  Budget = 'Budget',
+  Forecast = 'Forecast',
+  Actuals = 'Actuals',
+  NetProtocolOutflow = 'Net Protocol Outflow',
+  NetExpensesOnChain = 'Net Expenses On-Chain',
+}
+
+export enum SortOptionValue {
+  ReportingNewest = 'reporting_newest',
+  ReportingOldest = 'reporting_oldest',
+  ModifiedNewest = 'modified_newest',
+  ModifiedOldest = 'modified_oldest',
+}
+
+export type BudgetStatement = any // Type from GraphQL API
+
+export type MetricWithoutBudget = Exclude<METRIC_OPTIONS, METRIC_OPTIONS.Budget>
+
+// Doughnut Chart types
+interface DoughnutMetricValue {
+  value: number
+}
+
+export interface DoughnutBudgetMetric {
+  budget: DoughnutMetricValue
+  paymentsOnChain: DoughnutMetricValue
+  protocolNetOutflow?: DoughnutMetricValue
+  forecast?: DoughnutMetricValue
+  actuals?: DoughnutMetricValue
+}
+
+export interface DoughnutSeries {
+  name: string
+  value: number
+  percent: number
+  metrics: BudgetMetricWithName
+  color: string
+  code?: string
+  isVisible?: boolean
+  originalColor?: string
+  originalValue?: number
+  actuals?: number
 }

@@ -1,6 +1,6 @@
 import React from 'react'
-import type { DoughnutSeries } from '@/modules/finances/components/summary-section/doughnut-chart/types'
 import { sortDoughnutSeriesByValue } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
+import type { DoughnutSeries } from '@/modules/finances/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegendDoughnut } from './card-legend-item'
 
@@ -13,7 +13,7 @@ interface CardLegendProps {
   onLegendItemHover: (legendName: string) => void
 }
 
-export function CardLegend({
+function CardLegend({
   changeAlignment,
   isDeepLevel = true,
   doughnutSeriesData,
@@ -50,4 +50,4 @@ export function CardLegend({
   )
 }
 
-export default CardLegend
+export { CardLegend }

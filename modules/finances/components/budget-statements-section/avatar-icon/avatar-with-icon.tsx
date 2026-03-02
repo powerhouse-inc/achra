@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { cn } from '@/modules/shared/lib/utils'
-import TwoUserIcon from './TwoUserIcon'
+import { TwoUserIcon } from './TwoUserIcon'
 
 export interface CircleAvatarWithIconProps extends React.ComponentProps<typeof Avatar> {
   icon: boolean

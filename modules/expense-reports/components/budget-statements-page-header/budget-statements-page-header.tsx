@@ -6,7 +6,7 @@ import { BudgetStatementLastUpdate } from '@/modules/expense-reports/components/
 import { MonthNavigation } from '@/modules/expense-reports/components/month-navigation'
 import { useMonthNavigation } from '@/modules/expense-reports/components/month-navigation/use-month-navigation'
 import { isSameMonth } from '@/modules/expense-reports/lib/month-utils'
-import BudgetStatementsStatus from '@/modules/finances/components/budget-statements-section/budget-staments-status/budget-statments-status'
+import { BudgetStatementsStatus } from '@/modules/finances/components/budget-statements-section/budget-statements-status/budget-statements-status'
 
 export interface BudgetStatementsPageHeaderProps {
   availableMonthsWithMetadata: Array<{

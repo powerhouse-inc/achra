@@ -11,12 +11,12 @@ import {
   transformPathToName,
 } from '../../utils'
 import { LimitedColorAssigner } from './colors'
-import type { DoughnutSeries } from './doughnut-chart'
 import type {
   AnalyticMetric,
   BreakdownBudgetAnalytic,
   Budget,
   BudgetMetricWithName,
+  DoughnutSeries,
 } from '../../types'
 
 export const useCardChartOverview = (

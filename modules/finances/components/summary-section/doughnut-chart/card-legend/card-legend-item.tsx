@@ -1,11 +1,10 @@
-import React from 'react'
 import {
   getPercentDisplay,
   getShortCode,
   threeDigitsPrecisionHumanization,
 } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
+import type { DoughnutSeries } from '@/modules/finances/types'
 import { cn } from '@/modules/shared/lib/utils'
-import type { DoughnutSeries } from '../types'
 
 interface ItemLegendDoughnutProps {
   isDeepLevel?: boolean
@@ -16,7 +15,7 @@ interface ItemLegendDoughnutProps {
   onLegendItemHover: (legendName: string) => void
 }
 
-export function ItemLegendDoughnut({
+function ItemLegendDoughnut({
   changeAlignment,
   isDeepLevel = true,
   doughnutData,
@@ -92,4 +91,4 @@ export function ItemLegendDoughnut({
   )
 }
 
-export default ItemLegendDoughnut
+export { ItemLegendDoughnut }

@@ -1,6 +1,6 @@
 import { BudgetStatementsContentWrapper } from '@/modules/finances/components/budget-statements-section'
-import BudgetStatementFilters from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-stament-filters'
-import { BudgetStamentFiltersProvider } from '@/modules/finances/components/budget-statements-section/budget-stament-filters/budget-statement-filters-context'
+import { BudgetStatementFilters } from '@/modules/finances/components/budget-statements-section/budget-statement-filters/budget-statement-filters'
+import { BudgetStatementFiltersProvider } from '@/modules/finances/components/budget-statements-section/budget-statement-filters/budget-statement-filters-context'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { StripedCardContent } from '@/modules/shared/components/striped-card'
 import { NetworkDashboardSections } from '@/modules/shared/config/constants'
@@ -14,7 +14,11 @@ interface FinancesSectionProps {
   networkName: string
 }
 
-export async function FinancesSection({ params, searchParams, networkName }: FinancesSectionProps) {
+export async function FinancesSection({
+  params,
+  searchParams,
+  networkName,
+}: Readonly<FinancesSectionProps>) {
   const { slug } = await params
 
   return (
@@ -25,7 +29,7 @@ export async function FinancesSection({ params, searchParams, networkName }: Fin
       cardTitle={`All financial reports for Builders in the ${networkName} network`}
       href={`/network/${slug}/finances` as Route}
     >
-      <BudgetStamentFiltersProvider>
+      <BudgetStatementFiltersProvider>
         <StripedCardContent className="flex justify-end px-2 py-0">
           <BudgetStatementFilters />
         </StripedCardContent>
@@ -38,7 +42,7 @@ export async function FinancesSection({ params, searchParams, networkName }: Fin
             />
           </ErrorBoundaryWithPresets>
         </StripedCardContent>
-      </BudgetStamentFiltersProvider>
+      </BudgetStatementFiltersProvider>
     </DashboardSectionWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/utils'
-import IconTitleWithCode from './icon-title'
+import { IconTitleWithCode } from './icon-title'
 
 interface TitleComponentProps {
   title: string

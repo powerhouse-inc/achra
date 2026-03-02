@@ -7,7 +7,7 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 
-export default function BudgetEmptyState() {
+function BudgetEmptyState() {
   return (
     <div className="flex h-fit flex-col gap-6">
       <Empty>
@@ -24,3 +24,5 @@ export default function BudgetEmptyState() {
     </div>
   )
 }
+
+export { BudgetEmptyState }
