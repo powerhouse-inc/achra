@@ -1,7 +1,7 @@
+import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/breakdown-chart-utils'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 import { formatBudgetName, removeBudgetWord } from '../../utils'
-import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/breakdown-chart-utils'
 import type { BreakdownChartSeriesData } from '../../types'
 
 interface BreakdownChartItemProps {

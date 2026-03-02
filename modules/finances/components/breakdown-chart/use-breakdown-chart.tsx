@@ -1,5 +1,11 @@
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { useMemo, useRef, useState } from 'react'
+import {
+  getBarWidth,
+  getMetricValue,
+  parseAnalyticsToSeriesBreakDownChart,
+  setBorderRadiusForSeries,
+} from '@/modules/finances/lib/breakdown-chart-utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   type BreakdownBudgetAnalytic,
@@ -7,12 +13,6 @@ import {
   GRANULARITY_OPTIONS,
   METRIC_OPTIONS,
 } from '../../types'
-import {
-  getBarWidth,
-  getMetricValue,
-  parseAnalyticsToSeriesBreakDownChart,
-  setBorderRadiusForSeries,
-} from '@/modules/finances/lib/breakdown-chart-utils'
 import type { EChartsOption } from 'echarts-for-react'
 interface BreakdownChartProps {
   budgetsAnalytics: BreakdownBudgetAnalytic | undefined

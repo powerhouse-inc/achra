@@ -1,8 +1,8 @@
+import { breakdownChartSearchParamsCache } from '@/modules/finances/lib/breakdown-chart-search-params'
+import { getBudgetsAnalytics } from '@/modules/finances/services/breakdown-chart-service'
 import { BUDGETS } from '../../mocks'
 import { getCodePathFromParams, getLevelOfDetail } from '../../utils'
 import { BreakdownChartContent } from './breakdown-chart-content'
-import { breakdownChartSearchParamsCache } from '@/modules/finances/lib/breakdown-chart-search-params'
-import { getBudgetsAnalytics } from '@/modules/finances/services/breakdown-chart-service'
 
 interface SummarySectionProps {
   params: Promise<{

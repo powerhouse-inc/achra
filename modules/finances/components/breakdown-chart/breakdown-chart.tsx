@@ -3,11 +3,6 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
-import { useFinancesYear } from '../../hooks/use-finaces-year'
-import { formatBudgetName, removeBudgetWord } from '../../utils'
 import {
   formatterBreakdownChart,
   getChartAxisLabelByGranularity,
@@ -16,6 +11,11 @@ import {
   getSelectMetricText,
   replaceAllNumberLetOneBeforeDot,
 } from '@/modules/finances/lib/breakdown-chart-utils'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { cn } from '@/modules/shared/lib/utils'
+import { useFinancesYear } from '../../hooks/use-finaces-year'
+import { formatBudgetName, removeBudgetWord } from '../../utils'
 import type {
   AnalyticMetric,
   BarChartSeries,
