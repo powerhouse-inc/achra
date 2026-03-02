@@ -12,7 +12,7 @@ import {
   getMetricValue,
   parseAnalyticsToSeriesBreakDownChart,
   setBorderRadiusForSeries,
-} from './lib'
+} from '@/modules/finances/lib/breakdown-chart-utils'
 import type { EChartsOption } from 'echarts-for-react'
 interface BreakdownChartProps {
   budgetsAnalytics: BreakdownBudgetAnalytic | undefined

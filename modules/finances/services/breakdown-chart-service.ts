@@ -1,6 +1,6 @@
+import { getBreakdownAnalytics } from '@/modules/finances/lib/breakdown-chart-utils'
+import { seriesGranularityMonthlyFirtsLevel } from '@/modules/finances/mocks/breakdown-chart'
 import type { Analytic, Budget, GRANULARITY_OPTIONS } from '@/modules/finances/types'
-import { getBreakdownAnalytics } from '../lib'
-import { seriesGranularityMonthlyFirtsLevel } from './mocks'
 
 interface BreakdownChartService {
   granularity: GRANULARITY_OPTIONS

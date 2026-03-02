@@ -15,7 +15,7 @@ import {
   getMonthAbbreviationToolTip,
   getSelectMetricText,
   replaceAllNumberLetOneBeforeDot,
-} from './lib'
+} from '@/modules/finances/lib/breakdown-chart-utils'
 import type {
   AnalyticMetric,
   BarChartSeries,

@@ -1,5 +1,5 @@
-import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import type { AnalyticMetric, DoughnutSeries } from '@/modules/finances/types'
+import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 
 /**
  * Chunks an array into smaller arrays of specified size

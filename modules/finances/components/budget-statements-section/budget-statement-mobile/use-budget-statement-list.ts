@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import type { BudgetStatement } from '@/modules/finances/types'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBudgetStatementListProps {

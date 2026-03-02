@@ -2,6 +2,10 @@
 
 import { useQueryState } from 'nuqs'
 import { useCallback } from 'react'
+import {
+  granularityParser,
+  metricParser,
+} from '@/modules/finances/lib/breakdown-chart-search-params'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -10,7 +14,6 @@ import {
   BreakdownGranularitySelectDrawer,
   BreakdownMetricSelectDrawer,
 } from './filter-metric-breakdown-chart'
-import { granularityParser, metricParser } from './lib/search-params-server'
 export function FilterChart() {
   const [metric, setMetric] = useQueryState('metric', metricParser)
   const [granularity, setGranularity] = useQueryState('granularity', granularityParser)
