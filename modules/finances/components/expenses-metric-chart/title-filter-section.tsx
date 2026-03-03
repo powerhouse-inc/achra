@@ -1,4 +1,5 @@
 'use client'
+import { Suspense } from 'react'
 import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { TitleSectionFinances } from '../title-section-finances'
 import { FilterChart } from './filter-chart'
@@ -17,7 +18,9 @@ export function TitleFilterSection() {
         range={RANGE}
       />
 
-      <FilterChart />
+      <Suspense fallback={<div>Loading...</div>}>
+        <FilterChart />
+      </Suspense>
     </div>
   )
 }

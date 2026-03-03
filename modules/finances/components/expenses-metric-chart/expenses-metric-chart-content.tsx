@@ -46,7 +46,6 @@ export function ExpensesMetricChartContent({
           selectedGranularity={selectedGranularity}
           series={series}
           selectedMetric={selectedMetric}
-          key={selectedGranularity}
         />
       </div>
 

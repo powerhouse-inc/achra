@@ -320,7 +320,7 @@ export function ExpensesMetricChart({
   useEffect(() => {
     // avoid to merge data when moving between levels
     const chartInstance = refExpensesMetricChart.current?.getEchartsInstance()
-    chartInstance?.setOption(options, { notMerge: true, replaceAnimation: true })
+    chartInstance?.setOption(options, { notMerge: true })
   }, [options, refExpensesMetricChart])
   return (
     <div
