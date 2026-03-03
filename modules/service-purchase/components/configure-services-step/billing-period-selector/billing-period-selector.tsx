@@ -11,7 +11,6 @@ import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/tog
 
 function BillingPeriodSelector() {
   const servicesData = useServiceOffering()
-  console.log('>>>>>>>>>>>>>>>', servicesData)
   // TODO: ADD this once api tis ready
   // const selectedTier = useSelectedTier()
   const { selectedBillingCycle } = useServicePurchaseState()
