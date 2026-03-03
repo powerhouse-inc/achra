@@ -373,17 +373,5 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         tierDependentPricing: [],
       },
     ],
-
-    // ─── FINAL CONFIGURATION ──────────────────────────────────────────────────
-    finalConfiguration: {
-      selectedTierId: '43f85011-9702-4aa9-b118-e256c88504c2',
-      selectedBillingCycle: RsBillingCycle.Quarterly,
-      tierBasePrice: 297,
-      tierCurrency: 'USD',
-
-      optionGroupConfigs: [],
-      addOnConfigs: [],
-      lastModified: '2026-02-23T12:56:35.359Z',
-    },
   },
 ]

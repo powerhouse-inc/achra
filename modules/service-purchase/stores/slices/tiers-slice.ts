@@ -10,11 +10,11 @@ export function createTiersSlice(
   _get: ServicePurchaseStoreGet,
   services: RsServiceOffering,
 ): TiersSlice {
-  const { tiers, finalConfiguration } = services
+  const { tiers } = services
 
-  const selectedTier = tiers.find((t) => t.id === finalConfiguration?.selectedTierId) ?? tiers[0]
+  const selectedTier = tiers[0]
 
-  const selectedBillingCycle = finalConfiguration?.selectedBillingCycle ?? RsBillingCycle.Monthly
+  const selectedBillingCycle = RsBillingCycle.Monthly
 
   return {
     tiers,
