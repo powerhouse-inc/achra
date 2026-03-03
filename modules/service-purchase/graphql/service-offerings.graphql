@@ -103,6 +103,14 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       availableBillingCycles
       price
       currency
+      discountMode
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
     }
     resourceTemplateId
     services {

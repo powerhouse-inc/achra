@@ -19,8 +19,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
     summary: 'Operational Hub for Builders',
     title: 'Operational Hub',
     thumbnailUrl: null,
-    targetAudiences: [],
-    serviceGroups: [],
+    availableBillingCycles: [RsBillingCycle.Monthly, RsBillingCycle.Annual, RsBillingCycle.OneTime],
 
     // ─── FACET TARGETS (Selectores Superiores) ────────────────────────────────
     facetTargets: [
@@ -59,6 +58,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isCustomPricing: false,
         pricingMode: RsTierPricingMode.Calculated,
         pricing: { amount: 99, currency: 'USD' },
+        billingCycleDiscounts: [],
         serviceLevels: [],
         usageLimits: [
           {
@@ -84,6 +84,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
 
         pricing: { amount: 299, currency: 'USD' },
 
+        billingCycleDiscounts: [],
         serviceLevels: [],
         usageLimits: [],
       },
@@ -94,6 +95,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isCustomPricing: true,
         pricingMode: RsTierPricingMode.ManualOverride,
         pricing: { amount: null, currency: 'USD' },
+        billingCycleDiscounts: [],
         serviceLevels: [],
         usageLimits: [],
       },
@@ -108,14 +110,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isSetupFormation: true,
         optionGroupId: 'a5489308-faa1-460e-b2dd-de8e77fd24cb',
         // MOCK BINDING: Solo visible si eliges Swiss Association
-        facetBindings: [
-          {
-            id: 'bind-1',
-            facetName: 'Legal Entity',
-            facetType: '9aa48353-0110-4cc7-b57c-55cdc83ee8cc',
-            supportedOptions: ['Swiss Association'],
-          },
-        ],
       },
       {
         id: 'c9c625ef-127b-423e-9397-8465e7970d1e',
@@ -124,14 +118,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isSetupFormation: true,
         optionGroupId: 'a5489308-faa1-460e-b2dd-de8e77fd24cb',
         // MOCK BINDING: Solo visible si eliges Swiss Association
-        facetBindings: [
-          {
-            id: 'bind-2',
-            facetName: 'Legal Entity',
-            facetType: '9aa48353-0110-4cc7-b57c-55cdc83ee8cc',
-            supportedOptions: ['Swiss Association'],
-          },
-        ],
       },
       {
         id: 'ecc6737f-2425-43cc-bc33-88fde759f9e7',
@@ -139,7 +125,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Access to standardized legal document templates',
         isSetupFormation: true,
         optionGroupId: 'a5489308-faa1-460e-b2dd-de8e77fd24cb',
-        facetBindings: [],
       },
       {
         id: '177f1398-10c4-422e-84e6-b8d0e956a854',
@@ -147,7 +132,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Professional invoice processing and management',
         isSetupFormation: false,
         optionGroupId: '8e865e7d-57b1-4e13-a9ce-f4e7fec420db',
-        facetBindings: [],
       },
       {
         id: 'b860dfbb-b496-4f69-bcd8-6a093bd58ad9',
@@ -155,7 +139,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Yearly tax preparation and filing services',
         isSetupFormation: false,
         optionGroupId: '8e865e7d-57b1-4e13-a9ce-f4e7fec420db',
-        facetBindings: [],
       },
       {
         id: '1915724c-bfcb-4fc3-b444-eff7228fdd24',
@@ -163,7 +146,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Monthly bookkeeping and financial close',
         isSetupFormation: false,
         optionGroupId: '8e865e7d-57b1-4e13-a9ce-f4e7fec420db',
-        facetBindings: [],
       },
       {
         id: 'a5c8215f-1934-4f83-854b-2e32bfba5304',
@@ -171,7 +153,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Dedicated operations support team',
         isSetupFormation: false,
         optionGroupId: 'b1254371-0838-4a83-b00c-2c834b79b994',
-        facetBindings: [],
       },
       {
         id: '6cfca588-84c5-491b-8543-9a8ba8ba49f9',
@@ -179,7 +160,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Management of contributor payments and operations',
         isSetupFormation: false,
         optionGroupId: 'b1254371-0838-4a83-b00c-2c834b79b994',
-        facetBindings: [],
       },
       {
         id: 'e669fc53-1651-4de6-9740-3385ebdf26c5',
@@ -187,7 +167,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Support for payments in multiple currencies',
         isSetupFormation: false,
         optionGroupId: 'b1254371-0838-4a83-b00c-2c834b79b994',
-        facetBindings: [],
       },
       {
         id: '547a20b0-2827-40c9-b81f-4f4ac6128850',
@@ -195,7 +174,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Personal point of contact for all needs',
         isSetupFormation: false,
         optionGroupId: '0d55f6e9-e6eb-4989-ac59-b5b079f32fc5',
-        facetBindings: [],
       },
       {
         id: '613ae133-ccf3-4bf6-9fe5-a8d9e195cb5a',
@@ -203,15 +181,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Support for managing multiple legal entities',
         isSetupFormation: false,
         optionGroupId: 'ca203f41-f735-42fa-a659-cc2448782aa4',
-        // MOCK BINDING: Solo visible si seleccionas BVI Entity
-        facetBindings: [
-          {
-            id: 'bind-3',
-            facetName: 'Legal Entity',
-            facetType: '9aa48353-0110-4cc7-b57c-55cdc83ee8cc',
-            supportedOptions: ['BVI Entity'],
-          },
-        ],
       },
       {
         id: '2465c3de-c6d9-449f-9f2b-78bf45bb8546',
@@ -219,15 +188,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Testing facet logic',
         isSetupFormation: false,
         optionGroupId: 'e44ae821-4392-420b-a436-bdfa02a926e6',
-        // MOCK BINDING: Solo visible si seleccionas Anonymity Highest
-        facetBindings: [
-          {
-            id: 'bind-4',
-            facetName: 'Anonymity',
-            facetType: '88ded452-4246-4efb-8f94-e967d6db521d',
-            supportedOptions: ['Highest'],
-          },
-        ],
       },
     ],
 
@@ -242,6 +202,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         price: 5000,
         currency: 'USD',
         availableBillingCycles: [RsBillingCycle.OneTime],
+        billingCycleDiscounts: [],
         tierDependentPricing: [
           {
             id: 'tp-1',
@@ -264,6 +225,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         defaultSelected: true,
         costType: RsGroupCostType.Recurring,
         price: null,
+        billingCycleDiscounts: [],
         tierDependentPricing: [
           {
             id: 'tp-2',
@@ -290,6 +252,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         defaultSelected: true,
         costType: RsGroupCostType.Recurring,
         price: null,
+        billingCycleDiscounts: [],
         tierDependentPricing: [
           {
             id: 'tp-3',
@@ -315,6 +278,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
+        billingCycleDiscounts: [],
         standalonePricing: {
           setupCost: { amount: 100, currency: 'USD', discount: null },
           recurringPricing: [
@@ -344,6 +308,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         isAddOn: true,
         defaultSelected: false,
         costType: RsGroupCostType.Recurring,
+        billingCycleDiscounts: [],
         standalonePricing: {
           setupCost: { amount: 500, currency: 'USD', discount: null },
           recurringPricing: [
@@ -369,6 +334,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         price: 200,
         currency: 'USD',
         availableBillingCycles: [RsBillingCycle.OneTime],
+        billingCycleDiscounts: [],
 
         tierDependentPricing: [],
       },
