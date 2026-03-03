@@ -1,9 +1,9 @@
 'use client'
 import { ATLAS_BUDGETS, BUDGETS } from '../../mocks'
 import { getBudgetsByCodePath, getCodePathFromParams } from '../../utils'
-import ExpensesMetricChart from './expenses-metric-chart'
+import { ExpensesMetricChart } from './expenses-metric-chart'
 import LegendExpensesMetricChart from './expenses-metric-legend'
-import useExpensesMetricChart from './useExpensesMetricChart'
+import { useExpensesMetricChart } from './use-expenses-metric-chart'
 import type { ExpensesMetricBudgetAnalytic } from './types'
 
 interface ExpensesMetricChartContentProps {
@@ -12,7 +12,7 @@ interface ExpensesMetricChartContentProps {
   year: string
 }
 
-export default function ExpensesMetricChartContent({
+export function ExpensesMetricChartContent({
   params,
   budgetsAnalytics,
   year,
@@ -46,6 +46,7 @@ export default function ExpensesMetricChartContent({
           selectedGranularity={selectedGranularity}
           series={series}
           selectedMetric={selectedMetric}
+          key={selectedGranularity}
         />
       </div>
 

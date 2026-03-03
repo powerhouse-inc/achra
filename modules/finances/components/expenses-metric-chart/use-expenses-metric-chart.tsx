@@ -12,7 +12,7 @@ interface ExpensesMetricChartProps {
   codePath: string
 }
 
-export default function useExpensesMetricChart({
+export function useExpensesMetricChart({
   budgetsAnalytics,
   budgets,
   allBudgets,

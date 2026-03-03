@@ -1,7 +1,7 @@
 'use client'
 import { type ReactNode, Suspense } from 'react'
 import { Card } from '@/shared/components/ui/card'
-import TitleFilterSection from './title-filter-section'
+import { TitleFilterSection } from './title-filter-section'
 
 interface ExpensesMetricChartCardProps {
   children: ReactNode

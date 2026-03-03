@@ -323,7 +323,7 @@ export function BreakdownChart({
   useEffect(() => {
     // avoid to merge data when moving between levels
     const chartInstance = refBreakDownChart.current?.getEchartsInstance()
-    chartInstance?.setOption(options, { notMerge: true })
+    chartInstance?.setOption(options, { notMerge: true, replaceAnimation: true })
   }, [options, refBreakDownChart])
   return (
     <div

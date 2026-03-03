@@ -4,18 +4,22 @@ import { getBudgetsByCodePath, getCodePathFromParams } from '../../utils'
 import { BreakdownChart } from './breakdown-chart'
 import { BreakdownLegend } from './breakdown-legend'
 import { useBreakdownChart } from './use-breakdown-chart'
-import type { BreakdownBudgetAnalytic } from '../../types'
+import type { BreakdownBudgetAnalytic, GRANULARITY_OPTIONS, METRIC_OPTIONS } from '../../types'
 
 interface BreakdownChartContentProps {
   params?: string[]
   budgetsAnalytics: BreakdownBudgetAnalytic
   year: string
+  granularity: GRANULARITY_OPTIONS
+  metric: METRIC_OPTIONS
 }
 
 export function BreakdownChartContent({
   params,
   budgetsAnalytics,
   year,
+  granularity,
+  metric,
 }: Readonly<BreakdownChartContentProps>) {
   const codePath = getCodePathFromParams(params)
   const budgets = getBudgetsByCodePath(codePath, BUDGETS)
@@ -30,12 +34,15 @@ export function BreakdownChartContent({
     onLegendItemLeave,
     showLegendValue,
     selectedGranularity,
+    selectedMetric,
   } = useBreakdownChart({
     budgetsAnalytics,
     budgets,
     allBudgets: ATLAS_BUDGETS,
     year,
     codePath,
+    granularity,
+    metric,
   })
   return (
     <div className="flex w-full flex-col gap-4 sm:gap-6 md:flex-row 2xl:gap-8">
@@ -45,7 +52,8 @@ export function BreakdownChartContent({
           year={year}
           selectedGranularity={selectedGranularity}
           series={series}
-          selectedMetric="Budget"
+          selectedMetric={selectedMetric}
+          key={selectedGranularity}
         />
       </div>
 

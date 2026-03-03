@@ -1,6 +1,6 @@
 import { BUDGETS } from '../../mocks'
 import { getCodePathFromParams, getLevelOfDetail } from '../../utils'
-import ExpensesMetricChartContent from './expenses-metric-chart-content'
+import { ExpensesMetricChartContent } from './expenses-metric-chart-content'
 import { expensesMetricChartSearchParamsCache } from './lib'
 import { getBudgetsAnalytics } from './services/service'
 

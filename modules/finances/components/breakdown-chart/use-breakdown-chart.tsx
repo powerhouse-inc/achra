@@ -1,4 +1,3 @@
-import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { useMemo, useRef, useState } from 'react'
 import {
   getBarWidth,
@@ -7,9 +6,9 @@ import {
   setBorderRadiusForSeries,
 } from '@/modules/finances/lib/breakdown-chart-utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import {
-  type BreakdownBudgetAnalytic,
-  type Budget,
+import type {
+  BreakdownBudgetAnalytic,
+  Budget,
   GRANULARITY_OPTIONS,
   METRIC_OPTIONS,
 } from '../../types'
@@ -20,6 +19,8 @@ interface BreakdownChartProps {
   allBudgets: Budget[]
   year: string
   codePath: string
+  granularity: GRANULARITY_OPTIONS
+  metric: METRIC_OPTIONS
 }
 
 export function useBreakdownChart({
@@ -27,16 +28,11 @@ export function useBreakdownChart({
   budgets,
   allBudgets,
   codePath,
+  granularity,
+  metric,
 }: Readonly<BreakdownChartProps>) {
   const refBreakDownChart = useRef<EChartsOption>(null)
-  const [selectedGranularity] = useQueryState(
-    'granularity',
-    parseAsStringEnum(Object.values(GRANULARITY_OPTIONS)).withDefault(GRANULARITY_OPTIONS.Monthly),
-  )
-  const [selectedMetric] = useQueryState(
-    'metric',
-    parseAsStringEnum(Object.values(METRIC_OPTIONS)).withDefault(METRIC_OPTIONS.Budget),
-  )
+  const selectedGranularity = granularity
 
   const [isChecked, setIsChecked] = useState(true)
   const isMobile = useMediaQuery({ to: 'sm' })
@@ -57,7 +53,7 @@ export function useBreakdownChart({
     selectedGranularity,
   )
 
-  const getMetric = getMetricValue(selectedMetric)
+  const getMetric = useMemo(() => getMetricValue(metric), [metric])
 
   const allSeries = useMemo(() => {
     const seriesWithoutBorder = parseAnalyticsToSeriesBreakDownChart(
@@ -145,5 +141,6 @@ export function useBreakdownChart({
     refBreakDownChart,
     showLegendValue,
     selectedGranularity,
+    selectedMetric: getMetric,
   }
 }

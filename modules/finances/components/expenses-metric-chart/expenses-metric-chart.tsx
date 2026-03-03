@@ -27,7 +27,7 @@ interface ExpensesMetricChartProps {
   selectedMetric?: AnalyticMetric
 }
 
-export default function ExpensesMetricChart({
+export function ExpensesMetricChart({
   refExpensesMetricChart,
   series,
   selectedGranularity,
@@ -320,7 +320,7 @@ export default function ExpensesMetricChart({
   useEffect(() => {
     // avoid to merge data when moving between levels
     const chartInstance = refExpensesMetricChart.current?.getEchartsInstance()
-    chartInstance?.setOption(options, { notMerge: true })
+    chartInstance?.setOption(options, { notMerge: true, replaceAnimation: true })
   }, [options, refExpensesMetricChart])
   return (
     <div

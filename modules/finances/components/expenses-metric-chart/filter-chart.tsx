@@ -11,9 +11,12 @@ import {
   ExpensesMetricSelectDrawer,
 } from './filter-metric-expenses-metric-chart'
 import { granularityParser, metricParser } from './lib/search-params-server'
-export default function FilterChart() {
-  const [metric, setMetric] = useQueryState('metric', metricParser)
-  const [granularity, setGranularity] = useQueryState('granularity', granularityParser)
+export function FilterChart() {
+  const [metric, setMetric] = useQueryState('metric', metricParser.withOptions({ shallow: false }))
+  const [granularity, setGranularity] = useQueryState(
+    'granularity',
+    granularityParser.withOptions({ shallow: false }),
+  )
 
   const onReset = useCallback(() => {
     void setMetric(null)
