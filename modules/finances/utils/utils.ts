@@ -270,7 +270,7 @@ export const getCorrectMetricValuesOverViewChart = (metric: AnalyticMetric) => {
 }
 
 export const removeBudgetWord = (name: string) => {
-  const wordToRemove = /Budget\s*$/i
+  const wordToRemove = /\s+Budget\s*$/i
 
   return name.replace(wordToRemove, '')
 }

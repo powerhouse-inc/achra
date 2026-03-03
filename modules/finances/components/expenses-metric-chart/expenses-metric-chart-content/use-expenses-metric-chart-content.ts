@@ -4,13 +4,13 @@ import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
   getMetricValue,
   parseAnalyticsToSeriesExpensesMetricChart,
-} from '../../lib/expenses-metric-chart-utils'
+} from '../../../lib/expenses-metric-chart-utils'
 import {
   type Budget,
   type ExpensesMetricBudgetAnalytic,
   GRANULARITY_OPTIONS,
   METRIC_OPTIONS,
-} from '../../types'
+} from '../../../types'
 import type { EChartsOption } from 'echarts-for-react'
 
 interface ExpensesMetricChartProps {
