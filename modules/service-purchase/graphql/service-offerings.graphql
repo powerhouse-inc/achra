@@ -43,57 +43,57 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       categoryLabel
       selectedOptions
     }
-    finalConfiguration {
-      selectedTierId
-      selectedBillingCycle
-      tierBasePrice
-      tierCurrency
-      optionGroupConfigs {
-        id
-        optionGroupId
-        effectiveBillingCycle
-        billingCycleOverridden
-        discountStripped
-        recurringAmount
-        currency
-        discount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-        setupCost
-        setupCostCurrency
-        setupCostDiscount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-      }
-      lastModified
-      addOnConfigs {
-        id
-        optionGroupId
-        selectedBillingCycle
-        recurringAmount
-        currency
-        discount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-        setupCost
-        setupCostCurrency
-        setupCostDiscount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-      }
-    }
+    # finalConfiguration {
+    #   selectedTierId
+    #   selectedBillingCycle
+    #   tierBasePrice
+    #   tierCurrency
+    #   optionGroupConfigs {
+    #     id
+    #     optionGroupId
+    #     effectiveBillingCycle
+    #     billingCycleOverridden
+    #     discountStripped
+    #     recurringAmount
+    #     currency
+    #     discount {
+    #       discountType
+    #       discountValue
+    #       originalAmount
+    #       discountedAmount
+    #     }
+    #     setupCost
+    #     setupCostCurrency
+    #     setupCostDiscount {
+    #       discountType
+    #       discountValue
+    #       originalAmount
+    #       discountedAmount
+    #     }
+    #   }
+    #   lastModified
+    #   addOnConfigs {
+    #     id
+    #     optionGroupId
+    #     selectedBillingCycle
+    #     recurringAmount
+    #     currency
+    #     discount {
+    #       discountType
+    #       discountValue
+    #       originalAmount
+    #       discountedAmount
+    #     }
+    #     setupCost
+    #     setupCostCurrency
+    #     setupCostDiscount {
+    #       discountType
+    #       discountValue
+    #       originalAmount
+    #       discountedAmount
+    #     }
+    #   }
+    # }
 
     optionGroups {
       id

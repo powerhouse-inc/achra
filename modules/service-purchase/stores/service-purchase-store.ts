@@ -9,17 +9,18 @@ import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
 import { getAvailableCycles } from '../lib/billing-period'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
+import {
+  type PersistedServicePurchaseState,
+  ServicePurchaseStep,
+  type ServicePurchaseStore,
+  type ServicePurchaseStoreProps,
+} from '../types'
 import { createFacetsSlice } from './slices/facets-store-slice'
 import { createOptionGroupsSlice } from './slices/option-groups-slice'
 import { createStepSlice } from './slices/step-slice'
 import { createSubmitRequestSlice } from './slices/submit-request-slice'
 import { createTiersSlice } from './slices/tiers-slice'
 import { createTotalsSlice } from './slices/totals-slice'
-import type {
-  PersistedServicePurchaseState,
-  ServicePurchaseStore,
-  ServicePurchaseStoreProps,
-} from '../types'
 
 const showRestorationToast = debounce((result: 'restored' | 'discarded') => {
   if (result === 'restored') {
@@ -117,6 +118,11 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               | undefined
             if (persisted == null) {
               restorationResult = null
+              return currentState
+            }
+            if (persisted.activeStep === ServicePurchaseStep.Confirmation) {
+              restorationResult = null
+              localStorage.removeItem(storageKey)
               return currentState
             }
             if (persisted.apiChecksum !== currentApiChecksum) {

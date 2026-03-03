@@ -1,5 +1,6 @@
 'use server'
 
+import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { submitRequestSchema } from '../lib/submit-request-schema'
 import { submitResourceRequest } from '../services/create-product-instances'
 import type { SubmitRequestFormState } from '../types'
@@ -14,7 +15,7 @@ export async function submitRequestAction(
   formData: FormData,
 ): Promise<SubmitRequestFormState> {
   try {
-    const serviceSlug = (formData.get('serviceSlug') as string | null) ?? ''
+    const serviceOfferingId = (formData.get('serviceOfferingId') as string | null) ?? ''
     const rawData = {
       name: (formData.get('name') as string | null) ?? '',
       teamName: (formData.get('teamName') as string | null) ?? '',
@@ -32,18 +33,24 @@ export async function submitRequestAction(
       }
     }
 
-    if (!serviceSlug) {
+    if (!serviceOfferingId) {
       return {
         ...initialState,
         success: false,
-        error: 'Service context is missing. Please refresh and try again.',
+        error: 'We ran into an internal error. Please try again later.',
       }
     }
 
     const mutationResult = await submitResourceRequest({
       name: result.data.name,
       teamName: result.data.teamName,
-      serviceOfferingId: serviceSlug,
+      customerEmail: result.data.email,
+      serviceOfferingId,
+      userSelection: {
+        billingCycle: formData.get('billingCycle') as RsBillingCycle,
+        tierId: formData.get('tierId') as string,
+        optionGroupIds: JSON.parse(formData.get('optionGroupIds') as string) as string[],
+      },
     })
 
     return {
