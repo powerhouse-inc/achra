@@ -48,16 +48,29 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
+          {/* TODO:Improve this when api its ready */}
+          <span className={cn('text-primary text-xs/4.5 font-semibold transition-colors')}>
+            ~$50 <span className="text-foreground/50">per Contributor</span>
+          </span>
         </div>
       ) : (
         <div className="flex flex-col items-center gap-0.5">
-          <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
-            ${Math.round(displayPrice).toLocaleString()}/mo
-          </span>
+          <div>
+            <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+              ${Math.round(displayPrice).toLocaleString()}
+            </span>
+            <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
+              /mo
+            </span>
+          </div>
           {/* TODO: add this one its api fixed */}
           {/* <span className="text-status-progress text-xs font-semibold">save {savingsLabel}</span> */}
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+          </span>
+          {/* TODO:Improve this when api its ready */}
+          <span className={cn('text-primary text-xs/4.5 font-semibold transition-colors')}>
+            ~$50 <span className="text-foreground/50">per Contributor</span>
           </span>
         </div>
       )}
