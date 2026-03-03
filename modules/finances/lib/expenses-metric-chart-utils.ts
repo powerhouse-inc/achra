@@ -1,24 +1,17 @@
-import { LimitedColorAssigner } from '@/modules/finances/components/summary-section/colors'
 import {
   type Analytic,
   type AnalyticGranularity,
-  type AnalyticGranularityForBreakdownChart,
+  type AnalyticGranularityForExpensesMetricChart,
   type AnalyticMetric,
   type AnalyticSeries,
-  type BreakdownBudgetAnalytic,
-  type BreakdownChartSeriesData,
   type Budget,
   type BudgetMetric,
+  type ExpensesMetricBudgetAnalytic,
+  type ExpensesMetricChartSeriesData,
   GRANULARITY_OPTIONS,
   type ValuesDataWithBorder,
-} from '@/modules/finances/types'
-import {
-  existingColors,
-  newBudgetMetric,
-  removePatternAfterSlash,
-  setMetric,
-  transformPathToName,
-} from '@/modules/finances/utils'
+} from '../types'
+import { newBudgetMetric, setMetric } from '../utils'
 
 export const removeBudgetWord = (name: string) => {
   const wordToRemove = /\s+Budget\s*$/i
@@ -70,7 +63,14 @@ export const replaceAllNumberLetOneBeforeDot = (num: number, isShowNegative = fa
   return isShowNegative && isNegative ? `-${result}` : result
 }
 
-export const formatterBreakdownChart = (
+export const getLegendValue = (seriesElement: ExpensesMetricChartSeriesData) => {
+  const points = seriesElement.data.map((item) => item.value ?? 0)
+  const lastQuarter = points.slice(-3)
+
+  return lastQuarter.reduce((previous, current) => previous + current, 0)
+}
+
+export const formatterExpensesMetricChart = (
   granularity: Extract<AnalyticGranularity, 'monthly' | 'quarterly' | 'annual'>,
   isMobile: boolean,
   year: string,
@@ -124,7 +124,7 @@ export const getMonthlyBarChartLabels = (
 }
 
 export const barChartAxisLabelsQuarterly = (isMobile: boolean, isWaterfall = false) => {
-  const defaultArray = ["Q'1", "Q'2", "Q'3", "Q'4"]
+  const defaultArray = ['Q’1', 'Q’2', 'Q’3', 'Q’4']
 
   if (isWaterfall) {
     const start = isMobile ? '' : 'START'
@@ -147,7 +147,7 @@ const barChartAxisLabelsAnnually = (isMobile: boolean, isWaterfall: boolean) => 
 }
 
 export const getChartAxisLabelByGranularity = (
-  granularity: AnalyticGranularityForBreakdownChart,
+  granularity: AnalyticGranularityForExpensesMetricChart,
   isMobile: boolean,
   isWaterfall = false,
   useShortLabels = false,
@@ -182,33 +182,9 @@ export const getSelectMetricText = (metric?: AnalyticMetric): string => {
   }
 }
 
-export const getBarWidth = (
-  isMobile: boolean,
-  isTablet: boolean,
-  isDesktop1024: boolean,
-  isDesktop1280: boolean,
-  selectedGranularity: GRANULARITY_OPTIONS,
-) => {
-  if (isMobile) {
-    if (selectedGranularity === 'Quarterly') return 16
-    if (selectedGranularity === 'Annually') return 96
-    return 16
-  } else if (isTablet) {
-    return 23.8
-  } else if (isDesktop1024) {
-    return 30
-  } else if (isDesktop1280) {
-    return 40
-  } else {
-    if (selectedGranularity === 'Annually') return 168
-    if (selectedGranularity === 'Quarterly') return 64
-    return 40
-  }
-}
-
 // Create a Budget metric empty for the chart with the correct granularity
 export const getArrayAnalytic = (
-  granularity: AnalyticGranularityForBreakdownChart,
+  granularity: AnalyticGranularityForExpensesMetricChart,
 ): BudgetMetric[] => {
   const createBudgetMetric = () => ({
     actuals: {
@@ -301,12 +277,12 @@ export const getCorrectGranularity = (granularity: GRANULARITY_OPTIONS) => {
   }
 }
 
-export const getBreakdownAnalytics = (
+export const getExpensesMetricAnalytics = (
   analytics: Analytic,
   budgets: Budget[],
   granularity: GRANULARITY_OPTIONS,
-): BreakdownBudgetAnalytic => {
-  const budgetsAnalytics: BreakdownBudgetAnalytic = {}
+): ExpensesMetricBudgetAnalytic => {
+  const budgetsAnalytics: ExpensesMetricBudgetAnalytic = {}
 
   const analyticGranularity = getCorrectGranularity(granularity)
 
@@ -356,137 +332,67 @@ export const getBreakdownAnalytics = (
   return budgetsAnalytics
 }
 
-export const parseAnalyticsToSeriesBreakDownChart = (
-  budgetsAnalytics: BreakdownBudgetAnalytic | undefined,
+export const parseAnalyticsToSeriesExpensesMetricChart = (
+  budgetsAnalytics: ExpensesMetricBudgetAnalytic | undefined,
   budgets: Budget[],
-  barWidth: number,
-  metric: AnalyticMetric,
   allBudgets: Budget[],
 ) => {
-  const series: BreakdownChartSeriesData[] = []
+  const metricSeriesConfig: Array<{
+    name: string
+    metricKey: keyof BudgetMetric
+    color: string
+  }> = [
+    { name: 'Budget', metricKey: 'budget', color: '#F99374' },
+    { name: 'Forecast', metricKey: 'forecast', color: '#58A6FF' },
+    { name: 'Net Protocol Outflow', metricKey: 'protocolNetOutflow', color: '#B794F4' },
+    { name: 'Net Expenses On-chain', metricKey: 'paymentsOnChain', color: '#F5A623' },
+    { name: 'Actuals', metricKey: 'actuals', color: '#6FCF97' },
+  ]
+
+  const series: ExpensesMetricChartSeriesData[] = []
 
   if (budgetsAnalytics) {
-    const searchCorrectBudget = budgets.length > 0 ? budgets : allBudgets
-    const validPaths = new Set(searchCorrectBudget.map((b) => b.codePath))
+    const budgetsAtCurrentLevel = budgets.length > 0 ? budgets : allBudgets
+    const selectedPaths = budgetsAtCurrentLevel.map((budget) => budget.codePath)
+    const monthCount = Math.max(...selectedPaths.map((path) => budgetsAnalytics[path].length), 0)
 
-    const budgetKeys = Object.keys(budgetsAnalytics)
-      .filter((key) => validPaths.has(removePatternAfterSlash(key)))
-      .sort()
+    metricSeriesConfig.forEach((config, index) => {
+      const dataForSeries = Array.from({ length: monthCount }, (_, monthIndex) => {
+        const value = selectedPaths.reduce((acc, path) => {
+          const metricValue = budgetsAnalytics[path][monthIndex][config.metricKey].value
+          return acc + metricValue
+        }, 0)
 
-    const uniqueKeysCount = new Set(budgetKeys.map((key) => removePatternAfterSlash(key))).size
-    const colorAssigner = new LimitedColorAssigner(uniqueKeysCount, existingColors)
-
-    budgetKeys.forEach((budgetKey, index) => {
-      const nameBudget =
-        searchCorrectBudget.find((budget) => budget.codePath === removePatternAfterSlash(budgetKey))
-          ?.name ?? (budgetKey.endsWith('/*') ? 'Others' : undefined)
-
-      const budgetData = budgetsAnalytics[budgetKey]
-      if (Array.isArray(budgetData)) {
-        const dataForSeries = budgetData.map((budgetMetric) =>
-          getCorrectMetric(budgetMetric, metric),
-        )
-
-        series[index] = {
-          name: nameBudget || transformPathToName(budgetKey),
-          dataOriginal: dataForSeries,
-          data: dataForSeries,
-          type: 'bar',
-          stack: 'x',
-          barWidth,
-          showBackground: false,
+        return {
+          value: selectedPaths.length > 0 ? value / selectedPaths.length : 0,
           itemStyle: {
-            color: colorAssigner.getColor(budgetKey),
-            colorOriginal: colorAssigner.getColor(budgetKey),
+            borderRadius: [0, 0, 0, 0],
           },
-          isVisible: true,
         }
-      } else {
-        const dataForSeries = getCorrectMetric(budgetData, metric)
-        series[index] = {
-          name: nameBudget || transformPathToName(budgetKey),
-          dataOriginal: [dataForSeries],
-          data: [dataForSeries],
-          type: 'bar',
-          stack: 'x',
-          barWidth,
-          showBackground: false,
-          itemStyle: {
-            color: colorAssigner.getColor(budgetKey),
-            colorOriginal: colorAssigner.getColor(budgetKey),
-          },
-          isVisible: true,
-        }
+      })
+
+      series[index] = {
+        name: config.name,
+        dataOriginal: dataForSeries,
+        data: dataForSeries,
+        type: 'line',
+        smooth: false,
+        showSymbol: true,
+        symbolSize: 5,
+        connectNulls: false,
+        lineStyle: {
+          width: 2,
+          color: config.color,
+          colorOriginal: config.color,
+        },
+        itemStyle: {
+          color: config.color,
+          colorOriginal: config.color,
+        },
+        isVisible: true,
       }
     })
   }
-  return series
-}
-
-export const setBorderRadiusForSeries = (
-  series: BreakdownChartSeriesData[],
-  barBorderRadius: number,
-): BreakdownChartSeriesData[] => {
-  const seriesLength = series[0]?.data.length
-
-  for (let dataIndex = 0; dataIndex < seriesLength; dataIndex++) {
-    let firstPositiveIndex = -1
-    let lastPositiveIndex = -1
-    let firstNegativeIndex = -1
-    let lastNegativeIndex = -1
-    let positiveCount = 0
-    let negativeCount = 0
-
-    // Identify first and last indices for positive and negative values
-    series.forEach((s, seriesIndex) => {
-      let value = s.data[dataIndex].value ?? 0
-      value = Math.abs(value) < 0.004 ? 0 : value // if the values es too small, consider it as 0
-      if (value > 0) {
-        if (firstPositiveIndex === -1) firstPositiveIndex = seriesIndex
-        lastPositiveIndex = seriesIndex
-        positiveCount++
-      } else if (value < 0) {
-        if (firstNegativeIndex === -1) firstNegativeIndex = seriesIndex
-        lastNegativeIndex = seriesIndex
-        negativeCount++
-      }
-    })
-
-    // Apply border styles based on position and value.
-    series.forEach((s, seriesIndex) => {
-      const isPositive = (s.data[dataIndex].value ?? 0) > 0
-      const isNegative = (s.data[dataIndex].value ?? 0) < 0
-
-      if (positiveCount + negativeCount === 1) {
-        // Apply borders to the top or bottom depending of positive or negative
-        s.data[dataIndex].itemStyle.borderRadius = isPositive
-          ? [barBorderRadius, barBorderRadius, 0, 0]
-          : [0, 0, barBorderRadius, barBorderRadius]
-      } else if (isPositive && positiveCount === 1) {
-        // Only one positive value, apply top borders
-        s.data[dataIndex].itemStyle.borderRadius = [barBorderRadius, barBorderRadius, 0, 0]
-      } else if (isPositive && seriesIndex === firstPositiveIndex) {
-        // First positive value not bottom borders
-        s.data[dataIndex].itemStyle.borderRadius = [0, 0, 0, 0]
-      } else if (isPositive && seriesIndex === lastPositiveIndex) {
-        // Last positive value top borders
-        s.data[dataIndex].itemStyle.borderRadius = [barBorderRadius, barBorderRadius, 0, 0]
-      } else if (isNegative && negativeCount === 1) {
-        // Only one negative value, apply bottom borders
-        s.data[dataIndex].itemStyle.borderRadius = [0, 0, barBorderRadius, barBorderRadius]
-      } else if (isNegative && seriesIndex === firstNegativeIndex) {
-        // First negative value, bottom borders zero
-        s.data[dataIndex].itemStyle.borderRadius = [0, 0, 0, 0]
-      } else if (isNegative && seriesIndex === lastNegativeIndex) {
-        // Last negative value, bottom edges (inverted)
-        s.data[dataIndex].itemStyle.borderRadius = [0, 0, barBorderRadius, barBorderRadius]
-      } else {
-        // No borders for intermediate values
-        s.data[dataIndex].itemStyle.borderRadius = [0, 0, 0, 0]
-      }
-    })
-  }
-
   return series
 }
 

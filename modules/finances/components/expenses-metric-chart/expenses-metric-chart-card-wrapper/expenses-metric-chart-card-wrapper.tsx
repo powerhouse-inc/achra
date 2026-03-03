@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
-import { ExpensesMetricChartCard } from './expenses-metric-chart-card'
-import { ExpensesMetricChartDataFetcher } from './expenses-metric-data-fetcher'
-import { ExpensesMetricChartSkeleton } from './skeletons/expenses-metric-chart-skeleton'
+import { ExpensesMetricChartCard } from '../expenses-metric-chart-card'
+import { ExpensesMetricChartDataFetcher } from '../expenses-metric-data-fetcher'
+import { ExpensesMetricChartSkeleton } from '../skeletons/expenses-metric-chart-skeleton'
 
 interface SummarySectionProps {
   params: Promise<{
@@ -11,10 +11,7 @@ interface SummarySectionProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
-export function ExpensesMetricChartCardWrapper({
-  params,
-  searchParams,
-}: Readonly<SummarySectionProps>) {
+function ExpensesMetricChartCardWrapper({ params, searchParams }: Readonly<SummarySectionProps>) {
   return (
     <ExpensesMetricChartCard>
       <Suspense fallback={<ExpensesMetricChartSkeleton />}>
@@ -23,3 +20,5 @@ export function ExpensesMetricChartCardWrapper({
     </ExpensesMetricChartCard>
   )
 }
+
+export { ExpensesMetricChartCardWrapper }
