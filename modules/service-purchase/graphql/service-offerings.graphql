@@ -112,10 +112,8 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       displayOrder
       isSetupFormation
       optionGroupId
-
     }
     status
     summary
-
   }
 }
