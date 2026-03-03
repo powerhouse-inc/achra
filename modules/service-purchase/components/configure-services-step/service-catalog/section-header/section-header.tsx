@@ -1,7 +1,7 @@
 'use client'
 
 import { Lock } from 'lucide-react'
-import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import type { CatalogStatus } from '@/modules/service-purchase/types'
@@ -41,6 +41,7 @@ function SectionHeader({
   const { tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
 
+  const isOneTime = groupCostType === RsGroupCostType.Setup
   const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
   const discountedPriceLabel = getPriceLabel(groupCostType, groupDiscountedPrice, groupCurrency)
 
@@ -109,17 +110,17 @@ function SectionHeader({
           activePlan ? 'bg-primary/30' : 'bg-accent',
         )}
       >
-        {perTierPrices && activePlan && perTierPrices[activePlan] && (
+        {isOneTime && perTierPrices && activePlan && perTierPrices[activePlan] && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {perTierPrices[activePlan]}
           </span>
         )}
-        {!perTierPrices && priceLabel && !discountedPriceLabel && (
+        {isOneTime && !perTierPrices && priceLabel && !discountedPriceLabel && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
           </span>
         )}
-        {!perTierPrices && priceLabel && discountedPriceLabel && (
+        {isOneTime && !perTierPrices && priceLabel && discountedPriceLabel && (
           <span className="flex min-w-0 flex-col items-center gap-0.5">
             <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
               {priceLabel}
@@ -140,7 +141,7 @@ function SectionHeader({
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
-          {perTierPrices?.[plan] && (
+          {isOneTime && perTierPrices?.[plan] && (
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
@@ -150,21 +151,29 @@ function SectionHeader({
               {perTierPrices[plan]}
             </span>
           )}
-          {!perTierPrices && plan === lastTierName && priceLabel && !discountedPriceLabel && (
-            <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
-              {priceLabel}
-            </span>
-          )}
-          {!perTierPrices && plan === lastTierName && priceLabel && discountedPriceLabel && (
-            <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
-              <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+          {isOneTime &&
+            !perTierPrices &&
+            plan === lastTierName &&
+            priceLabel &&
+            !discountedPriceLabel && (
+              <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
                 {priceLabel}
               </span>
-              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
-                {discountedPriceLabel}
+            )}
+          {isOneTime &&
+            !perTierPrices &&
+            plan === lastTierName &&
+            priceLabel &&
+            discountedPriceLabel && (
+              <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
+                <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+                  {priceLabel}
+                </span>
+                <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+                  {discountedPriceLabel}
+                </span>
               </span>
-            </span>
-          )}
+            )}
         </div>
       ))}
     </div>

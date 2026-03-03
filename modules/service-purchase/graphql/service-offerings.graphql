@@ -43,58 +43,6 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       categoryLabel
       selectedOptions
     }
-    # finalConfiguration {
-    #   selectedTierId
-    #   selectedBillingCycle
-    #   tierBasePrice
-    #   tierCurrency
-    #   optionGroupConfigs {
-    #     id
-    #     optionGroupId
-    #     effectiveBillingCycle
-    #     billingCycleOverridden
-    #     discountStripped
-    #     recurringAmount
-    #     currency
-    #     discount {
-    #       discountType
-    #       discountValue
-    #       originalAmount
-    #       discountedAmount
-    #     }
-    #     setupCost
-    #     setupCostCurrency
-    #     setupCostDiscount {
-    #       discountType
-    #       discountValue
-    #       originalAmount
-    #       discountedAmount
-    #     }
-    #   }
-    #   lastModified
-    #   addOnConfigs {
-    #     id
-    #     optionGroupId
-    #     selectedBillingCycle
-    #     recurringAmount
-    #     currency
-    #     discount {
-    #       discountType
-    #       discountValue
-    #       originalAmount
-    #       discountedAmount
-    #     }
-    #     setupCost
-    #     setupCostCurrency
-    #     setupCostDiscount {
-    #       discountType
-    #       discountValue
-    #       originalAmount
-    #       discountedAmount
-    #     }
-    #   }
-    # }
-
     optionGroups {
       id
       name
@@ -156,59 +104,18 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       price
       currency
     }
-    serviceGroups {
-      id
-      name
-      description
-      billingCycle
-      displayOrder
-      tierPricing {
-        id
-        tierId
-        setupCostsPerCycle {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-        recurringPricing {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-      }
-    }
     resourceTemplateId
     services {
       id
       title
       description
       displayOrder
-      serviceGroupId
       isSetupFormation
       optionGroupId
-      # facetBindings {
-      #   id
-      #   facetName
-      #   facetType
-      #   supportedOptions
-      # }
+
     }
     status
     summary
-    targetAudiences {
-      id
-      label
-      color
-    }
+
   }
 }
