@@ -5,7 +5,7 @@ import { BUDGETS } from '../../mocks'
 import { MOCK_BUDGETS_ANALYTICS } from '../../mocks/analytics'
 import { getBudgetsByCodePath, getCodePathFromParams, getLevelOfDetail } from '../../utils'
 import { BudgetUtilizationCard } from './budget-utilization-card'
-import { DesktopChart } from './doughnut-chart'
+import { DoughnutChart } from './doughnut-chart'
 import { MobileChart } from './doughnut-chart/mobile-chart'
 import { FilterTabs } from './filter-tabs'
 import { useCardChartOverview } from './useCardChartOverview'
@@ -51,9 +51,9 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
         </div>
 
         <div data-slot="chart-container" className="hidden pt-4 pr-6 pb-4 md:flex md:w-[71%]">
-          <DesktopChart
+          <DoughnutChart
             seriesData={cardOverViewSectionData.doughnutSeriesData}
-            selectedMetric="Budget"
+            selectedMetric={cardOverViewSectionData.selectedMetric}
             changeAlignment={cardOverViewSectionData.changeAlignment}
             showSwiper={cardOverViewSectionData.showSwiper}
             numberSliderPerLevel={cardOverViewSectionData.numberSliderPerLevel}

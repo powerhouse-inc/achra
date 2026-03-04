@@ -2117,7 +2117,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Budget',
         unit: 'DAI',
-        value: 0,
+        value: 255000,
         sum: 87093180.6736,
       },
       {
@@ -2129,7 +2129,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
-        value: 0,
+        value: 63750,
         sum: 82660600.01372345,
       },
       {
@@ -2141,7 +2141,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'ProtocolNetOutflow',
         unit: 'DAI',
-        value: 0,
+        value: 68000,
         sum: 85600960.51061171,
       },
       {
@@ -2153,7 +2153,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Actuals',
         unit: 'DAI',
-        value: 0,
+        value: 65450,
         sum: 46899530.82999993,
       },
       {
@@ -2165,7 +2165,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Forecast',
         unit: 'DAI',
-        value: 0,
+        value: 70550,
         sum: 46746365.68999997,
       },
       {
@@ -2235,9 +2235,21 @@ export const seriesGranularityQuarterlyFirstLevel = [
             path: 'atlas/immutable',
           },
         ],
+        metric: 'Budget',
+        unit: 'DAI',
+        value: 135000,
+        sum: 537000,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
-        value: 0,
+        value: 32400,
         sum: 417713.93356000003,
       },
       {
@@ -2249,7 +2261,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'ProtocolNetOutflow',
         unit: 'DAI',
-        value: 0,
+        value: 36000,
         sum: 417937.44899999996,
       },
       {
@@ -2261,7 +2273,19 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Actuals',
         unit: 'DAI',
-        value: 0,
+        value: 34200,
+        sum: 0,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
+        metric: 'Forecast',
+        unit: 'DAI',
+        value: 37800,
         sum: 0,
       },
     ],
@@ -2280,7 +2304,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Budget',
         unit: 'DAI',
-        value: 0,
+        value: 265000,
         sum: 87093180.6736,
       },
       {
@@ -2398,6 +2422,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
             path: 'atlas/immutable',
           },
         ],
+        metric: 'Budget',
+        unit: 'DAI',
+        value: 151000,
+        sum: 537000,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
         value: 0,
@@ -2427,6 +2463,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
         value: 0,
         sum: 0,
       },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
+        metric: 'Forecast',
+        unit: 'DAI',
+        value: 0,
+        sum: 0,
+      },
     ],
   },
   {
@@ -2443,7 +2491,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Budget',
         unit: 'DAI',
-        value: 0,
+        value: 261000,
         sum: 87093180.6736,
       },
       {
@@ -2561,6 +2609,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
             path: 'atlas/immutable',
           },
         ],
+        metric: 'Budget',
+        unit: 'DAI',
+        value: 150000,
+        sum: 537000,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
         value: 0,
@@ -2590,6 +2650,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
         value: 0,
         sum: 0,
       },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
+        metric: 'Forecast',
+        unit: 'DAI',
+        value: 0,
+        sum: 0,
+      },
     ],
   },
   {
@@ -2606,7 +2678,7 @@ export const seriesGranularityQuarterlyFirstLevel = [
         ],
         metric: 'Budget',
         unit: 'DAI',
-        value: 0,
+        value: 267000,
         sum: 87093180.6736,
       },
       {
@@ -2724,6 +2796,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
             path: 'atlas/immutable',
           },
         ],
+        metric: 'Budget',
+        unit: 'DAI',
+        value: 101000,
+        sum: 537000,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
         value: 0,
@@ -2753,6 +2837,18 @@ export const seriesGranularityQuarterlyFirstLevel = [
         value: 0,
         sum: 0,
       },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
+        metric: 'Forecast',
+        unit: 'DAI',
+        value: 0,
+        sum: 0,
+      },
     ],
   },
 ]
@@ -2772,7 +2868,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'Budget',
         unit: 'DAI',
-        value: 0,
+        value: 1020000,
         sum: 87093180.6736,
       },
       {
@@ -2784,7 +2880,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
-        value: 0,
+        value: 63750,
         sum: 82660600.01372345,
       },
       {
@@ -2796,7 +2892,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'ProtocolNetOutflow',
         unit: 'DAI',
-        value: 0,
+        value: 68000,
         sum: 85600960.51061171,
       },
       {
@@ -2808,7 +2904,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'Actuals',
         unit: 'DAI',
-        value: 0,
+        value: 65450,
         sum: 46899530.82999993,
       },
       {
@@ -2820,7 +2916,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'Forecast',
         unit: 'DAI',
-        value: 0,
+        value: 70550,
         sum: 46746365.68999997,
       },
       {
@@ -2890,9 +2986,21 @@ export const seriesGranularityAnnuallyFirstLevel = [
             path: 'atlas/immutable',
           },
         ],
+        metric: 'Budget',
+        unit: 'DAI',
+        value: 537000,
+        sum: 537000,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
         metric: 'PaymentsOnChain',
         unit: 'DAI',
-        value: 0,
+        value: 32400,
         sum: 417713.93356000003,
       },
       {
@@ -2904,7 +3012,7 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'ProtocolNetOutflow',
         unit: 'DAI',
-        value: 0,
+        value: 36000,
         sum: 417937.44899999996,
       },
       {
@@ -2916,7 +3024,19 @@ export const seriesGranularityAnnuallyFirstLevel = [
         ],
         metric: 'Actuals',
         unit: 'DAI',
-        value: 0,
+        value: 34200,
+        sum: 0,
+      },
+      {
+        dimensions: [
+          {
+            name: 'budget',
+            path: 'atlas/immutable',
+          },
+        ],
+        metric: 'Forecast',
+        unit: 'DAI',
+        value: 37800,
         sum: 0,
       },
     ],

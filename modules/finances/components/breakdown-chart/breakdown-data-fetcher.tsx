@@ -29,6 +29,12 @@ export async function BreakdownChartDataFetcher({
   })
 
   return (
-    <BreakdownChartContent params={financeSlug} budgetsAnalytics={budgetsAnalytics} year={year} />
+    <BreakdownChartContent
+      params={financeSlug}
+      budgetsAnalytics={budgetsAnalytics}
+      year={year}
+      granularity={granularity}
+      metric={metric}
+    />
   )
 }

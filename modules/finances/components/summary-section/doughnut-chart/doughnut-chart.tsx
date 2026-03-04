@@ -18,7 +18,7 @@ import {
   sortDoughnutSeriesByValue,
 } from './utils'
 
-interface DesktopChartProps {
+interface DoughnutChartProps {
   seriesData: DoughnutSeries[]
   selectedMetric: AnalyticMetric
   changeAlignment: boolean
@@ -26,13 +26,13 @@ interface DesktopChartProps {
   numberSliderPerLevel?: number
 }
 
-function DesktopChart({
+function DoughnutChart({
   seriesData,
   selectedMetric,
   changeAlignment,
   showSwiper,
   numberSliderPerLevel = 6,
-}: DesktopChartProps) {
+}: Readonly<DoughnutChartProps>) {
   const chartRef = useRef<EChartsOption>(null)
   const ref = useRef<SwiperRef>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -234,7 +234,9 @@ function DesktopChart({
   }
 
   useEffect(() => {
-    chartRef.current?.getEchartsInstance()?.setOption(options, { notMerge: true })
+    chartRef.current
+      ?.getEchartsInstance()
+      ?.setOption(options, { notMerge: true, replaceAnimation: true })
   }, [options])
 
   useEffect(() => {
@@ -342,4 +344,4 @@ function DesktopChart({
   )
 }
 
-export { DesktopChart }
+export { DoughnutChart }

@@ -15,8 +15,11 @@ import {
   BreakdownMetricSelectDrawer,
 } from './filter-metric-breakdown-chart'
 export function FilterChart() {
-  const [metric, setMetric] = useQueryState('metric', metricParser)
-  const [granularity, setGranularity] = useQueryState('granularity', granularityParser)
+  const [metric, setMetric] = useQueryState('metric', metricParser.withOptions({ shallow: false }))
+  const [granularity, setGranularity] = useQueryState(
+    'granularity',
+    granularityParser.withOptions({ shallow: false }),
+  )
 
   const onReset = useCallback(() => {
     void setMetric(null)

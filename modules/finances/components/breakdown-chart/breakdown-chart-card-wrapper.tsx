@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { BreakdownChartCard } from './breakdown-chart-card'
-import { BreakdownChartDataFetcher } from './breakdown-data-fetcher'
+import { BreakdownChartDataFetcherKeyed } from './breakdown-chart-data-fetcher-keyed'
 import { BreakdownChartSkeleton } from './skeleton'
 
 interface SummarySectionProps {
@@ -15,7 +15,7 @@ export function BreakdownChartCardWrapper({ params, searchParams }: Readonly<Sum
   return (
     <BreakdownChartCard>
       <Suspense fallback={<BreakdownChartSkeleton />}>
-        <BreakdownChartDataFetcher params={params} searchParams={searchParams} />
+        <BreakdownChartDataFetcherKeyed params={params} searchParams={searchParams} />
       </Suspense>
     </BreakdownChartCard>
   )
