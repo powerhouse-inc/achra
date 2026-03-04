@@ -1,13 +1,29 @@
 'use client'
 
 import { Landmark } from 'lucide-react'
-import { useServicePurchaseState } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import { useMemo } from 'react'
+import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  useAllOptionGroups,
+  usePurchaseTotals,
+  useServicePurchaseState,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
-import { KeyValueCard } from './key-value-card'
-import { OptionGroup } from './option-group'
+import { SelectedFacets } from './selected-facets'
+import { Summary } from './summary-section'
 
 function SummaryCard() {
   const { facets } = useServicePurchaseState()
+  const totals = usePurchaseTotals()
+  const optionGroups = useAllOptionGroups()
+
+  const { recurringGroups, setupGroups } = useMemo(() => {
+    const selected = optionGroups.filter((g) => g.isSelected)
+    return {
+      recurringGroups: selected.filter((g) => g.costType === RsGroupCostType.Recurring),
+      setupGroups: selected.filter((g) => g.costType === RsGroupCostType.Setup),
+    }
+  }, [optionGroups])
 
   return (
     <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
@@ -26,52 +42,45 @@ function SummaryCard() {
           </div>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-0.5">
-          <span className="text-primary text-base/6 font-semibold lg:leading-7">$350/mo</span>
-          <span className="text-foreground/50 text-xs/4.5 font-medium">+ $3000 Setup</span>
+          <span className="text-primary text-base/6 font-semibold lg:leading-7">
+            ${totals.recurringTotal}/mo
+          </span>
+          <span className="text-foreground/50 text-xs/4.5 font-medium">
+            + ${totals.setupTotal} Setup
+          </span>
         </div>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">
-        {/* Key Information */}
-        <div className="bg-accent grid grid-cols-1 gap-2 px-3 py-3 sm:grid-cols-2 md:grid-cols-4 lg:px-6 lg:py-4">
-          {facets.map((facet) => (
-            <KeyValueCard
-              key={facet.originalFacet.id}
-              label={facet.originalFacet.categoryLabel}
-              value={facet.selectedOption}
-            />
-          ))}
-        </div>
-
-        {/* Pricing Breakdown */}
-        <div className="flex flex-col gap-4 px-3 lg:px-6">
-          <OptionGroup.Root variant="pricing">
-            <OptionGroup.PricingHeader>
-              <span className="text-foreground text-sm font-bold tracking-wide uppercase lg:text-base/6">
-                PRICING SUMMARY
-              </span>
-              <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                RECURRING
-              </span>
-            </OptionGroup.PricingHeader>
-            <OptionGroup.PricingLineItem label="Core Tools & Documentation" value="$300/mo" />
-            <OptionGroup.PricingLineItem label="Advance & Scale" value="$50/mo" />
-            <OptionGroup.TotalSetup label="TOTAL RECURRING">$350/mo</OptionGroup.TotalSetup>
-          </OptionGroup.Root>
-        </div>
+        {facets.length > 0 && <SelectedFacets />}
 
         <div className="flex flex-col gap-4 px-3 lg:px-6">
-          <OptionGroup.Root variant="pricing">
-            <OptionGroup.PricingHeader>
-              <span className="text-foreground text-sm font-bold tracking-wide uppercase lg:text-base/6">
-                PRICING SUMMARY
-              </span>
-              <span className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-                ONE-TIME FEE
-              </span>
-            </OptionGroup.PricingHeader>
-            <OptionGroup.PricingLineItem label="Legal Setup" value="$3000" />
-          </OptionGroup.Root>
+          {recurringGroups.length > 0 && (
+            <Summary.Provider sectionLabel="Recurring" totalSuffix="/mo">
+              <Summary.Card>
+                <Summary.Header />
+                <Summary.Content>
+                  {recurringGroups.map((group) => (
+                    <Summary.Group key={group.id} group={group} />
+                  ))}
+                </Summary.Content>
+                <Summary.Total totalAmount={totals.recurringTotal} />
+              </Summary.Card>
+            </Summary.Provider>
+          )}
+
+          {setupGroups.length > 0 && (
+            <Summary.Provider sectionLabel="ONE-TIME FEE" totalSuffix="">
+              <Summary.Card>
+                <Summary.Header />
+                <Summary.Content>
+                  {setupGroups.map((group) => (
+                    <Summary.Group key={group.id} group={group} />
+                  ))}
+                </Summary.Content>
+              </Summary.Card>
+            </Summary.Provider>
+          )}
         </div>
       </CardContent>
     </Card>

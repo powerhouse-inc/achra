@@ -17,6 +17,16 @@ const INCLUDED_LEVELS = new Set([
   RsServiceLevel.Variable,
 ])
 
+/**
+ * Checks whether a string value represents "included" (e.g. "included", "yes", "true").
+ * Used for display logic in summary sections.
+ */
+export function isIncludedValue(value: string | null): boolean {
+  if (value == null || value === '') return true
+  const lower = value.toLowerCase()
+  return lower === 'included' || lower === 'yes' || lower === 'true'
+}
+
 /** Safe coercion — Amount_Money scalar is typed `any` in codegen */
 function toNum(raw: unknown): number {
   if (raw === null || raw === undefined) return 0
