@@ -374,8 +374,21 @@ const SERVICE_PRIORITY = {
   ADD_ON: 2,
 } as const
 
-export const getPriorityOptionGroup = (group: RsOfferingOptionGroup): number => {
+/** Type for option groups that support priority-based sorting. */
+export interface OptionGroupSortable {
+  costType?: string | null
+  isAddOn: boolean
+}
+
+export const getPriorityOptionGroup = (group: OptionGroupSortable): number => {
   if (group.costType === 'SETUP') return SERVICE_PRIORITY.SETUP
   if (!group.isAddOn) return SERVICE_PRIORITY.INCLUDED
   return SERVICE_PRIORITY.ADD_ON
+}
+
+/** Sorts option groups: SETUP first, then INCLUDED (non-add-on), then ADD_ON. */
+export function sortOptionGroups<T extends OptionGroupSortable>(groups: T[]): T[] {
+  return [...groups]
+    .sort((a, b) => getPriorityOptionGroup(a) - getPriorityOptionGroup(b))
+    .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
 }

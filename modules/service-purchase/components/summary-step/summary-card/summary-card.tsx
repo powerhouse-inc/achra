@@ -3,6 +3,7 @@
 import { Landmark } from 'lucide-react'
 import { useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import {
   useAllOptionGroups,
   usePurchaseTotals,
@@ -20,8 +21,10 @@ function SummaryCard() {
   const { recurringGroups, setupGroups } = useMemo(() => {
     const selected = optionGroups.filter((g) => g.isSelected)
     return {
-      recurringGroups: selected.filter((g) => g.costType === RsGroupCostType.Recurring),
-      setupGroups: selected.filter((g) => g.costType === RsGroupCostType.Setup),
+      recurringGroups: sortOptionGroups(
+        selected.filter((g) => g.costType === RsGroupCostType.Recurring),
+      ),
+      setupGroups: sortOptionGroups(selected.filter((g) => g.costType === RsGroupCostType.Setup)),
     }
   }, [optionGroups])
 
