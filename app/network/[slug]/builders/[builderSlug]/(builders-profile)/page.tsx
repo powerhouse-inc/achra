@@ -1,7 +1,6 @@
-import { Suspense } from 'react'
+import { notFound } from 'next/navigation'
 import BuilderProfile from '@/modules/builder-profile/components/builder-profile/builder-profile'
-import { BuilderProfileSkeleton } from '@/modules/builder-profile/components/builder-profile/builder-profile-skeleton'
-import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
+import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 interface BuildersProfilePageProps {
@@ -11,13 +10,17 @@ interface BuildersProfilePageProps {
 export default async function BuildersProfilePage({ params }: BuildersProfilePageProps) {
   const { builderSlug } = await params
 
+  const builder = await getBuilderProfile({
+    slug: builderSlug,
+  })
+
+  if (!builder) {
+    notFound()
+  }
+
   return (
     <PageContent className="mt-3 sm:mt-4">
-      <ErrorBoundaryWithPresets>
-        <Suspense fallback={<BuilderProfileSkeleton />}>
-          <BuilderProfile builderSlug={builderSlug} />
-        </Suspense>
-      </ErrorBoundaryWithPresets>
+      <BuilderProfile builder={builder} />
     </PageContent>
   )
 }

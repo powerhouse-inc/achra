@@ -1,3 +1,4 @@
+import ServicesCardSkeleton from '@/modules/services/components/service-skeleton/service-card-skeleton'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -161,13 +162,17 @@ function ProjectSkeleton() {
   )
 }
 
-function BuilderProfileSkeleton() {
+interface BuilderProfileSkeletonProps {
+  isOperatorProfile?: boolean
+}
+
+function BuilderProfileSkeleton({ isOperatorProfile }: BuilderProfileSkeletonProps) {
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[65%_1fr] xl:grid-cols-[60%_1fr] 2xl:grid-cols-[65%_1fr]">
         <AboutUsSkeleton />
         <div className="flex flex-col gap-6">
-          <FinancesSkeleton className="hidden lg:flex" />
+          {!isOperatorProfile && <FinancesSkeleton className="hidden lg:flex" />}
           <SkillsSkeleton />
         </div>
       </div>
@@ -175,6 +180,15 @@ function BuilderProfileSkeleton() {
         <ProjectSkeleton />
         <ProjectSkeleton />
       </div>
+      {isOperatorProfile && (
+        <div className="flex flex-col gap-4 lg:flex-1">
+          <Skeleton className="h-5.5 w-full max-w-48" />
+          <div className="flex flex-col gap-6">
+            <ServicesCardSkeleton />
+            <ServicesCardSkeleton />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

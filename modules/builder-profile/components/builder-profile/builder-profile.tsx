@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-finances-card-content'
 import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/profile-finances-drawer'
 import { ProjectCard } from '@/modules/expense-reports/components/project-card'
@@ -6,21 +6,13 @@ import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import ff from '@/modules/shared/lib/feature-flags'
-import { getBuilderProfile } from '../../services/builder-profile'
 import { SkillsAccordion } from './components/skills-accordion/skills-accordion'
 interface BuilderProfileProps {
-  builderSlug: string
+  builder: BuilderProfileState
+  isOperatorProfile?: boolean
 }
 
-export default async function BuilderProfile({ builderSlug }: BuilderProfileProps) {
-  const builder = await getBuilderProfile({
-    slug: builderSlug,
-  })
-
-  if (!builder) {
-    notFound()
-  }
-
+export default function BuilderProfile({ builder, isOperatorProfile }: BuilderProfileProps) {
   const connectButton = (
     <ConnectLink
       action="edit"
@@ -41,12 +33,14 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
                 {`${builder.name}: Who we are`}
               </h1>
 
-              <div className="lg:hidden">
-                <ProfileFinancesDrawer
-                  builderSlug={builder.slug ?? ''}
-                  operationalHub={builder.operationalHubMember}
-                />
-              </div>
+              {!isOperatorProfile && (
+                <div className="lg:hidden">
+                  <ProfileFinancesDrawer
+                    builderSlug={builder.slug ?? ''}
+                    operationalHub={builder.operationalHubMember}
+                  />
+                </div>
+              )}
             </div>
 
             {ff.builders.CONNECT_LINK_ENABLED && (
@@ -62,17 +56,19 @@ export default async function BuilderProfile({ builderSlug }: BuilderProfileProp
             <div className="flex justify-end">{connectButton}</div>
           )}
 
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl leading-[120%] font-bold">Finances</h2>
-            <Card className="border-none py-0">
-              <CardContent className="p-4">
-                <ProfileFinancesCardContent
-                  builderSlug={builder.slug ?? ''}
-                  operationalHub={builder.operationalHubMember}
-                />
-              </CardContent>
-            </Card>
-          </div>
+          {!isOperatorProfile && (
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl leading-[120%] font-bold">Finances</h2>
+              <Card className="border-none py-0">
+                <CardContent className="p-4">
+                  <ProfileFinancesCardContent
+                    builderSlug={builder.slug ?? ''}
+                    operationalHub={builder.operationalHubMember}
+                  />
+                </CardContent>
+              </Card>
+            </div>
+          )}
           <SkillsAccordion skills={builder.skills} className="hidden lg:flex" />
         </div>
       </div>

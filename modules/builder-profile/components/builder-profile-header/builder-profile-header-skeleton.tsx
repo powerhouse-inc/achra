@@ -1,10 +1,15 @@
 import { Suspense } from 'react'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { cn } from '@/modules/shared/lib/utils'
 import { BuilderHeaderDescriptionSkeleton } from './builder-profile-header-description-skeleton'
 
-function BuilderProfileHeaderSkeleton() {
+interface BuilderProfileHeaderSkeletonProps {
+  isOperatorProfile?: boolean
+}
+
+function BuilderProfileHeaderSkeleton({ isOperatorProfile }: BuilderProfileHeaderSkeletonProps) {
   return (
-    <div className="border-input mt-16 w-full border-b">
+    <div className={cn('border-input mt-16 w-full border-b', isOperatorProfile && 'mt-3')}>
       <div className="container flex flex-col gap-4 pt-4 pb-2">
         <div className="flex justify-between gap-4">
           <div className="flex gap-4 lg:items-center">
