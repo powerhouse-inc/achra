@@ -18,6 +18,12 @@ interface PricingCalculatorContextValue {
   tiers: RsServiceSubscriptionTier[]
   /** The billing cycle selected by the user */
   selectedBillingCycle: RsBillingCycle
+  /**
+   * Dynamically computed monthly-equivalent header price per tier id.
+   * Derived from active recurring option groups + selected add-ons for the
+   * current billing cycle (with discounts applied). null means price is pending.
+   */
+  tierHeaderPrices: Record<string, number | null>
 }
 
 const PricingCalculatorContext = createContext<PricingCalculatorContextValue | null>(null)

@@ -26,6 +26,7 @@ const meta = {
           tierNames: ['1'],
           tiers: [],
           selectedBillingCycle: RsBillingCycle.Monthly,
+          tierHeaderPrices: { '1': 59 },
         }}
       >
         <Story />

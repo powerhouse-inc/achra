@@ -123,5 +123,6 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
     }
     status
     summary
+    availableBillingCycles
   }
 }

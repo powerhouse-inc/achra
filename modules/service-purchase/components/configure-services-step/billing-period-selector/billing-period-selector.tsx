@@ -1,8 +1,13 @@
 'use client'
 
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
-import { getAvailableCycles, PERIOD_LABELS } from '@/modules/service-purchase/lib/billing-period'
 import {
+  computePeriodDiscountLabel,
+  getAvailableCycles,
+  PERIOD_LABELS,
+} from '@/modules/service-purchase/lib/billing-period'
+import {
+  useSelectedTier,
   useServiceOffering,
   useServicePurchaseActions,
   useServicePurchaseState,
@@ -11,11 +16,10 @@ import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/tog
 
 function BillingPeriodSelector() {
   const servicesData = useServiceOffering()
-  // TODO: ADD this once api tis ready
-  // const selectedTier = useSelectedTier()
+  const selectedTier = useSelectedTier()
   const { selectedBillingCycle } = useServicePurchaseState()
   const { setSelectedBillingCycle } = useServicePurchaseActions()
-  const availableCycles = getAvailableCycles(servicesData.optionGroups)
+  const availableCycles = getAvailableCycles(servicesData.availableBillingCycles)
 
   if (availableCycles.length === 0) return null
 
@@ -31,9 +35,11 @@ function BillingPeriodSelector() {
         className="gap-1"
       >
         {availableCycles.map((cycle) => {
-          // TODO: ADD this once api tis ready
-          // const discount = computePeriodDiscountLabel(selectedTier, cycle)
-          const discount = 10
+          const discountLabel = computePeriodDiscountLabel(
+            servicesData.optionGroups,
+            selectedTier.id,
+            cycle,
+          )
 
           return (
             <ToggleGroupItem
@@ -43,9 +49,11 @@ function BillingPeriodSelector() {
             >
               {PERIOD_LABELS[cycle]}
 
-              <span className="bg-primary text-primary-foreground border-accent rounded-full border px-2.5 py-0.5 text-xs font-medium">
-                Save {discount} %
-              </span>
+              {discountLabel && (
+                <span className="bg-primary text-primary-foreground border-accent rounded-full border px-2.5 py-0.5 text-xs font-medium">
+                  {discountLabel}
+                </span>
+              )}
             </ToggleGroupItem>
           )
         })}

@@ -138,7 +138,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               currentState.tiers.find((t) => t.id === persisted.selectedTierId) ??
               currentState.selectedTier
             const validBillingCycles = new Set(
-              getAvailableCycles(currentState.services.optionGroups),
+              getAvailableCycles(currentState.services.availableBillingCycles),
             )
             const selectedBillingCycle: RsBillingCycle =
               persisted.selectedBillingCycle != null &&
