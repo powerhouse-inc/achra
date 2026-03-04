@@ -21,9 +21,9 @@ interface PlanSelectorItemProps {
 
 function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   const inputId = tier.id
-  const { selectedBillingCycle } = usePricingCalculatorContext()
+  const { selectedBillingCycle, tierHeaderPrices } = usePricingCalculatorContext()
 
-  const displayPrice = Number(tier.pricing.amount ?? 0)
+  const displayPrice = tierHeaderPrices[tier.id] ?? null
 
   return (
     <label
@@ -56,12 +56,18 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
       ) : (
         <div className="flex flex-col items-center gap-0.5">
           <div>
-            <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
-              ${Math.round(displayPrice).toLocaleString()}
-            </span>
-            <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
-              /mo
-            </span>
+            {displayPrice === null ? (
+              <span className="text-muted-foreground text-xs/5.5 font-semibold">—</span>
+            ) : (
+              <>
+                <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+                  ${Math.round(displayPrice).toLocaleString()}
+                </span>
+                <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
+                  /mo
+                </span>
+              </>
+            )}
           </div>
           {/* TODO: add this one its api fixed */}
           {/* <span className="text-status-progress text-xs font-semibold">save {savingsLabel}</span> */}

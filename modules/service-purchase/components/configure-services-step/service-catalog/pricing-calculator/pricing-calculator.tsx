@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo } from 'react'
 import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
+import { computeTierHeaderPriceWithBreakdown } from '@/modules/service-purchase/lib/price-breakdown-utils'
 import {
   buildServiceMetrics,
   buildServiceValues,
@@ -54,6 +55,20 @@ function PricingCalculator() {
     setSelectedTier(tierNames[newIndex])
   }, [mobilePlanIndex, tierNames, setSelectedTier])
 
+  const tierHeaderPrices = useMemo(() => {
+    const activeGroupIds = new Set(storeOptionGroups.filter((g) => g.isSelected).map((g) => g.id))
+    const prices: Record<string, number | null> = {}
+    for (const t of tiers) {
+      prices[t.id] = computeTierHeaderPriceWithBreakdown(
+        servicesData,
+        t.id,
+        billingPeriod,
+        activeGroupIds,
+      )
+    }
+    return prices
+  }, [tiers, storeOptionGroups, billingPeriod, servicesData])
+
   const contextValue = useMemo(
     () => ({
       activePlan: selectedPlan,
@@ -62,8 +77,17 @@ function PricingCalculator() {
       tierNames,
       tiers,
       selectedBillingCycle: billingPeriod,
+      tierHeaderPrices,
     }),
-    [selectedPlan, handlePrevPlan, handleNextPlan, tierNames, tiers, billingPeriod],
+    [
+      selectedPlan,
+      handlePrevPlan,
+      handleNextPlan,
+      tierNames,
+      tiers,
+      billingPeriod,
+      tierHeaderPrices,
+    ],
   )
 
   return (

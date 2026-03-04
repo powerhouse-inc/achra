@@ -1,7 +1,8 @@
 import {
   RsBillingCycle,
+  RsDiscountType,
+  RsGroupCostType,
   type RsOfferingOptionGroup,
-  type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export const PERIOD_ORDER: RsBillingCycle[] = [
@@ -20,21 +21,32 @@ export const PERIOD_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.OneTime]: 'One-Time',
 }
 
-/** Billing-cycle discounts are not available on RS tiers — always returns null. */
+/**
+ * Returns the discount badge label for a billing cycle (e.g. "Save 10%"),
+ * derived from the principal non-add-on recurring option group's
+ * tierDependentPricing for the selected tier.
+ */
 export function computePeriodDiscountLabel(
-  _tier: RsServiceSubscriptionTier,
-  _cycle: RsBillingCycle,
+  optionGroups: RsOfferingOptionGroup[],
+  tierId: string,
+  cycle: RsBillingCycle,
 ): string | null {
-  return null
+  const mainGroup = optionGroups.find((g) => !g.isAddOn && g.costType === RsGroupCostType.Recurring)
+  if (!mainGroup?.tierDependentPricing) return null
+
+  const tierPricing = mainGroup.tierDependentPricing.find((tp) => tp.tierId === tierId)
+  if (!tierPricing) return null
+
+  const entry = tierPricing.recurringPricing.find((rp) => rp.billingCycle === cycle)
+  if (!entry?.discount) return null
+
+  const { discountType, discountValue } = entry.discount
+  if (discountType === RsDiscountType.Percentage) return `Save ${discountValue}%`
+  return `Save $${discountValue}`
 }
 
-/** Derives available billing cycles from the union of all option-group availableBillingCycles. */
-export function getAvailableCycles(optionGroups: RsOfferingOptionGroup[]): RsBillingCycle[] {
-  const cyclesSet = new Set<RsBillingCycle>()
-  for (const group of optionGroups) {
-    for (const cycle of group.availableBillingCycles) {
-      cyclesSet.add(cycle)
-    }
-  }
+/** Returns the available billing cycles ordered by PERIOD_ORDER, using the root-level availableBillingCycles from the service offering. */
+export function getAvailableCycles(availableBillingCycles: RsBillingCycle[]): RsBillingCycle[] {
+  const cyclesSet = new Set(availableBillingCycles)
   return PERIOD_ORDER.filter((cycle) => cyclesSet.has(cycle))
 }
