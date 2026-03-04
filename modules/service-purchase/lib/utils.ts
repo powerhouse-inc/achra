@@ -8,7 +8,7 @@ import {
   RsServiceLevel,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import type { FeatureValue } from '../types'
+import type { FeatureValue, OptionGroupSortable } from '../types'
 
 const INCLUDED_LEVELS = new Set([
   RsServiceLevel.Included,
@@ -373,12 +373,6 @@ const SERVICE_PRIORITY = {
   INCLUDED: 1,
   ADD_ON: 2,
 } as const
-
-/** Type for option groups that support priority-based sorting. */
-export interface OptionGroupSortable {
-  costType?: string | null
-  isAddOn: boolean
-}
 
 export const getPriorityOptionGroup = (group: OptionGroupSortable): number => {
   if (group.costType === 'SETUP') return SERVICE_PRIORITY.SETUP
