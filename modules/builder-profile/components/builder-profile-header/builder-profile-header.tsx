@@ -7,13 +7,15 @@ import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-s
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
 import ff from '@/modules/shared/lib/feature-flags'
+import { cn } from '@/modules/shared/lib/utils'
 import { BuilderProfileHeaderDescription } from './builder-profile-header-description'
 
 interface BuilderProfileHeaderProps {
   builder: BuilderProfileState
+  isOperatorProfile?: boolean
 }
 
-function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
+function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHeaderProps) {
   const parsedDate = useMemo(() => {
     if (!builder.lastModified) return undefined
     const date = DateTime.fromISO(builder.lastModified)
@@ -28,7 +30,7 @@ function BuilderProfileHeader({ builder }: BuilderProfileHeaderProps) {
   }, [parsedDate])
 
   return (
-    <div className="border-input mt-16 w-full border-b">
+    <div className={cn('border-input mt-16 w-full border-b', isOperatorProfile && 'mt-3')}>
       <div className="container flex flex-col gap-2 pt-3 pb-2">
         <div className="relative flex w-full gap-2 lg:items-center lg:gap-4">
           <Avatar className="size-12 sm:size-10">
