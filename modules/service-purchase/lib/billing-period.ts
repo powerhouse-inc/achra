@@ -16,7 +16,6 @@ export const PERIOD_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.OneTime]: 'One-Time',
 }
 
-
 /** Returns the available billing cycles ordered by PERIOD_ORDER, using the root-level availableBillingCycles from the service offering. */
 export function getAvailableCycles(availableBillingCycles: RsBillingCycle[]): RsBillingCycle[] {
   const cyclesSet = new Set(availableBillingCycles)
