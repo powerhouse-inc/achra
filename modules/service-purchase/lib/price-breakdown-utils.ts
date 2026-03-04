@@ -42,3 +42,31 @@ export function computeTierHeaderPriceWithBreakdown(
   const monthsInCycle = BILLING_CYCLE_MONTHS[breakdown.billingCycle] || 1
   return breakdown.totals.grandRecurringTotal / monthsInCycle
 }
+
+/**
+ * Returns the discount badge label for a billing cycle (e.g. "Save 20%"),
+ * computed by comparing the undiscounted vs discounted totals from
+ * getUserSelectionPriceBreakdown across the full user selection (plan + active add-ons).
+ *
+ * undiscounted = tierCycleTotal + Σ addOnBreakdowns[].cycleAmount
+ * discounted   = totals.grandRecurringTotal
+ */
+export function computePeriodDiscountLabel(
+  offering: RsServiceOffering,
+  tierId: string,
+  cycle: RsBillingCycle,
+  activeGroupIds: Set<string>,
+): string | null {
+  if (activeGroupIds.size === 0) return null
+
+  const breakdown = getPriceBreakdownInternal(offering, tierId, cycle, activeGroupIds)
+
+  const addOnUndiscounted = breakdown.addOnBreakdowns.reduce((sum, a) => sum + a.cycleAmount, 0)
+  const undiscounted = breakdown.tierCycleTotal + addOnUndiscounted
+  const discounted = breakdown.totals.grandRecurringTotal
+
+  if (undiscounted <= 0 || discounted >= undiscounted) return null
+
+  const savingsPercent = Math.round(((undiscounted - discounted) / undiscounted) * 100)
+  return savingsPercent > 0 ? `Save ${savingsPercent}%` : null
+}

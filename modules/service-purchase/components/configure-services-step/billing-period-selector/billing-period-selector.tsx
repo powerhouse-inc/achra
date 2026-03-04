@@ -1,12 +1,12 @@
 'use client'
 
+import { useMemo } from 'react'
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getAvailableCycles, PERIOD_LABELS } from '@/modules/service-purchase/lib/billing-period'
+import { computePeriodDiscountLabel } from '@/modules/service-purchase/lib/price-breakdown-utils'
 import {
-  computePeriodDiscountLabel,
-  getAvailableCycles,
-  PERIOD_LABELS,
-} from '@/modules/service-purchase/lib/billing-period'
-import {
+  useOptionGroups,
+  useSelectedAddOns,
   useSelectedTier,
   useServiceOffering,
   useServicePurchaseActions,
@@ -19,7 +19,14 @@ function BillingPeriodSelector() {
   const selectedTier = useSelectedTier()
   const { selectedBillingCycle } = useServicePurchaseState()
   const { setSelectedBillingCycle } = useServicePurchaseActions()
+  const optionGroups = useOptionGroups()
+  const selectedAddOns = useSelectedAddOns()
   const availableCycles = getAvailableCycles(servicesData.availableBillingCycles)
+
+  const activeGroupIds = useMemo(
+    () => new Set([...optionGroups.map((g) => g.id), ...selectedAddOns.map((a) => a.id)]),
+    [optionGroups, selectedAddOns],
+  )
 
   if (availableCycles.length === 0) return null
 
@@ -36,9 +43,10 @@ function BillingPeriodSelector() {
       >
         {availableCycles.map((cycle) => {
           const discountLabel = computePeriodDiscountLabel(
-            servicesData.optionGroups,
+            servicesData,
             selectedTier.id,
             cycle,
+            activeGroupIds,
           )
 
           return (
