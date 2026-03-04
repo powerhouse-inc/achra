@@ -1,6 +1,5 @@
 import {
   RsBillingCycle,
-  type RsFinalConfiguration,
   type RsOfferingOptionGroup,
   RsServiceLevel,
   type RsServiceOffering,
@@ -60,34 +59,17 @@ function resolveOriginalPrice(
   return toAmount(group.price)
 }
 
-function resolveGroupPrice(
-  group: RsOfferingOptionGroup,
-  finalConfiguration: RsFinalConfiguration | null | undefined,
-): number {
-  if (!finalConfiguration) return 0
-  if (group.isAddOn) {
-    const config = finalConfiguration.addOnConfigs.find((c) => c.optionGroupId === group.id)
-    return toAmount(config?.recurringAmount ?? config?.setupCost)
-  }
-  const config = finalConfiguration.optionGroupConfigs.find((c) => c.optionGroupId === group.id)
-  return toAmount(config?.recurringAmount ?? config?.setupCost)
-}
-
-function isGroupSelected(
-  group: RsOfferingOptionGroup,
-  finalConfiguration: RsFinalConfiguration | null | undefined,
-): boolean {
+function isGroupSelected(group: RsOfferingOptionGroup): boolean {
   if (!group.isAddOn) return true
-  if (!finalConfiguration) return group.defaultSelected
-  return finalConfiguration.addOnConfigs.some((c) => c.optionGroupId === group.id)
+  return group.defaultSelected
 }
 
 export function computeOptionGroups(
   services: RsServiceOffering,
   selectedTier: RsServiceSubscriptionTier,
 ): PurchaseOptionGroup[] {
-  const { optionGroups, services: offeringServices, finalConfiguration } = services
-  const billingCycle = finalConfiguration?.selectedBillingCycle ?? RsBillingCycle.Monthly
+  const { optionGroups, services: offeringServices } = services
+  const billingCycle = RsBillingCycle.Monthly
 
   return optionGroups.map((group) => {
     const groupServices: PurchaseOptionGroupService[] = offeringServices
@@ -104,9 +86,9 @@ export function computeOptionGroups(
       name: group.name,
       costType: group.costType ?? null,
       isAddOn: group.isAddOn,
-      isSelected: isGroupSelected(group, finalConfiguration),
+      isSelected: isGroupSelected(group),
       originalPrice: resolveOriginalPrice(group, selectedTier.id, billingCycle),
-      resolvedPrice: resolveGroupPrice(group, finalConfiguration),
+      resolvedPrice: resolveOriginalPrice(group, selectedTier.id, billingCycle),
       services: groupServices,
     }
   })
@@ -117,9 +99,7 @@ export function createOptionGroupsSlice(
   _get: ServicePurchaseStoreGet,
   services: RsServiceOffering,
 ): OptionGroupsSlice {
-  const selectedTier =
-    services.tiers.find((t) => t.id === services.finalConfiguration?.selectedTierId) ??
-    services.tiers[0]
+  const selectedTier = services.tiers[0]
 
   const optionGroups = computeOptionGroups(services, selectedTier)
 

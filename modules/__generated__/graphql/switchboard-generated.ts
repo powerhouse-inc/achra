@@ -527,6 +527,11 @@ export enum BTemplateStatus {
   Draft = 'DRAFT'
 }
 
+export type BillingCycleOverrideInput = {
+  billingCycle: RsBillingCycle;
+  groupId: Scalars['OID']['input'];
+};
+
 export type BillingStatement = IDocument & {
   __typename?: 'BillingStatement';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -1109,9 +1114,11 @@ export type ClientInfo = {
 };
 
 export type CreateProductInstancesInput = {
+  customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
   name: Scalars['String']['input'];
   serviceOfferingId: Scalars['PHID']['input'];
   teamName: Scalars['String']['input'];
+  userSelection: UserSelectionInput;
 };
 
 export type CreateProductInstancesOutput = {
@@ -2515,7 +2522,6 @@ export type Mutation = {
   ServiceOffering_addTier?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_addUsageLimit?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_changeResourceTemplate?: Maybe<Scalars['Int']['output']>;
-  ServiceOffering_clearFinalConfiguration?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_createDocument?: Maybe<Scalars['String']['output']>;
   ServiceOffering_deleteOptionGroup?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_deleteService?: Maybe<Scalars['Int']['output']>;
@@ -2536,7 +2542,6 @@ export type Mutation = {
   ServiceOffering_setAvailableBillingCycles?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setFacetBindings?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setFacetTarget?: Maybe<Scalars['Int']['output']>;
-  ServiceOffering_setFinalConfiguration?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setOfferingId?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setOperator?: Maybe<Scalars['Int']['output']>;
   ServiceOffering_setOptionGroupDiscountMode?: Maybe<Scalars['Int']['output']>;
@@ -4499,14 +4504,6 @@ export type MutationServiceOffering_ChangeResourceTemplateArgs = {
 
 
 /** Subgraph definition */
-export type MutationServiceOffering_ClearFinalConfigurationArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ServiceOffering_ClearFinalConfigurationInput>;
-};
-
-
-/** Subgraph definition */
 export type MutationServiceOffering_CreateDocumentArgs = {
   driveId?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
@@ -4662,14 +4659,6 @@ export type MutationServiceOffering_SetFacetTargetArgs = {
   docId?: InputMaybe<Scalars['PHID']['input']>;
   driveId?: InputMaybe<Scalars['String']['input']>;
   input?: InputMaybe<ServiceOffering_SetFacetTargetInput>;
-};
-
-
-/** Subgraph definition */
-export type MutationServiceOffering_SetFinalConfigurationArgs = {
-  docId?: InputMaybe<Scalars['PHID']['input']>;
-  driveId?: InputMaybe<Scalars['String']['input']>;
-  input?: InputMaybe<ServiceOffering_SetFinalConfigurationInput>;
 };
 
 
@@ -6252,45 +6241,6 @@ export type RsFaqField = {
   question?: Maybe<Scalars['String']['output']>;
 };
 
-export type RsFinalAddOnConfig = {
-  __typename?: 'RSFinalAddOnConfig';
-  currency?: Maybe<Scalars['Currency']['output']>;
-  discount?: Maybe<RsResolvedDiscount>;
-  id: Scalars['OID']['output'];
-  optionGroupId: Scalars['OID']['output'];
-  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
-  selectedBillingCycle: RsBillingCycle;
-  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
-  setupCostDiscount?: Maybe<RsResolvedDiscount>;
-};
-
-export type RsFinalConfiguration = {
-  __typename?: 'RSFinalConfiguration';
-  addOnConfigs: Array<RsFinalAddOnConfig>;
-  lastModified: Scalars['DateTime']['output'];
-  optionGroupConfigs: Array<RsFinalOptionGroupConfig>;
-  selectedBillingCycle: RsBillingCycle;
-  selectedTierId: Scalars['OID']['output'];
-  tierBasePrice?: Maybe<Scalars['Amount_Money']['output']>;
-  tierCurrency: Scalars['Currency']['output'];
-};
-
-export type RsFinalOptionGroupConfig = {
-  __typename?: 'RSFinalOptionGroupConfig';
-  billingCycleOverridden: Scalars['Boolean']['output'];
-  currency?: Maybe<Scalars['Currency']['output']>;
-  discount?: Maybe<RsResolvedDiscount>;
-  discountStripped: Scalars['Boolean']['output'];
-  effectiveBillingCycle: RsBillingCycle;
-  id: Scalars['OID']['output'];
-  optionGroupId: Scalars['OID']['output'];
-  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
-  setupCostDiscount?: Maybe<RsResolvedDiscount>;
-};
-
 export enum RsGroupCostType {
   Recurring = 'RECURRING',
   Setup = 'SETUP'
@@ -6364,14 +6314,6 @@ export type RsRecurringPriceOption = {
   currency: Scalars['Currency']['output'];
   discount?: Maybe<RsDiscountRule>;
   id: Scalars['OID']['output'];
-};
-
-export type RsResolvedDiscount = {
-  __typename?: 'RSResolvedDiscount';
-  discountType: RsDiscountType;
-  discountValue: Scalars['Float']['output'];
-  discountedAmount: Scalars['Amount_Money']['output'];
-  originalAmount: Scalars['Amount_Money']['output'];
 };
 
 export type RsResourceFacetBinding = {
@@ -6461,7 +6403,6 @@ export type RsServiceOffering = {
   __typename?: 'RSServiceOffering';
   description?: Maybe<Scalars['String']['output']>;
   facetTargets: Array<RsOfferingFacetTarget>;
-  finalConfiguration?: Maybe<RsFinalConfiguration>;
   id: Scalars['PHID']['output'];
   infoLink?: Maybe<Scalars['URL']['output']>;
   lastModified: Scalars['DateTime']['output'];
@@ -8178,10 +8119,6 @@ export type ServiceOffering_ChangeResourceTemplateInput = {
   previousTemplateId: Scalars['PHID']['input'];
 };
 
-export type ServiceOffering_ClearFinalConfigurationInput = {
-  lastModified: Scalars['DateTime']['input'];
-};
-
 export type ServiceOffering_DeleteOptionGroupInput = {
   id: Scalars['OID']['input'];
   lastModified: Scalars['DateTime']['input'];
@@ -8236,72 +8173,6 @@ export type ServiceOffering_FacetTarget = {
   categoryLabel: Scalars['String']['output'];
   id: Scalars['OID']['output'];
   selectedOptions: Array<Scalars['String']['output']>;
-};
-
-export type ServiceOffering_FinalAddOnConfig = {
-  __typename?: 'ServiceOffering_FinalAddOnConfig';
-  currency?: Maybe<Scalars['Currency']['output']>;
-  discount?: Maybe<ServiceOffering_ResolvedDiscount>;
-  id: Scalars['OID']['output'];
-  optionGroupId: Scalars['OID']['output'];
-  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
-  selectedBillingCycle: ServiceOffering_BillingCycle;
-  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
-  setupCostDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
-};
-
-export type ServiceOffering_FinalAddOnConfigInput = {
-  currency?: InputMaybe<Scalars['Currency']['input']>;
-  discount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
-  id: Scalars['OID']['input'];
-  optionGroupId: Scalars['OID']['input'];
-  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  selectedBillingCycle: ServiceOffering_BillingCycle;
-  setupCost?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
-  setupCostDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
-};
-
-export type ServiceOffering_FinalConfiguration = {
-  __typename?: 'ServiceOffering_FinalConfiguration';
-  addOnConfigs: Array<ServiceOffering_FinalAddOnConfig>;
-  lastModified: Scalars['DateTime']['output'];
-  optionGroupConfigs: Array<ServiceOffering_FinalOptionGroupConfig>;
-  selectedBillingCycle: ServiceOffering_BillingCycle;
-  selectedTierId: Scalars['OID']['output'];
-  tierBasePrice?: Maybe<Scalars['Amount_Money']['output']>;
-  tierCurrency: Scalars['Currency']['output'];
-  tierDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
-};
-
-export type ServiceOffering_FinalOptionGroupConfig = {
-  __typename?: 'ServiceOffering_FinalOptionGroupConfig';
-  billingCycleOverridden: Scalars['Boolean']['output'];
-  currency?: Maybe<Scalars['Currency']['output']>;
-  discount?: Maybe<ServiceOffering_ResolvedDiscount>;
-  discountStripped: Scalars['Boolean']['output'];
-  effectiveBillingCycle: ServiceOffering_BillingCycle;
-  id: Scalars['OID']['output'];
-  optionGroupId: Scalars['OID']['output'];
-  recurringAmount?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCost?: Maybe<Scalars['Amount_Money']['output']>;
-  setupCostCurrency?: Maybe<Scalars['Currency']['output']>;
-  setupCostDiscount?: Maybe<ServiceOffering_ResolvedDiscount>;
-};
-
-export type ServiceOffering_FinalOptionGroupConfigInput = {
-  billingCycleOverridden: Scalars['Boolean']['input'];
-  currency?: InputMaybe<Scalars['Currency']['input']>;
-  discount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
-  discountStripped: Scalars['Boolean']['input'];
-  effectiveBillingCycle: ServiceOffering_BillingCycle;
-  id: Scalars['OID']['input'];
-  optionGroupId: Scalars['OID']['input'];
-  recurringAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupCost?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
-  setupCostDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
 };
 
 export enum ServiceOffering_GroupCostType {
@@ -8417,22 +8288,6 @@ export type ServiceOffering_ReorderServiceGroupsInput = {
   order: Array<Scalars['OID']['input']>;
 };
 
-export type ServiceOffering_ResolvedDiscount = {
-  __typename?: 'ServiceOffering_ResolvedDiscount';
-  discountType: ServiceOffering_DiscountType;
-  discountValue: Scalars['Float']['output'];
-  discountedAmount: Scalars['Amount_Money']['output'];
-  originalAmount: Scalars['Amount_Money']['output'];
-};
-
-/** Module: Configuration */
-export type ServiceOffering_ResolvedDiscountInput = {
-  discountType: ServiceOffering_DiscountType;
-  discountValue: Scalars['Float']['input'];
-  discountedAmount: Scalars['Amount_Money']['input'];
-  originalAmount: Scalars['Amount_Money']['input'];
-};
-
 export type ServiceOffering_ResourceFacetBinding = {
   __typename?: 'ServiceOffering_ResourceFacetBinding';
   facetName: Scalars['String']['output'];
@@ -8500,7 +8355,6 @@ export type ServiceOffering_ServiceOfferingState = {
   description?: Maybe<Scalars['String']['output']>;
   facetBindings: Array<ServiceOffering_ResourceFacetBinding>;
   facetTargets: Array<ServiceOffering_FacetTarget>;
-  finalConfiguration?: Maybe<ServiceOffering_FinalConfiguration>;
   id: Scalars['PHID']['output'];
   infoLink?: Maybe<Scalars['URL']['output']>;
   lastModified: Scalars['DateTime']['output'];
@@ -8574,17 +8428,6 @@ export type ServiceOffering_SetFacetTargetInput = {
   id: Scalars['OID']['input'];
   lastModified: Scalars['DateTime']['input'];
   selectedOptions: Array<Scalars['String']['input']>;
-};
-
-export type ServiceOffering_SetFinalConfigurationInput = {
-  addOnConfigs: Array<ServiceOffering_FinalAddOnConfigInput>;
-  lastModified: Scalars['DateTime']['input'];
-  optionGroupConfigs: Array<ServiceOffering_FinalOptionGroupConfigInput>;
-  selectedBillingCycle: ServiceOffering_BillingCycle;
-  selectedTierId: Scalars['OID']['input'];
-  tierBasePrice?: InputMaybe<Scalars['Amount_Money']['input']>;
-  tierCurrency: Scalars['Currency']['input'];
-  tierDiscount?: InputMaybe<ServiceOffering_ResolvedDiscountInput>;
 };
 
 export type ServiceOffering_SetOfferingIdInput = {
@@ -9663,6 +9506,14 @@ export type UploadInvoicePdfChunkOutput = {
   success: Scalars['Boolean']['output'];
 };
 
+export type UserSelectionInput = {
+  addonBillingCycleOverrides?: InputMaybe<Array<BillingCycleOverrideInput>>;
+  billingCycle: RsBillingCycle;
+  groupBillingCycleOverrides?: InputMaybe<Array<BillingCycleOverrideInput>>;
+  optionGroupIds: Array<Scalars['OID']['input']>;
+  tierId: Scalars['OID']['input'];
+};
+
 export type Value = {
   __typename?: 'Value';
   description?: Maybe<Scalars['String']['output']>;
@@ -10058,7 +9909,7 @@ export type ServiceOfferingsQueryVariables = Exact<{
 }>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, finalConfiguration?: { __typename?: 'RSFinalConfiguration', selectedTierId: any, selectedBillingCycle: RsBillingCycle, tierBasePrice?: any | null, tierCurrency: any, lastModified: any, optionGroupConfigs: Array<{ __typename?: 'RSFinalOptionGroupConfig', id: any, optionGroupId: any, effectiveBillingCycle: RsBillingCycle, billingCycleOverridden: boolean, discountStripped: boolean, recurringAmount?: any | null, currency?: any | null, setupCost?: any | null, setupCostCurrency?: any | null, discount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null, setupCostDiscount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null }>, addOnConfigs: Array<{ __typename?: 'RSFinalAddOnConfig', id: any, optionGroupId: any, selectedBillingCycle: RsBillingCycle, recurringAmount?: any | null, currency?: any | null, setupCost?: any | null, setupCostCurrency?: any | null, discount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null, setupCostDiscount?: { __typename?: 'RSResolvedDiscount', discountType: RsDiscountType, discountValue: number, originalAmount: any, discountedAmount: any } | null }> } | null, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null }>, serviceGroups: Array<{ __typename?: 'RSServiceGroup', id: any, name: string, description?: string | null, billingCycle: RsBillingCycle, displayOrder?: number | null, tierPricing: Array<{ __typename?: 'RSServiceGroupTierPricing', id: any, tierId: any, setupCostsPerCycle: Array<{ __typename?: 'RSSetupCostPerCycle', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, serviceGroupId?: any | null, isSetupFormation: boolean, optionGroupId?: any | null }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', id: any, label: string, color?: string | null }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null }>, serviceGroups: Array<{ __typename?: 'RSServiceGroup', id: any, name: string, description?: string | null, billingCycle: RsBillingCycle, displayOrder?: number | null, tierPricing: Array<{ __typename?: 'RSServiceGroupTierPricing', id: any, tierId: any, setupCostsPerCycle: Array<{ __typename?: 'RSSetupCostPerCycle', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, serviceGroupId?: any | null, isSetupFormation: boolean, optionGroupId?: any | null }>, targetAudiences: Array<{ __typename?: 'RSOfferingTargetAudience', id: any, label: string, color?: string | null }> }> };
 
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
@@ -11586,57 +11437,6 @@ export const ServiceOfferingsDocument = `
       categoryKey
       categoryLabel
       selectedOptions
-    }
-    finalConfiguration {
-      selectedTierId
-      selectedBillingCycle
-      tierBasePrice
-      tierCurrency
-      optionGroupConfigs {
-        id
-        optionGroupId
-        effectiveBillingCycle
-        billingCycleOverridden
-        discountStripped
-        recurringAmount
-        currency
-        discount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-        setupCost
-        setupCostCurrency
-        setupCostDiscount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-      }
-      lastModified
-      addOnConfigs {
-        id
-        optionGroupId
-        selectedBillingCycle
-        recurringAmount
-        currency
-        discount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-        setupCost
-        setupCostCurrency
-        setupCostDiscount {
-          discountType
-          discountValue
-          originalAmount
-          discountedAmount
-        }
-      }
     }
     optionGroups {
       id

@@ -23,10 +23,12 @@ function LeavePageGuard() {
   const { visitedSteps, requestEntityData, activeStep } = useServicePurchaseState()
   const [pendingHref, setPendingHref] = useState<string | null>(null)
 
+  const hasSubmitted = activeStep === ServicePurchaseStep.Confirmation
   const hasProgress =
-    visitedSteps.length > 1 ||
-    requestEntityData !== null ||
-    activeStep !== ServicePurchaseStep.ProductInfo
+    !hasSubmitted &&
+    (visitedSteps.length > 1 ||
+      requestEntityData !== null ||
+      activeStep !== ServicePurchaseStep.ProductInfo)
 
   const isPersisted = ff.ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE
 

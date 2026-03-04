@@ -10,20 +10,12 @@ export function createTotalsSlice(
   get: ServicePurchaseStoreGet,
   services: RsServiceOffering,
 ): TotalsSlice {
-  const { tiers, optionGroups, finalConfiguration } = services
+  const { tiers, optionGroups } = services
 
-  const initialTierId = finalConfiguration?.selectedTierId ?? tiers[0]?.id ?? ''
-  const initialCycle = finalConfiguration?.selectedBillingCycle ?? RsBillingCycle.Monthly
+  const initialTierId = tiers[0]?.id ?? ''
+  const initialCycle = RsBillingCycle.Monthly
   const initialActiveGroupIds = new Set(
-    optionGroups
-      .filter((g) => {
-        if (!g.isAddOn) return true
-        return (
-          finalConfiguration?.addOnConfigs.some((c) => c.optionGroupId === g.id) ??
-          g.defaultSelected
-        )
-      })
-      .map((g) => g.id),
+    optionGroups.filter((g) => !g.isAddOn || g.defaultSelected).map((g) => g.id),
   )
 
   const initialTotals = computeTotals(services, initialTierId, initialCycle, initialActiveGroupIds)

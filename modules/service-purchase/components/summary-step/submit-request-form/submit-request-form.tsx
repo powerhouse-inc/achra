@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Send } from 'lucide-react'
-import { useParams } from 'next/navigation'
 import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
@@ -12,7 +11,9 @@ import {
   submitRequestSchema,
 } from '@/modules/service-purchase/lib/submit-request-schema'
 import {
+  useServiceOffering,
   useServicePurchaseActions,
+  useServicePurchaseState,
   useServicePurchaseStep,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep, type SubmitRequestFormValues } from '@/modules/service-purchase/types'
@@ -30,9 +31,10 @@ import {
 import { Input } from '@/modules/shared/components/ui/input'
 
 function SubmitRequestForm() {
-  const { serviceSlug = '' } = useParams<{ serviceSlug?: string }>()
   const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
   const { setRequestEntityData } = useServicePurchaseActions()
+  const service = useServiceOffering()
+  const { selectedTier, selectedBillingCycle, optionGroups } = useServicePurchaseState()
 
   const { goToStep } = useServicePurchaseStep()
 
@@ -51,17 +53,26 @@ function SubmitRequestForm() {
         driveUrl: state.data?.driveUrl ?? null,
       })
 
-      // TODO: add the driver link so we can use it in the confirmation step
       goToStep(ServicePurchaseStep.Confirmation)
+
+      localStorage.removeItem(`service-${service.id}`)
     }
-  }, [state, goToStep, setRequestEntityData])
+  }, [state, goToStep, setRequestEntityData, service.id])
 
   function onSubmit(data: SubmitRequestFormValues) {
     const formData = new FormData()
-    formData.append('serviceSlug', serviceSlug)
+    formData.append('serviceOfferingId', service.id)
     formData.append('name', data.name)
     formData.append('teamName', data.teamName)
     formData.append('email', data.email)
+
+    // service configuration
+    formData.append('billingCycle', selectedBillingCycle)
+    formData.append('tierId', selectedTier.id)
+    formData.append(
+      'optionGroupIds',
+      JSON.stringify(optionGroups.filter((group) => group.isSelected).map((group) => group.id)),
+    )
 
     startTransition(() => {
       formAction(formData)
