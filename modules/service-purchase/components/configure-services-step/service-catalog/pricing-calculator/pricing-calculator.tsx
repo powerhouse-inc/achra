@@ -10,6 +10,7 @@ import {
   getBillingCycleValue,
   getCostType,
   getCurrency,
+  getPriorityOptionGroup,
   resolveAddOnDisplayPrice,
 } from '@/modules/service-purchase/lib/utils'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
@@ -106,6 +107,7 @@ function PricingCalculator() {
           {/* Service Sections */}
           <div className="flex flex-col">
             {[...servicesData.optionGroups]
+              .sort((a, b) => getPriorityOptionGroup(a) - getPriorityOptionGroup(b))
               .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
               .map((section) => {
                 const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)

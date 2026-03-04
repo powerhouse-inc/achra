@@ -367,3 +367,15 @@ export function computeOptionGroupHeaderPrices(
     }),
   )
 }
+
+const SERVICE_PRIORITY = {
+  SETUP: 0,
+  INCLUDED: 1,
+  ADD_ON: 2,
+} as const
+
+export const getPriorityOptionGroup = (group: RsOfferingOptionGroup): number => {
+  if (group.costType === 'SETUP') return SERVICE_PRIORITY.SETUP
+  if (!group.isAddOn) return SERVICE_PRIORITY.INCLUDED
+  return SERVICE_PRIORITY.ADD_ON
+}
