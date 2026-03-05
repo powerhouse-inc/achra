@@ -18,6 +18,7 @@ interface SummaryContextValue {
   totalSuffix: string
   isRecurring: boolean
   headerLabel?: string
+  groupPrices?: Map<string, number>
 }
 
 const SummaryContext = createContext<SummaryContextValue | null>(null)
@@ -35,6 +36,7 @@ interface SummaryProviderProps {
   sectionLabel: string
   totalSuffix: string
   headerLabel?: string
+  groupPrices?: Map<string, number>
 }
 
 function SummaryProvider({
@@ -42,6 +44,7 @@ function SummaryProvider({
   sectionLabel,
   totalSuffix,
   headerLabel = 'Pricing Summary',
+  groupPrices,
 }: SummaryProviderProps) {
   const isRecurring = sectionLabel === 'Recurring'
   const value: SummaryContextValue = {
@@ -49,6 +52,7 @@ function SummaryProvider({
     totalSuffix,
     isRecurring,
     headerLabel,
+    groupPrices,
   }
   return <SummaryContext.Provider value={value}>{children}</SummaryContext.Provider>
 }
@@ -91,10 +95,11 @@ interface SummaryGroupProps {
 }
 
 function SummaryGroup({ group }: SummaryGroupProps) {
-  const { isRecurring } = useSummary()
+  const { isRecurring, groupPrices } = useSummary()
+  const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
   const formattedPrice = isRecurring
-    ? `${formatPrice(group.resolvedPrice)}/mo`
-    : formatPrice(group.resolvedPrice)
+    ? `${formatPrice(displayAmount)}/mo`
+    : formatPrice(displayAmount)
   const expandable = useMemo(() => {
     return group.services.some(
       (service) => service.resolvedValue != null || service.metrics.length > 0,

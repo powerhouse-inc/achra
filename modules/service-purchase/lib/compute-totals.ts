@@ -2,12 +2,12 @@ import type {
   RsBillingCycle,
   RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { calculateTotals } from './calculate-totals'
-import { getMonths } from './utils'
+import { computeTotalsFromBreakdown, getPriceBreakdown } from './price-breakdown-utils'
 import type { PurchaseTotals } from '../types'
 
 /**
  * Computes purchase totals from service offering and current selections.
+ * Uses getUserSelectionPriceBreakdown from @powerhousedao/service-offering as single source of truth.
  * Used by the totals slice and by the store's merge function during rehydration.
  */
 export function computeTotals(
@@ -16,15 +16,11 @@ export function computeTotals(
   selectedBillingCycle: RsBillingCycle,
   activeGroupIds: Set<string>,
 ): PurchaseTotals {
-  const result = calculateTotals({
-    offering: services,
+  const breakdown = getPriceBreakdown(
+    services,
     selectedTierId,
     selectedBillingCycle,
     activeGroupIds,
-  })
-  const months = getMonths(selectedBillingCycle)
-  return {
-    recurringTotal: result.recurringTotal / months,
-    setupTotal: result.setupTotal,
-  }
+  )
+  return computeTotalsFromBreakdown(breakdown)
 }
