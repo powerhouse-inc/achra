@@ -51,15 +51,16 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics.map((ul) => (
+          {unitPriceMetrics[0] && (
             <span
-              key={ul.id}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(ul.unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">per {ul.unitName ?? ul.metric}</span>
+              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
+              <span className="text-foreground/50">
+                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
+              </span>
             </span>
-          ))}
+          )}
         </div>
       ) : (
         <div className="flex w-full flex-col items-center gap-0.5">
@@ -80,15 +81,16 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics.map((ul) => (
+          {unitPriceMetrics[0] && (
             <span
-              key={ul.id}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(ul.unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">per {ul.unitName ?? ul.metric}</span>
+              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
+              <span className="text-foreground/50">
+                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
+              </span>
             </span>
-          ))}
+          )}
         </div>
       )}
     </label>
