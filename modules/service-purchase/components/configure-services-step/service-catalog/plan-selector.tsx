@@ -1,8 +1,10 @@
 'use client'
+import { useMemo } from 'react'
 import {
   RsBillingCycle,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
@@ -24,11 +26,12 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   const { selectedBillingCycle, tierHeaderPrices } = usePricingCalculatorContext()
 
   const displayPrice = tierHeaderPrices[tier.id] ?? null
+  const unitPriceMetrics = useMemo(() => getUnitPriceMetrics(tier), [tier])
 
   return (
     <label
       htmlFor={inputId}
-      className="flex h-full w-full cursor-pointer flex-col items-center justify-center"
+      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-center px-1"
     >
       <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
@@ -41,20 +44,25 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
         </span>
       </div>
       {tier.isCustomPricing ? (
-        <div className="flex flex-col items-center gap-0.5">
+        <div className="flex w-full flex-col items-center gap-0.5">
           <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
             Custom
           </span>
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {/* TODO:Improve this when api its ready */}
-          <span className={cn('text-primary text-xs/4.5 font-semibold transition-colors')}>
-            ~$50 <span className="text-foreground/50">per Contributor</span>
-          </span>
+          {unitPriceMetrics.map((ul) => (
+            <span
+              key={ul.id}
+              className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
+            >
+              ~${Math.round(Number(ul.unitPrice)).toLocaleString()}{' '}
+              <span className="text-foreground/50">per {ul.unitName ?? ul.metric}</span>
+            </span>
+          ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-0.5">
+        <div className="flex w-full flex-col items-center gap-0.5">
           <div>
             {displayPrice === null ? (
               <span className="text-muted-foreground text-xs/5.5 font-semibold">—</span>
@@ -69,15 +77,18 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
               </>
             )}
           </div>
-          {/* TODO: add this one its api fixed */}
-          {/* <span className="text-status-progress text-xs font-semibold">save {savingsLabel}</span> */}
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {/* TODO:Improve this when api its ready */}
-          <span className={cn('text-primary text-xs/4.5 font-semibold transition-colors')}>
-            ~$50 <span className="text-foreground/50">per Contributor</span>
-          </span>
+          {unitPriceMetrics.map((ul) => (
+            <span
+              key={ul.id}
+              className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
+            >
+              ~${Math.round(Number(ul.unitPrice)).toLocaleString()}{' '}
+              <span className="text-foreground/50">per {ul.unitName ?? ul.metric}</span>
+            </span>
+          ))}
         </div>
       )}
     </label>
