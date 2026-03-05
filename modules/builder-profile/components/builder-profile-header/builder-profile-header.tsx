@@ -1,9 +1,11 @@
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
+import Link from 'next/link'
 import { useMemo } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Links } from '@/modules/builders/components/builders/components/links/links'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
+import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
 import ff from '@/modules/shared/lib/feature-flags'
@@ -28,6 +30,10 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
     }
     return 'No data'
   }, [parsedDate])
+
+  const builderWebsiteLink = useMemo(() => {
+    return builder.links.find((link) => link.label?.toLowerCase() === 'website')?.url
+  }, [builder.links])
 
   return (
     <div className={cn('border-input mt-16 w-full border-b', isOperatorProfile && 'mt-3')}>
@@ -61,6 +67,19 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
             {builder.links.length > 0 && <Links links={builder.links} />}
           </div>
         </div>
+        {builderWebsiteLink && (
+          <div className="flex items-center gap-2 md:pl-12 lg:pl-14">
+            <WebsiteSVG className="size-4" />
+            <Link
+              href={builderWebsiteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary text-xs/4.5 sm:text-sm/5.5"
+            >
+              {builderWebsiteLink}
+            </Link>
+          </div>
+        )}
         <BuilderProfileHeaderDescription description={builder.description} />
       </div>
     </div>
