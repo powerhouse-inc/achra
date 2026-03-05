@@ -38,7 +38,10 @@ function GrandTotalRowCatalog({
 
   return (
     <div
-      className={cn('items-center', 'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]')}
+      className={cn(
+        'items-center',
+        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+      )}
       style={
         {
           '--grid-cols-lg': `4fr repeat(${tierNames.length}, minmax(144px, 1fr))`,
