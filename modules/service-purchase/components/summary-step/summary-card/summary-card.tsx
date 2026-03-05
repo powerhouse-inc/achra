@@ -3,6 +3,7 @@
 import { Landmark } from 'lucide-react'
 import { useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
@@ -64,7 +65,7 @@ function SummaryCard() {
 
   return (
     <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
-      <CardHeader className="flex flex-row items-start justify-between gap-4 px-3 pt-3 lg:px-6 lg:pt-6">
+      <CardHeader className="flex flex-row items-center justify-between gap-4 px-3 pt-3 lg:px-6 lg:pt-6">
         <div className="flex items-start gap-2">
           <div className="bg-primary flex size-12 shrink-0 items-center justify-center rounded-2xl">
             <Landmark className="text-primary-foreground size-6" strokeWidth={1.5} />
@@ -79,9 +80,14 @@ function SummaryCard() {
           </div>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-0.5">
-          <span className="text-primary text-base/6 font-semibold lg:leading-7">
-            ${totals.recurringTotal}/mo
-          </span>
+          <div className="flex flex-col items-end">
+            <span className="text-primary text-base/6 font-semibold lg:leading-7">
+              ${totals.recurringTotal}/mo
+            </span>
+            <span className="text-foreground/50 text-xs/4.5 font-medium">
+              {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+            </span>
+          </div>
           <span className="text-foreground/50 text-xs/4.5 font-medium">
             + ${totals.setupTotal} Setup
           </span>

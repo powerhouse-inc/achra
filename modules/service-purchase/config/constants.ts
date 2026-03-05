@@ -1,3 +1,4 @@
+import { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ServicePurchaseStep } from '../types'
 
 /**
@@ -29,3 +30,11 @@ export const SERVICE_PURCHASE_STEPS_ENTRIES: ReadonlyArray<{
   { value: ServicePurchaseStep.Summary, label: 'Summary' },
   { value: ServicePurchaseStep.Confirmation, label: 'Confirmation' },
 ]
+
+export const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
+  [RsBillingCycle.Monthly]: 'Billed Monthly',
+  [RsBillingCycle.Quarterly]: 'Billed Quarterly',
+  [RsBillingCycle.SemiAnnual]: 'Billed Semi-Annually',
+  [RsBillingCycle.Annual]: 'Billed Annually',
+  [RsBillingCycle.OneTime]: 'One-time payment',
+}

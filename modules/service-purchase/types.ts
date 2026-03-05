@@ -116,6 +116,7 @@ export interface OptionGroupsSliceState {
 
 export interface OptionGroupsSliceActions {
   setOptionGroupSelected: (id: string, isSelected: boolean) => void
+  recomputeOptionGroups: () => void
 }
 
 export interface OptionGroupsSlice extends OptionGroupsSliceState {
