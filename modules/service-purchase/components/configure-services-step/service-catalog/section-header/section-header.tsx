@@ -42,6 +42,7 @@ function SectionHeader({
   const lastTierName = tierNames[tierNames.length - 1]
 
   const isOneTime = groupCostType === RsGroupCostType.Setup
+  const isRecurring = groupCostType === RsGroupCostType.Recurring
   const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
   const discountedPriceLabel = getPriceLabel(groupCostType, groupDiscountedPrice, groupCurrency)
 
@@ -116,6 +117,11 @@ function SectionHeader({
             {perTierPrices[activePlan]}
           </span>
         )}
+        {isRecurring && perTierPrices && activePlan && perTierPrices[activePlan] && (
+          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+            {perTierPrices[activePlan]}
+          </span>
+        )}
         {isOneTime && !perTierPrices && priceLabel && !discountedPriceLabel && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
@@ -143,6 +149,16 @@ function SectionHeader({
           )}
         >
           {isOneTime && perTierPrices?.[plan] && (
+            <span
+              className={cn(
+                'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
+                activePlan === plan ? 'text-primary' : 'text-foreground/50',
+              )}
+            >
+              {perTierPrices[plan]}
+            </span>
+          )}
+          {isRecurring && perTierPrices?.[plan] && (
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
