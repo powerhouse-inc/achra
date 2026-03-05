@@ -34,12 +34,13 @@ function HeaderCatalogPlan({
     <div
       style={
         {
-          '--grid-cols': `4fr repeat(${numTiers}, 1fr)`,
+          '--grid-cols-lg': `4fr repeat(${numTiers}, minmax(144px, 1fr))`,
+          '--grid-cols-xl': `4fr repeat(${numTiers}, minmax(220px, 1fr))`,
         } as React.CSSProperties
       }
       className={cn(
         'border-input min-h-21 w-full items-center border-b',
-        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols)]',
+        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
       )}
     >
       {/* LABEL */}

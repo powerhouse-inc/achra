@@ -48,7 +48,20 @@ const baseTier = {
     amount: 59,
     currency: 'USD',
   },
-  usageLimits: [],
+  usageLimits: [
+    {
+      id: 'ul-1',
+      serviceId: 's-1',
+      metric: 'Contributor',
+      unitName: 'Contributor',
+      freeLimit: null,
+      paidLimit: null,
+      resetCycle: null,
+      notes: null,
+      unitPrice: 50,
+      unitPriceCurrency: 'USD',
+    },
+  ],
   serviceLevels: [],
 } satisfies RsServiceSubscriptionTier
 

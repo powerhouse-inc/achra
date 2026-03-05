@@ -1,7 +1,6 @@
 import type { submitRequestSchema } from './lib/submit-request-schema'
 import type {
   RsBillingCycle,
-  RsDiscountType,
   RsGroupCostType,
   RsOfferingFacetTarget,
   RsServiceOffering,
@@ -220,31 +219,6 @@ export interface ServiceMetric {
   metric: string
   values: Record<string, FeatureValue>
   isOneTime?: boolean
-}
-
-export interface AppliedDiscount {
-  sourceId: string
-  sourceName: string
-  source: 'tier' | 'option-group'
-  discountType: RsDiscountType
-  discountValue: number
-  savedAmount: number
-}
-
-export interface CalculateTotalsResult {
-  recurringSubtotal: number
-  recurringTotal: number
-  setupTotal: number
-  appliedDiscounts: AppliedDiscount[]
-  isPending: boolean
-  currency: string
-}
-
-export interface CalculateTotalsInput {
-  offering: RsServiceOffering
-  selectedTierId: string
-  selectedBillingCycle: RsBillingCycle
-  activeGroupIds: Set<string>
 }
 
 export interface OptionGroupSortable {
