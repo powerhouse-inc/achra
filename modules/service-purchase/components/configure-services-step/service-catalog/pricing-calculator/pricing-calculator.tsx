@@ -1,8 +1,13 @@
 'use client'
 
 import { useCallback, useMemo } from 'react'
+import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
-import { computeTierHeaderPriceWithBreakdown } from '@/modules/service-purchase/lib/price-breakdown-utils'
+import {
+  computeTierHeaderPriceWithBreakdown,
+  getGroupPriceFromBreakdown,
+  getPriceBreakdown,
+} from '@/modules/service-purchase/lib/price-breakdown-utils'
 import {
   buildServiceMetrics,
   buildServiceValues,
@@ -69,6 +74,20 @@ function PricingCalculator() {
     }
     return prices
   }, [tiers, storeOptionGroups, billingPeriod, servicesData])
+
+  // Compute discounted setup costs from the breakdown for the selected tier.
+  // The breakdown's setupCost already reflects billing-cycle discounts.
+  const setupDiscountedPrices = useMemo(() => {
+    const activeGroupIds = new Set(storeOptionGroups.filter((g) => g.isSelected).map((g) => g.id))
+    const breakdown = getPriceBreakdown(servicesData, tier.id, billingPeriod, activeGroupIds)
+    const prices: Record<string, number | null> = {}
+    for (const section of servicesData.optionGroups) {
+      if (section.isAddOn || section.costType !== RsGroupCostType.Setup) continue
+      const result = getGroupPriceFromBreakdown(breakdown, section.id, true)
+      prices[section.id] = result?.amount ?? null
+    }
+    return prices
+  }, [servicesData, tier.id, billingPeriod, storeOptionGroups])
 
   const contextValue = useMemo(
     () => ({
@@ -143,7 +162,13 @@ function PricingCalculator() {
                       section.isAddOn ? addOnDisplayPrice?.basePrice : getBillingCycleValue(section)
                     }
                     groupDiscountedPrice={
-                      section.isAddOn ? addOnDisplayPrice?.discountedPrice : undefined
+                      section.isAddOn
+                        ? addOnDisplayPrice?.discountedPrice
+                        : section.costType === RsGroupCostType.Setup &&
+                            setupDiscountedPrices[section.id] != null &&
+                            setupDiscountedPrices[section.id] !== section.price
+                          ? setupDiscountedPrices[section.id]
+                          : undefined
                     }
                     groupCurrency={getCurrency(section)}
                     groupCostType={getCostType(section)}
