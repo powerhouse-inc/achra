@@ -1,5 +1,6 @@
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
+import Link from 'next/link'
 import { useMemo } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Links } from '@/modules/builders/components/builders/components/links/links'
@@ -28,6 +29,10 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
     }
     return 'No data'
   }, [parsedDate])
+
+  const builderWebsiteLink = useMemo(() => {
+    return builder.links.find((link) => link.label?.toLowerCase() === 'website')?.url
+  }, [builder.links])
 
   return (
     <div className={cn('border-input mt-16 w-full border-b', isOperatorProfile && 'mt-3')}>
@@ -61,6 +66,16 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
             {builder.links.length > 0 && <Links links={builder.links} />}
           </div>
         </div>
+        {builderWebsiteLink && (
+          <Link
+            href={builderWebsiteLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground text-xs/4.5 sm:text-sm/5.5 md:pl-12 lg:pl-14 lg:text-base/6"
+          >
+            {builderWebsiteLink}
+          </Link>
+        )}
         <BuilderProfileHeaderDescription description={builder.description} />
       </div>
     </div>

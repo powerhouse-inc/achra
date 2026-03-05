@@ -9,6 +9,7 @@ import ForumSVG from '@/modules/shared/components/svgs/forum.svg'
 import GithubSVG from '@/modules/shared/components/svgs/github.svg'
 import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import TwitterSVG from '@/modules/shared/components/svgs/x.svg'
+import YoutubeSVG from '@/modules/shared/components/svgs/youtube.svg'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -18,7 +19,7 @@ import {
 } from '../ui/dropdown-menu'
 import type { Route } from 'next'
 
-type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github'
+type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github' | 'youtube'
 
 const MEDIA_ICON_MAP: Record<SocialMedia, React.ReactNode> = {
   website: <WebsiteSVG className="size-4" />,
@@ -26,6 +27,7 @@ const MEDIA_ICON_MAP: Record<SocialMedia, React.ReactNode> = {
   discord: <DiscordSVG className="size-4" />,
   x: <TwitterSVG className="size-4" />,
   github: <GithubSVG className="size-4" />,
+  youtube: <YoutubeSVG className="size-4" />,
 }
 
 const MEDIA_LABEL_MAP: Record<SocialMedia, string> = {
@@ -34,6 +36,7 @@ const MEDIA_LABEL_MAP: Record<SocialMedia, string> = {
   discord: 'Discord',
   x: 'Twitter',
   github: 'Github',
+  youtube: 'Youtube',
 }
 
 interface MediaElement {
