@@ -1,7 +1,7 @@
 'use client'
 
 import { Check } from 'lucide-react'
-import { type ComponentProps, createContext, useContext, useMemo } from 'react'
+import { type ComponentProps, createContext, useContext } from 'react'
 import { formatPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
 import {
@@ -100,11 +100,7 @@ function SummaryGroup({ group }: SummaryGroupProps) {
   const formattedPrice = isRecurring
     ? `${formatPrice(displayAmount)}/mo`
     : formatPrice(displayAmount)
-  const expandable = useMemo(() => {
-    return group.services.some(
-      (service) => service.resolvedValue != null || service.metrics.length > 0,
-    )
-  }, [group])
+  const expandable = group.services.length > 0
 
   return (
     <AccordionItem value={group.id} className="border-border border-b last:border-b-0">
@@ -134,7 +130,9 @@ function SummaryGroup({ group }: SummaryGroupProps) {
                       value={service.resolvedValue}
                     />,
                   ]
-                : []),
+                : service.metrics.length === 0
+                  ? [<SummaryRow key={service.id} label={service.title} value="Included" />]
+                  : []),
               ...service.metrics.map((m) => (
                 <SummaryRow key={`${service.id}-${m.label}`} label={m.label} value={m.value} />
               )),

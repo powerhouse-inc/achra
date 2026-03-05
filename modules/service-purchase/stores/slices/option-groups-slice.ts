@@ -80,6 +80,7 @@ export function computeOptionGroups(
         resolvedValue: resolveServiceValue(s.id, selectedTier),
         metrics: resolveMetrics(s.id, selectedTier),
       }))
+      .filter((s) => s.resolvedValue != null || s.metrics.length > 0)
 
     return {
       id: group.id,
@@ -111,6 +112,17 @@ export function createOptionGroupsSlice(
         set((state) => ({
           optionGroups: state.optionGroups.map((g) => (g.id === id ? { ...g, isSelected } : g)),
         }))
+      },
+      recomputeOptionGroups: () => {
+        set((state) => {
+          const fresh = computeOptionGroups(state.services, state.selectedTier)
+          return {
+            optionGroups: fresh.map((g) => {
+              const existing = state.optionGroups.find((og) => og.id === g.id)
+              return { ...g, isSelected: existing?.isSelected ?? g.isSelected }
+            }),
+          }
+        })
       },
     },
   }

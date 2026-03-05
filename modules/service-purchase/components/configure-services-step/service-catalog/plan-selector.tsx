@@ -1,21 +1,12 @@
 'use client'
+
 import { useMemo } from 'react'
-import {
-  RsBillingCycle,
-  type RsServiceSubscriptionTier,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
 import { getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
-
-const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
-  [RsBillingCycle.Monthly]: 'Billed Monthly',
-  [RsBillingCycle.Quarterly]: 'Billed Quarterly',
-  [RsBillingCycle.SemiAnnual]: 'Billed Semi-Annually',
-  [RsBillingCycle.Annual]: 'Billed Annually',
-  [RsBillingCycle.OneTime]: 'One-time payment',
-}
 
 interface PlanSelectorItemProps {
   tier: RsServiceSubscriptionTier

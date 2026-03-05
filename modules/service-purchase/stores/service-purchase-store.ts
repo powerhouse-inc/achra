@@ -16,7 +16,7 @@ import {
   type ServicePurchaseStoreProps,
 } from '../types'
 import { createFacetsSlice } from './slices/facets-store-slice'
-import { createOptionGroupsSlice } from './slices/option-groups-slice'
+import { computeOptionGroups, createOptionGroupsSlice } from './slices/option-groups-slice'
 import { createStepSlice } from './slices/step-slice'
 import { createSubmitRequestSlice } from './slices/submit-request-slice'
 import { createTiersSlice } from './slices/tiers-slice'
@@ -73,6 +73,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
           // Override actions that affect totals — atomic: set once per action
           setSelectedTier: (id) => {
             tiersSlice.actions.setSelectedTier(id)
+            optionGroupsSlice.actions.recomputeOptionGroups()
             totalsSlice.actions.recomputeTotals()
           },
           setSelectedBillingCycle: (cycle) => {
@@ -154,7 +155,8 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
                 selectedOption: isValid ? persistedVal : f.selectedOption,
               }
             })
-            const mergedOptionGroups = currentState.optionGroups.map((g) => ({
+            const freshOptionGroups = computeOptionGroups(currentState.services, selectedTier)
+            const mergedOptionGroups = freshOptionGroups.map((g) => ({
               ...g,
               isSelected: persisted.optionGroupSelections?.[g.id] ?? g.isSelected,
             }))
