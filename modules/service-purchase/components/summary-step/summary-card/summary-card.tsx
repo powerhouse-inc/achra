@@ -3,10 +3,17 @@
 import { Landmark } from 'lucide-react'
 import { useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  getGroupPriceFromBreakdown,
+  getPriceBreakdown,
+} from '@/modules/service-purchase/lib/price-breakdown-utils'
 import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import {
   useAllOptionGroups,
   usePurchaseTotals,
+  useSelectedBillingCycle,
+  useSelectedTier,
+  useServiceOffering,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
@@ -17,16 +24,43 @@ function SummaryCard() {
   const { facets } = useServicePurchaseState()
   const totals = usePurchaseTotals()
   const optionGroups = useAllOptionGroups()
+  const offering = useServiceOffering()
+  const selectedTier = useSelectedTier()
+  const selectedBillingCycle = useSelectedBillingCycle()
 
-  const { recurringGroups, setupGroups } = useMemo(() => {
+  const { recurringGroups, setupGroups, recurringGroupPrices, setupGroupPrices } = useMemo(() => {
     const selected = optionGroups.filter((g) => g.isSelected)
-    return {
-      recurringGroups: sortOptionGroups(
-        selected.filter((g) => g.costType === RsGroupCostType.Recurring),
-      ),
-      setupGroups: sortOptionGroups(selected.filter((g) => g.costType === RsGroupCostType.Setup)),
+    const activeGroupIds = new Set(selected.map((g) => g.id))
+    const breakdown = getPriceBreakdown(
+      offering,
+      selectedTier.id,
+      selectedBillingCycle,
+      activeGroupIds,
+    )
+
+    const recurring = sortOptionGroups(
+      selected.filter((g) => g.costType === RsGroupCostType.Recurring),
+    )
+    const setup = sortOptionGroups(selected.filter((g) => g.costType === RsGroupCostType.Setup))
+
+    const recurringPrices = new Map<string, number>()
+    for (const g of recurring) {
+      const price = getGroupPriceFromBreakdown(breakdown, g.id, false)
+      if (price) recurringPrices.set(g.id, price.amount)
     }
-  }, [optionGroups])
+    const setupPrices = new Map<string, number>()
+    for (const g of setup) {
+      const price = getGroupPriceFromBreakdown(breakdown, g.id, true)
+      if (price) setupPrices.set(g.id, price.amount)
+    }
+
+    return {
+      recurringGroups: recurring,
+      setupGroups: setup,
+      recurringGroupPrices: recurringPrices,
+      setupGroupPrices: setupPrices,
+    }
+  }, [optionGroups, offering, selectedTier.id, selectedBillingCycle])
 
   return (
     <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
@@ -59,7 +93,11 @@ function SummaryCard() {
 
         <div className="flex flex-col gap-4 px-3 lg:px-6">
           {recurringGroups.length > 0 && (
-            <Summary.Provider sectionLabel="Recurring" totalSuffix="/mo">
+            <Summary.Provider
+              sectionLabel="Recurring"
+              totalSuffix="/mo"
+              groupPrices={recurringGroupPrices}
+            >
               <Summary.Card>
                 <Summary.Header />
                 <Summary.Content>
@@ -73,7 +111,11 @@ function SummaryCard() {
           )}
 
           {setupGroups.length > 0 && (
-            <Summary.Provider sectionLabel="ONE-TIME FEE" totalSuffix="">
+            <Summary.Provider
+              sectionLabel="ONE-TIME FEE"
+              totalSuffix=""
+              groupPrices={setupGroupPrices}
+            >
               <Summary.Card>
                 <Summary.Header />
                 <Summary.Content>

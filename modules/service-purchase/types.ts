@@ -149,6 +149,11 @@ export interface PurchaseTotals {
   setupTotal: number
 }
 
+export interface GroupPriceFromBreakdown {
+  amount: number
+  isRecurring: boolean
+}
+
 export interface TotalsSliceState {
   totals: PurchaseTotals
 }
