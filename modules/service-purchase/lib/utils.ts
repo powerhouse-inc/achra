@@ -8,7 +8,7 @@ import {
   RsServiceLevel,
   type RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import type { FeatureValue } from '../types'
+import type { FeatureValue, OptionGroupSortable } from '../types'
 
 const INCLUDED_LEVELS = new Set([
   RsServiceLevel.Included,
@@ -16,6 +16,16 @@ const INCLUDED_LEVELS = new Set([
   RsServiceLevel.Optional,
   RsServiceLevel.Variable,
 ])
+
+/**
+ * Checks whether a string value represents "included" (e.g. "included", "yes", "true").
+ * Used for display logic in summary sections.
+ */
+export function isIncludedValue(value: string | null): boolean {
+  if (value == null || value === '') return true
+  const lower = value.toLowerCase()
+  return lower === 'included' || lower === 'yes' || lower === 'true'
+}
 
 /** Safe coercion — Amount_Money scalar is typed `any` in codegen */
 function toNum(raw: unknown): number {
@@ -364,8 +374,15 @@ const SERVICE_PRIORITY = {
   ADD_ON: 2,
 } as const
 
-export const getPriorityOptionGroup = (group: RsOfferingOptionGroup): number => {
+export const getPriorityOptionGroup = (group: OptionGroupSortable): number => {
   if (group.costType === 'SETUP') return SERVICE_PRIORITY.SETUP
   if (!group.isAddOn) return SERVICE_PRIORITY.INCLUDED
   return SERVICE_PRIORITY.ADD_ON
+}
+
+/** Sorts option groups: SETUP first, then INCLUDED (non-add-on), then ADD_ON. */
+export function sortOptionGroups<T extends OptionGroupSortable>(groups: T[]): T[] {
+  return [...groups]
+    .sort((a, b) => getPriorityOptionGroup(a) - getPriorityOptionGroup(b))
+    .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
 }

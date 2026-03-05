@@ -10,8 +10,8 @@ import {
   getBillingCycleValue,
   getCostType,
   getCurrency,
-  getPriorityOptionGroup,
   resolveAddOnDisplayPrice,
+  sortOptionGroups,
 } from '@/modules/service-purchase/lib/utils'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import {
@@ -106,69 +106,64 @@ function PricingCalculator() {
           />
           {/* Service Sections */}
           <div className="flex flex-col">
-            {[...servicesData.optionGroups]
-              .sort((a, b) => getPriorityOptionGroup(a) - getPriorityOptionGroup(b))
-              .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
-              .map((section) => {
-                const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)
+            {sortOptionGroups(servicesData.optionGroups).map((section) => {
+              const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)
 
-                // For add-ons, resolve both the base price and the discounted price
-                // (accounting for billing cycle and discountMode).
-                const addOnDisplayPrice = section.isAddOn
-                  ? resolveAddOnDisplayPrice(section, tier.id, billingPeriod)
-                  : null
+              // For add-ons, resolve both the base price and the discounted price
+              // (accounting for billing cycle and discountMode).
+              const addOnDisplayPrice = section.isAddOn
+                ? resolveAddOnDisplayPrice(section, tier.id, billingPeriod)
+                : null
 
-                // For non-add-on recurring groups, show per-tier prices in the header.
-                const perTierPrices = computeOptionGroupHeaderPrices(section, tiers, billingPeriod)
+              // For non-add-on recurring groups, show per-tier prices in the header.
+              const perTierPrices = computeOptionGroupHeaderPrices(section, tiers, billingPeriod)
 
-                const isAddOnSelected =
-                  storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
+              const isAddOnSelected =
+                storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
 
-                return (
-                  <ServiceCatalogRoot
-                    key={section.id}
-                    isEnabled={!section.isAddOn || isAddOnSelected}
-                  >
-                    <ServiceCatalogHeader
-                      title={section.name}
-                      badge={section.isAddOn ? CatalogStatus.Optional : CatalogStatus.Included}
-                      hasToggle={section.isAddOn}
-                      toggleLabel={section.name}
-                      toggleEnabled={isAddOnSelected}
-                      onToggleChange={
-                        section.isAddOn
-                          ? (enabled: boolean) => {
-                              setOptionGroupSelected(section.id, enabled)
-                            }
-                          : undefined
-                      }
-                      groupPrice={
-                        section.isAddOn
-                          ? addOnDisplayPrice?.basePrice
-                          : getBillingCycleValue(section)
-                      }
-                      groupDiscountedPrice={
-                        section.isAddOn ? addOnDisplayPrice?.discountedPrice : undefined
-                      }
-                      groupCurrency={getCurrency(section)}
-                      groupCostType={getCostType(section)}
-                      perTierPrices={perTierPrices}
-                    />
+              return (
+                <ServiceCatalogRoot
+                  key={section.id}
+                  isEnabled={!section.isAddOn || isAddOnSelected}
+                >
+                  <ServiceCatalogHeader
+                    title={section.name}
+                    badge={section.isAddOn ? CatalogStatus.Optional : CatalogStatus.Included}
+                    hasToggle={section.isAddOn}
+                    toggleLabel={section.name}
+                    toggleEnabled={isAddOnSelected}
+                    onToggleChange={
+                      section.isAddOn
+                        ? (enabled: boolean) => {
+                            setOptionGroupSelected(section.id, enabled)
+                          }
+                        : undefined
+                    }
+                    groupPrice={
+                      section.isAddOn ? addOnDisplayPrice?.basePrice : getBillingCycleValue(section)
+                    }
+                    groupDiscountedPrice={
+                      section.isAddOn ? addOnDisplayPrice?.discountedPrice : undefined
+                    }
+                    groupCurrency={getCurrency(section)}
+                    groupCostType={getCostType(section)}
+                    perTierPrices={perTierPrices}
+                  />
 
-                    <ServiceCatalogBody>
-                      {rowBody.map((row) => (
-                        <ServiceCatalogRow
-                          key={row.id}
-                          label={row.title}
-                          sublabel={row.description ?? undefined}
-                          values={buildServiceValues(row.id, tiers)}
-                          metrics={buildServiceMetrics(row.id, tiers)}
-                        />
-                      ))}
-                    </ServiceCatalogBody>
-                  </ServiceCatalogRoot>
-                )
-              })}
+                  <ServiceCatalogBody>
+                    {rowBody.map((row) => (
+                      <ServiceCatalogRow
+                        key={row.id}
+                        label={row.title}
+                        sublabel={row.description ?? undefined}
+                        values={buildServiceValues(row.id, tiers)}
+                        metrics={buildServiceMetrics(row.id, tiers)}
+                      />
+                    ))}
+                  </ServiceCatalogBody>
+                </ServiceCatalogRoot>
+              )
+            })}
           </div>
         </div>
       </Card>

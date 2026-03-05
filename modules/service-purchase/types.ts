@@ -241,3 +241,8 @@ export interface CalculateTotalsInput {
   selectedBillingCycle: RsBillingCycle
   activeGroupIds: Set<string>
 }
+
+export interface OptionGroupSortable {
+  costType?: string | null
+  isAddOn: boolean
+}
