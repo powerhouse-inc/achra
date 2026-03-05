@@ -28,7 +28,6 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     getResourceOperator({ id: resourceTemplate.operatorId }),
     getServiceOfferings({
       operatorId: resourceTemplate.operatorId,
-      resourceTemplateId: resourceTemplate.id,
     }),
   ])
 
