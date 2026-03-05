@@ -1,5 +1,6 @@
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { MarketplaceHeaderSkeleton } from '../marketplace-header/marketplace-header-skeleton'
 import { FeatureRowSkeleton } from '../service-catalog/feature-row'
 import { HeaderCatalogPlanSkeleton } from '../service-catalog/header-catalog-plan'
 import { SectionHeaderSkeleton } from '../service-catalog/section-header'
@@ -8,11 +9,7 @@ import { SectionHeaderSkeleton } from '../service-catalog/section-header'
 function ConfigureServicesSkeleton() {
   return (
     <div className="mt-6 flex flex-col gap-6">
-      {/* Marketplace Header */}
-      <div className="border-border flex items-center gap-3 border-b pb-2">
-        <Skeleton className="size-6 shrink-0" />
-        <Skeleton className="bg-border h-5 w-52" />
-      </div>
+      <MarketplaceHeaderSkeleton />
 
       {/* Select filters */}
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-4">
