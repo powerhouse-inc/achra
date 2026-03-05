@@ -17,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { isSocialMediaType } from './utils/is-social-media-type'
 import type { Route } from 'next'
 
 type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github' | 'youtube'
@@ -40,7 +41,7 @@ const MEDIA_LABEL_MAP: Record<SocialMedia, string> = {
 }
 
 interface MediaElement {
-  type: SocialMedia
+  type: string
   href: string
 }
 
@@ -138,12 +139,23 @@ interface LinksPopoverItemProps extends React.ComponentProps<typeof DropdownMenu
 }
 
 function LinksPopoverItem({ link, ...props }: LinksPopoverItemProps) {
+  const linkType = 'type' in link && link.type.toLowerCase()
+  const isSocialMedia = linkType && isSocialMediaType(linkType)
   return (
     <DropdownMenuItem key={link.href} asChild className="hover:cursor-pointer" {...props}>
       {'type' in link ? (
         <Link href={link.href as Route} target="_blank" rel="noopener noreferrer">
-          {MEDIA_ICON_MAP[link.type]}
-          {MEDIA_LABEL_MAP[link.type]}
+          {isSocialMedia ? (
+            <>
+              {MEDIA_ICON_MAP[linkType]}
+              {MEDIA_LABEL_MAP[linkType]}
+            </>
+          ) : (
+            <>
+              <WebsiteSVG className="size-4" />
+              {link.type}
+            </>
+          )}
         </Link>
       ) : (
         <Link

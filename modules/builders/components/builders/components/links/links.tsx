@@ -6,14 +6,13 @@ import {
   LinksPopover,
   LinksPopoverItem,
   type MediaElement,
-  type SocialMedia,
 } from '@/modules/shared/components/links-popover'
 import { Button } from '@/modules/shared/components/ui/button'
 import type { MouseEvent } from 'react'
 
 export function Links({ links }: { links: BuilderLink[] }) {
   const mediaElements: MediaElement[] = links.map((link) => ({
-    type: link.label?.toLowerCase() as SocialMedia,
+    type: link.label ?? 'link',
     href: link.url,
   }))
 

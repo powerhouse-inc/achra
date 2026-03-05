@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Links } from '@/modules/builders/components/builders/components/links/links'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
+import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
 import ff from '@/modules/shared/lib/feature-flags'
@@ -67,14 +68,17 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
           </div>
         </div>
         {builderWebsiteLink && (
-          <Link
-            href={builderWebsiteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground text-xs/4.5 sm:text-sm/5.5 md:pl-12 lg:pl-14 lg:text-base/6"
-          >
-            {builderWebsiteLink}
-          </Link>
+          <div className="flex items-center gap-2 md:pl-12 lg:pl-14">
+            <WebsiteSVG className="size-4" />
+            <Link
+              href={builderWebsiteLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary text-xs/4.5 sm:text-sm/5.5"
+            >
+              {builderWebsiteLink}
+            </Link>
+          </div>
         )}
         <BuilderProfileHeaderDescription description={builder.description} />
       </div>
