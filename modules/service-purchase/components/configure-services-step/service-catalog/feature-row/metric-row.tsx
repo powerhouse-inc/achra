@@ -22,10 +22,14 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
 
   return (
     <div
-      className={cn('items-center', 'grid grid-cols-2 lg:grid-cols-[var(--grid-cols)]')}
+      className={cn(
+        'items-center',
+        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+      )}
       style={
         {
-          '--grid-cols': `4fr repeat(${tierNames.length}, 1fr)`,
+          '--grid-cols-lg': `4fr repeat(${tierNames.length}, minmax(144px, 1fr))`,
+          '--grid-cols-xl': `4fr repeat(${tierNames.length}, minmax(220px, 1fr))`,
         } as React.CSSProperties
       }
     >

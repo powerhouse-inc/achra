@@ -191,16 +191,16 @@ export function buildServiceValues(
 export function formatUsageLimit(
   limit: RsServiceSubscriptionTier['usageLimits'][number],
 ): FeatureValue {
-  const { unitPrice, unitPriceCurrency, notes } = limit
-  const symbol = getCurrencySymbol(unitPriceCurrency)
+  // Show quantity/description as primary text; overage price is secondary
+  if (limit.notes) {
+    return limit.notes
+  }
 
-  if (unitPrice != null && notes) {
-    return `${symbol}${unitPrice.toLocaleString()} (${notes})`
+  if (limit.freeLimit == null) {
+    return 'Unlimited'
   }
-  if (unitPrice != null) {
-    return `${symbol}${unitPrice.toLocaleString()}`
-  }
-  return notes ?? false
+
+  return `${limit.freeLimit}${limit.unitName ? ` ${limit.unitName}` : ''}`
 }
 
 export function buildServiceMetrics(
@@ -385,4 +385,8 @@ export function sortOptionGroups<T extends OptionGroupSortable>(groups: T[]): T[
   return [...groups]
     .sort((a, b) => getPriorityOptionGroup(a) - getPriorityOptionGroup(b))
     .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
+}
+
+export function getUnitPriceMetrics(tier: RsServiceSubscriptionTier) {
+  return tier.usageLimits.filter((ul) => ul.unitPrice != null && ul.unitPrice > 0)
 }
