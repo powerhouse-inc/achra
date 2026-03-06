@@ -2,39 +2,53 @@
 
 import { useMemo } from 'react'
 import type {
-  RsOfferingOptionGroup,
+  RsServiceOffering,
   RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { computeGrandTotals } from '@/modules/service-purchase/lib/utils'
+import { computeTierHeaderPriceWithBreakdown } from '@/modules/service-purchase/lib/price-breakdown-utils'
+import { formatPrice } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { useAllOptionGroups } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
 
+const CUSTOM_PRICING_LABEL = 'Custom'
+
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string
-  /** Tier list from the service offering */
   tiers: RsServiceSubscriptionTier[]
-  /** Pre-filtered option groups (facet-invisible groups must already be excluded) */
-  optionGroups: RsOfferingOptionGroup[]
+  offering: RsServiceOffering
 }
 
 function GrandTotalRowCatalog({
   selectedPlan,
   tiers,
-  optionGroups,
+  offering,
 }: Readonly<GrandTotalRowCatalogProps>) {
   const { tierNames, selectedBillingCycle } = usePricingCalculatorContext()
   const storeOptionGroups = useAllOptionGroups()
 
-  const enabledSections = useMemo(
-    () => Object.fromEntries(storeOptionGroups.map((g) => [g.id, g.isSelected])),
+  const activeGroupIds = useMemo(
+    () => new Set(storeOptionGroups.filter((g) => g.isSelected).map((g) => g.id)),
     [storeOptionGroups],
   )
 
-  const planTotals = useMemo(
-    () => computeGrandTotals(tiers, optionGroups, enabledSections, selectedBillingCycle),
-    [tiers, optionGroups, enabledSections, selectedBillingCycle],
-  )
+  const planTotals = useMemo(() => {
+    const totals: Record<string, string> = {}
+    for (const tier of tiers) {
+      if (tier.isCustomPricing) {
+        totals[tier.id] = CUSTOM_PRICING_LABEL
+        continue
+      }
+      const monthlyTotal = computeTierHeaderPriceWithBreakdown(
+        offering,
+        tier.id,
+        selectedBillingCycle,
+        activeGroupIds,
+      )
+      totals[tier.id] = `${formatPrice(Math.round(monthlyTotal), tier.pricing.currency)}/mo`
+    }
+    return totals
+  }, [tiers, offering, selectedBillingCycle, activeGroupIds])
 
   return (
     <div
@@ -52,7 +66,7 @@ function GrandTotalRowCatalog({
       {/* Label column - sticky on mobile */}
       <span
         className={cn(
-          'bg-background text-foreground flex min-h-14 items-center px-4 text-xs font-bold uppercase lg:px-6 lg:text-sm',
+          'bg-background text-foreground flex min-h-18 items-center px-4 text-lg font-bold lg:px-6',
           'sticky left-0 z-10 lg:static',
         )}
       >
@@ -62,12 +76,12 @@ function GrandTotalRowCatalog({
       {/* Mobile: Show only current plan */}
       <div
         className={cn(
-          'flex min-h-14 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
-          !!selectedPlan && 'bg-primary/10',
+          'flex min-h-18 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
+          !!selectedPlan && 'bg-primary/30',
         )}
       >
         <span
-          className={cn('text-sm font-bold', selectedPlan ? 'text-primary' : 'text-foreground')}
+          className={cn('text-lg font-semibold', selectedPlan ? 'text-primary' : 'text-foreground')}
         >
           {(selectedPlan && planTotals[selectedPlan]) ?? '—'}
         </span>
@@ -81,12 +95,12 @@ function GrandTotalRowCatalog({
           <div
             key={plan}
             className={cn(
-              'hidden min-h-14 min-w-0 items-center justify-center px-6 transition-colors lg:flex',
-              isActive && 'bg-primary/10',
+              'hidden min-h-18 min-w-0 items-center justify-center px-6 transition-colors lg:flex',
+              isActive && 'bg-primary/30',
             )}
           >
             <span
-              className={cn('text-sm font-bold', isActive ? 'text-primary' : 'text-foreground')}
+              className={cn('text-lg font-semibold', isActive ? 'text-primary' : 'text-foreground')}
             >
               {planTotals[plan]}
             </span>

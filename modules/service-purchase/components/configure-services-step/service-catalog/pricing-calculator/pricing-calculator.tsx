@@ -19,6 +19,7 @@ import {
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card } from '@/modules/shared/components/ui/card'
+import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { OptionGroupSection } from './option-group-section'
 
@@ -154,6 +155,17 @@ function PricingCalculator() {
             </div>
           </Card>
         </div>
+
+        {/* GRAND TOTAL (RECURRING) */}
+        <Card className="flex w-full flex-col border-none! py-0!">
+          <div className="overflow-hidden rounded-xl">
+            <GrandTotalRowCatalog
+              selectedPlan={selectedPlan}
+              tiers={tiers}
+              offering={servicesData}
+            />
+          </div>
+        </Card>
       </div>
     </PricingCalculatorProvider>
   )
