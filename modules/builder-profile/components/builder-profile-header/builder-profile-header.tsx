@@ -1,6 +1,5 @@
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
-import Link from 'next/link'
 import { useMemo } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Links } from '@/modules/builders/components/builders/components/links/links'
@@ -11,6 +10,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import ff from '@/modules/shared/lib/feature-flags'
 import { cn } from '@/modules/shared/lib/utils'
 import { BuilderProfileHeaderDescription } from './builder-profile-header-description'
+import { BuilderProfileWebsiteLink } from './builder-profile-website-link'
 
 interface BuilderProfileHeaderProps {
   builder: BuilderProfileState
@@ -68,17 +68,10 @@ function BuilderProfileHeader({ builder, isOperatorProfile }: BuilderProfileHead
           </div>
         </div>
         {builderWebsiteLink && (
-          <div className="flex items-center gap-2 md:pl-12 lg:pl-14">
-            <WebsiteSVG className="size-4" />
-            <Link
-              href={builderWebsiteLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary text-xs/4.5 sm:text-sm/5.5"
-            >
-              {builderWebsiteLink}
-            </Link>
-          </div>
+          <BuilderProfileWebsiteLink
+            href={builderWebsiteLink}
+            icon={<WebsiteSVG className="size-4" />}
+          />
         )}
         <BuilderProfileHeaderDescription description={builder.description} />
       </div>
