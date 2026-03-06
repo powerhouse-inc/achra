@@ -125,6 +125,7 @@ export function BuildersTable({
                                 code={builder.code}
                                 status={builder.status}
                                 image={builder.icon}
+                                isOperator={builder.isOperator}
                               />
                             </Link>
                           </TableCell>

@@ -64,6 +64,7 @@ export function BuildersList({
                         code={builder.code}
                         status={builder.status}
                         image={builder.icon}
+                        isOperator={builder.isOperator}
                       />
                       <div className="hidden flex-col gap-0.5 md:flex">
                         <span className="text-foreground/30 text-sm/5.5 font-semibold">Skills</span>
