@@ -11,7 +11,7 @@ export interface BuilderProfileProps {
   status: Maybe<BuilderStatus> | undefined
   image: string
   className?: string
-  isOperator: boolean
+  isOperator?: boolean
 }
 
 export default function BuilderProfile({
