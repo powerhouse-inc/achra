@@ -8,16 +8,7 @@ import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
 } from '@/modules/service-purchase/lib/price-breakdown-utils'
-import {
-  buildServiceMetrics,
-  buildServiceValues,
-  computeOptionGroupHeaderPrices,
-  getBillingCycleValue,
-  getCostType,
-  getCurrency,
-  resolveAddOnDisplayPrice,
-  sortOptionGroups,
-} from '@/modules/service-purchase/lib/utils'
+import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import {
   useAllOptionGroups,
@@ -27,16 +18,15 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { CatalogStatus } from '@/modules/service-purchase/types'
 import { Card } from '@/modules/shared/components/ui/card'
-import { ServiceCatalogBody, ServiceCatalogHeader, ServiceCatalogRoot, ServiceCatalogRow } from '..'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
+import { OptionGroupSection } from './option-group-section'
 
 function PricingCalculator() {
   const servicesData = useServiceOffering()
   const tier = useSelectedTier()
   const tiers = useComputedTiers()
-  const { setSelectedTier, setOptionGroupSelected } = useServicePurchaseActions()
+  const { setSelectedTier } = useServicePurchaseActions()
   const selectedPlan = tier.id
 
   const storeOptionGroups = useAllOptionGroups()
@@ -110,88 +100,61 @@ function PricingCalculator() {
     ],
   )
 
+  const sortedGroups = sortOptionGroups(servicesData.optionGroups)
+  const setupGroups = sortedGroups.filter((g) => g.costType === RsGroupCostType.Setup)
+  const recurringGroups = sortedGroups.filter((g) => g.costType !== RsGroupCostType.Setup)
+
   return (
     <PricingCalculatorProvider value={contextValue}>
-      <Card className="flex w-full flex-col border-none! py-0!">
-        <div className="overflow-hidden rounded-xl">
-          {/* Header with Plan Selectors */}
-          <HeaderCatalogPlan
-            selectedPlan={selectedPlan}
-            handlePlanChange={setSelectedTier}
-            mobilePlanIndex={mobilePlanIndex}
-            onPrevPlan={handlePrevPlan}
-            onNextPlan={handleNextPlan}
-            servicesData={servicesData}
-          />
-          {/* Service Sections */}
-          <div className="flex flex-col">
-            {sortOptionGroups(servicesData.optionGroups).map((section) => {
-              const rowBody = servicesData.services.filter((s) => s.optionGroupId === section.id)
-
-              // For add-ons, resolve both the base price and the discounted price
-              // (accounting for billing cycle and discountMode).
-              const addOnDisplayPrice = section.isAddOn
-                ? resolveAddOnDisplayPrice(section, tier.id, billingPeriod)
-                : null
-
-              // For non-add-on recurring groups, show per-tier prices in the header.
-              const perTierPrices = computeOptionGroupHeaderPrices(section, tiers, billingPeriod)
-
-              const isAddOnSelected =
-                storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
-
-              return (
-                <ServiceCatalogRoot
-                  key={section.id}
-                  isEnabled={!section.isAddOn || isAddOnSelected}
-                >
-                  <ServiceCatalogHeader
-                    title={section.name}
-                    badge={section.isAddOn ? CatalogStatus.Optional : CatalogStatus.Included}
-                    hasToggle={section.isAddOn}
-                    toggleLabel={section.name}
-                    toggleEnabled={isAddOnSelected}
-                    onToggleChange={
-                      section.isAddOn
-                        ? (enabled: boolean) => {
-                            setOptionGroupSelected(section.id, enabled)
-                          }
-                        : undefined
-                    }
-                    groupPrice={
-                      section.isAddOn ? addOnDisplayPrice?.basePrice : getBillingCycleValue(section)
-                    }
-                    groupDiscountedPrice={
-                      section.isAddOn
-                        ? addOnDisplayPrice?.discountedPrice
-                        : section.costType === RsGroupCostType.Setup &&
-                            setupDiscountedPrices[section.id] != null &&
-                            setupDiscountedPrices[section.id] !== section.price
-                          ? setupDiscountedPrices[section.id]
-                          : undefined
-                    }
-                    groupCurrency={getCurrency(section)}
-                    groupCostType={getCostType(section)}
-                    perTierPrices={perTierPrices}
+      <div className="flex w-full flex-col gap-8">
+        {/* SETUP & FORMATION */}
+        <div>
+          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
+            Setup & Formation
+          </h2>
+          <Card className="flex w-full flex-col border-none! py-0!">
+            <div className="overflow-hidden rounded-xl">
+              <HeaderCatalogPlan
+                selectedPlan={selectedPlan}
+                handlePlanChange={setSelectedTier}
+                mobilePlanIndex={mobilePlanIndex}
+                onPrevPlan={handlePrevPlan}
+                onNextPlan={handleNextPlan}
+                servicesData={servicesData}
+              />
+              <div className="flex flex-col">
+                {setupGroups.map((section) => (
+                  <OptionGroupSection
+                    key={section.id}
+                    section={section}
+                    setupDiscountedPrices={setupDiscountedPrices}
                   />
-
-                  <ServiceCatalogBody>
-                    {rowBody.map((row) => (
-                      <ServiceCatalogRow
-                        key={row.id}
-                        label={row.title}
-                        sublabel={row.description ?? undefined}
-                        values={buildServiceValues(row.id, tiers)}
-                        metrics={buildServiceMetrics(row.id, tiers)}
-                      />
-                    ))}
-                  </ServiceCatalogBody>
-                </ServiceCatalogRoot>
-              )
-            })}
-          </div>
+                ))}
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
+
+        {/* RECURRING SERVICES */}
+        <div>
+          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
+            Recurring Services
+          </h2>
+          <Card className="flex w-full flex-col border-none! py-0!">
+            <div className="overflow-hidden rounded-xl">
+              <div className="flex flex-col">
+                {recurringGroups.map((section) => (
+                  <OptionGroupSection
+                    key={section.id}
+                    section={section}
+                    setupDiscountedPrices={setupDiscountedPrices}
+                  />
+                ))}
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
     </PricingCalculatorProvider>
   )
 }
