@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-select-year/finances-breadcrumb'
 import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdown-chart/breakdown-chart-card-wrapper'
+import { BreakdownTable } from '@/modules/finances/components/breakdown-table'
 import { BudgetStatementsSectionWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
@@ -12,7 +13,6 @@ import { TitleComponentSkeleton } from '@/modules/finances/components/title-comp
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
 import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
-
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
@@ -69,6 +69,8 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
         {ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED && (
           <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
         )}
+
+        {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && <BreakdownTable />}
 
         <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
 
