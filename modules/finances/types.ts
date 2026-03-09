@@ -278,3 +278,20 @@ export interface AnalyticSeries {
 export interface Analytic {
   series: AnalyticSeries[]
 }
+
+// Breakdown Table types
+export type TableData = Record<string, Record<string, MetricValues>>
+
+export interface ItemRow {
+  name: string
+  isMain?: boolean
+  isUncategorized?: boolean
+  isSummaryRow?: boolean
+  codePath?: string
+  columns: MetricValues[]
+}
+
+export interface TableFinances {
+  tableName: string
+  rows: ItemRow[]
+}

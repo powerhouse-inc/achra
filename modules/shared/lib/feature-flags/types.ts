@@ -78,6 +78,12 @@ export interface FeatureFlags {
      * Whether to show the breakdown chart section
      */
     BREAKDOWN_CHART_SECTION_ENABLED: boolean
+
+    /**
+     * Whether to show the breakdown table section
+     */
+    BREAKDOWN_TABLE_SECTION_ENABLED: boolean
+
     /**
      * Whether to show the year selector in the finances section
      */
