@@ -242,7 +242,7 @@ export function BreakdownChart({
         },
         axisLabel: {
           margin: getMarginXAxis(),
-          color: 'var(--color-border)',
+          color: 'var(--color-foreground)',
           align: 'center',
           fontFamily: 'var(--font-open-sans-condensed)',
           fontWeight: 700,
