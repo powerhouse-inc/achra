@@ -32,8 +32,6 @@ function InitialProposalSection({
   return (
     <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
       <InitialProposalHeader
-        networkSlug={networkSlug}
-        workstreamSlug={workstreamSlug}
         proposalStatus={proposal?.status}
         proposalAuthor={proposal?.author.name}
       />

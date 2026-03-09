@@ -1,7 +1,11 @@
-import { LinkIcon } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import {
+  RoadmapSection,
+  RoadmapSectionSkeleton,
+} from '@/modules/networks/components/roadmap-section'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'
 import {
@@ -30,9 +34,6 @@ export default function InitialProposalPage({ params }: Readonly<InitialProposal
         </Suspense>
       </PageBreadcrumbContainer>
       <PageContent className="gap-6" variant="with-breadcrumb">
-        <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
-          Initial Proposal
-        </h1>
         <Suspense
           fallback={
             <WorkstreamServerListSkeleton>
@@ -43,12 +44,12 @@ export default function InitialProposalPage({ params }: Readonly<InitialProposal
         >
           <InitialProposalList params={params} />
         </Suspense>
-        <div className="flex items-center gap-2">
-          <h1 className="text-foreground text-xl leading-[1.2] font-bold sm:text-2xl md:text-3xl">
-            Roadmaps
-          </h1>
-          <LinkIcon className="text-foreground/50 size-5 md:size-6" />
-        </div>
+
+        <ErrorBoundaryWithPresets description="We ran into an unexpected error while loading the roadmaps. Please try again later.">
+          <Suspense fallback={<RoadmapSectionSkeleton />}>
+            <RoadmapSection params={params} />
+          </Suspense>
+        </ErrorBoundaryWithPresets>
         <Suspense fallback={<BudgetingSectionSkeleton />}>
           <BudgetingSection params={params} />
         </Suspense>
