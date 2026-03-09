@@ -22,7 +22,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   return (
     <label
       htmlFor={inputId}
-      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-center px-1"
+      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-start px-1"
     >
       <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
