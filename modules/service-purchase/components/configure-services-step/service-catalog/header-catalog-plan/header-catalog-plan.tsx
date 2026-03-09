@@ -52,7 +52,12 @@ function HeaderCatalogPlan({
 
       {/* MOBILE CAROUSEL */}
       <div className="bg-primary/10 flex h-full w-full items-center justify-between px-1 py-2 lg:hidden">
-        <Button variant="ghost" size="icon" onClick={onPrevPlan} className="size-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onPrevPlan}
+          className="size-8 hover:bg-transparent"
+        >
           <ChevronLeft className="size-5" />
         </Button>
         <div className="flex flex-col items-center justify-center">
@@ -60,7 +65,12 @@ function HeaderCatalogPlan({
             <PlanSelectorItem tier={currentMobileTier} />
           </RadioGroup>
         </div>
-        <Button variant="ghost" size="icon" onClick={onNextPlan} className="size-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onNextPlan}
+          className="size-8 hover:bg-transparent"
+        >
           <ChevronRight className="size-5" />
         </Button>
       </div>
