@@ -4,6 +4,8 @@ import ff from '@/modules/shared/lib/feature-flags'
 export enum FinancesSections {
   BudgetStatements = 'budget-statements',
   BreakdownChart = 'breakdown-chart',
+  ExpensesMetricChart = 'expenses-metric-chart',
+  FinancesReservesChart = 'finances-reserves-chart',
 }
 
 /**
@@ -14,5 +16,11 @@ export const FINANCES_SECTIONS_ENCODED = [
 
   ...(ff.finances.BREAKDOWN_CHART_SECTION_ENABLED
     ? [encodeSectionId(FinancesSections.BreakdownChart)]
+    : []),
+  ...(ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED
+    ? [encodeSectionId(FinancesSections.ExpensesMetricChart)]
+    : []),
+  ...(ff.finances.FINANCES_RESERVES_CHART_SECTION_ENABLED
+    ? [encodeSectionId(FinancesSections.FinancesReservesChart)]
     : []),
 ]
