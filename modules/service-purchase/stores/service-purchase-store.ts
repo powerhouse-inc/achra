@@ -72,15 +72,22 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
 
           // Override actions that affect totals — atomic: set once per action
           setSelectedTier: (id) => {
+            if (get().selectedTier.id !== id) {
+              stepSlice.actions.resetPostConfigureSteps()
+            }
             tiersSlice.actions.setSelectedTier(id)
             optionGroupsSlice.actions.recomputeOptionGroups()
             totalsSlice.actions.recomputeTotals()
           },
           setSelectedBillingCycle: (cycle) => {
+            if (get().selectedBillingCycle !== cycle) {
+              stepSlice.actions.resetPostConfigureSteps()
+            }
             tiersSlice.actions.setSelectedBillingCycle(cycle)
             totalsSlice.actions.recomputeTotals()
           },
           setOptionGroupSelected: (id, isSelected) => {
+            stepSlice.actions.resetPostConfigureSteps()
             optionGroupsSlice.actions.setOptionGroupSelected(id, isSelected)
             totalsSlice.actions.recomputeTotals()
           },
