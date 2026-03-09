@@ -1,6 +1,6 @@
 import { useMediaQuery as useMediaQueryTsHook } from 'usehooks-ts'
 
-type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | number
 
 type UseMediaQueryOptions =
   | { from: Breakpoint }
@@ -16,15 +16,23 @@ const BREAKPOINT_MAP: Record<Breakpoint, number> = {
   '2xl': 1536,
 }
 
+function getBreakpoint(breakpoint: Breakpoint | number): number {
+  return typeof breakpoint === 'number' ? breakpoint : BREAKPOINT_MAP[breakpoint]
+}
+
 function getQuery(options: UseMediaQueryOptions): string {
   if ('from' in options && !('to' in options)) {
-    return `(min-width: ${BREAKPOINT_MAP[options.from]}px)`
+    const breakpoint = getBreakpoint(options.from)
+    return `(min-width: ${breakpoint}px)`
   }
   if ('to' in options && !('from' in options)) {
-    return `(max-width: ${BREAKPOINT_MAP[options.to]}px)`
+    const breakpoint = getBreakpoint(options.to)
+    return `(max-width: ${breakpoint}px)`
   }
   if ('from' in options && 'to' in options) {
-    return `(min-width: ${BREAKPOINT_MAP[options.from]}px) and (max-width: ${BREAKPOINT_MAP[options.to]}px)`
+    const fromBreakpoint = getBreakpoint(options.from)
+    const toBreakpoint = getBreakpoint(options.to)
+    return `(min-width: ${fromBreakpoint}px) and (max-width: ${toBreakpoint}px)`
   }
 
   throw new Error('Invalid options for getQuery')

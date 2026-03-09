@@ -3,10 +3,14 @@
 import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { TitleSectionFinances } from '../title-section-finances'
 import { BreakdownTableFilters } from './breakdown-table-filters'
+import { TableHeader } from './table-header'
+import { useBreakdownTable } from './use-breakdown-table'
 
 function BreakdownTable() {
   const { year } = useFinancesYear()
   const range = `Jan - Dec ${year}`
+
+  const { isLoading, selectedGranularity, tableHeader, activeMetrics } = useBreakdownTable()
 
   return (
     <div>
@@ -19,6 +23,22 @@ function BreakdownTable() {
         />
         <BreakdownTableFilters />
       </div>
+
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <div>
+            <TableHeader
+              granularity={selectedGranularity}
+              title="Sky Budget"
+              year={year}
+              headerTable={tableHeader ?? []}
+              activeMetrics={activeMetrics}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -70,7 +70,11 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
           <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
-        {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && <BreakdownTable />}
+        {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && (
+          <Suspense>
+            <BreakdownTable />
+          </Suspense>
+        )}
 
         <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
 
