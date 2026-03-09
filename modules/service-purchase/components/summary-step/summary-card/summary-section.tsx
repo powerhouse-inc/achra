@@ -19,6 +19,7 @@ interface SummaryContextValue {
   isRecurring: boolean
   headerLabel?: string
   groupPrices?: Map<string, number>
+  isCustomPricing?: boolean
 }
 
 const SummaryContext = createContext<SummaryContextValue | null>(null)
@@ -37,6 +38,7 @@ interface SummaryProviderProps {
   totalSuffix: string
   headerLabel?: string
   groupPrices?: Map<string, number>
+  isCustomPricing?: boolean
 }
 
 function SummaryProvider({
@@ -45,6 +47,7 @@ function SummaryProvider({
   totalSuffix,
   headerLabel = 'Pricing Summary',
   groupPrices,
+  isCustomPricing,
 }: SummaryProviderProps) {
   const isRecurring = sectionLabel === 'Recurring'
   const value: SummaryContextValue = {
@@ -53,6 +56,7 @@ function SummaryProvider({
     isRecurring,
     headerLabel,
     groupPrices,
+    isCustomPricing,
   }
   return <SummaryContext.Provider value={value}>{children}</SummaryContext.Provider>
 }
@@ -164,10 +168,13 @@ interface SummaryFooterProps {
 }
 
 function SummaryTotal({ totalAmount }: SummaryFooterProps) {
-  const { sectionLabel, totalSuffix, isRecurring } = useSummary()
-  const formattedTotal = isRecurring
-    ? `${formatPrice(totalAmount)}${totalSuffix}`
-    : formatPrice(totalAmount)
+  const { sectionLabel, totalSuffix, isRecurring, isCustomPricing } = useSummary()
+  const formattedTotal =
+    isRecurring && isCustomPricing
+      ? 'Custom'
+      : isRecurring
+        ? `${formatPrice(totalAmount)}${totalSuffix}`
+        : formatPrice(totalAmount)
 
   return (
     <footer

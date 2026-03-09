@@ -81,14 +81,16 @@ function SummaryCard() {
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
           <span className="text-primary text-base/6 font-semibold lg:leading-7">
-            ${totals.recurringTotal}/mo
+            {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
           </span>
           <span className="text-foreground text-xs/4.5 font-medium">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          <span className="text-foreground/70 text-xs/4.5 font-medium">
-            + ${totals.setupTotal} Setup
-          </span>
+          {totals.setupTotal > 0 && (
+            <span className="text-foreground/70 text-xs/4.5 font-medium">
+              + ${totals.setupTotal} Setup
+            </span>
+          )}
         </div>
       </CardHeader>
 
@@ -101,6 +103,7 @@ function SummaryCard() {
               sectionLabel="Recurring"
               totalSuffix="/mo"
               groupPrices={recurringGroupPrices}
+              isCustomPricing={selectedTier.isCustomPricing}
             >
               <Summary.Card>
                 <Summary.Header />
