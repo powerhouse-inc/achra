@@ -7,6 +7,7 @@ import { NoDeliverables } from '../no-deliverables'
 import ProposalCardsGrid from '../workstream-card/proposal-cards-grid'
 import { StatCards } from '../workstream-card/stat-cards'
 import type { Route } from 'next'
+import type { ReactNode } from 'react'
 
 interface InitialProposalSectionProps {
   networkSlug: string
@@ -16,6 +17,7 @@ interface InitialProposalSectionProps {
   deliverables: number
   totalBudget: number
   projects: WorkstreamDetailsProject[]
+  action?: ReactNode
 }
 
 function InitialProposalSection({
@@ -26,6 +28,7 @@ function InitialProposalSection({
   deliverables,
   totalBudget,
   projects,
+  action,
 }: Readonly<InitialProposalSectionProps>) {
   const deliverablesList = proposal?.sow?.deliverables ?? []
 
@@ -34,6 +37,7 @@ function InitialProposalSection({
       <InitialProposalHeader
         proposalStatus={proposal?.status}
         proposalAuthor={proposal?.author.name}
+        action={action}
       />
 
       <StatCards milestones={milestones} deliverables={deliverables} totalBudget={totalBudget} />

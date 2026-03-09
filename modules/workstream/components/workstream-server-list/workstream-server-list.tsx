@@ -4,9 +4,11 @@ import {
   WorkstreamStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getWorkstreamsProjects } from '@/modules/project/services/workstream-projects-services'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import { getWorkstreams } from '../../services/workstream-service'
 import { WorkstreamCard } from '../workstream-card'
 import { WorkstreamEmpty } from '../workstream-empty'
+import type { Route } from 'next'
 
 const filtersParser = createLoader({
   search: parseAsString.withDefault(''),
@@ -67,6 +69,14 @@ async function WorkstreamServerList({ params, searchParams }: WorkstreamServerLi
           key={workstream.slug}
           workstream={workstream as FullQueryWorkstream}
           projects={projects}
+          action={
+            <InternalLink
+              href={`/network/${slug}/workstream/${workstream.slug}/initial-proposal` as Route}
+              variant="outline"
+            >
+              View Proposal
+            </InternalLink>
+          }
         />
       ))}
     </div>
