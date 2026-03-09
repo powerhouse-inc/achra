@@ -87,6 +87,10 @@ export interface FeatureFlags {
      * Whether to show the expenses metric chart section
      */
     EXPENSES_METRIC_CHART_SECTION_ENABLED?: boolean
+    /**
+     * Whether to show the finances reserves chart section
+     */
+    FINANCES_RESERVES_CHART_SECTION_ENABLED?: boolean
   }
   /**
    * Whether to enable the login button in the nav bar

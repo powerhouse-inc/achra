@@ -4,6 +4,7 @@ import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdo
 import { BudgetStatementsSectionWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
+import { FinancesReservesChartCardWrapper } from '@/modules/finances/components/finances-reserves-chart/finances-reserves-chart-card-wrapper'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
@@ -68,6 +69,10 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
 
         {ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED && (
           <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
+        )}
+
+        {ff.finances.FINANCES_RESERVES_CHART_SECTION_ENABLED && (
+          <FinancesReservesChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
         <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
