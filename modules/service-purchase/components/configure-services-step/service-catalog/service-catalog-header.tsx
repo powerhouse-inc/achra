@@ -2,12 +2,10 @@
 
 import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
-import type { CatalogStatus } from '@/modules/service-purchase/types'
 import { SectionHeader } from './section-header'
 
 export interface ServiceCatalogHeaderProps {
   title: string
-  badge?: CatalogStatus
   hasToggle?: boolean
   toggleLabel?: string
   toggleEnabled?: boolean
@@ -21,7 +19,6 @@ export interface ServiceCatalogHeaderProps {
 
 function ServiceCatalogHeader({
   title,
-  badge,
   hasToggle,
   toggleLabel,
   toggleEnabled = false,
@@ -37,7 +34,6 @@ function ServiceCatalogHeader({
   return (
     <SectionHeader
       title={title}
-      badge={badge}
       hasToggle={hasToggle}
       toggleLabel={toggleLabel}
       toggleEnabled={toggleEnabled}
