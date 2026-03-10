@@ -43,12 +43,7 @@ function HeaderCatalogPlan({
         'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
       )}
     >
-      {/* LABEL */}
-      <div className="flex h-full items-center px-4 lg:px-6">
-        <span className="text-muted-foreground text-xs font-bold tracking-wide uppercase lg:text-base">
-          SERVICE CATALOG
-        </span>
-      </div>
+      <div className="flex h-full items-center px-4 lg:px-6" />
 
       {/* MOBILE CAROUSEL */}
       <div className="bg-primary/10 flex h-full w-full items-center justify-between px-1 py-2 lg:hidden">
