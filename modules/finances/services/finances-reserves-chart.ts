@@ -2,7 +2,7 @@ import {
   seriesGranularityAnnuallyFirstLevelFinancesReserves,
   seriesGranularityMonthlyFirstLevelFinancesReserves,
   seriesGranularityQuarterlyFirstLevelFinancesReserves,
-} from '@/modules/finances/mocks/finances-reserves-chart'
+} from '@/modules/finances/mocks/reserves-waterfall-chart'
 import { type Analytic, type Budget, GRANULARITY_OPTIONS } from '@/modules/finances/types'
 
 interface FinancesReservesChartService {

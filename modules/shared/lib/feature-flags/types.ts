@@ -96,7 +96,7 @@ export interface FeatureFlags {
     /**
      * Whether to show the finances reserves chart section
      */
-    FINANCES_RESERVES_CHART_SECTION_ENABLED?: boolean
+    RESERVES_WATERFALL_CHART_SECTION_ENABLED?: boolean
   }
   /**
    * Whether to enable the login button in the nav bar
