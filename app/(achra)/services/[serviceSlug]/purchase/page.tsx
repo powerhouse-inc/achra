@@ -46,6 +46,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
             <ServiceHeader resourceTemplate={resourceTemplate} />
           </div>
           <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
+          <NavigationButtons isFooter />
         </div>
 
         {ff.LEAVE_PAGE_GUARD_ENABLED && <LeavePageGuard />}

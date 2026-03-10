@@ -18,13 +18,13 @@ function BuilderProfileWebsiteLink({ href, icon }: BuilderProfileWebsiteLinkProp
   }
 
   return (
-    <div className="flex items-center gap-2 md:pl-12 lg:pl-14">
+    <div className="-mt-2 flex items-center gap-2 md:pl-12 lg:pl-14">
       {icon}
       <Link
         href={href as Route}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-primary text-xs/4.5 sm:text-sm/5.5"
+        className="text-status-progress text-xs/4.5 sm:text-sm/5.5"
       >
         {href}
       </Link>
