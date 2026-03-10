@@ -39,7 +39,7 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
           )}
         >
           <div className="flex flex-col md:flex-row md:items-center md:gap-1">
-            <span className="text-foreground text-sm font-semibold lg:text-base">{label}</span>
+            <span className="text-foreground text-sm font-normal">{label}</span>
           </div>
         </div>
 
