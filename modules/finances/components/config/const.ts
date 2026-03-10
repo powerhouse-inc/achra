@@ -5,7 +5,7 @@ export enum FinancesSections {
   BudgetStatements = 'budget-statements',
   BreakdownChart = 'breakdown-chart',
   ExpensesMetricChart = 'expenses-metric-chart',
-  FinancesReservesChart = 'finances-reserves-chart',
+  ReservesWaterfallChart = 'reserves-waterfall-chart',
 }
 
 /**
@@ -20,7 +20,7 @@ export const FINANCES_SECTIONS_ENCODED = [
   ...(ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED
     ? [encodeSectionId(FinancesSections.ExpensesMetricChart)]
     : []),
-  ...(ff.finances.FINANCES_RESERVES_CHART_SECTION_ENABLED
-    ? [encodeSectionId(FinancesSections.FinancesReservesChart)]
+  ...(ff.finances.RESERVES_WATERFALL_CHART_SECTION_ENABLED
+    ? [encodeSectionId(FinancesSections.ReservesWaterfallChart)]
     : []),
 ]
