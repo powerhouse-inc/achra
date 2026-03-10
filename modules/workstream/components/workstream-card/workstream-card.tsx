@@ -5,17 +5,20 @@ import { useWorkstreamCardData } from '../../hooks/use-workstream-card-data'
 import { AlternativeProposalsFooter } from '../initial-proposal-list/alternative-proposals-footer'
 import { InitialProposalSection } from '../initial-proposal-list/initial-proposal-section'
 import { WorkstreamRfpHeader } from '../initial-proposal-list/workstream-rfp-header'
+import type { ReactNode } from 'react'
 
 interface WorkstreamCardProps {
   workstream: FullQueryWorkstream
   projects: WorkstreamDetailsProject[]
   fullVersion?: boolean
+  action?: ReactNode
 }
 
 function WorkstreamCard({
   workstream,
   projects,
   fullVersion = true,
+  action,
 }: Readonly<WorkstreamCardProps>) {
   const {
     networkSlug,
@@ -43,6 +46,7 @@ function WorkstreamCard({
         deliverables={deliverables}
         totalBudget={totalBudget}
         projects={projects}
+        action={action}
       />
       {fullVersion && (
         <AlternativeProposalsFooter isVisible={initialProposalDeliverables.length > 0} />
