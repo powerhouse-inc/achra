@@ -5,15 +5,15 @@ import { BreakdownTable } from '@/modules/finances/components/breakdown-table'
 import { BudgetStatementsSectionWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
-import { FinancesReservesChartCardWrapper } from '@/modules/finances/components/finances-reserves-chart/finances-reserves-chart-card-wrapper'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
+import { ReservesWaterfallChart } from '@/modules/finances/components/reserves-waterfall-chart'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
 import { SummarySectionWrapper } from '@/modules/finances/components/summary-section/summary-section-wrapper'
 import { TitleComponentSkeleton } from '@/modules/finances/components/title-component/title-component-skeleton'
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
-import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
+import { ATLAS_BUDGETS, WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
@@ -71,8 +71,13 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
           <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
         )}
 
-        {ff.finances.FINANCES_RESERVES_CHART_SECTION_ENABLED && (
-          <FinancesReservesChartCardWrapper params={params} searchParams={searchParams} />
+        {ff.finances.RESERVES_WATERFALL_CHART_SECTION_ENABLED && (
+          <ReservesWaterfallChart
+            codePath="atlas/immutable"
+            budgets={ATLAS_BUDGETS}
+            allBudgets={ATLAS_BUDGETS}
+            year="2025"
+          />
         )}
 
         {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && (

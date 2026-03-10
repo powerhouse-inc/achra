@@ -2,28 +2,24 @@
 
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useEffect, useMemo, useRef } from 'react'
+import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/expenses-metric-chart-utils'
+import { getWaterfallAxisLabels } from '@/modules/finances/lib/reserves-waterfall-chart-utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
-import {
-  getCorrectGranularity,
-  replaceAllNumberLetOneBeforeDot,
-} from '../../../lib/expenses-metric-chart-utils'
-import { getWaterfallAxisLabels } from '../../../lib/finances-reserves-chart-utils'
-import type { GRANULARITY_OPTIONS } from '../../../types'
+import { LegendItem } from './legend-item'
 
-interface FinancesReservesChartProps {
+interface ReservesWaterfallChartGraphProps {
   year: string
-  selectedGranularity: GRANULARITY_OPTIONS
+  selectedGranularity: 'monthly' | 'quarterly' | 'annual'
   series: NonNullable<EChartsOption['series']>
 }
 
-export function FinancesReservesChart({
+function ReservesWaterfallChartGraph({
   year,
   selectedGranularity,
   series,
-}: Readonly<FinancesReservesChartProps>) {
-  const chartRef = useRef<EChartsOption>(null)
-  const granularity = getCorrectGranularity(selectedGranularity)
+}: Readonly<ReservesWaterfallChartGraphProps>) {
+  const chartRef = useRef<ReactECharts>(null)
 
   const isLessMobile = useMediaQuery({ to: 'sm' })
   const isMobile = useMediaQuery({ from: 'sm', to: 'md' })
@@ -32,7 +28,8 @@ export function FinancesReservesChart({
 
   const isMobileOrLess = isMobile || isLessMobile
   const showLineYear =
-    (isMobile || isLessMobile) && (granularity === 'monthly' || granularity === 'quarterly')
+    isMobileOrLess && (selectedGranularity === 'monthly' || selectedGranularity === 'quarterly')
+
   const yAxisMax = useMemo(() => {
     let maxValue = 0
 
@@ -74,7 +71,7 @@ export function FinancesReservesChart({
       },
       xAxis: {
         type: 'category',
-        data: getWaterfallAxisLabels(granularity, isMobileOrLess),
+        data: getWaterfallAxisLabels(selectedGranularity, isMobileOrLess),
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
@@ -116,19 +113,19 @@ export function FinancesReservesChart({
       series,
     }),
     [
-      granularity,
       isDesktop1024,
       isLessMobile,
       isMobile,
       isMobileOrLess,
       isTablet,
+      selectedGranularity,
       series,
       yAxisMax,
     ],
   )
 
   useEffect(() => {
-    chartRef.current?.getEchartsInstance()?.setOption(options, { notMerge: true })
+    chartRef.current?.getEchartsInstance().setOption(options, { notMerge: true })
   }, [options])
 
   return (
@@ -161,12 +158,4 @@ export function FinancesReservesChart({
     </div>
   )
 }
-
-function LegendItem({ color, label }: Readonly<{ color: string; label: string }>) {
-  return (
-    <div className="flex items-center gap-2">
-      <span className="inline-block size-2.5 rounded-full" style={{ backgroundColor: color }} />
-      <span className="text-muted-foreground text-sm font-semibold">{label}</span>
-    </div>
-  )
-}
+export { ReservesWaterfallChartGraph }
