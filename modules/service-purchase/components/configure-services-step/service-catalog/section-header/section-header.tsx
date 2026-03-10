@@ -1,17 +1,13 @@
 'use client'
 
-import { Lock } from 'lucide-react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
-import type { CatalogStatus } from '@/modules/service-purchase/types'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
-import { ServiceCatalogStatus } from '../../service-catalog-status'
 
 interface SectionHeaderProps {
   title: string
-  badge?: CatalogStatus
   hasToggle?: boolean
   toggleLabel?: string
   toggleEnabled?: boolean
@@ -26,7 +22,6 @@ interface SectionHeaderProps {
 
 function SectionHeader({
   title,
-  badge,
   hasToggle,
   toggleLabel,
   toggleEnabled = false,
@@ -84,22 +79,8 @@ function SectionHeader({
               </label>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
-              <Lock className="text-muted-foreground size-4 shrink-0" />
-              <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
-                <span>{title}</span>
-                {badge && (
-                  <span className="ml-1 inline-block align-middle lg:hidden">
-                    <ServiceCatalogStatus catalogStatus={badge} />
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
-
-          {badge && (
-            <div className="hidden lg:block">
-              <ServiceCatalogStatus catalogStatus={badge} />
+            <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
+              <span>{title}</span>
             </div>
           )}
         </div>
