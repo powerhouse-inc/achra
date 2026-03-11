@@ -53,9 +53,10 @@ function GrandTotalRowCatalog({
   return (
     <div
       className={cn(
-        'bg-primary/10 items-center',
+        'bg-primary/10 items-center rounded-xl',
         'sticky bottom-0 z-20',
         'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+        'overflow-hidden rounded-xl',
       )}
       style={
         {

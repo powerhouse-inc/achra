@@ -157,15 +157,7 @@ function PricingCalculator() {
         </div>
 
         {/* GRAND TOTAL (RECURRING) */}
-        <Card className="flex w-full flex-col border-none! py-0!">
-          <div className="overflow-hidden rounded-xl">
-            <GrandTotalRowCatalog
-              selectedPlan={selectedPlan}
-              tiers={tiers}
-              offering={servicesData}
-            />
-          </div>
-        </Card>
+        <GrandTotalRowCatalog selectedPlan={selectedPlan} tiers={tiers} offering={servicesData} />
       </div>
     </PricingCalculatorProvider>
   )
