@@ -53,7 +53,9 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
     )
     const setup = sortOptionGroups(
       selected.filter(
-        (group) => group.costType === RsGroupCostType.Setup && hasServicesForTier(group),
+        (group) =>
+          group.costType === RsGroupCostType.Setup &&
+          (hasServicesForTier(group) || group.resolvedPrice > 0),
       ),
     )
 
