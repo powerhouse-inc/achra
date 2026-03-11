@@ -2,11 +2,11 @@ import type { FullProposal } from '@/modules/__generated__/graphql/switchboard-g
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Separator } from '@/modules/shared/components/ui/separator'
+import { cn } from '@/shared/lib/utils'
 import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
 import { NoDeliverables } from '../no-deliverables'
 import ProposalCardsGrid from '../workstream-card/proposal-cards-grid'
 import { StatCards } from '../workstream-card/stat-cards'
-import { cn } from '@/shared/lib/utils'
 import type { Route } from 'next'
 import type { ReactNode } from 'react'
 
@@ -36,7 +36,12 @@ function InitialProposalSection({
   const deliverablesList = proposal?.sow?.deliverables ?? []
 
   return (
-    <div className={cn("bg-accent flex flex-col gap-4 border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6", className)}>
+    <div
+      className={cn(
+        'bg-accent flex flex-col gap-4 border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6',
+        className,
+      )}
+    >
       <InitialProposalHeader
         proposalStatus={proposal?.status}
         proposalAuthor={proposal?.author.name}
