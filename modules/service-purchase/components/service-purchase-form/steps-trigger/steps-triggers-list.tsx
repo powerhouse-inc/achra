@@ -1,7 +1,7 @@
 'use client'
 
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
-import { Fragment, type ReactNode } from 'react'
+import { Fragment, type ReactNode, useEffect } from 'react'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/config/constants'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
@@ -19,6 +19,14 @@ const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
 
 function StepsTriggersList() {
   const { activeStep, hasVisitedStep, isStepDisabled } = useServicePurchaseStep()
+
+  /**
+   * Scroll to the top of the page when the active step changes.
+   */
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [activeStep])
 
   return (
     <TabsList className="h-fit w-full justify-center bg-transparent p-0 md:justify-between">

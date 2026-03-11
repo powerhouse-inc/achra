@@ -3,7 +3,11 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useEffect, useMemo, useRef } from 'react'
 import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/expenses-metric-chart-utils'
-import { getWaterfallAxisLabels } from '@/modules/finances/lib/reserves-waterfall-chart-utils'
+import {
+  formatterReservesWaterfallChart,
+  getReservesWaterfallXAxisRichStyles,
+  getWaterfallAxisLabels,
+} from '@/modules/finances/lib/reserves-waterfall-chart-utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
 import { LegendItem } from './legend-item'
@@ -29,6 +33,11 @@ function ReservesWaterfallChartGraph({
   const isMobileOrLess = isMobile || isLessMobile
   const showLineYear =
     isMobileOrLess && (selectedGranularity === 'monthly' || selectedGranularity === 'quarterly')
+  const axisLabels = useMemo(
+    () => getWaterfallAxisLabels(selectedGranularity, isMobileOrLess),
+    [isMobileOrLess, selectedGranularity],
+  )
+  const xAxisRichStyles = useMemo(() => getReservesWaterfallXAxisRichStyles(isMobile), [isMobile])
 
   const yAxisMax = useMemo(() => {
     let maxValue = 0
@@ -71,17 +80,28 @@ function ReservesWaterfallChartGraph({
       },
       xAxis: {
         type: 'category',
-        data: getWaterfallAxisLabels(selectedGranularity, isMobileOrLess),
+        data: axisLabels,
+        splitLine: { show: false },
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: {
           margin: isMobile ? 12 : 16,
-          color: 'var(--color-border)',
+          color: 'color-mix(in srgb, var(--color-foreground) 70%, transparent)',
           align: 'center',
           fontFamily: 'var(--font-open-sans-condensed)',
           fontWeight: 700,
           fontSize: isMobile ? 12 : 14,
           interval: 0,
+          padding: [0, 5, 0, 5],
+          formatter: (value: string, index: number) =>
+            formatterReservesWaterfallChart({
+              axisLabels,
+              isMobileOrLess,
+              year,
+              value,
+              index,
+            }),
+          rich: xAxisRichStyles,
         },
       },
       yAxis: {
@@ -106,7 +126,7 @@ function ReservesWaterfallChartGraph({
         splitLine: {
           lineStyle: {
             color: 'var(--color-border)',
-            width: 0.25,
+            width: 1,
           },
         },
       },
@@ -118,8 +138,10 @@ function ReservesWaterfallChartGraph({
       isMobile,
       isMobileOrLess,
       isTablet,
-      selectedGranularity,
+      axisLabels,
+      xAxisRichStyles,
       series,
+      year,
       yAxisMax,
     ],
   )
