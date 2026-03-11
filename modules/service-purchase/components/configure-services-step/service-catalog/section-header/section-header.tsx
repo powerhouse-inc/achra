@@ -118,7 +118,7 @@ function SectionHeader({
         )}
         {isOneTime && !perTierPrices && priceLabel && discountedPriceLabel && (
           <span className="flex min-w-0 flex-col items-center gap-0.5">
-            <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+            <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap uppercase line-through">
               {priceLabel}
             </span>
             <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
@@ -141,7 +141,7 @@ function SectionHeader({
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
-                activePlan === plan ? 'text-primary' : 'text-foreground/50',
+                activePlan === plan ? 'text-primary' : 'text-foreground/70',
               )}
             >
               {perTierPrices[plan]}
@@ -151,7 +151,7 @@ function SectionHeader({
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
-                activePlan === plan ? 'text-primary' : 'text-foreground/50',
+                activePlan === plan ? 'text-primary' : 'text-foreground/70',
               )}
             >
               {perTierPrices[plan]}
@@ -172,7 +172,7 @@ function SectionHeader({
             priceLabel &&
             discountedPriceLabel && (
               <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
-                <span className="text-muted-foreground min-w-0 text-xs whitespace-nowrap uppercase line-through">
+                <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap uppercase line-through">
                   {priceLabel}
                 </span>
                 <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">

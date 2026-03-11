@@ -58,7 +58,7 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
         {/* Circle dot */}
         <span className="bg-border z-10 size-1.5 shrink-0 rounded-full" />
 
-        <span className="text-muted-foreground text-xs lg:text-sm">{label}</span>
+        <span className="text-foreground/70 text-xs lg:text-sm">{label}</span>
       </div>
 
       {/* Mobile: Show only current plan */}
