@@ -61,7 +61,6 @@ async function WorkstreamServerList({ params, searchParams }: WorkstreamServerLi
       projects,
     }
   })
-
   return (
     <div className="flex flex-col gap-8">
       {workstreamsWithProjects.map(({ workstream, projects }) => (
@@ -71,7 +70,7 @@ async function WorkstreamServerList({ params, searchParams }: WorkstreamServerLi
           projects={projects}
           action={
             <InternalLink
-              href={`/network/${slug}/workstream/${workstream.slug}/initial-proposal` as Route}
+              href={`/network/${workstream.network?.slug}/workstream/${workstream.slug}` as Route}
               variant="outline"
             >
               View Proposal
