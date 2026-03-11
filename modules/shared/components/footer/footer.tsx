@@ -26,7 +26,7 @@ export function Footer() {
           </Link>
 
           <Link
-            href="https://www.powerhouse.inc/"
+            href="https://powerhouse.io/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Visit Powerhouse website"
