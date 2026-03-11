@@ -47,6 +47,7 @@ function WorkstreamCard({
         totalBudget={totalBudget}
         projects={projects}
         action={action}
+        className={fullVersion ? 'border-t' : undefined}
       />
       {fullVersion && (
         <AlternativeProposalsFooter isVisible={initialProposalDeliverables.length > 0} />

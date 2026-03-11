@@ -6,6 +6,7 @@ import InitialProposalHeader from '../initial-proposal-header/initial-proposal-h
 import { NoDeliverables } from '../no-deliverables'
 import ProposalCardsGrid from '../workstream-card/proposal-cards-grid'
 import { StatCards } from '../workstream-card/stat-cards'
+import { cn } from '@/shared/lib/utils'
 import type { Route } from 'next'
 import type { ReactNode } from 'react'
 
@@ -18,6 +19,7 @@ interface InitialProposalSectionProps {
   totalBudget: number
   projects: WorkstreamDetailsProject[]
   action?: ReactNode
+  className?: string
 }
 
 function InitialProposalSection({
@@ -29,11 +31,12 @@ function InitialProposalSection({
   totalBudget,
   projects,
   action,
+  className,
 }: Readonly<InitialProposalSectionProps>) {
   const deliverablesList = proposal?.sow?.deliverables ?? []
 
   return (
-    <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
+    <div className={cn("bg-accent flex flex-col gap-4 border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6", className)}>
       <InitialProposalHeader
         proposalStatus={proposal?.status}
         proposalAuthor={proposal?.author.name}
