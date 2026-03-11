@@ -112,7 +112,9 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
               </Suspense>
             </ErrorBoundaryWithPresets>
           )}
-          {step.value === ServicePurchaseStep.Summary && <SummaryStep operator={operator} />}
+          {step.value === ServicePurchaseStep.Summary && (
+            <SummaryStep operator={operator} templateTitle={resourceTemplate.title} />
+          )}
           {step.value === ServicePurchaseStep.Confirmation && <ConfirmationStep />}
         </TabsContent>
       ))}

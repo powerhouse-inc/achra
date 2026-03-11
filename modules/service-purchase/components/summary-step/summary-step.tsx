@@ -5,13 +5,14 @@ import { SummaryCard } from './summary-card'
 
 interface SummaryStepProps {
   operator: BuilderProfileState
+  templateTitle?: string
 }
 
-function SummaryStep({ operator }: Readonly<SummaryStepProps>) {
+function SummaryStep({ operator, templateTitle }: Readonly<SummaryStepProps>) {
   return (
     <div className="mt-6 flex flex-col gap-6">
       <MarketplaceHeader operator={operator} />
-      <SummaryCard />
+      <SummaryCard templateTitle={templateTitle} />
       <SubmitRequestForm />
     </div>
   )
