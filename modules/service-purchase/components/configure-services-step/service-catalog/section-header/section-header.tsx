@@ -74,7 +74,7 @@ function SectionHeader({
                   e.stopPropagation()
                 }}
                 id={`toggle-${title}`}
-                className="data-[state=checked]:bg-status-progress"
+                className="data-[state=checked]:bg-status-progress data-[state=unchecked]:bg-foreground/70"
               />
               <label
                 htmlFor={`toggle-${title}`}
