@@ -21,7 +21,11 @@ import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/ca
 import { SelectedFacets } from './selected-facets'
 import { Summary } from './summary-section'
 
-function SummaryCard() {
+interface SummaryCardProps {
+  templateTitle?: string
+}
+
+function SummaryCard({ templateTitle }: SummaryCardProps) {
   const { facets } = useServicePurchaseState()
   const totals = usePurchaseTotals()
   const optionGroups = useAllOptionGroups()
@@ -72,7 +76,7 @@ function SummaryCard() {
           </div>
           <div className="flex flex-col justify-center gap-1 self-stretch">
             <h2 className="text-foreground text-sm/5.5 leading-tight font-bold lg:text-lg lg:leading-[120%]">
-              Operational Hub for Open Source Builders
+              {templateTitle}
             </h2>
             <span className="text-foreground/70 text-xs font-medium uppercase lg:text-sm/5.5">
               Resource Template
@@ -80,9 +84,14 @@ function SummaryCard() {
           </div>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
-          <span className="text-primary text-base/6 font-semibold lg:leading-7">
-            {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
-          </span>
+          <div className="flex flex-col items-end sm:flex-row sm:items-baseline sm:gap-2">
+            <span className="text-foreground text-sm/5.5 font-bold lg:text-base/6">
+              {selectedTier.name}
+            </span>
+            <span className="text-primary text-base/6 font-semibold lg:leading-7">
+              {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
+            </span>
+          </div>
           <span className="text-foreground text-xs/4.5 font-medium">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
