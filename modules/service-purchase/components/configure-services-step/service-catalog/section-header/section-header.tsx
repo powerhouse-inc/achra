@@ -46,7 +46,9 @@ function SectionHeader({
       className={cn(
         'text-foreground items-center',
         'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+        hasToggle && 'cursor-pointer',
       )}
+      onClick={hasToggle ? () => onToggleChange?.(!toggleEnabled) : undefined}
       style={
         {
           '--grid-cols-lg': `4fr repeat(${tierNames.length}, minmax(144px, 1fr))`,
@@ -68,18 +70,24 @@ function SectionHeader({
               <Switch
                 checked={toggleEnabled}
                 onCheckedChange={onToggleChange}
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
                 id={`toggle-${title}`}
                 className="data-[state=checked]:bg-status-progress"
               />
               <label
                 htmlFor={`toggle-${title}`}
-                className="text-foreground cursor-pointer text-xs font-semibold lg:text-sm"
+                className="text-foreground cursor-pointer text-base font-bold"
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
               >
                 {toggleLabel ?? title}
               </label>
             </div>
           ) : (
-            <div className="text-foreground text-xs font-semibold lg:flex lg:items-center lg:gap-2 lg:text-sm">
+            <div className="text-foreground text-base font-bold lg:flex lg:items-center lg:gap-2">
               <span>{title}</span>
             </div>
           )}
