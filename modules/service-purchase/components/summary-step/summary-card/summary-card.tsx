@@ -17,6 +17,7 @@ import {
   useServiceOffering,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
 import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { SelectedFacets } from './selected-facets'
 import { Summary } from './summary-section'
@@ -43,10 +44,18 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
       activeGroupIds,
     )
 
+    const hasServicesForTier = (group: PurchaseOptionGroup): boolean => group.services.length > 0
+
     const recurring = sortOptionGroups(
-      selected.filter((g) => g.costType === RsGroupCostType.Recurring),
+      selected.filter(
+        (group) => group.costType === RsGroupCostType.Recurring && hasServicesForTier(group),
+      ),
     )
-    const setup = sortOptionGroups(selected.filter((g) => g.costType === RsGroupCostType.Setup))
+    const setup = sortOptionGroups(
+      selected.filter(
+        (group) => group.costType === RsGroupCostType.Setup && hasServicesForTier(group),
+      ),
+    )
 
     const recurringPrices = new Map<string, number>()
     for (const g of recurring) {
