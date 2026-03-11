@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
-import { getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
+import { formatMetricLabel, getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
@@ -48,7 +48,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
             >
               ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
               <span className="text-foreground/50">
-                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
+                per {formatMetricLabel(unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric)}
               </span>
             </span>
           )}
@@ -78,7 +78,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
             >
               ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
               <span className="text-foreground/50">
-                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
+                per {formatMetricLabel(unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric)}
               </span>
             </span>
           )}

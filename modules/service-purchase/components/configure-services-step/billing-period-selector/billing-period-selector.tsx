@@ -53,12 +53,12 @@ function BillingPeriodSelector() {
             <ToggleGroupItem
               key={cycle}
               value={cycle}
-              className="border-border data-[state=off]:bg-background data-[state=off]:text-foreground data-[state=off]:hover:bg-accent data-[state=on]:bg-accent data-[state=on]:text-foreground data-[state=on]:hover:bg-accent/80 flex h-9.5 flex-none cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm/5.5 font-normal"
+              className="group border-border data-[state=off]:bg-background data-[state=off]:text-foreground data-[state=off]:hover:bg-accent data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:border-primary data-[state=on]:hover:bg-primary/90 flex h-9.5 flex-none cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-sm/5.5 font-normal"
             >
               {PERIOD_LABELS[cycle]}
 
               {discountLabel && (
-                <span className="bg-primary text-primary-foreground border-accent rounded-full border px-2.5 py-0.5 text-xs font-medium">
+                <span className="bg-primary text-primary-foreground group-data-[state=on]:bg-primary-foreground group-data-[state=on]:text-primary rounded-full border border-transparent px-2.5 py-0.5 text-xs font-medium">
                   {discountLabel}
                 </span>
               )}

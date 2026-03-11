@@ -200,7 +200,16 @@ export function formatUsageLimit(
     return 'Unlimited'
   }
 
-  return `${limit.freeLimit}${limit.unitName ? ` ${limit.unitName}` : ''}`
+  const unit = limit.unitName?.replace(/^Number of /i, '') ?? ''
+  return `${limit.freeLimit}${unit ? ` ${unit}` : ''}`
+}
+
+/**
+ * Strips the "Number of " prefix from a metric name for display purposes.
+ * e.g. "Number of Invoices" → "Invoices"
+ */
+export function formatMetricLabel(metric: string): string {
+  return metric.replace(/^Number of /i, '')
 }
 
 export function buildServiceMetrics(
@@ -233,7 +242,7 @@ export function buildServiceMetrics(
       }
     }
 
-    return { metric, values, isOneTime }
+    return { metric: formatMetricLabel(metric), values, isOneTime }
   })
 }
 
