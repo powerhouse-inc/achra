@@ -57,24 +57,27 @@ export const getWaterfallAxisLabels = (granularity: AnalyticGranularity, isMobil
     case 'semiAnnual':
       return [isMobile ? '' : 'START', 'H1', 'H2', isMobile ? '' : 'FINISH']
     case 'monthly':
-      return [
-        isMobile ? 'S' : 'START',
-        'J',
-        'F',
-        'M',
-        'A',
-        'M',
-        'J',
-        'J',
-        'A',
-        'S',
-        'O',
-        'N',
-        'D',
-        isMobile ? 'F' : 'FINISH',
-      ]
+      if (!isMobile) {
+        return [
+          'START',
+          'JAN',
+          'FEB',
+          'MAR',
+          'APR',
+          'MAY',
+          'JUN',
+          'JUL',
+          'AUG',
+          'SEP',
+          'OCT',
+          'NOV',
+          'DEC',
+          'FINISH',
+        ]
+      }
+      return ['S', 'J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D', 'F']
     case 'quarterly':
-      return [isMobile ? '' : 'START', 'Q1', 'Q2', 'Q3', 'Q4', isMobile ? '' : 'FINISH']
+      return [isMobile ? '' : 'START', 'Q’1', 'Q’2', 'Q’3', 'Q’4', isMobile ? '' : 'FINISH']
     case 'weekly':
       return [isMobile ? '' : 'START', 'W1', 'W2', 'W3', 'W4', isMobile ? '' : 'FINISH']
     case 'daily':
@@ -84,22 +87,88 @@ export const getWaterfallAxisLabels = (granularity: AnalyticGranularity, isMobil
     case 'annual':
       return [isMobile ? '' : 'START', 'Year', isMobile ? '' : 'FINISH']
     default:
-      return [
-        isMobile ? 'S' : 'START',
-        'J',
-        'F',
-        'M',
-        'A',
-        'M',
-        'J',
-        'J',
-        'A',
-        'S',
-        'O',
-        'N',
-        'D',
-        isMobile ? 'F' : 'FINISH',
-      ]
+      if (!isMobile) {
+        return [
+          'START',
+          'JAN',
+          'FEB',
+          'MAR',
+          'APR',
+          'MAY',
+          'JUN',
+          'JUL',
+          'AUG',
+          'SEP',
+          'OCT',
+          'NOV',
+          'DEC',
+          'FINISH',
+        ]
+      }
+      return ['S', 'J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D', 'F']
+  }
+}
+
+interface ReservesWaterfallXAxisFormatterParams {
+  axisLabels: string[]
+  isMobileOrLess: boolean
+  year: string
+  value: string
+  index: number
+}
+
+export const formatterReservesWaterfallChart = ({
+  axisLabels,
+  isMobileOrLess,
+  year,
+  value,
+  index,
+}: ReservesWaterfallXAxisFormatterParams) => {
+  const isEdgeLabel = index === 0 || index === axisLabels.length - 1
+
+  if (isMobileOrLess) {
+    if (isEdgeLabel) return `{start|${value}}`
+    return `{month|${value}}`
+  }
+
+  const currentYear = Number.parseInt(year, 10)
+  const hasValidYear = Number.isFinite(currentYear)
+  const startYear = hasValidYear ? currentYear : year
+  const finishYear = hasValidYear ? currentYear + 1 : year
+
+  if (index === 0) return `{start|${value}}\n{startYear|${startYear}}`
+  if (isEdgeLabel) return `{start|${value}}\n{startYear|${finishYear}}`
+  return `{month|${value}}\n{year|${year}}`
+}
+
+export const getReservesWaterfallXAxisRichStyles = (isMobile: boolean) => {
+  const baseStyle = {
+    align: 'center' as const,
+    fontFamily: 'var(--font-open-sans-condensed)',
+    fontWeight: 700,
+    fontSize: isMobile ? 12 : 14,
+    lineHeight: isMobile ? 12 : 14,
+  }
+
+  return {
+    month: {
+      ...baseStyle,
+      padding: [0, 0, 3, 0],
+      color: 'color-mix(in srgb, var(--color-foreground) 70%, transparent)',
+    },
+    year: {
+      ...baseStyle,
+      color: 'color-mix(in srgb, var(--color-foreground) 70%, transparent)',
+    },
+    start: {
+      ...baseStyle,
+      padding: [0, 0, 3, 0],
+      color: 'var(--color-foreground)',
+    },
+    startYear: {
+      ...baseStyle,
+      color: 'var(--color-foreground)',
+    },
   }
 }
 
