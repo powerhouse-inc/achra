@@ -21,6 +21,7 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import { CatalogStatus } from '@/modules/service-purchase/types'
 import {
   ServiceCatalogBody,
   ServiceCatalogHeader,
@@ -55,6 +56,7 @@ function OptionGroupSection({ section, setupDiscountedPrices }: OptionGroupSecti
     <ServiceCatalogRoot isEnabled={!section.isAddOn || isAddOnSelected}>
       <ServiceCatalogHeader
         title={section.name}
+        badge={section.isAddOn ? CatalogStatus.Optional : undefined}
         hasToggle={section.isAddOn}
         toggleLabel={section.name}
         toggleEnabled={isAddOnSelected}

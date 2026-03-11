@@ -3,11 +3,14 @@
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { CatalogStatus } from '@/modules/service-purchase/types'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
+import { ServiceCatalogStatus } from '../../service-catalog-status'
 
 interface SectionHeaderProps {
   title: string
+  badge?: CatalogStatus
   hasToggle?: boolean
   toggleLabel?: string
   toggleEnabled?: boolean
@@ -22,6 +25,7 @@ interface SectionHeaderProps {
 
 function SectionHeader({
   title,
+  badge,
   hasToggle,
   toggleLabel,
   toggleEnabled = false,
@@ -66,29 +70,33 @@ function SectionHeader({
         {/* Title row */}
         <div className="flex items-center gap-2">
           {hasToggle ? (
-            <div className="flex items-center gap-2">
-              <Switch
-                checked={toggleEnabled}
-                onCheckedChange={onToggleChange}
-                onClick={(e) => {
-                  e.stopPropagation()
-                }}
-                id={`toggle-${title}`}
-                className="data-[state=checked]:bg-status-progress data-[state=unchecked]:bg-foreground/70"
-              />
-              <label
-                htmlFor={`toggle-${title}`}
-                className="text-foreground cursor-pointer text-base font-bold"
-                onClick={(e) => {
-                  e.stopPropagation()
-                }}
-              >
-                {toggleLabel ?? title}
-              </label>
+            <div className="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-2">
+              <div className="flex items-center gap-2">
+                <Switch
+                  checked={toggleEnabled}
+                  onCheckedChange={onToggleChange}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                  id={`toggle-${title}`}
+                  className="data-[state=checked]:bg-status-progress data-[state=unchecked]:bg-foreground/70"
+                />
+                <label
+                  htmlFor={`toggle-${title}`}
+                  className="text-foreground cursor-pointer text-base font-bold"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                  }}
+                >
+                  {toggleLabel ?? title}
+                </label>
+              </div>
+              {badge === CatalogStatus.Optional && <ServiceCatalogStatus catalogStatus={badge} />}
             </div>
           ) : (
-            <div className="text-foreground text-base font-bold lg:flex lg:items-center lg:gap-2">
+            <div className="text-foreground flex items-center gap-2 text-base font-bold">
               <span>{title}</span>
+              {badge === CatalogStatus.Optional && <ServiceCatalogStatus catalogStatus={badge} />}
             </div>
           )}
         </div>
@@ -133,7 +141,7 @@ function SectionHeader({
         <div
           key={plan}
           className={cn(
-            'border-input pointer-events-none relative hidden min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
+            'border-input pointer-events-none relative hidden h-full min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
