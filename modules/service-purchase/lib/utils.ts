@@ -201,7 +201,8 @@ export function formatUsageLimit(
   }
 
   const unit = limit.unitName?.replace(/^Number of /i, '') ?? ''
-  const displayUnit = unit && limit.freeLimit === 1 ? unit.replace(/s$/, '') : unit
+  const singularUnit = unit.replace(/s$/i, '')
+  const displayUnit = singularUnit ? `${singularUnit}(s)` : unit
   return `${limit.freeLimit}${displayUnit ? ` ${displayUnit}` : ''}`
 }
 
