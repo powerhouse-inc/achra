@@ -42,16 +42,17 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics[0] && (
+          {unitPriceMetrics.map((metric, index) => (
             <span
+              key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
+              ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
               <span className="text-foreground/50">
-                per {formatMetricLabel(unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric)}
+                per {formatMetricLabel(metric.unitName ?? metric.metric)}
               </span>
             </span>
-          )}
+          ))}
         </div>
       ) : (
         <div className="flex w-full flex-col items-center gap-0.5">
@@ -72,16 +73,17 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics[0] && (
+          {unitPriceMetrics.map((metric, index) => (
             <span
+              key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
+              ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
               <span className="text-foreground/50">
-                per {formatMetricLabel(unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric)}
+                per {formatMetricLabel(metric.unitName ?? metric.metric)}
               </span>
             </span>
-          )}
+          ))}
         </div>
       )}
     </label>
