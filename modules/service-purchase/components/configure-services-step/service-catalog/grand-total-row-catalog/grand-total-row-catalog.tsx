@@ -53,10 +53,10 @@ function GrandTotalRowCatalog({
   return (
     <div
       className={cn(
-        'bg-primary/10 items-center rounded-xl',
+        'bg-background border-primary/30 h-12 items-center rounded-xl border shadow-[0px_2px_10px_2px_rgba(122,58,255,0.2)]',
         'sticky bottom-0 z-20',
         'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
-        'overflow-hidden rounded-xl',
+        'overflow-hidden',
       )}
       style={
         {
@@ -68,7 +68,7 @@ function GrandTotalRowCatalog({
       {/* Label column - sticky on mobile */}
       <span
         className={cn(
-          'bg-primary/10 text-foreground flex min-h-18 items-center px-4 text-xl font-bold lg:px-6',
+          'bg-background text-foreground flex items-center px-4 text-lg/6 font-bold lg:px-6',
           'sticky left-0 z-10 lg:static',
         )}
       >
@@ -78,8 +78,8 @@ function GrandTotalRowCatalog({
       {/* Mobile: Show only current plan */}
       <div
         className={cn(
-          'flex min-h-18 min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
-          selectedPlan ? 'bg-primary/30' : '',
+          'flex h-full min-w-0 items-center justify-center px-4 transition-colors lg:hidden',
+          selectedPlan ? 'bg-primary/30' : 'bg-background',
         )}
       >
         <span
@@ -97,12 +97,12 @@ function GrandTotalRowCatalog({
           <div
             key={plan}
             className={cn(
-              'hidden min-h-18 min-w-0 items-center justify-center px-6 transition-colors lg:flex',
-              isActive && 'bg-primary/30',
+              'hidden h-full min-w-0 items-center justify-center px-6 transition-colors lg:flex',
+              isActive ? 'bg-primary/30' : 'bg-background',
             )}
           >
             <span
-              className={cn('text-xl font-bold', isActive ? 'text-primary' : 'text-foreground')}
+              className={cn('text-lg/6 font-bold', isActive ? 'text-primary' : 'text-foreground')}
             >
               {planTotals[plan]}
             </span>
