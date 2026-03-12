@@ -1,1 +1,1 @@
-export * from './reserves-waterfall-chart'
+export { ReservesWaterfallChart } from './reserves-waterfall-chart'

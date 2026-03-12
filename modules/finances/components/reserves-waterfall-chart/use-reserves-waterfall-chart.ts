@@ -1,8 +1,8 @@
 'use client'
 
+import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import { useMemo, useState } from 'react'
-import useSWRImmutable from 'swr/immutable'
 import {
   buildWaterfallSeries,
   getAnalyticForWaterfall,
@@ -61,16 +61,16 @@ function useReservesWaterfallChart({
     return titleLevelBudget === '' ? 'MakerDAO Finances' : titleLevelBudget
   }, [allBudgets, codePath])
 
-  const { data: analytics, isLoading } = useSWRImmutable(
-    [selectedGranularity, year, codePath, levelOfDetail],
-    async () =>
+  const { data: analytics, isLoading } = useQuery({
+    queryKey: ['reserves-waterfall-analytics', selectedGranularity, year, codePath, levelOfDetail],
+    queryFn: async () =>
       getFinancesReservesAnalytics({
         granularity: apiGranularityByValue[selectedGranularity],
         year,
         lod: levelOfDetail,
         budgets,
       }),
-  )
+  })
 
   const { summaryValues, totalToStartEachBudget } = useMemo(
     () => getAnalyticForWaterfall(budgets, selectedGranularity, analytics, allBudgets),
