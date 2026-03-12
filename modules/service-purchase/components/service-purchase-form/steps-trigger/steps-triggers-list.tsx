@@ -33,31 +33,50 @@ function StepsTriggersList() {
       {SERVICE_PURCHASE_STEPS_ENTRIES.map((step, index) => {
         const isActive = activeStep === step.value
         const isVisited = hasVisitedStep(step.value)
+        const isDisabled = isStepDisabled(step.value)
+        const isHoverable = !isActive && !isDisabled
 
         return (
           <Fragment key={step.value}>
             <TabsTrigger
               value={step.value}
               className={cn(
-                'md:border-border md:data-[state=active]:border-primary dark:md:data-[state=active]:border-primary flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 data-[state=active]:shadow-none md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl dark:data-[state=active]:bg-transparent dark:data-[state=active]:shadow-none',
-                isVisited && !isActive && 'md:border-primary/70 dark:md:border-primary/70',
+                // Colors & State
+                'group md:border-border md:data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none dark:data-[state=active]:bg-transparent',
+                isVisited && !isActive && 'md:border-primary/70 md:hover:border-primary/80',
+                !isVisited && isHoverable && 'md:hover:border-foreground/50',
+
+                // Layout, Sizing, Border
+                'flex h-8 w-8 flex-none items-center gap-0 overflow-hidden rounded-full border-none px-0 py-0 md:h-6.5 md:w-fit md:rounded-lg md:border-solid lg:h-10 2xl:h-12 2xl:rounded-xl',
+
+                // Disabled: override pointer-events and cursor-pointer so not-allowed is visible on hover
+                'disabled:pointer-events-auto disabled:cursor-not-allowed!',
+                isDisabled && isVisited && !isActive && 'md:group-hover:border-primary/70',
               )}
-              disabled={isStepDisabled(step.value)}
+              disabled={isDisabled}
             >
               <div
                 className={cn(
-                  'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold md:w-fit md:rounded-l-lg md:rounded-r-none lg:p-2.75 lg:text-base/6 2xl:rounded-l-xl 2xl:p-3 2xl:text-lg/6',
+                  'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold transition-colors md:w-fit md:rounded-l-lg md:rounded-r-none lg:p-2.75 lg:text-base/6 2xl:rounded-l-xl 2xl:p-3 2xl:text-lg/6',
                   isActive && 'bg-primary text-primary-foreground',
-                  isVisited && !isActive && 'bg-primary/70 text-primary-foreground',
+                  isVisited &&
+                    !isActive &&
+                    'bg-primary/70 text-primary-foreground group-hover:bg-primary/80 group-hover:text-primary-foreground group-disabled:group-hover:bg-primary/70 group-disabled:group-hover:text-primary-foreground',
+                  !isVisited &&
+                    isHoverable &&
+                    'group-hover:bg-foreground/50 group-hover:text-foreground/60',
                 )}
               >
                 {index + 1}
               </div>
               <div
                 className={cn(
-                  'text-foreground/50 hidden h-full items-center gap-1 rounded-r-lg px-1 md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
+                  'text-foreground/50 hidden h-full items-center gap-1 rounded-r-lg px-1 transition-colors md:flex xl:px-2 2xl:gap-2 2xl:rounded-r-xl 2xl:px-3',
                   isActive && 'text-primary',
-                  isVisited && !isActive && 'text-primary/70',
+                  isVisited &&
+                    !isActive &&
+                    'text-primary/70 group-hover:text-primary/80 group-disabled:group-hover:text-primary/70',
+                  !isVisited && isHoverable && 'group-hover:text-foreground/60',
                 )}
               >
                 {STEP_ICONS[step.value]}
