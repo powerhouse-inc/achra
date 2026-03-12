@@ -50,7 +50,7 @@ function ReservesWaterfallChartFilters({
           value={selectedCategoryOptions}
           onChange={handleCategoriesChange}
           placeholder="All Categories"
-          className="bg-background min-w-60"
+          className="bg-background max-w-72 min-w-72"
           enableSelectAll
           selectAllLabel="All Categories"
         />

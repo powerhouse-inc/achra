@@ -1,6 +1,6 @@
 import { ATLAS_BUDGETS, BUDGETS } from '@/modules/finances/mocks'
-import { ReservesWaterfallChart } from './reserves-waterfall-chart'
 
+import { ReservesWaterfallChart } from '../reserves-waterfall-chart'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
