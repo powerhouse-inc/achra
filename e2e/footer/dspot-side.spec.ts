@@ -39,5 +39,5 @@ test('has a link for Powerhouse', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    await expect(newTab).toHaveURL('https://www.powerhouse.inc/');
+    await expect(newTab).toHaveURL('https://powerhouse.io/');
 });
