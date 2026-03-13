@@ -63,3 +63,7 @@ chromatic-diagnostics.json
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Confidence index (local state, created/updated by test runs)
+e2e/confidence-index/.confidence-index.json
+e2e/confidence-index/.confidence-index.benchmark-backup.json

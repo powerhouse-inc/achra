@@ -12,7 +12,9 @@
     "format:check": "prettier --check .",
     "codegen": "graphql-codegen --config codegen.ts",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test:e2e": "node e2e/confidence-index/run.js",
+    "test:e2e:all": "playwright test --project=desktop-chrome"
   },
   "dependencies": {
     "@date-fns/utc": "^2.1.1",
