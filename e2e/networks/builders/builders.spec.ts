@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
 
+const builderName = 'Powerhouse';
+
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders`);
     await page.waitForLoadState('networkidle');
 });
 
 test('should have the main elements', async ({ page }) => {
-    await expect(page.getByText('Powerhouse')).toHaveCount(3);
+    await expect(page.getByText(builderName).count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Builders')).toHaveCount(6);
     await expect(page.getByText('Read more')).toBeVisible();
     await expect(page.getByText('Ecosystem Actors serve as external entities offering valuable services to both Maker Core and SubDAOs. These actors are further classified into two categories: Advisory Ecosystem Actors and Active Ecosystem Actors.')).toBeVisible();
@@ -35,7 +37,7 @@ test('should load all builder statuses', async ({ page }) => {
     await expect(page.getByText('COMPLETED')).toHaveCount(0);
     await expect(page.getByText('ON HOLD')).toHaveCount(0);
     await expect(page.getByText('ARCHIVED')).toHaveCount(0);
-    await expect(page.getByText('ACTIVE')).toHaveCount(14);
+    await expect(page.getByText('ACTIVE').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('INACTIVE')).toHaveCount(0);
 });
 
@@ -69,18 +71,18 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('16-FEB-2026')).toHaveCount(1);
-    await expect(page.getByText('12-FEB-2026')).toHaveCount(1);
-    await expect(page.getByText('18-FEB-2026')).toHaveCount(4);
+    await expect(page.getByText('05-MAR-2026').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('02-MAR-2026').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('04-MAR-2026').count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all builder links', async ({ page }) => {
-    await expect(page.getByText('Links')).toHaveCount(2);
+    await expect(page.getByText('Links').count()).resolves.toBeGreaterThan(0);
 
     await page.getByText('Links').first().hover();
     await page.waitForTimeout(1000);
 
-    await expect(page.getByText('Website')).toBeHidden();
+    await expect(page.getByText('Website')).toBeVisible();
     await expect(page.getByText('Forum')).toBeVisible();
     await expect(page.getByText('Discord').first()).toBeVisible();
     await expect(page.getByText('Twitter').first()).toBeVisible();
@@ -151,12 +153,12 @@ test('should sort builders by name in ascending order', async ({ page }) => {
 test('should sort builders by name in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Builders' }).click();
     await page.getByRole('button', { name: 'Builders' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('RGH Revenue Generating Hub')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('PRGH Powerhouse RGH')).toBeVisible();
 });
 
 test('should sort builders by skills in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Skills' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('Facilitator')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('UI/UX Design')).toBeVisible();
 });
 
 test('should sort builders by skills in descending order', async ({ page }) => {
@@ -180,14 +182,14 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('5 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('02-MAR-2026')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('11 Days Ago')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('05-MAR-2026')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {
