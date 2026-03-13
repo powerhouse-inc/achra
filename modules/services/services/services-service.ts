@@ -17,7 +17,9 @@ export async function getServices(operatorId?: string): Promise<Service[]> {
   return data.resourceTemplates
     .filter(
       (service) =>
-        service.status !== RsTemplateStatus.Draft && service.status !== RsTemplateStatus.Deprecated,
+        service.operatorId?.trim() &&
+        service.status !== RsTemplateStatus.Draft &&
+        service.status !== RsTemplateStatus.Deprecated,
     )
     .sort((a, b) => (STATUS_PRIORITY[a.status] ?? 2) - (STATUS_PRIORITY[b.status] ?? 2))
 }

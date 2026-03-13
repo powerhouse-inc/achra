@@ -20,7 +20,8 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
   const { serviceSlug } = await params
   const resourceTemplate = await getResourceTemplate({ id: serviceSlug })
 
-  if (!resourceTemplate) {
+  if (!resourceTemplate?.operatorId?.trim()) {
+    // it is required a resource template to have an operatorId
     notFound()
   }
 
