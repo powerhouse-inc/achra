@@ -3,6 +3,7 @@
 import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { TitleSectionFinances } from '../title-section-finances'
 import { BreakdownTableFilters } from './breakdown-table-filters'
+import { TableBody } from './table-body'
 import { TableHeader } from './table-header'
 import { useBreakdownTable } from './use-breakdown-table'
 
@@ -10,7 +11,8 @@ function BreakdownTable() {
   const { year } = useFinancesYear()
   const range = `Jan - Dec ${year}`
 
-  const { isLoading, selectedGranularity, tableHeader, activeMetrics } = useBreakdownTable()
+  const { isLoading, selectedGranularity, tableHeader, tableBody, activeMetrics } =
+    useBreakdownTable()
 
   return (
     <div>
@@ -37,6 +39,15 @@ function BreakdownTable() {
               activeMetrics={activeMetrics}
             />
           </div>
+          {tableBody && (
+            <div className="mt-4 flex flex-col gap-4 xl:mt-2 xl:gap-2">
+              <TableBody
+                tableBody={tableBody}
+                activeMetrics={activeMetrics}
+                granularity={selectedGranularity}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

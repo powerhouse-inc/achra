@@ -5,7 +5,7 @@ import groupBy from 'lodash/groupBy'
 import { useMemo } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useFinancesYear } from '../../hooks/use-finaces-year'
-import { BUDGETS } from '../../mocks'
+import { BUDGETS, FIRST_LEVEL_BUDGETS } from '../../mocks'
 import { analyticsMonthlyForBreakdownTable } from '../../mocks/analytics-monthly-for-breakdown-table'
 import type {
   Analytic,
@@ -63,7 +63,7 @@ function useBreakdownTable() {
   const { year } = useFinancesYear()
 
   const allBudgets = BUDGETS // TODO: fetch budgets from the API
-  const budgets = BUDGETS // TODO: fetch budgets from the API
+  const budgets = FIRST_LEVEL_BUDGETS // TODO: fetch budgets from the API
 
   // breakpoints
   const isMobile = useMediaQuery({ to: 'md' })
@@ -84,7 +84,7 @@ function useBreakdownTable() {
       : ['Annually', 'Quarterly', 'Monthly']
 
   const selectedGranularity = 'monthly' as AnalyticGranularity // FIXME: hardcoded for now
-  const activeMetrics = ['Actuals', 'Budget'] // FIXME: hardcoded for now
+  const activeMetrics = ['Actuals'] // FIXME: hardcoded for now
 
   const maxAmountOfActiveMetrics = 2 // TODO: implement the max amount of active metrics depending on the breakpoint
 
