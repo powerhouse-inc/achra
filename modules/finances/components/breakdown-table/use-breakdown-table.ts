@@ -6,7 +6,11 @@ import { useMemo } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useFinancesYear } from '../../hooks/use-finaces-year'
 import { BUDGETS, FIRST_LEVEL_BUDGETS } from '../../mocks'
-import { analyticsMonthlyForBreakdownTable } from '../../mocks/analytics-monthly-for-breakdown-table'
+import {
+  ANNUAL_ANALYTICS_MOCK,
+  MONTHLY_ANALYTICS_MOCK,
+  QUARTERLY_ANALYTICS_MOCK,
+} from '../../mocks/breakdown-table-analytics'
 import type {
   Analytic,
   AnalyticGranularity,
@@ -90,7 +94,7 @@ function useBreakdownTable() {
 
   // TODO: implement the data fetching, hardcoded for now to simulate the data fetching response
   const error = null as Error | null
-  const analytics = analyticsMonthlyForBreakdownTable as Analytic | null
+  const analytics = MONTHLY_ANALYTICS_MOCK as Analytic | null
 
   const [tableHeader, tableBody] = useMemo(() => {
     // occurred an error or the data is loading
