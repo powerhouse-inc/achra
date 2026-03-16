@@ -9,11 +9,11 @@ import {
 import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import {
   useAllOptionGroups,
+  useFacets,
   usePurchaseTotals,
   useSelectedBillingCycle,
   useSelectedTier,
   useServiceOffering,
-  useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
@@ -26,7 +26,7 @@ interface SummaryCardProps {
 }
 
 function SummaryCard({ templateTitle }: SummaryCardProps) {
-  const { facets } = useServicePurchaseState()
+  const facets = useFacets()
   const totals = usePurchaseTotals()
   const optionGroups = useAllOptionGroups()
   const offering = useServiceOffering()
@@ -78,7 +78,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
   }, [optionGroups, offering, selectedTier.id, selectedBillingCycle])
 
   return (
-    <Card className="mx-auto w-full max-w-218.5 border-none p-0!">
+    <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
       <SummaryCardHeader templateTitle={templateTitle} />
 
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">

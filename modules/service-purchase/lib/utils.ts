@@ -45,6 +45,29 @@ export function formatPrice(amount: number, currency?: string | null): string {
   return `${getCurrencySymbol(currency)}${amount.toLocaleString()}`
 }
 
+export interface FormatSummaryPriceOptions {
+  amount: number
+  /** Whether this is recurring pricing (adds suffix when applicable) */
+  isRecurring: boolean
+  /** Suffix for recurring prices (e.g. "/mo"). Defaults to "/mo" */
+  suffix?: string
+  /** When true and recurring, show "Custom" instead of amount */
+  isCustomPricing?: boolean
+  /** Currency for formatPrice */
+  currency?: string | null
+}
+
+/**
+ * Formats a price for display in the service purchase summary.
+ * Handles "Free" for zero, "Custom" for custom pricing, and recurring/one-time suffixes.
+ */
+export function formatSummaryPrice(options: FormatSummaryPriceOptions): string {
+  const { amount, isRecurring, suffix = '/mo', isCustomPricing = false, currency } = options
+  if (isCustomPricing && isRecurring) return CUSTOM_PRICING_LABEL
+  if (amount === 0) return 'Free'
+  return isRecurring ? `${formatPrice(amount, currency)}${suffix}` : formatPrice(amount, currency)
+}
+
 /**
  * Returns the number of months in a billing cycle.
  * Used to compute period totals for discount calculations.

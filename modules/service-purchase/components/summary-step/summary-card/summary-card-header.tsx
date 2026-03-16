@@ -7,6 +7,7 @@ import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
 } from '@/modules/service-purchase/lib/sticky-observer-utils'
+import { formatSummaryPrice } from '@/modules/service-purchase/lib/utils'
 import {
   usePurchaseTotals,
   useSelectedBillingCycle,
@@ -72,11 +73,18 @@ function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">
           <div className="flex flex-col items-end sm:flex-row sm:items-baseline sm:gap-2">
-            <span className="text-foreground text-sm/5.5 font-bold lg:text-base/6">
-              {selectedTier.name}
-            </span>
+            {!(selectedTier.name === 'Custom' && selectedTier.isCustomPricing) && (
+              <span className="text-foreground text-sm/5.5 font-bold lg:text-base/6">
+                {selectedTier.name}
+              </span>
+            )}
             <span className="text-primary text-base/6 font-semibold lg:leading-7">
-              {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
+              {formatSummaryPrice({
+                amount: totals.recurringTotal,
+                isRecurring: true,
+                suffix: '/mo',
+                isCustomPricing: selectedTier.isCustomPricing,
+              })}
             </span>
           </div>
           <span className="text-foreground text-xs/4.5 font-medium">
