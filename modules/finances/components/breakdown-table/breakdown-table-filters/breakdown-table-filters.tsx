@@ -38,7 +38,7 @@ function BreakdownTableFilters({
   }
 
   const handleDrawerMetricsChange = (values: string[]) => {
-    setMetrics(values as Array<METRIC_OPTIONS>)
+    setMetrics(values as METRIC_OPTIONS[])
   }
 
   const handleDrawerGranularityChange = (value: string) => {
