@@ -44,6 +44,7 @@ function ReservesWaterfallChartInternal({
     isLoading,
     series,
     selectedGranularity,
+    selectedGranularityFilter,
     setSelectedGranularity,
     granularityOptions,
     categoryOptions,
@@ -58,11 +59,7 @@ function ReservesWaterfallChartInternal({
     year,
   })
 
-  const selectedGranularityLabel = granularityOptions.find(
-    (option) => option.value === selectedGranularity,
-  )?.label
-
-  const granularityLabels = granularityOptions.map((option) => option.label)
+  const granularityValues = granularityOptions.map((option) => option.value)
 
   return (
     <Card className="bg-popover flex w-full flex-col gap-4 border-none p-2 pb-4 shadow-xs md:gap-6 md:p-4 lg:px-6 lg:pb-6">
@@ -74,10 +71,10 @@ function ReservesWaterfallChartInternal({
           range={`Jan - Dec ${year}`}
         />
         <ReservesWaterfallChartFilters
-          granularityValue={selectedGranularityLabel}
-          granularityOptions={granularityLabels}
-          onGranularityChange={(selectedLabel) => {
-            const option = granularityOptions.find((item) => item.label === selectedLabel)
+          granularityValue={selectedGranularityFilter}
+          granularityOptions={granularityValues}
+          onGranularityChange={(selectedValue) => {
+            const option = granularityOptions.find((item) => item.value === selectedValue)
             if (option) {
               setSelectedGranularity(option.value)
             }

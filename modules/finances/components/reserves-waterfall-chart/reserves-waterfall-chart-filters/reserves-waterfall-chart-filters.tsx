@@ -1,5 +1,6 @@
 'use client'
 
+import type { GRANULARITY_OPTIONS } from '@/modules/finances/types'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { DrawerSelect, FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
@@ -7,9 +8,9 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 
 interface ReservesWaterfallChartFiltersProps {
-  granularityValue?: string
-  granularityOptions: string[]
-  onGranularityChange: (selectedLabel: string) => void
+  granularityValue?: GRANULARITY_OPTIONS
+  granularityOptions: GRANULARITY_OPTIONS[]
+  onGranularityChange: (selectedValue: string) => void
   categoryOptions: Option[]
   selectedCategoryOptions: Option[]
   setActiveElements: (values: string[] | null) => void
