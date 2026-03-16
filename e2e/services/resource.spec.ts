@@ -1,37 +1,38 @@
 import { test, expect } from '@playwright/test';
 
+const SERVICE_UUID = 'c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8';
+
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/sno-embryonic-hub`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/${SERVICE_UUID}`);
+    await page.waitForLoadState('networkidle');
 });
 
-// NOTE: This resource (sno-embryonic-hub) no longer exists in the application (404 Page not found as of 2026-03-16)
-// The test should be updated or removed once the new resource structure is confirmed
-test.skip('should contain all elements', async ({ page }) => {
-    await expect(page.getByText('SNO Embryonic Hub')).toBeVisible();
-    await expect(page.getByText('Founders')).toBeVisible();
-    await expect(page.getByText('SNO Governors')).toBeVisible();
+test('should contain main elements', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Operational Hub' })).toBeVisible();
+    await expect(page.getByText('A turnkey legal and operational setup for open-source builder teams')).toBeVisible();
 
-    await expect(page.getByText('Formation & Setup')).toBeVisible();
-    await expect(page.getByText('Recurring Services')).toBeVisible();
-
-    await expect(page.getByText('Legal needs analysis').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Entity incorporation').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Payment processor setup').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Contributor on-boarding').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Wind-down planning').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Contracts administration').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Payment processing').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Transparency reporting').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Tax administration & filing').count()).resolves.toBeGreaterThanOrEqual(1);
-
-    await expect(page.getByText('Accountable OPC').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Powerhouse Genesis OH').count()).resolves.toBeGreaterThanOrEqual(1);
-
-    await expect(page.getByText('Accountable').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Budgeting').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Forecasting').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByRole('link', { name: /Book a Call/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Purchase/i })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Self Assessment Checklist/i }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'FAQ' }).first()).toBeVisible();
 });
 
-test.skip('should contain 1 purchase button', async ({ page }) => {
-    await expect(page.getByText('Purchase')).toHaveCount(1);
+test('should contain accordion sections', async ({ page }) => {
+    await expect(page.getByText('Why a Swiss Association?')).toBeVisible();
+    await expect(page.getByText(/What.s Included/i)).toBeVisible();
+    await expect(page.getByText('Privacy & Liability Protection')).toBeVisible();
+});
+
+test('should contain the Purchase section with an operator', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Purchase' })).toBeVisible();
+    await expect(page.getByText('Powerhouse').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByRole('link', { name: /Configure Services/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /More Info/i })).toBeVisible();
+});
+
+test('should contain the FAQ section', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'FAQ' })).toBeVisible();
+    await expect(page.getByText('What is an Operational Hub?')).toBeVisible();
+    await expect(page.getByText('Who is this for?')).toBeVisible();
+    await expect(page.getByText('How does setup work?')).toBeVisible();
 });
