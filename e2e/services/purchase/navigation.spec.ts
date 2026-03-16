@@ -53,3 +53,27 @@ test('should mark completed steps when advancing through the flow', async ({ pag
     await page.waitForTimeout(1500);
     await expect(page).toHaveURL(`${BASE_URL}?step=summary`);
 });
+
+test('should advance from summary to confirmation after submitting the form', async ({ page }) => {
+    await page.goto(BASE_URL);
+    await page.waitForLoadState('networkidle');
+
+    await page.getByText('Select Operator').click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Configure Services' }).click();
+    await page.waitForTimeout(1500);
+    await page.getByRole('button', { name: 'Continue' }).last().click();
+    await page.waitForTimeout(1500);
+
+    const ts = Date.now();
+    await page.getByRole('textbox', { name: 'Name', exact: true }).fill(`tester-${ts}`);
+    await page.getByRole('textbox', { name: /Team Name/i }).fill(`test-team-${ts}`);
+    await page.getByRole('textbox', { name: 'Email' }).fill(`test+${ts}@test.com`);
+    await page.getByRole('button', { name: /Submit Request/i }).click();
+    await page.waitForTimeout(4000);
+
+    await expect(page).toHaveURL(`${BASE_URL}?step=confirmation`);
+    await expect(
+        page.getByText(/Request Successfully Sent/i).or(page.getByText(/Thank you/i)).first()
+    ).toBeVisible();
+});
