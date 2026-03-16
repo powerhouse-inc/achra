@@ -17,12 +17,11 @@ test('should load the list of operators', async ({ page }) => {
     await expect(page.getByText('Powerhouse').count()).resolves.toBeGreaterThanOrEqual(1);
     await expect(page.getByText('Powerhouse is a team bringing a decentralized operations toolkit for open organizations')).toBeVisible();
 
-    // NOTE: These metadata fields and the Configure Services button may no longer exist in the current page design (as of 2026-03-16)
-    // await expect(page.getByText('Last Active')).toBeVisible();
-    // await expect(page.getByText('FEB 2026')).toBeVisible();
-    // await expect(page.getByText('Status')).toBeVisible();
-    // await expect(page.getByText('Active').count()).resolves.toBeGreaterThanOrEqual(1);
-    // await expect(page.getByText('Team Size')).toBeVisible();
-    // await expect(page.getByText('16 contributors')).toBeVisible();
-    await expect(page.getByText('Configure Services').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByText('Last Active')).toBeVisible();
+    await expect(page.getByText('Status')).toBeVisible();
+    await expect(page.getByText('Active').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByText('Team Size')).toBeVisible();
+    await expect(page.getByText('16 contributors')).toBeVisible();
+
+    await expect(page.getByRole('button', { name: /Configure Services/i })).toBeVisible();
 });

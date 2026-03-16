@@ -3,35 +3,39 @@ import { test, expect } from '@playwright/test';
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8/purchase`);
     await page.waitForLoadState('networkidle');
-    // Navigate to Summary tab (tab 4)
-    await page.getByRole('tab', { name: /Summary/i }).click();
+
+    await page.getByText('Select Operator').click();
     await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Configure Services' }).click();
+    await page.waitForTimeout(1500);
+    await page.getByRole('button', { name: 'Continue' }).last().click();
+    await page.waitForTimeout(1500);
 });
 
-// NOTE: The Summary tab requires completing previous steps (Select Operator, Configure Services) first
-// The tab is disabled by default in the new multi-step flow - skipping until E2E flow is implemented
-test.skip('should load the section main content', async ({ page }) => {
-    // NOTE: The operator avatar/initials may not be visible if the page structure changed
-    // await expect(page.getByText('PW')).toBeVisible();
-    await expect(page.getByText('Powerhouse')).toBeVisible();
+test('should load the operator and service info', async ({ page }) => {
+    await expect(page.getByText('Powerhouse').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByRole('heading', { name: 'Operational Hub' })).toBeVisible();
+    await expect(page.getByText('RESOURCE TEMPLATE')).toBeVisible();
 });
 
-// NOTE: The Summary tab requires completing previous steps (Select Operator, Configure Services) first
-test.skip('should load the summary data area', async ({ page }) => {
-    await expect(page.getByText('Operational Hub for Open Source Builders').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('Resource Template')).toBeVisible();
-    await expect(page.getByText('$550/mo').count()).resolves.toBeGreaterThanOrEqual(1);
-    await expect(page.getByText('+ $3000 Setup')).toBeVisible();
-
+test('should load the configuration values', async ({ page }) => {
     await expect(page.getByText('SNO Function')).toBeVisible();
     await expect(page.getByText('Legal Entity')).toBeVisible();
     await expect(page.getByText('Swiss Association')).toBeVisible();
-    await expect(page.getByText('Team').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByText('Team', { exact: true }).first()).toBeVisible();
     await expect(page.getByText('Remote')).toBeVisible();
     await expect(page.getByText('Anonymity')).toBeVisible();
-    await expect(page.getByText('Highest')).toBeVisible();
+});
 
-    await expect(page.getByText('Tier & Included Services')).toBeVisible();
-    await expect(page.getByText('Selected Add-ons')).toBeVisible();
-    await expect(page.getByText('Pricing Breakdown')).toBeVisible();
+test('should load the pricing summary', async ({ page }) => {
+    await expect(page.getByText('PRICING SUMMARY').count()).resolves.toBeGreaterThanOrEqual(1);
+    await expect(page.getByText('Entity & Compliance Foundation')).toBeVisible();
+    await expect(page.getByText('$3,000')).toBeVisible();
+});
+
+test('should load the submission form', async ({ page }) => {
+    await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toBeVisible();
+    await expect(page.getByRole('textbox', { name: /Team Name/i })).toBeVisible();
+    await expect(page.getByRole('textbox', { name: 'Email' })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Submit Request/i })).toBeVisible();
 });

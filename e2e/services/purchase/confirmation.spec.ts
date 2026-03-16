@@ -1,39 +1,47 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8/purchase`);
+const UUID = 'c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8';
+
+async function navigateToSummary(page: any) {
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/${UUID}/purchase`);
+    await page.waitForLoadState('networkidle');
+    await page.getByText('Select Operator').click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button', { name: 'Configure Services' }).click();
+    await page.waitForTimeout(1500);
+    await page.getByRole('button', { name: 'Continue' }).last().click();
+    await page.waitForTimeout(1500);
+}
+
+test('should show confirmation after submitting the form', async ({ page }) => {
+    await navigateToSummary(page);
+
+    const ts = Date.now();
+    await page.getByRole('textbox', { name: 'Name', exact: true }).fill(`tester-${ts}`);
+    await page.getByRole('textbox', { name: /Team Name/i }).fill(`test-team-${ts}`);
+    await page.getByRole('textbox', { name: 'Email' }).fill(`test+${ts}@test.com`);
+    await page.getByRole('button', { name: /Submit Request/i }).click();
+    await page.waitForTimeout(4000);
+
+    await expect(
+        page.getByText(/Request Successfully Sent/i).or(page.getByText(/Thank you/i)).first()
+    ).toBeVisible();
 });
 
-// NOTE: This test navigates to Confirmation tab but may require completing previous steps in the flow
-// The confirmation flow appears to have changed - skipping until the new UX is confirmed
-test.skip('should load the section main content without provided data', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
-    await page.getByText('Confirmation').click();
-    await page.waitForTimeout(2000);
+test('should show confirmation message with submitted email', async ({ page }) => {
+    await navigateToSummary(page);
 
-    await expect(page.getByText('Request Successfully Sent!').or(page.getByText('Thank you'))).toBeVisible();
-    await expect(page.getByText('We will contact you shortly to schedule an introduction meeting!').or(page.getByText('We have emailed the summary to'))).toBeVisible();
-});
+    const ts = Date.now();
+    const email = `test+${ts}@test.com`;
+    await page.getByRole('textbox', { name: 'Name', exact: true }).fill(`tester-${ts}`);
+    await page.getByRole('textbox', { name: /Team Name/i }).fill(`test-team-${ts}`);
+    await page.getByRole('textbox', { name: 'Email' }).fill(email);
+    await page.getByRole('button', { name: /Submit Request/i }).click();
+    await page.waitForTimeout(4000);
 
-// NOTE: This test submits a form in the Summary tab but may require completing previous steps
-// The confirmation flow appears to have changed - skipping until the new UX is confirmed
-test.skip('should load the data provided in the previous step', async ({ page }) => {
-    const name = 'tester';
-    const team = 'test team';
-    const email = 'test@test.com';
-
-    await page.waitForLoadState('networkidle');
-    await page.getByText('Summary').click();
-    await page.waitForTimeout(2000);
-
-    await page.locator('#submit-request-name').fill(name);
-    await page.locator('#submit-request-team-name').fill(team);
-    await page.locator('#submit-request-email').fill(email);
-    await page.getByText('Submit Request').click();
-    await page.waitForTimeout(2000);
-
-    await expect(page.getByText(`Thank you ${name}!`).or(page.getByText('Thank you'))).toBeVisible();
-    await expect(page.getByText(`We have emailed the summary to ${email}`).or(page.getByText('We have emailed the summary to'))).toBeVisible();
+    await expect(
+        page.getByText(new RegExp(email, 'i')).or(page.getByText(/emailed the summary/i))
+    ).toBeVisible();
 });
 
 test('should load empty state for unexisting service', async ({ page }) => {
