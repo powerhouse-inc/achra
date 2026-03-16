@@ -2,7 +2,12 @@
 
 import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
-import { useMemo, useState } from 'react'
+import { useQueryState } from 'nuqs'
+import { useMemo } from 'react'
+import {
+  reservesCategoriesParser,
+  reservesGranularityParser,
+} from '@/modules/finances/lib/finances-reserves-chart-search-params'
 import {
   buildWaterfallSeries,
   getAnalyticForWaterfall,
@@ -15,21 +20,21 @@ import type { Option } from '@/modules/shared/components/form/multiselect'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { getFinancesReservesAnalytics } from '../../services/finances-reserves-chart'
 
-const DEFAULT_GRANULARITY = 'monthly'
+const DEFAULT_GRANULARITY = GRANULARITY_OPTIONS.Monthly
 
 const granularityOptions = [
-  { label: 'Monthly', value: 'monthly' },
-  { label: 'Quarterly', value: 'quarterly' },
-  { label: 'Annually', value: 'annual' },
+  { label: GRANULARITY_OPTIONS.Monthly, value: GRANULARITY_OPTIONS.Monthly },
+  { label: GRANULARITY_OPTIONS.Quarterly, value: GRANULARITY_OPTIONS.Quarterly },
+  { label: GRANULARITY_OPTIONS.Annually, value: GRANULARITY_OPTIONS.Annually },
 ] as const
 
 const apiGranularityByValue: Record<
   (typeof granularityOptions)[number]['value'],
-  GRANULARITY_OPTIONS
+  'monthly' | 'quarterly' | 'annual'
 > = {
-  monthly: GRANULARITY_OPTIONS.Monthly,
-  quarterly: GRANULARITY_OPTIONS.Quarterly,
-  annual: GRANULARITY_OPTIONS.Annually,
+  [GRANULARITY_OPTIONS.Monthly]: 'monthly',
+  [GRANULARITY_OPTIONS.Quarterly]: 'quarterly',
+  [GRANULARITY_OPTIONS.Annually]: 'annual',
 }
 
 interface UseReservesWaterfallChartParams {
@@ -49,11 +54,17 @@ function useReservesWaterfallChart({
   const isTablet = useMediaQuery({ from: 'sm', to: 'lg' })
   const isDesktop1024 = useMediaQuery({ from: 'lg', to: 'xl' })
 
-  const [activeElements, setActiveElements] = useState<string[] | null>(null)
-  const [selectedGranularity, setSelectedGranularity] =
-    useState<(typeof granularityOptions)[number]['value']>(DEFAULT_GRANULARITY)
+  const [selectedGranularity, setSelectedGranularity] = useQueryState(
+    'reservesGranularity',
+    reservesGranularityParser,
+  )
+  const [activeElements, setActiveElements] = useQueryState(
+    'reservesCategories',
+    reservesCategoriesParser,
+  )
 
   const levelOfDetail = codePath.split('/').length + 1
+  const granularityApiValue = apiGranularityByValue[selectedGranularity]
 
   const titleChart = useMemo(() => {
     const levelBudget = allBudgets.find((budget) => budget.codePath === codePath)
@@ -65,7 +76,7 @@ function useReservesWaterfallChart({
     queryKey: ['reserves-waterfall-analytics', selectedGranularity, year, codePath, levelOfDetail],
     queryFn: async () =>
       getFinancesReservesAnalytics({
-        granularity: apiGranularityByValue[selectedGranularity],
+        granularity: selectedGranularity,
         year,
         lod: levelOfDetail,
         budgets,
@@ -73,15 +84,19 @@ function useReservesWaterfallChart({
   })
 
   const { summaryValues, totalToStartEachBudget } = useMemo(
-    () => getAnalyticForWaterfall(budgets, selectedGranularity, analytics, allBudgets),
-    [allBudgets, analytics, budgets, selectedGranularity],
+    () => getAnalyticForWaterfall(budgets, granularityApiValue, analytics, allBudgets),
+    [allBudgets, analytics, budgets, granularityApiValue],
   )
 
   const selectAll = useMemo(() => Array.from(summaryValues.keys()), [summaryValues])
-  const selectedElements = activeElements ?? selectAll
+  const activeElementsFiltered = useMemo(
+    () => activeElements.filter((element) => selectAll.includes(element)),
+    [activeElements, selectAll],
+  )
+  const selectedElements = activeElementsFiltered.length > 0 ? activeElementsFiltered : selectAll
 
   const series = useMemo(() => {
-    const valuesToShow = sumValuesFromMapKeys(summaryValues, selectedElements, selectedGranularity)
+    const valuesToShow = sumValuesFromMapKeys(summaryValues, selectedElements, granularityApiValue)
     const dataReady = processDataForWaterfall(
       valuesToShow,
       selectedElements,
@@ -93,7 +108,7 @@ function useReservesWaterfallChart({
     isMobile,
     isTablet,
     selectedElements,
-    selectedGranularity,
+    granularityApiValue,
     summaryValues,
     totalToStartEachBudget,
   ])
@@ -116,25 +131,32 @@ function useReservesWaterfallChart({
   const selectedCategoryOptions = categoryOptions.filter((item) =>
     selectedElements.includes(item.value),
   )
-  const canReset =
-    selectedGranularity !== DEFAULT_GRANULARITY ||
-    (activeElements !== null && activeElements.length !== selectAll.length)
+  const canReset = selectedGranularity !== DEFAULT_GRANULARITY || activeElements.length > 0
 
   const onReset = () => {
-    setSelectedGranularity(DEFAULT_GRANULARITY)
-    setActiveElements(null)
+    void setSelectedGranularity(null)
+    void setActiveElements(null)
+  }
+
+  const onSetSelectedGranularity = (value: (typeof granularityOptions)[number]['value']) => {
+    void setSelectedGranularity(value)
+  }
+
+  const onSetActiveElements = (values: string[] | null) => {
+    void setActiveElements(values)
   }
 
   return {
     titleChart,
     isLoading,
     series,
-    selectedGranularity,
-    setSelectedGranularity,
+    selectedGranularity: granularityApiValue,
+    selectedGranularityFilter: selectedGranularity,
+    setSelectedGranularity: onSetSelectedGranularity,
     granularityOptions,
     categoryOptions,
     selectedCategoryOptions,
-    setActiveElements,
+    setActiveElements: onSetActiveElements,
     canReset,
     onReset,
   }

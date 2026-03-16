@@ -7,13 +7,13 @@ import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/
 import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
 import { NavigationCardSkeletons } from '@/modules/finances/components/navigation-section/navigation-card-skeleton'
-import { ReservesWaterfallChart } from '@/modules/finances/components/reserves-waterfall-chart'
+import { ReservesWaterfallChartCardWrapper } from '@/modules/finances/components/reserves-waterfall-chart/reserves-waterfall-chart-card-wrapper'
 import { SummarySectionSkeleton } from '@/modules/finances/components/summary-section/summary-section-skeleton'
 import { SummarySectionWrapper } from '@/modules/finances/components/summary-section/summary-section-wrapper'
 import { TitleComponentSkeleton } from '@/modules/finances/components/title-component/title-component-skeleton'
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
-import { ATLAS_BUDGETS, WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
+import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
 import { FinancesYearProvider } from '@/modules/finances/providers/finances-year-provider'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -74,12 +74,7 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
           )}
 
           {ff.finances.RESERVES_WATERFALL_CHART_SECTION_ENABLED && (
-            <ReservesWaterfallChart
-              codePath="atlas/immutable"
-              budgets={ATLAS_BUDGETS}
-              allBudgets={ATLAS_BUDGETS}
-              year="2025"
-            />
+            <ReservesWaterfallChartCardWrapper params={params} searchParams={searchParams} />
           )}
 
           {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && (

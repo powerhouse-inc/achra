@@ -18,13 +18,12 @@ function ReservesWaterfallChart({
   year,
 }: Readonly<ReservesWaterfallChartProps>) {
   const key = `${codePath}-${year}`
-  const rootBudgets = budgets.filter((budget) => budget.parentId === null)
   return (
     <QueryClientProvider>
       <ReservesWaterfallChartInternal
         key={key}
         codePath={codePath}
-        budgets={rootBudgets}
+        budgets={budgets}
         allBudgets={allBudgets}
         year={year}
       />
