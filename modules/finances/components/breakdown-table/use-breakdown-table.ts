@@ -45,7 +45,6 @@ function removePatternAfterSlash(input: string) {
 // ASK: is this function needed in Achra?
 function formatBudgetName(name: string) {
   const newName = name ? name.replace(/^End-game\s*/i, '') : 'No-Name'
-
   switch (newName) {
     case 'Atlas Immutable':
       return 'Atlas Immutable Budget'
