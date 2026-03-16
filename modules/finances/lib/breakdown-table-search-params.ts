@@ -4,7 +4,7 @@ import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '@/modules/finances/types'
 export const btMetricsParser = parseAsArrayOf(parseAsStringEnum(Object.values(METRIC_OPTIONS)))
   .withDefault([METRIC_OPTIONS.Actuals])
   .withOptions({
-    shallow: false,
+    shallow: true,
     history: 'replace',
     limitUrlUpdates: {
       method: 'debounce',
@@ -15,7 +15,7 @@ export const btMetricsParser = parseAsArrayOf(parseAsStringEnum(Object.values(ME
 export const btGranularityParser = parseAsStringEnum(Object.values(GRANULARITY_OPTIONS))
   .withDefault(GRANULARITY_OPTIONS.Monthly)
   .withOptions({
-    shallow: false,
+    shallow: true,
     history: 'replace',
     limitUrlUpdates: {
       method: 'debounce',

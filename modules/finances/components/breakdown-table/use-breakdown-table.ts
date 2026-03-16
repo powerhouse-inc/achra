@@ -11,14 +11,22 @@ import {
   MONTHLY_ANALYTICS_MOCK,
   QUARTERLY_ANALYTICS_MOCK,
 } from '../../mocks/breakdown-table-analytics'
-import type {
-  Analytic,
-  AnalyticGranularity,
-  ItemRow,
-  MetricValues,
-  TableData,
-  TableFinances,
+import {
+  type Analytic,
+  type AnalyticGranularity,
+  GRANULARITY_OPTIONS,
+  type ItemRow,
+  type MetricValues,
+  type TableData,
+  type TableFinances,
 } from '../../types'
+import { useBreakdownTableFilters } from './breakdown-table-filters/use-breakdown-table-filters'
+
+const granularityToAnalytic: Record<GRANULARITY_OPTIONS, AnalyticGranularity> = {
+  [GRANULARITY_OPTIONS.Monthly]: 'monthly',
+  [GRANULARITY_OPTIONS.Quarterly]: 'quarterly',
+  [GRANULARITY_OPTIONS.Annually]: 'annual',
+}
 
 const EMPTY_METRIC_VALUE = {
   Actuals: 0,
@@ -66,6 +74,8 @@ function isHeaderValuesZero(header: ItemRow): boolean {
 function useBreakdownTable() {
   const { year } = useFinancesYear()
 
+  const filters = useBreakdownTableFilters()
+
   const allBudgets = BUDGETS // TODO: fetch budgets from the API
   const budgets = FIRST_LEVEL_BUDGETS // TODO: fetch budgets from the API
 
@@ -82,19 +92,27 @@ function useBreakdownTable() {
   const codePath = 'atlas' as string // FIXME: hardcoded for now
 
   const granularityOptions = isMobile
-    ? ['Annually', 'Semi-annual']
+    ? ['Annually']
     : isTablet || isDesk1024 || isDesk1280
       ? ['Annually', 'Quarterly']
       : ['Annually', 'Quarterly', 'Monthly']
 
-  const selectedGranularity = 'monthly' as AnalyticGranularity // FIXME: hardcoded for now
-  const activeMetrics = ['Actuals'] // FIXME: hardcoded for now
+  const selectedGranularity = granularityToAnalytic[filters.granularity]
+  const activeMetrics = filters.metrics // FIXME: hardcoded for now
 
   const maxAmountOfActiveMetrics = 2 // TODO: implement the max amount of active metrics depending on the breakpoint
 
   // TODO: implement the data fetching, hardcoded for now to simulate the data fetching response
   const error = null as Error | null
-  const analytics = MONTHLY_ANALYTICS_MOCK as Analytic | null
+  const analytics = useMemo(() => {
+    if (selectedGranularity === 'annual') {
+      return ANNUAL_ANALYTICS_MOCK
+    } else if (selectedGranularity === 'quarterly') {
+      return QUARTERLY_ANALYTICS_MOCK
+    } else {
+      return MONTHLY_ANALYTICS_MOCK
+    }
+  }, [selectedGranularity])
 
   const [tableHeader, tableBody] = useMemo(() => {
     // occurred an error or the data is loading
@@ -482,6 +500,7 @@ function useBreakdownTable() {
   const isLoading = !analytics && !error && (tableHeader === null || tableBody === null)
 
   return {
+    filters,
     isMobile,
     isLoading,
     activeMetrics,

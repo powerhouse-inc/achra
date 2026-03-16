@@ -11,7 +11,7 @@ function BreakdownTable() {
   const { year } = useFinancesYear()
   const range = `Jan - Dec ${year}`
 
-  const { isLoading, selectedGranularity, tableHeader, tableBody, activeMetrics } =
+  const { filters, isLoading, selectedGranularity, tableHeader, tableBody, activeMetrics } =
     useBreakdownTable()
 
   return (
@@ -23,7 +23,7 @@ function BreakdownTable() {
           tooltipContent="The breakdown table enhances the functionality of the breakdown chart by providing a side-by-side multi-metric comparison. It delivers a detailed view with subtotals for each budget category and their subdivisions, along with a cumulative total for selected metrics."
           range={range.toUpperCase()}
         />
-        <BreakdownTableFilters />
+        <BreakdownTableFilters filters={filters} />
       </div>
 
       {isLoading ? (
