@@ -8,7 +8,7 @@ import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
 } from '@/modules/service-purchase/lib/price-breakdown-utils'
-import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
+import { formatSummaryPrice, sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import {
   useAllOptionGroups,
   usePurchaseTotals,
@@ -100,7 +100,12 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               {selectedTier.name}
             </span>
             <span className="text-primary text-base/6 font-semibold lg:leading-7">
-              {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
+              {formatSummaryPrice({
+                amount: totals.recurringTotal,
+                isRecurring: true,
+                suffix: '/mo',
+                isCustomPricing: selectedTier.isCustomPricing,
+              })}
             </span>
           </div>
           <span className="text-foreground text-xs/4.5 font-medium">
