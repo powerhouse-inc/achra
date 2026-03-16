@@ -13,7 +13,7 @@ const withFinancesYearProvider = (Story: ComponentType) => (
 const meta = {
   title: 'Modules/Finances/ExpensesMetricChart/ExpensesMetricChart',
   component: ExpensesMetricChartCardWrapper,
-  decorators: [withNuqsAdapter, withFinancesYearProvider],
+  decorators: [withFinancesYearProvider, withNuqsAdapter],
 } satisfies Meta<typeof ExpensesMetricChartCardWrapper>
 
 export default meta
