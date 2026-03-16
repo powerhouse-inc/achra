@@ -658,6 +658,16 @@ export const BUDGETS = [
     description: '',
   },
   {
+    id: '168',
+    parentId: '1',
+    name: 'Immunefi@Hunter331348 Testing',
+    code: 'BUG-001',
+    idPath: '1/168',
+    codePath: 'atlas/immutable/BUG-001',
+    image: '',
+    description: '',
+  },
+  {
     id: '63',
     parentId: null,
     name: 'Scope Framework Budget',
@@ -1846,3 +1856,5 @@ export const BUDGETS = [
     description: '',
   },
 ]
+
+export const FIRST_LEVEL_BUDGETS = BUDGETS.filter((budget) => budget.parentId === null)

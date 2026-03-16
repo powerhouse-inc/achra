@@ -5,16 +5,28 @@ import groupBy from 'lodash/groupBy'
 import { useMemo } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useFinancesYear } from '../../hooks/use-finaces-year'
-import { BUDGETS } from '../../mocks'
-import { analyticsMonthlyForBreakdownTable } from '../../mocks/analytics-monthly-for-breakdown-table'
-import type {
-  Analytic,
-  AnalyticGranularity,
-  ItemRow,
-  MetricValues,
-  TableData,
-  TableFinances,
+import { BUDGETS, FIRST_LEVEL_BUDGETS } from '../../mocks'
+import {
+  ANNUAL_ANALYTICS_MOCK,
+  MONTHLY_ANALYTICS_MOCK,
+  QUARTERLY_ANALYTICS_MOCK,
+} from '../../mocks/breakdown-table-analytics'
+import {
+  type Analytic,
+  type AnalyticGranularity,
+  GRANULARITY_OPTIONS,
+  type ItemRow,
+  type MetricValues,
+  type TableData,
+  type TableFinances,
 } from '../../types'
+import { useBreakdownTableFilters } from './breakdown-table-filters/use-breakdown-table-filters'
+
+const granularityToAnalytic: Record<GRANULARITY_OPTIONS, AnalyticGranularity> = {
+  [GRANULARITY_OPTIONS.Monthly]: 'monthly',
+  [GRANULARITY_OPTIONS.Quarterly]: 'quarterly',
+  [GRANULARITY_OPTIONS.Annually]: 'annual',
+}
 
 const EMPTY_METRIC_VALUE = {
   Actuals: 0,
@@ -33,7 +45,6 @@ function removePatternAfterSlash(input: string) {
 // ASK: is this function needed in Achra?
 function formatBudgetName(name: string) {
   const newName = name ? name.replace(/^End-game\s*/i, '') : 'No-Name'
-
   switch (newName) {
     case 'Atlas Immutable':
       return 'Atlas Immutable Budget'
@@ -62,8 +73,10 @@ function isHeaderValuesZero(header: ItemRow): boolean {
 function useBreakdownTable() {
   const { year } = useFinancesYear()
 
+  const filters = useBreakdownTableFilters()
+
   const allBudgets = BUDGETS // TODO: fetch budgets from the API
-  const budgets = BUDGETS // TODO: fetch budgets from the API
+  const budgets = FIRST_LEVEL_BUDGETS // TODO: fetch budgets from the API
 
   // breakpoints
   const isMobile = useMediaQuery({ to: 'md' })
@@ -78,19 +91,27 @@ function useBreakdownTable() {
   const codePath = 'atlas' as string // FIXME: hardcoded for now
 
   const granularityOptions = isMobile
-    ? ['Annually', 'Semi-annual']
+    ? ['Annually']
     : isTablet || isDesk1024 || isDesk1280
       ? ['Annually', 'Quarterly']
       : ['Annually', 'Quarterly', 'Monthly']
 
-  const selectedGranularity = 'monthly' as AnalyticGranularity // FIXME: hardcoded for now
-  const activeMetrics = ['Actuals', 'Budget'] // FIXME: hardcoded for now
+  const selectedGranularity = granularityToAnalytic[filters.granularity]
+  const activeMetrics = filters.metrics // FIXME: hardcoded for now
 
   const maxAmountOfActiveMetrics = 2 // TODO: implement the max amount of active metrics depending on the breakpoint
 
   // TODO: implement the data fetching, hardcoded for now to simulate the data fetching response
   const error = null as Error | null
-  const analytics = analyticsMonthlyForBreakdownTable as Analytic | null
+  const analytics = useMemo(() => {
+    if (selectedGranularity === 'annual') {
+      return ANNUAL_ANALYTICS_MOCK
+    } else if (selectedGranularity === 'quarterly') {
+      return QUARTERLY_ANALYTICS_MOCK
+    } else {
+      return MONTHLY_ANALYTICS_MOCK
+    }
+  }, [selectedGranularity])
 
   const [tableHeader, tableBody] = useMemo(() => {
     // occurred an error or the data is loading
@@ -478,6 +499,7 @@ function useBreakdownTable() {
   const isLoading = !analytics && !error && (tableHeader === null || tableBody === null)
 
   return {
+    filters,
     isMobile,
     isLoading,
     activeMetrics,

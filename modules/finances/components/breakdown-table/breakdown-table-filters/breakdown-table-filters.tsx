@@ -7,7 +7,7 @@ import { BasicSelect } from '@/modules/shared/components/basic-select/basic-sele
 import { DrawerSelect, FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { Button } from '@/modules/shared/components/ui/button'
-import { useBreakdownTableFilters } from './use-breakdown-table-filters'
+import type { useBreakdownTableFilters } from './use-breakdown-table-filters'
 
 const metricOptions: Option[] = Object.values(METRIC_OPTIONS).map((value) => ({
   value,
@@ -21,39 +21,28 @@ const granularityOptions: Option[] = Object.values(GRANULARITY_OPTIONS).map((val
   group: 'Granularity',
 }))
 
-function BreakdownTableFilters() {
-  const {
-    metrics,
-    granularity,
-    setMetrics,
-    setGranularity,
-    onReset,
-    isResetDisabled,
-    isResetPending,
-    isMetricsPending,
-    isGranularityPending,
-  } = useBreakdownTableFilters()
+interface BreakdownTableFiltersProps {
+  filters: ReturnType<typeof useBreakdownTableFilters>
+}
 
+function BreakdownTableFilters({
+  filters: { metrics, granularity, setMetrics, setGranularity, onReset, isResetDisabled },
+}: BreakdownTableFiltersProps) {
   const selectedMetricOptions = useMemo(
-    () =>
-      metricOptions.filter((option) =>
-        metrics.includes(option.value as (typeof METRIC_OPTIONS)[keyof typeof METRIC_OPTIONS]),
-      ),
+    () => metricOptions.filter((option) => metrics.includes(option.value as METRIC_OPTIONS)),
     [metrics],
   )
 
   const handleMetricsChange = (options: Option[]) => {
-    setMetrics(
-      options.map((option) => option.value as (typeof METRIC_OPTIONS)[keyof typeof METRIC_OPTIONS]),
-    )
+    setMetrics(options.map((option) => option.value as METRIC_OPTIONS))
   }
 
   const handleDrawerMetricsChange = (values: string[]) => {
-    setMetrics(values as Array<(typeof METRIC_OPTIONS)[keyof typeof METRIC_OPTIONS]>)
+    setMetrics(values as METRIC_OPTIONS[])
   }
 
   const handleDrawerGranularityChange = (value: string) => {
-    setGranularity(value as (typeof GRANULARITY_OPTIONS)[keyof typeof GRANULARITY_OPTIONS])
+    setGranularity(value as GRANULARITY_OPTIONS)
   }
 
   return (
@@ -71,21 +60,17 @@ function BreakdownTableFilters() {
           commandProps={{
             className: 'md:w-48 lg:w-65',
           }}
-          isLoading={isMetricsPending}
-          disabled={isResetPending}
         />
         <BasicSelect
           key={`granularity-${granularity}`}
           value={granularity}
           label="Granularity"
           onValueChange={(value) => {
-            setGranularity(value as (typeof GRANULARITY_OPTIONS)[keyof typeof GRANULARITY_OPTIONS])
+            setGranularity(value as GRANULARITY_OPTIONS)
           }}
           options={Object.values(GRANULARITY_OPTIONS)}
           placeholder="Monthly"
           className="md:w-27 lg:w-46"
-          isLoading={isGranularityPending}
-          disabled={isResetPending}
         />
         <Button
           className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
@@ -97,11 +82,7 @@ function BreakdownTableFilters() {
         </Button>
       </div>
       <div className="flex items-center gap-4 md:hidden">
-        <FilterDrawer
-          onReset={onReset}
-          isResetDisabled={isResetDisabled}
-          isResetPending={isResetPending}
-        >
+        <FilterDrawer onReset={onReset} isResetDisabled={isResetDisabled}>
           <DrawerSelect
             value={metrics}
             onChange={handleDrawerMetricsChange}

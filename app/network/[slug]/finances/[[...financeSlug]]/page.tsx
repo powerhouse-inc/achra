@@ -14,6 +14,7 @@ import { TitleComponentSkeleton } from '@/modules/finances/components/title-comp
 import { TitleComponentWrapper } from '@/modules/finances/components/title-component/title-component-wrapper'
 import { WalletSection } from '@/modules/finances/components/wallet-sections'
 import { WALLET_GROUPS } from '@/modules/finances/mocks/group-wallets'
+import { FinancesYearProvider } from '@/modules/finances/providers/finances-year-provider'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'
@@ -33,58 +34,60 @@ interface FinancesPageProps {
 export default function FinancesPage({ params, searchParams }: FinancesPageProps) {
   return (
     <main>
-      <PageBreadcrumbContainer>
-        <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
-          <FinancesBreadcrumb params={params} />
-        </Suspense>
-      </PageBreadcrumbContainer>
-      <PageContent variant="with-breadcrumb" as="div" className="flex flex-col gap-4">
-        <Suspense fallback={<TitleComponentSkeleton />}>
-          <TitleComponentWrapper params={params} />
-        </Suspense>
+      <FinancesYearProvider>
+        <PageBreadcrumbContainer>
+          <Suspense fallback={<BreadcrumbSkeleton segments={3} />}>
+            <FinancesBreadcrumb params={params} />
+          </Suspense>
+        </PageBreadcrumbContainer>
+        <PageContent variant="with-breadcrumb" as="div" className="flex flex-col gap-4">
+          <Suspense fallback={<TitleComponentSkeleton />}>
+            <TitleComponentWrapper params={params} />
+          </Suspense>
 
-        {ff.finances.WALLETS_ENABLED && <WalletSection groupedWallets={WALLET_GROUPS} />}
+          {ff.finances.WALLETS_ENABLED && <WalletSection groupedWallets={WALLET_GROUPS} />}
 
-        {ff.finances.SUMMARY_SECTION_ENABLED && (
-          <>
-            <div className="mt-2 flex items-center justify-end gap-2 text-xs/5 font-semibold xl:text-sm">
-              <UsdsIcon className="size-5 md:size-6" />
-              *All values are converted to USDS
-            </div>
-            <Suspense fallback={<SummarySectionSkeleton />}>
-              <SummarySectionWrapper params={params} />
+          {ff.finances.SUMMARY_SECTION_ENABLED && (
+            <>
+              <div className="mt-2 flex items-center justify-end gap-2 text-xs/5 font-semibold xl:text-sm">
+                <UsdsIcon className="size-5 md:size-6" />
+                *All values are converted to USDS
+              </div>
+              <Suspense fallback={<SummarySectionSkeleton />}>
+                <SummarySectionWrapper params={params} />
+              </Suspense>
+            </>
+          )}
+
+          {ff.finances.NAVIGATION_SECTION_ENABLED && (
+            <Suspense fallback={<NavigationCardSkeletons />}>
+              <NavigationSection params={params} />
             </Suspense>
-          </>
-        )}
+          )}
 
-        {ff.finances.NAVIGATION_SECTION_ENABLED && (
-          <Suspense fallback={<NavigationCardSkeletons />}>
-            <NavigationSection params={params} />
-          </Suspense>
-        )}
+          {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
+            <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
+          )}
 
-        {ff.finances.BREAKDOWN_CHART_SECTION_ENABLED && (
-          <BreakdownChartCardWrapper params={params} searchParams={searchParams} />
-        )}
+          {ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED && (
+            <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
+          )}
 
-        {ff.finances.EXPENSES_METRIC_CHART_SECTION_ENABLED && (
-          <ExpensesMetricChartCardWrapper params={params} searchParams={searchParams} />
-        )}
+          {ff.finances.RESERVES_WATERFALL_CHART_SECTION_ENABLED && (
+            <ReservesWaterfallChartCardWrapper params={params} searchParams={searchParams} />
+          )}
 
-        {ff.finances.RESERVES_WATERFALL_CHART_SECTION_ENABLED && (
-          <ReservesWaterfallChartCardWrapper params={params} searchParams={searchParams} />
-        )}
+          {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && (
+            <Suspense>
+              <BreakdownTable />
+            </Suspense>
+          )}
 
-        {ff.finances.BREAKDOWN_TABLE_SECTION_ENABLED && (
-          <Suspense>
-            <BreakdownTable />
-          </Suspense>
-        )}
+          <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
 
-        <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
-
-        <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
-      </PageContent>
+          <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
+        </PageContent>
+      </FinancesYearProvider>
     </main>
   )
 }

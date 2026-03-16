@@ -1,9 +1,10 @@
-import { parseAsString, useQueryState } from 'nuqs'
+'use client'
 
-export const useFinancesYear = () => {
-  const [year, setSelectedYear] = useQueryState('year', parseAsString.withDefault('2025'))
-  return {
-    year,
-    setSelectedYear,
-  }
+import { useContext } from 'react'
+import { FinancesYearContext } from '../providers/finances-year-provider'
+
+export function useFinancesYear() {
+  const context = useContext(FinancesYearContext)
+  if (!context) throw new Error('useFinancesYear must be used within a FinancesYearProvider')
+  return context
 }
