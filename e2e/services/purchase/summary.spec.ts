@@ -46,3 +46,17 @@ test('should show validation errors when submitting empty required fields', asyn
     await expect(page.getByText('Team name must be at least 2 characters.')).toBeVisible();
     await expect(page.getByText('Please enter a valid email address.')).toBeVisible();
 });
+
+test('should show error and stay on summary when submitting duplicate data', async ({ page }) => {
+    // Use fixed data that has already been submitted — triggers a backend duplicate error
+    await page.getByRole('textbox', { name: 'Name', exact: true }).fill('tester');
+    await page.getByRole('textbox', { name: /Team Name/i }).fill('test team');
+    await page.getByRole('textbox', { name: 'Email' }).fill('test@test.com');
+    await page.getByRole('button', { name: /Submit Request/i }).click();
+    await page.waitForTimeout(4000);
+
+    // Should not advance to confirmation step
+    await expect(page).toHaveURL(/step=summary/);
+    // Should show an error message
+    await expect(page.getByText(/error/i).first()).toBeVisible();
+});
