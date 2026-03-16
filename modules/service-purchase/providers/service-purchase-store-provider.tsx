@@ -136,6 +136,11 @@ function useServiceOffering(): RsServiceOffering {
   return useStore(store, (state) => state.services)
 }
 
+function useFacets(): ServicePurchaseState['facets'] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.facets)
+}
+
 function useServicePurchaseStep() {
   const store = useServicePurchaseStoreContext()
   const activeStep = useStore(store, (state) => state.activeStep)
@@ -183,6 +188,7 @@ function useServicePurchaseStep() {
 
 export {
   ServicePurchaseStoreProvider,
+  useFacets,
   useServicePurchaseState,
   useServicePurchaseActions,
   useSelectedTier,
