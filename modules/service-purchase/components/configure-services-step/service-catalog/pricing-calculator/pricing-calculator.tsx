@@ -19,7 +19,6 @@ import {
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card } from '@/modules/shared/components/ui/card'
-import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { OptionGroupSection } from './option-group-section'
 
@@ -108,56 +107,59 @@ function PricingCalculator() {
   return (
     <PricingCalculatorProvider value={contextValue}>
       <div className="flex w-full flex-col gap-8">
-        {/* SETUP & FORMATION */}
-        <div>
+        <div className="flex flex-col">
+          {/* Setup & Formation */}
           <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
             Setup & Formation
           </h2>
-          <Card className="flex w-full flex-col border-none! py-0!">
-            <div className="overflow-hidden rounded-xl">
-              <HeaderCatalogPlan
-                selectedPlan={selectedPlan}
-                handlePlanChange={setSelectedTier}
-                mobilePlanIndex={mobilePlanIndex}
-                onPrevPlan={handlePrevPlan}
-                onNextPlan={handleNextPlan}
-                servicesData={servicesData}
-              />
-              <div className="flex flex-col">
-                {setupGroups.map((section) => (
-                  <OptionGroupSection
-                    key={section.id}
-                    section={section}
-                    setupDiscountedPrices={setupDiscountedPrices}
-                  />
-                ))}
+          <HeaderCatalogPlan
+            selectedPlan={selectedPlan}
+            handlePlanChange={setSelectedTier}
+            mobilePlanIndex={mobilePlanIndex}
+            onPrevPlan={handlePrevPlan}
+            onNextPlan={handleNextPlan}
+            servicesData={servicesData}
+          />
+          {/* -mt-px fusiona el borde superior con el borde inferior del header */}
+          <div className="-mt-px mb-8 rounded-b-xl border-x border-b shadow-sm">
+            <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+              <div className="overflow-clip rounded-b-xl">
+                <div className="flex flex-col">
+                  {setupGroups.map((section) => (
+                    <OptionGroupSection
+                      key={section.id}
+                      section={section}
+                      setupDiscountedPrices={setupDiscountedPrices}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          </Card>
-        </div>
+            </Card>
+          </div>
 
-        {/* RECURRING SERVICES */}
-        <div>
+          {/* Recurring Services — separate visual block */}
           <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
             Recurring Services
           </h2>
-          <Card className="flex w-full flex-col border-none! py-0!">
-            <div className="overflow-hidden rounded-xl">
-              <div className="flex flex-col">
-                {recurringGroups.map((section) => (
-                  <OptionGroupSection
-                    key={section.id}
-                    section={section}
-                    setupDiscountedPrices={setupDiscountedPrices}
-                  />
-                ))}
+          <div className="rounded-xl border shadow-sm">
+            <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+              <div className="overflow-clip rounded-xl">
+                <div className="flex flex-col">
+                  {recurringGroups.map((section) => (
+                    <OptionGroupSection
+                      key={section.id}
+                      section={section}
+                      setupDiscountedPrices={setupDiscountedPrices}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </div>
         </div>
 
-        {/* GRAND TOTAL (RECURRING) */}
-        <GrandTotalRowCatalog selectedPlan={selectedPlan} tiers={tiers} offering={servicesData} />
+        {/* TODO:Remove this is not necesary in the next itaration  */}
+        {/* <GrandTotalRowCatalog selectedPlan={selectedPlan} tiers={tiers} offering={servicesData} /> */}
       </div>
     </PricingCalculatorProvider>
   )
