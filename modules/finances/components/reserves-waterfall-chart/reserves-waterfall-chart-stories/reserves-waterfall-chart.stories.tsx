@@ -1,27 +1,21 @@
-import { ATLAS_BUDGETS, BUDGETS } from '@/modules/finances/mocks'
-
-import { ReservesWaterfallChart } from '../reserves-waterfall-chart'
+import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
+import { ReservesWaterfallChartCardWrapper } from '../reserves-waterfall-chart-card-wrapper'
 import type { Meta, StoryObj } from '@storybook/nextjs'
 
 const meta = {
   title: 'Modules/Finances/ReservesWaterfallChart/ReservesWaterfallChart',
-  component: ReservesWaterfallChart,
-  parameters: { layout: 'padded' },
-  render: (args) => (
-    <div className="w-full max-w-[1200px]">
-      <ReservesWaterfallChart {...args} />
-    </div>
-  ),
-} satisfies Meta<typeof ReservesWaterfallChart>
+  component: ReservesWaterfallChartCardWrapper,
+  decorators: [withNuqsAdapter],
+} satisfies Meta<typeof ReservesWaterfallChartCardWrapper>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    codePath: 'atlas/immutable',
-    budgets: BUDGETS,
-    allBudgets: ATLAS_BUDGETS,
-    year: '2025',
+    params: Promise.resolve({
+      slug: 'atlas',
+    }),
+    searchParams: Promise.resolve({ year: '2025' }),
   },
 }
