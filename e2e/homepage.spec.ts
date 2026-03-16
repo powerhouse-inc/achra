@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/`);
+    await page.waitForLoadState('networkidle');
 });
 
 test('has a link to the Networks page', async ({ page }) => {
@@ -31,21 +32,17 @@ test('has a link to the Networks page in the "For Organizations" section', async
 });
 
 test('has a description in the "For Builders" section', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
     await page.getByText('For Builders').click();
     await expect(page.getByText('Discover active projects and roadmaps from leading network organizations. Focus on building with built-in operational support.')).toBeVisible();
 });
 
 test('has a link to the Services page in the "For Operators" section', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
-
     await page.getByText('For Operators').click();
-    await page.getByText('Service Catalog').click()
+    await page.getByText('Service Catalog').click();
     await expect(page).toHaveURL('https://achra.com/services');
 });
 
 test('has a link to the Use Cases page from the link "View Use Cases"', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
     await page.getByText('View Use Cases').click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/cases`);
@@ -54,7 +51,6 @@ test('has a link to the Use Cases page from the link "View Use Cases"', async ({
 test('has a link to the Vetra page from the button "Start Building"', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
-    await page.waitForLoadState('networkidle');
     await page.getByText('Start Building').click();
 
     const newTab = await newTabPromise;
@@ -66,7 +62,6 @@ test('has a link to the Vetra page from the button "Start Building"', async ({ p
 test('has a link to the Powerhouse SNO page from the link "Visit Powerhouse"', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
-    await page.waitForLoadState('networkidle');
     await page.getByText('Visit Powerhouse').click();
 
     const newTab = await newTabPromise;
@@ -77,7 +72,6 @@ test('has a link to the Powerhouse SNO page from the link "Visit Powerhouse"', a
 
 // This needs a VPN, if it runs in a restricted region for the Cloudflare waitlist.
 test('has a button to subscribe to the Powerhouse waitlist', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
     await page.getByPlaceholder('Drop your email for launch updates.').fill('test@test.com');
     await page.getByText('Get Notified').click();
 

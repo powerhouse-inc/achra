@@ -26,9 +26,8 @@ test('has a link for Twitter', async ({ page }) => {
 });
 
 test('has a link for Discord', async ({ page }) => {
-    await page.getByText('Discord').getAttribute('href').then(href => {
-        expect(href).toBe('https://discord.com/invite/pwQJwgaQKd');
-    });
+    const discordLink = page.getByText('Discord');
+    await expect(discordLink).toHaveAttribute('href', 'https://discord.com/invite/pwQJwgaQKd');
 });
 
 test('has a link for Powerhouse', async ({ page }) => {
