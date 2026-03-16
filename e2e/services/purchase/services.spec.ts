@@ -34,3 +34,22 @@ test('should contain the grand total row', async ({ page }) => {
 test('should contain the continue button', async ({ page }) => {
     await expect(page.getByRole('button', { name: 'Continue' }).last()).toBeVisible();
 });
+
+test('should update grand total when selecting Starter tier', async ({ page }) => {
+    await page.getByRole('radiogroup').getByText('Starter').click();
+    await page.waitForTimeout(500);
+    const grandTotal = page.getByText('Grand Total (Recurring)');
+    await grandTotal.scrollIntoViewIfNeeded();
+    await expect(page.getByText('$750/mo').nth(3)).toBeVisible();
+});
+
+test('should show annual discount when switching to Annual billing', async ({ page }) => {
+    await page.getByRole('radiogroup').getByText('Starter').click();
+    await page.waitForTimeout(500);
+    await page.getByRole('radio', { name: 'Annual' }).click();
+    await page.waitForTimeout(500);
+    await expect(page.getByText(/Save 5%/)).toBeVisible();
+    const grandTotal = page.getByText('Grand Total (Recurring)');
+    await grandTotal.scrollIntoViewIfNeeded();
+    await expect(page.getByText('$713/mo').nth(3)).toBeVisible();
+});

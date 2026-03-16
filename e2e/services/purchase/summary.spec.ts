@@ -39,3 +39,10 @@ test('should load the submission form', async ({ page }) => {
     await expect(page.getByRole('textbox', { name: 'Email' })).toBeVisible();
     await expect(page.getByRole('button', { name: /Submit Request/i })).toBeVisible();
 });
+
+test('should show validation errors when submitting empty required fields', async ({ page }) => {
+    await page.getByRole('button', { name: /Submit Request/i }).click();
+    await page.waitForTimeout(500);
+    await expect(page.getByText('Team name must be at least 2 characters.')).toBeVisible();
+    await expect(page.getByText('Please enter a valid email address.')).toBeVisible();
+});
