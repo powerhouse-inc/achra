@@ -664,8 +664,8 @@ export const BUDGETS = [
     code: 'BUG-001',
     idPath: '1/168',
     codePath: 'atlas/immutable/BUG-001',
-    image: null,
-    description: null,
+    image: '',
+    description: '',
   },
   {
     id: '63',
