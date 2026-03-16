@@ -72,7 +72,11 @@ function SubmitRequestForm() {
     formData.append('tierId', selectedTier.id)
     formData.append(
       'optionGroupIds',
-      JSON.stringify(optionGroups.filter((group) => group.isSelected).map((group) => group.id)),
+      JSON.stringify(
+        optionGroups
+          .filter((group) => group.isSelected && group.services.length > 0)
+          .map((group) => group.id),
+      ),
     )
 
     startTransition(() => {
