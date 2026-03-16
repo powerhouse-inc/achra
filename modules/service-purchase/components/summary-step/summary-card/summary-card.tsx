@@ -100,7 +100,11 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               {selectedTier.name}
             </span>
             <span className="text-primary text-base/6 font-semibold lg:leading-7">
-              {selectedTier.isCustomPricing ? 'Custom' : `$${totals.recurringTotal}/mo`}
+              {selectedTier.isCustomPricing
+                ? 'Custom'
+                : totals.recurringTotal === 0
+                  ? 'Free'
+                  : `$${totals.recurringTotal}/mo`}
             </span>
           </div>
           <span className="text-foreground text-xs/4.5 font-medium">

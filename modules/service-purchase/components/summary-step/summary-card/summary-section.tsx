@@ -101,9 +101,12 @@ interface SummaryGroupProps {
 function SummaryGroup({ group }: SummaryGroupProps) {
   const { isRecurring, groupPrices } = useSummary()
   const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
-  const formattedPrice = isRecurring
-    ? `${formatPrice(displayAmount)}/mo`
-    : formatPrice(displayAmount)
+  const formattedPrice =
+    displayAmount === 0
+      ? 'Free'
+      : isRecurring
+        ? `${formatPrice(displayAmount)}/mo`
+        : formatPrice(displayAmount)
   const expandable = group.services.length > 0
 
   return (
@@ -172,9 +175,11 @@ function SummaryTotal({ totalAmount }: SummaryFooterProps) {
   const formattedTotal =
     isRecurring && isCustomPricing
       ? 'Custom'
-      : isRecurring
-        ? `${formatPrice(totalAmount)}${totalSuffix}`
-        : formatPrice(totalAmount)
+      : totalAmount === 0
+        ? 'Free'
+        : isRecurring
+          ? `${formatPrice(totalAmount)}${totalSuffix}`
+          : formatPrice(totalAmount)
 
   return (
     <footer
