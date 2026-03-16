@@ -2,7 +2,7 @@
 
 import { Check } from 'lucide-react'
 import { type ComponentProps, createContext, useContext } from 'react'
-import { formatPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
+import { formatSummaryPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
 import {
   Accordion,
@@ -101,12 +101,11 @@ interface SummaryGroupProps {
 function SummaryGroup({ group }: SummaryGroupProps) {
   const { isRecurring, groupPrices } = useSummary()
   const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
-  const formattedPrice =
-    displayAmount === 0
-      ? 'Free'
-      : isRecurring
-        ? `${formatPrice(displayAmount)}/mo`
-        : formatPrice(displayAmount)
+  const formattedPrice = formatSummaryPrice({
+    amount: displayAmount,
+    isRecurring,
+    suffix: '/mo',
+  })
   const expandable = group.services.length > 0
 
   return (
@@ -172,14 +171,12 @@ interface SummaryFooterProps {
 
 function SummaryTotal({ totalAmount }: SummaryFooterProps) {
   const { sectionLabel, totalSuffix, isRecurring, isCustomPricing } = useSummary()
-  const formattedTotal =
-    isRecurring && isCustomPricing
-      ? 'Custom'
-      : totalAmount === 0
-        ? 'Free'
-        : isRecurring
-          ? `${formatPrice(totalAmount)}${totalSuffix}`
-          : formatPrice(totalAmount)
+  const formattedTotal = formatSummaryPrice({
+    amount: totalAmount,
+    isRecurring,
+    suffix: totalSuffix,
+    isCustomPricing,
+  })
 
   return (
     <footer
