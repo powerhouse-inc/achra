@@ -99,13 +99,16 @@ interface SummaryGroupProps {
 }
 
 function SummaryGroup({ group }: SummaryGroupProps) {
-  const { isRecurring, groupPrices } = useSummary()
+  const { isRecurring, groupPrices, isCustomPricing } = useSummary()
   const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
-  const formattedPrice = formatSummaryPrice({
-    amount: displayAmount,
-    isRecurring,
-    suffix: '/mo',
-  })
+  const formattedPrice =
+    isCustomPricing && displayAmount === 0
+      ? ''
+      : formatSummaryPrice({
+          amount: displayAmount,
+          isRecurring,
+          suffix: '/mo',
+        })
   const expandable = group.services.length > 0
 
   return (
