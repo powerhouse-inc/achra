@@ -47,10 +47,21 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
               key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">
-                per {formatMetricLabel(metric.unitName ?? metric.metric)}
-              </span>
+              {metric.freeLimit ? (
+                <>
+                  up to {metric.freeLimit}{' '}
+                  <span className="text-foreground/50">
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              ) : (
+                <>
+                  ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
+                  <span className="text-foreground/50">
+                    per {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              )}
             </span>
           ))}
         </div>
@@ -78,10 +89,21 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
               key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">
-                per {formatMetricLabel(metric.unitName ?? metric.metric)}
-              </span>
+              {metric.freeLimit ? (
+                <>
+                  up to {metric.freeLimit}{' '}
+                  <span className="text-foreground/50">
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              ) : (
+                <>
+                  ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
+                  <span className="text-foreground/50">
+                    per {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              )}
             </span>
           ))}
         </div>
