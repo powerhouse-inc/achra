@@ -101,8 +101,11 @@ function PricingCalculator() {
   )
 
   const sortedGroups = sortOptionGroups(servicesData.optionGroups)
-  const setupGroups = sortedGroups.filter((g) => g.costType === RsGroupCostType.Setup)
-  const recurringGroups = sortedGroups.filter((g) => g.costType !== RsGroupCostType.Setup)
+  const setupGroups = sortedGroups.filter((g) => g.costType === RsGroupCostType.Setup && !g.isAddOn)
+  const recurringGroups = sortedGroups.filter(
+    (g) => g.costType !== RsGroupCostType.Setup && !g.isAddOn,
+  )
+  const addOnGroups = sortedGroups.filter((g) => g.isAddOn)
 
   return (
     <PricingCalculatorProvider value={contextValue}>
@@ -156,6 +159,29 @@ function PricingCalculator() {
               </div>
             </Card>
           </div>
+
+          {/* Addns — one table per add-on group */}
+          {addOnGroups.length > 0 && (
+            <div className="mt-8 flex flex-col gap-4">
+              <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
+                ADD-ON
+              </h2>
+              {addOnGroups.map((section) => (
+                <div key={section.id} className="rounded-xl border shadow-sm">
+                  <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+                    <div className="overflow-clip rounded-xl">
+                      <div className="flex flex-col">
+                        <OptionGroupSection
+                          section={section}
+                          setupDiscountedPrices={setupDiscountedPrices}
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* TODO:Remove this is not necesary in the next itaration  */}
