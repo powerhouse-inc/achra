@@ -1,6 +1,6 @@
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { DeliverableListPopover } from './deliverable-list-popover'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Project/Components/DeliverableListPopover',

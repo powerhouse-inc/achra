@@ -1,6 +1,6 @@
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import RoadmapFilters from './roadmap-filters'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const withNuqsAdapter = (Story: React.ComponentType) => (
   <NuqsAdapter>

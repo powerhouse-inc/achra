@@ -5,7 +5,7 @@ import {
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { PlanSelectorItem } from './plan-selector'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Services/Components/PlanSelector',

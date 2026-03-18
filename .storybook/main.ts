@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/nextjs'
+import type { StorybookConfig } from '@storybook/nextjs-vite'
 
 const config: StorybookConfig = {
   stories: [
@@ -14,28 +14,32 @@ const config: StorybookConfig = {
     '@storybook/addon-vitest',
     '@storybook/addon-themes',
   ],
-  framework: '@storybook/nextjs',
+  framework: {
+    name: '@storybook/nextjs-vite',
+    options: {
+      image: {
+        excludeFiles: ['**/*.svg'],
+      },
+    },
+  },
   features: {
     experimentalRSC: true,
   },
   staticDirs: ['../public'],
-  async webpackFinal(config) {
-    if (config.module?.rules) {
-      const imageRule = config.module.rules.find(
-        (rule) =>
-          typeof rule === 'object' && rule?.test instanceof RegExp && rule.test.test('.svg'),
-      )
-      if (imageRule && typeof imageRule === 'object') {
-        imageRule.exclude = /\.svg$/
-      }
+  async viteFinal(config) {
+    const { mergeConfig } = await import('vite')
+    const { default: svgr } = await import('vite-plugin-svgr')
 
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      })
-    }
-
-    return config
+    return mergeConfig(config, {
+      plugins: [
+        svgr({
+          include: '**/*.svg',
+          svgrOptions: {
+            exportType: 'default',
+          },
+        }),
+      ],
+    })
   },
 }
 

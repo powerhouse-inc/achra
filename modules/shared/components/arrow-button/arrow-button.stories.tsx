@@ -1,5 +1,5 @@
 import { ArrowButton } from './arrow-button'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Components/Buttons/Arrow Button',

@@ -1,6 +1,6 @@
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import DeliverableSetStatusChip from './deliverable-set-status-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof DeliverableSetStatusChip> = {
   title: 'Shared/Components/Chips/DeliverableSetStatusChip',

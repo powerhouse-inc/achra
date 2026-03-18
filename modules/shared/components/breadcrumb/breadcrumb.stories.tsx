@@ -1,6 +1,6 @@
 import { withPortalFontStyles } from '../../lib/decorators'
 import { Breadcrumb, PageBreadcrumbContainer } from './index'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Breadcrumb Navigation Component

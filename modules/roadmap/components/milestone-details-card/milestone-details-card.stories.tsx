@@ -5,7 +5,7 @@ import {
   mockedProjects1,
 } from '@/modules/roadmap/mocks'
 import MilestoneDetailsCard from './milestone-details-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Roadmap/Components/MilestoneDetailsCard',

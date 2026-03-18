@@ -1,6 +1,6 @@
 import React from 'react'
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from './input-otp'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/InputOTP',

@@ -1,7 +1,7 @@
 import { Bold, Italic, Underline } from 'lucide-react'
 import React from 'react'
 import { ToggleGroup, ToggleGroupItem } from './toggle-group'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/ToggleGroup',

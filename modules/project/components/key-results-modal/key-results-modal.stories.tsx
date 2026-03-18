@@ -2,7 +2,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { mockDeliverables } from '../../mock/deliverable'
 import { KeyResultsModal } from './key-results-modal'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const withNuqsAdapter = (Story: React.ComponentType) => (
   <NuqsAdapter>

@@ -1,6 +1,6 @@
 import { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ContributorProfileInfo } from './contributor-profile-info'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Finances/ContributorProfileInfo',

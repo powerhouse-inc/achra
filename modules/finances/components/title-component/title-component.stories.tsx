@@ -1,6 +1,6 @@
 import React from 'react'
 import { TitleComponent } from './title-component'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Finances/TitleComponent',

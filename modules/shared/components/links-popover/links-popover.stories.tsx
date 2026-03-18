@@ -1,7 +1,7 @@
 import { ExternalLink, Globe, Link as LinkIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import { type LinkElement, LinksPopover, type MediaElement } from './links-popover'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * A hover-activated dropdown menu component that displays a list of links (social media or custom links).

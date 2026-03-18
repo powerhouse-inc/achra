@@ -1,6 +1,6 @@
 import { PROPOSALS } from './mocks/proposals'
 import { ProposalsSection } from './proposals-section'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/ProposalsSection',

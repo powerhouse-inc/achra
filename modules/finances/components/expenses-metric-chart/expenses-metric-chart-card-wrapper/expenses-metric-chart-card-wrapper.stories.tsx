@@ -1,7 +1,7 @@
 import { FinancesYearProvider } from '@/modules/finances/providers/finances-year-provider'
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import { ExpensesMetricChartCardWrapper } from '../expenses-metric-chart-card-wrapper'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { ComponentType } from 'react'
 
 const withFinancesYearProvider = (Story: ComponentType) => (

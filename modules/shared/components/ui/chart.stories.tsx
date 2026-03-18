@@ -7,7 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from './chart'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Chart',

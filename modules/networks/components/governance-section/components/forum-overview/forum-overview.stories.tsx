@@ -5,7 +5,7 @@ import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
 import { BASE_URL } from '@/modules/shared/config/constants'
 import { forumCategories } from './categories'
 import ForumOverview from './forum-overview'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * ForumOverview displays forum posts from the Sky Forum organized by category tabs.

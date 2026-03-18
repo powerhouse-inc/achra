@@ -1,5 +1,5 @@
 import { KeyResultStatusChip } from './key-result-status'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Project/Components/KeyResultStatusChip',

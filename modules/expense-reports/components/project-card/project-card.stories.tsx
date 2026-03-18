@@ -1,7 +1,7 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import { project } from '../../mocks/project'
 import { ProjectCard } from './project-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Expense Reports/Components/ProjectCard',

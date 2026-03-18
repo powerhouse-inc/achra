@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './carousel'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Carousel',

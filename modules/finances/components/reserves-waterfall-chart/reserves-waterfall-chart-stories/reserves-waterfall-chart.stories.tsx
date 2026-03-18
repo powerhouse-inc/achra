@@ -1,6 +1,6 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import { ReservesWaterfallChartCardWrapper } from '../reserves-waterfall-chart-card-wrapper'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Finances/ReservesWaterfallChart/ReservesWaterfallChart',

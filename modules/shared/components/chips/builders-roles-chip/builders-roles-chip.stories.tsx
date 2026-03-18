@@ -1,6 +1,6 @@
 import { TeamRole } from '@/modules/shared/types'
 import BuildersRolesChip from './builders-roles-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof BuildersRolesChip> = {
   title: 'Shared/Components/Chips/BuildersRolesChip',

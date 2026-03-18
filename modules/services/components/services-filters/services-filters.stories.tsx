@@ -1,7 +1,7 @@
 import { NuqsAdapter } from 'nuqs/adapters/react'
 import ServicesFilters from './services-filters'
 import { ServicesFiltersProvider } from './services-filters-context'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Services/Components/ServicesFilters',

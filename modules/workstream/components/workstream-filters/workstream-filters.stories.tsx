@@ -3,7 +3,7 @@ import type { AllNetworksQuery } from '@/modules/__generated__/graphql/switchboa
 import { mockedNetworks } from '@/modules/networks/mocks/networks'
 import { withNuqsAdapter, withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import WorkstreamFilters from './workstream-filters'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Workstream/Components/WorkstreamFilters',

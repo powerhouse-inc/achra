@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { NavigationCard } from './navigation-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { Route } from 'next'
 
 const meta = {

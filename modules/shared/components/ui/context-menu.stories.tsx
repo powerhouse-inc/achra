@@ -7,7 +7,7 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from './context-menu'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/ContextMenu',
