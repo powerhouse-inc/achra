@@ -39,7 +39,6 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
 
   return (
     <PageContent className="gap-6">
-      {/* TODO: Remove this cast as when the api its ready */}
       <ServicePurchaseStoreProvider services={services as unknown as RsServiceOffering}>
         <div className="flex flex-col gap-6 lg:gap-8">
           <div>

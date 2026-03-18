@@ -111,9 +111,9 @@ function PricingCalculator() {
     <PricingCalculatorProvider value={contextValue}>
       <div className="flex w-full flex-col gap-8">
         <div className="flex flex-col">
-          {/* Setup & Formation */}
+          {/* Recurring Services */}
           <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
-            Setup & Formation
+            Recurring Services
           </h2>
           <HeaderCatalogPlan
             selectedPlan={selectedPlan}
@@ -128,7 +128,7 @@ function PricingCalculator() {
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
               <div className="overflow-clip rounded-b-xl">
                 <div className="flex flex-col">
-                  {setupGroups.map((section) => (
+                  {recurringGroups.map((section) => (
                     <OptionGroupSection
                       key={section.id}
                       section={section}
@@ -140,15 +140,15 @@ function PricingCalculator() {
             </Card>
           </div>
 
-          {/* Recurring Services — separate visual block */}
+          {/* Setup & Formation — separate visual block */}
           <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
-            Recurring Services
+            Setup & Formation
           </h2>
           <div className="rounded-xl border shadow-sm">
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
               <div className="overflow-clip rounded-xl">
                 <div className="flex flex-col">
-                  {recurringGroups.map((section) => (
+                  {setupGroups.map((section) => (
                     <OptionGroupSection
                       key={section.id}
                       section={section}
@@ -183,9 +183,6 @@ function PricingCalculator() {
             </div>
           )}
         </div>
-
-        {/* TODO:Remove this is not necesary in the next itaration  */}
-        {/* <GrandTotalRowCatalog selectedPlan={selectedPlan} tiers={tiers} offering={servicesData} /> */}
       </div>
     </PricingCalculatorProvider>
   )
