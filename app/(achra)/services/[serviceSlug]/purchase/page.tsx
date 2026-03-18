@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LeavePageGuard } from '@/modules/service-purchase/components/leave-page-guard'
 import { NavigationButtons } from '@/modules/service-purchase/components/navigation-buttons'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
@@ -39,7 +38,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
 
   return (
     <PageContent className="gap-6">
-      <ServicePurchaseStoreProvider services={services as unknown as RsServiceOffering}>
+      <ServicePurchaseStoreProvider services={services}>
         <div className="flex flex-col gap-6 lg:gap-8">
           <div>
             <NavigationButtons />
