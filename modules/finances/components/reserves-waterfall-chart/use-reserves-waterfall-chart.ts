@@ -90,10 +90,10 @@ function useReservesWaterfallChart({
 
   const selectAll = useMemo(() => Array.from(summaryValues.keys()), [summaryValues])
   const activeElementsFiltered = useMemo(
-    () => activeElements.filter((element) => selectAll.includes(element)),
+    () => (activeElements ?? []).filter((element) => selectAll.includes(element)),
     [activeElements, selectAll],
   )
-  const selectedElements = activeElementsFiltered.length > 0 ? activeElementsFiltered : selectAll
+  const selectedElements = activeElements === null ? selectAll : activeElementsFiltered
 
   const series = useMemo(() => {
     const valuesToShow = sumValuesFromMapKeys(summaryValues, selectedElements, granularityApiValue)
@@ -131,7 +131,7 @@ function useReservesWaterfallChart({
   const selectedCategoryOptions = categoryOptions.filter((item) =>
     selectedElements.includes(item.value),
   )
-  const canReset = selectedGranularity !== DEFAULT_GRANULARITY || activeElements.length > 0
+  const canReset = selectedGranularity !== DEFAULT_GRANULARITY || activeElements !== null
 
   const onReset = () => {
     void setSelectedGranularity(null)

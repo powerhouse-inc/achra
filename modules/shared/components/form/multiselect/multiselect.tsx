@@ -117,6 +117,8 @@ interface MultipleSelectorProps {
   >
   /** hide the clear all button. */
   hideClearAllButton?: boolean
+  /** Minimum number of visible items. */
+  minVisibleItems?: number
 }
 
 export interface MultipleSelectorRef {
@@ -150,6 +152,7 @@ function MultipleSelector({
   inputProps,
   hideClearAllButton = false,
   isLoading = false,
+  minVisibleItems = 0,
 }: MultipleSelectorProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
@@ -347,6 +350,7 @@ function MultipleSelector({
         <div className="flex w-full max-w-full items-center pr-12">
           <OverflowList
             items={selected}
+            minVisibleItems={minVisibleItems}
             className={cn('items-center gap-1', {
               hidden: selected.length === 0,
             })}
