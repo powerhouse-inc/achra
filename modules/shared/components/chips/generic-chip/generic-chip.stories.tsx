@@ -1,5 +1,5 @@
 import { GenericChip } from './generic-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Generic Chip Component

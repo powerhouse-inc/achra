@@ -1,7 +1,7 @@
 import { Badge } from '../ui/badge'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '../ui/resizable'
 import { OverflowList } from './overflow-list'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof OverflowList> = {
   title: 'Shared/Components/OverflowList',

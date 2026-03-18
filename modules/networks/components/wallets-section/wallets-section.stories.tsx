@@ -1,6 +1,6 @@
 import { WALLETS } from './mocks/wallets'
 import { WalletsSection } from './wallets-section'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof WalletsSection> = {
   title: 'Modules/Networks/Components/WalletsSection',

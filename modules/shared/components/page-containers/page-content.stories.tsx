@@ -1,5 +1,5 @@
 import { PageContent } from './page-content'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * PageContent is a container component that provides consistent spacing and layout for page content

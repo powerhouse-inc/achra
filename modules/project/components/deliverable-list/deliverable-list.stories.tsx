@@ -1,7 +1,7 @@
 import React from 'react'
 import { mockDeliverables } from '../../mock/deliverable'
 import { DeliverablesCard } from '../deliverables-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Project/Components/DeliverablesCard',

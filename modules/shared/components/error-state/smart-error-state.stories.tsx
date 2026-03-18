@@ -1,6 +1,6 @@
 import { AlertCircle, XCircle } from 'lucide-react'
 import { SmartErrorState } from './smart-error-state'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Smart Error State Component

@@ -2,7 +2,7 @@ import { withThemeByClassName } from '@storybook/addon-themes'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { mockDateDecorator } from 'storybook-mock-date-decorator'
 import { withNextjsExtras } from '../modules/shared/lib/decorators'
-import type { Preview } from '@storybook/nextjs'
+import type { Preview } from '@storybook/react'
 import { create } from 'storybook/theming'
 
 import '../app/globals.css'

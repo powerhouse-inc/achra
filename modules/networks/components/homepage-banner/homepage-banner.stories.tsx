@@ -1,6 +1,6 @@
 import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '../../config/constants'
 import { HomepageBanner } from '.'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/HomepageBanner',

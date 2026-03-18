@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { UsdsTooltip } from './usds-tooltip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Finances/SummarySection/UsdsTooltip',

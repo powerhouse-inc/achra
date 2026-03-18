@@ -1,6 +1,6 @@
 import { Button } from '../ui/button'
 import { HoverPopover, HoverPopoverContent, HoverPopoverTrigger } from './hover-popover'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Components/HoverPopover',

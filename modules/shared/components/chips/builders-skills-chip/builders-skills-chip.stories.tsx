@@ -1,6 +1,6 @@
 import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuildersSkillsChip from './builders-skills-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof BuildersSkillsChip> = {
   title: 'Shared/Components/Chips/BuildersSkillsChip',

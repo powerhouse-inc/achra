@@ -3,7 +3,7 @@ import {
   BuilderStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorCard } from './index'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { Route } from 'next'
 
 const baseOperator: BuilderProfileState = {

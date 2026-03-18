@@ -1,6 +1,6 @@
 import { RfpStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { RfpStatusChip } from './rfp-status-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof RfpStatusChip> = {
   title: 'Shared/Components/Chips/RfpStatusChip',

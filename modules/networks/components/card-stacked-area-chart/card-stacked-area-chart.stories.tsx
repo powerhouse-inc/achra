@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { CardStackedAreaChart } from './card-stacked-area-chart'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/CardStackedAreaChart',

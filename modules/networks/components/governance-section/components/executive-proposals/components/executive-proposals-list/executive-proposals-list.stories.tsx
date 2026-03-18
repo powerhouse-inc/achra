@@ -4,7 +4,7 @@ import {
 } from '@/modules/networks/mocks/governance-section'
 import { isNumeric } from '@/modules/shared/lib/utils'
 import { ExecutiveProposalsList } from './executive-proposals-list'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/GovernanceSection/ExecutiveProposalsList',

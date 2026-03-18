@@ -1,6 +1,6 @@
 import { CheckCircle, Copy } from 'lucide-react'
 import { CopyAnimatedIcon, CopyButton, CopyTooltip, CopyTrigger } from './copy-button'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof CopyButton> = {
   title: 'Shared/Components/CopyButton',

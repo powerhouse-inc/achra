@@ -1,5 +1,5 @@
 import { ExternalLinks } from './external-links'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/GovernanceSection/ExternalLinks',

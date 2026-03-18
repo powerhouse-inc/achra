@@ -1,5 +1,5 @@
 import { ScrollArea } from './scroll-area'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/ScrollArea',

@@ -1,7 +1,7 @@
 import { ArrowRight, Mail, Trash2 } from 'lucide-react'
 import React from 'react'
 import { Button } from './button'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Button',

@@ -8,7 +8,7 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from './striped-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Components/StripedCard',

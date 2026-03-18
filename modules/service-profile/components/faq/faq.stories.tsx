@@ -2,7 +2,7 @@ import { HelpCircle } from 'lucide-react'
 import { faqData } from '../../mocks/faqs'
 import { FaqSection } from './faq'
 import { FaqItem } from './faq-item'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta: Meta<typeof FaqSection> = {
   title: 'Modules/Services/Components/FaqSection',

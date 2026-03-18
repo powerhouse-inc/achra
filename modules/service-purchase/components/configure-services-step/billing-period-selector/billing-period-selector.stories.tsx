@@ -2,7 +2,7 @@
 import { SERVICES_DATA } from '@/modules/service-purchase/mocks/mock-data'
 import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { BillingPeriodSelector } from './billing-period-selector'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Services/Components/BillingPeriodSelector',

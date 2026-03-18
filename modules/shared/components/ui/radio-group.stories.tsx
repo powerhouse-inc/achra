@@ -1,7 +1,7 @@
 import React from 'react'
 import { Label } from './label'
 import { RadioGroup, RadioGroupItem } from './radio-group'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/RadioGroup',
