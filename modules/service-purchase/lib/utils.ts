@@ -176,10 +176,12 @@ export function getPriceLabel(
   costType?: RsGroupCostType | null,
   price?: number | null,
   currency?: string | null,
+  isAddOn?: boolean,
 ): string | null {
   if (!price) return null
   const formatted = `${getCurrencySymbol(currency)}${price.toLocaleString()}`
   if (costType === RsGroupCostType.Setup) return `One-time: ${formatted}`
+  if (isAddOn) return `Total: ${formatted}`
   return `+ ${formatted}/mo`
 }
 

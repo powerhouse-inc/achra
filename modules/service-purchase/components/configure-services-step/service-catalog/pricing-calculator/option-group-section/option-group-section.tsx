@@ -52,6 +52,11 @@ function OptionGroupSection({ section, setupDiscountedPrices }: OptionGroupSecti
 
   const isAddOnSelected = storeOptionGroups.find((og) => og.id === section.id)?.isSelected ?? false
 
+  const groupSetupPrice =
+    section.isAddOn && section.standalonePricing?.setupCost?.amount != null
+      ? Number(section.standalonePricing.setupCost.amount)
+      : undefined
+
   return (
     <ServiceCatalogRoot isEnabled={!section.isAddOn || isAddOnSelected}>
       <ServiceCatalogHeader
@@ -80,6 +85,8 @@ function OptionGroupSection({ section, setupDiscountedPrices }: OptionGroupSecti
         groupCurrency={getCurrency(section)}
         groupCostType={getCostType(section)}
         perTierPrices={perTierPrices}
+        isAddOn={section.isAddOn}
+        groupSetupPrice={groupSetupPrice}
       />
 
       <ServiceCatalogBody>
