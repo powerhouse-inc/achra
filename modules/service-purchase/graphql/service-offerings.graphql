@@ -36,6 +36,13 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
         unitPrice
         unitPriceCurrency
       }
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
     }
     facetTargets {
       id
