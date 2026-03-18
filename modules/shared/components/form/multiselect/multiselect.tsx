@@ -307,13 +307,7 @@ function MultipleSelector({
     return filteredOptions
   }, [options, inputValue, enableSearch])
 
-  const commandFilter = React.useCallback(() => {
-    if (commandProps?.filter) {
-      return commandProps.filter
-    }
-    // Using default filter in `cmdk`. We don't have to provide it.
-    return undefined
-  }, [commandProps?.filter])
+  const commandFilter = commandProps?.filter
 
   return (
     <Command
@@ -325,7 +319,7 @@ function MultipleSelector({
       }}
       className={cn('h-auto overflow-visible bg-transparent', commandProps?.className)}
       shouldFilter={commandProps?.shouldFilter ?? true}
-      filter={commandFilter()}
+      filter={commandFilter}
     >
       <button
         type="button"
@@ -347,6 +341,7 @@ function MultipleSelector({
         <div className="flex w-full max-w-full items-center pr-12">
           <OverflowList
             items={selected}
+            minVisibleItems={1}
             className={cn('items-center gap-1', {
               hidden: selected.length === 0,
             })}
