@@ -117,6 +117,8 @@ interface MultipleSelectorProps {
   >
   /** hide the clear all button. */
   hideClearAllButton?: boolean
+  /** Minimum number of visible items. */
+  minVisibleItems?: number
 }
 
 export interface MultipleSelectorRef {
@@ -150,6 +152,7 @@ function MultipleSelector({
   inputProps,
   hideClearAllButton = false,
   isLoading = false,
+  minVisibleItems = 0,
 }: MultipleSelectorProps) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
@@ -307,7 +310,13 @@ function MultipleSelector({
     return filteredOptions
   }, [options, inputValue, enableSearch])
 
-  const commandFilter = commandProps?.filter
+  const commandFilter = React.useCallback(() => {
+    if (commandProps?.filter) {
+      return commandProps.filter
+    }
+    // Using default filter in `cmdk`. We don't have to provide it.
+    return undefined
+  }, [commandProps?.filter])
 
   return (
     <Command
@@ -319,7 +328,7 @@ function MultipleSelector({
       }}
       className={cn('h-auto overflow-visible bg-transparent', commandProps?.className)}
       shouldFilter={commandProps?.shouldFilter ?? true}
-      filter={commandFilter}
+      filter={commandFilter()}
     >
       <button
         type="button"
@@ -341,7 +350,7 @@ function MultipleSelector({
         <div className="flex w-full max-w-full items-center pr-12">
           <OverflowList
             items={selected}
-            minVisibleItems={1}
+            minVisibleItems={minVisibleItems}
             className={cn('items-center gap-1', {
               hidden: selected.length === 0,
             })}
