@@ -1,9 +1,5 @@
-import {
-  withNextjsExtras,
-  withNuqsAdapter,
-  withPortalFontStyles,
-} from '@/modules/shared/lib/decorators'
 import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '@/modules/finances/types'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BreakdownTableFilters } from './breakdown-table-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -19,7 +15,13 @@ const mockFilters = {
 const meta = {
   title: 'Modules/Finances/Components/BreakdownTableFilters',
   component: BreakdownTableFilters,
-  decorators: [withNextjsExtras, withNuqsAdapter, withPortalFontStyles],
+  decorators: [withNuqsAdapter, withPortalFontStyles],
+  argTypes: {
+    filters: {
+      control: false,
+      description: 'Filter state and handlers',
+    },
+  },
   parameters: {
     layout: 'centered',
   },

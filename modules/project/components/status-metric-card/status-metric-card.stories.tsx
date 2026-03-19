@@ -10,8 +10,15 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    status: { control: 'select', options: Object.values(ScopeOfWork_DeliverableSetStatus) },
-    progress: { control: { type: 'range', min: 0, max: 100 } },
+    status: {
+      control: 'select',
+      options: Object.values(ScopeOfWork_DeliverableSetStatus),
+      description: 'Status of the deliverable set',
+    },
+    progress: {
+      control: { type: 'range', min: 0, max: 100 },
+      description: 'Progress percentage (0-100)',
+    },
   },
 } satisfies Meta<typeof StatusMetricCard>
 

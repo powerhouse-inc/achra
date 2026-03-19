@@ -1,10 +1,10 @@
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
-import { PROPOSALS } from '../../mocks/proposals'
+import { PROPOSALS } from '@/modules/networks/mocks/proposals'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ProposalCard } from './proposal-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Networks/Components/ProposalCard',
+  title: 'Modules/Networks/Components/ProposalsSection/ProposalCard',
   component: ProposalCard,
   parameters: {
     layout: 'centered',
@@ -15,7 +15,7 @@ const meta = {
       },
     },
   },
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
   args: {
     ...PROPOSALS[0],
   },

@@ -5,10 +5,17 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Roadmap/Components/Timeline',
   component: Timeline,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     viewport: {
       defaultViewport: 'responsive',
+    },
+  },
+  argTypes: {
+    milestones: {
+      control: false,
+      description: 'Array of milestones to display in the timeline',
     },
   },
   decorators: [

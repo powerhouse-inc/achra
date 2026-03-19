@@ -1,15 +1,21 @@
-import {
-  withNextjsExtras,
-  withNuqsAdapter,
-  withPortalFontStyles,
-} from '@/modules/shared/lib/decorators'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BudgetStatementsPageHeader } from './budget-statements-page-header'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/BudgetStatementsPageHeader',
+  title: 'Modules/ExpenseReports/Components/BudgetStatementsPageHeader',
   component: BudgetStatementsPageHeader,
-  decorators: [withNuqsAdapter, withPortalFontStyles, withNextjsExtras],
+  decorators: [withNuqsAdapter, withPortalFontStyles],
+  argTypes: {
+    availableMonthsWithMetadata: {
+      control: false,
+      description: 'Months with status and last update metadata',
+    },
+    defaultMonthIso: {
+      control: 'text',
+      description: 'Fallback month when URL has no viewMonth',
+    },
+  },
   parameters: {
     layout: 'padded',
     nextjs: {

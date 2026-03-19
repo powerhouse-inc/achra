@@ -2,7 +2,7 @@ import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-genera
 import BuildersSkillsChip from './builders-skills-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof BuildersSkillsChip> = {
+const meta = {
   title: 'Shared/Components/Chips/BuildersSkillsChip',
   component: BuildersSkillsChip,
   parameters: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof BuildersSkillsChip> = {
       description: 'The skill of the builder',
     },
   },
-}
+} satisfies Meta<typeof BuildersSkillsChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -27,6 +27,9 @@ export const BackendDevelopment: Story = {
 }
 
 export const AllSkills: Story = {
+  args: {
+    skill: BuilderSkill.BackendDevelopment, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

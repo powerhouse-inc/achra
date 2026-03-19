@@ -4,6 +4,17 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Services/Components/EmptyStateService',
   component: EmptyStateService,
+  tags: ['autodocs'],
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Title displayed in the empty state',
+    },
+    description: {
+      control: 'text',
+      description: 'Description text below the title',
+    },
+  },
   parameters: {
     layout: 'centered',
   },
@@ -16,12 +27,5 @@ export const Default: Story = {
   args: {
     title: 'No services found',
     description: 'There are no services available for this combination of filters',
-  },
-}
-
-export const CustomMessage: Story = {
-  args: {
-    title: 'No results',
-    description: 'Try adjusting your search or filter criteria to find services',
   },
 }

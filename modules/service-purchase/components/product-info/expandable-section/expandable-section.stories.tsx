@@ -1,15 +1,26 @@
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ExpandableSection } from './expandable-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Service Purchase/Components/ExpandableSection',
+  title: 'Modules/ServicePurchase/Components/ExpandableSection',
   component: ExpandableSection,
   parameters: {
     layout: 'padded',
     nextjs: { appDirectory: true },
   },
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  tags: ['autodocs'],
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Section header text',
+    },
+    description: {
+      control: 'text',
+      description: 'Markdown content shown when expanded',
+    },
+  },
+  decorators: [withPortalFontStyles],
   args: {
     title: 'What is included in this service?',
     description:
@@ -25,6 +36,7 @@ export const Default: Story = {}
 export const LongDescription: Story = {
   args: {
     title: 'Legal & Compliance Details',
-    description: `## Overview\n\nThis package covers everything you need to operate legally in Switzerland:\n\n- **Registered address** in Zug\n- **Swiss association** entity formation\n- **Legal document templates** for contracts and agreements\n\n## Ongoing Support\n\nOnce formed, our team handles all annual filings, tax preparation, and reporting obligations on your behalf.`,
+    description:
+      '## Overview\n\nThis package covers everything you need to operate legally in Switzerland:\n\n- **Registered address** in Zug\n- **Swiss association** entity formation\n- **Legal document templates** for contracts and agreements\n\n## Ongoing Support\n\nOnce formed, our team handles all annual filings, tax preparation, and reporting obligations on your behalf.',
   },
 }

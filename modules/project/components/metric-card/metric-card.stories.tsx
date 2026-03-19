@@ -8,6 +8,12 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes for the card',
+    },
+  },
 } satisfies Meta<typeof MetricCard>
 
 export default meta

@@ -5,8 +5,20 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Roadmap/Components/MilestoneStatusSection',
   component: MilestoneStatusSection,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+  },
+  argTypes: {
+    status: {
+      control: 'select',
+      options: Object.values(ScopeOfWork_DeliverableSetStatus),
+      description: 'Deliverable set status',
+    },
+    progress: {
+      control: { type: 'number', min: 0, max: 100 },
+      description: 'Progress percentage (0-100)',
+    },
   },
 } satisfies Meta<typeof MilestoneStatusSection>
 

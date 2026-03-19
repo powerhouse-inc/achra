@@ -1,5 +1,5 @@
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
-import { withNextjsExtras, withNuqsAdapter } from '@/modules/shared/lib/decorators'
+import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import { ServicesFiltersProvider } from '../services-filters/services-filters-context'
 import { ServicesPageContent } from './services-page-content'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -7,9 +7,14 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Services/Components/ServicesPageContent',
   component: ServicesPageContent,
+  argTypes: {
+    services: {
+      control: false,
+      description: 'List of services to display',
+    },
+  },
   decorators: [
     withNuqsAdapter,
-    withNextjsExtras,
     (Story) => (
       <ServicesFiltersProvider>
         <Story />

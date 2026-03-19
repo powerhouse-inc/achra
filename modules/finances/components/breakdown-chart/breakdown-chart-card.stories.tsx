@@ -1,15 +1,17 @@
-import {
-  withNextjsExtras,
-  withNuqsAdapter,
-  withPortalFontStyles,
-} from '@/modules/shared/lib/decorators'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BreakdownChartCard } from './breakdown-chart-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Finances/Components/BreakdownChartCard',
   component: BreakdownChartCard,
-  decorators: [withNextjsExtras, withNuqsAdapter, withPortalFontStyles],
+  decorators: [withNuqsAdapter, withPortalFontStyles],
+  argTypes: {
+    children: {
+      control: false,
+      description: 'Chart content to render inside the card',
+    },
+  },
   parameters: {
     layout: 'padded',
     nextjs: {

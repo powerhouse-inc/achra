@@ -1,12 +1,12 @@
 import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ForumList } from './forum-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const maxLikes = Math.max(...mockedForumPosts.map((p) => p.like_count))
 
 const meta = {
-  title: 'Modules/Networks/Components/ForumList',
+  title: 'Modules/Networks/Components/GovernanceSection/ForumList',
   component: ForumList,
   parameters: {
     layout: 'padded',
@@ -17,7 +17,7 @@ const meta = {
       },
     },
   },
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
   args: {
     posts: mockedForumPosts,
     biggerLikes: maxLikes,

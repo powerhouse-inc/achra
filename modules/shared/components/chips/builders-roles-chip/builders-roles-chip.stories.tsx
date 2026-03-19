@@ -2,7 +2,7 @@ import { TeamRole } from '@/modules/shared/types'
 import BuildersRolesChip from './builders-roles-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof BuildersRolesChip> = {
+const meta = {
   title: 'Shared/Components/Chips/BuildersRolesChip',
   component: BuildersRolesChip,
   parameters: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof BuildersRolesChip> = {
       description: 'The role of the builder',
     },
   },
-}
+} satisfies Meta<typeof BuildersRolesChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -27,6 +27,9 @@ export const ActiveEcosystemActor: Story = {
 }
 
 export const AllRoles: Story = {
+  args: {
+    role: TeamRole.All, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

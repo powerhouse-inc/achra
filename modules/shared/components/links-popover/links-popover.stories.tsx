@@ -1,4 +1,5 @@
 import { ExternalLink, Globe, Link as LinkIcon } from 'lucide-react'
+import { withPortalFontStyles } from '../../lib/decorators'
 import { Button } from '../ui/button'
 import { type LinkElement, LinksPopover, type MediaElement } from './links-popover'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -50,6 +51,7 @@ const meta = {
   title: 'Shared/Components/LinksPopover',
   component: LinksPopover,
   tags: ['autodocs'],
+  decorators: [withPortalFontStyles],
   parameters: {
     layout: 'centered',
     nextjs: {

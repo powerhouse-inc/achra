@@ -1,12 +1,22 @@
 import { mockReserveAccount } from '@/modules/expense-reports/mocks'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ReserveCard } from './reserve-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/ReserveCard',
+  title: 'Modules/ExpenseReports/Components/AccountSnapshot/ReserveCard',
   component: ReserveCard,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
+  argTypes: {
+    account: {
+      control: false,
+      description: 'Reserve account or operational group data',
+    },
+    defaultExpanded: {
+      control: 'boolean',
+      description: 'Whether the accordion starts expanded (story-only)',
+    },
+  },
   parameters: {
     layout: 'padded',
   },

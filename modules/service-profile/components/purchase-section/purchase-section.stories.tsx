@@ -3,8 +3,17 @@ import { PurchaseSection } from './purchase-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Service Profile/Components/PurchaseSection',
+  title: 'Modules/ServiceProfile/Components/PurchaseSection',
   component: PurchaseSection,
+  argTypes: {
+    operator: {
+      description: 'Operator/builder profile data',
+    },
+    serviceSlug: {
+      control: 'text',
+      description: 'Slug of the service for purchase links',
+    },
+  },
   parameters: {
     layout: 'padded',
     nextjs: {

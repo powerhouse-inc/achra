@@ -25,7 +25,8 @@ export const Default: Story = {
     name: 'Achra Labs',
     code: 'ACH',
     status: BuilderStatus.Active,
-    image: 'https://avatars.githubusercontent.com/u/100000000',
+    image:
+      'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     isOperator: false,
   },
 }
@@ -35,7 +36,8 @@ export const Operator: Story = {
     name: 'Powerhouse',
     code: 'PH',
     status: BuilderStatus.Active,
-    image: 'https://avatars.githubusercontent.com/u/100000000',
+    image:
+      'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     isOperator: true,
   },
 }
@@ -45,7 +47,8 @@ export const Inactive: Story = {
     name: 'Inactive Builder',
     code: 'INACT',
     status: BuilderStatus.Inactive,
-    image: 'https://avatars.githubusercontent.com/u/100000000',
+    image:
+      'https://makerdao-ses.github.io/ecosystem-dashboard/ecosystem-actors/POWERHOUSE/POWERHOUSE_logo.png',
     isOperator: false,
   },
 }

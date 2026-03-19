@@ -1,4 +1,3 @@
-import { withNextjsExtras } from '@/modules/shared/lib/decorators'
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
 import ServicesList from './services-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -6,7 +5,17 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Services/Components/ServicesList',
   component: ServicesList,
-  decorators: [withNextjsExtras],
+  tags: ['autodocs'],
+  argTypes: {
+    services: {
+      control: false,
+      description: 'List of services to display',
+    },
+    title: {
+      control: 'text',
+      description: 'Optional section title',
+    },
+  },
   parameters: {
     layout: 'padded',
     nextjs: {

@@ -1,4 +1,3 @@
-import { withNextjsExtras } from '@/modules/shared/lib/decorators'
 import { mockProposal } from '@/modules/workstream/mocks/proposals'
 import { InitialProposalSection } from './initial-proposal-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -6,7 +5,6 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Workstream/Components/InitialProposalSection',
   component: InitialProposalSection,
-  decorators: [withNextjsExtras],
   parameters: {
     layout: 'padded',
     nextjs: {
@@ -24,6 +22,16 @@ const meta = {
     deliverables: 3,
     totalBudget: 1580000,
     projects: [],
+  },
+  argTypes: {
+    networkSlug: { description: 'Slug of the network' },
+    workstreamSlug: { description: 'Slug of the workstream' },
+    proposal: { description: 'Initial proposal data or null when no proposal' },
+    milestones: { description: 'Number of milestones in the roadmap' },
+    deliverables: { description: 'Number of deliverables' },
+    totalBudget: { description: 'Total budget amount' },
+    projects: { description: 'Projects from the scope of work' },
+    action: { description: 'Optional action element (e.g. button) to display' },
   },
 } satisfies Meta<typeof InitialProposalSection>
 

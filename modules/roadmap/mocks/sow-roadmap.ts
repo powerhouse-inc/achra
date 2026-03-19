@@ -1,7 +1,7 @@
 import {
+  type Sow_Deliverable,
   Sow_DeliverableSetStatus,
   Sow_DeliverableStatus,
-  type Sow_Deliverable,
   type Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 

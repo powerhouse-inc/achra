@@ -1,11 +1,7 @@
 import { http, HttpResponse } from 'msw'
 import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
 import { BASE_URL } from '@/modules/shared/config/constants'
-import {
-  withNextjsExtras,
-  withPortalFontStyles,
-  withReactQueryProvider,
-} from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles, withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import { GovernanceSection } from './governance-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -39,7 +35,7 @@ const meta = {
       ],
     },
   },
-  decorators: [withReactQueryProvider, withPortalFontStyles, withNextjsExtras],
+  decorators: [withReactQueryProvider, withPortalFontStyles],
 } satisfies Meta<typeof GovernanceSection>
 
 export default meta

@@ -10,9 +10,19 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    value: { control: 'number' },
-    unit: { control: 'text' },
-    budgetType: { control: 'select', options: Object.values(ScopeOfWork_BudgetType) },
+    value: {
+      control: 'number',
+      description: 'Budget value to display',
+    },
+    unit: {
+      control: 'text',
+      description: 'Unit of the budget (e.g. USD, DAI)',
+    },
+    budgetType: {
+      control: 'select',
+      options: Object.values(ScopeOfWork_BudgetType),
+      description: 'Type of budget (CAPEX or OPEX)',
+    },
   },
 } satisfies Meta<typeof BudgetMetricCard>
 

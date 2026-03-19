@@ -2,7 +2,7 @@ import { ScopeOfWork_DeliverableStatus } from '@/modules/__generated__/graphql/s
 import DeliverableStatusChip from './deliverable-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof DeliverableStatusChip> = {
+const meta = {
   title: 'Shared/Components/Chips/DeliverableStatusChip',
   component: DeliverableStatusChip,
   parameters: {
@@ -15,54 +15,21 @@ const meta: Meta<typeof DeliverableStatusChip> = {
       description: 'The status of the deliverable',
     },
   },
-}
+} satisfies Meta<typeof DeliverableStatusChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Todo: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.Todo,
-  },
-}
-
-export const InProgress: Story = {
+export const Default: Story = {
   args: {
     status: ScopeOfWork_DeliverableStatus.InProgress,
   },
 }
 
-export const Delivered: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.Delivered,
-  },
-}
-
-export const Draft: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.Draft,
-  },
-}
-
-export const Blocked: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.Blocked,
-  },
-}
-
-export const Canceled: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.Canceled,
-  },
-}
-
-export const WontDo: Story = {
-  args: {
-    status: ScopeOfWork_DeliverableStatus.WontDo,
-  },
-}
-
 export const AllStatuses: Story = {
+  args: {
+    status: ScopeOfWork_DeliverableStatus.InProgress, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

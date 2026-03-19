@@ -1,12 +1,26 @@
 import { makeBudgetRow, mockBudgetColumns, mockBudgetRows } from '@/modules/expense-reports/mocks'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { AdvancedInnerTable } from './advanced-inner-table'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/AdvancedInnerTable',
+  title: 'Modules/ExpenseReports/Components/AdvancedInnerTable',
   component: AdvancedInnerTable,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
+  argTypes: {
+    longCode: {
+      control: 'text',
+      description: 'Actor/project code for empty placeholder',
+    },
+    columns: {
+      control: false,
+      description: 'Column definitions for the table',
+    },
+    items: {
+      control: false,
+      description: 'Table row data',
+    },
+  },
   parameters: {
     layout: 'padded',
   },

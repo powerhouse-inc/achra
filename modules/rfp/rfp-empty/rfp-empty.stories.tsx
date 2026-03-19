@@ -9,8 +9,14 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    title: { control: 'text' },
-    description: { control: 'text' },
+    title: {
+      control: 'text',
+      description: 'Empty state title',
+    },
+    description: {
+      control: 'text',
+      description: 'Empty state description text',
+    },
   },
 } satisfies Meta<typeof RfpEmpty>
 
@@ -21,12 +27,5 @@ export const Default: Story = {
   args: {
     title: 'No request for proposal found',
     description: 'No request for proposal found for this workstream.',
-  },
-}
-
-export const CustomMessage: Story = {
-  args: {
-    title: 'No RFPs available',
-    description: 'There are no open requests for proposals at this time. Check back later.',
   },
 }

@@ -19,6 +19,24 @@ const meta = {
       },
     },
   },
+  argTypes: {
+    roadmap: {
+      control: false,
+      description: 'The roadmap containing milestones to display',
+    },
+    deliverables: {
+      control: false,
+      description: 'Array of deliverables associated with milestones',
+    },
+    contributors: {
+      control: false,
+      description: 'Array of contributors/agents',
+    },
+    projects: {
+      control: false,
+      description: 'Array of projects',
+    },
+  },
 } satisfies Meta<typeof DetailsSection>
 
 export default meta
@@ -33,6 +51,12 @@ export const Default: Story = {
   },
 }
 
-export const Skeleton: StoryObj = {
+export const Skeleton: Story = {
+  args: {
+    roadmap: undefined,
+    deliverables: [],
+    contributors: [],
+    projects: [],
+  },
   render: () => <DetailsSectionSkeleton />,
 }

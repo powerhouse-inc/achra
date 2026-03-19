@@ -1,7 +1,6 @@
 import { http, HttpResponse } from 'msw'
-import type { AllNetworksQuery } from '@/modules/__generated__/graphql/switchboard-generated'
-import { mockedNetworks } from '@/modules/networks/mocks/networks'
 import { withNuqsAdapter, withReactQueryProvider } from '@/modules/shared/lib/decorators'
+import { mockedAllNetworksQuery } from '@/modules/workstream/mocks'
 import WorkstreamFilters from './workstream-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -23,22 +22,16 @@ const meta = {
       },
     },
   },
-  argTypes: {},
+  argTypes: {
+    showNetworkFilter: {
+      control: 'boolean',
+      description: 'Whether to show the network filter dropdown',
+    },
+  },
 } satisfies Meta<typeof WorkstreamFilters>
 
 export default meta
 type Story = StoryObj<typeof meta>
-
-const mockedAllNetworksQuery: AllNetworksQuery = {
-  __typename: 'Query',
-  allNetworks: mockedNetworks.map((network) => ({
-    __typename: 'AllNetworks',
-    network: {
-      ...network,
-      slug: network.name?.toLowerCase().replace(/\s+/g, '-') ?? null,
-    },
-  })),
-}
 
 export const Default: Story = {
   parameters: {

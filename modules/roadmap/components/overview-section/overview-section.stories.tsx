@@ -14,6 +14,12 @@ const meta = {
       },
     },
   },
+  argTypes: {
+    roadmap: {
+      control: false,
+      description: 'The roadmap containing milestones for the timeline',
+    },
+  },
 } satisfies Meta<typeof OverviewSection>
 
 export default meta
@@ -31,6 +37,9 @@ export const UndefinedRoadmap: Story = {
   },
 }
 
-export const Skeleton: StoryObj = {
+export const Skeleton: StoryObj<typeof meta> = {
+  args: {
+    roadmap: undefined,
+  },
   render: () => <OverviewSectionSkeleton />,
 }

@@ -1,13 +1,13 @@
 import { mockCategoriesTree } from '@/modules/expense-reports/mocks'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ModalCategoriesProvider } from '../../providers/categories-provider'
 import { CategoriesModal } from './categories-modal'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/CategoriesModal',
+  title: 'Modules/ExpenseReports/Components/CategoriesModal',
   component: CategoriesModal,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
   parameters: {
     layout: 'fullscreen',
   },

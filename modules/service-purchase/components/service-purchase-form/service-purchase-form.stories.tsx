@@ -5,7 +5,6 @@ import {
 } from '@/modules/service-purchase/mocks/resource-template'
 import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import {
-  withNextjsExtras,
   withNuqsAdapter,
   withPortalFontStyles,
   withReactQueryProvider,
@@ -14,7 +13,7 @@ import { ServicePurchaseForm } from './service-purchase-form'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Service Purchase/Components/ServicePurchaseForm',
+  title: 'Modules/ServicePurchase/Components/ServicePurchaseForm',
   component: ServicePurchaseForm,
   parameters: {
     layout: 'padded',
@@ -23,9 +22,16 @@ const meta = {
       navigation: { pathname: '/services/c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8/purchase' },
     },
   },
+  argTypes: {
+    resourceTemplate: {
+      description: 'Resource template configuration',
+    },
+    operator: {
+      description: 'Service operator/builder profile',
+    },
+  },
   decorators: [
     withPortalFontStyles,
-    withNextjsExtras,
     withNuqsAdapter,
     withReactQueryProvider,
     (Story) => (

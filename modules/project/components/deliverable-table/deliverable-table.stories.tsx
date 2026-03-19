@@ -8,6 +8,11 @@ const meta = {
   component: DeliverableTable,
   decorators: [withPortalFontStyles],
   parameters: { layout: 'padded' },
+  argTypes: {
+    deliverables: {
+      description: 'List of deliverables to display in the table',
+    },
+  },
 } satisfies Meta<typeof DeliverableTable>
 
 export default meta

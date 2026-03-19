@@ -1,16 +1,34 @@
 import { makeBudgetRow } from '@/modules/expense-reports/mocks'
-import {
-  withNextjsExtras,
-  withNuqsAdapter,
-  withPortalFontStyles,
-} from '@/modules/shared/lib/decorators'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BreakdownActualsSection } from './breakdown-actuals-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/BreakdownActualsSection',
+  title: 'Modules/ExpenseReports/Components/ExpenseReportsActuals/BreakdownActualsSection',
   component: BreakdownActualsSection,
-  decorators: [withNuqsAdapter, withPortalFontStyles, withNextjsExtras],
+  decorators: [withNuqsAdapter, withPortalFontStyles],
+  argTypes: {
+    currentMonth: {
+      control: 'date',
+      description: 'Month to display breakdown for',
+    },
+    hasMainTableItems: {
+      control: 'boolean',
+      description: 'Whether the main table has items (shows breakdown section)',
+    },
+    breakdownTabs: {
+      control: false,
+      description: 'Tab labels for each wallet',
+    },
+    breakdownItemsByWallet: {
+      control: false,
+      description: 'Table rows per wallet for breakdown view',
+    },
+    builderLabel: {
+      control: 'text',
+      description: 'Builder label for empty placeholder',
+    },
+  },
   parameters: {
     layout: 'padded',
     nextjs: {

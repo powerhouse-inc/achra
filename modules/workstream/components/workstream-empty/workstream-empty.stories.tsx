@@ -9,7 +9,10 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    hasActiveFilters: { control: 'boolean' },
+    hasActiveFilters: {
+      control: 'boolean',
+      description: 'Whether search or filter criteria are currently applied',
+    },
   },
 } satisfies Meta<typeof WorkstreamEmpty>
 

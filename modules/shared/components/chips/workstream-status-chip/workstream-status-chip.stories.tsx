@@ -2,7 +2,7 @@ import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-ge
 import WorkstreamStatusChip from './workstream-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof WorkstreamStatusChip> = {
+const meta = {
   title: 'Shared/Components/Chips/WorkstreamStatusChip',
   component: WorkstreamStatusChip,
   parameters: {
@@ -15,66 +15,21 @@ const meta: Meta<typeof WorkstreamStatusChip> = {
       description: 'The status of the workstream',
     },
   },
-}
+} satisfies Meta<typeof WorkstreamStatusChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const RfpDraft: Story = {
-  args: {
-    status: WorkstreamStatus.RfpDraft,
-  },
-}
-
-export const PreworkRfc: Story = {
-  args: {
-    status: WorkstreamStatus.PreworkRfc,
-  },
-}
-
-export const RfpCancelled: Story = {
-  args: {
-    status: WorkstreamStatus.RfpCancelled,
-  },
-}
-
-export const OpenForProposals: Story = {
-  args: {
-    status: WorkstreamStatus.OpenForProposals,
-  },
-}
-
-export const ProposalSubmitted: Story = {
-  args: {
-    status: WorkstreamStatus.ProposalSubmitted,
-  },
-}
-
-export const Awarded: Story = {
-  args: {
-    status: WorkstreamStatus.Awarded,
-  },
-}
-
-export const InProgress: Story = {
+export const Default: Story = {
   args: {
     status: WorkstreamStatus.InProgress,
   },
 }
 
-export const Finished: Story = {
-  args: {
-    status: WorkstreamStatus.Finished,
-  },
-}
-
-export const NotAwarded: Story = {
-  args: {
-    status: WorkstreamStatus.NotAwarded,
-  },
-}
-
 export const AllStatuses: Story = {
+  args: {
+    status: WorkstreamStatus.InProgress, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

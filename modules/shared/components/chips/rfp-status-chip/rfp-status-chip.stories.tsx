@@ -2,7 +2,7 @@ import { RfpStatus } from '@/modules/__generated__/graphql/switchboard-generated
 import { RfpStatusChip } from './rfp-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof RfpStatusChip> = {
+const meta = {
   title: 'Shared/Components/Chips/RfpStatusChip',
   component: RfpStatusChip,
   parameters: {
@@ -15,54 +15,21 @@ const meta: Meta<typeof RfpStatusChip> = {
       description: 'The status of the RFP',
     },
   },
-}
+} satisfies Meta<typeof RfpStatusChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const RfpDraft: Story = {
-  args: {
-    status: RfpStatus.Draft,
-  },
-}
-
-export const RequestForComments: Story = {
-  args: {
-    status: RfpStatus.RequestForCommments,
-  },
-}
-
-export const RfpCancelled: Story = {
-  args: {
-    status: RfpStatus.Canceled,
-  },
-}
-
-export const OpenForProposals: Story = {
+export const Default: Story = {
   args: {
     status: RfpStatus.OpenForProposals,
   },
 }
 
-export const ProposalSubmitted: Story = {
-  args: {
-    status: RfpStatus.Awarded,
-  },
-}
-
-export const Awarded: Story = {
-  args: {
-    status: RfpStatus.NotAwarded,
-  },
-}
-
-export const Closed: Story = {
-  args: {
-    status: RfpStatus.Closed,
-  },
-}
-
 export const AllStatuses: Story = {
+  args: {
+    status: RfpStatus.OpenForProposals, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

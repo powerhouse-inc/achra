@@ -4,8 +4,19 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Roadmap/Components/MilestoneTitleSection',
   component: MilestoneTitleSection,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+  },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Milestone title',
+    },
+    description: {
+      control: 'text',
+      description: 'Optional milestone description',
+    },
   },
 } satisfies Meta<typeof MilestoneTitleSection>
 

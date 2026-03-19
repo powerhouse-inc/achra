@@ -1,12 +1,34 @@
 import { mockTransactions } from '@/modules/expense-reports/mocks'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { FundingOverview } from './funding-overview'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/FundingOverview',
+  title: 'Modules/ExpenseReports/Components/AccountSnapshot/FundingOverview',
   component: FundingOverview,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
+  argTypes: {
+    builderName: {
+      control: 'text',
+      description: 'Builder name for display',
+    },
+    startDate: {
+      control: 'text',
+      description: 'Period start date',
+    },
+    endDate: {
+      control: 'text',
+      description: 'Period end date',
+    },
+    balance: {
+      control: false,
+      description: 'Calculated balance (starting, ending, inflow, outflow)',
+    },
+    transactionHistory: {
+      control: false,
+      description: 'List of transactions',
+    },
+  },
   parameters: {
     layout: 'padded',
   },

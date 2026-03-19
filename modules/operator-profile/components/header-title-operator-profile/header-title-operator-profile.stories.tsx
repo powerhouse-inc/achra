@@ -8,6 +8,24 @@ const meta = {
   component: HeaderTitleOperatorProfile,
   decorators: [withPortalFontStyles],
   parameters: { layout: 'centered' },
+  tags: ['autodocs'],
+  argTypes: {
+    name: {
+      control: 'text',
+      description: 'Operator name',
+    },
+    code: {
+      control: 'text',
+      description: 'Operator code abbreviation',
+    },
+    skills: {
+      description: 'Builder skills to display',
+    },
+    logo: {
+      control: 'text',
+      description: 'URL of operator logo image',
+    },
+  },
 } satisfies Meta<typeof HeaderTitleOperatorProfile>
 
 export default meta

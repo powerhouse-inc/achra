@@ -1,11 +1,12 @@
-import { withNextjsExtras } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { whitelistHandlers } from '@/modules/whitelist/mocks/whitelist-handlers'
 import { WhitelistOverlay } from './whitelist-overlay'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Whitelist/Components/WhitelistOverlay',
   component: WhitelistOverlay,
-  decorators: [withNextjsExtras],
+  decorators: [withPortalFontStyles],
   parameters: {
     layout: 'fullscreen',
     nextjs: {
@@ -13,6 +14,9 @@ const meta = {
       navigation: {
         pathname: '/',
       },
+    },
+    msw: {
+      handlers: whitelistHandlers,
     },
   },
 } satisfies Meta<typeof WhitelistOverlay>

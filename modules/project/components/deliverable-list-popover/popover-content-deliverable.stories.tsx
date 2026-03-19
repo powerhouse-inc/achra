@@ -1,3 +1,4 @@
+import { mockKeyResultsMixedLinks, mockKeyResultsWithLinks } from '@/modules/project/mocks'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { PopoverContentDeliverable } from './popover-content-deliverable'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -7,6 +8,19 @@ const meta = {
   component: PopoverContentDeliverable,
   decorators: [withPortalFontStyles],
   parameters: { layout: 'centered' },
+  argTypes: {
+    title: {
+      control: 'text',
+      description: 'Title of the deliverable',
+    },
+    code: {
+      control: 'text',
+      description: 'Deliverable code',
+    },
+    keyResults: {
+      description: 'List of key results to display',
+    },
+  },
 } satisfies Meta<typeof PopoverContentDeliverable>
 
 export default meta
@@ -16,18 +30,7 @@ export const Default: Story = {
   args: {
     title: 'RWA Portfolio Dashboard',
     code: 'D1',
-    keyResults: [
-      {
-        id: 'kr1',
-        title: 'RWA Portfolio conceptual wireframes',
-        link: 'www.examplelink.com',
-      },
-      {
-        id: 'kr2',
-        title: 'Technical demo of RWA Portfolio - Feb 21',
-        link: 'www.celestia-portfolio.com',
-      },
-    ],
+    keyResults: mockKeyResultsWithLinks,
   },
 }
 
@@ -43,17 +46,6 @@ export const WithLink: Story = {
   args: {
     title: 'Expense Dashboard',
     code: 'D3',
-    keyResults: [
-      {
-        id: 'kr3',
-        title: 'Expense Dashboard deployment v0.33.0',
-        link: 'https://expenses.example.com',
-      },
-      {
-        id: 'kr4',
-        title: 'Source code on Powerhouse Github repo',
-        link: '',
-      },
-    ],
+    keyResults: mockKeyResultsMixedLinks,
   },
 }

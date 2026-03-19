@@ -1,12 +1,22 @@
 import { mockTransactions } from '@/modules/expense-reports/mocks'
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { TransactionList } from './transaction-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/TransactionList',
+  title: 'Modules/ExpenseReports/Components/AccountSnapshot/TransactionList',
   component: TransactionList,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
+  argTypes: {
+    items: {
+      control: false,
+      description: 'Transactions or snapshot accounts to display',
+    },
+    highlightPositiveAmounts: {
+      control: 'boolean',
+      description: 'Whether to highlight positive amounts in green',
+    },
+  },
   parameters: {
     layout: 'padded',
   },
@@ -24,12 +34,5 @@ export const Default: Story = {
 export const Empty: Story = {
   args: {
     items: [],
-  },
-}
-
-export const WithHighlightedPositiveAmounts: Story = {
-  args: {
-    ...Default.args,
-    highlightPositiveAmounts: true,
   },
 }

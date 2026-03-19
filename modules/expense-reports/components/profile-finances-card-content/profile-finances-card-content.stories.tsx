@@ -1,11 +1,21 @@
-import { withNextjsExtras, withPortalFontStyles } from '@/modules/shared/lib/decorators'
+import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { ProfileFinancesCardContent } from './profile-finances-card-content'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Expense Reports/Components/ProfileFinancesCardContent',
+  title: 'Modules/ExpenseReports/Components/ProfileFinancesCardContent',
   component: ProfileFinancesCardContent,
-  decorators: [withPortalFontStyles, withNextjsExtras],
+  decorators: [withPortalFontStyles],
+  argTypes: {
+    builderSlug: {
+      control: 'text',
+      description: 'Builder slug for navigation links',
+    },
+    operationalHub: {
+      control: false,
+      description: 'Operational hub member data (name, phid)',
+    },
+  },
   parameters: {
     layout: 'centered',
     nextjs: {

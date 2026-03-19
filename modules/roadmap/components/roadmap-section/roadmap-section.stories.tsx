@@ -15,6 +15,32 @@ const meta = {
       },
     },
   },
+  argTypes: {
+    roadmap: {
+      control: false,
+      description: 'The roadmap data with milestones',
+    },
+    network: {
+      control: false,
+      description: 'Optional network info for header display',
+    },
+    workstreamSlug: {
+      control: 'text',
+      description: 'Workstream slug for navigation',
+    },
+    workstreamTitle: {
+      control: 'text',
+      description: 'Workstream title for display',
+    },
+    deliverables: {
+      control: false,
+      description: 'Array of deliverables',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes',
+    },
+  },
 } satisfies Meta<typeof RoadmapSection>
 
 export default meta

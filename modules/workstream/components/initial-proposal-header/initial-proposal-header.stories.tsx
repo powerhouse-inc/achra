@@ -1,18 +1,31 @@
 import { ProposalStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import { withNextjsExtras } from '@/modules/shared/lib/decorators'
 import InitialProposalHeader from './initial-proposal-header'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Workstream/Components/InitialProposalHeader',
   component: InitialProposalHeader,
-  decorators: [withNextjsExtras],
   parameters: {
     layout: 'padded',
   },
+  tags: ['autodocs'],
   args: {
     proposalStatus: ProposalStatus.Submitted,
     proposalAuthor: 'Jane Smith',
+  },
+  argTypes: {
+    proposalStatus: {
+      control: 'select',
+      options: Object.values(ProposalStatus),
+      description: 'Status of the initial proposal',
+    },
+    proposalAuthor: {
+      control: 'text',
+      description: 'Name of the proposal author',
+    },
+    action: {
+      description: 'Optional action element (e.g. button) to display',
+    },
   },
 } satisfies Meta<typeof InitialProposalHeader>
 
@@ -24,20 +37,6 @@ export const Default: Story = {}
 export const WithAction: Story = {
   args: {
     action: <button className="rounded-md border px-3 py-1.5 text-sm">View Proposal</button>,
-  },
-}
-
-export const DraftStatus: Story = {
-  args: {
-    proposalStatus: ProposalStatus.Draft,
-    proposalAuthor: 'John Doe',
-  },
-}
-
-export const AcceptedStatus: Story = {
-  args: {
-    proposalStatus: ProposalStatus.Accepted,
-    proposalAuthor: 'Alice Johnson',
   },
 }
 
