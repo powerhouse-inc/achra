@@ -14,12 +14,12 @@ const meta = {
     },
   },
   decorators: [
-    withNuqsAdapter,
     (Story) => (
       <ServicesFiltersProvider>
         <Story />
       </ServicesFiltersProvider>
     ),
+    withNuqsAdapter,
   ],
   parameters: {
     layout: 'padded',

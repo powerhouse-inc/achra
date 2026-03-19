@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+import { withReactServerComponentDecorator } from '@/modules/shared/config/rsc-decorator'
 import { mockedWorkstreamDetailsQuery } from '@/modules/workstream/mocks'
 import { BudgetingSection } from './budgeting-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -6,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Workstream/Components/BudgetingSection',
   component: BudgetingSection,
+  decorators: [withReactServerComponentDecorator],
   parameters: {
     layout: 'padded',
     nextjs: {

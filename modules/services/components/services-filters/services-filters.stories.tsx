@@ -9,12 +9,12 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {},
   decorators: [
-    withNuqsAdapter,
     (Story) => (
       <ServicesFiltersProvider>
         <Story />
       </ServicesFiltersProvider>
     ),
+    withNuqsAdapter,
   ],
   parameters: {
     layout: 'centered',
