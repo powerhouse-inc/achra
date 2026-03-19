@@ -366,14 +366,14 @@ function computeOptionGroupHeaderPriceForTier(
   if (tier.isCustomPricing) return CUSTOM_PRICING_LABEL
 
   const tierPricing = (group.tierDependentPricing ?? []).find((tp) => tp.tierId === tier.id)
-  if (!tierPricing) return formatPrice(0, group.currency)
+  if (!tierPricing) return 'Free'
 
   const entry =
     tierPricing.recurringPricing.find((rp) => rp.billingCycle === selectedBillingCycle) ??
     tierPricing.recurringPricing.find((rp) => rp.billingCycle === RsBillingCycle.Monthly)
 
   const amount = entry?.amount == null ? 0 : Math.round(Number(entry.amount))
-  return formatPrice(amount, group.currency)
+  return amount === 0 ? 'Free' : formatPrice(amount, group.currency)
 }
 
 /**
@@ -393,7 +393,11 @@ export function computeOptionGroupHeaderPrices(
         const { basePrice } = resolveAddOnDisplayPrice(group, tier.id, selectedBillingCycle)
         return [
           tier.id,
-          basePrice == null ? null : formatPrice(Math.round(basePrice), group.currency),
+          basePrice == null
+            ? null
+            : Math.round(basePrice) === 0
+              ? 'Free'
+              : formatPrice(Math.round(basePrice), group.currency),
         ]
       }
       return [tier.id, computeOptionGroupHeaderPriceForTier(group, tier, selectedBillingCycle)]
