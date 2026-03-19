@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const CONFIDENCE_CAP = 20;
+const SKIP_SENTINEL = -1;
 const STATE_FILE = path.resolve(process.cwd(), 'e2e/confidence-index/.confidence-index.json');
 
 export type State = Record<string, number>;
@@ -13,7 +14,7 @@ export function loadState(): State {
     const state: State = {};
     for (const [key, value] of Object.entries(data)) {
       const n = Number(value);
-      if (Number.isInteger(n) && n >= 0 && n <= CONFIDENCE_CAP) state[key] = n;
+      if (Number.isInteger(n) && n >= SKIP_SENTINEL && n <= CONFIDENCE_CAP) state[key] = n;
     }
     return state;
   } catch {
@@ -44,6 +45,7 @@ export function buildTestId(relativePath: string, title: string): string {
 /**
  * Run mode: "always" = run only tests with streak < 20 (skip daily).
  * "daily" = run only tests with streak >= 20 (skip the rest).
+ * Tests with SKIP_SENTINEL (-1) are excluded from all modes.
  */
 export function shouldSkipByConfidence(
   state: State,
@@ -51,6 +53,7 @@ export function shouldSkipByConfidence(
   runMode: 'always' | 'daily'
 ): boolean {
   const racha = getRacha(state, testId);
+  if (racha === SKIP_SENTINEL) return true;
   if (runMode === 'always') return racha >= CONFIDENCE_CAP;
   return racha < CONFIDENCE_CAP;
 }
@@ -59,18 +62,25 @@ export function updateStateFromResults(
   current: State,
   results: Array<{ testId: string; status: string }>
 ): State {
-  const byTest = new Map<string, { passed: boolean }>();
+  const byTest = new Map<string, { passed: boolean; skipped: boolean }>();
   for (const { testId, status } of results) {
     const passed = status === 'passed';
+    const skipped = status === 'skipped';
     const existing = byTest.get(testId);
-    if (existing === undefined) byTest.set(testId, { passed });
-    else if (!passed) existing.passed = false;
+    if (existing === undefined) {
+      byTest.set(testId, { passed, skipped });
+    } else {
+      if (!passed) existing.passed = false;
+      if (!skipped) existing.skipped = false;
+    }
   }
   const next = { ...current };
-  for (const [testId, { passed }] of byTest) {
+  for (const [testId, { passed, skipped }] of byTest) {
     if (passed) {
-      const racha = next[testId] ?? 0;
+      const racha = Math.max(next[testId] ?? 0, 0);
       next[testId] = Math.min(racha + 1, CONFIDENCE_CAP);
+    } else if (skipped) {
+      next[testId] = SKIP_SENTINEL;
     } else {
       next[testId] = 0;
     }
@@ -78,4 +88,4 @@ export function updateStateFromResults(
   return next;
 }
 
-export { CONFIDENCE_CAP, STATE_FILE };
+export { CONFIDENCE_CAP, SKIP_SENTINEL, STATE_FILE };

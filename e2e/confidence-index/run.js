@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const CONFIDENCE_CAP = 20;
+const SKIP_SENTINEL = -1;
 const STATE_FILE = path.resolve(process.cwd(), 'e2e/confidence-index/.confidence-index.json');
 const RUN_MODE = (process.env.RUN_MODE || 'always').toLowerCase();
 
@@ -20,7 +21,7 @@ function loadState() {
     const state = {};
     for (const [key, value] of Object.entries(data)) {
       const n = Number(value);
-      if (Number.isInteger(n) && n >= 0 && n <= CONFIDENCE_CAP) state[key] = n;
+      if (Number.isInteger(n) && n >= SKIP_SENTINEL && n <= CONFIDENCE_CAP) state[key] = n;
     }
     return state;
   } catch {
@@ -49,6 +50,7 @@ function filterTests(state, allIds, runMode) {
   const wantDaily = runMode === 'daily';
   return allIds.filter((id) => {
     const racha = state[id] ?? 0;
+    if (racha === SKIP_SENTINEL) return false;
     const isDaily = racha >= CONFIDENCE_CAP;
     return wantDaily ? isDaily : !isDaily;
   });
@@ -77,6 +79,7 @@ function main() {
     byFile.get(file).push(title);
   }
 
+  const startTime = Date.now();
   console.log(`Confidence: running ${selected.length} tests (RUN_MODE=${RUN_MODE}).`);
   let exitCode = 0;
   for (const [file, titles] of byFile) {
@@ -99,6 +102,8 @@ function main() {
     });
     if (result.status !== 0) exitCode = result.status;
   }
+  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+  console.log(`Confidence: finished in ${elapsed}s.`);
   process.exit(exitCode);
 }
 

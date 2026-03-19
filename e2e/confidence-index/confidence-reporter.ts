@@ -17,7 +17,6 @@ class ConfidenceReporter implements Reporter {
   private results: Array<{ testId: string; status: string }> = [];
 
   onTestEnd(test: TestCase, result: TestResult) {
-    if (result.status === 'skipped') return;
     this.results.push({ testId: getTestId(test), status: result.status });
   }
 
