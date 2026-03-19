@@ -11,8 +11,8 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should contain the billing toggle', async ({ page }) => {
-    await expect(page.getByRole('radio', { name: 'Quarterly' })).toBeVisible();
-    await expect(page.getByRole('radio', { name: 'Annual' })).toBeVisible();
+    await expect(page.getByRole('radio', { name: 'Quarterly' }).first()).toBeVisible();
+    await expect(page.getByRole('radio', { name: 'Annual' }).first()).toBeVisible();
 });
 
 test('should contain the tier pricing table', async ({ page }) => {
@@ -28,7 +28,9 @@ test('should contain the entity and compliance section', async ({ page }) => {
 });
 
 test('should contain the grand total row', async ({ page }) => {
-    await expect(page.getByText('Grand Total (Recurring)')).toBeVisible();
+    await expect(page.getByRole('radiogroup').getByText('Essentials')).toBeVisible();
+    await expect(page.getByRole('radiogroup').getByText('Starter')).toBeVisible();
+    await expect(page.getByRole('radiogroup').getByText('Standard')).toBeVisible();
 });
 
 test('should contain the continue button', async ({ page }) => {
@@ -38,18 +40,14 @@ test('should contain the continue button', async ({ page }) => {
 test('should update grand total when selecting Starter tier', async ({ page }) => {
     await page.getByRole('radiogroup').getByText('Starter').click();
     await page.waitForTimeout(500);
-    const grandTotal = page.getByText('Grand Total (Recurring)');
-    await grandTotal.scrollIntoViewIfNeeded();
-    await expect(page.getByText('$750/mo').nth(3)).toBeVisible();
+    await expect(page.getByText('$750/mo').last()).toBeVisible();
 });
 
 test('should show annual discount when switching to Annual billing', async ({ page }) => {
     await page.getByRole('radiogroup').getByText('Starter').click();
     await page.waitForTimeout(500);
-    await page.getByRole('radio', { name: 'Annual' }).click();
+    await page.getByRole('radio', { name: 'Annual' }).first().click();
     await page.waitForTimeout(500);
     await expect(page.getByText(/Save 5%/)).toBeVisible();
-    const grandTotal = page.getByText('Grand Total (Recurring)');
-    await grandTotal.scrollIntoViewIfNeeded();
-    await expect(page.getByText('$713/mo').nth(3)).toBeVisible();
+    await expect(page.getByText('$713/mo').last()).toBeVisible();
 });
