@@ -163,8 +163,8 @@ importers:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+        specifier: ^4.17.23
+        version: 4.17.23
       lucide-react:
         specifier: ^0.546.0
         version: 0.546.0(react@19.2.4)
@@ -232,8 +232,8 @@ importers:
         specifier: ^1.3.0
         version: 1.4.0(@types/react@19.2.14)(react@19.2.4)
       swiper:
-        specifier: ^11.2.10
-        version: 11.2.10
+        specifier: ^12.1.2
+        version: 12.1.2
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -10556,9 +10556,6 @@ packages:
   lodash.throttle@4.1.1:
     resolution: {integrity: sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==}
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-
   lodash@4.17.23:
     resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
 
@@ -13378,8 +13375,8 @@ packages:
   swap-case@2.0.2:
     resolution: {integrity: sha512-kc6S2YS/2yXbtkSMunBtKdah4VFETZ8Oh6ONSmSd9bRxhqTrtARUCBUiWXH3xVPpvR7tz2CSnkuXVE42EcGnMw==}
 
-  swiper@11.2.10:
-    resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
+  swiper@12.1.2:
+    resolution: {integrity: sha512-4gILrI3vXZqoZh71I1PALqukCFgk+gpOwe1tOvz5uE9kHtl2gTDzmYflYCwWvR4LOvCrJi6UEEU+gnuW5BtkgQ==}
     engines: {node: '>= 4.7.0'}
 
   sync-fetch@0.6.0-2:
@@ -16861,7 +16858,7 @@ snapshots:
       common-tags: 1.8.2
       graphql: 16.11.0
       import-from: 4.0.0
-      lodash: 4.17.21
+      lodash: 4.17.23
       tslib: 2.4.1
 
   '@graphql-codegen/plugin-helpers@5.1.1(graphql@16.11.0)':
@@ -16871,7 +16868,7 @@ snapshots:
       common-tags: 1.8.2
       graphql: 16.11.0
       import-from: 4.0.0
-      lodash: 4.17.21
+      lodash: 4.17.23
       tslib: 2.6.3
 
   '@graphql-codegen/schema-ast@4.1.0(graphql@16.11.0)':
@@ -17300,7 +17297,7 @@ snapshots:
       https-proxy-agent: 7.0.6
       jose: 5.10.0
       js-yaml: 4.1.0
-      lodash: 4.17.21
+      lodash: 4.17.23
       scuid: 1.1.0
       tslib: 2.8.1
       yaml-ast-parser: 0.0.43
@@ -18548,7 +18545,7 @@ snapshots:
       '@types/debug': 4.1.12
       '@types/lodash': 4.17.21
       debug: 4.4.3(supports-color@8.1.1)
-      lodash: 4.17.21
+      lodash: 4.17.23
       pony-cause: 2.1.11
       semver: 7.7.3
       uuid: 9.0.1
@@ -26104,7 +26101,7 @@ snapshots:
       is-installed-globally: 0.4.0
       lazy-ass: 1.6.0
       listr2: 3.14.0(enquirer@2.4.1)
-      lodash: 4.17.21
+      lodash: 4.17.23
       log-symbols: 4.1.0
       minimist: 1.2.8
       ospath: 1.2.2
@@ -28723,7 +28720,7 @@ snapshots:
       cli-cursor: 3.1.0
       cli-width: 3.0.0
       figures: 3.2.0
-      lodash: 4.17.21
+      lodash: 4.17.23
       mute-stream: 0.0.8
       ora: 5.4.1
       run-async: 2.4.1
@@ -29554,7 +29551,7 @@ snapshots:
       get-package-type: 0.1.0
       getopts: 2.3.0
       interpret: 2.2.0
-      lodash: 4.17.21
+      lodash: 4.17.23
       pg-connection-string: 2.6.2
       rechoir: 0.8.0
       resolve-from: 5.0.0
@@ -29876,8 +29873,6 @@ snapshots:
   lodash.sortby@4.7.0: {}
 
   lodash.throttle@4.1.1: {}
-
-  lodash@4.17.21: {}
 
   lodash@4.17.23: {}
 
@@ -32331,7 +32326,7 @@ snapshots:
     dependencies:
       clsx: 2.1.1
       eventemitter3: 4.0.7
-      lodash: 4.17.21
+      lodash: 4.17.23
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
       react-is: 18.3.1
@@ -32861,7 +32856,7 @@ snapshots:
       debug: 4.4.3(supports-color@8.1.1)
       dottie: 2.0.7
       inflection: 1.13.4
-      lodash: 4.17.21
+      lodash: 4.17.23
       moment: 2.30.1
       moment-timezone: 0.5.48
       pg-connection-string: 2.11.0
@@ -33085,7 +33080,7 @@ snapshots:
 
   simplebar-core@1.3.2:
     dependencies:
-      lodash: 4.17.21
+      lodash: 4.17.23
       lodash-es: 4.17.21
 
   simplebar-react@3.3.2(react@19.2.4):
@@ -33566,7 +33561,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  swiper@11.2.10: {}
+  swiper@12.1.2: {}
 
   sync-fetch@0.6.0-2:
     dependencies:
