@@ -69,7 +69,7 @@ function useReservesWaterfallChart({
   const titleChart = useMemo(() => {
     const levelBudget = allBudgets.find((budget) => budget.codePath === codePath)
     const titleLevelBudget = formatBudgetName(levelBudget?.name ?? '')
-    return titleLevelBudget === '' ? 'MakerDAO Finances' : titleLevelBudget
+    return titleLevelBudget === '' || titleLevelBudget === 'No-Name' ? 'Reserves' : titleLevelBudget
   }, [allBudgets, codePath])
 
   const { data: analytics, isLoading } = useQuery({
