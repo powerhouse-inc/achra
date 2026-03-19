@@ -1,5 +1,5 @@
+import { withOptionGroupSectionStoryProviders } from '@/modules/service-purchase/lib/decorators'
 import { SERVICES_DATA } from '@/modules/service-purchase/mocks/mock-data'
-import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { OptionGroupSection } from './option-group-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -22,14 +22,7 @@ const meta = {
       description: 'Map of option group IDs to discounted setup prices',
     },
   },
-  decorators: [
-    withPortalFontStyles,
-    (Story) => (
-      <ServicePurchaseStoreProvider services={SERVICES_DATA[0]}>
-        <Story />
-      </ServicePurchaseStoreProvider>
-    ),
-  ],
+  decorators: [withPortalFontStyles, withOptionGroupSectionStoryProviders],
   args: {
     section: mockSection,
     setupDiscountedPrices: {},

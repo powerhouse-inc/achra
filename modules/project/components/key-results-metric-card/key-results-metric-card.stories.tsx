@@ -1,12 +1,20 @@
 import { mockProjectDeliverables } from '@/modules/project/mocks'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { KeyResultsMetricCard } from './key-results-metric-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Project/Components/KeyResultsMetricCard',
   component: KeyResultsMetricCard,
+  decorators: [withNuqsAdapter, withPortalFontStyles],
   parameters: {
     layout: 'centered',
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: '/network/sky/workstream/finance-team',
+      },
+    },
   },
   tags: ['autodocs'],
   argTypes: {

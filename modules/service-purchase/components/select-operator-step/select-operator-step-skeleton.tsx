@@ -1,4 +1,4 @@
-import { OperatorCardSkeleton } from '@/modules/shared/components/operator-card'
+import { OperatorCardSkeleton } from '@/modules/services/components/operator-card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 function SelectOperatorStepSkeleton() {

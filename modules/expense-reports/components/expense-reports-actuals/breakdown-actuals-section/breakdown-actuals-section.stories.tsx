@@ -1,3 +1,4 @@
+import { withModalCategoriesMockProvider } from '@/modules/expense-reports/lib/decorators'
 import { makeBudgetRow } from '@/modules/expense-reports/mocks'
 import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BreakdownActualsSection } from './breakdown-actuals-section'
@@ -6,7 +7,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/ExpenseReports/Components/ExpenseReportsActuals/BreakdownActualsSection',
   component: BreakdownActualsSection,
-  decorators: [withNuqsAdapter, withPortalFontStyles],
+  decorators: [withModalCategoriesMockProvider, withNuqsAdapter, withPortalFontStyles],
   argTypes: {
     currentMonth: {
       control: 'date',

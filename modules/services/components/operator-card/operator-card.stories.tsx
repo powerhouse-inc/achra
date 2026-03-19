@@ -1,10 +1,10 @@
-import { baseOperator, onHoldOperator } from '@/modules/shared/mocks/operator-card'
+import { baseOperator, onHoldOperator } from '@/modules/services/mocks/operator-card'
 import { OperatorCard } from './index'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { Route } from 'next'
 
 const meta = {
-  title: 'Shared/Components/Operator Card',
+  title: 'Modules/Services/Components/Operator Card',
   component: OperatorCard,
   parameters: {
     layout: 'centered',

@@ -1,8 +1,17 @@
+import { useEffect } from 'react'
 import { mockCategoriesTree } from '@/modules/expense-reports/mocks'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
-import { ModalCategoriesProvider } from '../../providers/categories-provider'
+import { ModalCategoriesProvider, useModalCategories } from '../../providers/categories-provider'
 import { CategoriesModal } from './categories-modal'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+
+function AutoOpenModal() {
+  const { openModal } = useModalCategories()
+  useEffect(() => {
+    openModal()
+  }, [openModal])
+  return null
+}
 
 const meta = {
   title: 'Modules/ExpenseReports/Components/CategoriesModal',
@@ -16,14 +25,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The CategoriesModal requires ModalCategoriesProvider context.
- * This story wraps the modal in the provider and renders a button to open it.
- */
 export const Default: Story = {
   render: () => (
     <ModalCategoriesProvider categoriesTree={mockCategoriesTree}>
-      <CategoriesModal />
+      <AutoOpenModal />
     </ModalCategoriesProvider>
   ),
 }
@@ -31,7 +36,7 @@ export const Default: Story = {
 export const Empty: Story = {
   render: () => (
     <ModalCategoriesProvider categoriesTree={{ headcount: [], nonHeadcount: [] }}>
-      <CategoriesModal />
+      <AutoOpenModal />
     </ModalCategoriesProvider>
   ),
 }

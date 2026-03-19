@@ -29,7 +29,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     metric: METRIC_OPTIONS.Actuals,
-    // eslint-disable-next-line @typescript-eslint/require-await -- mock callback, no async work needed
-    setMetric: async () => new URLSearchParams(),
+    setMetric: async () => Promise.resolve(new URLSearchParams()),
   },
 }

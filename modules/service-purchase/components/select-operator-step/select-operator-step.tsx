@@ -1,5 +1,5 @@
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { OperatorCard } from '@/modules/shared/components/operator-card'
+import { OperatorCard } from '@/modules/services/components/operator-card'
 
 interface SelectOperatorStepProps {
   onSelectOperator: (operatorId: string) => void

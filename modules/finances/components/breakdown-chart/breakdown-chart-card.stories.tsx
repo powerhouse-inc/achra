@@ -1,3 +1,4 @@
+import { withFinancesYearProvider } from '@/modules/finances/lib/decorators'
 import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { BreakdownChartCard } from './breakdown-chart-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -5,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Finances/Components/BreakdownChartCard',
   component: BreakdownChartCard,
-  decorators: [withNuqsAdapter, withPortalFontStyles],
+  decorators: [withFinancesYearProvider, withNuqsAdapter, withPortalFontStyles],
   argTypes: {
     children: {
       control: false,
