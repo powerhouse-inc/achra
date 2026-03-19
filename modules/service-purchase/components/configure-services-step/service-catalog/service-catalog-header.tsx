@@ -17,6 +17,8 @@ export interface ServiceCatalogHeaderProps {
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
   perTierPrices?: Record<string, string | null> | null
+  isAddOn?: boolean
+  groupSetupPrice?: number | null
 }
 
 function ServiceCatalogHeader({
@@ -31,6 +33,8 @@ function ServiceCatalogHeader({
   groupCurrency,
   groupCostType,
   perTierPrices,
+  isAddOn,
+  groupSetupPrice,
 }: Readonly<ServiceCatalogHeaderProps>) {
   const { activePlan } = usePricingCalculatorContext()
 
@@ -48,6 +52,8 @@ function ServiceCatalogHeader({
       groupCurrency={groupCurrency}
       groupCostType={groupCostType}
       perTierPrices={perTierPrices}
+      isAddOn={isAddOn}
+      groupSetupPrice={groupSetupPrice}
     />
   )
 }
