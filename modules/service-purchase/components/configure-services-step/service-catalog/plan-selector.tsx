@@ -70,6 +70,10 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <div>
             {displayPrice === null ? (
               <span className="text-muted-foreground text-xs/5.5 font-semibold">—</span>
+            ) : displayPrice === 0 ? (
+              <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+                Free
+              </span>
             ) : (
               <>
                 <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
