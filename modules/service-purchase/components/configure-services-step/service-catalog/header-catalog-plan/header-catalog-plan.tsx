@@ -68,7 +68,7 @@ function HeaderCatalogPlan({
           } as React.CSSProperties
         }
         className={cn(
-          'bg-card sticky top-18 z-200 min-h-21 w-full items-center overflow-clip sm:top-27.5',
+          'bg-card sticky top-18 z-20 min-h-21 w-full items-center overflow-clip sm:top-27.5',
           'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
           'transition-all duration-500',
           isStuck
