@@ -1,9 +1,8 @@
 'use client'
 
-import { CheckCircle2, ChevronDown, Circle } from 'lucide-react'
+import { CheckCircle2, CheckIcon, ChevronDown, Circle } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
-import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
 import { cn } from '@/shared/lib/utils'
 import { CUMULATIVE_OPTIONS } from './cumulative-options'
@@ -49,7 +48,15 @@ function ExpensesMetricCumulativeFilter({
             onToggleCumulative()
           }}
         >
-          <Checkbox checked={isCumulative} className="pointer-events-none" />
+          <span
+            aria-hidden="true"
+            className={cn(
+              'border-input dark:bg-input/30 flex size-4 shrink-0 items-center justify-center rounded-sm border shadow-xs',
+              isCumulative && 'border-primary bg-primary text-primary-foreground',
+            )}
+          >
+            {isCumulative && <CheckIcon className="size-2.5" />}
+          </span>
         </button>
 
         <PopoverTrigger asChild>

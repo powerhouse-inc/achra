@@ -1,8 +1,7 @@
 'use client'
 
-import { CheckCircle2, Circle } from 'lucide-react'
+import { CheckCircle2, CheckIcon, Circle } from 'lucide-react'
 import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
-import { Checkbox } from '@/shared/components/ui/checkbox'
 import { cn } from '@/shared/lib/utils'
 import { CUMULATIVE_OPTIONS } from './cumulative-options'
 
@@ -27,7 +26,15 @@ function ExpensesMetricCumulativeDrawer({
         onClick={onToggleCumulative}
       >
         <span>Cumulative</span>
-        <Checkbox checked={isCumulative} className="pointer-events-none" />
+        <span
+          aria-hidden="true"
+          className={cn(
+            'border-input dark:bg-input/30 flex size-4 shrink-0 items-center justify-center rounded-[4px] border shadow-xs',
+            isCumulative && 'border-primary bg-primary text-primary-foreground',
+          )}
+        >
+          {isCumulative && <CheckIcon className="size-3.5" />}
+        </span>
       </button>
 
       <div className="border-border border-t px-2 pt-2 pb-1">
