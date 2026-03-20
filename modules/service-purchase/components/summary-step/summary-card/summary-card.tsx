@@ -117,6 +117,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
                     <Summary.Group key={group.id} group={group} />
                   ))}
                 </Summary.Content>
+                <Summary.Total totalAmount={totals.setupTotal} />
               </Summary.Card>
             </Summary.Provider>
           )}
