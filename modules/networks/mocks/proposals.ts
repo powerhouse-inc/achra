@@ -1,0 +1,46 @@
+import type { Proposal } from '@/modules/networks/components/proposals-section/proposals-section'
+
+export const PROPOSALS: Proposal[] = [
+  {
+    id: '1',
+    title: '3.1: Billing Analytics',
+    budget: '100,000 + 25,000 POWt',
+    submissionDeadline: '01/01/2026',
+    detailsHref: '/network/powerhouse',
+  },
+  {
+    id: '2',
+    title: '2.3: User Dashboard',
+    budget: '75,000 + 15,000 POWt',
+    submissionDeadline: '15/12/2025',
+    detailsHref: '/network/powerhouse',
+  },
+  {
+    id: '3',
+    title: '3.1: Billing Analytics',
+    budget: '100,000 + 25,000 POWt',
+    submissionDeadline: '01/01/2026',
+    detailsHref: '/network/powerhouse',
+  },
+  {
+    id: '4',
+    title: '3.1: Billing Analytics',
+    budget: '100,000 + 25,000 POWt',
+    submissionDeadline: '01/01/2026',
+    detailsHref: '/network/powerhouse',
+  },
+  {
+    id: '5',
+    title: '3.1: Billing Analytics',
+    budget: '100,000 + 25,000 POWt',
+    submissionDeadline: '01/01/2026',
+    detailsHref: '/network/powerhouse',
+  },
+  {
+    id: '6',
+    title: '3.1: Billing Analytics',
+    budget: '100,000 + 25,000 POWt',
+    submissionDeadline: '01/01/2026',
+    detailsHref: '/network/powerhouse',
+  },
+]

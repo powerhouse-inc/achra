@@ -19,7 +19,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
  *
  * **See** [PageBackground](?path=/docs/shared-components-page-containers-pagebackground--docs) - Related component for page background styling
  */
-const meta: Meta<typeof PageContent> = {
+const meta = {
   title: 'Shared/Components/Page Containers/PageContent',
   component: PageContent,
   parameters: {
@@ -47,11 +47,10 @@ const meta: Meta<typeof PageContent> = {
       defaultValue: 'default',
     },
   },
-  tags: ['autodocs'],
-}
+} satisfies Meta<typeof PageContent>
 
 export default meta
-type Story = StoryObj<typeof PageContent>
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {

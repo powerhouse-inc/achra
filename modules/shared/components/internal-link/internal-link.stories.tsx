@@ -5,6 +5,7 @@ const meta = {
   title: 'Shared/Components/Buttons/Internal Link',
   component: InternalLink,
   parameters: {
+    layout: 'centered',
     nextjs: {
       appDirectory: true,
       navigation: {

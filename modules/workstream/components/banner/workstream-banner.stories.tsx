@@ -6,8 +6,20 @@ const meta = {
   component: WorkstreamBanner,
   parameters: {
     layout: 'fullscreen',
+    nextjs: {
+      appDirectory: true,
+      navigation: {
+        pathname: '/network/powerhouse',
+      },
+    },
   },
-  argTypes: {},
+  tags: ['autodocs'],
+  argTypes: {
+    backgroundImage: {
+      control: 'text',
+      description: 'Optional URL or path for the banner background image',
+    },
+  },
 } satisfies Meta<typeof WorkstreamBanner>
 
 export default meta
