@@ -5,6 +5,7 @@ const meta = {
   title: 'Shared/Components/Buttons/External Link Button',
   component: ExternalLink,
   parameters: {
+    layout: 'centered',
     nextjs: {
       appDirectory: true,
       navigation: {

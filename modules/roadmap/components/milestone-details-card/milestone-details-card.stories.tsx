@@ -10,10 +10,11 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Roadmap/Components/MilestoneDetailsCard',
   component: MilestoneDetailsCard,
+  tags: ['autodocs'],
   parameters: {
     nextjs: {
       appDirectory: true,
-      router: {
+      navigation: {
         pathname: '/network/test/roadmap',
       },
     },

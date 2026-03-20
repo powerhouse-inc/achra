@@ -5,12 +5,7 @@ const meta = {
   title: 'Shared/Components/Buttons/Arrow Button',
   component: ArrowButton,
   parameters: {
-    nextjs: {
-      appDirectory: true,
-      navigation: {
-        pathname: '/networks',
-      },
-    },
+    layout: 'centered',
   },
 } satisfies Meta<typeof ArrowButton>
 

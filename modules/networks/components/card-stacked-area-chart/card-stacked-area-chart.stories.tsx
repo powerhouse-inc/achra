@@ -1,6 +1,3 @@
-import React from 'react'
-
-import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { CardStackedAreaChart } from './card-stacked-area-chart'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -13,18 +10,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Basic: Story = {
-  render: () => (
-    <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-      <CardStackedAreaChart />
-    </ThemeProvider>
-  ),
-}
-
-export const Dark: Story = {
-  render: () => (
-    <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-      <CardStackedAreaChart />
-    </ThemeProvider>
-  ),
+export const Default: Story = {
+  render: () => <CardStackedAreaChart />,
 }

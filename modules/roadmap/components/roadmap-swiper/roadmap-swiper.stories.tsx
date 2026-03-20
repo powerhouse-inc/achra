@@ -12,6 +12,24 @@ const meta = {
       defaultViewport: 'responsive',
     },
   },
+  argTypes: {
+    milestones: {
+      control: false,
+      description: 'Array of milestones to display in the swiper',
+    },
+    networkSlug: {
+      control: 'text',
+      description: 'Network slug for navigation links',
+    },
+    roadmapSlug: {
+      control: 'text',
+      description: 'Roadmap slug for navigation links',
+    },
+    deliverables: {
+      control: false,
+      description: 'Array of deliverables for milestone cards',
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ maxWidth: '1312px', width: '100%' }}>

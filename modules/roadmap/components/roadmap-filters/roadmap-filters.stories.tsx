@@ -1,12 +1,6 @@
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import RoadmapFilters from './roadmap-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-
-const withNuqsAdapter = (Story: React.ComponentType) => (
-  <NuqsAdapter>
-    <Story />
-  </NuqsAdapter>
-)
 
 const meta = {
   title: 'Modules/Roadmap/Components/RoadmapFilters',
@@ -25,7 +19,6 @@ const meta = {
       },
     },
   },
-  argTypes: {},
 } satisfies Meta<typeof RoadmapFilters>
 
 export default meta

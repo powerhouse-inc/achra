@@ -1,4 +1,4 @@
-import { NuqsAdapter } from 'nuqs/adapters/react'
+import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
 import ServicesFilters from './services-filters'
 import { ServicesFiltersProvider } from './services-filters-context'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
@@ -6,14 +6,15 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 const meta = {
   title: 'Modules/Services/Components/ServicesFilters',
   component: ServicesFilters,
+  tags: ['autodocs'],
+  argTypes: {},
   decorators: [
     (Story) => (
-      <NuqsAdapter>
-        <ServicesFiltersProvider>
-          <Story />
-        </ServicesFiltersProvider>
-      </NuqsAdapter>
+      <ServicesFiltersProvider>
+        <Story />
+      </ServicesFiltersProvider>
     ),
+    withNuqsAdapter,
   ],
   parameters: {
     layout: 'centered',

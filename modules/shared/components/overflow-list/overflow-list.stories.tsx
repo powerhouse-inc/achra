@@ -3,7 +3,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '../ui/resi
 import { OverflowList } from './overflow-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof OverflowList> = {
+const meta = {
   title: 'Shared/Components/OverflowList',
   component: OverflowList,
   parameters: {
@@ -21,10 +21,10 @@ const meta: Meta<typeof OverflowList> = {
       control: { type: 'boolean' },
     },
   },
-}
+} satisfies Meta<typeof OverflowList>
 
 export default meta
-type Story = StoryObj<typeof OverflowList>
+type Story = StoryObj<typeof meta>
 
 // Sample data
 const sampleTags = [
