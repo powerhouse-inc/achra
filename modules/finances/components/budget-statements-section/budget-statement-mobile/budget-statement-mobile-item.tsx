@@ -40,7 +40,7 @@ export function BudgetStatementMobileItem({
         )}
       >
         <CardHeader className="flex items-start justify-between px-4 pt-4 pb-2 md:pt-2">
-          <div className="flex flex-col">
+          <div className="flex min-w-0 flex-1 flex-col">
             <div className="text-foreground/30 hidden text-sm/5.5 font-semibold md:flex lg:hidden">
               Ecosystem Actor
             </div>
@@ -71,7 +71,12 @@ export function BudgetStatementMobileItem({
             />
           </div>
 
-          <Button variant="outline" size="icon" aria-label="View builder team details">
+          <Button
+            variant="outline"
+            size="icon"
+            className="shrink-0"
+            aria-label="View builder team details"
+          >
             <ArrowRight className="size-4" />
           </Button>
         </CardHeader>
