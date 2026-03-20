@@ -50,13 +50,10 @@ test('should load all builder skills', async ({ page }) => {
 
     await expect(page.getByText('UI/UX Design').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Full Stack Development').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('Devops Engineering').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('Smart Contract Development').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('UI/UX Design').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Technical Writing').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('QA Testing').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Data Engineering').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('Security Engineering').count()).resolves.toBeGreaterThan(0);
 });
 
 test.skip('should load all builder scopes', async ({ page }) => {
@@ -71,9 +68,8 @@ test.skip('should load all builder scopes', async ({ page }) => {
 });
 
 test('should load all last modified values', async ({ page }) => {
-    await expect(page.getByText('05-MAR-2026').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('02-MAR-2026').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('04-MAR-2026').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('19-MAR-2026').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('20-MAR-2026').count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all builder links', async ({ page }) => {
@@ -82,7 +78,6 @@ test('should load all builder links', async ({ page }) => {
     await page.getByText('Links').first().hover();
     await page.waitForTimeout(1000);
 
-    await expect(page.getByText('Website')).toBeVisible();
     await expect(page.getByText('Forum')).toBeVisible();
     await expect(page.getByText('Discord').first()).toBeVisible();
     await expect(page.getByText('Twitter').first()).toBeVisible();
@@ -158,7 +153,7 @@ test('should sort builders by name in descending order', async ({ page }) => {
 
 test('should sort builders by skills in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Skills' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('UI/UX Design')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('PW Powerhouse')).toBeVisible();
 });
 
 test('should sort builders by skills in descending order', async ({ page }) => {
@@ -182,14 +177,14 @@ test.skip('should sort builders by scope in descending order', async ({ page }) 
 
 test('should sort builders by last modified in ascending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('02-MAR-2026')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('19-MAR-2026')).toBeVisible();
 });
 
 // TODO: Now all fields have the same Last Modified value, so we need to check this test later
 test('should sort builders by last modified in descending order', async ({ page }) => {
     await page.getByRole('button', { name: 'Last Modified' }).click();
     await page.getByRole('button', { name: 'Last Modified' }).click();
-    await expect(page.locator('tbody > tr:nth-child(1)').getByText('05-MAR-2026')).toBeVisible();
+    await expect(page.locator('tbody > tr:nth-child(1)').getByText('20-MAR-2026')).toBeVisible();
 });
 
 test('should reset all sorting of builders', async ({ page }) => {

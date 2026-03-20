@@ -45,7 +45,7 @@ test('should load all Reporting Month dates', async ({ page }) => {
 });
 
 test('should load all builder names', async ({ page }) => {
-    await expect(page.getByText('PW').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('BAI').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Powerhouse').count()).resolves.toBeGreaterThan(0);
 });
 

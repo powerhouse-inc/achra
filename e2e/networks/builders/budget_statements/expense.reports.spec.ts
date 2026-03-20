@@ -4,7 +4,8 @@ test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse/budget-statements?section=expense-reports&viewMonth=Dec2025`);
 });
 
-test('should load the totals summary', async ({ page }) => {
+// TODO: Re-enable when expense reports data is available for the powerhouse builder
+test.skip('should load the totals summary', async ({ page }) => {
     await expect(page.getByText('Actuals - Dec 2025 Totals')).toBeVisible();
     await expect(page.getByText('Wallet')).toBeVisible();
     await expect(page.getByText('Mthly Budget')).toHaveCount(2);
@@ -24,7 +25,7 @@ test('should load the totals summary', async ({ page }) => {
     await expect(page.getByText('Total')).toHaveCount(4);
 });
 
-test('should load the breakdown', async ({ page }) => {
+test.skip('should load the breakdown', async ({ page }) => {
     await expect(page.getByText('Actuals - Dec 2025 Breakdown')).toBeVisible();
 
     await expect(page.getByText('Expense Category')).toBeVisible();

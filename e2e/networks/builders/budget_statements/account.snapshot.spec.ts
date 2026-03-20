@@ -36,14 +36,15 @@ test('should load the builder links', async ({ page }) => {
     await expect(page.getByText('GitHub')).toBeVisible();
 });
 
-test('should navigate to the previous month', async ({ page }) => {
+// TODO: Re-enable when account snapshot data is available for the powerhouse builder
+test.skip('should navigate to the previous month', async ({ page }) => {
     await expect(page.getByText(currentMonthText)).toHaveCount(5);
     //TODO: refactor locator
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
     await expect(page.getByText(previousMonthText)).toHaveCount(5);
 });
 
-test('should navigate to the next month', async ({ page }) => {
+test.skip('should navigate to the next month', async ({ page }) => {
     //TODO: refactor locator
     await expect(page.getByText(currentMonthText)).toHaveCount(5);
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
@@ -52,7 +53,7 @@ test('should navigate to the next month', async ({ page }) => {
     await expect(page.getByText(currentMonthText)).toHaveCount(5);
 });
 
-test('should load the Funding Overview', async ({ page }) => {
+test.skip('should load the Funding Overview', async ({ page }) => {
     await expect(page.getByText('*All values are converted to USDS')).toHaveCount(1);
     await expect(page.getByText(`1 ${currentMonthText}`).count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Initial Lifetime Balance')).toBeVisible();
@@ -64,7 +65,7 @@ test('should load the Funding Overview', async ({ page }) => {
     await expect(page.getByText('New Lifetime Balance')).toBeVisible();
 });
 
-test('should load View Transaction History', async ({ page }) => {
+test.skip('should load View Transaction History', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     page.getByText('View Transaction History').click();
     await expect(page.getByText('No transactions this month')).toBeVisible();
@@ -73,7 +74,7 @@ test('should load View Transaction History', async ({ page }) => {
     await expect(page.getByText('No transactions this month')).toBeHidden();
 });
 
-test('should load Funding Overview info', async ({ page }) => {
+test.skip('should load Funding Overview info', async ({ page }) => {
     const info = `Monitor funds made available to track spending, returns, and reserves, differentiate internal/external transactions, and gain insights into changes in ${builderName} Lifetime Balances.`;
 
     await page.waitForLoadState('networkidle');
@@ -84,7 +85,7 @@ test('should load Funding Overview info', async ({ page }) => {
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load the Total Reserves', async ({ page }) => {
+test.skip('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('Total Reserves')).toBeVisible();
     await expect(page.getByText(`On-Chain and off-chain reserves accessible to the ${builderName} Team.`)).toHaveCount(1);
     await expect(page.getByText('Include Off-Chain Reserves')).toBeHidden();
@@ -100,7 +101,7 @@ test('should load the Total Reserves', async ({ page }) => {
     await expect(page.getByText('New Reserves')).toBeVisible();
 });
 
-test('should load Total Reserves info', async ({ page }) => {
+test.skip('should load Total Reserves info', async ({ page }) => {
     const info = "Explore on and off-chain balances USD related cryptocurrencies, identify the flow of funds and track the total inflow from source to internal operational wallets, as well as the outflow to external wallets (e.g., Payment Processor) wallets."
 
     await page.waitForLoadState('networkidle');
@@ -111,7 +112,7 @@ test('should load Total Reserves info', async ({ page }) => {
     await expect(page.getByText(info)).toBeVisible();
 });
 
-test('should load the On Chain Reserves', async ({ page }) => {
+test.skip('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('On Chain Reserves')).toBeVisible();
     await expect(page.getByText(`Unspent on-chain reserves to the ${builderName} Team.`).count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Operational').count()).resolves.toBeGreaterThan(0);
@@ -119,7 +120,7 @@ test('should load the On Chain Reserves', async ({ page }) => {
     await expect(page.getByText('New Balance').count()).resolves.toBeGreaterThan(0);
 });
 
-test('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
+test.skip('should expand accordion for On Chain Reserves with multiple wallets', async ({ page }) => {
     await page.waitForLoadState('networkidle');
     await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeHidden();
 
@@ -169,7 +170,7 @@ test.skip('should expand accordion for On Chain Reserves with a single wallet', 
     await expect(page.getByText('56,800')).toHaveCount(1);
 });
 
-test('should load accordion for Growth', async ({ page }) => {
+test.skip('should load accordion for Growth', async ({ page }) => {
     const info = "Track and analyze the movement of On-Chain assets.";
 
     await page.waitForLoadState('networkidle');
@@ -216,7 +217,7 @@ test.skip('should load the Off Chain Reserves transactions', async ({ page }) =>
     await expect(page.getByText('243,751')).toBeVisible();
 });
 
-test('should load Reported Expenses Comparison main data', async ({ page }) => {
+test.skip('should load Reported Expenses Comparison main data', async ({ page }) => {
     await page.evaluate(() => {
         window.scrollTo(0, document.body.scrollHeight);
     });
@@ -234,7 +235,7 @@ test('should load Reported Expenses Comparison main data', async ({ page }) => {
     await expect(page.getByText('Totals')).toHaveCount(3);
 });
 
-test('should load Reported Expenses Comparison info', async ({ page }) => {
+test.skip('should load Reported Expenses Comparison info', async ({ page }) => {
     const info = "Understand the differences between reported and net transactions. Easily spot variations and improve financial tracking for comprehensive expense and revenue analysis.";
 
     await page.waitForLoadState('networkidle');
