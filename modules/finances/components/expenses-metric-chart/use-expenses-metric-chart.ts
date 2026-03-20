@@ -1,6 +1,6 @@
 import { useQueryStates } from 'nuqs'
 import { useCallback, useMemo, useRef, useState } from 'react'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { useMediaQuery } from '@/shared/hooks/use-media-query'
 import {
   type CumulativeType,
   expensesMetricChartFiltersConfig,

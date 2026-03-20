@@ -1,23 +1,11 @@
-import { renderToStaticMarkup } from 'react-dom/server'
-import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
-import { getMonthAbbreviationToolTip } from '../../../lib/expenses-metric-chart-utils'
-import { formatBudgetName, removeBudgetWord } from '../../../utils'
-import type { CumulativeType } from '../../../lib/expenses-metric-chart-search-params'
-import type { GRANULARITY_OPTIONS, LineChartSeries } from '../../../types'
+import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
+import { getMonthAbbreviationToolTip } from '@/modules/finances/lib/expenses-metric-chart-utils'
+import type { GRANULARITY_OPTIONS, LineChartSeries } from '@/modules/finances/types'
+import { formatBudgetName, removeBudgetWord } from '@/modules/finances/utils'
+import { usLocalizedNumber } from '@/shared/lib/humanization'
+import { cn } from '@/shared/lib/utils'
 
-interface ExpensesMetricTooltipProps {
-  params: LineChartSeries[]
-  isMobile: boolean
-  isTablet: boolean
-  isDesktop1024: boolean
-  selectedGranularity: GRANULARITY_OPTIONS
-  isCumulative: boolean
-  cumulativeType: CumulativeType
-  year: string
-}
-
-interface TooltipContentProps {
+interface ExpensesMetricChartTooltipProps {
   filteredParams: LineChartSeries[]
   isMobile: boolean
   isTablet: boolean
@@ -28,7 +16,7 @@ interface TooltipContentProps {
   year: string
 }
 
-function TooltipContent({
+function ExpensesMetricChartTooltip({
   filteredParams,
   isMobile,
   isTablet,
@@ -37,7 +25,7 @@ function TooltipContent({
   isCumulative,
   cumulativeType,
   year,
-}: Readonly<TooltipContentProps>) {
+}: Readonly<ExpensesMetricChartTooltipProps>) {
   const shortAmount = filteredParams.length > 10
   const title =
     (selectedGranularity as string) === 'Annually'
@@ -93,38 +81,4 @@ function TooltipContent({
   )
 }
 
-function getExpensesMetricTooltip({
-  params,
-  isMobile,
-  isTablet,
-  isDesktop1024,
-  selectedGranularity,
-  isCumulative,
-  cumulativeType,
-  year,
-}: Readonly<ExpensesMetricTooltipProps>) {
-  if (params.every((item) => item.value === 0)) {
-    return ''
-  }
-
-  const filteredParams = params.filter((item) => item.value !== 0 && Math.abs(item.value) > 0.004)
-
-  if (filteredParams.length === 0) {
-    return ''
-  }
-
-  return renderToStaticMarkup(
-    <TooltipContent
-      filteredParams={filteredParams}
-      isMobile={isMobile}
-      isTablet={isTablet}
-      isDesktop1024={isDesktop1024}
-      selectedGranularity={selectedGranularity}
-      isCumulative={isCumulative}
-      cumulativeType={cumulativeType}
-      year={year}
-    />,
-  )
-}
-
-export { getExpensesMetricTooltip }
+export { ExpensesMetricChartTooltip }

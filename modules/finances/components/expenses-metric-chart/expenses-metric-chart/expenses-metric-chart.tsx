@@ -3,8 +3,9 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useCallback, useEffect, useMemo } from 'react'
 
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { cn } from '@/modules/shared/lib/utils'
+import { getExpensesMetricTooltip } from '@/modules/finances/lib/get-expenses-metric-chart-tooltip'
+import { useMediaQuery } from '@/shared/hooks/use-media-query'
+import { cn } from '@/shared/lib/utils'
 import { useFinancesYear } from '../../../hooks/use-finaces-year'
 import {
   formatterExpensesMetricChart,
@@ -12,7 +13,6 @@ import {
   getCorrectGranularity,
   replaceAllNumberLetOneBeforeDot,
 } from '../../../lib/expenses-metric-chart-utils'
-import { getExpensesMetricTooltip } from '../expenses-metric-chart-tooltip/expenses-metric-chart-tooltip'
 import type { CumulativeType } from '../../../lib/expenses-metric-chart-search-params'
 import type {
   ExpensesMetricChartSeriesData,
