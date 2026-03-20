@@ -17,15 +17,12 @@ async function ExpensesMetricChartDataFetcher({
   searchParams,
 }: Readonly<SummarySectionProps>) {
   const { financeSlug } = await params
-  const { metric, year, granularity } = expensesMetricChartSearchParamsCache.parse(
-    await searchParams,
-  )
+  const { year, granularity } = expensesMetricChartSearchParamsCache.parse(await searchParams)
   const codePath = getCodePathFromParams(financeSlug)
   const levelNumber = getLevelOfDetail(codePath)
   const budgetsAnalytics = await getBudgetsAnalytics({
     granularity,
     year,
-    select: metric,
     lod: levelNumber.levelOfDetail,
     budgets: BUDGETS,
   })

@@ -1,12 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import {
-  getMonthAbbreviationToolTip,
-  getSelectMetricText,
-} from '../../../lib/expenses-metric-chart-utils'
+import { getMonthAbbreviationToolTip } from '../../../lib/expenses-metric-chart-utils'
 import { formatBudgetName, removeBudgetWord } from '../../../utils'
-import type { AnalyticMetric, GRANULARITY_OPTIONS, LineChartSeries } from '../../../types'
+import type { CumulativeType } from '../../../lib/expenses-metric-chart-search-params'
+import type { GRANULARITY_OPTIONS, LineChartSeries } from '../../../types'
 
 interface ExpensesMetricTooltipProps {
   params: LineChartSeries[]
@@ -14,7 +12,8 @@ interface ExpensesMetricTooltipProps {
   isTablet: boolean
   isDesktop1024: boolean
   selectedGranularity: GRANULARITY_OPTIONS
-  selectedMetric?: AnalyticMetric
+  isCumulative: boolean
+  cumulativeType: CumulativeType
   year: string
 }
 
@@ -24,7 +23,8 @@ interface TooltipContentProps {
   isTablet: boolean
   isDesktop1024: boolean
   selectedGranularity: GRANULARITY_OPTIONS
-  selectedMetric?: AnalyticMetric
+  isCumulative: boolean
+  cumulativeType: CumulativeType
   year: string
 }
 
@@ -34,7 +34,8 @@ function TooltipContent({
   isTablet,
   isDesktop1024,
   selectedGranularity,
-  selectedMetric,
+  isCumulative,
+  cumulativeType,
   year,
 }: Readonly<TooltipContentProps>) {
   const shortAmount = filteredParams.length > 10
@@ -45,10 +46,12 @@ function TooltipContent({
 
   return (
     <div className="bg-card rounded-xl p-4 shadow-md">
-      <div className="mb-4 text-xs font-semibold text-[#B6BCC2]">
-        {title}
-        <span className="ml-1 inline-block">{getSelectMetricText(selectedMetric)}</span>
-      </div>
+      <div className="mb-4 text-xs font-semibold text-[#B6BCC2]">{title}</div>
+      {isCumulative && (
+        <div className="text-muted-foreground mb-4 text-[11px] font-light uppercase">
+          {cumulativeType} cumulative
+        </div>
+      )}
 
       <div
         className={cn(
@@ -96,7 +99,8 @@ function getExpensesMetricTooltip({
   isTablet,
   isDesktop1024,
   selectedGranularity,
-  selectedMetric,
+  isCumulative,
+  cumulativeType,
   year,
 }: Readonly<ExpensesMetricTooltipProps>) {
   if (params.every((item) => item.value === 0)) {
@@ -116,7 +120,8 @@ function getExpensesMetricTooltip({
       isTablet={isTablet}
       isDesktop1024={isDesktop1024}
       selectedGranularity={selectedGranularity}
-      selectedMetric={selectedMetric}
+      isCumulative={isCumulative}
+      cumulativeType={cumulativeType}
       year={year}
     />,
   )

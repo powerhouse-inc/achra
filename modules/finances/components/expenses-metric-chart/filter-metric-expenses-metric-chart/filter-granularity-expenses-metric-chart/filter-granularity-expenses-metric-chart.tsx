@@ -38,7 +38,7 @@ function ExpensesMetricGranularitySelectDrawer({
     <DrawerSelect
       value={granularity ?? undefined}
       onChange={handleChange}
-      label="Metrics"
+      label="Granularity"
       options={granularityOptions}
     />
   )

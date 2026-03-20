@@ -13,8 +13,8 @@ import {
   replaceAllNumberLetOneBeforeDot,
 } from '../../../lib/expenses-metric-chart-utils'
 import { getExpensesMetricTooltip } from '../expenses-metric-chart-tooltip/expenses-metric-chart-tooltip'
+import type { CumulativeType } from '../../../lib/expenses-metric-chart-search-params'
 import type {
-  AnalyticMetric,
   ExpensesMetricChartSeriesData,
   GRANULARITY_OPTIONS,
   LineChartSeries,
@@ -25,14 +25,16 @@ interface ExpensesMetricChartProps {
   selectedGranularity: GRANULARITY_OPTIONS
   series: ExpensesMetricChartSeriesData[]
   refExpensesMetricChart: React.RefObject<EChartsOption>
-  selectedMetric?: AnalyticMetric
+  isCumulative: boolean
+  cumulativeType: CumulativeType
 }
 
 function ExpensesMetricChart({
   refExpensesMetricChart,
   series,
   selectedGranularity,
-  selectedMetric,
+  isCumulative,
+  cumulativeType,
 }: Readonly<ExpensesMetricChartProps>) {
   const { year } = useFinancesYear()
   const granularity = getCorrectGranularity(selectedGranularity)
@@ -141,7 +143,8 @@ function ExpensesMetricChart({
             isTablet,
             isDesktop1024,
             selectedGranularity,
-            selectedMetric,
+            isCumulative,
+            cumulativeType,
             year,
           })
         },
@@ -243,7 +246,8 @@ function ExpensesMetricChart({
       isDesktop1024,
       selectedGranularity,
       year,
-      selectedMetric,
+      isCumulative,
+      cumulativeType,
       isLessMobile,
     ],
   )

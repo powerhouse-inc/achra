@@ -1,16 +1,12 @@
-import { parseAsStringEnum, useQueryState } from 'nuqs'
-import { useMemo, useRef, useState } from 'react'
+import { useQueryStates } from 'nuqs'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import {
-  getMetricValue,
-  parseAnalyticsToSeriesExpensesMetricChart,
-} from '../../lib/expenses-metric-chart-utils'
-import {
-  type Budget,
-  type ExpensesMetricBudgetAnalytic,
-  GRANULARITY_OPTIONS,
-  METRIC_OPTIONS,
-} from '../../types'
+  type CumulativeType,
+  expensesMetricChartFiltersConfig,
+} from '../../lib/expenses-metric-chart-search-params'
+import { parseAnalyticsToSeriesExpensesMetricChart } from '../../lib/expenses-metric-chart-utils'
+import { type Budget, type ExpensesMetricBudgetAnalytic, GRANULARITY_OPTIONS } from '../../types'
 import type { EChartsOption } from 'echarts-for-react'
 
 interface ExpensesMetricChartProps {
@@ -27,14 +23,10 @@ function useExpensesMetricChart({
   codePath,
 }: Readonly<ExpensesMetricChartProps>) {
   const refExpensesMetricChart = useRef<EChartsOption>(null)
-  const [selectedGranularity] = useQueryState(
-    'granularity',
-    parseAsStringEnum(Object.values(GRANULARITY_OPTIONS)).withDefault(GRANULARITY_OPTIONS.Monthly),
-  )
-  const [selectedMetric] = useQueryState(
-    'metric',
-    parseAsStringEnum(Object.values(METRIC_OPTIONS)).withDefault(METRIC_OPTIONS.Budget),
-  )
+  const [filters, setFilters] = useQueryStates(expensesMetricChartFiltersConfig)
+  const selectedGranularity = filters.granularity
+  const isCumulative = filters.cumulative === 'true'
+  const cumulativeType = filters.cumulativeType
 
   const [isChecked, setIsChecked] = useState(true)
   const isMobile = useMediaQuery({ to: 'sm' })
@@ -42,21 +34,15 @@ function useExpensesMetricChart({
   const [inactiveSeries, setInactiveSeries] = useState<string[]>([])
   const levelNumber = codePath.split('/').length
 
-  const selectedMetricAnalytic = getMetricValue(selectedMetric)
-  const selectedMetricLabel =
-    selectedMetric === METRIC_OPTIONS.NetExpensesOnChain
-      ? 'Net Expenses On-chain'
-      : selectedMetric === METRIC_OPTIONS.NetProtocolOutflow
-        ? 'Net Protocol Outflow'
-        : selectedMetric
-
   const allSeries = useMemo(() => {
-    return parseAnalyticsToSeriesExpensesMetricChart(budgetsAnalytics, budgets, allBudgets)
-  }, [allBudgets, budgets, budgetsAnalytics])
+    return parseAnalyticsToSeriesExpensesMetricChart(budgetsAnalytics, budgets, allBudgets, {
+      isCumulative,
+      cumulativeType,
+    })
+  }, [allBudgets, budgets, budgetsAnalytics, cumulativeType, isCumulative])
 
   const series = useMemo(() => {
     const parsedSeries = allSeries.map((item) => {
-      const isSelectedMetric = item.name === selectedMetricLabel
       if (inactiveSeries.includes(item.name)) {
         return {
           ...item,
@@ -82,18 +68,55 @@ function useExpensesMetricChart({
         ...item,
         lineStyle: {
           ...item.lineStyle,
-          width: isSelectedMetric ? 3 : 2,
-          opacity: isSelectedMetric ? 1 : 0.35,
+          width: 2,
+          opacity: 1,
         },
         itemStyle: {
           ...item.itemStyle,
-          opacity: isSelectedMetric ? 1 : 0.35,
+          opacity: 1,
         },
       }
     })
 
     return parsedSeries
-  }, [allSeries, inactiveSeries, selectedMetricLabel])
+  }, [allSeries, inactiveSeries])
+
+  const handleSelectGranularity = useCallback(
+    (granularity: GRANULARITY_OPTIONS) => {
+      void setFilters({ granularity })
+    },
+    [setFilters],
+  )
+
+  const handleChangeCumulativeType = useCallback(
+    (value: CumulativeType) => {
+      void setFilters({
+        cumulative: 'true',
+        cumulativeType: value,
+      })
+    },
+    [setFilters],
+  )
+
+  const handleToggleCumulative = useCallback(() => {
+    void setFilters({
+      cumulative: isCumulative ? 'false' : 'true',
+      cumulativeType: 'relative',
+    })
+  }, [isCumulative, setFilters])
+
+  const onReset = useCallback(() => {
+    void setFilters({
+      granularity: GRANULARITY_OPTIONS.Monthly,
+      cumulative: 'false',
+      cumulativeType: 'relative',
+    })
+  }, [setFilters])
+
+  const isResetDisabled =
+    selectedGranularity === GRANULARITY_OPTIONS.Monthly &&
+    !isCumulative &&
+    cumulativeType === 'relative'
 
   const handleToggleSeries = (toggleSeries: string) => {
     setInactiveSeries(
@@ -142,7 +165,13 @@ function useExpensesMetricChart({
     refExpensesMetricChart,
     showLegendValue,
     selectedGranularity,
-    selectedMetric: selectedMetricAnalytic,
+    isCumulative,
+    cumulativeType,
+    handleSelectGranularity,
+    handleChangeCumulativeType,
+    handleToggleCumulative,
+    onReset,
+    isResetDisabled,
   }
 }
 

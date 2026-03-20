@@ -5,7 +5,7 @@ import type { Analytic, Budget, GRANULARITY_OPTIONS } from '../types'
 interface ExpensesMetricChartService {
   granularity: GRANULARITY_OPTIONS
   year: string
-  select: string
+  select?: string
   lod: number
   budgets: Budget[]
 }
