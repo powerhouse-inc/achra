@@ -69,7 +69,7 @@ function useReservesWaterfallChart({
   const titleChart = useMemo(() => {
     const levelBudget = allBudgets.find((budget) => budget.codePath === codePath)
     const titleLevelBudget = formatBudgetName(levelBudget?.name ?? '')
-    return titleLevelBudget === '' ? 'MakerDAO Finances' : titleLevelBudget
+    return titleLevelBudget === '' || titleLevelBudget === 'No-Name' ? 'Reserves' : titleLevelBudget
   }, [allBudgets, codePath])
 
   const { data: analytics, isLoading } = useQuery({
@@ -90,10 +90,10 @@ function useReservesWaterfallChart({
 
   const selectAll = useMemo(() => Array.from(summaryValues.keys()), [summaryValues])
   const activeElementsFiltered = useMemo(
-    () => activeElements.filter((element) => selectAll.includes(element)),
+    () => (activeElements ?? []).filter((element) => selectAll.includes(element)),
     [activeElements, selectAll],
   )
-  const selectedElements = activeElementsFiltered.length > 0 ? activeElementsFiltered : selectAll
+  const selectedElements = activeElements === null ? selectAll : activeElementsFiltered
 
   const series = useMemo(() => {
     const valuesToShow = sumValuesFromMapKeys(summaryValues, selectedElements, granularityApiValue)
@@ -131,7 +131,7 @@ function useReservesWaterfallChart({
   const selectedCategoryOptions = categoryOptions.filter((item) =>
     selectedElements.includes(item.value),
   )
-  const canReset = selectedGranularity !== DEFAULT_GRANULARITY || activeElements.length > 0
+  const canReset = selectedGranularity !== DEFAULT_GRANULARITY || activeElements !== null
 
   const onReset = () => {
     void setSelectedGranularity(null)

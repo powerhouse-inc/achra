@@ -1,30 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Achra
+
+Achra is the marketplace for global coordination. It connects organizations, builders, and operators to scale networks across borders through structured workflows for governance, proposals, services, and execution.
+
+The product is designed as an operational hub for modern distributed teams, bringing network objectives, contributors, roadmaps, payments, and support services into one connected platform.
+
+## Tech Stack
+
+- Next.js 16 App Router with typed routes, React Compiler, and cache components
+- React 19 and TypeScript
+- Tailwind CSS 4, shadcn/ui, Radix UI, Lucide icons
+- GraphQL + GraphQL Code Generator + TanStack Query
+- Storybook 10, Chromatic, MSW, Vitest, and Playwright
+- Vercel Analytics and Speed Insights
 
 ## Getting Started
 
-First, run the development server:
+This repository uses `pnpm`.
+
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Create your local environment file:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the development server:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If `HOMEPAGE_REMOTE_URL` is set, the `/` and `/cases` routes are rewritten to an external marketing site. For local product development, routes such as `/networks`, `/workstreams`, and `/services` are often more useful entry points.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Variables
+
+Start from `.env.example`. The most important variables are:
+
+| Variable                                                | Required    | Purpose                                                       |
+| ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| `HOMEPAGE_REMOTE_URL`                                   | Yes         | External homepage target used to rewrite `/` and `/cases`.    |
+| `NEXT_PUBLIC_SWITCHBOARD_URL`                           | Yes         | GraphQL endpoint used by the app and GraphQL code generation. |
+| `NEXT_PUBLIC_ETH_MAINNET_RPC`                           | Yes         | Ethereum mainnet RPC used for on-chain reads.                 |
+| `NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY`                    | Optional    | Enables the whitelist overlay. Defaults to `false`.           |
+| `NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED`                  | Optional    | Controls the leave-page guard in service purchase flows.      |
+| `NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE` | Optional    | Controls local persistence for service purchase state.        |
+| `MAILCHIMP_API_KEY`                                     | Conditional | Required when the whitelist overlay is enabled.               |
+| `MAILCHIMP_AUDIENCE_ID`                                 | Conditional | Required when the whitelist overlay is enabled.               |
+| `MAILCHIMP_SERVER_LOCATION`                             | Conditional | Required when the whitelist overlay is enabled.               |
+| `MAILCHIMP_TAG`                                         | Optional    | Tag applied to Mailchimp whitelist submissions.               |
+
+## Available Scripts
+
+| Command                | Description                                     |
+| ---------------------- | ----------------------------------------------- |
+| `pnpm dev`             | Start the Next.js development server.           |
+| `pnpm build`           | Build the production app.                       |
+| `pnpm start`           | Run the production server.                      |
+| `pnpm lint`            | Run ESLint.                                     |
+| `pnpm lint:fix`        | Run ESLint and apply auto-fixes.                |
+| `pnpm format`          | Format the repository with Prettier.            |
+| `pnpm format:check`    | Check formatting without writing changes.       |
+| `pnpm codegen`         | Regenerate GraphQL types and React Query hooks. |
+| `pnpm storybook`       | Run Storybook locally on port `6006`.           |
+| `pnpm build-storybook` | Build the static Storybook site.                |
+
+## Project Structure
+
+Achra follows a module-based architecture. Business and feature code lives in `modules/`, while route definitions live in `app/`.
+
+```text
+app/
+  (achra)/                    Global platform routes
+  network/[slug]/             Network-scoped routes
+  api/                        Route handlers
+
+modules/
+  shared/                     Shared UI, providers, hooks, utilities, feature flags
+  networks/                   Network listing and governance/forum integrations
+  builders/                   Builder lists and related UI
+  builder-profile/            Builder profile views
+  workstream/                 Workstream pages, proposals, and project details
+  finances/                   Financial summaries, charts, and statements
+  expense-reports/            Expense reporting flows and UI
+  roadmap/                    Roadmaps and milestones
+  services/                   Services catalog
+  service-profile/            Service profile pages
+  service-purchase/           Multi-step service purchase flow
+  operator-profile/           Operator profile pages
+  project/                    Project and deliverable UI
+  whitelist/                  Whitelist overlay and related logic
+  __generated__/graphql/      Generated GraphQL types and hooks
+```
+
+Use `modules/shared/` for code shared across multiple domains or app-level layouts. Domain-specific code should stay within its own module.
+
+## Routing Model
+
+- Global routes live under `app/(achra)`, including areas such as `/networks`, `/workstreams`, and `/services`.
+- Network-specific routes live under `app/network/[slug]` and cover builders, finances, roadmaps, workstreams, and related details.
+- The root layout in `app/layout.tsx` wires global providers, theme support, analytics, query state, toaster notifications, footer rendering, and the optional whitelist overlay.
+
+## Data Layer
+
+Achra uses GraphQL as its primary data layer.
+
+- GraphQL operations are colocated in `modules/**/*.graphql` and relevant `tsx` or `ts` files.
+- Code generation is configured in `codegen.ts`.
+- Generated types and TanStack Query hooks are written to `modules/__generated__/graphql/switchboard-generated.ts`.
+- The generated hooks use the custom fetcher at `modules/shared/lib/fetcher.ts`.
+
+Run `pnpm codegen` after adding or changing GraphQL operations.
+
+## Storybook And UI Development
+
+Storybook is configured with `@storybook/nextjs-vite` and scans stories from both `modules/` and `app/`. The project uses:
+
+- MSW for mocked API responses
+- Accessibility checks via Storybook addons
+- Shared decorators from `modules/shared/lib/decorators`
+- Global styles from `app/globals.css`
+
+Launch it locally with:
+
+```bash
+pnpm storybook
+```
+
+## Recommended Skill For Contributors
+
+To contribute to Achra effectively, we recommend using the `achra-guidelines` skill. It documents the project's architecture, business domains, naming conventions, feature-flag patterns, GraphQL conventions, Storybook expectations, and other engineering guidelines used across the codebase.
+
+Install it with:
+
+```bash
+npx skills add https://github.com/yasielcabrera/achra-guidelines-skill --skill achra-guidelines
+```
+
+Use this skill when writing or refactoring Achra code, adding new modules or routes, creating shared components, working with feature flags, or checking which project conventions to follow.
+
+## Notes For Contributors
+
+- Path aliases are configured in `tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `modules/shared/*`.
+- shadcn/ui components are configured to live under `modules/shared/components`.
+- Feature availability can differ by environment. Check `modules/shared/lib/feature-flags` before assuming a section should always render.
+- The homepage may be served remotely via `HOMEPAGE_REMOTE_URL`, so not every environment will render `/` from this repo.

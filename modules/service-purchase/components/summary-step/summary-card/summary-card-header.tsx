@@ -52,7 +52,7 @@ function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
       <div ref={sentinelRef} className="-mb-6 h-0 w-full" aria-hidden="true" />
       <CardHeader
         className={cn(
-          'sticky top-18 z-200 flex flex-row items-start justify-between gap-4 px-3 pt-3 sm:top-27.5 lg:px-6 lg:pt-6',
+          'sticky top-18 z-20 flex flex-row items-start justify-between gap-4 px-3 pt-3 sm:top-27.5 lg:px-6 lg:pt-6',
           'bg-card rounded-t-xl transition-shadow',
           isStuck &&
             'border-primary/30 shadow-primary/20 items-center rounded-xl border py-2 transition-all duration-500 lg:py-3',

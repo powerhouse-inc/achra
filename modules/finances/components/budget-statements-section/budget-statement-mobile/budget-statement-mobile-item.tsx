@@ -80,7 +80,7 @@ export function BudgetStatementMobileItem({
           <Separator className="my-2" />
         </div>
 
-        <CardContent className="mb-2 flex items-center justify-between px-10 md:hidden">
+        <CardContent className="mb-2 flex items-center justify-between px-4 md:hidden">
           <LabeledValue label="Reporting Month" value={reportMonth} />
 
           <LabeledValue label={metricLabel} value={`${usLocalizedNumber(amount)} USD`} />

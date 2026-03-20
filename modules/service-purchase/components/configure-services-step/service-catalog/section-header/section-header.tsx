@@ -21,6 +21,8 @@ interface SectionHeaderProps {
   groupCurrency?: string | null
   groupCostType?: RsGroupCostType | null
   perTierPrices?: Record<string, string | null> | null
+  isAddOn?: boolean
+  groupSetupPrice?: number | null
 }
 
 function SectionHeader({
@@ -36,14 +38,25 @@ function SectionHeader({
   groupCurrency,
   groupCostType,
   perTierPrices,
+  isAddOn,
+  groupSetupPrice,
 }: Readonly<SectionHeaderProps>) {
   const { tierNames } = usePricingCalculatorContext()
   const lastTierName = tierNames[tierNames.length - 1]
 
   const isOneTime = groupCostType === RsGroupCostType.Setup
   const isRecurring = groupCostType === RsGroupCostType.Recurring
-  const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency)
-  const discountedPriceLabel = getPriceLabel(groupCostType, groupDiscountedPrice, groupCurrency)
+  const setupPriceLabel =
+    isAddOn && groupSetupPrice
+      ? getPriceLabel(RsGroupCostType.Setup, groupSetupPrice, groupCurrency)
+      : null
+  const priceLabel = getPriceLabel(groupCostType, groupPrice, groupCurrency, isAddOn)
+  const discountedPriceLabel = getPriceLabel(
+    groupCostType,
+    groupDiscountedPrice,
+    groupCurrency,
+    isAddOn,
+  )
 
   return (
     <div
@@ -109,12 +122,12 @@ function SectionHeader({
           activePlan ? 'bg-primary/30' : 'bg-accent',
         )}
       >
-        {isOneTime && perTierPrices && activePlan && perTierPrices[activePlan] && (
-          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+        {!isAddOn && isOneTime && perTierPrices && activePlan && perTierPrices[activePlan] && (
+          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
             {perTierPrices[activePlan]}
           </span>
         )}
-        {isRecurring && perTierPrices && activePlan && perTierPrices[activePlan] && (
+        {!isAddOn && isRecurring && perTierPrices && activePlan && perTierPrices[activePlan] && (
           <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {perTierPrices[activePlan]}
           </span>
@@ -134,6 +147,31 @@ function SectionHeader({
             </span>
           </span>
         )}
+        {isAddOn && priceLabel && !discountedPriceLabel && (
+          <span className="flex items-center gap-2">
+            {setupPriceLabel && (
+              <>
+                <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                  {setupPriceLabel}
+                </span>
+                <span className="text-foreground/40 text-xs">|</span>
+              </>
+            )}
+            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+              {priceLabel}
+            </span>
+          </span>
+        )}
+        {isAddOn && priceLabel && discountedPriceLabel && (
+          <span className="flex min-w-0 flex-col items-center gap-0.5">
+            <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
+              {priceLabel}
+            </span>
+            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+              {discountedPriceLabel}
+            </span>
+          </span>
+        )}
       </div>
 
       {/* Desktop: one cell per plan */}
@@ -145,7 +183,7 @@ function SectionHeader({
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
           )}
         >
-          {isOneTime && perTierPrices?.[plan] && (
+          {!isAddOn && isOneTime && perTierPrices?.[plan] && (
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
@@ -155,7 +193,7 @@ function SectionHeader({
               {perTierPrices[plan]}
             </span>
           )}
-          {isRecurring && perTierPrices?.[plan] && (
+          {!isAddOn && isRecurring && perTierPrices?.[plan] && (
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
@@ -180,7 +218,7 @@ function SectionHeader({
             priceLabel &&
             discountedPriceLabel && (
               <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
-                <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap uppercase line-through">
+                <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
                   {priceLabel}
                 </span>
                 <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
@@ -188,6 +226,31 @@ function SectionHeader({
                 </span>
               </span>
             )}
+          {isAddOn && plan === lastTierName && priceLabel && !discountedPriceLabel && (
+            <span className="absolute right-6 flex items-center gap-2">
+              {setupPriceLabel && (
+                <>
+                  <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                    {setupPriceLabel}
+                  </span>
+                  <span className="text-foreground/40 text-xs">|</span>
+                </>
+              )}
+              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                {priceLabel}
+              </span>
+            </span>
+          )}
+          {isAddOn && plan === lastTierName && priceLabel && discountedPriceLabel && (
+            <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
+              <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
+                {priceLabel}
+              </span>
+              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                {discountedPriceLabel}
+              </span>
+            </span>
+          )}
         </div>
       ))}
     </div>
