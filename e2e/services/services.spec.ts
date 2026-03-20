@@ -30,7 +30,7 @@ test('should contain services or resource links to resource items', async ({ pag
 test('should navigate to more info page by clicking on the "More Info" button', async ({ page }) => {
     await page.getByRole('tab', { name: 'Builders' }).click();
     await page.getByRole('link', { name: 'More Info' }).first().click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services/c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8`);
+    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d`);
 });
 
 test('should search a service by name', async ({ page }) => {

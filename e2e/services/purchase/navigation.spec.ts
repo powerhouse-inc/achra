@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const UUID = 'c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8';
+const UUID = '712241c4-33ce-40de-94eb-f029b44f4a2d';
 const BASE_URL = `${process.env.HOMEPAGE_REMOTE_URL}/services/${UUID}/purchase`;
 
 test('should navigate back to product info from select operator step', async ({ page }) => {

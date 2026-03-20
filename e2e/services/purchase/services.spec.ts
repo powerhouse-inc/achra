@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8/purchase`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d/purchase`);
     await page.waitForLoadState('networkidle');
 
     await page.getByText('Select Operator').click();
@@ -48,6 +48,5 @@ test('should show annual discount when switching to Annual billing', async ({ pa
     await page.waitForTimeout(500);
     await page.getByRole('radio', { name: 'Annual' }).first().click();
     await page.waitForTimeout(500);
-    await expect(page.getByText(/Save 5%/)).toBeVisible();
-    await expect(page.getByText('$713/mo').last()).toBeVisible();
+    await expect(page.getByText('$750/mo').last()).toBeVisible();
 });

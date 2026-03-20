@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const SERVICE_UUID = 'c6aacdfe-b182-4ec5-8a4c-dbf9f21708f8';
+const SERVICE_UUID = '712241c4-33ce-40de-94eb-f029b44f4a2d';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/${SERVICE_UUID}`);
