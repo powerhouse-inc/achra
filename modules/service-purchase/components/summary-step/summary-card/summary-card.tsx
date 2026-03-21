@@ -91,6 +91,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               totalSuffix="/mo"
               groupPrices={recurringGroupPrices}
               isCustomPricing={selectedTier.isCustomPricing}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />
@@ -109,6 +110,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               sectionLabel="ONE-TIME FEE"
               totalSuffix=""
               groupPrices={setupGroupPrices}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />

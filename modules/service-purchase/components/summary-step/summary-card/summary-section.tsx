@@ -20,6 +20,7 @@ interface SummaryContextValue {
   headerLabel?: string
   groupPrices?: Map<string, number>
   isCustomPricing?: boolean
+  currency?: string | null
 }
 
 const SummaryContext = createContext<SummaryContextValue | null>(null)
@@ -39,6 +40,7 @@ interface SummaryProviderProps {
   headerLabel?: string
   groupPrices?: Map<string, number>
   isCustomPricing?: boolean
+  currency?: string | null
 }
 
 function SummaryProvider({
@@ -48,6 +50,7 @@ function SummaryProvider({
   headerLabel = 'Pricing Summary',
   groupPrices,
   isCustomPricing,
+  currency,
 }: SummaryProviderProps) {
   const isRecurring = sectionLabel === 'Recurring'
   const value: SummaryContextValue = {
@@ -57,6 +60,7 @@ function SummaryProvider({
     headerLabel,
     groupPrices,
     isCustomPricing,
+    currency,
   }
   return <SummaryContext.Provider value={value}>{children}</SummaryContext.Provider>
 }
@@ -99,7 +103,7 @@ interface SummaryGroupProps {
 }
 
 function SummaryGroup({ group }: SummaryGroupProps) {
-  const { isRecurring, groupPrices, isCustomPricing } = useSummary()
+  const { isRecurring, groupPrices, isCustomPricing, currency, totalSuffix } = useSummary()
   const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
   const formattedPrice =
     isCustomPricing && displayAmount === 0
@@ -107,7 +111,8 @@ function SummaryGroup({ group }: SummaryGroupProps) {
       : formatSummaryPrice({
           amount: displayAmount,
           isRecurring,
-          suffix: '/mo',
+          suffix: totalSuffix,
+          currency,
         })
   const expandable = group.services.length > 0
 
@@ -173,12 +178,13 @@ interface SummaryFooterProps {
 }
 
 function SummaryTotal({ totalAmount }: SummaryFooterProps) {
-  const { sectionLabel, totalSuffix, isRecurring, isCustomPricing } = useSummary()
+  const { sectionLabel, totalSuffix, isRecurring, isCustomPricing, currency } = useSummary()
   const formattedTotal = formatSummaryPrice({
     amount: totalAmount,
     isRecurring,
     suffix: totalSuffix,
     isCustomPricing,
+    currency,
   })
 
   return (
