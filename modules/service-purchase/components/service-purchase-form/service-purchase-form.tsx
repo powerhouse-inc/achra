@@ -1,8 +1,6 @@
 'use client'
 
-import { parseAsString, useQueryState } from 'nuqs'
-import { Suspense, useCallback, useEffect } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { Suspense, useCallback } from 'react'
 import type {
   BuilderProfileState,
   RsResourceTemplate,
@@ -35,60 +33,20 @@ export interface ServicePurchaseFormProps {
 }
 
 function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePurchaseFormProps>) {
-  const { activeStep, goToStep, hasVisitedStep, resetPostConfigureSteps } = useServicePurchaseStep()
-  const [operatorIdFromUrl, setOperatorIdFromUrl] = useQueryState(
-    'operatorId',
-    parseAsString.withDefault(''),
-  )
+  const { activeStep, goToStep } = useServicePurchaseStep()
 
-  const form = useForm<ServicePurchaseFormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      operatorId: undefined,
-      name: '',
-      teamName: '',
-      email: '',
-    },
-  })
-
-  const { control, setValue } = form
-
-  // TODO: the operatorId is not in the URL, is this necessary?
-  // Note: It is when the user clicks on the "Configure Services" button in an operator card from another page.
-  // Sync operatorId from URL query state
-  useEffect(() => {
-    if (!operatorIdFromUrl) return
-    setValue('operatorId', operatorIdFromUrl)
-    goToStep(ServicePurchaseStep.ConfigureServices)
-    void setOperatorIdFromUrl(null)
-  }, [operatorIdFromUrl, setValue, goToStep, setOperatorIdFromUrl])
-
-  const selectedOperatorId = useWatch({ control, name: 'operatorId' })
-
-  const handleOnSelectOperator = (operatorId: string) => {
-    const hasPreviousOperator = selectedOperatorId !== undefined
-    const isDifferentOperator = selectedOperatorId !== operatorId
-
-    const hasVisitedSummaryOrConfirmation =
-      hasVisitedStep(ServicePurchaseStep.Summary) ||
-      hasVisitedStep(ServicePurchaseStep.Confirmation)
-
-    if (hasPreviousOperator && isDifferentOperator && hasVisitedSummaryOrConfirmation) {
-      resetPostConfigureSteps()
-    }
-    setValue('operatorId', operatorId)
+  const handleOnSelectOperator = (_operatorId: string) => {
+    // TODO: implement the logic to select the operator once we add support for multiple operators
     goToStep(ServicePurchaseStep.ConfigureServices)
   }
 
-  // Note: In the near future there will be more than one operator, by then we will need to modify this function accordingly, selecting the operator by default if none is selected.
   const handleTabsNavigation = useCallback(
     (value: string) => {
-      if (!selectedOperatorId) {
-        setValue('operatorId', operator.id)
-      }
+      // Note: In the near future there will be more than one operator, by then we will need to
+      // modify this function accordingly, selecting the operator by default if none is selected.
       goToStep(value as ServicePurchaseStep)
     },
-    [selectedOperatorId, setValue, goToStep, operator.id],
+    [goToStep],
   )
 
   return (
