@@ -51,11 +51,17 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
       ),
     )
     const setup = sortOptionGroups(
-      selected.filter(
-        (group) =>
-          group.costType === RsGroupCostType.Setup &&
-          (hasServicesForTier(group) || group.resolvedPrice > 0),
-      ),
+      selected.filter((group) => {
+        if (group.costType === RsGroupCostType.Setup) {
+          return hasServicesForTier(group) || group.resolvedPrice > 0
+        }
+        // Add-ons with both setup and recurring appear in addOnBreakdowns with setupCost
+        if (group.costType === RsGroupCostType.Recurring && group.isAddOn) {
+          const setupPrice = getGroupPriceFromBreakdown(breakdown, group.id, true)
+          return setupPrice != null && setupPrice.amount > 0
+        }
+        return false
+      }),
     )
 
     const recurringPrices = new Map<string, number>()
