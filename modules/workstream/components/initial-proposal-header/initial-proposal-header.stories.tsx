@@ -1,5 +1,5 @@
 import { ProposalStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import InitialProposalHeader from './initial-proposal-header'
+import { InitialProposalHeader } from './initial-proposal-header'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

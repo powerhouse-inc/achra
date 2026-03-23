@@ -2,7 +2,7 @@ import { parseAsArrayOf, parseAsString, parseAsStringEnum, useQueryState } from 
 import { useCallback } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 
-export default function useWorkstreamFilters() {
+function useWorkstreamFilters() {
   const [search, setSearch] = useQueryState(
     'search',
     parseAsString.withDefault('').withOptions({
@@ -57,3 +57,5 @@ export default function useWorkstreamFilters() {
     onReset,
   }
 }
+
+export { useWorkstreamFilters }

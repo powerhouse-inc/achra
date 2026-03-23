@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw'
 import { withNuqsAdapter, withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import { mockedAllNetworksQuery } from '@/modules/workstream/mocks'
-import WorkstreamFilters from './workstream-filters'
+import { WorkstreamFilters } from './workstream-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

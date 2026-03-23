@@ -1,4 +1,4 @@
-import WorkstreamBanner from './workstream-banner'
+import { WorkstreamBanner } from './workstream-banner'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

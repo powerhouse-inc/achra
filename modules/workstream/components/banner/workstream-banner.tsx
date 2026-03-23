@@ -5,15 +5,15 @@ import { motion } from 'motion/react'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 import { useWorkstreamBanner } from './use-workstream-banner'
-import WorkstreamBannerBackground from './workstream-banner-background'
-import WorkstreamBannerContent from './workstream-banner-content'
-import WorkstreamBannerOverlay from './workstream-banner-overlay'
+import { WorkstreamBannerBackground } from './workstream-banner-background'
+import { WorkstreamBannerContent } from './workstream-banner-content'
+import { WorkstreamBannerOverlay } from './workstream-banner-overlay'
 
 interface WorkstreamBannerProps {
   backgroundImage?: string
 }
 
-export default function WorkstreamBanner({ backgroundImage }: WorkstreamBannerProps) {
+function WorkstreamBanner({ backgroundImage }: WorkstreamBannerProps) {
   const { isNetworkBanner, handleHide, animationProps } = useWorkstreamBanner()
 
   return (
@@ -44,3 +44,5 @@ export default function WorkstreamBanner({ backgroundImage }: WorkstreamBannerPr
     </motion.div>
   )
 }
+
+export { WorkstreamBanner }

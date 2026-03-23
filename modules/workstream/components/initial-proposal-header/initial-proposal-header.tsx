@@ -9,7 +9,7 @@ interface InitialProposalHeaderProps {
   action?: ReactNode
 }
 
-export default function InitialProposalHeader({
+function InitialProposalHeader({
   proposalStatus,
   proposalAuthor,
   action,
@@ -37,3 +37,5 @@ export default function InitialProposalHeader({
     </div>
   )
 }
+
+export { InitialProposalHeader }

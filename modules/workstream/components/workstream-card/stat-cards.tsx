@@ -5,7 +5,7 @@ import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import ProposalCardOutline from './proposal-card-outline'
+import { ProposalCardOutline } from './proposal-card-outline'
 
 interface StatCardsProps {
   milestones: number
