@@ -57,7 +57,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body
-        className={`${inter.className} ${openSansCondensed.variable} flex min-h-screen flex-col antialiased`}
+        className={`${inter.className} ${openSansCondensed.variable} flex min-h-dvh flex-col antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <QueryClientProvider>
