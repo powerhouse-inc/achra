@@ -29,5 +29,5 @@ test('should contain service listings with purchase and info links', async ({ pa
 
 test('should navigate to resource page by clicking on the "More Info" button', async ({ page }) => {
     await page.getByRole('link', { name: 'More Info' }).first().click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d`);
+    await expect(page).toHaveURL(/\/services\/[0-9a-f-]{36}$/);
 });

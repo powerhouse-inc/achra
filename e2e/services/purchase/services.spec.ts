@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
 
+const UUID = 'bb1d3128-9695-4bfd-93d1-9e980fa14de2';
+
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d/purchase`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/${UUID}/purchase`);
     await page.waitForLoadState('networkidle');
 
-    await page.getByText('Select Operator').click();
+    await page.getByRole('button', { name: 'Select an operator' }).click();
     await page.waitForTimeout(1000);
     await page.getByRole('button', { name: 'Configure Services' }).click();
     await page.waitForTimeout(1500);

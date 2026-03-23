@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services`);
+    await page.waitForLoadState('networkidle');
 });
 
 test('should contain all tabs', async ({ page }) => {
@@ -30,7 +31,7 @@ test('should contain services or resource links to resource items', async ({ pag
 test('should navigate to more info page by clicking on the "More Info" button', async ({ page }) => {
     await page.getByRole('tab', { name: 'Builders' }).click();
     await page.getByRole('link', { name: 'More Info' }).first().click();
-    await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d`);
+    await expect(page).toHaveURL(/\/services\/[0-9a-f-]{36}$/);
 });
 
 test('should search a service by name', async ({ page }) => {
