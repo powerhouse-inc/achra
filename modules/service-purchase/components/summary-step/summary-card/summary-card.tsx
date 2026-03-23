@@ -51,11 +51,17 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
       ),
     )
     const setup = sortOptionGroups(
-      selected.filter(
-        (group) =>
-          group.costType === RsGroupCostType.Setup &&
-          (hasServicesForTier(group) || group.resolvedPrice > 0),
-      ),
+      selected.filter((group) => {
+        if (group.costType === RsGroupCostType.Setup) {
+          return hasServicesForTier(group) || group.resolvedPrice > 0
+        }
+        // Add-ons with both setup and recurring appear in addOnBreakdowns with setupCost
+        if (group.costType === RsGroupCostType.Recurring && group.isAddOn) {
+          const setupPrice = getGroupPriceFromBreakdown(breakdown, group.id, true)
+          return setupPrice != null && setupPrice.amount > 0
+        }
+        return false
+      }),
     )
 
     const recurringPrices = new Map<string, number>()
@@ -91,6 +97,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               totalSuffix="/mo"
               groupPrices={recurringGroupPrices}
               isCustomPricing={selectedTier.isCustomPricing}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />
@@ -109,6 +116,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
               sectionLabel="ONE-TIME FEE"
               totalSuffix=""
               groupPrices={setupGroupPrices}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />
@@ -117,6 +125,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
                     <Summary.Group key={group.id} group={group} />
                   ))}
                 </Summary.Content>
+                {setupGroups.length > 1 && <Summary.Total totalAmount={totals.setupTotal} />}
               </Summary.Card>
             </Summary.Provider>
           )}

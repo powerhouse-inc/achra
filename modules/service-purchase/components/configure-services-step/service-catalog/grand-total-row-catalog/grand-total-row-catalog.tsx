@@ -45,7 +45,7 @@ function GrandTotalRowCatalog({
         selectedBillingCycle,
         activeGroupIds,
       )
-      totals[tier.id] = `${formatPrice(Math.round(monthlyTotal), tier.pricing.currency)}/mo`
+      totals[tier.id] = `${formatPrice(monthlyTotal, tier.pricing.currency)}/mo`
     }
     return totals
   }, [tiers, offering, selectedBillingCycle, activeGroupIds])

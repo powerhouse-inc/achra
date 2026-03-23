@@ -3,7 +3,11 @@
 import { useMemo } from 'react'
 import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
-import { formatMetricLabel, getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
+import {
+  formatMetricLabel,
+  formatPrice,
+  getUnitPriceMetrics,
+} from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
@@ -56,7 +60,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
                 </>
               ) : (
                 <>
-                  ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
+                  ~{formatPrice(Number(metric.unitPrice), tier.pricing.currency)}{' '}
                   <span className="text-foreground/50">
                     per {formatMetricLabel(metric.unitName ?? metric.metric)}
                   </span>
@@ -77,7 +81,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
             ) : (
               <>
                 <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
-                  ${Math.round(displayPrice).toLocaleString()}
+                  {formatPrice(displayPrice, tier.pricing.currency)}
                 </span>
                 <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
                   /mo
@@ -102,7 +106,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
                 </>
               ) : (
                 <>
-                  ~${Math.round(Number(metric.unitPrice)).toLocaleString()}{' '}
+                  ~{formatPrice(Number(metric.unitPrice), tier.pricing.currency)}{' '}
                   <span className="text-foreground/50">
                     per {formatMetricLabel(metric.unitName ?? metric.metric)}
                   </span>

@@ -7,7 +7,7 @@ import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
 } from '@/modules/service-purchase/lib/sticky-observer-utils'
-import { formatSummaryPrice } from '@/modules/service-purchase/lib/utils'
+import { formatPrice, formatSummaryPrice } from '@/modules/service-purchase/lib/utils'
 import {
   usePurchaseTotals,
   useSelectedBillingCycle,
@@ -84,6 +84,7 @@ function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
                 isRecurring: true,
                 suffix: '/mo',
                 isCustomPricing: selectedTier.isCustomPricing,
+                currency: selectedTier.pricing.currency,
               })}
             </span>
           </div>
@@ -92,7 +93,7 @@ function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
           </span>
           {totals.setupTotal > 0 && (
             <span className="text-foreground/70 text-xs/4.5 font-medium">
-              + ${totals.setupTotal} Setup
+              + {formatPrice(totals.setupTotal, selectedTier.pricing.currency)} Setup
             </span>
           )}
         </div>
