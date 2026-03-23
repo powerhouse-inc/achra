@@ -41,6 +41,7 @@ export interface FiancesNavigationCard {
 export interface ValueAndUnit {
   value: number
   unit: string
+  sum?: number
 }
 
 export interface ValuesDataWithBorder {
@@ -254,6 +255,7 @@ export type AnalyticGranularityForExpensesMetricChart = Extract<
 export interface ValueAndUnit {
   value: number
   unit: string
+  sum?: number
 }
 
 export type ExpensesMetricBudgetAnalytic = Record<string, BudgetMetric[]>

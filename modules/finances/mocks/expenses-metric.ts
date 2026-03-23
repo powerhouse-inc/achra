@@ -223,10 +223,20 @@ const metricOrder: MetricKey[] = [
   'Forecast',
 ]
 
+// The reference implementation uses API-provided `sum` values that represent
+// the cumulative total from previous years plus the current period.
+// Our chart still runs on mocks, so we emulate that historical carry-over here.
+const HISTORICAL_YEARS_BEFORE_2025 = 4
+
 const toIsoMonthStart = (period: string, endOffsetMonths = 0) => {
   const [year, month] = period.split('/').map(Number)
   const date = new Date(Date.UTC(year, month - 1 + endOffsetMonths, 1, 0, 0, 0, 0))
   return date.toISOString()
+}
+
+const getHistoricalOffset = (values: number[]) => {
+  const annualTotal = values.reduce((acc, value) => acc + value, 0)
+  return annualTotal * HISTORICAL_YEARS_BEFORE_2025
 }
 
 const createRowsForMonth = (monthIndex: number): MetricRow[] => {
@@ -234,13 +244,16 @@ const createRowsForMonth = (monthIndex: number): MetricRow[] => {
 
   Object.entries(mockSeriesByPath).forEach(([path, metricValues]) => {
     metricOrder.forEach((metric) => {
-      const value = metricValues[metric][monthIndex] ?? 0
+      const values = metricValues[metric]
+      const value = values[monthIndex] ?? 0
+      const yearToDate = values.slice(0, monthIndex + 1).reduce((acc, current) => acc + current, 0)
+
       rows.push({
         dimensions: [{ name: 'budget', path }],
         metric,
         unit: 'DAI',
         value,
-        sum: value,
+        sum: getHistoricalOffset(values) + yearToDate,
       })
     })
   })

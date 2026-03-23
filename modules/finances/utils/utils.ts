@@ -131,10 +131,11 @@ export function getBreadcrumbItems(
  * Sets the metric value and unit
  */
 
-export const setMetric = (value: number, unit: string) =>
+export const setMetric = (value: number, unit: string, sum?: number) =>
   ({
     value,
     unit,
+    sum,
   }) as ValueAndUnit
 
 /**
