@@ -25,8 +25,8 @@ importers:
         specifier: ^3.0.80
         version: 3.0.80
       '@powerhousedao/service-offering':
-        specifier: 1.0.0-dev.21
-        version: 1.0.0-dev.21(e9988d5aae3e5ee3ac825c2d57c807ef)
+        specifier: 1.0.0-dev.22
+        version: 1.0.0-dev.22(e9988d5aae3e5ee3ac825c2d57c807ef)
       '@radix-ui/react-accordion':
         specifier: ^1.2.11
         version: 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2790,8 +2790,8 @@ packages:
       document-drive: 6.0.0-dev.104
       document-model: 6.0.0-dev.104
 
-  '@powerhousedao/service-offering@1.0.0-dev.21':
-    resolution: {integrity: sha512-3QrKQrmuG4RRZZ1o2od55ewPErO8+7DYEOlKuKZfieKr3QHwa4/YN4LgbZ25qYLw1VKE4D3A5o613krX8pOOrQ==}
+  '@powerhousedao/service-offering@1.0.0-dev.22':
+    resolution: {integrity: sha512-vNQIZSwMqNiqg6XORz39xAWXoHEMi6jj1ipo34PajGC60+GodMUKb6TNLv+MRz8FRnt2eK6f+JmvkIYr+kbGjg==}
     peerDependencies:
       react: '>=19.0.0'
       react-dom: '>=19.0.0'
@@ -15527,7 +15527,7 @@ snapshots:
       document-drive: 6.0.0-dev.104
       document-model: 6.0.0-dev.104
 
-  '@powerhousedao/service-offering@1.0.0-dev.21(e9988d5aae3e5ee3ac825c2d57c807ef)':
+  '@powerhousedao/service-offering@1.0.0-dev.22(e9988d5aae3e5ee3ac825c2d57c807ef)':
     dependencies:
       '@electric-sql/pglite': 0.3.15
       '@powerhousedao/builder-tools': 6.0.0-dev.104(@types/node@22.18.12)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.52.5)(terser@5.44.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.1)
