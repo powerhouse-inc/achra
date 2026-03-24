@@ -14,7 +14,7 @@ async function navigateToSummary(page: any) {
 }
 
 test.skip('should show confirmation after submitting the form', async ({ page }) => {
-    // TODO: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
+    // Blocked: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
     // Form submission succeeds (HTTP 200) but success:false in response, page stays at step=summary.
     // Re-enable once the backend operator drive is configured for this service.
     await navigateToSummary(page);
@@ -32,7 +32,7 @@ test.skip('should show confirmation after submitting the form', async ({ page })
 });
 
 test.skip('should show confirmation message with submitted email', async ({ page }) => {
-    // TODO: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
+    // Blocked: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
     // Form submission succeeds (HTTP 200) but success:false in response, page stays at step=summary.
     // Re-enable once the backend operator drive is configured for this service.
     await navigateToSummary(page);

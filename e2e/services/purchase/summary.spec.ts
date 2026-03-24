@@ -50,7 +50,7 @@ test('should show validation errors when submitting empty required fields', asyn
 });
 
 test.skip('should show error and stay on summary when submitting duplicate data', async ({ page }) => {
-    // TODO: Backend behavior changed — duplicate submissions now advance to step=confirmation
+    // Note: Backend behavior changed — duplicate submissions now advance to step=confirmation
     // instead of showing an error on step=summary. Re-evaluate expected behavior with PM.
     await page.getByRole('textbox', { name: 'Name', exact: true }).fill('tester');
     await page.getByRole('textbox', { name: /Team Name/i }).fill('test team');

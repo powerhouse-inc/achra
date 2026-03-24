@@ -36,16 +36,14 @@ test('should load the builder links', async ({ page }) => {
     await expect(page.getByText('GitHub')).toBeVisible();
 });
 
-// TODO: Re-enable when account snapshot data is available for the powerhouse builder
+// Blocked: re-enable when account snapshot data is available for the powerhouse builder
 test.skip('should navigate to the previous month', async ({ page }) => {
     await expect(page.getByText(currentMonthText)).toHaveCount(5);
-    //TODO: refactor locator
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
     await expect(page.getByText(previousMonthText)).toHaveCount(5);
 });
 
 test.skip('should navigate to the next month', async ({ page }) => {
-    //TODO: refactor locator
     await expect(page.getByText(currentMonthText)).toHaveCount(5);
     await page.locator('div.flex.gap-2 > a:nth-child(1)').click();
     await expect(page.getByText(previousMonthText)).toHaveCount(5);
@@ -80,7 +78,6 @@ test.skip('should load Funding Overview info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('div > div:nth-child(4) > div > div > div > div > div > button > svg').first().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -107,7 +104,6 @@ test.skip('should load Total Reserves info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div > button > svg').first().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -124,7 +120,6 @@ test.skip('should expand accordion for On Chain Reserves with multiple wallets',
     await page.waitForLoadState('networkidle');
     await expect(page.getByText('Powerhouse Genesis Operational Hub Reserves')).toBeHidden();
 
-    //TODO: refactor locator
     await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(2) > div > div[data-state="closed"]').click();
 
     await expect(page.getByText('Powerhouse Genesis Operational Hub')).toHaveCount(1);
@@ -176,7 +171,6 @@ test.skip('should load accordion for Growth', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > main > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(2) > div > div > div:nth-child(1) > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -197,7 +191,6 @@ test.skip('should load Off Chain Reserves info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > div > div > div > div > div:nth-child(2) > div > div > div:nth-child(1) > div > svg').last().hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -241,7 +234,6 @@ test.skip('should load Reported Expenses Comparison info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > main > div > div:nth-child(4) > div > div > div > div > button > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -252,7 +244,6 @@ test.skip('should load the On-chain only info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > div > div > div > div > div > div > div > table > thead > tr:nth-child(2) > th:nth-child(1) > div > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });
@@ -263,7 +254,6 @@ test.skip('should load the Including off-chain info', async ({ page }) => {
     await page.waitForLoadState('networkidle');
 
     await expect(page.getByText(info)).toBeHidden();
-    //TODO: refactor locator
     await page.locator('body > div > div > div > div > div > div > div > table > thead > tr:nth-child(2) > th:nth-child(3) > div > svg').hover();
     await expect(page.getByText(info)).toBeVisible();
 });

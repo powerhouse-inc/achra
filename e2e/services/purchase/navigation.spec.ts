@@ -55,7 +55,7 @@ test('should mark completed steps when advancing through the flow', async ({ pag
 });
 
 test.skip('should advance from summary to confirmation after submitting the form', async ({ page }) => {
-    // TODO: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
+    // Blocked: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
     // Form submission succeeds (HTTP 200) but success:false in response, page stays at step=summary.
     // Re-enable once the backend operator drive is configured for this service.
     await page.goto(BASE_URL);

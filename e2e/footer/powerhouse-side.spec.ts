@@ -27,7 +27,7 @@ test('has a link for Explore Achra', async ({ page }) => {
     const newTab = await newTabPromise;
     await newTab.waitForLoadState();
 
-    // TODO: Check if this should redirect to the staging environment.
+    // Note: Check if this should redirect to the staging environment.
     await expect(newTab).toHaveURL('https://achra.com/workstreams');
 });
 

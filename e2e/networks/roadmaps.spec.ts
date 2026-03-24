@@ -8,7 +8,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('has a breadcrumb to go back to the network page', async ({ page }) => {
-    // TODO: refactor locator
     await page.locator('li[data-slot="breadcrumb-item"]').getByText("Powerhouse").click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
@@ -27,35 +26,30 @@ test('can filter roadmaps by status', async ({ page }) => {
 });
 
 test('the logo navigates to the network page', async ({ page }) => {
-    // TODO: refactor locator
     await page.locator('.bg-secondary > div.flex').first().click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse`);
 });
 
 test('the workstream name navigates to the workstream page', async ({ page }) => {
-    // TODO: refactor locator
     await page.locator('.bg-secondary > a').first().click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/workstream/powerhouse-workstream-2024`);
 });
 
 test('navigates to the Roadmap details page', async ({ page }) => {
-    // TODO: refactor locator
     await page.locator('a[href*="powerhouse-team-2024-roadmap-af7da134"]').first().click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134`);
 });
 
 test('navigates to the milenstone details in the Roadmap details page', async ({ page }) => {
-    //TODO: refactor locator
     await page.locator('div.hidden *> a[href*="#PROD"]').first().click();
 
     await expect(page).toHaveURL(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/roadmap/powerhouse-team-2024-roadmap-af7da134#PROD`);
 });
 
 test('should display hidden members', async ({ page }) => {
-    //TODO: refactor locator
     await page.locator('div.swiper-slide.swiper-slide-active.flex').getByText('+2').first().hover();
 
     await expect(page.getByText('meraki')).toHaveCount(2);
@@ -64,7 +58,6 @@ test('should display hidden members', async ({ page }) => {
 test('should redirect to the link of the key result', async ({ page }) => {
     const newTabPromise = page.waitForEvent("popup");
 
-    //TODO: refactor locator
     await page.locator('div.swiper-wrapper *> div.milestone-latest-key-results *> li').first().click();
 
     const newTab = await newTabPromise;
