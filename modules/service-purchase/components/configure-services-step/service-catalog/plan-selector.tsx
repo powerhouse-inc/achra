@@ -35,7 +35,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
         />
         {tier.mostPopular ? (
-          <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow-sm">
+          <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase shadow-sm">
             Most popular
           </span>
         ) : (
