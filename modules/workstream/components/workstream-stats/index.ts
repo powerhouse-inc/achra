@@ -1,2 +1,2 @@
-export * from './workstream-stats'
-export * from './workstream-stats-skeleton'
+export { WorkstreamStats } from './workstream-stats'
+export { WorkstreamStatsSkeleton } from './workstream-stats-skeleton'

@@ -3,15 +3,17 @@
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import SearchInput from '@/modules/shared/components/form/search-input'
 import { Separator } from '@/modules/shared/components/ui/separator'
-import { NetworkSelect, NetworkSelectDrawer } from './network-select'
-import { StatusSelect, StatusSelectDrawer } from './status-select'
-import useWorkstreamFilters from './useWorkstreamFilters'
+import { NetworkSelect } from './network-select'
+import { NetworkSelectDrawer } from './network-select-drawer'
+import { StatusSelect } from './status-select'
+import { StatusSelectDrawer } from './status-select-drawer'
+import { useWorkstreamFilters } from './use-workstream-filters'
 
 interface WorkstreamFiltersProps {
   showNetworkFilter?: boolean
 }
 
-export default function WorkstreamFilters({ showNetworkFilter = true }: WorkstreamFiltersProps) {
+function WorkstreamFilters({ showNetworkFilter = true }: WorkstreamFiltersProps) {
   const { search, statuses, networks, setSearch, setStatuses, setNetworks, onReset } =
     useWorkstreamFilters()
 
@@ -45,3 +47,5 @@ export default function WorkstreamFilters({ showNetworkFilter = true }: Workstre
     </div>
   )
 }
+
+export { WorkstreamFilters }

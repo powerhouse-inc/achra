@@ -1,1 +1,1 @@
-export { default } from './workstream-filters'
+export { WorkstreamFilters } from './workstream-filters'

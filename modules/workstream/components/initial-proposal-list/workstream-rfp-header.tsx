@@ -6,7 +6,7 @@ import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-s
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { NavigationHeader } from '@/modules/shared/components/navigation-header'
-import WorkstreamStats from '../workstream-stats/workstream-stats'
+import { WorkstreamStats } from '../workstream-stats/workstream-stats'
 import type { Route } from 'next'
 
 interface WorkstreamRfpHeaderProps {

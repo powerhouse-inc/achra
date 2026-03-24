@@ -7,7 +7,7 @@ interface WorkstreamBannerBackgroundProps {
   backgroundImage?: string
 }
 
-export default function WorkstreamBannerBackground({
+function WorkstreamBannerBackground({
   isNetworkBanner,
   backgroundImage,
 }: WorkstreamBannerBackgroundProps) {
@@ -91,3 +91,5 @@ export default function WorkstreamBannerBackground({
     </div>
   )
 }
+
+export { WorkstreamBannerBackground }

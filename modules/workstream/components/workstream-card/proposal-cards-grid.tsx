@@ -9,7 +9,7 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import { createDeliverableTitle } from '../../lib/deliverable-helpers'
 import { getProjectByDeliverableId } from '../../utils'
-import ProposalApplyCard from './proposal-apply-card'
+import { ProposalApplyCard } from './proposal-apply-card'
 
 interface ProposalCardsGridProps {
   deliverables: Array<Pick<Sow_Deliverable, 'id' | 'code' | 'title' | 'description'>>
@@ -19,7 +19,7 @@ interface ProposalCardsGridProps {
   workstreamSlug: string
 }
 
-export default function ProposalCardsGrid({
+function ProposalCardsGrid({
   deliverables,
   shouldUsePagination = true,
   projects,
@@ -108,3 +108,5 @@ export default function ProposalCardsGrid({
     </>
   )
 }
+
+export { ProposalCardsGrid }

@@ -1,1 +1,1 @@
-export { default as WorkstreamPageSkeleton } from './workstream-page-skeleton'
+export { WorkstreamPageSkeleton } from './workstream-page-skeleton'

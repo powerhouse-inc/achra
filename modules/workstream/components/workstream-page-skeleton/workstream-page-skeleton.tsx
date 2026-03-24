@@ -1,15 +1,13 @@
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card'
-import WorkstreamFiltersSkeleton from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
+import { WorkstreamFiltersSkeleton } from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
 import { WorkstreamServerListSkeleton } from '@/modules/workstream/components/workstream-server-list'
 
 interface WorkstreamPageSkeletonProps {
   showNetworkFilter?: boolean
 }
-export default function WorkstreamPageSkeleton({
-  showNetworkFilter = true,
-}: WorkstreamPageSkeletonProps) {
+function WorkstreamPageSkeleton({ showNetworkFilter = true }: WorkstreamPageSkeletonProps) {
   return (
     <PageContent>
       <Skeleton className="mb-8 h-55 w-full" />
@@ -25,3 +23,5 @@ export default function WorkstreamPageSkeleton({
     </PageContent>
   )
 }
+
+export { WorkstreamPageSkeleton }
