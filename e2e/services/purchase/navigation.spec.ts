@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const UUID = 'bb1d3128-9695-4bfd-93d1-9e980fa14de2';
+const UUID = '098a7cad-b66b-404a-b2c8-933d69b808cd';
 const BASE_URL = `${process.env.HOMEPAGE_REMOTE_URL}/services/${UUID}/purchase`;
 
 test('should navigate back to product info from select operator step', async ({ page }) => {
@@ -55,7 +55,7 @@ test('should mark completed steps when advancing through the flow', async ({ pag
 });
 
 test.skip('should advance from summary to confirmation after submitting the form', async ({ page }) => {
-    // TODO: Backend returns "Operator drive not found for resource template bb1d3128-9695-4bfd-93d1-9e980fa14de2"
+    // TODO: Backend returns "Operator drive not found for resource template 098a7cad-b66b-404a-b2c8-933d69b808cd"
     // Form submission succeeds (HTTP 200) but success:false in response, page stays at step=summary.
     // Re-enable once the backend operator drive is configured for this service.
     await page.goto(BASE_URL);

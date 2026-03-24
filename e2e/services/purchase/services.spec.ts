@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const UUID = 'bb1d3128-9695-4bfd-93d1-9e980fa14de2';
+const UUID = '098a7cad-b66b-404a-b2c8-933d69b808cd';
 
 test.beforeEach(async ({ page }) => {
     await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/${UUID}/purchase`);
@@ -50,5 +50,5 @@ test('should show annual discount when switching to Annual billing', async ({ pa
     await page.waitForTimeout(500);
     await page.getByRole('radio', { name: 'Annual' }).first().click();
     await page.waitForTimeout(500);
-    await expect(page.getByText('$750/mo').last()).toBeVisible();
+    await expect(page.getByText('$713/mo').last()).toBeVisible();
 });

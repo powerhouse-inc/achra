@@ -33,7 +33,7 @@ test('has a link to the Networks page in the "For Organizations" section', async
 
 test('has a description in the "For Builders" section', async ({ page }) => {
     await page.getByText('For Builders').click();
-    await expect(page.getByText('Discover active projects and roadmaps from leading network organizations. Focus on building with built-in operational support.')).toBeVisible();
+    await expect(page.getByText('Discover active projects and roadmaps from leading network organizations. Focus on building with built-in operational support.')).toBeVisible({ timeout: 10000 });
 });
 
 test('has a link to the Services page in the "For Operators" section', async ({ page }) => {

@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test('inspect operator list - contributors count', async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d/purchase`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/098a7cad-b66b-404a-b2c8-933d69b808cd/purchase`);
     await page.waitForLoadState('networkidle');
     await page.getByText('Select Operator').click();
     await page.waitForTimeout(1000);
@@ -13,7 +13,7 @@ test('inspect operator list - contributors count', async ({ page }) => {
 });
 
 test('inspect annual billing discount', async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/712241c4-33ce-40de-94eb-f029b44f4a2d/purchase`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/services/098a7cad-b66b-404a-b2c8-933d69b808cd/purchase`);
     await page.waitForLoadState('networkidle');
     await page.getByText('Select Operator').click();
     await page.waitForTimeout(1000);
