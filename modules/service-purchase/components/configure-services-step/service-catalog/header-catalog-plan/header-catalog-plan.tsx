@@ -79,7 +79,12 @@ function HeaderCatalogPlan({
         {/* LABEL */}
         <div className="flex h-full items-center px-4 lg:px-6" />
         {/* MOBILE CAROUSEL */}
-        <div className="bg-primary/10 flex h-full w-full items-center justify-between px-1 py-2 lg:hidden">
+        <div
+          className={cn(
+            'flex h-full w-full items-center justify-between px-1 py-2 lg:hidden',
+            currentMobileTier.mostPopular ? 'bg-primary/10 border-t-2 border-t-primary' : 'bg-primary/10',
+          )}
+        >
           <Button variant="ghost" size="icon" onClick={onPrevPlan} className="size-8">
             <ChevronLeft className="size-5" />
           </Button>
@@ -109,8 +114,9 @@ function HeaderCatalogPlan({
               <div
                 key={tier.id}
                 className={cn(
-                  'flex h-full min-w-0 items-center justify-center py-2 transition-colors',
+                  'relative flex h-full min-w-0 items-center justify-center py-2 transition-colors',
                   isActive && 'bg-primary/10',
+                  tier.mostPopular && 'border-t-2 border-t-primary',
                 )}
               >
                 <PlanSelectorItem tier={tier} />

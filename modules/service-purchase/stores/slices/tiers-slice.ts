@@ -13,7 +13,7 @@ export function createTiersSlice(
 ): TiersSlice {
   const { tiers } = services
 
-  const selectedTier = tiers[0]
+  const selectedTier = tiers.find((t) => t.mostPopular) ?? tiers[0]
 
   const availableCycles = getAvailableCycles(services.availableBillingCycles)
   const selectedBillingCycle = availableCycles[0] ?? RsBillingCycle.Monthly

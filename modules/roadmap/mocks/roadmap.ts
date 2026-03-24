@@ -498,10 +498,12 @@ export const mockedScopeOfWorkState: ScopeOfWork_ScopeOfWorkState = {
 
 export const mockedScopeOfWorkQuery: ScopeOfWorkQuery = {
   ScopeOfWork: {
-    getDocument: {
-      id: 'powerhouse-scope-of-work-2024',
-      state: mockedScopeOfWorkState,
-      stateJSON: mockedScopeOfWorkState,
+    document: {
+      document: {
+        id: 'powerhouse-scope-of-work-2024',
+        state: { global: mockedScopeOfWorkState },
+      },
+      childIds: [],
     },
   },
 }

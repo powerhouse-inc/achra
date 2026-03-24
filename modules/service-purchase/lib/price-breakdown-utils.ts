@@ -70,7 +70,6 @@ export function computeTierHeaderPriceWithBreakdown(
   activeGroupIds: Set<string>,
 ): number {
   const breakdown = getPriceBreakdown(offering, tierId, billingCycle, activeGroupIds)
-  console.log('<<<<<<<<<first>>>>>>>>>', breakdown)
   const monthsInCycle = monthsInBillingCycle(billingCycle)
   return breakdown.totals.grandRecurringTotal / monthsInCycle
 }
