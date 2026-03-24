@@ -33,16 +33,14 @@ export default function ServicesCard({ service }: ServicesCardProps) {
 
   const coverImage = service.thumbnailUrl ?? DEFAULT_COVER
 
-  const cardLink = isActive
-    ? (`/services/${service.id}/purchase` as Route)
-    : (`/services/${service.id}` as Route)
+  const cardLink = `/services/${service.id}` as Route
 
   return (
     <Card className="bg-accent relative p-2 transition-shadow duration-300 hover:shadow-lg sm:p-3 md:p-4">
       <Link
         href={cardLink}
         className="absolute inset-0 z-10 rounded-xl"
-        aria-label={`Purchase ${service.title}`}
+        aria-label={`${service.title} Profile`}
       />
       <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_328px] xl:grid-cols-[120px_1fr_520px] 2xl:grid-cols-[120px_1fr_632px]">
         <div className="flex flex-col gap-2 sm:gap-4">
