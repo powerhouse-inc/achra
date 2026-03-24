@@ -3,6 +3,7 @@ import { FinancesBreadcrumb } from '@/modules/finances/components/breadcrumb-sel
 import { BreakdownChartCardWrapper } from '@/modules/finances/components/breakdown-chart/breakdown-chart-card-wrapper'
 import { BreakdownTable } from '@/modules/finances/components/breakdown-table'
 import { BudgetStatementsSectionWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper'
+import { BudgetStatementsSectionWrapperSkeleton } from '@/modules/finances/components/budget-statements-section/budget-statements-section-wrapper-skeleton'
 import { FINANCES_SECTIONS_ENCODED } from '@/modules/finances/components/config/const'
 import { ExpensesMetricChartCardWrapper } from '@/modules/finances/components/expenses-metric-chart/expenses-metric-chart-card-wrapper'
 import { NavigationSection } from '@/modules/finances/components/navigation-section'
@@ -82,8 +83,9 @@ export default function FinancesPage({ params, searchParams }: FinancesPageProps
               <BreakdownTable />
             </Suspense>
           )}
-
-          <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
+          <Suspense fallback={<BudgetStatementsSectionWrapperSkeleton />}>
+            <BudgetStatementsSectionWrapper params={params} searchParams={searchParams} />
+          </Suspense>
 
           <SectionActivation sections={FINANCES_SECTIONS_ENCODED} />
         </PageContent>
