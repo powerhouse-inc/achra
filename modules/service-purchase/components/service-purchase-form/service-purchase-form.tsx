@@ -58,6 +58,7 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
             <ProductInfo
               description={resourceTemplate.description}
               contentSections={resourceTemplate.contentSections}
+              faqFields={resourceTemplate.faqFields}
             />
           )}
           {step.value === ServicePurchaseStep.SelectOperator && (

@@ -17212,7 +17212,7 @@ export type ResourceTemplateQueryVariables = Exact<{
 }>;
 
 
-export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
+export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', displayOrder: number, question?: string | null, answer?: string | null, id: any }> | null, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
 
 export type ServiceOfferingsQueryVariables = Exact<{
   filter?: InputMaybe<RsServiceOfferingsFilter>;
@@ -18657,6 +18657,12 @@ export const ResourceTemplateDocument = `
     summary
     status
     operatorId
+    faqFields {
+      displayOrder
+      question
+      answer
+      id
+    }
     contentSections {
       content
       displayOrder
