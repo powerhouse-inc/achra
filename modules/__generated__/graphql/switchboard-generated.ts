@@ -17177,7 +17177,7 @@ export type ScopeOfWorkQueryVariables = Exact<{
 }>;
 
 
-export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
+export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork: { __typename?: 'ScopeOfWorkQueries', document?: { __typename?: 'ScopeOfWork_DocumentWithChildren', childIds: Array<string>, document: { __typename?: 'ScopeOfWorkMutationResult', id: string, state: { __typename?: 'ScopeOfWork_FullState', global: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } } } | null } };
 
 export type RoadmapListQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -18270,85 +18270,89 @@ useRoadmapDetailsQuery.fetcher = (variables: RoadmapDetailsQueryVariables, optio
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($identifier: String!) {
   ScopeOfWork {
-    getDocument(docId: $docId) {
-      id
-      stateJSON
-      state {
-        roadmaps {
-          id
-          slug
-          title
-          description
-          milestones {
-            description
-            budget
-            title
-            sequenceCode
-            id
-            coordinators
-            deliveryTarget
-            scope {
-              deliverables
-              deliverablesCompleted {
-                completed
-                total
+    document(identifier: $identifier) {
+      document {
+        id
+        state {
+          global {
+            roadmaps {
+              id
+              slug
+              title
+              description
+              milestones {
+                description
+                budget
+                title
+                sequenceCode
+                id
+                coordinators
+                deliveryTarget
+                scope {
+                  deliverables
+                  deliverablesCompleted {
+                    completed
+                    total
+                  }
+                  status
+                }
               }
-              status
             }
-          }
-        }
-        contributors {
-          id
-          name
-        }
-        deliverables {
-          budgetAnchor {
-            margin
-            project
-            quantity
-            unit
-            unitCost
-          }
-          code
-          description
-          id
-          keyResults {
-            id
-            link
+            contributors {
+              id
+              name
+            }
+            deliverables {
+              budgetAnchor {
+                margin
+                project
+                quantity
+                unit
+                unitCost
+              }
+              code
+              description
+              id
+              keyResults {
+                id
+                link
+                title
+              }
+              owner
+              status
+              title
+            }
+            description
+            projects {
+              abstract
+              budget
+              budgetType
+              code
+              currency
+              expenditure {
+                actuals
+                cap
+                percentage
+              }
+              id
+              imageUrl
+              projectOwner
+              title
+              scope {
+                status
+                deliverablesCompleted {
+                  completed
+                  total
+                }
+                deliverables
+              }
+            }
+            status
             title
           }
-          owner
-          status
-          title
         }
-        description
-        projects {
-          abstract
-          budget
-          budgetType
-          code
-          currency
-          expenditure {
-            actuals
-            cap
-            percentage
-          }
-          id
-          imageUrl
-          projectOwner
-          title
-          scope {
-            status
-            deliverablesCompleted {
-              completed
-              total
-            }
-            deliverables
-          }
-        }
-        status
-        title
       }
+      childIds
     }
   }
 }
