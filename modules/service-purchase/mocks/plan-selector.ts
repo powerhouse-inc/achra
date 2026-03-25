@@ -4,6 +4,7 @@ export const mockPlanSelectorTier: RsServiceSubscriptionTier = {
   description: '',
   id: '1',
   name: 'Pro Plan',
+  mostPopular: false,
   isCustomPricing: false,
   billingCycleDiscounts: [],
   pricing: {

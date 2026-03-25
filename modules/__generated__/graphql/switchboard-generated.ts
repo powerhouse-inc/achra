@@ -17177,7 +17177,7 @@ export type ScopeOfWorkQueryVariables = Exact<{
 }>;
 
 
-export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork: { __typename?: 'ScopeOfWorkQueries', document?: { __typename?: 'ScopeOfWork_DocumentWithChildren', document: { __typename?: 'ScopeOfWorkMutationResult', state: { __typename?: 'ScopeOfWork_FullState', global: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } } } | null } };
+export type ScopeOfWorkQuery = { __typename?: 'Query', ScopeOfWork?: { __typename?: 'ScopeOfWorkQueries', getDocument?: { __typename?: 'ScopeOfWork', id: string, stateJSON?: any | null, state: { __typename?: 'ScopeOfWork_ScopeOfWorkState', description: string, status: ScopeOfWork_ScopeOfWorkStatus, title: string, roadmaps: Array<{ __typename?: 'ScopeOfWork_Roadmap', id: any, slug: string, title: string, description: string, milestones: Array<{ __typename?: 'ScopeOfWork_Milestone', description: string, budget?: number | null, title: string, sequenceCode: string, id: any, coordinators: Array<string>, deliveryTarget: string, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', deliverables: Array<any>, status: ScopeOfWork_DeliverableSetStatus, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> }>, contributors: Array<{ __typename?: 'ScopeOfWork_Agent', id: any, name: string }>, deliverables: Array<{ __typename?: 'ScopeOfWork_Deliverable', code: string, description: string, id: any, owner?: string | null, status: ScopeOfWork_DeliverableStatus, title: string, budgetAnchor?: { __typename?: 'ScopeOfWork_BudgetAnchorProject', margin: number, project?: any | null, quantity: number, unit?: ScopeOfWork_Unit | null, unitCost: number } | null, keyResults: Array<{ __typename?: 'ScopeOfWork_KeyResult', id: any, link: string, title: string }> }>, projects: Array<{ __typename?: 'ScopeOfWork_Project', abstract?: string | null, budget?: number | null, budgetType?: ScopeOfWork_BudgetType | null, code: string, currency?: ScopeOfWork_PmCurrency | null, id: any, imageUrl?: any | null, projectOwner?: string | null, title: string, expenditure?: { __typename?: 'ScopeOfWork_BudgetExpenditure', actuals: number, cap: number, percentage: number } | null, scope?: { __typename?: 'ScopeOfWork_DeliverablesSet', status: ScopeOfWork_DeliverableSetStatus, deliverables: Array<any>, deliverablesCompleted: { __typename?: 'ScopeOfWork_DeliverablesCompleted', completed: number, total: number } } | null }> } } | null } | null };
 
 export type RoadmapListQueryVariables = Exact<{
   filter: WorkstreamFilter;
@@ -17219,7 +17219,7 @@ export type ServiceOfferingsQueryVariables = Exact<{
 }>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
 
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
@@ -18270,86 +18270,84 @@ useRoadmapDetailsQuery.fetcher = (variables: RoadmapDetailsQueryVariables, optio
 export const ScopeOfWorkDocument = `
     query ScopeOfWork($identifier: String!) {
   ScopeOfWork {
-    document(identifier: $identifier) {
-      document {
-        state {
-          global {
-            roadmaps {
-              id
-              slug
-              title
-              description
-              milestones {
-                description
-                budget
-                title
-                sequenceCode
-                id
-                coordinators
-                deliveryTarget
-                scope {
-                  deliverables
-                  deliverablesCompleted {
-                    completed
-                    total
-                  }
-                  status
-                }
-              }
-            }
-            contributors {
-              id
-              name
-            }
-            deliverables {
-              budgetAnchor {
-                margin
-                project
-                quantity
-                unit
-                unitCost
-              }
-              code
-              description
-              id
-              keyResults {
-                id
-                link
-                title
-              }
-              owner
-              status
-              title
-            }
+    getDocument(docId: $docId) {
+      id
+      stateJSON
+      state {
+        roadmaps {
+          id
+          slug
+          title
+          description
+          milestones {
             description
-            projects {
-              abstract
-              budget
-              budgetType
-              code
-              currency
-              expenditure {
-                actuals
-                cap
-                percentage
-              }
-              id
-              imageUrl
-              projectOwner
-              title
-              scope {
-                status
-                deliverablesCompleted {
-                  completed
-                  total
-                }
-                deliverables
-              }
-            }
-            status
+            budget
             title
+            sequenceCode
+            id
+            coordinators
+            deliveryTarget
+            scope {
+              deliverables
+              deliverablesCompleted {
+                completed
+                total
+              }
+              status
+            }
           }
         }
+        contributors {
+          id
+          name
+        }
+        deliverables {
+          budgetAnchor {
+            margin
+            project
+            quantity
+            unit
+            unitCost
+          }
+          code
+          description
+          id
+          keyResults {
+            id
+            link
+            title
+          }
+          owner
+          status
+          title
+        }
+        description
+        projects {
+          abstract
+          budget
+          budgetType
+          code
+          currency
+          expenditure {
+            actuals
+            cap
+            percentage
+          }
+          id
+          imageUrl
+          projectOwner
+          title
+          scope {
+            status
+            deliverablesCompleted {
+              completed
+              total
+            }
+            deliverables
+          }
+        }
+        status
+        title
       }
     }
   }
@@ -18723,6 +18721,7 @@ export const ServiceOfferingsDocument = `
     tiers {
       id
       name
+      mostPopular
       description
       isCustomPricing
       pricingMode

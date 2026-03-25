@@ -2,6 +2,7 @@ query ScopeOfWork($identifier: String!) {
   ScopeOfWork {
     document(identifier: $identifier) {
       document {
+        id
         state {
           global {
             roadmaps {
@@ -81,6 +82,7 @@ query ScopeOfWork($identifier: String!) {
           }
         }
       }
+      childIds
     }
   }
 }
