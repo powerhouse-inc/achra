@@ -7,6 +7,12 @@ query ResourceTemplate($filter: RSResourceTemplatesFilter) {
     summary
     status
     operatorId
+    faqFields {
+      displayOrder
+      question
+      answer
+      id
+    }
     contentSections {
       content
       displayOrder
