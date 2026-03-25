@@ -19,7 +19,7 @@
     "@emotion/is-prop-valid": "^1.4.0",
     "@hookform/resolvers": "^5.2.1",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
-    "@powerhousedao/service-offering": "1.0.0-dev.21",
+    "@powerhousedao/service-offering": "1.0.0-dev.22",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-aspect-ratio": "^1.1.7",

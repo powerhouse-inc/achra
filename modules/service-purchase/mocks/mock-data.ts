@@ -55,6 +55,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         id: '43f85011-9702-4aa9-b118-e256c88504c2',
         name: 'Basic',
         description: 'Essential entity setup for small teams',
+        mostPopular: false,
         isCustomPricing: false,
         pricingMode: RsTierPricingMode.Calculated,
         pricing: { amount: 99, currency: 'USD' },
@@ -79,6 +80,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         id: '0c6ef639-e1ef-4dfb-8090-496c6c70326d',
         name: 'Professional',
         description: 'Full operations suite',
+        mostPopular: true,
         isCustomPricing: false,
         pricingMode: RsTierPricingMode.Calculated,
 
@@ -92,6 +94,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         id: 'c4181acc-d4f6-41a2-8b41-d4b7df7b6297',
         name: 'Enterprise',
         description: 'Custom pricing for enterprises',
+        mostPopular: false,
         isCustomPricing: true,
         pricingMode: RsTierPricingMode.ManualOverride,
         pricing: { amount: null, currency: 'USD' },

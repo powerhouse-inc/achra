@@ -1,84 +1,88 @@
-query ScopeOfWork($docId: PHID!) {
+query ScopeOfWork($identifier: String!) {
   ScopeOfWork {
-    getDocument(docId: $docId) {
-      id
-      stateJSON
-      state {
-        roadmaps {
-          id
-          slug
-          title
-          description
-          milestones {
-            description
-            budget
-            title
-            sequenceCode
-            id
-            coordinators
-            deliveryTarget
-            scope {
-              deliverables
-              deliverablesCompleted {
-                completed
-                total
+    document(identifier: $identifier) {
+      document {
+        id
+        state {
+          global {
+            roadmaps {
+              id
+              slug
+              title
+              description
+              milestones {
+                description
+                budget
+                title
+                sequenceCode
+                id
+                coordinators
+                deliveryTarget
+                scope {
+                  deliverables
+                  deliverablesCompleted {
+                    completed
+                    total
+                  }
+                  status
+                }
               }
-              status
             }
-          }
-        }
-        contributors {
-          id
-          name
-        }
-        deliverables {
-          budgetAnchor {
-            margin
-            project
-            quantity
-            unit
-            unitCost
-          }
-          code
-          description
-          id
-          keyResults {
-            id
-            link
+            contributors {
+              id
+              name
+            }
+            deliverables {
+              budgetAnchor {
+                margin
+                project
+                quantity
+                unit
+                unitCost
+              }
+              code
+              description
+              id
+              keyResults {
+                id
+                link
+                title
+              }
+              owner
+              status
+              title
+            }
+            description
+            projects {
+              abstract
+              budget
+              budgetType
+              code
+              currency
+              expenditure {
+                actuals
+                cap
+                percentage
+              }
+              id
+              imageUrl
+              projectOwner
+              title
+              scope {
+                status
+                deliverablesCompleted {
+                  completed
+                  total
+                }
+                deliverables
+              }
+            }
+            status
             title
           }
-          owner
-          status
-          title
         }
-        description
-        projects {
-          abstract
-          budget
-          budgetType
-          code
-          currency
-          expenditure {
-            actuals
-            cap
-            percentage
-          }
-          id
-          imageUrl
-          projectOwner
-          title
-          scope {
-            status
-            deliverablesCompleted {
-              completed
-              total
-            }
-            deliverables
-          }
-        }
-        status
-        title
       }
+      childIds
     }
   }
 }
