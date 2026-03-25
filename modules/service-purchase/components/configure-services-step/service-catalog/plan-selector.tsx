@@ -34,19 +34,13 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           id={inputId}
           className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
         />
-        {tier.mostPopular ? (
-          <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase shadow-sm">
-            Most popular
-          </span>
-        ) : (
-          <span className={cn('text-foreground text-sm/5.5 font-semibold transition-colors')}>
-            {tier.name}
-          </span>
-        )}
-      </div>
-      {tier.mostPopular && (
         <span className={cn('text-foreground text-sm/5.5 font-semibold transition-colors')}>
           {tier.name}
+        </span>
+      </div>
+      {tier.mostPopular && (
+        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+          Most popular
         </span>
       )}
       {tier.isCustomPricing ? (
