@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Send } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
@@ -20,9 +20,14 @@ import {
   FormMessage,
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
+import { cn } from '@/modules/shared/lib/utils'
 import { notifyMeAction } from '../../actions/notify-me-action'
 
-function NotifyMeForm() {
+interface NotifyMeForm {
+  className?: string
+}
+
+function NotifyMeForm({ className }: NotifyMeForm) {
   const [state, formAction, isPending] = useActionState(notifyMeAction, initialActionState)
 
   const form = useForm<NotifyMeFormValues>({
@@ -48,7 +53,7 @@ function NotifyMeForm() {
           event.preventDefault()
           void form.handleSubmit(onSubmit)(event)
         }}
-        className="flex items-center gap-2.5"
+        className={cn('flex w-full flex-col items-center gap-2.5 sm:flex-row', className)}
       >
         {state.error && (
           <Alert variant="destructive" role="alert">
@@ -62,7 +67,7 @@ function NotifyMeForm() {
           name="email"
           disabled={isPending}
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-full rounded-md bg-white sm:max-w-74">
               <FormControl>
                 <Input
                   {...field}
@@ -76,17 +81,14 @@ function NotifyMeForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="sm-w-24.5 w-full" disabled={isPending}>
+        <Button type="submit" className="w-full sm:w-fit" disabled={isPending}>
           {isPending ? (
             <>
               <Loader2 className="size-4 animate-spin" aria-hidden="true" />
               Notifying
             </>
           ) : (
-            <>
-              Notify Me
-              <Send className="size-4" aria-hidden="true" />
-            </>
+            <>Notify Me</>
           )}
         </Button>
       </form>
