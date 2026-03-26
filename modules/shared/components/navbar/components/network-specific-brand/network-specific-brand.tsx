@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { NetworkIcon } from './network-icon'
 import { NetworkLogo } from './network-logo'
 import { useNetworkProfile } from './use-network-profile'
 
@@ -18,7 +19,10 @@ function NetworkSpecificBrand() {
 
   return (
     <Link href={`/network/${slug}`} className="cursor-pointer hover:opacity-80">
-      <NetworkLogo network={networkProfile} />
+      <div className="flex items-center gap-2">
+        <NetworkIcon network={networkProfile} />
+        <NetworkLogo network={networkProfile} />
+      </div>
     </Link>
   )
 }
