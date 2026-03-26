@@ -1,11 +1,12 @@
+import { getAllNetworks } from '@/modules/networks/services/networks-service'
 import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
-import { getAllNetworks } from '../../services/networks-service'
-import { NetworkCard } from '../network-card'
+import { cn } from '@/modules/shared/lib/utils'
+import { NetworkCard } from '../../../network-card'
 
 export async function NetworkGrid() {
   const allNetworks = await getAllNetworks()
@@ -22,7 +23,7 @@ export async function NetworkGrid() {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div className={cn('grid grid-cols-1 gap-4', allNetworks.length > 1 && 'lg:grid-cols-2')}>
       {allNetworks.map((network) => {
         return <NetworkCard key={network.name} profile={network} />
       })}

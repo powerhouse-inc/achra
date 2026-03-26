@@ -1,4 +1,4 @@
-import { NetworkCardSkeleton } from '../network-card'
+import { NetworkCardSkeleton } from '../../../network-card'
 
 function NetworkGridSkeleton() {
   return (
