@@ -8,6 +8,7 @@ import {
 import type {
   RsBillingCycle,
   RsServiceOffering,
+  RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { GroupPriceFromBreakdown, PurchaseTotals } from '../types'
 
@@ -88,12 +89,14 @@ export function computePeriodDiscountLabel(
   cycle: RsBillingCycle,
   activeGroupIds: Set<string>,
 ): string | null {
-  if (activeGroupIds.size === 0) return null
-
   const breakdown = getPriceBreakdown(offering, tierId, cycle, activeGroupIds)
 
+  const optionGroupUndiscounted = breakdown.optionGroupBreakdowns.reduce(
+    (sum, g) => sum + g.cycleAmount,
+    0,
+  )
   const addOnUndiscounted = breakdown.addOnBreakdowns.reduce((sum, a) => sum + a.cycleAmount, 0)
-  const undiscounted = breakdown.tierCycleTotal + addOnUndiscounted
+  const undiscounted = breakdown.tierCycleTotal + optionGroupUndiscounted + addOnUndiscounted
   const discounted = breakdown.totals.grandRecurringTotal
 
   if (undiscounted <= 0 || discounted >= undiscounted) return null
@@ -115,6 +118,34 @@ export function computeTotalsFromBreakdown(
     recurringTotal: breakdown.totals.grandRecurringTotal / monthsInCycle,
     setupTotal: computeGrandSetupTotal(breakdown),
   }
+}
+
+/**
+ * Resolves the tier ID to use when computing the billing cycle discount label.
+ * When the selected tier is Free ($0/mo), falls back to the first paid non-custom tier
+ * so the badge stays visible and doesn't jump from hidden → visible on tier change.
+ */
+export function resolveDiscountReferenceTierId(
+  offering: RsServiceOffering,
+  selectedTier: RsServiceSubscriptionTier,
+  allTiers: RsServiceSubscriptionTier[],
+  billingCycle: RsBillingCycle,
+  activeGroupIds: Set<string>,
+): string {
+  if (selectedTier.isCustomPricing) return selectedTier.id
+  const selectedPrice = computeTierHeaderPriceWithBreakdown(
+    offering,
+    selectedTier.id,
+    billingCycle,
+    activeGroupIds,
+  )
+  if (selectedPrice > 0) return selectedTier.id
+  const firstPaidTier = allTiers.find(
+    (t) =>
+      !t.isCustomPricing &&
+      computeTierHeaderPriceWithBreakdown(offering, t.id, billingCycle, activeGroupIds) > 0,
+  )
+  return firstPaidTier?.id ?? selectedTier.id
 }
 
 /**

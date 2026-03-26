@@ -3,8 +3,12 @@
 import { useMemo } from 'react'
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getAvailableCycles, PERIOD_LABELS } from '@/modules/service-purchase/lib/billing-period'
-import { computePeriodDiscountLabel } from '@/modules/service-purchase/lib/price-breakdown-utils'
 import {
+  computePeriodDiscountLabel,
+  resolveDiscountReferenceTierId,
+} from '@/modules/service-purchase/lib/price-breakdown-utils'
+import {
+  useComputedTiers,
   useOptionGroups,
   useSelectedAddOns,
   useSelectedTier,
@@ -17,6 +21,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/tog
 function BillingPeriodSelector() {
   const servicesData = useServiceOffering()
   const selectedTier = useSelectedTier()
+  const allTiers = useComputedTiers()
   const { selectedBillingCycle } = useServicePurchaseState()
   const { setSelectedBillingCycle } = useServicePurchaseActions()
   const optionGroups = useOptionGroups()
@@ -26,6 +31,18 @@ function BillingPeriodSelector() {
   const activeGroupIds = useMemo(
     () => new Set([...optionGroups.map((g) => g.id), ...selectedAddOns.map((a) => a.id)]),
     [optionGroups, selectedAddOns],
+  )
+
+  const discountReferenceTierId = useMemo(
+    () =>
+      resolveDiscountReferenceTierId(
+        servicesData,
+        selectedTier,
+        allTiers,
+        selectedBillingCycle,
+        activeGroupIds,
+      ),
+    [servicesData, selectedTier, allTiers, selectedBillingCycle, activeGroupIds],
   )
 
   if (availableCycles.length === 0) return null
@@ -42,12 +59,16 @@ function BillingPeriodSelector() {
         className="gap-1"
       >
         {availableCycles.map((cycle) => {
-          const discountLabel = computePeriodDiscountLabel(
-            servicesData,
-            selectedTier.id,
-            cycle,
-            activeGroupIds,
-          )
+          const discountLabel = selectedTier.isCustomPricing
+            ? cycle !== availableCycles[0]
+              ? 'Custom'
+              : null
+            : computePeriodDiscountLabel(
+                servicesData,
+                discountReferenceTierId,
+                cycle,
+                activeGroupIds,
+              )
 
           return (
             <ToggleGroupItem
