@@ -8,7 +8,7 @@ import { BudgetUtilizationCard } from './budget-utilization-card'
 import { DoughnutChart } from './doughnut-chart'
 import { MobileChart } from './doughnut-chart/mobile-chart'
 import { FilterTabs } from './filter-tabs'
-import { useCardChartOverview } from './useCardChartOverview'
+import { useCardChartOverview } from './use-card-chart-overview'
 
 interface SummarySectionProps {
   financeSlug?: string[]
