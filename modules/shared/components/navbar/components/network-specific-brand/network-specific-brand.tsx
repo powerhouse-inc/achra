@@ -7,7 +7,7 @@ import { NetworkLogo } from './network-logo'
 import { useNetworkProfile } from './use-network-profile'
 
 /**
- * Network logo and icon display
+ * Network logo display
  */
 function NetworkSpecificBrand() {
   const slug = useParams().slug?.toString() ?? ''
