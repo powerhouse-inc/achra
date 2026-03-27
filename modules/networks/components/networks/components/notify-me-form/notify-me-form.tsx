@@ -67,7 +67,7 @@ function NotifyMeForm({ className }: NotifyMeForm) {
           name="email"
           disabled={isPending}
           render={({ field }) => (
-            <FormItem className="w-full rounded-md bg-white sm:max-w-74">
+            <FormItem className="bg-input h-9 w-full rounded-md sm:max-w-74">
               <FormControl>
                 <Input
                   {...field}
@@ -77,7 +77,7 @@ function NotifyMeForm({ className }: NotifyMeForm) {
                   autoComplete="email"
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-primary-foreground" />
             </FormItem>
           )}
         />

@@ -19,7 +19,7 @@ export function NetworkCard({ profile }: NetworkCardProps) {
       <Card
         className="flex h-64 flex-col gap-0 border-none bg-cover bg-center bg-no-repeat p-4 shadow-sm sm:p-6"
         style={{
-          backgroundImage: `linear-gradient(180deg, var(--popover) 31.73%, color-mix(in srgb, var(--popover) 40%, transparent) 91.35%), url(${profile.logoBig})`,
+          backgroundImage: `url(${profile.logoBig})`,
         }}
       >
         <CardHeader className="gap-0 p-0">
@@ -71,12 +71,12 @@ export function NetworkCard({ profile }: NetworkCardProps) {
 
         <CardContent className="flex flex-1 flex-col justify-between p-0 pt-0">
           <div className="mt-2 flex flex-col">
-            <p className="text-foreground line-clamp-6 text-sm leading-5.5 font-medium sm:line-clamp-4">
+            <p className="text-primary-foreground line-clamp-6 max-w-145 text-sm leading-5.5 font-medium sm:line-clamp-4">
               {profile.description}
             </p>
           </div>
 
-          <div className="flex h-9 w-full justify-end">
+          <div className="flex h-9 w-full">
             <Button className="text-primary-foreground bg-primary hover:bg-primary/90 inline-flex cursor-pointer items-center justify-center rounded-md px-4! py-2">
               Explore {profile.name}
               <ArrowRight className="ml-2 h-4 w-4" />
