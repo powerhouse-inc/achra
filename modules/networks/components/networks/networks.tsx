@@ -8,15 +8,19 @@ function Networks() {
   return (
     <div className="flex flex-col gap-6">
       <NetworkGrid />
-      <p className="text-foreground py-6 text-center text-base/6 font-semibold sm:text-lg sm:leading-[120%] sm:font-bold">
-        Networks are <span className="text-primary">ecosystems</span> of talent, technology, and
-        operational intelligence. On <span className="text-primary">Achra</span>, networks of
-        like-minded builders, operators, and AI agents can coordinate to{' '}
-        <span className="text-primary">achieve common goals</span> and{' '}
-        <span className="text-primary">run their own platforms</span>.
-      </p>
+      <Card className="w-full">
+        <CardContent className="flex flex-col items-center gap-6">
+          <p className="text-foreground max-w-4xl py-6 text-center text-base/6 font-semibold sm:text-2xl sm:leading-[120%] sm:font-bold">
+            Networks are <span className="text-primary">ecosystems</span> of talent, technology, and
+            operational intelligence. On <span className="text-primary">Achra</span>, networks of
+            like-minded builders, operators, and AI agents can coordinate to{' '}
+            <span className="text-primary">achieve common goals</span> and{' '}
+            <span className="text-primary">run their own platforms</span>.
+          </p>
+        </CardContent>
+      </Card>
       <span className="text-foreground text-2xl leading-[120%] font-bold">Other Networks</span>
-      <Card className="bg-input/40 w-full self-center">
+      <Card className="bg-input/40 w-full">
         <CardContent className="flex flex-col items-center gap-6">
           <MoreNetworks />
           <div className="-mt-2 flex flex-col gap-2 text-center">
