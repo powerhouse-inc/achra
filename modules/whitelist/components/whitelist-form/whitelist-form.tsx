@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useEffect } from 'react'
-import { submitWhitelistEmailAction } from '@/modules/whitelist/actions/whitelist-actions'
+import { submitWhitelistEmailAction } from '@/modules/whitelist/actions/whitelist-action'
 import type { WhitelistFormState } from '@/modules/whitelist/config/types'
 import { Button } from '@/shared/components/ui/button'
 import { Field, FieldLabel } from '@/shared/components/ui/field'

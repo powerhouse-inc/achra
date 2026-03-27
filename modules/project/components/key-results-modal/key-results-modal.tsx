@@ -16,7 +16,7 @@ import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
 import { StatusSelectDelivarableDrawer, StatusSelectDeliverable } from './key-result-filters'
 import { KeyResultItem } from './key-result-item'
-import useDeliverableFilters from './useDeliverableFilters'
+import useDeliverableFilters from './use-deliverable-filters'
 
 interface KeyResultsModalProps {
   isOpen: boolean

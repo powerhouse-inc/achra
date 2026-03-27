@@ -1,4 +1,4 @@
-import { ProposalKeyValueElementSkeleton } from '@/modules/rfp/skeleton/proposal-key-value-skeleton'
+import { ProposalKeyValueElementSkeleton } from '@/modules/rfp/components/rfp-skeleton/proposal-key-value-skeleton'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb/breadcrumb-skeleton'
 import { PageContent } from '@/modules/shared/components/page-containers'
