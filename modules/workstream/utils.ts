@@ -1,8 +1,5 @@
 import { format } from 'date-fns'
-import type {
-  Maybe,
-  Sow_BudgetType,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Maybe, Sow_BudgetType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import type { WorkstreamDetailsProject } from '../project/types'
 
