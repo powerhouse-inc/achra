@@ -5,16 +5,10 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('should load the builder info', async ({ page }) => {
-    await expect(page.getByText('Facilitator')).toHaveCount(0);
-    await expect(page.getByText('Backend Development')).toHaveCount(0);
-    await expect(page.getByText('Full Stack Development')).toHaveCount(0);
-    await expect(page.getByText('Devops Engineering')).toHaveCount(0);
-    await expect(page.getByText('Smart Contract Development')).toHaveCount(0);
-    await expect(page.getByText('UI/UX Design')).toHaveCount(0);
-    await expect(page.getByText('Technical Writing')).toHaveCount(0);
-    await expect(page.getByText('QA Testing')).toHaveCount(0);
-    await expect(page.getByText('Data Engineering')).toHaveCount(0);
-    await expect(page.getByText('Security Engineering')).toHaveCount(0);
+    await page.waitForLoadState('networkidle');
+    // Skills section is now populated — verify it is visible with at least one skill tag
+    await expect(page.getByText('Skills').first()).toBeVisible();
+    await expect(page.getByText('Facilitator').count()).resolves.toBeGreaterThan(0);
     await expect(page.getByText('Powerhouse is a team bringing a decentralized operations toolkit for open organizations')).toHaveCount(1);
 });
 

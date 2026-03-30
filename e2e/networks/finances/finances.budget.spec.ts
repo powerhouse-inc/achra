@@ -14,42 +14,43 @@ test('should save in clipboard the finances link', async ({ page }) => {
 });
 
 test('should load all builder statuses', async ({ page }) => {
-    // No budget data available — verify empty state is shown
-    await expect(page.getByText('No budget statements found')).toBeVisible();
-    await expect(page.getByText('There are no contributors available with this combination of filters')).toBeVisible();
+    const statusBadges = page.locator('#___SECTION___budget-statements').getByText(/Draft|Final|Escalated|AwaitingCorrection/);
+    await expect(statusBadges.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all last modified values', async ({ page }) => {
-    // No budget data available — verify empty state is shown
-    await expect(page.getByText('No budget statements found')).toBeVisible();
+    const dates = page.locator('#___SECTION___budget-statements').getByText(/\d{2}-[A-Z]{3}-\d{4}/);
+    await expect(dates.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all View buttons', async ({ page }) => {
-    // No budget data available — verify empty state is shown instead
-    await expect(page.getByText('No budget statements found')).toBeVisible();
-    await expect(page.getByText('View').count()).resolves.toBe(0);
+    const viewLinks = page.locator('#___SECTION___budget-statements').getByRole('link', { name: 'View' });
+    await expect(viewLinks.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all Actuals', async ({ page }) => {
-    // No budget data available — verify empty state is shown
-    await expect(page.getByText('No budget statements found')).toBeVisible();
+    const actuals = page.locator('#___SECTION___budget-statements').getByText(/[\d,]+\s*USD/);
+    await expect(actuals.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all Reporting Month dates', async ({ page }) => {
-    // No budget data available — verify empty state is shown
-    await expect(page.getByText('No budget statements found')).toBeVisible();
+    const months = page.locator('#___SECTION___budget-statements').getByText(/(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{4}/i);
+    await expect(months.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all builder names', async ({ page }) => {
-    // No budget data available — verify empty state is shown
-    await expect(page.getByText('No budget statements found')).toBeVisible();
+    const rows = page.locator('#___SECTION___budget-statements').getByRole('link').filter({ hasText: /.+/ });
+    await expect(rows.count()).resolves.toBeGreaterThan(0);
 });
 
 test('should load all columns', async ({ page }) => {
-    // No budget data available — column sort buttons are not rendered without table rows.
-    // Verify the section heading and empty state are visible instead.
-    await expect(page.getByText('Budget Statements', { exact: true })).toBeVisible();
-    await expect(page.getByText('No budget statements found')).toBeVisible();
+    const section = page.locator('#___SECTION___budget-statements');
+    await expect(section.getByText('Budget Statements', { exact: true })).toBeVisible();
+    await expect(section.getByRole('button', { name: 'Sort Builders column' })).toBeVisible();
+    await expect(section.getByRole('button', { name: 'Sort Reporting Month column' })).toBeVisible();
+    await expect(section.getByRole('button', { name: 'Sort Actuals column' })).toBeVisible();
+    await expect(section.getByRole('button', { name: 'Sort Status column' })).toBeVisible();
+    await expect(section.getByRole('button', { name: 'Sort Last Modified column' })).toBeVisible();
 });
 
 test('should load info tooltip', async ({ page }) => {

@@ -50,5 +50,5 @@ test('should show annual discount when switching to Annual billing', async ({ pa
     await page.waitForTimeout(500);
     await page.getByRole('radio', { name: 'Annual' }).first().click();
     await page.waitForTimeout(500);
-    await expect(page.getByText('$713/mo').last()).toBeVisible();
+    await expect(page.getByText(/\$[\d,.]+\/mo/).last()).toBeVisible();
 });

@@ -32,7 +32,7 @@ test('should load the configuration values', async ({ page }) => {
 test('should load the pricing summary', async ({ page }) => {
     await expect(page.getByText('PRICING SUMMARY').count()).resolves.toBeGreaterThanOrEqual(1);
     await expect(page.getByText('Entity & Compliance Foundation')).toBeVisible();
-    await expect(page.getByText('$3,000')).toBeVisible();
+    await expect(page.getByText('$3,000').first()).toBeVisible();
 });
 
 test('should load the submission form', async ({ page }) => {
