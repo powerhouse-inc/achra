@@ -1,7 +1,4 @@
-import type {
-  FullProposal,
-  Maybe,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { FullProposal, Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -54,11 +51,7 @@ function InitialProposalSection({
         action={action}
       />
 
-      <StatCards
-        milestones={milestones}
-        deliverables={deliverables}
-        totalBudget={totalBudget}
-      />
+      <StatCards milestones={milestones} deliverables={deliverables} totalBudget={totalBudget} />
 
       <InternalLink
         href={`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal` as Route}
