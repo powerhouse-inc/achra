@@ -50,8 +50,10 @@ function ProposalApplyCard({
   project,
 }: ProposalApplyCardProps) {
   const projectSlug = project?.slug ?? ''
-  const href =
-    `/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route
+  // TODO: confirm the correct fallback link when no project is linked to a deliverable
+  const href = projectSlug
+    ? (`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route)
+    : ('#' as Route)
 
   const itemRenderer = useCallback(
     (tag: string) => (

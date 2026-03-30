@@ -47,6 +47,7 @@ function WorkstreamCard({
         totalBudget={totalBudget}
         projects={projects}
         action={action}
+        applicationDeadline={workstream.rfp?.submissionDeadline}
         className={fullVersion ? 'border-t' : undefined}
       />
       {fullVersion && (

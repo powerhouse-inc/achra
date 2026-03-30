@@ -62,14 +62,6 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
             ))}
           </div>
         </ScrollableTabsList>
-        <span className="text-foreground/70 text-base/6 font-semibold">
-          Lorem ipsum dolor sit amet consectetur. Sollicitudin placerat ornare etiam mauris porta
-          odio scelerisque. In aliquam id dictum montes id. Ornare scelerisque aliquet enim ut eget
-          vitae fusce. Egestas turpis elit magna tortor montes sit vulputate. Dui cursus ridiculus
-          enim quam semper justo urna. Egestas amet nam id quisque sed ac turpis sed non. Eleifend
-          euismod phasellus dignissim pellentesque. Sapien donec nec ultrices laoreet dictum mauris
-          praesent.
-        </span>
         {roadmaps.map((roadmap) => (
           <TabsContent key={roadmap.id} value={roadmap.id} className="flex flex-col gap-4 xl:gap-6">
             <div
