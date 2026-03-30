@@ -26,7 +26,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   return (
     <label
       htmlFor={inputId}
-      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-start px-1"
+      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-start px-0 sm:px-1"
     >
       <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
@@ -39,7 +39,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
         </span>
       </div>
       {tier.mostPopular && (
-        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-widest uppercase shadow-sm">
+        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-bold tracking-wide whitespace-nowrap uppercase shadow-sm lg:px-2.5 lg:tracking-widest">
           Most popular
         </span>
       )}
@@ -94,7 +94,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
               </>
             )}
           </div>
-          <span className="text-foreground text-xs leading-4.5 font-normal">
+          <span className="text-foreground text-center text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
           {unitPriceMetrics.map((metric, index) => (
