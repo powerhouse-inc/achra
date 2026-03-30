@@ -13,6 +13,10 @@ interface NetworkCardProps {
 }
 
 export function NetworkCard({ profile }: NetworkCardProps) {
+  const logoSrc = [profile.darkThemeLogo, profile.logo].find(
+    (src): src is string => typeof src === 'string' && src.trim().length > 0,
+  )
+
   return (
     <Link href={`/network/${profile.slug}`} className="h-full">
       <Card
@@ -24,30 +28,18 @@ export function NetworkCard({ profile }: NetworkCardProps) {
       >
         <CardHeader className="gap-0 p-0">
           <CardTitle className="flex h-8 w-full items-center gap-2 sm:h-8 md:h-10">
-            {profile.logo || profile.darkThemeLogo ? (
+            {logoSrc ? (
               <div className="flex h-full max-w-full items-center overflow-hidden">
-                {profile.logo && (
-                  // Keep Next/Image intrinsic sizing minimal; actual display size is controlled by Tailwind
-                  // (`h-full w-auto max-w-full`) so height is fixed by the row and width follows aspect ratio.
-                  <Image
-                    src={profile.logo}
-                    width={1}
-                    height={1}
-                    unoptimized
-                    alt={`${profile.name} Logo`}
-                    className={`h-full w-auto max-w-full object-contain object-left ${profile.darkThemeLogo ? 'dark:hidden' : ''}`}
-                  />
-                )}
-                {profile.darkThemeLogo && (
-                  <Image
-                    src={profile.darkThemeLogo}
-                    width={1}
-                    height={1}
-                    unoptimized
-                    alt={`${profile.name} Logo`}
-                    className="hidden h-full w-auto max-w-full object-contain object-left dark:block"
-                  />
-                )}
+                {/* Keep Next/Image intrinsic sizing minimal; actual display size is controlled by Tailwind
+                  (`h-full w-auto max-w-full`) so height is fixed by the row and width follows aspect ratio. */}
+                <Image
+                  src={logoSrc}
+                  width={1}
+                  height={1}
+                  unoptimized
+                  alt={`${profile.name} Logo`}
+                  className="h-full w-auto max-w-full object-contain object-left"
+                />
               </div>
             ) : (
               <div className="text-accent-foreground md:text-lead flex w-full items-center gap-2 text-2xl">
