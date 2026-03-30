@@ -2,6 +2,7 @@ import { LinkIcon } from 'lucide-react'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-service'
 import { BudgetProjectCard } from './budget-project-card'
+import type { Route } from 'next'
 
 interface BudgetingSectionProps {
   params: Promise<{ slug: string; workstreamSlug: string }>
@@ -18,7 +19,7 @@ async function BudgetingSection({ params }: Readonly<BudgetingSectionProps>) {
   const deliverables = sow?.deliverables ?? []
   const paymentTerms = workstream.initialProposal?.paymentTerms
 
-  const totalBudget = paymentTerms?.totalAmount as number | null | undefined
+  const totalBudget = paymentTerms?.totalAmount ?? 0
   const currency = paymentTerms?.currency ?? 'USD'
 
   if (projects.length === 0) return null
@@ -36,9 +37,7 @@ async function BudgetingSection({ params }: Readonly<BudgetingSectionProps>) {
           <span className="text-foreground text-sm font-semibold sm:text-base/6">Total Budget</span>
           <div className="bg-secondary rounded-md border px-3 py-2">
             <span className="text-foreground text-sm font-semibold tabular-nums sm:text-base/6">
-              {totalBudget == null
-                ? '120,000.00 USD'
-                : `${usLocalizedNumber(totalBudget, 2)} ${currency}`}
+              {usLocalizedNumber(totalBudget, 2)} {currency}
             </span>
           </div>
         </div>
@@ -56,7 +55,9 @@ async function BudgetingSection({ params }: Readonly<BudgetingSectionProps>) {
               key={project.id}
               project={project}
               deliverables={projectDeliverables}
-              detailsHref="#"
+              detailsHref={
+                `/network/${slug}/workstream/${workstreamSlug}/initial-proposal/${project.slug}/project-details` as Route
+              }
             />
           )
         })}

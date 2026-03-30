@@ -1,8 +1,13 @@
-import type { FullProposal } from '@/modules/__generated__/graphql/switchboard-generated'
+import type {
+  FullProposal,
+  Maybe,
+  Pt_PaymentModel,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/shared/lib/utils'
+import { formatApplicationDeadline } from '../../utils'
 import { InitialProposalHeader } from '../initial-proposal-header/initial-proposal-header'
 import { NoDeliverables } from '../no-deliverables'
 import { ProposalCardsGrid } from '../workstream-card/proposal-cards-grid'
@@ -19,6 +24,8 @@ interface InitialProposalSectionProps {
   totalBudget: number
   projects: WorkstreamDetailsProject[]
   action?: ReactNode
+  applicationDeadline?: Maybe<string>
+  paymentModel?: Maybe<Pt_PaymentModel>
   className?: string
 }
 
@@ -31,6 +38,8 @@ function InitialProposalSection({
   totalBudget,
   projects,
   action,
+  applicationDeadline,
+  paymentModel,
   className,
 }: Readonly<InitialProposalSectionProps>) {
   const deliverablesList = proposal?.sow?.deliverables ?? []
@@ -48,7 +57,12 @@ function InitialProposalSection({
         action={action}
       />
 
-      <StatCards milestones={milestones} deliverables={deliverables} totalBudget={totalBudget} />
+      <StatCards
+        milestones={milestones}
+        deliverables={deliverables}
+        totalBudget={totalBudget}
+        paymentModel={paymentModel}
+      />
 
       <InternalLink
         href={`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal` as Route}
@@ -69,7 +83,7 @@ function InitialProposalSection({
             <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
               <span className="whitespace-nowrap">Application Deadline:</span>
               <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
-                31 SEP 2025
+                {formatApplicationDeadline(applicationDeadline)}
               </div>
             </div>
           </div>
