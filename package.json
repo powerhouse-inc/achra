@@ -139,7 +139,7 @@
     "prettier-plugin-tailwindcss": "^0.7.1",
     "shadcn": "^3.4.0",
     "storybook": "^10.3.0",
-    "storybook-mock-date-decorator": "^3.0.0",
+    "storybook-addon-mock-date": "^2.0.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5",

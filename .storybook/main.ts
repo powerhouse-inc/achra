@@ -13,6 +13,7 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
     '@storybook/addon-vitest',
     '@storybook/addon-themes',
+    'storybook-addon-mock-date',
   ],
   framework: {
     name: '@storybook/nextjs-vite',
