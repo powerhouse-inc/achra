@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    date: new Date(2025, 0, 1),
+    mockingDate: new Date(2025, 0, 1),
   },
 } satisfies Meta<typeof Calendar>
 

@@ -10,6 +10,7 @@ const meta = {
   component: ForumList,
   parameters: {
     layout: 'padded',
+    mockingDate: new Date(2025, 10, 1),
     nextjs: {
       appDirectory: true,
       navigation: {
