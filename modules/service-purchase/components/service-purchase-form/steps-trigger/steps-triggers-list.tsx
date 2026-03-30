@@ -58,7 +58,8 @@ function StepsTriggersList() {
               <div
                 className={cn(
                   'bg-border text-foreground/50 w-full rounded-l-full rounded-r-full p-1 text-center text-xs/5.5 font-semibold transition-colors md:w-fit md:rounded-l-lg md:rounded-r-none lg:p-2.75 lg:text-base/6 2xl:rounded-l-xl 2xl:p-3 2xl:text-lg/6',
-                  isActive && 'bg-background text-foreground',
+                  isActive &&
+                    'bg-primary text-primary-foreground md:bg-background md:text-foreground',
                   isVisited &&
                     !isActive &&
                     'bg-primary/70 text-primary-foreground group-hover:bg-primary/80 group-hover:text-primary-foreground group-disabled:group-hover:bg-primary/70 group-disabled:group-hover:text-primary-foreground',
