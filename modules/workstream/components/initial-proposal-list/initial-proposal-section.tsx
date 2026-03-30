@@ -1,7 +1,6 @@
 import type {
   FullProposal,
   Maybe,
-  Pt_PaymentModel,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
@@ -25,7 +24,6 @@ interface InitialProposalSectionProps {
   projects: WorkstreamDetailsProject[]
   action?: ReactNode
   applicationDeadline?: Maybe<string>
-  paymentModel?: Maybe<Pt_PaymentModel>
   className?: string
 }
 
@@ -39,7 +37,6 @@ function InitialProposalSection({
   projects,
   action,
   applicationDeadline,
-  paymentModel,
   className,
 }: Readonly<InitialProposalSectionProps>) {
   const deliverablesList = proposal?.sow?.deliverables ?? []
@@ -61,7 +58,6 @@ function InitialProposalSection({
         milestones={milestones}
         deliverables={deliverables}
         totalBudget={totalBudget}
-        paymentModel={paymentModel}
       />
 
       <InternalLink

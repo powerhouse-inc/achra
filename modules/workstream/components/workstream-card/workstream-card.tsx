@@ -48,7 +48,6 @@ function WorkstreamCard({
         projects={projects}
         action={action}
         applicationDeadline={workstream.rfp?.submissionDeadline}
-        paymentModel={workstream.initialProposal?.paymentTerms?.paymentModel}
         className={fullVersion ? 'border-t' : undefined}
       />
       {fullVersion && (
