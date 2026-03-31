@@ -10,9 +10,9 @@ function NetworkCardSkeleton() {
 
       <CardContent className="flex flex-1 flex-col justify-between gap-4 p-0 pt-0 md:gap-10">
         <div className="flex flex-col gap-2">
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-full max-w-[46%]" />
+          <Skeleton className="h-4 w-full max-w-[50%]" />
+          <Skeleton className="h-4 w-full max-w-[45%]" />
           <Skeleton className="h-4 w-3/4 sm:hidden" />
           <Skeleton className="h-4 w-3/4 sm:hidden" />
           <Skeleton className="h-4 w-3/4 sm:hidden" />

@@ -7,11 +7,12 @@ function NetworksSkeleton() {
     <div className="flex flex-col gap-6">
       <NetworkGridSkeleton />
 
-      <Card className="w-full">
-        <CardContent className="flex flex-col items-center gap-2">
+      <Card className="w-full py-12">
+        <CardContent className="flex flex-col items-center gap-[6.4px]">
           <Skeleton className="h-6 w-[60%]" />
           <Skeleton className="h-6 w-[80%]" />
           <Skeleton className="h-6 w-[70%]" />
+          <Skeleton className="h-6 w-[20%]" />
         </CardContent>
       </Card>
 
