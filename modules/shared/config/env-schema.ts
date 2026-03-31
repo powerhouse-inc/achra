@@ -43,7 +43,6 @@ export const envSchema = z
     MAILCHIMP_AUDIENCE_ID: z.string().optional(),
     MAILCHIMP_SERVER_LOCATION: z.string().optional(),
     MAILCHIMP_TAG: z.string().optional(),
-    MAILCHIMP_NETWORK_TAG: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     // If whitelist overlay is enabled, require all Mailchimp variables

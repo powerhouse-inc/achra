@@ -1,6 +1,5 @@
 'use server'
 
-import { addNetworkNotifySubscriber } from '@/modules/networks/lib/add-network-notify-subscriber'
 import { notifyMeSchema } from '@/modules/networks/lib/notify-me-schema'
 import type { NotifyMeFormState } from '@/modules/networks/types'
 import 'server-only'
@@ -29,28 +28,30 @@ export async function notifyMeAction(
       }
     }
 
-    const subscribed = await addNetworkNotifySubscriber(result.data.email)
+    // The mutation call will be executed here
 
-    if (subscribed) {
-      return {
-        success: true,
-        data: {
-          email: result.data.email,
-        },
-      }
+    const mutationResult = await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ username: 'Dummy' }) // Fulfilled state
+      }, 2000)
+    })
+
+    // eslint-disable-next-line no-console
+    console.log({ mutationResult })
+
+    return {
+      success: true,
+      data: {
+        email: result.data.email,
+      },
     }
-
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.'
     return {
       ...initialState,
       success: false,
-      error:
-        'We could not complete your signup right now. Please try again in a moment or contact support if the problem continues.',
-    }
-  } catch {
-    return {
-      ...initialState,
-      success: false,
-      error: 'An unexpected error occurred. Please try again.',
+      error: message,
     }
   }
 }
