@@ -43,18 +43,19 @@ If `HOMEPAGE_REMOTE_URL` is set, the `/` and `/cases` routes are rewritten to an
 
 Start from `.env.example`. The most important variables are:
 
-| Variable                                                | Required    | Purpose                                                       |
-| ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
-| `HOMEPAGE_REMOTE_URL`                                   | Yes         | External homepage target used to rewrite `/` and `/cases`.    |
-| `NEXT_PUBLIC_SWITCHBOARD_URL`                           | Yes         | GraphQL endpoint used by the app and GraphQL code generation. |
-| `NEXT_PUBLIC_ETH_MAINNET_RPC`                           | Yes         | Ethereum mainnet RPC used for on-chain reads.                 |
-| `NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY`                    | Optional    | Enables the whitelist overlay. Defaults to `false`.           |
-| `NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED`                  | Optional    | Controls the leave-page guard in service purchase flows.      |
-| `NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE` | Optional    | Controls local persistence for service purchase state.        |
-| `MAILCHIMP_API_KEY`                                     | Conditional | Required when the whitelist overlay is enabled.               |
-| `MAILCHIMP_AUDIENCE_ID`                                 | Conditional | Required when the whitelist overlay is enabled.               |
-| `MAILCHIMP_SERVER_LOCATION`                             | Conditional | Required when the whitelist overlay is enabled.               |
-| `MAILCHIMP_TAG`                                         | Optional    | Tag applied to Mailchimp whitelist submissions.               |
+| Variable                                                | Required    | Purpose                                                                              |
+| ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------ |
+| `HOMEPAGE_REMOTE_URL`                                   | Yes         | External homepage target used to rewrite `/` and `/cases`.                           |
+| `NEXT_PUBLIC_SWITCHBOARD_URL`                           | Yes         | GraphQL endpoint used by the app and GraphQL code generation.                        |
+| `NEXT_PUBLIC_ETH_MAINNET_RPC`                           | Yes         | Ethereum mainnet RPC used for on-chain reads.                                        |
+| `NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY`                    | Optional    | Enables the whitelist overlay. Defaults to `false`.                                  |
+| `NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED`                  | Optional    | Controls the leave-page guard in service purchase flows.                             |
+| `NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE` | Optional    | Controls local persistence for service purchase state.                               |
+| `MAILCHIMP_API_KEY`                                     | Conditional | Required when the whitelist overlay is enabled.                                      |
+| `MAILCHIMP_AUDIENCE_ID`                                 | Conditional | Required when the whitelist overlay is enabled.                                      |
+| `MAILCHIMP_SERVER_LOCATION`                             | Conditional | Required when the whitelist overlay is enabled.                                      |
+| `MAILCHIMP_TAG`                                         | Optional    | Tag applied to Mailchimp whitelist submissions.                                      |
+| `MAILCHIMP_NETWORK_TAG`                                 | Conditional | Tag for networks “Notify me”; requires Mailchimp audience vars when using that form. |
 
 ## Available Scripts
 
