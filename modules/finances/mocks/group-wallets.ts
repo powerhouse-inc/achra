@@ -1,4 +1,4 @@
-import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
+import { WALLETS } from '@/modules/networks/mocks/wallets'
 import type { WalletGroup } from '../types'
 
 export const WALLET_GROUPS: WalletGroup[] = [

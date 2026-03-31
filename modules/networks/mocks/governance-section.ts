@@ -1,9 +1,9 @@
+import type { Topic } from '@/modules/networks/types'
 import type {
   ExecutiveProposal,
   ExecutiveProposalSupporters,
   ExtendedExecutiveProposal,
 } from '@/modules/shared/types/makervote'
-import type { Topic } from '../lib/fetch-forum-posts'
 
 export const mockedExecutiveProposals: ExecutiveProposal[] = [
   {

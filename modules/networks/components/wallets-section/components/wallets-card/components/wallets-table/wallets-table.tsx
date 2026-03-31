@@ -1,6 +1,9 @@
 import { ArrowRight, ArrowUpDown, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card'
+import { useWalletsTable } from '@/modules/networks/hooks/use-wallets-table'
+import { SortEnum } from '@/modules/networks/types'
 import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
@@ -12,8 +15,6 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
-import { SortEnum, useWalletsTable } from './use-wallets-table'
-import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsTableProps {
   wallets: ProccesedWallets[]

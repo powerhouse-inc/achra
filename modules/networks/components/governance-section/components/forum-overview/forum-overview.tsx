@@ -5,6 +5,7 @@ import { ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import { fetchForumPosts } from '@/modules/networks/lib/fetch-forum-posts'
+import type { Topic } from '@/modules/networks/types'
 import {
   StripedCard,
   StripedCardAction,
@@ -16,16 +17,6 @@ import { Button } from '@/modules/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { ForumList } from '../forum-list/forum-list'
 import { forumCategories } from './categories'
-interface Topic {
-  id: number
-  slug: string
-  title: string
-  created_at: string
-  category_id: number
-  tags: string[]
-  like_count: number
-  posts_count: number
-}
 
 function ForumOverview() {
   const [activeTab, setActiveTab] = useState<string>(forumCategories[0].id.toString())

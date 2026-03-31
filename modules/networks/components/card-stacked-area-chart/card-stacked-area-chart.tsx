@@ -1,6 +1,10 @@
 'use client'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
+import {
+  mockFinancesData,
+  mockYears,
+} from '@/modules/networks/mocks/card-stacked-area-chart-finances'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { TabButton } from '@/modules/shared/components/tab-button/tab-button'
 import { Card } from '@/modules/shared/components/ui/card'
@@ -9,7 +13,6 @@ import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
 import StackedAreaChart from './components/stacked-area-chart'
 import { REALIZED_EXPENSES_FILTER, TABS } from './constants'
-import { mockFinancesData, mockYears } from './mocks/finances'
 import { getStackedAreaSeries } from './utils'
 import type { MetricKey, TabValue } from './type'
 

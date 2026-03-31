@@ -1,17 +1,14 @@
 import { useCallback, useMemo, useState } from 'react'
+import {
+  WALLETS_TABLE_COLUMNS,
+  type WalletsTableColumn,
+} from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/constants'
+import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card'
+import { SortEnum } from '@/modules/networks/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from './constants'
-import type { ProccesedWallets } from '../../use-wallets-card'
 
 interface UseWalletsTableProps {
   wallets: ProccesedWallets[]
-}
-
-export enum SortEnum {
-  Neutral = 'neutral',
-  Asc = 'asc',
-  Desc = 'desc',
-  Disabled = 'disabled',
 }
 
 export function useWalletsTable({ wallets }: UseWalletsTableProps) {

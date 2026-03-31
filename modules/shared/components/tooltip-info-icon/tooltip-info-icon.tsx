@@ -5,7 +5,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { InfoIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { MobileDialogContent } from '@/modules/networks/components/card-bar-chart/tooltips/mobile-tooltip-modal'
+import { MobileDialogContent } from '@/modules/shared/components/mobile-dialog-content'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface TooltipInfoIconProps {

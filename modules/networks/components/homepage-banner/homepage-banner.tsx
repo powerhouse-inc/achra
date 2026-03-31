@@ -2,6 +2,7 @@
 
 import { Maximize2, Minimize2 } from 'lucide-react'
 import Image from 'next/image'
+import { useHomepageBanner } from '@/modules/networks/hooks/use-homepage-banner'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -10,7 +11,6 @@ import {
   CollapsibleTrigger,
 } from '@/shared/components/ui/collapsible'
 import { cn } from '@/shared/lib/utils'
-import { useHomepageBanner } from './use-homepage-banner'
 
 interface HomepageBannerProps {
   backgroundImage: string

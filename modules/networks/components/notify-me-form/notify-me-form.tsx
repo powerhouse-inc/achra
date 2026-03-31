@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { startTransition, useActionState } from 'react'
 import { useForm } from 'react-hook-form'
+import { notifyMeAction } from '@/modules/networks/actions/notify-me-action'
 import {
   formDefaultValues,
   initialActionState,
@@ -21,7 +22,6 @@ import {
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
-import { notifyMeAction } from '../../actions/notify-me-action'
 
 interface NotifyMeForm {
   className?: string
