@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
+import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '@/modules/networks/config/constants'
 import { useWhitelistOverlay } from '@/modules/whitelist/hooks/use-whitelist-overlay'
-import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '../../config/constants'
 
 export function useHomepageBanner() {
   const [isExpanded, setIsExpanded] = useLocalStorage(HOME_BANNER_EXPANDED_STORAGE_KEY, true, {
@@ -16,7 +16,6 @@ export function useHomepageBanner() {
     setIsExpanded(value)
   }
 
-  // the banner will be collapsed if the whitelist overlay is visible
   const showWhitelistOverlay = useWhitelistOverlay()
 
   return {

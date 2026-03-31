@@ -3,7 +3,7 @@ import { cn } from '@/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/shared/types/routes'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
 import SectionTitle from '../../../shared/components/section-title/section-title'
-import ProposalsSwiper from './components/proposals-swiper/proposals-swiper'
+import { ProposalsSwiper } from './components/proposals-swiper/proposals-swiper'
 
 export interface Proposal {
   id: string

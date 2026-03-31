@@ -2,7 +2,7 @@
 import { ArrowUpDown } from 'lucide-react'
 import SimpleBar from 'simplebar-react'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
-import { SortEnum } from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/use-wallets-table'
+import { SortEnum } from '@/modules/networks/types'
 
 import { Button } from '@/modules/shared/components/ui/button'
 import {

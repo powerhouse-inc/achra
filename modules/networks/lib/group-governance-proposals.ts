@@ -1,11 +1,5 @@
+import type { GroupedGovernanceProposals } from '@/modules/networks/types'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
-
-export interface GroupedGovernanceProposals {
-  openProposals: ExtendedExecutiveProposal[]
-  activeProposals: ExtendedExecutiveProposal[]
-  passedProposals: ExtendedExecutiveProposal[]
-  slicedPassedProposals: ExtendedExecutiveProposal[]
-}
 
 export function groupGovernanceProposals(
   executiveProposals: ExtendedExecutiveProposal[] | undefined,

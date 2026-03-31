@@ -2,17 +2,17 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useProposalsSwiper } from '@/modules/networks/hooks/use-proposals-swiper'
 import { cn } from '@/shared/lib/utils'
 import { ProposalCard } from '../proposal-card/proposal-card'
 import { PROPOSALS_SWIPER_BREAKPOINTS } from './constants'
-import useProposalsSwiper from './use-proposals-swiper'
 import type { Proposal } from '../../proposals-section'
 
 interface ProposalsSwiperProps {
   proposals: Proposal[]
 }
 
-export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
+function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
   const { handleAfterInit, swiperRef, isSwiperReady } = useProposalsSwiper()
 
   return (
@@ -68,3 +68,5 @@ export default function ProposalsSwiper({ proposals }: ProposalsSwiperProps) {
     </div>
   )
 }
+
+export { ProposalsSwiper }
