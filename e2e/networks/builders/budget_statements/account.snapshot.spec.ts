@@ -29,10 +29,9 @@ test('should load the builder info', async ({ page }) => {
 
 test('should load the builder links', async ({ page }) => {
     await page.getByText('Links').click();
-    await page.waitForTimeout(1000);
 
     // Verify the links popover opened and contains at least one link item
-    await expect(page.getByRole('menu')).toBeVisible({ timeout: 5000 });
+    await expect(page.getByRole('menu')).toBeVisible();
     await expect(page.getByRole('menuitem').count()).resolves.toBeGreaterThan(0);
 });
 

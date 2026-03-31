@@ -1,29 +1,31 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse`);
+    await page.goto(`${process.env.HOMEPAGE_REMOTE_URL}/network/powerhouse/builders/powerhouse-rgh`);
+    await page.waitForLoadState('networkidle');
 });
 
 test('should load the builder info', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
     // Skills section is now populated — verify it is visible with at least one skill tag
     await expect(page.getByText('Skills').first()).toBeVisible();
-    await expect(page.getByText('Facilitator').count()).resolves.toBeGreaterThan(0);
-    await expect(page.getByText('Powerhouse is a team bringing a decentralized operations toolkit for open organizations')).toHaveCount(1);
+    await expect(page.getByText('Full Stack Development').count()).resolves.toBeGreaterThan(0);
+    await expect(page.getByText('The Powerhouse Revenue Generating Hub (RGH) drives commercial sustainability for the Powerhouse ecosystem by developing and operating revenue-generating products, services, and partnerships that fund ongoing development and ecosystem growth')).toHaveCount(1);
 });
 
 test('should load the builder description', async ({ page }) => {
-    await expect(page.getByText('Powerhouse: Who we are')).toHaveCount(1);
+    await expect(page.getByText('Powerhouse RGH: Who we are')).toHaveCount(1);
     await expect(page.getByText('About Us')).toHaveCount(1);
-    await expect(page.getByText('The new Powerhouse team uses its extensive knowledge and experience from its SES Core Unit and Maker Foundation days to contribute to the development of efficient and scalable decentralized organizations. It aims to work not just for Sky and its subDAOs, but as a fully independent service provider for the wider industry.')).toHaveCount(1);
-    await expect(page.getByText('Services Offered')).toHaveCount(1);
-    await expect(page.getByText('As an Ecosystem Actor, Powerhouse offers three categories of paid consultancy services. These services span various operational areas, from project management, to finances and transparency reporting, to legal-operational matters.')).toHaveCount(1);
-    await expect(page.getByText('Decentralized Org Design and Business Process Analysis')).toHaveCount(1);
-    await expect(page.getByText('Open and decentralized organizations are an emerging paradigm that can be difficult to get right at first. Sky has been one of the biggest pioneering experiments so far, achieving some successes but also laying bare the various challenges that these organizations may face.')).toHaveCount(1);
-    await expect(page.getByText('Open-Source Software Development')).toHaveCount(1);
-    await expect(page.getByText('To be successful, these organizations essentially need to trade traditional management oversight and extensive training programs with automated processes on their operational platform.')).toHaveCount(1);
-    await expect(page.getByText('Operational Support and Coordination')).toHaveCount(1);
-    await expect(page.getByText('One of the challenges of decentralized organizations is that they can introduce a lot of inefficiencies by forcing the contributor teams to take care of operational overhead tasks outside of their core competencies.')).toHaveCount(1);
+    await expect(page.getByText('The Powerhouse Revenue Generating Hub (RGH) is the commercial arm of the Powerhouse ecosystem. Our mandate is to ensure long-term sustainability by building, operating, and scaling revenue streams that fund continued development and ecosystem expansion.')).toHaveCount(1);
+    await expect(page.getByText('What We Do')).toHaveCount(1);
+    await expect(page.getByText('We identify, develop, and manage products and services that generate revenue while advancing the Powerhouse mission. We operate at the intersection of business development, product strategy, and operations — turning the platform\'s capabilities into viable commercial offerings.')).toHaveCount(1);
+    await expect(page.getByText('Commercial Products & Services')).toHaveCount(1);
+    await expect(page.getByText('We package Powerhouse\'s core technology into commercial products and managed services. This includes hosted infrastructure offerings, premium support tiers, custom document model development, and white-label solutions for organizations adopting decentralized operations.')).toHaveCount(1);
+    await expect(page.getByText('Business Development & Partnerships')).toHaveCount(1);
+    await expect(page.getByText('We cultivate strategic commercial relationships — from enterprise clients and protocol partnerships to integration deals and co-development agreements. We focus on sustainable revenue relationships that create mutual value.')).toHaveCount(1);
+    await expect(page.getByText('Revenue Operations')).toHaveCount(1);
+    await expect(page.getByText('We manage the full lifecycle of commercial engagements: pricing strategy, contract management, billing operations, customer success, and financial reporting. We ensure revenue streams are predictable, well-documented, and transparently reported to the ecosystem.')).toHaveCount(1);
+    await expect(page.getByText('Strategic Planning')).toHaveCount(1);
+    await expect(page.getByText('We continuously evaluate market opportunities, competitive landscape, and ecosystem needs to inform our commercial roadmap. We balance short-term revenue generation with long-term strategic positioning to ensure the Powerhouse ecosystem remains competitive and financially sustainable.')).toHaveCount(1);
 });
 
 test.skip('should load the builder projects', async ({ page }) => {
