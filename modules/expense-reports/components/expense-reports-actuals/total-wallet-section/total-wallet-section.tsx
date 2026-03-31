@@ -1,3 +1,4 @@
+import { UTCDate } from '@date-fns/utc'
 import { format } from 'date-fns'
 import type { InnerTableColumn, InnerTableRow } from '@/modules/expense-reports/types'
 import { AdvancedInnerTable } from '../../advanced-inner-table/advanced-inner-table'
@@ -19,7 +20,7 @@ function TotalWalletSection({
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-lg/[120%] font-bold">
-        Actuals - {format(currentMonth, 'MMM yyyy')} Totals
+        Actuals - {format(new UTCDate(currentMonth), 'MMM yyyy')} Totals
       </h2>
 
       <AdvancedInnerTable
