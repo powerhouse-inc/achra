@@ -9,7 +9,7 @@ function Networks() {
     <div className="flex flex-col gap-6">
       <NetworkGrid />
       <Card className="w-full">
-        <CardContent className="flex flex-col items-center gap-6">
+        <CardContent className="flex flex-col items-center">
           <p className="text-foreground max-w-4xl py-6 text-center text-base/6 font-semibold sm:text-2xl sm:leading-[120%] sm:font-bold">
             Networks are <span className="text-primary">ecosystems</span> of talent, technology, and
             operational intelligence. On <span className="text-primary">Achra</span>, networks of
