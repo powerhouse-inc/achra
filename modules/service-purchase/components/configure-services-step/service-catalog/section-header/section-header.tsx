@@ -123,17 +123,17 @@ function SectionHeader({
         )}
       >
         {!isAddOn && isOneTime && perTierPrices && activePlan && perTierPrices[activePlan] && (
-          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+          <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
             {perTierPrices[activePlan]}
           </span>
         )}
         {!isAddOn && isRecurring && perTierPrices && activePlan && perTierPrices[activePlan] && (
-          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+          <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {perTierPrices[activePlan]}
           </span>
         )}
         {isOneTime && !perTierPrices && priceLabel && !discountedPriceLabel && (
-          <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+          <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap uppercase">
             {priceLabel}
           </span>
         )}
@@ -142,7 +142,7 @@ function SectionHeader({
             <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap uppercase line-through">
               {priceLabel}
             </span>
-            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+            <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap uppercase">
               {discountedPriceLabel}
             </span>
           </span>
@@ -151,13 +151,13 @@ function SectionHeader({
           <span className="flex items-center gap-2">
             {setupPriceLabel && (
               <>
-                <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
                   {setupPriceLabel}
                 </span>
                 <span className="text-foreground/40 text-xs">|</span>
               </>
             )}
-            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+            <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
               {priceLabel}
             </span>
           </span>
@@ -167,7 +167,7 @@ function SectionHeader({
             <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
               {priceLabel}
             </span>
-            <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+            <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
               {discountedPriceLabel}
             </span>
           </span>
@@ -187,7 +187,9 @@ function SectionHeader({
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
-                activePlan === plan ? 'text-primary' : 'text-foreground/70',
+                activePlan === plan
+                  ? 'text-primary dark:text-primary-foreground'
+                  : 'text-foreground/70',
               )}
             >
               {perTierPrices[plan]}
@@ -197,7 +199,9 @@ function SectionHeader({
             <span
               className={cn(
                 'min-w-0 text-xs font-bold whitespace-nowrap uppercase',
-                activePlan === plan ? 'text-primary' : 'text-foreground/70',
+                activePlan === plan
+                  ? 'text-primary dark:text-primary-foreground'
+                  : 'text-foreground/70',
               )}
             >
               {perTierPrices[plan]}
@@ -208,7 +212,7 @@ function SectionHeader({
             plan === lastTierName &&
             priceLabel &&
             !discountedPriceLabel && (
-              <span className="text-primary absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+              <span className="text-primary dark:text-primary-foreground absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
                 {priceLabel}
               </span>
             )}
@@ -221,7 +225,7 @@ function SectionHeader({
                 <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
                   {priceLabel}
                 </span>
-                <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+                <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap uppercase">
                   {discountedPriceLabel}
                 </span>
               </span>
@@ -230,13 +234,13 @@ function SectionHeader({
             <span className="absolute right-6 flex items-center gap-2">
               {setupPriceLabel && (
                 <>
-                  <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+                  <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
                     {setupPriceLabel}
                   </span>
                   <span className="text-foreground/40 text-xs">|</span>
                 </>
               )}
-              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+              <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
                 {priceLabel}
               </span>
             </span>
@@ -246,7 +250,7 @@ function SectionHeader({
               <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
                 {priceLabel}
               </span>
-              <span className="text-primary min-w-0 text-xs font-bold whitespace-nowrap">
+              <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
                 {discountedPriceLabel}
               </span>
             </span>
