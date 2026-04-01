@@ -1,16 +1,10 @@
-import client, { type ErrorResponse } from '@mailchimp/mailchimp_marketing'
+import client from '@mailchimp/mailchimp_marketing'
 import {
   MAILCHIMP_API_KEY,
   MAILCHIMP_AUDIENCE_ID,
   MAILCHIMP_SERVER_LOCATION,
 } from '@/modules/shared/config/mailchimp'
 import 'server-only'
-
-interface MailchimpError extends Error {
-  response?: {
-    body?: ErrorResponse
-  }
-}
 
 function getClient() {
   client.setConfig({
@@ -21,24 +15,38 @@ function getClient() {
   return client
 }
 
-function isMailchimpError(error: unknown): error is MailchimpError {
+function isMemberExistsError(error: unknown): boolean {
   if (typeof error !== 'object' || error === null) {
     return false
   }
 
-  const mailchimpError = error as MailchimpError
+  const err = error as Record<string, unknown>
 
-  if (!('response' in mailchimpError) || typeof mailchimpError.response !== 'object') {
-    return false
+  // Check @mailchimp/mailchimp_marketing error shape: { response: { body: { title } } }
+  if (typeof err.response === 'object' && err.response !== null) {
+    const response = err.response as Record<string, unknown>
+
+    // superagent-style: response.body.title
+    if (typeof response.body === 'object' && response.body !== null) {
+      const body = response.body as Record<string, unknown>
+      if (body.title === 'Member Exists') return true
+    }
+
+    // superagent-style: response.text (JSON string)
+    if (typeof response.text === 'string') {
+      try {
+        const parsed = JSON.parse(response.text) as Record<string, unknown>
+        if (parsed.title === 'Member Exists') return true
+      } catch {
+        // ignore parse errors
+      }
+    }
   }
 
-  const responseBody = mailchimpError.response.body
+  // Direct status + title check (some versions of the client)
+  if (err.status === 400 && err.title === 'Member Exists') return true
 
-  return (
-    typeof responseBody === 'object' &&
-    'title' in responseBody &&
-    typeof responseBody.title === 'string'
-  )
+  return false
 }
 
 /**
@@ -57,7 +65,10 @@ export async function subscribeOrTagMember(email: string, tag: string): Promise<
 
     return true
   } catch (error) {
-    if (isMailchimpError(error) && error.response?.body?.title === 'Member Exists') {
+    // logging the error to the console
+    // eslint-disable-next-line no-console
+    console.log(error)
+    if (isMemberExistsError(error)) {
       await mailchimp.lists.updateListMemberTags(MAILCHIMP_AUDIENCE_ID, email, {
         tags: [
           {
