@@ -1,1 +1,1 @@
-export { default as ServicesCard } from './services-card'
+export { ServicesCard } from './services-card'

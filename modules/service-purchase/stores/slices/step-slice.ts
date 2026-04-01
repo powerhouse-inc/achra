@@ -61,4 +61,4 @@ function createStepSlice(set: ServicePurchaseStoreSet, _get: ServicePurchaseStor
   }
 }
 
-export { createStepSlice }
+export { createStepSlice, applyStepTransition }

@@ -2,13 +2,13 @@ import { Phone } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { type Maybe, RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { OPERATIONAL_HUB_URL } from '@/shared/config/constants'
 import { ActionButtons } from './action-buttons'
-import type { Route } from 'next'
 
 interface ServiceInfoProps {
   light?: boolean
@@ -19,6 +19,8 @@ interface ServiceInfoProps {
   thumbnailUrl?: string
   status?: RsTemplateStatus
   id: string
+  /** Passed into purchase entry URL when present (e.g. profile header CTA). */
+  operatorId?: string | null
   infoLink?: string
 }
 
@@ -34,6 +36,7 @@ function ServiceInfo({
   thumbnailUrl,
   status,
   id,
+  operatorId,
   infoLink,
 }: Readonly<ServiceInfoProps>) {
   const isUnavailable = status === RsTemplateStatus.ComingSoon
@@ -81,7 +84,7 @@ function ServiceInfo({
               </Button>
               {showPurchaseButton && (
                 <InternalLink
-                  href={`/services/${id}/purchase` as Route}
+                  href={getServicePurchaseUrl(id, { operatorId })}
                   disabled={isUnavailable}
                   className={cn(isUnavailable && 'pointer-events-none opacity-50')}
                   size="lg"

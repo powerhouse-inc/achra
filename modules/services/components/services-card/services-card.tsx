@@ -2,6 +2,7 @@ import { Info } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import ComingSoonTagDesktop from '@/modules/shared/components/svgs/coming-soon-tag-desktop.svg'
 import ComingSoonTagMobile from '@/modules/shared/components/svgs/coming-soon-tag-mobile.svg'
@@ -20,8 +21,8 @@ interface ServicesCardProps {
 
 const DEFAULT_COVER = '/services/covers/cover-01.jpg'
 
-export default function ServicesCard({ service }: ServicesCardProps) {
-  //  If the status is DRAFT or DEPRECATED, we don't show the service at all
+function ServicesCard({ service }: Readonly<ServicesCardProps>) {
+  // If the status is DRAFT or DEPRECATED, we don't show the service at all
   const isHidden =
     service.status === RsTemplateStatus.Draft || service.status === RsTemplateStatus.Deprecated
 
@@ -63,7 +64,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
           </div>
           <div className="relative z-20 flex flex-col gap-2">
             <InternalLink
-              href={`/services/${service.id}/purchase` as Route}
+              href={getServicePurchaseUrl(service.id, { operatorId: service.operatorId })}
               disabled={!isActive}
               className={cn(!isActive && 'pointer-events-none opacity-50')}
               size="lg"
@@ -105,3 +106,5 @@ export default function ServicesCard({ service }: ServicesCardProps) {
     </Card>
   )
 }
+
+export { ServicesCard }
