@@ -34,6 +34,7 @@ export default [
       '*.config.ts',
       'scripts/**',
       'vitest.shims.d.ts',
+      '.agents/**',
     ],
   },
   pluginJs.configs.recommended,
