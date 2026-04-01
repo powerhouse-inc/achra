@@ -6,7 +6,7 @@ const footerLinks = {
   products: {
     title: 'Products',
     links: [
-      { label: 'Explore Achra', href: '/workstreams' },
+      { label: 'Explore Achra', href: '/' },
       { label: 'Explore Vetra', href: 'https://vetra.io' },
       { label: 'Use Cases', href: '/cases' },
     ],
