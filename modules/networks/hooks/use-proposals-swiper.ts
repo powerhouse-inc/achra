@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from 'react'
 import type { SwiperRef } from 'swiper/react'
 
-export default function useProposalsSwiper() {
+export function useProposalsSwiper() {
   const [isSwiperReady, setIsSwiperReady] = useState(false)
   const swiperRef = useRef<SwiperRef>(null)
 

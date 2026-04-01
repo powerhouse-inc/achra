@@ -6,7 +6,7 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 import { cn } from '@/modules/shared/lib/utils'
-import { NetworkCard } from '../../../network-card'
+import { NetworkCard } from '../network-card'
 
 export async function NetworkGrid() {
   const allNetworks = await getAllNetworks()

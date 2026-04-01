@@ -1,4 +1,4 @@
-import type { Topic } from '@/modules/networks/lib/fetch-forum-posts'
+import type { Topic } from '@/modules/networks/types'
 import { SmartErrorState } from '@/modules/shared/components/error-state'
 import {
   Empty,

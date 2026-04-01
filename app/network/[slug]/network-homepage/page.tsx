@@ -8,18 +8,18 @@ import {
   HomepageBanner,
   HomepageBannerSkeleton,
 } from '@/modules/networks/components/homepage-banner'
-import { PROPOSALS } from '@/modules/networks/components/proposals-section/mocks/proposals'
 import { ProposalsSection } from '@/modules/networks/components/proposals-section/proposals-section'
 import {
   RoadmapSection,
   RoadmapSectionSkeleton,
 } from '@/modules/networks/components/roadmap-section'
-import { WALLETS } from '@/modules/networks/components/wallets-section/mocks/wallets'
 import { WalletsSection } from '@/modules/networks/components/wallets-section/wallets-section'
 import {
   NETWORK_HOMEPAGE_SECTIONS_ENCODED,
   NETWORK_HOMEPAGE_SKIP_SECTION,
 } from '@/modules/networks/config/constants'
+import { PROPOSALS } from '@/modules/networks/mocks/proposals'
+import { WALLETS } from '@/modules/networks/mocks/wallets'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { SectionActivation } from '@/modules/shared/components/section-activation'

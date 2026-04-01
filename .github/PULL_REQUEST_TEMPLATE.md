@@ -1,25 +1,15 @@
-## Ticket
+## Summary
 
-<!--- Your Ticket Link -->
+<!--- Short overview of the PR for reviewers -->
 
-## Description
+## What changed
 
-<!--- Describe the changes you added in this PR and any other relevant information for reviewers -->
+<!--- List or describe the substantive changes -->
 
-## PR Author Checklist:
+## How to test
 
-- [ ] I have performed a self-review of my own code
-- [ ] I have performed a self-review of my own chromatic changes and everything is expected
-- [ ] I have removed any unnecessary console messages and alerts
-- [ ] I have removed any commented code
-- [ ] I have checked that there are no dummy or unnecessary comments
-- [ ] I have added new test cases (if it applies)
-- [ ] I have not introduced any linting issues or warnings
+<!--- Steps, URLs, or scenarios to verify the change -->
 
-## Reviewer Checklist:
+## Snapshots
 
-- [ ] I have reviewed the code
-- [ ] I have reviewed the preview environment
-- [ ] I have reviewed Chromatic (if there are changes)
-
-## Screenshots (if apply)
+<!--- Screenshots, Chromatic links, or other visual references (if applicable) -->

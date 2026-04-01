@@ -2,8 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
-import { startTransition, useActionState } from 'react'
+import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { notifyMeAction } from '@/modules/networks/actions/notify-me-action'
 import {
   formDefaultValues,
   initialActionState,
@@ -21,7 +22,6 @@ import {
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
-import { notifyMeAction } from '../../actions/notify-me-action'
 
 interface NotifyMeForm {
   className?: string
@@ -32,9 +32,14 @@ function NotifyMeForm({ className }: NotifyMeForm) {
 
   const form = useForm<NotifyMeFormValues>({
     resolver: zodResolver(notifyMeSchema),
-    mode: 'onChange',
     defaultValues: formDefaultValues,
   })
+
+  useEffect(() => {
+    if (state.error) {
+      form.setError('email', { type: 'server', message: state.error })
+    }
+  }, [state, form])
 
   function onSubmit(data: NotifyMeFormValues) {
     const formData = new FormData()
@@ -43,6 +48,15 @@ function NotifyMeForm({ className }: NotifyMeForm) {
     startTransition(() => {
       formAction(formData)
     })
+  }
+
+  if (state.success) {
+    return (
+      <Alert variant="default" role="status" className={cn('w-full', className)}>
+        <AlertTitle>You are on the list</AlertTitle>
+        <AlertDescription>We will email you when new networks are added to Achra.</AlertDescription>
+      </Alert>
+    )
   }
 
   return (
@@ -55,13 +69,6 @@ function NotifyMeForm({ className }: NotifyMeForm) {
         }}
         className={cn('flex w-full flex-col items-center gap-2.5 sm:flex-row', className)}
       >
-        {state.error && (
-          <Alert variant="destructive" role="alert">
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{state.error}</AlertDescription>
-          </Alert>
-        )}
-
         <FormField
           control={form.control}
           name="email"
@@ -71,7 +78,6 @@ function NotifyMeForm({ className }: NotifyMeForm) {
               <FormControl>
                 <Input
                   {...field}
-                  id="notify-me-email"
                   type="email"
                   placeholder="Your email address"
                   autoComplete="email"

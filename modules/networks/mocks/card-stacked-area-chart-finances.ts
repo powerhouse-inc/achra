@@ -1,4 +1,4 @@
-import type { FormattedFinancesData } from '../type'
+import type { FormattedFinancesData } from '@/modules/networks/components/card-stacked-area-chart/type'
 
 export const mockFinancesData: FormattedFinancesData = {
   Actuals: {

@@ -1,6 +1,8 @@
 import { ArrowRight, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card'
+import { useWalletsList } from '@/modules/networks/hooks/use-wallets-list'
 import {
   CopyButton,
   CopyTooltip,
@@ -8,8 +10,6 @@ import {
 } from '@/modules/shared/components/copy-butoon/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-import { useWalletsList } from './use-wallets-list'
-import type { ProccesedWallets } from '../../use-wallets-card'
 
 export interface WalletsListProps {
   wallets: ProccesedWallets[]

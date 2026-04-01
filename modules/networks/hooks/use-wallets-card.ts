@@ -1,7 +1,10 @@
 import makeBlockie from 'ethereum-blockies-base64'
 import { useMemo, useState } from 'react'
-import { addressShortener, calculateTotalBalance } from './utils'
-import type { Wallet } from '../../wallets-section'
+import {
+  addressShortener,
+  calculateTotalBalance,
+} from '@/modules/networks/components/wallets-section/components/wallets-card/utils'
+import type { Wallet } from '@/modules/networks/components/wallets-section/wallets-section'
 
 interface UseWalletsCardProps {
   wallets: Wallet[]
