@@ -5,7 +5,7 @@ import ServiceSectionSkeleton from './service-section-skeleton'
 function ServicesCardSkeleton() {
   return (
     <Card className="bg-accent p-2 sm:p-3 md:p-4">
-      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_328px] xl:grid-cols-[120px_1fr_520px] 2xl:grid-cols-[120px_1fr_632px]">
+      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[170px_1fr] lg:grid-cols-[170px_1fr_328px] xl:grid-cols-[170px_1fr_520px] 2xl:grid-cols-[170px_1fr_632px]">
         {/* Cover image + buttons */}
         <div className="flex flex-col gap-2 sm:gap-4">
           <Skeleton className="bg-border h-32 w-full rounded-lg sm:h-30" />

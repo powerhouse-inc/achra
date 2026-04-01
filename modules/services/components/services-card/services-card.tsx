@@ -42,7 +42,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
         className="absolute inset-0 z-10 rounded-xl"
         aria-label={`${service.title} Profile`}
       />
-      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[120px_1fr] lg:grid-cols-[120px_1fr_328px] xl:grid-cols-[120px_1fr_520px] 2xl:grid-cols-[120px_1fr_632px]">
+      <CardContent className="grid grid-cols-1 gap-4 px-0 sm:grid-cols-[170px_1fr] lg:grid-cols-[170px_1fr_328px] xl:grid-cols-[170px_1fr_520px] 2xl:grid-cols-[170px_1fr_632px]">
         <div className="flex flex-col gap-2 sm:gap-4">
           <div className="relative h-32 w-full sm:h-30">
             <Image
@@ -69,7 +69,7 @@ export default function ServicesCard({ service }: ServicesCardProps) {
               size="lg"
               variant="default"
             >
-              Purchase
+              Request a Quote
             </InternalLink>
             <Button variant="outline" asChild size="lg">
               <Link href={`/services/${service.id}` as Route}>
