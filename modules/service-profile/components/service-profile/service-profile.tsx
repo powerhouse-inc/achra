@@ -27,6 +27,7 @@ async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
     <div className="flex flex-col gap-6">
       <ServiceInfo
         id={serviceSlug}
+        operatorId={resourceProfile.operatorId}
         showPurchaseButton
         showActionButtons
         title={resourceProfile.title}

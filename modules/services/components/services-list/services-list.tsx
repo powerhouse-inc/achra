@@ -1,5 +1,5 @@
 import type { Service } from '@/modules/shared/types/services'
-import ServicesCard from '../services-card/services-card'
+import { ServicesCard } from '../services-card/services-card'
 
 interface ServicesListProps {
   services: Service[]

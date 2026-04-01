@@ -7,20 +7,23 @@ import { useServicePurchaseStep } from '../../providers/service-purchase-store-p
 
 function StepUrlSync() {
   const { activeStep, goToStep } = useServicePurchaseStep()
+  // No default: keeps `?step=` absent when omitted so nuqs does not clobber the URL; step comes from persist/store.
   const [stepFromUrl, setStepFromUrl] = useQueryState(
     'step',
-    // no default value here to avoid overwriting the step from the URL
-    // if no step is provided in the URL, the step will be set to the persisted step
-    // or the default step if no step is persisted
     parseAsStringEnum(SERVICE_PURCHASE_STEP_VALUES),
   )
-  const prevStepFromUrlRef = useRef(stepFromUrl)
+  /** Last `step` query value we pushed into the store (`undefined` = not yet read for this mount). */
+  const prevSyncedUrlStepRef = useRef<typeof stepFromUrl | undefined>(undefined)
   const isSyncingFromUrlRef = useRef<boolean>(false)
 
-  // URL -> Store: when URL has explicit step param, sync to store (only when URL changed)
+  // URL -> Store: explicit `?step=` overrides store (including on first paint when URL already has step)
   useEffect(() => {
-    if (stepFromUrl !== null && stepFromUrl !== prevStepFromUrlRef.current) {
-      prevStepFromUrlRef.current = stepFromUrl
+    if (stepFromUrl === null) {
+      prevSyncedUrlStepRef.current = null
+      return
+    }
+    if (prevSyncedUrlStepRef.current !== stepFromUrl) {
+      prevSyncedUrlStepRef.current = stepFromUrl
       isSyncingFromUrlRef.current = true
       goToStep(stepFromUrl)
       queueMicrotask(() => {
