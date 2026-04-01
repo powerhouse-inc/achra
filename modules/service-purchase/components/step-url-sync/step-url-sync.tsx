@@ -32,7 +32,13 @@ function StepUrlSync() {
   // Store -> URL: when store changed (user nav, hydration), sync to URL
   useEffect(() => {
     if (isSyncingFromUrlRef.current || stepFromUrl === activeStep) return
-    void setStepFromUrl(activeStep)
+    // On first write when there is no ?step= param yet, use 'replace'
+    // to avoid creating an extra history entry.
+    // Use 'push' on step changes so that the browser back button
+    // walks the wizard steps correctly.
+    void setStepFromUrl(activeStep, {
+      history: stepFromUrl === null ? 'replace' : 'push',
+    })
   }, [activeStep, stepFromUrl, setStepFromUrl])
 
   return null
