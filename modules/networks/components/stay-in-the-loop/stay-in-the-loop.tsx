@@ -3,7 +3,7 @@ import { NotifyMeForm } from '../notify-me-form/notify-me-form'
 
 function StayInTheLoop() {
   return (
-    <div className="relative mt-6 grid h-64 w-full grid-cols-1 items-center gap-6 overflow-hidden rounded-xl p-6 sm:grid-cols-[40%_auto] md:gap-10 lg:grid-cols-[50%_auto] lg:gap-20 xl:grid-cols-[60%_auto]">
+    <div className="relative grid h-full min-h-64 w-full grid-cols-1 items-center gap-6 overflow-hidden rounded-xl p-6">
       <Image
         src="/networks/backgrounds/sky.png"
         alt="Networks background"
@@ -22,7 +22,7 @@ function StayInTheLoop() {
           live.
         </span>
       </div>
-      <NotifyMeForm className="justify-end" />
+      <NotifyMeForm />
     </div>
   )
 }

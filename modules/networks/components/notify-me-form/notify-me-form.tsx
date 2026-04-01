@@ -67,14 +67,17 @@ function NotifyMeForm({ className }: NotifyMeForm) {
           event.preventDefault()
           void form.handleSubmit(onSubmit)(event)
         }}
-        className={cn('flex w-full flex-col items-center gap-2.5 sm:flex-row', className)}
+        className={cn(
+          'flex w-full flex-col items-stretch gap-2.5 sm:flex-row sm:items-center',
+          className,
+        )}
       >
         <FormField
           control={form.control}
           name="email"
           disabled={isPending}
           render={({ field }) => (
-            <FormItem className="bg-input h-9 w-full rounded-md sm:max-w-74">
+            <FormItem className="bg-input h-9 w-full min-w-0 flex-1 rounded-md">
               <FormControl>
                 <Input
                   {...field}
