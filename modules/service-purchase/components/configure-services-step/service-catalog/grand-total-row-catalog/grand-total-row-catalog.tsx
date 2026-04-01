@@ -82,7 +82,10 @@ function GrandTotalRowCatalog({
         )}
       >
         <span
-          className={cn('text-xl font-bold', selectedPlan ? 'text-primary' : 'text-foreground')}
+          className={cn(
+            'text-xl font-bold',
+            selectedPlan ? 'text-primary dark:text-primary-foreground' : 'text-foreground',
+          )}
         >
           {(selectedPlan && planTotals[selectedPlan]) ?? '—'}
         </span>
@@ -101,7 +104,10 @@ function GrandTotalRowCatalog({
             )}
           >
             <span
-              className={cn('text-lg/6 font-bold', isActive ? 'text-primary' : 'text-foreground')}
+              className={cn(
+                'text-lg/6 font-bold',
+                isActive ? 'text-primary dark:text-primary-foreground' : 'text-foreground',
+              )}
             >
               {planTotals[plan]}
             </span>
