@@ -10,7 +10,6 @@ import {
 } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface PlanSelectorItemProps {
   tier: RsServiceSubscriptionTier
@@ -34,27 +33,25 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           id={inputId}
           className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
         />
-        <span className={cn('text-foreground text-sm/5.5 font-semibold transition-colors')}>
-          {tier.name}
-        </span>
+        <span className="text-foreground text-sm/5.5 font-semibold">{tier.name}</span>
       </div>
       {tier.mostPopular && (
-        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-bold tracking-wide whitespace-nowrap uppercase shadow-sm lg:px-2.5 lg:tracking-widest">
+        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-bold tracking-wide whitespace-nowrap uppercase lg:px-2.5 lg:tracking-widest">
           Most popular
         </span>
       )}
       {tier.isCustomPricing ? (
         <div className="flex w-full flex-col items-center gap-0.5">
-          <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
-            Custom
-          </span>
+          <span className="text-foreground/50 text-xs/5.5 font-semibold">Custom</span>
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
           {unitPriceMetrics.map((metric, index) => (
             <span
+              // order does not matter here as it doesn't change the UI
+              // eslint-disable-next-line react/no-array-index-key
               key={`${tier.id}-metric-${index}`}
-              className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
+              className="text-primary dark:text-primary-foreground text-center text-xs/4.5 font-semibold"
             >
               {metric.freeLimit ? (
                 <>
@@ -80,17 +77,15 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
             {displayPrice === null ? (
               <span className="text-muted-foreground text-xs/5.5 font-semibold">—</span>
             ) : displayPrice === 0 ? (
-              <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+              <span className="text-primary dark:text-primary-foreground text-xs/5.5 font-semibold">
                 Free
               </span>
             ) : (
               <>
-                <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+                <span className="text-primary dark:text-primary-foreground text-xs/5.5 font-semibold">
                   {formatPrice(displayPrice, tier.pricing.currency)}
                 </span>
-                <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
-                  /mo
-                </span>
+                <span className="text-foreground/70 text-xs/5.5 font-semibold">/mo</span>
               </>
             )}
           </div>
@@ -99,8 +94,10 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           </span>
           {unitPriceMetrics.map((metric, index) => (
             <span
+              // order does not matter here as it doesn't change the UI
+              // eslint-disable-next-line react/no-array-index-key
               key={`${tier.id}-metric-${index}`}
-              className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
+              className="text-primary dark:text-primary-foreground text-center text-xs/4.5 font-semibold"
             >
               {metric.freeLimit ? (
                 <>

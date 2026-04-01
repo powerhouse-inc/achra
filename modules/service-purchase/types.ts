@@ -17,6 +17,10 @@ export enum ServicePurchaseStep {
   Confirmation = 'confirmation',
 }
 
+export interface GetServicePurchaseUrlOptions {
+  operatorId?: string | null
+}
+
 export interface CreateResourceInstancesResult {
   name: string
   teamName: string

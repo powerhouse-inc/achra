@@ -1,7 +1,6 @@
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ServicePurchaseStep } from '@/modules/service-purchase/types'
+import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { OperatorCard } from '@/modules/services/components/operator-card'
-import type { Route } from 'next'
 
 interface PurchaseSectionProps {
   operator: BuilderProfileState
@@ -11,14 +10,12 @@ interface PurchaseSectionProps {
 export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-lg leading-[120%] font-bold">Purchase</h2>
+      <h2 className="text-lg leading-[120%] font-bold">Request a Quote</h2>
       <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2">
         <OperatorCard
           key={operator.name}
           operator={operator}
-          configureServicesHref={
-            `/services/${serviceSlug}/purchase?step=${ServicePurchaseStep.ConfigureServices}&operatorId=${operator.id}` as Route
-          }
+          configureServicesHref={getServicePurchaseUrl(serviceSlug, { operatorId: operator.id })}
           showMoreInfo
         />
       </div>

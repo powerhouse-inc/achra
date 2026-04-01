@@ -9,6 +9,7 @@ import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
 import { getAvailableCycles } from '../lib/billing-period'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
+import { mergeStateWithUrlStepIfPresent } from '../lib/merge-state-with-url-step'
 import {
   clearServicePurchasePersistedState,
   getServicePurchaseStorageKey,
@@ -130,19 +131,19 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               | undefined
             if (persisted == null) {
               restorationResult = null
-              return currentState
+              return mergeStateWithUrlStepIfPresent(currentState)
             }
             if (persisted.activeStep === ServicePurchaseStep.Confirmation) {
               restorationResult = null
               clearServicePurchasePersistedState(services.id)
-              return currentState
+              return mergeStateWithUrlStepIfPresent(currentState)
             }
             if (persisted.apiChecksum !== currentApiChecksum) {
               restorationResult = 'discarded'
               // remove the obsolete persisted data
               clearServicePurchasePersistedState(services.id)
               // ignore the persisted data if the data in the API has changed since the last time the store was persisted
-              return currentState
+              return mergeStateWithUrlStepIfPresent(currentState)
             }
             restorationResult = 'restored'
 
@@ -198,7 +199,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
                 ? persisted.disabledSteps.filter((s) => SERVICE_PURCHASE_STEP_VALUES.includes(s))
                 : currentState.disabledSteps
 
-            return {
+            return mergeStateWithUrlStepIfPresent({
               ...currentState,
               selectedTier,
               selectedBillingCycle,
@@ -209,7 +210,7 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
               activeStep,
               visitedSteps,
               disabledSteps,
-            }
+            })
           },
           onRehydrateStorage: () => (_state, error) => {
             if (error) return
