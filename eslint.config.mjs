@@ -33,6 +33,7 @@ export default [
       '*.config.js',
       '*.config.ts',
       'scripts/**',
+      '.agents/**',
       'vitest.shims.d.ts',
       '.agents/**',
     ],
