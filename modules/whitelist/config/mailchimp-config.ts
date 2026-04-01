@@ -1,10 +1,9 @@
 import 'server-only'
 
-/**
- * Mailchimp-specific configuration constants.
- * These are only required when using Mailchimp as the whitelist provider.
- */
-export const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY!
-export const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID!
-export const MAILCHIMP_SERVER_LOCATION = process.env.MAILCHIMP_SERVER_LOCATION!
-export const MAILCHIMP_TAG = process.env.MAILCHIMP_TAG ?? 'achra-waitlist'
+export {
+  MAILCHIMP_API_KEY,
+  MAILCHIMP_AUDIENCE_ID,
+  MAILCHIMP_NETWORK_TAG,
+  MAILCHIMP_SERVER_LOCATION,
+  MAILCHIMP_TAG,
+} from '@/modules/shared/config/mailchimp'
