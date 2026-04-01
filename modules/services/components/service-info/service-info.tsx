@@ -87,7 +87,7 @@ function ServiceInfo({
                   size="lg"
                   variant="default"
                 >
-                  Purchase
+                  Request a Quote
                 </InternalLink>
               )}
             </div>
