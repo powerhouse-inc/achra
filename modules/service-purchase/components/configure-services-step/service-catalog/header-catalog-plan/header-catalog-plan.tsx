@@ -69,10 +69,10 @@ function HeaderCatalogPlan({
         }
         className={cn(
           'bg-card sticky top-18 z-20 min-h-21 w-full items-center overflow-clip sm:top-27.5',
-          'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+          'grid grid-cols-2 lg:grid-cols-(--grid-cols-lg) xl:grid-cols-(--grid-cols-xl)',
           'transition-all duration-500',
           isStuck
-            ? 'border-primary/30 shadow-primary/20 rounded-xl border shadow-md'
+            ? 'border-primary/30 shadow-primary/20 rounded-xl border'
             : 'rounded-t-xl border shadow-[0_-1px_2px_0_rgb(0_0_0/0.05),-1px_0_2px_0_rgb(0_0_0/0.05),1px_0_2px_0_rgb(0_0_0/0.05)]',
         )}
       >
