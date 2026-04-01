@@ -17,6 +17,7 @@ interface Props {
   handleChangeSwitch: () => void
   showLegendValue?: boolean
   showScrollAndToggle?: boolean
+  isCumulative?: boolean
 }
 
 function ExpensesMetricLegend({
@@ -28,6 +29,7 @@ function ExpensesMetricLegend({
   showScrollAndToggle = false,
   isChecked,
   handleChangeSwitch,
+  isCumulative = false,
 }: Readonly<Props>) {
   return (
     <>
@@ -41,7 +43,7 @@ function ExpensesMetricLegend({
         )}
       >
         {series.map((element) => {
-          const value = getLegendValue(element)
+          const value = getLegendValue(element, isCumulative)
           return (
             <ExpensesMetricChartItem
               element={element}
@@ -106,7 +108,7 @@ function ExpensesMetricLegend({
                 )}
               >
                 {series.map((element) => {
-                  const value = getLegendValue(element)
+                  const value = getLegendValue(element, isCumulative)
                   return (
                     <ExpensesMetricChartItem
                       element={element}
@@ -151,7 +153,7 @@ function ExpensesMetricLegend({
             )}
           >
             {series.map((element) => {
-              const value = getLegendValue(element)
+              const value = getLegendValue(element, isCumulative)
               return (
                 <ExpensesMetricChartItem
                   element={element}

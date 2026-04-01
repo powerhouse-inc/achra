@@ -4,7 +4,7 @@ import {
 } from '@/modules/networks/mocks/governance-section'
 import { isNumeric } from '@/modules/shared/lib/utils'
 import { ExecutiveProposalsList } from './executive-proposals-list'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/GovernanceSection/ExecutiveProposalsList',
@@ -19,12 +19,30 @@ const meta = {
     },
   },
   argTypes: {
-    openProposals: { control: 'object' },
-    activeProposals: { control: 'object' },
-    passedProposals: { control: 'object' },
-    slicedPassedProposals: { control: 'object' },
-    hatAddress: { control: 'text' },
-    className: { control: 'text' },
+    openProposals: {
+      control: 'object',
+      description: 'Array of open executive proposals awaiting approval',
+    },
+    activeProposals: {
+      control: 'object',
+      description: 'Array of active executive proposals',
+    },
+    passedProposals: {
+      control: 'object',
+      description: 'Array of passed executive proposals',
+    },
+    slicedPassedProposals: {
+      control: 'object',
+      description: 'Sliced subset of passed proposals for display',
+    },
+    hatAddress: {
+      control: 'text',
+      description: 'Address of the current hat (leading proposal)',
+    },
+    className: {
+      control: 'text',
+      description: 'Additional CSS classes to apply to the list',
+    },
   },
 } satisfies Meta<typeof ExecutiveProposalsList>
 

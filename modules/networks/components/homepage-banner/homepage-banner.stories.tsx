@@ -1,11 +1,12 @@
+import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '../../config/constants'
 import { HomepageBanner } from '.'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/HomepageBanner',
   component: HomepageBanner,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'padded',
   },
   argTypes: {
     title: {
@@ -40,4 +41,41 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+const withBannerExpandedState = (isExpanded: boolean): NonNullable<Story['render']> => {
+  return function RenderWithStoredExpandedState(args) {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(HOME_BANNER_EXPANDED_STORAGE_KEY, String(isExpanded))
+    }
+
+    return <HomepageBanner {...args} />
+  }
+}
+
+export const Default: Story = {
+  name: 'Expanded (Logged In)',
+  render: withBannerExpandedState(true),
+  args: {
+    isLoggedIn: true,
+  },
+}
+
+export const CollapsedLoggedIn: Story = {
+  render: withBannerExpandedState(false),
+  args: {
+    isLoggedIn: true,
+  },
+}
+
+export const ExpandedLoggedOut: Story = {
+  render: withBannerExpandedState(true),
+  args: {
+    isLoggedIn: false,
+  },
+}
+
+export const CollapsedLoggedOut: Story = {
+  render: withBannerExpandedState(false),
+  args: {
+    isLoggedIn: false,
+  },
+}

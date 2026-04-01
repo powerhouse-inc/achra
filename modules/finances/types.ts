@@ -41,6 +41,7 @@ export interface FiancesNavigationCard {
 export interface ValueAndUnit {
   value: number
   unit: string
+  sum?: number
 }
 
 export interface ValuesDataWithBorder {
@@ -254,6 +255,7 @@ export type AnalyticGranularityForExpensesMetricChart = Extract<
 export interface ValueAndUnit {
   value: number
   unit: string
+  sum?: number
 }
 
 export type ExpensesMetricBudgetAnalytic = Record<string, BudgetMetric[]>
@@ -277,4 +279,21 @@ export interface AnalyticSeries {
 }
 export interface Analytic {
   series: AnalyticSeries[]
+}
+
+// Breakdown Table types
+export type TableData = Record<string, Record<string, MetricValues>>
+
+export interface ItemRow {
+  name: string
+  isMain?: boolean
+  isUncategorized?: boolean
+  isSummaryRow?: boolean
+  codePath?: string
+  columns: MetricValues[]
+}
+
+export interface TableFinances {
+  tableName: string
+  rows: ItemRow[]
 }

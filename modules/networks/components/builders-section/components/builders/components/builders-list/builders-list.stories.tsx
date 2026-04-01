@@ -1,6 +1,6 @@
 import { mockBuilderTeams } from '@/modules/networks/mocks/builders-section'
 import { BuildersList } from './builders-list'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/BuildersSection/BuilderTeamsList',

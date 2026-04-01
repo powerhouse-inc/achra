@@ -9,6 +9,7 @@ import { buttonVariants } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
+import { getTagVariant } from '@/modules/workstream/lib/proposal-apply-card-helpers'
 import type { Route } from 'next'
 
 interface ProposalApplyCardProps {
@@ -40,14 +41,7 @@ const tagVariants = cva(
   },
 )
 
-const variants = ['yellow', 'success', 'progress', 'destructive', 'purple', 'warning'] as const
-function getVariant(tag: string) {
-  return variants[
-    tag.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % variants.length
-  ]
-}
-
-export default function ProposalApplyCard({
+function ProposalApplyCard({
   networkSlug,
   workstreamSlug,
   title,
@@ -56,14 +50,16 @@ export default function ProposalApplyCard({
   project,
 }: ProposalApplyCardProps) {
   const projectSlug = project?.slug ?? ''
-  const href =
-    `/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route
+  // TODO: confirm the correct fallback link when no project is linked to a deliverable
+  const href = projectSlug
+    ? (`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route)
+    : ('#' as Route)
 
   const itemRenderer = useCallback(
     (tag: string) => (
       <div
         className={tagVariants({
-          variant: getVariant(tag),
+          variant: getTagVariant(tag),
         })}
       >
         {tag}
@@ -84,7 +80,10 @@ export default function ProposalApplyCard({
           <div className="max-w-64 space-y-1">
             <div className="flex flex-wrap gap-2">
               {items.map((tag) => (
-                <div key={tag} className={cn(tagVariants({ variant: getVariant(tag) }), 'text-xs')}>
+                <div
+                  key={tag}
+                  className={cn(tagVariants({ variant: getTagVariant(tag) }), 'text-xs')}
+                >
                   {tag}
                 </div>
               ))}
@@ -119,3 +118,5 @@ export default function ProposalApplyCard({
     </Link>
   )
 }
+
+export { ProposalApplyCard }

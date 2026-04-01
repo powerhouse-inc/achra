@@ -2,14 +2,12 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
 import { PRICING_GRID } from '../feature-row/feature-row-skeleton'
 
-/** Skeleton for the header row with "SERVICE CATALOG" label and 4 plan columns */
+/** Skeleton for the header row with plan columns */
 function HeaderCatalogPlanSkeleton() {
   return (
     <div className={cn('grid', PRICING_GRID.responsive, 'border-input h-21 items-center border-b')}>
-      {/* SERVICE CATALOG label */}
-      <div className="flex items-center px-6">
-        <Skeleton className="bg-border h-3 w-28" />
-      </div>
+      {/* Empty label column */}
+      <div className="flex items-center px-6" />
 
       {/* Mobile: single plan column */}
       <div className="flex h-full items-center justify-center lg:hidden">

@@ -10,6 +10,10 @@ import { getAvailableCycles } from '../lib/billing-period'
 import { computeApiChecksum } from '../lib/compute-api-checksum'
 import { computeTotals } from '../lib/compute-totals'
 import {
+  clearServicePurchasePersistedState,
+  getServicePurchaseStorageKey,
+} from '../lib/persistence-utils'
+import {
   type PersistedServicePurchaseState,
   ServicePurchaseStep,
   type ServicePurchaseStore,
@@ -33,7 +37,7 @@ const showRestorationToast = debounce((result: 'restored' | 'discarded') => {
 }, 1000)
 
 function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
-  const storageKey = `service-${services.id}`
+  const storageKey = getServicePurchaseStorageKey(services.id)
   const currentApiChecksum = computeApiChecksum(services)
 
   /**
@@ -72,15 +76,22 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
 
           // Override actions that affect totals — atomic: set once per action
           setSelectedTier: (id) => {
+            if (get().selectedTier.id !== id) {
+              stepSlice.actions.resetPostConfigureSteps()
+            }
             tiersSlice.actions.setSelectedTier(id)
             optionGroupsSlice.actions.recomputeOptionGroups()
             totalsSlice.actions.recomputeTotals()
           },
           setSelectedBillingCycle: (cycle) => {
+            if (get().selectedBillingCycle !== cycle) {
+              stepSlice.actions.resetPostConfigureSteps()
+            }
             tiersSlice.actions.setSelectedBillingCycle(cycle)
             totalsSlice.actions.recomputeTotals()
           },
           setOptionGroupSelected: (id, isSelected) => {
+            stepSlice.actions.resetPostConfigureSteps()
             optionGroupsSlice.actions.setOptionGroupSelected(id, isSelected)
             totalsSlice.actions.recomputeTotals()
           },
@@ -123,13 +134,13 @@ function createServicePurchaseStore({ services }: ServicePurchaseStoreProps) {
             }
             if (persisted.activeStep === ServicePurchaseStep.Confirmation) {
               restorationResult = null
-              localStorage.removeItem(storageKey)
+              clearServicePurchasePersistedState(services.id)
               return currentState
             }
             if (persisted.apiChecksum !== currentApiChecksum) {
               restorationResult = 'discarded'
               // remove the obsolete persisted data
-              localStorage.removeItem(storageKey)
+              clearServicePurchasePersistedState(services.id)
               // ignore the persisted data if the data in the API has changed since the last time the store was persisted
               return currentState
             }

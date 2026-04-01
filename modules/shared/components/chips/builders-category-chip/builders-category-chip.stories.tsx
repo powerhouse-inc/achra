@@ -1,8 +1,8 @@
 import { TeamCategory } from '@/modules/shared/types/types'
 import BuildersCategoryChip from './builders-category-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof BuildersCategoryChip> = {
+const meta = {
   title: 'Shared/Components/Chips/BuildersCategoryChip',
   component: BuildersCategoryChip,
   parameters: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof BuildersCategoryChip> = {
       description: 'The category of the builder',
     },
   },
-}
+} satisfies Meta<typeof BuildersCategoryChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -27,6 +27,9 @@ export const Technical: Story = {
 }
 
 export const AllCategories: Story = {
+  args: {
+    category: TeamCategory.All, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

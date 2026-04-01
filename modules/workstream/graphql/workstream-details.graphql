@@ -41,6 +41,7 @@ query WorkstreamDetails($filter: WorkstreamFilter!) {
           }
           imageUrl
           budget
+          budgetType
           currency
           expenditure {
             cap

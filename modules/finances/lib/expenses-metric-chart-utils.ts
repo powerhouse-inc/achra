@@ -12,6 +12,7 @@ import {
   type ValuesDataWithBorder,
 } from '../types'
 import { newBudgetMetric, setMetric } from '../utils'
+import type { CumulativeType } from './expenses-metric-chart-search-params'
 
 export const removeBudgetWord = (name: string) => {
   const wordToRemove = /\s+Budget\s*$/i
@@ -63,8 +64,16 @@ export const replaceAllNumberLetOneBeforeDot = (num: number, isShowNegative = fa
   return isShowNegative && isNegative ? `-${result}` : result
 }
 
-export const getLegendValue = (seriesElement: ExpensesMetricChartSeriesData) => {
+export const getLegendValue = (
+  seriesElement: ExpensesMetricChartSeriesData,
+  isCumulative = false,
+) => {
   const points = seriesElement.data.map((item) => item.value ?? 0)
+
+  if (isCumulative) {
+    return points.at(-1) ?? 0
+  }
+
   const lastQuarter = points.slice(-3)
 
   return lastQuarter.reduce((previous, current) => previous + current, 0)
@@ -300,19 +309,19 @@ export const getExpensesMetricAnalytics = (
 
         switch (row.metric) {
           case 'Actuals':
-            budgetMetric.actuals = setMetric(row.value, row.unit)
+            budgetMetric.actuals = setMetric(row.value, row.unit, row.sum)
             break
           case 'Forecast':
-            budgetMetric.forecast = setMetric(row.value, row.unit)
+            budgetMetric.forecast = setMetric(row.value, row.unit, row.sum)
             break
           case 'Budget':
-            budgetMetric.budget = setMetric(row.value, row.unit)
+            budgetMetric.budget = setMetric(row.value, row.unit, row.sum)
             break
           case 'PaymentsOnChain':
-            budgetMetric.paymentsOnChain = setMetric(row.value, row.unit)
+            budgetMetric.paymentsOnChain = setMetric(row.value, row.unit, row.sum)
             break
           case 'ProtocolNetOutflow':
-            budgetMetric.protocolNetOutflow = setMetric(row.value, row.unit)
+            budgetMetric.protocolNetOutflow = setMetric(row.value, row.unit, row.sum)
             break
         }
 
@@ -336,6 +345,10 @@ export const parseAnalyticsToSeriesExpensesMetricChart = (
   budgetsAnalytics: ExpensesMetricBudgetAnalytic | undefined,
   budgets: Budget[],
   allBudgets: Budget[],
+  options?: {
+    isCumulative?: boolean
+    cumulativeType?: CumulativeType
+  },
 ) => {
   const metricSeriesConfig: Array<{
     name: string
@@ -355,16 +368,42 @@ export const parseAnalyticsToSeriesExpensesMetricChart = (
     const budgetsAtCurrentLevel = budgets.length > 0 ? budgets : allBudgets
     const selectedPaths = budgetsAtCurrentLevel.map((budget) => budget.codePath)
     const monthCount = Math.max(...selectedPaths.map((path) => budgetsAnalytics[path].length), 0)
+    const isCumulative = options?.isCumulative ?? false
+    const cumulativeType = options?.cumulativeType ?? 'relative'
 
     metricSeriesConfig.forEach((config, index) => {
-      const dataForSeries = Array.from({ length: monthCount }, (_, monthIndex) => {
-        const value = selectedPaths.reduce((acc, path) => {
-          const metricValue = budgetsAnalytics[path][monthIndex][config.metricKey].value
-          return acc + metricValue
-        }, 0)
+      const rawPoints = Array.from({ length: monthCount }, (_, monthIndex) => {
+        const aggregatedPoint = selectedPaths.reduce(
+          (acc, path) => {
+            const metricValue = budgetsAnalytics[path][monthIndex][config.metricKey]
+            return {
+              value: acc.value + metricValue.value,
+              sum: acc.sum + (metricValue.sum ?? metricValue.value),
+            }
+          },
+          { value: 0, sum: 0 },
+        )
+
+        const divisor = selectedPaths.length > 0 ? selectedPaths.length : 1
 
         return {
-          value: selectedPaths.length > 0 ? value / selectedPaths.length : 0,
+          value: aggregatedPoint.value / divisor,
+          sum: aggregatedPoint.sum / divisor,
+        }
+      })
+
+      let runningTotal =
+        isCumulative && cumulativeType === 'absolute' && rawPoints.length > 0
+          ? rawPoints[0].sum - rawPoints[0].value
+          : 0
+
+      const dataForSeries = rawPoints.map((point) => {
+        if (isCumulative) {
+          runningTotal += point.value
+        }
+
+        return {
+          value: isCumulative ? runningTotal : point.value,
           itemStyle: {
             borderRadius: [0, 0, 0, 0],
           },

@@ -32,7 +32,7 @@ function NetworkIcon({ network }: { network: Network }) {
       alt={network.name ?? ''}
       size={36}
       lightClassName="block min-w-8 lg:hidden dark:hidden"
-      darkClassName="hidden min-w-8 lg:hidden dark:block"
+      darkClassName="hidden min-w-8 lg:hidden dark:block lg:dark:hidden"
       singleClassName="min-w-8 lg:hidden"
       useImgTag={false}
       showName={false}

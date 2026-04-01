@@ -10,6 +10,7 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
     tiers {
       id
       name
+      mostPopular
       description
       isCustomPricing
       pricingMode
@@ -35,6 +36,13 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
         notes
         unitPrice
         unitPriceCurrency
+      }
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
       }
     }
     facetTargets {

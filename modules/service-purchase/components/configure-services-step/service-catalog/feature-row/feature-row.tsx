@@ -4,6 +4,7 @@ import { usePricingCalculatorContext } from '@/modules/service-purchase/provider
 import type { FeatureValue, ServiceMetric } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogCell } from '../service-catalog-cell'
+import { useServiceCatalogEnabled } from '../service-catalog-context'
 import { MetricRow } from './metric-row'
 
 interface FeatureRowProps {
@@ -15,6 +16,7 @@ interface FeatureRowProps {
 
 function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
   const { activePlan, tierNames } = usePricingCalculatorContext()
+  const isGroupEnabled = useServiceCatalogEnabled()
   const hasMetrics = metrics && metrics.length > 0
 
   return (
@@ -39,7 +41,14 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
           )}
         >
           <div className="flex flex-col md:flex-row md:items-center md:gap-1">
-            <span className="text-foreground text-sm font-semibold lg:text-base">{label}</span>
+            <span
+              className={cn(
+                'text-sm font-normal',
+                isGroupEnabled ? 'text-foreground' : 'text-foreground/50',
+              )}
+            >
+              {label}
+            </span>
           </div>
         </div>
 

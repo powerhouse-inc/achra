@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useStore } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 import type {
@@ -8,6 +8,10 @@ import type {
   RsServiceOffering,
   RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  clearServicePurchasePersistedState,
+  hasReachedConfirmationStep,
+} from '../lib/persistence-utils'
 import { createServicePurchaseStore } from '../stores/service-purchase-store'
 import type {
   PurchaseOptionGroup,
@@ -31,6 +35,24 @@ function ServicePurchaseStoreProvider({
   services,
 }: Readonly<ServicePurchaseStoreProviderProps>) {
   const [store] = useState(() => createServicePurchaseStore({ services }))
+
+  /**
+   * Resets the store and clears the persisted state when the confirmation step is
+   * reached and the user navigates away from the page.
+   */
+  const resetCompletedPurchaseState = useCallback(() => {
+    const { visitedSteps, disabledSteps, services: currentServices } = store.getState()
+    if (!hasReachedConfirmationStep({ visitedSteps, disabledSteps })) return
+
+    store.setState(store.getInitialState(), true)
+    clearServicePurchasePersistedState(currentServices.id)
+  }, [store])
+
+  useEffect(() => {
+    return () => {
+      resetCompletedPurchaseState()
+    }
+  }, [resetCompletedPurchaseState])
 
   return (
     <ServicePurchaseStoreContext.Provider value={store}>
@@ -114,6 +136,11 @@ function useServiceOffering(): RsServiceOffering {
   return useStore(store, (state) => state.services)
 }
 
+function useFacets(): ServicePurchaseState['facets'] {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.facets)
+}
+
 function useServicePurchaseStep() {
   const store = useServicePurchaseStoreContext()
   const activeStep = useStore(store, (state) => state.activeStep)
@@ -161,6 +188,7 @@ function useServicePurchaseStep() {
 
 export {
   ServicePurchaseStoreProvider,
+  useFacets,
   useServicePurchaseState,
   useServicePurchaseActions,
   useSelectedTier,

@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LeavePageGuard } from '@/modules/service-purchase/components/leave-page-guard'
 import { NavigationButtons } from '@/modules/service-purchase/components/navigation-buttons'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
@@ -20,7 +19,8 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
   const { serviceSlug } = await params
   const resourceTemplate = await getResourceTemplate({ id: serviceSlug })
 
-  if (!resourceTemplate) {
+  if (!resourceTemplate?.operatorId?.trim()) {
+    // it is required a resource template to have an operatorId
     notFound()
   }
 
@@ -38,14 +38,14 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
 
   return (
     <PageContent className="gap-6">
-      {/* TODO: Remove this cast as when the api its ready */}
-      <ServicePurchaseStoreProvider services={services as unknown as RsServiceOffering}>
+      <ServicePurchaseStoreProvider services={services}>
         <div className="flex flex-col gap-6 lg:gap-8">
           <div>
             <NavigationButtons />
             <ServiceHeader resourceTemplate={resourceTemplate} />
           </div>
           <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
+          <NavigationButtons isFooter />
         </div>
 
         {ff.LEAVE_PAGE_GUARD_ENABLED && <LeavePageGuard />}

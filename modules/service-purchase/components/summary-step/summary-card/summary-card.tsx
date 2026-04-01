@@ -1,9 +1,7 @@
 'use client'
 
-import { Landmark } from 'lucide-react'
 import { useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
@@ -11,18 +9,24 @@ import {
 import { sortOptionGroups } from '@/modules/service-purchase/lib/utils'
 import {
   useAllOptionGroups,
+  useFacets,
   usePurchaseTotals,
   useSelectedBillingCycle,
   useSelectedTier,
   useServiceOffering,
-  useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
+import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
+import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { SelectedFacets } from './selected-facets'
+import { SummaryCardHeader } from './summary-card-header'
 import { Summary } from './summary-section'
 
-function SummaryCard() {
-  const { facets } = useServicePurchaseState()
+interface SummaryCardProps {
+  templateTitle?: string
+}
+
+function SummaryCard({ templateTitle }: SummaryCardProps) {
+  const facets = useFacets()
   const totals = usePurchaseTotals()
   const optionGroups = useAllOptionGroups()
   const offering = useServiceOffering()
@@ -39,10 +43,26 @@ function SummaryCard() {
       activeGroupIds,
     )
 
+    const hasServicesForTier = (group: PurchaseOptionGroup): boolean => group.services.length > 0
+
     const recurring = sortOptionGroups(
-      selected.filter((g) => g.costType === RsGroupCostType.Recurring),
+      selected.filter(
+        (group) => group.costType === RsGroupCostType.Recurring && hasServicesForTier(group),
+      ),
     )
-    const setup = sortOptionGroups(selected.filter((g) => g.costType === RsGroupCostType.Setup))
+    const setup = sortOptionGroups(
+      selected.filter((group) => {
+        if (group.costType === RsGroupCostType.Setup) {
+          return hasServicesForTier(group) || group.resolvedPrice > 0
+        }
+        // Add-ons with both setup and recurring appear in addOnBreakdowns with setupCost
+        if (group.costType === RsGroupCostType.Recurring && group.isAddOn) {
+          const setupPrice = getGroupPriceFromBreakdown(breakdown, group.id, true)
+          return setupPrice != null && setupPrice.amount > 0
+        }
+        return false
+      }),
+    )
 
     const recurringPrices = new Map<string, number>()
     for (const g of recurring) {
@@ -64,33 +84,8 @@ function SummaryCard() {
   }, [optionGroups, offering, selectedTier.id, selectedBillingCycle])
 
   return (
-    <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
-      <CardHeader className="flex flex-row items-start justify-between gap-4 px-3 pt-3 lg:px-6 lg:pt-6">
-        <div className="flex items-start gap-2">
-          <div className="bg-primary flex size-12 shrink-0 items-center justify-center rounded-2xl">
-            <Landmark className="text-primary-foreground size-6" strokeWidth={1.5} />
-          </div>
-          <div className="flex flex-col justify-center gap-1 self-stretch">
-            <h2 className="text-foreground text-sm/5.5 leading-tight font-bold lg:text-lg lg:leading-[120%]">
-              Operational Hub for Open Source Builders
-            </h2>
-            <span className="text-foreground/70 text-xs font-medium uppercase lg:text-sm/5.5">
-              Resource Template
-            </span>
-          </div>
-        </div>
-        <div className="flex shrink-0 flex-col items-end gap-1">
-          <span className="text-primary text-base/6 font-semibold lg:leading-7">
-            ${totals.recurringTotal}/mo
-          </span>
-          <span className="text-foreground text-xs/4.5 font-medium">
-            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
-          </span>
-          <span className="text-foreground/70 text-xs/4.5 font-medium">
-            + ${totals.setupTotal} Setup
-          </span>
-        </div>
-      </CardHeader>
+    <Card className="mx-auto w-full max-w-218.5 border-none p-0!">
+      <SummaryCardHeader templateTitle={templateTitle} />
 
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">
         {facets.length > 0 && <SelectedFacets />}
@@ -101,6 +96,8 @@ function SummaryCard() {
               sectionLabel="Recurring"
               totalSuffix="/mo"
               groupPrices={recurringGroupPrices}
+              isCustomPricing={selectedTier.isCustomPricing}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />
@@ -119,6 +116,7 @@ function SummaryCard() {
               sectionLabel="ONE-TIME FEE"
               totalSuffix=""
               groupPrices={setupGroupPrices}
+              currency={selectedTier.pricing.currency}
             >
               <Summary.Card>
                 <Summary.Header />
@@ -127,6 +125,7 @@ function SummaryCard() {
                     <Summary.Group key={group.id} group={group} />
                   ))}
                 </Summary.Content>
+                {setupGroups.length > 1 && <Summary.Total totalAmount={totals.setupTotal} />}
               </Summary.Card>
             </Summary.Provider>
           )}

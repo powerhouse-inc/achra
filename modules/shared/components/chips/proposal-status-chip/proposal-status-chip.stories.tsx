@@ -1,6 +1,6 @@
 import { ProposalStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProposalStatusChip } from './proposal-status-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * ProposalStatusChip Component

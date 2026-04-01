@@ -1,30 +1,12 @@
 import { useMemo } from 'react'
-import { useAllNetworksQuery } from '@/modules/__generated__/graphql/switchboard-generated'
-import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
+import { useNetworkOptions } from '@/modules/workstream/hooks/use-network-options'
 
 interface NetworkSelectProps {
   networks: string[]
   setNetworks: (networks: string[]) => Promise<URLSearchParams>
   className?: string
-}
-
-function useNetworkOptions() {
-  const { data: allNetworks, isLoading: isLoadingAllNetworks } = useAllNetworksQuery()
-
-  const options = useMemo(() => {
-    return (allNetworks?.allNetworks.map(
-      (network) =>
-        ({
-          value: network.network?.slug ?? '',
-          label: network.network?.name ?? network.network?.slug ?? 'Unknown',
-          group: 'Networks',
-        }) satisfies Option,
-    ) ?? []) as Option[]
-  }, [allNetworks])
-
-  return { options, isLoadingAllNetworks }
 }
 
 function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps) {
@@ -59,24 +41,5 @@ function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps)
   )
 }
 
-function NetworkSelectDrawer({ networks, setNetworks }: NetworkSelectProps) {
-  const handleChange = (values: string[]) => {
-    void setNetworks(values)
-  }
-
-  const { options } = useNetworkOptions()
-
-  return (
-    <DrawerSelect
-      value={networks}
-      onChange={handleChange}
-      label="Networks"
-      options={options}
-      multiselect={true}
-      enableSelectAll={true}
-      selectAllLabel="Select All"
-    />
-  )
-}
-
-export { NetworkSelect, NetworkSelectDrawer }
+export { NetworkSelect }
+export type { NetworkSelectProps }

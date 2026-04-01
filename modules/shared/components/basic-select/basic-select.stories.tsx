@@ -1,19 +1,49 @@
 import { BasicSelect } from './basic-select'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof BasicSelect> = {
+const meta = {
   title: 'Shared/Components/SingleSelect',
   component: BasicSelect,
   tags: ['autodocs'],
-  argTypes: {
-    onValueChange: { action: 'changed' },
+  parameters: {
+    layout: 'centered',
   },
-}
+  args: {
+    onValueChange: () => {},
+  },
+  argTypes: {
+    value: {
+      control: 'text',
+      description: 'Currently selected value (must match an option)',
+    },
+    options: {
+      control: false,
+      description: 'Array of options to display in the dropdown',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text when no value is selected',
+    },
+    label: {
+      control: 'text',
+      description: 'Optional label for the select group',
+    },
+    onValueChange: { action: 'changed', description: 'Called when selection changes' },
+    isLoading: {
+      control: 'boolean',
+      description: 'Shows loading skeleton in the trigger',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disables the select',
+    },
+  },
+} satisfies Meta<typeof BasicSelect>
 
 export default meta
-type Story = StoryObj<typeof BasicSelect>
+type Story = StoryObj<typeof meta>
 
-export const Budget: Story = {
+export const Default: Story = {
   args: {
     value: 'Budget',
     options: ['Budget', 'Forecast', 'Actuals'],
@@ -22,12 +52,12 @@ export const Budget: Story = {
   },
 }
 
-export const Granularity: Story = {
+export const Loading: Story = {
   args: {
-    value: 'Monthly',
+    value: undefined,
     options: ['Monthly', 'Quarterly', 'Semi-annual', 'Annually'],
-    label: 'Granularity',
     placeholder: 'Select granularity',
     'aria-label': 'Select granularity',
+    isLoading: true,
   },
 }

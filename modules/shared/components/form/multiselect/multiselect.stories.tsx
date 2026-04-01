@@ -5,7 +5,7 @@ import {
   MultipleSelector,
   type Option,
 } from './multiselect'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * MultipleSelector is a powerful multi-select component built on top of cmdk.

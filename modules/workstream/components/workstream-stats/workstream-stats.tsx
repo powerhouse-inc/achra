@@ -1,8 +1,10 @@
-import { format } from 'date-fns'
 import { CalendarClock, HandCoins, UserCheck } from 'lucide-react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
-import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
+import {
+  formatBudgetRange,
+  formatDeadline,
+} from '@/modules/workstream/lib/workstream-stats-formatters'
 
 interface WorkstreamStatsProps {
   issuer?: Maybe<string>
@@ -12,40 +14,7 @@ interface WorkstreamStatsProps {
   submissionDeadline?: Maybe<string>
 }
 
-function formatDeadline(submissionDeadline?: Maybe<string>) {
-  let deadline = 'Not specified'
-  if (submissionDeadline) {
-    const deadlineDate = new Date(submissionDeadline)
-    deadline = format(deadlineDate, 'd MMM yyyy @ HH:mm zzz').toUpperCase()
-  }
-  return deadline
-}
-
-const formatValue = (value: number) => {
-  const { value: formatted, suffix } = threeDigitsPrecisionHumanization(value)
-  const cleanedValue = formatted.replace(/\.0+$/, '')
-  return `${cleanedValue}${suffix}`
-}
-
-function formatBudgetRange(
-  budgetMin?: Maybe<number>,
-  budgetMax?: Maybe<number>,
-  budgetCurrency?: Maybe<string>,
-) {
-  if (!budgetMin && !budgetMax) return 'Not specified'
-  const currency = budgetCurrency ?? 'USD'
-
-  const min = budgetMin ? formatValue(budgetMin) : '0'
-  const max = budgetMax ? formatValue(budgetMax) : ''
-
-  if (min && max) return `${min} - ${max} ${currency}`
-  if (min) return `${min}  ${currency}`
-  if (max) return `Up to ${max} ${currency}`
-
-  return 'Not specified'
-}
-
-export default function WorkstreamStats({
+function WorkstreamStats({
   issuer,
   budgetMin,
   budgetMax,
@@ -73,3 +42,5 @@ export default function WorkstreamStats({
     </div>
   )
 }
+
+export { WorkstreamStats }

@@ -1,10 +1,11 @@
 import { InternalLink } from './internal-link'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Components/Buttons/Internal Link',
   component: InternalLink,
   parameters: {
+    layout: 'centered',
     nextjs: {
       appDirectory: true,
       navigation: {

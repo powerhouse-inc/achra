@@ -3,7 +3,11 @@
 import { useMemo } from 'react'
 import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
-import { getUnitPriceMetrics } from '@/modules/service-purchase/lib/utils'
+import {
+  formatMetricLabel,
+  formatPrice,
+  getUnitPriceMetrics,
+} from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
@@ -22,7 +26,7 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   return (
     <label
       htmlFor={inputId}
-      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-center px-1"
+      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-start px-0 sm:px-1"
     >
       <div className="flex cursor-pointer flex-col items-center gap-2">
         <RadioGroupItem
@@ -34,6 +38,11 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           {tier.name}
         </span>
       </div>
+      {tier.mostPopular && (
+        <span className="bg-primary text-primary-foreground inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-bold tracking-wide whitespace-nowrap uppercase shadow-sm lg:px-2.5 lg:tracking-widest">
+          Most popular
+        </span>
+      )}
       {tier.isCustomPricing ? (
         <div className="flex w-full flex-col items-center gap-0.5">
           <span className={cn('text-foreground/50 text-xs/5.5 font-semibold transition-colors')}>
@@ -42,26 +51,42 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
           <span className="text-foreground text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics[0] && (
+          {unitPriceMetrics.map((metric, index) => (
             <span
+              key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">
-                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
-              </span>
+              {metric.freeLimit ? (
+                <>
+                  up to {metric.freeLimit}{' '}
+                  <span className="text-foreground/50">
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              ) : (
+                <>
+                  ~{formatPrice(Number(metric.unitPrice), tier.pricing.currency)}{' '}
+                  <span className="text-foreground/50">
+                    per {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              )}
             </span>
-          )}
+          ))}
         </div>
       ) : (
         <div className="flex w-full flex-col items-center gap-0.5">
           <div>
             {displayPrice === null ? (
               <span className="text-muted-foreground text-xs/5.5 font-semibold">—</span>
+            ) : displayPrice === 0 ? (
+              <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
+                Free
+              </span>
             ) : (
               <>
                 <span className={cn('text-primary text-xs/5.5 font-semibold transition-colors')}>
-                  ${Math.round(displayPrice).toLocaleString()}
+                  {formatPrice(displayPrice, tier.pricing.currency)}
                 </span>
                 <span className="text-foreground/70 text-xs/5.5 font-semibold transition-colors">
                   /mo
@@ -69,19 +94,31 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
               </>
             )}
           </div>
-          <span className="text-foreground text-xs leading-4.5 font-normal">
+          <span className="text-foreground text-center text-xs leading-4.5 font-normal">
             {BILLING_CYCLE_LABELS[selectedBillingCycle]}
           </span>
-          {unitPriceMetrics[0] && (
+          {unitPriceMetrics.map((metric, index) => (
             <span
+              key={`${tier.id}-metric-${index}`}
               className={cn('text-primary text-center text-xs/4.5 font-semibold transition-colors')}
             >
-              ~${Math.round(Number(unitPriceMetrics[0].unitPrice)).toLocaleString()}{' '}
-              <span className="text-foreground/50">
-                per {unitPriceMetrics[0].unitName ?? unitPriceMetrics[0].metric}
-              </span>
+              {metric.freeLimit ? (
+                <>
+                  up to {metric.freeLimit}{' '}
+                  <span className="text-foreground/50">
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              ) : (
+                <>
+                  ~{formatPrice(Number(metric.unitPrice), tier.pricing.currency)}{' '}
+                  <span className="text-foreground/50">
+                    per {formatMetricLabel(metric.unitName ?? metric.metric)}
+                  </span>
+                </>
+              )}
             </span>
-          )}
+          ))}
         </div>
       )}
     </label>

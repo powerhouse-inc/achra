@@ -10,7 +10,7 @@ export const reservesGranularityParser = parseAsStringEnum(
   Object.values(GRANULARITY_OPTIONS),
 ).withDefault(GRANULARITY_OPTIONS.Monthly)
 
-export const reservesCategoriesParser = parseAsArrayOf(parseAsString).withDefault([])
+export const reservesCategoriesParser = parseAsArrayOf(parseAsString)
 
 export const yearParser = parseAsString.withDefault('2025')
 

@@ -1,5 +1,5 @@
 import { NetworkErrorState } from './network-error-state'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Network Error State Component

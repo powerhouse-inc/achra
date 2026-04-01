@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import {
   useServicePurchaseActions,
   useServicePurchaseState,
@@ -10,9 +11,16 @@ function FacetSelectionSection() {
   const { facets } = useServicePurchaseState()
   const { selectedFacetOption } = useServicePurchaseActions()
 
+  const visibleFacets = useMemo(
+    () => facets.filter((facet) => facet.originalFacet.selectedOptions.length > 1),
+    [facets],
+  )
+
+  if (visibleFacets.length === 0) return null
+
   return (
     <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-4">
-      {facets.map((facet) => (
+      {visibleFacets.map((facet) => (
         <FacetSelect
           key={facet.originalFacet.categoryKey}
           categoryLabel={facet.originalFacet.categoryLabel}

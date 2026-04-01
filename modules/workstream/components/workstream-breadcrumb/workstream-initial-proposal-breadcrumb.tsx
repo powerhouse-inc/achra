@@ -21,11 +21,11 @@ async function WorkstreamInitialProposalBreadcrumb({
       items={[
         { label: networkName, href: `/network/${slug}` as Route },
         {
-          label: workstreamName,
+          label: 'Contribute',
           href: `/network/${slug}/workstream/${workstreamSlug}` as Route,
         },
         {
-          label: 'Initial Proposal',
+          label: workstreamName,
           href: `/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route,
         },
       ]}

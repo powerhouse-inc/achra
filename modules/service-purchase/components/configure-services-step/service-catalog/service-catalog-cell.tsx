@@ -13,9 +13,9 @@ function ServiceCatalogCell({ value, isActive }: Readonly<FeatureCellProps>) {
     return (
       <div className="flex items-center justify-center">
         {value ? (
-          <Check className={cn('size-4', 'text-status-success')} />
+          <Check className={cn('size-4', 'text-status-success brightness-75')} />
         ) : (
-          <span className="text-muted-foreground">—</span>
+          <span className="text-foreground/60">—</span>
         )}
       </div>
     )
@@ -34,7 +34,7 @@ function ServiceCatalogCell({ value, isActive }: Readonly<FeatureCellProps>) {
       <span
         className={cn(
           'text-center text-sm',
-          isActive ? 'text-foreground font-medium' : 'text-muted-foreground',
+          isActive ? 'text-foreground font-medium' : 'text-foreground/70',
         )}
       >
         {value}

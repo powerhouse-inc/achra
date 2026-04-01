@@ -19,7 +19,7 @@ function RootPositioning({ children, routesWithBlurBackground }: RootPositioning
   return (
     <div
       className={cn(
-        'fixed top-0 right-0 left-0 z-160 h-27.5 w-full pb-3',
+        'fixed top-0 right-0 left-0 z-160 h-18 w-full p-0 sm:h-27.5 sm:pb-3',
         hasBlurBackground ? 'sm:backdrop-blur-2xl' : 'sm:bg-background',
       )}
     >

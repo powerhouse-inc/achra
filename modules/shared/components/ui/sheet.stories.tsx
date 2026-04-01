@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './sheet'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Sheet',

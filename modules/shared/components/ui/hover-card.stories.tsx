@@ -1,6 +1,6 @@
 import React from 'react'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/HoverCard',

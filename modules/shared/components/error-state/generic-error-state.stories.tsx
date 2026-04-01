@@ -1,6 +1,6 @@
 import { AlertCircle, XCircle } from 'lucide-react'
 import { GenericErrorState } from './generic-error-state'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Generic Error State Component

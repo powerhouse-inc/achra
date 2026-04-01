@@ -1,5 +1,6 @@
 'use client'
 
+import { UTCDate } from '@date-fns/utc'
 import { format } from 'date-fns'
 import { useQueryState } from 'nuqs'
 import { useMemo } from 'react'
@@ -53,7 +54,7 @@ function BreakdownActualsSection({
     <div className="flex flex-col gap-4">
       {hasMainTableItems && (
         <h2 className="text-lg/[120%] font-bold">
-          Actuals - {format(currentMonth, 'MMM yyyy')} Breakdown
+          Actuals - {format(new UTCDate(currentMonth), 'MMM yyyy')} Breakdown
         </h2>
       )}
 

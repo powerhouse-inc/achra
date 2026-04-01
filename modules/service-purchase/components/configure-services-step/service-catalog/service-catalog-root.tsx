@@ -1,6 +1,8 @@
 'use client'
 
 import { cn } from '@/modules/shared/lib/utils'
+import { ServiceCatalogEnabledContext } from './service-catalog-context'
+
 export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {
   isEnabled: boolean
 }
@@ -12,9 +14,11 @@ function ServiceCatalogRoot({
   ...props
 }: Readonly<ServiceCatalogRootProps>) {
   return (
-    <div className={cn(className)} {...props}>
-      <div className={cn(!isEnabled && 'opacity-50')}>{children}</div>
-    </div>
+    <ServiceCatalogEnabledContext value={isEnabled}>
+      <div className={cn(className)} {...props}>
+        <div>{children}</div>
+      </div>
+    </ServiceCatalogEnabledContext>
   )
 }
 

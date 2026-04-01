@@ -6,7 +6,7 @@ import AchraLayout from '@/app/(achra)/layout'
 import RootLayout from '@/app/layout'
 import NetworkLayout from '@/app/network/[slug]/layout'
 import { QueryClientProvider } from '@/shared/providers/query-client'
-import type { StoryContext } from '@storybook/nextjs'
+import type { StoryContext } from '@storybook/nextjs-vite'
 
 const inter = Inter({
   variable: '--font-inter',

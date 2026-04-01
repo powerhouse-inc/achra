@@ -2,7 +2,7 @@
 
 import { Check } from 'lucide-react'
 import { type ComponentProps, createContext, useContext } from 'react'
-import { formatPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
+import { formatSummaryPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
 import {
   Accordion,
@@ -19,6 +19,8 @@ interface SummaryContextValue {
   isRecurring: boolean
   headerLabel?: string
   groupPrices?: Map<string, number>
+  isCustomPricing?: boolean
+  currency?: string | null
 }
 
 const SummaryContext = createContext<SummaryContextValue | null>(null)
@@ -37,6 +39,8 @@ interface SummaryProviderProps {
   totalSuffix: string
   headerLabel?: string
   groupPrices?: Map<string, number>
+  isCustomPricing?: boolean
+  currency?: string | null
 }
 
 function SummaryProvider({
@@ -45,6 +49,8 @@ function SummaryProvider({
   totalSuffix,
   headerLabel = 'Pricing Summary',
   groupPrices,
+  isCustomPricing,
+  currency,
 }: SummaryProviderProps) {
   const isRecurring = sectionLabel === 'Recurring'
   const value: SummaryContextValue = {
@@ -53,6 +59,8 @@ function SummaryProvider({
     isRecurring,
     headerLabel,
     groupPrices,
+    isCustomPricing,
+    currency,
   }
   return <SummaryContext.Provider value={value}>{children}</SummaryContext.Provider>
 }
@@ -95,11 +103,17 @@ interface SummaryGroupProps {
 }
 
 function SummaryGroup({ group }: SummaryGroupProps) {
-  const { isRecurring, groupPrices } = useSummary()
+  const { isRecurring, groupPrices, isCustomPricing, currency, totalSuffix } = useSummary()
   const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
-  const formattedPrice = isRecurring
-    ? `${formatPrice(displayAmount)}/mo`
-    : formatPrice(displayAmount)
+  const formattedPrice =
+    isCustomPricing && displayAmount === 0
+      ? ''
+      : formatSummaryPrice({
+          amount: displayAmount,
+          isRecurring,
+          suffix: totalSuffix,
+          currency,
+        })
   const expandable = group.services.length > 0
 
   return (
@@ -164,10 +178,14 @@ interface SummaryFooterProps {
 }
 
 function SummaryTotal({ totalAmount }: SummaryFooterProps) {
-  const { sectionLabel, totalSuffix, isRecurring } = useSummary()
-  const formattedTotal = isRecurring
-    ? `${formatPrice(totalAmount)}${totalSuffix}`
-    : formatPrice(totalAmount)
+  const { sectionLabel, totalSuffix, isRecurring, isCustomPricing, currency } = useSummary()
+  const formattedTotal = formatSummaryPrice({
+    amount: totalAmount,
+    isRecurring,
+    suffix: totalSuffix,
+    isCustomPricing,
+    currency,
+  })
 
   return (
     <footer

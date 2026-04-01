@@ -5,7 +5,11 @@ import { cn } from '@/modules/shared/lib/utils'
 import { useServicePurchaseStep } from '../../providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '../../types'
 
-function NavigationButtons() {
+interface NavigationButtonsProps {
+  isFooter?: boolean
+}
+
+function NavigationButtons({ isFooter }: NavigationButtonsProps) {
   const { activeStep, goToStep, goBack } = useServicePurchaseStep()
 
   const handleGoToSelectOperator = () => {
@@ -21,8 +25,9 @@ function NavigationButtons() {
   return (
     <div
       className={cn({
-        'mb-8': activeStep !== ServicePurchaseStep.ProductInfo,
-        'mb-6 lg:mb-8': activeStep === ServicePurchaseStep.ProductInfo,
+        'mb-8': activeStep !== ServicePurchaseStep.ProductInfo && !isFooter,
+        'mb-6 lg:mb-8': activeStep === ServicePurchaseStep.ProductInfo && !isFooter,
+        hidden: isFooter && activeStep !== ServicePurchaseStep.ConfigureServices,
       })}
     >
       {activeStep === ServicePurchaseStep.ProductInfo ? (
@@ -33,9 +38,11 @@ function NavigationButtons() {
         </div>
       ) : (
         <div className="flex">
-          <Button variant="secondary" onClick={handleGoBack} className={cn('w-fit')}>
-            Back
-          </Button>
+          {!isFooter && (
+            <Button variant="secondary" onClick={handleGoBack} className={cn('w-fit')}>
+              Back
+            </Button>
+          )}
 
           {activeStep === ServicePurchaseStep.ConfigureServices && (
             <Button variant="default" onClick={handleGoToSummary} className="ml-auto">

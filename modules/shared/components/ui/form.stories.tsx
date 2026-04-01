@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { Button } from './button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './form'
 import { Input } from './input'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 // Wrapper component so story args don't need to satisfy react-hook-form's UseFormReturn
 function FormExample() {

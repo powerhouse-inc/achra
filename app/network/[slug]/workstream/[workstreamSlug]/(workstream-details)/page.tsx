@@ -3,21 +3,23 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import ff from '@/modules/shared/lib/feature-flags'
-import InitialProposalHeader from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
+import { InitialProposalHeader } from '@/modules/workstream/components/initial-proposal-header/initial-proposal-header'
 import { NoDeliverables } from '@/modules/workstream/components/no-deliverables'
 import { WorkstreamDetailsBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
-import ProposalCardsGrid from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
+import { ProposalCardsGrid } from '@/modules/workstream/components/workstream-card/proposal-cards-grid'
 import { StatCards } from '@/modules/workstream/components/workstream-card/stat-cards'
 import { ViewProposalLink } from '@/modules/workstream/components/workstream-card/view-proposal-link'
-import WorkstreamStats from '@/modules/workstream/components/workstream-stats/workstream-stats'
+import { WorkstreamStats } from '@/modules/workstream/components/workstream-stats/workstream-stats'
 import { calculateTotalBudget, countRoadmapStats } from '@/modules/workstream/lib/roadmap-stats'
 import { getWorkstreamDetails } from '@/modules/workstream/services/workstream-service'
+import type { Route } from 'next'
 
 interface Props {
   params: Promise<{ slug: string; workstreamSlug: string }>
@@ -76,8 +78,14 @@ export default async function WorkstreamDetailsPage({ params }: Props) {
 
         <div className="bg-accent flex flex-col gap-4 rounded-xl p-2 pb-4 shadow-sm sm:p-4 sm:pb-6">
           <InitialProposalHeader
-            networkSlug={slug}
-            workstreamSlug={workstreamSlug}
+            action={
+              <InternalLink
+                href={`/network/${slug}/workstream/${workstreamSlug}/initial-proposal` as Route}
+                variant="outline"
+              >
+                View Proposal
+              </InternalLink>
+            }
             proposalStatus={workstream.initialProposal?.status}
             proposalAuthor={workstream.initialProposal?.author.name}
           />

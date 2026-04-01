@@ -1,9 +1,9 @@
 'use client'
 import { ATLAS_BUDGETS, BUDGETS } from '../../../mocks'
 import { getBudgetsByCodePath, getCodePathFromParams } from '../../../utils'
-import { ExpensesMetricChart } from '../expenses-metric-chart'
+import { ExpensesMetricChart } from '../expenses-metric-chart/expenses-metric-chart'
 import { ExpensesMetricLegend } from '../expenses-metric-legend'
-import { useExpensesMetricChart } from './use-expenses-metric-chart-content'
+import { useExpensesMetricChart } from '../use-expenses-metric-chart'
 import type { ExpensesMetricBudgetAnalytic } from '../../../types'
 
 interface ExpensesMetricChartContentProps {
@@ -30,7 +30,8 @@ function ExpensesMetricChartContent({
     onLegendItemLeave,
     showLegendValue,
     selectedGranularity,
-    selectedMetric,
+    isCumulative,
+    cumulativeType,
   } = useExpensesMetricChart({
     budgetsAnalytics,
     budgets,
@@ -46,7 +47,8 @@ function ExpensesMetricChartContent({
           year={year}
           selectedGranularity={selectedGranularity}
           series={series}
-          selectedMetric={selectedMetric}
+          isCumulative={isCumulative}
+          cumulativeType={cumulativeType}
         />
       </div>
 
@@ -60,6 +62,7 @@ function ExpensesMetricChartContent({
           showScrollAndToggle={showScrollAndToggle}
           isChecked={isChecked}
           handleChangeSwitch={handleChangeSwitch}
+          isCumulative={isCumulative}
         />
       </div>
     </div>

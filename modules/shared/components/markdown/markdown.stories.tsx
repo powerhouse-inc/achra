@@ -1,17 +1,17 @@
 import { Markdown } from './markdown'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof Markdown> = {
+const meta = {
   title: 'Shared/Components/Markdown',
   component: Markdown,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
-}
+} satisfies Meta<typeof Markdown>
 
 export default meta
-type Story = StoryObj<typeof Markdown>
+type Story = StoryObj<typeof meta>
 
 // Default variant with basic markdown elements
 export const Default: Story = {

@@ -16,7 +16,7 @@ export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://achra.com'
 /**
  * URL for the Operational Hub
  */
-export const OPERATIONAL_HUB_URL = 'https://www.operationalhub.io/opshub'
+export const OPERATIONAL_HUB_URL = 'https://www.operationalhub.io/contact'
 
 /**
  * Network homepage sections IDs for hash navigation

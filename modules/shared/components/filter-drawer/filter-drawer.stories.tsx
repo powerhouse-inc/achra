@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { DrawerSelect, FilterDrawer } from './filter-drawer'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * FilterDrawer is a specialized drawer component designed for filtering interfaces.

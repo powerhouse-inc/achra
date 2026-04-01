@@ -1,8 +1,8 @@
 import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import BuildersStatusChip from './builders-status-chip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof BuildersStatusChip> = {
+const meta = {
   title: 'Shared/Components/Chips/BuildersStatusChip',
   component: BuildersStatusChip,
   parameters: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof BuildersStatusChip> = {
       description: 'The status of the builder',
     },
   },
-}
+} satisfies Meta<typeof BuildersStatusChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -27,6 +27,9 @@ export const Progress: Story = {
 }
 
 export const AllStatuses: Story = {
+  args: {
+    status: BuilderStatus.Active, // to avoid TS issues
+  },
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-2">

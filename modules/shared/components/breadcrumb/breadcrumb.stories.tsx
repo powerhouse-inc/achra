@@ -1,6 +1,8 @@
+import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import { withPortalFontStyles } from '../../lib/decorators'
 import { Breadcrumb, PageBreadcrumbContainer } from './index'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { BreadcrumbItemNavigation } from './types'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Breadcrumb Navigation Component
@@ -32,7 +34,13 @@ import type { Meta, StoryObj } from '@storybook/nextjs'
  *
  * ```tsx
  * <PageBreadcrumbContainer>
- *   <Breadcrumb items={breadcrumbItems} />
+ *   <Breadcrumb
+ *     items={[
+ *       { label: 'Networks', href: '/networks' },
+ *       { label: 'Powerhouse', href: '/network/powerhouse' },
+ *       { label: 'Overview', href: '/network/powerhouse/roadmap/overview' }
+ *     ]}
+ *   />
  * </PageBreadcrumbContainer>
  * ```
  */
@@ -59,17 +67,25 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const breadcrumbItems: BreadcrumbItemNavigation[] = [
+  { label: 'Networks', href: '/networks' as RouteWithDynamicPages },
+  { label: 'Powerhouse', href: '/network/powerhouse' as RouteWithDynamicPages },
+  { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as RouteWithDynamicPages },
+  {
+    label: 'Roadmap',
+    href: '/network/powerhouse/roadmap/overview' as RouteWithDynamicPages,
+  },
+  {
+    label: 'Overview',
+    href: '/network/powerhouse/roadmap/overview' as RouteWithDynamicPages,
+  },
+]
+
 export const Basic: Story = {
   name: 'Breadcrumb Component',
   args: {
     maxSegmentWidthMobile: 100,
-    items: [
-      { label: 'Networks', href: '/networks' },
-      { label: 'Powerhouse', href: '/network/powerhouse' },
-      { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
-      { label: 'Roadmap', href: '/network/powerhouse/roadmap/overview' },
-      { label: 'Overview', href: '/network/powerhouse/roadmap/overview' },
-    ],
+    items: breadcrumbItems,
   },
 }
 
@@ -84,12 +100,6 @@ export const WithContainer: Story = {
   ),
   args: {
     maxSegmentWidthMobile: 100,
-    items: [
-      { label: 'Networks', href: '/networks' },
-      { label: 'Powerhouse', href: '/network/powerhouse' },
-      { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
-      { label: 'Roadmap', href: '/network/powerhouse/roadmap/overview' },
-      { label: 'Overview', href: '/network/powerhouse/roadmap/overview' },
-    ],
+    items: breadcrumbItems,
   },
 }

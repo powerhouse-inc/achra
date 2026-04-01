@@ -1,18 +1,15 @@
 import { Suspense } from 'react'
-import { NetworkGrid, NetworkGridSkeleton } from '@/modules/networks/components/network-grid'
+import { Networks } from '@/modules/networks/components/networks/networks'
+import { NetworksSkeleton } from '@/modules/networks/components/networks/networks-skeleton'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function NetworksPage() {
   return (
     <PageContent>
-      <h1 className="text-foreground/50 md:text- mb-4 text-3xl font-bold tracking-tight">
-        Networks
-      </h1>
-
       <ErrorBoundaryWithPresets>
-        <Suspense fallback={<NetworkGridSkeleton />}>
-          <NetworkGrid />
+        <Suspense fallback={<NetworksSkeleton />}>
+          <Networks />
         </Suspense>
       </ErrorBoundaryWithPresets>
     </PageContent>

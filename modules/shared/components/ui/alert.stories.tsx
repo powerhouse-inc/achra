@@ -1,7 +1,7 @@
 import { Terminal } from 'lucide-react'
 import React from 'react'
 import { Alert, AlertDescription, AlertTitle } from './alert'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Alert',

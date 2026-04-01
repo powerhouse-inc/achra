@@ -4,7 +4,7 @@ interface WorkstreamBannerContentProps {
   isNetworkBanner: boolean
 }
 
-export default function WorkstreamBannerContent({ isNetworkBanner }: WorkstreamBannerContentProps) {
+function WorkstreamBannerContent({ isNetworkBanner }: WorkstreamBannerContentProps) {
   return (
     <div
       className={cn(
@@ -25,3 +25,5 @@ export default function WorkstreamBannerContent({ isNetworkBanner }: WorkstreamB
     </div>
   )
 }
+
+export { WorkstreamBannerContent }

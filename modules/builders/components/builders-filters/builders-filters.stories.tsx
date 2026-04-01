@@ -1,34 +1,21 @@
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { withBuildersFiltersProvider } from '@/modules/builders/lib/decorators'
+import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import BuilderFilters from './builders-filters'
-import { BuildersFiltersProvider } from './builders-filters-context'
-import type { Meta, StoryObj } from '@storybook/nextjs'
-
-const withNuqsAdapter = (Story: React.ComponentType) => (
-  <NuqsAdapter>
-    <BuildersFiltersProvider>
-      <Story />
-    </BuildersFiltersProvider>
-  </NuqsAdapter>
-)
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Builders/Components/BuilderFilters',
   component: BuilderFilters,
-  decorators: [withNuqsAdapter],
+  decorators: [withBuildersFiltersProvider, withNuqsAdapter, withPortalFontStyles],
   parameters: {
     layout: 'centered',
     nextjs: {
       appDirectory: true,
       navigation: {
-        pathname: '/roadmap',
-        query: {
-          search: '',
-          statuses: 'RFP_DRAFT',
-        },
+        pathname: '/network/powerhouse/builders',
       },
     },
   },
-  argTypes: {},
 } satisfies Meta<typeof BuilderFilters>
 
 export default meta

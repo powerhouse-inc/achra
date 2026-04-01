@@ -2,6 +2,7 @@ import {
   RsBillingCycle,
   type RsServiceOffering,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getAvailableCycles } from '../../lib/billing-period'
 import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TiersSlice } from '../../types'
 
 // ─── Slice factory ──────────
@@ -12,9 +13,10 @@ export function createTiersSlice(
 ): TiersSlice {
   const { tiers } = services
 
-  const selectedTier = tiers[0]
+  const selectedTier = tiers.find((t) => t.mostPopular) ?? tiers[0]
 
-  const selectedBillingCycle = RsBillingCycle.Monthly
+  const availableCycles = getAvailableCycles(services.availableBillingCycles)
+  const selectedBillingCycle = availableCycles[0] ?? RsBillingCycle.Monthly
 
   return {
     tiers,

@@ -5,6 +5,7 @@ import { Loader2, Send } from 'lucide-react'
 import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
+import { clearServicePurchasePersistedState } from '@/modules/service-purchase/lib/persistence-utils'
 import {
   formDefaultValues,
   initialActionState,
@@ -55,7 +56,7 @@ function SubmitRequestForm() {
 
       goToStep(ServicePurchaseStep.Confirmation)
 
-      localStorage.removeItem(`service-${service.id}`)
+      clearServicePurchasePersistedState(service.id)
     }
   }, [state, goToStep, setRequestEntityData, service.id])
 
@@ -71,7 +72,11 @@ function SubmitRequestForm() {
     formData.append('tierId', selectedTier.id)
     formData.append(
       'optionGroupIds',
-      JSON.stringify(optionGroups.filter((group) => group.isSelected).map((group) => group.id)),
+      JSON.stringify(
+        optionGroups
+          .filter((group) => group.isSelected && group.services.length > 0)
+          .map((group) => group.id),
+      ),
     )
 
     startTransition(() => {

@@ -1,19 +1,23 @@
-import {
-  RsBillingCycle,
-  type RsServiceSubscriptionTier,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
+import { mockPlanSelectorTier } from '@/modules/service-purchase/mocks/plan-selector'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { PlanSelectorItem } from './plan-selector'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/Services/Components/PlanSelector',
+  title: 'Modules/ServicePurchase/Components/PlanSelector',
   component: PlanSelectorItem,
   parameters: {
     layout: 'centered',
     nextjs: {
       appDirectory: true,
+    },
+  },
+  tags: ['autodocs'],
+  argTypes: {
+    tier: {
+      description: 'Service subscription tier configuration',
     },
   },
   decorators: [
@@ -38,37 +42,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const baseTier = {
-  description: '',
-  id: '1',
-  name: 'Pro Plan',
-  isCustomPricing: false,
-  billingCycleDiscounts: [],
-  pricing: {
-    amount: 59,
-    currency: 'USD',
-  },
-  usageLimits: [
-    {
-      id: 'ul-1',
-      serviceId: 's-1',
-      metric: 'Contributor',
-      unitName: 'Contributor',
-      freeLimit: null,
-      paidLimit: null,
-      resetCycle: null,
-      notes: null,
-      unitPrice: 50,
-      unitPriceCurrency: 'USD',
-    },
-  ],
-  serviceLevels: [],
-} satisfies RsServiceSubscriptionTier
-
-export const Selected: Story = {
+export const Unselected: Story = {
   name: 'Generic - UnSelected',
   args: {
-    tier: baseTier,
+    tier: mockPlanSelectorTier,
   },
   render: (args) => (
     <RadioGroup value="" className="inline-flex">
@@ -77,10 +54,10 @@ export const Selected: Story = {
   ),
 }
 
-export const Unselected: Story = {
+export const Selected: Story = {
   name: 'Generic - Selected',
   args: {
-    tier: baseTier,
+    tier: mockPlanSelectorTier,
   },
   render: (args) => (
     <RadioGroup value={args.tier.id} className="inline-flex">

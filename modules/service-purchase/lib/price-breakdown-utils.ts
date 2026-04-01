@@ -8,8 +8,39 @@ import {
 import type {
   RsBillingCycle,
   RsServiceOffering,
+  RsServiceSubscriptionTier,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { GroupPriceFromBreakdown, PurchaseTotals } from '../types'
+
+function monthsInBillingCycle(billingCycle: RsBillingCycle): number {
+  return BILLING_CYCLE_MONTHS[billingCycle as keyof typeof BILLING_CYCLE_MONTHS] || 1
+}
+
+/** Effective one-time setup for a row (discounted amount when a setup discount applies). */
+function effectiveSetupAmount(row: {
+  setupCost: number | null
+  setupCostDiscount?: { discountedAmount: number } | null
+}): number {
+  if (row.setupCostDiscount) return row.setupCostDiscount.discountedAmount
+  return row.setupCost ?? 0
+}
+
+/**
+ * Sums one-time setup across all breakdown rows (package no longer exposes totals.grandSetupTotal).
+ */
+export function computeGrandSetupTotal(breakdown: PriceBreakdown): number {
+  let sum = 0
+  for (const b of breakdown.optionGroupBreakdowns) {
+    sum += effectiveSetupAmount(b)
+  }
+  for (const b of breakdown.setupGroupBreakdowns) {
+    sum += effectiveSetupAmount(b)
+  }
+  for (const b of breakdown.addOnBreakdowns) {
+    sum += effectiveSetupAmount(b)
+  }
+  return sum
+}
 
 /**
  * Wraps the offering in the shape expected by getUserSelectionPriceBreakdown.
@@ -25,7 +56,7 @@ export function getPriceBreakdown(
 
   return getUserSelectionPriceBreakdown(state, {
     tierId,
-    billingCycle: billingCycle as string,
+    billingCycle,
     optionGroupIds: Array.from(activeGroupIds),
     groupBillingCycleOverrides: {},
     addonBillingCycleOverrides: {},
@@ -40,7 +71,7 @@ export function computeTierHeaderPriceWithBreakdown(
   activeGroupIds: Set<string>,
 ): number {
   const breakdown = getPriceBreakdown(offering, tierId, billingCycle, activeGroupIds)
-  const monthsInCycle = BILLING_CYCLE_MONTHS[breakdown.billingCycle] || 1
+  const monthsInCycle = monthsInBillingCycle(billingCycle)
   return breakdown.totals.grandRecurringTotal / monthsInCycle
 }
 
@@ -58,12 +89,14 @@ export function computePeriodDiscountLabel(
   cycle: RsBillingCycle,
   activeGroupIds: Set<string>,
 ): string | null {
-  if (activeGroupIds.size === 0) return null
-
   const breakdown = getPriceBreakdown(offering, tierId, cycle, activeGroupIds)
 
+  const optionGroupUndiscounted = breakdown.optionGroupBreakdowns.reduce(
+    (sum, g) => sum + g.cycleAmount,
+    0,
+  )
   const addOnUndiscounted = breakdown.addOnBreakdowns.reduce((sum, a) => sum + a.cycleAmount, 0)
-  const undiscounted = breakdown.tierCycleTotal + addOnUndiscounted
+  const undiscounted = breakdown.tierCycleTotal + optionGroupUndiscounted + addOnUndiscounted
   const discounted = breakdown.totals.grandRecurringTotal
 
   if (undiscounted <= 0 || discounted >= undiscounted) return null
@@ -74,20 +107,51 @@ export function computePeriodDiscountLabel(
 
 /**
  * Converts a PriceBreakdown into PurchaseTotals for display.
- * recurringTotal = monthly equivalent; setupTotal = one-time fees.
+ * recurringTotal = monthly equivalent; setupTotal = one-time fees (derived from row-level setup fields).
  */
-export function computeTotalsFromBreakdown(breakdown: PriceBreakdown): PurchaseTotals {
-  const monthsInCycle = BILLING_CYCLE_MONTHS[breakdown.billingCycle] || 1
+export function computeTotalsFromBreakdown(
+  breakdown: PriceBreakdown,
+  billingCycle: RsBillingCycle,
+): PurchaseTotals {
+  const monthsInCycle = monthsInBillingCycle(billingCycle)
   return {
     recurringTotal: breakdown.totals.grandRecurringTotal / monthsInCycle,
-    setupTotal: breakdown.totals.grandSetupTotal,
+    setupTotal: computeGrandSetupTotal(breakdown),
   }
+}
+
+/**
+ * Resolves the tier ID to use when computing the billing cycle discount label.
+ * When the selected tier is Free ($0/mo), falls back to the first paid non-custom tier
+ * so the badge stays visible and doesn't jump from hidden → visible on tier change.
+ */
+export function resolveDiscountReferenceTierId(
+  offering: RsServiceOffering,
+  selectedTier: RsServiceSubscriptionTier,
+  allTiers: RsServiceSubscriptionTier[],
+  billingCycle: RsBillingCycle,
+  activeGroupIds: Set<string>,
+): string {
+  if (selectedTier.isCustomPricing) return selectedTier.id
+  const selectedPrice = computeTierHeaderPriceWithBreakdown(
+    offering,
+    selectedTier.id,
+    billingCycle,
+    activeGroupIds,
+  )
+  if (selectedPrice > 0) return selectedTier.id
+  const firstPaidTier = allTiers.find(
+    (t) =>
+      !t.isCustomPricing &&
+      computeTierHeaderPriceWithBreakdown(offering, t.id, billingCycle, activeGroupIds) > 0,
+  )
+  return firstPaidTier?.id ?? selectedTier.id
 }
 
 /**
  * Resolves the display price for a group from the breakdown.
  * - Recurring: uses monthlyBase (for /mo display)
- * - Setup: uses setupCost (one-time)
+ * - Setup: uses effective setup (discounted one-time when applicable)
  */
 export function getGroupPriceFromBreakdown(
   breakdown: PriceBreakdown,
@@ -98,8 +162,11 @@ export function getGroupPriceFromBreakdown(
     const setupEntry =
       breakdown.setupGroupBreakdowns.find((b) => b.optionGroupId === groupId) ??
       breakdown.addOnBreakdowns.find((b) => b.optionGroupId === groupId)
-    if (setupEntry?.setupCost == null) return null
-    return { amount: setupEntry.setupCost, isRecurring: false }
+    if (!setupEntry) return null
+    const hasSetupDiscount =
+      'setupCostDiscount' in setupEntry && setupEntry.setupCostDiscount != null
+    if (setupEntry.setupCost == null && !hasSetupDiscount) return null
+    return { amount: effectiveSetupAmount(setupEntry), isRecurring: false }
   }
 
   const recurringEntry =

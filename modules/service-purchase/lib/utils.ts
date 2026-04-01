@@ -40,9 +40,49 @@ function getCurrencySymbol(currency?: string | null): string {
 
 const CUSTOM_PRICING_LABEL = 'Custom'
 
-/** Formats a price value as a dollar string (e.g. "$200") */
+/**
+ * Formats a numeric amount for display: whole dollars (after cent rounding) without decimals,
+ * otherwise exactly two fraction digits. Used for all service-purchase price numbers.
+ */
+export function formatPriceNumber(amount: number): string {
+  const cents = Math.round(Number(amount) * 100)
+  if (!Number.isFinite(cents)) {
+    return (0).toLocaleString(undefined, { maximumFractionDigits: 0 })
+  }
+  const dollars = cents / 100
+  const isWhole = Math.abs(cents) % 100 === 0
+  if (isWhole) {
+    return dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })
+  }
+  return dollars.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+
+/** Formats a price value as a dollar string (e.g. "$200" or "$200.33") */
 export function formatPrice(amount: number, currency?: string | null): string {
-  return `${getCurrencySymbol(currency)}${amount.toLocaleString()}`
+  return `${getCurrencySymbol(currency)}${formatPriceNumber(amount)}`
+}
+
+export interface FormatSummaryPriceOptions {
+  amount: number
+  /** Whether this is recurring pricing (adds suffix when applicable) */
+  isRecurring: boolean
+  /** Suffix for recurring prices (e.g. "/mo"). Defaults to "/mo" */
+  suffix?: string
+  /** When true and recurring, show "Custom" instead of amount */
+  isCustomPricing?: boolean
+  /** Currency for formatPrice */
+  currency?: string | null
+}
+
+/**
+ * Formats a price for display in the service purchase summary.
+ * Handles "Free" for zero, "Custom" for custom pricing, and recurring/one-time suffixes.
+ */
+export function formatSummaryPrice(options: FormatSummaryPriceOptions): string {
+  const { amount, isRecurring, suffix = '/mo', isCustomPricing = false, currency } = options
+  if (isCustomPricing && isRecurring) return CUSTOM_PRICING_LABEL
+  if (amount === 0) return 'Free'
+  return isRecurring ? `${formatPrice(amount, currency)}${suffix}` : formatPrice(amount, currency)
 }
 
 /**
@@ -141,10 +181,7 @@ export function computeGrandTotals(
 
       const total = computeTierGrandTotal(tier, activeRecurringGroups, selectedBillingCycle)
       const currency = tier.pricing.currency ?? activeRecurringGroups[0]?.currency ?? 'USD'
-      return [
-        tier.id,
-        `${getCurrencySymbol(currency)}${Math.round(total).toLocaleString()}${suffix}`,
-      ]
+      return [tier.id, `${formatPrice(total, currency)}${suffix}`]
     }),
   )
 }
@@ -153,10 +190,12 @@ export function getPriceLabel(
   costType?: RsGroupCostType | null,
   price?: number | null,
   currency?: string | null,
+  isAddOn?: boolean,
 ): string | null {
   if (!price) return null
-  const formatted = `${getCurrencySymbol(currency)}${price.toLocaleString()}`
+  const formatted = `${getCurrencySymbol(currency)}${formatPriceNumber(price)}`
   if (costType === RsGroupCostType.Setup) return `One-time: ${formatted}`
+  if (isAddOn) return `Total: ${formatted}`
   return `+ ${formatted}/mo`
 }
 
@@ -200,7 +239,15 @@ export function formatUsageLimit(
     return 'Unlimited'
   }
 
-  return `${limit.freeLimit}${limit.unitName ? ` ${limit.unitName}` : ''}`
+  const unit = limit.unitName ?? ''
+  return `${limit.freeLimit}${unit ? ` ${unit}` : ''}`
+}
+
+/**
+ * Returns the metric label as-is for display purposes.
+ */
+export function formatMetricLabel(metric: string): string {
+  return metric
 }
 
 export function buildServiceMetrics(
@@ -233,7 +280,7 @@ export function buildServiceMetrics(
       }
     }
 
-    return { metric, values, isOneTime }
+    return { metric: formatMetricLabel(metric), values, isOneTime }
   })
 }
 
@@ -333,14 +380,14 @@ function computeOptionGroupHeaderPriceForTier(
   if (tier.isCustomPricing) return CUSTOM_PRICING_LABEL
 
   const tierPricing = (group.tierDependentPricing ?? []).find((tp) => tp.tierId === tier.id)
-  if (!tierPricing) return formatPrice(0, group.currency)
+  if (!tierPricing) return 'Free'
 
   const entry =
     tierPricing.recurringPricing.find((rp) => rp.billingCycle === selectedBillingCycle) ??
     tierPricing.recurringPricing.find((rp) => rp.billingCycle === RsBillingCycle.Monthly)
 
-  const amount = entry?.amount == null ? 0 : Math.round(Number(entry.amount))
-  return formatPrice(amount, group.currency)
+  const raw = entry?.amount == null ? 0 : Number(entry.amount)
+  return Math.round(raw * 100) === 0 ? 'Free' : formatPrice(raw, group.currency)
 }
 
 /**
@@ -360,7 +407,11 @@ export function computeOptionGroupHeaderPrices(
         const { basePrice } = resolveAddOnDisplayPrice(group, tier.id, selectedBillingCycle)
         return [
           tier.id,
-          basePrice == null ? null : formatPrice(Math.round(basePrice), group.currency),
+          basePrice == null
+            ? null
+            : Math.round(basePrice * 100) === 0
+              ? 'Free'
+              : formatPrice(basePrice, group.currency),
         ]
       }
       return [tier.id, computeOptionGroupHeaderPriceForTier(group, tier, selectedBillingCycle)]

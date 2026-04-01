@@ -30,7 +30,7 @@ export function ContributorProfileInfo({
 
   return (
     <div
-      className={cn('flex flex-wrap items-center gap-2 md:flex-nowrap md:items-center', className)}
+      className={cn('flex min-w-0 items-center gap-2 md:flex-nowrap md:items-center', className)}
     >
       <AvatarWithIcon
         image={hasLogo ? logoUrl : undefined}
@@ -38,9 +38,9 @@ export function ContributorProfileInfo({
         icon={icon}
         isCoreUnit={isCoreUnit}
       />
-      <div className="flex flex-col gap-1">
-        <div className="flex-start md:flex-center md:50 flex gap-2 md:w-50">
-          <div className="text-foreground/30 text-sm/5.5 font-semibold">{code}</div>
+      <div className="flex min-w-0 flex-col gap-1">
+        <div className="flex-start md:flex-center flex min-w-0 gap-2 md:w-50">
+          <div className="text-foreground/30 shrink-0 text-sm/5.5 font-semibold">{code}</div>
           <div className="truncate text-sm/5.5 font-semibold">{name}</div>
         </div>
         <div className="flex md:hidden">

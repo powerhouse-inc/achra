@@ -1,6 +1,6 @@
 import React from 'react'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Resizable',

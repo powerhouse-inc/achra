@@ -1,6 +1,6 @@
 import { mockedNetworks } from '../../mocks/networks'
 import { NetworkCard } from '.'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Networks/Components/NetworkCard',

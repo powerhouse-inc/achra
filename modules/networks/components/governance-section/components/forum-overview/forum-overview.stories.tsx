@@ -1,11 +1,10 @@
-'use client'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { delay, http, HttpResponse } from 'msw'
 import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
 import { BASE_URL } from '@/modules/shared/config/constants'
+import { withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import { forumCategories } from './categories'
 import ForumOverview from './forum-overview'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * ForumOverview displays forum posts from the Sky Forum organized by category tabs.
@@ -25,7 +24,7 @@ const meta = {
   component: ForumOverview,
   parameters: {
     layout: 'padded',
-    date: new Date(2025, 10, 1),
+    mockingDate: new Date(2025, 10, 1),
     docs: {
       description: {
         component:
@@ -34,24 +33,12 @@ const meta = {
     },
     nextjs: {
       appDirectory: true,
+      navigation: {
+        pathname: '/network/powerhouse',
+      },
     },
   },
-  decorators: [
-    (Story) => {
-      const queryClient = new QueryClient({
-        defaultOptions: {
-          queries: {
-            retry: false,
-          },
-        },
-      })
-      return (
-        <QueryClientProvider client={queryClient}>
-          <Story />
-        </QueryClientProvider>
-      )
-    },
-  ],
+  decorators: [withReactQueryProvider],
 } satisfies Meta<typeof ForumOverview>
 
 export default meta

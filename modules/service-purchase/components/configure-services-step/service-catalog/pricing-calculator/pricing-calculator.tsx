@@ -19,7 +19,6 @@ import {
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Card } from '@/modules/shared/components/ui/card'
-import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { OptionGroupSection } from './option-group-section'
 
@@ -102,70 +101,88 @@ function PricingCalculator() {
   )
 
   const sortedGroups = sortOptionGroups(servicesData.optionGroups)
-  const setupGroups = sortedGroups.filter((g) => g.costType === RsGroupCostType.Setup)
-  const recurringGroups = sortedGroups.filter((g) => g.costType !== RsGroupCostType.Setup)
+  const setupGroups = sortedGroups.filter((g) => g.costType === RsGroupCostType.Setup && !g.isAddOn)
+  const recurringGroups = sortedGroups.filter(
+    (g) => g.costType !== RsGroupCostType.Setup && !g.isAddOn,
+  )
+  const addOnGroups = sortedGroups.filter((g) => g.isAddOn)
 
   return (
     <PricingCalculatorProvider value={contextValue}>
       <div className="flex w-full flex-col gap-8">
-        {/* SETUP & FORMATION */}
-        <div>
-          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
-            Setup & Formation
-          </h2>
-          <Card className="flex w-full flex-col border-none! py-0!">
-            <div className="overflow-hidden rounded-xl">
-              <HeaderCatalogPlan
-                selectedPlan={selectedPlan}
-                handlePlanChange={setSelectedTier}
-                mobilePlanIndex={mobilePlanIndex}
-                onPrevPlan={handlePrevPlan}
-                onNextPlan={handleNextPlan}
-                servicesData={servicesData}
-              />
-              <div className="flex flex-col">
-                {setupGroups.map((section) => (
-                  <OptionGroupSection
-                    key={section.id}
-                    section={section}
-                    setupDiscountedPrices={setupDiscountedPrices}
-                  />
-                ))}
-              </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* RECURRING SERVICES */}
-        <div>
+        <div className="flex flex-col">
+          {/* Recurring Services */}
           <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
             Recurring Services
           </h2>
-          <Card className="flex w-full flex-col border-none! py-0!">
-            <div className="overflow-hidden rounded-xl">
-              <div className="flex flex-col">
-                {recurringGroups.map((section) => (
-                  <OptionGroupSection
-                    key={section.id}
-                    section={section}
-                    setupDiscountedPrices={setupDiscountedPrices}
-                  />
-                ))}
+          <HeaderCatalogPlan
+            selectedPlan={selectedPlan}
+            handlePlanChange={setSelectedTier}
+            mobilePlanIndex={mobilePlanIndex}
+            onPrevPlan={handlePrevPlan}
+            onNextPlan={handleNextPlan}
+            servicesData={servicesData}
+          />
+          {/* -mt-px fusiona el borde superior con el borde inferior del header */}
+          <div className="-mt-px mb-8 rounded-b-xl border-x border-b shadow-sm">
+            <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+              <div className="overflow-clip rounded-b-xl">
+                <div className="flex flex-col">
+                  {recurringGroups.map((section) => (
+                    <OptionGroupSection
+                      key={section.id}
+                      section={section}
+                      setupDiscountedPrices={setupDiscountedPrices}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          </Card>
-        </div>
-
-        {/* GRAND TOTAL (RECURRING) */}
-        <Card className="flex w-full flex-col border-none! py-0!">
-          <div className="overflow-hidden rounded-xl">
-            <GrandTotalRowCatalog
-              selectedPlan={selectedPlan}
-              tiers={tiers}
-              offering={servicesData}
-            />
+            </Card>
           </div>
-        </Card>
+
+          {/* Setup & Formation — separate visual block */}
+          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
+            Setup & Formation
+          </h2>
+          <div className="rounded-xl border shadow-sm">
+            <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+              <div className="overflow-clip rounded-xl">
+                <div className="flex flex-col">
+                  {setupGroups.map((section) => (
+                    <OptionGroupSection
+                      key={section.id}
+                      section={section}
+                      setupDiscountedPrices={setupDiscountedPrices}
+                    />
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Addns — one table per add-on group */}
+          {addOnGroups.length > 0 && (
+            <div className="mt-8 flex flex-col gap-4">
+              <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
+                ADD-ON
+              </h2>
+              {addOnGroups.map((section) => (
+                <div key={section.id} className="rounded-xl border shadow-sm">
+                  <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
+                    <div className="overflow-clip rounded-xl">
+                      <div className="flex flex-col">
+                        <OptionGroupSection
+                          section={section}
+                          setupDiscountedPrices={setupDiscountedPrices}
+                        />
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </PricingCalculatorProvider>
   )
