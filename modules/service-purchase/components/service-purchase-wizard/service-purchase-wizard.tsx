@@ -20,19 +20,22 @@ import { SelectOperatorStep } from '../select-operator-step'
 import { SummaryStep } from '../summary-step'
 import { StepsTriggersList } from './steps-trigger/steps-triggers-list'
 
-export interface ServicePurchaseFormValues {
+export interface ServicePurchaseWizardValues {
   operatorId?: string
   name: string
   teamName: string
   email: string
 }
 
-export interface ServicePurchaseFormProps {
+export interface ServicePurchaseWizardProps {
   resourceTemplate: RsResourceTemplate
   operator: BuilderProfileState
 }
 
-function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePurchaseFormProps>) {
+function ServicePurchaseWizard({
+  resourceTemplate,
+  operator,
+}: Readonly<ServicePurchaseWizardProps>) {
   const { activeStep, goToStep } = useServicePurchaseStep()
 
   const handleOnSelectOperator = (_operatorId: string) => {
@@ -85,4 +88,4 @@ function ServicePurchaseForm({ resourceTemplate, operator }: Readonly<ServicePur
   )
 }
 
-export { ServicePurchaseForm }
+export { ServicePurchaseWizard }
