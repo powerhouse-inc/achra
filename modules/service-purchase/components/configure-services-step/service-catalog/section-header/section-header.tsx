@@ -3,6 +3,7 @@
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { useHoveredTier } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { CatalogStatus } from '@/modules/service-purchase/types'
 import { Switch } from '@/modules/shared/components/ui/switch'
 import { cn } from '@/modules/shared/lib/utils'
@@ -42,6 +43,7 @@ function SectionHeader({
   groupSetupPrice,
 }: Readonly<SectionHeaderProps>) {
   const { tierNames } = usePricingCalculatorContext()
+  const hoveredPlan = useHoveredTier()
   const lastTierName = tierNames[tierNames.length - 1]
 
   const isOneTime = groupCostType === RsGroupCostType.Setup
@@ -62,8 +64,8 @@ function SectionHeader({
     <div
       className={cn(
         'text-foreground items-center',
-        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
-        hasToggle && 'cursor-pointer',
+        'grid grid-cols-2 lg:grid-cols-(--grid-cols-lg) xl:grid-cols-(--grid-cols-xl)',
+        hasToggle && 'group/addon cursor-pointer transition-colors',
       )}
       onClick={hasToggle ? () => onToggleChange?.(!toggleEnabled) : undefined}
       style={
@@ -78,6 +80,7 @@ function SectionHeader({
         className={cn(
           'border-input bg-accent flex min-h-14 flex-col justify-center gap-1.5 border-b px-4 lg:px-6',
           'sticky left-0 z-10 lg:static',
+          hasToggle && 'group-hover/addon:bg-accent/60 transition-colors',
         )}
       >
         {/* Title row */}
@@ -120,6 +123,8 @@ function SectionHeader({
         className={cn(
           'border-input pointer-events-none relative flex h-full min-h-14 min-w-0 items-center justify-center border-b px-4 transition-colors lg:hidden',
           activePlan ? 'bg-primary/30' : 'bg-accent',
+          hasToggle &&
+            (activePlan ? 'group-hover/addon:bg-primary/20' : 'group-hover/addon:bg-accent/60'),
         )}
       >
         {!isAddOn && isOneTime && perTierPrices && activePlan && perTierPrices[activePlan] && (
@@ -181,6 +186,11 @@ function SectionHeader({
           className={cn(
             'border-input pointer-events-none relative hidden h-full min-h-14 min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
             activePlan === plan ? 'bg-primary/30' : 'bg-accent',
+            hoveredPlan === plan && activePlan !== plan && 'bg-accent/70',
+            hasToggle &&
+              (activePlan === plan
+                ? 'group-hover/addon:bg-primary/20'
+                : 'group-hover/addon:bg-accent/60'),
           )}
         >
           {!isAddOn && isOneTime && perTierPrices?.[plan] && (

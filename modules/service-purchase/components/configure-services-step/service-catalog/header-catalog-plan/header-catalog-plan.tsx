@@ -7,6 +7,7 @@ import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
 } from '@/modules/service-purchase/lib/sticky-observer-utils'
+import { useServicePurchaseActions } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { Button } from '@/modules/shared/components/ui/button'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
@@ -31,6 +32,7 @@ function HeaderCatalogPlan({
   onNextPlan,
   servicesData,
 }: Readonly<HeaderCatalogPlanProps>) {
+  const { setHoveredTier } = useServicePurchaseActions()
   const tiers = servicesData.tiers
   const numTiers = tiers.length
   const currentMobileTier = tiers[mobilePlanIndex]
@@ -92,7 +94,10 @@ function HeaderCatalogPlan({
           </Button>
           <div className="flex flex-col items-center justify-center">
             <RadioGroup value={selectedPlan} onValueChange={handlePlanChange} disabled={readOnly}>
-              <PlanSelectorItem tier={currentMobileTier} />
+              <PlanSelectorItem
+                tier={currentMobileTier}
+                isSelected={selectedPlan === currentMobileTier.id}
+              />
             </RadioGroup>
           </div>
           <Button variant="ghost" size="icon" onClick={onNextPlan} className="size-8">
@@ -118,10 +123,17 @@ function HeaderCatalogPlan({
                 className={cn(
                   'relative flex h-full min-w-0 items-center justify-center py-2 transition-colors',
                   isActive && 'bg-primary/10',
+                  !isActive && 'hover:bg-accent/80',
                   tier.mostPopular && 'border-t-primary border-t-2',
                 )}
+                onMouseEnter={() => {
+                  setHoveredTier(tier.id)
+                }}
+                onMouseLeave={() => {
+                  setHoveredTier(null)
+                }}
               >
-                <PlanSelectorItem tier={tier} />
+                <PlanSelectorItem tier={tier} isSelected={isActive} />
               </div>
             )
           })}

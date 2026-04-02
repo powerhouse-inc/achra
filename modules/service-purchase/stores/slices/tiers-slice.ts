@@ -22,6 +22,7 @@ export function createTiersSlice(
     tiers,
     selectedTier,
     selectedBillingCycle,
+    hoveredTierId: null,
 
     actions: {
       setSelectedTier: (id) => {
@@ -32,6 +33,10 @@ export function createTiersSlice(
 
       setSelectedBillingCycle: (cycle) => {
         set({ selectedBillingCycle: cycle })
+      },
+
+      setHoveredTier: (id) => {
+        set({ hoveredTierId: id })
       },
     },
   }

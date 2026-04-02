@@ -136,6 +136,11 @@ function useServiceOffering(): RsServiceOffering {
   return useStore(store, (state) => state.services)
 }
 
+function useHoveredTier(): string | null {
+  const store = useServicePurchaseStoreContext()
+  return useStore(store, (state) => state.hoveredTierId)
+}
+
 function useFacets(): ServicePurchaseState['facets'] {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.facets)
@@ -189,6 +194,7 @@ function useServicePurchaseStep() {
 export {
   ServicePurchaseStoreProvider,
   useFacets,
+  useHoveredTier,
   useServicePurchaseState,
   useServicePurchaseActions,
   useSelectedTier,

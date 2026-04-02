@@ -78,11 +78,13 @@ export interface TiersSliceState {
   tiers: RsServiceSubscriptionTier[]
   selectedTier: RsServiceSubscriptionTier
   selectedBillingCycle: RsBillingCycle
+  hoveredTierId: string | null
 }
 
 export interface TiersSliceActions {
   setSelectedTier: (id: string) => void
   setSelectedBillingCycle: (cycle: RsBillingCycle) => void
+  setHoveredTier: (id: string | null) => void
 }
 
 export interface TiersSlice extends TiersSliceState {

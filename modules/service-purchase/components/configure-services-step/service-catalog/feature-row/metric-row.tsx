@@ -1,6 +1,7 @@
 'use client'
 
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { useHoveredTier } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import type { FeatureValue } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogCell } from '../service-catalog-cell'
@@ -14,6 +15,7 @@ export interface MetricRowProps {
 
 function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps>) {
   const { activePlan, tierNames } = usePricingCalculatorContext()
+  const hoveredPlan = useHoveredTier()
   const lastTierName = tierNames[tierNames.length - 1]
   // For one-time metrics, find the value from any tier (may not exist on the last tier)
   const oneTimeValue = isOneTime
@@ -24,7 +26,7 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
     <div
       className={cn(
         'items-center',
-        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+        'grid grid-cols-2 lg:grid-cols-(--grid-cols-lg) xl:grid-cols-(--grid-cols-xl)',
       )}
       style={
         {
@@ -89,6 +91,7 @@ function MetricRow({ label, values, isLast, isOneTime }: Readonly<MetricRowProps
             isOneTime ? '' : 'justify-center',
             isLast && 'border-input border-b',
             activePlan === plan && 'bg-primary/10',
+            hoveredPlan === plan && activePlan !== plan && 'bg-accent/80',
           )}
         >
           {isOneTime ? (

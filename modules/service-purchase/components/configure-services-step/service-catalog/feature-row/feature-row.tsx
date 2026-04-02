@@ -1,6 +1,7 @@
 'use client'
 
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import { useHoveredTier } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import type { FeatureValue, ServiceMetric } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogCell } from '../service-catalog-cell'
@@ -16,6 +17,7 @@ interface FeatureRowProps {
 
 function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
   const { activePlan, tierNames } = usePricingCalculatorContext()
+  const hoveredPlan = useHoveredTier()
   const isGroupEnabled = useServiceCatalogEnabled()
   const hasMetrics = metrics && metrics.length > 0
 
@@ -24,7 +26,7 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
       <div
         className={cn(
           'group/row min-h-full items-center',
-          'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+          'grid grid-cols-2 lg:grid-cols-(--grid-cols-lg) xl:grid-cols-(--grid-cols-xl)',
         )}
         style={
           {
@@ -69,6 +71,7 @@ function FeatureRow({ label, values, metrics }: Readonly<FeatureRowProps>) {
             className={cn(
               'border-input hidden h-14 min-h-full min-w-0 items-center justify-center border-b px-6 transition-colors lg:flex',
               activePlan === plan && 'bg-primary/10 font-bold',
+              hoveredPlan === plan && activePlan !== plan && 'bg-accent/80',
             )}
           >
             <ServiceCatalogCell value={values[plan]} isActive={activePlan === plan} />
