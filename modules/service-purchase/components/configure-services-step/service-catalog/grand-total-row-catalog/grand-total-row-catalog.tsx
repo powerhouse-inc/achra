@@ -105,7 +105,7 @@ function GrandTotalRowCatalog({
             className={cn(
               'hidden h-full min-w-0 items-center justify-center px-6 transition-colors lg:flex',
               isActive ? 'bg-primary/30' : 'bg-background',
-              hoveredPlan === plan && !isActive && 'bg-background/80',
+              hoveredPlan === plan && !isActive && 'bg-accent/80',
             )}
           >
             <span
