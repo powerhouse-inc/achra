@@ -1,55 +1,62 @@
 'use client'
 
+import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
-import { useServicePurchaseStep } from '../../providers/service-purchase-store-provider'
-import { ServicePurchaseStep } from '../../types'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 
-interface NavigationButtonsProps {
-  isFooter?: boolean
+function continueDisabledHint(step: ServicePurchaseStep): string | null {
+  if (step === ServicePurchaseStep.Summary) {
+    return 'Fill out the form and request a quote to continue.'
+  }
+  return null
 }
 
-function NavigationButtons({ isFooter }: NavigationButtonsProps) {
-  const { activeStep, goToStep, goBack } = useServicePurchaseStep()
+function NavigationButtons() {
+  const { activeStep, goBack, goToStep } = useServicePurchaseStep()
 
-  const handleGoToSelectOperator = () => {
-    goToStep(ServicePurchaseStep.SelectOperator)
-  }
-  const handleGoBack = () => {
-    goBack()
-  }
-  const handleGoToSummary = () => {
+  const isContinueEnabled =
+    activeStep === ServicePurchaseStep.SelectOperator ||
+    activeStep === ServicePurchaseStep.ConfigureServices
+  const continueDisabledReason = !isContinueEnabled ? continueDisabledHint(activeStep) : null
+
+  function handleContinue() {
+    if (activeStep === ServicePurchaseStep.SelectOperator) {
+      goToStep(ServicePurchaseStep.ConfigureServices)
+      return
+    }
     goToStep(ServicePurchaseStep.Summary)
   }
 
-  return (
-    <div
-      className={cn({
-        'mb-8': activeStep !== ServicePurchaseStep.ProductInfo && !isFooter,
-        'mb-6 lg:mb-8': activeStep === ServicePurchaseStep.ProductInfo && !isFooter,
-        hidden: isFooter && activeStep !== ServicePurchaseStep.ConfigureServices,
-      })}
+  const continueButton = (
+    <Button
+      variant="default"
+      disabled={!isContinueEnabled}
+      onClick={handleContinue}
+      className="w-fit"
     >
-      {activeStep === ServicePurchaseStep.ProductInfo ? (
-        <div className={cn('flex w-full justify-end')}>
-          <Button variant="default" onClick={handleGoToSelectOperator}>
-            Select an operator
-          </Button>
-        </div>
-      ) : (
-        <div className="flex">
-          {!isFooter && (
-            <Button variant="secondary" onClick={handleGoBack} className={cn('w-fit')}>
-              Back
-            </Button>
-          )}
+      Continue
+    </Button>
+  )
 
-          {activeStep === ServicePurchaseStep.ConfigureServices && (
-            <Button variant="default" onClick={handleGoToSummary} className="ml-auto">
-              Continue
-            </Button>
-          )}
-        </div>
+  return (
+    <div className="flex items-center gap-2">
+      <Button variant="secondary" onClick={goBack} className="w-fit">
+        Back
+      </Button>
+      {continueDisabledReason ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex cursor-not-allowed" tabIndex={0}>
+              {continueButton}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" align="end">
+            {continueDisabledReason}
+          </TooltipContent>
+        </Tooltip>
+      ) : (
+        continueButton
       )}
     </div>
   )
