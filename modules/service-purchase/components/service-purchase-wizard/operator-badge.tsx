@@ -7,7 +7,8 @@ interface OperatorBadgeProps {
 
 function OperatorBadge({ operator }: Readonly<OperatorBadgeProps>) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0">
+      <span className="text-muted-foreground text-sm/5">Offered by:</span>
       <Avatar className="size-6">
         <AvatarImage src={operator.icon} alt={operator.name ?? ''} />
         <AvatarFallback className="text-xs">

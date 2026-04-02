@@ -40,7 +40,7 @@ function NavigationButtons() {
   )
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between gap-2 sm:justify-normal">
       <Button variant="secondary" onClick={goBack} className="w-fit">
         Back
       </Button>

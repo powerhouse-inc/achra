@@ -17,7 +17,7 @@ function OperatorBadgeSkeleton() {
       <Skeleton className="size-6 shrink-0 rounded-full" />
       <div className="flex items-center gap-1">
         <Skeleton className="h-5 w-8" />
-        <Skeleton className="h-5 w-full max-w-36" />
+        <Skeleton className="h-5 w-30 max-w-36 min-w-0" />
       </div>
     </div>
   )
@@ -34,7 +34,7 @@ function ServiceInfoSkeleton({
         <CardContent className="flex flex-row items-center gap-2 px-0">
           {/* Thumbnail (compact, matches ServiceInfo cover) */}
           <Skeleton className="size-14! min-w-14! shrink-0 rounded-full" />
-          <div className="flex min-w-0 flex-1 flex-col gap-0">
+          <div className="flex min-w-0 flex-1 flex-col gap-3 lg:gap-2">
             {/* Title (compact h1) */}
             <Skeleton className="h-5 w-full max-w-32 lg:h-7 lg:max-w-48" />
             {showOperatorBadge && <OperatorBadgeSkeleton />}
@@ -62,7 +62,7 @@ function ServiceInfoSkeleton({
           </div>
         </div>
 
-        <div className="flex w-full flex-col gap-4 lg:gap-6">
+        <div className="flex w-full flex-col gap-4 lg:gap-4">
           {/* Desktop title (text-xl/6) */}
           <Skeleton className="hidden h-6 w-full max-w-lg sm:block" />
           {showOperatorBadge && <OperatorBadgeSkeleton />}

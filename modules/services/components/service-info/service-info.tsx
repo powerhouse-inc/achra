@@ -1,3 +1,6 @@
+'use client'
+
+import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SERVICE_INFO_DEFAULT_COVER_PATH } from '@/modules/services/lib/constants'
@@ -63,7 +66,9 @@ function ServiceInfo({
           </div>
           {!isCompacted && children && <div className="flex flex-col gap-2">{children}</div>}
         </div>
-        <div className={cn('flex w-full flex-col gap-4 lg:gap-6', isCompacted && 'gap-0')}>
+        <div
+          className={cn('flex w-full flex-col', isCompacted ? 'gap-2 lg:gap-1' : 'gap-4 lg:gap-4')}
+        >
           <h1
             className={cn(
               'text-foreground hidden text-xl/6 font-bold sm:block',
@@ -72,7 +77,20 @@ function ServiceInfo({
           >
             {title}
           </h1>
-          {operator}
+          <AnimatePresence initial={false}>
+            {operator && (
+              <motion.div
+                key="operator"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                style={{ overflow: 'hidden' }}
+              >
+                {operator}
+              </motion.div>
+            )}
+          </AnimatePresence>
           <div
             className={cn('text-foreground text-sm/5.5 lg:text-base/6', isCompacted && 'hidden')}
           >
