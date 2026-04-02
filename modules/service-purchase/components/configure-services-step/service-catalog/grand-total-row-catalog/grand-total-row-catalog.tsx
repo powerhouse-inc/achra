@@ -8,7 +8,10 @@ import type {
 import { computeTierHeaderPriceWithBreakdown } from '@/modules/service-purchase/lib/price-breakdown-utils'
 import { formatPrice } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
-import { useAllOptionGroups } from '@/modules/service-purchase/providers/service-purchase-store-provider'
+import {
+  useAllOptionGroups,
+  useHoveredTier,
+} from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { cn } from '@/modules/shared/lib/utils'
 
 const CUSTOM_PRICING_LABEL = 'Custom'
@@ -25,6 +28,7 @@ function GrandTotalRowCatalog({
   offering,
 }: Readonly<GrandTotalRowCatalogProps>) {
   const { tierNames, selectedBillingCycle } = usePricingCalculatorContext()
+  const hoveredPlan = useHoveredTier()
   const storeOptionGroups = useAllOptionGroups()
 
   const activeGroupIds = useMemo(
@@ -54,7 +58,7 @@ function GrandTotalRowCatalog({
     <div
       className={cn(
         'bg-background border-primary/30 h-12 items-center rounded-xl border shadow-[0px_2px_10px_2px_rgba(122,58,255,0.2)]',
-        'grid grid-cols-2 lg:grid-cols-[var(--grid-cols-lg)] xl:grid-cols-[var(--grid-cols-xl)]',
+        'grid grid-cols-2 lg:grid-cols-(--grid-cols-lg) xl:grid-cols-(--grid-cols-xl)',
         'overflow-hidden',
       )}
       style={
@@ -101,6 +105,7 @@ function GrandTotalRowCatalog({
             className={cn(
               'hidden h-full min-w-0 items-center justify-center px-6 transition-colors lg:flex',
               isActive ? 'bg-primary/30' : 'bg-background',
+              hoveredPlan === plan && !isActive && 'bg-background/80',
             )}
           >
             <span
