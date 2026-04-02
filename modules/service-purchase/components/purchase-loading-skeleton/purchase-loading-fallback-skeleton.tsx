@@ -2,7 +2,7 @@
 
 import { ProductInfoSkeleton } from '@/modules/service-purchase/components/product-info'
 import { ServiceHeaderSkeleton } from '@/modules/service-purchase/components/service-header'
-import { StepsTriggerListSkeleton } from '@/modules/service-purchase/components/service-purchase-form/steps-trigger'
+import { StepsTriggerListSkeleton } from '@/modules/service-purchase/components/service-purchase-wizard/steps-trigger'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
 

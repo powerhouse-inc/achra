@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { type Maybe, RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
@@ -23,9 +23,10 @@ import { Summary } from './summary-section'
 
 interface SummaryCardProps {
   templateTitle?: string
+  templateSubtitle?: Maybe<string>
 }
 
-function SummaryCard({ templateTitle }: SummaryCardProps) {
+function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
   const facets = useFacets()
   const totals = usePurchaseTotals()
   const optionGroups = useAllOptionGroups()
@@ -85,7 +86,7 @@ function SummaryCard({ templateTitle }: SummaryCardProps) {
 
   return (
     <Card className="mx-auto w-full max-w-218.5 border-none p-0!">
-      <SummaryCardHeader templateTitle={templateTitle} />
+      <SummaryCardHeader templateTitle={templateTitle} templateSubtitle={templateSubtitle} />
 
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">
         {facets.length > 0 && <SelectedFacets />}

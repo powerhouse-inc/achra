@@ -9,12 +9,12 @@ import {
   withPortalFontStyles,
   withReactQueryProvider,
 } from '@/modules/shared/lib/decorators'
-import { ServicePurchaseForm } from './service-purchase-form'
+import { ServicePurchaseWizard } from './service-purchase-wizard'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Modules/ServicePurchase/Components/ServicePurchaseForm',
-  component: ServicePurchaseForm,
+  title: 'Modules/ServicePurchase/Components/ServicePurchaseWizard',
+  component: ServicePurchaseWizard,
   parameters: {
     layout: 'padded',
     nextjs: {
@@ -44,7 +44,7 @@ const meta = {
     resourceTemplate: mockResourceTemplate,
     operator: mockServicePurchaseOperator,
   },
-} satisfies Meta<typeof ServicePurchaseForm>
+} satisfies Meta<typeof ServicePurchaseWizard>
 
 export default meta
 type Story = StoryObj<typeof meta>

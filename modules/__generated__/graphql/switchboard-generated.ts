@@ -9116,10 +9116,12 @@ export type RsResourceTemplate = {
   services: Array<RsService>;
   setupServices: Array<Scalars['String']['output']>;
   status: RsTemplateStatus;
+  subtitle?: Maybe<Scalars['String']['output']>;
   summary: Scalars['String']['output'];
   targetAudiences: Array<RsTargetAudience>;
   thumbnailUrl?: Maybe<Scalars['URL']['output']>;
   title: Scalars['String']['output'];
+  weight?: Maybe<Scalars['Int']['output']>;
 };
 
 export type RsResourceTemplatesFilter = {
@@ -9202,6 +9204,7 @@ export type RsServiceSubscriptionTier = {
   billingCycleDiscounts: Array<RsBillingCycleDiscount>;
   defaultBillingCycle?: Maybe<RsBillingCycle>;
   description?: Maybe<Scalars['String']['output']>;
+  excludeFromSetupFee: Scalars['Boolean']['output'];
   id: Scalars['OID']['output'];
   isCustomPricing: Scalars['Boolean']['output'];
   mostPopular: Scalars['Boolean']['output'];
@@ -10581,6 +10584,8 @@ export type ResourceTemplateMutations = {
   setSetupServicesAsync: Scalars['String']['output'];
   setTemplateId: ResourceTemplateMutationResult;
   setTemplateIdAsync: Scalars['String']['output'];
+  setWeight: ResourceTemplateMutationResult;
+  setWeightAsync: Scalars['String']['output'];
   updateContentSection: ResourceTemplateMutationResult;
   updateContentSectionAsync: Scalars['String']['output'];
   updateFaq: ResourceTemplateMutationResult;
@@ -10917,6 +10922,20 @@ export type ResourceTemplateMutationsSetTemplateIdArgs = {
 export type ResourceTemplateMutationsSetTemplateIdAsyncArgs = {
   docId: Scalars['PHID']['input'];
   input: ResourceTemplate_SetTemplateIdInput;
+};
+
+
+/** Mutations: ResourceTemplate */
+export type ResourceTemplateMutationsSetWeightArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ResourceTemplate_SetWeightInput;
+};
+
+
+/** Mutations: ResourceTemplate */
+export type ResourceTemplateMutationsSetWeightAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ResourceTemplate_SetWeightInput;
 };
 
 
@@ -11314,10 +11333,12 @@ export type ResourceTemplate_ResourceTemplateState = {
   services: Array<ResourceTemplate_Service>;
   setupServices: Array<Scalars['String']['output']>;
   status: ResourceTemplate_TemplateStatus;
+  subtitle?: Maybe<Scalars['String']['output']>;
   summary: Scalars['String']['output'];
   targetAudiences: Array<ResourceTemplate_TargetAudience>;
   thumbnailUrl?: Maybe<Scalars['URL']['output']>;
   title: Scalars['String']['output'];
+  weight?: Maybe<Scalars['Int']['output']>;
 };
 
 /** Input Types for Initial State */
@@ -11335,10 +11356,12 @@ export type ResourceTemplate_ResourceTemplateStateInput = {
   services?: InputMaybe<Array<InputMaybe<ResourceTemplate_ServiceInput>>>;
   setupServices?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   status?: InputMaybe<ResourceTemplate_TemplateStatus>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
   targetAudiences?: InputMaybe<Array<InputMaybe<ResourceTemplate_TargetAudienceInput>>>;
   thumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  weight?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ResourceTemplate_SearchFilterInput = {
@@ -11397,6 +11420,11 @@ export type ResourceTemplate_SetSetupServicesInput = {
 export type ResourceTemplate_SetTemplateIdInput = {
   id: Scalars['PHID']['input'];
   lastModified: Scalars['DateTime']['input'];
+};
+
+export type ResourceTemplate_SetWeightInput = {
+  lastModified: Scalars['DateTime']['input'];
+  weight?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type ResourceTemplate_TargetAudience = {
@@ -11458,6 +11486,7 @@ export type ResourceTemplate_UpdateTemplateInfoInput = {
   description?: InputMaybe<Scalars['String']['input']>;
   infoLink?: InputMaybe<Scalars['URL']['input']>;
   lastModified: Scalars['DateTime']['input'];
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   summary?: InputMaybe<Scalars['String']['input']>;
   thumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -12989,6 +13018,8 @@ export type ServiceOfferingMutations = {
   removeServiceLevelAsync: Scalars['String']['output'];
   removeUsageLimit: ServiceOfferingMutationResult;
   removeUsageLimitAsync: Scalars['String']['output'];
+  reorderTiers: ServiceOfferingMutationResult;
+  reorderTiersAsync: Scalars['String']['output'];
   selectResourceTemplate: ServiceOfferingMutationResult;
   selectResourceTemplateAsync: Scalars['String']['output'];
   setAvailableBillingCycles: ServiceOfferingMutationResult;
@@ -13267,6 +13298,20 @@ export type ServiceOfferingMutationsRemoveUsageLimitArgs = {
 export type ServiceOfferingMutationsRemoveUsageLimitAsyncArgs = {
   docId: Scalars['PHID']['input'];
   input: ServiceOffering_RemoveUsageLimitInput;
+};
+
+
+/** Mutations: ServiceOffering */
+export type ServiceOfferingMutationsReorderTiersArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ServiceOffering_ReorderTiersInput;
+};
+
+
+/** Mutations: ServiceOffering */
+export type ServiceOfferingMutationsReorderTiersAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ServiceOffering_ReorderTiersInput;
 };
 
 
@@ -13648,6 +13693,7 @@ export type ServiceOffering_AddTierInput = {
   amount?: InputMaybe<Scalars['Amount_Money']['input']>;
   currency: Scalars['Currency']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
+  excludeFromSetupFee?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['OID']['input'];
   isCustomPricing?: InputMaybe<Scalars['Boolean']['input']>;
   lastModified: Scalars['DateTime']['input'];
@@ -13903,6 +13949,11 @@ export type ServiceOffering_RemoveUsageLimitInput = {
   tierId: Scalars['OID']['input'];
 };
 
+export type ServiceOffering_ReorderTiersInput = {
+  lastModified: Scalars['DateTime']['input'];
+  tierIds: Array<Scalars['OID']['input']>;
+};
+
 export type ServiceOffering_SearchFilterInput = {
   identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
   parentId?: InputMaybe<Scalars['String']['input']>;
@@ -14019,6 +14070,7 @@ export type ServiceOffering_ServiceSubscriptionTier = {
   billingCycleDiscounts: Array<ServiceOffering_BillingCycleDiscount>;
   defaultBillingCycle?: Maybe<ServiceOffering_BillingCycle>;
   description?: Maybe<Scalars['String']['output']>;
+  excludeFromSetupFee: Scalars['Boolean']['output'];
   id: Scalars['OID']['output'];
   isCustomPricing: Scalars['Boolean']['output'];
   mostPopular: Scalars['Boolean']['output'];
@@ -14033,6 +14085,7 @@ export type ServiceOffering_ServiceSubscriptionTierInput = {
   billingCycleDiscounts?: InputMaybe<Array<InputMaybe<ServiceOffering_BillingCycleDiscountInput>>>;
   defaultBillingCycle?: InputMaybe<ServiceOffering_BillingCycle>;
   description?: InputMaybe<Scalars['String']['input']>;
+  excludeFromSetupFee?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['OID']['input']>;
   isCustomPricing?: InputMaybe<Scalars['Boolean']['input']>;
   mostPopular?: InputMaybe<Scalars['Boolean']['input']>;
@@ -14212,6 +14265,7 @@ export type ServiceOffering_UpdateServiceLevelInput = {
 
 export type ServiceOffering_UpdateTierInput = {
   description?: InputMaybe<Scalars['String']['input']>;
+  excludeFromSetupFee?: InputMaybe<Scalars['Boolean']['input']>;
   id: Scalars['OID']['input'];
   isCustomPricing?: InputMaybe<Scalars['Boolean']['input']>;
   lastModified: Scalars['DateTime']['input'];
@@ -17212,14 +17266,14 @@ export type ResourceTemplateQueryVariables = Exact<{
 }>;
 
 
-export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', displayOrder: number, question?: string | null, answer?: string | null, id: any }> | null, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
+export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, subtitle?: string | null, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', displayOrder: number, question?: string | null, answer?: string | null, id: any }> | null, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
 
 export type ServiceOfferingsQueryVariables = Exact<{
   filter?: InputMaybe<RsServiceOfferingsFilter>;
 }>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
 
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
@@ -18652,6 +18706,7 @@ export const ResourceTemplateDocument = `
   resourceTemplates(filter: $filter) {
     id
     title
+    subtitle
     description
     thumbnailUrl
     summary
@@ -18728,6 +18783,7 @@ export const ServiceOfferingsDocument = `
       mostPopular
       description
       isCustomPricing
+      excludeFromSetupFee
       pricingMode
       pricing {
         amount

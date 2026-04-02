@@ -6,7 +6,7 @@ import { ConfirmationStepSkeleton } from '@/modules/service-purchase/components/
 import { ProductInfoSkeleton } from '@/modules/service-purchase/components/product-info'
 import { SelectOperatorStepSkeleton } from '@/modules/service-purchase/components/select-operator-step'
 import { ServiceHeaderSkeleton } from '@/modules/service-purchase/components/service-header'
-import { StepsTriggerListSkeleton } from '@/modules/service-purchase/components/service-purchase-form/steps-trigger'
+import { StepsTriggerListSkeleton } from '@/modules/service-purchase/components/service-purchase-wizard/steps-trigger'
 import { SummaryStepSkeleton } from '@/modules/service-purchase/components/summary-step'
 import {
   SERVICE_PURCHASE_DEFAULT_STEP,

@@ -13,6 +13,7 @@ query ServiceOfferings($filter: RSServiceOfferingsFilter) {
       mostPopular
       description
       isCustomPricing
+      excludeFromSetupFee
       pricingMode
       pricing {
         amount

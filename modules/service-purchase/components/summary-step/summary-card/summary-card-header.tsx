@@ -2,6 +2,7 @@
 
 import { Landmark } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
 import {
   createStickyObserver,
@@ -18,9 +19,10 @@ import { cn } from '@/modules/shared/lib/utils'
 
 interface SummaryCardHeaderProps {
   templateTitle?: string
+  templateSubtitle?: Maybe<string>
 }
 
-function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
+function SummaryCardHeader({ templateTitle, templateSubtitle }: SummaryCardHeaderProps) {
   const totals = usePurchaseTotals()
   const selectedTier = useSelectedTier()
   const selectedBillingCycle = useSelectedBillingCycle()
@@ -66,9 +68,11 @@ function SummaryCardHeader({ templateTitle }: SummaryCardHeaderProps) {
             <h2 className="text-foreground text-sm/5.5 leading-tight font-bold lg:text-lg lg:leading-[120%]">
               {templateTitle}
             </h2>
-            <span className="text-foreground/70 text-xs font-medium uppercase lg:text-sm/5.5">
-              Resource Template
-            </span>
+            {templateSubtitle && (
+              <span className="text-foreground/70 text-xs font-medium lg:text-sm/5.5">
+                {templateSubtitle}
+              </span>
+            )}
           </div>
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1">

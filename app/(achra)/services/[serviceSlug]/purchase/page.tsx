@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { LeavePageGuard } from '@/modules/service-purchase/components/leave-page-guard'
 import { NavigationButtons } from '@/modules/service-purchase/components/navigation-buttons'
 import { ServiceHeader } from '@/modules/service-purchase/components/service-header'
-import { ServicePurchaseForm } from '@/modules/service-purchase/components/service-purchase-form/service-purchase-form'
+import { ServicePurchaseWizard } from '@/modules/service-purchase/components/service-purchase-wizard/service-purchase-wizard'
 import { StepUrlSync } from '@/modules/service-purchase/components/step-url-sync'
 import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
@@ -44,7 +44,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
             <NavigationButtons />
             <ServiceHeader resourceTemplate={resourceTemplate} />
           </div>
-          <ServicePurchaseForm resourceTemplate={resourceTemplate} operator={operator} />
+          <ServicePurchaseWizard resourceTemplate={resourceTemplate} operator={operator} />
           <NavigationButtons isFooter />
         </div>
 
