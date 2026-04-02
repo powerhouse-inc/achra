@@ -58,6 +58,7 @@ export const Selected: Story = {
   name: 'Generic - Selected',
   args: {
     tier: mockPlanSelectorTier,
+    isSelected: true,
   },
   render: (args) => (
     <RadioGroup value={args.tier.id} className="inline-flex">

@@ -10,12 +10,14 @@ import {
 } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
+import { cn } from '@/modules/shared/lib/utils'
 
 interface PlanSelectorItemProps {
   tier: RsServiceSubscriptionTier
+  isSelected?: boolean
 }
 
-function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
+function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorItemProps>) {
   const inputId = tier.id
   const { selectedBillingCycle, tierHeaderPrices } = usePricingCalculatorContext()
 
@@ -25,13 +27,16 @@ function PlanSelectorItem({ tier }: Readonly<PlanSelectorItemProps>) {
   return (
     <label
       htmlFor={inputId}
-      className="flex h-full w-full min-w-0 cursor-pointer flex-col items-center justify-start px-0 sm:px-1"
+      className={cn(
+        'flex h-full w-full min-w-0 flex-col items-center justify-start px-0 sm:px-1',
+        isSelected ? 'cursor-default' : 'cursor-pointer',
+      )}
     >
-      <div className="flex cursor-pointer flex-col items-center gap-2">
+      <div className="flex flex-col items-center gap-2">
         <RadioGroupItem
           value={tier.id}
           id={inputId}
-          className="border-foreground [&_svg]:fill-foreground text-foreground cursor-pointer"
+          className="border-foreground [&_svg]:fill-foreground text-foreground"
         />
         <span className="text-foreground text-sm/5.5 font-semibold">{tier.name}</span>
       </div>
