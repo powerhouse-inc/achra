@@ -94,7 +94,10 @@ function HeaderCatalogPlan({
           </Button>
           <div className="flex flex-col items-center justify-center">
             <RadioGroup value={selectedPlan} onValueChange={handlePlanChange} disabled={readOnly}>
-              <PlanSelectorItem tier={currentMobileTier} />
+              <PlanSelectorItem
+                tier={currentMobileTier}
+                isSelected={selectedPlan === currentMobileTier.id}
+              />
             </RadioGroup>
           </div>
           <Button variant="ghost" size="icon" onClick={onNextPlan} className="size-8">
@@ -123,10 +126,14 @@ function HeaderCatalogPlan({
                   !isActive && 'hover:bg-accent/80',
                   tier.mostPopular && 'border-t-primary border-t-2',
                 )}
-                onMouseEnter={() => setHoveredTier(tier.id)}
-                onMouseLeave={() => setHoveredTier(null)}
+                onMouseEnter={() => {
+                  setHoveredTier(tier.id)
+                }}
+                onMouseLeave={() => {
+                  setHoveredTier(null)
+                }}
               >
-                <PlanSelectorItem tier={tier} />
+                <PlanSelectorItem tier={tier} isSelected={isActive} />
               </div>
             )
           })}
