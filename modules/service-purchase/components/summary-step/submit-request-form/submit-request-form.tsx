@@ -186,7 +186,7 @@ function SubmitRequestForm() {
                   </>
                 ) : (
                   <>
-                    Submit Request
+                    Request a Quote
                     <Send className="size-4" aria-hidden="true" />
                   </>
                 )}
