@@ -1,5 +1,6 @@
 'use client'
 import { useMemo } from 'react'
+import ff from '@/modules/shared/lib/feature-flags'
 import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
 import { filterBySearch } from '../../utils/utils'
 import EmptyStateService from '../empty-state-service/empty-state-service'
@@ -11,7 +12,10 @@ interface ServicesPageContentProps {
 }
 
 export function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
-  const { search, tab } = useServicesFiltersContext()
+  const { search: contextSearch, tab: contextTab } = useServicesFiltersContext()
+  const filtersEnabled = ff.SERVICES_LISTING_FILTERS_ENABLED
+  const search = filtersEnabled ? contextSearch : ''
+  const tab = filtersEnabled ? contextTab : 'all'
 
   const filteredServices = useMemo(() => filterBySearch(services, search), [services, search])
 

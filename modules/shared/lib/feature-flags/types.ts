@@ -112,4 +112,9 @@ export interface FeatureFlags {
    * Whether to enable the leave page guard on the service purchase flow
    */
   LEAVE_PAGE_GUARD_ENABLED: boolean
+
+  /**
+   * Whether to show tab and search filters on the services listing page
+   */
+  SERVICES_LISTING_FILTERS_ENABLED: boolean
 }
