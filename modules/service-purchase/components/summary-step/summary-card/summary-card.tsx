@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { type Maybe, RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/config/constants'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
@@ -95,7 +96,7 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
           {recurringGroups.length > 0 && (
             <Summary.Provider
               sectionLabel="Recurring"
-              totalSuffix="/mo"
+              totalSuffix={BILLING_CYCLE_SUFFIXES[selectedBillingCycle]}
               groupPrices={recurringGroupPrices}
               isCustomPricing={selectedTier.isCustomPricing}
               currency={selectedTier.pricing.currency}

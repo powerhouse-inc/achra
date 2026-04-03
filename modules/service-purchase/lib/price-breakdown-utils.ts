@@ -107,15 +107,11 @@ export function computePeriodDiscountLabel(
 
 /**
  * Converts a PriceBreakdown into PurchaseTotals for display.
- * recurringTotal = monthly equivalent; setupTotal = one-time fees (derived from row-level setup fields).
+ * recurringTotal = full billing-cycle amount (after discounts); setupTotal = one-time fees.
  */
-export function computeTotalsFromBreakdown(
-  breakdown: PriceBreakdown,
-  billingCycle: RsBillingCycle,
-): PurchaseTotals {
-  const monthsInCycle = monthsInBillingCycle(billingCycle)
+export function computeTotalsFromBreakdown(breakdown: PriceBreakdown): PurchaseTotals {
   return {
-    recurringTotal: breakdown.totals.grandRecurringTotal / monthsInCycle,
+    recurringTotal: breakdown.totals.grandRecurringTotal,
     setupTotal: computeGrandSetupTotal(breakdown),
   }
 }
@@ -150,7 +146,7 @@ export function resolveDiscountReferenceTierId(
 
 /**
  * Resolves the display price for a group from the breakdown.
- * - Recurring: uses monthlyBase (for /mo display)
+ * - Recurring: uses recurringAmount (discounted cycle total)
  * - Setup: uses effective setup (discounted one-time when applicable)
  */
 export function getGroupPriceFromBreakdown(
@@ -173,5 +169,5 @@ export function getGroupPriceFromBreakdown(
     breakdown.optionGroupBreakdowns.find((b) => b.optionGroupId === groupId) ??
     breakdown.addOnBreakdowns.find((b) => b.optionGroupId === groupId)
   if (!recurringEntry) return null
-  return { amount: recurringEntry.monthlyBase, isRecurring: true }
+  return { amount: recurringEntry.recurringAmount, isRecurring: true }
 }

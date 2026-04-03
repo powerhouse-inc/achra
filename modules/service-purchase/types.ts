@@ -149,7 +149,7 @@ export interface StepSlice extends StepSliceState {
 // ─── totals slice ─────────────────────────────────────────────────────────────
 
 export interface PurchaseTotals {
-  /** Monthly equivalent of (tier + active recurring groups + active add-ons) after discounts */
+  /** Full billing-cycle total of (tier + active recurring groups + active add-ons) after discounts */
   recurringTotal: number
   /** Sum of all active SETUP fees */
   setupTotal: number
