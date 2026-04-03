@@ -22,5 +22,5 @@ export function computeTotals(
     selectedBillingCycle,
     activeGroupIds,
   )
-  return computeTotalsFromBreakdown(breakdown, selectedBillingCycle)
+  return computeTotalsFromBreakdown(breakdown)
 }

@@ -38,3 +38,11 @@ export const BILLING_CYCLE_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.Annual]: 'Billed Annually',
   [RsBillingCycle.OneTime]: 'One-time payment',
 }
+
+export const BILLING_CYCLE_SUFFIXES: Record<RsBillingCycle, string> = {
+  [RsBillingCycle.Monthly]: '/mo',
+  [RsBillingCycle.Quarterly]: '/qtr',
+  [RsBillingCycle.SemiAnnual]: '/semi-annual',
+  [RsBillingCycle.Annual]: '/year',
+  [RsBillingCycle.OneTime]: '',
+}

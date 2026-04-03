@@ -3,7 +3,7 @@
 import { Landmark } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/config/constants'
+import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/config/constants'
 import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
@@ -86,15 +86,12 @@ function SummaryCardHeader({ templateTitle, templateSubtitle }: SummaryCardHeade
               {formatSummaryPrice({
                 amount: totals.recurringTotal,
                 isRecurring: true,
-                suffix: '/mo',
+                suffix: BILLING_CYCLE_SUFFIXES[selectedBillingCycle],
                 isCustomPricing: selectedTier.isCustomPricing,
                 currency: selectedTier.pricing.currency,
               })}
             </span>
           </div>
-          <span className="text-foreground text-xs/4.5 font-medium">
-            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
-          </span>
           {totals.setupTotal > 0 && (
             <span className="text-foreground/70 text-xs/4.5 font-medium">
               + {formatPrice(totals.setupTotal, selectedTier.pricing.currency)} Setup
