@@ -112,9 +112,6 @@ function SummaryGroup({ group }: SummaryGroupProps) {
   const { isRecurring, groupPrices, isCustomPricing, currency, totalSuffix } = useSummary()
   const priceEntry = groupPrices?.get(group.id)
   const displayAmount = priceEntry?.amount ?? group.resolvedPrice
-  const originalAmount = priceEntry?.originalAmount ?? displayAmount
-  const discountPercent = priceEntry?.discountPercent ?? null
-  const hasDiscount = originalAmount > displayAmount
 
   const formattedPrice =
     isCustomPricing && displayAmount === 0
@@ -125,15 +122,6 @@ function SummaryGroup({ group }: SummaryGroupProps) {
           suffix: totalSuffix,
           currency,
         })
-
-  const formattedOriginalPrice = hasDiscount
-    ? formatSummaryPrice({
-        amount: originalAmount,
-        isRecurring,
-        suffix: totalSuffix,
-        currency,
-      })
-    : null
 
   const expandable = group.services.length > 0
 
@@ -148,23 +136,9 @@ function SummaryGroup({ group }: SummaryGroupProps) {
       >
         <div className="flex flex-1 items-center justify-between gap-4">
           <span className="text-foreground text-sm/5.5 lg:text-base/6">{group.name}</span>
-          <div className="flex flex-col items-end">
-            {formattedOriginalPrice && (
-              <span className="flex items-center gap-1.5">
-                <span className="text-foreground/50 text-xs font-medium tabular-nums line-through lg:text-sm/5.5">
-                  {formattedOriginalPrice}
-                </span>
-                {discountPercent != null && (
-                  <span className="bg-primary/10 text-primary rounded-full px-1.5 py-0.5 text-[10px] leading-none font-semibold lg:text-xs">
-                    -{discountPercent}%
-                  </span>
-                )}
-              </span>
-            )}
-            <span className="text-foreground text-sm/5.5 font-semibold tabular-nums lg:text-base/6">
-              {formattedPrice}
-            </span>
-          </div>
+          <span className="text-foreground text-sm/5.5 font-semibold tabular-nums lg:text-base/6">
+            {formattedPrice}
+          </span>
         </div>
       </AccordionTrigger>
       {expandable && (
@@ -210,9 +184,10 @@ function SummaryCardHeader() {
 
 interface SummaryFooterProps {
   totalAmount: number
+  originalTotalAmount?: number
 }
 
-function SummaryTotal({ totalAmount }: SummaryFooterProps) {
+function SummaryTotal({ totalAmount, originalTotalAmount }: SummaryFooterProps) {
   const { sectionLabel, totalSuffix, isRecurring, isCustomPricing, currency } = useSummary()
   const formattedTotal = formatSummaryPrice({
     amount: totalAmount,
@@ -222,6 +197,19 @@ function SummaryTotal({ totalAmount }: SummaryFooterProps) {
     currency,
   })
 
+  const hasDiscount = originalTotalAmount != null && originalTotalAmount > totalAmount
+  const formattedOriginalTotal = hasDiscount
+    ? formatSummaryPrice({
+        amount: originalTotalAmount,
+        isRecurring,
+        suffix: totalSuffix,
+        currency,
+      })
+    : null
+  const discountPercent = hasDiscount
+    ? Math.round(((originalTotalAmount - totalAmount) / originalTotalAmount) * 100)
+    : null
+
   return (
     <footer
       className="bg-accent flex items-center justify-between px-4 py-2 lg:px-6"
@@ -230,9 +218,23 @@ function SummaryTotal({ totalAmount }: SummaryFooterProps) {
       <span className="text-foreground/70 text-sm/5.5 font-semibold tracking-wide uppercase">
         Total {sectionLabel.toLowerCase()}
       </span>
-      <span className="text-primary text-sm font-semibold tabular-nums lg:text-base/6">
-        {formattedTotal}
-      </span>
+      <div className="flex flex-col items-end">
+        {formattedOriginalTotal && (
+          <span className="flex items-center gap-1.5">
+            <span className="text-foreground/50 text-xs font-medium tabular-nums line-through lg:text-sm/5.5">
+              {formattedOriginalTotal}
+            </span>
+            {discountPercent != null && (
+              <span className="bg-primary/10 text-primary rounded-full px-1.5 py-0.5 text-[10px] leading-none font-semibold lg:text-xs">
+                -{discountPercent}%
+              </span>
+            )}
+          </span>
+        )}
+        <span className="text-primary text-sm font-semibold tabular-nums lg:text-base/6">
+          {formattedTotal}
+        </span>
+      </div>
     </footer>
   )
 }
