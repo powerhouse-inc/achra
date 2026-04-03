@@ -2,7 +2,12 @@ import { notFound } from 'next/navigation'
 import { FaqSection } from '@/modules/service-profile/components/faq'
 import { ProductInfo } from '@/modules/service-purchase/components/product-info'
 import { getResourceOperator } from '@/modules/service-purchase/services/resource-operator'
-import { ServiceInfo } from '@/modules/services/components/service-info'
+import {
+  ActionButtons,
+  BookCallButton,
+  PurchaseButton,
+  ServiceInfo,
+} from '@/modules/services/components/service-info'
 import { getResourceProfile } from '../../services/resource-profile'
 import { PurchaseSection } from '../purchase-section/purchase-section'
 
@@ -27,15 +32,18 @@ async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
     <div className="flex flex-col gap-6">
       <ServiceInfo
         id={serviceSlug}
-        operatorId={resourceProfile.operatorId}
-        showPurchaseButton
-        showActionButtons
         title={resourceProfile.title}
         summary={resourceProfile.summary}
         thumbnailUrl={resourceProfile.thumbnailUrl}
-        status={resourceProfile.status}
-        infoLink={resourceProfile.infoLink}
-      />
+        actions={<ActionButtons infoLink={resourceProfile.infoLink} />}
+      >
+        <BookCallButton />
+        <PurchaseButton
+          serviceId={serviceSlug}
+          operatorId={resourceProfile.operatorId}
+          status={resourceProfile.status}
+        />
+      </ServiceInfo>
       <ProductInfo
         description={resourceProfile.description}
         contentSections={resourceProfile.contentSections}
