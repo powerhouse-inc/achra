@@ -1,5 +1,6 @@
 'use client'
 
+import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { Suspense, useCallback } from 'react'
 import type {
   BuilderProfileState,
@@ -10,7 +11,10 @@ import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { BookCallButton, ServiceInfo } from '@/modules/services/components/service-info'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
-import { SERVICE_PURCHASE_STEPS_ENTRIES } from '../../config/constants'
+import {
+  SERVICE_PURCHASE_STEP_VALUES,
+  SERVICE_PURCHASE_STEPS_ENTRIES,
+} from '../../config/constants'
 import {
   ConfigureServices,
   ConfigureServicesSkeleton,
@@ -34,8 +38,11 @@ function ServicePurchaseWizard({
   operator,
 }: Readonly<ServicePurchaseWizardProps>) {
   const { activeStep, goToStep } = useServicePurchaseStep()
+  // Read step from URL directly so the first render (before zustand persist hydrates) has the
+  // correct visual state, preventing the big-image → small-circle flicker on page refresh.
+  const [urlStep] = useQueryState('step', parseAsStringEnum(SERVICE_PURCHASE_STEP_VALUES))
 
-  const isProductInfo = activeStep === ServicePurchaseStep.ProductInfo
+  const isProductInfo = (urlStep ?? activeStep) === ServicePurchaseStep.ProductInfo
 
   const handleOnSelectOperator = (_operatorId: string) => {
     // TODO: implement the logic to select the operator once we add support for multiple operators

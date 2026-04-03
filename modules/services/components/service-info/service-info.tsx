@@ -2,11 +2,11 @@
 
 import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
+import { type ReactNode, useEffect, useState } from 'react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SERVICE_INFO_DEFAULT_COVER_PATH } from '@/modules/services/lib/constants'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
-import type { ReactNode } from 'react'
 
 interface ServiceInfoProps {
   isCompacted?: boolean
@@ -28,7 +28,17 @@ function ServiceInfo({
   actions,
   operator,
 }: Readonly<ServiceInfoProps>) {
+  const [hasTransition, setHasTransition] = useState(false)
   const coverImage = thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      setHasTransition(true)
+    })
+    return () => {
+      cancelAnimationFrame(id)
+    }
+  }, [])
 
   return (
     <Card
@@ -49,7 +59,8 @@ function ServiceInfo({
         <div className={cn('flex flex-col gap-2 sm:gap-4', isCompacted && 'gap-0')}>
           <div
             className={cn(
-              'relative h-32 w-full transition-[width,height,border-radius] duration-300 ease-out sm:size-32 sm:min-w-32 md:size-64 md:min-w-64',
+              'relative h-32 w-full sm:size-32 sm:min-w-32 md:size-64 md:min-w-64',
+              hasTransition && 'transition-[width,height,border-radius] duration-300 ease-out',
               isCompacted &&
                 'border-background shadow-primary size-14! min-w-14! overflow-hidden rounded-full border-2',
             )}
