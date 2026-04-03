@@ -41,20 +41,15 @@ function getCurrencySymbol(currency?: string | null): string {
 const CUSTOM_PRICING_LABEL = 'Custom'
 
 /**
- * Formats a numeric amount for display: whole dollars (after cent rounding) without decimals,
- * otherwise exactly two fraction digits. Used for all service-purchase price numbers.
+ * Formats a numeric amount for display as a rounded integer (no decimals).
+ * Used for all service-purchase price numbers.
  */
 export function formatPriceNumber(amount: number): string {
-  const cents = Math.round(Number(amount) * 100)
-  if (!Number.isFinite(cents)) {
-    return (0).toLocaleString(undefined, { maximumFractionDigits: 0 })
+  const rounded = Math.round(Number(amount))
+  if (!Number.isFinite(rounded)) {
+    return (0).toLocaleString('en-US', { maximumFractionDigits: 0 })
   }
-  const dollars = cents / 100
-  const isWhole = Math.abs(cents) % 100 === 0
-  if (isWhole) {
-    return dollars.toLocaleString(undefined, { maximumFractionDigits: 0 })
-  }
-  return dollars.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  return rounded.toLocaleString('en-US', { maximumFractionDigits: 0 })
 }
 
 /** Formats a price value as a dollar string (e.g. "$200" or "$200.33") */
