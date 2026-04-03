@@ -162,12 +162,26 @@ export function getGroupPriceFromBreakdown(
     const hasSetupDiscount =
       'setupCostDiscount' in setupEntry && setupEntry.setupCostDiscount != null
     if (setupEntry.setupCost == null && !hasSetupDiscount) return null
-    return { amount: effectiveSetupAmount(setupEntry), isRecurring: false }
+    const setupDiscount =
+      'setupCostDiscount' in setupEntry && setupEntry.setupCostDiscount
+        ? setupEntry.setupCostDiscount
+        : null
+    return {
+      amount: effectiveSetupAmount(setupEntry),
+      originalAmount: setupEntry.setupCost ?? 0,
+      discountPercent: setupDiscount ? setupDiscount.discountValue : null,
+      isRecurring: false,
+    }
   }
 
   const recurringEntry =
     breakdown.optionGroupBreakdowns.find((b) => b.optionGroupId === groupId) ??
     breakdown.addOnBreakdowns.find((b) => b.optionGroupId === groupId)
   if (!recurringEntry) return null
-  return { amount: recurringEntry.recurringAmount, isRecurring: true }
+  return {
+    amount: recurringEntry.recurringAmount,
+    originalAmount: recurringEntry.cycleAmount,
+    discountPercent: recurringEntry.discount ? recurringEntry.discount.discountValue : null,
+    isRecurring: true,
+  }
 }

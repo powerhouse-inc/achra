@@ -66,15 +66,31 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
       }),
     )
 
-    const recurringPrices = new Map<string, number>()
+    const recurringPrices = new Map<
+      string,
+      { amount: number; originalAmount: number; discountPercent: number | null }
+    >()
     for (const g of recurring) {
       const price = getGroupPriceFromBreakdown(breakdown, g.id, false)
-      if (price) recurringPrices.set(g.id, price.amount)
+      if (price)
+        recurringPrices.set(g.id, {
+          amount: price.amount,
+          originalAmount: price.originalAmount,
+          discountPercent: price.discountPercent,
+        })
     }
-    const setupPrices = new Map<string, number>()
+    const setupPrices = new Map<
+      string,
+      { amount: number; originalAmount: number; discountPercent: number | null }
+    >()
     for (const g of setup) {
       const price = getGroupPriceFromBreakdown(breakdown, g.id, true)
-      if (price) setupPrices.set(g.id, price.amount)
+      if (price)
+        setupPrices.set(g.id, {
+          amount: price.amount,
+          originalAmount: price.originalAmount,
+          discountPercent: price.discountPercent,
+        })
     }
 
     return {

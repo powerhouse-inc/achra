@@ -157,6 +157,8 @@ export interface PurchaseTotals {
 
 export interface GroupPriceFromBreakdown {
   amount: number
+  originalAmount: number
+  discountPercent: number | null
   isRecurring: boolean
 }
 

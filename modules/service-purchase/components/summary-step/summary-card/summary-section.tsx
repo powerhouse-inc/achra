@@ -13,12 +13,18 @@ import {
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
 
+interface GroupPriceEntry {
+  amount: number
+  originalAmount: number
+  discountPercent: number | null
+}
+
 interface SummaryContextValue {
   sectionLabel: string
   totalSuffix: string
   isRecurring: boolean
   headerLabel?: string
-  groupPrices?: Map<string, number>
+  groupPrices?: Map<string, GroupPriceEntry>
   isCustomPricing?: boolean
   currency?: string | null
 }
@@ -38,7 +44,7 @@ interface SummaryProviderProps {
   sectionLabel: string
   totalSuffix: string
   headerLabel?: string
-  groupPrices?: Map<string, number>
+  groupPrices?: Map<string, GroupPriceEntry>
   isCustomPricing?: boolean
   currency?: string | null
 }
@@ -104,7 +110,12 @@ interface SummaryGroupProps {
 
 function SummaryGroup({ group }: SummaryGroupProps) {
   const { isRecurring, groupPrices, isCustomPricing, currency, totalSuffix } = useSummary()
-  const displayAmount = groupPrices?.get(group.id) ?? group.resolvedPrice
+  const priceEntry = groupPrices?.get(group.id)
+  const displayAmount = priceEntry?.amount ?? group.resolvedPrice
+  const originalAmount = priceEntry?.originalAmount ?? displayAmount
+  const discountPercent = priceEntry?.discountPercent ?? null
+  const hasDiscount = originalAmount > displayAmount
+
   const formattedPrice =
     isCustomPricing && displayAmount === 0
       ? ''
@@ -114,6 +125,16 @@ function SummaryGroup({ group }: SummaryGroupProps) {
           suffix: totalSuffix,
           currency,
         })
+
+  const formattedOriginalPrice = hasDiscount
+    ? formatSummaryPrice({
+        amount: originalAmount,
+        isRecurring,
+        suffix: totalSuffix,
+        currency,
+      })
+    : null
+
   const expandable = group.services.length > 0
 
   return (
@@ -127,9 +148,23 @@ function SummaryGroup({ group }: SummaryGroupProps) {
       >
         <div className="flex flex-1 items-center justify-between gap-4">
           <span className="text-foreground text-sm/5.5 lg:text-base/6">{group.name}</span>
-          <span className="text-foreground text-sm/5.5 font-semibold tabular-nums lg:text-base/6">
-            {formattedPrice}
-          </span>
+          <div className="flex flex-col items-end">
+            {formattedOriginalPrice && (
+              <span className="flex items-center gap-1.5">
+                <span className="text-foreground/50 text-xs font-medium tabular-nums line-through lg:text-sm/5.5">
+                  {formattedOriginalPrice}
+                </span>
+                {discountPercent != null && (
+                  <span className="bg-primary/10 text-primary rounded-full px-1.5 py-0.5 text-[10px] leading-none font-semibold lg:text-xs">
+                    -{discountPercent}%
+                  </span>
+                )}
+              </span>
+            )}
+            <span className="text-foreground text-sm/5.5 font-semibold tabular-nums lg:text-base/6">
+              {formattedPrice}
+            </span>
+          </div>
         </div>
       </AccordionTrigger>
       {expandable && (
