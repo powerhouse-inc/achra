@@ -57,6 +57,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Essential entity setup for small teams',
         mostPopular: false,
         isCustomPricing: false,
+        excludeFromSetupFee: false,
         pricingMode: RsTierPricingMode.Calculated,
         pricing: { amount: 99, currency: 'USD' },
         billingCycleDiscounts: [],
@@ -82,6 +83,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Full operations suite',
         mostPopular: true,
         isCustomPricing: false,
+        excludeFromSetupFee: false,
         pricingMode: RsTierPricingMode.Calculated,
 
         pricing: { amount: 299, currency: 'USD' },
@@ -96,6 +98,7 @@ export const SERVICES_DATA: RsServiceOffering[] = [
         description: 'Custom pricing for enterprises',
         mostPopular: false,
         isCustomPricing: true,
+        excludeFromSetupFee: false,
         pricingMode: RsTierPricingMode.ManualOverride,
         pricing: { amount: null, currency: 'USD' },
         billingCycleDiscounts: [],

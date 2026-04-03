@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { ConfigureStepContinueButton } from '@/modules/service-purchase/components/configure-step-continue-button'
 import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
 import {
   computeTierHeaderPriceWithBreakdown,
@@ -185,6 +186,7 @@ function PricingCalculator() {
           )}
         </div>
         <GrandTotalRowCatalog selectedPlan={selectedPlan} tiers={tiers} offering={servicesData} />
+        <ConfigureStepContinueButton />
       </div>
     </PricingCalculatorProvider>
   )

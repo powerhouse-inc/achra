@@ -2,6 +2,7 @@ query ResourceTemplate($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
     id
     title
+    subtitle
     description
     thumbnailUrl
     summary

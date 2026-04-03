@@ -1,18 +1,16 @@
-import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import { MarketplaceHeader } from '../configure-services-step/marketplace-header'
+import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SubmitRequestForm } from './submit-request-form'
 import { SummaryCard } from './summary-card'
 
 interface SummaryStepProps {
-  operator: BuilderProfileState
   templateTitle?: string
+  templateSubtitle?: Maybe<string>
 }
 
-function SummaryStep({ operator, templateTitle }: Readonly<SummaryStepProps>) {
+function SummaryStep({ templateTitle, templateSubtitle }: Readonly<SummaryStepProps>) {
   return (
     <div className="mt-6 flex flex-col gap-6">
-      <MarketplaceHeader operator={operator} />
-      <SummaryCard templateTitle={templateTitle} />
+      <SummaryCard templateTitle={templateTitle} templateSubtitle={templateSubtitle} />
       <SubmitRequestForm />
     </div>
   )
