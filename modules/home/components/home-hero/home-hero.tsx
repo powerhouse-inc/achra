@@ -1,5 +1,6 @@
 import { Poppins } from 'next/font/google'
 import { SkyIsotype, SkyLogotype } from '@/shared/components/svgs'
+import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 import { HeroGrid } from './hero-grid'
 
 const poppins = Poppins({
@@ -38,12 +39,14 @@ function HomeHero() {
       <div className="relative z-1 flex w-full max-w-[1200px] flex-col items-center gap-6 overflow-hidden">
         <div className="flex w-full flex-col items-center gap-5">
           <div className="flex max-w-2xl flex-col items-center gap-4 text-center">
-            <h1
-              id="home-hero-heading"
+            <BlurText
+              as="h1"
               className={`${poppins.className} text-3xl leading-[1.15] tracking-[-0.02em] text-[rgb(10,10,10)] sm:text-4xl md:text-5xl lg:text-[3.25rem]`}
-            >
-              The Marketplace For Global Coordination
-            </h1>
+              text="The Marketplace For Global Coordination"
+              delay={45}
+              animateBy="letters"
+              direction="bottom"
+            />
             <p className="max-w-lg text-sm leading-relaxed text-[rgb(64,64,64)] sm:text-base">
               Achra connects organizations, builders and operators to scale networks across borders.
             </p>
