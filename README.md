@@ -37,15 +37,12 @@ pnpm dev
 
 4. Open [http://localhost:3000](http://localhost:3000).
 
-If `HOMEPAGE_REMOTE_URL` is set, the `/` and `/cases` routes are rewritten to an external marketing site. For local product development, routes such as `/networks`, `/workstreams`, and `/services` are often more useful entry points.
-
 ## Environment Variables
 
 Start from `.env.example`. The most important variables are:
 
 | Variable                                                | Required    | Purpose                                                       |
 | ------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
-| `HOMEPAGE_REMOTE_URL`                                   | Yes         | External homepage target used to rewrite `/` and `/cases`.    |
 | `NEXT_PUBLIC_SWITCHBOARD_URL`                           | Yes         | GraphQL endpoint used by the app and GraphQL code generation. |
 | `NEXT_PUBLIC_ETH_MAINNET_RPC`                           | Yes         | Ethereum mainnet RPC used for on-chain reads.                 |
 | `NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY`                    | Optional    | Enables the whitelist overlay. Defaults to `false`.           |
@@ -103,7 +100,7 @@ Use `modules/shared/` for code shared across multiple domains or app-level layou
 
 ## Routing Model
 
-- Global routes live under `app/(achra)`, including areas such as `/networks`, `/workstreams`, and `/services`.
+- Global routes live under `app/(achra)`, including the app home at `/`, plus areas such as `/networks`, `/workstreams`, and `/services`.
 - Network-specific routes live under `app/network/[slug]` and cover builders, finances, roadmaps, workstreams, and related details.
 - The root layout in `app/layout.tsx` wires global providers, theme support, analytics, query state, toaster notifications, footer rendering, and the optional whitelist overlay.
 
@@ -150,4 +147,3 @@ Use this skill when writing or refactoring Achra code, adding new modules or rou
 - Path aliases are configured in `tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `modules/shared/*`.
 - shadcn/ui components are configured to live under `modules/shared/components`.
 - Feature availability can differ by environment. Check `modules/shared/lib/feature-flags` before assuming a section should always render.
-- The homepage may be served remotely via `HOMEPAGE_REMOTE_URL`, so not every environment will render `/` from this repo.
