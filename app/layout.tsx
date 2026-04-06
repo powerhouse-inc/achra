@@ -6,7 +6,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
 import { Toaster } from '@/modules/shared/components/ui/sonner'
 import ff from '@/modules/shared/lib/feature-flags'
-import { ThemeProvider } from '@/modules/shared/providers/theme-provider'
+import { RootThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
 import { Footer } from '@/shared/components/footer/footer'
 import { QueryClientProvider } from '@/shared/providers/query-client'
@@ -59,7 +59,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${openSansCondensed.variable} flex min-h-dvh flex-col antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+        <RootThemeProvider>
           <QueryClientProvider>
             <NuqsAdapter>
               <main className="flex-1">{children}</main>
@@ -74,7 +74,7 @@ export default function RootLayout({
               <Toaster />
             </NuqsAdapter>
           </QueryClientProvider>
-        </ThemeProvider>
+        </RootThemeProvider>
 
         <Analytics />
         <SpeedInsights />
