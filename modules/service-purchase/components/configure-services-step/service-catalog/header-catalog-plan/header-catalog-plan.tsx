@@ -75,7 +75,7 @@ function HeaderCatalogPlan({
           'transition-all duration-500',
           isStuck
             ? 'border-primary/30 shadow-primary/20 rounded-xl border'
-            : 'rounded-t-xl border shadow-[0_-1px_2px_0_rgb(0_0_0/0.05),-1px_0_2px_0_rgb(0_0_0/0.05),1px_0_2px_0_rgb(0_0_0/0.05)]',
+            : 'rounded-xl border shadow-[0_-1px_2px_0_rgb(0_0_0/0.05),-1px_0_2px_0_rgb(0_0_0/0.05),1px_0_2px_0_rgb(0_0_0/0.05)]',
         )}
       >
         {/* LABEL */}
