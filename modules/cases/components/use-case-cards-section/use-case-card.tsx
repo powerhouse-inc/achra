@@ -1,42 +1,58 @@
-import { CircleCheckBigIcon } from 'lucide-react'
-import { Badge } from '@/shared/components/ui/badge'
 import type { UseCase } from '../../data/use-cases-data'
 
-type UseCaseCardProps = {
+const TAG_STYLES: Record<string, string> = {
+  'Network Organizations': 'border-green-400 text-green-700',
+  'Open Source': 'border-green-400 text-green-700',
+  'Public Goods': 'border-rose-400 text-rose-700',
+  'Network States': 'border-blue-400 text-blue-700',
+  'Community Organizations': 'border-green-400 text-green-700',
+}
+
+interface UseCaseCardProps {
   useCase: UseCase
 }
 
 function UseCaseCard({ useCase }: UseCaseCardProps) {
   return (
-    <div className="flex flex-col gap-5 border-t pt-6">
+    <div className="flex flex-col gap-4 rounded-2xl bg-[rgb(250,249,247)] p-6 sm:p-8">
       <div className="flex flex-wrap gap-2">
         {useCase.tags.map((tag) => (
-          <Badge key={tag} variant="secondary" className="rounded-full">
+          <span
+            key={tag}
+            className={`rounded-full border px-3 py-1 text-xs font-medium ${TAG_STYLES[tag] ?? 'border-gray-400 text-gray-700'}`}
+          >
             {tag}
-          </Badge>
+          </span>
         ))}
       </div>
 
+      <h3 className="text-lg font-bold tracking-tight sm:text-xl">{useCase.title}</h3>
+
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="flex flex-col gap-3">
-          <h3 className="text-lg font-semibold tracking-tight sm:text-xl">{useCase.title}</h3>
-          <p className="text-muted-foreground text-sm leading-relaxed">{useCase.description}</p>
-          {useCase.note && (
-            <p className="text-muted-foreground/80 text-xs leading-relaxed italic">
-              {useCase.note}
-            </p>
-          )}
+          <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
+            {useCase.description}
+          </p>
         </div>
 
-        <ul className="flex flex-col gap-3">
-          {useCase.benefits.map((benefit) => (
-            <li key={benefit} className="flex items-start gap-2.5 text-sm leading-relaxed">
-              <CircleCheckBigIcon className="text-primary mt-0.5 size-4 shrink-0" />
-              <span>{benefit}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col gap-4">
+          {useCase.benefits.map((benefit) => {
+            const Icon = benefit.icon
+            return (
+              <div key={Icon.displayName} className="flex items-start gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-purple-100">
+                  <Icon className="size-5 text-purple-500" />
+                </div>
+                <p className="text-sm leading-relaxed sm:text-base">{benefit.text}</p>
+              </div>
+            )
+          })}
+        </div>
       </div>
+
+      {useCase.note && (
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{useCase.note}</p>
+      )}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { Poppins } from 'next/font/google'
-import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 import { Button } from '@/shared/components/ui/button'
+import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 
 const poppins = Poppins({
   weight: ['700'],

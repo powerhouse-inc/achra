@@ -1,16 +1,37 @@
+import {
+  ArrowLeftRight,
+  Building2,
+  ClipboardList,
+  FileText,
+  Flower2,
+  Gem,
+  Headphones,
+  Landmark,
+  LayoutGrid,
+  LayoutList,
+  Leaf,
+  Link2,
+  type LucideIcon,
+  Monitor,
+  Radar,
+  Radio,
+  ShieldCheck,
+  Target,
+  Users,
+} from 'lucide-react'
 import type { ReactNode } from 'react'
 
-type OrgLink = {
-  name: string
-  url: string
+interface Benefit {
+  icon: LucideIcon
+  text: ReactNode
 }
 
-type UseCase = {
+interface UseCase {
   title: string
   tags: string[]
   description: ReactNode
   note?: string
-  benefits: string[]
+  benefits: Benefit[]
 }
 
 const useCasesData: UseCase[] = [
@@ -26,9 +47,32 @@ const useCasesData: UseCase[] = [
     ),
     note: 'Achra grew out of work with Sky and runs there today. The same platform supports other distributed teams.',
     benefits: [
-      'Coordinate governance, funding, and operations through shared workflows.',
-      'Align contributors and sub-organizations under one transparent structure.',
-      'Scale participation while maintaining clarity and compliance.',
+      {
+        icon: ShieldCheck,
+        text: (
+          <>
+            <strong>Coordinate governance</strong>, funding, and operations through shared
+            workflows.
+          </>
+        ),
+      },
+      {
+        icon: LayoutList,
+        text: (
+          <>
+            Align contributors and sub-organizations under one{' '}
+            <strong>transparent structure</strong>.
+          </>
+        ),
+      },
+      {
+        icon: Target,
+        text: (
+          <>
+            <strong>Scale participation</strong> while maintaining clarity and compliance.
+          </>
+        ),
+      },
     ],
   },
   {
@@ -44,9 +88,18 @@ const useCasesData: UseCase[] = [
       </>
     ),
     benefits: [
-      'Manage budgets, payments, and contributors in one public ledger.',
-      'Fund long-term maintenance without privatizing the codebase.',
-      'Operate across multiple teams and jurisdictions with clear governance.',
+      {
+        icon: ClipboardList,
+        text: 'Manage budgets, payments, and contributors in one public ledger.',
+      },
+      {
+        icon: Leaf,
+        text: 'Fund long-term maintenance without privatizing the codebase.',
+      },
+      {
+        icon: Landmark,
+        text: 'Operate across multiple teams and jurisdictions with clear governance.',
+      },
     ],
   },
   {
@@ -61,9 +114,18 @@ const useCasesData: UseCase[] = [
       </>
     ),
     benefits: [
-      'Manage treasuries, initiatives, and elections in open view.',
-      'Coordinate cross-border funding and policy through accountable workflows.',
-      'Enable citizens or members to engage directly in decision-making.',
+      {
+        icon: Building2,
+        text: 'Manage treasuries, initiatives, and elections in open view.',
+      },
+      {
+        icon: ArrowLeftRight,
+        text: 'Coordinate cross-border funding and policy through accountable workflows.',
+      },
+      {
+        icon: Headphones,
+        text: 'Enable citizens or members to engage directly in decision-making.',
+      },
     ],
   },
   {
@@ -79,9 +141,18 @@ const useCasesData: UseCase[] = [
       </>
     ),
     benefits: [
-      'Pool funding and revenue transparently across members and projects.',
-      'Automate rights, payments, and profit-sharing within one platform.',
-      'Build community-led creative networks that sustain themselves over time.',
+      {
+        icon: Gem,
+        text: 'Pool funding and revenue transparently across members and projects.',
+      },
+      {
+        icon: LayoutGrid,
+        text: 'Automate rights, payments, and profit-sharing within one platform.',
+      },
+      {
+        icon: Flower2,
+        text: 'Build community-led creative networks that sustain themselves over time.',
+      },
     ],
   },
   {
@@ -97,9 +168,18 @@ const useCasesData: UseCase[] = [
       </>
     ),
     benefits: [
-      'Track supply chains, donations, and outcomes in real time.',
-      'Share transparent data with customers and supporters.',
-      'Reinforce trust and community ownership in every transaction.',
+      {
+        icon: Link2,
+        text: 'Track supply chains, donations, and outcomes in real time.',
+      },
+      {
+        icon: FileText,
+        text: 'Share transparent data with customers and supporters.',
+      },
+      {
+        icon: Radar,
+        text: 'Reinforce trust and community ownership in every transaction.',
+      },
     ],
   },
   {
@@ -116,9 +196,18 @@ const useCasesData: UseCase[] = [
       </>
     ),
     benefits: [
-      'Coordinate proposals, decisions, and outcomes transparently across members.',
-      'Manage shared finances and documentation in one clear system.',
-      'Stay decentralized while maintaining the benefits of a unified organization.',
+      {
+        icon: Users,
+        text: 'Coordinate proposals, decisions, and outcomes transparently across members.',
+      },
+      {
+        icon: Monitor,
+        text: 'Manage shared finances and documentation in one clear system.',
+      },
+      {
+        icon: Radio,
+        text: 'Stay decentralized while maintaining the benefits of a unified organization.',
+      },
     ],
   },
 ]
@@ -137,4 +226,4 @@ function OrgAnchor({ href, children }: { href: string; children: ReactNode }) {
 }
 
 export { useCasesData }
-export type { UseCase }
+export type { UseCase, Benefit }
