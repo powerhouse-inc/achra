@@ -48,9 +48,6 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
       {tier.isCustomPricing ? (
         <div className="flex w-full flex-col items-center gap-0.5">
           <span className="text-foreground/50 text-xs/5.5 font-semibold">Custom</span>
-          <span className="text-foreground text-xs leading-4.5 font-normal">
-            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
-          </span>
           {unitPriceMetrics.map((metric, index) => (
             <span
               // order does not matter here as it doesn't change the UI
@@ -60,9 +57,9 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
             >
               {metric.freeLimit ? (
                 <>
-                  up to {metric.freeLimit}{' '}
+                  {metric.freeLimit}{' '}
                   <span className="text-foreground/50">
-                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}/mo
                   </span>
                 </>
               ) : (
@@ -75,6 +72,9 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
               )}
             </span>
           ))}
+          <span className="text-foreground text-xs leading-4.5 font-normal">
+            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+          </span>
         </div>
       ) : (
         <div className="flex w-full flex-col items-center gap-0.5">
@@ -94,9 +94,6 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
               </>
             )}
           </div>
-          <span className="text-foreground text-center text-xs leading-4.5 font-normal">
-            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
-          </span>
           {unitPriceMetrics.map((metric, index) => (
             <span
               // order does not matter here as it doesn't change the UI
@@ -106,9 +103,9 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
             >
               {metric.freeLimit ? (
                 <>
-                  up to {metric.freeLimit}{' '}
+                  {metric.freeLimit}{' '}
                   <span className="text-foreground/50">
-                    {formatMetricLabel(metric.unitName ?? metric.metric)}
+                    {formatMetricLabel(metric.unitName ?? metric.metric)}/mo
                   </span>
                 </>
               ) : (
@@ -121,6 +118,9 @@ function PlanSelectorItem({ tier, isSelected = false }: Readonly<PlanSelectorIte
               )}
             </span>
           ))}
+          <span className="text-foreground text-center text-xs leading-4.5 font-normal">
+            {BILLING_CYCLE_LABELS[selectedBillingCycle]}
+          </span>
         </div>
       )}
     </label>

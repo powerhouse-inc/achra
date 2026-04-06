@@ -41,7 +41,7 @@ function resolveMetrics(
         ul.notes ??
         (ul.freeLimit == null
           ? 'Unlimited'
-          : `${ul.freeLimit}${ul.unitName ? ` ${ul.unitName}` : ''}`),
+          : `${ul.freeLimit}${ul.unitName ? ` ${ul.unitName}` : ''}${ul.unitName === 'setup' ? '' : '/mo'}`),
     }))
 }
 

@@ -235,7 +235,9 @@ export function formatUsageLimit(
   }
 
   const unit = limit.unitName ?? ''
-  return `${limit.freeLimit}${unit ? ` ${unit}` : ''}`
+  const isOneTime = limit.unitName === 'setup'
+  const suffix = isOneTime ? '' : '/mo'
+  return `${limit.freeLimit}${unit ? ` ${unit}` : ''}${suffix}`
 }
 
 /**
