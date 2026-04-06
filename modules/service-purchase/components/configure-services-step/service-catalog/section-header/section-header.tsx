@@ -44,8 +44,6 @@ function SectionHeader({
 }: Readonly<SectionHeaderProps>) {
   const { tierNames } = usePricingCalculatorContext()
   const hoveredPlan = useHoveredTier()
-  const lastTierName = tierNames[tierNames.length - 1]
-
   const isOneTime = groupCostType === RsGroupCostType.Setup
   const isRecurring = groupCostType === RsGroupCostType.Recurring
   const setupPriceLabel =
@@ -219,48 +217,45 @@ function SectionHeader({
           )}
           {isOneTime &&
             !perTierPrices &&
-            plan === lastTierName &&
+            plan === activePlan &&
             priceLabel &&
             !discountedPriceLabel && (
-              <span className="text-primary dark:text-primary-foreground absolute right-6 min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+              <span className="text-primary dark:text-primary-foreground min-w-0 text-center text-xs font-bold uppercase">
                 {priceLabel}
               </span>
             )}
           {isOneTime &&
             !perTierPrices &&
-            plan === lastTierName &&
+            plan === activePlan &&
             priceLabel &&
             discountedPriceLabel && (
-              <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
-                <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
+              <span className="flex min-w-0 flex-col items-center gap-0.5">
+                <span className="text-foreground/60 min-w-0 text-center text-xs line-through">
                   {priceLabel}
                 </span>
-                <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap uppercase">
+                <span className="text-primary dark:text-primary-foreground min-w-0 text-center text-xs font-bold uppercase">
                   {discountedPriceLabel}
                 </span>
               </span>
             )}
-          {isAddOn && plan === lastTierName && priceLabel && !discountedPriceLabel && (
-            <span className="absolute right-6 flex items-center gap-2">
+          {isAddOn && plan === activePlan && priceLabel && !discountedPriceLabel && (
+            <span className="flex min-w-0 flex-col items-center gap-0.5">
               {setupPriceLabel && (
-                <>
-                  <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
-                    {setupPriceLabel}
-                  </span>
-                  <span className="text-foreground/40 text-xs">|</span>
-                </>
+                <span className="text-primary dark:text-primary-foreground min-w-0 text-center text-xs font-bold">
+                  {setupPriceLabel}
+                </span>
               )}
-              <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
+              <span className="text-primary dark:text-primary-foreground min-w-0 text-center text-xs font-bold">
                 {priceLabel}
               </span>
             </span>
           )}
-          {isAddOn && plan === lastTierName && priceLabel && discountedPriceLabel && (
-            <span className="absolute right-6 flex min-w-0 flex-col items-end gap-0.5">
-              <span className="text-foreground/60 min-w-0 text-xs whitespace-nowrap line-through">
+          {isAddOn && plan === activePlan && priceLabel && discountedPriceLabel && (
+            <span className="flex min-w-0 flex-col items-center gap-0.5">
+              <span className="text-foreground/60 min-w-0 text-center text-xs line-through">
                 {priceLabel}
               </span>
-              <span className="text-primary dark:text-primary-foreground min-w-0 text-xs font-bold whitespace-nowrap">
+              <span className="text-primary dark:text-primary-foreground min-w-0 text-center text-xs font-bold">
                 {discountedPriceLabel}
               </span>
             </span>
