@@ -113,10 +113,6 @@ function PricingCalculator() {
     <PricingCalculatorProvider value={contextValue}>
       <div className="flex w-full flex-col gap-8">
         <div className="flex flex-col">
-          {/* Recurring Services */}
-          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
-            Recurring Services
-          </h2>
           <HeaderCatalogPlan
             selectedPlan={selectedPlan}
             handlePlanChange={setSelectedTier}
@@ -125,12 +121,15 @@ function PricingCalculator() {
             onNextPlan={handleNextPlan}
             servicesData={servicesData}
           />
-          {/* -mt-px fusiona el borde superior con el borde inferior del header */}
-          <div className="-mt-px mb-8 rounded-b-xl border-x border-b shadow-sm">
+
+          <h2 className="text-muted-foreground mt-8 mb-3 text-xs font-bold tracking-wide uppercase">
+            Setup & Formation
+          </h2>
+          <div className="rounded-xl border shadow-sm">
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
-              <div className="overflow-clip rounded-b-xl">
+              <div className="overflow-clip rounded-xl">
                 <div className="flex flex-col">
-                  {recurringGroups.map((section) => (
+                  {setupGroups.map((section) => (
                     <OptionGroupSection
                       key={section.id}
                       section={section}
@@ -142,15 +141,14 @@ function PricingCalculator() {
             </Card>
           </div>
 
-          {/* Setup & Formation — separate visual block */}
-          <h2 className="text-muted-foreground mb-3 text-xs font-bold tracking-wide uppercase">
-            Setup & Formation
+          <h2 className="text-muted-foreground mt-8 mb-3 text-xs font-bold tracking-wide uppercase">
+            Recurring Services
           </h2>
           <div className="rounded-xl border shadow-sm">
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
-              <div className="overflow-clip rounded-xl">
+              <div className="overflow-clip rounded-b-xl">
                 <div className="flex flex-col">
-                  {setupGroups.map((section) => (
+                  {recurringGroups.map((section) => (
                     <OptionGroupSection
                       key={section.id}
                       section={section}
