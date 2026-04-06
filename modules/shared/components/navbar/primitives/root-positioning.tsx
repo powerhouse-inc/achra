@@ -10,7 +10,7 @@ export interface RootPositioningProps {
 }
 
 /**
- * Handles navbar positioning and conditional blur background
+ * Fixed outer shell for navbar layout. Transparent by default; optional backdrop blur on configured routes.
  */
 function RootPositioning({ children, routesWithBlurBackground }: RootPositioningProps) {
   const pathname = usePathname()
@@ -20,7 +20,7 @@ function RootPositioning({ children, routesWithBlurBackground }: RootPositioning
     <div
       className={cn(
         'fixed top-0 right-0 left-0 z-160 h-18 w-full p-0 sm:h-27.5 sm:pb-3',
-        hasBlurBackground ? 'sm:backdrop-blur-2xl' : 'sm:bg-background',
+        hasBlurBackground && 'sm:backdrop-blur-2xl',
       )}
     >
       {children}
