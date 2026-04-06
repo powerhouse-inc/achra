@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { type Maybe, RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/config/constants'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,
@@ -34,7 +35,13 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
   const selectedTier = useSelectedTier()
   const selectedBillingCycle = useSelectedBillingCycle()
 
-  const { recurringGroups, setupGroups, recurringGroupPrices, setupGroupPrices } = useMemo(() => {
+  const {
+    recurringGroups,
+    setupGroups,
+    recurringGroupPrices,
+    setupGroupPrices,
+    originalRecurringTotal,
+  } = useMemo(() => {
     const selected = optionGroups.filter((g) => g.isSelected)
     const activeGroupIds = new Set(selected.map((g) => g.id))
     const breakdown = getPriceBreakdown(
@@ -65,15 +72,34 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
       }),
     )
 
-    const recurringPrices = new Map<string, number>()
+    const recurringPrices = new Map<
+      string,
+      { amount: number; originalAmount: number; discountPercent: number | null }
+    >()
+    let origRecurringSum = 0
     for (const g of recurring) {
       const price = getGroupPriceFromBreakdown(breakdown, g.id, false)
-      if (price) recurringPrices.set(g.id, price.amount)
+      if (price) {
+        recurringPrices.set(g.id, {
+          amount: price.amount,
+          originalAmount: price.originalAmount,
+          discountPercent: price.discountPercent,
+        })
+        origRecurringSum += price.originalAmount
+      }
     }
-    const setupPrices = new Map<string, number>()
+    const setupPrices = new Map<
+      string,
+      { amount: number; originalAmount: number; discountPercent: number | null }
+    >()
     for (const g of setup) {
       const price = getGroupPriceFromBreakdown(breakdown, g.id, true)
-      if (price) setupPrices.set(g.id, price.amount)
+      if (price)
+        setupPrices.set(g.id, {
+          amount: price.amount,
+          originalAmount: price.originalAmount,
+          discountPercent: price.discountPercent,
+        })
     }
 
     return {
@@ -81,6 +107,7 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
       setupGroups: setup,
       recurringGroupPrices: recurringPrices,
       setupGroupPrices: setupPrices,
+      originalRecurringTotal: origRecurringSum,
     }
   }, [optionGroups, offering, selectedTier.id, selectedBillingCycle])
 
@@ -95,7 +122,7 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
           {recurringGroups.length > 0 && (
             <Summary.Provider
               sectionLabel="Recurring"
-              totalSuffix="/mo"
+              totalSuffix={BILLING_CYCLE_SUFFIXES[selectedBillingCycle]}
               groupPrices={recurringGroupPrices}
               isCustomPricing={selectedTier.isCustomPricing}
               currency={selectedTier.pricing.currency}
@@ -107,7 +134,10 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
                     <Summary.Group key={group.id} group={group} />
                   ))}
                 </Summary.Content>
-                <Summary.Total totalAmount={totals.recurringTotal} />
+                <Summary.Total
+                  totalAmount={totals.recurringTotal}
+                  originalTotalAmount={originalRecurringTotal}
+                />
               </Summary.Card>
             </Summary.Provider>
           )}
