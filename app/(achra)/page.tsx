@@ -1,8 +1,10 @@
 import { BuildNetworkSection } from '@/modules/home/components/build-network-section'
+import { FaqSection } from '@/modules/home/components/faq-section'
+import { GovernanceOperationsSection } from '@/modules/home/components/governance-operations-section'
 import { HomeHero } from '@/modules/home/components/home-hero'
 import { OperationalHubSection } from '@/modules/home/components/operational-hub-section'
+import { PowerhouseStackSection } from '@/modules/home/components/powerhouse-stack-section'
 import { WhyAchraSection } from '@/modules/home/components/why-achra-section'
-import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function HomePage() {
   return (
@@ -11,9 +13,9 @@ export default function HomePage() {
       <BuildNetworkSection />
       <OperationalHubSection />
       <WhyAchraSection />
-      <PageContent as="div">
-        <p className="text-muted-foreground text-lg">TBD</p>
-      </PageContent>
+      <GovernanceOperationsSection />
+      <PowerhouseStackSection />
+      <FaqSection />
     </main>
   )
 }
