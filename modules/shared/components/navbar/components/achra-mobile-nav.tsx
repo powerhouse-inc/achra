@@ -23,7 +23,7 @@ function AchraMobileNav() {
   }, [pathname])
 
   return (
-    <div className="flex items-center xl:hidden">
+    <div className="flex items-center lg:hidden">
       <DropdownMenu>
         <DropdownMenuTrigger
           aria-label={`Navigation menu - Current: ${activeLinkLabel}`}
