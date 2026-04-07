@@ -7,7 +7,7 @@ interface BlurTextProps {
   text?: string
   delay?: number
   className?: string
-  animateBy?: 'words' | 'letters'
+  animateBy?: 'words' | 'letters' | 'line'
   direction?: 'top' | 'bottom'
   threshold?: number
   rootMargin?: string
@@ -50,7 +50,8 @@ function BlurText({
   as: Root = 'p',
   id,
 }: BlurTextProps) {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('')
+  const elements =
+    animateBy === 'line' ? [text] : animateBy === 'words' ? text.split(' ') : text.split('')
   const [inView, setInView] = useState(false)
   const ref = useRef<HTMLElement | null>(null)
 
@@ -101,7 +102,11 @@ function BlurText({
   )
 
   return (
-    <Root ref={ref} id={id} className={`blur-text ${className} flex flex-wrap justify-center`}>
+    <Root
+      ref={ref}
+      id={id}
+      className={`blur-text ${className} ${animateBy === 'line' ? 'block text-center' : 'flex flex-wrap justify-center'}`}
+    >
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots)
 
@@ -120,7 +125,7 @@ function BlurText({
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             style={{
-              display: 'inline-block',
+              display: animateBy === 'line' ? 'block' : 'inline-block',
               willChange: 'transform, filter, opacity',
             }}
           >
