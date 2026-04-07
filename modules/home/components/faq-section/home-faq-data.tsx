@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react'
+
 export interface HomeFaqItem {
   id: string
   question: string
-  answer: string
+  answer: ReactNode
 }
 
 /** Two columns of FAQs — copy matches Framer (product name Achra for this site). */
@@ -66,8 +68,22 @@ export const HOME_FAQ_COLUMNS: HomeFaqItem[][] = [
     {
       id: 'faq-get-started',
       question: 'How do organizations, builders, and operators get started on Achra?',
-      answer:
-        'Organizations can create a network, post RFPs, and set up workstreams. Builders can register to discover funded projects and submit proposals. Operators can list their services in the marketplace and connect to resources.',
+      answer: (
+        <div className="space-y-3">
+          <p>
+            <span className="font-semibold">Organizations</span> can create a network, post RFPs,
+            and set up workstreams.
+          </p>
+          <p>
+            <span className="font-semibold">Builders</span> can register to discover funded projects
+            and submit proposals.
+          </p>
+          <p>
+            <span className="font-semibold">Operators</span> can list their services in the
+            marketplace and connect to resources.
+          </p>
+        </div>
+      ),
     },
   ],
 ]

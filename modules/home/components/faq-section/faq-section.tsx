@@ -25,9 +25,9 @@ function FaqSection() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-12 lg:gap-16">
           {HOME_FAQ_COLUMNS.map((column) => (
-            <Accordion key={column[0]?.id ?? 'col'} type="single" collapsible className="w-full">
+            <Accordion key={column[0]?.id ?? 'col'} type="multiple" className="w-full">
               {column.map((item) => (
                 <AccordionItem
                   key={item.id}
@@ -37,7 +37,7 @@ function FaqSection() {
                   <AccordionTrigger className="text-foreground items-center py-5 text-left text-[15px] font-semibold hover:no-underline data-[state=open]:pb-3 sm:text-base">
                     {item.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-[15px] leading-relaxed sm:text-base">
+                  <AccordionContent className="text-foreground/80 text-[15px] leading-relaxed sm:text-base">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
