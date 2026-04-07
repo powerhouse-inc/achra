@@ -1,23 +1,21 @@
 import {
-  ArrowLeftRight,
-  Building2,
-  ClipboardList,
-  FileText,
-  Flower2,
-  Gem,
-  Headphones,
+  AppWindow,
+  Bot,
+  ClipboardClock,
+  Currency,
+  Database,
   Landmark,
-  LayoutGrid,
-  LayoutList,
-  Leaf,
-  Link2,
   type LucideIcon,
-  Monitor,
-  Radar,
-  Radio,
-  ShieldCheck,
-  Target,
-  Users,
+  Network,
+  PiggyBank,
+  RadioTower,
+  ShieldUser,
+  Speech,
+  Sprout,
+  Vault,
+  Vote,
+  Wallet,
+  Workflow,
 } from 'lucide-react'
 import Link from 'next/link'
 import type { Route } from 'next'
@@ -32,7 +30,7 @@ interface UseCase {
   title: string
   tags: string[]
   description: ReactNode
-  note?: string
+  note?: ReactNode
   benefits: Benefit[]
 }
 
@@ -42,15 +40,20 @@ const useCasesData: UseCase[] = [
     tags: ['Network Organizations', 'Open Source'],
     description: (
       <>
-        Global networks like <OrgAnchor href="https://arbitrum.io">Arbitrum</OrgAnchor> and{' '}
+        Global networks like <OrgAnchor href="https://arbitrum.foundation">Arbitrum</OrgAnchor> and{' '}
         <OrgAnchor href="https://sky.money">Sky</OrgAnchor> coordinate teams, grants, and programs
         across time zones and jurisdictions.
       </>
     ),
-    note: 'Achra grew out of work with Sky and runs there today. The same platform supports other distributed teams.',
+    note: (
+      <>
+        <p>Achra grew out of work with Sky and runs there today.</p>
+        <p>The same platform supports other distributed teams.</p>
+      </>
+    ),
     benefits: [
       {
-        icon: ShieldCheck,
+        icon: Currency,
         text: (
           <>
             <strong>Coordinate governance</strong>, funding, and operations through shared
@@ -59,7 +62,7 @@ const useCasesData: UseCase[] = [
         ),
       },
       {
-        icon: LayoutList,
+        icon: Vote,
         text: (
           <>
             Align contributors and sub-organizations under one{' '}
@@ -68,7 +71,7 @@ const useCasesData: UseCase[] = [
         ),
       },
       {
-        icon: Target,
+        icon: ShieldUser,
         text: (
           <>
             <strong>Scale participation</strong> while maintaining clarity and compliance.
@@ -91,11 +94,11 @@ const useCasesData: UseCase[] = [
     ),
     benefits: [
       {
-        icon: ClipboardList,
+        icon: Wallet,
         text: 'Manage budgets, payments, and contributors in one public ledger.',
       },
       {
-        icon: Leaf,
+        icon: PiggyBank,
         text: 'Fund long-term maintenance without privatizing the codebase.',
       },
       {
@@ -117,15 +120,15 @@ const useCasesData: UseCase[] = [
     ),
     benefits: [
       {
-        icon: Building2,
+        icon: Vault,
         text: 'Manage treasuries, initiatives, and elections in open view.',
       },
       {
-        icon: ArrowLeftRight,
+        icon: Workflow,
         text: 'Coordinate cross-border funding and policy through accountable workflows.',
       },
       {
-        icon: Headphones,
+        icon: Speech,
         text: 'Enable citizens or members to engage directly in decision-making.',
       },
     ],
@@ -144,15 +147,15 @@ const useCasesData: UseCase[] = [
     ),
     benefits: [
       {
-        icon: Gem,
+        icon: Currency,
         text: 'Pool funding and revenue transparently across members and projects.',
       },
       {
-        icon: LayoutGrid,
+        icon: Bot,
         text: 'Automate rights, payments, and profit-sharing within one platform.',
       },
       {
-        icon: Flower2,
+        icon: Sprout,
         text: 'Build community-led creative networks that sustain themselves over time.',
       },
     ],
@@ -171,15 +174,15 @@ const useCasesData: UseCase[] = [
     ),
     benefits: [
       {
-        icon: Link2,
+        icon: ClipboardClock,
         text: 'Track supply chains, donations, and outcomes in real time.',
       },
       {
-        icon: FileText,
+        icon: Database,
         text: 'Share transparent data with customers and supporters.',
       },
       {
-        icon: Radar,
+        icon: ShieldUser,
         text: 'Reinforce trust and community ownership in every transaction.',
       },
     ],
@@ -199,15 +202,15 @@ const useCasesData: UseCase[] = [
     ),
     benefits: [
       {
-        icon: Users,
+        icon: Network,
         text: 'Coordinate proposals, decisions, and outcomes transparently across members.',
       },
       {
-        icon: Monitor,
+        icon: AppWindow,
         text: 'Manage shared finances and documentation in one clear system.',
       },
       {
-        icon: Radio,
+        icon: RadioTower,
         text: 'Stay decentralized while maintaining the benefits of a unified organization.',
       },
     ],

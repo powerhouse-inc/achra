@@ -59,15 +59,14 @@ function UseCaseCard({ useCase }: UseCaseCardProps) {
             )
           })}
         </div>
-
-        <CardTitle className="text-lg font-bold tracking-tight sm:text-xl">
-          {useCase.title}
-        </CardTitle>
       </CardHeader>
 
-      <CardContent className="flex flex-col p-0">
+      <CardContent className="flex flex-col gap-6 p-0">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div className="flex flex-col gap-3">
+            <CardTitle className="text-lg font-bold tracking-tight sm:text-xl">
+              {useCase.title}
+            </CardTitle>
             <p className="text-sm leading-relaxed sm:text-base">{useCase.description}</p>
           </div>
 
@@ -76,10 +75,10 @@ function UseCaseCard({ useCase }: UseCaseCardProps) {
               const Icon = benefit.icon
               return (
                 <div key={Icon.displayName} className="flex items-start gap-3">
-                  <div className="bg-primary/10 flex size-10 shrink-0 items-center justify-center rounded-xl">
+                  <div className="bg-primary/10 flex size-8 shrink-0 items-center justify-center rounded-lg">
                     <Icon className="text-primary size-5" />
                   </div>
-                  <p className="text-sm leading-relaxed sm:text-base">{benefit.text}</p>
+                  <p className="text-foreground/80 text-sm">{benefit.text}</p>
                 </div>
               )
             })}
@@ -87,7 +86,7 @@ function UseCaseCard({ useCase }: UseCaseCardProps) {
         </div>
 
         {useCase.note && (
-          <p className="text-muted-foreground mt-2 text-sm leading-relaxed">{useCase.note}</p>
+          <div className="text-muted-foreground mt-2 text-sm leading-relaxed">{useCase.note}</div>
         )}
       </CardContent>
     </Card>

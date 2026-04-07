@@ -15,7 +15,7 @@ export default function CasesPage() {
           <h2 id="use-cases-heading" className="text-2xl font-semibold tracking-tight">
             Use Cases
           </h2>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
             {useCasesData.map((useCase) => (
               <UseCaseCard key={useCase.title} useCase={useCase} />
             ))}
