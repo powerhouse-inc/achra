@@ -112,10 +112,11 @@ const useCasesData: UseCase[] = [
     tags: ['Network States', 'Public Goods'],
     description: (
       <>
-        New civic networks like <OrgAnchor href="https://volteuropa.org">Volt</OrgAnchor> and
-        experiments like <OrgAnchor href="https://thenetworkstate.com">The Network State</OrgAnchor>{' '}
-        aim for transparent, participatory governance. Achra helps them budget programs, disburse
-        funds, manage roles and vendors, publish records, and track outcomes.
+        New civic networks like <OrgAnchor href="https://www.volt.eu">Volt</OrgAnchor> and
+        experiments like{' '}
+        <OrgAnchor href="https://www.thenetworkstate.com">The Network State</OrgAnchor> aim for
+        transparent, participatory governance. Achra helps them budget programs, disburse funds,
+        manage roles and vendors, publish records, and track outcomes.
       </>
     ),
     benefits: [
@@ -140,8 +141,8 @@ const useCasesData: UseCase[] = [
       <>
         Creators and cultural projects sustain their practice through patronage and community
         funding. Platforms like <OrgAnchor href="https://zora.co">Zora</OrgAnchor> and{' '}
-        <OrgAnchor href="https://patreon.com">Patreon</OrgAnchor> let communities back artists in
-        public view. Achra lets teams work together with shared ownership in a single transparent
+        <OrgAnchor href="https://www.patreon.com">Patreon</OrgAnchor> let communities back artists
+        in public view. Achra lets teams work together with shared ownership in a single transparent
         workflow, from planning through payment.
       </>
     ),
@@ -166,8 +167,8 @@ const useCasesData: UseCase[] = [
     description: (
       <>
         Purpose-driven groups like <OrgAnchor href="https://mossy.earth">Mossy Earth</OrgAnchor> and{' '}
-        <OrgAnchor href="https://givedirectly.org">GiveDirectly</OrgAnchor> use open reporting to
-        align mission with accountability. Achra ties donations, budgets, supply-chain data, and
+        <OrgAnchor href="https://www.givedirectly.org">GiveDirectly</OrgAnchor> use open reporting
+        to align mission with accountability. Achra ties donations, budgets, supply-chain data, and
         outcome tracking into one system so supporters can see where money goes and what it
         achieves.
       </>
