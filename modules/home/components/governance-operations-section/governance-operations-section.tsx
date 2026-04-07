@@ -1,17 +1,32 @@
+import {
+  BadgeDollarSign,
+  BrainCog,
+  Compass,
+  Earth,
+  FileCodeCorner,
+  Handshake,
+  Network,
+  Scale,
+  ShieldUser,
+  SquareKanban,
+  Users,
+  Vote,
+} from 'lucide-react'
+
 import { GovernanceFeatureRow } from './governance-feature-row'
 
 function GovernanceOperationsSection() {
   return (
     <section className="w-full py-16 sm:py-20" aria-labelledby="governance-operations-heading">
-      <div className="container flex flex-col gap-16 lg:gap-20">
-        <header className="mx-auto flex max-w-[550px] flex-col gap-6 text-center">
+      <div className="container flex flex-col gap-8 lg:gap-20">
+        <header className="mx-auto flex max-w-[550px] flex-col gap-4 text-center">
           <h2
             id="governance-operations-heading"
             className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             Governance &amp; Operations
           </h2>
-          <p className="text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg">
+          <p className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Move beyond outsourcing and unlock full autonomy. Run your entire network organization
             through Achra.
           </p>
@@ -30,48 +45,28 @@ function GovernanceOperationsSection() {
             bulletItems={[
               {
                 id: 'programmable-governance',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">Programmable governance</span>{' '}
-                    automates approvals and payouts.
-                  </>
-                ),
+                icon: BrainCog,
+                content: 'Programmable governance automates approvals and payouts.',
               },
               {
                 id: 'proposals-voting',
-                content: (
-                  <>
-                    Supports <span className="text-foreground font-medium">proposals, voting,</span>{' '}
-                    and <span className="text-foreground font-medium">rules.</span>
-                  </>
-                ),
+                icon: Vote,
+                content: 'Supports proposals, voting, and rules.',
               },
               {
                 id: 'scoped-authority',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">Scoped authority</span> enables
-                    safe, limited delegation.
-                  </>
-                ),
+                icon: ShieldUser,
+                content: 'Scoped authority enables safe, limited delegation.',
               },
               {
                 id: 'logged-auditable',
-                content: (
-                  <>
-                    Actions are{' '}
-                    <span className="text-foreground font-medium">logged and auditable.</span>
-                  </>
-                ),
+                icon: FileCodeCorner,
+                content: 'Actions are logged and auditable.',
               },
               {
                 id: 'atlas-workflows',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">Atlas</span> turns contracts into{' '}
-                    <span className="text-foreground font-medium">self-running workflows.</span>
-                  </>
-                ),
+                icon: Earth,
+                content: 'Atlas turns contracts into self-running workflows.',
               },
             ]}
           />
@@ -88,30 +83,18 @@ function GovernanceOperationsSection() {
             bulletItems={[
               {
                 id: 'legal-ops',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">Legal Ops</span> handles setup,
-                    contracts, and IP protection.
-                  </>
-                ),
+                icon: Scale,
+                content: 'Legal Ops handles setup, contracts, and IP protection.',
               },
               {
                 id: 'finance-ops',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">Finance Ops</span> automates
-                    budgets, payouts, and reporting.
-                  </>
-                ),
+                icon: BadgeDollarSign,
+                content: 'Finance Ops automates budgets, payouts, and reporting.',
               },
               {
                 id: 'people-ops',
-                content: (
-                  <>
-                    <span className="text-foreground font-medium">People Ops</span> streamlines
-                    hiring and onboarding.
-                  </>
-                ),
+                icon: Users,
+                content: 'People Ops streamlines hiring and onboarding.',
               },
             ]}
           />
@@ -125,26 +108,30 @@ function GovernanceOperationsSection() {
             labelStart="Integrated"
             labelEnd="Team Management"
             description="Whether you're an individual contributor, a dev shop, or a larger network participant, Achra gives you a dedicated control center to run your work, connect services, and manage operations in one place."
-            bulletClassName="font-light"
             bulletItems={[
               {
                 id: 'core-tools',
+                icon: Scale,
                 content: 'Operate with confidence with core tools for any team size.',
               },
               {
                 id: 'runway-balance',
+                icon: SquareKanban,
                 content: 'Manage your runway track balance, income, and burn in real time.',
               },
               {
                 id: 'support-services',
+                icon: Handshake,
                 content: 'Support services connect to essential marketplace tools.',
               },
               {
                 id: 'unified-control',
+                icon: Network,
                 content: 'Unified control manage all operations from one place.',
               },
               {
                 id: 'scalable-setup',
+                icon: Compass,
                 content: 'Scalable setup built for individuals, teams, and networks alike.',
               },
             ]}
