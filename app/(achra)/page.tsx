@@ -9,7 +9,7 @@ import { WhyAchraSection } from '@/modules/home/components/why-achra-section'
 
 export default function HomePage() {
   return (
-    <main className="-mt-18 sm:-mt-24.5">
+    <main className="-mt-18 bg-[#faf9f7] sm:-mt-24.5">
       <HomeHero />
       <BuildNetworkSection />
       <OperationalHubSection />

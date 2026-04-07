@@ -1,9 +1,9 @@
 /**
- * True when the current route is the Achra marketing homepage (`app/(achra)/page`).
- * Used to force light theme and hide the theme toggle there.
+ * True on Achra marketing routes that always use light theme and hide the navbar theme toggle:
+ * homepage (`/`) and cases (`/cases`).
  */
 function isAchraMarketingHomePath(pathname: string | null): boolean {
-  return pathname === '/'
+  return pathname === '/' || pathname === '/cases'
 }
 
 export { isAchraMarketingHomePath }

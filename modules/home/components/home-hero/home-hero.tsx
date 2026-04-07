@@ -15,10 +15,10 @@ const HERO_VIDEO = '/home/hero/Achrabg2.mp4'
 function HomeHero() {
   return (
     <section
-      className="relative flex min-h-[80vh] w-full items-center justify-center overflow-hidden bg-[rgb(250,249,247)] px-6 py-10 sm:px-12 sm:py-[30px]"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-x-clip bg-[rgb(250,249,247)] px-6 py-10 sm:px-12 sm:py-[30px]"
       aria-labelledby="home-hero-heading"
     >
-      <div className="absolute inset-0 z-0 overflow-visible" aria-hidden>
+      <div className="absolute inset-0 -bottom-20 z-0 -mt-24 overflow-visible" aria-hidden>
         <div
           className="pointer-events-none absolute inset-0 -top-24 bottom-0 bg-cover bg-center bg-no-repeat sm:-top-28"
           style={{ backgroundImage: `url(${HERO_BG})` }}

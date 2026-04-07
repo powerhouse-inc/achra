@@ -31,7 +31,7 @@ const pinkCtaClass =
 function BuildNetworkSection() {
   return (
     <section
-      className="w-full bg-[rgb(250,249,247)] px-6 py-16 sm:px-10 sm:py-20 lg:py-24"
+      className="relative z-10 w-full px-6 pb-16 sm:px-10 sm:pb-20 lg:pb-24"
       aria-labelledby="build-network-heading"
     >
       <div className="mx-auto max-w-[1200px]">

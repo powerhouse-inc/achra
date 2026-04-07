@@ -19,6 +19,8 @@ import {
   Target,
   Users,
 } from 'lucide-react'
+import Link from 'next/link'
+import type { Route } from 'next'
 import type { ReactNode } from 'react'
 
 interface Benefit {
@@ -212,16 +214,17 @@ const useCasesData: UseCase[] = [
   },
 ]
 
-function OrgAnchor({ href, children }: { href: string; children: ReactNode }) {
+function OrgAnchor({ href, children }: { href: Route; children: ReactNode }) {
   return (
-    <a
+    <Link
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover:text-foreground/80 font-medium underline underline-offset-2"
+      prefetch={false}
+      className="text-primary hover:text-primary/80 underline underline-offset-2"
     >
       {children}
-    </a>
+    </Link>
   )
 }
 

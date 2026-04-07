@@ -4,6 +4,7 @@ import { cn } from '@/shared/lib/utils'
 export default function AchraLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      {/* TODO: exclude / nad /cases from the bg gradient */}
       {/* Global page background gradient */}
       <div
         className={cn(
