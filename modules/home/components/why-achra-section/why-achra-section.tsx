@@ -8,19 +8,16 @@ import type { Route } from 'next'
 
 function WhyAchraSection() {
   return (
-    <section
-      className="w-full bg-[rgb(250,249,247)] px-6 py-14 sm:px-10 sm:py-16 lg:py-20"
-      aria-labelledby="why-achra-heading"
-    >
-      <div className="mx-auto max-w-[1200px]">
+    <section className="w-full py-14 sm:py-16 lg:py-20" aria-labelledby="why-achra-heading">
+      <div className="container">
         <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
           <h2
             id="why-achra-heading"
-            className="text-3xl font-semibold tracking-tight text-balance text-[#1a1a1a] sm:text-4xl"
+            className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             Why Achra
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-pretty text-[#666666] sm:text-lg">
+          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Run your entire network organization through Achra
           </p>
         </header>

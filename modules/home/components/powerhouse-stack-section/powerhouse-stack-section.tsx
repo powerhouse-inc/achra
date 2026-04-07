@@ -6,7 +6,7 @@ import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 
 const descriptionClass =
-  'text-[15px] font-normal leading-[150%] tracking-[-0.01em] text-[rgb(55,55,55)] sm:text-base'
+  'text-muted-foreground text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
 
 function VetraMark({ className }: { className?: string }) {
   return (
@@ -14,7 +14,7 @@ function VetraMark({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn('size-6 shrink-0 text-[rgb(10,10,10)]', className)}
+      className={cn('text-foreground size-6 shrink-0', className)}
       aria-hidden
     >
       <rect x="2" y="2" width="9" height="9" rx="2.25" fill="currentColor" />
@@ -46,19 +46,16 @@ function PowerhouseIsotype({ className }: { className?: string }) {
 
 function PowerhouseStackSection() {
   return (
-    <section
-      className="w-full bg-[rgb(250,249,247)] px-6 py-16 sm:px-10 sm:py-20"
-      aria-labelledby="powerhouse-stack-heading"
-    >
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-10 lg:gap-12">
+    <section className="w-full py-16 sm:py-20" aria-labelledby="powerhouse-stack-heading">
+      <div className="container flex flex-col gap-10 lg:gap-12">
         <header className="mx-auto flex max-w-[550px] flex-col gap-6 text-center">
           <h2
             id="powerhouse-stack-heading"
-            className="text-3xl font-semibold tracking-tight text-balance text-[#1a1a1a] sm:text-4xl"
+            className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             The Powerhouse Stack
           </h2>
-          <p className="text-base leading-relaxed text-pretty text-[#666666] sm:text-lg">
+          <p className="text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg">
             Tools that make distributed work simple and private.
           </p>
         </header>
@@ -67,44 +64,30 @@ function PowerhouseStackSection() {
           {/* Connect */}
           <article
             className={cn(
-              'flex min-h-0 flex-col overflow-hidden rounded-2xl border border-[rgb(230,220,250)] bg-[rgb(247,242,255)]',
-              'shadow-[0_1px_0_rgba(0,0,0,0.04)] md:min-h-[520px]',
+              'border-primary/20 bg-primary/5 flex flex-col overflow-hidden rounded-2xl border',
+              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10 md:min-h-[520px]',
             )}
           >
-            <div className="flex flex-col gap-4 px-8 pt-10 pb-2 sm:px-10 sm:pt-10">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2.5">
-                <Globe
-                  className="size-5 shrink-0 text-[rgb(122,59,255)]"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-                <span className="text-base font-semibold text-[rgb(122,59,255)] sm:text-[17px]">
-                  Connect
-                </span>
+                <Globe className="text-primary size-5 shrink-0" strokeWidth={2} aria-hidden />
+                <span className="text-primary text-base font-semibold sm:text-[17px]">Connect</span>
               </div>
               <p className={descriptionClass}>
                 Run work the same way every time, clear forms, shared files, private sync, and
                 ready-made templates.
               </p>
             </div>
-            <div className="relative mt-auto flex min-h-0 flex-1 flex-col px-5 pt-4 pb-5 sm:px-8 sm:pb-6">
-              <div
-                className={cn(
-                  'flex min-h-[220px] flex-1 flex-col overflow-hidden rounded-2xl bg-white',
-                  'shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.06]',
-                  'sm:min-h-[260px]',
-                )}
-              >
-                <div className="relative min-h-[200px] flex-1 overflow-hidden sm:min-h-[240px]">
-                  <Image
-                    src="/home/powerhouse-stack/connect-preview.png"
-                    alt="Connect workspace preview with drives and templates"
-                    width={1113}
-                    height={1239}
-                    className="h-full w-full object-cover object-top"
-                    sizes="(min-width: 768px) 45vw, 100vw"
-                  />
-                </div>
+            <div className="relative mt-auto min-h-[200px] flex-1 pt-6 sm:min-h-[260px]">
+              <div className="relative h-full overflow-hidden rounded-t-3xl">
+                <Image
+                  src="/home/powerhouse-stack/connect-preview.png"
+                  alt="Connect workspace preview with drives and templates"
+                  width={1113}
+                  height={1239}
+                  className="h-full w-full object-cover object-top"
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                />
               </div>
             </div>
           </article>
@@ -112,13 +95,13 @@ function PowerhouseStackSection() {
           {/* Renown */}
           <article
             className={cn(
-              'flex min-h-0 flex-col overflow-hidden rounded-2xl border border-[rgb(200,230,245)] bg-[rgb(239,248,255)]',
-              'shadow-[0_1px_0_rgba(0,0,0,0.04)] md:min-h-[520px]',
+              'flex flex-col overflow-hidden rounded-2xl border border-[rgb(200,230,245)] bg-[rgb(239,248,255)]',
+              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10 md:min-h-[520px]',
             )}
           >
-            <div className="flex flex-col gap-4 px-8 pt-10 pb-2 sm:px-10 sm:pt-10">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2.5">
-                <span className="text-base font-semibold text-[rgb(30,30,30)] sm:text-[17px]">
+                <span className="text-foreground text-base font-semibold sm:text-[17px]">
                   Renown
                 </span>
                 <Sparkles
@@ -132,24 +115,16 @@ function PowerhouseStackSection() {
                 collaborate with confidence.
               </p>
             </div>
-            <div className="relative mt-auto flex min-h-0 flex-1 flex-col px-5 pt-4 pb-5 sm:px-8 sm:pb-6">
-              <div
-                className={cn(
-                  'flex min-h-[220px] flex-1 flex-col overflow-hidden rounded-2xl bg-white',
-                  'shadow-[0_2px_12px_-4px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.06]',
-                  'sm:min-h-[260px]',
-                )}
-              >
-                <div className="relative min-h-[200px] flex-1 overflow-hidden sm:min-h-[240px]">
-                  <Image
-                    src="/home/powerhouse-stack/renown-preview.png"
-                    alt="Renown contributor history preview"
-                    width={1228}
-                    height={1456}
-                    className="h-full w-full object-cover object-top"
-                    sizes="(min-width: 768px) 45vw, 100vw"
-                  />
-                </div>
+            <div className="relative mt-auto min-h-[200px] flex-1 pt-6 sm:min-h-[260px]">
+              <div className="relative h-full overflow-hidden rounded-t-3xl">
+                <Image
+                  src="/home/powerhouse-stack/renown-preview.png"
+                  alt="Renown contributor history preview"
+                  width={1228}
+                  height={1456}
+                  className="h-full w-full object-cover object-top"
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                />
               </div>
             </div>
           </article>
@@ -157,13 +132,13 @@ function PowerhouseStackSection() {
           {/* VETRA */}
           <article
             className={cn(
-              'flex flex-col gap-5 rounded-2xl border border-[rgb(180,235,210)] bg-[rgb(222,255,238)] p-8 sm:gap-6 sm:p-10',
+              'flex flex-col gap-6 rounded-2xl border border-[rgb(180,235,210)] bg-[rgb(222,255,238)] p-8 sm:p-10',
               'shadow-[0_1px_0_rgba(0,0,0,0.04)]',
             )}
           >
             <div className="flex items-center gap-2.5">
               <VetraMark />
-              <span className="text-base font-bold tracking-wide text-[rgb(10,10,10)] sm:text-lg">
+              <span className="text-foreground text-base font-bold tracking-wide sm:text-lg">
                 VETRA
               </span>
             </div>
@@ -197,11 +172,7 @@ function PowerhouseStackSection() {
               className="absolute inset-0 size-full object-cover"
               sizes="(min-width: 768px) 50vw, 100vw"
             />
-            <div
-              className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent"
-              aria-hidden
-            />
-            <div className="relative z-1 flex flex-col gap-5 p-8 sm:gap-6 sm:p-10">
+            <div className="relative z-1 flex flex-col gap-6 p-8 sm:p-10">
               <div className="flex items-center gap-3">
                 <PowerhouseIsotype className="size-7 sm:size-8" />
                 <span className="text-sm font-bold tracking-[0.12em] text-white sm:text-base">
@@ -216,7 +187,7 @@ function PowerhouseStackSection() {
                   asChild
                   size="lg"
                   className={cn(
-                    'h-10 rounded-lg border-0 bg-white px-5 text-sm font-medium text-[rgb(10,10,10)]',
+                    'text-foreground h-10 rounded-lg border-0 bg-white px-5 text-sm font-medium',
                     'transition-opacity hover:bg-white/95 hover:opacity-95',
                   )}
                 >

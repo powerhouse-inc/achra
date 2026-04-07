@@ -8,8 +8,8 @@ import type { Route } from 'next'
 const cardShell =
   'relative flex flex-col overflow-hidden rounded-2xl bg-white p-8 shadow-[0_1px_3px_rgba(0,0,0,0.04)] ring-1 ring-black/[0.06]'
 
-const titleClass = 'text-lg font-semibold tracking-tight text-[#1a1a1a]'
-const bodyClass = 'text-base leading-relaxed text-[#666666]'
+const titleClass = 'text-foreground text-lg font-semibold tracking-tight'
+const bodyClass = 'text-muted-foreground text-base leading-relaxed'
 
 interface WhyAchraTextCardProps {
   title: string
@@ -85,7 +85,7 @@ function WhyAchraCtaCard({ description, href, linkLabel, className }: WhyAchraCt
         <p className={bodyClass}>{description}</p>
         <Link
           href={href}
-          className="inline-flex w-fit items-center gap-1 text-sm font-medium text-[#7c3aed] transition-colors hover:text-[#6d28d9]"
+          className="text-primary hover:text-primary/85 inline-flex w-fit items-center gap-1 text-sm font-medium transition-colors"
         >
           {linkLabel}
           <span aria-hidden className="text-base leading-none">
@@ -111,7 +111,7 @@ function WhyAchraWorkflowCard({ title, description, className }: WhyAchraWorkflo
         className,
       )}
     >
-      <div className="relative aspect-[1128/400] w-full bg-[#f4f4f5] sm:aspect-[1128/360]">
+      <div className="bg-secondary relative aspect-[1128/400] w-full sm:aspect-[1128/360]">
         <Image
           src="/home/why-achra/workflows.png"
           alt="Workflow templates: connected steps from RFP to payouts"

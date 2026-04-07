@@ -10,17 +10,17 @@ import { OrgTabCollage } from './org-tab-collage'
 import { TabCompositePanel } from './tab-composite-panel'
 
 const triggerClassName = cn(
-  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-[rgb(229,229,229)] bg-transparent p-0 py-6 text-left shadow-none',
+  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-border bg-transparent p-0 py-6 text-left shadow-none',
   'focus-visible:ring-[3px] focus-visible:ring-[rgb(5,130,255)]/35 focus-visible:outline-none',
-  'data-[state=active]:rounded-xl data-[state=active]:border-b-transparent data-[state=active]:bg-[rgb(240,240,240)] data-[state=active]:px-4 data-[state=active]:py-5 data-[state=active]:-mx-1 data-[state=active]:shadow-none',
+  'data-[state=active]:rounded-xl data-[state=active]:border-b-transparent data-[state=active]:bg-secondary data-[state=active]:px-4 data-[state=active]:py-5 data-[state=active]:-mx-1 data-[state=active]:shadow-none',
   'data-[state=inactive]:cursor-pointer data-[state=inactive]:opacity-100',
 )
 
 const inactiveTitleClass =
-  'text-[15px] font-medium text-[rgb(156,156,156)] group-data-[state=active]:font-semibold group-data-[state=active]:text-[rgb(10,10,10)]'
+  'text-[15px] font-medium text-muted-foreground group-data-[state=active]:font-semibold group-data-[state=active]:text-foreground'
 
 const buildersActiveTitleClass =
-  'text-[15px] font-medium text-[rgb(156,156,156)] group-data-[state=active]:font-semibold group-data-[state=active]:text-[rgb(122,59,255)]'
+  'text-[15px] font-medium text-muted-foreground group-data-[state=active]:font-semibold group-data-[state=active]:text-primary'
 
 const blueCtaClass =
   'mt-5 h-10 rounded-lg border-0 bg-[rgb(5,130,255)] px-5 text-sm font-medium text-white hover:bg-[rgb(5,130,255)]/90'
@@ -31,18 +31,18 @@ const pinkCtaClass =
 function BuildNetworkSection() {
   return (
     <section
-      className="relative z-10 w-full px-6 pb-16 sm:px-10 sm:pb-20 lg:pb-24"
+      className="relative z-10 w-full pb-16 sm:pb-20 lg:pb-24"
       aria-labelledby="build-network-heading"
     >
-      <div className="mx-auto max-w-[1200px]">
+      <div className="container">
         <header className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
           <h2
             id="build-network-heading"
-            className="text-3xl font-semibold tracking-tight text-balance text-[rgb(10,10,10)] sm:text-4xl"
+            className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             Build your Network with Achra
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-pretty text-[rgb(117,117,117)]">
+          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
             Powering the next generation of networked organizations.
           </p>
         </header>
@@ -61,7 +61,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Organizations</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-sm leading-relaxed text-[rgb(117,117,117)]">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Set clear objectives for your network organization. Receive structured proposals
                   from the best contributor teams to deliver on your roadmap.
                 </p>
@@ -79,7 +79,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', buildersActiveTitleClass)}>For Builders</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-sm leading-relaxed text-[rgb(117,117,117)]">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Discover active projects and roadmaps from leading network organizations. Focus on
                   building with built-in operational support.
                 </p>
@@ -97,7 +97,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Operators</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-sm leading-relaxed text-[rgb(117,117,117)]">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Provide essential services for teams from legal and accounting to governance.
                   Partner with teams building across the ecosystem.
                 </p>

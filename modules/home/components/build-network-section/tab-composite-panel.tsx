@@ -23,7 +23,7 @@ function TabCompositePanel({
   return (
     <div
       className={cn(
-        'relative mx-auto w-full max-w-[min(100%,504px)] overflow-hidden rounded-xl bg-[rgb(240,240,240)]',
+        'bg-secondary relative mx-auto w-full max-w-[min(100%,504px)] overflow-hidden rounded-xl',
         'shadow-[0px_16px_32px_rgba(0,0,0,0.08),0px_8px_16px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.08]',
         className,
       )}

@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { cn } from '@/shared/lib/utils'
 import type { ReactNode } from 'react'
 
-const bodyClass = 'text-base leading-relaxed text-pretty text-[rgb(87,87,87)] sm:text-lg'
-const labelClass = 'text-base font-medium text-[rgb(10,10,10)] sm:text-lg'
+const bodyClass = 'text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg'
+const labelClass = 'text-foreground text-base font-medium sm:text-lg'
 
 interface GovernanceBulletItem {
   id: string
@@ -65,7 +65,7 @@ function GovernanceFeatureRow({
           <li
             key={item.id}
             className={cn(
-              'relative pl-5 text-base leading-relaxed text-[rgb(87,87,87)] before:absolute before:top-[0.55em] before:left-0 before:size-1 before:rounded-full before:bg-[rgb(10,10,10)]/30 before:content-[""]',
+              'text-muted-foreground before:bg-foreground/30 relative pl-5 text-base leading-relaxed before:absolute before:top-[0.55em] before:left-0 before:size-1 before:rounded-full before:content-[""]',
               bulletClassName,
             )}
           >

@@ -2,19 +2,16 @@ import { GovernanceFeatureRow } from './governance-feature-row'
 
 function GovernanceOperationsSection() {
   return (
-    <section
-      className="w-full bg-[rgb(250,249,247)] px-6 py-16 sm:px-10 sm:py-20"
-      aria-labelledby="governance-operations-heading"
-    >
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-16 lg:gap-20">
+    <section className="w-full py-16 sm:py-20" aria-labelledby="governance-operations-heading">
+      <div className="container flex flex-col gap-16 lg:gap-20">
         <header className="mx-auto flex max-w-[550px] flex-col gap-6 text-center">
           <h2
             id="governance-operations-heading"
-            className="text-3xl font-semibold tracking-tight text-balance text-[#1a1a1a] sm:text-4xl"
+            className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             Governance &amp; Operations
           </h2>
-          <p className="text-base leading-relaxed text-pretty text-[#666666] sm:text-lg">
+          <p className="text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg">
             Move beyond outsourcing and unlock full autonomy. Run your entire network organization
             through Achra.
           </p>
@@ -35,9 +32,7 @@ function GovernanceOperationsSection() {
                 id: 'programmable-governance',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">
-                      Programmable governance
-                    </span>{' '}
+                    <span className="text-foreground font-medium">Programmable governance</span>{' '}
                     automates approvals and payouts.
                   </>
                 ),
@@ -46,9 +41,8 @@ function GovernanceOperationsSection() {
                 id: 'proposals-voting',
                 content: (
                   <>
-                    Supports{' '}
-                    <span className="font-medium text-[rgb(10,10,10)]">proposals, voting,</span> and{' '}
-                    <span className="font-medium text-[rgb(10,10,10)]">rules.</span>
+                    Supports <span className="text-foreground font-medium">proposals, voting,</span>{' '}
+                    and <span className="text-foreground font-medium">rules.</span>
                   </>
                 ),
               },
@@ -56,8 +50,8 @@ function GovernanceOperationsSection() {
                 id: 'scoped-authority',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">Scoped authority</span>{' '}
-                    enables safe, limited delegation.
+                    <span className="text-foreground font-medium">Scoped authority</span> enables
+                    safe, limited delegation.
                   </>
                 ),
               },
@@ -66,7 +60,7 @@ function GovernanceOperationsSection() {
                 content: (
                   <>
                     Actions are{' '}
-                    <span className="font-medium text-[rgb(10,10,10)]">logged and auditable.</span>
+                    <span className="text-foreground font-medium">logged and auditable.</span>
                   </>
                 ),
               },
@@ -74,11 +68,8 @@ function GovernanceOperationsSection() {
                 id: 'atlas-workflows',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">Atlas</span> turns contracts
-                    into{' '}
-                    <span className="font-medium text-[rgb(10,10,10)]">
-                      self-running workflows.
-                    </span>
+                    <span className="text-foreground font-medium">Atlas</span> turns contracts into{' '}
+                    <span className="text-foreground font-medium">self-running workflows.</span>
                   </>
                 ),
               },
@@ -99,8 +90,8 @@ function GovernanceOperationsSection() {
                 id: 'legal-ops',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">Legal Ops</span> handles
-                    setup, contracts, and IP protection.
+                    <span className="text-foreground font-medium">Legal Ops</span> handles setup,
+                    contracts, and IP protection.
                   </>
                 ),
               },
@@ -108,7 +99,7 @@ function GovernanceOperationsSection() {
                 id: 'finance-ops',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">Finance Ops</span> automates
+                    <span className="text-foreground font-medium">Finance Ops</span> automates
                     budgets, payouts, and reporting.
                   </>
                 ),
@@ -117,7 +108,7 @@ function GovernanceOperationsSection() {
                 id: 'people-ops',
                 content: (
                   <>
-                    <span className="font-medium text-[rgb(10,10,10)]">People Ops</span> streamlines
+                    <span className="text-foreground font-medium">People Ops</span> streamlines
                     hiring and onboarding.
                   </>
                 ),

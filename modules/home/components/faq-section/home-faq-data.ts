@@ -8,72 +8,66 @@ export interface HomeFaqItem {
 export const HOME_FAQ_COLUMNS: HomeFaqItem[][] = [
   [
     {
-      id: 'faq-legal-compliance',
-      question: 'How does Achra handle legal and compliance?',
+      id: 'faq-scale',
+      question: 'How does Achra help network organizations scale?',
       answer:
-        'Achra provides a framework that integrates legal and compliance requirements directly into the operational workflow. This includes automated KYC/AML checks, smart contract-based governance rules, and tools for generating legally binding documents. By embedding these processes, Achra ensures that all activities on the platform adhere to relevant regulations, reducing the risk of non-compliance.',
+        'Achra lowers the costs of coordination. It connects organizations, builders, and operators in a shared system where governance, payments, and services are integrated. By structuring procurement, automating execution, and aligning incentives, network organizations can grow across borders without the friction of traditional firms.',
     },
     {
-      id: 'faq-on-off-chain',
-      question: 'Can Achra be used for both on-chain and off-chain activities?',
+      id: 'faq-governance-execution',
+      question: 'How does Achra connect governance with day-to-day execution?',
       answer:
-        'Yes, Achra is designed to bridge the gap between on-chain and off-chain operations. It supports on-chain governance and transactions while also providing tools for managing off-chain tasks like legal documentation, payroll, and project management. This hybrid approach allows organizations to leverage the benefits of blockchain technology while maintaining the necessary connections to traditional business processes.',
+        'Governance decisions are not left onchain or in the forums. Achra integrates permissions and approvals from governance directly to into workflows, payouts, and records. Atlas powers this layer so that proposals, budgets, and milestones can move from decision to execution automatically.',
     },
     {
-      id: 'faq-blockchain-networks',
-      question: 'Is Achra compatible with existing blockchain networks?',
+      id: 'faq-workstreams',
+      question: 'How do workstreams, proposals, and roadmaps connect?',
       answer:
-        "Achra is built to be chain-agnostic, meaning it can integrate with various blockchain networks. Currently, it supports major networks like Ethereum and Polygon, with plans to expand to other ecosystems. This flexibility allows organizations to choose the network that best fits their needs while still benefiting from Achra's comprehensive management tools.",
+        'Workstreams are open calls for contribution. Builders submit proposals that describe how they will deliver. Approved proposals roll into roadmaps where progress is tracked and contributors get paid. This creates a structured flow from idea to delivery and keeps the network work structured and transparent.',
     },
     {
-      id: 'faq-data-security',
-      question: "How does Achra ensure the security of my organization's data?",
+      id: 'faq-payments',
+      question: 'How does Achra handle payments, budgets, and financial transparency?',
       answer:
-        "Security is a top priority for Achra. The platform uses advanced encryption and decentralized storage solutions to protect sensitive data. Additionally, all smart contracts used by Achra undergo rigorous audits by leading security firms. Users also have full control over their data and can manage access permissions through the platform's robust identity management system.",
+        'Every roadmap, project, and deliverable carries its own wallet. Budgets and expenses are visible at each level, so contributors know how funds are allocated and spent. Milestone-based payouts run in stablecoins, with automated tax reporting to keep compliance manageable.',
     },
     {
-      id: 'faq-new-org-support',
-      question: 'What kind of support does Achra offer for new organizations?',
+      id: 'faq-resources',
+      question: 'What are resources, and how do services connect to them?',
       answer:
-        'Achra offers a range of support services to help new organizations get started. This includes comprehensive documentation, video tutorials, and a dedicated support team. Additionally, Achra provides onboarding assistance and consulting services for organizations with complex needs, ensuring a smooth transition to the platform.',
+        'A resource is anything a network depends on, such as a builder team, a legal entity, or a treasury. Services attach to these resources in three stages: setup, maintenance, and wind-down. This makes it easy to plug in the right operational support at the right stage of a resource\u2019s lifecycle.',
     },
   ],
   [
     {
-      id: 'faq-costs',
-      question: 'What are the costs associated with using Achra?',
+      id: 'faq-operational-hub',
+      question: 'What is an operational hub, and how does it replace auditors?',
       answer:
-        'Achra offers a tiered pricing model based on the size and needs of the organization. There is a free tier for small teams and startups, as well as premium tiers with advanced features and higher usage limits. Detailed pricing information can be found on our pricing page, and we also offer custom enterprise solutions for large-scale organizations.',
+        'Instead of relying on external auditors, Achra introduces operational hubs. Hubs verify that deliverables, budgets, and services line up with governance decisions. They provide a live check on execution, so networks can act with confidence and reduce the lag of periodic audits.',
     },
     {
-      id: 'faq-governance-customize',
-      question: 'Can I customize the governance rules for my organization?',
+      id: 'faq-ai-automation',
+      question: 'How does Achra support AI and automation in operations?',
       answer:
-        'Absolutely. Achra provides a highly flexible governance engine that allows organizations to define their own rules and processes. This includes setting voting thresholds, defining roles and permissions, and creating custom proposal types. These rules are encoded into smart contracts, ensuring they are executed transparently and automatically.',
+        'Achra\u2019s workflows and data structures are designed for automation from the start. Specifications, approvals, and payouts are machine readable, which makes it possible for AI agents to participate directly in operations. They can draft proposals, monitor execution, and run services in ways that are transparent and safe.',
     },
     {
-      id: 'faq-disputes',
-      question: 'How does Achra handle dispute resolution?',
+      id: 'faq-powerhouse-stack',
+      question: 'How does Achra fit into the Powerhouse stack?',
       answer:
-        'Achra includes built-in tools for dispute resolution, ranging from simple internal voting mechanisms to integration with external decentralized arbitration services like Kleros. Organizations can choose the method that best suits their needs and incorporate it into their governance framework. This ensures that any conflicts can be resolved fairly and efficiently within the platform.',
+        'Powerhouse is the ecosystem for Scalable Network Organizations. It combines services, governance, and software to help decentralized groups grow into platform economies. Achra is Powerhouse\u2019s global coordination platform, where organizations, builders, and operators execute work through RFPs, services, and automated governance. Vetra is the builder platform for creating applications on a reactive document architecture with spec-driven AI, enabling developers to define workflows once and deploy them globally. Together, Achra and Vetra form the operational and technical backbone for SNOs, supported by Powerhouse\u2019s broader framework of services and models. At the core is Open-Source Capitalism, which treats code and models as shared infrastructure, funds development sustainably, and resists the concentration of power in a few centralized platforms.',
     },
     {
-      id: 'faq-mobile-app',
-      question: 'Is there a mobile app for Achra?',
+      id: 'faq-open-source',
+      question: 'Is Achra open source?',
       answer:
-        "Currently, Achra is a web-based platform optimized for desktop and mobile browsers. We are actively developing a dedicated mobile app to provide a more seamless experience for users on the go. In the meantime, the web platform's responsive design ensures that all features are accessible and functional on mobile devices.",
-    },
-    {
-      id: 'faq-integrations',
-      question: 'Can Achra integrate with other tools we already use?',
-      answer:
-        'Yes, Achra is designed to be highly interoperable. It offers a range of APIs and pre-built integrations with popular tools like Slack, Discord, Google Workspace, and various project management software. This allows organizations to connect Achra with their existing workflows and data sources, creating a unified operational hub.',
+        'Yes. Achra and the Powerhouse stack are released under the Daimon Dual Phase License (DDPL). In its first phase, the license requires contributors who build on the code to share improvements back, protecting early builders from one-sided extraction. After a defined change date, the code automatically converts to a permissive license, ensuring openness for the long term. The DDPL model balances sustainability with accessibility, making open-source development viable while keeping the infrastructure free for everyone over time.',
     },
     {
       id: 'faq-get-started',
-      question: 'How do I get started with Achra?',
+      question: 'How do organizations, builders, and operators get started on Achra?',
       answer:
-        'Getting started with Achra is easy. Simply visit our website and sign up for an account. You can then follow our step-by-step onboarding guide to set up your organization, invite team members, and start managing your operations. If you need any help along the way, our support team is always available to assist you.',
+        'Organizations can create a network, post RFPs, and set up workstreams. Builders can register to discover funded projects and submit proposals. Operators can list their services in the marketplace and connect to resources.',
     },
   ],
 ]
