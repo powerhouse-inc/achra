@@ -2,9 +2,9 @@
 
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
+import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 import { SkyIsotype, SkyLogotype } from '@/shared/components/svgs'
 import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
-import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 
 const partnershipBlurInitial = {
   filter: 'blur(10px)',
