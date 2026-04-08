@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import ff from '@/shared/lib/feature-flags'
@@ -18,10 +19,10 @@ const triggerClassName = cn(
 )
 
 const inactiveTitleClass =
-  'text-[15px] font-medium text-muted-foreground group-data-[state=active]:font-semibold group-data-[state=active]:text-foreground'
+  'text-[15px] font-medium text-foreground/80 group-data-[state=active]:font-semibold group-data-[state=active]:text-foreground'
 
 const buildersActiveTitleClass =
-  'text-[15px] font-medium text-muted-foreground group-data-[state=active]:font-semibold group-data-[state=active]:text-primary'
+  'text-[15px] font-medium text-foreground/80 group-data-[state=active]:font-semibold group-data-[state=active]:text-primary'
 
 const blueCtaClass =
   'mt-5 h-10 rounded-lg border-0 bg-[rgb(5,130,255)] px-5 text-sm font-medium text-white hover:bg-[rgb(5,130,255)]/90'
@@ -43,9 +44,9 @@ function BuildNetworkSection() {
           >
             Build your Network with Achra
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty">
             Powering the next generation of networked organizations.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <Tabs
@@ -62,7 +63,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Organizations</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-foreground/80 text-sm leading-relaxed">
                   Set clear objectives for your network organization. Receive structured proposals
                   from the best contributor teams to deliver on your roadmap.
                 </p>
@@ -80,7 +81,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', buildersActiveTitleClass)}>For Builders</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-foreground/80 text-sm leading-relaxed">
                   Discover active projects and roadmaps from leading network organizations. Focus on
                   building with built-in operational support.
                 </p>
@@ -100,7 +101,7 @@ function BuildNetworkSection() {
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Operators</span>
               </div>
               <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-foreground/80 text-sm leading-relaxed">
                   Provide essential services for teams from legal and accounting to governance.
                   Partner with teams building across the ecosystem.
                 </p>

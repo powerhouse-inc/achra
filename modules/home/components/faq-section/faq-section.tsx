@@ -1,5 +1,6 @@
 'use client'
 
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import {
   Accordion,
   AccordionContent,
@@ -11,7 +12,7 @@ import { HOME_FAQ_COLUMNS } from './home-faq-data'
 
 function FaqSection() {
   return (
-    <section className="w-full py-14 sm:py-16 lg:py-20" aria-labelledby="home-faq-heading">
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="home-faq-heading">
       <div className="container">
         <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
           <h2
@@ -20,9 +21,9 @@ function FaqSection() {
           >
             Frequently Asked Questions
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Everything you need to know.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-12 lg:gap-16">

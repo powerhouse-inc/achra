@@ -7,6 +7,8 @@ import {
   type HomeWaitlistFormState,
   submitHomeWaitlistAction,
 } from '@/modules/home/actions/home-waitlist-action'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
+import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
@@ -24,11 +26,14 @@ function HomeWaitlistSection() {
   return (
     <section
       id="home-waitlist-section"
-      className="w-full py-14 sm:py-16 lg:py-20"
+      className="w-full py-16 sm:py-20 lg:py-24"
       aria-labelledby="home-waitlist-heading"
     >
       <div className="container">
-        <div className="border-border bg-secondary relative overflow-hidden rounded-2xl border">
+        <div
+          data-waitlist-card
+          className="border-border bg-secondary relative overflow-hidden rounded-2xl border"
+        >
           <div className="pointer-events-none absolute inset-0" aria-hidden>
             <Image
               src="/home/waitlist/bg.png"
@@ -38,26 +43,25 @@ function HomeWaitlistSection() {
             />
           </div>
 
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.22]"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(90deg, transparent 0px, transparent 71px, var(--border) 71px, var(--border) 72px)',
-            }}
-            aria-hidden
+          <SpotlightGrid
+            spotlightRadius={120}
+            gridSize={50}
+            containerSelector="[data-waitlist-card]"
+            highlightOpacity={0.45}
+            showBaseGrid
           />
 
           <div className="relative z-10 px-5 py-16 sm:px-12 lg:p-16">
             <header className="mx-auto max-w-2xl text-center">
               <h2
                 id="home-waitlist-heading"
-                className="text-foreground text-3xl font-bold tracking-tight text-balance sm:text-4xl"
+                className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
               >
                 Join the Waitlist
               </h2>
-              <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+              <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
                 Connect your org, empower your network and operate as one.
-              </p>
+              </AnimatedSubtitle>
             </header>
 
             <div className="mx-auto mt-10 max-w-xl sm:mt-12">
@@ -91,7 +95,7 @@ function HomeWaitlistSection() {
                         required
                         className={cn(
                           'text-foreground h-11 min-w-0 flex-1 border-0 bg-transparent px-0 text-[15px] shadow-none',
-                          'placeholder:text-muted-foreground focus-visible:ring-0 md:text-base',
+                          'placeholder:text-foreground/60 focus-visible:ring-0 md:text-base',
                         )}
                       />
                     </div>

@@ -1,26 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 
 import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 
 const descriptionClass =
-  'text-muted-foreground text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
+  'text-foreground/80 text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
 
 function PowerhouseStackSection() {
   return (
-    <section className="w-full py-16 sm:py-20" aria-labelledby="powerhouse-stack-heading">
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="powerhouse-stack-heading">
       <div className="container flex flex-col gap-10 lg:gap-12">
-        <header className="mx-auto flex max-w-[550px] flex-col gap-6 text-center">
+        <header className="mx-auto flex max-w-2xl flex-col gap-6 text-center">
           <h2
             id="powerhouse-stack-heading"
             className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             The Powerhouse Stack
           </h2>
-          <p className="text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Tools that make distributed work simple and private.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">

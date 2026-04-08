@@ -13,26 +13,30 @@ import {
   Vote,
 } from 'lucide-react'
 
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { GovernanceFeatureRow } from './governance-feature-row'
 
 function GovernanceOperationsSection() {
   return (
-    <section className="w-full py-16 sm:py-20" aria-labelledby="governance-operations-heading">
+    <section
+      className="w-full py-16 sm:py-20 lg:py-24"
+      aria-labelledby="governance-operations-heading"
+    >
       <div className="container flex flex-col gap-8 lg:gap-20">
-        <header className="mx-auto flex max-w-[550px] flex-col gap-4 text-center">
+        <header className="mx-auto flex max-w-2xl flex-col gap-4 text-center">
           <h2
             id="governance-operations-heading"
             className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
           >
             Governance &amp; Operations
           </h2>
-          <p className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Move beyond outsourcing and unlock full autonomy. Run your entire network organization
             through Achra.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
-        <div className="flex flex-col gap-14 lg:gap-[71px]">
+        <div className="flex flex-col gap-14 lg:gap-18">
           <GovernanceFeatureRow
             imageSrc="/home/governance-operations/governance-executable.png"
             imageAlt="Achra governance flows connecting approvals, voting, and automated payouts"

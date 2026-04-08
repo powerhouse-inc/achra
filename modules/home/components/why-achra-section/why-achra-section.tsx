@@ -1,3 +1,4 @@
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import {
   WhyAchraAccentCard,
   WhyAchraCtaCard,
@@ -8,7 +9,7 @@ import type { Route } from 'next'
 
 function WhyAchraSection() {
   return (
-    <section className="w-full py-14 sm:py-16 lg:py-20" aria-labelledby="why-achra-heading">
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="why-achra-heading">
       <div className="container">
         <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
           <h2
@@ -17,9 +18,9 @@ function WhyAchraSection() {
           >
             Why Achra
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Run your entire network organization through Achra
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
