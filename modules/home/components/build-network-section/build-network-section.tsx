@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-
 import ff from '@/modules/shared/lib/feature-flags'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
