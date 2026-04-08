@@ -22,9 +22,10 @@ function WhyAchraSection() {
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start lg:gap-6">
-          <div className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          <div className="flex flex-col gap-6 lg:gap-8">
             <WhyAchraTextCard
+              className="lg:flex-1"
               title="Regain visibility"
               description="Transparency by default with structured RFPs, milestones, and audit trails so builders discover opportunities and operators see exactly where their services are needed."
             />
@@ -34,26 +35,28 @@ function WhyAchraSection() {
             />
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 lg:gap-8">
             <WhyAchraAccentCard
               accent="payments"
               title="Global Payments at Scale"
               description="Enable milestone-based payouts with stablecoins. Built-in collection and automated tax reporting (e.g., 1099/W-9) lets your network scale globally without the compliance chaos."
             />
             <WhyAchraAccentCard
+              className="lg:flex-1"
               accent="ai"
               title="AI-Ready Infrastructure"
               description="Our operational patterns are structured to automate the busywork and make data/flows accessible where AI agents can be first-class participants, not afterthoughts."
             />
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 sm:col-span-2 sm:grid sm:grid-cols-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-8">
             <WhyAchraCtaCard
               description="Learn more about how Achra supercharges organisations"
               href={'/cases' as Route}
               linkLabel="View Use Cases"
             />
             <WhyAchraWorkflowCard
+              className="lg:flex-1"
               title="Best-Practice Workflows"
               description="Launch faster with standardized templates and workflows designed for distributed teams from posting an RFP to tracking deliverables and releasing payouts."
             />

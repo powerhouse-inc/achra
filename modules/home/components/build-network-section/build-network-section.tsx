@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 
+import ff from '@/modules/shared/lib/feature-flags'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import { cn } from '@/shared/lib/utils'
@@ -84,9 +85,11 @@ function BuildNetworkSection() {
                   Discover active projects and roadmaps from leading network organizations. Focus on
                   building with built-in operational support.
                 </p>
-                <Button asChild size="lg" className={blueCtaClass}>
-                  <Link href="/workstreams">Browse workstreams</Link>
-                </Button>
+                {ff.workstreams.WORKSTREAMS_ENABLED && (
+                  <Button asChild size="lg" className={blueCtaClass}>
+                    <Link href="/workstreams">Browse workstreams</Link>
+                  </Button>
+                )}
               </div>
             </TabsTrigger>
 

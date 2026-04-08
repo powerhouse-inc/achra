@@ -56,7 +56,7 @@ function OrgTabCollage({ className, priority }: OrgTabCollageProps) {
     <div
       className={cn(
         'relative isolate mx-auto w-full max-w-[min(100%,504px)] overflow-visible',
-        'aspect-[500/400]',
+        'aspect-500/400',
         className,
       )}
     >
