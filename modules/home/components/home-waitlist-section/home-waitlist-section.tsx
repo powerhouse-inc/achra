@@ -12,6 +12,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
+import { WaitlistGrid } from './waitlist-grid'
 import { WaitlistIsotype } from './waitlist-isotype'
 
 const initialState: HomeWaitlistFormState = {
@@ -29,7 +30,10 @@ function HomeWaitlistSection() {
       aria-labelledby="home-waitlist-heading"
     >
       <div className="container">
-        <div className="border-border bg-secondary relative overflow-hidden rounded-2xl border">
+        <div
+          data-waitlist-card
+          className="border-border bg-secondary relative overflow-hidden rounded-2xl border"
+        >
           <div className="pointer-events-none absolute inset-0" aria-hidden>
             <Image
               src="/home/waitlist/bg.png"
@@ -39,14 +43,7 @@ function HomeWaitlistSection() {
             />
           </div>
 
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.22]"
-            style={{
-              backgroundImage:
-                'repeating-linear-gradient(90deg, transparent 0px, transparent 71px, var(--border) 71px, var(--border) 72px)',
-            }}
-            aria-hidden
-          />
+          <WaitlistGrid />
 
           <div className="relative z-10 px-5 py-16 sm:px-12 lg:p-16">
             <header className="mx-auto max-w-2xl text-center">
