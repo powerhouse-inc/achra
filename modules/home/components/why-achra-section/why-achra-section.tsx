@@ -17,7 +17,7 @@ function WhyAchraSection() {
           >
             Why Achra
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Run your entire network organization through Achra
           </p>
         </header>

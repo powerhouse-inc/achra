@@ -51,7 +51,7 @@ function HomeWaitlistSection() {
             <header className="mx-auto max-w-2xl text-center">
               <h2
                 id="home-waitlist-heading"
-                className="text-foreground text-3xl font-bold tracking-tight text-balance sm:text-4xl"
+                className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
               >
                 Join the Waitlist
               </h2>
@@ -91,7 +91,7 @@ function HomeWaitlistSection() {
                         required
                         className={cn(
                           'text-foreground h-11 min-w-0 flex-1 border-0 bg-transparent px-0 text-[15px] shadow-none',
-                          'placeholder:text-muted-foreground focus-visible:ring-0 md:text-base',
+                          'placeholder:text-foreground/60 focus-visible:ring-0 md:text-base',
                         )}
                       />
                     </div>

@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
 
 const descriptionClass =
-  'text-muted-foreground text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
+  'text-foreground/80 text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
 
 function PowerhouseStackSection() {
   return (
@@ -18,7 +18,7 @@ function PowerhouseStackSection() {
           >
             The Powerhouse Stack
           </h2>
-          <p className="text-muted-foreground text-base leading-relaxed text-pretty sm:text-lg">
+          <p className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Tools that make distributed work simple and private.
           </p>
         </header>

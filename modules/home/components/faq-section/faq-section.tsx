@@ -20,7 +20,7 @@ function FaqSection() {
           >
             Frequently Asked Questions
           </h2>
-          <p className="text-muted-foreground mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Everything you need to know.
           </p>
         </header>
