@@ -39,9 +39,35 @@ const openSansCondensed = localFont({
   variable: '--font-open-sans-condensed',
 })
 
+const title = 'Achra | The Marketplace for Global Coordination'
+const description =
+  'An operational marketplace where organizations, builders, and service providers collaborate to deliver customized solutions.'
+const ogImage = '/og-image.png'
+
 export const metadata: Metadata = {
-  title: 'Achra',
-  description: 'Achra',
+  title: {
+    default: title,
+    template: '%s | Achra',
+  },
+  description,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://achra.com'),
+  openGraph: {
+    title,
+    description,
+    images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    type: 'website',
+    siteName: 'Achra',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({
