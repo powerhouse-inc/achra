@@ -28,7 +28,7 @@ function WhyAchraAccentCard({ title, description, accent, className }: WhyAchraA
         quality={75}
         className={cn('pointer-events-none object-cover', accent === 'ai' ? 'object-bottom' : '')}
         aria-hidden
-        sizes="(min-width: 1024px) 33vw, 100vw"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       />
       {accent === 'ai' && (
         <Image
