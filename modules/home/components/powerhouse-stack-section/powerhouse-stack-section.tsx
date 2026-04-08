@@ -65,7 +65,7 @@ function PowerhouseStackSection() {
           <article
             className={cn(
               'border-primary/20 bg-primary/5 flex flex-col overflow-hidden rounded-2xl border',
-              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10 md:min-h-[520px]',
+              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10',
             )}
           >
             <div className="flex flex-col gap-4">
@@ -78,7 +78,7 @@ function PowerhouseStackSection() {
                 ready-made templates.
               </p>
             </div>
-            <div className="relative mt-auto min-h-[200px] flex-1 pt-6 sm:min-h-[260px]">
+            <div className="relative mt-auto h-[160px] pt-6 sm:h-[180px]">
               <div className="relative h-full overflow-hidden rounded-t-3xl">
                 <Image
                   src="/home/powerhouse-stack/connect-preview.png"
@@ -96,7 +96,7 @@ function PowerhouseStackSection() {
           <article
             className={cn(
               'flex flex-col overflow-hidden rounded-2xl border border-[rgb(200,230,245)] bg-[rgb(239,248,255)]',
-              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10 md:min-h-[520px]',
+              'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10',
             )}
           >
             <div className="flex flex-col gap-4">
@@ -115,7 +115,7 @@ function PowerhouseStackSection() {
                 collaborate with confidence.
               </p>
             </div>
-            <div className="relative mt-auto min-h-[200px] flex-1 pt-6 sm:min-h-[260px]">
+            <div className="relative mt-auto h-[160px] pt-6 sm:h-[180px]">
               <div className="relative h-full overflow-hidden rounded-t-3xl">
                 <Image
                   src="/home/powerhouse-stack/renown-preview.png"
@@ -163,7 +163,7 @@ function PowerhouseStackSection() {
           </article>
 
           {/* Powerhouse */}
-          <article className="relative flex min-h-[300px] flex-col justify-end overflow-hidden rounded-2xl border border-black/10 shadow-[0_1px_0_rgba(0,0,0,0.06)] sm:min-h-[340px]">
+          <article className="relative flex flex-col justify-end overflow-hidden rounded-2xl border border-black/10 shadow-[0_1px_0_rgba(0,0,0,0.06)]">
             <Image
               src="/home/powerhouse-stack/powerhouse-card-bg.png"
               alt=""

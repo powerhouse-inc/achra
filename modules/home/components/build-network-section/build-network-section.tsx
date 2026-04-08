@@ -6,13 +6,14 @@ import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import { cn } from '@/shared/lib/utils'
 import { AchraTabIsotype } from './achra-tab-isotype'
+import { BuildersTabCollage } from './builders-tab-collage'
+import { OperatorsTabCollage } from './operators-tab-collage'
 import { OrgTabCollage } from './org-tab-collage'
-import { TabCompositePanel } from './tab-composite-panel'
 
 const triggerClassName = cn(
-  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-border bg-transparent p-0 py-6 text-left shadow-none',
+  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-border bg-transparent p-0 py-6 text-left whitespace-normal shadow-none',
   'focus-visible:ring-[3px] focus-visible:ring-[rgb(5,130,255)]/35 focus-visible:outline-none',
-  'data-[state=active]:rounded-xl data-[state=active]:border-b-transparent data-[state=active]:bg-secondary data-[state=active]:px-4 data-[state=active]:py-5 data-[state=active]:-mx-1 data-[state=active]:shadow-none',
+  'data-[state=active]:rounded-none data-[state=active]:border-b-transparent data-[state=active]:bg-transparent data-[state=active]:px-0 data-[state=active]:py-6 data-[state=active]:mx-0 data-[state=active]:shadow-none',
   'data-[state=inactive]:cursor-pointer data-[state=inactive]:opacity-100',
 )
 
@@ -31,7 +32,7 @@ const pinkCtaClass =
 function BuildNetworkSection() {
   return (
     <section
-      className="relative z-10 w-full pb-16 sm:pb-20 lg:pb-24"
+      className="relative z-10 w-full overflow-x-clip pb-16 sm:pb-20 lg:pb-24"
       aria-labelledby="build-network-heading"
     >
       <div className="container">
@@ -121,12 +122,7 @@ function BuildNetworkSection() {
             forceMount
             className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1"
           >
-            <TabCompositePanel
-              src="/home/build-network/builders/builders-scene.png"
-              alt="Builder profile, project draft, and revenue chart mockups layered on the Achra workspace"
-              width={664}
-              height={384}
-            />
+            <BuildersTabCollage />
           </TabsContent>
 
           <TabsContent
@@ -134,12 +130,7 @@ function BuildNetworkSection() {
             forceMount
             className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1"
           >
-            <TabCompositePanel
-              src="/home/build-network/operators-panel.png"
-              alt="Achra services and operational hub preview for operators"
-              width={1142}
-              height={830}
-            />
+            <OperatorsTabCollage />
           </TabsContent>
         </Tabs>
       </div>
