@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 
 import { Button } from '@/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
@@ -18,9 +19,9 @@ function PowerhouseStackSection() {
           >
             The Powerhouse Stack
           </h2>
-          <p className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Tools that make distributed work simple and private.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-8">

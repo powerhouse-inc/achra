@@ -7,6 +7,7 @@ import {
   type HomeWaitlistFormState,
   submitHomeWaitlistAction,
 } from '@/modules/home/actions/home-waitlist-action'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
@@ -55,9 +56,9 @@ function HomeWaitlistSection() {
               >
                 Join the Waitlist
               </h2>
-              <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+              <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
                 Connect your org, empower your network and operate as one.
-              </p>
+              </AnimatedSubtitle>
             </header>
 
             <div className="mx-auto mt-10 max-w-xl sm:mt-12">

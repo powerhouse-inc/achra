@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import ff from '@/shared/lib/feature-flags'
@@ -43,9 +44,9 @@ function BuildNetworkSection() {
           >
             Build your Network with Achra
           </h2>
-          <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty">
             Powering the next generation of networked organizations.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <Tabs

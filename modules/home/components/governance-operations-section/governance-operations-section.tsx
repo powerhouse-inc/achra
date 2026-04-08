@@ -13,6 +13,7 @@ import {
   Vote,
 } from 'lucide-react'
 
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { GovernanceFeatureRow } from './governance-feature-row'
 
 function GovernanceOperationsSection() {
@@ -29,10 +30,10 @@ function GovernanceOperationsSection() {
           >
             Governance &amp; Operations
           </h2>
-          <p className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
             Move beyond outsourcing and unlock full autonomy. Run your entire network organization
             through Achra.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="flex flex-col gap-14 lg:gap-18">

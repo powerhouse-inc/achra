@@ -1,3 +1,4 @@
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import {
   WhyAchraAccentCard,
   WhyAchraCtaCard,
@@ -17,9 +18,9 @@ function WhyAchraSection() {
           >
             Why Achra
           </h2>
-          <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Run your entire network organization through Achra
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

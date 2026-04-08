@@ -1,5 +1,6 @@
 'use client'
 
+import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import {
   Accordion,
   AccordionContent,
@@ -20,9 +21,9 @@ function FaqSection() {
           >
             Frequently Asked Questions
           </h2>
-          <p className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
             Everything you need to know.
-          </p>
+          </AnimatedSubtitle>
         </header>
 
         <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-12 lg:gap-16">
