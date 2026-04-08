@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 
-const SPOTLIGHT_SIZE = 218
-const GRID_SIZE = 13
+const SPOTLIGHT_RADIUS = 90
+const GRID_SIZE = 12
 
-const MASK_IMAGE = `radial-gradient(closest-side, ${[
+const GRADIENT_STOPS = [
   [0, 1],
   [7.142857142857142, 0.9789983639784623],
   [14.285714285714285, 0.9088278450944927],
@@ -21,47 +21,75 @@ const MASK_IMAGE = `radial-gradient(closest-side, ${[
   [85.71428571428571, 0.01520817299024202],
   [92.85714285714286, 0.003670836304081604],
   [100, 0],
-]
-  .map(([pct, alpha]) => `rgba(255,255,255,${alpha}) ${pct}%`)
-  .join(', ')})`
+] as const
+
+function buildMask(x: number, y: number) {
+  const stops = GRADIENT_STOPS.map(([pct, alpha]) => `rgba(255,255,255,${alpha}) ${pct}%`).join(
+    ', ',
+  )
+  return `radial-gradient(${SPOTLIGHT_RADIUS}px circle at ${x}px ${y}px, ${stops})`
+}
 
 const GRID_BG = [
-  'linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)',
-  'linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px)',
+  'linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px)',
+  'linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)',
 ].join(', ')
 
+const LERP_SPEED = 0.06
+
 function HeroGrid() {
-  const spotRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const rafId = useRef(0)
+  const target = useRef({ x: 0, y: 0 })
+  const current = useRef({ x: 0, y: 0 })
+  const active = useRef(false)
 
   useEffect(() => {
-    const spot = spotRef.current
-    if (!spot) return
+    const grid = gridRef.current
+    if (!grid) return
 
-    const section = spot.closest('section')
+    const section = grid.closest('section')
     if (!section) return
 
+    function tick() {
+      if (!grid || !active.current) return
+
+      current.current.x += (target.current.x - current.current.x) * LERP_SPEED
+      current.current.y += (target.current.y - current.current.y) * LERP_SPEED
+
+      const mask = buildMask(current.current.x, current.current.y)
+      grid.style.maskImage = mask
+      grid.style.webkitMaskImage = mask
+
+      rafId.current = requestAnimationFrame(tick)
+    }
+
     function onMove(e: MouseEvent) {
-      cancelAnimationFrame(rafId.current)
-      rafId.current = requestAnimationFrame(() => {
-        if (!spot) return
-        const rect = section!.getBoundingClientRect()
-        const x = e.clientX - rect.left - SPOTLIGHT_SIZE / 2
-        const y = e.clientY - rect.top - SPOTLIGHT_SIZE / 2
-        spot.style.transform = `translate(${x}px, ${y}px)`
-        spot.style.opacity = '1'
-      })
+      const rect = grid!.getBoundingClientRect()
+      target.current.x = e.clientX - rect.left
+      target.current.y = e.clientY - rect.top
+
+      if (!active.current) {
+        // snap to initial position so there's no long drift on first enter
+        current.current.x = target.current.x
+        current.current.y = target.current.y
+        active.current = true
+        grid!.style.opacity = '1'
+        rafId.current = requestAnimationFrame(tick)
+      }
     }
 
     function onLeave() {
+      active.current = false
       cancelAnimationFrame(rafId.current)
-      if (!spot) return
-      spot.style.opacity = '0'
+      if (!grid) return
+      grid.style.opacity = '0'
     }
 
     section.addEventListener('mousemove', onMove)
     section.addEventListener('mouseleave', onLeave)
     return () => {
+      active.current = false
       cancelAnimationFrame(rafId.current)
       section.removeEventListener('mousemove', onMove)
       section.removeEventListener('mouseleave', onLeave)
@@ -70,16 +98,11 @@ function HeroGrid() {
 
   return (
     <div
-      ref={spotRef}
-      className="pointer-events-none absolute top-0 left-0 transition-opacity duration-300 ease-out"
+      ref={gridRef}
+      className="pointer-events-none absolute inset-0 transition-opacity duration-700 ease-out"
       style={{
-        width: SPOTLIGHT_SIZE,
-        height: SPOTLIGHT_SIZE,
-        backgroundColor: 'rgba(250, 249, 247, 0.51)',
         backgroundImage: GRID_BG,
         backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
-        maskImage: MASK_IMAGE,
-        WebkitMaskImage: MASK_IMAGE,
         opacity: 0,
       }}
     />
