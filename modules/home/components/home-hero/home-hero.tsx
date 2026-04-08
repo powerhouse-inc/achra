@@ -4,7 +4,7 @@ import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 import { SkyIsotype, SkyLogotype } from '@/shared/components/svgs'
 import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
-import { HeroGrid } from './hero-grid'
+import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 
 const partnershipBlurInitial = {
   filter: 'blur(10px)',
@@ -45,7 +45,7 @@ function HomeHero() {
         >
           <source src="/home/hero/Achrabg2.mp4" type="video/mp4" />
         </video>
-        <HeroGrid />
+        <SpotlightGrid spotlightRadius={90} gridSize={12} highlightOpacity={0.5} />
       </div>
 
       <div className="relative z-1 flex w-full max-w-4xl flex-col items-center gap-6 overflow-hidden">

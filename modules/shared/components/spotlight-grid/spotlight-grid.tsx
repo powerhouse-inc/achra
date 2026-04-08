@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 
-const SPOTLIGHT_RADIUS = 120
-const GRID_SIZE = 50
-
 const GRADIENT_STOPS = [
   [0, 1],
   [7.142857142857142, 0.9789983639784623],
@@ -23,28 +20,35 @@ const GRADIENT_STOPS = [
   [100, 0],
 ] as const
 
-const LINE_COLOR = 'var(--border)'
-
-const BASE_GRID = [
-  `linear-gradient(${LINE_COLOR} 1px, transparent 1px)`,
-  `linear-gradient(90deg, ${LINE_COLOR} 1px, transparent 1px)`,
-].join(', ')
-
-const HIGHLIGHT_GRID = [
-  'linear-gradient(rgba(255, 255, 255, 0.45) 1px, transparent 1px)',
-  'linear-gradient(90deg, rgba(255, 255, 255, 0.45) 1px, transparent 1px)',
-].join(', ')
-
-function buildMask(x: number, y: number) {
-  const stops = GRADIENT_STOPS.map(([pct, alpha]) => `rgba(255,255,255,${alpha}) ${pct}%`).join(
-    ', ',
-  )
-  return `radial-gradient(${SPOTLIGHT_RADIUS}px circle at ${x}px ${y}px, ${stops})`
-}
-
 const LERP_SPEED = 0.06
 
-function WaitlistGrid() {
+function buildHighlightGrid(opacity: number) {
+  return [
+    `linear-gradient(rgba(255, 255, 255, ${opacity}) 1px, transparent 1px)`,
+    `linear-gradient(90deg, rgba(255, 255, 255, ${opacity}) 1px, transparent 1px)`,
+  ].join(', ')
+}
+
+interface SpotlightGridProps {
+  /** Radius of the spotlight circle in px */
+  spotlightRadius?: number
+  /** Size of each grid cell in px */
+  gridSize?: number
+  /** CSS selector passed to `closest()` to find the mouse-tracking container */
+  containerSelector?: string
+  /** Opacity of the highlight grid lines (0–1) */
+  highlightOpacity?: number
+  /** Whether to render a faint always-visible base grid underneath */
+  showBaseGrid?: boolean
+}
+
+function SpotlightGrid({
+  spotlightRadius = 90,
+  gridSize = 12,
+  containerSelector = 'section',
+  highlightOpacity = 0.5,
+  showBaseGrid = false,
+}: SpotlightGridProps) {
   const spotRef = useRef<HTMLDivElement>(null)
   const rafId = useRef(0)
   const target = useRef({ x: 0, y: 0 })
@@ -55,8 +59,15 @@ function WaitlistGrid() {
     const spot = spotRef.current
     if (!spot) return
 
-    const container = spot.closest('[data-waitlist-card]')
+    const container = spot.closest(containerSelector)
     if (!container) return
+
+    function buildMask(x: number, y: number) {
+      const stops = GRADIENT_STOPS.map(([pct, alpha]) => `rgba(255,255,255,${alpha}) ${pct}%`).join(
+        ', ',
+      )
+      return `radial-gradient(${spotlightRadius}px circle at ${x}px ${y}px, ${stops})`
+    }
 
     function tick() {
       if (!spot || !active.current) return
@@ -100,36 +111,38 @@ function WaitlistGrid() {
       container.removeEventListener('mousemove', onMove as EventListener)
       container.removeEventListener('mouseleave', onLeave)
     }
-  }, [])
+  }, [containerSelector, spotlightRadius])
 
-  const gridStyle = {
-    backgroundImage: BASE_GRID,
-    backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
-  }
-
-  const highlightStyle = {
-    backgroundImage: HIGHLIGHT_GRID,
-    backgroundSize: `${GRID_SIZE}px ${GRID_SIZE}px`,
-    opacity: 0,
-  }
+  const sizeValue = `${gridSize}px ${gridSize}px`
 
   return (
     <>
-      {/* Always-visible base grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-5"
-        style={gridStyle}
-        aria-hidden
-      />
-      {/* Spotlight highlight layer */}
+      {showBaseGrid && (
+        <div
+          className="pointer-events-none absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: [
+              'linear-gradient(var(--border) 1px, transparent 1px)',
+              'linear-gradient(90deg, var(--border) 1px, transparent 1px)',
+            ].join(', '),
+            backgroundSize: sizeValue,
+          }}
+          aria-hidden
+        />
+      )}
       <div
         ref={spotRef}
         className="pointer-events-none absolute inset-0 transition-opacity duration-700 ease-out"
-        style={highlightStyle}
+        style={{
+          backgroundImage: buildHighlightGrid(highlightOpacity),
+          backgroundSize: sizeValue,
+          opacity: 0,
+        }}
         aria-hidden
       />
     </>
   )
 }
 
-export { WaitlistGrid }
+export { SpotlightGrid }
+export type { SpotlightGridProps }

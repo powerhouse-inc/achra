@@ -8,11 +8,11 @@ import {
   submitHomeWaitlistAction,
 } from '@/modules/home/actions/home-waitlist-action'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
+import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
-import { WaitlistGrid } from './waitlist-grid'
 import { WaitlistIsotype } from './waitlist-isotype'
 
 const initialState: HomeWaitlistFormState = {
@@ -43,7 +43,13 @@ function HomeWaitlistSection() {
             />
           </div>
 
-          <WaitlistGrid />
+          <SpotlightGrid
+            spotlightRadius={120}
+            gridSize={50}
+            containerSelector="[data-waitlist-card]"
+            highlightOpacity={0.45}
+            showBaseGrid
+          />
 
           <div className="relative z-10 px-5 py-16 sm:px-12 lg:p-16">
             <header className="mx-auto max-w-2xl text-center">
