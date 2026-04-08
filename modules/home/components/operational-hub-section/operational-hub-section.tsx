@@ -11,7 +11,7 @@ function OperationalHubSection() {
       className="w-full px-6 py-16 sm:px-10 sm:py-20 lg:py-24"
       aria-labelledby="operational-hub-heading"
     >
-      <div className="container grid max-w-2xl grid-cols-1 items-center gap-12 xl:max-w-none xl:grid-cols-2 xl:gap-x-16 xl:gap-y-0">
+      <div className="container mx-auto grid max-w-2xl grid-cols-1 items-center gap-12 xl:max-w-6xl xl:grid-cols-[minmax(0,24rem)_1fr] xl:gap-x-16 xl:gap-y-0">
         <div className="order-2 flex justify-center xl:order-1 xl:justify-end">
           <DashboardCard />
         </div>
@@ -24,7 +24,7 @@ function OperationalHubSection() {
             >
               Set up Your Operational Hub
             </h2>
-            <div className="text-muted-foreground [&_b]:text-foreground text-lg leading-[150%] tracking-[-0.012em] [&_b]:font-medium">
+            <div className="text-foreground/80 [&_b]:text-foreground text-lg leading-[150%] tracking-[-0.012em] [&_b]:font-medium">
               <p>A lightweight operational layer for modern, distributed teams.</p>
               <p>
                 Run <b>invoicing</b>, <b>payouts</b>, <b>reporting</b>, and <b>compliance</b>{' '}
@@ -33,7 +33,7 @@ function OperationalHubSection() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center xl:justify-start">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 xl:justify-start">
             <Button asChild size="lg" className="rounded-lg border-0 px-5 text-sm font-medium">
               <Link href={OPERATIONAL_HUB_URL} target="_blank" rel="noopener noreferrer">
                 Schedule a Call
