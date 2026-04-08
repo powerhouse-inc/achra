@@ -14,17 +14,14 @@ import { OperatorsTabCollage } from './operators-tab-collage'
 import { OrgTabCollage } from './org-tab-collage'
 
 const triggerClassName = cn(
-  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-border bg-transparent p-0 py-6 text-left whitespace-normal shadow-none',
+  'group flex w-full flex-col items-stretch gap-0 rounded-none border-0 border-b border-border bg-transparent p-0 py-6 text-left whitespace-normal shadow-none transition-[padding] duration-300 ease-in-out',
   'focus-visible:ring-[3px] focus-visible:ring-[rgb(5,130,255)]/35 focus-visible:outline-none',
-  'data-[state=active]:rounded-none data-[state=active]:border-b-transparent data-[state=active]:bg-transparent data-[state=active]:px-0 data-[state=active]:py-6 data-[state=active]:mx-0 data-[state=active]:shadow-none',
+  'data-[state=active]:rounded-none data-[state=active]:border-b-transparent data-[state=active]:bg-transparent data-[state=active]:pl-2 data-[state=active]:pr-0 data-[state=active]:py-6 data-[state=active]:mx-0 data-[state=active]:shadow-none sm:data-[state=active]:pl-3',
   'data-[state=inactive]:cursor-pointer data-[state=inactive]:opacity-100',
 )
 
-const inactiveTitleClass =
-  'text-[15px] font-medium text-foreground/80 group-data-[state=active]:font-semibold group-data-[state=active]:text-foreground'
-
-const buildersActiveTitleClass =
-  'text-[15px] font-medium text-foreground/80 group-data-[state=active]:font-semibold group-data-[state=active]:text-primary'
+const tabTitleClass =
+  'pt-0.5 text-base sm:text-lg font-medium text-foreground/80 group-data-[state=active]:font-semibold group-data-[state=active]:text-foreground'
 
 const blueCtaClass =
   'mt-5 h-10 rounded-lg border-0 bg-[rgb(5,130,255)] px-5 text-sm font-medium text-white hover:bg-[rgb(5,130,255)]/90'
@@ -35,7 +32,7 @@ const pinkCtaClass =
 function TriggerDetail({ isActive, children }: { isActive: boolean; children: React.ReactNode }) {
   return (
     <motion.div
-      className="w-full overflow-hidden pl-10"
+      className="w-full overflow-hidden"
       initial={false}
       animate={{
         height: isActive ? 'auto' : 0,
@@ -69,7 +66,7 @@ function BuildNetworkSection() {
           >
             Build your Network with Achra
           </h2>
-          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty">
+          <AnimatedSubtitle className="text-foreground/80 mt-4 text-lg leading-relaxed text-pretty">
             Powering the next generation of networked organizations.
           </AnimatedSubtitle>
         </header>
@@ -78,7 +75,7 @@ function BuildNetworkSection() {
           value={activeTab}
           onValueChange={setActiveTab}
           orientation="vertical"
-          className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[minmax(0,min(100%,380px))_minmax(0,1fr)] lg:items-start lg:gap-x-14 lg:gap-y-0"
+          className="grid w-full grid-cols-1 gap-30 lg:grid-cols-[minmax(0,1fr)_minmax(0,568px)] lg:items-start lg:gap-x-14 lg:gap-y-0"
         >
           <TabsList className="h-auto w-full flex-col gap-0 rounded-none bg-transparent p-0 lg:col-start-1 lg:row-start-1">
             <TabsTrigger value="organizations" className={triggerClassName}>
@@ -89,10 +86,10 @@ function BuildNetworkSection() {
                     isActive={activeTab === 'organizations'}
                   />
                 </span>
-                <span className={cn('pt-0.5', inactiveTitleClass)}>For Organizations</span>
+                <span className={tabTitleClass}>For Organizations</span>
               </div>
               <TriggerDetail isActive={activeTab === 'organizations'}>
-                <p className="text-foreground/80 text-sm leading-relaxed">
+                <p className="text-foreground/80 text-base leading-relaxed">
                   Set clear objectives for your network organization. Receive structured proposals
                   from the best contributor teams to deliver on your roadmap.
                 </p>
@@ -107,10 +104,10 @@ function BuildNetworkSection() {
                 <span className="shrink-0">
                   <AchraTabIsotype variant="builders" isActive={activeTab === 'builders'} />
                 </span>
-                <span className={cn('pt-0.5', buildersActiveTitleClass)}>For Builders</span>
+                <span className={tabTitleClass}>For Builders</span>
               </div>
               <TriggerDetail isActive={activeTab === 'builders'}>
-                <p className="text-foreground/80 text-sm leading-relaxed">
+                <p className="text-foreground/80 text-base leading-relaxed">
                   Discover active projects and roadmaps from leading network organizations. Focus on
                   building with built-in operational support.
                 </p>
@@ -127,10 +124,10 @@ function BuildNetworkSection() {
                 <span className="shrink-0">
                   <AchraTabIsotype variant="operators" isActive={activeTab === 'operators'} />
                 </span>
-                <span className={cn('pt-0.5', inactiveTitleClass)}>For Operators</span>
+                <span className={tabTitleClass}>For Operators</span>
               </div>
               <TriggerDetail isActive={activeTab === 'operators'}>
-                <p className="text-foreground/80 text-sm leading-relaxed">
+                <p className="text-foreground/80 text-base leading-relaxed">
                   Provide essential services for teams from legal and accounting to governance.
                   Partner with teams building across the ecosystem.
                 </p>
@@ -144,7 +141,7 @@ function BuildNetworkSection() {
           <TabsContent
             value="organizations"
             forceMount
-            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1"
+            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1 lg:px-8"
           >
             <OrgTabCollage priority />
           </TabsContent>
@@ -152,7 +149,7 @@ function BuildNetworkSection() {
           <TabsContent
             value="builders"
             forceMount
-            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1"
+            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1 lg:px-8"
           >
             <BuildersTabCollage />
           </TabsContent>
@@ -160,7 +157,7 @@ function BuildNetworkSection() {
           <TabsContent
             value="operators"
             forceMount
-            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1"
+            className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1 lg:px-8"
           >
             <OperatorsTabCollage />
           </TabsContent>
