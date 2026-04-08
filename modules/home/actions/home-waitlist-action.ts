@@ -1,8 +1,8 @@
 'use server'
 
 import { z } from 'zod'
-import { MAILCHIMP_TAG } from '@/modules/shared/config/mailchimp'
-import { subscribeOrTagMember } from '@/modules/shared/lib/mailchimp/subscribe-or-tag-member'
+import { MAILCHIMP_TAG } from '@/shared/config/mailchimp'
+import { subscribeOrTagMember } from '@/shared/lib/mailchimp/subscribe-or-tag-member'
 import 'server-only'
 
 export interface HomeWaitlistFormState {

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@/shared/lib/utils'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 

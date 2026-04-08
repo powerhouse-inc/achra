@@ -2,7 +2,7 @@
 
 import { GenericError } from '@/modules/shared/components/generic-error'
 
-export default function NetworkError({
+export default function AchraError({
   error,
   reset,
 }: {

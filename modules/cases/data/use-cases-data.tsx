@@ -5,7 +5,6 @@ import {
   Currency,
   Database,
   Landmark,
-  type LucideIcon,
   Network,
   PiggyBank,
   RadioTower,
@@ -17,22 +16,8 @@ import {
   Wallet,
   Workflow,
 } from 'lucide-react'
-import Link from 'next/link'
-import type { Route } from 'next'
-import type { ReactNode } from 'react'
-
-interface Benefit {
-  icon: LucideIcon
-  text: ReactNode
-}
-
-interface UseCase {
-  title: string
-  tags: string[]
-  description: ReactNode
-  note?: ReactNode
-  benefits: Benefit[]
-}
+import { OrgAnchor } from '@/modules/cases/components/org-anchor'
+import type { UseCase } from '@/modules/cases/types'
 
 const useCasesData: UseCase[] = [
   {
@@ -218,19 +203,4 @@ const useCasesData: UseCase[] = [
   },
 ]
 
-function OrgAnchor({ href, children }: { href: Route; children: ReactNode }) {
-  return (
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      prefetch={false}
-      className="text-primary hover:text-primary/80 underline underline-offset-2"
-    >
-      {children}
-    </Link>
-  )
-}
-
 export { useCasesData }
-export type { UseCase, Benefit }

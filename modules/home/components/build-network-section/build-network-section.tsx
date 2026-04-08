@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import ff from '@/modules/shared/lib/feature-flags'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
+import ff from '@/shared/lib/feature-flags'
 import { cn } from '@/shared/lib/utils'
 import { AchraTabIsotype } from './achra-tab-isotype'
 import { BuildersTabCollage } from './builders-tab-collage'

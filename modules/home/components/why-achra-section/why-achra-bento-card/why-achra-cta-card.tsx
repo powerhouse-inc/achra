@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { InternalLink } from '@/modules/shared/components/internal-link'
+import { InternalLink } from '@/shared/components/internal-link'
 import { cn } from '@/shared/lib/utils'
 import type { Route } from 'next'
 
