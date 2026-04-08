@@ -1,6 +1,8 @@
 'use client'
 
+import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useState } from 'react'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
@@ -30,7 +32,30 @@ const blueCtaClass =
 const pinkCtaClass =
   'mt-5 h-10 rounded-lg border-0 bg-[rgb(221,80,216)] px-5 text-sm font-medium text-white hover:bg-[rgb(221,80,216)]/90'
 
+function TriggerDetail({ isActive, children }: { isActive: boolean; children: React.ReactNode }) {
+  return (
+    <motion.div
+      className="w-full overflow-hidden pl-10"
+      initial={false}
+      animate={{
+        height: isActive ? 'auto' : 0,
+        opacity: isActive ? 1 : 0,
+        marginTop: isActive ? 16 : 0,
+      }}
+      transition={{
+        duration: 0.3,
+        ease: 'easeInOut',
+        opacity: { duration: isActive ? 0.3 : 0.15 },
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 function BuildNetworkSection() {
+  const [activeTab, setActiveTab] = useState('organizations')
+
   return (
     <section
       className="relative z-10 w-full overflow-x-clip pb-16 sm:pb-20 lg:pb-24"
@@ -50,19 +75,23 @@ function BuildNetworkSection() {
         </header>
 
         <Tabs
-          defaultValue="organizations"
+          value={activeTab}
+          onValueChange={setActiveTab}
           orientation="vertical"
           className="grid w-full grid-cols-1 gap-10 lg:grid-cols-[minmax(0,min(100%,380px))_minmax(0,1fr)] lg:items-start lg:gap-x-14 lg:gap-y-0"
         >
           <TabsList className="h-auto w-full flex-col gap-0 rounded-none bg-transparent p-0 lg:col-start-1 lg:row-start-1">
             <TabsTrigger value="organizations" className={triggerClassName}>
               <div className="flex w-full items-start gap-3">
-                <span className="shrink-0 transition-opacity group-data-[state=inactive]:opacity-50">
-                  <AchraTabIsotype variant="organizations" />
+                <span className="shrink-0">
+                  <AchraTabIsotype
+                    variant="organizations"
+                    isActive={activeTab === 'organizations'}
+                  />
                 </span>
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Organizations</span>
               </div>
-              <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
+              <TriggerDetail isActive={activeTab === 'organizations'}>
                 <p className="text-foreground/80 text-sm leading-relaxed">
                   Set clear objectives for your network organization. Receive structured proposals
                   from the best contributor teams to deliver on your roadmap.
@@ -70,17 +99,17 @@ function BuildNetworkSection() {
                 <Button asChild size="lg" className={blueCtaClass}>
                   <Link href="/networks">View networks</Link>
                 </Button>
-              </div>
+              </TriggerDetail>
             </TabsTrigger>
 
             <TabsTrigger value="builders" className={triggerClassName}>
               <div className="flex w-full items-start gap-3">
-                <span className="shrink-0 transition-opacity group-data-[state=inactive]:opacity-50">
-                  <AchraTabIsotype variant="builders" />
+                <span className="shrink-0">
+                  <AchraTabIsotype variant="builders" isActive={activeTab === 'builders'} />
                 </span>
                 <span className={cn('pt-0.5', buildersActiveTitleClass)}>For Builders</span>
               </div>
-              <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
+              <TriggerDetail isActive={activeTab === 'builders'}>
                 <p className="text-foreground/80 text-sm leading-relaxed">
                   Discover active projects and roadmaps from leading network organizations. Focus on
                   building with built-in operational support.
@@ -90,17 +119,17 @@ function BuildNetworkSection() {
                     <Link href="/workstreams">Browse workstreams</Link>
                   </Button>
                 )}
-              </div>
+              </TriggerDetail>
             </TabsTrigger>
 
             <TabsTrigger value="operators" className={triggerClassName}>
               <div className="flex w-full items-start gap-3">
-                <span className="shrink-0 transition-opacity group-data-[state=inactive]:opacity-50">
-                  <AchraTabIsotype variant="operators" />
+                <span className="shrink-0">
+                  <AchraTabIsotype variant="operators" isActive={activeTab === 'operators'} />
                 </span>
                 <span className={cn('pt-0.5', inactiveTitleClass)}>For Operators</span>
               </div>
-              <div className="mt-4 w-full pl-10 group-data-[state=inactive]:hidden">
+              <TriggerDetail isActive={activeTab === 'operators'}>
                 <p className="text-foreground/80 text-sm leading-relaxed">
                   Provide essential services for teams from legal and accounting to governance.
                   Partner with teams building across the ecosystem.
@@ -108,7 +137,7 @@ function BuildNetworkSection() {
                 <Button asChild size="lg" className={pinkCtaClass}>
                   <Link href="/services">Service catalog</Link>
                 </Button>
-              </div>
+              </TriggerDetail>
             </TabsTrigger>
           </TabsList>
 
