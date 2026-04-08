@@ -77,7 +77,7 @@ function HomeHero() {
           initial={partnershipBlurInitial}
           animate={heroInView ? partnershipBlurAnimate : partnershipBlurInitial}
           transition={{
-            delay: 1.1,
+            delay: 0.7,
             duration: 0.7,
             times: [0, 0.5, 1],
             ease: 'easeInOut',
