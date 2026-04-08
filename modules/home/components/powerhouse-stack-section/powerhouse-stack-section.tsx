@@ -1,4 +1,3 @@
-import { Globe, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,42 +6,6 @@ import { cn } from '@/shared/lib/utils'
 
 const descriptionClass =
   'text-muted-foreground text-[15px] font-normal leading-[150%] tracking-[-0.01em] sm:text-base'
-
-function VetraMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn('text-foreground size-6 shrink-0', className)}
-      aria-hidden
-    >
-      <rect x="2" y="2" width="9" height="9" rx="2.25" fill="currentColor" />
-      <rect x="13" y="2" width="9" height="9" rx="2.25" fill="currentColor" />
-      <rect x="2" y="13" width="9" height="9" rx="2.25" fill="currentColor" />
-      <rect x="13" y="13" width="9" height="9" rx="2.25" fill="currentColor" />
-    </svg>
-  )
-}
-
-function PowerhouseIsotype({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={cn('size-8 shrink-0 text-white', className)}
-      aria-hidden
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M30.0177 0L10.2491 16.3694C7.34937 18.7705 7.13849 23.1435 9.79369 25.8125L16.6327 32.6871C18.6393 34.7041 19.0735 37.8035 17.6983 40.2942L13.4438 48H6.4C2.86538 48 0 45.1346 0 41.6V6.4C0 2.86538 2.86538 0 6.4 0H30.0177ZM33.7309 0L30.0384 6.72664C28.677 9.20674 29.1055 12.2865 31.0923 14.3007L38.3474 21.656C40.9968 24.3421 40.7597 28.7254 37.8361 31.1099L17.1276 48H41.6C45.1346 48 48 45.1346 48 41.6V6.4C48 2.86538 45.1346 0 41.6 0H33.7309Z"
-        fill="currentColor"
-      />
-    </svg>
-  )
-}
 
 function PowerhouseStackSection() {
   return (
@@ -68,12 +31,15 @@ function PowerhouseStackSection() {
               'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10',
             )}
           >
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2.5">
-                <Globe className="text-primary size-5 shrink-0" strokeWidth={2} aria-hidden />
-                <span className="text-primary text-base font-semibold sm:text-[17px]">Connect</span>
-              </div>
-              <p className={descriptionClass}>
+            <div className="flex flex-col items-start gap-4">
+              <Image
+                src="/home/powerhouse-stack/connect-logo.svg"
+                alt="Connect"
+                width={136}
+                height={25}
+                className="text-primary h-5 w-auto sm:h-6"
+              />
+              <p className={cn(descriptionClass, 'w-full')}>
                 Run work the same way every time, clear forms, shared files, private sync, and
                 ready-made templates.
               </p>
@@ -99,18 +65,15 @@ function PowerhouseStackSection() {
               'px-8 pt-8 shadow-[0_1px_0_rgba(0,0,0,0.04)] sm:px-10 sm:pt-10',
             )}
           >
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-2.5">
-                <span className="text-foreground text-base font-semibold sm:text-[17px]">
-                  Renown
-                </span>
-                <Sparkles
-                  className="size-5 shrink-0 text-[rgb(0,180,200)]"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-              </div>
-              <p className={descriptionClass}>
+            <div className="flex flex-col items-start gap-4">
+              <Image
+                src="/home/powerhouse-stack/renown-logo.svg"
+                alt="Renown"
+                width={121}
+                height={32}
+                className="h-5 w-auto sm:h-6"
+              />
+              <p className={cn(descriptionClass, 'w-full')}>
                 Verifiable history for every contributor — use it to find talent, grant access, and
                 collaborate with confidence.
               </p>
@@ -132,17 +95,18 @@ function PowerhouseStackSection() {
           {/* VETRA */}
           <article
             className={cn(
-              'flex flex-col gap-6 rounded-2xl border border-[rgb(180,235,210)] bg-[rgb(222,255,238)] p-8 sm:p-10',
+              'flex flex-col items-start gap-6 rounded-2xl border border-[rgb(180,235,210)] bg-[rgb(222,255,238)] p-8 sm:p-10',
               'shadow-[0_1px_0_rgba(0,0,0,0.04)]',
             )}
           >
-            <div className="flex items-center gap-2.5">
-              <VetraMark />
-              <span className="text-foreground text-base font-bold tracking-wide sm:text-lg">
-                VETRA
-              </span>
-            </div>
-            <p className={descriptionClass}>
+            <Image
+              src="/home/powerhouse-stack/vetra-logo.svg"
+              alt="Vetra"
+              width={155}
+              height={32}
+              className="h-5 w-auto sm:h-6"
+            />
+            <p className={cn(descriptionClass, 'w-full')}>
               Open infrastructure for open organizations, create custom workflows to automate your
               network.
             </p>
@@ -172,14 +136,15 @@ function PowerhouseStackSection() {
               className="absolute inset-0 size-full object-cover"
               sizes="(min-width: 768px) 50vw, 100vw"
             />
-            <div className="relative z-1 flex flex-col gap-6 p-8 sm:p-10">
-              <div className="flex items-center gap-3">
-                <PowerhouseIsotype className="size-7 sm:size-8" />
-                <span className="text-sm font-bold tracking-[0.12em] text-white sm:text-base">
-                  POWERHOUSE
-                </span>
-              </div>
-              <p className="text-[15px] leading-[150%] font-normal text-white/95 sm:text-base">
+            <div className="relative z-1 flex flex-col items-start gap-6 p-8 sm:p-10">
+              <Image
+                src="/home/powerhouse-stack/powerhouse-logo.svg"
+                alt="Powerhouse"
+                width={173}
+                height={20}
+                className="h-5 w-auto brightness-0 invert sm:h-6"
+              />
+              <p className="w-full text-[15px] leading-[150%] font-normal text-white/95 sm:text-base">
                 Learn More About the Powerhouse Stack
               </p>
               <div>
