@@ -51,6 +51,7 @@ chromatic-diagnostics.json
 
 # cursor
 .cursor
+.mcp.json
 
 # skills (npx skills add)
 .commandcode

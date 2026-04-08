@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 320" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="waitlistBlobRight" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="45%" stop-color="#4338CA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#waitlistBlobRight)"
+    d="M280 48c48 38 72 108 52 172-22 72-92 118-168 108-62-8-108-58-112-120-6-88 68-168 158-188 28-6 58 8 70 28z"
+    opacity="0.88"
+  />
+  <path
+    fill="url(#waitlistBlobRight)"
+    d="M320 200c-8 58-58 102-118 98-52-4-92-48-88-100 4-58 52-100 110-96 48 4 100 48 96 98z"
+    opacity="0.45"
+  />
+</svg>
