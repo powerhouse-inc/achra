@@ -24,7 +24,7 @@ function HomeWaitlistSection() {
   return (
     <section
       id="home-waitlist-section"
-      className="w-full py-14 sm:py-16 lg:py-20"
+      className="w-full py-16 sm:py-20 lg:py-24"
       aria-labelledby="home-waitlist-heading"
     >
       <div className="container">

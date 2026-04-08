@@ -9,9 +9,9 @@ const descriptionClass =
 
 function PowerhouseStackSection() {
   return (
-    <section className="w-full py-16 sm:py-20" aria-labelledby="powerhouse-stack-heading">
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="powerhouse-stack-heading">
       <div className="container flex flex-col gap-10 lg:gap-12">
-        <header className="mx-auto flex max-w-[550px] flex-col gap-6 text-center">
+        <header className="mx-auto flex max-w-2xl flex-col gap-6 text-center">
           <h2
             id="powerhouse-stack-heading"
             className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"

@@ -27,7 +27,7 @@ function HomeHero() {
   return (
     <section
       ref={heroSectionRef}
-      className="bg-background relative flex min-h-screen w-full items-center justify-center overflow-x-clip px-6 py-10 sm:px-12 sm:py-[30px]"
+      className="bg-background relative flex min-h-screen w-full items-center justify-center overflow-x-clip px-4 py-10 sm:px-6 md:px-8"
       aria-labelledby="home-hero-heading"
     >
       <div className="absolute inset-0 -bottom-20 z-0 -mt-24 overflow-visible" aria-hidden>

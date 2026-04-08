@@ -8,7 +8,7 @@ import type { Route } from 'next'
 
 function WhyAchraSection() {
   return (
-    <section className="w-full py-14 sm:py-16 lg:py-20" aria-labelledby="why-achra-heading">
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="why-achra-heading">
       <div className="container">
         <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
           <h2

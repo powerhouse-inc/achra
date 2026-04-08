@@ -5,10 +5,7 @@ import { DashboardCard } from './dashboard-card'
 
 function OperationalHubSection() {
   return (
-    <section
-      className="w-full px-6 py-16 sm:px-10 sm:py-20 lg:py-24"
-      aria-labelledby="operational-hub-heading"
-    >
+    <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="operational-hub-heading">
       <div className="container mx-auto grid max-w-2xl grid-cols-1 items-center gap-12 xl:max-w-6xl xl:grid-cols-[minmax(0,24rem)_1fr] xl:gap-x-16 xl:gap-y-0">
         <div className="order-2 flex justify-center xl:order-1 xl:justify-end">
           <DashboardCard />
