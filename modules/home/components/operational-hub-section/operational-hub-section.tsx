@@ -44,6 +44,7 @@ function OperationalHubSection() {
                 href="https://operationalhub.io/opshub"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Learn more about Operational Hub"
               >
                 More Info
               </Link>
