@@ -48,6 +48,11 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
 export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
 
 /**
+ * Routes where the navbar outer shell should be fully transparent (exact match).
+ */
+export const NAVBAR_TRANSPARENT_ROUTES: string[] = ['/', '/cases']
+
+/**
  * Builds navigation links for a specific network
  *
  * @param network - The network slug

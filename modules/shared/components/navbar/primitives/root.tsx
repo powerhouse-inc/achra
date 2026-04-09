@@ -1,6 +1,9 @@
 import { Suspense } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import { NAVBAR_BLUR_BACKGROUND_ROUTES } from '../../../config/navbar-config'
+import {
+  NAVBAR_BLUR_BACKGROUND_ROUTES,
+  NAVBAR_TRANSPARENT_ROUTES,
+} from '../../../config/navbar-config'
 import { RootPositioning } from './root-positioning'
 
 export interface RootProps {
@@ -13,7 +16,10 @@ export interface RootProps {
 function Root({ children }: RootProps) {
   return (
     <Suspense fallback={<RootContent>{children}</RootContent>}>
-      <RootPositioning routesWithBlurBackground={NAVBAR_BLUR_BACKGROUND_ROUTES}>
+      <RootPositioning
+        routesWithBlurBackground={NAVBAR_BLUR_BACKGROUND_ROUTES}
+        routesWithTransparentBackground={NAVBAR_TRANSPARENT_ROUTES}
+      >
         <RootContent>{children}</RootContent>
       </RootPositioning>
     </Suspense>
