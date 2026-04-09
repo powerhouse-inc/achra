@@ -8,7 +8,7 @@ import { Toaster } from '@/modules/shared/components/ui/sonner'
 import ff from '@/modules/shared/lib/feature-flags'
 import { RootThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
-import { Footer } from '@/shared/components/footer/footer'
+import { Footer } from '@/shared/components/footer'
 import { QueryClientProvider } from '@/shared/providers/query-client'
 import type { Metadata } from 'next'
 
