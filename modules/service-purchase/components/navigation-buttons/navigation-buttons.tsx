@@ -1,5 +1,6 @@
 'use client'
 
+import { ArrowRight } from 'lucide-react'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -15,6 +16,7 @@ function continueDisabledHint(step: ServicePurchaseStep): string | null {
 function NavigationButtons() {
   const { activeStep, goBack, goToStep } = useServicePurchaseStep()
 
+  const isConfirmation = activeStep === ServicePurchaseStep.Confirmation
   const isContinueEnabled =
     activeStep === ServicePurchaseStep.SelectOperator ||
     activeStep === ServicePurchaseStep.ConfigureServices
@@ -33,9 +35,10 @@ function NavigationButtons() {
       variant="default"
       disabled={!isContinueEnabled}
       onClick={handleContinue}
-      className="w-fit"
+      className="group/link pr-7! pl-8!"
     >
       Continue
+      <ArrowRight className="size-4 transition-transform duration-200 ease-in-out group-hover/link:translate-x-1.5" />
     </Button>
   )
 
@@ -44,20 +47,21 @@ function NavigationButtons() {
       <Button variant="secondary" onClick={goBack} className="w-fit">
         Back
       </Button>
-      {continueDisabledReason ? (
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span className="inline-flex cursor-not-allowed" tabIndex={0}>
-              {continueButton}
-            </span>
-          </TooltipTrigger>
-          <TooltipContent side="bottom" align="end">
-            {continueDisabledReason}
-          </TooltipContent>
-        </Tooltip>
-      ) : (
-        continueButton
-      )}
+      {!isConfirmation &&
+        (continueDisabledReason ? (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="inline-flex cursor-not-allowed" tabIndex={0}>
+                {continueButton}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" align="end">
+              {continueDisabledReason}
+            </TooltipContent>
+          </Tooltip>
+        ) : (
+          continueButton
+        ))}
     </div>
   )
 }
