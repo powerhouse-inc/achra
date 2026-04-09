@@ -48,7 +48,8 @@ function BillingPeriodSelector() {
   if (availableCycles.length === 0) return null
 
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <label className="text-foreground/60 text-base font-medium">Billing Cycles:</label>
       <ToggleGroup
         type="single"
         value={selectedBillingCycle}

@@ -31,8 +31,8 @@ function GovernanceOperationsSection() {
             Governance &amp; Operations
           </h2>
           <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
-            Move beyond outsourcing and unlock full autonomy. Run your entire network organization
-            through Achra.
+            Move beyond outsourcing and unlock full autonomy.
+            <br /> Run your entire network organization through Achra.
           </AnimatedSubtitle>
         </header>
 

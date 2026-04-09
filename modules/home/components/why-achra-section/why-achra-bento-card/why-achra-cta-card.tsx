@@ -20,12 +20,12 @@ function WhyAchraCtaCard({ description, href, linkLabel, className }: WhyAchraCt
       )}
     >
       <Image
-        src="/home/why-achra/cta-gradient.png"
+        src="/home/why-achra/cta-gradient.webp"
         alt=""
         fill
-        className="pointer-events-none inset-x-0! -bottom-9! h-auto! w-full! object-cover"
+        className="pointer-events-none object-cover object-bottom lg:inset-x-0! lg:-bottom-9! lg:h-auto! lg:w-full!"
         aria-hidden
-        sizes="(min-width: 1024px) 33vw, 100vw"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       />
       <div className="relative z-1 flex flex-col gap-6 p-10">
         <p className="text-foreground/80 text-base">{description}</p>

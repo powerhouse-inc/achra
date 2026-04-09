@@ -1,13 +1,13 @@
-import { Footer } from '.'
+import { OperationalHubSection } from './operational-hub-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Shared/Components/Footer',
-  component: Footer,
+  title: 'Modules/Home/Components/OperationalHubSection',
+  component: OperationalHubSection,
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Footer>
+} satisfies Meta<typeof OperationalHubSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

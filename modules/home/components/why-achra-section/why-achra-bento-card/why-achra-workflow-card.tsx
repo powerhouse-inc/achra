@@ -17,11 +17,12 @@ function WhyAchraWorkflowCard({ title, description, className }: WhyAchraWorkflo
       )}
     >
       <div className="flex flex-col gap-4 p-10">
-        <div className="relative h-[130px] w-[245px] overflow-hidden">
+        <div className="relative mx-auto h-[130px] w-[245px] overflow-hidden sm:mx-0">
           <Image
-            src="/home/why-achra/workflows.png"
+            src="/home/why-achra/workflows.webp"
             alt="Workflow templates: connected steps from RFP to payouts"
             fill
+            unoptimized // optimizing it makes it blurry
             className="object-cover object-center"
             priority={false}
             sizes="245px"

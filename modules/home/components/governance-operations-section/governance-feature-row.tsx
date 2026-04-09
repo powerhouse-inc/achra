@@ -3,9 +3,6 @@ import { cn } from '@/shared/lib/utils'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-const bodyClass = 'text-foreground/80 text-base leading-relaxed text-pretty'
-const labelClass = 'text-lg font-semibold tracking-tight sm:text-xl'
-
 interface GovernanceBulletItem {
   id: string
   icon: LucideIcon
@@ -59,11 +56,11 @@ function GovernanceFeatureRow({
           imagePosition === 'right' && 'lg:order-1',
         )}
       >
-        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-          <span className={cn(labelClass, 'text-primary')}>{labelStart}</span>
-          <span className={cn(labelClass, 'text-foreground')}>{labelEnd}</span>
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-lg font-semibold tracking-tight sm:text-2xl">
+          <span className="text-primary">{labelStart}</span>
+          <span className="text-foreground">{labelEnd}</span>
         </div>
-        <p className={bodyClass}>{description}</p>
+        <p className="text-foreground/80 text-base leading-relaxed text-pretty">{description}</p>
         <ul className={cn('flex list-none flex-col gap-2.5', bulletListClassName)}>
           {bulletItems.map((item) => {
             const Icon = item.icon

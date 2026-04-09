@@ -1,13 +1,13 @@
-import { Footer } from '.'
+import { FaqSection } from './faq-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
-  title: 'Shared/Components/Footer',
-  component: Footer,
+  title: 'Modules/Home/Components/FaqSection',
+  component: FaqSection,
   parameters: {
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Footer>
+} satisfies Meta<typeof FaqSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

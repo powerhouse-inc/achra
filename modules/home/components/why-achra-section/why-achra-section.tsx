@@ -26,11 +26,12 @@ function WhyAchraSection() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           <div className="flex flex-col gap-6 lg:gap-8">
             <WhyAchraTextCard
-              className="lg:flex-1"
+              className="sm:flex-1"
               title="Regain visibility"
               description="Transparency by default with structured RFPs, milestones, and audit trails so builders discover opportunities and operators see exactly where their services are needed."
             />
             <WhyAchraTextCard
+              className="sm:flex-1 lg:flex-none"
               title="Network Governance"
               description="Codify rules, approvals, and execution with Atlas. Operate securely with logged decisions, scoped permissions, and auditable changes."
             />
@@ -38,12 +39,13 @@ function WhyAchraSection() {
 
           <div className="flex flex-col gap-6 lg:gap-8">
             <WhyAchraAccentCard
+              className="sm:flex-1 lg:flex-none"
               accent="payments"
               title="Global Payments at Scale"
               description="Enable milestone-based payouts with stablecoins. Built-in collection and automated tax reporting (e.g., 1099/W-9) lets your network scale globally without the compliance chaos."
             />
             <WhyAchraAccentCard
-              className="lg:flex-1"
+              className="sm:flex-1"
               accent="ai"
               title="AI-Ready Infrastructure"
               description="Our operational patterns are structured to automate the busywork and make data/flows accessible where AI agents can be first-class participants, not afterthoughts."

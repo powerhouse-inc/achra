@@ -204,11 +204,6 @@
   --color-fusion: var(--fusion);
   --color-to-do: var(--to-do);
   --color-yellow: var(--yellow);
-
-  /* Font overrides */
-  --text-3xl: 2rem;
-  --text-4xl: 2.5rem;
-  --text-5xl: 4rem;
 }
 
 @layer utilities {
