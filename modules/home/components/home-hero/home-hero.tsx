@@ -56,7 +56,7 @@ function HomeHero() {
                 as="h1"
                 className="text-foreground text-3xl leading-[1.15] font-extrabold tracking-[-0.02em] sm:text-4xl md:text-5xl lg:text-[3.25rem]"
                 text="The Marketplace For Global Coordination"
-                delay={100}
+                delay={80}
                 animateBy="words"
                 direction="bottom"
               />
@@ -77,7 +77,7 @@ function HomeHero() {
           initial={partnershipBlurInitial}
           animate={heroInView ? partnershipBlurAnimate : partnershipBlurInitial}
           transition={{
-            delay: 0.7,
+            delay: 0.6,
             duration: 0.7,
             times: [0, 0.5, 1],
             ease: 'easeInOut',
