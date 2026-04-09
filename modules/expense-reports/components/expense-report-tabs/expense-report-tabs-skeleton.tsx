@@ -1,22 +1,11 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
+import { TabSkeleton, TabsSkeleton } from '@/modules/shared/components/tab-skeleton'
 
-interface ExpenseReportTabsSkeletonProps {
-  className?: string
-}
-
-function ExpenseReportTabsSkeleton({ className }: ExpenseReportTabsSkeletonProps) {
+function ExpenseReportTabsSkeleton() {
   return (
-    <div className={cn('flex flex-col gap-2', className)}>
-      {/* TabsList skeleton */}
-      <div className="bg-muted inline-flex h-9 w-fit items-center justify-center gap-1 rounded-lg p-0.75">
-        {/* Account Snapshot tab skeleton */}
-        <Skeleton className="h-[calc(100%-1px)] w-34 rounded-md px-2 py-1" />
-
-        {/* Expense Reports tab skeleton */}
-        <Skeleton className="h-[calc(100%-1px)] w-33 rounded-md px-2 py-1" />
-      </div>
-    </div>
+    <TabsSkeleton>
+      <TabSkeleton className="w-32" active />
+      <TabSkeleton className="w-35" />
+    </TabsSkeleton>
   )
 }
 

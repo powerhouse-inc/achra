@@ -1,8 +1,9 @@
+import { encodeSectionId } from '@/modules/shared/components/section-activation'
+import { SectionTitle } from '@/modules/shared/components/section-title'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { SectionTitle } from '../section-title'
-import { BuilderTeams } from './components/builder-teams/builder-teams'
+
+import { Builders } from './components/builders/builders'
 
 export function BuildersSection() {
   return (
@@ -11,7 +12,7 @@ export function BuildersSection() {
       id={encodeSectionId(NetworkHomepageSections.Builders)}
     >
       <SectionTitle title="Builders" hash="builders" />
-      <BuilderTeams />
+      <Builders />
     </section>
   )
 }

@@ -1,9 +1,9 @@
 import { ArrowUpRight } from 'lucide-react'
-import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/shared/lib/utils'
 
 interface LatestKeyResultsProps {
-  keyResults: ScopeOfWork_KeyResult[]
+  keyResults: Sow_KeyResult[]
 }
 
 export default function LatestKeyResults({ keyResults }: LatestKeyResultsProps) {

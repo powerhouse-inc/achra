@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+.scannerwork
 
 # next.js
 /.next/
@@ -50,3 +51,18 @@ chromatic-diagnostics.json
 
 # cursor
 .cursor
+.mcp.json
+
+# skills (npx skills add)
+.commandcode
+
+# Ignore .agent for git but allow Gemini to read
+.agent/
+.agents/
+!.agent/rules/
+!.agent/workflows/
+
+# Serena
+.serena
+.claude
+CLAUDE.md

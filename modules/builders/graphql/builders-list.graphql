@@ -1,0 +1,24 @@
+query BuildersList($filter: buildersFilter) {
+  builders(filter: $filter) {
+    code
+    description
+    id
+    icon
+    lastModified
+    links {
+      id
+      label
+      url
+    }
+    name
+    scopes
+    skills
+    slug
+    status
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
+  }
+}

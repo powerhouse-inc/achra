@@ -4,8 +4,8 @@ import { cn } from '@/shared/lib/utils'
 const pageContentVariants = cva('container flex flex-col mb-8', {
   variants: {
     variant: {
-      default: 'mt-8 mb-8',
-      'with-breadcrumb': 'mt-20 sm:mt-18 md:mt-20',
+      default: 'mt-6 mb-8',
+      'with-breadcrumb': 'mt-20 sm:mt-19',
     },
   },
   defaultVariants: {

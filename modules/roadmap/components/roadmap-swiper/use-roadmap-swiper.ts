@@ -21,5 +21,10 @@ export default function useRoadmapSwiper() {
     })
   }, [adjustCardHeights])
 
-  return { swiperRef, isSwiperReady, handleAfterInit, adjustCardHeights }
+  return {
+    swiperRef,
+    isSwiperReady,
+    handleAfterInit,
+    adjustCardHeights,
+  }
 }

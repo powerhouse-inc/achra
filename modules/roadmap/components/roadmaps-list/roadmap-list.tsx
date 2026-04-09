@@ -1,0 +1,86 @@
+import { createLoader, parseAsArrayOf, parseAsString, parseAsStringEnum } from 'nuqs/server'
+import {
+  type Network,
+  useRoadmapListQuery,
+  WorkstreamStatus,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roadmap-section'
+import { Button } from '@/modules/shared/components/ui/button'
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyTitle,
+} from '@/modules/shared/components/ui/empty'
+import { cn } from '@/modules/shared/lib/utils'
+
+const filtersParser = createLoader({
+  search: parseAsString.withDefault(''),
+  statuses: parseAsArrayOf(parseAsStringEnum(Object.values(WorkstreamStatus))).withDefault([]),
+})
+
+interface RoadmapListProps {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{
+    search: string
+    statuses: string[]
+  }>
+}
+
+async function RoadmapList({ params, searchParams }: RoadmapListProps) {
+  const { slug } = await params
+
+  const filters = await filtersParser(searchParams)
+
+  const data = await useRoadmapListQuery.fetcher({
+    filter: {
+      networkSlug: slug,
+      // TODO: Handle multiple statuses (should be implemented in the api)
+      workstreamStatus: filters.statuses[0] ? filters.statuses[0] : undefined,
+    },
+  })()
+
+  const hasRoadmaps = data.workstream.some((workstream) => {
+    return (workstream.sow?.roadmaps.length ?? 0) > 0
+  })
+
+  const deliverables = data.workstream.flatMap((workstream) => workstream.sow?.deliverables ?? [])
+
+  if (!hasRoadmaps) {
+    return (
+      <Empty>
+        <EmptyHeader>
+          <EmptyTitle>No roadmaps found</EmptyTitle>
+          <EmptyDescription>There are no roadmaps to display at this time.</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    )
+  }
+
+  return (
+    <>
+      <div className="flex flex-col gap-14">
+        {data.workstream.map((workstream) =>
+          workstream.sow?.roadmaps.map((roadmap, index) => (
+            <RoadmapSection
+              key={roadmap.id}
+              roadmap={roadmap}
+              workstreamTitle={workstream.title ?? ''}
+              workstreamSlug={workstream.slug ?? ''}
+              network={
+                workstream.network as Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
+              }
+              deliverables={deliverables}
+              className={cn({ '-mt-2': index !== 0 })}
+            />
+          )),
+        )}
+      </div>
+      <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
+        Load More
+      </Button>
+    </>
+  )
+}
+
+export { RoadmapList }

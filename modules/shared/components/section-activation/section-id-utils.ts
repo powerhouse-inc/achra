@@ -20,3 +20,16 @@ export function encodeSectionId(sectionId: string) {
 export function decodeSectionId(sectionId: string) {
   return sectionId.replace(SECTION_ENCODING_PREFIX, '')
 }
+
+/**
+ * Scroll to a section by its ID with smooth behavior.
+ * This is useful for anchor links that need to work even when the hash is already in the URL.
+ *
+ * @param sectionId - The section ID to scroll to
+ */
+export function scrollToSection(sectionId: string) {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
+}

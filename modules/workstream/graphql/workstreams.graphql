@@ -1,0 +1,68 @@
+query Workstreams($filter: WorkstreamsFilter) {
+  workstreams(filter: $filter) {
+    title
+    status
+    slug
+    client {
+      name
+      icon
+    }
+    initialProposal {
+      status
+      author {
+        name
+      }
+      paymentTerms {
+        proposer
+        currency
+        totalAmount
+        paymentModel
+      }
+      sow {
+        description
+        roadmaps {
+          milestones {
+            budget
+            scope {
+              deliverables
+            }
+          }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
+        }
+      }
+    }
+    rfp {
+      title
+      summary
+      budgetMax
+      budgetMin
+      budgetCurrency
+      briefing
+      submissionDeadline
+    }
+    sow {
+      projects {
+        title
+      }
+      roadmaps {
+        milestones {
+          id
+        }
+      }
+    }
+    alternativeProposals {
+      id
+    }
+    network {
+      name
+      logo
+      darkThemeLogo
+      slug
+    }
+  }
+}

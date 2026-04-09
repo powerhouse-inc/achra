@@ -35,7 +35,7 @@ jobs:
         run: pnpm install
 
       - name: Run Chromatic
-        uses: chromaui/action@latest
+        uses: chromaui/action@v13.3.5
         with:
           projectToken: ${{ secrets.CHROMATIC_DSPOT_PROJECT_TOKEN }}
           exitZeroOnChanges: false # fail on changes

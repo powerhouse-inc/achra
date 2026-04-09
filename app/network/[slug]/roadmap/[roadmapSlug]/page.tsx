@@ -1,68 +1,64 @@
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { notFound } from 'next/navigation'
-import {
-  type ScopeOfWorkQuery,
-  useScopeOfWorkQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { RoadmapDetailsContent } from '@/modules/roadmap/components/roadmap-details-content'
-import { SCOPE_OF_WORK_DOCUMENT_ID } from '@/modules/roadmap/lib/constants'
-import {
-  fetchPowerhouseScopeOfWork,
-  getRoadmapFromScopeOfWork,
-} from '@/modules/roadmap/lib/fetch-scope-of-work'
+import { getRoadmapDetailsData } from '@/modules/roadmap/services/roadmaps'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
+import type { Route } from 'next'
 
 interface RoadmapPageProps {
-  params: Promise<{ roadmapSlug: string }>
+  params: Promise<{ slug: string; roadmapSlug: string }>
 }
 
 export default async function RoadmapPage({ params }: RoadmapPageProps) {
-  const { roadmapSlug } = await params
+  if (!ff.ROADMAPS_ENABLED) {
+    return notFound()
+  }
 
-  const scopeOfWork = await fetchPowerhouseScopeOfWork()
-  const roadmap = getRoadmapFromScopeOfWork(scopeOfWork, roadmapSlug)
+  const { slug: networkSlug, roadmapSlug } = await params
+  const networkData = await getNetworkBySlug(networkSlug)
+  const networkName = networkData?.name ?? 'Unknown'
 
-  const queryClient = new QueryClient()
-  queryClient.setQueryData<ScopeOfWorkQuery>(
-    useScopeOfWorkQuery.getKey({
-      docId: SCOPE_OF_WORK_DOCUMENT_ID,
-    }),
-    scopeOfWork,
+  const { roadmap, deliverables, contributors, projects } = await getRoadmapDetailsData(
+    networkSlug,
+    roadmapSlug,
   )
 
-  if (!scopeOfWork || !roadmap) {
+  if (!roadmap) {
     notFound()
   }
 
   const items: BreadcrumbItemNavigation[] = [
-    { label: 'Networks', href: '/networks' },
-    { label: 'Powerhouse', href: '/network/powerhouse' },
-    { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' },
+    { label: networkName, href: `/network/${networkSlug}` as Route },
+    { label: 'Roadmaps', href: `/network/${networkSlug}/roadmaps` as Route },
     {
       label: roadmap.title,
-      href: `/network/powerhouse/roadmap/${roadmapSlug}`,
+      href: `/network/${networkSlug}/roadmap/${roadmapSlug}` as Route,
     },
   ]
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <main>
-        <PageBreadcrumbContainer>
-          <Breadcrumb items={items} />
-        </PageBreadcrumbContainer>
+    <main>
+      <PageBreadcrumbContainer>
+        <Breadcrumb items={items} />
+      </PageBreadcrumbContainer>
 
-        <PageContent className="gap-6" as="div" variant="with-breadcrumb">
-          <div className="flex flex-col">
-            <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
-              {roadmap.title}
-            </h1>
-          </div>
+      <PageContent className="gap-6" as="div" variant="with-breadcrumb">
+        <div className="flex flex-col">
+          <h1 className="text-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-2xl xl:leading-7">
+            {roadmap.title}
+          </h1>
+        </div>
 
-          <RoadmapDetailsContent />
-        </PageContent>
-      </main>
-    </HydrationBoundary>
+        <RoadmapDetailsContent
+          roadmap={roadmap}
+          deliverables={deliverables}
+          contributors={contributors}
+          projects={projects}
+        />
+      </PageContent>
+    </main>
   )
 }

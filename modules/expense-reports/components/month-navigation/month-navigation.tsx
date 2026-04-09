@@ -1,100 +1,54 @@
 'use client'
 
-import { parse } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { useQueryState } from 'nuqs'
 import { Button } from '@/modules/shared/components/ui/button'
-import { viewMonthSearchParamParser } from '../../lib/search-params-client'
-import type { Route } from 'next'
+import { useMonthNavigation } from './use-month-navigation'
 
-const MONTH_NAMES = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-]
-
-function parseMonthString(monthString: string | null): Date {
-  if (!monthString) {
-    return new Date()
-  }
-
-  try {
-    return parse(monthString, 'MMMyyyy', new Date())
-  } catch {
-    return new Date()
-  }
+interface MonthNavigationProps {
+  availableMonths: Date[]
+  defaultMonth: Date
 }
 
-function formatMonthString(date: Date): string {
-  const month = MONTH_NAMES[date.getMonth()]
-  const year = date.getFullYear()
-  return `${month}${year}`
-}
-
-function formatMonthDisplay(date: Date): string {
-  const month = MONTH_NAMES[date.getMonth()].toUpperCase()
-  const year = date.getFullYear()
-  return `${month} ${year}`
-}
-
-function getPreviousMonth(date: Date): Date {
-  const newDate = new Date(date)
-  newDate.setMonth(newDate.getMonth() - 1)
-  return newDate
-}
-
-function getNextMonth(date: Date): Date {
-  const newDate = new Date(date)
-  newDate.setMonth(newDate.getMonth() + 1)
-  return newDate
-}
-
-function MonthNavigation() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const [viewMonth] = useQueryState('viewMonth', viewMonthSearchParamParser)
-
-  const currentMonth = parseMonthString(viewMonth)
-
-  const createUrl = (monthString: string): Route => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('viewMonth', monthString)
-    return `${pathname}?${params.toString()}` as Route
-  }
-
-  const previousMonth = getPreviousMonth(currentMonth)
-  const nextMonth = getNextMonth(currentMonth)
+function MonthNavigation({ availableMonths, defaultMonth }: MonthNavigationProps) {
+  const { selectedMonth, selectedMonthDisplay, previousMonth, nextMonth, createUrl } =
+    useMonthNavigation({ availableMonths, defaultMonth })
 
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex gap-0.5">
-        <Button asChild variant="ghost" size="icon" aria-label="Previous month">
-          <Link href={createUrl(formatMonthString(previousMonth))}>
-            <ChevronLeft className="text-foreground/50 size-4" />
-          </Link>
-        </Button>
-        <Button asChild variant="ghost" size="icon" aria-label="Next month">
-          <Link href={createUrl(formatMonthString(nextMonth))}>
-            <ChevronRight className="text-foreground/50 size-4" />
-          </Link>
-        </Button>
+    <nav className="flex items-center gap-2" aria-label="Month navigation">
+      <div className="flex gap-2">
+        {previousMonth ? (
+          <Button asChild variant="ghost" size="icon" aria-label="Previous month">
+            <Link href={createUrl(previousMonth)}>
+              <ChevronLeft className="text-foreground size-4" />
+            </Link>
+          </Button>
+        ) : (
+          <Button variant="ghost" size="icon" aria-label="Previous month" disabled>
+            <ChevronLeft className="text-foreground size-4" />
+          </Button>
+        )}
+        {nextMonth ? (
+          <Button asChild variant="ghost" size="icon" aria-label="Next month">
+            <Link href={createUrl(nextMonth)}>
+              <ChevronRight className="text-foreground size-4" />
+            </Link>
+          </Button>
+        ) : (
+          <Button variant="ghost" size="icon" aria-label="Next month" disabled>
+            <ChevronRight className="text-foreground size-4" />
+          </Button>
+        )}
       </div>
 
-      <div className="text-foreground/50 text-xl leading-[120%] font-bold">
-        {formatMonthDisplay(currentMonth)}
-      </div>
-    </div>
+      <time
+        className="text-foreground/50 text-base/6 font-semibold sm:text-xl/[120%] sm:font-bold"
+        dateTime={`${selectedMonth.getUTCFullYear()}-${String(selectedMonth.getUTCMonth() + 1).padStart(2, '0')}`}
+        aria-live="polite"
+      >
+        {selectedMonthDisplay}
+      </time>
+    </nav>
   )
 }
 

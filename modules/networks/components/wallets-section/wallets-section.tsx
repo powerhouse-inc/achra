@@ -3,7 +3,7 @@
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../section-title/section-title'
+import SectionTitle from '../../../shared/components/section-title/section-title'
 import { WalletsCard } from './components/wallets-card/wallets-card'
 
 export interface Wallet {

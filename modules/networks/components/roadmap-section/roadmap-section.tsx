@@ -1,55 +1,94 @@
-import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
-import { SectionTitle } from '@/modules/networks/components/section-title'
+import {
+  type ScopeOfWork_Milestone,
+  useRoadmapListQuery,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
+import { SectionTitle } from '@/modules/shared/components/section-title'
 import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { ROADMAP_TABS_CONFIG } from './constants'
 
 interface RoadmapSectionProps {
-  roadmaps: ScopeOfWork_Roadmap[]
+  params: Promise<{ slug: string }>
 }
 
-export default function RoadmapSection({ roadmaps }: RoadmapSectionProps) {
+export default async function RoadmapSection({ params }: RoadmapSectionProps) {
+  const { slug } = await params
+
+  const data = await useRoadmapListQuery.fetcher({
+    filter: {
+      networkSlug: slug,
+    },
+  })()
+
+  const hasRoadmaps = data.workstream.some((workstream) => {
+    return (workstream.sow?.roadmaps.length ?? 0) > 0
+  })
+
+  if (!hasRoadmaps) {
+    return null
+  }
+  const roadmaps = data.workstream.flatMap((workstream) => workstream.sow?.roadmaps ?? [])
+  const deliverables = data.workstream.flatMap((workstream) => workstream.sow?.deliverables ?? [])
+  const hasMoreThanOneRoadmap = roadmaps.length > 1
+
   return (
     <section
-      className={cn('flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
+      // Note: The -mt-2 is to compensate for the swiper pagination dots height
+      className={cn('-mt-2 flex flex-col gap-6 lg:gap-4 xl:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Roadmap)}
     >
       <SectionTitle title="Roadmap" hash="roadmap" />
-      <ScrollableTabs defaultValue="phase-1" className="md:order-1">
-        <ScrollableTabsList>
+      <ScrollableTabs
+        defaultValue={roadmaps[0].id}
+        className="gap-4 overflow-visible md:order-1 xl:gap-6"
+      >
+        <ScrollableTabsList className={cn({ 'h-fit bg-transparent p-0': !hasMoreThanOneRoadmap })}>
           <div className="flex w-fit">
-            {ROADMAP_TABS_CONFIG.map((tab) => (
+            {roadmaps.map((roadmap) => (
               <TabsTrigger
-                key={tab.id}
-                value={tab.id}
-                className="dark:data-[state=active]:bg-background text-muted-foreground data-[state=active]:text-foreground border-none px-3 py-1.5 leading-5"
+                key={roadmap.id}
+                value={roadmap.id}
+                className={cn({
+                  'data-[state=active]:text-foreground/50 dark:text-foreground/50 border-none bg-transparent p-0 text-xl/6 data-[state=active]:font-bold dark:data-[state=active]:bg-transparent':
+                    !hasMoreThanOneRoadmap,
+                })}
               >
-                {tab.label}
+                {roadmap.title}
               </TabsTrigger>
             ))}
           </div>
         </ScrollableTabsList>
-        {roadmaps.map((roadmap, index) => (
-          <TabsContent
-            key={roadmap.id}
-            value={`phase-${index + 1}`}
-            className="flex flex-col gap-4 xl:gap-6"
-          >
-            <div className="text-foreground/50 text-sm/5.5 font-semibold xl:text-base">
+        {roadmaps.map((roadmap) => (
+          <TabsContent key={roadmap.id} value={roadmap.id} className="flex flex-col gap-4 xl:gap-6">
+            <div
+              className={cn('text-foreground/50 text-sm/5.5 font-semibold xl:text-base', {
+                hidden: !roadmap.description,
+              })}
+            >
               {roadmap.description}
             </div>
             <div className="relative z-10 flex flex-col gap-6 sm:hidden">
               <div className="bg-border absolute top-0 left-1/2 -z-10 h-full w-1 -translate-x-1/2" />
               {roadmap.milestones.map((milestone) => (
-                <MilestoneExtendedCard key={milestone.id} milestone={milestone} />
+                <MilestoneExtendedCard
+                  key={milestone.id}
+                  milestone={milestone as ScopeOfWork_Milestone}
+                  networkSlug={slug}
+                  roadmapSlug={roadmap.slug}
+                  deliverables={deliverables}
+                />
               ))}
             </div>
-            <RoadmapSwiper milestones={roadmap.milestones} />
+            <RoadmapSwiper
+              milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
+              networkSlug={slug}
+              roadmapSlug={roadmap.slug}
+              deliverables={deliverables}
+            />
           </TabsContent>
         ))}
       </ScrollableTabs>

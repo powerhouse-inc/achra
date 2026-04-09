@@ -34,7 +34,7 @@ export function NavigationCard({
     <Card
       data-slot="navigation-card"
       className={cn(
-        'flex h-full w-full flex-col gap-2',
+        'bg-popover flex h-full w-full flex-col gap-2 border-none',
         isCompact ? 'p-2' : 'p-2 px-4 pb-4',
         'xl:p-2 xl:px-4 xl:pb-4',
         className,

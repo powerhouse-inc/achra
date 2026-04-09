@@ -1,14 +1,6 @@
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { NetworkHomepageSections } from '@/modules/shared/config/constants'
-
-/**
- * Network profile document ID in Switchboard/Connect
- */
-export const NETWORK_PROFILE_DOCUMENT_ID = '76314398-e7ad-4925-aad4-e994b8f6eb16'
-/**
- * Network profile document type in Switchboard/Connect
- */
-export const NETWORK_PROFILE_DOCUMENT_TYPE = 'powerhouse/network-profile'
+import ff from '@/modules/shared/lib/feature-flags'
 
 /**
  * Storage key for the homepage banner expanded state
@@ -20,7 +12,7 @@ export const HOME_BANNER_EXPANDED_STORAGE_KEY = 'home-banner-expanded'
  */
 export const NETWORK_HOMEPAGE_SECTIONS = [
   NetworkHomepageSections.Proposals,
-  NetworkHomepageSections.Roadmap,
+  ...(ff.ROADMAPS_ENABLED ? [NetworkHomepageSections.Roadmap] : []),
   NetworkHomepageSections.Finances,
   NetworkHomepageSections.Wallets,
   NetworkHomepageSections.Builders,

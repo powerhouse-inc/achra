@@ -1,1 +1,2 @@
-export * from './initial-proposal-header'
+export { InitialProposalHeader } from './initial-proposal-header'
+export { InitialProposalHeaderSkeleton } from './initial-proposal-header-skeleton'

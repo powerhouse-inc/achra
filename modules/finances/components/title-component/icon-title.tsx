@@ -4,12 +4,12 @@ import { cn } from '@/shared/lib/utils'
 
 interface Props {
   title: string
-  icon: string
+  icon?: string
   className?: string
   code: string
 }
 
-export default function IconTitleWithCode({ icon, title, className, code }: Props) {
+function IconTitleWithCode({ icon, title, className, code }: Readonly<Props>) {
   return (
     <div
       data-slot="icon-title-container"
@@ -24,7 +24,7 @@ export default function IconTitleWithCode({ icon, title, className, code }: Prop
         )}
       >
         <Image
-          src={icon}
+          src={icon ?? '/default-icon-cards-budget.svg'}
           width={42}
           height={42}
           alt="Picture"
@@ -51,3 +51,5 @@ export default function IconTitleWithCode({ icon, title, className, code }: Prop
     </div>
   )
 }
+
+export { IconTitleWithCode }

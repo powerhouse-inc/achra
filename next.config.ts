@@ -6,24 +6,14 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   images: {
     qualities: [100, 75],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.achra.com',
+      },
+    ],
   },
   productionBrowserSourceMaps: true,
-  async rewrites() {
-    if (!process.env.HOMEPAGE_REMOTE_URL) {
-      return []
-    }
-
-    return [
-      {
-        source: '/',
-        destination: process.env.HOMEPAGE_REMOTE_URL ?? '',
-      },
-      {
-        source: '/cases',
-        destination: `${process.env.HOMEPAGE_REMOTE_URL!}/cases`,
-      },
-    ]
-  },
   turbopack: {
     rules: {
       '*.svg': {

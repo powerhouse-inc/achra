@@ -1,5 +1,7 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { ArrowLeft, Search, X } from 'lucide-react'
+import SimpleBar from 'simplebar-react'
+import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -12,20 +14,20 @@ import {
 } from '@/modules/shared/components/ui/dialog'
 import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
-import { mockDeliverables } from '../../mock/deliverable'
 import { StatusSelectDelivarableDrawer, StatusSelectDeliverable } from './key-result-filters'
 import { KeyResultItem } from './key-result-item'
-import useDeliverableFilters from './useDeliverableFilters'
+import useDeliverableFilters from './use-deliverable-filters'
 
 interface KeyResultsModalProps {
   isOpen: boolean
   onClose: () => void
+  deliverables: ScopeOfWork_Deliverable[]
 }
 
-export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
+export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsModalProps) {
   const { search, statuses, onReset, setSearch, setStatuses, filteredDeliverables } =
     useDeliverableFilters({
-      deliverables: mockDeliverables,
+      deliverables,
     })
 
   const handleClose = () => {
@@ -39,7 +41,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
         <DialogPrimitive.Content
           className={cn(
             // mobile
-            'no-scrollbar top-0 left-0 z-180 mb-0 h-screen max-h-full! w-screen max-w-full translate-x-0 translate-y-0 content-start items-start gap-0 overflow-hidden overflow-y-auto rounded-none p-0',
+            'no-scrollbar top-0 left-0 z-180 mb-0 h-screen max-h-full! w-screen max-w-full translate-x-0 translate-y-0 content-start items-start gap-0 overflow-hidden overscroll-contain rounded-none p-0',
             'sm:top-[50%] sm:left-[50%] sm:mb-12 sm:h-auto sm:w-full sm:max-w-xl! sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-lg md:max-w-172! lg:max-w-216! xl:max-h-173.5! xl:max-w-279.5!',
             // Base styles from DialogContent
             'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed grid border shadow-lg duration-200',
@@ -111,7 +113,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
             </div>
           </DialogHeader>
 
-          <div className="no-scrollbar overflow-y-auto px-4 py-3 sm:h-150 sm:px-4 sm:py-3">
+          <SimpleBar className="px-4 py-3 sm:h-150 sm:px-4 sm:py-3" autoHide={false}>
             {filteredDeliverables.length === 0 ? (
               <div className="flex h-full items-center justify-center">
                 <p className="text-muted-foreground text-lg">Results not found...</p>
@@ -123,7 +125,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                     <div className="bg-accent mb-3 flex items-center justify-between rounded-md p-2">
                       <div className="flex items-center gap-1">
                         <span className="text-foreground/30 text-sm/4.5 font-semibold">
-                          {deliverable.id}
+                          {deliverable.code}
                         </span>
                         <h3 className="text-foreground text-sm/5.5 font-semibold">
                           {deliverable.title}
@@ -142,7 +144,7 @@ export function KeyResultsModal({ isOpen, onClose }: KeyResultsModalProps) {
                 ))}
               </div>
             )}
-          </div>
+          </SimpleBar>
         </DialogPrimitive.Content>
       </DialogPortal>
     </Dialog>

@@ -1,3 +1,5 @@
+import { OPERATIONAL_HUB_URL } from '../config/constants'
+import ff from '../lib/feature-flags'
 import type { RouteWithDynamicPages } from '../types/routes'
 
 /**
@@ -18,9 +20,17 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     label: 'Networks',
     href: '/networks',
   },
+  ...(ff.workstreams.WORKSTREAMS_ENABLED
+    ? [
+        {
+          label: 'Workstreams',
+          href: '/workstreams',
+        } satisfies NavbarLink,
+      ]
+    : []),
   {
-    label: 'Workstreams',
-    href: '/workstreams',
+    label: 'Operational Hub',
+    href: OPERATIONAL_HUB_URL,
   },
   {
     label: 'Services',
@@ -38,6 +48,11 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
 export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
 
 /**
+ * Routes where the navbar outer shell should be fully transparent (exact match).
+ */
+export const NAVBAR_TRANSPARENT_ROUTES: string[] = ['/', '/cases']
+
+/**
  * Builds navigation links for a specific network
  *
  * @param network - The network slug
@@ -45,16 +60,24 @@ export const NAVBAR_BLUR_BACKGROUND_ROUTES: string[] = ['/networks']
  */
 export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
   return [
-    {
-      label: 'Contribute',
-      href: `/network/${network}/workstreams` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
-    },
-    {
-      label: 'Roadmap',
-      href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
-      activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
-    },
+    ...(ff.workstreams.WORKSTREAMS_ENABLED
+      ? [
+          {
+            label: 'Contribute',
+            href: `/network/${network}/workstreams` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/workstreams?(\/.*)?/.source,
+          },
+        ]
+      : []),
+    ...(ff.ROADMAPS_ENABLED
+      ? [
+          {
+            label: 'Roadmaps',
+            href: `/network/${network}/roadmaps` as RouteWithDynamicPages,
+            activeWhen: /\/network\/[a-z]+\/roadmaps?(\/.*)?/.source,
+          },
+        ]
+      : []),
     {
       label: 'Finances',
       href: `/network/${network}/finances` as RouteWithDynamicPages,
@@ -65,10 +88,14 @@ export function buildNetworkNavbarLinks(network: string): NavbarLink[] {
       href: `/network/${network}/builders` as RouteWithDynamicPages,
       activeWhen: /\/network\/[a-z]+\/builders?(\/.*)?/.source,
     },
-    {
-      label: 'Governance',
-      href: 'https://governance.achra.network',
-      isExternal: true,
-    },
+    ...(ff.GOVERNANCE_LINK_ENABLED
+      ? [
+          {
+            label: 'Governance',
+            href: 'https://governance.achra.network',
+            isExternal: true,
+          } satisfies NavbarLink,
+        ]
+      : []),
   ]
 }

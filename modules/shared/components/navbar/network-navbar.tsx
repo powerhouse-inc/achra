@@ -16,7 +16,7 @@ function NetworkNavbar() {
       </NavbarPrimitives.BrandArea>
 
       <Suspense fallback={<NetworksNavSkeleton />}>
-        <NetworksNav />
+        <NetworksNav className="hidden lg:hidden xl:flex" />
       </Suspense>
 
       <NavbarActions />

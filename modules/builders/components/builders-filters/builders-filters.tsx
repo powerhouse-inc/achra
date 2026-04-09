@@ -1,0 +1,67 @@
+'use client'
+
+import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
+import SearchInput from '@/modules/shared/components/form/search-input'
+import { Button } from '@/modules/shared/components/ui/button'
+import { Separator } from '@/modules/shared/components/ui/separator'
+import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills-select'
+import { useBuildersFiltersContext } from './builders-filters-context'
+
+export default function BuilderFilters() {
+  const {
+    search,
+    skills,
+    isSearchPending,
+    isSkillsPending,
+    isResetPending,
+    isResetDisabled,
+    setSearch,
+    setSkills,
+    onReset,
+  } = useBuildersFiltersContext()
+
+  return (
+    <div
+      className="grid grid-cols-[1fr_auto] gap-4 md:grid-cols-[1fr_400px] lg:gap-6"
+      aria-busy={isResetPending || isSearchPending || isSkillsPending}
+    >
+      <SearchInput
+        value={search}
+        onChange={(value) => {
+          setSearch(value)
+        }}
+        placeholder="Search..."
+        isLoading={isSearchPending}
+        disabled={isResetPending}
+      />
+      <div className="hidden items-center gap-2 md:flex lg:gap-4">
+        <BuilderSkillsSelect
+          skills={skills}
+          setSkills={setSkills}
+          className="w-69"
+          isLoading={isSkillsPending}
+          disabled={isResetPending}
+        />
+        <Button
+          className="text-foreground/50 px-4 hover:bg-transparent dark:hover:bg-transparent"
+          variant="ghost"
+          onClick={onReset}
+          disabled={isResetDisabled}
+        >
+          Reset Filter
+        </Button>
+      </div>
+
+      <div className="flex items-center gap-4 md:hidden">
+        <Separator orientation="vertical" className="h-7!" />
+        <FilterDrawer
+          onReset={onReset}
+          isResetDisabled={isResetDisabled}
+          isResetPending={isResetPending}
+        >
+          <BuilderSkillsSelectDrawer skills={skills} setSkills={setSkills} />
+        </FilterDrawer>
+      </div>
+    </div>
+  )
+}

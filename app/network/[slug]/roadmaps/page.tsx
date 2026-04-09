@@ -1,38 +1,54 @@
+import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
-import RoadmapFiltersSkeleton from '@/modules/roadmap/components/roadmap-filters/roadmap-filters-skeleton'
-import { RoadmapSection } from '@/modules/roadmap/components/roadmap-section/roadmap-section'
-import { mockedRoadmaps } from '@/modules/roadmap/mocks/roadmap'
+import { RoadmapList } from '@/modules/roadmap/components/roadmaps-list/roadmap-list'
+import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list/roadmaps-list-skeleton'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import { PageBackground, PageContent } from '@/modules/shared/components/page-containers'
-import { Button } from '@/modules/shared/components/ui/button'
+import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
+import { PageContent } from '@/modules/shared/components/page-containers'
+import ff from '@/modules/shared/lib/feature-flags'
 import type { Route } from 'next'
 
-const items = [
-  { label: 'Networks', href: '/networks' as Route },
-  { label: 'Powerhouse', href: '/network/powerhouse' as Route },
-  { label: 'Roadmaps', href: '/network/powerhouse/roadmaps' as Route },
-]
+interface RoadmapPageProps {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{
+    search: string
+    statuses: string[]
+  }>
+}
 
-export default function RoadmapPage() {
+export default async function RoadmapPage({ params, searchParams }: RoadmapPageProps) {
+  if (!ff.ROADMAPS_ENABLED) {
+    return notFound()
+  }
+
+  const searchParamsString = JSON.stringify(await searchParams)
+
+  const { slug } = await params
+
+  const networkData = await getNetworkBySlug(slug)
+
+  const networkName = networkData?.name ?? ''
+
+  const items = [
+    { label: networkName, href: `/network/${slug}` as Route },
+    { label: 'Roadmaps', href: `/network/${slug}/roadmaps` as Route },
+  ]
+
   return (
-    <PageBackground>
+    <>
       <PageBreadcrumbContainer>
         <Breadcrumb items={items} />
       </PageBreadcrumbContainer>
       <PageContent variant="with-breadcrumb" className="gap-6">
-        <Suspense fallback={<RoadmapFiltersSkeleton />}>
-          <RoadmapFilters />
-        </Suspense>
-        <div className="flex flex-col gap-14">
-          {mockedRoadmaps.map((roadmap) => (
-            <RoadmapSection key={roadmap.id} roadmap={roadmap} />
-          ))}
-        </div>
-        <Button variant="outline" size="lg" className="-mt-2 w-58 self-center md:mt-0">
-          Load More
-        </Button>
+        <RoadmapFilters />
+        <ErrorBoundaryWithPresets>
+          <Suspense fallback={<RoadmapsListSkeleton />} key={searchParamsString}>
+            <RoadmapList params={params} searchParams={searchParams} />
+          </Suspense>
+        </ErrorBoundaryWithPresets>
       </PageContent>
-    </PageBackground>
+    </>
   )
 }

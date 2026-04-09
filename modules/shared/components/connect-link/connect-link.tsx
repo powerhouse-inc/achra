@@ -11,7 +11,14 @@ type ConnectLinkProps = Omit<React.ComponentProps<typeof Link>, 'children'> & {
   disabled?: boolean
 }
 
-function ConnectLink({ href, action = 'open', driveName, disabled, ...props }: ConnectLinkProps) {
+function ConnectLink({
+  href,
+  action = 'open',
+  driveName,
+  disabled,
+  className,
+  ...props
+}: ConnectLinkProps) {
   const onClickOverride = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (disabled) {
       e.preventDefault()
@@ -32,7 +39,7 @@ function ConnectLink({ href, action = 'open', driveName, disabled, ...props }: C
       className={cn(
         'text-primary-foreground',
         disabled && 'cursor-not-allowed opacity-100',
-        props.className,
+        className,
       )}
       {...props}
     >

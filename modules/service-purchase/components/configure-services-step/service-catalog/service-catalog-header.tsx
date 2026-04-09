@@ -1,0 +1,61 @@
+'use client'
+
+import type { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
+import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
+import type { CatalogStatus } from '@/modules/service-purchase/types'
+import { SectionHeader } from './section-header'
+
+export interface ServiceCatalogHeaderProps {
+  title: string
+  badge?: CatalogStatus
+  hasToggle?: boolean
+  toggleLabel?: string
+  toggleEnabled?: boolean
+  onToggleChange?: (enabled: boolean) => void
+  groupPrice?: number | null
+  groupDiscountedPrice?: number | null
+  groupCurrency?: string | null
+  groupCostType?: RsGroupCostType | null
+  perTierPrices?: Record<string, string | null> | null
+  isAddOn?: boolean
+  groupSetupPrice?: number | null
+}
+
+function ServiceCatalogHeader({
+  title,
+  badge,
+  hasToggle,
+  toggleLabel,
+  toggleEnabled = false,
+  onToggleChange,
+  groupPrice,
+  groupDiscountedPrice,
+  groupCurrency,
+  groupCostType,
+  perTierPrices,
+  isAddOn,
+  groupSetupPrice,
+}: Readonly<ServiceCatalogHeaderProps>) {
+  const { activePlan } = usePricingCalculatorContext()
+
+  return (
+    <SectionHeader
+      title={title}
+      badge={badge}
+      hasToggle={hasToggle}
+      toggleLabel={toggleLabel}
+      toggleEnabled={toggleEnabled}
+      onToggleChange={onToggleChange}
+      activePlan={activePlan}
+      groupPrice={groupPrice}
+      groupDiscountedPrice={groupDiscountedPrice}
+      groupCurrency={groupCurrency}
+      groupCostType={groupCostType}
+      perTierPrices={perTierPrices}
+      isAddOn={isAddOn}
+      groupSetupPrice={groupSetupPrice}
+    />
+  )
+}
+
+export { ServiceCatalogHeader }

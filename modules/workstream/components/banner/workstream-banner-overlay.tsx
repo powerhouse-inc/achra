@@ -4,7 +4,7 @@ interface WorkstreamBannerOverlayProps {
   isNetworkBanner: boolean
 }
 
-export default function WorkstreamBannerOverlay({ isNetworkBanner }: WorkstreamBannerOverlayProps) {
+function WorkstreamBannerOverlay({ isNetworkBanner }: WorkstreamBannerOverlayProps) {
   return (
     <div className="absolute inset-0 z-10">
       <div
@@ -28,3 +28,5 @@ export default function WorkstreamBannerOverlay({ isNetworkBanner }: WorkstreamB
     </div>
   )
 }
+
+export { WorkstreamBannerOverlay }

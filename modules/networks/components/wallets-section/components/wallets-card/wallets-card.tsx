@@ -1,6 +1,7 @@
 'use client'
 import { ChevronUp } from 'lucide-react'
 import { motion } from 'motion/react'
+import { useWalletsCard } from '@/modules/networks/hooks/use-wallets-card'
 import {
   StripedCard,
   StripedCardAction,
@@ -13,7 +14,6 @@ import { Separator } from '@/modules/shared/components/ui/separator'
 import { cn } from '@/shared/lib/utils'
 import { WalletsList } from './components/wallets-list/wallets-list'
 import { WalletsTable } from './components/wallets-table/wallets-table'
-import { useWalletsCard } from './use-wallets-card'
 import type { Wallet } from '../../wallets-section'
 
 export interface WalletsCardProps {
@@ -55,7 +55,7 @@ export function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCa
             onClick={handleToogleWalletTable}
             aria-label="Toggle wallets table"
           >
-            <ChevronUp className="size-6" />
+            <ChevronUp className="size-6 rotate-180" />
           </Button>
         </StripedCardAction>
       </StripedCardHeader>

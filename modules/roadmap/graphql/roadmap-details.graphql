@@ -1,0 +1,113 @@
+query RoadmapDetails($filter: scopeOfWorkByNetworkOrStatusFilter!) {
+  scopeOfWorkByNetworkOrStatus(filter: $filter) {
+    title
+    status
+    description
+    roadmaps {
+      id
+      title
+      slug
+      description
+      milestones {
+        id
+        title
+        description
+        sequenceCode
+        budget
+        deliveryTarget
+        coordinators
+        scope {
+          deliverables
+          deliverablesCompleted {
+            completed
+            total
+          }
+          status
+          progress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+        }
+      }
+    }
+    contributors {
+      id
+      name
+    }
+    deliverables {
+      id
+      owner {
+        id
+        code
+        icon
+      }
+      status
+      title
+      code
+      description
+      budgetAnchor {
+        margin
+        project
+        quantity
+        unit
+        unitCost
+      }
+      keyResults {
+        id
+        link
+        title
+      }
+      workProgress {
+        ... on SOW_StoryPoint {
+          __typename
+          total
+          completed
+        }
+        ... on SOW_Percentage {
+          __typename
+          value
+        }
+        ... on SOW_Binary {
+          __typename
+          done
+        }
+      }
+    }
+    projects {
+      abstract
+      budget
+      budgetType
+      code
+      currency
+      expenditure {
+        actuals
+        cap
+        percentage
+      }
+      id
+      imageUrl
+      projectOwner {
+        id
+        code
+        name
+      }
+      title
+      scope {
+        status
+        deliverablesCompleted {
+          completed
+          total
+        }
+        deliverables
+      }
+    }
+  }
+}

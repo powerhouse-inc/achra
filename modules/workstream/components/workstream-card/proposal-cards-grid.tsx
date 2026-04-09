@@ -3,52 +3,36 @@
 import { useState } from 'react'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Sow_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
-import ProposalApplyCard from './proposal-apply-card'
+import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
+import { createDeliverableTitle } from '../../lib/deliverable-helpers'
+import { getProjectByDeliverableId } from '../../utils'
+import { ProposalApplyCard } from './proposal-apply-card'
 
-// TODO: remove this mocked data once the API is integrated
-const mockedData = [
-  {
-    title: 'D1: Conduct Business Analysis',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['BA', 'Balsamiq', 'UI Design'],
-  },
-  {
-    title: 'D2: Deploy the smart contracts',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['GraphQL', 'JavaScript', 'UI Design', 'Smart Contracts', 'React'],
-  },
-  {
-    title: 'D3: Conduct Business Analysis',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['BA', 'Balsamiq', 'UI Design'],
-  },
-  {
-    title: 'D4: Conduct Business Analysis',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['BA', 'Balsamiq', 'UI Design', 'Smart Contracts'],
-  },
-  {
-    title: 'D5: Conduct Business Analysis',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['BA', 'Balsamiq', 'UI Design', 'Smart Contracts', 'React', 'Figma'],
-  },
-  {
-    title: 'D6: Conduct Business Analysis',
-    description:
-      'Lorem ipsum dolor sit amet consectetur. Feugiat tellus consectetur nulla at nullam.',
-    tags: ['BA', 'Balsamiq', 'UI Design', 'Smart Contracts', 'React', 'Figma'],
-  },
-]
+interface ProposalCardsGridProps {
+  deliverables: Array<Pick<Sow_Deliverable, 'id' | 'code' | 'title' | 'description'>>
+  shouldUsePagination?: boolean
+  projects: WorkstreamDetailsProject[]
+  networkSlug: string
+  workstreamSlug: string
+}
 
-export default function ProposalCardsGrid() {
-  const [activeIndex, setActiveIndex] = useState<number>(0)
+function ProposalCardsGrid({
+  deliverables,
+  shouldUsePagination = true,
+  projects,
+  networkSlug,
+  workstreamSlug,
+}: ProposalCardsGridProps) {
+  const [_activeIndex, setActiveIndex] = useState<number>(0)
+
+  const { visibleItems, hasMore, loadMore } = useInfiniteArray(deliverables, {
+    firstPageSize: 6,
+    pageSize: 9,
+    enabled: shouldUsePagination,
+  })
 
   return (
     <>
@@ -61,48 +45,68 @@ export default function ProposalCardsGrid() {
             setActiveIndex(swiper.activeIndex)
           }}
         >
-          {mockedData.map((proposal) => (
-            <SwiperSlide key={proposal.title}>
-              <div className="h-38 px-5 pb-2 sm:h-35.5 sm:px-10 [&>*:first-child]:h-full">
-                <ProposalApplyCard
-                  title={proposal.title}
-                  description={proposal.description}
-                  tags={proposal.tags}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
+          {deliverables.map((deliverable) => {
+            const projectDetails = getProjectByDeliverableId(deliverable.id, projects)
+            return (
+              <SwiperSlide key={deliverable.id}>
+                <div className="h-38 px-5 pb-2 sm:h-35.5 sm:px-10 [&>*:first-child]:h-full">
+                  <ProposalApplyCard
+                    key={deliverable.id}
+                    title={createDeliverableTitle(deliverable.code, deliverable.title)}
+                    description={deliverable.description}
+                    tags={[]}
+                    project={projectDetails}
+                    networkSlug={networkSlug}
+                    workstreamSlug={workstreamSlug}
+                  />
+                </div>
+              </SwiperSlide>
+            )
+          })}
         </Swiper>
 
-        <div className="mx-auto mt-2 flex w-fit gap-4">
-          {mockedData.map((proposal, index) => (
+        {/* TODO: create a solution in the UI that works for cases when there are too many deliverables */}
+        {/* <div className="mx-auto mt-2 flex w-fit gap-4">
+          {deliverables.map((deliverable, index) => (
             <div
-              key={proposal.title}
+              key={deliverable.id}
               className={cn(
                 'bg-muted size-3 rounded-full shadow-sm [&:first-child]:rounded-r-none [&:last-child]:rounded-l-none',
                 { 'bg-primary': activeIndex === index },
               )}
             />
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Desktop */}
       <div className="hidden flex-col gap-4 md:flex">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-4 xl:grid-cols-3 xl:gap-6">
-          {mockedData.map((proposal) => (
-            <ProposalApplyCard
-              key={proposal.title}
-              title={proposal.title}
-              description={proposal.description}
-              tags={proposal.tags}
-            />
-          ))}
+          {visibleItems.map((deliverable) => {
+            const projectDetails = getProjectByDeliverableId(deliverable.id, projects)
+            return (
+              <ProposalApplyCard
+                key={deliverable.id}
+                title={createDeliverableTitle(deliverable.code, deliverable.title)}
+                description={deliverable.description}
+                tags={[]}
+                project={projectDetails}
+                networkSlug={networkSlug}
+                workstreamSlug={workstreamSlug}
+              />
+            )
+          })}
         </div>
-        <div className="flex justify-center pt-2">
-          <Button variant="outline">Load More</Button>
-        </div>
+        {hasMore && (
+          <div className="flex justify-center pt-2">
+            <Button variant="outline" onClick={loadMore}>
+              Load More
+            </Button>
+          </div>
+        )}
       </div>
     </>
   )
 }
+
+export { ProposalCardsGrid }

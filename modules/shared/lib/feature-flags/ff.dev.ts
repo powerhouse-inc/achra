@@ -1,0 +1,43 @@
+import {
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
+  LEAVE_PAGE_GUARD_ENABLED,
+} from '@/modules/service-purchase/config/constants'
+import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
+import type { FeatureFlags } from './types'
+
+const ffDev: FeatureFlags = {
+  WHITELIST_OVERLAY_ENABLED: SHOW_WHITELIST_OVERLAY,
+  GOVERNANCE_LINK_ENABLED: true,
+  ROADMAPS_ENABLED: true,
+  USE_BUILDERS_AS_NETWORK_HOMEPAGE: false,
+
+  builders: {
+    FINANCES_LINK_ENABLED: true,
+    CONNECT_LINK_ENABLED: true,
+    PROJECTS_SECTION_ENABLED: true,
+  },
+
+  workstreams: {
+    WORKSTREAMS_ENABLED: true,
+    PROJECT_DETAILS_ENABLED: true,
+    INITIAL_PROPOSAL_ENABLED: true,
+    RFP_ENABLED: true,
+  },
+
+  finances: {
+    WALLETS_ENABLED: true,
+    SUMMARY_SECTION_ENABLED: true,
+    NAVIGATION_SECTION_ENABLED: true,
+    BREAKDOWN_CHART_SECTION_ENABLED: true,
+    BREAKDOWN_TABLE_SECTION_ENABLED: true,
+    YEAR_SELECTOR_ENABLED: true,
+    EXPENSES_METRIC_CHART_SECTION_ENABLED: true,
+    RESERVES_WATERFALL_CHART_SECTION_ENABLED: true,
+  },
+  NAV_BAR_LOGIN_BUTTON_ENABLED: true,
+  ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
+  LEAVE_PAGE_GUARD_ENABLED,
+  SERVICES_LISTING_FILTERS_ENABLED: true,
+}
+
+export { ffDev }

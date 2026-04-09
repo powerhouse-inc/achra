@@ -4,7 +4,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY } from '../../config/constants'
 import type { HTMLMotionProps } from 'motion/react'
 
-export function useWorkstreamBanner() {
+function useWorkstreamBanner() {
   const { slug: networkSlug } = useParams<{ slug?: string }>()
 
   const bannerVisibleStorageKey = networkSlug
@@ -52,3 +52,5 @@ export function useWorkstreamBanner() {
     animationProps,
   }
 }
+
+export { useWorkstreamBanner }

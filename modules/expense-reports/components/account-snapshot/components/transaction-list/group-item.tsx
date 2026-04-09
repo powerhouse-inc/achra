@@ -1,0 +1,122 @@
+import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { cn } from '@/modules/shared/lib/utils'
+import { ExpenseArrow } from '../transaction/expense-arrow'
+import { WalletInfo } from '../transaction/wallet-info'
+
+interface GroupItemProps {
+  name: string
+  address: string
+  initialBalance: number
+  inflow: number
+  outflow: number
+  newBalance: number
+}
+
+function GroupItem({ name, address, initialBalance, inflow, outflow, newBalance }: GroupItemProps) {
+  return (
+    <div
+      className={cn(
+        'flex flex-col overflow-hidden rounded-md',
+        'bg-secondary shadow-lg',
+        'px-4 py-2 pb-2.5',
+        'md:flex-row md:rounded-none md:shadow-none',
+        'md:px-2 md:py-1.5 md:pb-1.5',
+        'md:hover:bg-muted',
+        'lg:px-4 lg:py-1.5 lg:pb-1.5',
+        'xl:px-4 xl:py-1.5 xl:pb-2',
+      )}
+    >
+      {/* Wallet Container */}
+      <div
+        className={cn(
+          'mb-2.75',
+          'md:mb-0 md:w-63 md:min-w-63',
+          'lg:w-100 lg:min-w-100',
+          'xl:w-102.5 xl:min-w-102.5',
+        )}
+      >
+        <WalletInfo name={name} address={address} />
+      </div>
+
+      {/* Initial Balance - Mobile Only */}
+      <div className="flex justify-between md:hidden">
+        <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold">
+          Initial Balance
+        </div>
+        <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold">
+          {usLocalizedNumber(initialBalance)}{' '}
+          <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase">USD</span>
+        </div>
+      </div>
+
+      {/* Inflow */}
+      <div
+        className={cn(
+          'mt-2 mb-1 flex justify-between',
+          'w-full md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5',
+          'lg:ml-4',
+        )}
+      >
+        <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">
+          <ExpenseArrow isIncoming={true} className="md:hidden" />
+          Inflow
+        </div>
+        <div className="flex flex-wrap items-center gap-1">
+          <ExpenseArrow isIncoming={true} className="hidden md:inline-block" />
+          <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold lg:text-base lg:leading-5">
+            <span className="text-sm leading-5.5 font-semibold">+</span>
+            {usLocalizedNumber(inflow)}{' '}
+            <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
+              USD
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Outflow */}
+      <div
+        className={cn(
+          'mt-2.75 mb-2 flex justify-between',
+          'w-full md:mt-0 md:mb-0 md:flex-col md:justify-normal md:gap-1.5 md:pl-3',
+          'lg:pl-6 xl:pl-5',
+        )}
+      >
+        <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">
+          <ExpenseArrow isIncoming={false} className="md:hidden" />
+          Outflow
+        </div>
+        <div className="flex flex-wrap items-center gap-1">
+          <ExpenseArrow isIncoming={false} className="hidden md:inline-block" />
+          <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold lg:text-base lg:leading-5">
+            <span className="text-sm leading-5.5 font-semibold">-</span>
+            {usLocalizedNumber(Math.abs(outflow))}{' '}
+            <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
+              USD
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* New Balance */}
+      <div
+        className={cn(
+          'flex justify-between',
+          'md:ml-auto md:flex md:flex-col md:items-end md:justify-normal md:gap-1.5',
+          'md:w-full md:pr-8 lg:pr-10 xl:pr-12',
+        )}
+      >
+        <div className="text-foreground/50 flex items-center gap-1 text-sm leading-4.5 font-semibold md:text-xs md:font-medium">
+          New Balance
+        </div>
+        <div className="text-foreground flex flex-wrap items-baseline gap-1 text-sm leading-5.5 font-semibold lg:text-base lg:leading-5">
+          <span>{usLocalizedNumber(Math.abs(newBalance))}</span>{' '}
+          <span className="text-foreground/50 text-xs leading-4.5 font-medium uppercase lg:text-sm lg:leading-5.5">
+            USD
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export { GroupItem }

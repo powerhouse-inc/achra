@@ -6,11 +6,7 @@ interface ProposalCardOutlineProps {
   children: React.ReactNode
 }
 
-export default function ProposalCardOutline({
-  title,
-  children,
-  className,
-}: ProposalCardOutlineProps) {
+function ProposalCardOutline({ title, children, className }: Readonly<ProposalCardOutlineProps>) {
   return (
     <div
       className={cn('bg-background flex w-full flex-col gap-4 rounded-lg border p-3', className)}
@@ -22,3 +18,5 @@ export default function ProposalCardOutline({
     </div>
   )
 }
+
+export { ProposalCardOutline }

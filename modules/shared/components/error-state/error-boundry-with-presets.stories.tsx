@@ -3,7 +3,7 @@
 import { ServerCrash } from 'lucide-react'
 import { useState } from 'react'
 import { ErrorBoundaryWithPresets } from './error-boundry-with-presets'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * Error Boundary with Presets Component

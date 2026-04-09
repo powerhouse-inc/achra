@@ -1,17 +1,13 @@
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import WorkstreamFilters from './workstream-filters'
-import type { Meta, StoryObj } from '@storybook/nextjs'
-
-const withNuqsAdapter = (Story: React.ComponentType) => (
-  <NuqsAdapter>
-    <Story />
-  </NuqsAdapter>
-)
+import { http, HttpResponse } from 'msw'
+import { withNuqsAdapter, withReactQueryProvider } from '@/modules/shared/lib/decorators'
+import { mockedAllNetworksQuery } from '@/modules/workstream/mocks'
+import { WorkstreamFilters } from './workstream-filters'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Modules/Workstream/Components/WorkstreamFilters',
   component: WorkstreamFilters,
-  decorators: [withNuqsAdapter],
+  decorators: [withNuqsAdapter, withReactQueryProvider],
   parameters: {
     layout: 'centered',
     nextjs: {
@@ -26,10 +22,27 @@ const meta = {
       },
     },
   },
-  argTypes: {},
+  argTypes: {
+    showNetworkFilter: {
+      control: 'boolean',
+      description: 'Whether to show the network filter dropdown',
+    },
+  },
 } satisfies Meta<typeof WorkstreamFilters>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.post(process.env.NEXT_PUBLIC_SWITCHBOARD_URL, () => {
+          return HttpResponse.json({
+            data: mockedAllNetworksQuery,
+          })
+        }),
+      ],
+    },
+  },
+}

@@ -1,17 +1,24 @@
 'use client'
 
 import { cva } from 'class-variance-authority'
+import Link from 'next/link'
 import { useCallback } from 'react'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
-import { Button } from '@/modules/shared/components/ui/button'
+import { buttonVariants } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
+import { getTagVariant } from '@/modules/workstream/lib/proposal-apply-card-helpers'
+import type { Route } from 'next'
 
 interface ProposalApplyCardProps {
+  project?: WorkstreamDetailsProject
   title: string
   description: string
   tags: string[]
+  networkSlug: string
+  workstreamSlug: string
 }
 
 const tagVariants = cva(
@@ -34,19 +41,25 @@ const tagVariants = cva(
   },
 )
 
-const variants = ['yellow', 'success', 'progress', 'destructive', 'purple', 'warning'] as const
-function getVariant(tag: string) {
-  return variants[
-    tag.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % variants.length
-  ]
-}
+function ProposalApplyCard({
+  networkSlug,
+  workstreamSlug,
+  title,
+  description,
+  tags,
+  project,
+}: ProposalApplyCardProps) {
+  const projectSlug = project?.slug ?? ''
+  // TODO: confirm the correct fallback link when no project is linked to a deliverable
+  const href = projectSlug
+    ? (`/network/${networkSlug}/workstream/${workstreamSlug}/initial-proposal/${projectSlug}/project-details` as Route)
+    : ('#' as Route)
 
-export default function ProposalApplyCard({ title, description, tags }: ProposalApplyCardProps) {
   const itemRenderer = useCallback(
     (tag: string) => (
       <div
         className={tagVariants({
-          variant: getVariant(tag),
+          variant: getTagVariant(tag),
         })}
       >
         {tag}
@@ -67,7 +80,10 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
           <div className="max-w-64 space-y-1">
             <div className="flex flex-wrap gap-2">
               {items.map((tag) => (
-                <div key={tag} className={cn(tagVariants({ variant: getVariant(tag) }), 'text-xs')}>
+                <div
+                  key={tag}
+                  className={cn(tagVariants({ variant: getTagVariant(tag) }), 'text-xs')}
+                >
                   {tag}
                 </div>
               ))}
@@ -80,23 +96,27 @@ export default function ProposalApplyCard({ title, description, tags }: Proposal
   )
 
   return (
-    <Card className="rounded-lg p-0 shadow-sm">
-      <CardContent className="flex gap-4 p-2 sm:p-3">
-        <div className="w-full max-w-[calc(100%-86px)]">
-          <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
-            {title}
+    <Link href={href} className="block">
+      <Card className="cursor-pointer rounded-lg p-0 shadow-sm transition-all hover:shadow-md">
+        <CardContent className="flex gap-4 p-2 sm:p-3">
+          <div className="w-full max-w-[calc(100%-86px)]">
+            <div className="mb-0.5 line-clamp-2 text-sm/5.5 font-semibold sm:truncate xl:text-base/6">
+              {title}
+            </div>
+            <div className="line-clamp-2 text-sm/5.5 md:line-clamp-3">{description}</div>
+            <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
+              <OverflowList
+                items={tags}
+                itemRenderer={itemRenderer}
+                overflowRenderer={overflowRenderer}
+              />
+            </div>
           </div>
-          <div className="line-clamp-2 text-sm/5.5 md:line-clamp-3">{description}</div>
-          <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
-            <OverflowList
-              items={tags}
-              itemRenderer={itemRenderer}
-              overflowRenderer={overflowRenderer}
-            />
-          </div>
-        </div>
-        <Button>Apply</Button>
-      </CardContent>
-    </Card>
+          <span className={cn(buttonVariants())}>Apply</span>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
+
+export { ProposalApplyCard }

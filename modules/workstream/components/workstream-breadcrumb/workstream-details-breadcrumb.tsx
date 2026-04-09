@@ -2,19 +2,25 @@ import { Breadcrumb } from '@/modules/shared/components/breadcrumb'
 import type { Route } from 'next'
 
 interface WorkstreamDetailsBreadcrumbProps {
-  params: Promise<{ slug: string; workstreamSlug: string }>
+  networkName: string
+  networkSlug: string
+  workstreamName: string
+  workstreamSlug: string
 }
 
-async function WorkstreamDetailsBreadcrumb({ params }: WorkstreamDetailsBreadcrumbProps) {
-  const { slug, workstreamSlug } = await params
-
+function WorkstreamDetailsBreadcrumb({
+  networkName,
+  networkSlug,
+  workstreamName,
+  workstreamSlug,
+}: WorkstreamDetailsBreadcrumbProps) {
   return (
     <Breadcrumb
       items={[
-        { label: 'Powerhouse', href: '/network/powerhouse' },
+        { label: networkName, href: `/network/${networkSlug}` as Route },
         {
-          label: 'Vetra Beta Launch',
-          href: `/network/${slug}/workstream/${workstreamSlug}` as Route,
+          label: workstreamName,
+          href: `/network/${networkSlug}/workstream/${workstreamSlug}` as Route,
         },
       ]}
     />

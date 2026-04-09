@@ -1,0 +1,39 @@
+query BudgetStatementsDetails($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    expenseReport {
+      periodStart
+      periodEnd
+      wallets {
+        name
+        address
+        billingStatementIds
+        totals {
+          group
+          groupLabel
+          totalBudget
+          totalForecast
+          totalActuals
+          totalPayments
+        }
+        lineItems {
+          id
+          label
+          groupId
+          groupLabel
+          actuals
+          budget
+          comments
+          forecast
+          payments
+        }
+      }
+      groups {
+        id
+        label
+        parentId
+      }
+    }
+  }
+}

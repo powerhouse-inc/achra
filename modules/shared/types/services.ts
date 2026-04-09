@@ -1,19 +1,19 @@
-// Temporary types for the services page
+import type { ResourceTemplatesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+
 export enum ServiceEntityEnum {
   Builders = 'Builders',
+  Networks = 'Networks',
   Operators = 'Operators',
   Founders = 'Founders',
   'SNO Governors' = 'SNO Governors',
 }
 
-export interface Service {
-  id: string
-  cover: string
-  title: string
-  description: string[]
-  descriptionItems?: string[]
-  entities: ServiceEntityEnum[]
-  formationAndSetup: string[]
-  recurringServices: string[]
-  unavailable: boolean
+export type Service = ResourceTemplatesQuery['resourceTemplates'][number]
+
+export function isBuilderService(service: Service): boolean {
+  return service.targetAudiences.some((audience) => audience.label === 'Builders')
+}
+
+export function isNetworkService(service: Service): boolean {
+  return service.targetAudiences.some((audience) => audience.label === 'Networks')
 }

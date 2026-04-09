@@ -1,8 +1,8 @@
 import { CheckCircle, Copy } from 'lucide-react'
 import { CopyAnimatedIcon, CopyButton, CopyTooltip, CopyTrigger } from './copy-button'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-const meta: Meta<typeof CopyButton> = {
+const meta = {
   title: 'Shared/Components/CopyButton',
   component: CopyButton,
   parameters: {
@@ -26,10 +26,12 @@ const meta: Meta<typeof CopyButton> = {
     },
   },
   tags: ['autodocs'],
-}
+} satisfies Meta<typeof CopyButton>
 
 export default meta
-type Story = StoryObj<typeof CopyButton>
+
+type CopyButtonArgs = Omit<React.ComponentProps<typeof CopyButton>, 'children'>
+type Story = Omit<StoryObj<typeof meta>, 'args'> & { args?: Partial<CopyButtonArgs> }
 
 /**
  * Copy button with tooltip feedback but without icon animation.

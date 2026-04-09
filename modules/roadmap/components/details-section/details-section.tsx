@@ -1,18 +1,20 @@
 import type {
+  ScopeOfWork_Agent,
   ScopeOfWork_Deliverable,
   ScopeOfWork_Project,
   ScopeOfWork_Roadmap,
-  ScopeOfWorkQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneDetailsCard, MilestoneDetailsCardSkeleton } from '../milestone-details-card'
 import { SectionTitle } from '../section-title'
 
 interface DetailsSectionProps {
-  scopeOfWorkQuery: ScopeOfWorkQuery | undefined
   roadmap: ScopeOfWork_Roadmap | undefined
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
-function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
+function DetailsSection({ roadmap, deliverables, contributors, projects }: DetailsSectionProps) {
   return (
     <div className="flex flex-col gap-6">
       <SectionTitle title="Milestones Roadmap Details" />
@@ -22,18 +24,13 @@ function DetailsSection({ scopeOfWorkQuery, roadmap }: DetailsSectionProps) {
           <MilestoneDetailsCard
             key={milestone.id}
             milestone={milestone}
-            deliverables={(
-              scopeOfWorkQuery?.ScopeOfWork?.getDocument?.stateJSON?.deliverables ?? []
-            ).filter((deliverable: ScopeOfWork_Deliverable) =>
+            deliverables={deliverables.filter((deliverable: ScopeOfWork_Deliverable) =>
               milestone.scope?.deliverables.some(
                 (deliverableId) => deliverableId === deliverable.id,
               ),
             )}
-            contributors={scopeOfWorkQuery?.ScopeOfWork?.getDocument?.state.contributors ?? []}
-            projects={
-              (scopeOfWorkQuery?.ScopeOfWork?.getDocument?.state.projects ??
-                []) as ScopeOfWork_Project[]
-            }
+            contributors={contributors}
+            projects={projects}
           />
         ))}
       </div>

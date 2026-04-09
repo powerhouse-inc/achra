@@ -1,0 +1,20 @@
+query AllNetworks($filter: networkFilter) {
+  allNetworks(filter: $filter) {
+    network {
+      name
+      slug
+      icon
+      logo
+      darkThemeIcon
+      darkThemeLogo
+      category
+      description
+      discord
+      github
+      logoBig
+      website
+      x
+      youtube
+    }
+  }
+}

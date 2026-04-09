@@ -90,11 +90,8 @@ export function OverflowList<T>({
           }
         })
       } else {
-        // Neither growing nor shrinking: reset overflow direction
-        setState((prev) => ({
-          ...prev,
-          overflowDirection: 'none',
-        }))
+        // Neither growing nor shrinking: no repartition needed
+        return
       }
     },
     [collapseFrom, minVisibleItems, items],

@@ -1,55 +1,72 @@
 import { useMemo } from 'react'
-import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip/workstream-status-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface StatusSelectProps {
-  statuses: ScopeOfWork_DeliverableSetStatus[]
-  setStatuses: (statuses: ScopeOfWork_DeliverableSetStatus[]) => Promise<URLSearchParams>
+  statuses: WorkstreamStatus[]
+  setStatuses: (statuses: WorkstreamStatus[]) => Promise<URLSearchParams>
   className?: string
 }
 
 const statusOptions: Option[] = [
   {
-    value: ScopeOfWork_DeliverableSetStatus.Draft,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Draft} />,
+    value: WorkstreamStatus.RfpDraft,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.RfpDraft} />,
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.InProgress,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.InProgress} />,
+    value: WorkstreamStatus.InProgress,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.InProgress} />,
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.Finished,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Finished} />,
+    value: WorkstreamStatus.Finished,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.Finished} />,
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.Canceled,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Canceled} />,
+    value: WorkstreamStatus.RfpCancelled,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.RfpCancelled} />,
     group: 'Statuses',
   },
   {
-    value: ScopeOfWork_DeliverableSetStatus.Todo,
-    label: <DeliverableSetStatusChip status={ScopeOfWork_DeliverableSetStatus.Todo} />,
+    value: WorkstreamStatus.NotAwarded,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.NotAwarded} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.PreworkRfc,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.PreworkRfc} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.ProposalSubmitted,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.ProposalSubmitted} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.Awarded,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.Awarded} />,
+    group: 'Statuses',
+  },
+  {
+    value: WorkstreamStatus.OpenForProposals,
+    label: <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />,
     group: 'Statuses',
   },
 ]
 
 function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
   const selectedOptions = useMemo(
-    () =>
-      statusOptions.filter((option) =>
-        statuses.includes(option.value as ScopeOfWork_DeliverableSetStatus),
-      ),
+    () => statusOptions.filter((option) => statuses.includes(option.value as WorkstreamStatus)),
     [statuses],
   )
 
   const handleChange = (options: Option[]) => {
-    const values = options.map((option) => option.value as ScopeOfWork_DeliverableSetStatus)
+    const values = options.map((option) => option.value as WorkstreamStatus)
     void setStatuses(values)
   }
 
@@ -67,16 +84,14 @@ function StatusSelect({ statuses, setStatuses, className }: StatusSelectProps) {
       commandProps={{
         className,
       }}
-      customItemRenderer={(option) => (
-        <DeliverableSetStatusChip status={option.value as ScopeOfWork_DeliverableSetStatus} />
-      )}
+      customItemRenderer={(option): React.ReactNode => option.label}
     />
   )
 }
 
 function StatusSelectDrawer({ statuses, setStatuses }: StatusSelectProps) {
   const handleChange = (values: string[]) => {
-    void setStatuses(values as ScopeOfWork_DeliverableSetStatus[])
+    void setStatuses(values as WorkstreamStatus[])
   }
 
   return (

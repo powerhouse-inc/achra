@@ -1,0 +1,28 @@
+query BudgetStatements($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    lastModifiedAtUtcIso
+    status
+    owner {
+      name
+      code
+      id
+      logo
+    }
+    expenseReport {
+      periodStart
+      periodEnd
+      wallets {
+        name
+        address
+        totals {
+          groupLabel
+          totalActuals
+          totalForecast
+          totalPayments
+        }
+      }
+    }
+  }
+}

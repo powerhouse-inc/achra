@@ -1,25 +1,12 @@
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 
-interface CalculateTotalBalanceParams {
-  deliverables: ScopeOfWork_Deliverable[]
-}
-
-export const calculateTotalBalance = ({ deliverables }: CalculateTotalBalanceParams) => {
-  const total = deliverables.reduce((acc, deliverable) => {
-    return acc + (deliverable.budgetAnchor?.unitCost ?? 0)
-  }, 0)
-  return total.toLocaleString()
-}
-
-export const calculateDeliverableSubtotal = (
-  deliverable: ScopeOfWork_Deliverable,
-): number | null => {
+export const calculateDeliverableSubtotal = (deliverable: ScopeOfWork_Deliverable): number => {
   const quantity = deliverable.budgetAnchor?.quantity
   const unitCost = deliverable.budgetAnchor?.unitCost
   if (quantity != null && unitCost != null) {
     return quantity * unitCost
   }
-  return null
+  return 0
 }
 
 export const getDeliverableQuantity = (deliverable: ScopeOfWork_Deliverable): number | null => {

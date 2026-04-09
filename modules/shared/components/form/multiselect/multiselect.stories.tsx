@@ -5,7 +5,7 @@ import {
   MultipleSelector,
   type Option,
 } from './multiselect'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**
  * MultipleSelector is a powerful multi-select component built on top of cmdk.
@@ -272,6 +272,33 @@ export const Disabled: Story = {
           options={basicOptions}
           disabled
           placeholder="Select technologies..."
+          emptyIndicator={
+            <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+              No results found.
+            </p>
+          }
+        />
+      </div>
+    )
+  },
+}
+
+/**
+ * MultipleSelector in loading state.
+ * Shows the loading indicator while options are being fetched.
+ */
+export const Loading: Story = {
+  render: () => {
+    const [selected, setSelected] = useState<Option[]>([])
+
+    return (
+      <div className="w-80">
+        <MultipleSelector
+          value={selected}
+          onChange={setSelected}
+          options={basicOptions}
+          isLoading
+          placeholder="Loading technologies..."
           emptyIndicator={
             <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
               No results found.

@@ -1,17 +1,64 @@
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import { format, parseISO } from 'date-fns'
+import { DynamicCountUpPresets } from '@/modules/shared/components/count-up'
+import { Card } from '@/modules/shared/components/ui/card'
+import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
+import { cn } from '@/modules/shared/lib/utils'
+import EqualSign from '../svgs/equal.svg'
 
 interface SimpleStatCardProps {
   date?: string
   value?: number
-  caption: string
+  caption: string | React.ReactNode
   hasEqualSign?: boolean
   dynamicChanges?: boolean
+  className?: string
 }
 
-function SimpleStatCard({ ..._props }: SimpleStatCardProps) {
+function SimpleStatCard({
+  date,
+  value,
+  caption,
+  hasEqualSign = false,
+  dynamicChanges = false,
+  className,
+}: SimpleStatCardProps) {
   return (
-    <Card className="w-full border-none">
-      <CardContent>SimpleStatCard</CardContent>
+    <Card
+      className={cn(
+        'bg-popover w-full gap-2 border-none p-2 md:p-4 lg:p-4 xl:px-8 xl:py-4',
+        className,
+      )}
+    >
+      <div className="text-foreground/30 text-xs leading-4.5 uppercase">
+        {date ? format(parseISO(date), 'd MMM y') : 'N/A'}
+      </div>
+
+      <div className="flex items-center md:mt-auto md:gap-4 lg:gap-0">
+        {hasEqualSign && (
+          <div className="-mt-0.75 mr-1 md:mt-0 md:mr-auto lg:mt-1.75 lg:mr-2 xl:mr-4">
+            <EqualSign className="text-border h-2.5 w-4 md:h-2.5 md:w-4 lg:h-3.75 lg:w-6" />
+          </div>
+        )}
+        <div className="border-border bg-background flex w-full flex-col rounded-xl border px-1.75 py-0.75 pb-1.75 lg:gap-2 xl:px-3.75">
+          <div className="text-foreground text-xs/4.5 font-medium">{caption}</div>
+          <div className="text-foreground flex items-baseline text-base/6 font-semibold xl:text-lg/6">
+            {value !== undefined ? (
+              <>
+                {dynamicChanges ? (
+                  <DynamicCountUpPresets value={Math.round(value)} />
+                ) : (
+                  usLocalizedNumber(Math.round(value))
+                )}
+                <span className="text-foreground/30 ml-1 text-sm/5.5 font-semibold xl:text-base/6">
+                  USD
+                </span>
+              </>
+            ) : (
+              'N/A'
+            )}
+          </div>
+        </div>
+      </div>
     </Card>
   )
 }

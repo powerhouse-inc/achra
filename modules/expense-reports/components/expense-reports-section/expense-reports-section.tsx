@@ -1,15 +1,18 @@
+import { ExpenseReportsActuals } from '../expense-reports-actuals'
+
 interface ExpenseReportsSectionProps {
-  month: Date | null
+  teamId: string
+  month: Date
+  builderLabel: string
 }
 
-async function ExpenseReportsSection({ month }: ExpenseReportsSectionProps) {
-  // simulate api call
-  await new Promise((resolve) => setTimeout(resolve, 1000))
-
+function ExpenseReportsSection({ teamId, month, builderLabel }: ExpenseReportsSectionProps) {
   return (
     <div className="flex flex-col gap-4">
-      <div className="border-border align-center flex justify-between rounded-xl border p-8">
-        Expense Reports {month?.toISOString()}
+      <div className="bg-accent pt-2 pb-6 shadow-sm">
+        <div className="container">
+          <ExpenseReportsActuals teamId={teamId} month={month} builderLabel={builderLabel} />
+        </div>
       </div>
     </div>
   )

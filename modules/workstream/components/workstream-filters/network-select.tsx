@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
+import { useNetworkOptions } from '@/modules/workstream/hooks/use-network-options'
 
 interface NetworkSelectProps {
   networks: string[]
@@ -9,34 +9,31 @@ interface NetworkSelectProps {
   className?: string
 }
 
-const networkOptions: Option[] = [
-  { value: 'sky', label: 'Sky', group: 'Networks' },
-  { value: 'powerhouse', label: 'Powerhouse', group: 'Networks' },
-  { value: 'spark', label: 'Spark', group: 'Networks' },
-]
-
 function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps) {
-  const selectedOptions = useMemo(
-    () => networkOptions.filter((option) => networks.includes(option.value)),
-    [networks],
-  )
-
   const handleChange = (options: Option[]) => {
     const values = options.map((option) => option.value)
     void setNetworks(values)
   }
 
+  const { options, isLoadingAllNetworks } = useNetworkOptions()
+
+  const selectedOptions = useMemo(
+    () => options.filter((option) => networks.includes(option.value)),
+    [networks, options],
+  )
+
   return (
     <MultipleSelector
       value={selectedOptions}
       onChange={handleChange}
-      options={networkOptions}
+      options={options}
       enableSearch={false}
       groupBy="group"
       enableSelectAll={true}
       selectAllGroup="Networks"
       placeholder="All Networks"
       className={cn('bg-background dark:bg-background')}
+      disabled={isLoadingAllNetworks}
       commandProps={{
         className,
       }}
@@ -44,22 +41,5 @@ function NetworkSelect({ networks, setNetworks, className }: NetworkSelectProps)
   )
 }
 
-function NetworkSelectDrawer({ networks, setNetworks }: NetworkSelectProps) {
-  const handleChange = (values: string[]) => {
-    void setNetworks(values)
-  }
-
-  return (
-    <DrawerSelect
-      value={networks}
-      onChange={handleChange}
-      label="Networks"
-      options={networkOptions}
-      multiselect={true}
-      enableSelectAll={true}
-      selectAllLabel="Select All"
-    />
-  )
-}
-
-export { NetworkSelect, NetworkSelectDrawer }
+export { NetworkSelect }
+export type { NetworkSelectProps }

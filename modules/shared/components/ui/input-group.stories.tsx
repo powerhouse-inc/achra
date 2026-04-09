@@ -16,7 +16,7 @@ import {
 } from './input-group'
 import { Separator } from './separator'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/InputGroup',

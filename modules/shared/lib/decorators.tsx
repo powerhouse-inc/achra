@@ -1,8 +1,12 @@
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { useEffect } from 'react'
+import AchraLayout from '@/app/(achra)/layout'
 import RootLayout from '@/app/layout'
-import type { StoryContext } from '@storybook/nextjs'
+import NetworkLayout from '@/app/network/[slug]/layout'
+import { QueryClientProvider } from '@/shared/providers/query-client'
+import type { StoryContext } from '@storybook/nextjs-vite'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -35,9 +39,15 @@ const openSansCondensed = localFont({
  */
 export const withNextjsExtras = (Story: React.ComponentType, context: StoryContext) => {
   if (context.parameters.includeLayout) {
+    const pathname = context.parameters.nextjs?.navigation?.pathname
+    const isNetworkRoute = pathname?.startsWith('/network/')
+    const NestedLayout = isNetworkRoute ? NetworkLayout : AchraLayout
+
     return (
       <RootLayout>
-        <Story />
+        <NestedLayout>
+          <Story />
+        </NestedLayout>
       </RootLayout>
     )
   }
@@ -80,3 +90,21 @@ export const withPortalFontStyles = (Story: React.ComponentType) => {
     </PortalFontProvider>
   )
 }
+
+/**
+ * Storybook decorator to apply the Nuqs adapter to the page stories
+ */
+export const withNuqsAdapter = (Story: React.ComponentType) => (
+  <NuqsAdapter>
+    <Story />
+  </NuqsAdapter>
+)
+
+/**
+ * Storybook decorator to apply the React Query provider to the page stories
+ */
+export const withReactQueryProvider = (Story: React.ComponentType) => (
+  <QueryClientProvider>
+    <Story />
+  </QueryClientProvider>
+)

@@ -2,10 +2,10 @@ import { z } from 'zod'
 
 export const envSchema = z
   .object({
-    // private env variables
-    HOMEPAGE_REMOTE_URL: z.url({
-      error: 'Must be a valid URL (e.g., https://example.com) pointing to the hosted homepage.',
-    }),
+    NEXT_PUBLIC_ENVIRONMENT: z
+      .enum(['development', 'staging', 'production'] as const)
+      .optional()
+      .default('production'),
 
     // public env variables
     NEXT_PUBLIC_SWITCHBOARD_URL: z.url({
@@ -23,11 +23,22 @@ export const envSchema = z
       .optional()
       .default('false'),
 
+    NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED: z
+      .enum(['true', 'false'] as const)
+      .optional()
+      .default('true'),
+
+    NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: z
+      .enum(['true', 'false'] as const)
+      .optional()
+      .default('true'),
+
     // Mailchimp env variables (required only when whitelist overlay is enabled)
     MAILCHIMP_API_KEY: z.string().optional(),
     MAILCHIMP_AUDIENCE_ID: z.string().optional(),
     MAILCHIMP_SERVER_LOCATION: z.string().optional(),
     MAILCHIMP_TAG: z.string().optional(),
+    MAILCHIMP_NETWORK_TAG: z.string().optional(),
   })
   .superRefine((data, ctx) => {
     // If whitelist overlay is enabled, require all Mailchimp variables

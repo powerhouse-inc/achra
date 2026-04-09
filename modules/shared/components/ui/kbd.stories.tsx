@@ -1,6 +1,6 @@
 import React from 'react'
 import { Kbd, KbdGroup } from './kbd'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Kbd',

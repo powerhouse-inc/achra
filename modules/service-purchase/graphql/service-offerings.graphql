@@ -1,0 +1,137 @@
+query ServiceOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
+    id
+    description
+    infoLink
+    lastModified
+    operatorId
+    title
+    thumbnailUrl
+    tiers {
+      id
+      name
+      mostPopular
+      description
+      isCustomPricing
+      excludeFromSetupFee
+      pricingMode
+      pricing {
+        amount
+        currency
+      }
+      serviceLevels {
+        id
+        serviceId
+        level
+        customValue
+        optionGroupId
+      }
+      usageLimits {
+        id
+        serviceId
+        metric
+        unitName
+        freeLimit
+        paidLimit
+        resetCycle
+        notes
+        unitPrice
+        unitPriceCurrency
+      }
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
+    }
+    facetTargets {
+      id
+      categoryKey
+      categoryLabel
+      selectedOptions
+    }
+    optionGroups {
+      id
+      name
+      description
+      isAddOn
+      defaultSelected
+      pricingMode
+      standalonePricing {
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      tierDependentPricing {
+        id
+        tierId
+        setupCost {
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+        setupCostDiscounts {
+          billingCycle
+          discountRule {
+            discountType
+            discountValue
+          }
+        }
+        recurringPricing {
+          id
+          billingCycle
+          amount
+          currency
+          discount {
+            discountType
+            discountValue
+          }
+        }
+      }
+      costType
+      availableBillingCycles
+      price
+      currency
+      discountMode
+      billingCycleDiscounts {
+        billingCycle
+        discountRule {
+          discountType
+          discountValue
+        }
+      }
+    }
+    resourceTemplateId
+    services {
+      id
+      title
+      description
+      displayOrder
+      isSetupFormation
+      optionGroupId
+    }
+    status
+    summary
+    availableBillingCycles
+  }
+}

@@ -1,10 +1,7 @@
 'use client'
-import { ArrowUpRight } from 'lucide-react'
-import Link from 'next/link'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
 import { cn } from '@/modules/shared/lib/utils'
-import type { Route } from 'next'
+import { KeyResultItem } from './key-result-item'
 
 interface PopoverContentDeliverableProps {
   title: string
@@ -26,36 +23,20 @@ export function PopoverContentDeliverable({
         <span className="text-foreground/30 flex text-sm/5.5 font-semibold">{code}</span>
         <span className="text-sm/5.5 font-semibold">{title}</span>
       </div>
+
       <ul className="flex flex-col gap-2 pl-6">
-        {keyResults.map((keyResult) => (
-          <li key={keyResult.id}>
+        {keyResults.length > 0 ? (
+          keyResults.map((keyResult) => {
+            const hasLink = Boolean(keyResult.link && keyResult.link !== '')
+            return <KeyResultItem key={keyResult.id} keyResult={keyResult} hasLink={hasLink} />
+          })
+        ) : (
+          <li>
             <div className="flex flex-col">
-              <Link
-                href={keyResult.link as Route}
-                target="_blank"
-                className="flex items-start gap-2"
-              >
-                <span className="bg-foreground mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-foreground w-fit max-w-68 truncate text-sm/5.5 font-medium">
-                      {keyResult.title}
-                    </span>
-                    <ArrowUpRight className="size-4" />
-                  </div>
-                </div>
-              </Link>
-              <div className="flex items-center gap-1 pl-4">
-                <span className="text-foreground/50 text-xs/4.5 font-medium">{keyResult.link}</span>
-                <CopyButton value={keyResult.link}>
-                  <CopyTrigger>
-                    <CopyAnimatedIcon className="size-3" />
-                  </CopyTrigger>
-                </CopyButton>
-              </div>
+              <span className="text-foreground/30 text-sm/5.5 font-semibold">No Key Results</span>
             </div>
           </li>
-        ))}
+        )}
       </ul>
     </div>
   )

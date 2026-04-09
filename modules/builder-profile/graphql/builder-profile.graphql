@@ -1,0 +1,53 @@
+query BuilderProfile($filter: buildersFilter) {
+  builders(filter: $filter) {
+    code
+    description
+    about
+    id
+    icon
+    lastModified
+    links {
+      id
+      label
+      url
+    }
+    name
+    scopes
+    skills
+    slug
+    status
+    isOperator
+    operationalHubMember {
+      name
+      phid
+    }
+    projects {
+      scope {
+        status
+        progress {
+          ... on SOW_StoryPoint {
+            completed
+            total
+          }
+          ... on SOW_Percentage {
+            value
+          }
+          ... on SOW_Binary {
+            done
+          }
+        }
+        deliverablesCompleted {
+          completed
+          total
+        }
+      }
+      budget
+      title
+      code
+      slug
+      currency
+      abstract
+      id
+    }
+  }
+}

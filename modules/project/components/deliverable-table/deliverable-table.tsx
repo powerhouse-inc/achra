@@ -19,6 +19,7 @@ import { SortEnum } from '@/modules/shared/types'
 import { AvatarTitleAvatar, AvatarTitleRoot, AvatarTitleText } from '../avatar-title/avatar-title'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { ProgressComponent } from '../progress-component/progress-component'
+import { calculateDeliverableSubtotal } from '../utils'
 import { useDeliverableTable } from './use-deliverable-table'
 
 export interface DeliverableTableProps {
@@ -62,7 +63,7 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
                   handleSortClick(index)
                 }}
                 className={cn(
-                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6',
+                  '[&_path]:stroke-foreground/30 hover:[&_path]:stroke-foreground/50 active:[&_path]:stroke-foreground! h-fit p-0! font-semibold hover:bg-transparent lg:text-base/6 dark:hover:bg-transparent',
                   headersSort[index] === SortEnum.Asc &&
                     '[&_path:nth-child(3)]:stroke-foreground [&_path:nth-child(4)]:stroke-foreground hover:[&_path:nth-child(3)]:stroke-foreground/50 hover:[&_path:nth-child(4)]:stroke-foreground/50 hover:[&_path:nth-child(1)]:stroke-foreground/30 hover:[&_path:nth-child(2)]:stroke-foreground/30',
                   headersSort[index] === SortEnum.Desc &&
@@ -110,25 +111,20 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
               </div>
             </TableCell>
             <TableCell className="text-foreground h-fit w-[5.9%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[5.9%] xl:w-[8.2%]">
-              {deliverable.budgetAnchor?.quantity} USD
+              {deliverable.budgetAnchor?.quantity}
             </TableCell>
             <TableCell className="text-foreground h-fit w-[15.3%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[15.3%] xl:w-[13.4%]">
-              {deliverable.budgetAnchor?.unitCost.toLocaleString() ?? 0} USD
+              {deliverable.budgetAnchor?.unit}
             </TableCell>
             <TableCell className="text-foreground h-fit w-[15.3%] shrink-0 p-0! text-right text-sm/5.5 font-semibold lg:w-[15.3%] xl:w-[13.4%]">
-              {deliverable.budgetAnchor?.quantity && deliverable.budgetAnchor.unitCost
-                ? (
-                    deliverable.budgetAnchor.quantity * deliverable.budgetAnchor.unitCost
-                  ).toLocaleString()
-                : 0}
-              USD
+              {calculateDeliverableSubtotal(deliverable).toLocaleString()}
             </TableCell>
             <TableCell className="flex h-fit w-[10%] shrink-0 justify-end p-0!">
               <DeliverableListPopover
                 keyResults={deliverable.keyResults}
                 title="Deliverables"
                 count={deliverable.keyResults.length}
-                code="DR"
+                code={deliverable.code}
               />
             </TableCell>
           </TableRow>

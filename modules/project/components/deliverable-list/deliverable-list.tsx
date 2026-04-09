@@ -7,14 +7,14 @@ import { cn } from '@/modules/shared/lib/utils'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { DescriptionItem } from '../description-item/description-item'
 import { ProgressComponent } from '../progress-component/progress-component'
+import { calculateDeliverableSubtotal } from '../utils'
 
 export interface DeliverableListProps {
   deliverables: ScopeOfWork_Deliverable[]
   className?: string
-  totalBalance: string
 }
 
-export function DeliverableList({ deliverables, className, totalBalance }: DeliverableListProps) {
+export function DeliverableList({ deliverables, className }: DeliverableListProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       {deliverables.map((deliverable) => (
@@ -62,8 +62,9 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
             </div>
             <DeliverableListPopover
               title={deliverable.title}
-              code="DEL 001"
+              code={deliverable.code}
               keyResults={deliverable.keyResults}
+              count={deliverable.keyResults.length}
               className="flex justify-end sm:min-w-34"
             />
           </div>
@@ -75,14 +76,14 @@ export function DeliverableList({ deliverables, className, totalBalance }: Deliv
           />
           <Separator className="text-border my-2 hidden w-full sm:flex" />
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
-            <DescriptionItem label="QTY" value={`${deliverable.budgetAnchor?.quantity} USD`} />
             <DescriptionItem
-              label="Unit Budget"
-              value={`${deliverable.budgetAnchor?.unitCost.toLocaleString() ?? 0} USD`}
+              label="QTY"
+              value={deliverable.budgetAnchor?.quantity.toString() ?? '0'}
             />
+            <DescriptionItem label="Unit Budget" value={deliverable.budgetAnchor?.unit} />
             <DescriptionItem
               label="Subtotal"
-              value={`${totalBalance} USD`}
+              value={calculateDeliverableSubtotal(deliverable).toLocaleString()}
               className="sm:justify-end"
             />
           </div>

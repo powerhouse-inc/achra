@@ -1,1 +1,1 @@
-export * from './workstream-banner'
+export { WorkstreamBanner } from './workstream-banner'

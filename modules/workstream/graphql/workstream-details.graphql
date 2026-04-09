@@ -1,0 +1,121 @@
+query WorkstreamDetails($filter: WorkstreamFilter!) {
+  workstream(filter: $filter) {
+    title
+    status
+    slug
+    client {
+      name
+      icon
+    }
+    network {
+      name
+      slug
+      logo
+      darkThemeLogo
+    }
+    initialProposal {
+      status
+      author {
+        name
+      }
+      paymentTerms {
+        proposer
+        currency
+        totalAmount
+        paymentModel
+      }
+      sow {
+        description
+        title
+        status
+        projects {
+          id
+          slug
+          code
+          abstract
+          title
+          projectOwner {
+            id
+            code
+            name
+          }
+          imageUrl
+          budget
+          budgetType
+          currency
+          expenditure {
+            cap
+          }
+          scope {
+            status
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+            deliverables
+          }
+        }
+        roadmaps {
+          milestones {
+            budget
+            scope {
+              deliverables
+            }
+          }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
+          keyResults {
+            title
+            id
+            link
+          }
+          workProgress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+          budgetAnchor {
+            unitCost
+            unit
+            quantity
+          }
+          status
+        }
+      }
+    }
+    rfp {
+      title
+      summary
+      budgetMax
+      budgetMin
+      budgetCurrency
+      briefing
+      submissionDeadline
+    }
+    sow {
+      projects {
+        title
+      }
+      roadmaps {
+        milestones {
+          id
+        }
+      }
+    }
+    alternativeProposals {
+      id
+    }
+  }
+}

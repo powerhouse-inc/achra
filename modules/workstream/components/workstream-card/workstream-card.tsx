@@ -1,94 +1,60 @@
-import { FilePenLine } from 'lucide-react'
-import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
-import { InternalLink } from '@/modules/shared/components/internal-link'
-import { Markdown } from '@/modules/shared/components/markdown'
-import { NavigationHeader } from '@/modules/shared/components/navigation-header'
-import { Button } from '@/modules/shared/components/ui/button'
+import type { FullQueryWorkstream } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { Card } from '@/modules/shared/components/ui/card'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import InitialProposalHeader from '../initial-proposal-header/initial-proposal-header'
-import WorkstreamStats from '../workstream-stats/workstream-stats'
-import ProposalCardsGrid from './proposal-cards-grid'
-import { RfpDetailsLink } from './rfp-details-link'
-import StatCards from './stat-cards'
-import type { Route } from 'next'
+import { useWorkstreamCardData } from '../../hooks/use-workstream-card-data'
+import { AlternativeProposalsFooter } from '../initial-proposal-list/alternative-proposals-footer'
+import { InitialProposalSection } from '../initial-proposal-list/initial-proposal-section'
+import { WorkstreamRfpHeader } from '../initial-proposal-list/workstream-rfp-header'
+import type { ReactNode } from 'react'
 
-// TODO: remove this once the component is integrated with the API
-const proposalDescriptionMarkdown = `
-The Powerhouse Network is currently overseeing the "Vetra Beta Launch" project, which aims to enhance community engagement through innovative digital solutions. Key milestones include:
+interface WorkstreamCardProps {
+  workstream: FullQueryWorkstream
+  projects: WorkstreamDetailsProject[]
+  fullVersion?: boolean
+  action?: ReactNode
+}
 
-1. **Project Kickoff**: Scheduled for January 15, 2025, where team roles and responsibilities will be defined.
-2. **Phase 1 - Research & Development**: From February to April 2025, focusing on user feedback and prototype testing.
-3. **Phase 2 - Implementation**: Expected to begin in May 2025, where the developed solutions will be integrated into the existing platform.
-4. **Final Review & Launch**: Set for September 12, 2025, culminating in a community event to showcase the new features and gather further input.
+function WorkstreamCard({
+  workstream,
+  projects,
+  fullVersion = true,
+  action,
+}: Readonly<WorkstreamCardProps>) {
+  const {
+    networkSlug,
+    workstreamSlug,
+    milestones,
+    deliverables,
+    totalBudget,
+    initialProposalDeliverables,
+  } = useWorkstreamCardData(workstream)
 
-This project not only aims to improve user experience but also includes smaller initiatives like workshops and training sessions for contributors to maximize their impact.
-`
-
-export default function WorkstreamCard() {
   return (
-    <Card className="gap-0 p-0">
-      <div className="flex flex-col gap-4 p-2 sm:gap-6 sm:p-3 sm:pb-2 md:p-4">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <NavigationHeader
-            title="Vetra Beta Launch"
-            href={'/network/powerhouse/workstream/vetra-beta-launch' as Route}
-          />
-          <WorkstreamStatusChip status={WorkstreamStatus.OpenForProposals} />
-        </div>
-
-        <WorkstreamStats />
-
-        <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-          <Markdown className="line-clamp-6 sm:line-clamp-4">
-            {proposalDescriptionMarkdown}
-          </Markdown>
-
-          <RfpDetailsLink />
-        </div>
-      </div>
-
-      <div className="bg-accent flex flex-col gap-4 border-t border-b p-2 sm:p-3 sm:pb-4 md:p-4 md:pb-6">
-        <InitialProposalHeader slug="powerhouse" workstreamSlug="vetra-beta-launch" />
-
-        <StatCards />
-
-        <InternalLink href="#" className="ml-auto max-w-fit sm:hidden" variant="outline">
-          View Proposal
-        </InternalLink>
-
-        <Separator />
-
-        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-foreground/50 text-sm/5.5 font-semibold uppercase xl:text-base/6">
-            Join this proposal
-          </div>
-          <div className="flex w-full items-center gap-2 text-sm/5.5 font-semibold sm:w-auto xl:text-base/6">
-            <span className="whitespace-nowrap">Application Deadline:</span>
-            <div className="bg-background w-full rounded-lg border px-3 py-1.5 text-center sm:w-auto">
-              31 SEP 2025
-            </div>
-          </div>
-        </div>
-
-        <p className="text-xs/4.5 sm:text-sm/5.5 xl:text-base/6">
-          Help us empower our community with data. This project involves creating a real-time
-          GraphQL endpoing to provide powerful insight into network activity.
-        </p>
-
-        <ProposalCardsGrid />
-      </div>
-
-      <div className="flex flex-col gap-2 p-2 sm:gap-4 sm:p-4">
-        <div className="text-sm/5.5 font-semibold sm:text-lg sm:leading-[120%] xl:text-xl xl:font-bold">
-          Alternative Proposals
-        </div>
-        <Button className="w-fit">
-          <span>Create Alternative Proposal</span>
-          <FilePenLine className="size-4" />
-        </Button>
-      </div>
+    <Card className="gap-0 overflow-hidden p-0">
+      {fullVersion && (
+        <WorkstreamRfpHeader
+          workstream={workstream}
+          networkSlug={networkSlug}
+          workstreamSlug={workstreamSlug}
+        />
+      )}
+      <InitialProposalSection
+        networkSlug={networkSlug}
+        workstreamSlug={workstreamSlug}
+        proposal={workstream.initialProposal}
+        milestones={milestones}
+        deliverables={deliverables}
+        totalBudget={totalBudget}
+        projects={projects}
+        action={action}
+        applicationDeadline={workstream.rfp?.submissionDeadline}
+        className={fullVersion ? 'border-t' : undefined}
+      />
+      {fullVersion && (
+        <AlternativeProposalsFooter isVisible={initialProposalDeliverables.length > 0} />
+      )}
     </Card>
   )
 }
+
+export { WorkstreamCard }

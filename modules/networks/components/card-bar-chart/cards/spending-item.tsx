@@ -4,6 +4,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { InfoIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
+import { MobileDialogContent } from '@/modules/shared/components/mobile-dialog-content'
 import {
   HoverCard,
   HoverCardContent,
@@ -11,7 +12,6 @@ import {
 } from '@/modules/shared/components/ui/hover-card'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
-import { MobileDialogContent } from '../tooltips/mobile-tooltip-modal'
 
 interface SpendingItemProps extends React.PropsWithChildren {
   title: string

@@ -1,0 +1,13 @@
+query ResourceOperator($filter: buildersFilter) {
+  builders(filter: $filter) {
+    id
+    slug
+    description
+    name
+    icon
+    lastModified
+    contributors
+    code
+    status
+  }
+}

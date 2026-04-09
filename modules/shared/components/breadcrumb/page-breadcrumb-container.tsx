@@ -18,7 +18,7 @@ function PageBreadcrumbContainer<E extends ElementType = 'div'>({
     <Component
       data-slot="page-breadcrumb-container"
       className={cn(
-        'bg-background fixed top-18 z-50 w-full px-4 pt-4 pb-2 sm:top-22 sm:px-0 sm:py-0',
+        'bg-background fixed top-18 z-50 w-full px-4 pt-4 pb-2 sm:top-27.5 sm:px-0 sm:py-0',
         className,
       )}
       {...props}
@@ -27,7 +27,7 @@ function PageBreadcrumbContainer<E extends ElementType = 'div'>({
         data-slot="page-breadcrumb-container-wrapper"
         className={cn(
           'bg-secondary rounded-xl p-2', // mobile classes
-          'sm:bg-background border-accent sm:rounded-none sm:border-b sm:px-0 sm:py-3',
+          'sm:bg-background border-accent sm:h-12 sm:rounded-none sm:border-b sm:px-0 sm:py-3',
         )}
       >
         <div data-slot="page-breadcrumb-container-content" className="sm:container">

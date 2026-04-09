@@ -1,3 +1,4 @@
+import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { getTitleComponentData } from '../../utils'
 import { TitleComponent } from './title-component'
 
@@ -11,6 +12,7 @@ interface FinancesPageProps {
 export async function TitleComponentWrapper({ params }: FinancesPageProps) {
   const { slug, financeSlug } = await params
   const titleData = getTitleComponentData(slug, financeSlug)
+  const network = await getNetworkBySlug(slug)
 
   return (
     <TitleComponent
@@ -19,6 +21,7 @@ export async function TitleComponentWrapper({ params }: FinancesPageProps) {
       icon={titleData.icon}
       code={titleData.code}
       levelNumber={titleData.levelNumber}
+      networkName={network?.name ?? titleData.networkName}
     />
   )
 }

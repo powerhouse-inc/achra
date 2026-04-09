@@ -1,6 +1,6 @@
 import React from 'react'
 import { Calendar } from './calendar'
-import type { Meta, StoryObj } from '@storybook/nextjs'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Shadcn/Calendar',
@@ -8,7 +8,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
-    date: new Date(2025, 0, 1),
+    mockingDate: new Date(2025, 0, 1),
   },
 } satisfies Meta<typeof Calendar>
 

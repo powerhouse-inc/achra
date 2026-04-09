@@ -1,0 +1,74 @@
+query Projects($filter: WorkstreamsFilter) {
+  workstreams(filter: $filter) {
+    slug
+    initialProposal {
+      status
+      author {
+        id
+        name
+      }
+      sow {
+        description
+        title
+        status
+        projects {
+          abstract
+          slug
+          code
+          currency
+          id
+          imageUrl
+          projectOwner {
+            id
+            code
+            name
+          }
+          title
+          budget
+          expenditure {
+            cap
+          }
+          scope {
+            status
+
+            progress {
+              ... on SOW_Percentage {
+                value
+              }
+            }
+            deliverables
+          }
+        }
+        deliverables {
+          id
+          code
+          title
+          description
+          status
+          keyResults {
+            id
+            link
+            title
+          }
+          workProgress {
+            ... on SOW_StoryPoint {
+              total
+              completed
+            }
+            ... on SOW_Percentage {
+              value
+            }
+            ... on SOW_Binary {
+              done
+            }
+          }
+          budgetAnchor {
+            unitCost
+            unit
+            quantity
+          }
+        }
+      }
+    }
+  }
+}

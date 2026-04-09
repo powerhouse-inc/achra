@@ -5,12 +5,13 @@ import { UsdsIcon } from '@/modules/shared/components/svgs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../section-title/section-title'
+import SectionTitle from '../../../shared/components/section-title/section-title'
 
 export function FinancesSection() {
   return (
     <div
-      className={cn('flex flex-col gap-2 sm:gap-6', SCROLL_MT_CLASSES)}
+      // Note: The -mt-2 is to compensate for the swiper pagination dots height
+      className={cn('-mt-2 flex flex-col gap-2 sm:gap-6', SCROLL_MT_CLASSES)}
       id={encodeSectionId(NetworkHomepageSections.Finances)}
     >
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
