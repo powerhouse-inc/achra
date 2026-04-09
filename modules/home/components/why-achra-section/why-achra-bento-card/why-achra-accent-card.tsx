@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+import Sparkles from '@/public/home/why-achra/sparkles.svg'
 import { cn } from '@/shared/lib/utils'
 
 interface WhyAchraAccentCardProps {
@@ -29,16 +30,10 @@ function WhyAchraAccentCard({ title, description, accent, className }: WhyAchraA
         className={cn('pointer-events-none object-cover', accent === 'ai' ? 'object-bottom' : '')}
         aria-hidden
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        priority={accent === 'ai'}
       />
       {accent === 'ai' && (
-        <Image
-          src="/home/why-achra/sparkles.svg"
-          alt=""
-          width={32}
-          height={32}
-          className="pointer-events-none absolute top-3 right-3 z-1"
-          aria-hidden
-        />
+        <Sparkles className="pointer-events-none absolute top-3 right-3 z-1 size-8" aria-hidden />
       )}
       <div className="relative z-1 flex flex-col gap-6 p-10">
         <h3 className="text-foreground text-xl font-semibold tracking-tight xl:text-2xl">
