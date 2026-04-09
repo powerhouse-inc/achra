@@ -21,7 +21,7 @@ function Footer() {
                 aria-hidden
               />
             </a>
-            <p className="text-card-foreground/80 mt-8 text-sm">
+            <p className="text-card-foreground/80 mt-8 mb-2 text-sm">
               Learn more about Achra with your LLM.
             </p>
             <FooterLlmSection />
