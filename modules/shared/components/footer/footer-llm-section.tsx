@@ -52,13 +52,29 @@ function FooterLlmSection() {
         {activeLlm && (
           <div className="absolute -bottom-8 -left-9 w-[342px] overflow-hidden px-4 pb-4">
             <motion.div
-              initial={{ opacity: 0, height: 0, scale: 0.97 }}
-              animate={{ opacity: 1, height: 'auto', scale: 1 }}
-              exit={{ opacity: 0, height: 0, scale: 0.97 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="bg-card border-border origin-bottom overflow-hidden rounded-xl border pb-16 shadow-lg"
+              initial={{ height: 0, scale: 0.85, opacity: 0 }}
+              animate={{ height: 'auto', scale: 1, opacity: 1 }}
+              exit={{ height: 0, scale: 0.85, opacity: 0 }}
+              transition={{
+                height: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+                scale: { duration: 0.25, ease: 'easeOut' },
+                opacity: { duration: 0.2, delay: 0.1, ease: 'easeOut' },
+              }}
+              className="border-border bg-card overflow-hidden rounded-xl border shadow-lg"
             >
-              <div className="px-5 pt-1">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  opacity: {
+                    duration: 0.2,
+                    delay: 0.1,
+                    ease: 'easeOut',
+                  },
+                }}
+                className="px-5 pt-1 pb-16"
+              >
                 <AnimatePresence mode="wait">
                   <motion.ul
                     key={activeLlm}
@@ -100,7 +116,7 @@ function FooterLlmSection() {
                     ))}
                   </motion.ul>
                 </AnimatePresence>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         )}

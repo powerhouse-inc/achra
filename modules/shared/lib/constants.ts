@@ -41,6 +41,10 @@ export const FOOTER_LLM_CONVERSATIONS: Record<
   claude: [
     {
       label: 'Tell me about Achra',
+      href: '#',
+    },
+    {
+      label: 'Tell me about Achra',
       href: 'https://claude.ai/share/d193b0fa-0759-4c24-bf5a-d499b9e3458f',
     },
     {
