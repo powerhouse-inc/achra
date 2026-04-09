@@ -20,14 +20,15 @@ function WhyAchraAccentCard({ title, description, accent, className }: WhyAchraA
       <Image
         src={
           accent === 'payments'
-            ? '/home/why-achra/payments-gradient.png'
-            : '/home/why-achra/ai-gradient.png'
+            ? '/home/why-achra/payments-gradient.webp'
+            : '/home/why-achra/ai-gradient.webp'
         }
         alt=""
         fill
-        className="pointer-events-none object-cover"
+        quality={75}
+        className={cn('pointer-events-none object-cover', accent === 'ai' ? 'object-bottom' : '')}
         aria-hidden
-        sizes="(min-width: 1024px) 33vw, 100vw"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       />
       {accent === 'ai' && (
         <Image
@@ -35,7 +36,7 @@ function WhyAchraAccentCard({ title, description, accent, className }: WhyAchraA
           alt=""
           width={32}
           height={32}
-          className="pointer-events-none absolute top-10 right-10 z-1"
+          className="pointer-events-none absolute top-3 right-3 z-1"
           aria-hidden
         />
       )}
