@@ -11,8 +11,8 @@ export const PERIOD_ORDER: RsBillingCycle[] = [
 export const PERIOD_LABELS: Record<RsBillingCycle, string> = {
   [RsBillingCycle.Monthly]: 'Monthly',
   [RsBillingCycle.Quarterly]: 'Quarterly',
-  [RsBillingCycle.SemiAnnual]: 'Semi-Annual',
-  [RsBillingCycle.Annual]: 'Annual',
+  [RsBillingCycle.SemiAnnual]: 'Semi-Annually',
+  [RsBillingCycle.Annual]: 'Annually',
   [RsBillingCycle.OneTime]: 'One-Time',
 }
 
