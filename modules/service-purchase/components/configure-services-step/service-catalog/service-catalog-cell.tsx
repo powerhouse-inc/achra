@@ -2,6 +2,7 @@ import { Check } from 'lucide-react'
 import { CatalogStatus, type FeatureValue } from '@/modules/service-purchase/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogStatus } from '../service-catalog-status'
+import { useServiceCatalogEnabled } from './service-catalog-context'
 
 interface FeatureCellProps {
   value: FeatureValue
@@ -9,11 +10,18 @@ interface FeatureCellProps {
 }
 
 function ServiceCatalogCell({ value, isActive }: Readonly<FeatureCellProps>) {
+  const isGroupEnabled = useServiceCatalogEnabled()
+
   if (typeof value === 'boolean') {
     return (
       <div className="flex items-center justify-center">
         {value ? (
-          <Check className={cn('size-4', 'text-status-success brightness-75')} />
+          <Check
+            className={cn(
+              'size-4',
+              isGroupEnabled ? 'text-status-success brightness-75' : 'text-foreground/40',
+            )}
+          />
         ) : (
           <span className="text-foreground/60">—</span>
         )}
