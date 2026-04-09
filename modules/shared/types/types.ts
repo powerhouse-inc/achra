@@ -1,3 +1,5 @@
+export type FooterLlmKey = 'chatgpt' | 'claude' | 'grok'
+
 export enum ResourceType {
   AlignedDelegates = 'AlignedDelegates',
   CoreUnit = 'CoreUnit',
