@@ -1,17 +1,17 @@
 import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
+import { SectionTitle } from '@/modules/shared/components/section-title'
+import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import { SectionTitle } from '../../../shared/components/section-title'
 import {
   ExecutiveProposals,
   ExecutiveProposalsListSkeleton,
 } from './components/executive-proposals'
 import { ExternalLinks } from './components/external-links/external-links'
-import ForumOverview from './components/forum-overview/forum-overview'
+import { ForumOverview } from './components/forum-overview/forum-overview'
 
-export function GovernanceSection() {
+function GovernanceSection() {
   return (
     <section
       className={cn('flex w-full flex-col gap-6', SCROLL_MT_CLASSES)}
@@ -36,3 +36,5 @@ export function GovernanceSection() {
     </section>
   )
 }
+
+export { GovernanceSection }

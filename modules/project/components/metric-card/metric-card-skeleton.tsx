@@ -1,4 +1,4 @@
-export function MetricCardSkeleton() {
+function MetricCardSkeleton() {
   return (
     <div className="border-border bg-card w-full max-w-sm rounded-lg border p-6 shadow-sm">
       <div className="flex items-center justify-between">
@@ -13,3 +13,5 @@ export function MetricCardSkeleton() {
     </div>
   )
 }
+
+export { MetricCardSkeleton }

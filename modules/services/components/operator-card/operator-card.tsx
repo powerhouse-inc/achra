@@ -45,7 +45,7 @@ const OPERATOR_STATUS_LABELS_MAP: Record<BuilderStatus, string> = {
   [BuilderStatus.Archived]: 'Archived',
 }
 
-export default function OperatorCard({
+function OperatorCard({
   operator,
   onSelectOperator,
   configureServicesHref,
@@ -114,3 +114,5 @@ export default function OperatorCard({
     </Card>
   )
 }
+
+export { OperatorCard }

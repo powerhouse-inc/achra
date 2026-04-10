@@ -4,7 +4,7 @@ import Link from 'next/link'
 import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card'
 import { useWalletsTable } from '@/modules/networks/hooks/use-wallets-table'
 import { SortEnum } from '@/modules/networks/types'
-import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import {
   Table,
@@ -21,7 +21,7 @@ export interface WalletsTableProps {
   className?: string
 }
 
-export function WalletsTable({ wallets, className }: WalletsTableProps) {
+function WalletsTable({ wallets, className }: WalletsTableProps) {
   const {
     headersSort,
     sortedWallets,
@@ -131,3 +131,5 @@ export function WalletsTable({ wallets, className }: WalletsTableProps) {
     </Table>
   )
 }
+
+export { WalletsTable }

@@ -3,7 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ConfigureStepContinueButton } from '@/modules/service-purchase/components/configure-step-continue-button'
-import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
+import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/lib/constants'
 import {
   computeTierHeaderPriceWithBreakdown,
   getGroupPriceFromBreakdown,

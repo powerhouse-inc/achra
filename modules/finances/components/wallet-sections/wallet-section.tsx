@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
+import { calculateTotalBalance } from '@/modules/finances/lib/utils'
 import { WalletsCard } from '@/modules/networks/components/wallets-section/components/wallets-card/wallets-card'
-import { calculateTotalBalance } from '../../utils'
 import { TotalDisplay } from '../total-display'
 import type { WalletGroup } from '../../types'
 
@@ -8,7 +8,7 @@ interface WalletSectionProps {
   groupedWallets: WalletGroup[]
 }
 
-export function WalletSection({ groupedWallets }: WalletSectionProps) {
+function WalletSection({ groupedWallets }: WalletSectionProps) {
   const primaryValue = useMemo(
     () => calculateTotalBalance(groupedWallets, 'usdsBalance'),
     [groupedWallets],
@@ -35,3 +35,5 @@ export function WalletSection({ groupedWallets }: WalletSectionProps) {
     </section>
   )
 }
+
+export { WalletSection }

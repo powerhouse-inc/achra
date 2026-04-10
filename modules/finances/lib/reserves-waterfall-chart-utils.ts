@@ -1,5 +1,5 @@
+import { removePatternAfterSlash } from '@/modules/finances/lib'
 import type { Analytic, AnalyticGranularity, Budget, MetricValues } from '@/modules/finances/types'
-import { removePatternAfterSlash } from '@/modules/finances/utils'
 import type { EChartsOption } from 'echarts-for-react'
 
 const UMBRAL_CHART_WATERFALL = 0.004

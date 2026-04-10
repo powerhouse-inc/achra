@@ -2,7 +2,7 @@ import type {
   FullQueryWorkstream,
   Network,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { WorkstreamStatusChip } from '@/modules/shared/components/chips/workstream-status-chip'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { NavigationHeader } from '@/modules/shared/components/navigation-header'

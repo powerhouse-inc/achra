@@ -1,15 +1,15 @@
 'use client'
+import { TABS_CONFIG } from '@/modules/networks/lib/constants'
+import type { TabValue } from '@/modules/networks/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
-import { TABS_CONFIG } from '../constants'
-import type { TabValue } from '../type'
 
 interface FinancesTabsProps {
   activeTab: TabValue
   onTabChange: (tab: TabValue) => void
 }
 
-export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
+function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
   return (
     <div
       className={cn(
@@ -40,3 +40,5 @@ export function FinancesTabs({ activeTab, onTabChange }: FinancesTabsProps) {
     </div>
   )
 }
+
+export { FinancesTabs }

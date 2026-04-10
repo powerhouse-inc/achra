@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
+import { ETH_MAINNET_RPC, GOVERNANCE_MCD_ADM_MAINNET } from '@/modules/web3/lib/constants'
 import mcdAdmABI from '../abi/mcdAdmABI.json'
-import { ETH_MAINNET_RPC, GOVERNANCE_MCD_ADM_MAINNET } from '../constants'
 
 export const getChiefHat = async (): Promise<string | null> => {
   try {

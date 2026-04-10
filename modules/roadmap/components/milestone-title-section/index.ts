@@ -1,1 +1,1 @@
-export { default as MilestoneTitleSection } from './milestone-title-section'
+export { MilestoneTitleSection } from './milestone-title-section'

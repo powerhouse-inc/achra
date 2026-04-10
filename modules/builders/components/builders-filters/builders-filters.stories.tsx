@@ -1,6 +1,6 @@
 import { withBuildersFiltersProvider } from '@/modules/builders/lib/decorators'
 import { withNuqsAdapter, withPortalFontStyles } from '@/modules/shared/lib/decorators'
-import BuilderFilters from './builders-filters'
+import { BuilderFilters } from './builders-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

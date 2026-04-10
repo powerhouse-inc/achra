@@ -1,6 +1,6 @@
 import 'server-only'
 
-import type { ServiceRequestData } from '../config/types'
+import type { ServiceRequestData } from '../types'
 
 async function sendServiceRequest(data: ServiceRequestData): Promise<boolean> {
   try {

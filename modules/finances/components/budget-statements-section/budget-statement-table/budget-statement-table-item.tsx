@@ -4,13 +4,16 @@ import { useMemo } from 'react'
 import slugify from 'slugify'
 import type { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
+import {
+  formatReportingMonth,
+  getAmountByMetric,
+} from '@/modules/finances/lib/budget-statement-utils'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { BudgetStatementsStatus } from '../budget-statements-status/budget-statements-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
-import { formatReportingMonth, getAmountByMetric } from '../lib/utils'
 
 export interface BudgetStatementTableItemProps {
   budgetStatement: BudgetStatement
@@ -18,7 +21,7 @@ export interface BudgetStatementTableItemProps {
   className?: string
 }
 
-export function BudgetStatementTableItem({
+function BudgetStatementTableItem({
   budgetStatement,
   budgetMetric,
   className,
@@ -101,3 +104,5 @@ export function BudgetStatementTableItem({
     </TableRow>
   )
 }
+
+export { BudgetStatementTableItem }

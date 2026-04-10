@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import { BuilderProfile } from '@/modules/shared/components/builder-profile/builder-profile'
 import { BuilderSkills } from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
@@ -13,7 +13,7 @@ export interface CompactItemProps {
   className?: string
 }
 
-export default function CompactItem({ builder, className }: CompactItemProps) {
+function CompactItem({ builder, className }: CompactItemProps) {
   return (
     <div
       className={cn(
@@ -46,3 +46,5 @@ export default function CompactItem({ builder, className }: CompactItemProps) {
     </div>
   )
 }
+
+export { CompactItem }

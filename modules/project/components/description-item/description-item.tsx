@@ -8,7 +8,7 @@ export interface DescriptionItemProps {
   className?: string
 }
 
-export function DescriptionItem({ label, value, className }: DescriptionItemProps) {
+function DescriptionItem({ label, value, className }: DescriptionItemProps) {
   return (
     <div
       className={cn(
@@ -22,3 +22,5 @@ export function DescriptionItem({ label, value, className }: DescriptionItemProp
     </div>
   )
 }
+
+export { DescriptionItem }

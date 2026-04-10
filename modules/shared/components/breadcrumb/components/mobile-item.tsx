@@ -2,7 +2,7 @@ import { CheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { cn } from '@/modules/shared/lib/utils'
-import type { BreadcrumbItemNavigation } from '../types'
+import type { BreadcrumbItemNavigation } from '@/modules/shared/types/breadcrumb'
 
 interface MobileItemProps {
   item: BreadcrumbItemNavigation
@@ -10,7 +10,7 @@ interface MobileItemProps {
   onClick: () => void
 }
 
-export function MobileItem({ item, isCurrent, onClick }: MobileItemProps) {
+function MobileItem({ item, isCurrent, onClick }: MobileItemProps) {
   return (
     <div
       onClick={onClick}
@@ -28,3 +28,5 @@ export function MobileItem({ item, isCurrent, onClick }: MobileItemProps) {
     </div>
   )
 }
+
+export { MobileItem }

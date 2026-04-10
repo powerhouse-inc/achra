@@ -16,7 +16,7 @@ import { Input } from '@/modules/shared/components/ui/input'
 import { cn } from '@/modules/shared/lib/utils'
 import { StatusSelectDelivarableDrawer, StatusSelectDeliverable } from './key-result-filters'
 import { KeyResultItem } from './key-result-item'
-import useDeliverableFilters from './use-deliverable-filters'
+import { useDeliverableFilters } from './use-deliverable-filters'
 
 interface KeyResultsModalProps {
   isOpen: boolean
@@ -24,7 +24,7 @@ interface KeyResultsModalProps {
   deliverables: ScopeOfWork_Deliverable[]
 }
 
-export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsModalProps) {
+function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsModalProps) {
   const { search, statuses, onReset, setSearch, setStatuses, filteredDeliverables } =
     useDeliverableFilters({
       deliverables,
@@ -150,3 +150,5 @@ export function KeyResultsModal({ isOpen, onClose, deliverables }: KeyResultsMod
     </Dialog>
   )
 }
+
+export { KeyResultsModal }

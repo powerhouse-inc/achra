@@ -4,8 +4,8 @@ import { createContext, use } from 'react'
 
 const ServiceCatalogEnabledContext = createContext(true)
 
-export function useServiceCatalogEnabled() {
+function useServiceCatalogEnabled() {
   return use(ServiceCatalogEnabledContext)
 }
 
-export { ServiceCatalogEnabledContext }
+export { ServiceCatalogEnabledContext, useServiceCatalogEnabled }

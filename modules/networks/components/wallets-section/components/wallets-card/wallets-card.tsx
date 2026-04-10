@@ -22,7 +22,7 @@ export interface WalletsCardProps {
   title?: string
 }
 
-export function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCardProps) {
+function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCardProps) {
   const {
     toogleWalletTable,
     usdsTotalBalance,
@@ -85,3 +85,5 @@ export function WalletsCard({ wallets, className, title = 'Wallets' }: WalletsCa
     </StripedCard>
   )
 }
+
+export { WalletsCard }

@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BudgetStatementsDesktopSkeleton() {
+function BudgetStatementsDesktopSkeleton() {
   return (
     <div className="hidden flex-col space-y-3 lg:flex">
       {/* Table Header Simulation */}
@@ -67,3 +67,5 @@ export function BudgetStatementsDesktopSkeleton() {
     </div>
   )
 }
+
+export { BudgetStatementsDesktopSkeleton }

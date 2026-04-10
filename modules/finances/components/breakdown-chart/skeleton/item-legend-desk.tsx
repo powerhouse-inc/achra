@@ -5,7 +5,7 @@ interface ItemLegendDeskProps {
   widthValue: number
 }
 
-export function ItemLegendDesk({ widthName, widthValue }: Readonly<ItemLegendDeskProps>) {
+function ItemLegendDesk({ widthName, widthValue }: Readonly<ItemLegendDeskProps>) {
   return (
     <div className="flex h-fit w-full flex-row items-center gap-2">
       <Skeleton className="bg-border h-4 w-4 rounded-full" />
@@ -14,3 +14,5 @@ export function ItemLegendDesk({ widthName, widthValue }: Readonly<ItemLegendDes
     </div>
   )
 }
+
+export { ItemLegendDesk }

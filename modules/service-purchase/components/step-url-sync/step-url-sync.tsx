@@ -2,7 +2,7 @@
 
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { useEffect, useRef } from 'react'
-import { SERVICE_PURCHASE_STEP_VALUES } from '../../config/constants'
+import { SERVICE_PURCHASE_STEP_VALUES } from '@/modules/service-purchase/lib/constants'
 import { useServicePurchaseStep } from '../../providers/service-purchase-store-provider'
 
 function StepUrlSync() {

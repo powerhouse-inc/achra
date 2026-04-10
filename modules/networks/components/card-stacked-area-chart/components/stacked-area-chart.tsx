@@ -2,13 +2,11 @@
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useTheme } from 'next-themes'
 import { useRef } from 'react'
+import { formatNumberToShortScale } from '@/modules/networks/lib/finances-section-utils'
+import { getLegendSeries } from '@/modules/networks/lib/stacked-area-chart-utils'
+import type { BarChartSeries, StackedAreaSeries } from '@/modules/networks/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { cn } from '@/modules/shared/lib/utils'
-import { formatNumberToShortScale } from '../../finances-section/utils'
-import { getLegendSeries } from '../utils'
-import type { BarChartSeries } from '../../card-bar-chart/types'
-
-import type { StackedAreaSeries } from '../type'
 
 interface StackedAreaChartProps {
   years: string[]
@@ -267,4 +265,4 @@ function StackedAreaChart({ years, series }: StackedAreaChartProps) {
   )
 }
 
-export default StackedAreaChart
+export { StackedAreaChart }

@@ -6,13 +6,7 @@ interface FaqItemProps extends React.ComponentProps<'div'> {
   answer: string
 }
 
-export function FaqItem({
-  icon: Icon,
-  question,
-  answer,
-  className,
-  ...props
-}: Readonly<FaqItemProps>) {
+function FaqItem({ icon: Icon, question, answer, className, ...props }: Readonly<FaqItemProps>) {
   return (
     <div data-slot="faq-item" className={cn('flex flex-col gap-2', className)} {...props}>
       <div className="flex items-center gap-3">
@@ -32,3 +26,5 @@ export function FaqItem({
     </div>
   )
 }
+
+export { FaqItem }

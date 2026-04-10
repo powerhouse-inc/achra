@@ -25,4 +25,4 @@ function ForumInfoChip({ value, type, popular = false }: ForumInfoChipProps) {
   )
 }
 
-export default ForumInfoChip
+export { ForumInfoChip }

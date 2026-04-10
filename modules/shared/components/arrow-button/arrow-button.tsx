@@ -7,7 +7,7 @@ interface ArrowButtonProps extends React.ComponentProps<typeof Button> {
   onClick: () => void
 }
 
-export function ArrowButton({
+function ArrowButton({
   children,
   className,
   variant = 'secondary',
@@ -26,3 +26,5 @@ export function ArrowButton({
     </Button>
   )
 }
+
+export { ArrowButton }

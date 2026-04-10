@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { formatAddress } from '@/modules/expense-reports/lib/address'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { Identicon } from '@/modules/shared/components/identicon'
-import { formatAddress } from '../../utils/address'
 
 interface WalletInfoProps {
   name: string

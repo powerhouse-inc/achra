@@ -13,10 +13,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/compon
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
 import { isBinaryProgress, isStoryPointProgress } from '../../lib/type-helpers'
-import KeyResults from '../milestone-details-card/key-results/key-results'
-import DeliverablePercentageBar from './deliverable-percentage-bar'
-import DeliverableStoryPointBar from './deliverable-storypoint-bar'
-import ProjectLink from './project-link'
+import { KeyResults } from '../milestone-details-card/key-results/key-results'
+import { DeliverablePercentageBar } from './deliverable-percentage-bar'
+import { DeliverableStoryPointBar } from './deliverable-storypoint-bar'
+import { ProjectLink } from './project-link'
 
 export type DeliverableViewMode = 'compacted' | 'detailed'
 
@@ -29,7 +29,7 @@ interface DeliverableCardProps {
   isProjectCard?: boolean
 }
 
-export default function DeliverableCard({
+function DeliverableCard({
   deliverable,
   contributors,
   projects,
@@ -146,3 +146,5 @@ export default function DeliverableCard({
     </div>
   )
 }
+
+export { DeliverableCard }

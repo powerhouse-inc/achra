@@ -2,6 +2,11 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import type { ExpenseReport_ExpenseReportStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { LastModified } from '@/modules/builders/components/builders/components/last-modified'
+import {
+  formatReportingMonth,
+  getAmountByMetric,
+  getMetricLabel,
+} from '@/modules/finances/lib/budget-statement-utils'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
@@ -12,14 +17,13 @@ import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementsStatus } from '../budget-statements-status/budget-statements-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'
 import { LabeledValue } from '../labeled-value'
-import { formatReportingMonth, getAmountByMetric, getMetricLabel } from '../lib/utils'
 
 export interface BudgetStatementMobileItemProps {
   budgetStatement: BudgetStatement
   selectedMetric: MetricWithoutBudget
 }
 
-export function BudgetStatementMobileItem({
+function BudgetStatementMobileItem({
   budgetStatement,
   selectedMetric,
 }: Readonly<BudgetStatementMobileItemProps>) {
@@ -99,3 +103,5 @@ export function BudgetStatementMobileItem({
     </Link>
   )
 }
+
+export { BudgetStatementMobileItem }

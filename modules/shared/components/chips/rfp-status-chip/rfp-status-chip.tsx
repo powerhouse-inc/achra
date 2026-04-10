@@ -6,7 +6,7 @@ interface RfpStatusChipProps {
   status: RfpStatus
 }
 
-export function RfpStatusChip({ status }: RfpStatusChipProps) {
+function RfpStatusChip({ status }: RfpStatusChipProps) {
   const { label, color } = useMemo(() => {
     switch (status) {
       case RfpStatus.Draft:
@@ -58,3 +58,5 @@ export function RfpStatusChip({ status }: RfpStatusChipProps) {
     </GenericChip>
   )
 }
+
+export { RfpStatusChip }

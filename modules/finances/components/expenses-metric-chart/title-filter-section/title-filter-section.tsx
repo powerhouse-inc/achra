@@ -1,6 +1,6 @@
 'use client'
 import { Suspense } from 'react'
-import { useFinancesYear } from '../../../hooks/use-finaces-year'
+import { useFinancesYear } from '../../../hooks/use-finances-year'
 import { TitleSectionFinances } from '../../title-section-finances'
 import { FilterChart } from '../filter-chart'
 

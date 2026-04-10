@@ -6,10 +6,7 @@ interface DeliverableStoryPointsBarProps {
   completed: number
 }
 
-export default function DeliverableStoryPointBar({
-  total,
-  completed,
-}: DeliverableStoryPointsBarProps) {
+function DeliverableStoryPointBar({ total, completed }: DeliverableStoryPointsBarProps) {
   const storyPointItems = useMemo(() => {
     return Array.from({ length: total }, (_, index) => (
       <div
@@ -40,3 +37,5 @@ export default function DeliverableStoryPointBar({
     </div>
   )
 }
+
+export { DeliverableStoryPointBar }

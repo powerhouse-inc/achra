@@ -1,6 +1,6 @@
 import { EllipsisIcon } from 'lucide-react'
 
-export function TriggerIcon({ className, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
+function TriggerIcon({ className, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       aria-label="Open breadcrumb menu"
@@ -11,3 +11,5 @@ export function TriggerIcon({ className, ...props }: React.HTMLAttributes<HTMLBu
     </button>
   )
 }
+
+export { TriggerIcon }

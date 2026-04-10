@@ -34,10 +34,7 @@ interface ModalCategoriesProviderProps {
   categoriesTree: CategoriesTreeShape
 }
 
-export function ModalCategoriesProvider({
-  children,
-  categoriesTree,
-}: ModalCategoriesProviderProps) {
+function ModalCategoriesProvider({ children, categoriesTree }: ModalCategoriesProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [expandedState, setExpandedState] = useState<Record<string, boolean>>({})
 
@@ -162,10 +159,12 @@ export function ModalCategoriesProvider({
   )
 }
 
-export function useModalCategories() {
+function useModalCategories() {
   const context = useContext(ModalCategoriesContext)
   if (!context) {
     throw new Error('useModalCategories must be used within a ModalCategoriesProvider')
   }
   return context
 }
+
+export { ModalCategoriesProvider, useModalCategories }

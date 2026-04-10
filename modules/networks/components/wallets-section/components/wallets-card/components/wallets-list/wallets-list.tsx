@@ -7,7 +7,7 @@ import {
   CopyButton,
   CopyTooltip,
   CopyTrigger,
-} from '@/modules/shared/components/copy-butoon/copy-button'
+} from '@/modules/shared/components/copy-button/copy-button'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -16,7 +16,7 @@ export interface WalletsListProps {
   className?: string
 }
 
-export function WalletsList({ wallets, className }: WalletsListProps) {
+function WalletsList({ wallets, className }: WalletsListProps) {
   const { handleItemClick } = useWalletsList()
   return (
     <div className={cn('space-y-2', className)}>
@@ -84,3 +84,5 @@ export function WalletsList({ wallets, className }: WalletsListProps) {
     </div>
   )
 }
+
+export { WalletsList }

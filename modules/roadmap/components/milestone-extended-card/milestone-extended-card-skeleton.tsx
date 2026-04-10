@@ -5,7 +5,7 @@ interface MilestoneExtendedCardSkeletonProps {
   className?: string
 }
 
-export function MilestoneExtendedCardSkeleton({ className }: MilestoneExtendedCardSkeletonProps) {
+function MilestoneExtendedCardSkeleton({ className }: MilestoneExtendedCardSkeletonProps) {
   return (
     <div
       className={cn(
@@ -74,3 +74,5 @@ export function MilestoneExtendedCardSkeleton({ className }: MilestoneExtendedCa
     </div>
   )
 }
+
+export { MilestoneExtendedCardSkeleton }

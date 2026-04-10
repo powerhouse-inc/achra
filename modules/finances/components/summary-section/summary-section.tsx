@@ -1,9 +1,13 @@
 'use client'
+import {
+  getBudgetsByCodePath,
+  getCodePathFromParams,
+  getLevelOfDetail,
+} from '@/modules/finances/lib/utils'
 import { Card } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
 import { BUDGETS } from '../../mocks'
 import { MOCK_BUDGETS_ANALYTICS } from '../../mocks/analytics'
-import { getBudgetsByCodePath, getCodePathFromParams, getLevelOfDetail } from '../../utils'
 import { BudgetUtilizationCard } from './budget-utilization-card'
 import { DoughnutChart } from './doughnut-chart'
 import { MobileChart } from './doughnut-chart/mobile-chart'
@@ -14,7 +18,7 @@ interface SummarySectionProps {
   financeSlug?: string[]
 }
 
-export function SummarySection({ financeSlug }: SummarySectionProps) {
+function SummarySection({ financeSlug }: SummarySectionProps) {
   const codePath = getCodePathFromParams(financeSlug)
   const budgets = getBudgetsByCodePath(codePath, BUDGETS)
   const levelNumber = getLevelOfDetail(codePath)
@@ -66,3 +70,5 @@ export function SummarySection({ financeSlug }: SummarySectionProps) {
     </div>
   )
 }
+
+export { SummarySection }

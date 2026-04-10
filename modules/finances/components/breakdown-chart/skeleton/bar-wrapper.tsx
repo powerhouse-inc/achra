@@ -1,4 +1,4 @@
-export function BarWrapper({
+function BarWrapper({
   height,
   heightRelative,
   className,
@@ -21,3 +21,5 @@ export function BarWrapper({
     </div>
   )
 }
+
+export { BarWrapper }

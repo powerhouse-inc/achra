@@ -9,12 +9,7 @@ interface NumberCellProps {
   rowType?: RowType
 }
 
-export function NumberCell({
-  value,
-  className,
-  isIncome = false,
-  rowType = 'normal',
-}: NumberCellProps) {
+function NumberCell({ value, className, isIncome = false, rowType = 'normal' }: NumberCellProps) {
   const negative = value < 0
   const isTotal = rowType === 'total'
 
@@ -41,3 +36,5 @@ export function NumberCell({
     </div>
   )
 }
+
+export { NumberCell }

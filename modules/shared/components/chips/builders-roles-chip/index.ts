@@ -1,1 +1,1 @@
-export { default } from './builders-roles-chip'
+export { BuildersRolesChip } from './builders-roles-chip'

@@ -1,5 +1,5 @@
 import type { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { DeliverableSetStatusChip } from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { Progress } from '@/modules/shared/components/ui/progress'
 import { cn } from '@/modules/shared/lib/utils'
 import { MetricCard, MetricCardLabel } from '../metric-card/metric-card'

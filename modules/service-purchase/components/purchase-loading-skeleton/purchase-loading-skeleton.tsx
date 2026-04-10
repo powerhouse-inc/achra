@@ -10,7 +10,7 @@ import { SummaryStepSkeleton } from '@/modules/service-purchase/components/summa
 import {
   SERVICE_PURCHASE_DEFAULT_STEP,
   SERVICE_PURCHASE_STEP_VALUES,
-} from '@/modules/service-purchase/config/constants'
+} from '@/modules/service-purchase/lib/constants'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ServiceInfoSkeleton } from '@/modules/services/components/service-info'
 import { PageContent } from '@/modules/shared/components/page-containers'

@@ -17,7 +17,7 @@ export interface ExecutiveProposalsListProps {
   className?: string
 }
 
-export function ExecutiveProposalsList({
+function ExecutiveProposalsList({
   openProposals,
   activeProposals,
   passedProposals,
@@ -78,3 +78,5 @@ export function ExecutiveProposalsList({
     </div>
   )
 }
+
+export { ExecutiveProposalsList }

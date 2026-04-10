@@ -1,5 +1,5 @@
 import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuildersSkillsChip from './builders-skills-chip'
+import { BuildersSkillsChip } from './builders-skills-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

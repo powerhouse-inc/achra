@@ -3,7 +3,7 @@ import { Separator } from '@/modules/shared/components/ui/separator'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/shared/lib/utils'
 
-export function BudgetUtilizationCardSkeleton() {
+function BudgetUtilizationCardSkeleton() {
   return (
     <Card className="flex w-full flex-col gap-0 px-8 py-3.25 shadow-sm lg:py-4">
       {/* Top Section: Numbers */}
@@ -48,3 +48,5 @@ export function BudgetUtilizationCardSkeleton() {
     </Card>
   )
 }
+
+export { BudgetUtilizationCardSkeleton }

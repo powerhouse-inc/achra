@@ -5,17 +5,17 @@ import {
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '@/modules/shared/components/section-title'
 import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
 
 interface RoadmapSectionProps {
   params: Promise<{ slug: string }>
 }
 
-export default async function RoadmapSection({ params }: RoadmapSectionProps) {
+async function RoadmapSection({ params }: RoadmapSectionProps) {
   const { slug } = await params
 
   const data = await useRoadmapListQuery.fetcher({
@@ -95,3 +95,5 @@ export default async function RoadmapSection({ params }: RoadmapSectionProps) {
     </section>
   )
 }
+
+export { RoadmapSection }

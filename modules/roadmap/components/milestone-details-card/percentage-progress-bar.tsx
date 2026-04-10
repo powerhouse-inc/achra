@@ -110,4 +110,4 @@ function PercentageProgressBar({ value }: PercentageProgressBarProps) {
   )
 }
 
-export default PercentageProgressBar
+export { PercentageProgressBar }

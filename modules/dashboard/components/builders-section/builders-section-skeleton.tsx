@@ -1,8 +1,8 @@
 import { BuildersSkeleton } from '@/modules/builders/components/builders/builders-skeleton'
-import BuildersFiltersSkeleton from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
+import { BuildersFiltersSkeleton } from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
 import { DashboardSectionWrapperSkeleton } from '../dashboard-section-wrapper'
 
-export function BuildersSectionSkeleton() {
+function BuildersSectionSkeleton() {
   return (
     <DashboardSectionWrapperSkeleton>
       <BuildersFiltersSkeleton />
@@ -10,3 +10,5 @@ export function BuildersSectionSkeleton() {
     </DashboardSectionWrapperSkeleton>
   )
 }
+
+export { BuildersSectionSkeleton }

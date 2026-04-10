@@ -10,7 +10,8 @@ interface ServiceSectionsCardProps {
   className?: string
   showDetailsButton?: boolean
 }
-export function ServiceSectionsCard({
+
+function ServiceSectionsCard({
   icon: Icon,
   title,
   items,
@@ -50,3 +51,5 @@ export function ServiceSectionsCard({
     </Card>
   )
 }
+
+export { ServiceSectionsCard }

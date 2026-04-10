@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react'
 import { adjustElementHeights } from '@/shared/lib/swiper-utils'
 import type { SwiperRef } from 'swiper/react'
 
-export default function useRoadmapSwiper() {
+function useRoadmapSwiper() {
   const [isSwiperReady, setIsSwiperReady] = useState(false)
   const swiperRef = useRef<SwiperRef>(null)
 
@@ -28,3 +28,5 @@ export default function useRoadmapSwiper() {
     adjustCardHeights,
   }
 }
+
+export { useRoadmapSwiper }

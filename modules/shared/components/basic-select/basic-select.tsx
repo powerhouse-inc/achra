@@ -28,7 +28,7 @@ interface BasicSelectProps {
   disabled?: boolean
 }
 
-export function BasicSelect({
+function BasicSelect({
   value,
   onValueChange,
   options,
@@ -92,3 +92,5 @@ export function BasicSelect({
     </Select>
   )
 }
+
+export { BasicSelect }

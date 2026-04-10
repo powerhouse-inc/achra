@@ -2,7 +2,7 @@ import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import type { Topic } from '@/modules/networks/types'
 import { Button } from '@/modules/shared/components/ui/button'
-import ForumInfoChip from '../forum-info-chip/forum-info-chip'
+import { ForumInfoChip } from '../forum-info-chip/forum-info-chip'
 import { Dot, forumCategories } from '../forum-overview/categories'
 
 interface ForumPostProps {
@@ -71,4 +71,4 @@ function ForumPost({ post, isPopular = false }: ForumPostProps) {
   )
 }
 
-export default ForumPost
+export { ForumPost }

@@ -1,8 +1,8 @@
 import {
   ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
   LEAVE_PAGE_GUARD_ENABLED,
-} from '@/modules/service-purchase/config/constants'
-import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
+} from '@/modules/service-purchase/lib/constants'
+import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/lib/constants'
 import type { FeatureFlags } from './types'
 
 const ffStaging: FeatureFlags = {

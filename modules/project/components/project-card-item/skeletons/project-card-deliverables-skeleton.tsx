@@ -1,7 +1,7 @@
 import { CardContent } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function ProjectCardDeliverablesSkeleton() {
+function ProjectCardDeliverablesSkeleton() {
   return (
     <CardContent className="bg-accent flex flex-col gap-2 border-t px-2 pt-2 pb-3 sm:p-4">
       <Skeleton className="mb-1 h-4 w-24 rounded" />
@@ -99,3 +99,5 @@ export function ProjectCardDeliverablesSkeleton() {
     </CardContent>
   )
 }
+
+export { ProjectCardDeliverablesSkeleton }

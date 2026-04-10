@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import ServicesFilters from '@/modules/services/components/services-filters'
+import { ServicesFilters } from '@/modules/services/components/services-filters'
 import { ServicesFiltersProvider } from '@/modules/services/components/services-filters/services-filters-context'
 import {
   ServicesContentSkeleton,

@@ -10,7 +10,7 @@ interface TabsProps {
   isSelect?: boolean
 }
 
-export function TabButton({ label, className, onClick, isSelect = false }: TabsProps) {
+function TabButton({ label, className, onClick, isSelect = false }: TabsProps) {
   return (
     <Button
       variant="default"
@@ -50,3 +50,5 @@ export function TabButton({ label, className, onClick, isSelect = false }: TabsP
     </Button>
   )
 }
+
+export { TabButton }

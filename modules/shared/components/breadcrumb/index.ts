@@ -5,5 +5,5 @@ export type {
   BreadcrumbItemExtended,
   BreadcrumbItemProps,
   DotsSegmentProps,
-} from './types'
+} from '@/modules/shared/types/breadcrumb'
 export { BreadcrumbSkeleton } from './breadcrumb-skeleton'

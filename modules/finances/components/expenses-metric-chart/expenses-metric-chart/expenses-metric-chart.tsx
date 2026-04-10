@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { getExpensesMetricTooltip } from '@/modules/finances/lib/get-expenses-metric-chart-tooltip'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
 import { cn } from '@/shared/lib/utils'
-import { useFinancesYear } from '../../../hooks/use-finaces-year'
+import { useFinancesYear } from '../../../hooks/use-finances-year'
 import {
   formatterExpensesMetricChart,
   getChartAxisLabelByGranularity,

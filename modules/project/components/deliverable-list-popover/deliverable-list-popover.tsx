@@ -14,7 +14,7 @@ interface DeliverableListPopoverProps {
   className?: string
 }
 
-export function DeliverableListPopover({
+function DeliverableListPopover({
   title,
   keyResults,
   count,
@@ -51,3 +51,5 @@ export function DeliverableListPopover({
     </div>
   )
 }
+
+export { DeliverableListPopover }

@@ -1,4 +1,4 @@
-import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '../../config/constants'
+import { HOME_BANNER_EXPANDED_STORAGE_KEY } from '@/modules/networks/lib/constants'
 import { HomepageBanner } from '.'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

@@ -1,7 +1,7 @@
+import type { BreadcrumbItemNavigation } from '@/modules/shared/types/breadcrumb'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import { withPortalFontStyles } from '../../lib/decorators'
 import { Breadcrumb, PageBreadcrumbContainer } from './index'
-import type { BreadcrumbItemNavigation } from './types'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**

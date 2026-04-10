@@ -4,7 +4,7 @@ interface BuildersProfileSkeletonProps {
   builderNameWidth: number
 }
 
-export function BuildersProfileSkeleton({ builderNameWidth }: BuildersProfileSkeletonProps) {
+function BuildersProfileSkeleton({ builderNameWidth }: BuildersProfileSkeletonProps) {
   return (
     <div className="flex items-center gap-2 md:gap-4">
       <Skeleton className="h-8 w-8 rounded-full" />
@@ -18,3 +18,5 @@ export function BuildersProfileSkeleton({ builderNameWidth }: BuildersProfileSke
     </div>
   )
 }
+
+export { BuildersProfileSkeleton }

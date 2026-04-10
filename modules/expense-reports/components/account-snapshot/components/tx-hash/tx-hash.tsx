@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 
 interface TxHashProps {
   txHash: string | null

@@ -1,6 +1,6 @@
+import { getBudgetStatements } from '@/modules/finances/services/budget-statement-service'
 import { BudgetStatementsContent } from './budget-statements-content'
 import { budgetStatementsSearchParamsCache } from './lib/search-params-server'
-import { getBudgetStatements } from './services/budget-statement-service'
 import type { MetricWithoutBudget, SortOptionValue } from '../../types'
 import type { SearchParams } from 'nuqs/server'
 

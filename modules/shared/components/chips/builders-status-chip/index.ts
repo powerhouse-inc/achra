@@ -1,1 +1,1 @@
-export { default as BuildersStatusChip } from './builders-status-chip'
+export { BuildersStatusChip } from './builders-status-chip'

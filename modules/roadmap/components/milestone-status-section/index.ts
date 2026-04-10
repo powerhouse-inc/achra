@@ -1,1 +1,1 @@
-export { default as MilestoneStatusSection } from './milestone-status-section'
+export { MilestoneStatusSection } from './milestone-status-section'

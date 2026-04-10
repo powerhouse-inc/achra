@@ -8,7 +8,7 @@ interface BreakdownChartCardProps {
   children: ReactNode
 }
 
-export function BreakdownChartCard({ children }: Readonly<BreakdownChartCardProps>) {
+function BreakdownChartCard({ children }: Readonly<BreakdownChartCardProps>) {
   return (
     <Card className="bg-popover flex w-full flex-col gap-4 border-none p-2 pb-4 shadow-xs md:p-4 lg:p-6">
       <Suspense fallback={<BreakdownChartFilterSkeleton />}>
@@ -18,3 +18,5 @@ export function BreakdownChartCard({ children }: Readonly<BreakdownChartCardProp
     </Card>
   )
 }
+
+export { BreakdownChartCard }

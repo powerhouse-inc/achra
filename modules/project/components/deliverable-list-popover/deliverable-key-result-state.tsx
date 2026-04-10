@@ -6,7 +6,7 @@ interface DeliverableKeyResultStateProps {
   keyResult: ScopeOfWork_KeyResult
 }
 
-export function DeliverableKeyResultState({ keyResult }: DeliverableKeyResultStateProps) {
+function DeliverableKeyResultState({ keyResult }: DeliverableKeyResultStateProps) {
   const hasLink = Boolean(keyResult.link && keyResult.link !== '')
 
   return (
@@ -23,3 +23,5 @@ export function DeliverableKeyResultState({ keyResult }: DeliverableKeyResultSta
     </>
   )
 }
+
+export { DeliverableKeyResultState }

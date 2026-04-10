@@ -1,5 +1,5 @@
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import WorkstreamStatusChip from './workstream-status-chip'
+import { WorkstreamStatusChip } from './workstream-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

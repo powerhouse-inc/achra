@@ -21,7 +21,7 @@ interface SpendingItemProps extends React.PropsWithChildren {
 }
 const TOOLTIP_WIDTH = 320
 
-export function SpendingItem({
+function SpendingItem({
   title,
   shortTitle,
   tooltipContent,
@@ -132,3 +132,5 @@ export function SpendingItem({
     </div>
   )
 }
+
+export { SpendingItem }

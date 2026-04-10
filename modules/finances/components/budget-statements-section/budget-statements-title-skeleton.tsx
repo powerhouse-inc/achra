@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BudgetStatementsTitleSkeleton() {
+function BudgetStatementsTitleSkeleton() {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex w-fit items-center gap-2">
@@ -12,3 +12,5 @@ export function BudgetStatementsTitleSkeleton() {
     </div>
   )
 }
+
+export { BudgetStatementsTitleSkeleton }

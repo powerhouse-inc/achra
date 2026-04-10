@@ -3,9 +3,9 @@
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { useProposalsSwiper } from '@/modules/networks/hooks/use-proposals-swiper'
+import { PROPOSALS_SWIPER_BREAKPOINTS } from '@/modules/networks/lib/constants'
 import { cn } from '@/shared/lib/utils'
 import { ProposalCard } from '../proposal-card/proposal-card'
-import { PROPOSALS_SWIPER_BREAKPOINTS } from './constants'
 import type { Proposal } from '../../proposals-section'
 
 interface ProposalsSwiperProps {

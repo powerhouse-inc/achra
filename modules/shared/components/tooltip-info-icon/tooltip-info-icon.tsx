@@ -14,7 +14,7 @@ interface TooltipInfoIconProps {
 }
 const TOOLTIP_WIDTH = 320
 
-export function TooltipInfoIcon({ tooltipContent, className }: TooltipInfoIconProps) {
+function TooltipInfoIcon({ tooltipContent, className }: TooltipInfoIconProps) {
   const [alignment, setAlignment] = useState<'start' | 'end'>('start')
   const triggerRef = useRef<HTMLButtonElement>(null)
   const [isOpen, setIsOpen] = useState(false)
@@ -97,3 +97,5 @@ export function TooltipInfoIcon({ tooltipContent, className }: TooltipInfoIconPr
     </div>
   )
 }
+
+export { TooltipInfoIcon }

@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react'
+import {
+  generateCellKey,
+  renderCell,
+  transformCardItems,
+} from '@/modules/expense-reports/lib/advanced-inner-table-helpers'
+import { DEFAULT_COLUMN_WIDTH, DEFAULT_MIN_WIDTH } from '@/modules/expense-reports/lib/constants'
 import type { AdvancedInnerTableProps, Alignment } from '@/modules/expense-reports/types'
 import { cn } from '@/modules/shared/lib/utils'
-import { DEFAULT_COLUMN_WIDTH, DEFAULT_MIN_WIDTH } from './constants'
 import { EmptyTablePlaceholder } from './empty-table-placeholder'
-import { generateCellKey, renderCell, transformCardItems } from './helpers'
 import { TransparencyCard } from './transparency-card/transparency-card'
 
-export function AdvancedInnerTable({
+function AdvancedInnerTable({
   cardsTotalPosition = 'bottom',
   columns,
   items,
@@ -176,3 +180,5 @@ export function AdvancedInnerTable({
     (tablePlaceholder ?? <EmptyTablePlaceholder actorName={longCode} />)
   )
 }
+
+export { AdvancedInnerTable }

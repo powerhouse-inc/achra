@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Suspense } from 'react'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuilderProfile from '@/modules/shared/components/builder-profile'
+import { BuilderProfile } from '@/modules/shared/components/builder-profile'
 import { BuilderSkills } from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/modules/shared/lib/utils'
@@ -12,7 +12,7 @@ export interface LargeItemProps {
   className?: string
 }
 
-export default function LargeItem({ builder, className }: LargeItemProps) {
+function LargeItem({ builder, className }: LargeItemProps) {
   return (
     <div
       className={cn(
@@ -42,3 +42,5 @@ export default function LargeItem({ builder, className }: LargeItemProps) {
     </div>
   )
 }
+
+export { LargeItem }

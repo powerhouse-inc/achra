@@ -1,5 +1,5 @@
 import { BuildersSkeleton } from '@/modules/builders/components/builders/builders-skeleton'
-import BuildersFiltersSkeleton from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
+import { BuildersFiltersSkeleton } from '@/modules/builders/components/builders-filters/builders-filters-skeleton'
 import { BuildersHeaderSkeleton } from '@/modules/builders/components/builders-header/builders-header-skeleton'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'

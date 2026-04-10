@@ -4,7 +4,7 @@ const MobileAxisYValues = Array.from({ length: 9 }).map((_, i) => ({
   width: [13, 26, 16, 25, 16, 25, 16, 25, 16][i],
 }))
 
-export function LegendAxisYItems() {
+function LegendAxisYItems() {
   return (
     <div className="flex">
       {/* Mobile */}
@@ -30,3 +30,5 @@ export function LegendAxisYItems() {
     </div>
   )
 }
+
+export { LegendAxisYItems }

@@ -6,7 +6,7 @@ interface SectionTitleProps {
   tooltip?: string
 }
 
-export default function SectionTitle({ title, tooltip }: SectionTitleProps) {
+function SectionTitle({ title, tooltip }: SectionTitleProps) {
   return (
     <div className="flex items-center gap-2">
       <h2 className="text-secondary-foreground m-0 text-lg font-bold md:text-xl md:leading-6 xl:text-xl">
@@ -25,3 +25,5 @@ export default function SectionTitle({ title, tooltip }: SectionTitleProps) {
     </div>
   )
 }
+
+export { SectionTitle }

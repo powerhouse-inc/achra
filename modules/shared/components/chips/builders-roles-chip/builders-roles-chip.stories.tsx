@@ -1,5 +1,5 @@
-import { TeamRole } from '@/modules/shared/types'
-import BuildersRolesChip from './builders-roles-chip'
+import { TeamRole } from '@/modules/shared/types/common-enums'
+import { BuildersRolesChip } from './builders-roles-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

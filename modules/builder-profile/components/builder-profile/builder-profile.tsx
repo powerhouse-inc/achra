@@ -1,4 +1,5 @@
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import { SkillsAccordion } from '@/modules/builder-profile/components/skills-accordion'
 import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-finances-card-content'
 import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/profile-finances-drawer'
 import { ProjectCard } from '@/modules/expense-reports/components/project-card'
@@ -6,13 +7,13 @@ import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import ff from '@/modules/shared/lib/feature-flags'
-import { SkillsAccordion } from './components/skills-accordion/skills-accordion'
+
 interface BuilderProfileProps {
   builder: BuilderProfileState
   isOperatorProfile?: boolean
 }
 
-export default function BuilderProfile({ builder, isOperatorProfile }: BuilderProfileProps) {
+function BuilderProfile({ builder, isOperatorProfile }: BuilderProfileProps) {
   const connectButton = (
     <ConnectLink
       action="edit"
@@ -86,3 +87,5 @@ export default function BuilderProfile({ builder, isOperatorProfile }: BuilderPr
     </div>
   )
 }
+
+export { BuilderProfile }

@@ -1,7 +1,7 @@
 import { Phone } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
-import { OPERATIONAL_HUB_URL } from '@/shared/config/constants'
+import { OPERATIONAL_HUB_URL } from '@/modules/shared/lib/constants'
 
 function BookCallButton() {
   return (
