@@ -1,6 +1,6 @@
+import { buildWidths, MAX_ROWS } from '@/modules/builders/lib/skeletons-helpers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { buildWidths, MAX_ROWS } from '../../utils/skeletons-helpers'
 import { BuildersProfileSkeleton } from '../builders-profile-skeleton/builders-profile-skeleton'
 import { BuildersSkillsSkeleton } from '../builders-skills-skeleton/builders-skills-skeleton'
 
@@ -42,7 +42,7 @@ interface BuildersListSkeletonProps {
   className?: string
 }
 
-export function BuildersListSkeleton({ className }: BuildersListSkeletonProps) {
+function BuildersListSkeleton({ className }: BuildersListSkeletonProps) {
   const builderProfileWidths = buildWidths({ min: 13, max: 40, seed: 12345 })
   const builderSkillsWidths = buildWidths({ min: 23, max: 38, seed: 67890 })
   return (
@@ -62,3 +62,5 @@ export function BuildersListSkeleton({ className }: BuildersListSkeletonProps) {
     </div>
   )
 }
+
+export { BuildersListSkeleton }

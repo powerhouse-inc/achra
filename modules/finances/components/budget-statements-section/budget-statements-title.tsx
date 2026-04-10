@@ -1,6 +1,6 @@
 'use client'
 
-import { useFinancesYear } from '../../hooks/use-finaces-year'
+import { useFinancesYear } from '../../hooks/use-finances-year'
 import { TitleSectionFinances as TitleSection } from '../title-section-finances'
 
 function BudgetStatementsTitle() {

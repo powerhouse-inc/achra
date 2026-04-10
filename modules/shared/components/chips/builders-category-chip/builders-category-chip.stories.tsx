@@ -1,5 +1,5 @@
-import { TeamCategory } from '@/modules/shared/types/types'
-import BuildersCategoryChip from './builders-category-chip'
+import { TeamCategory } from '@/modules/shared/types/common-enums'
+import { BuildersCategoryChip } from './builders-category-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

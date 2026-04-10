@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from 'react'
 import { submitWhitelistEmailAction } from '@/modules/whitelist/actions/whitelist-action'
-import type { WhitelistFormState } from '@/modules/whitelist/config/types'
+import type { WhitelistFormState } from '@/modules/whitelist/types'
 import { Button } from '@/shared/components/ui/button'
 import { Field, FieldLabel } from '@/shared/components/ui/field'
 import { Input } from '@/shared/components/ui/input'
@@ -17,7 +17,7 @@ interface WhitelistFormProps {
   onSuccess: () => void
 }
 
-export function WhitelistForm({ onSuccess }: WhitelistFormProps) {
+function WhitelistForm({ onSuccess }: WhitelistFormProps) {
   const [state, formAction, isPending] = useActionState(submitWhitelistEmailAction, initialState)
 
   // Handle success state in useEffect to avoid setState during render
@@ -72,3 +72,5 @@ export function WhitelistForm({ onSuccess }: WhitelistFormProps) {
     </>
   )
 }
+
+export { WhitelistForm }

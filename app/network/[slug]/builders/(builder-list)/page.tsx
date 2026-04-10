@@ -1,5 +1,5 @@
 import { Builders } from '@/modules/builders/components/builders/builders'
-import BuilderFilters from '@/modules/builders/components/builders-filters'
+import { BuilderFilters } from '@/modules/builders/components/builders-filters'
 import { BuildersFiltersProvider } from '@/modules/builders/components/builders-filters/builders-filters-context'
 import { BuildersHeader } from '@/modules/builders/components/builders-header/builders-header'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-button'
 interface CopySectionUrlProps {
   hash: string
   children: React.ReactNode

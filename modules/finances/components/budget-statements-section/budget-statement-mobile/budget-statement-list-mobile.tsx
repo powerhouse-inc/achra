@@ -11,7 +11,7 @@ interface BudgetStatementListMobileProps {
   asSectionContent?: boolean
 }
 
-export function BudgetStatementListMobile({
+function BudgetStatementListMobile({
   budgetStatements,
   selectedMetric,
   asSectionContent = false,
@@ -44,3 +44,5 @@ export function BudgetStatementListMobile({
     </div>
   )
 }
+
+export { BudgetStatementListMobile }

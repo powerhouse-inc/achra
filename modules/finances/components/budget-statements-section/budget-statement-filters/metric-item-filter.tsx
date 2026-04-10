@@ -11,12 +11,7 @@ interface SortItemProps {
   className?: string
 }
 
-export function MetricItemFilter({
-  label,
-  isSelected,
-  onClick,
-  className,
-}: Readonly<SortItemProps>) {
+function MetricItemFilter({ label, isSelected, onClick, className }: Readonly<SortItemProps>) {
   return (
     <Button
       variant="ghost"
@@ -39,3 +34,5 @@ export function MetricItemFilter({
     </Button>
   )
 }
+
+export { MetricItemFilter }

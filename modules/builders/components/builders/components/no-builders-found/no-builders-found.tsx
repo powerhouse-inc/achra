@@ -5,7 +5,7 @@ import {
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
 
-export function NoBuildersFound() {
+function NoBuildersFound() {
   return (
     <Empty>
       <EmptyHeader>
@@ -15,3 +15,5 @@ export function NoBuildersFound() {
     </Empty>
   )
 }
+
+export { NoBuildersFound }

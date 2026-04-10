@@ -13,8 +13,8 @@ import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
-import Coordinators from './coordinators'
-import LatestKeyResults from './latest-key-results'
+import { Coordinators } from './coordinators'
+import { LatestKeyResults } from './latest-key-results'
 
 interface MilestoneExtendedCardProps {
   milestone: ScopeOfWork_Milestone
@@ -24,7 +24,7 @@ interface MilestoneExtendedCardProps {
   deliverables: Sow_Deliverable[]
 }
 
-export default function MilestoneExtendedCard({
+function MilestoneExtendedCard({
   milestone,
   className,
   networkSlug,
@@ -74,3 +74,5 @@ export default function MilestoneExtendedCard({
     </Card>
   )
 }
+
+export { MilestoneExtendedCard }

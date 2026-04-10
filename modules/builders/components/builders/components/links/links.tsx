@@ -10,7 +10,7 @@ import {
 import { Button } from '@/modules/shared/components/ui/button'
 import type { MouseEvent } from 'react'
 
-export function Links({ links }: { links: BuilderLink[] }) {
+function Links({ links }: { links: BuilderLink[] }) {
   const mediaElements: MediaElement[] = links.map((link) => ({
     type: link.label ?? 'link',
     href: link.url,
@@ -50,3 +50,5 @@ export function Links({ links }: { links: BuilderLink[] }) {
     </LinksPopover>
   )
 }
+
+export { Links }

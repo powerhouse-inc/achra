@@ -1,14 +1,14 @@
 'use client'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useMemo, useRef } from 'react'
-import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { cn } from '@/modules/shared/lib/utils'
 import {
   barChartSeriesConfig,
   createTooltipFormatter,
   formatNumberToShortScale,
-} from '../finances-section/utils'
-import type { BarChartSeries, RevenueAndSpendingRecords } from './types'
+} from '@/modules/networks/lib/finances-section-utils'
+import type { BarChartSeries, RevenueAndSpendingRecords } from '@/modules/networks/types'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import { cn } from '@/modules/shared/lib/utils'
 
 interface FinancesBarChartProps {
   revenueAndSpendingData: RevenueAndSpendingRecords
@@ -184,4 +184,4 @@ function FinancesBarChart({ revenueAndSpendingData }: FinancesBarChartProps) {
   )
 }
 
-export default FinancesBarChart
+export { FinancesBarChart }

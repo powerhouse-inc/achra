@@ -1,7 +1,7 @@
 import { CardHeader } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function ProjectCardHeaderSkeleton() {
+function ProjectCardHeaderSkeleton() {
   return (
     <CardHeader className="flex flex-col gap-4 px-4 pt-3 pb-4 lg:flex-row [&]:grid-cols-none!">
       {/* Title Section */}
@@ -67,3 +67,5 @@ export function ProjectCardHeaderSkeleton() {
     </CardHeader>
   )
 }
+
+export { ProjectCardHeaderSkeleton }

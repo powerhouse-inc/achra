@@ -7,7 +7,7 @@ interface CoordinatorItemProps {
   className?: string
 }
 
-export default function CoordinatorItem({ name, className }: CoordinatorItemProps) {
+function CoordinatorItem({ name, className }: CoordinatorItemProps) {
   return (
     <div className={cn('flex min-w-0 items-center gap-1', className)}>
       <Avatar className="size-6 flex-shrink-0">
@@ -19,3 +19,5 @@ export default function CoordinatorItem({ name, className }: CoordinatorItemProp
     </div>
   )
 }
+
+export { CoordinatorItem }

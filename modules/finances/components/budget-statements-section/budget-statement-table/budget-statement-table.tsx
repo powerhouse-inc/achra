@@ -2,7 +2,6 @@
 import { ArrowUpDown } from 'lucide-react'
 import SimpleBar from 'simplebar-react'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
-import { SortEnum } from '@/modules/networks/types'
 
 import { Button } from '@/modules/shared/components/ui/button'
 import {
@@ -13,6 +12,7 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
+import { SortEnum } from '@/modules/shared/types/common-enums'
 import { useBudgetStatementTable } from '../budget-statement-item/use-budget-statement-table'
 import { BudgetStatementTableItem } from './budget-statement-table-item'
 export interface BudgetStatementTableProps {
@@ -22,7 +22,7 @@ export interface BudgetStatementTableProps {
   asSectionContent?: boolean
 }
 
-export function BudgetStatementTable({
+function BudgetStatementTable({
   budgetStatements,
   budgetMetric,
   className,
@@ -122,3 +122,5 @@ export function BudgetStatementTable({
     </div>
   )
 }
+
+export { BudgetStatementTable }

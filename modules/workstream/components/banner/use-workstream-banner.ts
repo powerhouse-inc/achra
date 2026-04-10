@@ -1,7 +1,7 @@
 import { useParams } from 'next/navigation'
 import { useCallback, useMemo } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
-import { WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY } from '../../config/constants'
+import { WORKSTREAM_BANNER_VISIBLE_STORAGE_KEY } from '@/modules/workstream/lib/constants'
 import type { HTMLMotionProps } from 'motion/react'
 
 function useWorkstreamBanner() {

@@ -15,4 +15,4 @@ function ServicesFiltersSkeleton() {
   )
 }
 
-export default ServicesFiltersSkeleton
+export { ServicesFiltersSkeleton }

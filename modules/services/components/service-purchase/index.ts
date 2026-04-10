@@ -1,1 +1,1 @@
-// Components will be exported here as they are implemented
+// TODO: export { ServicePurchase } from './service-purchase' when the component is implemented

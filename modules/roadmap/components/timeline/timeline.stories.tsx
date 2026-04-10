@@ -1,5 +1,5 @@
 import { mockedMilestones } from '@/modules/roadmap/mocks'
-import Timeline from './timeline'
+import { Timeline } from './timeline'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

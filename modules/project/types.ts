@@ -1,4 +1,4 @@
-import type { WorkstreamDetailsQuery } from '../__generated__/graphql/switchboard-generated'
+import type { WorkstreamDetailsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export type WorkstreamDetailsProject = Omit<
   NonNullable<

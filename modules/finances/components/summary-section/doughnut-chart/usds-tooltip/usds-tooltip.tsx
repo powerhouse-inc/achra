@@ -4,7 +4,7 @@ import { UsdsIconWithInfo } from '@/modules/shared/components/svgs'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 import { cn } from '@/shared/lib/utils'
 
-export function UsdsTooltip() {
+function UsdsTooltip() {
   return (
     <div
       data-slot="usds-tooltip-wrapper"
@@ -36,3 +36,5 @@ export function UsdsTooltip() {
     </div>
   )
 }
+
+export { UsdsTooltip }

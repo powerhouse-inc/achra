@@ -130,18 +130,6 @@ Launch it locally with:
 pnpm storybook
 ```
 
-## Recommended Skill For Contributors
-
-To contribute to Achra effectively, we recommend using the `achra-guidelines` skill. It documents the project's architecture, business domains, naming conventions, feature-flag patterns, GraphQL conventions, Storybook expectations, and other engineering guidelines used across the codebase.
-
-Install it with:
-
-```bash
-npx skills add https://github.com/yasielcabrera/achra-guidelines-skill --skill achra-guidelines
-```
-
-Use this skill when writing or refactoring Achra code, adding new modules or routes, creating shared components, working with feature flags, or checking which project conventions to follow.
-
 ## Notes For Contributors
 
 - Path aliases are configured in `tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `modules/shared/*`.

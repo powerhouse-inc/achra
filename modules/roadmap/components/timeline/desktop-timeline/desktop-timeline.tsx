@@ -7,7 +7,7 @@ import {
 import { Circle, CircleWithDot } from '@/shared/components/svgs'
 import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
-import useDesktopTimeline from './use-desktop-timeline'
+import { useDesktopTimeline } from './use-desktop-timeline'
 
 const containerBaseClasses = 'flex items-stretch gap-10 xl:gap-18.25 2xl:gap-25.75'
 const spacingUpClasses = 'pr-32.5 xl:pr-45 2xl:pr-48.75'
@@ -21,7 +21,7 @@ interface DesktopTimelineProps {
   milestones: ScopeOfWork_Milestone[]
 }
 
-export default function DesktopTimeline({ milestones }: DesktopTimelineProps) {
+function DesktopTimeline({ milestones }: DesktopTimelineProps) {
   const { containerRef, upMilestones, downMilestones } = useDesktopTimeline({ milestones })
 
   if (milestones.length === 0) return null
@@ -84,3 +84,5 @@ export default function DesktopTimeline({ milestones }: DesktopTimelineProps) {
     </div>
   )
 }
+
+export { DesktopTimeline }

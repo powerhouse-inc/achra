@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { startTransition, useEffect, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
+import type { BreadcrumbItemNavigation } from '@/modules/shared/types/breadcrumb'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +16,6 @@ import {
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from '../../ui/drawer'
 import { MobileItem } from './mobile-item'
 import { TriggerIcon } from './trigger-icon'
-import type { BreadcrumbItemNavigation } from '../types'
 
 interface DotsSegmentProps {
   items: BreadcrumbItemNavigation[]
@@ -102,4 +102,4 @@ function DotsSegment({ items, defaultOpen = false }: DotsSegmentProps) {
   )
 }
 
-export default DotsSegment
+export { DotsSegment }

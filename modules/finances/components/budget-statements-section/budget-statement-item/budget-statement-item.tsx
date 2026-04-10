@@ -16,7 +16,7 @@ export interface BudgetStatementsItemProps {
   asSectionContent?: boolean
 }
 
-export function BudgetStatementsItem({
+function BudgetStatementsItem({
   budgetStatements,
   budgetMetric,
   sortOption,
@@ -45,3 +45,5 @@ export function BudgetStatementsItem({
     </>
   )
 }
+
+export { BudgetStatementsItem }

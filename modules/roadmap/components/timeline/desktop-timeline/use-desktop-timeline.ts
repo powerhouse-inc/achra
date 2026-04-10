@@ -8,7 +8,7 @@ interface UseDesktopTimelineOptions {
   milestones: ScopeOfWork_Milestone[]
 }
 
-export default function useDesktopTimeline({ milestones }: UseDesktopTimelineOptions) {
+function useDesktopTimeline({ milestones }: UseDesktopTimelineOptions) {
   const containerRef = useRef<HTMLDivElement | null>(null)
 
   const upMilestones = useMemo(
@@ -50,3 +50,5 @@ export default function useDesktopTimeline({ milestones }: UseDesktopTimelineOpt
 
   return { containerRef, upMilestones, downMilestones }
 }
+
+export { useDesktopTimeline }

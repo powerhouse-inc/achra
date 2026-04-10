@@ -1,5 +1,5 @@
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import MilestoneStatusSection from './milestone-status-section'
+import { MilestoneStatusSection } from './milestone-status-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

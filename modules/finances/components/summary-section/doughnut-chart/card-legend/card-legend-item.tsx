@@ -2,7 +2,7 @@ import {
   getPercentDisplay,
   getShortCode,
   threeDigitsPrecisionHumanization,
-} from '@/modules/finances/components/summary-section/doughnut-chart/utils'
+} from '@/modules/finances/lib/doughnut-chart-utils'
 import type { DoughnutSeries } from '@/modules/finances/types'
 import { cn } from '@/modules/shared/lib/utils'
 

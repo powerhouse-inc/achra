@@ -10,7 +10,7 @@ interface BuildersListItemsProps {
   builders: Builder[]
 }
 
-export function BuildersListItems({ className, builders }: BuildersListItemsProps) {
+function BuildersListItems({ className, builders }: BuildersListItemsProps) {
   const { simpleBarRef, cardContentRef, itemsWrapperRef } = useBuildersListItems({
     builders,
   })
@@ -26,3 +26,5 @@ export function BuildersListItems({ className, builders }: BuildersListItemsProp
     </div>
   )
 }
+
+export { BuildersListItems }

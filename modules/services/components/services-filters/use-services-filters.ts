@@ -1,6 +1,6 @@
 import { parseAsString, parseAsStringLiteral, useQueryStates } from 'nuqs'
 import { useCallback, useMemo, useTransition } from 'react'
-import type { ServiceTab } from '@/modules/services/config/types'
+import type { ServiceTab } from '@/modules/services/types'
 
 const SERVICE_TABS = ['all', 'builders', 'networks'] as const
 
@@ -19,7 +19,7 @@ const filtersConfig = {
   }),
 } as const
 
-export default function useServicesFilters() {
+function useServicesFilters() {
   const [filters, setFilters] = useQueryStates(filtersConfig)
   const [isSearchPending, startSearchTransition] = useTransition()
   const [isTabPending, startTabTransition] = useTransition()
@@ -94,3 +94,5 @@ export default function useServicesFilters() {
     onReset,
   }
 }
+
+export { useServicesFilters }

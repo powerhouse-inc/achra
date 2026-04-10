@@ -1,4 +1,11 @@
-import { LimitedColorAssigner } from '@/modules/finances/components/summary-section/colors'
+import {
+  existingColors,
+  newBudgetMetric,
+  removePatternAfterSlash,
+  setMetric,
+  transformPathToName,
+} from '@/modules/finances/lib'
+import { LimitedColorAssigner } from '@/modules/finances/lib/constants'
 import {
   type Analytic,
   type AnalyticGranularity,
@@ -12,13 +19,6 @@ import {
   GRANULARITY_OPTIONS,
   type ValuesDataWithBorder,
 } from '@/modules/finances/types'
-import {
-  existingColors,
-  newBudgetMetric,
-  removePatternAfterSlash,
-  setMetric,
-  transformPathToName,
-} from '@/modules/finances/utils'
 
 export const removeBudgetWord = (name: string) => {
   const wordToRemove = /\s+Budget\s*$/i

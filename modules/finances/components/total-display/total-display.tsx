@@ -3,7 +3,7 @@ interface TotalDisplayProps {
   secondaryValue: number
 }
 
-export function TotalDisplay({ primaryValue, secondaryValue }: TotalDisplayProps) {
+function TotalDisplay({ primaryValue, secondaryValue }: TotalDisplayProps) {
   const primaryValueFormatted = primaryValue.toLocaleString() || 0
   const secondaryValueFormatted = secondaryValue.toLocaleString() || 0
 
@@ -28,3 +28,5 @@ export function TotalDisplay({ primaryValue, secondaryValue }: TotalDisplayProps
     </div>
   )
 }
+
+export { TotalDisplay }

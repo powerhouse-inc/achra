@@ -4,7 +4,7 @@ interface KeyResultStatusChipProps {
   className?: string
 }
 
-export function KeyResultStatusChip({ className }: KeyResultStatusChipProps) {
+function KeyResultStatusChip({ className }: KeyResultStatusChipProps) {
   return (
     <div
       className={cn(
@@ -16,3 +16,5 @@ export function KeyResultStatusChip({ className }: KeyResultStatusChipProps) {
     </div>
   )
 }
+
+export { KeyResultStatusChip }

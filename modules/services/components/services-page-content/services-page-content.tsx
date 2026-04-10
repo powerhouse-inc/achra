@@ -2,16 +2,16 @@
 import { useMemo } from 'react'
 import ff from '@/modules/shared/lib/feature-flags'
 import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
-import { filterBySearch } from '../../utils/utils'
-import EmptyStateService from '../empty-state-service/empty-state-service'
+import { filterBySearch } from '../../lib/utils'
+import { EmptyStateService } from '../empty-state-service/empty-state-service'
 import { useServicesFiltersContext } from '../services-filters/services-filters-context'
-import ServicesList from '../services-list'
+import { ServicesList } from '../services-list'
 
 interface ServicesPageContentProps {
   services: Service[]
 }
 
-export function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
+function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
   const { search: contextSearch, tab: contextTab } = useServicesFiltersContext()
   const filtersEnabled = ff.SERVICES_LISTING_FILTERS_ENABLED
   const search = filtersEnabled ? contextSearch : ''
@@ -53,3 +53,5 @@ export function ServicesPageContent({ services }: Readonly<ServicesPageContentPr
     </div>
   )
 }
+
+export { ServicesPageContent }

@@ -1,14 +1,12 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface DashboardSectionWrapperSkeletonProps {
   children: React.ReactNode
 }
 
-export function DashboardSectionWrapperSkeleton({
-  children,
-}: DashboardSectionWrapperSkeletonProps) {
+function DashboardSectionWrapperSkeleton({ children }: DashboardSectionWrapperSkeletonProps) {
   return (
     <div className={cn('flex w-full flex-col gap-6', SCROLL_MT_CLASSES)}>
       <Skeleton className="h-[38px] w-48" />
@@ -22,3 +20,5 @@ export function DashboardSectionWrapperSkeleton({
     </div>
   )
 }
+
+export { DashboardSectionWrapperSkeleton }

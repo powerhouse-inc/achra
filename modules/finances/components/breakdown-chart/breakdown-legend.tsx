@@ -17,7 +17,7 @@ interface BreakdownLegendProps {
   showScrollAndToggle?: boolean
 }
 
-export function BreakdownLegend({
+function BreakdownLegend({
   series,
   handleToggleSeries,
   onLegendItemHover,
@@ -177,3 +177,5 @@ export function BreakdownLegend({
     </>
   )
 }
+
+export { BreakdownLegend }

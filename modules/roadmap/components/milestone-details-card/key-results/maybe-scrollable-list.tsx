@@ -22,4 +22,4 @@ function MaybeScrollableList({ scrollable, children }: MaybeScrollableListProps)
   return <ul className="flex h-full flex-col gap-2 p-0">{children}</ul>
 }
 
-export default MaybeScrollableList
+export { MaybeScrollableList }

@@ -1,1 +1,1 @@
-export { default as BuildersCategoryChip } from './builders-category-chip'
+export { BuildersCategoryChip } from './builders-category-chip'

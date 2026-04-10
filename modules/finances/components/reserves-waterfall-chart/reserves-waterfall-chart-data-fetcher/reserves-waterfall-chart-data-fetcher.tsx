@@ -1,6 +1,6 @@
+import { getBudgetsByCodePath, getCodePathFromParams } from '@/modules/finances/lib'
 import { financesReservesChartSearchParamsCache } from '@/modules/finances/lib/finances-reserves-chart-search-params'
 import { ATLAS_BUDGETS } from '@/modules/finances/mocks/group-wallets'
-import { getBudgetsByCodePath, getCodePathFromParams } from '@/modules/finances/utils'
 import { ReservesWaterfallChart } from '../reserves-waterfall-chart'
 
 interface ReservesWaterfallChartDataFetcherProps {

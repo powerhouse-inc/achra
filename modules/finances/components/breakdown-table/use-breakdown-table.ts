@@ -4,7 +4,7 @@
 import groupBy from 'lodash/groupBy'
 import { useMemo } from 'react'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { useFinancesYear } from '../../hooks/use-finaces-year'
+import { useFinancesYear } from '../../hooks/use-finances-year'
 import { BUDGETS, FIRST_LEVEL_BUDGETS } from '../../mocks'
 import {
   ANNUAL_ANALYTICS_MOCK,

@@ -6,7 +6,7 @@ interface MobileChartProps {
   seriesData: DoughnutSeries[]
 }
 
-export function MobileChart({ seriesData }: MobileChartProps) {
+function MobileChart({ seriesData }: MobileChartProps) {
   const series = useMemo(() => {
     const total = seriesData.reduce((acc, item) => acc + item.value, 0)
 
@@ -60,3 +60,5 @@ export function MobileChart({ seriesData }: MobileChartProps) {
     </div>
   )
 }
+
+export { MobileChart }

@@ -1,4 +1,4 @@
-import { ENVIRONMENT } from '@/modules/shared/config/constants'
+import { ENVIRONMENT } from '@/modules/shared/lib/constants'
 import { ffDev } from './ff.dev'
 import { ffProduction } from './ff.production'
 import { ffStaging } from './ff.staging'

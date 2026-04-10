@@ -1,5 +1,5 @@
-import EmptyStateService from '@/modules/services/components/empty-state-service/empty-state-service'
-import ServicesList from '@/modules/services/components/services-list'
+import { EmptyStateService } from '@/modules/services/components/empty-state-service/empty-state-service'
+import { ServicesList } from '@/modules/services/components/services-list'
 import type { Service } from '@/modules/shared/types/services'
 
 interface OperatorServicesProps {

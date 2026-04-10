@@ -1,4 +1,4 @@
-import { OPERATIONAL_HUB_URL } from '../config/constants'
+import { OPERATIONAL_HUB_URL } from '@/modules/shared/lib/constants'
 import ff from '../lib/feature-flags'
 import type { RouteWithDynamicPages } from '../types/routes'
 

@@ -1,3 +1,4 @@
+import type { TABS } from '@/modules/networks/lib/constants'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 import type { notifyMeSchema } from './lib/notify-me-schema'
 import type { z } from 'zod'
@@ -45,3 +46,49 @@ export enum SortEnum {
   Desc = 'desc',
   Disabled = 'disabled',
 }
+
+export interface RevenueAndSpendingData {
+  fees: number
+  liquidationIncome: number
+  psm: number
+  daiSpent: number
+  mkrVesting: number
+  dsr: number
+  annualProfit: number
+}
+export type RevenueAndSpendingRecords = Record<string, RevenueAndSpendingData>
+
+export interface BarChartSeries {
+  name: string
+  seriesName: string
+  color: string
+  value: number
+  dataIndex: number
+}
+
+export interface StackedAreaSeries {
+  type: string
+  name: string
+  stack: string
+  stackStrategy: string
+  areaStyle: object
+  emphasis: { focus: string }
+  showSymbol: false
+  data: number[]
+  itemStyle: { color: string }
+}
+
+export type TabValue = (typeof TABS)[keyof typeof TABS]
+
+export type MetricKey = 'Actuals' | 'PaymentsOnChain' | 'Forecast' | 'OperationalReserves'
+export type MetricKeyExtended = MetricKey | 'ProtocolNetOutflow' | 'PaymentsOnChainSum'
+export type BudgetKey =
+  | 'legacyOthers'
+  | 'legacyCoreUnits'
+  | 'governanceScope'
+  | 'stability'
+  | 'support'
+  | 'protocol'
+  | 'accessibility'
+  | 'immutable'
+export type FormattedFinancesData = Record<MetricKey, Record<BudgetKey, number[]>>

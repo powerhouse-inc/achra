@@ -3,6 +3,12 @@ import { startTransition, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, type SwiperProps, type SwiperRef, SwiperSlide } from 'swiper/react'
 
+import {
+  chunkArray,
+  getCorrectMetricValuesOverViewChart,
+  getPercentDisplay,
+  sortDoughnutSeriesByValue,
+} from '@/modules/finances/lib/doughnut-chart-utils'
 import type { AnalyticMetric, DoughnutBudgetMetric, DoughnutSeries } from '@/modules/finances/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
@@ -11,12 +17,6 @@ import { cn } from '@/modules/shared/lib/utils'
 import { CardLegend } from './card-legend'
 import { DoughnutChartSkeleton } from './doughnut-chart-skeleton'
 import { UsdsTooltip } from './usds-tooltip'
-import {
-  chunkArray,
-  getCorrectMetricValuesOverViewChart,
-  getPercentDisplay,
-  sortDoughnutSeriesByValue,
-} from './utils'
 
 interface DoughnutChartProps {
   seriesData: DoughnutSeries[]

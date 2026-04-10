@@ -11,7 +11,7 @@ export interface ExternalLinkProps extends Omit<React.ComponentProps<typeof Link
   className?: string
 }
 
-export function ExternalLink({ href, imageSrc, name, description, className }: ExternalLinkProps) {
+function ExternalLink({ href, imageSrc, name, description, className }: ExternalLinkProps) {
   return (
     <Link
       href={href}
@@ -34,3 +34,5 @@ export function ExternalLink({ href, imageSrc, name, description, className }: E
     </Link>
   )
 }
+
+export { ExternalLink }

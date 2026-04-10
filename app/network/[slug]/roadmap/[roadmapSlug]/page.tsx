@@ -3,9 +3,9 @@ import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
 import { RoadmapDetailsContent } from '@/modules/roadmap/components/roadmap-details-content'
 import { getRoadmapDetailsData } from '@/modules/roadmap/services/roadmaps'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
-import type { BreadcrumbItemNavigation } from '@/modules/shared/components/breadcrumb/types'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'
+import type { BreadcrumbItemNavigation } from '@/modules/shared/types/breadcrumb'
 import type { Route } from 'next'
 
 interface RoadmapPageProps {

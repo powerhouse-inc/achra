@@ -3,9 +3,10 @@ import type {
   ScopeOfWork_Deliverable,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { DeliverablesCard, TotalCostField } from '@/modules/project/components'
 import { AvatarTitleSkeleton } from '@/modules/project/components/avatar-title/avatar-title-skeleton'
 import { AvatarTitleProjectDetails } from '@/modules/project/components/avatar-title/project-details-avatar-title'
+import { DeliverablesCard } from '@/modules/project/components/deliverables-card'
+import { TotalCostField } from '@/modules/project/components/total-cost-field'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
@@ -23,7 +24,7 @@ interface ProjectCardItemProps {
   builderIcon: string
 }
 
-export function ProjectCardItem({
+function ProjectCardItem({
   project,
   deliverables,
   builderName,
@@ -135,3 +136,5 @@ export function ProjectCardItem({
     </Card>
   )
 }
+
+export { ProjectCardItem }

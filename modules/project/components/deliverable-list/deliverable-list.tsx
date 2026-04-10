@@ -1,4 +1,5 @@
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import { calculateDeliverableSubtotal } from '@/modules/project/lib/utils'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
@@ -7,14 +8,13 @@ import { cn } from '@/modules/shared/lib/utils'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { DescriptionItem } from '../description-item/description-item'
 import { ProgressComponent } from '../progress-component/progress-component'
-import { calculateDeliverableSubtotal } from '../utils'
 
 export interface DeliverableListProps {
   deliverables: ScopeOfWork_Deliverable[]
   className?: string
 }
 
-export function DeliverableList({ deliverables, className }: DeliverableListProps) {
+function DeliverableList({ deliverables, className }: DeliverableListProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       {deliverables.map((deliverable) => (
@@ -92,3 +92,5 @@ export function DeliverableList({ deliverables, className }: DeliverableListProp
     </div>
   )
 }
+
+export { DeliverableList }

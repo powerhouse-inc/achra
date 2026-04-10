@@ -1,4 +1,4 @@
-import { SERVICE_PURCHASE_STEP_VALUES } from '../config/constants'
+import { SERVICE_PURCHASE_STEP_VALUES } from './constants'
 import type { ServicePurchaseStep } from '../types'
 
 /** Reads `?step=` from the current URL when valid for the purchase wizard (client-only; uses `window`). */

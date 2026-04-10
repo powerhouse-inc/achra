@@ -1,1 +1,1 @@
-export { default } from './services-filters'
+export { ServicesFilters } from './services-filters'

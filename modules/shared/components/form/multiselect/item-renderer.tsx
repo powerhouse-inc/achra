@@ -12,7 +12,7 @@ interface ItemRendererProps {
   onUnselect: (option: Option) => void
 }
 
-export function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: ItemRendererProps) {
+function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: ItemRendererProps) {
   return (
     <div
       key={option.value}
@@ -58,3 +58,5 @@ export function ItemRenderer({ option, badgeClassName, disabled, onUnselect }: I
     </div>
   )
 }
+
+export { ItemRenderer }

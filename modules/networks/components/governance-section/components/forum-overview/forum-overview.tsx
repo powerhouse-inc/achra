@@ -92,4 +92,4 @@ function ForumOverview() {
   )
 }
 
-export default ForumOverview
+export { ForumOverview }

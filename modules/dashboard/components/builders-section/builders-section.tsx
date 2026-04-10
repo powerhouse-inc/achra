@@ -1,9 +1,9 @@
 import { Builders } from '@/modules/builders/components/builders/builders'
-import BuilderFilters from '@/modules/builders/components/builders-filters'
+import { BuilderFilters } from '@/modules/builders/components/builders-filters'
 import { BuildersFiltersProvider } from '@/modules/builders/components/builders-filters/builders-filters-context'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { StripedCardContent } from '@/modules/shared/components/striped-card'
-import { NetworkDashboardSections } from '@/modules/shared/config/constants'
+import { NetworkDashboardSections } from '@/modules/shared/lib/constants'
 import { DashboardSectionWrapper } from '../dashboard-section-wrapper'
 import type { Route } from 'next'
 
@@ -16,7 +16,7 @@ interface BuildersSectionProps {
   }>
 }
 
-export function BuildersSection({ networkSlug, searchParams, networkName }: BuildersSectionProps) {
+function BuildersSection({ networkSlug, searchParams, networkName }: BuildersSectionProps) {
   return (
     <DashboardSectionWrapper
       id={NetworkDashboardSections.Builders}
@@ -38,3 +38,5 @@ export function BuildersSection({ networkSlug, searchParams, networkName }: Buil
     </DashboardSectionWrapper>
   )
 }
+
+export { BuildersSection }

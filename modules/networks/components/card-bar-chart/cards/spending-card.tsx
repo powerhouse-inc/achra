@@ -5,7 +5,7 @@ import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from './legend-item'
 import { SpendingItem } from './spending-item'
 
-export function SpendingCard() {
+function SpendingCard() {
   return (
     <div
       className={cn(
@@ -63,3 +63,5 @@ export function SpendingCard() {
     </div>
   )
 }
+
+export { SpendingCard }

@@ -1,6 +1,6 @@
 import type { Sow_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { mockedDeliverables, mockedMilestones } from '@/modules/roadmap/mocks'
-import MilestoneExtendedCard from './milestone-extended-card'
+import { MilestoneExtendedCard } from './milestone-extended-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

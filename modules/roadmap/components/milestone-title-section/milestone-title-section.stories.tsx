@@ -1,4 +1,4 @@
-import MilestoneTitleSection from './milestone-title-section'
+import { MilestoneTitleSection } from './milestone-title-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

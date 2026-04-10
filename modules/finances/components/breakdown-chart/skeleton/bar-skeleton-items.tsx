@@ -45,7 +45,7 @@ const DeskBarsValues = [
   { height: 308, heightRelative: 48 },
 ]
 
-export function BarSkeletonItems() {
+function BarSkeletonItems() {
   return (
     <div className="flex w-full flex-row gap-2 xl:gap-6">
       {/* Mobile */}
@@ -87,3 +87,5 @@ export function BarSkeletonItems() {
     </div>
   )
 }
+
+export { BarSkeletonItems }

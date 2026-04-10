@@ -2,7 +2,7 @@ import { SlidersHorizontal, User } from 'lucide-react'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
-import { formatBudgetType, formatProjectBudget } from '@/modules/workstream/utils'
+import { formatBudgetType, formatProjectBudget } from '@/modules/workstream/lib/utils'
 import { BudgetDeliverableItem } from './budget-deliverable-item'
 import type { Route } from 'next'
 

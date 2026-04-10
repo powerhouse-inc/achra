@@ -11,7 +11,7 @@ interface PopoverContentDeliverableProps {
   className?: string
 }
 
-export function PopoverContentDeliverable({
+function PopoverContentDeliverable({
   title,
   code,
   keyResults,
@@ -41,3 +41,5 @@ export function PopoverContentDeliverable({
     </div>
   )
 }
+
+export { PopoverContentDeliverable }

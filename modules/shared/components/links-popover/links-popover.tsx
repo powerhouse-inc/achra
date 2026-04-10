@@ -10,6 +10,7 @@ import GithubSVG from '@/modules/shared/components/svgs/github.svg'
 import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import TwitterSVG from '@/modules/shared/components/svgs/x.svg'
 import YoutubeSVG from '@/modules/shared/components/svgs/youtube.svg'
+import { isSocialMediaType } from '@/modules/shared/lib/is-social-media-type'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -17,7 +18,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { isSocialMediaType } from './utils/is-social-media-type'
 import type { Route } from 'next'
 
 type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github' | 'youtube'

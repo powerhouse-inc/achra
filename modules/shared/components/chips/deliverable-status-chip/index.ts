@@ -1,1 +1,1 @@
-export { default as DeliverableStatusChip } from './deliverable-status-chip'
+export { DeliverableStatusChip } from './deliverable-status-chip'

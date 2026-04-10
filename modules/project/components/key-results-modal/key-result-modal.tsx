@@ -7,7 +7,7 @@ interface KeyResultModalProps {
   keyResult: ScopeOfWork_KeyResult
 }
 
-export function KeyResultModal({ keyResult }: KeyResultModalProps) {
+function KeyResultModal({ keyResult }: KeyResultModalProps) {
   const hasLink = Boolean(keyResult.link && keyResult.link !== '')
 
   return (
@@ -32,3 +32,5 @@ export function KeyResultModal({ keyResult }: KeyResultModalProps) {
     </>
   )
 }
+
+export { KeyResultModal }

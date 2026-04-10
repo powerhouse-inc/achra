@@ -11,11 +11,11 @@ import {
   getSelectMetricText,
   replaceAllNumberLetOneBeforeDot,
 } from '@/modules/finances/lib/breakdown-chart-utils'
+import { formatBudgetName, removeBudgetWord } from '@/modules/finances/lib/utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import { useFinancesYear } from '../../hooks/use-finaces-year'
-import { formatBudgetName, removeBudgetWord } from '../../utils'
+import { useFinancesYear } from '../../hooks/use-finances-year'
 import type {
   AnalyticMetric,
   BarChartSeries,
@@ -31,7 +31,7 @@ interface BreakdownChartProps {
   selectedMetric?: AnalyticMetric
 }
 
-export function BreakdownChart({
+function BreakdownChart({
   refBreakDownChart,
   series,
   selectedGranularity,
@@ -373,3 +373,5 @@ export function BreakdownChart({
     </div>
   )
 }
+
+export { BreakdownChart }

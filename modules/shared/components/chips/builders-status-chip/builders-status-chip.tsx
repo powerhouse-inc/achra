@@ -6,7 +6,7 @@ interface BuildersStatusChipProps {
   status: Maybe<BuilderStatus> | undefined
 }
 
-export default function BuildersStatusChip({ status }: BuildersStatusChipProps) {
+function BuildersStatusChip({ status }: BuildersStatusChipProps) {
   const { label, color } = useMemo(() => {
     if (!status) return { label: 'Unknown', color: 'gray' }
     switch (status) {
@@ -44,3 +44,5 @@ export default function BuildersStatusChip({ status }: BuildersStatusChipProps) 
     </GenericChip>
   )
 }
+
+export { BuildersStatusChip }

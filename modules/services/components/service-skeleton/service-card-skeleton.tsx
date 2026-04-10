@@ -1,6 +1,6 @@
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import ServiceSectionSkeleton from './service-section-skeleton'
+import { ServiceSectionSkeleton } from './service-section-skeleton'
 
 function ServicesCardSkeleton() {
   return (
@@ -33,4 +33,4 @@ function ServicesCardSkeleton() {
   )
 }
 
-export default ServicesCardSkeleton
+export { ServicesCardSkeleton }

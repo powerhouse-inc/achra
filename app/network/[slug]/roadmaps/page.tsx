@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
-import RoadmapFilters from '@/modules/roadmap/components/roadmap-filters'
+import { RoadmapFilters } from '@/modules/roadmap/components/roadmap-filters'
 import { RoadmapList } from '@/modules/roadmap/components/roadmaps-list/roadmap-list'
 import { RoadmapsListSkeleton } from '@/modules/roadmap/components/roadmaps-list/roadmaps-list-skeleton'
 import { Breadcrumb, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'

@@ -1,8 +1,11 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  DELIVERABLES_TABLE_COLUMNS,
+  type DeliverableTableColumn,
+} from '@/modules/project/lib/constants'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { SortEnum } from '@/modules/shared/types'
-import { DELIVERABLES_TABLE_COLUMNS, type DeliverableTableColumn } from './constants'
+import { SortEnum } from '@/modules/shared/types/common-enums'
 interface UseDeliverableTableProps {
   deliverables: ScopeOfWork_Deliverable[]
 }

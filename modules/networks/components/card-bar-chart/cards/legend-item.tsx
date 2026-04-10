@@ -7,7 +7,7 @@ interface LegendButtonProps {
   style?: React.CSSProperties
 }
 
-export function ItemLegend({ color = 'fill-gray-400', children, style }: LegendButtonProps) {
+function ItemLegend({ color = 'fill-gray-400', children, style }: LegendButtonProps) {
   return (
     <div className="text-foreground flex cursor-default items-center gap-2 bg-transparent p-0 text-xs/4.5 font-semibold shadow-none sm:text-sm/5.5 xl:text-base/6">
       <span>
@@ -17,3 +17,5 @@ export function ItemLegend({ color = 'fill-gray-400', children, style }: LegendB
     </div>
   )
 }
+
+export { ItemLegend }

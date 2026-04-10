@@ -11,7 +11,7 @@ interface ExternalLinkProps extends React.PropsWithChildren {
   wrapText?: boolean
 }
 
-export function ExternalLink({ href, children, className, wrapText = true }: ExternalLinkProps) {
+function ExternalLink({ href, children, className, wrapText = true }: ExternalLinkProps) {
   return (
     <Button
       variant="outline"
@@ -33,3 +33,5 @@ export function ExternalLink({ href, children, className, wrapText = true }: Ext
     </Button>
   )
 }
+
+export { ExternalLink }

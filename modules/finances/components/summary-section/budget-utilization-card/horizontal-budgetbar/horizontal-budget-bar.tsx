@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import type { HorizontalBudgetBarProps } from '@/modules/finances/types'
 import { cn } from '@/modules/shared/lib/utils'
 
-export function HorizontalBudgetBar({
+function HorizontalBudgetBar({
   actuals,
   prediction,
   budgetCap,
@@ -55,3 +55,5 @@ export function HorizontalBudgetBar({
     </div>
   )
 }
+
+export { HorizontalBudgetBar }

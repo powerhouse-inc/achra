@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { WorkstreamStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import WorkstreamStatusChip from '@/modules/shared/components/chips/workstream-status-chip'
+import { WorkstreamStatusChip } from '@/modules/shared/components/chips/workstream-status-chip'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'
 
