@@ -30,7 +30,7 @@ function WhyAchraAccentCard({ title, description, accent, className }: WhyAchraA
         className={cn('pointer-events-none object-cover', accent === 'ai' ? 'object-bottom' : '')}
         aria-hidden
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-        priority={accent === 'ai'}
+        loading="lazy"
       />
       {accent === 'ai' && (
         <Sparkles className="pointer-events-none absolute top-3 right-3 z-1 size-8" aria-hidden />

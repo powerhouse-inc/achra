@@ -45,6 +45,7 @@ function GovernanceFeatureRow({
             alt={imageAlt}
             width={imageWidth}
             height={imageHeight}
+            loading="lazy"
             className="h-auto w-full object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
