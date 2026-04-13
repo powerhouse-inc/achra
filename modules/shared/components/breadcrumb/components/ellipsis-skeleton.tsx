@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function EllipsisSkeleton() {
+function EllipsisSkeleton() {
   return (
     <div className="flex items-center gap-0.5">
       <Skeleton className="h-2 w-2 rounded-none" />
@@ -9,3 +9,5 @@ export function EllipsisSkeleton() {
     </div>
   )
 }
+
+export { EllipsisSkeleton }

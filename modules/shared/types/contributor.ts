@@ -1,4 +1,4 @@
-import type { CuJobEnum } from '../enums/cuJobEnum'
+import type { CuJobEnum } from './cu-job-enum'
 
 export type Commitment = 'FullTime' | 'PartTime' | 'Variable' | 'Inactive'
 

@@ -12,10 +12,7 @@ interface EmptyStateServiceProps {
   description: string
 }
 
-export default function EmptyStateService({
-  title,
-  description,
-}: Readonly<EmptyStateServiceProps>) {
+function EmptyStateService({ title, description }: Readonly<EmptyStateServiceProps>) {
   return (
     <div className="flex h-fit flex-col gap-6">
       <Empty>
@@ -30,3 +27,5 @@ export default function EmptyStateService({
     </div>
   )
 }
+
+export { EmptyStateService }

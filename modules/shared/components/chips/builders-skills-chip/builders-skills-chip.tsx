@@ -8,11 +8,7 @@ interface BuildersSkillsChipProps {
   className?: string
 }
 
-export default function BuildersSkillsChip({
-  skill,
-  size = 'large',
-  className,
-}: BuildersSkillsChipProps) {
+function BuildersSkillsChip({ skill, size = 'large', className }: BuildersSkillsChipProps) {
   const chipLabel = useMemo(() => {
     return skill
       .split('_')
@@ -83,3 +79,5 @@ export default function BuildersSkillsChip({
     </GenericChip>
   )
 }
+
+export { BuildersSkillsChip }

@@ -29,4 +29,4 @@ function ExpandableButtonItem({ expanded, handleToggleExpand }: ExpandableButton
   )
 }
 
-export default ExpandableButtonItem
+export { ExpandableButtonItem }

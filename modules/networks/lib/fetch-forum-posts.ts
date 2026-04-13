@@ -1,5 +1,5 @@
 import type { Topic } from '@/modules/networks/types'
-import { BASE_URL } from '@/modules/shared/config/constants'
+import { BASE_URL } from '@/modules/shared/lib/constants'
 
 const forumApi = (id: string) => `/api/forum?id=${id}`
 

@@ -1,3 +1,0 @@
-export const MAX_ALLOWED_WIDTH = 300
-export const MAX_SEGMENT_WIDTH_MOBILE_DEFAULT = 100
-export const THREE_DOTS_WIDTH = 60

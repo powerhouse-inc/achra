@@ -11,10 +11,7 @@ type FiltersHook = () => unknown
  * @param useFilters - The module-specific filters hook (e.g. useBuildersFilters, useFinancesFilters)
  * @param providerDisplayName - Optional name for error messages (e.g. 'BuildersFiltersProvider')
  */
-export function createFiltersContext<H extends FiltersHook>(
-  useFilters: H,
-  providerDisplayName?: string,
-) {
+function createFiltersContext<H extends FiltersHook>(useFilters: H, providerDisplayName?: string) {
   type Value = ReturnType<H>
 
   const FiltersContext = createContext<Value | null>(null)
@@ -39,3 +36,5 @@ export function createFiltersContext<H extends FiltersHook>(
 
   return { FiltersContext, FiltersProvider, useFiltersContext }
 }
+
+export { createFiltersContext }

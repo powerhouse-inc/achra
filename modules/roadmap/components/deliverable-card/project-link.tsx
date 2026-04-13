@@ -46,4 +46,4 @@ function ProjectLink({ href, code, name }: ProjectLinkProps) {
   )
 }
 
-export default ProjectLink
+export { ProjectLink }

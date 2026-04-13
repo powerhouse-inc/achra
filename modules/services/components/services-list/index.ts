@@ -1,1 +1,1 @@
-export { default } from './services-list'
+export { ServicesList } from './services-list'

@@ -1,1 +1,1 @@
-export { default as TimelineSwiper } from './timeline-swiper'
+export { TimelineSwiper } from './timeline-swiper'

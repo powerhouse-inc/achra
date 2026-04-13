@@ -1,7 +1,7 @@
 'use client'
 
-import type { ServiceTab } from '@/modules/services/config/types'
-import SearchInput from '@/modules/shared/components/form/search-input'
+import type { ServiceTab } from '@/modules/services/types'
+import { SearchInput } from '@/modules/shared/components/form/search-input'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
 import { TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { useServicesFiltersContext } from './services-filters-context'
@@ -12,7 +12,7 @@ const SERVICES_TABS: Array<{ id: ServiceTab; label: string }> = [
   { id: 'networks', label: 'Networks' },
 ]
 
-export default function ServicesFilters() {
+function ServicesFilters() {
   const { search, tab, isSearchPending, isTabPending, isResetPending, setSearch, setTab } =
     useServicesFiltersContext()
 
@@ -51,3 +51,5 @@ export default function ServicesFilters() {
     </div>
   )
 }
+
+export { ServicesFilters }

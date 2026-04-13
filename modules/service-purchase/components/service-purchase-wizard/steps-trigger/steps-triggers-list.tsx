@@ -2,7 +2,7 @@
 
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
 import { Fragment, type ReactNode, useEffect } from 'react'
-import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/config/constants'
+import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/lib/constants'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { Separator } from '@/modules/shared/components/ui/separator'

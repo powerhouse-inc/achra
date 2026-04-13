@@ -3,7 +3,7 @@
 import { Landmark } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/config/constants'
+import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/lib/constants'
 import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,

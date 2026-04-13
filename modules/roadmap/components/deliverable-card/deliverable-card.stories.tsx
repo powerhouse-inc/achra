@@ -1,5 +1,5 @@
 import { mockedContributors, mockedDeliverables, mockedProjects } from '@/modules/roadmap/mocks'
-import DeliverableCard from './deliverable-card'
+import { DeliverableCard } from './deliverable-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

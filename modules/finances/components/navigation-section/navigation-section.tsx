@@ -1,4 +1,4 @@
-import { getCardsNavigationData } from '../../utils'
+import { getCardsNavigationData } from '@/modules/finances/lib/utils'
 import { CardsNavigationSwipper } from './cards-navigation-swipper'
 
 interface NavigationSectionProps {

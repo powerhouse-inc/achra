@@ -7,7 +7,7 @@ interface BreakdownChartSwitchProps {
   handleChangeSwitch: () => void
 }
 
-export function BreakdownChartSwitch({ isChecked, handleChangeSwitch }: BreakdownChartSwitchProps) {
+function BreakdownChartSwitch({ isChecked, handleChangeSwitch }: BreakdownChartSwitchProps) {
   return (
     <div
       data-slot="switch-container"
@@ -41,3 +41,5 @@ export function BreakdownChartSwitch({ isChecked, handleChangeSwitch }: Breakdow
     </div>
   )
 }
+
+export { BreakdownChartSwitch }

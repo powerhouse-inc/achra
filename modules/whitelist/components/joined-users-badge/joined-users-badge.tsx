@@ -5,7 +5,7 @@ interface JoinedUsersBadgeProps {
   count?: number
 }
 
-export function JoinedUsersBadge({ count = 100 }: JoinedUsersBadgeProps) {
+function JoinedUsersBadge({ count = 100 }: JoinedUsersBadgeProps) {
   return (
     <div className="mt-10 flex items-center gap-2">
       <span className="inline-flex items-center -space-x-3.5 sm:-space-x-2.5">
@@ -19,3 +19,5 @@ export function JoinedUsersBadge({ count = 100 }: JoinedUsersBadgeProps) {
     </div>
   )
 }
+
+export { JoinedUsersBadge }

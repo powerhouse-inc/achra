@@ -2,7 +2,7 @@ import { CheckCircle2 } from 'lucide-react'
 import RealisticConfetti from 'react-canvas-confetti/dist/presets/realistic'
 import { JoinedUsersBadge } from '../joined-users-badge'
 
-export function SuccessView() {
+function SuccessView() {
   return (
     <>
       <RealisticConfetti
@@ -28,3 +28,5 @@ export function SuccessView() {
     </>
   )
 }
+
+export { SuccessView }

@@ -42,7 +42,7 @@ interface FilterTabsProps {
   onChangeTab: (metric: AnalyticMetric) => void
 }
 
-export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
+function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
   const id = useId()
   const [hasSmoke, setHasSmoke] = useState<[boolean, boolean]>([false, false])
 
@@ -130,3 +130,5 @@ export function FilterTabs({ selectedMetric, onChangeTab }: FilterTabsProps) {
     </div>
   )
 }
+
+export { FilterTabs }

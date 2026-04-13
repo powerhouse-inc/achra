@@ -1,7 +1,7 @@
 'use client'
 
 import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuildersSkillsChip from '@/modules/shared/components/chips/builders-skills-chip'
+import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { cn } from '@/modules/shared/lib/utils'
 import { SkillsPopover } from './skills-popover'
 

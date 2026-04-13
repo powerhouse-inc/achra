@@ -16,7 +16,7 @@ interface ContributorProfileInfoProps {
   className?: string
 }
 
-export function ContributorProfileInfo({
+function ContributorProfileInfo({
   name,
   code,
   isCoreUnit,
@@ -50,3 +50,5 @@ export function ContributorProfileInfo({
     </div>
   )
 }
+
+export { ContributorProfileInfo }

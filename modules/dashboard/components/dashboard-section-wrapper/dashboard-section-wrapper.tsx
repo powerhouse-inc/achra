@@ -8,7 +8,7 @@ import {
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
 import { Button } from '@/modules/shared/components/ui/button'
-import { type NetworkDashboardSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { type NetworkDashboardSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
@@ -21,7 +21,7 @@ interface DashboardSectionWrapperProps {
   children: React.ReactNode
 }
 
-export function DashboardSectionWrapper({
+function DashboardSectionWrapper({
   id,
   title,
   hash,
@@ -60,3 +60,5 @@ export function DashboardSectionWrapper({
     </section>
   )
 }
+
+export { DashboardSectionWrapper }

@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BuildersHeaderSkeleton() {
+function BuildersHeaderSkeleton() {
   return (
     <div className="flex flex-col gap-2">
       <Skeleton className="h-7.5 w-24.25" />
@@ -14,3 +14,5 @@ export function BuildersHeaderSkeleton() {
     </div>
   )
 }
+
+export { BuildersHeaderSkeleton }

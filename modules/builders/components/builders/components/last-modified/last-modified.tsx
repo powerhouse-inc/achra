@@ -8,7 +8,7 @@ export interface LastModifiedProps {
   className?: string
 }
 
-export function LastModified({ lastModified, isMobile, className }: LastModifiedProps) {
+function LastModified({ lastModified, isMobile, className }: LastModifiedProps) {
   const parsedDate = useMemo(() => {
     if (!lastModified) return undefined
     const date = DateTime.fromISO(lastModified)
@@ -54,3 +54,5 @@ export function LastModified({ lastModified, isMobile, className }: LastModified
     </div>
   )
 }
+
+export { LastModified }

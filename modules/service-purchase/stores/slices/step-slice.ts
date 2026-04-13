@@ -1,7 +1,7 @@
 import {
   SERVICE_PURCHASE_DEFAULT_STEP,
   SERVICE_PURCHASE_STEPS_ENTRIES,
-} from '../../config/constants'
+} from '@/modules/service-purchase/lib/constants'
 import {
   ServicePurchaseStep,
   type ServicePurchaseStoreGet,

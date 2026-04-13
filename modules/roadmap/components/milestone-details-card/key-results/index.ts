@@ -1,1 +1,1 @@
-export { default as KeyResults } from './key-results'
+export { KeyResults } from './key-results'

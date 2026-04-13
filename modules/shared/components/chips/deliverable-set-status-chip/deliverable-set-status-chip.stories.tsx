@@ -1,5 +1,5 @@
 import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from './deliverable-set-status-chip'
+import { DeliverableSetStatusChip } from './deliverable-set-status-chip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

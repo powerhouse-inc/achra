@@ -1,9 +1,9 @@
 import { delay, http, HttpResponse } from 'msw'
 import { mockedForumPosts } from '@/modules/networks/mocks/governance-section'
-import { BASE_URL } from '@/modules/shared/config/constants'
+import { BASE_URL } from '@/modules/shared/lib/constants'
 import { withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import { forumCategories } from './categories'
-import ForumOverview from './forum-overview'
+import { ForumOverview } from './forum-overview'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 /**

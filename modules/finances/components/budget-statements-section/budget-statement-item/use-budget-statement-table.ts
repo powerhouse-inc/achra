@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import { compareMonth, getMetricLabel } from '@/modules/finances/lib/budget-statement-utils'
+import type { BudgetStatementsTableColumn } from '@/modules/finances/lib/constants'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { compareMonth, getMetricLabel } from '../lib/utils'
-import type { BudgetStatementsTableColumn } from '../const'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBudgetStatementTableProps {

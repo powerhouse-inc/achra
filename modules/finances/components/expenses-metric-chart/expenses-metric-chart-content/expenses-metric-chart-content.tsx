@@ -1,6 +1,6 @@
 'use client'
+import { getBudgetsByCodePath, getCodePathFromParams } from '@/modules/finances/lib/utils'
 import { ATLAS_BUDGETS, BUDGETS } from '../../../mocks'
-import { getBudgetsByCodePath, getCodePathFromParams } from '../../../utils'
 import { ExpensesMetricChart } from '../expenses-metric-chart/expenses-metric-chart'
 import { ExpensesMetricLegend } from '../expenses-metric-legend'
 import { useExpensesMetricChart } from '../use-expenses-metric-chart'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { sortDoughnutSeriesByValue } from '@/modules/finances/components/summary-section/doughnut-chart/utils'
+import { sortDoughnutSeriesByValue } from '@/modules/finances/lib/doughnut-chart-utils'
 import type { DoughnutSeries } from '@/modules/finances/types'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegendDoughnut } from './card-legend-item'

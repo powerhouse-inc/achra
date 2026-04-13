@@ -1,4 +1,4 @@
-import SectionTitle from './section-title'
+import { SectionTitle } from './section-title'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

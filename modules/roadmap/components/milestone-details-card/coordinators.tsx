@@ -5,7 +5,7 @@ interface CoordinatorsProps {
   coordinators: string[]
 }
 
-export default function Coordinators({ coordinators }: CoordinatorsProps) {
+function Coordinators({ coordinators }: CoordinatorsProps) {
   return (
     <div className="flex flex-col gap-4 rounded-xl border px-4 pt-2 pb-4">
       <div className="text-xs font-medium">Coordinator(s)</div>
@@ -25,3 +25,5 @@ export default function Coordinators({ coordinators }: CoordinatorsProps) {
     </div>
   )
 }
+
+export { Coordinators }

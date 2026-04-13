@@ -43,7 +43,7 @@ const ConditionalDevTools =
       })
     : () => null
 
-export default function QueryClientProvider({ children }: { children: ReactNode }) {
+function QueryClientProvider({ children }: { children: ReactNode }) {
   // NOTE: Avoid useState when initializing the query client if you don't
   //       have a suspense boundary between this and the code that may
   //       suspend because React will throw away the client on the initial
@@ -60,3 +60,5 @@ export default function QueryClientProvider({ children }: { children: ReactNode 
     </TanstackQueryClientProvider>
   )
 }
+
+export { QueryClientProvider }

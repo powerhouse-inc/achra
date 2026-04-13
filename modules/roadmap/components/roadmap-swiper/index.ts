@@ -1,1 +1,1 @@
-export { default as RoadmapSwiper } from './roadmap-swiper'
+export { RoadmapSwiper } from './roadmap-swiper'

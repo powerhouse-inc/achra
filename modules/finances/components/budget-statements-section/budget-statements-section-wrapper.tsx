@@ -1,9 +1,9 @@
 import { BudgetStatementsContentWrapper } from '@/modules/finances/components/budget-statements-section/budget-statements-content-wrapper'
 import { BudgetStatementsTitle } from '@/modules/finances/components/budget-statements-section/budget-statements-title'
-import { FinancesSections } from '@/modules/finances/components/config/const'
+import { FinancesSections } from '@/modules/finances/lib/constants'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state/error-boundry-with-presets'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
-import { SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementFilters } from './budget-statement-filters/budget-statement-filters'
 
@@ -17,7 +17,7 @@ interface BudgetStatementsSectionWrapperProps {
   }>
 }
 
-export function BudgetStatementsSectionWrapper({
+function BudgetStatementsSectionWrapper({
   params,
   searchParams,
 }: Readonly<BudgetStatementsSectionWrapperProps>) {
@@ -36,3 +36,5 @@ export function BudgetStatementsSectionWrapper({
     </section>
   )
 }
+
+export { BudgetStatementsSectionWrapper }

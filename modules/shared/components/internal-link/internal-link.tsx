@@ -9,7 +9,7 @@ interface InternalLinkProps extends React.ComponentProps<typeof Button> {
   href: Route
 }
 
-export function InternalLink({
+function InternalLink({
   href,
   children,
   className,
@@ -25,3 +25,5 @@ export function InternalLink({
     </Button>
   )
 }
+
+export { InternalLink }

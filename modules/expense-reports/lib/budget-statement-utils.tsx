@@ -7,10 +7,10 @@ import type {
   SnapshotAccountTransaction,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { InnerTableColumn, InnerTableRow } from '@/modules/expense-reports/types'
-import { isGeneratedSnapshotAccount } from '../components/account-snapshot/utils/types-helpers'
 import { WalletTableCell } from '../components/wallet-table-cell'
 import { STABLECOIN_UNITS } from './constants'
 import { capitalizeSentence, formatAddressForOutput } from './strings'
+import { isGeneratedSnapshotAccount } from './types-helpers'
 
 function renderWallet(wallet: ExpenseReportWallet) {
   return (
@@ -23,9 +23,7 @@ function renderWallet(wallet: ExpenseReportWallet) {
   )
 }
 
-export function getWalletsFromBudgetStatement(
-  budgetStatement?: Partial<BudgetStatementExpenseReport>,
-) {
+function getWalletsFromBudgetStatement(budgetStatement?: Partial<BudgetStatementExpenseReport>) {
   if (!budgetStatement?.wallets || budgetStatement.wallets.length === 0) {
     return []
   }
@@ -45,7 +43,7 @@ export function getWalletsFromBudgetStatement(
   return sortBy(Object.values(dict), 'id')
 }
 
-export function getCurrencyValue(amount: unknown): number {
+function getCurrencyValue(amount: unknown): number {
   if (!amount) return 0
 
   if (typeof amount === 'number') {
@@ -56,7 +54,7 @@ export function getCurrencyValue(amount: unknown): number {
   return isNaN(num) ? 0 : num
 }
 
-export function isStablecoinLineItem(item: ExpenseReportLineItem): boolean {
+function isStablecoinLineItem(item: ExpenseReportLineItem): boolean {
   const currencyFields = [item.budget, item.actuals, item.forecast, item.payments]
 
   return currencyFields.every((field) => {
@@ -79,7 +77,7 @@ export function isStablecoinLineItem(item: ExpenseReportLineItem): boolean {
   })
 }
 
-export function getActualsTableData(wallets: ExpenseReportWallet[]): {
+function getActualsTableData(wallets: ExpenseReportWallet[]): {
   columns: InnerTableColumn[]
   items: InnerTableRow[]
 } {
@@ -236,7 +234,7 @@ export function getActualsTableData(wallets: ExpenseReportWallet[]): {
   }
 }
 
-export function filterAccountAndTransactions(
+function filterAccountAndTransactions(
   items: Array<SnapshotAccountTransaction | SnapshotAccount>,
 ): Array<SnapshotAccountTransaction | SnapshotAccount> {
   const filteredItems: Array<SnapshotAccountTransaction | SnapshotAccount> = []
@@ -254,4 +252,12 @@ export function filterAccountAndTransactions(
   })
 
   return filteredItems
+}
+
+export {
+  getWalletsFromBudgetStatement,
+  getCurrencyValue,
+  isStablecoinLineItem,
+  getActualsTableData,
+  filterAccountAndTransactions,
 }

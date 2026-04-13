@@ -6,7 +6,7 @@ export interface LabeledValueProps {
   className?: string
 }
 
-export function LabeledValue({ label, value, className }: LabeledValueProps) {
+function LabeledValue({ label, value, className }: LabeledValueProps) {
   return (
     <div className={cn('flex flex-col gap-1', className)}>
       <span className="text-foreground/30 text-sm/5.5 font-semibold">{label}</span>
@@ -14,3 +14,5 @@ export function LabeledValue({ label, value, className }: LabeledValueProps) {
     </div>
   )
 }
+
+export { LabeledValue }

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import BuilderProfile from '@/modules/builder-profile/components/builder-profile/builder-profile'
+import { BuilderProfile } from '@/modules/builder-profile/components/builder-profile/builder-profile'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { PageContent } from '@/modules/shared/components/page-containers'
 

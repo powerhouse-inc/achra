@@ -1,5 +1,5 @@
+import { getBreadcrumbItems } from '@/modules/finances/lib/utils'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
-import { getBreadcrumbItems } from '../../utils'
 import { BreadcrumbSelectYear } from './breadcrumb-select-year'
 
 interface FinancesBreadcrumbProps {

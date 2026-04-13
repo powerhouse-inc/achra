@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { DeliverableKeyResultState } from './deliverable-key-result-state'
 import type { Route } from 'next'
 
@@ -9,7 +9,7 @@ interface KeyResultItemProps {
   hasLink: boolean
 }
 
-export function KeyResultItem({ keyResult, hasLink }: KeyResultItemProps) {
+function KeyResultItem({ keyResult, hasLink }: KeyResultItemProps) {
   return (
     <li key={keyResult.id}>
       <div className="flex flex-col">
@@ -43,3 +43,5 @@ export function KeyResultItem({ keyResult, hasLink }: KeyResultItemProps) {
     </li>
   )
 }
+
+export { KeyResultItem }

@@ -7,7 +7,7 @@ interface PurchaseSectionProps {
   serviceSlug: string
 }
 
-export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
+function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-lg leading-[120%] font-bold">Request a Quote</h2>
@@ -22,3 +22,5 @@ export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps)
     </div>
   )
 }
+
+export { PurchaseSection }

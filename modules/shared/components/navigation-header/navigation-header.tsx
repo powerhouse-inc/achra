@@ -9,7 +9,7 @@ interface NavigationHeaderProps {
   workstreamSlug: string
 }
 
-export function NavigationHeader({ network, title, workstreamSlug }: NavigationHeaderProps) {
+function NavigationHeader({ network, title, workstreamSlug }: NavigationHeaderProps) {
   const href = `/network/${network?.slug ?? ''}/workstream/${workstreamSlug}` as Route
 
   // Light theme now falls back to darkThemeLogo automatically when no regular logo exists,
@@ -79,3 +79,5 @@ export function NavigationHeader({ network, title, workstreamSlug }: NavigationH
     </div>
   )
 }
+
+export { NavigationHeader }

@@ -1,6 +1,6 @@
 import FireIcon from '@/public/networks/governance/fire.svg'
 
-export function Dot({ className }: { className?: string }) {
+function Dot({ className }: { className?: string }) {
   return <span className={`inline-block size-3 rounded-full ${className}`} />
 }
 
@@ -49,3 +49,5 @@ export const forumCategories: ForumCategory[] = [
     icon: <Dot className="bg-to-do" />,
   },
 ]
+
+export { Dot }

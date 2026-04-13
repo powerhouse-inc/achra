@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import BuilderProfile from '@/modules/builder-profile/components/builder-profile/builder-profile'
+import { BuilderProfile } from '@/modules/builder-profile/components/builder-profile/builder-profile'
 import { BuilderProfileHeader } from '@/modules/builder-profile/components/builder-profile-header/builder-profile-header'
 import { getBuilderProfile } from '@/modules/builder-profile/services/builder-profile'
 import { OperatorServices } from '@/modules/operator-profile/components/operator-services'

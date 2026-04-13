@@ -1,13 +1,13 @@
 import React from 'react'
 import { CardBarChart } from '@/modules/networks/components/card-bar-chart/card-bar-chart'
 import { CardStackedAreaChart } from '@/modules/networks/components/card-stacked-area-chart/card-stacked-area-chart'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
+import { SectionTitle } from '@/modules/shared/components/section-title/section-title'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
-import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/modules/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../../../shared/components/section-title/section-title'
 
-export function FinancesSection() {
+function FinancesSection() {
   return (
     <div
       // Note: The -mt-2 is to compensate for the swiper pagination dots height
@@ -30,3 +30,5 @@ export function FinancesSection() {
     </div>
   )
 }
+
+export { FinancesSection }

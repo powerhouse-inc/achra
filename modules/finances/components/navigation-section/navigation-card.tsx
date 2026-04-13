@@ -21,7 +21,7 @@ interface NavigationCardProps {
   className?: string
 }
 
-export function NavigationCard({
+function NavigationCard({
   image,
   title,
   description,
@@ -115,3 +115,5 @@ export function NavigationCard({
     </Card>
   )
 }
+
+export { NavigationCard }

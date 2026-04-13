@@ -1,4 +1,4 @@
-import ServicesCardSkeleton from '@/modules/services/components/service-skeleton/service-card-skeleton'
+import { ServicesCardSkeleton } from '@/modules/services/components/service-skeleton/service-card-skeleton'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
 

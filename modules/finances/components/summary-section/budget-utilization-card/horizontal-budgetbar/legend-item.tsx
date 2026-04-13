@@ -6,7 +6,7 @@ interface LegendItemProps {
   color: string
   className?: string
 }
-export function LegendItem({ children, color = 'bg-status-success', className }: LegendItemProps) {
+function LegendItem({ children, color = 'bg-status-success', className }: LegendItemProps) {
   return (
     <div
       data-slot="legend-item"
@@ -24,3 +24,5 @@ export function LegendItem({ children, color = 'bg-status-success', className }:
     </div>
   )
 }
+
+export { LegendItem }

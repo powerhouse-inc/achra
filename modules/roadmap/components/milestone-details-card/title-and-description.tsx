@@ -3,7 +3,7 @@ interface TitleAndDescriptionProps {
   description: string
 }
 
-export default function TitleAndDescription({ title, description }: TitleAndDescriptionProps) {
+function TitleAndDescription({ title, description }: TitleAndDescriptionProps) {
   return (
     <div className="bg-card flex flex-col gap-4 rounded-xl border p-2 px-4 pb-4 md:h-full lg:border-none lg:bg-transparent lg:p-0">
       <div className="text-base/6 font-semibold lg:text-xl lg:font-bold">{title}</div>
@@ -18,3 +18,5 @@ export default function TitleAndDescription({ title, description }: TitleAndDesc
     </div>
   )
 }
+
+export { TitleAndDescription }

@@ -6,7 +6,7 @@ interface TargetDataProps {
   targetDate: string
 }
 
-export default function TargetData({ targetDate }: TargetDataProps) {
+function TargetData({ targetDate }: TargetDataProps) {
   return (
     <div className="flex flex-col items-start gap-4 rounded-xl border px-4 py-2 lg:p-4">
       <div className="flex items-center justify-between gap-4 self-stretch">
@@ -32,3 +32,5 @@ export default function TargetData({ targetDate }: TargetDataProps) {
     </div>
   )
 }
+
+export { TargetData }

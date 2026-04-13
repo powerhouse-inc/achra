@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib/utils'
 import { BudgetUtilizationCardSkeleton } from './budget-utilization-card/budget-utilization-skeleton'
 import { DoughnutChartSkeleton } from './doughnut-chart/doughnut-chart-skeleton'
 
-export function SummarySectionSkeleton() {
+function SummarySectionSkeleton() {
   return (
     <div
       data-slot="summary-section-skeleton"
@@ -80,3 +80,5 @@ export function SummarySectionSkeleton() {
     </div>
   )
 }
+
+export { SummarySectionSkeleton }

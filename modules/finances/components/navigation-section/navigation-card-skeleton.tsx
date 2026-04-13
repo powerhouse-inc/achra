@@ -2,7 +2,7 @@ import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/shared/lib/utils'
 
-export function NavigationCardSkeleton() {
+function NavigationCardSkeleton() {
   return (
     <Card className="flex h-full w-full flex-col justify-between gap-4 border p-4 shadow-sm md:gap-2">
       <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
@@ -24,7 +24,7 @@ export function NavigationCardSkeleton() {
   )
 }
 
-export function NavigationCardSkeletons() {
+function NavigationCardSkeletons() {
   return (
     <div
       data-slot="container-cards-navigation-skeleton"
@@ -47,3 +47,5 @@ export function NavigationCardSkeletons() {
     </div>
   )
 }
+
+export { NavigationCardSkeleton, NavigationCardSkeletons }

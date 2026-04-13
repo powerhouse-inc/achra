@@ -22,7 +22,7 @@ interface RoadmapSectionProps {
   deliverables: Sow_Deliverable[]
   className?: string
 }
-export function RoadmapSection({
+function RoadmapSection({
   roadmap,
   network,
   workstreamSlug,
@@ -62,3 +62,5 @@ export function RoadmapSection({
     </div>
   )
 }
+
+export { RoadmapSection }

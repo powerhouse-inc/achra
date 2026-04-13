@@ -17,7 +17,7 @@ interface RoadmapSectionHeaderProps {
   networkSlug: string
   workstreamTitle: string
 }
-export function Header({
+function Header({
   network,
   workstreamSlug,
   title,
@@ -52,3 +52,5 @@ export function Header({
     </div>
   )
 }
+
+export { Header }

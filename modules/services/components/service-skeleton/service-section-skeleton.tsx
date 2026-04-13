@@ -32,4 +32,4 @@ function ServiceSectionSkeleton() {
   )
 }
 
-export default ServiceSectionSkeleton
+export { ServiceSectionSkeleton }

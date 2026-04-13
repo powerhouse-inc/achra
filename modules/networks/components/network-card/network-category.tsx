@@ -27,5 +27,4 @@ function NetworkChip({ category }: NetworkChip) {
   return <Badge className={cn(networkCategoryVariants({ category }))}>{category}</Badge>
 }
 
-export { networkCategoryVariants }
-export default NetworkChip
+export { networkCategoryVariants, NetworkChip }

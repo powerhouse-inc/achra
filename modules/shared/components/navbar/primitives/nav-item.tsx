@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { type ActiveWhen, isActive } from '@/modules/shared/lib/navbar-utils'
 import { cn } from '@/modules/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
 import { Skeleton } from '../../ui/skeleton'
-import { type ActiveWhen, isActive } from '../utils'
 
 export interface NavItemProps extends Omit<React.ComponentProps<typeof Link>, 'href'> {
   href: RouteWithDynamicPages

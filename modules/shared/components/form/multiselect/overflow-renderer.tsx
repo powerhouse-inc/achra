@@ -9,7 +9,7 @@ interface OverflowRendererProps {
   badgeClassName?: string
 }
 
-export function OverflowRenderer({ overflowItems, badgeClassName }: OverflowRendererProps) {
+function OverflowRenderer({ overflowItems, badgeClassName }: OverflowRendererProps) {
   return (
     <div
       className={cn(
@@ -21,3 +21,5 @@ export function OverflowRenderer({ overflowItems, badgeClassName }: OverflowRend
     </div>
   )
 }
+
+export { OverflowRenderer }

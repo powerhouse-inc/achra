@@ -1,5 +1,5 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
-import ServicesFilters from './services-filters'
+import { ServicesFilters } from './services-filters'
 import { ServicesFiltersProvider } from './services-filters-context'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

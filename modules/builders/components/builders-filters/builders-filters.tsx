@@ -1,13 +1,13 @@
 'use client'
 
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
-import SearchInput from '@/modules/shared/components/form/search-input'
+import { SearchInput } from '@/modules/shared/components/form/search-input'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills-select'
 import { useBuildersFiltersContext } from './builders-filters-context'
 
-export default function BuilderFilters() {
+function BuilderFilters() {
   const {
     search,
     skills,
@@ -65,3 +65,5 @@ export default function BuilderFilters() {
     </div>
   )
 }
+
+export { BuilderFilters }

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { Identicon } from '@/modules/shared/components/identicon'
 import Gnosis from '@/modules/shared/components/svgs/gnosis.svg'
 import { cn } from '@/modules/shared/lib/utils'
@@ -13,7 +13,7 @@ interface WalletTableCellProps {
   className?: string
 }
 
-export function WalletTableCell({ className, address, name, wallet }: WalletTableCellProps) {
+function WalletTableCell({ className, address, name, wallet }: WalletTableCellProps) {
   return (
     <div
       className={cn(
@@ -55,3 +55,5 @@ export function WalletTableCell({ className, address, name, wallet }: WalletTabl
     </div>
   )
 }
+
+export { WalletTableCell }

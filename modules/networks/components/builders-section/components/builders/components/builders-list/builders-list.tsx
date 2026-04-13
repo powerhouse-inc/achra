@@ -16,7 +16,7 @@ export interface BuildersListProps {
   className?: string
 }
 
-export function BuildersList({ className, builders }: BuildersListProps) {
+function BuildersList({ className, builders }: BuildersListProps) {
   return (
     <div className={cn('flex w-full flex-col gap-4', className)}>
       <StripedCard className={cn('w-full', className)}>
@@ -47,3 +47,5 @@ export function BuildersList({ className, builders }: BuildersListProps) {
     </div>
   )
 }
+
+export { BuildersList }

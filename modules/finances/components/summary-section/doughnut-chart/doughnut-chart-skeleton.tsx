@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function DoughnutChartSkeleton() {
+function DoughnutChartSkeleton() {
   return (
     <div className="hidden flex-row items-center gap-6 md:flex xl:gap-16">
       {/* SVG Container */}
@@ -73,3 +73,5 @@ export function DoughnutChartSkeleton() {
     </div>
   )
 }
+
+export { DoughnutChartSkeleton }

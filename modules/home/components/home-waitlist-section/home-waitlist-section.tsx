@@ -39,7 +39,7 @@ function HomeWaitlistSection() {
               src="/home/waitlist/bg.png"
               alt=""
               fill
-              priority
+              loading="lazy"
               className="object-fill object-right-top"
             />
           </div>

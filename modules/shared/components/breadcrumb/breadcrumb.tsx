@@ -3,6 +3,16 @@ import Link from 'next/link'
 import { Fragment, Suspense, useMemo, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
 import { useResizeObserver } from 'usehooks-ts'
+import { getTextWidth, mobileRecommendedSegmentWidth } from '@/modules/shared/lib/breadcrumb-utils'
+import {
+  MAX_ALLOWED_WIDTH,
+  MAX_SEGMENT_WIDTH_MOBILE_DEFAULT,
+  THREE_DOTS_WIDTH,
+} from '@/modules/shared/lib/constants'
+import type {
+  BreadcrumbItemExtended,
+  BreadcrumbItemNavigation,
+} from '@/modules/shared/types/breadcrumb'
 import { cn } from '@/shared/lib/utils'
 import {
   BreadcrumbItem,
@@ -12,11 +22,8 @@ import {
   Breadcrumb as BreadcrumbPrimitive,
   BreadcrumbSeparator,
 } from '../ui/breadcrumb'
-import DotsSegment from './components/dot-segments'
+import { DotsSegment } from './components/dot-segments'
 import { EllipsisSkeleton } from './components/ellipsis-skeleton'
-import { MAX_ALLOWED_WIDTH, MAX_SEGMENT_WIDTH_MOBILE_DEFAULT, THREE_DOTS_WIDTH } from './constants'
-import { getTextWidth, mobileRecommendedSegmentWidth } from './utils'
-import type { BreadcrumbItemExtended, BreadcrumbItemNavigation } from './types'
 import type { Route } from 'next'
 
 interface BreadcrumbProps {

@@ -8,7 +8,7 @@ interface ProgressComponentProps extends Omit<ComponentProps<'div'>, 'ref'> {
   'aria-label'?: string
 }
 
-export function ProgressComponent({
+function ProgressComponent({
   progress,
   className,
   'aria-label': ariaLabel,
@@ -40,3 +40,5 @@ export function ProgressComponent({
     </div>
   )
 }
+
+export { ProgressComponent }

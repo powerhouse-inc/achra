@@ -1,2 +1,2 @@
-export { default as MilestoneCard } from './milestone-card'
+export { MilestoneCard } from './milestone-card'
 export { MilestoneCardSkeleton } from './milestone-card-skeleton'

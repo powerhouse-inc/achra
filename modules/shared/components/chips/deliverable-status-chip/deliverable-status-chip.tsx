@@ -6,7 +6,7 @@ interface DeliverableStatusChipProps {
   status: ScopeOfWork_DeliverableStatus
 }
 
-export default function DeliverableStatusChip({ status }: DeliverableStatusChipProps) {
+function DeliverableStatusChip({ status }: DeliverableStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
     switch (status) {
       case ScopeOfWork_DeliverableStatus.InProgress:
@@ -67,3 +67,5 @@ export default function DeliverableStatusChip({ status }: DeliverableStatusChipP
     </div>
   )
 }
+
+export { DeliverableStatusChip }

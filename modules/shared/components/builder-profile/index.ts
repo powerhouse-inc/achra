@@ -1,1 +1,1 @@
-export { default } from './builder-profile'
+export { BuilderProfile } from './builder-profile'

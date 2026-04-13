@@ -11,7 +11,7 @@ import {
   GRANULARITY_OPTIONS,
   type ValuesDataWithBorder,
 } from '../types'
-import { newBudgetMetric, setMetric } from '../utils'
+import { newBudgetMetric, setMetric } from './utils'
 import type { CumulativeType } from './expenses-metric-chart-search-params'
 
 export const removeBudgetWord = (name: string) => {

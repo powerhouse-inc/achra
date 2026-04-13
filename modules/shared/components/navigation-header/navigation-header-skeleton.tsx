@@ -1,7 +1,7 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
 
-export function NavigationHeaderSkeleton() {
+function NavigationHeaderSkeleton() {
   return (
     <div className="bg-secondary flex w-fit items-center gap-2 rounded-xl px-2 py-1 shadow-sm sm:gap-3 sm:px-3 sm:py-2 md:p-3">
       <div className="relative flex items-center self-stretch pr-7 sm:pr-8 md:pr-9">
@@ -29,3 +29,5 @@ export function NavigationHeaderSkeleton() {
     </div>
   )
 }
+
+export { NavigationHeaderSkeleton }

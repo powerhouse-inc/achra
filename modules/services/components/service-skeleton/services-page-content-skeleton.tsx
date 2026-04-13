@@ -1,9 +1,9 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import ff from '@/modules/shared/lib/feature-flags'
-import ServicesCardSkeleton from './service-card-skeleton'
-import ServicesFiltersSkeleton from './service-filter-skeleton'
+import { ServicesCardSkeleton } from './service-card-skeleton'
+import { ServicesFiltersSkeleton } from './service-filter-skeleton'
 
-export function ServicesContentSkeleton() {
+function ServicesContentSkeleton() {
   return (
     <>
       {/* Section title */}
@@ -15,7 +15,7 @@ export function ServicesContentSkeleton() {
   )
 }
 
-export function ServicesPageSkeleton() {
+function ServicesPageSkeleton() {
   return (
     <>
       {ff.SERVICES_LISTING_FILTERS_ENABLED && <ServicesFiltersSkeleton />}
@@ -23,3 +23,5 @@ export function ServicesPageSkeleton() {
     </>
   )
 }
+
+export { ServicesContentSkeleton, ServicesPageSkeleton }

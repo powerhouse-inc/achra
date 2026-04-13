@@ -1,8 +1,8 @@
-import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
+import { SectionTitle } from '@/modules/shared/components/section-title/section-title'
+import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/shared/types/routes'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../../../shared/components/section-title/section-title'
 import { ProposalsSwiper } from './components/proposals-swiper/proposals-swiper'
 
 export interface Proposal {
@@ -18,7 +18,7 @@ export interface ProposalsSectionProps {
   className?: string
 }
 
-export function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
+function ProposalsSection({ proposals, className }: ProposalsSectionProps) {
   return (
     <section
       className={cn(
@@ -38,3 +38,5 @@ export function ProposalsSection({ proposals, className }: ProposalsSectionProps
     </section>
   )
 }
+
+export { ProposalsSection }

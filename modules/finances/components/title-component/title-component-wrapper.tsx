@@ -1,5 +1,5 @@
+import { getTitleComponentData } from '@/modules/finances/lib/utils'
 import { getNetworkBySlug } from '@/modules/networks/services/networks-service'
-import { getTitleComponentData } from '../../utils'
 import { TitleComponent } from './title-component'
 
 interface FinancesPageProps {

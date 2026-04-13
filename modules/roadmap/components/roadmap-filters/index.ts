@@ -1,1 +1,1 @@
-export { default } from './roadmap-filters'
+export { RoadmapFilters } from './roadmap-filters'

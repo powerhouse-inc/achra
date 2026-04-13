@@ -1,5 +1,5 @@
 import { SERVICES_CARDS_MOCK } from '@/modules/services/mocks/services'
-import ServicesList from './services-list'
+import { ServicesList } from './services-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

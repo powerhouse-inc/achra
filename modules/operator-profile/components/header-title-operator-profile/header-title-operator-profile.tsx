@@ -2,7 +2,7 @@ import { FileText } from 'lucide-react'
 import Image from 'next/image'
 import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SkillsPopover } from '@/modules/shared/components/builder-skills'
-import BuildersSkillsChip from '@/modules/shared/components/chips/builders-skills-chip/builders-skills-chip'
+import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip/builders-skills-chip'
 
 const LOGO_SIZE = 56
 const MAX_SKILLS_TO_SHOW = 3

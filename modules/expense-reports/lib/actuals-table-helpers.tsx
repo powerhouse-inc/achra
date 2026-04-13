@@ -112,7 +112,7 @@ function buildSectionRows(
  * Builds table rows for the actuals breakdown UI from a wallet and group tree.
  * Returns section rows (headcount / non-headcount) plus a total row when there is data.
  */
-export function getActualsBreakdownItemsForTable(
+function getActualsBreakdownItemsForTable(
   wallet: ExpenseReportWallet,
   groupTree: GroupTree,
 ): InnerTableRow[] {
@@ -158,3 +158,5 @@ export function getActualsBreakdownItemsForTable(
 
   return rows
 }
+
+export { getActualsBreakdownItemsForTable }

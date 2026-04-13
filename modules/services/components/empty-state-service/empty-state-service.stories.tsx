@@ -1,4 +1,4 @@
-import EmptyStateService from './empty-state-service'
+import { EmptyStateService } from './empty-state-service'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

@@ -1,7 +1,7 @@
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { useMemo } from 'react'
+import { compareMonth, compareString } from '@/modules/finances/lib/budget-statement-utils'
 import type { BudgetStatement, SortOptionValue } from '@/modules/finances/types'
-import { compareMonth, compareString } from '../lib/utils'
 
 interface UseBudgetStatementDataProps {
   budgetStatements: BudgetStatement[]

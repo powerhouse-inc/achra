@@ -4,7 +4,7 @@ import { motion } from 'motion/react'
 import { useState } from 'react'
 import { Button } from '@/modules/shared/components/ui/button'
 
-export function BuildersHeader() {
+function BuildersHeader() {
   const [showFullDescription, setShowFullDescription] = useState(false)
 
   const handleToogleDescription = () => {
@@ -58,3 +58,5 @@ export function BuildersHeader() {
     </div>
   )
 }
+
+export { BuildersHeader }

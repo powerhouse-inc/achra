@@ -9,12 +9,12 @@ import type {
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { cn } from '@/modules/shared/lib/utils'
-import Contributors from './contributors'
-import Coordinators from './coordinators'
-import DeliverablesSection from './deliverables-section'
-import MilestoneProgress from './milestone-progress'
-import TargetData from './target-data'
-import TitleAndDescription from './title-and-description'
+import { Contributors } from './contributors'
+import { Coordinators } from './coordinators'
+import { DeliverablesSection } from './deliverables-section'
+import { MilestoneProgress } from './milestone-progress'
+import { TargetData } from './target-data'
+import { TitleAndDescription } from './title-and-description'
 
 interface MilestoneDetailsCardProps {
   milestone: ScopeOfWork_Milestone
@@ -23,7 +23,7 @@ interface MilestoneDetailsCardProps {
   projects: ScopeOfWork_Project[]
 }
 
-export default function MilestoneDetailsCard({
+function MilestoneDetailsCard({
   milestone,
   deliverables,
   contributors,
@@ -104,3 +104,5 @@ export default function MilestoneDetailsCard({
     </article>
   )
 }
+
+export { MilestoneDetailsCard }

@@ -1,4 +1,4 @@
-import type { TeamScopeEnum } from '../enums/actorScopeEnum'
+import type { TeamScopeEnum } from './actor-scope-enum'
 
 export interface Scope {
   id: string

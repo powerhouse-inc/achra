@@ -1,11 +1,11 @@
-import type { submitRequestSchema } from './lib/submit-request-schema'
 import type {
   RsBillingCycle,
   RsGroupCostType,
   RsOfferingFacetTarget,
   RsServiceOffering,
   RsServiceSubscriptionTier,
-} from '../__generated__/graphql/switchboard-generated'
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { submitRequestSchema } from './lib/submit-request-schema'
 import type { z } from 'zod'
 import type { StoreApi } from 'zustand'
 

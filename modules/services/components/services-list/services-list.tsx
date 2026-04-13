@@ -6,7 +6,7 @@ interface ServicesListProps {
   title?: string
 }
 
-export default function ServicesList({ services, title }: Readonly<ServicesListProps>) {
+function ServicesList({ services, title }: Readonly<ServicesListProps>) {
   if (services.length === 0) {
     // Add empty state handling if needed
     return null
@@ -23,3 +23,5 @@ export default function ServicesList({ services, title }: Readonly<ServicesListP
     </section>
   )
 }
+
+export { ServicesList }

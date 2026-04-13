@@ -7,7 +7,7 @@ interface TimelineProps {
   milestones: ScopeOfWork_Milestone[]
 }
 
-export default function Timeline({ milestones }: TimelineProps) {
+function Timeline({ milestones }: TimelineProps) {
   if (milestones.length === 0) {
     return null
   }
@@ -30,3 +30,5 @@ export default function Timeline({ milestones }: TimelineProps) {
     </>
   )
 }
+
+export { Timeline }

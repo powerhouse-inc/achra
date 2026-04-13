@@ -4,9 +4,9 @@ import { ChevronDown } from 'lucide-react'
 import { useParams, usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 import { buildNetworkNavbarLinks } from '@/modules/shared/config/navbar-config'
+import { isActive } from '@/modules/shared/lib/navbar-utils'
 import { cn } from '@/modules/shared/lib/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../../ui/dropdown-menu'
-import { isActive } from '../utils'
 import { MobileNavItem } from './mobile-nav-item'
 
 /**
