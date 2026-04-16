@@ -18,9 +18,7 @@ export async function getResourceProfile(
     facetTargets: [],
     lastModified: '',
     optionGroups: [],
-    recurringServices: [],
     services: [],
-    setupServices: [],
     targetAudiences: [],
     ...resourceProfile,
   }

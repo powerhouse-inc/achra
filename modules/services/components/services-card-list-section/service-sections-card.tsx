@@ -21,7 +21,7 @@ function ServiceSectionsCard({
   return (
     <Card
       className={cn(
-        'text-foreground bg-background gap-2 rounded-lg px-4 pt-2 pb-3 text-xs/4.5 shadow-none sm:flex-1 sm:text-sm/5.5 xl:pb-4',
+        'text-foreground gap-2 rounded-lg px-4 pt-2 pb-3 text-xs/4.5 shadow-none sm:flex-1 sm:text-sm/5.5 xl:pb-4',
         className,
       )}
     >
