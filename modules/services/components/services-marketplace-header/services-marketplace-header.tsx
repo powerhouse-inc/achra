@@ -1,6 +1,6 @@
 'use client'
 
-import { Boxes, Package, Store } from 'lucide-react'
+import { Boxes, Briefcase, Layers, Package, Store } from 'lucide-react'
 import { SearchInput } from '@/modules/shared/components/form/search-input'
 import ff from '@/modules/shared/lib/feature-flags'
 import { cn } from '@/modules/shared/lib/utils'
@@ -46,35 +46,49 @@ function ServicesMarketplaceHeader() {
 
         <Store
           className={cn(
-            'text-border absolute size-24 rotate-[14deg] transition-all duration-500 ease-in-out',
-            '-top-4 -left-4',
-            'sm:top-2 sm:left-[4%]',
-            'lg:top-4 lg:left-[8%]',
+            'text-border absolute rotate-[14deg] transition-all duration-500 ease-in-out',
+            '-top-6 -left-6 size-28',
+            'sm:-top-2 sm:left-[2%] sm:size-28',
+            'lg:top-0 lg:left-[3%] lg:size-32',
           )}
           aria-hidden="true"
         />
         <Package
           className={cn(
-            'text-muted-foreground/40 absolute size-32 -rotate-[14deg] transition-all duration-500 ease-in-out',
-            '-right-6 -bottom-6',
-            'sm:right-[4%] sm:bottom-1',
-            'lg:right-[8%] lg:bottom-3',
+            'text-muted-foreground/40 absolute -rotate-14 transition-all duration-500 ease-in-out',
+            '-right-8 -bottom-8 size-36',
+            'sm:right-[2%] sm:-bottom-2 sm:size-32',
+            'lg:right-[3%] lg:bottom-0 lg:size-36',
           )}
           aria-hidden="true"
         />
         <Boxes
           className={cn(
-            'text-muted-foreground/40 absolute hidden size-20 rotate-[-10deg] transition-all duration-500 ease-in-out',
-            'sm:top-4 sm:right-[10%] sm:block',
-            'lg:top-6 lg:right-[14%]',
+            'text-muted-foreground/40 absolute hidden rotate-[-10deg] transition-all duration-500 ease-in-out',
+            'sm:top-3 sm:right-[22%] sm:block sm:size-16',
+            'lg:top-4 lg:right-[24%] lg:size-20',
           )}
           aria-hidden="true"
         />
         <Boxes
           className={cn(
-            'text-border absolute hidden size-20 rotate-[10deg] transition-all duration-500 ease-in-out',
-            'sm:bottom-4 sm:left-[10%] sm:block',
-            'lg:bottom-6 lg:left-[14%]',
+            'text-border absolute hidden rotate-10 transition-all duration-500 ease-in-out',
+            'sm:bottom-3 sm:left-[22%] sm:block sm:size-16',
+            'lg:bottom-4 lg:left-[24%] lg:size-20',
+          )}
+          aria-hidden="true"
+        />
+        <Layers
+          className={cn(
+            'text-muted-foreground/30 absolute hidden -rotate-[8deg] transition-all duration-500 ease-in-out',
+            'lg:top-3 lg:left-[42%] lg:block lg:size-14',
+          )}
+          aria-hidden="true"
+        />
+        <Briefcase
+          className={cn(
+            'text-border absolute hidden rotate-[8deg] opacity-60 transition-all duration-500 ease-in-out',
+            'lg:right-[42%] lg:bottom-3 lg:block lg:size-14',
           )}
           aria-hidden="true"
         />
