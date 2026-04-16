@@ -40,7 +40,7 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
           </div>
         </div>
         {service.summary && (
-          <p className="text-muted-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm">
+          <p className="text-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm">
             {service.summary}
           </p>
         )}

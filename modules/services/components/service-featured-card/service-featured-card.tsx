@@ -34,40 +34,41 @@ function ServiceFeaturedCard({
         className="absolute inset-0 z-10 rounded-xl"
         aria-label={`${service.title} Profile`}
       />
-      <CardContent className={cn('flex gap-4 p-4 sm:p-5', primary && 'sm:gap-5')}>
-        <div
-          className={cn(
-            'relative shrink-0 overflow-hidden rounded-lg',
-            primary ? 'size-12 sm:size-14' : 'size-10 sm:size-12',
-          )}
-        >
-          <Image
-            src={coverImage}
-            alt={service.title}
-            fill
-            unoptimized
-            className="rounded-lg object-cover"
-          />
-        </div>
-
-        {/* Content */}
-        <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <div className="flex flex-col gap-1">
-            {badge && <ServiceBadge badge={badge} />}
-            <span
+      <CardContent className={cn('flex h-full gap-4 p-4', primary && 'sm:gap-5 sm:p-5')}>
+        <div className="flex min-w-0 flex-1 flex-col gap-3">
+          <div className="flex items-start gap-4">
+            <div
               className={cn(
-                'text-foreground leading-tight font-bold',
-                primary ? 'text-sm sm:text-lg' : 'text-sm sm:text-base',
+                'relative shrink-0 overflow-hidden rounded-lg',
+                primary ? 'size-12 sm:size-14' : 'size-10 sm:size-12',
               )}
             >
-              {service.title}
-            </span>
-            <span className="text-muted-foreground text-xs">by Powerhouse</span>
+              <Image
+                src={coverImage}
+                alt={service.title}
+                fill
+                unoptimized
+                className="rounded-lg object-cover"
+              />
+            </div>
+            <div className="flex min-w-0 flex-1 flex-col gap-1">
+              {!primary && badge && <ServiceBadge badge={badge} />}
+              <span
+                className={cn(
+                  'text-foreground leading-tight font-bold',
+                  primary ? 'text-sm sm:text-lg' : 'text-sm sm:text-base',
+                )}
+              >
+                {service.title}
+              </span>
+              <span className="text-muted-foreground text-xs">by Powerhouse</span>
+            </div>
           </div>
+
           {service.summary && (
             <p
               className={cn(
-                'text-muted-foreground leading-relaxed',
+                'text-foreground leading-relaxed',
                 primary ? 'text-xs sm:text-sm' : 'line-clamp-3 text-xs',
               )}
             >
@@ -79,9 +80,8 @@ function ServiceFeaturedCard({
           )}
         </div>
 
-        {/* Right metadata + CTA — primary card only */}
         {primary && (
-          <div className="hidden shrink-0 flex-col items-end justify-between text-right sm:flex">
+          <div className="hidden shrink-0 flex-col items-end justify-between gap-2 text-right sm:flex">
             <div className="flex flex-col items-end gap-1">
               {showFreeTier && (
                 <span className="text-status-success text-sm font-medium">Free tier included</span>
