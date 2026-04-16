@@ -25,7 +25,7 @@ function ServiceFeaturedCard({
   return (
     <Card
       className={cn(
-        'bg-card relative overflow-hidden transition-shadow duration-300 hover:shadow-lg',
+        'bg-card hover:border-border relative overflow-hidden border border-transparent transition-[box-shadow,border-color] duration-200 ease-out hover:shadow-lg',
         primary ? 'col-span-1 p-0 sm:col-span-2' : 'col-span-1 p-0',
       )}
     >
