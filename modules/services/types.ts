@@ -27,12 +27,13 @@ export interface OfferingPricingSummary {
 }
 
 /**
- * Service enriched with badge and offering data for the marketplace listing.
+ * Service enriched with badge, offering, and operator data for the marketplace listing.
  */
 export interface EnrichedService {
   service: Service
   badge: ServiceBadge | null
   offeringSummary: OfferingPricingSummary | null
+  operatorName: string | null
 }
 
 /**

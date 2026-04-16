@@ -10,6 +10,7 @@ const ENRICHED_SERVICES_MOCK: EnrichedService[] = SERVICES_CARDS_MOCK.map((servi
   service,
   badge: getServiceBadge(service, null),
   offeringSummary: null,
+  operatorName: 'Powerhouse',
 }))
 
 const meta = {
