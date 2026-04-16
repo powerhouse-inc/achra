@@ -1,4 +1,5 @@
 import { ServiceFeaturedCard } from '../service-featured-card'
+import { ServiceMarketplaceCard } from '../service-marketplace-card'
 import type { EnrichedService } from '../../types'
 
 interface ServicesFeaturedSectionProps {
@@ -12,13 +13,20 @@ function ServicesFeaturedSection({ services }: Readonly<ServicesFeaturedSectionP
     <section className="flex flex-col gap-4">
       <h2 className="text-foreground text-xl leading-tight font-bold">Featured</h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-        {services.map((enrichedService, index) => (
-          <ServiceFeaturedCard
-            key={enrichedService.service.id}
-            enrichedService={enrichedService}
-            primary={index === 0}
-          />
-        ))}
+        {services.map((enrichedService, index) =>
+          index === 0 ? (
+            <ServiceFeaturedCard
+              key={enrichedService.service.id}
+              enrichedService={enrichedService}
+              primary
+            />
+          ) : (
+            <ServiceMarketplaceCard
+              key={enrichedService.service.id}
+              enrichedService={enrichedService}
+            />
+          ),
+        )}
       </div>
     </section>
   )

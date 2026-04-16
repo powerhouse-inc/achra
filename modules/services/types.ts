@@ -14,12 +14,12 @@ export type ServiceBadge =
   | 'recommended'
   | 'most-popular'
   | 'new'
-  | 'free-trial'
+  | 'free-tier'
   | 'pro-only'
 
 /**
  * Offering pricing summary for a single resource template,
- * used to derive Free trial / Pro only badges on the listing page.
+ * used to derive Free tier / Pro only badges on the listing page.
  */
 export interface OfferingPricingSummary {
   hasFreeTier: boolean

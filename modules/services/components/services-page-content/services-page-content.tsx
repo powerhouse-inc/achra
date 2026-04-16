@@ -8,7 +8,6 @@ import { ServicesCategorySection } from '../services-category-section'
 import { ServicesFeaturedSection } from '../services-featured-section'
 import { useServicesFiltersContext } from '../services-filters/services-filters-context'
 import { ServicesMarketplaceHeader } from '../services-marketplace-header'
-import { ServicesRecommendationCta } from '../services-recommendation-cta'
 import type { EnrichedService } from '../../types'
 
 interface ServicesPageContentProps {
@@ -55,6 +54,7 @@ function ServicesPageContent({ enrichedServices }: Readonly<ServicesPageContentP
   return (
     <div className="flex flex-col gap-10">
       <ServicesMarketplaceHeader />
+
       {isTabEmpty ? (
         <EmptyStateService
           title="No services found"
@@ -73,7 +73,6 @@ function ServicesPageContent({ enrichedServices }: Readonly<ServicesPageContentP
           )}
         </>
       )}
-      <ServicesRecommendationCta />
     </div>
   )
 }

@@ -38,8 +38,8 @@ export const BADGE_CONFIG: Record<ServiceBadge, { label: string; className: stri
     label: 'New',
     className: 'bg-primary/15 text-primary',
   },
-  'free-trial': {
-    label: 'Free trial included',
+  'free-tier': {
+    label: 'Free tier included',
     className: 'bg-status-success/20 text-status-success',
   },
   'pro-only': {

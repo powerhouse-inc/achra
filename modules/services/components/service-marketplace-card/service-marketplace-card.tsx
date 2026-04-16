@@ -15,7 +15,7 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
   const coverImage = service.thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
 
   return (
-    <Card className="bg-card relative overflow-hidden p-0 transition-shadow duration-300 hover:shadow-lg">
+    <Card className="bg-card hover:border-border relative overflow-hidden border border-transparent p-0 transition-[box-shadow,border-color] duration-200 ease-out hover:shadow-lg">
       <Link
         href={`/services/${service.id}` as Route}
         className="absolute inset-0 z-10 rounded-xl"
@@ -40,7 +40,7 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
           </div>
         </div>
         {service.summary && (
-          <p className="text-muted-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm">
+          <p className="text-foreground line-clamp-3 text-xs leading-relaxed sm:text-sm">
             {service.summary}
           </p>
         )}
