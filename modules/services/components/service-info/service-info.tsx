@@ -17,6 +17,7 @@ interface ServiceInfoProps {
   children?: ReactNode
   actions?: ReactNode
   operator?: ReactNode
+  details?: ReactNode
 }
 
 function ServiceInfo({
@@ -27,6 +28,7 @@ function ServiceInfo({
   children,
   actions,
   operator,
+  details,
 }: Readonly<ServiceInfoProps>) {
   const [hasTransition, setHasTransition] = useState(false)
   const coverImage = thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
@@ -56,10 +58,15 @@ function ServiceInfo({
         >
           {title}
         </span>
-        <div className={cn('flex flex-col gap-2 sm:gap-4', isCompacted && 'gap-0')}>
+        <div
+          className={cn(
+            'flex flex-col gap-2 sm:gap-4',
+            isCompacted ? 'gap-0' : 'sm:sticky sm:top-30 sm:self-start',
+          )}
+        >
           <div
             className={cn(
-              'relative h-32 w-full sm:size-32 sm:min-w-32 md:size-64 md:min-w-64',
+              'relative h-32 w-full sm:min-w-32 md:h-64 md:min-w-64',
               hasTransition && 'transition-[width,height,border-radius] duration-300 ease-out',
               isCompacted &&
                 'border-background shadow-primary size-14! min-w-14! overflow-hidden rounded-full border-2',
@@ -107,10 +114,10 @@ function ServiceInfo({
           >
             {summary}
           </div>
+          {details}
         </div>
-        {actions && <div className="flex items-end justify-end sm:hidden lg:flex">{actions}</div>}
       </CardContent>
-      {actions && <div className="hidden items-end justify-end sm:flex lg:hidden">{actions}</div>}
+      {actions && <div className="flex items-end justify-end">{actions}</div>}
     </Card>
   )
 }

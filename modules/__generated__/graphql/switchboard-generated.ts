@@ -17245,7 +17245,7 @@ export type ResourceProfileQueryVariables = Exact<{
 }>;
 
 
-export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
+export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, setupServices: Array<string>, recurringServices: Array<string>, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
 
 export type CreateProductInstancesMutationVariables = Exact<{
   input: CreateProductInstancesInput;
@@ -18577,6 +18577,8 @@ export const ResourceProfileDocument = `
       id
       question
     }
+    setupServices
+    recurringServices
   }
 }
     `;

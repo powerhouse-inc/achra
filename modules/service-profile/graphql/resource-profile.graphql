@@ -20,5 +20,7 @@ query ResourceProfile($filter: RSResourceTemplatesFilter) {
       id
       question
     }
+    setupServices
+    recurringServices
   }
 }
