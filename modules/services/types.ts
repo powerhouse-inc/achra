@@ -1,7 +1,39 @@
+import type { Service } from '@/modules/shared/types/services'
+
 /**
  * Service filter tabs
  */
 export type ServiceTab = 'all' | 'builders' | 'networks'
+
+/**
+ * Badge types displayed on service cards.
+ * Only one badge is shown per card, selected by priority order.
+ */
+export type ServiceBadge =
+  | 'coming-soon'
+  | 'recommended'
+  | 'most-popular'
+  | 'new'
+  | 'free-trial'
+  | 'pro-only'
+
+/**
+ * Offering pricing summary for a single resource template,
+ * used to derive Free trial / Pro only badges on the listing page.
+ */
+export interface OfferingPricingSummary {
+  hasFreeTier: boolean
+  tierCount: number
+}
+
+/**
+ * Service enriched with badge and offering data for the marketplace listing.
+ */
+export interface EnrichedService {
+  service: Service
+  badge: ServiceBadge | null
+  offeringSummary: OfferingPricingSummary | null
+}
 
 /**
  * Configuration data for service purchase

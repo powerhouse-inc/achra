@@ -1,8 +1,10 @@
-import { getServices } from '../../services/services-service'
+import { getServicesWithOfferings } from '../../services/services-service'
 import { ServicesPageContent } from './services-page-content'
 
-export async function ServicesListSection() {
-  const services = await getServices()
+async function ServicesListSection() {
+  const enrichedServices = await getServicesWithOfferings()
 
-  return <ServicesPageContent services={services} />
+  return <ServicesPageContent enrichedServices={enrichedServices} />
 }
+
+export { ServicesListSection }
