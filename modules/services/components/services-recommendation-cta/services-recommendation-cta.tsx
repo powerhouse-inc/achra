@@ -11,7 +11,7 @@ function ServicesRecommendationCta() {
             Tell us about your organization and we&apos;ll recommend the right services for you.
           </p>
         </div>
-        <Button asChild variant="outline" size="lg" className="shrink-0">
+        <Button asChild size="lg" className="shrink-0">
           <Link href="#">Get a Recommendation</Link>
         </Button>
       </div>

@@ -45,7 +45,7 @@ export function filterBySearch(services: Service[], search: string): Service[] {
 
 /**
  * Determines the single badge to display on a service card.
- * Priority: Coming Soon > Recommended > Most Popular > New > Free trial > Pro only.
+ * Priority: Coming Soon > Recommended > Most Popular > New > Free tier > Pro only.
  */
 export function getServiceBadge(
   service: Service,
@@ -59,7 +59,7 @@ export function getServiceBadge(
   if (Date.now() - lastModified < NEW_SERVICE_THRESHOLD_MS) return 'new'
 
   if (offeringSummary) {
-    return offeringSummary.hasFreeTier ? 'free-trial' : 'pro-only'
+    return offeringSummary.hasFreeTier ? 'free-tier' : 'pro-only'
   }
 
   return null

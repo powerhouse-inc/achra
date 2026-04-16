@@ -19,7 +19,7 @@ function ServiceFeaturedCard({
 }: Readonly<ServiceFeaturedCardProps>) {
   const { service, badge, offeringSummary } = enrichedService
   const isComingSoon = badge === 'coming-soon'
-  const showFreeTrial = offeringSummary?.hasFreeTier
+  const showFreeTier = offeringSummary?.hasFreeTier
   const coverImage = service.thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
 
   return (
@@ -74,8 +74,8 @@ function ServiceFeaturedCard({
               {service.summary}
             </p>
           )}
-          {!primary && showFreeTrial && (
-            <span className="text-status-success text-xs font-medium">Free trial included</span>
+          {!primary && showFreeTier && (
+            <span className="text-status-success text-xs font-medium">Free tier included</span>
           )}
         </div>
 
@@ -83,8 +83,8 @@ function ServiceFeaturedCard({
         {primary && (
           <div className="hidden shrink-0 flex-col items-end justify-between text-right sm:flex">
             <div className="flex flex-col items-end gap-1">
-              {showFreeTrial && (
-                <span className="text-status-success text-sm font-medium">Free trial included</span>
+              {showFreeTier && (
+                <span className="text-status-success text-sm font-medium">Free tier included</span>
               )}
               {!isComingSoon && offeringSummary && offeringSummary.tierCount > 0 && (
                 <span className="text-muted-foreground text-xs">
