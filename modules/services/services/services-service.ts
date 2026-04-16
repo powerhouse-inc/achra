@@ -1,5 +1,6 @@
 import {
   RsTemplateStatus,
+  useBuildersListQuery,
   useResourceTemplatesQuery,
   useServicesListingOfferingsQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -24,9 +25,10 @@ export async function getServices(operatorId?: string): Promise<Service[]> {
 }
 
 export async function getServicesWithOfferings(): Promise<EnrichedService[]> {
-  const [services, offeringsData] = await Promise.all([
+  const [services, offeringsData, operatorsData] = await Promise.all([
     getServices(),
     useServicesListingOfferingsQuery.fetcher({})(),
+    useBuildersListQuery.fetcher({ filter: { isOperator: true } })(),
   ])
 
   const offeringsMap = new Map<string, OfferingPricingSummary>()
@@ -38,9 +40,18 @@ export async function getServicesWithOfferings(): Promise<EnrichedService[]> {
     offeringsMap.set(offering.resourceTemplateId, { hasFreeTier, tierCount: offering.tiers.length })
   }
 
+  const operatorNamesMap = new Map<string, string>()
+  for (const operator of operatorsData.builders) {
+    if (!operator.id || !operator.name) continue
+    operatorNamesMap.set(String(operator.id), operator.name)
+  }
+
   return services.map((service) => {
     const offeringSummary = offeringsMap.get(service.id) ?? null
     const badge = getServiceBadge(service, offeringSummary)
-    return { service, badge, offeringSummary }
+    const operatorName = service.operatorId
+      ? (operatorNamesMap.get(service.operatorId) ?? null)
+      : null
+    return { service, badge, offeringSummary, operatorName }
   })
 }

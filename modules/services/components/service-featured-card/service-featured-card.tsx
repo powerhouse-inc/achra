@@ -17,7 +17,7 @@ function ServiceFeaturedCard({
   enrichedService,
   primary = false,
 }: Readonly<ServiceFeaturedCardProps>) {
-  const { service, badge, offeringSummary } = enrichedService
+  const { service, badge, offeringSummary, operatorName } = enrichedService
   const isComingSoon = badge === 'coming-soon'
   const showFreeTier = offeringSummary?.hasFreeTier
   const coverImage = service.thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
@@ -36,7 +36,7 @@ function ServiceFeaturedCard({
       />
       <CardContent className={cn('flex h-full gap-4 p-4', primary && 'sm:gap-5 sm:p-5')}>
         <div className="flex min-w-0 flex-1 flex-col gap-3">
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <div
               className={cn(
                 'relative shrink-0 overflow-hidden rounded-lg',
@@ -61,7 +61,9 @@ function ServiceFeaturedCard({
               >
                 {service.title}
               </span>
-              <span className="text-muted-foreground text-xs">by Powerhouse</span>
+              {operatorName && (
+                <span className="text-muted-foreground text-xs">by {operatorName}</span>
+              )}
             </div>
           </div>
 

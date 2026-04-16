@@ -11,7 +11,7 @@ interface ServiceMarketplaceCardProps {
 }
 
 function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplaceCardProps>) {
-  const { service, badge } = enrichedService
+  const { service, badge, operatorName } = enrichedService
   const coverImage = service.thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
 
   return (
@@ -22,7 +22,7 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
         aria-label={`${service.title} Profile`}
       />
       <CardContent className="flex h-full flex-col gap-3 p-4">
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-3">
           <div className="relative size-12 shrink-0 overflow-hidden rounded-lg">
             <Image
               src={coverImage}
@@ -32,11 +32,13 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
               className="rounded-lg object-cover"
             />
           </div>
-          <div className="flex min-w-0 flex-col gap-0.5">
+          <div className="flex min-w-0 flex-col gap-1">
             <span className="text-foreground truncate text-sm leading-tight font-semibold sm:text-base">
               {service.title}
             </span>
-            <span className="text-muted-foreground text-xs">by Powerhouse</span>
+            {operatorName && (
+              <span className="text-muted-foreground text-xs">by {operatorName}</span>
+            )}
           </div>
         </div>
         {service.summary && (

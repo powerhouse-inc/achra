@@ -7,9 +7,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     chromatic: {
-      // This tells Chromatic/Storybook to wait for all animations to finish before snapshotting
-      waitForAnimationEnd: true,
-      pauseAnimationAtEnd: true,
+      disable: true,
     },
   },
 } satisfies Meta<typeof BuildNetworkSection>
