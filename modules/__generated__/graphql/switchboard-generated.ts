@@ -17275,6 +17275,13 @@ export type ServiceOfferingsQueryVariables = Exact<{
 
 export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
 
+export type ServicesListingOfferingsQueryVariables = Exact<{
+  filter?: InputMaybe<RsServiceOfferingsFilter>;
+}>;
+
+
+export type ServicesListingOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, resourceTemplateId?: any | null, status: RsServiceStatus, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, pricing: { __typename?: 'RSServicePricing', amount?: any | null } }> }> };
+
 export type ResourceTemplatesQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
 }>;
@@ -18947,6 +18954,61 @@ useSuspenseServiceOfferingsQuery.getKey = (variables?: ServiceOfferingsQueryVari
 
 
 useServiceOfferingsQuery.fetcher = (variables?: ServiceOfferingsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ServiceOfferingsQuery, ServiceOfferingsQueryVariables>(ServiceOfferingsDocument, variables, options);
+
+export const ServicesListingOfferingsDocument = `
+    query ServicesListingOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
+    id
+    resourceTemplateId
+    status
+    tiers {
+      id
+      pricing {
+        amount
+      }
+    }
+  }
+}
+    `;
+
+export const useServicesListingOfferingsQuery = <
+      TData = ServicesListingOfferingsQuery,
+      TError = unknown
+    >(
+      variables?: ServicesListingOfferingsQueryVariables,
+      options?: Omit<UseQueryOptions<ServicesListingOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<ServicesListingOfferingsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<ServicesListingOfferingsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ServicesListingOfferings'] : ['ServicesListingOfferings', variables],
+    queryFn: switchboardFetcher<ServicesListingOfferingsQuery, ServicesListingOfferingsQueryVariables>(ServicesListingOfferingsDocument, variables),
+    ...options
+  }
+    )};
+
+useServicesListingOfferingsQuery.getKey = (variables?: ServicesListingOfferingsQueryVariables) => variables === undefined ? ['ServicesListingOfferings'] : ['ServicesListingOfferings', variables];
+
+export const useSuspenseServicesListingOfferingsQuery = <
+      TData = ServicesListingOfferingsQuery,
+      TError = unknown
+    >(
+      variables?: ServicesListingOfferingsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<ServicesListingOfferingsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<ServicesListingOfferingsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<ServicesListingOfferingsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['ServicesListingOfferingsSuspense'] : ['ServicesListingOfferingsSuspense', variables],
+    queryFn: switchboardFetcher<ServicesListingOfferingsQuery, ServicesListingOfferingsQueryVariables>(ServicesListingOfferingsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseServicesListingOfferingsQuery.getKey = (variables?: ServicesListingOfferingsQueryVariables) => variables === undefined ? ['ServicesListingOfferingsSuspense'] : ['ServicesListingOfferingsSuspense', variables];
+
+
+useServicesListingOfferingsQuery.fetcher = (variables?: ServicesListingOfferingsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ServicesListingOfferingsQuery, ServicesListingOfferingsQueryVariables>(ServicesListingOfferingsDocument, variables, options);
 
 export const ResourceTemplatesDocument = `
     query ResourceTemplates($filter: RSResourceTemplatesFilter) {

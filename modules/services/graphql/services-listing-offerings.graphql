@@ -1,0 +1,13 @@
+query ServicesListingOfferings($filter: RSServiceOfferingsFilter) {
+  serviceOfferings(filter: $filter) {
+    id
+    resourceTemplateId
+    status
+    tiers {
+      id
+      pricing {
+        amount
+      }
+    }
+  }
+}
