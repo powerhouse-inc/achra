@@ -5,7 +5,6 @@ import {
   ServicesListSection,
   ServicesPageSkeleton,
 } from '@/modules/services/components/services-page-content'
-import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
 
 export default function ServicesPage() {
@@ -13,11 +12,9 @@ export default function ServicesPage() {
     <PageContent className="gap-6">
       <Suspense fallback={<ServicesPageSkeleton />}>
         <ServicesFiltersProvider>
-          <ErrorBoundaryWithPresets>
-            <Suspense fallback={<ServicesContentSkeleton />}>
-              <ServicesListSection />
-            </Suspense>
-          </ErrorBoundaryWithPresets>
+          <Suspense fallback={<ServicesContentSkeleton />}>
+            <ServicesListSection />
+          </Suspense>
         </ServicesFiltersProvider>
       </Suspense>
     </PageContent>
