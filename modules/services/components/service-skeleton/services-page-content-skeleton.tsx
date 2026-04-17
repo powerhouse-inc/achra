@@ -1,14 +1,10 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { FeaturedCardSkeleton } from './featured-card-skeleton'
 import { MarketplaceCardSkeleton } from './marketplace-card-skeleton'
-import { ServicesMarketplaceHeaderSkeleton } from './services-marketplace-header-skeleton'
 
 function ServicesContentSkeleton() {
   return (
     <div className="flex flex-col gap-10">
-      {/* marketplace header */}
-      <ServicesMarketplaceHeaderSkeleton />
-
       {/* featured section */}
       <section className="flex flex-col gap-4">
         {/* section title */}

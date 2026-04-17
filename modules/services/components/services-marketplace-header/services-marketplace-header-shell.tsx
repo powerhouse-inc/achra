@@ -1,15 +1,14 @@
-'use client'
-
 import { Boxes, Briefcase, Layers, Package, Store } from 'lucide-react'
-import { SearchInput } from '@/modules/shared/components/form/search-input'
-import ff from '@/modules/shared/lib/feature-flags'
 import { cn } from '@/modules/shared/lib/utils'
-import { useServicesFiltersContext } from '../services-filters/services-filters-context'
+import type { ReactNode } from 'react'
 
-function ServicesMarketplaceHeader() {
-  const filtersEnabled = ff.SERVICES_LISTING_FILTERS_ENABLED
-  const { search, isSearchPending, isResetPending, setSearch } = useServicesFiltersContext()
+interface ServicesMarketplaceHeaderShellProps {
+  searchSlot?: ReactNode
+}
 
+function ServicesMarketplaceHeaderShell({
+  searchSlot,
+}: Readonly<ServicesMarketplaceHeaderShellProps>) {
   return (
     <div className="shadow-primary bg-accent relative overflow-hidden rounded-xl">
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -46,7 +45,7 @@ function ServicesMarketplaceHeader() {
 
         <Store
           className={cn(
-            'text-border absolute rotate-[14deg]',
+            'text-border absolute rotate-14',
             '-top-6 -left-6 size-28',
             'sm:-top-2 sm:left-[2%] sm:size-28',
             'lg:top-0 lg:left-[3%] lg:size-32',
@@ -104,20 +103,10 @@ function ServicesMarketplaceHeader() {
           Find the right tools and services for your organization. From operational hubs to
           compliance frameworks.
         </p>
-        {filtersEnabled && (
-          <SearchInput
-            value={search}
-            onChange={setSearch}
-            isLoading={isSearchPending}
-            disabled={isResetPending}
-            showKeyboardShortcut={false}
-            placeholder="Search services, tools, and solutions..."
-            className="bg-background mt-4 h-10 w-full max-w-lg border"
-          />
-        )}
+        {searchSlot}
       </div>
     </div>
   )
 }
 
-export { ServicesMarketplaceHeader }
+export { ServicesMarketplaceHeaderShell }

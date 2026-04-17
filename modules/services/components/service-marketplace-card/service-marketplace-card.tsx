@@ -29,7 +29,7 @@ function ServiceMarketplaceCard({ enrichedService }: Readonly<ServiceMarketplace
               alt={service.title}
               fill
               unoptimized
-              className="rounded-lg object-cover"
+              className="bg-accent rounded-lg object-cover"
             />
           </div>
           <div className="flex min-w-0 flex-col gap-1">
