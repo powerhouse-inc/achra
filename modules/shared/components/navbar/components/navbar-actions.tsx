@@ -9,14 +9,14 @@ import { ThemeToggle, ThemeToggleOption } from './theme-toggle'
 import { UserButton, UserOption } from './user-button'
 
 function NavbarActionsContent({ showThemeToggle }: { showThemeToggle: boolean }) {
-  const showMobileMenu = ff.NAV_BAR_LOGIN_BUTTON_ENABLED || showThemeToggle
-  const showDesktopActions = ff.NAV_BAR_LOGIN_BUTTON_ENABLED || showThemeToggle
+  const showMobileMenu = ff.AUTH_ENABLED || showThemeToggle
+  const showDesktopActions = ff.AUTH_ENABLED || showThemeToggle
 
   return (
     <NavbarPrimitives.ActionsArea>
       {showMobileMenu ? (
         <NavbarPrimitives.ActionWithOptions className="flex md:hidden">
-          {ff.NAV_BAR_LOGIN_BUTTON_ENABLED && (
+          {ff.AUTH_ENABLED && (
             <>
               <UserOption />
               {showThemeToggle ? <NavbarPrimitives.ActionOptionSeparator /> : null}
@@ -29,7 +29,7 @@ function NavbarActionsContent({ showThemeToggle }: { showThemeToggle: boolean })
       {showDesktopActions ? (
         <NavbarPrimitives.ActionsGroup className="hidden md:flex">
           {showThemeToggle ? <ThemeToggle /> : null}
-          {ff.NAV_BAR_LOGIN_BUTTON_ENABLED && (
+          {ff.AUTH_ENABLED && (
             <>
               {showThemeToggle ? <NavbarPrimitives.ActionSeparator /> : null}
               <UserButton />
