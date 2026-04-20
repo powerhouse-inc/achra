@@ -19,6 +19,11 @@ import {
 } from '@/modules/shared/components/ui/dropdown-menu'
 import * as NavbarPrimitives from '../primitives'
 
+interface UserButtonProps {
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}
+
 function AddressLabel({ address, displayAddress }: { address: string; displayAddress: string }) {
   return (
     <DropdownMenuLabel
@@ -40,7 +45,7 @@ function AddressLabel({ address, displayAddress }: { address: string; displayAdd
 /**
  * User avatar or login button for desktop
  */
-function UserButton() {
+function UserButton({ open, onOpenChange }: UserButtonProps) {
   const auth = useRenownAuth()
 
   if (auth.status !== 'authorized' || !auth.address) {
@@ -56,7 +61,7 @@ function UserButton() {
   const displayLabel = auth.displayName ?? displayAddress
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="items-center gap-2 px-2">
           <Identicon value={address} className="size-5" />
@@ -64,7 +69,7 @@ function UserButton() {
           <ChevronDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="z-170 w-56">
+      <DropdownMenuContent align="end" className="z-170 w-56 max-md:hidden">
         <AddressLabel address={address} displayAddress={displayAddress} />
         <DropdownMenuSeparator />
         {auth.profileId ? (
