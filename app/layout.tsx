@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
+import { Renown } from '@/modules/shared/components/renown/renown'
 import { Toaster } from '@/modules/shared/components/ui/sonner'
 import ff from '@/modules/shared/lib/feature-flags'
 import { RootThemeProvider } from '@/modules/shared/providers/theme-provider'
@@ -87,6 +88,7 @@ export default function RootLayout({
       >
         <RootThemeProvider>
           <QueryClientProvider>
+            {ff.AUTH_ENABLED && <Renown appName="achra" url={process.env.NEXT_PUBLIC_RENOWN_URL} />}
             <NuqsAdapter>
               <main className="flex-1">{children}</main>
 

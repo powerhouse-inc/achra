@@ -29,67 +29,67 @@ All colors are defined as CSS custom properties in [`app/globals.css`](app/globa
 
 ### 2.1 Core surface & text
 
-| Token | Tailwind utility | Light | Dark | Role |
-| --- | --- | --- | --- | --- |
-| `--background` | `bg-background` | `oklch(0.9911 0 0)` (near-white) | `#1b1e24` (deep slate) | Page canvas. Applied to `<body>` by base layer. |
-| `--foreground` | `text-foreground` | `oklch(0.3372 0.0058 214.37)` (cool slate) | `#fcfcfc` (near-white) | Default body text. |
-| `--card` | `bg-card` | `oklch(0.9911 0 0)` | `#252a34` | Card surface. Dark mode lifts above `--background`. |
-| `--card-foreground` | `text-card-foreground` | `oklch(0.3372 0.0058 214.37)` | `#f3f5f7` | Text on cards. |
-| `--popover` | `bg-popover` | `oklch(1 0 0)` (pure white) | `#1e222b` | Menus, dropdowns, tooltips. |
-| `--popover-foreground` | `text-popover-foreground` | `oklch(0.3372 0.0058 214.37)` | `#fcfcfc` | Text on popovers. |
-| `--muted` | `bg-muted` | `oklch(0.9521 0 0)` | `#343839` | Subtle fills (skeletons, disabled rows, inactive chips). |
-| `--muted-foreground` | `text-muted-foreground` | `oklch(0.7044 0.0027 228.80)` | `#6c7275` | De-emphasized copy (captions, help text). |
+| Token                  | Tailwind utility          | Light                                      | Dark                   | Role                                                     |
+| ---------------------- | ------------------------- | ------------------------------------------ | ---------------------- | -------------------------------------------------------- |
+| `--background`         | `bg-background`           | `oklch(0.9911 0 0)` (near-white)           | `#1b1e24` (deep slate) | Page canvas. Applied to `<body>` by base layer.          |
+| `--foreground`         | `text-foreground`         | `oklch(0.3372 0.0058 214.37)` (cool slate) | `#fcfcfc` (near-white) | Default body text.                                       |
+| `--card`               | `bg-card`                 | `oklch(0.9911 0 0)`                        | `#252a34`              | Card surface. Dark mode lifts above `--background`.      |
+| `--card-foreground`    | `text-card-foreground`    | `oklch(0.3372 0.0058 214.37)`              | `#f3f5f7`              | Text on cards.                                           |
+| `--popover`            | `bg-popover`              | `oklch(1 0 0)` (pure white)                | `#1e222b`              | Menus, dropdowns, tooltips.                              |
+| `--popover-foreground` | `text-popover-foreground` | `oklch(0.3372 0.0058 214.37)`              | `#fcfcfc`              | Text on popovers.                                        |
+| `--muted`              | `bg-muted`                | `oklch(0.9521 0 0)`                        | `#343839`              | Subtle fills (skeletons, disabled rows, inactive chips). |
+| `--muted-foreground`   | `text-muted-foreground`   | `oklch(0.7044 0.0027 228.80)`              | `#6c7275`              | De-emphasized copy (captions, help text).                |
 
 ### 2.2 Brand & intent
 
-| Token | Tailwind utility | Light | Dark | Role |
-| --- | --- | --- | --- | --- |
-| `--primary` | `bg-primary` | `oklch(0.5553 0.2652 289.49)` | `oklch(0.5553 0.2652 289.49)` (identical) | Brand accent (violet). Primary CTAs, selected tabs, active filters. |
-| `--primary-foreground` | `text-primary-foreground` | `oklch(0.9692 0.0034 247.86)` | `oklch(0.9692 0.0034 247.86)` | Text/icons on primary surfaces. |
-| `--secondary` | `bg-secondary` | `oklch(0.9672 0 0)` (light gray) | `#4f596f` (slate-500) | Secondary buttons, chips, neutral fills. |
-| `--secondary-foreground` | `text-secondary-foreground` | `oklch(0.3372 0.0058 214.37)` | `#a6b1c7` | Text on secondary. |
-| `--accent` | `bg-accent` | `oklch(0.9692 0.0034 247.86)` | `#373e4d` | Hover fills for ghost/outline buttons, selected rows. |
-| `--accent-foreground` | `text-accent-foreground` | `oklch(0 0 0)` (pure black) | `#f3f5f7` | Text on accent surfaces. |
-| `--destructive` | `bg-destructive` / `text-destructive` | `oklch(0.6257 0.2058 29.08)` (red-500) | `oklch(0.704 0.191 22.22)` | Delete, error, validation failure. |
-| `--destructive-foreground` | `text-destructive-foreground` | `oklch(0.9911 0 0)` | `oklch(0.985 0 0)` | Text on destructive surfaces. |
+| Token                      | Tailwind utility                      | Light                                  | Dark                                      | Role                                                                |
+| -------------------------- | ------------------------------------- | -------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------- |
+| `--primary`                | `bg-primary`                          | `oklch(0.5553 0.2652 289.49)`          | `oklch(0.5553 0.2652 289.49)` (identical) | Brand accent (violet). Primary CTAs, selected tabs, active filters. |
+| `--primary-foreground`     | `text-primary-foreground`             | `oklch(0.9692 0.0034 247.86)`          | `oklch(0.9692 0.0034 247.86)`             | Text/icons on primary surfaces.                                     |
+| `--secondary`              | `bg-secondary`                        | `oklch(0.9672 0 0)` (light gray)       | `#4f596f` (slate-500)                     | Secondary buttons, chips, neutral fills.                            |
+| `--secondary-foreground`   | `text-secondary-foreground`           | `oklch(0.3372 0.0058 214.37)`          | `#a6b1c7`                                 | Text on secondary.                                                  |
+| `--accent`                 | `bg-accent`                           | `oklch(0.9692 0.0034 247.86)`          | `#373e4d`                                 | Hover fills for ghost/outline buttons, selected rows.               |
+| `--accent-foreground`      | `text-accent-foreground`              | `oklch(0 0 0)` (pure black)            | `#f3f5f7`                                 | Text on accent surfaces.                                            |
+| `--destructive`            | `bg-destructive` / `text-destructive` | `oklch(0.6257 0.2058 29.08)` (red-500) | `oklch(0.704 0.191 22.22)`                | Delete, error, validation failure.                                  |
+| `--destructive-foreground` | `text-destructive-foreground`         | `oklch(0.9911 0 0)`                    | `oklch(0.985 0 0)`                        | Text on destructive surfaces.                                       |
 
 ### 2.3 Lines & focus
 
-| Token | Tailwind utility | Light | Dark | Role |
-| --- | --- | --- | --- | --- |
-| `--border` | `border-border` | `oklch(0.8817 0.0018 247.84)` | `#485265` | Default border for cards, inputs, dividers. Applied via `@layer base { * { @apply border-border } }`. |
-| `--input` | `border-input` | `oklch(0.922 0 0)` | `#485265` | Input border. |
-| `--ring` | `ring-ring` | `oklch(0.3372 0.0058 214.37)` | `#f3f5f7` | Focus ring color (outline + 3px ring, applied by shadcn components). |
+| Token      | Tailwind utility | Light                         | Dark      | Role                                                                                                  |
+| ---------- | ---------------- | ----------------------------- | --------- | ----------------------------------------------------------------------------------------------------- |
+| `--border` | `border-border`  | `oklch(0.8817 0.0018 247.84)` | `#485265` | Default border for cards, inputs, dividers. Applied via `@layer base { * { @apply border-border } }`. |
+| `--input`  | `border-input`   | `oklch(0.922 0 0)`            | `#485265` | Input border.                                                                                         |
+| `--ring`   | `ring-ring`      | `oklch(0.3372 0.0058 214.37)` | `#f3f5f7` | Focus ring color (outline + 3px ring, applied by shadcn components).                                  |
 
 ### 2.4 Sidebar scale
 
 Dedicated tokens for the sidebar so it can diverge from main surfaces (e.g., darker panel in light mode, inverted panel in dark mode).
 
-| Token | Tailwind utility | Light | Dark | Role |
-| --- | --- | --- | --- | --- |
-| `--sidebar` | `bg-sidebar` | `oklch(0.985 0 0)` | `oklch(0.205 0 0)` | Sidebar surface. |
-| `--sidebar-foreground` | `text-sidebar-foreground` | `oklch(0.145 0 0)` | `oklch(0.985 0 0)` | Sidebar text. |
-| `--sidebar-primary` | `bg-sidebar-primary` | `oklch(0.205 0 0)` | `oklch(0.488 0.243 264.38)` | Active nav item. |
-| `--sidebar-primary-foreground` | `text-sidebar-primary-foreground` | `oklch(0.985 0 0)` | `oklch(0.985 0 0)` | Text on active nav item. |
-| `--sidebar-accent` | `bg-sidebar-accent` | `oklch(0.97 0 0)` | `oklch(0.269 0 0)` | Hover nav item. |
-| `--sidebar-accent-foreground` | `text-sidebar-accent-foreground` | `oklch(0.205 0 0)` | `oklch(0.985 0 0)` | Text on hover nav item. |
-| `--sidebar-border` | `border-sidebar-border` | `oklch(0.922 0 0)` | `oklch(1 0 0 / 10%)` | Sidebar dividers. |
-| `--sidebar-ring` | `ring-sidebar-ring` | `oklch(0.708 0 0)` | `oklch(0.439 0 0)` | Focus ring inside sidebar. |
+| Token                          | Tailwind utility                  | Light              | Dark                        | Role                       |
+| ------------------------------ | --------------------------------- | ------------------ | --------------------------- | -------------------------- |
+| `--sidebar`                    | `bg-sidebar`                      | `oklch(0.985 0 0)` | `oklch(0.205 0 0)`          | Sidebar surface.           |
+| `--sidebar-foreground`         | `text-sidebar-foreground`         | `oklch(0.145 0 0)` | `oklch(0.985 0 0)`          | Sidebar text.              |
+| `--sidebar-primary`            | `bg-sidebar-primary`              | `oklch(0.205 0 0)` | `oklch(0.488 0.243 264.38)` | Active nav item.           |
+| `--sidebar-primary-foreground` | `text-sidebar-primary-foreground` | `oklch(0.985 0 0)` | `oklch(0.985 0 0)`          | Text on active nav item.   |
+| `--sidebar-accent`             | `bg-sidebar-accent`               | `oklch(0.97 0 0)`  | `oklch(0.269 0 0)`          | Hover nav item.            |
+| `--sidebar-accent-foreground`  | `text-sidebar-accent-foreground`  | `oklch(0.205 0 0)` | `oklch(0.985 0 0)`          | Text on hover nav item.    |
+| `--sidebar-border`             | `border-sidebar-border`           | `oklch(0.922 0 0)` | `oklch(1 0 0 / 10%)`        | Sidebar dividers.          |
+| `--sidebar-ring`               | `ring-sidebar-ring`               | `oklch(0.708 0 0)` | `oklch(0.439 0 0)`          | Focus ring inside sidebar. |
 
 ### 2.5 Chart scale
 
 Sequential palette for data viz. Use in numeric order unless a semantic mapping applies. Tokens `chart-7` and `chart-8` are identical in both modes (neutral greys, used for "other"/"inactive" series).
 
-| Token | Tailwind utility | Light | Dark | Intent |
-| --- | --- | --- | --- | --- |
-| `--chart-1` | `bg-chart-1` / `text-chart-1` | `oklch(0.81 0.1 252)` | `oklch(0.488 0.243 264.38)` | Series 1 |
-| `--chart-2` | `bg-chart-2` | `oklch(0.62 0.19 260)` | `oklch(0.696 0.17 162.48)` | Series 2 |
-| `--chart-3` | `bg-chart-3` | `oklch(0.55 0.22 263)` | `oklch(0.769 0.188 70.08)` | Series 3 |
-| `--chart-4` | `bg-chart-4` | `oklch(0.49 0.22 264)` | `oklch(0.627 0.265 303.9)` | Series 4 |
-| `--chart-5` | `bg-chart-5` | `oklch(0.42 0.18 266)` | `oklch(0.645 0.246 16.44)` | Series 5 |
-| `--chart-6` | `bg-chart-6` | `oklch(78.92% 0.1 24.86)` | `oklch(0.742 0.141 24.53)` | Series 6 |
-| `--chart-7` | `bg-chart-7` | `oklch(72.42% 0.029 265.38)` | (same) | Neutral / "other" |
-| `--chart-8` | `bg-chart-8` | `oklch(86.57% 0.014 262.38)` | (same) | Muted / "inactive" |
+| Token       | Tailwind utility              | Light                        | Dark                        | Intent             |
+| ----------- | ----------------------------- | ---------------------------- | --------------------------- | ------------------ |
+| `--chart-1` | `bg-chart-1` / `text-chart-1` | `oklch(0.81 0.1 252)`        | `oklch(0.488 0.243 264.38)` | Series 1           |
+| `--chart-2` | `bg-chart-2`                  | `oklch(0.62 0.19 260)`       | `oklch(0.696 0.17 162.48)`  | Series 2           |
+| `--chart-3` | `bg-chart-3`                  | `oklch(0.55 0.22 263)`       | `oklch(0.769 0.188 70.08)`  | Series 3           |
+| `--chart-4` | `bg-chart-4`                  | `oklch(0.49 0.22 264)`       | `oklch(0.627 0.265 303.9)`  | Series 4           |
+| `--chart-5` | `bg-chart-5`                  | `oklch(0.42 0.18 266)`       | `oklch(0.645 0.246 16.44)`  | Series 5           |
+| `--chart-6` | `bg-chart-6`                  | `oklch(78.92% 0.1 24.86)`    | `oklch(0.742 0.141 24.53)`  | Series 6           |
+| `--chart-7` | `bg-chart-7`                  | `oklch(72.42% 0.029 265.38)` | (same)                      | Neutral / "other"  |
+| `--chart-8` | `bg-chart-8`                  | `oklch(86.57% 0.014 262.38)` | (same)                      | Muted / "inactive" |
 
 > **Note:** Light and dark chart scales are hue-independent. Light mode reads as a near-monochromatic sequence in a single hue region; dark mode is categorical across multiple hue regions. Don't assume `chart-N` is the "same color" across modes — address series by role/index, not by expected hue.
 
@@ -97,15 +97,15 @@ Sequential palette for data viz. Use in numeric order unless a semantic mapping 
 
 Application-specific tokens beyond the shadcn baseline. Same values in light and dark (tuned to work on both canvases).
 
-| Token | Tailwind utility | Value | Role |
-| --- | --- | --- | --- |
-| `--status-progress` | `bg-status-progress` / `text-status-progress` | `oklch(0.684 0.1727 250.59)` (blue) | "In progress" state on workstreams, proposals, purchases. |
-| `--status-success` | `bg-status-success` / `text-status-success` | `oklch(0.7432 0.1665 149.27)` (green) | Completed / approved / paid states. Also backs `success` badge variant (`bg-status-success/30 text-status-success`). |
-| `--status-warning` | `bg-status-warning` / `text-status-warning` | `oklch(0.7873 0.1608 64.84)` (amber) | Attention required, pending review. |
-| `--purple` | `bg-purple` | `oklch(59.01% 0.214 296.91)` | Categorical (network/tag illustration). |
-| `--fusion` | `bg-fusion` | `oklch(75.53% 0.154 5.76)` (pink) | Categorical. |
-| `--to-do` | `bg-to-do` | `oklch(78.73% 0.161 64.84)` | "To do" state. |
-| `--yellow` | `bg-yellow` | `oklch(0.8447 0.1726 88.48)` | Categorical highlight. |
+| Token               | Tailwind utility                              | Value                                 | Role                                                                                                                 |
+| ------------------- | --------------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `--status-progress` | `bg-status-progress` / `text-status-progress` | `oklch(0.684 0.1727 250.59)` (blue)   | "In progress" state on workstreams, proposals, purchases.                                                            |
+| `--status-success`  | `bg-status-success` / `text-status-success`   | `oklch(0.7432 0.1665 149.27)` (green) | Completed / approved / paid states. Also backs `success` badge variant (`bg-status-success/30 text-status-success`). |
+| `--status-warning`  | `bg-status-warning` / `text-status-warning`   | `oklch(0.7873 0.1608 64.84)` (amber)  | Attention required, pending review.                                                                                  |
+| `--purple`          | `bg-purple`                                   | `oklch(59.01% 0.214 296.91)`          | Categorical (network/tag illustration).                                                                              |
+| `--fusion`          | `bg-fusion`                                   | `oklch(75.53% 0.154 5.76)` (pink)     | Categorical.                                                                                                         |
+| `--to-do`           | `bg-to-do`                                    | `oklch(78.73% 0.161 64.84)`           | "To do" state.                                                                                                       |
+| `--yellow`          | `bg-yellow`                                   | `oklch(0.8447 0.1726 88.48)`          | Categorical highlight.                                                                                               |
 
 ---
 
@@ -115,13 +115,13 @@ Fonts are loaded in [`app/layout.tsx`](app/layout.tsx) and exposed via `@theme i
 
 ### 3.1 Font families
 
-| Token | Tailwind utility | Source | Usage |
-| --- | --- | --- | --- |
-| `--font-inter` | `font-inter` | `next/font/google` (Inter, Latin subset, CSS var `--font-inter`) | **Primary UI font.** Applied to `<body>` as `className`. Variable-weight. Default for all text. |
-| `--font-sans-condensed` | `font-sans-condensed` | Local (`/public/fonts/OpenSansCondensed/`): Light 300, Bold 700, Light Italic 300i | Display / marketing headlines and condensed-label usage. Variable `--font-open-sans-condensed`. |
-| `--font-sans` | `font-sans` | System stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'` | Fallback. |
-| `--font-serif` | `font-serif` | `ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif` | Reserved (rarely used). |
-| `--font-mono` | `font-mono` | `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace` | Code, addresses, hashes, technical values. |
+| Token                   | Tailwind utility      | Source                                                                                                                                                                                                                          | Usage                                                                                           |
+| ----------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--font-inter`          | `font-inter`          | `next/font/google` (Inter, Latin subset, CSS var `--font-inter`)                                                                                                                                                                | **Primary UI font.** Applied to `<body>` as `className`. Variable-weight. Default for all text. |
+| `--font-sans-condensed` | `font-sans-condensed` | Local (`/public/fonts/OpenSansCondensed/`): Light 300, Bold 700, Light Italic 300i                                                                                                                                              | Display / marketing headlines and condensed-label usage. Variable `--font-open-sans-condensed`. |
+| `--font-sans`           | `font-sans`           | System stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'` | Fallback.                                                                                       |
+| `--font-serif`          | `font-serif`          | `ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif`                                                                                                                                                                   | Reserved (rarely used).                                                                         |
+| `--font-mono`           | `font-mono`           | `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`                                                                                                                            | Code, addresses, hashes, technical values.                                                      |
 
 `--tracking-normal` is set to `0em` (no default letter-spacing adjustment).
 
@@ -129,17 +129,17 @@ Fonts are loaded in [`app/layout.tsx`](app/layout.tsx) and exposed via `@theme i
 
 Uses Tailwind 4 defaults (not overridden). Scale is `rem`-based, paired with the default `line-height` for each step.
 
-| Utility | Size (rem / px) | Line height | Typical use |
-| --- | --- | --- | --- |
-| `text-xs` | 0.75 / 12 | 1rem | Captions, badges, table meta. |
-| `text-sm` | 0.875 / 14 | 1.25rem | Secondary body, dense lists, form labels. |
-| `text-base` | 1 / 16 | 1.5rem | Body copy. |
-| `text-lg` | 1.125 / 18 | 1.75rem | Card titles, emphasized body. |
-| `text-xl` | 1.25 / 20 | 1.75rem | Section headers. |
-| `text-2xl` | 1.5 / 24 | 2rem | Page sub-headings. |
-| `text-3xl` | 1.875 / 30 | 2.25rem | Page titles. |
-| `text-4xl` | 2.25 / 36 | 2.5rem | Marketing / hero. |
-| `text-5xl`+ | ≥3 / 48 | 1 | Hero / landing. |
+| Utility     | Size (rem / px) | Line height | Typical use                               |
+| ----------- | --------------- | ----------- | ----------------------------------------- |
+| `text-xs`   | 0.75 / 12       | 1rem        | Captions, badges, table meta.             |
+| `text-sm`   | 0.875 / 14      | 1.25rem     | Secondary body, dense lists, form labels. |
+| `text-base` | 1 / 16          | 1.5rem      | Body copy.                                |
+| `text-lg`   | 1.125 / 18      | 1.75rem     | Card titles, emphasized body.             |
+| `text-xl`   | 1.25 / 20       | 1.75rem     | Section headers.                          |
+| `text-2xl`  | 1.5 / 24        | 2rem        | Page sub-headings.                        |
+| `text-3xl`  | 1.875 / 30      | 2.25rem     | Page titles.                              |
+| `text-4xl`  | 2.25 / 36       | 2.5rem      | Marketing / hero.                         |
+| `text-5xl`+ | ≥3 / 48         | 1           | Hero / landing.                           |
 
 Weights: use `font-normal` (400), `font-medium` (500), `font-semibold` (600), `font-bold` (700). shadcn components standardize on `font-medium` for buttons/badges.
 
@@ -164,27 +164,27 @@ Source: [`modules/shared/components/ui/button.tsx`](modules/shared/components/ui
 
 **Variants:**
 
-| Variant | Fill | Hover | Usage |
-| --- | --- | --- | --- |
-| `default` | `bg-primary text-primary-foreground` | `hover:bg-primary/90` | Primary CTA. One per viewport where possible. |
-| `destructive` | `bg-destructive text-white` (dark: `dark:bg-destructive/60`) | `hover:bg-destructive/90` | Delete, irreversible actions. Uses `focus-visible:ring-destructive/20` (dark: `/40`). |
-| `outline` | `bg-popover` + `border` (dark: `dark:border-input`) | `hover:bg-accent hover:text-accent-foreground` (dark: `dark:hover:bg-input/50`) | Secondary action, equal-weight alternative. |
-| `secondary` | `bg-secondary text-secondary-foreground` | `hover:bg-secondary/80` | Neutral companion action. |
-| `ghost` | transparent | `hover:bg-accent hover:text-accent-foreground` (dark: `dark:hover:bg-accent/50`) | Tertiary action, icon buttons in toolbars. |
-| `link` | `text-primary` | `hover:underline` (`underline-offset-4`) | Inline text-level action. |
-| `icon` | `text-accent-foreground/30` | `hover:text-accent-foreground` | De-emphasized icon-only control (e.g., dismiss "×"). |
+| Variant       | Fill                                                         | Hover                                                                            | Usage                                                                                 |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `default`     | `bg-primary text-primary-foreground`                         | `hover:bg-primary/90`                                                            | Primary CTA. One per viewport where possible.                                         |
+| `destructive` | `bg-destructive text-white` (dark: `dark:bg-destructive/60`) | `hover:bg-destructive/90`                                                        | Delete, irreversible actions. Uses `focus-visible:ring-destructive/20` (dark: `/40`). |
+| `outline`     | `bg-popover` + `border` (dark: `dark:border-input`)          | `hover:bg-accent hover:text-accent-foreground` (dark: `dark:hover:bg-input/50`)  | Secondary action, equal-weight alternative.                                           |
+| `secondary`   | `bg-secondary text-secondary-foreground`                     | `hover:bg-secondary/80`                                                          | Neutral companion action.                                                             |
+| `ghost`       | transparent                                                  | `hover:bg-accent hover:text-accent-foreground` (dark: `dark:hover:bg-accent/50`) | Tertiary action, icon buttons in toolbars.                                            |
+| `link`        | `text-primary`                                               | `hover:underline` (`underline-offset-4`)                                         | Inline text-level action.                                                             |
+| `icon`        | `text-accent-foreground/30`                                  | `hover:text-accent-foreground`                                                   | De-emphasized icon-only control (e.g., dismiss "×").                                  |
 
 **Sizes:**
 
-| Size | Dimensions |
-| --- | --- |
-| `default` | `h-9 px-4 py-2` (`has-[>svg]:px-3`) |
-| `sm` | `h-8 px-3 gap-1.5` (`has-[>svg]:px-2.5`) |
-| `lg` | `h-10 px-6` (`has-[>svg]:px-4`) |
-| `icon` | `size-9` |
-| `iconSm` | `size-6` |
-| `iconXsm` | `size-4` |
-| `iconXxs` | `size-3` |
+| Size      | Dimensions                               |
+| --------- | ---------------------------------------- |
+| `default` | `h-9 px-4 py-2` (`has-[>svg]:px-3`)      |
+| `sm`      | `h-8 px-3 gap-1.5` (`has-[>svg]:px-2.5`) |
+| `lg`      | `h-10 px-6` (`has-[>svg]:px-4`)          |
+| `icon`    | `size-9`                                 |
+| `iconSm`  | `size-6`                                 |
+| `iconXsm` | `size-4`                                 |
+| `iconXxs` | `size-3`                                 |
 
 Common base: `inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium cursor-pointer`.
 
@@ -225,6 +225,7 @@ Source: [`modules/shared/components/ui/chart.tsx`](modules/shared/components/ui/
 Base unit: `--spacing: 0.25rem` (4 px). Tailwind utilities (`p-*`, `m-*`, `gap-*`, `size-*`) multiply this. No custom overrides.
 
 Typical rhythm:
+
 - **2** (`gap-2` / `p-2`) — tight chips, dense toolbars.
 - **3–4** (`gap-3` / `p-4`) — standard card padding, form field gaps.
 - **6–8** (`py-6`, `gap-8`) — section padding.
@@ -234,13 +235,13 @@ Typical rhythm:
 
 Declared as `@utility container` in [`app/globals.css`](app/globals.css:225-247). Fluid up to `xl`, then capped:
 
-| Breakpoint | Width | Horizontal padding |
-| --- | --- | --- |
-| < 640 px | 100 % | `calc(var(--spacing) * 4)` (16 px) |
-| ≥ 640 px (sm) | 100 % | `calc(var(--spacing) * 6)` (24 px) |
-| ≥ 768 px (md) | 100 % | `calc(var(--spacing) * 8)` (32 px) |
-| ≥ 1280 px (xl) | `calc(var(--spacing) * 300)` ≈ **75 rem / 1200 px** | `0` (centered) |
-| ≥ 1536 px (2xl) | `calc(var(--spacing) * 328)` ≈ **82 rem / 1312 px** | `0` (centered) |
+| Breakpoint      | Width                                               | Horizontal padding                 |
+| --------------- | --------------------------------------------------- | ---------------------------------- |
+| < 640 px        | 100 %                                               | `calc(var(--spacing) * 4)` (16 px) |
+| ≥ 640 px (sm)   | 100 %                                               | `calc(var(--spacing) * 6)` (24 px) |
+| ≥ 768 px (md)   | 100 %                                               | `calc(var(--spacing) * 8)` (32 px) |
+| ≥ 1280 px (xl)  | `calc(var(--spacing) * 300)` ≈ **75 rem / 1200 px** | `0` (centered)                     |
+| ≥ 1536 px (2xl) | `calc(var(--spacing) * 328)` ≈ **82 rem / 1312 px** | `0` (centered)                     |
 
 Apply as `<div class="container">`.
 
@@ -256,6 +257,7 @@ No `--radius` token defined; uses Tailwind 4 defaults (`sm` 0.25rem · `md` 0.37
 ### 5.4 Global base layer
 
 From `@layer base` in [`app/globals.css`](app/globals.css:215-223):
+
 - `* { @apply border-border outline-ring/50 }` — every element inherits the semantic border and a 50 % ring color for non-focus-visible outlines.
 - `body { @apply bg-background text-foreground }` — page canvas and default text.
 
@@ -267,17 +269,17 @@ From `@layer base` in [`app/globals.css`](app/globals.css:215-223):
 
 Two-track system. Light mode uses subtle `hsl(0 0% 0% / …)` layers; dark mode uses heavier opaque `rgba(r g b / …)` drops with a slate-green tint that reads as separation on the dark canvas.
 
-| Token | Tailwind utility | Light | Dark | Use |
-| --- | --- | --- | --- | --- |
-| `--shadow-2xs` | `shadow-2xs` | `0 1px 3px 0 hsl(0 0% 0% / 0.05)` | `0 1px 3px 0 hsl(0 0% 0% / 0.05)` | Hairline press / separator. |
-| `--shadow-xs` | `shadow-xs` | `0 2px 12px 0 rgba(52,56,57,0.1)` | `0 2px 12px 1px rgba(0,0,0,0.2)` | Subtle card lift. |
-| `--shadow-sm` | `shadow-sm` | `0 2px 7px 0 rgba(52,56,57,0.25)` | `0 2px 7px 1px rgba(9,13,14,0.6)` | Default card, input rest. |
-| `--shadow` | `shadow` | `0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1)` | (same) | Generic raised surface. |
-| `--shadow-md` | `shadow-md` | `2px 4px 7px 0 rgba(52,56,57,0.25)` | `2px 4px 7px 1px rgba(7,8,8,0.4)` | Popover, dropdown. |
-| `--shadow-lg` | `shadow-lg` | `1px 4px 15px 0 rgba(52,56,57,0.25)` | `1px 2px 15px 3px rgba(2,1,11,0.5)` | Dialog, sheet. |
-| `--shadow-xl` | `shadow-xl` | `0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1)` | (same) | Large overlay. |
-| `--shadow-2xl` | `shadow-2xl` | `0 1px 3px 0 hsl(0 0% 0% / 0.25)` | (same) | Reserved for rare max-elevation surfaces. |
-| `--shadow-primary` | `shadow-primary` | `0 2px 10px 2px rgba(122,58,255,0.2)` | `0 2px 13px 2px rgba(122,58,255,0.3)` | **Branded glow.** Use sparingly on primary CTAs to reinforce the violet accent. |
+| Token              | Tailwind utility | Light                                                                | Dark                                  | Use                                                                             |
+| ------------------ | ---------------- | -------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
+| `--shadow-2xs`     | `shadow-2xs`     | `0 1px 3px 0 hsl(0 0% 0% / 0.05)`                                    | `0 1px 3px 0 hsl(0 0% 0% / 0.05)`     | Hairline press / separator.                                                     |
+| `--shadow-xs`      | `shadow-xs`      | `0 2px 12px 0 rgba(52,56,57,0.1)`                                    | `0 2px 12px 1px rgba(0,0,0,0.2)`      | Subtle card lift.                                                               |
+| `--shadow-sm`      | `shadow-sm`      | `0 2px 7px 0 rgba(52,56,57,0.25)`                                    | `0 2px 7px 1px rgba(9,13,14,0.6)`     | Default card, input rest.                                                       |
+| `--shadow`         | `shadow`         | `0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1)`  | (same)                                | Generic raised surface.                                                         |
+| `--shadow-md`      | `shadow-md`      | `2px 4px 7px 0 rgba(52,56,57,0.25)`                                  | `2px 4px 7px 1px rgba(7,8,8,0.4)`     | Popover, dropdown.                                                              |
+| `--shadow-lg`      | `shadow-lg`      | `1px 4px 15px 0 rgba(52,56,57,0.25)`                                 | `1px 2px 15px 3px rgba(2,1,11,0.5)`   | Dialog, sheet.                                                                  |
+| `--shadow-xl`      | `shadow-xl`      | `0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1)` | (same)                                | Large overlay.                                                                  |
+| `--shadow-2xl`     | `shadow-2xl`     | `0 1px 3px 0 hsl(0 0% 0% / 0.25)`                                    | (same)                                | Reserved for rare max-elevation surfaces.                                       |
+| `--shadow-primary` | `shadow-primary` | `0 2px 10px 2px rgba(122,58,255,0.2)`                                | `0 2px 13px 2px rgba(122,58,255,0.3)` | **Branded glow.** Use sparingly on primary CTAs to reinforce the violet accent. |
 
 ### 6.2 Elevation hierarchy
 
@@ -323,13 +325,13 @@ background (page)                           ← --background
 
 Tailwind 4 defaults (not overridden in `@theme`). Use prefixes `sm:`, `md:`, `lg:`, `xl:`, `2xl:`.
 
-| Prefix | Min width |
-| --- | --- |
-| `sm` | `40rem` / 640 px |
-| `md` | `48rem` / 768 px |
-| `lg` | `64rem` / 1024 px |
-| `xl` | `80rem` / 1280 px |
-| `2xl` | `96rem` / 1536 px |
+| Prefix | Min width         |
+| ------ | ----------------- |
+| `sm`   | `40rem` / 640 px  |
+| `md`   | `48rem` / 768 px  |
+| `lg`   | `64rem` / 1024 px |
+| `xl`   | `80rem` / 1280 px |
+| `2xl`  | `96rem` / 1536 px |
 
 Mobile-first: default styles target the smallest viewport, then layer up.
 

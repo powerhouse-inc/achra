@@ -99,9 +99,9 @@ export interface FeatureFlags {
     RESERVES_WATERFALL_CHART_SECTION_ENABLED?: boolean
   }
   /**
-   * Whether to enable the login button in the nav bar
+   * Whether Renown login is enabled (mounts the Renown SDK and shows the navbar login button)
    */
-  NAV_BAR_LOGIN_BUTTON_ENABLED: boolean
+  AUTH_ENABLED: boolean
 
   /**
    * Whether to persist the service purchase store to localStorage
