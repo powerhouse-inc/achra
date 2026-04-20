@@ -1,41 +1,69 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
+import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { isAchraMarketingHomePath } from '@/modules/shared/lib/achra-marketing-home-path'
 import ff from '@/modules/shared/lib/feature-flags'
 import * as NavbarPrimitives from '../primitives'
 import { ThemeToggle, ThemeToggleOption } from './theme-toggle'
 import { UserButton, UserOption } from './user-button'
 
+function MobileNavbarActions({ showThemeToggle }: { showThemeToggle: boolean }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  return (
+    <NavbarPrimitives.ActionWithOptions
+      className="flex md:hidden"
+      open={mobileMenuOpen}
+      onOpenChange={setMobileMenuOpen}
+    >
+      {ff.AUTH_ENABLED && (
+        <>
+          <UserOption />
+          {showThemeToggle ? <NavbarPrimitives.ActionOptionSeparator /> : null}
+        </>
+      )}
+      {showThemeToggle ? <ThemeToggleOption /> : null}
+    </NavbarPrimitives.ActionWithOptions>
+  )
+}
+
+function DesktopNavbarActions({ showThemeToggle }: { showThemeToggle: boolean }) {
+  const [desktopUserMenuOpen, setDesktopUserMenuOpen] = useState(false)
+
+  return (
+    <NavbarPrimitives.ActionsGroup className="hidden md:flex">
+      {showThemeToggle ? <ThemeToggle /> : null}
+      {ff.AUTH_ENABLED && (
+        <>
+          {showThemeToggle ? <NavbarPrimitives.ActionSeparator /> : null}
+          <UserButton open={desktopUserMenuOpen} onOpenChange={setDesktopUserMenuOpen} />
+        </>
+      )}
+    </NavbarPrimitives.ActionsGroup>
+  )
+}
+
 function NavbarActionsContent({ showThemeToggle }: { showThemeToggle: boolean }) {
   const showMobileMenu = ff.AUTH_ENABLED || showThemeToggle
   const showDesktopActions = ff.AUTH_ENABLED || showThemeToggle
+  const isDesktop = useMediaQuery({ from: 'md' })
 
   return (
     <NavbarPrimitives.ActionsArea>
       {showMobileMenu ? (
-        <NavbarPrimitives.ActionWithOptions className="flex md:hidden">
-          {ff.AUTH_ENABLED && (
-            <>
-              <UserOption />
-              {showThemeToggle ? <NavbarPrimitives.ActionOptionSeparator /> : null}
-            </>
-          )}
-          {showThemeToggle ? <ThemeToggleOption /> : null}
-        </NavbarPrimitives.ActionWithOptions>
+        <MobileNavbarActions
+          key={isDesktop ? 'mobile-hidden' : 'mobile-visible'}
+          showThemeToggle={showThemeToggle}
+        />
       ) : null}
 
       {showDesktopActions ? (
-        <NavbarPrimitives.ActionsGroup className="hidden md:flex">
-          {showThemeToggle ? <ThemeToggle /> : null}
-          {ff.AUTH_ENABLED && (
-            <>
-              {showThemeToggle ? <NavbarPrimitives.ActionSeparator /> : null}
-              <UserButton />
-            </>
-          )}
-        </NavbarPrimitives.ActionsGroup>
+        <DesktopNavbarActions
+          key={isDesktop ? 'desktop-visible' : 'desktop-hidden'}
+          showThemeToggle={showThemeToggle}
+        />
       ) : null}
     </NavbarPrimitives.ActionsArea>
   )

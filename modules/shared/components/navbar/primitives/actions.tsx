@@ -45,22 +45,24 @@ ActionSeparator.displayName = 'NavbarActionSeparator'
 export interface ActionWithOptionsProps {
   children: React.ReactNode
   className?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 /**
  * Dropdown menu container for action options (mobile)
  */
-function ActionWithOptions({ children, className }: ActionWithOptionsProps) {
+function ActionWithOptions({ children, className, open, onOpenChange }: ActionWithOptionsProps) {
   return (
     <div className={cn('flex items-center', className)}>
-      <DropdownMenu>
+      <DropdownMenu open={open} onOpenChange={onOpenChange}>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size="icon" aria-label="Open menu">
             <EllipsisVertical />
             <span className="sr-only">Open menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="z-160 w-56" align="end">
+        <DropdownMenuContent className="z-160 w-56 md:hidden" align="end">
           {children}
         </DropdownMenuContent>
       </DropdownMenu>
