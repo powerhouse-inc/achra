@@ -1,7 +1,7 @@
 'use client'
 
 import { Check, Copy, type LucideIcon } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import React, { createContext, useContext } from 'react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
@@ -139,28 +139,31 @@ interface AnimatedIconProps extends React.ComponentProps<typeof Copy> {
   copiedIcon?: LucideIcon
 }
 
+const ICON_EASE = [0.32, 0.72, 0, 1] as const
+
 function AnimatedIcon({ copiedIcon: CopiedIcon = Check, ...props }: AnimatedIconProps) {
   const { isCopied } = useCopyButtonContext()
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <AnimatePresence mode="wait" initial={false}>
       {isCopied ? (
         <motion.div
           key="check"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: [0.5, 1.2, 1] }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: [0.9, 1.05, 1] }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.2, ease: ICON_EASE }}
         >
           <CopiedIcon className="size-4" {...props} />
         </motion.div>
       ) : (
         <motion.div
           key="copy"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.15, ease: ICON_EASE }}
         >
           <Copy className="size-4" {...props} />
         </motion.div>

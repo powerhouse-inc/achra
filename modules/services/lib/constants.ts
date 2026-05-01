@@ -4,6 +4,12 @@ import type { ServiceBadge } from '../types'
 /** Public path to the default service cover image when `thumbnailUrl` is missing. */
 export const SERVICE_INFO_DEFAULT_COVER_PATH = '/services/covers/cover-01.jpg'
 
+/** Minimum available height (px) below which the service-sections height cap is released. */
+export const SERVICE_SECTIONS_MIN_AVAILABLE_HEIGHT = 160
+
+/** CSS custom property that carries the dynamic max-height for service-sections cards. */
+export const SERVICE_SECTIONS_MAX_HEIGHT_VAR = '--service-sections-max-height'
+
 /** Duration (ms) within which a service is considered "new" based on lastModified. */
 export const NEW_SERVICE_THRESHOLD_MS = 7 * 24 * 60 * 60 * 1000
 

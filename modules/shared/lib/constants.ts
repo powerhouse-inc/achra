@@ -127,14 +127,14 @@ export const FOOTER_LLM_CONVERSATIONS: Record<
   claude: [
     {
       label: 'Tell me about Achra',
-      href: '#',
-    },
-    {
-      label: 'Tell me about Achra',
-      href: 'https://claude.ai/share/d193b0fa-0759-4c24-bf5a-d499b9e3458f',
+      href: 'https://claude.ai/share/74821bd7-23e7-4fc3-939e-65fda30d5bea',
     },
     {
       label: 'The Future of Work',
+      href: 'https://claude.ai/share/d193b0fa-0759-4c24-bf5a-d499b9e3458f',
+    },
+    {
+      label: 'Operational Hub Structure',
       href: 'https://claude.ai/share/d0cf7eb1-6753-4556-928b-6e4525769f17',
     },
   ],

@@ -1,63 +1,130 @@
 'use client'
 
-import { UserIcon } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
-import { Button } from '../../ui/button'
+import { useRenownAuth } from '@powerhousedao/reactor-browser'
+import { ChevronDown, LogIn, LogOut, User } from 'lucide-react'
+import {
+  CopyAnimatedIcon,
+  CopyButton,
+  CopyTrigger,
+} from '@/modules/shared/components/copy-button/copy-button'
+import { Identicon } from '@/modules/shared/components/identicon/identicon'
+import { Button } from '@/modules/shared/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/modules/shared/components/ui/dropdown-menu'
 import * as NavbarPrimitives from '../primitives'
-import { useAuth } from '../primitives/use-auth'
+
+interface UserButtonProps {
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}
+
+function AddressLabel({ address, displayAddress }: { address: string; displayAddress: string }) {
+  return (
+    <DropdownMenuLabel
+      className="flex items-center justify-between gap-2 font-normal"
+      onSelect={(e) => {
+        e.preventDefault()
+      }}
+    >
+      <span>{displayAddress}</span>
+      <CopyButton value={address}>
+        <CopyTrigger className="text-muted-foreground hover:text-accent-foreground">
+          <CopyAnimatedIcon />
+        </CopyTrigger>
+      </CopyButton>
+    </DropdownMenuLabel>
+  )
+}
 
 /**
  * User avatar or login button for desktop
  */
-function UserButton() {
-  const { isAuthenticated } = useAuth()
+function UserButton({ open, onOpenChange }: UserButtonProps) {
+  const auth = useRenownAuth()
 
-  if (isAuthenticated) {
-    return <AuthenticatedUserAvatar className="hidden md:flex" />
+  if (auth.status !== 'authorized' || !auth.address) {
+    return (
+      <Button variant="outline" onClick={auth.login}>
+        Log in
+      </Button>
+    )
   }
 
+  const address = auth.address
+  const displayAddress = auth.displayAddress ?? address
+  const displayLabel = auth.displayName ?? displayAddress
+
   return (
-    <Button variant="outline" className="hidden cursor-pointer items-center gap-2 md:flex">
-      Log in
-    </Button>
+    <DropdownMenu open={open} onOpenChange={onOpenChange}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="items-center gap-2 px-2">
+          <Identicon value={address} className="size-5" />
+          <span>{displayLabel}</span>
+          <ChevronDown className="size-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="z-170 w-56 max-md:hidden">
+        <AddressLabel address={address} displayAddress={displayAddress} />
+        <DropdownMenuSeparator />
+        {auth.profileId ? (
+          <DropdownMenuItem className="cursor-pointer" onClick={auth.openProfile}>
+            <User />
+            <span>View Profile</span>
+          </DropdownMenuItem>
+        ) : null}
+        <DropdownMenuItem
+          variant="destructive"
+          className="cursor-pointer"
+          onClick={() => void auth.logout()}
+        >
+          <LogOut />
+          <span>Log out</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 UserButton.displayName = 'NavbarUserButton'
 
 /**
- * User option in mobile dropdown menu
+ * User option(s) in mobile dropdown menu — returns menu items directly
  */
 function UserOption() {
-  const { isAuthenticated } = useAuth()
+  const auth = useRenownAuth()
 
-  if (isAuthenticated) {
+  if (auth.status !== 'authorized' || !auth.address) {
     return (
-      <NavbarPrimitives.ActionOption>
-        <AuthenticatedUserAvatar />
+      <NavbarPrimitives.ActionOption onClick={auth.login}>
+        <LogIn />
+        <span>Log in</span>
       </NavbarPrimitives.ActionOption>
     )
   }
 
-  return (
-    <NavbarPrimitives.ActionOption>
-      <UserIcon className="mr-2 size-4" />
-      <span>Login</span>
-    </NavbarPrimitives.ActionOption>
-  )
-}
+  const address = auth.address
+  const displayAddress = auth.displayAddress ?? address
 
-/**
- * Authenticated user avatar
- */
-function AuthenticatedUserAvatar({ className }: { className?: string }) {
   return (
-    <div className={className ?? 'flex items-center gap-2'}>
-      <Avatar>
-        <AvatarImage src="/images/avatar.png" alt="avatar" />
-        <AvatarFallback>U</AvatarFallback>
-      </Avatar>
-      <span className="flex text-sm font-medium md:hidden">Jhon Doe</span>
-    </div>
+    <>
+      <AddressLabel address={address} displayAddress={displayAddress} />
+      <NavbarPrimitives.ActionOptionSeparator />
+      {auth.profileId ? (
+        <NavbarPrimitives.ActionOption onClick={auth.openProfile}>
+          <User />
+          <span>View Profile</span>
+        </NavbarPrimitives.ActionOption>
+      ) : null}
+      <NavbarPrimitives.ActionOption variant="destructive" onClick={() => void auth.logout()}>
+        <LogOut />
+        <span>Log out</span>
+      </NavbarPrimitives.ActionOption>
+    </>
   )
 }
 
