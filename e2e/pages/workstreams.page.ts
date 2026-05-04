@@ -10,6 +10,6 @@ export class WorkstreamsPage extends BasePage {
   readonly path = '/workstreams'
 
   protected readyLocator(): Locator {
-    return this.page.locator('main')
+    return this.page.getByRole('heading', { level: 1, name: /workstreams/i }).first()
   }
 }

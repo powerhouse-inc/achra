@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 /**
  * Pins the staging entities the rest of the suite depends on. If this test

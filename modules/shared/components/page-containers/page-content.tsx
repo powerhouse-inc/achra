@@ -13,14 +13,14 @@ const pageContentVariants = cva('container flex flex-col mb-8', {
   },
 })
 
-interface PageContentProps extends React.ComponentProps<'main'> {
+interface PageContentProps extends React.ComponentProps<'div'> {
   as?: React.ElementType
   variant?: VariantProps<typeof pageContentVariants>['variant']
 }
 
 function PageContent({
   children,
-  as: Element = 'main',
+  as: Element = 'div',
   variant = 'default',
   className,
   ...props

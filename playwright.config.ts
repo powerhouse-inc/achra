@@ -15,16 +15,26 @@ dotenv.config({
 const PORT = Number(process.env.E2E_PORT ?? 3000)
 const BASE_URL = process.env.E2E_BASE_URL ?? `http://localhost:${PORT}`
 
+// Cap local parallelism: a single Next.js dev server bottlenecks under
+// many concurrent workers, surfacing as flaky timeouts on data-heavy
+// pages. CI uses a fresh server boot, so 2 workers there is safe.
+// Override via E2E_WORKERS — accepts a number (`4`) or percentage (`50%`).
+const workersEnv = process.env.E2E_WORKERS
+const WORKERS: number | string = workersEnv
+  ? workersEnv.endsWith('%')
+    ? workersEnv
+    : Number(workersEnv)
+  : process.env.CI
+    ? 2
+    : 3
+
 export default defineConfig({
   testDir: './e2e/specs',
   outputDir: './test-results',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  // Cap local parallelism: a single Next.js dev server bottlenecks under
-  // many concurrent workers, surfacing as flaky timeouts on data-heavy
-  // pages. CI uses a fresh server boot, so 2 workers there is safe.
-  workers: process.env.CI ? 2 : 3,
+  workers: WORKERS,
   timeout: 60_000,
   expect: { timeout: 10_000 },
   reporter: process.env.CI
