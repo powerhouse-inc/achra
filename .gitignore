@@ -34,6 +34,17 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+!.env.e2e.example
+
+# e2e working env (non-dot variant, see playwright.config.ts)
+e2e/env.e2e
+!e2e/env.e2e.example
+
+# playwright
+/playwright-report
+/test-results
+/blob-report
+/playwright/.cache
 
 # vercel
 .vercel
