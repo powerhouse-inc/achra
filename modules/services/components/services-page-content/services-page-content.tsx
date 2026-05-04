@@ -14,10 +14,8 @@ interface ServicesPageContentProps {
 }
 
 function ServicesPageContent({ enrichedServices }: Readonly<ServicesPageContentProps>) {
-  const { search: contextSearch, tab: contextTab } = useServicesFiltersContext()
-  const filtersEnabled = ff.SERVICES_LISTING_FILTERS_ENABLED
-  const search = filtersEnabled ? contextSearch : ''
-  const tab = filtersEnabled ? contextTab : 'all'
+  const { search: contextSearch } = useServicesFiltersContext()
+  const search = ff.SERVICES_LISTING_FILTERS_ENABLED ? contextSearch : ''
 
   const filteredServices = useMemo(
     () => enrichedServices.filter((es) => filterBySearch([es.service], search).length > 0),
@@ -42,30 +40,22 @@ function ServicesPageContent({ enrichedServices }: Readonly<ServicesPageContentP
     return featured
   }, [builderServices, networkServices])
 
-  const shouldShowBuilders = (tab === 'all' || tab === 'builders') && builderServices.length > 0
-  const shouldShowNetworks = (tab === 'all' || tab === 'networks') && networkServices.length > 0
-
-  const isTabEmpty =
-    (tab === 'builders' && builderServices.length === 0) ||
-    (tab === 'networks' && networkServices.length === 0) ||
-    (tab === 'all' && builderServices.length === 0 && networkServices.length === 0)
+  const isEmpty = builderServices.length === 0 && networkServices.length === 0
 
   return (
     <div className="flex flex-col gap-10">
-      {isTabEmpty ? (
+      {isEmpty ? (
         <EmptyStateService
           title="No services found"
           description="There are no services available for this combination of filters"
         />
       ) : (
         <>
-          {tab === 'all' && featuredServices.length > 0 && (
-            <ServicesFeaturedSection services={featuredServices} />
-          )}
-          {shouldShowBuilders && (
+          {featuredServices.length > 0 && <ServicesFeaturedSection services={featuredServices} />}
+          {builderServices.length > 0 && (
             <ServicesCategorySection title="Builders" services={builderServices} />
           )}
-          {shouldShowNetworks && (
+          {networkServices.length > 0 && (
             <ServicesCategorySection title="Networks" services={networkServices} />
           )}
         </>
