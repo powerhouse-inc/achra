@@ -8,7 +8,12 @@ import { expect, test } from '../../../../fixtures'
 test.describe('@smoke workstreams', () => {
   test('should load and render', async ({ workstreamsPage, page, consoleErrors }) => {
     const response = await page.goto('/workstreams', { waitUntil: 'domcontentloaded' })
-    if (await page.getByText(/Page not found/i).isVisible().catch(() => false)) {
+    if (
+      await page
+        .getByText(/Page not found/i)
+        .isVisible()
+        .catch(() => false)
+    ) {
       test.skip(true, 'WORKSTREAMS_ENABLED is off in this environment; /workstreams returns 404.')
     }
     expect(response?.status() ?? 0).toBeLessThan(500)
