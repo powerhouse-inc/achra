@@ -1,6 +1,6 @@
-import { PURCHASE_STEP } from '../../data/constants'
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { PURCHASE_STEP } from '../../../data/constants'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 test.describe('@feature service purchase', () => {
   test('should render all 5 step tabs in the wizard tablist', async ({ purchaseFlow, page }) => {

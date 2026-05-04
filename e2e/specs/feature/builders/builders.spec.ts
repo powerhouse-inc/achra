@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 test.describe('@feature builders', () => {
   test('should show at least one row in the builders list', async ({ buildersListPage }) => {

@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 test.describe('@feature services', () => {
   test('should render at least one card with a /services/ href in the listing', async ({

@@ -1,4 +1,4 @@
-import { expect, test } from '../../fixtures'
+import { expect, test } from '../../../fixtures'
 
 test.describe('@feature home', () => {
   test('should render the FAQ section heading near the bottom of the marketing fold', async ({

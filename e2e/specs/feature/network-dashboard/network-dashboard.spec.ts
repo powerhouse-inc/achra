@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 /**
  * Conditional dashboard sections (details, governance, proposals, wallets,

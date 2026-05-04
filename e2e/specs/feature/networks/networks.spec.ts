@@ -1,4 +1,4 @@
-import { expect, test } from '../../fixtures'
+import { expect, test } from '../../../fixtures'
 
 test.describe('@feature networks listing', () => {
   test('should give every card a non-empty visible name and a /network/ href', async ({

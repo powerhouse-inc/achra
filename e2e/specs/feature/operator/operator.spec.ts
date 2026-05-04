@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures'
-import { getEnv } from '../../support/env'
+import { expect, test } from '../../../fixtures'
+import { getEnv } from '../../../support/env'
 
 test.describe('@feature operator', () => {
   test('should list at least one service link on the operator profile', async ({
