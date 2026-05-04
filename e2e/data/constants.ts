@@ -1,13 +1,12 @@
 /**
- * Hardcoded fallback identifiers for staging Switchboard data. Override per
- * environment via the corresponding E2E_* env var (see e2e/env.e2e.example).
- * The data-validity smoke test pins these values and fails loudly if the
- * referenced entity disappears from staging.
+ * Pinned staging Switchboard identifiers used across the suite. The
+ * data-validity smoke test pins these values and fails loudly if the
+ * referenced entity disappears from staging — update here when that happens.
  */
-export const FALLBACK_NETWORK_SLUG = 'powerhouse'
-export const FALLBACK_SERVICE_SLUG = '56dce7ce-e65d-4fd6-b3d8-7a8506528aa9'
-export const FALLBACK_OPERATOR_SLUG = 'powerhouse-rgh'
-export const FALLBACK_BUILDER_SLUG = 'business-analysis-and-integrations'
+export const NETWORK_SLUG = 'powerhouse'
+export const SERVICE_SLUG = '56dce7ce-e65d-4fd6-b3d8-7a8506528aa9'
+export const OPERATOR_SLUG = 'powerhouse-rgh'
+export const BUILDER_SLUG = 'business-analysis-and-integrations'
 
 /**
  * Step query-param values for /services/[slug]/purchase. Mirrors the

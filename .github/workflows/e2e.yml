@@ -59,10 +59,6 @@ jobs:
           NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY: 'false'
           NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED: 'false'
           NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: 'false'
-          E2E_NETWORK_SLUG: ${{ vars.E2E_NETWORK_SLUG }}
-          E2E_SERVICE_SLUG: ${{ vars.E2E_SERVICE_SLUG }}
-          E2E_OPERATOR_SLUG: ${{ vars.E2E_OPERATOR_SLUG }}
-          E2E_BUILDER_SLUG: ${{ vars.E2E_BUILDER_SLUG }}
         run: >-
           pnpm exec playwright test
           --project=chromium
@@ -130,10 +126,6 @@ jobs:
           NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY: 'false'
           NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED: 'false'
           NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE: 'false'
-          E2E_NETWORK_SLUG: ${{ vars.E2E_NETWORK_SLUG }}
-          E2E_SERVICE_SLUG: ${{ vars.E2E_SERVICE_SLUG }}
-          E2E_OPERATOR_SLUG: ${{ vars.E2E_OPERATOR_SLUG }}
-          E2E_BUILDER_SLUG: ${{ vars.E2E_BUILDER_SLUG }}
         run: pnpm exec playwright test --project=${{ matrix.project }}
 
       - name: Upload HTML report

@@ -14,7 +14,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test:e2e": "playwright test",
-    "test:e2e:smoke": "playwright test --grep @smoke",
+    "test:e2e:smoke": "playwright test --grep @smoke --project=chromium",
     "test:e2e:flow": "playwright test --grep @flow",
     "test:e2e:feature": "playwright test --grep @feature",
     "test:e2e:headed": "playwright test --headed",
