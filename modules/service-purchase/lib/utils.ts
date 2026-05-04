@@ -1,12 +1,12 @@
 import {
+  type DiscountRuleFieldsFragment,
+  type OfferingOptionGroupFieldsFragment,
+  type RecurringPriceOptionFieldsFragment,
   RsBillingCycle,
-  type RsDiscountRule,
   RsDiscountType,
   RsGroupCostType,
-  type RsOfferingOptionGroup,
-  type RsRecurringPriceOption,
   RsServiceLevel,
-  type RsServiceSubscriptionTier,
+  type ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { FeatureValue, OptionGroupSortable } from '../types'
 
@@ -127,8 +127,8 @@ export function computeMonthlyEquivalent(
  * Checks whether a tier has at least one service with an "included" level
  */
 function tierHasGroupServices(
-  tier: RsServiceSubscriptionTier,
-  group: RsOfferingOptionGroup,
+  tier: ServiceTierFieldsFragment,
+  group: OfferingOptionGroupFieldsFragment,
 ): boolean {
   return tier.serviceLevels.some(
     (sl) => sl.optionGroupId === group.id && INCLUDED_LEVELS.has(sl.level),
@@ -136,8 +136,8 @@ function tierHasGroupServices(
 }
 
 function computeTierGrandTotal(
-  tier: RsServiceSubscriptionTier,
-  activeGroups: readonly RsOfferingOptionGroup[],
+  tier: ServiceTierFieldsFragment,
+  activeGroups: readonly OfferingOptionGroupFieldsFragment[],
   selectedBillingCycle: RsBillingCycle,
 ): number {
   let total = toNum(tier.pricing.amount)
@@ -157,8 +157,8 @@ function computeTierGrandTotal(
  * RECURRING option groups that have services for that tier.
  */
 export function computeGrandTotals(
-  tiers: readonly RsServiceSubscriptionTier[],
-  optionGroups: readonly RsOfferingOptionGroup[],
+  tiers: readonly ServiceTierFieldsFragment[],
+  optionGroups: readonly OfferingOptionGroupFieldsFragment[],
   enabledSections?: Record<string, boolean>,
   selectedBillingCycle: RsBillingCycle = RsBillingCycle.Monthly,
 ): Record<string, string> {
@@ -212,7 +212,7 @@ function mapServiceLevel(level: RsServiceLevel, customValue?: string | null): Fe
 
 export function buildServiceValues(
   serviceId: string,
-  tiers: readonly RsServiceSubscriptionTier[],
+  tiers: readonly ServiceTierFieldsFragment[],
 ): Record<string, FeatureValue> {
   return Object.fromEntries(
     tiers.map(({ serviceLevels, id }) => {
@@ -223,7 +223,7 @@ export function buildServiceValues(
 }
 
 export function formatUsageLimit(
-  limit: RsServiceSubscriptionTier['usageLimits'][number],
+  limit: ServiceTierFieldsFragment['usageLimits'][number],
 ): FeatureValue {
   // Show quantity/description as primary text; overage price is secondary
   if (limit.notes) {
@@ -249,7 +249,7 @@ export function formatMetricLabel(metric: string): string {
 
 export function buildServiceMetrics(
   serviceId: string,
-  tiers: readonly RsServiceSubscriptionTier[],
+  tiers: readonly ServiceTierFieldsFragment[],
 ): Array<{ metric: string; values: Record<string, FeatureValue>; isOneTime?: boolean }> {
   const metricNames = new Set<string>()
 
@@ -283,12 +283,12 @@ export function buildServiceMetrics(
 
 interface PriceWithDiscount {
   basePrice: number | null
-  inlineDiscount: RsDiscountRule | null
+  inlineDiscount: DiscountRuleFieldsFragment | null
 }
 
 /** Finds a recurring pricing entry for the requested cycle, falling back to monthly. */
 function resolveCyclePrice(
-  entries: readonly RsRecurringPriceOption[],
+  entries: readonly RecurringPriceOptionFieldsFragment[],
   cycle: RsBillingCycle,
 ): PriceWithDiscount {
   const exact = entries.find((e) => e.billingCycle === cycle)
@@ -307,7 +307,7 @@ function resolveCyclePrice(
 
 /** Resolves base price from the three pricing sources in priority order. */
 function resolveAddOnBasePrice(
-  group: RsOfferingOptionGroup,
+  group: OfferingOptionGroupFieldsFragment,
   selectedTierId: string,
   selectedBillingCycle: RsBillingCycle,
 ): PriceWithDiscount {
@@ -329,7 +329,7 @@ function resolveAddOnBasePrice(
 }
 
 export function resolveAddOnDisplayPrice(
-  group: RsOfferingOptionGroup,
+  group: OfferingOptionGroupFieldsFragment,
   selectedTierId: string,
   selectedBillingCycle: RsBillingCycle,
 ): { basePrice: number | null; discountedPrice: number | null } {
@@ -346,19 +346,19 @@ export function resolveAddOnDisplayPrice(
   return { basePrice, discountedPrice: discounted < basePrice ? discounted : null }
 }
 
-function isAddOnOrSetup(section: RsOfferingOptionGroup): boolean {
+function isAddOnOrSetup(section: OfferingOptionGroupFieldsFragment): boolean {
   return section.isAddOn || section.costType === RsGroupCostType.Setup
 }
 
-export const getBillingCycleValue = (section: RsOfferingOptionGroup) => {
+export const getBillingCycleValue = (section: OfferingOptionGroupFieldsFragment) => {
   return isAddOnOrSetup(section) ? section.price : undefined
 }
 
-export const getCurrency = (section: RsOfferingOptionGroup) => {
+export const getCurrency = (section: OfferingOptionGroupFieldsFragment) => {
   return isAddOnOrSetup(section) ? section.currency : undefined
 }
 
-export const getCostType = (section: RsOfferingOptionGroup) => {
+export const getCostType = (section: OfferingOptionGroupFieldsFragment) => {
   return isAddOnOrSetup(section) ? section.costType : undefined
 }
 
@@ -370,8 +370,8 @@ export const getCostType = (section: RsOfferingOptionGroup) => {
  * - Tiers with no pricing entry → "$0"
  */
 function computeOptionGroupHeaderPriceForTier(
-  group: RsOfferingOptionGroup,
-  tier: RsServiceSubscriptionTier,
+  group: OfferingOptionGroupFieldsFragment,
+  tier: ServiceTierFieldsFragment,
   selectedBillingCycle: RsBillingCycle,
 ): string | null {
   if (tier.isCustomPricing) return CUSTOM_PRICING_LABEL
@@ -392,8 +392,8 @@ function computeOptionGroupHeaderPriceForTier(
  * Returns null for setup or add-on groups — those use a single flat-price display.
  */
 export function computeOptionGroupHeaderPrices(
-  group: RsOfferingOptionGroup,
-  tiers: readonly RsServiceSubscriptionTier[],
+  group: OfferingOptionGroupFieldsFragment,
+  tiers: readonly ServiceTierFieldsFragment[],
   selectedBillingCycle: RsBillingCycle,
 ): Record<string, string | null> | null {
   if (group.costType === RsGroupCostType.Setup) return null
@@ -435,6 +435,6 @@ export function sortOptionGroups<T extends OptionGroupSortable>(groups: T[]): T[
     .sort((a, b) => Number(a.isAddOn) - Number(b.isAddOn))
 }
 
-export function getUnitPriceMetrics(tier: RsServiceSubscriptionTier) {
+export function getUnitPriceMetrics(tier: ServiceTierFieldsFragment) {
   return tier.usageLimits.filter((ul) => ul.unitPrice != null && ul.unitPrice > 0)
 }

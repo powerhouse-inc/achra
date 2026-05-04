@@ -1,6 +1,6 @@
 import {
   RsBillingCycle,
-  type RsServiceOffering,
+  type ServiceOfferingFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeTotals } from '../../lib/compute-totals'
 import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TotalsSlice } from '../../types'
@@ -8,7 +8,7 @@ import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TotalsSlice } fr
 export function createTotalsSlice(
   set: ServicePurchaseStoreSet,
   get: ServicePurchaseStoreGet,
-  services: RsServiceOffering,
+  services: ServiceOfferingFieldsFragment,
 ): TotalsSlice {
   const { tiers, optionGroups } = services
 

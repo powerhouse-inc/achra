@@ -1,6 +1,6 @@
-import type { RsFaqField } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { FaqFieldFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 
-export const faqData: RsFaqField[] = [
+export const faqData: FaqFieldFieldsFragment[] = [
   {
     id: '1',
     question: 'What is an Operational Hub?',

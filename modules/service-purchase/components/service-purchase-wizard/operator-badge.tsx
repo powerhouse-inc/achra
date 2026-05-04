@@ -1,8 +1,8 @@
-import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ResourceOperatorFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 
 interface OperatorBadgeProps {
-  operator: BuilderProfileState
+  operator: ResourceOperatorFieldsFragment
 }
 
 function OperatorBadge({ operator }: Readonly<OperatorBadgeProps>) {

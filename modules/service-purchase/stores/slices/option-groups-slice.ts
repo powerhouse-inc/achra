@@ -1,9 +1,9 @@
 import {
+  type OfferingOptionGroupFieldsFragment,
   RsBillingCycle,
-  type RsOfferingOptionGroup,
   RsServiceLevel,
-  type RsServiceOffering,
-  type RsServiceSubscriptionTier,
+  type ServiceOfferingFieldsFragment,
+  type ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type {
   OptionGroupsSlice,
@@ -19,7 +19,7 @@ function toAmount(raw: unknown): number {
   return Number.isNaN(n) ? 0 : n
 }
 
-function resolveServiceValue(serviceId: string, tier: RsServiceSubscriptionTier): string | null {
+function resolveServiceValue(serviceId: string, tier: ServiceTierFieldsFragment): string | null {
   const binding = tier.serviceLevels.find((sl) => sl.serviceId === serviceId)
   if (!binding) return null
   if (binding.level === RsServiceLevel.NotApplicable) return null
@@ -31,7 +31,7 @@ function resolveServiceValue(serviceId: string, tier: RsServiceSubscriptionTier)
 
 function resolveMetrics(
   serviceId: string,
-  tier: RsServiceSubscriptionTier,
+  tier: ServiceTierFieldsFragment,
 ): PurchaseOptionGroupServiceMetric[] {
   return tier.usageLimits
     .filter((ul) => ul.serviceId === serviceId)
@@ -46,7 +46,7 @@ function resolveMetrics(
 }
 
 function resolveOriginalPrice(
-  group: RsOfferingOptionGroup,
+  group: OfferingOptionGroupFieldsFragment,
   tierId: string,
   billingCycle: RsBillingCycle,
 ): number {
@@ -59,14 +59,14 @@ function resolveOriginalPrice(
   return toAmount(group.price)
 }
 
-function isGroupSelected(group: RsOfferingOptionGroup): boolean {
+function isGroupSelected(group: OfferingOptionGroupFieldsFragment): boolean {
   if (!group.isAddOn) return true
   return group.defaultSelected
 }
 
 export function computeOptionGroups(
-  services: RsServiceOffering,
-  selectedTier: RsServiceSubscriptionTier,
+  services: ServiceOfferingFieldsFragment,
+  selectedTier: ServiceTierFieldsFragment,
 ): PurchaseOptionGroup[] {
   const { optionGroups, services: offeringServices } = services
   const billingCycle = RsBillingCycle.Monthly
@@ -98,7 +98,7 @@ export function computeOptionGroups(
 export function createOptionGroupsSlice(
   set: ServicePurchaseStoreSet,
   _get: ServicePurchaseStoreGet,
-  services: RsServiceOffering,
+  services: ServiceOfferingFieldsFragment,
 ): OptionGroupsSlice {
   const selectedTier = services.tiers[0]
 
