@@ -1,8 +1,5 @@
 query BudgetStatementsAvailableMonths($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
-    id
-    month
-    lastModifiedAtUtcIso
-    status
+    ...BudgetStatementMonthFields
   }
 }

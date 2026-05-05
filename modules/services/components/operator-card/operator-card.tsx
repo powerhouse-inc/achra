@@ -1,8 +1,8 @@
 import { ArrowRight, Info } from 'lucide-react'
 import Link from 'next/link'
 import {
-  type BuilderProfileState,
   BuilderStatus,
+  type ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -30,7 +30,7 @@ interface ConfigureWithHref {
 }
 
 interface BaseOperatorCardProps {
-  operator: BuilderProfileState
+  operator: ResourceOperatorFieldsFragment
   showMoreInfo?: boolean
   moreInfoHref?: Route
 }

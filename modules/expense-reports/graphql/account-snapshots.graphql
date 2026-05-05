@@ -5,35 +5,15 @@ query AccountSnapshots($filter: budgetStatementsFilter) {
     netExpenseTxns
     reportedActuals
     snapshotReport {
-      startDate
-      endDate
-      accounts {
-        id
-        name
-        type
-        address
-        transactions {
-          id
-          amount {
-            unit
-            value
-          }
-          counterParty
-          counterPartyName
-          datetime
-          direction
-          flowType
-          txHash
-        }
-        balances {
-          endingBalance
-          startingBalance
-          token {
-            symbol
-            contractAddress
-          }
-        }
-      }
+      ...BudgetStatementSnapshotReportFields
     }
+  }
+}
+
+fragment BudgetStatementSnapshotReportFields on BudgetStatementSnapshotReport {
+  startDate
+  endDate
+  accounts {
+    ...SnapshotAccountFields
   }
 }

@@ -1,0 +1,83 @@
+fragment BudgetStatementMonthFields on BudgetStatement {
+  id
+  month
+  lastModifiedAtUtcIso
+  status
+}
+
+fragment BudgetStatementOwnerFields on BudgetStatementOwner {
+  id
+  name
+  code
+  logo
+}
+
+fragment ExpenseReportGroupTotalsSummaryFields on ExpenseReportGroupTotals {
+  groupLabel
+  totalActuals
+  totalForecast
+  totalPayments
+}
+
+fragment ExpenseReportGroupTotalsFields on ExpenseReportGroupTotals {
+  group
+  groupLabel
+  totalBudget
+  totalForecast
+  totalActuals
+  totalPayments
+}
+
+fragment ExpenseReportLineItemFields on ExpenseReportLineItem {
+  id
+  label
+  groupId
+  groupLabel
+  actuals
+  budget
+  comments
+  forecast
+  payments
+}
+
+fragment ExpenseReportGroupFields on ExpenseReportGroup {
+  id
+  label
+  parentId
+}
+
+fragment SnapshotAccountTransactionFields on SnapshotAccountTransaction {
+  id
+  amount {
+    unit
+    value
+  }
+  counterParty
+  counterPartyName
+  datetime
+  direction
+  flowType
+  txHash
+}
+
+fragment SnapshotAccountBalanceFields on SnapshotAccountBalance {
+  endingBalance
+  startingBalance
+  token {
+    symbol
+    contractAddress
+  }
+}
+
+fragment SnapshotAccountFields on SnapshotAccount {
+  id
+  name
+  type
+  address
+  transactions {
+    ...SnapshotAccountTransactionFields
+  }
+  balances {
+    ...SnapshotAccountBalanceFields
+  }
+}

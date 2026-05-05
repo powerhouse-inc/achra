@@ -1,28 +1,27 @@
 query BudgetStatements($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
-    id
-    month
-    lastModifiedAtUtcIso
-    status
+    ...BudgetStatementMonthFields
     owner {
-      name
-      code
-      id
-      logo
+      ...BudgetStatementOwnerFields
     }
     expenseReport {
-      periodStart
-      periodEnd
-      wallets {
-        name
-        address
-        totals {
-          groupLabel
-          totalActuals
-          totalForecast
-          totalPayments
-        }
-      }
+      ...BudgetStatementExpenseReportSummaryFields
     }
+  }
+}
+
+fragment BudgetStatementExpenseReportSummaryFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletSummaryFields
+  }
+}
+
+fragment ExpenseReportWalletSummaryFields on ExpenseReportWallet {
+  name
+  address
+  totals {
+    ...ExpenseReportGroupTotalsSummaryFields
   }
 }

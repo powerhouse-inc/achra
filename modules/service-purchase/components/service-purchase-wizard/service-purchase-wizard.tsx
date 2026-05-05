@@ -3,8 +3,8 @@
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { Suspense, useCallback } from 'react'
 import type {
-  BuilderProfileState,
-  RsResourceTemplate,
+  PurchaseResourceTemplateFieldsFragment,
+  ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   SERVICE_PURCHASE_STEP_VALUES,
@@ -29,8 +29,8 @@ import { OperatorBadge } from './operator-badge'
 import { StepsTriggersList } from './steps-trigger/steps-triggers-list'
 
 export interface ServicePurchaseWizardProps {
-  resourceTemplate: RsResourceTemplate
-  operator: BuilderProfileState
+  resourceTemplate: PurchaseResourceTemplateFieldsFragment
+  operator: ResourceOperatorFieldsFragment
 }
 
 function ServicePurchaseWizard({

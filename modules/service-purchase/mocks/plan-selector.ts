@@ -1,6 +1,6 @@
-import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ServiceTierFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 
-export const mockPlanSelectorTier: RsServiceSubscriptionTier = {
+export const mockPlanSelectorTier: ServiceTierFieldsFragment = {
   description: '',
   id: '1',
   name: 'Pro Plan',
@@ -20,7 +20,6 @@ export const mockPlanSelectorTier: RsServiceSubscriptionTier = {
       unitName: 'Contributor',
       freeLimit: null,
       paidLimit: null,
-      resetCycle: null,
       notes: null,
       unitPrice: 50,
       unitPriceCurrency: 'USD',

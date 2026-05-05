@@ -1,6 +1,6 @@
 import {
   RsBillingCycle,
-  type RsServiceSubscriptionTier,
+  type ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SERVICES_DATA } from '@/modules/service-purchase/mocks/mock-data'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
@@ -12,7 +12,7 @@ const optionGroupSectionStoryPricingValue = {
   onPrevPlan: () => {},
   onNextPlan: () => {},
   tierNames: [] as string[],
-  tiers: [] as RsServiceSubscriptionTier[],
+  tiers: [] as ServiceTierFieldsFragment[],
   selectedBillingCycle: RsBillingCycle.Monthly,
   tierHeaderPrices: {} as Record<string, number | null>,
 }

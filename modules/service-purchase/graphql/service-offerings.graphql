@@ -1,137 +1,170 @@
 query ServiceOfferings($filter: RSServiceOfferingsFilter) {
   serviceOfferings(filter: $filter) {
-    id
-    description
-    infoLink
-    lastModified
-    operatorId
-    title
-    thumbnailUrl
-    tiers {
-      id
-      name
-      mostPopular
-      description
-      isCustomPricing
-      excludeFromSetupFee
-      pricingMode
-      pricing {
-        amount
-        currency
-      }
-      serviceLevels {
-        id
-        serviceId
-        level
-        customValue
-        optionGroupId
-      }
-      usageLimits {
-        id
-        serviceId
-        metric
-        unitName
-        freeLimit
-        paidLimit
-        resetCycle
-        notes
-        unitPrice
-        unitPriceCurrency
-      }
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-    }
-    facetTargets {
-      id
-      categoryKey
-      categoryLabel
-      selectedOptions
-    }
-    optionGroups {
-      id
-      name
-      description
-      isAddOn
-      defaultSelected
-      pricingMode
-      standalonePricing {
-        setupCost {
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-        recurringPricing {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-      }
-      tierDependentPricing {
-        id
-        tierId
-        setupCost {
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-        setupCostDiscounts {
-          billingCycle
-          discountRule {
-            discountType
-            discountValue
-          }
-        }
-        recurringPricing {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-      }
-      costType
-      availableBillingCycles
-      price
-      currency
-      discountMode
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-    }
-    resourceTemplateId
-    services {
-      id
-      title
-      description
-      displayOrder
-      isSetupFormation
-      optionGroupId
-    }
-    status
-    summary
-    availableBillingCycles
+    ...ServiceOfferingFields
   }
+}
+
+fragment ServiceOfferingFields on RSServiceOffering {
+  id
+  description
+  infoLink
+  lastModified
+  operatorId
+  title
+  thumbnailUrl
+  resourceTemplateId
+  status
+  summary
+  availableBillingCycles
+  tiers {
+    ...ServiceTierFields
+  }
+  facetTargets {
+    ...OfferingFacetTargetFields
+  }
+  optionGroups {
+    ...OfferingOptionGroupFields
+  }
+  services {
+    ...OfferingServiceFields
+  }
+}
+
+fragment ServiceTierFields on RSServiceSubscriptionTier {
+  id
+  name
+  mostPopular
+  description
+  isCustomPricing
+  excludeFromSetupFee
+  pricingMode
+  pricing {
+    ...ServicePricingFields
+  }
+  serviceLevels {
+    ...ServiceLevelBindingFields
+  }
+  usageLimits {
+    ...ServiceUsageLimitFields
+  }
+  billingCycleDiscounts {
+    ...BillingCycleDiscountFields
+  }
+}
+
+fragment ServicePricingFields on RSServicePricing {
+  amount
+  currency
+}
+
+fragment ServiceLevelBindingFields on RSServiceLevelBinding {
+  id
+  serviceId
+  level
+  customValue
+  optionGroupId
+}
+
+fragment ServiceUsageLimitFields on RSServiceUsageLimit {
+  id
+  serviceId
+  metric
+  unitName
+  freeLimit
+  paidLimit
+  notes
+  unitPrice
+  unitPriceCurrency
+}
+
+fragment BillingCycleDiscountFields on RSBillingCycleDiscount {
+  billingCycle
+  discountRule {
+    ...DiscountRuleFields
+  }
+}
+
+fragment DiscountRuleFields on RSDiscountRule {
+  discountType
+  discountValue
+}
+
+fragment OfferingFacetTargetFields on RSOfferingFacetTarget {
+  id
+  categoryKey
+  categoryLabel
+  selectedOptions
+}
+
+fragment OfferingOptionGroupFields on RSOfferingOptionGroup {
+  id
+  name
+  description
+  isAddOn
+  defaultSelected
+  pricingMode
+  costType
+  availableBillingCycles
+  price
+  currency
+  discountMode
+  standalonePricing {
+    ...StandalonePricingFields
+  }
+  tierDependentPricing {
+    ...OptionGroupTierPricingFields
+  }
+  billingCycleDiscounts {
+    ...BillingCycleDiscountFields
+  }
+}
+
+fragment StandalonePricingFields on RSStandalonePricing {
+  setupCost {
+    ...SetupCostFields
+  }
+  recurringPricing {
+    ...RecurringPriceOptionFields
+  }
+}
+
+fragment SetupCostFields on RSSetupCost {
+  amount
+  currency
+  discount {
+    ...DiscountRuleFields
+  }
+}
+
+fragment OptionGroupTierPricingFields on RSOptionGroupTierPricing {
+  id
+  tierId
+  setupCost {
+    ...SetupCostFields
+  }
+  setupCostDiscounts {
+    ...BillingCycleDiscountFields
+  }
+  recurringPricing {
+    ...RecurringPriceOptionFields
+  }
+}
+
+fragment RecurringPriceOptionFields on RSRecurringPriceOption {
+  id
+  billingCycle
+  amount
+  currency
+  discount {
+    ...DiscountRuleFields
+  }
+}
+
+fragment OfferingServiceFields on RSOfferingService {
+  id
+  title
+  description
+  displayOrder
+  isSetupFormation
+  optionGroupId
 }

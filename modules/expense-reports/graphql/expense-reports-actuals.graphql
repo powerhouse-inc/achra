@@ -3,37 +3,30 @@ query BudgetStatementsDetails($filter: budgetStatementsFilter) {
     id
     month
     expenseReport {
-      periodStart
-      periodEnd
-      wallets {
-        name
-        address
-        billingStatementIds
-        totals {
-          group
-          groupLabel
-          totalBudget
-          totalForecast
-          totalActuals
-          totalPayments
-        }
-        lineItems {
-          id
-          label
-          groupId
-          groupLabel
-          actuals
-          budget
-          comments
-          forecast
-          payments
-        }
-      }
-      groups {
-        id
-        label
-        parentId
-      }
+      ...BudgetStatementExpenseReportDetailsFields
     }
+  }
+}
+
+fragment BudgetStatementExpenseReportDetailsFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletDetailsFields
+  }
+  groups {
+    ...ExpenseReportGroupFields
+  }
+}
+
+fragment ExpenseReportWalletDetailsFields on ExpenseReportWallet {
+  name
+  address
+  billingStatementIds
+  totals {
+    ...ExpenseReportGroupTotalsFields
+  }
+  lineItems {
+    ...ExpenseReportLineItemFields
   }
 }

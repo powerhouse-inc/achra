@@ -1,4 +1,4 @@
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ServiceOfferingFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { djb2Hash } from '@/shared/lib/hash'
 
 /**
@@ -6,7 +6,7 @@ import { djb2Hash } from '@/shared/lib/hash'
  * When the stored checksum differs from the current checksum, persisted
  * user selections are ignored and fresh API-derived state is used.
  */
-export function computeApiChecksum(services: RsServiceOffering): string {
+export function computeApiChecksum(services: ServiceOfferingFieldsFragment): string {
   const payload = {
     serviceId: services.id,
     lastModified: services.lastModified,

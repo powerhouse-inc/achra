@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import type { RsServiceOffering } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ServiceOfferingFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
@@ -20,7 +20,7 @@ interface HeaderCatalogPlanProps {
   mobilePlanIndex: number
   onPrevPlan: () => void
   onNextPlan: () => void
-  servicesData: RsServiceOffering
+  servicesData: ServiceOfferingFieldsFragment
 }
 
 function HeaderCatalogPlan({
