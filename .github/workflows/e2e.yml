@@ -19,10 +19,6 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,7 +47,7 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: Run @smoke + @flow on chromium (sharded)
+      - name: Run @smoke + @flow on chromium
         env:
           NEXT_PUBLIC_ENVIRONMENT: staging
           NEXT_PUBLIC_SWITCHBOARD_URL: ${{ secrets.E2E_SWITCHBOARD_URL }}
@@ -63,13 +59,12 @@ jobs:
           pnpm exec playwright test
           --project=chromium
           --grep "@smoke|@flow"
-          --shard=${{ matrix.shard }}/2
 
       - name: Upload HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-pr-shard-${{ matrix.shard }}
+          name: playwright-report-pr
           path: playwright-report/
           retention-days: 7
 
@@ -77,7 +72,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-traces-pr-shard-${{ matrix.shard }}
+          name: playwright-traces-pr
           path: test-results/
           retention-days: 7
 
