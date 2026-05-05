@@ -1,11 +1,6 @@
 import type { Service } from '@/modules/shared/types/services'
 
 /**
- * Service filter tabs
- */
-export type ServiceTab = 'all' | 'builders' | 'networks'
-
-/**
  * Badge types displayed on service cards.
  * Only one badge is shown per card, selected by priority order.
  */
