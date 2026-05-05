@@ -2,12 +2,12 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import type { ServiceOfferingFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   createStickyObserver,
   STICKY_HEADER_SM_BREAKPOINT,
 } from '@/modules/service-purchase/lib/sticky-observer-utils'
 import { useServicePurchaseActions } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import type { ServiceOfferingFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'

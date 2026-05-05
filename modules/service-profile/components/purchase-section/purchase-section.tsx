@@ -1,5 +1,5 @@
-import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import type { ResourceOperatorFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
+import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { OperatorCard } from '@/modules/services/components/operator-card'
 
 interface PurchaseSectionProps {

@@ -1,6 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
+import type {
+  ServiceOfferingFieldsFragment,
+  ServiceTierFieldsFragment,
+} from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   computeGrandSetupTotal,
   computeTierHeaderPriceWithBreakdown,
@@ -12,10 +16,6 @@ import {
   useAllOptionGroups,
   useHoveredTier,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import type {
-  ServiceOfferingFieldsFragment,
-  ServiceTierFieldsFragment,
-} from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 const CUSTOM_PRICING_LABEL = 'Custom'

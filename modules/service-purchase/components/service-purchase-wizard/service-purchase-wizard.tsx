@@ -2,14 +2,14 @@
 
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { Suspense, useCallback } from 'react'
-import {
-  SERVICE_PURCHASE_STEP_VALUES,
-  SERVICE_PURCHASE_STEPS_ENTRIES,
-} from '@/modules/service-purchase/lib/constants'
 import type {
   PurchaseResourceTemplateFieldsFragment,
   ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  SERVICE_PURCHASE_STEP_VALUES,
+  SERVICE_PURCHASE_STEPS_ENTRIES,
+} from '@/modules/service-purchase/lib/constants'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { BookCallButton, ServiceInfo } from '@/modules/services/components/service-info'
