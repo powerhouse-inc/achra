@@ -2,8 +2,6 @@ name: Lint and Type Check
 
 on:
   workflow_dispatch:
-  push:
-    branches: ['main', 'staging', 'dev']
   pull_request:
     branches: ['main', 'staging', 'dev']
     types: [opened, synchronize]
