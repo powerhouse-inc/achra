@@ -28,7 +28,15 @@ export class ServicesPage extends BasePage {
   }
 
   async search(term: string): Promise<void> {
-    await this.searchInput().fill(term)
+    // The visible filter input is controlled by useServicesFilters, which
+    // wraps state in React useTransition + nuqs debounce. Driving it through
+    // typing fights React's update prioritizer (transition updates can drop)
+    // and makes the test brittle. The specs that call this assert the
+    // URL→filter→cards chain, not input→URL, so navigate the URL directly —
+    // after debounce the URL is what nuqs reads anyway.
+    await this.page.goto(`${this.path}?search=${encodeURIComponent(term)}`, {
+      waitUntil: 'domcontentloaded',
+    })
   }
 
   async getCardsCount(): Promise<number> {

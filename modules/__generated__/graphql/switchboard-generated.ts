@@ -45,6 +45,19 @@ export type Scalars = {
   Upload: { input: any; output: any; }
 };
 
+export enum AccountTransactionDirection {
+  Inflow = 'INFLOW',
+  Outflow = 'OUTFLOW'
+}
+
+export enum AccountTransactionFlowType {
+  External = 'External',
+  Internal = 'Internal',
+  Return = 'Return',
+  Swap = 'Swap',
+  TopUp = 'TopUp'
+}
+
 export type AccountTransactions = IDocument & {
   __typename?: 'AccountTransactions';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -347,6 +360,22 @@ export type AccountTransactions_AddTransactionInput = {
   uniqueId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type AccountTransactions_AlchemyFetchResult = {
+  __typename?: 'AccountTransactions_AlchemyFetchResult';
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  transactionsAdded: Scalars['Int']['output'];
+};
+
+/** Alchemy Integration Types */
+export type AccountTransactions_AlchemyTransactionsResult = {
+  __typename?: 'AccountTransactions_AlchemyTransactionsResult';
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  transactions: Array<AccountTransactions_TransactionData>;
+  transactionsCount: Scalars['Int']['output'];
+};
+
 export type AccountTransactions_Budget = {
   __typename?: 'AccountTransactions_Budget';
   id: Scalars['OID']['output'];
@@ -437,6 +466,21 @@ export type AccountTransactions_SetAccountInput = {
   name: Scalars['String']['input'];
   owners?: InputMaybe<Array<Scalars['String']['input']>>;
   type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AccountTransactions_TransactionData = {
+  __typename?: 'AccountTransactions_TransactionData';
+  accountingPeriod: Scalars['String']['output'];
+  amount: Scalars['Amount_Currency']['output'];
+  blockNumber: Scalars['Int']['output'];
+  counterParty: Scalars['EthereumAddress']['output'];
+  datetime: Scalars['DateTime']['output'];
+  direction: Scalars['String']['output'];
+  from: Scalars['EthereumAddress']['output'];
+  to: Scalars['EthereumAddress']['output'];
+  token: Scalars['Currency']['output'];
+  txHash: Scalars['String']['output'];
+  uniqueId?: Maybe<Scalars['String']['output']>;
 };
 
 export type AccountTransactions_TransactionDetails = {
@@ -1813,6 +1857,43 @@ export type BillingStatement_ViewFilterInput = {
   scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type BudgetStatement = {
+  __typename?: 'BudgetStatement';
+  expenseReport: BudgetStatementExpenseReport;
+  id: Scalars['OID']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  month: Scalars['String']['output'];
+  netExpenseTxns: Scalars['Amount_Currency']['output'];
+  operationalHubMember?: Maybe<OperationalHubMember>;
+  owner: BudgetStatementOwner;
+  reportedActuals: Scalars['Amount_Currency']['output'];
+  snapshotReport: BudgetStatementSnapshotReport;
+  status: Scalars['String']['output'];
+};
+
+export type BudgetStatementExpenseReport = {
+  __typename?: 'BudgetStatementExpenseReport';
+  groups: Array<ExpenseReportGroup>;
+  periodEnd: Scalars['DateTime']['output'];
+  periodStart: Scalars['DateTime']['output'];
+  wallets: Array<ExpenseReportWallet>;
+};
+
+export type BudgetStatementOwner = {
+  __typename?: 'BudgetStatementOwner';
+  code: Scalars['String']['output'];
+  id: Scalars['PHID']['output'];
+  logo: Scalars['URL']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type BudgetStatementSnapshotReport = {
+  __typename?: 'BudgetStatementSnapshotReport';
+  accounts: Array<SnapshotAccount>;
+  endDate: Scalars['DateTime']['output'];
+  startDate: Scalars['DateTime']['output'];
+};
+
 export type Builder = {
   __typename?: 'Builder';
   code?: Maybe<Scalars['String']['output']>;
@@ -2761,6 +2842,14 @@ export type CreateProductInstancesOutput = {
   __typename?: 'CreateProductInstancesOutput';
   data?: Maybe<Scalars['JSONObject']['output']>;
   errors: Array<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
+};
+
+/** Output type for request finance payment */
+export type CreateRequestFinancePaymentOutput = {
+  __typename?: 'CreateRequestFinancePaymentOutput';
+  data?: Maybe<Scalars['JSONObject']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
 
@@ -5023,6 +5112,36 @@ export type ExpenseReportOperationsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
 
+export type ExpenseReportGroup = {
+  __typename?: 'ExpenseReportGroup';
+  id: Scalars['ID']['output'];
+  label: Scalars['String']['output'];
+  parentId: Scalars['ID']['output'];
+};
+
+export type ExpenseReportGroupTotals = {
+  __typename?: 'ExpenseReportGroupTotals';
+  group: Scalars['ID']['output'];
+  groupLabel: Scalars['String']['output'];
+  totalActuals: Scalars['Amount_Currency']['output'];
+  totalBudget: Scalars['Amount_Currency']['output'];
+  totalForecast: Scalars['Amount_Currency']['output'];
+  totalPayments: Scalars['Amount_Currency']['output'];
+};
+
+export type ExpenseReportLineItem = {
+  __typename?: 'ExpenseReportLineItem';
+  actuals: Scalars['Amount_Currency']['output'];
+  budget: Scalars['Amount_Currency']['output'];
+  comments?: Maybe<Scalars['String']['output']>;
+  forecast: Scalars['Amount_Currency']['output'];
+  groupId: Scalars['ID']['output'];
+  groupLabel: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  label: Scalars['String']['output'];
+  payments: Scalars['Amount_Currency']['output'];
+};
+
 /**
  * Mutation result type for ExpenseReport operations with typed state.
  * Matches ReactorSubgraph PHDocument pattern with revisionsList.
@@ -5403,6 +5522,15 @@ export type ExpenseReportQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ExpenseReport_PagingInput>;
   search?: InputMaybe<ExpenseReport_SearchFilterInput>;
   view?: InputMaybe<ExpenseReport_ViewFilterInput>;
+};
+
+export type ExpenseReportWallet = {
+  __typename?: 'ExpenseReportWallet';
+  address?: Maybe<Scalars['EthereumAddress']['output']>;
+  billingStatementIds: Array<Scalars['PHID']['output']>;
+  lineItems: Array<ExpenseReportLineItem>;
+  name?: Maybe<Scalars['String']['output']>;
+  totals: Array<ExpenseReportGroupTotals>;
 };
 
 export type ExpenseReport_AddBillingStatementInput = {
@@ -7339,9 +7467,12 @@ export type MultiCurrencyConversions = {
   start?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** Subgraph definition */
 export type Mutation = {
   __typename?: 'Mutation';
   AccountTransactions: AccountTransactionsMutations;
+  AccountTransactions_fetchTransactionsFromAlchemy?: Maybe<AccountTransactions_AlchemyFetchResult>;
+  AccountTransactions_getTransactionsFromAlchemy?: Maybe<AccountTransactions_AlchemyTransactionsResult>;
   Accounts: AccountsMutations;
   AppModule: AppModuleMutations;
   BillingStatement: BillingStatementMutations;
@@ -7353,6 +7484,9 @@ export type Mutation = {
   ExpenseReport: ExpenseReportMutations;
   Facet: FacetMutations;
   Invoice: InvoiceMutations;
+  Invoice_createRequestFinancePayment?: Maybe<CreateRequestFinancePaymentOutput>;
+  Invoice_processGnosisPayment?: Maybe<ProcessGnosisPaymentOutput>;
+  Invoice_uploadInvoicePdfChunk?: Maybe<UploadInvoicePdfChunkOutput>;
   NetworkProfile: NetworkProfileMutations;
   OperationalHubProfile: OperationalHubProfileMutations;
   Packages: PackagesMutations;
@@ -7384,6 +7518,46 @@ export type Mutation = {
 };
 
 
+/** Subgraph definition */
+export type MutationAccountTransactions_FetchTransactionsFromAlchemyArgs = {
+  address: Scalars['EthereumAddress']['input'];
+  docId: Scalars['PHID']['input'];
+  fromBlock?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Subgraph definition */
+export type MutationAccountTransactions_GetTransactionsFromAlchemyArgs = {
+  address: Scalars['EthereumAddress']['input'];
+  fromBlock?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Subgraph definition */
+export type MutationInvoice_CreateRequestFinancePaymentArgs = {
+  paymentData: Scalars['JSONObject']['input'];
+};
+
+
+/** Subgraph definition */
+export type MutationInvoice_ProcessGnosisPaymentArgs = {
+  chainName: Scalars['String']['input'];
+  invoiceNo: Scalars['String']['input'];
+  paymentDetails: Scalars['JSONObject']['input'];
+};
+
+
+/** Subgraph definition */
+export type MutationInvoice_UploadInvoicePdfChunkArgs = {
+  chunk: Scalars['String']['input'];
+  chunkIndex: Scalars['Int']['input'];
+  fileName: Scalars['String']['input'];
+  sessionId: Scalars['String']['input'];
+  totalChunks: Scalars['Int']['input'];
+};
+
+
+/** Subgraph definition */
 export type MutationAddRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
   relationshipType: Scalars['String']['input'];
@@ -7392,35 +7566,41 @@ export type MutationAddRelationshipArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationCreateDocumentArgs = {
   document: Scalars['JSONObject']['input'];
   parentIdentifier?: InputMaybe<Scalars['String']['input']>;
 };
 
 
+/** Subgraph definition */
 export type MutationCreateEmptyDocumentArgs = {
   documentType: Scalars['String']['input'];
   parentIdentifier?: InputMaybe<Scalars['String']['input']>;
 };
 
 
+/** Subgraph definition */
 export type MutationCreateProductInstancesArgs = {
   input: CreateProductInstancesInput;
 };
 
 
+/** Subgraph definition */
 export type MutationDeleteDocumentArgs = {
   identifier: Scalars['String']['input'];
   propagate?: InputMaybe<PropagationMode>;
 };
 
 
+/** Subgraph definition */
 export type MutationDeleteDocumentsArgs = {
   identifiers: Array<Scalars['String']['input']>;
   propagate?: InputMaybe<PropagationMode>;
 };
 
 
+/** Subgraph definition */
 export type MutationMoveRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
   relationshipType: Scalars['String']['input'];
@@ -7430,6 +7610,7 @@ export type MutationMoveRelationshipArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationMutateDocumentArgs = {
   actions: Array<Scalars['JSONObject']['input']>;
   documentIdentifier: Scalars['String']['input'];
@@ -7437,6 +7618,7 @@ export type MutationMutateDocumentArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationMutateDocumentAsyncArgs = {
   actions: Array<Scalars['JSONObject']['input']>;
   documentIdentifier: Scalars['String']['input'];
@@ -7444,11 +7626,13 @@ export type MutationMutateDocumentAsyncArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationPushSyncEnvelopesArgs = {
   envelopes: Array<SyncEnvelopeInput>;
 };
 
 
+/** Subgraph definition */
 export type MutationRemoveRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
   relationshipType: Scalars['String']['input'];
@@ -7457,6 +7641,7 @@ export type MutationRemoveRelationshipArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationRenameDocumentArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
   documentIdentifier: Scalars['String']['input'];
@@ -7464,6 +7649,7 @@ export type MutationRenameDocumentArgs = {
 };
 
 
+/** Subgraph definition */
 export type MutationTouchChannelArgs = {
   input: TouchChannelInput;
 };
@@ -7993,6 +8179,12 @@ export type OperationWithContext = {
 export type OperationWithContextInput = {
   context: OperationContextInput;
   operation: OperationInput;
+};
+
+export type OperationalHubMember = {
+  __typename?: 'OperationalHubMember';
+  name?: Maybe<Scalars['String']['output']>;
+  phid?: Maybe<Scalars['PHID']['output']>;
 };
 
 export type OperationalHubProfile = IDocument & {
@@ -9226,6 +9418,14 @@ export type PollSyncEnvelopesResult = {
   hasMore: Scalars['Boolean']['output'];
 };
 
+/** Output type for process gnosis payment */
+export type ProcessGnosisPaymentOutput = {
+  __typename?: 'ProcessGnosisPaymentOutput';
+  data?: Maybe<Scalars['JSONObject']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
+};
+
 export type ProcessorModule = IDocument & {
   __typename?: 'ProcessorModule';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -9661,6 +9861,7 @@ export type Query = {
   Workstream: WorkstreamQueries;
   allNetworks: Array<AllNetworks>;
   analytics?: Maybe<AnalyticsQuery>;
+  budgetStatements: Array<BudgetStatement>;
   builders: Array<BuilderProfileState>;
   document?: Maybe<DocumentWithChildren>;
   documentIncomingRelationships: PhDocumentResultPage;
@@ -9684,6 +9885,12 @@ export type Query = {
 /** Subgraph definition */
 export type QueryAllNetworksArgs = {
   filter?: InputMaybe<NetworkFilter>;
+};
+
+
+/** Subgraph definition */
+export type QueryBudgetStatementsArgs = {
+  filter?: InputMaybe<BudgetStatementsFilter>;
 };
 
 
@@ -15202,6 +15409,42 @@ export type SignerUser = {
   networkId: Scalars['String']['output'];
 };
 
+export enum SnapAccountType {
+  Destination = 'Destination',
+  External = 'External',
+  Internal = 'Internal',
+  Source = 'Source'
+}
+
+export type SnapshotAccount = {
+  __typename?: 'SnapshotAccount';
+  address: Scalars['String']['output'];
+  balances: Array<SnapshotAccountBalance>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  transactions: Array<SnapshotAccountTransaction>;
+  type: SnapAccountType;
+};
+
+export type SnapshotAccountBalance = {
+  __typename?: 'SnapshotAccountBalance';
+  endingBalance: Scalars['Amount_Currency']['output'];
+  startingBalance: Scalars['Amount_Currency']['output'];
+  token: Token;
+};
+
+export type SnapshotAccountTransaction = {
+  __typename?: 'SnapshotAccountTransaction';
+  amount: TxAmount;
+  counterParty: Scalars['EthereumAddress']['output'];
+  counterPartyName: Scalars['String']['output'];
+  datetime: Scalars['DateTime']['output'];
+  direction: AccountTransactionDirection;
+  flowType: AccountTransactionFlowType;
+  id: Scalars['ID']['output'];
+  txHash: Scalars['String']['output'];
+};
+
 export type SnapshotReport = IDocument & {
   __typename?: 'SnapshotReport';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -17639,6 +17882,12 @@ export type SystemInfo = {
   version: Scalars['String']['output'];
 };
 
+export type Token = {
+  __typename?: 'Token';
+  contractAddress: Scalars['EthereumAddress']['output'];
+  symbol: Scalars['String']['output'];
+};
+
 export type TouchChannelInput = {
   collectionId: Scalars['String']['input'];
   filter: RemoteFilterInput;
@@ -17650,6 +17899,20 @@ export type TouchChannelInput = {
 export type TouchChannelResult = {
   __typename?: 'TouchChannelResult';
   ackOrdinal: Scalars['Int']['output'];
+  success: Scalars['Boolean']['output'];
+};
+
+export type TxAmount = {
+  __typename?: 'TxAmount';
+  unit: Scalars['String']['output'];
+  value: Scalars['Amount_Currency']['output'];
+};
+
+/** Output type for PDF chunk upload */
+export type UploadInvoicePdfChunkOutput = {
+  __typename?: 'UploadInvoicePdfChunkOutput';
+  data?: Maybe<Scalars['JSONObject']['output']>;
+  error?: Maybe<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
 
@@ -18622,6 +18885,11 @@ export type WorkstreamsFilter = {
   workstreamTitle?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type BudgetStatementsFilter = {
+  networkSlug?: InputMaybe<Scalars['String']['input']>;
+  teamId?: InputMaybe<Scalars['PHID']['input']>;
+};
+
 export type BuildersFilter = {
   code?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['PHID']['input']>;
@@ -18661,6 +18929,62 @@ export type BuildersListQueryVariables = Exact<{
 
 
 export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, isOperator: boolean, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null, phid?: any | null } }> };
+
+export type BudgetStatementMonthFieldsFragment = { __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string };
+
+export type BudgetStatementOwnerFieldsFragment = { __typename?: 'BudgetStatementOwner', id: any, name: string, code: string, logo: any };
+
+export type ExpenseReportGroupTotalsSummaryFieldsFragment = { __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any };
+
+export type ExpenseReportGroupTotalsFieldsFragment = { __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any };
+
+export type ExpenseReportLineItemFieldsFragment = { __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any };
+
+export type ExpenseReportGroupFieldsFragment = { __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string };
+
+export type SnapshotAccountTransactionFieldsFragment = { __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } };
+
+export type SnapshotAccountBalanceFieldsFragment = { __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } };
+
+export type SnapshotAccountFieldsFragment = { __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> };
+
+export type AccountSnapshotsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, netExpenseTxns: any, reportedActuals: any, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
+
+export type BudgetStatementSnapshotReportFieldsFragment = { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> };
+
+export type BudgetStatementsDetailsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsDetailsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }>, groups: Array<{ __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string }> } }> };
+
+export type BudgetStatementExpenseReportDetailsFieldsFragment = { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }>, groups: Array<{ __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string }> };
+
+export type ExpenseReportWalletDetailsFieldsFragment = { __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> };
+
+export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsAvailableMonthsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string }> };
+
+export type BudgetStatementsQueryVariables = Exact<{
+  filter?: InputMaybe<BudgetStatementsFilter>;
+}>;
+
+
+export type BudgetStatementsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string, owner: { __typename?: 'BudgetStatementOwner', id: any, name: string, code: string, logo: any }, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> } }> };
+
+export type BudgetStatementExpenseReportSummaryFieldsFragment = { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> };
+
+export type ExpenseReportWalletSummaryFieldsFragment = { __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> };
 
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
@@ -18820,6 +19144,151 @@ export type WorkstreamsQueryVariables = Exact<{
 export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title?: string | null, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }>, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null }> };
 
 
+export const BudgetStatementMonthFieldsFragmentDoc = `
+    fragment BudgetStatementMonthFields on BudgetStatement {
+  id
+  month
+  lastModifiedAtUtcIso
+  status
+}
+    `;
+export const BudgetStatementOwnerFieldsFragmentDoc = `
+    fragment BudgetStatementOwnerFields on BudgetStatementOwner {
+  id
+  name
+  code
+  logo
+}
+    `;
+export const SnapshotAccountTransactionFieldsFragmentDoc = `
+    fragment SnapshotAccountTransactionFields on SnapshotAccountTransaction {
+  id
+  amount {
+    unit
+    value
+  }
+  counterParty
+  counterPartyName
+  datetime
+  direction
+  flowType
+  txHash
+}
+    `;
+export const SnapshotAccountBalanceFieldsFragmentDoc = `
+    fragment SnapshotAccountBalanceFields on SnapshotAccountBalance {
+  endingBalance
+  startingBalance
+  token {
+    symbol
+    contractAddress
+  }
+}
+    `;
+export const SnapshotAccountFieldsFragmentDoc = `
+    fragment SnapshotAccountFields on SnapshotAccount {
+  id
+  name
+  type
+  address
+  transactions {
+    ...SnapshotAccountTransactionFields
+  }
+  balances {
+    ...SnapshotAccountBalanceFields
+  }
+}
+    `;
+export const BudgetStatementSnapshotReportFieldsFragmentDoc = `
+    fragment BudgetStatementSnapshotReportFields on BudgetStatementSnapshotReport {
+  startDate
+  endDate
+  accounts {
+    ...SnapshotAccountFields
+  }
+}
+    `;
+export const ExpenseReportGroupTotalsFieldsFragmentDoc = `
+    fragment ExpenseReportGroupTotalsFields on ExpenseReportGroupTotals {
+  group
+  groupLabel
+  totalBudget
+  totalForecast
+  totalActuals
+  totalPayments
+}
+    `;
+export const ExpenseReportLineItemFieldsFragmentDoc = `
+    fragment ExpenseReportLineItemFields on ExpenseReportLineItem {
+  id
+  label
+  groupId
+  groupLabel
+  actuals
+  budget
+  comments
+  forecast
+  payments
+}
+    `;
+export const ExpenseReportWalletDetailsFieldsFragmentDoc = `
+    fragment ExpenseReportWalletDetailsFields on ExpenseReportWallet {
+  name
+  address
+  billingStatementIds
+  totals {
+    ...ExpenseReportGroupTotalsFields
+  }
+  lineItems {
+    ...ExpenseReportLineItemFields
+  }
+}
+    `;
+export const ExpenseReportGroupFieldsFragmentDoc = `
+    fragment ExpenseReportGroupFields on ExpenseReportGroup {
+  id
+  label
+  parentId
+}
+    `;
+export const BudgetStatementExpenseReportDetailsFieldsFragmentDoc = `
+    fragment BudgetStatementExpenseReportDetailsFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletDetailsFields
+  }
+  groups {
+    ...ExpenseReportGroupFields
+  }
+}
+    `;
+export const ExpenseReportGroupTotalsSummaryFieldsFragmentDoc = `
+    fragment ExpenseReportGroupTotalsSummaryFields on ExpenseReportGroupTotals {
+  groupLabel
+  totalActuals
+  totalForecast
+  totalPayments
+}
+    `;
+export const ExpenseReportWalletSummaryFieldsFragmentDoc = `
+    fragment ExpenseReportWalletSummaryFields on ExpenseReportWallet {
+  name
+  address
+  totals {
+    ...ExpenseReportGroupTotalsSummaryFields
+  }
+}
+    `;
+export const BudgetStatementExpenseReportSummaryFieldsFragmentDoc = `
+    fragment BudgetStatementExpenseReportSummaryFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletSummaryFields
+  }
+}
+    `;
 export const ContentSectionFieldsFragmentDoc = `
     fragment ContentSectionFields on RSContentSection {
   id
@@ -19226,6 +19695,221 @@ useSuspenseBuildersListQuery.getKey = (variables?: BuildersListQueryVariables) =
 
 
 useBuildersListQuery.fetcher = (variables?: BuildersListQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BuildersListQuery, BuildersListQueryVariables>(BuildersListDocument, variables, options);
+
+export const AccountSnapshotsDocument = `
+    query AccountSnapshots($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    netExpenseTxns
+    reportedActuals
+    snapshotReport {
+      ...BudgetStatementSnapshotReportFields
+    }
+  }
+}
+    ${BudgetStatementSnapshotReportFieldsFragmentDoc}
+${SnapshotAccountFieldsFragmentDoc}
+${SnapshotAccountTransactionFieldsFragmentDoc}
+${SnapshotAccountBalanceFieldsFragmentDoc}`;
+
+export const useAccountSnapshotsQuery = <
+      TData = AccountSnapshotsQuery,
+      TError = unknown
+    >(
+      variables?: AccountSnapshotsQueryVariables,
+      options?: Omit<UseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<AccountSnapshotsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables],
+    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+    ...options
+  }
+    )};
+
+useAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshots'] : ['AccountSnapshots', variables];
+
+export const useSuspenseAccountSnapshotsQuery = <
+      TData = AccountSnapshotsQuery,
+      TError = unknown
+    >(
+      variables?: AccountSnapshotsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<AccountSnapshotsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<AccountSnapshotsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables],
+    queryFn: switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseAccountSnapshotsQuery.getKey = (variables?: AccountSnapshotsQueryVariables) => variables === undefined ? ['AccountSnapshotsSuspense'] : ['AccountSnapshotsSuspense', variables];
+
+
+useAccountSnapshotsQuery.fetcher = (variables?: AccountSnapshotsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AccountSnapshotsQuery, AccountSnapshotsQueryVariables>(AccountSnapshotsDocument, variables, options);
+
+export const BudgetStatementsDetailsDocument = `
+    query BudgetStatementsDetails($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    id
+    month
+    expenseReport {
+      ...BudgetStatementExpenseReportDetailsFields
+    }
+  }
+}
+    ${BudgetStatementExpenseReportDetailsFieldsFragmentDoc}
+${ExpenseReportWalletDetailsFieldsFragmentDoc}
+${ExpenseReportGroupTotalsFieldsFragmentDoc}
+${ExpenseReportLineItemFieldsFragmentDoc}
+${ExpenseReportGroupFieldsFragmentDoc}`;
+
+export const useBudgetStatementsDetailsQuery = <
+      TData = BudgetStatementsDetailsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsDetailsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsDetailsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables],
+    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetails'] : ['BudgetStatementsDetails', variables];
+
+export const useSuspenseBudgetStatementsDetailsQuery = <
+      TData = BudgetStatementsDetailsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsDetailsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsDetailsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsDetailsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsDetailsQuery.getKey = (variables?: BudgetStatementsDetailsQueryVariables) => variables === undefined ? ['BudgetStatementsDetailsSuspense'] : ['BudgetStatementsDetailsSuspense', variables];
+
+
+useBudgetStatementsDetailsQuery.fetcher = (variables?: BudgetStatementsDetailsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsDetailsQuery, BudgetStatementsDetailsQueryVariables>(BudgetStatementsDetailsDocument, variables, options);
+
+export const BudgetStatementsAvailableMonthsDocument = `
+    query BudgetStatementsAvailableMonths($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    ...BudgetStatementMonthFields
+  }
+}
+    ${BudgetStatementMonthFieldsFragmentDoc}`;
+
+export const useBudgetStatementsAvailableMonthsQuery = <
+      TData = BudgetStatementsAvailableMonthsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsAvailableMonthsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables],
+    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonths'] : ['BudgetStatementsAvailableMonths', variables];
+
+export const useSuspenseBudgetStatementsAvailableMonthsQuery = <
+      TData = BudgetStatementsAvailableMonthsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsAvailableMonthsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsAvailableMonthsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsAvailableMonthsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsAvailableMonthsQuery.getKey = (variables?: BudgetStatementsAvailableMonthsQueryVariables) => variables === undefined ? ['BudgetStatementsAvailableMonthsSuspense'] : ['BudgetStatementsAvailableMonthsSuspense', variables];
+
+
+useBudgetStatementsAvailableMonthsQuery.fetcher = (variables?: BudgetStatementsAvailableMonthsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsAvailableMonthsQuery, BudgetStatementsAvailableMonthsQueryVariables>(BudgetStatementsAvailableMonthsDocument, variables, options);
+
+export const BudgetStatementsDocument = `
+    query BudgetStatements($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    ...BudgetStatementMonthFields
+    owner {
+      ...BudgetStatementOwnerFields
+    }
+    expenseReport {
+      ...BudgetStatementExpenseReportSummaryFields
+    }
+  }
+}
+    ${BudgetStatementMonthFieldsFragmentDoc}
+${BudgetStatementOwnerFieldsFragmentDoc}
+${BudgetStatementExpenseReportSummaryFieldsFragmentDoc}
+${ExpenseReportWalletSummaryFieldsFragmentDoc}
+${ExpenseReportGroupTotalsSummaryFieldsFragmentDoc}`;
+
+export const useBudgetStatementsQuery = <
+      TData = BudgetStatementsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsQueryVariables,
+      options?: Omit<UseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<BudgetStatementsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables],
+    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+    ...options
+  }
+    )};
+
+useBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatements'] : ['BudgetStatements', variables];
+
+export const useSuspenseBudgetStatementsQuery = <
+      TData = BudgetStatementsQuery,
+      TError = unknown
+    >(
+      variables?: BudgetStatementsQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<BudgetStatementsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<BudgetStatementsQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables],
+    queryFn: switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVariables) => variables === undefined ? ['BudgetStatementsSuspense'] : ['BudgetStatementsSuspense', variables];
+
+
+useBudgetStatementsQuery.fetcher = (variables?: BudgetStatementsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables, options);
 
 export const AllNetworksDocument = `
     query AllNetworks($filter: networkFilter) {

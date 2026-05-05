@@ -10,16 +10,7 @@ const config: CodegenConfig = {
   // Where your GQL schema is located (could also be externally hosted)
   schema: process.env.NEXT_PUBLIC_SWITCHBOARD_URL,
   overwrite: true,
-  documents: [
-    './modules/**/*.graphql',
-    './modules/**/*.{tsx,ts}',
-    './app/**/*.{tsx,ts}',
-    // TODO: re-enable once the budgetStatements API is restored on Switchboard
-    '!./modules/expense-reports/graphql/account-snapshots.graphql',
-    '!./modules/expense-reports/graphql/expense-reports-actuals.graphql',
-    '!./modules/expense-reports/graphql/expense-reports-available-months.graphql',
-    '!./modules/finances/graphql/budget-statements.graphql',
-  ],
+  documents: ['./modules/**/*.graphql', './modules/**/*.{tsx,ts}', './app/**/*.{tsx,ts}'],
   generates: {
     // Where the generated types and hooks file will be placed
     './modules/__generated__/graphql/switchboard-generated.ts': {

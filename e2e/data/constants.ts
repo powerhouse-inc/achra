@@ -4,7 +4,7 @@
  * referenced entity disappears from staging — update here when that happens.
  */
 export const NETWORK_SLUG = 'powerhouse'
-export const SERVICE_SLUG = '56dce7ce-e65d-4fd6-b3d8-7a8506528aa9'
+export const SERVICE_SLUG = 'c5e444aa-0f16-4e7a-87f9-e860b1643eed'
 export const OPERATOR_SLUG = 'powerhouse-rgh'
 export const BUILDER_SLUG = 'business-analysis-and-integrations'
 
