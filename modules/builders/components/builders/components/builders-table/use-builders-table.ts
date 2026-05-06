@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from '@/modules/builders/lib/constants'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { useBuildersFiltersContext } from '../../../builders-filters/builders-filters-context'
-import { BUILDERS_TABLE_COLUMNS, type BuildersTableColumn } from './constants'
 import type SimpleBar from 'simplebar-react'
 
 interface UseBuildersTableProps {

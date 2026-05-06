@@ -1,13 +1,13 @@
-import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ResourceOperatorFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { OperatorCard } from '@/modules/services/components/operator-card'
 
 interface PurchaseSectionProps {
-  operator: BuilderProfileState
+  operator: ResourceOperatorFieldsFragment
   serviceSlug: string
 }
 
-export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
+function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps) {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-lg leading-[120%] font-bold">Request a Quote</h2>
@@ -22,3 +22,5 @@ export function PurchaseSection({ operator, serviceSlug }: PurchaseSectionProps)
     </div>
   )
 }
+
+export { PurchaseSection }

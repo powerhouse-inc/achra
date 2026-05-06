@@ -6,18 +6,18 @@ import { useMemo } from 'react'
 import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
+import { formatDateStringToQuarter } from '@/modules/roadmap/lib/milestone-card-utils'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
 import { cn } from '@/shared/lib/utils'
-import { formatDateStringToQuarter } from './utils'
 
 interface MilestoneCardProps {
   milestone: ScopeOfWork_Milestone
   className?: string
 }
 
-export default function MilestoneCard({ milestone, className }: MilestoneCardProps) {
+function MilestoneCard({ milestone, className }: MilestoneCardProps) {
   const progress = useMemo(() => {
     return getProgressPercentage(milestone.scope?.progress)
   }, [milestone.scope?.progress])
@@ -56,3 +56,5 @@ export default function MilestoneCard({ milestone, className }: MilestoneCardPro
     </Card>
   )
 }
+
+export { MilestoneCard }

@@ -20,7 +20,7 @@ export interface TableCellProps extends React.ComponentProps<'div'> {
   variant?: VariantProps<typeof textCellVariants>['variant']
 }
 
-export function TextCell({
+function TextCell({
   className,
   children,
   variant,
@@ -33,3 +33,5 @@ export function TextCell({
     </div>
   )
 }
+
+export { TextCell }

@@ -1,5 +1,5 @@
+import { percentageRespectTo } from '@/modules/finances/lib'
 import type { QuarterCardProps } from '@/modules/finances/types'
-import { percentageRespectTo } from '@/modules/finances/utils'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { Card } from '@/shared/components/ui/card'
 import { threeDigitsPrecisionHumanization } from '@/shared/lib/humanization'
@@ -9,7 +9,7 @@ import { MetricDisplay } from './horizontal-budgetbar'
 import { HorizontalBudgetBar } from './horizontal-budgetbar/horizontal-budget-bar'
 import { LegendItem } from './horizontal-budgetbar/legend-item'
 
-export function BudgetUtilizationCard({ paymentsOnChain, budgetCap }: QuarterCardProps) {
+function BudgetUtilizationCard({ paymentsOnChain, budgetCap }: QuarterCardProps) {
   const humanizedActuals = threeDigitsPrecisionHumanization(paymentsOnChain)
   const humanizedBudgetCap = threeDigitsPrecisionHumanization(budgetCap)
   const percent = percentageRespectTo(paymentsOnChain, budgetCap)
@@ -78,3 +78,5 @@ export function BudgetUtilizationCard({ paymentsOnChain, budgetCap }: QuarterCar
     </Card>
   )
 }
+
+export { BudgetUtilizationCard }

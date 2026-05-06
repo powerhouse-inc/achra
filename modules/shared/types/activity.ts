@@ -1,4 +1,4 @@
-import type { BudgetStatus, ResourceType } from './types'
+import type { BudgetStatus, ResourceType } from './common-enums'
 
 export interface ChangeTrackingParams {
   coreUnit?: {

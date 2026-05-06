@@ -2,9 +2,13 @@
 
 import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
-import { type ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
-import { SERVICE_INFO_DEFAULT_COVER_PATH } from '@/modules/services/lib/constants'
+import {
+  SERVICE_INFO_DEFAULT_COVER_PATH,
+  SERVICE_SECTIONS_MAX_HEIGHT_VAR,
+  SERVICE_SECTIONS_MIN_AVAILABLE_HEIGHT,
+} from '@/modules/services/lib/constants'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 
@@ -17,6 +21,7 @@ interface ServiceInfoProps {
   children?: ReactNode
   actions?: ReactNode
   operator?: ReactNode
+  details?: ReactNode
 }
 
 function ServiceInfo({
@@ -27,8 +32,11 @@ function ServiceInfo({
   children,
   actions,
   operator,
+  details,
 }: Readonly<ServiceInfoProps>) {
   const [hasTransition, setHasTransition] = useState(false)
+  const leftColumnRef = useRef<HTMLDivElement>(null)
+  const detailsWrapperRef = useRef<HTMLDivElement>(null)
   const coverImage = thumbnailUrl ?? SERVICE_INFO_DEFAULT_COVER_PATH
 
   useEffect(() => {
@@ -37,6 +45,49 @@ function ServiceInfo({
     })
     return () => {
       cancelAnimationFrame(id)
+    }
+  }, [])
+
+  useLayoutEffect(() => {
+    const leftEl = leftColumnRef.current
+    const detailsEl = detailsWrapperRef.current
+    if (!leftEl || !detailsEl) return
+
+    let rafId: number | null = null
+
+    const measure = () => {
+      rafId = null
+      const el = detailsWrapperRef.current
+      const left = leftColumnRef.current
+      if (!el || !left) return
+      // offsetTop/offsetHeight are scroll-invariant layout values; getBoundingClientRect
+      // would drift once the left column's sticky positioning engages.
+      const available = left.offsetTop + left.offsetHeight - el.offsetTop
+      if (available < SERVICE_SECTIONS_MIN_AVAILABLE_HEIGHT) {
+        el.style.removeProperty(SERVICE_SECTIONS_MAX_HEIGHT_VAR)
+      } else {
+        el.style.setProperty(SERVICE_SECTIONS_MAX_HEIGHT_VAR, `${available}px`)
+      }
+    }
+
+    const schedule = () => {
+      if (rafId !== null) return
+      rafId = requestAnimationFrame(measure)
+    }
+
+    const observer = new ResizeObserver(schedule)
+    observer.observe(leftEl)
+    observer.observe(detailsEl)
+    // Observe the right-column parent too: content above details (title, operator,
+    // summary) rewrapping changes detailsEl.offsetTop without changing its own size,
+    // so RO wouldn't fire on detailsEl alone.
+    const rightColumn = detailsEl.parentElement
+    if (rightColumn) observer.observe(rightColumn)
+    measure()
+
+    return () => {
+      observer.disconnect()
+      if (rafId !== null) cancelAnimationFrame(rafId)
     }
   }, [])
 
@@ -56,10 +107,16 @@ function ServiceInfo({
         >
           {title}
         </span>
-        <div className={cn('flex flex-col gap-2 sm:gap-4', isCompacted && 'gap-0')}>
+        <div
+          ref={leftColumnRef}
+          className={cn(
+            'flex flex-col gap-2 sm:gap-4',
+            isCompacted ? 'gap-0' : 'sm:sticky sm:top-30 sm:self-start',
+          )}
+        >
           <div
             className={cn(
-              'relative h-32 w-full sm:size-32 sm:min-w-32 md:size-64 md:min-w-64',
+              'relative h-32 w-full sm:min-w-32 md:h-64 md:min-w-64',
               hasTransition && 'transition-[width,height,border-radius] duration-300 ease-out',
               isCompacted &&
                 'border-background shadow-primary size-14! min-w-14! overflow-hidden rounded-full border-2',
@@ -107,10 +164,10 @@ function ServiceInfo({
           >
             {summary}
           </div>
+          <div ref={detailsWrapperRef}>{details}</div>
         </div>
-        {actions && <div className="flex items-end justify-end sm:hidden lg:flex">{actions}</div>}
       </CardContent>
-      {actions && <div className="hidden items-end justify-end sm:flex lg:hidden">{actions}</div>}
+      {actions && <div className="flex items-end justify-end">{actions}</div>}
     </Card>
   )
 }

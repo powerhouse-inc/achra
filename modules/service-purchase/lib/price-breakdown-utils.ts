@@ -7,8 +7,8 @@ import {
 } from '@powerhousedao/service-offering/document-models/service-offering'
 import type {
   RsBillingCycle,
-  RsServiceOffering,
-  RsServiceSubscriptionTier,
+  ServiceOfferingFieldsFragment,
+  ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { GroupPriceFromBreakdown, PurchaseTotals } from '../types'
 
@@ -44,10 +44,10 @@ export function computeGrandSetupTotal(breakdown: PriceBreakdown): number {
 
 /**
  * Wraps the offering in the shape expected by getUserSelectionPriceBreakdown.
- * RsServiceOffering matches ServiceOfferingGlobalState; we cast via unknown to bridge type systems.
+ * ServiceOfferingFieldsFragment matches ServiceOfferingGlobalState; we cast via unknown to bridge type systems.
  */
 export function getPriceBreakdown(
-  offering: RsServiceOffering,
+  offering: ServiceOfferingFieldsFragment,
   tierId: string,
   billingCycle: RsBillingCycle,
   activeGroupIds: Set<string>,
@@ -65,7 +65,7 @@ export function getPriceBreakdown(
 
 /** Returns the monthly-equivalent price for the tier header. */
 export function computeTierHeaderPriceWithBreakdown(
-  offering: RsServiceOffering,
+  offering: ServiceOfferingFieldsFragment,
   tierId: string,
   billingCycle: RsBillingCycle,
   activeGroupIds: Set<string>,
@@ -84,7 +84,7 @@ export function computeTierHeaderPriceWithBreakdown(
  * discounted   = totals.grandRecurringTotal
  */
 export function computePeriodDiscountLabel(
-  offering: RsServiceOffering,
+  offering: ServiceOfferingFieldsFragment,
   tierId: string,
   cycle: RsBillingCycle,
   activeGroupIds: Set<string>,
@@ -122,9 +122,9 @@ export function computeTotalsFromBreakdown(breakdown: PriceBreakdown): PurchaseT
  * so the badge stays visible and doesn't jump from hidden → visible on tier change.
  */
 export function resolveDiscountReferenceTierId(
-  offering: RsServiceOffering,
-  selectedTier: RsServiceSubscriptionTier,
-  allTiers: RsServiceSubscriptionTier[],
+  offering: ServiceOfferingFieldsFragment,
+  selectedTier: ServiceTierFieldsFragment,
+  allTiers: ServiceTierFieldsFragment[],
   billingCycle: RsBillingCycle,
   activeGroupIds: Set<string>,
 ): string {

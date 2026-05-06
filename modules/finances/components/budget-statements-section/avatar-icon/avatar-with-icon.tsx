@@ -10,7 +10,7 @@ export interface CircleAvatarWithIconProps extends React.ComponentProps<typeof A
   isCoreUnit?: boolean
 }
 
-export function AvatarWithIcon({
+function AvatarWithIcon({
   image,
   fallbackText,
   className,
@@ -43,3 +43,5 @@ export function AvatarWithIcon({
     </div>
   )
 }
+
+export { AvatarWithIcon }

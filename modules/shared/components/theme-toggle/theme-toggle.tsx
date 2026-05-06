@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
 import { Button } from '@/shared/components/ui/button'
 
-export function ThemeToggle() {
+function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
   const handleThemeToggle = useCallback(() => {
@@ -21,3 +21,5 @@ export function ThemeToggle() {
     </div>
   )
 }
+
+export { ThemeToggle }

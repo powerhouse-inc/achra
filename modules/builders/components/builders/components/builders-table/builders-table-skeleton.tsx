@@ -1,6 +1,6 @@
+import { buildWidths, MAX_ROWS } from '@/modules/builders/lib/skeletons-helpers'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { cn } from '@/modules/shared/lib/utils'
-import { buildWidths, MAX_ROWS } from '../../utils/skeletons-helpers'
 import { BuildersProfileSkeleton } from '../builders-profile-skeleton/builders-profile-skeleton'
 import { BuildersSkillsSkeleton } from '../builders-skills-skeleton/builders-skills-skeleton'
 
@@ -72,7 +72,7 @@ interface BuildersTableSkeletonProps {
   className?: string
 }
 
-export function BuildersTableSkeleton({ className }: BuildersTableSkeletonProps) {
+function BuildersTableSkeleton({ className }: BuildersTableSkeletonProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
       <BuildersTableHeaderSkeleton />
@@ -80,3 +80,5 @@ export function BuildersTableSkeleton({ className }: BuildersTableSkeletonProps)
     </div>
   )
 }
+
+export { BuildersTableSkeleton }

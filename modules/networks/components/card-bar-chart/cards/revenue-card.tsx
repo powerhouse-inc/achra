@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from './legend-item'
 
-export function RevenueCard() {
+function RevenueCard() {
   return (
     <div className="flex w-full flex-col gap-2 lg:h-32 xl:h-36">
       <div
@@ -38,3 +38,5 @@ export function RevenueCard() {
     </div>
   )
 }
+
+export { RevenueCard }

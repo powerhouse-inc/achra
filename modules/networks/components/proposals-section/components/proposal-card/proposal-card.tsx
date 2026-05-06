@@ -14,7 +14,7 @@ export interface ProposalCardProps extends Proposal {
   className?: string
 }
 
-export function ProposalCard({
+function ProposalCard({
   title,
   budget,
   submissionDeadline,
@@ -46,3 +46,5 @@ export function ProposalCard({
     </StripedCard>
   )
 }
+
+export { ProposalCard }

@@ -1,5 +1,5 @@
 import type { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import DeliverableSetStatusChip from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
+import { DeliverableSetStatusChip } from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
 import { Progress } from '@/shared/components/ui/progress'
 import { cn } from '@/shared/lib/utils'
 
@@ -8,7 +8,7 @@ interface MilestoneStatusSectionProps {
   progress: number
 }
 
-export default function MilestoneStatusSection({ status, progress }: MilestoneStatusSectionProps) {
+function MilestoneStatusSection({ status, progress }: MilestoneStatusSectionProps) {
   return (
     <div className="bg-popover flex flex-col gap-2 rounded-xl border p-2">
       <div className="flex items-center justify-between">
@@ -37,3 +37,5 @@ export default function MilestoneStatusSection({ status, progress }: MilestoneSt
     </div>
   )
 }
+
+export { MilestoneStatusSection }

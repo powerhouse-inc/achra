@@ -1,8 +1,8 @@
 import { ArrowRight, Info } from 'lucide-react'
 import Link from 'next/link'
 import {
-  type BuilderProfileState,
   BuilderStatus,
+  type ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -30,7 +30,7 @@ interface ConfigureWithHref {
 }
 
 interface BaseOperatorCardProps {
-  operator: BuilderProfileState
+  operator: ResourceOperatorFieldsFragment
   showMoreInfo?: boolean
   moreInfoHref?: Route
 }
@@ -45,7 +45,7 @@ const OPERATOR_STATUS_LABELS_MAP: Record<BuilderStatus, string> = {
   [BuilderStatus.Archived]: 'Archived',
 }
 
-export default function OperatorCard({
+function OperatorCard({
   operator,
   onSelectOperator,
   configureServicesHref,
@@ -114,3 +114,5 @@ export default function OperatorCard({
     </Card>
   )
 }
+
+export { OperatorCard }

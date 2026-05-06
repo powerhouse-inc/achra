@@ -204,7 +204,7 @@ let storyId = ''
  * };
  * ```
  */
-export function withReactServerComponentDecorator(Story: DecoratorStory) {
+function withReactServerComponentDecorator(Story: DecoratorStory) {
   const storyObj = Story()
   const decoratorStoryId = storyObj.props.id
 
@@ -231,3 +231,5 @@ export function withReactServerComponentDecorator(Story: DecoratorStory) {
     },
   }
 }
+
+export { withReactServerComponentDecorator }

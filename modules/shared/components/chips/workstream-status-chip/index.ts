@@ -1,1 +1,1 @@
-export { default } from './workstream-status-chip'
+export { WorkstreamStatusChip } from './workstream-status-chip'

@@ -26,7 +26,7 @@ interface SearchInputProps extends Omit<React.ComponentProps<typeof Input>, 'val
   onChange: (value: string) => void
 }
 
-export default function SearchInput({
+function SearchInput({
   value,
   isLoading = false,
   onChange,
@@ -102,3 +102,5 @@ export default function SearchInput({
     </div>
   )
 }
+
+export { SearchInput }

@@ -1,8 +1,8 @@
 import {
   ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
   LEAVE_PAGE_GUARD_ENABLED,
-} from '@/modules/service-purchase/config/constants'
-import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/config/constants'
+} from '@/modules/service-purchase/lib/constants'
+import { SHOW_WHITELIST_OVERLAY } from '@/modules/whitelist/lib/constants'
 import type { FeatureFlags } from './types'
 
 const ffStaging: FeatureFlags = {
@@ -33,10 +33,10 @@ const ffStaging: FeatureFlags = {
     EXPENSES_METRIC_CHART_SECTION_ENABLED: false,
     RESERVES_WATERFALL_CHART_SECTION_ENABLED: false,
   },
-  NAV_BAR_LOGIN_BUTTON_ENABLED: false,
+  AUTH_ENABLED: false,
   ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE,
   LEAVE_PAGE_GUARD_ENABLED,
-  SERVICES_LISTING_FILTERS_ENABLED: false,
+  SERVICES_LISTING_FILTERS_ENABLED: true,
 }
 
 export { ffStaging }

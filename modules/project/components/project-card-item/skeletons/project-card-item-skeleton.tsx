@@ -3,7 +3,7 @@ import { ProjectCardDeliverablesSkeleton } from './project-card-deliverables-ske
 import { ProjectCardFooterSkeleton } from './project-card-footer-skeleton'
 import { ProjectCardHeaderSkeleton } from './project-card-header-skeleton'
 
-export function ProjectCardItemSkeleton() {
+function ProjectCardItemSkeleton() {
   return (
     <Card className="bg-background gap-0 border-none p-0 sm:mt-2.25 md:-mt-2.75">
       <ProjectCardHeaderSkeleton />
@@ -12,3 +12,5 @@ export function ProjectCardItemSkeleton() {
     </Card>
   )
 }
+
+export { ProjectCardItemSkeleton }

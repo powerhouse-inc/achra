@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-butoon'
+import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { KeyResultModal } from './key-result-modal'
 import type { Route } from 'next'
 
@@ -8,7 +8,7 @@ interface KeyResultItemProps {
   keyResult: ScopeOfWork_KeyResult
 }
 
-export function KeyResultItem({ keyResult }: KeyResultItemProps) {
+function KeyResultItem({ keyResult }: KeyResultItemProps) {
   const hasLink = Boolean(keyResult.link && keyResult.link !== '')
 
   return (
@@ -38,3 +38,5 @@ export function KeyResultItem({ keyResult }: KeyResultItemProps) {
     </li>
   )
 }
+
+export { KeyResultItem }

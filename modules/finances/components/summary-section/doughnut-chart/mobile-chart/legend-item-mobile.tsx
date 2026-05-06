@@ -1,9 +1,9 @@
+import { getPercentDisplay } from '@/modules/finances/lib/doughnut-chart-utils'
 import {
   threeDigitsPrecisionHumanization,
   usLocalizedNumber,
 } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
-import { getPercentDisplay } from '../utils'
 
 interface LegendItemProps {
   inline: boolean

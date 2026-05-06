@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { type Maybe, RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
-import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/config/constants'
+import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/lib/constants'
 import {
   getGroupPriceFromBreakdown,
   getPriceBreakdown,

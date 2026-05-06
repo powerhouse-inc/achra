@@ -6,7 +6,7 @@ interface WorkstreamStatusChipProps {
   status: WorkstreamStatus
 }
 
-export default function WorkstreamStatusChip({ status }: WorkstreamStatusChipProps) {
+function WorkstreamStatusChip({ status }: WorkstreamStatusChipProps) {
   const { label, color } = useMemo(() => {
     switch (status) {
       case WorkstreamStatus.RfpDraft:
@@ -68,3 +68,5 @@ export default function WorkstreamStatusChip({ status }: WorkstreamStatusChipPro
     </GenericChip>
   )
 }
+
+export { WorkstreamStatusChip }

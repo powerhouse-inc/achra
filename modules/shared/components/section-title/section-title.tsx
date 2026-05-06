@@ -8,7 +8,7 @@ export interface SectionTitleProps {
   className?: string
 }
 
-export default function SectionTitle({ title, hash, className }: SectionTitleProps) {
+function SectionTitle({ title, hash, className }: SectionTitleProps) {
   return (
     <div className={cn('flex w-fit items-center gap-4', className)}>
       <span className="text-[32px] leading-[120%] font-bold">{title}</span>
@@ -19,3 +19,5 @@ export default function SectionTitle({ title, hash, className }: SectionTitlePro
     </div>
   )
 }
+
+export { SectionTitle }

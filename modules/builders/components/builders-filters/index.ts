@@ -1,1 +1,1 @@
-export { default } from './builders-filters'
+export { BuilderFilters } from './builders-filters'

@@ -12,9 +12,7 @@ interface CardsNavigationSwipperProps {
   cardsNavigationInformation: FiancesNavigationCard[]
 }
 
-export function CardsNavigationSwipper({
-  cardsNavigationInformation,
-}: CardsNavigationSwipperProps) {
+function CardsNavigationSwipper({ cardsNavigationInformation }: CardsNavigationSwipperProps) {
   const {
     handleAfterInit,
     adjustCardHeights,
@@ -141,3 +139,5 @@ export function CardsNavigationSwipper({
     </div>
   )
 }
+
+export { CardsNavigationSwipper }

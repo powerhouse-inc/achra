@@ -2,7 +2,7 @@
 
 import { z } from 'zod'
 import { addToWhitelist } from '../lib/add-to-whitelist'
-import type { WhitelistFormState } from '../config/types'
+import type { WhitelistFormState } from '../types'
 import 'server-only'
 
 const emailSchema = z.object({

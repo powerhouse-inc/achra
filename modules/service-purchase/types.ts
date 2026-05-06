@@ -1,11 +1,11 @@
-import type { submitRequestSchema } from './lib/submit-request-schema'
 import type {
+  OfferingFacetTargetFieldsFragment,
   RsBillingCycle,
   RsGroupCostType,
-  RsOfferingFacetTarget,
-  RsServiceOffering,
-  RsServiceSubscriptionTier,
-} from '../__generated__/graphql/switchboard-generated'
+  ServiceOfferingFieldsFragment,
+  ServiceTierFieldsFragment,
+} from '@/modules/__generated__/graphql/switchboard-generated'
+import type { submitRequestSchema } from './lib/submit-request-schema'
 import type { z } from 'zod'
 import type { StoreApi } from 'zustand'
 
@@ -60,7 +60,7 @@ export interface SubmitRequestSlice extends SubmitRequestSliceState {
 // facets slice
 export interface FacetsSliceState {
   facets: Array<{
-    originalFacet: RsOfferingFacetTarget
+    originalFacet: OfferingFacetTargetFieldsFragment
     selectedOption: string
   }>
 }
@@ -75,8 +75,8 @@ export interface FacetsSlice extends FacetsSliceState {
 
 // ─── tiers slice ─
 export interface TiersSliceState {
-  tiers: RsServiceSubscriptionTier[]
-  selectedTier: RsServiceSubscriptionTier
+  tiers: ServiceTierFieldsFragment[]
+  selectedTier: ServiceTierFieldsFragment
   selectedBillingCycle: RsBillingCycle
   hoveredTierId: string | null
 }
@@ -189,7 +189,7 @@ export interface PersistedServicePurchaseState {
 // ─── store composition
 // store init props (for dependency injection from page)
 export interface ServicePurchaseStoreProps {
-  services: RsServiceOffering
+  services: ServiceOfferingFieldsFragment
 }
 
 export type ServicePurchaseState = SubmitRequestSliceState &
@@ -207,7 +207,7 @@ export type ServicePurchaseActions = SubmitRequestSliceActions &
 
 export interface ServicePurchaseStore extends ServicePurchaseState {
   /** Raw service offering data — static, set once at store initialization */
-  services: RsServiceOffering
+  services: ServiceOfferingFieldsFragment
   actions: ServicePurchaseActions
 }
 

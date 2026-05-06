@@ -1,25 +1,40 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import ff from '@/modules/shared/lib/feature-flags'
-import ServicesCardSkeleton from './service-card-skeleton'
-import ServicesFiltersSkeleton from './service-filter-skeleton'
+import { FeaturedCardSkeleton } from './featured-card-skeleton'
+import { MarketplaceCardSkeleton } from './marketplace-card-skeleton'
 
-export function ServicesContentSkeleton() {
+function ServicesContentSkeleton() {
   return (
-    <>
-      {/* Section title */}
-      <Skeleton className="h-6 w-24" />
-      {/* Cards */}
-      <ServicesCardSkeleton />
-      <ServicesCardSkeleton />
-    </>
+    <div className="flex flex-col gap-10">
+      {/* featured section */}
+      <section className="flex flex-col gap-4">
+        {/* section title */}
+        <Skeleton className="h-7 w-full max-w-24" />
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+          {/* primary featured card spans 2 columns on sm+ */}
+          <div className="col-span-1 sm:col-span-2">
+            <FeaturedCardSkeleton />
+          </div>
+          {/* secondary slot renders a marketplace card */}
+          <MarketplaceCardSkeleton />
+        </div>
+      </section>
+
+      {/* category section */}
+      <section className="flex flex-col gap-4">
+        <div className="flex items-baseline gap-2">
+          {/* section title */}
+          <Skeleton className="h-7 w-full max-w-24" />
+          {/* service count */}
+          <Skeleton className="h-5 w-full max-w-20" />
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <MarketplaceCardSkeleton />
+          <MarketplaceCardSkeleton />
+          <MarketplaceCardSkeleton />
+        </div>
+      </section>
+    </div>
   )
 }
 
-export function ServicesPageSkeleton() {
-  return (
-    <>
-      {ff.SERVICES_LISTING_FILTERS_ENABLED && <ServicesFiltersSkeleton />}
-      <ServicesContentSkeleton />
-    </>
-  )
-}
+export { ServicesContentSkeleton }

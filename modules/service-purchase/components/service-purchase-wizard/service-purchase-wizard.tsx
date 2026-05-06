@@ -3,18 +3,18 @@
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { Suspense, useCallback } from 'react'
 import type {
-  BuilderProfileState,
-  RsResourceTemplate,
+  PurchaseResourceTemplateFieldsFragment,
+  ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
+import {
+  SERVICE_PURCHASE_STEP_VALUES,
+  SERVICE_PURCHASE_STEPS_ENTRIES,
+} from '@/modules/service-purchase/lib/constants'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { BookCallButton, ServiceInfo } from '@/modules/services/components/service-info'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
-import {
-  SERVICE_PURCHASE_STEP_VALUES,
-  SERVICE_PURCHASE_STEPS_ENTRIES,
-} from '../../config/constants'
 import {
   ConfigureServices,
   ConfigureServicesSkeleton,
@@ -29,8 +29,8 @@ import { OperatorBadge } from './operator-badge'
 import { StepsTriggersList } from './steps-trigger/steps-triggers-list'
 
 export interface ServicePurchaseWizardProps {
-  resourceTemplate: RsResourceTemplate
-  operator: BuilderProfileState
+  resourceTemplate: PurchaseResourceTemplateFieldsFragment
+  operator: ResourceOperatorFieldsFragment
 }
 
 function ServicePurchaseWizard({

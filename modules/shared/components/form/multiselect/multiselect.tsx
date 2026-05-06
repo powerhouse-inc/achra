@@ -4,13 +4,13 @@ import { Command as CommandPrimitive } from 'cmdk'
 import { Check, ChevronDown, Loader2, XIcon } from 'lucide-react'
 import * as React from 'react'
 import { useEffect } from 'react'
+import { transToGroupOption } from '@/modules/shared/lib/multiselect-utils'
 import { OverflowList } from '@/shared/components/overflow-list'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/shared/components/ui/command'
 import { cn } from '@/shared/lib/utils'
 import { CommandEmpty } from './command-empty'
 import { ItemRenderer } from './item-renderer'
 import { OverflowRenderer } from './overflow-renderer'
-import { transToGroupOption } from './utils'
 
 export interface Option {
   value: string
@@ -252,7 +252,7 @@ function MultipleSelector({
   useEffect(() => {
     if (value) {
       // disabled to keep the component as it come form shadcn
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelected(value)
     }
   }, [value])
@@ -281,6 +281,7 @@ function MultipleSelector({
       })
 
     if (hasChanged) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOptions(newOption)
     }
   }, [arrayDefaultOptions, arrayOptions, groupBy, options])
@@ -310,6 +311,7 @@ function MultipleSelector({
     return filteredOptions
   }, [options, inputValue, enableSearch])
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const commandFilter = React.useCallback(() => {
     if (commandProps?.filter) {
       return commandProps.filter

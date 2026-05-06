@@ -1,24 +1,24 @@
 query ResourceProfile($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
-    id
-    infoLink
-    title
-    description
-    thumbnailUrl
-    summary
-    status
-    operatorId
-    contentSections {
-      content
-      displayOrder
-      id
-      title
-    }
-    faqFields {
-      answer
-      displayOrder
-      id
-      question
-    }
+    ...ResourceProfileFields
+  }
+}
+
+fragment ResourceProfileFields on RSResourceTemplate {
+  id
+  infoLink
+  title
+  description
+  thumbnailUrl
+  summary
+  status
+  operatorId
+  setupServices
+  recurringServices
+  contentSections {
+    ...ContentSectionFields
+  }
+  faqFields {
+    ...FaqFieldFields
   }
 }

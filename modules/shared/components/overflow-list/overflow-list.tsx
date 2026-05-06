@@ -32,7 +32,7 @@ interface OverflowListState<T> {
   overflowDirection: OverflowDirection
 }
 
-export function OverflowList<T>({
+function OverflowList<T>({
   items,
   skeletonRenderer,
   collapseFrom = 'end',
@@ -162,3 +162,5 @@ export function OverflowList<T>({
     React.createElement('div', { style: { flexShrink: 1, width: 1 }, ref: spacer }),
   )
 }
+
+export { OverflowList }

@@ -4,7 +4,7 @@ import { ItemLegendDesk } from './item-legend-desk'
 import { ItemLegendValues } from './item-legend-values'
 import { LegendAxisYItems } from './legend-axis-y-items'
 
-export function BreakdownChartSkeleton() {
+function BreakdownChartSkeleton() {
   const arrayLegendAxisX = Array.from({ length: 12 }, () => 0)
 
   return (
@@ -73,3 +73,5 @@ export function BreakdownChartSkeleton() {
     </div>
   )
 }
+
+export { BreakdownChartSkeleton }

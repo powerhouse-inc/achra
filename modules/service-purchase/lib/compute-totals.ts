@@ -1,6 +1,6 @@
 import type {
   RsBillingCycle,
-  RsServiceOffering,
+  ServiceOfferingFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { computeTotalsFromBreakdown, getPriceBreakdown } from './price-breakdown-utils'
 import type { PurchaseTotals } from '../types'
@@ -11,7 +11,7 @@ import type { PurchaseTotals } from '../types'
  * Used by the totals slice and by the store's merge function during rehydration.
  */
 export function computeTotals(
-  services: RsServiceOffering,
+  services: ServiceOfferingFieldsFragment,
   selectedTierId: string,
   selectedBillingCycle: RsBillingCycle,
   activeGroupIds: Set<string>,

@@ -1,22 +1,22 @@
 'use client'
 import { useTheme } from 'next-themes'
 import React, { useState } from 'react'
+import { REALIZED_EXPENSES_FILTER, TABS } from '@/modules/networks/lib/constants'
+import { getStackedAreaSeries } from '@/modules/networks/lib/stacked-area-chart-utils'
 import {
   mockFinancesData,
   mockYears,
 } from '@/modules/networks/mocks/card-stacked-area-chart-finances'
+import type { MetricKey, TabValue } from '@/modules/networks/types'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import { TabButton } from '@/modules/shared/components/tab-button/tab-button'
 import { Card } from '@/modules/shared/components/ui/card'
 import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from '../card-bar-chart/cards/legend-item'
 import { FinancesTabs } from './components/finances-tabs'
-import StackedAreaChart from './components/stacked-area-chart'
-import { REALIZED_EXPENSES_FILTER, TABS } from './constants'
-import { getStackedAreaSeries } from './utils'
-import type { MetricKey, TabValue } from './type'
+import { StackedAreaChart } from './components/stacked-area-chart'
 
-export function CardStackedAreaChart() {
+function CardStackedAreaChart() {
   const isLightMode = useTheme().theme === 'light'
 
   const [activeTab, setActiveTab] = useState<TabValue>(TABS.REALIZED_EXPENSES)
@@ -116,3 +116,5 @@ export function CardStackedAreaChart() {
     </Card>
   )
 }
+
+export { CardStackedAreaChart }

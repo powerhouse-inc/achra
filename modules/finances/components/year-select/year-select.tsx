@@ -1,4 +1,5 @@
 'use client'
+import { getYearsRange } from '@/modules/finances/lib/utils'
 import {
   Select,
   SelectContent,
@@ -8,10 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/modules/shared/components/ui/select'
-import { useFinancesYear } from '../../hooks/use-finaces-year'
-import { getYearsRange } from '../../utils'
+import { useFinancesYear } from '../../hooks/use-finances-year'
 
-export function YearSelect() {
+function YearSelect() {
   const yearsRange = getYearsRange()
   const { year, setSelectedYear } = useFinancesYear()
   const handleYearSelect = (year: string) => {
@@ -43,3 +43,5 @@ export function YearSelect() {
     </div>
   )
 }
+
+export { YearSelect }

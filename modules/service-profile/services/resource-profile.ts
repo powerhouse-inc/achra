@@ -1,27 +1,12 @@
 import {
-  type RsResourceTemplate,
+  type ResourceProfileFieldsFragment,
   type RsResourceTemplatesFilter,
   useResourceProfileQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 export async function getResourceProfile(
   filter: RsResourceTemplatesFilter,
-): Promise<RsResourceTemplate | undefined> {
+): Promise<ResourceProfileFieldsFragment | undefined> {
   const data = await useResourceProfileQuery.fetcher({ filter })()
-  const resourceProfile = data.resourceTemplates.at(0)
-
-  if (!resourceProfile) {
-    return undefined
-  }
-
-  return {
-    facetTargets: [],
-    lastModified: '',
-    optionGroups: [],
-    recurringServices: [],
-    services: [],
-    setupServices: [],
-    targetAudiences: [],
-    ...resourceProfile,
-  }
+  return data.resourceTemplates.at(0)
 }

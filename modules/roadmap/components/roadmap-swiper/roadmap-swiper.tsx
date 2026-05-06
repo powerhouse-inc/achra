@@ -11,7 +11,7 @@ import {
   MilestoneExtendedCardSkeleton,
 } from '@/modules/roadmap/components/milestone-extended-card'
 import { cn } from '@/shared/lib/utils'
-import useRoadmapSwiper from './use-roadmap-swiper'
+import { useRoadmapSwiper } from './use-roadmap-swiper'
 
 interface RoadmapSwiperProps {
   milestones: ScopeOfWork_Milestone[]
@@ -20,12 +20,7 @@ interface RoadmapSwiperProps {
   deliverables: Sow_Deliverable[]
 }
 
-export default function RoadmapSwiper({
-  milestones,
-  networkSlug,
-  roadmapSlug,
-  deliverables,
-}: RoadmapSwiperProps) {
+function RoadmapSwiper({ milestones, networkSlug, roadmapSlug, deliverables }: RoadmapSwiperProps) {
   const { handleAfterInit, adjustCardHeights, swiperRef, isSwiperReady } = useRoadmapSwiper()
 
   return (
@@ -105,3 +100,5 @@ export default function RoadmapSwiper({
     </div>
   )
 }
+
+export { RoadmapSwiper }

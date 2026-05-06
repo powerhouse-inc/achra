@@ -3,7 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ConfigureStepContinueButton } from '@/modules/service-purchase/components/configure-step-continue-button'
-import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/config/constants'
+import { DEFAULT_PLAN_INDEX } from '@/modules/service-purchase/lib/constants'
 import {
   computeTierHeaderPriceWithBreakdown,
   getGroupPriceFromBreakdown,
@@ -125,7 +125,7 @@ function PricingCalculator() {
           <h2 className="text-muted-foreground mt-8 mb-3 text-xs font-bold tracking-wide uppercase">
             Setup & Formation
           </h2>
-          <div className="rounded-xl border shadow-sm">
+          <div className="overflow-hidden rounded-xl border shadow-sm">
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
               <div className="overflow-clip rounded-xl">
                 <div className="flex flex-col">
@@ -144,7 +144,7 @@ function PricingCalculator() {
           <h2 className="text-muted-foreground mt-8 mb-3 text-xs font-bold tracking-wide uppercase">
             Recurring Services
           </h2>
-          <div className="rounded-xl border shadow-sm">
+          <div className="overflow-hidden rounded-xl border shadow-sm">
             <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
               <div className="overflow-clip rounded-b-xl">
                 <div className="flex flex-col">
@@ -167,7 +167,7 @@ function PricingCalculator() {
                 ADD-ON
               </h2>
               {addOnGroups.map((section) => (
-                <div key={section.id} className="rounded-xl border shadow-sm">
+                <div key={section.id} className="overflow-hidden rounded-xl border shadow-sm">
                   <Card className="flex w-full flex-col border-none! py-0! shadow-none!">
                     <div className="overflow-clip rounded-xl">
                       <div className="flex flex-col">

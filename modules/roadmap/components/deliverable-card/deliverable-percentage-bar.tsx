@@ -1,11 +1,11 @@
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '../../../shared/lib/utils'
+import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverablePercentageBarProps {
   percentage: number
 }
 
-export default function DeliverablePercentageBar({ percentage }: DeliverablePercentageBarProps) {
+function DeliverablePercentageBar({ percentage }: DeliverablePercentageBarProps) {
   const width = percentage === 0 ? '0%' : `max(${percentage}%, 0.5px)`
 
   return (
@@ -31,3 +31,5 @@ export default function DeliverablePercentageBar({ percentage }: DeliverablePerc
     </div>
   )
 }
+
+export { DeliverablePercentageBar }

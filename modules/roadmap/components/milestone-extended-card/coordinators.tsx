@@ -2,13 +2,13 @@ import { UserRound } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/shared/lib/utils'
-import CoordinatorItem from './coordinator-item'
+import { CoordinatorItem } from './coordinator-item'
 
 interface CoordinatorsProps {
   coordinators: string[]
 }
 
-export default function Coordinators({ coordinators }: CoordinatorsProps) {
+function Coordinators({ coordinators }: CoordinatorsProps) {
   const displayCoordinators = coordinators.slice(0, 2)
   const remainingCoordinators = coordinators.slice(2)
 
@@ -56,3 +56,5 @@ export default function Coordinators({ coordinators }: CoordinatorsProps) {
     </div>
   )
 }
+
+export { Coordinators }

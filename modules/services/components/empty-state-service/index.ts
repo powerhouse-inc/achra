@@ -1,1 +1,1 @@
-export { default as EmptyStateService } from './empty-state-service'
+export { EmptyStateService } from './empty-state-service'

@@ -4,13 +4,13 @@ import type {
   ScopeOfWork_Deliverable,
   ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { ProjectDetailsBreadcrumb } from '@/modules/project/components'
+import { ProjectDetailsBreadcrumb } from '@/modules/project/components/breadcrumb-project'
 import { ProjectCardItem } from '@/modules/project/components/project-card-item/project-card-item'
+import { resolveProjectDeliverables } from '@/modules/project/lib/utils'
 import {
   getWorkstreamProjectBySlug,
   getWorkstreamProjects,
 } from '@/modules/project/services/workstream-projects-services'
-import { resolveProjectDeliverables } from '@/modules/project/utils'
 import { BreadcrumbSkeleton, PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import ff from '@/modules/shared/lib/feature-flags'

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import sortBy from 'lodash/sortBy'
 import { useQueryState } from 'nuqs'
 import { useMemo } from 'react'
+import { formatBudgetName } from '@/modules/finances/lib'
 import {
   reservesCategoriesParser,
   reservesGranularityParser,
@@ -15,7 +16,6 @@ import {
   sumValuesFromMapKeys,
 } from '@/modules/finances/lib/reserves-waterfall-chart-utils'
 import { type Budget, GRANULARITY_OPTIONS } from '@/modules/finances/types'
-import { formatBudgetName } from '@/modules/finances/utils'
 import type { Option } from '@/modules/shared/components/form/multiselect'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { getFinancesReservesAnalytics } from '../../services/finances-reserves-chart'

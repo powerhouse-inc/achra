@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { TeamRole } from '@/modules/shared/types'
+import { TeamRole } from '@/modules/shared/types/common-enums'
 import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersRolesChipProps {
@@ -7,7 +7,7 @@ interface BuildersRolesChipProps {
   className?: string
 }
 
-export default function BuildersRolesChip({ role, className }: BuildersRolesChipProps) {
+function BuildersRolesChip({ role, className }: BuildersRolesChipProps) {
   const { label, color } = useMemo(() => {
     switch (role) {
       case TeamRole.ActiveEcosystemActor:
@@ -69,3 +69,5 @@ export default function BuildersRolesChip({ role, className }: BuildersRolesChip
     </GenericChip>
   )
 }
+
+export { BuildersRolesChip }

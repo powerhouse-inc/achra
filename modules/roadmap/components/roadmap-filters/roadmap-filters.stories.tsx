@@ -1,5 +1,5 @@
 import { withNuqsAdapter } from '@/modules/shared/lib/decorators'
-import RoadmapFilters from './roadmap-filters'
+import { RoadmapFilters } from './roadmap-filters'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

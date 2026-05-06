@@ -12,7 +12,7 @@ interface RfpEmptyProps {
   description?: string
 }
 
-export function RfpEmpty({
+function RfpEmpty({
   title = 'No request for proposal found',
   description = 'No request for proposal found for this workstream.',
 }: RfpEmptyProps) {
@@ -28,3 +28,5 @@ export function RfpEmpty({
     </Empty>
   )
 }
+
+export { RfpEmpty }

@@ -1,0 +1,27 @@
+query BudgetStatements($filter: budgetStatementsFilter) {
+  budgetStatements(filter: $filter) {
+    ...BudgetStatementMonthFields
+    owner {
+      ...BudgetStatementOwnerFields
+    }
+    expenseReport {
+      ...BudgetStatementExpenseReportSummaryFields
+    }
+  }
+}
+
+fragment BudgetStatementExpenseReportSummaryFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletSummaryFields
+  }
+}
+
+fragment ExpenseReportWalletSummaryFields on ExpenseReportWallet {
+  name
+  address
+  totals {
+    ...ExpenseReportGroupTotalsSummaryFields
+  }
+}

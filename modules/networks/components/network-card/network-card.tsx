@@ -12,7 +12,7 @@ interface NetworkCardProps {
   >
 }
 
-export function NetworkCard({ profile }: NetworkCardProps) {
+function NetworkCard({ profile }: NetworkCardProps) {
   const logoSrc = [profile.darkThemeLogo, profile.logo].find(
     (src): src is string => typeof src === 'string' && src.trim().length > 0,
   )
@@ -73,3 +73,5 @@ export function NetworkCard({ profile }: NetworkCardProps) {
     </Link>
   )
 }
+
+export { NetworkCard }

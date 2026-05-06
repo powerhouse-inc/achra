@@ -14,14 +14,7 @@ export interface BuilderProfileProps {
   isOperator?: boolean
 }
 
-export default function BuilderProfile({
-  name,
-  code,
-  status,
-  image,
-  isOperator,
-  className,
-}: BuilderProfileProps) {
+function BuilderProfile({ name, code, status, image, isOperator, className }: BuilderProfileProps) {
   const avatar = (
     <div className="relative">
       <Avatar className="mt-1 size-8">
@@ -50,3 +43,5 @@ export default function BuilderProfile({
     </div>
   )
 }
+
+export { BuilderProfile }

@@ -1,6 +1,6 @@
 import { ExternalLink } from './components/external-link/external-link'
 
-export function ExternalLinks() {
+function ExternalLinks() {
   return (
     <div className="align-center flex flex-col gap-4 sm:flex-row md:gap-6">
       <ExternalLink
@@ -18,3 +18,5 @@ export function ExternalLinks() {
     </div>
   )
 }
+
+export { ExternalLinks }

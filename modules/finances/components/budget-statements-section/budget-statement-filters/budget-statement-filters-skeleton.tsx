@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BudgetStatementFiltersSkeleton() {
+function BudgetStatementFiltersSkeleton() {
   return (
     <div className="row flex w-full justify-end gap-4">
       <div className="hidden w-full items-center justify-end gap-4 md:flex">
@@ -25,3 +25,5 @@ export function BudgetStatementFiltersSkeleton() {
     </div>
   )
 }
+
+export { BudgetStatementFiltersSkeleton }

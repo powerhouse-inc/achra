@@ -1,7 +1,7 @@
 import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/breakdown-chart-utils'
+import { formatBudgetName, removeBudgetWord } from '@/modules/finances/lib/utils'
 import { Button } from '@/modules/shared/components/ui/button'
 import { cn } from '@/shared/lib/utils'
-import { formatBudgetName, removeBudgetWord } from '../../utils'
 import type { BreakdownChartSeriesData } from '../../types'
 
 interface BreakdownChartItemProps {
@@ -14,7 +14,7 @@ interface BreakdownChartItemProps {
   value?: number
 }
 
-export function BreakdownChartItem({
+function BreakdownChartItem({
   element,
   onLegendItemHover,
   onLegendItemLeave,
@@ -78,3 +78,5 @@ export function BreakdownChartItem({
     </Button>
   )
 }
+
+export { BreakdownChartItem }

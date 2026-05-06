@@ -1,7 +1,7 @@
+import { getCodePathFromParams, getLevelOfDetail } from '@/modules/finances/lib/utils'
 import { expensesMetricChartSearchParamsCache } from '../../../lib/expenses-metric-chart-search-params'
 import { BUDGETS } from '../../../mocks'
 import { getBudgetsAnalytics } from '../../../services/expenses-metric-chart'
-import { getCodePathFromParams, getLevelOfDetail } from '../../../utils'
 import { ExpensesMetricChartContent } from '../expenses-metric-chart-content'
 
 interface SummarySectionProps {

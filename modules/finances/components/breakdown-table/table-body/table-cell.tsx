@@ -1,7 +1,7 @@
+import { filterMetricValues } from '@/modules/finances/lib/breakdown-table-utils'
 import type { MetricValues } from '@/modules/finances/types'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { getKeyMetric } from '../table-header/cell-semi-annually'
-import { filterMetricValues } from '../utils'
 import { LinkCell } from './link-cell'
 
 interface TableCellProps {

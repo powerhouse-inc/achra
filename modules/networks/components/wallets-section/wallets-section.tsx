@@ -1,9 +1,9 @@
 'use client'
 
-import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/config/constants'
+import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
+import { SectionTitle } from '@/modules/shared/components/section-title/section-title'
+import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
 import { cn } from '@/shared/lib/utils'
-import { encodeSectionId } from '../../../shared/components/section-activation/section-id-utils'
-import SectionTitle from '../../../shared/components/section-title/section-title'
 import { WalletsCard } from './components/wallets-card/wallets-card'
 
 export interface Wallet {
@@ -19,7 +19,7 @@ export interface WalletsSectionProps {
   className?: string
 }
 
-export function WalletsSection({ wallets, className }: WalletsSectionProps) {
+function WalletsSection({ wallets, className }: WalletsSectionProps) {
   return (
     <section
       className={cn(
@@ -35,3 +35,5 @@ export function WalletsSection({ wallets, className }: WalletsSectionProps) {
     </section>
   )
 }
+
+export { WalletsSection }

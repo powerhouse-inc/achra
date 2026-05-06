@@ -40,8 +40,8 @@ function GovernanceOperationsSection() {
           <GovernanceFeatureRow
             imageSrc="/home/governance-operations/governance-executable.png"
             imageAlt="Achra governance flows connecting approvals, voting, and automated payouts"
-            imageWidth={3018}
-            imageHeight={1704}
+            imageWidth={720}
+            imageHeight={406}
             imagePosition="left"
             labelStart="Achra"
             labelEnd="Makes Governance Executable"
@@ -78,8 +78,8 @@ function GovernanceOperationsSection() {
           <GovernanceFeatureRow
             imageSrc="/home/governance-operations/scalable-operations.png"
             imageAlt="Operational marketplace connecting legal, finance, and people ops for network organizations"
-            imageWidth={1808}
-            imageHeight={1046}
+            imageWidth={720}
+            imageHeight={416}
             imagePosition="right"
             labelStart="Scalable"
             labelEnd="Operations for Network Orgs"
@@ -106,8 +106,8 @@ function GovernanceOperationsSection() {
           <GovernanceFeatureRow
             imageSrc="/home/governance-operations/integrated-team.png"
             imageAlt="Achra control center for teams to manage runway, services, and operations"
-            imageWidth={2762}
-            imageHeight={1426}
+            imageWidth={720}
+            imageHeight={371}
             imagePosition="left"
             labelStart="Integrated"
             labelEnd="Team Management"

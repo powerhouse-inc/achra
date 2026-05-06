@@ -1,9 +1,9 @@
-import type { RsOfferingFacetTarget } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { OfferingFacetTargetFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { FacetsSlice, ServicePurchaseStoreSet } from '../../types'
 
 function createFacetsSlice(
   set: ServicePurchaseStoreSet,
-  initialFacets?: RsOfferingFacetTarget[],
+  initialFacets?: OfferingFacetTargetFieldsFragment[],
 ): FacetsSlice {
   const facets =
     initialFacets?.map((ft) => ({

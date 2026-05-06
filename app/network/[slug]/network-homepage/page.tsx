@@ -17,7 +17,7 @@ import { WalletsSection } from '@/modules/networks/components/wallets-section/wa
 import {
   NETWORK_HOMEPAGE_SECTIONS_ENCODED,
   NETWORK_HOMEPAGE_SKIP_SECTION,
-} from '@/modules/networks/config/constants'
+} from '@/modules/networks/lib/constants'
 import { PROPOSALS } from '@/modules/networks/mocks/proposals'
 import { WALLETS } from '@/modules/networks/mocks/wallets'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'

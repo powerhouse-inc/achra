@@ -1,7 +1,7 @@
 import { Card } from '@/modules/shared/components/ui/card'
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BudgetStatementsTabletSkeleton() {
+function BudgetStatementsTabletSkeleton() {
   return (
     <div className="hidden flex-col space-y-4 md:flex lg:hidden">
       {Array.from({ length: 5 }).map((_, index) => (
@@ -57,3 +57,5 @@ export function BudgetStatementsTabletSkeleton() {
     </div>
   )
 }
+
+export { BudgetStatementsTabletSkeleton }

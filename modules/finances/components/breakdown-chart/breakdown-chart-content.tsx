@@ -1,6 +1,6 @@
 'use client'
+import { getBudgetsByCodePath, getCodePathFromParams } from '@/modules/finances/lib/utils'
 import { ATLAS_BUDGETS, BUDGETS } from '../../mocks'
-import { getBudgetsByCodePath, getCodePathFromParams } from '../../utils'
 import { BreakdownChart } from './breakdown-chart'
 import { BreakdownLegend } from './breakdown-legend'
 import { useBreakdownChart } from './use-breakdown-chart'
@@ -14,7 +14,7 @@ interface BreakdownChartContentProps {
   metric: METRIC_OPTIONS
 }
 
-export function BreakdownChartContent({
+function BreakdownChartContent({
   params,
   budgetsAnalytics,
   year,
@@ -72,3 +72,5 @@ export function BreakdownChartContent({
     </div>
   )
 }
+
+export { BreakdownChartContent }

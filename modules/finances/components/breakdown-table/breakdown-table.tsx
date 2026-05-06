@@ -1,6 +1,6 @@
 'use client'
 
-import { useFinancesYear } from '../../hooks/use-finaces-year'
+import { useFinancesYear } from '../../hooks/use-finances-year'
 import { TitleSectionFinances } from '../title-section-finances'
 import { BreakdownTableFilters } from './breakdown-table-filters'
 import { TableBody } from './table-body'

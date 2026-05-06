@@ -1,9 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
-import {
-  WALLETS_TABLE_COLUMNS,
-  type WalletsTableColumn,
-} from '@/modules/networks/components/wallets-section/components/wallets-card/components/wallets-table/constants'
 import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card'
+import { WALLETS_TABLE_COLUMNS, type WalletsTableColumn } from '@/modules/networks/lib/constants'
 import { SortEnum } from '@/modules/networks/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 

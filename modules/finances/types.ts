@@ -1,3 +1,5 @@
+import type { BudgetStatementsQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+
 export interface Wallet {
   id: string
   name: string
@@ -182,7 +184,7 @@ export enum SortOptionValue {
   ModifiedOldest = 'modified_oldest',
 }
 
-export type BudgetStatement = any // Type from GraphQL API
+export type BudgetStatement = BudgetStatementsQuery['budgetStatements'][number]
 
 export type MetricWithoutBudget = Exclude<METRIC_OPTIONS, METRIC_OPTIONS.Budget>
 

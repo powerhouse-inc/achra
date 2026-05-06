@@ -2,6 +2,7 @@
 import { ArrowUpDown } from 'lucide-react'
 
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
+import { calculateDeliverableSubtotal } from '@/modules/project/lib/utils'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -15,11 +16,10 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 import { cn } from '@/modules/shared/lib/utils'
-import { SortEnum } from '@/modules/shared/types'
+import { SortEnum } from '@/modules/shared/types/common-enums'
 import { AvatarTitleAvatar, AvatarTitleRoot, AvatarTitleText } from '../avatar-title/avatar-title'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'
 import { ProgressComponent } from '../progress-component/progress-component'
-import { calculateDeliverableSubtotal } from '../utils'
 import { useDeliverableTable } from './use-deliverable-table'
 
 export interface DeliverableTableProps {
@@ -27,7 +27,7 @@ export interface DeliverableTableProps {
   className?: string
 }
 
-export function DeliverableTable({ deliverables, className }: DeliverableTableProps) {
+function DeliverableTable({ deliverables, className }: DeliverableTableProps) {
   const { headersSort, sortedDeliverables, proccesedDeliverablesTableColumns, handleSortClick } =
     useDeliverableTable({
       deliverables,
@@ -133,3 +133,5 @@ export function DeliverableTable({ deliverables, className }: DeliverableTablePr
     </Table>
   )
 }
+
+export { DeliverableTable }

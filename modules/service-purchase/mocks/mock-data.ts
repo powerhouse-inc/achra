@@ -2,12 +2,12 @@ import {
   RsBillingCycle,
   RsDiscountType,
   RsGroupCostType,
-  type RsServiceOffering,
   RsServiceStatus,
   RsTierPricingMode,
+  type ServiceOfferingFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
-export const SERVICES_DATA: RsServiceOffering[] = [
+export const SERVICES_DATA: ServiceOfferingFieldsFragment[] = [
   {
     id: '90ad5b5f-530f-4d86-8436-4b595a81974c',
     description: 'A turnkey legal and operational setup for open-source builder teams.',
@@ -70,7 +70,6 @@ export const SERVICES_DATA: RsServiceOffering[] = [
             unitName: 'Registered Zug Address',
             freeLimit: 1,
             paidLimit: 2,
-            resetCycle: null,
             unitPrice: 500,
             unitPriceCurrency: 'USD',
             notes: null,

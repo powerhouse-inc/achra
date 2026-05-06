@@ -1,7 +1,7 @@
 'use client'
 
 import { createFiltersContext } from '@/modules/shared/lib/create-filters-context'
-import useServicesFilters from './use-services-filters'
+import { useServicesFilters } from './use-services-filters'
 
 const { FiltersProvider, useFiltersContext } = createFiltersContext(
   useServicesFilters,

@@ -1,6 +1,6 @@
 import {
   RsBillingCycle,
-  type RsServiceOffering,
+  type ServiceOfferingFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getAvailableCycles } from '../../lib/billing-period'
 import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TiersSlice } from '../../types'
@@ -9,7 +9,7 @@ import type { ServicePurchaseStoreGet, ServicePurchaseStoreSet, TiersSlice } fro
 export function createTiersSlice(
   set: ServicePurchaseStoreSet,
   _get: ServicePurchaseStoreGet,
-  services: RsServiceOffering,
+  services: ServiceOfferingFieldsFragment,
 ): TiersSlice {
   const { tiers } = services
 

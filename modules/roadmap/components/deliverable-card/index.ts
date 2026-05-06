@@ -1,1 +1,1 @@
-export { default as DeliverableCard } from './deliverable-card'
+export { DeliverableCard } from './deliverable-card'

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuildersSkillsChip from '@/modules/shared/components/chips/builders-skills-chip'
+import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { DrawerSelect } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
 import { cn } from '@/modules/shared/lib/utils'

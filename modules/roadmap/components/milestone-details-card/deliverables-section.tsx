@@ -13,11 +13,7 @@ interface DeliverablesSectionProps {
   projects: ScopeOfWork_Project[]
 }
 
-export default function DeliverablesSection({
-  deliverables,
-  contributors,
-  projects,
-}: DeliverablesSectionProps) {
+function DeliverablesSection({ deliverables, contributors, projects }: DeliverablesSectionProps) {
   const deliverablesRows = splitInRows(deliverables, 2)
 
   return (
@@ -61,3 +57,5 @@ export default function DeliverablesSection({
     </div>
   )
 }
+
+export { DeliverablesSection }

@@ -14,10 +14,7 @@ interface SortPopoverContentProps {
   handleOnMetricSelect: (value: SortOptionValue) => void
 }
 
-export function SortPopoverContent({
-  metric,
-  handleOnMetricSelect,
-}: Readonly<SortPopoverContentProps>) {
+function SortPopoverContent({ metric, handleOnMetricSelect }: Readonly<SortPopoverContentProps>) {
   return (
     <PopoverContent className="mt-1 w-60 p-0" align="end">
       <div className="flex flex-col gap-1 p-2">
@@ -72,3 +69,5 @@ export function SortPopoverContent({
     </PopoverContent>
   )
 }
+
+export { SortPopoverContent }

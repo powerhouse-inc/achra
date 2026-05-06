@@ -1,7 +1,7 @@
 import { BuildersListSkeleton } from './components/builders-list/builders-list-skeleton'
 import { BuildersTableSkeleton } from './components/builders-table/builders-table-skeleton'
 
-export function BuildersSkeleton() {
+function BuildersSkeleton() {
   return (
     <>
       <BuildersTableSkeleton className="hidden lg:flex" />
@@ -9,3 +9,5 @@ export function BuildersSkeleton() {
     </>
   )
 }
+
+export { BuildersSkeleton }

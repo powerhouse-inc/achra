@@ -16,7 +16,7 @@ interface Props {
   category?: string
 }
 
-export function TransparencyCard({
+function TransparencyCard({
   cardSpacingSize = 'large',
   header,
   headers,
@@ -98,3 +98,5 @@ export function TransparencyCard({
     </div>
   )
 }
+
+export { TransparencyCard }

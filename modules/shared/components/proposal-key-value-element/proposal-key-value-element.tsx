@@ -8,7 +8,7 @@ interface ProposalKeyValueElementProps {
   className?: string
 }
 
-export function ProposalKeyValueElement({
+function ProposalKeyValueElement({
   keyValue,
   keyIcon: KeyIcon,
   value,
@@ -26,3 +26,5 @@ export function ProposalKeyValueElement({
     </div>
   )
 }
+
+export { ProposalKeyValueElement }

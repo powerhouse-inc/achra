@@ -1,8 +1,8 @@
 'use client'
 
 import {
+  type OfferingOptionGroupFieldsFragment,
   RsGroupCostType,
-  type RsOfferingOptionGroup,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   buildServiceMetrics,
@@ -30,7 +30,7 @@ import {
 } from '../..'
 
 interface OptionGroupSectionProps {
-  section: RsOfferingOptionGroup
+  section: OfferingOptionGroupFieldsFragment
   setupDiscountedPrices: Record<string, number | null>
 }
 

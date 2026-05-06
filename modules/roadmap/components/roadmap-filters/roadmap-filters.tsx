@@ -1,12 +1,12 @@
 'use client'
 
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
-import SearchInput from '@/modules/shared/components/form/search-input'
+import { SearchInput } from '@/modules/shared/components/form/search-input'
 import { Separator } from '@/modules/shared/components/ui/separator'
 import { StatusSelect, StatusSelectDrawer } from './status-select'
-import useRoadmapFilters from './use-roadmap-filters'
+import { useWorkstreamFilters as useRoadmapFilters } from './use-roadmap-filters'
 
-export default function RoadmapFilters() {
+function RoadmapFilters() {
   const { search, statuses, setSearch, setStatuses, onReset } = useRoadmapFilters()
 
   return (
@@ -33,3 +33,5 @@ export default function RoadmapFilters() {
     </div>
   )
 }
+
+export { RoadmapFilters }

@@ -1,28 +1,35 @@
 import { Suspense } from 'react'
-import ServicesFilters from '@/modules/services/components/services-filters'
+import {
+  SearchInputSkeleton,
+  ServicesContentSkeleton,
+} from '@/modules/services/components/service-skeleton'
 import { ServicesFiltersProvider } from '@/modules/services/components/services-filters/services-filters-context'
 import {
-  ServicesContentSkeleton,
-  ServicesListSection,
-  ServicesPageSkeleton,
-} from '@/modules/services/components/services-page-content'
-import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
+  ServicesMarketplaceHeaderSearch,
+  ServicesMarketplaceHeaderShell,
+} from '@/modules/services/components/services-marketplace-header'
+import { ServicesListSection } from '@/modules/services/components/services-page-content'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import ff from '@/modules/shared/lib/feature-flags'
 
 export default function ServicesPage() {
   return (
     <PageContent className="gap-6">
-      <Suspense fallback={<ServicesPageSkeleton />}>
-        <ServicesFiltersProvider>
-          {ff.SERVICES_LISTING_FILTERS_ENABLED && <ServicesFilters />}
-          <ErrorBoundaryWithPresets>
-            <Suspense fallback={<ServicesContentSkeleton />}>
-              <ServicesListSection />
+      <div className="flex flex-col gap-10">
+        <ServicesMarketplaceHeaderShell
+          searchSlot={
+            <Suspense fallback={<SearchInputSkeleton />}>
+              <ServicesFiltersProvider>
+                <ServicesMarketplaceHeaderSearch />
+              </ServicesFiltersProvider>
             </Suspense>
-          </ErrorBoundaryWithPresets>
-        </ServicesFiltersProvider>
-      </Suspense>
+          }
+        />
+        <Suspense fallback={<ServicesContentSkeleton />}>
+          <ServicesFiltersProvider>
+            <ServicesListSection />
+          </ServicesFiltersProvider>
+        </Suspense>
+      </div>
     </PageContent>
   )
 }

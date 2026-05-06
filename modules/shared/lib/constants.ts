@@ -1,4 +1,90 @@
-import type { FooterLlmKey } from '@/modules/shared/types/types'
+import type { SocialMedia } from '@/modules/shared/components/links-popover'
+import type { FooterLlmKey } from '@/modules/shared/types/common-enums'
+
+// Application environment constants
+
+/**
+ * Application environment
+ */
+export const ENVIRONMENT = process.env.NEXT_PUBLIC_ENVIRONMENT
+
+/**
+ * Fast refresh interval for UseQuery to refetch data every X interval
+ */
+export const FAST_REFRESH_INTERVAL = 5000 // 5 seconds
+
+/**
+ * Base URL for the application
+ */
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://achra.com'
+
+/**
+ * URL for the Operational Hub
+ */
+export const OPERATIONAL_HUB_URL = 'https://www.operationalhub.io/contact'
+
+/**
+ * Network homepage sections IDs for hash navigation
+ */
+export enum NetworkHomepageSections {
+  Proposals = 'proposals',
+  Roadmap = 'roadmap',
+  Finances = 'finances',
+  Wallets = 'wallets',
+  Builders = 'builders',
+  Governance = 'governance',
+}
+
+export enum NetworkDashboardSections {
+  Builders = 'builders',
+  Finances = 'finances',
+}
+
+/**
+ * Scroll margin classes for sections, taking in consideration the navbar height
+ */
+export const SCROLL_MT_CLASSES = 'scroll-mt-22 sm:scroll-mt-28'
+
+/**
+ * Configurable threshold: percentage from top of viewport (0-100)
+ * to activate the section.
+ *
+ * @default 20
+ */
+export const DEFAULT_SECTION_ACTIVATION_THRESHOLD = 20
+
+/**
+ * Delay before scrolling to the section.
+ *
+ * @default 500
+ */
+export const SECTION_SCROLL_RESTORATION_DELAY = 500
+
+/**
+ * Additional buffer time to ensure smooth scroll completes before re-enabling hash updates
+ *
+ * @default 400
+ */
+export const SMOOTH_SCROLL_BUFFER = 400
+
+// Breadcrumb constants
+
+export const MAX_ALLOWED_WIDTH = 300
+export const MAX_SEGMENT_WIDTH_MOBILE_DEFAULT = 100
+export const THREE_DOTS_WIDTH = 60
+
+// Links popover constants
+
+export const SOCIAL_MEDIA_TYPES: SocialMedia[] = [
+  'website',
+  'forum',
+  'discord',
+  'x',
+  'github',
+  'youtube',
+]
+
+// Footer constants
 
 export const FOOTER_LINK_SECTIONS = {
   products: {
@@ -41,14 +127,14 @@ export const FOOTER_LLM_CONVERSATIONS: Record<
   claude: [
     {
       label: 'Tell me about Achra',
-      href: '#',
-    },
-    {
-      label: 'Tell me about Achra',
-      href: 'https://claude.ai/share/d193b0fa-0759-4c24-bf5a-d499b9e3458f',
+      href: 'https://claude.ai/share/74821bd7-23e7-4fc3-939e-65fda30d5bea',
     },
     {
       label: 'The Future of Work',
+      href: 'https://claude.ai/share/d193b0fa-0759-4c24-bf5a-d499b9e3458f',
+    },
+    {
+      label: 'Operational Hub Structure',
       href: 'https://claude.ai/share/d0cf7eb1-6753-4556-928b-6e4525769f17',
     },
   ],

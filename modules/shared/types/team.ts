@@ -1,10 +1,10 @@
 import type { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { ChangeTrackingEvent } from './activity'
-import type { BudgetStatement } from './budgetStatement'
+import type { BudgetStatement } from './budget-statement'
+import type { ResourceType, TeamCategory, TeamRole } from './common-enums'
 import type { ContributorCommitment, CuGithubContribution } from './contributor'
 import type { Scope } from './scopes'
-import type { SocialMediaChannels } from './socialMedia'
-import type { ResourceType, TeamCategory, TeamRole } from './types'
+import type { SocialMediaChannels } from './social-media'
 import type { Auditor } from './users'
 
 export interface TeamUpdate {

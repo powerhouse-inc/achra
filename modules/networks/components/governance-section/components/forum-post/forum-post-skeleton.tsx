@@ -30,4 +30,4 @@ function ForumPostSkeleton() {
   )
 }
 
-export default ForumPostSkeleton
+export { ForumPostSkeleton }

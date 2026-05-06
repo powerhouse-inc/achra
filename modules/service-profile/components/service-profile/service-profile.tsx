@@ -8,6 +8,9 @@ import {
   PurchaseButton,
   ServiceInfo,
 } from '@/modules/services/components/service-info'
+import { ServiceSectionsCard } from '@/modules/services/components/services-card-list-section/service-sections-card'
+import RecursiveIcon from '@/modules/shared/components/svgs/recursive.svg'
+import SettingsIcon from '@/modules/shared/components/svgs/settings.svg'
 import { getResourceProfile } from '../../services/resource-profile'
 import { PurchaseSection } from '../purchase-section/purchase-section'
 
@@ -36,6 +39,20 @@ async function ServiceProfile({ serviceSlug }: ServiceProfileProps) {
         summary={resourceProfile.summary}
         thumbnailUrl={resourceProfile.thumbnailUrl}
         actions={<ActionButtons infoLink={resourceProfile.infoLink} />}
+        details={
+          <div className="flex flex-col gap-2 lg:flex-row lg:gap-4">
+            <ServiceSectionsCard
+              icon={SettingsIcon}
+              title="Formation & Setup"
+              items={resourceProfile.setupServices}
+            />
+            <ServiceSectionsCard
+              icon={RecursiveIcon}
+              title="Recurring Services"
+              items={resourceProfile.recurringServices}
+            />
+          </div>
+        }
       >
         <BookCallButton />
         <PurchaseButton

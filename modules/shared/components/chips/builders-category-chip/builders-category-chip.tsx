@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { TeamCategory } from '@/modules/shared/types/types'
+import { TeamCategory } from '@/modules/shared/types/common-enums'
 import { GenericChip } from '../generic-chip/generic-chip'
 
 interface BuildersCategoryChipProps {
   category: TeamCategory
 }
 
-export default function BuildersCategoryChip({ category }: BuildersCategoryChipProps) {
+function BuildersCategoryChip({ category }: BuildersCategoryChipProps) {
   const { label, color } = useMemo(() => {
     switch (category) {
       case TeamCategory.Technical:
@@ -68,3 +68,5 @@ export default function BuildersCategoryChip({ category }: BuildersCategoryChipP
     </GenericChip>
   )
 }
+
+export { BuildersCategoryChip }

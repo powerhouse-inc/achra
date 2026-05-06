@@ -6,7 +6,7 @@ interface LatestKeyResultsProps {
   keyResults: Sow_KeyResult[]
 }
 
-export default function LatestKeyResults({ keyResults }: LatestKeyResultsProps) {
+function LatestKeyResults({ keyResults }: LatestKeyResultsProps) {
   return (
     <div className="milestone-latest-key-results bg-popover flex flex-col gap-2 rounded-xl border p-2">
       <div className="text-card-foreground text-xs/4.5 font-medium">Latest Key Results</div>
@@ -53,3 +53,5 @@ export default function LatestKeyResults({ keyResults }: LatestKeyResultsProps) 
     </div>
   )
 }
+
+export { LatestKeyResults }

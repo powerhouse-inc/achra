@@ -6,8 +6,8 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from '@/modules/shared/components/ui/empty'
-import ForumPost from '../forum-post/forum-post'
-import ForumPostSkeleton from '../forum-post/forum-post-skeleton'
+import { ForumPost } from '../forum-post/forum-post'
+import { ForumPostSkeleton } from '../forum-post/forum-post-skeleton'
 
 export interface ForumListProps {
   posts: Topic[]
@@ -22,7 +22,7 @@ export interface MeasureChipParams {
   reset?: boolean
 }
 
-export function ForumList({ posts, biggerLikes, error, isLoading }: ForumListProps) {
+function ForumList({ posts, biggerLikes, error, isLoading }: ForumListProps) {
   return (
     <div className="flex flex-col gap-2">
       {isLoading && (
@@ -60,3 +60,5 @@ export function ForumList({ posts, biggerLikes, error, isLoading }: ForumListPro
     </div>
   )
 }
+
+export { ForumList }

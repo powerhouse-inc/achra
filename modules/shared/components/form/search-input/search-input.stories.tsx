@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import SearchInput from './search-input'
+import { SearchInput } from './search-input'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

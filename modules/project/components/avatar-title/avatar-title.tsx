@@ -26,12 +26,7 @@ export interface AvatarTitleRootProps {
   children?: React.ReactNode
 }
 
-export function AvatarTitleRoot({
-  className,
-  asChild = false,
-  href,
-  ...props
-}: AvatarTitleRootProps) {
+function AvatarTitleRoot({ className, asChild = false, href, ...props }: AvatarTitleRootProps) {
   const baseClassName = cn('flex items-center gap-1 lg:gap-2', className)
 
   if (asChild) {
@@ -60,13 +55,7 @@ export type AvatarTitleAvatarProps = React.ComponentProps<typeof AvatarPrimitive
   fallback?: string
 }
 
-export function AvatarTitleAvatar({
-  src,
-  alt,
-  fallback,
-  className,
-  ...props
-}: AvatarTitleAvatarProps) {
+function AvatarTitleAvatar({ src, alt, fallback, className, ...props }: AvatarTitleAvatarProps) {
   const fallbackText = fallback ?? alt.substring(0, 2).toUpperCase()
 
   return (
@@ -79,7 +68,7 @@ export function AvatarTitleAvatar({
 
 export type AvatarTitleTextProps = React.ComponentProps<'p'>
 
-export function AvatarTitleText({ className, ...props }: AvatarTitleTextProps) {
+function AvatarTitleText({ className, ...props }: AvatarTitleTextProps) {
   return (
     <p
       data-slot="avatar-title-text"
@@ -88,3 +77,5 @@ export function AvatarTitleText({ className, ...props }: AvatarTitleTextProps) {
     />
   )
 }
+
+export { AvatarTitleRoot, AvatarTitleAvatar, AvatarTitleText }

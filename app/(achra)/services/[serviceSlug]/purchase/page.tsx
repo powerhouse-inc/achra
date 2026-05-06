@@ -38,6 +38,7 @@ export default async function ServicePurchasePage({ params }: ServicePurchasePag
     <PageContent className="gap-6">
       <ServicePurchaseStoreProvider services={services}>
         <ServicePurchaseWizard resourceTemplate={resourceTemplate} operator={operator} />
+
         {ff.LEAVE_PAGE_GUARD_ENABLED && <LeavePageGuard />}
         <StepUrlSync />
       </ServicePurchaseStoreProvider>

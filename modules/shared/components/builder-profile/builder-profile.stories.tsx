@@ -1,5 +1,5 @@
 import { BuilderStatus } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuilderProfile from './builder-profile'
+import { BuilderProfile } from './builder-profile'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

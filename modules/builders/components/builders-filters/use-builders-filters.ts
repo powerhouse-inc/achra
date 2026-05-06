@@ -23,7 +23,7 @@ const filtersConfig = {
     }),
 } as const
 
-export default function useBuildersFilters() {
+function useBuildersFilters() {
   // Keep all filter params in a single query-state object so resetting or updating one key
   // happens in a single URL mutation, eliminating the flicker we saw with multiple setters.
   const [filters, setFilters] = useQueryStates(filtersConfig)
@@ -97,3 +97,5 @@ export default function useBuildersFilters() {
     onReset,
   }
 }
+
+export { useBuildersFilters }

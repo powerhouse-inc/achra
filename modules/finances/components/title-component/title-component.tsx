@@ -10,7 +10,7 @@ interface TitleComponentProps {
   networkName: string
 }
 
-export function TitleComponent({
+function TitleComponent({
   title,
   description,
   icon,
@@ -52,3 +52,5 @@ export function TitleComponent({
     </div>
   )
 }
+
+export { TitleComponent }

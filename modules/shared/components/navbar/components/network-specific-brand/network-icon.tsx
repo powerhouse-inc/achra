@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
+import { selectNetworkImages } from '@/modules/shared/lib/network-brand-utils'
 import { NetworkImage } from './network-image'
-import { selectNetworkImages } from './utils'
 
 /**
  * Network icon for mobile view

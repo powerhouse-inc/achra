@@ -1,1 +1,1 @@
-export { default } from './builders-skills-chip'
+export { BuildersSkillsChip } from './builders-skills-chip'

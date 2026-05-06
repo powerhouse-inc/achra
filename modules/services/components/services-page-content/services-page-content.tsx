@@ -1,55 +1,67 @@
 'use client'
 import { useMemo } from 'react'
 import ff from '@/modules/shared/lib/feature-flags'
-import { isBuilderService, isNetworkService, type Service } from '@/modules/shared/types/services'
-import { filterBySearch } from '../../utils/utils'
-import EmptyStateService from '../empty-state-service/empty-state-service'
+import { isBuilderService, isNetworkService } from '@/modules/shared/types/services'
+import { filterBySearch } from '../../lib/utils'
+import { EmptyStateService } from '../empty-state-service/empty-state-service'
+import { ServicesCategorySection } from '../services-category-section'
+import { ServicesFeaturedSection } from '../services-featured-section'
 import { useServicesFiltersContext } from '../services-filters/services-filters-context'
-import ServicesList from '../services-list'
+import type { EnrichedService } from '../../types'
 
 interface ServicesPageContentProps {
-  services: Service[]
+  enrichedServices: EnrichedService[]
 }
 
-export function ServicesPageContent({ services }: Readonly<ServicesPageContentProps>) {
-  const { search: contextSearch, tab: contextTab } = useServicesFiltersContext()
-  const filtersEnabled = ff.SERVICES_LISTING_FILTERS_ENABLED
-  const search = filtersEnabled ? contextSearch : ''
-  const tab = filtersEnabled ? contextTab : 'all'
+function ServicesPageContent({ enrichedServices }: Readonly<ServicesPageContentProps>) {
+  const { search: contextSearch } = useServicesFiltersContext()
+  const search = ff.SERVICES_LISTING_FILTERS_ENABLED ? contextSearch : ''
 
-  const filteredServices = useMemo(() => filterBySearch(services, search), [services, search])
+  const filteredServices = useMemo(
+    () => enrichedServices.filter((es) => filterBySearch([es.service], search).length > 0),
+    [enrichedServices, search],
+  )
 
   const builderServices = useMemo(
-    () => filteredServices.filter(isBuilderService),
+    () => filteredServices.filter((es) => isBuilderService(es.service)),
     [filteredServices],
   )
   const networkServices = useMemo(
-    () => filteredServices.filter(isNetworkService),
+    () => filteredServices.filter((es) => isNetworkService(es.service)),
     [filteredServices],
   )
 
-  const shouldShowBuilders = (tab === 'all' || tab === 'builders') && builderServices.length > 0
-  const shouldShowNetworks = (tab === 'all' || tab === 'networks') && networkServices.length > 0
+  const featuredServices = useMemo(() => {
+    const featured: EnrichedService[] = []
+    const firstBuilder = builderServices.at(0)
+    const firstNetwork = networkServices.at(0)
+    if (firstBuilder !== undefined) featured.push(firstBuilder)
+    if (firstNetwork !== undefined) featured.push(firstNetwork)
+    return featured
+  }, [builderServices, networkServices])
 
-  // Only show empty state if the selected tab has not services
-  const isTabEmpty =
-    (tab === 'builders' && builderServices.length === 0) ||
-    (tab === 'networks' && networkServices.length === 0) ||
-    (tab === 'all' && builderServices.length === 0 && networkServices.length === 0)
-
-  if (isTabEmpty) {
-    return (
-      <EmptyStateService
-        title="No services found"
-        description="There are no services available for this combination of filters"
-      />
-    )
-  }
+  const isEmpty = builderServices.length === 0 && networkServices.length === 0
 
   return (
-    <div className="flex flex-col gap-8">
-      {shouldShowBuilders && <ServicesList title="Builders" services={builderServices} />}
-      {shouldShowNetworks && <ServicesList title="Networks" services={networkServices} />}
+    <div className="flex flex-col gap-10">
+      {isEmpty ? (
+        <EmptyStateService
+          title="No services found"
+          description="There are no services available for this combination of filters"
+        />
+      ) : (
+        <>
+          {featuredServices.length > 0 && <ServicesFeaturedSection services={featuredServices} />}
+          {builderServices.length > 0 && (
+            <ServicesCategorySection title="Builders" services={builderServices} />
+          )}
+          {networkServices.length > 0 && (
+            <ServicesCategorySection title="Networks" services={networkServices} />
+          )}
+        </>
+      )}
     </div>
   )
 }
+
+export { ServicesPageContent }

@@ -7,7 +7,7 @@ import {
   filterAccountAndTransactions,
   getCurrencyValue,
 } from '@/modules/expense-reports/lib/budget-statement-utils'
-import { isGeneratedSnapshotAccount } from '../../utils/types-helpers'
+import { isGeneratedSnapshotAccount } from '@/modules/expense-reports/lib/types-helpers'
 import { Transaction } from '../transaction'
 import { GroupItem } from './group-item'
 import { InitialBalanceRow } from './initial-balance-row'

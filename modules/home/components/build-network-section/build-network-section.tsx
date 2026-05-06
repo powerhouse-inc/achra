@@ -143,7 +143,7 @@ function BuildNetworkSection() {
             forceMount
             className="mt-0 hidden outline-none data-[state=active]:block lg:col-start-2 lg:row-start-1 lg:px-8"
           >
-            <OrgTabCollage priority />
+            <OrgTabCollage />
           </TabsContent>
 
           <TabsContent

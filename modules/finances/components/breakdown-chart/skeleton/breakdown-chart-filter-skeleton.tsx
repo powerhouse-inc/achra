@@ -1,6 +1,6 @@
 import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
-export function BreakdownChartFilterSkeleton() {
+function BreakdownChartFilterSkeleton() {
   return (
     <div className="flex flex-row flex-wrap items-start justify-between">
       <div className="flex flex-col gap-1">
@@ -21,3 +21,5 @@ export function BreakdownChartFilterSkeleton() {
     </div>
   )
 }
+
+export { BreakdownChartFilterSkeleton }

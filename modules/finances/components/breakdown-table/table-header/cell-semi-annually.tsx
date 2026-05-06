@@ -2,7 +2,7 @@ import type { MetricValues } from '@/modules/finances/types'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { cn } from '@/modules/shared/lib/utils'
 
-export function getShortNameForMetric(metric: string): string {
+function getShortNameForMetric(metric: string): string {
   if (metric === 'Net Expenses On-Chain') {
     return 'On-Chain'
   }
@@ -15,7 +15,7 @@ export function getShortNameForMetric(metric: string): string {
   return metric
 }
 
-export function getKeyMetric(metric: string): string {
+function getKeyMetric(metric: string): string {
   if (metric === 'Net Expenses On-Chain') {
     return 'PaymentsOnChain'
   }
@@ -75,4 +75,4 @@ function SemiAnnualCell({
   )
 }
 
-export { SemiAnnualCell }
+export { SemiAnnualCell, getKeyMetric, getShortNameForMetric }

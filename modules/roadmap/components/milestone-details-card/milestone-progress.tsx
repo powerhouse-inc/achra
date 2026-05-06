@@ -1,12 +1,12 @@
 import type { ScopeOfWork_DeliverablesSet } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getProgressPercentage } from '../../lib/type-helpers'
-import PercentageProgressBar from './percentage-progress-bar'
+import { PercentageProgressBar } from './percentage-progress-bar'
 
 interface MilestoneProgressProps {
   scope: Omit<ScopeOfWork_DeliverablesSet, 'deliverables'>
 }
 
-export default function MilestoneProgress({ scope }: MilestoneProgressProps) {
+function MilestoneProgress({ scope }: MilestoneProgressProps) {
   const progress = getProgressPercentage(scope.progress)
 
   return (
@@ -22,3 +22,5 @@ export default function MilestoneProgress({ scope }: MilestoneProgressProps) {
     </div>
   )
 }
+
+export { MilestoneProgress }

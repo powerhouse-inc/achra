@@ -9,7 +9,7 @@ import {
   TableRow,
 } from '@/modules/shared/components/ui/table'
 
-export function MetricCardSkeleton() {
+function MetricCardSkeleton() {
   return (
     <Card className="bg-popover relative flex h-[74px] w-full flex-col justify-between gap-2 border px-4 py-2 shadow-none">
       <div className="flex w-full items-center justify-between">
@@ -30,7 +30,7 @@ export function MetricCardSkeleton() {
 }
 
 // Simula ProgressCard
-export function ProgressCardSkeleton() {
+function ProgressCardSkeleton() {
   return (
     <div className="bg-popover flex h-[74px] w-full flex-col justify-center gap-2 rounded-xl border p-2 lg:px-4">
       <div className="flex items-center justify-between">
@@ -45,7 +45,7 @@ export function ProgressCardSkeleton() {
 }
 
 // Simula DeliverableList (Mobile View)
-export function DeliverableListSkeleton() {
+function DeliverableListSkeleton() {
   return (
     <div className="flex w-full flex-col gap-2">
       {[1, 2, 3].map((i) => (
@@ -92,7 +92,7 @@ export function DeliverableListSkeleton() {
 }
 
 // Simula DeliverableTable (Desktop View)
-export function DeliverableTableSkeleton() {
+function DeliverableTableSkeleton() {
   return (
     <Table className="w-full [&_table]:flex [&_table]:flex-col">
       <TableHeader className="block w-full">
@@ -154,4 +154,11 @@ export function DeliverableTableSkeleton() {
       </TableBody>
     </Table>
   )
+}
+
+export {
+  MetricCardSkeleton,
+  ProgressCardSkeleton,
+  DeliverableListSkeleton,
+  DeliverableTableSkeleton,
 }

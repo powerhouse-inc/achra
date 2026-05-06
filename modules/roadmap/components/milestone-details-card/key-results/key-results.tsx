@@ -5,8 +5,8 @@ import { useMemo } from 'react'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
 import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
 import { cn } from '@/modules/shared/lib/utils'
-import ExpandableButtonItem from './expandable-button-item'
-import MaybeScrollableList from './maybe-scrollable-list'
+import { ExpandableButtonItem } from './expandable-button-item'
+import { MaybeScrollableList } from './maybe-scrollable-list'
 import type { DeliverableViewMode } from '../../deliverable-card/deliverable-card'
 
 interface KeyResultsProps {
@@ -17,7 +17,7 @@ interface KeyResultsProps {
   maxKeyResultsOnRow: number
 }
 
-export default function KeyResults({
+function KeyResults({
   keyResults,
   viewMode,
   expanded,
@@ -127,3 +127,5 @@ export default function KeyResults({
     </div>
   )
 }
+
+export { KeyResults }

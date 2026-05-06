@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import SimpleBar from 'simplebar-react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
-import BuilderProfile from '@/modules/shared/components/builder-profile/builder-profile'
+import { BuilderProfile } from '@/modules/shared/components/builder-profile/builder-profile'
 import { BuilderSkills } from '@/modules/shared/components/builder-skills'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/modules/shared/components/ui/card'
@@ -24,7 +24,7 @@ export interface BuildersListProps {
   asSectionContent?: boolean
 }
 
-export function BuildersList({
+function BuildersList({
   builders,
   networkSlug,
   className,
@@ -103,3 +103,5 @@ export function BuildersList({
     </div>
   )
 }
+
+export { BuildersList }

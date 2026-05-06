@@ -7,7 +7,7 @@ interface MilestoneLinkProps {
   code: string
 }
 
-export default function MilestoneLink({ code }: MilestoneLinkProps) {
+function MilestoneLink({ code }: MilestoneLinkProps) {
   return (
     <Link
       className="flex w-full justify-between overflow-hidden rounded-sm bg-white shadow-sm"
@@ -30,3 +30,5 @@ export default function MilestoneLink({ code }: MilestoneLinkProps) {
     </Link>
   )
 }
+
+export { MilestoneLink }

@@ -13,7 +13,7 @@ interface BudgetStatementPopoverProps {
   setOpen: (open: boolean) => void
 }
 
-export function BudgetStatementPopover({
+function BudgetStatementPopover({
   className,
   metric,
   handleOnMetricSelect,
@@ -43,3 +43,5 @@ export function BudgetStatementPopover({
     </div>
   )
 }
+
+export { BudgetStatementPopover }
