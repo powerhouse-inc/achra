@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import type { RsServiceSubscriptionTier } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ServiceTierFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_LABELS } from '@/modules/service-purchase/lib/constants'
 import {
   formatMetricLabel,
@@ -13,7 +13,7 @@ import { RadioGroupItem } from '@/modules/shared/components/ui/radio-group'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface PlanSelectorItemProps {
-  tier: RsServiceSubscriptionTier
+  tier: ServiceTierFieldsFragment
   isSelected?: boolean
 }
 

@@ -1,9 +1,9 @@
-import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ResourceOperatorFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
 import { OperatorCard } from '@/modules/services/components/operator-card'
 
 interface SelectOperatorStepProps {
   onSelectOperator: (operatorId: string) => void
-  operator: BuilderProfileState
+  operator: ResourceOperatorFieldsFragment
 }
 
 function SelectOperatorStep({ onSelectOperator, operator }: Readonly<SelectOperatorStepProps>) {

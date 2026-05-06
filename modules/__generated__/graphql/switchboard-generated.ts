@@ -249,22 +249,16 @@ export type AccountTransactionsMutationsUpdateTransactionPeriodAsyncArgs = {
 /** Queries: AccountTransactions Document */
 export type AccountTransactionsQueries = {
   __typename?: 'AccountTransactionsQueries';
-  /** Get all AccountTransactions documents (paged) */
-  AccountTransactions_documents: AccountTransactions_DocumentResultPage;
   /** Get a specific AccountTransactions document by identifier */
   document?: Maybe<AccountTransactions_DocumentWithChildren>;
-  /** Get children of a AccountTransactions document */
-  documentChildren: AccountTransactions_DocumentResultPage;
-  /** Get parents of a AccountTransactions document */
-  documentParents: AccountTransactions_DocumentResultPage;
+  /** Get incoming relationships to a AccountTransactions document */
+  documentIncomingRelationships: AccountTransactions_DocumentResultPage;
+  /** Get outgoing relationships of a AccountTransactions document */
+  documentOutgoingRelationships: AccountTransactions_DocumentResultPage;
+  /** Get all AccountTransactions documents (paged) */
+  documents: AccountTransactions_DocumentResultPage;
   /** Find AccountTransactions documents by search criteria */
   findDocuments: AccountTransactions_DocumentResultPage;
-};
-
-
-/** Queries: AccountTransactions Document */
-export type AccountTransactionsQueriesAccountTransactions_DocumentsArgs = {
-  paging?: InputMaybe<AccountTransactions_PagingInput>;
 };
 
 
@@ -276,25 +270,33 @@ export type AccountTransactionsQueriesDocumentArgs = {
 
 
 /** Queries: AccountTransactions Document */
-export type AccountTransactionsQueriesDocumentChildrenArgs = {
+export type AccountTransactionsQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<AccountTransactions_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<AccountTransactions_ViewFilterInput>;
 };
 
 
 /** Queries: AccountTransactions Document */
-export type AccountTransactionsQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type AccountTransactionsQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<AccountTransactions_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<AccountTransactions_ViewFilterInput>;
+};
+
+
+/** Queries: AccountTransactions Document */
+export type AccountTransactionsQueriesDocumentsArgs = {
+  paging?: InputMaybe<AccountTransactions_PagingInput>;
 };
 
 
 /** Queries: AccountTransactions Document */
 export type AccountTransactionsQueriesFindDocumentsArgs = {
   paging?: InputMaybe<AccountTransactions_PagingInput>;
-  search: AccountTransactions_SearchFilterInput;
+  search?: InputMaybe<AccountTransactions_SearchFilterInput>;
   view?: InputMaybe<AccountTransactions_ViewFilterInput>;
 };
 
@@ -685,22 +687,16 @@ export type AccountsMutationsUpdateKycStatusAsyncArgs = {
 /** Queries: Accounts Document */
 export type AccountsQueries = {
   __typename?: 'AccountsQueries';
-  /** Get all Accounts documents (paged) */
-  Accounts_documents: Accounts_DocumentResultPage;
   /** Get a specific Accounts document by identifier */
   document?: Maybe<Accounts_DocumentWithChildren>;
-  /** Get children of a Accounts document */
-  documentChildren: Accounts_DocumentResultPage;
-  /** Get parents of a Accounts document */
-  documentParents: Accounts_DocumentResultPage;
+  /** Get incoming relationships to a Accounts document */
+  documentIncomingRelationships: Accounts_DocumentResultPage;
+  /** Get outgoing relationships of a Accounts document */
+  documentOutgoingRelationships: Accounts_DocumentResultPage;
+  /** Get all Accounts documents (paged) */
+  documents: Accounts_DocumentResultPage;
   /** Find Accounts documents by search criteria */
   findDocuments: Accounts_DocumentResultPage;
-};
-
-
-/** Queries: Accounts Document */
-export type AccountsQueriesAccounts_DocumentsArgs = {
-  paging?: InputMaybe<Accounts_PagingInput>;
 };
 
 
@@ -712,25 +708,33 @@ export type AccountsQueriesDocumentArgs = {
 
 
 /** Queries: Accounts Document */
-export type AccountsQueriesDocumentChildrenArgs = {
+export type AccountsQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<Accounts_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Accounts_ViewFilterInput>;
 };
 
 
 /** Queries: Accounts Document */
-export type AccountsQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type AccountsQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<Accounts_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Accounts_ViewFilterInput>;
+};
+
+
+/** Queries: Accounts Document */
+export type AccountsQueriesDocumentsArgs = {
+  paging?: InputMaybe<Accounts_PagingInput>;
 };
 
 
 /** Queries: Accounts Document */
 export type AccountsQueriesFindDocumentsArgs = {
   paging?: InputMaybe<Accounts_PagingInput>;
-  search: Accounts_SearchFilterInput;
+  search?: InputMaybe<Accounts_SearchFilterInput>;
   view?: InputMaybe<Accounts_ViewFilterInput>;
 };
 
@@ -1006,6 +1010,328 @@ export type AnalyticsSeriesDimension = {
   path?: Maybe<Scalars['String']['output']>;
 };
 
+export type AppModule = IDocument & {
+  __typename?: 'AppModule';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: AppModule_AppModuleState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: AppModule_AppModuleState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type AppModuleOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for AppModule operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type AppModuleMutationResult = {
+  __typename?: 'AppModuleMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: AppModule_FullState;
+};
+
+/** Mutations: AppModule */
+export type AppModuleMutations = {
+  __typename?: 'AppModuleMutations';
+  addDocumentType: AppModuleMutationResult;
+  addDocumentTypeAsync: Scalars['String']['output'];
+  createDocument: AppModuleMutationResult;
+  createEmptyDocument: AppModuleMutationResult;
+  removeDocumentType: AppModuleMutationResult;
+  removeDocumentTypeAsync: Scalars['String']['output'];
+  setAppName: AppModuleMutationResult;
+  setAppNameAsync: Scalars['String']['output'];
+  setAppStatus: AppModuleMutationResult;
+  setAppStatusAsync: Scalars['String']['output'];
+  setDocumentTypes: AppModuleMutationResult;
+  setDocumentTypesAsync: Scalars['String']['output'];
+  setDragAndDropEnabled: AppModuleMutationResult;
+  setDragAndDropEnabledAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsAddDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_AddDocumentTypeInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsAddDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_AddDocumentTypeInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<AppModule_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsRemoveDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsRemoveDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetAppNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetAppNameInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetAppNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetAppNameInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetAppStatusArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetAppStatusInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetAppStatusAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetAppStatusInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetDocumentTypesArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetDocumentTypesInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetDocumentTypesAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetDocumentTypesInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetDragAndDropEnabledArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetDragAndDropEnabledInput;
+};
+
+
+/** Mutations: AppModule */
+export type AppModuleMutationsSetDragAndDropEnabledAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: AppModule_SetDragAndDropEnabledInput;
+};
+
+/** Queries: AppModule Document */
+export type AppModuleQueries = {
+  __typename?: 'AppModuleQueries';
+  /** Get a specific AppModule document by identifier */
+  document?: Maybe<AppModule_DocumentWithChildren>;
+  /** Get incoming relationships to a AppModule document */
+  documentIncomingRelationships: AppModule_DocumentResultPage;
+  /** Get outgoing relationships of a AppModule document */
+  documentOutgoingRelationships: AppModule_DocumentResultPage;
+  /** Get all AppModule documents (paged) */
+  documents: AppModule_DocumentResultPage;
+  /** Find AppModule documents by search criteria */
+  findDocuments: AppModule_DocumentResultPage;
+};
+
+
+/** Queries: AppModule Document */
+export type AppModuleQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<AppModule_ViewFilterInput>;
+};
+
+
+/** Queries: AppModule Document */
+export type AppModuleQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<AppModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<AppModule_ViewFilterInput>;
+};
+
+
+/** Queries: AppModule Document */
+export type AppModuleQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<AppModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<AppModule_ViewFilterInput>;
+};
+
+
+/** Queries: AppModule Document */
+export type AppModuleQueriesDocumentsArgs = {
+  paging?: InputMaybe<AppModule_PagingInput>;
+};
+
+
+/** Queries: AppModule Document */
+export type AppModuleQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<AppModule_PagingInput>;
+  search?: InputMaybe<AppModule_SearchFilterInput>;
+  view?: InputMaybe<AppModule_ViewFilterInput>;
+};
+
+export type AppModule_AddDocumentTypeInput = {
+  documentType: Scalars['String']['input'];
+};
+
+export type AppModule_AppModuleState = {
+  __typename?: 'AppModule_AppModuleState';
+  allowedDocumentTypes?: Maybe<Array<Scalars['String']['output']>>;
+  isDragAndDropEnabled: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  status: AppModule_StatusType;
+};
+
+/** Input Types for Initial State */
+export type AppModule_AppModuleStateInput = {
+  allowedDocumentTypes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  isDragAndDropEnabled?: InputMaybe<Scalars['Boolean']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<AppModule_StatusType>;
+};
+
+/** Paginated result type for AppModule documents */
+export type AppModule_DocumentResultPage = {
+  __typename?: 'AppModule_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<AppModuleMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+/** Document with children for AppModule */
+export type AppModule_DocumentWithChildren = {
+  __typename?: 'AppModule_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: AppModuleMutationResult;
+};
+
+/** Full state with all scopes for AppModule */
+export type AppModule_FullState = {
+  __typename?: 'AppModule_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: AppModule_PhDocumentScopeState;
+  global: AppModule_AppModuleState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type AppModule_InitialStateInput = {
+  global?: InputMaybe<AppModule_AppModuleStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+/** Document scope state (same for all document types) */
+export type AppModule_PhDocumentScopeState = {
+  __typename?: 'AppModule_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: AppModule_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type AppModule_PhHashConfig = {
+  __typename?: 'AppModule_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type AppModule_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AppModule_RemoveDocumentTypeInput = {
+  documentType: Scalars['String']['input'];
+};
+
+export type AppModule_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: BaseOperations */
+export type AppModule_SetAppNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type AppModule_SetAppStatusInput = {
+  status: AppModule_StatusType;
+};
+
+export type AppModule_SetDocumentTypesInput = {
+  documentTypes: Array<Scalars['String']['input']>;
+};
+
+/** Module: DndOperations */
+export type AppModule_SetDragAndDropEnabledInput = {
+  enabled: Scalars['Boolean']['input'];
+};
+
+export enum AppModule_StatusType {
+  Confirmed = 'CONFIRMED',
+  Draft = 'DRAFT'
+}
+
+export type AppModule_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
 export type Attachment = {
   __typename?: 'Attachment';
   data: Scalars['String']['output'];
@@ -1270,22 +1596,16 @@ export type BillingStatementMutationsEditStatusAsyncArgs = {
 /** Queries: BillingStatement Document */
 export type BillingStatementQueries = {
   __typename?: 'BillingStatementQueries';
-  /** Get all BillingStatement documents (paged) */
-  BillingStatement_documents: BillingStatement_DocumentResultPage;
   /** Get a specific BillingStatement document by identifier */
   document?: Maybe<BillingStatement_DocumentWithChildren>;
-  /** Get children of a BillingStatement document */
-  documentChildren: BillingStatement_DocumentResultPage;
-  /** Get parents of a BillingStatement document */
-  documentParents: BillingStatement_DocumentResultPage;
+  /** Get incoming relationships to a BillingStatement document */
+  documentIncomingRelationships: BillingStatement_DocumentResultPage;
+  /** Get outgoing relationships of a BillingStatement document */
+  documentOutgoingRelationships: BillingStatement_DocumentResultPage;
+  /** Get all BillingStatement documents (paged) */
+  documents: BillingStatement_DocumentResultPage;
   /** Find BillingStatement documents by search criteria */
   findDocuments: BillingStatement_DocumentResultPage;
-};
-
-
-/** Queries: BillingStatement Document */
-export type BillingStatementQueriesBillingStatement_DocumentsArgs = {
-  paging?: InputMaybe<BillingStatement_PagingInput>;
 };
 
 
@@ -1297,25 +1617,33 @@ export type BillingStatementQueriesDocumentArgs = {
 
 
 /** Queries: BillingStatement Document */
-export type BillingStatementQueriesDocumentChildrenArgs = {
+export type BillingStatementQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<BillingStatement_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<BillingStatement_ViewFilterInput>;
 };
 
 
 /** Queries: BillingStatement Document */
-export type BillingStatementQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type BillingStatementQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<BillingStatement_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<BillingStatement_ViewFilterInput>;
+};
+
+
+/** Queries: BillingStatement Document */
+export type BillingStatementQueriesDocumentsArgs = {
+  paging?: InputMaybe<BillingStatement_PagingInput>;
 };
 
 
 /** Queries: BillingStatement Document */
 export type BillingStatementQueriesFindDocumentsArgs = {
   paging?: InputMaybe<BillingStatement_PagingInput>;
-  search: BillingStatement_SearchFilterInput;
+  search?: InputMaybe<BillingStatement_SearchFilterInput>;
   view?: InputMaybe<BillingStatement_ViewFilterInput>;
 };
 
@@ -1867,22 +2195,16 @@ export type BuilderProfileMutationsUpdateProfileAsyncArgs = {
 /** Queries: BuilderProfile Document */
 export type BuilderProfileQueries = {
   __typename?: 'BuilderProfileQueries';
-  /** Get all BuilderProfile documents (paged) */
-  BuilderProfile_documents: BuilderProfile_DocumentResultPage;
   /** Get a specific BuilderProfile document by identifier */
   document?: Maybe<BuilderProfile_DocumentWithChildren>;
-  /** Get children of a BuilderProfile document */
-  documentChildren: BuilderProfile_DocumentResultPage;
-  /** Get parents of a BuilderProfile document */
-  documentParents: BuilderProfile_DocumentResultPage;
+  /** Get incoming relationships to a BuilderProfile document */
+  documentIncomingRelationships: BuilderProfile_DocumentResultPage;
+  /** Get outgoing relationships of a BuilderProfile document */
+  documentOutgoingRelationships: BuilderProfile_DocumentResultPage;
+  /** Get all BuilderProfile documents (paged) */
+  documents: BuilderProfile_DocumentResultPage;
   /** Find BuilderProfile documents by search criteria */
   findDocuments: BuilderProfile_DocumentResultPage;
-};
-
-
-/** Queries: BuilderProfile Document */
-export type BuilderProfileQueriesBuilderProfile_DocumentsArgs = {
-  paging?: InputMaybe<BuilderProfile_PagingInput>;
 };
 
 
@@ -1894,25 +2216,33 @@ export type BuilderProfileQueriesDocumentArgs = {
 
 
 /** Queries: BuilderProfile Document */
-export type BuilderProfileQueriesDocumentChildrenArgs = {
+export type BuilderProfileQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<BuilderProfile_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<BuilderProfile_ViewFilterInput>;
 };
 
 
 /** Queries: BuilderProfile Document */
-export type BuilderProfileQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type BuilderProfileQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<BuilderProfile_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<BuilderProfile_ViewFilterInput>;
+};
+
+
+/** Queries: BuilderProfile Document */
+export type BuilderProfileQueriesDocumentsArgs = {
+  paging?: InputMaybe<BuilderProfile_PagingInput>;
 };
 
 
 /** Queries: BuilderProfile Document */
 export type BuilderProfileQueriesFindDocumentsArgs = {
   paging?: InputMaybe<BuilderProfile_PagingInput>;
-  search: BuilderProfile_SearchFilterInput;
+  search?: InputMaybe<BuilderProfile_SearchFilterInput>;
   view?: InputMaybe<BuilderProfile_ViewFilterInput>;
 };
 
@@ -2349,22 +2679,16 @@ export type BuildersMutationsRemoveBuilderAsyncArgs = {
 /** Queries: Builders Document */
 export type BuildersQueries = {
   __typename?: 'BuildersQueries';
-  /** Get all Builders documents (paged) */
-  Builders_documents: Builders_DocumentResultPage;
   /** Get a specific Builders document by identifier */
   document?: Maybe<Builders_DocumentWithChildren>;
-  /** Get children of a Builders document */
-  documentChildren: Builders_DocumentResultPage;
-  /** Get parents of a Builders document */
-  documentParents: Builders_DocumentResultPage;
+  /** Get incoming relationships to a Builders document */
+  documentIncomingRelationships: Builders_DocumentResultPage;
+  /** Get outgoing relationships of a Builders document */
+  documentOutgoingRelationships: Builders_DocumentResultPage;
+  /** Get all Builders documents (paged) */
+  documents: Builders_DocumentResultPage;
   /** Find Builders documents by search criteria */
   findDocuments: Builders_DocumentResultPage;
-};
-
-
-/** Queries: Builders Document */
-export type BuildersQueriesBuilders_DocumentsArgs = {
-  paging?: InputMaybe<Builders_PagingInput>;
 };
 
 
@@ -2376,25 +2700,33 @@ export type BuildersQueriesDocumentArgs = {
 
 
 /** Queries: Builders Document */
-export type BuildersQueriesDocumentChildrenArgs = {
+export type BuildersQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<Builders_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Builders_ViewFilterInput>;
 };
 
 
 /** Queries: Builders Document */
-export type BuildersQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type BuildersQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<Builders_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Builders_ViewFilterInput>;
+};
+
+
+/** Queries: Builders Document */
+export type BuildersQueriesDocumentsArgs = {
+  paging?: InputMaybe<Builders_PagingInput>;
 };
 
 
 /** Queries: Builders Document */
 export type BuildersQueriesFindDocumentsArgs = {
   paging?: InputMaybe<Builders_PagingInput>;
-  search: Builders_SearchFilterInput;
+  search?: InputMaybe<Builders_SearchFilterInput>;
   view?: InputMaybe<Builders_ViewFilterInput>;
 };
 
@@ -2868,22 +3200,16 @@ export type DocumentDriveMutationsUpdateNodeAsyncArgs = {
 /** Queries: DocumentDrive Document */
 export type DocumentDriveQueries = {
   __typename?: 'DocumentDriveQueries';
-  /** Get all DocumentDrive documents (paged) */
-  DocumentDrive_documents: DocumentDrive_DocumentResultPage;
   /** Get a specific DocumentDrive document by identifier */
   document?: Maybe<DocumentDrive_DocumentWithChildren>;
-  /** Get children of a DocumentDrive document */
-  documentChildren: DocumentDrive_DocumentResultPage;
-  /** Get parents of a DocumentDrive document */
-  documentParents: DocumentDrive_DocumentResultPage;
+  /** Get incoming relationships to a DocumentDrive document */
+  documentIncomingRelationships: DocumentDrive_DocumentResultPage;
+  /** Get outgoing relationships of a DocumentDrive document */
+  documentOutgoingRelationships: DocumentDrive_DocumentResultPage;
+  /** Get all DocumentDrive documents (paged) */
+  documents: DocumentDrive_DocumentResultPage;
   /** Find DocumentDrive documents by search criteria */
   findDocuments: DocumentDrive_DocumentResultPage;
-};
-
-
-/** Queries: DocumentDrive Document */
-export type DocumentDriveQueriesDocumentDrive_DocumentsArgs = {
-  paging?: InputMaybe<DocumentDrive_PagingInput>;
 };
 
 
@@ -2895,25 +3221,33 @@ export type DocumentDriveQueriesDocumentArgs = {
 
 
 /** Queries: DocumentDrive Document */
-export type DocumentDriveQueriesDocumentChildrenArgs = {
+export type DocumentDriveQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<DocumentDrive_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<DocumentDrive_ViewFilterInput>;
 };
 
 
 /** Queries: DocumentDrive Document */
-export type DocumentDriveQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type DocumentDriveQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<DocumentDrive_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<DocumentDrive_ViewFilterInput>;
+};
+
+
+/** Queries: DocumentDrive Document */
+export type DocumentDriveQueriesDocumentsArgs = {
+  paging?: InputMaybe<DocumentDrive_PagingInput>;
 };
 
 
 /** Queries: DocumentDrive Document */
 export type DocumentDriveQueriesFindDocumentsArgs = {
   paging?: InputMaybe<DocumentDrive_PagingInput>;
-  search: DocumentDrive_SearchFilterInput;
+  search?: InputMaybe<DocumentDrive_SearchFilterInput>;
   view?: InputMaybe<DocumentDrive_ViewFilterInput>;
 };
 
@@ -3205,6 +3539,297 @@ export type DocumentDrive_UpdateNodeInput = {
 };
 
 export type DocumentDrive_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type DocumentEditor = IDocument & {
+  __typename?: 'DocumentEditor';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: DocumentEditor_DocumentEditorState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: DocumentEditor_DocumentEditorState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type DocumentEditorOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for DocumentEditor operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type DocumentEditorMutationResult = {
+  __typename?: 'DocumentEditorMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: DocumentEditor_FullState;
+};
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutations = {
+  __typename?: 'DocumentEditorMutations';
+  addDocumentType: DocumentEditorMutationResult;
+  addDocumentTypeAsync: Scalars['String']['output'];
+  createDocument: DocumentEditorMutationResult;
+  createEmptyDocument: DocumentEditorMutationResult;
+  removeDocumentType: DocumentEditorMutationResult;
+  removeDocumentTypeAsync: Scalars['String']['output'];
+  setEditorName: DocumentEditorMutationResult;
+  setEditorNameAsync: Scalars['String']['output'];
+  setEditorStatus: DocumentEditorMutationResult;
+  setEditorStatusAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsAddDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_AddDocumentTypeInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsAddDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_AddDocumentTypeInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<DocumentEditor_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsRemoveDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsRemoveDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsSetEditorNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_SetEditorNameInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsSetEditorNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_SetEditorNameInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsSetEditorStatusArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_SetEditorStatusInput;
+};
+
+
+/** Mutations: DocumentEditor */
+export type DocumentEditorMutationsSetEditorStatusAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: DocumentEditor_SetEditorStatusInput;
+};
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueries = {
+  __typename?: 'DocumentEditorQueries';
+  /** Get a specific DocumentEditor document by identifier */
+  document?: Maybe<DocumentEditor_DocumentWithChildren>;
+  /** Get incoming relationships to a DocumentEditor document */
+  documentIncomingRelationships: DocumentEditor_DocumentResultPage;
+  /** Get outgoing relationships of a DocumentEditor document */
+  documentOutgoingRelationships: DocumentEditor_DocumentResultPage;
+  /** Get all DocumentEditor documents (paged) */
+  documents: DocumentEditor_DocumentResultPage;
+  /** Find DocumentEditor documents by search criteria */
+  findDocuments: DocumentEditor_DocumentResultPage;
+};
+
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<DocumentEditor_ViewFilterInput>;
+};
+
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<DocumentEditor_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<DocumentEditor_ViewFilterInput>;
+};
+
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<DocumentEditor_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<DocumentEditor_ViewFilterInput>;
+};
+
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueriesDocumentsArgs = {
+  paging?: InputMaybe<DocumentEditor_PagingInput>;
+};
+
+
+/** Queries: DocumentEditor Document */
+export type DocumentEditorQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<DocumentEditor_PagingInput>;
+  search?: InputMaybe<DocumentEditor_SearchFilterInput>;
+  view?: InputMaybe<DocumentEditor_ViewFilterInput>;
+};
+
+export type DocumentEditor_AddDocumentTypeInput = {
+  documentType: Scalars['String']['input'];
+  id: Scalars['OID']['input'];
+};
+
+export type DocumentEditor_DocumentEditorState = {
+  __typename?: 'DocumentEditor_DocumentEditorState';
+  documentTypes: Array<DocumentEditor_DocumentTypeItem>;
+  name: Scalars['String']['output'];
+  status: DocumentEditor_StatusType;
+};
+
+/** Input Types for Initial State */
+export type DocumentEditor_DocumentEditorStateInput = {
+  documentTypes?: InputMaybe<Array<InputMaybe<DocumentEditor_DocumentTypeItemInput>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<DocumentEditor_StatusType>;
+};
+
+/** Paginated result type for DocumentEditor documents */
+export type DocumentEditor_DocumentResultPage = {
+  __typename?: 'DocumentEditor_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<DocumentEditorMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+export type DocumentEditor_DocumentTypeItem = {
+  __typename?: 'DocumentEditor_DocumentTypeItem';
+  documentType: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+};
+
+export type DocumentEditor_DocumentTypeItemInput = {
+  documentType?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['OID']['input']>;
+};
+
+/** Document with children for DocumentEditor */
+export type DocumentEditor_DocumentWithChildren = {
+  __typename?: 'DocumentEditor_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: DocumentEditorMutationResult;
+};
+
+/** Full state with all scopes for DocumentEditor */
+export type DocumentEditor_FullState = {
+  __typename?: 'DocumentEditor_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: DocumentEditor_PhDocumentScopeState;
+  global: DocumentEditor_DocumentEditorState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type DocumentEditor_InitialStateInput = {
+  global?: InputMaybe<DocumentEditor_DocumentEditorStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+/** Document scope state (same for all document types) */
+export type DocumentEditor_PhDocumentScopeState = {
+  __typename?: 'DocumentEditor_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: DocumentEditor_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type DocumentEditor_PhHashConfig = {
+  __typename?: 'DocumentEditor_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type DocumentEditor_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type DocumentEditor_RemoveDocumentTypeInput = {
+  id: Scalars['OID']['input'];
+};
+
+export type DocumentEditor_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: BaseOperations */
+export type DocumentEditor_SetEditorNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type DocumentEditor_SetEditorStatusInput = {
+  status: DocumentEditor_StatusType;
+};
+
+export enum DocumentEditor_StatusType {
+  Confirmed = 'CONFIRMED',
+  Draft = 'DRAFT'
+}
+
+export type DocumentEditor_ViewFilterInput = {
   branch?: InputMaybe<Scalars['String']['input']>;
   scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
@@ -3951,22 +4576,16 @@ export type DocumentModelMutationsUpdateStateExampleAsyncArgs = {
 /** Queries: DocumentModel Document */
 export type DocumentModelQueries = {
   __typename?: 'DocumentModelQueries';
-  /** Get all DocumentModel documents (paged) */
-  DocumentModel_documents: DocumentModel_DocumentResultPage;
   /** Get a specific DocumentModel document by identifier */
   document?: Maybe<DocumentModel_DocumentWithChildren>;
-  /** Get children of a DocumentModel document */
-  documentChildren: DocumentModel_DocumentResultPage;
-  /** Get parents of a DocumentModel document */
-  documentParents: DocumentModel_DocumentResultPage;
+  /** Get incoming relationships to a DocumentModel document */
+  documentIncomingRelationships: DocumentModel_DocumentResultPage;
+  /** Get outgoing relationships of a DocumentModel document */
+  documentOutgoingRelationships: DocumentModel_DocumentResultPage;
+  /** Get all DocumentModel documents (paged) */
+  documents: DocumentModel_DocumentResultPage;
   /** Find DocumentModel documents by search criteria */
   findDocuments: DocumentModel_DocumentResultPage;
-};
-
-
-/** Queries: DocumentModel Document */
-export type DocumentModelQueriesDocumentModel_DocumentsArgs = {
-  paging?: InputMaybe<DocumentModel_PagingInput>;
 };
 
 
@@ -3978,25 +4597,33 @@ export type DocumentModelQueriesDocumentArgs = {
 
 
 /** Queries: DocumentModel Document */
-export type DocumentModelQueriesDocumentChildrenArgs = {
+export type DocumentModelQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<DocumentModel_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<DocumentModel_ViewFilterInput>;
 };
 
 
 /** Queries: DocumentModel Document */
-export type DocumentModelQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type DocumentModelQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<DocumentModel_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<DocumentModel_ViewFilterInput>;
+};
+
+
+/** Queries: DocumentModel Document */
+export type DocumentModelQueriesDocumentsArgs = {
+  paging?: InputMaybe<DocumentModel_PagingInput>;
 };
 
 
 /** Queries: DocumentModel Document */
 export type DocumentModelQueriesFindDocumentsArgs = {
   paging?: InputMaybe<DocumentModel_PagingInput>;
-  search: DocumentModel_SearchFilterInput;
+  search?: InputMaybe<DocumentModel_SearchFilterInput>;
   view?: InputMaybe<DocumentModel_ViewFilterInput>;
 };
 
@@ -4846,22 +5473,16 @@ export type ExpenseReportMutationsUpdateWalletAsyncArgs = {
 /** Queries: ExpenseReport Document */
 export type ExpenseReportQueries = {
   __typename?: 'ExpenseReportQueries';
-  /** Get all ExpenseReport documents (paged) */
-  ExpenseReport_documents: ExpenseReport_DocumentResultPage;
   /** Get a specific ExpenseReport document by identifier */
   document?: Maybe<ExpenseReport_DocumentWithChildren>;
-  /** Get children of a ExpenseReport document */
-  documentChildren: ExpenseReport_DocumentResultPage;
-  /** Get parents of a ExpenseReport document */
-  documentParents: ExpenseReport_DocumentResultPage;
+  /** Get incoming relationships to a ExpenseReport document */
+  documentIncomingRelationships: ExpenseReport_DocumentResultPage;
+  /** Get outgoing relationships of a ExpenseReport document */
+  documentOutgoingRelationships: ExpenseReport_DocumentResultPage;
+  /** Get all ExpenseReport documents (paged) */
+  documents: ExpenseReport_DocumentResultPage;
   /** Find ExpenseReport documents by search criteria */
   findDocuments: ExpenseReport_DocumentResultPage;
-};
-
-
-/** Queries: ExpenseReport Document */
-export type ExpenseReportQueriesExpenseReport_DocumentsArgs = {
-  paging?: InputMaybe<ExpenseReport_PagingInput>;
 };
 
 
@@ -4873,25 +5494,33 @@ export type ExpenseReportQueriesDocumentArgs = {
 
 
 /** Queries: ExpenseReport Document */
-export type ExpenseReportQueriesDocumentChildrenArgs = {
+export type ExpenseReportQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<ExpenseReport_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ExpenseReport_ViewFilterInput>;
 };
 
 
 /** Queries: ExpenseReport Document */
-export type ExpenseReportQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type ExpenseReportQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<ExpenseReport_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ExpenseReport_ViewFilterInput>;
+};
+
+
+/** Queries: ExpenseReport Document */
+export type ExpenseReportQueriesDocumentsArgs = {
+  paging?: InputMaybe<ExpenseReport_PagingInput>;
 };
 
 
 /** Queries: ExpenseReport Document */
 export type ExpenseReportQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ExpenseReport_PagingInput>;
-  search: ExpenseReport_SearchFilterInput;
+  search?: InputMaybe<ExpenseReport_SearchFilterInput>;
   view?: InputMaybe<ExpenseReport_ViewFilterInput>;
 };
 
@@ -5334,22 +5963,16 @@ export type FacetMutationsUpdateOptionAsyncArgs = {
 /** Queries: Facet Document */
 export type FacetQueries = {
   __typename?: 'FacetQueries';
-  /** Get all Facet documents (paged) */
-  Facet_documents: Facet_DocumentResultPage;
   /** Get a specific Facet document by identifier */
   document?: Maybe<Facet_DocumentWithChildren>;
-  /** Get children of a Facet document */
-  documentChildren: Facet_DocumentResultPage;
-  /** Get parents of a Facet document */
-  documentParents: Facet_DocumentResultPage;
+  /** Get incoming relationships to a Facet document */
+  documentIncomingRelationships: Facet_DocumentResultPage;
+  /** Get outgoing relationships of a Facet document */
+  documentOutgoingRelationships: Facet_DocumentResultPage;
+  /** Get all Facet documents (paged) */
+  documents: Facet_DocumentResultPage;
   /** Find Facet documents by search criteria */
   findDocuments: Facet_DocumentResultPage;
-};
-
-
-/** Queries: Facet Document */
-export type FacetQueriesFacet_DocumentsArgs = {
-  paging?: InputMaybe<Facet_PagingInput>;
 };
 
 
@@ -5361,25 +5984,33 @@ export type FacetQueriesDocumentArgs = {
 
 
 /** Queries: Facet Document */
-export type FacetQueriesDocumentChildrenArgs = {
+export type FacetQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<Facet_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Facet_ViewFilterInput>;
 };
 
 
 /** Queries: Facet Document */
-export type FacetQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type FacetQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<Facet_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Facet_ViewFilterInput>;
+};
+
+
+/** Queries: Facet Document */
+export type FacetQueriesDocumentsArgs = {
+  paging?: InputMaybe<Facet_PagingInput>;
 };
 
 
 /** Queries: Facet Document */
 export type FacetQueriesFindDocumentsArgs = {
   paging?: InputMaybe<Facet_PagingInput>;
-  search: Facet_SearchFilterInput;
+  search?: InputMaybe<Facet_SearchFilterInput>;
   view?: InputMaybe<Facet_ViewFilterInput>;
 };
 
@@ -5582,6 +6213,21 @@ export type IDocument = {
 export type IDocumentOperationsArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type InstallPackageResult = {
+  __typename?: 'InstallPackageResult';
+  documentModelsLoaded: Scalars['Int']['output'];
+  package: InstalledPackage;
+};
+
+export type InstalledPackage = {
+  __typename?: 'InstalledPackage';
+  documentTypes: Array<Scalars['String']['output']>;
+  installedAt: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  registryUrl: Scalars['String']['output'];
+  version?: Maybe<Scalars['String']['output']>;
 };
 
 export type Invoice = IDocument & {
@@ -6095,22 +6741,16 @@ export type InvoiceMutationsSetLineItemTagAsyncArgs = {
 /** Queries: Invoice Document */
 export type InvoiceQueries = {
   __typename?: 'InvoiceQueries';
-  /** Get all Invoice documents (paged) */
-  Invoice_documents: Invoice_DocumentResultPage;
   /** Get a specific Invoice document by identifier */
   document?: Maybe<Invoice_DocumentWithChildren>;
-  /** Get children of a Invoice document */
-  documentChildren: Invoice_DocumentResultPage;
-  /** Get parents of a Invoice document */
-  documentParents: Invoice_DocumentResultPage;
+  /** Get incoming relationships to a Invoice document */
+  documentIncomingRelationships: Invoice_DocumentResultPage;
+  /** Get outgoing relationships of a Invoice document */
+  documentOutgoingRelationships: Invoice_DocumentResultPage;
+  /** Get all Invoice documents (paged) */
+  documents: Invoice_DocumentResultPage;
   /** Find Invoice documents by search criteria */
   findDocuments: Invoice_DocumentResultPage;
-};
-
-
-/** Queries: Invoice Document */
-export type InvoiceQueriesInvoice_DocumentsArgs = {
-  paging?: InputMaybe<Invoice_PagingInput>;
 };
 
 
@@ -6122,25 +6762,33 @@ export type InvoiceQueriesDocumentArgs = {
 
 
 /** Queries: Invoice Document */
-export type InvoiceQueriesDocumentChildrenArgs = {
+export type InvoiceQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<Invoice_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Invoice_ViewFilterInput>;
 };
 
 
 /** Queries: Invoice Document */
-export type InvoiceQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type InvoiceQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<Invoice_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Invoice_ViewFilterInput>;
+};
+
+
+/** Queries: Invoice Document */
+export type InvoiceQueriesDocumentsArgs = {
+  paging?: InputMaybe<Invoice_PagingInput>;
 };
 
 
 /** Queries: Invoice Document */
 export type InvoiceQueriesFindDocumentsArgs = {
   paging?: InputMaybe<Invoice_PagingInput>;
-  search: Invoice_SearchFilterInput;
+  search?: InputMaybe<Invoice_SearchFilterInput>;
   view?: InputMaybe<Invoice_ViewFilterInput>;
 };
 
@@ -6800,8 +7448,8 @@ export type LinkedDocument = {
   stateJSON?: Maybe<Scalars['JSONObject']['output']>;
 };
 
-export type MoveChildrenResult = {
-  __typename?: 'MoveChildrenResult';
+export type MoveRelationshipResult = {
+  __typename?: 'MoveRelationshipResult';
   source: PhDocument;
   target: PhDocument;
 };
@@ -6826,10 +7474,12 @@ export type Mutation = {
   AccountTransactions_fetchTransactionsFromAlchemy?: Maybe<AccountTransactions_AlchemyFetchResult>;
   AccountTransactions_getTransactionsFromAlchemy?: Maybe<AccountTransactions_AlchemyTransactionsResult>;
   Accounts: AccountsMutations;
+  AppModule: AppModuleMutations;
   BillingStatement: BillingStatementMutations;
   BuilderProfile: BuilderProfileMutations;
   Builders: BuildersMutations;
   DocumentDrive: DocumentDriveMutations;
+  DocumentEditor: DocumentEditorMutations;
   DocumentModel: DocumentModelMutations;
   ExpenseReport: ExpenseReportMutations;
   Facet: FacetMutations;
@@ -6839,26 +7489,30 @@ export type Mutation = {
   Invoice_uploadInvoicePdfChunk?: Maybe<UploadInvoicePdfChunkOutput>;
   NetworkProfile: NetworkProfileMutations;
   OperationalHubProfile: OperationalHubProfileMutations;
+  Packages: PackagesMutations;
   PaymentTerms: PaymentTermsMutations;
+  ProcessorModule: ProcessorModuleMutations;
   RequestForProposals: RequestForProposalsMutations;
   ResourceInstance: ResourceInstanceMutations;
   ResourceTemplate: ResourceTemplateMutations;
   ScopeOfWork: ScopeOfWorkMutations;
   ServiceOffering: ServiceOfferingMutations;
   SnapshotReport: SnapshotReportMutations;
+  SubgraphModule: SubgraphModuleMutations;
   SubscriptionInstance: SubscriptionInstanceMutations;
+  VetraPackage: VetraPackageMutations;
   Workstream: WorkstreamMutations;
-  addChildren: PhDocument;
+  addRelationship: PhDocument;
   createDocument: PhDocument;
   createEmptyDocument: PhDocument;
   createProductInstances?: Maybe<CreateProductInstancesOutput>;
   deleteDocument: Scalars['Boolean']['output'];
   deleteDocuments: Scalars['Boolean']['output'];
-  moveChildren: MoveChildrenResult;
+  moveRelationship: MoveRelationshipResult;
   mutateDocument: PhDocument;
   mutateDocumentAsync: Scalars['String']['output'];
   pushSyncEnvelopes: Scalars['Boolean']['output'];
-  removeChildren: PhDocument;
+  removeRelationship: PhDocument;
   renameDocument: PhDocument;
   touchChannel: TouchChannelResult;
 };
@@ -6904,10 +7558,11 @@ export type MutationInvoice_UploadInvoicePdfChunkArgs = {
 
 
 /** Subgraph definition */
-export type MutationAddChildrenArgs = {
+export type MutationAddRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
 };
 
 
@@ -6946,10 +7601,11 @@ export type MutationDeleteDocumentsArgs = {
 
 
 /** Subgraph definition */
-export type MutationMoveChildrenArgs = {
+export type MutationMoveRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
+  relationshipType: Scalars['String']['input'];
   sourceParentIdentifier: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   targetParentIdentifier: Scalars['String']['input'];
 };
 
@@ -6977,10 +7633,11 @@ export type MutationPushSyncEnvelopesArgs = {
 
 
 /** Subgraph definition */
-export type MutationRemoveChildrenArgs = {
+export type MutationRemoveRelationshipArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
-  documentIdentifiers: Array<Scalars['String']['input']>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
 };
 
 
@@ -7262,22 +7919,16 @@ export type NetworkProfileMutationsSetYoutubeAsyncArgs = {
 /** Queries: NetworkProfile Document */
 export type NetworkProfileQueries = {
   __typename?: 'NetworkProfileQueries';
-  /** Get all NetworkProfile documents (paged) */
-  NetworkProfile_documents: NetworkProfile_DocumentResultPage;
   /** Get a specific NetworkProfile document by identifier */
   document?: Maybe<NetworkProfile_DocumentWithChildren>;
-  /** Get children of a NetworkProfile document */
-  documentChildren: NetworkProfile_DocumentResultPage;
-  /** Get parents of a NetworkProfile document */
-  documentParents: NetworkProfile_DocumentResultPage;
+  /** Get incoming relationships to a NetworkProfile document */
+  documentIncomingRelationships: NetworkProfile_DocumentResultPage;
+  /** Get outgoing relationships of a NetworkProfile document */
+  documentOutgoingRelationships: NetworkProfile_DocumentResultPage;
+  /** Get all NetworkProfile documents (paged) */
+  documents: NetworkProfile_DocumentResultPage;
   /** Find NetworkProfile documents by search criteria */
   findDocuments: NetworkProfile_DocumentResultPage;
-};
-
-
-/** Queries: NetworkProfile Document */
-export type NetworkProfileQueriesNetworkProfile_DocumentsArgs = {
-  paging?: InputMaybe<NetworkProfile_PagingInput>;
 };
 
 
@@ -7289,25 +7940,33 @@ export type NetworkProfileQueriesDocumentArgs = {
 
 
 /** Queries: NetworkProfile Document */
-export type NetworkProfileQueriesDocumentChildrenArgs = {
+export type NetworkProfileQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<NetworkProfile_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<NetworkProfile_ViewFilterInput>;
 };
 
 
 /** Queries: NetworkProfile Document */
-export type NetworkProfileQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type NetworkProfileQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<NetworkProfile_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<NetworkProfile_ViewFilterInput>;
+};
+
+
+/** Queries: NetworkProfile Document */
+export type NetworkProfileQueriesDocumentsArgs = {
+  paging?: InputMaybe<NetworkProfile_PagingInput>;
 };
 
 
 /** Queries: NetworkProfile Document */
 export type NetworkProfileQueriesFindDocumentsArgs = {
   paging?: InputMaybe<NetworkProfile_PagingInput>;
-  search: NetworkProfile_SearchFilterInput;
+  search?: InputMaybe<NetworkProfile_SearchFilterInput>;
   view?: InputMaybe<NetworkProfile_ViewFilterInput>;
 };
 
@@ -7655,22 +8314,16 @@ export type OperationalHubProfileMutationsSetOperatorTeamAsyncArgs = {
 /** Queries: OperationalHubProfile Document */
 export type OperationalHubProfileQueries = {
   __typename?: 'OperationalHubProfileQueries';
-  /** Get all OperationalHubProfile documents (paged) */
-  OperationalHubProfile_documents: OperationalHubProfile_DocumentResultPage;
   /** Get a specific OperationalHubProfile document by identifier */
   document?: Maybe<OperationalHubProfile_DocumentWithChildren>;
-  /** Get children of a OperationalHubProfile document */
-  documentChildren: OperationalHubProfile_DocumentResultPage;
-  /** Get parents of a OperationalHubProfile document */
-  documentParents: OperationalHubProfile_DocumentResultPage;
+  /** Get incoming relationships to a OperationalHubProfile document */
+  documentIncomingRelationships: OperationalHubProfile_DocumentResultPage;
+  /** Get outgoing relationships of a OperationalHubProfile document */
+  documentOutgoingRelationships: OperationalHubProfile_DocumentResultPage;
+  /** Get all OperationalHubProfile documents (paged) */
+  documents: OperationalHubProfile_DocumentResultPage;
   /** Find OperationalHubProfile documents by search criteria */
   findDocuments: OperationalHubProfile_DocumentResultPage;
-};
-
-
-/** Queries: OperationalHubProfile Document */
-export type OperationalHubProfileQueriesOperationalHubProfile_DocumentsArgs = {
-  paging?: InputMaybe<OperationalHubProfile_PagingInput>;
 };
 
 
@@ -7682,25 +8335,33 @@ export type OperationalHubProfileQueriesDocumentArgs = {
 
 
 /** Queries: OperationalHubProfile Document */
-export type OperationalHubProfileQueriesDocumentChildrenArgs = {
+export type OperationalHubProfileQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<OperationalHubProfile_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<OperationalHubProfile_ViewFilterInput>;
 };
 
 
 /** Queries: OperationalHubProfile Document */
-export type OperationalHubProfileQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type OperationalHubProfileQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<OperationalHubProfile_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<OperationalHubProfile_ViewFilterInput>;
+};
+
+
+/** Queries: OperationalHubProfile Document */
+export type OperationalHubProfileQueriesDocumentsArgs = {
+  paging?: InputMaybe<OperationalHubProfile_PagingInput>;
 };
 
 
 /** Queries: OperationalHubProfile Document */
 export type OperationalHubProfileQueriesFindDocumentsArgs = {
   paging?: InputMaybe<OperationalHubProfile_PagingInput>;
-  search: OperationalHubProfile_SearchFilterInput;
+  search?: InputMaybe<OperationalHubProfile_SearchFilterInput>;
   view?: InputMaybe<OperationalHubProfile_ViewFilterInput>;
 };
 
@@ -7960,6 +8621,34 @@ export type Pt_Retainer = {
   retainerAmount: Scalars['Amount']['output'];
   servicesIncluded: Scalars['String']['output'];
   startDate: Scalars['Date']['output'];
+};
+
+export type PackagesMutations = {
+  __typename?: 'PackagesMutations';
+  installPackage: InstallPackageResult;
+  uninstallPackage: Scalars['Boolean']['output'];
+};
+
+
+export type PackagesMutationsInstallPackageArgs = {
+  name: Scalars['String']['input'];
+  registryUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type PackagesMutationsUninstallPackageArgs = {
+  name: Scalars['String']['input'];
+};
+
+export type PackagesQueries = {
+  __typename?: 'PackagesQueries';
+  installedPackage?: Maybe<InstalledPackage>;
+  installedPackages: Array<InstalledPackage>;
+};
+
+
+export type PackagesQueriesInstalledPackageArgs = {
+  name: Scalars['String']['input'];
 };
 
 export type PagingInput = {
@@ -8303,22 +8992,16 @@ export type PaymentTermsMutationsUpdateStatusAsyncArgs = {
 /** Queries: PaymentTerms Document */
 export type PaymentTermsQueries = {
   __typename?: 'PaymentTermsQueries';
-  /** Get all PaymentTerms documents (paged) */
-  PaymentTerms_documents: PaymentTerms_DocumentResultPage;
   /** Get a specific PaymentTerms document by identifier */
   document?: Maybe<PaymentTerms_DocumentWithChildren>;
-  /** Get children of a PaymentTerms document */
-  documentChildren: PaymentTerms_DocumentResultPage;
-  /** Get parents of a PaymentTerms document */
-  documentParents: PaymentTerms_DocumentResultPage;
+  /** Get incoming relationships to a PaymentTerms document */
+  documentIncomingRelationships: PaymentTerms_DocumentResultPage;
+  /** Get outgoing relationships of a PaymentTerms document */
+  documentOutgoingRelationships: PaymentTerms_DocumentResultPage;
+  /** Get all PaymentTerms documents (paged) */
+  documents: PaymentTerms_DocumentResultPage;
   /** Find PaymentTerms documents by search criteria */
   findDocuments: PaymentTerms_DocumentResultPage;
-};
-
-
-/** Queries: PaymentTerms Document */
-export type PaymentTermsQueriesPaymentTerms_DocumentsArgs = {
-  paging?: InputMaybe<PaymentTerms_PagingInput>;
 };
 
 
@@ -8330,25 +9013,33 @@ export type PaymentTermsQueriesDocumentArgs = {
 
 
 /** Queries: PaymentTerms Document */
-export type PaymentTermsQueriesDocumentChildrenArgs = {
+export type PaymentTermsQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<PaymentTerms_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<PaymentTerms_ViewFilterInput>;
 };
 
 
 /** Queries: PaymentTerms Document */
-export type PaymentTermsQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type PaymentTermsQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<PaymentTerms_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<PaymentTerms_ViewFilterInput>;
+};
+
+
+/** Queries: PaymentTerms Document */
+export type PaymentTermsQueriesDocumentsArgs = {
+  paging?: InputMaybe<PaymentTerms_PagingInput>;
 };
 
 
 /** Queries: PaymentTerms Document */
 export type PaymentTermsQueriesFindDocumentsArgs = {
   paging?: InputMaybe<PaymentTerms_PagingInput>;
-  search: PaymentTerms_SearchFilterInput;
+  search?: InputMaybe<PaymentTerms_SearchFilterInput>;
   view?: InputMaybe<PaymentTerms_ViewFilterInput>;
 };
 
@@ -8724,6 +9415,7 @@ export type PollSyncEnvelopesResult = {
   ackOrdinal: Scalars['Int']['output'];
   deadLetters: Array<DeadLetterInfo>;
   envelopes: Array<SyncEnvelope>;
+  hasMore: Scalars['Boolean']['output'];
 };
 
 /** Output type for process gnosis payment */
@@ -8732,6 +9424,361 @@ export type ProcessGnosisPaymentOutput = {
   data?: Maybe<Scalars['JSONObject']['output']>;
   error?: Maybe<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
+};
+
+export type ProcessorModule = IDocument & {
+  __typename?: 'ProcessorModule';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: ProcessorModule_ProcessorModuleState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: ProcessorModule_ProcessorModuleState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type ProcessorModuleOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for ProcessorModule operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type ProcessorModuleMutationResult = {
+  __typename?: 'ProcessorModuleMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: ProcessorModule_FullState;
+};
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutations = {
+  __typename?: 'ProcessorModuleMutations';
+  addDocumentType: ProcessorModuleMutationResult;
+  addDocumentTypeAsync: Scalars['String']['output'];
+  addProcessorApp: ProcessorModuleMutationResult;
+  addProcessorAppAsync: Scalars['String']['output'];
+  createDocument: ProcessorModuleMutationResult;
+  createEmptyDocument: ProcessorModuleMutationResult;
+  removeDocumentType: ProcessorModuleMutationResult;
+  removeDocumentTypeAsync: Scalars['String']['output'];
+  removeProcessorApp: ProcessorModuleMutationResult;
+  removeProcessorAppAsync: Scalars['String']['output'];
+  setProcessorName: ProcessorModuleMutationResult;
+  setProcessorNameAsync: Scalars['String']['output'];
+  setProcessorStatus: ProcessorModuleMutationResult;
+  setProcessorStatusAsync: Scalars['String']['output'];
+  setProcessorType: ProcessorModuleMutationResult;
+  setProcessorTypeAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsAddDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_AddDocumentTypeInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsAddDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_AddDocumentTypeInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsAddProcessorAppArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_AddProcessorAppInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsAddProcessorAppAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_AddProcessorAppInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<ProcessorModule_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsRemoveDocumentTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsRemoveDocumentTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_RemoveDocumentTypeInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsRemoveProcessorAppArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_RemoveProcessorAppInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsRemoveProcessorAppAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_RemoveProcessorAppInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorNameInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorNameInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorStatusArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorStatusInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorStatusAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorStatusInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorTypeInput;
+};
+
+
+/** Mutations: ProcessorModule */
+export type ProcessorModuleMutationsSetProcessorTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ProcessorModule_SetProcessorTypeInput;
+};
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueries = {
+  __typename?: 'ProcessorModuleQueries';
+  /** Get a specific ProcessorModule document by identifier */
+  document?: Maybe<ProcessorModule_DocumentWithChildren>;
+  /** Get incoming relationships to a ProcessorModule document */
+  documentIncomingRelationships: ProcessorModule_DocumentResultPage;
+  /** Get outgoing relationships of a ProcessorModule document */
+  documentOutgoingRelationships: ProcessorModule_DocumentResultPage;
+  /** Get all ProcessorModule documents (paged) */
+  documents: ProcessorModule_DocumentResultPage;
+  /** Find ProcessorModule documents by search criteria */
+  findDocuments: ProcessorModule_DocumentResultPage;
+};
+
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<ProcessorModule_ViewFilterInput>;
+};
+
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<ProcessorModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<ProcessorModule_ViewFilterInput>;
+};
+
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<ProcessorModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<ProcessorModule_ViewFilterInput>;
+};
+
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueriesDocumentsArgs = {
+  paging?: InputMaybe<ProcessorModule_PagingInput>;
+};
+
+
+/** Queries: ProcessorModule Document */
+export type ProcessorModuleQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<ProcessorModule_PagingInput>;
+  search?: InputMaybe<ProcessorModule_SearchFilterInput>;
+  view?: InputMaybe<ProcessorModule_ViewFilterInput>;
+};
+
+export type ProcessorModule_AddDocumentTypeInput = {
+  documentType: Scalars['String']['input'];
+  id: Scalars['OID']['input'];
+};
+
+export type ProcessorModule_AddProcessorAppInput = {
+  processorApp: Scalars['String']['input'];
+};
+
+/** Paginated result type for ProcessorModule documents */
+export type ProcessorModule_DocumentResultPage = {
+  __typename?: 'ProcessorModule_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<ProcessorModuleMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+export type ProcessorModule_DocumentTypeItem = {
+  __typename?: 'ProcessorModule_DocumentTypeItem';
+  documentType: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+};
+
+export type ProcessorModule_DocumentTypeItemInput = {
+  documentType?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['OID']['input']>;
+};
+
+/** Document with children for ProcessorModule */
+export type ProcessorModule_DocumentWithChildren = {
+  __typename?: 'ProcessorModule_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: ProcessorModuleMutationResult;
+};
+
+/** Full state with all scopes for ProcessorModule */
+export type ProcessorModule_FullState = {
+  __typename?: 'ProcessorModule_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: ProcessorModule_PhDocumentScopeState;
+  global: ProcessorModule_ProcessorModuleState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type ProcessorModule_InitialStateInput = {
+  global?: InputMaybe<ProcessorModule_ProcessorModuleStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+/** Document scope state (same for all document types) */
+export type ProcessorModule_PhDocumentScopeState = {
+  __typename?: 'ProcessorModule_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: ProcessorModule_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type ProcessorModule_PhHashConfig = {
+  __typename?: 'ProcessorModule_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type ProcessorModule_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ProcessorModule_ProcessorModuleState = {
+  __typename?: 'ProcessorModule_ProcessorModuleState';
+  documentTypes: Array<ProcessorModule_DocumentTypeItem>;
+  name: Scalars['String']['output'];
+  processorApps: Array<Scalars['String']['output']>;
+  status: ProcessorModule_StatusType;
+  type: Scalars['String']['output'];
+};
+
+/** Input Types for Initial State */
+export type ProcessorModule_ProcessorModuleStateInput = {
+  documentTypes?: InputMaybe<Array<InputMaybe<ProcessorModule_DocumentTypeItemInput>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  processorApps?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  status?: InputMaybe<ProcessorModule_StatusType>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ProcessorModule_RemoveDocumentTypeInput = {
+  id: Scalars['OID']['input'];
+};
+
+export type ProcessorModule_RemoveProcessorAppInput = {
+  processorApp: Scalars['String']['input'];
+};
+
+export type ProcessorModule_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: BaseOperations */
+export type ProcessorModule_SetProcessorNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type ProcessorModule_SetProcessorStatusInput = {
+  status: ProcessorModule_StatusType;
+};
+
+export type ProcessorModule_SetProcessorTypeInput = {
+  type: Scalars['String']['input'];
+};
+
+export enum ProcessorModule_StatusType {
+  Confirmed = 'CONFIRMED',
+  Draft = 'DRAFT'
+}
+
+export type ProcessorModule_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type ProcessorWorkstream = {
@@ -8787,34 +9834,40 @@ export type Query = {
   __typename?: 'Query';
   AccountTransactions: AccountTransactionsQueries;
   Accounts: AccountsQueries;
+  AppModule: AppModuleQueries;
   BillingStatement: BillingStatementQueries;
   BuilderProfile: BuilderProfileQueries;
   Builders: BuildersQueries;
   DocumentDrive: DocumentDriveQueries;
+  DocumentEditor: DocumentEditorQueries;
   DocumentModel: DocumentModelQueries;
   ExpenseReport: ExpenseReportQueries;
   Facet: FacetQueries;
   Invoice: InvoiceQueries;
   NetworkProfile: NetworkProfileQueries;
   OperationalHubProfile: OperationalHubProfileQueries;
+  Packages: PackagesQueries;
   PaymentTerms: PaymentTermsQueries;
+  ProcessorModule: ProcessorModuleQueries;
   RequestForProposals: RequestForProposalsQueries;
   ResourceInstance: ResourceInstanceQueries;
   ResourceTemplate: ResourceTemplateQueries;
   ScopeOfWork: ScopeOfWorkQueries;
   ServiceOffering: ServiceOfferingQueries;
   SnapshotReport: SnapshotReportQueries;
+  SubgraphModule: SubgraphModuleQueries;
   SubscriptionInstance: SubscriptionInstanceQueries;
+  VetraPackage: VetraPackageQueries;
   Workstream: WorkstreamQueries;
   allNetworks: Array<AllNetworks>;
   analytics?: Maybe<AnalyticsQuery>;
   budgetStatements: Array<BudgetStatement>;
   builders: Array<BuilderProfileState>;
   document?: Maybe<DocumentWithChildren>;
-  documentChildren: PhDocumentResultPage;
+  documentIncomingRelationships: PhDocumentResultPage;
   documentModels: DocumentModelResultPage;
   documentOperations: ReactorOperationResultPage;
-  documentParents: PhDocumentResultPage;
+  documentOutgoingRelationships: PhDocumentResultPage;
   findDocuments: PhDocumentResultPage;
   jobStatus?: Maybe<JobInfo>;
   pollSyncEnvelopes: PollSyncEnvelopesResult;
@@ -8823,6 +9876,7 @@ export type Query = {
   rfpByWorkstream: Array<WorkstreamRfp>;
   scopeOfWorkByNetworkOrStatus: Array<Sow_ScopeOfWorkState>;
   serviceOfferings: Array<RsServiceOffering>;
+  system: SystemInfo;
   workstream: Array<FullQueryWorkstream>;
   workstreams: Array<FullQueryWorkstream>;
 };
@@ -8854,9 +9908,10 @@ export type QueryDocumentArgs = {
 
 
 /** Subgraph definition */
-export type QueryDocumentChildrenArgs = {
+export type QueryDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ViewFilterInput>;
 };
 
@@ -8876,9 +9931,10 @@ export type QueryDocumentOperationsArgs = {
 
 
 /** Subgraph definition */
-export type QueryDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type QueryDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ViewFilterInput>;
 };
 
@@ -8886,7 +9942,7 @@ export type QueryDocumentParentsArgs = {
 /** Subgraph definition */
 export type QueryFindDocumentsArgs = {
   paging?: InputMaybe<PagingInput>;
-  search: SearchFilterInput;
+  search?: InputMaybe<SearchFilterInput>;
   view?: InputMaybe<ViewFilterInput>;
 };
 
@@ -8966,6 +10022,16 @@ export enum RfpStatus {
   RequestForCommments = 'REQUEST_FOR_COMMMENTS'
 }
 
+export enum RsAccrualCycle {
+  Annual = 'ANNUAL',
+  Daily = 'DAILY',
+  Hourly = 'HOURLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
+  Weekly = 'WEEKLY'
+}
+
 export enum RsAddOnPricingMode {
   Standalone = 'STANDALONE',
   TierDependent = 'TIER_DEPENDENT'
@@ -9028,6 +10094,11 @@ export type RsFaqField = {
 export enum RsGroupCostType {
   Recurring = 'RECURRING',
   Setup = 'SETUP'
+}
+
+export enum RsMetricType {
+  Cumulative = 'CUMULATIVE',
+  NonCumulative = 'NON_CUMULATIVE'
 }
 
 export type RsOfferingFacetTarget = {
@@ -9217,12 +10288,13 @@ export type RsServiceSubscriptionTier = {
 
 export type RsServiceUsageLimit = {
   __typename?: 'RSServiceUsageLimit';
+  accrualCycle: RsAccrualCycle;
   freeLimit?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
   metric: Scalars['String']['output'];
+  metricType: RsMetricType;
   notes?: Maybe<Scalars['String']['output']>;
   paidLimit?: Maybe<Scalars['Int']['output']>;
-  resetCycle?: Maybe<RsUsageResetCycle>;
   serviceId: Scalars['OID']['output'];
   unitName?: Maybe<Scalars['String']['output']>;
   unitPrice?: Maybe<Scalars['Amount_Money']['output']>;
@@ -9266,17 +10338,6 @@ export enum RsTemplateStatusInput {
 export enum RsTierPricingMode {
   Calculated = 'CALCULATED',
   ManualOverride = 'MANUAL_OVERRIDE'
-}
-
-export enum RsUsageResetCycle {
-  Annual = 'ANNUAL',
-  Daily = 'DAILY',
-  Hourly = 'HOURLY',
-  Monthly = 'MONTHLY',
-  None = 'NONE',
-  Quarterly = 'QUARTERLY',
-  SemiAnnual = 'SEMI_ANNUAL',
-  Weekly = 'WEEKLY'
 }
 
 export type ReactorOperation = {
@@ -9514,22 +10575,16 @@ export type RequestForProposalsMutationsRemoveProposalAsyncArgs = {
 /** Queries: RequestForProposals Document */
 export type RequestForProposalsQueries = {
   __typename?: 'RequestForProposalsQueries';
-  /** Get all RequestForProposals documents (paged) */
-  RequestForProposals_documents: RequestForProposals_DocumentResultPage;
   /** Get a specific RequestForProposals document by identifier */
   document?: Maybe<RequestForProposals_DocumentWithChildren>;
-  /** Get children of a RequestForProposals document */
-  documentChildren: RequestForProposals_DocumentResultPage;
-  /** Get parents of a RequestForProposals document */
-  documentParents: RequestForProposals_DocumentResultPage;
+  /** Get incoming relationships to a RequestForProposals document */
+  documentIncomingRelationships: RequestForProposals_DocumentResultPage;
+  /** Get outgoing relationships of a RequestForProposals document */
+  documentOutgoingRelationships: RequestForProposals_DocumentResultPage;
+  /** Get all RequestForProposals documents (paged) */
+  documents: RequestForProposals_DocumentResultPage;
   /** Find RequestForProposals documents by search criteria */
   findDocuments: RequestForProposals_DocumentResultPage;
-};
-
-
-/** Queries: RequestForProposals Document */
-export type RequestForProposalsQueriesRequestForProposals_DocumentsArgs = {
-  paging?: InputMaybe<RequestForProposals_PagingInput>;
 };
 
 
@@ -9541,25 +10596,33 @@ export type RequestForProposalsQueriesDocumentArgs = {
 
 
 /** Queries: RequestForProposals Document */
-export type RequestForProposalsQueriesDocumentChildrenArgs = {
+export type RequestForProposalsQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<RequestForProposals_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<RequestForProposals_ViewFilterInput>;
 };
 
 
 /** Queries: RequestForProposals Document */
-export type RequestForProposalsQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type RequestForProposalsQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<RequestForProposals_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<RequestForProposals_ViewFilterInput>;
+};
+
+
+/** Queries: RequestForProposals Document */
+export type RequestForProposalsQueriesDocumentsArgs = {
+  paging?: InputMaybe<RequestForProposals_PagingInput>;
 };
 
 
 /** Queries: RequestForProposals Document */
 export type RequestForProposalsQueriesFindDocumentsArgs = {
   paging?: InputMaybe<RequestForProposals_PagingInput>;
-  search: RequestForProposals_SearchFilterInput;
+  search?: InputMaybe<RequestForProposals_SearchFilterInput>;
   view?: InputMaybe<RequestForProposals_ViewFilterInput>;
 };
 
@@ -10184,22 +11247,16 @@ export type ResourceInstanceMutationsUpdateInstanceStatusAsyncArgs = {
 /** Queries: ResourceInstance Document */
 export type ResourceInstanceQueries = {
   __typename?: 'ResourceInstanceQueries';
-  /** Get all ResourceInstance documents (paged) */
-  ResourceInstance_documents: ResourceInstance_DocumentResultPage;
   /** Get a specific ResourceInstance document by identifier */
   document?: Maybe<ResourceInstance_DocumentWithChildren>;
-  /** Get children of a ResourceInstance document */
-  documentChildren: ResourceInstance_DocumentResultPage;
-  /** Get parents of a ResourceInstance document */
-  documentParents: ResourceInstance_DocumentResultPage;
+  /** Get incoming relationships to a ResourceInstance document */
+  documentIncomingRelationships: ResourceInstance_DocumentResultPage;
+  /** Get outgoing relationships of a ResourceInstance document */
+  documentOutgoingRelationships: ResourceInstance_DocumentResultPage;
+  /** Get all ResourceInstance documents (paged) */
+  documents: ResourceInstance_DocumentResultPage;
   /** Find ResourceInstance documents by search criteria */
   findDocuments: ResourceInstance_DocumentResultPage;
-};
-
-
-/** Queries: ResourceInstance Document */
-export type ResourceInstanceQueriesResourceInstance_DocumentsArgs = {
-  paging?: InputMaybe<ResourceInstance_PagingInput>;
 };
 
 
@@ -10211,25 +11268,33 @@ export type ResourceInstanceQueriesDocumentArgs = {
 
 
 /** Queries: ResourceInstance Document */
-export type ResourceInstanceQueriesDocumentChildrenArgs = {
+export type ResourceInstanceQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<ResourceInstance_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ResourceInstance_ViewFilterInput>;
 };
 
 
 /** Queries: ResourceInstance Document */
-export type ResourceInstanceQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type ResourceInstanceQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<ResourceInstance_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ResourceInstance_ViewFilterInput>;
+};
+
+
+/** Queries: ResourceInstance Document */
+export type ResourceInstanceQueriesDocumentsArgs = {
+  paging?: InputMaybe<ResourceInstance_PagingInput>;
 };
 
 
 /** Queries: ResourceInstance Document */
 export type ResourceInstanceQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ResourceInstance_PagingInput>;
-  search: ResourceInstance_SearchFilterInput;
+  search?: InputMaybe<ResourceInstance_SearchFilterInput>;
   view?: InputMaybe<ResourceInstance_ViewFilterInput>;
 };
 
@@ -11025,22 +12090,16 @@ export type ResourceTemplateMutationsUpdateTemplateStatusAsyncArgs = {
 /** Queries: ResourceTemplate Document */
 export type ResourceTemplateQueries = {
   __typename?: 'ResourceTemplateQueries';
-  /** Get all ResourceTemplate documents (paged) */
-  ResourceTemplate_documents: ResourceTemplate_DocumentResultPage;
   /** Get a specific ResourceTemplate document by identifier */
   document?: Maybe<ResourceTemplate_DocumentWithChildren>;
-  /** Get children of a ResourceTemplate document */
-  documentChildren: ResourceTemplate_DocumentResultPage;
-  /** Get parents of a ResourceTemplate document */
-  documentParents: ResourceTemplate_DocumentResultPage;
+  /** Get incoming relationships to a ResourceTemplate document */
+  documentIncomingRelationships: ResourceTemplate_DocumentResultPage;
+  /** Get outgoing relationships of a ResourceTemplate document */
+  documentOutgoingRelationships: ResourceTemplate_DocumentResultPage;
+  /** Get all ResourceTemplate documents (paged) */
+  documents: ResourceTemplate_DocumentResultPage;
   /** Find ResourceTemplate documents by search criteria */
   findDocuments: ResourceTemplate_DocumentResultPage;
-};
-
-
-/** Queries: ResourceTemplate Document */
-export type ResourceTemplateQueriesResourceTemplate_DocumentsArgs = {
-  paging?: InputMaybe<ResourceTemplate_PagingInput>;
 };
 
 
@@ -11052,25 +12111,33 @@ export type ResourceTemplateQueriesDocumentArgs = {
 
 
 /** Queries: ResourceTemplate Document */
-export type ResourceTemplateQueriesDocumentChildrenArgs = {
+export type ResourceTemplateQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<ResourceTemplate_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ResourceTemplate_ViewFilterInput>;
 };
 
 
 /** Queries: ResourceTemplate Document */
-export type ResourceTemplateQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type ResourceTemplateQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<ResourceTemplate_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ResourceTemplate_ViewFilterInput>;
+};
+
+
+/** Queries: ResourceTemplate Document */
+export type ResourceTemplateQueriesDocumentsArgs = {
+  paging?: InputMaybe<ResourceTemplate_PagingInput>;
 };
 
 
 /** Queries: ResourceTemplate Document */
 export type ResourceTemplateQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ResourceTemplate_PagingInput>;
-  search: ResourceTemplate_SearchFilterInput;
+  search?: InputMaybe<ResourceTemplate_SearchFilterInput>;
   view?: InputMaybe<ResourceTemplate_ViewFilterInput>;
 };
 
@@ -12271,22 +13338,16 @@ export type ScopeOfWorkMutationsUpdateProjectOwnerAsyncArgs = {
 /** Queries: ScopeOfWork Document */
 export type ScopeOfWorkQueries = {
   __typename?: 'ScopeOfWorkQueries';
-  /** Get all ScopeOfWork documents (paged) */
-  ScopeOfWork_documents: ScopeOfWork_DocumentResultPage;
   /** Get a specific ScopeOfWork document by identifier */
   document?: Maybe<ScopeOfWork_DocumentWithChildren>;
-  /** Get children of a ScopeOfWork document */
-  documentChildren: ScopeOfWork_DocumentResultPage;
-  /** Get parents of a ScopeOfWork document */
-  documentParents: ScopeOfWork_DocumentResultPage;
+  /** Get incoming relationships to a ScopeOfWork document */
+  documentIncomingRelationships: ScopeOfWork_DocumentResultPage;
+  /** Get outgoing relationships of a ScopeOfWork document */
+  documentOutgoingRelationships: ScopeOfWork_DocumentResultPage;
+  /** Get all ScopeOfWork documents (paged) */
+  documents: ScopeOfWork_DocumentResultPage;
   /** Find ScopeOfWork documents by search criteria */
   findDocuments: ScopeOfWork_DocumentResultPage;
-};
-
-
-/** Queries: ScopeOfWork Document */
-export type ScopeOfWorkQueriesScopeOfWork_DocumentsArgs = {
-  paging?: InputMaybe<ScopeOfWork_PagingInput>;
 };
 
 
@@ -12298,25 +13359,33 @@ export type ScopeOfWorkQueriesDocumentArgs = {
 
 
 /** Queries: ScopeOfWork Document */
-export type ScopeOfWorkQueriesDocumentChildrenArgs = {
+export type ScopeOfWorkQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<ScopeOfWork_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ScopeOfWork_ViewFilterInput>;
 };
 
 
 /** Queries: ScopeOfWork Document */
-export type ScopeOfWorkQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type ScopeOfWorkQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<ScopeOfWork_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ScopeOfWork_ViewFilterInput>;
+};
+
+
+/** Queries: ScopeOfWork Document */
+export type ScopeOfWorkQueriesDocumentsArgs = {
+  paging?: InputMaybe<ScopeOfWork_PagingInput>;
 };
 
 
 /** Queries: ScopeOfWork Document */
 export type ScopeOfWorkQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ScopeOfWork_PagingInput>;
-  search: ScopeOfWork_SearchFilterInput;
+  search?: InputMaybe<ScopeOfWork_SearchFilterInput>;
   view?: InputMaybe<ScopeOfWork_ViewFilterInput>;
 };
 
@@ -13583,22 +14652,16 @@ export type ServiceOfferingMutationsUpdateUsageLimitAsyncArgs = {
 /** Queries: ServiceOffering Document */
 export type ServiceOfferingQueries = {
   __typename?: 'ServiceOfferingQueries';
-  /** Get all ServiceOffering documents (paged) */
-  ServiceOffering_documents: ServiceOffering_DocumentResultPage;
   /** Get a specific ServiceOffering document by identifier */
   document?: Maybe<ServiceOffering_DocumentWithChildren>;
-  /** Get children of a ServiceOffering document */
-  documentChildren: ServiceOffering_DocumentResultPage;
-  /** Get parents of a ServiceOffering document */
-  documentParents: ServiceOffering_DocumentResultPage;
+  /** Get incoming relationships to a ServiceOffering document */
+  documentIncomingRelationships: ServiceOffering_DocumentResultPage;
+  /** Get outgoing relationships of a ServiceOffering document */
+  documentOutgoingRelationships: ServiceOffering_DocumentResultPage;
+  /** Get all ServiceOffering documents (paged) */
+  documents: ServiceOffering_DocumentResultPage;
   /** Find ServiceOffering documents by search criteria */
   findDocuments: ServiceOffering_DocumentResultPage;
-};
-
-
-/** Queries: ServiceOffering Document */
-export type ServiceOfferingQueriesServiceOffering_DocumentsArgs = {
-  paging?: InputMaybe<ServiceOffering_PagingInput>;
 };
 
 
@@ -13610,27 +14673,45 @@ export type ServiceOfferingQueriesDocumentArgs = {
 
 
 /** Queries: ServiceOffering Document */
-export type ServiceOfferingQueriesDocumentChildrenArgs = {
+export type ServiceOfferingQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<ServiceOffering_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ServiceOffering_ViewFilterInput>;
 };
 
 
 /** Queries: ServiceOffering Document */
-export type ServiceOfferingQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type ServiceOfferingQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<ServiceOffering_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<ServiceOffering_ViewFilterInput>;
+};
+
+
+/** Queries: ServiceOffering Document */
+export type ServiceOfferingQueriesDocumentsArgs = {
+  paging?: InputMaybe<ServiceOffering_PagingInput>;
 };
 
 
 /** Queries: ServiceOffering Document */
 export type ServiceOfferingQueriesFindDocumentsArgs = {
   paging?: InputMaybe<ServiceOffering_PagingInput>;
-  search: ServiceOffering_SearchFilterInput;
+  search?: InputMaybe<ServiceOffering_SearchFilterInput>;
   view?: InputMaybe<ServiceOffering_ViewFilterInput>;
 };
+
+export enum ServiceOffering_AccrualCycle {
+  Annual = 'ANNUAL',
+  Daily = 'DAILY',
+  Hourly = 'HOURLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
+  Weekly = 'WEEKLY'
+}
 
 export type ServiceOffering_AddFacetOptionInput = {
   categoryKey: Scalars['String']['input'];
@@ -13701,13 +14782,14 @@ export type ServiceOffering_AddTierInput = {
 };
 
 export type ServiceOffering_AddUsageLimitInput = {
+  accrualCycle: ServiceOffering_AccrualCycle;
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   lastModified: Scalars['DateTime']['input'];
   limitId: Scalars['OID']['input'];
   metric: Scalars['String']['input'];
+  metricType: ServiceOffering_MetricType;
   notes?: InputMaybe<Scalars['String']['input']>;
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
-  resetCycle?: InputMaybe<ServiceOffering_UsageResetCycle>;
   serviceId: Scalars['OID']['input'];
   tierId: Scalars['OID']['input'];
   unitName?: InputMaybe<Scalars['String']['input']>;
@@ -13826,6 +14908,11 @@ export type ServiceOffering_InitialStateInput = {
   global?: InputMaybe<ServiceOffering_ServiceOfferingStateInput>;
   local?: InputMaybe<Scalars['JSONObject']['input']>;
 };
+
+export enum ServiceOffering_MetricType {
+  Cumulative = 'CUMULATIVE',
+  NonCumulative = 'NON_CUMULATIVE'
+}
 
 export type ServiceOffering_OptionGroup = {
   __typename?: 'ServiceOffering_OptionGroup';
@@ -14098,12 +15185,13 @@ export type ServiceOffering_ServiceSubscriptionTierInput = {
 
 export type ServiceOffering_ServiceUsageLimit = {
   __typename?: 'ServiceOffering_ServiceUsageLimit';
+  accrualCycle: ServiceOffering_AccrualCycle;
   freeLimit?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
   metric: Scalars['String']['output'];
+  metricType: ServiceOffering_MetricType;
   notes?: Maybe<Scalars['String']['output']>;
   paidLimit?: Maybe<Scalars['Int']['output']>;
-  resetCycle?: Maybe<ServiceOffering_UsageResetCycle>;
   serviceId: Scalars['OID']['output'];
   unitName?: Maybe<Scalars['String']['output']>;
   unitPrice?: Maybe<Scalars['Amount_Money']['output']>;
@@ -14111,12 +15199,13 @@ export type ServiceOffering_ServiceUsageLimit = {
 };
 
 export type ServiceOffering_ServiceUsageLimitInput = {
+  accrualCycle?: InputMaybe<ServiceOffering_AccrualCycle>;
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   id?: InputMaybe<Scalars['OID']['input']>;
   metric?: InputMaybe<Scalars['String']['input']>;
+  metricType?: InputMaybe<ServiceOffering_MetricType>;
   notes?: InputMaybe<Scalars['String']['input']>;
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
-  resetCycle?: InputMaybe<ServiceOffering_UsageResetCycle>;
   serviceId?: InputMaybe<Scalars['OID']['input']>;
   unitName?: InputMaybe<Scalars['String']['input']>;
   unitPrice?: InputMaybe<Scalars['Amount_Money']['input']>;
@@ -14281,29 +15370,19 @@ export type ServiceOffering_UpdateTierPricingInput = {
 };
 
 export type ServiceOffering_UpdateUsageLimitInput = {
+  accrualCycle?: InputMaybe<ServiceOffering_AccrualCycle>;
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   lastModified: Scalars['DateTime']['input'];
   limitId: Scalars['OID']['input'];
   metric?: InputMaybe<Scalars['String']['input']>;
+  metricType?: InputMaybe<ServiceOffering_MetricType>;
   notes?: InputMaybe<Scalars['String']['input']>;
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
-  resetCycle?: InputMaybe<ServiceOffering_UsageResetCycle>;
   tierId: Scalars['OID']['input'];
   unitName?: InputMaybe<Scalars['String']['input']>;
   unitPrice?: InputMaybe<Scalars['Amount_Money']['input']>;
   unitPriceCurrency?: InputMaybe<Scalars['Currency']['input']>;
 };
-
-export enum ServiceOffering_UsageResetCycle {
-  Annual = 'ANNUAL',
-  Daily = 'DAILY',
-  Hourly = 'HOURLY',
-  Monthly = 'MONTHLY',
-  None = 'NONE',
-  Quarterly = 'QUARTERLY',
-  SemiAnnual = 'SEMI_ANNUAL',
-  Weekly = 'WEEKLY'
-}
 
 export type ServiceOffering_ViewFilterInput = {
   branch?: InputMaybe<Scalars['String']['input']>;
@@ -14717,22 +15796,16 @@ export type SnapshotReportMutationsUpdateTransactionFlowTypeAsyncArgs = {
 /** Queries: SnapshotReport Document */
 export type SnapshotReportQueries = {
   __typename?: 'SnapshotReportQueries';
-  /** Get all SnapshotReport documents (paged) */
-  SnapshotReport_documents: SnapshotReport_DocumentResultPage;
   /** Get a specific SnapshotReport document by identifier */
   document?: Maybe<SnapshotReport_DocumentWithChildren>;
-  /** Get children of a SnapshotReport document */
-  documentChildren: SnapshotReport_DocumentResultPage;
-  /** Get parents of a SnapshotReport document */
-  documentParents: SnapshotReport_DocumentResultPage;
+  /** Get incoming relationships to a SnapshotReport document */
+  documentIncomingRelationships: SnapshotReport_DocumentResultPage;
+  /** Get outgoing relationships of a SnapshotReport document */
+  documentOutgoingRelationships: SnapshotReport_DocumentResultPage;
+  /** Get all SnapshotReport documents (paged) */
+  documents: SnapshotReport_DocumentResultPage;
   /** Find SnapshotReport documents by search criteria */
   findDocuments: SnapshotReport_DocumentResultPage;
-};
-
-
-/** Queries: SnapshotReport Document */
-export type SnapshotReportQueriesSnapshotReport_DocumentsArgs = {
-  paging?: InputMaybe<SnapshotReport_PagingInput>;
 };
 
 
@@ -14744,25 +15817,33 @@ export type SnapshotReportQueriesDocumentArgs = {
 
 
 /** Queries: SnapshotReport Document */
-export type SnapshotReportQueriesDocumentChildrenArgs = {
+export type SnapshotReportQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<SnapshotReport_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<SnapshotReport_ViewFilterInput>;
 };
 
 
 /** Queries: SnapshotReport Document */
-export type SnapshotReportQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type SnapshotReportQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<SnapshotReport_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<SnapshotReport_ViewFilterInput>;
+};
+
+
+/** Queries: SnapshotReport Document */
+export type SnapshotReportQueriesDocumentsArgs = {
+  paging?: InputMaybe<SnapshotReport_PagingInput>;
 };
 
 
 /** Queries: SnapshotReport Document */
 export type SnapshotReportQueriesFindDocumentsArgs = {
   paging?: InputMaybe<SnapshotReport_PagingInput>;
-  search: SnapshotReport_SearchFilterInput;
+  search?: InputMaybe<SnapshotReport_SearchFilterInput>;
   view?: InputMaybe<SnapshotReport_ViewFilterInput>;
 };
 
@@ -15068,6 +16149,243 @@ export type SnapshotReport_ViewFilterInput = {
   scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type SubgraphModule = IDocument & {
+  __typename?: 'SubgraphModule';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: SubgraphModule_SubgraphModuleState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: SubgraphModule_SubgraphModuleState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type SubgraphModuleOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for SubgraphModule operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type SubgraphModuleMutationResult = {
+  __typename?: 'SubgraphModuleMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: SubgraphModule_FullState;
+};
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutations = {
+  __typename?: 'SubgraphModuleMutations';
+  createDocument: SubgraphModuleMutationResult;
+  createEmptyDocument: SubgraphModuleMutationResult;
+  setSubgraphName: SubgraphModuleMutationResult;
+  setSubgraphNameAsync: Scalars['String']['output'];
+  setSubgraphStatus: SubgraphModuleMutationResult;
+  setSubgraphStatusAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<SubgraphModule_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsSetSubgraphNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubgraphModule_SetSubgraphNameInput;
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsSetSubgraphNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubgraphModule_SetSubgraphNameInput;
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsSetSubgraphStatusArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubgraphModule_SetSubgraphStatusInput;
+};
+
+
+/** Mutations: SubgraphModule */
+export type SubgraphModuleMutationsSetSubgraphStatusAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubgraphModule_SetSubgraphStatusInput;
+};
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueries = {
+  __typename?: 'SubgraphModuleQueries';
+  /** Get a specific SubgraphModule document by identifier */
+  document?: Maybe<SubgraphModule_DocumentWithChildren>;
+  /** Get incoming relationships to a SubgraphModule document */
+  documentIncomingRelationships: SubgraphModule_DocumentResultPage;
+  /** Get outgoing relationships of a SubgraphModule document */
+  documentOutgoingRelationships: SubgraphModule_DocumentResultPage;
+  /** Get all SubgraphModule documents (paged) */
+  documents: SubgraphModule_DocumentResultPage;
+  /** Find SubgraphModule documents by search criteria */
+  findDocuments: SubgraphModule_DocumentResultPage;
+};
+
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<SubgraphModule_ViewFilterInput>;
+};
+
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<SubgraphModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<SubgraphModule_ViewFilterInput>;
+};
+
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<SubgraphModule_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<SubgraphModule_ViewFilterInput>;
+};
+
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueriesDocumentsArgs = {
+  paging?: InputMaybe<SubgraphModule_PagingInput>;
+};
+
+
+/** Queries: SubgraphModule Document */
+export type SubgraphModuleQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<SubgraphModule_PagingInput>;
+  search?: InputMaybe<SubgraphModule_SearchFilterInput>;
+  view?: InputMaybe<SubgraphModule_ViewFilterInput>;
+};
+
+/** Paginated result type for SubgraphModule documents */
+export type SubgraphModule_DocumentResultPage = {
+  __typename?: 'SubgraphModule_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<SubgraphModuleMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+/** Document with children for SubgraphModule */
+export type SubgraphModule_DocumentWithChildren = {
+  __typename?: 'SubgraphModule_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: SubgraphModuleMutationResult;
+};
+
+/** Full state with all scopes for SubgraphModule */
+export type SubgraphModule_FullState = {
+  __typename?: 'SubgraphModule_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: SubgraphModule_PhDocumentScopeState;
+  global: SubgraphModule_SubgraphModuleState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type SubgraphModule_InitialStateInput = {
+  global?: InputMaybe<SubgraphModule_SubgraphModuleStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+/** Document scope state (same for all document types) */
+export type SubgraphModule_PhDocumentScopeState = {
+  __typename?: 'SubgraphModule_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: SubgraphModule_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type SubgraphModule_PhHashConfig = {
+  __typename?: 'SubgraphModule_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type SubgraphModule_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type SubgraphModule_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: BaseOperations */
+export type SubgraphModule_SetSubgraphNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type SubgraphModule_SetSubgraphStatusInput = {
+  status: SubgraphModule_StatusType;
+};
+
+export enum SubgraphModule_StatusType {
+  Confirmed = 'CONFIRMED',
+  Draft = 'DRAFT'
+}
+
+export type SubgraphModule_SubgraphModuleState = {
+  __typename?: 'SubgraphModule_SubgraphModuleState';
+  name: Scalars['String']['output'];
+  status: SubgraphModule_StatusType;
+};
+
+/** Input Types for Initial State */
+export type SubgraphModule_SubgraphModuleStateInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<SubgraphModule_StatusType>;
+};
+
+export type SubgraphModule_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   documentChanges: DocumentChangeEvent;
@@ -15076,7 +16394,7 @@ export type Subscription = {
 
 
 export type SubscriptionDocumentChangesArgs = {
-  search: SearchFilterInput;
+  search?: InputMaybe<SearchFilterInput>;
   view?: InputMaybe<ViewFilterInput>;
 };
 
@@ -15125,6 +16443,8 @@ export type SubscriptionInstanceMutationResult = {
 /** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutations = {
   __typename?: 'SubscriptionInstanceMutations';
+  accrueMetricUsage: SubscriptionInstanceMutationResult;
+  accrueMetricUsageAsync: Scalars['String']['output'];
   activateSubscription: SubscriptionInstanceMutationResult;
   activateSubscriptionAsync: Scalars['String']['output'];
   addService: SubscriptionInstanceMutationResult;
@@ -15163,6 +16483,8 @@ export type SubscriptionInstanceMutations = {
   removeServiceMetricAsync: Scalars['String']['output'];
   renewExpiringSubscription: SubscriptionInstanceMutationResult;
   renewExpiringSubscriptionAsync: Scalars['String']['output'];
+  reportOveragePayment: SubscriptionInstanceMutationResult;
+  reportOveragePaymentAsync: Scalars['String']['output'];
   reportRecurringPayment: SubscriptionInstanceMutationResult;
   reportRecurringPaymentAsync: Scalars['String']['output'];
   reportSetupPayment: SubscriptionInstanceMutationResult;
@@ -15183,8 +16505,8 @@ export type SubscriptionInstanceMutations = {
   setRenewalDateAsync: Scalars['String']['output'];
   setResourceDocument: SubscriptionInstanceMutationResult;
   setResourceDocumentAsync: Scalars['String']['output'];
-  updateBillingProjection: SubscriptionInstanceMutationResult;
-  updateBillingProjectionAsync: Scalars['String']['output'];
+  settleBillingCycle: SubscriptionInstanceMutationResult;
+  settleBillingCycleAsync: Scalars['String']['output'];
   updateCustomerInfo: SubscriptionInstanceMutationResult;
   updateCustomerInfoAsync: Scalars['String']['output'];
   updateMetric: SubscriptionInstanceMutationResult;
@@ -15199,12 +16521,24 @@ export type SubscriptionInstanceMutations = {
   updateServiceRecurringCostAsync: Scalars['String']['output'];
   updateServiceSetupCost: SubscriptionInstanceMutationResult;
   updateServiceSetupCostAsync: Scalars['String']['output'];
-  updateSubscriptionStatus: SubscriptionInstanceMutationResult;
-  updateSubscriptionStatusAsync: Scalars['String']['output'];
   updateTeamMemberCount: SubscriptionInstanceMutationResult;
   updateTeamMemberCountAsync: Scalars['String']['output'];
   updateTierInfo: SubscriptionInstanceMutationResult;
   updateTierInfoAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsAccrueMetricUsageArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_AccrueMetricUsageInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsAccrueMetricUsageAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_AccrueMetricUsageInput;
 };
 
 
@@ -15477,6 +16811,20 @@ export type SubscriptionInstanceMutationsRenewExpiringSubscriptionAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsReportOveragePaymentArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ReportOveragePaymentInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsReportOveragePaymentAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ReportOveragePaymentInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsReportRecurringPaymentArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_ReportRecurringPaymentInput;
@@ -15617,16 +16965,16 @@ export type SubscriptionInstanceMutationsSetResourceDocumentAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsUpdateBillingProjectionArgs = {
+export type SubscriptionInstanceMutationsSettleBillingCycleArgs = {
   docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_UpdateBillingProjectionInput;
+  input: SubscriptionInstance_SettleBillingCycleInput;
 };
 
 
 /** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsUpdateBillingProjectionAsyncArgs = {
+export type SubscriptionInstanceMutationsSettleBillingCycleAsyncArgs = {
   docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_UpdateBillingProjectionInput;
+  input: SubscriptionInstance_SettleBillingCycleInput;
 };
 
 
@@ -15729,20 +17077,6 @@ export type SubscriptionInstanceMutationsUpdateServiceSetupCostAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsUpdateSubscriptionStatusArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_UpdateSubscriptionStatusInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsUpdateSubscriptionStatusAsyncArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_UpdateSubscriptionStatusInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsUpdateTeamMemberCountArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_UpdateTeamMemberCountInput;
@@ -15772,22 +17106,16 @@ export type SubscriptionInstanceMutationsUpdateTierInfoAsyncArgs = {
 /** Queries: SubscriptionInstance Document */
 export type SubscriptionInstanceQueries = {
   __typename?: 'SubscriptionInstanceQueries';
-  /** Get all SubscriptionInstance documents (paged) */
-  SubscriptionInstance_documents: SubscriptionInstance_DocumentResultPage;
   /** Get a specific SubscriptionInstance document by identifier */
   document?: Maybe<SubscriptionInstance_DocumentWithChildren>;
-  /** Get children of a SubscriptionInstance document */
-  documentChildren: SubscriptionInstance_DocumentResultPage;
-  /** Get parents of a SubscriptionInstance document */
-  documentParents: SubscriptionInstance_DocumentResultPage;
+  /** Get incoming relationships to a SubscriptionInstance document */
+  documentIncomingRelationships: SubscriptionInstance_DocumentResultPage;
+  /** Get outgoing relationships of a SubscriptionInstance document */
+  documentOutgoingRelationships: SubscriptionInstance_DocumentResultPage;
+  /** Get all SubscriptionInstance documents (paged) */
+  documents: SubscriptionInstance_DocumentResultPage;
   /** Find SubscriptionInstance documents by search criteria */
   findDocuments: SubscriptionInstance_DocumentResultPage;
-};
-
-
-/** Queries: SubscriptionInstance Document */
-export type SubscriptionInstanceQueriesSubscriptionInstance_DocumentsArgs = {
-  paging?: InputMaybe<SubscriptionInstance_PagingInput>;
 };
 
 
@@ -15799,26 +17127,50 @@ export type SubscriptionInstanceQueriesDocumentArgs = {
 
 
 /** Queries: SubscriptionInstance Document */
-export type SubscriptionInstanceQueriesDocumentChildrenArgs = {
+export type SubscriptionInstanceQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<SubscriptionInstance_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<SubscriptionInstance_ViewFilterInput>;
 };
 
 
 /** Queries: SubscriptionInstance Document */
-export type SubscriptionInstanceQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type SubscriptionInstanceQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<SubscriptionInstance_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<SubscriptionInstance_ViewFilterInput>;
+};
+
+
+/** Queries: SubscriptionInstance Document */
+export type SubscriptionInstanceQueriesDocumentsArgs = {
+  paging?: InputMaybe<SubscriptionInstance_PagingInput>;
 };
 
 
 /** Queries: SubscriptionInstance Document */
 export type SubscriptionInstanceQueriesFindDocumentsArgs = {
   paging?: InputMaybe<SubscriptionInstance_PagingInput>;
-  search: SubscriptionInstance_SearchFilterInput;
+  search?: InputMaybe<SubscriptionInstance_SearchFilterInput>;
   view?: InputMaybe<SubscriptionInstance_ViewFilterInput>;
+};
+
+export enum SubscriptionInstance_AccrualCycle {
+  Annual = 'ANNUAL',
+  Daily = 'DAILY',
+  Hourly = 'HOURLY',
+  Monthly = 'MONTHLY',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL',
+  Weekly = 'WEEKLY'
+}
+
+export type SubscriptionInstance_AccrueMetricUsageInput = {
+  accrualDate: Scalars['DateTime']['input'];
+  metricId: Scalars['OID']['input'];
+  serviceId: Scalars['OID']['input'];
 };
 
 export type SubscriptionInstance_ActivateSubscriptionInput = {
@@ -15835,6 +17187,7 @@ export type SubscriptionInstance_AddServiceFacetSelectionInput = {
 /** Module: ServiceGroup */
 export type SubscriptionInstance_AddServiceGroupInput = {
   costType?: InputMaybe<SubscriptionInstance_GroupCostType>;
+  effectiveDate: Scalars['DateTime']['input'];
   groupId: Scalars['OID']['input'];
   name: Scalars['String']['input'];
   optional: Scalars['Boolean']['input'];
@@ -15843,7 +17196,6 @@ export type SubscriptionInstance_AddServiceGroupInput = {
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
   recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountServiceInfoInput>;
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
 };
 
@@ -15856,31 +17208,27 @@ export type SubscriptionInstance_AddServiceInput = {
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
   recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountServiceInfoInput>;
   recurringLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
-  recurringNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   serviceId: Scalars['OID']['input'];
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
   setupPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 /** Module: Metrics */
 export type SubscriptionInstance_AddServiceMetricInput = {
+  accrualCycle: SubscriptionInstance_AccrualCycle;
   currentUsage: Scalars['Int']['input'];
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  lastAccrualDate?: InputMaybe<Scalars['DateTime']['input']>;
   metricId: Scalars['OID']['input'];
+  metricType: SubscriptionInstance_MetricType;
   name: Scalars['String']['input'];
-  nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
   serviceId: Scalars['OID']['input'];
   unitCostAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
   unitCostBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   unitCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
-  unitCostLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
-  unitCostNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   unitName: Scalars['String']['input'];
-  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
 };
 
 export type SubscriptionInstance_AddServiceToGroupInput = {
@@ -15892,10 +17240,8 @@ export type SubscriptionInstance_AddServiceToGroupInput = {
   recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
   recurringLastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
-  recurringNextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   serviceId: Scalars['OID']['input'];
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
   setupPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -16028,17 +17374,18 @@ export type SubscriptionInstance_InitializeFacetSelectionInput = {
 };
 
 export type SubscriptionInstance_InitializeMetricInput = {
+  accrualCycle: SubscriptionInstance_AccrualCycle;
   currentUsage: Scalars['Int']['input'];
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   id: Scalars['OID']['input'];
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  lastAccrualDate?: InputMaybe<Scalars['DateTime']['input']>;
+  metricType: SubscriptionInstance_MetricType;
   name: Scalars['String']['input'];
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
   unitCostAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
   unitCostBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   unitCostCurrency?: InputMaybe<Scalars['Currency']['input']>;
   unitName: Scalars['String']['input'];
-  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
 };
 
 export type SubscriptionInstance_InitializeServiceGroupInput = {
@@ -16052,7 +17399,6 @@ export type SubscriptionInstance_InitializeServiceGroupInput = {
   recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountInfoInitInput>;
   services?: InputMaybe<Array<SubscriptionInstance_InitializeServiceInput>>;
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
 };
 
@@ -16092,6 +17438,11 @@ export type SubscriptionInstance_InitializeSubscriptionInput = {
   tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
 };
 
+export enum SubscriptionInstance_MetricType {
+  Cumulative = 'CUMULATIVE',
+  NonCumulative = 'NON_CUMULATIVE'
+}
+
 /** Document scope state (same for all document types) */
 export type SubscriptionInstance_PhDocumentScopeState = {
   __typename?: 'SubscriptionInstance_PHDocumentScopeState';
@@ -16127,7 +17478,6 @@ export type SubscriptionInstance_RecurringCost = {
   currency: Scalars['Currency']['output'];
   discount?: Maybe<SubscriptionInstance_DiscountInfo>;
   lastPaymentDate?: Maybe<Scalars['DateTime']['output']>;
-  nextBillingDate?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type SubscriptionInstance_RecurringCostInput = {
@@ -16136,7 +17486,6 @@ export type SubscriptionInstance_RecurringCostInput = {
   currency?: InputMaybe<Scalars['Currency']['input']>;
   discount?: InputMaybe<SubscriptionInstance_DiscountInfoInput>;
   lastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
-  nextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type SubscriptionInstance_RemoveBudgetCategoryInput = {
@@ -16154,6 +17503,7 @@ export type SubscriptionInstance_RemoveServiceFromGroupInput = {
 };
 
 export type SubscriptionInstance_RemoveServiceGroupInput = {
+  effectiveDate: Scalars['DateTime']['input'];
   groupId: Scalars['OID']['input'];
 };
 
@@ -16171,6 +17521,11 @@ export type SubscriptionInstance_RenewExpiringSubscriptionInput = {
   timestamp: Scalars['DateTime']['input'];
 };
 
+export type SubscriptionInstance_ReportOveragePaymentInput = {
+  amount: Scalars['Amount_Money']['input'];
+  paymentDate: Scalars['DateTime']['input'];
+};
+
 export type SubscriptionInstance_ReportRecurringPaymentInput = {
   paymentDate: Scalars['DateTime']['input'];
   serviceId: Scalars['OID']['input'];
@@ -16180,16 +17535,6 @@ export type SubscriptionInstance_ReportSetupPaymentInput = {
   paymentDate: Scalars['DateTime']['input'];
   serviceId: Scalars['OID']['input'];
 };
-
-export enum SubscriptionInstance_ResetPeriod {
-  Annual = 'ANNUAL',
-  Daily = 'DAILY',
-  Hourly = 'HOURLY',
-  Monthly = 'MONTHLY',
-  Quarterly = 'QUARTERLY',
-  SemiAnnual = 'SEMI_ANNUAL',
-  Weekly = 'WEEKLY'
-}
 
 export type SubscriptionInstance_ResourceDocument = {
   __typename?: 'SubscriptionInstance_ResourceDocument';
@@ -16272,29 +17617,29 @@ export type SubscriptionInstance_ServiceInput = {
 
 export type SubscriptionInstance_ServiceMetric = {
   __typename?: 'SubscriptionInstance_ServiceMetric';
+  accrualCycle: SubscriptionInstance_AccrualCycle;
   currentUsage: Scalars['Int']['output'];
   freeLimit?: Maybe<Scalars['Int']['output']>;
   id: Scalars['OID']['output'];
-  limit?: Maybe<Scalars['Int']['output']>;
+  lastAccrualDate?: Maybe<Scalars['DateTime']['output']>;
+  metricType: SubscriptionInstance_MetricType;
   name: Scalars['String']['output'];
-  nextUsageReset?: Maybe<Scalars['DateTime']['output']>;
   paidLimit?: Maybe<Scalars['Int']['output']>;
   unitCost?: Maybe<SubscriptionInstance_RecurringCost>;
   unitName: Scalars['String']['output'];
-  usageResetPeriod?: Maybe<SubscriptionInstance_ResetPeriod>;
 };
 
 export type SubscriptionInstance_ServiceMetricInput = {
+  accrualCycle?: InputMaybe<SubscriptionInstance_AccrualCycle>;
   currentUsage?: InputMaybe<Scalars['Int']['input']>;
   freeLimit?: InputMaybe<Scalars['Int']['input']>;
   id?: InputMaybe<Scalars['OID']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  lastAccrualDate?: InputMaybe<Scalars['DateTime']['input']>;
+  metricType?: InputMaybe<SubscriptionInstance_MetricType>;
   name?: InputMaybe<Scalars['String']['input']>;
-  nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
   paidLimit?: InputMaybe<Scalars['Int']['input']>;
   unitCost?: InputMaybe<SubscriptionInstance_RecurringCostInput>;
   unitName?: InputMaybe<Scalars['String']['input']>;
-  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
 };
 
 export type SubscriptionInstance_SetAutoRenewInput = {
@@ -16330,17 +17675,19 @@ export type SubscriptionInstance_SetResourceDocumentInput = {
   resourceThumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
 };
 
+export type SubscriptionInstance_SettleBillingCycleInput = {
+  settlementDate: Scalars['DateTime']['input'];
+};
+
 export type SubscriptionInstance_SetupCost = {
   __typename?: 'SubscriptionInstance_SetupCost';
   amount: Scalars['Amount_Money']['output'];
-  billingDate?: Maybe<Scalars['DateTime']['output']>;
   currency: Scalars['Currency']['output'];
   paymentDate?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type SubscriptionInstance_SetupCostInput = {
   amount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  billingDate?: InputMaybe<Scalars['DateTime']['input']>;
   currency?: InputMaybe<Scalars['Currency']['input']>;
   paymentDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -16353,6 +17700,7 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   cancellationReason?: Maybe<Scalars['String']['output']>;
   cancelledSince?: Maybe<Scalars['DateTime']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  currentBillingCycleStart?: Maybe<Scalars['DateTime']['output']>;
   customerEmail?: Maybe<Scalars['EmailAddress']['output']>;
   customerId?: Maybe<Scalars['PHID']['output']>;
   customerName?: Maybe<Scalars['String']['output']>;
@@ -16363,8 +17711,6 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   operatorId?: Maybe<Scalars['PHID']['output']>;
   operatorNotes?: Maybe<Scalars['String']['output']>;
   pausedSince?: Maybe<Scalars['DateTime']['output']>;
-  projectedBillAmount?: Maybe<Scalars['Amount_Money']['output']>;
-  projectedBillCurrency?: Maybe<Scalars['Currency']['output']>;
   renewalDate?: Maybe<Scalars['DateTime']['output']>;
   resource?: Maybe<SubscriptionInstance_ResourceDocument>;
   selectedBillingCycle?: Maybe<SubscriptionInstance_BillingCycle>;
@@ -16378,6 +17724,8 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   tierPrice?: Maybe<Scalars['Amount_Money']['output']>;
   tierPricingMode?: Maybe<SubscriptionInstance_TierPricingMode>;
   tierPricingOptionId?: Maybe<Scalars['OID']['output']>;
+  totalCredit?: Maybe<Scalars['Amount_Money']['output']>;
+  totalDebt?: Maybe<Scalars['Amount_Money']['output']>;
 };
 
 /** Input Types for Initial State */
@@ -16388,6 +17736,7 @@ export type SubscriptionInstance_SubscriptionInstanceStateInput = {
   cancellationReason?: InputMaybe<Scalars['String']['input']>;
   cancelledSince?: InputMaybe<Scalars['DateTime']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  currentBillingCycleStart?: InputMaybe<Scalars['DateTime']['input']>;
   customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
   customerId?: InputMaybe<Scalars['PHID']['input']>;
   customerName?: InputMaybe<Scalars['String']['input']>;
@@ -16398,8 +17747,6 @@ export type SubscriptionInstance_SubscriptionInstanceStateInput = {
   operatorId?: InputMaybe<Scalars['PHID']['input']>;
   operatorNotes?: InputMaybe<Scalars['String']['input']>;
   pausedSince?: InputMaybe<Scalars['DateTime']['input']>;
-  projectedBillAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  projectedBillCurrency?: InputMaybe<Scalars['Currency']['input']>;
   renewalDate?: InputMaybe<Scalars['DateTime']['input']>;
   resource?: InputMaybe<SubscriptionInstance_ResourceDocumentInput>;
   selectedBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
@@ -16413,6 +17760,8 @@ export type SubscriptionInstance_SubscriptionInstanceStateInput = {
   tierPrice?: InputMaybe<Scalars['Amount_Money']['input']>;
   tierPricingMode?: InputMaybe<SubscriptionInstance_TierPricingMode>;
   tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
+  totalCredit?: InputMaybe<Scalars['Amount_Money']['input']>;
+  totalDebt?: InputMaybe<Scalars['Amount_Money']['input']>;
 };
 
 export enum SubscriptionInstance_SubscriptionStatus {
@@ -16428,12 +17777,6 @@ export enum SubscriptionInstance_TierPricingMode {
   ManualOverride = 'MANUAL_OVERRIDE'
 }
 
-export type SubscriptionInstance_UpdateBillingProjectionInput = {
-  nextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
-  projectedBillAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  projectedBillCurrency?: InputMaybe<Scalars['Currency']['input']>;
-};
-
 export type SubscriptionInstance_UpdateCustomerInfoInput = {
   customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
   customerId?: InputMaybe<Scalars['PHID']['input']>;
@@ -16441,18 +17784,21 @@ export type SubscriptionInstance_UpdateCustomerInfoInput = {
 };
 
 export type SubscriptionInstance_UpdateMetricInput = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  accrualCycle?: InputMaybe<SubscriptionInstance_AccrualCycle>;
+  freeLimit?: InputMaybe<Scalars['Int']['input']>;
+  lastAccrualDate?: InputMaybe<Scalars['DateTime']['input']>;
   metricId: Scalars['OID']['input'];
+  metricType?: InputMaybe<SubscriptionInstance_MetricType>;
   name?: InputMaybe<Scalars['String']['input']>;
-  nextUsageReset?: InputMaybe<Scalars['DateTime']['input']>;
+  paidLimit?: InputMaybe<Scalars['Int']['input']>;
   serviceId: Scalars['OID']['input'];
   unitName?: InputMaybe<Scalars['String']['input']>;
-  usageResetPeriod?: InputMaybe<SubscriptionInstance_ResetPeriod>;
 };
 
 export type SubscriptionInstance_UpdateMetricUsageInput = {
   currentTime: Scalars['DateTime']['input'];
   currentUsage: Scalars['Int']['input'];
+  isAdjustment?: InputMaybe<Scalars['Boolean']['input']>;
   metricId: Scalars['OID']['input'];
   serviceId: Scalars['OID']['input'];
 };
@@ -16463,7 +17809,6 @@ export type SubscriptionInstance_UpdateServiceGroupCostInput = {
   recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  setupBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
 };
 
@@ -16485,14 +17830,9 @@ export type SubscriptionInstance_UpdateServiceRecurringCostInput = {
 
 export type SubscriptionInstance_UpdateServiceSetupCostInput = {
   amount?: InputMaybe<Scalars['Amount_Money']['input']>;
-  billingDate?: InputMaybe<Scalars['DateTime']['input']>;
   currency?: InputMaybe<Scalars['Currency']['input']>;
   paymentDate?: InputMaybe<Scalars['DateTime']['input']>;
   serviceId: Scalars['OID']['input'];
-};
-
-export type SubscriptionInstance_UpdateSubscriptionStatusInput = {
-  status: SubscriptionInstance_SubscriptionStatus;
 };
 
 export type SubscriptionInstance_UpdateTeamMemberCountInput = {
@@ -16535,6 +17875,12 @@ export enum SyncEnvelopeType {
   Ack = 'ACK',
   Operations = 'OPERATIONS'
 }
+
+export type SystemInfo = {
+  __typename?: 'SystemInfo';
+  gitHash: Scalars['String']['output'];
+  version: Scalars['String']['output'];
+};
 
 export type Token = {
   __typename?: 'Token';
@@ -16584,6 +17930,432 @@ export type Value = {
   icon?: Maybe<Scalars['String']['output']>;
   label?: Maybe<Scalars['String']['output']>;
   path?: Maybe<Scalars['String']['output']>;
+};
+
+export type VetraPackage = IDocument & {
+  __typename?: 'VetraPackage';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: VetraPackage_VetraPackageState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: VetraPackage_VetraPackageState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type VetraPackageOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for VetraPackage operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type VetraPackageMutationResult = {
+  __typename?: 'VetraPackageMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: VetraPackage_FullState;
+};
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutations = {
+  __typename?: 'VetraPackageMutations';
+  addPackageKeyword: VetraPackageMutationResult;
+  addPackageKeywordAsync: Scalars['String']['output'];
+  createDocument: VetraPackageMutationResult;
+  createEmptyDocument: VetraPackageMutationResult;
+  removePackageKeyword: VetraPackageMutationResult;
+  removePackageKeywordAsync: Scalars['String']['output'];
+  setPackageAuthor: VetraPackageMutationResult;
+  setPackageAuthorAsync: Scalars['String']['output'];
+  setPackageAuthorName: VetraPackageMutationResult;
+  setPackageAuthorNameAsync: Scalars['String']['output'];
+  setPackageAuthorWebsite: VetraPackageMutationResult;
+  setPackageAuthorWebsiteAsync: Scalars['String']['output'];
+  setPackageCategory: VetraPackageMutationResult;
+  setPackageCategoryAsync: Scalars['String']['output'];
+  setPackageDescription: VetraPackageMutationResult;
+  setPackageDescriptionAsync: Scalars['String']['output'];
+  setPackageGithubUrl: VetraPackageMutationResult;
+  setPackageGithubUrlAsync: Scalars['String']['output'];
+  setPackageName: VetraPackageMutationResult;
+  setPackageNameAsync: Scalars['String']['output'];
+  setPackageNpmUrl: VetraPackageMutationResult;
+  setPackageNpmUrlAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsAddPackageKeywordArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_AddPackageKeywordInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsAddPackageKeywordAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_AddPackageKeywordInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<VetraPackage_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsRemovePackageKeywordArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_RemovePackageKeywordInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsRemovePackageKeywordAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_RemovePackageKeywordInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorNameInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorNameInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorWebsiteArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorWebsiteInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageAuthorWebsiteAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageAuthorWebsiteInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageCategoryArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageCategoryInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageCategoryAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageCategoryInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageDescriptionArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageDescriptionInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageDescriptionAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageDescriptionInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageGithubUrlArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageGithubUrlInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageGithubUrlAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageGithubUrlInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageNameInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageNameInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageNpmUrlArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageNpmUrlInput;
+};
+
+
+/** Mutations: VetraPackage */
+export type VetraPackageMutationsSetPackageNpmUrlAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: VetraPackage_SetPackageNpmUrlInput;
+};
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueries = {
+  __typename?: 'VetraPackageQueries';
+  /** Get a specific VetraPackage document by identifier */
+  document?: Maybe<VetraPackage_DocumentWithChildren>;
+  /** Get incoming relationships to a VetraPackage document */
+  documentIncomingRelationships: VetraPackage_DocumentResultPage;
+  /** Get outgoing relationships of a VetraPackage document */
+  documentOutgoingRelationships: VetraPackage_DocumentResultPage;
+  /** Get all VetraPackage documents (paged) */
+  documents: VetraPackage_DocumentResultPage;
+  /** Find VetraPackage documents by search criteria */
+  findDocuments: VetraPackage_DocumentResultPage;
+};
+
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<VetraPackage_ViewFilterInput>;
+};
+
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<VetraPackage_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<VetraPackage_ViewFilterInput>;
+};
+
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<VetraPackage_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<VetraPackage_ViewFilterInput>;
+};
+
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueriesDocumentsArgs = {
+  paging?: InputMaybe<VetraPackage_PagingInput>;
+};
+
+
+/** Queries: VetraPackage Document */
+export type VetraPackageQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<VetraPackage_PagingInput>;
+  search?: InputMaybe<VetraPackage_SearchFilterInput>;
+  view?: InputMaybe<VetraPackage_ViewFilterInput>;
+};
+
+export type VetraPackage_AddPackageKeywordInput = {
+  id: Scalars['String']['input'];
+  label: Scalars['String']['input'];
+};
+
+export type VetraPackage_Author = {
+  __typename?: 'VetraPackage_Author';
+  name?: Maybe<Scalars['String']['output']>;
+  website?: Maybe<Scalars['URL']['output']>;
+};
+
+export type VetraPackage_AuthorInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['URL']['input']>;
+};
+
+/** Paginated result type for VetraPackage documents */
+export type VetraPackage_DocumentResultPage = {
+  __typename?: 'VetraPackage_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<VetraPackageMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+/** Document with children for VetraPackage */
+export type VetraPackage_DocumentWithChildren = {
+  __typename?: 'VetraPackage_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: VetraPackageMutationResult;
+};
+
+/** Full state with all scopes for VetraPackage */
+export type VetraPackage_FullState = {
+  __typename?: 'VetraPackage_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: VetraPackage_PhDocumentScopeState;
+  global: VetraPackage_VetraPackageState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type VetraPackage_InitialStateInput = {
+  global?: InputMaybe<VetraPackage_VetraPackageStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+export type VetraPackage_Keyword = {
+  __typename?: 'VetraPackage_Keyword';
+  id: Scalars['OID']['output'];
+  label: Scalars['String']['output'];
+};
+
+export type VetraPackage_KeywordInput = {
+  id?: InputMaybe<Scalars['OID']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Document scope state (same for all document types) */
+export type VetraPackage_PhDocumentScopeState = {
+  __typename?: 'VetraPackage_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: VetraPackage_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type VetraPackage_PhHashConfig = {
+  __typename?: 'VetraPackage_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type VetraPackage_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type VetraPackage_RemovePackageKeywordInput = {
+  id: Scalars['String']['input'];
+};
+
+export type VetraPackage_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type VetraPackage_SetPackageAuthorInput = {
+  name?: InputMaybe<Scalars['OID']['input']>;
+  website?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type VetraPackage_SetPackageAuthorNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type VetraPackage_SetPackageAuthorWebsiteInput = {
+  website: Scalars['URL']['input'];
+};
+
+export type VetraPackage_SetPackageCategoryInput = {
+  category: Scalars['String']['input'];
+};
+
+export type VetraPackage_SetPackageDescriptionInput = {
+  description: Scalars['String']['input'];
+};
+
+export type VetraPackage_SetPackageGithubUrlInput = {
+  url: Scalars['URL']['input'];
+};
+
+/** Module: BaseOperations */
+export type VetraPackage_SetPackageNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type VetraPackage_SetPackageNpmUrlInput = {
+  url: Scalars['URL']['input'];
+};
+
+export type VetraPackage_VetraPackageState = {
+  __typename?: 'VetraPackage_VetraPackageState';
+  author: VetraPackage_Author;
+  category?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  githubUrl?: Maybe<Scalars['URL']['output']>;
+  keywords: Array<VetraPackage_Keyword>;
+  name?: Maybe<Scalars['String']['output']>;
+  npmUrl?: Maybe<Scalars['URL']['output']>;
+};
+
+/** Input Types for Initial State */
+export type VetraPackage_VetraPackageStateInput = {
+  author?: InputMaybe<VetraPackage_AuthorInput>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  githubUrl?: InputMaybe<Scalars['URL']['input']>;
+  keywords?: InputMaybe<Array<InputMaybe<VetraPackage_KeywordInput>>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  npmUrl?: InputMaybe<Scalars['URL']['input']>;
+};
+
+export type VetraPackage_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type ViewFilterInput = {
@@ -16809,22 +18581,16 @@ export type WorkstreamMutationsSetRequestForProposalAsyncArgs = {
 /** Queries: Workstream Document */
 export type WorkstreamQueries = {
   __typename?: 'WorkstreamQueries';
-  /** Get all Workstream documents (paged) */
-  Workstream_documents: Workstream_DocumentResultPage;
   /** Get a specific Workstream document by identifier */
   document?: Maybe<Workstream_DocumentWithChildren>;
-  /** Get children of a Workstream document */
-  documentChildren: Workstream_DocumentResultPage;
-  /** Get parents of a Workstream document */
-  documentParents: Workstream_DocumentResultPage;
+  /** Get incoming relationships to a Workstream document */
+  documentIncomingRelationships: Workstream_DocumentResultPage;
+  /** Get outgoing relationships of a Workstream document */
+  documentOutgoingRelationships: Workstream_DocumentResultPage;
+  /** Get all Workstream documents (paged) */
+  documents: Workstream_DocumentResultPage;
   /** Find Workstream documents by search criteria */
   findDocuments: Workstream_DocumentResultPage;
-};
-
-
-/** Queries: Workstream Document */
-export type WorkstreamQueriesWorkstream_DocumentsArgs = {
-  paging?: InputMaybe<Workstream_PagingInput>;
 };
 
 
@@ -16836,25 +18602,33 @@ export type WorkstreamQueriesDocumentArgs = {
 
 
 /** Queries: Workstream Document */
-export type WorkstreamQueriesDocumentChildrenArgs = {
+export type WorkstreamQueriesDocumentIncomingRelationshipsArgs = {
   paging?: InputMaybe<Workstream_PagingInput>;
-  parentIdentifier: Scalars['String']['input'];
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Workstream_ViewFilterInput>;
 };
 
 
 /** Queries: Workstream Document */
-export type WorkstreamQueriesDocumentParentsArgs = {
-  childIdentifier: Scalars['String']['input'];
+export type WorkstreamQueriesDocumentOutgoingRelationshipsArgs = {
   paging?: InputMaybe<Workstream_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
   view?: InputMaybe<Workstream_ViewFilterInput>;
+};
+
+
+/** Queries: Workstream Document */
+export type WorkstreamQueriesDocumentsArgs = {
+  paging?: InputMaybe<Workstream_PagingInput>;
 };
 
 
 /** Queries: Workstream Document */
 export type WorkstreamQueriesFindDocumentsArgs = {
   paging?: InputMaybe<Workstream_PagingInput>;
-  search: Workstream_SearchFilterInput;
+  search?: InputMaybe<Workstream_SearchFilterInput>;
   view?: InputMaybe<Workstream_ViewFilterInput>;
 };
 
@@ -17156,6 +18930,24 @@ export type BuildersListQueryVariables = Exact<{
 
 export type BuildersListQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', code?: string | null, description?: string | null, id?: any | null, icon?: any | null, lastModified?: any | null, name?: string | null, scopes: Array<BuilderScope>, skills: Array<BuilderSkill>, slug?: string | null, status?: BuilderStatus | null, isOperator: boolean, links: Array<{ __typename?: 'BuilderLink', id: any, label?: string | null, url: any }>, operationalHubMember: { __typename?: 'OpHubMember', name?: string | null, phid?: any | null } }> };
 
+export type BudgetStatementMonthFieldsFragment = { __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string };
+
+export type BudgetStatementOwnerFieldsFragment = { __typename?: 'BudgetStatementOwner', id: any, name: string, code: string, logo: any };
+
+export type ExpenseReportGroupTotalsSummaryFieldsFragment = { __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any };
+
+export type ExpenseReportGroupTotalsFieldsFragment = { __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any };
+
+export type ExpenseReportLineItemFieldsFragment = { __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any };
+
+export type ExpenseReportGroupFieldsFragment = { __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string };
+
+export type SnapshotAccountTransactionFieldsFragment = { __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } };
+
+export type SnapshotAccountBalanceFieldsFragment = { __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } };
+
+export type SnapshotAccountFieldsFragment = { __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> };
+
 export type AccountSnapshotsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
 }>;
@@ -17163,12 +18955,18 @@ export type AccountSnapshotsQueryVariables = Exact<{
 
 export type AccountSnapshotsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, netExpenseTxns: any, reportedActuals: any, snapshotReport: { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> } }> };
 
+export type BudgetStatementSnapshotReportFieldsFragment = { __typename?: 'BudgetStatementSnapshotReport', startDate: any, endDate: any, accounts: Array<{ __typename?: 'SnapshotAccount', id: string, name: string, type: SnapAccountType, address: string, transactions: Array<{ __typename?: 'SnapshotAccountTransaction', id: string, counterParty: any, counterPartyName: string, datetime: any, direction: AccountTransactionDirection, flowType: AccountTransactionFlowType, txHash: string, amount: { __typename?: 'TxAmount', unit: string, value: any } }>, balances: Array<{ __typename?: 'SnapshotAccountBalance', endingBalance: any, startingBalance: any, token: { __typename?: 'Token', symbol: string, contractAddress: any } }> }> };
+
 export type BudgetStatementsDetailsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
 }>;
 
 
 export type BudgetStatementsDetailsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }>, groups: Array<{ __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string }> } }> };
+
+export type BudgetStatementExpenseReportDetailsFieldsFragment = { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> }>, groups: Array<{ __typename?: 'ExpenseReportGroup', id: string, label: string, parentId: string }> };
+
+export type ExpenseReportWalletDetailsFieldsFragment = { __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, billingStatementIds: Array<any>, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', group: string, groupLabel: string, totalBudget: any, totalForecast: any, totalActuals: any, totalPayments: any }>, lineItems: Array<{ __typename?: 'ExpenseReportLineItem', id: string, label: string, groupId: string, groupLabel: string, actuals: any, budget: any, comments?: string | null, forecast: any, payments: any }> };
 
 export type BudgetStatementsAvailableMonthsQueryVariables = Exact<{
   filter?: InputMaybe<BudgetStatementsFilter>;
@@ -17182,7 +18980,11 @@ export type BudgetStatementsQueryVariables = Exact<{
 }>;
 
 
-export type BudgetStatementsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string, owner: { __typename?: 'BudgetStatementOwner', name: string, code: string, id: any, logo: any }, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> } }> };
+export type BudgetStatementsQuery = { __typename?: 'Query', budgetStatements: Array<{ __typename?: 'BudgetStatement', id: any, month: string, lastModifiedAtUtcIso: any, status: string, owner: { __typename?: 'BudgetStatementOwner', id: any, name: string, code: string, logo: any }, expenseReport: { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> } }> };
+
+export type BudgetStatementExpenseReportSummaryFieldsFragment = { __typename?: 'BudgetStatementExpenseReport', periodStart: any, periodEnd: any, wallets: Array<{ __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> }> };
+
+export type ExpenseReportWalletSummaryFieldsFragment = { __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> };
 
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
@@ -17245,7 +19047,13 @@ export type ResourceProfileQueryVariables = Exact<{
 }>;
 
 
-export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, setupServices: Array<string>, recurringServices: Array<string>, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }>, faqFields?: Array<{ __typename?: 'RSFaqField', answer?: string | null, displayOrder: number, id: any, question?: string | null }> | null }> };
+export type ResourceProfileQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, setupServices: Array<string>, recurringServices: Array<string>, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }>, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null }> | null }> };
+
+export type ResourceProfileFieldsFragment = { __typename?: 'RSResourceTemplate', id: any, infoLink?: any | null, title: string, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, setupServices: Array<string>, recurringServices: Array<string>, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }>, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null }> | null };
+
+export type FaqFieldFieldsFragment = { __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null };
+
+export type ContentSectionFieldsFragment = { __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number };
 
 export type CreateProductInstancesMutationVariables = Exact<{
   input: CreateProductInstancesInput;
@@ -17261,19 +19069,51 @@ export type ResourceOperatorQueryVariables = Exact<{
 
 export type ResourceOperatorQuery = { __typename?: 'Query', builders: Array<{ __typename?: 'BuilderProfileState', id?: any | null, slug?: string | null, description?: string | null, name?: string | null, icon?: any | null, lastModified?: any | null, contributors: Array<any>, code?: string | null, status?: BuilderStatus | null }> };
 
+export type ResourceOperatorFieldsFragment = { __typename?: 'BuilderProfileState', id?: any | null, slug?: string | null, description?: string | null, name?: string | null, icon?: any | null, lastModified?: any | null, contributors: Array<any>, code?: string | null, status?: BuilderStatus | null };
+
 export type ResourceTemplateQueryVariables = Exact<{
   filter?: InputMaybe<RsResourceTemplatesFilter>;
 }>;
 
 
-export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, subtitle?: string | null, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', displayOrder: number, question?: string | null, answer?: string | null, id: any }> | null, contentSections: Array<{ __typename?: 'RSContentSection', content: string, displayOrder: number, id: any, title: string }> }> };
+export type ResourceTemplateQuery = { __typename?: 'Query', resourceTemplates: Array<{ __typename?: 'RSResourceTemplate', id: any, title: string, subtitle?: string | null, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null }> | null, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }> }> };
+
+export type PurchaseResourceTemplateFieldsFragment = { __typename?: 'RSResourceTemplate', id: any, title: string, subtitle?: string | null, description?: string | null, thumbnailUrl?: any | null, summary: string, status: RsTemplateStatus, operatorId: any, faqFields?: Array<{ __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null }> | null, contentSections: Array<{ __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number }> };
 
 export type ServiceOfferingsQueryVariables = Exact<{
   filter?: InputMaybe<RsServiceOfferingsFilter>;
 }>;
 
 
-export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, resetCycle?: RsUsageResetCycle | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
+export type ServiceOfferingsQuery = { __typename?: 'Query', serviceOfferings: Array<{ __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> }> };
+
+export type ServiceOfferingFieldsFragment = { __typename?: 'RSServiceOffering', id: any, description?: string | null, infoLink?: any | null, lastModified: any, operatorId: any, title: string, thumbnailUrl?: any | null, resourceTemplateId?: any | null, status: RsServiceStatus, summary: string, availableBillingCycles: Array<RsBillingCycle>, tiers: Array<{ __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, facetTargets: Array<{ __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> }>, optionGroups: Array<{ __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> }>, services: Array<{ __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null }> };
+
+export type ServiceTierFieldsFragment = { __typename?: 'RSServiceSubscriptionTier', id: any, name: string, mostPopular: boolean, description?: string | null, isCustomPricing: boolean, excludeFromSetupFee: boolean, pricingMode?: RsTierPricingMode | null, pricing: { __typename?: 'RSServicePricing', amount?: any | null, currency: any }, serviceLevels: Array<{ __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null }>, usageLimits: Array<{ __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null }>, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> };
+
+export type ServicePricingFieldsFragment = { __typename?: 'RSServicePricing', amount?: any | null, currency: any };
+
+export type ServiceLevelBindingFieldsFragment = { __typename?: 'RSServiceLevelBinding', id: any, serviceId: any, level: RsServiceLevel, customValue?: string | null, optionGroupId?: any | null };
+
+export type ServiceUsageLimitFieldsFragment = { __typename?: 'RSServiceUsageLimit', id: any, serviceId: any, metric: string, unitName?: string | null, freeLimit?: number | null, paidLimit?: number | null, notes?: string | null, unitPrice?: any | null, unitPriceCurrency?: any | null };
+
+export type BillingCycleDiscountFieldsFragment = { __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } };
+
+export type DiscountRuleFieldsFragment = { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number };
+
+export type OfferingFacetTargetFieldsFragment = { __typename?: 'RSOfferingFacetTarget', id: any, categoryKey: string, categoryLabel: string, selectedOptions: Array<string> };
+
+export type OfferingOptionGroupFieldsFragment = { __typename?: 'RSOfferingOptionGroup', id: any, name: string, description?: string | null, isAddOn: boolean, defaultSelected: boolean, pricingMode?: RsAddOnPricingMode | null, costType?: RsGroupCostType | null, availableBillingCycles: Array<RsBillingCycle>, price?: any | null, currency?: any | null, discountMode?: RsDiscountMode | null, standalonePricing?: { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> } | null, tierDependentPricing?: Array<{ __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> }> | null, billingCycleDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }> };
+
+export type StandalonePricingFieldsFragment = { __typename?: 'RSStandalonePricing', setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> };
+
+export type SetupCostFieldsFragment = { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null };
+
+export type OptionGroupTierPricingFieldsFragment = { __typename?: 'RSOptionGroupTierPricing', id: any, tierId: any, setupCost?: { __typename?: 'RSSetupCost', amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null } | null, setupCostDiscounts: Array<{ __typename?: 'RSBillingCycleDiscount', billingCycle: RsBillingCycle, discountRule: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } }>, recurringPricing: Array<{ __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null }> };
+
+export type RecurringPriceOptionFieldsFragment = { __typename?: 'RSRecurringPriceOption', id: any, billingCycle: RsBillingCycle, amount: any, currency: any, discount?: { __typename?: 'RSDiscountRule', discountType: RsDiscountType, discountValue: number } | null };
+
+export type OfferingServiceFieldsFragment = { __typename?: 'RSOfferingService', id: any, title: string, description?: string | null, displayOrder?: number | null, isSetupFormation: boolean, optionGroupId?: any | null };
 
 export type ServicesListingOfferingsQueryVariables = Exact<{
   filter?: InputMaybe<RsServiceOfferingsFilter>;
@@ -17304,7 +19144,397 @@ export type WorkstreamsQueryVariables = Exact<{
 export type WorkstreamsQuery = { __typename?: 'Query', workstreams: Array<{ __typename?: 'FullQueryWorkstream', title?: string | null, status?: WorkstreamStatus | null, slug?: string | null, client?: { __typename?: 'ClientInfo', name?: string | null, icon?: any | null } | null, initialProposal?: { __typename?: 'FullProposal', status: ProposalStatus, author: { __typename?: 'ProposalAuthor', name?: string | null }, paymentTerms?: { __typename?: 'PT_PaymentTermsState', proposer: string, currency: Pt_PaymentCurrency, totalAmount?: any | null, paymentModel: Pt_PaymentModel } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', description: string, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', budget?: number | null, scope?: { __typename?: 'SOW_DeliverablesSet', deliverables: Array<any> } | null }> }>, deliverables: Array<{ __typename?: 'SOW_Deliverable', id: any, code: string, title: string, description: string }> } | null } | null, rfp?: { __typename?: 'RFP', title?: string | null, summary?: string | null, budgetMax?: number | null, budgetMin?: number | null, budgetCurrency?: string | null, briefing?: string | null, submissionDeadline?: any | null } | null, sow?: { __typename?: 'SOW_ScopeOfWorkState', projects: Array<{ __typename?: 'SOW_Project', title: string }>, roadmaps: Array<{ __typename?: 'SOW_Roadmap', milestones: Array<{ __typename?: 'SOW_Milestone', id: any }> }> } | null, alternativeProposals: Array<{ __typename?: 'FullProposal', id: any }>, network?: { __typename?: 'Network', name?: string | null, logo?: string | null, darkThemeLogo?: string | null, slug?: string | null } | null }> };
 
 
-
+export const BudgetStatementMonthFieldsFragmentDoc = `
+    fragment BudgetStatementMonthFields on BudgetStatement {
+  id
+  month
+  lastModifiedAtUtcIso
+  status
+}
+    `;
+export const BudgetStatementOwnerFieldsFragmentDoc = `
+    fragment BudgetStatementOwnerFields on BudgetStatementOwner {
+  id
+  name
+  code
+  logo
+}
+    `;
+export const SnapshotAccountTransactionFieldsFragmentDoc = `
+    fragment SnapshotAccountTransactionFields on SnapshotAccountTransaction {
+  id
+  amount {
+    unit
+    value
+  }
+  counterParty
+  counterPartyName
+  datetime
+  direction
+  flowType
+  txHash
+}
+    `;
+export const SnapshotAccountBalanceFieldsFragmentDoc = `
+    fragment SnapshotAccountBalanceFields on SnapshotAccountBalance {
+  endingBalance
+  startingBalance
+  token {
+    symbol
+    contractAddress
+  }
+}
+    `;
+export const SnapshotAccountFieldsFragmentDoc = `
+    fragment SnapshotAccountFields on SnapshotAccount {
+  id
+  name
+  type
+  address
+  transactions {
+    ...SnapshotAccountTransactionFields
+  }
+  balances {
+    ...SnapshotAccountBalanceFields
+  }
+}
+    `;
+export const BudgetStatementSnapshotReportFieldsFragmentDoc = `
+    fragment BudgetStatementSnapshotReportFields on BudgetStatementSnapshotReport {
+  startDate
+  endDate
+  accounts {
+    ...SnapshotAccountFields
+  }
+}
+    `;
+export const ExpenseReportGroupTotalsFieldsFragmentDoc = `
+    fragment ExpenseReportGroupTotalsFields on ExpenseReportGroupTotals {
+  group
+  groupLabel
+  totalBudget
+  totalForecast
+  totalActuals
+  totalPayments
+}
+    `;
+export const ExpenseReportLineItemFieldsFragmentDoc = `
+    fragment ExpenseReportLineItemFields on ExpenseReportLineItem {
+  id
+  label
+  groupId
+  groupLabel
+  actuals
+  budget
+  comments
+  forecast
+  payments
+}
+    `;
+export const ExpenseReportWalletDetailsFieldsFragmentDoc = `
+    fragment ExpenseReportWalletDetailsFields on ExpenseReportWallet {
+  name
+  address
+  billingStatementIds
+  totals {
+    ...ExpenseReportGroupTotalsFields
+  }
+  lineItems {
+    ...ExpenseReportLineItemFields
+  }
+}
+    `;
+export const ExpenseReportGroupFieldsFragmentDoc = `
+    fragment ExpenseReportGroupFields on ExpenseReportGroup {
+  id
+  label
+  parentId
+}
+    `;
+export const BudgetStatementExpenseReportDetailsFieldsFragmentDoc = `
+    fragment BudgetStatementExpenseReportDetailsFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletDetailsFields
+  }
+  groups {
+    ...ExpenseReportGroupFields
+  }
+}
+    `;
+export const ExpenseReportGroupTotalsSummaryFieldsFragmentDoc = `
+    fragment ExpenseReportGroupTotalsSummaryFields on ExpenseReportGroupTotals {
+  groupLabel
+  totalActuals
+  totalForecast
+  totalPayments
+}
+    `;
+export const ExpenseReportWalletSummaryFieldsFragmentDoc = `
+    fragment ExpenseReportWalletSummaryFields on ExpenseReportWallet {
+  name
+  address
+  totals {
+    ...ExpenseReportGroupTotalsSummaryFields
+  }
+}
+    `;
+export const BudgetStatementExpenseReportSummaryFieldsFragmentDoc = `
+    fragment BudgetStatementExpenseReportSummaryFields on BudgetStatementExpenseReport {
+  periodStart
+  periodEnd
+  wallets {
+    ...ExpenseReportWalletSummaryFields
+  }
+}
+    `;
+export const ContentSectionFieldsFragmentDoc = `
+    fragment ContentSectionFields on RSContentSection {
+  id
+  title
+  content
+  displayOrder
+}
+    `;
+export const FaqFieldFieldsFragmentDoc = `
+    fragment FaqFieldFields on RSFaqField {
+  id
+  displayOrder
+  question
+  answer
+}
+    `;
+export const ResourceProfileFieldsFragmentDoc = `
+    fragment ResourceProfileFields on RSResourceTemplate {
+  id
+  infoLink
+  title
+  description
+  thumbnailUrl
+  summary
+  status
+  operatorId
+  setupServices
+  recurringServices
+  contentSections {
+    ...ContentSectionFields
+  }
+  faqFields {
+    ...FaqFieldFields
+  }
+}
+    `;
+export const ResourceOperatorFieldsFragmentDoc = `
+    fragment ResourceOperatorFields on BuilderProfileState {
+  id
+  slug
+  description
+  name
+  icon
+  lastModified
+  contributors
+  code
+  status
+}
+    `;
+export const PurchaseResourceTemplateFieldsFragmentDoc = `
+    fragment PurchaseResourceTemplateFields on RSResourceTemplate {
+  id
+  title
+  subtitle
+  description
+  thumbnailUrl
+  summary
+  status
+  operatorId
+  faqFields {
+    ...FaqFieldFields
+  }
+  contentSections {
+    ...ContentSectionFields
+  }
+}
+    `;
+export const ServicePricingFieldsFragmentDoc = `
+    fragment ServicePricingFields on RSServicePricing {
+  amount
+  currency
+}
+    `;
+export const ServiceLevelBindingFieldsFragmentDoc = `
+    fragment ServiceLevelBindingFields on RSServiceLevelBinding {
+  id
+  serviceId
+  level
+  customValue
+  optionGroupId
+}
+    `;
+export const ServiceUsageLimitFieldsFragmentDoc = `
+    fragment ServiceUsageLimitFields on RSServiceUsageLimit {
+  id
+  serviceId
+  metric
+  unitName
+  freeLimit
+  paidLimit
+  notes
+  unitPrice
+  unitPriceCurrency
+}
+    `;
+export const DiscountRuleFieldsFragmentDoc = `
+    fragment DiscountRuleFields on RSDiscountRule {
+  discountType
+  discountValue
+}
+    `;
+export const BillingCycleDiscountFieldsFragmentDoc = `
+    fragment BillingCycleDiscountFields on RSBillingCycleDiscount {
+  billingCycle
+  discountRule {
+    ...DiscountRuleFields
+  }
+}
+    `;
+export const ServiceTierFieldsFragmentDoc = `
+    fragment ServiceTierFields on RSServiceSubscriptionTier {
+  id
+  name
+  mostPopular
+  description
+  isCustomPricing
+  excludeFromSetupFee
+  pricingMode
+  pricing {
+    ...ServicePricingFields
+  }
+  serviceLevels {
+    ...ServiceLevelBindingFields
+  }
+  usageLimits {
+    ...ServiceUsageLimitFields
+  }
+  billingCycleDiscounts {
+    ...BillingCycleDiscountFields
+  }
+}
+    `;
+export const OfferingFacetTargetFieldsFragmentDoc = `
+    fragment OfferingFacetTargetFields on RSOfferingFacetTarget {
+  id
+  categoryKey
+  categoryLabel
+  selectedOptions
+}
+    `;
+export const SetupCostFieldsFragmentDoc = `
+    fragment SetupCostFields on RSSetupCost {
+  amount
+  currency
+  discount {
+    ...DiscountRuleFields
+  }
+}
+    `;
+export const RecurringPriceOptionFieldsFragmentDoc = `
+    fragment RecurringPriceOptionFields on RSRecurringPriceOption {
+  id
+  billingCycle
+  amount
+  currency
+  discount {
+    ...DiscountRuleFields
+  }
+}
+    `;
+export const StandalonePricingFieldsFragmentDoc = `
+    fragment StandalonePricingFields on RSStandalonePricing {
+  setupCost {
+    ...SetupCostFields
+  }
+  recurringPricing {
+    ...RecurringPriceOptionFields
+  }
+}
+    `;
+export const OptionGroupTierPricingFieldsFragmentDoc = `
+    fragment OptionGroupTierPricingFields on RSOptionGroupTierPricing {
+  id
+  tierId
+  setupCost {
+    ...SetupCostFields
+  }
+  setupCostDiscounts {
+    ...BillingCycleDiscountFields
+  }
+  recurringPricing {
+    ...RecurringPriceOptionFields
+  }
+}
+    `;
+export const OfferingOptionGroupFieldsFragmentDoc = `
+    fragment OfferingOptionGroupFields on RSOfferingOptionGroup {
+  id
+  name
+  description
+  isAddOn
+  defaultSelected
+  pricingMode
+  costType
+  availableBillingCycles
+  price
+  currency
+  discountMode
+  standalonePricing {
+    ...StandalonePricingFields
+  }
+  tierDependentPricing {
+    ...OptionGroupTierPricingFields
+  }
+  billingCycleDiscounts {
+    ...BillingCycleDiscountFields
+  }
+}
+    `;
+export const OfferingServiceFieldsFragmentDoc = `
+    fragment OfferingServiceFields on RSOfferingService {
+  id
+  title
+  description
+  displayOrder
+  isSetupFormation
+  optionGroupId
+}
+    `;
+export const ServiceOfferingFieldsFragmentDoc = `
+    fragment ServiceOfferingFields on RSServiceOffering {
+  id
+  description
+  infoLink
+  lastModified
+  operatorId
+  title
+  thumbnailUrl
+  resourceTemplateId
+  status
+  summary
+  availableBillingCycles
+  tiers {
+    ...ServiceTierFields
+  }
+  facetTargets {
+    ...OfferingFacetTargetFields
+  }
+  optionGroups {
+    ...OfferingOptionGroupFields
+  }
+  services {
+    ...OfferingServiceFields
+  }
+}
+    `;
 export const BuilderProfileDocument = `
     query BuilderProfile($filter: buildersFilter) {
   builders(filter: $filter) {
@@ -17474,39 +19704,14 @@ export const AccountSnapshotsDocument = `
     netExpenseTxns
     reportedActuals
     snapshotReport {
-      startDate
-      endDate
-      accounts {
-        id
-        name
-        type
-        address
-        transactions {
-          id
-          amount {
-            unit
-            value
-          }
-          counterParty
-          counterPartyName
-          datetime
-          direction
-          flowType
-          txHash
-        }
-        balances {
-          endingBalance
-          startingBalance
-          token {
-            symbol
-            contractAddress
-          }
-        }
-      }
+      ...BudgetStatementSnapshotReportFields
     }
   }
 }
-    `;
+    ${BudgetStatementSnapshotReportFieldsFragmentDoc}
+${SnapshotAccountFieldsFragmentDoc}
+${SnapshotAccountTransactionFieldsFragmentDoc}
+${SnapshotAccountBalanceFieldsFragmentDoc}`;
 
 export const useAccountSnapshotsQuery = <
       TData = AccountSnapshotsQuery,
@@ -17553,41 +19758,15 @@ export const BudgetStatementsDetailsDocument = `
     id
     month
     expenseReport {
-      periodStart
-      periodEnd
-      wallets {
-        name
-        address
-        billingStatementIds
-        totals {
-          group
-          groupLabel
-          totalBudget
-          totalForecast
-          totalActuals
-          totalPayments
-        }
-        lineItems {
-          id
-          label
-          groupId
-          groupLabel
-          actuals
-          budget
-          comments
-          forecast
-          payments
-        }
-      }
-      groups {
-        id
-        label
-        parentId
-      }
+      ...BudgetStatementExpenseReportDetailsFields
     }
   }
 }
-    `;
+    ${BudgetStatementExpenseReportDetailsFieldsFragmentDoc}
+${ExpenseReportWalletDetailsFieldsFragmentDoc}
+${ExpenseReportGroupTotalsFieldsFragmentDoc}
+${ExpenseReportLineItemFieldsFragmentDoc}
+${ExpenseReportGroupFieldsFragmentDoc}`;
 
 export const useBudgetStatementsDetailsQuery = <
       TData = BudgetStatementsDetailsQuery,
@@ -17631,13 +19810,10 @@ useBudgetStatementsDetailsQuery.fetcher = (variables?: BudgetStatementsDetailsQu
 export const BudgetStatementsAvailableMonthsDocument = `
     query BudgetStatementsAvailableMonths($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
-    id
-    month
-    lastModifiedAtUtcIso
-    status
+    ...BudgetStatementMonthFields
   }
 }
-    `;
+    ${BudgetStatementMonthFieldsFragmentDoc}`;
 
 export const useBudgetStatementsAvailableMonthsQuery = <
       TData = BudgetStatementsAvailableMonthsQuery,
@@ -17681,33 +19857,20 @@ useBudgetStatementsAvailableMonthsQuery.fetcher = (variables?: BudgetStatementsA
 export const BudgetStatementsDocument = `
     query BudgetStatements($filter: budgetStatementsFilter) {
   budgetStatements(filter: $filter) {
-    id
-    month
-    lastModifiedAtUtcIso
-    status
+    ...BudgetStatementMonthFields
     owner {
-      name
-      code
-      id
-      logo
+      ...BudgetStatementOwnerFields
     }
     expenseReport {
-      periodStart
-      periodEnd
-      wallets {
-        name
-        address
-        totals {
-          groupLabel
-          totalActuals
-          totalForecast
-          totalPayments
-        }
-      }
+      ...BudgetStatementExpenseReportSummaryFields
     }
   }
 }
-    `;
+    ${BudgetStatementMonthFieldsFragmentDoc}
+${BudgetStatementOwnerFieldsFragmentDoc}
+${BudgetStatementExpenseReportSummaryFieldsFragmentDoc}
+${ExpenseReportWalletSummaryFieldsFragmentDoc}
+${ExpenseReportGroupTotalsSummaryFieldsFragmentDoc}`;
 
 export const useBudgetStatementsQuery = <
       TData = BudgetStatementsQuery,
@@ -18564,31 +20727,12 @@ useRoadmapListQuery.fetcher = (variables: RoadmapListQueryVariables, options?: R
 export const ResourceProfileDocument = `
     query ResourceProfile($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
-    id
-    infoLink
-    title
-    description
-    thumbnailUrl
-    summary
-    status
-    operatorId
-    contentSections {
-      content
-      displayOrder
-      id
-      title
-    }
-    faqFields {
-      answer
-      displayOrder
-      id
-      question
-    }
-    setupServices
-    recurringServices
+    ...ResourceProfileFields
   }
 }
-    `;
+    ${ResourceProfileFieldsFragmentDoc}
+${ContentSectionFieldsFragmentDoc}
+${FaqFieldFieldsFragmentDoc}`;
 
 export const useResourceProfileQuery = <
       TData = ResourceProfileQuery,
@@ -18658,18 +20802,10 @@ useCreateProductInstancesMutation.fetcher = (variables: CreateProductInstancesMu
 export const ResourceOperatorDocument = `
     query ResourceOperator($filter: buildersFilter) {
   builders(filter: $filter) {
-    id
-    slug
-    description
-    name
-    icon
-    lastModified
-    contributors
-    code
-    status
+    ...ResourceOperatorFields
   }
 }
-    `;
+    ${ResourceOperatorFieldsFragmentDoc}`;
 
 export const useResourceOperatorQuery = <
       TData = ResourceOperatorQuery,
@@ -18713,29 +20849,12 @@ useResourceOperatorQuery.fetcher = (variables?: ResourceOperatorQueryVariables, 
 export const ResourceTemplateDocument = `
     query ResourceTemplate($filter: RSResourceTemplatesFilter) {
   resourceTemplates(filter: $filter) {
-    id
-    title
-    subtitle
-    description
-    thumbnailUrl
-    summary
-    status
-    operatorId
-    faqFields {
-      displayOrder
-      question
-      answer
-      id
-    }
-    contentSections {
-      content
-      displayOrder
-      id
-      title
-    }
+    ...PurchaseResourceTemplateFields
   }
 }
-    `;
+    ${PurchaseResourceTemplateFieldsFragmentDoc}
+${FaqFieldFieldsFragmentDoc}
+${ContentSectionFieldsFragmentDoc}`;
 
 export const useResourceTemplateQuery = <
       TData = ResourceTemplateQuery,
@@ -18779,142 +20898,23 @@ useResourceTemplateQuery.fetcher = (variables?: ResourceTemplateQueryVariables, 
 export const ServiceOfferingsDocument = `
     query ServiceOfferings($filter: RSServiceOfferingsFilter) {
   serviceOfferings(filter: $filter) {
-    id
-    description
-    infoLink
-    lastModified
-    operatorId
-    title
-    thumbnailUrl
-    tiers {
-      id
-      name
-      mostPopular
-      description
-      isCustomPricing
-      excludeFromSetupFee
-      pricingMode
-      pricing {
-        amount
-        currency
-      }
-      serviceLevels {
-        id
-        serviceId
-        level
-        customValue
-        optionGroupId
-      }
-      usageLimits {
-        id
-        serviceId
-        metric
-        unitName
-        freeLimit
-        paidLimit
-        resetCycle
-        notes
-        unitPrice
-        unitPriceCurrency
-      }
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-    }
-    facetTargets {
-      id
-      categoryKey
-      categoryLabel
-      selectedOptions
-    }
-    optionGroups {
-      id
-      name
-      description
-      isAddOn
-      defaultSelected
-      pricingMode
-      standalonePricing {
-        setupCost {
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-        recurringPricing {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-      }
-      tierDependentPricing {
-        id
-        tierId
-        setupCost {
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-        setupCostDiscounts {
-          billingCycle
-          discountRule {
-            discountType
-            discountValue
-          }
-        }
-        recurringPricing {
-          id
-          billingCycle
-          amount
-          currency
-          discount {
-            discountType
-            discountValue
-          }
-        }
-      }
-      costType
-      availableBillingCycles
-      price
-      currency
-      discountMode
-      billingCycleDiscounts {
-        billingCycle
-        discountRule {
-          discountType
-          discountValue
-        }
-      }
-    }
-    resourceTemplateId
-    services {
-      id
-      title
-      description
-      displayOrder
-      isSetupFormation
-      optionGroupId
-    }
-    status
-    summary
-    availableBillingCycles
+    ...ServiceOfferingFields
   }
 }
-    `;
+    ${ServiceOfferingFieldsFragmentDoc}
+${ServiceTierFieldsFragmentDoc}
+${ServicePricingFieldsFragmentDoc}
+${ServiceLevelBindingFieldsFragmentDoc}
+${ServiceUsageLimitFieldsFragmentDoc}
+${BillingCycleDiscountFieldsFragmentDoc}
+${DiscountRuleFieldsFragmentDoc}
+${OfferingFacetTargetFieldsFragmentDoc}
+${OfferingOptionGroupFieldsFragmentDoc}
+${StandalonePricingFieldsFragmentDoc}
+${SetupCostFieldsFragmentDoc}
+${RecurringPriceOptionFieldsFragmentDoc}
+${OptionGroupTierPricingFieldsFragmentDoc}
+${OfferingServiceFieldsFragmentDoc}`;
 
 export const useServiceOfferingsQuery = <
       TData = ServiceOfferingsQuery,

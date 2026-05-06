@@ -1,9 +1,9 @@
 'use client'
 
 import type {
+  ContentSectionFieldsFragment,
+  FaqFieldFieldsFragment,
   Maybe,
-  RsContentSection,
-  RsFaqField,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { FaqSection } from '@/modules/service-profile/components/faq/faq'
 import { Markdown } from '@/modules/shared/components/markdown/markdown'
@@ -11,8 +11,8 @@ import { ExpandableSection } from './expandable-section'
 
 export interface ProductInfoProps {
   description?: Maybe<string>
-  contentSections: RsContentSection[]
-  faqFields?: Maybe<RsFaqField[]>
+  contentSections: ContentSectionFieldsFragment[]
+  faqFields?: Maybe<FaqFieldFieldsFragment[]>
 }
 
 function ProductInfo({ description, contentSections, faqFields }: ProductInfoProps) {

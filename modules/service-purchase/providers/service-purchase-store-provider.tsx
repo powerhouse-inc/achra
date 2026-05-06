@@ -5,8 +5,8 @@ import { useStore } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 import type {
   RsBillingCycle,
-  RsServiceOffering,
-  RsServiceSubscriptionTier,
+  ServiceOfferingFieldsFragment,
+  ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   clearServicePurchasePersistedState,
@@ -27,7 +27,7 @@ export const ServicePurchaseStoreContext = createContext<ReturnType<
 
 export interface ServicePurchaseStoreProviderProps {
   children: React.ReactNode
-  services: RsServiceOffering
+  services: ServiceOfferingFieldsFragment
 }
 
 function ServicePurchaseStoreProvider({
@@ -87,7 +87,7 @@ function useServicePurchaseActions(): ServicePurchaseActions {
   return useStore(store, (state) => state.actions)
 }
 
-function useSelectedTier(): RsServiceSubscriptionTier {
+function useSelectedTier(): ServiceTierFieldsFragment {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.selectedTier)
 }
@@ -97,7 +97,7 @@ function useSelectedBillingCycle(): RsBillingCycle {
   return useStore(store, (state) => state.selectedBillingCycle)
 }
 
-function useComputedTiers(): RsServiceSubscriptionTier[] {
+function useComputedTiers(): ServiceTierFieldsFragment[] {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.tiers)
 }
@@ -131,7 +131,7 @@ function usePurchaseTotals(): PurchaseTotals {
   return useStore(store, (state) => state.totals)
 }
 
-function useServiceOffering(): RsServiceOffering {
+function useServiceOffering(): ServiceOfferingFieldsFragment {
   const store = useServicePurchaseStoreContext()
   return useStore(store, (state) => state.services)
 }

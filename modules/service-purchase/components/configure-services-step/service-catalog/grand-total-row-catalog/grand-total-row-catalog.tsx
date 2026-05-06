@@ -2,8 +2,8 @@
 
 import { useMemo } from 'react'
 import type {
-  RsServiceOffering,
-  RsServiceSubscriptionTier,
+  ServiceOfferingFieldsFragment,
+  ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   computeGrandSetupTotal,
@@ -22,8 +22,8 @@ const CUSTOM_PRICING_LABEL = 'Custom'
 
 interface GrandTotalRowCatalogProps {
   selectedPlan?: string
-  tiers: RsServiceSubscriptionTier[]
-  offering: RsServiceOffering
+  tiers: ServiceTierFieldsFragment[]
+  offering: ServiceOfferingFieldsFragment
 }
 
 function GrandTotalRowCatalog({

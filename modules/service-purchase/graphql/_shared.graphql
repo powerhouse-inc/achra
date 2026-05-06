@@ -1,0 +1,13 @@
+fragment FaqFieldFields on RSFaqField {
+  id
+  displayOrder
+  question
+  answer
+}
+
+fragment ContentSectionFields on RSContentSection {
+  id
+  title
+  content
+  displayOrder
+}

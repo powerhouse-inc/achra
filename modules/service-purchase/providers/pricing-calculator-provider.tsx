@@ -3,7 +3,7 @@
 import { createContext, type ReactNode, useContext } from 'react'
 import type {
   RsBillingCycle,
-  RsServiceSubscriptionTier,
+  ServiceTierFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 interface PricingCalculatorContextValue {
@@ -15,7 +15,7 @@ interface PricingCalculatorContextValue {
   onNextPlan: () => void
   /** Tier names derived from API data */
   tierNames: string[]
-  tiers: RsServiceSubscriptionTier[]
+  tiers: ServiceTierFieldsFragment[]
   /** The billing cycle selected by the user */
   selectedBillingCycle: RsBillingCycle
   /**
