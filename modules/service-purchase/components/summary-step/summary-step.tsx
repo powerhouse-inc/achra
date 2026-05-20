@@ -9,9 +9,11 @@ interface SummaryStepProps {
 
 function SummaryStep({ templateTitle, templateSubtitle }: Readonly<SummaryStepProps>) {
   return (
-    <div className="mt-6 flex flex-col gap-6">
+    <div className="mt-6 flex flex-col-reverse gap-6 lg:grid lg:grid-cols-[3fr_2fr] lg:items-start">
       <SummaryCard templateTitle={templateTitle} templateSubtitle={templateSubtitle} />
-      <SubmitRequestForm />
+      <div className="lg:sticky lg:top-28">
+        <SubmitRequestForm />
+      </div>
     </div>
   )
 }

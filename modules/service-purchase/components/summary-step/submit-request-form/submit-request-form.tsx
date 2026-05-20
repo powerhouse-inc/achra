@@ -1,7 +1,8 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Send } from 'lucide-react'
+import { useRenownAuth } from '@powerhousedao/reactor-browser'
+import { Loader2, LogIn, Send } from 'lucide-react'
 import { startTransition, useActionState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
@@ -31,7 +32,41 @@ import {
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
 
+const cardClassName = 'mx-auto w-full max-w-218.5 border-none py-0! lg:mx-0 lg:max-w-none'
+
+function LoginPrompt({ onLogin }: Readonly<{ onLogin: () => void }>) {
+  return (
+    <Card className={cardClassName}>
+      <CardContent className="flex flex-col items-center gap-4 p-6 text-center lg:p-8">
+        <div className="bg-primary/10 flex size-12 items-center justify-center rounded-full">
+          <LogIn className="text-primary size-6" aria-hidden="true" />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <h3 className="text-foreground text-base font-semibold lg:text-lg">Log in to continue</h3>
+          <p className="text-muted-foreground text-sm">
+            Please log in to continue with your service purchase.
+          </p>
+        </div>
+        <Button onClick={onLogin} className="w-full">
+          <LogIn className="size-4" aria-hidden="true" />
+          Log in
+        </Button>
+      </CardContent>
+    </Card>
+  )
+}
+
 function SubmitRequestForm() {
+  const auth = useRenownAuth()
+
+  if (auth.status !== 'authorized' || !auth.address) {
+    return <LoginPrompt onLogin={auth.login} />
+  }
+
+  return <RequestForm />
+}
+
+function RequestForm() {
   const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
   const { setRequestEntityData } = useServicePurchaseActions()
   const service = useServiceOffering()
@@ -85,7 +120,7 @@ function SubmitRequestForm() {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-218.5 border-none py-0!">
+    <Card className={cardClassName}>
       <CardContent className="p-3 lg:p-6">
         <Form {...form}>
           <form
