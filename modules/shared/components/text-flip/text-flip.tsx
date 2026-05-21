@@ -1,10 +1,10 @@
 'use client'
 import { AnimatePresence, motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface TextFlipProps {
-  words: string[]
+  words: ReactNode[]
   duration?: number
   className?: string
 }

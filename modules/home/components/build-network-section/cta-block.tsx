@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { AchraTabIsotype } from '@/modules/home/components/build-network-section/achra-tab-isotype'
 import { TextFlip } from '@/modules/shared/components/text-flip'
 import { CtaDecorativeIsotype } from './cta-decorative-isotype'
@@ -23,8 +24,21 @@ function CtaBlock() {
         <div className="relative z-1 flex flex-col gap-0.5">
           <h3 className="text-foreground text-lg font-semibold tracking-tight">Get started</h3>
           <p className="text-foreground max-w-[16rem] text-sm leading-snug">
-            Begin your journey as a <br />{' '}
-            <TextFlip words={['Builder', 'Operator', 'Organization']} className="font-bold" />
+            Begin your journey as <br />{' '}
+            <TextFlip
+              words={[
+                <Fragment key="builder">
+                  <span className="font-normal">a</span> Builder
+                </Fragment>,
+                <Fragment key="operator">
+                  <span className="font-normal">an</span> Operator
+                </Fragment>,
+                <Fragment key="organization">
+                  <span className="font-normal">an</span> Organization
+                </Fragment>,
+              ]}
+              className="font-bold"
+            />
           </p>
         </div>
         <span
