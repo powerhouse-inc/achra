@@ -1,6 +1,7 @@
 'use client'
 
 import { Renown as RenownSDK } from '@powerhousedao/reactor-browser'
+import { Suspense } from 'react'
 import { toast } from 'sonner'
 import { PostLoginRedirect } from '@/modules/shared/components/post-login-redirect/post-login-redirect'
 
@@ -20,7 +21,9 @@ export function Renown({ appName, url }: { appName: string; url?: string }) {
           toast.error("We couldn't sign you in. Please try again.")
         }}
       />
-      <PostLoginRedirect />
+      <Suspense fallback={null}>
+        <PostLoginRedirect />
+      </Suspense>
     </>
   )
 }
