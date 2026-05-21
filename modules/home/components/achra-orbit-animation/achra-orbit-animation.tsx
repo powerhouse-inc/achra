@@ -34,7 +34,7 @@ function AchraOrbitAnimation() {
         dotSize={3}
         gap={14}
         fade={{ direction: 'bottom-left', from: 0, to: 0.2 }}
-        className="text-primary pointer-events-none absolute top-12 right-16 opacity-70"
+        className="text-primary pointer-events-none absolute top-12 right-16 hidden opacity-70 md:block"
       />
       <DecorationDots
         rows={5}
@@ -42,7 +42,7 @@ function AchraOrbitAnimation() {
         dotSize={3}
         gap={14}
         fade={{ direction: 'top-right', from: 0, to: 0.3 }}
-        className="text-primary pointer-events-none absolute bottom-8 left-32 opacity-70"
+        className="text-primary pointer-events-none absolute bottom-8 left-10 opacity-70 md:left-32"
       />
       <DecorationDots
         rows={5}
@@ -132,27 +132,33 @@ function AchraOrbitAnimation() {
         <AchraIsotype className="text-primary relative size-14 md:size-18" />
       </div>
 
-      <OrbitingCircle radius={160} iconSize={40} duration={20}>
+      <OrbitingCircle
+        radiusClassName="[--radius:100] sm:[--radius:120] md:[--radius:130] lg:[--radius:140] xl:[--radius:160]"
+        iconSize={40}
+        duration={20}
+      >
         <PulsingDot dotClassName="bg-primary" waveClassName="bg-primary/45" />
         <PulsingDot dotClassName="bg-[rgb(221,80,216)]" waveClassName="bg-[rgb(221,80,216)]/45" />
         <PulsingDot dotClassName="bg-[rgb(5,130,255)]" waveClassName="bg-[rgb(5,130,255)]/45" />
       </OrbitingCircle>
 
+      <div className="hidden sm:contents">
+        <OrbitingCircle
+          radiusClassName="[--radius:210] lg:[--radius:250] xl:[--radius:290]"
+          iconSize={48}
+          duration={40}
+          reverse
+          className="border-border bg-card text-foreground size-9 border shadow-sm lg:size-12"
+        >
+          <Network className="size-4 lg:size-5" aria-label="Networks" />
+          <Workflow className="size-4 lg:size-5" aria-label="Workstreams" />
+          <Briefcase className="size-4 lg:size-5" aria-label="Services" />
+          <Vote className="size-4 lg:size-5" aria-label="Governance" />
+          <Wallet className="size-4 lg:size-5" aria-label="Finances" />
+        </OrbitingCircle>
+      </div>
       <OrbitingCircle
-        radius={290}
-        iconSize={48}
-        duration={40}
-        reverse
-        className="border-border bg-card text-foreground border shadow-sm"
-      >
-        <Network className="size-5" aria-label="Networks" />
-        <Workflow className="size-5" aria-label="Workstreams" />
-        <Briefcase className="size-5" aria-label="Services" />
-        <Vote className="size-5" aria-label="Governance" />
-        <Wallet className="size-5" aria-label="Finances" />
-      </OrbitingCircle>
-      <OrbitingCircle
-        radius={440}
+        radiusClassName="[--radius:200] sm:[--radius:300] lg:[--radius:370] xl:[--radius:440]"
         duration={60}
         className="border-border size-auto overflow-hidden rounded-xl"
       >
@@ -163,7 +169,7 @@ function AchraOrbitAnimation() {
             width={image.width}
             height={image.height}
             alt=""
-            className="h-32 w-auto md:h-40 lg:h-44"
+            className="h-24 w-auto md:h-32 lg:h-40 xl:h-44"
           />
         ))}
       </OrbitingCircle>
