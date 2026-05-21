@@ -10,7 +10,7 @@ function CtaBlock() {
   return (
     <div className="flex h-full p-4 lg:p-5">
       <Link
-        href="#home-waitlist-section"
+        href="/get-started"
         className="group focus-visible:ring-primary/30 relative isolate flex h-full min-h-[200px] w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl px-5 py-8 text-center transition-opacity hover:opacity-95 focus-visible:ring-[3px] focus-visible:outline-none sm:gap-4 sm:px-6"
       >
         <CtaMeshBackground />

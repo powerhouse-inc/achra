@@ -5,6 +5,7 @@ import { AchraTabIsotype } from '@/modules/home/components/build-network-section
 import {
   BUILD_NETWORK_V2_BLUE_CTA_CLASS,
   BUILD_NETWORK_V2_PINK_CTA_CLASS,
+  BUILD_NETWORK_V2_VIOLET_CTA_CLASS,
 } from '@/modules/home/lib/constants'
 import type { BuildNetworkFeatureColumn } from '@/modules/home/types'
 import { Button } from '@/shared/components/ui/button'
@@ -32,7 +33,9 @@ function FeatureBlock({ feature }: FeatureBlockProps) {
               className={cn(
                 feature.cta.tone === 'blue'
                   ? BUILD_NETWORK_V2_BLUE_CTA_CLASS
-                  : BUILD_NETWORK_V2_PINK_CTA_CLASS,
+                  : feature.cta.tone === 'violet'
+                    ? BUILD_NETWORK_V2_VIOLET_CTA_CLASS
+                    : BUILD_NETWORK_V2_PINK_CTA_CLASS,
               )}
             >
               <Link href={feature.cta.href}>{feature.cta.label}</Link>

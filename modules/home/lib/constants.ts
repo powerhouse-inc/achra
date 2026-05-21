@@ -7,6 +7,9 @@ export const ENABLE_COLLAGE_FLOAT_ANIMATION: boolean = true
 export const BUILD_NETWORK_V2_BLUE_CTA_CLASS =
   'h-10 rounded-md border-0 bg-[rgb(5,130,255)] px-5 text-sm font-medium text-white shadow-none hover:bg-[rgb(5,130,255)]/90'
 
+export const BUILD_NETWORK_V2_VIOLET_CTA_CLASS =
+  'h-10 rounded-md border-0 bg-[rgb(122,59,255)] px-5 text-sm font-medium text-white shadow-none hover:bg-[rgb(122,59,255)]/90'
+
 export const BUILD_NETWORK_V2_PINK_CTA_CLASS =
   'h-10 rounded-md border-0 bg-[rgb(221,80,216)] px-5 text-sm font-medium text-white shadow-none hover:bg-[rgb(221,80,216)]/90'
 
@@ -23,7 +26,7 @@ export const BUILD_NETWORK_V2_FEATURES: BuildNetworkFeatureColumn[] = [
     title: 'For Builders',
     description:
       'Discover active projects and roadmaps from leading network organizations. Focus on building with built-in operational support.',
-    cta: { label: 'Browse workstreams', href: '/workstreams', tone: 'blue' },
+    cta: { label: 'Browse workstreams', href: '/workstreams', tone: 'violet' },
     enabled: ff.workstreams.WORKSTREAMS_ENABLED,
   },
   {

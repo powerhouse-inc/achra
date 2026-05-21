@@ -28,8 +28,8 @@ function BuildNetworkSectionV2() {
           </AnimatedSubtitle>
         </header>
 
-        <div className="border-border bg-card overflow-hidden rounded-3xl border shadow-sm">
-          <div className="bg-background/40 px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div className="border-border bg-card overflow-hidden rounded-3xl border shadow-xs">
+          <div className="bg-background/40">
             <Image
               src="/home/build-network/build-network-testing.png"
               alt="Collage of Achra dashboards showing projects, profiles, services, and network tools"

@@ -8,19 +8,19 @@ function CtaMeshBackground() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-[12%] -left-[10%] h-[72%] w-[64%] rounded-full bg-[#F9A8D4] opacity-[0.88] blur-[48px]"
+        className="pointer-events-none absolute -top-[12%] -left-[10%] h-[72%] w-[64%] rounded-full bg-[#F9A8D4] opacity-[0.88] blur-[48px] transition-[transform,opacity] duration-[900ms] ease-out motion-safe:group-hover:animate-[cta-aurora-pink_3s_ease-in-out_infinite_alternate] motion-reduce:group-hover:opacity-100"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-[8%] -right-[6%] h-[62%] w-[56%] rounded-full bg-[#60A5FA] opacity-[0.82] blur-[50px]"
+        className="pointer-events-none absolute -top-[8%] -right-[6%] h-[62%] w-[56%] rounded-full bg-[#60A5FA] opacity-[0.82] blur-[50px] transition-[transform,opacity] duration-[900ms] ease-out motion-safe:group-hover:animate-[cta-aurora-blue_3.5s_ease-in-out_infinite_alternate] motion-reduce:group-hover:opacity-100"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-[4%] -bottom-[10%] h-[60%] w-[58%] rounded-full bg-[#C4B5FD] opacity-[0.78] blur-[52px]"
+        className="pointer-events-none absolute -right-[4%] -bottom-[10%] h-[60%] w-[58%] rounded-full bg-[#C4B5FD] opacity-[0.78] blur-[52px] transition-[transform,opacity] duration-[900ms] ease-out motion-safe:group-hover:animate-[cta-aurora-purple_2.6s_ease-in-out_infinite_alternate] motion-reduce:group-hover:opacity-95"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[20%] -left-[6%] h-[68%] w-[46%] rotate-[-10deg] rounded-[42%] bg-[#FCE7F3]/55 blur-2xl"
+        className="pointer-events-none absolute top-[20%] -left-[6%] h-[68%] w-[46%] rotate-[-10deg] rounded-[42%] bg-[#FCE7F3] opacity-[0.55] blur-2xl transition-[transform,opacity] duration-[900ms] ease-out motion-safe:group-hover:animate-[cta-aurora-pink-light_3.2s_ease-in-out_infinite_alternate] motion-reduce:group-hover:opacity-75"
       />
       <div
         aria-hidden

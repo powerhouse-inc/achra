@@ -6,6 +6,6 @@ export interface BuildNetworkFeatureColumn {
   variant: BuildNetworkFeatureVariant
   title: string
   description: string
-  cta: { label: string; href: Route; tone: 'blue' | 'pink' }
+  cta: { label: string; href: Route; tone: 'blue' | 'violet' | 'pink' }
   enabled?: boolean
 }
