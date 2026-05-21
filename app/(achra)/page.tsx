@@ -1,5 +1,4 @@
 import { BuildNetworkSection } from '@/modules/home/components/build-network-section'
-import { BuildNetworkSectionV2 } from '@/modules/home/components/build-network-section-v2'
 import { FadeInSection } from '@/modules/home/components/fade-in-section'
 import { FaqSection } from '@/modules/home/components/faq-section'
 import { GovernanceOperationsSection } from '@/modules/home/components/governance-operations-section'
@@ -16,9 +15,6 @@ export default function HomePage() {
 
       <FadeInSection>
         <BuildNetworkSection />
-      </FadeInSection>
-      <FadeInSection>
-        <BuildNetworkSectionV2 />
       </FadeInSection>
       <FadeInSection>
         <OperationalHubSection />
