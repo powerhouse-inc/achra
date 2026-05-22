@@ -4,6 +4,7 @@ import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { ChevronDown, LogIn, LogOut, User, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Suspense } from 'react'
 import {
   CopyAnimatedIcon,
   CopyButton,
@@ -45,11 +46,71 @@ function AddressLabel({ address, displayAddress }: { address: string; displayAdd
 }
 
 /**
+ * Desktop Sign up link that includes the current pathname as `returnTo`.
+ * Wrapped in Suspense so the parent (UserButton) can be rendered as a
+ * Suspense fallback during static prerender without accessing pathname.
+ */
+function SignUpButton() {
+  return (
+    <Suspense
+      fallback={
+        <Button asChild>
+          <Link href="/get-started">Sign up</Link>
+        </Button>
+      }
+    >
+      <SignUpButtonWithReturnTo />
+    </Suspense>
+  )
+}
+
+function SignUpButtonWithReturnTo() {
+  const pathname = usePathname()
+  return (
+    <Button asChild>
+      <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>Sign up</Link>
+    </Button>
+  )
+}
+
+/**
+ * Mobile Sign up option that includes the current pathname as `returnTo`.
+ * Wrapped in Suspense for the same reason as SignUpButton.
+ */
+function SignUpOption() {
+  return (
+    <Suspense
+      fallback={
+        <NavbarPrimitives.ActionOption asChild>
+          <Link href="/get-started">
+            <UserPlus />
+            <span>Sign up</span>
+          </Link>
+        </NavbarPrimitives.ActionOption>
+      }
+    >
+      <SignUpOptionWithReturnTo />
+    </Suspense>
+  )
+}
+
+function SignUpOptionWithReturnTo() {
+  const pathname = usePathname()
+  return (
+    <NavbarPrimitives.ActionOption asChild>
+      <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>
+        <UserPlus />
+        <span>Sign up</span>
+      </Link>
+    </NavbarPrimitives.ActionOption>
+  )
+}
+
+/**
  * User avatar or login button for desktop
  */
 function UserButton({ open, onOpenChange }: UserButtonProps) {
   const auth = useRenownAuth()
-  const pathname = usePathname()
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
@@ -57,9 +118,7 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
         <Button variant="outline" onClick={auth.login}>
           Log in
         </Button>
-        <Button asChild>
-          <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>Sign up</Link>
-        </Button>
+        <SignUpButton />
       </>
     )
   }
@@ -111,7 +170,6 @@ UserButton.displayName = 'NavbarUserButton'
  */
 function UserOption() {
   const auth = useRenownAuth()
-  const pathname = usePathname()
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
@@ -120,12 +178,7 @@ function UserOption() {
           <LogIn />
           <span>Log in</span>
         </NavbarPrimitives.ActionOption>
-        <NavbarPrimitives.ActionOption asChild>
-          <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>
-            <UserPlus />
-            <span>Sign up</span>
-          </Link>
-        </NavbarPrimitives.ActionOption>
+        <SignUpOption />
       </>
     )
   }
