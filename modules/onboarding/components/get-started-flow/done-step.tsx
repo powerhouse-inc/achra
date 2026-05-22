@@ -1,6 +1,7 @@
 'use client'
 
 import { CheckCircle2 } from 'lucide-react'
+import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
@@ -16,8 +17,8 @@ function DoneStep() {
           <p className="text-muted-foreground max-w-md text-sm">Pick where you want to go next.</p>
         </div>
         <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
-          <Button variant="outline" className="w-full min-w-0">
-            My Account
+          <Button variant="outline" className="w-full min-w-0" asChild>
+            <Link href="/my-account">My Account</Link>
           </Button>
           <Button className="w-full min-w-0">Explore my Drive</Button>
         </div>
