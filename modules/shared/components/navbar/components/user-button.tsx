@@ -68,7 +68,7 @@ function SignUpButtonWithReturnTo() {
   const pathname = usePathname()
   return (
     <Button asChild>
-      <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>Sign up</Link>
+      <Link href={`/get-started?returnTo=${encodeURIComponent(pathname)}`}>Sign up</Link>
     </Button>
   )
 }
@@ -98,7 +98,7 @@ function SignUpOptionWithReturnTo() {
   const pathname = usePathname()
   return (
     <NavbarPrimitives.ActionOption asChild>
-      <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>
+      <Link href={`/get-started?returnTo=${encodeURIComponent(pathname)}`}>
         <UserPlus />
         <span>Sign up</span>
       </Link>
