@@ -1,7 +1,9 @@
 'use client'
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { ChevronDown, LogIn, LogOut, User } from 'lucide-react'
+import { ChevronDown, LogIn, LogOut, User, UserPlus } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import {
   CopyAnimatedIcon,
   CopyButton,
@@ -47,12 +49,18 @@ function AddressLabel({ address, displayAddress }: { address: string; displayAdd
  */
 function UserButton({ open, onOpenChange }: UserButtonProps) {
   const auth = useRenownAuth()
+  const pathname = usePathname()
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
-      <Button variant="outline" onClick={auth.login}>
-        Log in
-      </Button>
+      <>
+        <Button variant="outline" onClick={auth.login}>
+          Log in
+        </Button>
+        <Button asChild>
+          <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>Sign up</Link>
+        </Button>
+      </>
     )
   }
 
@@ -78,6 +86,12 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
             <span>View Profile</span>
           </DropdownMenuItem>
         ) : null}
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/my-account">
+            <User />
+            <span>My Account</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem
           variant="destructive"
           className="cursor-pointer"
@@ -97,13 +111,22 @@ UserButton.displayName = 'NavbarUserButton'
  */
 function UserOption() {
   const auth = useRenownAuth()
+  const pathname = usePathname()
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
-      <NavbarPrimitives.ActionOption onClick={auth.login}>
-        <LogIn />
-        <span>Log in</span>
-      </NavbarPrimitives.ActionOption>
+      <>
+        <NavbarPrimitives.ActionOption onClick={auth.login}>
+          <LogIn />
+          <span>Log in</span>
+        </NavbarPrimitives.ActionOption>
+        <NavbarPrimitives.ActionOption asChild>
+          <Link href={{ pathname: '/get-started', query: { returnTo: pathname } }}>
+            <UserPlus />
+            <span>Sign up</span>
+          </Link>
+        </NavbarPrimitives.ActionOption>
+      </>
     )
   }
 
@@ -120,6 +143,12 @@ function UserOption() {
           <span>View Profile</span>
         </NavbarPrimitives.ActionOption>
       ) : null}
+      <NavbarPrimitives.ActionOption asChild>
+        <Link href="/my-account">
+          <User />
+          <span>My Account</span>
+        </Link>
+      </NavbarPrimitives.ActionOption>
       <NavbarPrimitives.ActionOption variant="destructive" onClick={() => void auth.logout()}>
         <LogOut />
         <span>Log out</span>

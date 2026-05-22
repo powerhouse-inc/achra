@@ -2,8 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { ArrowRight, Check } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { ArrowRight, Check, Loader2 } from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { type PersonaId, PERSONAS } from '@/modules/onboarding/lib/personas'
 import { stepOneSchema, type StepOneValues } from '@/modules/onboarding/lib/schemas'
@@ -20,18 +20,59 @@ import {
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
 import { Progress } from '@/modules/shared/components/ui/progress'
+import { useHasDrive } from '@/modules/shared/hooks/use-has-drive'
 import { cn } from '@/modules/shared/lib/utils'
+import { AlreadyCompletedCard } from './already-completed-card'
+import { DoneStep } from './done-step'
+import { LoginRequiredCard } from './login-required-card'
 import { PersonaCard } from './persona-card'
-import { SignInPrompt } from './sign-in-prompt'
-import { StepComingSoon } from './step-coming-soon'
+import { SpinUpStep } from './spin-up-step'
 
 const TOTAL_STEPS = 3
+const STEP_ESTIMATES = ['~30s', '~10s', ''] as const
 
-type Step = 1 | 2
+type Step = 1 | 2 | 3
 
 function GetStartedFlow() {
   const auth = useRenownAuth()
+
+  // Renown's `"loading"` is the only true pre-init state. `"initial"` is the
+  // resting "no session" state for a never-logged-in user and never advances
+  // on its own, so treating it as loading would spin forever.
+  const isAuthResolving = auth.status === 'loading'
   const isAuthenticated = auth.status === 'authorized' && Boolean(auth.address)
+
+  const hasDriveQuery = useHasDrive()
+
+  if (isAuthResolving) {
+    return <FullPageSpinner />
+  }
+
+  if (!isAuthenticated) {
+    return <LoginRequiredCard onLogin={auth.login} />
+  }
+
+  if (hasDriveQuery.isPending) {
+    return <FullPageSpinner />
+  }
+
+  if (hasDriveQuery.data === true) {
+    return <AlreadyCompletedCard />
+  }
+
+  return <OnboardingSteps />
+}
+
+function FullPageSpinner() {
+  return (
+    <div className="flex min-h-[320px] items-center justify-center">
+      <Loader2 className="text-muted-foreground size-6 animate-spin" aria-hidden="true" />
+    </div>
+  )
+}
+
+function OnboardingSteps() {
+  const auth = useRenownAuth()
   const [step, setStep] = useState<Step>(1)
 
   const form = useForm<StepOneValues>({
@@ -56,20 +97,26 @@ function GetStartedFlow() {
 
   const watched = useWatch({ control: form.control })
   const selectedPersonaId = watched.personaId
-  const selectedPersona = PERSONAS.find((p) => p.id === selectedPersonaId)
   const isFormValid = stepOneSchema.safeParse(watched).success
-  const canContinue = isAuthenticated && isFormValid
 
-  if (step === 2 && selectedPersona) {
+  const goToDone = useCallback(() => {
+    setStep(3)
+  }, [])
+
+  if (step === 3) {
     return (
       <div className="flex flex-col gap-6">
-        <OnboardingProgress step={2} estimate="~10s" />
-        <StepComingSoon
-          onBack={() => {
-            setStep(1)
-          }}
-          personaTitle={selectedPersona.title}
-        />
+        <OnboardingProgress step={3} estimate={STEP_ESTIMATES[2]} />
+        <DoneStep />
+      </div>
+    )
+  }
+
+  if (step === 2) {
+    return (
+      <div className="flex flex-col gap-6">
+        <OnboardingProgress step={2} estimate={STEP_ESTIMATES[1]} />
+        <SpinUpStep onSuccess={goToDone} />
       </div>
     )
   }
@@ -84,7 +131,7 @@ function GetStartedFlow() {
 
   return (
     <div className="flex flex-col gap-6">
-      <OnboardingProgress step={1} estimate="~30s" />
+      <OnboardingProgress step={1} estimate={STEP_ESTIMATES[0]} />
 
       <Card className="gap-0 overflow-hidden py-0">
         <Form {...form}>
@@ -135,58 +182,54 @@ function GetStartedFlow() {
                 )}
               />
 
-              {isAuthenticated ? (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            placeholder="you@example.com"
-                            autoComplete="email"
-                          />
-                        </FormControl>
-                        <FormDescription>We&apos;ll send your drive link here.</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="email"
+                          placeholder="you@example.com"
+                          autoComplete="email"
+                        />
+                      </FormControl>
+                      <FormDescription>We&apos;ll send your drive link here.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="displayName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Display name</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="text"
-                            placeholder="e.g. alex.eth"
-                            autoComplete="nickname"
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          Shown on your drive and any offerings. Editable later.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              ) : (
-                <SignInPrompt onSignIn={auth.login} />
-              )}
+                <FormField
+                  control={form.control}
+                  name="displayName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Display name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="text"
+                          placeholder="e.g. alex.eth"
+                          autoComplete="nickname"
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Shown on your drive and any offerings. Editable later.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
 
             <div className="bg-muted/40 border-border flex flex-col items-stretch gap-4 border-t px-8 py-5 sm:flex-row sm:items-center sm:justify-between">
               <Stepper currentStep={1} />
-              <Button type="submit" disabled={!canContinue} className="gap-2 sm:w-fit">
+              <Button type="submit" disabled={!isFormValid} className="gap-2 sm:w-fit">
                 Continue
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
@@ -211,7 +254,7 @@ function OnboardingProgress({ step, estimate }: OnboardingProgressProps) {
         Step {step} of {TOTAL_STEPS}
       </span>
       <Progress value={percent} className="h-1 flex-1" />
-      <span>{estimate}</span>
+      {estimate ? <span>{estimate}</span> : null}
     </div>
   )
 }
