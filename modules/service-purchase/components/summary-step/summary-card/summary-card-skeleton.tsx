@@ -5,7 +5,7 @@ import { SummarySectionSkeleton } from './summary-section-skeleton'
 
 function SummaryCardSkeleton() {
   return (
-    <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0!">
+    <Card className="mx-auto w-full max-w-218.5 overflow-hidden border-none p-0! lg:mx-0 lg:max-w-none">
       <CardHeader className="flex flex-row items-center justify-between gap-4 px-3 pt-3 lg:px-6 lg:pt-6">
         <div className="flex items-start gap-2">
           <Skeleton className="size-12 shrink-0 rounded-2xl" />

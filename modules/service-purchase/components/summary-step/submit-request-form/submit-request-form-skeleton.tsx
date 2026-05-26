@@ -3,7 +3,7 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 function SubmitRequestFormSkeleton() {
   return (
-    <Card className="mx-auto w-full max-w-218.5 border-none py-0!">
+    <Card className="mx-auto w-full max-w-218.5 border-none py-0! lg:mx-0 lg:max-w-none">
       <CardContent className="p-3 lg:p-6">
         <div className="flex flex-col gap-6">
           <fieldset className="flex flex-col gap-4">
