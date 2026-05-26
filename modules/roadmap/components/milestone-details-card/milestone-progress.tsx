@@ -1,9 +1,9 @@
-import type { ScopeOfWork_DeliverablesSet } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_DeliverablesSet } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getProgressPercentage } from '../../lib/type-helpers'
 import { PercentageProgressBar } from './percentage-progress-bar'
 
 interface MilestoneProgressProps {
-  scope: Omit<ScopeOfWork_DeliverablesSet, 'deliverables'>
+  scope: Omit<Sow_DeliverablesSet, 'deliverables'>
 }
 
 function MilestoneProgress({ scope }: MilestoneProgressProps) {

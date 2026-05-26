@@ -1,10 +1,10 @@
-import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneCard } from '@/modules/roadmap/components/milestone-card'
 import { DesktopTimeline } from './desktop-timeline'
 import { TimelineSwiper } from './timeline-swiper'
 
 interface TimelineProps {
-  milestones: ScopeOfWork_Milestone[]
+  milestones: Sow_Milestone[]
 }
 
 function Timeline({ milestones }: TimelineProps) {

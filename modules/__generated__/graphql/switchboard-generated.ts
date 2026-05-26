@@ -1224,11 +1224,20 @@ export type AppModule_AddDocumentTypeInput = {
   documentType: Scalars['String']['input'];
 };
 
+/**
+ * Configuration for a Drive App contributed by the package. Drive apps render a
+ * custom view at the drive level (instead of, or alongside, the document file
+ * tree) and can opt into which document types they accept.
+ */
 export type AppModule_AppModuleState = {
   __typename?: 'AppModule_AppModuleState';
+  /** Document type AppModule_ids this app handles. `null` means the app accepts any document type an empty list means it accepts none. */
   allowedDocumentTypes?: Maybe<Array<Scalars['String']['output']>>;
+  /** Whether the app surface accepts dropped files from the user. Defaults to true. */
   isDragAndDropEnabled: Scalars['Boolean']['output'];
+  /** Display name of the drive app. Also used as the source for the generated folder name under `apps/`. */
   name: Scalars['String']['output'];
+  /** Lifecycle status. While DRAFT the app definition is editable and codegen is skipped switching to CONFIRMED triggers app scaffold generation. */
   status: AppModule_StatusType;
 };
 
@@ -1322,6 +1331,11 @@ export type AppModule_SetDragAndDropEnabledInput = {
   enabled: Scalars['Boolean']['input'];
 };
 
+/**
+ * Lifecycle status of a module definition.
+ * - DRAFT: still being edited codegen does not run.
+ * - CONFIRMED: locked in codegen produces the corresponding scaffold.
+ */
 export enum AppModule_StatusType {
   Confirmed = 'CONFIRMED',
   Draft = 'DRAFT'
@@ -1912,6 +1926,14 @@ export type Builder = {
   status?: Maybe<BuilderStatus>;
 };
 
+export type BuilderDriveLink = {
+  __typename?: 'BuilderDriveLink';
+  driveId: Scalars['PHID']['output'];
+  driveLink: Scalars['URL']['output'];
+  driveName: Scalars['String']['output'];
+  driveSlug: Scalars['String']['output'];
+};
+
 export type BuilderLink = {
   __typename?: 'BuilderLink';
   id: Scalars['OID']['output'];
@@ -2004,6 +2026,8 @@ export type BuilderProfileMutations = {
   setOpHubMemberAsync: Scalars['String']['output'];
   setOperator: BuilderProfileMutationResult;
   setOperatorAsync: Scalars['String']['output'];
+  setWalletAddress: BuilderProfileMutationResult;
+  setWalletAddressAsync: Scalars['String']['output'];
   updateProfile: BuilderProfileMutationResult;
   updateProfileAsync: Scalars['String']['output'];
 };
@@ -2180,6 +2204,20 @@ export type BuilderProfileMutationsSetOperatorAsyncArgs = {
 
 
 /** Mutations: BuilderProfile */
+export type BuilderProfileMutationsSetWalletAddressArgs = {
+  docId: Scalars['PHID']['input'];
+  input: BuilderProfile_SetWalletAddressInput;
+};
+
+
+/** Mutations: BuilderProfile */
+export type BuilderProfileMutationsSetWalletAddressAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: BuilderProfile_SetWalletAddressInput;
+};
+
+
+/** Mutations: BuilderProfile */
 export type BuilderProfileMutationsUpdateProfileArgs = {
   docId: Scalars['PHID']['input'];
   input: BuilderProfile_UpdateProfileInput;
@@ -2315,6 +2353,7 @@ export type BuilderProfile_BuilderProfileState = {
   skills: Array<BuilderProfile_BuilderSkill>;
   slug?: Maybe<Scalars['String']['output']>;
   status?: Maybe<BuilderProfile_BuilderStatus>;
+  walletAddress?: Maybe<Scalars['EthereumAddress']['output']>;
 };
 
 /** Input Types for Initial State */
@@ -2334,6 +2373,7 @@ export type BuilderProfile_BuilderProfileStateInput = {
   skills?: InputMaybe<Array<InputMaybe<BuilderProfile_BuilderSkill>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<BuilderProfile_BuilderStatus>;
+  walletAddress?: InputMaybe<Scalars['EthereumAddress']['input']>;
 };
 
 export enum BuilderProfile_BuilderScope {
@@ -2498,6 +2538,10 @@ export type BuilderProfile_SetOpHubMemberInput = {
 
 export type BuilderProfile_SetOperatorInput = {
   isOperator: Scalars['Boolean']['input'];
+};
+
+export type BuilderProfile_SetWalletAddressInput = {
+  walletAddress: Scalars['EthereumAddress']['input'];
 };
 
 /** Module: Builders */
@@ -2832,6 +2876,7 @@ export type ClientInfo = {
 
 export type CreateProductInstancesInput = {
   customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
+  ethereumAddress: Scalars['EthereumAddress']['input'];
   name: Scalars['String']['input'];
   serviceOfferingId: Scalars['PHID']['input'];
   teamName: Scalars['String']['input'];
@@ -2850,6 +2895,25 @@ export type CreateRequestFinancePaymentOutput = {
   __typename?: 'CreateRequestFinancePaymentOutput';
   data?: Maybe<Scalars['JSONObject']['output']>;
   error?: Maybe<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
+};
+
+export type CreateUserDriveData = {
+  __typename?: 'CreateUserDriveData';
+  drives: Array<BuilderDriveLink>;
+};
+
+export type CreateUserDriveInput = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  role: UserRole;
+  teamName?: InputMaybe<Scalars['String']['input']>;
+  user: Scalars['EthereumAddress']['input'];
+};
+
+export type CreateUserDriveOutput = {
+  __typename?: 'CreateUserDriveOutput';
+  data?: Maybe<CreateUserDriveData>;
+  errors: Array<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
 
@@ -3722,14 +3786,22 @@ export type DocumentEditorQueriesFindDocumentsArgs = {
 };
 
 export type DocumentEditor_AddDocumentTypeInput = {
+  DocumentEditor_id: Scalars['OID']['input'];
   documentType: Scalars['String']['input'];
-  id: Scalars['OID']['input'];
 };
 
+/**
+ * Configuration for a document editor contributed by the package. The editor is
+ * registered against every document type DocumentEditor_listed in `documentTypes` Connect picks
+ * the first matching editor when opening a document.
+ */
 export type DocumentEditor_DocumentEditorState = {
   __typename?: 'DocumentEditor_DocumentEditorState';
+  /** Document types this editor can edit. Each entry has a stable DocumentEditor_id so it can be removed individually. */
   documentTypes: Array<DocumentEditor_DocumentTypeItem>;
+  /** Display name of the editor. Also determines the generated folder name under `editors/`. */
   name: Scalars['String']['output'];
+  /** Lifecycle status. While DRAFT the editor definition is editable and codegen is skipped switching to CONFIRMED triggers scaffold generation. */
   status: DocumentEditor_StatusType;
 };
 
@@ -3750,15 +3822,18 @@ export type DocumentEditor_DocumentResultPage = {
   totalCount: Scalars['Int']['output'];
 };
 
+/** A document type DocumentEditor_id (e.g. 'powerhouse/document-drive') attached to the editor with a stable entry DocumentEditor_id. */
 export type DocumentEditor_DocumentTypeItem = {
   __typename?: 'DocumentEditor_DocumentTypeItem';
+  /** Stable identifier for the entry used to remove it. */
+  DocumentEditor_id: Scalars['OID']['output'];
+  /** Document type DocumentEditor_id this editor handles (e.g. 'my-org/invoice'). */
   documentType: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
 };
 
 export type DocumentEditor_DocumentTypeItemInput = {
+  DocumentEditor_id?: InputMaybe<Scalars['OID']['input']>;
   documentType?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['OID']['input']>;
 };
 
 /** Document with children for DocumentEditor */
@@ -3807,7 +3882,7 @@ export type DocumentEditor_PagingInput = {
 };
 
 export type DocumentEditor_RemoveDocumentTypeInput = {
-  id: Scalars['OID']['input'];
+  DocumentEditor_id: Scalars['OID']['input'];
 };
 
 export type DocumentEditor_SearchFilterInput = {
@@ -3824,6 +3899,11 @@ export type DocumentEditor_SetEditorStatusInput = {
   status: DocumentEditor_StatusType;
 };
 
+/**
+ * Lifecycle status of a module definition.
+ * - DRAFT: still being edited codegen does not run.
+ * - CONFIRMED: locked in codegen produces the corresponding scaffold.
+ */
 export enum DocumentEditor_StatusType {
   Confirmed = 'CONFIRMED',
   Draft = 'DRAFT'
@@ -6180,6 +6260,10 @@ export type FullQueryWorkstream = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+export type GetBuilderDrivesFilter = {
+  ethereumAddress: Scalars['EthereumAddress']['input'];
+};
+
 export type GqlDocument = IDocument & {
   __typename?: 'GqlDocument';
   createdAtUtcIso: Scalars['DateTime']['output'];
@@ -7492,6 +7576,7 @@ export type Mutation = {
   Packages: PackagesMutations;
   PaymentTerms: PaymentTermsMutations;
   ProcessorModule: ProcessorModuleMutations;
+  ReactorDrive: ReactorDriveMutations;
   RequestForProposals: RequestForProposalsMutations;
   ResourceInstance: ResourceInstanceMutations;
   ResourceTemplate: ResourceTemplateMutations;
@@ -7500,12 +7585,14 @@ export type Mutation = {
   SnapshotReport: SnapshotReportMutations;
   SubgraphModule: SubgraphModuleMutations;
   SubscriptionInstance: SubscriptionInstanceMutations;
+  SubscriptionInvoice: SubscriptionInvoiceMutations;
   VetraPackage: VetraPackageMutations;
   Workstream: WorkstreamMutations;
   addRelationship: PhDocument;
   createDocument: PhDocument;
   createEmptyDocument: PhDocument;
   createProductInstances?: Maybe<CreateProductInstancesOutput>;
+  createUserDrive?: Maybe<CreateUserDriveOutput>;
   deleteDocument: Scalars['Boolean']['output'];
   deleteDocuments: Scalars['Boolean']['output'];
   moveRelationship: MoveRelationshipResult;
@@ -7514,6 +7601,7 @@ export type Mutation = {
   pushSyncEnvelopes: Scalars['Boolean']['output'];
   removeRelationship: PhDocument;
   renameDocument: PhDocument;
+  setPreferredEditor: PhDocument;
   touchChannel: TouchChannelResult;
 };
 
@@ -7587,6 +7675,12 @@ export type MutationCreateProductInstancesArgs = {
 
 
 /** Subgraph definition */
+export type MutationCreateUserDriveArgs = {
+  input: CreateUserDriveInput;
+};
+
+
+/** Subgraph definition */
 export type MutationDeleteDocumentArgs = {
   identifier: Scalars['String']['input'];
   propagate?: InputMaybe<PropagationMode>;
@@ -7646,6 +7740,14 @@ export type MutationRenameDocumentArgs = {
   branch?: InputMaybe<Scalars['String']['input']>;
   documentIdentifier: Scalars['String']['input'];
   name: Scalars['String']['input'];
+};
+
+
+/** Subgraph definition */
+export type MutationSetPreferredEditorArgs = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  documentIdentifier: Scalars['String']['input'];
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -9653,8 +9755,8 @@ export type ProcessorModuleQueriesFindDocumentsArgs = {
 };
 
 export type ProcessorModule_AddDocumentTypeInput = {
+  ProcessorModule_id: Scalars['OID']['input'];
   documentType: Scalars['String']['input'];
-  id: Scalars['OID']['input'];
 };
 
 export type ProcessorModule_AddProcessorAppInput = {
@@ -9671,15 +9773,18 @@ export type ProcessorModule_DocumentResultPage = {
   totalCount: Scalars['Int']['output'];
 };
 
+/** A document type ProcessorModule_id (e.g. 'my-org/invoice') attached to the processor with a stable entry ProcessorModule_id. */
 export type ProcessorModule_DocumentTypeItem = {
   __typename?: 'ProcessorModule_DocumentTypeItem';
+  /** Stable identifier for the entry used to remove it. */
+  ProcessorModule_id: Scalars['OID']['output'];
+  /** Document type ProcessorModule_id this processor subscribes to. */
   documentType: Scalars['String']['output'];
-  id: Scalars['OID']['output'];
 };
 
 export type ProcessorModule_DocumentTypeItemInput = {
+  ProcessorModule_id?: InputMaybe<Scalars['OID']['input']>;
   documentType?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['OID']['input']>;
 };
 
 /** Document with children for ProcessorModule */
@@ -9727,12 +9832,22 @@ export type ProcessorModule_PagingInput = {
   offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/**
+ * Configuration for a processor contributed by the package. A processor receives
+ * operations from documents of matching types and runs server-side logic (e.g.
+ * building a read model, indexing, syncing to an external system).
+ */
 export type ProcessorModule_ProcessorModuleState = {
   __typename?: 'ProcessorModule_ProcessorModuleState';
+  /** Document types this processor subscribes to. Each entry has a stable ProcessorModule_id so it can be removed individually. */
   documentTypes: Array<ProcessorModule_DocumentTypeItem>;
+  /** Display name of the processor. Also determines the generated folder name under `processors/`. */
   name: Scalars['String']['output'];
+  /** Drive-app names this processor is attached to. The processor runs in the context of each listed app. */
   processorApps: Array<Scalars['String']['output']>;
+  /** Lifecycle status. While DRAFT the processor definition is editable and codegen is skipped switching to CONFIRMED triggers scaffold generation. */
   status: ProcessorModule_StatusType;
+  /** Processor implementation kind (e.g. 'read-model', 'relational-db'). Determines which scaffold codegen emits. */
   type: Scalars['String']['output'];
 };
 
@@ -9746,7 +9861,7 @@ export type ProcessorModule_ProcessorModuleStateInput = {
 };
 
 export type ProcessorModule_RemoveDocumentTypeInput = {
-  id: Scalars['OID']['input'];
+  ProcessorModule_id: Scalars['OID']['input'];
 };
 
 export type ProcessorModule_RemoveProcessorAppInput = {
@@ -9771,6 +9886,11 @@ export type ProcessorModule_SetProcessorTypeInput = {
   type: Scalars['String']['input'];
 };
 
+/**
+ * Lifecycle status of a module definition.
+ * - DRAFT: still being edited codegen does not run.
+ * - CONFIRMED: locked in codegen produces the corresponding scaffold.
+ */
 export enum ProcessorModule_StatusType {
   Confirmed = 'CONFIRMED',
   Draft = 'DRAFT'
@@ -9849,6 +9969,7 @@ export type Query = {
   Packages: PackagesQueries;
   PaymentTerms: PaymentTermsQueries;
   ProcessorModule: ProcessorModuleQueries;
+  ReactorDrive: ReactorDriveQueries;
   RequestForProposals: RequestForProposalsQueries;
   ResourceInstance: ResourceInstanceQueries;
   ResourceTemplate: ResourceTemplateQueries;
@@ -9857,6 +9978,7 @@ export type Query = {
   SnapshotReport: SnapshotReportQueries;
   SubgraphModule: SubgraphModuleQueries;
   SubscriptionInstance: SubscriptionInstanceQueries;
+  SubscriptionInvoice: SubscriptionInvoiceQueries;
   VetraPackage: VetraPackageQueries;
   Workstream: WorkstreamQueries;
   allNetworks: Array<AllNetworks>;
@@ -9869,6 +9991,7 @@ export type Query = {
   documentOperations: ReactorOperationResultPage;
   documentOutgoingRelationships: PhDocumentResultPage;
   findDocuments: PhDocumentResultPage;
+  getBuilderDrives: Array<BuilderDriveLink>;
   jobStatus?: Maybe<JobInfo>;
   pollSyncEnvelopes: PollSyncEnvelopesResult;
   processorWorkstreams: Array<ProcessorWorkstream>;
@@ -9944,6 +10067,12 @@ export type QueryFindDocumentsArgs = {
   paging?: InputMaybe<PagingInput>;
   search?: InputMaybe<SearchFilterInput>;
   view?: InputMaybe<ViewFilterInput>;
+};
+
+
+/** Subgraph definition */
+export type QueryGetBuilderDrivesArgs = {
+  filter: GetBuilderDrivesFilter;
 };
 
 
@@ -10339,6 +10468,353 @@ export enum RsTierPricingMode {
   Calculated = 'CALCULATED',
   ManualOverride = 'MANUAL_OVERRIDE'
 }
+
+export type ReactorDrive = IDocument & {
+  __typename?: 'ReactorDrive';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: ReactorDrive_ReactorDriveState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: ReactorDrive_ReactorDriveState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type ReactorDriveOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for ReactorDrive operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type ReactorDriveMutationResult = {
+  __typename?: 'ReactorDriveMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: ReactorDrive_FullState;
+};
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutations = {
+  __typename?: 'ReactorDriveMutations';
+  addFolder: ReactorDriveMutationResult;
+  addFolderAsync: Scalars['String']['output'];
+  createDocument: ReactorDriveMutationResult;
+  createEmptyDocument: ReactorDriveMutationResult;
+  removeFolder: ReactorDriveMutationResult;
+  removeFolderAsync: Scalars['String']['output'];
+  setAvailableOffline: ReactorDriveMutationResult;
+  setAvailableOfflineAsync: Scalars['String']['output'];
+  setDriveIcon: ReactorDriveMutationResult;
+  setDriveIconAsync: Scalars['String']['output'];
+  setDriveName: ReactorDriveMutationResult;
+  setDriveNameAsync: Scalars['String']['output'];
+  setSharingType: ReactorDriveMutationResult;
+  setSharingTypeAsync: Scalars['String']['output'];
+  updateFolder: ReactorDriveMutationResult;
+  updateFolderAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsAddFolderArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_AddFolderInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsAddFolderAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_AddFolderInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<ReactorDrive_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsRemoveFolderArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_RemoveFolderInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsRemoveFolderAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_RemoveFolderInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetAvailableOfflineArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetAvailableOfflineInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetAvailableOfflineAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetAvailableOfflineInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetDriveIconArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetDriveIconInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetDriveIconAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetDriveIconInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetDriveNameArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetDriveNameInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetDriveNameAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetDriveNameInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetSharingTypeArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetSharingTypeInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsSetSharingTypeAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_SetSharingTypeInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsUpdateFolderArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_UpdateFolderInput;
+};
+
+
+/** Mutations: ReactorDrive */
+export type ReactorDriveMutationsUpdateFolderAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: ReactorDrive_UpdateFolderInput;
+};
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueries = {
+  __typename?: 'ReactorDriveQueries';
+  /** Get a specific ReactorDrive document by identifier */
+  document?: Maybe<ReactorDrive_DocumentWithChildren>;
+  /** Get incoming relationships to a ReactorDrive document */
+  documentIncomingRelationships: ReactorDrive_DocumentResultPage;
+  /** Get outgoing relationships of a ReactorDrive document */
+  documentOutgoingRelationships: ReactorDrive_DocumentResultPage;
+  /** Get all ReactorDrive documents (paged) */
+  documents: ReactorDrive_DocumentResultPage;
+  /** Find ReactorDrive documents by search criteria */
+  findDocuments: ReactorDrive_DocumentResultPage;
+};
+
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<ReactorDrive_ViewFilterInput>;
+};
+
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<ReactorDrive_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<ReactorDrive_ViewFilterInput>;
+};
+
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<ReactorDrive_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<ReactorDrive_ViewFilterInput>;
+};
+
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueriesDocumentsArgs = {
+  paging?: InputMaybe<ReactorDrive_PagingInput>;
+};
+
+
+/** Queries: ReactorDrive Document */
+export type ReactorDriveQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<ReactorDrive_PagingInput>;
+  search?: InputMaybe<ReactorDrive_SearchFilterInput>;
+  view?: InputMaybe<ReactorDrive_ViewFilterInput>;
+};
+
+export type ReactorDrive_AddFolderInput = {
+  folderId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  parentFolderId?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Paginated result type for ReactorDrive documents */
+export type ReactorDrive_DocumentResultPage = {
+  __typename?: 'ReactorDrive_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<ReactorDriveMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+/** Document with children for ReactorDrive */
+export type ReactorDrive_DocumentWithChildren = {
+  __typename?: 'ReactorDrive_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: ReactorDriveMutationResult;
+};
+
+/** Full state with all scopes for ReactorDrive */
+export type ReactorDrive_FullState = {
+  __typename?: 'ReactorDrive_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: ReactorDrive_PhDocumentScopeState;
+  global: ReactorDrive_ReactorDriveState;
+  local: ReactorDrive_ReactorDriveLocalState;
+};
+
+export type ReactorDrive_InitialStateInput = {
+  global?: InputMaybe<ReactorDrive_ReactorDriveStateInput>;
+  local?: InputMaybe<ReactorDrive_ReactorDriveLocalStateInput>;
+};
+
+/** Document scope state (same for all document types) */
+export type ReactorDrive_PhDocumentScopeState = {
+  __typename?: 'ReactorDrive_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: ReactorDrive_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type ReactorDrive_PhHashConfig = {
+  __typename?: 'ReactorDrive_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type ReactorDrive_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type ReactorDrive_ReactorDriveLocalState = {
+  __typename?: 'ReactorDrive_ReactorDriveLocalState';
+  availableOffline: Scalars['Boolean']['output'];
+  sharingType: Scalars['String']['output'];
+};
+
+export type ReactorDrive_ReactorDriveLocalStateInput = {
+  availableOffline?: InputMaybe<Scalars['Boolean']['input']>;
+  sharingType?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReactorDrive_ReactorDriveState = {
+  __typename?: 'ReactorDrive_ReactorDriveState';
+  icon?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+};
+
+/** Input Types for Initial State */
+export type ReactorDrive_ReactorDriveStateInput = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReactorDrive_RemoveFolderInput = {
+  folderId: Scalars['String']['input'];
+};
+
+export type ReactorDrive_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReactorDrive_SetAvailableOfflineInput = {
+  availableOffline: Scalars['Boolean']['input'];
+};
+
+export type ReactorDrive_SetDriveIconInput = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Module: BaseOperations */
+export type ReactorDrive_SetDriveNameInput = {
+  name: Scalars['String']['input'];
+};
+
+export type ReactorDrive_SetSharingTypeInput = {
+  sharingType: Scalars['String']['input'];
+};
+
+export type ReactorDrive_UpdateFolderInput = {
+  folderId: Scalars['String']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
+  parentFolderId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ReactorDrive_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
 
 export type ReactorOperation = {
   __typename?: 'ReactorOperation';
@@ -13484,15 +13960,6 @@ export type ScopeOfWork_AgentInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ScopeOfWork_Binary = {
-  __typename?: 'ScopeOfWork_Binary';
-  done?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type ScopeOfWork_BinaryInput = {
-  done?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type ScopeOfWork_BudgetAnchorProject = {
   __typename?: 'ScopeOfWork_BudgetAnchorProject';
   margin: Scalars['Float']['output'];
@@ -13554,7 +14021,7 @@ export type ScopeOfWork_DeliverableInput = {
   owner?: InputMaybe<Scalars['ID']['input']>;
   status?: InputMaybe<ScopeOfWork_DeliverableStatus>;
   title?: InputMaybe<Scalars['String']['input']>;
-  workProgress?: InputMaybe<Scalars['JSONObject']['input']>;
+  workProgress?: InputMaybe<ScopeOfWork_ProgressInput>;
 };
 
 export enum ScopeOfWork_DeliverableSetStatus {
@@ -13605,7 +14072,7 @@ export type ScopeOfWork_DeliverablesSet = {
 export type ScopeOfWork_DeliverablesSetInput = {
   deliverables?: InputMaybe<Array<InputMaybe<Scalars['OID']['input']>>>;
   deliverablesCompleted?: InputMaybe<ScopeOfWork_DeliverablesCompletedInput>;
-  progress?: InputMaybe<Scalars['JSONObject']['input']>;
+  progress?: InputMaybe<ScopeOfWork_ProgressInput>;
   status?: InputMaybe<ScopeOfWork_DeliverableSetStatus>;
 };
 
@@ -13786,16 +14253,13 @@ export type ScopeOfWork_PagingInput = {
   offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type ScopeOfWork_Percentage = {
-  __typename?: 'ScopeOfWork_Percentage';
-  value: Scalars['Float']['output'];
+export type ScopeOfWork_Progress = {
+  __typename?: 'ScopeOfWork_Progress';
+  completed?: Maybe<Scalars['Int']['output']>;
+  done?: Maybe<Scalars['Boolean']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
+  value?: Maybe<Scalars['Float']['output']>;
 };
-
-export type ScopeOfWork_PercentageInput = {
-  value?: InputMaybe<Scalars['Float']['input']>;
-};
-
-export type ScopeOfWork_Progress = ScopeOfWork_Binary | ScopeOfWork_Percentage | ScopeOfWork_StoryPoint;
 
 export type ScopeOfWork_ProgressInput = {
   done?: InputMaybe<Scalars['Boolean']['input']>;
@@ -13967,12 +14431,6 @@ export type ScopeOfWork_SetProjectMarginInput = {
 export type ScopeOfWork_SetProjectTotalBudgetInput = {
   projectId: Scalars['OID']['input'];
   totalBudget: Scalars['Float']['input'];
-};
-
-export type ScopeOfWork_StoryPoint = {
-  __typename?: 'ScopeOfWork_StoryPoint';
-  completed: Scalars['Int']['output'];
-  total: Scalars['Int']['output'];
 };
 
 export type ScopeOfWork_StoryPointInput = {
@@ -16364,14 +16822,25 @@ export type SubgraphModule_SetSubgraphStatusInput = {
   status: SubgraphModule_StatusType;
 };
 
+/**
+ * Lifecycle status of a module definition.
+ * - DRAFT: still being edited codegen does not run.
+ * - CONFIRMED: locked in codegen produces the corresponding scaffold.
+ */
 export enum SubgraphModule_StatusType {
   Confirmed = 'CONFIRMED',
   Draft = 'DRAFT'
 }
 
+/**
+ * Configuration for a GraphQL subgraph contributed by the package. The subgraph
+ * is served by Switchboard and stitched into the unified Powerhouse API.
+ */
 export type SubgraphModule_SubgraphModuleState = {
   __typename?: 'SubgraphModule_SubgraphModuleState';
+  /** Display name of the subgraph. Also determines the generated folder name under `subgraphs/` and the route segment Switchboard mounts it at. */
   name: Scalars['String']['output'];
+  /** Lifecycle status. While DRAFT the subgraph definition is editable and codegen is skipped switching to CONFIRMED triggers scaffold generation. */
   status: SubgraphModule_StatusType;
 };
 
@@ -16457,20 +16926,28 @@ export type SubscriptionInstanceMutations = {
   addServiceMetricAsync: Scalars['String']['output'];
   addServiceToGroup: SubscriptionInstanceMutationResult;
   addServiceToGroupAsync: Scalars['String']['output'];
+  applyCredit: SubscriptionInstanceMutationResult;
+  applyCreditAsync: Scalars['String']['output'];
   cancelSubscription: SubscriptionInstanceMutationResult;
   cancelSubscriptionAsync: Scalars['String']['output'];
+  changePlan: SubscriptionInstanceMutationResult;
+  changePlanAsync: Scalars['String']['output'];
+  confirmLineItemPayment: SubscriptionInstanceMutationResult;
+  confirmLineItemPaymentAsync: Scalars['String']['output'];
   createDocument: SubscriptionInstanceMutationResult;
   createEmptyDocument: SubscriptionInstanceMutationResult;
   decrementMetricUsage: SubscriptionInstanceMutationResult;
   decrementMetricUsageAsync: Scalars['String']['output'];
+  generateInvoice: SubscriptionInstanceMutationResult;
+  generateInvoiceAsync: Scalars['String']['output'];
   incrementMetricUsage: SubscriptionInstanceMutationResult;
   incrementMetricUsageAsync: Scalars['String']['output'];
   initializeSubscription: SubscriptionInstanceMutationResult;
   initializeSubscriptionAsync: Scalars['String']['output'];
+  markLineItemInvoiced: SubscriptionInstanceMutationResult;
+  markLineItemInvoicedAsync: Scalars['String']['output'];
   pauseSubscription: SubscriptionInstanceMutationResult;
   pauseSubscriptionAsync: Scalars['String']['output'];
-  removeBudgetCategory: SubscriptionInstanceMutationResult;
-  removeBudgetCategoryAsync: Scalars['String']['output'];
   removeService: SubscriptionInstanceMutationResult;
   removeServiceAsync: Scalars['String']['output'];
   removeServiceFacetSelection: SubscriptionInstanceMutationResult;
@@ -16485,6 +16962,8 @@ export type SubscriptionInstanceMutations = {
   renewExpiringSubscriptionAsync: Scalars['String']['output'];
   reportOveragePayment: SubscriptionInstanceMutationResult;
   reportOveragePaymentAsync: Scalars['String']['output'];
+  reportPayment: SubscriptionInstanceMutationResult;
+  reportPaymentAsync: Scalars['String']['output'];
   reportRecurringPayment: SubscriptionInstanceMutationResult;
   reportRecurringPaymentAsync: Scalars['String']['output'];
   reportSetupPayment: SubscriptionInstanceMutationResult;
@@ -16493,20 +16972,14 @@ export type SubscriptionInstanceMutations = {
   resumeSubscriptionAsync: Scalars['String']['output'];
   setAutoRenew: SubscriptionInstanceMutationResult;
   setAutoRenewAsync: Scalars['String']['output'];
-  setBudgetCategory: SubscriptionInstanceMutationResult;
-  setBudgetCategoryAsync: Scalars['String']['output'];
   setCustomerType: SubscriptionInstanceMutationResult;
   setCustomerTypeAsync: Scalars['String']['output'];
   setExpiring: SubscriptionInstanceMutationResult;
   setExpiringAsync: Scalars['String']['output'];
   setOperatorNotes: SubscriptionInstanceMutationResult;
   setOperatorNotesAsync: Scalars['String']['output'];
-  setRenewalDate: SubscriptionInstanceMutationResult;
-  setRenewalDateAsync: Scalars['String']['output'];
   setResourceDocument: SubscriptionInstanceMutationResult;
   setResourceDocumentAsync: Scalars['String']['output'];
-  settleBillingCycle: SubscriptionInstanceMutationResult;
-  settleBillingCycleAsync: Scalars['String']['output'];
   updateCustomerInfo: SubscriptionInstanceMutationResult;
   updateCustomerInfoAsync: Scalars['String']['output'];
   updateMetric: SubscriptionInstanceMutationResult;
@@ -16627,6 +17100,20 @@ export type SubscriptionInstanceMutationsAddServiceToGroupAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsApplyCreditArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ApplyCreditInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsApplyCreditAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ApplyCreditInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsCancelSubscriptionArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_CancelSubscriptionInput;
@@ -16637,6 +17124,34 @@ export type SubscriptionInstanceMutationsCancelSubscriptionArgs = {
 export type SubscriptionInstanceMutationsCancelSubscriptionAsyncArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_CancelSubscriptionInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsChangePlanArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ChangePlanInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsChangePlanAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ChangePlanInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsConfirmLineItemPaymentArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ConfirmLineItemPaymentInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsConfirmLineItemPaymentAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ConfirmLineItemPaymentInput;
 };
 
 
@@ -16671,6 +17186,20 @@ export type SubscriptionInstanceMutationsDecrementMetricUsageAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsGenerateInvoiceArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_GenerateInvoiceInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsGenerateInvoiceAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_GenerateInvoiceInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsIncrementMetricUsageArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_IncrementMetricUsageInput;
@@ -16699,6 +17228,20 @@ export type SubscriptionInstanceMutationsInitializeSubscriptionAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsMarkLineItemInvoicedArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_MarkLineItemInvoicedInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsMarkLineItemInvoicedAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_MarkLineItemInvoicedInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsPauseSubscriptionArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_PauseSubscriptionInput;
@@ -16709,20 +17252,6 @@ export type SubscriptionInstanceMutationsPauseSubscriptionArgs = {
 export type SubscriptionInstanceMutationsPauseSubscriptionAsyncArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_PauseSubscriptionInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsRemoveBudgetCategoryArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_RemoveBudgetCategoryInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsRemoveBudgetCategoryAsyncArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_RemoveBudgetCategoryInput;
 };
 
 
@@ -16825,6 +17354,20 @@ export type SubscriptionInstanceMutationsReportOveragePaymentAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsReportPaymentArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ReportPaymentInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
+export type SubscriptionInstanceMutationsReportPaymentAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInstance_ReportPaymentInput;
+};
+
+
+/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsReportRecurringPaymentArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_ReportRecurringPaymentInput;
@@ -16881,20 +17424,6 @@ export type SubscriptionInstanceMutationsSetAutoRenewAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSetBudgetCategoryArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SetBudgetCategoryInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSetBudgetCategoryAsyncArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SetBudgetCategoryInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsSetCustomerTypeArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_SetCustomerTypeInput;
@@ -16937,20 +17466,6 @@ export type SubscriptionInstanceMutationsSetOperatorNotesAsyncArgs = {
 
 
 /** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSetRenewalDateArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SetRenewalDateInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSetRenewalDateAsyncArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SetRenewalDateInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
 export type SubscriptionInstanceMutationsSetResourceDocumentArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_SetResourceDocumentInput;
@@ -16961,20 +17476,6 @@ export type SubscriptionInstanceMutationsSetResourceDocumentArgs = {
 export type SubscriptionInstanceMutationsSetResourceDocumentAsyncArgs = {
   docId: Scalars['PHID']['input'];
   input: SubscriptionInstance_SetResourceDocumentInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSettleBillingCycleArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SettleBillingCycleInput;
-};
-
-
-/** Mutations: SubscriptionInstance */
-export type SubscriptionInstanceMutationsSettleBillingCycleAsyncArgs = {
-  docId: Scalars['PHID']['input'];
-  input: SubscriptionInstance_SettleBillingCycleInput;
 };
 
 
@@ -17170,11 +17671,20 @@ export enum SubscriptionInstance_AccrualCycle {
 export type SubscriptionInstance_AccrueMetricUsageInput = {
   accrualDate: Scalars['DateTime']['input'];
   metricId: Scalars['OID']['input'];
+  newSliceIds: Array<Scalars['OID']['input']>;
   serviceId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_ActivateSliceIdMappingInput = {
+  sliceId: Scalars['OID']['input'];
+  sourceId: Scalars['OID']['input'];
+  sourceName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SubscriptionInstance_ActivateSubscriptionInput = {
   activatedSince: Scalars['DateTime']['input'];
+  recurringSliceIds: Array<SubscriptionInstance_ActivateSliceIdMappingInput>;
+  setupSliceIds: Array<SubscriptionInstance_ActivateSliceIdMappingInput>;
 };
 
 export type SubscriptionInstance_AddServiceFacetSelectionInput = {
@@ -17195,8 +17705,10 @@ export type SubscriptionInstance_AddServiceGroupInput = {
   recurringBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   recurringCurrency?: InputMaybe<Scalars['Currency']['input']>;
   recurringDiscount?: InputMaybe<SubscriptionInstance_DiscountServiceInfoInput>;
+  recurringSliceId: Scalars['OID']['input'];
   setupAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
   setupCurrency?: InputMaybe<Scalars['Currency']['input']>;
+  setupSliceId: Scalars['OID']['input'];
 };
 
 export type SubscriptionInstance_AddServiceInput = {
@@ -17246,6 +17758,14 @@ export type SubscriptionInstance_AddServiceToGroupInput = {
   setupPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
+export type SubscriptionInstance_ApplyCreditInput = {
+  amount: Scalars['Amount_Money']['input'];
+  creditDate: Scalars['DateTime']['input'];
+  /** When provided, allocates credit against a single specific debt line item; otherwise FIFO+priority across all collectible outstanding slices. */
+  lineItemId?: InputMaybe<Scalars['OID']['input']>;
+  reason: Scalars['String']['input'];
+};
+
 export enum SubscriptionInstance_BillingCycle {
   Annual = 'ANNUAL',
   Monthly = 'MONTHLY',
@@ -17254,20 +17774,28 @@ export enum SubscriptionInstance_BillingCycle {
   SemiAnnual = 'SEMI_ANNUAL'
 }
 
-export type SubscriptionInstance_BudgetCategory = {
-  __typename?: 'SubscriptionInstance_BudgetCategory';
-  id: Scalars['OID']['output'];
-  label: Scalars['String']['output'];
-};
-
-export type SubscriptionInstance_BudgetCategoryInput = {
-  id?: InputMaybe<Scalars['OID']['input']>;
-  label?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type SubscriptionInstance_CancelSubscriptionInput = {
   cancellationReason?: InputMaybe<Scalars['String']['input']>;
   cancelledSince: Scalars['DateTime']['input'];
+  refundSliceIds: Array<SubscriptionInstance_RenewSliceIdMappingInput>;
+};
+
+export type SubscriptionInstance_ChangePlanInput = {
+  creditLineItemId: Scalars['OID']['input'];
+  debitLineItemId: Scalars['OID']['input'];
+  effectiveDate: Scalars['DateTime']['input'];
+  newBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
+  newTierCurrency: Scalars['Currency']['input'];
+  newTierName?: InputMaybe<Scalars['String']['input']>;
+  newTierPrice: Scalars['Amount_Money']['input'];
+  newTierPricingOptionId: Scalars['OID']['input'];
+};
+
+export type SubscriptionInstance_ConfirmLineItemPaymentInput = {
+  amount: Scalars['Amount_Money']['input'];
+  lineItemId: Scalars['OID']['input'];
+  paymentDate: Scalars['DateTime']['input'];
+  paymentRef?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 export enum SubscriptionInstance_CustomerType {
@@ -17275,10 +17803,71 @@ export enum SubscriptionInstance_CustomerType {
   Team = 'TEAM'
 }
 
+export type SubscriptionInstance_DebtLineItem = {
+  __typename?: 'SubscriptionInstance_DebtLineItem';
+  accrualPeriodStart?: Maybe<Scalars['DateTime']['output']>;
+  chargedAt: Scalars['DateTime']['output'];
+  creditApplied: Scalars['Amount_Money']['output'];
+  currency: Scalars['Currency']['output'];
+  debitAmount: Scalars['Amount_Money']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  frozen: Scalars['Boolean']['output'];
+  fullyPaidAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['OID']['output'];
+  invoiceRef?: Maybe<Scalars['PHID']['output']>;
+  invoiced: Scalars['Boolean']['output'];
+  invoicedAt?: Maybe<Scalars['DateTime']['output']>;
+  lastPaymentRef?: Maybe<Scalars['PHID']['output']>;
+  origin: SubscriptionInstance_DebtOriginType;
+  settledAmount: Scalars['Amount_Money']['output'];
+  sourceGroupId?: Maybe<Scalars['OID']['output']>;
+  sourceMetricId?: Maybe<Scalars['OID']['output']>;
+  sourceServiceId?: Maybe<Scalars['OID']['output']>;
+  status: SubscriptionInstance_DebtLineItemStatus;
+};
+
+export type SubscriptionInstance_DebtLineItemInput = {
+  accrualPeriodStart?: InputMaybe<Scalars['DateTime']['input']>;
+  chargedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  creditApplied?: InputMaybe<Scalars['Amount_Money']['input']>;
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  debitAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  frozen?: InputMaybe<Scalars['Boolean']['input']>;
+  fullyPaidAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['OID']['input']>;
+  invoiceRef?: InputMaybe<Scalars['PHID']['input']>;
+  invoiced?: InputMaybe<Scalars['Boolean']['input']>;
+  invoicedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  lastPaymentRef?: InputMaybe<Scalars['PHID']['input']>;
+  origin?: InputMaybe<SubscriptionInstance_DebtOriginType>;
+  settledAmount?: InputMaybe<Scalars['Amount_Money']['input']>;
+  sourceGroupId?: InputMaybe<Scalars['OID']['input']>;
+  sourceMetricId?: InputMaybe<Scalars['OID']['input']>;
+  sourceServiceId?: InputMaybe<Scalars['OID']['input']>;
+  status?: InputMaybe<SubscriptionInstance_DebtLineItemStatus>;
+};
+
+export enum SubscriptionInstance_DebtLineItemStatus {
+  Charged = 'CHARGED',
+  FullyPaid = 'FULLY_PAID',
+  Invoiced = 'INVOICED',
+  PartiallyPaid = 'PARTIALLY_PAID'
+}
+
+export enum SubscriptionInstance_DebtOriginType {
+  Dynamic = 'DYNAMIC',
+  EstimatedUsage = 'ESTIMATED_USAGE',
+  Reconciliation = 'RECONCILIATION',
+  Setup = 'SETUP',
+  SubscriptionFee = 'SUBSCRIPTION_FEE'
+}
+
 export type SubscriptionInstance_DecrementMetricUsageInput = {
   currentTime: Scalars['DateTime']['input'];
   decrementBy: Scalars['Int']['input'];
   metricId: Scalars['OID']['input'];
+  newSliceId: Scalars['OID']['input'];
   serviceId: Scalars['OID']['input'];
 };
 
@@ -17349,6 +17938,14 @@ export type SubscriptionInstance_FullState = {
   local: Scalars['JSONObject']['output'];
 };
 
+export type SubscriptionInstance_GenerateInvoiceInput = {
+  advanceCycleIfDue?: InputMaybe<Scalars['Boolean']['input']>;
+  generatedAt: Scalars['DateTime']['input'];
+  invoiceId: Scalars['PHID']['input'];
+  metricFreezeSliceIds: Array<SubscriptionInstance_SettleSliceIdMappingInput>;
+  nextCycleRecurringSliceIds: Array<SubscriptionInstance_SettleSliceIdMappingInput>;
+};
+
 export enum SubscriptionInstance_GroupCostType {
   Recurring = 'RECURRING',
   Setup = 'SETUP'
@@ -17358,6 +17955,7 @@ export type SubscriptionInstance_IncrementMetricUsageInput = {
   currentTime: Scalars['DateTime']['input'];
   incrementBy: Scalars['Int']['input'];
   metricId: Scalars['OID']['input'];
+  newSliceId: Scalars['OID']['input'];
   serviceId: Scalars['OID']['input'];
 };
 
@@ -17438,6 +18036,13 @@ export type SubscriptionInstance_InitializeSubscriptionInput = {
   tierPricingOptionId?: InputMaybe<Scalars['OID']['input']>;
 };
 
+/** Module: DebtLineItems */
+export type SubscriptionInstance_MarkLineItemInvoicedInput = {
+  invoiceRef?: InputMaybe<Scalars['PHID']['input']>;
+  invoicedAt: Scalars['DateTime']['input'];
+  lineItemId: Scalars['OID']['input'];
+};
+
 export enum SubscriptionInstance_MetricType {
   Cumulative = 'CUMULATIVE',
   NonCumulative = 'NON_CUMULATIVE'
@@ -17488,10 +18093,6 @@ export type SubscriptionInstance_RecurringCostInput = {
   lastPaymentDate?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-export type SubscriptionInstance_RemoveBudgetCategoryInput = {
-  budgetId: Scalars['OID']['input'];
-};
-
 export type SubscriptionInstance_RemoveServiceFacetSelectionInput = {
   facetSelectionId: Scalars['OID']['input'];
   serviceId: Scalars['OID']['input'];
@@ -17503,6 +18104,7 @@ export type SubscriptionInstance_RemoveServiceFromGroupInput = {
 };
 
 export type SubscriptionInstance_RemoveServiceGroupInput = {
+  creditSliceId: Scalars['OID']['input'];
   effectiveDate: Scalars['DateTime']['input'];
   groupId: Scalars['OID']['input'];
 };
@@ -17517,13 +18119,25 @@ export type SubscriptionInstance_RemoveServiceMetricInput = {
 };
 
 export type SubscriptionInstance_RenewExpiringSubscriptionInput = {
-  newRenewalDate?: InputMaybe<Scalars['DateTime']['input']>;
+  recurringSliceIds: Array<SubscriptionInstance_RenewSliceIdMappingInput>;
   timestamp: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_RenewSliceIdMappingInput = {
+  sliceId: Scalars['OID']['input'];
+  sourceId: Scalars['OID']['input'];
+  sourceName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SubscriptionInstance_ReportOveragePaymentInput = {
   amount: Scalars['Amount_Money']['input'];
   paymentDate: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInstance_ReportPaymentInput = {
+  amount: Scalars['Amount_Money']['input'];
+  paymentDate: Scalars['DateTime']['input'];
+  paymentRef?: InputMaybe<Scalars['PHID']['input']>;
 };
 
 export type SubscriptionInstance_ReportRecurringPaymentInput = {
@@ -17646,11 +18260,6 @@ export type SubscriptionInstance_SetAutoRenewInput = {
   autoRenew: Scalars['Boolean']['input'];
 };
 
-export type SubscriptionInstance_SetBudgetCategoryInput = {
-  budgetId: Scalars['OID']['input'];
-  budgetLabel: Scalars['String']['input'];
-};
-
 /** Module: Customer */
 export type SubscriptionInstance_SetCustomerTypeInput = {
   customerType: SubscriptionInstance_CustomerType;
@@ -17665,18 +18274,16 @@ export type SubscriptionInstance_SetOperatorNotesInput = {
   operatorNotes?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SubscriptionInstance_SetRenewalDateInput = {
-  renewalDate: Scalars['DateTime']['input'];
-};
-
 export type SubscriptionInstance_SetResourceDocumentInput = {
   resourceId: Scalars['PHID']['input'];
   resourceLabel?: InputMaybe<Scalars['String']['input']>;
   resourceThumbnailUrl?: InputMaybe<Scalars['URL']['input']>;
 };
 
-export type SubscriptionInstance_SettleBillingCycleInput = {
-  settlementDate: Scalars['DateTime']['input'];
+export type SubscriptionInstance_SettleSliceIdMappingInput = {
+  sliceId: Scalars['OID']['input'];
+  sourceId: Scalars['OID']['input'];
+  sourceName?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SubscriptionInstance_SetupCost = {
@@ -17696,22 +18303,22 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
   __typename?: 'SubscriptionInstance_SubscriptionInstanceState';
   activatedSince?: Maybe<Scalars['DateTime']['output']>;
   autoRenew: Scalars['Boolean']['output'];
-  budget?: Maybe<SubscriptionInstance_BudgetCategory>;
   cancellationReason?: Maybe<Scalars['String']['output']>;
   cancelledSince?: Maybe<Scalars['DateTime']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   currentBillingCycleStart?: Maybe<Scalars['DateTime']['output']>;
+  currentCycleOverage?: Maybe<Scalars['Amount_Money']['output']>;
   customerEmail?: Maybe<Scalars['EmailAddress']['output']>;
   customerId?: Maybe<Scalars['PHID']['output']>;
   customerName?: Maybe<Scalars['String']['output']>;
   customerType?: Maybe<SubscriptionInstance_CustomerType>;
+  debtLineItems: Array<SubscriptionInstance_DebtLineItem>;
   expiringSince?: Maybe<Scalars['DateTime']['output']>;
   globalCurrency?: Maybe<Scalars['Currency']['output']>;
   nextBillingDate?: Maybe<Scalars['DateTime']['output']>;
   operatorId?: Maybe<Scalars['PHID']['output']>;
   operatorNotes?: Maybe<Scalars['String']['output']>;
   pausedSince?: Maybe<Scalars['DateTime']['output']>;
-  renewalDate?: Maybe<Scalars['DateTime']['output']>;
   resource?: Maybe<SubscriptionInstance_ResourceDocument>;
   selectedBillingCycle?: Maybe<SubscriptionInstance_BillingCycle>;
   serviceGroups: Array<SubscriptionInstance_ServiceGroup>;
@@ -17732,22 +18339,22 @@ export type SubscriptionInstance_SubscriptionInstanceState = {
 export type SubscriptionInstance_SubscriptionInstanceStateInput = {
   activatedSince?: InputMaybe<Scalars['DateTime']['input']>;
   autoRenew?: InputMaybe<Scalars['Boolean']['input']>;
-  budget?: InputMaybe<SubscriptionInstance_BudgetCategoryInput>;
   cancellationReason?: InputMaybe<Scalars['String']['input']>;
   cancelledSince?: InputMaybe<Scalars['DateTime']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   currentBillingCycleStart?: InputMaybe<Scalars['DateTime']['input']>;
+  currentCycleOverage?: InputMaybe<Scalars['Amount_Money']['input']>;
   customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
   customerId?: InputMaybe<Scalars['PHID']['input']>;
   customerName?: InputMaybe<Scalars['String']['input']>;
   customerType?: InputMaybe<SubscriptionInstance_CustomerType>;
+  debtLineItems?: InputMaybe<Array<InputMaybe<SubscriptionInstance_DebtLineItemInput>>>;
   expiringSince?: InputMaybe<Scalars['DateTime']['input']>;
   globalCurrency?: InputMaybe<Scalars['Currency']['input']>;
   nextBillingDate?: InputMaybe<Scalars['DateTime']['input']>;
   operatorId?: InputMaybe<Scalars['PHID']['input']>;
   operatorNotes?: InputMaybe<Scalars['String']['input']>;
   pausedSince?: InputMaybe<Scalars['DateTime']['input']>;
-  renewalDate?: InputMaybe<Scalars['DateTime']['input']>;
   resource?: InputMaybe<SubscriptionInstance_ResourceDocumentInput>;
   selectedBillingCycle?: InputMaybe<SubscriptionInstance_BillingCycle>;
   serviceGroups?: InputMaybe<Array<InputMaybe<SubscriptionInstance_ServiceGroupInput>>>;
@@ -17800,6 +18407,7 @@ export type SubscriptionInstance_UpdateMetricUsageInput = {
   currentUsage: Scalars['Int']['input'];
   isAdjustment?: InputMaybe<Scalars['Boolean']['input']>;
   metricId: Scalars['OID']['input'];
+  newSliceId: Scalars['OID']['input'];
   serviceId: Scalars['OID']['input'];
 };
 
@@ -17852,6 +18460,424 @@ export type SubscriptionInstance_ViewFilterInput = {
   scopes?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type SubscriptionInvoice = IDocument & {
+  __typename?: 'SubscriptionInvoice';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  initialState: SubscriptionInvoice_SubscriptionInvoiceState;
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  operations: Array<Operation>;
+  revision: Scalars['Int']['output'];
+  state: SubscriptionInvoice_SubscriptionInvoiceState;
+  stateJSON?: Maybe<Scalars['JSONObject']['output']>;
+};
+
+
+export type SubscriptionInvoiceOperationsArgs = {
+  first?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/**
+ * Mutation result type for SubscriptionInvoice operations with typed state.
+ * Matches ReactorSubgraph PHDocument pattern with revisionsList.
+ */
+export type SubscriptionInvoiceMutationResult = {
+  __typename?: 'SubscriptionInvoiceMutationResult';
+  createdAtUtcIso: Scalars['DateTime']['output'];
+  documentType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  lastModifiedAtUtcIso: Scalars['DateTime']['output'];
+  name: Scalars['String']['output'];
+  preferredEditor?: Maybe<Scalars['String']['output']>;
+  revisionsList: Array<Revision>;
+  slug?: Maybe<Scalars['String']['output']>;
+  state: SubscriptionInvoice_FullState;
+};
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutations = {
+  __typename?: 'SubscriptionInvoiceMutations';
+  createDocument: SubscriptionInvoiceMutationResult;
+  createEmptyDocument: SubscriptionInvoiceMutationResult;
+  initializeSubscriptionInvoice: SubscriptionInvoiceMutationResult;
+  initializeSubscriptionInvoiceAsync: Scalars['String']['output'];
+  markSubscriptionInvoiceIssued: SubscriptionInvoiceMutationResult;
+  markSubscriptionInvoiceIssuedAsync: Scalars['String']['output'];
+  markSubscriptionInvoicePaid: SubscriptionInvoiceMutationResult;
+  markSubscriptionInvoicePaidAsync: Scalars['String']['output'];
+  setSubscriptionInvoiceNotes: SubscriptionInvoiceMutationResult;
+  setSubscriptionInvoiceNotesAsync: Scalars['String']['output'];
+  setSubscriptionInvoiceStripeId: SubscriptionInvoiceMutationResult;
+  setSubscriptionInvoiceStripeIdAsync: Scalars['String']['output'];
+  voidSubscriptionInvoice: SubscriptionInvoiceMutationResult;
+  voidSubscriptionInvoiceAsync: Scalars['String']['output'];
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsCreateDocumentArgs = {
+  initialState?: InputMaybe<SubscriptionInvoice_InitialStateInput>;
+  name: Scalars['String']['input'];
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+  preferredEditor?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsCreateEmptyDocumentArgs = {
+  parentIdentifier?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsInitializeSubscriptionInvoiceArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_InitializeSubscriptionInvoiceInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsInitializeSubscriptionInvoiceAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_InitializeSubscriptionInvoiceInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsMarkSubscriptionInvoiceIssuedArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_MarkSubscriptionInvoiceIssuedInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsMarkSubscriptionInvoiceIssuedAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_MarkSubscriptionInvoiceIssuedInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsMarkSubscriptionInvoicePaidArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_MarkSubscriptionInvoicePaidInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsMarkSubscriptionInvoicePaidAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_MarkSubscriptionInvoicePaidInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsSetSubscriptionInvoiceNotesArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_SetSubscriptionInvoiceNotesInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsSetSubscriptionInvoiceNotesAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_SetSubscriptionInvoiceNotesInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsSetSubscriptionInvoiceStripeIdArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_SetSubscriptionInvoiceStripeIdInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsSetSubscriptionInvoiceStripeIdAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_SetSubscriptionInvoiceStripeIdInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsVoidSubscriptionInvoiceArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_VoidSubscriptionInvoiceInput;
+};
+
+
+/** Mutations: SubscriptionInvoice */
+export type SubscriptionInvoiceMutationsVoidSubscriptionInvoiceAsyncArgs = {
+  docId: Scalars['PHID']['input'];
+  input: SubscriptionInvoice_VoidSubscriptionInvoiceInput;
+};
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueries = {
+  __typename?: 'SubscriptionInvoiceQueries';
+  /** Get a specific SubscriptionInvoice document by identifier */
+  document?: Maybe<SubscriptionInvoice_DocumentWithChildren>;
+  /** Get incoming relationships to a SubscriptionInvoice document */
+  documentIncomingRelationships: SubscriptionInvoice_DocumentResultPage;
+  /** Get outgoing relationships of a SubscriptionInvoice document */
+  documentOutgoingRelationships: SubscriptionInvoice_DocumentResultPage;
+  /** Get all SubscriptionInvoice documents (paged) */
+  documents: SubscriptionInvoice_DocumentResultPage;
+  /** Find SubscriptionInvoice documents by search criteria */
+  findDocuments: SubscriptionInvoice_DocumentResultPage;
+};
+
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueriesDocumentArgs = {
+  identifier: Scalars['String']['input'];
+  view?: InputMaybe<SubscriptionInvoice_ViewFilterInput>;
+};
+
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueriesDocumentIncomingRelationshipsArgs = {
+  paging?: InputMaybe<SubscriptionInvoice_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  targetIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<SubscriptionInvoice_ViewFilterInput>;
+};
+
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueriesDocumentOutgoingRelationshipsArgs = {
+  paging?: InputMaybe<SubscriptionInvoice_PagingInput>;
+  relationshipType: Scalars['String']['input'];
+  sourceIdentifier: Scalars['String']['input'];
+  view?: InputMaybe<SubscriptionInvoice_ViewFilterInput>;
+};
+
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueriesDocumentsArgs = {
+  paging?: InputMaybe<SubscriptionInvoice_PagingInput>;
+};
+
+
+/** Queries: SubscriptionInvoice Document */
+export type SubscriptionInvoiceQueriesFindDocumentsArgs = {
+  paging?: InputMaybe<SubscriptionInvoice_PagingInput>;
+  search?: InputMaybe<SubscriptionInvoice_SearchFilterInput>;
+  view?: InputMaybe<SubscriptionInvoice_ViewFilterInput>;
+};
+
+/** Paginated result type for SubscriptionInvoice documents */
+export type SubscriptionInvoice_DocumentResultPage = {
+  __typename?: 'SubscriptionInvoice_DocumentResultPage';
+  cursor?: Maybe<Scalars['String']['output']>;
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  items: Array<SubscriptionInvoiceMutationResult>;
+  totalCount: Scalars['Int']['output'];
+};
+
+/** Document with children for SubscriptionInvoice */
+export type SubscriptionInvoice_DocumentWithChildren = {
+  __typename?: 'SubscriptionInvoice_DocumentWithChildren';
+  childIds: Array<Scalars['String']['output']>;
+  document: SubscriptionInvoiceMutationResult;
+};
+
+/** Full state with all scopes for SubscriptionInvoice */
+export type SubscriptionInvoice_FullState = {
+  __typename?: 'SubscriptionInvoice_FullState';
+  auth: Scalars['JSONObject']['output'];
+  document: SubscriptionInvoice_PhDocumentScopeState;
+  global: SubscriptionInvoice_SubscriptionInvoiceState;
+  local: Scalars['JSONObject']['output'];
+};
+
+export type SubscriptionInvoice_InitialStateInput = {
+  global?: InputMaybe<SubscriptionInvoice_SubscriptionInvoiceStateInput>;
+  local?: InputMaybe<Scalars['JSONObject']['input']>;
+};
+
+/** Module: Invoice */
+export type SubscriptionInvoice_InitializeSubscriptionInvoiceInput = {
+  billingCycle?: InputMaybe<SubscriptionInvoice_SubscriptionInvoiceBillingCycle>;
+  creditApplied: Scalars['Amount_Money']['input'];
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
+  customerId?: InputMaybe<Scalars['PHID']['input']>;
+  customerName?: InputMaybe<Scalars['String']['input']>;
+  cycleEnd?: InputMaybe<Scalars['DateTime']['input']>;
+  cycleStart?: InputMaybe<Scalars['DateTime']['input']>;
+  dueDate?: InputMaybe<Scalars['DateTime']['input']>;
+  invoiceNumber?: InputMaybe<Scalars['String']['input']>;
+  lineItems: Array<SubscriptionInvoice_SubscriptionInvoiceLineItemInput>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  sourceSubscriptionId?: InputMaybe<Scalars['PHID']['input']>;
+  sourceSubscriptionName?: InputMaybe<Scalars['String']['input']>;
+  subtotal: Scalars['Amount_Money']['input'];
+  totalDue: Scalars['Amount_Money']['input'];
+  totalPaid: Scalars['Amount_Money']['input'];
+};
+
+export type SubscriptionInvoice_MarkSubscriptionInvoiceIssuedInput = {
+  issuedAt: Scalars['DateTime']['input'];
+};
+
+export type SubscriptionInvoice_MarkSubscriptionInvoicePaidInput = {
+  paidAmount: Scalars['Amount_Money']['input'];
+  paidAt: Scalars['DateTime']['input'];
+};
+
+/** Document scope state (same for all document types) */
+export type SubscriptionInvoice_PhDocumentScopeState = {
+  __typename?: 'SubscriptionInvoice_PHDocumentScopeState';
+  deletedAtUtcIso?: Maybe<Scalars['String']['output']>;
+  deletedBy?: Maybe<Scalars['String']['output']>;
+  deletionReason?: Maybe<Scalars['String']['output']>;
+  hash: SubscriptionInvoice_PhHashConfig;
+  isDeleted?: Maybe<Scalars['Boolean']['output']>;
+  version: Scalars['Int']['output'];
+};
+
+/** Hash configuration for document state */
+export type SubscriptionInvoice_PhHashConfig = {
+  __typename?: 'SubscriptionInvoice_PHHashConfig';
+  algorithm: Scalars['String']['output'];
+  encoding: Scalars['String']['output'];
+};
+
+export type SubscriptionInvoice_PagingInput = {
+  cursor?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type SubscriptionInvoice_SearchFilterInput = {
+  identifiers?: InputMaybe<Array<Scalars['String']['input']>>;
+  parentId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubscriptionInvoice_SetSubscriptionInvoiceNotesInput = {
+  notes?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubscriptionInvoice_SetSubscriptionInvoiceStripeIdInput = {
+  stripeInvoiceId: Scalars['String']['input'];
+};
+
+export enum SubscriptionInvoice_SubscriptionInvoiceBillingCycle {
+  Annual = 'ANNUAL',
+  Monthly = 'MONTHLY',
+  OneTime = 'ONE_TIME',
+  Quarterly = 'QUARTERLY',
+  SemiAnnual = 'SEMI_ANNUAL'
+}
+
+export type SubscriptionInvoice_SubscriptionInvoiceLineItem = {
+  __typename?: 'SubscriptionInvoice_SubscriptionInvoiceLineItem';
+  amountDue: Scalars['Amount_Money']['output'];
+  chargedAt: Scalars['DateTime']['output'];
+  creditApplied: Scalars['Amount_Money']['output'];
+  currency: Scalars['Currency']['output'];
+  debitAmount: Scalars['Amount_Money']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['OID']['output'];
+  origin: SubscriptionInvoice_SubscriptionInvoiceLineItemOrigin;
+  settledAmount: Scalars['Amount_Money']['output'];
+  sliceId: Scalars['OID']['output'];
+  sourceName?: Maybe<Scalars['String']['output']>;
+};
+
+export type SubscriptionInvoice_SubscriptionInvoiceLineItemInput = {
+  amountDue: Scalars['Amount_Money']['input'];
+  chargedAt: Scalars['DateTime']['input'];
+  creditApplied: Scalars['Amount_Money']['input'];
+  currency: Scalars['Currency']['input'];
+  debitAmount: Scalars['Amount_Money']['input'];
+  description: Scalars['String']['input'];
+  id: Scalars['OID']['input'];
+  origin: SubscriptionInvoice_SubscriptionInvoiceLineItemOrigin;
+  settledAmount: Scalars['Amount_Money']['input'];
+  sliceId: Scalars['OID']['input'];
+  sourceName?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum SubscriptionInvoice_SubscriptionInvoiceLineItemOrigin {
+  Dynamic = 'DYNAMIC',
+  EstimatedUsage = 'ESTIMATED_USAGE',
+  Reconciliation = 'RECONCILIATION',
+  Setup = 'SETUP',
+  SubscriptionFee = 'SUBSCRIPTION_FEE'
+}
+
+export type SubscriptionInvoice_SubscriptionInvoiceState = {
+  __typename?: 'SubscriptionInvoice_SubscriptionInvoiceState';
+  billingCycle?: Maybe<SubscriptionInvoice_SubscriptionInvoiceBillingCycle>;
+  creditApplied: Scalars['Amount_Money']['output'];
+  currency?: Maybe<Scalars['Currency']['output']>;
+  customerEmail?: Maybe<Scalars['EmailAddress']['output']>;
+  customerId?: Maybe<Scalars['PHID']['output']>;
+  customerName?: Maybe<Scalars['String']['output']>;
+  cycleEnd?: Maybe<Scalars['DateTime']['output']>;
+  cycleStart?: Maybe<Scalars['DateTime']['output']>;
+  dueDate?: Maybe<Scalars['DateTime']['output']>;
+  invoiceNumber?: Maybe<Scalars['String']['output']>;
+  issuedAt?: Maybe<Scalars['DateTime']['output']>;
+  lineItems: Array<SubscriptionInvoice_SubscriptionInvoiceLineItem>;
+  notes?: Maybe<Scalars['String']['output']>;
+  sourceSubscriptionId?: Maybe<Scalars['PHID']['output']>;
+  sourceSubscriptionName?: Maybe<Scalars['String']['output']>;
+  status: SubscriptionInvoice_SubscriptionInvoiceStatus;
+  stripeInvoiceId?: Maybe<Scalars['String']['output']>;
+  subtotal: Scalars['Amount_Money']['output'];
+  totalDue: Scalars['Amount_Money']['output'];
+  totalPaid: Scalars['Amount_Money']['output'];
+};
+
+/** Input Types for Initial State */
+export type SubscriptionInvoice_SubscriptionInvoiceStateInput = {
+  billingCycle?: InputMaybe<SubscriptionInvoice_SubscriptionInvoiceBillingCycle>;
+  creditApplied?: InputMaybe<Scalars['Amount_Money']['input']>;
+  currency?: InputMaybe<Scalars['Currency']['input']>;
+  customerEmail?: InputMaybe<Scalars['EmailAddress']['input']>;
+  customerId?: InputMaybe<Scalars['PHID']['input']>;
+  customerName?: InputMaybe<Scalars['String']['input']>;
+  cycleEnd?: InputMaybe<Scalars['DateTime']['input']>;
+  cycleStart?: InputMaybe<Scalars['DateTime']['input']>;
+  dueDate?: InputMaybe<Scalars['DateTime']['input']>;
+  invoiceNumber?: InputMaybe<Scalars['String']['input']>;
+  issuedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  lineItems?: InputMaybe<Array<InputMaybe<SubscriptionInvoice_SubscriptionInvoiceLineItemInput>>>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+  sourceSubscriptionId?: InputMaybe<Scalars['PHID']['input']>;
+  sourceSubscriptionName?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<SubscriptionInvoice_SubscriptionInvoiceStatus>;
+  stripeInvoiceId?: InputMaybe<Scalars['String']['input']>;
+  subtotal?: InputMaybe<Scalars['Amount_Money']['input']>;
+  totalDue?: InputMaybe<Scalars['Amount_Money']['input']>;
+  totalPaid?: InputMaybe<Scalars['Amount_Money']['input']>;
+};
+
+export enum SubscriptionInvoice_SubscriptionInvoiceStatus {
+  Draft = 'DRAFT',
+  Issued = 'ISSUED',
+  Paid = 'PAID',
+  Void = 'VOID'
+}
+
+export type SubscriptionInvoice_ViewFilterInput = {
+  branch?: InputMaybe<Scalars['String']['input']>;
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type SubscriptionInvoice_VoidSubscriptionInvoiceInput = {
+  reason?: InputMaybe<Scalars['String']['input']>;
+  voidedAt: Scalars['DateTime']['input'];
+};
+
 export type SyncEnvelope = {
   __typename?: 'SyncEnvelope';
   channelMeta: ChannelMeta;
@@ -17879,6 +18905,7 @@ export enum SyncEnvelopeType {
 export type SystemInfo = {
   __typename?: 'SystemInfo';
   gitHash: Scalars['String']['output'];
+  gitUrl?: Maybe<Scalars['String']['output']>;
   version: Scalars['String']['output'];
 };
 
@@ -17915,6 +18942,11 @@ export type UploadInvoicePdfChunkOutput = {
   error?: Maybe<Scalars['String']['output']>;
   success: Scalars['Boolean']['output'];
 };
+
+export enum UserRole {
+  Builder = 'BUILDER',
+  Operator = 'OPERATOR'
+}
 
 export type UserSelectionInput = {
   addonBillingCycleOverrides?: InputMaybe<Array<BillingCycleOverrideInput>>;
@@ -18211,9 +19243,12 @@ export type VetraPackage_AddPackageKeywordInput = {
   label: Scalars['String']['input'];
 };
 
+/** VetraPackage_Author/maintainer of the Vetra Package. */
 export type VetraPackage_Author = {
   __typename?: 'VetraPackage_Author';
+  /** Display name of the author or organization. */
   name?: Maybe<Scalars['String']['output']>;
+  /** VetraPackage_Author's website URL. */
   website?: Maybe<Scalars['URL']['output']>;
 };
 
@@ -18253,9 +19288,12 @@ export type VetraPackage_InitialStateInput = {
   local?: InputMaybe<Scalars['JSONObject']['input']>;
 };
 
+/** A single search keyword attached to the package. */
 export type VetraPackage_Keyword = {
   __typename?: 'VetraPackage_Keyword';
+  /** Stable identifier for the keyword entry used to remove it. */
   id: Scalars['OID']['output'];
+  /** Display label for the keyword (e.g. 'invoicing', 'defi'). */
   label: Scalars['String']['output'];
 };
 
@@ -18331,14 +19369,26 @@ export type VetraPackage_SetPackageNpmUrlInput = {
   url: Scalars['URL']['input'];
 };
 
+/**
+ * Package metadata used to publish a Vetra Reactor Package to npm and surface
+ * it inside Connect/Switchboard. All fields are optional so a package can be
+ * created empty and filled in incrementally during development.
+ */
 export type VetraPackage_VetraPackageState = {
   __typename?: 'VetraPackage_VetraPackageState';
+  /** VetraPackage_Author/maintainer information surfaced in the published package metadata. */
   author: VetraPackage_Author;
+  /** Free-form category label used to group packages in directories (e.g. 'Finance', 'Productivity'). */
   category?: Maybe<Scalars['String']['output']>;
+  /** One-paragraph summary of what the package provides. Shown on package listing pages. */
   description?: Maybe<Scalars['String']['output']>;
+  /** Public source code URL (typically a GitHub repository). */
   githubUrl?: Maybe<Scalars['URL']['output']>;
+  /** Search keywords associated with the package. Each keyword has a stable id so it can be removed individually. */
   keywords: Array<VetraPackage_Keyword>;
+  /** Human-readable package name (e.g. 'Pizza Plaza'). Distinct from the npm package id. */
   name?: Maybe<Scalars['String']['output']>;
+  /** Published npm package URL. Set once the package has been released. */
   npmUrl?: Maybe<Scalars['URL']['output']>;
 };
 
@@ -18986,12 +20036,26 @@ export type BudgetStatementExpenseReportSummaryFieldsFragment = { __typename?: '
 
 export type ExpenseReportWalletSummaryFieldsFragment = { __typename?: 'ExpenseReportWallet', name?: string | null, address?: any | null, totals: Array<{ __typename?: 'ExpenseReportGroupTotals', groupLabel: string, totalActuals: any, totalForecast: any, totalPayments: any }> };
 
+export type GetBuilderDrivesQueryVariables = Exact<{
+  filter: GetBuilderDrivesFilter;
+}>;
+
+
+export type GetBuilderDrivesQuery = { __typename?: 'Query', getBuilderDrives: Array<{ __typename?: 'BuilderDriveLink', driveId: any, driveLink: any, driveName: string, driveSlug: string }> };
+
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
 }>;
 
 
 export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, icon?: string | null, logo?: string | null, darkThemeIcon?: string | null, darkThemeLogo?: string | null, category?: Array<NetworkCategory> | null, description?: string | null, discord?: string | null, github?: string | null, logoBig?: string | null, website?: string | null, x?: string | null, youtube?: string | null } | null }> };
+
+export type CreateUserDriveMutationVariables = Exact<{
+  input: CreateUserDriveInput;
+}>;
+
+
+export type CreateUserDriveMutation = { __typename?: 'Mutation', createUserDrive?: { __typename?: 'CreateUserDriveOutput', errors: Array<string>, success: boolean, data?: { __typename?: 'CreateUserDriveData', drives: Array<{ __typename?: 'BuilderDriveLink', driveId: any, driveLink: any, driveName: string, driveSlug: string }> } | null } | null };
 
 export type OperatorProfileQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
@@ -19911,6 +20975,56 @@ useSuspenseBudgetStatementsQuery.getKey = (variables?: BudgetStatementsQueryVari
 
 useBudgetStatementsQuery.fetcher = (variables?: BudgetStatementsQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<BudgetStatementsQuery, BudgetStatementsQueryVariables>(BudgetStatementsDocument, variables, options);
 
+export const GetBuilderDrivesDocument = `
+    query GetBuilderDrives($filter: GetBuilderDrivesFilter!) {
+  getBuilderDrives(filter: $filter) {
+    driveId
+    driveLink
+    driveName
+    driveSlug
+  }
+}
+    `;
+
+export const useGetBuilderDrivesQuery = <
+      TData = GetBuilderDrivesQuery,
+      TError = unknown
+    >(
+      variables: GetBuilderDrivesQueryVariables,
+      options?: Omit<UseQueryOptions<GetBuilderDrivesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetBuilderDrivesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetBuilderDrivesQuery, TError, TData>(
+      {
+    queryKey: ['GetBuilderDrives', variables],
+    queryFn: switchboardFetcher<GetBuilderDrivesQuery, GetBuilderDrivesQueryVariables>(GetBuilderDrivesDocument, variables),
+    ...options
+  }
+    )};
+
+useGetBuilderDrivesQuery.getKey = (variables: GetBuilderDrivesQueryVariables) => ['GetBuilderDrives', variables];
+
+export const useSuspenseGetBuilderDrivesQuery = <
+      TData = GetBuilderDrivesQuery,
+      TError = unknown
+    >(
+      variables: GetBuilderDrivesQueryVariables,
+      options?: Omit<UseSuspenseQueryOptions<GetBuilderDrivesQuery, TError, TData>, 'queryKey'> & { queryKey?: UseSuspenseQueryOptions<GetBuilderDrivesQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useSuspenseQuery<GetBuilderDrivesQuery, TError, TData>(
+      {
+    queryKey: ['GetBuilderDrivesSuspense', variables],
+    queryFn: switchboardFetcher<GetBuilderDrivesQuery, GetBuilderDrivesQueryVariables>(GetBuilderDrivesDocument, variables),
+    ...options
+  }
+    )};
+
+useSuspenseGetBuilderDrivesQuery.getKey = (variables: GetBuilderDrivesQueryVariables) => ['GetBuilderDrivesSuspense', variables];
+
+
+useGetBuilderDrivesQuery.fetcher = (variables: GetBuilderDrivesQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<GetBuilderDrivesQuery, GetBuilderDrivesQueryVariables>(GetBuilderDrivesDocument, variables, options);
+
 export const AllNetworksDocument = `
     query AllNetworks($filter: networkFilter) {
   allNetworks(filter: $filter) {
@@ -19972,6 +21086,39 @@ useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => 
 
 
 useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
+
+export const CreateUserDriveDocument = `
+    mutation CreateUserDrive($input: CreateUserDriveInput!) {
+  createUserDrive(input: $input) {
+    data {
+      drives {
+        driveId
+        driveLink
+        driveName
+        driveSlug
+      }
+    }
+    errors
+    success
+  }
+}
+    `;
+
+export const useCreateUserDriveMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateUserDriveMutation, TError, CreateUserDriveMutationVariables, TContext>) => {
+    
+    return useMutation<CreateUserDriveMutation, TError, CreateUserDriveMutationVariables, TContext>(
+      {
+    mutationKey: ['CreateUserDrive'],
+    mutationFn: (variables?: CreateUserDriveMutationVariables) => switchboardFetcher<CreateUserDriveMutation, CreateUserDriveMutationVariables>(CreateUserDriveDocument, variables)(),
+    ...options
+  }
+    )};
+
+
+useCreateUserDriveMutation.fetcher = (variables: CreateUserDriveMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateUserDriveMutation, CreateUserDriveMutationVariables>(CreateUserDriveDocument, variables, options);
 
 export const OperatorProfileDocument = `
     query OperatorProfile($filter: buildersFilter) {

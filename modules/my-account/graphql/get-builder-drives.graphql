@@ -1,0 +1,8 @@
+query GetBuilderDrives($filter: GetBuilderDrivesFilter!) {
+  getBuilderDrives(filter: $filter) {
+    driveId
+    driveLink
+    driveName
+    driveSlug
+  }
+}

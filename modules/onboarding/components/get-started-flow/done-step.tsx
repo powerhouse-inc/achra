@@ -2,10 +2,15 @@
 
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
+import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
-function DoneStep() {
+interface DoneStepProps {
+  drive: BuilderDriveLink | null
+}
+
+function DoneStep({ drive }: DoneStepProps) {
   return (
     <Card>
       <CardContent className="flex flex-col items-center gap-5 px-8 py-12 text-center">
@@ -20,7 +25,15 @@ function DoneStep() {
           <Button variant="outline" className="w-full min-w-0" asChild>
             <Link href="/my-account">My Account</Link>
           </Button>
-          <Button className="w-full min-w-0">Explore my Drive</Button>
+          <Button className="w-full min-w-0" asChild disabled={!drive}>
+            {drive ? (
+              <a href={drive.driveLink as string} target="_blank" rel="noopener noreferrer">
+                Explore my Drive
+              </a>
+            ) : (
+              <span aria-disabled="true">Explore my Drive</span>
+            )}
+          </Button>
         </div>
       </CardContent>
     </Card>

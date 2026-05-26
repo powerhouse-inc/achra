@@ -5,7 +5,6 @@ export const stepOneSchema = z.object({
   personaId: z.enum(PERSONA_IDS).refine((value) => value !== 'organization', {
     message: 'Running a network is coming in Phase 2. Pick Operator or Builder for now.',
   }),
-  email: z.email({ message: 'Please enter a valid email address.' }),
   displayName: z
     .string()
     .trim()

@@ -31,6 +31,11 @@ const meta = {
       control: 'text',
       description: 'The URL to navigate to',
     },
+    variant: {
+      control: 'select',
+      options: ['default', 'primary'],
+      description: 'The visual style of the link',
+    },
   },
 } satisfies Meta<typeof ConnectLink>
 
@@ -44,6 +49,17 @@ export const Default: Story = {
     driveName: 'Network Drive',
     action: 'open',
     disabled: false,
+    variant: 'default',
+  },
+}
+
+export const Primary: Story = {
+  args: {
+    href: 'https://connect.example.com/drive/123',
+    driveName: 'Network Drive',
+    action: 'open',
+    disabled: false,
+    variant: 'primary',
   },
 }
 

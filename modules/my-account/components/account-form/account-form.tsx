@@ -2,7 +2,13 @@ import { CalendarIcon } from 'lucide-react'
 import { LANGUAGE_OPTIONS } from '@/modules/my-account/lib/constants'
 import { Button } from '@/shared/components/ui/button'
 import { Calendar } from '@/shared/components/ui/calendar'
-import { Card, CardContent } from '@/shared/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/ui/card'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/shared/components/ui/field'
 import { Input } from '@/shared/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
@@ -17,6 +23,10 @@ import {
 function AccountForm() {
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>Account</CardTitle>
+        <CardDescription>Your name, date of birth, and dashboard language.</CardDescription>
+      </CardHeader>
       <CardContent>
         <FieldGroup>
           <Field>

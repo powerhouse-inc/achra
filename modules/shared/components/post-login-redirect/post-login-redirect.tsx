@@ -3,7 +3,7 @@
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useHasDrive } from '@/modules/shared/hooks/use-has-drive'
+import { useHasDrive } from '@/modules/my-account/hooks/use-has-drive'
 import type { Route } from 'next'
 
 // Matches `/services/[serviceSlug]/purchase` so we don't yank the user
@@ -33,7 +33,7 @@ function PostLoginRedirect() {
     if (hasDriveQuery.isPending) return
     handled.current = true
     if (isServicePurchasePath(pathname)) return
-    if (hasDriveQuery.data === true) return
+    if (hasDriveQuery.data) return
     router.replace('/get-started' as Route)
   }, [
     arrivedFromRenown,

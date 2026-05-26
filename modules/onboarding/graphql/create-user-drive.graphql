@@ -1,0 +1,14 @@
+mutation CreateUserDrive($input: CreateUserDriveInput!) {
+  createUserDrive(input: $input) {
+    data {
+      drives {
+        driveId
+        driveLink
+        driveName
+        driveSlug
+      }
+    }
+    errors
+    success
+  }
+}

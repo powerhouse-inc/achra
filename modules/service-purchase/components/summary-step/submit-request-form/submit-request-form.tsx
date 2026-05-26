@@ -63,10 +63,14 @@ function SubmitRequestForm() {
     return <LoginPrompt onLogin={auth.login} />
   }
 
-  return <RequestForm />
+  return <RequestForm ethereumAddress={auth.address} />
 }
 
-function RequestForm() {
+interface RequestFormProps {
+  ethereumAddress: string
+}
+
+function RequestForm({ ethereumAddress }: RequestFormProps) {
   const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
   const { setRequestEntityData } = useServicePurchaseActions()
   const service = useServiceOffering()
@@ -98,6 +102,7 @@ function RequestForm() {
   function onSubmit(data: SubmitRequestFormValues) {
     const formData = new FormData()
     formData.append('serviceOfferingId', service.id)
+    formData.append('ethereumAddress', ethereumAddress)
     formData.append('name', data.name)
     formData.append('teamName', data.teamName)
     formData.append('email', data.email)

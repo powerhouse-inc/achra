@@ -5,6 +5,9 @@ import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { ArrowRight, Check, Loader2 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
+import { useHasDrive } from '@/modules/my-account/hooks/use-has-drive'
+import { type SpinUpPersonaId, useSpinUpDrive } from '@/modules/onboarding/hooks/use-spin-up-drive'
 import { type PersonaId, PERSONAS } from '@/modules/onboarding/lib/personas'
 import { stepOneSchema, type StepOneValues } from '@/modules/onboarding/lib/schemas'
 import { Button } from '@/modules/shared/components/ui/button'
@@ -20,10 +23,10 @@ import {
 } from '@/modules/shared/components/ui/form'
 import { Input } from '@/modules/shared/components/ui/input'
 import { Progress } from '@/modules/shared/components/ui/progress'
-import { useHasDrive } from '@/modules/shared/hooks/use-has-drive'
 import { cn } from '@/modules/shared/lib/utils'
 import { AlreadyCompletedCard } from './already-completed-card'
 import { DoneStep } from './done-step'
+import { DriveCheckErrorCard } from './drive-check-error-card'
 import { LoginRequiredCard } from './login-required-card'
 import { PersonaCard } from './persona-card'
 import { SpinUpStep } from './spin-up-step'
@@ -56,7 +59,11 @@ function GetStartedFlow() {
     return <FullPageSpinner />
   }
 
-  if (hasDriveQuery.data === true) {
+  if (hasDriveQuery.isError) {
+    return <DriveCheckErrorCard onRetry={() => void hasDriveQuery.refetch()} />
+  }
+
+  if (hasDriveQuery.data) {
     return <AlreadyCompletedCard />
   }
 
@@ -74,12 +81,12 @@ function FullPageSpinner() {
 function OnboardingSteps() {
   const auth = useRenownAuth()
   const [step, setStep] = useState<Step>(1)
+  const [createdDrive, setCreatedDrive] = useState<BuilderDriveLink | null>(null)
 
   const form = useForm<StepOneValues>({
     resolver: zodResolver(stepOneSchema),
     defaultValues: {
       personaId: undefined as unknown as PersonaId,
-      email: '',
       displayName: '',
     },
     mode: 'onTouched',
@@ -99,15 +106,37 @@ function OnboardingSteps() {
   const selectedPersonaId = watched.personaId
   const isFormValid = stepOneSchema.safeParse(watched).success
 
-  const goToDone = useCallback(() => {
-    setStep(3)
+  const { mutate: spinUpMutate, isError: spinUpFailed, error: spinUpError } = useSpinUpDrive()
+
+  // Triggered by the Continue button (and the retry button) — an event handler,
+  // not a mount effect — so React Strict Mode can't double-invoke it into two
+  // drives. Step transitions live in the mutation's `onSuccess` callback.
+  const submitSpinUp = useCallback(() => {
+    // `personaId` is narrowed at the schema boundary: stepOneSchema rejects
+    // 'organization', so by submit time it must be a SpinUpPersonaId.
+    const personaId = form.getValues('personaId') as SpinUpPersonaId
+    const name = form.getValues('displayName')
+    setStep(2)
+    spinUpMutate(
+      { personaId, name },
+      {
+        onSuccess: (drive) => {
+          setCreatedDrive(drive)
+          setStep(3)
+        },
+      },
+    )
+  }, [form, spinUpMutate])
+
+  const handleBackToStepOne = useCallback(() => {
+    setStep(1)
   }, [])
 
   if (step === 3) {
     return (
       <div className="flex flex-col gap-6">
         <OnboardingProgress step={3} estimate={STEP_ESTIMATES[2]} />
-        <DoneStep />
+        <DoneStep drive={createdDrive} />
       </div>
     )
   }
@@ -116,7 +145,12 @@ function OnboardingSteps() {
     return (
       <div className="flex flex-col gap-6">
         <OnboardingProgress step={2} estimate={STEP_ESTIMATES[1]} />
-        <SpinUpStep onSuccess={goToDone} />
+        <SpinUpStep
+          isError={spinUpFailed}
+          error={spinUpError}
+          onRetry={submitSpinUp}
+          onBack={handleBackToStepOne}
+        />
       </div>
     )
   }
@@ -126,7 +160,7 @@ function OnboardingSteps() {
   }
 
   function onSubmit() {
-    setStep(2)
+    submitSpinUp()
   }
 
   return (
@@ -182,49 +216,27 @@ function OnboardingSteps() {
                 )}
               />
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="email"
-                          placeholder="you@example.com"
-                          autoComplete="email"
-                        />
-                      </FormControl>
-                      <FormDescription>We&apos;ll send your drive link here.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="displayName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Display name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="text"
-                          placeholder="e.g. alex.eth"
-                          autoComplete="nickname"
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Shown on your drive and any offerings. Editable later.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="displayName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Display name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        placeholder="e.g. alex.eth"
+                        autoComplete="nickname"
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Shown on your drive and any offerings. Editable later.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             <div className="bg-muted/40 border-border flex flex-col items-stretch gap-4 border-t px-8 py-5 sm:flex-row sm:items-center sm:justify-between">
