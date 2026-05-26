@@ -2,9 +2,9 @@
 
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
-import { useUserDrives } from '@/modules/my-account/hooks/use-user-drives'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
 
 function AlreadyCompletedCard() {
   const { data: drives } = useUserDrives()

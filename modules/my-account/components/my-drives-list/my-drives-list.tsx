@@ -3,7 +3,7 @@
 import { MyDrivesListEmpty } from '@/modules/my-account/components/my-drives-list/my-drives-list-empty'
 import { MyDrivesListError } from '@/modules/my-account/components/my-drives-list/my-drives-list-error'
 import { MyDrivesListSkeleton } from '@/modules/my-account/components/my-drives-list/my-drives-list-skeleton'
-import { useUserDrives } from '@/modules/my-account/hooks/use-user-drives'
+import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
 import { ConnectLink } from '@/shared/components/connect-link/connect-link'
 import {
   Card,

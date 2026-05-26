@@ -33,9 +33,15 @@ import { Input } from '@/modules/shared/components/ui/input'
 
 interface RequestFormProps {
   ethereumAddress: string
+  defaultName?: string
+  defaultTeamName?: string
 }
 
-function RequestForm({ ethereumAddress }: RequestFormProps) {
+function RequestForm({
+  ethereumAddress,
+  defaultName = '',
+  defaultTeamName = '',
+}: RequestFormProps) {
   const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
   const { setRequestEntityData } = useServicePurchaseActions()
   const service = useServiceOffering()
@@ -48,6 +54,11 @@ function RequestForm({ ethereumAddress }: RequestFormProps) {
     mode: 'onChange',
     defaultValues: formDefaultValues,
   })
+
+  const { reset } = form
+  useEffect(() => {
+    reset({ name: defaultName, teamName: defaultTeamName, email: '' }, { keepDirtyValues: true })
+  }, [reset, defaultName, defaultTeamName])
 
   useEffect(() => {
     if (state.success) {
