@@ -6,11 +6,20 @@ import { useEffect, useRef, useState } from 'react'
 import { useHasDrive } from '@/modules/my-account/hooks/use-has-drive'
 import type { Route } from 'next'
 
-// Matches `/services/[serviceSlug]/purchase` so we don't yank the user
-// out of an in-progress service purchase flow after they log in.
-function isServicePurchasePath(pathname: string): boolean {
+// Paths where we keep the user where they are after login instead of sending
+// them to onboarding — they either arrived intentionally (account pages) or are
+// mid-flow (service purchase). Add new exempt routes here.
+function isRedirectExemptPath(pathname: string): boolean {
   const segments = pathname.split('/')
-  return segments[1] === 'services' && segments[3] === 'purchase'
+  const section = segments[1]
+
+  // `/my-account` and its sub-routes (e.g. login via the account AuthGuard).
+  if (section === 'my-account') return true
+
+  // `/services/[serviceSlug]/purchase` — an in-progress purchase flow.
+  if (section === 'services' && segments[3] === 'purchase') return true
+
+  return false
 }
 
 function PostLoginRedirect() {
@@ -32,7 +41,7 @@ function PostLoginRedirect() {
     if (auth.status !== 'authorized') return
     if (hasDriveQuery.isPending) return
     handled.current = true
-    if (isServicePurchasePath(pathname)) return
+    if (isRedirectExemptPath(pathname)) return
     if (hasDriveQuery.data) return
     router.replace('/get-started' as Route)
   }, [
