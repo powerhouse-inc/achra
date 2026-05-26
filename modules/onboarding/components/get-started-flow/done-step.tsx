@@ -18,8 +18,10 @@ function DoneStep({ drive }: DoneStepProps) {
           <CheckCircle2 className="size-5" aria-hidden="true" />
         </div>
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-semibold tracking-tight">Your drive is ready</h2>
-          <p className="text-muted-foreground max-w-md text-sm">Pick where you want to go next.</p>
+          <h2 className="text-2xl font-semibold tracking-tight">You&apos;re all set!</h2>
+          <p className="text-muted-foreground max-w-md text-sm">
+            Your drive is ready. Pick where you want to go next.
+          </p>
         </div>
         <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
           <Button variant="outline" className="w-full min-w-0" asChild>

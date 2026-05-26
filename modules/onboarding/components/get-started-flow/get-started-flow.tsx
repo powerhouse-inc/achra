@@ -47,6 +47,12 @@ function GetStartedFlow() {
 
   const hasDriveQuery = useHasDrive()
 
+  // Latches once the user finishes onboarding in this session. Spinning up a
+  // drive invalidates the `GetBuilderDrives` query, flipping `hasDriveQuery.data`
+  // to true — without this guard that would swap the just-earned DoneStep for the
+  // generic "already completed" card the moment the drive is created.
+  const [justCompleted, setJustCompleted] = useState(false)
+
   if (isAuthResolving) {
     return <FullPageSpinner />
   }
@@ -63,11 +69,17 @@ function GetStartedFlow() {
     return <DriveCheckErrorCard onRetry={() => void hasDriveQuery.refetch()} />
   }
 
-  if (hasDriveQuery.data) {
+  if (hasDriveQuery.data && !justCompleted) {
     return <AlreadyCompletedCard />
   }
 
-  return <OnboardingSteps />
+  return (
+    <OnboardingSteps
+      onComplete={() => {
+        setJustCompleted(true)
+      }}
+    />
+  )
 }
 
 function FullPageSpinner() {
@@ -78,7 +90,11 @@ function FullPageSpinner() {
   )
 }
 
-function OnboardingSteps() {
+interface OnboardingStepsProps {
+  onComplete: () => void
+}
+
+function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   const auth = useRenownAuth()
   const [step, setStep] = useState<Step>(1)
   const [createdDrive, setCreatedDrive] = useState<BuilderDriveLink | null>(null)
@@ -122,11 +138,12 @@ function OnboardingSteps() {
       {
         onSuccess: (drive) => {
           setCreatedDrive(drive)
+          onComplete()
           setStep(3)
         },
       },
     )
-  }, [form, spinUpMutate])
+  }, [form, spinUpMutate, onComplete])
 
   const handleBackToStepOne = useCallback(() => {
     setStep(1)
