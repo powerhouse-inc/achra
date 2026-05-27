@@ -18,5 +18,4 @@ export const ONBOARDING_STEPS = [
 
 export const TOTAL_STEPS = ONBOARDING_STEPS.length
 
-// TODO: Replace with the Achra support Discord invite once it's available.
-export const SUPPORT_DISCORD_URL = '#'
+export const SUPPORT_DISCORD_URL = 'https://discord.gg/DZhgH2843F'
