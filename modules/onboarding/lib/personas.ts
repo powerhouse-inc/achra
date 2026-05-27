@@ -17,6 +17,15 @@ export interface PersonaOption {
 
 export const PERSONAS: readonly PersonaOption[] = [
   {
+    id: 'builder',
+    title: 'Subscribe to a service',
+    description:
+      'Browse provider offerings — software, legal, ops, infrastructure. Subscribe in stablecoin. Cancel or export anytime.',
+    meta: 'Builder workspace',
+    icon: ShoppingBag,
+    iconClassName: 'bg-gradient-to-br from-chart-2 to-chart-1 text-white',
+  },
+  {
     id: 'operator',
     title: 'Publish a service',
     description:
@@ -25,15 +34,6 @@ export const PERSONAS: readonly PersonaOption[] = [
     icon: Briefcase,
     iconClassName:
       'bg-gradient-to-br from-primary to-purple text-primary-foreground shadow-primary',
-  },
-  {
-    id: 'builder',
-    title: 'Subscribe to a service',
-    description:
-      'Browse provider offerings — software, legal, ops, infrastructure. Subscribe in stablecoin. Cancel or export anytime.',
-    meta: 'Builder workspace',
-    icon: ShoppingBag,
-    iconClassName: 'bg-gradient-to-br from-chart-2 to-chart-1 text-white',
   },
   {
     id: 'organization',

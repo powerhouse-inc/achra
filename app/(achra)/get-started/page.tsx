@@ -13,11 +13,9 @@ export const metadata: Metadata = {
 export default function GetStartedPage() {
   return (
     <PageContent>
-      <div className="mx-auto w-full max-w-3xl">
-        <Suspense fallback={null}>
-          <GetStartedFlow />
-        </Suspense>
-      </div>
+      <Suspense fallback={null}>
+        <GetStartedFlow />
+      </Suspense>
     </PageContent>
   )
 }
