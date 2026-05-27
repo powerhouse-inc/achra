@@ -4,5 +4,6 @@ query GetBuilderDrives($filter: GetBuilderDrivesFilter!) {
     driveLink
     driveName
     driveSlug
+    builderProfileId
   }
 }

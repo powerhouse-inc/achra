@@ -1928,6 +1928,7 @@ export type Builder = {
 
 export type BuilderDriveLink = {
   __typename?: 'BuilderDriveLink';
+  builderProfileId?: Maybe<Scalars['PHID']['output']>;
   driveId: Scalars['PHID']['output'];
   driveLink: Scalars['URL']['output'];
   driveName: Scalars['String']['output'];
@@ -20041,7 +20042,7 @@ export type GetBuilderDrivesQueryVariables = Exact<{
 }>;
 
 
-export type GetBuilderDrivesQuery = { __typename?: 'Query', getBuilderDrives: Array<{ __typename?: 'BuilderDriveLink', driveId: any, driveLink: any, driveName: string, driveSlug: string }> };
+export type GetBuilderDrivesQuery = { __typename?: 'Query', getBuilderDrives: Array<{ __typename?: 'BuilderDriveLink', driveId: any, driveLink: any, driveName: string, driveSlug: string, builderProfileId?: any | null }> };
 
 export type AllNetworksQueryVariables = Exact<{
   filter?: InputMaybe<NetworkFilter>;
@@ -20982,6 +20983,7 @@ export const GetBuilderDrivesDocument = `
     driveLink
     driveName
     driveSlug
+    builderProfileId
   }
 }
     `;

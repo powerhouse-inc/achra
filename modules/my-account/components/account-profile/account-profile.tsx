@@ -10,11 +10,12 @@ import { AccountProfileError } from './account-profile-error'
 import { AccountProfileSkeleton } from './account-profile-skeleton'
 
 function AccountProfile() {
-  const { drivesQuery, profileQuery, driveSlug } = useMyBuilderProfile()
+  const { drivesQuery, profileQuery, driveSlug, builderProfileId } = useMyBuilderProfile()
 
   if (drivesQuery.isPending) return <AccountProfileSkeleton />
   if (drivesQuery.isError) return <AccountProfileError onRetry={() => void drivesQuery.refetch()} />
   if (!driveSlug) return <AccountProfileEmpty />
+  if (!builderProfileId) return <AccountProfileEmpty driveSlug={driveSlug} />
   if (profileQuery.isPending) return <AccountProfileSkeleton />
   if (profileQuery.isError) {
     return <AccountProfileError onRetry={() => void profileQuery.refetch()} />
