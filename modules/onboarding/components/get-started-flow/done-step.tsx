@@ -30,10 +30,10 @@ function DoneStep({ drive }: DoneStepProps) {
           <Button className="w-full min-w-0" asChild disabled={!drive}>
             {drive ? (
               <a href={drive.driveLink as string} target="_blank" rel="noopener noreferrer">
-                Explore my Drive
+                Explore my Workspace
               </a>
             ) : (
-              <span aria-disabled="true">Explore my Drive</span>
+              <span aria-disabled="true">Explore my Workspace</span>
             )}
           </Button>
         </div>

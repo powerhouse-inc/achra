@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/modules/shared/components/ui/dropdown-menu'
 import * as NavbarPrimitives from '../primitives'
+import { NavbarDrivesSection } from './navbar-drives-section'
 
 interface UserButtonProps {
   open?: boolean
@@ -151,6 +152,7 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
             <span>My Account</span>
           </Link>
         </DropdownMenuItem>
+        <NavbarDrivesSection />
         <DropdownMenuItem
           variant="destructive"
           className="cursor-pointer"
@@ -202,6 +204,10 @@ function UserOption() {
           <span>My Account</span>
         </Link>
       </NavbarPrimitives.ActionOption>
+      <NavbarDrivesSection
+        ItemComponent={NavbarPrimitives.ActionOption}
+        Separator={NavbarPrimitives.ActionOptionSeparator}
+      />
       <NavbarPrimitives.ActionOption variant="destructive" onClick={() => void auth.logout()}>
         <LogOut />
         <span>Log out</span>

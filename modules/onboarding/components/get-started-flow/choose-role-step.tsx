@@ -96,9 +96,7 @@ function ChooseRoleStep({ form, onSubmit }: ChooseRoleStepProps) {
                       autoComplete="nickname"
                     />
                   </FormControl>
-                  <FormDescription>
-                    Shown on your drive and any offerings. Editable later.
-                  </FormDescription>
+                  <FormDescription>Shown on your drive and any offerings.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

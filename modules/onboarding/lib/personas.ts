@@ -20,7 +20,7 @@ export const PERSONAS: readonly PersonaOption[] = [
     id: 'builder',
     title: 'Subscribe to a service',
     description:
-      'Browse provider offerings — software, legal, ops, infrastructure. Subscribe in stablecoin. Cancel or export anytime.',
+      'Browse provider offerings — software, legal, ops, infrastructure. Cancel or export anytime.',
     meta: 'Builder workspace',
     icon: ShoppingBag,
     iconClassName: 'bg-gradient-to-br from-chart-2 to-chart-1 text-white',
@@ -29,7 +29,7 @@ export const PERSONAS: readonly PersonaOption[] = [
     id: 'operator',
     title: 'Publish a service',
     description:
-      'Hosted product, legal retainer, accounting, governance ops — publish any recurring offering. Subscribers buy directly from you in stablecoin.',
+      'Hosted product, legal retainer, accounting, governance ops — publish any setup, recurring service.',
     meta: 'Operator workspace',
     icon: Briefcase,
     iconClassName:
@@ -38,8 +38,7 @@ export const PERSONAS: readonly PersonaOption[] = [
   {
     id: 'organization',
     title: 'Run a network',
-    description:
-      'Post projects and RFPs, manage milestone payouts. Returning after subscription rails ship.',
+    description: 'Post projects and RFPs, manage milestone payouts, track workstream progress.',
     meta: 'Coming soon',
     icon: Network,
     iconClassName: 'bg-muted text-muted-foreground',
