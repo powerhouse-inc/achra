@@ -2,7 +2,7 @@ import type {
   BuilderProject,
   ScopeOfWork_Deliverable,
   ScopeOfWork_DeliverableSetStatus,
-  ScopeOfWork_Progress,
+  Sow_Progress,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BudgetMetricCard } from '@/modules/project/components/budget-metric-card'
 import { KeyResultsMetricCard } from '@/modules/project/components/key-results-metric-card'
@@ -46,7 +46,7 @@ function ProjectCard({ project }: ProjectCardProps) {
             // TODO: this function is commonly used in the app, we should move it to a shared space
             progress={getProgressPercentage(
               // TODO: This is another instance of unified types issues from the backend
-              project.scope?.progress as unknown as ScopeOfWork_Progress,
+              project.scope?.progress as unknown as Sow_Progress,
             )}
           />
           <KeyResultsMetricCard

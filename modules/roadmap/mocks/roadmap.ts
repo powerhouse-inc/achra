@@ -1,49 +1,49 @@
 import {
-  type ScopeOfWork_Agent,
-  type ScopeOfWork_Deliverable,
-  ScopeOfWork_DeliverableSetStatus,
-  ScopeOfWork_DeliverableStatus,
-  type ScopeOfWork_Milestone,
-  type ScopeOfWork_Project,
-  type ScopeOfWork_Roadmap,
-  type ScopeOfWork_ScopeOfWorkState,
-  ScopeOfWork_ScopeOfWorkStatus,
   type ScopeOfWorkQuery,
+  type Sow_Agent,
+  type Sow_Deliverable,
+  Sow_DeliverableSetStatus,
+  Sow_DeliverableStatus,
+  type Sow_Milestone,
+  type Sow_Project,
+  type Sow_Roadmap,
+  type Sow_ScopeOfWorkState,
+  Sow_ScopeOfWorkStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
 // Mocked contributors/agents
-export const mockedContributors: ScopeOfWork_Agent[] = [
+export const mockedContributors: Sow_Agent[] = [
   {
-    __typename: 'ScopeOfWork_Agent',
+    __typename: 'SOW_Agent',
     id: '93RF8qO5',
     name: 'Powerhouse',
   },
   {
-    __typename: 'ScopeOfWork_Agent',
+    __typename: 'SOW_Agent',
     id: '0454KB3p',
     name: 'Prometheus',
   },
   {
-    __typename: 'ScopeOfWork_Agent',
+    __typename: 'SOW_Agent',
     id: '5Q4UrTDg',
     name: 'teep',
   },
   {
-    __typename: 'ScopeOfWork_Agent',
+    __typename: 'SOW_Agent',
     id: '11F2ho3q',
     name: 'meraki',
   },
   {
-    __typename: 'ScopeOfWork_Agent',
+    __typename: 'SOW_Agent',
     id: 'p7026973',
     name: 'callmeT',
   },
 ]
 
 // Mocked projects
-export const mockedProjects: ScopeOfWork_Project[] = [
+export const mockedProjects: Sow_Project[] = [
   {
-    __typename: 'ScopeOfWork_Project',
+    __typename: 'SOW_Project',
     id: 'rwa-project',
     code: 'RWA',
     title: 'RWA Portfolio Reporting',
@@ -53,12 +53,12 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     currency: null,
     expenditure: null,
     imageUrl: null,
-    projectOwner: '93RF8qO5',
+    projectOwner: { id: '93RF8qO5' } as unknown as Sow_Project['projectOwner'],
     scope: null,
     slug: 'rwa-project',
   },
   {
-    __typename: 'ScopeOfWork_Project',
+    __typename: 'SOW_Project',
     id: 'php-project',
     code: 'PHP',
     title: 'Powerhouse Products POC',
@@ -68,12 +68,12 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     currency: null,
     expenditure: null,
     imageUrl: null,
-    projectOwner: '93RF8qO5',
+    projectOwner: { id: '93RF8qO5' } as unknown as Sow_Project['projectOwner'],
     scope: null,
     slug: 'php-project',
   },
   {
-    __typename: 'ScopeOfWork_Project',
+    __typename: 'SOW_Project',
     id: 'pea-project',
     code: 'PEA',
     title: 'Protocol Expense Accounting',
@@ -83,43 +83,43 @@ export const mockedProjects: ScopeOfWork_Project[] = [
     currency: null,
     expenditure: null,
     imageUrl: null,
-    projectOwner: '93RF8qO5',
+    projectOwner: { id: '93RF8qO5' } as unknown as Sow_Project['projectOwner'],
     scope: null,
     slug: 'pea-project',
   },
 ]
 
 // Mocked deliverables
-export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
+export const mockedDeliverables: Sow_Deliverable[] = [
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'oy69oibt04',
     code: 'POC1',
     title: 'First technical integration of RWA Portfolio (Connect & Switchboard)',
     description:
       'Technical integration demo showcasing for the first time the RWA Portfolio Editor in Connect and the data synchronization with Switchboard.',
-    status: ScopeOfWork_DeliverableStatus.Delivered,
-    owner: '93RF8qO5',
+    status: Sow_DeliverableStatus.Delivered,
+    owner: { id: '93RF8qO5' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'e9FdAg63',
         title: 'RWA Conceptual Wireframes',
         link: 'https://drive.google.com/file/d/1NZXm_Q43sKH5pqwHTwN0DYvSW1uewMlY/view',
       },
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: '710Ed212',
         title: 'First demo of RWA Portfolio - Feb 21',
         link: 'https://drive.google.com/file/d/1CMwePiR046IJqQGLypi7Fzu_B7aLYNco/view',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 1,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'rwa-project',
       margin: 0.1,
       quantity: 1,
@@ -128,34 +128,34 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
     },
   },
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'oy69oibt03',
     code: 'POC2',
     title: 'Integration (API endpoints and Queries)',
     description:
       'Switchboard API endpoints for integration partners with document model update events and document state queries.',
-    status: ScopeOfWork_DeliverableStatus.Delivered,
-    owner: '93RF8qO5',
+    status: Sow_DeliverableStatus.Delivered,
+    owner: { id: '93RF8qO5' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'Zmb1aoqR',
         title: 'Source code (Powerhouse repo)',
         link: 'https://github.com/powerhouse-inc/',
       },
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: '9p92yM7X',
         title: 'Source code (SES repo)',
         link: 'https://github.com/makerdao-ses',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 1,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'php-project',
       margin: 0.1,
       quantity: 1,
@@ -164,28 +164,28 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
     },
   },
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'oy69oibt02',
     code: 'POC3',
     title: 'Expense dashboard increments (on-chain data, budget breakdowns)',
     description:
       'Separate incremental release of the Sky Ecosystem expenses platform with on-chain transactional data and budget breakdown views.',
-    status: ScopeOfWork_DeliverableStatus.Delivered,
-    owner: '93RF8qO5',
+    status: Sow_DeliverableStatus.Delivered,
+    owner: { id: '93RF8qO5' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: '7E7cp06j',
         title: 'Expense Dashboard deployment v0.33.0',
         link: 'https://github.com/makerdao-ses/ecosystem-dashboard/releases/tag/v0.33.0',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 1,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'pea-project',
       margin: 0.1,
       quantity: 1,
@@ -194,34 +194,34 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
     },
   },
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'mvp-deliverable-1',
     code: 'MVP1',
     title: 'MVP Platform Core Features',
     description:
       'Core platform features for the MVP release including user management, document editing, and basic workflows.',
-    status: ScopeOfWork_DeliverableStatus.InProgress,
-    owner: '93RF8qO5',
+    status: Sow_DeliverableStatus.InProgress,
+    owner: { id: '93RF8qO5' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'mvp-kr-1',
         title: 'User Authentication System',
         link: 'https://github.com/powerhouse-inc/auth-system',
       },
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'mvp-kr-2',
         title: 'Document Editor MVP',
         link: 'https://github.com/powerhouse-inc/document-editor',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 0.6,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'php-project',
       margin: 0.15,
       quantity: 1,
@@ -230,40 +230,40 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
     },
   },
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'prod-deliverable-1',
     code: 'PROD1',
     title: 'Production Infrastructure Setup',
     description:
       'Production-ready infrastructure including monitoring, logging, security, and scalability improvements.',
-    status: ScopeOfWork_DeliverableStatus.Todo,
-    owner: '93RF8qO5',
+    status: Sow_DeliverableStatus.Todo,
+    owner: { id: '93RF8qO5' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'prod-kr-1',
         title: 'Infrastructure Documentation',
         link: '',
       },
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'prod-kr-2',
         title: 'Security Audit Report',
         link: 'https://security-audit.example.com',
       },
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'prod-kr-3',
         title: 'Performance Benchmarks',
         link: '',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 0,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'php-project',
       margin: 0.2,
       quantity: 1,
@@ -272,27 +272,27 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
     },
   },
   {
-    __typename: 'ScopeOfWork_Deliverable',
+    __typename: 'SOW_Deliverable',
     id: 'atlas-deliverable-1',
     code: 'ATLAS1',
     title: 'Atlas Editor Integration',
     description: 'Integration of Atlas Editor with automation processes and workflow management.',
-    status: ScopeOfWork_DeliverableStatus.Todo,
-    owner: '11F2ho3q',
+    status: Sow_DeliverableStatus.Todo,
+    owner: { id: '11F2ho3q' } as unknown as Sow_Deliverable['owner'],
     keyResults: [
       {
-        __typename: 'ScopeOfWork_KeyResult',
+        __typename: 'SOW_KeyResult',
         id: 'atlas-kr-1',
         title: 'Atlas Editor Prototype',
         link: '',
       },
     ],
     workProgress: {
-      __typename: 'ScopeOfWork_Percentage',
+      __typename: 'SOW_Percentage',
       value: 0,
     },
     budgetAnchor: {
-      __typename: 'ScopeOfWork_BudgetAnchorProject',
+      __typename: 'SOW_BudgetAnchorProject',
       project: 'php-project',
       margin: 0.1,
       quantity: 1,
@@ -303,9 +303,9 @@ export const mockedDeliverables: ScopeOfWork_Deliverable[] = [
 ]
 
 // Mocked milestones
-export const mockedMilestones: ScopeOfWork_Milestone[] = [
+export const mockedMilestones: Sow_Milestone[] = [
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'ustpb52jla',
     sequenceCode: 'PH01',
     title: 'Decentralized Operations Platform - POC',
@@ -315,22 +315,22 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 330000,
     coordinators: ['Prometheus', 'callmeT', 'meraki', 'Lumen', 'Kilgore', 'Layer0x'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: ['oy69oibt04', 'oy69oibt03', 'oy69oibt02'],
-      status: ScopeOfWork_DeliverableSetStatus.Finished,
+      status: Sow_DeliverableSetStatus.Finished,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 3,
         total: 3,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 1,
       },
     },
   },
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'milestone-2',
     sequenceCode: 'PH02',
     title: 'Decentralized Operations Platform - MVP',
@@ -340,22 +340,22 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 500000,
     coordinators: ['Prometheus', 'teep'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: ['mvp-deliverable-1'],
-      status: ScopeOfWork_DeliverableSetStatus.Todo,
+      status: Sow_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 0,
         total: 5,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 0,
       },
     },
   },
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'milestone-3',
     sequenceCode: 'PH03',
     title: 'Decentralized Operations Platform - Production',
@@ -365,22 +365,22 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 750000,
     coordinators: ['Powerhouse', 'Prometheus'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: ['prod-deliverable-1'],
-      status: ScopeOfWork_DeliverableSetStatus.Todo,
+      status: Sow_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 0,
         total: 8,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 0,
       },
     },
   },
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'milestone-4',
     sequenceCode: 'PH04',
     title: 'Atlas + I/A POC',
@@ -390,22 +390,22 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 200000,
     coordinators: ['meraki', 'callmeT'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: ['atlas-deliverable-1'],
-      status: ScopeOfWork_DeliverableSetStatus.Todo,
+      status: Sow_DeliverableSetStatus.Todo,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 0,
         total: 3,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 0,
       },
     },
   },
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'milestone-5',
     sequenceCode: 'PH05',
     title: 'Powerhouse Spin-off',
@@ -415,22 +415,22 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 1000000,
     coordinators: ['Powerhouse', 'Prometheus', 'teep'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: [],
-      status: ScopeOfWork_DeliverableSetStatus.InProgress,
+      status: Sow_DeliverableSetStatus.InProgress,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 1,
         total: 6,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 0.33,
       },
     },
   },
   {
-    __typename: 'ScopeOfWork_Milestone',
+    __typename: 'SOW_Milestone',
     id: 'milestone-6',
     sequenceCode: 'PH06',
     title: 'MakerDAO PM Consultancy',
@@ -440,16 +440,16 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
     budget: 300000,
     coordinators: ['Prometheus', 'meraki'],
     scope: {
-      __typename: 'ScopeOfWork_DeliverablesSet',
+      __typename: 'SOW_DeliverablesSet',
       deliverables: [],
-      status: ScopeOfWork_DeliverableSetStatus.InProgress,
+      status: Sow_DeliverableSetStatus.InProgress,
       deliverablesCompleted: {
-        __typename: 'ScopeOfWork_DeliverablesCompleted',
+        __typename: 'SOW_DeliverablesCompleted',
         completed: 2,
         total: 4,
       },
       progress: {
-        __typename: 'ScopeOfWork_Percentage',
+        __typename: 'SOW_Percentage',
         value: 0.66,
       },
     },
@@ -457,9 +457,9 @@ export const mockedMilestones: ScopeOfWork_Milestone[] = [
 ]
 
 // Mocked roadmap
-export const mockedRoadmaps: ScopeOfWork_Roadmap[] = [
+export const mockedRoadmaps: Sow_Roadmap[] = [
   {
-    __typename: 'ScopeOfWork_Roadmap',
+    __typename: 'SOW_Roadmap',
     id: 'roadmap-powerhouse-2024',
     slug: 'powerhouse-2024',
     title: 'Powerhouse 2024 Roadmap',
@@ -467,7 +467,7 @@ export const mockedRoadmaps: ScopeOfWork_Roadmap[] = [
     milestones: mockedMilestones,
   },
   {
-    __typename: 'ScopeOfWork_Roadmap',
+    __typename: 'SOW_Roadmap',
     id: 'roadmap-powerhouse-2025',
     slug: 'powerhouse-2025',
     title: 'Powerhouse 2025 Roadmap',
@@ -475,7 +475,7 @@ export const mockedRoadmaps: ScopeOfWork_Roadmap[] = [
     milestones: mockedMilestones,
   },
   {
-    __typename: 'ScopeOfWork_Roadmap',
+    __typename: 'SOW_Roadmap',
     id: 'roadmap-powerhouse-2026',
     slug: 'powerhouse-2026',
     title: 'Powerhouse 2026 Roadmap',
@@ -485,18 +485,18 @@ export const mockedRoadmaps: ScopeOfWork_Roadmap[] = [
 ]
 
 // Mocked scope of work state
-export const mockedScopeOfWorkState: ScopeOfWork_ScopeOfWorkState = {
-  __typename: 'ScopeOfWork_ScopeOfWorkState',
+export const mockedScopeOfWorkState: Sow_ScopeOfWorkState = {
+  __typename: 'SOW_ScopeOfWorkState',
   title: 'Powerhouse Scope of Work 2024',
   description: 'Comprehensive scope of work for Powerhouse operations and development',
-  status: ScopeOfWork_ScopeOfWorkStatus.InProgress,
+  status: Sow_ScopeOfWorkStatus.InProgress,
   roadmaps: mockedRoadmaps,
-  contributors: mockedContributors,
+  contributors: mockedContributors as unknown as Sow_ScopeOfWorkState['contributors'],
   deliverables: mockedDeliverables,
   projects: mockedProjects,
 }
 
-export const mockedScopeOfWorkQuery: ScopeOfWorkQuery = {
+export const mockedScopeOfWorkQuery = {
   ScopeOfWork: {
     document: {
       document: {
@@ -506,7 +506,7 @@ export const mockedScopeOfWorkQuery: ScopeOfWorkQuery = {
       childIds: [],
     },
   },
-}
+} as unknown as ScopeOfWorkQuery
 
 // Legacy compatibility exports for existing components
 export const mockedContributors1 = mockedContributors

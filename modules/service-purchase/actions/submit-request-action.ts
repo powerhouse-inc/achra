@@ -16,6 +16,7 @@ export async function submitRequestAction(
 ): Promise<SubmitRequestFormState> {
   try {
     const serviceOfferingId = (formData.get('serviceOfferingId') as string | null) ?? ''
+    const ethereumAddress = (formData.get('ethereumAddress') as string | null) ?? ''
     const rawData = {
       name: (formData.get('name') as string | null) ?? '',
       teamName: (formData.get('teamName') as string | null) ?? '',
@@ -33,7 +34,7 @@ export async function submitRequestAction(
       }
     }
 
-    if (!serviceOfferingId) {
+    if (!serviceOfferingId || !ethereumAddress) {
       return {
         ...initialState,
         success: false,
@@ -45,6 +46,7 @@ export async function submitRequestAction(
       name: result.data.name,
       teamName: result.data.teamName,
       customerEmail: result.data.email,
+      ethereumAddress,
       serviceOfferingId,
       userSelection: {
         billingCycle: formData.get('billingCycle') as RsBillingCycle,

@@ -68,7 +68,7 @@ function ConfirmationStep() {
                 <UserRoundCheck className="text-foreground size-6" />
               </div>
               <div className="flex flex-col items-center gap-2">
-                <span className="text-foreground text-lg/5.5 font-bold">Account Created</span>
+                <span className="text-foreground text-lg/5.5 font-bold">You&apos;re all set!</span>
               </div>
             </div>
             <Button variant="outline" className="w-full" asChild>
@@ -77,7 +77,7 @@ function ConfirmationStep() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Explore your account <ExternalLink />
+                Go to your workspace <ExternalLink />
               </Link>
             </Button>
           </CardContent>

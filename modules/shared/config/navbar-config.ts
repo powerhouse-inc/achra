@@ -20,14 +20,15 @@ export const ACHRA_NAVBAR_LINKS: NavbarLink[] = [
     label: 'Networks',
     href: '/networks',
   },
-  ...(ff.workstreams.WORKSTREAMS_ENABLED
-    ? [
-        {
-          label: 'Workstreams',
-          href: '/workstreams',
-        } satisfies NavbarLink,
-      ]
-    : []),
+  // TODO: Uncomment this when workstreams are enabled
+  // ...(ff.workstreams.WORKSTREAMS_ENABLED
+  //   ? [
+  //       {
+  //         label: 'Workstreams',
+  //         href: '/workstreams',
+  //       } satisfies NavbarLink,
+  //     ]
+  //   : []),
   {
     label: 'Operational Hub',
     href: OPERATIONAL_HUB_URL,

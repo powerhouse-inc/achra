@@ -1,9 +1,9 @@
-import type { ScopeOfWork_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_Roadmap } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SectionTitle } from '../section-title'
 import { Timeline, TimelineSkeleton } from '../timeline'
 
 interface OverviewSectionProps {
-  roadmap: ScopeOfWork_Roadmap | undefined
+  roadmap: Sow_Roadmap | undefined
 }
 
 function OverviewSection({ roadmap }: OverviewSectionProps) {

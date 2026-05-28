@@ -1,9 +1,9 @@
 import { UserRound } from 'lucide-react'
-import type { ScopeOfWork_Agent } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { Sow_Agent } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 
 interface ContributorsProps {
-  contributors: ScopeOfWork_Agent[]
+  contributors: Sow_Agent[]
 }
 
 function Contributors({ contributors }: ContributorsProps) {
