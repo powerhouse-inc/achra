@@ -1,8 +1,8 @@
 import type {
-  Sow_Agent,
-  Sow_Deliverable,
-  Sow_Project,
-  Sow_Roadmap,
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Project,
+  ScopeOfWork_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { encodeSectionId, SectionActivation } from '@/modules/shared/components/section-activation'
 import { DetailsSection, DetailsSectionSkeleton } from '../details-section'
@@ -13,10 +13,10 @@ function ContentContainer({ children }: { children: React.ReactNode }) {
 }
 
 interface RoadmapDetailsContentProps {
-  roadmap: Sow_Roadmap
-  deliverables: Sow_Deliverable[]
-  contributors: Sow_Agent[]
-  projects: Sow_Project[]
+  roadmap: ScopeOfWork_Roadmap
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
 function RoadmapDetailsContent({

@@ -21,7 +21,6 @@ function BuilderProfile({ builder, isOperatorProfile }: BuilderProfileProps) {
       driveName="Sky Network Admin"
       className="w-full sm:w-fit"
       disabled={true}
-      variant="primary"
     />
   )
 

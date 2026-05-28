@@ -1,20 +1,14 @@
 import { useMemo } from 'react'
-import {
-  ScopeOfWork_DeliverableSetStatus,
-  type Sow_DeliverableSetStatus,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableSetStatusChipProps {
-  status: ScopeOfWork_DeliverableSetStatus | Sow_DeliverableSetStatus
+  status: ScopeOfWork_DeliverableSetStatus
 }
 
 function DeliverableSetStatusChip({ status }: DeliverableSetStatusChipProps) {
   const { label, bgColor, textColor } = useMemo(() => {
-    // Both Sow_ and ScopeOfWork_ enums share identical string values, so we
-    // narrow to one to keep the switch exhaustive.
-    const normalizedStatus = status as ScopeOfWork_DeliverableSetStatus
-    switch (normalizedStatus) {
+    switch (status) {
       case ScopeOfWork_DeliverableSetStatus.Draft:
       case ScopeOfWork_DeliverableSetStatus.InProgress:
         return {

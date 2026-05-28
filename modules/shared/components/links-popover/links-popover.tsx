@@ -11,7 +11,6 @@ import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import TwitterSVG from '@/modules/shared/components/svgs/x.svg'
 import YoutubeSVG from '@/modules/shared/components/svgs/youtube.svg'
 import { isSocialMediaType } from '@/modules/shared/lib/is-social-media-type'
-import { cn } from '@/modules/shared/lib/utils'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,
@@ -135,83 +134,40 @@ function LinksPopover({
   )
 }
 
-function LinkContent({ link }: { link: MediaElement | LinkElement }) {
-  if ('type' in link) {
-    const linkType = link.type.toLowerCase()
-    if (isSocialMediaType(linkType)) {
-      return (
-        <>
-          {MEDIA_ICON_MAP[linkType]}
-          {MEDIA_LABEL_MAP[linkType]}
-        </>
-      )
-    }
-    return (
-      <>
-        <WebsiteSVG className="size-4" />
-        {link.type}
-      </>
-    )
-  }
-  return (
-    <>
-      {link.icon}
-      {link.label}
-    </>
-  )
-}
-
-function getLinkExternalProps(link: MediaElement | LinkElement) {
-  const isExternal = 'type' in link ? true : Boolean(link.isExternal)
-  return isExternal ? { target: '_blank' as const, rel: 'noopener noreferrer' } : {}
-}
-
 interface LinksPopoverItemProps extends React.ComponentProps<typeof DropdownMenuItem> {
   link: MediaElement | LinkElement
 }
 
 function LinksPopoverItem({ link, ...props }: LinksPopoverItemProps) {
+  const linkType = 'type' in link && link.type.toLowerCase()
+  const isSocialMedia = linkType && isSocialMediaType(linkType)
   return (
     <DropdownMenuItem key={link.href} asChild className="hover:cursor-pointer" {...props}>
-      <Link href={link.href as Route} {...getLinkExternalProps(link)}>
-        <LinkContent link={link} />
-      </Link>
+      {'type' in link ? (
+        <Link href={link.href as Route} target="_blank" rel="noopener noreferrer">
+          {isSocialMedia ? (
+            <>
+              {MEDIA_ICON_MAP[linkType]}
+              {MEDIA_LABEL_MAP[linkType]}
+            </>
+          ) : (
+            <>
+              <WebsiteSVG className="size-4" />
+              {link.type}
+            </>
+          )}
+        </Link>
+      ) : (
+        <Link
+          href={link.href as Route}
+          {...(link.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {link.icon}
+          {link.label}
+        </Link>
+      )}
     </DropdownMenuItem>
   )
 }
 
-interface LinksListProps {
-  links: Array<MediaElement | LinkElement>
-  className?: string
-}
-
-/**
- * Renders links as a flat, always-visible list of anchors (no popover/trigger),
- * reusing the same social-media icons and labels as {@link LinksPopover}.
- */
-function LinksList({ links, className }: LinksListProps) {
-  return (
-    <ul className={cn('flex flex-col gap-1', className)}>
-      {links.map((link) => (
-        <li key={`${link.href}-${'type' in link ? link.type : link.label}`}>
-          <Link
-            href={link.href as Route}
-            {...getLinkExternalProps(link)}
-            className="text-muted-foreground hover:text-foreground inline-flex w-fit items-center gap-2 text-sm [&_svg]:size-4"
-          >
-            <LinkContent link={link} />
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-export {
-  LinksPopover,
-  LinksPopoverItem,
-  LinksList,
-  type SocialMedia,
-  type MediaElement,
-  type LinkElement,
-}
+export { LinksPopover, LinksPopoverItem, type SocialMedia, type MediaElement, type LinkElement }

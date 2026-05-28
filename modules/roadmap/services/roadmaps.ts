@@ -1,8 +1,8 @@
 import {
-  type Sow_Agent,
-  type Sow_Deliverable,
-  type Sow_Project,
-  type Sow_Roadmap,
+  type ScopeOfWork_Agent,
+  type ScopeOfWork_Deliverable,
+  type ScopeOfWork_Project,
+  type ScopeOfWork_Roadmap,
   useRoadmapDetailsQuery,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 
@@ -13,32 +13,30 @@ export async function getRoadmapDetailsData(networkSlug: string, roadmapSlug: st
     },
   })()
 
-  let roadmap: Sow_Roadmap | null = null
+  let roadmap: ScopeOfWork_Roadmap | null = null
 
   for (const scopeOfWork of data.scopeOfWorkByNetworkOrStatus) {
     for (const roadmapItem of scopeOfWork.roadmaps) {
       if (roadmapItem.slug === roadmapSlug) {
-        roadmap = roadmapItem as Sow_Roadmap
+        roadmap = roadmapItem as ScopeOfWork_Roadmap
         break
       }
     }
   }
 
-  const deliverablesMap = new Map<string, Sow_Deliverable>()
-  const contributorsMap = new Map<string, Sow_Agent>()
-  const projectsMap = new Map<string, Sow_Project>()
+  const deliverablesMap = new Map<string, ScopeOfWork_Deliverable>()
+  const contributorsMap = new Map<string, ScopeOfWork_Agent>()
+  const projectsMap = new Map<string, ScopeOfWork_Project>()
 
   data.scopeOfWorkByNetworkOrStatus.forEach((scopeOfWork) => {
     scopeOfWork.deliverables.forEach((deliverable) => {
-      deliverablesMap.set(deliverable.id, deliverable as unknown as Sow_Deliverable)
+      deliverablesMap.set(deliverable.id, deliverable as unknown as ScopeOfWork_Deliverable)
     })
     scopeOfWork.contributors.forEach((contributor) => {
-      if (contributor.id) {
-        contributorsMap.set(contributor.id, contributor as unknown as Sow_Agent)
-      }
+      contributorsMap.set(contributor.id, contributor as ScopeOfWork_Agent)
     })
     scopeOfWork.projects.forEach((project) => {
-      projectsMap.set(project.id, project as unknown as Sow_Project)
+      projectsMap.set(project.id, project as ScopeOfWork_Project)
     })
   })
 

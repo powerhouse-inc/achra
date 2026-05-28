@@ -1,8 +1,8 @@
 'use client'
 
 import {
-  Sow_DeliverableSetStatus,
-  type Sow_Milestone,
+  ScopeOfWork_DeliverableSetStatus,
+  type ScopeOfWork_Milestone,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Circle, CircleWithDot } from '@/shared/components/svgs'
 import { cn } from '@/shared/lib/utils'
@@ -18,7 +18,7 @@ const lineBaseClasses =
 const dotBaseClasses = 'absolute left-1/2 z-10 h-4 w-4 -translate-x-1/2'
 
 interface DesktopTimelineProps {
-  milestones: Sow_Milestone[]
+  milestones: ScopeOfWork_Milestone[]
 }
 
 function DesktopTimeline({ milestones }: DesktopTimelineProps) {
@@ -42,7 +42,7 @@ function DesktopTimeline({ milestones }: DesktopTimelineProps) {
               <div className={cn(dotBaseClasses, '-bottom-2')}>
                 {/* TODO: the following line is the real one, it should be enabled once the progress is fixed in the API */}
                 {/* {milestone.progress === 0 ? ( */}
-                {milestone.scope?.status === Sow_DeliverableSetStatus.Draft ? (
+                {milestone.scope?.status === ScopeOfWork_DeliverableSetStatus.Draft ? (
                   <Circle className="text-accent-foreground" />
                 ) : (
                   <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />
@@ -69,7 +69,7 @@ function DesktopTimeline({ milestones }: DesktopTimelineProps) {
                 <div className={cn(dotBaseClasses, '-top-2')}>
                   {/* TODO: the following line is the real one, it should be enabled once the progress is fixed in the API */}
                   {/* {milestone.progress === 0 ? ( */}
-                  {milestone.scope?.status === Sow_DeliverableSetStatus.Draft ? (
+                  {milestone.scope?.status === ScopeOfWork_DeliverableSetStatus.Draft ? (
                     <Circle className="text-accent-foreground" />
                   ) : (
                     <CircleWithDot className="text-accent-foreground [&>circle]:fill-status-progress" />

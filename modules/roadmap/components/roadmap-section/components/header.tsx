@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import {
   type Network,
-  Sow_DeliverableStatus,
+  ScopeOfWork_DeliverableStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { NavigationHeader } from '@/modules/shared/components/navigation-header'
@@ -33,7 +33,7 @@ function Header({
           <div className="flex items-center gap-2">
             <span className="text-foreground text-lg/5.5 font-bold">{title}</span>
             {/* TODO: integrate with the roadmaps general status, currently not available in the workstream query */}
-            <DeliverableStatusChip status={Sow_DeliverableStatus.InProgress} />
+            <DeliverableStatusChip status={ScopeOfWork_DeliverableStatus.InProgress} />
           </div>
           <NavigationHeader
             network={network}

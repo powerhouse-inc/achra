@@ -3,11 +3,9 @@ import { SummaryCardSkeleton } from './summary-card/summary-card-skeleton'
 
 function SummaryStepSkeleton() {
   return (
-    <div className="mt-6 flex flex-col-reverse gap-6 lg:grid lg:grid-cols-[3fr_2fr] lg:items-start">
+    <div className="mt-6 flex flex-col gap-6">
       <SummaryCardSkeleton />
-      <div className="lg:sticky lg:top-28">
-        <SubmitRequestFormSkeleton />
-      </div>
+      <SubmitRequestFormSkeleton />
     </div>
   )
 }

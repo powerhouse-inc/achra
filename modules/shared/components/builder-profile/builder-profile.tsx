@@ -1,6 +1,6 @@
 import type { BuilderStatus, Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import OperatorSVG from '@/modules/shared/components/svgs/operator.svg'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
+import { Avatar, AvatarImage } from '@/modules/shared/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { cn } from '@/modules/shared/lib/utils'
 import { BuildersStatusChip } from '../chips/builders-status-chip'
@@ -18,10 +18,7 @@ function BuilderProfile({ name, code, status, image, isOperator, className }: Bu
   const avatar = (
     <div className="relative">
       <Avatar className="mt-1 size-8">
-        <AvatarImage src={image || undefined} alt={name ?? 'Wallet'} />
-        <AvatarFallback className="text-xs font-semibold">
-          {name?.charAt(0).toUpperCase() ?? 'U'}
-        </AvatarFallback>
+        <AvatarImage src={image} alt={name ?? 'Wallet'} />
       </Avatar>
       {isOperator && <OperatorSVG className="absolute -bottom-2.5 left-1.5 z-20 size-11" />}
     </div>

@@ -3,7 +3,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import type { Sow_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { formatDateStringToQuarter } from '@/modules/roadmap/lib/milestone-card-utils'
@@ -13,7 +13,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/u
 import { cn } from '@/shared/lib/utils'
 
 interface MilestoneCardProps {
-  milestone: Sow_Milestone
+  milestone: ScopeOfWork_Milestone
   className?: string
 }
 

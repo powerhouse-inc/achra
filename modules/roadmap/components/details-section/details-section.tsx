@@ -1,17 +1,17 @@
 import type {
-  Sow_Agent,
-  Sow_Deliverable,
-  Sow_Project,
-  Sow_Roadmap,
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Project,
+  ScopeOfWork_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneDetailsCard, MilestoneDetailsCardSkeleton } from '../milestone-details-card'
 import { SectionTitle } from '../section-title'
 
 interface DetailsSectionProps {
-  roadmap: Sow_Roadmap | undefined
-  deliverables: Sow_Deliverable[]
-  contributors: Sow_Agent[]
-  projects: Sow_Project[]
+  roadmap: ScopeOfWork_Roadmap | undefined
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
 function DetailsSection({ roadmap, deliverables, contributors, projects }: DetailsSectionProps) {
@@ -24,7 +24,7 @@ function DetailsSection({ roadmap, deliverables, contributors, projects }: Detai
           <MilestoneDetailsCard
             key={milestone.id}
             milestone={milestone}
-            deliverables={deliverables.filter((deliverable: Sow_Deliverable) =>
+            deliverables={deliverables.filter((deliverable: ScopeOfWork_Deliverable) =>
               milestone.scope?.deliverables.some(
                 (deliverableId) => deliverableId === deliverable.id,
               ),

@@ -1,5 +1,6 @@
 import type {
   Network,
+  ScopeOfWork_Milestone,
   Sow_Deliverable,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -8,6 +9,11 @@ import { MilestoneExtendedCard } from '../milestone-extended-card'
 import { RoadmapSwiper } from '../roadmap-swiper'
 import { Header } from './components/header'
 
+// Note: there are two types of roadmaps
+// 1. Sow_Roadmap
+// 2. ScopeOfWork_Roadmap
+// Note: Both types are exactly the same.
+// TODO: Ask the client to reuse the already existing type for roadmaps so we do not need to instantiate the data to the original type
 interface RoadmapSectionProps {
   roadmap: Sow_Roadmap
   network?: Pick<Network, 'name' | 'logo' | 'darkThemeLogo' | 'slug'>
@@ -40,7 +46,7 @@ function RoadmapSection({
         {roadmap.milestones.map((milestone) => (
           <MilestoneExtendedCard
             key={milestone.id}
-            milestone={milestone}
+            milestone={milestone as ScopeOfWork_Milestone}
             networkSlug={network?.slug ?? ''}
             roadmapSlug={roadmap.slug}
             deliverables={deliverables}
@@ -48,7 +54,7 @@ function RoadmapSection({
         ))}
       </div>
       <RoadmapSwiper
-        milestones={roadmap.milestones}
+        milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
         networkSlug={network?.slug ?? ''}
         roadmapSlug={roadmap.slug}
         deliverables={deliverables}

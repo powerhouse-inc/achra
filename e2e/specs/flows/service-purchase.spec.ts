@@ -1,4 +1,3 @@
-import { deleteDriveRecord } from '@/e2e/support/drive-api'
 import { PURCHASE_STEP } from '../../data/constants'
 import { expect, test } from '../../fixtures'
 import { getEnv } from '../../support/env'
@@ -11,15 +10,11 @@ test.describe('@flow service purchase', () => {
     await purchaseFlow.goto({ params: { serviceSlug } })
 
     const ts = Date.now()
-    const driveTeam = `e2e-drive-${ts}`
     await purchaseFlow.completeHappyPath({
       name: `E2E Tester ${ts}`,
-      teamName: driveTeam,
+      teamName: `E2E Team ${ts}`,
       email: `e2e+${ts}@test.invalid`,
     })
-
-    // cleanup - delete the drive record created by this submission
-    await deleteDriveRecord(driveTeam)
   })
 
   test('should show validation errors on the summary step when required fields are empty', async ({

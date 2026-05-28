@@ -92,7 +92,6 @@ function HomepageBanner({
             href="https://connect.achra.network"
             action="edit"
             driveName="Sky Network Admin"
-            variant="primary"
           />
         </div>
       )}

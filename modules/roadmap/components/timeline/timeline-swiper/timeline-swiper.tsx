@@ -2,13 +2,13 @@
 
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import type { Sow_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneCard } from '@/modules/roadmap/components/milestone-card'
 import { useRoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper/use-roadmap-swiper'
 import { cn } from '@/shared/lib/utils'
 
 interface TimelineSwiperProps {
-  milestones: Sow_Milestone[]
+  milestones: ScopeOfWork_Milestone[]
 }
 
 function TimelineSwiper({ milestones }: TimelineSwiperProps) {

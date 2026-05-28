@@ -1,16 +1,16 @@
 import type {
-  Sow_Agent,
-  Sow_Deliverable,
-  Sow_Project,
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'
 import { DeliverableCard } from '../deliverable-card'
 
 interface DeliverablesSectionProps {
-  deliverables: Sow_Deliverable[]
-  contributors: Sow_Agent[]
-  projects: Sow_Project[]
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
 function DeliverablesSection({ deliverables, contributors, projects }: DeliverablesSectionProps) {

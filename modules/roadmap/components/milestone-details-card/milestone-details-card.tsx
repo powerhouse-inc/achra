@@ -2,10 +2,10 @@
 
 import { useMemo } from 'react'
 import type {
-  Sow_Agent,
-  Sow_Deliverable,
-  Sow_Milestone,
-  Sow_Project,
+  ScopeOfWork_Agent,
+  ScopeOfWork_Deliverable,
+  ScopeOfWork_Milestone,
+  ScopeOfWork_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { cn } from '@/modules/shared/lib/utils'
@@ -17,10 +17,10 @@ import { TargetData } from './target-data'
 import { TitleAndDescription } from './title-and-description'
 
 interface MilestoneDetailsCardProps {
-  milestone: Sow_Milestone
-  deliverables: Sow_Deliverable[]
-  contributors: Sow_Agent[]
-  projects: Sow_Project[]
+  milestone: ScopeOfWork_Milestone
+  deliverables: ScopeOfWork_Deliverable[]
+  contributors: ScopeOfWork_Agent[]
+  projects: ScopeOfWork_Project[]
 }
 
 function MilestoneDetailsCard({
@@ -30,13 +30,15 @@ function MilestoneDetailsCard({
   projects,
 }: MilestoneDetailsCardProps) {
   const milestoneContributors = useMemo(() => {
-    const uniqueContributors: Record<string, Sow_Agent> = {}
+    const uniqueContributors: Record<string, ScopeOfWork_Agent> = {}
     deliverables.forEach((deliverable) => {
-      const ownerId = deliverable.owner?.id
-      if (ownerId && !Object.prototype.hasOwnProperty.call(uniqueContributors, ownerId)) {
-        const contributor = contributors.find((contributor) => contributor.id === ownerId)
+      if (
+        deliverable.owner &&
+        !Object.prototype.hasOwnProperty.call(uniqueContributors, deliverable.owner)
+      ) {
+        const contributor = contributors.find((contributor) => contributor.id === deliverable.owner)
         if (contributor) {
-          uniqueContributors[ownerId] = contributor
+          uniqueContributors[deliverable.owner] = contributor
         }
       }
     })

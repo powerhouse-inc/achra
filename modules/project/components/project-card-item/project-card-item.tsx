@@ -75,7 +75,6 @@ function ProjectCardItem({
                 href="https://connect.achra.network"
                 action="edit"
                 driveName="Sky Network Admin"
-                variant="primary"
               />
             </div>
           </div>
@@ -99,7 +98,6 @@ function ProjectCardItem({
               action="edit"
               driveName="Sky Network Admin"
               className="w-full [&>div]:w-full"
-              variant="primary"
             />
           </div>
         </div>

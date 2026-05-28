@@ -4,8 +4,8 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 import type {
+  ScopeOfWork_Milestone,
   Sow_Deliverable,
-  Sow_Milestone,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
@@ -17,7 +17,7 @@ import { Coordinators } from './coordinators'
 import { LatestKeyResults } from './latest-key-results'
 
 interface MilestoneExtendedCardProps {
-  milestone: Sow_Milestone
+  milestone: ScopeOfWork_Milestone
   className?: string
   networkSlug: string
   roadmapSlug: string

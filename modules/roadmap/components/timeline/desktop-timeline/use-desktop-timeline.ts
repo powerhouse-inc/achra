@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { useWindowSize } from 'usehooks-ts'
-import type { Sow_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
+import type { ScopeOfWork_Milestone } from '@/modules/__generated__/graphql/switchboard-generated'
 
 interface UseDesktopTimelineOptions {
-  milestones: Sow_Milestone[]
+  milestones: ScopeOfWork_Milestone[]
 }
 
 function useDesktopTimeline({ milestones }: UseDesktopTimelineOptions) {

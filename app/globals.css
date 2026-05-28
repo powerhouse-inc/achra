@@ -204,31 +204,6 @@
   --color-fusion: var(--fusion);
   --color-to-do: var(--to-do);
   --color-yellow: var(--yellow);
-
-  --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
-  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
-
-  @keyframes pulse-ring {
-    0% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    100% {
-      transform: scale(2.75);
-      opacity: 0;
-    }
-  }
-
-  @keyframes orbit {
-    0% {
-      transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px))
-        rotate(calc(var(--angle) * -1deg));
-    }
-    100% {
-      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px))
-        rotate(calc((var(--angle) * -1deg) - 360deg));
-    }
-  }
 }
 
 @layer utilities {
@@ -336,40 +311,4 @@ html body[data-scroll-locked] {
 
 :root {
   scrollbar-gutter: stable;
-}
-
-@keyframes cta-aurora-pink {
-  from {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  to {
-    transform: translate(22%, 14%) rotate(20deg) scale(1.35);
-  }
-}
-
-@keyframes cta-aurora-blue {
-  from {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  to {
-    transform: translate(-20%, 24%) rotate(-22deg) scale(1.4);
-  }
-}
-
-@keyframes cta-aurora-purple {
-  from {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  to {
-    transform: translate(22%, -20%) rotate(18deg) scale(1.35);
-  }
-}
-
-@keyframes cta-aurora-pink-light {
-  from {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  to {
-    transform: translate(-26%, -16%) rotate(-24deg) scale(1.45);
-  }
 }

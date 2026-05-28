@@ -112,7 +112,7 @@ function SummaryCard({ templateTitle, templateSubtitle }: SummaryCardProps) {
   }, [optionGroups, offering, selectedTier.id, selectedBillingCycle])
 
   return (
-    <Card className="mx-auto w-full max-w-218.5 border-none p-0! lg:mx-0 lg:max-w-none">
+    <Card className="mx-auto w-full max-w-218.5 border-none p-0!">
       <SummaryCardHeader templateTitle={templateTitle} templateSubtitle={templateSubtitle} />
 
       <CardContent className="flex flex-col gap-6 p-0! pb-3! lg:pb-6!">
