@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { useQuery, useSuspenseQuery, useMutation, UseQueryOptions, UseSuspenseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery, UseQueryOptions, UseSuspenseQueryOptions } from '@tanstack/react-query';
 import { switchboardFetcher } from '@/shared/lib/fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -20051,13 +20051,6 @@ export type AllNetworksQueryVariables = Exact<{
 
 export type AllNetworksQuery = { __typename?: 'Query', allNetworks: Array<{ __typename?: 'AllNetworks', network?: { __typename?: 'Network', name?: string | null, slug?: string | null, icon?: string | null, logo?: string | null, darkThemeIcon?: string | null, darkThemeLogo?: string | null, category?: Array<NetworkCategory> | null, description?: string | null, discord?: string | null, github?: string | null, logoBig?: string | null, website?: string | null, x?: string | null, youtube?: string | null } | null }> };
 
-export type CreateUserDriveMutationVariables = Exact<{
-  input: CreateUserDriveInput;
-}>;
-
-
-export type CreateUserDriveMutation = { __typename?: 'Mutation', createUserDrive?: { __typename?: 'CreateUserDriveOutput', errors: Array<string>, success: boolean, data?: { __typename?: 'CreateUserDriveData', drives: Array<{ __typename?: 'BuilderDriveLink', driveId: any, driveLink: any, driveName: string, driveSlug: string }> } | null } | null };
-
 export type OperatorProfileQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
 }>;
@@ -20119,13 +20112,6 @@ export type ResourceProfileFieldsFragment = { __typename?: 'RSResourceTemplate',
 export type FaqFieldFieldsFragment = { __typename?: 'RSFaqField', id: any, displayOrder: number, question?: string | null, answer?: string | null };
 
 export type ContentSectionFieldsFragment = { __typename?: 'RSContentSection', id: any, title: string, content: string, displayOrder: number };
-
-export type CreateProductInstancesMutationVariables = Exact<{
-  input: CreateProductInstancesInput;
-}>;
-
-
-export type CreateProductInstancesMutation = { __typename?: 'Mutation', createProductInstances?: { __typename?: 'CreateProductInstancesOutput', data?: any | null, errors: Array<string>, success: boolean } | null };
 
 export type ResourceOperatorQueryVariables = Exact<{
   filter?: InputMaybe<BuildersFilter>;
@@ -21089,39 +21075,6 @@ useSuspenseAllNetworksQuery.getKey = (variables?: AllNetworksQueryVariables) => 
 
 useAllNetworksQuery.fetcher = (variables?: AllNetworksQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<AllNetworksQuery, AllNetworksQueryVariables>(AllNetworksDocument, variables, options);
 
-export const CreateUserDriveDocument = `
-    mutation CreateUserDrive($input: CreateUserDriveInput!) {
-  createUserDrive(input: $input) {
-    data {
-      drives {
-        driveId
-        driveLink
-        driveName
-        driveSlug
-      }
-    }
-    errors
-    success
-  }
-}
-    `;
-
-export const useCreateUserDriveMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateUserDriveMutation, TError, CreateUserDriveMutationVariables, TContext>) => {
-    
-    return useMutation<CreateUserDriveMutation, TError, CreateUserDriveMutationVariables, TContext>(
-      {
-    mutationKey: ['CreateUserDrive'],
-    mutationFn: (variables?: CreateUserDriveMutationVariables) => switchboardFetcher<CreateUserDriveMutation, CreateUserDriveMutationVariables>(CreateUserDriveDocument, variables)(),
-    ...options
-  }
-    )};
-
-
-useCreateUserDriveMutation.fetcher = (variables: CreateUserDriveMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateUserDriveMutation, CreateUserDriveMutationVariables>(CreateUserDriveDocument, variables, options);
-
 export const OperatorProfileDocument = `
     query OperatorProfile($filter: buildersFilter) {
   builders(filter: $filter) {
@@ -21921,32 +21874,6 @@ useSuspenseResourceProfileQuery.getKey = (variables?: ResourceProfileQueryVariab
 
 
 useResourceProfileQuery.fetcher = (variables?: ResourceProfileQueryVariables, options?: RequestInit['headers']) => switchboardFetcher<ResourceProfileQuery, ResourceProfileQueryVariables>(ResourceProfileDocument, variables, options);
-
-export const CreateProductInstancesDocument = `
-    mutation CreateProductInstances($input: CreateProductInstancesInput!) {
-  createProductInstances(input: $input) {
-    data
-    errors
-    success
-  }
-}
-    `;
-
-export const useCreateProductInstancesMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateProductInstancesMutation, TError, CreateProductInstancesMutationVariables, TContext>) => {
-    
-    return useMutation<CreateProductInstancesMutation, TError, CreateProductInstancesMutationVariables, TContext>(
-      {
-    mutationKey: ['CreateProductInstances'],
-    mutationFn: (variables?: CreateProductInstancesMutationVariables) => switchboardFetcher<CreateProductInstancesMutation, CreateProductInstancesMutationVariables>(CreateProductInstancesDocument, variables)(),
-    ...options
-  }
-    )};
-
-
-useCreateProductInstancesMutation.fetcher = (variables: CreateProductInstancesMutationVariables, options?: RequestInit['headers']) => switchboardFetcher<CreateProductInstancesMutation, CreateProductInstancesMutationVariables>(CreateProductInstancesDocument, variables, options);
 
 export const ResourceOperatorDocument = `
     query ResourceOperator($filter: buildersFilter) {

@@ -2,13 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Send } from 'lucide-react'
-import { startTransition, useActionState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { submitRequestAction } from '@/modules/service-purchase/actions/submit-request-action'
+import { useIsAuthenticated } from '@/modules/sdk'
+import { useSubmitPurchaseRequest } from '@/modules/service-purchase/hooks/use-submit-purchase-request'
 import { clearServicePurchasePersistedState } from '@/modules/service-purchase/lib/persistence-utils'
 import {
   formDefaultValues,
-  initialActionState,
   submitRequestSchema,
 } from '@/modules/service-purchase/lib/submit-request-schema'
 import {
@@ -32,22 +32,18 @@ import {
 import { Input } from '@/modules/shared/components/ui/input'
 
 interface RequestFormProps {
-  ethereumAddress: string
   defaultName?: string
   defaultTeamName?: string
 }
 
-function RequestForm({
-  ethereumAddress,
-  defaultName = '',
-  defaultTeamName = '',
-}: RequestFormProps) {
-  const [state, formAction, isPending] = useActionState(submitRequestAction, initialActionState)
+function RequestForm({ defaultName = '', defaultTeamName = '' }: RequestFormProps) {
   const { setRequestEntityData } = useServicePurchaseActions()
   const service = useServiceOffering()
   const { selectedTier, selectedBillingCycle, optionGroups } = useServicePurchaseState()
-
   const { goToStep } = useServicePurchaseStep()
+  const isAuthenticated = useIsAuthenticated()
+
+  const { mutate, isPending, error } = useSubmitPurchaseRequest()
 
   const form = useForm<SubmitRequestFormValues>({
     resolver: zodResolver(submitRequestSchema),
@@ -60,44 +56,25 @@ function RequestForm({
     reset({ name: defaultName, teamName: defaultTeamName, email: '' }, { keepDirtyValues: true })
   }, [reset, defaultName, defaultTeamName])
 
-  useEffect(() => {
-    if (state.success) {
-      setRequestEntityData({
-        name: state.data?.name ?? '',
-        teamName: state.data?.teamName ?? '',
-        email: state.data?.email ?? '',
-        driveUrl: state.data?.driveUrl ?? null,
-      })
-
-      goToStep(ServicePurchaseStep.Confirmation)
-
-      clearServicePurchasePersistedState(service.id)
-    }
-  }, [state, goToStep, setRequestEntityData, service.id])
-
   function onSubmit(data: SubmitRequestFormValues) {
-    const formData = new FormData()
-    formData.append('serviceOfferingId', service.id)
-    formData.append('ethereumAddress', ethereumAddress)
-    formData.append('name', data.name)
-    formData.append('teamName', data.teamName)
-    formData.append('email', data.email)
-
-    // service configuration
-    formData.append('billingCycle', selectedBillingCycle)
-    formData.append('tierId', selectedTier.id)
-    formData.append(
-      'optionGroupIds',
-      JSON.stringify(
-        optionGroups
-          .filter((group) => group.isSelected && group.services.length > 0)
-          .map((group) => group.id),
-      ),
+    mutate(
+      {
+        name: data.name,
+        teamName: data.teamName,
+        email: data.email,
+        service,
+        selectedTierId: selectedTier.id,
+        selectedBillingCycle,
+        optionGroups,
+      },
+      {
+        onSuccess: (result) => {
+          setRequestEntityData(result)
+          goToStep(ServicePurchaseStep.Confirmation)
+          clearServicePurchasePersistedState(service.id)
+        },
+      },
     )
-
-    startTransition(() => {
-      formAction(formData)
-    })
   }
 
   return (
@@ -113,10 +90,10 @@ function RequestForm({
             className="flex flex-col gap-6"
           >
             <fieldset className="flex flex-col gap-4" disabled={isPending}>
-              {state.error && (
+              {error && (
                 <Alert variant="destructive" role="alert">
                   <AlertTitle>Error</AlertTitle>
-                  <AlertDescription>{state.error}</AlertDescription>
+                  <AlertDescription>{error.message}</AlertDescription>
                 </Alert>
               )}
 
@@ -194,7 +171,7 @@ function RequestForm({
             </fieldset>
 
             <div className="flex flex-col gap-4">
-              <Button type="submit" className="w-full" disabled={isPending}>
+              <Button type="submit" className="w-full" disabled={isPending || !isAuthenticated}>
                 {isPending ? (
                   <>
                     <Loader2 className="size-4 animate-spin" aria-hidden="true" />

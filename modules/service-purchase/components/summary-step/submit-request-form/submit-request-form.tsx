@@ -7,16 +7,12 @@ import { LoginPrompt } from './login-prompt'
 import { RequestForm } from './request-form'
 
 function SubmitRequestForm() {
-  const { address, displayName, login } = useRenownAuth()
+  const { displayName, login } = useRenownAuth()
   const { data: drives } = useUserDrives()
 
   return (
     <AuthGuard loginFallback={<LoginPrompt onLogin={login} />}>
-      <RequestForm
-        ethereumAddress={address ?? ''}
-        defaultName={displayName ?? ''}
-        defaultTeamName={drives?.[0]?.driveName ?? ''}
-      />
+      <RequestForm defaultName={displayName ?? ''} defaultTeamName={drives?.[0]?.driveName ?? ''} />
     </AuthGuard>
   )
 }

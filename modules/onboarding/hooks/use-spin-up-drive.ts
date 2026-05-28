@@ -1,12 +1,15 @@
 'use client'
 
-import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
+import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
+import { createBuilderWorkspace } from '@/modules/onboarding/lib/controllers'
 import {
-  type BuilderDriveLink,
-  useCreateUserDriveMutation,
-  UserRole,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+  deriveDriveNaming,
+  OPERATOR_DRIVE_EDITOR,
+  OPERATOR_DRIVE_ICON,
+} from '@/modules/onboarding/lib/drive-naming'
+import { createDrive, documents, useSignedMutation } from '@/modules/sdk'
+import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 
 type SpinUpPersonaId = 'operator' | 'builder'
 
@@ -15,48 +18,51 @@ interface SpinUpDriveInput {
   name: string
 }
 
-const PERSONA_TO_ROLE: Record<SpinUpPersonaId, UserRole> = {
-  operator: UserRole.Operator,
-  builder: UserRole.Builder,
-}
-
 function useSpinUpDrive() {
-  const auth = useRenownAuth()
   const queryClient = useQueryClient()
 
-  return useMutation<BuilderDriveLink, Error, SpinUpDriveInput>({
-    mutationFn: async ({ personaId, name }) => {
-      const address = auth.address
-      if (!address) {
-        throw new Error('You must be signed in to create a drive.')
+  return useSignedMutation<SpinUpDriveInput, BuilderDriveLink>({
+    mutationFn: async ({ personaId, name }, { signer, address }) => {
+      const isOperator = personaId === 'operator'
+
+      const workspace = await createBuilderWorkspace({
+        signer,
+        address,
+        name,
+        isOperator,
+      })
+
+      if (isOperator) {
+        const naming = deriveDriveNaming({ name, address })
+        const { driveId: offeringDriveId } = await createDrive({
+          name: naming.offeringDisplayName,
+          slug: naming.offeringSlug,
+          icon: OPERATOR_DRIVE_ICON,
+          preferredEditor: OPERATOR_DRIVE_EDITOR,
+        })
+        // Drive creation goes through an unsigned `CreateDocument`, so the
+        // drive carries no wallet-signed operation. The backend attributes
+        // drive ownership to the wallet that signed an operation on it, so we
+        // push one signed op here to record the creator — otherwise this
+        // service-offering drive is invisible to `getBuilderDrives`. Loading
+        // the drive with the signer and re-setting its name is a harmless
+        // signed touch that stamps `signer.user.address`.
+        const offeringDrive = await documents.documentDrive.load({
+          documentId: offeringDriveId,
+          signer,
+        })
+        offeringDrive.setDriveName({ name: naming.offeringDisplayName })
+        await offeringDrive.push()
       }
 
-      const result = await useCreateUserDriveMutation.fetcher({
-        input: {
-          user: address,
-          role: PERSONA_TO_ROLE[personaId],
-          name,
-        },
-      })()
-
-      const output = result.createUserDrive
-      if (!output) {
-        throw new Error("Couldn't create your drive. Please try again.")
+      return {
+        __typename: 'BuilderDriveLink',
+        driveId: workspace.driveId,
+        driveSlug: workspace.driveSlug,
+        driveName: workspace.driveName,
+        driveLink: driveLinkFor(workspace.driveSlug),
+        builderProfileId: workspace.builderProfileId,
       }
-      if (!output.success) {
-        const message =
-          output.errors.length > 0
-            ? output.errors.join(', ')
-            : "Couldn't create your drive. Please try again."
-        throw new Error(message)
-      }
-
-      const drive = output.data?.drives[0]
-      if (!drive) {
-        throw new Error("Your drive was created but we couldn't read it back. Please refresh.")
-      }
-
-      return drive
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: ['GetBuilderDrives'] })
