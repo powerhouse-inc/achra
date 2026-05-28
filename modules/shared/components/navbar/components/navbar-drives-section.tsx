@@ -44,7 +44,7 @@ function NavbarDrivesSection({
   return (
     <>
       <DropdownMenuLabel className="text-muted-foreground text-xs font-normal uppercase">
-        Drives
+        Apps
       </DropdownMenuLabel>
       {isPending
         ? Array.from({ length: 2 }, (_, index) => (
