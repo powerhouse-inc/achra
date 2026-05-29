@@ -17,7 +17,7 @@
  * Requires Node 18+ (uses built-in fetch). No dependencies.
  */
 
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { createInterface } from "node:readline/promises";
 import { stdin, stdout, argv, env, exit } from "node:process";
 import { fileURLToPath } from "node:url";
@@ -25,6 +25,31 @@ import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = join(__dirname, "..");
+
+// Where we cache the last wallet we operated on. Lives inside .next (already
+// gitignored) but uses a dedicated, clearly-namespaced filename so it never
+// collides with anything Next.js writes there.
+const LAST_WALLET_FILE = join(PROJECT_ROOT, ".next", ".remove-user-drives-last-wallet");
+
+/** Read the previously remembered wallet, or null if none / unreadable. */
+async function readLastWallet() {
+  try {
+    const v = (await readFile(LAST_WALLET_FILE, "utf8")).trim();
+    return v || null;
+  } catch {
+    return null;
+  }
+}
+
+/** Persist the wallet for next time. Best-effort: never throw on failure. */
+async function rememberWallet(wallet) {
+  try {
+    await mkdir(dirname(LAST_WALLET_FILE), { recursive: true });
+    await writeFile(LAST_WALLET_FILE, `${wallet}\n`, "utf8");
+  } catch {
+    // Caching is a convenience; a write failure must not break the run.
+  }
+}
 
 // --- tiny ansi helpers ---------------------------------------------------
 const c = {
@@ -144,7 +169,13 @@ async function main() {
 
   let wallet = walletArg;
   if (!wallet) {
-    wallet = await prompt("Wallet address: ");
+    const last = await readLastWallet();
+    const question = last
+      ? `Wallet address ${c.dim(`[${last}]`)}: `
+      : "Wallet address: ";
+    const answer = await prompt(question);
+    // Empty input reuses the remembered wallet (the offered default).
+    wallet = answer || last || "";
   }
   if (!wallet) {
     console.error(c.red("No wallet address provided."));
@@ -164,6 +195,9 @@ async function main() {
   console.log(c.dim("\nLooking up drives…"));
   const data = await gql(url, GET_DRIVES, { address: wallet });
   const drives = data?.getBuilderDrives ?? [];
+
+  // Remember this wallet so the next run can offer it as the default.
+  await rememberWallet(wallet);
 
   if (drives.length === 0) {
     console.log(c.green(`\nNo drives found for ${wallet}. Nothing to do.`));

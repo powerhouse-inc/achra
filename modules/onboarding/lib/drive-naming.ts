@@ -49,8 +49,12 @@ export function deriveDriveNaming(input: DriveNamingInput): DriveNaming {
   }
 }
 
-export const PRIMARY_DRIVE_ICON =
-  'https://www.pngall.com/wp-content/uploads/12/Engineer-Helmet-Equipment-PNG-Image-HD.png'
-export const OPERATOR_DRIVE_ICON = 'https://cdn-icons-png.magnific.com/256/17754/17754439.png'
-export const BUILDER_DRIVE_EDITOR = 'builder-team-admin'
-export const OPERATOR_DRIVE_EDITOR = 'service-offering-app'
+// Drive icons + preferred editors must match op-hub. Connect resolves a
+// drive's editor by matching `header.meta.preferredEditor` to the editor
+// module's `config.id`; op-hub renamed those modules (builder-team-admin →
+// team-admin, service-offering-app → service-offering) and ships a canonical
+// background icon per editor (see op-hub scripts/drive-sync/upload.sh).
+export const PRIMARY_DRIVE_ICON = 'https://i.postimg.cc/FztDhVrh/team-admin-bg.png'
+export const OPERATOR_DRIVE_ICON = 'https://i.postimg.cc/QtFy8Mc4/service-offering-bg.png'
+export const BUILDER_DRIVE_EDITOR = 'team-admin'
+export const OPERATOR_DRIVE_EDITOR = 'service-offering'
