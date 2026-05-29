@@ -37,9 +37,14 @@ import { defineDocumentModel } from '@/modules/sdk/documents/define'
  * new doc type = one line here. Consumers reach for `documents.<name>` and
  * never write `PHDocumentController.forDocumentModel<S, A>` themselves.
  *
- * This file is the ONLY SDK file that imports app-specific document
- * models. When the SDK is extracted to a package, this file stays in the
- * app and re-exports the package's `defineDocumentModel` factory.
+ * Layering: the extractable, app-agnostic core is `documents/` (drives,
+ * workspace, define) — it knows nothing about achra. The achra-domain layer
+ * lives in `sdk/workspaces/` (builder-workspace orchestration + drive naming)
+ * and composes that core; it is NOT part of the extractable package. This
+ * registry is the seam between the two — the one place that names the app's
+ * concrete document models. When the core is extracted to a package, this file
+ * and `sdk/workspaces/` stay in the app and re-export the package's
+ * `defineDocumentModel` factory.
  */
 export const documents = {
   builderProfile: defineDocumentModel<BuilderProfilePHState, BuilderProfileAction>(

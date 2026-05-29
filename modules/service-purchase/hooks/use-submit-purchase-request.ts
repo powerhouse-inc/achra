@@ -10,9 +10,13 @@ import type {
   RsBillingCycle,
   ServiceOfferingFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { createBuilderWorkspace } from '@/modules/onboarding/lib/controllers'
-import { slugify } from '@/modules/onboarding/lib/drive-naming'
-import { documents, openWorkspace, useSignedMutation } from '@/modules/sdk'
+import {
+  createBuilderWorkspace,
+  documents,
+  openWorkspace,
+  slugify,
+  useSignedMutation,
+} from '@/modules/sdk'
 import { mapOfferingToSubscription } from '@/modules/service-purchase/lib/map-offering-to-subscription'
 import type {
   CreateResourceInstancesResult,

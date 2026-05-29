@@ -1,3 +1,5 @@
+import { generateId } from 'document-model/core'
+
 export function slugify(value: string): string {
   return value
     .trim()
@@ -21,31 +23,47 @@ export interface DriveNaming {
   baseDisplayName: string
   baseSlug: string
   profileDisplayName: string
+  profileSlug: string
   offeringSlug: string
   offeringDisplayName: string
 }
 
-/** Suffix appended to a builder drive's slug to derive its operator/service-offering drive. */
-export const OPERATOR_DRIVE_SLUG_SUFFIX = '-operator'
+/**
+ * Canonical drive display names — they mirror the preferred-editor ids below
+ * (`team-admin` → "Team Admin", `service-offering` → "Service Offering") so a
+ * drive's label always reflects its editor/type rather than the builder's name.
+ */
+export const PRIMARY_DRIVE_NAME = 'Team Admin'
+export const OPERATOR_DRIVE_NAME = 'Service Offering'
 
-/** True when a drive slug belongs to an operator/service-offering drive (vs the primary builder drive). */
-export function isOperatorDriveSlug(slug: string): boolean {
-  return slug.endsWith(OPERATOR_DRIVE_SLUG_SUFFIX)
+/**
+ * True when a drive belongs to an operator/service-offering (vs the primary
+ * builder/team-admin drive). Slugs are random and opaque, so the drive type is
+ * read from its (fixed) name. Drive rename is not user-exposed, so the name is
+ * a stable type signal.
+ */
+export function isOperatorDriveName(name: string): boolean {
+  return name === OPERATOR_DRIVE_NAME
 }
 
 export function deriveDriveNaming(input: DriveNamingInput): DriveNaming {
   const suffix = addressSuffix(input.address)
   const trimmedTeam = input.teamName?.trim() ?? ''
   const trimmedName = input.name?.trim() ?? ''
-  const baseDisplayName = trimmedTeam || trimmedName || `User ${suffix}`
-  const baseSlug = slugify(trimmedTeam) || slugify(trimmedName) || `user-${suffix}`
+  // The profile keeps the builder's own name; the drive labels are canonical.
   const profileDisplayName = trimmedName || trimmedTeam || `User ${suffix}`
   return {
-    baseDisplayName,
-    baseSlug,
+    baseDisplayName: PRIMARY_DRIVE_NAME,
+    // Drive slugs are auto-assigned random (URL-safe) ids — not derived from
+    // name or address — so they never collide and carry no guessable identity.
+    baseSlug: generateId(),
+    offeringSlug: generateId(),
     profileDisplayName,
-    offeringSlug: `${baseSlug}${OPERATOR_DRIVE_SLUG_SUFFIX}`,
-    offeringDisplayName: `${baseDisplayName} Operator`,
+    // The profile slug is distinct from the drive slug and stays human-readable:
+    // it feeds the public builder URL (`/builders/<slug>`). Derived from the
+    // builder's name, with the address suffix as a uniqueness fallback.
+    profileSlug: slugify(trimmedName) || slugify(trimmedTeam) || `user-${suffix}`,
+    offeringDisplayName: OPERATOR_DRIVE_NAME,
   }
 }
 

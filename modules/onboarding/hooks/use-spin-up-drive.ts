@@ -2,13 +2,11 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
-import { createBuilderWorkspace } from '@/modules/onboarding/lib/controllers'
 import {
-  deriveDriveNaming,
-  OPERATOR_DRIVE_EDITOR,
-  OPERATOR_DRIVE_ICON,
-} from '@/modules/onboarding/lib/drive-naming'
-import { createDrive, documents, useSignedMutation } from '@/modules/sdk'
+  createBuilderWorkspace,
+  createOperatorOfferingDrive,
+  useSignedMutation,
+} from '@/modules/sdk'
 import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 
 type SpinUpPersonaId = 'operator' | 'builder'
@@ -33,26 +31,7 @@ function useSpinUpDrive() {
       })
 
       if (isOperator) {
-        const naming = deriveDriveNaming({ name, address })
-        const { driveId: offeringDriveId } = await createDrive({
-          name: naming.offeringDisplayName,
-          slug: naming.offeringSlug,
-          icon: OPERATOR_DRIVE_ICON,
-          preferredEditor: OPERATOR_DRIVE_EDITOR,
-        })
-        // Drive creation goes through an unsigned `CreateDocument`, so the
-        // drive carries no wallet-signed operation. The backend attributes
-        // drive ownership to the wallet that signed an operation on it, so we
-        // push one signed op here to record the creator — otherwise this
-        // service-offering drive is invisible to `getBuilderDrives`. Loading
-        // the drive with the signer and re-setting its name is a harmless
-        // signed touch that stamps `signer.user.address`.
-        const offeringDrive = await documents.documentDrive.load({
-          documentId: offeringDriveId,
-          signer,
-        })
-        offeringDrive.setDriveName({ name: naming.offeringDisplayName })
-        await offeringDrive.push()
+        await createOperatorOfferingDrive({ signer, address, name })
       }
 
       return {

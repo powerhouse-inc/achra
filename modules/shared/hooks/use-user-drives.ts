@@ -2,7 +2,7 @@
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { useGetBuilderDrivesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
-import { isOperatorDriveSlug } from '@/modules/onboarding/lib/drive-naming'
+import { isOperatorDriveName } from '@/modules/sdk'
 
 function useUserDrives() {
   const auth = useRenownAuth()
@@ -21,7 +21,7 @@ function useUserDrives() {
       select: (data) =>
         [...data.getBuilderDrives].sort(
           (a, b) =>
-            Number(isOperatorDriveSlug(a.driveSlug)) - Number(isOperatorDriveSlug(b.driveSlug)),
+            Number(isOperatorDriveName(a.driveName)) - Number(isOperatorDriveName(b.driveName)),
         ),
     },
   )

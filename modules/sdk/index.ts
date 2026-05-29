@@ -14,6 +14,25 @@ export {
 } from '@/modules/sdk/documents/workspace'
 
 export {
+  type CreatedBuilderWorkspace,
+  createBuilderWorkspace,
+  createOperatorOfferingDrive,
+} from '@/modules/sdk/workspaces/controllers'
+export {
+  BUILDER_DRIVE_EDITOR,
+  deriveDriveNaming,
+  type DriveNaming,
+  type DriveNamingInput,
+  isOperatorDriveName,
+  OPERATOR_DRIVE_EDITOR,
+  OPERATOR_DRIVE_ICON,
+  OPERATOR_DRIVE_NAME,
+  PRIMARY_DRIVE_ICON,
+  PRIMARY_DRIVE_NAME,
+  slugify,
+} from '@/modules/sdk/workspaces/drive-naming'
+
+export {
   useSignedMutation,
   type SignedContext,
   type UseSignedMutationOptions,

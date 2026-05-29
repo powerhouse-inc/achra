@@ -31,6 +31,14 @@ export interface AddDocumentArgs<TController> {
    * returns.
    */
   init: (controller: TController) => void
+  /**
+   * Optional follow-up dispatched after the document exists and its id has
+   * been assigned. The reactor assigns the id at push time, so it is unknown
+   * during `init`; this runs on the same controller once the id is known and
+   * is pushed as a second signed batch. Use to set state that must reference
+   * the document's own id (e.g. a self-referential `id` field).
+   */
+  initWithId?: (controller: TController, id: string) => void
   /** Name of the file node registered in the drive tree. */
   fileName: string
   /** Optional folder node id to nest the file under. */
@@ -69,6 +77,17 @@ export interface Workspace {
     name: string
     parentFolder?: string
   }): Promise<void>
+  /**
+   * Push one harmless signed operation (re-setting the drive's own name) to
+   * stamp the signer's wallet on the drive. A freshly created drive carries
+   * only the genesis header sig (the session key → did:key), not a
+   * wallet-signed operation; the backend attributes drive ownership to the
+   * wallet that signed an *operation*, so a drive with no signed ops is
+   * invisible to a wallet→drive reverse lookup. Drives that get a child
+   * document via {@link addDocument} are attributed for free by that push;
+   * call this only for an otherwise-empty drive that needs attribution.
+   */
+  touch(): Promise<void>
   /** Push the accumulated drive-tree changes as one signed batch. No-op if nothing was queued. */
   commit(): Promise<void>
 }
@@ -103,6 +122,11 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
     const pushed = await controller.push()
     const id = pushed.remoteDocument.id
 
+    if (args.initWithId) {
+      args.initWithId(controller, id)
+      await controller.push()
+    }
+
     const driveController = await drive()
     driveController.addFile({
       documentType: args.definition.documentType,
@@ -130,6 +154,12 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
     dirty = true
   }
 
+  async function touch(): Promise<void> {
+    const controller = await drive()
+    controller.setDriveName({ name: controller.state.global.name })
+    await controller.push()
+  }
+
   async function commit(): Promise<void> {
     if (!dirty) return
     const controller = await drive()
@@ -137,13 +167,11 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
     dirty = false
   }
 
-  return { driveId, ensureFolder, addDocument, registerDocument, commit }
+  return { driveId, ensureFolder, addDocument, registerDocument, touch, commit }
 }
 
 /** Create a new drive and return a {@link Workspace} bound to it. */
-export async function createWorkspace(
-  opts: CreateDriveOptions & { signer: ISigner },
-): Promise<Workspace> {
+export async function createWorkspace(opts: CreateDriveOptions): Promise<Workspace> {
   const { driveId } = await createDrive(opts)
   return makeWorkspace(driveId, opts.signer)
 }
