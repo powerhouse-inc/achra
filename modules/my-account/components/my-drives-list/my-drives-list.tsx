@@ -4,6 +4,7 @@ import { MyDrivesListEmpty } from '@/modules/my-account/components/my-drives-lis
 import { MyDrivesListError } from '@/modules/my-account/components/my-drives-list/my-drives-list-error'
 import { MyDrivesListSkeleton } from '@/modules/my-account/components/my-drives-list/my-drives-list-skeleton'
 import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
+import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 import { ConnectLink } from '@/shared/components/connect-link/connect-link'
 import {
   Card,
@@ -12,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card'
+import type { Route } from 'next'
 
 function MyDrivesList() {
   const { data: drives, isPending, isError, refetch } = useUserDrives()
@@ -34,7 +36,7 @@ function MyDrivesList() {
             {drives.map((drive) => (
               <li key={drive.driveId}>
                 <ConnectLink
-                  href={drive.driveLink}
+                  href={driveLinkFor(drive.driveSlug) as Route}
                   driveName={drive.driveName}
                   className="block"
                   variant="default"
