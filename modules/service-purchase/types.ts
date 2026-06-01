@@ -28,12 +28,6 @@ export interface CreateResourceInstancesResult {
   driveUrl: string | null
 }
 
-export interface SubmitRequestFormState {
-  success: boolean
-  error?: string
-  data?: CreateResourceInstancesResult
-}
-
 export type SubmitRequestFormValues = z.infer<typeof submitRequestSchema>
 
 // store types

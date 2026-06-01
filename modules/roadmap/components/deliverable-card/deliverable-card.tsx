@@ -2,10 +2,10 @@
 
 import { useCallback, useState } from 'react'
 import {
-  type ScopeOfWork_Agent,
-  type ScopeOfWork_Deliverable,
-  ScopeOfWork_DeliverableStatus,
-  type ScopeOfWork_Project,
+  type Sow_Agent,
+  type Sow_Deliverable,
+  Sow_DeliverableStatus,
+  type Sow_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
 import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
@@ -21,9 +21,9 @@ import { ProjectLink } from './project-link'
 export type DeliverableViewMode = 'compacted' | 'detailed'
 
 interface DeliverableCardProps {
-  deliverable: ScopeOfWork_Deliverable
-  contributors: ScopeOfWork_Agent[]
-  projects: ScopeOfWork_Project[]
+  deliverable: Sow_Deliverable
+  contributors: Sow_Agent[]
+  projects: Sow_Project[]
   viewMode: DeliverableViewMode
   maxKeyResultsOnRow: number
   isProjectCard?: boolean
@@ -43,7 +43,9 @@ function DeliverableCard({
     setExpanded((prev) => !prev)
   }, [])
 
-  const deliverableOwner = contributors.find((contributor) => contributor.id === deliverable.owner)
+  const deliverableOwner = contributors.find(
+    (contributor) => contributor.id === deliverable.owner?.id,
+  )
   const deliverableProject = projects.find(
     (project) => project.id === deliverable.budgetAnchor?.project,
   )
@@ -88,7 +90,7 @@ function DeliverableCard({
       {/* progress */}
       <div className="flex w-full items-center gap-2">
         <DeliverableStatusChip status={deliverable.status} />
-        {deliverable.status === ScopeOfWork_DeliverableStatus.InProgress &&
+        {deliverable.status === Sow_DeliverableStatus.InProgress &&
           deliverable.workProgress &&
           (isStoryPointProgress(deliverable.workProgress) ? (
             <DeliverableStoryPointBar

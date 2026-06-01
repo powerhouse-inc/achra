@@ -1,7 +1,4 @@
-import {
-  type ScopeOfWork_Milestone,
-  useRoadmapListQuery,
-} from '@/modules/__generated__/graphql/switchboard-generated'
+import { useRoadmapListQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
@@ -76,7 +73,7 @@ async function RoadmapSection({ params }: RoadmapSectionProps) {
               {roadmap.milestones.map((milestone) => (
                 <MilestoneExtendedCard
                   key={milestone.id}
-                  milestone={milestone as ScopeOfWork_Milestone}
+                  milestone={milestone}
                   networkSlug={slug}
                   roadmapSlug={roadmap.slug}
                   deliverables={deliverables}
@@ -84,7 +81,7 @@ async function RoadmapSection({ params }: RoadmapSectionProps) {
               ))}
             </div>
             <RoadmapSwiper
-              milestones={roadmap.milestones as ScopeOfWork_Milestone[]}
+              milestones={roadmap.milestones}
               networkSlug={slug}
               roadmapSlug={roadmap.slug}
               deliverables={deliverables}

@@ -3,8 +3,8 @@
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type {
-  ScopeOfWork_Milestone,
   Sow_Deliverable,
+  Sow_Milestone,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
   MilestoneExtendedCard,
@@ -14,7 +14,7 @@ import { cn } from '@/shared/lib/utils'
 import { useRoadmapSwiper } from './use-roadmap-swiper'
 
 interface RoadmapSwiperProps {
-  milestones: ScopeOfWork_Milestone[]
+  milestones: Sow_Milestone[]
   networkSlug: string
   roadmapSlug: string
   deliverables: Sow_Deliverable[]

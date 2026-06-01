@@ -1,7 +1,10 @@
 'use client'
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { ChevronDown, LogIn, LogOut, User } from 'lucide-react'
+import { ChevronDown, LogIn, LogOut, User, UserPlus } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Suspense } from 'react'
 import {
   CopyAnimatedIcon,
   CopyButton,
@@ -18,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/modules/shared/components/ui/dropdown-menu'
 import * as NavbarPrimitives from '../primitives'
+import { NavbarDrivesSection } from './navbar-drives-section'
 
 interface UserButtonProps {
   open?: boolean
@@ -43,6 +47,67 @@ function AddressLabel({ address, displayAddress }: { address: string; displayAdd
 }
 
 /**
+ * Desktop Sign up link that includes the current pathname as `returnTo`.
+ * Wrapped in Suspense so the parent (UserButton) can be rendered as a
+ * Suspense fallback during static prerender without accessing pathname.
+ */
+function SignUpButton() {
+  return (
+    <Suspense
+      fallback={
+        <Button asChild>
+          <Link href="/get-started">Sign up</Link>
+        </Button>
+      }
+    >
+      <SignUpButtonWithReturnTo />
+    </Suspense>
+  )
+}
+
+function SignUpButtonWithReturnTo() {
+  const pathname = usePathname()
+  return (
+    <Button asChild>
+      <Link href={`/get-started?returnTo=${encodeURIComponent(pathname)}`}>Sign up</Link>
+    </Button>
+  )
+}
+
+/**
+ * Mobile Sign up option that includes the current pathname as `returnTo`.
+ * Wrapped in Suspense for the same reason as SignUpButton.
+ */
+function SignUpOption() {
+  return (
+    <Suspense
+      fallback={
+        <NavbarPrimitives.ActionOption asChild>
+          <Link href="/get-started">
+            <UserPlus />
+            <span>Sign up</span>
+          </Link>
+        </NavbarPrimitives.ActionOption>
+      }
+    >
+      <SignUpOptionWithReturnTo />
+    </Suspense>
+  )
+}
+
+function SignUpOptionWithReturnTo() {
+  const pathname = usePathname()
+  return (
+    <NavbarPrimitives.ActionOption asChild>
+      <Link href={`/get-started?returnTo=${encodeURIComponent(pathname)}`}>
+        <UserPlus />
+        <span>Sign up</span>
+      </Link>
+    </NavbarPrimitives.ActionOption>
+  )
+}
+
+/**
  * User avatar or login button for desktop
  */
 function UserButton({ open, onOpenChange }: UserButtonProps) {
@@ -50,9 +115,12 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
-      <Button variant="outline" onClick={auth.login}>
-        Log in
-      </Button>
+      <>
+        <Button variant="outline" onClick={auth.login}>
+          Log in
+        </Button>
+        <SignUpButton />
+      </>
     )
   }
 
@@ -78,6 +146,13 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
             <span>View Profile</span>
           </DropdownMenuItem>
         ) : null}
+        <DropdownMenuItem asChild className="cursor-pointer">
+          <Link href="/my-account">
+            <User />
+            <span>My Account</span>
+          </Link>
+        </DropdownMenuItem>
+        <NavbarDrivesSection />
         <DropdownMenuItem
           variant="destructive"
           className="cursor-pointer"
@@ -100,10 +175,13 @@ function UserOption() {
 
   if (auth.status !== 'authorized' || !auth.address) {
     return (
-      <NavbarPrimitives.ActionOption onClick={auth.login}>
-        <LogIn />
-        <span>Log in</span>
-      </NavbarPrimitives.ActionOption>
+      <>
+        <NavbarPrimitives.ActionOption onClick={auth.login}>
+          <LogIn />
+          <span>Log in</span>
+        </NavbarPrimitives.ActionOption>
+        <SignUpOption />
+      </>
     )
   }
 
@@ -120,6 +198,16 @@ function UserOption() {
           <span>View Profile</span>
         </NavbarPrimitives.ActionOption>
       ) : null}
+      <NavbarPrimitives.ActionOption asChild>
+        <Link href="/my-account">
+          <User />
+          <span>My Account</span>
+        </Link>
+      </NavbarPrimitives.ActionOption>
+      <NavbarDrivesSection
+        ItemComponent={NavbarPrimitives.ActionOption}
+        Separator={NavbarPrimitives.ActionOptionSeparator}
+      />
       <NavbarPrimitives.ActionOption variant="destructive" onClick={() => void auth.logout()}>
         <LogOut />
         <span>Log out</span>

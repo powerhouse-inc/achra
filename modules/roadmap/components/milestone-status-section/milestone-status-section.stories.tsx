@@ -1,4 +1,4 @@
-import { ScopeOfWork_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
+import { Sow_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneStatusSection } from './milestone-status-section'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -12,7 +12,7 @@ const meta = {
   argTypes: {
     status: {
       control: 'select',
-      options: Object.values(ScopeOfWork_DeliverableSetStatus),
+      options: Object.values(Sow_DeliverableSetStatus),
       description: 'Deliverable set status',
     },
     progress: {
@@ -27,21 +27,21 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    status: ScopeOfWork_DeliverableSetStatus.InProgress,
+    status: Sow_DeliverableSetStatus.InProgress,
     progress: 60,
   },
 }
 
 export const Finished: Story = {
   args: {
-    status: ScopeOfWork_DeliverableSetStatus.Finished,
+    status: Sow_DeliverableSetStatus.Finished,
     progress: 100,
   },
 }
 
 export const Todo: Story = {
   args: {
-    status: ScopeOfWork_DeliverableSetStatus.Todo,
+    status: Sow_DeliverableSetStatus.Todo,
     progress: 0,
   },
 }
