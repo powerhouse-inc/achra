@@ -7,7 +7,7 @@ import type { PurchaseTotals } from '../types'
 
 /**
  * Computes purchase totals from service offering and current selections.
- * Uses getUserSelectionPriceBreakdown from @powerhousedao/service-offering as single source of truth.
+ * Uses getUserSelectionPriceBreakdown from @powerhousedao/op-hub as single source of truth.
  * Used by the totals slice and by the store's merge function during rehydration.
  */
 export function computeTotals(

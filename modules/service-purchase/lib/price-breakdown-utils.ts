@@ -4,7 +4,7 @@ import {
   type PriceBreakdown,
   type ServiceOfferingPHState,
   type UserSelection,
-} from '@powerhousedao/service-offering/document-models/service-offering'
+} from '@powerhousedao/op-hub/document-models/service-offering'
 import type {
   RsBillingCycle,
   ServiceOfferingFieldsFragment,

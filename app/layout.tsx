@@ -4,9 +4,10 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
-import { Renown } from '@/modules/shared/components/renown/renown'
+import { PostLoginRedirect } from '@/modules/shared/components/post-login-redirect/post-login-redirect'
 import { Toaster } from '@/modules/shared/components/ui/sonner'
 import ff from '@/modules/shared/lib/feature-flags'
+import { SDKProvider } from '@/modules/shared/providers/sdk-provider'
 import { RootThemeProvider } from '@/modules/shared/providers/theme-provider'
 import { WhitelistOverlay } from '@/modules/whitelist/components/whitelist-overlay'
 import { Footer } from '@/shared/components/footer'
@@ -88,19 +89,29 @@ export default function RootLayout({
       >
         <RootThemeProvider>
           <QueryClientProvider>
-            {ff.AUTH_ENABLED && <Renown appName="achra" url={process.env.NEXT_PUBLIC_RENOWN_URL} />}
-            <NuqsAdapter>
-              <main className="flex-1">{children}</main>
-
-              {ff.WHITELIST_OVERLAY_ENABLED && (
-                <Suspense>
-                  <WhitelistOverlay />
+            <SDKProvider
+              appName="achra"
+              renownUrl={process.env.NEXT_PUBLIC_RENOWN_URL}
+              enabled={ff.AUTH_ENABLED}
+            >
+              {ff.AUTH_ENABLED && (
+                <Suspense fallback={null}>
+                  <PostLoginRedirect />
                 </Suspense>
               )}
+              <NuqsAdapter>
+                <main className="flex-1">{children}</main>
 
-              <Footer />
-              <Toaster />
-            </NuqsAdapter>
+                {ff.WHITELIST_OVERLAY_ENABLED && (
+                  <Suspense>
+                    <WhitelistOverlay />
+                  </Suspense>
+                )}
+
+                <Footer />
+                <Toaster />
+              </NuqsAdapter>
+            </SDKProvider>
           </QueryClientProvider>
         </RootThemeProvider>
 

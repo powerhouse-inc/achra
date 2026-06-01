@@ -2,6 +2,7 @@
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { useGetBuilderDrivesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import { isOperatorDriveName } from '@/modules/sdk'
 
 function useUserDrives() {
   const auth = useRenownAuth()
@@ -13,7 +14,17 @@ function useUserDrives() {
     {
       enabled,
       staleTime: 30_000,
-      select: (data) => data.getBuilderDrives,
+      // Sort operator/service-offering drives last so the team-admin drive leads
+      // the navbar and "My Drives" list. Builder-drive consumers (profile
+      // resolution, the purchase workspace) no longer rely on order — they match
+      // the profile-bearing drive explicitly by `builderProfileId` — but a stable,
+      // predictable order still reads better in the lists. Stable sort preserves
+      // intra-group order.
+      select: (data) =>
+        [...data.getBuilderDrives].sort(
+          (a, b) =>
+            Number(isOperatorDriveName(a.driveName)) - Number(isOperatorDriveName(b.driveName)),
+        ),
     },
   )
 }
