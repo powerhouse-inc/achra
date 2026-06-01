@@ -14,24 +14,26 @@ type SpinUpPersonaId = 'operator' | 'builder'
 interface SpinUpDriveInput {
   personaId: SpinUpPersonaId
   name: string
+  ensName?: string
 }
 
 function useSpinUpDrive() {
   const queryClient = useQueryClient()
 
   return useSignedMutation<SpinUpDriveInput, BuilderDriveLink>({
-    mutationFn: async ({ personaId, name }, { signer, address }) => {
+    mutationFn: async ({ personaId, name, ensName }, { signer, address }) => {
       const isOperator = personaId === 'operator'
 
       const workspace = await createBuilderWorkspace({
         signer,
         address,
         name,
+        ensName,
         isOperator,
       })
 
       if (isOperator) {
-        await createOperatorOfferingDrive({ signer, address, name })
+        await createOperatorOfferingDrive({ signer, address, name, ensName })
       }
 
       return {

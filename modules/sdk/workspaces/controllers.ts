@@ -32,11 +32,13 @@ export async function createBuilderWorkspace(opts: {
   address: string
   teamName?: string
   name?: string
+  ensName?: string
   isOperator?: boolean
 }): Promise<CreatedBuilderWorkspace> {
   const naming = deriveDriveNaming({
     name: opts.name,
     teamName: opts.teamName,
+    ensName: opts.ensName,
     address: opts.address,
   })
 
@@ -91,8 +93,13 @@ export async function createOperatorOfferingDrive(opts: {
   signer: ISigner
   address: string
   name?: string
+  ensName?: string
 }): Promise<{ driveId: string }> {
-  const naming = deriveDriveNaming({ name: opts.name, address: opts.address })
+  const naming = deriveDriveNaming({
+    name: opts.name,
+    ensName: opts.ensName,
+    address: opts.address,
+  })
 
   const workspace = await createWorkspace({
     name: naming.offeringDisplayName,

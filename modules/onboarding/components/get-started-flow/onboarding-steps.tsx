@@ -62,7 +62,9 @@ function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
     const name = form.getValues('displayName')
     setPhase('spinning-up')
     spinUpMutate(
-      { personaId, name },
+      // `ensName` is the fallback prefix for builders who leave the name field
+      // empty — the drive is labelled with their ENS over a bare wallet address.
+      { personaId, name, ensName: auth.ensName },
       {
         onSuccess: (drive) => {
           setCreatedDrive(drive)
@@ -71,7 +73,7 @@ function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
         },
       },
     )
-  }, [form, spinUpMutate, onComplete])
+  }, [form, spinUpMutate, onComplete, auth.ensName])
 
   const handleBackToChooseRole = useCallback(() => {
     setPhase('choose-role')
