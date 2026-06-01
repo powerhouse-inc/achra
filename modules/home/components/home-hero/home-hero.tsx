@@ -1,32 +1,11 @@
 'use client'
 
-import { motion, useInView } from 'motion/react'
-import { useRef } from 'react'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
-import { SkyIsotype, SkyLogotype } from '@/shared/components/svgs'
 import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 
-const partnershipBlurInitial = {
-  filter: 'blur(10px)',
-  opacity: 0,
-  y: 50,
-}
-
-const partnershipBlurAnimate = {
-  filter: ['blur(10px)', 'blur(5px)', 'blur(0px)'],
-  opacity: [0, 0.5, 1],
-  y: [50, -5, 0],
-}
-
 function HomeHero() {
-  // Observe the hero `<section>` (native ref is set before effects). `useInView` on `motion.*`
-  // can miss the first intersection if the ref isn't attached when the effect runs.
-  const heroSectionRef = useRef<HTMLElement>(null)
-  const heroInView = useInView(heroSectionRef, { once: true, amount: 'some' })
-
   return (
     <section
-      ref={heroSectionRef}
       className="bg-background relative flex min-h-screen w-full items-center justify-center overflow-x-clip px-4 py-10 sm:px-6 md:px-8"
       aria-labelledby="home-hero-heading"
     >
@@ -81,32 +60,6 @@ function HomeHero() {
             />
           </div>
         </div>
-
-        <motion.div
-          className="flex flex-col items-center gap-2.5"
-          initial={partnershipBlurInitial}
-          animate={heroInView ? partnershipBlurAnimate : partnershipBlurInitial}
-          transition={{
-            delay: 0.6,
-            duration: 0.7,
-            times: [0, 0.5, 1],
-            ease: 'easeInOut',
-          }}
-          style={{ willChange: 'transform, filter, opacity' }}
-        >
-          <span className="text-muted-foreground text-xs font-semibold tracking-[0.15em] uppercase">
-            In Partnership With
-          </span>
-          <a
-            href="https://sky.money"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground flex items-center gap-2"
-          >
-            <SkyIsotype className="size-6" aria-hidden />
-            <SkyLogotype className="h-5 w-auto" aria-label="Sky" />
-          </a>
-        </motion.div>
       </div>
     </section>
   )
