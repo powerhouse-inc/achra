@@ -2,13 +2,24 @@
 /**
  * remove-user-drives.mjs
  *
- * Removes ALL drives belonging to a given wallet address from the Switchboard
- * reactor pointed to by NEXT_PUBLIC_SWITCHBOARD_URL in the project's .env.
+ * Removes selected drives belonging to a given wallet address from the
+ * Switchboard reactor pointed to by NEXT_PUBLIC_SWITCHBOARD_URL in the
+ * project's .env.
+ *
+ * By default it opens an interactive picker so you choose exactly which
+ * drives to delete (↑/↓ to move, space to toggle, a to toggle all,
+ * enter to confirm, esc to abort).
  *
  * Usage:
- *   node scripts/remove-user-drives.mjs                 # prompts for wallet
- *   node scripts/remove-user-drives.mjs 0xWallet...     # wallet as argument
- *   node scripts/remove-user-drives.mjs 0xWallet... -y  # skip confirmation
+ *   node scripts/remove-user-drives.mjs                 # prompt wallet, then pick drives
+ *   node scripts/remove-user-drives.mjs 0xWallet...     # wallet as argument, then pick drives
+ *   node scripts/remove-user-drives.mjs 0xWallet... -y  # pick drives, skip final confirmation
+ *   node scripts/remove-user-drives.mjs 0xWallet... --all     # select every drive (no picker)
+ *   node scripts/remove-user-drives.mjs 0xWallet... --all -y  # remove every drive non-interactively
+ *
+ * Flags:
+ *   --all, -a    select every drive (skips the interactive picker; useful for non-TTY)
+ *   --yes, -y    skip the final "are you sure?" confirmation
  *
  * Overrides:
  *   NEXT_PUBLIC_SWITCHBOARD_URL   override the .env URL (env var wins)
@@ -119,6 +130,115 @@ async function prompt(question) {
   }
 }
 
+/**
+ * Interactive multi-select over the given drives.
+ *
+ * Returns the array of chosen drives (possibly empty), or null if the user
+ * aborted (esc / q / ctrl-c). Requires a TTY — callers must check stdin.isTTY.
+ */
+function selectDrivesInteractive(drives) {
+  const selected = drives.map(() => true); // all pre-selected; deselect to keep
+  let cursor = 0;
+  let prevCount = 0;
+  let first = true;
+
+  // Restore the terminal no matter how we leave (including an uncaught throw
+  // mid-render). Without this, a crash would leave raw mode on and the cursor
+  // hidden, forcing the user to `reset` their shell.
+  const restore = () => {
+    if (stdin.isTTY) stdin.setRawMode(false);
+    stdout.write("\x1b[?25h"); // show cursor
+  };
+
+  const clip = (s, n) => {
+    n = Math.max(0, n);
+    return s.length > n ? s.slice(0, Math.max(0, n - 1)) + "…" : s;
+  };
+
+  const build = () => {
+    const width = stdout.columns || 80;
+    const lines = [
+      c.bold("Select drives to remove:"),
+      c.dim(clip("↑/↓ move · space toggle · a toggle all · enter confirm · esc abort", width - 1)),
+      "",
+    ];
+    drives.forEach((d, i) => {
+      const isCursor = i === cursor;
+      const pointer = isCursor ? c.cyan(">") : " ";
+      const box = selected[i] ? c.green("[x]") : "[ ]";
+      // Visible prefix ("> [x] ") is a fixed 6 columns; clip only the plain
+      // label so the logical line count always matches physical rows (no wrap).
+      const label = clip(`${d.driveName}  (slug: ${d.driveSlug}, id: ${d.driveId})`, width - 6 - 1);
+      lines.push(`${pointer} ${box} ${isCursor ? c.bold(label) : label}`);
+    });
+    lines.push("");
+    lines.push(c.dim(`(${selected.filter(Boolean).length} selected)`));
+    return lines;
+  };
+
+  const draw = () => {
+    const lines = build();
+    if (!first) stdout.write(`\x1b[${prevCount}A\x1b[0J`); // up, then clear to end
+    first = false;
+    stdout.write(lines.join("\n") + "\n");
+    prevCount = lines.length;
+  };
+
+  return new Promise((resolve, reject) => {
+    const onKey = (key) => {
+      try {
+        if (key === "\x03") { // ctrl-c
+          cleanup();
+          resolve(null);
+          return;
+        }
+        if (key === "\r" || key === "\n") {
+          cleanup();
+          resolve(drives.filter((_, i) => selected[i]));
+          return;
+        }
+        if (key === "\x1b" || key === "q") { // esc / q → abort
+          cleanup();
+          resolve(null);
+          return;
+        }
+        if (key === "\x1b[A" || key === "\x1bOA" || key === "k") {
+          cursor = (cursor - 1 + drives.length) % drives.length;
+        } else if (key === "\x1b[B" || key === "\x1bOB" || key === "j") {
+          cursor = (cursor + 1) % drives.length;
+        } else if (key === " ") {
+          selected[cursor] = !selected[cursor];
+        } else if (key === "a") {
+          const allOn = selected.every(Boolean);
+          selected.fill(!allOn);
+        } else {
+          return; // ignore unknown keys without a redraw
+        }
+        draw();
+      } catch (err) {
+        cleanup();
+        reject(err);
+      }
+    };
+
+    const cleanup = () => {
+      stdin.off("data", onKey);
+      process.off("exit", restore);
+      restore();
+      stdin.pause();
+      stdout.write("\n");
+    };
+
+    process.once("exit", restore); // safety net for an uncaught throw
+    if (stdin.isTTY) stdin.setRawMode(true);
+    stdin.resume();
+    stdin.setEncoding("utf8");
+    stdout.write("\x1b[?25l"); // hide cursor
+    draw();
+    stdin.on("data", onKey);
+  });
+}
+
 /** Minimal GraphQL client over fetch. */
 async function gql(url, query, variables) {
   const headers = { "content-type": "application/json" };
@@ -162,6 +282,7 @@ const DELETE_DOCUMENT = /* GraphQL */ `
 async function main() {
   const args = argv.slice(2);
   const skipConfirm = args.includes("-y") || args.includes("--yes");
+  const selectAll = args.includes("--all") || args.includes("-a");
   const walletArg = args.find((a) => !a.startsWith("-"));
 
   const { url, source } = await resolveSwitchboardUrl();
@@ -204,14 +325,45 @@ async function main() {
     return;
   }
 
-  console.log(c.bold(`\nFound ${drives.length} drive(s) for ${wallet}:`));
-  for (const d of drives) {
-    console.log(`  • ${d.driveName} ${c.dim(`(slug: ${d.driveSlug}, id: ${d.driveId})`)}`);
+  console.log(c.bold(`\nFound ${drives.length} drive(s) for ${wallet}.`));
+
+  // Decide which drives to remove.
+  let toRemove;
+  if (selectAll) {
+    for (const d of drives) {
+      console.log(`  • ${d.driveName} ${c.dim(`(slug: ${d.driveSlug}, id: ${d.driveId})`)}`);
+    }
+    toRemove = drives;
+  } else if (stdin.isTTY) {
+    console.log("");
+    toRemove = await selectDrivesInteractive(drives);
+  } else {
+    console.error(
+      c.red(
+        "\nInteractive selection requires a TTY. Re-run in a terminal, or pass --all to " +
+          "remove every drive non-interactively (add -y to skip the confirmation).",
+      ),
+    );
+    exit(1);
+  }
+
+  if (toRemove === null) {
+    console.log("\nAborted.");
+    return;
+  }
+  if (toRemove.length === 0) {
+    console.log("\nNothing selected — no drives to remove.");
+    return;
+  }
+
+  console.log(c.bold(`\nWill remove ${toRemove.length} of ${drives.length} drive(s):`));
+  for (const d of toRemove) {
+    console.log(`  • ${d.driveName} ${c.dim(`(${d.driveId})`)}`);
   }
 
   if (!skipConfirm) {
     const ans = (
-      await prompt(c.red(`\nDelete all ${drives.length} drive(s)? This cannot be undone. (y/N) `))
+      await prompt(c.red(`\nDelete ${toRemove.length} drive(s)? This cannot be undone. (y/N) `))
     ).toLowerCase();
     if (ans !== "y" && ans !== "yes") {
       console.log("Aborted.");
@@ -221,7 +373,7 @@ async function main() {
 
   console.log("");
   let failures = 0;
-  for (const d of drives) {
+  for (const d of toRemove) {
     try {
       const result = await gql(url, DELETE_DOCUMENT, { id: d.driveId });
       if (result?.deleteDocument) {
@@ -238,8 +390,8 @@ async function main() {
 
   console.log(
     failures === 0
-      ? c.green(`\nDone — removed ${drives.length} drive(s).`)
-      : c.yellow(`\nDone with ${failures} failure(s) out of ${drives.length}.`),
+      ? c.green(`\nDone — removed ${toRemove.length} drive(s).`)
+      : c.yellow(`\nDone with ${failures} failure(s) out of ${toRemove.length}.`),
   );
   if (failures > 0) exit(1);
 }
