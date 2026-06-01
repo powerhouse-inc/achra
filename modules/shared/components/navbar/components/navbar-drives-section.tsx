@@ -8,7 +8,9 @@ import {
   DropdownMenuSeparator,
 } from '@/modules/shared/components/ui/dropdown-menu'
 import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
+import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 import { Skeleton } from '@/shared/components/ui/skeleton'
+import type { Route } from 'next'
 
 type MenuItemComponent = React.ComponentType<React.ComponentProps<typeof DropdownMenuItem>>
 type SeparatorComponent = React.ComponentType
@@ -55,7 +57,7 @@ function NavbarDrivesSection({
           ))
         : drives.map((drive) => (
             <ItemComponent key={drive.driveId} asChild className="cursor-pointer">
-              <Link href={drive.driveLink} target="_blank" rel="noreferrer">
+              <Link href={driveLinkFor(drive.driveSlug) as Route} target="_blank" rel="noreferrer">
                 <HardDrive />
                 <span className="min-w-0 flex-1 truncate">{drive.driveName}</span>
               </Link>
