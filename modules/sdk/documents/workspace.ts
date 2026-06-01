@@ -1,4 +1,5 @@
 import { generateId } from 'document-model/core'
+import { reactorClient } from '@/modules/sdk/client/reactor-client'
 import type { CreateOptions } from '@/modules/sdk/documents/define'
 import { createDrive, type CreateDriveOptions } from '@/modules/sdk/documents/drives'
 import { documents } from '@/modules/sdk/documents/registry'
@@ -49,11 +50,12 @@ export interface AddDocumentArgs<TController> {
  * A handle to a drive plus the orchestration mechanics for populating its
  * file tree: create a child document, push it, and register it as a node.
  *
- * Drive-tree mutations (`ensureFolder`, the `addFile` inside `addDocument`)
- * are dispatched locally on a single cached drive controller and only hit
- * the network on `commit()` — one signed batch for the whole tree, per the
- * Powerhouse local-first model. Child documents are each pushed as their
- * own signed batch inside `addDocument`.
+ * Drive-tree mutations (`ensureFolder`, `addDocument`, `registerDocument`)
+ * are accumulated and flushed as one signed batch on `commit()`, which
+ * re-pulls first so it reconciles with the file nodes the reactor
+ * auto-registers for freshly created child documents (per the Powerhouse
+ * local-first model). Child documents are each pushed as their own signed
+ * batch inside `addDocument`.
  *
  * Domain specifics (which model, which actions, naming) are supplied by the
  * caller, so this abstraction stays free of any app concept.
@@ -69,7 +71,9 @@ export interface Workspace {
   /**
    * Register an already-persisted document as a file node in this drive
    * (a reference — the document itself is not created or moved). Use this to
-   * link a document that lives elsewhere, e.g. surfacing a shared profile.
+   * link a document that lives elsewhere, e.g. surfacing a shared profile or
+   * a buyer's purchase into the operator's drive. Also wires the drive→doc
+   * `child` relationship so drive-sync surfaces the referenced document.
    */
   registerDocument(args: {
     documentType: string
@@ -92,9 +96,33 @@ export interface Workspace {
   commit(): Promise<void>
 }
 
+interface PendingFolder {
+  id: string
+  name: string
+}
+
+interface PendingFile {
+  id: string
+  name: string
+  documentType: string
+  parentFolder?: string
+}
+
 function makeWorkspace(driveId: string, signer: ISigner): Workspace {
   let drivePromise: Promise<DriveController> | null = null
-  let dirty = false
+
+  // Drive-tree node edits are accumulated here and flushed as one signed
+  // batch in commit(). They are NOT dispatched eagerly, because creating a
+  // child document with `parentIdentifier=driveId` (see addDocument) makes the
+  // reactor auto-register a UUID-named file node at the drive ROOT. A plain
+  // `addFile` for that same id then collides ("node already exists") and is
+  // dropped on the commit rebase, stranding the document at the root under its
+  // UUID. commit() instead re-pulls so it sees the auto-registered nodes, then
+  // branches on presence: an already-present node (auto-registered, or a
+  // pre-existing one) is renamed in place + moved into its folder; an absent
+  // one (a cross-drive reference added via registerDocument) is added.
+  const pendingFolders: PendingFolder[] = []
+  const pendingFiles: PendingFile[] = []
 
   async function drive(): Promise<DriveController> {
     drivePromise ??= documents.documentDrive.load({ documentId: driveId, signer })
@@ -108,9 +136,11 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
     )
     if (existing) return existing.id
 
+    const queued = pendingFolders.find((folder) => folder.name === name)
+    if (queued) return queued.id
+
     const id = generateId()
-    controller.addFolder({ id, name })
-    dirty = true
+    pendingFolders.push({ id, name })
     return id
   }
 
@@ -127,14 +157,14 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
       await controller.push()
     }
 
-    const driveController = await drive()
-    driveController.addFile({
-      documentType: args.definition.documentType,
+    // The child push above auto-registered a root node for `id`. Defer its
+    // rename + folder placement to commit() (see the pending-edits note).
+    pendingFiles.push({
       id,
       name: args.fileName,
+      documentType: args.definition.documentType,
       parentFolder: args.parentFolder,
     })
-    dirty = true
     return id
   }
 
@@ -144,14 +174,18 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
     name: string
     parentFolder?: string
   }): Promise<void> {
-    const driveController = await drive()
-    driveController.addFile({
-      documentType: args.documentType,
-      id: args.id,
-      name: args.name,
-      parentFolder: args.parentFolder,
+    // Wire the reactor relationship index so drive-sync pulls this
+    // (foreign-created) document into the drive's view. `addFile` alone only
+    // updates the drive's `nodes` array; without the explicit drive→doc
+    // `child` relationship the document renders as an orphan and never
+    // appears. Documents created *in* this drive via `addDocument` get this
+    // relationship for free at creation time, so only references need it.
+    await reactorClient.AddRelationship({
+      sourceIdentifier: driveId,
+      targetIdentifier: args.id,
+      relationshipType: 'child',
     })
-    dirty = true
+    pendingFiles.push({ ...args })
   }
 
   async function touch(): Promise<void> {
@@ -161,10 +195,44 @@ function makeWorkspace(driveId: string, signer: ISigner): Workspace {
   }
 
   async function commit(): Promise<void> {
-    if (!dirty) return
+    if (pendingFolders.length === 0 && pendingFiles.length === 0) return
+
+    // Re-pull: the cached controller predates the child pushes in addDocument,
+    // so it doesn't yet see the nodes the reactor auto-registered for them.
+    drivePromise = documents.documentDrive.load({ documentId: driveId, signer })
     const controller = await drive()
+    const present = new Set(controller.state.global.nodes.map((node) => node.id))
+
+    for (const folder of pendingFolders) {
+      if (!present.has(folder.id)) {
+        controller.addFolder({ id: folder.id, name: folder.name })
+      }
+    }
+
+    for (const file of pendingFiles) {
+      if (present.has(file.id)) {
+        // Auto-registered (UUID-named) or pre-existing node: rename in place,
+        // then move it into the target folder. `moveNode.srcFolder` is the
+        // node being moved (the field name is a misnomer; it moves files too).
+        controller.updateFile({ id: file.id, name: file.name })
+        if (file.parentFolder) {
+          controller.moveNode({ srcFolder: file.id, targetParentFolder: file.parentFolder })
+        }
+      } else {
+        // A reference to a document that lives in another drive — no node for
+        // it exists here yet, so add one directly.
+        controller.addFile({
+          documentType: file.documentType,
+          id: file.id,
+          name: file.name,
+          parentFolder: file.parentFolder,
+        })
+      }
+    }
+
     await controller.push()
-    dirty = false
+    pendingFolders.length = 0
+    pendingFiles.length = 0
   }
 
   return { driveId, ensureFolder, addDocument, registerDocument, touch, commit }

@@ -66,3 +66,23 @@ export async function createDrive(opts: CreateDriveOptions): Promise<{ driveId: 
   })
   return { driveId: res.createDocument.id }
 }
+
+/**
+ * Find the drive that holds `documentId` as a file-tree child.
+ *
+ * A drive carries a `child` relationship to every document registered in its
+ * file tree, so a document's *incoming* `child` relationships are exactly the
+ * drives that contain it. This is an O(1), pagination-proof index lookup —
+ * preferred over scanning every drive's outgoing children. Returns the first
+ * matching drive's id, or null if none holds the document.
+ */
+export async function findDriveContainingDocument(documentId: string): Promise<string | null> {
+  const res = await reactorClient.GetDocumentIncomingRelationships({
+    targetIdentifier: documentId,
+    relationshipType: 'child',
+  })
+  const drive = res.documentIncomingRelationships.items.find(
+    (item) => item.documentType === driveDocumentType,
+  )
+  return drive?.id ?? null
+}

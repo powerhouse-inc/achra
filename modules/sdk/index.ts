@@ -17,6 +17,7 @@ export {
   type CreatedBuilderWorkspace,
   createBuilderWorkspace,
   createOperatorOfferingDrive,
+  findOperatorDriveId,
 } from '@/modules/sdk/workspaces/controllers'
 export {
   BUILDER_DRIVE_EDITOR,

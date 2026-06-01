@@ -13,6 +13,7 @@ import type {
 import {
   createBuilderWorkspace,
   documents,
+  findOperatorDriveId,
   openWorkspace,
   slugify,
   useSignedMutation,
@@ -44,6 +45,17 @@ export function useSubmitPurchaseRequest() {
       if (!input.service.resourceTemplateId) {
         throw new Error('This service has no associated resource template.')
       }
+      const resourceTemplateId = input.service.resourceTemplateId as string
+
+      // 0. Resolve the operator's drive up-front (read-only) so the purchase
+      //    fails before creating any documents if it can't be found. Locating
+      //    it only after the buyer docs are committed would strand a
+      //    half-finished purchase that a retry can only duplicate (every run
+      //    mints fresh document ids).
+      const operatorDriveId = await findOperatorDriveId(resourceTemplateId)
+      if (!operatorDriveId) {
+        throw new Error('Could not locate the operator workspace for this service.')
+      }
 
       // 1. Resolve (or create) the customer's builder-team-admin workspace —
       //    the drive carrying a builder profile, not a stray operator/preview
@@ -73,7 +85,6 @@ export function useSubmitPurchaseRequest() {
 
       // 2. Read the resource template's state for the metadata used when
       //    initializing the resource-instance document.
-      const resourceTemplateId = input.service.resourceTemplateId as string
       const templateState = await documents.resourceTemplate.getState(resourceTemplateId)
 
       if (!templateState) {
@@ -147,7 +158,7 @@ export function useSubmitPurchaseRequest() {
         createdAt: new Date().toISOString(),
         priceBreakdown,
       })
-      await workspace.addDocument({
+      const subscriptionInstanceId = await workspace.addDocument({
         definition: documents.subscriptionInstance,
         init: (subscription) => {
           subscription.initializeSubscription({
@@ -164,6 +175,29 @@ export function useSubmitPurchaseRequest() {
       // 7. Persist the drive-tree changes (folder + both file nodes) as one
       //    signed batch.
       await workspace.commit()
+
+      // 8. Link both instance documents into the operator's drive so the
+      //    operator dashboard (op-hub service-offering-app editor) surfaces
+      //    them. The dashboard reads resource/subscription documents nested in
+      //    the drive's "Customers" folder; these file nodes reference the same
+      //    documents created above (one document, referenced from two drives)
+      //    and registerDocument wires the drive→doc relationship so each
+      //    surfaces under the operator's view.
+      const operatorWorkspace = openWorkspace({ driveId: operatorDriveId, signer })
+      const customersFolderId = await operatorWorkspace.ensureFolder('Customers')
+      await operatorWorkspace.registerDocument({
+        documentType: documents.resourceInstance.documentType,
+        id: resourceInstanceId,
+        name: `${parsedTeamName} Resource Instance`,
+        parentFolder: customersFolderId,
+      })
+      await operatorWorkspace.registerDocument({
+        documentType: documents.subscriptionInstance.documentType,
+        id: subscriptionInstanceId,
+        name: `${parsedTeamName} Subscription Instance`,
+        parentFolder: customersFolderId,
+      })
+      await operatorWorkspace.commit()
 
       return {
         name: input.name,

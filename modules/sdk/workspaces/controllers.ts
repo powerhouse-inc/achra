@@ -1,3 +1,4 @@
+import { findDriveContainingDocument } from '@/modules/sdk/documents/drives'
 import { documents } from '@/modules/sdk/documents/registry'
 import { createWorkspace } from '@/modules/sdk/documents/workspace'
 import {
@@ -103,4 +104,18 @@ export async function createOperatorOfferingDrive(opts: {
   await workspace.touch()
 
   return { driveId: workspace.driveId }
+}
+
+/**
+ * Resolve the operator's service-offering drive from one of its resource
+ * templates.
+ *
+ * A service offering's resource template lives in the operator's drive file
+ * tree, so the drive that holds the template is the operator drive. Used by
+ * the purchase flow to link a buyer's new resource/subscription instances
+ * into the operator's drive (where the operator dashboard reads them).
+ * Returns null if no drive holds the template.
+ */
+export async function findOperatorDriveId(resourceTemplateId: string): Promise<string | null> {
+  return findDriveContainingDocument(resourceTemplateId)
 }
