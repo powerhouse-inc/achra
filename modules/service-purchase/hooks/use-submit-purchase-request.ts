@@ -45,8 +45,10 @@ export function useSubmitPurchaseRequest() {
         throw new Error('This service has no associated resource template.')
       }
 
-      // 1. Resolve (or create) the customer's builder-team-admin workspace.
-      const existing = drivesQuery.data?.[0]
+      // 1. Resolve (or create) the customer's builder-team-admin workspace —
+      //    the drive carrying a builder profile, not a stray operator/preview
+      //    drive that `getBuilderDrives` may also return.
+      const existing = drivesQuery.data?.find((d) => Boolean(d.builderProfileId))
       let driveId: string
       let builderProfileId: string
       let driveSlug: string

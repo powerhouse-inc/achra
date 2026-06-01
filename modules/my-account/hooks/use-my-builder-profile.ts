@@ -11,10 +11,11 @@ type MyBuilderProfile = BuilderProfileQuery['builders'][number]
 /**
  * Resolves the builder profile of the currently authenticated user.
  *
- * The user's builder profile lives in their builder drive, so we first resolve
- * the user's drive (matched server-side by the renown wallet address) and then
- * fetch the builder profile by its document id (`builderProfileId`), which the
- * drive lookup returns alongside the slug.
+ * The user's builder profile lives in their builder/team-admin drive. The drive
+ * lookup (matched server-side by the renown wallet address) also returns
+ * operator and shared/preview drives, so we pick the one carrying a builder
+ * profile and fetch that profile by its document id (`builderProfileId`), which
+ * the lookup returns alongside the slug.
  *
  * We match by id rather than slug because `drive.slug` and `profile.slug` are
  * independent backend fields: renaming a profile re-slugs the profile but not
@@ -22,7 +23,7 @@ type MyBuilderProfile = BuilderProfileQuery['builders'][number]
  */
 function useMyBuilderProfile() {
   const drivesQuery = useUserDrives()
-  const drive = drivesQuery.data?.[0]
+  const drive = drivesQuery.data?.find((d) => Boolean(d.builderProfileId))
   const driveSlug = drive?.driveSlug
   const builderProfileId = drive?.builderProfileId ?? undefined
 

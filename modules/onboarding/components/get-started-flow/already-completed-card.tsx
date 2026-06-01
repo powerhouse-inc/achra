@@ -8,7 +8,9 @@ import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
 
 function AlreadyCompletedCard() {
   const { data: drives } = useUserDrives()
-  const drive = drives?.[0]
+  // Link to the builder/team-admin drive (the one with a builder profile), not a
+  // stray operator/preview drive that `getBuilderDrives` may also return.
+  const drive = drives?.find((d) => Boolean(d.builderProfileId))
 
   return (
     <Card>
