@@ -118,30 +118,32 @@ function RequestForm({ defaultName = '', defaultTeamName = '' }: RequestFormProp
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="teamName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel
-                      htmlFor="submit-request-team-name"
-                      className="text-sm/3.5 font-medium"
-                    >
-                      Team Name <span aria-hidden="true">*</span>
-                      <span className="sr-only">(required)</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        id="submit-request-team-name"
-                        placeholder="Your team name"
-                        autoComplete="organization"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className={defaultTeamName === '' ? undefined : 'hidden'}>
+                <FormField
+                  control={form.control}
+                  name="teamName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel
+                        htmlFor="submit-request-team-name"
+                        className="text-sm/3.5 font-medium"
+                      >
+                        Team Name <span aria-hidden="true">*</span>
+                        <span className="sr-only">(required)</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          id="submit-request-team-name"
+                          placeholder="Your team name"
+                          autoComplete="organization"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               <FormField
                 control={form.control}

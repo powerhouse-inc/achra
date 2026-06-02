@@ -24,7 +24,6 @@ export {
   deriveDriveNaming,
   type DriveNaming,
   type DriveNamingInput,
-  driveNamePrefix,
   isOperatorDriveName,
   OPERATOR_DRIVE_EDITOR,
   OPERATOR_DRIVE_ICON,

@@ -2,7 +2,7 @@
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { useState } from 'react'
-import { useHasBuilderDrive } from '@/modules/my-account/hooks/use-has-builder-drive'
+import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
 import { AlreadyCompletedCard } from './already-completed-card'
 import { ConnectAccountStep } from './connect-account-step'
 import { DriveCheckErrorCard } from './drive-check-error-card'
@@ -19,12 +19,10 @@ function GetStartedFlow() {
   const isAuthResolving = auth.status === 'loading'
   const isAuthenticated = auth.status === 'authorized' && Boolean(auth.address)
 
-  const hasBuilderDriveQuery = useHasBuilderDrive()
+  const { drivesQuery, hasTeamAdminDrive } = useTeamAdminDrive()
 
-  // Latches once the user finishes onboarding in this session. Spinning up a
-  // drive invalidates the `GetBuilderDrives` query, flipping `hasBuilderDriveQuery.data`
-  // to true — without this guard that would swap the just-earned DoneStep for the
-  // generic "already completed" card the moment the drive is created.
+  // Tracks if onboarding was just completed in this session, preventing the UI
+  // from showing the "already completed" message right after drive creation.
   const [justCompleted, setJustCompleted] = useState(false)
 
   if (isAuthResolving) {
@@ -41,19 +39,19 @@ function GetStartedFlow() {
     )
   }
 
-  if (hasBuilderDriveQuery.isPending) {
+  if (drivesQuery.isPending) {
     return <FullPageSpinner />
   }
 
-  if (hasBuilderDriveQuery.isError) {
+  if (drivesQuery.isError) {
     return (
       <div className="mx-auto w-full max-w-xl">
-        <DriveCheckErrorCard onRetry={() => void hasBuilderDriveQuery.refetch()} />
+        <DriveCheckErrorCard onRetry={() => void drivesQuery.refetch()} />
       </div>
     )
   }
 
-  if (hasBuilderDriveQuery.data && !justCompleted) {
+  if (hasTeamAdminDrive && !justCompleted) {
     return (
       <div className="mx-auto w-full max-w-xl">
         <AlreadyCompletedCard />

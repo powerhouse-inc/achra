@@ -1,9 +1,9 @@
 'use client'
 
-import { useMyBuilderProfile } from '@/modules/my-account/hooks/use-my-builder-profile'
 import { BuilderProfile } from '@/modules/shared/components/builder-profile'
 import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { LinksList } from '@/modules/shared/components/links-popover'
+import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
 import { getDomain } from '@/modules/shared/lib/get-domain'
 import { AccountProfileEmpty } from './account-profile-empty'
 import { AccountProfileError } from './account-profile-error'
