@@ -1,4 +1,5 @@
 import { AccountProfile } from '@/modules/my-account/components/account-profile'
+import { BecomeAnOperator } from '@/modules/my-account/components/become-an-operator'
 import { RenownIdentity } from '@/modules/my-account/components/renown-identity'
 import {
   Card,
@@ -22,6 +23,7 @@ export default function MyAccountPage() {
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
         <RenownIdentity />
+        <BecomeAnOperator />
         <AccountProfile />
       </CardContent>
     </Card>
