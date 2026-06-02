@@ -1,24 +1,31 @@
 'use client'
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { driveNamePrefix } from '@/modules/sdk'
 import { AuthGuard } from '@/modules/shared/components/auth-guard'
-import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
+import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
 import { LoginPrompt } from './login-prompt'
 import { RequestForm } from './request-form'
+import { SubmitRequestFormSkeleton } from './submit-request-form-skeleton'
 
 function SubmitRequestForm() {
-  const { displayName, login } = useRenownAuth()
-  const { data: drives } = useUserDrives()
+  const { login } = useRenownAuth()
+  const { drivesQuery, profileQuery, teamAdminDrive } = useMyBuilderProfile()
 
-  // The team-admin drive leads the sorted list; prefill the team name with its
-  // builder-identity prefix ("vitalik.eth Team Admin" → "vitalik.eth") rather
-  // than the full label, so the drive-type suffix doesn't leak into the field.
-  const teamName = driveNamePrefix(drives?.[0]?.driveName ?? '')
+  // If the user already has a team-admin drive, the team name is set and its input
+  // is hidden; if not, they enter a team name to create a new workspace. This
+  // loading check waits only for drives if no profile is needed.
+  const isResolving = drivesQuery.isLoading || profileQuery.isLoading
 
   return (
     <AuthGuard loginFallback={<LoginPrompt onLogin={login} />}>
-      <RequestForm defaultName={displayName ?? ''} defaultTeamName={teamName} />
+      {isResolving ? (
+        <SubmitRequestFormSkeleton />
+      ) : (
+        <RequestForm
+          defaultName={profileQuery.data?.name ?? ''}
+          defaultTeamName={teamAdminDrive?.driveName ?? ''}
+        />
+      )}
     </AuthGuard>
   )
 }
