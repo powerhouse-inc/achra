@@ -23,7 +23,7 @@ import type {
   CreateResourceInstancesResult,
   PurchaseOptionGroup,
 } from '@/modules/service-purchase/types'
-import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
+import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
 import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 
 export interface SubmitPurchaseRequestInput {
@@ -38,7 +38,7 @@ export interface SubmitPurchaseRequestInput {
 
 export function useSubmitPurchaseRequest() {
   const queryClient = useQueryClient()
-  const drivesQuery = useUserDrives()
+  const { teamAdminDrive } = useTeamAdminDrive()
 
   return useSignedMutation<SubmitPurchaseRequestInput, CreateResourceInstancesResult>({
     mutationFn: async (input, { signer, address }) => {
@@ -60,7 +60,7 @@ export function useSubmitPurchaseRequest() {
       // 1. Resolve (or create) the customer's builder-team-admin workspace —
       //    the drive carrying a builder profile, not a stray operator/preview
       //    drive that `getBuilderDrives` may also return.
-      const existing = drivesQuery.data?.find((d) => Boolean(d.builderProfileId))
+      const existing = teamAdminDrive
       let driveId: string
       let builderProfileId: string
       let driveSlug: string

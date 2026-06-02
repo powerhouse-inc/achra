@@ -3,7 +3,7 @@
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useHasBuilderDrive } from '@/modules/my-account/hooks/use-has-builder-drive'
+import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
 import type { Route } from 'next'
 
 // Paths where we keep the user where they are after login instead of sending
@@ -34,24 +34,17 @@ function PostLoginRedirect() {
     () => typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('user'),
   )
   const handled = useRef(false)
-  const hasBuilderDriveQuery = useHasBuilderDrive()
+  const { drivesQuery, hasTeamAdminDrive } = useTeamAdminDrive()
 
   useEffect(() => {
     if (!arrivedFromRenown || handled.current) return
     if (auth.status !== 'authorized') return
-    if (hasBuilderDriveQuery.isPending) return
+    if (drivesQuery.isPending) return
     handled.current = true
     if (isRedirectExemptPath(pathname)) return
-    if (hasBuilderDriveQuery.data) return
+    if (hasTeamAdminDrive) return
     router.replace('/get-started' as Route)
-  }, [
-    arrivedFromRenown,
-    auth.status,
-    hasBuilderDriveQuery.isPending,
-    hasBuilderDriveQuery.data,
-    pathname,
-    router,
-  ])
+  }, [arrivedFromRenown, auth.status, drivesQuery.isPending, hasTeamAdminDrive, pathname, router])
 
   return null
 }

@@ -4,13 +4,12 @@ import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/modules/shared/components/ui/button'
 import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
+import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
 
 function AlreadyCompletedCard() {
-  const { data: drives } = useUserDrives()
   // Link to the builder/team-admin drive (the one with a builder profile), not a
   // stray operator/preview drive that `getBuilderDrives` may also return.
-  const drive = drives?.find((d) => Boolean(d.builderProfileId))
+  const { teamAdminDrive: drive } = useTeamAdminDrive()
 
   return (
     <Card>

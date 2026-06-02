@@ -73,19 +73,6 @@ export function isOperatorDriveName(name: string): boolean {
   return name.endsWith(OPERATOR_DRIVE_NAME)
 }
 
-/**
- * Recover the builder-identity prefix from a drive's display name by stripping
- * the canonical type suffix (`"vitalik.eth Team Admin"` → `"vitalik.eth"`).
- * Legacy bare-named drives ("Team Admin") have no prefix and return unchanged.
- */
-export function driveNamePrefix(name: string): string {
-  for (const type of [PRIMARY_DRIVE_NAME, OPERATOR_DRIVE_NAME]) {
-    const suffix = ` ${type}`
-    if (name.endsWith(suffix)) return name.slice(0, -suffix.length)
-  }
-  return name
-}
-
 export function deriveDriveNaming(input: DriveNamingInput): DriveNaming {
   const suffix = addressSuffix(input.address)
   const trimmedTeam = input.teamName?.trim() ?? ''
