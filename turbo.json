@@ -1,0 +1,43 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "lint:fix": {
+      "cache": false
+    },
+    "format": {
+      "cache": false
+    },
+    "format:check": {},
+    "type-check": {
+      "outputs": ["*.tsbuildinfo"]
+    },
+    "codegen": {
+      "cache": false
+    },
+    "build-storybook": {
+      "outputs": ["storybook-static/**"]
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:e2e": {
+      "cache": false
+    }
+  }
+}
