@@ -1,0 +1,71 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
+import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const meta = {
+  title: 'Packages/UI/Table',
+  component: Table,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
+} satisfies Meta<typeof Table>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Basic: Story = {
+  render: () => (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead>Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>INV-001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell>$250.00</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>INV-002</TableCell>
+          <TableCell>Processing</TableCell>
+          <TableCell>PayPal</TableCell>
+          <TableCell>$125.00</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+}
+
+export const Pills: Story = {
+  render: () => (
+    <Table variant="pills">
+      <TableHeader>
+        <TableRow>
+          <TableHead>Invoice</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Method</TableHead>
+          <TableHead>Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>INV-001</TableCell>
+          <TableCell>Paid</TableCell>
+          <TableCell>Credit Card</TableCell>
+          <TableCell>$250.00</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>INV-002</TableCell>
+          <TableCell>Processing</TableCell>
+          <TableCell>PayPal</TableCell>
+          <TableCell>$125.00</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  ),
+}

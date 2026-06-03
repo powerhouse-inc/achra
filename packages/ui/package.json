@@ -63,10 +63,13 @@
     "@achra/eslint-config": "workspace:*",
     "@achra/design-system": "workspace:*",
     "@achra/typescript-config": "workspace:*",
+    "@hookform/resolvers": "^5.2.1",
+    "@storybook/react-vite": "^10.3.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "^9",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "4.1.12"
   },
   "peerDependencies": {
     "react": "^19",

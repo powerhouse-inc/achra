@@ -2,6 +2,7 @@
 // Base + React / React Hooks. No Next.js, no type-aware project service.
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import storybook from 'eslint-plugin-storybook'
 import { baseConfig } from './base.js'
 
 /** @type {import("eslint").Linter.Config[]} */
@@ -49,6 +50,10 @@ export const reactInternalConfig = [
       'react/function-component-definition': 'off',
     },
   },
+  // Storybook lint rules (story-exports, hierarchy, hooks-in-render off, etc.) —
+  // parity with the Next.js app config so stories authored inside packages get
+  // the same checks.
+  ...storybook.configs['flat/recommended'],
 ]
 
 export default reactInternalConfig

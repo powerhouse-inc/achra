@@ -1,0 +1,23 @@
+import { Separator } from '@achra/ui/separator'
+import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+
+const meta = {
+  title: 'Packages/UI/Separator',
+  component: Separator,
+  tags: ['autodocs'],
+  parameters: { layout: 'centered' },
+} satisfies Meta<typeof Separator>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Horizontal: Story = {
+  render: () => (
+    <div style={{ width: 320 }}>
+      <div>Above</div>
+      <Separator />
+      <div>Below</div>
+    </div>
+  ),
+}
