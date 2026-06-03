@@ -9,6 +9,7 @@ overrides:
   '@types/react-dom': 19.2.3
   playwright: 1.59.1
   playwright-core: 1.59.1
+  prettier: 3.6.2
 
 importers:
 
@@ -86,7 +87,7 @@ importers:
         version: 10.1.8(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.8.1)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.38.0(jiti@2.6.1))
@@ -515,7 +516,7 @@ importers:
         specifier: 1.59.1
         version: 1.59.1
       prettier:
-        specifier: ^3.6.2
+        specifier: 3.6.2
         version: 3.6.2
       prettier-plugin-tailwindcss:
         specifier: ^0.7.1
@@ -575,7 +576,7 @@ importers:
         version: 6.10.2(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.8.1)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.38.0(jiti@2.6.1))
@@ -584,7 +585,7 @@ importers:
         version: 7.1.1(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-storybook:
         specifier: ^10.3.0
-        version: 10.3.0(eslint@9.38.0(jiti@2.6.1))(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)
+        version: 10.3.0(eslint@9.38.0(jiti@2.6.1))(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)
       globals:
         specifier: ^16.4.0
         version: 16.4.0
@@ -714,7 +715,7 @@ importers:
         version: 10.1.8(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.8.1)
+        version: 5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.6.2)
       eslint-plugin-react:
         specifier: ^7.37.5
         version: 7.37.5(eslint@9.38.0(jiti@2.6.1))
@@ -906,7 +907,7 @@ importers:
         version: 5.2.2(react-hook-form@7.65.0(react@19.2.6))
       '@storybook/react-vite':
         specifier: ^10.3.0
-        version: 10.3.0(esbuild@0.27.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
+        version: 10.3.0(esbuild@0.27.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
       '@types/react':
         specifier: 19.2.14
         version: 19.2.14
@@ -8656,7 +8657,7 @@ packages:
       '@types/eslint': '>=8.0.0'
       eslint: '>=8.0.0'
       eslint-config-prettier: '>= 7.0.0 <10.0.0 || >=10.1.0'
-      prettier: '>=3.0.0'
+      prettier: 3.6.2
     peerDependenciesMeta:
       '@types/eslint':
         optional: true
@@ -11397,7 +11398,7 @@ packages:
       '@shopify/prettier-plugin-liquid': '*'
       '@trivago/prettier-plugin-sort-imports': '*'
       '@zackad/prettier-plugin-twig': '*'
-      prettier: ^3.0
+      prettier: 3.6.2
       prettier-plugin-astro: '*'
       prettier-plugin-css-order: '*'
       prettier-plugin-jsdoc: '*'
@@ -11443,11 +11444,6 @@ packages:
 
   prettier@3.6.2:
     resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
-    engines: {node: '>=14'}
-    hasBin: true
-
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -12432,7 +12428,7 @@ packages:
     resolution: {integrity: sha512-OpLdng98l7cACuqBoQwewx21Vhgl9XPssgLdXQudW0+N5QPjinWXZpZCquZpXpNCyw5s5BFAcv+jKB3Qkf9jeA==}
     hasBin: true
     peerDependencies:
-      prettier: ^2 || ^3
+      prettier: 3.6.2
     peerDependenciesMeta:
       prettier:
         optional: true
@@ -17979,7 +17975,7 @@ snapshots:
       graphql-codegen-typescript-validation-schema: 0.18.1(graphql@16.12.0)(zod@4.3.6)
       load-json-file: 7.0.1
       npm-registry-fetch: 19.1.1
-      prettier: 3.8.1
+      prettier: 3.6.2
       read-pkg: 10.1.0
       remeda: 2.33.7
       ts-morph: 27.0.2
@@ -18022,7 +18018,7 @@ snapshots:
       graphql-codegen-typescript-validation-schema: 0.18.1(graphql@16.12.0)(zod@4.3.6)
       load-json-file: 7.0.1
       npm-registry-fetch: 19.1.1
-      prettier: 3.8.1
+      prettier: 3.6.2
       read-pkg: 10.1.0
       remeda: 2.33.7
       ts-morph: 27.0.2
@@ -20813,10 +20809,10 @@ snapshots:
       - rollup
       - webpack
 
-  '@storybook/builder-vite@10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
+  '@storybook/builder-vite@10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
     dependencies:
-      '@storybook/csf-plugin': 10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
+      '@storybook/csf-plugin': 10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
+      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
       ts-dedent: 2.2.0
       vite: 8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
     transitivePeerDependencies:
@@ -20834,9 +20830,9 @@ snapshots:
       vite: 8.0.0(@types/node@22.18.12)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
       webpack: 5.103.0(esbuild@0.27.3)
 
-  '@storybook/csf-plugin@10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
+  '@storybook/csf-plugin@10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
     dependencies:
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
+      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
       unplugin: 2.3.10
     optionalDependencies:
       esbuild: 0.27.3
@@ -20879,12 +20875,6 @@ snapshots:
       react-dom: 19.2.6(react@19.2.6)
       storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
 
-  '@storybook/react-dom-shim@10.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))':
-    dependencies:
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
-
   '@storybook/react-vite@10.3.0(esbuild@0.27.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)(vite@8.0.0(@types/node@22.18.12)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.4(typescript@5.9.3)(vite@8.0.0(@types/node@22.18.12)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
@@ -20907,19 +20897,19 @@ snapshots:
       - typescript
       - webpack
 
-  '@storybook/react-vite@10.3.0(esbuild@0.27.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
+  '@storybook/react-vite@10.3.0(esbuild@0.27.3)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.6.4(typescript@5.9.3)(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@rollup/pluginutils': 5.3.0(rollup@4.52.5)
-      '@storybook/builder-vite': 10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
-      '@storybook/react': 10.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)
+      '@storybook/builder-vite': 10.3.0(esbuild@0.27.3)(rollup@4.52.5)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(vite@8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(webpack@5.103.0(esbuild@0.27.3))
+      '@storybook/react': 10.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)
       empathic: 2.0.0
       magic-string: 0.30.21
       react: 19.2.6
       react-docgen: 8.0.2
       react-dom: 19.2.6(react@19.2.6)
       resolve: 1.22.11
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
+      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
       tsconfig-paths: 4.2.0
       vite: 8.0.8(@types/node@25.2.3)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
     transitivePeerDependencies:
@@ -20938,20 +20928,6 @@ snapshots:
       react-docgen-typescript: 2.4.0(typescript@5.9.3)
       react-dom: 19.2.6(react@19.2.6)
       storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
-    optionalDependencies:
-      typescript: 5.9.3
-    transitivePeerDependencies:
-      - supports-color
-
-  '@storybook/react@10.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3)':
-    dependencies:
-      '@storybook/global': 5.0.0
-      '@storybook/react-dom-shim': 10.3.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))
-      react: 19.2.6
-      react-docgen: 8.0.2
-      react-docgen-typescript: 2.4.0(typescript@5.9.3)
-      react-dom: 19.2.6(react@19.2.6)
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -24199,16 +24175,6 @@ snapshots:
       '@types/eslint': 9.6.1
       eslint-config-prettier: 10.1.8(eslint@9.38.0(jiti@2.6.1))
 
-  eslint-plugin-prettier@5.5.4(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.38.0(jiti@2.6.1)))(eslint@9.38.0(jiti@2.6.1))(prettier@3.8.1):
-    dependencies:
-      eslint: 9.38.0(jiti@2.6.1)
-      prettier: 3.8.1
-      prettier-linter-helpers: 1.0.0
-      synckit: 0.11.11
-    optionalDependencies:
-      '@types/eslint': 9.6.1
-      eslint-config-prettier: 10.1.8(eslint@9.38.0(jiti@2.6.1))
-
   eslint-plugin-react-hooks@7.0.0(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
       '@babel/core': 7.28.4
@@ -24258,15 +24224,6 @@ snapshots:
       '@typescript-eslint/utils': 8.57.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
       eslint: 9.38.0(jiti@2.6.1)
       storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.6.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-
-  eslint-plugin-storybook@10.3.0(eslint@9.38.0(jiti@2.6.1))(storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6))(typescript@5.9.3):
-    dependencies:
-      '@typescript-eslint/utils': 8.57.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
-      eslint: 9.38.0(jiti@2.6.1)
-      storybook: 10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -27454,8 +27411,6 @@ snapshots:
 
   prettier@3.6.2: {}
 
-  prettier@3.8.1: {}
-
   pretty-format@27.5.1:
     dependencies:
       ansi-regex: 5.0.1
@@ -28810,29 +28765,6 @@ snapshots:
       ws: 8.19.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
     optionalDependencies:
       prettier: 3.6.2
-    transitivePeerDependencies:
-      - '@testing-library/dom'
-      - bufferutil
-      - react
-      - react-dom
-      - utf-8-validate
-
-  storybook@10.3.0(@testing-library/dom@10.4.1)(bufferutil@4.1.0)(prettier@3.8.1)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(utf-8-validate@6.0.6):
-    dependencies:
-      '@storybook/global': 5.0.0
-      '@storybook/icons': 2.0.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@testing-library/jest-dom': 6.9.1
-      '@testing-library/user-event': 14.6.1(@testing-library/dom@10.4.1)
-      '@vitest/expect': 3.2.4
-      '@vitest/spy': 3.2.4
-      esbuild: 0.27.3
-      open: 10.2.0
-      recast: 0.23.11
-      semver: 7.7.3
-      use-sync-external-store: 1.6.0(react@19.2.6)
-      ws: 8.19.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
-    optionalDependencies:
-      prettier: 3.8.1
     transitivePeerDependencies:
       - '@testing-library/dom'
       - bufferutil

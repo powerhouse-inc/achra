@@ -37,6 +37,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The frontend imports @powerhousedao/op-hub, whose dist/ output is
+      # gitignored — build frontend's workspace deps before running the app.
+      - name: Build workspace deps
+        run: pnpm --filter "frontend^..." run build
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -101,6 +106,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # The frontend imports @powerhousedao/op-hub, whose dist/ output is
+      # gitignored — build frontend's workspace deps before running the app.
+      - name: Build workspace deps
+        run: pnpm --filter "frontend^..." run build
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
