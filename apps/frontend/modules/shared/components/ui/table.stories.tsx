@@ -1,5 +1,5 @@
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 import React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './table'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

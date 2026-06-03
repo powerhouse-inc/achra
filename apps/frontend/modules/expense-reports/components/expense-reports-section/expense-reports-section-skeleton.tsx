@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { TabSkeleton, TabsSkeleton } from '@/modules/shared/components/tab-skeleton'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { ActualTableSkeleton } from './actuals-table-skeleton'
 import { BreakdownTableSkeleton } from './breakdown-table-skeleton'
 

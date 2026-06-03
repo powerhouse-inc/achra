@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { WorkstreamCardSkeleton } from '@/modules/workstream/components/workstream-card'
 import { WorkstreamFiltersSkeleton } from '@/modules/workstream/components/workstream-filters/workstream-filters-skeleton'
 import { WorkstreamServerListSkeleton } from '@/modules/workstream/components/workstream-server-list'

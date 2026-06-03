@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/shared/lib/utils'
 
 const pageContentVariants = cva('container flex flex-col mb-8', {
   variants: {

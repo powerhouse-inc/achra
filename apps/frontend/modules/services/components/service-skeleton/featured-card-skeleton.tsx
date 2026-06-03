@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Card, CardContent } from '@achra/ui/card'
+import { Skeleton } from '@achra/ui/skeleton'
 
 function FeaturedCardSkeleton() {
   return (

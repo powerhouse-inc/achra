@@ -1,12 +1,6 @@
+import { Button } from '@achra/ui/button'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
 import { HardDrive } from 'lucide-react'
-import { Button } from '@/shared/components/ui/button'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/shared/components/ui/empty'
 
 interface MyDrivesListErrorProps {
   onRetry: () => void

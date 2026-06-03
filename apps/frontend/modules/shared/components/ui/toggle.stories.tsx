@@ -1,5 +1,5 @@
+import { Toggle } from '@achra/ui/toggle'
 import React from 'react'
-import { Toggle } from './toggle'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

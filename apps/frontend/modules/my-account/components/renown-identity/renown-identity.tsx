@@ -1,5 +1,6 @@
 'use client'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import {
   CopyAnimatedIcon,
@@ -9,7 +10,6 @@ import {
 import { ExternalLink } from '@/modules/shared/components/external-link/external-link'
 import { Identicon } from '@/modules/shared/components/identicon/identicon'
 import { RenownIsotype } from '@/modules/shared/components/svgs'
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar'
 
 function RenownIdentity() {
   const auth = useRenownAuth()

@@ -1,5 +1,5 @@
+import { Calendar } from '@achra/ui/calendar'
 import React from 'react'
-import { Calendar } from './calendar'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

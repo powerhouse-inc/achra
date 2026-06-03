@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +6,8 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from './pagination'
+} from '@achra/ui/pagination'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

@@ -1,5 +1,5 @@
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@achra/ui/resizable'
 import React from 'react'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './resizable'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

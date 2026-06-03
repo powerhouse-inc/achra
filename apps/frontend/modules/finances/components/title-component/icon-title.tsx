@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import Image from 'next/image'
 import React from 'react'
-import { cn } from '@/shared/lib/utils'
 
 interface Props {
   title: string

@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import OperatorSVG from '@/modules/shared/components/svgs/operator.svg'
 import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
-import { Button } from '@/shared/components/ui/button'
 
 function BecomeAnOperator() {
   const { profileQuery } = useMyBuilderProfile()

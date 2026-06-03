@@ -1,5 +1,5 @@
-import { Badge } from '../ui/badge'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '../ui/resizable'
+import { Badge } from '@achra/ui/badge'
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@achra/ui/resizable'
 import { OverflowList } from './overflow-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

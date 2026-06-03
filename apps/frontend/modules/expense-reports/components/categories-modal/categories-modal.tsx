@@ -1,10 +1,7 @@
 'use client'
 
-import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { FolderOpen, X } from 'lucide-react'
-import SimpleBar from 'simplebar-react'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Checkbox } from '@/modules/shared/components/ui/checkbox'
+import { Button } from '@achra/ui/button'
+import { Checkbox } from '@achra/ui/checkbox'
 import {
   Dialog,
   DialogDescription,
@@ -12,15 +9,12 @@ import {
   DialogOverlay,
   DialogPortal,
   DialogTitle,
-} from '@/modules/shared/components/ui/dialog'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
-import { cn } from '@/modules/shared/lib/utils'
+} from '@achra/ui/dialog'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
+import { cn } from '@achra/ui/lib/utils'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { FolderOpen, X } from 'lucide-react'
+import SimpleBar from 'simplebar-react'
 import { useModalCategories } from '../../providers/categories-provider'
 import { HeadcountSection } from './headcount-section'
 import { NonHeadcountSection } from './non-headcount-section'

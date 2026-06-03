@@ -1,5 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent, CardHeader } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -10,9 +13,6 @@ import type {
 import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-status-section'
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
 import { Coordinators } from './coordinators'
 import { LatestKeyResults } from './latest-key-results'
 

@@ -1,17 +1,12 @@
 'use client'
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { Check } from 'lucide-react'
 import { type ComponentProps, createContext, useContext } from 'react'
 import { formatSummaryPrice, isIncludedValue } from '@/modules/service-purchase/lib/utils'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/modules/shared/components/ui/accordion'
-import { Card } from '@/modules/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
 
 interface GroupPriceEntry {
   amount: number

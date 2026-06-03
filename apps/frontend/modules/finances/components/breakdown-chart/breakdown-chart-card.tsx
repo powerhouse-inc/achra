@@ -1,6 +1,6 @@
 'use client'
+import { Card } from '@achra/ui/card'
 import { type ReactNode, Suspense } from 'react'
-import { Card } from '@/shared/components/ui/card'
 import { BreakdownChartFilterSkeleton } from './skeleton'
 import { TitleFilterSection } from './title-filter-section'
 

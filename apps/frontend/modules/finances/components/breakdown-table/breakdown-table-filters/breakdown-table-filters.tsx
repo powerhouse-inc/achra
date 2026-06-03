@@ -1,12 +1,12 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { useMemo } from 'react'
 
 import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '@/modules/finances/types'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { DrawerSelect, FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
-import { Button } from '@/modules/shared/components/ui/button'
 import type { useBreakdownTableFilters } from './use-breakdown-table-filters'
 
 const metricOptions: Option[] = Object.values(METRIC_OPTIONS).map((value) => ({

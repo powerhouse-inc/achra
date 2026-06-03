@@ -1,4 +1,4 @@
-import { Badge } from './badge'
+import { Badge } from '@achra/ui/badge'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import * as React from 'react'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface TabsSkeletonProps {
   children: React.ReactNode

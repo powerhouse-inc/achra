@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
 import type {
   Maybe,
   ScopeOfWork_BudgetType,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { MetricCard, MetricCardLabel } from '../metric-card/metric-card'
 
 interface BudgetMetricCardProps {

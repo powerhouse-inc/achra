@@ -1,5 +1,5 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@achra/ui/tabs'
 import React from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

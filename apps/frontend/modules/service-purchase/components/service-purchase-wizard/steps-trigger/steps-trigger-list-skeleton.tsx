@@ -1,7 +1,7 @@
+import { Separator } from '@achra/ui/separator'
 import { Fragment } from 'react'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/lib/constants'
 import type { ServicePurchaseStep } from '@/modules/service-purchase/types'
-import { Separator } from '@/modules/shared/components/ui/separator'
 import { StepTriggerSkeleton } from './step-trigger-skeleton'
 
 interface StepsTriggerListSkeletonProps {

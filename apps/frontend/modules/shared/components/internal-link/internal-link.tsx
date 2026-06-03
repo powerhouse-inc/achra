@@ -1,8 +1,8 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { Button } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 import type { Route } from 'next'
 
 interface InternalLinkProps extends React.ComponentProps<typeof Button> {

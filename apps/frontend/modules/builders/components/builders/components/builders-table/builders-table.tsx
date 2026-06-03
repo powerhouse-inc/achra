@@ -1,20 +1,13 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 import { ArrowRight, ArrowUpDown } from 'lucide-react'
 import Link from 'next/link'
 import SimpleBar from 'simplebar-react'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuilderProfile } from '@/modules/shared/components/builder-profile'
 import { BuilderSkills } from '@/modules/shared/components/builder-skills'
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuildersSkeleton } from '../../builders-skeleton'
 import { LastModified } from '../last-modified'
 import { Links } from '../links'

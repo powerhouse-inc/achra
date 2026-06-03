@@ -1,7 +1,7 @@
+import { RadioGroup } from '@achra/ui/radio-group'
 import { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { mockPlanSelectorTier } from '@/modules/service-purchase/mocks/plan-selector'
 import { PricingCalculatorProvider } from '@/modules/service-purchase/providers/pricing-calculator-provider'
-import { RadioGroup } from '@/modules/shared/components/ui/radio-group'
 import { PlanSelectorItem } from './plan-selector'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

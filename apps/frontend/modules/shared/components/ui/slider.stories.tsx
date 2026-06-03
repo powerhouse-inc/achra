@@ -1,4 +1,4 @@
-import { Slider } from './slider'
+import { Slider } from '@achra/ui/slider'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

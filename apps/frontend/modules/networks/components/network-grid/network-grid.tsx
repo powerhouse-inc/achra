@@ -1,11 +1,6 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@achra/ui/empty'
+import { cn } from '@achra/ui/lib/utils'
 import { getAllNetworks } from '@/modules/networks/services/networks-service'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
-import { cn } from '@/modules/shared/lib/utils'
 import { NetworkCard } from '../network-card'
 
 export async function NetworkGrid() {

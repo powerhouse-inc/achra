@@ -13,8 +13,8 @@
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@/shared/components",
-    "utils": "@/shared/lib/utils",
-    "ui": "@/shared/components/ui",
+    "utils": "@achra/ui/lib/utils",
+    "ui": "@achra/ui",
     "lib": "@/shared/lib",
     "hooks": "@/shared/hooks"
   },

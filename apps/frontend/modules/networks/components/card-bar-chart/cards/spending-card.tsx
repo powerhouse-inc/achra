@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 import { ItemLegend } from './legend-item'
 import { SpendingItem } from './spending-item'
 

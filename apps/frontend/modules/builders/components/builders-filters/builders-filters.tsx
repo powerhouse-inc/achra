@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Separator } from '@achra/ui/separator'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { SearchInput } from '@/modules/shared/components/form/search-input'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Separator } from '@/modules/shared/components/ui/separator'
 import { BuilderSkillsSelect, BuilderSkillsSelectDrawer } from './builder-skills-select'
 import { useBuildersFiltersContext } from './builders-filters-context'
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import { Card, CardContent } from '@achra/ui/card'
 import { OnboardingStepper } from './onboarding-stepper'
 import { OnboardingStepperCompact } from './onboarding-stepper-compact'
 import { SupportCallout } from './support-callout'

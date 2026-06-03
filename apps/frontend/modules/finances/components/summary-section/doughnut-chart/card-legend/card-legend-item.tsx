@@ -1,10 +1,10 @@
+import { cn } from '@achra/ui/lib/utils'
 import {
   getPercentDisplay,
   getShortCode,
   threeDigitsPrecisionHumanization,
 } from '@/modules/finances/lib/doughnut-chart-utils'
 import type { DoughnutSeries } from '@/modules/finances/types'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ItemLegendDoughnutProps {
   isDeepLevel?: boolean

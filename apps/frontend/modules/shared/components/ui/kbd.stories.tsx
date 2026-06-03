@@ -1,5 +1,5 @@
+import { Kbd, KbdGroup } from '@achra/ui/kbd'
 import React from 'react'
-import { Kbd, KbdGroup } from './kbd'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

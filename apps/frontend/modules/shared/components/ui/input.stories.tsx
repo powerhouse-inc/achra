@@ -1,4 +1,4 @@
-import { Input } from './input'
+import { Input } from '@achra/ui/input'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

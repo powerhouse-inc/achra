@@ -1,7 +1,7 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
 import { type ReactNode, useEffect, useState } from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface TextFlipProps {
   words: ReactNode[]

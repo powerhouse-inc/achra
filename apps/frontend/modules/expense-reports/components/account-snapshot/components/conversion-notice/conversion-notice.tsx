@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { UsdsIcon } from '@/modules/shared/components/svgs'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ConversionNoticeProps {
   className?: string

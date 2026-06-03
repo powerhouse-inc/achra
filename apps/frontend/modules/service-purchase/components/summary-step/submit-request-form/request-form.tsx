@@ -1,5 +1,10 @@
 'use client'
 
+import { Alert, AlertDescription, AlertTitle } from '@achra/ui/alert'
+import { Button } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@achra/ui/form'
+import { Input } from '@achra/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Send } from 'lucide-react'
 import { useEffect } from 'react'
@@ -18,18 +23,6 @@ import {
   useServicePurchaseStep,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep, type SubmitRequestFormValues } from '@/modules/service-purchase/types'
-import { Alert, AlertDescription, AlertTitle } from '@/modules/shared/components/ui/alert'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/modules/shared/components/ui/form'
-import { Input } from '@/modules/shared/components/ui/input'
 
 interface RequestFormProps {
   defaultName?: string

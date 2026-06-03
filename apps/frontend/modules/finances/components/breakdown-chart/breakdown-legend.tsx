@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
 
-import { cn } from '@/shared/lib/utils'
 import { BreakdownChartItem } from './breakdown-chart-item'
 import { BreakdownChartSwitch } from './breakdown-chart-switch'
 import type { BreakdownChartSeriesData } from '../../types'

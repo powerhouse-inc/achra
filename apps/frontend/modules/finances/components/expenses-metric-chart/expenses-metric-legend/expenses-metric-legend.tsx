@@ -1,10 +1,10 @@
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
 import SimpleBar from 'simplebar-react'
 import 'simplebar-react/dist/simplebar.min.css'
 
 import { getLegendValue } from '@/modules/finances/lib/expenses-metric-chart-utils'
 import type { ExpensesMetricChartSeriesData } from '@/modules/finances/types'
-import { cn } from '@/shared/lib/utils'
 import { ExpensesMetricChartItem } from '../expenses-metric-chart-item'
 import { ExpensesMetricChartSwitch } from '../expenses-metric-chart-switch'
 

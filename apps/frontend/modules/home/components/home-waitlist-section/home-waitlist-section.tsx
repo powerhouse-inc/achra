@@ -1,5 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Input } from '@achra/ui/input'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import { useActionState } from 'react'
@@ -9,10 +12,7 @@ import {
 } from '@/modules/home/actions/home-waitlist-action'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
-import { Button } from '@/shared/components/ui/button'
-import { Input } from '@/shared/components/ui/input'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
-import { cn } from '@/shared/lib/utils'
 import { WaitlistIsotype } from './waitlist-isotype'
 
 const initialState: HomeWaitlistFormState = {

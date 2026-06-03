@@ -1,10 +1,10 @@
 'use client'
 
+import { useIsMobile } from '@achra/ui/hooks/use-mobile'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import { useMemo } from 'react'
 import type { Sow_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
-import { cn } from '@/modules/shared/lib/utils'
 import { ExpandableButtonItem } from './expandable-button-item'
 import { MaybeScrollableList } from './maybe-scrollable-list'
 import type { DeliverableViewMode } from '../../deliverable-card/deliverable-card'

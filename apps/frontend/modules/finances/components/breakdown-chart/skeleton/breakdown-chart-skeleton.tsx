@@ -1,4 +1,4 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 import { BarSkeletonItems } from './bar-skeleton-items'
 import { ItemLegendDesk } from './item-legend-desk'
 import { ItemLegendValues } from './item-legend-values'

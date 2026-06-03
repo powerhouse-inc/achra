@@ -1,12 +1,6 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
+import { cn } from '@achra/ui/lib/utils'
 import { FileX } from 'lucide-react'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface EmptyTablePlaceholderProps {
   /** Builder or actor name/code shown in the message */

@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
 import { useMemo } from 'react'
 import {
   ScopeOfWork_DeliverableSetStatus,
   type Sow_DeliverableSetStatus,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableSetStatusChipProps {
   status: ScopeOfWork_DeliverableSetStatus | Sow_DeliverableSetStatus

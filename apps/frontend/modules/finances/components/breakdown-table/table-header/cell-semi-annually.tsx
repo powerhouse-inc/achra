@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { MetricValues } from '@/modules/finances/types'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 
 function getShortNameForMetric(metric: string): string {
   if (metric === 'Net Expenses On-Chain') {

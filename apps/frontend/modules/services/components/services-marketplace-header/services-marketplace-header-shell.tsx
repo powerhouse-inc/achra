@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Boxes, Briefcase, Layers, Package, Store } from 'lucide-react'
-import { cn } from '@/modules/shared/lib/utils'
 import type { ReactNode } from 'react'
 
 interface ServicesMarketplaceHeaderShellProps {

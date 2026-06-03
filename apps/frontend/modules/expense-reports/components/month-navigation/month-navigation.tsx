@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/modules/shared/components/ui/button'
 import { useMonthNavigation } from './use-month-navigation'
 
 interface MonthNavigationProps {

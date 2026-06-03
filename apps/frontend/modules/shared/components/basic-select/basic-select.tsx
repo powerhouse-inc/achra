@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import {
   Select,
   SelectContent,
@@ -7,8 +8,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/modules/shared/components/ui/select'
-import { cn } from '../../lib/utils'
+} from '@achra/ui/select'
 
 interface BasicSelectProps {
   value?: string

@@ -1,3 +1,5 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { SectionTitle } from '@/modules/shared/components/section-title'
@@ -7,9 +9,7 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
-import { Button } from '@/modules/shared/components/ui/button'
 import { type NetworkDashboardSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 interface DashboardSectionWrapperProps {

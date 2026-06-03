@@ -1,7 +1,7 @@
 'use client'
 
+import { Skeleton } from '@achra/ui/skeleton'
 import { usePathname } from 'next/navigation'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 function BuilderHeaderDescriptionSkeleton() {
   const pathname = usePathname()

@@ -1,5 +1,6 @@
 'use client'
 
+import { Popover, PopoverContent, PopoverTrigger } from '@achra/ui/popover'
 import {
   type ComponentProps,
   type ComponentRef,
@@ -12,7 +13,6 @@ import {
   useState,
 } from 'react'
 import { useDebounceValue } from 'usehooks-ts'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 
 interface HoverPopoverContextValue {
   open: boolean

@@ -1,17 +1,11 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 import { ArrowUpDown } from 'lucide-react'
 import SimpleBar from 'simplebar-react'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
 
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
-import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum } from '@/modules/shared/types/common-enums'
 import { useBudgetStatementTable } from '../budget-statement-item/use-budget-statement-table'
 import { BudgetStatementTableItem } from './budget-statement-table-item'

@@ -1,15 +1,11 @@
 'use client'
 
+import { DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from '@achra/ui/dropdown-menu'
+import { Skeleton } from '@achra/ui/skeleton'
 import { HardDrive } from 'lucide-react'
 import Link from 'next/link'
-import {
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from '@/modules/shared/components/ui/dropdown-menu'
 import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
 import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
-import { Skeleton } from '@/shared/components/ui/skeleton'
 import type { Route } from 'next'
 
 type MenuItemComponent = React.ComponentType<React.ComponentProps<typeof DropdownMenuItem>>

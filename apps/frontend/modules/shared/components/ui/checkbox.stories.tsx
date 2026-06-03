@@ -1,4 +1,4 @@
-import { Checkbox } from './checkbox'
+import { Checkbox } from '@achra/ui/checkbox'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

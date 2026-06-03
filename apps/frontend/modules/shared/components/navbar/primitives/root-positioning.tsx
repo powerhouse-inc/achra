@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface RootPositioningProps {
   children: React.ReactNode

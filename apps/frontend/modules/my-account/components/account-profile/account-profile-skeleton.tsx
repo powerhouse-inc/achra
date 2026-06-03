@@ -1,4 +1,4 @@
-import { Skeleton } from '@/shared/components/ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 
 function AccountProfileSkeleton() {
   return (

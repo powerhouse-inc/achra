@@ -2,7 +2,9 @@
 
 A plain-text design reference for AI agents and engineers. Captures the light/dark design tokens, typography, elevation, and component patterns that power the Achra UI.
 
-**Source of truth:** [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css) (Tailwind v4 CSS-first config) and [`apps/frontend/components.json`](apps/frontend/components.json) (shadcn/ui `new-york` style, `neutral` base, CSS variables).
+**Source of truth:** the design tokens live in [`packages/design-system/theme.css`](packages/design-system/theme.css) (the shared `@achra/design-system` package — Tailwind v4 CSS-first config, consumed by every app). The frontend's [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css) is the app's Tailwind entry: it `@import`s the shared theme, owns the app-level `@layer base` / `container` utility, and `@source`s the shared UI package. shadcn config: [`packages/ui/components.json`](packages/ui/components.json) (the `@achra/ui` package) and [`apps/frontend/components.json`](apps/frontend/components.json) (app-level aliases pointing at `@achra/ui`). Both use shadcn/ui `new-york` style, `neutral` base, CSS variables.
+
+> **Monorepo note:** the design system is shared via workspace packages — `@achra/design-system` (tokens), `@achra/ui` (53 shadcn components + `cn` + `use-mobile`, at `packages/ui/src/`), plus `@achra/typescript-config` and `@achra/eslint-config`. Import components as `@achra/ui/<name>` (e.g. `@achra/ui/button`), the `cn` helper as `@achra/ui/lib/utils`.
 
 **Stack:** Next.js 16 · React 19 · Tailwind CSS 4 · shadcn/ui (new-york) · Radix UI · Lucide · `next-themes` (class strategy).
 
@@ -25,7 +27,7 @@ Achra is "the marketplace for global coordination" — an operational hub for ne
 
 ## 2. Color Palette & Roles
 
-All colors are defined as CSS custom properties in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css) and exposed to Tailwind as `bg-*`, `text-*`, `border-*` utilities via `@theme inline`. Use the **Tailwind utility** column in component code — never hardcode hex/oklch.
+All colors are defined as CSS custom properties in [`packages/design-system/theme.css`](packages/design-system/theme.css) and exposed to Tailwind as `bg-*`, `text-*`, `border-*` utilities via `@theme inline`. Use the **Tailwind utility** column in component code — never hardcode hex/oklch.
 
 ### 2.1 Core surface & text
 
@@ -147,7 +149,7 @@ Weights: use `font-normal` (400), `font-medium` (500), `font-semibold` (600), `f
 
 ## 4. Component Stylings
 
-Built on shadcn/ui `new-york` style (see [`apps/frontend/components.json`](apps/frontend/components.json)). All components live under [`apps/frontend/modules/shared/components/ui/`](apps/frontend/modules/shared/components/ui). Variants are declared with `class-variance-authority` (CVA). Semantic tokens — never raw colors — drive all variants.
+Built on shadcn/ui `new-york` style (see [`packages/ui/components.json`](packages/ui/components.json)). All components live in the shared `@achra/ui` package under [`packages/ui/src/components/`](packages/ui/src/components) and are imported as `@achra/ui/<name>`. Variants are declared with `class-variance-authority` (CVA). Semantic tokens — never raw colors — drive all variants.
 
 ### 4.1 Common traits (applied across shadcn components)
 
@@ -389,7 +391,7 @@ Warning        text-status-warning
 
 ### 9.3 When extending the system
 
-1. **New color:** add to both `:root` and `.dark` in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css), then map under `@theme inline` as `--color-<name>: var(--<name>)`. Document the role here.
-2. **New component:** place under [`apps/frontend/modules/shared/components/ui/`](apps/frontend/modules/shared/components/ui), use CVA, export `{ Component, componentVariants }`, add Storybook story alongside.
-3. **New font:** load in [`apps/frontend/app/layout.tsx`](apps/frontend/app/layout.tsx) with `next/font`, expose as a CSS variable, register under `@theme inline` as `--font-<name>: var(--font-<name>)`.
+1. **New color:** add to both `:root` and `.dark` in [`packages/design-system/theme.css`](packages/design-system/theme.css), then map under `@theme inline` as `--color-<name>: var(--<name>)`. Document the role here.
+2. **New component:** place under [`packages/ui/src/components/`](packages/ui/src/components) (the `@achra/ui` package), use CVA, export `{ Component, componentVariants }`. Stories live alongside the component consumers in `apps/frontend` and import via `@achra/ui/<name>`.
+3. **New font:** load in [`apps/frontend/app/layout.tsx`](apps/frontend/app/layout.tsx) with `next/font` and expose as a CSS variable; the shared theme references it as `--font-<name>` (e.g. `--font-inter`). Non-Next consumers (e.g. op-hub via Vite) must load fonts themselves.
 4. **Visual verification:** Storybook is configured at `pnpm storybook` (see [`README.md`](README.md)) — a convenient place to check a component in both `.dark` and default themes before it lands.

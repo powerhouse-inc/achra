@@ -1,6 +1,4 @@
-import { BadgeCheck, ChevronRight } from 'lucide-react'
-import React from 'react'
-import { Button } from './button'
+import { Button } from '@achra/ui/button'
 import {
   Item,
   ItemActions,
@@ -10,7 +8,9 @@ import {
   ItemMedia,
   ItemSeparator,
   ItemTitle,
-} from './item'
+} from '@achra/ui/item'
+import { BadgeCheck, ChevronRight } from 'lucide-react'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

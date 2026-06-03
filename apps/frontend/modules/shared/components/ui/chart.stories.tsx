@@ -1,12 +1,12 @@
-import React from 'react'
-import * as Recharts from 'recharts'
 import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from './chart'
+} from '@achra/ui/chart'
+import React from 'react'
+import * as Recharts from 'recharts'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

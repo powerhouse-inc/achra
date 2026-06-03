@@ -1,6 +1,6 @@
+import { Button } from '@achra/ui/button'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@achra/ui/collapsible'
 import React from 'react'
-import { Button } from './button'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

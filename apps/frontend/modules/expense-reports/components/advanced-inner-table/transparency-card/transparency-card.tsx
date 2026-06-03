@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { CardSpacingSize, ItemType } from '@/modules/expense-reports/types'
-import { cn } from '@/modules/shared/lib/utils'
 import type { JSX } from 'react'
 
 interface Props {

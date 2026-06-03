@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import type { AnalyticGranularity, MetricValues, TableFinances } from '@/modules/finances/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import { getKeyMetric } from '../table-header/cell-semi-annually'
 import { defaultOrder, orderMetrics } from '../table-header/header-semi-annually'
 import { LinkCell } from './link-cell'

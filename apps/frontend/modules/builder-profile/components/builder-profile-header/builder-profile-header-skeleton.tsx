@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { Suspense } from 'react'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuilderHeaderDescriptionSkeleton } from './builder-profile-header-description-skeleton'
 
 interface BuilderProfileHeaderSkeletonProps {

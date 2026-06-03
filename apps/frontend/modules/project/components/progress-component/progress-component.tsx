@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Progress } from '@achra/ui/progress'
 import React, { type ComponentProps } from 'react'
-import { Progress } from '@/modules/shared/components/ui/progress'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ProgressComponentProps extends Omit<ComponentProps<'div'>, 'ref'> {
   progress: number

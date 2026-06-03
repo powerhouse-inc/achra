@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { CircleArrowOutUpRightIcon } from 'lucide-react'
-import { cn } from '@/modules/shared/lib/utils'
 import { useModalCategories } from '../../providers/categories-provider'
 
 interface OpenModalTransparencyProps {

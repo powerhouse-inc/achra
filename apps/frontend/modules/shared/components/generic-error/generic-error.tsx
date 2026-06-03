@@ -1,8 +1,6 @@
 'use client'
 
-import { ServerCrash } from 'lucide-react'
-import { useEffect } from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@achra/ui/button'
 import {
   Empty,
   EmptyContent,
@@ -10,7 +8,9 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '../ui/empty'
+} from '@achra/ui/empty'
+import { ServerCrash } from 'lucide-react'
+import { useEffect } from 'react'
 
 interface GenericErrorProps {
   error: Error & { digest?: string }

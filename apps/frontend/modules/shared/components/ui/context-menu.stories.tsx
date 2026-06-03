@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   ContextMenu,
   ContextMenuContent,
@@ -6,7 +5,8 @@ import {
   ContextMenuLabel,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from './context-menu'
+} from '@achra/ui/context-menu'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

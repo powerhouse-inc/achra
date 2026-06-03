@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
 import { ExternalLinkIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface ExternalLinkProps extends Omit<React.ComponentProps<typeof Link>, 'children'> {
   imageSrc: string

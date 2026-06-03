@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { NetworkNavbar } from '@/modules/shared/components/navbar'
-import { cn } from '@/shared/lib/utils'
 
 export default function NetworkLayout({ children }: { children: React.ReactNode }) {
   return (

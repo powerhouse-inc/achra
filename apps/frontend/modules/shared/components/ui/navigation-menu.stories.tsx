@@ -1,6 +1,3 @@
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
-import Link from 'next/link'
-import React from 'react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,7 +6,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from './navigation-menu'
+} from '@achra/ui/navigation-menu'
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import type { Route } from 'next'
 

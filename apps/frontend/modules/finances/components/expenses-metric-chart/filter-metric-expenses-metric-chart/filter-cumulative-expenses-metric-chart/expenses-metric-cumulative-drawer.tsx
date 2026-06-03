@@ -1,8 +1,8 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { CheckCircle2, CheckIcon, Circle } from 'lucide-react'
 import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
-import { cn } from '@/shared/lib/utils'
 import { CUMULATIVE_OPTIONS } from './cumulative-options'
 
 interface ExpensesMetricCumulativeDrawerProps {

@@ -1,5 +1,3 @@
-import { Calculator, Calendar, CreditCard, Settings, Smile, User } from 'lucide-react'
-import React from 'react'
 import {
   Command,
   CommandDialog,
@@ -10,7 +8,9 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from './command'
+} from '@achra/ui/command'
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from 'lucide-react'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { BlurText } from '@achra/ui/react-bits/blur-text'
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
-import { Button } from '@/shared/components/ui/button'
-import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 
 const entranceInitial = {
   filter: 'blur(10px)',

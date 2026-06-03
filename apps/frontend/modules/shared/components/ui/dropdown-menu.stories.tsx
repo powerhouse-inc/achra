@@ -1,5 +1,4 @@
-import React from 'react'
-import { Button } from './button'
+import { Button } from '@achra/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,7 +6,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu'
+} from '@achra/ui/dropdown-menu'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

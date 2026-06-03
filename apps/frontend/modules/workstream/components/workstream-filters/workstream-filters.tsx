@@ -1,8 +1,8 @@
 'use client'
 
+import { Separator } from '@achra/ui/separator'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { SearchInput } from '@/modules/shared/components/form/search-input'
-import { Separator } from '@/modules/shared/components/ui/separator'
 import { NetworkSelect } from './network-select'
 import { NetworkSelectDrawer } from './network-select-drawer'
 import { StatusSelect } from './status-select'

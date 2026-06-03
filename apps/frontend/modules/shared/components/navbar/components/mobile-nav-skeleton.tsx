@@ -1,4 +1,4 @@
-import { Skeleton } from '../../ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 
 /**
  * Skeleton for mobile navigation dropdown

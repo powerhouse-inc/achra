@@ -1,7 +1,7 @@
 'use client'
 
+import { ScrollArea } from '@achra/ui/scroll-area'
 import { useLayoutEffect, useRef } from 'react'
-import { ScrollArea } from '@/modules/shared/components/ui/scroll-area'
 
 interface ServiceSectionsCardListProps {
   items: string[]

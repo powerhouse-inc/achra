@@ -1,7 +1,7 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import React from 'react'
-import { Button } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 
 interface ArrowButtonProps extends React.ComponentProps<typeof Button> {
   onClick: () => void

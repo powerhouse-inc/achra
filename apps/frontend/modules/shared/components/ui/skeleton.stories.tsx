@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import React from 'react'
-import { Skeleton } from './skeleton'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

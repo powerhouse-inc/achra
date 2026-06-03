@@ -1,6 +1,6 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
-import { Skeleton } from '@/shared/components/ui/skeleton'
-import { cn } from '@/shared/lib/utils'
+import { Card, CardContent, CardFooter, CardHeader } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 
 interface MilestoneCardSkeletonProps {
   className?: string

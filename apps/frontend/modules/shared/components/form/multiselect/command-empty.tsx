@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { type Command as CommandPrimitive, useCommandState } from 'cmdk'
 import * as React from 'react'
-import { cn } from '@/shared/lib/utils'
 
 function CommandEmpty({
   className,

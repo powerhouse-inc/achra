@@ -1,5 +1,5 @@
+import { Separator } from '@achra/ui/separator'
 import React from 'react'
-import { Separator } from './separator'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

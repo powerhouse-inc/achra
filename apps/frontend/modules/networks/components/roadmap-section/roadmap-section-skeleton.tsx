@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { MilestoneExtendedCardSkeleton } from '@/modules/roadmap/components/milestone-extended-card/milestone-extended-card-skeleton'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 function TitleSkeleton() {
   return <Skeleton className="h-9.5 w-52" />

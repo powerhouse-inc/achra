@@ -1,5 +1,8 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+
+import { Tabs, TabsList } from '@achra/ui/tabs'
 import {
   type ComponentProps,
   type ComponentRef,
@@ -12,10 +15,6 @@ import {
   useRef,
   useState,
 } from 'react'
-
-import { cn } from '@/shared/lib/utils'
-
-import { Tabs, TabsList } from '../ui/tabs'
 
 interface ScrollableTabsContextValue {
   setShowStartIndicator: (value: boolean) => void

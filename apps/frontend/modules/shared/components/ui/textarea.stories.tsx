@@ -1,4 +1,4 @@
-import { Textarea } from './textarea'
+import { Textarea } from '@achra/ui/textarea'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

@@ -1,5 +1,5 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { InfoIcon } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { formatDateStringToQuarter } from '../../lib/date'
 
 interface TargetDataProps {

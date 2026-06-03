@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
@@ -6,7 +7,6 @@ import { InfoIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MobileDialogContent } from '@/modules/shared/components/mobile-dialog-content'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface TooltipInfoIconProps {
   tooltipContent: React.ReactNode

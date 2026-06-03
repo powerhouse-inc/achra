@@ -1,5 +1,5 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
 import React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

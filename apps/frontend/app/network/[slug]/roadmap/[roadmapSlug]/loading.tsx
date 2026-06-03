@@ -1,8 +1,8 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { RoadmapDetailsContentSkeleton } from '@/modules/roadmap/components/roadmap-details-content'
 import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb/page-breadcrumb-container'
 import { PageContent } from '@/modules/shared/components/page-containers/page-content'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 export default function RoadmapPageLoading() {
   return (

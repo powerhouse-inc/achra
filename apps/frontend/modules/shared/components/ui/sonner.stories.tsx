@@ -1,7 +1,7 @@
+import { Button } from '@achra/ui/button'
+import { Toaster } from '@achra/ui/sonner'
 import React from 'react'
 import { toast } from 'sonner'
-import { Button } from './button'
-import { Toaster } from './sonner'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

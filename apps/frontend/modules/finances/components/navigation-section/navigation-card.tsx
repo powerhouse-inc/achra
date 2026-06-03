@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { InternalLink } from '@/modules/shared/components/internal-link'
 import {
   Card,
   CardContent,
@@ -7,8 +5,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/modules/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
+} from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import Image from 'next/image'
+import { InternalLink } from '@/modules/shared/components/internal-link'
 import type { Route } from 'next'
 
 interface NavigationCardProps {

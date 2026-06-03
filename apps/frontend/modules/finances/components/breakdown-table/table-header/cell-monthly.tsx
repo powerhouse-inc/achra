@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { MetricValues } from '@/modules/finances/types'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import { getKeyMetric, getShortNameForMetric } from './cell-semi-annually'
 
 interface CellMonthlyProps {

@@ -1,6 +1,6 @@
+import { Label } from '@achra/ui/label'
+import { RadioGroup, RadioGroupItem } from '@achra/ui/radio-group'
 import React from 'react'
-import { Label } from './label'
-import { RadioGroup, RadioGroupItem } from './radio-group'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

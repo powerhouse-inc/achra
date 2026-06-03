@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Sidebar,
   SidebarContent,
@@ -13,7 +12,8 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
-} from './sidebar'
+} from '@achra/ui/sidebar'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

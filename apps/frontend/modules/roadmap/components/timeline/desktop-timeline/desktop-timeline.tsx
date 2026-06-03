@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import {
   Sow_DeliverableSetStatus,
   type Sow_Milestone,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { Circle, CircleWithDot } from '@/shared/components/svgs'
-import { cn } from '@/shared/lib/utils'
 import { MilestoneCard } from '../../milestone-card'
 import { useDesktopTimeline } from './use-desktop-timeline'
 

@@ -1,6 +1,5 @@
-import React from 'react'
-import { Button } from './button'
-import { Checkbox } from './checkbox'
+import { Button } from '@achra/ui/button'
+import { Checkbox } from '@achra/ui/checkbox'
 import {
   Field,
   FieldDescription,
@@ -9,10 +8,11 @@ import {
   FieldLegend,
   FieldSeparator,
   FieldSet,
-} from './field'
-import { Input } from './input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select'
-import { Textarea } from './textarea'
+} from '@achra/ui/field'
+import { Input } from '@achra/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@achra/ui/select'
+import { Textarea } from '@achra/ui/textarea'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

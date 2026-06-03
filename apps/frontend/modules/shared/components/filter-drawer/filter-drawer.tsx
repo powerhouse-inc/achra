@@ -1,16 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Drawer, DrawerContent, DrawerFooter, DrawerTitle, DrawerTrigger } from '@achra/ui/drawer'
+import { cn } from '@achra/ui/lib/utils'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { BrushCleaning, CheckIcon, FilterIcon, Loader2 } from 'lucide-react'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerFooter,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/modules/shared/components/ui/drawer'
-import { cn } from '../../lib/utils'
-import { Button } from '../ui/button'
 
 interface FilterDrawerProps extends React.PropsWithChildren {
   filterTrigger?: React.ReactNode

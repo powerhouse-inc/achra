@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   cacheComponents: true,
   outputFileTracingRoot: monorepoRoot,
+  // @achra/ui ships untranspiled TS/TSX source (consumed via its package
+  // exports), so Next must compile it rather than treat it as an opaque
+  // node_modules dependency.
+  transpilePackages: ['@achra/ui'],
   images: {
     qualities: [100, 75],
     remotePatterns: [

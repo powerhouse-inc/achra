@@ -1,3 +1,5 @@
+import { Button } from '@achra/ui/button'
+import { TableCell, TableRow } from '@achra/ui/table'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -9,8 +11,6 @@ import {
   getAmountByMetric,
 } from '@/modules/finances/lib/budget-statement-utils'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
-import { Button } from '@/modules/shared/components/ui/button'
-import { TableCell, TableRow } from '@/modules/shared/components/ui/table'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { BudgetStatementsStatus } from '../budget-statements-status/budget-statements-status'
 import { ContributorProfileInfo } from '../contributor-profile-info/contributor-profile-info'

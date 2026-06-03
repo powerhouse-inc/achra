@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { Link as LinkIcon } from 'lucide-react'
 import type { BuilderLink } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
@@ -7,7 +8,6 @@ import {
   LinksPopoverItem,
   type MediaElement,
 } from '@/modules/shared/components/links-popover'
-import { Button } from '@/modules/shared/components/ui/button'
 import type { MouseEvent } from 'react'
 
 function Links({ links }: { links: BuilderLink[] }) {

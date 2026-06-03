@@ -1,15 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from '@achra/ui/drawer'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { WalletIcon } from 'lucide-react'
 import type { OpHubMember } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/modules/shared/components/ui/drawer'
 import { useBuilderDrawerState } from '../../hooks/use-builder-drawer-state'
 import { ProfileFinancesCardContent } from '../profile-finances-card-content'
 

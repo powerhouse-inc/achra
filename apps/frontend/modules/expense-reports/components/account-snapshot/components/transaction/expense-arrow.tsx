@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ExpenseArrowProps extends React.SVGProps<SVGSVGElement> {
   isIncoming?: boolean

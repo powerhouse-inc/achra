@@ -1,4 +1,4 @@
-import { Spinner } from '@/modules/shared/components/ui/spinner'
+import { Spinner } from '@achra/ui/spinner'
 
 function AuthGuardLoadingFallback() {
   return (

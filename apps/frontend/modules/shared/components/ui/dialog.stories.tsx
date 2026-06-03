@@ -1,5 +1,4 @@
-import React from 'react'
-import { Button } from './button'
+import { Button } from '@achra/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,7 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './dialog'
+} from '@achra/ui/dialog'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

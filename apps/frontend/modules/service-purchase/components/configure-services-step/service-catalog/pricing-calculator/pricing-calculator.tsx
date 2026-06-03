@@ -1,5 +1,6 @@
 'use client'
 
+import { Card } from '@achra/ui/card'
 import { useCallback, useMemo } from 'react'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { ConfigureStepContinueButton } from '@/modules/service-purchase/components/configure-step-continue-button'
@@ -19,7 +20,6 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { Card } from '@/modules/shared/components/ui/card'
 import { GrandTotalRowCatalog } from '../grand-total-row-catalog'
 import { HeaderCatalogPlan } from '../header-catalog-plan'
 import { OptionGroupSection } from './option-group-section'

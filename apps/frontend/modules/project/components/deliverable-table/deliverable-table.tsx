@@ -1,21 +1,14 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 import { ArrowUpDown } from 'lucide-react'
 
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import { calculateDeliverableSubtotal } from '@/modules/project/lib/utils'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
-import { Button } from '@/modules/shared/components/ui/button'
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
-import { cn } from '@/modules/shared/lib/utils'
 import { SortEnum } from '@/modules/shared/types/common-enums'
 import { AvatarTitleAvatar, AvatarTitleRoot, AvatarTitleText } from '../avatar-title/avatar-title'
 import { DeliverableListPopover } from '../deliverable-list-popover/deliverable-list-popover'

@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Spinner } from '@achra/ui/spinner'
 import { Check } from 'lucide-react'
 import { ONBOARDING_STEPS, TOTAL_STEPS } from '@/modules/onboarding/lib/constants'
-import { Spinner } from '@/modules/shared/components/ui/spinner'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface OnboardingStepperCompactProps {
   currentStep: number

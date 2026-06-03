@@ -1,4 +1,4 @@
-import { ScrollArea } from './scroll-area'
+import { ScrollArea } from '@achra/ui/scroll-area'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

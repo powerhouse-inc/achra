@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { AnalyticGranularity } from '@/modules/finances/types'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface RowHeaderProps extends React.HTMLAttributes<HTMLTableCellElement> {
   granularity: AnalyticGranularity

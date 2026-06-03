@@ -1,3 +1,6 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 import { ArrowRight, ArrowUpDown, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -5,16 +8,6 @@ import type { ProccesedWallets } from '@/modules/networks/hooks/use-wallets-card
 import { useWalletsTable } from '@/modules/networks/hooks/use-wallets-table'
 import { SortEnum } from '@/modules/networks/types'
 import { CopyButton, CopyTooltip, CopyTrigger } from '@/modules/shared/components/copy-button'
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface WalletsTableProps {
   wallets: ProccesedWallets[]

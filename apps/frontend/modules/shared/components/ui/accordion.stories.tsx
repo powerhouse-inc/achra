@@ -1,5 +1,5 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
 import React from 'react'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

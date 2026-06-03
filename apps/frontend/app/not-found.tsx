@@ -1,12 +1,6 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
 import { FileQuestion } from 'lucide-react'
 import { AchraNavbar } from '@/modules/shared/components/navbar'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

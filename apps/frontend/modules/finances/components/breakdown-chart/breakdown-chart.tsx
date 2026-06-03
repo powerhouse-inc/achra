@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useCallback, useEffect, useMemo } from 'react'
 
@@ -14,7 +15,6 @@ import {
 import { formatBudgetName, removeBudgetWord } from '@/modules/finances/lib/utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import { useFinancesYear } from '../../hooks/use-finances-year'
 import type {
   AnalyticMetric,

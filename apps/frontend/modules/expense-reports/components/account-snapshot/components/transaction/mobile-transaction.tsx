@@ -1,18 +1,14 @@
 'use client'
 
+import { Accordion, AccordionContent, AccordionItem } from '@achra/ui/accordion'
+import { cn } from '@achra/ui/lib/utils'
+import { Separator } from '@achra/ui/separator'
 import { utc } from '@date-fns/utc'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { format, parseISO } from 'date-fns'
 import { useId } from 'react'
 import { AccountTransactionDirection } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-} from '@/modules/shared/components/ui/accordion'
-import { Separator } from '@/modules/shared/components/ui/separator'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import { TxHash } from '../tx-hash'
 import { ExpenseArrow } from './expense-arrow'
 import { WalletInfo } from './wallet-info'

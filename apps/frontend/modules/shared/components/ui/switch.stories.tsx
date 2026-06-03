@@ -1,4 +1,4 @@
-import { Switch } from './switch'
+import { Switch } from '@achra/ui/switch'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

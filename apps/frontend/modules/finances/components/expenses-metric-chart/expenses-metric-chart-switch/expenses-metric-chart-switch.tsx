@@ -1,8 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
-
-import { cn } from '@/shared/lib/utils'
 
 interface Props {
   isChecked: boolean

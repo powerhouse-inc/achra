@@ -1,6 +1,6 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { DateTime } from 'luxon'
 import { useMemo } from 'react'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 type ProfileUpdatedDateProps<E extends React.ElementType> = React.ComponentProps<E> & {
   as?: E

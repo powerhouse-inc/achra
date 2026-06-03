@@ -1,5 +1,4 @@
-import { FilePenLine } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
+import { Button } from '@achra/ui/button'
 import {
   Empty,
   EmptyContent,
@@ -7,7 +6,8 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
+} from '@achra/ui/empty'
+import { FilePenLine } from 'lucide-react'
 
 function NoDeliverables() {
   return (

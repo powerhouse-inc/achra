@@ -1,5 +1,9 @@
 'use client'
 
+import { Avatar, AvatarFallback } from '@achra/ui/avatar'
+import { useIsMobile } from '@achra/ui/hooks/use-mobile'
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { useCallback, useState } from 'react'
 import {
   type Sow_Agent,
@@ -8,10 +12,6 @@ import {
   type Sow_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableStatusChip } from '@/modules/shared/components/chips/deliverable-status-chip'
-import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
-import { cn } from '@/modules/shared/lib/utils'
 import { isBinaryProgress, isStoryPointProgress } from '../../lib/type-helpers'
 import { KeyResults } from '../milestone-details-card/key-results/key-results'
 import { DeliverablePercentageBar } from './deliverable-percentage-bar'

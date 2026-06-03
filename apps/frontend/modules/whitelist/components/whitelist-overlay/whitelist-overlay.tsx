@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { useCallback, useEffect } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { useWhitelistOverlay } from '@/modules/whitelist/hooks/use-whitelist-overlay'
 import { WHITELIST_OVERLAY_STORAGE_KEY } from '@/modules/whitelist/lib/constants'
-import { cn } from '@/shared/lib/utils'
 import { SuccessView } from '../success-view'
 import { WhitelistForm } from '../whitelist-form'
 

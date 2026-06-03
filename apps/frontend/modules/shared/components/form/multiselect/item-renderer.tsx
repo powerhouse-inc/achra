@@ -1,8 +1,8 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { XIcon } from 'lucide-react'
 import * as React from 'react'
-import { cn } from '@/shared/lib/utils'
 import type { Option } from './multiselect'
 
 interface ItemRendererProps {

@@ -1,7 +1,7 @@
 'use client'
 
+import { BlurText } from '@achra/ui/react-bits/blur-text'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
-import { BlurText } from '@/shared/components/ui/react-bits/blur-text'
 
 function HomeHero() {
   return (

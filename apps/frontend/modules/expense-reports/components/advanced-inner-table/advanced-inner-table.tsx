@@ -1,3 +1,4 @@
+import { cn } from '@achra/ui/lib/utils'
 import React, { useMemo } from 'react'
 import {
   generateCellKey,
@@ -6,7 +7,6 @@ import {
 } from '@/modules/expense-reports/lib/advanced-inner-table-helpers'
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_MIN_WIDTH } from '@/modules/expense-reports/lib/constants'
 import type { AdvancedInnerTableProps, Alignment } from '@/modules/expense-reports/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { EmptyTablePlaceholder } from './empty-table-placeholder'
 import { TransparencyCard } from './transparency-card/transparency-card'
 

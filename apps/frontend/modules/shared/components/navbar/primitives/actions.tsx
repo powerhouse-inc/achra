@@ -1,13 +1,13 @@
-import { EllipsisVertical } from 'lucide-react'
-import { cn } from '@/modules/shared/lib/utils'
-import { Button } from '../../ui/button'
+import { Button } from '@achra/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../ui/dropdown-menu'
+} from '@achra/ui/dropdown-menu'
+import { cn } from '@achra/ui/lib/utils'
+import { EllipsisVertical } from 'lucide-react'
 
 export interface ActionsAreaProps {
   children: React.ReactNode

@@ -1,5 +1,5 @@
+import { AspectRatio } from '@achra/ui/aspect-ratio'
 import React from 'react'
-import { AspectRatio } from './aspect-ratio'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

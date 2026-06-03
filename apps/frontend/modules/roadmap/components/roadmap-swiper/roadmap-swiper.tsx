@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type {
@@ -10,7 +11,6 @@ import {
   MilestoneExtendedCard,
   MilestoneExtendedCardSkeleton,
 } from '@/modules/roadmap/components/milestone-extended-card'
-import { cn } from '@/shared/lib/utils'
 import { useRoadmapSwiper } from './use-roadmap-swiper'
 
 interface RoadmapSwiperProps {

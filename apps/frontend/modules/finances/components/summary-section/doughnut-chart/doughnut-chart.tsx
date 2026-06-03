@@ -1,3 +1,4 @@
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { startTransition, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigation, Pagination } from 'swiper/modules'
@@ -13,7 +14,6 @@ import type { AnalyticMetric, DoughnutBudgetMetric, DoughnutSeries } from '@/mod
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 
-import { cn } from '@/modules/shared/lib/utils'
 import { CardLegend } from './card-legend'
 import { DoughnutChartSkeleton } from './doughnut-chart-skeleton'
 import { UsdsTooltip } from './usds-tooltip'

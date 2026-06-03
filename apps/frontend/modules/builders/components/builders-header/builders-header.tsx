@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { motion } from 'motion/react'
 import { useState } from 'react'
-import { Button } from '@/modules/shared/components/ui/button'
 
 function BuildersHeader() {
   const [showFullDescription, setShowFullDescription] = useState(false)

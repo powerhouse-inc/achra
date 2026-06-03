@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type ActiveWhen, isActive } from '@/modules/shared/lib/navbar-utils'
-import { cn } from '@/modules/shared/lib/utils'
 import type { RouteWithDynamicPages } from '@/modules/shared/types/routes'
-import { Skeleton } from '../../ui/skeleton'
 
 export interface NavItemProps extends Omit<React.ComponentProps<typeof Link>, 'href'> {
   href: RouteWithDynamicPages

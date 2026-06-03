@@ -1,12 +1,12 @@
+import { cn } from '@achra/ui/lib/utils'
+import { TabsContent, TabsTrigger } from '@achra/ui/tabs'
 import { useRoadmapListQuery } from '@/modules/__generated__/graphql/switchboard-generated'
 import { MilestoneExtendedCard } from '@/modules/roadmap/components/milestone-extended-card'
 import { RoadmapSwiper } from '@/modules/roadmap/components/roadmap-swiper'
 import { ScrollableTabs, ScrollableTabsList } from '@/modules/shared/components/scrollable-tabs'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '@/modules/shared/components/section-title'
-import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface RoadmapSectionProps {
   params: Promise<{ slug: string }>

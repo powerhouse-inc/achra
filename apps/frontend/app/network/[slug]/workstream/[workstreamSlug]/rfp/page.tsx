@@ -1,3 +1,5 @@
+import { Card } from '@achra/ui/card'
+import { Separator } from '@achra/ui/separator'
 import { CalendarClock, HandCoins } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
@@ -12,8 +14,6 @@ import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-stat
 import { Markdown } from '@/modules/shared/components/markdown'
 import { PageContent } from '@/modules/shared/components/page-containers'
 import { ProposalKeyValueElement } from '@/modules/shared/components/proposal-key-value-element'
-import { Card } from '@/modules/shared/components/ui/card'
-import { Separator } from '@/modules/shared/components/ui/separator'
 import ff from '@/modules/shared/lib/feature-flags'
 import { WorkstreamRfpBreadcrumb } from '@/modules/workstream/components/workstream-breadcrumb'
 

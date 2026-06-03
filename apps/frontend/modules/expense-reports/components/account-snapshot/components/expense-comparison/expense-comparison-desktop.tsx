@@ -1,16 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { InfoIcon } from 'lucide-react'
 import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ExpenseComparisonDesktopProps {
   lineItems: ExpenseComparisonLineItem[]

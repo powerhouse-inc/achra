@@ -1,4 +1,4 @@
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 
 interface KeyResultStatusChipProps {
   className?: string

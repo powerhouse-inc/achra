@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader } from '@achra/ui/card'
 import type {
   BuilderProject,
   ScopeOfWork_Deliverable,
@@ -9,7 +10,6 @@ import { KeyResultsMetricCard } from '@/modules/project/components/key-results-m
 import { StatusMetricCard } from '@/modules/project/components/status-metric-card'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { InternalLink } from '@/modules/shared/components/internal-link'
-import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import ff from '@/modules/shared/lib/feature-flags'
 
 interface ProjectCardProps {

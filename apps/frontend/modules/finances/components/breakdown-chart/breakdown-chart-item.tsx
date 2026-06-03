@@ -1,7 +1,7 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/breakdown-chart-utils'
 import { formatBudgetName, removeBudgetWord } from '@/modules/finances/lib/utils'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 import type { BreakdownChartSeriesData } from '../../types'
 
 interface BreakdownChartItemProps {

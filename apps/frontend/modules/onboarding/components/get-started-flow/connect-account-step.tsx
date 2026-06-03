@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
 import { LogIn } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
 interface ConnectAccountStepProps {
   onLogin: () => void

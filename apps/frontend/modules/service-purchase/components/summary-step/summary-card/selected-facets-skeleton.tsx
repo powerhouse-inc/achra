@@ -1,4 +1,4 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 
 function SelectedFacetsSkeleton() {
   return (

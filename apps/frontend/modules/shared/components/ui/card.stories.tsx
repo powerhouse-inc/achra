@@ -1,6 +1,13 @@
+import { Button } from '@achra/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@achra/ui/card'
 import React from 'react'
-import { Button } from './button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

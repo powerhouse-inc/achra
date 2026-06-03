@@ -1,8 +1,8 @@
+import { Badge } from '@achra/ui/badge'
+import { cn } from '@achra/ui/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import type { NetworkCategory } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Badge } from '@/modules/shared/components/ui/badge'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface NetworkChip extends VariantProps<typeof networkCategoryVariants> {
   category: NetworkCategory

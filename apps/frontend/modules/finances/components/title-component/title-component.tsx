@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 import { IconTitleWithCode } from './icon-title'
 
 interface TitleComponentProps {

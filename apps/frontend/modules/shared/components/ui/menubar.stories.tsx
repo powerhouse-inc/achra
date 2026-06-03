@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Menubar,
   MenubarCheckboxItem,
@@ -13,7 +12,8 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from './menubar'
+} from '@achra/ui/menubar'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

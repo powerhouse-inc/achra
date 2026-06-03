@@ -1,9 +1,9 @@
+import { Card, CardTitle } from '@achra/ui/card'
 import React from 'react'
 import { getYearsForChart } from '@/modules/networks/lib/finances-section-utils'
 import { revenueAndSpendingData } from '@/modules/networks/mocks/revenue-and-spending-data'
 import { ExternalLink } from '@/modules/shared/components/external-link/external-link'
 import { InternalLink } from '@/modules/shared/components/internal-link/internal-link'
-import { Card, CardTitle } from '@/modules/shared/components/ui/card'
 import { FinancesBarChart } from './finances-bar-chart'
 import { FinancesLegends } from './legend-card-section'
 

@@ -1,11 +1,7 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
-import { type UseFormReturn, useWatch } from 'react-hook-form'
-import { type PersonaId, PERSONAS } from '@/modules/onboarding/lib/personas'
-import { stepOneSchema, type StepOneValues } from '@/modules/onboarding/lib/schemas'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card } from '@/modules/shared/components/ui/card'
+import { Button } from '@achra/ui/button'
+import { Card } from '@achra/ui/card'
 import {
   Form,
   FormControl,
@@ -14,8 +10,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/modules/shared/components/ui/form'
-import { Input } from '@/modules/shared/components/ui/input'
+} from '@achra/ui/form'
+import { Input } from '@achra/ui/input'
+import { ArrowRight } from 'lucide-react'
+import { type UseFormReturn, useWatch } from 'react-hook-form'
+import { type PersonaId, PERSONAS } from '@/modules/onboarding/lib/personas'
+import { stepOneSchema, type StepOneValues } from '@/modules/onboarding/lib/schemas'
 import { PersonaCard } from './persona-card'
 
 interface ChooseRoleStepProps {

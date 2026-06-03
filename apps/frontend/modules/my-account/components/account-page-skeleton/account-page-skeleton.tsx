@@ -1,6 +1,6 @@
+import { Card, CardContent, CardHeader } from '@achra/ui/card'
+import { Skeleton } from '@achra/ui/skeleton'
 import { SettingsNavSkeleton } from '@/modules/my-account/components/settings-nav'
-import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 const FIELD_KEYS = ['name', 'date-of-birth', 'language'] as const
 

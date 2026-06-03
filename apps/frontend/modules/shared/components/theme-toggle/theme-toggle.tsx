@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useCallback } from 'react'
-import { Button } from '@/shared/components/ui/button'
 
 function ThemeToggle() {
   const { setTheme, theme } = useTheme()

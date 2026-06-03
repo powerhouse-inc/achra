@@ -1,11 +1,11 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { useState } from 'react'
 import { Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Sow_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
-import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
 import { getProjectByDeliverableId } from '@/modules/workstream/lib/utils'
 import { createDeliverableTitle } from '../../lib/deliverable-helpers'

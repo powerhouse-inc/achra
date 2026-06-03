@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Suspense } from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 import {
   NAVBAR_BLUR_BACKGROUND_ROUTES,
   NAVBAR_TRANSPARENT_ROUTES,

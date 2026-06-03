@@ -1,13 +1,6 @@
-import { Card } from '@/modules/shared/components/ui/card'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/modules/shared/components/ui/table'
+import { Card } from '@achra/ui/card'
+import { Skeleton } from '@achra/ui/skeleton'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@achra/ui/table'
 
 function MetricCardSkeleton() {
   return (

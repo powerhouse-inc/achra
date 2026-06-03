@@ -1,4 +1,4 @@
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 import { FundChangeRateSkeleton } from '../fund-change-rate'
 import { ReserveCardSkeleton } from '../reserve-card'
 import { SectionHeaderSkeleton } from '../section-header'

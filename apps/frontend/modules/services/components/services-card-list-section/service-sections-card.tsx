@@ -1,7 +1,7 @@
+import { Card, CardAction, CardContent, CardHeader } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { ServiceSectionsCardList } from '@/modules/services/components/services-card-list-section/service-sections-card-list'
 import { InternalLink } from '@/modules/shared/components/internal-link'
-import { Card, CardAction, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
-import { cn } from '@/modules/shared/lib/utils'
 import type { ComponentType, SVGProps } from 'react'
 
 interface ServiceSectionsCardProps {

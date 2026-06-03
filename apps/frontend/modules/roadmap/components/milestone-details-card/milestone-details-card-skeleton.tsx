@@ -1,5 +1,5 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { ContributorsSkeleton } from './contributors-skeleton'
 import { CoordinatorsSkeleton } from './coordinators-skeleton'
 import { DeliverablesSectionSkeleton } from './deliverables-section-skeleton'

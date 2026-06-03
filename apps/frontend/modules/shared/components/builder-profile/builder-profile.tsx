@@ -1,8 +1,8 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import type { BuilderStatus, Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
 import OperatorSVG from '@/modules/shared/components/svgs/operator.svg'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuildersStatusChip } from '../chips/builders-status-chip'
 
 export interface BuilderProfileProps {

@@ -1,12 +1,7 @@
 'use client'
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/shared/components/ui/accordion'
 
 import { HOME_FAQ_COLUMNS } from './home-faq-data'
 

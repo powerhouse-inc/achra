@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,7 +5,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from './breadcrumb'
+} from '@achra/ui/breadcrumb'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

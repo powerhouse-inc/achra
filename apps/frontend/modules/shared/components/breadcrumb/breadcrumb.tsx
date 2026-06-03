@@ -1,4 +1,13 @@
 'use client'
+import {
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  Breadcrumb as BreadcrumbPrimitive,
+  BreadcrumbSeparator,
+} from '@achra/ui/breadcrumb'
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { Fragment, Suspense, useMemo, useRef, useState } from 'react'
 import { useMountedState } from 'react-use'
@@ -13,15 +22,6 @@ import type {
   BreadcrumbItemExtended,
   BreadcrumbItemNavigation,
 } from '@/modules/shared/types/breadcrumb'
-import { cn } from '@/shared/lib/utils'
-import {
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  Breadcrumb as BreadcrumbPrimitive,
-  BreadcrumbSeparator,
-} from '../ui/breadcrumb'
 import { DotsSegment } from './components/dot-segments'
 import { EllipsisSkeleton } from './components/ellipsis-skeleton'
 import type { Route } from 'next'

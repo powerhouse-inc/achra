@@ -1,6 +1,6 @@
+import { Card } from '@achra/ui/card'
 import type { FullQueryWorkstream } from '@/modules/__generated__/graphql/switchboard-generated'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
-import { Card } from '@/modules/shared/components/ui/card'
 import { useWorkstreamCardData } from '../../hooks/use-workstream-card-data'
 import { AlternativeProposalsFooter } from '../initial-proposal-list/alternative-proposals-footer'
 import { InitialProposalSection } from '../initial-proposal-list/initial-proposal-section'

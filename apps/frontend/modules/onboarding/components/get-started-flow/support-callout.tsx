@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { LifeBuoy } from 'lucide-react'
 import { SUPPORT_DISCORD_URL } from '@/modules/onboarding/lib/constants'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface SupportCalloutProps {
   className?: string

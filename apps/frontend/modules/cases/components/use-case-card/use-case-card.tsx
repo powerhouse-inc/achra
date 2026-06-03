@@ -1,7 +1,7 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@achra/ui/card'
 import { TAG_CHIP_CONFIG } from '@/modules/cases/lib/constants'
 import type { UseCase } from '@/modules/cases/types'
 import { GenericChip } from '@/shared/components/chips/generic-chip/generic-chip'
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 
 interface UseCaseCardProps {
   useCase: UseCase

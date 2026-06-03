@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import Image from 'next/image'
 
 import { InternalLink } from '@/shared/components/internal-link'
-import { cn } from '@/shared/lib/utils'
 import type { Route } from 'next'
 
 interface WhyAchraCtaCardProps {

@@ -1,7 +1,7 @@
-import { Card } from '@/modules/shared/components/ui/card'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/shared/lib/utils'
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import { Separator } from '@achra/ui/separator'
+import { Skeleton } from '@achra/ui/skeleton'
 
 function BudgetUtilizationCardSkeleton() {
   return (

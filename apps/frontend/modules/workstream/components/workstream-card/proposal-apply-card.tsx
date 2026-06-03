@@ -1,14 +1,14 @@
 'use client'
 
+import { buttonVariants } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { cva } from 'class-variance-authority'
 import Link from 'next/link'
 import { useCallback } from 'react'
 import type { WorkstreamDetailsProject } from '@/modules/project/types'
 import { OverflowList } from '@/modules/shared/components/overflow-list'
-import { buttonVariants } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { cn } from '@/modules/shared/lib/utils'
 import { getTagVariant } from '@/modules/workstream/lib/proposal-apply-card-helpers'
 import type { Route } from 'next'
 

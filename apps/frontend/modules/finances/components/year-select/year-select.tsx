@@ -1,5 +1,4 @@
 'use client'
-import { getYearsRange } from '@/modules/finances/lib/utils'
 import {
   Select,
   SelectContent,
@@ -8,7 +7,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/modules/shared/components/ui/select'
+} from '@achra/ui/select'
+import { getYearsRange } from '@/modules/finances/lib/utils'
 import { useFinancesYear } from '../../hooks/use-finances-year'
 
 function YearSelect() {

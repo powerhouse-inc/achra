@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,8 +8,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from './alert-dialog'
-import { Button } from './button'
+} from '@achra/ui/alert-dialog'
+import { Button } from '@achra/ui/button'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

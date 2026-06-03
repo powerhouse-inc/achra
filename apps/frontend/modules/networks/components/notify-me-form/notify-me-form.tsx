@@ -1,5 +1,10 @@
 'use client'
 
+import { Alert, AlertDescription, AlertTitle } from '@achra/ui/alert'
+import { Button } from '@achra/ui/button'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@achra/ui/form'
+import { Input } from '@achra/ui/input'
+import { cn } from '@achra/ui/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { startTransition, useActionState, useEffect } from 'react'
@@ -11,17 +16,6 @@ import {
   notifyMeSchema,
 } from '@/modules/networks/lib/notify-me-schema'
 import type { NotifyMeFormValues } from '@/modules/networks/types'
-import { Alert, AlertDescription, AlertTitle } from '@/modules/shared/components/ui/alert'
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/modules/shared/components/ui/form'
-import { Input } from '@/modules/shared/components/ui/input'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface NotifyMeForm {
   className?: string

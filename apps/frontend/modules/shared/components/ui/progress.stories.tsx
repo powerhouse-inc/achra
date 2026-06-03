@@ -1,4 +1,4 @@
-import { Progress } from './progress'
+import { Progress } from '@achra/ui/progress'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

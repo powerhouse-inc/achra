@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { OpHubMember } from '@/modules/__generated__/graphql/switchboard-generated'
 import { InternalLink } from '@/modules/shared/components/internal-link'
 import ff from '@/modules/shared/lib/feature-flags'
-import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 interface ProfileFinancesCardContentProps {

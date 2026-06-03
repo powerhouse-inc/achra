@@ -1,11 +1,11 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { Check, Copy, type LucideIcon } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import React, { createContext, useContext } from 'react'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { cn } from '@/modules/shared/lib/utils'
-import { Button } from '../ui/button'
 import { useCopyButton } from './use-copy-button'
 
 type Value = string | (() => string)

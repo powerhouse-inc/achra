@@ -1,4 +1,4 @@
-import { Label } from './label'
+import { Label } from '@achra/ui/label'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

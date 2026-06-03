@@ -1,5 +1,5 @@
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@achra/ui/tooltip'
 import React from 'react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

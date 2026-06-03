@@ -1,18 +1,13 @@
 'use client'
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
+import { Card, CardContent } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import { Separator } from '@achra/ui/separator'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { InfoIcon } from 'lucide-react'
 import type { ExpenseComparisonLineItem } from '@/modules/expense-reports/types'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/modules/shared/components/ui/accordion'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ExpenseComparisonMobileProps {
   lineItems: ExpenseComparisonLineItem[]

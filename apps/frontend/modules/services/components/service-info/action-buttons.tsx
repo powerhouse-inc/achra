@@ -1,7 +1,7 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { Download } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 import { ScrollToSectionButton } from './scroll-to-section-button'
 import type { Route } from 'next'
 

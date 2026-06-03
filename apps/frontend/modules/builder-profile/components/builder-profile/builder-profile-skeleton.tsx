@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { ServicesCardSkeleton } from '@/modules/services/components/service-skeleton/service-card-skeleton'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
 
 function AboutUsSkeleton() {
   return (

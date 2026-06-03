@@ -1,12 +1,8 @@
+import { AvatarFallback, AvatarImage, Avatar as AvatarPrimitive } from '@achra/ui/avatar'
+import { cn } from '@achra/ui/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
 import Link from 'next/link'
 import React from 'react'
-import {
-  AvatarFallback,
-  AvatarImage,
-  Avatar as AvatarPrimitive,
-} from '@/modules/shared/components/ui/avatar'
-import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 export interface AvatarTitleRootProps {

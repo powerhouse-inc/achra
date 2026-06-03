@@ -1,11 +1,9 @@
-import { ArrowUp, Check, Info, Plus, Search } from 'lucide-react'
-import React from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from './dropdown-menu'
+} from '@achra/ui/dropdown-menu'
 import {
   InputGroup,
   InputGroupAddon,
@@ -13,9 +11,11 @@ import {
   InputGroupInput,
   InputGroupText,
   InputGroupTextarea,
-} from './input-group'
-import { Separator } from './separator'
-import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
+} from '@achra/ui/input-group'
+import { Separator } from '@achra/ui/separator'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
+import { ArrowUp, Check, Info, Plus, Search } from 'lucide-react'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

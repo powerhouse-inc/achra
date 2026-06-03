@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { buildWidths, MAX_ROWS } from '@/modules/builders/lib/skeletons-helpers'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuildersProfileSkeleton } from '../builders-profile-skeleton/builders-profile-skeleton'
 import { BuildersSkillsSkeleton } from '../builders-skills-skeleton/builders-skills-skeleton'
 

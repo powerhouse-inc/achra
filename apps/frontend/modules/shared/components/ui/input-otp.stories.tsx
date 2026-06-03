@@ -1,5 +1,5 @@
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@achra/ui/input-otp'
 import React from 'react'
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from './input-otp'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

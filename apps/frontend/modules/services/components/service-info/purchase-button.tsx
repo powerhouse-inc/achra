@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import { RsTemplateStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getServicePurchaseUrl } from '@/modules/service-purchase/lib/get-service-purchase-url'
 import { InternalLink } from '@/modules/shared/components/internal-link'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface PurchaseButtonProps {
   serviceId: string

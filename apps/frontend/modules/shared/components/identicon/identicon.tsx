@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import makeBlockie from 'ethereum-blockies-base64'
 import { useMemo } from 'react'
-import { cn } from '../../lib/utils'
-import { Skeleton } from '../ui/skeleton'
 
 interface IdenticonProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string

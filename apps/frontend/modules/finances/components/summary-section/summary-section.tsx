@@ -1,11 +1,11 @@
 'use client'
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import {
   getBudgetsByCodePath,
   getCodePathFromParams,
   getLevelOfDetail,
 } from '@/modules/finances/lib/utils'
-import { Card } from '@/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
 import { BUDGETS } from '../../mocks'
 import { MOCK_BUDGETS_ANALYTICS } from '../../mocks/analytics'
 import { BudgetUtilizationCard } from './budget-utilization-card'

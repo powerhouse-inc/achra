@@ -1,17 +1,13 @@
 'use client'
+import { useIsMobile } from '@achra/ui/hooks/use-mobile'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@achra/ui/hover-card'
+import { cn } from '@achra/ui/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { InfoIcon } from 'lucide-react'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MobileDialogContent } from '@/modules/shared/components/mobile-dialog-content'
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/modules/shared/components/ui/hover-card'
-import { useIsMobile } from '@/modules/shared/hooks/use-mobile'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface SpendingItemProps extends React.PropsWithChildren {
   title: string

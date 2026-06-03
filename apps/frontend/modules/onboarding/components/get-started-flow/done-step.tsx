@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
 interface DoneStepProps {
   drive: BuilderDriveLink | null

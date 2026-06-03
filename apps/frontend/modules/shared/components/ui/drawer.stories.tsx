@@ -1,5 +1,4 @@
-import React from 'react'
-import { Button } from './button'
+import { Button } from '@achra/ui/button'
 import {
   Drawer,
   DrawerClose,
@@ -9,7 +8,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from './drawer'
+} from '@achra/ui/drawer'
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

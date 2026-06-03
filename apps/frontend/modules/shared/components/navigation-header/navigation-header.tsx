@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 interface NavigationHeaderProps {

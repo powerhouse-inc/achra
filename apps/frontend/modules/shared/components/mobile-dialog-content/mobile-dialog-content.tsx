@@ -1,10 +1,10 @@
 'use client'
 
+import { DialogClose, DialogOverlay, DialogPortal } from '@achra/ui/dialog'
+import { cn } from '@achra/ui/lib/utils'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import * as React from 'react'
-import { DialogClose, DialogOverlay, DialogPortal } from '@/modules/shared/components/ui/dialog'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface MobileDialogContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {

@@ -1,13 +1,7 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@achra/ui/card'
 import { AccountProfile } from '@/modules/my-account/components/account-profile'
 import { BecomeAnOperator } from '@/modules/my-account/components/become-an-operator'
 import { RenownIdentity } from '@/modules/my-account/components/renown-identity'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
+import { Item, ItemContent, ItemMedia, ItemTitle } from '@achra/ui/item'
+import { Spinner } from '@achra/ui/spinner'
 import React from 'react'
-import { Item, ItemContent, ItemMedia, ItemTitle } from './item'
-import { Spinner } from './spinner'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

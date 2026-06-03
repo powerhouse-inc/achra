@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Popover, PopoverContent, PopoverTrigger } from '@achra/ui/popover'
 import { CheckCircle2, CheckIcon, ChevronDown, Circle } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
-import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
-import { cn } from '@/shared/lib/utils'
 import { CUMULATIVE_OPTIONS } from './cumulative-options'
 
 interface ExpensesMetricCumulativeFilterProps {

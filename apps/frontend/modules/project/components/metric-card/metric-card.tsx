@@ -1,5 +1,5 @@
-import { Card } from '@/modules/shared/components/ui/card'
-import { cn } from '@/modules/shared/lib/utils'
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 
 function MetricCard({ children, className, ...props }: React.ComponentProps<typeof Card>) {
   return (

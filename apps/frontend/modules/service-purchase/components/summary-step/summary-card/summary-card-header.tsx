@@ -1,5 +1,7 @@
 'use client'
 
+import { CardHeader } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { Landmark } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { Maybe } from '@/modules/__generated__/graphql/switchboard-generated'
@@ -14,8 +16,6 @@ import {
   useSelectedBillingCycle,
   useSelectedTier,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { CardHeader } from '@/modules/shared/components/ui/card'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface SummaryCardHeaderProps {
   templateTitle?: string

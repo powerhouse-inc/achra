@@ -1,5 +1,5 @@
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@achra/ui/hover-card'
 import React from 'react'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {

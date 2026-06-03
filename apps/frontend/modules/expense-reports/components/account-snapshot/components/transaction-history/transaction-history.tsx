@@ -1,10 +1,5 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
 import type { SnapshotAccountTransaction } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/modules/shared/components/ui/accordion'
 import { TransactionList } from '../transaction-list'
 
 interface TransactionHistoryProps {

@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowUpRight } from 'lucide-react'
 import type { Sow_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/shared/lib/utils'
 
 interface LatestKeyResultsProps {
   keyResults: Sow_KeyResult[]

@@ -1,6 +1,6 @@
+import { Badge } from '@achra/ui/badge'
+import { Button } from '@achra/ui/button'
 import React, { useState } from 'react'
-import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
 import { DrawerSelect, FilterDrawer } from './filter-drawer'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { ExternalLink } from 'lucide-react'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { KeyResultStatusChip } from '../key-result-status/key-result-status'
 
 interface KeyResultModalProps {

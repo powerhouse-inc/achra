@@ -2,7 +2,7 @@ import {
   getMockedExtendedProposals,
   mockedHatAddress,
 } from '@/modules/networks/mocks/governance-section'
-import { isNumeric } from '@/modules/shared/lib/utils'
+import { isNumeric } from '@/shared/lib/utils'
 import { ExecutiveProposalsList } from './executive-proposals-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

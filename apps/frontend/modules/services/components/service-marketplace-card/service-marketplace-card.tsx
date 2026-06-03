@@ -1,6 +1,6 @@
+import { Card, CardContent } from '@achra/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { SERVICE_INFO_DEFAULT_COVER_PATH } from '../../lib/constants'
 import { ServiceBadge } from '../service-badge'
 import type { EnrichedService } from '../../types'

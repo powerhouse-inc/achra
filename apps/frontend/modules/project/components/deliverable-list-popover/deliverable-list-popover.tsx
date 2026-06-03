@@ -1,9 +1,9 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Popover, PopoverContent, PopoverTrigger } from '@achra/ui/popover'
 import { Link } from 'lucide-react'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shared/components/ui/popover'
-import { cn } from '@/modules/shared/lib/utils'
 import { PopoverContentDeliverable } from './popover-content-deliverable'
 
 interface DeliverableListPopoverProps {
