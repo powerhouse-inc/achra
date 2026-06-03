@@ -1,0 +1,41 @@
+{
+  "about": "## About Us\nCore Dev is the engineering backbone of the Powerhouse ecosystem. We build and maintain the foundational infrastructure that powers decentralized operations \u2014 from document model runtimes and reactor engines to the developer SDK and CLI tooling.\n\n## What We Do\nOur team focuses on the deep technical work that makes the Powerhouse platform reliable, performant, and extensible. We own the core protocol layer, ensuring that document models, reducers, and operations work correctly and efficiently at scale.\n\n## Core Infrastructure\nWe design and implement the runtime systems that power Powerhouse document processing \u2014 including the reactor architecture, synchronization protocols, and the document-model framework that enables type-safe, deterministic state management.\n\n## Developer Experience\nWe build the tools that other teams rely on: the Powerhouse CLI, code generation pipelines, SDK libraries, and development environment integrations. Our goal is to make building on Powerhouse as productive and enjoyable as possible.\n\n## Platform Reliability\nWe ensure the platform is robust, well-tested, and secure. This includes continuous integration pipelines, automated testing infrastructure, performance monitoring, and security audits across the stack.",
+  "code": "CD",
+  "contributors": [],
+  "description": "Core Dev is a team focused on building and maintaining the core infrastructure, protocols, and developer tooling for the Powerhouse ecosystem",
+  "icon": "https://cdn-icons-png.flaticon.com/512/6062/6062646.png",
+  "id": "982989fc-922b-4347-a463-0b4025d95ee9",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:25:11.921Z",
+  "links": [
+    {
+      "id": "link-github-01",
+      "label": "Github",
+      "url": "https://github.com/powerhouse-inc"
+    },
+    {
+      "id": "link-discord-01",
+      "label": "Discord",
+      "url": "https://discord.com/invite/h7GKvqDyDP"
+    }
+  ],
+  "name": "Core Dev",
+  "operationalHubMember": {
+    "name": "Powerhouse Genesis",
+    "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+  },
+  "scopes": [
+    "PROTOCOL_SCOPE"
+  ],
+  "skills": [
+    "FRONTEND_DEVELOPMENT",
+    "BACKEND_DEVELOPMENT",
+    "FULL_STACK_DEVELOPMENT",
+    "DEVOPS_ENGINEERING",
+    "SMART_CONTRACT_DEVELOPMENT",
+    "QA_TESTING",
+    "SECURITY_ENGINEERING"
+  ],
+  "slug": "core-dev",
+  "status": "ACTIVE"
+}

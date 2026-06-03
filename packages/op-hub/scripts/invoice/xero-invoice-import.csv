@@ -1,0 +1,10 @@
+Narration,Date,Description,AccountCode,TaxRate,Amount,TrackingName1,TrackingOption1,TrackingName2,TrackingOption2
+"Matrix Consultants, invoice 1","2025-05-19","Accounts Payable","802","Tax Exempt (0%)","-10340.00","","","",""
+"Matrix Consultants, invoice 1","2025-05-19","Contractor Fees","4009","Tax Exempt (0%)","10000.00","","","",""
+"Matrix Consultants, invoice 1","2025-05-19","Transportation (Uber, Taxi etc)","3004","Tax Exempt (0%)","340.00","","","",""
+"Liberums Logistics, invoice 12","2025-06-01","Accounts Payable","802","Tax Exempt (0%)","-10750.00","","","",""
+"Liberums Logistics, invoice 12","2025-06-01","Contractor Fees","4009","Tax Exempt (0%)","10000.00","","","",""
+"Liberums Logistics, invoice 12","2025-06-01","Activities and Events","3000","Tax Exempt (0%)","750.00","","","",""
+"Apeirons Angels, invoice 200","2025-05-19","Accounts Payable","802","Tax Exempt (0%)","-10340.00","","","",""
+"Apeirons Angels, invoice 200","2025-05-19","Contractor Fees","4009","Tax Exempt (0%)","10000.00","","","",""
+"Apeirons Angels, invoice 200","2025-05-19","Transportation (Uber, Taxi etc)","3004","Tax Exempt (0%)","340.00","","","",""

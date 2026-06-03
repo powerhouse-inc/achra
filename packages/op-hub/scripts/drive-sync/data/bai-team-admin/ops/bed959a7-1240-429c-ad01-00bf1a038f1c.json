@@ -1,0 +1,337 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "bed959a7-1240-429c-ad01-00bf1a038f1c",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Business Analysis and Integrations",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:05.616Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "1bbe46f4c4ad2e56811075383c06683c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.616Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": " <br/>\n\nThe **Business Analysis & Integrations (BAI) team at Powerhouse** operates at the intersection of business strategy, product development, and engineering execution. Our role is to ensure that business goals are translated into clear, well-defined technical requirements and that systems, tools, and partners are effectively connected to support scalable, reliable operations.\n\n#### What We Do\n\nThe BAI team focuses on turning complexity into clarity. We work closely with internal stakeholders to deeply understand business needs, constraints, and priorities, and then translate those insights into actionable specifications that engineering teams can confidently build against.\n\n#### Key Areas of Responsibility\n\n##### Business Analysis & Requirements Definition\n\nWe gather, document, and validate business and functional requirements, ensuring alignment across teams and reducing ambiguity during delivery.\n\n##### Systems & Integrations Design\n\nWe design, coordinate, and oversee integrations between internal platforms and external partners, ensuring reliable data flows, consistency, and long-term maintainability.\n\n##### Cross-Team Coordination\n\nActing as a bridge between business, product, engineering, and external stakeholders, we help teams stay aligned, unblock delivery, and manage dependencies.\n\n##### Delivery Support & Quality Assurance\n\nWe support implementation by clarifying edge cases, validating outcomes against requirements, and helping ensure solutions meet real operational and user needs.\n\n##### Process & Operational Improvement\n\nThe team documents workflows, identifies gaps or inefficiencies, and continuously improves how systems and teams interact to support scale.\n\n#### How We Work\n\nBAI takes a collaborative, structured approach to problem-solving. We prioritise clarity, documentation, and shared understanding, while remaining flexible as requirements evolve. Our work is iterative and grounded in real-world usage, ensuring that solutions are both technically sound and operationally practical.\n\n#### Our Goal\n\nOur goal is to enable smooth operations, informed decision-making, and sustainable growth across the Powerhouse ecosystem. By aligning business intent with technical execution and robust integrations, the BAI team helps ensure that Powerhouse products and partnerships can scale with confidence.",
+        "code": "BAI",
+        "description": "The BAI (Business Analysis & Integrations) team at Powerhouse bridges product, engineering, and partners. We translate business needs into clear technical requirements, design and manage integrations, and ensure systems work together reliably to support scalable products and operations.",
+        "icon": "data:image/jpeg;base64,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",
+        "id": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "name": "Business Analysis and Integrations",
+        "slug": "business-analysis-and-integrations",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "NXIj/f/ATLNwl15+NarYJZMGh6c=",
+    "id": "430e0c84bf7c5731ef9fe47c3d7dd41c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "bed959a7-1240-429c-ad01-00bf1a038f1c",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "565f3ed3a09f487a33216bc31a99aa13",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.616Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "bai-link-github-01",
+        "label": "Github",
+        "url": "https://github.com/powerhouse-inc"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "b27ssZu/aAtd8YuekM4g8JlqIj0=",
+    "id": "633ebc0f76d128101b0d19a97ef3c4b1",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "bai-link-discord-01",
+        "label": "Discord",
+        "url": "https://discord.com/invite/h7GKvqDyDP"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "AF3nheGcXXew1S/diwhC06MBm/w=",
+    "id": "5d0362eb9365f0f6b64789125bca0527",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "bai-link-forum-01",
+        "label": "Forum",
+        "url": "https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "dyot0vCmesfAhuqcH7iiAKFQCYk=",
+    "id": "c4f5d20466415d1f36b8c0a72066cbba",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FRONTEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "e57KGWn/75MqK0sSYWzlB3QwWXE=",
+    "id": "0c8dbea193e453b88af4d22236e89867",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FULL_STACK_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "PAxCkuZavLHzMeoyX4nDDFcg0j8=",
+    "id": "8b6f772c43b066b0774527b521edabc5",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "BACKEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "Qabes8UbU4/BeqUhYZbqqUC8KBQ=",
+    "id": "41e4b8136c860f5dfa60651790adcc10",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "UI_UX_DESIGN"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "2TYBjjs9fEV0f6eGJWZgP2YtfnY=",
+    "id": "70bf6f026f570afa4f1307f67343a2c4",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DATA_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "7Ow/cqRjK2TZFUAVL+PlIwE7uNE=",
+    "id": "d467f2afd8d5a75ca2a1d67840995234",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "QA_TESTING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "ZGWmdRrQQiXxgXhm9b28/Sa+/+c=",
+    "id": "4f24e98dc67c445538285d9e1fbedfcc",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "SUP"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "S0Z0pcMEJuKYMpNB4Kl2XMipJ94=",
+    "id": "bdd0bc0eb5d844f08140bb5c073d7d4c",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "03df64d8-a882-4801-acb9-56d452a73905"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "v7UCUh7v+cdO4M9Pgc8KoEusPIg=",
+    "id": "d7a2c33ed21dc57dc0c21fe64fb17900",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "34de3edb-e37e-41b3-9c77-eea1522d854d"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "2Bki6mCW22iRHTawM1KOpx3Nb3Q=",
+    "id": "40c344aad86f2d47a9a5727488b902b4",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "063e9cfd-14e2-440f-b837-9b6cb404338e"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "hGFcyn199Dw0Pqe8YriaIDufSwI=",
+    "id": "1665c38abcc84af1f9fc0a143e3c57b2",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "ab700de9-90dd-4219-9fff-5aaf94ca2bc9"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "9KdkCEgaBslKG8CRxg8/ABvj8TA=",
+    "id": "35d4e1915c17d1a1fd33e941d14589c6",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:05.378Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "OqoqybvDDhOBnNdc7O/aU+DyjU4=",
+    "id": "40b637065cfdb7bd0a09fa01b04d96fe",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:21.377Z"
+  }
+]

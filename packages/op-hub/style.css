@@ -1,0 +1,142 @@
+@import "tailwindcss";
+@import "@powerhousedao/design-system/theme.css";
+@import "@powerhousedao/connect/style.css";
+/* Markdown editor (@uiw/react-md-editor) styles — bundled into dist/style.css
+   (the package's exported stylesheet) so the editor renders correctly in
+   deployed Connect, where the library's lazy-loaded CSS chunk isn't served. */
+@import "@uiw/react-md-editor/markdown-editor.css";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Force-generate the dark-mode utilities used by the component libraries we
+   render but DON'T author.
+   ──────────────────────────────────────────────────────────────────────────
+   Tailwind v4 ignores node_modules during content detection, and Connect's
+   prebuilt stylesheet only ships the dark utilities Connect's OWN pages use.
+   So classes the document-engineering Sidebar and the design-system
+   FileItem/FolderItem/Breadcrumbs reference — e.g. `dark:text-gray-50` — were
+   never generated, leaving the sidebar with a dark background but unreadable
+   dark text. `@source inline(...)` is the v4 safelist: it force-emits these
+   classes regardless of where they're used. (Directory `@source` into
+   node_modules is unreliable under Vite, hence the explicit list.) */
+@source inline(
+  "{dark:text-gray-{50,200,300,400,500,700,900},dark:text-slate-{50,100,200,400,500,600,700,800,900}}"
+);
+@source inline(
+  "{dark:bg-gray-{600,800,900},dark:bg-slate-{50,100,400,600,700,800,900},dark:bg-slate-900/50,dark:bg-charcoal-{800,900}}"
+);
+@source inline(
+  "{dark:border-gray-800,dark:border-slate-{50,500,600},dark:border-none}"
+);
+@source inline(
+  "{dark:hover:bg-{charcoal-900,gray-600,slate-{100,600,700,800}},dark:hover:text-{blue-900,gray-{50,300,600},slate-{50,100,200,300}}}"
+);
+@source inline(
+  "{dark:active:text-gray-300,dark:group-hover:text-slate-{50,100},dark:even:bg-slate-800,dark:odd:bg-slate-800,dark:after:bg-slate-800,dark:divide-slate-500,dark:scrollbar-thumb-slate-600}"
+);
+@source inline(
+  "{dark:text-{blue,green,orange,purple,red,yellow}-100,dark:text-red-400,dark:bg-blue-{50,400,600,700,800,900},dark:bg-green-{300,400,800,900},dark:bg-{purple,red,yellow}-{300,400,800,900},dark:bg-violet-500}"
+);
+
+@theme {
+  /* You can customize the theme by overriding the theme variables here */
+  /* See https://tailwindcss.com/docs/theme#using-a-custom-theme for details */
+
+  /* If you would prefer to use plain css, add your styles below this @theme tag as you normally would */
+
+  /* A sensible CSS reset is applied by default. If you would prefer to use a different reset or none at all, uncomment the following line */
+
+  /* --*: initial; */
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Lighter dark theme
+   ──────────────────────────────────────────────────────────────────────────
+   Connect toggles a `.dark` class on <html> and paints dark surfaces with the
+   `slate` palette (the main app background is `dark:bg-slate-900`). Tailwind v4
+   resolves those utilities to `var(--color-slate-*)` at use-time, so redefining
+   the tokens *scoped under `.dark`* retints every dark surface WITHOUT touching
+   light mode and without editing the design-system or Connect.
+
+   The design-system defaults are near-black (slate-900 = 6% lightness). The
+   values below lift the whole dark end to a softer charcoal. Tweak the final
+   lightness % of each line to taste — higher = lighter.
+
+   Defaults (for reference):
+     --color-slate-500: hsl(207 8% 21%);
+     --color-slate-600: hsl(210 9% 13%);
+     --color-slate-700: hsl(204 9% 11%);
+     --color-slate-800: hsl(195 9%  9%);
+     --color-slate-900: hsl(195 6%  6%);   ← main app background
+
+   ⚠️ Selector is `:root.dark`, NOT `.dark`. The design-system ships the
+   defaults above as `:root { … }` (specificity 0,1,0). A plain `.dark { … }`
+   override is ALSO 0,1,0, so which one wins comes down to stylesheet load
+   ORDER — fine in local studio (our file loads last) but NOT on a deployed
+   Connect, where the hosted app injects its own design-system `:root` defaults
+   that can load after our package CSS and clobber these. `:root.dark` is 0,2,0
+   (`.dark` lives on <html>, which is `:root`), so it wins regardless of order. */
+:root.dark {
+  --color-slate-900: hsl(201, 20%, 17%); /* main app background */
+  --color-slate-800: hsl(200, 4%, 26%); /* raised surfaces / panels */
+  --color-slate-700: hsl(200, 5%, 22%);
+  --color-slate-600: hsl(210, 5%, 26%);
+  --color-slate-500: hsl(210, 5%, 29%);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Dashboard card surface (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   The page background is `--color-slate-900` (≈17% lightness). Cards need a
+   visibly LIGHTER surface so they read as raised panels on top of it. Editor
+   panels tagged `.dash-card` get this treatment in dark mode only; in light
+   mode their existing `bg-stone-50` / border classes still apply.
+
+   Tune `--op-card-bg` (higher % = lighter card) and `--op-card-border` to taste. */
+.dark {
+  --op-card-bg: hsl(201, 13%, 31%);
+  --op-card-border: hsl(0, 0%, 100%, 0.09);
+}
+.dark .dash-card {
+  background-color: var(--op-card-bg);
+  border-color: var(--op-card-border);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Sidebar items (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   The document-engineering Sidebar colors its rows with Tailwind `dark:`
+   variants (`dark:text-gray-400`, `dark:bg-charcoal-900`, …) that live in
+   node_modules. Tailwind doesn't scan node_modules, so in our build only the
+   LIGHT fallback (`text-gray-700`) gets emitted — the rows render dark-on-dark
+   and stay unreadable.
+
+   The Sidebar exposes no color prop, but it DOES tag stable BEM classes on
+   every element, so we restyle those directly. This is build-independent
+   (plain CSS, not a generated utility) and `.dark .sidebar__item` (specificity
+   0,2,0) outranks the `dark:` utilities (0,1,0 — Tailwind wraps them in
+   `:where()`), so it wins regardless of class-generation order.
+
+   These selectors are global, so they theme EVERY document-engineering Sidebar
+   on the page (our editor sidebars + Connect's). Tune the greys to taste. */
+.dark .sidebar__item {
+  color: #cbd5e1; /* readable light-grey row text */
+}
+.dark .sidebar__item:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.dark .sidebar__item--active {
+  color: #f8fafc; /* brighter text for the active row */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.dark .sidebar__item-caret:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+/* Header (drive title) — `dark:text-gray-300` / `dark:border-gray-800` also
+   live in node_modules, so the title falls back to dark `text-gray-700` and the
+   bottom divider to the light `border-gray-300`. Restyle both directly. */
+.dark .sidebar__header-title {
+  color: #e2e8f0; /* light heading text */
+}
+.dark .sidebar__header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}

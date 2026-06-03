@@ -1,0 +1,2058 @@
+{
+  "availableBillingCycles": [
+    "ANNUAL",
+    "QUARTERLY"
+  ],
+  "description": "A ready-to-use operational setup that gives open-source and public-goods builder teams the legal and financial infrastructure to receive funding, pay contributors, and operate compliantly from day one.\n\nStructured as a Swiss Association \u2014 a cost-efficient, privacy-preserving legal form with strong international recognition \u2014 the Operational Hub reduces personal liability for contributors, simplifies compliance, and provides a professional foundation for teams that are already doing the work.",
+  "facetTargets": [
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "1c4c7002-e263-4f2b-8e7f-193975a25d7c",
+      "selectedOptions": [
+        "Operational Hub"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "be9d299b-be2f-4d71-8d24-559d77a0c7ca",
+      "selectedOptions": [
+        "Swiss Association"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "4e112a9c-64a9-44ca-8c59-c2e3c21e20eb",
+      "selectedOptions": [
+        "Remote"
+      ]
+    },
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "99cd71c3-23ae-4714-994b-8e4f64e6d1fd",
+      "selectedOptions": [
+        "High"
+      ]
+    }
+  ],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-04-29T16:16:31.000Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": true,
+      "description": "Free tools for legal documentation, invoicing, budgeting, and needs assessment.",
+      "discountMode": null,
+      "id": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+      "isAddOn": false,
+      "name": "Core Tools & Documentation",
+      "price": null,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": null,
+      "tierDependentPricing": [
+        {
+          "id": "d30f2f19-ca16-4f21-a1bc-58b76e327179",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "9bcc9ebe-6e65-40ae-8e15-5689ad02a72a"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "add924bd-6419-4bba-b919-27e815e10ec3"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "5950f49a-ae30-42db-94da-1bdf7701ae87"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "1fd4a2d0-230a-4ccc-86bf-ef5bf4157e58"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "62530b23-f0b9-49f6-beee-0730d6ff2fb6"
+        },
+        {
+          "id": "99b60847-9d4f-4209-b988-6480567e4530",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "97342d65-089f-474f-ba91-f99a2625d32d"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "bb20cb84-b8d5-4f72-8757-226d5260fc1e"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "10be15b7-7304-44e2-91a8-604e7307aa8a"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "f6dc59c8-dab7-4458-930f-f1535586e4df"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "7728d31a-3190-42fc-b76c-37bba1d25085"
+        },
+        {
+          "id": "36abbca7-585a-4970-a5c0-0f07c277ab53",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "82bc80b3-054f-4d00-8095-024a5fe8af82"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "977c8f49-54bf-4f6e-9054-567e5e2459ec"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "dded47fa-f559-4624-aaa0-69bd9ef5ef3d"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "d6cac730-75f5-496f-8c51-63bc7ca1766b"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "2521782c-120b-49bd-be3e-14e86fd4eeb1"
+        }
+      ]
+    },
+    {
+      "availableBillingCycles": [
+        "ONE_TIME"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "SETUP",
+      "currency": "USD",
+      "defaultSelected": true,
+      "description": "One-time entity formation: Swiss Association setup, registered address in Zug, and VAT registration.",
+      "discountMode": null,
+      "id": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+      "isAddOn": false,
+      "name": "Entity & Compliance Foundation",
+      "price": 3000,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": {
+        "recurringPricing": [],
+        "setupCost": {
+          "amount": 3000,
+          "currency": "USD",
+          "discount": null
+        }
+      },
+      "tierDependentPricing": [
+        {
+          "id": "d0636421-f52c-442f-86d2-c5c47c8f70c4",
+          "recurringPricing": [],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "62530b23-f0b9-49f6-beee-0730d6ff2fb6"
+        },
+        {
+          "id": "cbc3ed7c-65e3-4501-aff8-b3b4581a4610",
+          "recurringPricing": [],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "7728d31a-3190-42fc-b76c-37bba1d25085"
+        },
+        {
+          "id": "d09d236e-a32f-43d9-9a8d-31d0253050e3",
+          "recurringPricing": [],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "2521782c-120b-49bd-be3e-14e86fd4eeb1"
+        }
+      ]
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": true,
+      "description": "Ongoing financial management: tax filing, invoicing, accounting, expense reporting, and reimbursements.",
+      "discountMode": null,
+      "id": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "isAddOn": false,
+      "name": "Financial Operations & Reporting",
+      "price": null,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": null,
+      "tierDependentPricing": [
+        {
+          "id": "0f7c52de-4ae7-49f5-93fa-61c3500a4640",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "eec0f84a-91e3-494a-b16b-77e8d89514d6"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "3e8687a3-334a-4d67-b786-86843543b24c"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "5a9b6ff1-a2c1-47e1-bfde-7ce7840a4192"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "c7061a15-57cc-4616-abcf-99cf9545dd42"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "62530b23-f0b9-49f6-beee-0730d6ff2fb6"
+        },
+        {
+          "id": "414d9867-8064-4fda-84aa-4fea80750f23",
+          "recurringPricing": [
+            {
+              "amount": 750,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "a668f3e6-1dd1-4256-9fe4-fbda347cc0ee"
+            },
+            {
+              "amount": 750,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "6c952477-7a4a-4a9d-99f9-2c270883a54e"
+            },
+            {
+              "amount": 750,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "af814d3e-342c-4a4e-baa1-287f5e897e72"
+            },
+            {
+              "amount": 750,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "3aa54129-2aee-4721-a890-01c53d968148"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "7728d31a-3190-42fc-b76c-37bba1d25085"
+        },
+        {
+          "id": "a2c42345-762c-4b97-a9f9-bf184d906a0c",
+          "recurringPricing": [
+            {
+              "amount": 550,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "4c3b2c27-813a-4bac-b721-69e31207dcf4"
+            },
+            {
+              "amount": 550,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "9227a2e4-a79c-4bb8-833a-fd239f31b132"
+            },
+            {
+              "amount": 550,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "417f67bd-ae4d-4ad0-ac43-3e1d69fe47c5"
+            },
+            {
+              "amount": 550,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "f68243ad-a2b4-4e5a-be4c-c99a7b094259"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "2521782c-120b-49bd-be3e-14e86fd4eeb1"
+        }
+      ]
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": true,
+      "description": "Contributor onboarding, multi-currency payouts, and dedicated ops support for distributed teams.",
+      "discountMode": null,
+      "id": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+      "isAddOn": false,
+      "name": "Team & Contributor Operations",
+      "price": null,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": null,
+      "tierDependentPricing": [
+        {
+          "id": "ed84bf98-225e-4c1f-9395-3557ed4f614a",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "312c66d0-eb62-48fa-b521-355854a12a67"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "bb0db5c5-f6bc-446a-a4e9-2d8247c2f276"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "29ee8d61-c571-4f46-b09c-45552da964c4"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "c673c801-dca5-41d4-b196-f17dfc6f0998"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "62530b23-f0b9-49f6-beee-0730d6ff2fb6"
+        },
+        {
+          "id": "c59d491a-601c-4c67-a1b5-5c231664aa95",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "a8a3a29f-003e-4635-a0f9-2ee6158636ae"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "3bba1450-2131-43f8-bc79-daac301fe94e"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "fd29a2d9-f4d2-4cc2-aaf2-1f29d1cf9364"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "a9f2ae1d-1bc1-478c-8845-dff7e00e94df"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "7728d31a-3190-42fc-b76c-37bba1d25085"
+        },
+        {
+          "id": "17fdecd5-221a-477e-882d-6352adb49188",
+          "recurringPricing": [
+            {
+              "amount": 350,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "095dfc44-24e3-4563-9715-c100996ec172"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "98249c73-ee26-4959-bc4d-636533a9ea8e"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "b71de242-0e31-45fd-80e6-b778e57e2566"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "c86fba03-58ea-4ea3-8e28-bfa7b1973a8b"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "2521782c-120b-49bd-be3e-14e86fd4eeb1"
+        }
+      ]
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": true,
+      "description": "Enterprise features: multiple entities, dedicated account manager, admin portal, and custom workflows.",
+      "discountMode": null,
+      "id": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+      "isAddOn": false,
+      "name": "Advanced & Scale Features",
+      "price": null,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": null,
+      "tierDependentPricing": [
+        {
+          "id": "227b20b9-4edd-40da-9856-c9a6a2d89e03",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "0258f2f9-ed09-4ddd-b90c-9db98a188ae9"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "02596eed-8a6a-42c3-a271-bfc13d3ea81a"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "db68854c-671e-4671-99ba-373ca92ca218"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "366156d1-31e3-46c5-94eb-5d2fdc46dc85"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "62530b23-f0b9-49f6-beee-0730d6ff2fb6"
+        },
+        {
+          "id": "b97846e2-bd1a-40bb-833c-392572c8fdc6",
+          "recurringPricing": [
+            {
+              "amount": 0,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "59a0c897-d94d-4551-99bd-a55710ea0301"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "08e2d7a7-d386-4001-9d23-544b36398780"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "0dd54a09-f2ed-44f9-b6ad-006f08f4716b"
+            },
+            {
+              "amount": 0,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "bc0675cc-a613-4cee-a836-0462c6806d59"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "7728d31a-3190-42fc-b76c-37bba1d25085"
+        },
+        {
+          "id": "51721efc-d35c-42a4-a392-dffd6354393e",
+          "recurringPricing": [
+            {
+              "amount": 350,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "cb0a4814-89ad-4465-8741-21f8d513772d"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "e435c783-afba-4248-b5b8-d878caf9c6e5"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "300e856b-a976-490d-8e44-d1478b45d0fd"
+            },
+            {
+              "amount": 350,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "11cdb255-3c5d-46cf-aa87-d734cd6c76dd"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "2521782c-120b-49bd-be3e-14e86fd4eeb1"
+        }
+      ]
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": false,
+      "description": "Add-on: Exchange/bank setup, payment infrastructure, EOR/PEO, reconciliation, and audit support.",
+      "discountMode": null,
+      "id": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "isAddOn": true,
+      "name": "Financial Operations & Reporting",
+      "price": null,
+      "pricingMode": "STANDALONE",
+      "standalonePricing": {
+        "recurringPricing": [
+          {
+            "amount": 1810,
+            "billingCycle": "MONTHLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "8789c155-6c60-46b0-aa87-178c070271ff"
+          },
+          {
+            "amount": 1810,
+            "billingCycle": "QUARTERLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "f54af8e5-3912-43d2-8786-e21e8649a9a1"
+          },
+          {
+            "amount": 1810,
+            "billingCycle": "SEMI_ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "179ac467-2f47-402e-a738-da90d52a7adb"
+          },
+          {
+            "amount": 1810,
+            "billingCycle": "ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "e7bbd5a9-ce44-4c84-9111-beefdb1e4560"
+          }
+        ],
+        "setupCost": {
+          "amount": 3600,
+          "currency": "USD",
+          "discount": null
+        }
+      },
+      "tierDependentPricing": null
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": false,
+      "description": "Add-on: Supplier liaison, AML monitoring, compliance, card operations, and legal counsel.",
+      "discountMode": null,
+      "id": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "isAddOn": true,
+      "name": "Advanced & Scale Add-On",
+      "price": null,
+      "pricingMode": "STANDALONE",
+      "standalonePricing": {
+        "recurringPricing": [
+          {
+            "amount": 1860,
+            "billingCycle": "MONTHLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "1d59c346-e0a3-4b9a-a074-cb8db7233e55"
+          },
+          {
+            "amount": 1860,
+            "billingCycle": "QUARTERLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "4f9a71b1-0b7e-4dcf-884b-d9c2012bfd5d"
+          },
+          {
+            "amount": 1860,
+            "billingCycle": "SEMI_ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "0fce5192-aa5d-4341-89b3-45ffe6619d26"
+          },
+          {
+            "amount": 1860,
+            "billingCycle": "ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "b941059c-2103-4a0b-a56e-86bc7c8878ad"
+          }
+        ],
+        "setupCost": null
+      },
+      "tierDependentPricing": null
+    },
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": false,
+      "description": "Add-on: AI-powered information retrieval, document generation, workflow execution, and reporting.",
+      "discountMode": null,
+      "id": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "isAddOn": true,
+      "name": "Virtual Assistant Services",
+      "price": null,
+      "pricingMode": "STANDALONE",
+      "standalonePricing": {
+        "recurringPricing": [
+          {
+            "amount": 3010,
+            "billingCycle": "MONTHLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "d62a4db1-fded-41cd-9c28-34bcf2f536db"
+          },
+          {
+            "amount": 3010,
+            "billingCycle": "QUARTERLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "e0e4fc82-9432-4945-b67a-25d30b2848bd"
+          },
+          {
+            "amount": 3010,
+            "billingCycle": "SEMI_ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "abc76701-b352-4782-b3b6-6d0739930d78"
+          },
+          {
+            "amount": 3010,
+            "billingCycle": "ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "7d2a3185-fa11-4f10-83cb-e51c2d91816e"
+          }
+        ],
+        "setupCost": null
+      },
+      "tierDependentPricing": null
+    }
+  ],
+  "resourceTemplateId": "098a7cad-b66b-404a-b2c8-933d69b808cd",
+  "services": [
+    {
+      "description": "Professionally drafted contract templates for contributor agreements, internal Multisig Agreements, and other operational needs.",
+      "displayOrder": null,
+      "id": "0c4a026a-07ea-48c5-ae1a-a3bfda696881",
+      "isSetupFormation": false,
+      "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+      "title": "Legal Document Templates"
+    },
+    {
+      "description": "A global invoice generation tool that creates professionally structured invoices following international best practices, while remaining independent from any specific legal or tax jurisdiction.",
+      "displayOrder": null,
+      "id": "c7d5fd36-6294-43a0-a48b-b30db8befaf4",
+      "isSetupFormation": false,
+      "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+      "title": "Global Invoice generator"
+    },
+    {
+      "description": "A budget planning tool that helps organizations allocate resources across teams, projects, and categories following financial best practices, with defined budget categories and time horizons.",
+      "displayOrder": null,
+      "id": "960a5814-a1f7-41a2-96e8-6ee39ace7c5f",
+      "isSetupFormation": false,
+      "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+      "title": "Budget generator"
+    },
+    {
+      "description": "A guided self-assessment to help teams evaluate their operational and legal needs before choosing a plan.",
+      "displayOrder": null,
+      "id": "70cc2100-3843-4449-b422-174f5f3cbabd",
+      "isSetupFormation": false,
+      "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+      "title": "Needs analysis"
+    },
+    {
+      "description": "Formation of a Swiss Association with the support of a Swiss licensed counsel. Includes onboarding checklist, use of templates for founding documents and articles of association, a workshop, and a founding meeting with counsel.",
+      "displayOrder": null,
+      "id": "583c4d12-6b9b-422e-97ed-8ba2895e6950",
+      "isSetupFormation": true,
+      "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+      "title": "Swiss association setup"
+    },
+    {
+      "description": "A registered legal address in Zug, Switzerland for the entity.",
+      "displayOrder": null,
+      "id": "f67111bc-a0af-45be-9220-8ff1d1c8e05d",
+      "isSetupFormation": true,
+      "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+      "title": "Registered address (Zug)"
+    },
+    {
+      "description": "VAT registration and issuance of a VAT number. If the entity is not registered in the Commercial registry, the VAT ID may serve as the company identification number with customers and suppliers.",
+      "displayOrder": null,
+      "id": "41ecaf72-b84e-449b-a561-916424740a4c",
+      "isSetupFormation": true,
+      "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+      "title": "VAT registration"
+    },
+    {
+      "description": "Structured support for Swiss annual tax compliance and VAT reporting (by default, quarterly), handled by licensed tax professionals, coordinated through our operational framework. Documentation for Swiss VAT reporting, ensuring that all relevant invoices, payment records, and transaction classifications are properly maintained to support accurate VAT filings and potential audits by the Swiss Federal Tax Administration (FTA).",
+      "displayOrder": null,
+      "id": "db3d3cd6-591e-4bc7-83eb-2b2ed26ab55a",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Annual tax filing and VAT reporting"
+    },
+    {
+      "description": "Expense tracking and reimbursement workflows.",
+      "displayOrder": null,
+      "id": "f0a3fb67-dd66-4303-b749-217d69f3aa5f",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Reimbursement management"
+    },
+    {
+      "description": "End-to-end handling of invoices from submission and approval to accounting and payment.",
+      "displayOrder": null,
+      "id": "d60a7e1f-d9e5-40f3-9172-3b246646c7b7",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Invoice management"
+    },
+    {
+      "description": "Reconciliation of transactions, validation of balances, and accurate financial records in the accounting system for reporting and decision-making.",
+      "displayOrder": null,
+      "id": "05894260-606a-491b-95b5-646a39fbb71a",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Monthly accounting & close"
+    },
+    {
+      "description": "A report of all expenses incurred during the month, categorized and reviewed to provide visibility into spending and budget performance.",
+      "displayOrder": null,
+      "id": "7eaa226b-5156-4ceb-a5e8-9cb8850551f1",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Monthly expense report"
+    },
+    {
+      "description": "Defined rules governing how expenses are submitted, approved, and reimbursed.",
+      "displayOrder": null,
+      "id": "dfe25adf-eb55-4eb1-9434-2c8a6d2d9a79",
+      "isSetupFormation": false,
+      "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+      "title": "Expense Policies"
+    },
+    {
+      "description": "Operational processes to onboard contributors, manage contracts, and payment details.",
+      "displayOrder": null,
+      "id": "060de4c6-003f-4db0-b0b3-73bc1eee3667",
+      "isSetupFormation": false,
+      "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+      "title": "Contributor onboarding and operations"
+    },
+    {
+      "description": "Crypto-to-fiat conversions with 48-hour transfers in USD, GBP, EUR, CHF, and DKK. Additional currencies available upon request.",
+      "displayOrder": null,
+      "id": "6527d83a-ac0b-4e01-9a43-448d444fd982",
+      "isSetupFormation": false,
+      "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+      "title": "Multi-currency payouts"
+    },
+    {
+      "description": "Dedicated operational support with an assigned point of contact for handling day-to-day financial and administrative requests.",
+      "displayOrder": null,
+      "id": "afe19ef7-ee82-492d-9814-e427bf19c72a",
+      "isSetupFormation": false,
+      "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+      "title": "Dedicated ops support"
+    },
+    {
+      "description": "Operational support across multiple legal entities, with consolidated oversight and coordinated financial workflows.",
+      "displayOrder": null,
+      "id": "309cbb23-e978-452f-bca2-dc4995993a48",
+      "isSetupFormation": false,
+      "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+      "title": "Multiple entities"
+    },
+    {
+      "description": "A dedicated account manager for overseeing the relationship and coordinating ongoing requests.",
+      "displayOrder": null,
+      "id": "2e7d934b-2324-4ab9-8e72-37bf64488841",
+      "isSetupFormation": false,
+      "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+      "title": "Dedicated account manager"
+    },
+    {
+      "description": "An informative admin portal providing visibility into billing, active services, and key operational documents.",
+      "displayOrder": null,
+      "id": "ceaf4759-63f3-488e-bb1d-6ba6ce7919fa",
+      "isSetupFormation": false,
+      "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+      "title": "Admin portal"
+    },
+    {
+      "description": "Tailored operational workflows and reporting structures.",
+      "displayOrder": null,
+      "id": "43a9473a-a217-4e67-9b26-31e1c6cbb2b5",
+      "isSetupFormation": false,
+      "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+      "title": "Custom workflows & reporting"
+    },
+    {
+      "description": "Setup of centralized exchange accounts (Kraken, Coinbase, Binance, Bitfinex, Crypto.com, Nexo).",
+      "displayOrder": null,
+      "id": "7b892ca8-3781-43a5-8535-d19022dba5c2",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "Exchange account setup"
+    },
+    {
+      "description": "Crypto-friendly banking services setup.",
+      "displayOrder": null,
+      "id": "9df512e6-d003-40bf-ba7d-642b3297dbab",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "Crypto-friendly bank setup"
+    },
+    {
+      "description": "Off-ramp setup for fiat conversion.",
+      "displayOrder": null,
+      "id": "df8a6ed0-f1d3-4b98-8916-0167d4f5a8f6",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "Payment provider & off-ramp setup"
+    },
+    {
+      "description": "Payroll setup with local Professional Employer Organization providers.",
+      "displayOrder": null,
+      "id": "89733dc9-b855-4250-bb2e-d0a25fab0266",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "EOR/PEO setup"
+    },
+    {
+      "description": "Setting up crypto payments for second-party approval based on invoices received.",
+      "displayOrder": null,
+      "id": "0819dd5e-2eab-45cd-87e0-2d3d73a838ba",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "Payment controls & reconciliation"
+    },
+    {
+      "description": "Assistance in coordinating financial information to support external audits.",
+      "displayOrder": null,
+      "id": "5b7956e2-808e-414d-bd1d-5fa8c38881e7",
+      "isSetupFormation": false,
+      "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+      "title": "Audit support"
+    },
+    {
+      "description": "Maintaining accounts with EORs/PEOs and other suppliers to reduce the risk of being offboarded.",
+      "displayOrder": null,
+      "id": "f31e6ba6-4457-4d8b-8ba6-0ee1a56357ee",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "Supplier & partner liaison"
+    },
+    {
+      "description": "Regular checks on contractors and clients for sanctions, PEP status, and other compliance flags. Monitoring of connected wallets for risk assessment. Regular compliance reports.",
+      "displayOrder": null,
+      "id": "267f9fff-5d50-48cc-a29a-be7b60948f73",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "AML monitoring & compliance reporting"
+    },
+    {
+      "description": "Assist in preparing documents needed by individuals showing income/affiliation for visas, loans, or other purposes.",
+      "displayOrder": null,
+      "id": "6a353e64-b8a7-451e-854f-4d22b1a7bf6c",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "Contractor documentation support"
+    },
+    {
+      "description": "Monitor incoming invoices for compliance to make sure invoices contain everything needed under local law prior to payment.",
+      "displayOrder": null,
+      "id": "397cc5c1-4c49-4ca0-9d83-b872a1adad6c",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "Invoice compliance review"
+    },
+    {
+      "description": "Monitor connected accounts, assist with creating new cards/users, and monitor for dubious/restricted transactions.",
+      "displayOrder": null,
+      "id": "c6687ae3-3fc4-4a2e-b927-4beb8afba421",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "Card & spend operations"
+    },
+    {
+      "description": "Five additional hours of legal advice provided by Swiss counsel.",
+      "displayOrder": null,
+      "id": "56d73f9a-6a51-4e20-993f-d44f6de53ce1",
+      "isSetupFormation": false,
+      "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+      "title": "Legal Counsel advice"
+    },
+    {
+      "description": "Finds, compiles, and summarizes information from connected sources on request",
+      "displayOrder": 1,
+      "id": "cb301072-23ff-47fe-bef7-8be3dc10b7b8",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Information Retrieval"
+    },
+    {
+      "description": "Produces structured documents from templates, data inputs, or natural language instructions",
+      "displayOrder": null,
+      "id": "8acde3a7-ef03-4698-aee4-35a1d4a891f7",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Document Generation"
+    },
+    {
+      "description": "Fills forms, updates records, and populates fields across connected systems",
+      "displayOrder": null,
+      "id": "05fd3d8d-e448-41ad-b25f-b56cea574f0e",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Data Entry & Form Completion"
+    },
+    {
+      "description": "Runs multi-step processes autonomously end-to-end based on triggers or instructions",
+      "displayOrder": null,
+      "id": "5ef19c2f-b42f-4e14-8c93-dad35d9db421",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Workflow Execution"
+    },
+    {
+      "description": "Identifies tasks outside scope and hands off to the right human or system with context",
+      "displayOrder": null,
+      "id": "72bb76d7-7bcc-42fd-b652-3b79b4d51295",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Task Routing & Escalation"
+    },
+    {
+      "description": "Aggregates data and produces structured reports or digests on a schedule or on demand",
+      "displayOrder": null,
+      "id": "44873698-5756-4d3c-86b9-96fe8771b9a3",
+      "isSetupFormation": false,
+      "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+      "title": "Reporting & Summarization"
+    }
+  ],
+  "status": "ACTIVE",
+  "summary": "A turnkey legal and operational setup for open-source builder teams \u2014 entity formation, invoicing, payouts, and compliance bundled under one roof.",
+  "thumbnailUrl": "https://staging.achra.com/_next/image?url=%2Fservices%2Fcovers%2Fcover-02.jpg&w=3840&q=75&dpl=dpl_FjkVSKv1rrWGpfaa2yG8PPxLE1Na",
+  "tiers": [
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": "MONTHLY",
+      "description": "Free tools and self-service resources for any team",
+      "excludeFromSetupFee": false,
+      "id": "62530b23-f0b9-49f6-beee-0730d6ff2fb6",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "Essentials",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "ebca726e-1edf-4b79-a295-f6994c074a3f",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "0c4a026a-07ea-48c5-ae1a-a3bfda696881"
+        },
+        {
+          "customValue": null,
+          "id": "bd6a797a-943d-4741-bb1f-fee79b6daba5",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "c7d5fd36-6294-43a0-a48b-b30db8befaf4"
+        },
+        {
+          "customValue": null,
+          "id": "8ed3fbf0-a5c6-4a32-a8e3-51fd77d5be6a",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "960a5814-a1f7-41a2-96e8-6ee39ace7c5f"
+        },
+        {
+          "customValue": null,
+          "id": "c98faf8b-aad6-46be-a78f-40bc9686cfcf",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "70cc2100-3843-4449-b422-174f5f3cbabd"
+        },
+        {
+          "customValue": null,
+          "id": "99998c59-7932-4f4d-81e3-dc6803a79732",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "7b892ca8-3781-43a5-8535-d19022dba5c2"
+        },
+        {
+          "customValue": null,
+          "id": "41e7eff1-59f6-4a64-87fd-c0c3d3265bf1",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "9df512e6-d003-40bf-ba7d-642b3297dbab"
+        },
+        {
+          "customValue": null,
+          "id": "66f67b64-8cbb-4ccb-9f40-59e1f3d71c52",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "df8a6ed0-f1d3-4b98-8916-0167d4f5a8f6"
+        },
+        {
+          "customValue": null,
+          "id": "6aa85e1e-ee94-4376-9bca-85c537b427cc",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "89733dc9-b855-4250-bb2e-d0a25fab0266"
+        },
+        {
+          "customValue": null,
+          "id": "a5155d24-fc68-4c52-a0b9-be60f77f8d49",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "0819dd5e-2eab-45cd-87e0-2d3d73a838ba"
+        },
+        {
+          "customValue": null,
+          "id": "93b70daa-5f3a-4cff-a7cf-0c6cbe6b4a36",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "5b7956e2-808e-414d-bd1d-5fa8c38881e7"
+        },
+        {
+          "customValue": null,
+          "id": "8eac69fe-8674-4418-9c1a-762fe05ca935",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "f31e6ba6-4457-4d8b-8ba6-0ee1a56357ee"
+        },
+        {
+          "customValue": null,
+          "id": "91bf4471-4648-4667-9863-cdc7003e43d3",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "267f9fff-5d50-48cc-a29a-be7b60948f73"
+        },
+        {
+          "customValue": null,
+          "id": "ce961898-1c20-4e5d-921b-6fde72756066",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "6a353e64-b8a7-451e-854f-4d22b1a7bf6c"
+        },
+        {
+          "customValue": null,
+          "id": "4573b55a-272a-4394-8bc7-2b0eeb3255ce",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "397cc5c1-4c49-4ca0-9d83-b872a1adad6c"
+        },
+        {
+          "customValue": null,
+          "id": "4f3f3c36-740f-499a-936a-c42afdcff1fa",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "c6687ae3-3fc4-4a2e-b927-4beb8afba421"
+        },
+        {
+          "customValue": null,
+          "id": "6c435de2-b9e5-45fc-b08c-68b588471a18",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "56d73f9a-6a51-4e20-993f-d44f6de53ce1"
+        },
+        {
+          "customValue": null,
+          "id": "46710869-4ef6-41c3-8720-a13df1c43c10",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "cb301072-23ff-47fe-bef7-8be3dc10b7b8"
+        },
+        {
+          "customValue": null,
+          "id": "451d86b8-0193-4f89-b23a-3994ffe97ade",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "8acde3a7-ef03-4698-aee4-35a1d4a891f7"
+        },
+        {
+          "customValue": null,
+          "id": "34a29fe3-a396-46ce-b939-6cc94650f0b3",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "05fd3d8d-e448-41ad-b25f-b56cea574f0e"
+        },
+        {
+          "customValue": null,
+          "id": "af4219d9-ed70-400a-9ce7-b4ff7b555112",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "5ef19c2f-b42f-4e14-8c93-dad35d9db421"
+        },
+        {
+          "customValue": null,
+          "id": "cae8da22-a461-4114-874f-4342daba5d6c",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "72bb76d7-7bcc-42fd-b652-3b79b4d51295"
+        },
+        {
+          "customValue": null,
+          "id": "9fe6a1e8-96fd-402d-ae28-d05a151f3a01",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "44873698-5756-4d3c-86b9-96fe8771b9a3"
+        }
+      ],
+      "usageLimits": []
+    },
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": "MONTHLY",
+      "description": "For early-stage teams needing entity formation and basic financial operations",
+      "excludeFromSetupFee": false,
+      "id": "7728d31a-3190-42fc-b76c-37bba1d25085",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "Starter",
+      "pricing": {
+        "amount": 750,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "6be42a6b-0fd3-4b1c-af69-997607e9d15d",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "0c4a026a-07ea-48c5-ae1a-a3bfda696881"
+        },
+        {
+          "customValue": null,
+          "id": "a7cdf3bb-d1bb-4e70-aafa-66918bcf9a4d",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "c7d5fd36-6294-43a0-a48b-b30db8befaf4"
+        },
+        {
+          "customValue": null,
+          "id": "307421fb-48f8-4875-888a-d6e74108b796",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "960a5814-a1f7-41a2-96e8-6ee39ace7c5f"
+        },
+        {
+          "customValue": null,
+          "id": "7b8f6769-422d-40a2-80e8-defb63ddda9d",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "70cc2100-3843-4449-b422-174f5f3cbabd"
+        },
+        {
+          "customValue": null,
+          "id": "d425b8dc-5883-4c9f-9c36-ad3f2868a604",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "583c4d12-6b9b-422e-97ed-8ba2895e6950"
+        },
+        {
+          "customValue": null,
+          "id": "ee50d7db-9935-4b8d-95ef-0ba6f7f7c8da",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "f67111bc-a0af-45be-9220-8ff1d1c8e05d"
+        },
+        {
+          "customValue": null,
+          "id": "647e709f-d241-43aa-988f-99a8f9a00bef",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "41ecaf72-b84e-449b-a561-916424740a4c"
+        },
+        {
+          "customValue": null,
+          "id": "ee629b74-aecc-4cb7-8a1b-1fe2be80980f",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "db3d3cd6-591e-4bc7-83eb-2b2ed26ab55a"
+        },
+        {
+          "customValue": null,
+          "id": "66c03dd1-5eb9-4b69-b469-9180f165396f",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "f0a3fb67-dd66-4303-b749-217d69f3aa5f"
+        },
+        {
+          "customValue": null,
+          "id": "b01607f1-3f3d-496a-8b82-31069e9cece5",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "d60a7e1f-d9e5-40f3-9172-3b246646c7b7"
+        },
+        {
+          "customValue": null,
+          "id": "94ad5473-25c4-4a2c-95e6-9df3c1eea911",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "05894260-606a-491b-95b5-646a39fbb71a"
+        },
+        {
+          "customValue": null,
+          "id": "023724bf-b1f1-4f84-956c-8ea7fdd5ae93",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "7eaa226b-5156-4ceb-a5e8-9cb8850551f1"
+        },
+        {
+          "customValue": null,
+          "id": "a7beab16-0221-4d3a-9905-51213bcdf8ad",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "7b892ca8-3781-43a5-8535-d19022dba5c2"
+        },
+        {
+          "customValue": null,
+          "id": "c846fdaf-f2b9-4924-8162-a866190681c4",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "9df512e6-d003-40bf-ba7d-642b3297dbab"
+        },
+        {
+          "customValue": null,
+          "id": "635357a2-852c-4487-97e3-72a5ce54fab3",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "df8a6ed0-f1d3-4b98-8916-0167d4f5a8f6"
+        },
+        {
+          "customValue": null,
+          "id": "61830989-f5c0-4bb6-bf88-d1b5cafa402e",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "89733dc9-b855-4250-bb2e-d0a25fab0266"
+        },
+        {
+          "customValue": null,
+          "id": "a9c2a726-7b54-439a-b6c8-68989d8fd5a4",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "0819dd5e-2eab-45cd-87e0-2d3d73a838ba"
+        },
+        {
+          "customValue": null,
+          "id": "59df8e25-7dd7-4918-a3a3-15852e97a8b1",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "5b7956e2-808e-414d-bd1d-5fa8c38881e7"
+        },
+        {
+          "customValue": null,
+          "id": "83c55eec-49a5-46fd-af8e-8123ba9ca5e6",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "f31e6ba6-4457-4d8b-8ba6-0ee1a56357ee"
+        },
+        {
+          "customValue": null,
+          "id": "6b19465d-ee40-44a3-b366-ca59cfafc690",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "267f9fff-5d50-48cc-a29a-be7b60948f73"
+        },
+        {
+          "customValue": null,
+          "id": "661f42cc-6ed1-4281-bd5c-6f8ffee7f4fc",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "6a353e64-b8a7-451e-854f-4d22b1a7bf6c"
+        },
+        {
+          "customValue": null,
+          "id": "450840c8-15c8-4b40-9ce7-179aaadca1eb",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "397cc5c1-4c49-4ca0-9d83-b872a1adad6c"
+        },
+        {
+          "customValue": null,
+          "id": "28ecc679-1ebd-4eb0-ae06-ec885dca39f5",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "c6687ae3-3fc4-4a2e-b927-4beb8afba421"
+        },
+        {
+          "customValue": null,
+          "id": "55049473-ec0f-4a0d-b202-eaf0df6922d6",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "56d73f9a-6a51-4e20-993f-d44f6de53ce1"
+        },
+        {
+          "customValue": null,
+          "id": "15a79254-1848-46f5-9a79-3ffeb92f772a",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "cb301072-23ff-47fe-bef7-8be3dc10b7b8"
+        },
+        {
+          "customValue": null,
+          "id": "c69f4d94-161c-47ad-adec-d964fdf4be79",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "8acde3a7-ef03-4698-aee4-35a1d4a891f7"
+        },
+        {
+          "customValue": null,
+          "id": "0f9ad1b0-aeda-43d3-b329-1fe94abd2e24",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "05fd3d8d-e448-41ad-b25f-b56cea574f0e"
+        },
+        {
+          "customValue": null,
+          "id": "8df45a89-393a-4bb9-b2c0-8a88156ead6b",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "5ef19c2f-b42f-4e14-8c93-dad35d9db421"
+        },
+        {
+          "customValue": null,
+          "id": "db00dcb4-b66e-4765-b4da-b84116d1790a",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "72bb76d7-7bcc-42fd-b652-3b79b4d51295"
+        },
+        {
+          "customValue": null,
+          "id": "9588ff32-f2bb-4ae3-8a17-4fef856abea0",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "44873698-5756-4d3c-86b9-96fe8771b9a3"
+        }
+      ],
+      "usageLimits": []
+    },
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": "MONTHLY",
+      "description": "For growing teams of 3+ with full contributor operations and dedicated support",
+      "excludeFromSetupFee": false,
+      "id": "2521782c-120b-49bd-be3e-14e86fd4eeb1",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "Standard",
+      "pricing": {
+        "amount": 1250,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "cff58708-dd37-4c10-9f7d-e3f0f00c197b",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "0c4a026a-07ea-48c5-ae1a-a3bfda696881"
+        },
+        {
+          "customValue": null,
+          "id": "264f12a4-3568-40d3-816e-83d596545fd0",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "c7d5fd36-6294-43a0-a48b-b30db8befaf4"
+        },
+        {
+          "customValue": null,
+          "id": "e521ec69-6b2e-42ca-9d7b-51fc4b34f59b",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "960a5814-a1f7-41a2-96e8-6ee39ace7c5f"
+        },
+        {
+          "customValue": null,
+          "id": "f386318c-59a1-49bf-9145-fe2bb7f1eb29",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "70cc2100-3843-4449-b422-174f5f3cbabd"
+        },
+        {
+          "customValue": null,
+          "id": "7aaa069e-037d-45f8-a547-5385f2505ca6",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "583c4d12-6b9b-422e-97ed-8ba2895e6950"
+        },
+        {
+          "customValue": null,
+          "id": "0399aed2-2192-44be-821f-6fe16e329e9a",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "f67111bc-a0af-45be-9220-8ff1d1c8e05d"
+        },
+        {
+          "customValue": null,
+          "id": "13fd779f-9c45-4460-8c8e-90f3af973be6",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "41ecaf72-b84e-449b-a561-916424740a4c"
+        },
+        {
+          "customValue": null,
+          "id": "3d3d8e56-c41c-47ed-876f-735046fefcd3",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "db3d3cd6-591e-4bc7-83eb-2b2ed26ab55a"
+        },
+        {
+          "customValue": null,
+          "id": "f363aec0-63e3-40e0-be0c-a063ae09d8ca",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "f0a3fb67-dd66-4303-b749-217d69f3aa5f"
+        },
+        {
+          "customValue": null,
+          "id": "709586df-ac6b-4d20-ae03-fdabd41c4dbc",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "d60a7e1f-d9e5-40f3-9172-3b246646c7b7"
+        },
+        {
+          "customValue": null,
+          "id": "a2a6fdaa-4c3c-45ce-8545-a10d95062afa",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "05894260-606a-491b-95b5-646a39fbb71a"
+        },
+        {
+          "customValue": null,
+          "id": "212970b3-ecd4-46b8-ad8d-770a9fca2e81",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "7eaa226b-5156-4ceb-a5e8-9cb8850551f1"
+        },
+        {
+          "customValue": null,
+          "id": "c22d7e4d-320e-4a10-8536-e66a3731f507",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "dfe25adf-eb55-4eb1-9434-2c8a6d2d9a79"
+        },
+        {
+          "customValue": null,
+          "id": "b45dade5-7c15-493e-b876-39cfb234d609",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "060de4c6-003f-4db0-b0b3-73bc1eee3667"
+        },
+        {
+          "customValue": null,
+          "id": "329ad638-494b-4877-ba3f-2116c6fa81f5",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "6527d83a-ac0b-4e01-9a43-448d444fd982"
+        },
+        {
+          "customValue": null,
+          "id": "42ab8332-bed1-4ced-bdc6-61181e7beca1",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "afe19ef7-ee82-492d-9814-e427bf19c72a"
+        },
+        {
+          "customValue": null,
+          "id": "e1a3b5c7-9d2f-4e8a-b6c4-1f0d8e7a2b59",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "309cbb23-e978-452f-bca2-dc4995993a48"
+        },
+        {
+          "customValue": null,
+          "id": "a4d8f2e6-3b7c-41a9-8e5d-6c9f0b2a1d73",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "2e7d934b-2324-4ab9-8e72-37bf64488841"
+        },
+        {
+          "customValue": null,
+          "id": "c7f1a9b3-5e4d-42c8-96a7-2d8b0e3f5c16",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "ceaf4759-63f3-488e-bb1d-6ba6ce7919fa"
+        },
+        {
+          "customValue": null,
+          "id": "b2e6d4a8-1c9f-43b7-a5e3-7f0c8d1b6a24",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "43a9473a-a217-4e67-9b26-31e1c6cbb2b5"
+        },
+        {
+          "customValue": null,
+          "id": "14784011-2ac9-4f02-a37e-568824b2bd49",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "7b892ca8-3781-43a5-8535-d19022dba5c2"
+        },
+        {
+          "customValue": null,
+          "id": "86dd1390-d1d0-43e6-ac0a-eac1b212d456",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "9df512e6-d003-40bf-ba7d-642b3297dbab"
+        },
+        {
+          "customValue": null,
+          "id": "9e51f5dc-08cc-4fae-9ccc-79594ee3abcc",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "df8a6ed0-f1d3-4b98-8916-0167d4f5a8f6"
+        },
+        {
+          "customValue": null,
+          "id": "5b717f4d-ba1a-4826-88ca-16146b083717",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "0819dd5e-2eab-45cd-87e0-2d3d73a838ba"
+        },
+        {
+          "customValue": null,
+          "id": "9c45726e-a363-461c-acd1-11631b3ed2e3",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "5b7956e2-808e-414d-bd1d-5fa8c38881e7"
+        },
+        {
+          "customValue": null,
+          "id": "d001f23f-aa63-475b-8b0d-2e39373069bc",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "f31e6ba6-4457-4d8b-8ba6-0ee1a56357ee"
+        },
+        {
+          "customValue": null,
+          "id": "b613d313-f01b-4470-addd-9093cda815a9",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "6a353e64-b8a7-451e-854f-4d22b1a7bf6c"
+        },
+        {
+          "customValue": null,
+          "id": "73af2b75-d5f9-44e2-a8bd-a14c9004d682",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "397cc5c1-4c49-4ca0-9d83-b872a1adad6c"
+        },
+        {
+          "customValue": null,
+          "id": "38d55ca2-5d3a-4b2a-b3a4-418342269b9f",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "c6687ae3-3fc4-4a2e-b927-4beb8afba421"
+        },
+        {
+          "customValue": null,
+          "id": "a00eb24a-3c7f-484f-8f83-b6379a286965",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "cb301072-23ff-47fe-bef7-8be3dc10b7b8"
+        },
+        {
+          "customValue": null,
+          "id": "b08839db-3b97-42b5-8eb8-782842bab720",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "267f9fff-5d50-48cc-a29a-be7b60948f73"
+        },
+        {
+          "customValue": null,
+          "id": "1ee656f5-bb5b-4414-a564-79f1d31d65eb",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "56d73f9a-6a51-4e20-993f-d44f6de53ce1"
+        },
+        {
+          "customValue": null,
+          "id": "37b01d40-0832-447b-9edd-b119d4cb80fd",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "89733dc9-b855-4250-bb2e-d0a25fab0266"
+        },
+        {
+          "customValue": null,
+          "id": "782cafa6-9bb6-4f88-9247-d94c16a32d35",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "8acde3a7-ef03-4698-aee4-35a1d4a891f7"
+        },
+        {
+          "customValue": null,
+          "id": "c3730db4-f03c-4ec1-beba-6afec6b47909",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "05fd3d8d-e448-41ad-b25f-b56cea574f0e"
+        },
+        {
+          "customValue": null,
+          "id": "8b5754c4-83cd-4256-b4a6-2b5f8fef2ab9",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "5ef19c2f-b42f-4e14-8c93-dad35d9db421"
+        },
+        {
+          "customValue": null,
+          "id": "d865741e-889b-409a-b0c3-99f4513427cc",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "72bb76d7-7bcc-42fd-b652-3b79b4d51295"
+        },
+        {
+          "customValue": null,
+          "id": "dd4f8d53-0d82-4a81-97e3-eb9008776d9f",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "44873698-5756-4d3c-86b9-96fe8771b9a3"
+        }
+      ],
+      "usageLimits": []
+    },
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": "MONTHLY",
+      "description": "Enterprise-grade with custom workflows, multiple entities, and dedicated management",
+      "excludeFromSetupFee": false,
+      "id": "4a94171e-9abe-4cae-ad40-375ad18a5c7a",
+      "isCustomPricing": true,
+      "mostPopular": false,
+      "name": "Custom",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "93f9cc60-92f1-42c8-a42b-746ba58bfb1e",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "0c4a026a-07ea-48c5-ae1a-a3bfda696881"
+        },
+        {
+          "customValue": null,
+          "id": "af168503-91d7-4d69-878b-5986fd4ede88",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "c7d5fd36-6294-43a0-a48b-b30db8befaf4"
+        },
+        {
+          "customValue": null,
+          "id": "3d476417-a9c6-41a6-9b0b-7a7a7f0438f4",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "960a5814-a1f7-41a2-96e8-6ee39ace7c5f"
+        },
+        {
+          "customValue": null,
+          "id": "c351a8d8-066e-414b-83a6-df11c59c1354",
+          "level": "INCLUDED",
+          "optionGroupId": "b569d93b-d93b-4cf7-9205-d98b80f2ecd8",
+          "serviceId": "70cc2100-3843-4449-b422-174f5f3cbabd"
+        },
+        {
+          "customValue": null,
+          "id": "79c73d24-2562-4331-a0b6-24ef6132cef1",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "583c4d12-6b9b-422e-97ed-8ba2895e6950"
+        },
+        {
+          "customValue": null,
+          "id": "58764e72-d2c0-4f49-991b-abcd7fa84fe4",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "f67111bc-a0af-45be-9220-8ff1d1c8e05d"
+        },
+        {
+          "customValue": null,
+          "id": "8ab1c9e2-7026-4eff-a9c7-f45b1ef860a2",
+          "level": "INCLUDED",
+          "optionGroupId": "4f215157-a75f-4cab-ab91-a6ea708ce474",
+          "serviceId": "41ecaf72-b84e-449b-a561-916424740a4c"
+        },
+        {
+          "customValue": null,
+          "id": "66124976-8a28-4ef4-906c-e297e49b8f81",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "db3d3cd6-591e-4bc7-83eb-2b2ed26ab55a"
+        },
+        {
+          "customValue": null,
+          "id": "a7b7555e-2f20-4105-a327-a8e492456066",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "f0a3fb67-dd66-4303-b749-217d69f3aa5f"
+        },
+        {
+          "customValue": null,
+          "id": "e675df82-4398-4d05-9be9-a3d77d396147",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "d60a7e1f-d9e5-40f3-9172-3b246646c7b7"
+        },
+        {
+          "customValue": null,
+          "id": "ae6c0c28-7bb4-462d-8670-d8eb19e4ccaa",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "05894260-606a-491b-95b5-646a39fbb71a"
+        },
+        {
+          "customValue": null,
+          "id": "a2e5d44b-71ee-4577-b3d9-238a4208d0d8",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "7eaa226b-5156-4ceb-a5e8-9cb8850551f1"
+        },
+        {
+          "customValue": null,
+          "id": "393e216b-0ab0-45d9-89b7-bf9e9c61f628",
+          "level": "INCLUDED",
+          "optionGroupId": "076744ed-c6a1-4ecd-b15e-e241c6fed82e",
+          "serviceId": "dfe25adf-eb55-4eb1-9434-2c8a6d2d9a79"
+        },
+        {
+          "customValue": null,
+          "id": "3aa9f83a-57b1-45a7-8149-4cae1eef2b9a",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "060de4c6-003f-4db0-b0b3-73bc1eee3667"
+        },
+        {
+          "customValue": null,
+          "id": "d2766c9e-4c29-4db3-b706-d8ebb20da3ae",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "6527d83a-ac0b-4e01-9a43-448d444fd982"
+        },
+        {
+          "customValue": null,
+          "id": "c0da89b7-0f79-46e5-b2ad-b878225e4ca7",
+          "level": "INCLUDED",
+          "optionGroupId": "45cb921f-e2e7-4043-ae54-a4b9f44be415",
+          "serviceId": "afe19ef7-ee82-492d-9814-e427bf19c72a"
+        },
+        {
+          "customValue": null,
+          "id": "e5beeee8-3815-4742-ab05-f43aba973cce",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "309cbb23-e978-452f-bca2-dc4995993a48"
+        },
+        {
+          "customValue": null,
+          "id": "f92d928d-c395-4541-afd6-6e9ff479c61d",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "2e7d934b-2324-4ab9-8e72-37bf64488841"
+        },
+        {
+          "customValue": null,
+          "id": "16a6d705-146c-4527-9c29-38aace047971",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "ceaf4759-63f3-488e-bb1d-6ba6ce7919fa"
+        },
+        {
+          "customValue": null,
+          "id": "03822bdb-46b3-4e25-bcf1-50218d5eb38f",
+          "level": "INCLUDED",
+          "optionGroupId": "0894f5e4-a03d-42f6-8e86-672fd6b7d46f",
+          "serviceId": "43a9473a-a217-4e67-9b26-31e1c6cbb2b5"
+        },
+        {
+          "customValue": null,
+          "id": "567308de-c4fd-4352-8136-fb1843b31187",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "7b892ca8-3781-43a5-8535-d19022dba5c2"
+        },
+        {
+          "customValue": null,
+          "id": "22a4491f-299d-4c63-b4b6-7631f81e5931",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "9df512e6-d003-40bf-ba7d-642b3297dbab"
+        },
+        {
+          "customValue": null,
+          "id": "b738212b-f070-462b-ab74-b85807824a86",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "df8a6ed0-f1d3-4b98-8916-0167d4f5a8f6"
+        },
+        {
+          "customValue": null,
+          "id": "c58b9a4d-9978-4830-a321-4064ca193569",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "0819dd5e-2eab-45cd-87e0-2d3d73a838ba"
+        },
+        {
+          "customValue": null,
+          "id": "eca8e7d0-5348-4ec9-b395-1e949067104c",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "5b7956e2-808e-414d-bd1d-5fa8c38881e7"
+        },
+        {
+          "customValue": null,
+          "id": "336fb05f-b0b6-415e-9812-8ef29aceedec",
+          "level": "INCLUDED",
+          "optionGroupId": "d9a9ca46-a603-487c-ad00-a6b2fb25b81c",
+          "serviceId": "89733dc9-b855-4250-bb2e-d0a25fab0266"
+        },
+        {
+          "customValue": null,
+          "id": "a3f2c312-9b0a-4620-befc-e9d4772f610f",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "f31e6ba6-4457-4d8b-8ba6-0ee1a56357ee"
+        },
+        {
+          "customValue": null,
+          "id": "dbd84aab-5a67-4e2e-8944-99f275b0aeca",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "267f9fff-5d50-48cc-a29a-be7b60948f73"
+        },
+        {
+          "customValue": null,
+          "id": "6005d04e-0649-4867-8a42-98c90b773225",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "6a353e64-b8a7-451e-854f-4d22b1a7bf6c"
+        },
+        {
+          "customValue": null,
+          "id": "d12c0529-cbce-4f0e-85f3-f06a45c926e0",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "397cc5c1-4c49-4ca0-9d83-b872a1adad6c"
+        },
+        {
+          "customValue": null,
+          "id": "3b268700-8df2-444e-b106-4a676a9c5595",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "c6687ae3-3fc4-4a2e-b927-4beb8afba421"
+        },
+        {
+          "customValue": null,
+          "id": "ae841668-4821-4fcb-bf87-a57bde6e6c70",
+          "level": "INCLUDED",
+          "optionGroupId": "830bca2e-e230-48d5-b9ff-f93779ebf5be",
+          "serviceId": "56d73f9a-6a51-4e20-993f-d44f6de53ce1"
+        },
+        {
+          "customValue": null,
+          "id": "b4a84270-107b-4790-b6cf-d4de7be87be9",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "cb301072-23ff-47fe-bef7-8be3dc10b7b8"
+        },
+        {
+          "customValue": null,
+          "id": "d582ea00-e9f8-4a0a-92c4-dc520503a1d3",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "8acde3a7-ef03-4698-aee4-35a1d4a891f7"
+        },
+        {
+          "customValue": null,
+          "id": "12664279-5493-414b-8d08-da7bd2b834ee",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "05fd3d8d-e448-41ad-b25f-b56cea574f0e"
+        },
+        {
+          "customValue": null,
+          "id": "b8597d0e-21e3-4567-9667-8ed2f68b3a3b",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "5ef19c2f-b42f-4e14-8c93-dad35d9db421"
+        },
+        {
+          "customValue": null,
+          "id": "3cdd68cc-23ef-4cb9-a243-ffe84ebb6aca",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "72bb76d7-7bcc-42fd-b652-3b79b4d51295"
+        },
+        {
+          "customValue": null,
+          "id": "d7628d88-398d-4537-9ce3-fcc9b1be0b7e",
+          "level": "INCLUDED",
+          "optionGroupId": "ea1d4d3a-3611-471e-9cf8-0b749e63ba81",
+          "serviceId": "44873698-5756-4d3c-86b9-96fe8771b9a3"
+        }
+      ],
+      "usageLimits": []
+    }
+  ],
+  "title": "Operational Hub"
+}

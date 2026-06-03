@@ -1,0 +1,1643 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "a5ede147-85ac-4a89-9119-675174bc03b8",
+        "meta": {},
+        "model": "powerhouse/expense-report",
+        "name": "PH-OH-April-2025-expense-report",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:42.789Z",
+          "documentType": "powerhouse/expense-report",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "a5ede147-85ac-4a89-9119-675174bc03b8"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "280e070e08fd363d81cfd5da800d6930",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:42.789Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "ff4cf2ff-447b-4f75-85da-80112253de78"
+      },
+      "scope": "global",
+      "type": "SET_OWNER_ID"
+    },
+    "error": null,
+    "hash": "Zn64jQ1GAsG4A/Tby/Z/4xPE3ZQ=",
+    "id": "fc4ea2464a745c45f78230e0658e05f8",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "a5ede147-85ac-4a89-9119-675174bc03b8",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "endDate": null,
+            "groups": [
+              {
+                "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",
+                "label": "Headcount Expenses",
+                "parentId": null
+              },
+              {
+                "id": "4971def8-64f8-4eab-b69b-a869d10452c2",
+                "label": "Non-Headcount Expenses",
+                "parentId": null
+              },
+              {
+                "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+                "label": "Travel & Entertainment",
+                "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+              },
+              {
+                "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+                "label": "Compensation & Benefits",
+                "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+              },
+              {
+                "id": "92e445ba-96af-4793-ae01-9b71035174ba",
+                "label": "Marketing Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+                "label": "Admin Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "5f024d53-7d0e-4818-9661-256aee69709d",
+                "label": "Professional Services",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "659337f4-01c3-495a-89d7-c177c4137620",
+                "label": "Cost of Goods Sold",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "1d6f0601-966a-4982-811d-981ac28db0b4",
+                "label": "Software Development Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "800dac9a-5665-4826-a972-b3170c789d92",
+                "label": "Income Tax Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+                "label": "Software Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+                "label": "Gas Expense",
+                "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+              },
+              {
+                "id": "465367d1-636a-45a1-9e43-4a48dd074918",
+                "label": "Budget",
+                "parentId": null
+              },
+              {
+                "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",
+                "label": "Interest Income",
+                "parentId": null
+              },
+              {
+                "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",
+                "label": "Other Income Expense (Non-operating)",
+                "parentId": null
+              },
+              {
+                "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",
+                "label": "Other Income",
+                "parentId": null
+              },
+              {
+                "id": "1c61e841-c599-4c38-944a-7c9450c27d17",
+                "label": "Current Asset",
+                "parentId": null
+              },
+              {
+                "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",
+                "label": "Fixed Asset",
+                "parentId": null
+              },
+              {
+                "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",
+                "label": "Non-Current Asset",
+                "parentId": null
+              },
+              {
+                "id": "b3091879-f549-4227-beef-c8d4947be2e7",
+                "label": "Current Liability",
+                "parentId": null
+              },
+              {
+                "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",
+                "label": "Non-current Liability",
+                "parentId": null
+              },
+              {
+                "id": "42e480eb-9790-49ed-af35-3ab124af556e",
+                "label": "Owner Equity",
+                "parentId": null
+              },
+              {
+                "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",
+                "label": "Equity",
+                "parentId": null
+              },
+              {
+                "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",
+                "label": "Adjustment A/C",
+                "parentId": null
+              },
+              {
+                "id": "566fede7-b593-43d0-84b6-50301e5a84ed",
+                "label": "Temporary Holding Account",
+                "parentId": null
+              },
+              {
+                "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+                "label": "Other",
+                "parentId": null
+              },
+              {
+                "id": "470504f0-a89f-4555-a46e-667c74240238",
+                "label": "Internal Transfers",
+                "parentId": null
+              },
+              {
+                "id": "121482a1-b69f-4511-g46f-267c24450238",
+                "label": "Uncategorized",
+                "parentId": null
+              }
+            ],
+            "ownerId": null,
+            "periodEnd": null,
+            "periodStart": null,
+            "startDate": null,
+            "status": "DRAFT",
+            "wallets": []
+          },
+          "local": {}
+        },
+        "model": "powerhouse/expense-report",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "972f09011b38691968a53645f7da9898",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:42.789Z"
+  },
+  {
+    "action": {
+      "input": {
+        "periodStart": "2025-04-01T00:00:00.000Z"
+      },
+      "scope": "global",
+      "type": "SET_PERIOD_START"
+    },
+    "error": null,
+    "hash": "iDYF8Saw+LveEeH1uQ7ehC5EaeA=",
+    "id": "3a15352c48806d3db2352c882463d6b4",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "periodEnd": "2025-04-30T23:59:59.999Z"
+      },
+      "scope": "global",
+      "type": "SET_PERIOD_END"
+    },
+    "error": null,
+    "hash": "EKOAxZdWBmtRMXNqxt4m6rBLNbo=",
+    "id": "b76809bcf185e4c4d87534c029af685f",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "status": "DRAFT"
+      },
+      "scope": "global",
+      "type": "SET_STATUS"
+    },
+    "error": null,
+    "hash": "EKOAxZdWBmtRMXNqxt4m6rBLNbo=",
+    "id": "1affeb2b9ad03b5aa04a66f82428ce10",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",
+        "label": "Headcount Expenses"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "wLVxFfQegQmwIYBRP5PtIv+TgGc=",
+    "id": "818f4854999317c587b79522cd7648ec",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "4971def8-64f8-4eab-b69b-a869d10452c2",
+        "label": "Non-Headcount Expenses"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "nDHzCQLFd9u0pTnIxKL/dual06s=",
+    "id": "a4c073af96141148272c0bffc0a079af",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "465367d1-636a-45a1-9e43-4a48dd074918",
+        "label": "Budget"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "KpIMxQCJwp6u6DgJ8Go0Xx5z2Vk=",
+    "id": "fbe4d15ab59fe9ec324f33fd56addc2c",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",
+        "label": "Interest Income"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "GwtCeULC8UX8BwGvQJRSgaT3eSk=",
+    "id": "7bfcbce8fa54ad2b5db896c6e693018c",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",
+        "label": "Other Income Expense (Non-operating)"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "IWMGIGPzMGz/iFK1qXu430f1nLg=",
+    "id": "f246ae893b41836ec2e0ceb8c49c5099",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",
+        "label": "Other Income"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "xJgcacWDVpIRnD1E3dq63UIwUkg=",
+    "id": "eed0c17ed23c52adc429a8af031d38a8",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "1c61e841-c599-4c38-944a-7c9450c27d17",
+        "label": "Current Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "RlQzPN7laCnnHgGg7f+MNwIY9wI=",
+    "id": "251703417a45e1a9caca758b5d0f98d2",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",
+        "label": "Fixed Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "kzwGXo1bnhlneatR6CbMUJhfzr0=",
+    "id": "72963c19c71229d1eb437767dd177f11",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",
+        "label": "Non-Current Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "XYPhxwipsK0BfEuGJ9JCnsOzHc4=",
+    "id": "31aa7ef23722dccef389addb5a2a8b07",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "b3091879-f549-4227-beef-c8d4947be2e7",
+        "label": "Current Liability"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "M9iB61wQcHOs5I4ZqaD3qQrA6LU=",
+    "id": "239cd54e013a03473d783caa8bad61ec",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",
+        "label": "Non-current Liability"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "AOpgbEfQYCDVa4St1WGciKk8TnY=",
+    "id": "e5a70750507d54c51b4f17671c303e7d",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "42e480eb-9790-49ed-af35-3ab124af556e",
+        "label": "Owner Equity"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "2/ooNsjVSc5OdOZXBQQTzwMus+c=",
+    "id": "30aeb746fbc7b797909e22ab349a68a6",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",
+        "label": "Equity"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "subojQlOIpGZ8ApB65Aa7Z0uZhI=",
+    "id": "c73792a8b7e8def3e8fbae0fc63d82f8",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",
+        "label": "Adjustment A/C"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "95AxS4p+w2bfHLfk3fF3hyQYdqo=",
+    "id": "91722e551e9739afac86d27657526635",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "566fede7-b593-43d0-84b6-50301e5a84ed",
+        "label": "Temporary Holding Account"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "j/swkm7imC8jmY7SeevyaHVyeiY=",
+    "id": "68517b587719a1d129db99d8b6bdae20",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+        "label": "Other"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "w3xPxs/NMynm7t2XCYdNYQMDTnA=",
+    "id": "8c0fcf78e014239319490ffd7dc2f3b5",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "470504f0-a89f-4555-a46e-667c74240238",
+        "label": "Internal Transfers"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "wSytrtyVPtD2peEDcPKZs4x3Mmo=",
+    "id": "646d2a2deb3afcbc6948012fd29e2888",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "121482a1-b69f-4511-g46f-267c24450238",
+        "label": "Uncategorized"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "7Gz/bQ9Oyr9rMP42qDlAUf0m1n4=",
+    "id": "fcd9e00be0f9c837a7f820622b06aeb5",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",
+        "label": "Headcount Expenses"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "vytP+rjmzZQ9v54ii2BoD1XxsXI=",
+    "id": "fce8b18594190db3ceb74313ddc2c3fa",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "4971def8-64f8-4eab-b69b-a869d10452c2",
+        "label": "Non-Headcount Expenses"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "oOcM2T8Es4OihBFqVdjtkU2Hv2w=",
+    "id": "f01aaabd23f08372729654fba29aa13a",
+    "index": 23,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "465367d1-636a-45a1-9e43-4a48dd074918",
+        "label": "Budget"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "QYTXkBVLpEIm62LuhFI7AwR4Fyc=",
+    "id": "c147f958395b4fbecc718f37f56a3888",
+    "index": 24,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",
+        "label": "Interest Income"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "UWX+CoGZ3825KFSL895ENZ331Mk=",
+    "id": "5d92da4b52471ed886cb052240dd0507",
+    "index": 25,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",
+        "label": "Other Income Expense (Non-operating)"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "nJRm9xgqlw4ayy6y1XUDUYetifk=",
+    "id": "dbefaf6735de2522d1a7600e8861ff79",
+    "index": 26,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",
+        "label": "Other Income"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "t/6JaavAwfGkpq0T+4oTMMQj344=",
+    "id": "b3eef6718592742d8b8f1b8f96917014",
+    "index": 27,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "1c61e841-c599-4c38-944a-7c9450c27d17",
+        "label": "Current Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "KJl4e1PnPy2JTbYxgJ07XiB+WwE=",
+    "id": "15b75289dc889dad55fc2335c9b627d9",
+    "index": 28,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",
+        "label": "Fixed Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "XEY9008RwmncmZHx7s8igWKYRfY=",
+    "id": "e62867de1b6349e19c1e70ec175c3645",
+    "index": 29,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",
+        "label": "Non-Current Asset"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "UiZDXoFxeSlWYJ4BGRdAoZgAfSk=",
+    "id": "8bdb1bfaefdf19e15c34bb3391b57cc7",
+    "index": 30,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "b3091879-f549-4227-beef-c8d4947be2e7",
+        "label": "Current Liability"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "/wycsfN0+QJo7Mz/555yn4mfSDo=",
+    "id": "514a096dea1b6a91597f1bb41c7f848f",
+    "index": 31,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",
+        "label": "Non-current Liability"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "milcrmRVNZhPACvjGgH77+NZnsI=",
+    "id": "2c5745bfec04aa4d671d4e0f3d259481",
+    "index": 32,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "42e480eb-9790-49ed-af35-3ab124af556e",
+        "label": "Owner Equity"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "IvikaYB1a4SlzBqOfuZNvwoW0dA=",
+    "id": "44471e2779ff7a363fc0d6e76ed27bbe",
+    "index": 33,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",
+        "label": "Equity"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "gQZJyY4s22MIy1zEqEE+v8hxvgs=",
+    "id": "8281b1b2fafff53009abf540549c9078",
+    "index": 34,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",
+        "label": "Adjustment A/C"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "wBDO8hL7JD4Zeav0/Yc4SX1UJI4=",
+    "id": "9578237ce3e25afe85f1dc3ccd8b43ee",
+    "index": 35,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "566fede7-b593-43d0-84b6-50301e5a84ed",
+        "label": "Temporary Holding Account"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "HSaZowrsh/gEJuLOTO3VWwQeYew=",
+    "id": "debccf12836d9ae4c4af3e4847dca029",
+    "index": 36,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+        "label": "Other"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "RbkxXuUAHhyEq37DAFdZZjwsqF0=",
+    "id": "b265b0b793191e871804a8cb36a66e29",
+    "index": 37,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "470504f0-a89f-4555-a46e-667c74240238",
+        "label": "Internal Transfers"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "wYXTmL+Y1OYz7f8WD2L/7ki+Cyk=",
+    "id": "5d3294147c7001aa6499ac30e4593386",
+    "index": 38,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "121482a1-b69f-4511-g46f-267c24450238",
+        "label": "Uncategorized"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "oJ9mxCBY0znmpwknAIjYjHco0Tw=",
+    "id": "c309b62b3477daa5ec14c12c143c393c",
+    "index": 39,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+        "label": "Travel & Entertainment",
+        "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "dcmJwQFORW/Vh0SPg5T8ewE+zZU=",
+    "id": "dabf99308a87c4bf48fa445e8df2881c",
+    "index": 40,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+        "label": "Compensation & Benefits",
+        "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "sqCKa0zEQ+1J0xR1XaBPK5vN6Qo=",
+    "id": "bdc1a5fdac33ab3a59a769821245f343",
+    "index": 41,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "92e445ba-96af-4793-ae01-9b71035174ba",
+        "label": "Marketing Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "1tJeMhjyIHbFiwQracNb1Rl3UDU=",
+    "id": "fca11aca17aa429d69b9fc57ba42ac60",
+    "index": 42,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+        "label": "Admin Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "IlwiQ5tXKmkPn3+0cvtp3adGlPk=",
+    "id": "1469739e715f3a7bb6117540cd61f6a2",
+    "index": 43,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5f024d53-7d0e-4818-9661-256aee69709d",
+        "label": "Professional Services",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "5MhXgrBLG3anDGIxaKthC67Vv6o=",
+    "id": "84f417a3a87a25e9bc71b2a2ec3e688c",
+    "index": 44,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "659337f4-01c3-495a-89d7-c177c4137620",
+        "label": "Cost of Goods Sold",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "5rZKm8Nv9rpu3BbFnXQncKW1i44=",
+    "id": "befbd917898abf290c0b267e88ee304a",
+    "index": 45,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "1d6f0601-966a-4982-811d-981ac28db0b4",
+        "label": "Software Development Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "TesGC5niL4G+HIp4FMQxTOA3uzc=",
+    "id": "7dbda63e3d354005576bb4d595bca010",
+    "index": 46,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "800dac9a-5665-4826-a972-b3170c789d92",
+        "label": "Income Tax Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "TIKZ2QRVp7+c4tSv9R/EKqh5eB8=",
+    "id": "8dfbf748bf9e5bf49641038460fc583e",
+    "index": 47,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+        "label": "Software Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "//C3DeNONF9ZgolFJux/Ak/BdD0=",
+    "id": "98ffff433c01eb6836683627a85aa585",
+    "index": 48,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+        "label": "Gas Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "UwshdU+UHFPratbtNz9nwKg5Lmc=",
+    "id": "1c1445efc081b309f7b92c69c25b3a83",
+    "index": 49,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+        "label": "Travel & Entertainment",
+        "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "uNlM8l5jZ1JgjCo5ydyFDs+WwC4=",
+    "id": "0eced605ba4ba13e694f3d834def2a5b",
+    "index": 50,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+        "label": "Compensation & Benefits",
+        "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "lmLHAffR3ybNO2rHLIndP2UEE58=",
+    "id": "cf9f138ec16c874584e9000ff29fbb51",
+    "index": 51,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "92e445ba-96af-4793-ae01-9b71035174ba",
+        "label": "Marketing Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "FKFC7Ko7Qswr8DrSy5JfbDVUgQs=",
+    "id": "17e327b05b249f8cefa1fc4ee30fff8b",
+    "index": 52,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+        "label": "Admin Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "4c8yt0yqjWqmcEQAy63JyAKMJbs=",
+    "id": "dd750852e72776d814efe3aa8a11e626",
+    "index": 53,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5f024d53-7d0e-4818-9661-256aee69709d",
+        "label": "Professional Services",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "+mqJQGeWqxBHH3Xhv7oPzL9UYKo=",
+    "id": "aa03299d13be94b8fbead5711bdbb6c1",
+    "index": 54,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "659337f4-01c3-495a-89d7-c177c4137620",
+        "label": "Cost of Goods Sold",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "ug7E0JpfOKMkp6HDLtULcRgrLxI=",
+    "id": "4b39ad6a50f3836111e1d67975242867",
+    "index": 55,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "1d6f0601-966a-4982-811d-981ac28db0b4",
+        "label": "Software Development Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "GNc0V+A7xgLdg5XF7GEDOeDU1xY=",
+    "id": "43bc639f20cdc13675aa01a21123382f",
+    "index": 56,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "800dac9a-5665-4826-a972-b3170c789d92",
+        "label": "Income Tax Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "MH4Fz9wQE57bICv62neWa+rgtZ4=",
+    "id": "212c12529576cf6257f0189d48644516",
+    "index": 57,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+        "label": "Software Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "Qvt1e/P5FdjfGdbkhVcJVQv69rk=",
+    "id": "499d34a1b25ff85b4a6b55e673238e88",
+    "index": 58,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+        "label": "Gas Expense",
+        "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM_GROUP"
+    },
+    "error": null,
+    "hash": "twvn4wALiRHRQi/ftqS+c008vbs=",
+    "id": "269a4bc45de5c16daf2e3e4507aa9e61",
+    "index": 59,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis Operational Hub",
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_WALLET"
+    },
+    "error": null,
+    "hash": "m+xzs1ci2z0zep2Pg7025cIqTfM=",
+    "id": "6f536fc993781caa71918775e8a5fca6",
+    "index": 60,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 1218.02,
+          "budget": 818.03,
+          "comments": "Bank fees and foreign exchange charges for the period.",
+          "forecast": 279.01,
+          "group": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+          "id": "22e662e5-aa4e-4813-a400-012eec3eb56f",
+          "label": "Admin Expense",
+          "payments": 1113.32
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "6tw/zxDU33D+teIx4ptXIMN8aLc=",
+    "id": "08246b8648b6e1e9d0be7df9b25d2e33",
+    "index": 61,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 186055.61,
+          "budget": 201980.61,
+          "comments": "On track with annual compensation plan.",
+          "forecast": 166303.5,
+          "group": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+          "id": "073c2ff4-edc4-4ab2-b3c0-d427cb8a7cc7",
+          "label": "Compensation & Benefits",
+          "payments": 221126.92
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "zWxgV/q4KU6GPsJaikhQaboylFs=",
+    "id": "604a7b98b870fad73de2b58c909e569f",
+    "index": 62,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 0,
+          "budget": 1262.01,
+          "comments": "No ETH purchases were made during the reporting period.",
+          "forecast": 0,
+          "group": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+          "id": "a8cf4dbb-834d-4bfa-bdac-8c9e55aceecd",
+          "label": "Gas Expense",
+          "payments": 0
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "dYp6ZLoLWW80IwsYr/Gi++dzhKU=",
+    "id": "052eb789fe67d35cd28c5628d89d236b",
+    "index": 63,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 0,
+          "budget": 13343.57,
+          "comments": "No marketing expenses registered in this period.",
+          "forecast": 0,
+          "group": "92e445ba-96af-4793-ae01-9b71035174ba",
+          "id": "2277b669-c9ce-42f1-8486-968e9dc39bdf",
+          "label": "Marketing Expense",
+          "payments": 0
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "w+oAqdtaGWjrtnfXm1tbbmGqoAQ=",
+    "id": "d56c08ae1a12f929b0b148def30f1ed1",
+    "index": 64,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 14071.44,
+          "budget": 35924.65,
+          "comments": "Lower legal expense than expected.",
+          "forecast": 21900.06,
+          "group": "5f024d53-7d0e-4818-9661-256aee69709d",
+          "id": "bde91903-2160-4a28-a0fc-da05a6f4b773",
+          "label": "Professional Services",
+          "payments": 7102.02
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "ykfrWnZ4zyRini4yVC11UIdSxKs=",
+    "id": "da4b18532e6b3f3d651ee2bcecaebf3a",
+    "index": 65,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 24336.07,
+          "budget": 19747.83,
+          "comments": "Development hours for core platform features.",
+          "forecast": 34081.5,
+          "group": "1d6f0601-966a-4982-811d-981ac28db0b4",
+          "id": "f8929263-a202-4317-8b09-2ee740f30fdb",
+          "label": "Software Development Expense",
+          "payments": 32902.59
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "MK/SYemjy9P10eq2tLxF69q6wNk=",
+    "id": "33cfeff1d6aa57f540c8f12fd7941a39",
+    "index": 66,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 1105.36,
+          "budget": 1900.49,
+          "comments": "Standard software licensing costs.",
+          "forecast": 1325.34,
+          "group": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+          "id": "547dee24-bb09-4f18-a8f9-724da58592b1",
+          "label": "Software Expense",
+          "payments": 1049.56
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "rXm8TVDocmN3q3YE3fyyJ7fS7bQ=",
+    "id": "a454509db8b05b6359d24817145b309e",
+    "index": 67,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 498.59,
+          "budget": 13208.96,
+          "comments": "Minimal travel this period.",
+          "forecast": 12295.86,
+          "group": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+          "id": "8894f3c2-b356-4f1d-b5ff-b25c1fa76bfb",
+          "label": "Travel & Entertainment",
+          "payments": 462.52
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "JoFMHWjH8dTmF+znUSmCQJo0ke0=",
+    "id": "00c582d0f6608e07c1f7bb68617f3d6d",
+    "index": 68,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lineItem": {
+          "actuals": 0,
+          "budget": 0,
+          "comments": "Prepaid expenses recognized in period.",
+          "forecast": 0,
+          "group": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+          "id": "973df06f-b6df-48d5-b83b-24cf904c34af",
+          "label": "Other",
+          "payments": 23559.48
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "91+FedTq6Q4gd/kF4NPsRcV/QrI=",
+    "id": "2e30585c39d42573c2e78e68d1e8e9d1",
+    "index": 69,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+          "totalActuals": 1218.02,
+          "totalBudget": 818.03,
+          "totalForecast": 279.01,
+          "totalPayments": 1113.32
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "91+FedTq6Q4gd/kF4NPsRcV/QrI=",
+    "id": "a1184e0956b09516a4316ac5c45f8d5f",
+    "index": 70,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+          "totalActuals": 186055.61,
+          "totalBudget": 201980.61,
+          "totalForecast": 166303.5,
+          "totalPayments": 221126.92
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "91+FedTq6Q4gd/kF4NPsRcV/QrI=",
+    "id": "166cff5bbba27defc80ba3668b926fbe",
+    "index": 71,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+          "totalActuals": 0,
+          "totalBudget": 1262.01,
+          "totalForecast": 0,
+          "totalPayments": 0
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "fmt/HyOKpwe1xlxN5fWYwMt02ZY=",
+    "id": "494c1fcf5e56bae4473885988717137b",
+    "index": 72,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "92e445ba-96af-4793-ae01-9b71035174ba",
+          "totalActuals": 0,
+          "totalBudget": 13343.57,
+          "totalForecast": 0,
+          "totalPayments": 0
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "hYPx8P8o+x3rbnBj6FpZ8t0k+8w=",
+    "id": "5bd937e870c4774f225fb723bcbaa1d5",
+    "index": 73,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "5f024d53-7d0e-4818-9661-256aee69709d",
+          "totalActuals": 14071.44,
+          "totalBudget": 35924.65,
+          "totalForecast": 21900.06,
+          "totalPayments": 7102.02
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "hYPx8P8o+x3rbnBj6FpZ8t0k+8w=",
+    "id": "093b4e5e364f4cd801a309a586cab095",
+    "index": 74,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "1d6f0601-966a-4982-811d-981ac28db0b4",
+          "totalActuals": 24336.07,
+          "totalBudget": 19747.83,
+          "totalForecast": 34081.5,
+          "totalPayments": 32902.59
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "hYPx8P8o+x3rbnBj6FpZ8t0k+8w=",
+    "id": "a652fd9f0101b81b7b14f7e08ce9c122",
+    "index": 75,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+          "totalActuals": 1105.36,
+          "totalBudget": 1900.49,
+          "totalForecast": 1325.34,
+          "totalPayments": 1049.56
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "hYPx8P8o+x3rbnBj6FpZ8t0k+8w=",
+    "id": "d8ed1c32becaef860b638b928c96bf39",
+    "index": 76,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+          "totalActuals": 498.59,
+          "totalBudget": 13208.96,
+          "totalForecast": 12295.86,
+          "totalPayments": 462.52
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "hYPx8P8o+x3rbnBj6FpZ8t0k+8w=",
+    "id": "35c0fc85e68f98ebc3c3fe14a9496a24",
+    "index": 77,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "groupTotals": {
+          "group": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+          "totalActuals": 0,
+          "totalBudget": 0,
+          "totalForecast": 0,
+          "totalPayments": 23559.48
+        },
+        "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+      },
+      "scope": "global",
+      "type": "SET_GROUP_TOTALS"
+    },
+    "error": null,
+    "hash": "/RSnhNjHGB+zlk0019G0SVGkZzc=",
+    "id": "e8a4f87453987a93978e4b86f6edecda",
+    "index": 78,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:33.644Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "SET_OWNER_ID"
+    },
+    "error": null,
+    "hash": "A12Vp8/AKz80FJzYKtAqsXcKTco=",
+    "id": "81636aaf2971c1b08577ae193a4e37ac",
+    "index": 79,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:56.745Z"
+  }
+]

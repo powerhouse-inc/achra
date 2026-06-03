@@ -1,0 +1,76 @@
+{
+  "contentSections": [],
+  "description": " A turnkey commercial entity for agents that enables builder teams to combine development and early commercial activity under a single legal structure. It serves as a coordination hub for contributors and customers, enabling teams to process revenues and expenses, contract with customers, and manage early sales without incurring in structural overhead.\n\nTypical Use Cases\n\n- Early products moving from grants to revenue\n- Teams testing initial commercial demand\n- One\u2011entity setups before fundraising or regulatory complexity\n\nSuitable for Early\u2011stage teams with no external funding and limited regulatory exposure, where simplicity outweighs structural separation.\n\n**Capabilities**\n\n\u2705 Receive income in crypto as grants or donations\n\n\u2705Pay and hire contributors\n\n\u2705Pay out dividends\n\n\u2705Issue shares, security tokens, and receive external investment\n\n\u2705Getting a bank account\n\n\u2705Public Registry requirement\n\n\ud83d\udfe8International Team (founding team may be abroad, but a local Director is  required)\n\n\ud83d\udfe8Tax optimization\n\n\ud83d\udfe8Shareholder anonymity (depends on final entity type)\n\n",
+  "facetTargets": [
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "a02508f2-8542-4fc1-820c-6b493cc0986e",
+      "selectedOptions": [
+        "Operational Hub"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "9572bd79-a982-4736-acbb-f4ff4677a8f8",
+      "selectedOptions": [
+        "Remote"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "2cfc4922-654c-4561-8855-56d9a6a4a16c",
+      "selectedOptions": [
+        "Swiss Association"
+      ]
+    },
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "24ee7b66-33d3-4232-954b-35359a37d82a",
+      "selectedOptions": [
+        "High",
+        "Highest"
+      ]
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:40:51.378Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Payment preparation and processing",
+    "Accounting and bookkeeping services",
+    "Transparency reporting",
+    "Prepare financial statements",
+    "Contract administration",
+    "Tax filing and reporting"
+  ],
+  "services": [],
+  "setupServices": [
+    "Needs analysis tool (Self-assessment)",
+    "Legal document assembler for setting up a commercial entity and Contributor Agreements *(entity wind-down document assembler included)",
+    "Kick off meeting with Powerhouse and workshop with local Counsel",
+    "Legal entity founding meeting and legal document review with local counsel  *(Tier 1: access to x hours of counsel)",
+    "Onboarding assistance with payment processor, accounting software and billing setup",
+    "Commercial Registry filing, if required",
+    "Legal entity domicile and Tax ID"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "A single legal entity to build, commercialize, and operate a product from day one.\n",
+  "targetAudiences": [
+    {
+      "color": "#0ea5e9",
+      "id": "1dae09f6-61d8-4804-a706-6292a954509f",
+      "label": "Builders"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/commercial_oh/commercial_oh.png",
+  "title": "Commercial Operational Hub",
+  "weight": null
+}

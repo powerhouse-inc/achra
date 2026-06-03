@@ -1,0 +1,144 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type SubscriptionInvoiceState {
+    invoiceNumber: String
+    issuedAt: DateTime
+    dueDate: DateTime
+    status: SubscriptionInvoiceStatus!
+    customerId: PHID
+    customerName: String
+    customerEmail: EmailAddress
+    sourceSubscriptionId: PHID
+    sourceSubscriptionName: String
+    cycleStart: DateTime
+    cycleEnd: DateTime
+    billingCycle: SubscriptionInvoiceBillingCycle
+    lineItems: [SubscriptionInvoiceLineItem!]!
+    currency: Currency
+    subtotal: Amount_Money!
+    creditApplied: Amount_Money!
+    totalDue: Amount_Money!
+    totalPaid: Amount_Money!
+    stripeInvoiceId: String
+    notes: String
+}
+
+enum SubscriptionInvoiceStatus {
+    DRAFT
+    ISSUED
+    PAID
+    VOID
+}
+
+enum SubscriptionInvoiceBillingCycle {
+    MONTHLY
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+    ONE_TIME
+}
+
+enum SubscriptionInvoiceLineItemOrigin {
+    SETUP
+    SUBSCRIPTION_FEE
+    DYNAMIC
+    ESTIMATED_USAGE
+    RECONCILIATION
+}
+
+type SubscriptionInvoiceLineItem {
+    id: OID!
+    sliceId: OID!
+    origin: SubscriptionInvoiceLineItemOrigin!
+    description: String!
+    sourceName: String
+    chargedAt: DateTime!
+    debitAmount: Amount_Money!
+    settledAmount: Amount_Money!
+    creditApplied: Amount_Money!
+    amountDue: Amount_Money!
+    currency: Currency!
+}
+
+
+# invoice
+
+input InitializeSubscriptionInvoiceInput {
+    invoiceNumber: String
+    dueDate: DateTime
+    customerId: PHID
+    customerName: String
+    customerEmail: EmailAddress
+    sourceSubscriptionId: PHID
+    sourceSubscriptionName: String
+    cycleStart: DateTime
+    cycleEnd: DateTime
+    billingCycle: SubscriptionInvoiceBillingCycle
+    lineItems: [SubscriptionInvoiceLineItemInput!]!
+    currency: Currency
+    subtotal: Amount_Money!
+    creditApplied: Amount_Money!
+    totalDue: Amount_Money!
+    totalPaid: Amount_Money!
+    notes: String
+}
+
+input SubscriptionInvoiceLineItemInput {
+    id: OID!
+    sliceId: OID!
+    origin: SubscriptionInvoiceLineItemOrigin!
+    description: String!
+    sourceName: String
+    chargedAt: DateTime!
+    debitAmount: Amount_Money!
+    settledAmount: Amount_Money!
+    creditApplied: Amount_Money!
+    amountDue: Amount_Money!
+    currency: Currency!
+}
+
+
+input MarkSubscriptionInvoiceIssuedInput {
+    issuedAt: DateTime!
+}
+
+
+input MarkSubscriptionInvoicePaidInput {
+    paidAt: DateTime!
+    paidAmount: Amount_Money!
+}
+
+
+input VoidSubscriptionInvoiceInput {
+    voidedAt: DateTime!
+    reason: String
+}
+
+
+input SetSubscriptionInvoiceStripeIdInput {
+    stripeInvoiceId: String!
+}
+
+
+input SetSubscriptionInvoiceNotesInput {
+    notes: String
+}

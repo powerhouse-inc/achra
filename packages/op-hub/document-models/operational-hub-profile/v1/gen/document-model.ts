@@ -1,0 +1,91 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/operational-hub-profile",
+  name: "OperationalHubProfile",
+  author: {
+    name: "Powerhouse",
+    website: "https://www.powerhouse.inc/",
+  },
+  extension: "",
+  description:
+    "Profile document for Operational Hubs that manages operator team assignment and subteam relationships",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type OperationalHubProfileState {\n  name: String!\n  operatorTeam: PHID\n  subteams: [PHID!]!\n}",
+          examples: [],
+          initialValue: '{"name": "", "operatorTeam": null, "subteams": []}',
+        },
+      },
+      modules: [
+        {
+          id: "configuration",
+          name: "configuration",
+          description: "Operations for configuring the operational hub profile",
+          operations: [
+            {
+              id: "set-operational-hub-name",
+              name: "setOperationalHubName",
+              description: "Set the name of the operational hub",
+              schema: "input SetOperationalHubNameInput {\n  name: String!\n}",
+              template: "Set the name of the operational hub",
+              reducer: "state.name = action.input.name;",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-operator-team",
+              name: "setOperatorTeam",
+              description:
+                "Set the operator team PHID for this operational hub",
+              schema: "input SetOperatorTeamInput {\n  operatorTeam: PHID\n}",
+              template: "Set the operator team PHID for this operational hub",
+              reducer:
+                "state.operatorTeam = action.input.operatorTeam || null;",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-subteam",
+              name: "addSubteam",
+              description:
+                "Add a subteam (builder profile) to the operational hub",
+              schema: "input AddSubteamInput {\n  subteam: PHID!\n}",
+              template:
+                "Add a subteam (builder profile) to the operational hub",
+              reducer:
+                "if (!state.subteams.includes(action.input.subteam)) {\n  state.subteams.push(action.input.subteam);\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-subteam",
+              name: "removeSubteam",
+              description: "Remove a subteam from the operational hub",
+              schema: "input RemoveSubteamInput {\n  subteam: PHID!\n}",
+              template: "Remove a subteam from the operational hub",
+              reducer:
+                "const index = state.subteams.indexOf(action.input.subteam);\nif (index !== -1) {\n  state.subteams.splice(index, 1);\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

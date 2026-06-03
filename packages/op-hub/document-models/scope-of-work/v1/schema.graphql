@@ -1,0 +1,458 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type ScopeOfWorkState {
+  title: String!
+  description: String!
+  status: ScopeOfWorkStatus!
+  deliverables: [Deliverable!]!
+  projects: [Project!]!
+  roadmaps: [Roadmap!]!
+  contributors: [Agent!]!
+}
+
+enum ScopeOfWorkStatus {
+  DRAFT
+  SUBMITTED
+  IN_PROGRESS
+  REJECTED
+  APPROVED
+  DELIVERED
+  CANCELED
+}
+
+type Agent {
+  id: PHID!
+  name: String!
+  icon: URL
+  description: String
+}
+
+type Deliverable {
+  id: OID!
+  owner: ID
+  icon: String
+  title: String!
+  code: String!
+  description: String!
+  status: DeliverableStatus!
+  workProgress: Progress
+  keyResults: [KeyResult!]!
+  budgetAnchor: BudgetAnchorProject
+}
+
+type BudgetAnchorProject {
+  project: OID
+  unit: Unit
+  unitCost: Float!
+  quantity: Float!
+  margin: Float!
+}
+
+enum Unit {
+  StoryPoints
+  Hours
+}
+
+enum DeliverableStatus {
+  WONT_DO
+  DRAFT
+  TODO
+  BLOCKED
+  IN_PROGRESS
+  DELIVERED
+  CANCELED
+}
+
+type Progress {
+  value: Float
+  done: Boolean
+  total: Int
+  completed: Int
+}
+
+type KeyResult {
+  id: OID!
+  title: String!
+  link: String!
+}
+
+type Project {
+  id: OID!
+  slug: String!
+  code: String!
+  title: String!
+  projectOwner: ID
+  abstract: String
+  imageUrl: URL
+  scope: DeliverablesSet
+  budgetType: BudgetType
+  currency: PMCurrency
+  budget: Float
+  expenditure: BudgetExpenditure
+}
+
+enum PMCurrency {
+  DAI
+  USDS
+  EUR
+  USD
+}
+
+enum BudgetType {
+  CONTINGENCY
+  OPEX
+  CAPEX
+  OVERHEAD
+}
+
+type BudgetExpenditure {
+  percentage: Float!
+  actuals: Float!
+  cap: Float!
+}
+
+type Roadmap {
+  id: OID!
+  slug: String!
+  title: String!
+  description: String!
+  milestones: [Milestone!]!
+}
+
+type Milestone {
+  id: OID!
+  sequenceCode: String!
+  title: String!
+  description: String!
+  deliveryTarget: String!
+  scope: DeliverablesSet
+  coordinators: [ID!]!
+  budget: Float
+}
+
+type DeliverablesSet {
+  deliverables: [OID!]!
+  status: DeliverableSetStatus!
+  progress: Progress!
+  deliverablesCompleted: DeliverablesCompleted!
+}
+
+type DeliverablesCompleted {
+  total: Int!
+  completed: Int!
+}
+
+enum DeliverableSetStatus {
+  DRAFT
+  TODO
+  IN_PROGRESS
+  FINISHED
+  CANCELED
+}
+
+# scope_of_work
+
+input EditScopeOfWorkInput {
+    title: String
+    description: String
+	status: ScopeOfWorkStatusInput
+}
+
+enum ScopeOfWorkStatusInput {
+  DRAFT
+  SUBMITTED
+  IN_PROGRESS
+  REJECTED
+  APPROVED
+  DELIVERED
+  CANCELED
+}
+
+# deliverables
+
+input AddDeliverableInput {
+  id: OID!
+  owner: ID
+  title: String
+  code: String
+  description: String
+  status: PMDeliverableStatusInput
+}
+
+enum PMDeliverableStatusInput {
+  WONT_DO
+  DRAFT
+  TODO
+  BLOCKED
+  IN_PROGRESS
+  DELIVERED
+  CANCELED
+}
+
+input RemoveDeliverableInput {
+  id: OID!
+}
+
+input EditDeliverableInput {
+  id: OID!
+  owner: ID
+  icon: String
+  title: String
+  code: String
+  description: String
+  status: PMDeliverableStatusInput
+}
+
+input SetDeliverableProgressInput {
+  id: OID!
+  workProgress: ProgressInput
+}
+
+input ProgressInput {
+  percentage: Float
+  storyPoints: StoryPointInput
+  done: Boolean
+}
+
+input StoryPointInput {
+  total: Int!
+  completed: Int!
+}
+
+input AddKeyResultInput {
+  id: OID!
+  deliverableId: OID!
+  title: String!
+  link: String
+}
+
+input RemoveKeyResultInput {
+  id: OID!
+  deliverableId: OID!
+}
+
+input EditKeyResultInput {
+  id: OID!
+  deliverableId: OID!
+  title: String
+  link: URL
+}
+
+input SetDeliverableBudgetAnchorProjectInput {
+  deliverableId: ID!
+  project: OID
+  unit: Unit
+  unitCost: Float
+  quantity: Float
+  margin: Float
+}
+
+# roadmaps
+
+input AddRoadmapInput {
+  id: OID!
+  title: String!
+  slug: String
+  description: String
+}
+
+input RemoveRoadmapInput {
+  id: OID!
+}
+
+input EditRoadmapInput {
+  id: OID!
+  title: String
+  slug: String
+  description: String
+}
+
+# milestones
+
+input AddMilestoneInput {
+  id: OID!
+  roadmapId: OID!
+  sequenceCode: String
+  title: String
+  description: String
+  deliveryTarget: String
+}
+
+input RemoveMilestoneInput {
+  id: OID!
+  roadmapId: OID!
+}
+
+input EditMilestoneInput {
+  id: OID!
+  roadmapId: OID!
+  sequenceCode: String
+  title: String
+  description: String
+  deliveryTarget: String
+}
+
+input AddCoordinatorInput {
+  id: ID!
+  milestoneId: OID!
+}
+
+input RemoveCoordinatorInput {
+  id: ID!
+  milestoneId: OID!
+}
+
+input AddMilestoneDeliverableInput {
+  milestoneId: OID!
+  deliverableId: OID!
+  title: String!
+}
+
+input RemoveMilestoneDeliverableInput {
+  milestoneId: OID!
+  deliverableId: OID!
+}
+
+# deliverables_set
+
+input EditDeliverablesSetInput {
+  milestoneId: ID
+  projectId: ID
+  status: DeliverableSetStatusInput
+  deliverablesCompleted: DeliverablesCompletedInput
+}
+
+enum DeliverableSetStatusInput {
+  DRAFT
+  TODO
+  IN_PROGRESS
+  FINISHED
+  CANCELED
+}
+
+input DeliverablesCompletedInput {
+  total: Int!
+  completed: Int!
+}
+
+input AddDeliverableInSetInput {
+  milestoneId: ID
+  projectId: ID
+  deliverableId: OID!
+}
+
+input RemoveDeliverableInSetInput {
+  milestoneId: ID
+  projectId: ID
+  deliverableId: OID!
+}
+
+# contributors
+
+input AddAgentInput {
+  id: PHID!
+  name: String!
+  icon: URL
+  description: String
+}
+
+input RemoveAgentInput {
+  id: PHID!
+}
+
+input EditAgentInput {
+  id: PHID!
+  name: String
+  icon: URL
+  description: String
+}
+
+# projects
+
+input AddProjectInput {
+  id: OID!
+  code: String!
+  title: String!
+  slug: String
+  projectOwner: ID
+  abstract: String
+  imageUrl: URL
+  budgetType: PMBudgetTypeInput
+  currency: PMCurrencyInput
+  budget: Float
+}
+
+enum PMBudgetTypeInput {
+  CONTINGENCY
+  OPEX
+  CAPEX
+  OVERHEAD
+}
+
+enum PMCurrencyInput {
+  DAI
+  USDS
+  EUR
+  USD
+}
+
+input UpdateProjectInput {
+  id: OID!
+  code: String
+  slug: String
+  title: String
+  abstract: String
+  imageUrl: URL
+  budgetType: PMBudgetTypeInput
+  currency: PMCurrencyInput
+  budget: Float
+}
+
+input UpdateProjectOwnerInput {
+  id: OID!
+  projectOwner: ID!
+}
+
+input RemoveProjectInput {
+  projectId: ID!
+}
+
+input SetProjectMarginInput {
+  projectId: OID!
+  margin: Float!
+}
+
+input SetProjectTotalBudgetInput {
+  projectId: OID!
+  totalBudget: Float!
+}
+
+input AddProjectDeliverableInput {
+  projectId: OID!
+  deliverableId: ID!
+  title: String!
+}
+
+input RemoveProjectDeliverableInput {
+  projectId: OID!
+  deliverableId: OID!
+}

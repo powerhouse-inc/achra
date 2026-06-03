@@ -1,0 +1,117 @@
+/* ── Keyframes (cannot be expressed as Tailwind utilities) ── */
+
+@keyframes so-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes so-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes so-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes so-fab-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes so-confirm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes so-confirm-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes progress-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes progress-dropdown-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progress-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes progress-modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes tier-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes catalog__fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rts-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes matrix-warning-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes panel-overlay-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes panel-slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes modal-backdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-pop {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Tooltip overrides — Radix portals outside .so-editor scope ── */
+
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+  min-width: 0 !important;
+  max-width: 280px !important;
+}
+
+[data-radix-popper-content-wrapper] [data-side] {
+  max-width: 280px !important;
+  white-space: normal !important;
+  line-height: 1.45 !important;
+  word-wrap: break-word !important;
+}
+
+/* ── Scrollbar styles (not possible with Tailwind) ── */
+
+.so-scrollbar-h::-webkit-scrollbar { height: 8px; }
+.so-scrollbar-h::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+.so-scrollbar-h::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.so-scrollbar-h::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.so-scrollbar-v::-webkit-scrollbar { width: 6px; }
+.so-scrollbar-v::-webkit-scrollbar-track { background: #f8fafc; border-radius: 3px; }
+.so-scrollbar-v::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.so-scrollbar-v::-webkit-scrollbar-thumb:hover { background: #94a3b8; }

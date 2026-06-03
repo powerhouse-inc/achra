@@ -1,0 +1,14 @@
+{
+  "documentModelsDir": "./document-models",
+  "editorsDir": "./editors",
+  "processorsDir": "./processors",
+  "subgraphsDir": "./subgraphs",
+  "studio": {
+    "port": 3001
+  },
+  "reactor": {
+    "port": 4001
+  },
+  "packages": [{ "packageName": "@powerhousedao/op-hub", "provider": "local" }],
+  "packageRegistryUrl": "https://registry.dev.vetra.io"
+}

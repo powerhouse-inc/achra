@@ -1,0 +1,225 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "0a5ca09b-3532-45f0-8315-0891e02c5442",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "NETWORK IP SPV",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:38.775Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "0a5ca09b-3532-45f0-8315-0891e02c5442"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "d72ade5d35a88906fb89b529a66ac331",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:38.775Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": " A spin-off of the Embryonic Hub, which acts as a neutral IP steward for decentralized networks. The IP Hub is responsible for holding, protecting, and licensing network\u2011owned intellectual property. It enforces open\u2011source licenses, polices third\u2011party infringements, and structures neutral licensing frameworks aligned with network governance.\n\nThe IP Hub typically operates through a holding structure, with a special\u2011purpose Foundation acting as the parent entity of individual IP SPVs that each hold portfolios of related projects. This enables modular IP governance while maintaining clean separation from operations and commercialization.\n\n**Typical Use Cases**\n\n- Protocol and brand stewardship\n- Multi\u2011project IP portfolios\n- Neutral licensing and enforcement\n\nSuitable for networks with valuable shared IP requiring long\u2011term protection and governance\u2011aligned licensing.\n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "The IP and Licensing Hub of a Network Organization\n",
+        "thumbnailUrl": "https://www.kompetenznetzwerkip.de/en/central-grafik.png",
+        "title": "Network IP SPV"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "Etv70qtb+SvFKOf/UbP1eFLuBHk=",
+    "id": "7f04e89c1af0950d5981a6e3893cd854",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "0a5ca09b-3532-45f0-8315-0891e02c5442",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "1633bfd4c9f136842496710929aafae7",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:38.775Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "4JndqXr7+gerS5ZOx95voX192kk=",
+    "id": "e071f57d3565d5a8d9050c727e01362d",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "tcaqGoE0sZ4iifDko9JlTuOeMHM=",
+    "id": "3494a03af3b75284bd6278be10ed28d1",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#10b981",
+        "id": "a9b0f691-dbe5-4058-9c2d-6c31b012f716",
+        "label": "Networks",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "flbSfyFWiqB/mfZTEbT59DxVmsM=",
+    "id": "02373eb261aeb772563feba3f833a433",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Needs analysis + IP asset audit",
+          "Holding structure design",
+          "License framework implementation",
+          "Entity formation (Cayman Holding Foundation)"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "052Bu+JMCec3A07sxP6STx4KvD8=",
+    "id": "b8d20f29fa9dc07faa948075e80712a4",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "License administration",
+          "Enforcement and infringement monitoring",
+          "Royalty processing"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "vgFv4Nw9GQ/kDG3CjpMZxSWLO4g=",
+    "id": "af91dbf5557535ff85b0aa6a1384d6c7",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:07.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:39:25.109Z",
+        "thumbnailUrl": "https://github.com/powerhouse-inc/service-offering/blob/main/services-img/network-ipspv/network_ip_spv.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "glb92NzDrGegpmCwqJ3v2wVDSAA=",
+    "id": "b2acebe642d08daa70a1d2ace96a0348",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:39:25.109Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:39:33.784Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/network-ipspv/network_ip_spv.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "o5pX/St6neHYB0kJdkVowaEFVAs=",
+    "id": "7ce51a1852f8b34b37ed82715b88bc80",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:39:33.784Z"
+  }
+]

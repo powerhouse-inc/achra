@@ -1,0 +1,29 @@
+{
+  "about": " Core Dev Tech Lead",
+  "code": "ACA",
+  "contributors": [],
+  "description": "Tech Lead",
+  "icon": "https://pbs.twimg.com/profile_images/1925450094175723520/2Gedxco__400x400.jpg",
+  "id": "92a6e064-083b-4c76-affb-e68a653c7f98",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:46.352Z",
+  "links": [],
+  "name": "Acaldas",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [
+    "PROTOCOL_SCOPE"
+  ],
+  "skills": [
+    "FRONTEND_DEVELOPMENT",
+    "BACKEND_DEVELOPMENT",
+    "FULL_STACK_DEVELOPMENT",
+    "DEVOPS_ENGINEERING",
+    "SMART_CONTRACT_DEVELOPMENT",
+    "UI_UX_DESIGN"
+  ],
+  "slug": "acaldas",
+  "status": "ACTIVE"
+}

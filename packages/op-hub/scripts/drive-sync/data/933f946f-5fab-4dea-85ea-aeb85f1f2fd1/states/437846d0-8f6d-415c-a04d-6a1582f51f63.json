@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "cmt",
+  "contributors": [],
+  "description": null,
+  "icon": "https://pbs.twimg.com/profile_images/1729527564723744768/7Q0QXF_4_400x400.jpg",
+  "id": "dbda6fee-049a-4983-8d43-7e1f6f4fa659",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:23.123Z",
+  "links": [],
+  "name": "callMeT",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "callmet",
+  "status": "ACTIVE"
+}

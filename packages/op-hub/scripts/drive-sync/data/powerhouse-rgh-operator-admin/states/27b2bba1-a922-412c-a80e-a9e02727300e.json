@@ -1,0 +1,73 @@
+{
+  "contentSections": [],
+  "description": " A dedicated entity to hold, protect, and license IP assets such as trademarks, copyrights, patents, and domains. Separating IP ownership reduces operational risk and enables flexible licensing models.\n\n**Typical use cases:**\n\n- 1. IP isolation\n- 2. Licensing and royalty structures\n- 3. Enforcement and brand protection\n\nSuitable for teams with valuable IP that require clear ownership and risk separation.\n\n",
+  "facetTargets": [
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "371a1e8b-d484-4a3e-aed0-da155cd7f11a",
+      "selectedOptions": [
+        "High",
+        "Highest"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "13cc2066-8bba-42f7-ba67-2c9e2d428dbe",
+      "selectedOptions": [
+        "Remote",
+        "Local",
+        "Hybrid"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "2fc22df5-ba9f-45c4-8376-97fc9bf3b451",
+      "selectedOptions": [
+        "Swiss Association",
+        "BVI Entity"
+      ]
+    },
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "f97a1ccc-07ff-40ee-b1ee-04e2cfbd0c31",
+      "selectedOptions": [
+        "IP SPV"
+      ]
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:40:33.368Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Licensing",
+    "Enforcing copyrights/police infringements"
+  ],
+  "services": [],
+  "setupServices": [
+    "(same as commercial OH, plus)",
+    "Needs analysis",
+    "IP asset audit",
+    "Setup licenses",
+    "Legal entity design and implementation"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "A clean, isolated home for your project\u2019s intellectual property.",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "d9212b5e-5c19-400b-a19d-4739967c0fc6",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/ip-spv/ip_spv.png",
+  "title": "Intellectual Property SPV",
+  "weight": null
+}

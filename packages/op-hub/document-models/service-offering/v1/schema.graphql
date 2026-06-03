@@ -1,0 +1,524 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type ServiceOfferingState {
+    id: PHID
+    operatorId: PHID
+    resourceTemplateId: PHID
+    title: String!
+    summary: String!
+    description: String
+    thumbnailUrl: URL
+    infoLink: URL
+    status: ServiceStatus!
+    lastModified: DateTime
+    availableBillingCycles: [BillingCycle!]!
+    facetTargets: [FacetTarget!]!
+    services: [Service!]!
+    tiers: [ServiceSubscriptionTier!]!
+    optionGroups: [OptionGroup!]!
+}
+
+enum ServiceStatus {
+    DRAFT
+    COMING_SOON
+    ACTIVE
+    DEPRECATED
+}
+
+type FacetTarget {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOptions: [String!]!
+}
+
+type DiscountRule {
+    discountType: DiscountType!
+    discountValue: Float!
+}
+
+enum DiscountType {
+    PERCENTAGE
+    FLAT_AMOUNT
+}
+
+type BillingCycleDiscount {
+    billingCycle: BillingCycle!
+    discountRule: DiscountRule!
+}
+
+type SetupCost {
+    amount: Amount_Money!
+    currency: Currency!
+    discount: DiscountRule
+}
+
+type RecurringPriceOption {
+    id: OID!
+    billingCycle: BillingCycle!
+    amount: Amount_Money!
+    currency: Currency!
+    discount: DiscountRule
+}
+
+type Service {
+    id: OID!
+    title: String!
+    description: String
+    displayOrder: Int
+    isSetupFormation: Boolean!
+    optionGroupId: OID
+}
+
+type ServiceSubscriptionTier {
+    id: OID!
+    name: String!
+    description: String
+    isCustomPricing: Boolean!
+    pricingMode: TierPricingMode
+    pricing: ServicePricing!
+    defaultBillingCycle: BillingCycle
+    mostPopular: Boolean!
+    billingCycleDiscounts: [BillingCycleDiscount!]!
+    serviceLevels: [ServiceLevelBinding!]!
+    usageLimits: [ServiceUsageLimit!]!
+    excludeFromSetupFee: Boolean!
+}
+
+type ServicePricing {
+    amount: Amount_Money
+    currency: Currency!
+}
+
+enum BillingCycle {
+    MONTHLY
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+    ONE_TIME
+}
+
+type ServiceLevelBinding {
+    id: OID!
+    serviceId: OID!
+    level: ServiceLevel!
+    customValue: String
+    optionGroupId: OID
+}
+
+enum ServiceLevel {
+    INCLUDED
+    NOT_INCLUDED
+    OPTIONAL
+    CUSTOM
+    VARIABLE
+    NOT_APPLICABLE
+}
+
+type ServiceUsageLimit {
+    id: OID!
+    serviceId: OID!
+    metric: String!
+    unitName: String
+    freeLimit: Int
+    paidLimit: Int
+    metricType: MetricType!
+    accrualCycle: AccrualCycle!
+    notes: String
+    unitPrice: Amount_Money
+    unitPriceCurrency: Currency
+}
+
+enum AccrualCycle {
+    HOURLY
+    DAILY
+    WEEKLY
+    MONTHLY
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+}
+
+enum MetricType {
+    CUMULATIVE
+    NON_CUMULATIVE
+}
+
+type OptionGroup {
+    id: OID!
+    name: String!
+    description: String
+    isAddOn: Boolean!
+    defaultSelected: Boolean!
+    pricingMode: AddOnPricingMode
+    standalonePricing: StandalonePricing
+    tierDependentPricing: [OptionGroupTierPricing!]
+    costType: GroupCostType
+    availableBillingCycles: [BillingCycle!]!
+    billingCycleDiscounts: [BillingCycleDiscount!]!
+    discountMode: DiscountMode
+    price: Amount_Money
+    currency: Currency
+}
+
+enum AddOnPricingMode {
+    TIER_DEPENDENT
+    STANDALONE
+}
+
+enum DiscountMode {
+    INHERIT_TIER
+    INDEPENDENT
+}
+
+enum TierPricingMode {
+    CALCULATED
+    MANUAL_OVERRIDE
+}
+
+type StandalonePricing {
+    setupCost: SetupCost
+    recurringPricing: [RecurringPriceOption!]!
+}
+
+type OptionGroupTierPricing {
+    id: OID!
+    tierId: OID!
+    setupCost: SetupCost
+    setupCostDiscounts: [BillingCycleDiscount!]!
+    recurringPricing: [RecurringPriceOption!]!
+}
+
+enum GroupCostType {
+    RECURRING
+    SETUP
+}
+
+# offering
+
+input UpdateOfferingInfoInput {
+    title: String
+    summary: String
+    description: String
+    thumbnailUrl: URL
+    infoLink: URL
+    lastModified: DateTime!
+}
+
+input UpdateOfferingStatusInput {
+    status: ServiceStatus!
+    lastModified: DateTime!
+}
+
+input SetOperatorInput {
+    operatorId: PHID!
+    lastModified: DateTime!
+}
+
+input SetOfferingIdInput {
+    id: PHID!
+    lastModified: DateTime!
+}
+
+input SetFacetTargetInput {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOptions: [String!]!
+    lastModified: DateTime!
+}
+
+input RemoveFacetTargetInput {
+    categoryKey: String!
+    lastModified: DateTime!
+}
+
+input AddFacetOptionInput {
+    categoryKey: String!
+    optionId: String!
+    lastModified: DateTime!
+}
+
+input RemoveFacetOptionInput {
+    categoryKey: String!
+    optionId: String!
+    lastModified: DateTime!
+}
+
+input SelectResourceTemplateInput {
+    resourceTemplateId: PHID!
+    lastModified: DateTime!
+}
+
+input ChangeResourceTemplateInput {
+    previousTemplateId: PHID!
+    newTemplateId: PHID!
+    lastModified: DateTime!
+}
+
+input SetAvailableBillingCyclesInput {
+    billingCycles: [BillingCycle!]!
+    lastModified: DateTime!
+}
+
+# services
+
+input AddServiceInput {
+    id: OID!
+    title: String!
+    description: String
+    displayOrder: Int
+    isSetupFormation: Boolean
+    optionGroupId: OID
+    lastModified: DateTime!
+}
+
+input UpdateServiceInput {
+    id: OID!
+    title: String
+    description: String
+    displayOrder: Int
+    isSetupFormation: Boolean
+    optionGroupId: OID
+    lastModified: DateTime!
+}
+
+input DeleteServiceInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+# tiers
+
+input AddTierInput {
+    id: OID!
+    name: String!
+    description: String
+    amount: Amount_Money
+    currency: Currency!
+    isCustomPricing: Boolean
+    excludeFromSetupFee: Boolean
+    lastModified: DateTime!
+}
+
+input UpdateTierInput {
+    id: OID!
+    name: String
+    description: String
+    isCustomPricing: Boolean
+    lastModified: DateTime!
+    mostPopular: Boolean
+    excludeFromSetupFee: Boolean
+}
+
+input UpdateTierPricingInput {
+    tierId: OID!
+    amount: Amount_Money
+    currency: Currency
+    lastModified: DateTime!
+}
+
+input DeleteTierInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input AddServiceLevelInput {
+    tierId: OID!
+    serviceLevelId: OID!
+    serviceId: OID!
+    level: ServiceLevel!
+    optionGroupId: OID
+    customValue: String
+    lastModified: DateTime!
+}
+
+input UpdateServiceLevelInput {
+    tierId: OID!
+    serviceLevelId: OID!
+    level: ServiceLevel
+    optionGroupId: OID
+    customValue: String
+    lastModified: DateTime!
+}
+
+input RemoveServiceLevelInput {
+    tierId: OID!
+    serviceLevelId: OID!
+    lastModified: DateTime!
+}
+
+input AddUsageLimitInput {
+    tierId: OID!
+    limitId: OID!
+    serviceId: OID!
+    metric: String!
+    unitName: String
+    freeLimit: Int
+    paidLimit: Int
+    metricType: MetricType!
+    accrualCycle: AccrualCycle!
+    notes: String
+    unitPrice: Amount_Money
+    unitPriceCurrency: Currency
+    lastModified: DateTime!
+}
+
+input UpdateUsageLimitInput {
+    tierId: OID!
+    limitId: OID!
+    metric: String
+    unitName: String
+    freeLimit: Int
+    paidLimit: Int
+    metricType: MetricType
+    accrualCycle: AccrualCycle
+    notes: String
+    unitPrice: Amount_Money
+    unitPriceCurrency: Currency
+    lastModified: DateTime!
+}
+
+input RemoveUsageLimitInput {
+    tierId: OID!
+    limitId: OID!
+    lastModified: DateTime!
+}
+
+input SetTierDefaultBillingCycleInput {
+    tierId: OID!
+    defaultBillingCycle: BillingCycle!
+    lastModified: DateTime!
+}
+
+input DiscountRuleInput {
+    discountType: DiscountType!
+    discountValue: Float!
+}
+
+input BillingCycleDiscountInput {
+    billingCycle: BillingCycle!
+    discountRule: DiscountRuleInput!
+}
+
+input SetTierBillingCycleDiscountsInput {
+    tierId: OID!
+    discounts: [BillingCycleDiscountInput!]!
+    lastModified: DateTime!
+}
+
+input SetTierPricingModeInput {
+    tierId: OID!
+    pricingMode: TierPricingMode!
+    lastModified: DateTime!
+}
+
+input ReorderTiersInput {
+    tierIds: [OID!]!
+    lastModified: DateTime!
+}
+
+# option-groups
+
+input AddOptionGroupInput {
+    id: OID!
+    name: String!
+    description: String
+    isAddOn: Boolean!
+    defaultSelected: Boolean!
+    costType: GroupCostType
+    availableBillingCycles: [BillingCycle!]
+    price: Amount_Money
+    currency: Currency
+    lastModified: DateTime!
+}
+
+input UpdateOptionGroupInput {
+    id: OID!
+    name: String
+    description: String
+    isAddOn: Boolean
+    defaultSelected: Boolean
+    costType: GroupCostType
+    availableBillingCycles: [BillingCycle!]
+    price: Amount_Money
+    currency: Currency
+    lastModified: DateTime!
+}
+
+input DeleteOptionGroupInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input RecurringPriceOptionInput {
+    id: OID!
+    billingCycle: BillingCycle!
+    amount: Amount_Money!
+    currency: Currency!
+    discount: DiscountRuleInput
+}
+
+input SetupCostInput {
+    amount: Amount_Money!
+    currency: Currency!
+    discount: DiscountRuleInput
+}
+
+input SetOptionGroupStandalonePricingInput {
+    optionGroupId: OID!
+    setupCost: SetupCostInput
+    recurringPricing: [RecurringPriceOptionInput!]!
+    billingCycleDiscounts: [BillingCycleDiscountInput!]
+    lastModified: DateTime!
+}
+
+input AddOptionGroupTierPricingInput {
+    optionGroupId: OID!
+    tierPricingId: OID!
+    tierId: OID!
+    setupCost: SetupCostInput
+    setupCostDiscounts: [BillingCycleDiscountInput!]
+    recurringPricing: [RecurringPriceOptionInput!]!
+    lastModified: DateTime!
+}
+
+input UpdateOptionGroupTierPricingInput {
+    optionGroupId: OID!
+    tierId: OID!
+    setupCost: SetupCostInput
+    setupCostDiscounts: [BillingCycleDiscountInput!]
+    recurringPricing: [RecurringPriceOptionInput!]
+    lastModified: DateTime!
+}
+
+input RemoveOptionGroupTierPricingInput {
+    optionGroupId: OID!
+    tierId: OID!
+    lastModified: DateTime!
+}
+
+input SetOptionGroupDiscountModeInput {
+    optionGroupId: OID!
+    discountMode: DiscountMode!
+    lastModified: DateTime!
+}

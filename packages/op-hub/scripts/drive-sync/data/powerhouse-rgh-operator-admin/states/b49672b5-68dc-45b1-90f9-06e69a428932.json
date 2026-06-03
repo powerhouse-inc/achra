@@ -1,0 +1,215 @@
+{
+  "availableBillingCycles": [
+    "MONTHLY",
+    "ANNUAL"
+  ],
+  "description": "Perform verification of standard contributor agreements for software developers.",
+  "facetTargets": [
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "37d48782-6049-457d-be8b-f7d22a239eef",
+      "selectedOptions": [
+        "OH Artic"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "cbbfe890-0939-46ad-9bb0-94949bd77e33",
+      "selectedOptions": [
+        "Remote",
+        "Local",
+        "Hybrid"
+      ]
+    },
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "350dd247-c626-42d4-8b70-4553c887a95f",
+      "selectedOptions": [
+        "High",
+        "Highest",
+        "Low"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "65c2bbd9-1eb9-4d9c-b926-6a031af874ba",
+      "selectedOptions": [
+        "Cyber",
+        "Swiss Association",
+        "BVI Entity"
+      ]
+    }
+  ],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-04-29T16:16:31.000Z",
+  "operatorId": "Operator-007",
+  "optionGroups": [
+    {
+      "availableBillingCycles": [
+        "MONTHLY"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": "USD",
+      "defaultSelected": true,
+      "description": null,
+      "discountMode": null,
+      "id": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "isAddOn": false,
+      "name": "OH-Artic-1",
+      "price": 999.99,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": {
+        "recurringPricing": [
+          {
+            "amount": 999.99,
+            "billingCycle": "MONTHLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "ad4569a5-c21c-416d-a05d-7b94b9b44b79"
+          }
+        ],
+        "setupCost": null
+      },
+      "tierDependentPricing": [
+        {
+          "id": "67ba0bec-9362-4d2f-90a0-ad83487bfb1e",
+          "recurringPricing": [
+            {
+              "amount": 999.99,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "b82e691b-1321-4e94-a1bd-74c1f9434aec"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "e0f6b29d-f872-4d31-8a58-74789cc99eda"
+        },
+        {
+          "id": "625f7b4a-c3f8-4115-959f-00b8820fbbe2",
+          "recurringPricing": [
+            {
+              "amount": 999.99,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "959f8376-5cd8-4f96-a448-97d53f9229d3"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "c62e4751-b716-48c4-bc48-250a76456f4e"
+        }
+      ]
+    }
+  ],
+  "resourceTemplateId": "dfc7d263-2db6-45a4-a34f-631f1eaa7b6e",
+  "services": [
+    {
+      "description": "A comprehensive review of contributor agreements to ensure compliance, clarity, and proper terms, including IP rights, payment terms, and scope of work.",
+      "displayOrder": null,
+      "id": "0c1ddea9-29b3-4da4-962a-1a7a8416a38c",
+      "isSetupFormation": false,
+      "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "title": "Formation & Setup"
+    },
+    {
+      "description": "Regular agreement checks or updates for contributors over time, you can add it as a recurring service:",
+      "displayOrder": null,
+      "id": "cb4e89d8-9b44-4b44-a6be-53f6346144eb",
+      "isSetupFormation": false,
+      "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "title": "Recurring Services (Ongoing Services)"
+    },
+    {
+      "description": "Template for intellectual property rights in contributor agreements.",
+      "displayOrder": null,
+      "id": "7ca3e52c-84d1-4789-8a71-bdd04182a721",
+      "isSetupFormation": false,
+      "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "title": "IP Clause Template"
+    },
+    {
+      "description": "Standard language for outlining payment terms and compensation.",
+      "displayOrder": null,
+      "id": "3fa07d28-b980-4ec2-85b6-746bd451625e",
+      "isSetupFormation": false,
+      "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "title": "Payment Terms Template"
+    },
+    {
+      "description": "Template for non-compete clauses that might be added to contributor agreements.",
+      "displayOrder": null,
+      "id": "5b10532a-cca8-42b0-b3a0-8ad7f8e9cfd2",
+      "isSetupFormation": false,
+      "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+      "title": "Non-Compete Clause Template"
+    }
+  ],
+  "status": "DRAFT",
+  "summary": "",
+  "thumbnailUrl": null,
+  "tiers": [
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": null,
+      "description": "Monthly Subscription  999.99 USD",
+      "excludeFromSetupFee": false,
+      "id": "e0f6b29d-f872-4d31-8a58-74789cc99eda",
+      "isCustomPricing": true,
+      "mostPopular": false,
+      "name": "Essential",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "cb0c91c8-2c15-4718-964e-eb87de6ce730",
+          "level": "INCLUDED",
+          "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+          "serviceId": "0c1ddea9-29b3-4da4-962a-1a7a8416a38c"
+        },
+        {
+          "customValue": null,
+          "id": "49edf204-ada8-4b25-a0fe-eb0218cdfb21",
+          "level": "INCLUDED",
+          "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+          "serviceId": "cb4e89d8-9b44-4b44-a6be-53f6346144eb"
+        },
+        {
+          "customValue": null,
+          "id": "1f81bb8a-7886-4a4d-b13b-3833277ed953",
+          "level": "INCLUDED",
+          "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+          "serviceId": "7ca3e52c-84d1-4789-8a71-bdd04182a721"
+        },
+        {
+          "customValue": null,
+          "id": "b1042218-f1a7-4f88-92c8-7e3ba05cc1f0",
+          "level": "INCLUDED",
+          "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+          "serviceId": "3fa07d28-b980-4ec2-85b6-746bd451625e"
+        },
+        {
+          "customValue": null,
+          "id": "c019c563-5b66-4220-8812-253ec505502e",
+          "level": "INCLUDED",
+          "optionGroupId": "b9ad84e2-988f-4970-8a55-9580f4063b88",
+          "serviceId": "5b10532a-cca8-42b0-b3a0-8ad7f8e9cfd2"
+        }
+      ],
+      "usageLimits": []
+    }
+  ],
+  "title": "OH - Artic "
+}

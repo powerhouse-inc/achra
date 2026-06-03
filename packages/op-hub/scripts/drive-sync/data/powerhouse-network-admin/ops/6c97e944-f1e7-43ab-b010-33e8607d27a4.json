@@ -1,0 +1,140 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "6c97e944-f1e7-43ab-b010-33e8607d27a4",
+        "meta": {},
+        "model": "powerhouse/builders",
+        "name": "Builders",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:20:03.631Z",
+          "documentType": "powerhouse/builders",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "6c97e944-f1e7-43ab-b010-33e8607d27a4"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "7214f2d290cf9ecd4da44e85705b427c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:03.632Z"
+  },
+  {
+    "action": {
+      "input": {
+        "builderPhid": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "ADD_BUILDER"
+    },
+    "error": null,
+    "hash": "eYB466uK5zLGtwdv+OFFICwZTLI=",
+    "id": "59bf670f402f28afc860232700d002a0",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:28:03.994Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "6c97e944-f1e7-43ab-b010-33e8607d27a4",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "builders": []
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builders",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "425d1977db9ac23c83681b780ad7d543",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:03.632Z"
+  },
+  {
+    "action": {
+      "input": {
+        "builderPhid": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+      },
+      "scope": "global",
+      "type": "ADD_BUILDER"
+    },
+    "error": null,
+    "hash": "2T43Y9j/5RpljKiZdLHtCzrM0wc=",
+    "id": "3b9d4ac157838d72cd352b9766001a71",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:28:04.362Z"
+  },
+  {
+    "action": {
+      "input": {
+        "builderPhid": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07"
+      },
+      "scope": "global",
+      "type": "ADD_BUILDER"
+    },
+    "error": null,
+    "hash": "w83OpZ7jm7N7DL9NUL0Kgu68tfw=",
+    "id": "939242e27d1ba989b3f791ef3b5a4135",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:28:04.706Z"
+  },
+  {
+    "action": {
+      "input": {
+        "builderPhid": "d18b0d40-b1ba-44b0-898d-6fc74f5d5e23"
+      },
+      "scope": "global",
+      "type": "ADD_BUILDER"
+    },
+    "error": null,
+    "hash": "un2y0ooGiDpk4WwplesawU56Vi4=",
+    "id": "29e4173f7e94c0d95dd31d1a74855745",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:28:05.055Z"
+  },
+  {
+    "action": {
+      "input": {
+        "builderPhid": "68b53909-7f70-4add-9bca-0a3c38e40c76"
+      },
+      "scope": "global",
+      "type": "ADD_BUILDER"
+    },
+    "error": null,
+    "hash": "2bKErQF5eMZ7RldasgzyEK4nIxg=",
+    "id": "7f1d682ce923d94b6359e8dae90fef77",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:28:05.414Z"
+  }
+]

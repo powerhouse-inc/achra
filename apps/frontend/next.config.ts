@@ -11,6 +11,21 @@ const dirname =
   typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url))
 const monorepoRoot = path.join(dirname, '../../')
 
+// @powerhousedao/reactor statically imports its server transport (pg →
+// dns/fs/net/tls, worker pools → node:worker_threads) from its index, which
+// reactor-browser re-exports. That transport is dead code in the browser
+// (reactor-browser uses PGlite + a GraphQL client, never .withWorkerPool()),
+// but Turbopack still tries to bundle it for the client and fails on the Node
+// builtins. Stub them to an empty module for the `browser` condition only —
+// server bundles keep the real modules.
+const browserStub = './empty-module.cjs'
+const stubNodeBuiltinsInBrowser = Object.fromEntries(
+  ['dns', 'fs', 'net', 'tls', 'worker_threads'].flatMap((m) => [
+    [m, { browser: browserStub }],
+    [`node:${m}`, { browser: browserStub }],
+  ]),
+)
+
 const nextConfig: NextConfig = {
   typedRoutes: true,
   reactCompiler: true,
@@ -28,6 +43,7 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true,
   turbopack: {
     root: monorepoRoot,
+    resolveAlias: stubNodeBuiltinsInBrowser,
     rules: {
       '*.svg': {
         loaders: ['@svgr/webpack'],

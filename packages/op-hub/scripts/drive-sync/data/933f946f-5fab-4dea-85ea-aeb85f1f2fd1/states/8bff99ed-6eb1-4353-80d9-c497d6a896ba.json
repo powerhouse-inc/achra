@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "gldm",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/6Q89n5nS/golden-Mule-Icon.png",
+  "id": "3b84ea6c-6203-4a45-8278-cd9c357e3cf3",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:31.483Z",
+  "links": [],
+  "name": "TheGoldenMule",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "thegoldenmule",
+  "status": null
+}

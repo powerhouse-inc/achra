@@ -1,0 +1,54 @@
+{
+  "about": "<br/>\n\n**Teeps Team of Builders (TTOB)** is a dynamic team focused on expanding Powerhouse operations across Latin America. We bridge the gap between the global Powerhouse ecosystem and regional opportunities, bringing deep local expertise and operational excellence.\n\n#### What We Do\n\nTTOB specializes in scaling BAI operations into LATAM markets, combining business analysis, community building, and technical integration to drive adoption and operational efficiency.\n\n#### Key Areas of Responsibility\n\n##### Regional Operations & Expansion\n\nWe identify, evaluate, and execute expansion opportunities across Latin American markets, ensuring alignment with Powerhouse's global strategy and local regulatory requirements.\n\n##### Community Building & Engagement\n\nWe cultivate and maintain strong relationships with regional partners, contributors, and stakeholders, fostering a vibrant local ecosystem around Powerhouse tools and services.\n\n##### Localization & Integration\n\nWe adapt Powerhouse products and processes for LATAM markets, handling translations, cultural adaptations, and integrations with regional platforms and payment systems.\n\n##### Cross-Team Coordination\n\nActing as the LATAM liaison for the broader Powerhouse ecosystem, we ensure smooth communication and alignment between global and regional initiatives.\n\n#### How We Work\n\nTTOB operates with agility and cultural awareness. We combine structured project management with the flexibility needed to navigate diverse Latin American markets. Our approach emphasizes building trust, delivering value incrementally, and maintaining clear communication across time zones and languages.\n\n#### Our Goal\n\nOur goal is to make Powerhouse the leading transparency and operational platform in Latin America, driving adoption through localized solutions, strong partnerships, and exceptional operational support.",
+  "code": "TTOB",
+  "contributors": [
+    "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43",
+    "2a01f417-0c6d-4450-8db0-fce70fccfede",
+    "f77ec756-49d5-4ea5-9f57-8af0d6ea421a"
+  ],
+  "description": "Teeps Team of Builders helps scale BAI operations to LATAM",
+  "icon": "https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg",
+  "id": "1fb041f5-cee7-4877-a91b-4e59c82279f1",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:25:35.070Z",
+  "links": [
+    {
+      "id": "ttob-link-github",
+      "label": "Github",
+      "url": "https://github.com/powerhouse-inc"
+    },
+    {
+      "id": "ttob-link-discord",
+      "label": "Discord",
+      "url": "https://discord.com/invite/h7GKvqDyDP"
+    },
+    {
+      "id": "ttob-link-twitter",
+      "label": "Twitter",
+      "url": "https://x.com/powerhousedao"
+    },
+    {
+      "id": "ttob-link-website",
+      "label": "Website",
+      "url": "https://powerhouse.io"
+    }
+  ],
+  "name": "Teeps Team of Builders",
+  "operationalHubMember": {
+    "name": "Powerhouse Genesis",
+    "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+  },
+  "scopes": [
+    "SUP",
+    "ACC"
+  ],
+  "skills": [
+    "FULL_STACK_DEVELOPMENT",
+    "FRONTEND_DEVELOPMENT",
+    "DATA_ENGINEERING",
+    "TECHNICAL_WRITING",
+    "UI_UX_DESIGN"
+  ],
+  "slug": "teeps-team-of-builders",
+  "status": "ACTIVE"
+}

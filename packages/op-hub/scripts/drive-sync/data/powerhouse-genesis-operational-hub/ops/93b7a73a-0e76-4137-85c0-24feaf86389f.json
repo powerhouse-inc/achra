@@ -1,0 +1,342 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "93b7a73a-0e76-4137-85c0-24feaf86389f",
+        "meta": {},
+        "model": "powerhouse/snapshot-report",
+        "name": "June 2025 - Snapshot Report",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:47.063Z",
+          "documentType": "powerhouse/snapshot-report",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "93b7a73a-0e76-4137-85c0-24feaf86389f"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "83bf261ba338cd6b2883d196f97fc7b9",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:47.063Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountsDocumentId": "26bb6763-0f21-41e2-addc-be3474fa101e",
+        "endDate": "2025-08-19T23:59:59.999Z",
+        "startDate": "2025-07-07T00:00:00.000Z"
+      },
+      "scope": "global",
+      "type": "SET_REPORT_CONFIG"
+    },
+    "error": null,
+    "hash": "VtdffQ0RWwklA+rqSZ8ESi+zfFs=",
+    "id": "34cc14dacab48ff46dff022f44580b63",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "93b7a73a-0e76-4137-85c0-24feaf86389f",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "accountsDocumentId": null,
+            "endDate": null,
+            "ownerIds": [],
+            "reportName": null,
+            "reportPeriodEnd": null,
+            "reportPeriodStart": null,
+            "snapshotAccounts": [],
+            "startDate": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/snapshot-report",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "301c337e9f110283f47281931db05964",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:47.063Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountsDocumentId": "26bb6763-0f21-41e2-addc-be3474fa101e"
+      },
+      "scope": "global",
+      "type": "SET_ACCOUNTS_DOCUMENT"
+    },
+    "error": null,
+    "hash": "VtdffQ0RWwklA+rqSZ8ESi+zfFs=",
+    "id": "68cdae1263ed2b300c58897f8775389d",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "endDate": "2025-08-19T23:59:59.999Z",
+        "startDate": "2025-07-07T00:00:00.000Z"
+      },
+      "scope": "global",
+      "type": "SET_PERIOD"
+    },
+    "error": null,
+    "hash": "VtdffQ0RWwklA+rqSZ8ESi+zfFs=",
+    "id": "b644e80f99cd696d40094d92d3b1f7a9",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+        "accountId": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+        "accountName": "Powerhouse Genesis Operational Hub Reserves",
+        "accountTransactionsId": "407e202b-23a2-45bc-bbcb-699467a85ddc",
+        "id": "e93bb69a-5153-44cc-8d38-8c32c5353ce2",
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "UPAlM4ANMy3fUpIeRRuJtRlo3Og=",
+    "id": "d4d1d004995270bcdef99c6b2a4ff656",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+        "accountId": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+        "accountName": "Powerhouse Genesis Operational Hub",
+        "accountTransactionsId": "008c31a8-81e3-4c40-8b91-0eff3787ad43",
+        "id": "25f3e7d4-0190-486e-b95c-688aaddde59a",
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "AKtbQU+cRJx82A8V+VtOhdPrhyo=",
+    "id": "040dc3ed1d696fec14f22f7cf118837d",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+        "accountId": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+        "accountName": "SKY Launch Wallet",
+        "id": "d573df73-b99a-440f-a7e1-e13440300fd6",
+        "type": "Source"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "8Hqpt1LuKUEJReD9lKOAO6fFmoo=",
+    "id": "4b1293a63cbe79bcc462a95821678353",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+        "accountId": "4f707770-005c-4192-bd7c-f407e68af47d",
+        "accountName": "Request Finance 1",
+        "id": "3c4f3284-1467-4deb-b9fb-94d9bd9c5a25",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "d4nDdcHVhXPlkQLTlWjjI02DfKE=",
+    "id": "3e578b2e6dca3ba326cbe49184dedca0",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+        "accountId": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+        "accountName": "Request Finance 2",
+        "id": "6a877515-3915-4e93-a3ec-d45910a4a664",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "ezoxPqIj3FbYTz0wPIgfXH6BZtU=",
+    "id": "2fe2f8822b88391ffb17e0356e987138",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+        "accountId": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+        "accountName": "Request Finance 3",
+        "id": "c63caba9-ac17-484c-a605-2942eed1b54c",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "WPHgTqAtjsO47DRFal3CJNKA5Ns=",
+    "id": "887e489d0a0689c413f35dfd0ec156d5",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+        "accountId": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+        "accountName": "Request Finance 4",
+        "id": "2d42b356-6119-42bc-ae3f-41683acd2c70",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "+xFcVJiUP5I7CgskxBUA/zpPAvk=",
+    "id": "80458df88314c6efe604dffec7ce8d75",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+        "accountId": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+        "accountName": "Accountable",
+        "id": "1e0bf609-4a9c-470e-bb78-14625053f630",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "eeXGZqXIWKd3tORGsuDPepZ2vYo=",
+    "id": "db37f48fa7dba775412f4c6958f04fc6",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+        "accountId": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+        "accountName": "CoW Swap",
+        "id": "1db1cadc-5f53-4981-b367-94e0d7429489",
+        "type": "External"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "pMsD+qK6WBsrEsHh78FmHBLTzGc=",
+    "id": "c1ad5cb3a40704eb0d7cf954e4f59231",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+        "accountId": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+        "accountName": "Venly.io",
+        "id": "e2ff384c-d773-4e0d-a2a4-f4b922365849",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "a6+rt3+JapOjNbXmKu1JGR0Zm/8=",
+    "id": "c37578eb2b6dd9e50c953d605c1104d2",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:50.259Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "AVwvmTZKR3Et0SvtN3BI44DsiH8=",
+    "id": "d8af356ce5eec0dc3778f63e791668c4",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:45.220Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "okzXJQPtPqDJemOxFiIJ/43QBC8=",
+    "id": "6f557c01fd694bda1b34bed5948d0079",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:45.843Z"
+  }
+]

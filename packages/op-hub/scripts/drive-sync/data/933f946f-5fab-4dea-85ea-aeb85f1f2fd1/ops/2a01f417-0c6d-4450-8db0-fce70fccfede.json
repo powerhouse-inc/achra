@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "2a01f417-0c6d-4450-8db0-fce70fccfede",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "liberuum",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:15.390Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "2a01f417-0c6d-4450-8db0-fce70fccfede"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "f1c65108ccef080b12175e9a59a6b72c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:15.390Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "lib",
+        "icon": "https://pbs.twimg.com/profile_images/1578398330278871041/YfZgMhQW_400x400.jpg",
+        "id": "34de3edb-e37e-41b3-9c77-eea1522d854d",
+        "name": "liberuum",
+        "slug": "liberuum",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "fFWthle+40qr87cgECQYpCIjvp4=",
+    "id": "c01e4700ca4dfce379efa9aa348099ea",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:38.882Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "2a01f417-0c6d-4450-8db0-fce70fccfede",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "e13082b20ecc4a3450724b56029f0768",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:15.390Z"
+  }
+]

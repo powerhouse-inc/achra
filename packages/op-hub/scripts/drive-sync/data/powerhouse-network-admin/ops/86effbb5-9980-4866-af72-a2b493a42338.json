@@ -1,0 +1,110 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "86effbb5-9980-4866-af72-a2b493a42338",
+        "meta": {},
+        "model": "payment-terms",
+        "name": "Payment Terms-Powerhouse Workstream 2024",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:20:04.698Z",
+          "documentType": "payment-terms",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "86effbb5-9980-4866-af72-a2b493a42338"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "c660625043dc41ef2969113a9099d0d2",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:04.699Z"
+  },
+  {
+    "action": {
+      "input": {
+        "currency": "USD",
+        "payer": "",
+        "paymentModel": "MILESTONE",
+        "proposer": ""
+      },
+      "scope": "global",
+      "type": "SET_BASIC_TERMS"
+    },
+    "error": null,
+    "hash": "wSWRNvebFzvfpXCdEkQC32h9+/o=",
+    "id": "6b4f8341e6af23b13b67af8056786e7a",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:13.735Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "86effbb5-9980-4866-af72-a2b493a42338",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "bonusClauses": [],
+            "costAndMaterials": null,
+            "currency": "USD",
+            "escrowDetails": null,
+            "evaluation": null,
+            "milestoneSchedule": [],
+            "payer": "",
+            "paymentModel": "MILESTONE",
+            "penaltyClauses": [],
+            "proposer": "",
+            "retainerDetails": null,
+            "status": "DRAFT",
+            "totalAmount": null
+          },
+          "local": {}
+        },
+        "model": "payment-terms",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "2658e46847907e6119f046d3103d44de",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:04.699Z"
+  },
+  {
+    "action": {
+      "input": {
+        "status": "DRAFT"
+      },
+      "scope": "global",
+      "type": "UPDATE_STATUS"
+    },
+    "error": null,
+    "hash": "wSWRNvebFzvfpXCdEkQC32h9+/o=",
+    "id": "ac97351347c4380a6f34dfb9548f50c9",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:13.735Z"
+  }
+]

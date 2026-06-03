@@ -1,0 +1,444 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "68b53909-7f70-4add-9bca-0a3c38e40c76",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Teeps Team of Builders",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:14.254Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "68b53909-7f70-4add-9bca-0a3c38e40c76"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "14a8fcdf987467feeb7971fcc4656cce",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.254Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": "<br/>\n\n**Teeps Team of Builders (TTOB)** is a dynamic team focused on expanding Powerhouse operations across Latin America. We bridge the gap between the global Powerhouse ecosystem and regional opportunities, bringing deep local expertise and operational excellence.\n\n#### What We Do\n\nTTOB specializes in scaling BAI operations into LATAM markets, combining business analysis, community building, and technical integration to drive adoption and operational efficiency.\n\n#### Key Areas of Responsibility\n\n##### Regional Operations & Expansion\n\nWe identify, evaluate, and execute expansion opportunities across Latin American markets, ensuring alignment with Powerhouse's global strategy and local regulatory requirements.\n\n##### Community Building & Engagement\n\nWe cultivate and maintain strong relationships with regional partners, contributors, and stakeholders, fostering a vibrant local ecosystem around Powerhouse tools and services.\n\n##### Localization & Integration\n\nWe adapt Powerhouse products and processes for LATAM markets, handling translations, cultural adaptations, and integrations with regional platforms and payment systems.\n\n##### Cross-Team Coordination\n\nActing as the LATAM liaison for the broader Powerhouse ecosystem, we ensure smooth communication and alignment between global and regional initiatives.\n\n#### How We Work\n\nTTOB operates with agility and cultural awareness. We combine structured project management with the flexibility needed to navigate diverse Latin American markets. Our approach emphasizes building trust, delivering value incrementally, and maintaining clear communication across time zones and languages.\n\n#### Our Goal\n\nOur goal is to make Powerhouse the leading transparency and operational platform in Latin America, driving adoption through localized solutions, strong partnerships, and exceptional operational support.",
+        "code": "TTOB",
+        "description": "Teeps Team of Builders helps scale BAI operations to LATAM",
+        "icon": "https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg",
+        "id": "1fb041f5-cee7-4877-a91b-4e59c82279f1",
+        "name": "Teeps Team of Builders",
+        "slug": "teeps-team-of-builders",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "9TvJ3eM1KwaPH07A98pbQece6Lg=",
+    "id": "d0c9cd3f1e1922d3835ce2b5c8d9a2ab",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "68b53909-7f70-4add-9bca-0a3c38e40c76",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "391b7019c737cbac0e58cff0a905185c",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.254Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ttob-link-github",
+        "label": "Github",
+        "url": "https://github.com/powerhouse-inc"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "6cC5ZVA7xFi6szLRU8Mb9vsyiYg=",
+    "id": "a7313d66cfd7f9ec6fc1a99d608ae492",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ttob-link-discord",
+        "label": "Discord",
+        "url": "https://discord.com/invite/h7GKvqDyDP"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "S9M8I9lgqW2HmMx4luU2mwIx8K8=",
+    "id": "f14a7a76cebf8fdb20138ee7b31038b1",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ttob-link-twitter",
+        "label": "Twitter",
+        "url": "https://x.com/powerhousedao"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "2tlThKNIZdmUJaQVsKrsLxRf5ZI=",
+    "id": "95d4840114d436e3745fc096122af5df",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "ttob-link-website",
+        "label": "Website",
+        "url": "https://powerhouse.io"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "pOmHUZeJ2jAKO4TB4zwN+kcezMg=",
+    "id": "e33d1260c39bda3533ece86d60dc3838",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FULL_STACK_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "kr7z7frnVa9s8cPj/Votmro2seQ=",
+    "id": "6607e06ac5c56066736a6890448d0bcd",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FRONTEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "SeLtf9fRP45XlQOznfkKbGq7/KU=",
+    "id": "55c927e147f5a8a5ac2880f66da81620",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DATA_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "5W/OMes0LRUNz9k8ilTmM1eKFg0=",
+    "id": "67a2c348b2ad7cf72f4c1bf1c1cc1e48",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "TECHNICAL_WRITING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "38GQOE12SgRITBfLkr/m8tGz8I4=",
+    "id": "418ed512860478c2828ee3901ed82fc5",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "UI_UX_DESIGN"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "PK6GYSbvel6OzXAkUhPrHJGhl/Y=",
+    "id": "5037454059442059b9ce92e3b9345a44",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "SUP"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "FLLC04DmseHFaGKQNqsoxzBns5g=",
+    "id": "7108458ab58d7ab930d8559d589a1038",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "ACC"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "rCRs4lZtwI4oH72VrRrmpCD5hws=",
+    "id": "97cc19ad0765746ff232c62d450ef6a1",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e971b366-0fc1-4457-98df-1fc5738e0628"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "lBcQwI2YayD2wXVZkuwL12PqoBg=",
+    "id": "e99a6133c2bd80bd07b3655f8a284ee5",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "831c8c57-432c-4650-b0fc-1011b6894a91"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "LZx5eHzI50u/rObGqueWkfWLWng=",
+    "id": "74492af744d1256255fc7a5fe8bcf7f6",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "a8ad8819-9eee-483c-924d-a70dd28dce4d"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "KC3kLC1HaDuNYA2hEgHqqPR74R4=",
+    "id": "a0bcc1c636f04121da1cbf0128fae8bf",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "ab700de9-90dd-4219-9fff-5aaf94ca2bc9"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "FOaB/TI4z34mt2/42OhrKwPZlIE=",
+    "id": "48e04e5b7b14673726495a2911dfc00f",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:14.023Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e971b366-0fc1-4457-98df-1fc5738e0628"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "eU134/xqrt1Gq4C4JPXw2da6ThI=",
+    "id": "630742c88d3078898b614b9c86b71065",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:32.899Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "3YyBtKSmJceqPaqVHDuEVFEKC2M=",
+    "id": "f90aa3b8de73316be80974dc6073948c",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:33.281Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "831c8c57-432c-4650-b0fc-1011b6894a91"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "n2EyskEchTRQbitqCydF1v+IN+E=",
+    "id": "c425e7314bb8e050391e5026903535ba",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:33.656Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "2a01f417-0c6d-4450-8db0-fce70fccfede"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "YOHKhIKwzskJi3rjOxhitHPRtEA=",
+    "id": "7877e1dd47faacd6ae4c6d2744f06e2b",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:34.001Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "a8ad8819-9eee-483c-924d-a70dd28dce4d"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "ZiL/o2wmHjmLiqVwgnlWhf9pQUo=",
+    "id": "566f360f01946b864d89798055bf7539",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:34.348Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f77ec756-49d5-4ea5-9f57-8af0d6ea421a"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "aLa9WXq4E1wq+DiSHC/LGTQdIVc=",
+    "id": "c923807e277b860165e871ec3b0d2059",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:34.703Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "JNUkt9K19QJcE793RPU7P6Du0Wo=",
+    "id": "4a9ddbd0b4123f00ed857c5f62bc595b",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:35.070Z"
+  }
+]

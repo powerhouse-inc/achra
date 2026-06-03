@@ -1,0 +1,181 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type ResourceInstanceState {
+    resourceTemplateId: PHID
+    customerId: PHID
+    customerName: String
+    templateName: String
+    thumbnailUrl: URL
+    infoLink: URL
+    description: String
+    operatorProfile: OperatorProfile
+    status: InstanceStatus!
+    configuration: [InstanceFacet!]!
+    confirmedAt: DateTime
+    provisioningStartedAt: DateTime
+    provisioningCompletedAt: DateTime
+    provisioningFailureReason: String
+    activatedAt: DateTime
+    suspendedAt: DateTime
+    suspensionType: SuspensionType
+    suspensionReason: String
+    suspensionDetails: String
+    resumedAt: DateTime
+    terminatedAt: DateTime
+    terminationReason: String
+}
+
+type OperatorProfile {
+    id: PHID!
+    operatorName: String
+}
+
+enum InstanceStatus {
+    DRAFT
+    PROVISIONING
+    ACTIVE
+    SUSPENDED
+    TERMINATED
+}
+
+enum SuspensionType {
+    NON_PAYMENT
+    MAINTENANCE
+    OTHER
+}
+
+type InstanceFacet {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOption: String!
+}
+
+# Instance Management
+
+input InitializeInstanceInput {
+    operatorId: PHID!
+    operatorDocumentType: String!
+    resourceTemplateId: PHID
+    customerId: PHID
+    customerName: String
+    templateName: String
+    operatorName: String
+    thumbnailUrl: URL
+    infoLink: URL
+    description: String
+}
+
+input UpdateInstanceInfoInput {
+    name: String
+    thumbnailUrl: URL
+    infoLink: URL
+    description: String
+}
+
+input SetOperatorProfileInput {
+    operatorId: PHID!
+    operatorName: String
+}
+
+input UpdateInstanceStatusInput {
+    status: InstanceStatus!
+}
+
+input ConfirmInstanceInput {
+    confirmedAt: DateTime!
+}
+
+input ReportProvisioningStartedInput {
+    startedAt: DateTime!
+}
+
+input ReportProvisioningCompletedInput {
+    completedAt: DateTime!
+}
+
+input ReportProvisioningFailedInput {
+    failedAt: DateTime!
+    failureReason: String!
+}
+
+input ActivateInstanceInput {
+    activatedAt: DateTime!
+}
+
+input SuspendForNonPaymentInput {
+    suspendedAt: DateTime!
+    outstandingAmount: Amount_Money
+    daysPastDue: Int
+}
+
+input SuspendForMaintenanceInput {
+    suspendedAt: DateTime!
+    estimatedDuration: String
+    maintenanceType: String
+}
+
+input ResumeAfterPaymentInput {
+    resumedAt: DateTime!
+    paymentReference: String
+}
+
+input ResumeAfterMaintenanceInput {
+    resumedAt: DateTime!
+}
+
+input SuspendInstanceInput {
+    suspendedAt: DateTime!
+    reason: String
+}
+
+input TerminateInstanceInput {
+    terminatedAt: DateTime!
+    reason: String!
+}
+
+# Configuration Management
+
+input SetInstanceFacetInput {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOption: String!
+}
+
+input RemoveInstanceFacetInput {
+    categoryKey: String!
+}
+
+input UpdateInstanceFacetInput {
+    categoryKey: String!
+    selectedOption: String
+    categoryLabel: String
+}
+
+input ApplyConfigurationChangesInput {
+    appliedAt: DateTime!
+    changeDescription: String
+    addFacets: [SetInstanceFacetInput!]
+    updateFacets: [UpdateInstanceFacetInput!]
+    removeFacetKeys: [String!]
+}

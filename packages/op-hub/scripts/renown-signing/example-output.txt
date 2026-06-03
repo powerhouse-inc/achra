@@ -1,0 +1,11 @@
+→ drive id (uuid): ee281887-c466-49f8-9ff6-d27f95ca4529
+✓ createDocument: ee281887-c466-49f8-9ff6-d27f95ca4529 | slug: signed-drive-1780064632518
+✓ mutateDocument: ADD_FOLDER pushed
+
+========= READ-BACK =========
+op#0 CREATE_DOCUMENT → user.address=(none) app.key=did:key:zDnaen2YLkpSUCyTXMoaxnHCe1XzAG3oWjLXqwgJi2nGmgKiu #sigs=1
+op#0 ADD_FOLDER → user.address=0xadbA7C2F82139031D7564D18aC22D09B12A0BcA4 app.key=did:key:zDnaen2YLkpSUCyTXMoaxnHCe1XzAG3oWjLXqwgJi2nGmgKiu #sigs=1
+op#1 UPGRADE_DOCUMENT → user.address=(none) app.key=did:key:zDnaen2YLkpSUCyTXMoaxnHCe1XzAG3oWjLXqwgJi2nGmgKiu #sigs=1
+
+Expected wallet: 0xadbA7C2F82139031D7564D18aC22D09B12A0BcA4
+Drive id: ee281887-c466-49f8-9ff6-d27f95ca4529

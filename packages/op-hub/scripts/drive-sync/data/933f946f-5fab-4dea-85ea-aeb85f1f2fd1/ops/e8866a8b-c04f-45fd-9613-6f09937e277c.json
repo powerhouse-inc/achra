@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "e8866a8b-c04f-45fd-9613-6f09937e277c",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Memo",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:14.823Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "e8866a8b-c04f-45fd-9613-6f09937e277c"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "7bc3128914a7dc08ff50ff06c1d301ea",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:14.823Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "memo",
+        "icon": "https://i.postimg.cc/fT1SJFGL/memo-Icon.png",
+        "id": "a125807d-aab6-49ee-9d79-1b13334d6fc9",
+        "name": "Memo",
+        "slug": "memo",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "M22HMRB3XF8BWkWMPjMnod5aUb8=",
+    "id": "a0f4aed6ed10359e9d287d7788c221a8",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:37.022Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "e8866a8b-c04f-45fd-9613-6f09937e277c",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "c3dca908e7cccb3fc3396357bbd1d9d6",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:14.823Z"
+  }
+]

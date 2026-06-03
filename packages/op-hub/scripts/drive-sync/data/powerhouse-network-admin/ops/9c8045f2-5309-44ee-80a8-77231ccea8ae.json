@@ -1,0 +1,1521 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "9c8045f2-5309-44ee-80a8-77231ccea8ae",
+        "meta": {},
+        "model": "powerhouse/scopeofwork",
+        "name": "SOW-Powerhouse Workstream 2024",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:20:05.776Z",
+          "documentType": "powerhouse/scopeofwork",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "9c8045f2-5309-44ee-80a8-77231ccea8ae"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "142483745f604ad978f73908a9db75be",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:05.776Z"
+  },
+  {
+    "action": {
+      "input": {
+        "title": "Scope of Work Powerhouse 2024"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROJECT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"id\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "p3SDdHwpi7YyyCjXgYs0yg296ZM=",
+    "id": "da5e224a444e1711322fb4eed73b51f4",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "9c8045f2-5309-44ee-80a8-77231ccea8ae",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contributors": [],
+            "deliverables": [],
+            "description": "The Scope of Work model defines a structured plan for executing contributor work; on top of deliverables and roadmaps with milestones it now also includes projects as budget anchors for project based budgeting.",
+            "projects": [],
+            "roadmaps": [],
+            "status": "DRAFT",
+            "title": "Scope of Work"
+          },
+          "local": {}
+        },
+        "model": "powerhouse/scopeofwork",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "6d9a2d85e9b50ca69a191077cd544061",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:05.776Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "DOP2",
+        "description": " Switchboard API endpoints for integration partners with document model update events and document state queries.",
+        "id": "ba279199-a946-463d-b03e-b0b08042ffaa",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Integration (API endpoints and Queries)"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "7g4SJG6lhxxbJKQu7k9CIFSar2w=",
+    "id": "5b8cccaad593d2441c374b3cac1f297f",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "DOP3",
+        "description": "Separate incremental release of the Sky Ecosystem expenses platform with on-chain transactional data and budget breakdown views.",
+        "id": "59260f2b-a178-483a-85f0-c632cd4bfb17",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Expense dashboard increments (on-chain data, budget breakdowns)"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ruli+61YawQHySpa2MQ3CUxEPj8=",
+    "id": "eacce22589e2774693de77467c06013c",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "DOP1",
+        "description": "Technical integration demo showcasing for the first time the RWA Portfolio Editor in Connect and the data synchronization with Switchboard.",
+        "id": "542443cd-459e-47af-bc1c-04a8e5ae920c",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "First technical integration of RWA Portfolio (Connect & Switchboard)"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "+rJxwXz8E6g8BDu9mEGHwIf1lIw=",
+    "id": "ecaea94cc45e25ebf9f37eced33c37d6",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "MVP1",
+        "description": " \"MVP Release with Sky Ecosystem transparency reporting information that can be shared publicly. \n* RWA reporting flow (without e2e encryption & comparison views) \n* DAO finances (advanced stage) \n* DAO teams (at least core unit + ecosystem actor profiles) \n* DAO work (projects & roadmaps in early stage) \n* Endgame overview (latest updates & budget insights) \n* New homepage with at-glance insights on various DAO aspects - Finances, governance, Teams, and Work (reskin implemented).\"",
+        "id": "7a0c4c47-a084-4cc1-9e0e-b6eb287cdc17",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "MVP release of the Sky Ecosystem transparency reporting information."
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "XPTaeM2KMut1rUmyl+J1EIVDGHg=",
+    "id": "df752cd9248ab62b41501b634a9062f6",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "MVP2",
+        "description": " MVP Release with Sky Ecosystem transparency reporting information that can be shared publicly. \n* RWA reporting flow (without e2e encryption & comparison views) \n* DAO finances (advanced stage) \n* DAO teams (at least core unit + ecosystem actor profiles) \n* DAO work (projects & roadmaps in early stage) \n* Endgame overview (latest updates & budget insights) \n* New homepage with at-glance insights on various DAO aspects - Finances, governance, Teams, and Work (reskin implemented).",
+        "id": "e026924c-19df-415d-a549-7d1849fa5fd1",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Integrated Powerhouse Platform delivery including Renown"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "u2l/yS9G1GYHMBOiBBwrCnYQN5w=",
+    "id": "934690f97f7239f73eab1c23577571dc",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA1",
+        "description": "Account for all Sky Ecosystem on-chain data expenses.",
+        "id": "3d995400-80b1-44df-a6cb-16b5d6e19172",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "On-chain Data Reconciliation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "/OOBX9B+d+9CRAZLttJ0KfyECCk=",
+    "id": "b8da9012f6139ed06ebbc2356b9f09f5",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA2",
+        "description": "",
+        "id": "8e668089-8c5c-43ca-ac6a-7b9ad2c9b24c",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Delegates Transparency Reporting"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ZUvAd/3EQnLwOzmBAIpTQBrJpcA=",
+    "id": "1212f4a0585a19ebbfbe34ac2e72b2f7",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA3",
+        "description": "Purely financial view of SPFs with generalized financial categories applicable across all budget categories.",
+        "id": "43be05a3-9e54-489c-a0fd-9618a7cc9bd7",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "SPF Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "A/jRwpjgVCG6YnVGDzHZ24Cg0kE=",
+    "id": "1ecb7415d7a0839cf1b27d1c18f563e4",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA4",
+        "description": "Provide access to aggregated expense data in the level of detail: DAO-level finances.",
+        "id": "7bf3d270-583a-45a0-8213-593ef180cc76",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Aggregated view - DAO Level Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "zNNNAzYqWi8BNGZhFloVv0RidS0=",
+    "id": "62f72e49019a8717c5ff5f282507b094",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA5",
+        "description": "Transition expense reporting from the Budget Reporting tool to Connect Budget Editor (implementing Connect Document Model)",
+        "id": "865610e0-949a-499f-b31d-3290d722d414",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Transition from Budget Tool to Connect"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "F9F1QNmyeU4Ju7pVCjTZt12kpdE=",
+    "id": "20ab245d7a7e9e27318e26237f67cbaf",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA6",
+        "description": "Provide access to aggregated expense data at the top level at a glance on the dashboard homepage.",
+        "id": "f137160f-e405-4057-8ff0-618b49b917d4",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Aggregated View - Fusion Homepage overview"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "bbYrT7Kh868sbIGi5PJnH4g4E+Y=",
+    "id": "f4b82ca501963d2ed340b245b14efe94",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA7",
+        "description": " Provide access to aggregated expense data in the lower levels of detail: budget-level overview.",
+        "id": "b71fb90d-8c2f-4032-9cc2-1bc8aa8b1326",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Aggregated View - Budget Level Overview"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "xRI8iHtUHVh09z4aKeWpQVyMioc=",
+    "id": "6be0fcd304f5a0fd08811fe6e56e187e",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA8",
+        "description": "Small improvements to optimize the workflow of budget auditors.",
+        "id": "e20efea4-497a-4f1f-936a-b4fa5333777c",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Onboard All EAs to Expense Reporting Process "
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ncsl/coeIFiOyN4u1WH7FZmAk/c=",
+    "id": "251e7f17fc52cbf8be91c8eec1bf0bb9",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA9",
+        "description": "An overview of the major conceptual and budget changes to Sky Ecosystem as it relates to the Endgame plan.",
+        "id": "ad4e5147-cdab-4d07-a502-7ef94e527f8b",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Sky Ecosystem Endgame Transition Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ccDNhifhp1qlgn2iH6T4/XgCsu4=",
+    "id": "2d205d0a56389adcc0457cb38a7aa264",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PEA10",
+        "description": "An advanced replacement for MIP40, providing enhanced transparency and flexibility in budget management for Contributor Teams. ",
+        "id": "33807bfc-d6f6-4665-acc3-c44072af0246",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Generalized Budget Planning Model"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "hX/lumkIU38sfqqho0hXcSCgOYY=",
+    "id": "cff1e4c9fe6f784abc4b9ac1b93b0d1e",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "ATLAS1",
+        "description": "Analysis of the Atlas Axis Notion database setup and identifying how we can pull the data from it, serving as input to creation of document model + viewer.",
+        "id": "03a43484-d9af-4023-a5f2-e7a31f46360e",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Notion Atlas integration analysis"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "l5hRT/3REXpkG9XNcSbP2rQpTQg=",
+    "id": "0ca95bc7d4cbf0d183def141ef869a16",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": " ATLAS2",
+        "description": "Creation of Notion export + viewer to replicate the structure of Notion DB.",
+        "id": "26a231b1-bd5e-45e8-ae3c-b721fa7bbb35",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Atlas document model creation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "prCrFz16GDuKj2eiiE+VfVJHZ98=",
+    "id": "0befd94058174e4b3768685dbef4173b",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "ATLAS3",
+        "description": " Gap analysis & future roadmap plan covering 2024 year end + 2025. ",
+        "id": "c5289661-2497-4dff-b734-0f0fb518d693",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Atlas - Powerhouse integrated roadmap planning"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "WIdf2mL0VcbEcODELKV+KFdAC/o=",
+    "id": "39b7a3cabc83aa148d89665274ad6b92",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC01",
+        "description": "Forum post to Sky Ecosystem community on evolution & spinoff of Powerhouse. It will feature three updates (PH vision & product updates, RWA+ Atlas+grants features)",
+        "id": "bc27e448-d4c6-4a92-8fd4-7e55cb4752ad",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "MVP comms support"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "RVrBQr/GnnFspKJEw1qTBEJDO5A=",
+    "id": "e7e873eac239fb64624cd982a2536773",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC02",
+        "description": " Deliver Powerhouse website content (incl. feedback and review)",
+        "id": "a535678b-a27d-4a86-8180-9561ecd0aeb0",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "New website content"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "C/xfOssUkaxrnDMDST2b20bKk9E=",
+    "id": "418d58718746eaebff57e827eb654e10",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": " PRC03",
+        "description": " Standalone Powerhouse website to coincide with Demo 3 and Powerhouse official announcement that it\u2019s spinning out of Sky Ecosystem, based on website content",
+        "id": "7a3d3bb0-63b7-4aa5-9429-49f9e70e68bc",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "New website delivery"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ZgoIAQKGxy0sN5a8ktvL7swzIow=",
+    "id": "f6717287e43b0f2a0ea39467de9b7041",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC04",
+        "description": "Establish Powerhouse X presence with ~4 tweets a week",
+        "id": "828d60a4-ba62-47df-81ac-6a9215c65a9d",
+        "owner": "68f67fe0-32d3-465e-873d-bfa2706ad369",
+        "status": "IN_PROGRESS",
+        "title": "Social Media activation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ssJGjAk5TajSg4zvZf3DHLkL4Rg=",
+    "id": "522603595a644e833007e802a84da888",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC05",
+        "description": "Series of blog posts explaining Powerhouse and our view on the world",
+        "id": "285879a2-5b3e-409f-bd43-74da0bd10e75",
+        "owner": "68f67fe0-32d3-465e-873d-bfa2706ad369",
+        "status": "IN_PROGRESS",
+        "title": "Blog Posts"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "gdYtWk/55BmduKuYjVEqbGtVxLg=",
+    "id": "982b77a53ffcfc53786e043876a3bb66",
+    "index": 23,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC06",
+        "description": "personalized team swag for the Berlin offsite",
+        "id": "85479b52-191e-48e5-a671-f31a77ec4151",
+        "owner": "68f67fe0-32d3-465e-873d-bfa2706ad369",
+        "status": "DELIVERED",
+        "title": "Team swag"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "YwL8AANCBdPtk08DLv4WcrIxEIU=",
+    "id": "26188c6c1deb5c34d184ae0e5c2caf11",
+    "index": 24,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRC07",
+        "description": "Podcast documenting the challenges and the rise of Powerhouse",
+        "id": "5193f760-1e2b-4466-ac52-610a320caf00",
+        "owner": "68f67fe0-32d3-465e-873d-bfa2706ad369",
+        "status": "IN_PROGRESS",
+        "title": "Podcast"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "oUfVgKTW1lbYxB8s8ZkKaugAvbk=",
+    "id": "b8455f2003ac6bfe04b7dba7f7f93fc2",
+    "index": 25,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PLS01",
+        "description": "Requirements of a minimally viable legal infrastructure for Powerhouse documented ",
+        "id": "31d012d4-e16a-4da4-b6f2-88b2581de785",
+        "owner": "9fa2c3c5-f720-4db8-b687-37c394a76fa1",
+        "status": "DELIVERED",
+        "title": "Minimal legal & ops setup documentation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "6pyubQaAmEoXZkpKMp7/lH11jfk=",
+    "id": "803e7c9ccad244229ae383e3a06ff27e",
+    "index": 26,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PLS02",
+        "description": "Contractual and Legal Entity Specs are defined for Powerhouse operational entity.",
+        "id": "119e5c91-1cd3-46a3-8fa3-071b73fc039b",
+        "owner": "9fa2c3c5-f720-4db8-b687-37c394a76fa1",
+        "status": "DELIVERED",
+        "title": "Contractual and Legal Entity Specs"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "9qjfZ8X8i4cqWMvZLHie4f5hwbo=",
+    "id": "cfda38d370c041e8deb1bb32898757bc",
+    "index": 27,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PLS03",
+        "description": "Consultancy on entity type and jurisdiction, documenting trade-offs. ",
+        "id": "9c75df75-1a66-4f0d-8a8d-6a59bddf6b56",
+        "owner": "9fa2c3c5-f720-4db8-b687-37c394a76fa1",
+        "status": "DELIVERED",
+        "title": "Jurisdiction and Entity type defined"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "HM+zkYfWjgWha4WWbA4CF+9VCpA=",
+    "id": "011687d86ee53389df85cec2139849a0",
+    "index": 28,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PLS04",
+        "description": "Design and Execute Multisig Operational Agreement. V1 of MPA for operational multisig wallet for Powerhouse.",
+        "id": "efd2b20f-2234-4f79-94b3-6b616f7ce025",
+        "owner": "9fa2c3c5-f720-4db8-b687-37c394a76fa1",
+        "status": "DELIVERED",
+        "title": "Multisig Participation Agreement"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "lyRFvKC2gW8jRkySh/E24dRA6D4=",
+    "id": "d0897ba5f3fa16825b62c55f1c5bb298",
+    "index": 29,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PLS05",
+        "description": "Incorporate operational vehicle",
+        "id": "45aabac8-b9db-4498-a234-1939b65a7948",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "IN_PROGRESS",
+        "title": "Operational Hub Entity incorporation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "f8NzeQrbqaRm+nwUVD1lnltCclI=",
+    "id": "a655db3b28bff6f7f3017312fecc3ef4",
+    "index": 30,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC01",
+        "description": " Post demo 1 refactoring work on Connect, Switchboard & core architecture.",
+        "id": "c826b5bd-cbb7-451f-8396-8ce3b99a00e8",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Post demo 1 refactor"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "wUx5zn9ZJeJl+R4TRR4VsBGkR48=",
+    "id": "964dc83a347b15a2449186ad5e82e92b",
+    "index": 31,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC02",
+        "description": "Integrate Renown prototype with basic authentication & authorisation flow",
+        "id": "c26b7149-f244-44ee-b56d-3c2824453197",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Renown Authentication Flow"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "OfXJ/EWcxm9KYM5kS6DONC0ty1g=",
+    "id": "62062f922575b91f4ac840045a31a783",
+    "index": 32,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC03",
+        "description": "Implement basic conflict resolution using autorebase mechanism",
+        "id": "13265ab5-1e9c-4bbe-b902-45ec676f04f1",
+        "owner": "a79381c3-9dc1-4edc-a552-ae5b577cdbde",
+        "status": "DELIVERED",
+        "title": "Basic conflict resolution"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "wqzi2UZVnJL4EEZBdkfVrBpANlE=",
+    "id": "3eee0bc19f75e5fdc0c0e5e45102bf52",
+    "index": 33,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC04",
+        "description": "Tech work needed to build the necessary functionality for the finished extended RWA portfolio reporting prototype.",
+        "id": "dccbac77-d999-4e33-a4a1-020a73133019",
+        "owner": "8b2d60c1-0ef3-40f7-b8e4-d13d7d57b09d",
+        "status": "DELIVERED",
+        "title": "Demo 2 RWA Connect Delivery"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "gIEzbtJCtYaEadSZbBfgXASf5nE=",
+    "id": "3fbb38b9f8c7f60851d67fe75cf37b49",
+    "index": 34,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC05",
+        "description": "Document model upgradability (and getting rid of initial state)",
+        "id": "389b4e3a-4f45-450a-997b-a27882a25172",
+        "owner": "8b2d60c1-0ef3-40f7-b8e4-d13d7d57b09d",
+        "status": "IN_PROGRESS",
+        "title": "Document model upgradability"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "ElHYzCZ3lbP/Tpj1ilMQVo91HDQ=",
+    "id": "82ec456ab3ef9bc1e83a1efc567dfb6b",
+    "index": 35,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC07",
+        "description": "Select and implement a template engine to create document model viewers",
+        "id": "7202ee0f-418e-46a7-9ff6-989fd2d8a386",
+        "owner": "8b2d60c1-0ef3-40f7-b8e4-d13d7d57b09d",
+        "status": "IN_PROGRESS",
+        "title": "Template Engine Implementation"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "8i8thJuDTtwovtdgM3w0OiHef8M=",
+    "id": "a0aab5e6d4aeb49b911bd69a9d2d6ac8",
+    "index": 36,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC08",
+        "description": "Deeplinking Support for Connect Web (desktop nice to have)",
+        "id": "e3a655bd-7a45-444c-941e-0fa2479bb2d5",
+        "owner": "8b2d60c1-0ef3-40f7-b8e4-d13d7d57b09d",
+        "status": "DELIVERED",
+        "title": "Deeplinking support"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "JxwGc67YK9CGYmm4sgBgbHTjYoY=",
+    "id": "97d0c7fe6fca9bc456b9114cb28f30ca",
+    "index": 37,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC09",
+        "description": "Switchboard MVP development (includes architecture, transmitter, caching work) ",
+        "id": "82f1e813-9edb-432a-8b07-bc68b7e21512",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "DELIVERED",
+        "title": "Switchboard MVP development"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "EsKdF0cWhvHkDoSbHvjXvb9Qw6A=",
+    "id": "dc3258380b09a7b764f286c4ac5af652",
+    "index": 38,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "POC10",
+        "description": "Reveal Fusion decentralized operations platform as a revamped expenses dashboard, where Fusion features use the new Switchboard instance as backend.",
+        "id": "29965c36-cc9e-4023-886f-7c1a7b93e24f",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "DELIVERED",
+        "title": "Fusion & Switchboard demo"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "bTsjX2ow1S8EhOA7SZkpM6iHFKg=",
+    "id": "f48982f1267636acb34271681d54bb52",
+    "index": 39,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": " DES-GLO",
+        "description": "All the global Achra pages are wireframed, designed, reviewed, and approved by the RGH team. \n\nThe global pages are the ones that are not displayed in the context of a specific network. For example: the global list of workstreams as opposed to the workstreams belonging to a particular network.\n\n* Achra landing page (achra.com)\n* Achra use cases overview (achra.com/use-cases)\n* Achra use cases details (achra.com/use-cases/{use-case-slug})\n* Workstreams overview (achra.com/workstreams)\n* Services overview (achra.com/services)\n* Services details (achra.com/services/{service-slug})",
+        "id": "7500bed3-9d56-46b9-8045-d152cfa0b018",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "Design Global Pages"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "dEA8nML2/a66KXs0h97JM6DzxTY=",
+    "id": "41a30bfad5e1bc1f7c9ca3a92d3aae49",
+    "index": 40,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "The Network Builders and Governance pages on Achra are wireframed, designed, reviewed, and approved by the RGH team. \n\nThe Network Builders page is the list of Builders specific to a given network. Similarly, the Governance page shows Governance information for a specific Network. \n\n* Achra Network Builders page (achra.com/network/{network-slug}/builders)\n* Achra Network Governance page (achra.com/network/{network-slug}/governance)",
+        "id": "68c3e332-c00d-4c2d-909b-1aa0c8e90a55",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "Design NW Buiders/Governance"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "VFyQtALboPVx/aM8Zp3TtInn8PA=",
+    "id": "30becb1956318e24d42e4bfe95149195",
+    "index": 41,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "DES-NW-WS",
+        "description": "The Network Workstream pages on Achra are wireframed, designed, reviewed, and approved by the RGH team. \n\nThe Network Workstream pages show an overview, as well as the specifics, for Workstreams within a given Network. This includes the roadmaps, milestones, deliverables and key results for a given Workstream.\n\n* Achra Network Workstreams page (achra.com/network/{network-slug}/contribute)\n* Achra Network Roadmaps page (achra.com/network/{network-slug}/roadmap\n* Achra Network Roadmap page (achra.com/network/{network-slug}/roadmap/{roadmap-slug}",
+        "id": "992ddb00-cef5-46f6-abd9-7181ca021c26",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "Design NW Workstreams"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "kOWrn9LnPnGGNPG1gR28N5iwwPc=",
+    "id": "1dc8b047af4ef210d694b4e8b304fbf3",
+    "index": 42,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "DES-NW-FIN",
+        "description": "The Network Finances pages on Achra are wireframed, designed, reviewed, and approved by the RGH team. \n\nThese pages show an overview, as well as specific details, of finances within a given network. This includes the Network Finance Home page, the Builder's Finance page, the Builder's Account Snapshot, and the Expense Report.\n\n* Achra Network Finance page (achra.com/network/{network-slug}/finances)\n* Achra Network Builder Finances page (achra.com/network/{network-slug}/builders/{builder-slug}/finances)\n* Achra Network Builder Finances Expense Report page (achra.com/network/{network-slug}/builders/{builder-slug}/finances/expense-report\n* * Achra Network Builder Finances Account Snapshot page (achra.com/network/{network-slug}/builders/{builder-slug}/finances/account-snapshot",
+        "id": "a29525bc-39c3-4216-ab6e-569019129cb4",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "Design NW Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "Rob57Mrs3LqIaoIiWWmblrtxeZw=",
+    "id": "372cd151954e9e0a9cd2a27a2ec82a79",
+    "index": 43,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "FE-GLO",
+        "description": "All the global Achra pages are accessible in the development environment and approved by the RGH team. \n\nThe global pages are the ones that are not displayed in the context of a specific network. For example: the global list of workstreams as opposed to the workstreams belonging to a particular network.\n\n* Achra landing page (dev.achra.com)\n* Achra use cases overview (dev.achra.com/use-cases)\n* Achra use cases details (dev.achra.com/use-cases/{use-case-slug})\n* Workstreams overview (dev.achra.com/workstreams)\n* Services overview (dev.achra.com/services)\n* Services details (dev.achra.com/services/{service-slug})",
+        "id": "589dcafd-ddde-4166-a037-a09f7bb1b0f2",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "FE Dev Global"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "WV/U8GEGBz2terOTMqUEotPdZBE=",
+    "id": "6617b6f7c647d7bfa0a97488c2ff84e8",
+    "index": 44,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "FE-NW-BLD",
+        "description": "Frontend implementation of Builders & Governance modules.",
+        "id": "429cdbc8-961c-47af-b602-0776804adf8c",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "FE Dev NW Builders/Governance"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "UcF1RK9asE6WZwyFF9mwmw0WhSE=",
+    "id": "afc73d23e85ae0c84177f80ec667f9a8",
+    "index": 45,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "FE-NW-WS",
+        "description": "Front-end interface for Network Workstream has been implemented.",
+        "id": "fcf4830a-0641-4793-b350-5021e96e3170",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "FE Dev NW Workstreams"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "U+JuBRLVrOSFQUx//q3M/6uGOTU=",
+    "id": "8b98fbb210ee555c5f09f2a7df3930d9",
+    "index": 46,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "FE-NW-FIN",
+        "description": "Frontend for Network Finances page is functional.",
+        "id": "f8e14974-7cbd-441b-95fc-0e647f4d1364",
+        "owner": "c49f86fa-7a65-4a8a-aeab-db77bd546f90",
+        "status": "IN_PROGRESS",
+        "title": "FE Dev NW Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "4tKY5VrhIW4lFG62zgswj36Myvw=",
+    "id": "7fc5b0cd984b544533a43679e8208b79",
+    "index": 47,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "f94f23da-7647-474b-9517-26c76f6ab7e7",
+        "status": "IN_PROGRESS",
+        "title": "BE Dev Global"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "Zd3U6Mkc/fpEMPDyvGkB2Eiq7Ao=",
+    "id": "165b8ab03be7de6e21218ff73c8204a3",
+    "index": 48,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "e3ef49df-a4b0-4cb3-91b6-d7f358a080ae",
+        "status": "IN_PROGRESS",
+        "title": "BE Dev NW Builders/Governance"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "2SR10+cXlKZfwUkv75zzNTKi+68=",
+    "id": "41bbc391a12c931fc03ebf075bc2e9fa",
+    "index": 49,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "fa0e9c93-844c-414d-bdf2-9b853977c7b7",
+        "status": "IN_PROGRESS",
+        "title": "BE Dev NW Workstreams"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "2E9pKCl2TvoVN/iGIyuAUILRS2w=",
+    "id": "cac9db22ac9bcce3a44077ec25e5a151",
+    "index": 50,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "f5ce3c58-aa00-4075-bfbd-b21cd5ed604d",
+        "status": "IN_PROGRESS",
+        "title": "BE Dev NW Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "dmd/QubjO2Pjue+w/T1tDxLdt98=",
+    "id": "db97dd76a589810a52dc68a45993877f",
+    "index": 51,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "320ada67-5c96-41ca-8669-085e6ea110f2",
+        "status": "IN_PROGRESS",
+        "title": "QA Global"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "9g2tQYD3FvNyVid/SGwU7U37fxY=",
+    "id": "5dd5043e41ae22a9940e5a964d3cf73b",
+    "index": 52,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "aff047eb-e816-4b91-bbf3-ab6e5f94998e",
+        "status": "IN_PROGRESS",
+        "title": "QA NW Builders/Governance"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "LsjHvMkO+aX8ZBY7KCAlJrDnz9s=",
+    "id": "b8aa3906de48abd0de1ecd33c68d0c9f",
+    "index": 53,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "cb258ba1-219d-4373-86e3-c324e1e98734",
+        "status": "IN_PROGRESS",
+        "title": "QA NW Workstreams"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "8QG/2JhRblWpMCHtBicjWQELxHE=",
+    "id": "c10bd9f4670b151ddbce8b2cf4e2b0b2",
+    "index": 54,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "2cf32bbb-9910-45b2-bade-6067a5c6faa8",
+        "status": "IN_PROGRESS",
+        "title": "QA NW Finances"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "EJ0xomc1Aixxa/z7rO6WAg57JMM=",
+    "id": "762779d08df563899df55519f0e6d726",
+    "index": 55,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "5a6d4d83-8471-472c-9c73-717ad10edf43",
+        "status": "IN_PROGRESS",
+        "title": "Staging UAT FE"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "Q9lE1Tfd/YdrmzuUXfoIz18Gklk=",
+    "id": "37431a963863801f91bd0f3ee4b766ed",
+    "index": 56,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "149fca7c-29fa-4b28-aa02-99d2387df056",
+        "status": "IN_PROGRESS",
+        "title": "Staging UAT BE"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "35DQwNxv89GzzLVRM1w0cgRbijY=",
+    "id": "b3166a619a27aa6093769976a5f35123",
+    "index": 57,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "",
+        "description": "",
+        "id": "4e9694c4-8d65-4c2d-b9dc-7f5f6af2ffe5",
+        "status": "IN_PROGRESS",
+        "title": "Production Release"
+      },
+      "scope": "global",
+      "type": "ADD_DELIVERABLE"
+    },
+    "error": null,
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "5c9e88bb7bfe07e8cf953efe01b57ecb",
+    "index": 58,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "6902a216-fbfd-4c73-8ab3-199a3a4870f6",
+        "title": "Protocol Expense Accounting"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "f886795207d8a3f09c62241a2b481e8e",
+    "index": 59,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "fb263253-65f3-42a7-9498-8535da0dcb46",
+        "title": "RWA Portfolio Reporting"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "81849199ea2ed9bd71963754ecff048c",
+    "index": 60,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e3cb3064-7294-42a0-aa83-85fc9023d4aa",
+        "title": "Powerhouse Products POC"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "f9169f3b93a35ec903ebe4a4f41066b4",
+    "index": 61,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "38750a5a-8a7e-49d1-9276-167087935ff0",
+        "title": "Atlas Rulebook Prototype"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "b6a136d6bc576a9355cb686017cd2fb7",
+    "index": 62,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "b279bf37-1524-49b3-b365-21aa5f0e7584",
+        "title": "Powerhouse Release Comms"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "236f3e029a564fcd8237f20c83fb7c2c",
+    "index": 63,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "a2233aeb-0d27-4357-82c3-9295e7f9247f",
+        "title": "Powerhouse Legal Structuring"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "9aebd8a41429fae8a4ba3fc99bc8486c",
+    "index": 64,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "94dcefec-6bb5-48bf-b977-710d10abf474",
+        "title": "Achra MVP BAI Work"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "9c9920c4d24ab29c5e5b4426ced33cca",
+    "index": 65,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "cce55412-9084-4130-91d0-f41072eb067b",
+        "title": "Achra MVP dSpot Work"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "8a55484e5e4a53216dbaf6bc7ac1473b",
+    "index": 66,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "fbda60d3-58ed-4776-8ade-d505516c97c2",
+        "title": "Achra MVP RGH Work"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "d912c08b612f249d907ac5247f11ccd5",
+    "index": 67,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "3950e0df-c736-4464-a631-914c707cb1a4",
+        "title": "Achra MVP Sky Teams Work"
+      },
+      "scope": "global",
+      "type": "ADD_KEY_RESULT"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"deliverableId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "yC37E91gcqRg3u6Dvh1L48lSWtk=",
+    "id": "4db403f021d918912c5e8d2eecc924e7",
+    "index": 68,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "",
+        "id": "1ede83d7-ba5a-479f-8cf0-a004af7da134",
+        "slug": "powerhouse-team-2024-roadmap-af7da134",
+        "title": "Powerhouse Team 2024 Roadmap"
+      },
+      "scope": "global",
+      "type": "ADD_ROADMAP"
+    },
+    "error": null,
+    "hash": "1jzw2dNV+6AhoyD0ik43zui30JM=",
+    "id": "a788a72981ac4f80608cf2b84230a400",
+    "index": 69,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "Make Achra the official transparency reporting platform for Powerhouse, SKY, and its Prime Agents as required by the Atlas. The expectation is from launch day onwards, all the network administration teams, the project/product managers, the builders and the finance operators are using Achra and the associated Connect apps on a daily basis to keep track of work and finances. ",
+        "id": "bba656ca-ae26-4e81-a389-269cbf0a9871",
+        "slug": "achra-mvp-roadmap-bf0a9871",
+        "title": "Achra MVP Roadmap"
+      },
+      "scope": "global",
+      "type": "ADD_ROADMAP"
+    },
+    "error": null,
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "ee868009f4e64ab19caa6079bf115834",
+    "index": 70,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "885b6917-fe03-4763-94e7-94570b993f3c"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "12e9f732253ebca028dab88d4eeb84ce",
+    "index": 71,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "10adc74e-30ce-4f75-8380-efda45197524"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "4e2c57debeb9ccec379f3b383f1b0c7e",
+    "index": 72,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "98d0b6cf-7d01-4d8f-ba40-f5fa842d5669"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "c7ce56d7b25b093c955f33f3543720a4",
+    "index": 73,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "28681d88-88b4-4b9e-bc90-aa9325f30b04"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "67e919a61f9616c87850c1707cb0a2fb",
+    "index": 74,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "e20bafa0-956a-4c14-a54d-596ff26bb640"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "c4642258b1098c2eeacdc86a68905efa",
+    "index": 75,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "b0d857d6-2783-4022-998c-db97e318fd2c"
+      },
+      "scope": "global",
+      "type": "ADD_COORDINATOR"
+    },
+    "error": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"milestoneId\"\n    ],\n    \"message\": \"Invalid input\"\n  }\n]",
+    "hash": "R47d4/jp25ZmxVQ+9iK3KyL83aU=",
+    "id": "2fc6684cc5fb3e471b7d931b88680c80",
+    "index": 76,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:19.638Z"
+  }
+]

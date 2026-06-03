@@ -1,0 +1,245 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+enum PaymentTermsStatus {
+  DRAFT
+  SUBMITTED
+  ACCEPTED
+  CANCELLED
+}
+
+enum PaymentCurrency {
+  USD
+  EUR
+  GBP
+}
+
+enum PaymentModel {
+  MILESTONE
+  COST_AND_MATERIALS
+  RETAINER
+}
+
+enum MilestonePayoutStatus {
+  PENDING
+  READY_FOR_REVIEW
+  APPROVED
+  PAID
+  REJECTED
+}
+
+enum BillingFrequency {
+  WEEKLY
+  BIWEEKLY
+  MONTHLY
+}
+
+enum EvaluationFrequency {
+  WEEKLY
+  MONTHLY
+  PER_MILESTONE
+}
+
+type Milestone {
+  id: OID!
+  name: String!
+  amount: Amount!
+  expectedCompletionDate: Date
+  requiresApproval: Boolean!
+  payoutStatus: MilestonePayoutStatus!
+}
+
+type CostAndMaterials {
+  hourlyRate: Amount
+  variableCap: Amount
+  billingFrequency: BillingFrequency!
+  timesheetRequired: Boolean!
+}
+
+type Retainer {
+  retainerAmount: Amount!
+  billingFrequency: BillingFrequency!
+  startDate: Date!
+  endDate: Date
+  autoRenew: Boolean!
+  servicesIncluded: String!
+}
+
+type Escrow {
+  amountHeld: Amount!
+  proofOfFundsDocumentId: String
+  releaseConditions: String!
+  escrowProvider: String
+}
+
+type EvaluationTerms {
+  evaluationFrequency: EvaluationFrequency!
+  evaluatorTeam: String!
+  criteria: [String!]!
+  impactsPayout: Boolean!
+  impactsReputation: Boolean!
+  commentsVisibleToClient: Boolean!
+}
+
+type BonusClause {
+  id: OID!
+  condition: String!
+  bonusAmount: Amount!
+  comment: String
+}
+
+type PenaltyClause {
+  id: OID!
+  condition: String!
+  deductionAmount: Amount!
+  comment: String
+}
+
+type PaymentTermsState {
+  status: PaymentTermsStatus!
+  proposer: String!
+  payer: String!
+  currency: PaymentCurrency!
+  paymentModel: PaymentModel!
+  totalAmount: Amount
+  milestoneSchedule: [Milestone!]!
+  costAndMaterials: CostAndMaterials
+  retainerDetails: Retainer
+  escrowDetails: Escrow
+  evaluation: EvaluationTerms
+  bonusClauses: [BonusClause!]!
+  penaltyClauses: [PenaltyClause!]!
+}
+
+# terms
+
+input SetBasicTermsInput {
+  proposer: String!
+  payer: String!
+  currency: PaymentCurrency!
+  paymentModel: PaymentModel!
+  totalAmount: Amount
+}
+
+input UpdateStatusInput {
+  status: PaymentTermsStatus!
+}
+
+input SetCostAndMaterialsInput {
+  hourlyRate: Amount
+  variableCap: Amount
+  billingFrequency: BillingFrequency!
+  timesheetRequired: Boolean!
+}
+
+input SetEscrowDetailsInput {
+  amountHeld: Amount!
+  proofOfFundsDocumentId: String
+  releaseConditions: String!
+  escrowProvider: String
+}
+
+input SetEvaluationTermsInput {
+  evaluationFrequency: EvaluationFrequency!
+  evaluatorTeam: String!
+  criteria: [String!]!
+  impactsPayout: Boolean!
+  impactsReputation: Boolean!
+  commentsVisibleToClient: Boolean!
+}
+
+input SetRetainerDetailsInput {
+  retainerAmount: Amount!
+  billingFrequency: BillingFrequency!
+  startDate: Date!
+  endDate: Date
+  autoRenew: Boolean!
+  servicesIncluded: String!
+}
+
+# milestones
+
+input AddMilestoneInput {
+  id: OID!
+  name: String!
+  amount: Amount!
+  expectedCompletionDate: Date
+  requiresApproval: Boolean!
+}
+
+input UpdateMilestoneInput {
+  id: OID!
+  name: String
+  amount: Amount
+  expectedCompletionDate: Date
+  requiresApproval: Boolean
+}
+
+input UpdateMilestoneStatusInput {
+  id: OID!
+  payoutStatus: MilestonePayoutStatus!
+}
+
+input DeleteMilestoneInput {
+  id: OID!
+}
+
+input ReorderMilestonesInput {
+  order: [OID!]!
+}
+
+# clauses
+
+input AddBonusClauseInput {
+  id: OID!
+  condition: String!
+  bonusAmount: Amount!
+  comment: String
+}
+
+input UpdateBonusClauseInput {
+  id: OID!
+  condition: String
+  bonusAmount: Amount
+  comment: String
+}
+
+input DeleteBonusClauseInput {
+  id: OID!
+}
+
+input AddPenaltyClauseInput {
+  id: OID!
+  condition: String!
+  deductionAmount: Amount!
+  comment: String
+}
+
+input UpdatePenaltyClauseInput {
+  id: OID!
+  condition: String
+  deductionAmount: Amount
+  comment: String
+}
+
+input DeletePenaltyClauseInput {
+  id: OID!
+}

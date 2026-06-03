@@ -1,0 +1,63 @@
+{
+  "contentSections": [],
+  "description": " A spin-off of the Embryonic Hub focused on managing development activities and structuring contributor relationships. \n\nThe entity will hire and pay contributors, receive invoices from builders and suppliers, process payments, and provide operational support for team members working in network organizations.\n\nThe Network Operational Hub is structured as a Swiss Association \u2014 a cost\u2011efficient, tax\u2011optimized, and flexible legal form that offers strong privacy protections* in a reputable European jurisdiction.\n\n**Typical Use Cases**\n\n- Networks with recurring development budgets\n- Permanent or semi\u2011permanent contributor groups\n- Multi\u2011team and multi\u2011project ecosystems\n\nSuitable networks that have outgrown embryonic coordination and require a dedicated procurement and execution layer.",
+  "facetTargets": [
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "9793f50b-bfe5-414f-805b-603c1e08b65d",
+      "selectedOptions": []
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "a0140461-c47d-41f3-b817-73ac9d65d89b",
+      "selectedOptions": []
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "e4a31bf8-700a-44b7-9c93-e18ac0817adc",
+      "selectedOptions": []
+    },
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "d2d92f3d-4e40-46c9-a270-64838897c194",
+      "selectedOptions": []
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:40:10.082Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Payment processing",
+    "Transparency reporting",
+    "Contract administration",
+    "Tax administration and filing"
+  ],
+  "services": [],
+  "setupServices": [
+    "(Same as non-commercial Operational Hub)",
+    "Needs analysis tool (Self-assessment)",
+    "Legal document assembler for setting up (and winding down) a Swiss Association",
+    "Founding meeting and document review by local counsel *",
+    "Payment processor and contributor billing setup"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "The procurement and contributor coordination hub for an active network.\n",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "b1b75358-1385-4e44-a15d-7249d11a1fac",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/noh/network_oh.png",
+  "title": "Network Operational Hub",
+  "weight": null
+}

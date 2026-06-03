@@ -1,0 +1,48 @@
+{
+  "about": "## About Us\nThe Growth team is the outward-facing engine of the Powerhouse ecosystem. We focus on expanding the reach and impact of Powerhouse by driving adoption, nurturing community, and building strategic partnerships that bring new builders and organizations into the ecosystem.\n\n## What We Do\nWe work across marketing, community, partnerships, and developer relations to ensure that Powerhouse is visible, accessible, and compelling to its target audiences \u2014 from decentralized organizations and DAOs to traditional teams exploring open operations.\n\n## Community & Ecosystem Development\nWe build and nurture the Powerhouse community through events, content, social media, and direct engagement. We help onboard new contributors, facilitate collaboration between teams, and create spaces where builders can share knowledge and get support.\n\n## Partnerships & Business Development\nWe identify and pursue strategic partnerships that expand the Powerhouse ecosystem. This includes integrations with complementary protocols, collaborations with other DAOs and organizations, and relationships with service providers and tooling partners.\n\n## Developer Relations & Advocacy\nWe bridge the gap between the Powerhouse platform and its developer community. Through documentation, tutorials, workshops, and direct support, we make it easier for developers to build on Powerhouse and contribute to the ecosystem.\n\n## Communications & Brand\nWe own the Powerhouse brand voice and public communications \u2014 from social media and blog posts to presentations and governance forum updates. We ensure the ecosystem understands what Powerhouse is building and why it matters.",
+  "code": "GR",
+  "contributors": [],
+  "description": "The Growth team drives adoption, community engagement, and ecosystem expansion for Powerhouse \u2014 connecting builders, partners, and users with the tools and resources they need to succeed",
+  "icon": "https://cdn-icons-png.flaticon.com/512/1055/1055687.png",
+  "id": "da469f0a-ca6d-4232-ad5e-be259f783618",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:25:11.512Z",
+  "links": [
+    {
+      "id": "gr-link-x-01",
+      "label": "X",
+      "url": "https://x.com/PowerhouseDAO"
+    },
+    {
+      "id": "gr-link-discord-01",
+      "label": "Discord",
+      "url": "https://discord.com/invite/h7GKvqDyDP"
+    },
+    {
+      "id": "gr-link-youtube-01",
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@Powerhouse-zh2po"
+    },
+    {
+      "id": "gr-link-forum-01",
+      "label": "Forum",
+      "url": "https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057"
+    }
+  ],
+  "name": "Growth",
+  "operationalHubMember": {
+    "name": "Powerhouse Genesis",
+    "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+  },
+  "scopes": [
+    "SUPPORT_SCOPE"
+  ],
+  "skills": [
+    "UI_UX_DESIGN",
+    "TECHNICAL_WRITING",
+    "DATA_ENGINEERING",
+    "FRONTEND_DEVELOPMENT"
+  ],
+  "slug": "growth",
+  "status": "ACTIVE"
+}

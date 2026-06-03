@@ -1,0 +1,290 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Core Dev Team Profile",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:27.622Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "bb2b6ccf652df6e323b68415b21b7683",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.622Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": "## About Us\nCore Dev is the engineering backbone of the Powerhouse ecosystem. We build and maintain the foundational infrastructure that powers decentralized operations \u2014 from document model runtimes and reactor engines to the developer SDK and CLI tooling.\n\n## What We Do\nOur team focuses on the deep technical work that makes the Powerhouse platform reliable, performant, and extensible. We own the core protocol layer, ensuring that document models, reducers, and operations work correctly and efficiently at scale.\n\n## Core Infrastructure\nWe design and implement the runtime systems that power Powerhouse document processing \u2014 including the reactor architecture, synchronization protocols, and the document-model framework that enables type-safe, deterministic state management.\n\n## Developer Experience\nWe build the tools that other teams rely on: the Powerhouse CLI, code generation pipelines, SDK libraries, and development environment integrations. Our goal is to make building on Powerhouse as productive and enjoyable as possible.\n\n## Platform Reliability\nWe ensure the platform is robust, well-tested, and secure. This includes continuous integration pipelines, automated testing infrastructure, performance monitoring, and security audits across the stack.",
+        "code": "CD",
+        "description": "Core Dev is a team focused on building and maintaining the core infrastructure, protocols, and developer tooling for the Powerhouse ecosystem",
+        "icon": "https://cdn-icons-png.flaticon.com/512/6062/6062646.png",
+        "id": "982989fc-922b-4347-a463-0b4025d95ee9",
+        "name": "Core Dev",
+        "slug": "core-dev",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "AuvWAYeIYBXfHXEBVia/7k7fKWo=",
+    "id": "9c890bb615bebec17e6be063b9712c21",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "93b91d0e1851af21d38be81c30f7685f",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.622Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "link-github-01",
+        "label": "Github",
+        "url": "https://github.com/powerhouse-inc"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "0ZtpVtnLpCWYpPe/dS5Iayh0ieg=",
+    "id": "c1401685e50f31dee9b29d90c8862ed1",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "link-discord-01",
+        "label": "Discord",
+        "url": "https://discord.com/invite/h7GKvqDyDP"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "+KTk9ONWGAWSHfMvrl3X2D9cw24=",
+    "id": "e50af707eee5335cadd719e9fbfb212e",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FRONTEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "n8G/K8mmLZWsuKpDNSau0J26gqc=",
+    "id": "09bd32611d99d9eb6ed68d320a7023dc",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "BACKEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "2OvCRiOTfQO7ya2r9sHgcPkKCPo=",
+    "id": "daf01845d3b9ac731bce0fc2aed17efd",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FULL_STACK_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "HiLRKKTf6gzhCJGde+xvuL3esPA=",
+    "id": "8722a67c1555b0907aafeb5b47920025",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DEVOPS_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "67IROlL2Usxed6LnnQ0u+gFLp8o=",
+    "id": "9397e403750e2fe0238fe90d58a4bd8a",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "SMART_CONTRACT_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "+68aZGUtvd6nYdp4ya4Ct6hrU6A=",
+    "id": "34019a9bd68db0f39e81ef6ef7a64ffe",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "QA_TESTING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "uIHsJZ0k7xhWzHuREhin6MvGd0Q=",
+    "id": "5590d651b0b8fa976eac7a1d68bd7eff",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "SECURITY_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "oB6OxhtgWqERjK1OComNIvCUNjk=",
+    "id": "a3c6691d2b3f40da0b07225b7a9c233f",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "PROTOCOL_SCOPE"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "C+dVROVS2oITkz3bytfDQTftlEQ=",
+    "id": "4762660b78a4db734a3c91f0c533260b",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "ab700de9-90dd-4219-9fff-5aaf94ca2bc9"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "i+fA6VxdU/r5FM0d0IbpRN+ZXHQ=",
+    "id": "d9c19a7b9e775326b6ef581e92235db8",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:27.394Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "BdxTmOAupqaWDB4AjjCjYreddik=",
+    "id": "6f4a9bec130919d62678688fd8614cd3",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:11.921Z"
+  }
+]

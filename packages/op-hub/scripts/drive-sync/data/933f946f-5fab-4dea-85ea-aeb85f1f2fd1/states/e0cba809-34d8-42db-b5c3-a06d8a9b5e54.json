@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "frank",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/GpyWbBkH/frank-Icon.png",
+  "id": "77f720c1-2eb6-4a14-aaab-616808c2874e",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:48.240Z",
+  "links": [],
+  "name": "Frank",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "frank",
+  "status": null
+}

@@ -1,0 +1,279 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Growth Team Profile",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:20.987Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "dc8838011dbc11a4fbc1215955e03220",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.987Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": "## About Us\nThe Growth team is the outward-facing engine of the Powerhouse ecosystem. We focus on expanding the reach and impact of Powerhouse by driving adoption, nurturing community, and building strategic partnerships that bring new builders and organizations into the ecosystem.\n\n## What We Do\nWe work across marketing, community, partnerships, and developer relations to ensure that Powerhouse is visible, accessible, and compelling to its target audiences \u2014 from decentralized organizations and DAOs to traditional teams exploring open operations.\n\n## Community & Ecosystem Development\nWe build and nurture the Powerhouse community through events, content, social media, and direct engagement. We help onboard new contributors, facilitate collaboration between teams, and create spaces where builders can share knowledge and get support.\n\n## Partnerships & Business Development\nWe identify and pursue strategic partnerships that expand the Powerhouse ecosystem. This includes integrations with complementary protocols, collaborations with other DAOs and organizations, and relationships with service providers and tooling partners.\n\n## Developer Relations & Advocacy\nWe bridge the gap between the Powerhouse platform and its developer community. Through documentation, tutorials, workshops, and direct support, we make it easier for developers to build on Powerhouse and contribute to the ecosystem.\n\n## Communications & Brand\nWe own the Powerhouse brand voice and public communications \u2014 from social media and blog posts to presentations and governance forum updates. We ensure the ecosystem understands what Powerhouse is building and why it matters.",
+        "code": "GR",
+        "description": "The Growth team drives adoption, community engagement, and ecosystem expansion for Powerhouse \u2014 connecting builders, partners, and users with the tools and resources they need to succeed",
+        "icon": "https://cdn-icons-png.flaticon.com/512/1055/1055687.png",
+        "id": "da469f0a-ca6d-4232-ad5e-be259f783618",
+        "name": "Growth",
+        "slug": "growth",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "nt9psdPHz2/YNGrrynSPmsC26O4=",
+    "id": "ce59b29cb6214cbe6bb509ffce3b3600",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5d3e9ba5836b07a13c33508bec19d777",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.987Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "gr-link-x-01",
+        "label": "X",
+        "url": "https://x.com/PowerhouseDAO"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "vrduPY4ITmB03TX0GImmQ2aiI4E=",
+    "id": "cd046309e1e341fbf7d5da76b36b7d83",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "gr-link-discord-01",
+        "label": "Discord",
+        "url": "https://discord.com/invite/h7GKvqDyDP"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "xtdHq7WSsCTl5nVz9QLx2PLueBg=",
+    "id": "15cb69e8c8e19f7b622eb49036f8703d",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "gr-link-youtube-01",
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@Powerhouse-zh2po"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "vINv7MNVE64wgqOcXyJrmm6+toc=",
+    "id": "050cf0aa5de86efbb8812973d0d36d85",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "gr-link-forum-01",
+        "label": "Forum",
+        "url": "https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "2jbtm+1tI+9Yhc8cGiPQYLHNPis=",
+    "id": "88be45427a858cc0bec8724ee8ba76fa",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "UI_UX_DESIGN"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "NZO58byRYMDVQwqITUDc0ZGgBFI=",
+    "id": "312dc6c04909d8dcd43baff1b7046acd",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "TECHNICAL_WRITING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "ArzeJxhOVq/4f3OmLbhgmaBNkuY=",
+    "id": "9759f178f465d122a2840fd109dae2d6",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DATA_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "U0kgdkS6NgPNcCzrq1k3o38xccc=",
+    "id": "00907096a1656f3d352c6c41ad07fe6e",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FRONTEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "HaRv9B/cMxJHF/LOPADVBcxQIrA=",
+    "id": "9744522bc580c846d939d855d201ba05",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "SUPPORT_SCOPE"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "TH07h2wLtVHusdBLmMcunSOG4k4=",
+    "id": "6b70c38de8c00a4d2e96c4264aa78360",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "ab700de9-90dd-4219-9fff-5aaf94ca2bc9"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "MaVjSMEp01fCbe0NTvWS2a3/sws=",
+    "id": "29ea0f6faf38ca3458f6258905679ebc",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:20.752Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "6I3QWOnjIKd6CmhvNWhZrHyHqWw=",
+    "id": "99e53daa7e23a0d0e1bb61ac0a5e1262",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:11.512Z"
+  }
+]

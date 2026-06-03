@@ -1,0 +1,269 @@
+{
+  "documentType": "powerhouse/document-drive",
+  "id": "c4618bc9-e06a-479f-9813-13e37cba4e86",
+  "name": "Powerhouse RGH Operator Admin",
+  "preferredEditor": "builder-team-admin",
+  "revisionsList": [
+    {
+      "revision": 285,
+      "scope": "document"
+    },
+    {
+      "revision": 812,
+      "scope": "global"
+    }
+  ],
+  "slug": "powerhouse-rgh-operator-admin",
+  "state": {
+    "auth": {},
+    "document": {
+      "hash": {
+        "algorithm": "sha1",
+        "encoding": "base64"
+      },
+      "version": 0
+    },
+    "global": {
+      "icon": null,
+      "name": "Powerhouse RGH Operator Admin",
+      "nodes": [
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "0a5ca09b-3532-45f0-8315-0891e02c5442",
+          "kind": "file",
+          "name": "NETWORK IP SPV (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "1b9fe8f6-1433-4cb6-9060-7313dfff8802",
+          "kind": "file",
+          "name": "REVENUE GENERATING HUB (RGH) (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "id": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0",
+          "kind": "folder",
+          "name": "Service Offerings",
+          "parentFolder": "c5efac35-4a20-421a-9a96-75cfd48ce58f"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "1ed86169-dd18-4394-8b0b-3c1a628a98b2",
+          "kind": "file",
+          "name": "Operational Hub (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "236f4cd7-90b5-433d-845a-ac171bc4559b",
+          "kind": "file",
+          "name": "NETWORK OPERATIONAL HUB (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "27b2bba1-a922-412c-a80e-a9e02727300e",
+          "kind": "file",
+          "name": "Intellectual Property SPV (IP SPV) (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "31907ea2-0efc-42e4-b288-6b0b01607809",
+          "kind": "file",
+          "name": "OperationalHubOffering (copy) 1 (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "414d0ffc-5632-4e68-a874-25cef38aed8e",
+          "kind": "file",
+          "name": "COMMERCIAL OPERATIONAL HUB (OH) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "id": "4931e94b-bb17-44cf-9d79-c0708835116b",
+          "kind": "folder",
+          "name": "E2E Team 1779261096130",
+          "parentFolder": "6c4157b4-1e4f-4e67-acda-8563b7bd4529"
+        },
+        {
+          "documentType": "powerhouse/subscription-instance",
+          "id": "49b1041f-4842-4b29-8ab5-8bdb603f9a99",
+          "kind": "file",
+          "name": "e2e-team-1779261096130 Subscription Instance",
+          "parentFolder": "4931e94b-bb17-44cf-9d79-c0708835116b"
+        },
+        {
+          "id": "49c0b43c-2c2e-46c7-b42f-b53f5ef47fb0",
+          "kind": "folder",
+          "name": "E2E Team 1779261303564",
+          "parentFolder": "6c4157b4-1e4f-4e67-acda-8563b7bd4529"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "5e01fe27-474c-41c5-b0b7-6633edce651e",
+          "kind": "file",
+          "name": "OperationalHubOffering (copy) 2",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "6946adbe-e092-4ed5-bd7e-0285897ecee8",
+          "kind": "file",
+          "name": "OperationalHubOffering (draft) (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/builder-profile",
+          "id": "6a47c0ea-4fc3-4075-93ac-38bccefff854",
+          "kind": "file",
+          "name": "Powerhouse RGH",
+          "parentFolder": null
+        },
+        {
+          "id": "6c4157b4-1e4f-4e67-acda-8563b7bd4529",
+          "kind": "folder",
+          "name": "Service Subscriptions",
+          "parentFolder": null
+        },
+        {
+          "id": "71d5b70c-d13f-4614-9357-edee957e59c2",
+          "kind": "folder",
+          "name": "Snapshot Reports",
+          "parentFolder": null
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "7b208d47-e3a6-4873-b484-cba9b391c013",
+          "kind": "file",
+          "name": "OperationalHubOffering (active 2) (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "7e37c9b9-3bfa-407b-b108-3ee94e4f4d7f",
+          "kind": "file",
+          "name": "OperationalHubOffering (active 3) (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "80c2f168-e8e7-44e0-b43a-9175f3b61c62",
+          "kind": "file",
+          "name": "NETWORK REVENUE GENERATING HUB (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "82b608d4-536e-43f9-a947-63d53c03b03b",
+          "kind": "file",
+          "name": "AgentOps",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "id": "85df3324-0c90-45e1-a595-7bbb5fea7f7b",
+          "kind": "folder",
+          "name": "Expense Reports",
+          "parentFolder": null
+        },
+        {
+          "id": "93f1a413-3b9e-4ae8-b739-7c005ddbe923",
+          "kind": "folder",
+          "name": "Products",
+          "parentFolder": "c5efac35-4a20-421a-9a96-75cfd48ce58f"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "9504d4ac-3eb2-4a58-94d9-8835a804af51",
+          "kind": "file",
+          "name": "NETWORK EMBRYONIC HUB (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "951cf911-787c-4691-bd43-2413752e874f",
+          "kind": "file",
+          "name": "FUNDRAISING VEHICLE (OCF)",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "a0b70ded-84f2-4cec-85e2-eab29c7c34fb",
+          "kind": "file",
+          "name": "AgenticOps (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "b49672b5-68dc-45b1-90f9-06e69a428932",
+          "kind": "file",
+          "name": "OH-Artic (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "c1f49b73-aa28-438f-a1bd-7892b9978ca3",
+          "kind": "file",
+          "name": "ALTERNATIVE RISK TRANSFER (ART)",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "c5e444aa-0f16-4e7a-87f9-e860b1643eed",
+          "kind": "file",
+          "name": "OperationalHub (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "id": "c5efac35-4a20-421a-9a96-75cfd48ce58f",
+          "kind": "folder",
+          "name": "Services And Offerings",
+          "parentFolder": null
+        },
+        {
+          "documentType": "powerhouse/resource-instance",
+          "id": "e98851c9-100d-41de-aafb-4943f26b0144",
+          "kind": "file",
+          "name": "e2e-team-1779261303564 Resource Instance",
+          "parentFolder": "49c0b43c-2c2e-46c7-b42f-b53f5ef47fb0"
+        },
+        {
+          "documentType": "powerhouse/resource-template",
+          "id": "ea0081ba-3d01-4872-bf25-e957fbd023fd",
+          "kind": "file",
+          "name": "rupert (copy) 1",
+          "parentFolder": "93f1a413-3b9e-4ae8-b739-7c005ddbe923"
+        },
+        {
+          "documentType": "powerhouse/resource-instance",
+          "id": "ea0c2a63-997e-4b28-996b-0be8bfe97434",
+          "kind": "file",
+          "name": "e2e-team-1779261096130 Resource Instance",
+          "parentFolder": "4931e94b-bb17-44cf-9d79-c0708835116b"
+        },
+        {
+          "documentType": "powerhouse/service-offering",
+          "id": "efb57cb7-6009-45d9-a4cb-db2287222f31",
+          "kind": "file",
+          "name": "OperationalHubOffering (active) (copy) 1",
+          "parentFolder": "1ebf7f33-1060-44b5-aa70-0acf1d1b1fa0"
+        },
+        {
+          "documentType": "powerhouse/subscription-instance",
+          "id": "f698ec5f-de64-4265-a665-ffa88af94d54",
+          "kind": "file",
+          "name": "e2e-team-1779261303564 Subscription Instance",
+          "parentFolder": "49c0b43c-2c2e-46c7-b42f-b53f5ef47fb0"
+        }
+      ]
+    },
+    "local": {
+      "availableOffline": false,
+      "listeners": [],
+      "sharingType": "private",
+      "triggers": []
+    }
+  }
+}

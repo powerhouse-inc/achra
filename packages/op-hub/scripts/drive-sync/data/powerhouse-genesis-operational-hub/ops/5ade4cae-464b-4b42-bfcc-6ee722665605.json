@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "5ade4cae-464b-4b42-bfcc-6ee722665605",
+        "meta": {},
+        "model": "powerhouse/snapshot-report",
+        "name": "November 2025 - Snapshot Report (copy) 1",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:37.548Z",
+          "documentType": "powerhouse/snapshot-report",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "5ade4cae-464b-4b42-bfcc-6ee722665605"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "4bca49b0ba6c6e319ed92f33dc8ce5b7",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:37.548Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "ZTYfHVYH+zkEGXzRQHWZV9rmLTc=",
+    "id": "d06f23d9f4779620166139b28e52e8ff",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:43.973Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "5ade4cae-464b-4b42-bfcc-6ee722665605",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "accountsDocumentId": null,
+            "endDate": null,
+            "ownerIds": [],
+            "reportName": null,
+            "reportPeriodEnd": null,
+            "reportPeriodStart": null,
+            "snapshotAccounts": [],
+            "startDate": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/snapshot-report",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "205efb706a3228eefcfb4c578fb7ee8e",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:37.548Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "vLVrU3yUdw0++THmB1ETfU7Glos=",
+    "id": "7a163f1b0074665efd8bd15289a26857",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:44.602Z"
+  }
+]

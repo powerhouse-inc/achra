@@ -1,0 +1,864 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "6a47c0ea-4fc3-4075-93ac-38bccefff854",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Powerhouse RGH",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:36.151Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "6a47c0ea-4fc3-4075-93ac-38bccefff854"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "343a064fbb463a15b4e08b87b676c013",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:36.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "isOperator": true
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "qaL6QZdKpoKuvxScllpDdv+PRLI=",
+    "id": "29a03a6763ca4b58d4bf96663074f38f",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "6a47c0ea-4fc3-4075-93ac-38bccefff854",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "692f35d05ae156e1e5a1f66fd615a01c",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:36.151Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": "## About Us\nThe Powerhouse Revenue Generating Hub (RGH) is the commercial arm of the Powerhouse ecosystem. Our mandate is to ensure long-term sustainability by building, operating, and scaling revenue streams that fund continued development and ecosystem expansion.\n\n## What We Do\nWe identify, develop, and manage products and services that generate revenue while advancing the Powerhouse mission. We operate at the intersection of business development, product strategy, and operations \u2014 turning the platform's capabilities into viable commercial offerings.\n\n## Commercial Products & Services\nWe package Powerhouse's core technology into commercial products and managed services. This includes hosted infrastructure offerings, premium support tiers, custom document model development, and white-label solutions for organizations adopting decentralized operations.\n\n## Business Development & Partnerships\nWe cultivate strategic commercial relationships \u2014 from enterprise clients and protocol partnerships to integration deals and co-development agreements. We focus on sustainable revenue relationships that create mutual value.\n\n## Revenue Operations\nWe manage the full lifecycle of commercial engagements: pricing strategy, contract management, billing operations, customer success, and financial reporting. We ensure revenue streams are predictable, well-documented, and transparently reported to the ecosystem.\n\n## Strategic Planning\nWe continuously evaluate market opportunities, competitive landscape, and ecosystem needs to inform our commercial roadmap. We balance short-term revenue generation with long-term strategic positioning to ensure the Powerhouse ecosystem remains competitive and financially sustainable.",
+        "code": "PRGH",
+        "description": "The Powerhouse Revenue Generating Hub (RGH) drives commercial sustainability for the Powerhouse ecosystem by developing and operating revenue-generating products, services, and partnerships that fund ongoing development and ecosystem growth",
+        "icon": "https://framerusercontent.com/images/GZkbeeiIcPgM6wgEk8vIZlWi7o.png?scale-down-to=512&width=1024&height=1024",
+        "id": "a326c3a9-d29b-46d3-8ab0-14b361e11567",
+        "name": "Powerhouse RGH",
+        "slug": "powerhouse-rgh",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "qRxzpw1GNXcMMPAFS1xVCSqZkpA=",
+    "id": "dc6241a657e823c1ed74836bb0086d82",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "rgh-link-x-01",
+        "label": "X",
+        "url": "https://x.com/PowerhouseDAO"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "3XwAW113LykktSo7eSK4ziWdwRA=",
+    "id": "0ea7c7f5f0f0c7ae243f653e35e0b695",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "rgh-link-discord-01",
+        "label": "Discord",
+        "url": "https://discord.com/invite/h7GKvqDyDP"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "6iDQDll1et0E/2iJWqrWs9HzINM=",
+    "id": "2d5c0388270812a6d3a870782334a902",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "rgh-link-forum-01",
+        "label": "Forum",
+        "url": "https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "oBMv+tP2S5/IAx6NP7nVKGQqMjw=",
+    "id": "3602e0196d44a5e1f33b595995e46ccc",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "64665247-09e7-479b-8101-d4e335d75701",
+        "label": "Powerhouse.io",
+        "url": "https://powerhouse.io/"
+      },
+      "scope": "global",
+      "type": "ADD_LINK"
+    },
+    "error": null,
+    "hash": "qVbxpIJ4+mIDygvxoOEwu/ImWro=",
+    "id": "3383dcdfe4a5d322d9103e14538bb669",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FULL_STACK_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "+8LKbRUP3VdZNfS1VbNoAWbuTSE=",
+    "id": "14ddf6bda1a35248527724bca9f6ad5f",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "BACKEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "t5L4kXsnHYa+Ijkpk6rL7Dyckco=",
+    "id": "604ed67e8a1f7c9db737e090bedb9d0b",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DATA_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "zCys3tL7YSSsOm9UQUK350hQDOg=",
+    "id": "1f1430d093349bee82090ec08157c742",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "UI_UX_DESIGN"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "0qyC4BlHHRXI6EPyjQO3pHWua/M=",
+    "id": "f6133413fd08f1532e0f4a994df395a7",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "TECHNICAL_WRITING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "hwTP4h7ds24XOcPdKcQOOUhexSg=",
+    "id": "6f3454d0b8a3d32d207c398c1af5b232",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "SUPPORT_SCOPE"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "D8VAD/ZgHQM8HC026vHXp6f/XCo=",
+    "id": "85f06341de730ba46a5a26d0bc9a2550",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "64be53c8-89aa-4347-8519-093059cfa774"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "EHmKln1GaGeJxuMja5XtpGSeZDs=",
+    "id": "6341a5e721f2b144bce0ec3b4c5310d4",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "026e0f63-c2d4-47a1-96bb-0515f00001cc"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "WYjJtcc7WHsN2kJU870pCYdtPvQ=",
+    "id": "8c819ab8985ba877f7901cb7a4314fb0",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "c263d8a6-b6c1-45c8-8491-7827123465cf"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "ctM4PtOnAhLdhuPoF8wmv4k7kxM=",
+    "id": "27268ce0d51d02d957f9cc5d36d12cc2",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "1962b59b-8486-4666-bdf1-b5766c7d9b02"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "qIBJV4Qg7zYtslaEMAYTdhrj2F0=",
+    "id": "11907eb2ceeb64bc34fac4c9047629a3",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "695e6417-0540-4f80-8936-187209c9f0ee"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "dRB+lUIwLfJPNRhOQXzZMWztIQo=",
+    "id": "08084c257186962387966abcf7cc9e18",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "ab732576-7e06-40d2-9942-0c0b02449022"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "9YBgiyTliQuIBA+A8Beub7kQLdU=",
+    "id": "6be0fb03d2e7dee79c23a1f15990d399",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "7bba4d13-bf8e-4151-ac92-1c512886de66"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "U1XE1RKT6+yYU/kfHklXvUOkDMk=",
+    "id": "bf87ca1309e14c113bc275491715b56a",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f3d3ac0b-decf-40dc-8929-19a92b650d1a"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "pf7Ruh8udS2aTxSsTAuqq2+02H4=",
+    "id": "fab04e1e1931b60f7a53992752aad935",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "abcdef78-9755-4f86-8e85-7d4eea9d1679"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "H0W2PabwLmpkxZZOYRw2EmWqF64=",
+    "id": "251d55e2070efb2f3d76f10357dc9b14",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e971b366-0fc1-4457-98df-1fc5738e0628"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "Xn5A3pVhUifp64fcf1wY5Tw37RA=",
+    "id": "ce2a6944058cc20f3dd35bf225b34b0c",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "a8ad8819-9eee-483c-924d-a70dd28dce4d"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "JmeFONcrvGr67XcKLcfTwtcv8aY=",
+    "id": "eabb6a38baea04389b2698453aebc392",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "831c8c57-432c-4650-b0fc-1011b6894a91"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "pVlSaU40b5BeCs1zKieEmDaC0T4=",
+    "id": "627c12c387873a9b53a2df58aaa8029b",
+    "index": 23,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "ab700de9-90dd-4219-9fff-5aaf94ca2bc9"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "SFZPKZlHcJfQCZ7kKjl1ZZnz7Z4=",
+    "id": "c2868f6b427041cf45942f86ef679adc",
+    "index": 24,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:57.634Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "64be53c8-89aa-4347-8519-093059cfa774"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "C4X/0R4YtTYiufxYQmCmeUVgKxA=",
+    "id": "37b7fff59cf09f8f8d9e54116c221024",
+    "index": 25,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:12.331Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "550a270e-9ca0-46e8-a3bc-4a6fb2a18382"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "dKMZ96dcBBh5zsJrQGdP4JQVgNQ=",
+    "id": "06c6c246ff3b89dc83bb1607d97d7f2a",
+    "index": 26,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:12.729Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "026e0f63-c2d4-47a1-96bb-0515f00001cc"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "N9eww9TipGIdE4ir9sYgqSqBg6M=",
+    "id": "b47c75d8f3cf68d560f9ed8c26312319",
+    "index": 27,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:13.092Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "b41845f8-0986-4576-8dc6-d283be7b9fe6"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "dCehwRrn+JZAuhWPAgXNztNGOfA=",
+    "id": "8d9bb74894d133ae796a8a167b1ce096",
+    "index": 28,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:13.454Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "c263d8a6-b6c1-45c8-8491-7827123465cf"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "YfttOuzuTHmgCLxv6A3Q7U0Ns0g=",
+    "id": "1e7708c1444e1c0084b51c1483d185c8",
+    "index": 29,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:13.816Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "547f197a-3203-4c00-8f8d-7e9d6af425fe"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "6pO/ov57R3XeQIr4SEm7Z3hqX2Q=",
+    "id": "546a2cc5c0d41a91651a830828227071",
+    "index": 30,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:14.178Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "1962b59b-8486-4666-bdf1-b5766c7d9b02"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "dRkzq/Ze1G6X+/YAsLrSG0RJ5kY=",
+    "id": "d538600de753073e0c34add92b782644",
+    "index": 31,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:14.538Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "437846d0-8f6d-415c-a04d-6a1582f51f63"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "fBf4u3AJDZ/ziHiwwi2R6QHUAX0=",
+    "id": "1bd7adf3d673b09cc6e8a60a3a049bcb",
+    "index": 32,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:14.893Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "695e6417-0540-4f80-8936-187209c9f0ee"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "apt4AJ6+HpCA9h4308u+Zk4x0ZM=",
+    "id": "a9f89341bc136740712fc5cf7dc1c7f4",
+    "index": 33,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:15.252Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "8bff99ed-6eb1-4353-80d9-c497d6a896ba"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "LsdRd2i9gM/6nzZ3ajM32Y54KV0=",
+    "id": "0afacc9aefe748cedd3de1fe588798b7",
+    "index": 34,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:15.619Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "ab732576-7e06-40d2-9942-0c0b02449022"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "hfmQSMxFbGUXGH37nUgzIgh2pmk=",
+    "id": "fb736cb9a7eaa627b74624542a3f7c60",
+    "index": 35,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:15.988Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "abb40a78-b75b-4e80-af68-6494b73f88f4"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "e5uf7Qyld34Poat7f8aKgyBlyA4=",
+    "id": "07387decf5b060727deeec14ee00e03b",
+    "index": 36,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:16.334Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "7bba4d13-bf8e-4151-ac92-1c512886de66"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "hYTkbbvz0yG3/ayKikoiNLDjPZM=",
+    "id": "1cd77c6d0c1ec0bccd12a2bbed0a2080",
+    "index": 37,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:16.690Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e8866a8b-c04f-45fd-9613-6f09937e277c"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "LSibb13Pvo10VYWAxrDwo7dCcqs=",
+    "id": "fe60f4d72ee67d9773af38b76983cf0b",
+    "index": 38,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:17.049Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f3d3ac0b-decf-40dc-8929-19a92b650d1a"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "+gNqNauFoO+NkwpcEF3ufpwlam4=",
+    "id": "8817b967391024444ccdcbee75d05f3e",
+    "index": 39,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:17.400Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e77bf52f-e63c-4a87-85f3-cde1a4a247c6"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "l9vrIqAGO69c6xW+swT0LjTOpXU=",
+    "id": "2504ea1efa69118bc543849e23e88ee7",
+    "index": 40,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:17.751Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "abcdef78-9755-4f86-8e85-7d4eea9d1679"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "QCFRqsp2fN6r1xThRkhLm0a7AAY=",
+    "id": "d1127a4028982729a8d35cda6a2cfc19",
+    "index": 41,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:18.133Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e0cba809-34d8-42db-b5c3-a06d8a9b5e54"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "Xn3/LUHngFQdUocXkf4w6N77mxY=",
+    "id": "1e39ccfa6ec7c7bbbea281703e630809",
+    "index": 42,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:18.482Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e971b366-0fc1-4457-98df-1fc5738e0628"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "1ISdHrPBoQ9/4u/V9vQTxqm3tUU=",
+    "id": "c07ee2ea4058097e1adba581e5481547",
+    "index": 43,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:18.834Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "qlg6VgtRoeNW6CEuKIpKUFUQ28g=",
+    "id": "93f9490318917fabb9ad59a50b9b4334",
+    "index": 44,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:19.192Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "a8ad8819-9eee-483c-924d-a70dd28dce4d"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "55wx9G2OxjzXfFU9SXdwCGM/2TE=",
+    "id": "9de831757f03437b43763dca5fa2c367",
+    "index": 45,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:19.546Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f77ec756-49d5-4ea5-9f57-8af0d6ea421a"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "VcCIgF69EwiNz+EpXWc64W2Plts=",
+    "id": "96c1de9d9712c02b7a46c1976d5c8075",
+    "index": 46,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:19.903Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "831c8c57-432c-4650-b0fc-1011b6894a91"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "Go39PS5AkNxzeBn1B4QmYHyCnts=",
+    "id": "9c24e9da50063369343f9e2d02e090be",
+    "index": 47,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:20.289Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "2a01f417-0c6d-4450-8db0-fce70fccfede"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "4lHPX4Tmr9iPnSft9tQr2Q10reM=",
+    "id": "178a5af37bed97b068f7aac8586ca899",
+    "index": 48,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:20.645Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis",
+        "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+      },
+      "scope": "global",
+      "type": "SET_OP_HUB_MEMBER"
+    },
+    "error": null,
+    "hash": "nuuRrE2iI6IcMSwuUhbAP1fZB08=",
+    "id": "101db28a985da7a0f33fbabfe3d18f15",
+    "index": 49,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:21.013Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "The Powerhouse Revenue Generating Hub (RGH) drives commercial sustainability for the Powerhouse ecosystem by developing and operating revenue-generating products, services, and partnerships that fund ongoing development and ecosystem growth."
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "hw3dODl6HqylULvr4jYHhy0lUoU=",
+    "id": "3bb6610a8d08275b83033b8471156498",
+    "index": 50,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-01T14:23:07.878Z"
+  }
+]

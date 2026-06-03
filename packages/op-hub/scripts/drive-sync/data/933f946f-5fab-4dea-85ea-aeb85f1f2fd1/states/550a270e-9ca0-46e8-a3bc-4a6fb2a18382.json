@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "PRM",
+  "contributors": [],
+  "description": null,
+  "icon": "https://pbs.twimg.com/profile_images/1795417022433480704/Gyl8mM7x_400x400.jpg",
+  "id": "77d71092-1f1a-4d5c-93c4-ac8d9f43d56d",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:28.637Z",
+  "links": [],
+  "name": "Prometheus",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "prometheus",
+  "status": "ACTIVE"
+}

@@ -1,0 +1,582 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "c5e444aa-0f16-4e7a-87f9-e860b1643eed",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "OperationalHub",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:39.281Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "c5e444aa-0f16-4e7a-87f9-e860b1643eed"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "82b9281ffac5231f977a665ad69fb485",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:39.281Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "A ready-to-use operational setup that gives open-source and public-goods builder teams the legal and financial infrastructure to receive funding, pay contributors, and operate compliantly from day one.\n\nStructured as a Swiss Association \u2014 a cost-efficient, privacy-preserving legal form with strong international recognition \u2014 the Operational Hub reduces personal liability for contributors, simplifies compliance, and provides a professional foundation for teams that are already doing the work.",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "A turnkey legal and operational setup for open-source builder teams \u2014 entity formation, invoicing, payouts, and compliance bundled under one roof.",
+        "thumbnailUrl": "https://staging.achra.com/_next/image?url=%2Fservices%2Fcovers%2Fcover-02.jpg&w=3840&q=75&dpl=dpl_FjkVSKv1rrWGpfaa2yG8PPxLE1Na",
+        "title": "Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "cEQfdr4hVdW+GifFPdXDvzxWWsg=",
+    "id": "e9296bf382d436ce42db7dceeb46fa84",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "c5e444aa-0f16-4e7a-87f9-e860b1643eed",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "07f8e842ee013ca85a52a0f26d2b3070",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:39.281Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "BhMeiXgdKtKq5fPXry5MMoBfcW4=",
+    "id": "286fa55fdd78231b5c3ddbc902533529",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "6a47c0ea-4fc3-4075-93ac-38bccefff854"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "Taymg3bhkS+bEWDo+MCUurnnnI8=",
+    "id": "845cb0bd8447ebff5a225ee668a9052f",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#0ea5e9",
+        "id": "02aad85b-88d4-4d55-b841-d9e739c54a77",
+        "label": "Builders",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "kykLdYyPnK5vSyCanWI/LCg2wBY=",
+    "id": "6ce1c2cc5236dde29716c7c2c9765714",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "sno-function",
+        "categoryLabel": "SNO Function",
+        "id": "df976250-6b17-4f0b-b60c-34cca38d9156",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Operational Hub for Open Source Builders",
+          "Operational Hub"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "i7cTe58jnmKRc6fRFQUGmZUXmt4=",
+    "id": "c6a872650beb66eddc413fed906e1958",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "legal-entity",
+        "categoryLabel": "Legal Entity",
+        "id": "c9aa8cc9-40bf-4b52-9ac0-4434061583a2",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Swiss Association",
+          "BVI Entity"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "xpdrEH+98cG6fI46fzQGOtAUspk=",
+    "id": "ea6af32a030617deb7b87791cb6e5460",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "anonymity",
+        "categoryLabel": "Anonymity",
+        "id": "a519bba5-09df-461e-9364-0dd2ea3c2fb5",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "High",
+          "Highest"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "PSjEkip1ZjQlJjNDuSwMGMDWFnc=",
+    "id": "e0ae1e60185b74a8eee865bf5a890f39",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "team",
+        "categoryLabel": "Team",
+        "id": "9a57462a-678c-4c21-b2f4-578851f95cbf",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Remote",
+          "Local"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "JnErY+OhrQoitiVtsGwueGgqawI=",
+    "id": "827aa873b28797afa0d647b16fe5775d",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Registered address (Zug)",
+          "VAT documentation",
+          "Contract templates",
+          "Swiss Association setup with local counsel"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "+7Ier3eEHCta6Pf3VAa2XVmpIuE=",
+    "id": "03d1f1ebcd3973766ac391707c5610ed",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Annual tax filing",
+          "Reimbursement management",
+          "Invoice management",
+          "Monthly accounting & close",
+          "Monthly expense reports",
+          "Expense policies (role-based)",
+          "Contributor onboarding & operations",
+          "Multi-currency payouts",
+          "Dedicated ops support",
+          "Multiple entities",
+          "Dedicated account manager",
+          "Admin portal",
+          "Custom workflows & reporting"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "+hYd7jGaEtieXB06Kwn+DrF8/tc=",
+    "id": "238037fa1efb03d4b22e1adb39634190",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "A ready-to-use, non-commercial entity that serves as a coordination and execution hub with essential legal and operational infrastructure for open-source and public-goods builder teams.",
+        "displayOrder": 0,
+        "id": "fd3c1dbc-8c7c-4202-9417-154b4f26bb04",
+        "question": "What is an Operational Hub?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "tCkJqNQCvyTe7ETAHylN/Q231ik=",
+    "id": "0fd23a977ea357a62efe952dbb72b7b0",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Builder teams, open-source projects, and DAOs that receive grants or donations, pay contributors, or hold a treasury \u2014 and need a legal and operational structure to do so properly. Particularly well suited to globally distributed teams that want to operate under a recognized legal framework without setting up a traditional company.",
+        "displayOrder": 1,
+        "id": "d0d661ca-0a9d-422a-a41f-a5848165695a",
+        "question": "Who is this for?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "KbOFjrCT+o0KfoU3mqszBGqFelc=",
+    "id": "1cf6dbb8eabc479558f0f47110b22fdd",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Contributors are not publicly identified. Swiss Associations do not list members in a public registry. However, contributor identities are disclosed to legal counsel (attorney-client privilege) and the operator for KYB/KYC compliance purposes.",
+        "displayOrder": 2,
+        "id": "628fcf58-a69e-4cc6-b387-db1fd0148ab7",
+        "question": "Do contributors need to reveal their identity?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "vL3lEftdk4eJU/G+yTpY/+Flino=",
+    "id": "e0124cf16c33e013aaad51a05a320a9f",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "After an initial consultation, the process includes KYB/KYC verification, a founding meeting with licensed Swiss counsel, and entity registration. Once the entity is created, ongoing operational services begin immediately.",
+        "displayOrder": 3,
+        "id": "41f93228-2c7a-4bd8-933f-0cd8f3474a98",
+        "question": "How does setup work?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "ydUEkRfDp5MQYwxCpqQC7JfjfMY=",
+    "id": "e529c0626c88f0f580998bab537825d0",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Starter ($750/mo) is designed for early-stage teams and includes entity formation, financial operations, and up to 5 invoices per month. Standard ($1,250/mo + $250/contributor) is for growing teams of 3+ and adds contributor onboarding, multi-currency payouts, dedicated ops support, expense policies, and unlimited invoicing.",
+        "displayOrder": 4,
+        "id": "65df910d-d6eb-4a7d-97e3-a2052633e1f2",
+        "question": "What's the difference between Starter and Standard?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "tz8rqq6qszp/u0Aj5hxfUIMtMy8=",
+    "id": "2ea940a400ed051fda860aead795e9ac",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "Swiss Associations are a flexible, cost-efficient legal form well suited to open-source and public-goods teams. They offer independent legal personhood, privacy protections (members are not listed in a public registry), democratic governance, international recognition, and low administrative overhead.\n\nUnlike a traditional company, a Swiss Association is non-commercial \u2014 it cannot carry out exclusively commercial activities, receive equity investments, or distribute profits. For teams receiving grants, paying contributors, and building public goods, this is the right legal fit.",
+        "displayOrder": 0,
+        "id": "ace1fdae-8fae-e7de-89af-b11b4484a6f0",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "Why a Swiss Association?"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "8vOMxzqj/gRrIbju2skyLouQUes=",
+    "id": "7ef32ddea6b9bf6820d4327079b85193",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "Every Operational Hub subscription includes entity formation and ongoing operational support.\n\nFormation & Setup: Swiss association formation with licensed counsel, a registered address in Zug, legal document templates, and VAT documentation.\n\nOngoing Operations: Financial management (invoicing, accounting, expense reporting, tax filing), contributor operations (onboarding, multi-currency payouts, expense policies), and dedicated operational support.\n\nAdvanced & Custom: For scaling organizations \u2014 multiple entity support, a dedicated account manager, admin portal, and custom workflows. Add-ons available for exchange setup, banking, AML monitoring, and more.",
+        "displayOrder": 1,
+        "id": "ba96235c-ba48-22b6-5320-d278bd6bb2cd",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "What's Included"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "cDmNWNUrr3USDJU+krHwwfTHr78=",
+    "id": "4bc423329ea63cc9fc0e18cf1e264e80",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "Contributors work through the entity, not as individuals \u2014 avoiding the risk of being treated as a general partnership where each person carries unlimited personal liability.\n\nMembers of a Swiss Association are not listed in any public registry. While identities are known to legal counsel and the operator for KYB/KYC compliance, they are not publicly disclosed.\n\nA legal entity protects against the majority of operational and contractual liability. It does not protect against gross negligence, willful misconduct, or criminal liability.",
+        "displayOrder": 2,
+        "id": "78ef2f6b-22f1-295a-0e88-cd5d0fe1c679",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "Privacy & Liability Protection"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "xCVx2lrUJY1c6Nir/x0Bpjez544=",
+    "id": "54087845fb595af71775f5a89079f76e",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:08.998Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:42:51.287Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/oh/operational_hub.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "9K5y4UyVZKu0E56mBYUUOoycbyc=",
+    "id": "eefed3cf53574c0e8b2835b1e2a472dc",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:42:51.287Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T07:58:08.602Z",
+        "title": "Operational 4 Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "Uh+55RAKSKdJunZMioYgxpoCEtE=",
+    "id": "30a5b6343328ad8eb56d22433e36d598",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T07:58:08.602Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T07:58:13.438Z",
+        "title": "Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "5GDVuCWPM76qi7VCHHHMmfiPxAM=",
+    "id": "b8d05cdf37bc755614f1be58425229f2",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T07:58:13.438Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T08:15:30.895Z",
+        "title": "Operational 4 Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "D8Ki2l8lDEFoV39yYOS1tB8JibU=",
+    "id": "9aeaf04a757d4ad39c0dfe1dd899d441",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T08:15:30.895Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T08:15:42.555Z",
+        "title": "Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "YQMN/I88O2Ipms8YZ8eomNC1OkM=",
+    "id": "f6b6407b4dfa2c9ae91f295c2bbc3f39",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T08:15:42.555Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T08:15:50.809Z",
+        "title": "Operational 4 Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "NwfkC6U1fA8Q7ZT59AR7BW1dDL8=",
+    "id": "0fe33fdd80619544c963f74aec808170",
+    "index": 23,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T08:15:50.809Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-14T08:15:57.060Z",
+        "title": "Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "cgiz7Jtsh5QRY3S11lS+TCv/c6U=",
+    "id": "932a20377b09040c9dd8e6205b260326",
+    "index": 24,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T08:15:57.060Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-19T15:14:57.511Z",
+        "title": "Operational 4 Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "U1NIafJ4Dz3IOLsoMhSC41RYDhs=",
+    "id": "501fbb31fe1758de135592b134dc7036",
+    "index": 25,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:14:57.511Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-19T15:15:02.389Z",
+        "title": "Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "UBdJkcLvwDcEXD/d9pYJOKldm+g=",
+    "id": "b75f1fab38620ce3b45da57dc46e1bca",
+    "index": 26,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:15:02.389Z"
+  }
+]

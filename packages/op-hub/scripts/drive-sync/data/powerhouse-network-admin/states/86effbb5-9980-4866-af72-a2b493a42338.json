@@ -1,0 +1,15 @@
+{
+  "bonusClauses": [],
+  "costAndMaterials": null,
+  "currency": "USD",
+  "escrowDetails": null,
+  "evaluation": null,
+  "milestoneSchedule": [],
+  "payer": "",
+  "paymentModel": "MILESTONE",
+  "penaltyClauses": [],
+  "proposer": "",
+  "retainerDetails": null,
+  "status": "DRAFT",
+  "totalAmount": null
+}

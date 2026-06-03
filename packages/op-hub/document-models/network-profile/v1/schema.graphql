@@ -1,0 +1,92 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type NetworkProfileState {
+  name: String!
+  icon: String!
+  darkThemeIcon: String!
+  logo: String!
+  darkThemeLogo: String!
+  logoBig: String!
+  website: String
+  description: String!
+  category: [NetworkCategory!]!
+  x: String
+  github: String
+  discord: String
+  youtube: String
+}
+
+enum NetworkCategory {
+  DEFI
+  OSS
+  CRYPTO
+  NGO
+  CHARITY
+}
+
+# network-profile-management
+
+input SetIconInput {
+  icon: String
+  darkThemeIcon: String
+}
+
+input SetLogoInput {
+  logo: String
+  darkThemeLogo: String
+}
+
+input SetLogoBigInput {
+  logoBig: String!
+}
+
+input SetWebsiteInput {
+  website: String
+}
+
+input SetDescriptionInput {
+  description: String!
+}
+
+input SetCategoryInput {
+  category: [NetworkCategory!]!
+}
+
+input SetXInput {
+  x: String
+}
+
+input SetGithubInput {
+  github: String
+}
+
+input SetDiscordInput {
+  discord: String
+}
+
+input SetYoutubeInput {
+  youtube: String
+}
+
+input SetProfileNameInput {
+  name: String!
+}

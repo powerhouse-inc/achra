@@ -1,0 +1,1308 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "a0b70ded-84f2-4cec-85e2-eab29c7c34fb",
+        "meta": {},
+        "model": "powerhouse/service-offering",
+        "name": "AgenticOps",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:44.032Z",
+          "documentType": "powerhouse/service-offering",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "a0b70ded-84f2-4cec-85e2-eab29c7c34fb"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "86a0069ae9fa69d62faf02f665dffdbb",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:44.032Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+        "thumbnailUrl": "https://images.stockcake.com/public/0/4/a/04ad3a9a-cb3a-4e5c-97a4-8ed06c53fa91_large/galactic-council-meeting-stockcake.jpg",
+        "title": "AgentOps"
+      },
+      "scope": "global",
+      "type": "UPDATE_OFFERING_INFO"
+    },
+    "error": null,
+    "hash": "QGig+uqJQfx65wAWMOGLI+8lCr0=",
+    "id": "533e8a23d4c908bc9ea1d6c7a08feb8e",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "a0b70ded-84f2-4cec-85e2-eab29c7c34fb",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "availableBillingCycles": [],
+            "description": null,
+            "facetTargets": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "resourceTemplateId": null,
+            "services": [],
+            "status": "DRAFT",
+            "summary": "",
+            "thumbnailUrl": null,
+            "tiers": [],
+            "title": ""
+          },
+          "local": {}
+        },
+        "model": "powerhouse/service-offering",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "28278a325769b1f3b5dfd0f6779782d4",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:44.032Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "DRAFT"
+      },
+      "scope": "global",
+      "type": "UPDATE_OFFERING_STATUS"
+    },
+    "error": null,
+    "hash": "QGig+uqJQfx65wAWMOGLI+8lCr0=",
+    "id": "7af0b41364995ccbb8db7a746a3390ba",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "7oabGsp5YUdTz5hWS1l7qC7X0m0=",
+    "id": "dc3324d60ba8480c5d97e10907b0c3c3",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "resourceTemplateId": "82b608d4-536e-43f9-a947-63d53c03b03b"
+      },
+      "scope": "global",
+      "type": "SELECT_RESOURCE_TEMPLATE"
+    },
+    "error": null,
+    "hash": "c8MwuhiAtjyVNK/cjBaVinBHBNM=",
+    "id": "8324b1ee5162d7c00e3249e737d2d2a6",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "billingCycles": [
+          "MONTHLY",
+          "QUARTERLY",
+          "SEMI_ANNUAL",
+          "ANNUAL"
+        ],
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "SET_AVAILABLE_BILLING_CYCLES"
+    },
+    "error": null,
+    "hash": "4mOKBImTYzpztBIKC2ABUKxa9Qk=",
+    "id": "31dec6d0bd5ab1aa52c733176d7f5d9b",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "client",
+        "categoryLabel": "Client",
+        "id": "87ce2668-285d-4ae2-9e89-319a85bc6b6b",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "open-source",
+          "public-goods",
+          "vibe-coder",
+          "zero-human-company",
+          "commercial-operator",
+          "agent-fleet"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "ZoyC2gsO6o2U4eRvLZKXcAgrnu8=",
+    "id": "dddaeb4b4a46c4cb5deee3ffc81d4d7b",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "risk-profile",
+        "categoryLabel": "Risk Profile",
+        "id": "36fa3adf-8288-4028-b5ed-2bd61dc17ecc",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "low-read only",
+          "medium-automation",
+          "high"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "SGjDtAf588BW/OICrPgHwNTZ6rg=",
+    "id": "365781617d426be3cb6635748d32f340",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "jursidiction",
+        "categoryLabel": "Jursidiction",
+        "id": "2146d323-45ac-40e3-a76c-a799f783a2c2",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Estonia",
+          "Switzerland",
+          "US"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "o7voKAuhTXSYEUAi527jE3Jap1Q=",
+    "id": "b47abb5be8393d4ac093e7b606617e8d",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "availableBillingCycles": [
+          "MONTHLY",
+          "QUARTERLY",
+          "SEMI_ANNUAL",
+          "ANNUAL"
+        ],
+        "costType": "RECURRING",
+        "defaultSelected": true,
+        "id": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "isAddOn": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "name": "AgentOps"
+      },
+      "scope": "global",
+      "type": "ADD_OPTION_GROUP"
+    },
+    "error": null,
+    "hash": "FraShKvD+M+QEicCh5382lyGU6Y=",
+    "id": "8f6493e5e2fb304249d8c8008cd499c1",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "6f0297a5-8097-4f29-ae52-61db1702f8f6",
+        "isSetupFormation": true,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+        "title": "Agent Operational Assessment"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "35KnxwWu9697w6w+XLmU/QW7K50=",
+    "id": "697b438be9b6c45754238afce0a1694a",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "0e9367a7-5e13-4efd-bd6e-ed185692703c",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Agent Operational Assessment"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "7jgKfi7abDErywHDZe6D/dtrZrM=",
+    "id": "d7f9534c6d8fe08599ec2391611fc552",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "8c9d378a-3850-4200-bcbb-64ecda325874",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Entity Formation"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "wVJFc1556zlEnpzR5yYL2dIB7n4=",
+    "id": "c03797535d9b3da9b4f838f5ac6fa99f",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "34e1e619-6fc2-4704-a03f-b133db6ce425",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Director Appointment"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "4C0fdFILJt9YtJRkJNY7O7bv3aw=",
+    "id": "f0888f7acb15865aa3746bbcbba85c8d",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "d46bfa21-222d-4421-9662-2c20da8a0d48",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "KYC/AML Framework Setup"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "XiUACpF+vtvKrH5+kFasryMExrs=",
+    "id": "1a947e1ae38cd91e71b6f2130bfd4225",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5763e899-c6cf-4a04-9620-cff232eae3da",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Payment & Wallet Integration"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "ao9sgddA6Sn8gN3sHNlHhUh4xms=",
+    "id": "5b2fe57f2d43688ac959d01bd0ca4e79",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "568356b2-23fd-4aa3-8fd3-3bdd971d918d",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Bank Account Setup"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "rpopOHeRzjM+Dsmh1RPPF24s08k=",
+    "id": "55dbf5eac07da1b88da7544d36763b20",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "f64c1090-a4df-42c0-ac40-02946c962b07",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Risk Assessment & Classification"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "PZA/tKV6P3P8oNFy5Jx27zdFfIg=",
+    "id": "2dff233b0976b11ca0f59b7ae0668f86",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "6d4b8f7e-e626-4e1a-b51b-9a6b8916e900",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Instrument Selection & Structuring"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "m3lsRH9j7DML+S2cV1SplIP5cn4=",
+    "id": "28486e15fecd81e5bba19e1cb5a4a2f4",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "f972151c-23cd-4773-a510-aa1938213fe7",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Legal Vehicle Design"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "zniwurzFPU8CW2NfduDpT4eFVuc=",
+    "id": "4e1f7f5515fdcda1e3c05d92289d816a",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "b31ddc14-a638-4a25-8d32-3a1f5b496a95",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Transaction Processing"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "zRHJZqDsFEsvVh9mGBcGaIpVMnY=",
+    "id": "b35f07bb1fae4629188919e90b3a8205",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "012f4e6a-299c-4ac4-902b-992581515786",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Reporting"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "WiJeTPPFjPBq5aB29cEZD8M/rKY=",
+    "id": "6dcee169d9fa58b44931cf8a7f6fdd1b",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "7372799b-4a3b-4184-944a-2278913751c8",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Annual Maintenance & Filing"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "D4WSV37Paln7Hk4rze+gMz0YJFU=",
+    "id": "e2b3706fe088956ac7e95dd0ed49ddac",
+    "index": 21,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "fd073428-e09e-4c3c-9d8f-17d0950ff062",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Claims Management"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "5/VnO8vEe0RrKqegnR4jSdrES/8=",
+    "id": "a49d5138507cd4ae47075c94616df365",
+    "index": 22,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "6db9f8bb-ab79-4915-83f0-4459c0b960b6",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Risk Monitoring"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "RpmUdkudYjyzi52vK+hFVaeiWMc=",
+    "id": "428aba379b27950411636af0bd07b63c",
+    "index": 23,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "5d0a6b84-e382-4dd8-b5ff-3feb7f5ee2e5",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Vehicle Maintenance & Audit"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "2cbYlQSAqg/rYB2x1bOGjQPR6+U=",
+    "id": "05fe82bcf7990902fa87068400cdb632",
+    "index": 24,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "68836ad4-ce46-4bed-8ec2-56f6caae8681",
+        "isSetupFormation": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "title": "Coverage Adjustments"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE"
+    },
+    "error": null,
+    "hash": "XxMzDf+Sqeb+ZLvxqvi3oqgnJUs=",
+    "id": "ae44657a283e988afad4939272dbd23a",
+    "index": 25,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "currency": "USD",
+        "id": "6aaa166b-9cea-4347-8d60-ea29e8e18efa",
+        "isCustomPricing": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "name": "AgentCo Non-Profit"
+      },
+      "scope": "global",
+      "type": "ADD_TIER"
+    },
+    "error": null,
+    "hash": "PXSavLX8gKehW8rq8m9NcdBwsIQ=",
+    "id": "37ca38c3404be8166aa9ace8c74224d4",
+    "index": 26,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+        "serviceId": "6f0297a5-8097-4f29-ae52-61db1702f8f6",
+        "serviceLevelId": "2a436b48-98d2-401c-b080-625334643c19",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "hDnC0+K2/jMnK2sTVb74EOkxlp0=",
+    "id": "3e629114ccdc837ef57486f108ae6b39",
+    "index": 27,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "0e9367a7-5e13-4efd-bd6e-ed185692703c",
+        "serviceLevelId": "8d73f839-4906-4f4a-a737-f81790dac69b",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "yYsr6aiq6059dbXC0UH6D6wQ11Q=",
+    "id": "fa44b57f93486ae3e60b6e18f62cc1d3",
+    "index": 28,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "8c9d378a-3850-4200-bcbb-64ecda325874",
+        "serviceLevelId": "3731fa7f-82b1-4d99-b962-79717349ae8a",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "bZzD3IAIriS4VBrqNx4leQl56qA=",
+    "id": "4efcb13ce8135248f5dd597e05430921",
+    "index": 29,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "34e1e619-6fc2-4704-a03f-b133db6ce425",
+        "serviceLevelId": "c7aa13ce-7890-40d1-8411-0466a94669ed",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "xzbQoh/eyoLYFUvyWGu4iul7ezA=",
+    "id": "b9922081cc31afb22546eb34d080ba6d",
+    "index": 30,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "d46bfa21-222d-4421-9662-2c20da8a0d48",
+        "serviceLevelId": "6afd90bf-c04d-4aa6-9f67-2a7dfa7aa09c",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "qW9A+76C03OPB6jdiGY3N1C8tOs=",
+    "id": "87db0b83f9757b9f379a5bfc8efb1ec8",
+    "index": 31,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "5763e899-c6cf-4a04-9620-cff232eae3da",
+        "serviceLevelId": "d89e6ee9-51d9-4875-99cf-04b308bbceb3",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "yaVl9EqDYLRxs9Wf09TJNPm+KzM=",
+    "id": "d87c32fae1ea66bfc52783b6a9fd5bd2",
+    "index": 32,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "b31ddc14-a638-4a25-8d32-3a1f5b496a95",
+        "serviceLevelId": "a42609da-52b4-4bd4-a7a7-2553430c85a0",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "CEyh3d1SPjWEND+nbXseZIAu0Kg=",
+    "id": "2db1ba87f3e8ef63c75d29781d2daa35",
+    "index": 33,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "012f4e6a-299c-4ac4-902b-992581515786",
+        "serviceLevelId": "c06960cc-7c7d-4700-8170-7af8d6305c5a",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "1FvkDsP3ZusNljepa07URGQps/g=",
+    "id": "bc4f6cc83319cd21cc10687fb0f94455",
+    "index": 34,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "7372799b-4a3b-4184-944a-2278913751c8",
+        "serviceLevelId": "3cdccc0b-2bec-4dba-aec5-a51635bf2fdc",
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "TzxZTgBBbIwQ3nZpZ/SQVq7Y25s=",
+    "id": "a823c2866760bdadd88d0f433e9d1a1a",
+    "index": 35,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "currency": "USD",
+        "id": "9699579e-191b-452c-aa4c-e1128f8df16f",
+        "isCustomPricing": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "name": "AgentCo Commercial,"
+      },
+      "scope": "global",
+      "type": "ADD_TIER"
+    },
+    "error": null,
+    "hash": "+8PaBWxABPIkQwU9m0Q0OoQtgXk=",
+    "id": "cd04e4289447f7a56dcddff445220b2a",
+    "index": 36,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "8c9d378a-3850-4200-bcbb-64ecda325874",
+        "serviceLevelId": "4944b4d6-7d4d-44bb-a73d-0098fe221ea6",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "hR/X3LIO2TIvMuDIBJC3AxmIlGg=",
+    "id": "4fd063b29aaba934e9ffed5f6f753d7e",
+    "index": 37,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "5763e899-c6cf-4a04-9620-cff232eae3da",
+        "serviceLevelId": "19d2db6b-2099-452f-838f-1cc63b287598",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "hL8D8l/YwEj3m/0qMAq0LByVMac=",
+    "id": "d8f0cf0a6ef6fe5eca4b472b85b64eb4",
+    "index": 38,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "568356b2-23fd-4aa3-8fd3-3bdd971d918d",
+        "serviceLevelId": "754d6ae6-a994-4834-91a3-c92f33069088",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "euyEv64Dws12MU5XgcwZEk1AJAA=",
+    "id": "4fdc40b10bbfff29900041329216fae3",
+    "index": 39,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "b31ddc14-a638-4a25-8d32-3a1f5b496a95",
+        "serviceLevelId": "04d8cb5b-3dcc-43cc-926a-494579ca5ce1",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "dkuwu5979rszAXbHxobFgkF3Rlg=",
+    "id": "2a409c0f6541f2e09c8be0bd6257c584",
+    "index": 40,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "012f4e6a-299c-4ac4-902b-992581515786",
+        "serviceLevelId": "428bde60-c19e-4f8f-a606-ea9a87f25e98",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "uuOqsSojjg1Bz5XUNfSWdO0cgPE=",
+    "id": "c67d4607eca8f99116997e8b35006980",
+    "index": 41,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "7372799b-4a3b-4184-944a-2278913751c8",
+        "serviceLevelId": "fc49340e-dd92-49cf-a9f0-867c5bc1e62f",
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "WYcDYR1EdFgLG0ra1pAUqLnBP/A=",
+    "id": "0088df5f30ceb49a713c81aa0a776b9b",
+    "index": 42,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "currency": "USD",
+        "id": "10d0a997-724f-445a-b95b-992ffe8c2054",
+        "isCustomPricing": false,
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "name": "Agent RiskCo"
+      },
+      "scope": "global",
+      "type": "ADD_TIER"
+    },
+    "error": null,
+    "hash": "4Z45X5kbbObNrMqrzvgv8QIKpk8=",
+    "id": "d5d4f28454a5770dde33b308d816be94",
+    "index": 43,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+        "serviceId": "6f0297a5-8097-4f29-ae52-61db1702f8f6",
+        "serviceLevelId": "7ed63e17-5cc7-4f88-a7f6-aa9bfd8f63da",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "goTEPMgEmGJ075WKWhsfqfHYOIs=",
+    "id": "77cabfe6038aa95f1cac19aa696186c3",
+    "index": 44,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "0e9367a7-5e13-4efd-bd6e-ed185692703c",
+        "serviceLevelId": "e782e910-fd2d-4ca7-acce-087d0f81561c",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "9oxldFBiorIWKo+X2COAalzWsGE=",
+    "id": "eeb9ec36222e9eef832a2468bd6bb043",
+    "index": 45,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "568356b2-23fd-4aa3-8fd3-3bdd971d918d",
+        "serviceLevelId": "d0a7befe-f1b9-4e76-81ed-a08b567928d7",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "WmaeFhRdFh0YHM8fD6a8m/XlpmY=",
+    "id": "165c05b0c59b4c07fc15a9eec5b43df8",
+    "index": 46,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "f64c1090-a4df-42c0-ac40-02946c962b07",
+        "serviceLevelId": "be6c5dce-2d0e-4b59-944a-27892657dad2",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "RTAx5VAnirFL3llMEYIxe6XR7B0=",
+    "id": "7bec2290ab484cea4aed79bf9d8b021d",
+    "index": 47,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "6d4b8f7e-e626-4e1a-b51b-9a6b8916e900",
+        "serviceLevelId": "b0b2d658-2133-4e34-afc6-e627da8b8226",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "VADzXxXwZp9pRk0A3CoGWNVYsg0=",
+    "id": "02cf0c45446995e27568cb59fb22a40f",
+    "index": 48,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "f972151c-23cd-4773-a510-aa1938213fe7",
+        "serviceLevelId": "b7ddd988-ad88-4006-8042-c9e62ddad575",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "8boyMPylqLtTE586XQI1uYjjgP4=",
+    "id": "34da1fecff8ce1e60f661a95fc48d3fe",
+    "index": 49,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "012f4e6a-299c-4ac4-902b-992581515786",
+        "serviceLevelId": "ad250bdb-9f92-4eb6-815c-573a0fa8080d",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "3AQm5TpYdJh/+VMt3674imDNRXs=",
+    "id": "5c35a718ee22f9626de9f20a1cadc0d2",
+    "index": 50,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "fd073428-e09e-4c3c-9d8f-17d0950ff062",
+        "serviceLevelId": "ccadf7a6-1a38-427f-823e-df6dee22a077",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "Ilr5qizanYy/73pAih359jijEIE=",
+    "id": "2aab7f509634e3b1ef3c4e16358d101b",
+    "index": 51,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "6db9f8bb-ab79-4915-83f0-4459c0b960b6",
+        "serviceLevelId": "b912fb73-63ac-4b2b-83d0-b61caaac195f",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "Sw66l5Khycg7eMIan6WqRn9hqw8=",
+    "id": "6261fe714fe1c325bdebc4faec5fda1e",
+    "index": 52,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "5d0a6b84-e382-4dd8-b5ff-3feb7f5ee2e5",
+        "serviceLevelId": "84a4b8b5-98fa-4ba3-bea8-5b7d0a232c1a",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "Hz6lddNVEw7hkWgZ4nAQRvqJVmI=",
+    "id": "7dbc7b33b378718b3ab5ae1c7331affd",
+    "index": 53,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "level": "INCLUDED",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "serviceId": "68836ad4-ce46-4bed-8ec2-56f6caae8681",
+        "serviceLevelId": "f0f5fc0d-e51f-4e2d-a464-0b78a265409d",
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+      },
+      "scope": "global",
+      "type": "ADD_SERVICE_LEVEL"
+    },
+    "error": null,
+    "hash": "lt3tG8DPzmrLNuPv3YdwRyGHJb0=",
+    "id": "fce2df64e895e6a1ae41e0b783148b45",
+    "index": 54,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "recurringPricing": [],
+        "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa",
+        "tierPricingId": "caec743a-82ef-4096-8ef7-fc0ac0fa3a90"
+      },
+      "scope": "global",
+      "type": "ADD_OPTION_GROUP_TIER_PRICING"
+    },
+    "error": null,
+    "hash": "Uthliy7JGcf59JG8UhZ6FDERgjc=",
+    "id": "7fa7852850e3fa898b4ee77d72e35eef",
+    "index": 55,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "recurringPricing": [
+          {
+            "amount": 700,
+            "billingCycle": "MONTHLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "d58e0472-b6d4-43b1-a9bb-a316e18bc255"
+          },
+          {
+            "amount": 700,
+            "billingCycle": "QUARTERLY",
+            "currency": "USD",
+            "discount": null,
+            "id": "ab1a56a3-b71c-408d-a912-d26e9936b453"
+          },
+          {
+            "amount": 700,
+            "billingCycle": "SEMI_ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "37da97cf-a04f-478b-ac80-284bd960890f"
+          },
+          {
+            "amount": 700,
+            "billingCycle": "ANNUAL",
+            "currency": "USD",
+            "discount": null,
+            "id": "c39780a3-3a22-44f6-80b5-619817894669"
+          }
+        ],
+        "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f",
+        "tierPricingId": "4139f886-19a7-44a4-a7c6-e6d6a250d636"
+      },
+      "scope": "global",
+      "type": "ADD_OPTION_GROUP_TIER_PRICING"
+    },
+    "error": null,
+    "hash": "OnH0qbcUsrgxTh67HLztoEuRrIM=",
+    "id": "c50031c82a3381e06a42c96fb8c46b1c",
+    "index": 56,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+        "recurringPricing": [],
+        "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054",
+        "tierPricingId": "0ebb0fc7-fc1c-41ad-99ee-540e979f356d"
+      },
+      "scope": "global",
+      "type": "ADD_OPTION_GROUP_TIER_PRICING"
+    },
+    "error": null,
+    "hash": "CN63pfV4eUS5kd7EAVdHLpWAmSQ=",
+    "id": "dc2a74931ebbabb165b0c1e45c68672c",
+    "index": 57,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:28.562Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+        "lastModified": "2026-05-14T07:58:24.635Z",
+        "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/agent-ops/agent_ops.png",
+        "title": "AgentOps"
+      },
+      "scope": "global",
+      "type": "UPDATE_OFFERING_INFO"
+    },
+    "error": null,
+    "hash": "grZv9klBdi7SZWk8a0F2/4tFj7M=",
+    "id": "cba6b2ed05b2384c1bb684f033ef05e5",
+    "index": 58,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T07:58:24.635Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+        "lastModified": "2026-05-14T07:58:24.643Z",
+        "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/agent-ops/agent_ops.png",
+        "title": "AgentOps"
+      },
+      "scope": "global",
+      "type": "UPDATE_OFFERING_INFO"
+    },
+    "error": null,
+    "hash": "2YUG78+tCpttsMsRmvO/QXqgDlo=",
+    "id": "a6dc47f0abc22dba04741272b18061f4",
+    "index": 59,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T07:58:24.643Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+        "lastModified": "2026-05-14T07:58:24.694Z",
+        "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/agent-ops/agent_ops.png",
+        "title": "AgentOps"
+      },
+      "scope": "global",
+      "type": "UPDATE_OFFERING_INFO"
+    },
+    "error": null,
+    "hash": "Dug8bB8qdLqt3Ox1ILo+7cdDa4I=",
+    "id": "287cedd4f9aa21668c8e0286fe107f33",
+    "index": 60,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-14T07:58:24.694Z"
+  }
+]
