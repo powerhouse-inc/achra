@@ -71,14 +71,14 @@ export function LinksSection({
   };
 
   return (
-    <div className="bg-white border border-slate-200/60 rounded-2xl shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
-          <Link2 size={18} className="text-violet-600" />
+    <div className="bg-card border border-border rounded-2xl shadow-sm p-6">
+      <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+        <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+          <Link2 size={18} className="text-muted-foreground" />
         </span>
         Links
       </h3>
-      <p className="text-sm text-slate-500 mb-5">
+      <p className="text-sm text-muted-foreground mb-5">
         Add links to your portfolio, social profiles, or other relevant pages
       </p>
 
@@ -90,8 +90,8 @@ export function LinksSection({
               key={link.id}
               className={`group flex items-center gap-3 p-3 rounded-xl border transition-all ${
                 editingId === link.id
-                  ? "bg-slate-50 border-slate-300"
-                  : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm"
+                  ? "bg-muted border-input"
+                  : "bg-card border-border hover:border-input hover:shadow-sm"
               }`}
             >
               {editingId === link.id ? (
@@ -118,14 +118,14 @@ export function LinksSection({
                     <button
                       type="button"
                       onClick={handleSaveEdit}
-                      className="p-2.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-600 transition-colors"
+                      className="p-2.5 rounded-xl bg-status-success/20 hover:bg-status-success/30 text-status-success transition-colors"
                     >
                       <Check size={16} />
                     </button>
                     <button
                       type="button"
                       onClick={handleCancelEdit}
-                      className="p-2.5 rounded-xl hover:bg-slate-100 text-slate-500 transition-colors"
+                      className="p-2.5 rounded-xl hover:bg-muted text-muted-foreground transition-colors"
                     >
                       <X size={16} />
                     </button>
@@ -134,7 +134,7 @@ export function LinksSection({
               ) : (
                 <>
                   {/* Favicon */}
-                  <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 overflow-hidden">
                     {getFaviconUrl(link.url) ? (
                       <img
                         src={getFaviconUrl(link.url) || ""}
@@ -145,12 +145,12 @@ export function LinksSection({
                         }}
                       />
                     ) : (
-                      <Link2 size={14} className="text-slate-400" />
+                      <Link2 size={14} className="text-muted-foreground" />
                     )}
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-slate-800 truncate text-sm">
+                    <p className="font-medium text-foreground truncate text-sm">
                       {link.label ||
                         (() => {
                           try {
@@ -164,7 +164,7 @@ export function LinksSection({
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-slate-500 hover:text-indigo-600 truncate block transition-colors"
+                      className="text-xs text-muted-foreground hover:text-primary truncate block transition-colors"
                     >
                       {link.url}
                     </a>
@@ -174,7 +174,7 @@ export function LinksSection({
                     <button
                       type="button"
                       onClick={() => handleStartEdit(link)}
-                      className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                      className="p-2 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                       title="Edit link"
                     >
                       <Pencil size={14} />
@@ -182,7 +182,7 @@ export function LinksSection({
                     <button
                       type="button"
                       onClick={() => onRemoveLink(link.id)}
-                      className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors"
+                      className="p-2 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                       title="Remove link"
                     >
                       <Trash2 size={14} />
@@ -197,19 +197,19 @@ export function LinksSection({
 
       {/* Empty state */}
       {links.length === 0 && (
-        <div className="text-center py-8 mb-5 rounded-xl bg-slate-50 border-2 border-dashed border-slate-200">
-          <Link2 size={32} className="text-slate-300 mx-auto mb-2" />
-          <p className="text-slate-500 text-sm">No links added yet</p>
-          <p className="text-slate-400 text-xs mt-1">
+        <div className="text-center py-8 mb-5 rounded-xl bg-muted border-2 border-dashed border-border">
+          <Link2 size={32} className="text-muted-foreground mx-auto mb-2" />
+          <p className="text-muted-foreground text-sm">No links added yet</p>
+          <p className="text-muted-foreground text-xs mt-1">
             Add links to your portfolio, GitHub, or social profiles
           </p>
         </div>
       )}
 
       {/* Add Link Form */}
-      <div className="bg-slate-50 rounded-xl p-4 border border-slate-200">
-        <p className="text-sm font-medium text-slate-700 mb-3 flex items-center gap-2">
-          <Plus size={14} className="text-slate-500" />
+      <div className="bg-muted rounded-xl p-4 border border-border">
+        <p className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
+          <Plus size={14} className="text-muted-foreground" />
           Add New Link
         </p>
         <div className="space-y-3">
@@ -240,7 +240,7 @@ export function LinksSection({
               type="button"
               onClick={handleAddLink}
               disabled={!newUrl.trim()}
-              className="px-5 py-2.5 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              className="px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium rounded-xl hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed transition-colors flex items-center gap-2"
             >
               <Plus size={14} />
               Add

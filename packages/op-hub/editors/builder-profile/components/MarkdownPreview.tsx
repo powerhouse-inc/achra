@@ -37,7 +37,7 @@ export function MarkdownPreview({
       <button
         type="button"
         onClick={() => setIsExpanded(!isExpanded)}
-        className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-700 transition-colors"
+        className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
       >
         {isExpanded ? (
           <>
@@ -55,7 +55,7 @@ export function MarkdownPreview({
   if (!MarkdownRenderer) {
     return (
       <div className={className}>
-        <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap">
+        <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
           {displayContent}
         </p>
         <ExpandButton />
@@ -67,6 +67,11 @@ export function MarkdownPreview({
     <div className={className}>
       <style>
         {`
+          /* NOTE: this preview renders the third-party @uiw/react-markdown-preview
+             widget locked to light mode (data-color-mode="light" below), so these
+             colors stay hardcoded to match that light palette. Tokenizing them
+             without also theming the widget would paint light text on the widget's
+             light background in dark mode. Theming the widget is out of scope. */
           .markdown-preview-content {
             font-size: 0.875rem;
             line-height: 1.625;

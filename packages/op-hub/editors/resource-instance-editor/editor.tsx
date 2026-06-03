@@ -47,7 +47,10 @@ export default function ResourceInstanceEditor() {
     // (see service-offering-app/module.ts). Accept the legacy "service-offering-app"
     // string too in case a drive was tagged with the directory name.
     const preferred = selectedDrive?.header.meta?.preferredEditor;
-    if (preferred === "service-offering" || preferred === "service-offering-app") {
+    if (
+      preferred === "service-offering" ||
+      preferred === "service-offering-app"
+    ) {
       setMode("operator");
     }
   }, [selectedDrive]);

@@ -11,43 +11,43 @@ const SCOPE_OPTIONS: {
     value: "ACC",
     label: "ACC",
     description: "Accessibility",
-    color: "bg-cyan-500",
+    color: "bg-chart-1",
   },
   {
     value: "STA",
     label: "STA",
     description: "Stability",
-    color: "bg-blue-500",
+    color: "bg-chart-2",
   },
   {
     value: "SUP",
     label: "SUP",
     description: "Support",
-    color: "bg-violet-500",
+    color: "bg-chart-3",
   },
   {
     value: "STABILITY_SCOPE",
     label: "Stability Scope",
     description: "Protocol stability initiatives",
-    color: "bg-emerald-500",
+    color: "bg-chart-4",
   },
   {
     value: "SUPPORT_SCOPE",
     label: "Support Scope",
     description: "Ecosystem support work",
-    color: "bg-amber-500",
+    color: "bg-chart-5",
   },
   {
     value: "PROTOCOL_SCOPE",
     label: "Protocol Scope",
     description: "Core protocol development",
-    color: "bg-indigo-500",
+    color: "bg-chart-6",
   },
   {
     value: "GOVERNANCE_SCOPE",
     label: "Governance Scope",
     description: "Governance processes",
-    color: "bg-rose-500",
+    color: "bg-chart-7",
   },
 ];
 
@@ -70,14 +70,14 @@ export function ScopesSection({
     .filter(Boolean);
 
   return (
-    <div className="bg-white border border-slate-200/60 rounded-2xl shadow-sm p-6">
-      <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
-        <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-          <Target size={18} className="text-emerald-600" />
+    <div className="bg-card border border-border rounded-2xl shadow-sm p-6">
+      <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center gap-2">
+        <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+          <Target size={18} className="text-muted-foreground" />
         </span>
         Scopes
       </h3>
-      <p className="text-sm text-slate-500 mb-5">
+      <p className="text-sm text-muted-foreground mb-5">
         Define the areas where you contribute to the ecosystem
       </p>
 
@@ -89,16 +89,16 @@ export function ScopesSection({
               scope && (
                 <div
                   key={scope.value}
-                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 hover:border-emerald-300 transition-all"
+                  className="group flex items-center gap-2 px-3 py-2 rounded-xl bg-muted border border-border hover:border-input transition-all"
                 >
                   <span className={`w-2 h-2 rounded-full ${scope.color}`} />
-                  <span className="text-sm font-medium text-slate-700">
+                  <span className="text-sm font-medium text-foreground">
                     {scope.label}
                   </span>
                   <button
                     type="button"
                     onClick={() => onRemoveScope(scope.value)}
-                    className="ml-1 p-1 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-red-100 text-slate-400 hover:text-red-600 transition-all"
+                    className="ml-1 p-1 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-all"
                   >
                     <X size={14} />
                   </button>
@@ -110,10 +110,12 @@ export function ScopesSection({
 
       {/* Empty state */}
       {scopes.length === 0 && (
-        <div className="text-center py-8 mb-5 rounded-xl bg-slate-50 border-2 border-dashed border-slate-200">
-          <Target size={32} className="text-slate-300 mx-auto mb-2" />
-          <p className="text-slate-500 text-sm">No scopes selected yet</p>
-          <p className="text-slate-400 text-xs mt-1">
+        <div className="text-center py-8 mb-5 rounded-xl bg-muted border-2 border-dashed border-border">
+          <Target size={32} className="text-muted-foreground mx-auto mb-2" />
+          <p className="text-muted-foreground text-sm">
+            No scopes selected yet
+          </p>
+          <p className="text-muted-foreground text-xs mt-1">
             Add scopes from the dropdown below
           </p>
         </div>
@@ -123,7 +125,7 @@ export function ScopesSection({
       {availableScopes.length > 0 && (
         <div className="relative">
           <select
-            className="w-full px-4 py-3 pr-10 border border-slate-200 rounded-xl text-sm bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors appearance-none cursor-pointer"
+            className="w-full px-4 py-3 pr-10 border border-input rounded-xl text-sm bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-colors appearance-none cursor-pointer"
             onChange={(e) => {
               if (e.target.value) {
                 onAddScope(e.target.value as BuilderScope);
@@ -142,7 +144,7 @@ export function ScopesSection({
             ))}
           </select>
           <svg
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-4 h-4"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none w-4 h-4"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -157,7 +159,7 @@ export function ScopesSection({
 
       {/* All scopes added message */}
       {availableScopes.length === 0 && scopes.length > 0 && (
-        <div className="flex items-center gap-2 text-sm text-emerald-600 bg-emerald-50 rounded-xl px-4 py-3">
+        <div className="flex items-center gap-2 text-sm text-status-success bg-status-success/10 rounded-xl px-4 py-3">
           <Check size={16} />
           <span>All available scopes have been added</span>
         </div>
