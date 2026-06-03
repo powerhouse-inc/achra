@@ -5,6 +5,18 @@
    (the package's exported stylesheet) so the editor renders correctly in
    deployed Connect, where the library's lazy-loaded CSS chunk isn't served. */
 @import "@uiw/react-md-editor/markdown-editor.css";
+@import "@achra/design-system";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Scan op-hub's own editor source explicitly.
+   ──────────────────────────────────────────────────────────────────────────
+   Tailwind v4 does not reliably auto-detect a package's own source across the
+   different build roots op-hub is processed in (ph-cli build, the Connect /
+   Vetra studio, and downstream consumers). Without an explicit @source, the
+   editors' utility classes (padding, radius, borders, shadows) can silently
+   fail to generate, leaving editors unstyled. All className usage lives under
+   editors/, so scanning it here makes generation deterministic. */
+@source "./editors/**/*.{ts,tsx}";
 
 /* ──────────────────────────────────────────────────────────────────────────
    Force-generate the dark-mode utilities used by the component libraries we
