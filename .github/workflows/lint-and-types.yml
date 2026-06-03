@@ -10,7 +10,7 @@ jobs:
   lint-and-types:
     name: Lint and Types Checks
     runs-on: ubuntu-latest
-    container: node:22
+    container: node:24
 
     steps:
       - name: Checkout
