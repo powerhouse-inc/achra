@@ -1,0 +1,142 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type WorkstreamState {
+  code: String
+  title: String
+  status: WorkstreamStatus!
+  client: ClientInfo
+  rfp: RFP
+  initialProposal: Proposal
+  alternativeProposals: [Proposal!]!
+  sow: PHID
+  paymentTerms: PHID
+  paymentRequests: [PHID!]!
+}
+
+enum WorkstreamStatus {
+  RFP_DRAFT
+  PREWORK_RFC
+  RFP_CANCELLED
+  OPEN_FOR_PROPOSALS
+  PROPOSAL_SUBMITTED
+  NOT_AWARDED
+  AWARDED
+  IN_PROGRESS
+  FINISHED
+}
+
+type Proposal {
+  id: OID!
+  sow: PHID!
+  paymentTerms: PHID!
+  status: ProposalStatus!
+  author: ProposalAuthor!
+}
+
+enum ProposalStatus {
+  DRAFT
+  SUBMITTED
+  ACCEPTED
+  REJECTED
+}
+
+type ClientInfo {
+  id: PHID!
+  name: String
+  icon: URL
+}
+
+type RFP {
+  id: PHID!
+  title: String!
+}
+
+type ProposalAuthor {
+  id: PHID!
+  name: String
+  icon: URL
+}
+
+# workstream
+
+input EditWorkstreamInput {
+  code: String
+  title: String
+  status: WorkstreamStatus
+  sowId: PHID
+  paymentTerms: PHID
+}
+
+input EditClientInfoInput {
+  clientId: PHID!
+  name: String
+  icon: String
+}
+
+input SetRequestForProposalInput {
+  rfpId: PHID!
+  title: String!
+}
+
+input AddPaymentRequestInput {
+  id: PHID!
+}
+
+input RemovePaymentRequestInput {
+  id: PHID!
+}
+
+# proposals
+
+input EditInitialProposalInput {
+  id: OID!
+  sowId: PHID
+  paymentTermsId: PHID
+  status: ProposalStatus
+  proposalAuthor: ProposalAuthorInput
+}
+
+input ProposalAuthorInput {
+  id: PHID!
+  name: String
+  icon: URL
+}
+
+input AddAlternativeProposalInput {
+  id: OID!
+  sowId: PHID
+  paymentTermsId: PHID
+  status: ProposalStatus
+  proposalAuthor: ProposalAuthorInput
+}
+
+input EditAlternativeProposalInput {
+  id: OID!
+  sowId: PHID
+  paymentTermsId: PHID
+  status: ProposalStatus
+  proposalAuthor: ProposalAuthorInput
+}
+
+input RemoveAlternativeProposalInput {
+  id: OID!
+}

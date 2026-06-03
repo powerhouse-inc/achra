@@ -1,0 +1,306 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type ResourceTemplateState {
+    id: PHID
+    operatorId: PHID
+    title: String!
+    summary: String!
+    description: String
+    thumbnailUrl: URL
+    infoLink: URL
+    status: TemplateStatus!
+    lastModified: DateTime
+    targetAudiences: [TargetAudience!]!
+    setupServices: [String!]!
+    recurringServices: [String!]!
+    facetTargets: [FacetTarget!]!
+    services: [Service!]!
+    optionGroups: [OptionGroup!]!
+    faqFields: [FaqField!]
+    contentSections: [ContentSection!]!
+    weight: Int
+    subtitle: String
+}
+
+enum TemplateStatus {
+    DRAFT
+    COMING_SOON
+    ACTIVE
+    DEPRECATED
+}
+
+type TargetAudience {
+    id: OID!
+    label: String!
+    color: String
+}
+
+type FacetTarget {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOptions: [String!]!
+}
+
+type Service {
+    id: OID!
+    title: String!
+    description: String
+    displayOrder: Int
+    parentServiceId: OID
+    isSetupFormation: Boolean!
+    optionGroupId: OID
+    facetBindings: [ResourceFacetBinding!]!
+}
+
+type ResourceFacetBinding {
+    id: OID!
+    facetName: String!
+    facetType: PHID!
+    supportedOptions: [OID!]!
+}
+
+type OptionGroup {
+    id: OID!
+    name: String!
+    description: String
+    isAddOn: Boolean!
+    defaultSelected: Boolean!
+}
+
+type FaqField {
+    id: OID!
+    question: String
+    answer: String
+    displayOrder: Int!
+}
+
+type ContentSection {
+    id: OID!
+    title: String!
+    content: String!
+    displayOrder: Int!
+}
+
+# Template Management
+
+input UpdateTemplateInfoInput {
+    title: String
+    summary: String
+    description: String
+    thumbnailUrl: URL
+    infoLink: URL
+    subtitle: String
+    lastModified: DateTime!
+}
+
+input UpdateTemplateStatusInput {
+    status: TemplateStatus!
+    lastModified: DateTime!
+}
+
+input SetOperatorInput {
+    operatorId: PHID!
+    lastModified: DateTime!
+}
+
+input SetTemplateIdInput {
+    id: PHID!
+    lastModified: DateTime!
+}
+
+input SetWeightInput {
+    weight: Int
+    lastModified: DateTime!
+}
+
+# Audience Management
+
+input AddTargetAudienceInput {
+    id: OID!
+    label: String!
+    color: String
+    lastModified: DateTime!
+}
+
+input RemoveTargetAudienceInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+# Facet Targeting
+
+input SetFacetTargetInput {
+    id: OID!
+    categoryKey: String!
+    categoryLabel: String!
+    selectedOptions: [String!]!
+    lastModified: DateTime!
+}
+
+input RemoveFacetTargetInput {
+    categoryKey: String!
+    lastModified: DateTime!
+}
+
+input AddFacetOptionInput {
+    categoryKey: String!
+    optionId: String!
+    lastModified: DateTime!
+}
+
+input RemoveFacetOptionInput {
+    categoryKey: String!
+    optionId: String!
+    lastModified: DateTime!
+}
+
+# Service Category Management
+
+input SetSetupServicesInput {
+    services: [String!]!
+    lastModified: DateTime!
+}
+
+input SetRecurringServicesInput {
+    services: [String!]!
+    lastModified: DateTime!
+}
+
+# Service Management
+
+input AddServiceInput {
+    id: OID!
+    title: String!
+    description: String
+    parentServiceId: OID
+    displayOrder: Int
+    isSetupFormation: Boolean
+    optionGroupId: OID
+    lastModified: DateTime!
+}
+
+input UpdateServiceInput {
+    id: OID!
+    title: String
+    description: String
+    parentServiceId: OID
+    displayOrder: Int
+    isSetupFormation: Boolean
+    optionGroupId: OID
+    lastModified: DateTime!
+}
+
+input DeleteServiceInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input AddFacetBindingInput {
+    serviceId: OID!
+    bindingId: OID!
+    facetName: String!
+    facetType: PHID!
+    supportedOptions: [OID!]!
+    lastModified: DateTime!
+}
+
+input RemoveFacetBindingInput {
+    serviceId: OID!
+    bindingId: OID!
+    lastModified: DateTime!
+}
+
+# Option Group Management
+
+input AddOptionGroupInput {
+    id: OID!
+    name: String!
+    description: String
+    isAddOn: Boolean!
+    defaultSelected: Boolean!
+    lastModified: DateTime!
+}
+
+input UpdateOptionGroupInput {
+    id: OID!
+    name: String
+    description: String
+    isAddOn: Boolean
+    defaultSelected: Boolean
+    lastModified: DateTime!
+}
+
+input DeleteOptionGroupInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input AddFaqInput {
+    id: OID!
+    question: String
+    answer: String
+    displayOrder: Int!
+}
+
+input UpdateFaqInput {
+  id: OID!
+  question: String
+  answer: String
+}
+
+input DeleteFaqInput {
+  id:OID!
+}
+
+input ReorderFaqsInput {
+    faqIds: [OID!]!
+    lastModified: DateTime!
+}
+
+# Content Section Management
+
+input AddContentSectionInput {
+    id: OID!
+    title: String!
+    content: String!
+    displayOrder: Int!
+    lastModified: DateTime!
+}
+
+input UpdateContentSectionInput {
+    id: OID!
+    title: String
+    content: String
+    displayOrder: Int
+    lastModified: DateTime!
+}
+
+input DeleteContentSectionInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input ReorderContentSectionsInput {
+    sectionIds: [OID!]!
+    lastModified: DateTime!
+}

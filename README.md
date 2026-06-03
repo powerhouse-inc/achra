@@ -70,7 +70,7 @@ Start from `.env.example`. The most important variables are:
 
 ## Project Structure
 
-Achra follows a module-based architecture. Business and feature code lives in `modules/`, while route definitions live in `app/`.
+Achra follows a module-based architecture. Business and feature code lives in `apps/frontend/modules/`, while route definitions live in `apps/frontend/app/`.
 
 ```text
 app/
@@ -96,33 +96,33 @@ modules/
   __generated__/graphql/      Generated GraphQL types and hooks
 ```
 
-Use `modules/shared/` for code shared across multiple domains or app-level layouts. Domain-specific code should stay within its own module.
+Use `apps/frontend/modules/shared/` for code shared across multiple domains or app-level layouts. Domain-specific code should stay within its own module.
 
 ## Routing Model
 
-- Global routes live under `app/(achra)`, including the app home at `/`, plus areas such as `/networks`, `/workstreams`, and `/services`.
-- Network-specific routes live under `app/network/[slug]` and cover builders, finances, roadmaps, workstreams, and related details.
-- The root layout in `app/layout.tsx` wires global providers, theme support, analytics, query state, toaster notifications, footer rendering, and the optional whitelist overlay.
+- Global routes live under `apps/frontend/app/(achra)`, including the app home at `/`, plus areas such as `/networks`, `/workstreams`, and `/services`.
+- Network-specific routes live under `apps/frontend/app/network/[slug]` and cover builders, finances, roadmaps, workstreams, and related details.
+- The root layout in `apps/frontend/app/layout.tsx` wires global providers, theme support, analytics, query state, toaster notifications, footer rendering, and the optional whitelist overlay.
 
 ## Data Layer
 
 Achra uses GraphQL as its primary data layer.
 
-- GraphQL operations are colocated in `modules/**/*.graphql` and relevant `tsx` or `ts` files.
-- Code generation is configured in `codegen.ts`.
-- Generated types and TanStack Query hooks are written to `modules/__generated__/graphql/switchboard-generated.ts`.
-- The generated hooks use the custom fetcher at `modules/shared/lib/fetcher.ts`.
+- GraphQL operations are colocated in `apps/frontend/modules/**/*.graphql` and relevant `tsx` or `ts` files.
+- Code generation is configured in `apps/frontend/codegen.ts`.
+- Generated types and TanStack Query hooks are written to `apps/frontend/modules/__generated__/graphql/switchboard-generated.ts`.
+- The generated hooks use the custom fetcher at `apps/frontend/modules/shared/lib/fetcher.ts`.
 
 Run `pnpm codegen` after adding or changing GraphQL operations.
 
 ## Storybook And UI Development
 
-Storybook is configured with `@storybook/nextjs-vite` and scans stories from both `modules/` and `app/`. The project uses:
+Storybook is configured with `@storybook/nextjs-vite` and scans stories from both `apps/frontend/modules/` and `apps/frontend/app/`. The project uses:
 
 - MSW for mocked API responses
 - Accessibility checks via Storybook addons
-- Shared decorators from `modules/shared/lib/decorators`
-- Global styles from `app/globals.css`
+- Shared decorators from `apps/frontend/modules/shared/lib/decorators`
+- Global styles from `apps/frontend/app/globals.css`
 
 Launch it locally with:
 
@@ -132,6 +132,6 @@ pnpm storybook
 
 ## Notes For Contributors
 
-- Path aliases are configured in `tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `modules/shared/*`.
-- shadcn/ui components are configured to live under `modules/shared/components`.
-- Feature availability can differ by environment. Check `modules/shared/lib/feature-flags` before assuming a section should always render.
+- Path aliases are configured in `apps/frontend/tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `apps/frontend/modules/shared/*`.
+- shadcn/ui components are configured to live under `apps/frontend/modules/shared/components`.
+- Feature availability can differ by environment. Check `apps/frontend/modules/shared/lib/feature-flags` before assuming a section should always render.

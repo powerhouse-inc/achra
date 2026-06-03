@@ -1,0 +1,17 @@
+{
+  "source": {
+    "slug": "growth-team-admin",
+    "name": "Growth Team Admin",
+    "downloadedAt": "2026-05-20T11:42:32.000Z"
+  },
+  "excluded": [],
+  "folders": [],
+  "documents": [
+    {
+      "id": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07",
+      "name": "Growth Team Profile",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    }
+  ]
+}

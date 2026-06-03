@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "teep",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:19.100Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5ecdd8fbd6145a80d8ec27cbf6c52d4c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:19.100Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "teep",
+        "icon": "https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg",
+        "id": "03df64d8-a882-4801-acb9-56d452a73905",
+        "name": "teep",
+        "slug": "teep",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "gQZXLgwrKlzt4BGhpg/28X8xEBg=",
+    "id": "5806690c5fc79d24773d1363b538c24d",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:51.946Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "a1bbe0ff3652976797f9ff7b17060e2b",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:19.100Z"
+  }
+]

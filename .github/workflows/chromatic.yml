@@ -23,7 +23,6 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v3
         with:
-          version: 10
           run_install: false
 
       - name: Install Dependencies
@@ -33,5 +32,6 @@ jobs:
         uses: chromaui/action@v13.3.5
         with:
           projectToken: ${{ secrets.CHROMATIC_DSPOT_PROJECT_TOKEN }}
+          workingDir: apps/frontend # Storybook project lives in the frontend app
           exitZeroOnChanges: false # fail on changes
           onlyChanged: true # enable TurboSnap https://www.chromatic.com/docs/turbosnap

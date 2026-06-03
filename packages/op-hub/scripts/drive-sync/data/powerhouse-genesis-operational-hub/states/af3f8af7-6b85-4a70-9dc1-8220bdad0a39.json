@@ -1,0 +1,50 @@
+{
+  "closureReason": null,
+  "currency": "",
+  "dateDelivered": null,
+  "dateDue": null,
+  "dateIssued": null,
+  "exported": {
+    "exportedLineItems": [],
+    "timestamp": null
+  },
+  "invoiceNo": "",
+  "invoiceTags": [],
+  "issuer": {
+    "address": null,
+    "contactInfo": null,
+    "country": null,
+    "id": null,
+    "name": null,
+    "paymentRouting": null
+  },
+  "lineItems": [
+    {
+      "currency": "USD",
+      "description": "Operational services - May 2025",
+      "id": "li-05-001",
+      "lineItemTag": [],
+      "quantity": 1,
+      "taxPercent": 0,
+      "totalPriceTaxExcl": 3000,
+      "totalPriceTaxIncl": 3000,
+      "unitPriceTaxExcl": 3000,
+      "unitPriceTaxIncl": 3000
+    }
+  ],
+  "notes": null,
+  "payAfter": null,
+  "payer": {
+    "address": null,
+    "contactInfo": null,
+    "country": null,
+    "id": null,
+    "name": null,
+    "paymentRouting": null
+  },
+  "payments": [],
+  "rejections": [],
+  "status": "DRAFT",
+  "totalPriceTaxExcl": 3000,
+  "totalPriceTaxIncl": 3000
+}

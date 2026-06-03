@@ -1,0 +1,148 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "8fe26957-a2c6-4578-87e9-6809baa5990b",
+        "meta": {},
+        "model": "powerhouse/workstream",
+        "name": "Powerhouse Workstream 2024",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:20:04.182Z",
+          "documentType": "powerhouse/workstream",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "8fe26957-a2c6-4578-87e9-6809baa5990b"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "c9c51d228827edcdb4eae5ed0c75fd92",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:04.182Z"
+  },
+  {
+    "action": {
+      "input": {
+        "clientId": "cf9687db-fc86-4bd9-8d77-0b8b9e893063",
+        "icon": "https://fusion.sky.money/_next/image?url=https%3A%2F%2Fmakerdao-ses.github.io%2Fecosystem-dashboard%2Fecosystem-actors%2FPOWERHOUSE%2FPOWERHOUSE_logo.png&w=3840&q=85",
+        "name": "Powerhouse"
+      },
+      "scope": "global",
+      "type": "EDIT_CLIENT_INFO"
+    },
+    "error": null,
+    "hash": "0nIOEtsQDkfgip+DvKH1J94esd4=",
+    "id": "19bb9496d0d8128dd9c931e7fdf0e3f0",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:09.676Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "8fe26957-a2c6-4578-87e9-6809baa5990b",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "alternativeProposals": [],
+            "client": null,
+            "code": null,
+            "initialProposal": null,
+            "paymentRequests": [],
+            "paymentTerms": null,
+            "rfp": null,
+            "sow": null,
+            "status": "RFP_DRAFT",
+            "title": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/workstream",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "ca427ac2dd95de5fab78953490324534",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:04.182Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PW25",
+        "paymentTerms": "86effbb5-9980-4866-af72-a2b493a42338",
+        "sowId": "9c8045f2-5309-44ee-80a8-77231ccea8ae",
+        "status": "AWARDED",
+        "title": "Powerhouse Workstream 2024"
+      },
+      "scope": "global",
+      "type": "EDIT_WORKSTREAM"
+    },
+    "error": null,
+    "hash": "zzfVJOwSOrvJM9UH1QiSBLVqwRs=",
+    "id": "ebe7b3a1240251b8ec0e071d162e66fb",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:09.676Z"
+  },
+  {
+    "action": {
+      "input": {
+        "rfpId": "ba556481-400f-4160-87a4-b46831c96eb0",
+        "title": "RFP-Powerhouse Workstream 2024"
+      },
+      "scope": "global",
+      "type": "SET_REQUEST_FOR_PROPOSAL"
+    },
+    "error": null,
+    "hash": "Ld8E4h1Rs77/7/q4I4mnK8G1rw0=",
+    "id": "4f247ff43565610b9e213f96a749307f",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:09.676Z"
+  },
+  {
+    "action": {
+      "input": {
+        "id": "7f6e94e1-7418-453b-92f9-a93b49f07257",
+        "paymentTermsId": "86effbb5-9980-4866-af72-a2b493a42338",
+        "proposalAuthor": {
+          "id": "55b914d4-a738-46a5-bd10-e3627e617c0d",
+          "name": "BAI"
+        },
+        "sowId": "9c8045f2-5309-44ee-80a8-77231ccea8ae",
+        "status": "ACCEPTED"
+      },
+      "scope": "global",
+      "type": "EDIT_INITIAL_PROPOSAL"
+    },
+    "error": null,
+    "hash": "XLjMv49XXut4m96cU3PoCYPE8BA=",
+    "id": "ec3975c3680f01182dbe566df57be4ab",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:20:09.676Z"
+  }
+]

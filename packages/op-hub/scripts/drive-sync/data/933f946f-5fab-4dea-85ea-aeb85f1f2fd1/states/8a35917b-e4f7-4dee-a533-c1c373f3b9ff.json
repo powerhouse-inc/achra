@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "klg",
+  "contributors": [],
+  "description": null,
+  "icon": "https://pbs.twimg.com/profile_images/1742981743974498304/5Z8KeXyW_400x400.jpg",
+  "id": "68f67fe0-32d3-465e-873d-bfa2706ad369",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:24.966Z",
+  "links": [],
+  "name": "Kilgore",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "kilgore",
+  "status": "ACTIVE"
+}

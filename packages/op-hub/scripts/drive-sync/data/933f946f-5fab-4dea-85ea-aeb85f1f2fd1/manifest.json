@@ -1,0 +1,125 @@
+{
+  "source": {
+    "slug": "933f946f-5fab-4dea-85ea-aeb85f1f2fd1",
+    "name": "builders",
+    "downloadedAt": "2026-05-20T11:42:09.000Z"
+  },
+  "excluded": [],
+  "folders": [],
+  "documents": [
+    {
+      "id": "05557061-1777-419e-866c-1039fb9366b0",
+      "name": "switchboard-cli profile",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "0f9017a6-0c16-4c30-8301-01b04ae40481",
+      "name": "Lumen",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "297a2968-de2e-4e3d-8bfb-1a3e7c1d70dd",
+      "name": "Teeps Team of Builders",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "2a01f417-0c6d-4450-8db0-fce70fccfede",
+      "name": "liberuum",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "437846d0-8f6d-415c-a04d-6a1582f51f63",
+      "name": "callMeT",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "49138081-b2dd-430f-90f9-bde97283ad5f",
+      "name": "deadgoat",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "547f197a-3203-4c00-8f8d-7e9d6af425fe",
+      "name": "Layer0",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "550a270e-9ca0-46e8-a3bc-4a6fb2a18382",
+      "name": "Prometheus",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "8a35917b-e4f7-4dee-a533-c1c373f3b9ff",
+      "name": "Kilgore",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "8bff99ed-6eb1-4353-80d9-c497d6a896ba",
+      "name": "TheGoldenMule",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "abb40a78-b75b-4e80-af68-6494b73f88f4",
+      "name": "Acaldas",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "b41845f8-0986-4576-8dc6-d283be7b9fe6",
+      "name": "Dracaena",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "cfd651aa-d072-4fe5-800a-82549c4dcff7",
+      "name": "willow",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43",
+      "name": "teep",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "d18b0d40-b1ba-44b0-898d-6fc74f5d5e23",
+      "name": "Powerhouse RGH",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "e0cba809-34d8-42db-b5c3-a06d8a9b5e54",
+      "name": "Frank",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "e77bf52f-e63c-4a87-85f3-cde1a4a247c6",
+      "name": "oz",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "e8866a8b-c04f-45fd-9613-6f09937e277c",
+      "name": "Memo",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    },
+    {
+      "id": "f77ec756-49d5-4ea5-9f57-8af0d6ea421a",
+      "name": "Apeiron",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    }
+  ]
+}

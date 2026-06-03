@@ -1,0 +1,163 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/workstream",
+  name: "Workstream",
+  author: {
+    name: "Powerhouse",
+    website: "https://powerhouse.inc",
+  },
+  extension: "",
+  description:
+    "A workstream document model that allows the user to create workstreams under a network organization",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type WorkstreamState {\n  code: String\n  title: String\n  status: WorkstreamStatus!\n  client: ClientInfo\n  rfp: RFP\n  initialProposal: Proposal\n  alternativeProposals: [Proposal!]!\n  sow: PHID\n  paymentTerms: PHID\n  paymentRequests: [PHID!]!\n}\n\nenum WorkstreamStatus {\n  RFP_DRAFT\n  PREWORK_RFC\n  RFP_CANCELLED\n  OPEN_FOR_PROPOSALS\n  PROPOSAL_SUBMITTED\n  NOT_AWARDED\n  AWARDED\n  IN_PROGRESS\n  FINISHED\n}\n\ntype Proposal {\n  id: OID!\n  sow: PHID!\n  paymentTerms: PHID!\n  status: ProposalStatus!\n  author: ProposalAuthor!\n}\n\nenum ProposalStatus {\n  DRAFT\n  SUBMITTED\n  ACCEPTED\n  REJECTED\n}\n\ntype ClientInfo {\n  id: PHID!\n  name: String\n  icon: URL\n}\n\ntype RFP {\n  id: PHID!\n  title: String!\n}\n\ntype ProposalAuthor {\n  id: PHID!\n  name: String\n  icon: URL\n}",
+          examples: [],
+          initialValue:
+            '{\n  "code": null,\n  "title": null,\n  "status": "RFP_DRAFT",\n  "client": null,\n  "rfp": null,\n  "initialProposal": null,\n  "alternativeProposals": [],\n  "sow": null,\n  "paymentTerms": null,\n  "paymentRequests": []\n}',
+        },
+      },
+      modules: [
+        {
+          id: "workstream-module",
+          name: "workstream",
+          description: "",
+          operations: [
+            {
+              id: "edit-workstream-op",
+              name: "EDIT_WORKSTREAM",
+              description: "",
+              schema:
+                "input EditWorkstreamInput {\n  code: String\n  title: String\n  status: WorkstreamStatus\n  sowId: PHID\n  paymentTerms: PHID\n}",
+              template: "",
+              reducer:
+                'const input = action.input;\n\nif (input.code !== undefined) {\n  state.code = input.code || null;\n}\nif (input.title !== undefined) {\n  state.title = input.title || null;\n}\nif (input.status !== undefined) {\n  state.status = input.status || "RFP_DRAFT";\n}\nif (input.sowId !== undefined) {\n  state.sow = input.sowId || null;\n}\nif (input.paymentTerms !== undefined) {\n  state.paymentTerms = input.paymentTerms || null;\n}',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "edit-client-info-op",
+              name: "EDIT_CLIENT_INFO",
+              description: "",
+              schema:
+                "input EditClientInfoInput {\n  clientId: PHID!\n  name: String\n  icon: String\n}",
+              template: "",
+              reducer:
+                "const input = action.input;\n\nif (!state.client) {\n  state.client = {\n    id: input.clientId,\n    name: null,\n    icon: null,\n  };\n}\n\nstate.client.id = input.clientId;\n\nif (input.name !== undefined) {\n  state.client.name = input.name || null;\n}\nif (input.icon !== undefined) {\n  state.client.icon = input.icon || null;\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-rfp-op",
+              name: "SET_REQUEST_FOR_PROPOSAL",
+              description: "",
+              schema:
+                "input SetRequestForProposalInput {\n  rfpId: PHID!\n  title: String!\n}",
+              template: "",
+              reducer:
+                "const input = action.input;\n\nstate.rfp = {\n  id: input.rfpId,\n  title: input.title,\n};",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-payment-request-op",
+              name: "ADD_PAYMENT_REQUEST",
+              description: "",
+              schema: "input AddPaymentRequestInput {\n  id: PHID!\n}",
+              template: "",
+              reducer:
+                "const input = action.input;\n\nif (!state.paymentRequests.includes(input.id)) {\n  state.paymentRequests.push(input.id);\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-payment-request-op",
+              name: "REMOVE_PAYMENT_REQUEST",
+              description: "",
+              schema: "input RemovePaymentRequestInput {\n  id: PHID!\n}",
+              template: "",
+              reducer:
+                "const input = action.input;\n\nconst index = state.paymentRequests.indexOf(input.id);\nif (index > -1) {\n  state.paymentRequests.splice(index, 1);\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "ws-proposals-module",
+          name: "proposals",
+          description: "",
+          operations: [
+            {
+              id: "edit-initial-proposal-op",
+              name: "EDIT_INITIAL_PROPOSAL",
+              description: "",
+              schema:
+                "input EditInitialProposalInput {\n  id: OID!\n  sowId: PHID\n  paymentTermsId: PHID\n  status: ProposalStatus\n  proposalAuthor: ProposalAuthorInput\n}\n\ninput ProposalAuthorInput {\n  id: PHID!\n  name: String\n  icon: URL\n}",
+              template: "",
+              reducer:
+                'const input = action.input;\n\nif (!state.initialProposal) {\n  state.initialProposal = {\n    id: input.id,\n    sow: "",\n    paymentTerms: "",\n    status: "DRAFT",\n    author: {\n      id: "",\n      name: null,\n      icon: null,\n    },\n  };\n}\n\nstate.initialProposal.id = input.id;\n\nif (input.sowId !== undefined) {\n  state.initialProposal.sow = input.sowId || "";\n  if (state.initialProposal.status === "ACCEPTED") {\n    state.sow = input.sowId || null;\n  }\n}\nif (input.paymentTermsId !== undefined) {\n  state.initialProposal.paymentTerms = input.paymentTermsId || "";\n  if (state.initialProposal.status === "ACCEPTED") {\n    state.paymentTerms = input.paymentTermsId || null;\n  }\n}\nif (input.status !== undefined) {\n  state.initialProposal.status = input.status || "DRAFT";\n  if (input.status === "ACCEPTED") {\n    if (state.alternativeProposals.length > 0) {\n      state.alternativeProposals.forEach((proposal) => {\n        if (proposal.status === "ACCEPTED") {\n          proposal.status = "REJECTED";\n        }\n      });\n    }\n    const initialProposalPaymentTerms = state.initialProposal.paymentTerms;\n    const intialProposalSow = state.initialProposal.sow;\n    state.paymentTerms = initialProposalPaymentTerms || null;\n    state.sow = intialProposalSow || null;\n  } else {\n    state.paymentTerms = null;\n    state.sow = null;\n  }\n}\nif (input.proposalAuthor !== undefined) {\n  if (input.proposalAuthor) {\n    state.initialProposal.author = {\n      id: input.proposalAuthor.id,\n      name: input.proposalAuthor.name || null,\n      icon: input.proposalAuthor.icon || null,\n    };\n  }\n}',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-alt-proposal-op",
+              name: "ADD_ALTERNATIVE_PROPOSAL",
+              description: "",
+              schema:
+                "input AddAlternativeProposalInput {\n  id: OID!\n  sowId: PHID\n  paymentTermsId: PHID\n  status: ProposalStatus\n  proposalAuthor: ProposalAuthorInput\n}",
+              template: "",
+              reducer:
+                'const input = action.input;\n\nconst existingIndex = state.alternativeProposals.findIndex(\n  (proposal) => proposal.id === input.id\n);\n\nif (existingIndex === -1) {\n  const newProposal = {\n    id: input.id,\n    sow: input.sowId || "",\n    paymentTerms: input.paymentTermsId || "",\n    status: input.status || "DRAFT",\n    author: input.proposalAuthor\n      ? {\n          id: input.proposalAuthor.id,\n          name: input.proposalAuthor.name || null,\n          icon: input.proposalAuthor.icon || null,\n        }\n      : {\n          id: "",\n          name: null,\n          icon: null,\n        },\n  };\n\n  state.alternativeProposals.push(newProposal);\n}',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "edit-alt-proposal-op",
+              name: "EDIT_ALTERNATIVE_PROPOSAL",
+              description: "",
+              schema:
+                "input EditAlternativeProposalInput {\n  id: OID!\n  sowId: PHID\n  paymentTermsId: PHID\n  status: ProposalStatus\n  proposalAuthor: ProposalAuthorInput\n}",
+              template: "",
+              reducer:
+                'const input = action.input;\n\nconst proposalIndex = state.alternativeProposals.findIndex(\n  (proposal) => proposal.id === input.id\n);\n\nif (proposalIndex > -1) {\n  const proposal = state.alternativeProposals[proposalIndex];\n\n  if (input.sowId !== undefined) {\n    proposal.sow = input.sowId || "";\n    if (proposal.status === "ACCEPTED") {\n      state.sow = proposal.sow || null;\n    }\n  }\n  if (input.paymentTermsId !== undefined) {\n    proposal.paymentTerms = input.paymentTermsId || "";\n    if (proposal.status === "ACCEPTED") {\n      state.paymentTerms = proposal.paymentTerms || null;\n    }\n  }\n  if (input.status !== undefined) {\n    const wasAccepted = proposal.status === "ACCEPTED";\n    proposal.status = input.status || "DRAFT";\n    if (input.status === "ACCEPTED") {\n      if (state.initialProposal && state.initialProposal.status === "ACCEPTED") {\n        state.initialProposal.status = "REJECTED";\n      }\n      if (state.alternativeProposals.length > 0) {\n        state.alternativeProposals.forEach((p) => {\n          if (p.status === "ACCEPTED" && p.id !== input.id) {\n            p.status = "REJECTED";\n          }\n        });\n      }\n      if (proposal) {\n        state.paymentTerms = proposal.paymentTerms || null;\n        state.sow = proposal.sow || null;\n      }\n    } else if (wasAccepted) {\n      const hasAcceptedInitialProposal = state.initialProposal?.status === "ACCEPTED";\n      const hasAcceptedAlternativeProposal = state.alternativeProposals.some(\n        (p) => p.status === "ACCEPTED" && p.id !== input.id\n      );\n      if (!hasAcceptedInitialProposal && !hasAcceptedAlternativeProposal) {\n        state.paymentTerms = null;\n        state.sow = null;\n      }\n    }\n  }\n  if (input.proposalAuthor !== undefined) {\n    if (input.proposalAuthor) {\n      proposal.author = {\n        id: input.proposalAuthor.id,\n        name: input.proposalAuthor.name || null,\n        icon: input.proposalAuthor.icon || null,\n      };\n    }\n  }\n}',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-alt-proposal-op",
+              name: "REMOVE_ALTERNATIVE_PROPOSAL",
+              description: "",
+              schema: "input RemoveAlternativeProposalInput {\n  id: OID!\n}",
+              template: "",
+              reducer:
+                'const input = action.input;\n\nconst proposalIndex = state.alternativeProposals.findIndex(\n  (proposal) => proposal.id === input.id\n);\n\nif (proposalIndex > -1) {\n  const proposalToRemove = state.alternativeProposals[proposalIndex];\n  const wasAccepted = proposalToRemove.status === "ACCEPTED";\n\n  state.alternativeProposals.splice(proposalIndex, 1);\n\n  if (wasAccepted) {\n    const hasAcceptedInitialProposal = state.initialProposal?.status === "ACCEPTED";\n    const hasAcceptedAlternativeProposal = state.alternativeProposals.some(\n      (p) => p.status === "ACCEPTED"\n    );\n    if (!hasAcceptedInitialProposal && !hasAcceptedAlternativeProposal) {\n      state.paymentTerms = null;\n      state.sow = null;\n    }\n  }\n}',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

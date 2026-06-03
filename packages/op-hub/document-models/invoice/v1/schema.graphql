@@ -1,0 +1,445 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type InvoiceState {
+  status: Status!
+  invoiceNo: String!
+  dateIssued: Date
+  dateDue: Date
+  dateDelivered: Date
+  issuer: LegalEntity!
+  payer: LegalEntity!
+  currency: String!
+  lineItems: [InvoiceLineItem!]!
+  totalPriceTaxExcl: Float!
+  totalPriceTaxIncl: Float!
+  notes: String
+  rejections: [Rejection!]!
+  payments: [Payment!]!
+  payAfter: DateTime
+  invoiceTags: [InvoiceTag!]!   # e.g. {'xero-payment-account', '090', 'PowerhouseUSD'}
+  exported: ExportedData!
+  closureReason: ClosureReason
+}
+
+enum ClosureReason {
+  UNDERPAID
+  OVERPAID
+  CANCELLED
+}
+
+type Rejection {
+  id: OID!
+  reason: String!
+  final: Boolean!
+}
+
+type ExportedData {
+  timestamp: DateTime   # ISO 8601 timestamp of the export
+  exportedLineItems: [[String!]!]!   # CSV Format
+}
+
+type Payment {
+  id: OID!
+  processorRef: String
+  paymentDate: DateTime
+  txnRef: String
+  confirmed: Boolean!
+  issue: String
+  amount: Float
+}
+
+type Token {
+  evmAddress: String
+  symbol: String
+  chainName: String
+  chainId: String
+  rpc: String
+}
+
+type LegalEntity {
+  id: LegalEntityId
+  name: String
+  address: Address
+  contactInfo: ContactInfo
+  country: String
+  paymentRouting: PaymentRouting
+}
+
+type Address {
+  streetAddress: String
+  extendedAddress: String
+  city: String
+  postalCode: String
+  country: String
+  stateProvince: String
+}
+
+type ContactInfo {
+  tel: String
+  email: String
+}
+
+type PaymentRouting {
+  bank: Bank
+  wallet: InvoiceWallet
+}
+
+type Bank {
+  name: String!
+  address: Address!
+  ABA: String
+  BIC: String
+  SWIFT: String
+  accountNum: String!
+  accountType: InvoiceAccountType
+  beneficiary: String
+  intermediaryBank: IntermediaryBank
+  memo: String
+}
+
+type IntermediaryBank {
+  name: String!
+  address: Address!
+  ABA: String
+  BIC: String
+  SWIFT: String
+  accountNum: String!
+  accountType: InvoiceAccountType
+  beneficiary: String
+  memo: String
+}
+
+type InvoiceWallet {
+  rpc: String
+  chainName: String
+  chainId: String
+  address: String
+}
+
+type InvoiceLineItem {
+  id: OID!
+  description: String!
+  taxPercent: Float!
+  quantity: Float!
+  currency: String!
+  unitPriceTaxExcl: Float!
+  unitPriceTaxIncl: Float!
+  totalPriceTaxExcl: Float!
+  totalPriceTaxIncl: Float!
+  lineItemTag: [InvoiceTag!]
+}
+
+type InvoiceTag {
+  dimension: String!  # "xero-expense-account", "xero-payment-account", "accounting-period", ...
+  value: String!      # "627", ..., "090", ..., "2025/05", "2025/Q1", ...
+  label: String       # "Marketing", ..., "Business Bank", ..., "May 2025"
+}
+
+type LegalEntityId {
+  taxId: String
+  corpRegId: String
+}
+
+enum Status {
+  DRAFT
+  ISSUED
+  CANCELLED
+  ACCEPTED
+  REJECTED
+  PAYMENTSCHEDULED
+  PAYMENTSENT
+  PAYMENTISSUE
+  PAYMENTRECEIVED
+  PAYMENTCLOSED
+}
+
+enum InvoiceAccountType {
+  CHECKING
+  SAVINGS
+  TRUST
+  WALLET
+}
+
+enum InvoiceAccountTypeInput {
+  CHECKING
+  SAVINGS
+  TRUST
+  WALLET
+}
+
+# general
+
+input EditInvoiceInput {
+    invoiceNo: String
+    dateIssued: String
+    dateDelivered: String
+    dateDue: String
+    currency: String
+    notes: String
+}
+
+input AddPaymentInput {
+  id: OID!
+  processorRef: String
+  paymentDate: DateTime
+  txnRef: String
+  confirmed: Boolean!
+  issue: String
+}
+
+input EditPaymentDataInput {
+  id: OID!
+  processorRef: String
+  paymentDate: DateTime
+  txnRef: String
+  confirmed: Boolean!
+  issue: String
+}
+
+input EditStatusInput {
+  status: Status!
+}
+
+input SetExportedDataInput {
+  timestamp: DateTime!
+  exportedLineItems: [[String!]!]! 
+}
+
+# parties
+
+input EditIssuerBankInput {
+  name: String
+    streetAddress: String
+    extendedAddress: String
+    city: String
+    postalCode: String
+    country: String
+    stateProvince: String
+    ABA: String
+    BIC: String
+    SWIFT: String
+    accountNum: String
+    accountType: InvoiceAccountTypeInput
+    beneficiary: String
+    memo: String
+    # intermediaryBank
+    nameIntermediary: String
+    streetAddressIntermediary: String
+    extendedAddressIntermediary: String
+    cityIntermediary: String
+    postalCodeIntermediary: String
+    countryIntermediary: String
+    stateProvinceIntermediary: String
+    ABAIntermediary: String
+    BICIntermediary: String
+    SWIFTIntermediary: String
+    accountNumIntermediary: String
+    accountTypeIntermediary: InvoiceAccountTypeInput
+    beneficiaryIntermediary: String
+    memoIntermediary: String
+}
+
+input EditIssuerInput {
+    id: String
+    name: String
+    streetAddress: String
+    extendedAddress: String
+    city: String
+    postalCode: String
+    country: String
+    stateProvince: String
+    tel: String
+    email: String
+}
+
+input EditIssuerWalletInput {
+    rpc: String
+    chainName: String
+    chainId: String
+    address: String
+}
+
+
+
+input EditPayerBankInput {
+    name: String
+    streetAddress: String
+    extendedAddress: String
+    city: String
+    postalCode: String
+    country: String
+    stateProvince: String
+    ABA: String
+    BIC: String
+    SWIFT: String
+    accountNum: String
+    accountType: InvoiceAccountTypeInput
+    beneficiary: String
+    memo: String
+    # intermediaryBank
+    nameIntermediary: String
+    streetAddressIntermediary: String
+    extendedAddressIntermediary: String
+    cityIntermediary: String
+    postalCodeIntermediary: String
+    countryIntermediary: String
+    stateProvinceIntermediary: String
+    ABAIntermediary: String
+    BICIntermediary: String
+    SWIFTIntermediary: String
+    accountNumIntermediary: String
+    accountTypeIntermediary: InvoiceAccountTypeInput
+    beneficiaryIntermediary: String
+    memoIntermediary: String
+}
+
+input EditPayerInput {
+    id: String
+    name: String
+    streetAddress: String
+    extendedAddress: String
+    city: String
+    postalCode: String
+    country: String
+    stateProvince: String
+    tel: String
+    email: String
+}
+
+input EditPayerWalletInput {
+    rpc: String
+    chainName: String
+    chainId: String
+    address: String
+}
+
+# items
+
+input AddLineItemInput {
+    id: OID!
+    description: String!
+    taxPercent: Float!
+    quantity: Float!
+    currency: String! # Default can be USD
+    unitPriceTaxExcl: Float!
+    unitPriceTaxIncl: Float!
+    totalPriceTaxExcl: Float!
+    totalPriceTaxIncl: Float!
+}
+
+input DeleteLineItemInput {
+  id: OID!
+}
+
+input EditLineItemInput {
+    id: OID!
+    description: String
+    taxPercent: Float
+    quantity: Float
+    currency: String
+    unitPriceTaxExcl: Float
+    unitPriceTaxIncl: Float
+    totalPriceTaxExcl: Float
+    totalPriceTaxIncl: Float
+}
+
+input SetInvoiceTagInput {
+  dimension: String!
+  value: String!
+  label: String
+}
+
+input SetLineItemTagInput {
+  lineItemId: OID!
+  dimension: String!
+  value: String!
+  label: String
+}
+
+# transitions
+
+input AcceptInput {
+  payAfter: DateTime
+}
+
+input CancelInput {
+  "Add your inputs here"
+  _placeholder: String
+}
+
+input ClosePaymentInput {
+  closureReason: ClosureReasonInput
+}
+
+enum ClosureReasonInput {
+  UNDERPAID
+  OVERPAID
+  CANCELLED
+}
+
+input ConfirmPaymentInput {
+  id: OID!       # Payment ID
+  amount: Float!
+}
+
+input IssueInput {
+  invoiceNo: String!
+  dateIssued: String!
+}
+
+input ReapprovePaymentInput {
+  "Add your inputs here"
+  _placeholder: String
+}
+
+input RegisterPaymentTxInput {
+  id: OID!       # Payment ID
+  timestamp: DateTime!
+  txRef: String!
+}
+
+input ReinstateInput {
+  "Add your inputs here"
+  _placeholder: String
+}
+
+input RejectInput {
+  id: OID! # New Rejection ID
+  reason: String!
+  final: Boolean!
+}
+
+input ReportPaymentIssueInput {
+  id: OID!       # Payment ID
+  issue: String!
+}
+
+input ResetInput {
+  "Add your inputs here"
+  _placeholder: String
+}
+
+input SchedulePaymentInput {
+  id: OID!
+  processorRef: String!
+  paymentDate: DateTime
+}

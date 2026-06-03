@@ -1,0 +1,355 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "4973a075-35d5-45d1-9d9d-e39d584cb834",
+        "meta": {},
+        "model": "powerhouse/snapshot-report",
+        "name": "January 2025 - Snapshot Report",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:47.581Z",
+          "documentType": "powerhouse/snapshot-report",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "4973a075-35d5-45d1-9d9d-e39d584cb834"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "c3a82416163601fd6bfb0572dc5dcb64",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:47.581Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountsDocumentId": "26bb6763-0f21-41e2-addc-be3474fa101e",
+        "endDate": "2025-04-01T23:59:59.999Z",
+        "startDate": "2025-03-04T00:00:00.000Z"
+      },
+      "scope": "global",
+      "type": "SET_REPORT_CONFIG"
+    },
+    "error": null,
+    "hash": "mXKvV/nKR43Sj9Htn8xG9GCKO74=",
+    "id": "d788ad3afd417b6e6c26a01273a215fd",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "4973a075-35d5-45d1-9d9d-e39d584cb834",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "accountsDocumentId": null,
+            "endDate": null,
+            "ownerIds": [],
+            "reportName": null,
+            "reportPeriodEnd": null,
+            "reportPeriodStart": null,
+            "snapshotAccounts": [],
+            "startDate": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/snapshot-report",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5f063c13311b86e592371c74cd57f93d",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:47.581Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountsDocumentId": "26bb6763-0f21-41e2-addc-be3474fa101e"
+      },
+      "scope": "global",
+      "type": "SET_ACCOUNTS_DOCUMENT"
+    },
+    "error": null,
+    "hash": "mXKvV/nKR43Sj9Htn8xG9GCKO74=",
+    "id": "93fab55410599ba6cc67d3d20223af48",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "endDate": "2025-04-01T23:59:59.999Z",
+        "startDate": "2025-03-04T00:00:00.000Z"
+      },
+      "scope": "global",
+      "type": "SET_PERIOD"
+    },
+    "error": null,
+    "hash": "mXKvV/nKR43Sj9Htn8xG9GCKO74=",
+    "id": "e0420f1f03f6c7b0cbb440abb579d46d",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+        "accountId": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+        "accountName": "Powerhouse Genesis Operational Hub Reserves",
+        "id": "679cc536-ccc0-4e0e-a4a6-55052121b4dd",
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "rwYnzmuW5YCAUOW7jiSyVisFYAs=",
+    "id": "64f071b9dff1ffa61404261b8807e879",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+        "accountId": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+        "accountName": "Powerhouse Genesis Operational Hub",
+        "id": "fe15c22d-d1c5-46d9-be72-a04e5b90907e",
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "+4QYJLr7na3980EYfGi3dBoNFE8=",
+    "id": "ddfbcb0143e37187e233113b0d659d84",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+        "accountId": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+        "accountName": "SKY Launch Wallet",
+        "id": "663c86ad-e6bc-4239-a777-6395c4314526",
+        "type": "Source"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "7wjP6bi0Y7+cNtP3dkBXP0vaEb4=",
+    "id": "b0f75ee1fcf0f429580d52fee981a3b0",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+        "accountId": "4f707770-005c-4192-bd7c-f407e68af47d",
+        "accountName": "Request Finance 1",
+        "id": "1f9deb8b-7f2a-447e-9012-30db3dab8bec",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "FLtGBX/A1ZmCQLlSDgbN3bjWUZw=",
+    "id": "36f4c2b1d4c16f40437ea100cedaceb3",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+        "accountId": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+        "accountName": "Request Finance 2",
+        "id": "5bde71e6-e38e-402f-b74b-45954c4ac0b5",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "5IJyzzjqk8iCghBSip8KHPk/dTQ=",
+    "id": "55f1090910877bd4ca60c19ed9495d68",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+        "accountId": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+        "accountName": "Request Finance 3",
+        "id": "9ab00f64-c30f-4707-85d2-e1c001de2b33",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "DV68x75mjfXxAHs6Yiw9CVaF39Q=",
+    "id": "2ca141ad7dff96b1abee461c3448dd6e",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+        "accountId": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+        "accountName": "Request Finance 4",
+        "id": "fec90386-5d1e-4124-9d30-62dcfd707b7f",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "CS2ZKOpudyQR767dYaEg/n+5UF0=",
+    "id": "774089162a0b46f6d35e6fa1da90dca2",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+        "accountId": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+        "accountName": "Accountable",
+        "id": "4c71f064-dff6-471a-92ae-774842c45ea4",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "kws+7HYDOo2hufPAyMdks8BkOGI=",
+    "id": "50fca6691392f39a1846998b79ff3559",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+        "accountId": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+        "accountName": "CoW Swap",
+        "id": "d78ed079-6a6c-401f-9839-51660653d27f",
+        "type": "External"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "bu81nFZ8Q9hDLuyBdlcXB9B1G2Y=",
+    "id": "ec7bf2990f0ebe4c30c003a5ba9ee299",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "accountAddress": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+        "accountId": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+        "accountName": "Venly.io",
+        "id": "28996245-2314-4ac5-8ff0-f287d4b1d397",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_SNAPSHOT_ACCOUNT"
+    },
+    "error": null,
+    "hash": "2nR8qQuaZ7VtiMFcwkLeA6/4ufg=",
+    "id": "44bec2bf091f8f7561d6a627a5f7ea1d",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:52.419Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "Fidgfr8XGkYvjP3c8vxF2fjVNbc=",
+    "id": "14e1242501048764113f34b4f10e7648",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:12:19.623Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "Fidgfr8XGkYvjP3c8vxF2fjVNbc=",
+    "id": "bfecaf40e807e5958fc20f71a138ad09",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:41.505Z"
+  },
+  {
+    "action": {
+      "input": {
+        "ownerId": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+      },
+      "scope": "global",
+      "type": "ADD_OWNER_ID"
+    },
+    "error": null,
+    "hash": "aQPvYRdCBgc/7KljYAomnZrOtpM=",
+    "id": "31ab50ad12db801677e7bcd376519d83",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-04T21:13:42.095Z"
+  }
+]

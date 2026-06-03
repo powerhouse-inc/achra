@@ -1,0 +1,64 @@
+{
+  "documentType": "powerhouse/document-drive",
+  "id": "d0b7ae39-de2a-4aef-af19-035c90d1fbb1",
+  "name": "Teeps Team Admin",
+  "preferredEditor": "builder-team-admin",
+  "revisionsList": [
+    {
+      "revision": 3,
+      "scope": "document"
+    },
+    {
+      "revision": 5,
+      "scope": "global"
+    }
+  ],
+  "slug": "teeps-team-admin",
+  "state": {
+    "auth": {},
+    "document": {
+      "hash": {
+        "algorithm": "sha1",
+        "encoding": "base64"
+      },
+      "version": 0
+    },
+    "global": {
+      "icon": null,
+      "name": "Teeps Team Admin",
+      "nodes": [
+        {
+          "id": "0feec564-9249-48d5-9b8d-8bcc3f674e40",
+          "kind": "folder",
+          "name": "Snapshot Reports",
+          "parentFolder": null
+        },
+        {
+          "documentType": "powerhouse/builder-profile",
+          "id": "68b53909-7f70-4add-9bca-0a3c38e40c76",
+          "kind": "file",
+          "name": "Teeps Team of Builders",
+          "parentFolder": null
+        },
+        {
+          "id": "704de1fb-3951-4fc3-97bd-a5d42608a85c",
+          "kind": "folder",
+          "name": "Service Subscriptions",
+          "parentFolder": null
+        },
+        {
+          "id": "f2657bdb-58ed-41f9-9e84-7d3f9eeaaeed",
+          "kind": "folder",
+          "name": "Expense Reports",
+          "parentFolder": null
+        }
+      ]
+    },
+    "local": {
+      "availableOffline": false,
+      "listeners": [],
+      "sharingType": "private",
+      "triggers": []
+    }
+  }
+}

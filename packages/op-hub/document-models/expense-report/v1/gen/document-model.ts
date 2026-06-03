@@ -1,0 +1,261 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/expense-report",
+  name: "ExpenseReport",
+  author: {
+    name: "Powerhouse",
+    website: "https://powerhouse.inc",
+  },
+  extension: "",
+  description:
+    "A document that contains expenses for n amount wallets across different dimensions, such as expense types and categories.",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type ExpenseReportState {\n  ownerId: PHID\n  status: ExpenseReportStatus!\n  wallets: [Wallet!]!\n  groups: [LineItemGroup!]!\n  periodStart: DateTime\n  periodEnd: DateTime\n  startDate: DateTime\n  endDate: DateTime\n}\n\nenum ExpenseReportStatus {\n  DRAFT\n  REVIEW\n  FINAL\n}\n\ntype Wallet {\n  name: String\n  wallet: EthereumAddress\n  totals: [GroupTotals]\n  billingStatements: [OID]\n  lineItems: [LineItem]\n  accountDocumentId: PHID\n  accountTransactionsDocumentId: PHID\n}\n\ntype LineItemGroup {\n  id: ID!\n  label: String\n  parentId: ID\n}\n\ntype GroupTotals {\n  group: ID\n  totalBudget: Float\n  totalForecast: Float\n  totalActuals: Float\n  totalPayments: Float\n}\n\ntype LineItem {\n  id: ID\n  label: String\n  group: ID\n  budget: Float\n  actuals: Float\n  forecast: Float\n  payments: Float\n  comments: String\n}",
+          examples: [],
+          initialValue:
+            '{\n  "ownerId": null,\n  "status": "DRAFT",\n  "wallets": [],\n  "groups": [\n    {\n      "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",\n      "label": "Headcount Expenses",\n      "parentId": null\n    },\n    {\n      "id": "4971def8-64f8-4eab-b69b-a869d10452c2",\n      "label": "Non-Headcount Expenses",\n      "parentId": null\n    },\n    {\n      "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",\n      "label": "Travel & Entertainment",\n      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"\n    },\n    {\n      "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",\n      "label": "Compensation & Benefits",\n      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"\n    },\n    {\n      "id": "92e445ba-96af-4793-ae01-9b71035174ba",\n      "label": "Marketing Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",\n      "label": "Admin Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "5f024d53-7d0e-4818-9661-256aee69709d",\n      "label": "Professional Services",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "659337f4-01c3-495a-89d7-c177c4137620",\n      "label": "Cost of Goods Sold",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "1d6f0601-966a-4982-811d-981ac28db0b4",\n      "label": "Software Development Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "800dac9a-5665-4826-a972-b3170c789d92",\n      "label": "Income Tax Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",\n      "label": "Software Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",\n      "label": "Gas Expense",\n      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"\n    },\n    {\n      "id": "465367d1-636a-45a1-9e43-4a48dd074918",\n      "label": "Budget",\n      "parentId": null\n    },\n    {\n      "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",\n      "label": "Interest Income",\n      "parentId": null\n    },\n    {\n      "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",\n      "label": "Other Income Expense (Non-operating)",\n      "parentId": null\n    },\n    {\n      "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",\n      "label": "Other Income",\n      "parentId": null\n    },\n    {\n      "id": "1c61e841-c599-4c38-944a-7c9450c27d17",\n      "label": "Current Asset",\n      "parentId": null\n    },\n    {\n      "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",\n      "label": "Fixed Asset",\n      "parentId": null\n    },\n    {\n      "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",\n      "label": "Non-Current Asset",\n      "parentId": null\n    },\n    {\n      "id": "b3091879-f549-4227-beef-c8d4947be2e7",\n      "label": "Current Liability",\n      "parentId": null\n    },\n    {\n      "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",\n      "label": "Non-current Liability",\n      "parentId": null\n    },\n    {\n      "id": "42e480eb-9790-49ed-af35-3ab124af556e",\n      "label": "Owner Equity",\n      "parentId": null\n    },\n    {\n      "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",\n      "label": "Equity",\n      "parentId": null\n    },\n    {\n      "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",\n      "label": "Adjustment A/C",\n      "parentId": null\n    },\n    {\n      "id": "566fede7-b593-43d0-84b6-50301e5a84ed",\n      "label": "Temporary Holding Account",\n      "parentId": null\n    },\n    {\n      "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",\n      "label": "Other",\n      "parentId": null\n    },\n    {\n      "id": "470504f0-a89f-4555-a46e-667c74240238",\n      "label": "Internal Transfers",\n      "parentId": null\n    },\n    {\n      "id": "121482a1-b69f-4511-g46f-267c24450238",\n      "label": "Uncategorized",\n      "parentId": null\n    }\n  ],\n  "periodStart": null,\n  "periodEnd": null,\n  "startDate": null,\n  "endDate": null\n}',
+        },
+      },
+      modules: [
+        {
+          id: "wallet",
+          name: "wallet",
+          description: "",
+          operations: [
+            {
+              id: "add-wallet",
+              name: "addWallet",
+              description: "",
+              schema:
+                "input AddWalletInput {\n  wallet: EthereumAddress!\n  name: String\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-wallet",
+              name: "removeWallet",
+              description: "",
+              schema:
+                "input RemoveWalletInput {\n  wallet: EthereumAddress!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-billing-statement",
+              name: "addBillingStatement",
+              description: "",
+              schema:
+                "input AddBillingStatementInput {\n  wallet: EthereumAddress!\n  billingStatementId: OID!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-billing-statement",
+              name: "removeBillingStatement",
+              description: "",
+              schema:
+                "input RemoveBillingStatementInput {\n  wallet: EthereumAddress!\n  billingStatementId: OID!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-line-item",
+              name: "addLineItem",
+              description: "",
+              schema:
+                "input AddLineItemInput {\n  wallet: EthereumAddress!\n  lineItem: LineItemInput!\n}\n\ninput LineItemInput {\n  id: ID!\n  label: String\n  group: ID\n  budget: Float\n  actuals: Float\n  forecast: Float\n  payments: Float\n  comments: String\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-line-item",
+              name: "updateLineItem",
+              description: "",
+              schema:
+                "input UpdateLineItemInput {\n  wallet: EthereumAddress!\n  lineItemId: ID!\n  label: String\n  group: ID\n  budget: Float\n  actuals: Float\n  forecast: Float\n  payments: Float\n  comments: String\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-line-item",
+              name: "removeLineItem",
+              description: "",
+              schema:
+                "input RemoveLineItemInput {\n  wallet: EthereumAddress!\n  lineItemId: ID!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "add-line-item-group",
+              name: "addLineItemGroup",
+              description: "",
+              schema:
+                "input AddLineItemGroupInput {\n  id: ID!\n  label: String\n  parentId: ID\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-line-item-group",
+              name: "updateLineItemGroup",
+              description: "",
+              schema:
+                "input UpdateLineItemGroupInput {\n  id: ID!\n  label: String\n  parentId: ID\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-line-item-group",
+              name: "removeLineItemGroup",
+              description: "",
+              schema: "input RemoveLineItemGroupInput {\n  id: ID!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-group-totals",
+              name: "setGroupTotals",
+              description: "",
+              schema:
+                "input SetGroupTotalsInput {\n  wallet: EthereumAddress!\n  groupTotals: GroupTotalsInput!\n}\n\ninput GroupTotalsInput {\n  group: ID!\n  totalBudget: Float\n  totalForecast: Float\n  totalActuals: Float\n  totalPayments: Float\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-group-totals",
+              name: "removeGroupTotals",
+              description: "",
+              schema:
+                "input RemoveGroupTotalsInput {\n  wallet: EthereumAddress!\n  groupId: ID!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-period-start",
+              name: "setPeriodStart",
+              description: "",
+              schema:
+                "input SetPeriodStartInput {\n  periodStart: DateTime!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-period-end",
+              name: "setPeriodEnd",
+              description: "",
+              schema: "input SetPeriodEndInput {\n  periodEnd: DateTime!\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-wallet",
+              name: "updateWallet",
+              description: "",
+              schema:
+                "input UpdateWalletInput {\n  address: EthereumAddress!\n  name: String\n  accountDocumentId: PHID\n  accountTransactionsDocumentId: PHID\n}",
+              template: "",
+              reducer:
+                "const wallet = state.wallets.find((w) => w.wallet === action.input.address);\nif (!wallet) {\n  throw new Error(`Wallet with address ${action.input.address} not found`);\n}\n\nif (action.input.name !== undefined && action.input.name !== null) {\n  wallet.name = action.input.name;\n}\n\nif (action.input.accountDocumentId !== undefined && action.input.accountDocumentId !== null) {\n  wallet.accountDocumentId = action.input.accountDocumentId;\n}\n\nif (action.input.accountTransactionsDocumentId !== undefined && action.input.accountTransactionsDocumentId !== null) {\n  wallet.accountTransactionsDocumentId = action.input.accountTransactionsDocumentId;\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-owner-id",
+              name: "setOwnerId",
+              description:
+                "Set the owner ID (builder team) for the expense report",
+              schema: "input SetOwnerIdInput {\n  ownerId: PHID!\n}",
+              template:
+                "Set the owner ID (builder team) for the expense report",
+              reducer: "state.ownerId = action.input.ownerId;",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-status",
+              name: "setStatus",
+              description: "",
+              schema:
+                "input SetStatusInput {\n  status: ExpenseReportStatusInput!\n}\n\nenum ExpenseReportStatusInput {\n  DRAFT\n  REVIEW\n  FINAL\n}",
+              template: "",
+              reducer: "",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "set-period",
+              name: "setPeriod",
+              description:
+                "Set the snapshot period dates for transaction filtering",
+              schema:
+                "input SetPeriodInput {\n  startDate: DateTime\n  endDate: DateTime\n}",
+              template:
+                "Set the snapshot period dates for transaction filtering",
+              reducer:
+                "if (action.input.startDate !== undefined && action.input.startDate !== null) {\n  state.startDate = action.input.startDate;\n}\nif (action.input.endDate !== undefined && action.input.endDate !== null) {\n  state.endDate = action.input.endDate;\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

@@ -1,0 +1,214 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type SnapshotReportState {
+  ownerIds: [PHID!]!
+  accountsDocumentId: PHID
+  startDate: DateTime
+  endDate: DateTime
+  reportName: String
+  reportPeriodStart: DateTime
+  reportPeriodEnd: DateTime
+  snapshotAccounts: [SnapshotAccount!]!
+}
+
+type SnapshotAccount {
+  id: OID!
+  accountId: OID!
+  accountAddress: String!
+  accountName: String!
+  type: AccountType!
+  accountTransactionsId: PHID
+  startingBalances: [TokenBalance!]!
+  endingBalances: [TokenBalance!]!
+  transactions: [SnapshotTransaction!]!
+}
+
+type TokenBalance {
+  id: OID!
+  token: Currency!
+  amount: Amount_Currency!
+}
+
+type SnapshotTransaction {
+  id: OID!
+  transactionId: String!
+  counterParty: EthereumAddress
+  amount: Amount_Currency!
+  datetime: DateTime!
+  txHash: String!
+  token: Currency!
+  blockNumber: Int
+  direction: TransactionDirection!
+  flowType: TransactionFlowType
+  counterPartyAccountId: OID
+}
+
+enum AccountType {
+  Source
+  Internal
+  Destination
+  External
+}
+
+enum AccountTypeInput {
+  Source
+  Internal
+  Destination
+  External
+}
+
+enum TransactionDirection {
+  INFLOW
+  OUTFLOW
+}
+
+enum TransactionDirectionInput {
+  INFLOW
+  OUTFLOW
+}
+
+enum TransactionFlowType {
+  TopUp
+  Return
+  Internal
+  External
+  Swap
+}
+
+enum TransactionFlowTypeInput {
+  TopUp
+  Return
+  Internal
+  External
+  Swap
+}
+
+# configuration
+
+input SetReportConfigInput {
+  reportName: String
+  startDate: DateTime
+  endDate: DateTime
+  accountsDocumentId: PHID
+}
+
+input SetAccountsDocumentInput {
+  accountsDocumentId: PHID!
+}
+
+input SetPeriodInput {
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+input AddOwnerIdInput {
+  ownerId: PHID!
+}
+
+input SetPeriodStartInput {
+  periodStart: DateTime!
+}
+
+input SetPeriodEndInput {
+  periodEnd: DateTime!
+}
+
+input RemoveOwnerIdInput {
+  ownerId: PHID!
+}
+
+# accounts
+
+input AddSnapshotAccountInput {
+  id: OID!
+  accountId: OID!
+  accountAddress: String!
+  accountName: String!
+  type: AccountTypeInput!
+  accountTransactionsId: PHID
+}
+
+input UpdateSnapshotAccountTypeInput {
+  id: OID!
+  type: AccountTypeInput!
+}
+
+input RemoveSnapshotAccountInput {
+  id: OID!
+}
+
+# balances
+
+input SetStartingBalanceInput {
+  accountId: OID!
+  balanceId: OID!
+  token: Currency!
+  amount: Amount_Currency!
+}
+
+input SetEndingBalanceInput {
+  accountId: OID!
+  balanceId: OID!
+  token: Currency!
+  amount: Amount_Currency!
+}
+
+input RemoveStartingBalanceInput {
+  accountId: OID!
+  balanceId: OID!
+}
+
+input RemoveEndingBalanceInput {
+  accountId: OID!
+  balanceId: OID!
+}
+
+# transactions
+
+input AddTransactionInput {
+  accountId: OID!
+  id: OID!
+  transactionId: String!
+  counterParty: EthereumAddress
+  amount: Amount_Currency!
+  datetime: DateTime!
+  txHash: String!
+  token: Currency!
+  blockNumber: Int
+  direction: TransactionDirectionInput!
+  flowType: TransactionFlowTypeInput
+  counterPartyAccountId: OID
+}
+
+
+input RemoveTransactionInput {
+  id: OID!
+}
+
+input UpdateTransactionFlowTypeInput {
+  id: OID!
+  flowType: TransactionFlowTypeInput!
+}
+
+input RecalculateFlowTypesInput {
+  _: String
+}

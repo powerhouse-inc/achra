@@ -1,0 +1,323 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "951cf911-787c-4691-bd43-2413752e874f",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "FUNDRAISING VEHICLE (OCF)",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:41.403Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "951cf911-787c-4691-bd43-2413752e874f"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "43415023682d9279350eacb93ceee515",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:41.403Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": " A standalone vehicle for issuing equity, tokens, or revenue\u2011participation instruments to DAOs or traditional investors. Keeps fundraising, investor rights, and distributions separate from operations.\n\n\n**Typical use cases:**\n\n- DAO\u2011based fundraising\n- Token issuance\n- Hybrid Web2 / Web3 capital raises\n\nSuitable for teams needing regulatory clarity and clean cap\u2011table separation.\n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "A purpose\u2011built entity for raising and distributing capital.\n",
+        "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNGcgm98TZZ6ESUv4wQuTg1VcC0xl2rpyzyA&s",
+        "title": "Fundraising Vehicle (OCF)"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "yepZ83kgmP8PxQRnPMCS4r/53kc=",
+    "id": "31ab0907650b9cdc8cac21eedac2a872",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "951cf911-787c-4691-bd43-2413752e874f",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "b26add6ca2cec2352588330942f6aee3",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:41.403Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "U9AhBiLDiLQdYpHJdGVsPChyhzE=",
+    "id": "1536a361b9610a755351ae92712c6c22",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "AYprpXCT/Trlb5RFEzor3hNU3Xc=",
+    "id": "7d8db2bf33331f47090be35569d333c3",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#10b981",
+        "id": "07bea701-a531-41f8-a3ef-a52e668a7d4e",
+        "label": "Networks",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "ldsmRPCrCjS/2YiNMcm1c3qoSMw=",
+    "id": "14623cc9a5b5d79913b6826ae65faa20",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "sno-function",
+        "categoryLabel": "SNO Function",
+        "id": "03392b63-b36b-4304-bfc4-021a864a040e",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Operational Hub"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "J7YylRKL9JJAw789z2FUjKIac6U=",
+    "id": "bbfe002d639be25657a93fac337ff5a0",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "legal-entity",
+        "categoryLabel": "Legal Entity",
+        "id": "70dd899e-0b78-4129-9de4-01b99d67aa34",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "BVI Entity"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "tYwF819+m8duGHoUqTXOLBchH6s=",
+    "id": "80a37269449ea9cab1eb56fdccd751c9",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "team",
+        "categoryLabel": "Team",
+        "id": "756e5616-38d4-401a-9b99-0cf9f7fddbfd",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Local"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "r3r95+X8omajnYyVtQSOpZX4zzI=",
+    "id": "2bf6f6bcebad40c4a06522b182bfde96",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "anonymity",
+        "categoryLabel": "Anonymity",
+        "id": "3c7918ea-fdff-4c14-a519-b5580fece37c",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Highest"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "Hch3oowRTrBcsKrSEBTrIkGMr+4=",
+    "id": "2c96da0f1f2b7ac42b064457686852f6",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Needs analysis",
+          "Legal vehicle design and implementation",
+          "Governance integration and code-deference mechanisms"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "pQkh5QF5sXN5XXmQ8OlKh/Len9k=",
+    "id": "e173d2c400fb456d0a5257a6d9843e88",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Treasury operations",
+          "Distribution processing",
+          "Reporting to governance",
+          "Compliance and filing"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "rdflARRHPeFXIeGwgV4oC4RSev4=",
+    "id": "fef306c5ed3b04e8ca20a2a6c3290f51",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:16.647Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:42:05.943Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/fund-vehicle/fv_ocf.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "yR3YpqoSNxJYAoU+gUrx3xJmi1A=",
+    "id": "2a6c36b2333f1ff80698932245e854b6",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:42:05.943Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "FUNDRAISING VEHICLE (OCF)"
+      },
+      "scope": "global",
+      "type": "SET_NAME"
+    },
+    "error": null,
+    "hash": "yR3YpqoSNxJYAoU+gUrx3xJmi1A=",
+    "id": "5493669c6330ba11ecbe28c9053a69d0",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:30:53.193Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "FUNDRAISING VEHICLE (OCF)"
+      },
+      "scope": "global",
+      "type": "SET_NAME"
+    },
+    "error": null,
+    "hash": "yR3YpqoSNxJYAoU+gUrx3xJmi1A=",
+    "id": "6037073fd2e4670a546cd6d9cf95a524",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:30:53.194Z"
+  }
+]

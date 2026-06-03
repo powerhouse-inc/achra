@@ -1,0 +1,209 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "abb40a78-b75b-4e80-af68-6494b73f88f4",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Acaldas",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:17.493Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "abb40a78-b75b-4e80-af68-6494b73f88f4"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "ace3df49c24e994630319e0badcfeba7",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:17.493Z"
+  },
+  {
+    "action": {
+      "input": {
+        "about": " Core Dev Tech Lead",
+        "code": "ACA",
+        "description": "Tech Lead",
+        "icon": "https://pbs.twimg.com/profile_images/1925450094175723520/2Gedxco__400x400.jpg",
+        "id": "92a6e064-083b-4c76-affb-e68a653c7f98",
+        "name": "Acaldas",
+        "slug": "acaldas",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "JcMx8Ux4ChXRLTmcHrkGs5N3xsM=",
+    "id": "09e3fe6ab8b1c8226c54530b942b9834",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "abb40a78-b75b-4e80-af68-6494b73f88f4",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "7296190a7682fe3cf2b9aee91b821f75",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:17.493Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FRONTEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "gn5CKyL24+hI2IQpboupybGwHUg=",
+    "id": "d13cc130e22e05674556c3acc96355a8",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "BACKEND_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "sZjRNuwCuyz2DhmFrxKlLnvX4n4=",
+    "id": "152d78f677c0a64dd0b59be85fae2041",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "FULL_STACK_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "SI3ve0XWXmrqnx0kX+Pg3LxEo6A=",
+    "id": "eebbf27cf9accf742bba4429d958342b",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "DEVOPS_ENGINEERING"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "fnv4J280BHu9c0TDf0m0hHcC8EE=",
+    "id": "a1123e94ecc203268fef849c1f7dcf45",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "SMART_CONTRACT_DEVELOPMENT"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "tRYJIkSWnkH1fIfemnr6GeT5RSw=",
+    "id": "3f0ac1d7e482cdee68b8dde02c07b1c4",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "skill": "UI_UX_DESIGN"
+      },
+      "scope": "global",
+      "type": "ADD_SKILL"
+    },
+    "error": null,
+    "hash": "4c6q1UQHaSpzvJxigSH301H/83A=",
+    "id": "d94075be225398eb18e68ca0e6079811",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  },
+  {
+    "action": {
+      "input": {
+        "scope": "PROTOCOL_SCOPE"
+      },
+      "scope": "global",
+      "type": "ADD_SCOPE"
+    },
+    "error": null,
+    "hash": "g84gwBs3+ds9KI5pPXTwjmu3jMo=",
+    "id": "564fb08a0abad9f4d993be5067ff3500",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:46.352Z"
+  }
+]

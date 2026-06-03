@@ -1,0 +1,74 @@
+{
+  "contentSections": [],
+  "description": "\nA modular legal and financial toolkit for managing operational, technical, and liability risks faced by builder teams and individual contributors. ART solutions address scenarios such as protocol failures, data breaches, litigation, product liability, and professional liability through bespoke legal and financial instruments.\nRisk management instruments are typically based on a self-insurance layer and may include internal risk pools, captive insurance vehicles, performance bonds and guarantees, Directors & Officers (D&O) insurance frameworks, and financial reinsurance.  These instruments can be integrated into a comprehensive legal risk management framework for a project. \n\n**Typical use cases:**\n\n- High\u2011risk technical systems\n- Contributor liability protection\n- DAO\u2011adjacent risk exposure\n\nSuitable for teams seeking structured, proactive risk mitigation beyond standard insurance.\n\n\n\n",
+  "facetTargets": [
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "de233161-f0d0-4d17-85aa-c9ecbbb0a649",
+      "selectedOptions": [
+        "High",
+        "Highest"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "fb852570-32d3-4490-ae4f-91ddbf8b44e0",
+      "selectedOptions": [
+        "Hybrid"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "72e1d5f4-8472-4f86-b683-36261ddca199",
+      "selectedOptions": [
+        "Swiss Association",
+        "BVI Entity"
+      ]
+    },
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "8056de26-64fc-4875-9ee2-a6e81307b839",
+      "selectedOptions": [
+        "Self-Insurance Risk Management Hub"
+      ]
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:42:26.184Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Operation and maintenance of financial vehicles",
+    "Claim management",
+    "Control and audit",
+    "Oversight of structures through technical committees",
+    "Event prevention and risk mitigation",
+    "Contributor training"
+  ],
+  "services": [],
+  "setupServices": [
+    "Risk identification, classification, assessment, and mapping",
+    "Evaluation of suitable risk management instruments",
+    "Design, structuring, and implementation of legal vehicles",
+    "Set up insurance and reinsurance mechanisms"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": " Programmable, modular risk infrastructure for contributor and builder teams where traditional insurance falls short. ",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "e9cf7ad7-46a5-4d0d-a964-4daca5b0bd2a",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/risk/risk.png",
+  "title": "Alternative Risk Transfer",
+  "weight": null
+}

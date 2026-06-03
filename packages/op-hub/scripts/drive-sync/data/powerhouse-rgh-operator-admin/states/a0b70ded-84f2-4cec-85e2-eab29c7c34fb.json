@@ -1,0 +1,503 @@
+{
+  "availableBillingCycles": [
+    "MONTHLY",
+    "QUARTERLY",
+    "SEMI_ANNUAL",
+    "ANNUAL"
+  ],
+  "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+  "facetTargets": [
+    {
+      "categoryKey": "client",
+      "categoryLabel": "Client",
+      "id": "87ce2668-285d-4ae2-9e89-319a85bc6b6b",
+      "selectedOptions": [
+        "open-source",
+        "public-goods",
+        "vibe-coder",
+        "zero-human-company",
+        "commercial-operator",
+        "agent-fleet"
+      ]
+    },
+    {
+      "categoryKey": "risk-profile",
+      "categoryLabel": "Risk Profile",
+      "id": "36fa3adf-8288-4028-b5ed-2bd61dc17ecc",
+      "selectedOptions": [
+        "low-read only",
+        "medium-automation",
+        "high"
+      ]
+    },
+    {
+      "categoryKey": "jursidiction",
+      "categoryLabel": "Jursidiction",
+      "id": "2146d323-45ac-40e3-a76c-a799f783a2c2",
+      "selectedOptions": [
+        "Estonia",
+        "Switzerland",
+        "US"
+      ]
+    }
+  ],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-14T07:58:24.694Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [
+    {
+      "availableBillingCycles": [
+        "MONTHLY",
+        "QUARTERLY",
+        "SEMI_ANNUAL",
+        "ANNUAL"
+      ],
+      "billingCycleDiscounts": [],
+      "costType": "RECURRING",
+      "currency": null,
+      "defaultSelected": true,
+      "description": null,
+      "discountMode": null,
+      "id": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "isAddOn": false,
+      "name": "AgentOps",
+      "price": null,
+      "pricingMode": "TIER_DEPENDENT",
+      "standalonePricing": null,
+      "tierDependentPricing": [
+        {
+          "id": "caec743a-82ef-4096-8ef7-fc0ac0fa3a90",
+          "recurringPricing": [],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "6aaa166b-9cea-4347-8d60-ea29e8e18efa"
+        },
+        {
+          "id": "4139f886-19a7-44a4-a7c6-e6d6a250d636",
+          "recurringPricing": [
+            {
+              "amount": 700,
+              "billingCycle": "MONTHLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "d58e0472-b6d4-43b1-a9bb-a316e18bc255"
+            },
+            {
+              "amount": 700,
+              "billingCycle": "QUARTERLY",
+              "currency": "USD",
+              "discount": null,
+              "id": "ab1a56a3-b71c-408d-a912-d26e9936b453"
+            },
+            {
+              "amount": 700,
+              "billingCycle": "SEMI_ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "37da97cf-a04f-478b-ac80-284bd960890f"
+            },
+            {
+              "amount": 700,
+              "billingCycle": "ANNUAL",
+              "currency": "USD",
+              "discount": null,
+              "id": "c39780a3-3a22-44f6-80b5-619817894669"
+            }
+          ],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "9699579e-191b-452c-aa4c-e1128f8df16f"
+        },
+        {
+          "id": "0ebb0fc7-fc1c-41ad-99ee-540e979f356d",
+          "recurringPricing": [],
+          "setupCost": null,
+          "setupCostDiscounts": [],
+          "tierId": "10d0a997-724f-445a-b95b-992ffe8c2054"
+        }
+      ]
+    }
+  ],
+  "resourceTemplateId": "82b608d4-536e-43f9-a947-63d53c03b03b",
+  "services": [
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "6f0297a5-8097-4f29-ae52-61db1702f8f6",
+      "isSetupFormation": true,
+      "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+      "title": "Agent Operational Assessment"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "0e9367a7-5e13-4efd-bd6e-ed185692703c",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Agent Operational Assessment"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "8c9d378a-3850-4200-bcbb-64ecda325874",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Entity Formation"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "34e1e619-6fc2-4704-a03f-b133db6ce425",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Director Appointment"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "d46bfa21-222d-4421-9662-2c20da8a0d48",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "KYC/AML Framework Setup"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "5763e899-c6cf-4a04-9620-cff232eae3da",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Payment & Wallet Integration"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "568356b2-23fd-4aa3-8fd3-3bdd971d918d",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Bank Account Setup"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "f64c1090-a4df-42c0-ac40-02946c962b07",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Risk Assessment & Classification"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "6d4b8f7e-e626-4e1a-b51b-9a6b8916e900",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Instrument Selection & Structuring"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "f972151c-23cd-4773-a510-aa1938213fe7",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Legal Vehicle Design"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "b31ddc14-a638-4a25-8d32-3a1f5b496a95",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Transaction Processing"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "012f4e6a-299c-4ac4-902b-992581515786",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Reporting"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "7372799b-4a3b-4184-944a-2278913751c8",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Annual Maintenance & Filing"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "fd073428-e09e-4c3c-9d8f-17d0950ff062",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Claims Management"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "6db9f8bb-ab79-4915-83f0-4459c0b960b6",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Risk Monitoring"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "5d0a6b84-e382-4dd8-b5ff-3feb7f5ee2e5",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Vehicle Maintenance & Audit"
+    },
+    {
+      "description": null,
+      "displayOrder": null,
+      "id": "68836ad4-ce46-4bed-8ec2-56f6caae8681",
+      "isSetupFormation": false,
+      "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+      "title": "Coverage Adjustments"
+    }
+  ],
+  "status": "DRAFT",
+  "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/agent-ops/agent_ops.png",
+  "tiers": [
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": null,
+      "description": null,
+      "excludeFromSetupFee": false,
+      "id": "6aaa166b-9cea-4347-8d60-ea29e8e18efa",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "AgentCo Non-Profit",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "2a436b48-98d2-401c-b080-625334643c19",
+          "level": "INCLUDED",
+          "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+          "serviceId": "6f0297a5-8097-4f29-ae52-61db1702f8f6"
+        },
+        {
+          "customValue": null,
+          "id": "8d73f839-4906-4f4a-a737-f81790dac69b",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "0e9367a7-5e13-4efd-bd6e-ed185692703c"
+        },
+        {
+          "customValue": null,
+          "id": "3731fa7f-82b1-4d99-b962-79717349ae8a",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "8c9d378a-3850-4200-bcbb-64ecda325874"
+        },
+        {
+          "customValue": null,
+          "id": "c7aa13ce-7890-40d1-8411-0466a94669ed",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "34e1e619-6fc2-4704-a03f-b133db6ce425"
+        },
+        {
+          "customValue": null,
+          "id": "6afd90bf-c04d-4aa6-9f67-2a7dfa7aa09c",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "d46bfa21-222d-4421-9662-2c20da8a0d48"
+        },
+        {
+          "customValue": null,
+          "id": "d89e6ee9-51d9-4875-99cf-04b308bbceb3",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "5763e899-c6cf-4a04-9620-cff232eae3da"
+        },
+        {
+          "customValue": null,
+          "id": "a42609da-52b4-4bd4-a7a7-2553430c85a0",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "b31ddc14-a638-4a25-8d32-3a1f5b496a95"
+        },
+        {
+          "customValue": null,
+          "id": "c06960cc-7c7d-4700-8170-7af8d6305c5a",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "012f4e6a-299c-4ac4-902b-992581515786"
+        },
+        {
+          "customValue": null,
+          "id": "3cdccc0b-2bec-4dba-aec5-a51635bf2fdc",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "7372799b-4a3b-4184-944a-2278913751c8"
+        }
+      ],
+      "usageLimits": []
+    },
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": null,
+      "description": null,
+      "excludeFromSetupFee": false,
+      "id": "9699579e-191b-452c-aa4c-e1128f8df16f",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "AgentCo Commercial,",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "4944b4d6-7d4d-44bb-a73d-0098fe221ea6",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "8c9d378a-3850-4200-bcbb-64ecda325874"
+        },
+        {
+          "customValue": null,
+          "id": "19d2db6b-2099-452f-838f-1cc63b287598",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "5763e899-c6cf-4a04-9620-cff232eae3da"
+        },
+        {
+          "customValue": null,
+          "id": "754d6ae6-a994-4834-91a3-c92f33069088",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "568356b2-23fd-4aa3-8fd3-3bdd971d918d"
+        },
+        {
+          "customValue": null,
+          "id": "04d8cb5b-3dcc-43cc-926a-494579ca5ce1",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "b31ddc14-a638-4a25-8d32-3a1f5b496a95"
+        },
+        {
+          "customValue": null,
+          "id": "428bde60-c19e-4f8f-a606-ea9a87f25e98",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "012f4e6a-299c-4ac4-902b-992581515786"
+        },
+        {
+          "customValue": null,
+          "id": "fc49340e-dd92-49cf-a9f0-867c5bc1e62f",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "7372799b-4a3b-4184-944a-2278913751c8"
+        }
+      ],
+      "usageLimits": []
+    },
+    {
+      "billingCycleDiscounts": [],
+      "defaultBillingCycle": null,
+      "description": null,
+      "excludeFromSetupFee": false,
+      "id": "10d0a997-724f-445a-b95b-992ffe8c2054",
+      "isCustomPricing": false,
+      "mostPopular": false,
+      "name": "Agent RiskCo",
+      "pricing": {
+        "amount": null,
+        "currency": "USD"
+      },
+      "pricingMode": null,
+      "serviceLevels": [
+        {
+          "customValue": null,
+          "id": "7ed63e17-5cc7-4f88-a7f6-aa9bfd8f63da",
+          "level": "INCLUDED",
+          "optionGroupId": "e975c6ce-5e64-4cfb-a8f3-aa70eb498b73",
+          "serviceId": "6f0297a5-8097-4f29-ae52-61db1702f8f6"
+        },
+        {
+          "customValue": null,
+          "id": "e782e910-fd2d-4ca7-acce-087d0f81561c",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "0e9367a7-5e13-4efd-bd6e-ed185692703c"
+        },
+        {
+          "customValue": null,
+          "id": "d0a7befe-f1b9-4e76-81ed-a08b567928d7",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "568356b2-23fd-4aa3-8fd3-3bdd971d918d"
+        },
+        {
+          "customValue": null,
+          "id": "be6c5dce-2d0e-4b59-944a-27892657dad2",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "f64c1090-a4df-42c0-ac40-02946c962b07"
+        },
+        {
+          "customValue": null,
+          "id": "b0b2d658-2133-4e34-afc6-e627da8b8226",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "6d4b8f7e-e626-4e1a-b51b-9a6b8916e900"
+        },
+        {
+          "customValue": null,
+          "id": "b7ddd988-ad88-4006-8042-c9e62ddad575",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "f972151c-23cd-4773-a510-aa1938213fe7"
+        },
+        {
+          "customValue": null,
+          "id": "ad250bdb-9f92-4eb6-815c-573a0fa8080d",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "012f4e6a-299c-4ac4-902b-992581515786"
+        },
+        {
+          "customValue": null,
+          "id": "ccadf7a6-1a38-427f-823e-df6dee22a077",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "fd073428-e09e-4c3c-9d8f-17d0950ff062"
+        },
+        {
+          "customValue": null,
+          "id": "b912fb73-63ac-4b2b-83d0-b61caaac195f",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "6db9f8bb-ab79-4915-83f0-4459c0b960b6"
+        },
+        {
+          "customValue": null,
+          "id": "84a4b8b5-98fa-4ba3-bea8-5b7d0a232c1a",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "5d0a6b84-e382-4dd8-b5ff-3feb7f5ee2e5"
+        },
+        {
+          "customValue": null,
+          "id": "f0f5fc0d-e51f-4e2d-a464-0b78a265409d",
+          "level": "INCLUDED",
+          "optionGroupId": "29529ab2-be24-47fd-92cc-cd7240b93657",
+          "serviceId": "68836ad4-ce46-4bed-8ec2-56f6caae8681"
+        }
+      ],
+      "usageLimits": []
+    }
+  ],
+  "title": "AgentOps"
+}

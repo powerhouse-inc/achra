@@ -1,0 +1,46 @@
+{
+  "documentType": "powerhouse/document-drive",
+  "id": "2f21902c-b367-481f-b3ec-625fdc8d6fe0",
+  "name": "Core Dev Team Admin",
+  "preferredEditor": "builder-team-admin",
+  "revisionsList": [
+    {
+      "revision": 3,
+      "scope": "document"
+    },
+    {
+      "revision": 2,
+      "scope": "global"
+    }
+  ],
+  "slug": "core-dev-team-admin",
+  "state": {
+    "auth": {},
+    "document": {
+      "hash": {
+        "algorithm": "sha1",
+        "encoding": "base64"
+      },
+      "version": 0
+    },
+    "global": {
+      "icon": null,
+      "name": "Core Dev Team Admin",
+      "nodes": [
+        {
+          "documentType": "powerhouse/builder-profile",
+          "id": "a2a90b25-2f7b-4eb2-bc07-968ad682dc96",
+          "kind": "file",
+          "name": "Core Dev Team Profile",
+          "parentFolder": null
+        }
+      ]
+    },
+    "local": {
+      "availableOffline": false,
+      "listeners": [],
+      "sharingType": "private",
+      "triggers": []
+    }
+  }
+}

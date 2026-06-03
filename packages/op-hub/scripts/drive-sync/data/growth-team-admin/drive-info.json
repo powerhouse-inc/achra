@@ -1,0 +1,46 @@
+{
+  "documentType": "powerhouse/document-drive",
+  "id": "b4822754-ac09-4fc3-9190-fa6ee4911dab",
+  "name": "Growth Team Admin",
+  "preferredEditor": "builder-team-admin",
+  "revisionsList": [
+    {
+      "revision": 3,
+      "scope": "document"
+    },
+    {
+      "revision": 2,
+      "scope": "global"
+    }
+  ],
+  "slug": "growth-team-admin",
+  "state": {
+    "auth": {},
+    "document": {
+      "hash": {
+        "algorithm": "sha1",
+        "encoding": "base64"
+      },
+      "version": 0
+    },
+    "global": {
+      "icon": null,
+      "name": "Growth Team Admin",
+      "nodes": [
+        {
+          "documentType": "powerhouse/builder-profile",
+          "id": "ec049f96-f8d1-4ff6-9ec4-4fdb3d24ff07",
+          "kind": "file",
+          "name": "Growth Team Profile",
+          "parentFolder": null
+        }
+      ]
+    },
+    "local": {
+      "availableOffline": false,
+      "listeners": [],
+      "sharingType": "private",
+      "triggers": []
+    }
+  }
+}

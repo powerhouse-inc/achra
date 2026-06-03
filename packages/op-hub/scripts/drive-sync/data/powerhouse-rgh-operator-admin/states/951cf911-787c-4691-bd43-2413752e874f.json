@@ -1,0 +1,69 @@
+{
+  "contentSections": [],
+  "description": " A standalone vehicle for issuing equity, tokens, or revenue\u2011participation instruments to DAOs or traditional investors. Keeps fundraising, investor rights, and distributions separate from operations.\n\n\n**Typical use cases:**\n\n- DAO\u2011based fundraising\n- Token issuance\n- Hybrid Web2 / Web3 capital raises\n\nSuitable for teams needing regulatory clarity and clean cap\u2011table separation.\n",
+  "facetTargets": [
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "03392b63-b36b-4304-bfc4-021a864a040e",
+      "selectedOptions": [
+        "Operational Hub"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "70dd899e-0b78-4129-9de4-01b99d67aa34",
+      "selectedOptions": [
+        "BVI Entity"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "756e5616-38d4-401a-9b99-0cf9f7fddbfd",
+      "selectedOptions": [
+        "Local"
+      ]
+    },
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "3c7918ea-fdff-4c14-a519-b5580fece37c",
+      "selectedOptions": [
+        "Highest"
+      ]
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:42:05.943Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Treasury operations",
+    "Distribution processing",
+    "Reporting to governance",
+    "Compliance and filing"
+  ],
+  "services": [],
+  "setupServices": [
+    "Needs analysis",
+    "Legal vehicle design and implementation",
+    "Governance integration and code-deference mechanisms"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "A purpose\u2011built entity for raising and distributing capital.\n",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "07bea701-a531-41f8-a3ef-a52e668a7d4e",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/fund-vehicle/fv_ocf.png",
+  "title": "Fundraising Vehicle (OCF)",
+  "weight": null
+}

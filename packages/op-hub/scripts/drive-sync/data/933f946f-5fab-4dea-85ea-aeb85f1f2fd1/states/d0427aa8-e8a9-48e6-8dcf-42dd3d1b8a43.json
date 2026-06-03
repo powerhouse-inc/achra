@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "teep",
+  "contributors": [],
+  "description": null,
+  "icon": "https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg",
+  "id": "03df64d8-a882-4801-acb9-56d452a73905",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:51.946Z",
+  "links": [],
+  "name": "teep",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "teep",
+  "status": "ACTIVE"
+}

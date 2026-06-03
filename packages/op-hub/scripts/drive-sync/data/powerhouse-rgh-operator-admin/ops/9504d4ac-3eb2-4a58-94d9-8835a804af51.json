@@ -1,0 +1,303 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "9504d4ac-3eb2-4a58-94d9-8835a804af51",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "NETWORK EMBRYONIC HUB",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:41.919Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "9504d4ac-3eb2-4a58-94d9-8835a804af51"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "ca799d12ccd72eaf84c5a142cc739532",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:41.919Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": " The embryonic entity enables networks to execute minimum viable operations across organizational functions simultaneously: procurement, contributor coordination, IP management, governance support, and early fundraising. As the network matures, specialized entities can be spun out without disruption.\n\nThe network embryonic hub is structured as a Swiss Association \u2014 a cost\u2011efficient, tax\u2011optimized, and flexible legal form that offers strong privacy protections* in a reputable European jurisdiction.\n\n**Typical Use Cases**\n\n- Early DAOs or protocol networks\n- Pre\u2011token and pre\u2011revenue ecosystems\n- Networks testing coordination and governance primitives\n\nSuitable for networks that require coordination capacity without committing to permanent or specialized organizational structures.\n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "Coordination vehicle for early stage networks. ",
+        "thumbnailUrl": "https://images.squarespace-cdn.com/content/v1/64b014ef4dc32b6e02ac4ac8/d50c567d-60b8-4a75-a965-7c3ef3858b2f/2_Graph_view.jpg",
+        "title": "Network Embryonic Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "3QzWcCI0rnQiNPZtDSHUEVvOIgE=",
+    "id": "d37e7f407ddcc2f2676f0660161eeaf3",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "9504d4ac-3eb2-4a58-94d9-8835a804af51",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "f6e7fd8b938bb5b138f5aba0cf89e48d",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:41.919Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "QyMxjPJxlMCsVsmhKvaJniC3ZUA=",
+    "id": "fef773e6702de8388465b74d3006746b",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "vjykx7V1EpDXNzktc76joJ7UKFI=",
+    "id": "5473fa291df0f36ef5369f985fd13881",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#10b981",
+        "id": "0c2fdb16-d4dc-49ba-8375-04e493181485",
+        "label": "Networks",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "rIaWs7XwNVpnYYb4wf5Pr3VSiZQ=",
+    "id": "435ef524c12712eaa01064a5b601304b",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "anonymity",
+        "categoryLabel": "Anonymity",
+        "id": "8133ffd6-b0f7-4461-b808-b935cdf15816",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "High",
+          "Highest"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "UmH0XWZ6tCiT/hhRWiqEBGlFWuE=",
+    "id": "502ec4326e4fd949a65c6f323b46bfb1",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "team",
+        "categoryLabel": "Team",
+        "id": "0b0cf700-5bd4-43e0-91b4-739ad150286f",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Remote",
+          "Local",
+          "Hybrid"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "Uh4DROS7Vgye6rPGSn8+VegIsaQ=",
+    "id": "40eaf2953d1a7d70e56547735f8c4e0d",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "legal-entity",
+        "categoryLabel": "Legal Entity",
+        "id": "e0928def-e3dc-43b9-9e26-c201e90f32b0",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Swiss Association",
+          "BVI Entity"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "smM2Ulzjnx+ea/BAtfAAgp/0rRo=",
+    "id": "dc0f8a3244d0e8858785e8c0c2cb4812",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "sno-function",
+        "categoryLabel": "SNO Function",
+        "id": "f6559461-5dbd-4f06-b497-543e8895c7de",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Operational Hub for Open Source Builders",
+          "Operational Hub",
+          "IP SPV",
+          "Revenue Generating Hub",
+          "SNO Embryonic Hub",
+          "Self-Insurance Risk Management Hub"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "Sg/IIlsBV9w3B/kyOCeSzmOzOJ4=",
+    "id": "9ccc1ee97c1517302357e1ca602ab61b",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Needs analysis tool (Self-assessment)",
+          "Legal document assembler for setting up (and winding down) a Swiss Association",
+          "Founding meeting and document review by local counsel *",
+          "Payment processor and contributor billing setup"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "X6nE/d7aVNjxFLlg8eFpMO+WDOY=",
+    "id": "b47a2716e8795dd7a584ed46a64e78bf",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Payment processing",
+          "Transparency reporting",
+          "Contract administration",
+          "Tax administration and filing"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "CmHUWmltFbIfnH37S2dhiRnjJck=",
+    "id": "2185598d443b1190d43db981c2a925f5",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:18.527Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:41:47.751Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/neh/neh.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "1BLV0xWYtXm9FnFANoDGC1yEye4=",
+    "id": "1f378dc65a06afad8aec56ba9b30de71",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:41:47.751Z"
+  }
+]

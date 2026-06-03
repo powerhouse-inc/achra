@@ -1,0 +1,287 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "236f4cd7-90b5-433d-845a-ac171bc4559b",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "NETWORK OPERATIONAL HUB",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:37.175Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "236f4cd7-90b5-433d-845a-ac171bc4559b"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "c1029ebb2f864b80be88cde8daa8a0c3",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:37.175Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": " A spin-off of the Embryonic Hub focused on managing development activities and structuring contributor relationships. \n\nThe entity will hire and pay contributors, receive invoices from builders and suppliers, process payments, and provide operational support for team members working in network organizations.\n\nThe Network Operational Hub is structured as a Swiss Association \u2014 a cost\u2011efficient, tax\u2011optimized, and flexible legal form that offers strong privacy protections* in a reputable European jurisdiction.\n\n**Typical Use Cases**\n\n- Networks with recurring development budgets\n- Permanent or semi\u2011permanent contributor groups\n- Multi\u2011team and multi\u2011project ecosystems\n\nSuitable networks that have outgrown embryonic coordination and require a dedicated procurement and execution layer.",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "The procurement and contributor coordination hub for an active network.\n",
+        "thumbnailUrl": "https://imageio.forbes.com/specials-images/imageserve/696668d98311081f79a9eaef/Global-communication-network-concept--Digital-transformation-/0x0.jpg?format=jpg&width=480",
+        "title": "Network Operational Hub"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "GIKNHzeiwZculqVig4oKQ+f1lxg=",
+    "id": "c185a7fca6f4a9b9f6ae5e8bf3fd4edc",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "236f4cd7-90b5-433d-845a-ac171bc4559b",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "8fa7bd1d30870b87bd0fa6fc1d2ed414",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:37.175Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "+7oqE/387eCCpUTS9ze3BUhOZJM=",
+    "id": "24ab0e87942263c9c0a2684689e1e2f5",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "rMu/8gzeFoyMw53khOUSFKIXrNk=",
+    "id": "b68712c5e063dee418a13af46eb3f322",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#10b981",
+        "id": "b1b75358-1385-4e44-a15d-7249d11a1fac",
+        "label": "Networks",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "oXNEmaCtsSOpo8wHJeNEMmV7xlc=",
+    "id": "c98644c8030e11b3428915ae5b7e228b",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "sno-function",
+        "categoryLabel": "SNO Function",
+        "id": "9793f50b-bfe5-414f-805b-603c1e08b65d",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": []
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "b0RiwwnzFzaV7YZVTs5Nj7wuJnc=",
+    "id": "ff1d074fae6a62f7cdb37518f126d84d",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "legal-entity",
+        "categoryLabel": "Legal Entity",
+        "id": "a0140461-c47d-41f3-b817-73ac9d65d89b",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": []
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "t1ixwXrm6UO+UYRUyJfqII9ojLw=",
+    "id": "de5478e7101aef78241dd4a86108f4e3",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "team",
+        "categoryLabel": "Team",
+        "id": "e4a31bf8-700a-44b7-9c93-e18ac0817adc",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": []
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "h43b3ZjhRavabQ0K+1Ew+fsXPqk=",
+    "id": "c7f1de5ce3a1ad110b7960f0d377aef5",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "anonymity",
+        "categoryLabel": "Anonymity",
+        "id": "d2d92f3d-4e40-46c9-a270-64838897c194",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": []
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "BZZFylv317FzrYMpC46KP28rQ1o=",
+    "id": "19fff178c79b883c88c009588147954b",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "(Same as non-commercial Operational Hub)",
+          "Needs analysis tool (Self-assessment)",
+          "Legal document assembler for setting up (and winding down) a Swiss Association",
+          "Founding meeting and document review by local counsel *",
+          "Payment processor and contributor billing setup"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "4KPSTmEaeThPwVK1ncbOXir9yJI=",
+    "id": "63232f0d617547ed9f75fa02ad174de5",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Payment processing",
+          "Transparency reporting",
+          "Contract administration",
+          "Tax administration and filing"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "gD7CL1tSuJiIssrwcpozhiI8pUE=",
+    "id": "ea9249c9872a7465fda7d3ec681276e3",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:01.532Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:40:10.082Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/noh/network_oh.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "7MznOjcPC3gMGCFVeyZINK23nc8=",
+    "id": "033914c7c2af3655e1ee1957077b98e5",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:40:10.082Z"
+  }
+]

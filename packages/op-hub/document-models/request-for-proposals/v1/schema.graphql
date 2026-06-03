@@ -1,0 +1,165 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type RequestForProposalsState {
+  issuer: String!
+  code: String
+  title: String!
+  summary: String!
+  briefing: String!
+  rfpCommenter: [RfpCommenter!]!
+  eligibilityCriteria: String!
+  evaluationCriteria: String!
+  budgetRange: BudgetRange!
+  contextDocuments: [ContextDocument!]!
+  status: RFPStatus!
+  proposals: [RfpProposal!]!
+  deadline: DateTime
+  tags: [String!]
+}
+
+type RfpCommenter {
+  id: OID!
+  rfpCommentatorType: RFPCommentatorType!
+  agentType: RfpAgentType!
+  name: String!
+  code: String!
+  imageUrl: String
+}
+
+enum RFPCommentatorType {
+  INTERNAL
+  EXTERNAL
+}
+
+enum RfpAgentType {
+  HUMAN
+  GROUP
+  AI
+}
+
+type BudgetRange {
+  min: Float
+  max: Float
+  currency: String
+}
+
+type ContextDocument {
+  name: String!
+  url: URL!
+}
+
+enum RFPStatus {
+  DRAFT
+  REQUEST_FOR_COMMMENTS
+  CANCELED
+  OPEN_FOR_PROPOSALS
+  AWARDED
+  NOT_AWARDED
+  CLOSED
+}
+
+type RfpProposal {
+  id: OID!
+  title: String!
+  summary: String!
+  proposalStatus: RfpProposalStatus!
+  submittedby: OID
+  budgetEstimate: String!
+  paymentTerms: RfpPaymentTerm!
+}
+
+enum RfpPaymentTerm {
+  MILESTONE_BASED_FIXED_PRICE
+  MILESTONE_BASED_ADVANCE_PAYMENT
+  RETAINER_BASED
+  VARIABLE_COST
+  ESCROW
+}
+
+enum RfpProposalStatus {
+  SUBMITTED
+  OPENED
+  UNDER_REVIEW
+  NEEDS_REVISION
+  REVISED
+  APPROVED
+  CONDITIONALLY_APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+# rfp_state
+
+input EditRfpInput {
+  title: String
+  code: String
+  summary: String
+  briefing: String
+  eligibilityCriteria: String
+  evaluationCriteria: String
+  budgetRange: BudgetRangeInput
+  status: RFPStatus
+  deadline: DateTime
+  tags: [String!]
+}
+
+input BudgetRangeInput {
+  min: Float
+  max: Float
+  currency: String
+}
+
+# contex_document
+
+input AddContextDocumentInput {
+  rfpId: OID!
+  name: String!
+  url: URL!
+}
+
+input RemoveContextDocumentInput {
+  rfpId: OID!
+  name: String!
+}
+
+# proposals
+
+input AddProposalInput {
+  rfpId: OID!
+  id: OID!
+  title: String!
+  summary: String!
+  proposalStatus: RfpProposalStatus!
+  submittedby: OID
+  budgetEstimate: String!
+  paymentTerms: RfpPaymentTerm!
+}
+
+input ChangeProposalStatusInput {
+  proposalId: OID!
+  status: RfpProposalStatus!
+}
+
+input RemoveProposalInput {
+  rfpId: OID!
+  id: OID!
+}

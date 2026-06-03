@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "willow",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/wBzB9XnG/willow-Icon.png",
+  "id": "4a7b1c76-eb07-4d5f-98c1-db22371877d8",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:42.682Z",
+  "links": [],
+  "name": "willow",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "willow",
+  "status": "ACTIVE"
+}

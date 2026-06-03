@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "550a270e-9ca0-46e8-a3bc-4a6fb2a18382",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Prometheus",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:12.669Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "550a270e-9ca0-46e8-a3bc-4a6fb2a18382"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5c76ddeb4a1e026253731336ccb6426c",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:12.669Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "PRM",
+        "icon": "https://pbs.twimg.com/profile_images/1795417022433480704/Gyl8mM7x_400x400.jpg",
+        "id": "77d71092-1f1a-4d5c-93c4-ac8d9f43d56d",
+        "name": "Prometheus",
+        "slug": "prometheus",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "FIYRoo3bWVsvReSJE5JHd8piWD8=",
+    "id": "35ac4c19aa08b110ae5f118b04618678",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:28.637Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "550a270e-9ca0-46e8-a3bc-4a6fb2a18382",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "76d7a76eeb95a262110230120c5ee2be",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:12.669Z"
+  }
+]

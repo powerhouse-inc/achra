@@ -1,0 +1,297 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "27b2bba1-a922-412c-a80e-a9e02727300e",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "Intellectual Property SPV (IP SPV)",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:39.817Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "27b2bba1-a922-412c-a80e-a9e02727300e"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "d4e3f37357e2b781a488805b76d08a2d",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:39.817Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": " A dedicated entity to hold, protect, and license IP assets such as trademarks, copyrights, patents, and domains. Separating IP ownership reduces operational risk and enables flexible licensing models.\n\n**Typical use cases:**\n\n- 1. IP isolation\n- 2. Licensing and royalty structures\n- 3. Enforcement and brand protection\n\nSuitable for teams with valuable IP that require clear ownership and risk separation.\n\n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "A clean, isolated home for your project\u2019s intellectual property.",
+        "thumbnailUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDzJGT1jCjvoiniEs9-mG6d7QfvSpnbbZgKw&s",
+        "title": "Intellectual Property SPV"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "0k7uOf5vUe4gFkcvDQSWLqeBrao=",
+    "id": "7625ba5068c1dc831c59f8ff059dc1e3",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "27b2bba1-a922-412c-a80e-a9e02727300e",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "d9f2ac5b1f83dce6bb266afe7d666b97",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:39.817Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "z9D8QNGoR73E+mPnnxQqhKIOJbk=",
+    "id": "899b8a2d8dfc7a7b7864140108ad658a",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "InbpdAzPbJxQVU8XFfNdZzCRxB8=",
+    "id": "4c405dc9e57970b58d3e3af918355d2f",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#10b981",
+        "id": "d9212b5e-5c19-400b-a19d-4739967c0fc6",
+        "label": "Networks",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "2JOynsjb34ZfsZcQ/zP2F8N4K0M=",
+    "id": "91a1f42352b35527fe2aa066a0b902de",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "anonymity",
+        "categoryLabel": "Anonymity",
+        "id": "371a1e8b-d484-4a3e-aed0-da155cd7f11a",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "High",
+          "Highest"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "kiUocQ1zrmHuozPFUCxeoO3b81c=",
+    "id": "fd06ca99e1f5c615d6327abdb1f7ef09",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "team",
+        "categoryLabel": "Team",
+        "id": "13cc2066-8bba-42f7-ba67-2c9e2d428dbe",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Remote",
+          "Local",
+          "Hybrid"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "cSOaJFltFGInwOUBAICpmBp0ztk=",
+    "id": "4c811bb841b5587df8d7d863067fe5c3",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "legal-entity",
+        "categoryLabel": "Legal Entity",
+        "id": "2fc22df5-ba9f-45c4-8376-97fc9bf3b451",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Swiss Association",
+          "BVI Entity"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "7/x3rVNYqXOW3UM97CuFG48bULc=",
+    "id": "b2b8978a1a49dc2ad7781f3a462d0f47",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "sno-function",
+        "categoryLabel": "SNO Function",
+        "id": "f97a1ccc-07ff-40ee-b1ee-04e2cfbd0c31",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "IP SPV"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "mb4Jm/YH8l+wvoUX/9FvNLPx6kY=",
+    "id": "922fcbdc729fee695d4f0d1cb5db1e4d",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "(same as commercial OH, plus)",
+          "Needs analysis",
+          "IP asset audit",
+          "Setup licenses",
+          "Legal entity design and implementation"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "crTzcylFET03uYFHOXm2B6++6Vw=",
+    "id": "160722b8508f3fb9687f779f56c0c6a2",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Licensing",
+          "Enforcing copyrights/police infringements"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "pBFRzQK1+6voVHjj3uRtuDrxfQk=",
+    "id": "e1eeabbcb5999fa7ad50360919a3b003",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:10.934Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:40:33.368Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/ip-spv/ip_spv.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "cGRnQSeXpMWMwIl45gEyqq7sdLU=",
+    "id": "73601324ffc3487ddc0c81126e233df6",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:40:33.368Z"
+  }
+]

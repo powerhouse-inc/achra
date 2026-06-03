@@ -1,0 +1,20 @@
+{
+  "briefing": "",
+  "budgetRange": {
+    "currency": null,
+    "max": null,
+    "min": null
+  },
+  "code": null,
+  "contextDocuments": [],
+  "deadline": null,
+  "eligibilityCriteria": "",
+  "evaluationCriteria": "",
+  "issuer": "placeholder-id",
+  "proposals": [],
+  "rfpCommenter": [],
+  "status": "DRAFT",
+  "summary": "",
+  "tags": null,
+  "title": ""
+}

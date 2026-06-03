@@ -1,0 +1,79 @@
+{
+  "contentSections": [],
+  "description": " The embryonic entity enables networks to execute minimum viable operations across organizational functions simultaneously: procurement, contributor coordination, IP management, governance support, and early fundraising. As the network matures, specialized entities can be spun out without disruption.\n\nThe network embryonic hub is structured as a Swiss Association \u2014 a cost\u2011efficient, tax\u2011optimized, and flexible legal form that offers strong privacy protections* in a reputable European jurisdiction.\n\n**Typical Use Cases**\n\n- Early DAOs or protocol networks\n- Pre\u2011token and pre\u2011revenue ecosystems\n- Networks testing coordination and governance primitives\n\nSuitable for networks that require coordination capacity without committing to permanent or specialized organizational structures.\n",
+  "facetTargets": [
+    {
+      "categoryKey": "anonymity",
+      "categoryLabel": "Anonymity",
+      "id": "8133ffd6-b0f7-4461-b808-b935cdf15816",
+      "selectedOptions": [
+        "High",
+        "Highest"
+      ]
+    },
+    {
+      "categoryKey": "team",
+      "categoryLabel": "Team",
+      "id": "0b0cf700-5bd4-43e0-91b4-739ad150286f",
+      "selectedOptions": [
+        "Remote",
+        "Local",
+        "Hybrid"
+      ]
+    },
+    {
+      "categoryKey": "legal-entity",
+      "categoryLabel": "Legal Entity",
+      "id": "e0928def-e3dc-43b9-9e26-c201e90f32b0",
+      "selectedOptions": [
+        "Swiss Association",
+        "BVI Entity"
+      ]
+    },
+    {
+      "categoryKey": "sno-function",
+      "categoryLabel": "SNO Function",
+      "id": "f6559461-5dbd-4f06-b497-543e8895c7de",
+      "selectedOptions": [
+        "Operational Hub for Open Source Builders",
+        "Operational Hub",
+        "IP SPV",
+        "Revenue Generating Hub",
+        "SNO Embryonic Hub",
+        "Self-Insurance Risk Management Hub"
+      ]
+    }
+  ],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:41:47.751Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "Payment processing",
+    "Transparency reporting",
+    "Contract administration",
+    "Tax administration and filing"
+  ],
+  "services": [],
+  "setupServices": [
+    "Needs analysis tool (Self-assessment)",
+    "Legal document assembler for setting up (and winding down) a Swiss Association",
+    "Founding meeting and document review by local counsel *",
+    "Payment processor and contributor billing setup"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "Coordination vehicle for early stage networks. ",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "0c2fdb16-d4dc-49ba-8375-04e493181485",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/neh/neh.png",
+  "title": "Network Embryonic Hub",
+  "weight": null
+}

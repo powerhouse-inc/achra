@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "memo",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/fT1SJFGL/memo-Icon.png",
+  "id": "a125807d-aab6-49ee-9d79-1b13334d6fc9",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:37.022Z",
+  "links": [],
+  "name": "Memo",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "memo",
+  "status": "ACTIVE"
+}

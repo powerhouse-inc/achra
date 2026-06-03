@@ -1,0 +1,33 @@
+{
+  "source": {
+    "slug": "teeps-team-admin",
+    "name": "Teeps Team Admin",
+    "downloadedAt": "2026-05-20T11:42:38.000Z"
+  },
+  "excluded": [],
+  "folders": [
+    {
+      "id": "0feec564-9249-48d5-9b8d-8bcc3f674e40",
+      "name": "Snapshot Reports",
+      "parentFolder": null
+    },
+    {
+      "id": "704de1fb-3951-4fc3-97bd-a5d42608a85c",
+      "name": "Service Subscriptions",
+      "parentFolder": null
+    },
+    {
+      "id": "f2657bdb-58ed-41f9-9e84-7d3f9eeaaeed",
+      "name": "Expense Reports",
+      "parentFolder": null
+    }
+  ],
+  "documents": [
+    {
+      "id": "68b53909-7f70-4add-9bca-0a3c38e40c76",
+      "name": "Teeps Team of Builders",
+      "type": "powerhouse/builder-profile",
+      "parentFolder": null
+    }
+  ]
+}

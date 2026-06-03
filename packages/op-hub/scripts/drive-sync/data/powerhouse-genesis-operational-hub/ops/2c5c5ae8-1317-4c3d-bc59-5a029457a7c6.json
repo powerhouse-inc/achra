@@ -1,0 +1,122 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "2c5c5ae8-1317-4c3d-bc59-5a029457a7c6",
+        "meta": {},
+        "model": "powerhouse/invoice",
+        "name": "PH-Genesis-April-2025-Invoice",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:39.627Z",
+          "documentType": "powerhouse/invoice",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "2c5c5ae8-1317-4c3d-bc59-5a029457a7c6"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "791b67a54bfd354fdc4bae20ab999002",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:39.627Z"
+  },
+  {
+    "action": {
+      "input": {
+        "currency": "USD",
+        "description": "Operational services - April 2025",
+        "id": "li-04-001",
+        "quantity": 1,
+        "taxPercent": 0,
+        "totalPriceTaxExcl": 2500,
+        "totalPriceTaxIncl": 2500,
+        "unitPriceTaxExcl": 2500,
+        "unitPriceTaxIncl": 2500
+      },
+      "scope": "global",
+      "type": "ADD_LINE_ITEM"
+    },
+    "error": null,
+    "hash": "Ca7+el/1ajU+vQwl2On28M4zjSA=",
+    "id": "0d897d671d3d2a29195557a2ecbcccb5",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:23.544Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "2c5c5ae8-1317-4c3d-bc59-5a029457a7c6",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "closureReason": null,
+            "currency": "",
+            "dateDelivered": null,
+            "dateDue": null,
+            "dateIssued": null,
+            "exported": {
+              "exportedLineItems": [],
+              "timestamp": null
+            },
+            "invoiceNo": "",
+            "invoiceTags": [],
+            "issuer": {
+              "address": null,
+              "contactInfo": null,
+              "country": null,
+              "id": null,
+              "name": null,
+              "paymentRouting": null
+            },
+            "lineItems": [],
+            "notes": null,
+            "payAfter": null,
+            "payer": {
+              "address": null,
+              "contactInfo": null,
+              "country": null,
+              "id": null,
+              "name": null,
+              "paymentRouting": null
+            },
+            "payments": [],
+            "rejections": [],
+            "status": "DRAFT",
+            "totalPriceTaxExcl": 0,
+            "totalPriceTaxIncl": 0
+          },
+          "local": {}
+        },
+        "model": "powerhouse/invoice",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5149bce6f59c2e8143f658412e328bf3",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:39.627Z"
+  }
+]

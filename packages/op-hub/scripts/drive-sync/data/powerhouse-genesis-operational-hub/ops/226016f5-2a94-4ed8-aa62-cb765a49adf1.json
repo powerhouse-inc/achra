@@ -1,0 +1,99 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "226016f5-2a94-4ed8-aa62-cb765a49adf1",
+        "meta": {},
+        "model": "powerhouse/invoice",
+        "name": "Invoice DEC 2025",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:31.798Z",
+          "documentType": "powerhouse/invoice",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "226016f5-2a94-4ed8-aa62-cb765a49adf1"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "02d6276c6d2413397eec052d1209dfa9",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:31.798Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "226016f5-2a94-4ed8-aa62-cb765a49adf1",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "closureReason": null,
+            "currency": "",
+            "dateDelivered": null,
+            "dateDue": null,
+            "dateIssued": null,
+            "exported": {
+              "exportedLineItems": [],
+              "timestamp": null
+            },
+            "invoiceNo": "",
+            "invoiceTags": [],
+            "issuer": {
+              "address": null,
+              "contactInfo": null,
+              "country": null,
+              "id": null,
+              "name": null,
+              "paymentRouting": null
+            },
+            "lineItems": [],
+            "notes": null,
+            "payAfter": null,
+            "payer": {
+              "address": null,
+              "contactInfo": null,
+              "country": null,
+              "id": null,
+              "name": null,
+              "paymentRouting": null
+            },
+            "payments": [],
+            "rejections": [],
+            "status": "DRAFT",
+            "totalPriceTaxExcl": 0,
+            "totalPriceTaxIncl": 0
+          },
+          "local": {}
+        },
+        "model": "powerhouse/invoice",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "b6685c82d9bdd90de859f7537a03d4e6",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:31.798Z"
+  }
+]

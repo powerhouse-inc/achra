@@ -1,0 +1,237 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "297a2968-de2e-4e3d-8bfb-1a3e7c1d70dd",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "Teeps Team of Builders",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:14.280Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "297a2968-de2e-4e3d-8bfb-1a3e7c1d70dd"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "99b925efda2ff0d007a60fad40dd7317",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:14.280Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "TTOB",
+        "description": "Teeps Team of Builders helps scale BAI operations to LATAM",
+        "icon": "https://pbs.twimg.com/profile_images/1543149307435618304/5K_7BdwO_400x400.jpg",
+        "name": "Teeps Team of Builders",
+        "slug": "teeps-team-of-builders",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "uWCAyLmx4qqEpKvOQIMaysejVxw=",
+    "id": "91393eb1642a0640a808d71d4c4104fd",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:35.158Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "297a2968-de2e-4e3d-8bfb-1a3e7c1d70dd",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "6393587711c9c1c958e47d558cee1f2b",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:14.280Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "1UvSoLaPLIEhy4DefWIh74RiXm8=",
+    "id": "e1f0761c9aa9e003c861932c2dfb1699",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:35.158Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "2a01f417-0c6d-4450-8db0-fce70fccfede"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "I6u5kAIpIFH229871Sg2XXsLeNQ=",
+    "id": "e74174b0be98797654a94da76b322c57",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:35.158Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f77ec756-49d5-4ea5-9f57-8af0d6ea421a"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "veLF+GfQOBl5gUiu1CEqSTej8mk=",
+    "id": "fd29c98d68e67526450fe76a7d4125c4",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:35.158Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "e971b366-0fc1-4457-98df-1fc5738e0628"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "pHTYFGaYCTtahsDccbMdqhBJDn4=",
+    "id": "c0593ecddd42a418abe6e21fc3180f49",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:21.753Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "DY0FvxaUstLVJiG+wcs4EKV1IGg=",
+    "id": "1fac4ac5deac92072e1ddbb91f6a2af6",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:22.125Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "831c8c57-432c-4650-b0fc-1011b6894a91"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "76om64guZMvVFZZ1g7YQQS82Guc=",
+    "id": "9789825c1af4a1a76767e371da25e86e",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:22.489Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "2a01f417-0c6d-4450-8db0-fce70fccfede"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "a7LEtmLE4WPDlbKV0XW8IKbts98=",
+    "id": "b92560236c15e8c84d3c48ac3857babf",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:22.844Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "a8ad8819-9eee-483c-924d-a70dd28dce4d"
+      },
+      "scope": "global",
+      "type": "REMOVE_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "mC4QzkdQI3OwN4vgtyofYR/9vSg=",
+    "id": "90a77fab5c0a3ec4fd2834570eb70679",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:23.201Z"
+  },
+  {
+    "action": {
+      "input": {
+        "contributorPHID": "f77ec756-49d5-4ea5-9f57-8af0d6ea421a"
+      },
+      "scope": "global",
+      "type": "ADD_CONTRIBUTOR"
+    },
+    "error": null,
+    "hash": "fYiALMSrKeqlEzUM3kdHymvrSjs=",
+    "id": "58c1ae26557a227c71f1284084258db2",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:25:23.554Z"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "dg",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/C5jGJSMk/deadgoat.png",
+  "id": "ca1bd614-a6f1-4b77-95f9-744bba0c6390",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:26.805Z",
+  "links": [],
+  "name": "deadgoat",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "deadgoat",
+  "status": null
+}

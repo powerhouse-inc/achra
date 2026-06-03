@@ -1,0 +1,62 @@
+{
+  "about": "## About Us\nThe Powerhouse Revenue Generating Hub (RGH) is the commercial arm of the Powerhouse ecosystem. Our mandate is to ensure long-term sustainability by building, operating, and scaling revenue streams that fund continued development and ecosystem expansion.\n\n## What We Do\nWe identify, develop, and manage products and services that generate revenue while advancing the Powerhouse mission. We operate at the intersection of business development, product strategy, and operations \u2014 turning the platform's capabilities into viable commercial offerings.\n\n## Commercial Products & Services\nWe package Powerhouse's core technology into commercial products and managed services. This includes hosted infrastructure offerings, premium support tiers, custom document model development, and white-label solutions for organizations adopting decentralized operations.\n\n## Business Development & Partnerships\nWe cultivate strategic commercial relationships \u2014 from enterprise clients and protocol partnerships to integration deals and co-development agreements. We focus on sustainable revenue relationships that create mutual value.\n\n## Revenue Operations\nWe manage the full lifecycle of commercial engagements: pricing strategy, contract management, billing operations, customer success, and financial reporting. We ensure revenue streams are predictable, well-documented, and transparently reported to the ecosystem.\n\n## Strategic Planning\nWe continuously evaluate market opportunities, competitive landscape, and ecosystem needs to inform our commercial roadmap. We balance short-term revenue generation with long-term strategic positioning to ensure the Powerhouse ecosystem remains competitive and financially sustainable.",
+  "code": "PRGH",
+  "contributors": [
+    "550a270e-9ca0-46e8-a3bc-4a6fb2a18382",
+    "b41845f8-0986-4576-8dc6-d283be7b9fe6",
+    "547f197a-3203-4c00-8f8d-7e9d6af425fe",
+    "437846d0-8f6d-415c-a04d-6a1582f51f63",
+    "8bff99ed-6eb1-4353-80d9-c497d6a896ba",
+    "abb40a78-b75b-4e80-af68-6494b73f88f4",
+    "e8866a8b-c04f-45fd-9613-6f09937e277c",
+    "e77bf52f-e63c-4a87-85f3-cde1a4a247c6",
+    "e0cba809-34d8-42db-b5c3-a06d8a9b5e54",
+    "d0427aa8-e8a9-48e6-8dcf-42dd3d1b8a43",
+    "f77ec756-49d5-4ea5-9f57-8af0d6ea421a",
+    "2a01f417-0c6d-4450-8db0-fce70fccfede"
+  ],
+  "description": "The Powerhouse Revenue Generating Hub (RGH) drives commercial sustainability for the Powerhouse ecosystem by developing and operating revenue-generating products, services, and partnerships that fund ongoing development and ecosystem growth.",
+  "icon": "https://framerusercontent.com/images/GZkbeeiIcPgM6wgEk8vIZlWi7o.png?scale-down-to=512&width=1024&height=1024",
+  "id": "a326c3a9-d29b-46d3-8ab0-14b361e11567",
+  "isOperator": true,
+  "lastModified": "2026-05-01T14:23:07.878Z",
+  "links": [
+    {
+      "id": "rgh-link-x-01",
+      "label": "X",
+      "url": "https://x.com/PowerhouseDAO"
+    },
+    {
+      "id": "rgh-link-discord-01",
+      "label": "Discord",
+      "url": "https://discord.com/invite/h7GKvqDyDP"
+    },
+    {
+      "id": "rgh-link-forum-01",
+      "label": "Forum",
+      "url": "https://forum.sky.money/t/professional-ecosystem-actor-introduction-powerhouse/21057"
+    },
+    {
+      "id": "64665247-09e7-479b-8101-d4e335d75701",
+      "label": "Powerhouse.io",
+      "url": "https://powerhouse.io/"
+    }
+  ],
+  "name": "Powerhouse RGH",
+  "operationalHubMember": {
+    "name": "Powerhouse Genesis",
+    "phid": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+  },
+  "scopes": [
+    "SUPPORT_SCOPE"
+  ],
+  "skills": [
+    "FULL_STACK_DEVELOPMENT",
+    "BACKEND_DEVELOPMENT",
+    "DATA_ENGINEERING",
+    "UI_UX_DESIGN",
+    "TECHNICAL_WRITING"
+  ],
+  "slug": "powerhouse-rgh",
+  "status": "ACTIVE"
+}

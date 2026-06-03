@@ -1,0 +1,20 @@
+{
+  "about": null,
+  "code": "lmn",
+  "contributors": [],
+  "description": null,
+  "icon": "https://i.postimg.cc/MGmwJM0p/lumen-Icon.png",
+  "id": "e1ed6ad6-2658-433f-b9c8-5178fbcd2d02",
+  "isOperator": false,
+  "lastModified": "2026-04-29T16:15:33.321Z",
+  "links": [],
+  "name": "Lumen",
+  "operationalHubMember": {
+    "name": null,
+    "phid": null
+  },
+  "scopes": [],
+  "skills": [],
+  "slug": "lumen",
+  "status": null
+}

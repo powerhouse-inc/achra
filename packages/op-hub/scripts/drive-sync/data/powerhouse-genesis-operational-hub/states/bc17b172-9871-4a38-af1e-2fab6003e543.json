@@ -1,0 +1,234 @@
+{
+  "accountsDocumentId": "26bb6763-0f21-41e2-addc-be3474fa101e",
+  "endDate": null,
+  "ownerIds": [
+    "bed959a7-1240-429c-ad01-00bf1a038f1c",
+    "a2a90b25-2f7b-4eb2-bc07-968ad682dc96"
+  ],
+  "reportName": null,
+  "reportPeriodEnd": null,
+  "reportPeriodStart": null,
+  "snapshotAccounts": [
+    {
+      "accountAddress": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+      "accountId": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+      "accountName": "Powerhouse Genesis Operational Hub Reserves",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "1cf3c83d-906b-4f28-bc21-813fe6d2c58e",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Internal"
+    },
+    {
+      "accountAddress": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+      "accountId": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+      "accountName": "Powerhouse Genesis Operational Hub",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "f78f6551-1063-440e-b938-c093f34753c0",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Internal"
+    },
+    {
+      "accountAddress": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+      "accountId": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+      "accountName": "SKY Launch Wallet",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "07c12125-973b-48ee-964d-ac70151cb7af",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Source"
+    },
+    {
+      "accountAddress": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+      "accountId": "4f707770-005c-4192-bd7c-f407e68af47d",
+      "accountName": "Request Finance 1",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "946fa327-a16e-4fbc-a1d1-208933f64927",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+      "accountId": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+      "accountName": "Request Finance 2",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "2e6aed8d-c350-4729-bdb0-3597274c7c52",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+      "accountId": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+      "accountName": "Request Finance 3",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "0dacee0b-de26-48b2-90e9-15ade004a0e7",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+      "accountId": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+      "accountName": "Request Finance 4",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "00c6caca-4997-45fb-a5e4-6ac138fbe6df",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+      "accountId": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+      "accountName": "Accountable",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "1061008a-46ce-4764-924f-ec8e5229fb13",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+      "accountId": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+      "accountName": "CoW Swap",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "087fd70e-bf28-48c7-836f-ce75383b9cf6",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "External"
+    },
+    {
+      "accountAddress": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+      "accountId": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+      "accountName": "Venly.io",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "70363d2a-c4be-4946-9cf3-aff4de7734b8",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+      "accountId": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+      "accountName": "Powerhouse Genesis Operational Hub Reserves",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "d921b251-37d3-40ea-9df8-5ce73f728fba",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Internal"
+    },
+    {
+      "accountAddress": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+      "accountId": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+      "accountName": "Powerhouse Genesis Operational Hub",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "c9caa0d4-01c8-4942-9225-4db23a288dc8",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Internal"
+    },
+    {
+      "accountAddress": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+      "accountId": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+      "accountName": "SKY Launch Wallet",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "a73191f8-1406-4056-8255-c79756e58f13",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Source"
+    },
+    {
+      "accountAddress": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+      "accountId": "4f707770-005c-4192-bd7c-f407e68af47d",
+      "accountName": "Request Finance 1",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "96d757f0-2e72-46f3-9dc8-a36194080210",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+      "accountId": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+      "accountName": "Request Finance 2",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "f1c98757-1058-493e-a7c8-17880c8c5441",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+      "accountId": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+      "accountName": "Request Finance 3",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "7250fbb8-d19b-47e3-89a7-e7098c8a7081",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+      "accountId": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+      "accountName": "Request Finance 4",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "1b5e0438-fe8d-4654-8f2f-aee5fd8913fd",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+      "accountId": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+      "accountName": "Accountable",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "f15c91e4-d14a-4d52-9c81-89091b4b5d32",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    },
+    {
+      "accountAddress": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+      "accountId": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+      "accountName": "CoW Swap",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "3b230486-2258-463c-b42a-2a6cdd0877de",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "External"
+    },
+    {
+      "accountAddress": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+      "accountId": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+      "accountName": "Venly.io",
+      "accountTransactionsId": null,
+      "endingBalances": [],
+      "id": "bac3ca58-17cd-428e-8380-96d36ab0dfb4",
+      "startingBalances": [],
+      "transactions": [],
+      "type": "Destination"
+    }
+  ],
+  "startDate": null
+}

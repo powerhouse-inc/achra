@@ -1,0 +1,102 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "437846d0-8f6d-415c-a04d-6a1582f51f63",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "callMeT",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:11.051Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "437846d0-8f6d-415c-a04d-6a1582f51f63"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "1fb0ce3a031c5dd12f87cb8bf044ca68",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:11.051Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "cmt",
+        "icon": "https://pbs.twimg.com/profile_images/1729527564723744768/7Q0QXF_4_400x400.jpg",
+        "id": "dbda6fee-049a-4983-8d43-7e1f6f4fa659",
+        "name": "callMeT",
+        "slug": "callmet",
+        "status": "ACTIVE"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "pQk68PkQ8B0siUFh0DeNiaGvZGs=",
+    "id": "523530bedbcc4e18955ae054feb03b7b",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:23.123Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "437846d0-8f6d-415c-a04d-6a1582f51f63",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "7a5ac57edffea20a7ca1d8cc4087b89c",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:11.051Z"
+  }
+]

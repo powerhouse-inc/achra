@@ -1,0 +1,97 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f",
+        "meta": {},
+        "model": "powerhouse/operational-hub-profile",
+        "name": "Powerhouse Genesis",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:44.383Z",
+          "documentType": "powerhouse/operational-hub-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "5d8b79dea3d4b148e85e41154c604188",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:44.383Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "Powerhouse Genesis"
+      },
+      "scope": "global",
+      "type": "SET_OPERATIONAL_HUB_NAME"
+    },
+    "error": null,
+    "hash": "/VjwKSUDCyraasXkkacP7ZdjYOs=",
+    "id": "0eb3ac171c5bd0cee00f177bbd80151a",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:40.229Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "c14323da-f22a-4dc9-bd53-a7694a0b0a3f",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "name": "",
+            "operatorTeam": null,
+            "subteams": []
+          },
+          "local": {}
+        },
+        "model": "powerhouse/operational-hub-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "ecad85095f41e77e2691a0fc3ae5f603",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:44.383Z"
+  },
+  {
+    "action": {
+      "input": {
+        "operatorTeam": "8a65a724-7529-4300-92b1-c39732b6100f"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR_TEAM"
+    },
+    "error": null,
+    "hash": "KomNAMHwEMs0Hvp2c2Vi+h7UWPo=",
+    "id": "89b038fe279e7c8f26aac62073747b56",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:40.229Z"
+  }
+]

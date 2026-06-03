@@ -19,7 +19,6 @@ jobs:
       - name: Install PNPM
         uses: pnpm/action-setup@v3
         with:
-          version: 9
           run_install: false
 
       - name: Install dependencies
@@ -32,4 +31,4 @@ jobs:
         run: pnpm run format:check
 
       - name: Type check
-        run: pnpm exec tsc -p tsconfig.json --noEmit
+        run: pnpm run type-check

@@ -1,0 +1,134 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/rfp",
+  name: "RequestForProposals",
+  author: {
+    name: "powerhouse ",
+    website: "https://powerhouse.inc/",
+  },
+  extension: "",
+  description:
+    "An RFP (Request for Proposal) is a formal invitation issued by a client to gather tailored proposals addressing specific needs. It outlines objectives, requirements, and deadlines, enabling external parties to submit competitive solutions.",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type RequestForProposalsState {\n  issuer: String!\n  code: String\n  title: String!\n  summary: String!\n  briefing: String!\n  rfpCommenter: [RfpCommenter!]!\n  eligibilityCriteria: String!\n  evaluationCriteria: String!\n  budgetRange: BudgetRange!\n  contextDocuments: [ContextDocument!]!\n  status: RFPStatus!\n  proposals: [RfpProposal!]!\n  deadline: DateTime\n  tags: [String!]\n}\n\ntype RfpCommenter {\n  id: OID!\n  rfpCommentatorType: RFPCommentatorType!\n  agentType: RfpAgentType!\n  name: String!\n  code: String!\n  imageUrl: String\n}\n\nenum RFPCommentatorType {\n  INTERNAL\n  EXTERNAL\n}\n\nenum RfpAgentType {\n  HUMAN\n  GROUP\n  AI\n}\n\ntype BudgetRange {\n  min: Float\n  max: Float\n  currency: String\n}\n\ntype ContextDocument {\n  name: String!\n  url: URL!\n}\n\nenum RFPStatus {\n  DRAFT\n  REQUEST_FOR_COMMMENTS\n  CANCELED\n  OPEN_FOR_PROPOSALS\n  AWARDED\n  NOT_AWARDED\n  CLOSED\n}\n\ntype RfpProposal {\n  id: OID!\n  title: String!\n  summary: String!\n  proposalStatus: RfpProposalStatus!\n  submittedby: OID\n  budgetEstimate: String!\n  paymentTerms: RfpPaymentTerm!\n}\n\nenum RfpPaymentTerm {\n  MILESTONE_BASED_FIXED_PRICE\n  MILESTONE_BASED_ADVANCE_PAYMENT\n  RETAINER_BASED\n  VARIABLE_COST\n  ESCROW\n}\n\nenum RfpProposalStatus {\n  SUBMITTED\n  OPENED\n  UNDER_REVIEW\n  NEEDS_REVISION\n  REVISED\n  APPROVED\n  CONDITIONALLY_APPROVED\n  REJECTED\n  WITHDRAWN\n}",
+          examples: [],
+          initialValue:
+            '{\n  "issuer": "placeholder-id",\n  "code": null,\n  "title": "",\n  "summary": "",\n  "briefing": "",\n  "rfpCommenter": [],\n  "eligibilityCriteria": "",\n  "evaluationCriteria": "",\n  "budgetRange": {\n    "min": null,\n    "max": null,\n    "currency": null\n  },\n  "contextDocuments": [],\n  "status": "DRAFT",\n  "proposals": [],\n  "deadline": null,\n  "tags": null\n}',
+        },
+      },
+      modules: [
+        {
+          id: "rfp-state-module",
+          name: "rfp_state",
+          description: "",
+          operations: [
+            {
+              id: "edit-rfp-op",
+              name: "EDIT_RFP",
+              description: "",
+              schema:
+                "input EditRfpInput {\n  title: String\n  code: String\n  summary: String\n  briefing: String\n  eligibilityCriteria: String\n  evaluationCriteria: String\n  budgetRange: BudgetRangeInput\n  status: RFPStatus\n  deadline: DateTime\n  tags: [String!]\n}\n\ninput BudgetRangeInput {\n  min: Float\n  max: Float\n  currency: String\n}",
+              template: "",
+              reducer:
+                "state.title = action.input.title || state.title;\nstate.code = action.input.code || state.code;\nstate.summary = action.input.summary || state.summary;\nstate.briefing = action.input.briefing || state.briefing;\nstate.eligibilityCriteria = action.input.eligibilityCriteria || state.eligibilityCriteria;\nstate.evaluationCriteria = action.input.evaluationCriteria || state.evaluationCriteria;\nstate.status = action.input.status || state.status;\nstate.deadline = action.input.deadline || state.deadline;\nstate.tags = action.input.tags || state.tags;\nif (action.input.budgetRange) {\n  state.budgetRange = {\n    min: action.input.budgetRange.min ?? state.budgetRange?.min ?? null,\n    max: action.input.budgetRange.max ?? state.budgetRange?.max ?? null,\n    currency: action.input.budgetRange.currency ?? state.budgetRange?.currency ?? null,\n  };\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "context-document-module",
+          name: "contex_document",
+          description: "",
+          operations: [
+            {
+              id: "add-context-document-op",
+              name: "ADD_CONTEXT_DOCUMENT",
+              description: "",
+              schema:
+                "input AddContextDocumentInput {\n  rfpId: OID!\n  name: String!\n  url: URL!\n}",
+              template: "",
+              reducer:
+                "if (action.input.name === undefined || action.input.name === null) {\n  throw new Error('Context document name is required');\n}\nif (action.input.url === undefined || action.input.url === null) {\n  throw new Error('Context document URL is required');\n}\nstate.contextDocuments.push({\n  name: action.input.name,\n  url: action.input.url,\n});",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-context-document-op",
+              name: "REMOVE_CONTEXT_DOCUMENT",
+              description: "",
+              schema:
+                "input RemoveContextDocumentInput {\n  rfpId: OID!\n  name: String!\n}",
+              template: "",
+              reducer:
+                "if (action.input.name === undefined || action.input.name === null) {\n  throw new Error('Context document name is required');\n}\nstate.contextDocuments = state.contextDocuments.filter(\n  (document) => document.name !== action.input.name,\n);",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "proposals-module",
+          name: "proposals",
+          description: "",
+          operations: [
+            {
+              id: "add-proposal-op",
+              name: "ADD_PROPOSAL",
+              description: "",
+              schema:
+                "input AddProposalInput {\n  rfpId: OID!\n  id: OID!\n  title: String!\n  summary: String!\n  proposalStatus: RfpProposalStatus!\n  submittedby: OID\n  budgetEstimate: String!\n  paymentTerms: RfpPaymentTerm!\n}",
+              template: "",
+              reducer:
+                "if (action.input.title === undefined || action.input.title === null) {\n  throw new Error('Proposal title is required');\n}\nif (action.input.summary === undefined || action.input.summary === null) {\n  throw new Error('Proposal summary is required');\n}\nif (action.input.budgetEstimate === undefined || action.input.budgetEstimate === null) {\n  throw new Error('Proposal budget estimate is required');\n}\nif (action.input.paymentTerms === undefined || action.input.paymentTerms === null) {\n  throw new Error('Proposal payment terms are required');\n}\nif (action.input.proposalStatus === undefined || action.input.proposalStatus === null) {\n  throw new Error('Proposal status is required');\n}\nstate.proposals.push({\n  title: action.input.title,\n  summary: action.input.summary,\n  budgetEstimate: action.input.budgetEstimate,\n  paymentTerms: action.input.paymentTerms,\n  proposalStatus: action.input.proposalStatus,\n  submittedby: action.input.submittedby || null,\n  id: action.input.id,\n});",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "change-proposal-status-op",
+              name: "CHANGE_PROPOSAL_STATUS",
+              description: "",
+              schema:
+                "input ChangeProposalStatusInput {\n  proposalId: OID!\n  status: RfpProposalStatus!\n}",
+              template: "",
+              reducer:
+                "if (action.input.proposalId === undefined || action.input.proposalId === null) {\n  throw new Error('Proposal ID is required');\n}\nif (action.input.status === undefined || action.input.status === null) {\n  throw new Error('Proposal status is required');\n}\nstate.proposals = state.proposals.map((proposal) => {\n  if (proposal.id === action.input.proposalId) {\n    return { ...proposal, proposalStatus: action.input.status };\n  }\n  return proposal;\n});",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "remove-proposal-op",
+              name: "REMOVE_PROPOSAL",
+              description: "",
+              schema:
+                "input RemoveProposalInput {\n  rfpId: OID!\n  id: OID!\n}",
+              template: "",
+              reducer:
+                "if (action.input.id === undefined || action.input.id === null) {\n  throw new Error('Proposal ID is required');\n}\nstate.proposals = state.proposals.filter((proposal) => proposal.id !== action.input.id);",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

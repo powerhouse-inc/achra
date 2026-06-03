@@ -1,0 +1,484 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "82b608d4-536e-43f9-a947-63d53c03b03b",
+        "meta": {},
+        "model": "powerhouse/resource-template",
+        "name": "AgentOps",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:16:40.341Z",
+          "documentType": "powerhouse/resource-template",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "82b608d4-536e-43f9-a947-63d53c03b03b"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "871f0f59eb500a6e74dd1c1bcb45bbdf",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:40.341Z"
+  },
+  {
+    "action": {
+      "input": {
+        "description": "AI agents are transacting in the real world with no legal identity. 13,700+ agent skills exist today: executing crypto trades at 100x leverage, providing medical advice, collecting credit cards, autonomously self-modifying and zero have legal protections. 283 leak API keys. 341 distribute malware. Every operator is personally exposed. Agents can't hold assets, sign contracts, or bear liability. \n\nThe Agentic Legal Wrapper is the full-stack answer: entity formation, compliance monitoring, and liability coverage as a single integrated service. It gives AI agents and AI-assisted teams a real-world legal identity, so they can hold assets, sign contracts, receive payments, and interact with regulated services, while shielding operators from personal liability.\n\nThree tiers scale from lightweight non-profit wrappers for open-source projects and public goods, through commercial entities for entrepreneurs and \"zero human companies,\" to captive insurance vehicles for operators with material liability exposure. Cross-cutting all tiers is a compliance layer that continuously scans agent actions against the growing patchwork of AI regulations (*from Texas TRAIGA, Utah AI Policy Act, California Transparency Act, to EU AI Act*). \n",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "summary": "Legal entity formation, compliance monitoring, and liability coverage for AI agent operators. Three tiers from lightweight commercial entities to full captive insurance vehicles",
+        "thumbnailUrl": "https://images.stockcake.com/public/0/4/a/04ad3a9a-cb3a-4e5c-97a4-8ed06c53fa91_large/galactic-council-meeting-stockcake.jpg",
+        "title": "AgentOps"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "Z8Fo7hJAbXWP8VfefvYJLvZTtQ4=",
+    "id": "2fd28c0b35077d7380dc88edd50392fd",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "82b608d4-536e-43f9-a947-63d53c03b03b",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "contentSections": [],
+            "description": null,
+            "facetTargets": [],
+            "faqFields": [],
+            "id": null,
+            "infoLink": null,
+            "lastModified": null,
+            "operatorId": null,
+            "optionGroups": [],
+            "recurringServices": [],
+            "services": [],
+            "setupServices": [],
+            "status": "DRAFT",
+            "subtitle": null,
+            "summary": "",
+            "targetAudiences": [],
+            "thumbnailUrl": null,
+            "title": "",
+            "weight": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/resource-template",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "cc6384100478e5e77bb6d4aba0fba4ae",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:16:40.341Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "status": "COMING_SOON"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_STATUS"
+    },
+    "error": null,
+    "hash": "o1vrVyhjnW6FuWX0HZBVVDBdd/U=",
+    "id": "8f9440e92d897b3822deecfc26763882",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b"
+      },
+      "scope": "global",
+      "type": "SET_OPERATOR"
+    },
+    "error": null,
+    "hash": "/ALLt7HeQezilt1NCKPMVhreAis=",
+    "id": "77e67aaaecd49ba3b20b3c795370abe8",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "color": "#0ea5e9",
+        "id": "393dcb0e-859d-4ee2-b4a7-3657765590aa",
+        "label": "Builders",
+        "lastModified": "2026-04-29T16:16:31.000Z"
+      },
+      "scope": "global",
+      "type": "ADD_TARGET_AUDIENCE"
+    },
+    "error": null,
+    "hash": "u4Sdmi2Q+huEZiUYTkFl8xPlUJo=",
+    "id": "5ff9325dce4d063197f8556f0757bc49",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "client",
+        "categoryLabel": "Client",
+        "id": "019178e4-635f-4230-ac09-b6f48e655a91",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "open-source",
+          "public-goods",
+          "vibe-coder",
+          "zero-human-company",
+          "commercial-operator",
+          "agent-fleet"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "3OR3GGiposOVZizq4eakbfK6cHs=",
+    "id": "c3d2f573779897b5fedaff77315cf96a",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "risk-profile",
+        "categoryLabel": "Risk Profile",
+        "id": "69fc0648-a751-4fd4-b5a5-ba36c47e657b",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "low-read only",
+          "medium-automation",
+          "high"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "TNUV0pSVZc+WKsp8lD6Cdvz1TT4=",
+    "id": "a80568cbd73025a1a2c7f1b3f863d381",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "categoryKey": "jursidiction",
+        "categoryLabel": "Jursidiction",
+        "id": "a7ecb47b-5004-4244-9149-4b83da2f877f",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "selectedOptions": [
+          "Switzerland",
+          "Estonia",
+          "US",
+          "Bermuda",
+          "Global"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_FACET_TARGET"
+    },
+    "error": null,
+    "hash": "ENEtolPwMC6Vgu56QQJoTnK1p24=",
+    "id": "bfa742bf0a3daf97bb30e0b82a4e75b3",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Agent operational assessment",
+          "Entity formation with agent-specific mandate",
+          "Director appointment (human representative)",
+          "KYC/AML framework setup",
+          "Payment processor & wallet integration",
+          "Legal vehicle design",
+          "Insurance mechanism setup"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_SETUP_SERVICES"
+    },
+    "error": null,
+    "hash": "ZHBfxwnTiZEKr0hKf7TStMmSm6w=",
+    "id": "d20e98ae16e1e6e0bd85f0e71499165c",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "services": [
+          "Transaction processing",
+          "Compliance monitoring",
+          "Reporting to agent operator",
+          "Claims management",
+          "Risk monitoring",
+          "Vehicle maintenance & audit"
+        ]
+      },
+      "scope": "global",
+      "type": "SET_RECURRING_SERVICES"
+    },
+    "error": null,
+    "hash": "/svH9pjBYiPpl6GNgB2c7H9vxak=",
+    "id": "ddc0c98d601ad84438a82b8e0a4038fe",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "A legal entity (Swiss Association, Estonian O\u00dc, or Wyoming LLC) that gives your AI agent a real-world identity. The entity can hold assets, sign contracts, receive payments, and interact with regulated services \u2014 so the agent can operate commercially while you're shielded from personal liability.",
+        "displayOrder": 0,
+        "id": "e10c9518-071c-43e7-959e-1c34384c6ea7",
+        "question": "What is a legal wrapper for an AI agent?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "9yn4b0bXdcWsVZ1HNBYLjCQCF3I=",
+    "id": "99139b0a3a32b6fada920e05af5ba973",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "You can \u2014 but your personal LLC exposes you to unlimited liability for agent actions. If your agent executes a bad trade, sends a malicious email, or violates a state AI law, YOU are personally liable. A purpose-built agent entity with proper governance and compliance monitoring limits that exposure.",
+        "displayOrder": 1,
+        "id": "2ca562dd-9e8d-4e3c-ac76-dfadec6ad93d",
+        "question": "Why can't I just use my personal LLC?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "s51z34tZxwBc1PEu0xjtFEywQOM=",
+    "id": "4e1e23ab952a7b28a66bd14bc98411db",
+    "index": 10,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Swiss Associations (Verein) require minimal formation overhead, no share capital, and are globally respected. They're the same structure used by Ethereum Foundation, Tezos, and dozens of crypto foundations. Directors can be legal persons, and the association can receive grants, donations, and crypto \u2014 perfect for open-source AI projects and public goods.",
+        "displayOrder": 2,
+        "id": "b593c27e-7c43-47d4-898f-ac27acc5fcb2",
+        "question": "Why a Swiss Association for non-profit agents?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "sjouqh6K9iz1f+Y/G0pnrmE0BKw=",
+    "id": "f439c03254dd27a26bc2020c27d76edd",
+    "index": 11,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "It scans your agent's actions against the patchwork of US state AI laws (Texas TRAIGA, Utah AI Policy Act, California Transparency Act) and upcoming EU regulations (AI Act, Product Liability Directive). It monitors for: unauthorized contract signing, financial transactions without disclosure, PII handling violations, and missing mandatory disclosures.",
+        "displayOrder": 3,
+        "id": "523bf311-c00c-48b7-8b5d-2b3614469306",
+        "question": "What does the compliance monitoring actually check?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "dmuUTQd4CfO1IBXckzq/x81Z6KU=",
+    "id": "423fde5cc01ac2bb91306762f79622bc",
+    "index": 12,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Start with the free Compliance Scan to see your risk score, then upgrade to Shield ($149/mo) for runtime monitoring. No entity formation required. If your exposure grows, entity formation becomes the natural next step.",
+        "displayOrder": 4,
+        "id": "c3a66796-cafa-4b01-a3f4-58b00d1c78d6",
+        "question": "What if I only need compliance monitoring, not entity formation?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "3ObS5pLUVNwejZ/uSeCevGMSgFQ=",
+    "id": "36a1a5a13ce577c8d0e2945b79e76af9",
+    "index": 13,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "answer": "Commercial entities (Estonian O\u00dc, Wyoming LLC): 2-4 weeks. Non-profit entities (Swiss Association): 4-8 weeks. Risk vehicles (captive insurance): 6-12 months including regulatory approvals.",
+        "displayOrder": 5,
+        "id": "06f74688-7f83-46ed-a8e9-c6356b592d30",
+        "question": "How long does entity formation take?"
+      },
+      "scope": "global",
+      "type": "ADD_FAQ"
+    },
+    "error": null,
+    "hash": "TUMY+H/HKVrkeu9f5bLr9H21Gc8=",
+    "id": "ddeba1c817f305ea818a6402387c9f6a",
+    "index": 14,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "Legal and operational wrapper for autonomous agents\n\nA lightweight DevCo entity that gives an AI agent and AI-assisted teams a legal identity in the real world. A director (natural or legal person \u2014 provided or appointed) acts as the legal representative while the agent operates autonomously within defined parameters. The natural or legal person binds itself to follow AI recommendations or vote based on AI outputs.\n\nThe entity participates formally: receive grants and donations in crypto, hire and pay contributors, and formalize relationships \u2014 all within a compliant structure. Non-profit entity, no shares, no investors, no overhead. Hold assets, sign contracts, receive payments, and interact with regulated services. AI agents provide inputs, triggers, constraints, and workflows within the governance framework.\n\nStructured as a non-profit Swiss Association (Verein) with a strictly limited mandate and automated operational rails.\n\nTypical use cases\n\nProjects that use AI agents for developing open-source software\nAI agents that need to transact (receive payments, pay for services)\nAutonomous systems interacting with regulated platforms (KYC/AML)\nProjects building Public Goods funded by grants or donations\nAgent-to-agent commerce requiring legal counterparties\nAgent-to-human interactions requiring legal structure\nDevelopers deploying revenue-generating agents",
+        "displayOrder": 0,
+        "id": "8bd38204-7298-4b3d-82be-bb62d0e12da3",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "Non-Profit AgentCo"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "zGkQY0VfHTLStDu5YatLc3tnd2c=",
+    "id": "0e1f0f6c7fcd76a88c6170ac541ee1ba",
+    "index": 15,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "A lightweight commercial DevCo entity that gives an AI agent and AI-assisted teams a legal identity in the real world. A director (natural or legal person \u2014 provided or appointed) acts as the legal representative while the agent operates autonomously within defined parameters. The natural or legal person binds itself to follow AI recommendations or vote based on AI outputs.\n\nA single entity to build, sell, and operate from day one. Combines development and early commercial activity under one roof: process revenue, contract with customers, manage sales. Available in multiple jurisdictions (e.g., Estonian O\u00dc, Wyoming LLC).\n\nTypical use cases\n\n\"Vibe Coders\": Entrepreneurs building applications with the support of AI agents\n\"Zero Human Companies\": Organizations where core operations are handled by autonomous AI agents instead of humans\nAI agents that engage in commercial relationships (receive payments, pay for services)\nAgent-to-agent commerce requiring legal counterparties\nDevelopers deploying revenue-generating agents",
+        "displayOrder": 1,
+        "id": "31f13a0f-a54b-481f-865c-b0065c7f95cf",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "Commercial AgentCo"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "n66p6jCL3NCD0GFTA7Ox7vf5lLI=",
+    "id": "a1f7c614ac8f15aca17abd5766c96b4a",
+    "index": 16,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "content": "Liability and insurance coverage for agent operations\n\nModular risk infrastructure for the agentic economy. Covers liability exposure from autonomous actions: errors, financial losses, data breaches, or third-party damages. Because agents aren't legal persons, traditional insurance doesn't apply. This fills the gap with structured self-insurance, captive vehicles, and reinsurance layering.\n\nTypical use cases\n\nLiability coverage for autonomous agent actions\nLegal defense and self-insurance funds for agent operators\nPerformance bonds for agent service commitments\nRisk pooling across agent fleets",
+        "displayOrder": 2,
+        "id": "75085cd4-103c-4cfd-880a-e283336d799e",
+        "lastModified": "2026-04-29T16:16:31.000Z",
+        "title": "Agent RiskCo"
+      },
+      "scope": "global",
+      "type": "ADD_CONTENT_SECTION"
+    },
+    "error": null,
+    "hash": "yqnK2Svb80BHNyHjt8hjjlJMiiI=",
+    "id": "442d52f6f5a71363cd58063e75246fbc",
+    "index": 17,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:17:12.822Z"
+  },
+  {
+    "action": {
+      "input": {
+        "lastModified": "2026-05-07T11:41:27.064Z",
+        "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/agent-ops/agent_ops.png"
+      },
+      "scope": "global",
+      "type": "UPDATE_TEMPLATE_INFO"
+    },
+    "error": null,
+    "hash": "2/UXyU13HuvLx14XXyhQABNn2JI=",
+    "id": "58fd9fbef19e87d45e3577da9b85f591",
+    "index": 18,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-07T11:41:27.064Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "AgentOps"
+      },
+      "scope": "global",
+      "type": "SET_NAME"
+    },
+    "error": null,
+    "hash": "2/UXyU13HuvLx14XXyhQABNn2JI=",
+    "id": "301f4a6d827be3616fba7359e8c388b5",
+    "index": 19,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:30:29.238Z"
+  },
+  {
+    "action": {
+      "input": {
+        "name": "AgentOps"
+      },
+      "scope": "global",
+      "type": "SET_NAME"
+    },
+    "error": null,
+    "hash": "2/UXyU13HuvLx14XXyhQABNn2JI=",
+    "id": "b2d1042e9729f4fdc9832213cd00b6f7",
+    "index": 20,
+    "skip": 0,
+    "timestampUtcMs": "2026-05-19T15:30:29.239Z"
+  }
+]

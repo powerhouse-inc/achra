@@ -1,0 +1,36 @@
+{
+  "contentSections": [],
+  "description": " A spin-off of the Embryonic Hub, which acts as a neutral IP steward for decentralized networks. The IP Hub is responsible for holding, protecting, and licensing network\u2011owned intellectual property. It enforces open\u2011source licenses, polices third\u2011party infringements, and structures neutral licensing frameworks aligned with network governance.\n\nThe IP Hub typically operates through a holding structure, with a special\u2011purpose Foundation acting as the parent entity of individual IP SPVs that each hold portfolios of related projects. This enables modular IP governance while maintaining clean separation from operations and commercialization.\n\n**Typical Use Cases**\n\n- Protocol and brand stewardship\n- Multi\u2011project IP portfolios\n- Neutral licensing and enforcement\n\nSuitable for networks with valuable shared IP requiring long\u2011term protection and governance\u2011aligned licensing.\n",
+  "facetTargets": [],
+  "faqFields": [],
+  "id": null,
+  "infoLink": null,
+  "lastModified": "2026-05-07T11:39:33.784Z",
+  "operatorId": "831efda4-c052-42b1-8df3-dfae977b732b",
+  "optionGroups": [],
+  "recurringServices": [
+    "License administration",
+    "Enforcement and infringement monitoring",
+    "Royalty processing"
+  ],
+  "services": [],
+  "setupServices": [
+    "Needs analysis + IP asset audit",
+    "Holding structure design",
+    "License framework implementation",
+    "Entity formation (Cayman Holding Foundation)"
+  ],
+  "status": "COMING_SOON",
+  "subtitle": null,
+  "summary": "The IP and Licensing Hub of a Network Organization\n",
+  "targetAudiences": [
+    {
+      "color": "#10b981",
+      "id": "a9b0f691-dbe5-4058-9c2d-6c31b012f716",
+      "label": "Networks"
+    }
+  ],
+  "thumbnailUrl": "https://raw.githubusercontent.com/powerhouse-inc/service-offering/refs/heads/main/services-img/network-ipspv/network_ip_spv.png",
+  "title": "Network IP SPV",
+  "weight": null
+}

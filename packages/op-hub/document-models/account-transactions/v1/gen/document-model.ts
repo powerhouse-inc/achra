@@ -1,0 +1,158 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/account-transactions",
+  name: "AccountTransactions",
+  author: {
+    name: "Powerhouse",
+    website: "https://powerhouse.inc",
+  },
+  extension: "",
+  description:
+    "The AccountTransactions doc model is designed to track and manage all transactions associated with various accounts. Each transaction entry records critical details such as the source and destination accounts, transaction amount, timestamp, and specific transaction details tailored to the type of transaction (e.g., cryptocurrency or bank-related)",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type AccountTransactionsState {\n  account: Account!\n  transactions: [TransactionEntry!]!\n  budgets: [Budget!]!\n}\n\ntype Account {\n    id: OID!\n    account: String!\n    name: String!\n    budgetPath: String\n    accountTransactionsId: PHID\n    chain: [String!]\n    type: String\n    owners: [String!]\n    KycAmlStatus: String\n}\n\ntype TransactionDetails {\n    txHash: String!\n    token: Currency!\n    blockNumber: Int\n    uniqueId: String\n}\n\ntype TransactionEntry {\n    id: ID!\n    counterParty: EthereumAddress\n    amount: Amount_Currency!\n    datetime: DateTime!\n    details: TransactionDetails!\n    budget: OID\n    accountingPeriod: String!\n    direction: TransactionDirection!\n}\n\ntype Budget {\n    id: OID!\n    name: OLabel\n}\n\nenum TransactionDirection {\n    INFLOW\n    OUTFLOW\n}\n\nenum TransactionDirectionInput {\n    INFLOW\n    OUTFLOW\n}",
+          examples: [],
+          initialValue:
+            '{"account":{"id":"","account":"","name":"","budgetPath":null,"accountTransactionsId":null,"chain":null,"type":null,"owners":null,"KycAmlStatus":null},"transactions":[],"budgets":[]}',
+        },
+      },
+      modules: [
+        {
+          id: "account-module-id",
+          name: "account",
+          description: "",
+          operations: [
+            {
+              id: "set-account-op-id",
+              name: "SET_ACCOUNT",
+              description: "",
+              schema:
+                "input SetAccountInput {\n    id: OID!\n    account: String!\n    name: String!\n    budgetPath: String\n    accountTransactionsId: PHID\n    chain: [String!]\n    type: String\n    owners: [String!]\n    KycAmlStatus: String\n}",
+              template: "",
+              reducer:
+                "state.account.account = action.input.account;\nstate.account.name = action.input.name;\nstate.account.budgetPath = action.input.budgetPath || null;\nstate.account.accountTransactionsId = action.input.accountTransactionsId || null;\nstate.account.chain = action.input.chain || null;\nstate.account.type = action.input.type || null;\nstate.account.owners = action.input.owners || null;\nstate.account.KycAmlStatus = action.input.KycAmlStatus || null;",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "transactions-module-id",
+          name: "transactions",
+          description: "",
+          operations: [
+            {
+              id: "add-transaction-op-id",
+              name: "ADD_TRANSACTION",
+              description: "",
+              schema:
+                "input AddTransactionInput {\n    id: ID!\n    counterParty: EthereumAddress\n    amount: Amount_Currency!\n    datetime: DateTime!\n    txHash: String!\n    token: Currency!\n    blockNumber: Int\n    uniqueId: String\n    budget: OID\n    accountingPeriod: String!\n    direction: TransactionDirectionInput!\n}",
+              template: "",
+              reducer:
+                "// Check for duplicate uniqueId to prevent duplicate transactions\nif (action.input.uniqueId) {\n  const existingTransaction = state.transactions.find(\n    (tx) => tx.details.uniqueId === action.input.uniqueId,\n  );\n  if (existingTransaction) {\n    throw new Error(\n      `Transaction with uniqueId ${action.input.uniqueId} already exists`,\n    );\n  }\n}\n\nstate.transactions.push({\n  id: action.input.id,\n  counterParty: action.input.counterParty || null,\n  amount: action.input.amount,\n  datetime: action.input.datetime,\n  details: {\n    txHash: action.input.txHash,\n    token: action.input.token,\n    blockNumber: action.input.blockNumber || null,\n    uniqueId: action.input.uniqueId || null,\n  },\n  budget: action.input.budget || null,\n  accountingPeriod: action.input.accountingPeriod,\n  direction: action.input.direction,\n});",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-transaction-op-id",
+              name: "UPDATE_TRANSACTION",
+              description: "",
+              schema:
+                "input UpdateTransactionInput {\n    id: ID!\n    counterParty: EthereumAddress\n    amount: Amount_Currency\n    datetime: DateTime\n    txHash: String\n    token: Currency\n    blockNumber: Int\n    uniqueId: String\n    budget: OID\n    accountingPeriod: String\n    direction: TransactionDirectionInput\n}",
+              template: "",
+              reducer:
+                "const transaction = state.transactions.find(\n  (transaction) => transaction.id === action.input.id,\n);\nif (!transaction) {\n  throw new Error(`Transaction with id ${action.input.id} not found`);\n}\nif (\n  action.input.counterParty !== undefined &&\n  action.input.counterParty !== null\n) {\n  transaction.counterParty = action.input.counterParty;\n}\nif (action.input.amount !== undefined && action.input.amount !== null) {\n  transaction.amount = action.input.amount;\n}\nif (\n  action.input.datetime !== undefined &&\n  action.input.datetime !== null\n) {\n  transaction.datetime = action.input.datetime;\n}\nif (action.input.txHash !== undefined && action.input.txHash !== null) {\n  transaction.details.txHash = action.input.txHash;\n}\nif (action.input.token !== undefined && action.input.token !== null) {\n  transaction.details.token = action.input.token;\n}\nif (action.input.blockNumber !== undefined) {\n  transaction.details.blockNumber = action.input.blockNumber;\n}\nif (action.input.uniqueId !== undefined) {\n  transaction.details.uniqueId = action.input.uniqueId;\n}\nif (\n  action.input.direction !== undefined &&\n  action.input.direction !== null\n) {\n  transaction.direction = action.input.direction;\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "delete-transaction-op-id",
+              name: "DELETE_TRANSACTION",
+              description: "",
+              schema: "input DeleteTransactionInput {\n    id: ID!\n}",
+              template: "",
+              reducer:
+                "state.transactions = state.transactions.filter(\n  (transaction) => transaction.id !== action.input.id,\n);",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-period-op-id",
+              name: "UPDATE_TRANSACTION_PERIOD",
+              description: "",
+              schema:
+                "input UpdateTransactionPeriodInput {\n    id: ID!\n    accountingPeriod: String!\n}",
+              template: "",
+              reducer:
+                'const transaction = state.transactions.find(\n  (transaction) => transaction.id === action.input.id,\n);\nif (!transaction) {\n  throw new Error(`Transaction with id ${action.input.id} not found`);\n}\ntransaction.accountingPeriod = action.input.accountingPeriod || "";',
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+        {
+          id: "budgets-module-id",
+          name: "budgets",
+          description: "",
+          operations: [
+            {
+              id: "add-budget-op-id",
+              name: "ADD_BUDGET",
+              description: "",
+              schema:
+                "input AddBudgetInput {\n    id: OID!\n    name: OLabel\n}",
+              template: "",
+              reducer:
+                "state.budgets.push({\n  id: action.input.id,\n  name: action.input.name || null,\n});",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "update-budget-op-id",
+              name: "UPDATE_BUDGET",
+              description: "",
+              schema:
+                "input UpdateBudgetInput {\n    id: OID!\n    name: OLabel\n}",
+              template: "",
+              reducer:
+                "const budget = state.budgets.find(\n  (budget) => budget.id === action.input.id,\n);\nif (!budget) {\n  throw new Error(`Budget with id ${action.input.id} not found`);\n}\nif (action.input.name !== undefined && action.input.name !== null) {\n  budget.name = action.input.name;\n}",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "delete-budget-op-id",
+              name: "DELETE_BUDGET",
+              description: "",
+              schema: "input DeleteBudgetInput {\n    id: OID!\n}",
+              template: "",
+              reducer:
+                "state.budgets = state.budgets.filter(\n  (budget) => budget.id !== action.input.id,\n);",
+              errors: [],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

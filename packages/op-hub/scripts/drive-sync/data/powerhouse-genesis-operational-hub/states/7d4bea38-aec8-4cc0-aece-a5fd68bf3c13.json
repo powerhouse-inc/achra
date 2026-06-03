@@ -1,0 +1,441 @@
+{
+  "endDate": null,
+  "groups": [
+    {
+      "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",
+      "label": "Headcount Expenses",
+      "parentId": null
+    },
+    {
+      "id": "4971def8-64f8-4eab-b69b-a869d10452c2",
+      "label": "Non-Headcount Expenses",
+      "parentId": null
+    },
+    {
+      "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+      "label": "Travel & Entertainment",
+      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+    },
+    {
+      "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+      "label": "Compensation & Benefits",
+      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+    },
+    {
+      "id": "92e445ba-96af-4793-ae01-9b71035174ba",
+      "label": "Marketing Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+      "label": "Admin Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "5f024d53-7d0e-4818-9661-256aee69709d",
+      "label": "Professional Services",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "659337f4-01c3-495a-89d7-c177c4137620",
+      "label": "Cost of Goods Sold",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "1d6f0601-966a-4982-811d-981ac28db0b4",
+      "label": "Software Development Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "800dac9a-5665-4826-a972-b3170c789d92",
+      "label": "Income Tax Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+      "label": "Software Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+      "label": "Gas Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "465367d1-636a-45a1-9e43-4a48dd074918",
+      "label": "Budget",
+      "parentId": null
+    },
+    {
+      "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",
+      "label": "Interest Income",
+      "parentId": null
+    },
+    {
+      "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",
+      "label": "Other Income Expense (Non-operating)",
+      "parentId": null
+    },
+    {
+      "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",
+      "label": "Other Income",
+      "parentId": null
+    },
+    {
+      "id": "1c61e841-c599-4c38-944a-7c9450c27d17",
+      "label": "Current Asset",
+      "parentId": null
+    },
+    {
+      "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",
+      "label": "Fixed Asset",
+      "parentId": null
+    },
+    {
+      "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",
+      "label": "Non-Current Asset",
+      "parentId": null
+    },
+    {
+      "id": "b3091879-f549-4227-beef-c8d4947be2e7",
+      "label": "Current Liability",
+      "parentId": null
+    },
+    {
+      "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",
+      "label": "Non-current Liability",
+      "parentId": null
+    },
+    {
+      "id": "42e480eb-9790-49ed-af35-3ab124af556e",
+      "label": "Owner Equity",
+      "parentId": null
+    },
+    {
+      "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",
+      "label": "Equity",
+      "parentId": null
+    },
+    {
+      "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",
+      "label": "Adjustment A/C",
+      "parentId": null
+    },
+    {
+      "id": "566fede7-b593-43d0-84b6-50301e5a84ed",
+      "label": "Temporary Holding Account",
+      "parentId": null
+    },
+    {
+      "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+      "label": "Other",
+      "parentId": null
+    },
+    {
+      "id": "470504f0-a89f-4555-a46e-667c74240238",
+      "label": "Internal Transfers",
+      "parentId": null
+    },
+    {
+      "id": "121482a1-b69f-4511-g46f-267c24450238",
+      "label": "Uncategorized",
+      "parentId": null
+    },
+    {
+      "id": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2",
+      "label": "Headcount Expenses",
+      "parentId": null
+    },
+    {
+      "id": "4971def8-64f8-4eab-b69b-a869d10452c2",
+      "label": "Non-Headcount Expenses",
+      "parentId": null
+    },
+    {
+      "id": "465367d1-636a-45a1-9e43-4a48dd074918",
+      "label": "Budget",
+      "parentId": null
+    },
+    {
+      "id": "aa5b7188-2231-445e-9f3d-7e5d1ce5754f",
+      "label": "Interest Income",
+      "parentId": null
+    },
+    {
+      "id": "d1e9bd15-930d-4faa-ba61-8f2a3b1d0e8f",
+      "label": "Other Income Expense (Non-operating)",
+      "parentId": null
+    },
+    {
+      "id": "133b762c-a240-4a42-8bf6-9c29b3675f91",
+      "label": "Other Income",
+      "parentId": null
+    },
+    {
+      "id": "1c61e841-c599-4c38-944a-7c9450c27d17",
+      "label": "Current Asset",
+      "parentId": null
+    },
+    {
+      "id": "5a33a954-09d0-4ddd-95fc-c56853de4dbd",
+      "label": "Fixed Asset",
+      "parentId": null
+    },
+    {
+      "id": "75130e59-7c11-44ae-980c-eaa4968a4a56",
+      "label": "Non-Current Asset",
+      "parentId": null
+    },
+    {
+      "id": "b3091879-f549-4227-beef-c8d4947be2e7",
+      "label": "Current Liability",
+      "parentId": null
+    },
+    {
+      "id": "2f64aca7-38db-4ff4-8cc5-8e0952c23151",
+      "label": "Non-current Liability",
+      "parentId": null
+    },
+    {
+      "id": "42e480eb-9790-49ed-af35-3ab124af556e",
+      "label": "Owner Equity",
+      "parentId": null
+    },
+    {
+      "id": "248f0af0-74b1-4fd9-9e7f-3d723f5c4c56",
+      "label": "Equity",
+      "parentId": null
+    },
+    {
+      "id": "5044752a-5618-4ab2-90b7-54b5d95e38cf",
+      "label": "Adjustment A/C",
+      "parentId": null
+    },
+    {
+      "id": "566fede7-b593-43d0-84b6-50301e5a84ed",
+      "label": "Temporary Holding Account",
+      "parentId": null
+    },
+    {
+      "id": "f0077e3f-2931-4637-8715-ba3a01ce3786",
+      "label": "Other",
+      "parentId": null
+    },
+    {
+      "id": "470504f0-a89f-4555-a46e-667c74240238",
+      "label": "Internal Transfers",
+      "parentId": null
+    },
+    {
+      "id": "121482a1-b69f-4511-g46f-267c24450238",
+      "label": "Uncategorized",
+      "parentId": null
+    },
+    {
+      "id": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+      "label": "Travel & Entertainment",
+      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+    },
+    {
+      "id": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+      "label": "Compensation & Benefits",
+      "parentId": "57b0fdd7-51f5-4725-8a05-7ab3c15d90c2"
+    },
+    {
+      "id": "92e445ba-96af-4793-ae01-9b71035174ba",
+      "label": "Marketing Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+      "label": "Admin Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "5f024d53-7d0e-4818-9661-256aee69709d",
+      "label": "Professional Services",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "659337f4-01c3-495a-89d7-c177c4137620",
+      "label": "Cost of Goods Sold",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "1d6f0601-966a-4982-811d-981ac28db0b4",
+      "label": "Software Development Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "800dac9a-5665-4826-a972-b3170c789d92",
+      "label": "Income Tax Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+      "label": "Software Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    },
+    {
+      "id": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+      "label": "Gas Expense",
+      "parentId": "4971def8-64f8-4eab-b69b-a869d10452c2"
+    }
+  ],
+  "ownerId": "bed959a7-1240-429c-ad01-00bf1a038f1c",
+  "periodEnd": "2025-10-31T23:59:59.999Z",
+  "periodStart": "2025-10-01T00:00:00.000Z",
+  "startDate": null,
+  "status": "DRAFT",
+  "wallets": [
+    {
+      "accountDocumentId": null,
+      "accountTransactionsDocumentId": null,
+      "billingStatements": [
+        "bbb08182-2fc3-4719-a871-56f9968e36a3"
+      ],
+      "lineItems": [
+        {
+          "actuals": 216726.99,
+          "budget": 225600,
+          "comments": "Variance primarily attributable to foreign exchange rate fluctuations.",
+          "forecast": 214445,
+          "group": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+          "id": "a251fec2-1280-4873-8061-faecaf744636",
+          "label": "Compensation & Benefits",
+          "payments": 205438.99
+        },
+        {
+          "actuals": 4959.11,
+          "budget": 11000,
+          "comments": "Expenses primarily related to Devconnect 2025 travel and event attendance.",
+          "forecast": 12052.32,
+          "group": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+          "id": "df372fb4-24a5-4872-9820-77b46466b8b0",
+          "label": "Travel & Entertainment",
+          "payments": 4959.11
+        },
+        {
+          "actuals": 5780,
+          "budget": 9000,
+          "comments": "Costs relate to Devconnect 2025 participation and associated activities.",
+          "forecast": 6000,
+          "group": "92e445ba-96af-4793-ae01-9b71035174ba",
+          "id": "836631c9-a4b4-4e87-877e-7433c3e41ea7",
+          "label": "Marketing Expense",
+          "payments": 5780
+        },
+        {
+          "actuals": 38371.15,
+          "budget": 50000,
+          "comments": "Includes recruitment and hiring-related fees incurred during the month.",
+          "forecast": 28500,
+          "group": "5f024d53-7d0e-4818-9661-256aee69709d",
+          "id": "3952db98-2a45-4fee-a30e-f4367a5d2bd2",
+          "label": "Professional Services",
+          "payments": 51008.53
+        },
+        {
+          "actuals": 1702.6,
+          "budget": 1500,
+          "comments": "Primarily driven by bank and foreign exchange transaction fees.",
+          "forecast": 2050,
+          "group": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+          "id": "336e1e7a-6323-42ff-a26f-980ab8a65296",
+          "label": "Admin Expense",
+          "payments": 1623.21
+        },
+        {
+          "actuals": 28560.98,
+          "budget": 120677,
+          "comments": "Variance reflects actual billable development hours recorded for the period.",
+          "forecast": 30000,
+          "group": "1d6f0601-966a-4982-811d-981ac28db0b4",
+          "id": "11393449-ed70-46db-a79d-51e257e76df2",
+          "label": "Software Development Expense",
+          "payments": 28560.98
+        },
+        {
+          "actuals": 0,
+          "budget": 200,
+          "comments": "No ETH purchases were made during the reporting period.",
+          "forecast": 0,
+          "group": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+          "id": "1ce70c96-ca64-4d92-85f4-d2b174fd165d",
+          "label": "Gas Expense",
+          "payments": 0
+        },
+        {
+          "actuals": 2757.81,
+          "budget": 6500,
+          "comments": "Increase driven by onboarding and implementation of a new software tool.",
+          "forecast": 1500,
+          "group": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+          "id": "b5014fbe-51d0-4386-ae1e-e09b81636603",
+          "label": "Software Expense",
+          "payments": 2757.81
+        }
+      ],
+      "name": "Powerhouse Genesis Operational Hub",
+      "totals": [
+        {
+          "group": "e4dce6df-1aa6-4861-b9f4-d861ad74d66c",
+          "totalActuals": 216726.99,
+          "totalBudget": 225600,
+          "totalForecast": 214445,
+          "totalPayments": 205438.99
+        },
+        {
+          "group": "e27b7f51-dc22-4ebe-8659-4e41824ae58c",
+          "totalActuals": 4959.11,
+          "totalBudget": 11000,
+          "totalForecast": 12052.32,
+          "totalPayments": 4959.109999999986
+        },
+        {
+          "group": "92e445ba-96af-4793-ae01-9b71035174ba",
+          "totalActuals": 5780,
+          "totalBudget": 9000,
+          "totalForecast": 6000,
+          "totalPayments": 5780
+        },
+        {
+          "group": "5f024d53-7d0e-4818-9661-256aee69709d",
+          "totalActuals": 38371.15,
+          "totalBudget": 50000,
+          "totalForecast": 28500,
+          "totalPayments": 51008.53
+        },
+        {
+          "group": "778dbd41-3d4a-4c8f-9004-7797f04e5b40",
+          "totalActuals": 1702.6,
+          "totalBudget": 1500,
+          "totalForecast": 2050,
+          "totalPayments": 1623.210000000001
+        },
+        {
+          "group": "1d6f0601-966a-4982-811d-981ac28db0b4",
+          "totalActuals": 28560.97999999998,
+          "totalBudget": 120677,
+          "totalForecast": 30000,
+          "totalPayments": 28560.98000000001
+        },
+        {
+          "group": "ba7688ad-1329-4344-8f8a-e0f27dc648b8",
+          "totalActuals": null,
+          "totalBudget": 200,
+          "totalForecast": null,
+          "totalPayments": null
+        },
+        {
+          "group": "30ed3523-c15a-411f-a8f6-7bb6b978f6f8",
+          "totalActuals": 2757.81,
+          "totalBudget": 6500,
+          "totalForecast": 1500,
+          "totalPayments": 2757.8100000000013
+        }
+      ],
+      "wallet": "0xF130f741d4E3185b29412c65397363f8c23A0460"
+    }
+  ]
+}

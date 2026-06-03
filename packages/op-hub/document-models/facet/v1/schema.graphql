@@ -1,0 +1,78 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type FacetState {
+    id: PHID
+    name: String!
+    description: String
+    lastModified: DateTime
+    options: [FacetOption!]!
+}
+
+type FacetOption {
+    id: OID!
+    label: String!
+    description: String
+    displayOrder: Int
+    isDefault: Boolean!
+}
+
+# Facet Management
+
+input SetFacetNameInput {
+    name: String!
+    lastModified: DateTime!
+}
+
+input SetFacetDescriptionInput {
+    description: String
+    lastModified: DateTime!
+}
+
+# Option Management
+
+input AddOptionInput {
+    id: OID!
+    label: String!
+    description: String
+    displayOrder: Int
+    isDefault: Boolean
+    lastModified: DateTime!
+}
+
+input UpdateOptionInput {
+    id: OID!
+    label: String
+    description: String
+    displayOrder: Int
+    isDefault: Boolean
+    lastModified: DateTime!
+}
+
+input RemoveOptionInput {
+    id: OID!
+    lastModified: DateTime!
+}
+
+input ReorderOptionsInput {
+    optionIds: [OID!]!
+    lastModified: DateTime!
+}

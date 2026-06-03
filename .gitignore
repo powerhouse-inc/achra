@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Repo-wide ignores. App-specific build artifacts live in apps/frontend/.gitignore.
 
 # dependencies
-/node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,16 +11,11 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-.scannerwork
+# turborepo
+.turbo
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# vercel
+.vercel
 
 # misc
 .DS_Store
@@ -30,35 +26,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
-!.env.example
-!.env.e2e.example
-
-# e2e working env (non-dot variant, see playwright.config.ts)
-e2e/env.e2e
-!e2e/env.e2e.example
-
-# playwright
-/playwright-report
-/test-results
-/blob-report
-/playwright/.cache
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-*storybook.log
-storybook-static
-build-storybook.log
-chromatic.log
-chromatic-build-*.xml
-chromatic-diagnostics.json
 
 # cursor
 .cursor
@@ -76,4 +43,3 @@ chromatic-diagnostics.json
 # Serena
 .serena
 .claude
-CLAUDE.md

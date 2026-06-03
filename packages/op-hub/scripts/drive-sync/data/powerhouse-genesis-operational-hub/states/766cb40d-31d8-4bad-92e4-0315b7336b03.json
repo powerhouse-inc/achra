@@ -1,0 +1,130 @@
+{
+  "accounts": [
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations",
+      "chain": [
+        "Ethereum"
+      ],
+      "id": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+      "name": "Powerhouse Genesis Operational Hub Reserves",
+      "owners": [
+        "Dracaena",
+        "Prometheus"
+      ],
+      "type": "Internal"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations",
+      "chain": [
+        "Ethereum"
+      ],
+      "id": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+      "name": "Powerhouse Genesis Operational Hub",
+      "owners": [
+        "Dracaena",
+        "Prometheus"
+      ],
+      "type": "Internal"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+      "accountTransactionsId": null,
+      "budgetPath": "/SKY/Operations",
+      "chain": null,
+      "id": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+      "name": "SKY Launch Wallet",
+      "owners": null,
+      "type": "Source"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+      "chain": null,
+      "id": "4f707770-005c-4192-bd7c-f407e68af47d",
+      "name": "Request Finance 1",
+      "owners": null,
+      "type": "Destination"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+      "chain": null,
+      "id": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+      "name": "Request Finance 2",
+      "owners": null,
+      "type": "Destination"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+      "chain": null,
+      "id": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+      "name": "Request Finance 3",
+      "owners": null,
+      "type": "Destination"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+      "chain": [
+        "Ethereum"
+      ],
+      "id": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+      "name": "Request Finance 4",
+      "owners": null,
+      "type": "Destination"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/Accountable",
+      "chain": [
+        "Ethereum"
+      ],
+      "id": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+      "name": "Accountable",
+      "owners": [
+        "Accountable"
+      ],
+      "type": "Destination"
+    },
+    {
+      "KycAmlStatus": "PENDING",
+      "account": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+      "accountTransactionsId": null,
+      "budgetPath": null,
+      "chain": null,
+      "id": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+      "name": "CoW Swap",
+      "owners": null,
+      "type": "External"
+    },
+    {
+      "KycAmlStatus": "PASSED",
+      "account": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+      "accountTransactionsId": null,
+      "budgetPath": "/Powerhouse/Operations/Venlyio",
+      "chain": null,
+      "id": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+      "name": "Venly.io",
+      "owners": null,
+      "type": "Destination"
+    }
+  ]
+}

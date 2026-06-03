@@ -1,0 +1,628 @@
+scalar Unknown
+scalar DateTime
+scalar Attachment
+scalar Address
+scalar Amount_Tokens
+scalar EthereumAddress
+scalar EmailAddress
+scalar Amount_Percentage
+scalar Date
+scalar URL
+scalar Amount_Money
+scalar OLabel
+scalar Currency
+scalar PHID
+scalar OID
+scalar Amount_Fiat
+scalar Amount_Currency
+scalar Amount_Crypto
+scalar Amount
+scalar Upload
+
+type SubscriptionInstanceState {
+    customerId: PHID
+    customerName: String
+    customerEmail: EmailAddress
+    customerType: CustomerType
+    teamMemberCount: Int
+    operatorId: PHID
+    serviceOfferingId: PHID
+    tierName: String
+    tierPricingOptionId: OID
+    tierPrice: Amount_Money
+    tierCurrency: Currency
+    tierPricingMode: TierPricingMode
+    selectedBillingCycle: BillingCycle
+    globalCurrency: Currency
+    resource: ResourceDocument
+    status: SubscriptionStatus!
+    createdAt: DateTime
+    activatedSince: DateTime
+    pausedSince: DateTime
+    expiringSince: DateTime
+    cancelledSince: DateTime
+    cancellationReason: String
+    autoRenew: Boolean!
+    operatorNotes: String
+    nextBillingDate: DateTime
+    currentBillingCycleStart: DateTime
+    totalDebt: Amount_Money
+    totalCredit: Amount_Money
+    currentCycleOverage: Amount_Money
+    debtLineItems: [DebtLineItem!]!
+    services: [Service!]!
+    serviceGroups: [ServiceGroup!]!
+}
+
+enum TierPricingMode {
+    CALCULATED
+    MANUAL_OVERRIDE
+}
+
+enum CustomerType {
+    INDIVIDUAL
+    TEAM
+}
+
+enum GroupCostType {
+    RECURRING
+    SETUP
+}
+
+enum SubscriptionStatus {
+    PENDING
+    ACTIVE
+    PAUSED
+    EXPIRING
+    CANCELLED
+}
+
+enum DiscountType {
+    PERCENTAGE
+    FLAT_AMOUNT
+}
+
+enum DiscountSource {
+    TIER_INHERITED
+    GROUP_INDEPENDENT
+    BUNDLE
+}
+
+enum BillingCycle {
+    MONTHLY
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+    ONE_TIME
+}
+
+enum AccrualCycle {
+    HOURLY
+    DAILY
+    WEEKLY
+    MONTHLY
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+}
+
+enum MetricType {
+    CUMULATIVE
+    NON_CUMULATIVE
+}
+
+enum DebtOriginType {
+    SETUP
+    SUBSCRIPTION_FEE
+    DYNAMIC
+    ESTIMATED_USAGE
+    RECONCILIATION
+}
+
+enum DebtLineItemStatus {
+    CHARGED
+    INVOICED
+    PARTIALLY_PAID
+    FULLY_PAID
+}
+
+type DebtLineItem {
+    id: OID!
+    origin: DebtOriginType!
+    status: DebtLineItemStatus!
+    invoiced: Boolean!
+    debitAmount: Amount_Money!
+    settledAmount: Amount_Money!
+    creditApplied: Amount_Money!
+    currency: Currency!
+    chargedAt: DateTime!
+    invoicedAt: DateTime
+    fullyPaidAt: DateTime
+    sourceServiceId: OID
+    sourceMetricId: OID
+    sourceGroupId: OID
+    frozen: Boolean!
+    accrualPeriodStart: DateTime
+    invoiceRef: PHID
+    lastPaymentRef: PHID
+    description: String
+}
+
+type DiscountInfo {
+    originalAmount: Amount_Money!
+    discountType: DiscountType!
+    discountValue: Float!
+    source: DiscountSource!
+}
+
+type SetupCost {
+    amount: Amount_Money!
+    currency: Currency!
+    paymentDate: DateTime
+}
+
+type RecurringCost {
+    amount: Amount_Money!
+    currency: Currency!
+    billingCycle: BillingCycle!
+    lastPaymentDate: DateTime
+    discount: DiscountInfo
+}
+
+type ResourceDocument {
+    id: PHID!
+    label: String
+    thumbnailUrl: URL
+}
+
+type ServiceFacetSelection {
+    id: OID!
+    facetName: String!
+    selectedOption: String!
+}
+
+type ServiceMetric {
+    id: OID!
+    name: String!
+    unitName: String!
+    freeLimit: Int
+    paidLimit: Int
+    unitCost: RecurringCost
+    currentUsage: Int!
+    metricType: MetricType!
+    accrualCycle: AccrualCycle!
+    lastAccrualDate: DateTime
+}
+
+type Service {
+    id: OID!
+    name: String
+    description: String
+    customValue: String
+    facetSelections: [ServiceFacetSelection!]!
+    setupCost: SetupCost
+    recurringCost: RecurringCost
+    metrics: [ServiceMetric!]!
+}
+
+type ServiceGroup {
+    id: OID!
+    optional: Boolean!
+    name: String!
+    costType: GroupCostType
+    setupCost: SetupCost
+    recurringCost: RecurringCost
+    services: [Service!]!
+}
+
+# subscription
+
+input InitializeFacetSelectionInput {
+    id: OID!
+    facetName: String!
+    selectedOption: String!
+}
+
+input DiscountInfoInitInput {
+    originalAmount: Amount_Money!
+    discountType: DiscountType!
+    discountValue: Float!
+    source: DiscountSource!
+}
+
+input InitializeMetricInput {
+    id: OID!
+    name: String!
+    unitName: String!
+    freeLimit: Int
+    paidLimit: Int
+    currentUsage: Int!
+    metricType: MetricType!
+    accrualCycle: AccrualCycle!
+    unitCostAmount: Amount_Money
+    unitCostCurrency: Currency
+    unitCostBillingCycle: BillingCycle
+    lastAccrualDate: DateTime
+}
+
+input InitializeServiceInput {
+    id: OID!
+    name: String
+    description: String
+    customValue: String
+    facetSelections: [InitializeFacetSelectionInput!]
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+    recurringDiscount: DiscountInfoInitInput
+    metrics: [InitializeMetricInput!]
+}
+
+input InitializeServiceGroupInput {
+    id: OID!
+    name: String!
+    optional: Boolean!
+    costType: GroupCostType
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+    recurringDiscount: DiscountInfoInitInput
+    services: [InitializeServiceInput!]
+}
+
+input InitializeSubscriptionInput {
+    customerId: PHID
+    customerName: String
+    customerEmail: EmailAddress
+    serviceOfferingId: PHID
+    tierName: String
+    tierPricingOptionId: OID
+    tierPrice: Amount_Money
+    tierCurrency: Currency
+    tierPricingMode: TierPricingMode
+    selectedBillingCycle: BillingCycle
+    globalCurrency: Currency
+    resourceId: PHID
+    resourceLabel: String
+    resourceThumbnailUrl: URL
+    autoRenew: Boolean
+    createdAt: DateTime!
+    services: [InitializeServiceInput!]
+    serviceGroups: [InitializeServiceGroupInput!]
+}
+
+input SetResourceDocumentInput {
+    resourceId: PHID!
+    resourceLabel: String
+    resourceThumbnailUrl: URL
+}
+
+input ActivateSliceIdMappingInput {
+    sourceId: OID!
+    sliceId: OID!
+    sourceName: String
+}
+
+input ActivateSubscriptionInput {
+    activatedSince: DateTime!
+    setupSliceIds: [ActivateSliceIdMappingInput!]!
+    recurringSliceIds: [ActivateSliceIdMappingInput!]!
+}
+
+input PauseSubscriptionInput {
+    pausedSince: DateTime!
+}
+
+input SetExpiringInput {
+    expiringSince: DateTime!
+}
+
+input RenewSliceIdMappingInput {
+    sourceId: OID!
+    sliceId: OID!
+    sourceName: String
+}
+
+input CancelSubscriptionInput {
+    cancelledSince: DateTime!
+    cancellationReason: String
+    refundSliceIds: [RenewSliceIdMappingInput!]!
+}
+
+input ResumeSubscriptionInput {
+    timestamp: DateTime!
+}
+
+input RenewExpiringSubscriptionInput {
+    timestamp: DateTime!
+    recurringSliceIds: [RenewSliceIdMappingInput!]!
+}
+
+input UpdateCustomerInfoInput {
+    customerId: PHID
+    customerName: String
+    customerEmail: EmailAddress
+}
+
+input UpdateTierInfoInput {
+    tierName: String
+    tierPricingOptionId: OID
+    tierPrice: Amount_Money
+    tierCurrency: Currency
+    tierPricingMode: TierPricingMode
+}
+
+input SetOperatorNotesInput {
+    operatorNotes: String
+}
+
+input SetAutoRenewInput {
+    autoRenew: Boolean!
+}
+
+input ChangePlanInput {
+    newTierPricingOptionId: OID!
+    effectiveDate: DateTime!
+    newBillingCycle: BillingCycle
+    creditLineItemId: OID!
+    debitLineItemId: OID!
+    newTierName: String
+    newTierPrice: Amount_Money!
+    newTierCurrency: Currency!
+}
+
+input SettleSliceIdMappingInput {
+    sourceId: OID!
+    sliceId: OID!
+    sourceName: String
+}
+
+input GenerateInvoiceInput {
+    invoiceId: PHID!
+    generatedAt: DateTime!
+    advanceCycleIfDue: Boolean
+    metricFreezeSliceIds: [SettleSliceIdMappingInput!]!
+    nextCycleRecurringSliceIds: [SettleSliceIdMappingInput!]!
+}
+
+# service
+
+input DiscountServiceInfoInput {
+    originalAmount: Amount_Money!
+    discountType: DiscountType!
+    discountValue: Float!
+    source: DiscountSource!
+}
+
+input AddServiceInput {
+    serviceId: OID!
+    name: String
+    description: String
+    customValue: String
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    setupPaymentDate: DateTime
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+    recurringLastPaymentDate: DateTime
+    recurringDiscount: DiscountServiceInfoInput
+}
+
+input RemoveServiceInput {
+    serviceId: OID!
+}
+
+input UpdateServiceSetupCostInput {
+    serviceId: OID!
+    amount: Amount_Money
+    currency: Currency
+    paymentDate: DateTime
+}
+
+input UpdateServiceRecurringCostInput {
+    serviceId: OID!
+    amount: Amount_Money
+    currency: Currency
+    billingCycle: BillingCycle
+    nextBillingDate: DateTime
+    lastPaymentDate: DateTime
+}
+
+input ReportSetupPaymentInput {
+    serviceId: OID!
+    paymentDate: DateTime!
+}
+
+input ReportRecurringPaymentInput {
+    serviceId: OID!
+    paymentDate: DateTime!
+}
+
+input UpdateServiceInfoInput {
+    serviceId: OID!
+    name: String
+    description: String
+    customValue: String
+}
+
+input AddServiceFacetSelectionInput {
+    serviceId: OID!
+    facetSelectionId: OID!
+    facetName: String!
+    selectedOption: String!
+}
+
+input RemoveServiceFacetSelectionInput {
+    serviceId: OID!
+    facetSelectionId: OID!
+}
+
+input ReportOveragePaymentInput {
+    paymentDate: DateTime!
+    amount: Amount_Money!
+}
+
+# service-group
+
+input AddServiceGroupInput {
+    groupId: OID!
+    name: String!
+    optional: Boolean!
+    costType: GroupCostType
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+    recurringDiscount: DiscountServiceInfoInput
+    effectiveDate: DateTime!
+    setupSliceId: OID!
+    recurringSliceId: OID!
+}
+
+input RemoveServiceGroupInput {
+    groupId: OID!
+    effectiveDate: DateTime!
+    creditSliceId: OID!
+}
+
+input AddServiceToGroupInput {
+    groupId: OID!
+    serviceId: OID!
+    name: String
+    description: String
+    customValue: String
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    setupPaymentDate: DateTime
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+    recurringLastPaymentDate: DateTime
+}
+
+input RemoveServiceFromGroupInput {
+    groupId: OID!
+    serviceId: OID!
+}
+
+input UpdateServiceGroupCostInput {
+    groupId: OID!
+    setupAmount: Amount_Money
+    setupCurrency: Currency
+    recurringAmount: Amount_Money
+    recurringCurrency: Currency
+    recurringBillingCycle: BillingCycle
+}
+
+# metrics
+
+input AddServiceMetricInput {
+    serviceId: OID!
+    metricId: OID!
+    name: String!
+    unitName: String!
+    freeLimit: Int
+    paidLimit: Int
+    currentUsage: Int!
+    metricType: MetricType!
+    accrualCycle: AccrualCycle!
+    unitCostAmount: Amount_Money
+    unitCostCurrency: Currency
+    unitCostBillingCycle: BillingCycle
+    lastAccrualDate: DateTime
+}
+
+input UpdateMetricInput {
+    serviceId: OID!
+    metricId: OID!
+    name: String
+    unitName: String
+    freeLimit: Int
+    paidLimit: Int
+    metricType: MetricType
+    accrualCycle: AccrualCycle
+    lastAccrualDate: DateTime
+}
+
+input UpdateMetricUsageInput {
+    serviceId: OID!
+    metricId: OID!
+    currentTime: DateTime!
+    currentUsage: Int!
+    isAdjustment: Boolean
+    newSliceId: OID!
+}
+
+input RemoveServiceMetricInput {
+    serviceId: OID!
+    metricId: OID!
+}
+
+input IncrementMetricUsageInput {
+    serviceId: OID!
+    metricId: OID!
+    currentTime: DateTime!
+    incrementBy: Int!
+    newSliceId: OID!
+}
+
+input DecrementMetricUsageInput {
+    serviceId: OID!
+    metricId: OID!
+    currentTime: DateTime!
+    decrementBy: Int!
+    newSliceId: OID!
+}
+
+input AccrueMetricUsageInput {
+    serviceId: OID!
+    metricId: OID!
+    accrualDate: DateTime!
+    newSliceIds: [OID!]!
+}
+
+# customer
+
+input SetCustomerTypeInput {
+    customerType: CustomerType!
+    teamMemberCount: Int
+}
+
+input UpdateTeamMemberCountInput {
+    teamMemberCount: Int!
+}
+
+# debt-line-items
+
+input MarkLineItemInvoicedInput {
+    lineItemId: OID!
+    invoicedAt: DateTime!
+    invoiceRef: PHID
+}
+
+input ConfirmLineItemPaymentInput {
+    lineItemId: OID!
+    amount: Amount_Money!
+    paymentDate: DateTime!
+    paymentRef: PHID
+}
+
+input ReportPaymentInput {
+    amount: Amount_Money!
+    paymentDate: DateTime!
+    paymentRef: PHID
+}
+
+input ApplyCreditInput {
+    amount: Amount_Money!
+    creditDate: DateTime!
+    reason: String!
+    "When provided, allocates credit against a single specific debt line item; otherwise FIFO+priority across all collectible outstanding slices."
+    lineItemId: OID
+}

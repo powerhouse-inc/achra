@@ -1,0 +1,287 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "766cb40d-31d8-4bad-92e4-0315b7336b03",
+        "meta": {},
+        "model": "powerhouse/accounts",
+        "name": "PHAccounts",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:18:34.943Z",
+          "documentType": "powerhouse/accounts",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "766cb40d-31d8-4bad-92e4-0315b7336b03"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "3608831f17685d123dd8da7d93ab077d",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:34.943Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0xA06546b8e1f6c6ab6E1CA5249d0b9E448b2EAe41",
+        "budgetPath": "/Powerhouse/Operations",
+        "chain": [
+          "Ethereum"
+        ],
+        "id": "7f895d81-a1ae-477d-b14e-7f6b5ed439db",
+        "name": "Powerhouse Genesis Operational Hub Reserves",
+        "owners": [
+          "Dracaena",
+          "Prometheus"
+        ],
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "B3vuVjR8Lnn/Q5NKqb48v9oBUcQ=",
+    "id": "64c1ee30e64788f57eb23dd4d03bec96",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "766cb40d-31d8-4bad-92e4-0315b7336b03",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "accounts": []
+          },
+          "local": {}
+        },
+        "model": "powerhouse/accounts",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "e64e0008a3c39278a8d3ea200c55f9c0",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:18:34.943Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0xF130f741d4E3185b29412c65397363f8c23A0460",
+        "budgetPath": "/Powerhouse/Operations",
+        "chain": [
+          "Ethereum"
+        ],
+        "id": "cd3a7c49-c02b-4911-b2d0-353c9ca366d4",
+        "name": "Powerhouse Genesis Operational Hub",
+        "owners": [
+          "Dracaena",
+          "Prometheus"
+        ],
+        "type": "Internal"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "QVWvwNsSfK4KvvcYtE9FPbz1Qqc=",
+    "id": "aa3a38d6b492e82d4ce44bd1bb4ce4d9",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0xF0E22BA1368F90E54dFD68b1442AA5aecdf6CE6A",
+        "budgetPath": "/SKY/Operations",
+        "id": "1103bc22-fb34-465b-9c54-5a5b56a4046a",
+        "name": "SKY Launch Wallet",
+        "type": "Source"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "Y/zEnV08/lq+V+Z7m69ErfJCn6s=",
+    "id": "c7955b614adcf5dfc28a876c9999caac",
+    "index": 2,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0x3cf63891928b8ceebb81c95426600a18cd59c03f",
+        "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+        "id": "4f707770-005c-4192-bd7c-f407e68af47d",
+        "name": "Request Finance 1",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "1kS5xNrwponv3sBrsglhz2aQ02Q=",
+    "id": "32ca41dd743ed27e35a3b1c575d97936",
+    "index": 3,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0x5f480f1baa1016b22054e928042ac7198eea55d4",
+        "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+        "id": "7f0cc7ae-75b9-4960-bf09-944eaca4b131",
+        "name": "Request Finance 2",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "LMNJ4B1K5AgrCS/nFR0Odr9QWdA=",
+    "id": "5a022746fc25b4924a829bcf59054ebd",
+    "index": 4,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0x62d0521dffec43b4fba483fc42f5f98388c454e9",
+        "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+        "id": "8cbcb1b0-fc93-47a7-a35a-5c8f826a80e6",
+        "name": "Request Finance 3",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "RSzQoGbVueAiNOjsKxlDJf0rPBg=",
+    "id": "2e1ced35ab526d3dd0fee5b690c53b89",
+    "index": 5,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0xda2a74a1d8c24c7136933834cb2c2d484a4c1f5b",
+        "budgetPath": "/Powerhouse/Operations/PaymentProcessor",
+        "chain": [
+          "Ethereum"
+        ],
+        "id": "44a88dec-55ef-4da9-93b4-cdd25295d961",
+        "name": "Request Finance 4",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "OZIB5Qqxjw1xeTlsC4TRydm98kA=",
+    "id": "225c824d9170878bdf70373753e3fa0d",
+    "index": 6,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0x62dad9169cd0d553fe876b6aa6566ebb6ccdb8b2",
+        "budgetPath": "/Powerhouse/Operations/Accountable",
+        "chain": [
+          "Ethereum"
+        ],
+        "id": "f4093b2c-0565-4473-bb9d-a3ebe0709b86",
+        "name": "Accountable",
+        "owners": [
+          "Accountable"
+        ],
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "JJN+maIuJh9gan3DKXPZ+GssbNM=",
+    "id": "7a7d1fbacd777bb6ab55f047d4df55c7",
+    "index": 7,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PENDING",
+        "account": "0x9008d19f58aabd9ed0d60971565aa8510560ab41",
+        "id": "0eb7deba-5b07-4835-9b07-11f7e873b52a",
+        "name": "CoW Swap",
+        "type": "External"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "PqphxISVubTfiowadfJWcAYNLyc=",
+    "id": "ed43dfe162f3361bc2f347ababd0f7c7",
+    "index": 8,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  },
+  {
+    "action": {
+      "input": {
+        "KycAmlStatus": "PASSED",
+        "account": "0x0D509a71188a280c933cD13bb616B435C07B7F06",
+        "budgetPath": "/Powerhouse/Operations/Venlyio",
+        "id": "672f62f1-45fb-4c45-b317-5fc87dd6e5d7",
+        "name": "Venly.io",
+        "type": "Destination"
+      },
+      "scope": "global",
+      "type": "ADD_ACCOUNT"
+    },
+    "error": null,
+    "hash": "e3GFaYYcH7TaK5kKIpD6w7izG6A=",
+    "id": "c1da095959a58cb276f21f404a239ddc",
+    "index": 9,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:19:07.836Z"
+  }
+]

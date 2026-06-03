@@ -1,0 +1,101 @@
+[
+  {
+    "action": {
+      "input": {
+        "branch": "main",
+        "documentId": "49138081-b2dd-430f-90f9-bde97283ad5f",
+        "meta": {},
+        "model": "powerhouse/builder-profile",
+        "name": "deadgoat",
+        "protocolVersions": {
+          "base-reducer": 2
+        },
+        "signing": {
+          "createdAtUtcIso": "2026-04-29T16:15:12.124Z",
+          "documentType": "powerhouse/builder-profile",
+          "nonce": "",
+          "publicKey": {},
+          "signature": "49138081-b2dd-430f-90f9-bde97283ad5f"
+        },
+        "slug": "",
+        "version": 0
+      },
+      "scope": "document",
+      "type": "CREATE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "4b78f98d6cf4bce1dfa94b3b668fe049",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:12.124Z"
+  },
+  {
+    "action": {
+      "input": {
+        "code": "dg",
+        "icon": "https://i.postimg.cc/C5jGJSMk/deadgoat.png",
+        "id": "ca1bd614-a6f1-4b77-95f9-744bba0c6390",
+        "name": "deadgoat",
+        "slug": "deadgoat"
+      },
+      "scope": "global",
+      "type": "UPDATE_PROFILE"
+    },
+    "error": null,
+    "hash": "7iuCfjvsXeqKgpo62KLZuJC/mYY=",
+    "id": "1cc52fb070adefeda2024ec5114a8113",
+    "index": 0,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:26.805Z"
+  },
+  {
+    "action": {
+      "input": {
+        "documentId": "49138081-b2dd-430f-90f9-bde97283ad5f",
+        "fromVersion": 0,
+        "initialState": {
+          "auth": {},
+          "document": {
+            "hash": {
+              "algorithm": "sha1",
+              "encoding": "base64"
+            },
+            "version": 0
+          },
+          "global": {
+            "about": null,
+            "code": null,
+            "contributors": [],
+            "description": null,
+            "icon": null,
+            "id": null,
+            "isOperator": false,
+            "lastModified": null,
+            "links": [],
+            "name": null,
+            "operationalHubMember": {
+              "name": null,
+              "phid": null
+            },
+            "scopes": [],
+            "skills": [],
+            "slug": null,
+            "status": null
+          },
+          "local": {}
+        },
+        "model": "powerhouse/builder-profile",
+        "toVersion": 1
+      },
+      "scope": "document",
+      "type": "UPGRADE_DOCUMENT"
+    },
+    "error": null,
+    "hash": "",
+    "id": "d77575ffe4b90249d02a8b6b01122bae",
+    "index": 1,
+    "skip": 0,
+    "timestampUtcMs": "2026-04-29T16:15:12.124Z"
+  }
+]

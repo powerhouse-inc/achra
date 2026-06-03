@@ -2,11 +2,11 @@
 
 A plain-text design reference for AI agents and engineers. Captures the light/dark design tokens, typography, elevation, and component patterns that power the Achra UI.
 
-**Source of truth:** [`app/globals.css`](app/globals.css) (Tailwind v4 CSS-first config) and [`components.json`](components.json) (shadcn/ui `new-york` style, `neutral` base, CSS variables).
+**Source of truth:** [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css) (Tailwind v4 CSS-first config) and [`apps/frontend/components.json`](apps/frontend/components.json) (shadcn/ui `new-york` style, `neutral` base, CSS variables).
 
 **Stack:** Next.js 16 · React 19 · Tailwind CSS 4 · shadcn/ui (new-york) · Radix UI · Lucide · `next-themes` (class strategy).
 
-**Theme toggle:** `.dark` class on any ancestor. Wired through [`RootThemeProvider`](modules/shared/providers/theme-provider/root-theme-provider.tsx) (wraps `next-themes`). Declared in CSS as `@custom-variant dark (&:where(.dark, .dark *))`.
+**Theme toggle:** `.dark` class on any ancestor. Wired through [`RootThemeProvider`](apps/frontend/modules/shared/providers/theme-provider/root-theme-provider.tsx) (wraps `next-themes`). Declared in CSS as `@custom-variant dark (&:where(.dark, .dark *))`.
 
 ---
 
@@ -25,7 +25,7 @@ Achra is "the marketplace for global coordination" — an operational hub for ne
 
 ## 2. Color Palette & Roles
 
-All colors are defined as CSS custom properties in [`app/globals.css`](app/globals.css) and exposed to Tailwind as `bg-*`, `text-*`, `border-*` utilities via `@theme inline`. Use the **Tailwind utility** column in component code — never hardcode hex/oklch.
+All colors are defined as CSS custom properties in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css) and exposed to Tailwind as `bg-*`, `text-*`, `border-*` utilities via `@theme inline`. Use the **Tailwind utility** column in component code — never hardcode hex/oklch.
 
 ### 2.1 Core surface & text
 
@@ -111,14 +111,14 @@ Application-specific tokens beyond the shadcn baseline. Same values in light and
 
 ## 3. Typography Rules
 
-Fonts are loaded in [`app/layout.tsx`](app/layout.tsx) and exposed via `@theme inline` as Tailwind font-family utilities.
+Fonts are loaded in [`apps/frontend/app/layout.tsx`](apps/frontend/app/layout.tsx) and exposed via `@theme inline` as Tailwind font-family utilities.
 
 ### 3.1 Font families
 
 | Token                   | Tailwind utility      | Source                                                                                                                                                                                                                          | Usage                                                                                           |
 | ----------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--font-inter`          | `font-inter`          | `next/font/google` (Inter, Latin subset, CSS var `--font-inter`)                                                                                                                                                                | **Primary UI font.** Applied to `<body>` as `className`. Variable-weight. Default for all text. |
-| `--font-sans-condensed` | `font-sans-condensed` | Local (`/public/fonts/OpenSansCondensed/`): Light 300, Bold 700, Light Italic 300i                                                                                                                                              | Display / marketing headlines and condensed-label usage. Variable `--font-open-sans-condensed`. |
+| `--font-sans-condensed` | `font-sans-condensed` | Local (`apps/frontend/public/fonts/OpenSansCondensed/`): Light 300, Bold 700, Light Italic 300i                                                                                                                                              | Display / marketing headlines and condensed-label usage. Variable `--font-open-sans-condensed`. |
 | `--font-sans`           | `font-sans`           | System stack: `ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'` | Fallback.                                                                                       |
 | `--font-serif`          | `font-serif`          | `ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif`                                                                                                                                                                   | Reserved (rarely used).                                                                         |
 | `--font-mono`           | `font-mono`           | `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`                                                                                                                            | Code, addresses, hashes, technical values.                                                      |
@@ -147,7 +147,7 @@ Weights: use `font-normal` (400), `font-medium` (500), `font-semibold` (600), `f
 
 ## 4. Component Stylings
 
-Built on shadcn/ui `new-york` style (see [`components.json`](components.json)). All components live under [`modules/shared/components/ui/`](modules/shared/components/ui). Variants are declared with `class-variance-authority` (CVA). Semantic tokens — never raw colors — drive all variants.
+Built on shadcn/ui `new-york` style (see [`apps/frontend/components.json`](apps/frontend/components.json)). All components live under [`apps/frontend/modules/shared/components/ui/`](apps/frontend/modules/shared/components/ui). Variants are declared with `class-variance-authority` (CVA). Semantic tokens — never raw colors — drive all variants.
 
 ### 4.1 Common traits (applied across shadcn components)
 
@@ -160,7 +160,7 @@ Built on shadcn/ui `new-york` style (see [`components.json`](components.json)). 
 
 ### 4.2 Button
 
-Source: [`modules/shared/components/ui/button.tsx`](modules/shared/components/ui/button.tsx)
+Source: [`apps/frontend/modules/shared/components/ui/button.tsx`](apps/frontend/modules/shared/components/ui/button.tsx)
 
 **Variants:**
 
@@ -190,22 +190,22 @@ Common base: `inline-flex items-center justify-center gap-2 rounded-md text-sm f
 
 ### 4.3 Badge
 
-Source: [`modules/shared/components/ui/badge.tsx`](modules/shared/components/ui/badge.tsx)
+Source: [`apps/frontend/modules/shared/components/ui/badge.tsx`](apps/frontend/modules/shared/components/ui/badge.tsx)
 
 `rounded-md border px-2 py-0.5 text-xs font-medium`. Variants: `default` (primary), `secondary`, `destructive`, `outline`, `success` (`bg-status-success/30 text-status-success leading-4.5 border-none` — Achra custom).
 
 ### 4.4 Input / Textarea / Field
 
-Source: [`modules/shared/components/ui/input.tsx`](modules/shared/components/ui/input.tsx)
+Source: [`apps/frontend/modules/shared/components/ui/input.tsx`](apps/frontend/modules/shared/components/ui/input.tsx)
 
 Base: `h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow]` (plus `md:text-sm`). Dark mode layers a subtle tint via `dark:bg-input/30`. Placeholder uses `placeholder:text-muted-foreground`; text selection uses `selection:bg-primary selection:text-primary-foreground`. Focus / invalid follow the common pattern in §4.1.
 
 ### 4.5 Card / Dialog / Popover / Sheet
 
-- **Card** — source [`card.tsx`](modules/shared/components/ui/card.tsx). Container: `bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm`. Horizontal padding is not on `<Card>` — subparts (`CardHeader`, `CardContent`, `CardFooter`) own their own `px-6`. Note the radius is `rounded-xl`, not `rounded-md`.
-- **Dialog** — source [`dialog.tsx`](modules/shared/components/ui/dialog.tsx). Overlay: `fixed inset-0 z-170 bg-black/50`. Content: `bg-background fixed top-[50%] left-[50%] z-180 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border p-6 shadow-lg sm:max-w-lg`. Note the surface token is `--background`, not `--popover`.
-- **Sheet** — source [`sheet.tsx`](modules/shared/components/ui/sheet.tsx). Overlay: `bg-black/50`. Content: `bg-background flex flex-col gap-4 shadow-lg` with a side-specific border (`border-l`, `border-r`, `border-b`, or `border-t`) depending on `side` prop (default `right`, `w-3/4 sm:max-w-sm`).
-- **Popover / Dropdown / Hover card** — source [`popover.tsx`](modules/shared/components/ui/popover.tsx). `bg-popover text-popover-foreground rounded-md border p-4 shadow-md outline-hidden` (popover width `w-72`).
+- **Card** — source [`card.tsx`](apps/frontend/modules/shared/components/ui/card.tsx). Container: `bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm`. Horizontal padding is not on `<Card>` — subparts (`CardHeader`, `CardContent`, `CardFooter`) own their own `px-6`. Note the radius is `rounded-xl`, not `rounded-md`.
+- **Dialog** — source [`dialog.tsx`](apps/frontend/modules/shared/components/ui/dialog.tsx). Overlay: `fixed inset-0 z-170 bg-black/50`. Content: `bg-background fixed top-[50%] left-[50%] z-180 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border p-6 shadow-lg sm:max-w-lg`. Note the surface token is `--background`, not `--popover`.
+- **Sheet** — source [`sheet.tsx`](apps/frontend/modules/shared/components/ui/sheet.tsx). Overlay: `bg-black/50`. Content: `bg-background flex flex-col gap-4 shadow-lg` with a side-specific border (`border-l`, `border-r`, `border-b`, or `border-t`) depending on `side` prop (default `right`, `w-3/4 sm:max-w-sm`).
+- **Popover / Dropdown / Hover card** — source [`popover.tsx`](apps/frontend/modules/shared/components/ui/popover.tsx). `bg-popover text-popover-foreground rounded-md border p-4 shadow-md outline-hidden` (popover width `w-72`).
 
 ### 4.6 Navigation
 
@@ -214,7 +214,7 @@ Base: `h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-b
 
 ### 4.7 Chart
 
-Source: [`modules/shared/components/ui/chart.tsx`](modules/shared/components/ui/chart.tsx). Consumes the 8-step `--chart-*` scale via a CSS-var bridge so series colors adapt to light/dark.
+Source: [`apps/frontend/modules/shared/components/ui/chart.tsx`](apps/frontend/modules/shared/components/ui/chart.tsx). Consumes the 8-step `--chart-*` scale via a CSS-var bridge so series colors adapt to light/dark.
 
 ---
 
@@ -233,7 +233,7 @@ Typical rhythm:
 
 ### 5.2 Container
 
-Declared as `@utility container` in [`app/globals.css`](app/globals.css:225-247). Fluid up to `xl`, then capped:
+Declared as `@utility container` in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css:225-247). Fluid up to `xl`, then capped:
 
 | Breakpoint      | Width                                               | Horizontal padding                 |
 | --------------- | --------------------------------------------------- | ---------------------------------- |
@@ -250,13 +250,13 @@ Apply as `<div class="container">`.
 No `--radius` token defined; uses Tailwind 4 defaults (`sm` 0.25rem · `md` 0.375rem · `lg` 0.5rem · `xl` 0.75rem · `2xl` 1rem · `full`). House conventions observed in the shipped shadcn components:
 
 - `rounded-md` — buttons, inputs, badges, popovers, small controls.
-- `rounded-lg` — dialogs (confirmed in [`dialog.tsx`](modules/shared/components/ui/dialog.tsx)).
-- `rounded-xl` — cards (confirmed in [`card.tsx`](modules/shared/components/ui/card.tsx)).
+- `rounded-lg` — dialogs (confirmed in [`dialog.tsx`](apps/frontend/modules/shared/components/ui/dialog.tsx)).
+- `rounded-xl` — cards (confirmed in [`card.tsx`](apps/frontend/modules/shared/components/ui/card.tsx)).
 - `rounded-full` — avatars, circular pills, swiper pagination bullets.
 
 ### 5.4 Global base layer
 
-From `@layer base` in [`app/globals.css`](app/globals.css:215-223):
+From `@layer base` in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css:215-223):
 
 - `* { @apply border-border outline-ring/50 }` — every element inherits the semantic border and a 50 % ring color for non-focus-visible outlines.
 - `body { @apply bg-background text-foreground }` — page canvas and default text.
@@ -308,7 +308,7 @@ background (page)                           ← --background
 
 ### Don't
 
-- **Don't hardcode hex or oklch** in component code. If a needed value isn't a token, add it to `app/globals.css` (both `:root` and `.dark` blocks) and the `@theme inline` map.
+- **Don't hardcode hex or oklch** in component code. If a needed value isn't a token, add it to `apps/frontend/app/globals.css` (both `:root` and `.dark` blocks) and the `@theme inline` map.
 - **Don't use Tailwind's built-in palettes** (`bg-gray-500`, `text-slate-600`, `border-zinc-200`, etc.) in shared components. They don't switch with theme.
 - **Don't introduce a second brand color.** Violet `--primary` is the only saturated accent. Additional saturation should go through `--chart-*` (data viz) or the Achra custom tokens (categorical).
 - **Don't set `ring-offset-*` manually** — shadcn components already encode the 3-px `ring-[3px]` pattern. Adding offset often breaks it.
@@ -338,10 +338,10 @@ Mobile-first: default styles target the smallest viewport, then layer up.
 ### 8.2 Layout collapsing
 
 - **Container padding** — widens `16 → 24 → 32 px` across `< sm → sm → md`, then becomes `0` at `xl` / `2xl` (fixed max-width).
-- **Sidebar** — collapses to a drawer / off-canvas at mobile breakpoints (see [`modules/shared/components/ui/sidebar.tsx`](modules/shared/components/ui/sidebar.tsx)).
+- **Sidebar** — collapses to a drawer / off-canvas at mobile breakpoints (see [`apps/frontend/modules/shared/components/ui/sidebar.tsx`](apps/frontend/modules/shared/components/ui/sidebar.tsx)).
 - **Navigation** — top-level nav consolidates into a sheet/drawer at `< md`.
 - **Data tables** — consider horizontal scroll (`scroll-area`) at `< md` rather than reflowing rows.
-- **Custom CSS media query** at 640 px: bumps Swiper navigation size (`--swiper-navigation-size: 10 → 14 px`, sides offset `4 → 6 px`). Lives in [`app/globals.css`](app/globals.css:74-79).
+- **Custom CSS media query** at 640 px: bumps Swiper navigation size (`--swiper-navigation-size: 10 → 14 px`, sides offset `4 → 6 px`). Lives in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css:74-79).
 
 ### 8.3 Touch targets
 
@@ -349,7 +349,7 @@ Minimum hit target: 36 × 36 (`size-9` / `h-9`). The `icon` button size hits thi
 
 ### 8.4 Motion & scroll
 
-- `html { scroll-behavior: smooth }` on the root (see [`app/layout.tsx`](app/layout.tsx)).
+- `html { scroll-behavior: smooth }` on the root (see [`apps/frontend/app/layout.tsx`](apps/frontend/app/layout.tsx)).
 - `:root { scrollbar-gutter: stable }` prevents layout shift when scrollbars appear/disappear.
 - `body[data-scroll-locked]` safely neutralizes scroll-lock libs that try to add right margin.
 
@@ -379,17 +379,17 @@ Warning        text-status-warning
 
 ### 9.2 Copy-paste prompt fragments
 
-- **"Use semantic tokens only"** — "Only use shadcn semantic Tailwind utilities (`bg-*`, `text-*`, `border-*` mapped to CSS vars in `app/globals.css`). Do not use `gray-*`, `slate-*`, or raw hex."
+- **"Use semantic tokens only"** — "Only use shadcn semantic Tailwind utilities (`bg-*`, `text-*`, `border-*` mapped to CSS vars in `apps/frontend/app/globals.css`). Do not use `gray-*`, `slate-*`, or raw hex."
 - **"Pair bg with foreground"** — "Whenever you apply a `bg-X`, apply the matching `text-X-foreground` on child text, or ensure inherited text color already resolves to that pair."
 - **"Primary is scarce"** — "`bg-primary` is reserved for the single most important action per screen. Use `bg-secondary` or `variant=outline` for companion actions."
 - **"Dark mode by class"** — "Dark mode is toggled via the `.dark` class on the root. Don't gate on `prefers-color-scheme`; use `useTheme()` from `next-themes`."
-- **"Use CVA for component variants"** — "Define component variants with `class-variance-authority`, following the pattern in `modules/shared/components/ui/button.tsx`: a shared base class string, a `variants` map keyed by semantic names, `defaultVariants` explicit."
+- **"Use CVA for component variants"** — "Define component variants with `class-variance-authority`, following the pattern in `apps/frontend/modules/shared/components/ui/button.tsx`: a shared base class string, a `variants` map keyed by semantic names, `defaultVariants` explicit."
 - **"Focus ring pattern"** — "Interactive elements use `outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]`. Invalid adds `aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive`."
 - **"Elevation"** — "Pick one `shadow-*` per surface. Card rest uses `shadow-sm`, popovers `shadow-md`, dialogs `shadow-lg`, hero CTAs can use `shadow-primary`."
 
 ### 9.3 When extending the system
 
-1. **New color:** add to both `:root` and `.dark` in [`app/globals.css`](app/globals.css), then map under `@theme inline` as `--color-<name>: var(--<name>)`. Document the role here.
-2. **New component:** place under [`modules/shared/components/ui/`](modules/shared/components/ui), use CVA, export `{ Component, componentVariants }`, add Storybook story alongside.
-3. **New font:** load in [`app/layout.tsx`](app/layout.tsx) with `next/font`, expose as a CSS variable, register under `@theme inline` as `--font-<name>: var(--font-<name>)`.
+1. **New color:** add to both `:root` and `.dark` in [`apps/frontend/app/globals.css`](apps/frontend/app/globals.css), then map under `@theme inline` as `--color-<name>: var(--<name>)`. Document the role here.
+2. **New component:** place under [`apps/frontend/modules/shared/components/ui/`](apps/frontend/modules/shared/components/ui), use CVA, export `{ Component, componentVariants }`, add Storybook story alongside.
+3. **New font:** load in [`apps/frontend/app/layout.tsx`](apps/frontend/app/layout.tsx) with `next/font`, expose as a CSS variable, register under `@theme inline` as `--font-<name>: var(--font-<name>)`.
 4. **Visual verification:** Storybook is configured at `pnpm storybook` (see [`README.md`](README.md)) — a convenient place to check a component in both `.dark` and default themes before it lands.
