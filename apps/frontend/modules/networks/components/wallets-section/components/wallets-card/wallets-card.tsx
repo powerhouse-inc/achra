@@ -1,4 +1,7 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Separator } from '@achra/ui/separator'
 import { ChevronUp } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useWalletsCard } from '@/modules/networks/hooks/use-wallets-card'
@@ -9,9 +12,6 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { cn } from '@/shared/lib/utils'
 import { WalletsList } from './components/wallets-list/wallets-list'
 import { WalletsTable } from './components/wallets-table/wallets-table'
 import type { Wallet } from '../../wallets-section'

@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import SimpleBar from 'simplebar-react'
 import type { BudgetStatement, MetricWithoutBudget } from '@/modules/finances/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementMobileItem } from './budget-statement-mobile-item'
 import { useBudgetStatementList } from './use-budget-statement-list'
 

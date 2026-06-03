@@ -1,6 +1,6 @@
+import { Tabs } from '@achra/ui/tabs'
 import { SERVICES_DATA } from '@/modules/service-purchase/mocks/mock-data'
 import { ServicePurchaseStoreProvider } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { Tabs } from '@/modules/shared/components/ui/tabs'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
 import { StepsTriggersList } from './steps-triggers-list'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'

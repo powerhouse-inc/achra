@@ -1,8 +1,8 @@
+import { DropdownMenuItem } from '@achra/ui/dropdown-menu'
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import type { NavbarLink } from '@/modules/shared/config/navbar-config'
 import { isActive } from '@/modules/shared/lib/navbar-utils'
-import { cn } from '@/modules/shared/lib/utils'
-import { DropdownMenuItem } from '../../ui/dropdown-menu'
 
 function MobileNavItem({ link, pathname }: { link: NavbarLink; pathname: string }) {
   const isItemActive = isActive(pathname, link.activeWhen ?? link.href)

@@ -23,6 +23,8 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "@achra/design-system": "workspace:*",
+    "@achra/ui": "workspace:*",
     "@date-fns/utc": "^2.1.1",
     "@emotion/is-prop-valid": "^1.4.0",
     "@hookform/resolvers": "^5.2.1",
@@ -108,6 +110,8 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@achra/eslint-config": "workspace:*",
+    "@achra/typescript-config": "workspace:*",
     "@chromatic-com/storybook": "^5.0.1",
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.35.0",

@@ -1,6 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import Image from 'next/image'
-
-import { cn } from '@/shared/lib/utils'
 
 interface WhyAchraWorkflowCardProps {
   title: string

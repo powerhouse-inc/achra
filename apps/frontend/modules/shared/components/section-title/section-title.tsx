@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { LinkIcon } from 'lucide-react'
-import { cn } from '@/modules/shared/lib/utils'
 import { CopySectionUrl } from './copy-section-url'
 
 export interface SectionTitleProps {

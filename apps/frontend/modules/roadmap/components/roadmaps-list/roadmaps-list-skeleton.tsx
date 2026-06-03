@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { NavigationHeaderSkeleton } from '@/modules/shared/components/navigation-header/navigation-header-skeleton'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 import { MilestoneExtendedCardSkeleton } from '../milestone-extended-card'
 
 function HeaderSkeleton() {

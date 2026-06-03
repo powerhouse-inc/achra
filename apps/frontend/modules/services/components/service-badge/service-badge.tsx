@@ -1,5 +1,5 @@
-import { Badge } from '@/modules/shared/components/ui/badge'
-import { cn } from '@/modules/shared/lib/utils'
+import { Badge } from '@achra/ui/badge'
+import { cn } from '@achra/ui/lib/utils'
 import { BADGE_CONFIG } from '../../lib/constants'
 import type { ServiceBadge as ServiceBadgeType } from '../../types'
 

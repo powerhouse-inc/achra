@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import type { MetricValues } from '@/modules/finances/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { CellQuarterly } from './cell-quarterly'
 import { filterActiveMetrics, orderMetrics } from './header-semi-annually'
 

@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'
-import { cn } from '@/modules/shared/lib/utils'
 import { sectionSearchParamParser } from '../../lib/search-params-client'
 import { TabSection } from '../../types'
 import type { Route } from 'next'

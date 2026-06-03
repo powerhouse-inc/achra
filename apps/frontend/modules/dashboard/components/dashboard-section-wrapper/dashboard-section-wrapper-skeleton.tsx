@@ -1,6 +1,6 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface DashboardSectionWrapperSkeletonProps {
   children: React.ReactNode

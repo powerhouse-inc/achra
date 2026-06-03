@@ -1,5 +1,5 @@
-import { Card } from '@/modules/shared/components/ui/card'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Card } from '@achra/ui/card'
+import { Skeleton } from '@achra/ui/skeleton'
 import { FeatureRowSkeleton } from '../service-catalog/feature-row'
 import { HeaderCatalogPlanSkeleton } from '../service-catalog/header-catalog-plan'
 import { SectionHeaderSkeleton } from '../service-catalog/section-header'

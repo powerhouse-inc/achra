@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
 import type {
   Network,
   Sow_Deliverable,
   Sow_Roadmap,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { MilestoneExtendedCard } from '../milestone-extended-card'
 import { RoadmapSwiper } from '../roadmap-swiper'
 import { Header } from './components/header'

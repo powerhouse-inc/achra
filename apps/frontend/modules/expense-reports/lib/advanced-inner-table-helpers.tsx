@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
 import { CELL_VALUES, COLUMN_HEADERS } from '@/modules/expense-reports/lib/constants'
 import type { InnerTableColumn, RowType } from '@/modules/expense-reports/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { NumberCell } from '../components/advanced-inner-table/number-cell'
 import { TextCell } from '../components/advanced-inner-table/text-cell'
 import { OpenModalTransparency } from '../components/open-modal-transparency'

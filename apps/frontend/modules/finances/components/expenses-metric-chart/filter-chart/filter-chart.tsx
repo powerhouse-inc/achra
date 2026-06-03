@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { useQueryStates } from 'nuqs'
 import { useCallback, useMemo } from 'react'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
-import { Button } from '@/modules/shared/components/ui/button'
 import { expensesMetricChartFiltersConfig } from '../../../lib/expenses-metric-chart-search-params'
 import { GRANULARITY_OPTIONS } from '../../../types'
 import {

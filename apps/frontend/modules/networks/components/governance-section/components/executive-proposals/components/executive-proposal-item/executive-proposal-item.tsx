@@ -1,15 +1,16 @@
 'use client'
 
+import { Badge } from '@achra/ui/badge'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ethers } from 'ethers'
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Badge } from '@/modules/shared/components/ui/badge'
-import { Button } from '@/modules/shared/components/ui/button'
 import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
-import { cn, isNumeric } from '@/modules/shared/lib/utils'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
+import { isNumeric } from '@/shared/lib/utils'
 
 export interface ExecutiveProposalItemProps {
   executiveProposal: ExtendedExecutiveProposal

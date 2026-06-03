@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '@/modules/shared/components/section-title'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/modules/shared/lib/utils'
 import {
   ExecutiveProposals,
   ExecutiveProposalsListSkeleton,

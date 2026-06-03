@@ -1,6 +1,6 @@
+import { Button } from '@achra/ui/button'
 import Link from 'next/link'
 import { OPERATIONAL_HUB_URL } from '@/modules/shared/lib/constants'
-import { Button } from '@/shared/components/ui/button'
 import { DashboardCard } from './dashboard-card'
 
 function OperationalHubSection() {

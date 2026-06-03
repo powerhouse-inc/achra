@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 
 interface WaitlistIsotypeProps {
   className?: string

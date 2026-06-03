@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 
 interface BreakdownChartSwitchProps {
   isChecked: boolean

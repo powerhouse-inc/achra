@@ -32,25 +32,29 @@ const SCOPE_LABELS: Record<BuilderScope, string> = {
 const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> =
   {
     ACTIVE: {
-      bg: "bg-emerald-50",
-      text: "text-emerald-700",
-      dot: "bg-emerald-500",
+      bg: "bg-status-success/10",
+      text: "text-status-success",
+      dot: "bg-status-success",
     },
     INACTIVE: {
-      bg: "bg-slate-100",
-      text: "text-slate-600",
-      dot: "bg-slate-400",
+      bg: "bg-muted",
+      text: "text-muted-foreground",
+      dot: "bg-muted-foreground",
     },
     ON_HOLD: {
-      bg: "bg-amber-50",
-      text: "text-amber-700",
-      dot: "bg-amber-500",
+      bg: "bg-status-warning/10",
+      text: "text-status-warning",
+      dot: "bg-status-warning",
     },
-    COMPLETED: { bg: "bg-sky-50", text: "text-sky-700", dot: "bg-sky-500" },
+    COMPLETED: {
+      bg: "bg-status-progress/10",
+      text: "text-status-progress",
+      dot: "bg-status-progress",
+    },
     ARCHIVED: {
-      bg: "bg-slate-100",
-      text: "text-slate-500",
-      dot: "bg-slate-300",
+      bg: "bg-muted",
+      text: "text-muted-foreground",
+      dot: "bg-muted-foreground",
     },
   };
 
@@ -68,9 +72,19 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
     : STATUS_STYLES.INACTIVE;
 
   return (
-    <div className="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-hidden">
-      {/* Gradient banner */}
-      <div className="h-24 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 relative">
+    <div className="bg-card border border-border rounded-2xl shadow-sm overflow-hidden">
+      {/* Gradient banner — driven by design tokens via an inline linear-gradient.
+          Tailwind gradient-stop utilities (from / via / to) don't reliably
+          generate in op-hub's build, so we reference the token CSS vars directly.
+          The tokens carry the same value in light and dark, so the gradient is
+          intentionally identical in both themes. */}
+      <div
+        className="h-24 relative"
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom right, var(--primary), var(--purple), var(--fusion))",
+        }}
+      >
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzBoLTZWMGg2djMwem0tNiAwSDI0VjBoNnYzMHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
       </div>
 
@@ -82,11 +96,17 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
               <img
                 src={state.icon}
                 alt="Profile"
-                className="w-24 h-24 rounded-2xl object-cover border-4 border-white shadow-lg"
+                className="w-24 h-24 rounded-2xl object-cover border-4 border-card shadow-lg"
               />
             ) : (
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 border-4 border-white shadow-lg flex items-center justify-center">
-                <span className="text-3xl font-bold text-white">
+              <div
+                className="w-24 h-24 rounded-2xl border-4 border-card shadow-lg flex items-center justify-center"
+                style={{ backgroundColor: "var(--foreground)" }}
+              >
+                <span
+                  className="text-3xl font-bold"
+                  style={{ color: "var(--background)" }}
+                >
                   {state.name?.charAt(0).toUpperCase() || "?"}
                 </span>
               </div>
@@ -107,17 +127,19 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
 
         {/* Name & Slug */}
         <div className="mb-4">
-          <h4 className="text-xl font-semibold text-slate-900 tracking-tight">
+          <h4 className="text-xl font-semibold text-foreground tracking-tight">
             {state.name || "Unnamed Builder"}
           </h4>
           {state.slug && (
-            <p className="text-sm text-slate-500 font-medium">@{state.slug}</p>
+            <p className="text-sm text-muted-foreground font-medium">
+              @{state.slug}
+            </p>
           )}
         </div>
 
         {/* Short Description */}
         {state.description && (
-          <p className="text-sm text-slate-600 mb-4 leading-relaxed">
+          <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
             {state.description}
           </p>
         )}
@@ -132,14 +154,14 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
         {/* Skills */}
         {state.skills && state.skills.length > 0 && (
           <div className="mb-4">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
               Skills
             </p>
             <div className="flex flex-wrap gap-1.5">
               {state.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100"
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-secondary text-secondary-foreground border border-border"
                 >
                   {SKILL_LABELS[skill] || skill}
                 </span>
@@ -151,14 +173,14 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
         {/* Scopes */}
         {state.scopes && state.scopes.length > 0 && (
           <div className="mb-4">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
               Scopes
             </p>
             <div className="flex flex-wrap gap-1.5">
               {state.scopes.map((scope) => (
                 <span
                   key={scope}
-                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium bg-secondary text-secondary-foreground border border-border"
                 >
                   {SCOPE_LABELS[scope] || scope}
                 </span>
@@ -169,7 +191,7 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
 
         {/* Links */}
         {state.links && state.links.length > 0 && (
-          <div className="pt-4 border-t border-slate-100">
+          <div className="pt-4 border-t border-border">
             <div className="flex flex-wrap gap-3">
               {state.links.map((link) => (
                 <a
@@ -177,11 +199,11 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-indigo-600 transition-colors group"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors group"
                 >
                   <Link2
                     size={14}
-                    className="text-slate-400 group-hover:text-indigo-500 transition-colors"
+                    className="text-muted-foreground group-hover:text-primary transition-colors"
                   />
                   <span className="group-hover:underline underline-offset-2">
                     {link.label || new URL(link.url).hostname}

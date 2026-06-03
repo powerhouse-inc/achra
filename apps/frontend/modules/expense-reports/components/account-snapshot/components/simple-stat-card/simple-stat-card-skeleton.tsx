@@ -1,6 +1,6 @@
-import { Card } from '@/modules/shared/components/ui/card'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import EqualSign from '../svgs/equal.svg'
 
 interface SimpleStatCardSkeletonProps {

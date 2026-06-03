@@ -1,12 +1,12 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip/builders-skills-chip'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface SkillsAccordionProps {
   skills: BuilderSkill[]

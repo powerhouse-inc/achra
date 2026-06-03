@@ -1,5 +1,5 @@
+import { Card } from '@achra/ui/card'
 import { DynamicCountUpPresets } from '@/modules/shared/components/count-up'
-import { Card } from '@/modules/shared/components/ui/card'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
 import { NumberWithSignCard } from './number-with-sign-card'
 import type { ReactNode } from 'react'

@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import { useState } from 'react'
 import type { ScopeOfWork_Deliverable } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 import { KeyResultsModal } from '../key-results-modal/key-results-modal'
 import { MetricCard, MetricCardLabel } from '../metric-card/metric-card'
 

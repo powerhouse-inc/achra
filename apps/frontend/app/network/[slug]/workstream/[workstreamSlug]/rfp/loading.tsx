@@ -1,10 +1,10 @@
+import { Card } from '@achra/ui/card'
+import { Separator } from '@achra/ui/separator'
+import { Skeleton } from '@achra/ui/skeleton'
 import { ProposalKeyValueElementSkeleton } from '@/modules/rfp/components/rfp-skeleton/proposal-key-value-skeleton'
 import { PageBreadcrumbContainer } from '@/modules/shared/components/breadcrumb'
 import { BreadcrumbSkeleton } from '@/modules/shared/components/breadcrumb/breadcrumb-skeleton'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import { Card } from '@/modules/shared/components/ui/card'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 export default function RfpLoading() {
   return (

@@ -1,12 +1,12 @@
 'use client'
 
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@achra/ui/dropdown-menu'
+import { cn } from '@achra/ui/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
 import { ACHRA_NAVBAR_LINKS } from '@/modules/shared/config/navbar-config'
 import { isActive } from '@/modules/shared/lib/navbar-utils'
-import { cn } from '@/modules/shared/lib/utils'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../../ui/dropdown-menu'
 import { MobileNavItem } from './mobile-nav-item'
 
 /**

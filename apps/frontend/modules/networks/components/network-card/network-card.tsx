@@ -1,9 +1,9 @@
+import { Button } from '@achra/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@achra/ui/card'
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Network } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/modules/shared/components/ui/card'
 
 interface NetworkCardProps {
   profile: Pick<

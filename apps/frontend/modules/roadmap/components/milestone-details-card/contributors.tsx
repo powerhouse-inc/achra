@@ -1,6 +1,6 @@
+import { Avatar, AvatarFallback } from '@achra/ui/avatar'
 import { UserRound } from 'lucide-react'
 import type { Sow_Agent } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 
 interface ContributorsProps {
   contributors: Sow_Agent[]

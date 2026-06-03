@@ -1,6 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
+import { cn } from '@achra/ui/lib/utils'
 import * as React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import { cn } from '@/modules/shared/lib/utils'
 import { TwoUserIcon } from './two-user-icon'
 
 export interface CircleAvatarWithIconProps extends React.ComponentProps<typeof Avatar> {

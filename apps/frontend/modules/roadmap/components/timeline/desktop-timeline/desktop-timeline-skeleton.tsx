@@ -1,5 +1,5 @@
-import { Skeleton } from '@/shared/components/ui/skeleton'
-import { cn } from '@/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { MilestoneCardSkeleton } from '../../milestone-card'
 
 const containerBaseClasses = 'flex items-stretch gap-10 xl:gap-18.25 2xl:gap-25.75'

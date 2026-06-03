@@ -1,3 +1,5 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import type { Builder } from '@/modules/__generated__/graphql/switchboard-generated'
 import {
@@ -7,8 +9,6 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card/striped-card'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuildersListItems } from './components/builders-list-items/builders-list-items'
 
 export interface BuildersListProps {

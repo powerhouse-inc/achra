@@ -1,11 +1,6 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@achra/ui/empty'
 import type { Topic } from '@/modules/networks/types'
 import { SmartErrorState } from '@/modules/shared/components/error-state'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 import { ForumPost } from '../forum-post/forum-post'
 import { ForumPostSkeleton } from '../forum-post/forum-post-skeleton'
 

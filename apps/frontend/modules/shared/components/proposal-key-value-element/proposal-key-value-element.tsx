@@ -1,4 +1,4 @@
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 import type { LucideIcon } from 'lucide-react'
 
 interface ProposalKeyValueElementProps {

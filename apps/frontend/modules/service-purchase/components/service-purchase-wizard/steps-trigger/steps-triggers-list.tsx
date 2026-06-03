@@ -1,13 +1,13 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Separator } from '@achra/ui/separator'
+import { TabsList, TabsTrigger } from '@achra/ui/tabs'
 import { BookOpenCheck, BookOpenText, CheckCheck, FileText, InfoIcon } from 'lucide-react'
 import { Fragment, type ReactNode, useEffect } from 'react'
 import { SERVICE_PURCHASE_STEPS_ENTRIES } from '@/modules/service-purchase/lib/constants'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
-import { Separator } from '@/modules/shared/components/ui/separator'
-import { TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
-import { cn } from '@/modules/shared/lib/utils'
 
 const STEP_ICONS: Record<ServicePurchaseStep, ReactNode> = {
   [ServicePurchaseStep.ProductInfo]: <InfoIcon className="size-4 lg:size-6" />,

@@ -1,5 +1,6 @@
 'use client'
 
+import { ToggleGroup, ToggleGroupItem } from '@achra/ui/toggle-group'
 import { useMemo } from 'react'
 import type { RsBillingCycle } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getAvailableCycles, PERIOD_LABELS } from '@/modules/service-purchase/lib/billing-period'
@@ -16,7 +17,6 @@ import {
   useServicePurchaseActions,
   useServicePurchaseState,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { ToggleGroup, ToggleGroupItem } from '@/modules/shared/components/ui/toggle-group'
 
 function BillingPeriodSelector() {
   const servicesData = useServiceOffering()

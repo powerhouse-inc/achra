@@ -8,7 +8,6 @@ on:
 
 env:
   HUSKY: 0
-  NX_ISOLATE_PLUGINS: false
 
 jobs:
   chromatic:
@@ -25,8 +24,20 @@ jobs:
         with:
           run_install: false
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      # Storybook lives in apps/frontend and pulls in workspace deps; build
+      # @powerhousedao/op-hub (its dist/ output is gitignored) before the
+      # Storybook build so module resolution doesn't fall through to a missing dist.
+      - name: Build workspace deps
+        run: pnpm --filter "frontend^..." run build
 
       - name: Run Chromatic
         uses: chromaui/action@v13.3.5

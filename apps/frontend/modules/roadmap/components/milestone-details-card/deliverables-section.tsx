@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
 import type {
   Sow_Agent,
   Sow_Deliverable,
   Sow_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { splitInRows } from '../../lib/deliverables'
 import { DeliverableCard } from '../deliverable-card'
 

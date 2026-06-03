@@ -1,8 +1,8 @@
+import { Card } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { format, parseISO } from 'date-fns'
 import { DynamicCountUpPresets } from '@/modules/shared/components/count-up'
-import { Card } from '@/modules/shared/components/ui/card'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import EqualSign from '../svgs/equal.svg'
 
 interface SimpleStatCardProps {

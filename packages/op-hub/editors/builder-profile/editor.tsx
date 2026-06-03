@@ -240,15 +240,15 @@ export default function Editor() {
   const roleLabel = state?.isOperator ? "Operator" : "Builder";
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="w-full min-h-screen">
       <style>
         {`
           .builder-editor input, .builder-editor textarea, .builder-editor select {
             font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           }
           .builder-editor .section-card {
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
             transition: box-shadow 0.2s ease, transform 0.2s ease;
@@ -259,25 +259,25 @@ export default function Editor() {
           .builder-editor .field-label {
             font-size: 0.8125rem;
             font-weight: 600;
-            color: #374151;
+            color: var(--foreground);
             letter-spacing: -0.01em;
             margin-bottom: 0.5rem;
             display: block;
           }
           .builder-editor .field-hint {
             font-size: 0.75rem;
-            color: #9CA3AF;
+            color: var(--muted-foreground);
             margin-top: 0.375rem;
             letter-spacing: -0.01em;
           }
           .builder-editor .meta-value {
             font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
             font-size: 0.8125rem;
-            color: #6B7280;
-            background: #F9FAFB;
+            color: var(--muted-foreground);
+            background: var(--muted);
             padding: 0.5rem 0.75rem;
             border-radius: 8px;
-            border: 1px solid #E5E7EB;
+            border: 1px solid var(--border);
           }
           .builder-editor .status-select {
             appearance: none;
@@ -348,7 +348,7 @@ export default function Editor() {
             to { opacity: 1; }
           }
           .role-dialog {
-            background: white;
+            background: var(--background);
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 700px;
@@ -369,7 +369,7 @@ export default function Editor() {
           }
           .role-dialog-header {
             padding: 2rem 2rem 1.5rem 2rem;
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--border);
           }
           .role-dialog-content {
             padding: 2rem;
@@ -381,14 +381,14 @@ export default function Editor() {
           }
           .role-card {
             padding: 1.5rem;
-            border: 2px solid #E5E7EB;
+            border: 2px solid var(--border);
             border-radius: 12px;
-            background: #F9FAFB;
+            background: var(--muted);
             transition: all 0.2s ease;
           }
           .role-card.highlight {
-            border-color: #3B82F6;
-            background: #EFF6FF;
+            border-color: var(--primary);
+            background: var(--accent);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
           }
           .role-card-header {
@@ -410,7 +410,7 @@ export default function Editor() {
           }
           .role-features li {
             font-size: 0.875rem;
-            color: #475569;
+            color: var(--foreground);
             padding-left: 0;
           }
           .role-dialog-actions {
@@ -418,7 +418,7 @@ export default function Editor() {
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
-            border-top: 1px solid #E5E7EB;
+            border-top: 1px solid var(--border);
           }
           .dialog-button {
             padding: 0.75rem 1.5rem;
@@ -430,15 +430,15 @@ export default function Editor() {
             border: none;
           }
           .dialog-button-cancel {
-            background: #F3F4F6;
-            color: #374151;
+            background: var(--secondary);
+            color: var(--secondary-foreground);
           }
           .dialog-button-cancel:hover {
-            background: #E5E7EB;
+            background: var(--muted);
           }
           .dialog-button-confirm {
-            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-            color: white;
+            background: var(--primary);
+            color: var(--primary-foreground);
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
           }
           .dialog-button-confirm:hover {
@@ -455,10 +455,10 @@ export default function Editor() {
         <div className="section-card p-8">
           <div className="flex items-start justify-between gap-6">
             <div>
-              <h1 className="text-2xl font-semibold text-slate-900 tracking-tight">
+              <h1 className="text-2xl font-semibold text-foreground tracking-tight">
                 {roleLabel} Team Profile
               </h1>
-              <p className="text-slate-500 mt-1 text-sm">
+              <p className="text-muted-foreground mt-1 text-sm">
                 Configure your {roleLabel.toLowerCase()} team identity and
                 capabilities
               </p>
@@ -505,9 +505,9 @@ export default function Editor() {
 
         {/* Identity Section */}
         <div className="section-card p-6">
-          <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center">
-              <Info size={18} className="text-indigo-600" />
+          <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+              <Info size={18} className="text-muted-foreground" />
             </span>
             Identity
           </h3>
@@ -571,10 +571,10 @@ export default function Editor() {
             </div>
 
             {/* Operational Hub Member */}
-            <div className="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
+            <div className="md:col-span-2 border-t border-border pt-6 mt-2">
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center">
-                  <Building2 size={18} className="text-violet-600" />
+                <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+                  <Building2 size={18} className="text-muted-foreground" />
                 </span>
                 <label className="field-label mb-0">
                   Operational Hub Member
@@ -582,7 +582,7 @@ export default function Editor() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-medium text-slate-500 mb-1.5 block">
+                  <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
                     Name
                   </label>
                   <TextInput
@@ -599,7 +599,7 @@ export default function Editor() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-medium text-slate-500 mb-1.5 block">
+                  <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
                     PHID
                   </label>
                   <TextInput
@@ -625,9 +625,9 @@ export default function Editor() {
 
         {/* Status & Type Section */}
         <div className="section-card p-6">
-          <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
-              <Settings size={18} className="text-amber-600" />
+          <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+              <Settings size={18} className="text-muted-foreground" />
             </span>
             Status & Type
           </h3>
@@ -637,7 +637,7 @@ export default function Editor() {
             <div>
               <label className="field-label">Current Status</label>
               <select
-                className="status-select w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                className="status-select w-full px-4 py-2.5 border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring bg-background"
                 value={state?.status || ""}
                 onChange={(e) => {
                   if (e.target.value) {
@@ -660,9 +660,9 @@ export default function Editor() {
 
         {/* Description Section */}
         <div className="section-card p-6">
-          <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-              <FileText size={18} className="text-emerald-600" />
+          <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center">
+              <FileText size={18} className="text-muted-foreground" />
             </span>
             Description & About
           </h3>
@@ -675,10 +675,10 @@ export default function Editor() {
                 <span
                   className={`text-xs font-medium ${
                     descriptionValue.length > DESCRIPTION_MAX_LENGTH
-                      ? "text-red-500"
+                      ? "text-destructive"
                       : descriptionValue.length > DESCRIPTION_MAX_LENGTH * 0.9
-                        ? "text-amber-500"
-                        : "text-slate-400"
+                        ? "text-status-warning"
+                        : "text-muted-foreground"
                   }`}
                 >
                   {descriptionValue.length}/{DESCRIPTION_MAX_LENGTH}
@@ -687,7 +687,7 @@ export default function Editor() {
               <Textarea
                 className={`w-full ${
                   descriptionValue.length > DESCRIPTION_MAX_LENGTH
-                    ? "border-red-300 focus:ring-red-500 focus:border-red-500"
+                    ? "border-destructive focus:ring-destructive focus:border-destructive"
                     : ""
                 }`}
                 value={descriptionValue}
@@ -711,7 +711,7 @@ export default function Editor() {
                 maxLength={DESCRIPTION_MAX_LENGTH + 50}
               />
               {descriptionValue.length > DESCRIPTION_MAX_LENGTH && (
-                <p className="text-xs text-red-500 mt-1">
+                <p className="text-xs text-destructive mt-1">
                   Description exceeds {DESCRIPTION_MAX_LENGTH} character limit.
                   Please shorten it to save.
                 </p>
@@ -773,13 +773,13 @@ export default function Editor() {
           <div className="role-dialog-overlay">
             <div className="role-dialog">
               <div className="role-dialog-header relative">
-                <h3 className="text-xl font-semibold text-slate-900 pr-8">
+                <h3 className="text-xl font-semibold text-foreground pr-8">
                   Switch to {pendingRoleChange ? "Operator" : "Builder"}?
                 </h3>
                 <button
                   type="button"
                   onClick={cancelRoleChange}
-                  className="absolute top-0 right-0 p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                  className="absolute top-0 right-0 p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                   aria-label="Close dialog"
                 >
                   <X size={20} />
@@ -787,7 +787,7 @@ export default function Editor() {
               </div>
 
               <div className="role-dialog-content">
-                <p className="text-slate-600 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Before switching, make sure you understand the difference
                   between these roles:
                 </p>
@@ -798,11 +798,11 @@ export default function Editor() {
                   >
                     <div className="role-card-header">
                       <span className="role-icon-large">🔨</span>
-                      <h4 className="text-lg font-semibold text-slate-900">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Builder
                       </h4>
                     </div>
-                    <p className="text-sm text-slate-600 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3">
                       Connect gives you the tools to run your builder operations
                       effectively. Manage your team members, edit your profile,
                       find work to complete and purchase supporting services.
@@ -823,7 +823,7 @@ export default function Editor() {
                         alt=""
                         style={{ width: 24, height: 24 }}
                       />
-                      <h4 className="text-lg font-semibold text-slate-900">
+                      <h4 className="text-lg font-semibold text-foreground">
                         Operator
                       </h4>
                     </div>

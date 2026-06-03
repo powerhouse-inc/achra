@@ -1,5 +1,5 @@
-import { cn } from '../../lib/utils'
-import { Skeleton } from '../ui/skeleton'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 
 interface MarkdownSkeletonProps {
   /**

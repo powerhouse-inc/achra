@@ -1,5 +1,5 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
 import type { ResourceOperatorFieldsFragment } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
 
 interface OperatorBadgeProps {
   operator: ResourceOperatorFieldsFragment

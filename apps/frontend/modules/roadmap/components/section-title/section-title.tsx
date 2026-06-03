@@ -1,5 +1,5 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { Info } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
 
 interface SectionTitleProps {
   title: string

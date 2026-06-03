@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useTheme } from 'next-themes'
 import { useRef } from 'react'
@@ -6,7 +7,6 @@ import { formatNumberToShortScale } from '@/modules/networks/lib/finances-sectio
 import { getLegendSeries } from '@/modules/networks/lib/stacked-area-chart-utils'
 import type { BarChartSeries, StackedAreaSeries } from '@/modules/networks/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface StackedAreaChartProps {
   years: string[]

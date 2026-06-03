@@ -1,7 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Button } from '@achra/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -10,9 +9,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/modules/shared/components/ui/dialog'
+} from '@achra/ui/dialog'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import ff from '@/modules/shared/lib/feature-flags'
-import { Button } from '@/shared/components/ui/button'
 import { useServicePurchaseState } from '../../providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '../../types'
 import type { Route } from 'next'

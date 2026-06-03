@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import Image from 'next/image'
 
 import Sparkles from '@/public/home/why-achra/sparkles.svg'
-import { cn } from '@/shared/lib/utils'
 
 interface WhyAchraAccentCardProps {
   title: string

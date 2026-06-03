@@ -1,6 +1,6 @@
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { InfoIcon } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 
 const titleVariants = cva('font-bold text-foreground leading-[120%]', {
   variants: {

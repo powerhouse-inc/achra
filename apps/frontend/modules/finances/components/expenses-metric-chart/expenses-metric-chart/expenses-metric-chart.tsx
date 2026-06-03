@@ -1,11 +1,11 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useCallback, useEffect, useMemo } from 'react'
 
 import { getExpensesMetricTooltip } from '@/modules/finances/lib/get-expenses-metric-chart-tooltip'
 import { useMediaQuery } from '@/shared/hooks/use-media-query'
-import { cn } from '@/shared/lib/utils'
 import { useFinancesYear } from '../../../hooks/use-finances-year'
 import {
   formatterExpensesMetricChart,

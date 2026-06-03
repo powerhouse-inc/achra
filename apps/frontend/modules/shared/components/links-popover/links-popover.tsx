@@ -1,5 +1,13 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@achra/ui/dropdown-menu'
+import { cn } from '@achra/ui/lib/utils'
 import { LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -11,14 +19,6 @@ import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
 import TwitterSVG from '@/modules/shared/components/svgs/x.svg'
 import YoutubeSVG from '@/modules/shared/components/svgs/youtube.svg'
 import { isSocialMediaType } from '@/modules/shared/lib/is-social-media-type'
-import { cn } from '@/modules/shared/lib/utils'
-import { Button } from '../ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
 import type { Route } from 'next'
 
 type SocialMedia = 'website' | 'forum' | 'discord' | 'x' | 'github' | 'youtube'

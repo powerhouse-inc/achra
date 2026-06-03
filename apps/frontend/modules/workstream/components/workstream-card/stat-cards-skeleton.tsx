@@ -1,4 +1,4 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 
 function StatCardsSkeleton() {
   // Card 1: Roadmap - two columns with numbers and labels

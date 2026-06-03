@@ -1,5 +1,6 @@
 'use client'
 
+import { Tabs, TabsContent } from '@achra/ui/tabs'
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { Suspense, useCallback } from 'react'
 import type {
@@ -14,7 +15,6 @@ import { useServicePurchaseStep } from '@/modules/service-purchase/providers/ser
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { BookCallButton, ServiceInfo } from '@/modules/services/components/service-info'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
-import { Tabs, TabsContent } from '@/modules/shared/components/ui/tabs'
 import {
   ConfigureServices,
   ConfigureServicesSkeleton,

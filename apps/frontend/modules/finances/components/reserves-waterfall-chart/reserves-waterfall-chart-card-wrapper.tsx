@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Suspense } from 'react'
 import { FinancesSections } from '@/modules/finances/lib/constants'
 import { encodeSectionId } from '@/modules/shared/components/section-activation'
 import { SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/modules/shared/lib/utils'
 import { ReservesWaterfallChartDataFetcher } from './reserves-waterfall-chart-data-fetcher'
 import { ReservesWaterfallChartSkeleton } from './reserves-waterfall-chart-skeleton'
 

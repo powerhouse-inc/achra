@@ -1,9 +1,9 @@
 'use client'
 
+import { Badge } from '@achra/ui/badge'
+import { cn } from '@achra/ui/lib/utils'
 import { Check } from 'lucide-react'
 import type { PersonaOption } from '@/modules/onboarding/lib/personas'
-import { Badge } from '@/modules/shared/components/ui/badge'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface PersonaCardProps {
   persona: PersonaOption

@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { getSkeletonWidth } from '@/modules/expense-reports/lib/skeleton-utils'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface SkeletonCardProps {
   renderHeader?: () => React.ReactNode

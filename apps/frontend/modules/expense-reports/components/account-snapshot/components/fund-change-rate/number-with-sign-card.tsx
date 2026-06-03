@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { DynamicCountUpPresets } from '@/modules/shared/components/count-up'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import type { NumberColor } from './fund-change-rate'
 import type { ReactNode } from 'react'
 

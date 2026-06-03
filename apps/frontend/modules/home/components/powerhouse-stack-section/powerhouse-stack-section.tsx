@@ -1,9 +1,8 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
-
-import { Button } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 
 const descriptionClass =
   'text-foreground text-base font-normal leading-[150%] tracking-[-0.01em] sm:text-lg font-medium'

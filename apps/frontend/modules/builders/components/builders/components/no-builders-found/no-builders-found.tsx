@@ -1,9 +1,4 @@
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from '@achra/ui/empty'
 
 function NoBuildersFound() {
   return (

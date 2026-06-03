@@ -1,5 +1,6 @@
 'use client'
 
+import { Skeleton } from '@achra/ui/skeleton'
 import { parseAsStringEnum, useQueryState } from 'nuqs'
 import { ConfigureServicesSkeleton } from '@/modules/service-purchase/components/configure-services-step/configure-services'
 import { ConfirmationStepSkeleton } from '@/modules/service-purchase/components/confirmation-step'
@@ -14,7 +15,6 @@ import {
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
 import { ServiceInfoSkeleton } from '@/modules/services/components/service-info'
 import { PageContent } from '@/modules/shared/components/page-containers'
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
 
 function PurchaseLoadingSkeleton() {
   const [step] = useQueryState(

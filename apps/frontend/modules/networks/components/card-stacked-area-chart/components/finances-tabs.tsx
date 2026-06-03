@@ -1,8 +1,8 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { TABS_CONFIG } from '@/modules/networks/lib/constants'
 import type { TabValue } from '@/modules/networks/types'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface FinancesTabsProps {
   activeTab: TabValue

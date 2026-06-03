@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { formatNumber } from '@/modules/expense-reports/lib/strings'
 import type { RowType } from '@/modules/expense-reports/types'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface NumberCellProps {
   value: number

@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
 import type {
   ExpenseReport_ExpenseReportStatus,
   Maybe,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { AvatarWithIcon } from '../avatar-icon'
 import { BudgetStatementsStatus } from '../budget-statements-status/budget-statements-status'
 

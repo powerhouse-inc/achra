@@ -1,3 +1,4 @@
+import { Card, CardContent, CardFooter, CardHeader } from '@achra/ui/card'
 import { Suspense } from 'react'
 import type {
   ScopeOfWork_Deliverable,
@@ -9,7 +10,6 @@ import { DeliverablesCard } from '@/modules/project/components/deliverables-card
 import { TotalCostField } from '@/modules/project/components/total-cost-field'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
-import { Card, CardContent, CardFooter, CardHeader } from '@/modules/shared/components/ui/card'
 import { BudgetMetricCard } from '../budget-metric-card'
 import { DeliverablesEmpty } from '../deliverables-empty/deliverables-empty'
 import { KeyResultsMetricCard } from '../key-results-metric-card'

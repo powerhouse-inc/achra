@@ -1,12 +1,12 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
+import { Button } from '@achra/ui/button'
+import { Card, CardContent, CardHeader } from '@achra/ui/card'
 import { ArrowRight, Info } from 'lucide-react'
 import Link from 'next/link'
 import {
   BuilderStatus,
   type ResourceOperatorFieldsFragment,
 } from '@/modules/__generated__/graphql/switchboard-generated'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent, CardHeader } from '@/modules/shared/components/ui/card'
 import { formatMonthYear } from '@/modules/shared/lib/date'
 import { OperatorKeyPoint } from './operator-key-point'
 import type { Route } from 'next'

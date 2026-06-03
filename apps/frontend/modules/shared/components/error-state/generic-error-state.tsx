@@ -1,6 +1,6 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
+import { cn } from '@achra/ui/lib/utils'
 import { type LucideIcon, ServerCrash } from 'lucide-react'
-import { cn } from '../../lib/utils'
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../ui/empty'
 
 interface GenericErrorStateProps {
   icon?: LucideIcon

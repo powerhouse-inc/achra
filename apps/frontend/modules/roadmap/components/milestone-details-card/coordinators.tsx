@@ -1,5 +1,5 @@
+import { Avatar, AvatarFallback } from '@achra/ui/avatar'
 import { UserRound } from 'lucide-react'
-import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
 
 interface CoordinatorsProps {
   coordinators: string[]

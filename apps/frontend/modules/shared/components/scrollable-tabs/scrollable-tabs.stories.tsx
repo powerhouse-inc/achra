@@ -1,4 +1,4 @@
-import { TabsContent, TabsTrigger } from '@/modules/shared/components/ui/tabs'
+import { TabsContent, TabsTrigger } from '@achra/ui/tabs'
 import { ScrollableTabs, ScrollableTabsList } from './scrollable-tabs'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 

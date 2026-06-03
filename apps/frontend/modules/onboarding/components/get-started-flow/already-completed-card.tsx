@@ -1,9 +1,9 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
 
 function AlreadyCompletedCard() {

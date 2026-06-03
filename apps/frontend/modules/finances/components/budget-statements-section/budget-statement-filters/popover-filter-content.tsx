@@ -1,6 +1,6 @@
 'use client'
-import { Button } from '@/modules/shared/components/ui/button'
-import { PopoverContent } from '@/modules/shared/components/ui/popover'
+import { Button } from '@achra/ui/button'
+import { PopoverContent } from '@achra/ui/popover'
 import { MetricItemFilter } from './metric-item-filter'
 
 export type SortOptionValue =

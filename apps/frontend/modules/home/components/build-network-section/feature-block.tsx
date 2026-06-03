@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { AchraTabIsotype } from '@/modules/home/components/build-network-section/achra-tab-isotype'
 import {
@@ -8,8 +10,6 @@ import {
   BUILD_NETWORK_V2_VIOLET_CTA_CLASS,
 } from '@/modules/home/lib/constants'
 import type { BuildNetworkFeatureColumn } from '@/modules/home/types'
-import { Button } from '@/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 
 interface FeatureBlockProps {
   feature: BuildNetworkFeatureColumn

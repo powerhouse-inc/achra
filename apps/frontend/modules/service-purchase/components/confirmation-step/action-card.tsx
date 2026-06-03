@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { cn } from '@/modules/shared/lib/utils'
+import { Card, CardContent } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 
 interface ActionCardProps {
   icon: React.ReactNode

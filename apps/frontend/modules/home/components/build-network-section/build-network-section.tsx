@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { getBuildNetworkSectionV2CellBorderClass } from '@/modules/home/lib/build-network-section-v2-cell-border'
 import { BUILD_NETWORK_V2_FEATURES } from '@/modules/home/lib/constants'
-import { cn } from '@/shared/lib/utils'
 import { AchraOrbitAnimation } from '../achra-orbit-animation'
 import { CtaBlock } from './cta-block'
 import { FeatureBlock } from './feature-block'

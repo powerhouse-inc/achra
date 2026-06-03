@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@achra/ui/tabs'
 import { useQuery } from '@tanstack/react-query'
 import { ExternalLinkIcon } from 'lucide-react'
 import Link from 'next/link'
@@ -13,8 +15,6 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shared/components/ui/tabs'
 import { ForumList } from '../forum-list/forum-list'
 import { forumCategories } from './categories'
 

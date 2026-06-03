@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Progress } from '@achra/ui/progress'
 import type { Sow_DeliverableSetStatus } from '@/modules/__generated__/graphql/switchboard-generated'
 import { DeliverableSetStatusChip } from '@/modules/shared/components/chips/deliverable-set-status-chip/deliverable-set-status-chip'
-import { Progress } from '@/shared/components/ui/progress'
-import { cn } from '@/shared/lib/utils'
 
 interface MilestoneStatusSectionProps {
   status?: Sow_DeliverableSetStatus

@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Check, Lock } from 'lucide-react'
-import { cn } from '@/modules/shared/lib/utils'
 
 type ServiceLineItemValueType = 'check' | 'price' | 'label' | 'text' | 'included' | 'none'
 

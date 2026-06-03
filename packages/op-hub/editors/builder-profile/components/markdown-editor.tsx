@@ -169,26 +169,26 @@ export function MarkdownEditor({
       {label && <p className={labelClassName}>{label}</p>}
       {!isLoaded && (
         <div
-          className="w-full border border-gray-300 rounded-md p-3 bg-white"
+          className="w-full border border-border rounded-md p-3 bg-card"
           style={{ height: `${height}px` }}
         >
-          <div className="w-full h-full flex items-center justify-center text-gray-500">
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground">
             Loading editor...
           </div>
         </div>
       )}
       {isLoaded && loadError && (
         <div
-          className="w-full border border-red-300 rounded-md p-3 bg-red-50"
+          className="w-full border border-destructive rounded-md p-3 bg-destructive/10"
           style={{ height: `${height}px` }}
         >
-          <div className="w-full h-full flex flex-col items-center justify-center text-red-600">
+          <div className="w-full h-full flex flex-col items-center justify-center text-destructive">
             <p className="text-sm font-medium mb-2">
               Failed to load markdown editor
             </p>
-            <p className="text-xs text-red-500">{loadError}</p>
+            <p className="text-xs text-destructive">{loadError}</p>
             <textarea
-              className="w-full h-full mt-2 p-2 border border-gray-300 rounded text-sm"
+              className="w-full h-full mt-2 p-2 border border-border rounded text-sm"
               placeholder="Fallback text editor - write your content here..."
               value={value ?? ""}
               onChange={(e) => onChange(e.target.value)}

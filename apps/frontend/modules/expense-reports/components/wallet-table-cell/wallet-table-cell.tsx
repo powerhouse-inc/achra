@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { CopyAnimatedIcon, CopyButton, CopyTrigger } from '@/modules/shared/components/copy-button'
 import { Identicon } from '@/modules/shared/components/identicon'
 import Gnosis from '@/modules/shared/components/svgs/gnosis.svg'
-import { cn } from '@/modules/shared/lib/utils'
 import { capitalizeSentence } from '../../lib/strings'
 
 interface WalletTableCellProps {

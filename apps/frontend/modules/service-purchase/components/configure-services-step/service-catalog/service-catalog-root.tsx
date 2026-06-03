@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 import { ServiceCatalogEnabledContext } from './service-catalog-context'
 
 export interface ServiceCatalogRootProps extends React.ComponentProps<'div'> {

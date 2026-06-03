@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { DateTime } from 'luxon'
 import { useMemo } from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface LastModifiedProps {
   lastModified?: string | null

@@ -1,5 +1,14 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@achra/ui/dropdown-menu'
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { ChevronDown, LogIn, LogOut, User, UserPlus } from 'lucide-react'
 import Link from 'next/link'
@@ -11,15 +20,6 @@ import {
   CopyTrigger,
 } from '@/modules/shared/components/copy-button/copy-button'
 import { Identicon } from '@/modules/shared/components/identicon/identicon'
-import { Button } from '@/modules/shared/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/modules/shared/components/ui/dropdown-menu'
 import * as NavbarPrimitives from '../primitives'
 import { NavbarDrivesSection } from './navbar-drives-section'
 

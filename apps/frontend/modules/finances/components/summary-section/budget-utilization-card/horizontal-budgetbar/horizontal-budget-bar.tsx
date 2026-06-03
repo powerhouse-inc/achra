@@ -1,8 +1,8 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import { motion } from 'motion/react'
 import { useMemo } from 'react'
 import type { HorizontalBudgetBarProps } from '@/modules/finances/types'
-import { cn } from '@/modules/shared/lib/utils'
 
 function HorizontalBudgetBar({
   actuals,

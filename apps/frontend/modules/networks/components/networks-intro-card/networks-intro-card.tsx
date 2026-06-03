@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
+import { Card, CardContent } from '@achra/ui/card'
 
 function NetworksIntroCard() {
   return (

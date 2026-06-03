@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { useMemo } from 'react'
 import type {
   ServiceOfferingFieldsFragment,
@@ -16,7 +17,6 @@ import {
   useAllOptionGroups,
   useHoveredTier,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
-import { cn } from '@/modules/shared/lib/utils'
 
 const CUSTOM_PRICING_LABEL = 'Custom'
 

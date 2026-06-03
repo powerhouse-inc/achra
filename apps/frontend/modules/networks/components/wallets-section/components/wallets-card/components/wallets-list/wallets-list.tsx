@@ -1,3 +1,5 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight, Copy } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,8 +10,6 @@ import {
   CopyTooltip,
   CopyTrigger,
 } from '@/modules/shared/components/copy-button/copy-button'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface WalletsListProps {
   wallets: ProccesedWallets[]

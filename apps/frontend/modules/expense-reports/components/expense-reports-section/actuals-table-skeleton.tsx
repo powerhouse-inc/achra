@@ -1,5 +1,5 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import { getSkeletonWidth } from '../../lib/skeleton-utils'
 import { AdvancedInnerTableSkeleton } from '../advanced-inner-table-skeleton'
 import { SkeletonCard } from '../advanced-inner-table-skeleton/cards'

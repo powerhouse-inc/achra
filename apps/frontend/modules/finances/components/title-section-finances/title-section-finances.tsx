@@ -1,10 +1,10 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { LinkIcon } from 'lucide-react'
 import { CopySectionUrl } from '@/modules/shared/components/section-title/copy-section-url'
 import { TooltipInfoIcon } from '@/modules/shared/components/tooltip-info-icon/tooltip-info-icon'
 import ff from '@/modules/shared/lib/feature-flags'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface TitleBreakdownChartProps {
   title: string

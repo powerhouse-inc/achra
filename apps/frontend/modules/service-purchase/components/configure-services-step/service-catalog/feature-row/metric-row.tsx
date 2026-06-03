@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { useHoveredTier } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import type { FeatureValue } from '@/modules/service-purchase/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogCell } from '../service-catalog-cell'
 
 export interface MetricRowProps {

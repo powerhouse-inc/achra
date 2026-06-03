@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import React from 'react'
 import type { Maybe, ScopeOfWork_Unit } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 
 export interface DescriptionItemProps {
   label: string

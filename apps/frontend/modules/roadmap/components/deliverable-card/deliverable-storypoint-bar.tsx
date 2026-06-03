@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { useMemo } from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface DeliverableStoryPointsBarProps {
   total: number

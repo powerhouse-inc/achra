@@ -1,12 +1,12 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Field, FieldLabel } from '@achra/ui/field'
+import { Input } from '@achra/ui/input'
+import { cn } from '@achra/ui/lib/utils'
 import { useActionState, useEffect } from 'react'
 import { submitWhitelistEmailAction } from '@/modules/whitelist/actions/whitelist-action'
 import type { WhitelistFormState } from '@/modules/whitelist/types'
-import { Button } from '@/shared/components/ui/button'
-import { Field, FieldLabel } from '@/shared/components/ui/field'
-import { Input } from '@/shared/components/ui/input'
-import { cn } from '@/shared/lib/utils'
 import { JoinedUsersBadge } from '../joined-users-badge'
 
 const initialState: WhitelistFormState = {

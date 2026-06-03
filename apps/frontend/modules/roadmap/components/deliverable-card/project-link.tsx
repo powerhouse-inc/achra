@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { cn } from '@/modules/shared/lib/utils'
 import type { Route } from 'next'
 
 interface ProjectLinkProps<T extends string = string> {

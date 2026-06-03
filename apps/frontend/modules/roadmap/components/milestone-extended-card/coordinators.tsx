@@ -1,7 +1,7 @@
+import { Avatar, AvatarFallback } from '@achra/ui/avatar'
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { UserRound } from 'lucide-react'
-import { Avatar, AvatarFallback } from '@/modules/shared/components/ui/avatar'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
-import { cn } from '@/shared/lib/utils'
 import { CoordinatorItem } from './coordinator-item'
 
 interface CoordinatorsProps {

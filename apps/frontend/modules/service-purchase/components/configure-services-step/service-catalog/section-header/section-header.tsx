@@ -1,12 +1,12 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
+import { Switch } from '@achra/ui/switch'
 import { RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { getPriceLabel } from '@/modules/service-purchase/lib/utils'
 import { usePricingCalculatorContext } from '@/modules/service-purchase/providers/pricing-calculator-provider'
 import { useHoveredTier } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { CatalogStatus } from '@/modules/service-purchase/types'
-import { Switch } from '@/modules/shared/components/ui/switch'
-import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogStatus } from '../../service-catalog-status'
 
 interface SectionHeaderProps {

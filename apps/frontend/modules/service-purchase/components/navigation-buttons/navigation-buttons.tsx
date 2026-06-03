@@ -1,10 +1,10 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { ArrowRight } from 'lucide-react'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/modules/shared/components/ui/tooltip'
 
 function continueDisabledHint(step: ServicePurchaseStep): string | null {
   if (step === ServicePurchaseStep.Summary) {

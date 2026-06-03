@@ -1,0 +1,11 @@
+/* Self-contained stylesheet for @achra/ui — used when the package is consumed
+   standalone (e.g. a Storybook that targets only this package). Apps that
+   already import "tailwindcss" + "@achra/design-system" in their own entry
+   CSS (and @source this package) do not need to import this file.
+
+   Tailwind v4 does not scan node_modules, so the @source below (relative to
+   this file → ../ = src/) ensures utility classes used by these components are
+   generated when this stylesheet is the Tailwind entry point. */
+@import 'tailwindcss';
+@import '@achra/design-system';
+@source '../**/*.{ts,tsx}';

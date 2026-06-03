@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { useMemo } from 'react'
 import type {
   Sow_Agent,
@@ -8,7 +9,6 @@ import type {
   Sow_Project,
 } from '@/modules/__generated__/graphql/switchboard-generated'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
-import { cn } from '@/modules/shared/lib/utils'
 import { Contributors } from './contributors'
 import { Coordinators } from './coordinators'
 import { DeliverablesSection } from './deliverables-section'

@@ -1,4 +1,4 @@
-import { Card } from '@/modules/shared/components/ui/card'
+import { Card } from '@achra/ui/card'
 import { ProjectCardDeliverablesSkeleton } from './project-card-deliverables-skeleton'
 import { ProjectCardFooterSkeleton } from './project-card-footer-skeleton'
 import { ProjectCardHeaderSkeleton } from './project-card-header-skeleton'

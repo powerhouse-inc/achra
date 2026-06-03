@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { Check } from 'lucide-react'
 import { CatalogStatus, type FeatureValue } from '@/modules/service-purchase/types'
-import { cn } from '@/modules/shared/lib/utils'
 import { ServiceCatalogStatus } from '../service-catalog-status'
 import { useServiceCatalogEnabled } from './service-catalog-context'
 

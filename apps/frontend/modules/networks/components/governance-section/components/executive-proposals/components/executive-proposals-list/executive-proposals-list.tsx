@@ -1,10 +1,10 @@
+import { cn } from '@achra/ui/lib/utils'
 import {
   StripedCard,
   StripedCardContent,
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card/striped-card'
-import { cn } from '@/modules/shared/lib/utils'
 import type { ExtendedExecutiveProposal } from '@/modules/shared/types/makervote'
 import { ExecutiveProposalItem } from '../executive-proposal-item/executive-proposal-item'
 

@@ -1,5 +1,5 @@
+import { Skeleton } from '@achra/ui/skeleton'
 import { ChevronRight } from 'lucide-react'
-import { Skeleton } from '../ui/skeleton'
 
 interface BreadcrumbSkeletonProps {
   segments: number

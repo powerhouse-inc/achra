@@ -1,11 +1,7 @@
 'use client'
 
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/modules/shared/components/ui/accordion'
-import { cn } from '@/modules/shared/lib/utils'
+import { AccordionContent, AccordionItem, AccordionTrigger } from '@achra/ui/accordion'
+import { cn } from '@achra/ui/lib/utils'
 import { pascalCaseToNormalString } from '../../lib/strings'
 import type { CategoryTree } from '../../types'
 

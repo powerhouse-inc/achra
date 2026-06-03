@@ -1,5 +1,7 @@
 'use client'
 
+import { Card, CardContent } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -9,8 +11,6 @@ import {
   SERVICE_SECTIONS_MAX_HEIGHT_VAR,
   SERVICE_SECTIONS_MIN_AVAILABLE_HEIGHT,
 } from '@/modules/services/lib/constants'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ServiceInfoProps {
   isCompacted?: boolean

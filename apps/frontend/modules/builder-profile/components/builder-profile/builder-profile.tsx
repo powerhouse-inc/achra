@@ -1,3 +1,4 @@
+import { Card, CardContent } from '@achra/ui/card'
 import type { BuilderProfileState } from '@/modules/__generated__/graphql/switchboard-generated'
 import { SkillsAccordion } from '@/modules/builder-profile/components/skills-accordion'
 import { ProfileFinancesCardContent } from '@/modules/expense-reports/components/profile-finances-card-content'
@@ -5,7 +6,6 @@ import { ProfileFinancesDrawer } from '@/modules/expense-reports/components/prof
 import { ProjectCard } from '@/modules/expense-reports/components/project-card'
 import { ConnectLink } from '@/modules/shared/components/connect-link'
 import { Markdown } from '@/modules/shared/components/markdown'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import ff from '@/modules/shared/lib/feature-flags'
 
 interface BuilderProfileProps {

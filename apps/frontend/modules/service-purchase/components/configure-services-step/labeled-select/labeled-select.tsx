@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface LabeledSelectProps {
   label: string

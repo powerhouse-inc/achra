@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SETTINGS_NAV_SECTIONS } from '@/modules/my-account/lib/constants'
-import { cn } from '@/shared/lib/utils'
 
 function SettingsNav() {
   const pathname = usePathname()

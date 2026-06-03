@@ -1,24 +1,12 @@
+import { Button } from '@achra/ui/button'
+import { Calendar } from '@achra/ui/calendar'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@achra/ui/card'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@achra/ui/field'
+import { Input } from '@achra/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@achra/ui/popover'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@achra/ui/select'
 import { CalendarIcon } from 'lucide-react'
 import { LANGUAGE_OPTIONS } from '@/modules/my-account/lib/constants'
-import { Button } from '@/shared/components/ui/button'
-import { Calendar } from '@/shared/components/ui/calendar'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/shared/components/ui/field'
-import { Input } from '@/shared/components/ui/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/shared/components/ui/select'
 
 function AccountForm() {
   return (

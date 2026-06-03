@@ -1,14 +1,10 @@
+import { Accordion, AccordionContent, AccordionItem } from '@achra/ui/accordion'
+import { cn } from '@achra/ui/lib/utils'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
 import { ChevronDownIcon } from 'lucide-react'
 import { getBalance } from '@/modules/expense-reports/lib/balance'
 import { isOperationalGroup } from '@/modules/expense-reports/lib/reserve-account-types'
 import type { ReserveAccount } from '@/modules/expense-reports/types'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-} from '@/modules/shared/components/ui/accordion'
-import { cn } from '@/modules/shared/lib/utils'
 import { WalletInfo } from '../transaction/wallet-info'
 import { TransactionList } from '../transaction-list'
 import { KeyValuePair } from './key-value-pair'

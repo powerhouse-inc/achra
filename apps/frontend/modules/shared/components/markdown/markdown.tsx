@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { Streamdown } from 'streamdown'
-import { cn } from '../../lib/utils'
 import { componentsOverrides } from './markdown-components'
 
 interface MarkdownProps {

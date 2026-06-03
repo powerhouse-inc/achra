@@ -1,11 +1,11 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Separator } from '@achra/ui/separator'
 import type { GRANULARITY_OPTIONS } from '@/modules/finances/types'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { DrawerSelect, FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
 import { MultipleSelector, type Option } from '@/modules/shared/components/form/multiselect'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Separator } from '@/modules/shared/components/ui/separator'
 
 interface ReservesWaterfallChartFiltersProps {
   granularityValue?: GRANULARITY_OPTIONS

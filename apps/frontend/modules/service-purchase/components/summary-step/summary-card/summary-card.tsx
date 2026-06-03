@@ -1,5 +1,6 @@
 'use client'
 
+import { Card, CardContent } from '@achra/ui/card'
 import { useMemo } from 'react'
 import { type Maybe, RsGroupCostType } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BILLING_CYCLE_SUFFIXES } from '@/modules/service-purchase/lib/constants'
@@ -17,7 +18,6 @@ import {
   useServiceOffering,
 } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import type { PurchaseOptionGroup } from '@/modules/service-purchase/types'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 import { SelectedFacets } from './selected-facets'
 import { SummaryCardHeader } from './summary-card-header'
 import { Summary } from './summary-section'

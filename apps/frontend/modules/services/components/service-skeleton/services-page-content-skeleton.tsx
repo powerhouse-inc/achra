@@ -1,4 +1,4 @@
-import { Skeleton } from '@/modules/shared/components/ui/skeleton'
+import { Skeleton } from '@achra/ui/skeleton'
 import { FeaturedCardSkeleton } from './featured-card-skeleton'
 import { MarketplaceCardSkeleton } from './marketplace-card-skeleton'
 

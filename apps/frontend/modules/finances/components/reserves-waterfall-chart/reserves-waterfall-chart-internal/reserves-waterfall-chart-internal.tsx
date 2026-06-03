@@ -1,7 +1,7 @@
 'use client'
 
+import { Card } from '@achra/ui/card'
 import type { Budget } from '@/modules/finances/types'
-import { Card } from '@/modules/shared/components/ui/card'
 import { TitleSectionFinances } from '../../title-section-finances'
 import { ReservesWaterfallChartFilters } from '../reserves-waterfall-chart-filters'
 import { ReservesWaterfallChartGraph } from '../reserves-waterfall-chart-graph'

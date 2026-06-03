@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import * as React from 'react'
-import { cn } from '@/shared/lib/utils'
 import type { Option } from './multiselect'
 
 interface OverflowRendererProps {

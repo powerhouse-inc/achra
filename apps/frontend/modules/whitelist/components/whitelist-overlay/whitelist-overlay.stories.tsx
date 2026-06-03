@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { withPortalFontStyles } from '@/modules/shared/lib/decorators'
-import { cn } from '@/modules/shared/lib/utils'
 import { whitelistHandlers } from '@/modules/whitelist/mocks/whitelist-handlers'
 import { SuccessView } from '../success-view'
 import { WhitelistForm } from '../whitelist-form'

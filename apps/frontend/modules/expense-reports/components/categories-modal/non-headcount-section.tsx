@@ -1,7 +1,7 @@
 'use client'
 
+import { Accordion } from '@achra/ui/accordion'
 import { useMemo } from 'react'
-import { Accordion } from '@/modules/shared/components/ui/accordion'
 import { CategoryItem } from './category-item'
 import type { CategoryTree } from '../../types'
 

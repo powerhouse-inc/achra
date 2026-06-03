@@ -1,4 +1,4 @@
-import { cn } from '@/modules/shared/lib/utils'
+import { cn } from '@achra/ui/lib/utils'
 
 interface FaqItemProps extends React.ComponentProps<'div'> {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>

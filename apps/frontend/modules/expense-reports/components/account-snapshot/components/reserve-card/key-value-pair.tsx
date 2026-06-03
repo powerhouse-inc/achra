@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { usLocalizedNumber } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface KeyValuePairProps {
   label: string

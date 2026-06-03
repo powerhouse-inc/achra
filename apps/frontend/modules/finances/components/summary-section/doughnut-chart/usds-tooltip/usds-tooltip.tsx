@@ -1,8 +1,8 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@achra/ui/tooltip'
 import { InfoIcon } from 'lucide-react'
 
 import { UsdsIconWithInfo } from '@/modules/shared/components/svgs'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/components/ui/tooltip'
-import { cn } from '@/shared/lib/utils'
 
 function UsdsTooltip() {
   return (

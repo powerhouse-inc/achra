@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
 import { formatBudgetName, removeBudgetWord } from '@/modules/finances/lib'
 import type { CumulativeType } from '@/modules/finances/lib/expenses-metric-chart-search-params'
 import { getMonthAbbreviationToolTip } from '@/modules/finances/lib/expenses-metric-chart-utils'
 import type { GRANULARITY_OPTIONS, LineChartSeries } from '@/modules/finances/types'
 import { usLocalizedNumber } from '@/shared/lib/humanization'
-import { cn } from '@/shared/lib/utils'
 
 interface ExpensesMetricChartTooltipProps {
   filteredParams: LineChartSeries[]

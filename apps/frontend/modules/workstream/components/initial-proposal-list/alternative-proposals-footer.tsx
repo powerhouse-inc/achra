@@ -1,5 +1,5 @@
+import { Button } from '@achra/ui/button'
 import { FilePenLine } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
 
 interface AlternativeProposalsFooterProps {
   isVisible: boolean

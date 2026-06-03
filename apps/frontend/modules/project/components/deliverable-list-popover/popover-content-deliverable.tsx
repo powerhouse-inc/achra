@@ -1,6 +1,6 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import type { ScopeOfWork_KeyResult } from '@/modules/__generated__/graphql/switchboard-generated'
-import { cn } from '@/modules/shared/lib/utils'
 import { KeyResultItem } from './key-result-item'
 
 interface PopoverContentDeliverableProps {

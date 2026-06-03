@@ -1,5 +1,5 @@
+import { Card, CardContent } from '@achra/ui/card'
 import MoreNetworks from '@/modules/shared/components/svgs/more-networks.svg'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
 function MoreNetworksComingSoon() {
   return (

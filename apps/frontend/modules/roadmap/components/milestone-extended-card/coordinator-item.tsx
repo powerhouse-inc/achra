@@ -1,6 +1,6 @@
+import { Avatar, AvatarFallback } from '@achra/ui/avatar'
+import { cn } from '@achra/ui/lib/utils'
 import { UserRound } from 'lucide-react'
-import { Avatar, AvatarFallback } from '@/shared/components/ui/avatar'
-import { cn } from '@/shared/lib/utils'
 
 interface CoordinatorItemProps {
   name: string

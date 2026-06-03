@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { encodeSectionId } from '@/modules/shared/components/section-activation/section-id-utils'
 import { SectionTitle } from '@/modules/shared/components/section-title/section-title'
 import { NetworkHomepageSections, SCROLL_MT_CLASSES } from '@/modules/shared/lib/constants'
-import { cn } from '@/shared/lib/utils'
 import { WalletsCard } from './components/wallets-card/wallets-card'
 
 export interface Wallet {

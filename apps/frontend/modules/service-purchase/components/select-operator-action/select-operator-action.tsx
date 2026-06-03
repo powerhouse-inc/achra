@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { useServicePurchaseStep } from '@/modules/service-purchase/providers/service-purchase-store-provider'
 import { ServicePurchaseStep } from '@/modules/service-purchase/types'
-import { Button } from '@/modules/shared/components/ui/button'
 
 function SelectOperatorAction() {
   const { goToStep } = useServicePurchaseStep()

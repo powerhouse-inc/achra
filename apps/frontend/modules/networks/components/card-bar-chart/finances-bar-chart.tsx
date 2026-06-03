@@ -1,4 +1,5 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useMemo, useRef } from 'react'
 import {
@@ -8,7 +9,6 @@ import {
 } from '@/modules/networks/lib/finances-section-utils'
 import type { BarChartSeries, RevenueAndSpendingRecords } from '@/modules/networks/types'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface FinancesBarChartProps {
   revenueAndSpendingData: RevenueAndSpendingRecords

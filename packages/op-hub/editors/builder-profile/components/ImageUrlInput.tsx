@@ -47,12 +47,12 @@ function ImageModal({ isOpen, onClose, imageUrl, imageAlt }: ImageModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative bg-gray-900 rounded-lg shadow-2xl border-2 border-gray-700"
+        className="relative bg-popover rounded-lg shadow-2xl border-2 border-border"
         style={getModalSize()}
       >
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 z-10 w-8 h-8 bg-gray-800 hover:bg-gray-900 rounded-full flex items-center justify-center text-white transition-all duration-200 shadow-lg"
+          className="absolute -top-3 -right-3 z-10 w-8 h-8 bg-secondary hover:bg-secondary/80 rounded-full flex items-center justify-center text-secondary-foreground transition-all duration-200 shadow-lg"
         >
           <Icon name="Xmark" size={16} />
         </button>
@@ -105,14 +105,14 @@ export function ImageUrlInput({
   return (
     <>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-foreground">
           {label}
         </label>
-        <div className="border border-gray-300 rounded-lg p-4">
+        <div className="border border-border rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div
-                className={`flex-shrink-0 w-12 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden ${
+                className={`flex-shrink-0 w-12 h-12 bg-muted rounded border flex items-center justify-center overflow-hidden ${
                   value &&
                   !imageError &&
                   (value.startsWith("http://") || value.startsWith("https://"))
@@ -133,19 +133,23 @@ export function ImageUrlInput({
                     onLoad={() => setImageError(false)}
                   />
                 ) : (
-                  <Icon name="Image" size={24} className="text-gray-400" />
+                  <Icon
+                    name="Image"
+                    size={24}
+                    className="text-muted-foreground"
+                  />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-muted-foreground">
                   {imageError && value && (
-                    <div className="text-red-500">Failed to load image</div>
+                    <div className="text-destructive">Failed to load image</div>
                   )}
                   {value &&
                     !imageError &&
                     (value.startsWith("http://") ||
                       value.startsWith("https://")) && (
-                      <div className="text-blue-600">
+                      <div className="text-primary">
                         Click image to view full size
                       </div>
                     )}

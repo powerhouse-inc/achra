@@ -1,3 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Skeleton } from '@achra/ui/skeleton'
 import React, { type JSX, useCallback, useEffect, useRef, useState } from 'react'
 import {
   useMeasure,
@@ -6,8 +8,6 @@ import {
   useShallowCompareEffect,
   useUpdateEffect,
 } from 'react-use'
-import { cn } from '@/modules/shared/lib/utils'
-import { Skeleton } from '../ui/skeleton'
 
 type CollapseDirection = 'start' | 'end'
 type OverflowDirection = 'none' | 'grow' | 'shrink'
@@ -158,7 +158,7 @@ function OverflowList<T>({
     )),
     collapseFrom === 'end' ? maybeOverflow : null,
     // TODO: fix this
-    // eslint-disable-next-line react-hooks/refs
+
     React.createElement('div', { style: { flexShrink: 1, width: 1 }, ref: spacer }),
   )
 }

@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { threeDigitsPrecisionHumanization } from '@/modules/shared/lib/humanization'
-import { cn } from '@/modules/shared/lib/utils'
 import { ProposalCardOutline } from './proposal-card-outline'
 
 interface BudgetEstimateCardProps {

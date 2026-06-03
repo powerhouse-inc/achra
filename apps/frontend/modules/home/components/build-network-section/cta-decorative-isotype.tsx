@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { useId } from 'react'
-import { cn } from '@/shared/lib/utils'
 
 interface CtaDecorativeIsotypeProps {
   className?: string

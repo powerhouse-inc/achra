@@ -1,7 +1,4 @@
-import { CheckIcon, WifiOffIcon } from 'lucide-react'
-import { useNetworkState } from 'react-use'
-import { cn } from '../../lib/utils'
-import { Badge } from '../ui/badge'
+import { Badge } from '@achra/ui/badge'
 import {
   Empty,
   EmptyContent,
@@ -9,8 +6,11 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '../ui/empty'
-import { Spinner } from '../ui/spinner'
+} from '@achra/ui/empty'
+import { cn } from '@achra/ui/lib/utils'
+import { Spinner } from '@achra/ui/spinner'
+import { CheckIcon, WifiOffIcon } from 'lucide-react'
+import { useNetworkState } from 'react-use'
 
 interface NetworkErrorStateProps {
   showBorder?: boolean

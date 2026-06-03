@@ -1,11 +1,5 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
 import { Folder } from 'lucide-react'
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/modules/shared/components/ui/empty'
 
 interface RfpEmptyProps {
   title?: string

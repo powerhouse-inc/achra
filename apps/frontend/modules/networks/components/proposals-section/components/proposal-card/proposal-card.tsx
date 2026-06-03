@@ -1,3 +1,5 @@
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import {
@@ -6,8 +8,6 @@ import {
   StripedCardHeader,
   StripedCardTitle,
 } from '@/modules/shared/components/striped-card'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
 import type { Proposal } from '../../proposals-section'
 
 export interface ProposalCardProps extends Proposal {

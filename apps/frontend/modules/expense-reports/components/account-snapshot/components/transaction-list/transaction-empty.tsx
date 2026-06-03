@@ -1,5 +1,5 @@
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
 import { Receipt } from 'lucide-react'
-import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/modules/shared/components/ui/empty'
 
 function TransactionEmpty() {
   return (

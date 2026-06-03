@@ -1,9 +1,9 @@
+import { cn } from '@achra/ui/lib/utils'
+import { Popover, PopoverContent, PopoverTrigger } from '@achra/ui/popover'
 import { Ellipsis } from 'lucide-react'
 import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { GenericChip } from '@/modules/shared/components/chips/generic-chip/generic-chip'
-import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shared/components/ui/popover'
-import { cn } from '../../lib/utils'
 
 interface SkillsPopoverProps {
   skills: BuilderSkill[]

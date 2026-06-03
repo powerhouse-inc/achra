@@ -1,11 +1,11 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ChevronDown } from 'lucide-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import { Markdown } from '@/modules/shared/components/markdown/markdown'
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface ExpandableSectionProps {
   title: string

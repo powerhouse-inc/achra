@@ -1,6 +1,6 @@
+import { cn } from '@achra/ui/lib/utils'
 import { FolderGit2, FolderKanban } from 'lucide-react'
 import Image from 'next/image'
-import { cn } from '@/modules/shared/lib/utils'
 
 interface WorkstreamBannerBackgroundProps {
   isNetworkBanner: boolean

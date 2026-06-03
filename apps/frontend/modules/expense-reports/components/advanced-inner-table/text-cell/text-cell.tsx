@@ -1,5 +1,5 @@
+import { cn } from '@achra/ui/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/shared/lib/utils'
 
 const textCellVariants = cva('flex items-center md:text-sm/4.5 lg:text-base/6 md:p-4', {
   variants: {

@@ -1,8 +1,8 @@
 'use client'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
+import { Popover, PopoverTrigger } from '@achra/ui/popover'
 import { ArrowUpDown } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Popover, PopoverTrigger } from '@/modules/shared/components/ui/popover'
-import { cn } from '@/modules/shared/lib/utils'
 import { type SortOptionValue, SortPopoverContent } from './popover-filter-content'
 
 interface BudgetStatementPopoverProps {

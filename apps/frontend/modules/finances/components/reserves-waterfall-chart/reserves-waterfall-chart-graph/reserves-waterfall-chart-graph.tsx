@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import ReactECharts, { type EChartsOption } from 'echarts-for-react'
 import { useEffect, useMemo, useRef } from 'react'
 import { replaceAllNumberLetOneBeforeDot } from '@/modules/finances/lib/expenses-metric-chart-utils'
@@ -9,7 +10,6 @@ import {
   getWaterfallAxisLabels,
 } from '@/modules/finances/lib/reserves-waterfall-chart-utils'
 import { useMediaQuery } from '@/modules/shared/hooks/use-media-query'
-import { cn } from '@/modules/shared/lib/utils'
 import { LegendItem } from './legend-item'
 
 interface ReservesWaterfallChartGraphProps {

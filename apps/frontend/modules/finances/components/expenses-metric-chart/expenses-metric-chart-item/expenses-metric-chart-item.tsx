@@ -1,5 +1,5 @@
-import { Button } from '@/modules/shared/components/ui/button'
-import { cn } from '@/shared/lib/utils'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { replaceAllNumberLetOneBeforeDot } from '../../../lib/expenses-metric-chart-utils'
 import type { ExpensesMetricChartSeriesData } from '../../../types'
 

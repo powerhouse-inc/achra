@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { useQueryState } from 'nuqs'
 import { useCallback } from 'react'
 import {
@@ -8,7 +9,6 @@ import {
 } from '@/modules/finances/lib/breakdown-chart-search-params'
 import { BasicSelect } from '@/modules/shared/components/basic-select/basic-select'
 import { FilterDrawer } from '@/modules/shared/components/filter-drawer/filter-drawer'
-import { Button } from '@/modules/shared/components/ui/button'
 import { GRANULARITY_OPTIONS, METRIC_OPTIONS } from '../../types'
 import {
   BreakdownGranularitySelectDrawer,

@@ -1,5 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent, CardFooter, CardHeader } from '@achra/ui/card'
+import { cn } from '@achra/ui/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -8,9 +11,6 @@ import { MilestoneStatusSection } from '@/modules/roadmap/components/milestone-s
 import { MilestoneTitleSection } from '@/modules/roadmap/components/milestone-title-section'
 import { formatDateStringToQuarter } from '@/modules/roadmap/lib/milestone-card-utils'
 import { getProgressPercentage } from '@/modules/roadmap/lib/type-helpers'
-import { Button } from '@/shared/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader } from '@/shared/components/ui/card'
-import { cn } from '@/shared/lib/utils'
 
 interface MilestoneCardProps {
   milestone: Sow_Milestone

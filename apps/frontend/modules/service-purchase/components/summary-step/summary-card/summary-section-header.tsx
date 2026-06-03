@@ -1,4 +1,4 @@
-import { Separator } from '@/modules/shared/components/ui/separator'
+import { Separator } from '@achra/ui/separator'
 
 interface SummarySectionHeaderProps {
   title: string

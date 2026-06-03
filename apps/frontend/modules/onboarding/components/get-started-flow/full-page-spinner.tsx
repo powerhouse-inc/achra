@@ -1,6 +1,6 @@
 'use client'
 
-import { Spinner } from '@/modules/shared/components/ui/spinner'
+import { Spinner } from '@achra/ui/spinner'
 
 function FullPageSpinner() {
   return (

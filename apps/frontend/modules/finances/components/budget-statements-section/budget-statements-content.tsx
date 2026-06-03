@@ -1,13 +1,13 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import type {
   BudgetStatement,
   MetricWithoutBudget,
   SortOptionValue,
 } from '@/modules/finances/types'
-import { Button } from '@/modules/shared/components/ui/button'
 import { useInfiniteArray } from '@/modules/shared/hooks/use-infinite-array'
-import { cn } from '@/modules/shared/lib/utils'
 import { BudgetStatementsItem } from './budget-statement-item/budget-statement-item'
 
 interface BudgetStatementsContentProps {

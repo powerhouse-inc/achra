@@ -1,7 +1,7 @@
+import { cn } from '@achra/ui/lib/utils'
 import { CheckIcon } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-import { cn } from '@/modules/shared/lib/utils'
 import type { BreadcrumbItemNavigation } from '@/modules/shared/types/breadcrumb'
 
 interface MobileItemProps {

@@ -1,9 +1,9 @@
 'use client'
 
+import { cn } from '@achra/ui/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { LucideExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { cn } from '../../lib/utils'
 import { ConnectIsotype } from '../svgs'
 
 const connectLinkVariants = cva('group transition-colors', {

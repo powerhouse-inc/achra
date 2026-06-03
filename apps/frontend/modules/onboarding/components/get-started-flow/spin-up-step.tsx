@@ -1,8 +1,8 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
+import { Card, CardContent } from '@achra/ui/card'
 import { AlertTriangle, ArrowLeft, Loader2, RefreshCw } from 'lucide-react'
-import { Button } from '@/modules/shared/components/ui/button'
-import { Card, CardContent } from '@/modules/shared/components/ui/card'
 
 interface SpinUpStepProps {
   isError: boolean

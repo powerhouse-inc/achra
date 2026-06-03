@@ -10,7 +10,7 @@ jobs:
   lint-and-types:
     name: Lint and Types Checks
     runs-on: ubuntu-latest
-    container: node:22
+    container: node:24
 
     steps:
       - name: Checkout
@@ -22,13 +22,18 @@ jobs:
           run_install: false
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      # frontend's type-check resolves @powerhousedao/op-hub types from its
+      # dist/ output (gitignored), so build frontend's workspace deps first.
+      - name: Build workspace deps
+        run: pnpm --filter "frontend^..." run build
 
       - name: Lint
-        run: pnpm run lint
+        run: pnpm --filter frontend run lint
 
       - name: Code Format
-        run: pnpm run format:check
+        run: pnpm --filter frontend run format:check
 
       - name: Type check
-        run: pnpm run type-check
+        run: pnpm --filter frontend run type-check

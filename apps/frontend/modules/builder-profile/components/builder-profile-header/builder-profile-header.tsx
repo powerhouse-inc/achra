@@ -1,3 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@achra/ui/avatar'
+import { Button } from '@achra/ui/button'
+import { cn } from '@achra/ui/lib/utils'
 import { ExternalLinkIcon } from 'lucide-react'
 import { DateTime } from 'luxon'
 import { useMemo } from 'react'
@@ -5,10 +8,7 @@ import type { BuilderProfileState } from '@/modules/__generated__/graphql/switch
 import { Links } from '@/modules/builders/components/builders/components/links/links'
 import { BuildersStatusChip } from '@/modules/shared/components/chips/builders-status-chip'
 import WebsiteSVG from '@/modules/shared/components/svgs/website.svg'
-import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar'
-import { Button } from '@/modules/shared/components/ui/button'
 import ff from '@/modules/shared/lib/feature-flags'
-import { cn } from '@/modules/shared/lib/utils'
 import { BuilderProfileHeaderDescription } from './builder-profile-header-description'
 import { BuilderProfileWebsiteLink } from './builder-profile-website-link'
 

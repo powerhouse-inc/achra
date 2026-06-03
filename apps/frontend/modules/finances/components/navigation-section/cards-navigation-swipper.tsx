@@ -1,7 +1,7 @@
 'use client'
+import { cn } from '@achra/ui/lib/utils'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { cn } from '@/shared/lib/utils'
 import { NavigationCard } from './navigation-card'
 import { useCardsNavigationSwiper } from './use-cards-navigation-swiper'
 import type { FiancesNavigationCard } from '../../types'
