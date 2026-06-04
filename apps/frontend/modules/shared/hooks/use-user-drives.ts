@@ -1,8 +1,8 @@
 'use client'
 
+import { isOperatorDriveName } from '@achra/sdk'
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
 import { useGetBuilderDrivesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
-import { isOperatorDriveName } from '@/modules/sdk'
 
 function useUserDrives() {
   const auth = useRenownAuth()

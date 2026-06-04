@@ -1,8 +1,10 @@
+import { withReactQueryProvider } from '@/modules/shared/lib/decorators'
 import { AchraNavbar } from './achra-navbar'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 const meta = {
   title: 'Shared/Components/Navbar',
+  decorators: [withReactQueryProvider],
   parameters: {
     layout: 'centered',
     nextjs: {

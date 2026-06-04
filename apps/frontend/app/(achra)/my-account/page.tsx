@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@achra/ui/card'
 import { AccountProfile } from '@/modules/my-account/components/account-profile'
-import { BecomeAnOperator } from '@/modules/my-account/components/become-an-operator'
 import { RenownIdentity } from '@/modules/my-account/components/renown-identity'
 import type { Metadata } from 'next'
 
@@ -10,16 +9,25 @@ export const metadata: Metadata = {
 
 export default function MyAccountPage() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>My Renown Identity</CardTitle>
-        <CardDescription>The Renown profile you use to sign in.</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-6">
-        <RenownIdentity />
-        <BecomeAnOperator />
-        <AccountProfile />
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Builder Profile</CardTitle>
+          <CardDescription>The Renown profile you use to sign in.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <AccountProfile />
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>My Renown Identity</CardTitle>
+          <CardDescription>The Renown profile you use to sign in.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <RenownIdentity />
+        </CardContent>
+      </Card>
+    </div>
   )
 }
