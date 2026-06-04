@@ -1,7 +1,7 @@
 'use client'
 
+import { PowerhouseSDKProvider } from '@achra/sdk/react'
 import { toast } from 'sonner'
-import { PowerhouseSDKProvider } from '@/modules/sdk'
 import type { ReactNode } from 'react'
 
 interface SDKProviderProps {
@@ -20,6 +20,10 @@ export function SDKProvider({ appName, renownUrl, enabled, children }: SDKProvid
   return (
     <PowerhouseSDKProvider
       appName={appName}
+      // Env access stays in app code so Next inlines `NEXT_PUBLIC_SWITCHBOARD_URL`
+      // into the client bundle; the package never reads `process.env`. Falls back
+      // to the SDK's localhost default when unset.
+      switchboardUrl={process.env.NEXT_PUBLIC_SWITCHBOARD_URL}
       renownUrl={renownUrl}
       enabled={enabled}
       onAuthError={(error) => {

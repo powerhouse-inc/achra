@@ -1,15 +1,19 @@
 'use client'
 
-import { BuilderProfile } from '@/modules/shared/components/builder-profile'
+import { useRenownAuth } from '@powerhousedao/reactor-browser'
+import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { LinksList } from '@/modules/shared/components/links-popover'
 import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
 import { getDomain } from '@/modules/shared/lib/get-domain'
+import { BecomeAnOperator } from '../become-an-operator'
+import { AccountBuilderProfile } from './account-builder-profile'
 import { AccountProfileEmpty } from './account-profile-empty'
 import { AccountProfileError } from './account-profile-error'
 import { AccountProfileSkeleton } from './account-profile-skeleton'
 
 function AccountProfile() {
+  const auth = useRenownAuth()
   const { drivesQuery, profileQuery, driveSlug, builderProfileId } = useMyBuilderProfile()
 
   if (drivesQuery.isPending) return <AccountProfileSkeleton />
@@ -26,24 +30,22 @@ function AccountProfile() {
 
   return (
     <div className="flex flex-col gap-5">
-      <h3 className="leading-none font-semibold">
-        {profile.isOperator ? 'Operator Profile' : 'Builder Profile'}
-      </h3>
-
-      <BuilderProfile
+      <AccountBuilderProfile
         name={profile.name}
         code={profile.code}
-        status={profile.status}
+        address={auth.status === 'authorized' ? auth.address : undefined}
         image={profile.icon ?? ''}
         isOperator={profile.isOperator}
       />
+
+      <BecomeAnOperator />
 
       {profile.skills.length > 0 && (
         <div className="flex flex-col gap-2">
           <span className="text-muted-foreground text-sm font-medium">Skills</span>
           <div className="flex flex-wrap gap-1.5">
             {profile.skills.map((skill) => (
-              <BuildersSkillsChip key={skill} skill={skill} />
+              <BuildersSkillsChip key={skill} skill={skill as BuilderSkill} />
             ))}
           </div>
         </div>

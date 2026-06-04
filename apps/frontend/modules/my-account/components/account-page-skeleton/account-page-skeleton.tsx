@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader } from '@achra/ui/card'
 import { Skeleton } from '@achra/ui/skeleton'
+import { AccountProfileSkeleton } from '@/modules/my-account/components/account-profile'
+import { RenownIdentitySkeleton } from '@/modules/my-account/components/renown-identity'
 import { SettingsNavSkeleton } from '@/modules/my-account/components/settings-nav'
-
-const FIELD_KEYS = ['name', 'date-of-birth', 'language'] as const
 
 function AccountPageSkeleton() {
   return (
@@ -18,31 +18,31 @@ function AccountPageSkeleton() {
         <SettingsNavSkeleton />
 
         <main>
-          {/* account form card */}
-          <Card>
-            <CardHeader>
-              {/* card title + description */}
-              <Skeleton className="h-5 w-24" />
-              <Skeleton className="h-4 w-full max-w-xs" />
-            </CardHeader>
-            <CardContent>
-              {/* field group (gap-7 mirrors FieldGroup) */}
-              <div className="flex w-full flex-col gap-7">
-                {FIELD_KEYS.map((key) => (
-                  // field: label + control + description (gap-3 mirrors Field)
-                  <div key={key} className="flex w-full flex-col gap-3">
-                    <Skeleton className="h-4 w-24" />
-                    <Skeleton className="h-9 w-full" />
-                    <Skeleton className="h-4 w-full max-w-sm" />
-                  </div>
-                ))}
-                {/* submit button */}
-                <div>
-                  <Skeleton className="h-9 w-32" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex flex-col gap-6">
+            {/* builder profile card */}
+            <Card>
+              <CardHeader>
+                {/* card title + description */}
+                <Skeleton className="h-5 w-32" />
+                <Skeleton className="h-4 w-full max-w-xs" />
+              </CardHeader>
+              <CardContent className="flex flex-col gap-6">
+                <AccountProfileSkeleton />
+              </CardContent>
+            </Card>
+
+            {/* renown identity card */}
+            <Card>
+              <CardHeader>
+                {/* card title + description */}
+                <Skeleton className="h-5 w-40" />
+                <Skeleton className="h-4 w-full max-w-xs" />
+              </CardHeader>
+              <CardContent className="flex flex-col gap-6">
+                <RenownIdentitySkeleton />
+              </CardContent>
+            </Card>
+          </div>
         </main>
       </div>
     </div>

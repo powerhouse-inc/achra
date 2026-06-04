@@ -1,12 +1,8 @@
 'use client'
 
+import { useSignedMutation } from '@achra/sdk/react'
 import { useQueryClient } from '@tanstack/react-query'
 import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
-import {
-  createBuilderWorkspace,
-  createOperatorOfferingDrive,
-  useSignedMutation,
-} from '@/modules/sdk'
 import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 
 type SpinUpPersonaId = 'operator' | 'builder'
@@ -21,28 +17,23 @@ function useSpinUpDrive() {
   const queryClient = useQueryClient()
 
   return useSignedMutation<SpinUpDriveInput, BuilderDriveLink>({
-    mutationFn: async ({ personaId, name, ensName }, { signer, address }) => {
-      const isOperator = personaId === 'operator'
+    mutationFn: async ({ personaId, name, ensName }, { signer, address, client }) => {
+      // Idempotent + role-aware: an operator persona ensures both the builder
+      // workspace and the operator role; a builder persona ensures just the
+      // builder workspace. Already-provisioned roles are skipped (no dupes).
+      const result = await client.workspaces.ensure(
+        personaId === 'operator' ? ['builder', 'operator'] : ['builder'],
+        { signer, address, name, ensName },
+      )
 
-      const workspace = await createBuilderWorkspace({
-        signer,
-        address,
-        name,
-        ensName,
-        isOperator,
-      })
-
-      if (isOperator) {
-        await createOperatorOfferingDrive({ signer, address, name, ensName })
-      }
-
+      const driveSlug = result.builderDriveSlug ?? ''
       return {
         __typename: 'BuilderDriveLink',
-        driveId: workspace.driveId,
-        driveSlug: workspace.driveSlug,
-        driveName: workspace.driveName,
-        driveLink: driveLinkFor(workspace.driveSlug),
-        builderProfileId: workspace.builderProfileId,
+        driveId: result.builderDriveId ?? '',
+        driveSlug,
+        driveName: result.builderDriveName ?? '',
+        driveLink: driveLinkFor(driveSlug),
+        builderProfileId: result.builderProfileId,
       }
     },
     onSuccess: () => {

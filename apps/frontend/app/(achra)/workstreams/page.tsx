@@ -1,4 +1,5 @@
-import { notFound } from 'next/navigation'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
+import { Clock } from 'lucide-react'
 import { Suspense } from 'react'
 import { ErrorBoundaryWithPresets } from '@/modules/shared/components/error-state'
 import { PageContent } from '@/modules/shared/components/page-containers'
@@ -20,7 +21,21 @@ interface WorkstreamsPageProps {
 
 export default async function WorkstreamsPage({ searchParams }: WorkstreamsPageProps) {
   if (!ff.workstreams.WORKSTREAMS_ENABLED) {
-    return notFound()
+    return (
+      <PageContent>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <Clock />
+            </EmptyMedia>
+            <EmptyTitle>Coming soon</EmptyTitle>
+            <EmptyDescription>
+              Workstreams aren&apos;t available just yet. Check back soon.
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      </PageContent>
+    )
   }
 
   const searchParamsString = JSON.stringify(await searchParams)

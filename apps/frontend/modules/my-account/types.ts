@@ -6,8 +6,3 @@ export interface SettingsNavSection {
   href: Route
   icon: LucideIcon
 }
-
-export interface LanguageOption {
-  value: string
-  label: string
-}

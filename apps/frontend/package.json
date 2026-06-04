@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@achra/design-system": "workspace:*",
+    "@achra/sdk": "workspace:*",
     "@achra/ui": "workspace:*",
     "@date-fns/utc": "^2.1.1",
     "@emotion/is-prop-valid": "^1.4.0",

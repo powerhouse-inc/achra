@@ -1,6 +1,9 @@
 'use client'
 
+import { Button } from '@achra/ui/button'
 import { BlurText } from '@achra/ui/react-bits/blur-text'
+import { motion } from 'motion/react'
+import Link from 'next/link'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 
 function HomeHero() {
@@ -59,6 +62,21 @@ function HomeHero() {
               direction="bottom"
             />
           </div>
+
+          <motion.div
+            className="mt-8 flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4"
+            initial={{ filter: 'blur(10px)', opacity: 0, y: 50 }}
+            animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9, ease: 'easeOut' }}
+            style={{ willChange: 'transform, filter, opacity' }}
+          >
+            <Button variant="default" className="h-10 w-full sm:w-60" asChild>
+              <Link href="/services">Explore Services</Link>
+            </Button>
+            <Button variant="secondary" className="h-10 w-full sm:w-60" asChild>
+              <Link href="/get-started?intent=operator">Offer Services</Link>
+            </Button>
+          </motion.div>
         </div>
       </div>
     </section>
