@@ -100,7 +100,7 @@ export async function createOperatorOfferingDrive(
     name?: string
     ensName?: string
   },
-): Promise<{ driveId: string }> {
+): Promise<{ driveId: string; driveSlug: string; driveName: string }> {
   const naming = deriveDriveNaming({
     name: opts.name,
     ensName: opts.ensName,
@@ -120,7 +120,11 @@ export async function createOperatorOfferingDrive(
   workspace.touch()
   await workspace.commit()
 
-  return { driveId: workspace.driveId }
+  return {
+    driveId: workspace.driveId,
+    driveSlug: naming.offeringSlug,
+    driveName: naming.offeringDisplayName,
+  }
 }
 
 /**

@@ -45,6 +45,8 @@ interface ProvisionState {
   builderDriveSlug?: string
   builderDriveName?: string
   operatorDriveId?: string
+  operatorDriveSlug?: string
+  operatorDriveName?: string
 }
 
 interface RoleDefinition {
@@ -82,13 +84,15 @@ export const roles: Record<RoleId, RoleDefinition> = {
     // The operator's artifact is the service-offering drive.
     detect: (existing) => existing.drives.some((drive) => isOperatorDriveName(drive.driveName)),
     provision: async (state) => {
-      const { driveId } = await createOperatorOfferingDrive(state.ctx, {
+      const { driveId, driveSlug, driveName } = await createOperatorOfferingDrive(state.ctx, {
         signer: state.identity.signer,
         address: state.identity.address,
         name: state.identity.name,
         ensName: state.identity.ensName,
       })
       state.operatorDriveId = driveId
+      state.operatorDriveSlug = driveSlug
+      state.operatorDriveName = driveName
       // Mark the builder profile as an operator. The profile exists by now
       // (created above, or pre-existing — `operator` dependsOn `builder`).
       if (state.builderProfileId) {
@@ -109,6 +113,8 @@ export interface EnsureRolesResult {
   builderDriveName?: string
   builderProfileId?: string
   operatorDriveId?: string
+  operatorDriveSlug?: string
+  operatorDriveName?: string
 }
 
 /**
@@ -168,6 +174,8 @@ export async function ensureRoles(
     builderDriveName: state.builderDriveName,
     builderProfileId: state.builderProfileId,
     operatorDriveId: state.operatorDriveId,
+    operatorDriveSlug: state.operatorDriveSlug,
+    operatorDriveName: state.operatorDriveName,
   }
 }
 
