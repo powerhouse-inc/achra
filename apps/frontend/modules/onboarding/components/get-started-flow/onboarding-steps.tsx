@@ -18,9 +18,11 @@ type Phase = 'choose-role' | 'spinning-up' | 'done'
 
 interface OnboardingStepsProps {
   onComplete: () => void
+  /** Pre-selects a persona on first render (e.g. operator intent from the hero). */
+  defaultPersonaId?: PersonaId
 }
 
-function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
+function OnboardingSteps({ onComplete, defaultPersonaId }: OnboardingStepsProps) {
   const auth = useRenownAuth()
   const [phase, setPhase] = useState<Phase>('choose-role')
   const [createdDrive, setCreatedDrive] = useState<BuilderDriveLink | null>(null)
@@ -30,7 +32,7 @@ function OnboardingSteps({ onComplete }: OnboardingStepsProps) {
   const form = useForm<StepOneValues>({
     resolver: zodResolver(stepOneSchema),
     defaultValues: {
-      personaId: undefined as unknown as PersonaId,
+      personaId: defaultPersonaId ?? (undefined as unknown as PersonaId),
       displayName: '',
     },
   })

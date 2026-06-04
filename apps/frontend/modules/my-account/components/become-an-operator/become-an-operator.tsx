@@ -2,9 +2,9 @@
 
 import { Button } from '@achra/ui/button'
 import { useState } from 'react'
+import { BecomeAnOperatorDialog } from '@/modules/shared/components/become-an-operator'
 import OperatorIcon from '@/modules/shared/components/svgs/operator-icon.svg'
 import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
-import { BecomeAnOperatorDialog } from './become-an-operator-dialog'
 
 function BecomeAnOperator() {
   const { profileQuery } = useMyBuilderProfile()

@@ -74,7 +74,7 @@ function HomeHero() {
               <Link href="/services">Explore Services</Link>
             </Button>
             <Button variant="secondary" className="h-10 w-full sm:w-60" asChild>
-              <Link href="/get-started">Offer Services</Link>
+              <Link href="/get-started?intent=operator">Offer Services</Link>
             </Button>
           </motion.div>
         </div>
