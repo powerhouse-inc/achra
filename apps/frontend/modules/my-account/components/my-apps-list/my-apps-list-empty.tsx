@@ -3,7 +3,7 @@ import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@a
 import { HardDrive } from 'lucide-react'
 import Link from 'next/link'
 
-function MyDrivesListEmpty() {
+function MyAppsListEmpty() {
   return (
     <Empty>
       <EmptyHeader>
@@ -11,7 +11,7 @@ function MyDrivesListEmpty() {
           <HardDrive aria-hidden="true" />
         </EmptyMedia>
         <EmptyTitle>Finish setting up your account</EmptyTitle>
-        <EmptyDescription>Complete onboarding to create your first drive.</EmptyDescription>
+        <EmptyDescription>Complete onboarding to create your first app.</EmptyDescription>
       </EmptyHeader>
       <Button asChild>
         <Link href="/get-started">Continue onboarding</Link>
@@ -20,4 +20,4 @@ function MyDrivesListEmpty() {
   )
 }
 
-export { MyDrivesListEmpty }
+export { MyAppsListEmpty }

@@ -3,7 +3,7 @@ import type { LanguageOption, SettingsNavSection } from '@/modules/my-account/ty
 
 export const SETTINGS_NAV_SECTIONS: readonly SettingsNavSection[] = [
   { label: 'Account', href: '/my-account', icon: Shield },
-  { label: 'My Drives', href: '/my-account/drives', icon: HardDrive },
+  { label: 'My Apps', href: '/my-account/apps', icon: HardDrive },
 ]
 
 export const LANGUAGE_OPTIONS: readonly LanguageOption[] = [

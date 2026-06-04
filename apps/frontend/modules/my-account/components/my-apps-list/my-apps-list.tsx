@@ -1,30 +1,30 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@achra/ui/card'
-import { MyDrivesListEmpty } from '@/modules/my-account/components/my-drives-list/my-drives-list-empty'
-import { MyDrivesListError } from '@/modules/my-account/components/my-drives-list/my-drives-list-error'
-import { MyDrivesListSkeleton } from '@/modules/my-account/components/my-drives-list/my-drives-list-skeleton'
+import { MyAppsListEmpty } from '@/modules/my-account/components/my-apps-list/my-apps-list-empty'
+import { MyAppsListError } from '@/modules/my-account/components/my-apps-list/my-apps-list-error'
+import { MyAppsListSkeleton } from '@/modules/my-account/components/my-apps-list/my-apps-list-skeleton'
 import { useUserDrives } from '@/modules/shared/hooks/use-user-drives'
 import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 import { ConnectLink } from '@/shared/components/connect-link/connect-link'
 import type { Route } from 'next'
 
-function MyDrivesList() {
+function MyAppsList() {
   const { data: drives, isPending, isError, refetch } = useUserDrives()
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Drives</CardTitle>
+        <CardTitle>Apps</CardTitle>
         <CardDescription>Your workspaces for managing documents in Connect.</CardDescription>
       </CardHeader>
       <CardContent>
         {isPending ? (
-          <MyDrivesListSkeleton />
+          <MyAppsListSkeleton />
         ) : isError ? (
-          <MyDrivesListError onRetry={() => void refetch()} />
+          <MyAppsListError onRetry={() => void refetch()} />
         ) : drives.length === 0 ? (
-          <MyDrivesListEmpty />
+          <MyAppsListEmpty />
         ) : (
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
             {drives.map((drive) => (
@@ -44,4 +44,4 @@ function MyDrivesList() {
   )
 }
 
-export { MyDrivesList }
+export { MyAppsList }

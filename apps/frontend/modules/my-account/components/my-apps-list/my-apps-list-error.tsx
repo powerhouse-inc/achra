@@ -2,18 +2,18 @@ import { Button } from '@achra/ui/button'
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@achra/ui/empty'
 import { HardDrive } from 'lucide-react'
 
-interface MyDrivesListErrorProps {
+interface MyAppsListErrorProps {
   onRetry: () => void
 }
 
-function MyDrivesListError({ onRetry }: MyDrivesListErrorProps) {
+function MyAppsListError({ onRetry }: MyAppsListErrorProps) {
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <HardDrive aria-hidden="true" />
         </EmptyMedia>
-        <EmptyTitle>We couldn&apos;t load your drives</EmptyTitle>
+        <EmptyTitle>We couldn&apos;t load your apps</EmptyTitle>
         <EmptyDescription>Something went wrong. Try again in a moment.</EmptyDescription>
       </EmptyHeader>
       <Button variant="outline" onClick={onRetry}>
@@ -23,4 +23,4 @@ function MyDrivesListError({ onRetry }: MyDrivesListErrorProps) {
   )
 }
 
-export { MyDrivesListError }
+export { MyAppsListError }

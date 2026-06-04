@@ -1,1 +1,1 @@
-export { MyDrivesList } from './my-drives-list'
+export { MyAppsList } from './my-apps-list'
