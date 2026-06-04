@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsAuthenticated } from '@achra/sdk/react'
 import { Alert, AlertDescription, AlertTitle } from '@achra/ui/alert'
 import { Button } from '@achra/ui/button'
 import { Card, CardContent } from '@achra/ui/card'
@@ -9,7 +10,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2, Send } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useIsAuthenticated } from '@/modules/sdk'
 import { useSubmitPurchaseRequest } from '@/modules/service-purchase/hooks/use-submit-purchase-request'
 import { clearServicePurchasePersistedState } from '@/modules/service-purchase/lib/persistence-utils'
 import {

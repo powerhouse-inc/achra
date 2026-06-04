@@ -1,32 +1,30 @@
 'use client'
 
-import { isOperatorDriveName } from '@achra/sdk'
+import { useClient } from '@achra/sdk/react'
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
-import { useGetBuilderDrivesQuery } from '@/modules/__generated__/graphql/switchboard-generated'
+import { useQuery } from '@tanstack/react-query'
 
+/**
+ * The current user's drives, fetched through the SDK (`client.workspaces.list`,
+ * which owns the `getBuilderDrives` query and sorts operator/service-offering
+ * drives last). This hook is a thin React Query wrapper: it owns caching and
+ * auth-gating; the SDK owns the query + shape.
+ *
+ * Query key stays `['GetBuilderDrives', …]` so the post-mutation invalidations
+ * in the onboarding / purchase hooks keep matching.
+ */
 function useUserDrives() {
+  const client = useClient()
   const auth = useRenownAuth()
   const address = auth.address
   const enabled = auth.status === 'authorized' && Boolean(address)
 
-  return useGetBuilderDrivesQuery(
-    { filter: { ethereumAddress: address ?? '' } },
-    {
-      enabled,
-      staleTime: 30_000,
-      // Sort operator/service-offering drives last so the team-admin drive leads
-      // the navbar and "My Drives" list. Builder-drive consumers (profile
-      // resolution, the purchase workspace) no longer rely on order — they match
-      // the profile-bearing drive explicitly by `builderProfileId` — but a stable,
-      // predictable order still reads better in the lists. Stable sort preserves
-      // intra-group order.
-      select: (data) =>
-        [...data.getBuilderDrives].sort(
-          (a, b) =>
-            Number(isOperatorDriveName(a.driveName)) - Number(isOperatorDriveName(b.driveName)),
-        ),
-    },
-  )
+  return useQuery({
+    queryKey: ['GetBuilderDrives', address ?? ''],
+    queryFn: async () => client.workspaces.list({ address: address ?? '' }),
+    enabled,
+    staleTime: 30_000,
+  })
 }
 
 export { useUserDrives }

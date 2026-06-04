@@ -171,20 +171,31 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
   const address = auth.address
   const displayAddress = auth.displayAddress ?? address
   const profile = profileQuery.data
-  // `|| undefined` (not `??`) coerces an empty-string icon to undefined so the
-  // Avatar falls through to the Identicon instead of rendering a broken `src=""`.
-  const profileImage = profile?.icon || undefined
   const displayLabel = profile?.name ?? auth.displayName ?? displayAddress
+  // Mirror the My Account page's avatar logic: with a builder profile, show its
+  // icon and fall back to the name's initial (see `AccountBuilderProfile`);
+  // otherwise show the Renown avatar and fall back to the address Identicon (see
+  // `RenownIdentity`). `|| undefined` (not `??`) coerces an empty-string image to
+  // undefined so the Avatar falls through to the fallback instead of a broken
+  // `src=""`.
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing -- empty string must coerce to undefined
+  const avatarImage = (profile ? profile.icon : auth.avatarUrl) || undefined
 
   return (
     <DropdownMenu open={open} onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="items-center gap-2 px-2">
           <Avatar className="size-5">
-            <AvatarImage src={profileImage} alt={displayLabel} className="object-cover" />
-            <AvatarFallback className="bg-transparent">
-              <Identicon value={address} className="size-full" />
-            </AvatarFallback>
+            <AvatarImage src={avatarImage} alt={displayLabel} className="object-cover" />
+            {profile ? (
+              <AvatarFallback className="text-[10px] font-semibold">
+                {profile.name?.charAt(0).toUpperCase() ?? 'U'}
+              </AvatarFallback>
+            ) : (
+              <AvatarFallback className="bg-transparent">
+                <Identicon value={address} className="size-full" />
+              </AvatarFallback>
+            )}
           </Avatar>
           <span>{displayLabel}</span>
           <ChevronDown className="size-4" />

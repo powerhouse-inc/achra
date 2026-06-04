@@ -1,16 +1,8 @@
 'use client'
 
-import { configureSDK } from '@achra/sdk'
 import { PowerhouseSDKProvider } from '@achra/sdk/react'
 import { toast } from 'sonner'
 import type { ReactNode } from 'react'
-
-// Point the (framework-agnostic) SDK at this app's reactor endpoint. The env
-// access stays in app code so Next inlines `NEXT_PUBLIC_SWITCHBOARD_URL` into
-// the client bundle; the package never reads `process.env`. Runs at module load
-// — before any reactor call — and is a no-op when the env var is unset (the SDK
-// keeps its localhost default).
-configureSDK({ switchboardUrl: process.env.NEXT_PUBLIC_SWITCHBOARD_URL })
 
 interface SDKProviderProps {
   appName: string
@@ -28,6 +20,10 @@ export function SDKProvider({ appName, renownUrl, enabled, children }: SDKProvid
   return (
     <PowerhouseSDKProvider
       appName={appName}
+      // Env access stays in app code so Next inlines `NEXT_PUBLIC_SWITCHBOARD_URL`
+      // into the client bundle; the package never reads `process.env`. Falls back
+      // to the SDK's localhost default when unset.
+      switchboardUrl={process.env.NEXT_PUBLIC_SWITCHBOARD_URL}
       renownUrl={renownUrl}
       enabled={enabled}
       onAuthError={(error) => {

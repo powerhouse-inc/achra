@@ -234,10 +234,9 @@ function mapUsageLimits(
     // satisfy that — defend at runtime.
     const legacyReset = (ul as { resetCycle?: string | null }).resetCycle
     const accrualCycle: AccrualCycle =
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       ul.accrualCycle ??
       (legacyReset && legacyReset !== 'NONE' ? (legacyReset as AccrualCycle) : 'MONTHLY')
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
     const metricType: MetricType = ul.metricType ?? 'NON_CUMULATIVE'
 
     return {

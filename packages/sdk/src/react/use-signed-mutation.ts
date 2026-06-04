@@ -1,13 +1,17 @@
 'use client'
 
 import { useMutation, type UseMutationResult } from '@tanstack/react-query'
-import { useAuth } from '@/modules/sdk/auth/use-auth'
-import { SDKError } from '@/modules/sdk/errors'
 import type { ISigner } from 'document-model'
+import type { PowerhouseClient } from '../client/create-client'
+import { SDKError } from '../errors'
+import { useAuth } from './use-auth'
+import { useClient } from './client-context'
 
 export interface SignedContext {
   address: string
   signer: ISigner
+  /** The SDK client, so `mutationFn` can call `client.workspaces.*` etc. */
+  client: PowerhouseClient
 }
 
 export interface UseSignedMutationOptions<TInput, TResult> {
@@ -43,6 +47,7 @@ export function useSignedMutation<TInput, TResult>(
   options: UseSignedMutationOptions<TInput, TResult>,
 ): UseMutationResult<TResult, Error, TInput> {
   const auth = useAuth()
+  const client = useClient()
 
   return useMutation<TResult, Error, TInput>({
     mutationFn: async (input) => {
@@ -55,7 +60,7 @@ export function useSignedMutation<TInput, TResult>(
           'Your wallet is still initializing. Please try again in a moment.',
         )
       }
-      return options.mutationFn(input, { address: auth.address, signer: auth.signer })
+      return options.mutationFn(input, { address: auth.address, signer: auth.signer, client })
     },
     onSuccess: options.onSuccess,
     onError: options.onError,

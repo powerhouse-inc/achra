@@ -1,6 +1,7 @@
 'use client'
 
 import { useRenownAuth } from '@powerhousedao/reactor-browser'
+import type { BuilderSkill } from '@/modules/__generated__/graphql/switchboard-generated'
 import { BuildersSkillsChip } from '@/modules/shared/components/chips/builders-skills-chip'
 import { LinksList } from '@/modules/shared/components/links-popover'
 import { useMyBuilderProfile } from '@/modules/shared/hooks/use-my-builder-profile'
@@ -44,7 +45,7 @@ function AccountProfile() {
           <span className="text-muted-foreground text-sm font-medium">Skills</span>
           <div className="flex flex-wrap gap-1.5">
             {profile.skills.map((skill) => (
-              <BuildersSkillsChip key={skill} skill={skill} />
+              <BuildersSkillsChip key={skill} skill={skill as BuilderSkill} />
             ))}
           </div>
         </div>

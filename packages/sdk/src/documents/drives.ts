@@ -4,8 +4,8 @@ import {
   driveDocumentType,
 } from '@powerhousedao/shared/document-drive'
 import { createSignedHeader } from '@powerhousedao/shared/document-model'
-import { reactorClient } from '@/modules/sdk/client/reactor-client'
 import type { ISigner } from 'document-model'
+import type { ClientContext } from '../context'
 
 export interface CreateDriveOptions {
   name: string
@@ -14,6 +14,12 @@ export interface CreateDriveOptions {
   icon?: string
   /** `header.meta.preferredEditor` the drive opens with in Connect. */
   preferredEditor?: string
+  /**
+   * Pre-generated client UUID. Pass it when the caller needs the drive id
+   * before the network round-trip (e.g. the transaction stages drive-tree
+   * edits keyed on it). Defaults to the UUID `driveCreateDocument` mints.
+   */
+  id?: string
   /**
    * Signer whose session key (ECDSA-P256) signs the drive's genesis header.
    * Required — every drive must carry a verifiable creation proof.
@@ -44,7 +50,10 @@ export interface CreateDriveOptions {
  * drive afterward (`context.signer.user.address`); that is what a wallet→drive
  * reverse-lookup actually reads.
  */
-export async function createDrive(opts: CreateDriveOptions): Promise<{ driveId: string }> {
+export async function createDrive(
+  ctx: ClientContext,
+  opts: CreateDriveOptions,
+): Promise<{ driveId: string }> {
   const doc: DocumentDriveDocument = driveCreateDocument({
     global: { name: opts.name, icon: opts.icon ?? null, nodes: [] },
   })
@@ -57,11 +66,12 @@ export async function createDrive(opts: CreateDriveOptions): Promise<{ driveId: 
     doc.header.meta.preferredEditor = opts.preferredEditor
   }
 
-  const driveUuid = doc.header.id
+  const driveUuid = opts.id ?? doc.header.id
+  doc.header.id = driveUuid
   const signedHeader = await createSignedHeader(doc.header, driveDocumentType, opts.signer)
   doc.header = { ...signedHeader, id: driveUuid }
 
-  const res = await reactorClient.CreateDocument({
+  const res = await ctx.reactorClient.CreateDocument({
     document: doc as unknown as Record<string, unknown>,
   })
   return { driveId: res.createDocument.id }
@@ -76,8 +86,11 @@ export async function createDrive(opts: CreateDriveOptions): Promise<{ driveId: 
  * preferred over scanning every drive's outgoing children. Returns the first
  * matching drive's id, or null if none holds the document.
  */
-export async function findDriveContainingDocument(documentId: string): Promise<string | null> {
-  const res = await reactorClient.GetDocumentIncomingRelationships({
+export async function findDriveContainingDocument(
+  ctx: ClientContext,
+  documentId: string,
+): Promise<string | null> {
+  const res = await ctx.reactorClient.GetDocumentIncomingRelationships({
     targetIdentifier: documentId,
     relationshipType: 'child',
   })
