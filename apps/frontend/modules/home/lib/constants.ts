@@ -1,5 +1,4 @@
 import type { BuildNetworkFeatureColumn } from '@/modules/home/types'
-import ff from '@/shared/lib/feature-flags'
 
 /** Enable the floating "ships on waves" animation on build-network collage layers. */
 export const ENABLE_COLLAGE_FLOAT_ANIMATION: boolean = true
@@ -27,7 +26,6 @@ export const BUILD_NETWORK_V2_FEATURES: BuildNetworkFeatureColumn[] = [
     description:
       'Discover active projects and roadmaps from leading network organizations. Focus on building with built-in operational support.',
     cta: { label: 'Browse workstreams', href: '/workstreams', tone: 'violet' },
-    enabled: ff.workstreams.WORKSTREAMS_ENABLED,
   },
   {
     variant: 'operators',

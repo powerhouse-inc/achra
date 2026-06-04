@@ -84,9 +84,6 @@ export {
   type BuilderProfile,
   type BuilderProfileLink,
   type BuilderProfileOperationalHubMember,
-  type BuilderProfileProject,
-  type BuilderProfileProjectScope,
-  type BuilderProfileProgress,
   getBuilderProfile,
 } from './reads/builder-profile'
 
