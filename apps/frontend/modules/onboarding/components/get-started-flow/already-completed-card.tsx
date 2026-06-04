@@ -29,7 +29,7 @@ function AlreadyCompletedCard() {
           </Button>
           <Button className="w-full min-w-0" asChild disabled={!drive}>
             {drive ? (
-              <a href={drive.driveLink as string} target="_blank" rel="noopener noreferrer">
+              <a href={drive.driveLink} target="_blank" rel="noopener noreferrer">
                 Explore my Workspace
               </a>
             ) : (
