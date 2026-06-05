@@ -23,8 +23,8 @@ interface UpgradeToOperatorCardProps {
  */
 function UpgradeToOperatorCard({ open, onOpenChange }: UpgradeToOperatorCardProps) {
   const { profileQuery } = useMyBuilderProfile()
-  // Pass the builder's name (best-effort, non-blocking) so the new Service
-  // Offering drive keeps the same prefix as their existing Team Admin drive.
+  // Pass the builder's name (best-effort, non-blocking) as identity for the
+  // upgrade. The Service Offering drive itself is named canonically (no prefix).
   const profileName = profileQuery.data?.name ?? undefined
 
   return (

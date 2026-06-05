@@ -30,25 +30,26 @@ describe('isOperatorDriveName', () => {
 })
 
 describe('deriveDriveNaming', () => {
-  it('prefers name, then teamName, then ensName, then a wallet short label', () => {
+  it('names the base drive with the bare canonical name, no identity prefix', () => {
     expect(deriveDriveNaming({ address: ADDRESS, name: 'Acme' }).baseDisplayName).toBe(
-      `Acme ${PRIMARY_DRIVE_NAME}`,
+      PRIMARY_DRIVE_NAME,
     )
     expect(
       deriveDriveNaming({ address: ADDRESS, teamName: 'Team', ensName: 'x.eth' }).baseDisplayName,
-    ).toBe(`Team ${PRIMARY_DRIVE_NAME}`)
-    expect(deriveDriveNaming({ address: ADDRESS, ensName: 'vitalik.eth' }).baseDisplayName).toBe(
-      `vitalik.eth ${PRIMARY_DRIVE_NAME}`,
-    )
-    // wallet fallback: 0x<first4>…<last4>
-    expect(deriveDriveNaming({ address: ADDRESS }).baseDisplayName).toBe(
-      `0x1f3b…a91c ${PRIMARY_DRIVE_NAME}`,
+    ).toBe(PRIMARY_DRIVE_NAME)
+    expect(deriveDriveNaming({ address: ADDRESS }).baseDisplayName).toBe(PRIMARY_DRIVE_NAME)
+    // identity never leaks into the drive name
+    expect(deriveDriveNaming({ address: ADDRESS, name: 'Acme' }).baseDisplayName).not.toContain(
+      'Acme',
     )
   })
 
-  it('derives offering display name with the operator suffix', () => {
+  it('names the offering drive with the bare canonical name, no identity prefix', () => {
     expect(deriveDriveNaming({ address: ADDRESS, name: 'Acme' }).offeringDisplayName).toBe(
-      `Acme ${OPERATOR_DRIVE_NAME}`,
+      OPERATOR_DRIVE_NAME,
+    )
+    expect(deriveDriveNaming({ address: ADDRESS, name: 'Acme' }).offeringDisplayName).not.toContain(
+      'Acme',
     )
   })
 
