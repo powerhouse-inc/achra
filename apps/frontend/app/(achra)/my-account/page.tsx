@@ -16,7 +16,6 @@ export default function MyAccountPage() {
       <Card>
         <CardHeader>
           <AccountProfileTitle />
-          <CardDescription>The Renown profile you use to sign in.</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
           <AccountProfile />

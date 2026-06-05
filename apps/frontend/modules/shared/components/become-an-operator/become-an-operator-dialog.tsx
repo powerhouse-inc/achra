@@ -18,7 +18,7 @@ import { useBecomeAnOperator } from './use-become-an-operator'
 interface BecomeAnOperatorDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  /** The builder's display name, so the offering drive is named consistently. */
+  /** The builder's display name, passed through as identity for the upgrade. */
   profileName?: string
 }
 
