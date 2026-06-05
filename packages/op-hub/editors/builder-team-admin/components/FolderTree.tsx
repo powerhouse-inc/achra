@@ -499,7 +499,8 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
         doc.state as unknown as { global: SubscriptionInstanceState }
       ).global;
       const label = state.resource?.label ?? "";
-      return label.trim().toLowerCase() === "operational hub";
+      const isActive = state.status === "ACTIVE";
+      return isActive && label.trim().toLowerCase() === "operational hub";
     });
   }, [documentsInDrive, serviceSubscriptionsNodeIds]);
 
