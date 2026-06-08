@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  deriveCustomerFolderId,
   deriveDriveNaming,
   isOperatorDriveName,
   OPERATOR_DRIVE_NAME,
@@ -69,5 +70,29 @@ describe('deriveDriveNaming', () => {
     expect(naming.baseSlug).not.toBe('acme')
     // two calls produce different random slugs
     expect(deriveDriveNaming({ address: ADDRESS, name: 'Acme' }).baseSlug).not.toBe(naming.baseSlug)
+  })
+})
+
+describe('deriveCustomerFolderId', () => {
+  // Mirrors `findUuid` in reactor-browser: node ids must round-trip through this
+  // to be resolvable from a URL slug.
+  const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
+
+  it('is deterministic for the same address', () => {
+    expect(deriveCustomerFolderId(ADDRESS)).toBe(deriveCustomerFolderId(ADDRESS))
+  })
+
+  it('is case-insensitive and whitespace-insensitive on the address', () => {
+    expect(deriveCustomerFolderId(ADDRESS.toUpperCase())).toBe(deriveCustomerFolderId(ADDRESS))
+    expect(deriveCustomerFolderId(`  ${ADDRESS}  `)).toBe(deriveCustomerFolderId(ADDRESS))
+  })
+
+  it('produces a UUID-shaped id (URL/node-id safe)', () => {
+    expect(deriveCustomerFolderId(ADDRESS)).toMatch(UUID_RE)
+  })
+
+  it('maps distinct addresses to distinct ids', () => {
+    const other = '0x2c4d0000000000000000000000000000000000b82d'
+    expect(deriveCustomerFolderId(other)).not.toBe(deriveCustomerFolderId(ADDRESS))
   })
 })

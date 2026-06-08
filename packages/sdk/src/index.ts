@@ -67,6 +67,8 @@ export {
 } from './workspaces/purchases'
 export {
   BUILDER_DRIVE_EDITOR,
+  CUSTOMER_FOLDER_NAMESPACE,
+  deriveCustomerFolderId,
   deriveDriveNaming,
   type DriveNaming,
   type DriveNamingInput,

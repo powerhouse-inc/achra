@@ -1,4 +1,5 @@
 import { generateId } from 'document-model/core'
+import { v5 as uuidv5 } from 'uuid'
 
 export function slugify(value: string): string {
   return value
@@ -7,6 +8,26 @@ export function slugify(value: string): string {
     .replace(/\s+/g, '-')
     .replace(/_/g, '-')
     .replace(/[^a-z0-9-]/g, '')
+}
+
+/**
+ * Fixed UUIDv5 namespace for deriving per-customer folder ids in an operator's
+ * Service Offering drive. NEVER change this — it would re-home every existing
+ * customer folder (the id is the rename-proof link between a folder and its
+ * customer).
+ */
+export const CUSTOMER_FOLDER_NAMESPACE = '7b6d0c2e-2c9a-4d2b-9b1e-2a4f6c8d0e12'
+
+/**
+ * Deterministic, rename-proof folder id for a customer inside an operator's
+ * drive. Seeded from the customer's wallet address (lowercased) so the same
+ * customer always maps to the same folder node id — letting the purchase flow
+ * group a customer's documents and reuse their folder across purchases even
+ * after the operator renames it. UUIDv5 output is `8-4-4-4-12` shaped, so it
+ * round-trips through the drive's URL/node id parsing.
+ */
+export function deriveCustomerFolderId(address: string): string {
+  return uuidv5(address.trim().toLowerCase(), CUSTOMER_FOLDER_NAMESPACE)
 }
 
 function addressSuffix(address: string): string {
