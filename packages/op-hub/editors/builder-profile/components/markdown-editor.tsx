@@ -154,10 +154,11 @@ export function MarkdownEditor({
             background-color: #f5f5f5;
           }
          
-        .w-md-editor-text-pre code, .w-md-editor-text-pre div {
-            font-size: 16px !important;
-            line-height: 24px !important;
-          }
+          .w-md-editor-text,
+          .w-md-editor-text-pre,
+          .w-md-editor-text-pre *,
+
+
           .w-md-editor-text-input {
             font-size: 16px !important;
             line-height: 24px !important;
