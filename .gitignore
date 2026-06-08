@@ -46,3 +46,6 @@ yarn-error.log*
 
 # ph
 .ph
+
+# bun
+bun.lock
