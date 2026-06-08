@@ -74,8 +74,8 @@ function BecomeAnOperatorDialog({ open, onOpenChange, profileName }: BecomeAnOpe
               <div className="flex flex-col gap-2">
                 <DialogTitle className="text-xl">You&apos;re now an operator!</DialogTitle>
                 <DialogDescription className="mx-auto max-w-sm">
-                  Your service offering workspace is ready. Add the services builders across Achra
-                  can subscribe to.
+                  Your service offering workspace is ready. Start offering your own services to
+                  builders across Achra.
                 </DialogDescription>
               </div>
             </div>
@@ -134,7 +134,7 @@ function BecomeAnOperatorDialog({ open, onOpenChange, profileName }: BecomeAnOpe
               <div className="flex flex-col gap-2">
                 <DialogTitle className="text-xl">Become an Operator</DialogTitle>
                 <DialogDescription className="mx-auto max-w-sm">
-                  Operators publish services that builders across Achra can subscribe to.
+                  Start offering your own services that builders across Achra can subscribe to.
                 </DialogDescription>
               </div>
             </DialogHeader>
