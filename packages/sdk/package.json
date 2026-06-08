@@ -15,7 +15,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@powerhousedao/op-hub": "workspace:*"
+    "@powerhousedao/op-hub": "workspace:*",
+    "uuid": "^11.1.0"
   },
   "peerDependencies": {
     "@powerhousedao/reactor-browser": "6.1.0-dev.14",

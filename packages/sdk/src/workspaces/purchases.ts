@@ -9,7 +9,7 @@ import type { BillingCycle as SIBillingCycle } from '@powerhousedao/op-hub/docum
 import type { ClientContext } from '../context'
 import { openWorkspace } from '../documents/workspace'
 import { createBuilderWorkspace, findOperatorDriveId } from './controllers'
-import { slugify } from './drive-naming'
+import { deriveCustomerFolderId, deriveDriveNaming, slugify } from './drive-naming'
 import { mapOfferingToSubscription } from './map-offering-to-subscription'
 
 /**
@@ -197,24 +197,46 @@ export async function purchaseService(
 
   // 8. Link both instance documents into the operator's drive so the
   //    operator dashboard (op-hub service-offering-app editor) surfaces
-  //    them. The dashboard reads resource/subscription documents nested in
-  //    the drive's "Customers" folder; these file nodes reference the same
-  //    documents created above (one document, referenced from two drives)
-  //    and registerDocument wires the drive→doc relationship so each
-  //    surfaces under the operator's view.
+  //    them. The dashboard reads resource/subscription documents nested
+  //    anywhere under the drive's "Customers" folder; these file nodes
+  //    reference the same documents created above (one document, referenced
+  //    from two drives) and registerDocument wires the drive→doc relationship
+  //    so each surfaces under the operator's view.
   const operatorWorkspace = openWorkspace(ctx, { driveId: operatorDriveId, signer })
   const customersFolderId = await operatorWorkspace.ensureFolder('Customers')
+  // Group this customer's documents under a per-customer subfolder whose id is
+  // derived deterministically from their wallet address — stable even if the
+  // operator renames the folder, so repeat purchases land in the same place.
+  const customerFolderId = deriveCustomerFolderId(address)
+  // Name the folder after the customer's builder profile, not the drive: drives
+  // now carry only a generic canonical type name ("Team Admin"), so identity
+  // lives on the profile. Prefer the profile's authoritative display name (the
+  // operator/customer may have edited it); fall back to re-deriving it from the
+  // request form exactly as the profile itself is named. The name only applies
+  // on first creation — repeat purchases reuse the folder by id and keep the
+  // operator's edits (see `ensureFolder`).
+  const profileState = builderProfileId
+    ? await ctx.documents.builderProfile.getState(builderProfileId)
+    : null
+  const customerFolderName =
+    profileState?.name?.trim() ||
+    deriveDriveNaming({ name: customer.name, teamName: customer.teamName, address })
+      .profileDisplayName
+  await operatorWorkspace.ensureFolder(customerFolderName, {
+    id: customerFolderId,
+    parentFolder: customersFolderId,
+  })
   await operatorWorkspace.registerDocument({
     documentType: ctx.documents.resourceInstance.documentType,
     id: resourceInstanceId,
     name: `${parsedTeamName} Resource Instance`,
-    parentFolder: customersFolderId,
+    parentFolder: customerFolderId,
   })
   await operatorWorkspace.registerDocument({
     documentType: ctx.documents.subscriptionInstance.documentType,
     id: subscriptionInstanceId,
     name: `${parsedTeamName} Subscription Instance`,
-    parentFolder: customersFolderId,
+    parentFolder: customerFolderId,
   })
   await operatorWorkspace.commit()
 

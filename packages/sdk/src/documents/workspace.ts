@@ -50,8 +50,15 @@ export interface AddDocumentArgs<TState extends PHBaseState, TController> {
  */
 export interface Workspace {
   readonly driveId: string
-  /** Find a folder node by name, creating it (locally) if absent. Returns its id. */
-  ensureFolder(name: string): Promise<string>
+  /**
+   * Resolve a folder node, creating it (locally) if absent. Returns its id.
+   *
+   * By default the folder is matched by NAME at the drive root. Pass `opts.id`
+   * to supply a deterministic, rename-proof id: the folder is then matched by
+   * id (so an existing folder is reused even after it was renamed/moved, never
+   * duplicated), and `opts.parentFolder` nests it under another folder.
+   */
+  ensureFolder(name: string, opts?: { id?: string; parentFolder?: string }): Promise<string>
   /** Stage a new child document (created on `commit`). Returns its id immediately. */
   addDocument<TState extends PHBaseState, TController extends { state: { global: unknown } }>(
     args: AddDocumentArgs<TState, TController>,
@@ -92,6 +99,7 @@ interface StagedDoc {
 interface PendingFolder {
   id: string
   name: string
+  parentFolder?: string
 }
 
 interface PendingFile {
@@ -125,22 +133,30 @@ function makeWorkspace(
     return drivePromise
   }
 
-  async function ensureFolder(name: string): Promise<string> {
+  async function ensureFolder(
+    name: string,
+    opts?: { id?: string; parentFolder?: string },
+  ): Promise<string> {
+    const explicitId = opts?.id
     // Only an existing drive can already hold folders; a not-yet-created drive
     // is empty, so skip the (network) load entirely.
     if (driveCreated) {
       const controller = await drive()
-      const existing = controller.state.global.nodes.find(
-        (node) => node.kind === 'folder' && node.name === name,
+      const existing = controller.state.global.nodes.find((node) =>
+        explicitId ? node.id === explicitId : node.kind === 'folder' && node.name === name,
       )
+      // An explicit id is the stable identity: reuse the node even if it was
+      // renamed/moved, so we never duplicate it or revert the operator's edits.
       if (existing) return existing.id
     }
 
-    const queued = pendingFolders.find((folder) => folder.name === name)
+    const queued = pendingFolders.find((folder) =>
+      explicitId ? folder.id === explicitId : folder.name === name,
+    )
     if (queued) return queued.id
 
-    const id = generateId()
-    pendingFolders.push({ id, name })
+    const id = explicitId ?? generateId()
+    pendingFolders.push({ id, name, parentFolder: opts?.parentFolder })
     return id
   }
 
@@ -218,7 +234,11 @@ function makeWorkspace(
 
       for (const folder of pendingFolders) {
         if (!present.has(folder.id)) {
-          controller.addFolder({ id: folder.id, name: folder.name })
+          controller.addFolder({
+            id: folder.id,
+            name: folder.name,
+            parentFolder: folder.parentFolder,
+          })
         }
       }
 
