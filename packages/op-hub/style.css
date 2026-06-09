@@ -19,6 +19,17 @@
 @source "./editors/**/*.{ts,tsx}";
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Scan the shared @achra/ui component source.
+   ──────────────────────────────────────────────────────────────────────────
+   Editors migrated to the Achra design system import shadcn primitives from
+   @achra/ui (Input, Textarea, Select, …). Those components reference semantic
+   utilities (bg-popover, border-input, ring-ring, …) whose classes Tailwind
+   only generates if it scans the component source. @achra/ui is a workspace
+   package, so we point at its real monorepo path — a directory @source into
+   node_modules is unreliable under Vite (same rationale as the editors scan). */
+@source "../ui/src/**/*.{ts,tsx}";
+
+/* ──────────────────────────────────────────────────────────────────────────
    Force-generate the dark-mode utilities used by the component libraries we
    render but DON'T author.
    ──────────────────────────────────────────────────────────────────────────
@@ -61,24 +72,31 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Lighter dark theme
+   Connect chrome → Achra dark surfaces
    ──────────────────────────────────────────────────────────────────────────
-   Connect toggles a `.dark` class on <html> and paints dark surfaces with the
-   `slate` palette (the main app background is `dark:bg-slate-900`). Tailwind v4
-   resolves those utilities to `var(--color-slate-*)` at use-time, so redefining
-   the tokens *scoped under `.dark`* retints every dark surface WITHOUT touching
-   light mode and without editing the design-system or Connect.
+   Connect toggles a `.dark` class on <html> and paints its chrome with the
+   `slate` palette — the app canvas is `bg-slate-900`, and the drive explorer's
+   panels, document tiles and "New document" buttons use `bg-slate-{600,700,800}`
+   (the design-system renders these; `bg-slate-600` alone appears 144×). Tailwind
+   v4 resolves those utilities to `var(--color-slate-*)` at use-time, so
+   redefining the slate dark end *scoped under `.dark`* retints every dark
+   surface to follow the Achra design system WITHOUT touching light mode and
+   without editing the design-system or Connect.
 
-   The design-system defaults are near-black (slate-900 = 6% lightness). The
-   values below lift the whole dark end to a softer charcoal. Tweak the final
-   lightness % of each line to taste — higher = lighter.
+   Each step is anchored to an Achra dark token (packages/design-system/theme.css
+   `.dark` block), preserving Connect's lightness order (900 darkest → 500
+   lightest):
 
-   Defaults (for reference):
-     --color-slate-500: hsl(207 8% 21%);
-     --color-slate-600: hsl(210 9% 13%);
-     --color-slate-700: hsl(204 9% 11%);
-     --color-slate-800: hsl(195 9%  9%);
-     --color-slate-900: hsl(195 6%  6%);   ← main app background
+     slate-900 → --background  #1b1e24   (app canvas)
+     slate-800 → --card        #252a34   (panels / drive-explorer surface)
+     slate-700 → (card↔accent) #2e3440   (raised tiles)
+     slate-600 → --accent      #373e4d   (buttons / hover fills — most-used)
+     slate-500 → --border      #485265   (dividers, lightest dark surface)
+
+   Defaults the design-system ships (for reference, near-black):
+     --color-slate-500: hsl(207 8% 21%);   --color-slate-600: hsl(210 9% 13%);
+     --color-slate-700: hsl(204 9% 11%);   --color-slate-800: hsl(195 9% 9%);
+     --color-slate-900: hsl(195 6% 6%);
 
    ⚠️ Selector is `:root.dark`, NOT `.dark`. The design-system ships the
    defaults above as `:root { … }` (specificity 0,1,0). A plain `.dark { … }`
@@ -88,11 +106,11 @@
    that can load after our package CSS and clobber these. `:root.dark` is 0,2,0
    (`.dark` lives on <html>, which is `:root`), so it wins regardless of order. */
 :root.dark {
-  --color-slate-900: hsl(201, 20%, 17%); /* main app background */
-  --color-slate-800: hsl(200, 4%, 26%); /* raised surfaces / panels */
-  --color-slate-700: hsl(200, 5%, 22%);
-  --color-slate-600: hsl(210, 5%, 26%);
-  --color-slate-500: hsl(210, 5%, 29%);
+  --color-slate-900: #1b1e24; /* Achra --background — app canvas */
+  --color-slate-800: #252a34; /* Achra --card — panels / tiles */
+  --color-slate-700: #2e3440; /* card → accent midpoint — raised tiles */
+  --color-slate-600: #373e4d; /* Achra --accent — buttons / hover fills */
+  --color-slate-500: #485265; /* Achra --border / --input — dividers */
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -151,4 +169,106 @@
 }
 .dark .sidebar__header {
   border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   @achra/ui form-control text color
+   ──────────────────────────────────────────────────────────────────────────
+   The shadcn @achra/ui Input/Textarea/Select set no explicit text color — they
+   inherit it (shadcn relies on Tailwind preflight's `input { color: inherit }`
+   resolving to a `text-foreground` body). The frontend gets that for free, but
+   inside Connect's editor host the inherited value resolves to a dark color in
+   dark mode, so typed text renders black-on-dark and is unreadable.
+
+   Pin the value text to the semantic `--foreground` token via the stable
+   `data-slot` attributes @achra/ui stamps on every control. This flips with the
+   theme (dark slate in light, near-white in dark), fixes every migrated editor
+   in one place, and — keyed on `data-slot` — touches ONLY @achra/ui controls,
+   never the kept document-engineering fields. Unlayered (like the overrides
+   above) so it beats Connect's prebuilt element rules. */
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"]:not([data-placeholder]) {
+  color: var(--foreground);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   @achra/ui form-control surface (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   The shadcn @achra/ui Input/Textarea/Select default to `dark:bg-input/30` (a
+   faint tint of --input). On the lifted editor cards (where --card → --accent)
+   that reads almost identical to the card surface — you can't tell it's an
+   input. A `bg-background` className doesn't fix it: `dark:bg-input/30` is a
+   `dark:`-variant utility and out-orders a plain unmodified utility in dark mode.
+
+   Pin the fill to --background (the app canvas, #1b1e24 in dark) so every
+   control sits clearly DARKER than its card and reads as an input field.
+   Unlayered (beats Tailwind's layered `dark:bg-input/30` regardless of order)
+   and `.dark`-scoped (light mode keeps its transparent-on-card look). Keyed on
+   data-slot → touches ONLY @achra/ui controls, never document-engineering
+   fields. Fixes every migrated editor in one place. */
+.dark [data-slot="input"],
+.dark [data-slot="textarea"],
+.dark [data-slot="select-trigger"] {
+  background-color: var(--background);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ObjectSetTable (@powerhousedao/document-engineering) — dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   The <ObjectSetTable> hardcodes LIGHT-mode palette classes with no `dark:`
+   variants: `text-gray-900` body text, `bg-gray-100` row hover, `bg-blue-50/
+   -100` row selection, and `border-gray-{100,300}` grid lines. Those classes
+   live in node_modules, so neither Tailwind's content scan nor `@source
+   inline` can synthesize dark counterparts — on the dark canvas the table
+   renders dark-on-dark text with a glaring WHITE hover/selection flash.
+
+   Fixed the same way as the Sidebar/form-control overrides above: restyle the
+   table's stable structure directly. Selectors hang off the `.object-set-table`
+   class on the <table> (+ the `data-selected` attr rows carry), so this themes
+   EVERY migrated editor's table in one place (16 call sites, not just
+   Contributors). `.dark .object-set-table …` is ≥(0,2,1); Tailwind wraps its
+   utilities in `:where()` (≤(0,1,0)), so we out-specify them regardless of
+   import/generation order — and since we set properties on elements (not
+   redefine tokens), the `:root.dark` load-order caveat above doesn't apply. */
+
+/* Table surface → dark --background. Rows render transparent, so on the lifted
+   editor cards (--card → --accent) the grid would inherit the card and blend in;
+   filling the table with --background makes it read as a recessed, input-like
+   data well (consistent with the form's dark inputs). The hover / selection
+   overlays and hairline borders below layer on top. */
+.dark .object-set-table {
+  background-color: var(--background);
+}
+
+/* Body text → semantic foreground (near-white in dark). Cell renderers that set
+   their own color — e.g. the muted "+ Double-click to add" placeholder — still
+   win: an explicit color on the descendant beats the inherited tbody color. */
+.dark .object-set-table tbody {
+  color: var(--foreground);
+}
+
+/* Row hover → subtle light lift instead of `bg-gray-100`'s near-white flash
+   (the reported bug). Same overlay as the sidebar hover above. */
+.dark .object-set-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Selected row → slightly stronger lift, replacing the light `bg-blue-50/-100`.
+   The blue row-number cell (`bg-blue-900`) and selection-edge borders remain as
+   the accent, so selection is still obvious. */
+.dark .object-set-table tbody tr[data-selected="true"],
+.dark .object-set-table tbody tr[data-selected="true"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Grid lines → faint white hairlines (same convention as the card/sidebar
+   borders above). Scoped to the outer frame, header underline, row-number
+   divider, and NON-selected row dividers — selected rows keep their blue
+   `border-*-blue-900` edges untouched. */
+.dark :has(> table.object-set-table),
+.dark .object-set-table thead tr,
+.dark .object-set-table tbody tr:not([data-selected="true"]),
+.dark .object-set-table tbody td:first-child {
+  border-color: rgba(255, 255, 255, 0.1);
 }

@@ -139,7 +139,7 @@ export function ProfilePreview({ state }: ProfilePreviewProps) {
 
         {/* Short Description */}
         {state.description && (
-          <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+          <p className="text-sm text-foreground mb-4 leading-relaxed">
             {state.description}
           </p>
         )}
