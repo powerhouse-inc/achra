@@ -4,7 +4,6 @@ import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { addAccrualPeriod } from "../../document-models/subscription-instance/v1/src/utils.js";
 import { useSelectedSubscriptionInstanceDocument } from "../../document-models/subscription-instance/v1/hooks.js";
 import type { ViewMode } from "./types.js";
-import { ModeToggle } from "./components/ModeToggle.js";
 import { MockDataButton } from "./components/MockDataButton.js";
 import { ImportServiceConfigButton } from "./components/ImportServiceConfigButton.js";
 import { SubscriptionHeader } from "./components/SubscriptionHeader.js";
@@ -14,27 +13,20 @@ import { DebtLedgerPanel } from "./components/DebtLedgerPanel.js";
 import { InvoicesPanel } from "./components/InvoicesPanel.js";
 import { CustomerInfo } from "./components/CustomerInfo.js";
 import { OperatorNotes } from "./components/OperatorNotes.js";
-import {
-  SimulatedClockPanel,
-  SimulatedClockProvider,
-  useSimulatedClock,
-} from "./components/SimulatedClock.js";
+
 import { accrueMetricUsage } from "../../document-models/subscription-instance/v1/gen/metrics/creators.js";
 import { generateInvoice } from "../../document-models/subscription-instance/v1/gen/subscription/creators.js";
 import { useSelectedDrive } from "@powerhousedao/reactor-browser";
 
 export default function SubscriptionInstanceEditor() {
   return (
-    <SimulatedClockProvider>
-      <SubscriptionInstanceEditorInner />
-    </SimulatedClockProvider>
+    <SubscriptionInstanceEditorInner />
   );
 }
 
 function SubscriptionInstanceEditorInner() {
   const [document, dispatch] = useSelectedSubscriptionInstanceDocument();
   const [mode, setMode] = useState<ViewMode>("client");
-  const { simulatedNow } = useSimulatedClock();
 
   const [selectedDrive] = useSelectedDrive();
 
@@ -63,14 +55,8 @@ function SubscriptionInstanceEditorInner() {
   // Skips the very first run after mount when sim mode is null.
   const lastTickedRef = useRef<string | null>(null);
   useEffect(() => {
-    if (!simulatedNow) {
-      lastTickedRef.current = null;
-      return;
-    }
     if (!document) return;
     if (document.state.global.status !== "ACTIVE") return;
-    if (lastTickedRef.current === simulatedNow) return;
-    lastTickedRef.current = simulatedNow;
 
     // Auto-invoice at boundary: if the simulated clock has reached or
     // crossed the cycle boundary, dispatch GENERATE_INVOICE with
@@ -79,7 +65,7 @@ function SubscriptionInstanceEditorInner() {
     // against the new window. sourceName is informational — operation log
     // shows readable names per slice.
     const next = document.state.global.nextBillingDate;
-    if (next && simulatedNow >= next) {
+    if (next && new Date().toISOString() >= next) {
       const metricFreezeSliceIds: {
         sourceId: string;
         sliceId: string;
@@ -127,7 +113,7 @@ function SubscriptionInstanceEditorInner() {
       dispatch(
         generateInvoice({
           invoiceId: generateId(),
-          generatedAt: simulatedNow,
+          generatedAt: new Date().toISOString(),
           advanceCycleIfDue: true,
           metricFreezeSliceIds,
           nextCycleRecurringSliceIds,
@@ -177,7 +163,7 @@ function SubscriptionInstanceEditorInner() {
       if (lastAccrualDate) {
         let boundary = addAccrualPeriod(lastAccrualDate, accrualCycle);
         let safety = 0;
-        while (simulatedNow >= boundary && safety < 10000) {
+        while (new Date().toISOString() >= boundary && safety < 10000) {
           newSliceIds.push(generateId());
           boundary = addAccrualPeriod(boundary, accrualCycle);
           safety += 1;
@@ -187,12 +173,12 @@ function SubscriptionInstanceEditorInner() {
         accrueMetricUsage({
           serviceId,
           metricId,
-          accrualDate: simulatedNow,
+          accrualDate: new Date().toISOString(),
           newSliceIds,
         }),
       );
     }
-  }, [simulatedNow, document, dispatch]);
+  }, [document, dispatch]);
 
   if (!document) {
     return (
@@ -241,9 +227,6 @@ function SubscriptionInstanceEditorInner() {
           )}
           {/* <ModeToggle mode={mode} onModeChange={setMode} /> */}
         </div>
-
-        {/* Simulated clock — operator-only test tool */}
-        {mode === "operator" && <SimulatedClockPanel />}
 
         {/* Subscription Header */}
         <SubscriptionHeader
