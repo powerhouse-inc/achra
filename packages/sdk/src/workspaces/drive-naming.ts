@@ -97,7 +97,7 @@ export function deriveDriveNaming(input: DriveNamingInput): DriveNaming {
 // module's `config.id`; op-hub renamed those modules (builder-team-admin →
 // team-admin, service-offering-app → service-offering) and ships a canonical
 // background icon per editor (see op-hub scripts/drive-sync/upload.sh).
-export const PRIMARY_DRIVE_ICON = 'https://i.postimg.cc/FztDhVrh/team-admin-bg.png'
-export const OPERATOR_DRIVE_ICON = 'https://i.postimg.cc/QtFy8Mc4/service-offering-bg.png'
+export const PRIMARY_DRIVE_ICON = 'https://achra.com/op-hub/drives/team-admin.png'
+export const OPERATOR_DRIVE_ICON = 'https://achra.com/op-hub/drives/service-offering.png'
 export const BUILDER_DRIVE_EDITOR = 'team-admin'
 export const OPERATOR_DRIVE_EDITOR = 'service-offering'
