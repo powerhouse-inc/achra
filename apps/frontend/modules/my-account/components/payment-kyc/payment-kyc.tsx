@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@achr
 import { Skeleton } from '@achra/ui/skeleton'
 import { ExternalLink } from '@/modules/shared/components/external-link/external-link'
 import { useOperatorPaymentAccount } from '@/modules/shared/hooks/use-operator-payment-account'
-import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
+import { driveDocumentLinkFor, driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 import type { OperatorPaymentAccount } from '@achra/sdk'
 import type { Route } from 'next'
 
@@ -50,9 +50,13 @@ function PaymentKyc() {
 
   if (!hasOperatorDrive || !operatorDrive) return null
 
-  const { label, badgeClassName, description, cta } = kycPresentation(
-    paymentAccountQuery.data ?? null,
-  )
+  const account = paymentAccountQuery.data ?? null
+  const { label, badgeClassName, description, cta } = kycPresentation(account)
+  // Deep-link straight to the payment-account document when it exists;
+  // fall back to the drive root otherwise.
+  const driveHref = account
+    ? driveDocumentLinkFor(operatorDrive.driveSlug, account.id)
+    : driveLinkFor(operatorDrive.driveSlug)
 
   return (
     <Card>
@@ -80,7 +84,7 @@ function PaymentKyc() {
                   : description}
               </span>
             </div>
-            <ExternalLink href={driveLinkFor(operatorDrive.driveSlug) as Route}>{cta}</ExternalLink>
+            <ExternalLink href={driveHref as Route}>{cta}</ExternalLink>
           </div>
         )}
       </CardContent>
