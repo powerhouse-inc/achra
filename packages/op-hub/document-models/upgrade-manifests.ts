@@ -13,6 +13,7 @@ import { facetUpgradeManifest } from "document-models/facet/upgrades";
 import { invoiceUpgradeManifest } from "document-models/invoice/upgrades";
 import { networkProfileUpgradeManifest } from "document-models/network-profile/upgrades";
 import { operationalHubProfileUpgradeManifest } from "document-models/operational-hub-profile/upgrades";
+import { paymentAccountUpgradeManifest } from "document-models/payment-account/upgrades";
 import { paymentTermsUpgradeManifest } from "document-models/payment-terms/upgrades";
 import { requestForProposalsUpgradeManifest } from "document-models/request-for-proposals/upgrades";
 import { resourceInstanceUpgradeManifest } from "document-models/resource-instance/upgrades";
@@ -35,6 +36,7 @@ export const upgradeManifests: UpgradeManifest<readonly number[]>[] = [
   invoiceUpgradeManifest,
   networkProfileUpgradeManifest,
   operationalHubProfileUpgradeManifest,
+  paymentAccountUpgradeManifest,
   paymentTermsUpgradeManifest,
   requestForProposalsUpgradeManifest,
   resourceInstanceUpgradeManifest,

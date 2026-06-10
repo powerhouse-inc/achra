@@ -1,5 +1,6 @@
 import {
   BuilderProfileV1,
+  PaymentAccountV1,
   ResourceInstanceV1,
   ResourceTemplateV1,
   SubscriptionInstanceV1,
@@ -9,6 +10,11 @@ import {
   builderProfileDocumentType,
   type BuilderProfilePHState,
 } from '@powerhousedao/op-hub/document-models/builder-profile'
+import {
+  type PaymentAccountAction,
+  paymentAccountDocumentType,
+  type PaymentAccountPHState,
+} from '@powerhousedao/op-hub/document-models/payment-account'
 import {
   type ResourceInstanceAction,
   resourceInstanceDocumentType,
@@ -49,6 +55,10 @@ export const documents = {
     builderProfileDocumentType,
   ),
   documentDrive,
+  paymentAccount: defineDocumentModel<PaymentAccountPHState, PaymentAccountAction>(
+    PaymentAccountV1,
+    paymentAccountDocumentType,
+  ),
   resourceInstance: defineDocumentModel<ResourceInstancePHState, ResourceInstanceAction>(
     ResourceInstanceV1,
     resourceInstanceDocumentType,
@@ -77,6 +87,7 @@ export function bindDocuments(reactorClient: ReactorClient) {
   return {
     builderProfile: documents.builderProfile.bind(reactorClient),
     documentDrive: documents.documentDrive.bind(reactorClient),
+    paymentAccount: documents.paymentAccount.bind(reactorClient),
     resourceInstance: documents.resourceInstance.bind(reactorClient),
     resourceTemplate: documents.resourceTemplate.bind(reactorClient),
     subscriptionInstance: documents.subscriptionInstance.bind(reactorClient),

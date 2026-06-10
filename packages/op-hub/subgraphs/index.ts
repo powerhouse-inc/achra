@@ -8,4 +8,5 @@ export * as BuildersAddonSubgraph from "./builders-addon/index.js";
 export * as InvoiceAddonSubgraph from "./invoice-addon/index.js";
 export * as NetworksSubgraph from "./networks/index.js";
 export * as ResourcesServicesSubgraph from "./resources-services/index.js";
+export * as StripeSubgraph from "./stripe/index.js";
 export * as WorkstreamsSubgraph from "./workstreams/index.js";

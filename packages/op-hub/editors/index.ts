@@ -10,6 +10,7 @@ export { Invoice } from "./invoice/module.js";
 export { NetworkAdmin } from "./network-admin/module.js";
 export { NetworkProfile } from "./network-profile-editor/module.js";
 export { OperationalHubProfileEditor } from "./operational-hub-profile-editor/module.js";
+export { PaymentAccountEditor } from "./payment-account-editor/module.js";
 export { PaymentTerms } from "./payment-terms-editor/module.js";
 export { ResourceInstanceEditor } from "./resource-instance-editor/module.js";
 export { ResourceTemplateEditor } from "./resource-template-editor/module.js";

@@ -8,6 +8,7 @@ import { Facet as FacetV1 } from "document-models/facet/v1";
 import { Invoice as InvoiceV1 } from "document-models/invoice/v1";
 import { NetworkProfile as NetworkProfileV1 } from "document-models/network-profile/v1";
 import { OperationalHubProfile as OperationalHubProfileV1 } from "document-models/operational-hub-profile/v1";
+import { PaymentAccount as PaymentAccountV1 } from "document-models/payment-account/v1";
 import { PaymentTerms as PaymentTermsV1 } from "document-models/payment-terms/v1";
 import { RequestForProposals as RequestForProposalsV1 } from "document-models/request-for-proposals/v1";
 import { ResourceInstance as ResourceInstanceV1 } from "document-models/resource-instance/v1";
@@ -35,6 +36,7 @@ export const documentModels = [
   InvoiceV1,
   NetworkProfileV1,
   OperationalHubProfileV1,
+  PaymentAccountV1,
   PaymentTermsV1,
   RequestForProposalsV1,
   ResourceInstanceV1,

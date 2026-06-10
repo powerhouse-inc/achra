@@ -14,7 +14,14 @@ import type {
   FolderNode,
   FileNode,
 } from "@powerhousedao/shared/document-drive";
-import { FileText, Folder, Layers, UserRound, Users } from "lucide-react";
+import {
+  CreditCard,
+  FileText,
+  Folder,
+  Layers,
+  UserRound,
+  Users,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 
 const ICON_SIZE = 16;
@@ -22,6 +29,8 @@ const CUSTOMERS_FOLDER_NAME = "Customers";
 const SERVICES_AND_OFFERINGS_FOLDER_NAME = "Services And Offerings";
 const RESOURCE_TEMPLATES_FOLDER_NAME = "Products";
 const SERVICE_OFFERINGS_FOLDER_NAME = "Service Offerings";
+const PAYMENT_ACCOUNT_DOCUMENT_TYPE = "powerhouse/payment-account";
+const PAYMENTS_SECTION_TITLE = "Payments";
 
 /** Custom view types that don't correspond to document models */
 export type CustomView = "resources-services" | "customers" | null;
@@ -122,6 +131,18 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
     return nodes.find(
       (node: Node): node is FolderNode =>
         isFolderNodeKind(node) && node.name === CUSTOMERS_FOLDER_NAME,
+    );
+  }, [driveDocument]);
+
+  // Find the payment-account document (auto-created at the drive root when
+  // the operator drive is provisioned; holds the Stripe onboarding).
+  const paymentAccountFile = useMemo(() => {
+    if (!driveDocument) return null;
+    const nodes = driveDocument.state.global.nodes;
+    return nodes.find(
+      (node: Node): node is FileNode =>
+        isFileNodeKind(node) &&
+        node.documentType === PAYMENT_ACCOUNT_DOCUMENT_TYPE,
     );
   }, [driveDocument]);
 
@@ -256,7 +277,7 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
       });
     }
 
-    return BASE_NAVIGATION_SECTIONS.map((section) => {
+    const sections = BASE_NAVIGATION_SECTIONS.map((section) => {
       if (section.id === "customers" && customersChildren.length > 0) {
         return { ...section, children: customersChildren };
       }
@@ -268,17 +289,38 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
       }
       return section;
     });
+
+    // Payments section — points straight at the payment-account document so
+    // clicking it opens the Stripe onboarding editor. Only shown when the doc
+    // exists (drives provisioned before auto-creation can add it manually).
+    if (paymentAccountFile) {
+      sections.push({
+        id: paymentAccountFile.id,
+        title: PAYMENTS_SECTION_TITLE,
+        icon: <CreditCard size={ICON_SIZE} />,
+      });
+    }
+
+    return sections;
   }, [
     driveDocument,
     customersFolder,
     resourceTemplatesFolder,
     serviceOfferingsFolder,
+    paymentAccountFile,
   ]);
 
   const driveName = driveDocument?.state.global.name || "Service Offerings";
 
   const handleActiveNodeChange = (node: SidebarNode) => {
     setActiveNodeId(node.id);
+
+    // Payments section: open the payment-account document editor directly
+    if (paymentAccountFile && node.id === paymentAccountFile.id) {
+      onCustomViewChange?.(null);
+      setSelectedNode(node.id);
+      return;
+    }
 
     // Child node within Customers tree
     if (customersNodeIds.has(node.id)) {
