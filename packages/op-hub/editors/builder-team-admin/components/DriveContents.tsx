@@ -36,7 +36,7 @@ export function DriveContents() {
   // const hasExpenseReports = expenseReportDocuments.length > 0;
 
   return (
-    <div className="min-h-full bg-slate-50/50 px-6 py-6">
+    <div className="min-h-full bg-background px-6 py-6">
       <div className="mx-auto max-w-5xl space-y-8">
         {/* Profile Header */}
         <ProfileHeader builderProfileDoc={builderProfileDoc} />

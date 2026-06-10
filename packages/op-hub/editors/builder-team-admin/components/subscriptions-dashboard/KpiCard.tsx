@@ -15,23 +15,25 @@ export function KpiCard({
 }: KpiCardProps) {
   const deltaColor =
     deltaType === "positive"
-      ? "text-emerald-500"
+      ? "text-status-success"
       : deltaType === "negative"
-        ? "text-red-400"
-        : "text-stone-400";
+        ? "text-destructive"
+        : "text-muted-foreground";
 
   return (
-    <div className="flex flex-col justify-between rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60 min-h-[120px]">
-      <span className="text-xs font-medium uppercase tracking-wider text-stone-400">
+    <div className="flex flex-col justify-between rounded-xl bg-card p-5 shadow-sm border border-border min-h-[120px]">
+      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {label}
       </span>
       <div className="mt-2">
-        <span className="text-3xl font-bold text-stone-800">{value}</span>
+        <span className="text-3xl font-bold text-foreground">{value}</span>
       </div>
       {(subtitle ?? delta) ? (
         <div className="mt-1.5 text-xs">
           {delta ? <span className={deltaColor}>{delta}</span> : null}
-          {subtitle ? <span className="text-stone-400">{subtitle}</span> : null}
+          {subtitle ? (
+            <span className="text-muted-foreground">{subtitle}</span>
+          ) : null}
         </div>
       ) : null}
     </div>

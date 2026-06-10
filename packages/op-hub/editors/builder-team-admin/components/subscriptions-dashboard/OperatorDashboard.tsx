@@ -47,12 +47,12 @@ export function OperatorDashboard({
               : undefined
           }
         />
-        <div className="flex flex-col justify-between rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60 min-h-[120px]">
-          <span className="text-xs font-medium uppercase tracking-wider text-stone-400">
+        <div className="flex flex-col justify-between rounded-xl bg-card p-5 shadow-sm border border-border min-h-[120px]">
+          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Monthly Revenue
           </span>
           <div className="mt-2">
-            <span className="text-3xl font-bold text-emerald-600">
+            <span className="text-3xl font-bold text-status-success">
               {formatCurrency(metrics.totalMonthlyRevenue)}
             </span>
           </div>
@@ -68,7 +68,7 @@ export function OperatorDashboard({
                     <StatusBadge status={s.status} />
                     <span
                       className={
-                        STATUS_TEXT_COLORS[s.status] ?? "text-stone-500"
+                        STATUS_TEXT_COLORS[s.status] ?? "text-muted-foreground"
                       }
                     >
                       {formatCurrency(s.mrr)}
@@ -91,8 +91,8 @@ export function OperatorDashboard({
 
       {/* Charts Row */}
       <div className="grid grid-cols-5 gap-4 items-start">
-        <div className="col-span-3 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-4 text-base font-bold text-stone-700">
+        <div className="col-span-3 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-4 text-base font-bold text-foreground">
             Monthly Revenue by Resource
           </h2>
           <RevenueByResourceChart
@@ -100,8 +100,8 @@ export function OperatorDashboard({
             currency={metrics.currency}
           />
         </div>
-        <div className="col-span-2 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-4 text-base font-bold text-stone-700">
+        <div className="col-span-2 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-4 text-base font-bold text-foreground">
             Subscriptions by Plan
           </h2>
           <SubscriptionsByPlanChart data={metrics.subscriptionsByTier} />
@@ -110,19 +110,19 @@ export function OperatorDashboard({
 
       {/* Tables Row */}
       <div className="grid grid-cols-5 gap-4 items-start">
-        <div className="col-span-3 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-4 text-base font-bold text-stone-700">
+        <div className="col-span-3 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-4 text-base font-bold text-foreground">
             Recent Subscriptions
           </h2>
           <RecentSubscriptionsTable
             subscriptions={metrics.subscriptionSummaries}
           />
         </div>
-        <div className="col-span-2 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-3 text-base font-bold text-stone-700">
+        <div className="col-span-2 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-3 text-base font-bold text-foreground">
             Top Customers
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             By monthly recurring revenue
           </p>
           <TopCustomersList customers={metrics.topCustomers} />
@@ -131,20 +131,20 @@ export function OperatorDashboard({
 
       {/* Metrics & Actions Row */}
       <div className="grid grid-cols-5 gap-4 items-start">
-        <div className="col-span-3 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-1 text-base font-bold text-stone-700">
+        <div className="col-span-3 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-1 text-base font-bold text-foreground">
             Customer Usage Metrics
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             Live consumption across all tracked service metrics
           </p>
           <CustomerMetricsCard metrics={metrics.customerMetrics} />
         </div>
-        <div className="col-span-2 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-1 text-base font-bold text-stone-700">
+        <div className="col-span-2 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-1 text-base font-bold text-foreground">
             Action Items
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             Issues requiring operator attention
           </p>
           <ActionItemsCard items={metrics.actionItems} />

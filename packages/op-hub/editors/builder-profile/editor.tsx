@@ -264,16 +264,6 @@ export default function Editor() {
           .builder-editor .section-card:hover {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
           }
-          /* Dark mode: Achra --card (#252a34) is only ~5% lighter than
-             --background (#1b1e24), so full-width panels blend into the canvas.
-             Lift --card to --accent (#373e4d) for this editor's subtree so every
-             card — the .section-card panels AND the bg-card section components
-             (Skills, Scopes, Links, Contributors, Preview) — reads clearly as a
-             raised surface. Inner bg-muted / bg-secondary fills stay distinct
-             (darker / lighter than --accent). */
-          .dark .builder-editor {
-            --card: var(--accent);
-          }
           .builder-editor .field-label {
             font-size: 0.8125rem;
             font-weight: 600;

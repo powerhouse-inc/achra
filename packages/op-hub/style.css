@@ -114,6 +114,21 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Editor cards → lifted surface (--card → --accent), dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   Achra's --card (#252a34) sits only ~5% above --background (#1b1e24), so on the
+   dark canvas full-width editor cards blend in. Remap --card to --accent
+   (#373e4d) so every `bg-card` panel reads as a clearly raised surface across
+   ALL op-hub editors. Safe to do globally: Connect and @powerhousedao/design-
+   system neither use `bg-card` nor define --card, so this touches ONLY @achra/ui
+   cards in op-hub editors. `:root.dark` (0,2,0) beats @achra's `.dark { --card }`
+   (0,1,0) regardless of load order. Inputs and tables are pinned to --background
+   (below), so they stay clearly darker than the lifted cards. */
+:root.dark {
+  --card: var(--accent);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Dashboard card surface (dark mode)
    ──────────────────────────────────────────────────────────────────────────
    The page background is `--color-slate-900` (≈17% lightness). Cards need a
@@ -160,6 +175,27 @@
 }
 .dark .sidebar__item-caret:hover {
   background-color: rgba(255, 255, 255, 0.08);
+}
+/* Expand-arrow (caret) color — BOTH modes, BOTH states. The document-
+   engineering Sidebar hardcodes the chevron svg as `text-gray-700
+   dark:text-gray-400` (flat greys outside the theme); collapsed (▶) vs
+   expanded (▼) is only a rotation on the SAME svg, so one color rule covers
+   both states. The CaretDown svg is fill="currentcolor", so pinning `color`
+   themes it. Light mode follows --muted-foreground; dark mode matches the
+   `.dark .sidebar__item` row text above so the arrows unambiguously read as
+   part of the themed sidebar. `!important` because the utility classes sit ON
+   the svg itself and arrive from multiple compiled stylesheets (Connect's
+   prebuilt CSS + our build) — this ends the cascade fight for good. The faint
+   leaf-row placeholder (`--no-children`) is re-pinned to --border (declared
+   LAST: it ties on specificity+importance, so source order decides). */
+.sidebar__item-caret svg {
+  color: var(--muted-foreground) !important;
+}
+.dark .sidebar__item-caret svg {
+  color: #cbd5e1 !important; /* match the dark sidebar row text */
+}
+.sidebar__item-caret svg.sidebar__item-caret--no-children {
+  color: var(--border) !important;
 }
 /* Header (drive title) — `dark:text-gray-300` / `dark:border-gray-800` also
    live in node_modules, so the title falls back to dark `text-gray-700` and the
