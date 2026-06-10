@@ -88,5 +88,6 @@ export {
   type BuilderProfileOperationalHubMember,
   getBuilderProfile,
 } from './reads/builder-profile'
+export { getOperatorPaymentAccount, type OperatorPaymentAccount } from './reads/payment-account'
 
 export { SDKError, isSDKError, type SDKErrorCode } from './errors'

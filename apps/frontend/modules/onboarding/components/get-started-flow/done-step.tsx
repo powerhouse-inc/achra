@@ -5,6 +5,7 @@ import { Card, CardContent } from '@achra/ui/card'
 import { CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import type { BuilderDriveLink } from '@/modules/__generated__/graphql/switchboard-generated'
+import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 
 interface DoneStepProps {
   drive: BuilderDriveLink | null
@@ -29,7 +30,7 @@ function DoneStep({ drive }: DoneStepProps) {
           </Button>
           <Button className="w-full min-w-0" asChild disabled={!drive}>
             {drive ? (
-              <a href={drive.driveLink as string} target="_blank" rel="noopener noreferrer">
+              <a href={driveLinkFor(drive.driveSlug)} target="_blank" rel="noopener noreferrer">
                 Explore my Workspace
               </a>
             ) : (

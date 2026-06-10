@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 
 export const WithDrive: Story = {
   args: {
-    operatorDriveLink: 'http://localhost:3001/?driveUrl=http://localhost:4001/d/example',
+    operatorDriveLink: 'http://localhost:3001/d/example?driveUrl=http://localhost:4001/d/example',
   },
 }
 

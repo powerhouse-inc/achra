@@ -27,6 +27,7 @@ import {
   resolveTeamAdminDrive,
 } from '../reads/builder-drives'
 import { type BuilderProfile, getBuilderProfile } from '../reads/builder-profile'
+import { getOperatorPaymentAccount, type OperatorPaymentAccount } from '../reads/payment-account'
 import {
   createReactorClientHandle,
   type ReactorClientHandleOptions,
@@ -93,6 +94,11 @@ export interface PowerhouseClient {
     }>
   }
 
+  readonly payments: {
+    /** The payment-account (Stripe KYC) state in an operator drive, if any. */
+    getOperatorAccount(opts: { driveId: string }): Promise<OperatorPaymentAccount | null>
+  }
+
   readonly purchases: {
     create(input: PurchaseServiceInput): Promise<Awaited<ReturnType<typeof purchaseService>>>
   }
@@ -152,6 +158,9 @@ export function createClient(config: PowerhouseClientConfig = {}): PowerhouseCli
           : null
         return { drives, teamAdminDrive, builderProfileId, profile }
       },
+    },
+    payments: {
+      getOperatorAccount: (opts) => getOperatorPaymentAccount(ctx, opts),
     },
     purchases: {
       create: (input) => purchaseService(ctx, input),

@@ -3,6 +3,7 @@ import {
   AccountProfile,
   AccountProfileTitle,
 } from '@/modules/my-account/components/account-profile'
+import { PaymentKyc } from '@/modules/my-account/components/payment-kyc'
 import { RenownIdentity } from '@/modules/my-account/components/renown-identity'
 import type { Metadata } from 'next'
 
@@ -21,6 +22,7 @@ export default function MyAccountPage() {
           <AccountProfile />
         </CardContent>
       </Card>
+      <PaymentKyc />
       <Card>
         <CardHeader>
           <CardTitle>My Renown Identity</CardTitle>

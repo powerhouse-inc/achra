@@ -19,5 +19,7 @@ export function driveLinkFor(driveSlug: string): string {
   const switchboard = switchboardOrigin(
     process.env.NEXT_PUBLIC_SWITCHBOARD_URL || DEFAULT_SWITCHBOARD_URL,
   )
-  return `${connect}/?driveUrl=${switchboard}/d/${driveSlug}`
+  // The /d/<slug> path makes Connect OPEN the drive after importing it;
+  // ?driveUrl=... alone only imports it and leaves the user at the home view.
+  return `${connect}/d/${driveSlug}?driveUrl=${switchboard}/d/${driveSlug}`
 }
