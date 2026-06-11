@@ -26,9 +26,7 @@ function BecomeAnOperator() {
         </div>
         <div className="flex min-w-0 flex-col gap-0.5">
           <span className="font-medium">Become an Operator</span>
-          <span className="text-muted-foreground text-sm">
-            Offer services that builders across Achra can subscribe to.
-          </span>
+          <span className="text-muted-foreground text-sm">Start offering your own services.</span>
         </div>
       </div>
       <Button

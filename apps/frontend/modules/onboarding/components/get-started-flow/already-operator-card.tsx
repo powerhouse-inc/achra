@@ -25,8 +25,8 @@ function AlreadyOperatorCard({ operatorDriveLink }: AlreadyOperatorCardProps) {
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold tracking-tight">You&apos;re already an operator</h2>
           <p className="text-muted-foreground max-w-md text-sm">
-            Use your Service Offering drive to create and publish the services builders across Achra
-            can subscribe to.
+            Use your Service Offering drive to start offering your own services to builders across
+            Achra.
           </p>
         </div>
         <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">

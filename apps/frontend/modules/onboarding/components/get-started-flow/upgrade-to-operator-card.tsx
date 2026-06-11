@@ -36,8 +36,8 @@ function UpgradeToOperatorCard({ open, onOpenChange }: UpgradeToOperatorCardProp
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-semibold tracking-tight">Become an Operator</h2>
           <p className="text-muted-foreground max-w-md text-sm">
-            You&apos;re set up as a builder. Upgrade to an operator to publish services that
-            builders across Achra can subscribe to.
+            You&apos;re set up as a builder. Upgrade to an operator to start offering your own
+            services.
           </p>
         </div>
         <Button
