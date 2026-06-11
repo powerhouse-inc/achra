@@ -94,17 +94,17 @@ export function CustomerDashboard({
 
       {/* Bottom Row */}
       <div className="grid grid-cols-5 gap-4">
-        <div className="col-span-3 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-4 text-base font-bold text-stone-700">
+        <div className="col-span-3 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-4 text-base font-bold text-foreground">
             My Subscriptions
           </h2>
           <MySubscriptionsTable subscriptions={metrics.subscriptionSummaries} />
         </div>
-        <div className="col-span-2 rounded-xl bg-stone-50 p-5 shadow-sm border border-stone-200/60">
-          <h2 className="mb-1 text-base font-bold text-stone-700">
+        <div className="col-span-2 rounded-xl bg-card p-5 shadow-sm border border-border">
+          <h2 className="mb-1 text-base font-bold text-foreground">
             Spend Breakdown
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             Monthly cost by resource template
           </p>
           <SpendBreakdown data={metrics.revenueByTemplate} />

@@ -285,11 +285,11 @@ export default function Editor() {
   if (missingProperties.length > 0) {
     // Show error message for missing properties
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="max-w-md mx-auto text-center p-8 bg-white rounded-lg shadow-lg border border-red-200">
-          <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="max-w-md mx-auto text-center p-8 bg-card rounded-lg shadow-lg border border-destructive/30">
+          <div className="w-16 h-16 mx-auto mb-4 bg-destructive/15 rounded-full flex items-center justify-center">
             <svg
-              className="w-8 h-8 text-red-600"
+              className="w-8 h-8 text-destructive"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -302,22 +302,22 @@ export default function Editor() {
               ></path>
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             Document Schema Mismatch
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             The current document structure doesn't match the expected schema.
             This usually happens when using an outdated document model.
           </p>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Please create a new document using the latest document model to
             ensure compatibility.
           </p>
-          <details className="text-left text-xs text-gray-600">
-            <summary className="cursor-pointer hover:text-gray-800">
+          <details className="text-left text-xs text-muted-foreground">
+            <summary className="cursor-pointer hover:text-foreground">
               View missing properties
             </summary>
-            <pre className="mt-2 p-2 bg-gray-100 rounded text-xs overflow-auto max-h-32">
+            <pre className="mt-2 p-2 bg-muted rounded text-xs overflow-auto max-h-32 text-foreground">
               {JSON.stringify(missingProperties, null, 2)}
             </pre>
           </details>
@@ -329,11 +329,11 @@ export default function Editor() {
   // NOW ALL HOOKS ARE CALLED - SAFE TO DO CONDITIONAL RETURNS
   if (!state) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="max-w-md mx-auto text-center p-8 bg-white rounded-lg shadow-lg border border-red-200">
-          <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="max-w-md mx-auto text-center p-8 bg-card rounded-lg shadow-lg border border-destructive/30">
+          <div className="w-16 h-16 mx-auto mb-4 bg-destructive/15 rounded-full flex items-center justify-center">
             <svg
-              className="w-8 h-8 text-red-600"
+              className="w-8 h-8 text-destructive"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -346,14 +346,14 @@ export default function Editor() {
               ></path>
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             Document Schema Mismatch
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-muted-foreground mb-4">
             The current document structure doesn't match the expected schema.
             This usually happens when using an outdated document model.
           </p>
-          <p className="text-sm text-gray-500 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Please create a new document using the latest document model to
             ensure compatibility.
           </p>
@@ -740,7 +740,9 @@ export default function Editor() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             {/* Left side with Invoice title, input, and upload */}
             <div className="flex flex-wrap items-center gap-4">
-              <h1 className="text-3xl font-bold whitespace-nowrap">Invoice</h1>
+              <h1 className="text-3xl font-bold whitespace-nowrap text-foreground">
+                Invoice
+              </h1>
               <div className="min-w-[200px]">
                 <InputField
                   placeholder={"Add invoice number"}
@@ -761,7 +763,7 @@ export default function Editor() {
               <div className="relative" ref={uploadDropdownRef}>
                 <button
                   onClick={() => setUploadDropdownOpen(!uploadDropdownOpen)}
-                  className="inline-flex items-center h-10 px-4 rounded bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center h-10 px-4 rounded bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors whitespace-nowrap cursor-pointer"
                   disabled={isPdfLoading}
                 >
                   {isPdfLoading ? "Processing..." : "Upload File"}
@@ -782,13 +784,13 @@ export default function Editor() {
                 </button>
 
                 {uploadDropdownOpen && !isPdfLoading && (
-                  <div className="absolute z-10 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="absolute z-10 mt-1 w-48 rounded-md shadow-lg bg-popover border border-border">
                     <div
                       className="py-1"
                       role="menu"
                       aria-orientation="vertical"
                     >
-                      <label className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
+                      <label className="block px-4 py-2 text-sm text-foreground hover:bg-accent cursor-pointer">
                         Upload UBL
                         <input
                           accept=".xml"
@@ -813,7 +815,7 @@ export default function Editor() {
               <div className="relative" ref={exportDropdownRef}>
                 <button
                   onClick={() => setExportDropdownOpen(!exportDropdownOpen)}
-                  className="inline-flex items-center h-10 px-4 rounded bg-black hover:bg-gray-800 text-white font-medium transition-colors whitespace-nowrap cursor-pointer"
+                  className="inline-flex items-center h-10 px-4 rounded border border-border bg-secondary text-secondary-foreground hover:bg-secondary/80 font-medium transition-colors whitespace-nowrap cursor-pointer"
                 >
                   Export File
                   <svg
@@ -833,7 +835,7 @@ export default function Editor() {
                 </button>
 
                 {exportDropdownOpen && (
-                  <div className="absolute z-10 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div className="absolute z-10 mt-1 w-48 rounded-md shadow-lg bg-popover border border-border">
                     <div
                       className="py-1"
                       role="menu"
@@ -844,7 +846,7 @@ export default function Editor() {
                           handleExportUBL();
                           setExportDropdownOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent cursor-pointer"
                       >
                         Export UBL
                       </button>
@@ -853,7 +855,7 @@ export default function Editor() {
                           handleExportPDF();
                           setExportDropdownOpen(false);
                         }}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        className="block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-accent cursor-pointer"
                       >
                         Export PDF
                       </button>
@@ -892,14 +894,16 @@ export default function Editor() {
           }}
         >
           {/* Issuer Section */}
-          <div className="border border-gray-200 rounded-lg p-4 min-w-0">
-            <h3 className="text-lg font-semibold mb-4">Issuer</h3>
+          <div className="border border-border rounded-lg p-4 min-w-0 bg-card shadow-sm">
+            <h3 className="text-lg font-semibold mb-4 text-foreground">Issuer</h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="mb-2 relative isolate">
-                <label className="block mb-1 text-sm">Issue Date:</label>
+                <label className="block mb-1 text-sm text-foreground">
+                  Issue Date:
+                </label>
                 <DatePicker
                   name="issueDate"
-                  className={String.raw`w-full p-0 bg-white`}
+                  className={String.raw`w-full p-0 bg-background`}
                   onChange={(e) => {
                     const dateOnly = e.target.value.split("T")[0];
                     const datetime = dateToDatetime(dateOnly);
@@ -913,10 +917,12 @@ export default function Editor() {
                 />
               </div>
               <div className="mb-2 relative isolate">
-                <label className="block mb-1 text-sm">Delivery Date:</label>
+                <label className="block mb-1 text-sm text-foreground">
+                  Delivery Date:
+                </label>
                 <DatePicker
                   name="deliveryDate"
-                  className={String.raw`w-full p-0 bg-white`}
+                  className={String.raw`w-full p-0 bg-background`}
                   onChange={(e) => {
                     const dateOnly = e.target.value.split("T")[0];
                     const datetime = dateToDatetime(dateOnly);
@@ -959,13 +965,15 @@ export default function Editor() {
           </div>
 
           {/* Payer Section */}
-          <div className="border border-gray-200 rounded-lg p-4 min-w-0">
-            <h3 className="text-lg font-semibold mb-4">Payer</h3>
+          <div className="border border-border rounded-lg p-4 min-w-0 bg-card shadow-sm">
+            <h3 className="text-lg font-semibold mb-4 text-foreground">Payer</h3>
             <div className="mb-2 w-64 relative isolate">
-              <label className="block mb-1 text-sm">Due Date:</label>
+              <label className="block mb-1 text-sm text-foreground">
+                Due Date:
+              </label>
               <DatePicker
                 name="dateDue"
-                className={String.raw`w-full p-0 bg-white`}
+                className={String.raw`w-full p-0 bg-background`}
                 onChange={(e) => {
                   const dateOnly = e.target.value.split("T")[0];
                   const datetime = dateToDatetime(dateOnly);
@@ -1020,8 +1028,10 @@ export default function Editor() {
         >
           <div>
             <div className="">
+              <label className="mb-1 block text-sm font-medium text-foreground">
+                Notes
+              </label>
               <Textarea
-                label="Notes"
                 placeholder="Add notes"
                 autoExpand={true}
                 rows={4}
@@ -1041,15 +1051,15 @@ export default function Editor() {
             </div>
           </div>
           <div>
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-sm h-32">
+            <div className="rounded-lg border border-border bg-muted p-6 shadow-sm h-32">
               <div className="">
-                <div className="flex justify-between text-gray-700">
+                <div className="flex justify-between text-foreground">
                   <span className="font-medium">Subtotal (excl. tax):</span>
                   <span>
                     {formatNumber(itemsTotalTaxExcl)} {state.currency}
                   </span>
                 </div>
-                <div className="flex justify-between border-t border-gray-200 pt-6 text-lg font-bold text-gray-900">
+                <div className="flex justify-between border-t border-border pt-6 text-lg font-bold text-foreground">
                   <span>Total (incl. tax):</span>
                   <span>
                     {formatNumber(itemsTotalTaxIncl)} {state.currency}
@@ -1156,8 +1166,8 @@ export default function Editor() {
         )}
 
         {/* Live PDF Preview */}
-        {/* <div className="mt-8 border border-gray-200 rounded-lg overflow-hidden">
-        <div className="bg-gray-50 px-4 py-2 border-b border-gray-200">
+        {/* <div className="mt-8 border border-border rounded-lg overflow-hidden">
+        <div className="bg-muted px-4 py-2 border-b border-border">
           <h3 className="text-lg font-semibold">PDF Preview</h3>
         </div>
         <div style={{ height: "1000px" }}>

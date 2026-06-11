@@ -18,6 +18,17 @@ import {
   type PenaltyClause,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface ClausesTabProps {
   bonusClauses: BonusClause[];
@@ -221,10 +232,10 @@ export function ClausesTab({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             Bonus & Penalty Clauses
           </h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+          <p className="mt-1 text-sm text-muted-foreground">
             {bonusClauses.length} bonus clause(s), {penaltyClauses.length}{" "}
             penalty clause(s)
           </p>
@@ -233,30 +244,32 @@ export function ClausesTab({
           onClick={() => setIsAddingNew(!isAddingNew)}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           + Add {activeSubTab === "bonus" ? "Bonus" : "Penalty"} Clause
         </Button>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex space-x-1 border-b border-gray-200 dark:border-gray-600">
+      <div className="flex space-x-1 border-b border-border">
         <button
+          type="button"
           onClick={() => setActiveSubTab("bonus")}
           className={`rounded-t-lg px-4 py-2 text-sm font-medium ${
             activeSubTab === "bonus"
-              ? "border-b-2 border-blue-700 bg-blue-50 text-blue-700 dark:border-blue-300 dark:bg-blue-900 dark:text-blue-300"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              ? "border-b-2 border-primary bg-primary/10 text-primary"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           Bonus Clauses ({bonusClauses.length})
         </button>
         <button
+          type="button"
           onClick={() => setActiveSubTab("penalty")}
           className={`rounded-t-lg px-4 py-2 text-sm font-medium ${
             activeSubTab === "penalty"
-              ? "border-b-2 border-red-700 bg-red-50 text-red-700 dark:border-red-300 dark:bg-red-900 dark:text-red-300"
-              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              ? "border-b-2 border-destructive bg-destructive/10 text-destructive"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           Penalty Clauses ({penaltyClauses.length})
@@ -264,8 +277,8 @@ export function ClausesTab({
       </div>
 
       {isAddingNew && (
-        <div className="rounded-lg border bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-          <h3 className="mb-4 text-lg font-medium dark:text-white">
+        <div className={formPanelClass}>
+          <h3 className="mb-4 text-lg font-medium text-foreground">
             Add New {activeSubTab === "bonus" ? "Bonus" : "Penalty"} Clause
           </h3>
           <form onSubmit={handleAddClause} className="space-y-4">
@@ -308,7 +321,7 @@ export function ClausesTab({
                 type="submit"
                 color="light"
                 size="sm"
-                className="cursor-pointer hover:bg-blue-600 hover:text-white"
+                className={primaryButtonClass}
               >
                 Add {activeSubTab === "bonus" ? "Bonus" : "Penalty"} Clause
               </Button>
@@ -320,7 +333,7 @@ export function ClausesTab({
                 }}
                 color="light"
                 size="sm"
-                className="cursor-pointer hover:bg-gray-600 hover:text-white"
+                className={secondaryButtonClass}
               >
                 Cancel
               </Button>
@@ -360,7 +373,7 @@ export function ClausesTab({
           />
         )
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-gray-300 py-8 text-center text-gray-500 dark:border-gray-600 dark:text-gray-400">
+        <div className={dashedEmptyClass}>
           <p className="text-lg font-medium">
             No {activeSubTab} clauses defined yet
           </p>

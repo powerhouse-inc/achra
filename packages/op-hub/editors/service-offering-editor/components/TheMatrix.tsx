@@ -58,37 +58,37 @@ const SERVICE_LEVELS: {
     value: "INCLUDED",
     label: "Included",
     shortLabel: "✓",
-    color: "#059669",
+    color: "var(--status-success)",
   },
   {
     value: "OPTIONAL",
     label: "Optional",
     shortLabel: "Optional",
-    color: "#0284c7",
+    color: "var(--status-progress)",
   },
   {
     value: "NOT_INCLUDED",
     label: "Not Included",
     shortLabel: "—",
-    color: "#94a3b8",
+    color: "var(--muted-foreground)",
   },
   {
     value: "NOT_APPLICABLE",
     label: "Not Applicable",
     shortLabel: "/",
-    color: "#cbd5e1",
+    color: "var(--border)",
   },
   {
     value: "CUSTOM",
     label: "Custom",
     shortLabel: "Custom",
-    color: "#d97706",
+    color: "var(--status-warning)",
   },
   {
     value: "VARIABLE",
     label: "Variable",
     shortLabel: "#",
-    color: "#7c3aed",
+    color: "var(--primary)",
   },
 ];
 
@@ -925,7 +925,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
   const getLevelDisplay = (
     serviceLevel: ServiceLevelBinding | undefined,
   ): { label: string; color: string } => {
-    if (!serviceLevel) return { label: "—", color: "#cbd5e1" };
+    if (!serviceLevel) return { label: "—", color: "var(--border)" };
 
     const level = serviceLevel.level;
     const config = SERVICE_LEVELS.find((l) => l.value === level);
@@ -933,23 +933,23 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
     if (level === "CUSTOM" && serviceLevel.customValue) {
       return {
         label: serviceLevel.customValue,
-        color: config?.color || "#d97706",
+        color: config?.color || "var(--status-warning)",
       };
     }
 
     return {
       label: config?.shortLabel || level,
-      color: config?.color || "#475569",
+      color: config?.color || "var(--foreground)",
     };
   };
 
   if (services.length === 0 || tiers.length === 0) {
     return (
       <>
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-card rounded-xl shadow-md overflow-hidden">
           <div className="py-16 px-8 text-center">
             <svg
-              className="w-16 h-16 mx-auto mb-4 text-slate-300"
+              className="w-16 h-16 mx-auto mb-4 text-muted-foreground/60"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -962,12 +962,12 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               />
             </svg>
             <h3
-              className="text-lg font-semibold text-slate-900 mb-2"
+              className="text-lg font-semibold text-foreground mb-2"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               Matrix Not Ready
             </h3>
-            <p className="text-sm text-slate-500 max-w-[28rem] mx-auto">
+            <p className="text-sm text-muted-foreground max-w-[28rem] mx-auto">
               {services.length === 0 && tiers.length === 0
                 ? "Add services in the Service Catalog and tiers in Tier Definition to configure the matrix."
                 : services.length === 0
@@ -982,26 +982,26 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
   return (
     <>
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="bg-card rounded-xl shadow-md overflow-hidden">
         {/* Facet Selector - Dynamic from Resource Template */}
         {Object.keys(facetCategories).length > 0 && (
           <div
-            className="px-6 py-5 border-b border-slate-200"
+            className="px-6 py-5 border-b border-border"
             style={{
-              background: "linear-gradient(to bottom, #f8fafc, #ffffff)",
+              background: "var(--card)",
             }}
           >
             <div className="flex flex-wrap items-end gap-6">
               {Object.entries(facetCategories).map(([key, category]) => (
                 <div key={key} className="flex flex-col gap-1.5">
                   <span
-                    className="text-[0.625rem] font-medium uppercase tracking-[0.08em] text-slate-500"
+                    className="text-[0.625rem] font-medium uppercase tracking-[0.08em] text-muted-foreground"
                     style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
                   >
                     {category.label}
                   </span>
                   {category.options.length <= 3 ? (
-                    <div className="flex bg-white border border-slate-200 rounded-[10px] overflow-hidden">
+                    <div className="flex bg-card border border-border rounded-[10px] overflow-hidden">
                       {category.options.map((option, optIdx) => (
                         <button
                           key={option.id}
@@ -1012,15 +1012,15 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               [key]: option.id,
                             }))
                           }
-                          className={`px-3.5 py-2 text-[0.8125rem] font-medium border-none cursor-pointer transition-all duration-150 ${optIdx > 0 ? "border-l border-slate-200" : ""} ${
+                          className={`px-3.5 py-2 text-[0.8125rem] font-medium border-none cursor-pointer transition-all duration-150 ${optIdx > 0 ? "border-l border-border" : ""} ${
                             selectedFacets[key] === option.id
-                              ? "bg-violet-100 text-violet-700"
-                              : "bg-white text-slate-600 hover:bg-slate-50"
+                              ? "bg-primary/15 text-primary"
+                              : "bg-card text-muted-foreground hover:bg-accent"
                           }`}
                           style={{
                             fontFamily: "'DM Sans', system-ui, sans-serif",
                             ...(optIdx > 0
-                              ? { borderLeft: "1px solid #e2e8f0" }
+                              ? { borderLeft: "1px solid var(--border)" }
                               : {}),
                           }}
                         >
@@ -1039,7 +1039,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                           [key]: e.target.value,
                         }))
                       }
-                      className="text-[0.8125rem] text-slate-700 bg-white border border-slate-200 rounded-[10px] py-2 pl-3 pr-8 cursor-pointer outline-none transition-all duration-150 appearance-none hover:border-slate-300 focus:border-violet-400 focus:shadow-[0_0_0_3px_#ede9fe]"
+                      className="text-[0.8125rem] text-foreground bg-card border border-border rounded-[10px] py-2 pl-3 pr-8 cursor-pointer outline-none transition-all duration-150 appearance-none hover:border-input focus:border-ring focus:shadow-[0_0_0_3px_color-mix(in oklab, var(--primary) 18%, transparent)]"
                       style={{
                         fontFamily: "'DM Sans', system-ui, sans-serif",
                         backgroundImage:
@@ -1065,12 +1065,12 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         {/* Incomplete Services Warning */}
         {incompleteServices.length > 0 && (
           <div
-            className="flex items-start gap-3.5 p-4 px-5 mb-4 bg-amber-50 border border-amber-200 rounded-[10px]"
+            className="flex items-start gap-3.5 p-4 px-5 mb-4 bg-status-warning/10 border border-status-warning/30 rounded-[10px]"
             style={{
               animation: "matrix-warning-pulse 2s ease-in-out infinite",
             }}
           >
-            <div className="shrink-0 w-6 h-6 text-amber-600">
+            <div className="shrink-0 w-6 h-6 text-status-warning">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -1082,13 +1082,13 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               </svg>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-sm font-semibold text-amber-800">
+              <span className="text-sm font-semibold text-status-warning">
                 {incompleteServices.length} service
                 {incompleteServices.length !== 1 ? "s" : ""} not configured
               </span>
-              <span className="text-[0.8125rem] text-amber-700 leading-6">
+              <span className="text-[0.8125rem] text-status-warning leading-6">
                 The following services are not included in any tier:{" "}
-                <strong className="font-semibold text-amber-900">
+                <strong className="font-semibold text-status-warning">
                   {incompleteServices
                     .slice(0, 3)
                     .map((s) => s.title)
@@ -1102,9 +1102,9 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         )}
 
         {/* Billing Cycle Selector */}
-        <div className="flex items-center gap-4 py-3 px-5 bg-slate-50 border border-slate-200 rounded-xl mb-4">
+        <div className="flex items-center gap-4 py-3 px-5 bg-muted border border-border rounded-xl mb-4">
           <span
-            className="text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-slate-500 whitespace-nowrap"
+            className="text-[0.6875rem] font-medium uppercase tracking-[0.08em] text-muted-foreground whitespace-nowrap"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Set Subscription Plan & Billing Cycle:
@@ -1114,7 +1114,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               <button
                 key={cycle}
                 onClick={() => handleGlobalCycleChange(cycle)}
-                className={`py-1.5 px-3.5 text-[0.8125rem] font-medium rounded-[10px] cursor-pointer transition-all duration-150 ${!isCustomBillingMode && activeBillingCycle === cycle ? "bg-violet-600 border-violet-600 text-white hover:bg-violet-700 hover:border-violet-700" : "text-slate-600 bg-white border border-slate-200 hover:border-violet-300 hover:text-violet-700"}`}
+                className={`py-1.5 px-3.5 text-[0.8125rem] font-medium rounded-[10px] cursor-pointer transition-all duration-150 ${!isCustomBillingMode && activeBillingCycle === cycle ? "bg-primary border-primary text-white hover:bg-primary/90 hover:border-primary" : "text-muted-foreground bg-card border border-border hover:border-primary/40 hover:text-primary/80"}`}
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 {BILLING_CYCLE_SHORT_LABELS[cycle]}
@@ -1122,7 +1122,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
             ))}
             {isCustomBillingMode && (
               <span
-                className="py-1.5 px-3.5 text-[0.8125rem] font-medium rounded-[10px] bg-amber-500 border border-amber-500 text-white cursor-default italic"
+                className="py-1.5 px-3.5 text-[0.8125rem] font-medium rounded-[10px] bg-status-warning/100 border border-status-warning text-white cursor-default italic"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 Custom
@@ -1132,7 +1132,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
           <button
             type="button"
             onClick={handleCopyUserSelection}
-            className="inline-flex items-center gap-1.5 ml-auto py-1.5 px-3 text-[0.6875rem] font-medium text-slate-500 bg-white border border-slate-200 rounded-[10px] cursor-pointer transition-all duration-150 whitespace-nowrap hover:text-violet-700 hover:border-violet-300 hover:bg-violet-50"
+            className="inline-flex items-center gap-1.5 ml-auto py-1.5 px-3 text-[0.6875rem] font-medium text-muted-foreground bg-card border border-border rounded-[10px] cursor-pointer transition-all duration-150 whitespace-nowrap hover:text-primary/80 hover:border-primary/40 hover:bg-primary/10"
             title="Copy current UserSelectionInput as JSON for mutation testing"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
@@ -1151,13 +1151,13 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         </div>
 
         {majorityResult && !majorityDismissed && (
-          <div className="flex items-center gap-2 py-2 px-3 mb-2 bg-sky-50 border border-sky-200 rounded-[10px] text-xs text-sky-800">
+          <div className="flex items-center gap-2 py-2 px-3 mb-2 bg-status-progress/10 border border-status-progress/30 rounded-[10px] text-xs text-status-progress">
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
-              className="shrink-0 w-4 h-4 text-sky-500"
+              className="shrink-0 w-4 h-4 text-status-progress"
             >
               <path
                 strokeLinecap="round"
@@ -1175,7 +1175,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
             </span>
             <button
               type="button"
-              className="py-1 px-2 text-[0.6875rem] font-medium rounded-md cursor-pointer border border-transparent transition-all duration-150 bg-sky-600 text-white hover:bg-sky-700"
+              className="py-1 px-2 text-[0.6875rem] font-medium rounded-md cursor-pointer border border-transparent transition-all duration-150 bg-status-progress text-white hover:bg-status-progress/90"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               onClick={() => {
                 handleGlobalCycleChange(majorityResult.majorityCycle);
@@ -1187,7 +1187,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
             </button>
             <button
               type="button"
-              className="py-1 px-2 text-[0.6875rem] font-medium rounded-md cursor-pointer transition-all duration-150 bg-transparent text-sky-600 border border-sky-300 hover:bg-sky-100"
+              className="py-1 px-2 text-[0.6875rem] font-medium rounded-md cursor-pointer transition-all duration-150 bg-transparent text-status-progress border border-status-progress/40 hover:bg-status-progress/20"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               onClick={() => setMajorityDismissed(true)}
             >
@@ -1197,10 +1197,10 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         )}
 
         <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-220px)] so-scrollbar-h so-scrollbar-v">
-          <table className="w-full border-collapse text-[0.8125rem]">
+          <table className="w-full border-collapse text-[0.8125rem] text-foreground">
             <thead>
               <tr>
-                <th className="sticky left-0 z-10 bg-white p-4 text-left font-normal text-slate-500 border-b border-slate-200 min-w-[260px]">
+                <th className="sticky left-0 z-10 bg-card p-4 text-left font-normal text-muted-foreground border-b border-border min-w-[260px]">
                   <InfoIcon
                     content="INCLUDED: part of the tier. OPTIONAL: available as add-on. NOT_INCLUDED: not available in this tier. CUSTOM/VARIABLE: negotiated pricing."
                     side="right"
@@ -1218,14 +1218,14 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                       onClick={() => {
                         setSelectedTierIdx(idx);
                       }}
-                      className={`p-4 text-center border-b border-slate-200 min-w-[140px] cursor-pointer transition-all duration-150 ${
-                        isSelected ? "text-white relative" : "bg-white"
+                      className={`p-4 text-center border-b border-border min-w-[140px] cursor-pointer transition-all duration-150 ${
+                        isSelected ? "text-white relative" : "bg-card"
                       }`}
                       style={
                         isSelected
                           ? {
                               background:
-                                "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                               boxShadow:
                                 "0 4px 12px rgba(139, 92, 246, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                             }
@@ -1234,7 +1234,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                       onMouseEnter={(e) => {
                         if (!isSelected)
                           e.currentTarget.style.background =
-                            "linear-gradient(180deg, #f8fafc 0%, #f5f3ff 100%)";
+                            "linear-gradient(180deg, var(--card) 0%, color-mix(in oklab, var(--primary) 10%, transparent) 100%)";
                       }}
                       onMouseLeave={(e) => {
                         if (!isSelected) e.currentTarget.style.background = "";
@@ -1257,16 +1257,16 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               ? {
                                   borderColor: "rgba(255, 255, 255, 0.9)",
                                   background:
-                                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+                                    "linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%)",
                                   boxShadow:
-                                    "inset 0 0 0 3px #ffffff, 0 2px 4px rgba(0, 0, 0, 0.15)",
+                                    "inset 0 0 0 3px var(--card), 0 2px 4px rgba(0, 0, 0, 0.15)",
                                   border: "2px solid rgba(255,255,255,0.9)",
                                 }
-                              : { border: "2px solid #cbd5e1" }
+                              : { border: "2px solid var(--border)" }
                           }
                         />
                         <span
-                          className={`font-semibold ${isSelected ? "text-white" : "text-slate-900"}`}
+                          className={`font-semibold ${isSelected ? "text-white" : "text-foreground"}`}
                           style={{
                             fontFamily: "'DM Sans', system-ui, sans-serif",
                           }}
@@ -1275,21 +1275,21 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                         </span>
                         {tier.isCustomPricing ? (
                           <span
-                            className={`text-[0.6875rem] ${isSelected ? "text-white/85" : "text-slate-500"}`}
+                            className={`text-[0.6875rem] ${isSelected ? "text-white/85" : "text-muted-foreground"}`}
                           >
                             Custom
                           </span>
                         ) : cyclePrice ? (
                           <>
                             <span
-                              className={`text-xl font-bold leading-tight ${isSelected ? "text-white" : "text-slate-900"}`}
+                              className={`text-xl font-bold leading-tight ${isSelected ? "text-white" : "text-foreground"}`}
                             >
                               {formatPrice(
                                 cyclePrice.monthlyEquivalent,
                                 tierBreakdowns[idx].tierCurrency,
                               )}
                               <span
-                                className={`text-xs font-normal ${isSelected ? "text-white/70" : "text-slate-500"}`}
+                                className={`text-xs font-normal ${isSelected ? "text-white/70" : "text-muted-foreground"}`}
                               >
                                 /mo
                               </span>
@@ -1297,7 +1297,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             {!isCustomBillingMode &&
                               activeBillingCycle !== "MONTHLY" && (
                                 <span
-                                  className={`text-[0.6875rem] ${isSelected ? "text-white/65" : "text-slate-400"}`}
+                                  className={`text-[0.6875rem] ${isSelected ? "text-white/65" : "text-muted-foreground"}`}
                                 >
                                   Billed{" "}
                                   {formatPrice(
@@ -1311,7 +1311,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               cyclePrice.hasDiscount &&
                               cyclePrice.savingsPercent > 0 && (
                                 <span
-                                  className="inline-block mt-1 py-0.5 px-2 text-[0.625rem] font-semibold text-emerald-700 bg-emerald-100 rounded-md"
+                                  className="inline-block mt-1 py-0.5 px-2 text-[0.625rem] font-semibold text-status-success bg-status-success/20 rounded-md"
                                   style={{
                                     fontFamily:
                                       "'DM Mono', 'SF Mono', monospace",
@@ -1323,7 +1323,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                           </>
                         ) : (
                           <span
-                            className={`text-[0.6875rem] ${isSelected ? "text-white/85" : "text-slate-500"}`}
+                            className={`text-[0.6875rem] ${isSelected ? "text-white/85" : "text-muted-foreground"}`}
                           >
                             —
                           </span>
@@ -1339,7 +1339,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               <tr>
                 <td
                   colSpan={tiers.length + 1}
-                  className="bg-slate-100 py-2.5 px-4 text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-600 border-b border-slate-200"
+                  className="bg-muted py-2.5 px-4 text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground border-b border-border"
                   style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
                 >
                   Service Catalog
@@ -1352,9 +1352,9 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                 <tr>
                   <td
                     colSpan={tiers.length + 1}
-                    className="bg-slate-50 py-3 px-4 text-xs font-semibold text-slate-700 border-b border-slate-200 flex items-center gap-2"
+                    className="bg-muted py-3 px-4 text-xs font-semibold text-foreground border-b border-border flex items-center gap-2"
                   >
-                    <span className="flex items-center justify-center w-5 h-5 text-slate-500">
+                    <span className="flex items-center justify-center w-5 h-5 text-muted-foreground">
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -1450,9 +1450,9 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                 <tr>
                   <td
                     colSpan={tiers.length + 1}
-                    className="bg-slate-50 py-3 px-4 text-xs font-semibold text-slate-700 border-b border-slate-200 flex items-center gap-2"
+                    className="bg-muted py-3 px-4 text-xs font-semibold text-foreground border-b border-border flex items-center gap-2"
                   >
-                    <span className="flex items-center justify-center w-5 h-5 text-slate-500">
+                    <span className="flex items-center justify-center w-5 h-5 text-muted-foreground">
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"
@@ -1549,7 +1549,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                 />
               )}
 
-              <tr className="bg-slate-100 [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-slate-700 [&>td]:border-b [&>td]:border-slate-300 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-slate-100">
+              <tr className="bg-muted [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-foreground [&>td]:border-b [&>td]:border-input [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-muted">
                 <td>SUBTOTAL</td>
                 {tiers.map((tier, idx) => {
                   if (tier.isCustomPricing) {
@@ -1577,7 +1577,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                         </span>
                         {isCalculated && (
                           <span
-                            className="inline-block ml-1 px-1 text-[0.5rem] font-semibold text-emerald-700 bg-emerald-100 rounded-md align-middle uppercase"
+                            className="inline-block ml-1 px-1 text-[0.5rem] font-semibold text-status-success bg-status-success/20 rounded-md align-middle uppercase"
                             title="Calculated from service groups"
                             style={{
                               fontFamily: "'DM Mono', 'SF Mono', monospace",
@@ -1591,7 +1591,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                           tierPrice > 0 &&
                           groupSum !== tierPrice && (
                             <span
-                              className={`text-[0.5625rem] py-px px-1.5 rounded-md ${isOver ? "text-rose-700 bg-rose-100 font-semibold" : "text-slate-500 bg-slate-100"}`}
+                              className={`text-[0.5625rem] py-px px-1.5 rounded-md ${isOver ? "text-destructive bg-destructive/15 font-semibold" : "text-muted-foreground bg-muted"}`}
                               style={{
                                 fontFamily: "'DM Mono', 'SF Mono', monospace",
                               }}
@@ -1650,18 +1650,18 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
           {/* Grand Total - Sticky at bottom of scroll container */}
           <div
-            className="sticky bottom-0 z-[15] border-t-[3px] border-violet-400"
+            className="sticky bottom-0 z-[15] border-t-[3px] border-primary/60 bg-card"
             style={{ boxShadow: "0 -4px 16px rgba(0, 0, 0, 0.12)" }}
           >
-            <table className="w-full border-collapse text-[0.8125rem] m-0">
+            <table className="w-full border-collapse text-[0.8125rem] m-0 text-foreground">
               <tbody>
                 {/* 1. Recurring Tier Price — global mode: single row; custom mode: per-group rows */}
                 {!isCustomBillingMode ? (
-                  <tr className="bg-violet-100 [&>td]:py-3.5 [&>td]:px-4 [&>td]:font-bold [&>td]:text-violet-900 [&>td]:border-t-2 [&>td]:border-violet-300 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-violet-100">
+                  <tr className="bg-[color-mix(in_oklab,var(--primary)_15%,var(--background))] [&>td]:py-3.5 [&>td]:px-4 [&>td]:font-bold [&>td]:text-foreground [&>td:first-child]:text-primary [&>td]:border-t-2 [&>td]:border-primary/40 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-[color-mix(in_oklab,var(--primary)_15%,var(--background))]">
                     <td>
                       Recurring Tier Price
                       <InfoIcon content="Shows the calculated total for a client selecting this tier with the current billing cycle. Includes base price + included services + optional add-ons." />
-                      <span className="font-normal text-[0.6875rem] text-slate-400 ml-1">
+                      <span className="font-normal text-[0.6875rem] text-muted-foreground ml-1">
                         /
                         {BILLING_CYCLE_SHORT_LABELS[
                           activeBillingCycle
@@ -1697,7 +1697,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             ...(idx === selectedTierIdx
                               ? {
                                   background:
-                                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                    "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                                   boxShadow:
                                     "inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                                 }
@@ -1715,7 +1715,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                                 )}
                                 {savingsPct > 0 && (
                                   <span
-                                    className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-emerald-700 bg-emerald-100 rounded-md align-middle"
+                                    className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-status-success bg-status-success/20 rounded-md align-middle"
                                     style={{
                                       fontFamily:
                                         "'DM Mono', 'SF Mono', monospace",
@@ -1737,11 +1737,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                     (ogb) => (
                       <tr
                         key={`group-${ogb.optionGroupId}`}
-                        className="bg-violet-100 [&>td]:py-3.5 [&>td]:px-4 [&>td]:font-bold [&>td]:text-violet-900 [&>td]:border-t-2 [&>td]:border-violet-300 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-violet-100"
+                        className="bg-[color-mix(in_oklab,var(--primary)_15%,var(--background))] [&>td]:py-3.5 [&>td]:px-4 [&>td]:font-bold [&>td]:text-foreground [&>td:first-child]:text-primary [&>td]:border-t-2 [&>td]:border-primary/40 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-[color-mix(in_oklab,var(--primary)_15%,var(--background))]"
                       >
                         <td>
                           {ogb.optionGroupName}
-                          <span className="font-normal text-[0.6875rem] text-slate-400 ml-1">
+                          <span className="font-normal text-[0.6875rem] text-muted-foreground ml-1">
                             /
                             {BILLING_CYCLE_SHORT_LABELS[
                               ogb.effectiveBillingCycle
@@ -1761,7 +1761,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               ...(idx === selectedTierIdx
                                 ? {
                                     background:
-                                      "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                      "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                                     boxShadow:
                                       "inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                                   }
@@ -1780,7 +1780,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                                   {ogb.discount &&
                                     ogb.discount.discountValue > 0 && (
                                       <span
-                                        className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-emerald-700 bg-emerald-100 rounded-md align-middle"
+                                        className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-status-success bg-status-success/20 rounded-md align-middle"
                                         style={{
                                           fontFamily:
                                             "'DM Mono', 'SF Mono', monospace",
@@ -1819,11 +1819,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   .map((ab) => (
                     <tr
                       key={`addon-recurring-${ab.optionGroupId}`}
-                      className="bg-violet-50 [&>td]:border-t [&>td]:border-dashed [&>td]:border-violet-200 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-violet-700 [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-violet-50"
+                      className="bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))] [&>td]:border-t [&>td]:border-dashed [&>td]:border-primary/30 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-foreground [&>td:first-child]:text-primary [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))]"
                     >
                       <td>
                         + {ab.optionGroupName}
-                        <span className="font-normal text-[0.6875rem] text-slate-400 ml-1">
+                        <span className="font-normal text-[0.6875rem] text-muted-foreground ml-1">
                           /
                           {BILLING_CYCLE_SHORT_LABELS[
                             ab.selectedBillingCycle
@@ -1841,7 +1841,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             ...(idx === selectedTierIdx
                               ? {
                                   background:
-                                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                    "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                                   boxShadow:
                                     "inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                                 }
@@ -1853,7 +1853,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               +{formatPrice(ab.recurringAmount, ab.currency)}
                               {ab.discount && ab.discount.discountValue > 0 && (
                                 <span
-                                  className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-emerald-700 bg-emerald-100 rounded-md align-middle"
+                                  className="inline-block ml-1.5 py-px px-1.5 text-[0.5625rem] font-semibold text-status-success bg-status-success/20 rounded-md align-middle"
                                   style={{
                                     fontFamily:
                                       "'DM Mono', 'SF Mono', monospace",
@@ -1886,11 +1886,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   .map((ab) => (
                     <tr
                       key={`addon-setup-${ab.optionGroupId}`}
-                      className="bg-violet-50 [&>td]:border-t [&>td]:border-dashed [&>td]:border-violet-200 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-violet-700 [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-violet-50"
+                      className="bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))] [&>td]:border-t [&>td]:border-dashed [&>td]:border-primary/30 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-foreground [&>td:first-child]:text-primary [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))]"
                     >
                       <td>
                         + {ab.optionGroupName}{" "}
-                        <span className="font-normal text-[0.6875rem] text-slate-400 ml-1">
+                        <span className="font-normal text-[0.6875rem] text-muted-foreground ml-1">
                           (one-time setup)
                         </span>
                       </td>
@@ -1905,7 +1905,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             ...(idx === selectedTierIdx
                               ? {
                                   background:
-                                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                    "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                                   boxShadow:
                                     "inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                                 }
@@ -1942,7 +1942,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   if (totalSetupBase === 0) return null;
                   const hasDiscount = totalSetupEffective !== totalSetupBase;
                   return (
-                    <tr className="bg-violet-50 [&>td]:border-t [&>td]:border-dashed [&>td]:border-violet-200 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-violet-700 [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-violet-50">
+                    <tr className="bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))] [&>td]:border-t [&>td]:border-dashed [&>td]:border-primary/30 [&>td]:font-semibold [&>td]:text-[0.8125rem] [&>td]:text-foreground [&>td:first-child]:text-primary [&>td]:py-2 [&>td]:px-4 [&>td:first-child]:bg-[color-mix(in_oklab,var(--primary)_10%,var(--background))]">
                       <td>+ Setup & Formation Fees</td>
                       {tiers.map((tier, idx) => (
                         <td
@@ -1955,7 +1955,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             ...(idx === selectedTierIdx
                               ? {
                                   background:
-                                    "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)",
+                                    "linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--purple) 100%)",
                                   boxShadow:
                                     "inset 0 1px 0 rgba(255, 255, 255, 0.15)",
                                 }
@@ -1993,11 +1993,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
         {addServiceModal && (
           <div
-            className="fixed inset-0 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center z-[100]"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100]"
             style={{ animation: "modal-backdrop 0.2s ease-out" }}
           >
             <div
-              className="bg-white rounded-xl p-6 max-h-[85vh] overflow-y-auto"
+              className="bg-card rounded-xl p-6 max-h-[85vh] overflow-y-auto"
               style={{
                 width: "min(32rem, calc(100vw - 2rem))",
                 maxWidth: "32rem",
@@ -2007,7 +2007,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               }}
             >
               <h3
-                className="text-xl font-bold text-slate-900 mb-5 tracking-tight"
+                className="text-xl font-bold text-foreground mb-5 tracking-tight"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 Add New Service
@@ -2016,7 +2016,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               {/* Service Name */}
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Service Name
@@ -2026,7 +2026,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   value={newServiceName}
                   onChange={(e) => setNewServiceName(e.target.value)}
                   placeholder="Enter service name"
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   autoFocus
                 />
@@ -2035,7 +2035,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               {/* Description */}
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Description (optional)
@@ -2045,7 +2045,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   onChange={(e) => setNewServiceDescription(e.target.value)}
                   placeholder="Enter description..."
                   rows={2}
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 resize-y min-h-[80px] focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 resize-y min-h-[80px] focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 />
               </div>
@@ -2054,7 +2054,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               {tiers.length > 0 && (
                 <div className="mb-5">
                   <label
-                    className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                    className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   >
                     Include in Tiers
@@ -2065,7 +2065,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                       return (
                         <label
                           key={tier.id}
-                          className={`relative flex items-center gap-2 p-3 bg-white border-2 rounded-xl cursor-pointer transition-all duration-150 min-w-0 overflow-hidden ${isSelected ? "border-violet-500 bg-violet-50 shadow-[0_0_0_3px_rgba(139,92,246,0.15)] hover:border-violet-600" : "border-slate-300 hover:border-violet-400 hover:bg-violet-50"}`}
+                          className={`relative flex items-center gap-2 p-3 bg-card border-2 rounded-xl cursor-pointer transition-all duration-150 min-w-0 overflow-hidden ${isSelected ? "border-primary bg-primary/10 shadow-[0_0_0_3px_rgba(139,92,246,0.15)] hover:border-primary" : "border-input hover:border-primary/60 hover:bg-primary/10"}`}
                         >
                           <input
                             type="checkbox"
@@ -2079,13 +2079,13 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               }
                               setNewServiceSelectedTiers(newSet);
                             }}
-                            className="relative w-5 h-5 shrink-0 appearance-none bg-white border-2 border-slate-400 rounded-md cursor-pointer transition-all duration-150 checked:bg-violet-600 checked:border-violet-600"
+                            className="relative w-5 h-5 shrink-0 appearance-none bg-card border-2 border-input rounded-md cursor-pointer transition-all duration-150 checked:bg-primary checked:border-primary"
                           />
-                          <span className="flex-1 text-sm font-semibold text-slate-800 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                          <span className="flex-1 text-sm font-semibold text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
                             {tier.name}
                           </span>
                           {tier.pricing.amount !== null && (
-                            <span className="text-xs font-semibold text-slate-500 whitespace-nowrap shrink-0">
+                            <span className="text-xs font-semibold text-muted-foreground whitespace-nowrap shrink-0">
                               ${tier.pricing.amount}/mo
                             </span>
                           )}
@@ -2094,14 +2094,14 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                     })}
                   </div>
                   {newServiceSelectedTiers.size === 0 && (
-                    <p className="text-[0.8125rem] text-slate-500 mt-3 italic">
+                    <p className="text-[0.8125rem] text-muted-foreground mt-3 italic">
                       Select at least one tier to include this service
                     </p>
                   )}
                 </div>
               )}
 
-              <p className="text-[0.8125rem] text-slate-600 mb-5 leading-6">
+              <p className="text-[0.8125rem] text-muted-foreground mb-5 leading-6">
                 This service will be added to{" "}
                 <strong>
                   {addServiceModal.groupId !== UNGROUPED_ID
@@ -2124,7 +2124,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                     setNewServiceDescription("");
                     setNewServiceSelectedTiers(new Set());
                   }}
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-200 text-slate-600 border-none hover:bg-slate-300 hover:text-slate-800"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-muted-foreground border-none hover:bg-accent hover:text-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Cancel
@@ -2134,7 +2134,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   disabled={
                     !newServiceName.trim() || newServiceSelectedTiers.size === 0
                   }
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-violet-700 hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-primary hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Add Service
@@ -2147,11 +2147,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         {/* Edit Service Modal */}
         {editServiceModal && (
           <div
-            className="fixed inset-0 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center z-[100]"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100]"
             style={{ animation: "modal-backdrop 0.2s ease-out" }}
           >
             <div
-              className="bg-white rounded-xl p-6 max-h-[85vh] overflow-y-auto"
+              className="bg-card rounded-xl p-6 max-h-[85vh] overflow-y-auto"
               style={{
                 width: "min(32rem, calc(100vw - 2rem))",
                 maxWidth: "32rem",
@@ -2161,7 +2161,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               }}
             >
               <h3
-                className="text-xl font-bold text-slate-900 mb-5 tracking-tight"
+                className="text-xl font-bold text-foreground mb-5 tracking-tight"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 Edit Service
@@ -2169,7 +2169,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Service Name
@@ -2179,7 +2179,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   value={editServiceName}
                   onChange={(e) => setEditServiceName(e.target.value)}
                   placeholder="Enter service name"
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   autoFocus
                 />
@@ -2187,7 +2187,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Description (optional)
@@ -2197,7 +2197,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   onChange={(e) => setEditServiceDescription(e.target.value)}
                   placeholder="Enter description..."
                   rows={2}
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 resize-y min-h-[80px] focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 resize-y min-h-[80px] focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 />
               </div>
@@ -2206,7 +2206,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               {tiers.length > 0 && (
                 <div className="mb-5">
                   <label
-                    className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                    className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   >
                     Include in Tiers
@@ -2217,7 +2217,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                       return (
                         <label
                           key={tier.id}
-                          className={`relative flex items-center gap-2 p-3 bg-white border-2 rounded-xl cursor-pointer transition-all duration-150 min-w-0 overflow-hidden ${isSelected ? "border-violet-500 bg-violet-50 shadow-[0_0_0_3px_rgba(139,92,246,0.15)] hover:border-violet-600" : "border-slate-300 hover:border-violet-400 hover:bg-violet-50"}`}
+                          className={`relative flex items-center gap-2 p-3 bg-card border-2 rounded-xl cursor-pointer transition-all duration-150 min-w-0 overflow-hidden ${isSelected ? "border-primary bg-primary/10 shadow-[0_0_0_3px_rgba(139,92,246,0.15)] hover:border-primary" : "border-input hover:border-primary/60 hover:bg-primary/10"}`}
                         >
                           <input
                             type="checkbox"
@@ -2231,13 +2231,13 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               }
                               setEditServiceSelectedTiers(newSet);
                             }}
-                            className="relative w-5 h-5 shrink-0 appearance-none bg-white border-2 border-slate-400 rounded-md cursor-pointer transition-all duration-150 checked:bg-violet-600 checked:border-violet-600"
+                            className="relative w-5 h-5 shrink-0 appearance-none bg-card border-2 border-input rounded-md cursor-pointer transition-all duration-150 checked:bg-primary checked:border-primary"
                           />
-                          <span className="flex-1 text-sm font-semibold text-slate-800 min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+                          <span className="flex-1 text-sm font-semibold text-foreground min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
                             {tier.name}
                           </span>
                           {tier.pricing.amount !== null && (
-                            <span className="text-xs font-semibold text-slate-500 whitespace-nowrap shrink-0">
+                            <span className="text-xs font-semibold text-muted-foreground whitespace-nowrap shrink-0">
                               ${tier.pricing.amount}/mo
                             </span>
                           )}
@@ -2256,7 +2256,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                     setEditServiceDescription("");
                     setEditServiceSelectedTiers(new Set());
                   }}
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-200 text-slate-600 border-none hover:bg-slate-300 hover:text-slate-800"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-muted-foreground border-none hover:bg-accent hover:text-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Cancel
@@ -2264,7 +2264,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                 <button
                   onClick={handleSaveEditService}
                   disabled={!editServiceName.trim()}
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-violet-700 hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-primary hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Save Changes
@@ -2277,11 +2277,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
         {/* Metric Edit Modal */}
         {metricModal && (
           <div
-            className="fixed inset-0 bg-slate-900/75 backdrop-blur-sm flex items-center justify-center z-[100]"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100]"
             style={{ animation: "modal-backdrop 0.2s ease-out" }}
           >
             <div
-              className="bg-white rounded-xl p-6 max-h-[85vh] overflow-y-auto"
+              className="bg-card rounded-xl p-6 max-h-[85vh] overflow-y-auto"
               style={{
                 width: "min(32rem, calc(100vw - 2rem))",
                 maxWidth: "32rem",
@@ -2291,7 +2291,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
               }}
             >
               <h3
-                className="text-xl font-bold text-slate-900 mb-5 tracking-tight"
+                className="text-xl font-bold text-foreground mb-5 tracking-tight"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 {metricModal.metric ? "Edit Metric" : "Add Metric"}
@@ -2299,7 +2299,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Metric Name
@@ -2309,7 +2309,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   value={metricName}
                   onChange={(e) => setMetricName(e.target.value)}
                   placeholder="e.g., Number of Entities, API Calls, Storage"
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   autoFocus
                 />
@@ -2317,7 +2317,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Unit Name (Optional)
@@ -2327,11 +2327,11 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   value={metricUnitName}
                   onChange={(e) => setMetricUnitName(e.target.value)}
                   placeholder="e.g., entity, user, API call, GB"
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 />
                 <p
-                  className="text-[0.8125rem] text-slate-600 mb-5 leading-6"
+                  className="text-[0.8125rem] text-muted-foreground mb-5 leading-6"
                   style={{ marginTop: "0.375rem" }}
                 >
                   Used for overage pricing (e.g., "$50/entity above free limit")
@@ -2340,7 +2340,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Accrual Cycle
@@ -2350,7 +2350,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   onChange={(e) =>
                     setMetricResetCycle(e.target.value as AccrualCycle)
                   }
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400 cursor-pointer"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground cursor-pointer"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   <option value="DAILY">Daily</option>
@@ -2361,7 +2361,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   <option value="ANNUAL">Annual</option>
                 </select>
                 <p
-                  className="text-[0.8125rem] text-slate-600 mb-5 leading-6"
+                  className="text-[0.8125rem] text-muted-foreground mb-5 leading-6"
                   style={{ marginTop: "0.375rem" }}
                 >
                   How often usage accrues (when overage is crystallized into
@@ -2371,7 +2371,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Metric Type
@@ -2381,7 +2381,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   onChange={(e) =>
                     setMetricTypeChoice(e.target.value as MetricType)
                   }
-                  className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400 cursor-pointer"
+                  className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground cursor-pointer"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   <option value="NON_CUMULATIVE">
@@ -2392,7 +2392,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                   </option>
                 </select>
                 <p
-                  className="text-[0.8125rem] text-slate-600 mb-5 leading-6"
+                  className="text-[0.8125rem] text-muted-foreground mb-5 leading-6"
                   style={{ marginTop: "0.375rem" }}
                 >
                   Non-cumulative metrics reset to zero each billing cycle (e.g.
@@ -2403,13 +2403,13 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
 
               <div className="mb-5">
                 <label
-                  className="block text-[0.8125rem] font-semibold text-slate-700 mb-2"
+                  className="block text-[0.8125rem] font-semibold text-foreground mb-2"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Pricing Tiers & Values
                 </label>
                 <p
-                  className="text-[0.8125rem] text-slate-600 mb-5 leading-6"
+                  className="text-[0.8125rem] text-muted-foreground mb-5 leading-6"
                   style={{ marginBottom: "0.75rem" }}
                 >
                   Enable the metric for each tier and set values.
@@ -2435,10 +2435,10 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                           borderRadius: "6px",
                           background: isEnabled
                             ? "rgba(124, 58, 237, 0.05)"
-                            : "#f8fafc",
+                            : "var(--card)",
                           border: isEnabled
                             ? "1px solid rgba(124, 58, 237, 0.2)"
-                            : "1px solid #e2e8f0",
+                            : "1px solid var(--border)",
                           transition: "all 0.15s ease",
                         }}
                       >
@@ -2475,14 +2475,16 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               style={{
                                 width: "16px",
                                 height: "16px",
-                                accentColor: "#7c3aed",
+                                accentColor: "var(--primary)",
                                 cursor: "pointer",
                               }}
                             />
                             <span
                               style={{
                                 fontWeight: 600,
-                                color: isEnabled ? "#334155" : "#94a3b8",
+                                color: isEnabled
+                                  ? "var(--foreground)"
+                                  : "var(--muted-foreground)",
                                 fontSize: "0.875rem",
                               }}
                             >
@@ -2499,7 +2501,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               }))
                             }
                             placeholder={isEnabled ? "Free limit" : "—"}
-                            className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                            className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                             disabled={!isEnabled}
                             style={{
                               fontFamily: "'DM Sans', system-ui, sans-serif",
@@ -2518,7 +2520,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               }))
                             }
                             placeholder={isEnabled ? "Paid limit" : "—"}
-                            className="w-full text-sm text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-slate-400"
+                            className="w-full text-sm text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-3 px-4 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] placeholder:text-muted-foreground"
                             disabled={!isEnabled}
                             style={{
                               fontFamily: "'DM Sans', system-ui, sans-serif",
@@ -2544,7 +2546,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             <span
                               style={{
                                 fontSize: "0.75rem",
-                                color: "#64748b",
+                                color: "var(--muted-foreground)",
                                 whiteSpace: "nowrap",
                               }}
                             >
@@ -2554,7 +2556,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                               style={{
                                 fontFamily: "'DM Mono', 'SF Mono', monospace",
                                 fontSize: "0.8125rem",
-                                color: "#64748b",
+                                color: "var(--muted-foreground)",
                               }}
                             >
                               $
@@ -2575,9 +2577,9 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                                 fontFamily: "'DM Mono', 'SF Mono', monospace",
                                 fontSize: "0.8125rem",
                                 fontWeight: 500,
-                                color: "#0f172a",
-                                background: "#ffffff",
-                                border: "1px solid #cbd5e1",
+                                color: "var(--foreground)",
+                                background: "var(--card)",
+                                border: "1px solid var(--border)",
                                 borderRadius: "4px",
                                 padding: "0.25rem 0.375rem",
                                 outline: "none",
@@ -2586,7 +2588,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                             <span
                               style={{
                                 fontSize: "0.6875rem",
-                                color: "#64748b",
+                                color: "var(--muted-foreground)",
                               }}
                             >
                               per {metricUnitName || "unit"} above free limit
@@ -2615,7 +2617,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                     setMetricResetCycle("MONTHLY");
                     setMetricTypeChoice("NON_CUMULATIVE");
                   }}
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-200 text-slate-600 border-none hover:bg-slate-300 hover:text-slate-800"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-muted-foreground border-none hover:bg-accent hover:text-foreground"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   Cancel
@@ -2623,7 +2625,7 @@ export function TheMatrix({ document, dispatch }: TheMatrixProps) {
                 <button
                   onClick={handleSaveMetric}
                   disabled={!metricName.trim() || metricEnabledTiers.size === 0}
-                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-violet-700 hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+                  className="py-2.5 px-5 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-white border-none shadow-[0_2px_4px_rgba(124,58,237,0.3)] hover:enabled:bg-primary hover:enabled:shadow-[0_4px_8px_rgba(124,58,237,0.4)] hover:enabled:-translate-y-px active:enabled:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                 >
                   {metricModal.metric ? "Save Changes" : "Add Metric"}
@@ -2737,43 +2739,43 @@ function ServiceGroupSection({
     : groupActiveCycle || activeBillingCycle;
 
   const headerClass = isSetupFormation
-    ? "bg-amber-100"
+    ? "bg-[color-mix(in_oklab,var(--status-warning)_20%,var(--card))]"
     : isOptional
-      ? "bg-sky-100"
-      : "bg-slate-100";
+      ? "bg-[color-mix(in_oklab,var(--status-progress)_20%,var(--card))]"
+      : "bg-muted";
 
   const rowClass = isSetupFormation
-    ? "bg-amber-50"
+    ? "bg-[color-mix(in_oklab,var(--status-warning)_10%,var(--card))]"
     : isOptional
-      ? "bg-sky-50"
-      : "bg-slate-50";
+      ? "bg-[color-mix(in_oklab,var(--status-progress)_10%,var(--card))]"
+      : "bg-muted";
 
   return (
     <>
-      <tr className={`py-3 px-4 border-b border-slate-200 ${headerClass}`}>
+      <tr className={`py-3 px-4 border-b border-border ${headerClass}`}>
         <td
-          className={`sticky left-0 z-10 py-3 px-4 border-b border-slate-200 ${headerClass}`}
+          className={`sticky left-0 z-10 py-3 px-4 border-b border-border ${headerClass}`}
         >
           <div className="flex items-center gap-3">
             {isOptional && (
               <button
                 onClick={onToggle}
-                className={`relative w-10 h-5 rounded-full border-none cursor-pointer transition-all duration-200 ${isEnabled ? "bg-violet-600" : "bg-slate-300"}`}
+                className={`relative w-10 h-5 rounded-full border-none cursor-pointer transition-all duration-200 ${isEnabled ? "bg-primary" : "bg-border"}`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-150 ${isEnabled ? "left-[calc(100%-1.125rem)]" : "left-0.5"}`}
+                  className={`absolute top-0.5 w-4 h-4 bg-card rounded-full shadow-sm transition-all duration-150 ${isEnabled ? "left-[calc(100%-1.125rem)]" : "left-0.5"}`}
                 />
               </button>
             )}
             <div className="flex flex-col gap-0.5">
               <span
-                className="font-semibold text-slate-800"
+                className="font-semibold text-foreground"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 {group.name}
               </span>
               {group.isAddOn && (
-                <span className="text-[0.625rem] font-semibold uppercase tracking-[0.05em] text-slate-400">
+                <span className="text-[0.625rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
                   Optional Add-on
                 </span>
               )}
@@ -2803,7 +2805,7 @@ function ServiceGroupSection({
                 return (
                   <div className="flex items-center gap-3 ml-auto">
                     {monthlyBase > 0 && (
-                      <span className="text-sm font-bold text-slate-800 whitespace-nowrap">
+                      <span className="text-sm font-bold text-foreground whitespace-nowrap">
                         {formatPrice(
                           effectiveBillingCycle === "MONTHLY"
                             ? monthlyBase
@@ -2814,18 +2816,18 @@ function ServiceGroupSection({
                       </span>
                     )}
                     {effectiveBillingCycle !== "MONTHLY" && monthlyBase > 0 && (
-                      <span className="text-[0.6875rem] font-medium text-slate-500 whitespace-nowrap">
+                      <span className="text-[0.6875rem] font-medium text-muted-foreground whitespace-nowrap">
                         Billed {formatPrice(recurringAmount, currency)}{" "}
                         {BILLING_CYCLE_LABELS[effectiveBillingCycle]}
                       </span>
                     )}
                     {savingsPct > 0 && (
-                      <span className="text-[0.6875rem] font-semibold text-emerald-600 whitespace-nowrap">
+                      <span className="text-[0.6875rem] font-semibold text-status-success whitespace-nowrap">
                         SAVE {Math.round(savingsPct)}%
                       </span>
                     )}
                     {setupCost && setupCost.amount > 0 && (
-                      <span className="text-[0.6875rem] font-medium text-slate-500 whitespace-nowrap">
+                      <span className="text-[0.6875rem] font-medium text-muted-foreground whitespace-nowrap">
                         +{" "}
                         {formatPrice(
                           setupCost.amount,
@@ -2847,8 +2849,8 @@ function ServiceGroupSection({
           <span
             className={`inline-block py-1 px-2.5 rounded-md text-[0.625rem] font-semibold uppercase tracking-[0.04em] ${
               isSetupFormation || !isOptional
-                ? "bg-emerald-100 text-emerald-700"
-                : "bg-sky-200 text-sky-700"
+                ? "bg-status-success/20 text-status-success"
+                : "bg-status-progress/25 text-status-progress"
             }`}
           >
             {isSetupFormation
@@ -2889,12 +2891,12 @@ function ServiceGroupSection({
 
       {onAddService && group.id !== "__ungrouped__" && (
         <tr
-          className={`[&>td]:py-2 [&>td]:px-4 [&>td]:pl-8 [&>td]:border-b [&>td]:border-slate-100 ${rowClass}`}
+          className={`[&>td]:py-2 [&>td]:px-4 [&>td]:pl-8 [&>td]:border-b [&>td]:border-border ${rowClass}`}
         >
           <td className={rowClass}>
             <button
               onClick={() => onAddService(group.id, isSetupFormation)}
-              className="flex items-center gap-1.5 text-[0.8125rem] font-medium text-violet-600 bg-transparent border-none cursor-pointer transition-all duration-150 hover:text-violet-700"
+              className="flex items-center gap-1.5 text-[0.8125rem] font-medium text-primary bg-transparent border-none cursor-pointer transition-all duration-150 hover:text-primary/80"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             >
               <svg
@@ -2922,7 +2924,7 @@ function ServiceGroupSection({
           const basePrice = group.price ?? 0;
           if (basePrice === 0) {
             return (
-              <tr className="bg-slate-50 [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-slate-700 [&>td]:border-b [&>td]:border-slate-200 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-slate-50">
+              <tr className="bg-muted [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-foreground [&>td]:border-b [&>td]:border-border [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-muted">
                 <td>TOTAL SETUP FEE</td>
                 <td colSpan={tiers.length} style={{ textAlign: "center" }}>
                   No setup fee configured
@@ -2953,11 +2955,11 @@ function ServiceGroupSection({
           const curr = group.currency || "USD";
           const hasDiscount = effectivePrice !== basePrice;
           return (
-            <tr className="bg-slate-50 [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-slate-700 [&>td]:border-b [&>td]:border-slate-200 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-slate-50">
+            <tr className="bg-muted [&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-foreground [&>td]:border-b [&>td]:border-border [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 [&>td:first-child]:bg-muted">
               <td>TOTAL SETUP FEE</td>
               <td colSpan={tiers.length} style={{ textAlign: "center" }}>
                 {selectedTier?.excludeFromSetupFee ? (
-                  <span className="text-slate-400 italic">
+                  <span className="text-muted-foreground italic">
                     No setup fee for this tier
                   </span>
                 ) : hasDiscount ? (
@@ -3012,7 +3014,7 @@ function ServiceGroupSection({
 
           return (
             <tr
-              className={`[&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-slate-700 [&>td]:border-b [&>td]:border-slate-300 [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 ${headerClass}`}
+              className={`[&>td]:py-2.5 [&>td]:px-4 [&>td]:font-semibold [&>td]:text-foreground [&>td]:border-b [&>td]:border-input [&>td:first-child]:sticky [&>td:first-child]:left-0 [&>td:first-child]:z-10 ${headerClass}`}
             >
               <td className={headerClass}>SUBTOTAL</td>
               <td colSpan={tiers.length} style={{ textAlign: "center" }}>
@@ -3099,13 +3101,13 @@ function ServiceRowWithMetrics({
         className={`group/servicerow transition-all duration-150 hover:brightness-[0.98] ${rowClass}`}
       >
         <td
-          className={`py-2.5 px-4 pl-8 border-b border-slate-100 sticky left-0 z-10 ${rowClass}`}
+          className={`py-2.5 px-4 pl-8 border-b border-border sticky left-0 z-10 ${rowClass}`}
         >
           <div className="flex items-center justify-start gap-2">
             {/* Reorder arrows */}
             <div className="flex flex-col gap-px mr-2 opacity-0 group-hover/servicerow:opacity-100 transition-opacity duration-150">
               <button
-                className="flex items-center justify-center w-[18px] h-[14px] p-0 border-none bg-transparent text-slate-400 cursor-pointer rounded-sm transition-all duration-150 hover:enabled:bg-violet-100 hover:enabled:text-violet-600 disabled:opacity-30 disabled:cursor-not-allowed [&>svg]:w-3 [&>svg]:h-3"
+                className="flex items-center justify-center w-[18px] h-[14px] p-0 border-none bg-transparent text-muted-foreground cursor-pointer rounded-sm transition-all duration-150 hover:enabled:bg-primary/15 hover:enabled:text-primary disabled:opacity-30 disabled:cursor-not-allowed [&>svg]:w-3 [&>svg]:h-3"
                 onClick={(e) => {
                   e.stopPropagation();
                   onReorderService(service.id, "up", groupServices);
@@ -3123,7 +3125,7 @@ function ServiceRowWithMetrics({
                 </svg>
               </button>
               <button
-                className="flex items-center justify-center w-[18px] h-[14px] p-0 border-none bg-transparent text-slate-400 cursor-pointer rounded-sm transition-all duration-150 hover:enabled:bg-violet-100 hover:enabled:text-violet-600 disabled:opacity-30 disabled:cursor-not-allowed [&>svg]:w-3 [&>svg]:h-3"
+                className="flex items-center justify-center w-[18px] h-[14px] p-0 border-none bg-transparent text-muted-foreground cursor-pointer rounded-sm transition-all duration-150 hover:enabled:bg-primary/15 hover:enabled:text-primary disabled:opacity-30 disabled:cursor-not-allowed [&>svg]:w-3 [&>svg]:h-3"
                 onClick={(e) => {
                   e.stopPropagation();
                   onReorderService(service.id, "down", groupServices);
@@ -3142,7 +3144,7 @@ function ServiceRowWithMetrics({
               </button>
             </div>
             <button
-              className="text-[0.8125rem] text-slate-700 bg-none border-none py-1 px-2 -m-1 rounded cursor-pointer transition-all duration-150 text-left hover:bg-slate-100 hover:text-violet-700"
+              className="text-[0.8125rem] text-foreground bg-none border-none py-1 px-2 -m-1 rounded cursor-pointer transition-all duration-150 text-left hover:bg-accent hover:text-primary/80"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               onClick={(e) => {
                 e.stopPropagation();
@@ -3153,7 +3155,7 @@ function ServiceRowWithMetrics({
               {service.title}
             </button>
             {service.isSetupFormation && (
-              <span className="inline-block py-px px-1.5 ml-1.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded-md bg-amber-100 text-amber-700 align-middle">
+              <span className="inline-block py-px px-1.5 ml-1.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded-md bg-status-warning/20 text-status-warning align-middle">
                 Setup
               </span>
             )}
@@ -3162,7 +3164,7 @@ function ServiceRowWithMetrics({
                 e.stopPropagation();
                 onAddMetric(service.id);
               }}
-              className="opacity-60 group-hover/servicerow:opacity-100 text-[0.6875rem] font-medium text-violet-600 bg-transparent border-none cursor-pointer py-0.5 px-1.5 rounded-md transition-all duration-150 whitespace-nowrap hover:bg-violet-100 hover:text-violet-700"
+              className="opacity-60 group-hover/servicerow:opacity-100 text-[0.6875rem] font-medium text-primary bg-transparent border-none cursor-pointer py-0.5 px-1.5 rounded-md transition-all duration-150 whitespace-nowrap hover:bg-primary/15 hover:text-primary/80"
               style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               title="Add metric to this service"
             >
@@ -3190,9 +3192,9 @@ function ServiceRowWithMetrics({
           return (
             <td
               key={tier.id}
-              className={`py-2.5 px-4 text-center border-b border-slate-100 cursor-pointer transition-all duration-150 hover:bg-white/50 ${
+              className={`py-2.5 px-4 text-center border-b border-border cursor-pointer transition-all duration-150 hover:bg-card/50 ${
                 isSelected
-                  ? "shadow-[inset_0_0_0_2px_#8b5cf6] bg-violet-500/[0.08]"
+                  ? "shadow-[inset_0_0_0_2px_var(--primary)] bg-primary/[0.08]"
                   : ""
               } ${tierIdx === selectedTierIdx ? "" : ""} ${
                 isNotIncluded ? "relative" : ""
@@ -3231,7 +3233,7 @@ function ServiceRowWithMetrics({
               {/* Loss Aversion: Show upgrade hint for NOT_INCLUDED */}
               {isNotIncluded && nextTierWithService && (
                 <span
-                  className="absolute bottom-0.5 left-1/2 -translate-x-1/2 translate-y-1 text-[0.5625rem] font-medium text-violet-600 whitespace-nowrap opacity-0 transition-all duration-150 pointer-events-none group-hover/servicerow:opacity-0"
+                  className="absolute bottom-0.5 left-1/2 -translate-x-1/2 translate-y-1 text-[0.5625rem] font-medium text-primary whitespace-nowrap opacity-0 transition-all duration-150 pointer-events-none group-hover/servicerow:opacity-0"
                   style={{ opacity: 0 }}
                 >
                   In {nextTierWithService.name} →
@@ -3245,15 +3247,15 @@ function ServiceRowWithMetrics({
       {metrics.map((metric) => (
         <tr
           key={`${service.id}-${metric}`}
-          className={`group/metricrow bg-inherit cursor-pointer transition-all duration-150 hover:bg-violet-500/[0.08] ${rowClass}`}
+          className={`group/metricrow bg-inherit cursor-pointer transition-all duration-150 hover:bg-primary/90/[0.08] ${rowClass}`}
           onClick={() => onEditMetric(service.id, metric)}
         >
           <td
-            className={`py-2 px-4 pl-28 border-b border-slate-100 sticky left-0 z-10 align-middle ${rowClass}`}
+            className={`py-2 px-4 pl-28 border-b border-border sticky left-0 z-10 align-middle ${rowClass}`}
           >
             <div className="flex items-center gap-2 relative h-full">
               <span
-                className="text-xs italic text-slate-500"
+                className="text-xs italic text-muted-foreground"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 {metric}
@@ -3264,7 +3266,7 @@ function ServiceRowWithMetrics({
                     e.stopPropagation();
                     onEditMetric(service.id, metric);
                   }}
-                  className="p-0.5 bg-transparent border-none text-slate-400 cursor-pointer rounded-md transition-all duration-150 flex items-center justify-center hover:bg-slate-200 hover:text-violet-600"
+                  className="p-0.5 bg-transparent border-none text-muted-foreground cursor-pointer rounded-md transition-all duration-150 flex items-center justify-center hover:bg-accent hover:text-primary"
                   title="Edit metric"
                 >
                   <svg
@@ -3286,7 +3288,7 @@ function ServiceRowWithMetrics({
                     e.stopPropagation();
                     onRemoveMetric(service.id, metric);
                   }}
-                  className="p-0.5 bg-transparent border-none text-slate-400 cursor-pointer rounded-md transition-all duration-150 flex items-center justify-center hover:bg-slate-200 hover:text-rose-600"
+                  className="p-0.5 bg-transparent border-none text-muted-foreground cursor-pointer rounded-md transition-all duration-150 flex items-center justify-center hover:bg-accent hover:text-destructive"
                   title="Remove metric"
                 >
                   <svg
@@ -3312,7 +3314,7 @@ function ServiceRowWithMetrics({
             return (
               <td
                 key={tier.id}
-                className="py-1.5 px-3 text-center border-b border-slate-100 align-middle"
+                className="py-1.5 px-3 text-center border-b border-border align-middle"
                 style={
                   tierIdx === selectedTierIdx
                     ? {
@@ -3322,14 +3324,14 @@ function ServiceRowWithMetrics({
                     : undefined
                 }
               >
-                <div className="inline-flex flex-col border border-slate-200 rounded-[10px] overflow-hidden min-w-[10rem]">
+                <div className="inline-flex flex-col border border-border rounded-[10px] overflow-hidden min-w-[10rem]">
                   {usageLimit ? (
                     <>
                       <div className="flex justify-between items-center py-1.5 px-3 gap-4">
-                        <span className="text-[0.6875rem] text-slate-500 whitespace-nowrap">
+                        <span className="text-[0.6875rem] text-muted-foreground whitespace-nowrap">
                           Included
                         </span>
-                        <span className="text-xs text-slate-700 text-right whitespace-nowrap">
+                        <span className="text-xs text-foreground text-right whitespace-nowrap">
                           {usageLimit.freeLimit != null ? (
                             <>
                               <strong>
@@ -3339,7 +3341,7 @@ function ServiceRowWithMetrics({
                                   : ""}
                               </strong>
                               {usageLimit.accrualCycle && (
-                                <span className="text-[0.625rem] font-normal text-slate-400">
+                                <span className="text-[0.625rem] font-normal text-muted-foreground">
                                   {" "}
                                   / {usageLimit.accrualCycle.toLowerCase()}
                                 </span>
@@ -3351,16 +3353,16 @@ function ServiceRowWithMetrics({
                         </span>
                       </div>
                       {usageLimit.unitPrice != null && (
-                        <div className="flex justify-between items-center py-1.5 px-3 gap-4 border-t border-slate-100">
-                          <span className="text-[0.6875rem] text-slate-500 whitespace-nowrap">
+                        <div className="flex justify-between items-center py-1.5 px-3 gap-4 border-t border-border">
+                          <span className="text-[0.6875rem] text-muted-foreground whitespace-nowrap">
                             Overage
                           </span>
-                          <span className="text-xs text-emerald-600 font-medium text-right whitespace-nowrap">
+                          <span className="text-xs text-status-success font-medium text-right whitespace-nowrap">
                             {formatPrice(
                               usageLimit.unitPrice,
                               usageLimit.unitPriceCurrency || "USD",
                             )}
-                            <span className="text-[0.625rem] font-normal text-slate-400">
+                            <span className="text-[0.625rem] font-normal text-muted-foreground">
                               {" "}
                               / extra
                             </span>
@@ -3369,7 +3371,7 @@ function ServiceRowWithMetrics({
                       )}
                     </>
                   ) : (
-                    <span className="text-xs text-slate-300">—</span>
+                    <span className="text-xs text-muted-foreground/60">—</span>
                   )}
                 </div>
               </td>
@@ -3522,7 +3524,7 @@ function ServiceLevelDetailPanel({
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 bg-slate-900/75 backdrop-blur-sm flex items-center justify-end z-50"
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-end z-50"
       style={{ animation: "panel-overlay-fade 0.2s ease-out" }}
       onClick={handleOverlayClick}
       role="dialog"
@@ -3531,13 +3533,13 @@ function ServiceLevelDetailPanel({
     >
       <div
         ref={panelRef}
-        className="w-96 h-full bg-white overflow-y-auto"
+        className="w-96 h-full bg-card overflow-y-auto"
         style={{
           boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
           animation: "panel-slide-in 0.2s ease-out",
         }}
       >
-        <div className="bg-violet-600 text-white p-4">
+        <div className="bg-primary text-white p-4">
           <div className="flex items-center justify-between mb-1">
             <span
               className="text-[0.6875rem] uppercase tracking-[0.08em] opacity-80"
@@ -3547,7 +3549,7 @@ function ServiceLevelDetailPanel({
             </span>
             <button
               onClick={onClose}
-              className="p-1 bg-transparent border-none text-white cursor-pointer rounded-md transition-all duration-150 hover:bg-white/20"
+              className="p-1 bg-transparent border-none text-white cursor-pointer rounded-md transition-all duration-150 hover:bg-card/20"
             >
               <svg
                 className="w-5 h-5"
@@ -3577,14 +3579,14 @@ function ServiceLevelDetailPanel({
           <div>
             <div className="flex items-center justify-between mb-3">
               <label
-                className="block text-[0.8125rem] font-semibold text-slate-700 mb-0"
+                className="block text-[0.8125rem] font-semibold text-foreground mb-0"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 Metrics
               </label>
               <button
                 onClick={() => setIsAddingMetric(true)}
-                className="text-[0.8125rem] font-semibold text-violet-600 bg-transparent border-none cursor-pointer transition-all duration-150 hover:text-violet-700"
+                className="text-[0.8125rem] font-semibold text-primary bg-transparent border-none cursor-pointer transition-all duration-150 hover:text-primary/80"
                 style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
               >
                 + Add Metric
@@ -3602,17 +3604,17 @@ function ServiceLevelDetailPanel({
             ))}
 
             {usageLimits.length === 0 && !isAddingMetric && (
-              <p className="text-[0.8125rem] italic text-slate-500">
+              <p className="text-[0.8125rem] italic text-muted-foreground">
                 No metrics added yet. Metrics will appear as nested rows under
                 this service in the matrix.
               </p>
             )}
 
             {isAddingMetric && (
-              <div className="p-3 bg-violet-50 rounded-[10px] mb-3 [&>div]:mb-2.5 [&>div:last-child]:mb-0">
+              <div className="p-3 bg-primary/10 rounded-[10px] mb-3 [&>div]:mb-2.5 [&>div:last-child]:mb-0">
                 <div>
                   <label
-                    className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+                    className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
                     style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
                   >
                     Metric Name
@@ -3622,14 +3624,14 @@ function ServiceLevelDetailPanel({
                     value={newMetric}
                     onChange={(e) => setNewMetric(e.target.value)}
                     placeholder="e.g., API Calls, Storage, Users"
-                    className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+                    className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                     autoFocus
                   />
                 </div>
                 <div>
                   <label
-                    className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+                    className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
                     style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
                   >
                     Value
@@ -3639,10 +3641,10 @@ function ServiceLevelDetailPanel({
                     value={newLimit}
                     onChange={(e) => setNewLimit(e.target.value)}
                     placeholder="e.g., 100, Unlimited, Custom"
-                    className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+                    className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   />
-                  <p className="text-[0.6875rem] text-slate-400 mt-1">
+                  <p className="text-[0.6875rem] text-muted-foreground mt-1">
                     Enter a value or leave empty
                   </p>
                 </div>
@@ -3650,7 +3652,7 @@ function ServiceLevelDetailPanel({
                   <button
                     onClick={handleAddLimit}
                     disabled={!newMetric.trim()}
-                    className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none hover:enabled:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-white border-none hover:enabled:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   >
                     Add Metric
@@ -3661,7 +3663,7 @@ function ServiceLevelDetailPanel({
                       setNewLimit("");
                       setIsAddingMetric(false);
                     }}
-                    className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-200 text-slate-700 border-none hover:bg-slate-300"
+                    className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-foreground border-none hover:bg-accent"
                     style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   >
                     Cancel
@@ -3672,10 +3674,10 @@ function ServiceLevelDetailPanel({
           </div>
         </div>
 
-        <div className="p-4 border-t border-slate-200 bg-white">
+        <div className="p-4 border-t border-border bg-card">
           <button
             onClick={onClose}
-            className="w-full py-2.5 px-4 text-sm font-semibold bg-violet-600 text-white border-none rounded-[10px] cursor-pointer transition-all duration-150 hover:bg-violet-700"
+            className="w-full py-2.5 px-4 text-sm font-semibold bg-primary text-white border-none rounded-[10px] cursor-pointer transition-all duration-150 hover:bg-primary/90"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           >
             Done
@@ -3767,10 +3769,10 @@ function MetricLimitItem({
 
   if (isEditing) {
     return (
-      <div className="p-3 bg-violet-50 rounded-[10px] mb-3 [&>div]:mb-2.5 [&>div:last-child]:mb-0">
+      <div className="p-3 bg-primary/10 rounded-[10px] mb-3 [&>div]:mb-2.5 [&>div:last-child]:mb-0">
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Metric Name
@@ -3780,14 +3782,14 @@ function MetricLimitItem({
             value={editMetric}
             onChange={(e) => setEditMetric(e.target.value)}
             placeholder="e.g., Number of Entities"
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
             autoFocus
           />
         </div>
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Unit Name
@@ -3797,16 +3799,16 @@ function MetricLimitItem({
             value={editUnitName}
             onChange={(e) => setEditUnitName(e.target.value)}
             placeholder="e.g., entity, credit card, contractor"
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           />
-          <p className="text-[0.6875rem] text-slate-400 mt-1">
+          <p className="text-[0.6875rem] text-muted-foreground mt-1">
             Used for overage pricing display (e.g., "$50 per entity")
           </p>
         </div>
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Free Limit
@@ -3816,16 +3818,16 @@ function MetricLimitItem({
             value={editLimit}
             onChange={(e) => setEditLimit(e.target.value)}
             placeholder="e.g., 100, Unlimited, Custom"
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           />
-          <p className="text-[0.6875rem] text-slate-400 mt-1">
+          <p className="text-[0.6875rem] text-muted-foreground mt-1">
             Included free limit for this tier
           </p>
         </div>
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Paid Limit
@@ -3835,16 +3837,16 @@ function MetricLimitItem({
             value={editPaidLimit}
             onChange={(e) => setEditPaidLimit(e.target.value)}
             placeholder="e.g., 500, 1000"
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           />
-          <p className="text-[0.6875rem] text-slate-400 mt-1">
+          <p className="text-[0.6875rem] text-muted-foreground mt-1">
             Maximum paid usage beyond the free limit (optional)
           </p>
         </div>
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Accrual Cycle
@@ -3852,7 +3854,7 @@ function MetricLimitItem({
           <select
             value={editResetCycle}
             onChange={(e) => setEditResetCycle(e.target.value as AccrualCycle)}
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] cursor-pointer"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] cursor-pointer"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           >
             <option value="DAILY">Daily</option>
@@ -3865,7 +3867,7 @@ function MetricLimitItem({
         </div>
         <div>
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Metric Type
@@ -3873,22 +3875,22 @@ function MetricLimitItem({
           <select
             value={editMetricType}
             onChange={(e) => setEditMetricType(e.target.value as MetricType)}
-            className="w-full text-[0.8125rem] text-slate-900 bg-white border-[1.5px] border-slate-300 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] cursor-pointer"
+            className="w-full text-[0.8125rem] text-foreground bg-card border-[1.5px] border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)] cursor-pointer"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           >
             <option value="NON_CUMULATIVE">Non-cumulative (persists)</option>
             <option value="CUMULATIVE">Cumulative (resets on settle)</option>
           </select>
         </div>
-        <div className="mt-2 pt-3 border-t border-dashed border-slate-300">
+        <div className="mt-2 pt-3 border-t border-dashed border-input">
           <label
-            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-slate-500 mb-1"
+            className="block text-[0.625rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1"
             style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
           >
             Overage Pricing (Optional)
           </label>
           <p
-            className="text-[0.6875rem] text-slate-400 mt-1"
+            className="text-[0.6875rem] text-muted-foreground mt-1"
             style={{ marginBottom: "0.5rem" }}
           >
             Set a price for usage beyond the included limit
@@ -3896,7 +3898,7 @@ function MetricLimitItem({
           <div className="flex items-center gap-1.5 flex-wrap">
             <div className="flex items-center gap-1">
               <span
-                className="text-sm text-slate-500"
+                className="text-sm text-muted-foreground"
                 style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
               >
                 $
@@ -3907,11 +3909,11 @@ function MetricLimitItem({
                 onChange={(e) => setEditUnitPrice(e.target.value)}
                 placeholder="0.00"
                 step="0.01"
-                className="w-[4.5rem] text-sm font-medium text-slate-900 bg-white border border-slate-300 rounded-md py-1.5 px-2 outline-none transition-colors duration-150 focus:border-violet-600"
+                className="w-[4.5rem] text-sm font-medium text-foreground bg-card border border-input rounded-md py-1.5 px-2 outline-none transition-colors duration-150 focus:border-ring"
                 style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
               />
             </div>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-muted-foreground">
               per {editUnitName || "unit"}
             </span>
           </div>
@@ -3919,14 +3921,14 @@ function MetricLimitItem({
         <div className="flex gap-2">
           <button
             onClick={handleSave}
-            className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none hover:enabled:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-white border-none hover:enabled:bg-primary disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           >
             Save
           </button>
           <button
             onClick={handleCancel}
-            className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-200 text-slate-700 border-none hover:bg-slate-300"
+            className="flex-1 py-2 px-3 text-[0.8125rem] font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-foreground border-none hover:bg-accent"
             style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
           >
             Cancel
@@ -3937,25 +3939,30 @@ function MetricLimitItem({
   }
 
   return (
-    <div className="group/limititem flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 rounded-[10px] mb-3">
+    <div className="group/limititem flex items-center gap-3 p-3 bg-muted border border-border rounded-[10px] mb-3">
       <div
-        className="flex-1 cursor-pointer p-1 -m-1 rounded-md transition-all duration-150 hover:bg-slate-200"
+        className="flex-1 cursor-pointer p-1 -m-1 rounded-md transition-all duration-150 hover:bg-accent"
         onClick={() => setIsEditing(true)}
       >
         <div
-          className="text-sm font-semibold text-slate-900"
+          className="text-sm font-semibold text-foreground"
           style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
         >
           {limit.metric}
         </div>
         <div className="flex flex-col gap-0.5">
-          <div className="text-[0.8125rem] text-slate-500">
+          <div className="text-[0.8125rem] text-muted-foreground">
             {limit.freeLimit != null
               ? `Free: ${limit.freeLimit}${limit.paidLimit != null ? ` / Paid: ${limit.paidLimit}` : ""}`
               : (limit.notes ?? "—")}
           </div>
           {limit.accrualCycle && (
-            <div style={{ fontSize: "0.6875rem", color: "#64748b" }}>
+            <div
+              style={{
+                fontSize: "0.6875rem",
+                color: "var(--muted-foreground)",
+              }}
+            >
               Accrues {limit.accrualCycle.toLowerCase()}
               {limit.metricType
                 ? ` · ${limit.metricType === "CUMULATIVE" ? "cumulative" : "non-cumulative"}`
@@ -3964,7 +3971,7 @@ function MetricLimitItem({
           )}
           {overageDisplay && (
             <div
-              className="text-[0.6875rem] text-emerald-600 font-medium"
+              className="text-[0.6875rem] text-status-success font-medium"
               style={{ fontFamily: "'DM Mono', 'SF Mono', monospace" }}
             >
               {overageDisplay}
@@ -3975,7 +3982,7 @@ function MetricLimitItem({
       <div className="flex gap-1 opacity-0 group-hover/limititem:opacity-100 transition-all duration-150">
         <button
           onClick={() => setIsEditing(true)}
-          className="p-1 bg-transparent border-none text-slate-400 cursor-pointer rounded-md transition-all duration-150 hover:bg-slate-200 hover:text-violet-600"
+          className="p-1 bg-transparent border-none text-muted-foreground cursor-pointer rounded-md transition-all duration-150 hover:bg-accent hover:text-primary"
           title="Edit metric"
         >
           <svg
@@ -3994,7 +4001,7 @@ function MetricLimitItem({
         </button>
         <button
           onClick={onRemove}
-          className="p-1 bg-transparent border-none text-slate-400 cursor-pointer rounded-md transition-all duration-150 hover:bg-slate-200 hover:text-rose-600"
+          className="p-1 bg-transparent border-none text-muted-foreground cursor-pointer rounded-md transition-all duration-150 hover:bg-accent hover:text-destructive"
           title="Remove metric"
         >
           <svg

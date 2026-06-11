@@ -111,7 +111,7 @@ export function TransactionForm({
   ];
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-card rounded-xl border border-border shadow-sm p-6">
       <Form
         onSubmit={handleSubmit}
         defaultValues={defaultValues}
@@ -128,7 +128,7 @@ export function TransactionForm({
               className="font-mono"
               required
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Ethereum address of the transaction counterpart
             </p>
           </div>
@@ -198,23 +198,23 @@ export function TransactionForm({
               Accounting Period
             </FormLabel>
             <StringField name="accountingPeriod" placeholder="2024" required />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Year or period for accounting purposes
             </p>
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
+        <div className="flex items-center justify-end gap-4 pt-6 border-t border-border">
           <Button
             type="button"
             onClick={onCancel}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2"
+            className="px-6 py-2.5 border border-border rounded-lg font-medium text-foreground hover:bg-accent transition-colors"
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2 rounded-lg font-medium transition-colors"
           >
             {isEditing ? "Update Transaction" : "Add Transaction"}
           </Button>

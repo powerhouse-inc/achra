@@ -100,25 +100,25 @@ export function DateRangePicker({
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           {label}
         </label>
       )}
-      <div className="inline-flex items-center border border-gray-300 rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500">
+      <div className="inline-flex items-center border border-input rounded-md overflow-hidden focus-within:ring-2 focus-within:ring-ring focus-within:border-ring">
         <input
           type="date"
           value={localFrom}
           onChange={handleFromChange}
-          className="px-3 py-2 text-sm border-none outline-none bg-white"
+          className="px-3 py-2 text-sm border-none outline-none bg-background text-foreground dark:[color-scheme:dark]"
         />
-        <span className="px-2 text-sm text-gray-400 bg-gray-50 self-stretch flex items-center border-x border-gray-300">
+        <span className="px-2 text-sm text-muted-foreground bg-muted self-stretch flex items-center border-x border-input">
           →
         </span>
         <input
           type="date"
           value={localTo}
           onChange={handleToChange}
-          className="px-3 py-2 text-sm border-none outline-none bg-white"
+          className="px-3 py-2 text-sm border-none outline-none bg-background text-foreground dark:[color-scheme:dark]"
         />
       </div>
     </div>

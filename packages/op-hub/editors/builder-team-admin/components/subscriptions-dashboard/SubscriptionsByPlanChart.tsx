@@ -1,13 +1,13 @@
 import type { TierDistribution } from "../../hooks/useSubscriptionMetrics.js";
 
 const TIER_COLORS: Record<string, string> = {
-  Custom: "#a855f7",
-  Standard: "#5b6abf",
-  Starter: "#00b8a9",
-  Essentials: "#c4c9cf",
+  Custom: "var(--chart-1)",
+  Standard: "var(--chart-2)",
+  Starter: "var(--chart-3)",
+  Essentials: "var(--chart-8)",
 };
 
-const DEFAULT_COLOR = "#94a3b8";
+const DEFAULT_COLOR = "var(--muted-foreground)";
 
 interface SubscriptionsByPlanChartProps {
   data: TierDistribution[];
@@ -19,7 +19,7 @@ export function SubscriptionsByPlanChart({
   const total = data.reduce((sum, d) => sum + d.count, 0);
   if (total === 0) {
     return (
-      <div className="flex items-center justify-center h-full text-stone-400 text-sm">
+      <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
         No subscriptions
       </div>
     );
@@ -68,7 +68,7 @@ export function SubscriptionsByPlanChart({
             key={seg.tierName}
             d={seg.d}
             fill="none"
-            stroke={seg.color}
+            style={{ stroke: seg.color }}
             strokeWidth={strokeWidth}
             strokeLinecap="butt"
           />
@@ -78,7 +78,7 @@ export function SubscriptionsByPlanChart({
           y={cy - 6}
           textAnchor="middle"
           className="text-2xl font-bold"
-          fill="#2d3436"
+          style={{ fill: "var(--foreground)" }}
         >
           {total}
         </text>
@@ -87,7 +87,7 @@ export function SubscriptionsByPlanChart({
           y={cy + 12}
           textAnchor="middle"
           className="text-xs"
-          fill="#636e72"
+          style={{ fill: "var(--muted-foreground)" }}
         >
           total
         </text>
@@ -101,9 +101,11 @@ export function SubscriptionsByPlanChart({
                 className="inline-block h-3 w-3 rounded-sm"
                 style={{ backgroundColor: seg.color }}
               />
-              <span className="text-sm text-stone-600">{seg.tierName}</span>
+              <span className="text-sm text-muted-foreground">
+                {seg.tierName}
+              </span>
             </div>
-            <span className="text-sm font-semibold text-stone-700">
+            <span className="text-sm font-semibold text-foreground">
               {seg.count}
             </span>
           </div>

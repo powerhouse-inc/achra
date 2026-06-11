@@ -15,6 +15,7 @@ export function MarkdownPreview({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [MarkdownRenderer, setMarkdownRenderer] = useState<any>(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   const shouldTruncate = content.length > maxLength;
   const displayContent =
@@ -30,6 +31,17 @@ export function MarkdownPreview({
       .catch(() => {
         // Silently fail - will use fallback
       });
+  }, []);
+
+  // Track Connect's `.dark` class so the widget follows the active theme
+  // (data-color-mode) instead of staying locked to light.
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => setIsDark(root.classList.contains("dark"));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
   const ExpandButton = () =>
@@ -67,15 +79,20 @@ export function MarkdownPreview({
     <div className={className}>
       <style>
         {`
-          /* NOTE: this preview renders the third-party @uiw/react-markdown-preview
-             widget locked to light mode (data-color-mode="light" below), so these
-             colors stay hardcoded to match that light palette. Tokenizing them
-             without also theming the widget would paint light text on the widget's
-             light background in dark mode. Theming the widget is out of scope. */
+          /* The third-party @uiw/react-markdown-preview widget is theme-aware via
+             data-color-mode (set from Connect's .dark class below). We force its
+             surface transparent so it blends with the surrounding card in both
+             themes, and drive every color from semantic design tokens so the
+             content stays readable in light AND dark mode. */
+          .markdown-preview-content .wmde-markdown,
+          .markdown-preview-content .wmde-markdown-color {
+            background-color: transparent;
+            color: var(--foreground);
+          }
           .markdown-preview-content {
             font-size: 0.875rem;
             line-height: 1.625;
-            color: #475569;
+            color: var(--foreground);
           }
           .markdown-preview-content p {
             margin-bottom: 0.75em;
@@ -87,7 +104,7 @@ export function MarkdownPreview({
           .markdown-preview-content h2,
           .markdown-preview-content h3 {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--foreground);
             margin-top: 1em;
             margin-bottom: 0.5em;
           }
@@ -105,24 +122,25 @@ export function MarkdownPreview({
             margin-bottom: 0.75em;
           }
           .markdown-preview-content a {
-            color: #4f46e5;
+            color: var(--primary);
             text-decoration: underline;
           }
           .markdown-preview-content code {
-            background: #f1f5f9;
+            background: var(--muted);
+            color: var(--foreground);
             padding: 0.125em 0.375em;
             border-radius: 0.25em;
             font-size: 0.875em;
           }
           .markdown-preview-content blockquote {
-            border-left: 3px solid #e2e8f0;
+            border-left: 3px solid var(--border);
             padding-left: 1em;
-            color: #64748b;
+            color: var(--muted-foreground);
             font-style: italic;
           }
           .markdown-preview-content strong {
             font-weight: 600;
-            color: #334155;
+            color: var(--foreground);
           }
           /* Hide anchor links on headers */
           .markdown-preview-content .anchor {
@@ -133,7 +151,10 @@ export function MarkdownPreview({
           }
         `}
       </style>
-      <div className="markdown-preview-content" data-color-mode="light">
+      <div
+        className="markdown-preview-content"
+        data-color-mode={isDark ? "dark" : "light"}
+      >
         <MarkdownRenderer source={displayContent} disableCopy={true} />
       </div>
       <ExpandButton />

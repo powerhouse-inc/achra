@@ -1,10 +1,10 @@
 import { useToasts } from "./cbToast.js";
 
 const typeStyles: Record<string, string> = {
-  success: "bg-green-600",
-  error: "bg-red-600",
-  warning: "bg-yellow-500 text-black",
-  info: "bg-blue-600",
+  success: "bg-status-success",
+  error: "bg-destructive",
+  warning: "bg-status-warning",
+  info: "bg-status-progress",
 };
 
 export function ToastRenderer() {
@@ -17,7 +17,7 @@ export function ToastRenderer() {
       {toasts.map((t) => (
         <div
           key={t.id}
-          className={`${typeStyles[t.type] ?? typeStyles.info} text-white px-4 py-3 rounded shadow-lg text-sm flex items-start gap-2 animate-[slideIn_0.2s_ease-out]`}
+          className={`${typeStyles[t.type] ?? typeStyles.info} text-primary-foreground px-4 py-3 rounded shadow-lg text-sm flex items-start gap-2 animate-[slideIn_0.2s_ease-out]`}
         >
           <span className="flex-1">{t.message}</span>
           <button

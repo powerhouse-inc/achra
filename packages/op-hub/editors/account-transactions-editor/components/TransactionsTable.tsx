@@ -62,9 +62,9 @@ export function TransactionsTable({
 
   if (transactions.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
+      <div className="bg-card rounded-xl border border-border shadow-sm p-12 text-center">
         <svg
-          className="mx-auto h-12 w-12 text-gray-400"
+          className="mx-auto h-12 w-12 text-muted-foreground"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -76,10 +76,10 @@ export function TransactionsTable({
             d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
           />
         </svg>
-        <h3 className="mt-4 text-lg font-medium text-gray-900">
+        <h3 className="mt-4 text-lg font-medium text-foreground">
           No transactions yet
         </h3>
-        <p className="mt-2 text-sm text-gray-600">
+        <p className="mt-2 text-sm text-muted-foreground">
           Get started by adding your first transaction
         </p>
       </div>
@@ -87,62 +87,62 @@ export function TransactionsTable({
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div className="bg-card rounded-xl border border-border overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-muted">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Date
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Counter Party
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Amount
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Direction
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Token
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Tx Hash
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Period
               </th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-card divide-y divide-border">
             {sortedTransactions.map((transaction) => (
-              <tr key={transaction.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <tr key={transaction.id} className="hover:bg-accent">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   {formatDate(transaction.datetime)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   {transaction.counterParty ? (
-                    <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
+                    <span className="font-mono text-xs bg-muted text-foreground px-2 py-1 rounded">
                       {transaction.counterParty.slice(0, 8)}...
                       {transaction.counterParty.slice(-6)}
                     </span>
                   ) : (
-                    <span className="text-gray-400">—</span>
+                    <span className="text-muted-foreground">—</span>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground font-mono">
                   {formatAmount(transaction.amount)}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   <span
                     className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                       transaction.direction === "INFLOW"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                        ? "bg-status-success/20 text-status-success"
+                        : "bg-destructive/15 text-destructive"
                     }`}
                   >
                     {transaction.direction === "INFLOW" ? (
@@ -178,39 +178,39 @@ export function TransactionsTable({
                     )}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-status-progress/20 text-status-progress">
                     {transaction.details.token}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   {transaction.details.txHash ? (
                     <a
                       href={`https://etherscan.io/tx/${transaction.details.txHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-blue-600 hover:text-blue-800 underline"
+                      className="font-mono text-xs text-primary hover:text-primary/80 underline"
                     >
                       {transaction.details.txHash.slice(0, 10)}...
                     </a>
                   ) : (
-                    <span className="text-gray-400">—</span>
+                    <span className="text-muted-foreground">—</span>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">
                   {transaction.accountingPeriod}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex items-center justify-end gap-2">
                     <Button
                       onClick={() => onEdit(transaction)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 text-xs"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1 text-xs rounded-lg font-medium transition-colors"
                     >
                       Edit
                     </Button>
                     <Button
                       onClick={() => onDelete(transaction.id)}
-                      className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-xs"
+                      className="bg-destructive hover:bg-destructive/90 text-destructive-foreground px-3 py-1 text-xs rounded-lg font-medium transition-colors"
                     >
                       Delete
                     </Button>

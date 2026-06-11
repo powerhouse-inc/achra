@@ -24,6 +24,19 @@ import { actions as workstreamActions } from "document-models/workstream";
 import { actions as networkProfileActions } from "document-models/network-profile";
 import { FolderTree } from "./FolderTree.js";
 
+function getCategoryBadgeClass(category: string) {
+  switch (category.toLowerCase()) {
+    case "oss":
+      return "bg-primary/15 text-primary border-primary/30";
+    case "defi":
+      return "bg-status-progress/15 text-status-progress border-status-progress/30";
+    case "crypto":
+      return "bg-status-warning/15 text-status-warning border-status-warning/30";
+    default:
+      return "bg-muted text-muted-foreground border-border";
+  }
+}
+
 /**
  * Main drive explorer component with sidebar navigation and content area.
  * Layout: Left sidebar (folder tree) + Right content area (files/folders + document editor)
@@ -110,13 +123,12 @@ export function DriveExplorer(props: EditorProps) {
         return (
           <div className="w-full h-full p-6 overflow-auto">
             <div className="max-w-7xl mx-auto">
-              <div className="space-y-6 flex flex-col items-center justify-center mb-10">
-                <h1 className="text-2xl font-bold">
+              <div className="mb-10 flex flex-col items-center justify-center space-y-6">
+                <h1 className="text-2xl font-bold text-foreground">
                   Welcome to the Network Admin
                 </h1>
-                {/* Card to display the network profile */}
                 {isNetworkProfileCreated && (
-                  <div className="bg-white rounded-lg shadow-md border border-gray-300 p-4 max-w-lg mx-auto text-sm">
+                  <div className="mx-auto max-w-lg rounded-lg border border-border bg-card p-4 text-sm text-foreground shadow-sm">
                     <div className="flex items-start justify-between gap-4">
                       {networkProfileDoc?.state.global.logo ? (
                         <img
@@ -132,13 +144,7 @@ export function DriveExplorer(props: EditorProps) {
                           (category) => (
                             <span
                               key={category}
-                              className={`inline-flex items-center justify-center rounded-md w-fit whitespace-nowrap shrink-0 border-2 px-2 py-0 text-sm font-extrabold ${
-                                category.toLowerCase() === "oss"
-                                  ? "bg-purple-600/30 text-purple-600 border-purple-600/70"
-                                  : category.toLowerCase() === "defi"
-                                    ? "bg-blue-600/30 text-blue-600 border-blue-600/70"
-                                    : "bg-gray-500/30 text-gray-500 border-gray-500/70"
-                              }`}
+                              className={`inline-flex w-fit shrink-0 items-center justify-center whitespace-nowrap rounded-md border-2 px-2 py-0 text-sm font-extrabold ${getCategoryBadgeClass(category)}`}
                             >
                               {category}
                             </span>
@@ -155,7 +161,7 @@ export function DriveExplorer(props: EditorProps) {
                   <Button
                     color="dark"
                     size="sm"
-                    className="cursor-pointer hover:bg-gray-600 hover:text-white"
+                    className="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
                     title={"Create Workstream Document"}
                     aria-description={"Create Workstream Document"}
                     onClick={() => {
@@ -164,7 +170,7 @@ export function DriveExplorer(props: EditorProps) {
                     }}
                   >
                     <span className="flex items-center gap-2">
-                      <WorkstreamIcon className="w-7 h-7 text-white" />
+                      <WorkstreamIcon className="h-7 w-7 text-primary-foreground" />
                       Create Workstream Document
                     </span>
                   </Button>
@@ -174,26 +180,25 @@ export function DriveExplorer(props: EditorProps) {
               {/* === DOCUMENTS TABLE === */}
               {networkAdminDocuments && networkAdminDocuments.length > 0 && (
                 <div className="w-full">
-                  <h3 className="mb-4 text-lg font-medium text-gray-700">
+                  <h3 className="mb-4 text-lg font-medium text-foreground">
                     Documents
                   </h3>
-                  <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
-                    <table className="w-full bg-white">
-                      <thead className="bg-gray-50">
+                  <div className="overflow-x-auto rounded-lg border border-border shadow-sm">
+                    <table className="w-full bg-card text-foreground">
+                      <thead className="bg-muted">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                          <th className="w-1/4 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-foreground">
                             Name
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                          <th className="w-1/4 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-foreground">
                             Type
                           </th>
-
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/4">
+                          <th className="w-1/4 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-foreground">
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="divide-y divide-border bg-card">
                         {networkAdminDocuments.map((document) => {
                           // Find the corresponding file node for actions
                           const fileNode = fileChildren?.find(
@@ -203,11 +208,11 @@ export function DriveExplorer(props: EditorProps) {
                           return (
                             <tr
                               key={document.header.id}
-                              className="hover:bg-gray-50 transition-colors"
+                              className="transition-colors hover:bg-accent"
                             >
                               <td className="px-2 py-2">
                                 <div
-                                  className="text-sm font-medium text-gray-900 truncate max-w-xs"
+                                  className="max-w-xs truncate text-sm font-medium text-foreground"
                                   title={fileNode?.name || document.header.name}
                                 >
                                   {fileNode?.name || document.header.name}
@@ -215,7 +220,7 @@ export function DriveExplorer(props: EditorProps) {
                               </td>
                               <td className="px-2 py-2">
                                 <div
-                                  className="text-sm text-gray-500 truncate max-w-xs"
+                                  className="max-w-xs truncate text-sm text-muted-foreground"
                                   title={document.header.documentType}
                                 >
                                   {document.header.documentType}
@@ -230,7 +235,7 @@ export function DriveExplorer(props: EditorProps) {
                                         setSelectedNode(fileNode);
                                       }
                                     }}
-                                    className="px-3 py-1.5 bg-blue-500 text-white rounded text-xs font-medium hover:bg-blue-600 transition-colors whitespace-nowrap"
+                                    className="whitespace-nowrap rounded bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
                                   >
                                     Open
                                   </button>
@@ -261,7 +266,7 @@ export function DriveExplorer(props: EditorProps) {
                                         }
                                       }
                                     }}
-                                    className="px-3 py-1.5 bg-yellow-500 text-white rounded text-xs font-medium hover:bg-yellow-600 transition-colors whitespace-nowrap"
+                                    className="whitespace-nowrap rounded border border-border bg-muted px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent"
                                   >
                                     Edit
                                   </button>
@@ -271,7 +276,7 @@ export function DriveExplorer(props: EditorProps) {
                                         showDeleteNodeModal(fileNode.id);
                                       }
                                     }}
-                                    className="px-3 py-1.5 bg-red-500 text-white rounded text-xs font-medium hover:bg-red-600 transition-colors whitespace-nowrap"
+                                    className="whitespace-nowrap rounded bg-destructive px-3 py-1.5 text-xs font-medium text-destructive-foreground transition-colors hover:bg-destructive/90"
                                   >
                                     Delete
                                   </button>
@@ -289,7 +294,11 @@ export function DriveExplorer(props: EditorProps) {
           </div>
         );
       default:
-        return <div>Unknown node type: {nodeType}</div>;
+        return (
+          <div className="p-6 text-muted-foreground">
+            Unknown node type: {nodeType}
+          </div>
+        );
     }
   };
 
@@ -427,12 +436,12 @@ export function DriveExplorer(props: EditorProps) {
     const isValid = isValidName(profileNameInput);
     return (
       <div className="flex h-full items-center justify-center px-4 py-12">
-        <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200/50 bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/40 p-12 shadow-xl shadow-slate-200/50 backdrop-blur-sm">
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-purple-400/20 to-indigo-400/20 blur-3xl" />
-          <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-br from-indigo-300/20 to-purple-300/20 blur-2xl" />
+        <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card p-12 shadow-lg">
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-primary/20 to-purple/20 blur-3xl" />
+          <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-br from-purple/15 to-primary/15 blur-2xl" />
 
           <div className="relative z-10 text-center">
-            <div className="mb-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 p-3 shadow-lg shadow-purple-500/30">
+            <div className="mb-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-purple p-3 shadow-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -443,24 +452,24 @@ export function DriveExplorer(props: EditorProps) {
                 strokeWidth={2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-white"
+                className="text-primary-foreground"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
 
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground">
               Create your Network Profile
             </h2>
 
-            <p className="mb-8 text-lg leading-relaxed text-slate-600">
+            <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
               Get started by creating a network profile to manage workstreams,
               builders, and documents.
             </p>
 
             <form onSubmit={handleCreateProfile} className="mx-auto max-w-md">
               {!isValid && profileNameInput && (
-                <div className="mb-2 text-sm text-red-500">
+                <div className="mb-2 text-sm text-destructive">
                   Document name must be valid URL characters.
                 </div>
               )}
@@ -471,13 +480,13 @@ export function DriveExplorer(props: EditorProps) {
                 placeholder="Network profile name"
                 maxLength={100}
                 disabled={isCreatingProfile}
-                className="mb-6 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder-slate-400 shadow-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 disabled:opacity-50"
+                className="mb-6 w-full rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground shadow-sm outline-none transition-all placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:opacity-50"
               />
 
               <button
                 type="submit"
                 disabled={!isValid || isCreatingProfile}
-                className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-lg"
+                className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary to-purple px-8 py-4 text-base font-semibold text-primary-foreground shadow-primary transition-all duration-300 hover:scale-105 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <span>
@@ -501,7 +510,7 @@ export function DriveExplorer(props: EditorProps) {
                     </svg>
                   )}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-indigo-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple to-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </button>
             </form>
           </div>
@@ -517,7 +526,7 @@ export function DriveExplorer(props: EditorProps) {
         <div className="h-full w-full">{props.children}</div>
       ) : (
         /* === NORMAL VIEW WITH SIDEBAR === */
-        <div className="flex h-full">
+        <div className="ph-drive-explorer-shell na-drive-shell flex h-full w-full overflow-hidden">
           <FolderTree
             activeSidebarNodeId={activeSidebarNodeId}
             setActiveSidebarNodeId={setActiveSidebarNodeId}

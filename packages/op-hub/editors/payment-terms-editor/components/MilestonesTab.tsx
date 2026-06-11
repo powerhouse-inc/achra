@@ -18,6 +18,17 @@ import {
   type MilestonePayoutStatus,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface MilestonesTabProps {
   milestones: Milestone[];
@@ -158,7 +169,7 @@ export function MilestonesTab({
               toast?.("Milestone deleted", { type: "success" });
             }}
             size="sm"
-            className="text-red-600 hover:text-red-800"
+            className="text-destructive hover:text-destructive/80"
           >
             Delete
           </Button>
@@ -212,8 +223,8 @@ export function MilestonesTab({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold dark:text-white">Milestones</h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+          <h2 className="text-xl font-semibold text-foreground">Milestones</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
             {milestones.length} milestone(s) defined
           </p>
         </div>
@@ -221,15 +232,15 @@ export function MilestonesTab({
           onClick={() => setIsAddingNew(!isAddingNew)}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           + Add Milestone
         </Button>
       </div>
 
       {isAddingNew && (
-        <div className="rounded-lg border bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-          <h3 className="mb-4 text-lg font-medium dark:text-white">
+        <div className={formPanelClass}>
+          <h3 className="mb-4 text-lg font-medium text-foreground">
             Add New Milestone
           </h3>
           <form onSubmit={handleAddMilestone} className="space-y-4">
@@ -285,11 +296,11 @@ export function MilestonesTab({
                       requiresApproval: e.target.checked,
                     })
                   }
-                  className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  className={checkboxClass}
                 />
                 <label
                   htmlFor="requiresApproval"
-                  className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  className={checkboxLabelClass}
                 >
                   Requires Approval
                 </label>
@@ -301,7 +312,7 @@ export function MilestonesTab({
                 type="submit"
                 color="light"
                 size="sm"
-                className="cursor-pointer hover:bg-blue-600 hover:text-white"
+                className={primaryButtonClass}
               >
                 Add Milestone
               </Button>
@@ -318,7 +329,7 @@ export function MilestonesTab({
                 }}
                 color="light"
                 size="sm"
-                className="cursor-pointer hover:bg-gray-600 hover:text-white"
+                className={secondaryButtonClass}
               >
                 Cancel
               </Button>
@@ -342,7 +353,7 @@ export function MilestonesTab({
           }}
         />
       ) : (
-        <div className="rounded-lg border-2 border-dashed border-gray-300 py-8 text-center text-gray-500 dark:border-gray-600 dark:text-gray-400">
+        <div className={dashedEmptyClass}>
           <p className="text-lg font-medium">No milestones defined yet</p>
           <p className="text-sm">Add your first milestone to get started</p>
         </div>

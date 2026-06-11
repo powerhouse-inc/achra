@@ -18,16 +18,16 @@ export function DashboardHeader({
   return (
     <div className="flex items-start justify-between mb-6">
       <div>
-        <h1 className="text-2xl font-bold text-stone-800 tracking-tight">
+        <h1 className="text-2xl font-bold text-foreground tracking-tight">
           {title}
         </h1>
-        <p className="mt-1 text-sm text-stone-400">{subtitle}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
       </div>
       {showBack && onBackToDashboard ? (
         <button
           type="button"
           onClick={onBackToDashboard}
-          className="flex items-center gap-1.5 rounded-lg bg-stone-100 px-3 py-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 border border-stone-200/60"
+          className="flex items-center gap-1.5 rounded-lg bg-stone-100 px-3 py-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 border border-stone-200/60 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600 dark:border-slate-600"
         >
           <ArrowLeft size={14} />
           Back to Dashboard
@@ -36,7 +36,7 @@ export function DashboardHeader({
         <button
           type="button"
           onClick={onBrowseFiles}
-          className="flex items-center gap-1.5 rounded-lg bg-stone-100 px-3 py-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 border border-stone-200/60"
+          className="flex items-center gap-1.5 rounded-lg bg-stone-100 px-3 py-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 border border-stone-200/60 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600 dark:border-slate-600"
         >
           <FolderOpen size={14} />
           Browse Files

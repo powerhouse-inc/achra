@@ -1,6 +1,6 @@
 {
   "name": "@powerhousedao/op-hub",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "license": "AGPL-3.0-only",
   "type": "module",
   "files": [
@@ -93,6 +93,7 @@
   },
   "devDependencies": {
     "@achra/design-system": "workspace:*",
+    "@achra/ui": "workspace:*",
     "@electric-sql/pglite": "0.3.15",
     "@electric-sql/pglite-tools": "0.2.20",
     "@eslint/js": "^9.38.0",

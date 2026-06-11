@@ -33,11 +33,11 @@ type Props = {
 };
 
 const SUBSCRIPTION_PILL: Record<string, string> = {
-  ACTIVE: "bg-emerald-100 text-emerald-700",
-  PENDING: "bg-stone-100 text-stone-600",
-  PAUSED: "bg-amber-100 text-amber-700",
-  EXPIRING: "bg-amber-100 text-amber-700",
-  CANCELLED: "bg-rose-100 text-rose-700",
+  ACTIVE: "bg-status-success/20 text-status-success",
+  PENDING: "bg-muted text-muted-foreground",
+  PAUSED: "bg-status-warning/20 text-status-warning",
+  EXPIRING: "bg-status-warning/20 text-status-warning",
+  CANCELLED: "bg-destructive/15 text-destructive",
 };
 
 function formatDate(d: string | null | undefined): string {
@@ -102,13 +102,13 @@ function Kpi({
 }) {
   const valueCls =
     tone === "danger"
-      ? "text-rose-600"
+      ? "text-destructive"
       : tone === "muted"
-        ? "text-stone-400"
-        : "text-stone-800";
+        ? "text-muted-foreground"
+        : "text-foreground";
   return (
-    <div className="rounded-xl border border-stone-200 bg-white p-4">
-      <div className="mb-1 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-stone-400">
+    <div className="rounded-xl border border-border bg-card p-4">
+      <div className="mb-1 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {icon}
         {label}
       </div>
@@ -197,8 +197,8 @@ export function OperationalHubLanding({ onNavigate }: Props) {
 
   if (!subscription && !resourceInstance) {
     return (
-      <div className="rounded-xl border border-stone-200 bg-white p-6">
-        <p className="text-sm text-stone-500">
+      <div className="rounded-xl border border-border bg-card p-6">
+        <p className="text-sm text-muted-foreground">
           No Operational Hub subscription found in this drive.
         </p>
       </div>
@@ -224,22 +224,24 @@ export function OperationalHubLanding({ onNavigate }: Props) {
   return (
     <div className="space-y-6 p-2">
       {/* Hero */}
-      <div className="rounded-2xl border border-violet-100/60 bg-gradient-to-br from-violet-50 to-indigo-50 p-6">
+      <div className="rounded-2xl border border-border bg-card p-6">
         <div className="flex items-start gap-4">
-          <div className="rounded-xl bg-violet-600/10 p-2.5 text-violet-700">
+          <div className="rounded-xl bg-primary/10 p-2.5 text-primary">
             <Building2 size={24} />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-bold text-stone-800">{title}</h1>
+              <h1 className="text-2xl font-bold text-foreground">{title}</h1>
               {subscription ? (
                 <Pill className={subStatusPill}>{subStatus}</Pill>
               ) : null}
             </div>
-            <p className="mt-1 max-w-2xl text-sm text-stone-600">{summary}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-stone-500">
+            <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+              {summary}
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
               {subscription?.tierName ? (
-                <span className="inline-flex items-center rounded-full bg-white/80 px-2.5 py-1 font-medium text-violet-700 ring-1 ring-violet-200">
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-1 font-medium text-primary ring-1 ring-primary/30">
                   {subscription.tierName} tier
                 </span>
               ) : null}
@@ -297,20 +299,20 @@ export function OperationalHubLanding({ onNavigate }: Props) {
           resource-instance (single selectedOption per facet). Falls back to the
           RT's catalog facets if the instance hasn't been provisioned yet. */}
       {resourceInstance && resourceInstance.configuration.length > 0 ? (
-        <div className="rounded-xl border border-stone-200 bg-white p-5">
-          <h2 className="text-sm font-semibold text-stone-700">
+        <div className="rounded-xl border border-border bg-card p-5">
+          <h2 className="text-sm font-semibold text-foreground">
             Your configuration
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             The choices you made for this product.
           </p>
           <div className="grid grid-cols-2 gap-x-6 gap-y-4">
             {resourceInstance.configuration.map((f) => (
               <div key={f.id}>
-                <div className="mb-1 text-xs font-medium uppercase tracking-wider text-stone-400">
+                <div className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   {f.categoryLabel}
                 </div>
-                <span className="inline-flex items-center rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700">
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
                   {f.selectedOption}
                 </span>
               </div>
@@ -318,25 +320,25 @@ export function OperationalHubLanding({ onNavigate }: Props) {
           </div>
         </div>
       ) : rtState && (rtState.facetTargets?.length ?? 0) > 0 ? (
-        <div className="rounded-xl border border-stone-200 bg-white p-5">
-          <h2 className="text-sm font-semibold text-stone-700">
+        <div className="rounded-xl border border-border bg-card p-5">
+          <h2 className="text-sm font-semibold text-foreground">
             Configuration options
           </h2>
-          <p className="mb-4 text-xs text-stone-400">
+          <p className="mb-4 text-xs text-muted-foreground">
             The choices this product supports. Your selections appear here once
             the instance is provisioned.
           </p>
           <div className="grid grid-cols-2 gap-x-6 gap-y-4">
             {(rtState.facetTargets ?? []).map((ft) => (
               <div key={ft.id}>
-                <div className="mb-1 text-xs font-medium uppercase tracking-wider text-stone-400">
+                <div className="mb-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   {ft.categoryLabel}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {(ft.selectedOptions ?? []).map((opt) => (
                     <span
                       key={opt}
-                      className="inline-flex items-center rounded-full bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600"
+                      className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground"
                     >
                       {opt}
                     </span>
@@ -356,10 +358,10 @@ export function OperationalHubLanding({ onNavigate }: Props) {
         resourceInstance.activatedAt ||
         resourceInstance.suspendedAt ||
         resourceInstance.terminatedAt) ? (
-        <div className="rounded-xl border border-stone-200 bg-white p-5">
+        <div className="rounded-xl border border-border bg-card p-5">
           <div className="mb-3 flex items-center gap-2">
-            <Activity size={14} className="text-stone-500" />
-            <h2 className="text-sm font-semibold text-stone-700">Lifecycle</h2>
+            <Activity size={14} className="text-muted-foreground" />
+            <h2 className="text-sm font-semibold text-foreground">Lifecycle</h2>
           </div>
           <dl className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-3">
             {resourceInstance.confirmedAt ? (
@@ -406,17 +408,17 @@ export function OperationalHubLanding({ onNavigate }: Props) {
             ) : null}
           </dl>
           {resourceInstance.suspensionReason ? (
-            <p className="mt-3 text-xs text-amber-700">
+            <p className="mt-3 text-xs text-status-warning">
               Suspension reason: {resourceInstance.suspensionReason}
             </p>
           ) : null}
           {resourceInstance.terminationReason ? (
-            <p className="mt-3 text-xs text-rose-700">
+            <p className="mt-3 text-xs text-destructive">
               Termination reason: {resourceInstance.terminationReason}
             </p>
           ) : null}
           {resourceInstance.provisioningFailureReason ? (
-            <p className="mt-3 text-xs text-rose-700">
+            <p className="mt-3 text-xs text-destructive">
               Provisioning failure: {resourceInstance.provisioningFailureReason}
             </p>
           ) : null}
@@ -428,38 +430,38 @@ export function OperationalHubLanding({ onNavigate }: Props) {
       ((rtState.setupServices?.length ?? 0) > 0 ||
         (rtState.recurringServices?.length ?? 0) > 0) ? (
         <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-xl border border-stone-200 bg-white p-5">
-            <h2 className="mb-3 text-sm font-semibold text-stone-700">
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h2 className="mb-3 text-sm font-semibold text-foreground">
               Setup (one-time)
             </h2>
             <ul className="space-y-2">
               {(rtState.setupServices ?? []).map((s) => (
                 <li
                   key={s}
-                  className="flex items-start gap-2 text-sm text-stone-600"
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
                 >
                   <CheckCircle2
                     size={14}
-                    className="mt-0.5 shrink-0 text-emerald-500"
+                    className="mt-0.5 shrink-0 text-status-success"
                   />
                   <span>{s}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-xl border border-stone-200 bg-white p-5">
-            <h2 className="mb-3 text-sm font-semibold text-stone-700">
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h2 className="mb-3 text-sm font-semibold text-foreground">
               Recurring (included)
             </h2>
             <ul className="space-y-2">
               {(rtState.recurringServices ?? []).map((s) => (
                 <li
                   key={s}
-                  className="flex items-start gap-2 text-sm text-stone-600"
+                  className="flex items-start gap-2 text-sm text-muted-foreground"
                 >
                   <CheckCircle2
                     size={14}
-                    className="mt-0.5 shrink-0 text-emerald-500"
+                    className="mt-0.5 shrink-0 text-status-success"
                   />
                   <span>{s}</span>
                 </li>
@@ -474,17 +476,17 @@ export function OperationalHubLanding({ onNavigate }: Props) {
         <button
           type="button"
           onClick={() => onNavigate?.("expense-reports")}
-          className="group rounded-xl border border-stone-200 bg-white p-5 text-left transition hover:border-violet-300 hover:shadow-sm"
+          className="group rounded-xl border border-border bg-card p-5 text-left transition hover:border-primary hover:shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-stone-100 p-2 text-stone-600 transition group-hover:bg-violet-100 group-hover:text-violet-700">
+            <div className="rounded-lg bg-muted p-2 text-muted-foreground transition group-hover:bg-primary/10 group-hover:text-primary">
               <FileText size={18} />
             </div>
             <div>
-              <div className="text-sm font-semibold text-stone-700">
+              <div className="text-sm font-semibold text-foreground">
                 Expense Reports
               </div>
-              <div className="text-xs text-stone-500">
+              <div className="text-xs text-muted-foreground">
                 Track and review expenses
               </div>
             </div>
@@ -493,17 +495,17 @@ export function OperationalHubLanding({ onNavigate }: Props) {
         <button
           type="button"
           onClick={() => onNavigate?.("snapshot-reports")}
-          className="group rounded-xl border border-stone-200 bg-white p-5 text-left transition hover:border-violet-300 hover:shadow-sm"
+          className="group rounded-xl border border-border bg-card p-5 text-left transition hover:border-primary hover:shadow-sm"
         >
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-stone-100 p-2 text-stone-600 transition group-hover:bg-violet-100 group-hover:text-violet-700">
+            <div className="rounded-lg bg-muted p-2 text-muted-foreground transition group-hover:bg-primary/10 group-hover:text-primary">
               <Camera size={18} />
             </div>
             <div>
-              <div className="text-sm font-semibold text-stone-700">
+              <div className="text-sm font-semibold text-foreground">
                 Snapshot Reports
               </div>
-              <div className="text-xs text-stone-500">
+              <div className="text-xs text-muted-foreground">
                 Monthly operational snapshots
               </div>
             </div>
@@ -514,21 +516,21 @@ export function OperationalHubLanding({ onNavigate }: Props) {
       {/* About this product — RT contentSections */}
       {rtState && (rtState.contentSections?.length ?? 0) > 0 ? (
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-stone-700">
+          <h2 className="text-sm font-semibold text-foreground">
             About this product
           </h2>
           {(rtState.contentSections ?? []).map((cs) => (
             <details
               key={cs.id}
-              className="group rounded-xl border border-stone-200 bg-white p-4 open:bg-stone-50/30"
+              className="group rounded-xl border border-border bg-card p-4 open:bg-muted/30"
             >
-              <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-stone-700">
+              <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-foreground">
                 {cs.title}
-                <span className="text-stone-400 transition group-open:rotate-180">
+                <span className="text-muted-foreground transition group-open:rotate-180">
                   ▾
                 </span>
               </summary>
-              <div className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-stone-600">
+              <div className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
                 {cs.content}
               </div>
             </details>
@@ -539,19 +541,19 @@ export function OperationalHubLanding({ onNavigate }: Props) {
       {/* FAQs — RT faqFields */}
       {rtState && (rtState.faqFields?.length ?? 0) > 0 ? (
         <div className="space-y-3">
-          <h2 className="text-sm font-semibold text-stone-700">FAQs</h2>
+          <h2 className="text-sm font-semibold text-foreground">FAQs</h2>
           {(rtState.faqFields ?? []).map((q) => (
             <details
               key={q.id}
-              className="group rounded-xl border border-stone-200 bg-white p-4"
+              className="group rounded-xl border border-border bg-card p-4"
             >
-              <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-stone-700">
+              <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-foreground">
                 {q.question ?? "Question"}
-                <span className="text-stone-400 transition group-open:rotate-180">
+                <span className="text-muted-foreground transition group-open:rotate-180">
                   ▾
                 </span>
               </summary>
-              <div className="mt-3 whitespace-pre-wrap text-sm text-stone-600">
+              <div className="mt-3 whitespace-pre-wrap text-sm text-muted-foreground">
                 {q.answer ?? ""}
               </div>
             </details>
@@ -573,13 +575,13 @@ function Step({
 }) {
   const valueCls =
     tone === "danger"
-      ? "text-rose-700"
+      ? "text-destructive"
       : tone === "warn"
-        ? "text-amber-700"
-        : "text-stone-700";
+        ? "text-status-warning"
+        : "text-foreground";
   return (
     <div>
-      <dt className="text-xs font-medium uppercase tracking-wider text-stone-400">
+      <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {label}
       </dt>
       <dd className={`text-sm font-medium ${valueCls}`}>{value}</dd>

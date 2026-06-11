@@ -105,14 +105,14 @@ export const InvoiceTableRow = ({
     !billingFile;
 
   return (
-    <tr className="hover:bg-gray-50 transition-colors">
+    <tr className="hover:bg-accent transition-colors">
       {/* Checkbox */}
       <td className="px-2 py-2">
         <input
           type="checkbox"
           checked={isSelected}
           onChange={(e) => onSelect(e.target.checked)}
-          className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+          className="w-4 h-4 rounded border-input text-primary focus:ring-2 focus:ring-ring"
         />
       </td>
 
@@ -122,37 +122,39 @@ export const InvoiceTableRow = ({
           invoiceFile ? (
             <FileItem fileNode={invoiceFile} className="h-10" />
           ) : (
-            <span className="text-gray-500">{row.issuer || "Unknown"}</span>
+            <span className="text-muted-foreground">
+              {row.issuer || "Unknown"}
+            </span>
           )
         ) : invoiceFile ? (
           <FileItem fileNode={invoiceFile} className="h-10" />
         ) : (
-          <span className="text-gray-400">-</span>
+          <span className="text-muted-foreground">-</span>
         )}
       </td>
 
       {/* Invoice No */}
-      <td className="px-2 py-2 text-center text-sm text-gray-700">
+      <td className="px-2 py-2 text-center text-sm text-foreground">
         {row.invoiceNo || "-"}
       </td>
 
       {/* Issue Date */}
-      <td className="px-2 py-2 text-center text-sm text-gray-700">
+      <td className="px-2 py-2 text-center text-sm text-foreground">
         {row.issueDate ? formatDateUTC(row.issueDate) : "-"}
       </td>
 
       {/* Due Date */}
-      <td className="px-2 py-2 text-center text-sm text-gray-700">
+      <td className="px-2 py-2 text-center text-sm text-foreground">
         {row.dueDate ? formatDateUTC(row.dueDate) : "-"}
       </td>
 
       {/* Currency */}
-      <td className="px-2 py-2 text-center text-sm text-gray-700">
+      <td className="px-2 py-2 text-center text-sm text-foreground">
         {row.currency || "-"}
       </td>
 
       {/* Amount */}
-      <td className="px-2 py-2 text-center text-sm font-medium text-gray-800">
+      <td className="px-2 py-2 text-center text-sm font-medium text-foreground">
         {formatAmount(row.amount)}
       </td>
 
@@ -162,7 +164,7 @@ export const InvoiceTableRow = ({
           {canShowBillingStatementButton ? (
             <button
               type="button"
-              className="bg-white border border-gray-300 rounded px-3 py-1 text-xs font-medium hover:bg-gray-50 transition-colors"
+              className="bg-popover text-foreground border border-border rounded px-3 py-1 text-xs font-medium hover:bg-accent transition-colors"
               onClick={() => onCreateBillingStatement?.(row.id)}
             >
               Generate Billing Statement
@@ -177,13 +179,13 @@ export const InvoiceTableRow = ({
       <td className="px-2 py-2 text-center">
         {hasExportedData ? (
           <div className="flex flex-col items-center">
-            <span className="text-green-600 text-sm font-medium">Yes</span>
-            <span className="text-green-600 text-xs">
+            <span className="text-status-success text-sm font-medium">Yes</span>
+            <span className="text-status-success text-xs">
               {formatTimestamp(row.exported!.timestamp!)}
             </span>
           </div>
         ) : (
-          <span className="text-red-500 text-sm">No</span>
+          <span className="text-destructive text-sm">No</span>
         )}
       </td>
     </tr>

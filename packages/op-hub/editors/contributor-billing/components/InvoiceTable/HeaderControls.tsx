@@ -210,7 +210,7 @@ export const HeaderControls = ({
           </div>
           <input
             type="text"
-            className="border border-gray-300 rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="bg-background text-foreground placeholder:text-muted-foreground border border-input rounded px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
             placeholder="Search"
             onChange={(e) => onSearchChange?.(e.target.value)}
           />
@@ -220,9 +220,9 @@ export const HeaderControls = ({
         <div className="flex gap-2 items-center">
           <button
             type="button"
-            className={`bg-white border border-gray-300 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`bg-popover text-foreground border border-border rounded px-3 py-1.5 text-sm font-medium transition-colors ${
               hasBillingStatements
-                ? "hover:bg-gray-50"
+                ? "hover:bg-accent"
                 : "opacity-50 cursor-not-allowed"
             }`}
             onClick={onCreateOrOpenExpenseReport}
@@ -232,8 +232,8 @@ export const HeaderControls = ({
           </button>
           <button
             type="button"
-            className={`bg-white border border-gray-300 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
-              canExport ? "hover:bg-gray-50" : "opacity-50 cursor-not-allowed"
+            className={`bg-popover text-foreground border border-border rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+              canExport ? "hover:bg-accent" : "opacity-50 cursor-not-allowed"
             }`}
             onClick={() => {
               setShowCurrencyModal(true);
@@ -258,11 +258,11 @@ export const HeaderControls = ({
           {/* TO BE Implemented later */}
           {/* <button
             type="button"
-            className="p-1.5 rounded hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded hover:bg-accent transition-colors"
             onClick={handleSettingsClick}
             title="Settings"
           >
-            <Icon name="Settings" className="w-5 h-5 text-gray-600" />
+            <Icon name="Settings" className="w-5 h-5 text-muted-foreground" />
           </button> */}
         </div>
       </div>
@@ -279,7 +279,7 @@ export const HeaderControls = ({
         continueLabel="Export"
         cancelLabel="Cancel"
       >
-        <p className="text-red-600 text-sm mb-3 font-medium">
+        <p className="text-destructive text-sm mb-3 font-medium">
           Warning: the chosen currency should match the base currency of the
           accounting system.
         </p>
@@ -305,7 +305,7 @@ export const HeaderControls = ({
         continueLabel="Export"
         cancelLabel="Cancel"
       >
-        <p className="text-red-600 text-sm mb-3 font-medium">
+        <p className="text-destructive text-sm mb-3 font-medium">
           Warning: the chosen currency should match the base currency of the
           accounting system.
         </p>
@@ -350,7 +350,7 @@ export const HeaderControls = ({
         continueLabel="Delete"
         cancelLabel="Cancel"
       >
-        <p className="text-red-600 text-sm mb-3 font-medium">
+        <p className="text-destructive text-sm mb-3 font-medium">
           This will permanently delete {deleteIds.length} selected document
           {deleteIds.length !== 1 ? "s" : ""} from the drive. This action cannot
           be undone.

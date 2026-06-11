@@ -77,14 +77,14 @@ export default function PDFReviewModal({
   // descendants, which otherwise traps the modal and hides the footer).
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-7xl h-full max-h-[calc(100vh-2rem)] flex flex-col overflow-hidden">
+      <div className="bg-card rounded-2xl shadow-lg w-full max-w-7xl h-full max-h-[calc(100vh-2rem)] flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+        <header className="flex items-center justify-between border-b border-border px-6 py-4">
           <div>
-            <h2 className="text-xl font-semibold text-slate-900">
+            <h2 className="text-xl font-semibold text-foreground">
               Review extracted invoice
             </h2>
-            <p className="text-sm text-slate-500 mt-0.5">
+            <p className="text-sm text-muted-foreground mt-0.5">
               Check each field against the PDF before applying. Edit anything
               that looks off.
             </p>
@@ -92,7 +92,7 @@ export default function PDFReviewModal({
           <button
             onClick={onReject}
             disabled={isApplying}
-            className="text-slate-500 hover:text-slate-800 disabled:opacity-50"
+            className="text-muted-foreground hover:text-foreground disabled:opacity-50"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -112,11 +112,11 @@ export default function PDFReviewModal({
         {/* Body — split pane */}
         <div className="flex-1 flex min-h-0">
           {/* PDF preview */}
-          <div className="w-1/2 bg-slate-100 border-r border-slate-200">
+          <div className="w-1/2 bg-background border-r border-border">
             {pdfSrc ? (
               <iframe src={pdfSrc} title={fileName} className="w-full h-full" />
             ) : (
-              <div className="flex items-center justify-center h-full text-slate-400">
+              <div className="flex items-center justify-center h-full text-muted-foreground">
                 No preview available
               </div>
             )}
@@ -209,10 +209,10 @@ export default function PDFReviewModal({
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-slate-200 px-6 py-4 flex items-center justify-between bg-slate-50">
-          <div className="text-xs text-slate-500">
+        <footer className="border-t border-border px-6 py-4 flex items-center justify-between bg-muted">
+          <div className="text-xs text-muted-foreground">
             {reviewData.invalidFields.length > 0 ? (
-              <span className="text-amber-700 font-medium">
+              <span className="text-status-warning font-medium">
                 {reviewData.invalidFields.length} field
                 {reviewData.invalidFields.length === 1 ? "" : "s"} flagged —
                 please verify highlighted values.
@@ -225,14 +225,14 @@ export default function PDFReviewModal({
             <button
               onClick={onReject}
               disabled={isApplying}
-              className="px-5 py-2 rounded-lg text-sm font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-100 disabled:opacity-50"
+              className="px-5 py-2 rounded-lg text-sm font-semibold text-foreground bg-card border border-border hover:bg-accent disabled:opacity-50"
             >
               Reject
             </button>
             <button
               onClick={handleAccept}
               disabled={isApplying}
-              className="px-5 py-2 rounded-lg text-sm font-semibold text-white bg-slate-900 hover:bg-slate-800 disabled:opacity-50 flex items-center gap-2"
+              className="px-5 py-2 rounded-lg text-sm font-semibold text-primary-foreground bg-primary hover:bg-primary/90 disabled:opacity-50 flex items-center gap-2"
             >
               {isApplying && <Loader2 className="w-4 h-4 animate-spin" />}
               Accept & Apply
@@ -258,7 +258,7 @@ function Section({
 }) {
   return (
     <section>
-      <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide mb-3 border-b border-slate-100 pb-1">
+      <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-3 border-b border-border pb-1">
         {title}
       </h3>
       <div className="space-y-3">{children}</div>
@@ -358,8 +358,8 @@ function PartySection({
       {showPaymentRouting && (
         <>
           {/* Wallet — high stakes, separate visual emphasis */}
-          <div className="mt-4 p-3 rounded-lg bg-slate-50 border border-slate-200">
-            <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
+          <div className="mt-4 p-3 rounded-lg bg-muted border border-border">
+            <p className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2">
               Wallet
             </p>
             <FieldRow
@@ -381,8 +381,8 @@ function PartySection({
             />
           </div>
           {/* Bank — high stakes */}
-          <div className="mt-2 p-3 rounded-lg bg-slate-50 border border-slate-200">
-            <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
+          <div className="mt-2 p-3 rounded-lg bg-muted border border-border">
+            <p className="text-xs font-semibold text-foreground uppercase tracking-wide mb-2">
               Bank
             </p>
             <FieldRow
@@ -448,7 +448,7 @@ function LineItemsSection({
   if (items.length === 0) {
     return (
       <Section title="Line items">
-        <p className="text-sm text-slate-400 italic">
+        <p className="text-sm text-muted-foreground italic">
           No line items extracted.
         </p>
       </Section>
@@ -460,10 +460,10 @@ function LineItemsSection({
         {items.map((item, idx) => (
           <div
             key={item.id ?? idx}
-            className="p-3 rounded-lg border border-slate-200 bg-white"
+            className="p-3 rounded-lg border border-border bg-card"
           >
             <input
-              className="w-full text-sm font-medium border-0 focus:ring-0 px-0 py-0.5 bg-transparent"
+              className="w-full text-sm font-medium border-0 focus:ring-0 px-0 py-0.5 bg-transparent text-foreground placeholder:text-muted-foreground"
               value={item.description ?? ""}
               onChange={(e) =>
                 onChange(`lineItems.${idx}.description`, e.target.value)
@@ -514,10 +514,10 @@ function NumberCell({
 }) {
   return (
     <label className="flex flex-col gap-0.5">
-      <span className="text-slate-500">{label}</span>
+      <span className="text-foreground">{label}</span>
       <input
         type="number"
-        className="border border-slate-200 rounded px-1.5 py-1 text-slate-900 focus:outline-none focus:border-slate-400"
+        className="border border-input rounded px-1.5 py-1 bg-background text-foreground focus:outline-none focus:border-ring focus:ring-1 focus:ring-ring"
         value={typeof value === "number" ? value : ""}
         onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
       />
@@ -550,10 +550,12 @@ function FieldRow({
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <label className="text-xs font-medium text-slate-600">{label}</label>
+        <label className="text-xs font-medium text-foreground">
+          {label}
+        </label>
         <div className="flex items-center gap-1">
           {isInvalid && (
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded">
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-status-warning bg-status-warning/15 px-1.5 py-0.5 rounded">
               <AlertTriangle className="w-3 h-3" />
               Verify
             </span>
@@ -563,10 +565,10 @@ function FieldRow({
       </div>
       <input
         type={type}
-        className={`w-full text-sm rounded-md border px-2.5 py-1.5 focus:outline-none focus:ring-1 ${
+        className={`w-full text-sm rounded-md border px-2.5 py-1.5 bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 ${
           isInvalid
-            ? "border-amber-400 bg-amber-50/30 focus:border-amber-500 focus:ring-amber-200"
-            : "border-slate-200 focus:border-slate-400 focus:ring-slate-200"
+            ? "border-status-warning/50 bg-status-warning/15 focus:border-status-warning focus:ring-status-warning/30"
+            : "border-input focus:border-ring focus:ring-ring"
         } ${mono ? "font-mono" : ""}`}
         value={value == null ? "" : String(value)}
         placeholder="(not extracted)"
@@ -582,7 +584,7 @@ function FieldRow({
         }
       />
       {conf?.evidence && (
-        <p className="text-[11px] text-slate-400 mt-0.5 italic line-clamp-1">
+        <p className="text-[11px] text-muted-foreground mt-0.5 italic line-clamp-1">
           PDF: "{conf.evidence}"
         </p>
       )}
@@ -592,9 +594,9 @@ function FieldRow({
 
 function ConfidenceBadge({ level }: { level: ConfidenceLevel }) {
   const styles: Record<ConfidenceLevel, string> = {
-    high: "text-emerald-700 bg-emerald-50",
-    medium: "text-slate-700 bg-slate-100",
-    low: "text-amber-700 bg-amber-50",
+    high: "text-status-success bg-status-success/15",
+    medium: "text-foreground bg-muted",
+    low: "text-status-warning bg-status-warning/15",
   };
   return (
     <span
@@ -622,10 +624,10 @@ function WarningsBanner({
   groundingAvailable: boolean;
 }) {
   return (
-    <div className="bg-amber-50 border-b border-amber-200 px-6 py-3">
+    <div className="bg-status-warning/15 border-b border-status-warning/30 px-6 py-3">
       <div className="flex items-start gap-2">
-        <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" />
-        <div className="text-xs text-amber-900 space-y-1">
+        <AlertTriangle className="w-4 h-4 text-status-warning mt-0.5 shrink-0" />
+        <div className="text-xs text-foreground space-y-1">
           {truncated && (
             <p>
               <strong>Output was truncated.</strong> Some line items may be
@@ -645,7 +647,7 @@ function WarningsBanner({
             <p key={i}>• {w}</p>
           ))}
           {warnings.length > 5 && (
-            <p className="text-amber-700">
+            <p className="text-status-warning">
               … and {warnings.length - 5} more issue
               {warnings.length - 5 === 1 ? "" : "s"}.
             </p>

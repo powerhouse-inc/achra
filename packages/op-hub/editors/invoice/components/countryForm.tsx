@@ -32,6 +32,11 @@ export const CountryForm = ({
       onSubmit={() => {}}
       resetOnSuccessfulSubmit
     >
+      {label ? (
+        <label className="mb-1 block text-sm font-medium text-foreground">
+          {label}
+        </label>
+      ) : null}
       <CountryCodeField
         enableSearch
         name="country"
@@ -57,7 +62,6 @@ export const CountryForm = ({
         // defaultValue={countryCode}
         value={countryCode}
         className={twMerge(className)}
-        label={label}
         warnings={warnings}
         includeDependentAreas={true}
       />

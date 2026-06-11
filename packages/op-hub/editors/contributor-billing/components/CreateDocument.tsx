@@ -14,7 +14,7 @@ export function CreateDocument() {
   return (
     <div>
       {/* Customize section title here */}
-      <h3 className="mb-3 mt-4 text-sm font-bold text-gray-600">
+      <h3 className="mb-3 mt-4 text-sm font-bold text-muted-foreground">
         Create document
       </h3>
       {/* Customize layout by changing flex-wrap, gap, or grid layout */}
@@ -43,7 +43,7 @@ function CreateDocumentButton({ documentModelModule }: Props) {
     documentModelModule.documentModel.global.description;
   return (
     <button
-      className="cursor-pointer rounded-md bg-gray-200 py-2 px-3 hover:bg-gray-300"
+      className="cursor-pointer rounded-md bg-muted text-foreground py-2 px-3 hover:bg-accent hover:text-accent-foreground"
       title={documentModelName}
       aria-description={documentModelDescription}
       onClick={() => showCreateDocumentModal(documentType)}

@@ -9,9 +9,9 @@ function formatCurrency(amount: number): string {
 }
 
 const SEVERITY_STROKE = {
-  critical: "#ef4444",
-  warning: "#f59e0b",
-  ok: "#10b981",
+  critical: "var(--destructive)",
+  warning: "var(--status-warning)",
+  ok: "var(--status-success)",
 };
 
 function MiniGauge({ m }: { m: CustomerMetric }) {
@@ -39,16 +39,16 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
   const bgY2 = cy + r * Math.sin(0);
 
   return (
-    <div className="flex flex-col items-center rounded-lg border border-stone-200/60 bg-white px-5 py-4 min-w-[190px]">
+    <div className="flex flex-col items-center rounded-lg border border-border bg-card px-5 py-4 min-w-[190px]">
       {/* Customer + severity */}
       <div className="flex items-center gap-2 mb-2 w-full">
-        <span className="text-sm font-semibold text-stone-700 truncate">
+        <span className="text-sm font-semibold text-foreground truncate">
           {m.customerName}
         </span>
         {m.severity === "critical" ? (
-          <span className="shrink-0 inline-block h-2 w-2 rounded-full bg-red-500" />
+          <span className="shrink-0 inline-block h-2 w-2 rounded-full bg-destructive" />
         ) : m.severity === "warning" ? (
-          <span className="shrink-0 inline-block h-2 w-2 rounded-full bg-amber-400" />
+          <span className="shrink-0 inline-block h-2 w-2 rounded-full bg-status-warning" />
         ) : null}
       </div>
 
@@ -63,7 +63,7 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
         <path
           d={`M ${x1} ${y1} A ${r} ${r} 0 1 1 ${bgX2} ${bgY2}`}
           fill="none"
-          stroke="#e7e5e4"
+          style={{ stroke: "var(--border)" }}
           strokeWidth={sw}
           strokeLinecap="round"
         />
@@ -71,7 +71,7 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
           <path
             d={`M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2}`}
             fill="none"
-            stroke={stroke}
+            style={{ stroke }}
             strokeWidth={sw}
             strokeLinecap="round"
           />
@@ -81,7 +81,7 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
           y={cy - 12}
           textAnchor="middle"
           className="text-2xl font-bold"
-          fill="#292524"
+          style={{ fill: "var(--foreground)" }}
         >
           {m.currentUsage}
         </text>
@@ -90,24 +90,24 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
           y={cy + 4}
           textAnchor="middle"
           className="text-xs"
-          fill="#a8a29e"
+          style={{ fill: "var(--muted-foreground)" }}
         >
           / {limit}
         </text>
       </svg>
 
       {/* Metric name */}
-      <div className="text-sm text-stone-500 text-center leading-tight mt-1">
+      <div className="text-sm text-muted-foreground text-center leading-tight mt-1">
         {m.metricName}
       </div>
 
       {/* Overage or status */}
       {m.overageUnits > 0 ? (
-        <div className="text-sm font-semibold text-red-600 text-center mt-1.5">
+        <div className="text-sm font-semibold text-destructive text-center mt-1.5">
           {formatCurrency(m.overageCost)} overage
         </div>
       ) : (
-        <div className="text-sm text-stone-400 text-center mt-1.5">
+        <div className="text-sm text-muted-foreground text-center mt-1.5">
           {m.freeLimit > 0 ? `${m.freeLimit} free` : "—"}
         </div>
       )}
@@ -118,7 +118,7 @@ function MiniGauge({ m }: { m: CustomerMetric }) {
 export function CustomerMetricsCard({ metrics }: CustomerMetricsCardProps) {
   if (metrics.length === 0) {
     return (
-      <div className="flex items-center justify-center py-8 text-sm text-stone-400">
+      <div className="flex items-center justify-center py-8 text-sm text-muted-foreground">
         No usage metrics tracked across subscriptions
       </div>
     );

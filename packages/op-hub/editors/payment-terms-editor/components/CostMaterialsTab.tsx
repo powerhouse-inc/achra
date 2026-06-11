@@ -10,6 +10,17 @@ import {
   type BillingFrequency,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface CostMaterialsTabProps {
   state: PaymentTermsState;
@@ -69,14 +80,14 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
     return (
       <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             Cost & Materials Configuration
           </h2>
           <Button
             onClick={() => setIsEditing(true)}
             color="light"
             size="sm"
-            className="cursor-pointer hover:bg-blue-600 hover:text-white"
+            className={primaryButtonClass}
           >
             {state.costAndMaterials
               ? "Edit Configuration"
@@ -87,44 +98,44 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         {state.costAndMaterials ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Hourly Rate
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.costAndMaterials.hourlyRate
                   ? `${state.costAndMaterials.hourlyRate.value} ${state.costAndMaterials.hourlyRate.unit}`
                   : "Not set"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Variable Cap
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.costAndMaterials.variableCap
                   ? `${state.costAndMaterials.variableCap.value} ${state.costAndMaterials.variableCap.unit}`
                   : "Not set"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Billing Frequency
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.costAndMaterials.billingFrequency}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Timesheet Required
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.costAndMaterials.timesheetRequired ? "Yes" : "No"}
               </p>
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-gray-500 dark:text-gray-400">
+          <div className={emptyStateClass}>
             <p>No cost & materials configuration set up yet.</p>
             <p className="text-sm">
               Click "Configure Cost & Materials" to get started.
@@ -138,14 +149,14 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold dark:text-white">
+        <h2 className="text-xl font-semibold text-foreground">
           Configure Cost & Materials
         </h2>
       </div>
 
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label className={fieldLabelClass}>
             Hourly Rate
           </label>
           <TextInput
@@ -160,7 +171,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label className={fieldLabelClass}>
             Variable Cap
           </label>
           <TextInput
@@ -175,7 +186,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label className={fieldLabelClass}>
             Billing Frequency *
           </label>
           <Select
@@ -204,11 +215,11 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
             onChange={(e) =>
               setFormData({ ...formData, timesheetRequired: e.target.checked })
             }
-            className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            className={checkboxClass}
           />
           <label
             htmlFor="timesheetRequired"
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            className={checkboxLabelClass}
           >
             Timesheet Required
           </label>
@@ -220,7 +231,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
           type="submit"
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           Save Configuration
         </Button>
@@ -229,7 +240,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
           onClick={handleCancel}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-gray-600 hover:text-white"
+          className={secondaryButtonClass}
         >
           Cancel
         </Button>

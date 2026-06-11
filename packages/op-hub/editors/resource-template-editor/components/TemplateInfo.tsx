@@ -41,8 +41,8 @@ const STATUS_OPTIONS = [
 ] as const;
 
 const AUDIENCE_PRESETS = [
-  { label: "Builders", color: "#0ea5e9" },
-  { label: "Networks", color: "#10b981" },
+  { label: "Builders", color: "var(--status-progress)" },
+  { label: "Networks", color: "var(--status-success)" },
 ];
 
 // Service templates for quick-add functionality
@@ -649,7 +649,7 @@ export function TemplateInfo({ document, dispatch }: TemplateInfoProps) {
               style={{
                 fontSize: "0.95rem",
                 fontWeight: 400,
-                color: "var(--rt-slate-600, #475569)",
+                color: "var(--rt-slate-600, var(--foreground))",
                 marginTop: "-4px",
               }}
             />
@@ -764,7 +764,7 @@ export function TemplateInfo({ document, dispatch }: TemplateInfoProps) {
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
-                  color: "var(--rt-slate-500, #64748b)",
+                  color: "var(--rt-slate-500, var(--muted-foreground))",
                   whiteSpace: "nowrap",
                 }}
               >
@@ -788,7 +788,7 @@ export function TemplateInfo({ document, dispatch }: TemplateInfoProps) {
                   width: "72px",
                   padding: "4px 8px",
                   fontSize: "0.8125rem",
-                  border: "1px solid var(--rt-slate-200, #e2e8f0)",
+                  border: "1px solid var(--rt-slate-200, var(--border))",
                   borderRadius: "6px",
                   outline: "none",
                   textAlign: "center",
@@ -798,7 +798,7 @@ export function TemplateInfo({ document, dispatch }: TemplateInfoProps) {
               <span
                 style={{
                   fontSize: "0.6875rem",
-                  color: "var(--rt-slate-400, #94a3b8)",
+                  color: "var(--rt-slate-400, var(--muted-foreground))",
                 }}
               >
                 Lower = higher priority
@@ -1679,28 +1679,31 @@ const styles = `
     --te-font: 'Instrument Sans', system-ui, sans-serif;
     --te-mono: 'DM Mono', 'SF Mono', monospace;
 
-    --te-ink: #1a1f36;
-    --te-ink-light: #4a5578;
-    --te-ink-muted: #8792a8;
-    --te-surface: #ffffff;
-    --te-surface-raised: #fafbfc;
-    --te-border: #e4e8f0;
-    --te-border-light: #f0f2f7;
+    --te-ink: var(--foreground);
+    --te-ink-light: var(--foreground);
+    --te-ink-muted: var(--muted-foreground);
+    --te-surface: var(--card);
+    /* "Raised" items (service/FAQ/section/facet cards, add-forms, inputs) sit
+       ON the --card panels — recess them to --background so they read
+       distinctly; chips/labels on --te-surface (--card) pop on top. */
+    --te-surface-raised: var(--background);
+    --te-border: var(--border);
+    --te-border-light: var(--muted);
 
-    --te-violet: #7c5cff;
-    --te-violet-light: #f4f1ff;
-    --te-amber: #f59e0b;
-    --te-amber-light: #fef7e6;
-    --te-emerald: #10b981;
-    --te-emerald-light: #e8faf3;
-    --te-sky: #0ea5e9;
-    --te-sky-light: #e8f7fc;
-    --te-rose: #f43f5e;
-    --te-rose-light: #fef1f3;
-    --te-slate: #64748b;
-    --te-slate-light: #f1f5f9;
-    --te-teal: #14b8a6;
-    --te-teal-light: #ccfbf1;
+    --te-violet: var(--primary);
+    --te-violet-light: color-mix(in oklab, var(--primary) 10%, transparent);
+    --te-amber: var(--status-warning);
+    --te-amber-light: color-mix(in oklab, var(--status-warning) 10%, transparent);
+    --te-emerald: var(--status-success);
+    --te-emerald-light: color-mix(in oklab, var(--status-success) 12%, transparent);
+    --te-sky: var(--status-progress);
+    --te-sky-light: color-mix(in oklab, var(--status-progress) 12%, transparent);
+    --te-rose: var(--destructive);
+    --te-rose-light: color-mix(in oklab, var(--destructive) 14%, transparent);
+    --te-slate: var(--muted-foreground);
+    --te-slate-light: var(--muted);
+    --te-teal: var(--status-success);
+    --te-teal-light: color-mix(in oklab, var(--status-success) 20%, transparent);
 
     font-family: var(--te-font);
     display: flex;
@@ -1776,22 +1779,22 @@ const styles = `
 
   .template-editor__status-badge--emerald {
     background: rgba(16, 185, 129, 0.9);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__status-badge--sky {
     background: rgba(14, 165, 233, 0.9);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__status-badge--slate {
     background: rgba(100, 116, 139, 0.9);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__status-badge--rose {
     background: rgba(244, 63, 94, 0.9);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__thumbnail-input {
@@ -1964,7 +1967,7 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.75rem;
     font-weight: 600;
-    color: white;
+    color: var(--primary-foreground);
     background: var(--te-teal);
     border: none;
     border-radius: 100px;
@@ -1973,7 +1976,7 @@ const styles = `
   }
 
   .template-editor__audience-add-btn:hover {
-    background: #0d9488;
+    background: var(--status-success);
   }
 
   .template-editor__audience-presets {
@@ -2128,8 +2131,8 @@ const styles = `
     font-size: 0.9375rem;
     line-height: 1.7;
     color: var(--te-ink);
-    background: var(--te-surface-raised);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 12px;
     padding: 16px;
     resize: vertical;
@@ -2306,12 +2309,12 @@ const styles = `
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    color: white;
+    color: var(--primary-foreground);
     transition: background 0.15s ease;
   }
 
   .template-editor__service-add-btn:hover {
-    background: #0d9488;
+    background: var(--status-success);
   }
 
   .template-editor__service-add-btn svg {
@@ -2349,8 +2352,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.9375rem;
     padding: 12px 16px;
-    background: var(--te-surface-raised);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     color: var(--te-ink);
     transition: all 0.15s ease;
@@ -2467,8 +2470,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.8125rem;
     color: var(--te-ink-light);
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -2510,7 +2513,7 @@ const styles = `
   .template-editor__facet-checkbox svg {
     width: 12px;
     height: 12px;
-    color: white;
+    color: var(--primary-foreground);
   }
 
   /* Templates Panel */
@@ -2542,7 +2545,7 @@ const styles = `
 
   .template-editor__templates-toggle--active {
     background: var(--te-emerald);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__templates-toggle--amber {
@@ -2556,7 +2559,7 @@ const styles = `
 
   .template-editor__templates-toggle--amber.template-editor__templates-toggle--active {
     background: var(--te-amber);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .template-editor__templates-panel {
@@ -2617,8 +2620,8 @@ const styles = `
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--te-ink);
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -2626,7 +2629,7 @@ const styles = `
 
   .template-editor__template-item:hover:not(:disabled) {
     border-color: var(--te-emerald);
-    background: white;
+    background: var(--card);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
   }
@@ -2742,8 +2745,8 @@ const styles = `
     width: 32px;
     height: 32px;
     padding: 0;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
     color: var(--te-ink-muted);
@@ -2860,7 +2863,7 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.8125rem;
     font-weight: 600;
-    color: white;
+    color: var(--primary-foreground);
     background: var(--te-sky);
     border: none;
     border-radius: 8px;
@@ -2869,7 +2872,7 @@ const styles = `
   }
 
   .template-editor__faq-save-btn:hover {
-    background: #0284c7;
+    background: var(--status-progress);
   }
 
   .template-editor__faq-cancel-btn {
@@ -2895,7 +2898,7 @@ const styles = `
     flex-direction: column;
     gap: 10px;
     padding: 16px;
-    background: var(--te-surface-raised);
+    background: transparent;
     border: 1.5px dashed var(--te-border);
     border-radius: 12px;
   }
@@ -2904,8 +2907,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.9375rem;
     padding: 10px 14px;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     color: var(--te-ink);
     transition: all 0.15s ease;
@@ -2929,8 +2932,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.875rem;
     padding: 10px 14px;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     color: var(--te-ink);
     resize: vertical;
@@ -2961,7 +2964,7 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.875rem;
     font-weight: 600;
-    color: white;
+    color: var(--primary-foreground);
     background: var(--te-sky);
     border: none;
     border-radius: 8px;
@@ -2971,7 +2974,7 @@ const styles = `
   }
 
   .template-editor__faq-add-btn:hover:not(:disabled) {
-    background: #0284c7;
+    background: var(--status-progress);
   }
 
   .template-editor__faq-add-btn:disabled {
@@ -2986,8 +2989,8 @@ const styles = `
 
   /* Content Sections */
   .template-editor__card-icon--indigo {
-    background: #eef2ff;
-    color: #6366f1;
+    background: color-mix(in oklab, var(--primary) 12%, transparent);
+    color: var(--primary);
   }
 
   .template-editor__sections-list {
@@ -3013,8 +3016,8 @@ const styles = `
   }
 
   .template-editor__section-item--editing {
-    border-color: #6366f1;
-    background: #eef2ff;
+    border-color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 12%, transparent);
   }
 
   .template-editor__section-reorder {
@@ -3045,8 +3048,8 @@ const styles = `
   }
 
   .template-editor__section-reorder-btn:hover:not(:disabled) {
-    background: #e0e7ff;
-    color: #6366f1;
+    background: color-mix(in oklab, var(--primary) 18%, transparent);
+    color: var(--primary);
   }
 
   .template-editor__section-reorder-btn:disabled {
@@ -3066,8 +3069,8 @@ const styles = `
     width: 28px;
     height: 28px;
     padding: 0;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
     color: var(--te-ink-muted);
@@ -3076,9 +3079,9 @@ const styles = `
   }
 
   .template-editor__section-toggle:hover {
-    border-color: #6366f1;
-    color: #6366f1;
-    background: #eef2ff;
+    border-color: var(--primary);
+    color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 12%, transparent);
   }
 
   .template-editor__section-chevron {
@@ -3161,8 +3164,8 @@ const styles = `
     width: 32px;
     height: 32px;
     padding: 0;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     cursor: pointer;
     color: var(--te-ink-muted);
@@ -3170,9 +3173,9 @@ const styles = `
   }
 
   .template-editor__section-action-btn:hover {
-    border-color: #6366f1;
-    color: #6366f1;
-    background: #eef2ff;
+    border-color: var(--primary);
+    color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 12%, transparent);
   }
 
   .template-editor__section-action-btn--delete:hover {
@@ -3206,7 +3209,7 @@ const styles = `
 
   .template-editor__section-edit-title:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: var(--primary);
   }
 
   .template-editor__section-edit-content {
@@ -3224,7 +3227,7 @@ const styles = `
 
   .template-editor__section-edit-content:focus {
     outline: none;
-    border-color: #6366f1;
+    border-color: var(--primary);
   }
 
   .template-editor__section-edit-actions {
@@ -3238,8 +3241,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.8125rem;
     font-weight: 600;
-    color: white;
-    background: #6366f1;
+    color: var(--primary-foreground);
+    background: var(--primary);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -3247,7 +3250,7 @@ const styles = `
   }
 
   .template-editor__section-save-btn:hover {
-    background: #4f46e5;
+    background: var(--primary);
   }
 
   .template-editor__section-cancel-btn {
@@ -3273,7 +3276,7 @@ const styles = `
     flex-direction: column;
     gap: 10px;
     padding: 16px;
-    background: var(--te-surface-raised);
+    background: transparent;
     border: 1.5px dashed var(--te-border);
     border-radius: 12px;
   }
@@ -3283,8 +3286,8 @@ const styles = `
     font-size: 0.9375rem;
     font-weight: 600;
     padding: 10px 14px;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     color: var(--te-ink);
     transition: all 0.15s ease;
@@ -3296,8 +3299,8 @@ const styles = `
 
   .template-editor__section-new-title:focus {
     outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px #eef2ff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 12%, transparent);
   }
 
   .template-editor__section-new-title::placeholder {
@@ -3309,8 +3312,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.875rem;
     padding: 10px 14px;
-    background: var(--te-surface);
-    border: 1.5px solid var(--te-border-light);
+    background: var(--background);
+    border: 1.5px solid var(--border);
     border-radius: 8px;
     color: var(--te-ink);
     resize: vertical;
@@ -3325,8 +3328,8 @@ const styles = `
 
   .template-editor__section-new-content:focus {
     outline: none;
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px #eef2ff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 12%, transparent);
   }
 
   .template-editor__section-new-content::placeholder {
@@ -3342,8 +3345,8 @@ const styles = `
     font-family: var(--te-font);
     font-size: 0.875rem;
     font-weight: 600;
-    color: white;
-    background: #6366f1;
+    color: var(--primary-foreground);
+    background: var(--primary);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -3352,7 +3355,7 @@ const styles = `
   }
 
   .template-editor__section-add-btn:hover:not(:disabled) {
-    background: #4f46e5;
+    background: var(--primary);
   }
 
   .template-editor__section-add-btn:disabled {

@@ -44,14 +44,14 @@ interface MonthReportCardProps {
 function getStatusColors(status: ReportStatus): { bg: string; text: string } {
   switch (status) {
     case "FINAL":
-      return { bg: "bg-green-100", text: "text-green-700" };
+      return { bg: "bg-status-success/20", text: "text-status-success" };
     case "REVIEW":
-      return { bg: "bg-blue-100", text: "text-blue-700" };
+      return { bg: "bg-status-progress/20", text: "text-status-progress" };
     case "DRAFT":
-      return { bg: "bg-amber-100", text: "text-amber-700" };
+      return { bg: "bg-status-warning/15", text: "text-status-warning" };
     case "NONE":
     default:
-      return { bg: "bg-gray-100", text: "text-gray-500" };
+      return { bg: "bg-muted", text: "text-muted-foreground" };
   }
 }
 
@@ -99,18 +99,20 @@ function ReportRow({
   );
 
   return (
-    <div className="flex items-center border-b border-gray-100 last:border-b-0">
+    <div className="flex items-center border-b border-border last:border-b-0">
       <button
         onClick={handleClick}
-        className="flex-1 flex items-center justify-between p-3 hover:bg-gray-50 cursor-pointer transition-colors min-w-0"
+        className="flex-1 flex items-center justify-between p-3 hover:bg-accent cursor-pointer transition-colors min-w-0"
       >
         <div className="flex items-center gap-3 min-w-0">
           {isSnapshot ? (
-            <Camera className="w-4 h-4 text-purple-500 flex-shrink-0" />
+            <Camera className="w-4 h-4 text-primary flex-shrink-0" />
           ) : (
-            <FileText className="w-4 h-4 text-blue-500 flex-shrink-0" />
+            <FileText className="w-4 h-4 text-primary flex-shrink-0" />
           )}
-          <span className="text-sm text-gray-900 truncate">{report.name}</span>
+          <span className="text-sm text-foreground truncate">
+            {report.name}
+          </span>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <span
@@ -118,13 +120,13 @@ function ReportRow({
           >
             {getStatusLabel(report.status)}
           </span>
-          <ArrowRight className="w-4 h-4 text-gray-400" />
+          <ArrowRight className="w-4 h-4 text-muted-foreground" />
         </div>
       </button>
       {onDelete && (
         <button
           onClick={handleDelete}
-          className="p-3 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+          className="p-3 text-muted-foreground hover:text-destructive transition-colors flex-shrink-0"
           title="Delete report"
         >
           <Trash2 className="w-4 h-4" />
@@ -241,26 +243,28 @@ export function MonthReportCard({
       : `${reportSet.reportCount} Reports`;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div className="bg-card rounded-xl border border-border overflow-hidden">
       {/* Header - Clickable to expand/collapse */}
       <div className="flex items-center">
         <button
           onClick={toggleExpanded}
-          className="flex-1 flex items-center justify-between p-4 hover:bg-gray-50 transition-colors text-left"
+          className="flex-1 flex items-center justify-between p-4 hover:bg-accent transition-colors text-left"
         >
           <div className="flex items-center gap-3">
             {isExpanded ? (
-              <ChevronDown className="w-5 h-5 text-gray-400" />
+              <ChevronDown className="w-5 h-5 text-muted-foreground" />
             ) : (
-              <ChevronRight className="w-5 h-5 text-gray-400" />
+              <ChevronRight className="w-5 h-5 text-muted-foreground" />
             )}
-            <Calendar className="w-5 h-5 text-gray-600" />
-            <span className="font-medium text-gray-900">
+            <Calendar className="w-5 h-5 text-muted-foreground" />
+            <span className="font-medium text-foreground">
               {reportSet.monthName}
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500">{reportCountText}</span>
+            <span className="text-sm text-muted-foreground">
+              {reportCountText}
+            </span>
             {reportSet.reportCount > 0 && (
               <span
                 className={`px-2 py-0.5 text-xs font-medium rounded-full ${overallColors.bg} ${overallColors.text}`}
@@ -273,7 +277,7 @@ export function MonthReportCard({
         {onDeleteMonth && (
           <button
             onClick={() => setShowDeleteMonthConfirm(true)}
-            className="p-4 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+            className="p-4 text-muted-foreground hover:text-destructive transition-colors flex-shrink-0"
             title={`Delete ${reportSet.monthName}`}
           >
             <Trash2 className="w-4 h-4" />
@@ -283,30 +287,30 @@ export function MonthReportCard({
 
       {/* Expanded content */}
       {isExpanded && (
-        <div className="border-t border-gray-200">
+        <div className="border-t border-border">
           {/* Payments row */}
           {onViewPayments && (
             <button
               onClick={handleViewPayments}
-              className="w-full flex items-center justify-between p-3 hover:bg-gray-50 cursor-pointer transition-colors border-b border-gray-100"
+              className="w-full flex items-center justify-between p-3 hover:bg-accent cursor-pointer transition-colors border-b border-border"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <CreditCard className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-900">
+                <CreditCard className="w-4 h-4 text-status-success flex-shrink-0" />
+                <span className="text-sm font-medium text-foreground">
                   Payments
                 </span>
                 {paymentStats && paymentStats.totalInvoices > 0 && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-muted-foreground">
                     {paymentStats.totalInvoices} invoice
                     {paymentStats.totalInvoices !== 1 ? "s" : ""}
                     {paymentStats.pendingCount > 0 && (
-                      <span className="text-amber-600">
+                      <span className="text-status-warning">
                         {" "}
                         · {paymentStats.pendingCount} pending
                       </span>
                     )}
                     {paymentStats.paidCount > 0 && (
-                      <span className="text-green-600">
+                      <span className="text-status-success">
                         {" "}
                         · {paymentStats.paidCount} paid
                       </span>
@@ -314,7 +318,7 @@ export function MonthReportCard({
                   </span>
                 )}
               </div>
-              <ArrowRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+              <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
             </button>
           )}
 
@@ -338,7 +342,7 @@ export function MonthReportCard({
 
           {/* Empty state */}
           {reportSet.reportCount === 0 && (
-            <div className="p-4 text-center text-sm text-gray-500">
+            <div className="p-4 text-center text-sm text-muted-foreground">
               No reports created yet
             </div>
           )}
@@ -346,12 +350,12 @@ export function MonthReportCard({
           {/* Add report buttons */}
           {(onCreateExpenseReport || onCreateSnapshotReport) &&
             reportSet.reportingFolderId && (
-              <div className="p-3 border-t border-gray-100 bg-gray-50">
+              <div className="p-3 border-t border-border bg-muted">
                 <div className="flex items-center gap-3">
                   {onCreateSnapshotReport && !reportSet.snapshotReport && (
                     <button
                       onClick={handleCreateSnapshotReport}
-                      className="flex items-center gap-2 text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                      className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 font-medium transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       Add Snapshot Report
@@ -360,7 +364,7 @@ export function MonthReportCard({
                   {onCreateExpenseReport && (
                     <button
                       onClick={handleCreateExpenseReport}
-                      className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                      className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 font-medium transition-colors"
                     >
                       <Plus className="w-4 h-4" />
                       Add Expense Report
@@ -371,7 +375,7 @@ export function MonthReportCard({
                   !reportSet.snapshotReport &&
                   suggestedStartDate &&
                   !isFirstOfMonth(suggestedStartDate, reportSet.monthName) && (
-                    <div className="flex items-center gap-1.5 mt-2 text-xs text-indigo-600">
+                    <div className="flex items-center gap-1.5 mt-2 text-xs text-status-progress">
                       <Info className="w-3.5 h-3.5 flex-shrink-0" />
                       <span>
                         Transaction period will start{" "}
@@ -395,12 +399,12 @@ export function MonthReportCard({
         continueLabel={isDeleting ? "Deleting..." : "Delete"}
         continueDisabled={isDeleting}
       >
-        <p className="text-red-600 text-sm mb-2 font-medium">
+        <p className="text-destructive text-sm mb-2 font-medium">
           This will permanently delete this report from the drive. This action
           cannot be undone.
         </p>
         {deleteTarget && (
-          <p className="text-gray-700 text-sm font-medium">
+          <p className="text-foreground text-sm font-medium">
             {deleteTarget.name}
           </p>
         )}
@@ -416,12 +420,12 @@ export function MonthReportCard({
         continueLabel={isDeletingMonth ? "Deleting..." : "Delete Month"}
         continueDisabled={isDeletingMonth}
       >
-        <p className="text-red-600 text-sm mb-2 font-medium">
+        <p className="text-destructive text-sm mb-2 font-medium">
           This will permanently delete the {reportSet.monthName} folder and all
           its contents including reports, invoices, and billing statements.
         </p>
         {reportSet.reportCount > 0 && (
-          <p className="text-gray-700 text-sm">
+          <p className="text-foreground text-sm">
             {reportSet.reportCount} report
             {reportSet.reportCount !== 1 ? "s" : ""} will be deleted.
           </p>

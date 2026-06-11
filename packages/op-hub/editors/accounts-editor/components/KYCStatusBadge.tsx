@@ -7,16 +7,17 @@ interface KYCStatusBadgeProps {
 export function KYCStatusBadge({ status }: KYCStatusBadgeProps) {
   if (!status) {
     return (
-      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground">
         No Status
       </span>
     );
   }
 
   const styles = {
-    PASSED: "bg-green-100 text-green-800 border-green-200",
-    PENDING: "bg-yellow-100 text-yellow-800 border-yellow-200",
-    FAILED: "bg-red-100 text-red-800 border-red-200",
+    PASSED: "bg-status-success/20 text-status-success border-status-success/30",
+    PENDING:
+      "bg-status-warning/20 text-status-warning border-status-warning/30",
+    FAILED: "bg-destructive/15 text-destructive border-destructive/30",
   };
 
   const icons = {

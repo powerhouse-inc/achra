@@ -44,20 +44,20 @@ export function RecentSubscriptionsTable({
       <div className="max-h-96 overflow-y-auto">
         <table className="w-full text-left" role="table">
           <thead>
-            <tr className="border-b border-stone-200">
-              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+            <tr className="border-b border-border">
+              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Customer
               </th>
-              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Plan
               </th>
-              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Resources
               </th>
-              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 MRR
               </th>
-              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+              <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Status
               </th>
             </tr>
@@ -67,7 +67,7 @@ export function RecentSubscriptionsTable({
               <tr>
                 <td
                   colSpan={5}
-                  className="py-8 text-center text-sm text-stone-400"
+                  className="py-8 text-center text-sm text-muted-foreground"
                 >
                   No subscriptions yet
                 </td>
@@ -76,30 +76,30 @@ export function RecentSubscriptionsTable({
               sorted.map((sub) => (
                 <tr
                   key={sub.id}
-                  className="border-b border-stone-100 last:border-0"
+                  className="border-b border-border last:border-0"
                 >
                   <td className="py-2.5 text-sm">
                     <button
                       type="button"
                       onClick={() => setSelectedNode(sub.id)}
-                      className="group inline-flex max-w-full min-w-0 items-center gap-1.5 rounded-md px-1 -mx-1 py-0.5 text-left font-medium text-teal-700 transition-colors hover:bg-teal-50 hover:text-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-500"
+                      className="group inline-flex max-w-full min-w-0 items-center gap-1.5 rounded-md px-1 -mx-1 py-0.5 text-left font-medium text-primary transition-colors hover:bg-accent hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-ring"
                       title="Open subscription instance document"
                     >
                       <span className="truncate">{sub.customerName}</span>
                       <SquareArrowOutUpRight
-                        className="h-3.5 w-3.5 shrink-0 text-teal-500/80 opacity-80 transition-opacity group-hover:opacity-100"
+                        className="h-3.5 w-3.5 shrink-0 text-primary/80 opacity-80 transition-opacity group-hover:opacity-100"
                         aria-hidden
                       />
                       <span className="sr-only">Open in editor</span>
                     </button>
                   </td>
-                  <td className="py-2.5 text-sm text-stone-500">
+                  <td className="py-2.5 text-sm text-muted-foreground">
                     {sub.tierName}
                   </td>
-                  <td className="py-2.5 text-sm text-stone-500">
+                  <td className="py-2.5 text-sm text-muted-foreground">
                     {sub.resourceCount}
                   </td>
-                  <td className="py-2.5 text-sm font-medium text-stone-700">
+                  <td className="py-2.5 text-sm font-medium text-foreground">
                     {formatCurrency(sub.mrr)}
                   </td>
                   <td className="py-2.5">
@@ -114,15 +114,15 @@ export function RecentSubscriptionsTable({
 
       {/* Summary footer */}
       {subscriptions.length > 0 ? (
-        <div className="mt-4 border-t border-stone-200 pt-3 space-y-2">
+        <div className="mt-4 border-t border-border pt-3 space-y-2">
           <div className="flex flex-wrap gap-3">
             {statusEntries.map(([status, { count, mrr }]) => (
               <div
                 key={status}
-                className="flex items-center gap-1.5 rounded-md bg-stone-100 px-2.5 py-1.5"
+                className="flex items-center gap-1.5 rounded-md bg-muted px-2.5 py-1.5"
               >
                 <StatusBadge status={status} />
-                <span className="text-xs text-stone-500">
+                <span className="text-xs text-muted-foreground">
                   {count} &middot; {formatCurrency(mrr)}
                 </span>
               </div>
@@ -130,13 +130,13 @@ export function RecentSubscriptionsTable({
           </div>
 
           <div className="flex items-center justify-between text-sm">
-            <span className="text-stone-500">
+            <span className="text-muted-foreground">
               Active MRR:{" "}
-              <span className="font-semibold text-emerald-600">
+              <span className="font-semibold text-status-success">
                 {formatCurrency(activeMrr)}
               </span>
             </span>
-            <span className="text-stone-400">
+            <span className="text-muted-foreground">
               Total (all statuses): {formatCurrency(totalMrr)}
             </span>
           </div>

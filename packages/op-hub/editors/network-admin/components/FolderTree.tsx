@@ -299,7 +299,67 @@ export function FolderTree({
 
   return (
     <SidebarProvider nodes={sidebarNodes}>
+      <style>
+        {`
+          /* Macro depth buttons (1–4): DE ships bg-slate-50 + text-slate-100,
+             which read as white-on-white in light mode and white/blank on the
+             dark drive canvas. Repaint with semantic tokens and give them a
+             crisp 1px edge (inset box-shadow → no layout shift) so they read as
+             distinct buttons even when the muted fill is near the sidebar bg. */
+          .na-folder-tree-sidebar .sidebar__header-macro-item {
+            background-color: var(--muted) !important;
+            color: var(--foreground) !important;
+            box-shadow: inset 0 0 0 1px var(--border) !important;
+          }
+          .na-folder-tree-sidebar .sidebar__header-macro-item:hover {
+            background-color: var(--accent) !important;
+            color: var(--foreground) !important;
+          }
+          .na-folder-tree-sidebar .sidebar__header-macro-item.cursor-not-allowed {
+            background-color: var(--muted) !important;
+            color: var(--muted-foreground) !important;
+            opacity: 0.55;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__header-macro-item {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+            color: var(--secondary-foreground) !important;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__header-macro-item:hover {
+            background-color: rgba(255, 255, 255, 0.14) !important;
+            color: var(--foreground) !important;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__header-macro-item.cursor-not-allowed {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+            color: var(--muted-foreground) !important;
+          }
+          /* Active row / caret hover: bg-gray-200 utilities don't get dark: pairs. */
+          .na-folder-tree-sidebar .sidebar__item--active {
+            background-color: var(--accent) !important;
+            color: var(--foreground) !important;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__item--active {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: var(--foreground) !important;
+          }
+          .na-folder-tree-sidebar .sidebar__item:hover {
+            background-color: var(--accent) !important;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__item:hover {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+          }
+          .na-folder-tree-sidebar .sidebar__item-caret:hover {
+            background-color: var(--accent) !important;
+          }
+          .dark .na-folder-tree-sidebar .sidebar__item-caret:hover {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+          }
+          .na-folder-tree-sidebar .sidebar__item svg {
+            color: inherit;
+          }
+        `}
+      </style>
       <Sidebar
+        className="na-folder-tree-sidebar pt-1"
         nodes={sidebarNodes}
         activeNodeId={activeSidebarNodeId}
         onActiveNodeChange={(node) => handleActiveNodeChange(node.id)}

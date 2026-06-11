@@ -53,19 +53,21 @@ export class FolderTreeErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="p-4 bg-red-50 border-r border-red-200 h-full min-w-[200px]">
-          <h3 className="text-red-800 font-semibold mb-2">Navigation Error</h3>
-          <p className="text-red-600 text-sm mb-3">
+        <div className="p-4 bg-destructive/15 border-r border-destructive/30 h-full min-w-[200px]">
+          <h3 className="text-destructive font-semibold mb-2">
+            Navigation Error
+          </h3>
+          <p className="text-destructive text-sm mb-3">
             {this.state.errorInfo || "Failed to load the folder tree."}
           </p>
           {this.state.error && (
-            <p className="text-red-500 text-xs mb-3 font-mono break-all">
+            <p className="text-destructive text-xs mb-3 font-mono break-all">
               {this.state.error.message}
             </p>
           )}
           <button
             onClick={this.handleRetry}
-            className="px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-800 rounded"
+            className="px-3 py-1 text-sm bg-destructive/15 hover:bg-destructive/25 text-destructive rounded"
           >
             Retry
           </button>

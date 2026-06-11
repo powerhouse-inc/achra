@@ -74,22 +74,22 @@ const STATUS_CONFIG: Record<
 > = {
   DRAFT: {
     label: "Draft",
-    badgeClass: "bg-slate-100 text-slate-600",
+    badgeClass: "bg-muted text-muted-foreground",
     description: "Not visible on Achra",
   },
   COMING_SOON: {
     label: "Coming Soon",
-    badgeClass: "bg-amber-100 text-amber-700",
+    badgeClass: "bg-status-warning/20 text-status-warning",
     description: "Visible on Achra as coming soon",
   },
   ACTIVE: {
     label: "Active",
-    badgeClass: "bg-emerald-50 text-emerald-600",
+    badgeClass: "bg-status-success/20 text-status-success",
     description: "Live on Achra",
   },
   DEPRECATED: {
     label: "Deprecated",
-    badgeClass: "bg-rose-50 text-rose-600",
+    badgeClass: "bg-destructive/15 text-destructive",
     description: "Marked as deprecated on Achra",
   },
 };
@@ -261,23 +261,23 @@ export function OfferingProgress({
 
   return (
     <>
-      <div className="bg-white rounded-xl py-4 px-6 mb-4 shadow-sm border border-slate-100">
+      <div className="bg-card rounded-xl py-4 px-6 mb-4 shadow-sm border border-border">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-baseline gap-2">
             {totalPercent < 100 ? (
               <>
                 <span
-                  className="text-2xl font-bold text-violet-600"
+                  className="text-2xl font-bold text-primary"
                   style={fontMono}
                 >
                   {totalPercent}%
                 </span>
-                <span className="text-xs text-slate-500 uppercase tracking-[0.05em]">
+                <span className="text-xs text-muted-foreground uppercase tracking-[0.05em]">
                   Complete
                 </span>
               </>
             ) : (
-              <span className="text-[0.8125rem] font-medium text-emerald-600 leading-[1.4]">
+              <span className="text-[0.8125rem] font-medium text-status-success leading-[1.4]">
                 Review pricing in the Matrix and set usage metrics
               </span>
             )}
@@ -321,7 +321,7 @@ export function OfferingProgress({
               </button>
               {dropdownOpen && (
                 <div
-                  className="absolute right-0 w-[220px] bg-white rounded-[10px] shadow-lg border border-slate-200 p-1 z-50"
+                  className="absolute right-0 w-[220px] bg-card rounded-[10px] shadow-lg border border-border p-1 z-50"
                   style={{
                     top: "calc(100% + 6px)",
                     animation: "progress-dropdown-in 0.15s ease-out",
@@ -333,14 +333,14 @@ export function OfferingProgress({
                     return (
                       <button
                         key={status}
-                        className={`flex flex-col items-start relative w-full py-2 px-3 border-none bg-transparent rounded-md cursor-pointer text-left transition-colors duration-100 ${isCurrent ? "bg-violet-50 hover:bg-violet-50" : "hover:bg-slate-50"}`}
+                        className={`flex flex-col items-start relative w-full py-2 px-3 border-none bg-transparent rounded-md cursor-pointer text-left transition-colors duration-100 ${isCurrent ? "bg-primary/10 hover:bg-primary/10" : "hover:bg-accent"}`}
                         style={fontSans}
                         onClick={() => handleStatusSelect(status)}
                       >
-                        <span className="text-[0.8125rem] font-semibold text-slate-800">
+                        <span className="text-[0.8125rem] font-semibold text-foreground">
                           {config.label}
                         </span>
-                        <span className="text-[0.6875rem] text-slate-400">
+                        <span className="text-[0.6875rem] text-muted-foreground">
                           {config.description}
                         </span>
                         {isCurrent && (
@@ -349,7 +349,7 @@ export function OfferingProgress({
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="3"
-                            className="absolute top-2.5 right-2.5 w-3.5 h-3.5 text-violet-500"
+                            className="absolute top-2.5 right-2.5 w-3.5 h-3.5 text-primary"
                           >
                             <path d="M5 12l5 5L20 7" />
                           </svg>
@@ -362,13 +362,13 @@ export function OfferingProgress({
             </div>
           </div>
         </div>
-        <div className="h-2 bg-slate-100 rounded-full overflow-hidden mb-4">
+        <div className="h-2 bg-muted rounded-full overflow-hidden mb-4">
           <div
             className="h-full rounded-full"
             style={{
               width: `${totalPercent}%`,
               background:
-                "linear-gradient(90deg, rgb(139, 92, 246), rgb(16, 185, 129))",
+                "linear-gradient(90deg, var(--primary), var(--status-success))",
               transition: "width 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
           />
@@ -381,19 +381,22 @@ export function OfferingProgress({
               <button
                 key={step.id}
                 onClick={() => onTabChange(step.id)}
-                className={`flex-[1_1_45%] md:flex-1 flex items-center gap-2.5 py-2 px-3 bg-transparent border-none rounded-[10px] cursor-pointer transition-all duration-150 text-left ${isActive ? "bg-violet-50" : "hover:bg-slate-50"}`}
+                className={`flex-[1_1_45%] md:flex-1 flex items-center gap-2.5 py-2 px-3 bg-transparent border-none rounded-[10px] cursor-pointer transition-all duration-150 text-left ${isActive ? "bg-primary/10" : "hover:bg-accent"}`}
               >
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 transition-all duration-200 ${
                     step.isComplete
-                      ? "bg-emerald-500 text-white"
+                      ? "bg-status-success text-primary-foreground"
                       : isActive
-                        ? "bg-violet-500 text-white"
-                        : "bg-slate-200 text-slate-500"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground"
                   }`}
                   style={
                     isActive && !step.isComplete
-                      ? { boxShadow: "0 0 0 3px rgb(237, 233, 254)" }
+                      ? {
+                          boxShadow:
+                            "0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent)",
+                        }
                       : undefined
                   }
                 >
@@ -413,15 +416,15 @@ export function OfferingProgress({
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span
-                    className={`text-[0.8125rem] font-semibold ${isActive ? "text-violet-700" : "text-slate-700"}`}
+                    className={`text-[0.8125rem] font-semibold ${isActive ? "text-primary" : "text-foreground"}`}
                   >
                     {step.label}
                   </span>
-                  <span className="text-[0.625rem] text-slate-400 leading-[1.3] mt-px">
+                  <span className="text-[0.625rem] text-muted-foreground leading-[1.3] mt-px">
                     {step.explainer}
                   </span>
                   <span
-                    className={`text-[0.6875rem] whitespace-nowrap overflow-hidden text-ellipsis ${step.isComplete ? "text-emerald-600" : "text-slate-400"}`}
+                    className={`text-[0.6875rem] whitespace-nowrap overflow-hidden text-ellipsis ${step.isComplete ? "text-status-success" : "text-muted-foreground"}`}
                   >
                     {step.details}
                   </span>
@@ -437,27 +440,27 @@ export function OfferingProgress({
         <div
           className="fixed inset-0 flex items-center justify-center z-[1000]"
           style={{
-            background: "rgba(15, 23, 42, 0.4)",
+            background: "rgba(0, 0, 0, 0.4)",
             backdropFilter: "blur(4px)",
             animation: "progress-overlay-in 0.2s ease-out",
           }}
           onClick={cancelStatusChange}
         >
           <div
-            className="bg-white rounded-xl p-6 max-w-[400px] w-[90%] shadow-xl"
+            className="bg-card rounded-xl p-6 max-w-[400px] w-[90%] shadow-xl"
             style={{
               animation:
                 "progress-modal-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-bold text-slate-800 m-0 mb-2">
+            <h3 className="text-lg font-bold text-foreground m-0 mb-2">
               {pendingConfirmation.title}
             </h3>
-            <p className="text-sm text-slate-500 leading-relaxed m-0 mb-5">
+            <p className="text-sm text-muted-foreground leading-relaxed m-0 mb-5">
               {pendingConfirmation.message}
             </p>
-            <div className="flex items-center justify-center gap-3 p-3 bg-slate-50 rounded-[10px] mb-5">
+            <div className="flex items-center justify-center gap-3 p-3 bg-muted rounded-[10px] mb-5">
               <span
                 className={`inline-flex items-center gap-1.5 py-1.5 px-3 text-[0.6875rem] font-bold uppercase tracking-[0.04em] rounded-full border-none cursor-default ${currentConfig.badgeClass}`}
                 style={fontSans}
@@ -469,7 +472,11 @@ export function OfferingProgress({
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                style={{ width: 20, height: 20, color: "rgb(148, 163, 184)" }}
+                style={{
+                  width: 20,
+                  height: 20,
+                  color: "var(--muted-foreground)",
+                }}
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -482,27 +489,28 @@ export function OfferingProgress({
             </div>
             <div className="flex justify-end gap-2">
               <button
-                className="py-2 px-5 text-[0.8125rem] font-semibold border-none rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-100 text-slate-600 hover:bg-slate-200"
+                className="py-2 px-5 text-[0.8125rem] font-semibold border-none rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-muted-foreground hover:bg-accent"
                 style={fontSans}
                 onClick={cancelStatusChange}
               >
                 Cancel
               </button>
               <button
-                className="py-2 px-5 text-[0.8125rem] font-semibold border-none rounded-[10px] cursor-pointer transition-all duration-150 text-white hover:-translate-y-px active:translate-y-0"
+                className="py-2 px-5 text-[0.8125rem] font-semibold border-none rounded-[10px] cursor-pointer transition-all duration-150 text-primary-foreground hover:-translate-y-px active:translate-y-0"
                 style={{
                   ...fontSans,
                   background:
-                    "linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105))",
-                  boxShadow: "0 2px 6px rgba(16, 185, 129, 0.3)",
+                    "linear-gradient(135deg, var(--status-success), color-mix(in oklab, var(--status-success) 85%, black))",
+                  boxShadow:
+                    "0 2px 6px color-mix(in oklab, var(--status-success) 30%, transparent)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "0 4px 10px rgba(16, 185, 129, 0.4)";
+                    "0 4px 10px color-mix(in oklab, var(--status-success) 40%, transparent)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow =
-                    "0 2px 6px rgba(16, 185, 129, 0.3)";
+                    "0 2px 6px color-mix(in oklab, var(--status-success) 30%, transparent)";
                 }}
                 onClick={confirmStatusChange}
               >

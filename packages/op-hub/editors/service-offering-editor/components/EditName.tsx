@@ -43,18 +43,18 @@ export function EditServiceOfferingName() {
         onSubmit={onSubmitSetName}
       >
         <input
-          className="text-lg font-semibold text-gray-900 p-1"
+          className="text-lg font-semibold text-foreground p-1"
           type="text"
           name="name"
           defaultValue={serviceOfferingDocumentName}
           autoFocus
         />
         <div className="flex gap-2">
-          <button type="submit" className="text-sm text-gray-600">
+          <button type="submit" className="text-sm text-muted-foreground">
             Save
           </button>
           <button
-            className="text-sm text-red-800"
+            className="text-sm text-destructive"
             onClick={onClickCancelEditServiceOfferingName}
           >
             Cancel
@@ -65,11 +65,11 @@ export function EditServiceOfferingName() {
 
   return (
     <div className="flex justify-between items-center">
-      <h2 className="text-lg font-semibold text-gray-900">
+      <h2 className="text-lg font-semibold text-foreground">
         {serviceOfferingDocumentName}
       </h2>
       <button
-        className="text-sm text-gray-600"
+        className="text-sm text-muted-foreground"
         onClick={onClickEditServiceOfferingName}
       >
         Edit Name

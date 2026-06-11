@@ -403,7 +403,7 @@ export function ContributorsSection() {
         renderCell: (value) => {
           if (value === "" || !value) {
             return (
-              <div className="font-light italic text-gray-500 text-center">
+              <div className="font-light italic text-muted-foreground text-center">
                 + Double-click to add new contributor (enter or click outside to
                 save)
               </div>
@@ -461,9 +461,9 @@ export function ContributorsSection() {
   );
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-sm">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Contributors</h3>
-      <p className="text-sm text-gray-600 mb-4">
+    <div className="bg-card rounded-lg p-6 shadow-sm">
+      <h3 className="text-lg font-medium text-foreground mb-4">Contributors</h3>
+      <p className="text-sm text-muted-foreground mb-4">
         Add team members to your builder profile. Search for existing builder
         profiles by name or PHID.
       </p>

@@ -455,7 +455,7 @@ export function AggregatedExpensesTable({
   return (
     <div className="space-y-4">
       {/* Wallet Tabs */}
-      <div className="border-b border-gray-200 dark:border-gray-700">
+      <div className="border-b border-border">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           {wallets.map((wallet, index) => {
             const isActive = index === activeWalletIndex;
@@ -467,8 +467,8 @@ export function AggregatedExpensesTable({
                   whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors
                   ${
                     isActive
-                      ? "border-green-500 text-green-600 dark:text-green-400"
-                      : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
+                      ? "border-status-success text-status-success"
+                      : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
                   }
                 `}
               >
@@ -481,44 +481,44 @@ export function AggregatedExpensesTable({
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className="bg-gray-50 dark:bg-gray-800">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-muted">
             <tr>
-              <th className="pl-6 pr-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <th className="pl-6 pr-3 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setIsAddingLineItem(true)}
-                    className="inline-flex items-center justify-center w-6 h-6 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-md transition-colors"
+                    className="inline-flex items-center justify-center w-6 h-6 text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 rounded-md transition-colors"
                   >
                     <Plus size={14} />
                   </button>
                   <span>Expense Category</span>
                 </div>
               </th>
-              <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Budget Allocation
               </th>
-              <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Forecast
               </th>
-              <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Actuals
               </th>
-              <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Difference
               </th>
-              <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-96">
+              <th className="px-3 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider w-96">
                 Comments
               </th>
-              <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-32">
+              <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider w-32">
                 Payments
               </th>
-              <th className="px-2 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-16">
+              <th className="px-2 py-3 text-center text-xs font-medium text-muted-foreground uppercase tracking-wider w-16">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody className="divide-y divide-border">
             {sortedParentKeys.map((parentKey) => {
               const items = groupedAndAggregatedItems.get(parentKey) || [];
               if (items.length === 0) return null;
@@ -532,10 +532,10 @@ export function AggregatedExpensesTable({
               return (
                 <React.Fragment key={parentKey}>
                   {/* Parent Category Header */}
-                  <tr className="bg-gray-100 dark:bg-gray-800">
+                  <tr className="bg-muted">
                     <td
                       colSpan={8}
-                      className="px-6 py-3 text-sm font-bold text-gray-900 dark:text-white"
+                      className="px-6 py-3 text-sm font-bold text-foreground"
                     >
                       {parentLabel}
                     </td>
@@ -574,7 +574,7 @@ export function AggregatedExpensesTable({
                               }}
                               onBlur={handleSaveField}
                               autoFocus
-                              className="w-full px-2 py-1 text-right text-sm border border-blue-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                              className="w-full px-2 py-1 text-right text-sm border border-ring rounded focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground"
                             />
                           </div>
                         );
@@ -587,7 +587,7 @@ export function AggregatedExpensesTable({
                             handleStartFieldEdit(item.lineItemId, field, value)
                           }
                         >
-                          <span className="group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 inline-block px-1 py-0.5 rounded transition-colors min-w-[4rem]">
+                          <span className="group-hover:bg-primary/10 inline-block px-1 py-0.5 rounded transition-colors min-w-[4rem]">
                             {formatNumber(value)}
                           </span>
                         </div>
@@ -597,25 +597,25 @@ export function AggregatedExpensesTable({
                     return (
                       <tr
                         key={item.lineItemId}
-                        className="bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors align-top"
+                        className="bg-card hover:bg-accent transition-colors align-top"
                       >
-                        <td className="pl-6 pr-3 py-3 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                        <td className="pl-6 pr-3 py-3 whitespace-nowrap text-sm text-foreground">
                           {item.groupLabel}
                         </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                           {renderEditableCell("budget", item.budget)}
                         </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                           {renderEditableCell("forecast", item.forecast)}
                         </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                           {renderEditableCell("actuals", item.actuals)}
                         </td>
                         <td
                           className={`px-3 py-3 whitespace-nowrap text-right text-sm font-medium ${
                             difference < 0
-                              ? "text-red-600 dark:text-red-400"
-                              : "text-gray-900 dark:text-white"
+                              ? "text-destructive"
+                              : "text-foreground"
                           }`}
                         >
                           {formatNumber(difference)}
@@ -643,7 +643,7 @@ export function AggregatedExpensesTable({
                               }}
                               onBlur={handleSaveComment}
                               autoFocus
-                              className="w-full px-2 py-1 text-sm border border-blue-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white max-h-32 overflow-y-auto"
+                              className="w-full px-2 py-1 text-sm border border-ring rounded focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground max-h-32 overflow-y-auto"
                             />
                           ) : (
                             <div
@@ -653,13 +653,13 @@ export function AggregatedExpensesTable({
                               }
                               title={item.comment || "No comments"}
                             >
-                              <span className="group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 px-1 py-0.5 rounded transition-colors block text-gray-600 dark:text-gray-400 break-words">
+                              <span className="group-hover:bg-primary/10 px-1 py-0.5 rounded transition-colors block text-muted-foreground break-words">
                                 {item.comment || "No comments"}
                               </span>
                             </div>
                           )}
                         </td>
-                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white w-32">
+                        <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground w-32">
                           {renderEditableCell("payments", item.payments)}
                         </td>
                         <td className="px-2 py-3 whitespace-nowrap text-center w-16">
@@ -670,7 +670,7 @@ export function AggregatedExpensesTable({
                                 item.groupLabel,
                               )
                             }
-                            className="inline-flex items-center justify-center p-0.5 text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors"
+                            className="inline-flex items-center justify-center p-0.5 text-destructive hover:text-destructive/80 hover:bg-destructive/15 rounded transition-colors"
                             title="Delete line item"
                           >
                             <Trash2 size={14} />
@@ -681,25 +681,25 @@ export function AggregatedExpensesTable({
                   })}
 
                   {/* Subtotal Row */}
-                  <tr className="bg-gray-50 dark:bg-gray-800/50 font-semibold align-top">
-                    <td className="pl-6 pr-3 py-3 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                  <tr className="bg-muted/50 font-semibold align-top">
+                    <td className="pl-6 pr-3 py-3 whitespace-nowrap text-sm text-foreground">
                       Subtotal
                     </td>
-                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                       <div className="text-right">
                         <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                           {formatNumber(subtotals.budget)}
                         </span>
                       </div>
                     </td>
-                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                       <div className="text-right">
                         <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                           {formatNumber(subtotals.forecast)}
                         </span>
                       </div>
                     </td>
-                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                       <div className="text-right">
                         <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                           {formatNumber(subtotals.actuals)}
@@ -709,14 +709,14 @@ export function AggregatedExpensesTable({
                     <td
                       className={`px-3 py-3 whitespace-nowrap text-right text-sm font-bold ${
                         subtotals.difference < 0
-                          ? "text-red-600 dark:text-red-400"
-                          : "text-gray-900 dark:text-white"
+                          ? "text-destructive"
+                          : "text-foreground"
                       }`}
                     >
                       {formatNumber(subtotals.difference)}
                     </td>
                     <td className="px-3 py-3"></td>
-                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white w-32">
+                    <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground w-32">
                       <div className="text-right">
                         <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                           {formatNumber(subtotals.payments)}
@@ -730,25 +730,25 @@ export function AggregatedExpensesTable({
             })}
 
             {/* Grand Total Row */}
-            <tr className="bg-gray-100 dark:bg-gray-800 font-bold align-top">
-              <td className="pl-6 pr-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+            <tr className="bg-muted font-bold align-top">
+              <td className="pl-6 pr-3 py-4 whitespace-nowrap text-sm text-foreground">
                 Total
               </td>
-              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-foreground">
                 <div className="text-right">
                   <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                     {formatNumber(grandTotals.budget)}
                   </span>
                 </div>
               </td>
-              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-foreground">
                 <div className="text-right">
                   <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                     {formatNumber(grandTotals.forecast)}
                   </span>
                 </div>
               </td>
-              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-foreground">
                 <div className="text-right">
                   <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                     {formatNumber(grandTotals.actuals)}
@@ -758,14 +758,14 @@ export function AggregatedExpensesTable({
               <td
                 className={`px-3 py-4 whitespace-nowrap text-right text-sm ${
                   grandTotals.difference < 0
-                    ? "text-red-600 dark:text-red-400"
-                    : "text-gray-900 dark:text-white"
+                    ? "text-destructive"
+                    : "text-foreground"
                 }`}
               >
                 {formatNumber(grandTotals.difference)}
               </td>
               <td className="px-3 py-4"></td>
-              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white w-32">
+              <td className="px-3 py-4 whitespace-nowrap text-right text-sm text-foreground w-32">
                 <div className="text-right">
                   <span className="inline-block px-1 py-0.5 min-w-[4rem]">
                     {formatNumber(grandTotals.payments)}
@@ -779,13 +779,13 @@ export function AggregatedExpensesTable({
             {isAddingLineItem && (
               <tr
                 ref={lineItemEditorRef}
-                className="bg-white dark:bg-gray-900 border-t border-gray-900 dark:border-gray-100"
+                className="bg-card border-t border-foreground"
               >
                 <td colSpan={8} className="px-6 py-4">
                   <div className="space-y-2">
                     <div className="flex items-end gap-4">
                       <div className="flex-1">
-                        <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-xs font-medium text-foreground mb-2">
                           Select Category
                         </label>
                         <Select
@@ -806,7 +806,7 @@ export function AggregatedExpensesTable({
                           disabled={
                             !selectedGroupId || !!duplicateCategoryError
                           }
-                          className="bg-green-600 hover:bg-green-700 text-white"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground"
                         >
                           SAVE
                         </Button>
@@ -819,8 +819,8 @@ export function AggregatedExpensesTable({
                       </div>
                     </div>
                     {duplicateCategoryError && (
-                      <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-md">
-                        <span className="text-sm text-amber-800 dark:text-amber-200">
+                      <div className="flex items-start gap-2 p-3 bg-status-warning/20 border border-status-warning rounded-md">
+                        <span className="text-sm text-status-warning">
                           {duplicateCategoryError}
                         </span>
                       </div>
@@ -843,19 +843,19 @@ export function AggregatedExpensesTable({
           />
 
           {/* Modal */}
-          <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden">
+          <div className="relative bg-card rounded-lg shadow-xl max-w-md w-full mx-4 overflow-hidden">
             {/* Header */}
-            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div className="px-6 py-4 border-b border-border">
+              <h3 className="text-lg font-semibold text-foreground">
                 Delete Line Item
               </h3>
             </div>
 
             {/* Content */}
             <div className="px-6 py-4">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-sm text-muted-foreground">
                 Are you sure you want to delete the line item{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">
+                <span className="font-semibold text-foreground">
                   "{lineItemToDelete.label}"
                 </span>
                 ? This action cannot be undone.
@@ -863,13 +863,13 @@ export function AggregatedExpensesTable({
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-3">
+            <div className="px-6 py-4 bg-muted/50 border-t border-border flex justify-end gap-3">
               <Button onClick={handleCancelDelete} variant="secondary">
                 CANCEL
               </Button>
               <Button
                 onClick={handleConfirmDelete}
-                className="bg-red-600 hover:bg-red-700 text-white"
+                className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
               >
                 DELETE
               </Button>

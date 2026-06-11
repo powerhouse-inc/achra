@@ -4,7 +4,6 @@ import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { addAccrualPeriod } from "../../document-models/subscription-instance/v1/src/utils.js";
 import { useSelectedSubscriptionInstanceDocument } from "../../document-models/subscription-instance/v1/hooks.js";
 import type { ViewMode } from "./types.js";
-import { ModeToggle } from "./components/ModeToggle.js";
 import { MockDataButton } from "./components/MockDataButton.js";
 import { ImportServiceConfigButton } from "./components/ImportServiceConfigButton.js";
 import { SubscriptionHeader } from "./components/SubscriptionHeader.js";
@@ -14,27 +13,18 @@ import { DebtLedgerPanel } from "./components/DebtLedgerPanel.js";
 import { InvoicesPanel } from "./components/InvoicesPanel.js";
 import { CustomerInfo } from "./components/CustomerInfo.js";
 import { OperatorNotes } from "./components/OperatorNotes.js";
-import {
-  SimulatedClockPanel,
-  SimulatedClockProvider,
-  useSimulatedClock,
-} from "./components/SimulatedClock.js";
+
 import { accrueMetricUsage } from "../../document-models/subscription-instance/v1/gen/metrics/creators.js";
 import { generateInvoice } from "../../document-models/subscription-instance/v1/gen/subscription/creators.js";
 import { useSelectedDrive } from "@powerhousedao/reactor-browser";
 
 export default function SubscriptionInstanceEditor() {
-  return (
-    <SimulatedClockProvider>
-      <SubscriptionInstanceEditorInner />
-    </SimulatedClockProvider>
-  );
+  return <SubscriptionInstanceEditorInner />;
 }
 
 function SubscriptionInstanceEditorInner() {
   const [document, dispatch] = useSelectedSubscriptionInstanceDocument();
   const [mode, setMode] = useState<ViewMode>("client");
-  const { simulatedNow } = useSimulatedClock();
 
   const [selectedDrive] = useSelectedDrive();
 
@@ -63,14 +53,8 @@ function SubscriptionInstanceEditorInner() {
   // Skips the very first run after mount when sim mode is null.
   const lastTickedRef = useRef<string | null>(null);
   useEffect(() => {
-    if (!simulatedNow) {
-      lastTickedRef.current = null;
-      return;
-    }
     if (!document) return;
     if (document.state.global.status !== "ACTIVE") return;
-    if (lastTickedRef.current === simulatedNow) return;
-    lastTickedRef.current = simulatedNow;
 
     // Auto-invoice at boundary: if the simulated clock has reached or
     // crossed the cycle boundary, dispatch GENERATE_INVOICE with
@@ -79,7 +63,7 @@ function SubscriptionInstanceEditorInner() {
     // against the new window. sourceName is informational — operation log
     // shows readable names per slice.
     const next = document.state.global.nextBillingDate;
-    if (next && simulatedNow >= next) {
+    if (next && new Date().toISOString() >= next) {
       const metricFreezeSliceIds: {
         sourceId: string;
         sliceId: string;
@@ -127,7 +111,7 @@ function SubscriptionInstanceEditorInner() {
       dispatch(
         generateInvoice({
           invoiceId: generateId(),
-          generatedAt: simulatedNow,
+          generatedAt: new Date().toISOString(),
           advanceCycleIfDue: true,
           metricFreezeSliceIds,
           nextCycleRecurringSliceIds,
@@ -177,7 +161,7 @@ function SubscriptionInstanceEditorInner() {
       if (lastAccrualDate) {
         let boundary = addAccrualPeriod(lastAccrualDate, accrualCycle);
         let safety = 0;
-        while (simulatedNow >= boundary && safety < 10000) {
+        while (new Date().toISOString() >= boundary && safety < 10000) {
           newSliceIds.push(generateId());
           boundary = addAccrualPeriod(boundary, accrualCycle);
           safety += 1;
@@ -187,12 +171,12 @@ function SubscriptionInstanceEditorInner() {
         accrueMetricUsage({
           serviceId,
           metricId,
-          accrualDate: simulatedNow,
+          accrualDate: new Date().toISOString(),
           newSliceIds,
         }),
       );
     }
-  }, [simulatedNow, document, dispatch]);
+  }, [document, dispatch]);
 
   if (!document) {
     return (
@@ -232,18 +216,15 @@ function SubscriptionInstanceEditorInner() {
         <div className="si-editor__header">
           {mode === "operator" && (
             <>
-              <ImportServiceConfigButton
+              {/* <ImportServiceConfigButton
                 document={document}
                 dispatch={dispatch}
-              />
-              <MockDataButton document={document} dispatch={dispatch} />
+              /> */}
+              {/* <MockDataButton document={document} dispatch={dispatch} /> */}
             </>
           )}
           {/* <ModeToggle mode={mode} onModeChange={setMode} /> */}
         </div>
-
-        {/* Simulated clock — operator-only test tool */}
-        {mode === "operator" && <SimulatedClockPanel />}
 
         {/* Subscription Header */}
         <SubscriptionHeader
@@ -295,68 +276,91 @@ const editorStyles = `
     --si-font-sans: 'Inter', system-ui, sans-serif;
     --si-font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
 
-    /* Colors */
-    --si-slate-50: #f8fafc;
-    --si-slate-100: #f1f5f9;
-    --si-slate-200: #e2e8f0;
-    --si-slate-300: #cbd5e1;
-    --si-slate-400: #94a3b8;
-    --si-slate-500: #64748b;
-    --si-slate-600: #475569;
-    --si-slate-700: #334155;
-    --si-slate-800: #1e293b;
-    --si-slate-900: #0f172a;
+    /* Colors — each --si-* step resolves to an Achra design-system token
+       (packages/design-system/theme.css) by ROLE, so the whole editor follows
+       Connect's light/dark theme from this one block; the scale names are kept
+       so the usage sites below stay untouched. Tinted *-50..*-300 steps use
+       color-mix() — the same mechanism Tailwind v4 uses for /20 opacity. */
+    --si-slate-50: var(--background); /* inset wells (recessed on cards) */
+    --si-slate-100: var(--muted); /* chips, toggle tracks, hover fills */
+    --si-slate-200: var(--border); /* borders, dividers, switch tracks */
+    --si-slate-300: var(--border); /* faint icons, strong input borders */
+    --si-slate-400: var(--muted-foreground); /* placeholders, knobs */
+    --si-slate-500: var(--muted-foreground); /* secondary text */
+    --si-slate-600: var(--foreground); /* labels */
+    --si-slate-700: var(--foreground);
+    --si-slate-800: var(--foreground); /* body text */
+    --si-slate-900: var(--foreground); /* headings */
 
-    --si-emerald-50: #ecfdf5;
-    --si-emerald-100: #d1fae5;
-    --si-emerald-500: #10b981;
-    --si-emerald-600: #059669;
-    --si-emerald-700: #047857;
+    --si-emerald-50: color-mix(in oklab, var(--status-success) 12%, transparent);
+    --si-emerald-100: color-mix(in oklab, var(--status-success) 22%, transparent);
+    --si-emerald-200: color-mix(in oklab, var(--status-success) 35%, transparent);
+    --si-emerald-500: var(--status-success);
+    --si-emerald-600: var(--status-success);
+    --si-emerald-700: var(--status-success);
 
-    --si-amber-50: #fffbeb;
-    --si-amber-100: #fef3c7;
-    --si-amber-500: #f59e0b;
-    --si-amber-600: #d97706;
-    --si-amber-700: #b45309;
+    --si-amber-50: color-mix(in oklab, var(--status-warning) 12%, transparent);
+    --si-amber-100: color-mix(in oklab, var(--status-warning) 22%, transparent);
+    --si-amber-200: color-mix(in oklab, var(--status-warning) 35%, transparent);
+    --si-amber-500: var(--status-warning);
+    --si-amber-600: var(--status-warning);
+    --si-amber-700: var(--status-warning);
+    --si-amber-800: var(--status-warning);
 
-    --si-orange-50: #fff7ed;
-    --si-orange-100: #ffedd5;
-    --si-orange-500: #f97316;
-    --si-orange-600: #ea580c;
+    --si-orange-50: color-mix(in oklab, var(--status-warning) 12%, transparent);
+    --si-orange-100: color-mix(in oklab, var(--status-warning) 22%, transparent);
+    --si-orange-500: var(--status-warning);
+    --si-orange-600: var(--status-warning);
 
-    --si-rose-50: #fff1f2;
-    --si-rose-100: #ffe4e6;
-    --si-rose-500: #f43f5e;
-    --si-rose-600: #e11d48;
-    --si-rose-700: #be123c;
+    --si-rose-50: color-mix(in oklab, var(--destructive) 12%, transparent);
+    --si-rose-100: color-mix(in oklab, var(--destructive) 18%, transparent);
+    --si-rose-200: color-mix(in oklab, var(--destructive) 30%, transparent);
+    --si-rose-500: var(--destructive);
+    --si-rose-600: var(--destructive);
+    --si-rose-700: var(--destructive);
 
-    --si-violet-50: #f5f3ff;
-    --si-violet-100: #ede9fe;
-    --si-violet-500: #8b5cf6;
-    --si-violet-600: #7c3aed;
-    --si-violet-700: #6d28d9;
+    /* Violet IS the Achra brand accent — the whole scale routes to --primary.
+       The 200/300 steps were referenced below but never defined; defined here
+       so focus rings and hover steps resolve. */
+    --si-violet-50: color-mix(in oklab, var(--primary) 10%, transparent);
+    --si-violet-100: color-mix(in oklab, var(--primary) 18%, transparent);
+    --si-violet-200: color-mix(in oklab, var(--primary) 28%, transparent);
+    --si-violet-300: color-mix(in oklab, var(--primary) 40%, transparent);
+    --si-violet-400: color-mix(in oklab, var(--primary) 60%, transparent);
+    --si-violet-500: var(--primary);
+    --si-violet-600: var(--primary);
+    --si-violet-700: var(--primary);
 
-    --si-sky-50: #f0f9ff;
-    --si-sky-100: #e0f2fe;
-    --si-sky-500: #0ea5e9;
-    --si-sky-600: #0284c7;
+    --si-sky-50: color-mix(in oklab, var(--status-progress) 12%, transparent);
+    --si-sky-100: color-mix(in oklab, var(--status-progress) 22%, transparent);
+    --si-sky-500: var(--status-progress);
+    --si-sky-600: var(--status-progress);
+
+    /* Steps referenced below but missing from the original palette (they were
+       silently invalid) — defined so the info callout and radius resolve. */
+    --si-blue-50: color-mix(in oklab, var(--status-progress) 12%, transparent);
+    --si-blue-100: color-mix(in oklab, var(--status-progress) 22%, transparent);
+    --si-blue-700: var(--status-progress);
 
     /* Spacing */
     --si-radius-sm: 6px;
     --si-radius-md: 8px;
     --si-radius-lg: 12px;
+    --si-radius: var(--si-radius-md); /* referenced below; was undefined */
 
-    /* Shadows */
-    --si-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --si-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-    --si-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    /* Shadows — bridged to the Achra elevation scale (theme-aware: card-lift
+       shadows in light mode, heavier separation drops in dark mode). */
+    --si-shadow-sm: var(--shadow-sm);
+    --si-shadow-md: var(--shadow-md);
+    --si-shadow-lg: var(--shadow-lg);
 
     /* Transitions */
     --si-transition-fast: 150ms ease;
     --si-transition-base: 200ms ease;
 
     font-family: var(--si-font-sans);
-    background: var(--si-slate-50);
+    /* No background here: the editor root stays transparent so the page
+       matches Connect's drive-app canvas exactly (like builder-profile). */
     min-height: 100%;
     overflow-y: auto;
   }
@@ -466,7 +470,7 @@ const editorStyles = `
   }
 
   .si-mode-toggle__btn--active {
-    background: white;
+    background: var(--card);
     color: var(--si-slate-900);
     box-shadow: var(--si-shadow-sm);
   }
@@ -478,7 +482,7 @@ const editorStyles = `
 
   /* Header */
   .si-header {
-    background: white;
+    background: var(--card);
     border-radius: var(--si-radius-lg);
     padding: 24px;
     box-shadow: var(--si-shadow-sm);
@@ -629,7 +633,7 @@ const editorStyles = `
 
   /* Panel */
   .si-panel {
-    background: white;
+    background: var(--card);
     border-radius: var(--si-radius-lg);
     padding: 24px;
     box-shadow: var(--si-shadow-sm);
@@ -795,7 +799,7 @@ const editorStyles = `
   /* Metrics / Usage */
   .si-metric {
     padding: 8px;
-    background: white;
+    background: var(--card);
     border-radius: var(--si-radius-sm);
     border: 1px solid var(--si-slate-200);
   }
@@ -1047,7 +1051,8 @@ const editorStyles = `
 
   .si-invoice-row:hover {
     border-color: var(--si-slate-300);
-    background: white;
+    /* Theme-flipping hover lift: light overlay in dark mode, dark in light. */
+    background: color-mix(in oklab, var(--foreground) 6%, transparent);
   }
 
   .si-invoice-row__main {
@@ -1247,7 +1252,7 @@ const editorStyles = `
 
   .si-btn--primary {
     background: var(--si-violet-600);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .si-btn--primary:hover {
@@ -1287,7 +1292,7 @@ const editorStyles = `
     font-family: var(--si-font-sans);
     font-size: 0.875rem;
     color: var(--si-slate-800);
-    background: white;
+    background: var(--background);
     border: 1px solid var(--si-slate-300);
     border-radius: var(--si-radius-md);
     transition: all var(--si-transition-fast);
@@ -1338,7 +1343,7 @@ const editorStyles = `
     font-family: var(--si-font-sans);
     font-size: 0.875rem;
     color: var(--si-slate-800);
-    background: white;
+    background: var(--background);
     border: 1px solid var(--si-slate-300);
     border-radius: var(--si-radius-md);
     cursor: pointer;
@@ -1420,7 +1425,7 @@ const editorStyles = `
   }
 
   .si-modal {
-    background: white;
+    background: var(--card);
     border-radius: var(--si-radius-lg);
     box-shadow: var(--si-shadow-lg);
     max-width: 400px;
@@ -1620,7 +1625,7 @@ const editorStyles = `
     left: 2px;
     width: 20px;
     height: 20px;
-    background: white;
+    background: var(--primary-foreground);
     border-radius: 50%;
     box-shadow: var(--si-shadow-sm);
     transition: transform var(--si-transition-fast);
@@ -1633,7 +1638,7 @@ const editorStyles = `
   /* Additional Button Variants */
   .si-btn--success {
     background: var(--si-emerald-500);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .si-btn--success:hover {
@@ -1642,7 +1647,7 @@ const editorStyles = `
 
   .si-btn--warning {
     background: var(--si-amber-500);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .si-btn--warning:hover {
@@ -1651,7 +1656,7 @@ const editorStyles = `
 
   .si-btn--danger {
     background: var(--si-rose-500);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .si-btn--danger:hover {
@@ -1974,7 +1979,7 @@ const editorStyles = `
   .si-request-card__reason {
     font-size: 0.8125rem;
     color: var(--si-slate-600);
-    background: white;
+    background: var(--background);
     padding: 8px;
     border-radius: var(--si-radius-sm);
     margin: 8px 0;
@@ -2368,7 +2373,7 @@ const editorStyles = `
     align-items: flex-start;
     gap: 12px;
     padding: 12px 16px;
-    background: white;
+    background: var(--card);
     border: 2px solid var(--si-slate-200);
     border-radius: var(--si-radius-md);
     cursor: pointer;
@@ -2417,7 +2422,7 @@ const editorStyles = `
   .si-import-summary {
     margin-top: 16px;
     padding: 12px 16px;
-    background: white;
+    background: var(--background);
     border-radius: var(--si-radius-md);
     border: 1px solid var(--si-slate-200);
   }
@@ -3107,7 +3112,7 @@ const editorStyles = `
     font-weight: 700;
     letter-spacing: 0.05em;
     background: var(--si-amber-500);
-    color: white;
+    color: var(--primary-foreground);
     border-radius: 4px;
   }
 

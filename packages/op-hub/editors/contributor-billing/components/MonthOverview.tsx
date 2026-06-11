@@ -52,10 +52,10 @@ export function MonthOverview({
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-foreground">
           {monthName || "Month Overview"}
         </h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Select a category to manage your billing for this month
         </p>
       </div>
@@ -65,26 +65,26 @@ export function MonthOverview({
         <button
           onClick={handlePaymentsClick}
           disabled={!monthInfo?.paymentsFolder}
-          className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md hover:border-blue-300 transition-all text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-card rounded-lg border border-border p-6 hover:shadow-md hover:border-primary/50 transition-all text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <CreditCard className="w-6 h-6 text-blue-600" />
+              <div className="p-3 bg-primary/15 rounded-lg">
+                <CreditCard className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-foreground">
                   Payments
                 </h2>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   Invoices and billing statements
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground" />
           </div>
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <p className="text-sm text-gray-500">
+          <div className="mt-4 pt-4 border-t border-border">
+            <p className="text-sm text-muted-foreground">
               Manage contributor invoices, generate billing statements, and
               track payment status.
             </p>
@@ -95,26 +95,26 @@ export function MonthOverview({
         <button
           onClick={handleReportingClick}
           disabled={!monthInfo?.reportingFolder}
-          className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md hover:border-purple-300 transition-all text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-card rounded-lg border border-border p-6 hover:shadow-md hover:border-primary/50 transition-all text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-purple-100 rounded-lg">
-                <BarChart3 className="w-6 h-6 text-purple-600" />
+              <div className="p-3 bg-primary/15 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-foreground">
                   Reporting
                 </h2>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   Expense and snapshot reports
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground" />
           </div>
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <p className="text-sm text-gray-500">
+          <div className="mt-4 pt-4 border-t border-border">
+            <p className="text-sm text-muted-foreground">
               Create expense reports and snapshot reports for financial tracking
               and auditing.
             </p>

@@ -103,15 +103,15 @@ export const statusOptions = [
 
 // Status color mappings
 const statusColors: Record<string, string> = {
-  DRAFT: "bg-blue-100 text-blue-600",
-  ISSUED: "bg-blue-100 text-blue-600",
-  ACCEPTED: "bg-green-100 text-green-600",
-  PAYMENTSCHEDULED: "bg-green-100 text-green-600",
-  PAYMENTSENT: "bg-green-100 text-green-600",
-  PAYMENTISSUE: "bg-yellow-100 text-yellow-600",
-  PAYMENTCLOSED: "bg-red-100 text-red-600",
-  REJECTED: "bg-red-100 text-red-600",
-  OTHER: "bg-blue-100 text-blue-600",
+  DRAFT: "bg-status-progress/20 text-status-progress",
+  ISSUED: "bg-status-progress/20 text-status-progress",
+  ACCEPTED: "bg-status-success/20 text-status-success",
+  PAYMENTSCHEDULED: "bg-status-success/20 text-status-success",
+  PAYMENTSENT: "bg-status-success/20 text-status-success",
+  PAYMENTISSUE: "bg-status-warning/15 text-status-warning",
+  PAYMENTCLOSED: "bg-destructive/15 text-destructive",
+  REJECTED: "bg-destructive/15 text-destructive",
+  OTHER: "bg-status-progress/20 text-status-progress",
 };
 
 interface InvoiceTableProps {
@@ -146,7 +146,7 @@ const TableHeader = ({
   showBillingStatement?: boolean;
 }) => (
   <thead>
-    <tr className="bg-gray-50 font-medium text-gray-500 text-xs">
+    <tr className="bg-muted font-medium text-muted-foreground text-xs">
       <th className="px-2 py-2 w-8 rounded-tl-sm" />
       <th className="px-2 py-2 text-center">
         {showIssuer ? "Issuer" : "Invoice"}
@@ -803,7 +803,7 @@ export const InvoiceTable = ({
           showCreateButton ? filteredDocumentModels : undefined
         }
       >
-        <table className="w-full text-sm rounded-sm border-separate border-spacing-0 border border-gray-300 overflow-hidden">
+        <table className="w-full text-sm rounded-sm border-separate border-spacing-0 border border-border overflow-hidden">
           <TableHeader
             showIssuer={showIssuer}
             showBillingStatement={showBillingStatement}
@@ -840,7 +840,7 @@ export const InvoiceTable = ({
         details={notification.details}
         onClose={() => setNotification({ ...notification, show: false })}
       />
-      <div className="contributor-billing-table w-full h-full bg-white rounded-lg p-4 border border-gray-200 shadow-sm mt-4 overflow-x-auto">
+      <div className="contributor-billing-table w-full h-full bg-card rounded-lg p-4 border border-border shadow-sm mt-4 overflow-x-auto">
         <HeaderControls
           statusOptions={statusOptions}
           selectedStatuses={selectedStatuses}
@@ -902,11 +902,11 @@ export const InvoiceTable = ({
           <InvoiceTableSection
             title="Loading"
             count={loadingFileIds.length}
-            color="bg-gray-100 text-gray-600"
+            color="bg-muted text-muted-foreground"
           >
-            <table className="w-full text-sm rounded-sm border-separate border-spacing-0 border border-gray-300 overflow-hidden">
+            <table className="w-full text-sm rounded-sm border-separate border-spacing-0 border border-border overflow-hidden">
               <thead>
-                <tr className="bg-gray-50 font-medium text-gray-500 text-xs">
+                <tr className="bg-muted font-medium text-muted-foreground text-xs">
                   <th className="px-2 py-2 w-8 rounded-tl-sm" />
                   <th className="px-2 py-2 text-center">Invoice</th>
                   <th className="px-2 py-2 text-center">Invoice No.</th>
@@ -925,29 +925,29 @@ export const InvoiceTable = ({
                   return (
                     <tr
                       key={id}
-                      className="border-t border-gray-200 animate-pulse"
+                      className="border-t border-border animate-pulse"
                     >
                       <td className="px-2 py-2" />
-                      <td className="px-2 py-2 text-center text-gray-400">
+                      <td className="px-2 py-2 text-center text-muted-foreground">
                         {file?.name || "Loading..."}
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <div className="h-4 bg-gray-200 rounded w-16 mx-auto" />
+                        <div className="h-4 bg-muted rounded w-16 mx-auto" />
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <div className="h-4 bg-gray-200 rounded w-20 mx-auto" />
+                        <div className="h-4 bg-muted rounded w-20 mx-auto" />
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <div className="h-4 bg-gray-200 rounded w-20 mx-auto" />
+                        <div className="h-4 bg-muted rounded w-20 mx-auto" />
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <div className="h-4 bg-gray-200 rounded w-12 mx-auto" />
+                        <div className="h-4 bg-muted rounded w-12 mx-auto" />
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <div className="h-4 bg-gray-200 rounded w-16 mx-auto" />
+                        <div className="h-4 bg-muted rounded w-16 mx-auto" />
                       </td>
                       <td className="px-2 py-2 text-center">
-                        <span className="text-xs text-gray-400">
+                        <span className="text-xs text-muted-foreground">
                           Loading...
                         </span>
                       </td>

@@ -51,7 +51,7 @@ export function AddMonthButton() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isCreating}
-        className="flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors disabled:opacity-50"
+        className="flex items-center gap-1 px-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded transition-colors disabled:opacity-50"
         title="Add month"
       >
         <Plus className="w-3 h-3" />
@@ -60,8 +60,8 @@ export function AddMonthButton() {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-          <div className="px-3 py-2 text-xs font-medium text-gray-500 border-b border-gray-100">
+        <div className="absolute left-0 top-full mt-1 w-48 bg-popover rounded-lg shadow-lg border border-border py-1 z-50">
+          <div className="px-3 py-2 text-xs font-medium text-muted-foreground border-b border-border">
             Select a month to add
           </div>
           <div className="max-h-60 overflow-y-auto">
@@ -70,7 +70,7 @@ export function AddMonthButton() {
                 key={monthName}
                 onClick={() => void handleCreateMonth(monthName)}
                 disabled={isCreating}
-                className="w-full px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-3 py-2 text-left text-sm text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {monthName}
               </button>

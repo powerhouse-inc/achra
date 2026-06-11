@@ -339,7 +339,7 @@ export function DriveExplorer({ children }: EditorProps) {
   };
 
   return (
-    <div className="ph-drive-explorer-shell flex h-full w-full overflow-hidden">
+    <div className="ph-drive-explorer-shell bta-drive-shell flex h-full w-full overflow-hidden">
       <FolderTree onCustomViewChange={setCustomView} />
       <div
         className={`relative min-h-0 min-w-0 flex-1 overflow-y-auto p-4 ${
@@ -355,7 +355,7 @@ export function DriveExplorer({ children }: EditorProps) {
             aria-label="Close drive"
             title="Close drive"
             onClick={() => setSelectedDrive(undefined)}
-            className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-500 shadow-sm hover:bg-gray-100 hover:text-gray-800"
+            className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-md border border-border bg-muted text-foreground shadow-sm hover:bg-accent hover:text-foreground"
           >
             <X size={18} />
           </button>

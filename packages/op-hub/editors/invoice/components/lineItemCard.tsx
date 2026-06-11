@@ -32,7 +32,7 @@ export function LineItemCard({
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg mb-3 overflow-hidden">
+    <div className="bg-card border border-border shadow-sm rounded-lg mb-3 overflow-hidden">
       {/* Card Header */}
       <div
         className="p-4 cursor-pointer"
@@ -40,51 +40,53 @@ export function LineItemCard({
       >
         <div className="flex items-start justify-between mb-2">
           <div className="flex-1">
-            <h5 className="font-medium text-gray-900 text-sm">
+            <h5 className="font-medium text-foreground text-sm">
               {item.description || "Untitled Item"}
             </h5>
           </div>
           <button
-            className="p-1 hover:bg-gray-100 rounded"
+            className="p-1 hover:bg-accent rounded text-foreground"
             onClick={(e) => {
               e.stopPropagation();
               setShowMenu(!showMenu);
             }}
           >
-            <MoreVertical className="w-5 h-5 text-gray-500" />
+            <MoreVertical className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
 
         {/* Primary Info */}
         <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center gap-4 text-gray-600">
+          <div className="flex items-center gap-4 text-muted-foreground">
             <span>Qty: {item.quantity}</span>
             <span>•</span>
             <span>
               {currency} {formatNumber(item.unitPriceTaxExcl)}
             </span>
           </div>
-          <div className="font-semibold text-gray-900">
+          <div className="font-semibold text-foreground">
             {currency} {formatNumber(item.totalPriceTaxIncl)}
           </div>
         </div>
 
         {/* Expanded Details */}
         {isExpanded && (
-          <div className="mt-3 pt-3 border-t border-gray-100 space-y-2 text-sm">
+          <div className="mt-3 pt-3 border-t border-border space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">Tax %:</span>
-              <span className="text-gray-900">{item.taxPercent}%</span>
+              <span className="text-muted-foreground">Tax %:</span>
+              <span className="text-foreground">{item.taxPercent}%</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Total (excl. tax):</span>
-              <span className="text-gray-900">
+              <span className="text-muted-foreground">Total (excl. tax):</span>
+              <span className="text-foreground">
                 {currency} {formatNumber(item.totalPriceTaxExcl)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Unit Price (incl. tax):</span>
-              <span className="text-gray-900">
+              <span className="text-muted-foreground">
+                Unit Price (incl. tax):
+              </span>
+              <span className="text-foreground">
                 {currency} {formatNumber(item.unitPriceTaxIncl)}
               </span>
             </div>
@@ -94,20 +96,20 @@ export function LineItemCard({
 
       {/* Action Menu Dropdown */}
       {showMenu && (
-        <div className="border-t border-gray-200 bg-gray-50">
+        <div className="border-t border-border bg-muted">
           <button
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left hover:bg-gray-100 transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left text-foreground hover:bg-accent transition-colors"
             onClick={(e) => {
               e.stopPropagation();
               onEdit();
               setShowMenu(false);
             }}
           >
-            <Edit className="w-4 h-4 text-blue-600" />
+            <Edit className="w-4 h-4 text-primary" />
             <span>Edit Line Item</span>
           </button>
           <button
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left hover:bg-red-50 text-red-600 transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-left hover:bg-destructive/15 text-destructive transition-colors"
             onClick={(e) => {
               e.stopPropagation();
               if (confirm("Delete this line item?")) {

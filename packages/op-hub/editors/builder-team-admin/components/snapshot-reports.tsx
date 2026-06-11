@@ -199,7 +199,7 @@ export function SnapshotReports() {
 
   return (
     <div>
-      <div className="text-2xl font-bold text-center mb-4">
+      <div className="text-2xl font-bold text-center mb-4 text-foreground">
         Snapshot Reports
       </div>
       <div className="space-y-6 px-6">

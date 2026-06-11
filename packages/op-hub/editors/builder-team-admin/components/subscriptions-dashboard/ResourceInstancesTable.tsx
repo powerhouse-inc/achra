@@ -28,20 +28,20 @@ export function ResourceInstancesTable({
   return (
     <table className="w-full text-left" role="table">
       <thead>
-        <tr className="border-b border-stone-200">
-          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+        <tr className="border-b border-border">
+          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Product
           </th>
-          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Status
           </th>
-          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Configuration
           </th>
-          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Activated
           </th>
-          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-stone-400">
+          <th className="pb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Actions
           </th>
         </tr>
@@ -49,18 +49,18 @@ export function ResourceInstancesTable({
       <tbody>
         {resources.length === 0 ? (
           <tr>
-            <td colSpan={6} className="py-8 text-center text-sm text-stone-400">
+            <td
+              colSpan={6}
+              className="py-8 text-center text-sm text-muted-foreground"
+            >
               No resource instances yet
             </td>
           </tr>
         ) : (
           resources.map((res) => (
-            <tr
-              key={res.id}
-              className="border-b border-stone-100 last:border-0"
-            >
+            <tr key={res.id} className="border-b border-border last:border-0">
               <td className="py-3">
-                <div className="text-sm font-medium text-teal-600">
+                <div className="text-sm font-medium text-primary">
                   <span
                     className="cursor-pointer hover:underline"
                     onClick={() => setSelectedNode(res.id)}
@@ -70,7 +70,7 @@ export function ResourceInstancesTable({
                   </span>
                 </div>
                 {res.description ? (
-                  <div className="mt-0.5 text-xs text-stone-400 line-clamp-1 max-w-[200px]">
+                  <div className="mt-0.5 text-xs text-muted-foreground line-clamp-1 max-w-[200px]">
                     {res.description}
                   </div>
                 ) : null}
@@ -78,15 +78,15 @@ export function ResourceInstancesTable({
               <td className="py-3">
                 <StatusBadge status={res.status} />
               </td>
-              <td className="py-3 text-sm text-stone-500">
+              <td className="py-3 text-sm text-muted-foreground">
                 {res.facetCount} facet{res.facetCount !== 1 ? "s" : ""}{" "}
                 configured
               </td>
-              <td className="py-3 text-sm text-stone-500">
+              <td className="py-3 text-sm text-muted-foreground">
                 {formatDate(res.activatedAt)}
               </td>
               <td className="py-3">
-                <span className="text-sm font-medium text-teal-600 cursor-pointer hover:underline">
+                <span className="text-sm font-medium text-primary cursor-pointer hover:underline">
                   {actionLabel(res.status)}
                 </span>
               </td>

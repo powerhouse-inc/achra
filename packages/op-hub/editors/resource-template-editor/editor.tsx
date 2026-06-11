@@ -44,39 +44,42 @@ const editorStyles = `
     --rt-font-sans: 'DM Sans', system-ui, sans-serif;
     --rt-font-mono: 'DM Mono', 'SF Mono', monospace;
 
-    --rt-slate-50: #f8fafc;
-    --rt-slate-100: #f1f5f9;
-    --rt-slate-200: #e2e8f0;
-    --rt-slate-300: #cbd5e1;
-    --rt-slate-400: #94a3b8;
-    --rt-slate-500: #64748b;
-    --rt-slate-600: #475569;
-    --rt-slate-700: #334155;
-    --rt-slate-800: #1e293b;
-    --rt-slate-900: #0f172a;
+    /* Achra design-system tokens by ROLE (see migrate skill, Recipe A3/4):
+       scale names kept so usage sites stay untouched. */
+    --rt-slate-50: var(--background); /* inset wells (recessed on cards) */
+    --rt-slate-100: var(--muted);
+    --rt-slate-200: var(--border);
+    --rt-slate-300: var(--border);
+    --rt-slate-400: var(--muted-foreground);
+    --rt-slate-500: var(--muted-foreground);
+    --rt-slate-600: var(--foreground);
+    --rt-slate-700: var(--foreground);
+    --rt-slate-800: var(--foreground);
+    --rt-slate-900: var(--foreground);
 
-    --rt-teal-50: #f0fdfa;
-    --rt-teal-100: #ccfbf1;
-    --rt-teal-200: #99f6e4;
-    --rt-teal-500: #14b8a6;
-    --rt-teal-600: #0d9488;
-    --rt-teal-700: #0f766e;
+    /* Teal was a secondary decorative accent — routed to the success family. */
+    --rt-teal-50: color-mix(in oklab, var(--status-success) 10%, transparent);
+    --rt-teal-100: color-mix(in oklab, var(--status-success) 20%, transparent);
+    --rt-teal-200: color-mix(in oklab, var(--status-success) 32%, transparent);
+    --rt-teal-500: var(--status-success);
+    --rt-teal-600: var(--status-success);
+    --rt-teal-700: var(--status-success);
 
     --rt-radius-sm: 6px;
     --rt-radius-md: 10px;
     --rt-radius-lg: 14px;
     --rt-radius-xl: 20px;
 
-    --rt-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-    --rt-shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
-    --rt-shadow-lg: 0 10px 40px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+    --rt-shadow-sm: var(--shadow-sm);
+    --rt-shadow-md: var(--shadow-md);
+    --rt-shadow-lg: var(--shadow-lg);
 
     --rt-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --rt-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
     --rt-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 
     font-family: var(--rt-font-sans);
-    background: linear-gradient(135deg, var(--rt-teal-50) 0%, var(--rt-slate-50) 50%, #f0f4f8 100%);
+    /* No background: root stays transparent to match Connect's host canvas. */
     min-height: 100%;
     overflow-y: auto;
   }

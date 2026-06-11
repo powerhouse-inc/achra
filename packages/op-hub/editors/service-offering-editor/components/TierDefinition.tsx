@@ -26,14 +26,30 @@ interface TierDefinitionProps {
 
 const TIER_ACCENTS = [
   {
-    color: "var(--so-emerald-500)",
-    bg: "var(--so-emerald-50)",
+    color: "var(--chart-1)",
+    bg: "color-mix(in oklab, var(--chart-1) 15%, transparent)",
     name: "emerald",
   },
-  { color: "var(--so-violet-500)", bg: "var(--so-violet-50)", name: "violet" },
-  { color: "var(--so-amber-500)", bg: "var(--so-amber-50)", name: "amber" },
-  { color: "var(--so-sky-500)", bg: "var(--so-sky-50)", name: "sky" },
-  { color: "var(--so-rose-500)", bg: "var(--so-rose-50)", name: "rose" },
+  {
+    color: "var(--chart-2)",
+    bg: "color-mix(in oklab, var(--chart-2) 15%, transparent)",
+    name: "violet",
+  },
+  {
+    color: "var(--chart-3)",
+    bg: "color-mix(in oklab, var(--chart-3) 15%, transparent)",
+    name: "amber",
+  },
+  {
+    color: "var(--chart-4)",
+    bg: "color-mix(in oklab, var(--chart-4) 15%, transparent)",
+    name: "sky",
+  },
+  {
+    color: "var(--chart-5)",
+    bg: "color-mix(in oklab, var(--chart-5) 15%, transparent)",
+    name: "rose",
+  },
 ];
 
 // Tier Presets - Default Effect & Activation Energy Reduction
@@ -199,22 +215,22 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
         {/* Tier Presets - Show when no tiers exist (Default Effect) */}
         {tiers.length === 0 && (
           <div
-            className="rounded-xl p-6 mb-6 border border-violet-100"
+            className="rounded-xl p-6 mb-6 border border-primary/40"
             style={{
               background:
-                "linear-gradient(135deg, rgb(245 243 255) 0%, rgb(240 249 255) 100%)",
+                "linear-gradient(135deg, color-mix(in oklab, var(--primary) 15%, transparent) 0%, color-mix(in oklab, var(--primary) 5%, transparent) 100%)",
             }}
           >
             <div className="mb-5">
               <h3
-                className="text-lg font-bold text-slate-800 m-0 mb-1.5 flex items-center gap-2"
+                className="text-lg font-bold text-foreground m-0 mb-1.5 flex items-center gap-2"
                 style={{ fontFamily: fontSans }}
               >
                 <span>{"⚡"}</span>
                 Quick Start with a Template
                 <InfoIcon content="Quick-start templates for common tier structures. You can customize everything after selecting a preset." />
               </h3>
-              <p className="text-sm text-slate-600 m-0">
+              <p className="text-sm text-muted-foreground m-0">
                 Choose a pricing structure to get started quickly, or create
                 custom tiers below
               </p>
@@ -229,11 +245,10 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                 <button
                   key={preset.name}
                   onClick={() => handleApplyPreset(preset)}
-                  className="group flex flex-col gap-3 p-5 bg-white border-2 border-slate-200 rounded-[10px] cursor-pointer transition-all duration-150 text-left hover:border-violet-400 hover:-translate-y-0.5"
+                  className="group flex flex-col gap-3 p-5 bg-card border-2 border-border rounded-[10px] cursor-pointer transition-all duration-150 text-left hover:border-primary hover:-translate-y-0.5"
                   style={{ boxShadow: undefined }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow =
-                      "0 4px 12px rgba(124, 58, 237, 0.15)";
+                    e.currentTarget.style.boxShadow = "var(--shadow-primary)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = "none";
@@ -242,20 +257,20 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                   <span className="text-2xl">{preset.icon}</span>
                   <div className="flex-1">
                     <h4
-                      className="text-base font-semibold text-slate-800 m-0 mb-1"
+                      className="text-base font-semibold text-foreground m-0 mb-1"
                       style={{ fontFamily: fontSans }}
                     >
                       {preset.name}
                     </h4>
-                    <p className="text-[0.8125rem] text-slate-500 m-0">
+                    <p className="text-[0.8125rem] text-muted-foreground m-0">
                       {preset.description}
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
+                  <div className="flex flex-wrap gap-2 pt-3 border-t border-border">
                     {preset.tiers.map((t, i) => (
                       <span
                         key={i}
-                        className="text-[0.6875rem] py-1 px-2 bg-slate-100 text-slate-600 rounded-md group-hover:bg-violet-100 group-hover:text-violet-700"
+                        className="text-[0.6875rem] py-1 px-2 bg-muted text-muted-foreground rounded-md group-hover:bg-primary/10 group-hover:text-primary"
                         style={{ fontFamily: fontMono }}
                       >
                         {t.name}
@@ -270,8 +285,8 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
         )}
 
         {/* Billing Cycle Selector */}
-        <div className="bg-white border border-slate-200 rounded-xl py-5 px-6 flex items-center gap-4">
-          <span className="text-[0.8rem] font-semibold text-slate-600 uppercase tracking-wide whitespace-nowrap">
+        <div className="bg-card border border-border rounded-xl py-5 px-6 flex items-center gap-4">
+          <span className="text-[0.8rem] font-semibold text-muted-foreground uppercase tracking-wide whitespace-nowrap">
             Billing Cycles:
             <InfoIcon content="Select which payment frequencies you want to offer. These will be available for pricing across all tiers." />
           </span>
@@ -285,8 +300,8 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                   key={opt.value}
                   className={`py-2 px-4 rounded-lg text-[0.85rem] font-medium cursor-pointer transition-all duration-150 ${
                     isActive
-                      ? "bg-violet-500 border-[1.5px] border-violet-500 text-white hover:bg-violet-600 hover:border-violet-600"
-                      : "bg-white border-[1.5px] border-slate-200 text-slate-500 hover:border-violet-300 hover:text-violet-600"
+                      ? "bg-primary border-[1.5px] border-primary text-primary-foreground hover:bg-primary/90 hover:border-primary/90"
+                      : "bg-card border-[1.5px] border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
                   }`}
                   onClick={() => {
                     const current = state.global.availableBillingCycles ?? [];
@@ -311,7 +326,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
             })}
           </div>
           {(state.global.availableBillingCycles ?? []).length === 0 && (
-            <div className="text-[0.6875rem] text-rose-600 py-1.5 px-2.5 bg-rose-50 rounded-md mt-2">
+            <div className="text-[0.6875rem] text-destructive py-1.5 px-2.5 bg-destructive/15 rounded-md mt-2">
               Select at least one billing cycle to enable pricing
             </div>
           )}
@@ -339,11 +354,11 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
 
           {isAddingTier ? (
             <div
-              className="w-80 bg-white border-2 border-violet-200 rounded-xl p-6"
+              className="w-80 bg-card border-2 border-primary/40 rounded-xl p-6"
               style={{ animation: "tier-slide-up 0.2s ease-out" }}
             >
               <h3
-                className="text-base font-bold text-slate-900 mb-5"
+                className="text-base font-bold text-foreground mb-5"
                 style={{ fontFamily: fontSans }}
               >
                 New Subscription Tier
@@ -351,7 +366,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
 
               <div className="mb-4">
                 <label
-                  className="block text-[0.625rem] font-medium uppercase tracking-widest text-slate-500 mb-1.5"
+                  className="block text-[0.625rem] font-medium uppercase tracking-widest text-muted-foreground mb-1.5"
                   style={{ fontFamily: fontMono }}
                 >
                   Tier Name
@@ -363,7 +378,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                     setNewTier({ ...newTier, name: e.target.value })
                   }
                   placeholder="e.g., Basic, Professional"
-                  className="w-full text-base font-semibold text-slate-900 bg-white border border-slate-200 rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-violet-400 focus:shadow-[0_0_0_3px_rgb(237_233_254)] placeholder:font-normal placeholder:text-slate-400"
+                  className="w-full text-base font-semibold text-foreground bg-background border border-input rounded-[10px] py-2.5 px-3.5 outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--primary)_30%,transparent)] placeholder:font-normal placeholder:text-muted-foreground"
                   style={{ fontFamily: fontSans }}
                   autoFocus
                 />
@@ -380,9 +395,9 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                     })
                   }
                   className="w-[1.125rem] h-[1.125rem] cursor-pointer"
-                  style={{ accentColor: "#f59e0b" }}
+                  style={{ accentColor: "var(--status-warning)" }}
                 />
-                <span className="text-[0.8125rem] text-slate-600">
+                <span className="text-[0.8125rem] text-muted-foreground">
                   Custom Pricing (price varies per client)
                 </span>
               </label>
@@ -391,7 +406,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                 <button
                   onClick={handleAddTier}
                   disabled={!newTier.name.trim()}
-                  className="flex-1 py-2.5 px-4 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-violet-600 text-white border-none hover:enabled:bg-violet-700 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed"
+                  className="flex-1 py-2.5 px-4 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border-none hover:enabled:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed"
                   style={{ fontFamily: fontSans }}
                 >
                   Create Tier
@@ -405,7 +420,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                       isCustomPricing: false,
                     });
                   }}
-                  className="flex-1 py-2.5 px-4 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-slate-100 text-slate-700 border-none hover:bg-slate-200"
+                  className="flex-1 py-2.5 px-4 text-sm font-semibold rounded-[10px] cursor-pointer transition-all duration-150 bg-muted text-foreground border-none hover:bg-accent"
                   style={{ fontFamily: fontSans }}
                 >
                   Cancel
@@ -415,11 +430,11 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
           ) : (
             <button
               onClick={() => setIsAddingTier(true)}
-              className="group w-80 min-h-[280px] bg-white border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-200 hover:border-violet-300 hover:bg-violet-50"
+              className="group w-80 min-h-[280px] bg-card border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-200 hover:border-primary/40 hover:bg-primary/10"
             >
-              <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center transition-all duration-200 group-hover:bg-violet-100">
+              <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center transition-all duration-200 group-hover:bg-primary/10">
                 <svg
-                  className="w-6 h-6 text-slate-400 transition-all duration-150 group-hover:text-violet-600"
+                  className="w-6 h-6 text-muted-foreground transition-all duration-150 group-hover:text-primary"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -433,7 +448,7 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
                 </svg>
               </div>
               <span
-                className="text-[0.9375rem] font-semibold text-slate-500 transition-all duration-150 group-hover:text-violet-600"
+                className="text-[0.9375rem] font-semibold text-muted-foreground transition-all duration-150 group-hover:text-primary"
                 style={{ fontFamily: fontSans }}
               >
                 Add Subscription Tier
@@ -442,9 +457,9 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
           )}
         </div>
 
-        <div className="flex items-start gap-3.5 p-4 px-5 bg-amber-50 border border-amber-200 rounded-xl">
+        <div className="flex items-start gap-3.5 p-4 px-5 bg-status-warning/10 border border-status-warning/40 rounded-xl">
           <svg
-            className="shrink-0 w-5 h-5 text-amber-600 mt-0.5"
+            className="shrink-0 w-5 h-5 text-status-warning mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -458,12 +473,12 @@ export function TierDefinition({ document, dispatch }: TierDefinitionProps) {
           </svg>
           <div className="flex-1">
             <p
-              className="text-sm font-semibold text-amber-800 mb-1"
+              className="text-sm font-semibold text-status-warning mb-1"
               style={{ fontFamily: fontSans }}
             >
               Pricing is managed at the option group level
             </p>
-            <p className="text-[0.8125rem] text-amber-700 leading-relaxed">
+            <p className="text-[0.8125rem] text-status-warning leading-relaxed">
               Billing cycles and pricing are configured per option group in the
               Service Catalog. Setup fees, recurring prices, and billing cycles
               apply to all tiers within each group.
@@ -548,9 +563,9 @@ const TierCard = memo(function TierCard({
 
   return (
     <div
-      className={`w-80 bg-white rounded-xl shadow-md overflow-hidden flex flex-col transition-all duration-200 relative hover:shadow-lg hover:-translate-y-0.5 ${
+      className={`w-80 bg-card rounded-xl shadow-md overflow-hidden flex flex-col transition-all duration-200 relative hover:shadow-lg hover:-translate-y-0.5 ${
         isRecommended
-          ? "border-2 border-violet-300 scale-[1.02] z-[1] hover:scale-[1.02] hover:-translate-y-0.5"
+          ? "border-2 border-primary scale-[1.02] z-[1] hover:scale-[1.02] hover:-translate-y-0.5"
           : ""
       }`}
       style={{
@@ -561,11 +576,10 @@ const TierCard = memo(function TierCard({
       {/* Most Popular Badge or Set Button — positioned top-right */}
       {isRecommended ? (
         <button
-          className="absolute top-[-1px] right-4 flex items-center gap-1 py-1 px-3.5 text-white text-[0.6875rem] font-semibold uppercase tracking-wide rounded-b-lg z-[2] border-none cursor-pointer transition-opacity duration-150 hover:opacity-80"
+          className="absolute top-[-1px] right-4 flex items-center gap-1 py-1 px-3.5 text-primary-foreground text-[0.6875rem] font-semibold uppercase tracking-wide rounded-b-lg z-[2] border-none cursor-pointer transition-opacity duration-150 hover:opacity-80"
           style={{
-            background:
-              "linear-gradient(135deg, rgb(124 58 237) 0%, rgb(109 40 217) 100%)",
-            boxShadow: "0 2px 8px rgba(124, 58, 237, 0.3)",
+            background: "var(--primary)",
+            boxShadow: "var(--shadow-primary)",
           }}
           title="Click to remove Most Popular"
           onClick={() => {
@@ -585,7 +599,7 @@ const TierCard = memo(function TierCard({
         </button>
       ) : (
         <button
-          className="absolute top-2 right-3 flex items-center gap-1 py-1 px-3 text-slate-400 text-[0.625rem] font-medium uppercase tracking-wide rounded-full z-[2] bg-transparent border border-transparent cursor-pointer transition-all duration-150 hover:border-violet-300 hover:text-violet-500 hover:bg-violet-50"
+          className="absolute top-2 right-3 flex items-center gap-1 py-1 px-3 text-muted-foreground text-[0.625rem] font-medium uppercase tracking-wide rounded-full z-[2] bg-transparent border border-transparent cursor-pointer transition-all duration-150 hover:border-primary/40 hover:text-primary hover:bg-primary/10"
           onClick={() => {
             dispatch(
               updateTier({
@@ -614,7 +628,7 @@ const TierCard = memo(function TierCard({
         <div className="flex items-start justify-between mb-5">
           <div className="flex-1">
             <span
-              className="block text-[0.625rem] font-medium uppercase tracking-widest text-slate-400 mb-1.5"
+              className="block text-[0.625rem] font-medium uppercase tracking-widest text-muted-foreground mb-1.5"
               style={{ fontFamily: fontMono }}
             >
               Tier Name
@@ -624,13 +638,13 @@ const TierCard = memo(function TierCard({
               value={localName}
               onChange={(e) => setLocalName(e.target.value)}
               onBlur={handleNameBlur}
-              className="w-full text-[1.375rem] font-bold text-slate-900 bg-transparent border-none border-b-2 border-b-transparent pb-1 pl-0 transition-all duration-150 outline-none hover:border-b-slate-200 focus:border-b-violet-500"
+              className="w-full text-[1.375rem] font-bold text-foreground bg-transparent border-none border-b-2 border-b-transparent pb-1 pl-0 transition-all duration-150 outline-none hover:border-b-border focus:border-b-ring"
               style={{ fontFamily: fontSans }}
             />
           </div>
           <button
             onClick={onDelete}
-            className="p-1.5 text-slate-400 bg-transparent border-none rounded-md cursor-pointer transition-all duration-150 hover:text-rose-500 hover:bg-rose-50"
+            className="p-1.5 text-muted-foreground bg-transparent border-none rounded-md cursor-pointer transition-all duration-150 hover:text-destructive hover:bg-destructive/15"
           >
             <svg
               width="20"
@@ -650,9 +664,9 @@ const TierCard = memo(function TierCard({
         </div>
 
         {isCustomPricing && (
-          <div className="flex items-center gap-2 py-3 px-4 bg-amber-50 border border-amber-200 rounded-[10px] mb-4">
+          <div className="flex items-center gap-2 py-3 px-4 bg-status-warning/10 border border-status-warning/40 rounded-[10px] mb-4">
             <svg
-              className="w-5 h-5 text-amber-600"
+              className="w-5 h-5 text-status-warning"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -665,10 +679,10 @@ const TierCard = memo(function TierCard({
               />
             </svg>
             <div className="flex-1">
-              <span className="block text-[0.8125rem] font-semibold text-amber-800">
+              <span className="block text-[0.8125rem] font-semibold text-status-warning">
                 Custom Pricing
               </span>
-              <span className="text-[0.6875rem] text-amber-600">
+              <span className="text-[0.6875rem] text-status-warning">
                 Price varies per client
               </span>
             </div>
@@ -689,9 +703,9 @@ const TierCard = memo(function TierCard({
               );
             }}
             className="w-[1.125rem] h-[1.125rem] cursor-pointer"
-            style={{ accentColor: "#0d9488" }}
+            style={{ accentColor: "var(--primary)" }}
           />
-          <span className="text-[0.8125rem] text-slate-600">
+          <span className="text-[0.8125rem] text-muted-foreground">
             Exclude from setup fee
           </span>
         </label>
@@ -700,7 +714,7 @@ const TierCard = memo(function TierCard({
           <div className="mb-4">
             <div className="mb-1.5">
               <span
-                className="block text-[0.625rem] font-medium uppercase tracking-widest text-slate-400 mb-1.5"
+                className="block text-[0.625rem] font-medium uppercase tracking-widest text-muted-foreground mb-1.5"
                 style={{ fontFamily: fontMono }}
               >
                 Recurring Price
@@ -708,20 +722,22 @@ const TierCard = memo(function TierCard({
               </span>
             </div>
 
-            <div className="flex items-center gap-2 py-3.5 px-4 bg-slate-50 rounded-[10px] border border-slate-100">
+            <div className="flex items-center gap-2 py-3.5 px-4 bg-background rounded-[10px] border border-input">
               <span>$</span>
               <span
-                className="text-[1.375rem] font-semibold text-emerald-700"
+                className="text-[1.375rem] font-semibold text-status-success"
                 style={{ fontFamily: fontMono }}
               >
                 {formatPrice(calculatedPrice.monthlyTotal).replace("$", "")}
               </span>
-              <span className="text-sm text-emerald-600 font-medium">/mo</span>
+              <span className="text-sm text-status-success font-medium">
+                /mo
+              </span>
             </div>
 
             {calculatedPrice.groupBreakdown.length > 0 && (
-              <div className="mt-2 py-2 px-2.5 bg-slate-50 rounded-md border border-slate-100">
-                <span className="block text-[0.625rem] font-medium text-slate-500 uppercase tracking-wide mb-1.5">
+              <div className="mt-2 py-2 px-2.5 bg-background rounded-md border border-input">
+                <span className="block text-[0.625rem] font-medium text-muted-foreground uppercase tracking-wide mb-1.5">
                   Sum of {calculatedPrice.groupBreakdown.length} service group
                   {calculatedPrice.groupBreakdown.length !== 1 ? "s" : ""}
                 </span>
@@ -731,13 +747,13 @@ const TierCard = memo(function TierCard({
                     className="flex items-center justify-between py-[0.1875rem]"
                   >
                     <span
-                      className={`flex items-center gap-1 text-xs ${g.hasPrice ? "text-slate-600" : "text-amber-600"}`}
+                      className={`flex items-center gap-1 text-xs ${g.hasPrice ? "text-muted-foreground" : "text-status-warning"}`}
                     >
                       {!g.hasPrice && (
                         <svg
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-3 h-3 text-amber-500"
+                          className="w-3 h-3 text-status-warning"
                         >
                           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                         </svg>
@@ -745,7 +761,7 @@ const TierCard = memo(function TierCard({
                       {g.groupName}
                     </span>
                     <span
-                      className={`text-xs font-medium ${g.hasPrice ? "text-slate-700" : "text-amber-500 italic"}`}
+                      className={`text-xs font-medium ${g.hasPrice ? "text-foreground" : "text-status-warning italic"}`}
                       style={{ fontFamily: fontMono }}
                     >
                       {g.hasPrice ? formatPrice(g.monthlyAmount) : "$0"}
@@ -756,9 +772,9 @@ const TierCard = memo(function TierCard({
             )}
 
             {calculatedPrice.missingPriceGroups.length > 0 && (
-              <div className="flex items-center gap-1.5 mt-2 py-1.5 px-2 text-[0.6875rem] text-amber-700 bg-amber-50 border border-amber-200 rounded-md">
+              <div className="flex items-center gap-1.5 mt-2 py-1.5 px-2 text-[0.6875rem] text-status-warning bg-status-warning/10 border border-status-warning/40 rounded-md">
                 <svg
-                  className="shrink-0 w-3.5 h-3.5 text-amber-500"
+                  className="shrink-0 w-3.5 h-3.5 text-status-warning"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -784,7 +800,7 @@ const TierCard = memo(function TierCard({
 
         <div className="mt-4">
           <span
-            className="block text-[0.625rem] font-medium uppercase tracking-widest text-slate-400 mb-1.5"
+            className="block text-[0.625rem] font-medium uppercase tracking-widest text-muted-foreground mb-1.5"
             style={{ fontFamily: fontMono }}
           >
             Description
@@ -795,18 +811,18 @@ const TierCard = memo(function TierCard({
             onBlur={handleDescriptionBlur}
             placeholder="Add a description..."
             rows={2}
-            className="w-full text-[0.8125rem] text-slate-600 bg-slate-50 border border-slate-200 rounded-[10px] p-3 resize-none outline-none transition-all duration-150 focus:border-violet-400 focus:shadow-[0_0_0_3px_rgb(237_233_254)] placeholder:text-slate-400"
+            className="w-full text-[0.8125rem] text-foreground bg-background border border-input rounded-[10px] p-3 resize-none outline-none transition-all duration-150 focus:border-ring focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--primary)_30%,transparent)] placeholder:text-muted-foreground"
             style={{ fontFamily: fontSans }}
           />
         </div>
       </div>
 
-      <div className="flex items-center justify-between py-3 px-6 bg-slate-50 border-t border-slate-100">
+      <div className="flex items-center justify-between py-3 px-6 bg-muted border-t border-border">
         <div className="flex items-center gap-1">
           <button
             onClick={onMoveLeft}
             disabled={isFirst}
-            className="p-1.5 rounded-md border-none cursor-pointer transition-all duration-150 bg-transparent text-slate-400 hover:enabled:text-violet-600 hover:enabled:bg-violet-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1.5 rounded-md border-none cursor-pointer transition-all duration-150 bg-transparent text-muted-foreground hover:enabled:text-primary hover:enabled:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed"
             title="Move left"
           >
             <svg
@@ -827,7 +843,7 @@ const TierCard = memo(function TierCard({
           <button
             onClick={onMoveRight}
             disabled={isLast}
-            className="p-1.5 rounded-md border-none cursor-pointer transition-all duration-150 bg-transparent text-slate-400 hover:enabled:text-violet-600 hover:enabled:bg-violet-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-1.5 rounded-md border-none cursor-pointer transition-all duration-150 bg-transparent text-muted-foreground hover:enabled:text-primary hover:enabled:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed"
             title="Move right"
           >
             <svg
@@ -846,7 +862,7 @@ const TierCard = memo(function TierCard({
             </svg>
           </button>
         </div>
-        <span className="text-[0.6875rem] text-slate-400">
+        <span className="text-[0.6875rem] text-muted-foreground">
           Matrix view for service levels
         </span>
       </div>
