@@ -1,0 +1,15 @@
+diff --git a/dist/renown-builder-BvFud66V.js b/dist/renown-builder-BvFud66V.js
+index 8f246bd..eba92a7 100644
+--- a/dist/renown-builder-BvFud66V.js
++++ b/dist/renown-builder-BvFud66V.js
+@@ -685,7 +685,9 @@ var Renown = class {
+ 				throw new Error("Credential not found");
+ 			}
+ 			if (!(credential.issuer.id === userDid && credential.credentialSubject.id === this.did)) throw new Error("Invalid credential");
+-			if (credential.issuer.ethereumAddress.toLowerCase() !== result.address.toLowerCase() || credential.proof.eip712.domain.chainId !== result.chainId || !await verifyCredentialSignature(credential)) throw new Error("Invalid credential signature");
++			if (credential.issuer.ethereumAddress.toLowerCase() !== result.address.toLowerCase()) throw new Error("Invalid credential signature");
++			const proofChainId = credential.proof?.eip712?.domain?.chainId;
++			if (proofChainId !== undefined && (Number(proofChainId) !== result.chainId || !await verifyCredentialSignature(credential))) throw new Error("Invalid credential signature");
+ 			const user = {
+ 				...result,
+ 				address: credential.issuer.ethereumAddress,
