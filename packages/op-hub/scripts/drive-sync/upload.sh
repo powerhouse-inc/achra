@@ -149,8 +149,8 @@ if preferred_editor in EDITOR_ID_REMAP:
 # Default drive icon per editor type, so every team-admin / service-offering
 # drive lands with the matching icon. An explicit DRIVE_ICON env always wins.
 EDITOR_DEFAULT_ICON = {
-    "team-admin":       "https://i.postimg.cc/FztDhVrh/team-admin-bg.png",
-    "service-offering": "https://i.postimg.cc/QtFy8Mc4/service-offering-bg.png",
+    "team-admin":       "https://achra.com/op-hub/drives/team-admin.png",
+    "service-offering": "https://achra.com/op-hub/drives/service-offering.png",
 }
 if not drive_icon and preferred_editor in EDITOR_DEFAULT_ICON:
     drive_icon = EDITOR_DEFAULT_ICON[preferred_editor]
