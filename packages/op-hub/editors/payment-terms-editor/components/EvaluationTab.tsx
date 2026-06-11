@@ -15,6 +15,17 @@ import {
   type EvaluationFrequency,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface EvaluationTabProps {
   state: PaymentTermsState;
@@ -90,14 +101,14 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
     return (
       <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             Evaluation Terms
           </h2>
           <Button
             onClick={() => setIsEditing(true)}
             color="light"
             size="sm"
-            className="cursor-pointer hover:bg-blue-600 hover:text-white"
+            className={primaryButtonClass}
           >
             {state.evaluation ? "Edit Terms" : "Configure Evaluation"}
           </Button>
@@ -106,50 +117,50 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
         {state.evaluation ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Evaluation Frequency
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.evaluation.evaluationFrequency}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Evaluator Team
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.evaluation.evaluatorTeam}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Impacts Payout
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.evaluation.impactsPayout ? "Yes" : "No"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Impacts Reputation
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.evaluation.impactsReputation ? "Yes" : "No"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Comments Visible to Client
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.evaluation.commentsVisibleToClient ? "Yes" : "No"}
               </p>
             </div>
             <div className="col-span-2">
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Evaluation Criteria
               </label>
-              <div className="rounded border bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-700">
+              <div className={readOnlyPanelClass}>
                 <ul className="list-inside list-disc space-y-1 text-sm">
                   {state.evaluation.criteria.map((criterion, index) => (
                     <li key={index}>{criterion}</li>
@@ -159,7 +170,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-gray-500 dark:text-gray-400">
+          <div className={emptyStateClass}>
             <p>No evaluation terms configured yet.</p>
             <p className="text-sm">
               Click "Configure Evaluation" to get started.
@@ -173,7 +184,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold dark:text-white">
+        <h2 className="text-xl font-semibold text-foreground">
           Configure Evaluation Terms
         </h2>
       </div>
@@ -217,7 +228,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
         </div>
 
         <div className="col-span-2 space-y-4">
-          <h3 className="text-lg font-medium dark:text-white">
+          <h3 className="text-lg font-medium text-foreground">
             Impact Settings
           </h3>
 
@@ -232,11 +243,11 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
                   impactsPayout: e.target.checked,
                 })
               }
-              className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className={checkboxClass}
             />
             <label
               htmlFor="impactsPayout"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              className={checkboxLabelClass}
             >
               Evaluation results impact payout
             </label>
@@ -253,11 +264,11 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
                   impactsReputation: e.target.checked,
                 })
               }
-              className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className={checkboxClass}
             />
             <label
               htmlFor="impactsReputation"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              className={checkboxLabelClass}
             >
               Evaluation results impact reputation
             </label>
@@ -274,11 +285,11 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
                   commentsVisibleToClient: e.target.checked,
                 })
               }
-              className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className={checkboxClass}
             />
             <label
               htmlFor="commentsVisibleToClient"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              className={checkboxLabelClass}
             >
               Evaluation comments visible to client
             </label>
@@ -291,7 +302,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
           type="submit"
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           Save Evaluation Terms
         </Button>
@@ -300,7 +311,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
           onClick={handleCancel}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-gray-600 hover:text-white"
+          className={secondaryButtonClass}
         >
           Cancel
         </Button>

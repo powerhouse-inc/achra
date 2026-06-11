@@ -6,7 +6,9 @@ export const FieldLabel = ({
 }: {
   readonly children: React.ReactNode;
 }) => (
-  <label className="block text-sm font-medium text-gray-700">{children}</label>
+  <label className="block text-sm font-medium text-foreground">
+    {children}
+  </label>
 );
 
 export const TextInput = (props: ComponentProps<"input">) => {
@@ -14,7 +16,7 @@ export const TextInput = (props: ComponentProps<"input">) => {
     <input
       {...props}
       className={twMerge(
-        "h-10 w-full rounded-md border border-gray-200 bg-white px-3 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-50 disabled:p-0",
+        "h-10 w-full rounded-md border border-input bg-background px-3 text-foreground transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-ring disabled:bg-muted disabled:p-0",
         props.className,
       )}
       type="text"

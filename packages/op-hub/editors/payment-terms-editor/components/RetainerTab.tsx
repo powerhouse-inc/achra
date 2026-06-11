@@ -16,6 +16,17 @@ import {
   type BillingFrequency,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface RetainerTabProps {
   state: PaymentTermsState;
@@ -108,14 +119,14 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
     return (
       <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             Retainer Configuration
           </h2>
           <Button
             onClick={() => setIsEditing(true)}
             color="light"
             size="sm"
-            className="cursor-pointer hover:bg-blue-600 hover:text-white"
+            className={primaryButtonClass}
           >
             {state.retainerDetails
               ? "Edit Configuration"
@@ -126,58 +137,58 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
         {state.retainerDetails ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Retainer Amount
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {`${state.retainerDetails.retainerAmount.value} ${state.retainerDetails.retainerAmount.unit}`}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Billing Frequency
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.retainerDetails.billingFrequency}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Start Date
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.retainerDetails.startDate}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 End Date
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.retainerDetails.endDate || "Ongoing"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Auto Renew
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.retainerDetails.autoRenew ? "Yes" : "No"}
               </p>
             </div>
             <div className="col-span-2">
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Services Included
               </label>
-              <div className="rounded border bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-700">
-                <p className="text-sm dark:text-white">
+              <div className={readOnlyPanelClass}>
+                <p className="text-sm text-foreground">
                   {state.retainerDetails.servicesIncluded}
                 </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-gray-500 dark:text-gray-400">
+          <div className={emptyStateClass}>
             <p>No retainer configuration set up yet.</p>
             <p className="text-sm">
               Click "Configure Retainer" to get started.
@@ -191,7 +202,7 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold dark:text-white">
+        <h2 className="text-xl font-semibold text-foreground">
           Configure Retainer
         </h2>
       </div>
@@ -272,11 +283,11 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
               onChange={(e) =>
                 setFormData({ ...formData, autoRenew: e.target.checked })
               }
-              className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className={checkboxClass}
             />
             <label
               htmlFor="autoRenew"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              className={checkboxLabelClass}
             >
               Auto-Renew Retainer
             </label>
@@ -289,7 +300,7 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
           type="submit"
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           Save Configuration
         </Button>
@@ -298,7 +309,7 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
           onClick={handleCancel}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-gray-600 hover:text-white"
+          className={secondaryButtonClass}
         >
           Cancel
         </Button>

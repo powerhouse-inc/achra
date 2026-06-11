@@ -149,6 +149,16 @@
   background-color: var(--color-slate-800);
 }
 
+/* Same treatment for the contributor-billing drive editor's shell. */
+.dark .cb-drive-shell {
+  background-color: var(--color-slate-800);
+}
+
+/* Same treatment for the network-admin drive editor's shell. */
+.dark .na-drive-shell {
+  background-color: var(--color-slate-800);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Dashboard card surface (dark mode)
    ──────────────────────────────────────────────────────────────────────────
@@ -245,6 +255,12 @@
    stylesheets and some carry `!`-important variants. Matches the convention:
    inputs/triggers = recessed --background wells, dropdown panels = --popover,
    option text = --foreground. */
+
+/* FormLabel (StringField, Textarea, DatePickerField, Checkbox, etc.)
+   hardcodes `text-gray-900` / `dark:text-gray-50` — theme to --foreground. */
+label[class*="inline-flex items-center text-sm font-medium"] {
+  color: var(--foreground) !important;
+}
 
 /* Native HTML date/time inputs: the BROWSER renders their dropdown picker UI
    (calendar popup, clock) and only themes it dark when the input declares

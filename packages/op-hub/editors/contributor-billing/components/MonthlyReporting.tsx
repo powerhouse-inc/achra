@@ -29,17 +29,17 @@ function getStatusColors(status: string | null): {
     case "final":
     case "approved":
     case "completed":
-      return { bg: "bg-green-100", text: "text-green-700" };
+      return { bg: "bg-status-success/20", text: "text-status-success" };
     case "submitted":
     case "review":
     case "in_review":
-      return { bg: "bg-blue-100", text: "text-blue-700" };
+      return { bg: "bg-status-progress/20", text: "text-status-progress" };
     case "rejected":
     case "cancelled":
-      return { bg: "bg-red-100", text: "text-red-700" };
+      return { bg: "bg-destructive/15", text: "text-destructive" };
     case "draft":
     default:
-      return { bg: "bg-amber-100", text: "text-amber-700" };
+      return { bg: "bg-status-warning/15", text: "text-status-warning" };
   }
 }
 
@@ -72,7 +72,7 @@ export function MonthlyReporting({
 
   // Get report info for a specific month
   const getReportInfo = (month: string, type: string): ReportInfo => {
-    const emptyColors = { bg: "bg-gray-100", text: "text-gray-500" };
+    const emptyColors = { bg: "bg-muted", text: "text-muted-foreground" };
     const emptyReport: ReportInfo = {
       exists: false,
       status: null,
@@ -121,16 +121,16 @@ export function MonthlyReporting({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-card rounded-xl border border-border p-6">
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 bg-purple-100 rounded-lg">
-          <Calendar className="w-5 h-5 text-purple-600" />
+        <div className="p-2 bg-primary/15 rounded-lg">
+          <Calendar className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-foreground">
             Monthly Reporting
           </h2>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             Track expense and snapshot reports for each period
           </p>
         </div>
@@ -151,32 +151,32 @@ export function MonthlyReporting({
           return (
             <div
               key={monthName}
-              className="border border-gray-100 rounded-lg p-4"
+              className="border border-border rounded-lg p-4"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-medium text-gray-900">{monthName}</h3>
+                <h3 className="font-medium text-foreground">{monthName}</h3>
                 {monthExists ? (
                   <button
                     onClick={() => handleOpenMonth(monthName)}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+                    className="text-sm text-primary hover:text-primary/80 font-medium"
                   >
                     Open Reporting
                   </button>
                 ) : (
-                  <span className="text-xs text-gray-400">
+                  <span className="text-xs text-muted-foreground">
                     Month not created
                   </span>
                 )}
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div
-                  className={`flex items-center gap-2 p-2 rounded ${expenseReport.exists ? "bg-blue-50" : "bg-gray-50"}`}
+                  className={`flex items-center gap-2 p-2 rounded ${expenseReport.exists ? "bg-primary/10" : "bg-muted"}`}
                 >
                   <FileText
-                    className={`w-4 h-4 ${expenseReport.exists ? "text-blue-600" : "text-gray-400"}`}
+                    className={`w-4 h-4 ${expenseReport.exists ? "text-primary" : "text-muted-foreground"}`}
                   />
                   <span
-                    className={`text-sm ${expenseReport.exists ? "text-blue-700" : "text-gray-500"}`}
+                    className={`text-sm ${expenseReport.exists ? "text-primary" : "text-muted-foreground"}`}
                   >
                     Expense Report
                   </span>
@@ -189,13 +189,13 @@ export function MonthlyReporting({
                   )}
                 </div>
                 <div
-                  className={`flex items-center gap-2 p-2 rounded ${snapshotReport.exists ? "bg-purple-50" : "bg-gray-50"}`}
+                  className={`flex items-center gap-2 p-2 rounded ${snapshotReport.exists ? "bg-primary/10" : "bg-muted"}`}
                 >
                   <Camera
-                    className={`w-4 h-4 ${snapshotReport.exists ? "text-purple-600" : "text-gray-400"}`}
+                    className={`w-4 h-4 ${snapshotReport.exists ? "text-primary" : "text-muted-foreground"}`}
                   />
                   <span
-                    className={`text-sm ${snapshotReport.exists ? "text-purple-700" : "text-gray-500"}`}
+                    className={`text-sm ${snapshotReport.exists ? "text-primary" : "text-muted-foreground"}`}
                   >
                     Snapshot Report
                   </span>
@@ -209,8 +209,8 @@ export function MonthlyReporting({
                 </div>
               </div>
               {!expenseReport.exists && !snapshotReport.exists && (
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded">
+                <div className="mt-3 pt-3 border-t border-border">
+                  <span className="text-xs font-medium text-status-warning bg-status-warning/15 px-2 py-1 rounded">
                     Reports pending for {monthName}
                   </span>
                 </div>

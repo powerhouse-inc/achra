@@ -11,6 +11,7 @@ import {
 } from "@powerhousedao/document-engineering";
 import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { usePHToast } from "@powerhousedao/reactor-browser";
+import { FileText } from "lucide-react";
 import { MarkdownEditor } from "./components/MarkdownEditor.js";
 
 const statusOptions = [
@@ -23,13 +24,57 @@ const statusOptions = [
   { label: "CLOSED", value: "CLOSED" },
 ];
 
+const sectionCardClass =
+  "mb-6 overflow-hidden rounded-lg border border-border bg-card shadow-sm";
+
+const fieldLabelClass = "mb-2 block text-sm font-medium text-foreground";
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "DRAFT":
+    case "CLOSED":
+      return "bg-muted text-muted-foreground";
+    case "OPEN_FOR_PROPOSALS":
+      return "bg-status-progress/15 text-status-progress";
+    case "AWARDED":
+      return "bg-status-success/15 text-status-success";
+    case "CANCELED":
+    case "NOT_AWARDED":
+      return "bg-destructive/15 text-destructive";
+    case "REQUEST_FOR_COMMMENTS":
+      return "bg-status-warning/15 text-status-warning";
+    default:
+      return "bg-muted text-muted-foreground";
+  }
+}
+
+function Section({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className={sectionCardClass}>
+      <div className="border-b border-border px-5 py-4">
+        <h3 className="text-sm font-medium text-foreground">{title}</h3>
+        {description ? (
+          <p className="mt-0.5 text-xs text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
+      <div className="p-5">{children}</div>
+    </section>
+  );
+}
+
 export default function Editor() {
   const [doc, dispatch] = useSelectedRequestForProposalsDocument();
   const toast = usePHToast();
-
   const state = doc.state.global;
 
-  // Validation function for budget range
   const validateBudgetRange = (min: number | null, max: number | null) => {
     if (min !== null && max !== null && min >= max) {
       toast?.("Minimum budget must be less than maximum budget", {
@@ -40,26 +85,46 @@ export default function Editor() {
     return true;
   };
 
+  const statusLabel =
+    statusOptions.find((o) => o.value === state.status)?.label ?? state.status;
+
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <DocumentToolbar />
-      <div className="w-full bg-gray-50">
-        <div className="mx-auto min-h-screen max-w-4xl p-6">
-          {/* Header Section */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-            <h1 className="mb-2 text-3xl font-bold text-gray-900">
-              Request for Proposals
-            </h1>
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <h1 className="text-lg font-semibold text-foreground">
+          Request for Proposals
+        </h1>
+        <span
+          className={`max-w-xs truncate rounded-full px-3 py-1 text-xs font-medium ${getStatusColor(state.status)}`}
+        >
+          {statusLabel}
+        </span>
+      </div>
+
+      <div className="flex-1 overflow-auto">
+        <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                <FileText className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  {state.title || "Untitled RFP"}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Define the RFP details, submission window, budget, and
+                  evaluation criteria.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Main Form Section */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
+          <Section title="Details" description="Code, title, and workflow status">
             <div className="flex flex-row gap-6">
-              {/* Code Field */}
               <div className="flex-1">
-                <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Code
-                </label>
+                <label className={fieldLabelClass}>Code</label>
                 <TextInput
                   className="w-full"
                   defaultValue={state.code || ""}
@@ -72,11 +137,8 @@ export default function Editor() {
                 />
               </div>
 
-              {/* Title Field */}
               <div className="flex-1">
-                <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Title
-                </label>
+                <label className={fieldLabelClass}>Title</label>
                 <TextInput
                   className="w-full"
                   defaultValue={state.title || ""}
@@ -89,7 +151,6 @@ export default function Editor() {
                 />
               </div>
 
-              {/* Status Field */}
               <div className="w-[150px]">
                 <Select
                   label="Status"
@@ -101,152 +162,161 @@ export default function Editor() {
                 />
               </div>
             </div>
-          </div>
+          </Section>
 
-          {/* Summary Section */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
+          <Section
+            title="Summary"
+            description="High-level overview shown to prospective bidders"
+          >
             <MarkdownEditor
               height={200}
-              label="Summary"
+              label=""
               value={state.summary || ""}
               onChange={() => {}}
               onBlur={(value) => dispatch(actions.editRfp({ summary: value }))}
             />
-          </div>
+          </Section>
 
-          {/* Submission Deadline Section */}
-          <div className="mb-6 flex flex-row justify-between rounded-lg bg-white p-6 shadow-sm">
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Submission Deadline
-              </label>
-              <div className="w-[250px]">
-                <DatePicker
-                  value={state.deadline ? new Date(state.deadline) : undefined}
-                  onChange={(e) => {
-                    const date = e.target.value
-                      ? new Date(e.target.value)
-                      : null;
-                    dispatch(
-                      actions.editRfp({ deadline: date?.toISOString() }),
-                    );
-                  }}
-                  name="submission-deadline"
-                  placeholder="Select submission deadline"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Budget Range
-              </label>
-              <div className="flex flex-row gap-2">
-                <NumberInput
-                  name="minimum-budget"
-                  defaultValue={state.budgetRange.min || undefined}
-                  onBlur={(e) => {
-                    const newMin = Number(e.target.value);
-                    if (newMin !== Number(state.budgetRange.min)) {
-                      // Validate before dispatching
-                      if (
-                        validateBudgetRange(
-                          newMin,
-                          state.budgetRange.max || null,
-                        )
-                      ) {
-                        dispatch(
-                          actions.editRfp({
-                            budgetRange: { min: newMin },
-                          }),
-                        );
-                      }
+          <Section
+            title="Submission & budget"
+            description="Deadline and optional budget range"
+          >
+            <div className="flex flex-col justify-between gap-6 lg:flex-row">
+              <div>
+                <label className={fieldLabelClass}>Submission Deadline</label>
+                <div className="w-[250px]">
+                  <DatePicker
+                    value={
+                      state.deadline ? new Date(state.deadline) : undefined
                     }
-                  }}
-                  placeholder="Minimum budget"
-                  className="w-[140px]"
-                />
-                <span className="text-gray-500">-</span>
-                <NumberInput
-                  name="maximum-budget"
-                  defaultValue={state.budgetRange.max || undefined}
-                  onBlur={(e) => {
-                    const newMax = Number(e.target.value);
-                    if (newMax !== Number(state.budgetRange.max)) {
-                      // Validate before dispatching
-                      if (
-                        validateBudgetRange(
-                          state.budgetRange.min || null,
-                          newMax,
-                        )
-                      ) {
-                        dispatch(
-                          actions.editRfp({
-                            budgetRange: { max: newMax },
-                          }),
-                        );
-                      }
-                    }
-                  }}
-                  placeholder="Maximum budget"
-                  className="w-[140px]"
-                />
-                <Select
-                  placeholder="Currency"
-                  options={[
-                    "USD",
-                    "EUR",
-                    "GBP",
-                    "JPY",
-                    "CHF",
-                    "CNY",
-                    "DKK",
-                    "USDC",
-                    "USDS",
-                    "DAI",
-                  ].map((currency) => ({ label: currency, value: currency }))}
-                  value={state.budgetRange.currency || ""}
-                  onChange={(value) => {
-                    if (value !== state.budgetRange.currency) {
+                    onChange={(e) => {
+                      const date = e.target.value
+                        ? new Date(e.target.value)
+                        : null;
                       dispatch(
-                        actions.editRfp({
-                          budgetRange: { currency: value as string },
-                        }),
+                        actions.editRfp({ deadline: date?.toISOString() }),
                       );
-                    }
-                  }}
-                  className="w-[115px]"
-                />
+                    }}
+                    name="submission-deadline"
+                    placeholder="Select submission deadline"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className={fieldLabelClass}>Budget Range</label>
+                <div className="flex flex-row flex-wrap items-center gap-2">
+                  <NumberInput
+                    name="minimum-budget"
+                    defaultValue={state.budgetRange.min || undefined}
+                    onBlur={(e) => {
+                      const newMin = Number(e.target.value);
+                      if (newMin !== Number(state.budgetRange.min)) {
+                        if (
+                          validateBudgetRange(
+                            newMin,
+                            state.budgetRange.max || null,
+                          )
+                        ) {
+                          dispatch(
+                            actions.editRfp({
+                              budgetRange: { min: newMin },
+                            }),
+                          );
+                        }
+                      }
+                    }}
+                    placeholder="Minimum budget"
+                    className="w-[140px]"
+                  />
+                  <span className="text-muted-foreground">-</span>
+                  <NumberInput
+                    name="maximum-budget"
+                    defaultValue={state.budgetRange.max || undefined}
+                    onBlur={(e) => {
+                      const newMax = Number(e.target.value);
+                      if (newMax !== Number(state.budgetRange.max)) {
+                        if (
+                          validateBudgetRange(
+                            state.budgetRange.min || null,
+                            newMax,
+                          )
+                        ) {
+                          dispatch(
+                            actions.editRfp({
+                              budgetRange: { max: newMax },
+                            }),
+                          );
+                        }
+                      }
+                    }}
+                    placeholder="Maximum budget"
+                    className="w-[140px]"
+                  />
+                  <Select
+                    placeholder="Currency"
+                    options={[
+                      "USD",
+                      "EUR",
+                      "GBP",
+                      "JPY",
+                      "CHF",
+                      "CNY",
+                      "DKK",
+                      "USDC",
+                      "USDS",
+                      "DAI",
+                    ].map((currency) => ({
+                      label: currency,
+                      value: currency,
+                    }))}
+                    value={state.budgetRange.currency || ""}
+                    onChange={(value) => {
+                      if (value !== state.budgetRange.currency) {
+                        dispatch(
+                          actions.editRfp({
+                            budgetRange: { currency: value as string },
+                          }),
+                        );
+                      }
+                    }}
+                    className="w-[115px]"
+                  />
+                </div>
               </div>
             </div>
-          </div>
+          </Section>
 
-          {/* Eligibility Criteria Section */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
+          <Section
+            title="Eligibility criteria"
+            description="Who may submit proposals"
+          >
             <MarkdownEditor
               height={200}
-              label="Eligibility Criteria"
+              label=""
               value={state.eligibilityCriteria || ""}
               onChange={() => {}}
               onBlur={(value) =>
                 dispatch(actions.editRfp({ eligibilityCriteria: value }))
               }
             />
-          </div>
+          </Section>
 
-          {/* Evaluation Criteria Section */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
+          <Section
+            title="Evaluation criteria"
+            description="How proposals will be assessed"
+          >
             <MarkdownEditor
               height={200}
-              label="Evaluation Criteria"
+              label=""
               value={state.evaluationCriteria || ""}
               onChange={() => {}}
               onBlur={(value) =>
                 dispatch(actions.editRfp({ evaluationCriteria: value }))
               }
             />
-          </div>
+          </Section>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -187,16 +187,16 @@ export function BillingOverview({
     return (
       <div>
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Billing</h1>
-          <p className="text-gray-600">
+          <h1 className="text-2xl font-bold text-foreground">Billing</h1>
+          <p className="text-muted-foreground">
             Manage monthly billing, payments, and reports
           </p>
         </div>
-        <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+        <div className="bg-card rounded-lg border border-border p-8 text-center">
           <div className="animate-pulse">
-            <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-4" />
-            <div className="h-5 bg-gray-200 rounded w-32 mx-auto mb-2" />
-            <div className="h-4 bg-gray-100 rounded w-48 mx-auto" />
+            <div className="w-12 h-12 bg-muted rounded-full mx-auto mb-4" />
+            <div className="h-5 bg-muted rounded w-32 mx-auto mb-2" />
+            <div className="h-4 bg-muted rounded w-48 mx-auto" />
           </div>
         </div>
       </div>
@@ -207,44 +207,48 @@ export function BillingOverview({
     <div>
       {/* Page Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Billing</h1>
-        <p className="text-gray-600">
+        <h1 className="text-2xl font-bold text-foreground">Billing</h1>
+        <p className="text-muted-foreground">
           Manage monthly billing, payments, and reports
         </p>
       </div>
 
       {/* Payment Stats */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-card rounded-xl border border-border p-6 mb-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <CreditCard className="w-5 h-5 text-blue-600" />
+          <div className="p-2 bg-primary/15 rounded-lg">
+            <CreditCard className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-foreground">
               Payment Summary
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Overview of all invoices across billing months
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <div className="bg-gray-50 rounded-lg p-3">
+          <div className="bg-muted rounded-lg p-3">
             <div className="flex items-center gap-2 mb-1">
-              <FileText className="w-4 h-4 text-gray-500" />
-              <span className="text-sm text-gray-600">Total Invoices</span>
+              <FileText className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">
+                Total Invoices
+              </span>
             </div>
-            <p className="text-xl font-bold text-gray-900">
+            <p className="text-xl font-bold text-foreground">
               {paymentStats.totalInvoices}
             </p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3">
+          <div className="bg-muted rounded-lg p-3">
             <div className="flex items-center gap-2 mb-1">
-              <CreditCard className="w-4 h-4 text-gray-500" />
-              <span className="text-sm text-gray-600">Total Amount</span>
+              <CreditCard className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm text-muted-foreground">
+                Total Amount
+              </span>
             </div>
-            <p className="text-xl font-bold text-gray-900">
+            <p className="text-xl font-bold text-foreground">
               $
               {paymentStats.totalAmount.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
@@ -252,36 +256,36 @@ export function BillingOverview({
               })}
             </p>
           </div>
-          <div className="bg-amber-50 rounded-lg p-3">
-            <span className="text-sm text-amber-600">Pending</span>
-            <p className="text-xl font-bold text-amber-700">
+          <div className="bg-status-warning/15 rounded-lg p-3">
+            <span className="text-sm text-status-warning">Pending</span>
+            <p className="text-xl font-bold text-status-warning">
               {paymentStats.pendingCount}
             </p>
           </div>
-          <div className="bg-green-50 rounded-lg p-3">
-            <span className="text-sm text-green-600">Paid</span>
-            <p className="text-xl font-bold text-green-700">
+          <div className="bg-status-success/20 rounded-lg p-3">
+            <span className="text-sm text-status-success">Paid</span>
+            <p className="text-xl font-bold text-status-success">
               {paymentStats.paidCount}
             </p>
           </div>
           <div
-            className={`${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "bg-green-50" : "bg-amber-50"} rounded-lg p-3`}
+            className={`${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "bg-status-success/20" : "bg-status-warning/15"} rounded-lg p-3`}
           >
             <div className="flex items-center gap-2 mb-1">
               {reportingCompleteness.total > 0 &&
               reportingCompleteness.complete === reportingCompleteness.total ? (
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
+                <CheckCircle2 className="w-4 h-4 text-status-success" />
               ) : (
-                <AlertTriangle className="w-4 h-4 text-amber-500" />
+                <AlertTriangle className="w-4 h-4 text-status-warning" />
               )}
               <span
-                className={`text-sm ${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "text-green-600" : "text-amber-600"}`}
+                className={`text-sm ${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "text-status-success" : "text-status-warning"}`}
               >
                 Reports Complete
               </span>
             </div>
             <p
-              className={`text-xl font-bold ${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "text-green-700" : "text-amber-700"}`}
+              className={`text-xl font-bold ${reportingCompleteness.total > 0 && reportingCompleteness.complete === reportingCompleteness.total ? "text-status-success" : "text-status-warning"}`}
             >
               {reportingCompleteness.complete}/{reportingCompleteness.total}
             </p>
@@ -291,10 +295,10 @@ export function BillingOverview({
 
       {/* Action Items */}
       {actionItems.length > 0 && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+        <div className="bg-status-warning/15 border border-status-warning/30 rounded-xl p-4 mb-6">
           <div className="flex items-center gap-2 mb-3">
-            <AlertTriangle className="w-4 h-4 text-amber-600" />
-            <span className="text-sm font-semibold text-amber-800">
+            <AlertTriangle className="w-4 h-4 text-status-warning" />
+            <span className="text-sm font-semibold text-status-warning">
               Needs attention
             </span>
           </div>
@@ -304,14 +308,14 @@ export function BillingOverview({
                 {item.folderInfo && onFolderSelect ? (
                   <button
                     type="button"
-                    className="w-full flex items-center justify-between text-left text-sm text-amber-900 hover:bg-amber-100 rounded px-2 py-1.5 transition-colors"
+                    className="w-full flex items-center justify-between text-left text-sm text-foreground hover:bg-status-warning/25 rounded px-2 py-1.5 transition-colors"
                     onClick={() => onFolderSelect(item.folderInfo!)}
                   >
                     <span>• {item.label}</span>
-                    <ChevronRight className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                    <ChevronRight className="w-4 h-4 text-status-warning flex-shrink-0" />
                   </button>
                 ) : (
-                  <span className="text-sm text-amber-900 px-2 py-1.5 block">
+                  <span className="text-sm text-foreground px-2 py-1.5 block">
                     • {item.label}
                   </span>
                 )}

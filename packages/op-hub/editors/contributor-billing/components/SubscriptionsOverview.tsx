@@ -58,7 +58,7 @@ function FolderNameInput({
           onCancel();
         }
       }}
-      className="text-gray-800 bg-transparent border-b border-gray-400 outline-none px-1 py-0.5 text-sm min-w-[100px]"
+      className="text-foreground bg-transparent border-b border-input outline-none px-1 py-0.5 text-sm min-w-[100px]"
       placeholder="New Folder"
     />
   );
@@ -111,11 +111,11 @@ function SubscriptionsBreadcrumbs({ rootFolderId }: { rootFolderId: string }) {
   };
 
   return (
-    <div className="flex h-9 flex-row items-center gap-2 text-gray-500 border-b border-gray-200 pb-3">
+    <div className="flex h-9 flex-row items-center gap-2 text-muted-foreground border-b border-border pb-3">
       {visiblePath.map((node) => (
         <Fragment key={node.id}>
           <div
-            className="transition-colors last-of-type:text-gray-800 hover:text-gray-800 cursor-pointer"
+            className="transition-colors last-of-type:text-foreground hover:text-foreground cursor-pointer"
             onClick={() => setSelectedNode(node.id)}
             role="button"
           >
@@ -130,7 +130,7 @@ function SubscriptionsBreadcrumbs({ rootFolderId }: { rootFolderId: string }) {
         ) : (
           <button
             type="button"
-            className="ml-1 flex items-center justify-center gap-2 rounded-md bg-gray-50 px-2 py-1.5 transition-colors hover:bg-gray-200 hover:text-gray-800"
+            className="ml-1 flex items-center justify-center gap-2 rounded-md bg-muted px-2 py-1.5 transition-colors hover:bg-accent hover:text-accent-foreground"
             onClick={handleAddNew}
           >
             <Plus size={14} />
@@ -179,7 +179,9 @@ export function SubscriptionsOverview() {
   if (!subscriptionsFolder) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-gray-500">Setting up Subscriptions folder...</div>
+        <div className="text-muted-foreground">
+          Setting up Subscriptions folder...
+        </div>
       </div>
     );
   }
@@ -196,13 +198,13 @@ export function SubscriptionsOverview() {
       <div className="text-2xl font-bold text-center mb-4">Subscriptions</div>
       <div className="space-y-6 px-6">
         {/* Create Document Buttons */}
-        <div className="flex gap-2 justify-center pb-4 border-b border-gray-200">
+        <div className="flex gap-2 justify-center pb-4 border-b border-border">
           <button
             type="button"
             onClick={() =>
               showCreateDocumentModal("powerhouse/resource-instance")
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-xs border border-gray-300"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-muted text-foreground rounded-md hover:bg-accent transition-colors text-xs border border-border"
           >
             <Plus size={14} />
             New Resource Instance
@@ -212,7 +214,7 @@ export function SubscriptionsOverview() {
             onClick={() =>
               showCreateDocumentModal("powerhouse/subscription-instance")
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-xs border border-gray-300"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-muted text-foreground rounded-md hover:bg-accent transition-colors text-xs border border-border"
           >
             <Plus size={14} />
             New Subscription Instance
@@ -223,7 +225,9 @@ export function SubscriptionsOverview() {
 
         {hasFolders && (
           <div>
-            <h3 className="mb-2 text-sm font-bold text-gray-600">Folders</h3>
+            <h3 className="mb-2 text-sm font-bold text-muted-foreground">
+              Folders
+            </h3>
             <div className="flex flex-wrap gap-4">
               {folderNodes.map((folderNode) => (
                 <FolderItem key={folderNode.id} folderNode={folderNode} />
@@ -234,7 +238,7 @@ export function SubscriptionsOverview() {
 
         {hasFiles && (
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-gray-600">
+            <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
               Documents
             </h3>
             <div className="flex flex-wrap gap-4">
@@ -247,7 +251,7 @@ export function SubscriptionsOverview() {
 
         {isEmpty && (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="text-gray-400 mb-2">
+            <div className="text-muted-foreground mb-2">
               <svg
                 className="w-16 h-16 mx-auto"
                 fill="none"
@@ -262,7 +266,7 @@ export function SubscriptionsOverview() {
                 />
               </svg>
             </div>
-            <p className="text-gray-500 text-sm">
+            <p className="text-muted-foreground text-sm">
               No subscriptions yet. Add documents to this folder to get started.
             </p>
           </div>

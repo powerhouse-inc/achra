@@ -199,7 +199,9 @@ export function ExpenseReports() {
 
   return (
     <div>
-      <div className="text-2xl font-bold text-center mb-4 text-foreground">Expense Reports</div>
+      <div className="text-2xl font-bold text-center mb-4 text-foreground">
+        Expense Reports
+      </div>
       <div className="space-y-6 px-6">
         {/* Stats section - only shown when there are expense reports */}
         {hasExpenseReports && (

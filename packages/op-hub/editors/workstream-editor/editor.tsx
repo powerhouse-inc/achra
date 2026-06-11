@@ -34,6 +34,7 @@ import { useSelectedWorkstreamDocument } from "document-models/workstream";
 import type { Proposal } from "document-models/workstream";
 import type { FileNode } from "@powerhousedao/shared/document-drive";
 import { DocumentToolbar } from "@powerhousedao/design-system/connect";
+import { Workflow } from "lucide-react";
 
 import {
   type ScopeOfWorkState,
@@ -54,11 +55,21 @@ const statusOptions: Array<{ value: WorkstreamStatus; label: string }> = [
 ];
 
 const statusStyles = {
-  DRAFT: "bg-[#fcdfbd] text-[#ffa033] rounded px-2 py-1 font-semibold",
-  SUBMITTED: "bg-[#bfdffd] text-[#339cff] rounded px-2 py-1 font-semibold",
-  ACCEPTED: "bg-[#c8ecd1] text-[#4fc86f] rounded px-2 py-1 font-semibold",
-  REJECTED: "bg-[#ffaea8] text-[#de3333] rounded px-2 py-1 font-semibold",
+  DRAFT: "bg-status-warning/15 text-status-warning rounded px-2 py-1 font-semibold",
+  SUBMITTED:
+    "bg-status-progress/15 text-status-progress rounded px-2 py-1 font-semibold",
+  ACCEPTED:
+    "bg-status-success/15 text-status-success rounded px-2 py-1 font-semibold",
+  REJECTED: "bg-destructive/15 text-destructive rounded px-2 py-1 font-semibold",
 };
+
+const fieldLabelClass = "mb-2 block text-sm font-medium text-foreground";
+const sectionCardClass =
+  "mb-6 overflow-hidden rounded-lg border border-border bg-card shadow-sm";
+const secondaryButtonClass =
+  "mt-1 rounded-md border border-border bg-muted px-3 py-1.5 text-sm text-foreground hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50";
+const primaryButtonClass =
+  "bg-primary text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50";
 
 export default function Editor() {
   const [doc, dispatch] = useSelectedWorkstreamDocument() as [
@@ -531,12 +542,12 @@ export default function Editor() {
         renderCell: (value: Proposal["author"]["name"]) => {
           if (value === undefined) {
             return (
-              <div className="text-left text-xs font-light italic text-gray-500">
+              <div className="text-left text-xs font-light italic text-muted-foreground">
                 + Double-click to add new author
               </div>
             );
           }
-          return <div className="text-left">{value}</div>;
+          return <div className="text-left text-foreground">{value}</div>;
         },
       },
       {
@@ -749,23 +760,44 @@ export default function Editor() {
     ],
   );
 
-  return (
-    <div className="w-full bg-gray-50">
-      <DocumentToolbar />
-      <div className="mx-auto min-h-screen max-w-4xl p-6">
-        {/* Header Section */}
-        <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">Workstream</h1>
-        </div>
+  const currentStatusLabel =
+    statusOptions.find((o) => o.value === state.status)?.label ?? state.status;
 
-        {/* Main Form Section */}
-        <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-          <div className="flex flex-row gap-6">
-            {/* Code Field */}
+  return (
+    <div className="flex h-screen flex-col">
+      <DocumentToolbar />
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <h1 className="text-lg font-semibold text-foreground">Workstream</h1>
+        <span className="max-w-md truncate rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+          {currentStatusLabel}
+        </span>
+      </div>
+
+      <div className="flex-1 overflow-auto">
+        <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                <Workflow className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  {state.title || "Untitled workstream"}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Manage workstream details, client info, RFP, and proposals.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <section className={sectionCardClass}>
+            <div className="border-b border-border px-5 py-4">
+              <h3 className="text-sm font-medium text-foreground">Details</h3>
+            </div>
+            <div className="flex flex-row gap-6 p-5">
             <div className="flex-1">
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Code
-              </label>
+              <label className={fieldLabelClass}>Code</label>
               <TextInput
                 className="w-full"
                 defaultValue={state.code || ""}
@@ -778,11 +810,8 @@ export default function Editor() {
               />
             </div>
 
-            {/* Title Field */}
             <div className="flex-1">
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Title
-              </label>
+              <label className={fieldLabelClass}>Title</label>
               <TextInput
                 className="w-full"
                 defaultValue={state.title || ""}
@@ -795,7 +824,6 @@ export default function Editor() {
               />
             </div>
 
-            {/* Status Field */}
             <div className="flex-1">
               <Select
                 label="Status"
@@ -806,23 +834,20 @@ export default function Editor() {
                 }
               />
             </div>
-          </div>
-        </div>
+            </div>
+          </section>
 
-        {/* Client Section */}
-        <div className="rounded-lg border border-gray-300 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-medium text-gray-900">Client</h2>
-
-          <div className="space-y-4">
-            {/* Client ID Field */}
+          <section className={sectionCardClass}>
+            <div className="border-b border-border px-5 py-4">
+              <h3 className="text-sm font-medium text-foreground">Client</h3>
+            </div>
+            <div className="space-y-4 p-5">
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Client ID
-              </label>
+              <label className={fieldLabelClass}>Client ID</label>
               <div className="flex items-center space-x-2">
                 <div className="flex-shrink-0">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="h-5 w-5 text-muted-foreground"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -845,7 +870,7 @@ export default function Editor() {
                 />
                 <div className="flex-shrink-0">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="h-5 w-5 text-muted-foreground"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -859,11 +884,8 @@ export default function Editor() {
               </div>
             </div>
 
-            {/* Client Name Field */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Name
-              </label>
+              <label className={fieldLabelClass}>Name</label>
               <TextInput
                 className="w-full"
                 defaultValue={state.client?.name || ""}
@@ -876,15 +898,12 @@ export default function Editor() {
               />
             </div>
 
-            {/* Client Icon Field */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Icon
-              </label>
+              <label className={fieldLabelClass}>Icon</label>
               <div className="flex items-center space-x-2">
                 <div className="flex-shrink-0">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="h-5 w-5 text-muted-foreground"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -910,7 +929,7 @@ export default function Editor() {
                     <img
                       src={state.client?.icon}
                       alt="Client Icon"
-                      className="h-10 w-10 object-cover"
+                      className="h-10 w-10 rounded-lg border border-border object-cover"
                     />
                   ) : (
                     ""
@@ -918,11 +937,16 @@ export default function Editor() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+            </div>
+          </section>
 
-        <div className="mb-6 mt-6 rounded-lg bg-white p-6 shadow-sm">
-          <h1 className="mb-4 text-2xl text-gray-900">Request for Proposal</h1>
+          <section className={sectionCardClass}>
+            <div className="border-b border-border px-5 py-4">
+              <h3 className="text-sm font-medium text-foreground">
+                Request for Proposal
+              </h3>
+            </div>
+            <div className="p-5">
           <div className="flex w-full flex-row items-center gap-8">
             <div className="w-[350px]">
               <OIDInput
@@ -995,7 +1019,7 @@ export default function Editor() {
             <div className="mt-4">
               <Button
                 color="light"
-                className="cursor-pointer hover:bg-gray-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                className={`cursor-pointer ${primaryButtonClass}`}
                 title={"Save Workstream"}
                 aria-description={"Save Workstream"}
                 disabled={isCreatingRfp}
@@ -1016,19 +1040,20 @@ export default function Editor() {
                 {isCreatingRfp ? "Creating..." : "Create RFP Document"}
               </Button>
             </div>
-          ) : (
-            ""
-          )}
-        </div>
+          ) : null}
+            </div>
+          </section>
 
-        {/* Initial Proposal Section */}
         {rfpDocument ? (
           <div>
             {state.initialProposal ? (
-              <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-                <h1 className="mb-4 text-2xl text-gray-900">
-                  Initial Proposal
-                </h1>
+              <section className={sectionCardClass}>
+                <div className="border-b border-border px-5 py-4">
+                  <h3 className="text-sm font-medium text-foreground">
+                    Initial Proposal
+                  </h3>
+                </div>
+                <div className="p-5">
                 <div className="mb-6 flex flex-row gap-4">
                   <div className="flex-1">
                     <TextInput
@@ -1165,7 +1190,7 @@ export default function Editor() {
                       }
                     />
                     <button
-                      className="mt-1 rounded-md bg-gray-100 p-1 text-sm hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      className={secondaryButtonClass}
                       disabled={isCreatingSow}
                       onClick={async () => {
                         console.log("Creating sow");
@@ -1266,7 +1291,7 @@ export default function Editor() {
                       }
                     />
                     <button
-                      className="mt-1 rounded-md bg-gray-100 p-1 text-sm hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
+                      className={secondaryButtonClass}
                       disabled={isCreatingPaymentTerms}
                       onClick={async () => {
                         console.log("Creating payment terms");
@@ -1290,9 +1315,9 @@ export default function Editor() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="mb-4 text-lg font-medium text-gray-900">
+                  <h4 className="mb-4 text-sm font-medium text-foreground">
                     Alternative Proposals
-                  </h2>
+                  </h4>
                   <ObjectSetTable
                     columns={alternativeProposalsColumns}
                     data={alternativeProposalsData}
@@ -1323,16 +1348,19 @@ export default function Editor() {
                     }}
                   />
                 </div>
-              </div>
+                </div>
+              </section>
             ) : (
-              <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-                <h1 className="mb-4 text-2xl text-gray-900">
-                  Initial Proposal
-                </h1>
-                <div className="mt-4">
+              <section className={sectionCardClass}>
+                <div className="border-b border-border px-5 py-4">
+                  <h3 className="text-sm font-medium text-foreground">
+                    Initial Proposal
+                  </h3>
+                </div>
+                <div className="p-5">
                   <Button
                     color="light"
-                    className="cursor-pointer hover:bg-gray-600 hover:text-white"
+                    className={`cursor-pointer ${primaryButtonClass}`}
                     title={"Create Initial Proposal"}
                     aria-description={"Create Initial Proposal"}
                     onClick={() => {
@@ -1347,10 +1375,11 @@ export default function Editor() {
                     Create Initial Proposal
                   </Button>
                 </div>
-              </div>
+              </section>
             )}
           </div>
         ) : null}
+        </div>
       </div>
     </div>
   );

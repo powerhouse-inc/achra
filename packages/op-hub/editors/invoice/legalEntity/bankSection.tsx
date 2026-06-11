@@ -174,22 +174,22 @@ export const LegalEntityBankSection = forwardRef(
       <div
         {...divProps}
         className={twMerge(
-          "rounded-lg border border-gray-200 bg-white p-6",
+          "rounded-lg border border-border bg-card p-6",
           props.className,
         )}
         ref={ref}
       >
-        <h3 className="mb-4 text-lg font-semibold text-gray-900">
+        <h3 className="mb-4 text-lg font-semibold text-foreground">
           Banking Information
         </h3>
         <div className="space-y-6">
           <div className="space-y-4">
             <div className="space-y-2">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-foreground mb-1">
                   Account Number
                   {isValidIBAN(localState.accountNum ?? "") && (
-                    <span className="ml-2 text-green-600 font-medium">
+                    <span className="ml-2 text-status-success font-medium">
                       IBAN
                     </span>
                   )}
@@ -346,7 +346,7 @@ export const LegalEntityBankSection = forwardRef(
                 <div className="space-y-2">
                   {localState.country === "US" ? (
                     <>
-                      <label className="mb-2 block text-sm font-medium text-gray-700">
+                      <label className="mb-2 block text-sm font-medium text-foreground">
                         State/Province
                       </label>
                       <Select
@@ -412,20 +412,20 @@ export const LegalEntityBankSection = forwardRef(
             <label className="flex items-center space-x-2">
               <input
                 checked={showIntermediary}
-                className="size-4 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                className="size-4 rounded border-input text-primary focus:ring-2 focus:ring-ring"
                 id="showIntermediary"
                 onChange={handleIntermediaryToggle}
                 type="checkbox"
               />
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium text-foreground">
                 Include Intermediary Bank
               </span>
             </label>
           </div>
 
           {showIntermediary ? (
-            <div className="bg-blue-50 mt-4 space-y-6 rounded-lg border border-blue-100 p-6">
-              <h3 className="text-lg font-semibold text-gray-900">
+            <div className="bg-primary/10 mt-4 space-y-6 rounded-lg border border-primary/30 p-6">
+              <h3 className="text-lg font-semibold text-foreground">
                 Intermediary Bank Details
               </h3>
               <div className="space-y-6">
@@ -586,7 +586,7 @@ export const LegalEntityBankSection = forwardRef(
                       <div className="space-y-2">
                         {localState.countryIntermediary === "US" ? (
                           <>
-                            <label className="mb-2 block text-sm font-medium text-gray-700">
+                            <label className="mb-2 block text-sm font-medium text-foreground">
                               State/Province
                             </label>
                             <Select

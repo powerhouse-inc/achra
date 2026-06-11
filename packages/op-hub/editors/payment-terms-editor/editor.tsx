@@ -1,5 +1,6 @@
 import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { useSelectedPaymentTermsDocument } from "document-models/payment-terms";
+import { FileText } from "lucide-react";
 import { BasicTermsTab } from "./components/BasicTermsTab.js";
 import { MilestonesTab } from "./components/MilestonesTab.js";
 import { ClausesTab } from "./components/ClausesTab.js";
@@ -8,25 +9,47 @@ import { RetainerTab } from "./components/RetainerTab.js";
 import { EscrowTab } from "./components/EscrowTab.js";
 import { EvaluationTab } from "./components/EvaluationTab.js";
 
+const sectionCardClass =
+  "overflow-hidden rounded-lg border border-border bg-card shadow-sm";
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "DRAFT":
+      return "bg-muted text-muted-foreground";
+    case "SUBMITTED":
+      return "bg-status-progress/15 text-status-progress";
+    case "ACCEPTED":
+      return "bg-status-success/15 text-status-success";
+    case "CANCELLED":
+      return "bg-destructive/15 text-destructive";
+    default:
+      return "bg-muted text-muted-foreground";
+  }
+}
+
+function Section({
+  title,
+  description,
+  children,
+}: {
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className={sectionCardClass}>
+      <div className="border-b border-border px-6 py-4">
+        <h2 className="text-sm font-medium text-foreground">{title}</h2>
+        <p className="mt-1 text-xs text-muted-foreground">{description}</p>
+      </div>
+      <div className="p-6">{children}</div>
+    </section>
+  );
+}
+
 export default function Editor() {
   const [doc, dispatch] = useSelectedPaymentTermsDocument();
-
   const state = doc.state.global;
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "DRAFT":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200";
-      case "SUBMITTED":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
-      case "ACCEPTED":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
-      case "CANCELLED":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
-      default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200";
-    }
-  };
 
   const totalMilestones = state.milestoneSchedule.length;
   const completedMilestones = state.milestoneSchedule.filter(
@@ -34,192 +57,143 @@ export default function Editor() {
   ).length;
 
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <DocumentToolbar />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        <div className="mx-auto max-w-7xl p-6">
-          {/* Header */}
-          <div className="mb-6 rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800">
-            <div className="flex items-start justify-between">
-              <div>
-                <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
-                  Payment Terms Document
-                </h1>
-                <p className="text-gray-600 dark:text-gray-300">
-                  Manage payment terms, milestones, and contract clauses
-                </p>
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <h1 className="text-lg font-semibold text-foreground">Payment Terms</h1>
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-medium ${getStatusColor(state.status)}`}
+        >
+          {state.status}
+        </span>
+      </div>
+
+      <div className="flex-1 overflow-auto">
+        <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                <FileText className="h-5 w-5 text-muted-foreground" />
               </div>
-              <div
-                className={`flex items-center gap-2 rounded-full px-3 py-2 font-medium ${getStatusColor(state.status)}`}
-              >
-                {state.status}
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  Payment Terms Document
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Manage payment terms, milestones, and contract clauses.
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Quick Stats */}
-            <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-                <p className="mb-1 text-sm font-medium text-gray-600 dark:text-gray-300">
-                  Payment Model
-                </p>
-                <p className="text-lg font-semibold dark:text-white">
-                  {state.paymentModel.replace(/_/g, " ")}
-                </p>
-              </div>
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-                <p className="mb-1 text-sm font-medium text-gray-600 dark:text-gray-300">
-                  Currency
-                </p>
-                <p className="text-lg font-semibold dark:text-white">
-                  {state.currency}
-                </p>
-              </div>
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-                <p className="mb-1 text-sm font-medium text-gray-600 dark:text-gray-300">
-                  Total Amount
-                </p>
-                <p className="text-lg font-semibold dark:text-white">
-                  {state.totalAmount
-                    ? `${state.totalAmount.value} ${state.totalAmount.unit}`
-                    : "Not set"}
-                </p>
-              </div>
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700">
-                <p className="mb-1 text-sm font-medium text-gray-600 dark:text-gray-300">
-                  Progress
-                </p>
-                <p className="text-lg font-semibold dark:text-white">
-                  {state.paymentModel === "MILESTONE"
-                    ? `${completedMilestones} / ${totalMilestones}`
-                    : "N/A"}
-                </p>
-              </div>
+          <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="rounded-lg border border-border bg-muted p-4">
+              <p className="mb-1 text-sm font-medium text-muted-foreground">
+                Payment Model
+              </p>
+              <p className="text-lg font-semibold text-foreground">
+                {state.paymentModel.replace(/_/g, " ")}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-muted p-4">
+              <p className="mb-1 text-sm font-medium text-muted-foreground">
+                Currency
+              </p>
+              <p className="text-lg font-semibold text-foreground">
+                {state.currency}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-muted p-4">
+              <p className="mb-1 text-sm font-medium text-muted-foreground">
+                Total Amount
+              </p>
+              <p className="text-lg font-semibold text-foreground">
+                {state.totalAmount
+                  ? `${state.totalAmount.value} ${state.totalAmount.unit}`
+                  : "Not set"}
+              </p>
+            </div>
+            <div className="rounded-lg border border-border bg-muted p-4">
+              <p className="mb-1 text-sm font-medium text-muted-foreground">
+                Progress
+              </p>
+              <p className="text-lg font-semibold text-foreground">
+                {state.paymentModel === "MILESTONE"
+                  ? `${completedMilestones} / ${totalMilestones}`
+                  : "N/A"}
+              </p>
             </div>
           </div>
 
           <div className="space-y-6">
-            {/* Basic Terms Section */}
-            <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-              <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Basic Terms
-                </h2>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                  Configure the basic payment terms and details
-                </p>
-              </div>
-              <div className="p-6">
-                <BasicTermsTab state={state} dispatch={dispatch} />
-              </div>
-            </div>
+            <Section
+              title="Basic Terms"
+              description="Configure the basic payment terms and details"
+            >
+              <BasicTermsTab state={state} dispatch={dispatch} />
+            </Section>
 
-            {/* Payment Structure Section - Conditional based on payment model */}
-            {state.paymentModel === "MILESTONE" && (
-              <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-                <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Milestone Schedule
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                    Define project milestones and payment amounts
-                  </p>
-                </div>
-                <div className="p-6">
-                  <MilestonesTab
-                    milestones={state.milestoneSchedule}
-                    dispatch={dispatch}
-                    currency={state.currency}
-                  />
-                </div>
-              </div>
-            )}
-
-            {state.paymentModel === "COST_AND_MATERIALS" && (
-              <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-                <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Cost & Materials
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                    Configure hourly rates, billing frequency, and caps
-                  </p>
-                </div>
-                <div className="p-6">
-                  <CostMaterialsTab state={state} dispatch={dispatch} />
-                </div>
-              </div>
-            )}
-
-            {state.paymentModel === "RETAINER" && (
-              <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-                <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Retainer Details
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                    Configure retainer amount, frequency, and services
-                  </p>
-                </div>
-                <div className="p-6">
-                  <RetainerTab state={state} dispatch={dispatch} />
-                </div>
-              </div>
-            )}
-
-            {/* Escrow Section */}
-            {state.escrowDetails && state.escrowDetails.releaseConditions && (
-              <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-                <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    Escrow Details
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                    Configure escrow payment arrangements
-                  </p>
-                </div>
-                <div className="p-6">
-                  <EscrowTab state={state} dispatch={dispatch} />
-                </div>
-              </div>
-            )}
-
-            {/* Clauses Section */}
-            <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-              <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Bonus & Penalty Clauses
-                </h2>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                  Add performance-based bonus and penalty conditions
-                </p>
-              </div>
-              <div className="p-6">
-                <ClausesTab
-                  bonusClauses={state.bonusClauses}
-                  penaltyClauses={state.penaltyClauses}
+            {state.paymentModel === "MILESTONE" ? (
+              <Section
+                title="Milestone Schedule"
+                description="Define project milestones and payment amounts"
+              >
+                <MilestonesTab
+                  milestones={state.milestoneSchedule}
                   dispatch={dispatch}
                   currency={state.currency}
                 />
-              </div>
-            </div>
+              </Section>
+            ) : null}
 
-            {/* Evaluation Section */}
-            <div className="rounded-lg bg-white shadow-sm dark:bg-gray-800">
-              <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Evaluation Terms
-                </h2>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                  Define performance evaluation criteria and processes
-                </p>
-              </div>
-              <div className="p-6">
-                <EvaluationTab state={state} dispatch={dispatch} />
-              </div>
-            </div>
+            {state.paymentModel === "COST_AND_MATERIALS" ? (
+              <Section
+                title="Cost & Materials"
+                description="Configure hourly rates, billing frequency, and caps"
+              >
+                <CostMaterialsTab state={state} dispatch={dispatch} />
+              </Section>
+            ) : null}
+
+            {state.paymentModel === "RETAINER" ? (
+              <Section
+                title="Retainer Details"
+                description="Configure retainer amount, frequency, and services"
+              >
+                <RetainerTab state={state} dispatch={dispatch} />
+              </Section>
+            ) : null}
+
+            {state.escrowDetails && state.escrowDetails.releaseConditions ? (
+              <Section
+                title="Escrow Details"
+                description="Configure escrow payment arrangements"
+              >
+                <EscrowTab state={state} dispatch={dispatch} />
+              </Section>
+            ) : null}
+
+            <Section
+              title="Bonus & Penalty Clauses"
+              description="Add performance-based bonus and penalty conditions"
+            >
+              <ClausesTab
+                bonusClauses={state.bonusClauses}
+                penaltyClauses={state.penaltyClauses}
+                dispatch={dispatch}
+                currency={state.currency}
+              />
+            </Section>
+
+            <Section
+              title="Evaluation Terms"
+              description="Define performance evaluation criteria and processes"
+            >
+              <EvaluationTab state={state} dispatch={dispatch} />
+            </Section>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

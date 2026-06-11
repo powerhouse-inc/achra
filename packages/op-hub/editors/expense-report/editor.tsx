@@ -494,7 +494,9 @@ export default function Editor() {
                         />
                       </Form>
                     </div>
-                    <span className="self-center text-muted-foreground">to</span>
+                    <span className="self-center text-muted-foreground">
+                      to
+                    </span>
                     <div className="relative isolate">
                       <Form
                         key={`endDate-${openToDate}`}

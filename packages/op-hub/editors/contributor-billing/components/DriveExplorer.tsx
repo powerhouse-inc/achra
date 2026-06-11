@@ -136,14 +136,14 @@ export function DriveExplorer({ children }: EditorProps) {
 
     return (
       <div className="flex h-full items-center justify-center px-4 py-12">
-        <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200/50 bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/40 p-12 shadow-xl shadow-slate-200/50 backdrop-blur-sm">
+        <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card p-12 shadow-lg">
           {/* Decorative background elements */}
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-purple-400/20 to-indigo-400/20 blur-3xl" />
-          <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-br from-indigo-300/20 to-purple-300/20 blur-2xl" />
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-primary/20 to-purple/20 blur-3xl" />
+          <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-br from-purple/15 to-primary/15 blur-2xl" />
 
           {/* Content */}
           <div className="relative z-10 text-center">
-            <div className="mb-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 p-3 shadow-lg shadow-purple-500/30">
+            <div className="mb-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-purple p-3 shadow-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -154,24 +154,24 @@ export function DriveExplorer({ children }: EditorProps) {
                 strokeWidth={2}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-white"
+                className="text-primary-foreground"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
 
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground">
               Create your Operational Hub
             </h2>
 
-            <p className="mb-8 text-lg leading-relaxed text-slate-600">
+            <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
               Get started by creating your operational hub to manage accounts,
               billing, and financial reporting.
             </p>
 
             <form onSubmit={handleSubmit} className="mx-auto max-w-md">
               {!isValid && hubName && (
-                <div className="mb-2 text-sm text-red-500">
+                <div className="mb-2 text-sm text-destructive">
                   Document name must be valid URL characters.
                 </div>
               )}
@@ -182,13 +182,13 @@ export function DriveExplorer({ children }: EditorProps) {
                 placeholder="Operational Hub name"
                 maxLength={100}
                 disabled={isCreating}
-                className="mb-6 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder-slate-400 shadow-sm outline-none transition-all focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 disabled:opacity-50"
+                className="mb-6 w-full rounded-xl border border-input bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground shadow-sm outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:opacity-50"
               />
 
               <button
                 type="submit"
                 disabled={!isValid || isCreating}
-                className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-purple-500/40 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/50 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-lg"
+                className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary to-purple px-8 py-4 text-base font-semibold text-primary-foreground shadow-primary transition-all duration-300 hover:scale-105 active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <span>
@@ -210,7 +210,7 @@ export function DriveExplorer({ children }: EditorProps) {
                     </svg>
                   )}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-700 to-indigo-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple to-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </button>
             </form>
           </div>
@@ -220,7 +220,7 @@ export function DriveExplorer({ children }: EditorProps) {
   }
 
   return (
-    <div className="flex h-full w-full overflow-hidden">
+    <div className="ph-drive-explorer-shell cb-drive-shell flex h-full w-full overflow-hidden">
       {/* Sidebar - resizable, managed by Sidebar component */}
       <FolderTreeErrorBoundary>
         <FolderTree

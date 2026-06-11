@@ -260,7 +260,7 @@ const RequestFinance: React.FC<RequestFinanceProps> = ({
   return (
     <div>
       <button
-        className="bg-blue-500 text-black px-4 py-2 rounded-md"
+        className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90"
         onClick={handleRequestFinance}
         disabled={isLoading}
       >
@@ -276,7 +276,7 @@ const RequestFinance: React.FC<RequestFinanceProps> = ({
           <div className="direct-payment-status">
             <p>{directPaymentStatus}</p>
           </div>
-          <div className="invoice-link text-blue-900 hover:text-blue-600">
+          <div className="invoice-link text-primary hover:text-primary/80">
             <a
               href={invoiceLink}
               target="_blank"
@@ -294,13 +294,13 @@ const RequestFinance: React.FC<RequestFinanceProps> = ({
           <>
             {docState.payments[docState.payments.length - 1].issue !== "" ? (
               <div className="mt-4">
-                <p className="text-red-700 font-medium">
+                <p className="text-destructive font-medium">
                   Issue: {docState.payments[docState.payments.length - 1].issue}
                 </p>
               </div>
             ) : (
               <div className="mt-4">
-                <div className="invoice-link text-blue-900 hover:text-blue-600">
+                <div className="invoice-link text-primary hover:text-primary/80">
                   <a
                     className="view-invoice-button"
                     href={

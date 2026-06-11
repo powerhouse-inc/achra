@@ -9,7 +9,7 @@ export function EmptyState({
   description = "Create your first document or drop one here",
 }: EmptyStateProps) {
   return (
-    <div className="py-12 text-center text-gray-500">
+    <div className="py-12 text-center text-muted-foreground">
       <p className="text-lg">{title}</p>
       <p className="mt-2 text-sm">{description}</p>
     </div>

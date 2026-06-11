@@ -247,7 +247,7 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
   return (
     <div className="space-y-4">
       {tokenUnsupported && (
-        <div className="text-red-500 bg-red-50 p-3 rounded-md">
+        <div className="text-destructive bg-destructive/15 p-3 rounded-md">
           {currency} is not supported on {chainName}
         </div>
       )}
@@ -257,7 +257,7 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
         chainName !== "" &&
         !tokenUnsupported && (
           <button
-            className="bg-blue-500 text-black px-4 py-2 rounded-md hover:bg-blue-600"
+            className="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90"
             onClick={handleInvoiceToGnosis}
             disabled={isLoading}
           >
@@ -270,16 +270,18 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
         )}
 
       {error && (
-        <div className="text-red-500 bg-red-50 p-3 rounded-md">{error}</div>
+        <div className="text-destructive bg-destructive/15 p-3 rounded-md">
+          {error}
+        </div>
       )}
 
       {safeTxHash && (
-        <div className="bg-gray-50 mt-4 rounded-md space-y-2 w-full">
+        <div className="bg-muted mt-4 rounded-md space-y-2 w-full">
           <a
             href={`https://app.safe.global/transactions/queue?safe=${urlChainName}:${safeAddress}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-600 underline block w-full"
+            className="text-primary hover:text-primary/80 underline block w-full"
           >
             {linkText}
           </a>
@@ -299,13 +301,13 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
           <>
             {docState.payments[docState.payments.length - 1].issue !== "" ? (
               <div className="mt-4">
-                <p className="text-red-700 font-medium">
+                <p className="text-destructive font-medium">
                   Issue: {docState.payments[docState.payments.length - 1].issue}
                 </p>
               </div>
             ) : (
               <div className="mt-4">
-                <div className="invoice-link text-blue-900 hover:text-blue-600">
+                <div className="invoice-link text-primary hover:text-primary/80">
                   <a
                     className="view-invoice-button"
                     href={`https://app.safe.global/transactions/queue?safe=${urlChainName}:${safeAddress}`}
@@ -330,9 +332,9 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
         )}
 
       {invoiceStatusResponse && (
-        <div className="bg-gray-50 p-4 rounded-md">
-          <p className="font-medium">Payment Details:</p>
-          <p className="text-gray-700">{invoiceStatusResponse}</p>
+        <div className="bg-muted p-4 rounded-md">
+          <p className="font-medium text-foreground">Payment Details:</p>
+          <p className="text-muted-foreground">{invoiceStatusResponse}</p>
         </div>
       )}
     </div>

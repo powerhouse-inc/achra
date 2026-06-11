@@ -36,8 +36,12 @@ export const InputField = (props: InputFieldProps) => {
       onSubmit={() => {}}
       resetOnSuccessfulSubmit={true}
     >
+      {label ? (
+        <label className="mb-1 block text-sm font-medium text-foreground">
+          {label}
+        </label>
+      ) : null}
       <StringField
-        label={label}
         placeholder={placeholder}
         name="input"
         value={value}

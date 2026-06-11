@@ -13,6 +13,17 @@ import {
   type PaymentTermsState,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  dashedEmptyClass,
+  emptyStateClass,
+  fieldLabelClass,
+  formPanelClass,
+  primaryButtonClass,
+  readOnlyPanelClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface EscrowTabProps {
   state: PaymentTermsState;
@@ -77,14 +88,14 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
     return (
       <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             Escrow Configuration
           </h2>
           <Button
             onClick={() => setIsEditing(true)}
             color="light"
             size="sm"
-            className="cursor-pointer hover:bg-blue-600 hover:text-white"
+            className={primaryButtonClass}
           >
             {state.escrowDetails ? "Edit Escrow" : "Configure Escrow"}
           </Button>
@@ -93,42 +104,42 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
         {state.escrowDetails && state.escrowDetails.releaseConditions ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Amount Held
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {`${state.escrowDetails.amountHeld.value} ${state.escrowDetails.amountHeld.unit}`}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Escrow Provider
               </label>
-              <p className="text-lg dark:text-white">
+              <p className="text-lg text-foreground">
                 {state.escrowDetails.escrowProvider || "Not specified"}
               </p>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Proof of Funds Document ID
               </label>
-              <p className="text-sm font-mono dark:text-white">
+              <p className="text-sm font-mono text-foreground">
                 {state.escrowDetails.proofOfFundsDocumentId || "Not provided"}
               </p>
             </div>
             <div className="col-span-1">
-              <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label className={fieldLabelClass}>
                 Release Conditions
               </label>
-              <div className="rounded border bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-700">
-                <p className="text-sm dark:text-white">
+              <div className={readOnlyPanelClass}>
+                <p className="text-sm text-foreground">
                   {state.escrowDetails.releaseConditions}
                 </p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="py-8 text-center text-gray-500 dark:text-gray-400">
+          <div className={emptyStateClass}>
             <p>No escrow configuration set up yet.</p>
             <p className="text-sm">Click "Configure Escrow" to get started.</p>
           </div>
@@ -140,7 +151,7 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold dark:text-white">
+        <h2 className="text-xl font-semibold text-foreground">
           Configure Escrow
         </h2>
       </div>
@@ -202,7 +213,7 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
           type="submit"
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           Save Escrow Details
         </Button>
@@ -211,7 +222,7 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
           onClick={handleCancel}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-gray-600 hover:text-white"
+          className={secondaryButtonClass}
         >
           Cancel
         </Button>

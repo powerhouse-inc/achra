@@ -122,11 +122,11 @@ export const HeaderStats = ({ folderId }: HeaderStatsProps) => {
   }));
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+    <div className="bg-card rounded-lg border border-border p-4 shadow-sm">
       <TooltipProvider delayDuration={0} skipDelayDuration={0}>
         {/* Header with Currency Selector */}
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl font-semibold text-gray-900">
+          <h1 className="text-xl font-semibold text-foreground">
             Operational Hub
           </h1>
           <div className="max-w-[200px]">
@@ -142,21 +142,21 @@ export const HeaderStats = ({ folderId }: HeaderStatsProps) => {
 
         {/* Main Content - Stats */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gray-50 rounded-lg p-3">
+          <div className="bg-muted rounded-lg p-3">
             <div className="flex items-center gap-1 mb-1">
-              <h3 className="text-sm font-medium text-gray-600">
+              <h3 className="text-sm font-medium text-muted-foreground">
                 Total Expenses
               </h3>
               <Tooltip
                 content="Approximate value calculated using exchangerate-api.com. DAI + USDS are converted to USD for simplicity"
                 side="right"
               >
-                <div className="w-4 h-4 rounded-full bg-gray-300 text-white text-xs flex items-center justify-center cursor-help">
+                <div className="w-4 h-4 rounded-full bg-muted text-muted-foreground text-xs flex items-center justify-center cursor-help">
                   !
                 </div>
               </Tooltip>
             </div>
-            <p className="text-xl font-bold text-gray-900">
+            <p className="text-xl font-bold text-foreground">
               {selectedCurrency}{" "}
               {totalExpenses.toLocaleString("en-US", {
                 minimumFractionDigits: 2,
@@ -164,11 +164,11 @@ export const HeaderStats = ({ folderId }: HeaderStatsProps) => {
               })}
             </p>
           </div>
-          <div className="bg-gray-50 rounded-lg p-3">
-            <h3 className="text-sm font-medium text-gray-600 mb-1">
+          <div className="bg-muted rounded-lg p-3">
+            <h3 className="text-sm font-medium text-muted-foreground mb-1">
               Total Invoices
             </h3>
-            <p className="text-xl font-bold text-gray-900">
+            <p className="text-xl font-bold text-foreground">
               {invoices?.length}
             </p>
           </div>

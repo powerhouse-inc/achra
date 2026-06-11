@@ -46,7 +46,9 @@ export function ProfileHeader({ builderProfileDoc }: ProfileHeaderProps) {
               icon ? "hidden" : "flex"
             } items-center justify-center`}
           >
-            <span className="text-2xl font-bold text-foreground">{initials}</span>
+            <span className="text-2xl font-bold text-foreground">
+              {initials}
+            </span>
           </div>
         </div>
 
@@ -56,7 +58,9 @@ export function ProfileHeader({ builderProfileDoc }: ProfileHeaderProps) {
             {displayName}
           </h1>
           {slug && (
-            <p className="mt-1 text-base font-medium text-muted-foreground">@{slug}</p>
+            <p className="mt-1 text-base font-medium text-muted-foreground">
+              @{slug}
+            </p>
           )}
         </div>
       </div>

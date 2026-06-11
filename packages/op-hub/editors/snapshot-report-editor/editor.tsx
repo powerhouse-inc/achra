@@ -761,11 +761,15 @@ export default function Editor() {
     <div>
       <DocumentToolbar document={document} />
       <div className="p-6 max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-foreground">Snapshot Report</h1>
+        <h1 className="text-3xl font-bold mb-6 text-foreground">
+          Snapshot Report
+        </h1>
 
         {/* Report Configuration */}
         <div className="bg-card rounded-lg shadow p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-foreground">Report Configuration</h2>
+          <h2 className="text-xl font-semibold mb-4 text-foreground">
+            Report Configuration
+          </h2>
 
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -807,7 +811,9 @@ export default function Editor() {
                   }
                   className="w-full px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background text-foreground placeholder:text-muted-foreground"
                 >
-                  <option value="" className="text-muted-foreground">Select an Accounts document...</option>
+                  <option value="" className="text-muted-foreground">
+                    Select an Accounts document...
+                  </option>
                   {accountsDocuments.map((doc) => (
                     <option key={doc.header.id} value={doc.header.id}>
                       {doc.header.name ||
@@ -940,7 +946,9 @@ export default function Editor() {
         {/* Accounts Section */}
         <div className="bg-card rounded-lg shadow p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-foreground">Snapshot Accounts</h2>
+            <h2 className="text-xl font-semibold text-foreground">
+              Snapshot Accounts
+            </h2>
             <div className="flex gap-2">
               {snapshotAccounts.length > 0 && (
                 <button

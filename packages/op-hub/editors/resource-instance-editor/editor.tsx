@@ -115,7 +115,6 @@ export default function ResourceInstanceEditor() {
 
       <div className="ri-editor__container">
         {/* Mode Toggle and Import Button */}
-       
 
         {/* Instance Header */}
         <InstanceHeader document={document} dispatch={dispatch} mode={mode} />

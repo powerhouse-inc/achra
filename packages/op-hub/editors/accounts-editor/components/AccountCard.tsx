@@ -27,10 +27,10 @@ export function AccountCard({
   const [showKycMenu, setShowKycMenu] = useState(false);
 
   const accountTypeColors = {
-    Source: "bg-purple-100 text-purple-800",
-    Internal: "bg-blue-100 text-blue-800",
-    Destination: "bg-green-100 text-green-800",
-    External: "bg-orange-100 text-orange-800",
+    Source: "bg-primary/15 text-primary",
+    Internal: "bg-status-progress/20 text-status-progress",
+    Destination: "bg-status-success/20 text-status-success",
+    External: "bg-status-warning/20 text-status-warning",
   };
 
   function handleKycStatusChange(status: KycAmlStatusTypeInput) {
@@ -39,19 +39,21 @@ export function AccountCard({
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            <h3 className="text-lg font-semibold text-foreground mb-1">
               {account.name}
             </h3>
-            <p className="text-sm text-gray-600 font-mono">{account.account}</p>
+            <p className="text-sm text-muted-foreground font-mono">
+              {account.account}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => onEdit(account)}
-              className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus:outline-none"
+              className="p-2 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus:outline-none"
               title="Edit account"
               aria-label={`Edit account ${account.name}`}
             >
@@ -72,7 +74,7 @@ export function AccountCard({
             </button>
             <button
               onClick={() => onDelete(account.id)}
-              className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus:outline-none"
+              className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/15 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-destructive focus-visible:ring-offset-2 focus:outline-none"
               title="Delete account"
               aria-label={`Delete account ${account.name}`}
             >
@@ -97,7 +99,9 @@ export function AccountCard({
         <div className="space-y-3">
           {account.type && (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-500">Type:</span>
+              <span className="text-sm font-medium text-muted-foreground">
+                Type:
+              </span>
               <span
                 className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${accountTypeColors[account.type]}`}
               >
@@ -108,10 +112,10 @@ export function AccountCard({
 
           {account.budgetPath && (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-500">
+              <span className="text-sm font-medium text-muted-foreground">
                 Budget Path:
               </span>
-              <span className="text-sm text-gray-900">
+              <span className="text-sm text-foreground">
                 {account.budgetPath}
               </span>
             </div>
@@ -119,10 +123,10 @@ export function AccountCard({
 
           {account.accountTransactionsId && (
             <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-500">
+              <span className="text-sm font-medium text-muted-foreground">
                 Transactions ID:
               </span>
-              <span className="text-sm text-gray-900 font-mono">
+              <span className="text-sm text-foreground font-mono">
                 {account.accountTransactionsId}
               </span>
             </div>
@@ -130,12 +134,14 @@ export function AccountCard({
 
           {account.chain && account.chain.length > 0 && (
             <div className="flex items-start gap-2">
-              <span className="text-sm font-medium text-gray-500">Chains:</span>
+              <span className="text-sm font-medium text-muted-foreground">
+                Chains:
+              </span>
               <div className="flex flex-wrap gap-1.5">
                 {account.chain.map((chain, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-700"
+                    className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-muted text-muted-foreground"
                   >
                     {chain}
                   </span>
@@ -146,12 +152,14 @@ export function AccountCard({
 
           {account.owners && account.owners.length > 0 && (
             <div className="flex items-start gap-2">
-              <span className="text-sm font-medium text-gray-500">Owners:</span>
+              <span className="text-sm font-medium text-muted-foreground">
+                Owners:
+              </span>
               <div className="flex flex-wrap gap-1.5">
                 {account.owners.map((owner, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-indigo-100 text-indigo-700"
+                    className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-primary/15 text-primary"
                   >
                     {owner}
                   </span>
@@ -160,16 +168,16 @@ export function AccountCard({
             </div>
           )}
 
-          <div className="pt-3 border-t border-gray-100">
+          <div className="pt-3 border-t border-border">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-gray-500">
+              <span className="text-sm font-medium text-muted-foreground">
                 KYC/AML Status:
               </span>
               <div className="relative">
                 <button
                   id={`kyc-status-button-${account.id}`}
                   onClick={() => setShowKycMenu(!showKycMenu)}
-                  className="hover:opacity-80 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus:outline-none rounded"
+                  className="hover:opacity-80 transition-opacity focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus:outline-none rounded"
                   title="Update KYC/AML status"
                   aria-label={`Update KYC/AML status for ${account.name}, currently ${account.KycAmlStatus || "Not Set"}`}
                   aria-expanded={showKycMenu}
@@ -185,7 +193,7 @@ export function AccountCard({
                       aria-hidden="true"
                     />
                     <div
-                      className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-20"
+                      className="absolute right-0 mt-2 w-48 bg-popover rounded-lg shadow-lg border border-border z-20"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby={`kyc-status-button-${account.id}`}
@@ -194,10 +202,10 @@ export function AccountCard({
                         <button
                           role="menuitem"
                           onClick={() => handleKycStatusChange("PASSED")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-900 flex items-center gap-2 focus:bg-green-50 focus:text-green-900 focus:outline-none"
+                          className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-status-success/20 hover:text-status-success flex items-center gap-2 focus:bg-status-success/20 focus:text-status-success focus:outline-none"
                         >
                           <span
-                            className="w-2 h-2 rounded-full bg-green-500"
+                            className="w-2 h-2 rounded-full bg-status-success"
                             aria-hidden="true"
                           />
                           Passed
@@ -205,10 +213,10 @@ export function AccountCard({
                         <button
                           role="menuitem"
                           onClick={() => handleKycStatusChange("PENDING")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-900 flex items-center gap-2 focus:bg-yellow-50 focus:text-yellow-900 focus:outline-none"
+                          className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-status-warning/20 hover:text-status-warning flex items-center gap-2 focus:bg-status-warning/20 focus:text-status-warning focus:outline-none"
                         >
                           <span
-                            className="w-2 h-2 rounded-full bg-yellow-500"
+                            className="w-2 h-2 rounded-full bg-status-warning"
                             aria-hidden="true"
                           />
                           Pending
@@ -216,10 +224,10 @@ export function AccountCard({
                         <button
                           role="menuitem"
                           onClick={() => handleKycStatusChange("FAILED")}
-                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-900 flex items-center gap-2 focus:bg-red-50 focus:text-red-900 focus:outline-none"
+                          className="w-full text-left px-4 py-2 text-sm text-foreground hover:bg-destructive/15 hover:text-destructive flex items-center gap-2 focus:bg-destructive/15 focus:text-destructive focus:outline-none"
                         >
                           <span
-                            className="w-2 h-2 rounded-full bg-red-500"
+                            className="w-2 h-2 rounded-full bg-destructive"
                             aria-hidden="true"
                           />
                           Failed
@@ -240,13 +248,13 @@ export function AccountCard({
                     onClick={() =>
                       setSelectedNode(account.accountTransactionsId!)
                     }
-                    className="w-full bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg p-3 transition-colors text-left"
+                    className="w-full bg-status-progress/10 hover:bg-status-progress/20 border border-status-progress/30 rounded-lg p-3 transition-colors text-left"
                     aria-label={`View transaction history for ${account.name}`}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <svg
-                          className="w-5 h-5 text-blue-600"
+                          className="w-5 h-5 text-status-progress"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -260,16 +268,16 @@ export function AccountCard({
                           />
                         </svg>
                         <div>
-                          <span className="text-sm font-medium text-blue-900">
+                          <span className="text-sm font-medium text-foreground">
                             View Transaction History
                           </span>
-                          <p className="text-xs text-blue-600 mt-0.5">
+                          <p className="text-xs text-status-progress mt-0.5">
                             Transactions synced for reporting
                           </p>
                         </div>
                       </div>
                       <svg
-                        className="w-5 h-5 text-blue-600 flex-shrink-0"
+                        className="w-5 h-5 text-status-progress flex-shrink-0"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -287,9 +295,9 @@ export function AccountCard({
                 ) : (
                   // Show warning and create button if no transactions document exists
                   <div className="space-y-2">
-                    <div className="flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <div className="flex items-start gap-2 p-3 bg-status-warning/15 border border-status-warning/30 rounded-lg">
                       <svg
-                        className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5"
+                        className="w-5 h-5 text-status-warning flex-shrink-0 mt-0.5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -303,10 +311,10 @@ export function AccountCard({
                         />
                       </svg>
                       <div>
-                        <p className="text-sm font-medium text-amber-900">
+                        <p className="text-sm font-medium text-status-warning">
                           No transaction history
                         </p>
-                        <p className="text-xs text-amber-700 mt-0.5">
+                        <p className="text-xs text-muted-foreground mt-0.5">
                           Fetch transactions to enable accurate expense
                           reporting
                         </p>
@@ -315,12 +323,12 @@ export function AccountCard({
                     <Button
                       onClick={() => onCreateTransactions(account)}
                       disabled={isCreatingTransactions}
-                      className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2.5 rounded-lg font-medium shadow-sm transition-colors"
+                      className="w-full bg-status-success hover:bg-status-success/90 disabled:bg-muted disabled:text-muted-foreground text-primary-foreground px-4 py-2.5 rounded-lg font-medium shadow-sm transition-colors"
                     >
                       {isCreatingTransactions ? (
                         <span className="flex items-center justify-center gap-2">
                           <svg
-                            className="animate-spin h-4 w-4 text-white"
+                            className="animate-spin h-4 w-4 text-primary-foreground"
                             fill="none"
                             viewBox="0 0 24 24"
                             aria-hidden="true"

@@ -10,10 +10,10 @@ import {
 import type { NetworkCategory } from "document-models/network-profile";
 import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { useCallback } from "react";
+import { Globe } from "lucide-react";
 import { ImageUrlInput } from "./components/ImageUrlInput.js";
 import { ToggleableImageInput } from "./components/ToggleableImageInput.js";
 
-// Category options for the dropdown
 const categoryOptions: Array<{ value: NetworkCategory; label: string }> = [
   { value: "DEFI", label: "DeFi" },
   { value: "OSS", label: "Open Source Software" },
@@ -22,11 +22,12 @@ const categoryOptions: Array<{ value: NetworkCategory; label: string }> = [
   { value: "CHARITY", label: "Charity" },
 ];
 
+const fieldLabelClass = "mb-2 block text-sm font-medium text-foreground";
+
 export default function Editor() {
   const [doc, dispatch] = useSelectedNetworkProfileDocument();
   const state = doc.state.global;
 
-  // Handle field changes
   const handleFieldChange = useCallback(
     (field: string, value: string | string[] | null) => {
       let action;
@@ -83,179 +84,207 @@ export default function Editor() {
   );
 
   return (
-    <div className="min-h-screen w-full bg-gray-50">
+    <div className="flex h-screen flex-col">
       <DocumentToolbar />
-      <div className="mx-auto max-w-4xl p-6">
-        {/* Header Section */}
-        <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
-          <h1 className="mb-2 text-3xl font-bold text-gray-900">
-            Network Profile
-          </h1>
-        </div>
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <h1 className="text-lg font-semibold text-foreground">
+          Network Profile
+        </h1>
+        {state.category[0] ? (
+          <span className="rounded-full bg-status-progress/15 px-3 py-1 text-xs font-medium text-status-progress">
+            {categoryOptions.find((c) => c.value === state.category[0])?.label ??
+              state.category[0]}
+          </span>
+        ) : null}
+      </div>
 
-        {/* Main Form Section */}
-        <div className="rounded-lg bg-white p-6 shadow-sm">
+      <div className="flex-1 overflow-auto">
+        <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                <Globe className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  {state.name || "Network profile"}
+                </h2>
+                <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+                  Configure how this network appears across the ecosystem —
+                  branding, description, and social links.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-6">
-            {/* Network Name */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Network Name:
-              </label>
-              <TextInput
-                className="w-full"
-                defaultValue={state.name || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  if (e.target.value !== state.name) {
-                    handleFieldChange("name", e.target.value);
-                  }
-                }}
-                placeholder="Enter network name"
-              />
-            </div>
+            <section className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+              <div className="border-b border-border px-5 py-4">
+                <h3 className="text-sm font-medium text-foreground">
+                  Basic information
+                </h3>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Name, category, and public description.
+                </p>
+              </div>
+              <div className="space-y-5 p-5">
+                <div>
+                  <label className={fieldLabelClass}>Network Name</label>
+                  <TextInput
+                    className="w-full"
+                    defaultValue={state.name || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      if (e.target.value !== state.name) {
+                        handleFieldChange("name", e.target.value);
+                      }
+                    }}
+                    placeholder="Enter network name"
+                  />
+                </div>
 
-            {/* Icon URL with Dark Theme Toggle */}
-            <ToggleableImageInput
-              label="Icon:"
-              lightValue={state.icon || ""}
-              darkValue={state.darkThemeIcon || ""}
-              onLightChange={(value) => handleFieldChange("icon", value)}
-              onDarkChange={(value) =>
-                handleFieldChange("darkThemeIcon", value)
-              }
-              lightPlaceholder="icon.jpg"
-              darkPlaceholder="icon-dark.jpg"
-            />
-
-            {/* Logo URL with Dark Theme Toggle */}
-            <ToggleableImageInput
-              label="Logo:"
-              lightValue={state.logo || ""}
-              darkValue={state.darkThemeLogo || ""}
-              onLightChange={(value) => handleFieldChange("logo", value)}
-              onDarkChange={(value) =>
-                handleFieldChange("darkThemeLogo", value)
-              }
-              lightPlaceholder="logo.jpg"
-              darkPlaceholder="logo-dark.jpg"
-            />
-
-            {/* Large Logo URL */}
-            <ImageUrlInput
-              label="Large Logo:"
-              value={state.logoBig || ""}
-              onChange={(value) => handleFieldChange("logoBig", value)}
-              placeholder="LargeLogo.jpg"
-              fileSize="10MB"
-            />
-
-            {/* Website */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Website:
-              </label>
-              <TextInput
-                className="w-full"
-                defaultValue={state.website || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  const value = e.target.value || null;
-                  if (value !== state.website) {
-                    handleFieldChange("website", value);
-                  }
-                }}
-                placeholder="Enter website URL"
-              />
-            </div>
-
-            {/* Description */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Description:
-              </label>
-              <Textarea
-                className="w-full"
-                defaultValue={state.description || ""}
-                onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {
-                  if (e.target.value !== state.description) {
-                    handleFieldChange("description", e.target.value);
-                  }
-                }}
-                placeholder="Enter network description"
-                rows={4}
-              />
-            </div>
-
-            {/* Category */}
-            <div>
-              <Select
-                label="Category:"
-                options={categoryOptions}
-                value={state.category[0] || undefined}
-                onChange={(value) =>
-                  handleFieldChange("category", [value as NetworkCategory])
-                }
-              />
-            </div>
-
-            {/* Social Media Links */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-medium text-gray-900">
-                Social Media Links
-              </h3>
-
-              {/* X Link */}
-              <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
-                  X Link:
-                </label>
-                <TextInput
-                  className="w-full"
-                  defaultValue={state.x || ""}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    const value = e.target.value || null;
-                    if (value !== state.x) {
-                      handleFieldChange("x", value);
+                <div>
+                  <Select
+                    label="Category"
+                    options={categoryOptions}
+                    value={state.category[0] || undefined}
+                    onChange={(value) =>
+                      handleFieldChange("category", [value as NetworkCategory])
                     }
-                  }}
-                  placeholder="https://x.com/YourHandle"
+                  />
+                </div>
+
+                <div>
+                  <label className={fieldLabelClass}>Description</label>
+                  <Textarea
+                    className="w-full"
+                    defaultValue={state.description || ""}
+                    onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {
+                      if (e.target.value !== state.description) {
+                        handleFieldChange("description", e.target.value);
+                      }
+                    }}
+                    placeholder="Enter network description"
+                    rows={4}
+                  />
+                </div>
+
+                <div>
+                  <label className={fieldLabelClass}>Website</label>
+                  <TextInput
+                    className="w-full"
+                    defaultValue={state.website || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      const value = e.target.value || null;
+                      if (value !== state.website) {
+                        handleFieldChange("website", value);
+                      }
+                    }}
+                    placeholder="https://example.com"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+              <div className="border-b border-border px-5 py-4">
+                <h3 className="text-sm font-medium text-foreground">
+                  Branding
+                </h3>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Icons and logos for light and dark themes.
+                </p>
+              </div>
+              <div className="space-y-5 p-5">
+                <ToggleableImageInput
+                  label="Icon"
+                  lightValue={state.icon || ""}
+                  darkValue={state.darkThemeIcon || ""}
+                  onLightChange={(value) => handleFieldChange("icon", value)}
+                  onDarkChange={(value) =>
+                    handleFieldChange("darkThemeIcon", value)
+                  }
+                  lightPlaceholder="icon.jpg"
+                  darkPlaceholder="icon-dark.jpg"
+                />
+
+                <ToggleableImageInput
+                  label="Logo"
+                  lightValue={state.logo || ""}
+                  darkValue={state.darkThemeLogo || ""}
+                  onLightChange={(value) => handleFieldChange("logo", value)}
+                  onDarkChange={(value) =>
+                    handleFieldChange("darkThemeLogo", value)
+                  }
+                  lightPlaceholder="logo.jpg"
+                  darkPlaceholder="logo-dark.jpg"
+                />
+
+                <ImageUrlInput
+                  label="Large Logo"
+                  value={state.logoBig || ""}
+                  onChange={(value) => handleFieldChange("logoBig", value)}
+                  placeholder="LargeLogo.jpg"
+                  fileSize="10MB"
                 />
               </div>
+            </section>
 
-              {/* Discord Link */}
-              <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Discord Link:
-                </label>
-                <TextInput
-                  className="w-full"
-                  defaultValue={state.discord || ""}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    const value = e.target.value || null;
-                    if (value !== state.discord) {
-                      handleFieldChange("discord", value);
-                    }
-                  }}
-                  placeholder="https://discord.com/invite/YourServer"
-                />
+            <section className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+              <div className="border-b border-border px-5 py-4">
+                <h3 className="text-sm font-medium text-foreground">
+                  Social media links
+                </h3>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  Optional links shown on the network profile.
+                </p>
               </div>
+              <div className="space-y-5 p-5">
+                <div>
+                  <label className={fieldLabelClass}>X</label>
+                  <TextInput
+                    className="w-full"
+                    defaultValue={state.x || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      const value = e.target.value || null;
+                      if (value !== state.x) {
+                        handleFieldChange("x", value);
+                      }
+                    }}
+                    placeholder="https://x.com/YourHandle"
+                  />
+                </div>
 
-              {/* YouTube Link */}
-              <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
-                  YouTube Link:
-                </label>
-                <TextInput
-                  className="w-full"
-                  defaultValue={state.youtube || ""}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    const value = e.target.value || null;
-                    if (value !== state.youtube) {
-                      handleFieldChange("youtube", value);
-                    }
-                  }}
-                  placeholder="https://www.youtube.com/YourChannel"
-                />
+                <div>
+                  <label className={fieldLabelClass}>Discord</label>
+                  <TextInput
+                    className="w-full"
+                    defaultValue={state.discord || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      const value = e.target.value || null;
+                      if (value !== state.discord) {
+                        handleFieldChange("discord", value);
+                      }
+                    }}
+                    placeholder="https://discord.com/invite/YourServer"
+                  />
+                </div>
+
+                <div>
+                  <label className={fieldLabelClass}>YouTube</label>
+                  <TextInput
+                    className="w-full"
+                    defaultValue={state.youtube || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      const value = e.target.value || null;
+                      if (value !== state.youtube) {
+                        handleFieldChange("youtube", value);
+                      }
+                    }}
+                    placeholder="https://www.youtube.com/YourChannel"
+                  />
+                </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>
