@@ -6,9 +6,11 @@ import { createAuroraScene } from '@/shared/lib/hero-aurora-scene'
 
 interface AuroraCanvasProps {
   className?: string
+  /** Element the silk dims behind so text on top keeps contrast */
+  clearanceRef?: React.RefObject<HTMLElement | null>
 }
 
-function AuroraCanvas({ className }: AuroraCanvasProps) {
+function AuroraCanvas({ className, clearanceRef }: AuroraCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
 
@@ -16,8 +18,11 @@ function AuroraCanvas({ className }: AuroraCanvasProps) {
     const container = containerRef.current
     if (!container) return
 
-    const sceneHandle = createAuroraScene(container, () => {
-      setReady(true)
+    const sceneHandle = createAuroraScene(container, {
+      onFirstFrame: () => {
+        setReady(true)
+      },
+      clearanceElement: clearanceRef?.current,
     })
     if (!sceneHandle) return
 
@@ -32,7 +37,7 @@ function AuroraCanvas({ className }: AuroraCanvasProps) {
       observer.disconnect()
       sceneHandle.dispose()
     }
-  }, [])
+  }, [clearanceRef])
 
   return (
     <div

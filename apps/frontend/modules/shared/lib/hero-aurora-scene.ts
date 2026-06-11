@@ -16,6 +16,11 @@ const MAX_RIPPLES = 8
 const RIPPLE_MAX_AGE_S = 2.5
 const RIPPLE_SPAWN_INTERVAL_MS = 70
 const RIPPLE_MIN_TRAVEL_PX = 24
+// How much silk survives inside the measured content box (0 = fully cleared).
+// The box is fed to uClearance so the headline keeps contrast wherever the
+// folds drift; outside the feather the scene is untouched. Keep enough silk
+// that the cleared zone reads as a thinning, not a white hole.
+const CONTENT_CLEARANCE_MIN = 0.28
 
 const VERTEX_SHADER = /* glsl */ `
   attribute vec2 position;
@@ -39,6 +44,10 @@ const FRAGMENT_SHADER = /* glsl */ `
   uniform float uAspect;
   // cursor ripples: xy = origin in uv, z = age in seconds (< 0 inactive)
   uniform vec3 uRipples[8];
+  // content clearance box: xy = center in uv, zw = half extents in uv
+  uniform vec4 uClearance;
+  // remaining silk intensity inside the box (1.0 disables the clearance)
+  uniform float uClearanceMin;
 
   const vec3 BLUE = vec3(0.122, 0.310, 0.960);
   const vec3 VIOLET = vec3(0.478, 0.227, 1.000);
@@ -139,6 +148,14 @@ const FRAGMENT_SHADER = /* glsl */ `
       fbm(p * 1.2 + 2.8 * q + vec2(8.3, 2.8) - t * 0.2)
     );
 
+    // feathered clearance around the hero copy: distance to the measured
+    // content box (aspect-corrected so the falloff is round in pixels), with
+    // a touch of flow-field noise so the dimmed edge stays organic
+    vec2 cOver = max(abs(vUv - uClearance.xy) - uClearance.zw, vec2(0.0));
+    cOver.x *= uAspect;
+    float cDist = length(cOver) + (r.y - 0.5) * 0.05;
+    float clearance = mix(uClearanceMin, 1.0, smoothstep(0.0, 0.15, cDist));
+
     // silk pleats: slanted, vertically-elongated folds
     float pleats = fbm(vec2(
       p.x * 1.5 + p.y * 0.35 + r.x * 2.2,
@@ -201,7 +218,7 @@ const FRAGMENT_SHADER = /* glsl */ `
     // panel seams modulate the form like overlapping translucent sheets
     structure *= 0.74 + 0.26 * seamFade + 0.08 * panelShift;
     float intensity = mainMask * structure * 1.3 + wisp1 * 1.0 + wisp2 * 0.95;
-    intensity = clamp(intensity, 0.0, 1.0);
+    intensity = clamp(intensity, 0.0, 1.0) * clearance;
 
     // color: spectral mapping blue -> violet -> pink, biased by position
     float h = fbm(p * 0.7 + r * 1.0 + vec2(t * 0.4, 0.0));
@@ -248,10 +265,13 @@ const FRAGMENT_SHADER = /* glsl */ `
     // lavender haze on the faint outer regions
     col = mix(LAVENDER, col, smoothstep(0.05, 0.45, intensity));
 
-    intensity = max(intensity, haze * (1.0 - mainMask));
+    intensity = max(intensity, haze * (1.0 - mainMask) * clearance);
     // faint water-glint so the ripple rings also read on the bare canvas
     float rippleGlow = clamp(length(rippleDisp) * 40.0, 0.0, 1.0);
     intensity = clamp(intensity + rippleGlow * 0.09, 0.0, 1.0);
+    // dissolve before the bottom edge so the silk never touches the canvas
+    // boundary — otherwise it hard-cuts where the hero overlay ends
+    intensity *= smoothstep(0.0, 0.18, vUv.y);
     float alpha = pow(smoothstep(0.045, 1.0, intensity), 0.9);
     gl_FragColor = vec4(col * alpha, alpha);
   }
@@ -263,10 +283,21 @@ export interface AuroraSceneHandle {
   dispose: () => void
 }
 
+export interface AuroraSceneOptions {
+  onFirstFrame?: () => void
+  /**
+   * Element the silk should clear out of (the hero copy). Its box is measured
+   * against the container and fed to the shader, which dims the aurora inside
+   * a feathered zone around it so text on top keeps contrast.
+   */
+  clearanceElement?: HTMLElement | null
+}
+
 export function createAuroraScene(
   container: HTMLElement,
-  onFirstFrame?: () => void,
+  options: AuroraSceneOptions = {},
 ): AuroraSceneHandle | null {
+  const { onFirstFrame, clearanceElement } = options
   let renderer: Renderer
   try {
     renderer = new Renderer({
@@ -292,18 +323,37 @@ export function createAuroraScene(
   // array uniforms (Array.isArray check), silently skipping the upload.
   const rippleData: number[] = new Array<number>(MAX_RIPPLES * 3).fill(-1)
   const uRipples = { value: rippleData }
+  // zero half-extents + min 1.0 keep the clearance a no-op until measured
+  const uClearance = { value: [0.5, 0.5, 0, 0] }
+  const uClearanceMin = { value: 1 }
   const program = new Program(gl, {
     vertex: VERTEX_SHADER,
     fragment: FRAGMENT_SHADER,
     transparent: true,
     depthTest: false,
     depthWrite: false,
-    uniforms: { uTime, uAspect, uRipples },
+    uniforms: { uTime, uAspect, uRipples, uClearance, uClearanceMin },
   })
   program.setBlendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
 
   const geometry = new Triangle(gl)
   const mesh = new Mesh(gl, { geometry, program })
+
+  function measureClearance() {
+    if (!clearanceElement) return
+    const containerRect = container.getBoundingClientRect()
+    const contentRect = clearanceElement.getBoundingClientRect()
+    if (containerRect.width === 0 || containerRect.height === 0) return
+    const centerX = contentRect.left + contentRect.width / 2 - containerRect.left
+    const centerY = contentRect.top + contentRect.height / 2 - containerRect.top
+    uClearance.value = [
+      centerX / containerRect.width,
+      1 - centerY / containerRect.height,
+      contentRect.width / 2 / containerRect.width,
+      contentRect.height / 2 / containerRect.height,
+    ]
+    uClearanceMin.value = CONTENT_CLEARANCE_MIN
+  }
 
   function resize() {
     const { clientWidth, clientHeight } = container
@@ -312,10 +362,12 @@ export function createAuroraScene(
     gl.canvas.style.width = '100%'
     gl.canvas.style.height = '100%'
     uAspect.value = clientWidth / clientHeight
+    measureClearance()
   }
 
   const resizeObserver = new ResizeObserver(resize)
   resizeObserver.observe(container)
+  if (clearanceElement) resizeObserver.observe(clearanceElement)
 
   // spawn ripples along the cursor path; events arrive on the hero section
   // because the canvas itself sits in a pointer-events-none layer

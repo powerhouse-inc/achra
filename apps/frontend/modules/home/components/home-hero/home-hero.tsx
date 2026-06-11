@@ -4,21 +4,31 @@ import { Button } from '@achra/ui/button'
 import { BlurText } from '@achra/ui/react-bits/blur-text'
 import { motion } from 'motion/react'
 import Link from 'next/link'
+import { useRef } from 'react'
 import { HeroAurora } from '@/shared/components/hero-aurora'
 import { SpotlightGrid } from '@/shared/components/spotlight-grid'
 
 function HomeHero() {
+  // the aurora dims behind this block so the copy keeps contrast
+  const contentRef = useRef<HTMLDivElement>(null)
+
   return (
     <section
-      className="bg-background relative flex min-h-svh w-full items-center justify-center overflow-x-clip px-4 py-10 sm:px-6 md:px-8"
+      className="relative flex min-h-svh w-full items-center justify-center overflow-x-clip px-4 py-10 sm:px-6 md:px-8"
       aria-labelledby="home-hero-heading"
     >
       <div className="absolute inset-0 -bottom-20 z-0 -mt-24 overflow-visible" aria-hidden>
-        <HeroAurora className="absolute inset-0 -top-24 bottom-0 sm:-top-28" />
-        <SpotlightGrid spotlightRadius={90} gridSize={12} highlightOpacity={0.5} />
+        <HeroAurora
+          className="absolute inset-0 -top-24 bottom-0 sm:-top-28"
+          clearanceRef={contentRef}
+        />
+        <SpotlightGrid spotlightRadius={100} gridSize={16} highlightOpacity={0.15} />
       </div>
 
-      <div className="relative z-1 flex w-full max-w-4xl flex-col items-center gap-6 overflow-hidden">
+      <div
+        ref={contentRef}
+        className="relative z-1 flex w-full max-w-2xl flex-col items-center gap-6 overflow-hidden"
+      >
         <div className="flex w-full flex-col items-center gap-5">
           <div className="flex w-full flex-col items-center gap-4 text-center">
             <div className="mx-auto w-full max-w-2xl">

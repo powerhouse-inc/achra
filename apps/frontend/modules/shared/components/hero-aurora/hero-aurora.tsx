@@ -17,9 +17,11 @@ const AuroraCanvas = dynamic(
 
 interface HeroAuroraProps {
   className?: string
+  /** Element the silk dims behind so text on top keeps contrast */
+  clearanceRef?: React.RefObject<HTMLElement | null>
 }
 
-function HeroAurora({ className }: HeroAuroraProps) {
+function HeroAurora({ className, clearanceRef }: HeroAuroraProps) {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)', {
     defaultValue: true,
     initializeWithValue: false,
@@ -27,11 +29,15 @@ function HeroAurora({ className }: HeroAuroraProps) {
 
   return (
     <div className={cn('pointer-events-none', className)} aria-hidden>
+      {/* the poster can't track the measured clearance box, so it dims a
+          static center ellipse roughly matching the hero copy instead */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-xl dark:opacity-0"
+        className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_80%,transparent_98%),radial-gradient(ellipse_36%_24%_at_50%_52%,rgba(0,0,0,0.4)_35%,black_95%)] bg-cover bg-center bg-no-repeat [mask-composite:intersect] blur-xl dark:opacity-0"
         style={{ backgroundImage: `url(${HERO_AURORA_POSTER_DATA_URL})` }}
       />
-      {!prefersReducedMotion && <AuroraCanvas className="absolute inset-0" />}
+      {!prefersReducedMotion && (
+        <AuroraCanvas className="absolute inset-0" clearanceRef={clearanceRef} />
+      )}
     </div>
   )
 }
