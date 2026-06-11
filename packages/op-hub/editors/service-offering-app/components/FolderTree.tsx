@@ -1,11 +1,13 @@
 import {
   Sidebar,
   SidebarProvider,
+  useSidebar,
   type SidebarNode,
 } from "@powerhousedao/document-engineering";
 import {
   setSelectedNode,
   useSelectedDrive,
+  useSelectedNode,
   isFolderNodeKind,
   isFileNodeKind,
 } from "@powerhousedao/reactor-browser";
@@ -25,7 +27,7 @@ import {
   UserRound,
   Users,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 const ICON_SIZE = 16;
 const CUSTOMERS_FOLDER_NAME = "Customers";
@@ -132,8 +134,24 @@ function buildSidebarNodesFromFolder(
 }
 
 type FolderTreeProps = {
+  customView?: CustomView;
   onCustomViewChange?: (view: CustomView) => void;
 };
+
+/**
+ * Expands the sidebar path to the active node so selections made outside the
+ * sidebar (deep links, content-area navigation) are always visible. Must be
+ * rendered inside SidebarProvider.
+ */
+function SidebarActiveNodeReveal({ activeNodeId }: { activeNodeId: string }) {
+  const { openNode } = useSidebar();
+  useEffect(() => {
+    if (activeNodeId) {
+      openNode(activeNodeId, true);
+    }
+  }, [activeNodeId, openNode]);
+  return null;
+}
 
 /**
  * Sidebar for the Service Offering App.
@@ -142,12 +160,12 @@ type FolderTreeProps = {
  * routes to its own custom view; child folder/document clicks navigate within
  * that view.
  */
-export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
-  const [activeNodeId, setActiveNodeId] = useState<string>(
-    BASE_NAVIGATION_SECTIONS[0].id,
-  );
-
+export function FolderTree({
+  customView = null,
+  onCustomViewChange,
+}: FolderTreeProps) {
   const [driveDocument] = useSelectedDrive();
+  const selectedNode = useSelectedNode();
 
   // Find the "Customers" folder in the drive
   const customersFolder = useMemo(() => {
@@ -366,9 +384,28 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
 
   const driveName = driveDocument?.state.global.name || "Service Offerings";
 
-  const handleActiveNodeChange = (node: SidebarNode) => {
-    setActiveNodeId(node.id);
+  // The active sidebar node is derived, never stored: the reactor's selected
+  // node is the source of truth (it also changes via deep links and
+  // content-area navigation), with the active custom view as fallback for
+  // synthetic entries that have no drive node.
+  const activeNodeId = useMemo(() => {
+    if (selectedNode) {
+      // "Services And Offerings" has no sidebar entry of its own; its
+      // subfolders are listed under the Service Offerings section.
+      if (selectedNode.id === servicesAndOfferingsFolder?.id) {
+        return "resources-services";
+      }
+      return selectedNode.id;
+    }
+    if (customView) {
+      return customView;
+    }
+    // No selection and no custom view: DriveExplorer falls back to the
+    // Customers view.
+    return "customers";
+  }, [selectedNode, customView, servicesAndOfferingsFolder]);
 
+  const handleActiveNodeChange = (node: SidebarNode) => {
     // Stripe embedded views (synthetic children of "Payment documents")
     if (isStripeViewId(node.id)) {
       onCustomViewChange?.(node.id);
@@ -446,6 +483,7 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
 
   return (
     <SidebarProvider nodes={navigationSections}>
+      <SidebarActiveNodeReveal activeNodeId={activeNodeId} />
       <Sidebar
         className="pt-1"
         nodes={navigationSections}

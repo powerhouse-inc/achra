@@ -132,7 +132,7 @@ export function DriveExplorer({ children }: EditorProps) {
 
   return (
     <div className="ph-drive-explorer-shell flex h-full w-full overflow-hidden">
-      <FolderTree onCustomViewChange={setCustomView} />
+      <FolderTree customView={customView} onCustomViewChange={setCustomView} />
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         {/* Close button — only in custom views, not the document editor */}
         {!showDocumentEditor && (
