@@ -19,10 +19,10 @@
     "uuid": "^11.1.0"
   },
   "peerDependencies": {
-    "@powerhousedao/reactor-browser": "6.1.0-dev.14",
-    "@powerhousedao/shared": "6.1.0-dev.14",
+    "@powerhousedao/reactor-browser": "6.2.0-dev.10",
+    "@powerhousedao/shared": "6.2.0-dev.10",
     "@tanstack/react-query": "^5",
-    "document-model": "6.1.0-dev.14",
+    "document-model": "6.2.0-dev.10",
     "react": "^19",
     "react-dom": "^19"
   },
