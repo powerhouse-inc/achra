@@ -15,6 +15,7 @@ import { Invoice } from "./invoice/module.js";
 import { NetworkAdmin } from "./network-admin/module.js";
 import { NetworkProfile } from "./network-profile-editor/module.js";
 import { OperationalHubProfileEditor } from "./operational-hub-profile-editor/module.js";
+import { PaymentAccountEditor } from "./payment-account-editor/module.js";
 import { PaymentTerms } from "./payment-terms-editor/module.js";
 import { ResourceInstanceEditor } from "./resource-instance-editor/module.js";
 import { ResourceTemplateEditor } from "./resource-template-editor/module.js";
@@ -40,6 +41,7 @@ export const editors: EditorModule[] = [
   NetworkAdmin,
   NetworkProfile,
   OperationalHubProfileEditor,
+  PaymentAccountEditor,
   PaymentTerms,
   ResourceInstanceEditor,
   ResourceTemplateEditor,

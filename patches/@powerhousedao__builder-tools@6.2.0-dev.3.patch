@@ -1,0 +1,13 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 036bc80..0cf9a2d 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -490,7 +490,7 @@ function getConnectHtmlTags(options = {}) {
+ 			tag: "meta",
+ 			attrs: {
+ 				"http-equiv": "Content-Security-Policy",
+-				content: `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh${registryUrl ? " " + registryUrl : ""}; worker-src 'self' blob:; object-src 'none'; base-uri 'self';`
++				content: `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://esm.sh https://connect-js.stripe.com https://js.stripe.com${registryUrl ? " " + registryUrl : ""}; worker-src 'self' blob:; object-src 'none'; base-uri 'self';`
+ 			},
+ 			injectTo
+ 		},

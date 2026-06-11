@@ -87,10 +87,12 @@ export async function createBuilderWorkspace(
  *
  * The achra-domain companion to {@link createBuilderWorkspace}: it supplies
  * the canonical service-offering naming/icon/editor and delegates the drive
- * mechanics to the SDK core (`createWorkspace`). Unlike the builder workspace,
- * the offering drive holds no child documents, so nothing has stamped the
- * creator wallet on it — `workspace.touch()` pushes the one signed op that
- * makes it visible to `getBuilderDrives`.
+ * mechanics to the SDK core (`createWorkspace`). The drive is born with the
+ * operator's payment-account document (Stripe Connect onboarding lives there),
+ * pre-linked to the builder profile when `builderProfileId` is known — so the
+ * operator opens the drive and just starts the onboarding. That drive push
+ * also stamps the creator wallet on the drive, making it visible to
+ * `getBuilderDrives` (no separate `touch()` needed).
  */
 export async function createOperatorOfferingDrive(
   ctx: ClientContext,
@@ -99,8 +101,15 @@ export async function createOperatorOfferingDrive(
     address: string
     name?: string
     ensName?: string
+    /** The operator's builder-profile id, baked into the payment account as `operatorId`. */
+    builderProfileId?: string
   },
-): Promise<{ driveId: string; driveSlug: string; driveName: string }> {
+): Promise<{
+  driveId: string
+  driveSlug: string
+  driveName: string
+  paymentAccountId: string
+}> {
   const naming = deriveDriveNaming({
     name: opts.name,
     ensName: opts.ensName,
@@ -114,16 +123,25 @@ export async function createOperatorOfferingDrive(
     preferredEditor: OPERATOR_DRIVE_EDITOR,
     signer: opts.signer,
   })
-  // The offering drive holds no documents, so nothing else stamps the creator
-  // wallet on it. `touch()` stages a wallet-signed op; `commit()` creates the
-  // drive and flushes it, making the drive visible to `getBuilderDrives`.
-  workspace.touch()
+  const paymentAccountId = await workspace.addDocument({
+    definition: ctx.documents.paymentAccount,
+    init: (account) => {
+      if (opts.builderProfileId) {
+        account.setOperator({
+          operatorId: opts.builderProfileId,
+          lastModified: new Date().toISOString(),
+        })
+      }
+    },
+    fileName: 'Payment Account',
+  })
   await workspace.commit()
 
   return {
     driveId: workspace.driveId,
     driveSlug: naming.offeringSlug,
     driveName: naming.offeringDisplayName,
+    paymentAccountId,
   }
 }
 
@@ -159,6 +177,7 @@ export async function spinUpBuilderWorkspaces(
       address: opts.address,
       name: opts.name,
       ensName: opts.ensName,
+      builderProfileId: workspace.builderProfileId,
     })
   }
 

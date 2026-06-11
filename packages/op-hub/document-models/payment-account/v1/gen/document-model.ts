@@ -1,0 +1,119 @@
+import type { DocumentModelGlobalState } from "document-model";
+
+export const documentModel: DocumentModelGlobalState = {
+  id: "powerhouse/payment-account",
+  name: "PaymentAccount",
+  author: {
+    name: "Powerhouse",
+    website: "https://powerhouse.inc",
+  },
+  extension: "",
+  description:
+    "Operator payment account for Stripe Connect onboarding and payout status.",
+  specifications: [
+    {
+      state: {
+        local: {
+          schema: "",
+          examples: [],
+          initialValue: "",
+        },
+        global: {
+          schema:
+            "type PaymentAccountState {\n  operatorId: PHID\n  lastModified: DateTime\n  stripeAccountId: String\n  stripeChargesEnabled: Boolean!\n  stripePayoutsEnabled: Boolean!\n  stripeDetailsSubmitted: Boolean!\n  stripeRequirementsCurrentlyDue: [String!]!\n  stripeRequirementsDisabledReason: String\n}",
+          examples: [],
+          initialValue:
+            '{\n  "operatorId": null,\n  "lastModified": null,\n  "stripeAccountId": null,\n  "stripeChargesEnabled": false,\n  "stripePayoutsEnabled": false,\n  "stripeDetailsSubmitted": false,\n  "stripeRequirementsCurrentlyDue": [],\n  "stripeRequirementsDisabledReason": null\n}',
+        },
+      },
+      modules: [
+        {
+          id: "7bfeba81-413a-4dfe-a148-c4f00d760399",
+          name: "stripe",
+          description: "Stripe Connect account linkage and onboarding status",
+          operations: [
+            {
+              id: "c7af6515-ac11-49d4-a712-d802d627a241",
+              name: "SET_OPERATOR",
+              description:
+                "Links the payment account to the operator's builder profile",
+              schema:
+                "input SetOperatorInput {\n    operatorId: PHID!\n    lastModified: DateTime!\n}",
+              template: "Set operator ID",
+              reducer:
+                'const operatorId = action.input.operatorId ? action.input.operatorId.trim() : "";\nif (!operatorId) {\n    throw new EmptyOperatorIdError("Operator id cannot be empty");\n}\nstate.operatorId = operatorId;\nstate.lastModified = action.input.lastModified;',
+              errors: [
+                {
+                  id: "91dfdeeb-5ceb-4e7b-9860-49c3f39436ff",
+                  name: "EmptyOperatorIdError",
+                  code: "EMPTY_OPERATOR_ID",
+                  description: "Operator id is empty or whitespace-only",
+                  template: "",
+                },
+              ],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "8420a753-7a6f-4ba4-93e0-403c8b73bc7a",
+              name: "CONNECT_STRIPE_ACCOUNT",
+              description:
+                "Links the payment account to a newly created Stripe connected account. Called once, immediately after accounts.create on the platform side.",
+              schema:
+                "input ConnectStripeAccountInput {\n    stripeAccountId: String!\n    lastModified: DateTime!\n}",
+              template:
+                "Links the payment account to a Stripe connected account",
+              reducer:
+                'const id = action.input.stripeAccountId ? action.input.stripeAccountId.trim() : "";\nif (!id) {\n    throw new EmptyStripeAccountIdError("Stripe account ID cannot be empty");\n}\nif (state.stripeAccountId) {\n    throw new StripeAccountAlreadyConnectedError("A Stripe account is already connected");\n}\nstate.stripeAccountId = id;\nstate.lastModified = action.input.lastModified;',
+              errors: [
+                {
+                  id: "5562bd4a-5b16-4d04-8d81-39f2819272cf",
+                  name: "EmptyStripeAccountIdError",
+                  code: "EMPTY_STRIPE_ACCOUNT_ID",
+                  description: "Stripe account ID is empty or whitespace-only",
+                  template: "",
+                },
+                {
+                  id: "ffbc6e91-8c58-4a0e-b6ed-044a3a644991",
+                  name: "StripeAccountAlreadyConnectedError",
+                  code: "STRIPE_ACCOUNT_ALREADY_CONNECTED",
+                  description:
+                    "A Stripe account is already connected to this payment account",
+                  template: "",
+                },
+              ],
+              examples: [],
+              scope: "global",
+            },
+            {
+              id: "a7c6254a-9619-4a09-a96a-3cd8d14c6225",
+              name: "SYNC_STRIPE_ACCOUNT_STATUS",
+              description:
+                "Mirrors the latest account.updated Stripe webhook payload into the payment account (charges/payouts flags, requirements, disabled reason).",
+              schema:
+                "input SyncStripeAccountStatusInput {\n    chargesEnabled: Boolean!\n    payoutsEnabled: Boolean!\n    detailsSubmitted: Boolean!\n    requirementsCurrentlyDue: [String!]!\n    disabledReason: String\n    lastModified: DateTime!\n}",
+              template:
+                "Syncs Stripe account status fields from an account.updated webhook",
+              reducer:
+                'if (!state.stripeAccountId) {\n    throw new StripeAccountNotConnectedError("Cannot sync status: no Stripe account connected");\n}\nstate.stripeChargesEnabled = action.input.chargesEnabled;\nstate.stripePayoutsEnabled = action.input.payoutsEnabled;\nstate.stripeDetailsSubmitted = action.input.detailsSubmitted;\nstate.stripeRequirementsCurrentlyDue = action.input.requirementsCurrentlyDue;\nstate.stripeRequirementsDisabledReason = action.input.disabledReason || null;\nstate.lastModified = action.input.lastModified;',
+              errors: [
+                {
+                  id: "3d4ce4e6-37c3-461d-89ec-842a851c4ce6",
+                  name: "StripeAccountNotConnectedError",
+                  code: "STRIPE_ACCOUNT_NOT_CONNECTED",
+                  description:
+                    "Cannot sync status because no Stripe account is connected to this payment account",
+                  template: "",
+                },
+              ],
+              examples: [],
+              scope: "global",
+            },
+          ],
+        },
+      ],
+      version: 1,
+      changeLog: [],
+    },
+  ],
+};

@@ -18,6 +18,12 @@
    editors/, so scanning it here makes generation deterministic. */
 @source "./editors/**/*.{ts,tsx}";
 
+/* @achra/ui components used by op-hub editors are source-only and live in a
+   sibling workspace package — Tailwind never scans node_modules, so the
+   package source must be @source'd explicitly for its utility classes to
+   generate. */
+@source "../ui/src/**/*.{ts,tsx}";
+
 /* ──────────────────────────────────────────────────────────────────────────
    Scan the shared @achra/ui component source.
    ──────────────────────────────────────────────────────────────────────────

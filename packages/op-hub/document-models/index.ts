@@ -8,6 +8,7 @@ export { Facet as FacetV1 } from "./facet/v1/module.js";
 export { Invoice as InvoiceV1 } from "./invoice/v1/module.js";
 export { NetworkProfile as NetworkProfileV1 } from "./network-profile/v1/module.js";
 export { OperationalHubProfile as OperationalHubProfileV1 } from "./operational-hub-profile/v1/module.js";
+export { PaymentAccount as PaymentAccountV1 } from "./payment-account/v1/module.js";
 export { PaymentTerms as PaymentTermsV1 } from "./payment-terms/v1/module.js";
 export { RequestForProposals as RequestForProposalsV1 } from "./request-for-proposals/v1/module.js";
 export { ResourceInstance as ResourceInstanceV1 } from "./resource-instance/v1/module.js";

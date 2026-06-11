@@ -1,11 +1,13 @@
 import {
   Sidebar,
   SidebarProvider,
+  useSidebar,
   type SidebarNode,
 } from "@powerhousedao/document-engineering";
 import {
   setSelectedNode,
   useSelectedDrive,
+  useSelectedNode,
   isFolderNodeKind,
   isFileNodeKind,
 } from "@powerhousedao/reactor-browser";
@@ -14,17 +16,51 @@ import type {
   FolderNode,
   FileNode,
 } from "@powerhousedao/shared/document-drive";
-import { FileText, Folder, Layers, UserRound, Users } from "lucide-react";
-import { useMemo, useState } from "react";
+import {
+  ArrowLeftRight,
+  Banknote,
+  CreditCard,
+  FileText,
+  Folder,
+  Layers,
+  Settings,
+  UserRound,
+  Users,
+} from "lucide-react";
+import { useEffect, useMemo } from "react";
 
 const ICON_SIZE = 16;
 const CUSTOMERS_FOLDER_NAME = "Customers";
 const SERVICES_AND_OFFERINGS_FOLDER_NAME = "Services And Offerings";
 const RESOURCE_TEMPLATES_FOLDER_NAME = "Products";
 const SERVICE_OFFERINGS_FOLDER_NAME = "Service Offerings";
+const PAYMENT_ACCOUNT_DOCUMENT_TYPE = "powerhouse/payment-account";
+const PAYMENT_DOCUMENTS_SECTION_ID = "payment-documents";
+const PAYMENT_DOCUMENTS_SECTION_TITLE = "Payment documents";
+
+/**
+ * Synthetic sidebar ids for the Stripe embedded views under the
+ * "Payment documents" section. Each opens a full custom view rendering the
+ * matching Stripe Connect embedded component(s).
+ */
+export const STRIPE_VIEW_IDS = [
+  "stripe-payments",
+  "stripe-payouts",
+  "stripe-documents",
+  "stripe-account",
+] as const;
+export type StripeViewId = (typeof STRIPE_VIEW_IDS)[number];
+
+export function isStripeViewId(id: string | null): id is StripeViewId {
+  return STRIPE_VIEW_IDS.includes(id as StripeViewId);
+}
 
 /** Custom view types that don't correspond to document models */
-export type CustomView = "resources-services" | "customers" | null;
+export type CustomView =
+  | "resources-services"
+  | "customers"
+  | StripeViewId
+  | null;
 
 /** Maps navigation section IDs to custom view identifiers. */
 const SECTION_TO_CUSTOM_VIEW: Record<string, CustomView> = {
@@ -56,7 +92,12 @@ const BASE_NAVIGATION_SECTIONS: SidebarNode[] = [
 const GROUP_HEADER_CLASS = "so-sidebar-group-header";
 const OFFERINGS_HEADER_ID = "__group-offerings__";
 const CUSTOMERS_HEADER_ID = "__group-customers__";
-const GROUP_HEADER_IDS = new Set([OFFERINGS_HEADER_ID, CUSTOMERS_HEADER_ID]);
+const PAYMENTS_HEADER_ID = "__group-payments__";
+const GROUP_HEADER_IDS = new Set([
+  OFFERINGS_HEADER_ID,
+  CUSTOMERS_HEADER_ID,
+  PAYMENTS_HEADER_ID,
+]);
 
 function groupHeader(id: string, title: string): SidebarNode {
   return { id, title, className: GROUP_HEADER_CLASS };
@@ -72,6 +113,11 @@ function withGroupHeaders(sections: SidebarNode[]): SidebarNode[] {
   out.push(groupHeader(CUSTOMERS_HEADER_ID, "CUSTOMERS"));
   const customers = byId("customers");
   if (customers) out.push(customers);
+  const payments = byId(PAYMENT_DOCUMENTS_SECTION_ID);
+  if (payments) {
+    out.push(groupHeader(PAYMENTS_HEADER_ID, "PAYMENTS"));
+    out.push(payments);
+  }
   return out;
 }
 
@@ -124,8 +170,24 @@ function buildSidebarNodesFromFolder(
 }
 
 type FolderTreeProps = {
+  customView?: CustomView;
   onCustomViewChange?: (view: CustomView) => void;
 };
+
+/**
+ * Expands the sidebar path to the active node so selections made outside the
+ * sidebar (deep links, content-area navigation) are always visible. Must be
+ * rendered inside SidebarProvider.
+ */
+function SidebarActiveNodeReveal({ activeNodeId }: { activeNodeId: string }) {
+  const { openNode } = useSidebar();
+  useEffect(() => {
+    if (activeNodeId) {
+      openNode(activeNodeId, true);
+    }
+  }, [activeNodeId, openNode]);
+  return null;
+}
 
 /**
  * Sidebar for the Service Offering App.
@@ -134,12 +196,12 @@ type FolderTreeProps = {
  * routes to its own custom view; child folder/document clicks navigate within
  * that view.
  */
-export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
-  const [activeNodeId, setActiveNodeId] = useState<string>(
-    BASE_NAVIGATION_SECTIONS[0].id,
-  );
-
+export function FolderTree({
+  customView = null,
+  onCustomViewChange,
+}: FolderTreeProps) {
   const [driveDocument] = useSelectedDrive();
+  const selectedNode = useSelectedNode();
 
   // Find the "Customers" folder in the drive
   const customersFolder = useMemo(() => {
@@ -148,6 +210,18 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
     return nodes.find(
       (node: Node): node is FolderNode =>
         isFolderNodeKind(node) && node.name === CUSTOMERS_FOLDER_NAME,
+    );
+  }, [driveDocument]);
+
+  // Find the payment-account document (auto-created at the drive root when
+  // the operator drive is provisioned; holds the Stripe onboarding).
+  const paymentAccountFile = useMemo(() => {
+    if (!driveDocument) return null;
+    const nodes = driveDocument.state.global.nodes;
+    return nodes.find(
+      (node: Node): node is FileNode =>
+        isFileNodeKind(node) &&
+        node.documentType === PAYMENT_ACCOUNT_DOCUMENT_TYPE,
     );
   }, [driveDocument]);
 
@@ -294,20 +368,101 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
       }
       return section;
     });
+
+    // Payment documents section — the payment-account document (Stripe
+    // onboarding/KYC editor) plus one child per Stripe embedded view. Only
+    // shown when the doc exists (drives provisioned before auto-creation can
+    // add it manually); the views themselves prompt for verification until
+    // KYC is complete.
+    if (paymentAccountFile) {
+      sections.push({
+        id: PAYMENT_DOCUMENTS_SECTION_ID,
+        title: PAYMENT_DOCUMENTS_SECTION_TITLE,
+        icon: <CreditCard size={ICON_SIZE} />,
+        children: [
+          {
+            id: paymentAccountFile.id,
+            title: "Payment account",
+            icon: <FileText size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-payments",
+            title: "Payments",
+            icon: <ArrowLeftRight size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-payouts",
+            title: "Payouts & balance",
+            icon: <Banknote size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-documents",
+            title: "Documents",
+            icon: <FileText size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-account",
+            title: "Account",
+            icon: <Settings size={ICON_SIZE} />,
+          },
+        ],
+      });
+    }
+
     return withGroupHeaders(sections);
   }, [
     driveDocument,
     customersFolder,
     resourceTemplatesFolder,
     serviceOfferingsFolder,
+    paymentAccountFile,
   ]);
 
   const driveName = driveDocument?.state.global.name || "Service Offerings";
 
+  // The active sidebar node is derived, never stored: the reactor's selected
+  // node is the source of truth (it also changes via deep links and
+  // content-area navigation), with the active custom view as fallback for
+  // synthetic entries that have no drive node.
+  const activeNodeId = useMemo(() => {
+    if (selectedNode) {
+      // "Services And Offerings" has no sidebar entry of its own; its
+      // subfolders are listed under the Service Offerings section.
+      if (selectedNode.id === servicesAndOfferingsFolder?.id) {
+        return "resources-services";
+      }
+      return selectedNode.id;
+    }
+    if (customView) {
+      return customView;
+    }
+    // No selection and no custom view: DriveExplorer falls back to the
+    // Customers view.
+    return "customers";
+  }, [selectedNode, customView, servicesAndOfferingsFolder]);
+
   const handleActiveNodeChange = (node: SidebarNode) => {
     // Group-header rows are non-interactive labels (also pointer-events: none).
     if (GROUP_HEADER_IDS.has(node.id)) return;
-    setActiveNodeId(node.id);
+
+    // Stripe embedded views (synthetic children of "Payment documents")
+    if (isStripeViewId(node.id)) {
+      onCustomViewChange?.(node.id);
+      setSelectedNode("");
+      return;
+    }
+
+    // Payment-account doc child, or the "Payment documents" parent itself —
+    // both open the document editor (Stripe onboarding/KYC).
+    if (
+      paymentAccountFile &&
+      (node.id === paymentAccountFile.id ||
+        node.id === PAYMENT_DOCUMENTS_SECTION_ID)
+    ) {
+      onCustomViewChange?.(null);
+      setSelectedNode(paymentAccountFile.id);
+      return;
+    }
 
     // Child node within Customers tree
     if (customersNodeIds.has(node.id)) {
@@ -386,6 +541,7 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
         }
       `}</style>
       <SidebarProvider nodes={navigationSections}>
+        <SidebarActiveNodeReveal activeNodeId={activeNodeId} />
         <Sidebar
           className="pt-1"
           nodes={navigationSections}

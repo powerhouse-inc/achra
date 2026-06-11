@@ -29,6 +29,9 @@
       "playwright": "1.59.1",
       "playwright-core": "1.59.1",
       "prettier": "3.6.2"
+    },
+    "patchedDependencies": {
+      "@powerhousedao/builder-tools@6.2.0-dev.3": "patches/@powerhousedao__builder-tools@6.2.0-dev.3.patch"
     }
   }
 }

@@ -86,6 +86,10 @@
     {
       "id": "powerhouse/workstream",
       "name": "Workstream"
+    },
+    {
+      "id": "powerhouse/payment-account",
+      "name": "PaymentAccount"
     }
   ],
   "apps": [
@@ -251,6 +255,13 @@
       "documentTypes": [
         "powerhouse/builders"
       ]
+    },
+    {
+      "name": "payment-account-editor",
+      "id": "payment-account-editor",
+      "documentTypes": [
+        "powerhouse/payment-account"
+      ]
     }
   ],
   "processors": [
@@ -287,6 +298,10 @@
     {
       "id": "invoice-addon",
       "name": "invoice-addon"
+    },
+    {
+      "id": "stripe",
+      "name": "stripe"
     }
   ],
   "config": [
@@ -348,6 +363,24 @@
       "name": "PH_SWITCHBOARD_URL",
       "type": "var",
       "description": "URL of the Switchboard application. Used by the resources-services subgraph to generate drive links.",
+      "required": true
+    },
+    {
+      "name": "STRIPE_SECRET_KEY",
+      "type": "secret",
+      "description": "Stripe secret API key (sk_...). Read by the stripe subgraph (subgraphs/stripe/lib/stripe-client.ts) to create Connect accounts, account sessions, and verify webhook events. Server-only — never expose with a PH_CONNECT_ prefix. Obtain from the Stripe dashboard (Developers → API keys).",
+      "required": true
+    },
+    {
+      "name": "STRIPE_WEBHOOK_SECRET",
+      "type": "secret",
+      "description": "Stripe webhook signing secret (whsec_...). Used by the stripe subgraph's Stripe_processStripeWebhookEvent mutation to verify webhook signatures. Obtain from the Stripe dashboard webhook endpoint settings, or `stripe listen` output in local dev.",
+      "required": true
+    },
+    {
+      "name": "PH_CONNECT_STRIPE_PUBLISHABLE_KEY",
+      "type": "var",
+      "description": "Stripe publishable key (pk_...). Exposed to the Connect studio browser bundle (PH_CONNECT_ vite envPrefix) and used by the payment-account editor to initialize Stripe embedded Connect components. Safe to expose.",
       "required": true
     }
   ]

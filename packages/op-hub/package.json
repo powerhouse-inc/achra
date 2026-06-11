@@ -74,10 +74,13 @@
     "service-unstartup": "bash ./node_modules/@powerhousedao/ph-cli/dist/scripts/service-unstartup.sh"
   },
   "dependencies": {
+    "@achra/ui": "workspace:*",
     "@react-pdf/renderer": "^4.3.1",
     "@safe-global/api-kit": "^4.0.0",
     "@safe-global/protocol-kit": "^6.0.3",
     "@safe-global/types-kit": "^2.0.1",
+    "@stripe/connect-js": "^3.4.5",
+    "@stripe/react-connect-js": "^3.4.3",
     "@uiw/react-markdown-preview": "^5.2.1",
     "@uiw/react-md-editor": "^4.1.0",
     "dotenv": "^16.6.1",
@@ -86,6 +89,7 @@
     "lucide-react": "^1.14.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
+    "stripe": "^22.2.0",
     "tailwind-merge": "^3.6.0",
     "unpdf": "^1.6.2",
     "usehooks-ts": "^3.1.1",

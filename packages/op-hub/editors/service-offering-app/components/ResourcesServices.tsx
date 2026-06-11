@@ -53,7 +53,10 @@ export function ResourcesServices() {
   const isInServiceOfferings = currentFolderId === serviceOfferingsFolder?.id;
   const isInRootView = !isInResourceTemplates && !isInServiceOfferings;
 
-  // Navigate to root view initially (deselect any node)
+  // Navigate to root view initially (deselect any node) — unless the view
+  // was entered already pointing at one of its own folders (e.g. clicking
+  // "Products" in the sidebar selects that folder and mounts this view;
+  // clearing the selection here would undo that navigation).
   useEffect(() => {
     if (
       servicesAndOfferingsFolder &&
@@ -62,13 +65,19 @@ export function ResourcesServices() {
       !hasNavigatedToFolder.current
     ) {
       hasNavigatedToFolder.current = true;
-      // Don't select any node so we show the root view with both folders
-      setSelectedNode("");
+      const selectionInThisView = selectedNodePath.some(
+        (node) => node.id === servicesAndOfferingsFolder.id,
+      );
+      if (!selectionInThisView) {
+        // Don't select any node so we show the root view with both folders
+        setSelectedNode("");
+      }
     }
   }, [
     servicesAndOfferingsFolder,
     resourceTemplatesFolder,
     serviceOfferingsFolder,
+    selectedNodePath,
   ]);
 
   // Find the BuilderProfile id from the same drive — used as the

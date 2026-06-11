@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useOperatorDrive } from '@/modules/shared/hooks/use-operator-drive'
 import { useTeamAdminDrive } from '@/modules/shared/hooks/use-team-admin-drive'
+import { driveLinkFor } from '@/modules/shared/lib/switchboard-urls'
 import { AlreadyCompletedCard } from './already-completed-card'
 import { AlreadyOperatorCard } from './already-operator-card'
 import { ConnectAccountStep } from './connect-account-step'
@@ -97,7 +98,9 @@ function GetStartedFlow() {
       if (hasOperatorDrive && !upgradeOpen) {
         return (
           <div className="mx-auto w-full max-w-xl">
-            <AlreadyOperatorCard operatorDriveLink={operatorDrive?.driveLink} />
+            <AlreadyOperatorCard
+              operatorDriveLink={operatorDrive ? driveLinkFor(operatorDrive.driveSlug) : undefined}
+            />
           </div>
         )
       }
