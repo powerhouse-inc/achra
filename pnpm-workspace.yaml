@@ -1,3 +1,11 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+# @renown/sdk 6.2.0-dev.10 crashes on login ("Cannot read properties of undefined
+# (reading 'chainId')") for credentials issued before the portal stored the EIP-712
+# domain: the renown.id API returns proof.eip712 as undefined for those, but the SDK
+# dereferences it unconditionally. The patch only runs signature verification when
+# proof.eip712 is present, matching the portal's own legacy-credential handling.
+patchedDependencies:
+  '@renown/sdk@6.2.0-dev.10': patches/@renown__sdk@6.2.0-dev.10.patch
