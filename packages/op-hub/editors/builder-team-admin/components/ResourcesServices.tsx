@@ -204,11 +204,11 @@ export function ResourcesServices() {
               className="border border-gray-200 rounded-lg p-6 hover:border-blue-400 hover:shadow-md transition-all cursor-pointer"
               onClick={() => setSelectedNode(resourceTemplatesFolder.id)}
             >
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 text-muted-foreground">
                 <div className="p-2 bg-blue-50 rounded-lg">
                   <FileText className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-lg font-semibold text-muted-foreground">
                   {RESOURCE_TEMPLATES_FOLDER_NAME}
                 </h3>
               </div>

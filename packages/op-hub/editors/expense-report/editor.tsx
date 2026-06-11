@@ -384,22 +384,22 @@ export default function Editor() {
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
       <DocumentToolbar document={document} />
-      <div className="ph-default-styles flex flex-col flex-1 min-h-0 w-full bg-gray-50 dark:bg-gray-900">
+      <div className="ph-default-styles flex flex-col flex-1 min-h-0 w-full">
         {/* Main Content */}
         <div className="flex-1 overflow-auto px-3 sm:px-4 lg:px-6 py-4">
           <div className="w-full max-w-none space-y-4 lg:space-y-6">
             {/* Header Section */}
-            <section className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <section className="bg-card rounded-lg shadow-sm border border-border">
               <div className="px-4 sm:px-6 py-4 sm:py-6">
                 {/* Top row: Title and Export button */}
                 <div className="flex items-start justify-between gap-4 mb-4">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">
                     Expense Report
                   </h1>
                   <Button
                     variant="ghost"
                     onClick={handleExportPDF}
-                    className="flex items-center gap-2 shrink-0"
+                    className="flex items-center gap-2 shrink-0 h-9 px-4 rounded-md border border-border bg-secondary text-secondary-foreground text-sm font-medium hover:bg-secondary/80 transition-colors"
                   >
                     <Icon name="ExportPdf" size={18} />
                     <span>Export to PDF</span>
@@ -409,7 +409,7 @@ export default function Editor() {
                 <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mb-4">
                   {/* Reporting Period */}
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <span className="text-sm font-medium text-muted-foreground">
                       Reporting Period:
                     </span>
                     {isEditingPeriod ? (
@@ -433,14 +433,14 @@ export default function Editor() {
                         )}
                       </div>
                     ) : (
-                      <span className="text-lg font-bold text-gray-900 dark:text-white">
+                      <span className="text-lg font-bold text-foreground">
                         {periodDisplayLabel}
                       </span>
                     )}
                   </div>
                   {/* Status */}
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <span className="text-sm font-medium text-muted-foreground">
                       Status:
                     </span>
                     <Select
@@ -470,7 +470,7 @@ export default function Editor() {
 
                 {/* Transaction Period - exact same structure as Snapshot Report editor */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Transaction Period
                   </label>
                   <div className="flex gap-2 items-center">
@@ -494,7 +494,7 @@ export default function Editor() {
                         />
                       </Form>
                     </div>
-                    <span className="self-center">to</span>
+                    <span className="self-center text-muted-foreground">to</span>
                     <div className="relative isolate">
                       <Form
                         key={`endDate-${openToDate}`}
@@ -519,9 +519,9 @@ export default function Editor() {
             </section>
 
             {/* Wallets Section */}
-            <section className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
+            <section className="bg-card rounded-lg shadow-sm border border-border overflow-hidden">
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border flex items-center justify-between">
+                <h2 className="text-lg sm:text-xl font-semibold text-foreground">
                   Wallets
                 </h2>
                 <Button
@@ -553,9 +553,9 @@ export default function Editor() {
 
             {/* Aggregated Expenses Section */}
             {wallets.length > 0 && (
-              <section className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
-                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
+              <section className="bg-card rounded-lg shadow-sm border border-border overflow-hidden">
+                <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border">
+                  <h2 className="text-lg sm:text-xl font-semibold text-foreground">
                     {breakdownTitle}
                   </h2>
                 </div>

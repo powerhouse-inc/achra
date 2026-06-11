@@ -243,35 +243,35 @@ export function AddBillingStatementModal({
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-4xl max-h-[80vh] bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col">
+      <div className="relative w-full max-w-4xl max-h-[80vh] bg-card rounded-lg shadow-2xl border border-border flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h2 className="text-xl font-semibold text-foreground">
               Add Billing Statements
             </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               Select billing statements to add to wallet{" "}
               {walletAddress.substring(0, 10)}...
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+            className="text-muted-foreground hover:text-foreground transition-colors"
           >
             <X size={24} />
           </button>
         </div>
 
         {/* Search */}
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="px-6 py-4 border-b border-border">
           <div className="relative">
             <input
               type="text"
               placeholder="Search billing statements..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 pl-11 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent"
+              className="w-full px-4 py-2 pl-11 border border-input rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent"
             />
           </div>
         </div>
@@ -296,43 +296,43 @@ export function AddBillingStatementModal({
                     onClick={() => toggleStatement(statement.id)}
                     className={`flex items-center gap-4 p-4 rounded-lg border-2 transition-all ${
                       isAlreadyAdded
-                        ? "border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 opacity-60 cursor-not-allowed"
+                        ? "border-border bg-muted opacity-60 cursor-not-allowed"
                         : isSelected
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 cursor-pointer"
-                          : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 cursor-pointer"
+                          ? "border-primary bg-primary/10 cursor-pointer"
+                          : "border-border hover:border-muted-foreground cursor-pointer"
                     }`}
                   >
                     {/* Checkbox */}
                     <div
                       className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
                         isAlreadyAdded
-                          ? "border-gray-400 dark:border-gray-500 bg-gray-200 dark:bg-gray-700"
+                          ? "border-border bg-muted"
                           : isSelected
-                            ? "bg-blue-500 border-blue-500"
-                            : "border-gray-300 dark:border-gray-600"
+                            ? "bg-primary border-primary"
+                            : "border-input"
                       }`}
                     >
                       {(isSelected || isAlreadyAdded) && (
-                        <Check className="text-white" size={14} />
+                        <Check className="text-primary-foreground" size={14} />
                       )}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-gray-900 dark:text-white truncate">
+                        <span className="font-medium text-foreground truncate">
                           {statement.name}
                         </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded">
+                        <span className="text-xs text-muted-foreground px-2 py-1 bg-muted rounded">
                           {lineItemCount} items
                         </span>
                         {isAlreadyAdded && (
-                          <span className="text-xs text-amber-600 dark:text-amber-400 px-2 py-1 bg-amber-50 dark:bg-amber-900/20 rounded font-medium">
+                          <span className="text-xs text-status-warning px-2 py-1 bg-status-warning/20 rounded font-medium">
                             Already included
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
                         <span>Total: {formatCurrency(totalCash)}</span>
                         <span className="text-xs font-mono">
                           {statement.id.substring(0, 8)}...
@@ -344,7 +344,7 @@ export function AddBillingStatementModal({
               })}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-12 text-gray-500 dark:text-gray-400">
+            <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
               <FileText size={48} className="mb-4 opacity-50" />
               <p className="text-sm">
                 {searchTerm
@@ -356,8 +356,8 @@ export function AddBillingStatementModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-          <span className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-muted/50">
+          <span className="text-sm text-muted-foreground">
             {selectedStatements.size} statement
             {selectedStatements.size !== 1 ? "s" : ""} selected
           </span>
@@ -368,7 +368,7 @@ export function AddBillingStatementModal({
             <Button
               onClick={handleAddStatements}
               disabled={selectedStatements.size === 0}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               ADD{" "}
               {selectedStatements.size > 0 && `(${selectedStatements.size})`}

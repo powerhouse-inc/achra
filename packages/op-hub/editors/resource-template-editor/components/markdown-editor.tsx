@@ -30,13 +30,25 @@ export function MarkdownEditor({
   onBlur,
   height = 350,
   label = "Content",
-  labelClassName = "text-sm leading-4 mb-3 font-medium",
+  labelClassName = "text-sm leading-4 mb-3 font-medium text-foreground",
 }: MarkdownEditorProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [MDEditor, setMDEditor] = useState<any>(null);
   const [contentValue, setContentValue] = useState<string>("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [isDark, setIsDark] = useState(false);
+
+  // Track Connect's `.dark` class so the editor follows the active theme
+  // (data-color-mode) instead of staying locked to light.
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () => setIsDark(root.classList.contains("dark"));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   const [viewMarkdownMode, setViewMarkdownMode] =
     useLocalStorage<MarkdownEditorMode>("markdown-editor-view-mode", "live");
@@ -146,13 +158,13 @@ export function MarkdownEditor({
 
           .w-md-editor-preview th,
           .w-md-editor-preview td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border);
             padding: 8px;
             text-align: left;
           }
 
           .w-md-editor-preview th {
-            background-color: #f5f5f5;
+            background-color: var(--muted);
           }
          
           .w-md-editor-text,
@@ -165,32 +177,50 @@ export function MarkdownEditor({
             line-height: 24px !important;
           }
             
+
+          /* Retint the @uiw editor chrome to achra design tokens (see the
+             builder-profile markdown editor for the full rationale): canvas =
+             --background so it reads as an input field; chrome vars -> tokens;
+             scoped to .op-md-editor; !important to beat the widget's values. */
+          .op-md-editor .w-md-editor,
+          .op-md-editor .wmde-markdown {
+            --color-canvas-default: var(--background) !important;
+            --color-canvas-subtle: var(--muted) !important;
+            --color-fg-default: var(--foreground) !important;
+            --color-fg-muted: var(--muted-foreground) !important;
+            --color-fg-subtle: var(--muted-foreground) !important;
+            --color-border-default: var(--border) !important;
+            --color-border-muted: var(--border) !important;
+            --color-neutral-muted: var(--muted) !important;
+            --color-accent-fg: var(--primary) !important;
+            --color-accent-emphasis: var(--primary) !important;
+          }
         `}
       </style>
 
       {label && <p className={labelClassName}>{label}</p>}
       {!isLoaded && (
         <div
-          className="w-full border border-gray-300 rounded-md p-3 bg-white"
+          className="w-full border border-border rounded-md p-3 bg-background"
           style={{ height: `${height}px` }}
         >
-          <div className="w-full h-full flex items-center justify-center text-gray-500">
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground">
             Loading editor...
           </div>
         </div>
       )}
       {isLoaded && loadError && (
         <div
-          className="w-full border border-red-300 rounded-md p-3 bg-red-50"
+          className="w-full border border-destructive rounded-md p-3 bg-destructive/10"
           style={{ height: `${height}px` }}
         >
-          <div className="w-full h-full flex flex-col items-center justify-center text-red-600">
+          <div className="w-full h-full flex flex-col items-center justify-center text-destructive">
             <p className="text-sm font-medium mb-2">
               Failed to load markdown editor
             </p>
-            <p className="text-xs text-red-500">{loadError}</p>
+            <p className="text-xs text-destructive">{loadError}</p>
             <textarea
-              className="w-full h-full mt-2 p-2 border border-gray-300 rounded text-sm"
+              className="w-full h-full mt-2 p-2 border border-border rounded text-sm bg-background text-foreground"
               placeholder="Fallback text editor - write your content here..."
               value={value ?? ""}
               onChange={(e) => onChange(e.target.value)}
@@ -200,7 +230,10 @@ export function MarkdownEditor({
         </div>
       )}
       {isLoaded && MDEditor && (
-        <div data-color-mode="light" className="w-full">
+        <div
+          data-color-mode={isDark ? "dark" : "light"}
+          className="w-full op-md-editor"
+        >
           <MDEditor
             height={height}
             value={contentValue || " "}

@@ -115,31 +115,7 @@ export default function ResourceInstanceEditor() {
 
       <div className="ri-editor__container">
         {/* Mode Toggle and Import Button */}
-        <div className="ri-editor__header">
-          {mode === "operator" && (
-            <button
-              type="button"
-              className="ri-btn ri-btn--primary"
-              onClick={handleImportData}
-            >
-              <svg
-                className="ri-btn__icon"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                width="16"
-                height="16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Import Data
-            </button>
-          )}
-          {/* <ModeToggle mode={mode} onModeChange={setMode} /> */}
-        </div>
+       
 
         {/* Instance Header */}
         <InstanceHeader document={document} dispatch={dispatch} mode={mode} />
@@ -545,15 +521,6 @@ function ConfigurationPanel({
     <div className="ri-panel">
       <div className="ri-panel__header">
         <h3 className="ri-panel__title">Configuration</h3>
-        {mode === "operator" && (
-          <button
-            type="button"
-            className="ri-btn ri-btn--primary ri-btn--sm"
-            onClick={() => setIsAdding(true)}
-          >
-            Add Facet
-          </button>
-        )}
       </div>
 
       {isAdding && (
@@ -1139,57 +1106,64 @@ const editorStyles = `
     --ri-font-sans: 'Inter', system-ui, sans-serif;
     --ri-font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
 
-    /* Colors */
-    --ri-slate-50: #f8fafc;
-    --ri-slate-100: #f1f5f9;
-    --ri-slate-200: #e2e8f0;
-    --ri-slate-300: #cbd5e1;
-    --ri-slate-400: #94a3b8;
-    --ri-slate-500: #64748b;
-    --ri-slate-600: #475569;
-    --ri-slate-700: #334155;
-    --ri-slate-800: #1e293b;
-    --ri-slate-900: #0f172a;
+    /* Colors — each --ri-* step resolves to an Achra design-system token
+       (packages/design-system/theme.css) by ROLE, so the whole editor follows
+       Connect's light/dark theme from this one block; the scale names are kept
+       so the usage sites below stay untouched. Tinted *-50/*-100 steps use
+       color-mix() — the same mechanism Tailwind v4 uses for /20 opacity. */
+    --ri-slate-50: var(--background); /* inset wells (recessed on cards) */
+    --ri-slate-100: var(--muted); /* chips, toggle tracks, hover fills */
+    --ri-slate-200: var(--border); /* borders, dividers, switch tracks */
+    --ri-slate-300: var(--border); /* faint icons, strong input borders */
+    --ri-slate-400: var(--muted-foreground); /* placeholders, knobs, draft dot */
+    --ri-slate-500: var(--muted-foreground); /* secondary text */
+    --ri-slate-600: var(--foreground); /* labels */
+    --ri-slate-700: var(--foreground);
+    --ri-slate-800: var(--foreground); /* body text */
+    --ri-slate-900: var(--foreground); /* headings */
 
-    --ri-emerald-50: #ecfdf5;
-    --ri-emerald-100: #d1fae5;
-    --ri-emerald-500: #10b981;
-    --ri-emerald-600: #059669;
-    --ri-emerald-700: #047857;
+    --ri-emerald-50: color-mix(in oklab, var(--status-success) 12%, transparent);
+    --ri-emerald-100: color-mix(in oklab, var(--status-success) 22%, transparent);
+    --ri-emerald-500: var(--status-success);
+    --ri-emerald-600: var(--status-success);
+    --ri-emerald-700: var(--status-success);
 
-    --ri-amber-50: #fffbeb;
-    --ri-amber-100: #fef3c7;
-    --ri-amber-500: #f59e0b;
-    --ri-amber-600: #d97706;
-    --ri-amber-700: #b45309;
+    --ri-amber-50: color-mix(in oklab, var(--status-warning) 12%, transparent);
+    --ri-amber-100: color-mix(in oklab, var(--status-warning) 22%, transparent);
+    --ri-amber-500: var(--status-warning);
+    --ri-amber-600: var(--status-warning);
+    --ri-amber-700: var(--status-warning);
 
-    --ri-rose-50: #fff1f2;
-    --ri-rose-100: #ffe4e6;
-    --ri-rose-500: #f43f5e;
-    --ri-rose-600: #e11d48;
-    --ri-rose-700: #be123c;
+    --ri-rose-50: color-mix(in oklab, var(--destructive) 12%, transparent);
+    --ri-rose-100: color-mix(in oklab, var(--destructive) 18%, transparent);
+    --ri-rose-500: var(--destructive);
+    --ri-rose-600: var(--destructive);
+    --ri-rose-700: var(--destructive);
 
-    --ri-sky-50: #f0f9ff;
-    --ri-sky-100: #e0f2fe;
-    --ri-sky-500: #0ea5e9;
-    --ri-sky-600: #0284c7;
+    --ri-sky-50: color-mix(in oklab, var(--status-progress) 12%, transparent);
+    --ri-sky-100: color-mix(in oklab, var(--status-progress) 22%, transparent);
+    --ri-sky-500: var(--status-progress);
+    --ri-sky-600: var(--status-progress);
 
     /* Spacing */
     --ri-radius-sm: 6px;
     --ri-radius-md: 8px;
     --ri-radius-lg: 12px;
 
-    /* Shadows */
-    --ri-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --ri-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-    --ri-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    /* Shadows — bridged to the Achra elevation scale (theme-aware: card-lift
+       shadows in light mode, heavier separation drops in dark mode). */
+    --ri-shadow-sm: var(--shadow-sm);
+    --ri-shadow-md: var(--shadow-md);
+    --ri-shadow-lg: var(--shadow-lg);
 
     /* Transitions */
     --ri-transition-fast: 150ms ease;
     --ri-transition-base: 200ms ease;
 
     font-family: var(--ri-font-sans);
-    background: var(--ri-slate-50);
+    /* No background here: the editor root stays transparent so the page
+       matches Connect's drive-app canvas exactly (like builder-profile).
+       Painting --background here rendered DARKER than the host surface. */
     min-height: 100%;
     overflow-y: auto;
   }
@@ -1299,7 +1273,7 @@ const editorStyles = `
   }
 
   .ri-mode-toggle__btn--active {
-    background: white;
+    background: var(--card);
     color: var(--ri-slate-900);
     box-shadow: var(--ri-shadow-sm);
   }
@@ -1311,7 +1285,7 @@ const editorStyles = `
 
   /* Header */
   .ri-header {
-    background: white;
+    background: var(--card);
     border-radius: var(--ri-radius-lg);
     padding: 24px;
     box-shadow: var(--ri-shadow-sm);
@@ -1394,7 +1368,7 @@ const editorStyles = `
   }
 
   .ri-header__meta-value--link {
-    color: var(--ri-sky-600);
+    color: var(--primary);
     text-decoration: none;
   }
 
@@ -1470,7 +1444,7 @@ const editorStyles = `
     position: absolute;
     top: calc(100% + 4px);
     right: 0;
-    background: white;
+    background: var(--popover);
     border-radius: var(--ri-radius-md);
     box-shadow: var(--ri-shadow-lg);
     border: 1px solid var(--ri-slate-200);
@@ -1535,7 +1509,7 @@ const editorStyles = `
 
   /* Panel */
   .ri-panel {
-    background: white;
+    background: var(--card);
     border-radius: var(--ri-radius-lg);
     padding: 24px;
     box-shadow: var(--ri-shadow-sm);
@@ -1623,17 +1597,17 @@ const editorStyles = `
   }
 
   .ri-btn--primary {
-    background: var(--ri-sky-600);
-    color: white;
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   .ri-btn--primary:hover {
-    background: var(--ri-sky-500);
+    background: color-mix(in oklab, var(--primary) 90%, transparent);
   }
 
   .ri-btn--success {
     background: var(--ri-emerald-600);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .ri-btn--success:hover {
@@ -1642,7 +1616,7 @@ const editorStyles = `
 
   .ri-btn--warning {
     background: var(--ri-amber-500);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .ri-btn--warning:hover {
@@ -1651,7 +1625,7 @@ const editorStyles = `
 
   .ri-btn--danger {
     background: var(--ri-rose-600);
-    color: white;
+    color: var(--primary-foreground);
   }
 
   .ri-btn--danger:hover {
@@ -1689,7 +1663,7 @@ const editorStyles = `
     font-family: var(--ri-font-sans);
     font-size: 0.875rem;
     color: var(--ri-slate-800);
-    background: white;
+    background: var(--background);
     border: 1px solid var(--ri-slate-300);
     border-radius: var(--ri-radius-md);
     transition: border-color var(--ri-transition-fast);
@@ -1697,7 +1671,7 @@ const editorStyles = `
 
   .ri-input:focus {
     outline: none;
-    border-color: var(--ri-sky-500);
+    border-color: var(--ring);
   }
 
   .ri-input--sm {
@@ -1943,7 +1917,7 @@ const editorStyles = `
   }
 
   .ri-modal {
-    background: white;
+    background: var(--card);
     border-radius: var(--ri-radius-lg);
     padding: 24px;
     width: 100%;
@@ -2013,13 +1987,13 @@ const editorStyles = `
   }
 
   .ri-profile-selector__item:hover {
-    background: white;
+    background: var(--card);
     border-color: var(--ri-slate-200);
   }
 
   .ri-profile-selector__item--active {
-    background: white;
-    border-color: var(--ri-sky-500);
+    background: var(--card);
+    border-color: var(--primary);
   }
 
   .ri-profile-selector__name {

@@ -59,6 +59,12 @@
 @source inline(
   "{dark:text-{blue,green,orange,purple,red,yellow}-100,dark:text-red-400,dark:bg-blue-{50,400,600,700,800,900},dark:bg-green-{300,400,800,900},dark:bg-{purple,red,yellow}-{300,400,800,900},dark:bg-violet-500}"
 );
+/* Arbitrary-value LAYOUT utilities used by the date-picker's year/month picker
+   views (document-engineering, node_modules → never content-scanned). Without
+   these the year grid collapses into an unreadable squished card. */
+@source inline(
+  "{h-[28px],w-[68px],w-[114px],rounded-[4px],rounded-[6px],text-[12px],leading-[18px],gap-x-[14px],gap-y-[15px],px-[2px],py-[5px]}"
+);
 
 @theme {
   /* You can customize the theme by overriding the theme variables here */
@@ -129,6 +135,21 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Drive-app content surface (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   DOCUMENT editors (builder-profile, …) sit on Connect's document-host surface
+   — slate-800, remapped above to Achra --card (#252a34). The builder-team-admin
+   DRIVE editor replaces the drive view and sits directly on the DARKER app
+   canvas (slate-900 → #1b1e24), so its pages read visibly darker than the
+   document editors. Paint its shell with the same slate-800 surface so both
+   share one background. Scoped to the `bta-drive-shell` tag on team-admin's
+   DriveExplorer ONLY (service-offering-app already matches its host); dark-only
+   (in light mode the hosts are already the same light canvas). */
+.dark .bta-drive-shell {
+  background-color: var(--color-slate-800);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
    Dashboard card surface (dark mode)
    ──────────────────────────────────────────────────────────────────────────
    The page background is `--color-slate-900` (≈17% lightness). Cards need a
@@ -196,6 +217,186 @@
 }
 .sidebar__item-caret svg.sidebar__item-caret--no-children {
   color: var(--border) !important;
+}
+/* Sidebar row tooltip text. The document-engineering Tooltip (shown when
+   hovering truncated sidebar nodes) hardcodes `text-gray-900
+   dark:text-gray-200` — the dark value reads as muted on the dark surface.
+   The tooltip renders in a Radix portal under <body>, OUTSIDE the sidebar DOM,
+   so per-editor <style> blocks can't reach it — this global rule themes every
+   document-engineering tooltip in both drives. Keyed on the component's own
+   class string (substring match) so other Radix popper content (selects,
+   dropdowns) is untouched; var(--foreground) flips with the theme. */
+[data-radix-popper-content-wrapper] [class*="dark:text-gray-200"] {
+  color: var(--foreground);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   document-engineering form controls (Select, DatePicker, Input) — dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   The scalars/data-entry controls pair light classes with dark variants that
+   lose the cascade against the plain light utilities (`bg-white` wins over
+   `dark:bg-slate-600`), and their dark text uses the redefined gray palette
+   (`dark:text-gray-700` ≈ 29% lightness — unreadable). Symptoms: white
+   dropdown panels with invisible options, faint trigger/date-input text.
+
+   Fixed on the components' OWN class strings (substring keys, same technique
+   as the tooltip rule above) and cmdk's stable attributes. `!important` per
+   the escalation rule — these utilities arrive from multiple compiled
+   stylesheets and some carry `!`-important variants. Matches the convention:
+   inputs/triggers = recessed --background wells, dropdown panels = --popover,
+   option text = --foreground. */
+
+/* Native HTML date/time inputs: the BROWSER renders their dropdown picker UI
+   (calendar popup, clock) and only themes it dark when the input declares
+   `color-scheme: dark` — without this the popup is a white panel regardless of
+   any CSS on the page. Global so every editor's native inputs are covered. */
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="datetime-local"],
+.dark input[type="month"],
+.dark input[type="week"] {
+  color-scheme: dark;
+}
+
+/* Triggers + text/date inputs (shared Input carries `dark:bg-charcoal-900`). */
+.dark [class*="dark:bg-charcoal-900"] {
+  background-color: var(--background) !important;
+  border-color: var(--input) !important;
+  color: var(--foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"]::placeholder {
+  color: var(--muted-foreground) !important;
+}
+/* Select trigger's selected-value span (`truncate text-gray-900 ...`). */
+.dark [class*="truncate text-gray-900"] {
+  color: var(--foreground) !important;
+}
+/* Date/time picker internals. The BasePickerField wrapper is themed by the
+   charcoal rule above, but its inner <input> ships `focus:bg-white` (a white
+   flash on focus) and its calendar-button segment carries the PANEL class pair
+   (`bg-white dark:bg-slate-600`), which the panel rule below would tint a
+   different shade — pin both transparent so the whole field reads as ONE
+   recessed input. Higher specificity (.dark + two hooks) beats the panel rule. */
+.dark [class*="dark:bg-charcoal-900"] input,
+.dark [class*="dark:bg-charcoal-900"] .input-field {
+  background-color: transparent !important;
+  color: var(--foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"] input::placeholder {
+  color: var(--muted-foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"] [class*="dark:bg-slate-600"] {
+  background-color: transparent !important;
+  border-color: var(--input) !important;
+}
+/* Calendar dropdown (react-day-picker v9 behind the stable
+   `.date-picker__calendar` class; day states arrive as data attributes).
+   Day numbers / caption / nav chevrons hardcode near-black text in dark mode —
+   pin interactive text to --foreground, de-emphasize weekday headers and
+   outside/disabled days with --muted-foreground, and force dark text on the
+   selected day's light pill (its `!`-important classes may out-layer ours, so
+   restate the readable combination explicitly). */
+.dark .date-picker__calendar {
+  background-color: var(--popover) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+.dark .date-picker__calendar button {
+  color: var(--foreground) !important;
+}
+.dark .date-picker__calendar th,
+.dark .date-picker__calendar [data-outside="true"] button,
+.dark .date-picker__calendar [data-disabled="true"] button {
+  color: var(--muted-foreground) !important;
+}
+.dark .date-picker__calendar [data-selected="true"] button,
+.dark .date-picker__calendar button[aria-selected="true"],
+.dark .date-picker__calendar [aria-selected="true"] button {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+/* "Today" keeps its light pill, but our --foreground day-text would render
+   white-on-white there — pin it to grey instead. Guarded so a today that is
+   ALSO the selected day stays on the violet pill with light text. */
+.dark
+  .date-picker__calendar
+  [data-today="true"]:not([data-selected="true"]):not([aria-selected="true"])
+  button {
+  color: var(--muted-foreground) !important;
+}
+.dark .date-picker__calendar button:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+/* Year / month picker views (caption-click). Buttons hardcode light styling
+   (`text-gray-900`, current = `bg-gray-100`, selected = `bg-gray-900
+   text-white`) — keyed on their arbitrary size classes (`w-[68px]` years,
+   `py-[5px]` months), which are unique to these views. Selected follows the
+   violet selection convention. */
+.dark [class*="w-[68px]"],
+.dark [class*="py-[5px]"] {
+  color: var(--foreground) !important;
+}
+.dark [class*="w-[68px]"]:hover,
+.dark [class*="py-[5px]"]:hover,
+.dark [class*="w-[68px]"][class*="bg-gray-100"],
+.dark [class*="py-[5px]"][class*="bg-gray-100"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark [class*="w-[68px]"][class*="bg-gray-900"],
+.dark [class*="py-[5px]"][class*="bg-gray-900"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+/* Calendar nav arrows (‹ ›): they're `position: absolute` with NO z-index, so
+   the caption row (also positioned, later in the DOM) painted over them and
+   swallowed clicks — the arrows looked fine but were dead in all views. Lift
+   ONLY the buttons (z-index applies to their existing absolute positioning);
+   do NOT make the nav `position: relative` — that re-anchors the arrows to the
+   nav box instead of the months container and they render misplaced. */
+.date-picker__calendar nav button {
+  z-index: 50;
+}
+/* Footer Year/Month toggle buttons (`.date-picker__date-footer`): shipped
+   `bg-white border-gray-200 text-gray-500` — the white blocks. */
+.dark .date-picker__date-footer button {
+  background-color: var(--muted) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+.dark .date-picker__date-footer button:hover {
+  background-color: var(--accent) !important;
+}
+
+/* Dropdown / calendar panels (PopoverContent + date-picker wrapper both carry
+   `dark:bg-slate-600`). */
+.dark [class*="dark:bg-slate-600"] {
+  background-color: var(--popover) !important;
+  border-color: var(--border) !important;
+  color: var(--popover-foreground) !important;
+}
+
+/* cmdk option rows (Select lists, autocompletes): readable foreground text,
+   subtle overlay hover/selection, hairline separators. */
+.dark [cmdk-item],
+.dark [cmdk-item] span {
+  color: var(--foreground) !important;
+}
+.dark [cmdk-item]:hover,
+.dark [cmdk-item][data-selected="true"],
+.dark [cmdk-item][aria-selected="true"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+/* Each option row ships `border-y-2 border-white dark:border-slate-600` —
+   separators DESIGNED to be invisible against the original panel color. With
+   the panel now --popover they'd resolve lighter and stripe the list, so blend
+   them into the panel for one uniform dark surface (rows stay transparent;
+   only the hover/selected overlay above lifts them). */
+.dark [cmdk-item] {
+  border-color: var(--popover) !important;
+  background-color: transparent;
+}
+.dark [cmdk-input] {
+  color: var(--foreground) !important;
 }
 /* Header (drive title) — `dark:text-gray-300` / `dark:border-gray-800` also
    live in node_modules, so the title falls back to dark `text-gray-700` and the

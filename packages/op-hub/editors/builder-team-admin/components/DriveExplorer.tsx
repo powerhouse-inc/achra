@@ -339,7 +339,7 @@ export function DriveExplorer({ children }: EditorProps) {
   };
 
   return (
-    <div className="ph-drive-explorer-shell flex h-full w-full overflow-hidden">
+    <div className="ph-drive-explorer-shell bta-drive-shell flex h-full w-full overflow-hidden">
       <FolderTree onCustomViewChange={setCustomView} />
       <div
         className={`relative min-h-0 min-w-0 flex-1 overflow-y-auto p-4 ${

@@ -152,16 +152,16 @@ const invoicesPanelStyles = `
   justify-content: space-between;
   gap: 16px;
   padding: 12px 14px;
-  border: 1px solid var(--si-slate-100, #e2e8f0);
+  border: 1px solid var(--si-slate-200, var(--border));
   border-radius: var(--si-radius-md, 8px);
-  background: white;
+  background: var(--card);
   cursor: pointer;
   transition: all 150ms;
   text-align: left;
 }
 .si-invoice__row:hover {
-  border-color: var(--si-violet-500, #6d28d9);
-  background: #fafaff;
+  border-color: var(--si-violet-500, var(--primary));
+  background: color-mix(in oklab, var(--primary) 6%, transparent);
 }
 .si-invoice__row-main {
   flex: 1 1 auto;
@@ -176,7 +176,7 @@ const invoicesPanelStyles = `
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--si-slate-800, #1e293b);
+  color: var(--si-slate-800, var(--foreground));
 }
 .si-invoice__status {
   font-size: 0.65rem;
@@ -188,28 +188,28 @@ const invoicesPanelStyles = `
   border: 1px solid;
 }
 .si-invoice__status--draft {
-  background: #f1f5f9;
-  color: #475569;
-  border-color: #cbd5e1;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  border-color: var(--border);
 }
 .si-invoice__status--issued {
-  background: #ecfdf5;
-  color: #047857;
-  border-color: #a7f3d0;
+  background: color-mix(in oklab, var(--status-success) 12%, transparent);
+  color: var(--status-success);
+  border-color: color-mix(in oklab, var(--status-success) 30%, transparent);
 }
 .si-invoice__status--paid {
-  background: #d1fae5;
-  color: #065f46;
-  border-color: #6ee7b7;
+  background: color-mix(in oklab, var(--status-success) 22%, transparent);
+  color: var(--status-success);
+  border-color: color-mix(in oklab, var(--status-success) 45%, transparent);
 }
 .si-invoice__status--void {
-  background: #fef2f2;
-  color: #b91c1c;
-  border-color: #fecaca;
+  background: color-mix(in oklab, var(--destructive) 12%, transparent);
+  color: var(--destructive);
+  border-color: color-mix(in oklab, var(--destructive) 30%, transparent);
 }
 .si-invoice__row-meta {
   font-size: 0.78rem;
-  color: var(--si-slate-500, #64748b);
+  color: var(--si-slate-500, var(--muted-foreground));
   margin-top: 4px;
 }
 .si-invoice__row-amount {
@@ -219,11 +219,11 @@ const invoicesPanelStyles = `
 .si-invoice__total {
   font-weight: 600;
   font-size: 0.95rem;
-  color: var(--si-slate-800, #1e293b);
+  color: var(--si-slate-800, var(--foreground));
   font-variant-numeric: tabular-nums;
 }
 .si-invoice__paid {
   font-size: 0.75rem;
-  color: var(--si-emerald-600, #059669);
+  color: var(--si-emerald-600, var(--status-success));
 }
 `;

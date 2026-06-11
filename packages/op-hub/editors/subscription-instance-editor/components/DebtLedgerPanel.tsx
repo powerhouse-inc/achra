@@ -1031,7 +1031,7 @@ const debtLedgerStyles = `
   justify-content: space-between;
   width: 100%;
   padding: 16px 20px;
-  background: white;
+  background: var(--card);
   border: none;
   cursor: pointer;
   text-align: left;
@@ -1143,7 +1143,7 @@ const debtLedgerStyles = `
   margin-top: 12px;
   border: 1px solid var(--si-slate-200);
   border-radius: 8px;
-  background: white;
+  background: var(--card);
   overflow: hidden;
 }
 .si-debt-cycle--setup {
@@ -1219,7 +1219,7 @@ const debtLedgerStyles = `
   border: 1px solid var(--si-slate-200);
   border-radius: 6px;
   margin-bottom: 6px;
-  background: white;
+  background: var(--card);
   transition: background 0.15s, border-color 0.15s;
 }
 .si-debt-row[data-actionable="true"] {

@@ -409,13 +409,12 @@ export function ResourceTemplateSelector({
       >
         {/* Header */}
         <div
-          className="flex items-start gap-5 p-6 bg-white rounded-2xl border-l-4 border-l-teal-500 max-md:flex-col"
+          className="flex items-start gap-5 p-6 bg-card rounded-2xl border-l-4 border-l-primary max-md:flex-col"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
-          <div className="w-12 h-12 rounded-xl bg-teal-100 text-teal-500 flex items-center justify-center shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
             <svg
               className="w-6 h-6"
               viewBox="0 0 24 24"
@@ -427,11 +426,11 @@ export function ResourceTemplateSelector({
             </svg>
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold text-[#1a1f36] m-0 mb-2 tracking-tight">
+            <h2 className="text-xl font-bold text-foreground m-0 mb-2 tracking-tight">
               Select a Product
               <InfoIcon content="A Product defines the scope and available services for your offering. Select one to pre-populate your offering structure." />
             </h2>
-            <p className="text-[0.9375rem] text-[#4a5578] m-0 leading-relaxed max-w-[600px]">
+            <p className="text-[0.9375rem] text-muted-foreground m-0 leading-relaxed max-w-[600px]">
               Choose a product to base this service offering on. The product
               defines the configuration, target audiences, and available
               services.
@@ -440,9 +439,9 @@ export function ResourceTemplateSelector({
         </div>
 
         {/* Search */}
-        <div className="flex items-center gap-3 py-3.5 px-[18px] bg-white border-[1.5px] border-[#e4e8f0] rounded-xl transition-all duration-150 focus-within:border-teal-500 focus-within:shadow-[0_0_0_3px_#ccfbf1]">
+        <div className="flex items-center gap-3 py-3.5 px-[18px] bg-background border-[1.5px] border-input rounded-xl transition-all duration-150 focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_30%,transparent)]">
           <svg
-            className="w-5 h-5 text-[#8792a8] shrink-0"
+            className="w-5 h-5 text-muted-foreground shrink-0"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -455,14 +454,14 @@ export function ResourceTemplateSelector({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search products..."
-            className="flex-1 text-[0.9375rem] bg-transparent border-none outline-none text-[#1a1f36] placeholder:text-[#8792a8]"
+            className="flex-1 text-[0.9375rem] bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground"
             style={{ fontFamily: "'Instrument Sans', system-ui, sans-serif" }}
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery("")}
-              className="flex items-center justify-center w-6 h-6 p-0 bg-[#f0f2f7] border-none rounded-md text-[#8792a8] cursor-pointer transition-all duration-150 hover:bg-[#e4e8f0] hover:text-[#4a5578]"
+              className="flex items-center justify-center w-6 h-6 p-0 bg-muted border-none rounded-md text-muted-foreground cursor-pointer transition-all duration-150 hover:bg-accent hover:text-foreground"
             >
               <svg
                 className="w-3.5 h-3.5"
@@ -478,9 +477,9 @@ export function ResourceTemplateSelector({
 
         {/* Facet Filters */}
         {aggregatedFacets.length > 0 && (
-          <div className="flex flex-col gap-3 py-4 px-5 bg-slate-50 border border-slate-200 rounded-xl">
+          <div className="flex flex-col gap-3 py-4 px-5 bg-muted border border-border rounded-xl">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Filter by facet
                 <InfoIcon content="Facets are customizable dimensions of your service (e.g., Legal Entity type, Team size). Clients choose from these options when subscribing." />
               </span>
@@ -488,7 +487,7 @@ export function ResourceTemplateSelector({
                 <button
                   type="button"
                   onClick={clearAllFacetFilters}
-                  className="text-xs font-medium text-violet-600 bg-transparent border-none cursor-pointer p-0 hover:underline"
+                  className="text-xs font-medium text-primary bg-transparent border-none cursor-pointer p-0 hover:underline"
                   style={{ fontFamily: "system-ui" }}
                 >
                   Clear filters
@@ -507,14 +506,14 @@ export function ResourceTemplateSelector({
                     onClick={() => toggleFacet(facet.categoryKey)}
                     className={`inline-flex items-center gap-1.5 py-1.5 px-3.5 text-[0.8125rem] font-medium rounded-full cursor-pointer transition-all duration-150 ${
                       isActive
-                        ? "bg-violet-600 border-[1.5px] border-violet-600 text-white hover:bg-violet-700 hover:border-violet-700"
-                        : "bg-white border-[1.5px] border-slate-200 text-slate-600 hover:border-violet-300 hover:text-violet-700"
+                        ? "bg-primary border-[1.5px] border-primary text-primary-foreground hover:bg-primary/90 hover:border-primary/90"
+                        : "bg-card border-[1.5px] border-border text-muted-foreground hover:border-primary/40 hover:text-primary"
                     }`}
                     style={{ fontFamily: "system-ui" }}
                   >
                     {facet.categoryLabel}
                     {selectedCount > 0 && (
-                      <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-[5px] text-[0.6875rem] font-bold bg-white/25 rounded-full">
+                      <span className="inline-flex items-center justify-center min-w-[18px] h-[18px] px-[5px] text-[0.6875rem] font-bold bg-primary-foreground/25 rounded-full">
                         {selectedCount}
                       </span>
                     )}
@@ -531,9 +530,9 @@ export function ResourceTemplateSelector({
                 return (
                   <div
                     key={facet.categoryKey}
-                    className="flex items-start gap-2.5 pt-2.5 border-t border-slate-200"
+                    className="flex items-start gap-2.5 pt-2.5 border-t border-border"
                   >
-                    <span className="text-xs font-semibold text-slate-500 whitespace-nowrap pt-[5px] min-w-[80px]">
+                    <span className="text-xs font-semibold text-muted-foreground whitespace-nowrap pt-[5px] min-w-[80px]">
                       {facet.categoryLabel}:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -546,8 +545,8 @@ export function ResourceTemplateSelector({
                           }
                           className={`py-1 px-3 text-xs font-medium rounded-lg cursor-pointer transition-all duration-150 ${
                             selected.has(opt)
-                              ? "bg-emerald-50 border border-emerald-500 text-emerald-700 hover:bg-emerald-100"
-                              : "bg-white border border-slate-200 text-slate-600 hover:border-emerald-400 hover:text-emerald-700"
+                              ? "bg-status-success/20 border border-status-success text-status-success hover:bg-status-success/30"
+                              : "bg-card border border-border text-muted-foreground hover:border-status-success/40 hover:text-status-success"
                           }`}
                           style={{ fontFamily: "system-ui" }}
                         >
@@ -559,7 +558,7 @@ export function ResourceTemplateSelector({
                 );
               })}
             {hasAnyFacetFilter && (
-              <div className="text-xs font-medium text-slate-500 pt-1">
+              <div className="text-xs font-medium text-muted-foreground pt-1">
                 Showing {filteredTemplates.length} of {allTemplates.length}{" "}
                 product{allTemplates.length !== 1 ? "s" : ""}
               </div>
@@ -570,18 +569,18 @@ export function ResourceTemplateSelector({
         {/* Templates List */}
         <div className="flex flex-col gap-6">
           {isLoadingRemote && allTemplates.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-2xl border-2 border-dashed border-[#e4e8f0]">
+            <div className="p-12 text-center bg-card rounded-2xl border-2 border-dashed border-border">
               <div
-                className="w-8 h-8 border-[3px] border-[#e4e8f0] border-t-teal-500 rounded-full mx-auto mb-3"
+                className="w-8 h-8 border-[3px] border-border border-t-primary rounded-full mx-auto mb-3"
                 style={{ animation: "rts-spin 0.8s linear infinite" }}
               />
-              <p className="text-[0.9375rem] text-[#8792a8] m-0 max-w-[400px] mx-auto leading-relaxed">
+              <p className="text-[0.9375rem] text-muted-foreground m-0 max-w-[400px] mx-auto leading-relaxed">
                 Loading products...
               </p>
             </div>
           ) : allTemplates.length === 0 ? (
-            <div className="p-12 text-center bg-white rounded-2xl border-2 border-dashed border-[#e4e8f0]">
-              <div className="w-16 h-16 mx-auto mb-4 text-[#8792a8] opacity-50">
+            <div className="p-12 text-center bg-card rounded-2xl border-2 border-dashed border-border">
+              <div className="w-16 h-16 mx-auto mb-4 text-muted-foreground opacity-50">
                 <svg
                   className="w-full h-full"
                   viewBox="0 0 24 24"
@@ -592,17 +591,17 @@ export function ResourceTemplateSelector({
                   <path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-[#1a1f36] m-0 mb-2">
+              <h3 className="text-lg font-semibold text-foreground m-0 mb-2">
                 No Products Found
               </h3>
-              <p className="text-[0.9375rem] text-[#8792a8] m-0 max-w-[400px] mx-auto leading-relaxed">
+              <p className="text-[0.9375rem] text-muted-foreground m-0 max-w-[400px] mx-auto leading-relaxed">
                 Create a product first to define the base configuration for your
                 service offering.
               </p>
             </div>
           ) : filteredTemplates.length === 0 ? (
-            <div className="p-6 text-center bg-[#fafbfc] rounded-2xl border-2 border-solid border-[#e4e8f0]">
-              <p className="text-[0.9375rem] text-[#8792a8] m-0 max-w-[400px] mx-auto leading-relaxed">
+            <div className="p-6 text-center bg-card rounded-2xl border-2 border-solid border-border">
+              <p className="text-[0.9375rem] text-muted-foreground m-0 max-w-[400px] mx-auto leading-relaxed">
                 No products match
                 {searchQuery ? ` "${searchQuery}"` : " the selected filters"}
               </p>
@@ -612,8 +611,8 @@ export function ResourceTemplateSelector({
               {/* Active Templates Section */}
               {activeTemplates.length > 0 && (
                 <div>
-                  <h3 className="flex items-center gap-2.5 text-[0.8125rem] font-semibold text-[#4a5578] uppercase tracking-wide m-0 mb-4">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <h3 className="flex items-center gap-2.5 text-[0.8125rem] font-semibold text-muted-foreground uppercase tracking-wide m-0 mb-4">
+                    <span className="w-2 h-2 rounded-full bg-status-success" />
                     Active Products
                   </h3>
                   <div
@@ -639,8 +638,8 @@ export function ResourceTemplateSelector({
               {/* Other Templates Section */}
               {otherTemplates.length > 0 && (
                 <div>
-                  <h3 className="flex items-center gap-2.5 text-[0.8125rem] font-semibold text-[#4a5578] uppercase tracking-wide m-0 mb-4">
-                    <span className="w-2 h-2 rounded-full bg-slate-500" />
+                  <h3 className="flex items-center gap-2.5 text-[0.8125rem] font-semibold text-muted-foreground uppercase tracking-wide m-0 mb-4">
+                    <span className="w-2 h-2 rounded-full bg-muted-foreground" />
                     Other Products
                   </h3>
                   <div
@@ -664,9 +663,9 @@ export function ResourceTemplateSelector({
 
               {/* Remote loading indicator */}
               {isLoadingRemote && (
-                <div className="flex items-center justify-center gap-2.5 p-3 text-[0.8125rem] text-[#8792a8] bg-[#fafbfc] rounded-lg border border-[#f0f2f7]">
+                <div className="flex items-center justify-center gap-2.5 p-3 text-[0.8125rem] text-muted-foreground bg-muted rounded-lg border border-border">
                   <div
-                    className="w-4 h-4 border-2 border-[#e4e8f0] border-t-teal-500 rounded-full"
+                    className="w-4 h-4 border-2 border-border border-t-primary rounded-full"
                     style={{ animation: "rts-spin 0.8s linear infinite" }}
                   />
                   <span>Loading remote products...</span>
@@ -712,18 +711,18 @@ function TemplateCard({
     <button
       type="button"
       onClick={onSelect}
-      className={`relative flex flex-col text-left bg-white border-2 rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 ${
+      className={`relative flex flex-col text-left bg-card border-2 rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 ${
         isSelected
-          ? "border-teal-500 bg-teal-100 hover:border-teal-500"
+          ? "border-primary bg-primary/10 hover:border-primary"
           : isRecommended
-            ? "border-amber-500 hover:border-amber-500"
-            : "border-[#f0f2f7] hover:border-[#e4e8f0] hover:-translate-y-0.5"
+            ? "border-status-warning hover:border-status-warning"
+            : "border-muted hover:border-border hover:-translate-y-0.5"
       }`}
       style={
         isRecommended && !isSelected
           ? {
               boxShadow:
-                "0 0 0 1px #f59e0b, 0 4px 16px rgba(245, 158, 11, 0.15)",
+                "0 0 0 1px var(--status-warning), 0 4px 16px color-mix(in oklab, var(--status-warning) 15%, transparent)",
             }
           : !isSelected
             ? undefined
@@ -732,10 +731,12 @@ function TemplateCard({
     >
       {isRecommended && !isSelected && (
         <div
-          className="absolute -top-px right-10 flex items-center gap-1 py-1.5 px-3 text-[0.625rem] font-bold uppercase tracking-[0.04em] text-white rounded-b-lg z-[5]"
+          className="absolute -top-px right-10 flex items-center gap-1 py-1.5 px-3 text-[0.625rem] font-bold uppercase tracking-[0.04em] text-primary-foreground rounded-b-lg z-[5]"
           style={{
-            background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
-            boxShadow: "0 2px 8px rgba(245, 158, 11, 0.4)",
+            background:
+              "linear-gradient(135deg, var(--status-warning) 0%, color-mix(in oklab, var(--status-warning) 80%, black) 100%)",
+            boxShadow:
+              "0 2px 8px color-mix(in oklab, var(--status-warning) 40%, transparent)",
           }}
         >
           <svg
@@ -752,7 +753,7 @@ function TemplateCard({
       )}
       {!template.isRemote && (
         <div
-          className="absolute top-2.5 right-2.5 flex items-center gap-1 py-1 px-2.5 text-[0.625rem] font-bold uppercase tracking-[0.04em] rounded-full z-[4] text-emerald-600 bg-emerald-50"
+          className="absolute top-2.5 right-2.5 flex items-center gap-1 py-1 px-2.5 text-[0.625rem] font-bold uppercase tracking-[0.04em] rounded-full z-[4] text-status-success bg-status-success/20"
           style={{ backdropFilter: "blur(8px)" }}
         >
           <svg
@@ -771,8 +772,8 @@ function TemplateCard({
         <div
           className={`absolute top-2.5 right-2.5 flex items-center gap-1 py-1 px-2.5 text-[0.625rem] font-bold uppercase tracking-[0.04em] rounded-full z-[4] ${
             template.operatorName
-              ? "normal-case font-semibold text-teal-500 bg-teal-100"
-              : "text-[#7c5cff] bg-[#f4f1ff]"
+              ? "normal-case font-semibold text-primary bg-primary/10"
+              : "text-primary bg-primary/10"
           }`}
           style={{ backdropFilter: "blur(8px)" }}
         >
@@ -802,18 +803,13 @@ function TemplateCard({
       <div className="relative h-[100px]">
         {globalState.thumbnailUrl ? (
           <div
-            className="w-full h-full bg-cover bg-center bg-[#f0f2f7]"
+            className="w-full h-full bg-cover bg-center bg-muted"
             style={{ backgroundImage: `url(${globalState.thumbnailUrl})` }}
           />
         ) : (
-          <div
-            className="w-full h-full flex items-center justify-center text-[#8792a8]"
-            style={{
-              background: "linear-gradient(135deg, #f0f2f7 0%, #e4e8f0 100%)",
-            }}
-          >
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground bg-background">
             <svg
-              className="w-8 h-8 opacity-50"
+              className="w-8 h-8 opacity-80"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -841,11 +837,11 @@ function TemplateCard({
         </span>
       </div>
       <div className="p-4 flex flex-col gap-2 flex-1">
-        <h4 className="text-base font-semibold text-[#1a1f36] m-0 tracking-tight">
+        <h4 className="text-base font-semibold text-foreground m-0 tracking-tight">
           {globalState.title || "Untitled"}
         </h4>
         <p
-          className="text-[0.8125rem] text-[#4a5578] m-0 leading-normal overflow-hidden"
+          className="text-[0.8125rem] text-muted-foreground m-0 leading-normal overflow-hidden"
           style={{
             display: "-webkit-box",
             WebkitLineClamp: 2,
@@ -856,7 +852,7 @@ function TemplateCard({
         </p>
         <div className="flex gap-3 mt-auto pt-2">
           {globalState.targetAudiences.length > 0 && (
-            <span className="inline-flex items-center gap-1 text-xs text-[#8792a8]">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <svg
                 className="w-3.5 h-3.5"
                 viewBox="0 0 24 24"
@@ -875,7 +871,7 @@ function TemplateCard({
             </span>
           )}
           {globalState.services.length > 0 && (
-            <span className="inline-flex items-center gap-1 text-xs text-[#8792a8]">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <svg
                 className="w-3.5 h-3.5"
                 viewBox="0 0 24 24"
@@ -890,7 +886,7 @@ function TemplateCard({
             </span>
           )}
           {globalState.facetTargets.length > 0 && (
-            <span className="inline-flex items-center gap-1 text-xs text-[#8792a8]">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <svg
                 className="w-3.5 h-3.5"
                 viewBox="0 0 24 24"
@@ -906,8 +902,11 @@ function TemplateCard({
       </div>
       {isSelected && (
         <div
-          className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-teal-500 text-white flex items-center justify-center"
-          style={{ boxShadow: "0 2px 8px rgba(20, 184, 166, 0.4)" }}
+          className="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center"
+          style={{
+            boxShadow:
+              "0 2px 8px color-mix(in oklab, var(--primary) 40%, transparent)",
+          }}
         >
           <svg
             className="w-4 h-4"
@@ -1077,9 +1076,9 @@ function TemplateDetailView({
   return (
     <div className="flex flex-col gap-5">
       {/* Selected Template Header */}
-      <div className="flex items-center justify-between py-4 px-5 bg-teal-100 border-2 border-teal-500 rounded-xl">
+      <div className="flex items-center justify-between py-4 px-5 bg-primary/10 border-2 border-primary rounded-xl">
         <div className="flex items-center justify-between w-full">
-          <span className="inline-flex items-center gap-2 text-sm font-semibold text-teal-500">
+          <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
             <svg
               className="w-[18px] h-[18px]"
               viewBox="0 0 24 24"
@@ -1094,7 +1093,7 @@ function TemplateDetailView({
           <button
             type="button"
             onClick={onChangeTemplate}
-            className="inline-flex items-center gap-1.5 py-2 px-4 text-[0.8125rem] font-semibold text-teal-500 bg-white border-[1.5px] border-teal-500 rounded-lg cursor-pointer transition-all duration-150 hover:bg-teal-500 hover:text-white"
+            className="inline-flex items-center gap-1.5 py-2 px-4 text-[0.8125rem] font-semibold text-primary bg-card border-[1.5px] border-primary rounded-lg cursor-pointer transition-all duration-150 hover:bg-primary hover:text-primary-foreground"
             style={{ fontFamily: "'Instrument Sans', system-ui, sans-serif" }}
           >
             <svg
@@ -1113,29 +1112,25 @@ function TemplateDetailView({
 
       {/* Hero Section */}
       <section
-        className="grid gap-6 bg-white rounded-2xl p-6 max-[900px]:grid-cols-1"
+        className="grid gap-6 bg-card rounded-2xl p-6 max-[900px]:grid-cols-1"
         style={{
           gridTemplateColumns: "180px 1fr",
-          boxShadow:
-            "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+          boxShadow: "var(--shadow-sm)",
         }}
       >
         <div className="relative max-[900px]:-order-1">
           <div
-            className="w-[180px] h-[135px] rounded-xl bg-cover bg-center relative overflow-hidden max-[900px]:w-full max-[900px]:h-40"
-            style={{
-              backgroundImage: globalState.thumbnailUrl
-                ? `url(${globalState.thumbnailUrl})`
-                : undefined,
-              background: !globalState.thumbnailUrl
-                ? "linear-gradient(135deg, #f0f2f7 0%, #e4e8f0 100%)"
-                : undefined,
-            }}
+            className="w-[180px] h-[135px] rounded-xl bg-cover bg-center relative overflow-hidden max-[900px]:w-full max-[900px]:h-40 bg-background border border-border"
+            style={
+              globalState.thumbnailUrl
+                ? { backgroundImage: `url(${globalState.thumbnailUrl})` }
+                : undefined
+            }
           >
             {!globalState.thumbnailUrl && (
-              <div className="absolute inset-0 flex items-center justify-center text-[#8792a8]">
+              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
                 <svg
-                  className="w-10 h-10 opacity-50"
+                  className="w-10 h-10 opacity-80"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -1165,7 +1160,7 @@ function TemplateDetailView({
         </div>
 
         <div className="flex flex-col gap-3">
-          <h1 className="text-[1.75rem] font-bold text-[#1a1f36] m-0 tracking-tight">
+          <h1 className="text-[1.75rem] font-bold text-foreground m-0 tracking-tight">
             {globalState.title || "Untitled Product"}
           </h1>
 
@@ -1175,7 +1170,7 @@ function TemplateDetailView({
               {globalState.targetAudiences.map((audience) => (
                 <span
                   key={audience.id}
-                  className="inline-flex items-center py-[5px] px-3 text-[0.8125rem] font-semibold rounded-full bg-teal-100 text-teal-500"
+                  className="inline-flex items-center py-[5px] px-3 text-[0.8125rem] font-semibold rounded-full bg-primary/10 text-primary"
                   style={
                     audience.color
                       ? {
@@ -1185,7 +1180,8 @@ function TemplateDetailView({
                           color: audience.color,
                         }
                       : {
-                          border: "1px solid rgba(20, 184, 166, 0.2)",
+                          border:
+                            "1px solid color-mix(in oklab, var(--primary) 20%, transparent)",
                         }
                   }
                 >
@@ -1195,7 +1191,7 @@ function TemplateDetailView({
             </div>
           )}
 
-          <p className="text-[0.9375rem] leading-relaxed text-[#4a5578] m-0">
+          <p className="text-[0.9375rem] leading-relaxed text-foreground m-0">
             {globalState.summary || "No summary provided"}
           </p>
         </div>
@@ -1204,14 +1200,13 @@ function TemplateDetailView({
       {/* Description */}
       {globalState.description && (
         <section
-          className="bg-white rounded-2xl p-6"
+          className="bg-card rounded-2xl p-6"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <div className="flex items-start gap-3.5 mb-4">
-            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-[#f4f1ff] text-[#7c5cff]">
+            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-primary/10 text-primary">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
@@ -1223,14 +1218,14 @@ function TemplateDetailView({
               </svg>
             </div>
             <div>
-              <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+              <h3 className="text-base font-semibold text-foreground m-0">
                 Description
               </h3>
             </div>
           </div>
           <MarkdownPreview
             content={globalState.description}
-            className="text-[0.9375rem] leading-[1.7] text-[#4a5578] m-0"
+            className="text-[0.9375rem] leading-[1.7] text-muted-foreground m-0"
           />
         </section>
       )}
@@ -1242,14 +1237,13 @@ function TemplateDetailView({
       >
         {/* Setup Services */}
         <section
-          className="bg-white rounded-2xl p-6"
+          className="bg-card rounded-2xl p-6"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <div className="flex items-start gap-3.5 mb-4">
-            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-[#e8faf3] text-emerald-500">
+            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-status-success/20 text-status-success">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
@@ -1263,10 +1257,10 @@ function TemplateDetailView({
               </svg>
             </div>
             <div>
-              <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+              <h3 className="text-base font-semibold text-foreground m-0">
                 Formation & Setup
               </h3>
-              <p className="text-[0.8125rem] text-[#8792a8] mt-0.5 mb-0">
+              <p className="text-[0.8125rem] text-muted-foreground mt-0.5 mb-0">
                 One-time setup services
               </p>
             </div>
@@ -1276,15 +1270,15 @@ function TemplateDetailView({
               {globalState.setupServices.map((service, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2.5 py-2.5 px-3 bg-[#fafbfc] rounded-lg"
+                  className="flex items-center gap-2.5 py-2.5 px-3 bg-muted rounded-lg"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
-                  <span className="text-sm text-[#1a1f36]">{service}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-status-success shrink-0" />
+                  <span className="text-sm text-foreground">{service}</span>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#8792a8] italic m-0">
+            <p className="text-sm text-muted-foreground italic m-0">
               No setup services defined
             </p>
           )}
@@ -1292,14 +1286,13 @@ function TemplateDetailView({
 
         {/* Recurring Services */}
         <section
-          className="bg-white rounded-2xl p-6"
+          className="bg-card rounded-2xl p-6"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <div className="flex items-start gap-3.5 mb-4">
-            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-[#fef7e6] text-amber-500">
+            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-status-warning/20 text-status-warning">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
@@ -1312,10 +1305,10 @@ function TemplateDetailView({
               </svg>
             </div>
             <div>
-              <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+              <h3 className="text-base font-semibold text-foreground m-0">
                 Recurring Services
               </h3>
-              <p className="text-[0.8125rem] text-[#8792a8] mt-0.5 mb-0">
+              <p className="text-[0.8125rem] text-muted-foreground mt-0.5 mb-0">
                 Ongoing services included
               </p>
             </div>
@@ -1325,15 +1318,15 @@ function TemplateDetailView({
               {globalState.recurringServices.map((service, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2.5 py-2.5 px-3 bg-[#fafbfc] rounded-lg"
+                  className="flex items-center gap-2.5 py-2.5 px-3 bg-muted rounded-lg"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
-                  <span className="text-sm text-[#1a1f36]">{service}</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-status-warning shrink-0" />
+                  <span className="text-sm text-foreground">{service}</span>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#8792a8] italic m-0">
+            <p className="text-sm text-muted-foreground italic m-0">
               No recurring services defined
             </p>
           )}
@@ -1343,15 +1336,14 @@ function TemplateDetailView({
       {/* Facet Targeting - Interactive Selection */}
       {globalState.facetTargets.length > 0 && (
         <section
-          className="bg-white rounded-2xl p-6"
+          className="bg-card rounded-2xl p-6"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <div className="flex items-start gap-3.5 mb-4 flex-wrap justify-between">
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-[#e8f7fc] text-sky-500">
+              <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-status-progress/20 text-status-progress">
                 <svg
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
@@ -1363,29 +1355,30 @@ function TemplateDetailView({
                 </svg>
               </div>
               <div>
-                <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+                <h3 className="text-base font-semibold text-foreground m-0">
                   Facet Targeting
                 </h3>
-                <p className="text-[0.8125rem] text-[#8792a8] mt-0.5 mb-0">
+                <p className="text-[0.8125rem] text-muted-foreground mt-0.5 mb-0">
                   Select which facet options apply to this offering
                 </p>
               </div>
             </div>
             {/* Goal-Gradient Progress Indicator */}
             <div className="flex flex-col items-end gap-1.5 min-w-[140px]">
-              <div className="w-full h-1.5 bg-[#f0f2f7] rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full transition-[width] duration-300 ease-out"
                   style={{
                     width: `${facetProgress.percent}%`,
-                    background: "linear-gradient(90deg, #0ea5e9, #10b981)",
+                    background:
+                      "linear-gradient(90deg, var(--status-progress), var(--status-success))",
                   }}
                 />
               </div>
-              <span className="text-[0.6875rem] text-[#8792a8] font-medium">
+              <span className="text-[0.6875rem] text-muted-foreground font-medium">
                 {facetProgress.selected} of {facetProgress.total} selected
                 {facetProgress.percent === 100 && (
-                  <span className="text-emerald-500 font-semibold"> ✓</span>
+                  <span className="text-status-success font-semibold"> ✓</span>
                 )}
               </span>
             </div>
@@ -1397,9 +1390,9 @@ function TemplateDetailView({
             {globalState.facetTargets.map((facet) => (
               <div
                 key={facet.id}
-                className="p-3.5 bg-white rounded-[10px] border-[1.5px] border-[#e4e8f0]"
+                className="p-3.5 bg-card rounded-[10px] border-[1.5px] border-border"
               >
-                <span className="block text-xs font-semibold text-[#8792a8] uppercase tracking-[0.04em] mb-2">
+                <span className="block text-xs font-semibold text-muted-foreground uppercase tracking-[0.04em] mb-2">
                   {facet.categoryLabel}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
@@ -1414,8 +1407,8 @@ function TemplateDetailView({
                         type="button"
                         className={`inline-flex items-center gap-2 py-2 px-3.5 text-[0.8125rem] font-medium rounded-lg cursor-pointer transition-all duration-150 capitalize ${
                           selected
-                            ? "bg-teal-100 border-[1.5px] border-teal-500 text-teal-500"
-                            : "bg-[#fafbfc] border-[1.5px] border-[#e4e8f0] text-[#4a5578] hover:border-sky-500 hover:bg-[#e8f7fc] hover:text-sky-500"
+                            ? "bg-primary/10 border-[1.5px] border-primary text-primary"
+                            : "bg-muted border-[1.5px] border-border text-muted-foreground hover:border-status-progress hover:bg-status-progress/20 hover:text-status-progress"
                         }`}
                         style={{
                           fontFamily:
@@ -1432,13 +1425,13 @@ function TemplateDetailView({
                         <span
                           className={`flex items-center justify-center w-[18px] h-[18px] rounded shrink-0 transition-all duration-150 ${
                             selected
-                              ? "bg-teal-500 border-[1.5px] border-teal-500"
-                              : "bg-white border-[1.5px] border-[#e4e8f0]"
+                              ? "bg-primary border-[1.5px] border-primary"
+                              : "bg-background border-[1.5px] border-input"
                           }`}
                         >
                           {selected && (
                             <svg
-                              className="w-3 h-3 text-white"
+                              className="w-3 h-3 text-primary-foreground"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -1462,14 +1455,13 @@ function TemplateDetailView({
       {/* Services Catalog */}
       {globalState.services.length > 0 && (
         <section
-          className="bg-white rounded-2xl p-6"
+          className="bg-card rounded-2xl p-6"
           style={{
-            boxShadow:
-              "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+            boxShadow: "var(--shadow-sm)",
           }}
         >
           <div className="flex items-start gap-3.5 mb-4">
-            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-teal-100 text-teal-500">
+            <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-primary/10 text-primary">
               <svg
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
@@ -1481,10 +1473,10 @@ function TemplateDetailView({
               </svg>
             </div>
             <div>
-              <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+              <h3 className="text-base font-semibold text-foreground m-0">
                 Services Defined
               </h3>
-              <p className="text-[0.8125rem] text-[#8792a8] mt-0.5 mb-0">
+              <p className="text-[0.8125rem] text-muted-foreground mt-0.5 mb-0">
                 {globalState.services.length} service
                 {globalState.services.length !== 1 ? "s" : ""} available
               </p>
@@ -1494,20 +1486,20 @@ function TemplateDetailView({
             {globalState.services.map((service) => (
               <div
                 key={service.id}
-                className="py-3.5 px-4 bg-[#fafbfc] rounded-[10px] border border-[#f0f2f7]"
+                className="py-3.5 px-4 bg-muted rounded-[10px] border border-border"
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-[0.9375rem] font-semibold text-[#1a1f36]">
+                  <span className="text-[0.9375rem] font-semibold text-foreground">
                     {service.title}
                   </span>
                   {service.isSetupFormation && (
-                    <span className="py-0.5 px-2 text-[0.625rem] font-bold uppercase tracking-[0.04em] text-emerald-500 bg-[#e8faf3] rounded">
+                    <span className="py-0.5 px-2 text-[0.625rem] font-bold uppercase tracking-[0.04em] text-status-success bg-status-success/20 rounded">
                       Setup
                     </span>
                   )}
                 </div>
                 {service.description && (
-                  <p className="text-[0.8125rem] text-[#4a5578] mt-1.5 mb-0 leading-normal">
+                  <p className="text-[0.8125rem] text-muted-foreground mt-1.5 mb-0 leading-normal">
                     {service.description}
                   </p>
                 )}
@@ -1519,14 +1511,13 @@ function TemplateDetailView({
 
       {/* Operator ID */}
       <section
-        className="bg-white rounded-2xl p-6"
+        className="bg-card rounded-2xl p-6"
         style={{
-          boxShadow:
-            "0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06)",
+          boxShadow: "var(--shadow-sm)",
         }}
       >
         <div className="flex items-start gap-3.5 mb-4">
-          <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-[#f4f1ff] text-[#7c5cff]">
+          <div className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0 bg-primary/10 text-primary">
             <svg
               className="w-5 h-5"
               viewBox="0 0 24 24"
@@ -1539,11 +1530,11 @@ function TemplateDetailView({
             </svg>
           </div>
           <div>
-            <h3 className="text-base font-semibold text-[#1a1f36] m-0">
+            <h3 className="text-base font-semibold text-foreground m-0">
               Operator
               <InfoIcon content="Your Powerhouse ID (PHID) as the service provider. This links the offering to your builder profile." />
             </h3>
-            <p className="text-[0.8125rem] text-[#8792a8] mt-0.5 mb-0">
+            <p className="text-[0.8125rem] text-muted-foreground mt-0.5 mb-0">
               {offeringOperatorId
                 ? "Operator assigned to this offering"
                 : "No operator set — please provide one"}
@@ -1557,7 +1548,7 @@ function TemplateDetailView({
               value={operatorIdInput}
               onChange={(e) => setOperatorIdInput(e.target.value)}
               placeholder="Enter operator ID (PHID)"
-              className="flex-1 py-2.5 px-3.5 text-sm text-[#1a1f36] bg-[#fafbfc] border-[1.5px] border-[#e4e8f0] rounded-lg outline-none transition-[border-color,box-shadow] duration-150 focus:border-[#7c5cff] focus:shadow-[0_0_0_3px_#f4f1ff] placeholder:text-[#8792a8]"
+              className="flex-1 py-2.5 px-3.5 text-sm text-foreground bg-background border-[1.5px] border-input rounded-lg outline-none transition-[border-color,box-shadow] duration-150 focus:border-ring focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_30%,transparent)] placeholder:text-muted-foreground"
               style={{
                 fontFamily: "'DM Mono', 'SF Mono', monospace",
               }}
@@ -1566,7 +1557,7 @@ function TemplateDetailView({
               type="button"
               onClick={handleSaveOperatorId}
               disabled={!operatorIdInput.trim()}
-              className="py-2.5 px-[18px] text-[0.8125rem] font-semibold text-white bg-[#7c5cff] border-none rounded-lg cursor-pointer whitespace-nowrap transition-[background,opacity] duration-150 hover:bg-[#6a4de6] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="py-2.5 px-[18px] text-[0.8125rem] font-semibold text-primary-foreground bg-primary border-none rounded-lg cursor-pointer whitespace-nowrap transition-[background,opacity] duration-150 hover:bg-primary/90 disabled:opacity-40 disabled:cursor-not-allowed"
               style={{ fontFamily: "'Instrument Sans', system-ui, sans-serif" }}
             >
               {offeringOperatorId ? "Update" : "Set Operator"}
@@ -1578,7 +1569,7 @@ function TemplateDetailView({
                   setIsEditingOperator(false);
                   setOperatorIdInput(offeringOperatorId);
                 }}
-                className="py-2.5 px-3.5 text-[0.8125rem] font-medium text-[#8792a8] bg-transparent border-[1.5px] border-[#e4e8f0] rounded-lg cursor-pointer transition-all duration-150 hover:border-[#8792a8] hover:text-[#4a5578]"
+                className="py-2.5 px-3.5 text-[0.8125rem] font-medium text-muted-foreground bg-transparent border-[1.5px] border-border rounded-lg cursor-pointer transition-all duration-150 hover:border-muted-foreground hover:text-foreground"
                 style={{
                   fontFamily: "'Instrument Sans', system-ui, sans-serif",
                 }}
@@ -1588,9 +1579,9 @@ function TemplateDetailView({
             )}
           </div>
         ) : (
-          <div className="flex items-center justify-between py-2.5 px-3.5 bg-[#fafbfc] rounded-lg border border-[#f0f2f7]">
+          <div className="flex items-center justify-between py-2.5 px-3.5 bg-background rounded-lg border border-input">
             <span
-              className="text-[0.9375rem] text-[#1a1f36]"
+              className="text-[0.9375rem] text-foreground"
               style={{
                 fontFamily: "'DM Mono', 'SF Mono', monospace",
                 fontSize: "0.875rem",
@@ -1601,7 +1592,7 @@ function TemplateDetailView({
             <button
               type="button"
               onClick={() => setIsEditingOperator(true)}
-              className="flex items-center justify-center w-8 h-8 p-0 text-[#8792a8] bg-transparent border-[1.5px] border-[#e4e8f0] rounded-md cursor-pointer transition-all duration-150 hover:border-[#7c5cff] hover:text-[#7c5cff] hover:bg-[#f4f1ff]"
+              className="flex items-center justify-center w-8 h-8 p-0 text-muted-foreground bg-transparent border-[1.5px] border-border rounded-md cursor-pointer transition-all duration-150 hover:border-primary hover:text-primary hover:bg-primary/10"
             >
               <svg
                 className="w-3.5 h-3.5"
@@ -1621,21 +1612,21 @@ function TemplateDetailView({
       {/* Metadata */}
       {globalState.infoLink && (
         <section
-          className="grid gap-4 p-5 bg-white rounded-xl max-[900px]:grid-cols-1"
+          className="grid gap-4 p-5 bg-card rounded-xl max-[900px]:grid-cols-1"
           style={{
             gridTemplateColumns: "1fr 1fr",
-            boxShadow: "0 1px 3px rgba(26, 31, 54, 0.04)",
+            boxShadow: "var(--shadow-2xs)",
           }}
         >
           <div className="flex flex-col gap-1.5">
-            <span className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[#8792a8]">
+            <span className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-muted-foreground">
               More Info
             </span>
             <a
               href={globalState.infoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm text-teal-500 no-underline transition-colors duration-150 hover:text-[#0d9488]"
+              className="inline-flex items-center gap-1.5 text-sm text-primary no-underline transition-colors duration-150 hover:text-primary/80"
             >
               {globalState.infoLink}
               <svg
@@ -1663,24 +1654,24 @@ function getStatusStyle(status: ResourceTemplateGlobalState["status"]) {
     { bg: string; text: string; dot: string }
   > = {
     ACTIVE: {
-      bg: "#e8faf3",
-      text: "#10b981",
-      dot: "#10b981",
+      bg: "color-mix(in oklab, var(--status-success) 20%, transparent)",
+      text: "var(--status-success)",
+      dot: "var(--status-success)",
     },
     DRAFT: {
-      bg: "#f1f5f9",
-      text: "#64748b",
-      dot: "#64748b",
+      bg: "var(--muted)",
+      text: "var(--muted-foreground)",
+      dot: "var(--muted-foreground)",
     },
     COMING_SOON: {
-      bg: "#e8f7fc",
-      text: "#0ea5e9",
-      dot: "#0ea5e9",
+      bg: "color-mix(in oklab, var(--status-progress) 20%, transparent)",
+      text: "var(--status-progress)",
+      dot: "var(--status-progress)",
     },
     DEPRECATED: {
-      bg: "#fef1f3",
-      text: "#f43f5e",
-      dot: "#f43f5e",
+      bg: "color-mix(in oklab, var(--destructive) 15%, transparent)",
+      text: "var(--destructive)",
+      dot: "var(--destructive)",
     },
   };
 
