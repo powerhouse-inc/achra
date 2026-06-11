@@ -5,16 +5,16 @@ import type {
 } from "document-models/payment-account";
 import { actions } from "document-models/payment-account";
 import { useState } from "react";
-import { getStripePublishableKey } from "../env.js";
+import { getStripePublishableKey } from "../../shared/stripe/env.js";
 import {
   callStripeMutation,
   CREATE_CONNECT_ACCOUNT_MUTATION,
-} from "../lib/stripe-graphql.js";
+} from "../../shared/stripe/stripe-graphql.js";
 import {
   describeDisabledReason,
   humanizeRequirements,
 } from "../lib/stripe-requirements.js";
-import { useStripeSync } from "../lib/use-stripe-sync.js";
+import { useStripeSync } from "../../shared/stripe/use-stripe-sync.js";
 import { Alert, SectionCard, StatusRow } from "./ui.js";
 
 const PUBLISHABLE_KEY = getStripePublishableKey();

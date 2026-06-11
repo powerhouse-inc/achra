@@ -15,10 +15,13 @@ import type {
   FileNode,
 } from "@powerhousedao/shared/document-drive";
 import {
+  ArrowLeftRight,
+  Banknote,
   CreditCard,
   FileText,
   Folder,
   Layers,
+  Settings,
   UserRound,
   Users,
 } from "lucide-react";
@@ -30,10 +33,32 @@ const SERVICES_AND_OFFERINGS_FOLDER_NAME = "Services And Offerings";
 const RESOURCE_TEMPLATES_FOLDER_NAME = "Products";
 const SERVICE_OFFERINGS_FOLDER_NAME = "Service Offerings";
 const PAYMENT_ACCOUNT_DOCUMENT_TYPE = "powerhouse/payment-account";
-const PAYMENTS_SECTION_TITLE = "Payments";
+const PAYMENT_DOCUMENTS_SECTION_ID = "payment-documents";
+const PAYMENT_DOCUMENTS_SECTION_TITLE = "Payment documents";
+
+/**
+ * Synthetic sidebar ids for the Stripe embedded views under the
+ * "Payment documents" section. Each opens a full custom view rendering the
+ * matching Stripe Connect embedded component(s).
+ */
+export const STRIPE_VIEW_IDS = [
+  "stripe-payments",
+  "stripe-payouts",
+  "stripe-documents",
+  "stripe-account",
+] as const;
+export type StripeViewId = (typeof STRIPE_VIEW_IDS)[number];
+
+export function isStripeViewId(id: string | null): id is StripeViewId {
+  return STRIPE_VIEW_IDS.includes(id as StripeViewId);
+}
 
 /** Custom view types that don't correspond to document models */
-export type CustomView = "resources-services" | "customers" | null;
+export type CustomView =
+  | "resources-services"
+  | "customers"
+  | StripeViewId
+  | null;
 
 /** Maps navigation section IDs to custom view identifiers. */
 const SECTION_TO_CUSTOM_VIEW: Record<string, CustomView> = {
@@ -290,14 +315,43 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
       return section;
     });
 
-    // Payments section — points straight at the payment-account document so
-    // clicking it opens the Stripe onboarding editor. Only shown when the doc
-    // exists (drives provisioned before auto-creation can add it manually).
+    // Payment documents section — the payment-account document (Stripe
+    // onboarding/KYC editor) plus one child per Stripe embedded view. Only
+    // shown when the doc exists (drives provisioned before auto-creation can
+    // add it manually); the views themselves prompt for verification until
+    // KYC is complete.
     if (paymentAccountFile) {
       sections.push({
-        id: paymentAccountFile.id,
-        title: PAYMENTS_SECTION_TITLE,
+        id: PAYMENT_DOCUMENTS_SECTION_ID,
+        title: PAYMENT_DOCUMENTS_SECTION_TITLE,
         icon: <CreditCard size={ICON_SIZE} />,
+        children: [
+          {
+            id: paymentAccountFile.id,
+            title: "Payment account",
+            icon: <FileText size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-payments",
+            title: "Payments",
+            icon: <ArrowLeftRight size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-payouts",
+            title: "Payouts & balance",
+            icon: <Banknote size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-documents",
+            title: "Documents",
+            icon: <FileText size={ICON_SIZE} />,
+          },
+          {
+            id: "stripe-account",
+            title: "Account",
+            icon: <Settings size={ICON_SIZE} />,
+          },
+        ],
       });
     }
 
@@ -315,10 +369,22 @@ export function FolderTree({ onCustomViewChange }: FolderTreeProps) {
   const handleActiveNodeChange = (node: SidebarNode) => {
     setActiveNodeId(node.id);
 
-    // Payments section: open the payment-account document editor directly
-    if (paymentAccountFile && node.id === paymentAccountFile.id) {
+    // Stripe embedded views (synthetic children of "Payment documents")
+    if (isStripeViewId(node.id)) {
+      onCustomViewChange?.(node.id);
+      setSelectedNode("");
+      return;
+    }
+
+    // Payment-account doc child, or the "Payment documents" parent itself —
+    // both open the document editor (Stripe onboarding/KYC).
+    if (
+      paymentAccountFile &&
+      (node.id === paymentAccountFile.id ||
+        node.id === PAYMENT_DOCUMENTS_SECTION_ID)
+    ) {
       onCustomViewChange?.(null);
-      setSelectedNode(node.id);
+      setSelectedNode(paymentAccountFile.id);
       return;
     }
 

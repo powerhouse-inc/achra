@@ -4,13 +4,11 @@ import {
   ConnectNotificationBanner,
 } from "@stripe/react-connect-js";
 import type { PaymentAccountState } from "document-models/payment-account";
-import { useEffect, useMemo } from "react";
-import { getStripePublishableKey } from "../env.js";
-import {
-  getStripeConnectInstance,
-  refreshStripeAppearance,
-} from "../lib/stripe-connect.js";
-import { useStripeSync } from "../lib/use-stripe-sync.js";
+import { useMemo } from "react";
+import { getStripePublishableKey } from "../../shared/stripe/env.js";
+import { getStripeConnectInstance } from "../../shared/stripe/stripe-connect.js";
+import { useStripeSync } from "../../shared/stripe/use-stripe-sync.js";
+import { useStripeThemeSync } from "../../shared/stripe/use-stripe-theme-sync.js";
 import { Alert, SectionCard } from "./ui.js";
 
 const PUBLISHABLE_KEY = getStripePublishableKey();
@@ -36,22 +34,7 @@ export function VerificationSection({ state }: Props) {
   // The embedded form's appearance is baked from the design tokens at init;
   // when Connect toggles the `.dark` class on <html>, push the re-derived
   // tokens to the live Stripe instance so the form restyles in place.
-  useEffect(() => {
-    const root = window.document.documentElement;
-    let wasDark = root.classList.contains("dark");
-    // The cached instance may carry an appearance from a previous theme
-    // (e.g. the theme flipped while this pane was unmounted) — re-sync once.
-    refreshStripeAppearance();
-    const observer = new MutationObserver(() => {
-      const isDark = root.classList.contains("dark");
-      if (isDark !== wasDark) {
-        wasDark = isDark;
-        refreshStripeAppearance();
-      }
-    });
-    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
-    return () => observer.disconnect();
-  }, []);
+  useStripeThemeSync();
 
   if (!PUBLISHABLE_KEY) {
     return (

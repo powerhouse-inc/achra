@@ -42,6 +42,13 @@ export const schema: DocumentNode = gql`
 
   type Stripe_CreateConnectAccountSessionResult {
     clientSecret: String!
+    """
+    Requested embedded components the platform has NOT enabled (Stripe
+    Dashboard -> Settings -> Connect -> Embedded components). Stripe silently
+    drops them from the session and their iframes render nothing, so clients
+    surface this list instead of showing a blank component.
+    """
+    disabledComponents: [String!]!
   }
 
   input Stripe_SyncConnectAccountInput {

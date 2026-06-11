@@ -17,6 +17,35 @@ import {
 // component mount/unmount cycles.
 const connectInstanceCache = new Map<string, StripeConnectInstance>();
 
+// Embedded components the platform has NOT enabled, keyed by accountId —
+// refreshed every time an account session is created. Stripe silently drops
+// components the platform hasn't enabled in the Dashboard and their iframes
+// then render nothing, so views read this to explain instead of going blank.
+const disabledComponentsByAccount = new Map<string, string[]>();
+const disabledComponentsListeners = new Set<() => void>();
+const NO_DISABLED_COMPONENTS: string[] = [];
+
+function setDisabledComponents(accountId: string, disabled: string[]): void {
+  const previous = disabledComponentsByAccount.get(accountId);
+  if (previous && previous.join("|") === disabled.join("|")) return;
+  disabledComponentsByAccount.set(accountId, disabled);
+  for (const listener of disabledComponentsListeners) listener();
+}
+
+/** Stable snapshot accessor (same array identity until the list changes). */
+export function getDisabledStripeComponents(accountId: string): string[] {
+  return disabledComponentsByAccount.get(accountId) ?? NO_DISABLED_COMPONENTS;
+}
+
+export function subscribeDisabledStripeComponents(
+  listener: () => void,
+): () => void {
+  disabledComponentsListeners.add(listener);
+  return () => {
+    disabledComponentsListeners.delete(listener);
+  };
+}
+
 export function getStripeConnectInstance(
   accountId: string,
   publishableKey: string,
@@ -28,11 +57,16 @@ export function getStripeConnectInstance(
     appearance: buildStripeAppearance(),
     fetchClientSecret: async () => {
       const data = await callStripeMutation<{
-        Stripe_createConnectAccountSession: { clientSecret: string };
+        Stripe_createConnectAccountSession: {
+          clientSecret: string;
+          disabledComponents: string[];
+        };
       }>(CREATE_CONNECT_ACCOUNT_SESSION_MUTATION, {
         input: { stripeAccountId: accountId },
       });
-      return data.Stripe_createConnectAccountSession.clientSecret;
+      const session = data.Stripe_createConnectAccountSession;
+      setDisabledComponents(accountId, session.disabledComponents);
+      return session.clientSecret;
     },
   });
   connectInstanceCache.set(accountId, created);

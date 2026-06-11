@@ -95,6 +95,12 @@ export const buildStripeMutations = (client: IReactorClient) => ({
         account_onboarding: { enabled: true },
         account_management: { enabled: true },
         notification_banner: { enabled: true },
+        payments: { enabled: true },
+        payment_details: { enabled: true },
+        payouts: { enabled: true },
+        payouts_list: { enabled: true },
+        balances: { enabled: true },
+        documents: { enabled: true },
       },
     });
 
@@ -108,6 +114,12 @@ export const buildStripeMutations = (client: IReactorClient) => ({
       "account_onboarding",
       "account_management",
       "notification_banner",
+      "payments",
+      "payment_details",
+      "payouts",
+      "payouts_list",
+      "balances",
+      "documents",
     ] as const;
     const components = session.components as unknown as Record<
       string,
@@ -122,7 +134,10 @@ export const buildStripeMutations = (client: IReactorClient) => ({
       );
     }
 
-    return { clientSecret: session.client_secret };
+    return {
+      clientSecret: session.client_secret,
+      disabledComponents: disabled,
+    };
   },
 
   Stripe_syncConnectAccount: async (

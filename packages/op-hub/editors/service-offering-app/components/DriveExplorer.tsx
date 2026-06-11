@@ -1,7 +1,8 @@
 import type { EditorProps } from "document-model";
 import { Component, useState, type ReactNode } from "react";
-import { FolderTree, type CustomView } from "./FolderTree.js";
+import { FolderTree, isStripeViewId, type CustomView } from "./FolderTree.js";
 import { ResourcesServices } from "./ResourcesServices.js";
+import { StripeViews } from "./StripeViews.js";
 import { Customers } from "./customers.js";
 import { useCustomersAutoPlacement } from "../hooks/useCustomersAutoPlacement.js";
 import { setSelectedDrive } from "@powerhousedao/reactor-browser";
@@ -113,6 +114,12 @@ export function DriveExplorer({ children }: EditorProps) {
   const renderContent = () => {
     if (showDocumentEditor) {
       return <DocumentEditorBoundary>{children}</DocumentEditorBoundary>;
+    }
+    // All stripe-* views render the same component from the same tree
+    // position, so it (and its Stripe iframes) survives switches between
+    // Stripe sidebar items.
+    if (isStripeViewId(customView)) {
+      return <StripeViews view={customView} />;
     }
     if (customView === "customers") {
       return <Customers />;

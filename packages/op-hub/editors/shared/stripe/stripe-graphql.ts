@@ -3,7 +3,7 @@
  * Unlike the shared graphql-client, errors are thrown rather than
  * swallowed so the editor can surface them to the operator.
  */
-import { getSubgraphUrl } from "../../shared/graphql.js";
+import { getSubgraphUrl } from "../graphql.js";
 
 export const CREATE_CONNECT_ACCOUNT_MUTATION = /* GraphQL */ `
   mutation CreateConnectAccount($input: Stripe_CreateConnectAccountInput!) {
@@ -19,6 +19,7 @@ export const CREATE_CONNECT_ACCOUNT_SESSION_MUTATION = /* GraphQL */ `
   ) {
     Stripe_createConnectAccountSession(input: $input) {
       clientSecret
+      disabledComponents
     }
   }
 `;
