@@ -45,7 +45,8 @@ yarn-error.log*
 
 # Claude Code — ignore local settings, share team skills
 .claude/*
-!.claude/skills/
+!.claude/skills/migrate-op-hub-design-system
+scheduled_tasks.lock
 
 # ph
 .ph
