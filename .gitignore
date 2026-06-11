@@ -42,7 +42,11 @@ yarn-error.log*
 
 # Serena
 .serena
-.claude
+
+# Claude Code — ignore local settings, share team skills
+.claude/*
+!.claude/skills/migrate-op-hub-design-system
+scheduled_tasks.lock
 
 # ph
 .ph

@@ -305,11 +305,11 @@ export function SubteamsPicker({
                   ? "Search builder name to add subteam..."
                   : "Add another subteam..."
             }
-            className="flex-1 min-w-[280px] rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-gray-400 dark:focus:ring-gray-800"
+            className="flex-1 min-w-[280px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
         {isPickerOpen && (
-          <div className="absolute z-10 mt-2 w-full max-h-64 overflow-auto rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
+          <div className="absolute z-10 mt-2 w-full max-h-64 overflow-auto rounded-md border border-border bg-popover shadow-lg">
             {filteredProfiles.length > 0 ? (
               filteredProfiles.map((profile) => {
                 const isOperatorTeam = operatorTeam === profile.id;
@@ -321,24 +321,24 @@ export function SubteamsPicker({
                     disabled={isOperatorTeam}
                     className={`flex w-full flex-col px-3 py-2 text-left text-sm ${
                       isOperatorTeam
-                        ? "cursor-not-allowed bg-gray-50 text-gray-400 dark:bg-gray-800 dark:text-gray-500"
-                        : "text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                        ? "cursor-not-allowed bg-muted text-muted-foreground"
+                        : "text-foreground hover:bg-accent"
                     }`}
                   >
                     <span className="font-medium">
                       {profile.name}
                       {profile.isRemote && (
-                        <span className="ml-2 text-xs text-blue-500 dark:text-blue-400">
+                        <span className="ml-2 text-xs text-status-progress">
                           (remote)
                         </span>
                       )}
                       {isOperatorTeam && (
-                        <span className="ml-2 text-xs text-amber-600 dark:text-amber-400">
+                        <span className="ml-2 text-xs text-status-warning">
                           (already set as Operator Team)
                         </span>
                       )}
                     </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-muted-foreground">
                       {profile.id}
                     </span>
                   </button>
@@ -346,7 +346,7 @@ export function SubteamsPicker({
               })
             ) : (
               <>
-                <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                <div className="px-3 py-2 text-sm text-muted-foreground">
                   {normalizedQuery
                     ? "No matching teams"
                     : "No more teams available"}
@@ -355,10 +355,10 @@ export function SubteamsPicker({
                   <button
                     type="button"
                     onClick={() => handleManualSelect(query)}
-                    className="flex w-full flex-col px-3 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                    className="flex w-full flex-col px-3 py-2 text-left text-sm text-foreground hover:bg-accent"
                   >
                     <span className="font-medium">Use this ID</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-muted-foreground">
                       {query}
                     </span>
                   </button>
@@ -386,25 +386,25 @@ function SubteamCard({
   const profile = builderProfiles.find((p) => p.id === subteamId);
 
   return (
-    <div className="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+    <div className="rounded-md border border-border bg-background px-3 py-2 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <div className="text-sm font-semibold text-foreground">
             {profile?.name || "Unknown team"}
             {profile?.isRemote && (
-              <span className="ml-2 text-xs font-normal text-blue-500 dark:text-blue-400">
+              <span className="ml-2 text-xs font-normal text-status-progress">
                 (remote)
               </span>
             )}
           </div>
-          <div className="mt-1 text-xs font-mono text-gray-500 dark:text-gray-400 truncate">
+          <div className="mt-1 text-xs font-mono text-muted-foreground truncate">
             {subteamId}
           </div>
         </div>
         <button
           type="button"
           onClick={onRemove}
-          className="p-1 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+          className="p-1 text-muted-foreground hover:text-destructive"
           title="Remove subteam"
         >
           <svg

@@ -294,10 +294,10 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-foreground">
           Reporting {monthName ? `- ${monthName}` : ""}
         </h1>
-        <p className="text-gray-600">
+        <p className="text-muted-foreground">
           Manage expense reports and snapshot reports
           {monthName ? ` for ${monthName}` : ""}
         </p>
@@ -305,15 +305,15 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Expense Reports Section */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-card rounded-lg border border-border p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-blue-600" />
-              <h2 className="text-lg font-semibold text-gray-900">
+              <FileText className="w-5 h-5 text-primary" />
+              <h2 className="text-lg font-semibold text-foreground">
                 Expense Reports
               </h2>
               {expenseReports.length > 0 && (
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-muted-foreground">
                   ({expenseReports.length})
                 </span>
               )}
@@ -321,7 +321,7 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
             <button
               onClick={() => void handleCreateExpenseReport()}
               disabled={isCreating}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Plus className="w-4 h-4" />
               {isCreating ? "Creating..." : "New"}
@@ -329,24 +329,26 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
           </div>
 
           {expenseReports.length === 0 ? (
-            <p className="text-gray-500 text-sm">No expense reports yet</p>
+            <p className="text-muted-foreground text-sm">
+              No expense reports yet
+            </p>
           ) : (
             <div className="space-y-2">
               {expenseReports.map((doc) => (
                 <div
                   key={doc.header.id}
-                  className="flex items-center rounded-md border border-gray-100"
+                  className="flex items-center rounded-md border border-border"
                 >
                   <button
                     onClick={() => handleOpenDocument(doc.header.id)}
-                    className="flex-1 flex items-center gap-3 p-3 text-left hover:bg-gray-50 rounded-l-md transition-colors min-w-0"
+                    className="flex-1 flex items-center gap-3 p-3 text-left hover:bg-accent rounded-l-md transition-colors min-w-0"
                   >
-                    <FileText className="w-4 h-4 text-gray-400" />
+                    <FileText className="w-4 h-4 text-muted-foreground" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {doc.header.name || "Untitled"}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         Modified:{" "}
                         {new Date(
                           doc.header.lastModifiedAtUtcIso || Date.now(),
@@ -361,7 +363,7 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
                         name: doc.header.name || "Untitled",
                       })
                     }
-                    className="p-3 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+                    className="p-3 text-muted-foreground hover:text-destructive transition-colors flex-shrink-0"
                     title="Delete report"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -373,11 +375,11 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
         </div>
 
         {/* Snapshot Reports Section */}
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-card rounded-lg border border-border p-4">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Camera className="w-5 h-5 text-purple-600" />
-              <h2 className="text-lg font-semibold text-gray-900">
+              <Camera className="w-5 h-5 text-primary" />
+              <h2 className="text-lg font-semibold text-foreground">
                 Snapshot Reports
               </h2>
             </div>
@@ -385,7 +387,7 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
               <button
                 onClick={() => void handleCreateSnapshotReport()}
                 disabled={isCreating}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-purple-600 hover:bg-purple-50 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-primary hover:bg-primary/10 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Plus className="w-4 h-4" />
                 {isCreating ? "Creating..." : "New"}
@@ -394,24 +396,26 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
           </div>
 
           {snapshotReports.length === 0 ? (
-            <p className="text-gray-500 text-sm">No snapshot reports yet</p>
+            <p className="text-muted-foreground text-sm">
+              No snapshot reports yet
+            </p>
           ) : (
             <div className="space-y-2">
               {snapshotReports.map((doc) => (
                 <div
                   key={doc.header.id}
-                  className="flex items-center rounded-md border border-gray-100"
+                  className="flex items-center rounded-md border border-border"
                 >
                   <button
                     onClick={() => handleOpenDocument(doc.header.id)}
-                    className="flex-1 flex items-center gap-3 p-3 text-left hover:bg-gray-50 rounded-l-md transition-colors min-w-0"
+                    className="flex-1 flex items-center gap-3 p-3 text-left hover:bg-accent rounded-l-md transition-colors min-w-0"
                   >
-                    <Camera className="w-4 h-4 text-gray-400" />
+                    <Camera className="w-4 h-4 text-muted-foreground" />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {doc.header.name || "Untitled"}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-muted-foreground">
                         Modified:{" "}
                         {new Date(
                           doc.header.lastModifiedAtUtcIso || Date.now(),
@@ -426,7 +430,7 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
                         name: doc.header.name || "Untitled",
                       })
                     }
-                    className="p-3 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
+                    className="p-3 text-muted-foreground hover:text-destructive transition-colors flex-shrink-0"
                     title="Delete report"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -448,12 +452,12 @@ export function ReportingView({ folderId, monthName }: ReportingViewProps) {
         continueLabel={isDeleting ? "Deleting..." : "Delete"}
         continueDisabled={isDeleting}
       >
-        <p className="text-red-600 text-sm mb-2 font-medium">
+        <p className="text-destructive text-sm mb-2 font-medium">
           This will permanently delete this report from the drive. This action
           cannot be undone.
         </p>
         {deleteTarget && (
-          <p className="text-gray-700 text-sm font-medium">
+          <p className="text-foreground text-sm font-medium">
             {deleteTarget.name}
           </p>
         )}

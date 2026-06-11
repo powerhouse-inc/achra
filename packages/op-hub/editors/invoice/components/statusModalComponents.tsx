@@ -63,14 +63,14 @@ export function IssueInvoiceModalContent({
   return (
     <div>
       {warning && (
-        <div className="my-6 rounded-md bg-red-50 p-4 text-center flex flex-col items-center justify-center min-h-[64px]">
-          <div className="text-red-500">
+        <div className="my-6 rounded-md bg-destructive/15 p-4 text-center flex flex-col items-center justify-center min-h-[64px]">
+          <div className="text-destructive">
             <p>Warning: Fill in all fields before continuing.</p>
           </div>
         </div>
       )}
       <div>
-        <label className="block mb-1 text-sm">Invoice Number:</label>
+        <label className="block mb-1 text-sm text-foreground">Invoice Number:</label>
         <InputField
           placeholder={"Add invoice number"}
           value={invoiceNoInput}
@@ -85,10 +85,10 @@ export function IssueInvoiceModalContent({
         />
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm">Issue Date:</label>
+        <label className="block mb-1 text-sm text-foreground">Issue Date:</label>
         <DatePicker
           name="issueDate"
-          className={String.raw`w-full p-0 bg-white`}
+          className={String.raw`w-full p-0 bg-background`}
           onChange={(e) => {
             const dateOnly = e.target.value.split("T")[0];
             const datetime = dateToDatetime(dateOnly);
@@ -123,7 +123,7 @@ export function RejectInvoiceModalContent({
   return (
     <div className="w-full">
       <div>
-        <label className="block mb-1 text-sm">Reason:</label>
+        <label className="block mb-1 text-sm text-foreground">Reason:</label>
         <Textarea
           autoExpand={true}
           placeholder={"Add reason"}
@@ -168,7 +168,7 @@ export function SchedulePaymentModalContent({
   return (
     <div className="w-full">
       <div>
-        <label className="block mb-1 text-sm">Payment Reference:</label>
+        <label className="block mb-1 text-sm text-foreground">Payment Reference:</label>
         <Textarea
           autoExpand={true}
           placeholder={"Add payment reference"}
@@ -194,7 +194,7 @@ export function ClosePaymentModalContent({
   return (
     <div className="w-[250px]">
       <div className="justify-center">
-        <label className="block mb-2 text-sm">Closure Reason:</label>
+        <label className="block mb-2 text-sm text-foreground">Closure Reason:</label>
         <Select
           options={[
             {
@@ -236,10 +236,10 @@ export function RegisterPaymentTxModalContent({
   return (
     <div className="w-full">
       <div className="mt-4">
-        <label className="block mb-1 text-sm">Payment Date:</label>
+        <label className="block mb-1 text-sm text-foreground">Payment Date:</label>
         <DatePicker
           name="paymentDate"
-          className={String.raw`w-full p-0 bg-white`}
+          className={String.raw`w-full p-0 bg-background`}
           onChange={(e) => {
             setPaymentDate(e.target.value);
           }}
@@ -247,7 +247,7 @@ export function RegisterPaymentTxModalContent({
         />
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm">Transaction Reference:</label>
+        <label className="block mb-1 text-sm text-foreground">Transaction Reference:</label>
         <Textarea
           autoExpand={true}
           placeholder={"Add transaction reference"}
@@ -273,7 +273,7 @@ export function ReportPaymentIssueModalContent({
   return (
     <div className="w-full">
       <div>
-        <label className="block mb-1 text-sm">Payment Issue:</label>
+        <label className="block mb-1 text-sm text-foreground">Payment Issue:</label>
         <Textarea
           autoExpand={true}
           placeholder={"Add payment issue"}
@@ -301,7 +301,7 @@ export function ConfirmPaymentModalContent({
   return (
     <div className="w-full">
       <div className="flex flex-col gap-2">
-        <label className="block mb-1 text-sm font-bold">
+        <label className="block mb-1 text-sm font-bold text-foreground">
           Processor Reference :
         </label>
         <span className="break-all max-w-full">
@@ -309,13 +309,13 @@ export function ConfirmPaymentModalContent({
         </span>
       </div>
       <div className="flex flex-col gap-2 mt-4">
-        <label className="block mb-1 text-sm font-bold">Payment Date :</label>
+        <label className="block mb-1 text-sm font-bold text-foreground">Payment Date :</label>
         <span className="break-all max-w-full">
           {payments[payments.length - 1].paymentDate}
         </span>
       </div>
       <div className="flex flex-col gap-2 mt-4">
-        <label className="block mb-1 text-sm font-bold">
+        <label className="block mb-1 text-sm font-bold text-foreground">
           Transaction Reference :
         </label>
         <span className="break-all max-w-full">
@@ -323,9 +323,9 @@ export function ConfirmPaymentModalContent({
         </span>
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm font-bold">Payment Amount:</label>
+        <label className="block mb-1 text-sm font-bold text-foreground">Payment Amount:</label>
         <input
-          className="w-full rounded-md border border-gray-300 px-3 py-2 bg-white"
+          className="w-full rounded-md border border-input px-3 py-2 bg-background text-foreground placeholder:text-muted-foreground"
           type="number"
           name="Enter payment amount"
           value={paymentAmount}

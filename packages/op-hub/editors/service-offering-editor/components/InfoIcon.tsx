@@ -10,7 +10,7 @@ export function InfoIcon({ content, side = "top", className }: InfoIconProps) {
   return (
     <Tooltip content={content} side={side} sideOffset={6} className={className}>
       <span
-        className="inline-flex items-center justify-center w-[18px] h-[18px] text-slate-400 cursor-help align-middle ml-1 transition-colors duration-150 shrink-0 hover:text-violet-500"
+        className="inline-flex items-center justify-center w-[18px] h-[18px] text-muted-foreground cursor-help align-middle ml-1 transition-colors duration-150 shrink-0 hover:text-primary"
         aria-label="More info"
       >
         <svg

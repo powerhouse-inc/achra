@@ -184,28 +184,28 @@ export function SetOwner({ ownerIds, dispatch }: SetOwnerProps) {
                 ? "Search builder name to add team"
                 : "Add another team..."
             }
-            className="flex-1 min-w-[280px] rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-gray-400 dark:focus:ring-gray-800"
+            className="flex-1 min-w-[280px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
         {isPickerOpen && (
-          <div className="absolute z-10 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
+          <div className="absolute z-10 mt-2 w-full rounded-md border border-border bg-popover shadow-lg">
             {filteredProfiles.length > 0 ? (
               filteredProfiles.map((profile) => (
                 <button
                   key={`${profile.driveId}-${profile.id}`}
                   type="button"
                   onClick={() => handleSelect(profile)}
-                  className="flex w-full flex-col px-3 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                  className="flex w-full flex-col px-3 py-2 text-left text-sm text-popover-foreground hover:bg-accent"
                 >
                   <span className="font-medium">{profile.name}</span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-muted-foreground">
                     {profile.id}
                   </span>
                 </button>
               ))
             ) : (
               <>
-                <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                <div className="px-3 py-2 text-sm text-muted-foreground">
                   {normalizedQuery
                     ? "No matching teams"
                     : "No more teams available"}
@@ -214,10 +214,10 @@ export function SetOwner({ ownerIds, dispatch }: SetOwnerProps) {
                   <button
                     type="button"
                     onClick={() => handleManualSelect(query)}
-                    className="flex w-full flex-col px-3 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                    className="flex w-full flex-col px-3 py-2 text-left text-sm text-popover-foreground hover:bg-accent"
                   >
                     <span className="font-medium">Use this ID</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                    <span className="text-xs text-muted-foreground">
                       {query}
                     </span>
                   </button>
@@ -243,20 +243,20 @@ function OwnerCard({ ownerId, builderProfiles, onRemove }: OwnerCardProps) {
   const ownerDriveMissing = !!ownerId && !ownerDriveId;
 
   return (
-    <div className="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+    <div className="rounded-md border border-border bg-card px-3 py-2 shadow-sm">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <div className="text-sm font-semibold text-foreground">
             {profile?.name || "Unknown team"}
           </div>
-          <div className="mt-1 text-xs font-mono text-gray-500 dark:text-gray-400 truncate">
+          <div className="mt-1 text-xs font-mono text-muted-foreground truncate">
             {ownerId}
           </div>
         </div>
         <button
           type="button"
           onClick={onRemove}
-          className="p-1 text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+          className="p-1 text-muted-foreground hover:text-destructive"
           title="Remove team"
         >
           <svg
@@ -276,7 +276,7 @@ function OwnerCard({ ownerId, builderProfiles, onRemove }: OwnerCardProps) {
       </div>
       <div className="mt-2 flex flex-wrap items-center gap-3">
         {ownerDriveMissing ? (
-          <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
+          <span className="text-xs font-medium text-status-warning">
             Team Drive Not Found
           </span>
         ) : ownerDriveId ? (
@@ -343,7 +343,7 @@ function OwnerDriveActions({
 
   if (addStatus === "added") {
     return (
-      <span className="text-xs font-medium text-green-600 dark:text-green-400">
+      <span className="text-xs font-medium text-status-success">
         Snapshot Report is added to {ownerName}
       </span>
     );
@@ -354,7 +354,7 @@ function OwnerDriveActions({
       type="button"
       onClick={handleAddReport}
       disabled={!canAddReportToOwnerDrive || addStatus !== "idle"}
-      className="text-xs font-medium text-blue-600 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50 dark:text-blue-400 dark:hover:text-blue-300"
+      className="text-xs font-medium text-primary hover:text-primary/80 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {addStatus === "adding"
         ? "Adding report..."

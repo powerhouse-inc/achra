@@ -62,14 +62,14 @@ export function BillingCycleConfigPanel({
   };
 
   return (
-    <div className="mt-4 pt-4 border-t border-slate-200">
+    <div className="mt-4 pt-4 border-t border-border">
       <div className="flex items-center gap-1.5 mb-3">
         <span
-          className="text-[0.625rem] font-medium uppercase text-slate-500 flex items-center gap-1.5"
+          className="text-[0.625rem] font-medium uppercase text-muted-foreground flex items-center gap-1.5"
           style={{ fontFamily: fontMono, letterSpacing: "0.08em" }}
         >
           <svg
-            className="w-3.5 h-3.5 text-violet-500"
+            className="w-3.5 h-3.5 text-primary"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -84,7 +84,7 @@ export function BillingCycleConfigPanel({
           Billing Cycles & Discounts
         </span>
         <span
-          className="text-[0.5625rem] font-medium text-slate-400 bg-slate-100 py-0.5 px-1.5 rounded-md ml-auto"
+          className="text-[0.5625rem] font-medium text-muted-foreground bg-muted py-0.5 px-1.5 rounded-md ml-auto"
           style={{ fontFamily: fontMono }}
         >
           Computed from service groups
@@ -92,9 +92,9 @@ export function BillingCycleConfigPanel({
       </div>
 
       {!hasBasePrice && (
-        <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-[10px] text-slate-500 text-xs">
+        <div className="flex items-center gap-2 p-3 bg-muted rounded-[10px] text-muted-foreground text-xs">
           <svg
-            className="w-4 h-4 shrink-0 text-slate-400"
+            className="w-4 h-4 shrink-0 text-muted-foreground"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -174,29 +174,29 @@ function BillingCycleRow({
   return (
     <div
       className={`rounded-[10px] overflow-hidden transition-all duration-150 ${
-        enabled ? "border border-violet-200" : "border border-slate-100"
+        enabled ? "border border-primary/40" : "border border-border"
       } ${!hasBasePrice && !isMonthly ? "opacity-50" : ""}`}
     >
       {/* Top: dot + label + total */}
       <div
         className={`flex items-center gap-2.5 py-2.5 px-3 cursor-default ${
-          enabled ? "bg-violet-50" : "bg-white"
+          enabled ? "bg-primary/10" : "bg-card"
         }`}
       >
         <span
           className={`w-2 h-2 rounded-full shrink-0 ${
-            enabled ? "bg-violet-500" : "bg-slate-300"
+            enabled ? "bg-primary" : "bg-border"
           }`}
         />
         <span
-          className="text-sm font-medium text-slate-700 flex-1"
+          className="text-sm font-medium text-foreground flex-1"
           style={{ fontFamily: fontSans }}
         >
           {label}
         </span>
         {enabled && total !== null ? (
           <span
-            className="text-[0.9375rem] font-semibold text-slate-800 whitespace-nowrap"
+            className="text-[0.9375rem] font-semibold text-foreground whitespace-nowrap"
             style={{ fontFamily: fontMono }}
           >
             {formatPrice(total, currency)}
@@ -204,7 +204,7 @@ function BillingCycleRow({
         ) : (
           !enabled && (
             <span
-              className="text-sm text-slate-300 ml-auto"
+              className="text-sm text-muted-foreground/50 ml-auto"
               style={{ fontFamily: fontMono }}
             >
               --
@@ -218,33 +218,33 @@ function BillingCycleRow({
         <div
           className={`flex items-end gap-4 px-3 pt-2 pb-2.5 border-t ${
             enabled
-              ? "bg-violet-50 border-violet-100"
-              : "bg-slate-50 border-slate-100"
+              ? "bg-primary/10 border-primary/20"
+              : "bg-muted border-border"
           }`}
         >
           <div className="flex flex-col gap-1 flex-1">
             <span
-              className="text-[0.5625rem] font-semibold uppercase text-slate-400 flex items-center gap-1"
+              className="text-[0.5625rem] font-semibold uppercase text-muted-foreground flex items-center gap-1"
               style={{ fontFamily: fontMono, letterSpacing: "0.06em" }}
             >
               Standard Price
             </span>
             <div
-              className="flex items-center gap-2 text-xs text-slate-500 py-1"
+              className="flex items-center gap-2 text-xs text-muted-foreground py-1"
               style={{ fontFamily: fontMono, minHeight: "1.75rem" }}
             >
               <span>
                 {currencySymbol}
                 {basePrice} &times; {shortLabel}
               </span>
-              <span className="font-semibold text-slate-700">
+              <span className="font-semibold text-foreground">
                 {formatPrice(total ?? 0, currency)}
               </span>
             </div>
           </div>
           <div className="flex flex-col gap-1 flex-1">
             <span
-              className="text-[0.5625rem] font-semibold uppercase text-slate-400 flex items-center gap-1"
+              className="text-[0.5625rem] font-semibold uppercase text-muted-foreground flex items-center gap-1"
               style={{ fontFamily: fontMono, letterSpacing: "0.06em" }}
             >
               Flat Discount
@@ -264,7 +264,9 @@ function BillingCycleRow({
             </span>
             <div
               className={`flex items-center gap-1 text-[0.8125rem] font-medium py-1 ${
-                discount === 0 ? "text-slate-300" : "text-slate-600"
+                discount === 0
+                  ? "text-muted-foreground/50"
+                  : "text-muted-foreground"
               }`}
               style={{ fontFamily: fontMono, minHeight: "1.75rem" }}
             >
@@ -277,17 +279,17 @@ function BillingCycleRow({
 
       {/* Effective price bar (only when discount > 0) */}
       {effectivePrice !== null && discount > 0 && (
-        <div className="flex items-center gap-1.5 py-1.5 px-3 bg-emerald-50 border-t border-emerald-100">
-          <span className="text-[0.6875rem] text-emerald-400">&rarr;</span>
+        <div className="flex items-center gap-1.5 py-1.5 px-3 bg-status-success/10 border-t border-status-success/20">
+          <span className="text-[0.6875rem] text-status-success">&rarr;</span>
           <span
-            className="text-xs font-semibold text-emerald-700"
+            className="text-xs font-semibold text-status-success"
             style={{ fontFamily: fontMono }}
           >
             {formatPrice(effectivePrice, currency)}
           </span>
           {savingsPercent > 0 && (
             <span
-              className="text-[0.5625rem] font-semibold text-emerald-600 bg-emerald-100 py-[0.0625rem] px-[0.3125rem] rounded-md ml-auto"
+              className="text-[0.5625rem] font-semibold text-status-success bg-status-success/20 py-[0.0625rem] px-[0.3125rem] rounded-md ml-auto"
               style={{ fontFamily: fontMono }}
             >
               {savingsPercent}% off

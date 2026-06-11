@@ -22,10 +22,14 @@ export const DatePicker = (props: DatePickerProps) => {
       onSubmit={() => {}}
       resetOnSuccessfulSubmit={false}
     >
+      {props.label ? (
+        <label className="mb-1 block text-sm font-medium text-foreground">
+          {props.label}
+        </label>
+      ) : null}
       <DatePickerField
         name={props.name}
         value={props.value || ""}
-        label={props.label}
         placeholder={props.placeholder}
         onChange={props.onChange}
         dateFormat={"YYYY-MM-DD"}

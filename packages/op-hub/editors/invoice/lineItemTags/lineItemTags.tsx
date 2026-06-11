@@ -64,12 +64,12 @@ export function LineItemTagsTable({
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-200 p-6 bg-white z-10">
+      <div className="flex items-center justify-between border-b border-border p-6 bg-card z-10">
         <span className="flex items-center gap-2">
-          <h2 className="text-2xl font-semibold text-gray-900">Assign Tags </h2>
-          <Tag
-            style={{ width: 28, height: 28, color: "white", fill: "#475264" }}
-          />
+          <h2 className="text-2xl font-semibold text-foreground">
+            Assign Tags{" "}
+          </h2>
+          <Tag style={{ width: 28, height: 28, fill: "var(--foreground)" }} />
         </span>
         <div className="flex items-center gap-2">
           <Button color="light" size="medium" onClick={handleReset}>
@@ -77,30 +77,36 @@ export function LineItemTagsTable({
           </Button>
           <button
             onClick={onClose}
-            className="rounded-full p-2 hover:bg-gray-100"
+            className="rounded-full p-2 hover:bg-accent text-foreground"
           >
-            <X size={24} className="text-gray-500" />
+            <X size={24} className="text-muted-foreground" />
           </button>
         </div>
       </div>
 
       {/* Table View */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="w-full border-collapse bg-white">
-          <thead className="bg-gray-50 z-10">
+      <div className="overflow-x-auto rounded-lg border border-border">
+        <table className="w-full border-collapse bg-background">
+          <thead className="bg-muted z-10">
             <tr>
-              <th className="border-b border-gray-200 p-3 text-left">Item</th>
-              <th className="border-b border-gray-200 p-3 text-left">Period</th>
-              <th className="border-b border-gray-200 p-3 text-left">
+              <th className="border-b border-border p-3 text-left text-foreground">
+                Item
+              </th>
+              <th className="border-b border-border p-3 text-left text-foreground">
+                Period
+              </th>
+              <th className="border-b border-border p-3 text-left text-foreground">
                 Xero Expense Account
               </th>
-              <th className="border-b border-gray-200 p-3 text-right">Total</th>
+              <th className="border-b border-border p-3 text-right text-foreground">
+                Total
+              </th>
             </tr>
           </thead>
           <tbody>
             {lineItems.map((item) => (
-              <tr key={item.id} className="hover:bg-gray-50">
-                <td className="border-b border-gray-200 p-3">
+              <tr key={item.id} className="hover:bg-muted">
+                <td className="border-b border-border p-3">
                   <InputField
                     value={item.item}
                     handleInputChange={() => {}}
@@ -114,7 +120,7 @@ export function LineItemTagsTable({
                     }}
                   />
                 </td>
-                <td className="border-b border-gray-200 w-48">
+                <td className="border-b border-border w-48">
                   <DatePicker
                     name="period"
                     dateFormat="YYYY-MM-DD"
@@ -148,10 +154,10 @@ export function LineItemTagsTable({
                         }),
                       )
                     }
-                    className="bg-white"
+                    className="bg-background"
                   />
                 </td>
-                <td className="border-b border-gray-200 p-3">
+                <td className="border-b border-border p-3">
                   <Select
                     options={expenseAccountOptions}
                     value={
@@ -175,7 +181,7 @@ export function LineItemTagsTable({
                     }}
                   />
                 </td>
-                <td className="border-b border-gray-200 p-3 text-right font-medium">
+                <td className="border-b border-border p-3 text-right font-medium text-foreground">
                   {item.total}
                 </td>
               </tr>
@@ -185,9 +191,9 @@ export function LineItemTagsTable({
       </div>
 
       {/* Payment Account */}
-      <div className="border-t border-gray-200 p-6">
+      <div className="border-t border-border p-6">
         <div className="flex items-center justify-end gap-4">
-          <label className="text-lg font-medium text-gray-900">
+          <label className="text-lg font-medium text-foreground">
             Payment Account
           </label>
           <Select

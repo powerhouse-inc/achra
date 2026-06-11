@@ -461,7 +461,7 @@ export function MonthlyReportsOverview({
         ref={buttonRef}
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         disabled={isAddingMonth}
-        className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <Plus className="w-4 h-4" />
         {isAddingMonth ? "Adding..." : "Add Month"}
@@ -472,13 +472,13 @@ export function MonthlyReportsOverview({
         createPortal(
           <div
             ref={dropdownRef}
-            className="fixed w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-[9999]"
+            className="fixed w-56 bg-popover rounded-lg shadow-lg border border-border py-1 z-[9999]"
             style={{
               top: dropdownPosition.top,
               left: dropdownPosition.left,
             }}
           >
-            <div className="px-3 py-2 text-xs font-medium text-gray-500 border-b border-gray-100">
+            <div className="px-3 py-2 text-xs font-medium text-muted-foreground border-b border-border">
               Select a month to add
             </div>
             <div className="max-h-72 overflow-y-auto">
@@ -489,13 +489,15 @@ export function MonthlyReportsOverview({
                   disabled={isAddingMonth || exists}
                   className={`w-full px-3 py-2 text-left text-sm ${
                     exists
-                      ? "text-gray-400 cursor-not-allowed"
-                      : "text-gray-700 hover:bg-gray-50"
+                      ? "text-muted-foreground cursor-not-allowed"
+                      : "text-foreground hover:bg-accent"
                   } disabled:cursor-not-allowed`}
                 >
                   {name}
                   {exists && (
-                    <span className="ml-2 text-xs text-gray-400">(exists)</span>
+                    <span className="ml-2 text-xs text-muted-foreground">
+                      (exists)
+                    </span>
                   )}
                 </button>
               ))}
@@ -508,20 +510,20 @@ export function MonthlyReportsOverview({
 
   if (isLoading) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-card rounded-xl border border-border p-6">
         <div className="animate-pulse">
           <div className="flex items-center justify-between gap-3 mb-5">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-gray-200 rounded-lg" />
+              <div className="w-9 h-9 bg-muted rounded-lg" />
               <div>
-                <div className="h-5 bg-gray-200 rounded w-36 mb-2" />
-                <div className="h-4 bg-gray-100 rounded w-56" />
+                <div className="h-5 bg-muted rounded w-36 mb-2" />
+                <div className="h-4 bg-muted rounded w-56" />
               </div>
             </div>
           </div>
           <div className="space-y-3">
-            <div className="h-16 bg-gray-100 rounded-xl" />
-            <div className="h-16 bg-gray-100 rounded-xl" />
+            <div className="h-16 bg-muted rounded-xl" />
+            <div className="h-16 bg-muted rounded-xl" />
           </div>
         </div>
       </div>
@@ -530,24 +532,24 @@ export function MonthlyReportsOverview({
 
   if (monthReportSets.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-6 overflow-visible">
+      <div className="bg-card rounded-xl border border-border p-6 overflow-visible">
         <div className="flex items-center justify-between gap-3 mb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-100 rounded-lg">
-              <BarChart3 className="w-5 h-5 text-indigo-600" />
+            <div className="p-2 bg-primary/15 rounded-lg">
+              <BarChart3 className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-foreground">
                 Monthly Reports
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted-foreground">
                 Quick access to expense and snapshot reports
               </p>
             </div>
           </div>
           {addMonthButton}
         </div>
-        <p className="text-gray-500 text-sm text-center py-4">
+        <p className="text-muted-foreground text-sm text-center py-4">
           No months configured yet. Click "Add Month" to get started.
         </p>
       </div>
@@ -555,18 +557,18 @@ export function MonthlyReportsOverview({
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 overflow-visible">
+    <div className="bg-card rounded-xl border border-border p-6 overflow-visible">
       {/* Header with Add Month button */}
       <div className="flex items-center justify-between gap-3 mb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-100 rounded-lg">
-            <BarChart3 className="w-5 h-5 text-indigo-600" />
+          <div className="p-2 bg-primary/15 rounded-lg">
+            <BarChart3 className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-foreground">
               Monthly Reports
             </h2>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Quick access to expense and snapshot reports
             </p>
           </div>

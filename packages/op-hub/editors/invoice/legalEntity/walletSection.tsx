@@ -96,12 +96,12 @@ export const LegalEntityWalletSection = (
     <div
       {...divProps}
       className={twMerge(
-        "rounded-lg border border-gray-200 bg-white p-6",
+        "rounded-lg border border-border bg-card p-6",
         props.className,
       )}
     >
       <div className="grid grid-cols-2 gap-4 items-center">
-        <h3 className="mb-4 text-lg font-semibold text-black-200">
+        <h3 className="mb-4 text-lg font-semibold text-foreground">
           Wallet Information
         </h3>
         <div>
@@ -113,7 +113,7 @@ export const LegalEntityWalletSection = (
             placeholder="Select Chain"
           />
           {chainvalidation && !chainvalidation.isValid && (
-            <p className="mt-1 text-xs text-yellow-600">
+            <p className="mt-1 text-xs text-status-warning">
               {chainvalidation.message}
             </p>
           )}

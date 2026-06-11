@@ -10,7 +10,7 @@ interface SelectFieldProps {
 }
 
 function warningIcon() {
-  return <Icon name="WarningFill" color="#eb4235" />;
+  return <Icon name="WarningFill" color="var(--destructive)" />;
 }
 
 function clockIcon() {
@@ -19,11 +19,11 @@ function clockIcon() {
       style={{
         width: 24,
         height: 24,
-        fill: "#475264",
-        color: "white",
+        fill: "var(--muted-foreground)",
+        color: "var(--primary-foreground)",
         padding: 0,
         margin: 0,
-        borderColor: "#475264",
+        borderColor: "var(--muted-foreground)",
       }}
     />
   );
@@ -31,7 +31,14 @@ function clockIcon() {
 
 function checkCircleIcon(color: string) {
   return (
-    <FileCheck style={{ width: 24, height: 24, fill: color, color: "white" }} />
+    <FileCheck
+      style={{
+        width: 24,
+        height: 24,
+        fill: color,
+        color: "var(--primary-foreground)",
+      }}
+    />
   );
 }
 
@@ -47,12 +54,12 @@ const STATUS_OPTIONS_MAP = [
   {
     label: "Draft",
     value: "DRAFT",
-    icon: () => arrowRightIcon("#1890ff"),
+    icon: () => arrowRightIcon("var(--primary)"),
   },
   {
     label: "Issued",
     value: "ISSUED",
-    icon: () => arrowRightIcon("#475264"),
+    icon: () => arrowRightIcon("var(--muted-foreground)"),
   },
   {
     label: "Cancelled",
@@ -62,7 +69,7 @@ const STATUS_OPTIONS_MAP = [
   {
     label: "Accepted",
     value: "ACCEPTED",
-    icon: () => checkCircleIcon("#475264"),
+    icon: () => checkCircleIcon("var(--muted-foreground)"),
   },
   {
     label: "Rejected",
@@ -87,12 +94,12 @@ const STATUS_OPTIONS_MAP = [
   {
     label: "Payment Received",
     value: "PAYMENTRECEIVED",
-    icon: () => checkCircleIcon("#34a853"),
+    icon: () => checkCircleIcon("var(--status-success)"),
   },
   {
     label: "Payment Closed",
     value: "PAYMENTCLOSED",
-    icon: () => checkCircleIcon("#475264"),
+    icon: () => checkCircleIcon("var(--muted-foreground)"),
   },
 ];
 
@@ -105,7 +112,7 @@ export const SelectField = (props: SelectFieldProps) => {
     {
       label: "Draft",
       value: "DRAFT",
-      icon: () => arrowRightIcon("#1890ff"),
+      icon: () => arrowRightIcon("var(--primary)"),
     },
     {
       label: "Issue Invoice",
@@ -133,7 +140,7 @@ export const SelectField = (props: SelectFieldProps) => {
     {
       label: "Issued",
       value: "ISSUED",
-      icon: () => arrowRightIcon("#475264"),
+      icon: () => arrowRightIcon("var(--muted-foreground)"),
     },
     {
       label: "Reject Invoice",
@@ -161,7 +168,7 @@ export const SelectField = (props: SelectFieldProps) => {
     {
       label: "Accepted",
       value: "ACCEPTED",
-      icon: () => checkCircleIcon("#475264"),
+      icon: () => checkCircleIcon("var(--muted-foreground)"),
     },
     {
       label: "Schedule Payment",
@@ -229,7 +236,7 @@ export const SelectField = (props: SelectFieldProps) => {
     {
       label: "Payment Received",
       value: "PAYMENTRECEIVED",
-      icon: () => checkCircleIcon("#34a853"),
+      icon: () => checkCircleIcon("var(--status-success)"),
     },
     {
       label: "Report Payment Issue",
@@ -241,7 +248,7 @@ export const SelectField = (props: SelectFieldProps) => {
     {
       label: "Payment Closed",
       value: "PAYMENTCLOSED",
-      icon: () => checkCircleIcon("#475264"),
+      icon: () => checkCircleIcon("var(--muted-foreground)"),
     },
     {
       label: "Re-approve Payment",

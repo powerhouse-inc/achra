@@ -14,7 +14,7 @@ export function SpendBreakdown({ data }: SpendBreakdownProps) {
 
   if (data.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full text-stone-400 text-sm">
+      <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
         No spend data
       </div>
     );
@@ -27,14 +27,14 @@ export function SpendBreakdown({ data }: SpendBreakdownProps) {
         return (
           <div key={item.templateName}>
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-sm font-medium text-stone-700">
+              <span className="text-sm font-medium text-foreground">
                 {item.templateName}
               </span>
-              <span className="text-sm font-semibold text-stone-700">
+              <span className="text-sm font-semibold text-foreground">
                 {formatCurrency(item.amount)}
               </span>
             </div>
-            <div className="h-2.5 w-full rounded-full bg-stone-200/60">
+            <div className="h-2.5 w-full rounded-full bg-muted">
               <div
                 className="h-2.5 rounded-full transition-all"
                 style={{
@@ -47,9 +47,9 @@ export function SpendBreakdown({ data }: SpendBreakdownProps) {
         );
       })}
 
-      <div className="border-t border-stone-200 pt-3 flex items-center justify-between">
-        <span className="text-sm text-stone-500">Total Monthly</span>
-        <span className="text-lg font-bold text-stone-800">
+      <div className="border-t border-border pt-3 flex items-center justify-between">
+        <span className="text-sm text-muted-foreground">Total Monthly</span>
+        <span className="text-lg font-bold text-foreground">
           {formatCurrency(total)}
         </span>
       </div>

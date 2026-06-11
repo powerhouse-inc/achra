@@ -24,7 +24,9 @@ export type EditLegalEntityBankInput = EditIssuerBankInput | EditPayerBankInput;
 export type EditLegalEntityInput = EditIssuerInput | EditPayerInput;
 
 const FieldLabel = ({ children }: { readonly children: React.ReactNode }) => (
-  <label className="block text-sm font-medium text-gray-700">{children}</label>
+  <label className="block text-sm font-medium text-foreground">
+    {children}
+  </label>
 );
 
 export const STATE_PROVINCE_OPTIONS = [
@@ -148,11 +150,11 @@ export const LegalEntityMainSection = (props: LegalEntityMainSectionProps) => {
     <div
       {...divProps}
       className={twMerge(
-        "rounded-lg border border-gray-200 bg-white p-6 mb-2",
+        "rounded-lg border border-border bg-card p-6 mb-2",
         props.className,
       )}
     >
-      <h3 className="mb-4 text-lg font-semibold text-gray-900">
+      <h3 className="mb-4 text-lg font-semibold text-foreground">
         Basic Information
       </h3>
       <div className="space-y-6">
@@ -213,7 +215,7 @@ export const LegalEntityMainSection = (props: LegalEntityMainSectionProps) => {
             <div className="space-y-2">
               {value.country === "US" ? (
                 <>
-                  <label className="mb-2 block text-sm font-medium text-gray-700">
+                  <label className="mb-2 block text-sm font-medium text-foreground">
                     State/Province
                   </label>
                   <Select

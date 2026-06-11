@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { TextInput, Icon } from "@powerhousedao/document-engineering";
+import { Image as ImageIcon, X } from "lucide-react";
+import { Input } from "@achra/ui/input";
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -54,7 +55,7 @@ function ImageModal({ isOpen, onClose, imageUrl, imageAlt }: ImageModalProps) {
           onClick={onClose}
           className="absolute -top-3 -right-3 z-10 w-8 h-8 bg-secondary hover:bg-secondary/80 rounded-full flex items-center justify-center text-secondary-foreground transition-all duration-200 shadow-lg"
         >
-          <Icon name="Xmark" size={16} />
+          <X size={16} />
         </button>
         <div className="w-full h-full flex items-center justify-center p-8">
           <img
@@ -133,11 +134,7 @@ export function ImageUrlInput({
                     onLoad={() => setImageError(false)}
                   />
                 ) : (
-                  <Icon
-                    name="Image"
-                    size={24}
-                    className="text-muted-foreground"
-                  />
+                  <ImageIcon size={24} className="text-muted-foreground" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
@@ -158,7 +155,7 @@ export function ImageUrlInput({
             </div>
           </div>
           <div className="mt-3">
-            <TextInput
+            <Input
               className="w-full"
               defaultValue={value || ""}
               onBlur={(e: React.FocusEvent<HTMLInputElement>) => {

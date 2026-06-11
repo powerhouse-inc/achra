@@ -63,13 +63,11 @@ export default function ServiceOfferingEditor() {
         className="min-h-full overflow-y-auto"
         style={{
           fontFamily: "'DM Sans', system-ui, sans-serif",
-          background:
-            "linear-gradient(135deg, #f1f5f9 0%, #f8fafc 50%, #f0f4f8 100%)",
         }}
       >
         <div className="flex flex-col items-center justify-center min-h-screen text-center p-12">
           <div
-            className="w-20 h-20 mb-6 text-slate-300"
+            className="w-20 h-20 mb-6 text-muted-foreground"
             style={{ animation: "so-float 3s ease-in-out infinite" }}
           >
             <svg
@@ -86,10 +84,10 @@ export default function ServiceOfferingEditor() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-semibold text-slate-700 m-0 mb-2 tracking-tight">
+          <h2 className="text-2xl font-semibold text-foreground m-0 mb-2 tracking-tight">
             No service offering selected
           </h2>
-          <p className="text-base text-slate-500 m-0">
+          <p className="text-base text-muted-foreground m-0">
             Select a document to start editing
           </p>
         </div>
@@ -132,8 +130,6 @@ export default function ServiceOfferingEditor() {
         className="min-h-full overflow-y-auto"
         style={{
           fontFamily: "'DM Sans', system-ui, sans-serif",
-          background:
-            "linear-gradient(135deg, #f1f5f9 0%, #f8fafc 50%, #f0f4f8 100%)",
         }}
       >
         <DocumentToolbar />
@@ -151,16 +147,16 @@ export default function ServiceOfferingEditor() {
             {renderTabContent()}
             {nextTab && (
               <div
-                className="flex items-center justify-end gap-3 py-4 mt-6 border-t border-slate-200"
+                className="flex items-center justify-end gap-3 py-4 mt-6 border-t border-border"
                 ref={nextBarRef}
               >
                 {!isCurrentStepComplete && (
-                  <span className="text-[0.6875rem] text-amber-600">
+                  <span className="text-[0.6875rem] text-status-warning">
                     This step is not yet complete — you can still continue
                   </span>
                 )}
                 <button
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[0.8125rem] font-semibold text-white bg-violet-600 border-none rounded-[10px] cursor-pointer transition-colors duration-150 hover:bg-violet-700"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-[0.8125rem] font-semibold text-primary-foreground bg-primary border-none rounded-[10px] cursor-pointer transition-colors duration-150 hover:bg-primary/90"
                   style={{ fontFamily: "'DM Sans', system-ui, sans-serif" }}
                   onClick={goNext}
                 >
@@ -181,11 +177,10 @@ export default function ServiceOfferingEditor() {
         </div>
         {nextTab && !nextBarVisible && (
           <button
-            className="fixed bottom-6 right-8 inline-flex items-center gap-1.5 px-5 py-2.5 text-[0.8125rem] font-semibold text-white bg-violet-600 border-none rounded-full cursor-pointer z-50 hover:bg-violet-700"
+            className="fixed bottom-6 right-8 inline-flex items-center gap-1.5 px-5 py-2.5 text-[0.8125rem] font-semibold text-primary-foreground bg-primary border-none rounded-full cursor-pointer z-50 hover:bg-primary/90"
             style={{
               fontFamily: "'DM Sans', system-ui, sans-serif",
-              boxShadow:
-                "0 4px 12px rgba(109, 40, 217, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1)",
+              boxShadow: "var(--shadow-primary)",
               animation: "so-fab-in 0.2s ease-out",
             }}
             onClick={goNext}

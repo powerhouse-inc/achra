@@ -140,9 +140,9 @@ export function TeamMembersOverview({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <h2 className="text-lg font-semibold text-slate-900">Team Members</h2>
-        <span className="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-sm font-medium text-indigo-700">
+      <div className="flex items-center gap-3 text-muted-foreground">
+        <h2 className="text-lg font-semibold text-foreground">Team Members</h2>
+        <span className="inline-flex items-center justify-center rounded-full bg-primary/10 px-2.5 py-0.5 text-sm font-medium text-primary">
           {contributorCount}
         </span>
       </div>
@@ -183,7 +183,7 @@ function MemberCard({ member }: { member: TeamMember }) {
           <img
             src={member.icon}
             alt={member.name}
-            className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-md transition-transform group-hover:scale-105"
+            className="h-14 w-14 rounded-full object-cover ring-2 ring-border shadow-md transition-transform group-hover:scale-105"
             onError={(e) => {
               e.currentTarget.style.display = "none";
               const fallback = e.currentTarget.nextElementSibling;
@@ -194,14 +194,14 @@ function MemberCard({ member }: { member: TeamMember }) {
           />
         ) : null}
         <div
-          className={`h-14 w-14 rounded-full bg-gradient-to-br from-slate-400 to-slate-500 ring-2 ring-white shadow-md ${
+          className={`h-14 w-14 rounded-full bg-gradient-to-br from-muted-foreground/70 to-muted-foreground ring-2 ring-border shadow-md ${
             member.icon ? "hidden" : "flex"
           } items-center justify-center transition-transform group-hover:scale-105`}
         >
           <span className="text-sm font-semibold text-white">{initials}</span>
         </div>
       </div>
-      <span className="max-w-[80px] truncate text-xs font-medium text-slate-600">
+      <span className="max-w-[80px] truncate text-xs font-medium text-foreground">
         {member.name}
       </span>
     </div>
@@ -225,12 +225,12 @@ function OverflowIndicator({
       className="flex flex-col items-center gap-2 group cursor-pointer"
       title="Click to show all members"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 ring-2 ring-white shadow-sm transition-all group-hover:bg-indigo-100 group-hover:ring-indigo-200">
-        <span className="text-sm font-semibold text-slate-500 group-hover:text-indigo-600">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted ring-2 ring-border shadow-sm transition-all group-hover:bg-primary/10 group-hover:ring-primary/30">
+        <span className="text-sm font-semibold text-muted-foreground group-hover:text-primary">
           +{count}
         </span>
       </div>
-      <span className="text-xs font-medium text-slate-400 group-hover:text-indigo-500">
+      <span className="text-xs font-medium text-muted-foreground group-hover:text-primary/80">
         show all
       </span>
     </button>
@@ -248,9 +248,9 @@ function CollapseIndicator({ onClick }: { onClick: () => void }) {
       className="flex flex-col items-center gap-2 group cursor-pointer"
       title="Click to show less"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 ring-2 ring-white shadow-sm transition-all group-hover:bg-slate-200">
+      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted ring-2 ring-border shadow-sm transition-all group-hover:bg-accent">
         <svg
-          className="h-5 w-5 text-slate-500 group-hover:text-slate-700"
+          className="h-5 w-5 text-muted-foreground group-hover:text-foreground"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -263,7 +263,7 @@ function CollapseIndicator({ onClick }: { onClick: () => void }) {
           />
         </svg>
       </div>
-      <span className="text-xs font-medium text-slate-400 group-hover:text-slate-600">
+      <span className="text-xs font-medium text-muted-foreground group-hover:text-muted-foreground">
         show less
       </span>
     </button>
@@ -276,11 +276,11 @@ function CollapseIndicator({ onClick }: { onClick: () => void }) {
 function TeamMembersEmptyState() {
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-semibold text-slate-900">Team Members</h2>
-      <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50/50 p-8 text-center">
-        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
+      <h2 className="text-lg font-semibold text-foreground">Team Members</h2>
+      <div className="rounded-xl border border-dashed border-border bg-muted/50 p-8 text-center">
+        <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
           <svg
-            className="h-6 w-6 text-slate-400"
+            className="h-6 w-6 text-muted-foreground"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -293,7 +293,7 @@ function TeamMembersEmptyState() {
             />
           </svg>
         </div>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-muted-foreground">
           No team members added yet. Add contributors to your builder profile.
         </p>
       </div>

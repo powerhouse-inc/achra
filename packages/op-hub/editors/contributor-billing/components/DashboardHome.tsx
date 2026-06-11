@@ -206,8 +206,8 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
     <div className="max-w-4xl mx-auto">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-          <span className="flex items-center justify-center w-6 h-6 rounded bg-purple-800 flex-shrink-0">
+        <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+          <span className="flex items-center justify-center w-6 h-6 rounded bg-primary flex-shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -218,30 +218,30 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-white"
+              className="text-primary-foreground"
             >
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </span>
           {hubName}
         </h1>
-        <p className="text-gray-600 mt-1">
+        <p className="text-muted-foreground mt-1">
           Manage accounts, billing, and financial reporting
         </p>
       </div>
 
       {/* Setup Progress - Only show if not complete */}
       {!setupComplete && (
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-6 mb-6">
+        <div className="bg-card rounded-xl border border-border p-6 mb-6">
           <div className="flex items-center gap-3 mb-5">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <CheckCircle2 className="w-5 h-5 text-blue-600" />
+            <div className="p-2 bg-primary/15 rounded-lg">
+              <CheckCircle2 className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">
+              <h2 className="text-lg font-semibold text-foreground">
                 Getting Started
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted-foreground">
                 Complete these steps to set up your operational hub
               </p>
             </div>
@@ -255,15 +255,15 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
                 disabled={step.done}
                 className={`w-full flex items-start gap-3 p-3 rounded-lg text-left transition-colors ${
                   step.done
-                    ? "bg-white/50 cursor-default"
-                    : "bg-white hover:bg-blue-50 cursor-pointer"
+                    ? "bg-muted/50 cursor-default"
+                    : "bg-muted hover:bg-primary/10 cursor-pointer"
                 }`}
               >
                 <div className="mt-0.5">
                   {step.done ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    <CheckCircle2 className="w-5 h-5 text-status-success" />
                   ) : (
-                    <div className="w-5 h-5 rounded-full border-2 border-blue-400 flex items-center justify-center text-xs font-semibold text-blue-600">
+                    <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center text-xs font-semibold text-primary">
                       {index + 1}
                     </div>
                   )}
@@ -271,21 +271,25 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
                 <div className="flex-1">
                   <span
                     className={`font-medium ${
-                      step.done ? "text-gray-400 line-through" : "text-gray-900"
+                      step.done
+                        ? "text-muted-foreground line-through"
+                        : "text-foreground"
                     }`}
                   >
                     {step.label}
                   </span>
                   <p
                     className={`text-sm mt-0.5 ${
-                      step.done ? "text-gray-400" : "text-gray-600"
+                      step.done
+                        ? "text-muted-foreground"
+                        : "text-muted-foreground"
                     }`}
                   >
                     {step.description}
                   </p>
                 </div>
                 {!step.done && (
-                  <ArrowRight className="w-4 h-4 text-blue-500 mt-1" />
+                  <ArrowRight className="w-4 h-4 text-primary mt-1" />
                 )}
               </button>
             ))}
@@ -298,27 +302,27 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
         {/* Profile Card */}
         <button
           onClick={handleOpenProfile}
-          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-md hover:border-blue-200 transition-all group"
+          className="bg-card rounded-xl border border-border p-5 text-left hover:shadow-md hover:border-primary/50 transition-all group"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-lg bg-purple-100">
-                <User className="w-5 h-5 text-purple-600" />
+              <div className="p-3 rounded-lg bg-primary/15">
+                <User className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Profile</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="font-semibold text-foreground">Profile</h3>
+                <p className="text-sm text-muted-foreground">
                   {operationalHubProfileDocument
                     ? profileStats || "View and update your hub profile"
                     : "Set up your hub profile"}
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </div>
           {!operationalHubProfileDocument && (
-            <div className="mt-3 pt-3 border-t border-gray-100">
-              <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded">
+            <div className="mt-3 pt-3 border-t border-border">
+              <span className="text-xs font-medium text-status-warning bg-status-warning/15 px-2 py-1 rounded">
                 Action Required
               </span>
             </div>
@@ -328,31 +332,31 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
         {/* Accounts Card */}
         <button
           onClick={() => void handleOpenAccounts()}
-          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-md hover:border-blue-200 transition-all group"
+          className="bg-card rounded-xl border border-border p-5 text-left hover:shadow-md hover:border-primary/50 transition-all group"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <div
-                className={`p-3 rounded-lg ${accountsDocument ? "bg-green-100" : "bg-amber-100"}`}
+                className={`p-3 rounded-lg ${accountsDocument ? "bg-status-success/20" : "bg-status-warning/15"}`}
               >
                 <Wallet
-                  className={`w-5 h-5 ${accountsDocument ? "text-green-600" : "text-amber-600"}`}
+                  className={`w-5 h-5 ${accountsDocument ? "text-status-success" : "text-status-warning"}`}
                 />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Accounts</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="font-semibold text-foreground">Accounts</h3>
+                <p className="text-sm text-muted-foreground">
                   {accountsDocument
                     ? accountStats || "View and manage accounts"
                     : "Set up your accounts first"}
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </div>
           {!accountsDocument && (
-            <div className="mt-3 pt-3 border-t border-gray-100">
-              <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded">
+            <div className="mt-3 pt-3 border-t border-border">
+              <span className="text-xs font-medium text-status-warning bg-status-warning/15 px-2 py-1 rounded">
                 Action Required
               </span>
             </div>
@@ -362,21 +366,21 @@ export function DashboardHome({ onFolderSelect }: DashboardHomeProps) {
         {/* Billing Card */}
         <button
           onClick={handleOpenBilling}
-          className="bg-white rounded-xl border border-gray-200 p-5 text-left hover:shadow-md hover:border-blue-200 transition-all group"
+          className="bg-card rounded-xl border border-border p-5 text-left hover:shadow-md hover:border-primary/50 transition-all group"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <Building2 className="w-5 h-5 text-blue-600" />
+              <div className="p-3 bg-primary/15 rounded-lg">
+                <Building2 className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Billing</h3>
-                <p className="text-sm text-gray-500">
+                <h3 className="font-semibold text-foreground">Billing</h3>
+                <p className="text-sm text-muted-foreground">
                   {billingStats || "Manage monthly billing cycles"}
                 </p>
               </div>
             </div>
-            <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </div>
         </button>
       </div>

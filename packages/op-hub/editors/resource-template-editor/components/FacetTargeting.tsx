@@ -724,7 +724,7 @@ function PresetCard({ preset, onAdd, onAddWithOptions }: PresetCardProps) {
 
 const styles = `
   .facet-targeting {
-    background: var(--te-surface, #ffffff);
+    background: var(--te-surface, var(--card));
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 1px 3px rgba(26, 31, 54, 0.04), 0 4px 16px rgba(26, 31, 54, 0.06);
@@ -732,7 +732,7 @@ const styles = `
 
   /* Progress Section - Goal-Gradient Effect */
   .facet-targeting__progress {
-    background: linear-gradient(135deg, #f5f3ff 0%, #ecfdf5 100%);
+    background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 10%, transparent) 0%, color-mix(in oklab, var(--status-success) 12%, transparent) 100%);
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 20px;
@@ -754,13 +754,13 @@ const styles = `
   .facet-targeting__progress-percent {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #7c5cff;
+    color: var(--primary);
     font-family: 'DM Mono', monospace;
   }
 
   .facet-targeting__progress-label {
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--muted-foreground);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -770,8 +770,8 @@ const styles = `
     align-items: center;
     gap: 4px;
     padding: 4px 10px;
-    background: #10b981;
-    color: white;
+    background: var(--status-success);
+    color: var(--primary-foreground);
     font-size: 0.6875rem;
     font-weight: 600;
     border-radius: 100px;
@@ -797,7 +797,7 @@ const styles = `
 
   .facet-targeting__progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #7c5cff, #10b981);
+    background: linear-gradient(90deg, var(--primary), var(--status-success));
     border-radius: 100px;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -828,8 +828,8 @@ const styles = `
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    background: #f5f3ff;
-    color: #7c5cff;
+    background: color-mix(in oklab, var(--primary) 10%, transparent);
+    color: var(--primary);
   }
 
   .facet-targeting__icon svg {
@@ -840,13 +840,13 @@ const styles = `
   .facet-targeting__title {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--te-ink, #1a1f36);
+    color: var(--te-ink, var(--foreground));
     margin: 0 0 2px;
   }
 
   .facet-targeting__subtitle {
     font-size: 0.8125rem;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     margin: 0;
   }
 
@@ -858,8 +858,8 @@ const styles = `
     font-family: inherit;
     font-size: 0.8125rem;
     font-weight: 500;
-    color: #7c5cff;
-    background: #f5f3ff;
+    color: var(--primary);
+    background: color-mix(in oklab, var(--primary) 10%, transparent);
     border: 1.5px solid transparent;
     border-radius: 8px;
     cursor: pointer;
@@ -867,12 +867,12 @@ const styles = `
   }
 
   .facet-targeting__toggle-btn:hover {
-    border-color: #7c5cff;
+    border-color: var(--primary);
   }
 
   .facet-targeting__toggle-btn--active {
-    background: #7c5cff;
-    color: white;
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   .facet-targeting__toggle-btn svg {
@@ -888,8 +888,8 @@ const styles = `
     font-family: inherit;
     font-size: 0.875rem;
     font-weight: 500;
-    color: white;
-    background: #14b8a6;
+    color: var(--primary-foreground);
+    background: var(--status-success);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -897,7 +897,7 @@ const styles = `
   }
 
   .facet-targeting__add-btn:hover {
-    background: #0d9488;
+    background: var(--status-success);
   }
 
   .facet-targeting__add-btn svg {
@@ -907,7 +907,7 @@ const styles = `
 
   /* Presets Panel */
   .facet-targeting__presets {
-    background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+    background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 10%, transparent) 0%, color-mix(in oklab, var(--primary) 10%, transparent) 100%);
     border: 1px solid rgba(124, 92, 255, 0.2);
     border-radius: 12px;
     padding: 20px;
@@ -930,7 +930,7 @@ const styles = `
   .facet-targeting__presets-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #1a1f36;
+    color: var(--foreground);
     margin: 0;
     display: flex;
     align-items: center;
@@ -946,8 +946,8 @@ const styles = `
     font-family: inherit;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #7c5cff;
-    background: white;
+    color: var(--primary);
+    background: var(--card);
     border: 1px solid rgba(124, 92, 255, 0.3);
     border-radius: 6px;
     cursor: pointer;
@@ -955,9 +955,9 @@ const styles = `
   }
 
   .facet-targeting__add-all-btn:hover {
-    background: #7c5cff;
-    color: white;
-    border-color: #7c5cff;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
   }
 
   .facet-targeting__presets-section {
@@ -976,14 +976,14 @@ const styles = `
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #64748b;
+    color: var(--muted-foreground);
     margin-bottom: 10px;
   }
 
   .facet-targeting__presets-label svg {
     width: 12px;
     height: 12px;
-    color: #f59e0b;
+    color: var(--status-warning);
   }
 
   .facet-targeting__presets-grid {
@@ -994,25 +994,25 @@ const styles = `
 
   /* Preset Card */
   .preset-card {
-    background: white;
-    border: 1.5px solid #e4e8f0;
+    background: var(--card);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     padding: 14px;
     transition: all 0.15s ease;
   }
 
   .preset-card:hover {
-    border-color: #7c5cff;
+    border-color: var(--primary);
     box-shadow: 0 4px 12px rgba(124, 92, 255, 0.1);
   }
 
   .preset-card--recommended {
     border-color: rgba(245, 158, 11, 0.4);
-    background: linear-gradient(135deg, white 0%, #fffbeb 100%);
+    background: linear-gradient(135deg, white 0%, color-mix(in oklab, var(--status-warning) 10%, transparent) 100%);
   }
 
   .preset-card--recommended:hover {
-    border-color: #f59e0b;
+    border-color: var(--status-warning);
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
   }
 
@@ -1037,13 +1037,13 @@ const styles = `
     display: block;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #1a1f36;
+    color: var(--foreground);
   }
 
   .preset-card__desc {
     display: block;
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--muted-foreground);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1060,8 +1060,8 @@ const styles = `
     padding: 2px 8px;
     font-size: 0.6875rem;
     font-weight: 500;
-    color: #64748b;
-    background: #f1f5f9;
+    color: var(--muted-foreground);
+    background: var(--muted);
     border-radius: 4px;
   }
 
@@ -1069,7 +1069,7 @@ const styles = `
     padding: 2px 8px;
     font-size: 0.6875rem;
     font-weight: 500;
-    color: #94a3b8;
+    color: var(--muted-foreground);
     font-style: italic;
   }
 
@@ -1084,8 +1084,8 @@ const styles = `
     font-family: inherit;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #64748b;
-    background: #f1f5f9;
+    color: var(--muted-foreground);
+    background: var(--muted);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -1093,22 +1093,22 @@ const styles = `
   }
 
   .preset-card__btn:hover {
-    background: #e2e8f0;
-    color: #475569;
+    background: var(--border);
+    color: var(--foreground);
   }
 
   .preset-card__btn--primary {
-    background: #7c5cff;
-    color: white;
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 
   .preset-card__btn--primary:hover {
-    background: #6d4aeb;
+    background: var(--primary);
   }
 
   .facet-targeting__new-category {
-    background: var(--te-surface-raised, #fafbfc);
-    border: 1.5px solid var(--te-border, #e4e8f0);
+    background: var(--te-surface-raised, var(--card));
+    border: 1.5px solid var(--te-border, var(--border));
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 16px;
@@ -1129,7 +1129,7 @@ const styles = `
   .facet-targeting__label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -1139,17 +1139,17 @@ const styles = `
     padding: 10px 14px;
     font-family: inherit;
     font-size: 0.875rem;
-    border: 1.5px solid var(--te-border, #e4e8f0);
+    border: 1.5px solid var(--te-border, var(--border));
     border-radius: 8px;
-    background: var(--te-surface, #ffffff);
-    color: var(--te-ink, #1a1f36);
+    background: var(--te-surface, var(--card));
+    color: var(--te-ink, var(--foreground));
     transition: all 0.15s ease;
     box-sizing: border-box;
   }
 
   .facet-targeting__input:focus {
     outline: none;
-    border-color: #14b8a6;
+    border-color: var(--status-success);
     box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
   }
 
@@ -1185,12 +1185,12 @@ const styles = `
   }
 
   .facet-targeting__btn--primary {
-    background: #14b8a6;
-    color: white;
+    background: var(--status-success);
+    color: var(--primary-foreground);
   }
 
   .facet-targeting__btn--primary:hover:not(:disabled) {
-    background: #0d9488;
+    background: var(--status-success);
   }
 
   .facet-targeting__btn--primary:disabled {
@@ -1199,13 +1199,13 @@ const styles = `
   }
 
   .facet-targeting__btn--secondary {
-    background: var(--te-surface-raised, #fafbfc);
-    color: var(--te-ink-light, #4a5578);
-    border: 1px solid var(--te-border, #e4e8f0);
+    background: var(--te-surface-raised, var(--card));
+    color: var(--te-ink-light, var(--foreground));
+    border: 1px solid var(--te-border, var(--border));
   }
 
   .facet-targeting__btn--secondary:hover {
-    background: var(--te-border-light, #f0f2f7);
+    background: var(--te-border-light, var(--muted));
   }
 
   .facet-targeting__btn--sm {
@@ -1216,8 +1216,8 @@ const styles = `
   .facet-targeting__empty {
     padding: 40px 24px;
     text-align: center;
-    background: var(--te-surface-raised, #fafbfc);
-    border: 2px dashed var(--te-border, #e4e8f0);
+    background: var(--te-surface-raised, var(--card));
+    border: 2px dashed var(--te-border, var(--border));
     border-radius: 12px;
   }
 
@@ -1225,7 +1225,7 @@ const styles = `
     width: 48px;
     height: 48px;
     margin: 0 auto 12px;
-    color: var(--te-border, #e4e8f0);
+    color: var(--te-border, var(--border));
   }
 
   .facet-targeting__empty-icon svg {
@@ -1235,7 +1235,7 @@ const styles = `
 
   .facet-targeting__empty-text {
     font-size: 0.875rem;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     margin: 0 0 16px;
     max-width: 400px;
     margin-left: auto;
@@ -1249,15 +1249,17 @@ const styles = `
   }
 
   .facet-category {
-    background: var(--te-surface-raised, #fafbfc);
-    border: 1px solid var(--te-border-light, #f0f2f7);
+    /* Recessed well (--background) so each facet card reads distinctly against
+       the lifted parent panel; option chips (--card) pop on top of it. */
+    background: var(--background);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px;
     transition: border-color 0.15s ease;
   }
 
   .facet-category:hover {
-    border-color: var(--te-border, #e4e8f0);
+    border-color: var(--te-border, var(--border));
   }
 
   .facet-category__header {
@@ -1280,14 +1282,14 @@ const styles = `
   .facet-category__label {
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--te-ink, #1a1f36);
+    color: var(--te-ink, var(--foreground));
   }
 
   .facet-category__key {
     font-size: 0.75rem;
     font-family: 'DM Mono', monospace;
-    color: var(--te-ink-muted, #8792a8);
-    background: var(--te-border-light, #f0f2f7);
+    color: var(--te-ink-muted, var(--muted-foreground));
+    background: var(--te-border-light, var(--muted));
     padding: 2px 8px;
     border-radius: 4px;
   }
@@ -1297,8 +1299,8 @@ const styles = `
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: #f59e0b;
-    background: #fef3c7;
+    color: var(--status-warning);
+    background: color-mix(in oklab, var(--status-warning) 22%, transparent);
     padding: 2px 8px;
     border-radius: 4px;
   }
@@ -1318,19 +1320,19 @@ const styles = `
     background: transparent;
     border: none;
     border-radius: 6px;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     cursor: pointer;
     transition: all 0.15s ease;
   }
 
   .facet-category__btn:hover {
-    background: var(--te-border-light, #f0f2f7);
-    color: var(--te-ink-light, #4a5578);
+    background: var(--te-border-light, var(--muted));
+    color: var(--te-ink-light, var(--foreground));
   }
 
   .facet-category__btn--danger:hover {
-    background: #fee2e2;
-    color: #dc2626;
+    background: color-mix(in oklab, var(--destructive) 14%, transparent);
+    color: var(--destructive);
   }
 
   .facet-category__btn svg {
@@ -1356,14 +1358,14 @@ const styles = `
     gap: 6px;
     margin-bottom: 12px;
     padding: 10px 12px;
-    background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+    background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 10%, transparent) 0%, color-mix(in oklab, var(--primary) 10%, transparent) 100%);
     border-radius: 8px;
   }
 
   .facet-category__suggestions-label {
     font-size: 0.6875rem;
     font-weight: 600;
-    color: #64748b;
+    color: var(--muted-foreground);
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -1373,8 +1375,8 @@ const styles = `
     font-family: inherit;
     font-size: 0.75rem;
     font-weight: 500;
-    color: #7c5cff;
-    background: white;
+    color: var(--primary);
+    background: var(--card);
     border: 1px solid rgba(124, 92, 255, 0.3);
     border-radius: 6px;
     cursor: pointer;
@@ -1382,15 +1384,15 @@ const styles = `
   }
 
   .facet-category__suggestion-btn:hover {
-    background: #7c5cff;
-    color: white;
-    border-color: #7c5cff;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
     transform: translateY(-1px);
   }
 
   .facet-category__more {
     font-size: 0.6875rem;
-    color: #94a3b8;
+    color: var(--muted-foreground);
     font-style: italic;
   }
 
@@ -1402,7 +1404,7 @@ const styles = `
 
   .facet-category__no-options {
     font-size: 0.8125rem;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     margin: 0;
     font-style: italic;
   }
@@ -1414,10 +1416,10 @@ const styles = `
     gap: 6px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px dashed #e4e8f0;
+    border-top: 1px dashed var(--border);
     font-size: 0.75rem;
     font-weight: 500;
-    color: #10b981;
+    color: var(--status-success);
   }
 
   .facet-category__status svg {
@@ -1430,16 +1432,16 @@ const styles = `
     align-items: center;
     gap: 6px;
     padding: 6px 10px 6px 12px;
-    background: var(--te-surface, #ffffff);
-    border: 1px solid var(--te-border, #e4e8f0);
+    background: var(--te-surface, var(--card));
+    border: 1px solid var(--te-border, var(--border));
     border-radius: 6px;
     font-size: 0.8125rem;
-    color: var(--te-ink, #1a1f36);
+    color: var(--te-ink, var(--foreground));
     transition: all 0.15s ease;
   }
 
   .facet-option:hover {
-    border-color: var(--te-ink-muted, #8792a8);
+    border-color: var(--te-ink-muted, var(--muted-foreground));
   }
 
   .facet-option__label {
@@ -1456,7 +1458,7 @@ const styles = `
     background: transparent;
     border: none;
     border-radius: 4px;
-    color: var(--te-ink-muted, #8792a8);
+    color: var(--te-ink-muted, var(--muted-foreground));
     cursor: pointer;
     opacity: 0.6;
     transition: all 0.15s ease;
@@ -1464,8 +1466,8 @@ const styles = `
 
   .facet-option__remove:hover {
     opacity: 1;
-    color: #dc2626;
-    background: #fee2e2;
+    color: var(--destructive);
+    background: color-mix(in oklab, var(--destructive) 14%, transparent);
   }
 
   .facet-option__remove svg {

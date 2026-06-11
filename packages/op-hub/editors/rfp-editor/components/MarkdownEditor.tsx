@@ -3,7 +3,6 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { useLocalStorage } from "usehooks-ts";
 
-// Custom preview renderer to make links open in new tabs and ensure proper list rendering
 const previewOptions = {
   components: {
     a: ({ ...props }: { node: unknown; [key: string]: unknown }) => (
@@ -31,28 +30,33 @@ export function MarkdownEditor({
   onBlur,
   height = 350,
   label = "Content",
-  labelClassName = "text-sm leading-4 mb-3 font-medium",
+  labelClassName = "mb-2 block text-sm font-medium text-foreground",
 }: MarkdownEditorProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const [MDEditor, setMDEditor] = useState<any>(null);
   const [contentValue, setContentValue] = useState<string>(" ");
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [isDark, setIsDark] = useState(false);
 
   const [viewMarkdownMode, setViewMarkdownMode] =
     useLocalStorage<MarkdownEditorMode>("markdown-editor-view-mode", "live");
 
-  // Ensure we have a valid mode for the editor
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   const editorMode = viewMarkdownMode || "live";
 
-  // Load the MDEditor component dynamically
   useEffect(() => {
-    // Use a more robust dynamic import approach
+    const root = document.documentElement;
+    const sync = () => setIsDark(root.classList.contains("dark"));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const loadEditor = async () => {
       try {
         const module = await import("@uiw/react-md-editor");
-
         setMDEditor(() => module.default);
         setIsLoaded(true);
         setLoadError(null);
@@ -65,17 +69,14 @@ export function MarkdownEditor({
       }
     };
 
-    // Add a small delay to ensure DOM is ready
     const timer = setTimeout(() => void loadEditor(), 0);
     return () => clearTimeout(timer);
   }, []);
 
-  // Update contentValue when value prop changes
   useEffect(() => {
     if (isLoaded) {
       const stringValue = typeof value === "string" ? value : "";
-      const safeValue = stringValue.trim() || " ";
-      setContentValue(safeValue);
+      setContentValue(stringValue.trim() || " ");
     }
   }, [value, isLoaded]);
 
@@ -110,18 +111,15 @@ export function MarkdownEditor({
     };
   }, [MDEditor, setViewMarkdownMode]);
 
-  // Handle content changes
   const handleContentChange = (newValue: string | undefined) => {
     if (newValue !== undefined) {
       const stringValue = typeof newValue === "string" ? newValue : "";
-      // Only replace completely empty strings with a space, preserve all other content
       const safeValue = stringValue === "" ? " " : stringValue;
       setContentValue(safeValue);
-      onChange(newValue); // Keep the original value for the parent component
+      onChange(newValue);
     }
   };
 
-  // Handle content blur
   const handleContentBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
     if (onBlur) {
       onBlur(e.target.value);
@@ -142,7 +140,6 @@ export function MarkdownEditor({
             padding-left: 2em !important;
           }
 
-          /* Ensure proper table styling */
           .w-md-editor-preview table {
             border-collapse: collapse;
             width: 100%;
@@ -151,49 +148,62 @@ export function MarkdownEditor({
 
           .w-md-editor-preview th,
           .w-md-editor-preview td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border);
             padding: 8px;
             text-align: left;
           }
 
           .w-md-editor-preview th {
-            background-color: #f5f5f5;
+            background-color: var(--muted);
           }
 
           .w-md-editor-text,
           .w-md-editor-text-pre,
           .w-md-editor-text-pre *,
-
           .w-md-editor-text-input {
             font-size: 16px !important;
             line-height: 24px !important;
           }
+
+          .op-md-editor .w-md-editor,
+          .op-md-editor .wmde-markdown {
+            --color-canvas-default: var(--background) !important;
+            --color-canvas-subtle: var(--muted) !important;
+            --color-fg-default: var(--foreground) !important;
+            --color-fg-muted: var(--muted-foreground) !important;
+            --color-fg-subtle: var(--muted-foreground) !important;
+            --color-border-default: var(--border) !important;
+            --color-border-muted: var(--border) !important;
+            --color-neutral-muted: var(--muted) !important;
+            --color-accent-fg: var(--primary) !important;
+            --color-accent-emphasis: var(--primary) !important;
+          }
         `}
       </style>
 
-      {label && <p className={labelClassName}>{label}</p>}
-      {!isLoaded && (
+      {label ? <p className={labelClassName}>{label}</p> : null}
+      {!isLoaded ? (
         <div
-          className="w-full rounded-md border border-gray-300 bg-white p-3"
+          className="w-full rounded-md border border-border bg-background p-3"
           style={{ height: `${height}px` }}
         >
-          <div className="flex h-full w-full items-center justify-center text-gray-500">
+          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
             Loading editor...
           </div>
         </div>
-      )}
-      {isLoaded && loadError && (
+      ) : null}
+      {isLoaded && loadError ? (
         <div
-          className="w-full rounded-md border border-red-300 bg-red-50 p-3"
+          className="w-full rounded-md border border-destructive bg-destructive/10 p-3"
           style={{ height: `${height}px` }}
         >
-          <div className="flex h-full w-full flex-col items-center justify-center text-red-600">
+          <div className="flex h-full w-full flex-col items-center justify-center text-destructive">
             <p className="mb-2 text-sm font-medium">
               Failed to load markdown editor
             </p>
-            <p className="text-xs text-red-500">{loadError}</p>
+            <p className="text-xs text-destructive">{loadError}</p>
             <textarea
-              className="mt-2 h-full w-full rounded border border-gray-300 p-2 text-sm"
+              className="mt-2 h-full w-full rounded border border-border bg-background p-2 text-sm text-foreground"
               placeholder="Fallback text editor - write your content here..."
               value={value}
               onChange={(e) => onChange(e.target.value)}
@@ -201,9 +211,12 @@ export function MarkdownEditor({
             />
           </div>
         </div>
-      )}
-      {isLoaded && MDEditor && (
-        <div data-color-mode="light" className="w-full">
+      ) : null}
+      {isLoaded && MDEditor ? (
+        <div
+          data-color-mode={isDark ? "dark" : "light"}
+          className="w-full op-md-editor"
+        >
           <MDEditor
             height={height}
             value={contentValue}
@@ -217,7 +230,7 @@ export function MarkdownEditor({
             }}
           />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

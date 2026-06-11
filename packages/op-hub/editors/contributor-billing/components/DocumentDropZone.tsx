@@ -196,14 +196,14 @@ export function DocumentDropZone({
     >
       {children}
       {isDragging && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-blue-500/10 border-2 border-dashed border-blue-500 rounded-lg pointer-events-none">
-          <div className="bg-white rounded-lg shadow-lg p-6 border border-blue-200">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-lg pointer-events-none">
+          <div className="bg-card rounded-lg shadow-lg p-6 border border-primary/30">
             <div className="text-center">
               <div className="text-4xl mb-2">📄</div>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-foreground">
                 Drop documents here
               </p>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-muted-foreground mt-1">
                 Invoices, Expense Reports, and Accounts documents will be
                 automatically organized
               </p>

@@ -9,4 +9,4 @@ node_modules
 .ph
 projects-import.js
 
-.env
+.env*

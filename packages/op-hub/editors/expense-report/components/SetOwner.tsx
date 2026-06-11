@@ -180,7 +180,7 @@ export function SetOwner({ ownerId, periodStart, dispatch }: SetOwnerProps) {
 
   return (
     <div className="flex items-start gap-2">
-      <span className="pt-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+      <span className="pt-2 text-sm font-medium text-muted-foreground">
         Owner:
       </span>
       <div className="w-full max-w-lg">
@@ -192,38 +192,38 @@ export function SetOwner({ ownerId, periodStart, dispatch }: SetOwnerProps) {
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setIsPickerOpen(true)}
               placeholder="Search builder name"
-              className="w-full min-w-[320px] rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-gray-400 dark:focus:ring-gray-800"
+              className="w-full min-w-[320px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring"
             />
             {shouldShowOptions ? (
               filteredProfiles.length > 0 ? (
-                <div className="absolute z-10 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
+                <div className="absolute z-10 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg">
                   {filteredProfiles.map((profile) => (
                     <button
                       key={`${profile.driveId}-${profile.id}`}
                       type="button"
                       onClick={() => handleSelect(profile)}
-                      className="flex w-full flex-col px-3 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                      className="flex w-full flex-col px-3 py-2 text-left text-sm text-foreground hover:bg-accent"
                     >
                       <span className="font-medium">{profile.name}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-muted-foreground">
                         {profile.id}
                       </span>
                     </button>
                   ))}
                 </div>
               ) : (
-                <div className="absolute z-10 mt-2 w-full rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
-                  <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">
+                <div className="absolute z-10 mt-2 w-full rounded-md border border-border bg-popover text-popover-foreground shadow-lg">
+                  <div className="px-3 py-2 text-sm text-muted-foreground">
                     No matching builders
                   </div>
                   {normalizedQuery ? (
                     <button
                       type="button"
                       onClick={() => handleManualSelect(query)}
-                      className="flex w-full flex-col px-3 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800"
+                      className="flex w-full flex-col px-3 py-2 text-left text-sm text-foreground hover:bg-accent"
                     >
                       <span className="font-medium">Use this ID</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                      <span className="text-xs text-muted-foreground">
                         {query}
                       </span>
                     </button>
@@ -233,8 +233,8 @@ export function SetOwner({ ownerId, periodStart, dispatch }: SetOwnerProps) {
             ) : null}
           </div>
         ) : (
-          <div className="rounded-md border border-gray-200 bg-white px-3 py-2 shadow-sm dark:border-gray-700 dark:bg-gray-900">
-            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          <div className="rounded-md border border-border bg-card px-3 py-2 shadow-sm">
+            <div className="text-sm font-semibold text-foreground">
               {selectedProfile?.name || "Unknown builder"}
             </div>
             <div className="mt-2">
@@ -242,19 +242,19 @@ export function SetOwner({ ownerId, periodStart, dispatch }: SetOwnerProps) {
                 type="text"
                 value={ownerId || ""}
                 readOnly
-                className="w-full min-w-[320px] rounded-md border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs font-mono text-gray-700 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                className="w-full min-w-[320px] rounded-md border border-input bg-background px-3 py-1.5 text-xs font-mono text-foreground shadow-sm focus:outline-none"
               />
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 onClick={() => setIsPickerOpen(true)}
-                className="text-xs font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                className="text-xs font-medium text-muted-foreground hover:text-foreground"
               >
                 Change owner
               </button>
               {ownerDriveMissing ? (
-                <span className="text-xs font-medium text-amber-600 dark:text-amber-400">
+                <span className="text-xs font-medium text-status-warning">
                   Owner Drive Not Found
                 </span>
               ) : ownerDriveId ? (
@@ -324,7 +324,7 @@ function OwnerDriveActions({
 
   if (addStatus === "added") {
     return (
-      <span className="text-xs font-medium text-green-600 dark:text-green-400">
+      <span className="text-xs font-medium text-status-success">
         ✓ Expense Report is added to {ownerName}
       </span>
     );
@@ -335,7 +335,7 @@ function OwnerDriveActions({
       type="button"
       onClick={handleAddReport}
       disabled={!canAddReportToOwnerDrive || addStatus !== "idle"}
-      className="text-xs font-medium text-blue-600 hover:text-blue-700 disabled:cursor-not-allowed disabled:opacity-50 dark:text-blue-400 dark:hover:text-blue-300"
+      className="text-xs font-medium text-primary hover:text-primary/80 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {addStatus === "adding"
         ? "Adding report..."

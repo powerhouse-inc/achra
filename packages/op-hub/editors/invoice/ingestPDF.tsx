@@ -290,10 +290,10 @@ export default function PDFUploader({
       <div className="flex flex-col gap-2">
         <label
           htmlFor="pdf-upload"
-          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-accent cursor-pointer"
         >
           {isLoading && (
-            <LoaderCircle className="w-4 h-4 text-blue-600 animate-spin" />
+            <LoaderCircle className="w-4 h-4 text-primary animate-spin" />
           )}
           {isLoading ? "Uploading..." : "Upload PDF"}
           <input
@@ -306,7 +306,7 @@ export default function PDFUploader({
           />
         </label>
 
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {error && <p className="text-destructive text-sm mt-2">{error}</p>}
       </div>
     </div>
   );

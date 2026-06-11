@@ -50,7 +50,7 @@ export default function Editor() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="h-screen flex flex-col">
       <DocumentToolbar document={document} />
       <div className="flex-1 overflow-auto">
         {showOverview ? (
@@ -68,7 +68,7 @@ export default function Editor() {
               <button
                 type="button"
                 onClick={() => setMode("overview")}
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Overview
@@ -76,15 +76,15 @@ export default function Editor() {
             )}
 
             {/* Header Section */}
-            <section className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <section className="bg-card rounded-lg shadow-sm border border-border">
               <div className="px-4 sm:px-6 py-4 sm:py-6">
-                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground mb-6">
                   Operational Hub Profile
                 </h1>
 
                 {/* Name Field */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Hub Name
                   </label>
                   <Input
@@ -99,9 +99,9 @@ export default function Editor() {
 
                 {/* Operator Team Field */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-foreground mb-2">
                     Operator Team{" "}
-                    <span className="text-gray-400 font-normal">
+                    <span className="text-muted-foreground font-normal">
                       (optional)
                     </span>
                   </label>
@@ -111,7 +111,7 @@ export default function Editor() {
                     opHubPhid={document.header.id}
                     opHubName={document.state.global.name || ""}
                   />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Link to the builder team that operates this hub
                   </p>
                 </div>
@@ -119,15 +119,15 @@ export default function Editor() {
             </section>
 
             {/* Subteams Section */}
-            <section className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
-                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
+            <section className="bg-card rounded-lg shadow-sm border border-border">
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-border">
+                <h2 className="text-lg sm:text-xl font-semibold text-foreground">
                   Subteams{" "}
-                  <span className="text-gray-400 font-normal text-base">
+                  <span className="text-muted-foreground font-normal text-base">
                     (optional)
                   </span>
                 </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   Add builder teams that are managed by this operational hub
                 </p>
               </div>

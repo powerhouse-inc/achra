@@ -802,18 +802,18 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
       {/* Edit Group Modal */}
       {editingGroup && (
         <div
-          className="fixed inset-0 bg-slate-900/50 flex items-center justify-center z-[1000]"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]"
           style={{ animation: "so-fade-in 150ms ease-out" }}
           onClick={() => setEditingGroup(null)}
         >
           <div
-            className="bg-white rounded-xl shadow-xl w-full max-w-[420px] max-h-[90vh] flex flex-col"
+            className="bg-card rounded-xl shadow-xl w-full max-w-[420px] max-h-[90vh] flex flex-col"
             style={{ animation: "so-scale-in 200ms ease-out" }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-slate-100">
+            <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border">
               <h3
-                className="text-lg font-semibold text-slate-800 m-0 tracking-[-0.01em]"
+                className="text-lg font-semibold text-foreground m-0 tracking-[-0.01em]"
                 style={fontSans}
               >
                 Edit Group
@@ -821,7 +821,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               </h3>
               <button
                 onClick={() => setEditingGroup(null)}
-                className="w-8 h-8 rounded-[10px] bg-transparent border-none text-slate-400 cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-slate-100 hover:text-slate-600"
+                className="w-8 h-8 rounded-[10px] bg-transparent border-none text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-accent hover:text-accent-foreground"
                 aria-label="Close"
               >
                 <svg
@@ -838,7 +838,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
             <div className="px-6 py-5 flex flex-col gap-4 overflow-y-auto flex-1 min-h-0">
               <div className="flex flex-col gap-1.5">
                 <label
-                  className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                  className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                   style={fontSans}
                 >
                   Group Name
@@ -847,14 +847,14 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                   type="text"
                   value={editGroupName}
                   onChange={(e) => setEditGroupName(e.target.value)}
-                  className="w-full px-3 py-2.5 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md transition-all duration-150 focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                  className="w-full px-3 py-2.5 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md transition-all duration-150 focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                   style={fontSans}
                   autoFocus
                 />
               </div>
               <div className="flex flex-col gap-2">
                 <span
-                  className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-slate-500"
+                  className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                   style={fontSans}
                 >
                   Category
@@ -879,11 +879,11 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                       className={`flex-1 px-2.5 py-2 text-xs font-semibold rounded-md border-[1.5px] cursor-pointer transition-all duration-150 ${
                         editGroupType === type
                           ? color === "amber"
-                            ? "border-amber-500 bg-amber-50 text-amber-700"
+                            ? "border-status-warning bg-status-warning/10 text-status-warning"
                             : color === "emerald"
-                              ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                              : "border-violet-500 bg-violet-50 text-violet-700"
-                          : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                              ? "border-status-success bg-status-success/10 text-status-success"
+                              : "border-primary bg-primary/10 text-primary"
+                          : "border-input bg-background text-muted-foreground hover:border-border"
                       }`}
                       style={fontSans}
                     >
@@ -896,12 +896,12 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               {editGroupType !== "setup" && (
                 <div className="flex flex-col gap-1.5">
                   <label
-                    className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                    className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                     style={fontSans}
                   >
                     Available Billing Cycles
                   </label>
-                  <div className="flex flex-col gap-2.5 p-3 bg-slate-50 rounded-[10px]">
+                  <div className="flex flex-col gap-2.5 p-3 bg-muted rounded-[10px]">
                     {(
                       Object.entries(BILLING_CYCLE_SHORT_LABELS) as [
                         BillingCycle,
@@ -912,7 +912,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                       .map(([value, label]) => (
                         <label
                           key={value}
-                          className="flex items-center gap-2.5 cursor-pointer text-sm text-slate-700"
+                          className="flex items-center gap-2.5 cursor-pointer text-sm text-foreground"
                         >
                           <input
                             type="checkbox"
@@ -946,21 +946,21 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                 tiers.length > 0 && (
                   <>
                     {/* Tier Tab Bar */}
-                    <div className="flex gap-0 border-b border-slate-200 mb-3 overflow-x-auto sticky top-0 bg-white z-10">
+                    <div className="flex gap-0 border-b border-border mb-3 overflow-x-auto sticky top-0 bg-card z-10">
                       {tiers.map((tier) => (
                         <button
                           key={tier.id}
                           onClick={() => setEditTierTab(tier.id)}
                           className={`flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-none border-none border-b-2 cursor-pointer whitespace-nowrap transition-all duration-150 ${
                             editTierTab === tier.id
-                              ? "text-violet-700 border-b-violet-600 font-semibold"
-                              : "text-slate-500 border-b-transparent hover:text-slate-700 hover:bg-slate-50"
+                              ? "text-primary border-b-primary font-semibold"
+                              : "text-muted-foreground border-b-transparent hover:text-foreground hover:bg-accent"
                           } ${tier.isCustomPricing ? "italic" : ""}`}
                           style={fontSans}
                         >
                           {tier.name}
                           {tier.isCustomPricing && (
-                            <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-amber-600 bg-amber-50 px-[5px] py-px rounded-full">
+                            <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-status-warning bg-status-warning/10 px-[5px] py-px rounded-full">
                               Custom
                             </span>
                           )}
@@ -968,7 +968,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             editTierPrices[tier.id] &&
                             parseFloat(editTierPrices[tier.id]) > 0 && (
                               <span
-                                className="text-[0.6875rem] text-emerald-600 font-semibold"
+                                className="text-[0.6875rem] text-status-success font-semibold"
                                 style={fontMono}
                               >
                                 {formatPrice(
@@ -980,7 +980,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             (!editTierPrices[tier.id] ||
                               parseFloat(editTierPrices[tier.id]) <= 0) && (
                               <span
-                                className="text-[0.6875rem] text-amber-500 font-medium"
+                                className="text-[0.6875rem] text-status-warning font-medium"
                                 style={fontMono}
                               >
                                 $0
@@ -1001,7 +1001,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                         // Custom tier: no price input
                         if (activeTier.isCustomPricing) {
                           return (
-                            <div className="flex items-center gap-2 p-3 bg-slate-50 border border-dashed border-slate-300 rounded-md text-xs text-slate-500 italic">
+                            <div className="flex items-center gap-2 p-3 bg-muted border border-dashed border-border rounded-md text-xs text-muted-foreground italic">
                               <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -1053,13 +1053,13 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             {/* Recurring Price for this tier */}
                             <div className="flex flex-col gap-1.5">
                               <label
-                                className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                                className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                                 style={fontSans}
                               >
                                 Recurring Price ({activeTier.name})
                               </label>
                               <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-500">
+                                <span className="text-sm text-muted-foreground">
                                   $
                                 </span>
                                 <input
@@ -1072,7 +1072,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                     })
                                   }
                                   placeholder="0.00"
-                                  className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                                  className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                                   style={fontSans}
                                   step="0.01"
                                 />
@@ -1082,29 +1082,29 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             {/* Budget indicator -- only in MANUAL_OVERRIDE mode (CALCULATED tier has no fixed budget) */}
                             {tierAmount > 0 &&
                               activeTier.pricingMode !== "CALCULATED" && (
-                                <div className="mt-2 p-2 px-2.5 bg-slate-50 border border-slate-200 rounded-md">
-                                  <span className="block text-[0.6875rem] font-semibold text-slate-700 mb-1.5">
+                                <div className="mt-2 p-2 px-2.5 bg-background border border-input rounded-md">
+                                  <span className="block text-[0.6875rem] font-semibold text-foreground mb-1.5">
                                     {activeTier.name} budget:{" "}
                                     {formatPrice(projectedTotal)}/mo of{" "}
                                     {formatPrice(tierAmount)}/mo
                                   </span>
                                   <div className="flex items-center gap-1.5 py-[3px]">
-                                    <div className="flex-1 h-[5px] bg-slate-200 rounded-full overflow-hidden">
+                                    <div className="flex-1 h-[5px] bg-muted rounded-full overflow-hidden">
                                       <div
-                                        className={`h-full rounded-full transition-[width] duration-200 ease-linear ${projectedTotal > tierAmount ? "bg-rose-500" : "bg-emerald-500"}`}
+                                        className={`h-full rounded-full transition-[width] duration-200 ease-linear ${projectedTotal > tierAmount ? "bg-destructive" : "bg-status-success"}`}
                                         style={{
                                           width: `${Math.min((projectedTotal / tierAmount) * 100, 100)}%`,
                                         }}
                                       />
                                     </div>
                                     <span
-                                      className={`shrink-0 text-[0.625rem] ${projectedTotal > tierAmount ? "text-rose-600 font-semibold" : "text-slate-600"}`}
+                                      className={`shrink-0 text-[0.625rem] ${projectedTotal > tierAmount ? "text-destructive font-semibold" : "text-muted-foreground"}`}
                                       style={fontMono}
                                     >
                                       {formatPrice(projectedTotal)} /{" "}
                                       {formatPrice(tierAmount)}
                                       {projectedTotal > tierAmount && (
-                                        <span className="text-rose-500 font-bold">
+                                        <span className="text-destructive font-bold">
                                           {" "}
                                           +
                                           {formatPrice(
@@ -1120,13 +1120,13 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             {/* Setup Cost for this tier */}
                             <div className="flex flex-col gap-1.5">
                               <label
-                                className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                                className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                                 style={fontSans}
                               >
                                 Setup Cost (one-time)
                               </label>
                               <div className="flex items-center gap-2">
-                                <span className="text-sm text-slate-500">
+                                <span className="text-sm text-muted-foreground">
                                   $
                                 </span>
                                 <input
@@ -1141,7 +1141,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                     })
                                   }
                                   placeholder="0.00"
-                                  className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                                  className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                                   style={fontSans}
                                   step="0.01"
                                 />
@@ -1153,7 +1153,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                               tierBase > 0 && (
                                 <div className="flex flex-col gap-1.5">
                                   <label
-                                    className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                                    className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                                     style={fontSans}
                                   >
                                     Billing Cycles & Discounts
@@ -1192,43 +1192,43 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                       return (
                                         <div
                                           key={cycle}
-                                          className="border border-slate-200 rounded-[10px] px-3.5 py-2.5 bg-white"
+                                          className="border border-border rounded-[10px] px-3.5 py-2.5 bg-card"
                                         >
                                           <div className="flex items-center justify-between gap-2">
-                                            <span className="text-sm font-semibold text-slate-700">
+                                            <span className="text-sm font-semibold text-foreground">
                                               {cycleLabel}
                                             </span>
                                             <span
-                                              className="text-[0.9375rem] font-bold text-slate-800"
+                                              className="text-[0.9375rem] font-bold text-foreground"
                                               style={fontMono}
                                             >
                                               {formatPrice(total, "USD")}
                                             </span>
                                           </div>
                                           {!isMonthly && (
-                                            <div className="flex gap-4 mt-2 pt-2 border-t border-dashed border-slate-200">
+                                            <div className="flex gap-4 mt-2 pt-2 border-t border-dashed border-border">
                                               <div className="flex-1 flex flex-col gap-0.5">
                                                 <span
-                                                  className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-violet-500"
+                                                  className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-primary"
                                                   style={fontMono}
                                                 >
                                                   Standard Price
                                                 </span>
-                                                <span className="text-[0.8125rem] text-slate-600 flex items-baseline gap-1.5">
+                                                <span className="text-[0.8125rem] text-muted-foreground flex items-baseline gap-1.5">
                                                   ${tierBase} &times; {months}mo
-                                                  <span className="font-semibold text-slate-700">
+                                                  <span className="font-semibold text-foreground">
                                                     {formatPrice(total, "USD")}
                                                   </span>
                                                 </span>
                                               </div>
                                               <div className="flex-1 flex flex-col gap-0.5">
                                                 <span
-                                                  className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-violet-500"
+                                                  className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-primary"
                                                   style={fontMono}
                                                 >
                                                   Discount
                                                 </span>
-                                                <div className="flex items-center border border-slate-200 rounded-[10px] overflow-hidden transition-all duration-150 h-[34px] focus-within:border-violet-400 focus-within:shadow-[0_0_0_3px_rgba(124,58,237,0.1)]">
+                                                <div className="flex items-center border border-input rounded-[10px] overflow-hidden transition-all duration-150 h-[34px] focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_15%,transparent)]">
                                                   <input
                                                     type="number"
                                                     value={
@@ -1254,10 +1254,10 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                                     step="0.1"
                                                     min="0"
                                                     max="100"
-                                                    className="flex-1 py-1.5 px-2 pr-1 border-none text-sm text-slate-700 bg-transparent outline-none min-w-0 placeholder:text-slate-400"
+                                                    className="flex-1 py-1.5 px-2 pr-1 border-none text-sm text-foreground bg-transparent outline-none min-w-0 placeholder:text-muted-foreground"
                                                     style={fontMono}
                                                   />
-                                                  <span className="px-3 py-2.5 pl-2 text-sm font-medium text-slate-400 bg-slate-50 whitespace-nowrap select-none">
+                                                  <span className="px-3 py-2.5 pl-2 text-sm font-medium text-muted-foreground bg-muted whitespace-nowrap select-none">
                                                     %
                                                   </span>
                                                 </div>
@@ -1265,19 +1265,19 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                             </div>
                                           )}
                                           {effective !== null && (
-                                            <div className="flex items-center gap-2 mt-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-md">
-                                              <span className="text-[0.8125rem] text-emerald-600">
+                                            <div className="flex items-center gap-2 mt-1.5 px-2.5 py-1.5 bg-status-success/10 rounded-md">
+                                              <span className="text-[0.8125rem] text-status-success">
                                                 &rarr;
                                               </span>
                                               <span
-                                                className="text-sm font-bold text-emerald-700"
+                                                className="text-sm font-bold text-status-success"
                                                 style={fontMono}
                                               >
                                                 {formatPrice(effective, "USD")}
                                               </span>
                                               {savingsPct > 0 && (
                                                 <span
-                                                  className="ml-auto text-[0.6875rem] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full"
+                                                  className="ml-auto text-[0.6875rem] font-bold text-status-success bg-status-success/20 px-2 py-0.5 rounded-full"
                                                   style={fontMono}
                                                 >
                                                   {formatPrice(
@@ -1308,13 +1308,13 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     {/* Recurring Price (base monthly) */}
                     <div className="flex flex-col gap-1.5">
                       <label
-                        className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                        className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                         style={fontSans}
                       >
                         Recurring Price
                       </label>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-slate-500">$</span>
+                        <span className="text-sm text-muted-foreground">$</span>
                         <input
                           type="number"
                           value={editGroupBasePrice}
@@ -1322,7 +1322,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             setEditGroupBasePrice(e.target.value)
                           }
                           placeholder="0.00"
-                          className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                          className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                           style={fontSans}
                           step="0.01"
                         />
@@ -1332,13 +1332,13 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     {/* Setup Cost */}
                     <div className="flex flex-col gap-1.5">
                       <label
-                        className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                        className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                         style={fontSans}
                       >
                         Setup Cost (one-time)
                       </label>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-slate-500">$</span>
+                        <span className="text-sm text-muted-foreground">$</span>
                         <input
                           type="number"
                           value={editGroupSetupCost}
@@ -1346,7 +1346,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             setEditGroupSetupCost(e.target.value)
                           }
                           placeholder="0.00"
-                          className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                          className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                           style={fontSans}
                           step="0.01"
                         />
@@ -1357,7 +1357,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     {editGroupBillingCycles.length > 0 && (
                       <div className="flex flex-col gap-1.5">
                         <label
-                          className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                          className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                           style={fontSans}
                         >
                           Billing Cycles & Discounts
@@ -1387,38 +1387,38 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                             return (
                               <div
                                 key={cycle}
-                                className={`border border-slate-200 rounded-[10px] px-3.5 py-2.5 transition-[150ms] ${base > 0 ? "bg-white" : "bg-slate-50"}`}
+                                className={`border border-border rounded-[10px] px-3.5 py-2.5 transition-[150ms] ${base > 0 ? "bg-card" : "bg-muted"}`}
                               >
                                 <div className="flex items-center justify-between gap-2">
-                                  <span className="text-sm font-semibold text-slate-700">
+                                  <span className="text-sm font-semibold text-foreground">
                                     {cycleLabel}
                                   </span>
                                   {total !== null ? (
                                     <span
-                                      className="text-[0.9375rem] font-bold text-slate-800"
+                                      className="text-[0.9375rem] font-bold text-foreground"
                                       style={fontMono}
                                     >
                                       {formatPrice(total, "USD")}
                                     </span>
                                   ) : (
-                                    <span className="text-sm text-slate-400">
+                                    <span className="text-sm text-muted-foreground">
                                       --
                                     </span>
                                   )}
                                 </div>
                                 {base > 0 && (
-                                  <div className="flex gap-4 mt-2 pt-2 border-t border-dashed border-slate-200">
+                                  <div className="flex gap-4 mt-2 pt-2 border-t border-dashed border-border">
                                     {!isMonthly && (
                                       <div className="flex-1 flex flex-col gap-0.5">
                                         <span
-                                          className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-violet-500"
+                                          className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-primary"
                                           style={fontMono}
                                         >
                                           Standard Price
                                         </span>
-                                        <span className="text-[0.8125rem] text-slate-600 flex items-baseline gap-1.5">
+                                        <span className="text-[0.8125rem] text-muted-foreground flex items-baseline gap-1.5">
                                           ${base} &times; {shortLabel}
-                                          <span className="font-semibold text-slate-700">
+                                          <span className="font-semibold text-foreground">
                                             {formatPrice(total ?? 0, "USD")}
                                           </span>
                                         </span>
@@ -1426,12 +1426,12 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                     )}
                                     <div className="flex-1 flex flex-col gap-0.5">
                                       <span
-                                        className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-violet-500"
+                                        className="text-[0.625rem] font-medium uppercase tracking-[0.06em] text-primary"
                                         style={fontMono}
                                       >
                                         Discount
                                       </span>
-                                      <div className="flex items-center border border-slate-200 rounded-[10px] overflow-hidden transition-all duration-150 h-[34px] focus-within:border-violet-400 focus-within:shadow-[0_0_0_3px_rgba(124,58,237,0.1)]">
+                                      <div className="flex items-center border border-input rounded-[10px] overflow-hidden transition-all duration-150 h-[34px] focus-within:border-ring focus-within:shadow-[0_0_0_3px_color-mix(in_oklab,var(--ring)_15%,transparent)]">
                                         <input
                                           type="number"
                                           value={editGroupDiscounts[cycle]}
@@ -1445,10 +1445,10 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                           step="0.1"
                                           min="0"
                                           max="100"
-                                          className="flex-1 py-1.5 px-2 pr-1 border-none text-sm text-slate-700 bg-transparent outline-none min-w-0 placeholder:text-slate-400"
+                                          className="flex-1 py-1.5 px-2 pr-1 border-none text-sm text-foreground bg-transparent outline-none min-w-0 placeholder:text-muted-foreground"
                                           style={fontMono}
                                         />
-                                        <span className="px-3 py-2.5 pl-2 text-sm font-medium text-slate-400 bg-slate-50 whitespace-nowrap select-none">
+                                        <span className="px-3 py-2.5 pl-2 text-sm font-medium text-muted-foreground bg-muted whitespace-nowrap select-none">
                                           %
                                         </span>
                                       </div>
@@ -1456,19 +1456,19 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                   </div>
                                 )}
                                 {effective !== null && discountPct > 0 && (
-                                  <div className="flex items-center gap-2 mt-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-md">
-                                    <span className="text-[0.8125rem] text-emerald-600">
+                                  <div className="flex items-center gap-2 mt-1.5 px-2.5 py-1.5 bg-status-success/10 rounded-md">
+                                    <span className="text-[0.8125rem] text-status-success">
                                       &rarr;
                                     </span>
                                     <span
-                                      className="text-sm font-bold text-emerald-700"
+                                      className="text-sm font-bold text-status-success"
                                       style={fontMono}
                                     >
                                       {formatPrice(effective, "USD")}
                                     </span>
                                     {savingsPct > 0 && (
                                       <span
-                                        className="ml-auto text-[0.6875rem] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full"
+                                        className="ml-auto text-[0.6875rem] font-bold text-status-success bg-status-success/20 px-2 py-0.5 rounded-full"
                                         style={fontMono}
                                       >
                                         {savingsPct}% off
@@ -1488,17 +1488,17 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               {editGroupType === "setup" && (
                 <>
                   <div className="flex flex-col gap-1.5">
-                    <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-slate-500">
+                    <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
                       One-time Fee
                     </span>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-slate-500">$</span>
+                      <span className="text-sm text-muted-foreground">$</span>
                       <input
                         type="number"
                         value={editGroupPrice}
                         onChange={(e) => setEditGroupPrice(e.target.value)}
                         placeholder="0"
-                        className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                        className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                         style={fontSans}
                         step="0.01"
                       />
@@ -1508,29 +1508,29 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                   {/* Per-tier setup fee discounts */}
                   {tiers.length > 0 && parseFloat(editGroupPrice) > 0 && (
                     <div className="flex flex-col gap-2.5">
-                      <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-slate-500">
+                      <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.05em] text-muted-foreground">
                         Setup Fee Discounts by Tier & Billing Cycle
                       </span>
-                      <div className="flex gap-0 border-b border-slate-200 mb-3 overflow-x-auto">
+                      <div className="flex gap-0 border-b border-border mb-3 overflow-x-auto">
                         {tiers.map((tier) => (
                           <button
                             key={tier.id}
                             onClick={() => setEditTierTab(tier.id)}
                             className={`flex items-center gap-1.5 px-3 py-2 text-xs font-medium bg-none border-none border-b-2 cursor-pointer whitespace-nowrap transition-all duration-150 ${
                               editTierTab === tier.id
-                                ? "text-violet-700 border-b-violet-600 font-semibold"
-                                : "text-slate-500 border-b-transparent hover:text-slate-700 hover:bg-slate-50"
+                                ? "text-primary border-b-primary font-semibold"
+                                : "text-muted-foreground border-b-transparent hover:text-foreground hover:bg-accent"
                             } ${tier.isCustomPricing ? "italic" : ""}`}
                             style={fontSans}
                           >
                             {tier.name}
                             {tier.excludeFromSetupFee && (
-                              <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-teal-600 bg-teal-50 px-[5px] py-px rounded-full">
+                              <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-status-progress bg-status-progress/10 px-[5px] py-px rounded-full">
                                 No Fee
                               </span>
                             )}
                             {tier.isCustomPricing && (
-                              <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-amber-600 bg-amber-50 px-[5px] py-px rounded-full">
+                              <span className="text-[0.5625rem] font-semibold uppercase tracking-[0.04em] text-status-warning bg-status-warning/10 px-[5px] py-px rounded-full">
                                 Custom
                               </span>
                             )}
@@ -1547,7 +1547,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
                           if (activeTier.excludeFromSetupFee) {
                             return (
-                              <div className="flex items-center gap-2 p-3 bg-teal-50 border border-dashed border-teal-300 rounded-md text-xs text-teal-700 italic">
+                              <div className="flex items-center gap-2 p-3 bg-status-progress/10 border border-dashed border-status-progress/40 rounded-md text-xs text-status-progress italic">
                                 <svg
                                   viewBox="0 0 24 24"
                                   fill="none"
@@ -1568,7 +1568,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
                           if (activeTier.isCustomPricing) {
                             return (
-                              <div className="flex items-center gap-2 p-3 bg-slate-50 border border-dashed border-slate-300 rounded-md text-xs text-slate-500 italic">
+                              <div className="flex items-center gap-2 p-3 bg-muted border border-dashed border-border rounded-md text-xs text-muted-foreground italic">
                                 <svg
                                   viewBox="0 0 24 24"
                                   fill="none"
@@ -1632,21 +1632,21 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                 return (
                                   <div
                                     key={cycle}
-                                    className="flex flex-col gap-1 px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-md"
+                                    className="flex flex-col gap-1 px-3 py-2.5 bg-muted border border-border rounded-md"
                                   >
                                     <div className="flex justify-between items-center">
-                                      <span className="text-xs font-semibold text-slate-700">
+                                      <span className="text-xs font-semibold text-foreground">
                                         {cycleLabels[cycle]} subscription
                                       </span>
                                       <span
-                                        className="text-xs text-slate-400"
+                                        className="text-xs text-muted-foreground"
                                         style={fontMono}
                                       >
                                         {formatPrice(baseAmount, "USD")}
                                       </span>
                                     </div>
                                     <div className="flex gap-1.5 items-stretch">
-                                      <span className="text-[0.8125rem] font-medium text-slate-500 whitespace-nowrap">
+                                      <span className="text-[0.8125rem] font-medium text-muted-foreground whitespace-nowrap">
                                         Discount
                                       </span>
                                       <div className="flex-1 flex items-center gap-2">
@@ -1669,37 +1669,37 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                             setEditSetupTierDiscounts(updated);
                                           }}
                                           placeholder="0"
-                                          className="flex-1 px-2.5 py-2 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                                          className="flex-1 px-2.5 py-2 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                                           style={fontSans}
                                           step="0.01"
                                           min="0"
                                           max="100"
                                         />
-                                        <span className="px-3 py-2.5 pl-2 text-sm font-medium text-slate-400 bg-slate-50 whitespace-nowrap select-none">
+                                        <span className="px-3 py-2.5 pl-2 text-sm font-medium text-muted-foreground bg-muted whitespace-nowrap select-none">
                                           %
                                         </span>
                                       </div>
                                     </div>
                                     {parsedValue > 0 && baseAmount > 0 && (
-                                      <div className="flex items-center gap-2 px-2.5 py-1.5 bg-emerald-50 border border-emerald-100 rounded-md flex-wrap">
-                                        <span className="text-xs text-emerald-500">
+                                      <div className="flex items-center gap-2 px-2.5 py-1.5 bg-status-success/10 border border-status-success/20 rounded-md flex-wrap">
+                                        <span className="text-xs text-status-success">
                                           &rarr;
                                         </span>
                                         <span
-                                          className="text-xs text-slate-400 line-through"
+                                          className="text-xs text-muted-foreground line-through"
                                           style={fontMono}
                                         >
                                           {formatPrice(baseAmount, "USD")}
                                         </span>
                                         <span
-                                          className="text-sm font-bold text-emerald-700"
+                                          className="text-sm font-bold text-status-success"
                                           style={fontMono}
                                         >
                                           {formatPrice(effectiveAmount, "USD")}
                                         </span>
                                         {savingsPct > 0 && (
                                           <span
-                                            className="ml-auto text-[0.625rem] font-semibold text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded-md"
+                                            className="ml-auto text-[0.625rem] font-semibold text-status-success bg-status-success/20 px-1.5 py-0.5 rounded-md"
                                             style={fontMono}
                                           >
                                             save {formatPrice(savings, "USD")} (
@@ -1719,10 +1719,10 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                 </>
               )}
             </div>
-            <div className="flex gap-3 px-6 pt-4 pb-5 border-t border-slate-100">
+            <div className="flex gap-3 px-6 pt-4 pb-5 border-t border-border">
               <button
                 onClick={() => setEditingGroup(null)}
-                className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-muted text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
                 style={fontSans}
               >
                 Cancel
@@ -1730,12 +1730,11 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               <button
                 onClick={handleSaveGroupEdit}
                 disabled={!editGroupName.trim()}
-                className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-white hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-primary-foreground hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
                   ...fontSans,
-                  background:
-                    "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-                  boxShadow: "0 2px 6px rgba(124, 58, 237, 0.25)",
+                  background: "var(--primary)",
+                  boxShadow: "var(--shadow-primary)",
                 }}
               >
                 Save Changes
@@ -1748,17 +1747,17 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
       <div className="flex gap-6 min-h-[600px]">
         {/* Service Groups Sidebar */}
         <aside
-          className="w-80 shrink-0 bg-white rounded-xl shadow-md border border-slate-100 p-5"
+          className="w-80 shrink-0 bg-card rounded-xl shadow-md border border-border p-5"
           style={{ animation: "so-scale-in 300ms ease-out" }}
         >
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-[1.0625rem] font-semibold text-slate-800 m-0 tracking-[-0.01em]">
+            <h2 className="text-[1.0625rem] font-semibold text-foreground m-0 tracking-[-0.01em]">
               Service Groups
               <InfoIcon content="Option Groups bundle related services together. They can be setup fees (one-time), recurring charges, or add-ons that clients select independently." />
             </h2>
             <button
               onClick={handleAddNewGroup}
-              className="w-8 h-8 rounded-[10px] bg-slate-100 border-none text-slate-500 cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-violet-100 hover:text-violet-600"
+              className="w-8 h-8 rounded-[10px] bg-muted border-none text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-primary/10 hover:text-primary"
               aria-label="Add group"
             >
               <svg
@@ -1821,12 +1820,12 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => setSelectedGroupId(null)}
-                  className={`w-full px-3.5 py-2.5 bg-transparent border-none border-t border-slate-200 rounded-none cursor-pointer text-left transition-all duration-150 mt-2 pt-[18px] hover:bg-slate-50 ${selectedGroupId === null ? "bg-slate-100 border-l-[3px] border-l-slate-500 rounded-[10px]" : ""}`}
+                  className={`w-full px-3.5 py-2.5 bg-transparent border-none border-t border-border rounded-none cursor-pointer text-left transition-all duration-150 mt-2 pt-[18px] hover:bg-accent ${selectedGroupId === null ? "bg-muted border-l-[3px] border-l-muted-foreground rounded-[10px]" : ""}`}
                 >
-                  <span className="block text-sm font-medium text-slate-700">
+                  <span className="block text-sm font-medium text-foreground">
                     Ungrouped Services
                   </span>
-                  <span className="block text-xs text-slate-400 mt-0.5">
+                  <span className="block text-xs text-muted-foreground mt-0.5">
                     {ungroupedServices.length} services
                   </span>
                 </button>
@@ -1835,11 +1834,11 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
             {/* Empty state */}
             {optionGroups.length === 0 && ungroupedServices.length === 0 && (
-              <div className="text-center px-4 py-8 text-slate-500">
+              <div className="text-center px-4 py-8 text-muted-foreground">
                 <p className="text-sm font-medium m-0 mb-1">
                   No service groups yet
                 </p>
-                <p className="text-xs m-0 text-slate-400">
+                <p className="text-xs m-0 text-muted-foreground">
                   Click + to create a group
                 </p>
               </div>
@@ -1849,7 +1848,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
         {/* Services List */}
         <main
-          className="flex-1 bg-white rounded-xl shadow-md border border-slate-100 p-6"
+          className="flex-1 bg-card rounded-xl shadow-md border border-border p-6"
           style={{
             animation: "so-scale-in 300ms ease-out",
             animationDelay: "50ms",
@@ -1857,13 +1856,13 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
         >
           <div className="flex items-start justify-between gap-4 mb-6">
             <div className="flex-1">
-              <h2 className="text-[1.375rem] font-semibold text-slate-800 m-0 mb-1.5 tracking-[-0.02em]">
+              <h2 className="text-[1.375rem] font-semibold text-foreground m-0 mb-1.5 tracking-[-0.02em]">
                 {selectedGroup?.name || "Ungrouped Services"}
               </h2>
-              <p className="text-sm text-slate-500 m-0">
+              <p className="text-sm text-muted-foreground m-0">
                 {selectedGroup?.costType === "SETUP" ? (
                   <span className="flex items-center gap-2.5">
-                    <span className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-amber-100 text-amber-700">
+                    <span className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-status-warning/20 text-status-warning">
                       Setup & Formation
                     </span>
                     {selectedGroup.price != null
@@ -1876,14 +1875,14 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     {selectedGroup.availableBillingCycles.map((cycle) => (
                       <span
                         key={cycle}
-                        className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-violet-100 text-violet-700"
+                        className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-primary/10 text-primary"
                         style={{ marginLeft: 8 }}
                       >
                         {BILLING_CYCLE_SHORT_LABELS[cycle]}
                       </span>
                     ))}
                     {selectedGroup.price != null && (
-                      <span className="text-amber-600">
+                      <span className="text-status-warning">
                         ${selectedGroup.price}
                       </span>
                     )}
@@ -1894,7 +1893,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     {selectedGroup.availableBillingCycles.map((cycle) => (
                       <span
                         key={cycle}
-                        className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-emerald-100 text-emerald-700"
+                        className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-status-success/20 text-status-success"
                         style={{ marginLeft: 8 }}
                       >
                         {BILLING_CYCLE_SHORT_LABELS[cycle]}
@@ -1910,7 +1909,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               <div className="flex gap-2">
                 <button
                   onClick={() => setShowServiceTemplates(!showServiceTemplates)}
-                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-muted text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
                   style={fontSans}
                   title="Quick-add from templates"
                 >
@@ -1927,12 +1926,11 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                 </button>
                 <button
                   onClick={() => setIsAddingService(true)}
-                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-white hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-primary-foreground hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     ...fontSans,
-                    background:
-                      "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-                    boxShadow: "0 2px 6px rgba(124, 58, 237, 0.25)",
+                    background: "var(--primary)",
+                    boxShadow: "var(--shadow-primary)",
                   }}
                 >
                   <svg
@@ -1953,19 +1951,20 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
           {/* Service Templates Quick-Add Panel */}
           {showServiceTemplates && selectedGroupId && (
             <div
-              className="border border-violet-200 rounded-xl p-5 mb-6"
+              className="border border-primary/40 rounded-xl p-5 mb-6"
               style={{
-                background: "linear-gradient(135deg, #f5f3ff 0%, #f8fafc 100%)",
+                background:
+                  "linear-gradient(135deg, color-mix(in oklab, var(--primary) 8%, var(--card)) 0%, var(--card) 100%)",
                 animation: "so-scale-in 150ms ease-out",
               }}
             >
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-base font-semibold text-slate-800 m-0 flex items-center gap-2">
+                <h3 className="text-base font-semibold text-foreground m-0 flex items-center gap-2">
                   {"⚡"} Quick Add from Templates
                 </h3>
                 <button
                   onClick={() => setShowServiceTemplates(false)}
-                  className="w-7 h-7 rounded-md bg-transparent border-none text-slate-400 cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-white hover:text-slate-600"
+                  className="w-7 h-7 rounded-md bg-transparent border-none text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-accent hover:text-accent-foreground"
                 >
                   <svg
                     className="w-4 h-4"
@@ -1978,7 +1977,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                   </svg>
                 </button>
               </div>
-              <p className="text-[0.8125rem] text-slate-500 m-0 mb-4">
+              <p className="text-[0.8125rem] text-muted-foreground m-0 mb-4">
                 Click any template to instantly add it to this group. Services
                 will be included in all tiers by default.
               </p>
@@ -1986,7 +1985,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                 {Object.entries(SERVICE_TEMPLATES).map(
                   ([category, templates]) => (
                     <div key={category} className="flex flex-col gap-2">
-                      <h4 className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-slate-500 m-0 pl-1">
+                      <h4 className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-muted-foreground m-0 pl-1">
                         {category}
                       </h4>
                       <div className="flex flex-col gap-1">
@@ -2005,21 +2004,21 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                                 handleAddFromTemplate(template)
                               }
                               disabled={alreadyExists}
-                              className={`flex items-center gap-2.5 px-3 py-2.5 bg-white border border-slate-200 rounded-[10px] cursor-pointer text-left transition-all duration-150 hover:enabled:border-violet-300 hover:enabled:bg-white hover:enabled:shadow-[0_2px_8px_rgba(124,58,237,0.1)] hover:enabled:translate-x-0.5 active:enabled:translate-x-0 ${alreadyExists ? "opacity-60 cursor-not-allowed" : ""}`}
+                              className={`flex items-center gap-2.5 px-3 py-2.5 bg-card border border-border rounded-[10px] cursor-pointer text-left transition-all duration-150 hover:enabled:border-primary/40 hover:enabled:bg-card hover:enabled:shadow-[0_2px_8px_color-mix(in_oklab,var(--primary)_10%,transparent)] hover:enabled:translate-x-0.5 active:enabled:translate-x-0 ${alreadyExists ? "opacity-60 cursor-not-allowed" : ""}`}
                             >
                               <span className="text-xl shrink-0">
                                 {template.icon}
                               </span>
                               <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-                                <span className="text-[0.8125rem] font-medium text-slate-800">
+                                <span className="text-[0.8125rem] font-medium text-foreground">
                                   {template.title}
                                 </span>
-                                <span className="text-[0.6875rem] text-slate-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                                <span className="text-[0.6875rem] text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
                                   {template.description}
                                 </span>
                               </div>
                               {alreadyExists && (
-                                <span className="px-2 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] bg-emerald-100 text-emerald-700 rounded shrink-0">
+                                <span className="px-2 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] bg-status-success/20 text-status-success rounded shrink-0">
                                   Added
                                 </span>
                               )}
@@ -2035,7 +2034,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
           )}
 
           {!selectedGroupId && (
-            <div className="flex items-start gap-3 px-4 py-3.5 rounded-[10px] mb-5 bg-sky-50 border border-sky-200 text-sky-700">
+            <div className="flex items-start gap-3 px-4 py-3.5 rounded-[10px] mb-5 bg-status-progress/10 border border-status-progress/40 text-status-progress">
               <svg
                 className="w-5 h-5 shrink-0 mt-px"
                 viewBox="0 0 24 24"
@@ -2055,12 +2054,12 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
           {isAddingService && selectedGroupId && (
             <div
-              className="bg-slate-50 rounded-[10px] border border-slate-200 p-5 mb-6 flex flex-col gap-4"
+              className="bg-muted rounded-[10px] border border-border p-5 mb-6 flex flex-col gap-4"
               style={{ animation: "so-scale-in 150ms ease-out" }}
             >
               <div className="flex flex-col gap-1.5">
                 <label
-                  className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                  className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                   style={fontSans}
                 >
                   Service Name
@@ -2072,14 +2071,14 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     setNewService({ ...newService, title: e.target.value })
                   }
                   placeholder="Enter service name..."
-                  className="w-full px-3 py-2.5 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md transition-all duration-150 focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                  className="w-full px-3 py-2.5 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md transition-all duration-150 focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                   style={fontSans}
                   autoFocus
                 />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
-                  className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                  className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                   style={fontSans}
                 >
                   Description
@@ -2094,7 +2093,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                   }
                   placeholder="Enter description..."
                   rows={2}
-                  className="w-full px-3 py-2.5 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md resize-none transition-all duration-150 focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+                  className="w-full px-3 py-2.5 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md resize-none transition-all duration-150 focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
                   style={fontSans}
                 />
               </div>
@@ -2103,7 +2102,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               {tiers.length > 0 && (
                 <div className="flex flex-col gap-1.5">
                   <label
-                    className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                    className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                     style={fontSans}
                   >
                     Include in Tiers
@@ -2114,10 +2113,10 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                       return (
                         <label
                           key={tier.id}
-                          className={`flex items-center gap-2.5 px-3.5 py-3 bg-white border-[1.5px] rounded-[10px] cursor-pointer transition-all duration-150 ${
+                          className={`flex items-center gap-2.5 px-3.5 py-3 bg-card border-[1.5px] rounded-[10px] cursor-pointer transition-all duration-150 ${
                             isSelected
-                              ? "border-emerald-500 bg-emerald-50 hover:border-emerald-600"
-                              : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                              ? "border-status-success bg-status-success/10 hover:border-status-success"
+                              : "border-input hover:border-border hover:bg-accent"
                           }`}
                         >
                           <input
@@ -2132,16 +2131,16 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                               }
                               setSelectedTierIds(newSet);
                             }}
-                            className="w-[18px] h-[18px] shrink-0 accent-emerald-600 cursor-pointer"
+                            className="w-[18px] h-[18px] shrink-0 accent-status-success cursor-pointer"
                           />
                           <span
-                            className={`flex-1 text-sm font-medium ${isSelected ? "text-emerald-800" : "text-slate-800"}`}
+                            className={`flex-1 text-sm font-medium ${isSelected ? "text-status-success" : "text-foreground"}`}
                           >
                             {tier.name}
                           </span>
                           {tier.pricing.amount !== null && (
                             <span
-                              className={`text-xs font-medium whitespace-nowrap ${isSelected ? "text-emerald-600" : "text-slate-500"}`}
+                              className={`text-xs font-medium whitespace-nowrap ${isSelected ? "text-status-success" : "text-muted-foreground"}`}
                             >
                               ${tier.pricing.amount}
                             </span>
@@ -2151,7 +2150,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     })}
                   </div>
                   {selectedTierIds.size === 0 && (
-                    <p className="text-xs text-slate-500 mt-2 m-0 italic">
+                    <p className="text-xs text-muted-foreground mt-2 m-0 italic">
                       Select at least one tier to include this service
                     </p>
                   )}
@@ -2159,7 +2158,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
               )}
 
               {tiers.length === 0 && (
-                <div className="flex items-start gap-3 px-4 py-3.5 rounded-[10px] mb-5 bg-amber-50 border border-amber-200 text-amber-700">
+                <div className="flex items-start gap-3 px-4 py-3.5 rounded-[10px] mb-5 bg-status-warning/10 border border-status-warning/40 text-status-warning">
                   <svg
                     className="w-5 h-5 shrink-0 mt-px"
                     viewBox="0 0 24 24"
@@ -2180,12 +2179,11 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                 <button
                   onClick={handleAddService}
                   disabled={!newService.title.trim()}
-                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-white hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 text-primary-foreground hover:enabled:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     ...fontSans,
-                    background:
-                      "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-                    boxShadow: "0 2px 6px rgba(124, 58, 237, 0.25)",
+                    background: "var(--primary)",
+                    boxShadow: "var(--shadow-primary)",
                   }}
                 >
                   Add Service
@@ -2196,7 +2194,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                     setNewService({ title: "", description: "" });
                     setSelectedTierIds(new Set());
                   }}
-                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-slate-100 text-slate-700 hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 text-[0.8125rem] font-semibold rounded-[10px] border-none cursor-pointer flex items-center justify-center gap-1.5 transition-all duration-150 bg-muted text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed"
                   style={fontSans}
                 >
                   Cancel
@@ -2207,7 +2205,7 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
 
           {displayedServices.length === 0 ? (
             <div className="text-center px-6 py-[60px]">
-              <div className="w-14 h-14 mx-auto mb-4 text-slate-300">
+              <div className="w-14 h-14 mx-auto mb-4 text-muted-foreground/50">
                 <svg
                   className="w-full h-full"
                   viewBox="0 0 24 24"
@@ -2218,10 +2216,10 @@ export function ServiceCatalog({ document, dispatch }: ServiceCatalogProps) {
                   <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
-              <h3 className="text-[1.0625rem] font-semibold text-slate-700 m-0 mb-1.5">
+              <h3 className="text-[1.0625rem] font-semibold text-foreground m-0 mb-1.5">
                 No services in this group
               </h3>
-              <p className="text-sm text-slate-500 m-0">
+              <p className="text-sm text-muted-foreground m-0">
                 {selectedGroupId
                   ? 'Click "Add Service" to create a new service.'
                   : "Select a group to manage its services."}
@@ -2297,13 +2295,13 @@ function GroupSection({
         <span
           className={`w-2 h-2 rounded-full ${
             color === "amber"
-              ? "bg-amber-500"
+              ? "bg-status-warning"
               : color === "emerald"
-                ? "bg-emerald-500"
-                : "bg-violet-500"
+                ? "bg-status-success"
+                : "bg-primary"
           }`}
         />
-        <span className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-slate-500">
+        <span className="text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-muted-foreground">
           {title}
         </span>
       </div>
@@ -2355,57 +2353,57 @@ function GroupButton({
     >
       <button
         onClick={onSelect}
-        className={`w-full px-3.5 py-2.5 bg-transparent border-none rounded-[10px] cursor-pointer text-left transition-all duration-150 hover:bg-slate-50 ${
+        className={`w-full px-3.5 py-2.5 bg-background border border-border rounded-[10px] cursor-pointer text-left transition-all duration-150 hover:bg-accent hover:border-input ${
           isSelected
             ? `border-l-[3px] border-l-solid ${
                 color === "amber"
-                  ? "bg-amber-50 border-l-amber-500"
+                  ? "bg-status-warning/10 border-l-status-warning"
                   : color === "emerald"
-                    ? "bg-emerald-50 border-l-emerald-500"
-                    : "bg-violet-50 border-l-violet-500"
+                    ? "bg-status-success/10 border-l-status-success"
+                    : "bg-primary/10 border-l-primary"
               }`
             : ""
         }`}
       >
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-sm font-medium text-slate-800">
+          <span className="text-sm font-medium text-foreground">
             {group.name}
           </span>
           {isSetup && (
-            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-amber-100 text-amber-700">
+            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-status-warning/20 text-status-warning">
               SETUP
             </span>
           )}
           {group.isAddOn && (
-            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-violet-100 text-violet-700">
+            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-primary/10 text-primary">
               OPTIONAL
             </span>
           )}
           {group.availableBillingCycles.length > 0 && !isSetup && (
-            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-emerald-100 text-emerald-700">
+            <span className="px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-[0.04em] rounded bg-status-success/20 text-status-success">
               {group.availableBillingCycles
                 .map((c) => BILLING_CYCLE_SHORT_LABELS[c])
                 .join(", ")}
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
           <span>
             {serviceCount} services
             {serviceCount === 0 && (
-              <span className="text-[0.6875rem] text-amber-600">
+              <span className="text-[0.6875rem] text-status-warning">
                 {" "}
                 — add services
               </span>
             )}
           </span>
           {group.costType === "SETUP" && group.price != null && (
-            <span className="text-amber-600">
+            <span className="text-status-warning">
               {formatPrice(group.price, "USD")}
             </span>
           )}
           {group.isAddOn && group.price != null && (
-            <span className="text-amber-600">
+            <span className="text-status-warning">
               {formatPrice(group.price, "USD")}
             </span>
           )}
@@ -2420,7 +2418,7 @@ function GroupButton({
                   (p) => p.billingCycle === "MONTHLY",
                 )?.amount;
               return monthlyPrice != null && monthlyPrice > 0 ? (
-                <span className="text-amber-600">
+                <span className="text-status-warning">
                   {formatPrice(monthlyPrice, "USD")}/mo
                 </span>
               ) : null;
@@ -2437,7 +2435,7 @@ function GroupButton({
               e.stopPropagation();
               onEdit();
             }}
-            className="w-7 h-7 rounded-[10px] bg-white border border-slate-200 text-slate-400 cursor-pointer flex items-center justify-center transition-all duration-150 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:scale-105 hover:shadow-[0_2px_4px_rgba(0,0,0,0.1)] active:scale-95 hover:bg-violet-50 hover:border-violet-300 hover:text-violet-600"
+            className="w-7 h-7 rounded-[10px] bg-card border border-border text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 shadow-2xs hover:scale-105 hover:shadow active:scale-95 hover:bg-primary/10 hover:border-primary/40 hover:text-primary"
             aria-label="Edit group"
           >
             <svg
@@ -2457,7 +2455,7 @@ function GroupButton({
               e.stopPropagation();
               onDelete();
             }}
-            className="w-7 h-7 rounded-[10px] bg-white border border-slate-200 text-slate-400 cursor-pointer flex items-center justify-center transition-all duration-150 shadow-[0_1px_2px_rgba(0,0,0,0.05)] hover:scale-105 hover:shadow-[0_2px_4px_rgba(0,0,0,0.1)] active:scale-95 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-600"
+            className="w-7 h-7 rounded-[10px] bg-card border border-border text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 shadow-2xs hover:scale-105 hover:shadow active:scale-95 hover:bg-destructive/15 hover:border-destructive/40 hover:text-destructive"
             aria-label="Delete group"
           >
             <svg
@@ -2535,12 +2533,12 @@ function ServiceCard({
 
   return (
     <div
-      className={`flex flex-col gap-4 p-[18px] bg-white border-[1.5px] rounded-[10px] transition-all duration-150 hover:border-slate-300 hover:shadow-sm ${
+      className={`flex flex-col gap-4 p-[18px] bg-card border-[1.5px] rounded-[10px] transition-all duration-150 hover:border-border hover:shadow-sm ${
         service.isSetupFormation
-          ? "bg-amber-50 border-amber-200 hover:border-amber-300"
+          ? "bg-status-warning/10 border-status-warning/40 hover:border-status-warning/60"
           : isExpanded
-            ? "border-violet-300"
-            : "border-slate-200"
+            ? "border-primary/40"
+            : "border-border"
       }`}
     >
       <div className="flex gap-4">
@@ -2555,11 +2553,11 @@ function ServiceCard({
                   onUpdate(service, { title: localTitle.trim() });
                 }
               }}
-              className="flex-1 text-base font-medium text-slate-800 bg-transparent border-none border-b-[1.5px] border-b-transparent px-0 pb-0.5 transition-all duration-150 hover:border-b-slate-300 focus:outline-none focus:border-b-violet-500"
+              className="flex-1 text-base font-medium text-foreground bg-transparent border-none border-b-[1.5px] border-b-transparent px-0 pb-0.5 transition-all duration-150 hover:border-b-input focus:outline-none focus:border-b-ring"
               style={fontSans}
             />
             {service.isSetupFormation && (
-              <span className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-amber-100 text-amber-700">
+              <span className="inline-flex items-center px-2.5 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.04em] rounded-full bg-status-warning/20 text-status-warning">
                 Setup Service
               </span>
             )}
@@ -2574,7 +2572,7 @@ function ServiceCard({
             }}
             placeholder="Add a description..."
             rows={2}
-            className="w-full px-3 py-2.5 text-[0.8125rem] text-slate-600 bg-slate-50 border border-slate-200 rounded-md resize-none transition-all duration-150 hover:bg-white hover:border-slate-300 focus:outline-none focus:bg-white focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+            className="w-full px-3 py-2.5 text-[0.8125rem] text-foreground bg-muted border border-input rounded-md resize-none transition-all duration-150 hover:bg-background hover:border-border focus:outline-none focus:bg-background focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
             style={fontSans}
           />
 
@@ -2586,8 +2584,8 @@ function ServiceCard({
                   key={tier.id}
                   className={`px-2 py-[3px] text-[0.625rem] font-semibold uppercase tracking-[0.04em] rounded ${
                     includedTierIds.has(tier.id)
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-slate-100 text-slate-400"
+                      ? "bg-status-success/20 text-status-success"
+                      : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {tier.name}
@@ -2599,7 +2597,7 @@ function ServiceCard({
         <div className="flex flex-col gap-2">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-9 h-9 rounded-[10px] bg-slate-100 border-none text-slate-500 cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-violet-100 hover:text-violet-600"
+            className="w-9 h-9 rounded-[10px] bg-muted border-none text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-primary/10 hover:text-primary"
             aria-label={isExpanded ? "Collapse" : "Expand"}
           >
             <svg
@@ -2615,7 +2613,7 @@ function ServiceCard({
           </button>
           <button
             onClick={onDelete}
-            className="w-9 h-9 shrink-0 rounded-[10px] bg-transparent border-none text-slate-400 cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-rose-100 hover:text-rose-600"
+            className="w-9 h-9 shrink-0 rounded-[10px] bg-transparent border-none text-muted-foreground cursor-pointer flex items-center justify-center transition-all duration-150 hover:bg-destructive/15 hover:text-destructive"
             aria-label="Delete service"
           >
             <svg
@@ -2634,13 +2632,13 @@ function ServiceCard({
       {/* Expanded section for editing group and tier inclusion */}
       {isExpanded && (
         <div
-          className="border-t border-slate-200 mt-4 pt-4 flex flex-col gap-4"
+          className="border-t border-border mt-4 pt-4 flex flex-col gap-4"
           style={{ animation: "so-fade-in 150ms ease-out" }}
         >
           {/* Group assignment */}
           <div className="flex flex-col gap-2">
             <label
-              className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+              className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
               style={fontSans}
             >
               Assign to Group
@@ -2659,7 +2657,7 @@ function ServiceCard({
                   isSetupFormation: isSetupGroup,
                 });
               }}
-              className="w-full px-3 py-2.5 text-sm text-slate-800 bg-white border-[1.5px] border-slate-200 rounded-md cursor-pointer transition-all duration-150 hover:border-slate-300 focus:outline-none focus:border-violet-500 focus:shadow-[0_0_0_2px_rgb(237,233,254)]"
+              className="w-full px-3 py-2.5 text-sm text-foreground bg-background border-[1.5px] border-input rounded-md cursor-pointer transition-all duration-150 hover:border-border focus:outline-none focus:border-ring focus:shadow-[0_0_0_2px_color-mix(in_oklab,var(--ring)_30%,transparent)]"
               style={fontSans}
             >
               <option value="">No group (ungrouped)</option>
@@ -2683,7 +2681,7 @@ function ServiceCard({
           {tiers.length > 0 && (
             <div className="flex flex-col gap-2">
               <label
-                className="text-xs font-semibold uppercase tracking-[0.05em] text-slate-500"
+                className="text-xs font-semibold uppercase tracking-[0.05em] text-muted-foreground"
                 style={fontSans}
               >
                 Include in Tiers
@@ -2694,10 +2692,10 @@ function ServiceCard({
                   return (
                     <label
                       key={tier.id}
-                      className={`flex items-center gap-2.5 px-3 py-2.5 bg-white border-[1.5px] rounded-[10px] cursor-pointer transition-all duration-150 ${
+                      className={`flex items-center gap-2.5 px-3 py-2.5 bg-card border-[1.5px] rounded-[10px] cursor-pointer transition-all duration-150 ${
                         isIncluded
-                          ? "border-emerald-500 bg-emerald-50 hover:border-emerald-600"
-                          : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                          ? "border-status-success bg-status-success/10 hover:border-status-success"
+                          : "border-input hover:border-border hover:bg-accent"
                       }`}
                     >
                       <input
@@ -2706,16 +2704,16 @@ function ServiceCard({
                         onChange={(e) => {
                           onToggleTier(service.id, tier.id, e.target.checked);
                         }}
-                        className="w-[18px] h-[18px] shrink-0 accent-emerald-600 cursor-pointer"
+                        className="w-[18px] h-[18px] shrink-0 accent-status-success cursor-pointer"
                       />
                       <span
-                        className={`flex-1 text-sm font-medium ${isIncluded ? "text-emerald-800" : "text-slate-800"}`}
+                        className={`flex-1 text-sm font-medium ${isIncluded ? "text-status-success" : "text-foreground"}`}
                       >
                         {tier.name}
                       </span>
                       {tier.pricing.amount !== null && (
                         <span
-                          className={`text-xs font-medium whitespace-nowrap ${isIncluded ? "text-emerald-600" : "text-slate-500"}`}
+                          className={`text-xs font-medium whitespace-nowrap ${isIncluded ? "text-status-success" : "text-muted-foreground"}`}
                         >
                           ${tier.pricing.amount}
                         </span>

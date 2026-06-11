@@ -1,5 +1,4 @@
 import { usePHToast } from "@powerhousedao/reactor-browser";
-import { Button as RWAButton } from "@powerhousedao/design-system/ui";
 import {
   type DeleteLineItemInput,
   type EditInvoiceInput,
@@ -390,8 +389,8 @@ const EditableLineItem = forwardRef(function EditableLineItem(
   }
 
   return (
-    <tr ref={ref} className="hover:bg-gray-50 table-row">
-      <td className="border border-gray-200 p-3 table-cell">
+    <tr ref={ref} className="hover:bg-accent table-row text-foreground">
+      <td className="border border-border p-3 table-cell">
         <InputField
           onBlur={() => {}}
           handleInputChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -402,7 +401,7 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 table-cell">
+      <td className="border border-border p-3 table-cell">
         <NumberForm
           number={calculatedValues.quantity || 1}
           precision={2}
@@ -411,7 +410,7 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 table-cell">
+      <td className="border border-border p-3 table-cell">
         <NumberForm
           number={
             calculatedValues.unitPriceTaxExcl % 1 === 0
@@ -425,7 +424,7 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 text-right font-medium table-cell">
+      <td className="border border-border p-3 text-right font-medium table-cell">
         <NumberForm
           number={calculatedValues.taxPercent}
           precision={0}
@@ -435,7 +434,7 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 text-right font-medium table-cell">
+      <td className="border border-border p-3 text-right font-medium table-cell">
         <NumberForm
           number={
             calculatedValues.totalPriceTaxExcl % 1 === 0
@@ -449,7 +448,7 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 text-right font-medium table-cell">
+      <td className="border border-border p-3 text-right font-medium table-cell">
         <NumberForm
           number={
             calculatedValues.totalPriceTaxIncl % 1 === 0
@@ -463,16 +462,16 @@ const EditableLineItem = forwardRef(function EditableLineItem(
           className=""
         />
       </td>
-      <td className="border border-gray-200 p-3 table-cell">
+      <td className="border border-border p-3 table-cell">
         <div className="flex space-x-2">
           <button
-            className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-700"
+            className="rounded bg-primary px-3 py-1 text-primary-foreground hover:bg-primary/90"
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="rounded bg-gray-500 px-3 py-1 text-white hover:bg-gray-600"
+            className="rounded bg-muted px-3 py-1 text-foreground hover:bg-accent"
             onClick={onCancel}
           >
             Cancel
@@ -540,7 +539,7 @@ export function LineItemsTable({
                 <p>{firstError.message}: </p>
                 {zodError.map((err: any, index: number) => (
                   <ul key={index}>
-                    <li className="text-red-500 font-semibold">
+                    <li className="text-destructive font-semibold">
                       - {err.path.join(".")}
                     </li>
                   </ul>
@@ -605,19 +604,24 @@ export function LineItemsTable({
       <div className="mt-4">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
-          <h4 className="text-xl font-semibold text-gray-900">Line Items</h4>
+          <h4 className="text-xl font-semibold text-foreground">Line Items</h4>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowTagTable(true)}
-              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
+              className="flex items-center gap-2 px-4 py-2 border border-input rounded-md hover:bg-accent transition-colors text-sm font-medium text-foreground"
               title="Manage Tags for All Line Items"
             >
               <Tag className="w-4 h-4" />
               <span>Manage Tags</span>
             </button>
-            <RWAButton disabled={isAddingNew} onClick={handleAddClick}>
+            <button
+              type="button"
+              disabled={isAddingNew}
+              onClick={handleAddClick}
+              className="inline-flex items-center h-10 px-4 rounded bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors whitespace-nowrap cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               Add Line Item
-            </RWAButton>
+            </button>
           </div>
         </div>
 
@@ -630,11 +634,11 @@ export function LineItemsTable({
         {(lineItems.length > 0 || isAddingNew) && (
           <div
             ref={tableContainerRef}
-            className="overflow-x-auto rounded-lg border border-gray-200"
+            className="overflow-x-auto rounded-lg border border-border shadow-sm"
           >
             <table
               ref={tableRef}
-              className="w-full table-fixed border-collapse bg-white"
+              className="w-full table-fixed border-collapse bg-card text-foreground"
             >
               <colgroup>
                 <col style={{ width: "30%" }} />
@@ -646,26 +650,26 @@ export function LineItemsTable({
                 <col />
               </colgroup>
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="border-b border-gray-200 p-3 text-left">
+                <tr className="bg-muted text-foreground">
+                  <th className="border-b border-border p-3 text-left text-foreground">
                     Description
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-right">
+                  <th className="border-b border-border p-3 text-right text-foreground">
                     Quantity
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-right">
+                  <th className="border-b border-border p-3 text-right text-foreground">
                     Unit Price (excl. tax)
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-right">
+                  <th className="border-b border-border p-3 text-right text-foreground">
                     Tax %
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-right">
+                  <th className="border-b border-border p-3 text-right text-foreground">
                     Total (excl. tax)
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-right">
+                  <th className="border-b border-border p-3 text-right text-foreground">
                     Total (incl. tax)
                   </th>
-                  <th className="border-b border-gray-200 p-3 text-center">
+                  <th className="border-b border-border p-3 text-center text-foreground">
                     Actions
                   </th>
                 </tr>
@@ -707,7 +711,7 @@ export function LineItemsTable({
                                     <p>{firstError.message}: </p>
                                     {zodError.map((err: any, index: number) => (
                                       <ul key={index}>
-                                        <li className="text-red-500 font-semibold">
+                                        <li className="text-destructive font-semibold">
                                           - {err.path.join(".")}
                                         </li>
                                       </ul>
@@ -745,40 +749,40 @@ export function LineItemsTable({
                       onEditingItemChange={onEditingItemChange}
                     />
                   ) : (
-                    <tr key={item.id} className="hover:bg-gray-50 table-row">
-                      <td className="border-b border-gray-200 p-3 table-cell">
+                    <tr key={item.id} className="hover:bg-accent table-row text-foreground">
+                      <td className="border-b border-border p-3 table-cell">
                         {item.description}
                       </td>
-                      <td className="border-b border-gray-200 p-3 text-right table-cell">
+                      <td className="border-b border-border p-3 text-right table-cell">
                         {item.quantity % 1 === 0
                           ? item.quantity.toString()
                           : item.quantity.toFixed(2)}
                       </td>
-                      <td className="border-b border-gray-200 p-3 text-right table-cell">
+                      <td className="border-b border-border p-3 text-right table-cell">
                         {formatNumber(item.unitPriceTaxExcl)}
                       </td>
-                      <td className="border-b border-gray-200 p-3 text-right table-cell">
+                      <td className="border-b border-border p-3 text-right table-cell">
                         {typeof item.taxPercent === "number"
                           ? Math.round(item.taxPercent)
                           : 0}
                         %
                       </td>
-                      <td className="border-b border-gray-200 p-3 text-right font-medium table-cell">
+                      <td className="border-b border-border p-3 text-right font-medium table-cell">
                         {formatNumber(item.totalPriceTaxExcl)}
                       </td>
-                      <td className="border-b border-gray-200 p-3 text-right font-medium table-cell">
+                      <td className="border-b border-border p-3 text-right font-medium table-cell">
                         {formatNumber(item.totalPriceTaxIncl)}
                       </td>
-                      <td className="border-b border-gray-200 p-3 table-cell">
+                      <td className="border-b border-border p-3 table-cell">
                         <div className="flex justify-center space-x-2">
                           <button
-                            className="rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-200"
+                            className="rounded bg-primary px-3 py-1 text-primary-foreground hover:bg-primary/90"
                             onClick={() => setEditingId(item.id)}
                           >
                             Edit
                           </button>
                           <button
-                            className="rounded bg-red-600 px-3 py-1 text-white hover:bg-red-700"
+                            className="rounded bg-destructive px-3 py-1 text-destructive-foreground hover:bg-destructive/90"
                             onClick={() => onDeleteItem({ id: item.id })}
                           >
                             Delete

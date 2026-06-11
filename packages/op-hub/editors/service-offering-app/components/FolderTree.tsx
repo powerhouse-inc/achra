@@ -85,6 +85,42 @@ const BASE_NAVIGATION_SECTIONS: SidebarNode[] = [
   },
 ];
 
+// Non-interactive grouping headers rendered above the sections — same treatment
+// as the Builder Team Admin sidebar. The Sidebar has no native group concept,
+// so these are SidebarNodes styled as labels via `className` and short-circuited
+// in the click handler.
+const GROUP_HEADER_CLASS = "so-sidebar-group-header";
+const OFFERINGS_HEADER_ID = "__group-offerings__";
+const CUSTOMERS_HEADER_ID = "__group-customers__";
+const PAYMENTS_HEADER_ID = "__group-payments__";
+const GROUP_HEADER_IDS = new Set([
+  OFFERINGS_HEADER_ID,
+  CUSTOMERS_HEADER_ID,
+  PAYMENTS_HEADER_ID,
+]);
+
+function groupHeader(id: string, title: string): SidebarNode {
+  return { id, title, className: GROUP_HEADER_CLASS };
+}
+
+/** Group the sections under uppercase header labels (mirrors the Builder Team
+ *  Admin sidebar). */
+function withGroupHeaders(sections: SidebarNode[]): SidebarNode[] {
+  const byId = (id: string) => sections.find((s) => s.id === id);
+  const out: SidebarNode[] = [groupHeader(OFFERINGS_HEADER_ID, "OFFERINGS")];
+  const offerings = byId("resources-services");
+  if (offerings) out.push(offerings);
+  out.push(groupHeader(CUSTOMERS_HEADER_ID, "CUSTOMERS"));
+  const customers = byId("customers");
+  if (customers) out.push(customers);
+  const payments = byId(PAYMENT_DOCUMENTS_SECTION_ID);
+  if (payments) {
+    out.push(groupHeader(PAYMENTS_HEADER_ID, "PAYMENTS"));
+    out.push(payments);
+  }
+  return out;
+}
+
 /**
  * Recursively builds SidebarNode children from folder contents.
  * Folders get folder icons, files get document icons. Pass `folderIcon` to
@@ -272,7 +308,7 @@ export function FolderTree({
   // Build navigation sections with dynamic children
   const navigationSections = useMemo(() => {
     if (!driveDocument) {
-      return BASE_NAVIGATION_SECTIONS;
+      return withGroupHeaders(BASE_NAVIGATION_SECTIONS);
     }
 
     const allNodes = driveDocument.state.global.nodes;
@@ -373,7 +409,7 @@ export function FolderTree({
       });
     }
 
-    return sections;
+    return withGroupHeaders(sections);
   }, [
     driveDocument,
     customersFolder,
@@ -406,6 +442,9 @@ export function FolderTree({
   }, [selectedNode, customView, servicesAndOfferingsFolder]);
 
   const handleActiveNodeChange = (node: SidebarNode) => {
+    // Group-header rows are non-interactive labels (also pointer-events: none).
+    if (GROUP_HEADER_IDS.has(node.id)) return;
+
     // Stripe embedded views (synthetic children of "Payment documents")
     if (isStripeViewId(node.id)) {
       onCustomViewChange?.(node.id);
@@ -482,25 +521,45 @@ export function FolderTree({
   };
 
   return (
-    <SidebarProvider nodes={navigationSections}>
-      <SidebarActiveNodeReveal activeNodeId={activeNodeId} />
-      <Sidebar
-        className="pt-1"
-        nodes={navigationSections}
-        activeNodeId={activeNodeId}
-        onActiveNodeChange={handleActiveNodeChange}
-        sidebarTitle={driveName}
-        showSearchBar={false}
-        resizable={true}
-        allowPinning={false}
-        showStatusFilter={false}
-        initialWidth={256}
-        defaultLevel={2}
-        handleOnTitleClick={() => {
-          onCustomViewChange?.(null);
-          setSelectedNode("");
-        }}
-      />
-    </SidebarProvider>
+    <>
+      <style>{`
+        .${GROUP_HEADER_CLASS} {
+          pointer-events: none;
+          text-transform: uppercase;
+          font-size: 0.6875rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          color: #94a3b8;
+          margin-top: 0.75rem;
+        }
+        .${GROUP_HEADER_CLASS}:first-child {
+          margin-top: 0;
+        }
+        /* Hide the expand caret on group-header rows (they have no children). */
+        .${GROUP_HEADER_CLASS} .sidebar__item-caret {
+          display: none;
+        }
+      `}</style>
+      <SidebarProvider nodes={navigationSections}>
+        <SidebarActiveNodeReveal activeNodeId={activeNodeId} />
+        <Sidebar
+          className="pt-1"
+          nodes={navigationSections}
+          activeNodeId={activeNodeId}
+          onActiveNodeChange={handleActiveNodeChange}
+          sidebarTitle={driveName}
+          showSearchBar={false}
+          resizable={true}
+          allowPinning={false}
+          showStatusFilter={false}
+          initialWidth={256}
+          defaultLevel={2}
+          handleOnTitleClick={() => {
+            onCustomViewChange?.(null);
+            setSelectedNode("");
+          }}
+        />
+      </SidebarProvider>
+    </>
   );
 }

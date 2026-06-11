@@ -34,7 +34,7 @@ export function DocumentHeader({
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+    <div className="bg-card rounded-xl border border-border shadow-sm p-6">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           {isEditing ? (
@@ -43,7 +43,7 @@ export function DocumentHeader({
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="flex-1 px-4 py-2 text-2xl font-semibold border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-4 py-2 text-2xl font-semibold border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
                 autoFocus
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSave();
@@ -52,25 +52,25 @@ export function DocumentHeader({
               />
               <Button
                 onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 rounded-lg font-medium"
               >
                 Save
               </Button>
               <Button
                 onClick={handleCancel}
-                className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium"
+                className="bg-muted hover:bg-accent text-foreground px-4 py-2 rounded-lg font-medium"
               >
                 Cancel
               </Button>
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-semibold text-gray-900">
+              <h1 className="text-2xl font-semibold text-foreground">
                 {document.header.name}
               </h1>
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
                 title="Edit document name"
               >
                 <svg
@@ -91,26 +91,32 @@ export function DocumentHeader({
           )}
           <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-gray-500">Document ID:</span>
-              <span className="text-gray-900 font-mono text-xs">
+              <span className="font-medium text-muted-foreground">
+                Document ID:
+              </span>
+              <span className="text-foreground font-mono text-xs">
                 {document.header.id}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-medium text-gray-500">Type:</span>
-              <span className="text-gray-900">
+              <span className="font-medium text-muted-foreground">Type:</span>
+              <span className="text-foreground">
                 {document.header.documentType}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-medium text-gray-500">Created:</span>
-              <span className="text-gray-900">
+              <span className="font-medium text-muted-foreground">
+                Created:
+              </span>
+              <span className="text-foreground">
                 {new Date(document.header.createdAtUtcIso).toLocaleString()}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-medium text-gray-500">Last Modified:</span>
-              <span className="text-gray-900">
+              <span className="font-medium text-muted-foreground">
+                Last Modified:
+              </span>
+              <span className="text-foreground">
                 {new Date(
                   document.header.lastModifiedAtUtcIso,
                 ).toLocaleString()}

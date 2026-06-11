@@ -1,7 +1,6 @@
 import { TextInput, Icon } from "@powerhousedao/document-engineering";
 import { useState, useEffect } from "react";
 
-// Image Modal Component
 function ImageModal({
   isOpen,
   onClose,
@@ -47,16 +46,17 @@ function ImageModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="relative rounded-lg border-2 border-gray-700 bg-gray-900 shadow-2xl"
+        className="relative rounded-lg border-2 border-border bg-popover shadow-2xl"
         style={getModalSize()}
       >
         <button
+          type="button"
           onClick={onClose}
-          className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-gray-800 text-white shadow-lg transition-all duration-200 hover:bg-gray-900"
+          className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground shadow-lg transition-all duration-200 hover:bg-secondary/80"
         >
           <Icon name="ArrowLeft" size={16} />
         </button>
@@ -80,7 +80,6 @@ function isUrl(value: string): boolean {
   return value.startsWith("http://") || value.startsWith("https://");
 }
 
-// Image URL input component with preview — shows only the loaded image, not the URL text
 export function ImageUrlInput({
   label,
   value,
@@ -111,15 +110,15 @@ export function ImageUrlInput({
   return (
     <>
       <div className="space-y-2">
-        {label && (
-          <label className="block text-sm font-medium text-gray-700">
+        {label ? (
+          <label className="block text-sm font-medium text-foreground">
             {label}
           </label>
-        )}
-        <div className="rounded-lg border border-gray-300 p-4">
+        ) : null}
+        <div className="rounded-lg border border-border p-4">
           <div className="flex items-center space-x-3">
             <div
-              className={`flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded border bg-gray-100 ${
+              className={`flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded border border-border bg-muted ${
                 hasValidImage
                   ? "cursor-pointer transition-opacity duration-200 hover:opacity-80"
                   : ""
@@ -136,18 +135,18 @@ export function ImageUrlInput({
                   onLoad={() => setImageError(false)}
                 />
               ) : (
-                <Icon name="Image" size={24} className="text-gray-400" />
+                <Icon name="Image" size={24} className="text-muted-foreground" />
               )}
             </div>
-            <div className="min-w-0 flex-1 text-xs text-gray-500">
-              {imageError && value && (
-                <span className="text-red-500">Failed to load image</span>
-              )}
-              {hasValidImage && (
-                <span className="text-blue-600">
+            <div className="min-w-0 flex-1 text-xs text-muted-foreground">
+              {imageError && value ? (
+                <span className="text-destructive">Failed to load image</span>
+              ) : null}
+              {hasValidImage ? (
+                <span className="text-primary">
                   Click image to view full size
                 </span>
-              )}
+              ) : null}
             </div>
           </div>
           <div className="mt-3">

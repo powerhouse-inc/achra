@@ -793,23 +793,23 @@ export function WalletsTable({
       {wallets.length > 0 ? (
         <div className="w-full overflow-x-auto">
           <div className="min-w-max">
-            <table className="w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead className="bg-gray-50 dark:bg-gray-800">
+            <table className="w-full divide-y divide-border">
+              <thead className="bg-muted">
                 <tr>
-                  <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Wallet
                   </th>
                   {/* Budget Allocation column - hidden for now, may be needed in the future
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider whitespace-nowrap">
                     Budget Allocation
                   </th>
                   */}
                   {/* Forecast column - hidden for now, may be needed in the future
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Forecast
                   </th>
                   */}
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     <div className="flex items-center justify-end gap-2">
                       {needsSync && (
                         <button
@@ -829,8 +829,8 @@ export function WalletsTable({
                           disabled={syncingWallet !== null}
                           className={`inline-flex items-center justify-center w-8 h-8 rounded-md transition-colors ${
                             tagChangedWallets.length > 0
-                              ? "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 animate-pulse"
-                              : "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30 animate-pulse"
+                              ? "text-destructive bg-destructive/15 hover:bg-destructive/25 animate-pulse"
+                              : "text-muted-foreground bg-muted hover:bg-accent hover:text-foreground"
                           } disabled:opacity-50 disabled:cursor-not-allowed`}
                           title={
                             tagChangedWallets.length > 0
@@ -850,26 +850,26 @@ export function WalletsTable({
                     </div>
                   </th>
                   {/* Difference column - hidden for now, may be needed in the future
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Difference
                   </th>
                   */}
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Payments
                   </th>
-                  <th className="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+              <tbody className="bg-card divide-y divide-border">
                 {wallets.map((wallet) => {
                   const totals = calculateWalletTotals(wallet);
 
                   return (
                     <tr
                       key={wallet.wallet}
-                      className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                      className="hover:bg-accent transition-colors"
                     >
                       <td className="px-3 py-3 whitespace-nowrap">
                         {editingWallet === wallet.wallet ? (
@@ -892,14 +892,14 @@ export function WalletsTable({
                               onClick={() =>
                                 handleSaveEditName(wallet.wallet || "")
                               }
-                              className="inline-flex items-center justify-center w-7 h-7 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-md transition-colors"
+                              className="inline-flex items-center justify-center w-7 h-7 text-status-success hover:bg-status-success/20 rounded-md transition-colors"
                               title="Save"
                             >
                               <Check size={14} />
                             </button>
                             <button
                               onClick={handleCancelEditName}
-                              className="inline-flex items-center justify-center w-7 h-7 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900/20 rounded-md transition-colors"
+                              className="inline-flex items-center justify-center w-7 h-7 text-muted-foreground hover:bg-accent rounded-md transition-colors"
                               title="Cancel"
                             >
                               <X size={14} />
@@ -907,12 +907,12 @@ export function WalletsTable({
                           </div>
                         ) : (
                           <div className="flex items-center gap-1">
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                            <span className="text-sm font-medium text-foreground">
                               {wallet.name || "Unnamed Wallet"}
                             </span>
                             <button
                               onClick={() => handleStartEditName(wallet)}
-                              className="inline-flex items-center justify-center w-6 h-6 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                              className="inline-flex items-center justify-center w-6 h-6 text-muted-foreground hover:bg-accent rounded-md transition-colors"
                               title="Edit name"
                             >
                               <Pencil size={12} />
@@ -921,14 +921,14 @@ export function WalletsTable({
                               onClick={() =>
                                 handleCopyAddress(wallet.wallet || "")
                               }
-                              className="inline-flex items-center gap-1 px-2 py-1 text-xs text-gray-500 dark:text-gray-400 font-mono hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors"
+                              className="inline-flex items-center gap-1 px-2 py-1 text-xs text-muted-foreground font-mono hover:bg-accent rounded transition-colors"
                               title={`Copy address: ${wallet.wallet}`}
                             >
                               {formatAddress(wallet.wallet || "")}
                               {copiedWallet === wallet.wallet ? (
                                 <CheckCheck
                                   size={12}
-                                  className="text-green-500"
+                                  className="text-status-success"
                                 />
                               ) : (
                                 <Copy size={12} />
@@ -938,12 +938,12 @@ export function WalletsTable({
                         )}
                       </td>
                       {/* Budget Allocation column - hidden for now, may be needed in the future
-                      <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                      <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                         {formatCurrency(totals.budget)}
                       </td>
                       */}
                       {/* Forecast column - hidden for now, may be needed in the future
-                      <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-gray-900 dark:text-white">
+                      <td className="px-3 py-3 whitespace-nowrap text-right text-sm text-foreground">
                         {formatCurrency(totals.forecast)}
                       </td>
                       */}
@@ -957,7 +957,7 @@ export function WalletsTable({
                               onClick={() =>
                                 onAddBillingStatement(wallet.wallet || "")
                               }
-                              className="inline-flex items-center gap-1 px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-md transition-colors"
+                              className="inline-flex items-center gap-1 px-3 py-1 text-sm font-medium text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 rounded-md transition-colors"
                               title="Add billing statement for this wallet"
                             >
                               <Plus size={16} />
@@ -971,7 +971,7 @@ export function WalletsTable({
                               onClick={() =>
                                 onAddBillingStatement(wallet.wallet || "")
                               }
-                              className="inline-flex items-center justify-center w-8 h-8 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-md transition-colors"
+                              className="inline-flex items-center justify-center w-8 h-8 text-primary hover:text-primary/80 bg-primary/10 hover:bg-primary/20 rounded-md transition-colors"
                               title="Add billing statement for this wallet"
                             >
                               <Plus size={16} />
@@ -986,12 +986,12 @@ export function WalletsTable({
                                   tagChangedWallets.includes(
                                     wallet.wallet || "",
                                   )
-                                    ? "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 animate-pulse"
+                                    ? "text-destructive bg-destructive/15 hover:bg-destructive/25 animate-pulse"
                                     : outdatedWallets.includes(
                                           wallet.wallet || "",
                                         )
-                                      ? "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 dark:hover:bg-amber-900/30 animate-pulse"
-                                      : "text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                      ? "text-status-warning bg-status-warning/20 hover:bg-status-warning/30 animate-pulse"
+                                      : "text-muted-foreground bg-muted hover:bg-accent"
                                 } disabled:opacity-50 disabled:cursor-not-allowed`}
                                 title={
                                   tagChangedWallets.includes(
@@ -1017,7 +1017,7 @@ export function WalletsTable({
                                 />
                               </button>
                             )}
-                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                            <span className="text-sm font-medium text-foreground">
                               {formatCurrency(totals.actuals)}
                             </span>
                           </div>
@@ -1027,10 +1027,10 @@ export function WalletsTable({
                       <td
                         className={`px-3 py-3 whitespace-nowrap text-right text-sm font-medium ${
                           totals.difference > 0
-                            ? "text-red-600 dark:text-red-400"
+                            ? "text-destructive"
                             : totals.difference < 0
-                              ? "text-green-600 dark:text-green-400"
-                              : "text-gray-900 dark:text-white"
+                              ? "text-status-success"
+                              : "text-foreground"
                         }`}
                       >
                         {formatCurrency(totals.difference)}
@@ -1045,11 +1045,11 @@ export function WalletsTable({
                                 wallet.accountTransactionsDocumentId!,
                               )
                             }
-                            className="bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 border border-green-200 dark:border-green-800 rounded px-2 py-1 transition-colors text-left"
+                            className="bg-status-success/20 hover:bg-status-success/30 border border-status-success/40 rounded px-2 py-1 transition-colors text-left"
                           >
                             <div className="flex items-center gap-1.5">
                               <svg
-                                className="w-3 h-3 text-green-600 dark:text-green-400 flex-shrink-0"
+                                className="w-3 h-3 text-status-success flex-shrink-0"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -1062,10 +1062,10 @@ export function WalletsTable({
                                 />
                               </svg>
                               <div className="min-w-0">
-                                <span className="text-[10px] font-medium text-green-900 dark:text-green-100 block leading-tight">
+                                <span className="text-[10px] font-medium text-status-success block leading-tight">
                                   Transactions
                                 </span>
-                                <span className="text-xs text-green-600 dark:text-green-400">
+                                <span className="text-xs text-status-success">
                                   {formatCurrency(totals.payments)}
                                 </span>
                               </div>
@@ -1076,7 +1076,7 @@ export function WalletsTable({
                           <div className="flex items-center justify-end">
                             <button
                               onClick={() => handleAddTransactions(wallet)}
-                              className="inline-flex items-center gap-1 px-3 py-1 text-sm font-medium text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-md transition-colors"
+                              className="inline-flex items-center gap-1 px-3 py-1 text-sm font-medium text-status-success hover:text-status-success/80 bg-status-success/20 hover:bg-status-success/30 rounded-md transition-colors"
                               title="Add transactions document for this wallet"
                             >
                               <Plus size={16} />
@@ -1091,7 +1091,7 @@ export function WalletsTable({
                             onClick={() =>
                               handleRemoveWallet(wallet.wallet || "")
                             }
-                            className="inline-flex items-center justify-center w-8 h-8 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors"
+                            className="inline-flex items-center justify-center w-8 h-8 text-destructive hover:bg-destructive/15 rounded-md transition-colors"
                             title="Remove wallet"
                           >
                             <Trash2 size={16} />
@@ -1106,20 +1106,20 @@ export function WalletsTable({
           </div>
         </div>
       ) : (
-        <div className="text-center py-8 sm:py-12 text-gray-500 dark:text-gray-400">
-          <p className="text-sm">
+        <div className="text-center py-8 sm:py-12">
+          <p className="text-sm text-muted-foreground">
             No wallets added yet. Add a wallet to get started.
           </p>
         </div>
       )}
 
       {/* Add Wallet Section */}
-      <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="pt-4 border-t border-border">
         {/* Horizontal layout: Select Account (left) and Manual Entry (right) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Select from existing accounts - left side */}
           <div className="w-full">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Select Account
             </label>
             <select
@@ -1176,10 +1176,8 @@ export function WalletsTable({
                   }
                 }
               }}
-              className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                walletError
-                  ? "border-red-300 dark:border-red-600"
-                  : "border-gray-300 dark:border-gray-600"
+              className={`w-full px-3 py-2 border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
+                walletError ? "border-destructive" : "border-input"
               }`}
             >
               <option value="">-- Select an account to add --</option>
@@ -1191,10 +1189,8 @@ export function WalletsTable({
               ))}
             </select>
             {walletError && (
-              <div className="mt-2 px-3 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
-                <p className="text-sm text-red-600 dark:text-red-400">
-                  {walletError}
-                </p>
+              <div className="mt-2 px-3 py-2 bg-destructive/15 border border-destructive rounded-md">
+                <p className="text-sm text-destructive">{walletError}</p>
               </div>
             )}
           </div>
@@ -1207,7 +1203,7 @@ export function WalletsTable({
                 setShowManualEntry(!showManualEntry);
                 setManualWalletError("");
               }}
-              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {showManualEntry ? (
                 <ChevronUp size={16} />
@@ -1219,12 +1215,12 @@ export function WalletsTable({
 
             {/* Manual entry form - collapsible */}
             {showManualEntry && (
-              <div className="mt-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 space-y-3 animate-in slide-in-from-top-2 duration-200">
+              <div className="mt-3 p-4 bg-muted/50 rounded-lg border border-border space-y-3 animate-in slide-in-from-top-2 duration-200">
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-foreground mb-1">
                       Wallet Address
-                      <span className="text-red-500 ml-0.5">*</span>
+                      <span className="text-destructive ml-0.5">*</span>
                     </label>
                     <input
                       type="text"
@@ -1234,21 +1230,21 @@ export function WalletsTable({
                         setManualWalletError("");
                       }}
                       placeholder="0x..."
-                      className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                      className={`w-full px-3 py-2 border rounded-md bg-background text-foreground font-mono text-sm focus:outline-none focus:ring-2 focus:ring-ring transition-colors ${
                         manualWalletError
-                          ? "border-red-300 dark:border-red-600"
-                          : "border-gray-300 dark:border-gray-600"
+                          ? "border-destructive"
+                          : "border-input"
                       }`}
                     />
-                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       Enter a valid Ethereum address (0x + 40 hex characters)
                     </p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-foreground mb-1">
                       Wallet Name
-                      <span className="text-gray-400 dark:text-gray-500 ml-1 font-normal">
+                      <span className="text-muted-foreground ml-1 font-normal">
                         (optional)
                       </span>
                     </label>
@@ -1257,7 +1253,7 @@ export function WalletsTable({
                       value={manualWalletName}
                       onChange={(e) => setManualWalletName(e.target.value)}
                       placeholder="e.g., Operations Wallet"
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           handleAddManualWallet();
@@ -1269,8 +1265,8 @@ export function WalletsTable({
 
                 {/* Error message */}
                 {manualWalletError && (
-                  <div className="px-3 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
-                    <p className="text-sm text-red-600 dark:text-red-400">
+                  <div className="px-3 py-2 bg-destructive/15 border border-destructive rounded-md">
+                    <p className="text-sm text-destructive">
                       {manualWalletError}
                     </p>
                   </div>
@@ -1292,7 +1288,7 @@ export function WalletsTable({
                       setManualWalletName("");
                       setManualWalletError("");
                     }}
-                    className="px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+                    className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Cancel
                   </button>
@@ -1306,28 +1302,28 @@ export function WalletsTable({
       {/* Progress Notification - Bottom Right */}
       {txProgress.show && (
         <div className="fixed bottom-4 right-4 z-50 transition-all duration-300 ease-out">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 p-4 w-80">
+          <div className="bg-card rounded-lg shadow-2xl border border-border p-4 w-80">
             <div className="space-y-3">
               {/* Header with Spinner */}
               <div className="flex items-center gap-3">
                 <RefreshCw
                   size={20}
-                  className="animate-spin text-blue-600 dark:text-blue-500 flex-shrink-0"
+                  className="animate-spin text-primary flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                  <h4 className="text-sm font-semibold text-foreground truncate">
                     {txProgress.step}
                   </h4>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                  <p className="text-xs text-muted-foreground">
                     Step {txProgress.current} of {txProgress.total}
                   </p>
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+              <div className="w-full bg-muted rounded-full h-1.5">
                 <div
-                  className="bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full transition-all duration-300 ease-in-out"
+                  className="bg-primary h-1.5 rounded-full transition-all duration-300 ease-in-out"
                   style={{
                     width: `${(txProgress.current / txProgress.total) * 100}%`,
                   }}
@@ -1335,7 +1331,7 @@ export function WalletsTable({
               </div>
 
               {/* Details */}
-              <p className="text-xs text-gray-600 dark:text-gray-400">
+              <p className="text-xs text-muted-foreground">
                 {txProgress.details}
               </p>
             </div>

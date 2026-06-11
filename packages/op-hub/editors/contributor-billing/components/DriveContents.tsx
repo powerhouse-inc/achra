@@ -47,10 +47,10 @@ export function DriveContents({
             reportingFolderId={selectedFolder.reportingFolderId}
           >
             <div className="mb-4">
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-foreground">
                 Payments - {selectedFolder.monthName}
               </h1>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 Manage invoices and billing statements for{" "}
                 {selectedFolder.monthName}
               </p>

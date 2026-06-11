@@ -12,6 +12,7 @@ import {
   useDocuments,
 } from "@powerhousedao/reactor-browser";
 import { useMemo, useCallback, useState, useEffect } from "react";
+import { Users } from "lucide-react";
 import type { FileNode } from "@powerhousedao/shared/document-drive";
 import {
   ObjectSetTable,
@@ -357,13 +358,17 @@ export default function Editor() {
         renderCell: (value) => {
           if (value === "" || !value) {
             return (
-              <div className="font-light italic text-gray-500 text-center">
+              <div className="text-center font-light italic text-muted-foreground">
                 + Double-click to add new builder (enter or click outside to
                 save)
               </div>
             );
           }
-          return <div className="text-center font-mono text-sm">{value}</div>;
+          return (
+            <div className="text-center font-mono text-sm text-foreground">
+              {value}
+            </div>
+          );
         },
       },
       {
@@ -373,7 +378,9 @@ export default function Editor() {
         align: "center",
         width: 200,
         renderCell: (value) => {
-          return <div className="text-center">{value}</div>;
+          return (
+            <div className="text-center text-foreground">{value}</div>
+          );
         },
       },
       {
@@ -383,7 +390,9 @@ export default function Editor() {
         align: "center",
         width: 200,
         renderCell: (value) => {
-          return <div className="text-center">{value}</div>;
+          return (
+            <div className="text-center text-foreground">{value}</div>
+          );
         },
       },
       {
@@ -397,11 +406,11 @@ export default function Editor() {
             return null;
           }
           return (
-            <div className="text-center">
+            <div className="flex justify-center">
               <img
                 src={context.row.icon}
                 alt="Builder icon"
-                className="w-10 h-10 rounded-sm mx-auto object-cover"
+                className="h-10 w-10 rounded-lg border border-border object-cover"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}
@@ -414,39 +423,74 @@ export default function Editor() {
     [builders, getBuilderProfiles, dispatch],
   );
 
+  const profileCount = getBuilderProfiles().length;
+
   return (
-    <div className="w-full bg-gray-50">
+    <div className="flex h-screen flex-col">
       <DocumentToolbar />
-      <div className="p-2 max-w-4xl mx-auto min-h-screen">
-        <div className="bg-white rounded-lg p-6 mb-6 shadow-sm text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Builders</h1>
-        </div>
-        <div className="mt-4 bg-white">
-          <ObjectSetTable
-            columns={columns}
-            data={builders}
-            allowRowSelection={true}
-            onDelete={(data) => {
-              if (data.length > 0) {
-                data.forEach((d) => {
-                  dispatch(
-                    buildersActions.removeBuilder({ builderPhid: d.phid }),
-                  );
-                });
-              }
-            }}
-            onAdd={(data) => {
-              // Only add if we have a PHID
-              const phid = (data as { id?: string }).id;
-              if (phid) {
-                dispatch(
-                  buildersActions.addBuilder({
-                    builderPhid: phid,
-                  }),
-                );
-              }
-            }}
-          />
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-3">
+        <h1 className="text-lg font-semibold text-foreground">Builders</h1>
+        <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+          {builders.length} linked · {profileCount} profiles available
+        </span>
+      </div>
+
+      <div className="flex-1 overflow-auto">
+        <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-border bg-muted">
+                <Users className="h-5 w-5 text-muted-foreground" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  Builder registry
+                </h2>
+                <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+                  Link builder profiles to this document. Double-click a row to
+                  search by name or PHID, then press Enter or click outside to
+                  save.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <section className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+            <div className="border-b border-border px-5 py-4">
+              <h3 className="text-sm font-medium text-foreground">
+                Linked builders
+              </h3>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Select rows to remove builders from the registry.
+              </p>
+            </div>
+            <div className="p-4">
+              <ObjectSetTable
+                columns={columns}
+                data={builders}
+                allowRowSelection={true}
+                onDelete={(data) => {
+                  if (data.length > 0) {
+                    data.forEach((d) => {
+                      dispatch(
+                        buildersActions.removeBuilder({ builderPhid: d.phid }),
+                      );
+                    });
+                  }
+                }}
+                onAdd={(data) => {
+                  const phid = (data as { id?: string }).id;
+                  if (phid) {
+                    dispatch(
+                      buildersActions.addBuilder({
+                        builderPhid: phid,
+                      }),
+                    );
+                  }
+                }}
+              />
+            </div>
+          </section>
         </div>
       </div>
     </div>

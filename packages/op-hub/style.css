@@ -25,6 +25,17 @@
 @source "../ui/src/**/*.{ts,tsx}";
 
 /* ──────────────────────────────────────────────────────────────────────────
+   Scan the shared @achra/ui component source.
+   ──────────────────────────────────────────────────────────────────────────
+   Editors migrated to the Achra design system import shadcn primitives from
+   @achra/ui (Input, Textarea, Select, …). Those components reference semantic
+   utilities (bg-popover, border-input, ring-ring, …) whose classes Tailwind
+   only generates if it scans the component source. @achra/ui is a workspace
+   package, so we point at its real monorepo path — a directory @source into
+   node_modules is unreliable under Vite (same rationale as the editors scan). */
+@source "../ui/src/**/*.{ts,tsx}";
+
+/* ──────────────────────────────────────────────────────────────────────────
    Force-generate the dark-mode utilities used by the component libraries we
    render but DON'T author.
    ──────────────────────────────────────────────────────────────────────────
@@ -54,6 +65,12 @@
 @source inline(
   "{dark:text-{blue,green,orange,purple,red,yellow}-100,dark:text-red-400,dark:bg-blue-{50,400,600,700,800,900},dark:bg-green-{300,400,800,900},dark:bg-{purple,red,yellow}-{300,400,800,900},dark:bg-violet-500}"
 );
+/* Arbitrary-value LAYOUT utilities used by the date-picker's year/month picker
+   views (document-engineering, node_modules → never content-scanned). Without
+   these the year grid collapses into an unreadable squished card. */
+@source inline(
+  "{h-[28px],w-[68px],w-[114px],rounded-[4px],rounded-[6px],text-[12px],leading-[18px],gap-x-[14px],gap-y-[15px],px-[2px],py-[5px]}"
+);
 
 @theme {
   /* You can customize the theme by overriding the theme variables here */
@@ -67,24 +84,31 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Lighter dark theme
+   Connect chrome → Achra dark surfaces
    ──────────────────────────────────────────────────────────────────────────
-   Connect toggles a `.dark` class on <html> and paints dark surfaces with the
-   `slate` palette (the main app background is `dark:bg-slate-900`). Tailwind v4
-   resolves those utilities to `var(--color-slate-*)` at use-time, so redefining
-   the tokens *scoped under `.dark`* retints every dark surface WITHOUT touching
-   light mode and without editing the design-system or Connect.
+   Connect toggles a `.dark` class on <html> and paints its chrome with the
+   `slate` palette — the app canvas is `bg-slate-900`, and the drive explorer's
+   panels, document tiles and "New document" buttons use `bg-slate-{600,700,800}`
+   (the design-system renders these; `bg-slate-600` alone appears 144×). Tailwind
+   v4 resolves those utilities to `var(--color-slate-*)` at use-time, so
+   redefining the slate dark end *scoped under `.dark`* retints every dark
+   surface to follow the Achra design system WITHOUT touching light mode and
+   without editing the design-system or Connect.
 
-   The design-system defaults are near-black (slate-900 = 6% lightness). The
-   values below lift the whole dark end to a softer charcoal. Tweak the final
-   lightness % of each line to taste — higher = lighter.
+   Each step is anchored to an Achra dark token (packages/design-system/theme.css
+   `.dark` block), preserving Connect's lightness order (900 darkest → 500
+   lightest):
 
-   Defaults (for reference):
-     --color-slate-500: hsl(207 8% 21%);
-     --color-slate-600: hsl(210 9% 13%);
-     --color-slate-700: hsl(204 9% 11%);
-     --color-slate-800: hsl(195 9%  9%);
-     --color-slate-900: hsl(195 6%  6%);   ← main app background
+     slate-900 → --background  #1b1e24   (app canvas)
+     slate-800 → --card        #252a34   (panels / drive-explorer surface)
+     slate-700 → (card↔accent) #2e3440   (raised tiles)
+     slate-600 → --accent      #373e4d   (buttons / hover fills — most-used)
+     slate-500 → --border      #485265   (dividers, lightest dark surface)
+
+   Defaults the design-system ships (for reference, near-black):
+     --color-slate-500: hsl(207 8% 21%);   --color-slate-600: hsl(210 9% 13%);
+     --color-slate-700: hsl(204 9% 11%);   --color-slate-800: hsl(195 9% 9%);
+     --color-slate-900: hsl(195 6% 6%);
 
    ⚠️ Selector is `:root.dark`, NOT `.dark`. The design-system ships the
    defaults above as `:root { … }` (specificity 0,1,0). A plain `.dark { … }`
@@ -94,11 +118,51 @@
    that can load after our package CSS and clobber these. `:root.dark` is 0,2,0
    (`.dark` lives on <html>, which is `:root`), so it wins regardless of order. */
 :root.dark {
-  --color-slate-900: hsl(201, 20%, 17%); /* main app background */
-  --color-slate-800: hsl(200, 4%, 26%); /* raised surfaces / panels */
-  --color-slate-700: hsl(200, 5%, 22%);
-  --color-slate-600: hsl(210, 5%, 26%);
-  --color-slate-500: hsl(210, 5%, 29%);
+  --color-slate-900: #1b1e24; /* Achra --background — app canvas */
+  --color-slate-800: #252a34; /* Achra --card — panels / tiles */
+  --color-slate-700: #2e3440; /* card → accent midpoint — raised tiles */
+  --color-slate-600: #373e4d; /* Achra --accent — buttons / hover fills */
+  --color-slate-500: #485265; /* Achra --border / --input — dividers */
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Editor cards → lifted surface (--card → --accent), dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   Achra's --card (#252a34) sits only ~5% above --background (#1b1e24), so on the
+   dark canvas full-width editor cards blend in. Remap --card to --accent
+   (#373e4d) so every `bg-card` panel reads as a clearly raised surface across
+   ALL op-hub editors. Safe to do globally: Connect and @powerhousedao/design-
+   system neither use `bg-card` nor define --card, so this touches ONLY @achra/ui
+   cards in op-hub editors. `:root.dark` (0,2,0) beats @achra's `.dark { --card }`
+   (0,1,0) regardless of load order. Inputs and tables are pinned to --background
+   (below), so they stay clearly darker than the lifted cards. */
+:root.dark {
+  --card: var(--accent);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Drive-app content surface (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   DOCUMENT editors (builder-profile, …) sit on Connect's document-host surface
+   — slate-800, remapped above to Achra --card (#252a34). The builder-team-admin
+   DRIVE editor replaces the drive view and sits directly on the DARKER app
+   canvas (slate-900 → #1b1e24), so its pages read visibly darker than the
+   document editors. Paint its shell with the same slate-800 surface so both
+   share one background. Scoped to the `bta-drive-shell` tag on team-admin's
+   DriveExplorer ONLY (service-offering-app already matches its host); dark-only
+   (in light mode the hosts are already the same light canvas). */
+.dark .bta-drive-shell {
+  background-color: var(--color-slate-800);
+}
+
+/* Same treatment for the contributor-billing drive editor's shell. */
+.dark .cb-drive-shell {
+  background-color: var(--color-slate-800);
+}
+
+/* Same treatment for the network-admin drive editor's shell. */
+.dark .na-drive-shell {
+  background-color: var(--color-slate-800);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -149,6 +213,213 @@
 .dark .sidebar__item-caret:hover {
   background-color: rgba(255, 255, 255, 0.08);
 }
+/* Expand-arrow (caret) color — BOTH modes, BOTH states. The document-
+   engineering Sidebar hardcodes the chevron svg as `text-gray-700
+   dark:text-gray-400` (flat greys outside the theme); collapsed (▶) vs
+   expanded (▼) is only a rotation on the SAME svg, so one color rule covers
+   both states. The CaretDown svg is fill="currentcolor", so pinning `color`
+   themes it. Light mode follows --muted-foreground; dark mode matches the
+   `.dark .sidebar__item` row text above so the arrows unambiguously read as
+   part of the themed sidebar. `!important` because the utility classes sit ON
+   the svg itself and arrive from multiple compiled stylesheets (Connect's
+   prebuilt CSS + our build) — this ends the cascade fight for good. The faint
+   leaf-row placeholder (`--no-children`) is re-pinned to --border (declared
+   LAST: it ties on specificity+importance, so source order decides). */
+.sidebar__item-caret svg {
+  color: var(--muted-foreground) !important;
+}
+.dark .sidebar__item-caret svg {
+  color: #cbd5e1 !important; /* match the dark sidebar row text */
+}
+.sidebar__item-caret svg.sidebar__item-caret--no-children {
+  color: var(--border) !important;
+}
+/* Sidebar row tooltip text. The document-engineering Tooltip (shown when
+   hovering truncated sidebar nodes) hardcodes `text-gray-900
+   dark:text-gray-200` — the dark value reads as muted on the dark surface.
+   The tooltip renders in a Radix portal under <body>, OUTSIDE the sidebar DOM,
+   so per-editor <style> blocks can't reach it — this global rule themes every
+   document-engineering tooltip in both drives. Keyed on the component's own
+   class string (substring match) so other Radix popper content (selects,
+   dropdowns) is untouched; var(--foreground) flips with the theme. */
+[data-radix-popper-content-wrapper] [class*="dark:text-gray-200"] {
+  color: var(--foreground);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   document-engineering form controls (Select, DatePicker, Input) — dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   The scalars/data-entry controls pair light classes with dark variants that
+   lose the cascade against the plain light utilities (`bg-white` wins over
+   `dark:bg-slate-600`), and their dark text uses the redefined gray palette
+   (`dark:text-gray-700` ≈ 29% lightness — unreadable). Symptoms: white
+   dropdown panels with invisible options, faint trigger/date-input text.
+
+   Fixed on the components' OWN class strings (substring keys, same technique
+   as the tooltip rule above) and cmdk's stable attributes. `!important` per
+   the escalation rule — these utilities arrive from multiple compiled
+   stylesheets and some carry `!`-important variants. Matches the convention:
+   inputs/triggers = recessed --background wells, dropdown panels = --popover,
+   option text = --foreground. */
+
+/* FormLabel (StringField, Textarea, DatePickerField, Checkbox, etc.)
+   hardcodes `text-gray-900` / `dark:text-gray-50` — theme to --foreground. */
+label[class*="inline-flex items-center text-sm font-medium"] {
+  color: var(--foreground) !important;
+}
+
+/* Native HTML date/time inputs: the BROWSER renders their dropdown picker UI
+   (calendar popup, clock) and only themes it dark when the input declares
+   `color-scheme: dark` — without this the popup is a white panel regardless of
+   any CSS on the page. Global so every editor's native inputs are covered. */
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="datetime-local"],
+.dark input[type="month"],
+.dark input[type="week"] {
+  color-scheme: dark;
+}
+
+/* Triggers + text/date inputs (shared Input carries `dark:bg-charcoal-900`). */
+.dark [class*="dark:bg-charcoal-900"] {
+  background-color: var(--background) !important;
+  border-color: var(--input) !important;
+  color: var(--foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"]::placeholder {
+  color: var(--muted-foreground) !important;
+}
+/* Select trigger's selected-value span (`truncate text-gray-900 ...`). */
+.dark [class*="truncate text-gray-900"] {
+  color: var(--foreground) !important;
+}
+/* Date/time picker internals. The BasePickerField wrapper is themed by the
+   charcoal rule above, but its inner <input> ships `focus:bg-white` (a white
+   flash on focus) and its calendar-button segment carries the PANEL class pair
+   (`bg-white dark:bg-slate-600`), which the panel rule below would tint a
+   different shade — pin both transparent so the whole field reads as ONE
+   recessed input. Higher specificity (.dark + two hooks) beats the panel rule. */
+.dark [class*="dark:bg-charcoal-900"] input,
+.dark [class*="dark:bg-charcoal-900"] .input-field {
+  background-color: transparent !important;
+  color: var(--foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"] input::placeholder {
+  color: var(--muted-foreground) !important;
+}
+.dark [class*="dark:bg-charcoal-900"] [class*="dark:bg-slate-600"] {
+  background-color: transparent !important;
+  border-color: var(--input) !important;
+}
+/* Calendar dropdown (react-day-picker v9 behind the stable
+   `.date-picker__calendar` class; day states arrive as data attributes).
+   Day numbers / caption / nav chevrons hardcode near-black text in dark mode —
+   pin interactive text to --foreground, de-emphasize weekday headers and
+   outside/disabled days with --muted-foreground, and force dark text on the
+   selected day's light pill (its `!`-important classes may out-layer ours, so
+   restate the readable combination explicitly). */
+.dark .date-picker__calendar {
+  background-color: var(--popover) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+.dark .date-picker__calendar button {
+  color: var(--foreground) !important;
+}
+.dark .date-picker__calendar th,
+.dark .date-picker__calendar [data-outside="true"] button,
+.dark .date-picker__calendar [data-disabled="true"] button {
+  color: var(--muted-foreground) !important;
+}
+.dark .date-picker__calendar [data-selected="true"] button,
+.dark .date-picker__calendar button[aria-selected="true"],
+.dark .date-picker__calendar [aria-selected="true"] button {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+/* "Today" keeps its light pill, but our --foreground day-text would render
+   white-on-white there — pin it to grey instead. Guarded so a today that is
+   ALSO the selected day stays on the violet pill with light text. */
+.dark
+  .date-picker__calendar
+  [data-today="true"]:not([data-selected="true"]):not([aria-selected="true"])
+  button {
+  color: var(--muted-foreground) !important;
+}
+.dark .date-picker__calendar button:hover:not([disabled]) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+/* Year / month picker views (caption-click). Buttons hardcode light styling
+   (`text-gray-900`, current = `bg-gray-100`, selected = `bg-gray-900
+   text-white`) — keyed on their arbitrary size classes (`w-[68px]` years,
+   `py-[5px]` months), which are unique to these views. Selected follows the
+   violet selection convention. */
+.dark [class*="w-[68px]"],
+.dark [class*="py-[5px]"] {
+  color: var(--foreground) !important;
+}
+.dark [class*="w-[68px]"]:hover,
+.dark [class*="py-[5px]"]:hover,
+.dark [class*="w-[68px]"][class*="bg-gray-100"],
+.dark [class*="py-[5px]"][class*="bg-gray-100"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark [class*="w-[68px]"][class*="bg-gray-900"],
+.dark [class*="py-[5px]"][class*="bg-gray-900"] {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+}
+/* Calendar nav arrows (‹ ›): they're `position: absolute` with NO z-index, so
+   the caption row (also positioned, later in the DOM) painted over them and
+   swallowed clicks — the arrows looked fine but were dead in all views. Lift
+   ONLY the buttons (z-index applies to their existing absolute positioning);
+   do NOT make the nav `position: relative` — that re-anchors the arrows to the
+   nav box instead of the months container and they render misplaced. */
+.date-picker__calendar nav button {
+  z-index: 50;
+}
+/* Footer Year/Month toggle buttons (`.date-picker__date-footer`): shipped
+   `bg-white border-gray-200 text-gray-500` — the white blocks. */
+.dark .date-picker__date-footer button {
+  background-color: var(--muted) !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
+}
+.dark .date-picker__date-footer button:hover {
+  background-color: var(--accent) !important;
+}
+
+/* Dropdown / calendar panels (PopoverContent + date-picker wrapper both carry
+   `dark:bg-slate-600`). */
+.dark [class*="dark:bg-slate-600"] {
+  background-color: var(--popover) !important;
+  border-color: var(--border) !important;
+  color: var(--popover-foreground) !important;
+}
+
+/* cmdk option rows (Select lists, autocompletes): readable foreground text,
+   subtle overlay hover/selection, hairline separators. */
+.dark [cmdk-item],
+.dark [cmdk-item] span {
+  color: var(--foreground) !important;
+}
+.dark [cmdk-item]:hover,
+.dark [cmdk-item][data-selected="true"],
+.dark [cmdk-item][aria-selected="true"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+/* Each option row ships `border-y-2 border-white dark:border-slate-600` —
+   separators DESIGNED to be invisible against the original panel color. With
+   the panel now --popover they'd resolve lighter and stripe the list, so blend
+   them into the panel for one uniform dark surface (rows stay transparent;
+   only the hover/selected overlay above lifts them). */
+.dark [cmdk-item] {
+  border-color: var(--popover) !important;
+  background-color: transparent;
+}
+.dark [cmdk-input] {
+  color: var(--foreground) !important;
+}
 /* Header (drive title) — `dark:text-gray-300` / `dark:border-gray-800` also
    live in node_modules, so the title falls back to dark `text-gray-700` and the
    bottom divider to the light `border-gray-300`. Restyle both directly. */
@@ -157,4 +428,106 @@
 }
 .dark .sidebar__header {
   border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   @achra/ui form-control text color
+   ──────────────────────────────────────────────────────────────────────────
+   The shadcn @achra/ui Input/Textarea/Select set no explicit text color — they
+   inherit it (shadcn relies on Tailwind preflight's `input { color: inherit }`
+   resolving to a `text-foreground` body). The frontend gets that for free, but
+   inside Connect's editor host the inherited value resolves to a dark color in
+   dark mode, so typed text renders black-on-dark and is unreadable.
+
+   Pin the value text to the semantic `--foreground` token via the stable
+   `data-slot` attributes @achra/ui stamps on every control. This flips with the
+   theme (dark slate in light, near-white in dark), fixes every migrated editor
+   in one place, and — keyed on `data-slot` — touches ONLY @achra/ui controls,
+   never the kept document-engineering fields. Unlayered (like the overrides
+   above) so it beats Connect's prebuilt element rules. */
+[data-slot="input"],
+[data-slot="textarea"],
+[data-slot="select-trigger"]:not([data-placeholder]) {
+  color: var(--foreground);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   @achra/ui form-control surface (dark mode)
+   ──────────────────────────────────────────────────────────────────────────
+   The shadcn @achra/ui Input/Textarea/Select default to `dark:bg-input/30` (a
+   faint tint of --input). On the lifted editor cards (where --card → --accent)
+   that reads almost identical to the card surface — you can't tell it's an
+   input. A `bg-background` className doesn't fix it: `dark:bg-input/30` is a
+   `dark:`-variant utility and out-orders a plain unmodified utility in dark mode.
+
+   Pin the fill to --background (the app canvas, #1b1e24 in dark) so every
+   control sits clearly DARKER than its card and reads as an input field.
+   Unlayered (beats Tailwind's layered `dark:bg-input/30` regardless of order)
+   and `.dark`-scoped (light mode keeps its transparent-on-card look). Keyed on
+   data-slot → touches ONLY @achra/ui controls, never document-engineering
+   fields. Fixes every migrated editor in one place. */
+.dark [data-slot="input"],
+.dark [data-slot="textarea"],
+.dark [data-slot="select-trigger"] {
+  background-color: var(--background);
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   ObjectSetTable (@powerhousedao/document-engineering) — dark mode
+   ──────────────────────────────────────────────────────────────────────────
+   The <ObjectSetTable> hardcodes LIGHT-mode palette classes with no `dark:`
+   variants: `text-gray-900` body text, `bg-gray-100` row hover, `bg-blue-50/
+   -100` row selection, and `border-gray-{100,300}` grid lines. Those classes
+   live in node_modules, so neither Tailwind's content scan nor `@source
+   inline` can synthesize dark counterparts — on the dark canvas the table
+   renders dark-on-dark text with a glaring WHITE hover/selection flash.
+
+   Fixed the same way as the Sidebar/form-control overrides above: restyle the
+   table's stable structure directly. Selectors hang off the `.object-set-table`
+   class on the <table> (+ the `data-selected` attr rows carry), so this themes
+   EVERY migrated editor's table in one place (16 call sites, not just
+   Contributors). `.dark .object-set-table …` is ≥(0,2,1); Tailwind wraps its
+   utilities in `:where()` (≤(0,1,0)), so we out-specify them regardless of
+   import/generation order — and since we set properties on elements (not
+   redefine tokens), the `:root.dark` load-order caveat above doesn't apply. */
+
+/* Table surface → dark --background. Rows render transparent, so on the lifted
+   editor cards (--card → --accent) the grid would inherit the card and blend in;
+   filling the table with --background makes it read as a recessed, input-like
+   data well (consistent with the form's dark inputs). The hover / selection
+   overlays and hairline borders below layer on top. */
+.dark .object-set-table {
+  background-color: var(--background);
+}
+
+/* Body text → semantic foreground (near-white in dark). Cell renderers that set
+   their own color — e.g. the muted "+ Double-click to add" placeholder — still
+   win: an explicit color on the descendant beats the inherited tbody color. */
+.dark .object-set-table tbody {
+  color: var(--foreground);
+}
+
+/* Row hover → subtle light lift instead of `bg-gray-100`'s near-white flash
+   (the reported bug). Same overlay as the sidebar hover above. */
+.dark .object-set-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Selected row → slightly stronger lift, replacing the light `bg-blue-50/-100`.
+   The blue row-number cell (`bg-blue-900`) and selection-edge borders remain as
+   the accent, so selection is still obvious. */
+.dark .object-set-table tbody tr[data-selected="true"],
+.dark .object-set-table tbody tr[data-selected="true"]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Grid lines → faint white hairlines (same convention as the card/sidebar
+   borders above). Scoped to the outer frame, header underline, row-number
+   divider, and NON-selected row dividers — selected rows keep their blue
+   `border-*-blue-900` edges untouched. */
+.dark :has(> table.object-set-table),
+.dark .object-set-table thead tr,
+.dark .object-set-table tbody tr:not([data-selected="true"]),
+.dark .object-set-table tbody td:first-child {
+  border-color: rgba(255, 255, 255, 0.1);
 }

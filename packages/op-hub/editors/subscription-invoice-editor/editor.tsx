@@ -295,22 +295,21 @@ export default function Editor() {
 
 const invoiceStyles = `
 .invoice-page {
-  background: #f1f5f9;
   min-height: 100%;
   padding: 24px 16px 64px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
-  color: #0f172a;
+  color: var(--foreground);
 }
 .invoice-actions {
   max-width: 880px;
-  margin: 0 auto 16px;
+  margin: 24px auto 16px;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 0 4px;
 }
 .invoice-actions__hint {
-  color: #475569;
+  color: var(--foreground);
   font-size: 0.85rem;
 }
 .ph-status {
@@ -322,24 +321,24 @@ const invoiceStyles = `
   text-transform: uppercase;
 }
 .ph-status--draft {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
+  background: var(--muted);
+  color: var(--foreground);
+  border: 1px solid var(--border);
 }
 .ph-status--issued {
-  background: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
+  background: color-mix(in oklab, var(--status-success) 12%, transparent);
+  color: var(--status-success);
+  border: 1px solid color-mix(in oklab, var(--status-success) 35%, transparent);
 }
 .ph-status--paid {
-  background: #d1fae5;
-  color: #065f46;
-  border: 1px solid #6ee7b7;
+  background: color-mix(in oklab, var(--status-success) 22%, transparent);
+  color: var(--status-success);
+  border: 1px solid color-mix(in oklab, var(--status-success) 45%, transparent);
 }
 .ph-status--void {
-  background: #fef2f2;
-  color: #b91c1c;
-  border: 1px solid #fecaca;
+  background: color-mix(in oklab, var(--destructive) 12%, transparent);
+  color: var(--destructive);
+  border: 1px solid color-mix(in oklab, var(--destructive) 30%, transparent);
 }
 .ph-btn {
   border: 0;
@@ -350,19 +349,19 @@ const invoiceStyles = `
   cursor: pointer;
   transition: all 150ms;
 }
-.ph-btn--primary { background: #6d28d9; color: white; }
-.ph-btn--primary:hover { background: #5b21b6; }
-.ph-btn--success { background: #059669; color: white; }
-.ph-btn--success:hover { background: #047857; }
-.ph-btn--ghost { background: transparent; color: #475569; border: 1px solid #cbd5e1; }
-.ph-btn--ghost:hover { background: #f8fafc; }
+.ph-btn--primary { background: var(--primary); color: var(--primary-foreground); }
+.ph-btn--primary:hover { background: var(--primary); }
+.ph-btn--success { background: var(--status-success); color: var(--primary-foreground); }
+.ph-btn--success:hover { background: var(--status-success); }
+.ph-btn--ghost { background: transparent; color: var(--foreground); border: 1px solid var(--border); }
+.ph-btn--ghost:hover { background: color-mix(in oklab, var(--foreground) 6%, transparent); }
 
 .invoice {
   max-width: 880px;
   margin: 0 auto;
-  background: white;
+  background: var(--card);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 16px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-sm);
   padding: 48px 56px;
 }
 .invoice__header {
@@ -370,7 +369,7 @@ const invoiceStyles = `
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
   padding-bottom: 24px;
 }
 .invoice__title {
@@ -378,12 +377,12 @@ const invoiceStyles = `
   font-weight: 700;
   letter-spacing: 0.18em;
   margin: 0 0 4px;
-  color: #0f172a;
+  color: var(--foreground);
 }
 .invoice__number {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--foreground);
 }
 .invoice__org { text-align: right; }
 .invoice__org-name {
@@ -392,29 +391,29 @@ const invoiceStyles = `
 }
 .invoice__org-line {
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--muted-foreground);
 }
 .invoice__meta {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 32px;
   padding: 28px 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
 }
 .invoice__label {
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--muted-foreground);
   margin-bottom: 6px;
   font-weight: 600;
 }
-.invoice__strong { font-weight: 600; color: #0f172a; }
-.invoice__faint { color: #64748b; font-size: 0.85rem; line-height: 1.5; }
+.invoice__strong { font-weight: 600; color: var(--foreground); }
+.invoice__faint { color: var(--muted-foreground); font-size: 0.85rem; line-height: 1.5; }
 .invoice__mono {
   font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--muted-foreground);
   word-break: break-all;
 }
 .invoice__items { padding-top: 24px; }
@@ -428,19 +427,19 @@ const invoiceStyles = `
   font-size: 0.7rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--muted-foreground);
   font-weight: 600;
   padding: 10px 8px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
 }
 .invoice__table td {
   padding: 14px 8px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--muted);
   vertical-align: top;
 }
 .invoice__num { text-align: right; font-variant-numeric: tabular-nums; }
-.invoice__credit { color: #047857; font-weight: 500; }
-.invoice__owed { color: #b91c1c; }
+.invoice__credit { color: var(--status-success); font-weight: 500; }
+.invoice__owed { color: var(--destructive); }
 .origin {
   display: inline-block;
   font-size: 0.7rem;
@@ -448,16 +447,16 @@ const invoiceStyles = `
   letter-spacing: 0.04em;
   padding: 2px 8px;
   border-radius: 6px;
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--muted);
+  color: var(--foreground);
 }
-.origin--SETUP { background: #fef3c7; color: #92400e; }
-.origin--SUBSCRIPTION_FEE { background: #ede9fe; color: #6d28d9; }
-.origin--DYNAMIC { background: #dbeafe; color: #1d4ed8; }
+.origin--SETUP { background: color-mix(in oklab, var(--status-warning) 22%, transparent); color: var(--status-warning); }
+.origin--SUBSCRIPTION_FEE { background: color-mix(in oklab, var(--primary) 18%, transparent); color: var(--primary); }
+.origin--DYNAMIC { background: color-mix(in oklab, var(--status-progress) 22%, transparent); color: var(--status-progress); }
 
 .invoice__totals {
   padding: 24px 0 8px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
 }
@@ -467,14 +466,14 @@ const invoiceStyles = `
   gap: 8px 32px;
   min-width: 280px;
   font-size: 0.9rem;
-  color: #475569;
+  color: var(--foreground);
 }
 .invoice__total-line {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--foreground);
   padding-top: 12px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border);
   margin-top: 6px;
 }
 .invoice__notes {
@@ -484,12 +483,12 @@ const invoiceStyles = `
   white-space: pre-wrap;
   font-family: inherit;
   font-size: 0.88rem;
-  color: #475569;
+  color: var(--foreground);
   margin: 0;
 }
 
 @media print {
-  .invoice-page { background: white; padding: 0; }
+  .invoice-page { background: var(--card); padding: 0; }
   .invoice-actions { display: none; }
   .invoice {
     max-width: none;

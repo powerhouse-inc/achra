@@ -1,4 +1,12 @@
-import { TextInput, Textarea } from "@powerhousedao/document-engineering";
+import { Input } from "@achra/ui/input";
+import { Textarea } from "@achra/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@achra/ui/select";
 import { Settings, FileText, Info, X, Building2 } from "lucide-react";
 import { DocumentToolbar } from "@powerhousedao/design-system/connect";
 import { actions } from "document-models/builder-profile";
@@ -30,11 +38,11 @@ const STATUS_OPTIONS: {
   label: string;
   color: string;
 }[] = [
-  { value: "ACTIVE", label: "Active", color: "bg-emerald-500" },
-  { value: "INACTIVE", label: "Inactive", color: "bg-slate-400" },
-  { value: "ON_HOLD", label: "On Hold", color: "bg-amber-500" },
-  { value: "COMPLETED", label: "Completed", color: "bg-sky-500" },
-  { value: "ARCHIVED", label: "Archived", color: "bg-slate-300" },
+  { value: "ACTIVE", label: "Active", color: "bg-status-success" },
+  { value: "INACTIVE", label: "Inactive", color: "bg-muted-foreground" },
+  { value: "ON_HOLD", label: "On Hold", color: "bg-status-warning" },
+  { value: "COMPLETED", label: "Completed", color: "bg-status-progress" },
+  { value: "ARCHIVED", label: "Archived", color: "bg-muted-foreground/60" },
 ];
 
 const DESCRIPTION_MAX_LENGTH = 350;
@@ -279,14 +287,6 @@ export default function Editor() {
             border-radius: 8px;
             border: 1px solid var(--border);
           }
-          .builder-editor .status-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.75rem center;
-            background-repeat: no-repeat;
-            background-size: 1.25em 1.25em;
-            padding-right: 2.5rem;
-          }
           .builder-editor .role-toggle {
             display: flex;
             background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
@@ -463,40 +463,6 @@ export default function Editor() {
                 capabilities
               </p>
             </div>
-
-            {/* Role Toggle */}
-            {/* <div className="flex flex-col items-end gap-1.5">
-              <div className="role-toggle">
-                <button
-                  type="button"
-                  onClick={() => handleSetOperator(false)}
-                  className={!state?.isOperator ? "active builder" : ""}
-                >
-                  <span className="role-icon">🔨</span>
-                  Builder
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSetOperator(true)}
-                  className={state?.isOperator ? "active operator" : ""}
-                >
-                  <img
-                    src={operatorIconUrl}
-                    alt=""
-                    className="role-icon"
-                    style={{
-                      width: 19,
-                      height: 19,
-                      filter: state?.isOperator ? "invert(1)" : "none",
-                    }}
-                  />
-                  Operator
-                </button>
-              </div>
-              <p className="text-xs text-slate-400 text-right max-w-[180px]">
-                {state?.isOperator ? "Sells & buys services" : "Buys services"}
-              </p>
-            </div> */}
           </div>
         </div>
 
@@ -516,7 +482,7 @@ export default function Editor() {
             {/* Builder/Operator Name */}
             <div>
               <label className="field-label">{roleLabel} Name</label>
-              <TextInput
+              <Input
                 className="w-full"
                 defaultValue={state?.name || ""}
                 onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
@@ -531,7 +497,7 @@ export default function Editor() {
             {/* Code */}
             <div>
               <label className="field-label">Code</label>
-              <TextInput
+              <Input
                 className="w-full"
                 defaultValue={state?.code || ""}
                 onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
@@ -547,7 +513,7 @@ export default function Editor() {
             {/* Slug - Full width */}
             <div className="md:col-span-2">
               <label className="field-label">Profile Slug</label>
-              <TextInput
+              <Input
                 className="w-full"
                 value={state?.slug || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -585,7 +551,7 @@ export default function Editor() {
                   <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
                     Name
                   </label>
-                  <TextInput
+                  <Input
                     className="w-full"
                     defaultValue={state?.operationalHubMember?.name || ""}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
@@ -602,7 +568,7 @@ export default function Editor() {
                   <label className="text-xs font-medium text-muted-foreground mb-1.5 block">
                     PHID
                   </label>
-                  <TextInput
+                  <Input
                     className="w-full"
                     defaultValue={state?.operationalHubMember?.phid || ""}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
@@ -636,24 +602,23 @@ export default function Editor() {
             {/* Status */}
             <div>
               <label className="field-label">Current Status</label>
-              <select
-                className="status-select w-full px-4 py-2.5 border border-input rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring bg-background"
+              <Select
                 value={state?.status || ""}
-                onChange={(e) => {
-                  if (e.target.value) {
-                    handleStatusChange(e.target.value as BuilderStatus);
-                  }
-                }}
+                onValueChange={(value) =>
+                  handleStatusChange(value as BuilderStatus)
+                }
               >
-                <option value="" disabled>
-                  Select status...
-                </option>
-                {STATUS_OPTIONS.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select status..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {STATUS_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

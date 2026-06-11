@@ -8,28 +8,28 @@ interface ActionItemsCardProps {
 const SEVERITY_CONFIG = {
   critical: {
     icon: AlertTriangle,
-    border: "border-l-red-500",
-    iconColor: "text-red-500",
-    bg: "bg-red-50/50",
+    border: "border-l-destructive",
+    iconColor: "text-destructive",
+    bg: "bg-destructive/15",
   },
   warning: {
     icon: AlertCircle,
-    border: "border-l-amber-400",
-    iconColor: "text-amber-500",
-    bg: "bg-amber-50/50",
+    border: "border-l-status-warning",
+    iconColor: "text-status-warning",
+    bg: "bg-status-warning/20",
   },
   info: {
     icon: Info,
-    border: "border-l-blue-400",
-    iconColor: "text-blue-400",
-    bg: "bg-blue-50/30",
+    border: "border-l-status-progress",
+    iconColor: "text-status-progress",
+    bg: "bg-status-progress/20",
   },
 };
 
 export function ActionItemsCard({ items }: ActionItemsCardProps) {
   if (items.length === 0) {
     return (
-      <div className="flex items-center justify-center py-8 text-sm text-stone-400">
+      <div className="flex items-center justify-center py-8 text-sm text-muted-foreground">
         No action items — all systems normal
       </div>
     );
@@ -54,19 +54,19 @@ export function ActionItemsCard({ items }: ActionItemsCardProps) {
       {/* Summary bar */}
       <div className="flex gap-3 mb-3">
         {counts.critical > 0 ? (
-          <span className="flex items-center gap-1 text-xs font-medium text-red-600">
+          <span className="flex items-center gap-1 text-xs font-medium text-destructive">
             <AlertTriangle size={12} />
             {counts.critical} critical
           </span>
         ) : null}
         {counts.warning > 0 ? (
-          <span className="flex items-center gap-1 text-xs font-medium text-amber-600">
+          <span className="flex items-center gap-1 text-xs font-medium text-status-warning">
             <AlertCircle size={12} />
             {counts.warning} warning
           </span>
         ) : null}
         {counts.info > 0 ? (
-          <span className="flex items-center gap-1 text-xs font-medium text-blue-500">
+          <span className="flex items-center gap-1 text-xs font-medium text-status-progress">
             <Info size={12} />
             {counts.info} info
           </span>
@@ -89,16 +89,16 @@ export function ActionItemsCard({ items }: ActionItemsCardProps) {
               />
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-medium text-stone-700">
+                  <span className="text-sm font-medium text-foreground">
                     {item.title}
                   </span>
                   {item.customerName ? (
-                    <span className="text-xs text-stone-400">
+                    <span className="text-xs text-muted-foreground">
                       — {item.customerName}
                     </span>
                   ) : null}
                 </div>
-                <p className="mt-0.5 text-xs text-stone-500">
+                <p className="mt-0.5 text-xs text-muted-foreground">
                   {item.description}
                 </p>
               </div>

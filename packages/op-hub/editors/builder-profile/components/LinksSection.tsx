@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput } from "@powerhousedao/document-engineering";
+import { Input } from "@achra/ui/input";
 import { Link2, Plus, Check, X, Pencil, Trash2 } from "lucide-react";
 import { generateId } from "document-model/core";
 import type { BuilderLink } from "document-models/builder-profile";
@@ -97,16 +97,16 @@ export function LinksSection({
               {editingId === link.id ? (
                 <>
                   <div className="flex-1 space-y-2">
-                    <TextInput
-                      className="w-full"
+                    <Input
+                      className="w-full bg-background"
                       value={editUrl}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setEditUrl(e.target.value)
                       }
                       placeholder="https://example.com"
                     />
-                    <TextInput
-                      className="w-full"
+                    <Input
+                      className="w-full bg-background"
                       value={editLabel}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setEditLabel(e.target.value)
@@ -213,8 +213,8 @@ export function LinksSection({
           Add New Link
         </p>
         <div className="space-y-3">
-          <TextInput
-            className="w-full"
+          <Input
+            className="w-full bg-background"
             value={newUrl}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setNewUrl(e.target.value)
@@ -225,8 +225,8 @@ export function LinksSection({
             }}
           />
           <div className="flex gap-2">
-            <TextInput
-              className="flex-1"
+            <Input
+              className="flex-1 bg-background"
               value={newLabel}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setNewLabel(e.target.value)

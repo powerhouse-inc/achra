@@ -1,4 +1,11 @@
 import { Sparkles, X, Check } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@achra/ui/select";
 import type { BuilderSkill } from "document-models/builder-profile";
 
 const SKILL_OPTIONS: {
@@ -130,38 +137,21 @@ export function SkillsSection({
 
       {/* Add Skill Dropdown */}
       {availableSkills.length > 0 && (
-        <div className="relative">
-          <select
-            className="w-full px-4 py-3 pr-10 border border-input rounded-xl text-sm bg-background hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-colors appearance-none cursor-pointer"
-            onChange={(e) => {
-              if (e.target.value) {
-                onAddSkill(e.target.value as BuilderSkill);
-                e.target.value = "";
-              }
-            }}
-            defaultValue=""
-          >
-            <option value="" disabled>
-              + Add a skill...
-            </option>
+        <Select
+          value=""
+          onValueChange={(value) => onAddSkill(value as BuilderSkill)}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="+ Add a skill..." />
+          </SelectTrigger>
+          <SelectContent>
             {availableSkills.map((option) => (
-              <option key={option.value} value={option.value}>
+              <SelectItem key={option.value} value={option.value}>
                 {option.label}
-              </option>
+              </SelectItem>
             ))}
-          </select>
-          <svg
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none w-4 h-4"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
+          </SelectContent>
+        </Select>
       )}
 
       {/* All skills added message */}

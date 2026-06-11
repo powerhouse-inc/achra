@@ -20,18 +20,18 @@ export const NotificationDialog = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="mx-4 w-full max-w-md rounded-2xl border border-black/10 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.15)]">
+      <div className="mx-4 w-full max-w-md rounded-2xl border border-border bg-card shadow-lg">
         {/* Header */}
         <div
-          className={`border-b border-black/10 px-6 py-4 ${
-            type === "error" ? "bg-red-50" : "bg-emerald-50"
+          className={`border-b border-border px-6 py-4 ${
+            type === "error" ? "bg-destructive/15" : "bg-status-success/20"
           }`}
         >
           <div className="flex items-center gap-3">
             {type === "error" ? (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/15">
                 <svg
-                  className="h-5 w-5 text-red-600"
+                  className="h-5 w-5 text-destructive"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -45,9 +45,9 @@ export const NotificationDialog = ({
                 </svg>
               </div>
             ) : (
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-status-success/20">
                 <svg
-                  className="h-5 w-5 text-emerald-600"
+                  className="h-5 w-5 text-status-success"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -63,7 +63,7 @@ export const NotificationDialog = ({
             )}
             <h3
               className={`text-lg font-semibold ${
-                type === "error" ? "text-red-900" : "text-emerald-900"
+                type === "error" ? "text-destructive" : "text-status-success"
               }`}
             >
               {title}
@@ -74,18 +74,18 @@ export const NotificationDialog = ({
         {/* Body */}
         <div className="px-6 py-5">
           {message && (
-            <p className="text-sm leading-relaxed text-gray-700">{message}</p>
+            <p className="text-sm leading-relaxed text-foreground">{message}</p>
           )}
           {details && details.length > 0 && (
-            <div className="mt-4 rounded-lg border border-black/10 bg-gray-50 p-4">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-600">
+            <div className="mt-4 rounded-lg border border-border bg-muted p-4">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Affected Items:
               </p>
               <ul className="space-y-1">
                 {details.map((item, idx) => (
                   <li
                     key={idx}
-                    className="text-sm text-gray-700 before:mr-2 before:content-['•']"
+                    className="text-sm text-foreground before:mr-2 before:content-['•']"
                   >
                     {item}
                   </li>
@@ -96,13 +96,13 @@ export const NotificationDialog = ({
         </div>
 
         {/* Footer */}
-        <div className="border-t border-black/10 px-6 py-4">
+        <div className="border-t border-border px-6 py-4">
           <button
             onClick={onClose}
-            className={`w-full rounded-lg px-4 py-2.5 text-sm font-semibold text-white transition ${
+            className={`w-full rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
               type === "error"
-                ? "bg-red-600 hover:bg-red-700"
-                : "bg-emerald-600 hover:bg-emerald-700"
+                ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                : "bg-status-success text-primary-foreground hover:bg-status-success/90"
             }`}
           >
             Got it

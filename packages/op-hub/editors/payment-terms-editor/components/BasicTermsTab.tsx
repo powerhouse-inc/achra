@@ -12,6 +12,13 @@ import {
   type PaymentTermsStatus,
   type PaymentTermsAction,
 } from "document-models/payment-terms";
+import {
+  checkboxClass,
+  checkboxLabelClass,
+  fieldLabelClass,
+  primaryButtonClass,
+  secondaryButtonClass,
+} from "./uiClasses.js";
 
 export interface BasicTermsTabProps {
   state: PaymentTermsState;
@@ -100,12 +107,14 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
     return (
       <div className="space-y-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Basic Information</h2>
+          <h2 className="text-xl font-semibold text-foreground">
+            Basic Information
+          </h2>
           <Button
             onClick={() => setIsEditing(true)}
             color="light"
             size="sm"
-            className="cursor-pointer hover:bg-blue-600 hover:text-white"
+            className={primaryButtonClass}
           >
             Edit Terms
           </Button>
@@ -113,50 +122,50 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Proposer
             </label>
-            <p className="text-lg">{state.proposer || "Not set"}</p>
+            <p className="text-lg text-foreground">{state.proposer || "Not set"}</p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Payer
             </label>
-            <p className="text-lg">{state.payer || "Not set"}</p>
+            <p className="text-lg text-foreground">{state.payer || "Not set"}</p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Currency
             </label>
-            <p className="text-lg">{state.currency}</p>
+            <p className="text-lg text-foreground">{state.currency}</p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Payment Model
             </label>
-            <p className="text-lg">{state.paymentModel.replace(/_/g, " ")}</p>
+            <p className="text-lg text-foreground">{state.paymentModel.replace(/_/g, " ")}</p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Total Amount
             </label>
-            <p className="text-lg">
+            <p className="text-lg text-foreground">
               {state.totalAmount
                 ? `${state.totalAmount.value} ${state.totalAmount.unit}`
                 : "Not set"}
             </p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Status
             </label>
-            <p className="text-lg">{state.status}</p>
+            <p className="text-lg text-foreground">{state.status}</p>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className={fieldLabelClass}>
               Escrow
             </label>
-            <p className="text-lg">
+            <p className="text-lg text-foreground">
               {state.escrowDetails && state.escrowDetails.releaseConditions
                 ? "Enabled"
                 : "Disabled"}
@@ -170,12 +179,14 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Edit Basic Terms</h2>
+        <h2 className="text-xl font-semibold text-foreground">
+          Edit Basic Terms
+        </h2>
       </div>
 
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Proposer *
           </label>
           <TextInput
@@ -189,7 +200,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Payer *
           </label>
           <TextInput
@@ -203,7 +214,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Currency *
           </label>
           <Select
@@ -222,7 +233,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Payment Model *
           </label>
           <Select
@@ -241,7 +252,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Total Amount
           </label>
           <TextInput
@@ -256,7 +267,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className={fieldLabelClass}>
             Status *
           </label>
           <Select
@@ -287,12 +298,9 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
               onChange={(e) =>
                 setFormData({ ...formData, useEscrow: e.target.checked })
               }
-              className="mr-2 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className={checkboxClass}
             />
-            <label
-              htmlFor="useEscrow"
-              className="text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="useEscrow" className={checkboxLabelClass}>
               Use Escrow
             </label>
           </div>
@@ -304,7 +312,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
           type="submit"
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-blue-600 hover:text-white"
+          className={primaryButtonClass}
         >
           Save Terms
         </Button>
@@ -313,7 +321,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
           onClick={handleCancel}
           color="light"
           size="sm"
-          className="cursor-pointer hover:bg-gray-600 hover:text-white"
+          className={secondaryButtonClass}
         >
           Cancel
         </Button>

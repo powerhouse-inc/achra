@@ -22,7 +22,7 @@ export function ProfileHeader({ builderProfileDoc }: ProfileHeaderProps) {
     .toUpperCase();
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 via-indigo-50/40 to-blue-50/30 p-8 border border-slate-200/60">
+    <div className="overflow-hidden rounded-2xl bg-card p-8 border border-border shadow-sm">
       {/* Content */}
       <div className="flex items-center gap-6">
         {/* Avatar */}
@@ -31,7 +31,7 @@ export function ProfileHeader({ builderProfileDoc }: ProfileHeaderProps) {
             <img
               src={icon}
               alt={displayName}
-              className="h-20 w-20 rounded-2xl object-cover shadow-lg shadow-slate-300/50 ring-4 ring-white/80"
+              className="h-20 w-20 rounded-2xl object-cover shadow-lg ring-4 ring-border"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
                 const fallback = e.currentTarget.nextElementSibling;
@@ -42,21 +42,25 @@ export function ProfileHeader({ builderProfileDoc }: ProfileHeaderProps) {
             />
           ) : null}
           <div
-            className={`h-20 w-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 shadow-lg shadow-indigo-400/30 ring-4 ring-white/80 ${
+            className={`h-20 w-20 rounded-2xl bg-gradient-to-br from-primary to-purple shadow-lg shadow-primary/30 ring-4 ring-border ${
               icon ? "hidden" : "flex"
             } items-center justify-center`}
           >
-            <span className="text-2xl font-bold text-white">{initials}</span>
+            <span className="text-2xl font-bold text-foreground">
+              {initials}
+            </span>
           </div>
         </div>
 
         {/* Text content */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             {displayName}
           </h1>
           {slug && (
-            <p className="mt-1 text-base font-medium text-slate-500">@{slug}</p>
+            <p className="mt-1 text-base font-medium text-muted-foreground">
+              @{slug}
+            </p>
           )}
         </div>
       </div>
