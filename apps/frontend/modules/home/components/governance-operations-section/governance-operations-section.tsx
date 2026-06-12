@@ -1,145 +1,60 @@
-import {
-  BadgeDollarSign,
-  BrainCog,
-  Compass,
-  Earth,
-  FileCodeCorner,
-  Handshake,
-  Network,
-  Scale,
-  ShieldUser,
-  SquareKanban,
-  Users,
-  Vote,
-} from 'lucide-react'
-
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
+import { SectionHeading } from '@/modules/home/components/section-heading'
+import { Reveal } from '@/shared/components/reveal'
 import { GovernanceFeatureRow } from './governance-feature-row'
+import { GOVERNANCE_ROWS } from './governance-rows'
+import { GovernanceScrollytelling } from './governance-scrollytelling'
+
+// Rendered twice (pinned panel on desktop, normal flow on mobile) — only the
+// desktop copy carries the id the section's aria-labelledby points to.
+function GovernanceHeader({ withId = false }: { withId?: boolean }) {
+  return (
+    <header className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
+      <SectionHeading
+        id={withId ? 'governance-operations-heading' : undefined}
+        title="Governance & Operations"
+        highlight="Governance"
+      />
+      <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
+        Move beyond outsourcing and unlock full autonomy.
+        <br /> Run your entire network organization through Achra.
+      </AnimatedSubtitle>
+    </header>
+  )
+}
 
 function GovernanceOperationsSection() {
   return (
     <section
-      className="w-full py-16 sm:py-20 lg:py-24"
+      className="w-full py-16 sm:py-20 lg:py-0"
       aria-labelledby="governance-operations-heading"
     >
-      <div className="container flex flex-col gap-8 lg:gap-20">
-        <header className="mx-auto flex max-w-2xl flex-col gap-4 text-center">
-          <h2
-            id="governance-operations-heading"
-            className="text-foreground text-3xl font-semibold tracking-tight text-balance sm:text-4xl"
-          >
-            Governance &amp; Operations
-          </h2>
-          <AnimatedSubtitle className="text-foreground/80 text-base leading-relaxed text-pretty sm:text-lg">
-            Move beyond outsourcing and unlock full autonomy.
-            <br /> Run your entire network organization through Achra.
-          </AnimatedSubtitle>
-        </header>
+      <div className="container">
+        {/* pinned scroll story on desktop — the header pins with it */}
+        <div className="hidden lg:block">
+          <GovernanceScrollytelling header={<GovernanceHeader withId />} />
+        </div>
 
-        <div className="flex flex-col gap-14 lg:gap-18">
-          <GovernanceFeatureRow
-            imageSrc="/home/governance-operations/governance-executable.png"
-            imageAlt="Achra governance flows connecting approvals, voting, and automated payouts"
-            imageWidth={720}
-            imageHeight={406}
-            imagePosition="left"
-            labelStart="Achra"
-            labelEnd="Makes Governance Executable"
-            description="Achra integrates with the governance system of your choice and transforms approvals and rules into workflows, payouts, and verifiable records so organizations can move with clarity and confidence."
-            bulletItems={[
-              {
-                id: 'programmable-governance',
-                icon: BrainCog,
-                content: 'Programmable governance automates approvals and payouts.',
-              },
-              {
-                id: 'proposals-voting',
-                icon: Vote,
-                content: 'Supports proposals, voting, and rules.',
-              },
-              {
-                id: 'scoped-authority',
-                icon: ShieldUser,
-                content: 'Scoped authority enables safe, limited delegation.',
-              },
-              {
-                id: 'logged-auditable',
-                icon: FileCodeCorner,
-                content: 'Actions are logged and auditable.',
-              },
-              {
-                id: 'atlas-workflows',
-                icon: Earth,
-                content: 'Atlas turns contracts into self-running workflows.',
-              },
-            ]}
-          />
-
-          <GovernanceFeatureRow
-            imageSrc="/home/governance-operations/scalable-operations.png"
-            imageAlt="Operational marketplace connecting legal, finance, and people ops for network organizations"
-            imageWidth={720}
-            imageHeight={416}
-            imagePosition="right"
-            labelStart="Scalable"
-            labelEnd="Operations for Network Orgs"
-            description="Every network has its own unique set of operational needs: legal, finance, people and more. Achra brings them all into one connected marketplace, so networks can scale without chaos."
-            bulletItems={[
-              {
-                id: 'legal-ops',
-                icon: Scale,
-                content: 'Legal Ops handles setup, contracts, and IP protection.',
-              },
-              {
-                id: 'finance-ops',
-                icon: BadgeDollarSign,
-                content: 'Finance Ops automates budgets, payouts, and reporting.',
-              },
-              {
-                id: 'people-ops',
-                icon: Users,
-                content: 'People Ops streamlines hiring and onboarding.',
-              },
-            ]}
-          />
-
-          <GovernanceFeatureRow
-            imageSrc="/home/governance-operations/integrated-team.png"
-            imageAlt="Achra control center for teams to manage runway, services, and operations"
-            imageWidth={720}
-            imageHeight={371}
-            imagePosition="left"
-            labelStart="Integrated"
-            labelEnd="Team Management"
-            description="Whether you're an individual contributor, a dev shop, or a larger network participant, Achra gives you a dedicated control center to run your work, connect services, and manage operations in one place."
-            bulletItems={[
-              {
-                id: 'core-tools',
-                icon: Scale,
-                content: 'Operate with confidence with core tools for any team size.',
-              },
-              {
-                id: 'runway-balance',
-                icon: SquareKanban,
-                content: 'Manage your runway track balance, income, and burn in real time.',
-              },
-              {
-                id: 'support-services',
-                icon: Handshake,
-                content: 'Support services connect to essential marketplace tools.',
-              },
-              {
-                id: 'unified-control',
-                icon: Network,
-                content: 'Unified control manage all operations from one place.',
-              },
-              {
-                id: 'scalable-setup',
-                icon: Compass,
-                content: 'Scalable setup built for individuals, teams, and networks alike.',
-              },
-            ]}
-          />
+        {/* stacked rows below lg */}
+        <div className="flex flex-col gap-8 lg:hidden">
+          <GovernanceHeader />
+          <div className="flex flex-col gap-14">
+            {GOVERNANCE_ROWS.map((row, index) => (
+              <Reveal key={row.id} delay={0.05}>
+                <GovernanceFeatureRow
+                  imageSrc={row.imageSrc}
+                  imageAlt={row.imageAlt}
+                  imageWidth={row.imageWidth}
+                  imageHeight={row.imageHeight}
+                  imagePosition={index % 2 === 1 ? 'right' : 'left'}
+                  labelStart={row.labelStart}
+                  labelEnd={row.labelEnd}
+                  description={row.description}
+                  bulletItems={row.bulletItems}
+                />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
