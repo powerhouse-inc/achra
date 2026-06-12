@@ -58,7 +58,9 @@ function GovernanceFeatureRow({
         )}
       >
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-lg font-semibold tracking-tight sm:text-2xl">
-          <span className="text-primary">{labelStart}</span>
+          <span className="from-primary to-fusion bg-linear-to-r bg-clip-text text-transparent">
+            {labelStart}
+          </span>
           <span className="text-foreground">{labelEnd}</span>
         </div>
         <p className="text-foreground/80 text-base leading-relaxed text-pretty">{description}</p>
