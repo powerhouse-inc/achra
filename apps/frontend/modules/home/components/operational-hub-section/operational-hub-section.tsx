@@ -5,36 +5,56 @@ import { SectionHeading } from '@/modules/home/components/section-heading'
 import { OPERATIONAL_HUB_URL } from '@/modules/shared/lib/constants'
 import { Reveal } from '@/shared/components/reveal'
 import { DashboardCard } from './dashboard-card'
+import { FloatingOpsChips } from './floating-ops-chips'
 
 function OperationalHubSection() {
   return (
     <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="operational-hub-heading">
-      <div className="container mx-auto grid max-w-2xl grid-cols-1 items-center gap-12 xl:max-w-6xl xl:grid-cols-[minmax(0,24rem)_1fr] xl:gap-x-16 xl:gap-y-0">
-        <div className="relative order-2 flex justify-center xl:order-1 xl:justify-end">
-          {/* brand glow + dotted texture anchoring the live dashboard mock */}
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="bg-primary/15 absolute top-1/2 left-1/2 size-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-            <div className="bg-fusion/10 absolute top-1/4 left-1/3 size-56 -translate-x-1/2 rounded-full blur-3xl" />
-            <DecorationDots
-              rows={7}
-              columns={7}
-              dotSize={3}
-              gap={14}
-              fade={{ direction: 'bottom-right', from: 0, to: 0.4 }}
-              className="text-primary absolute -top-6 -left-2 opacity-60 sm:left-6"
-            />
-            <DecorationDots
-              rows={6}
-              columns={6}
-              dotSize={3}
-              gap={14}
-              fade={{ direction: 'top-left', from: 0, to: 0.35 }}
-              className="text-primary absolute -right-2 -bottom-6 opacity-60 sm:right-6"
-            />
+      <div className="container mx-auto grid max-w-2xl grid-cols-1 items-center gap-4 xl:max-w-6xl xl:grid-cols-2 xl:gap-x-10 xl:gap-y-0">
+        <div className="relative order-2 flex justify-center xl:order-1">
+          {/* floating product shot: the live dashboard as a layered deck with
+              the four ops capabilities drifting around it as glass chips */}
+          <div className="relative flex h-[540px] w-full max-w-[560px] items-center justify-center sm:h-[580px]">
+            <div aria-hidden className="pointer-events-none absolute inset-0">
+              <div className="bg-primary/15 absolute top-1/2 left-1/2 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+              <div className="bg-fusion/10 absolute top-1/4 left-1/3 size-56 -translate-x-1/2 rounded-full blur-3xl" />
+              <DecorationDots
+                rows={7}
+                columns={7}
+                dotSize={3}
+                gap={14}
+                fade={{ direction: 'bottom-right', from: 0, to: 0.4 }}
+                className="text-primary absolute top-6 left-2 opacity-60 sm:left-10"
+              />
+              <DecorationDots
+                rows={6}
+                columns={6}
+                dotSize={3}
+                gap={14}
+                fade={{ direction: 'top-left', from: 0, to: 0.35 }}
+                className="text-primary absolute right-2 bottom-6 opacity-60 sm:right-10"
+              />
+            </div>
+
+            <FloatingOpsChips className="absolute inset-0 z-2" />
+
+            <Reveal y={48} className="relative z-1">
+              <div className="relative">
+                {/* deck of settled cards peeking below the live one */}
+                <div
+                  aria-hidden
+                  className="bg-card ring-primary/15 absolute inset-0 translate-y-10 scale-[0.86] rotate-3 rounded-2xl shadow-lg ring-1"
+                />
+                <div
+                  aria-hidden
+                  className="bg-card ring-border absolute inset-0 translate-y-5 scale-[0.93] -rotate-2 rounded-2xl shadow-lg ring-1"
+                />
+                <div className="relative z-1">
+                  <DashboardCard />
+                </div>
+              </div>
+            </Reveal>
           </div>
-          <Reveal y={48} className="relative">
-            <DashboardCard />
-          </Reveal>
         </div>
 
         <div className="order-1 flex flex-col items-center gap-8 text-center xl:order-2 xl:items-start xl:text-left">
