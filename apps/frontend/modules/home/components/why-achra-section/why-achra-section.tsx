@@ -1,141 +1,167 @@
 import { cn } from '@achra/ui/lib/utils'
+import {
+  BrainCircuit,
+  Coins,
+  type LucideIcon,
+  ScanSearch,
+  ShieldCheck,
+  Workflow,
+} from 'lucide-react'
 import Image from 'next/image'
 
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { DecorationDots } from '@/modules/home/components/decoration-dots'
 import { SectionHeading } from '@/modules/home/components/section-heading'
 import Sparkles from '@/public/home/why-achra/sparkles.svg'
+import { CardAurora } from '@/shared/components/card-aurora'
 import { GradientFlow } from '@/shared/components/gradient-flow'
 import { InternalLink } from '@/shared/components/internal-link'
+import { Reveal } from '@/shared/components/reveal'
 import type { Route } from 'next'
-import type { ReactNode } from 'react'
 
-const PANEL_CLASS =
-  'relative overflow-hidden rounded-3xl border border-black/6 bg-card shadow-lg lg:sticky lg:min-h-[24rem] lg:[&>div:last-child]:h-full lg:[&>div:last-child]:items-center'
+const tileClass =
+  'relative flex h-full w-full flex-col gap-4 overflow-hidden rounded-2xl bg-card p-8 shadow-xs ring-1 ring-black/6 transition-shadow duration-300 hover:shadow-md lg:p-10'
 
-interface PanelEntryProps {
-  title?: string
-  children: ReactNode
-  footer?: ReactNode
-  icon?: ReactNode
-}
-
-function PanelEntry({ title, children, footer, icon }: PanelEntryProps) {
+function TileIcon({ icon: Icon }: { icon: LucideIcon }) {
   return (
-    <div className="relative z-1 flex flex-col gap-5 p-8 sm:p-10 lg:p-14">
-      {icon}
-      {title && (
-        <h3 className="text-foreground text-2xl font-bold tracking-tight xl:text-3xl">{title}</h3>
-      )}
-      <div className="text-foreground/80 max-w-prose text-base leading-relaxed xl:text-lg">
-        {children}
-      </div>
-      {footer}
+    <div className="bg-primary/10 flex size-11 shrink-0 items-center justify-center rounded-xl">
+      <Icon className="text-primary size-5.5" aria-hidden />
     </div>
   )
 }
 
-/**
- * The six value props as three full-width panels that stack over each other
- * while scrolling (CSS sticky with stepped offsets — no scroll hijacking).
- */
+function TileHeader({ icon, children }: { icon: LucideIcon; children: string }) {
+  return (
+    <div className="flex items-center gap-3.5">
+      <TileIcon icon={icon} />
+      <h3 className="text-foreground text-xl font-semibold tracking-tight xl:text-2xl">
+        {children}
+      </h3>
+    </div>
+  )
+}
+
+function TileCopy({ children }: { children: string }) {
+  return <p className="text-foreground/80 max-w-prose text-base leading-relaxed">{children}</p>
+}
+
 function WhyAchraSection() {
   return (
     <section className="w-full py-16 sm:py-20 lg:py-24" aria-labelledby="why-achra-heading">
       <div className="container">
-        <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
-          <SectionHeading id="why-achra-heading" title="Why Achra" highlight="Achra" />
-          <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
-            Run your entire network organization through Achra
-          </AnimatedSubtitle>
-        </header>
+        <Reveal>
+          <header className="mx-auto mb-12 max-w-2xl text-center sm:mb-14 lg:mb-16">
+            <SectionHeading id="why-achra-heading" title="Why Achra" highlight="Achra" />
+            <AnimatedSubtitle className="text-foreground/80 mt-4 text-base leading-relaxed text-pretty sm:text-lg">
+              Run your entire network organization through Achra
+            </AnimatedSubtitle>
+          </header>
+        </Reveal>
 
-        <div className="flex flex-col gap-6 lg:gap-0">
-          {/* 1 — visibility + governance */}
-          <div className="lg:h-[62vh]">
-            <article className={cn(PANEL_CLASS, 'lg:top-28')}>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
+          {/* visibility */}
+          <Reveal className="flex lg:col-span-7">
+            <article className={tileClass}>
               <DecorationDots
-                rows={6}
-                columns={10}
+                rows={5}
+                columns={9}
                 dotSize={3}
                 gap={14}
-                fade={{ direction: 'bottom-right', from: 0, to: 0.4 }}
-                className="text-primary pointer-events-none absolute top-8 right-10 opacity-60"
+                fade={{ direction: 'bottom-left', from: 0, to: 0.35 }}
+                className="text-primary pointer-events-none absolute top-8 right-8 opacity-60"
               />
-              <div className="lg:divide-border grid grid-cols-1 lg:grid-cols-2 lg:divide-x">
-                <PanelEntry title="Regain visibility">
-                  Transparency by default with structured RFPs, milestones, and audit trails so
-                  builders discover opportunities and operators see exactly where their services are
-                  needed.
-                </PanelEntry>
-                <PanelEntry title="Network Governance">
-                  Codify rules, approvals, and execution with Atlas. Operate securely with logged
-                  decisions, scoped permissions, and auditable changes.
-                </PanelEntry>
-              </div>
+              <TileHeader icon={ScanSearch}>Regain visibility</TileHeader>
+              <TileCopy>
+                Transparency by default with structured RFPs, milestones, and audit trails so
+                builders discover opportunities and operators see exactly where their services are
+                needed.
+              </TileCopy>
             </article>
-          </div>
+          </Reveal>
 
-          {/* 2 — payments + AI on a live gradient wash */}
-          <div className="lg:h-[62vh]">
-            <article className={cn(PANEL_CLASS, 'lg:top-32')}>
-              <GradientFlow preset="valueFlow" className="absolute inset-0" />
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <PanelEntry title="Global Payments at Scale">
+          {/* governance */}
+          <Reveal delay={0.08} className="flex lg:col-span-5">
+            <article className={tileClass}>
+              <TileHeader icon={ShieldCheck}>Network Governance</TileHeader>
+              <TileCopy>
+                Codify rules, approvals, and execution with Atlas. Operate securely with logged
+                decisions, scoped permissions, and auditable changes.
+              </TileCopy>
+            </article>
+          </Reveal>
+
+          {/* payments — animated violet/pink bloom */}
+          <Reveal delay={0.05} className="flex lg:col-span-5">
+            <article className={tileClass}>
+              <GradientFlow preset="payments" className="absolute inset-0" />
+              <div className="relative z-1 flex flex-col gap-4">
+                <TileHeader icon={Coins}>Global Payments at Scale</TileHeader>
+                <TileCopy>
                   Enable milestone-based payouts with stablecoins. Built-in collection and automated
                   tax reporting (e.g., 1099/W-9) lets your network scale globally without the
                   compliance chaos.
-                </PanelEntry>
-                <PanelEntry
-                  title="AI-Ready Infrastructure"
-                  icon={<Sparkles className="absolute top-6 right-6 size-9" aria-hidden />}
-                >
+                </TileCopy>
+              </div>
+            </article>
+          </Reveal>
+
+          {/* AI — animated blue/violet glow */}
+          <Reveal delay={0.12} className="flex lg:col-span-7">
+            <article className={tileClass}>
+              <GradientFlow preset="ai" className="absolute inset-0" />
+              <Sparkles
+                className="pointer-events-none absolute top-6 right-6 z-1 size-9"
+                aria-hidden
+              />
+              <div className="relative z-1 flex flex-col gap-4">
+                <TileHeader icon={BrainCircuit}>AI-Ready Infrastructure</TileHeader>
+                <TileCopy>
                   Our operational patterns are structured to automate the busywork and make
                   data/flows accessible where AI agents can be first-class participants, not
                   afterthoughts.
-                </PanelEntry>
+                </TileCopy>
               </div>
             </article>
-          </div>
+          </Reveal>
 
-          {/* 3 — workflows + use cases CTA */}
-          <div className="lg:h-[62vh]">
-            <article className={cn(PANEL_CLASS, 'lg:top-36')}>
-              <GradientFlow preset="useCases" animated={false} className="absolute inset-0" />
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <PanelEntry title="Best-Practice Workflows">
+          {/* workflows — copy beside the template illustration */}
+          <Reveal delay={0.05} className="flex sm:col-span-2 lg:col-span-7">
+            <article className={cn(tileClass, 'lg:flex-row lg:items-center lg:gap-10')}>
+              <div className="flex min-w-0 flex-col gap-4">
+                <TileHeader icon={Workflow}>Best-Practice Workflows</TileHeader>
+                <TileCopy>
                   Launch faster with standardized templates and workflows designed for distributed
                   teams from posting an RFP to tracking deliverables and releasing payouts.
-                </PanelEntry>
-                <PanelEntry
-                  footer={
-                    <InternalLink
-                      variant="link"
-                      href={'/cases' as Route}
-                      className="w-fit pl-0! text-base"
-                    >
-                      View Use Cases
-                    </InternalLink>
-                  }
-                >
-                  <div className="flex flex-col gap-6">
-                    <div className="relative h-[130px] w-[245px] overflow-hidden">
-                      <Image
-                        src="/home/why-achra/workflows.webp"
-                        alt="Workflow templates: connected steps from RFP to payouts"
-                        fill
-                        unoptimized // optimizing it makes it blurry
-                        className="object-cover object-center"
-                        priority={false}
-                        sizes="245px"
-                      />
-                    </div>
-                    <p>Learn more about how Achra supercharges organisations</p>
-                  </div>
-                </PanelEntry>
+                </TileCopy>
+              </div>
+              <div className="relative h-[130px] w-[245px] shrink-0 overflow-hidden">
+                <Image
+                  src="/home/why-achra/workflows.webp"
+                  alt="Workflow templates: connected steps from RFP to payouts"
+                  fill
+                  unoptimized // optimizing it makes it blurry
+                  className="object-cover object-center"
+                  priority={false}
+                  sizes="245px"
+                />
               </div>
             </article>
-          </div>
+          </Reveal>
+
+          {/* use-cases CTA — living silk accent */}
+          <Reveal delay={0.12} className="flex sm:col-span-2 lg:col-span-5">
+            <article className={cn(tileClass, 'justify-center')}>
+              <CardAurora className="absolute inset-0" />
+              <div className="relative z-1 flex flex-col items-center gap-4 text-center">
+                <p className="text-foreground max-w-[18rem] text-base leading-relaxed font-medium">
+                  Learn more about how Achra supercharges organisations
+                </p>
+                <InternalLink variant="link" href={'/cases' as Route} className="text-base">
+                  View Use Cases
+                </InternalLink>
+              </div>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>
