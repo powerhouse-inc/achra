@@ -85,14 +85,16 @@ function GovernanceScrollytelling({ header }: GovernanceScrollytellingProps) {
 
           {/* progress rail + copy */}
           <div className="flex gap-8 xl:gap-10">
-            <div className="relative flex flex-col items-center" aria-hidden>
-              <div className="bg-border relative h-full w-px overflow-hidden rounded-full">
+            <div className="relative flex w-9 flex-col items-center" aria-hidden>
+              {/* track runs from the center of the first step number to the
+                  center of the last one (button = size-9 + py-1 offset) */}
+              <div className="bg-border absolute top-[22px] bottom-[22px] left-1/2 w-px -translate-x-1/2 overflow-hidden rounded-full">
                 <motion.div
                   className="from-primary to-fusion absolute inset-x-0 top-0 origin-top bg-linear-to-b"
                   style={{ scaleY: railScale, height: '100%' }}
                 />
               </div>
-              <div className="absolute inset-y-0 flex flex-col justify-between py-1">
+              <div className="relative flex flex-1 flex-col justify-between py-1">
                 {rows.map((row, index) => (
                   <button
                     key={row.id}
