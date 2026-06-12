@@ -127,8 +127,9 @@ function WhyAchraSection() {
           {/* workflows — illustration on top, copy below; soft mask melts the
               image's own background into the card */}
           <Reveal delay={0.05} className="flex lg:col-span-7">
-            <article className={tileClass}>
-              <div className="relative h-[140px] w-[260px] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_55%,transparent_98%)]">
+            <article className={cn(tileClass, 'lg:flex-row lg:items-center lg:gap-10')}>
+              {/* illustration: on top when stacked, beside the copy when wide */}
+              <div className="relative h-[140px] w-[260px] shrink-0 [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_55%,transparent_98%)] lg:order-last">
                 <Image
                   src="/home/why-achra/workflows.webp"
                   alt="Workflow templates: connected steps from RFP to payouts"
@@ -139,11 +140,13 @@ function WhyAchraSection() {
                   sizes="260px"
                 />
               </div>
-              <TileHeader icon={Workflow}>Best-Practice Workflows</TileHeader>
-              <TileCopy>
-                Launch faster with standardized templates and workflows designed for distributed
-                teams from posting an RFP to tracking deliverables and releasing payouts.
-              </TileCopy>
+              <div className="flex min-w-0 flex-col gap-4">
+                <TileHeader icon={Workflow}>Best-Practice Workflows</TileHeader>
+                <TileCopy>
+                  Launch faster with standardized templates and workflows designed for distributed
+                  teams from posting an RFP to tracking deliverables and releasing payouts.
+                </TileCopy>
+              </div>
             </article>
           </Reveal>
 

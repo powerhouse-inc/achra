@@ -181,6 +181,9 @@ export function createGradientFlowScene(
     gl.canvas.style.width = '100%'
     gl.canvas.style.height = '100%'
     uAspect.value = clientWidth / clientHeight
+    // setSize clears the drawing buffer; repaint synchronously so the canvas
+    // never shows a cleared (black/transparent) frame while resizing
+    renderer.render({ scene: mesh })
   }
 
   const resizeObserver = new ResizeObserver(resize)
