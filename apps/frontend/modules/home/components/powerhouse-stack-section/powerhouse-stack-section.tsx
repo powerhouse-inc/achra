@@ -5,11 +5,14 @@ import Link from 'next/link'
 import { AnimatedSubtitle } from '@/modules/home/components/animated-subtitle'
 import { SectionHeading } from '@/modules/home/components/section-heading'
 import { GradientFlow } from '@/shared/components/gradient-flow'
+import { LightBeams } from '@/shared/components/light-beams'
 import { Reveal } from '@/shared/components/reveal'
 
-// always-white cards so they pop on the dark band
+// light cards pop on the dark band; each carries its product's pastel tint
+// (solid artwork colors — the band behind them is dark, so token alphas
+// would muddy instead of tint)
 const glassCardClass =
-  'relative flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-black/6'
+  'relative flex h-full w-full flex-col overflow-hidden rounded-2xl border shadow-lg'
 
 const descriptionClass =
   'w-full text-base font-medium leading-[150%] tracking-[-0.01em] text-neutral-700 sm:text-lg'
@@ -42,7 +45,12 @@ function PowerhouseStackSection() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           {/* Connect */}
           <Reveal className="flex">
-            <article className={cn(glassCardClass, 'px-8 pt-8 sm:px-10 sm:pt-10')}>
+            <article
+              className={cn(
+                glassCardClass,
+                'border-[rgb(221,208,250)] bg-[rgb(247,244,254)] px-8 pt-8 sm:px-10 sm:pt-10',
+              )}
+            >
               <div className="flex flex-col items-start gap-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +87,12 @@ function PowerhouseStackSection() {
 
           {/* Renown */}
           <Reveal delay={0.1} className="flex">
-            <article className={cn(glassCardClass, 'px-8 pt-8 sm:px-10 sm:pt-10')}>
+            <article
+              className={cn(
+                glassCardClass,
+                'border-[rgb(200,230,245)] bg-[rgb(239,248,255)] px-8 pt-8 sm:px-10 sm:pt-10',
+              )}
+            >
               <div className="flex flex-col items-start gap-4">
                 <Image
                   src="/home/powerhouse-stack/renown-logo.svg"
@@ -110,7 +123,12 @@ function PowerhouseStackSection() {
 
           {/* VETRA */}
           <Reveal delay={0.05} className="flex">
-            <article className={cn(glassCardClass, 'items-start gap-6 p-8 sm:p-10')}>
+            <article
+              className={cn(
+                glassCardClass,
+                'items-start gap-6 border-[rgb(180,235,210)] bg-[rgb(222,255,238)] p-8 sm:p-10',
+              )}
+            >
               <Image
                 src="/home/powerhouse-stack/vetra-logo.svg"
                 alt="Vetra"
@@ -139,27 +157,43 @@ function PowerhouseStackSection() {
             </article>
           </Reveal>
 
-          {/* Powerhouse */}
+          {/* Powerhouse — dark brand card with the powerhouse.io beam effect */}
           <Reveal delay={0.15} className="flex">
-            <article className={cn(glassCardClass, 'items-start gap-6 p-8 sm:p-10')}>
-              <Image
-                src="/home/powerhouse-stack/powerhouse-logo.svg"
-                alt="Powerhouse"
-                width={173}
-                height={20}
-                className="h-5 w-auto sm:h-6"
+            <article
+              className={cn(glassCardClass, 'items-start gap-6 border-white/15 p-8 sm:p-10')}
+            >
+              <LightBeams className="absolute inset-0" />
+              {/* scrim so the copy reads over the beams while the right side
+                  stays vivid */}
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-linear-to-r from-black/60 via-black/25 to-transparent"
               />
-              <p className={descriptionClass}>Learn More About the Powerhouse Stack</p>
-              <div className="mt-auto">
-                <Button
-                  asChild
-                  size="lg"
-                  className="shadow-primary h-10 rounded-lg border-0 px-5 text-sm font-medium"
-                >
-                  <Link href="https://powerhouse.io" target="_blank" rel="noopener noreferrer">
-                    Visit Powerhouse
-                  </Link>
-                </Button>
+              <div className="relative z-1 flex h-full w-full flex-col items-start gap-6 drop-shadow-[0_1px_10px_rgba(0,0,0,0.85)]">
+                <Image
+                  src="/home/powerhouse-stack/powerhouse-logo.svg"
+                  alt="Powerhouse"
+                  width={173}
+                  height={20}
+                  className="h-5 w-auto brightness-0 invert sm:h-6"
+                />
+                <p className="w-full text-base leading-[150%] font-medium tracking-[-0.01em] text-white sm:text-lg">
+                  Learn More About the Powerhouse Stack
+                </p>
+                <div className="mt-auto">
+                  <Button
+                    asChild
+                    size="lg"
+                    className={cn(
+                      'text-foreground h-10 rounded-lg border-0 bg-white px-5 text-sm font-medium',
+                      'transition-opacity hover:bg-white/95 hover:opacity-95',
+                    )}
+                  >
+                    <Link href="https://powerhouse.io" target="_blank" rel="noopener noreferrer">
+                      Visit Powerhouse
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </article>
           </Reveal>

@@ -68,7 +68,7 @@ function WhyAchraSection() {
                 dotSize={3}
                 gap={14}
                 fade={{ direction: 'bottom-left', from: 0, to: 0.35 }}
-                className="text-primary pointer-events-none absolute top-8 right-8 opacity-60"
+                className="text-primary pointer-events-none absolute top-3 right-3 opacity-60"
               />
               <TileHeader icon={ScanSearch}>Regain visibility</TileHeader>
               <TileCopy>
@@ -124,17 +124,11 @@ function WhyAchraSection() {
             </article>
           </Reveal>
 
-          {/* workflows — copy beside the template illustration */}
-          <Reveal delay={0.05} className="flex sm:col-span-2 lg:col-span-7">
-            <article className={cn(tileClass, 'lg:flex-row lg:items-center lg:gap-10')}>
-              <div className="flex min-w-0 flex-col gap-4">
-                <TileHeader icon={Workflow}>Best-Practice Workflows</TileHeader>
-                <TileCopy>
-                  Launch faster with standardized templates and workflows designed for distributed
-                  teams from posting an RFP to tracking deliverables and releasing payouts.
-                </TileCopy>
-              </div>
-              <div className="relative h-[130px] w-[245px] shrink-0 overflow-hidden">
+          {/* workflows — illustration on top, copy below; soft mask melts the
+              image's own background into the card */}
+          <Reveal delay={0.05} className="flex lg:col-span-7">
+            <article className={tileClass}>
+              <div className="relative h-[140px] w-[260px] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,black_55%,transparent_98%)]">
                 <Image
                   src="/home/why-achra/workflows.webp"
                   alt="Workflow templates: connected steps from RFP to payouts"
@@ -142,16 +136,22 @@ function WhyAchraSection() {
                   unoptimized // optimizing it makes it blurry
                   className="object-cover object-center"
                   priority={false}
-                  sizes="245px"
+                  sizes="260px"
                 />
               </div>
+              <TileHeader icon={Workflow}>Best-Practice Workflows</TileHeader>
+              <TileCopy>
+                Launch faster with standardized templates and workflows designed for distributed
+                teams from posting an RFP to tracking deliverables and releasing payouts.
+              </TileCopy>
             </article>
           </Reveal>
 
           {/* use-cases CTA — living silk accent */}
-          <Reveal delay={0.12} className="flex sm:col-span-2 lg:col-span-5">
+          <Reveal delay={0.12} className="flex lg:col-span-5">
             <article className={cn(tileClass, 'justify-center')}>
-              <CardAurora className="absolute inset-0" />
+              {/* softened so the silk reads as a wash behind the CTA copy */}
+              <CardAurora className="absolute inset-0 opacity-55" />
               <div className="relative z-1 flex flex-col items-center gap-4 text-center">
                 <p className="text-foreground max-w-[18rem] text-base leading-relaxed font-medium">
                   Learn more about how Achra supercharges organisations
