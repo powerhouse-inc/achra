@@ -4,6 +4,7 @@ import { cn } from '@achra/ui/lib/utils'
 import dynamic from 'next/dynamic'
 import { useMediaQuery } from 'usehooks-ts'
 import type { CSSProperties } from 'react'
+import { useNearViewport } from '@/shared/hooks/use-near-viewport'
 
 // The WebGL scene (ogl) loads in its own chunk, on the client only. Until it
 // paints (or when the user prefers reduced motion / WebGL is unavailable) the
@@ -37,11 +38,12 @@ function LightBeams({ className }: LightBeamsProps) {
     defaultValue: true,
     initializeWithValue: false,
   })
+  const [ref, near] = useNearViewport<HTMLDivElement>()
 
   return (
-    <div className={cn('pointer-events-none', className)} aria-hidden>
+    <div ref={ref} className={cn('pointer-events-none', className)} aria-hidden>
       <div className="absolute inset-0" style={FALLBACK_STYLE} />
-      {!prefersReducedMotion && <LightBeamsCanvas className="absolute inset-0" />}
+      {near && !prefersReducedMotion && <LightBeamsCanvas className="absolute inset-0" />}
     </div>
   )
 }
