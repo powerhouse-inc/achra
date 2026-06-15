@@ -20,6 +20,11 @@ function NavItem({ children, className, href, activeWhen, ...props }: NavItemPro
   return (
     <Link
       href={href}
+      // Don't speculatively prefetch the heavy app routes (network/services
+      // dashboards pull in the reactor SDK + document registry). On the
+      // marketing shell that prefetch saturates a throttled connection for no
+      // benefit; the route is fetched on hover/click instead. Overridable via props.
+      prefetch={false}
       className={cn(
         'text-foreground hover:text-foreground/50 flex items-center gap-1 text-base font-semibold',
         isItemActive && 'text-primary hover:text-primary',

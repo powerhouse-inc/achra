@@ -3,6 +3,7 @@
 import { cn } from '@achra/ui/lib/utils'
 import dynamic from 'next/dynamic'
 import { useMediaQuery } from 'usehooks-ts'
+import { useNearViewport } from '@/shared/hooks/use-near-viewport'
 import {
   GRADIENT_FLOW_PRESETS,
   type GradientFlowPresetName,
@@ -30,12 +31,13 @@ function GradientFlow({ preset, animated = true, className }: GradientFlowProps)
     defaultValue: true,
     initializeWithValue: false,
   })
+  const [ref, near] = useNearViewport<HTMLDivElement>()
   const { config, fallbackStyle } = GRADIENT_FLOW_PRESETS[preset]
 
   return (
-    <div className={cn('pointer-events-none', className)} aria-hidden>
+    <div ref={ref} className={cn('pointer-events-none', className)} aria-hidden>
       <div className="absolute inset-0" style={fallbackStyle} />
-      {animated && !prefersReducedMotion && (
+      {animated && near && !prefersReducedMotion && (
         <GradientFlowCanvas config={config} className="absolute inset-0" />
       )}
     </div>

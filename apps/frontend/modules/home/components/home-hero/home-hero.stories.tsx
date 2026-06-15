@@ -1,3 +1,4 @@
+import { HeroCopy } from './hero-copy'
 import { HomeHero } from './home-hero'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
@@ -17,4 +18,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    copy: <HeroCopy />,
+  },
+}

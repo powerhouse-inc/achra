@@ -11,6 +11,7 @@ function MobileNavItem({ link, pathname }: { link: NavbarLink; pathname: string 
     <DropdownMenuItem asChild className="p-2">
       <Link
         href={link.href}
+        prefetch={false}
         className={cn(
           'block w-full rounded-sm p-3 text-sm leading-none no-underline transition-colors outline-none select-none',
           isItemActive

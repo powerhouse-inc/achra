@@ -46,6 +46,27 @@
         rotate(calc((var(--angle) * -1deg) - 360deg));
     }
   }
+
+  /* CSS twin of BlurText's framer-motion keyframes (direction: bottom). Runs
+     automatically at first paint so the animated text is server-rendered and
+     never gated behind JS hydration — keeps it as a valid early LCP candidate. */
+  @keyframes blur-text-in {
+    0% {
+      filter: blur(10px);
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    50% {
+      filter: blur(5px);
+      opacity: 0.5;
+      transform: translateY(-5px);
+    }
+    100% {
+      filter: blur(0);
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @utility container {
