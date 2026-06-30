@@ -1,6 +1,6 @@
 {
   "name": "@powerhousedao/op-hub",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "license": "AGPL-3.0-only",
   "type": "module",
   "files": [
@@ -97,15 +97,15 @@
     "@electric-sql/pglite": "0.3.15",
     "@electric-sql/pglite-tools": "0.2.20",
     "@eslint/js": "^9.38.0",
-    "@powerhousedao/analytics-engine-core": "6.2.0-dev.11",
-    "@powerhousedao/connect": "6.2.0-dev.11",
-    "@powerhousedao/design-system": "6.2.0-dev.11",
+    "@powerhousedao/analytics-engine-core": "6.2.0-dev.42",
+    "@powerhousedao/connect": "6.2.0-dev.42",
+    "@powerhousedao/design-system": "6.2.0-dev.42",
     "@powerhousedao/document-engineering": "1.40.5",
-    "@powerhousedao/ph-cli": "6.2.0-dev.11",
-    "@powerhousedao/reactor": "6.2.0-dev.11",
-    "@powerhousedao/reactor-api": "6.2.0-dev.11",
-    "@powerhousedao/reactor-browser": "6.2.0-dev.11",
-    "@powerhousedao/shared": "6.2.0-dev.11",
+    "@powerhousedao/ph-cli": "6.2.0-dev.42",
+    "@powerhousedao/reactor": "6.2.0-dev.42",
+    "@powerhousedao/reactor-api": "6.2.0-dev.42",
+    "@powerhousedao/reactor-browser": "6.2.0-dev.42",
+    "@powerhousedao/shared": "6.2.0-dev.42",
     "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^24.9.2",
@@ -113,7 +113,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "4.1.1",
-    "document-model": "6.2.0-dev.11",
+    "document-model": "6.2.0-dev.42",
     "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -133,9 +133,9 @@
     "zod": "4.3.6"
   },
   "peerDependencies": {
-    "@powerhousedao/reactor-api": "6.2.0-dev.11",
-    "@powerhousedao/reactor-browser": "6.2.0-dev.11",
-    "document-model": "6.2.0-dev.11",
+    "@powerhousedao/reactor-api": "6.2.0-dev.42",
+    "@powerhousedao/reactor-browser": "6.2.0-dev.42",
+    "document-model": "6.2.0-dev.42",
     "graphql": "^16",
     "graphql-tag": "^2",
     "react": "^19",
@@ -143,5 +143,5 @@
     "zod": "^4"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "@powerhousedao/op-hub@0.0.33"
+  "_id": "@powerhousedao/op-hub@0.0.34"
 }
