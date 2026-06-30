@@ -285,7 +285,7 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
           >
             {linkText}
           </a>
-          <p className="font-medium">
+          <p className="font-medium text-foreground">
             Safe Transaction Hash:
             <span className="font-mono text-sm ml-2 break-all">
               {safeTxHash}
@@ -300,32 +300,30 @@ const InvoiceToGnosis: React.FC<InvoiceToGnosisProps> = ({
         docState.payments.length > 0 && (
           <>
             {docState.payments[docState.payments.length - 1].issue !== "" ? (
-              <div className="mt-4">
+              <div className="mt-4 p-4">
                 <p className="text-destructive font-medium">
                   Issue: {docState.payments[docState.payments.length - 1].issue}
                 </p>
               </div>
             ) : (
-              <div className="mt-4">
-                <div className="invoice-link text-primary hover:text-primary/80">
-                  <a
-                    className="view-invoice-button"
-                    href={`https://app.safe.global/transactions/queue?safe=${urlChainName}:${safeAddress}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {linkText}
-                  </a>
-                </div>
-                <p className="mt-4 font-medium">
+              <div className="mt-4 p-4 space-y-2">
+                <a
+                  className="text-primary hover:text-primary/80 underline block w-full"
+                  href={`https://app.safe.global/transactions/queue?safe=${urlChainName}:${safeAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {linkText}
+                </a>
+                <div className="mt-4 space-y-2 text-foreground">
                   Safe Transaction Hash:
-                  <span className="font-mono text-sm ml-2 break-all">
+                  <span className="font-mono text-sm ml-2 break-all text-foreground">
                     {
                       docState.payments[docState.payments.length - 1]
                         .processorRef
                     }
                   </span>
-                </p>
+                </div>
               </div>
             )}
           </>
