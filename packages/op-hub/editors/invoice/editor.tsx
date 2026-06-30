@@ -895,7 +895,9 @@ export default function Editor() {
         >
           {/* Issuer Section */}
           <div className="border border-border rounded-lg p-4 min-w-0 bg-card shadow-sm">
-            <h3 className="text-lg font-semibold mb-4 text-foreground">Issuer</h3>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">
+              Issuer
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="mb-2 relative isolate">
                 <label className="block mb-1 text-sm text-foreground">
@@ -966,7 +968,9 @@ export default function Editor() {
 
           {/* Payer Section */}
           <div className="border border-border rounded-lg p-4 min-w-0 bg-card shadow-sm">
-            <h3 className="text-lg font-semibold mb-4 text-foreground">Payer</h3>
+            <h3 className="text-lg font-semibold mb-4 text-foreground">
+              Payer
+            </h3>
             <div className="mb-2 w-64 relative isolate">
               <label className="block mb-1 text-sm text-foreground">
                 Due Date:

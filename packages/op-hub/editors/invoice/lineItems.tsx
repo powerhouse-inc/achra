@@ -749,7 +749,10 @@ export function LineItemsTable({
                       onEditingItemChange={onEditingItemChange}
                     />
                   ) : (
-                    <tr key={item.id} className="hover:bg-accent table-row text-foreground">
+                    <tr
+                      key={item.id}
+                      className="hover:bg-accent table-row text-foreground"
+                    >
                       <td className="border-b border-border p-3 table-cell">
                         {item.description}
                       </td>

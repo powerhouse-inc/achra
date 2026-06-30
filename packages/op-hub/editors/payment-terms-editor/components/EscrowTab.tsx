@@ -104,17 +104,13 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
         {state.escrowDetails && state.escrowDetails.releaseConditions ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className={fieldLabelClass}>
-                Amount Held
-              </label>
+              <label className={fieldLabelClass}>Amount Held</label>
               <p className="text-lg text-foreground">
                 {`${state.escrowDetails.amountHeld.value} ${state.escrowDetails.amountHeld.unit}`}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Escrow Provider
-              </label>
+              <label className={fieldLabelClass}>Escrow Provider</label>
               <p className="text-lg text-foreground">
                 {state.escrowDetails.escrowProvider || "Not specified"}
               </p>
@@ -128,9 +124,7 @@ export function EscrowTab({ state, dispatch }: EscrowTabProps) {
               </p>
             </div>
             <div className="col-span-1">
-              <label className={fieldLabelClass}>
-                Release Conditions
-              </label>
+              <label className={fieldLabelClass}>Release Conditions</label>
               <div className={readOnlyPanelClass}>
                 <p className="text-sm text-foreground">
                   {state.escrowDetails.releaseConditions}

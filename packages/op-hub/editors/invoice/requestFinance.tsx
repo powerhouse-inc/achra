@@ -274,18 +274,16 @@ const RequestFinance: React.FC<RequestFinanceProps> = ({
       {invoiceLink && (
         <div>
           <div className="direct-payment-status">
-            <p>{directPaymentStatus}</p>
+            <p className="text-foreground">{directPaymentStatus}</p>
           </div>
-          <div className="invoice-link text-primary hover:text-primary/80">
-            <a
-              href={invoiceLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="view-invoice-button"
-            >
-              {liktText}
-            </a>
-          </div>
+          <a
+            href={invoiceLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-primary/80 underline block w-full"
+          >
+            {liktText}
+          </a>
         </div>
       )}
       {!invoiceLink &&
@@ -300,19 +298,17 @@ const RequestFinance: React.FC<RequestFinanceProps> = ({
               </div>
             ) : (
               <div className="mt-4">
-                <div className="invoice-link text-primary hover:text-primary/80">
-                  <a
-                    className="view-invoice-button"
-                    href={
-                      docState.payments[docState.payments.length - 1]
-                        .processorRef ?? ""
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {liktText}
-                  </a>
-                </div>
+                <a
+                  className="text-primary hover:text-primary/80 underline block w-full"
+                  href={
+                    docState.payments[docState.payments.length - 1]
+                      .processorRef ?? ""
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {liktText}
+                </a>
               </div>
             )}
           </>

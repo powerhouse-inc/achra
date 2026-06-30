@@ -135,7 +135,11 @@ export function ImageUrlInput({
                   onLoad={() => setImageError(false)}
                 />
               ) : (
-                <Icon name="Image" size={24} className="text-muted-foreground" />
+                <Icon
+                  name="Image"
+                  size={24}
+                  className="text-muted-foreground"
+                />
               )}
             </div>
             <div className="min-w-0 flex-1 text-xs text-muted-foreground">

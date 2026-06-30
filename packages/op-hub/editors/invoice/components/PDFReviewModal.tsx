@@ -550,9 +550,7 @@ function FieldRow({
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <label className="text-xs font-medium text-foreground">
-          {label}
-        </label>
+        <label className="text-xs font-medium text-foreground">{label}</label>
         <div className="flex items-center gap-1">
           {isInvalid && (
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-status-warning bg-status-warning/15 px-1.5 py-0.5 rounded">

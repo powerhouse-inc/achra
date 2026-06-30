@@ -121,7 +121,10 @@ export default function Editor() {
             </div>
           </div>
 
-          <Section title="Details" description="Code, title, and workflow status">
+          <Section
+            title="Details"
+            description="Code, title, and workflow status"
+          >
             <div className="flex flex-row gap-6">
               <div className="flex-1">
                 <label className={fieldLabelClass}>Code</label>

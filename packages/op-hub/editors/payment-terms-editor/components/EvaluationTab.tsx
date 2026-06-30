@@ -117,33 +117,25 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
         {state.evaluation ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className={fieldLabelClass}>
-                Evaluation Frequency
-              </label>
+              <label className={fieldLabelClass}>Evaluation Frequency</label>
               <p className="text-lg text-foreground">
                 {state.evaluation.evaluationFrequency}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Evaluator Team
-              </label>
+              <label className={fieldLabelClass}>Evaluator Team</label>
               <p className="text-lg text-foreground">
                 {state.evaluation.evaluatorTeam}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Impacts Payout
-              </label>
+              <label className={fieldLabelClass}>Impacts Payout</label>
               <p className="text-lg text-foreground">
                 {state.evaluation.impactsPayout ? "Yes" : "No"}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Impacts Reputation
-              </label>
+              <label className={fieldLabelClass}>Impacts Reputation</label>
               <p className="text-lg text-foreground">
                 {state.evaluation.impactsReputation ? "Yes" : "No"}
               </p>
@@ -157,9 +149,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
               </p>
             </div>
             <div className="col-span-2">
-              <label className={fieldLabelClass}>
-                Evaluation Criteria
-              </label>
+              <label className={fieldLabelClass}>Evaluation Criteria</label>
               <div className={readOnlyPanelClass}>
                 <ul className="list-inside list-disc space-y-1 text-sm">
                   {state.evaluation.criteria.map((criterion, index) => (
@@ -245,10 +235,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
               }
               className={checkboxClass}
             />
-            <label
-              htmlFor="impactsPayout"
-              className={checkboxLabelClass}
-            >
+            <label htmlFor="impactsPayout" className={checkboxLabelClass}>
               Evaluation results impact payout
             </label>
           </div>
@@ -266,10 +253,7 @@ export function EvaluationTab({ state, dispatch }: EvaluationTabProps) {
               }
               className={checkboxClass}
             />
-            <label
-              htmlFor="impactsReputation"
-              className={checkboxLabelClass}
-            >
+            <label htmlFor="impactsReputation" className={checkboxLabelClass}>
               Evaluation results impact reputation
             </label>
           </div>

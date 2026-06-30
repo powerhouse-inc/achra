@@ -92,8 +92,8 @@ export default function Editor() {
         </h1>
         {state.category[0] ? (
           <span className="rounded-full bg-status-progress/15 px-3 py-1 text-xs font-medium text-status-progress">
-            {categoryOptions.find((c) => c.value === state.category[0])?.label ??
-              state.category[0]}
+            {categoryOptions.find((c) => c.value === state.category[0])
+              ?.label ?? state.category[0]}
           </span>
         ) : null}
       </div>

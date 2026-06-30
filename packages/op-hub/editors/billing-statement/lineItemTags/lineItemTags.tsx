@@ -179,9 +179,8 @@ export function LineItemTagsTable({
                   <Select
                     options={budgetOptions}
                     value={
-                      item.lineItemTag.find(
-                        (tag) => tag.dimension === "budget",
-                      )?.value || ""
+                      item.lineItemTag.find((tag) => tag.dimension === "budget")
+                        ?.value || ""
                     }
                     placeholder="Select Budget Allocation"
                     searchable={true}

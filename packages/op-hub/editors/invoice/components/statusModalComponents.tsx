@@ -70,7 +70,9 @@ export function IssueInvoiceModalContent({
         </div>
       )}
       <div>
-        <label className="block mb-1 text-sm text-foreground">Invoice Number:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Invoice Number:
+        </label>
         <InputField
           placeholder={"Add invoice number"}
           value={invoiceNoInput}
@@ -85,7 +87,9 @@ export function IssueInvoiceModalContent({
         />
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm text-foreground">Issue Date:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Issue Date:
+        </label>
         <DatePicker
           name="issueDate"
           className={String.raw`w-full p-0 bg-background`}
@@ -168,7 +172,9 @@ export function SchedulePaymentModalContent({
   return (
     <div className="w-full">
       <div>
-        <label className="block mb-1 text-sm text-foreground">Payment Reference:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Payment Reference:
+        </label>
         <Textarea
           autoExpand={true}
           placeholder={"Add payment reference"}
@@ -194,7 +200,9 @@ export function ClosePaymentModalContent({
   return (
     <div className="w-[250px]">
       <div className="justify-center">
-        <label className="block mb-2 text-sm text-foreground">Closure Reason:</label>
+        <label className="block mb-2 text-sm text-foreground">
+          Closure Reason:
+        </label>
         <Select
           options={[
             {
@@ -236,7 +244,9 @@ export function RegisterPaymentTxModalContent({
   return (
     <div className="w-full">
       <div className="mt-4">
-        <label className="block mb-1 text-sm text-foreground">Payment Date:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Payment Date:
+        </label>
         <DatePicker
           name="paymentDate"
           className={String.raw`w-full p-0 bg-background`}
@@ -247,7 +257,9 @@ export function RegisterPaymentTxModalContent({
         />
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm text-foreground">Transaction Reference:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Transaction Reference:
+        </label>
         <Textarea
           autoExpand={true}
           placeholder={"Add transaction reference"}
@@ -273,7 +285,9 @@ export function ReportPaymentIssueModalContent({
   return (
     <div className="w-full">
       <div>
-        <label className="block mb-1 text-sm text-foreground">Payment Issue:</label>
+        <label className="block mb-1 text-sm text-foreground">
+          Payment Issue:
+        </label>
         <Textarea
           autoExpand={true}
           placeholder={"Add payment issue"}
@@ -309,7 +323,9 @@ export function ConfirmPaymentModalContent({
         </span>
       </div>
       <div className="flex flex-col gap-2 mt-4">
-        <label className="block mb-1 text-sm font-bold text-foreground">Payment Date :</label>
+        <label className="block mb-1 text-sm font-bold text-foreground">
+          Payment Date :
+        </label>
         <span className="break-all max-w-full">
           {payments[payments.length - 1].paymentDate}
         </span>
@@ -323,7 +339,9 @@ export function ConfirmPaymentModalContent({
         </span>
       </div>
       <div className="mt-4">
-        <label className="block mb-1 text-sm font-bold text-foreground">Payment Amount:</label>
+        <label className="block mb-1 text-sm font-bold text-foreground">
+          Payment Amount:
+        </label>
         <input
           className="w-full rounded-md border border-input px-3 py-2 bg-background text-foreground placeholder:text-muted-foreground"
           type="number"

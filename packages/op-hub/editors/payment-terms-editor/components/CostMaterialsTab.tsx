@@ -98,9 +98,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         {state.costAndMaterials ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className={fieldLabelClass}>
-                Hourly Rate
-              </label>
+              <label className={fieldLabelClass}>Hourly Rate</label>
               <p className="text-lg text-foreground">
                 {state.costAndMaterials.hourlyRate
                   ? `${state.costAndMaterials.hourlyRate.value} ${state.costAndMaterials.hourlyRate.unit}`
@@ -108,9 +106,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Variable Cap
-              </label>
+              <label className={fieldLabelClass}>Variable Cap</label>
               <p className="text-lg text-foreground">
                 {state.costAndMaterials.variableCap
                   ? `${state.costAndMaterials.variableCap.value} ${state.costAndMaterials.variableCap.unit}`
@@ -118,17 +114,13 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Billing Frequency
-              </label>
+              <label className={fieldLabelClass}>Billing Frequency</label>
               <p className="text-lg text-foreground">
                 {state.costAndMaterials.billingFrequency}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Timesheet Required
-              </label>
+              <label className={fieldLabelClass}>Timesheet Required</label>
               <p className="text-lg text-foreground">
                 {state.costAndMaterials.timesheetRequired ? "Yes" : "No"}
               </p>
@@ -156,9 +148,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
 
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className={fieldLabelClass}>
-            Hourly Rate
-          </label>
+          <label className={fieldLabelClass}>Hourly Rate</label>
           <TextInput
             value={formData.hourlyRate}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -171,9 +161,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Variable Cap
-          </label>
+          <label className={fieldLabelClass}>Variable Cap</label>
           <TextInput
             value={formData.variableCap}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -186,9 +174,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Billing Frequency *
-          </label>
+          <label className={fieldLabelClass}>Billing Frequency *</label>
           <Select
             value={formData.billingFrequency}
             onChange={(value) =>
@@ -217,10 +203,7 @@ export function CostMaterialsTab({ state, dispatch }: CostMaterialsTabProps) {
             }
             className={checkboxClass}
           />
-          <label
-            htmlFor="timesheetRequired"
-            className={checkboxLabelClass}
-          >
+          <label htmlFor="timesheetRequired" className={checkboxLabelClass}>
             Timesheet Required
           </label>
         </div>

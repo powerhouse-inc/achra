@@ -55,12 +55,14 @@ const statusOptions: Array<{ value: WorkstreamStatus; label: string }> = [
 ];
 
 const statusStyles = {
-  DRAFT: "bg-status-warning/15 text-status-warning rounded px-2 py-1 font-semibold",
+  DRAFT:
+    "bg-status-warning/15 text-status-warning rounded px-2 py-1 font-semibold",
   SUBMITTED:
     "bg-status-progress/15 text-status-progress rounded px-2 py-1 font-semibold",
   ACCEPTED:
     "bg-status-success/15 text-status-success rounded px-2 py-1 font-semibold",
-  REJECTED: "bg-destructive/15 text-destructive rounded px-2 py-1 font-semibold",
+  REJECTED:
+    "bg-destructive/15 text-destructive rounded px-2 py-1 font-semibold",
 };
 
 const fieldLabelClass = "mb-2 block text-sm font-medium text-foreground";
@@ -796,44 +798,44 @@ export default function Editor() {
               <h3 className="text-sm font-medium text-foreground">Details</h3>
             </div>
             <div className="flex flex-row gap-6 p-5">
-            <div className="flex-1">
-              <label className={fieldLabelClass}>Code</label>
-              <TextInput
-                className="w-full"
-                defaultValue={state.code || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  if (e.target.value !== state.code) {
-                    handleWorkstreamChange("code", e.target.value);
-                  }
-                }}
-                placeholder="Enter workstream code"
-              />
-            </div>
+              <div className="flex-1">
+                <label className={fieldLabelClass}>Code</label>
+                <TextInput
+                  className="w-full"
+                  defaultValue={state.code || ""}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    if (e.target.value !== state.code) {
+                      handleWorkstreamChange("code", e.target.value);
+                    }
+                  }}
+                  placeholder="Enter workstream code"
+                />
+              </div>
 
-            <div className="flex-1">
-              <label className={fieldLabelClass}>Title</label>
-              <TextInput
-                className="w-full"
-                defaultValue={state.title || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  if (e.target.value !== state.title) {
-                    handleWorkstreamChange("title", e.target.value);
-                  }
-                }}
-                placeholder="Enter workstream title"
-              />
-            </div>
+              <div className="flex-1">
+                <label className={fieldLabelClass}>Title</label>
+                <TextInput
+                  className="w-full"
+                  defaultValue={state.title || ""}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    if (e.target.value !== state.title) {
+                      handleWorkstreamChange("title", e.target.value);
+                    }
+                  }}
+                  placeholder="Enter workstream title"
+                />
+              </div>
 
-            <div className="flex-1">
-              <Select
-                label="Status"
-                options={statusOptions}
-                value={state.status}
-                onChange={(value) =>
-                  handleStatusChange(value as WorkstreamStatus)
-                }
-              />
-            </div>
+              <div className="flex-1">
+                <Select
+                  label="Status"
+                  options={statusOptions}
+                  value={state.status}
+                  onChange={(value) =>
+                    handleStatusChange(value as WorkstreamStatus)
+                  }
+                />
+              </div>
             </div>
           </section>
 
@@ -842,101 +844,101 @@ export default function Editor() {
               <h3 className="text-sm font-medium text-foreground">Client</h3>
             </div>
             <div className="space-y-4 p-5">
-            <div>
-              <label className={fieldLabelClass}>Client ID</label>
-              <div className="flex items-center space-x-2">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-muted-foreground"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <TextInput
-                  className="flex-1"
-                  defaultValue={state.client?.id || ""}
-                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                    if (e.target.value !== state.client?.id) {
-                      handleClientIdChange(e.target.value);
-                    }
-                  }}
-                  placeholder="Enter client ID"
-                />
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-muted-foreground"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label className={fieldLabelClass}>Name</label>
-              <TextInput
-                className="w-full"
-                defaultValue={state.client?.name || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  if (e.target.value !== state.client?.name) {
-                    handleClientChange("name", e.target.value);
-                  }
-                }}
-                placeholder="Enter client name"
-              />
-            </div>
-
-            <div>
-              <label className={fieldLabelClass}>Icon</label>
-              <div className="flex items-center space-x-2">
-                <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-muted-foreground"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
+              <div>
+                <label className={fieldLabelClass}>Client ID</label>
                 <div className="flex items-center space-x-2">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-muted-foreground"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
                   <TextInput
                     className="flex-1"
-                    defaultValue={state.client?.icon || ""}
+                    defaultValue={state.client?.id || ""}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                      if (e.target.value !== state.client?.icon) {
-                        handleClientChange("icon", e.target.value);
+                      if (e.target.value !== state.client?.id) {
+                        handleClientIdChange(e.target.value);
                       }
                     }}
-                    placeholder="Enter client icon URL"
+                    placeholder="Enter client ID"
                   />
-                  {state.client?.icon ? (
-                    <img
-                      src={state.client?.icon}
-                      alt="Client Icon"
-                      className="h-10 w-10 rounded-lg border border-border object-cover"
-                    />
-                  ) : (
-                    ""
-                  )}
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-muted-foreground"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div>
+                <label className={fieldLabelClass}>Name</label>
+                <TextInput
+                  className="w-full"
+                  defaultValue={state.client?.name || ""}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                    if (e.target.value !== state.client?.name) {
+                      handleClientChange("name", e.target.value);
+                    }
+                  }}
+                  placeholder="Enter client name"
+                />
+              </div>
+
+              <div>
+                <label className={fieldLabelClass}>Icon</label>
+                <div className="flex items-center space-x-2">
+                  <div className="flex-shrink-0">
+                    <svg
+                      className="h-5 w-5 text-muted-foreground"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <TextInput
+                      className="flex-1"
+                      defaultValue={state.client?.icon || ""}
+                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                        if (e.target.value !== state.client?.icon) {
+                          handleClientChange("icon", e.target.value);
+                        }
+                      }}
+                      placeholder="Enter client icon URL"
+                    />
+                    {state.client?.icon ? (
+                      <img
+                        src={state.client?.icon}
+                        alt="Client Icon"
+                        className="h-10 w-10 rounded-lg border border-border object-cover"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -947,438 +949,451 @@ export default function Editor() {
               </h3>
             </div>
             <div className="p-5">
-          <div className="flex w-full flex-row items-center gap-8">
-            <div className="w-[350px]">
-              <OIDInput
-                name="Request for Proposal"
-                label="RFP Document"
-                placeholder="Search for RFP Document"
-                variant="withValueTitleAndDescription"
-                value={newlyCreatedRfpId || state.rfp?.id || ""}
-                onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                  if (e.target.value !== state.rfp?.id) {
-                    dispatch(
-                      actions.setRequestForProposal({
-                        rfpId: e.target.value,
-                        title: rfpDocument?.document.title || "",
-                      }),
-                    );
-                  }
-                }}
-                // search options as the user types
-                fetchOptionsCallback={async (userInput) => {
-                  const results = searchRfpDocuments(userInput || "") || [];
-                  if (results?.length === 0) {
-                    return Promise.reject(new Error("No RFP documents found"));
-                  }
-                  return results?.map((doc) => ({
-                    value: doc.value,
-                    title: doc.title,
-                    path: {
-                      text: doc.path,
-                      url: doc.value,
-                    },
-                    description: "",
-                    icon: "File",
-                  }));
-                }}
-                // get details of a specific option by its ID/value
-                fetchSelectedOptionCallback={async (documentId) => {
-                  console.log("fetching selected option", documentId);
-                  const doc = searchRfpDocuments(documentId)?.[0];
-                  if (!doc) {
-                    return Promise.reject(new Error("RFP document not found"));
-                  }
-                  return {
-                    value: doc.value,
-                    title: doc.title,
-                    path: {
-                      text: doc.path,
-                      url: doc.title,
-                    },
-                    description: "",
-                    icon: "File",
-                  };
-                }}
-                initialOptions={[
-                  {
-                    value: rfpDocument?.header.id || "",
-                    title: rfpDocument?.document.title || "",
-                    path: {
-                      text: rfpDocument?.document.title || "",
-                      url: rfpDocument?.header.id || "",
-                    },
-                    description: "",
-                    icon: "File",
-                  },
-                ]}
-              />
-            </div>
-          </div>
-          {!rfpDocument ? (
-            <div className="mt-4">
-              <Button
-                color="light"
-                className={`cursor-pointer ${primaryButtonClass}`}
-                title={"Save Workstream"}
-                aria-description={"Save Workstream"}
-                disabled={isCreatingRfp}
-                onClick={async () => {
-                  const createdNode = await createRfpDocument();
-                  if (createdNode) {
-                    setNewlyCreatedRfpId(createdNode.id);
-
-                    dispatch(
-                      actions.setRequestForProposal({
-                        rfpId: createdNode.id,
-                        title: createdNode.name,
-                      }),
-                    );
-                  }
-                }}
-              >
-                {isCreatingRfp ? "Creating..." : "Create RFP Document"}
-              </Button>
-            </div>
-          ) : null}
-            </div>
-          </section>
-
-        {rfpDocument ? (
-          <div>
-            {state.initialProposal ? (
-              <section className={sectionCardClass}>
-                <div className="border-b border-border px-5 py-4">
-                  <h3 className="text-sm font-medium text-foreground">
-                    Initial Proposal
-                  </h3>
-                </div>
-                <div className="p-5">
-                <div className="mb-6 flex flex-row gap-4">
-                  <div className="flex-1">
-                    <TextInput
-                      label="Author"
-                      value={
-                        manualAuthorInput ||
-                        state.initialProposal?.author?.name ||
-                        ""
-                      }
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setManualAuthorInput(e.target.value);
-                      }}
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                        if (
-                          e.target.value !== state.initialProposal?.author?.name
-                        ) {
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              proposalAuthor: {
-                                id: generateId(),
-                                name: e.target.value,
-                              },
-                            }),
-                          );
-                        }
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex-1">
-                    <Select
-                      label="Status"
-                      options={[
-                        { value: "DRAFT", label: "Draft" },
-                        { value: "SUBMITTED", label: "Submitted" },
-                        { value: "ACCEPTED", label: "Accepted" },
-                        { value: "REJECTED", label: "Rejected" },
-                      ]}
-                      value={state.initialProposal.status || "DRAFT"}
-                      onChange={(value) => {
-                        if (value !== state.initialProposal?.status) {
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              status: value as ProposalStatus,
-                            }),
-                          );
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="mb-6 flex flex-row gap-4">
-                  <div className="flex-1">
-                    <OIDInput
-                      name="Scope of Work"
-                      label="Scope Of Work"
-                      placeholder="Search for SOW Document"
-                      variant="withValueTitleAndDescription"
-                      value={
-                        newlyCreatedSowId || state.initialProposal?.sow || ""
-                      }
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                        if (e.target.value !== state.initialProposal?.sow) {
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              sowId: e.target.value,
-                            }),
-                          );
-                        }
-                      }}
-                      // search options as the user types
-                      fetchOptionsCallback={async (userInput) => {
-                        const results =
-                          searchSowDocuments(userInput || "") || [];
-                        if (results?.length === 0) {
-                          return Promise.reject(
-                            new Error("No SOW documents found"),
-                          );
-                        }
-                        return results?.map((doc) => ({
-                          value: doc.value,
-                          title: doc.title,
-                          path: {
-                            text: doc.path,
-                            url: doc.value,
-                          },
-                          description: "",
-                          icon: "File",
-                        }));
-                      }}
-                      // get details of a specific option by its ID/value
-                      fetchSelectedOptionCallback={async (documentId) => {
-                        const doc = searchSowDocuments(documentId)?.[0];
-                        if (!doc) {
-                          return Promise.reject(
-                            new Error("SOW document not found"),
-                          );
-                        }
-                        return {
-                          value: doc.value,
-                          title: doc.title,
-                          path: {
-                            text: doc.path,
-                            url: doc.title,
-                          },
-                          description: "",
-                          icon: "File",
-                        };
-                      }}
-                      initialOptions={
-                        sowDocumentNode
-                          ? [
-                              {
-                                value: sowDocumentNode.header.id,
-                                title:
-                                  (
-                                    sowDocumentNode.state as unknown as PHDocumentState & {
-                                      global: ScopeOfWorkState;
-                                    }
-                                  )?.global?.title ||
-                                  sowDocumentNode.header.name,
-                                path: {
-                                  text: sowDocumentNode.header.name,
-                                  url: sowDocumentNode.header.id,
-                                },
-                                description: "",
-                                icon: "File",
-                              },
-                            ]
-                          : undefined
-                      }
-                    />
-                    <button
-                      className={secondaryButtonClass}
-                      disabled={isCreatingSow}
-                      onClick={async () => {
-                        console.log("Creating sow");
-                        const createdNode = await createSowDocument();
-                        if (createdNode) {
-                          setNewlyCreatedSowId(createdNode.id);
-
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              sowId: createdNode.id,
-                            }),
-                          );
-                        }
-                      }}
-                    >
-                      {isCreatingSow ? "Creating..." : "Create sow"}
-                    </button>
-                  </div>
-                  <div className="flex-1">
-                    <OIDInput
-                      name="Payment Terms"
-                      label="Payment Terms"
-                      placeholder="Search for Payment Terms Document"
-                      variant="withValueTitleAndDescription"
-                      value={
-                        newlyCreatedPaymentTermsId ||
-                        state.initialProposal?.paymentTerms ||
-                        ""
-                      }
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                        if (
-                          e.target.value !== state.initialProposal?.paymentTerms
-                        ) {
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              paymentTermsId: e.target.value,
-                            }),
-                          );
-                        }
-                      }}
-                      // search options as the user types
-                      fetchOptionsCallback={async (userInput) => {
-                        const results =
-                          searchPaymentTermsDocuments(userInput || "") || [];
-                        if (results?.length === 0) {
-                          return Promise.reject(
-                            new Error("No Payment Terms documents found"),
-                          );
-                        }
-                        return results?.map((doc) => ({
-                          value: doc.value,
-                          title: doc.title,
-                          path: {
-                            text: doc.path,
-                            url: doc.value,
-                          },
-                          description: "",
-                          icon: "File",
-                        }));
-                      }}
-                      // get details of a specific option by its ID/value
-                      fetchSelectedOptionCallback={async (documentId) => {
-                        const doc =
-                          searchPaymentTermsDocuments(documentId)?.[0];
-                        if (!doc) {
-                          return Promise.reject(
-                            new Error("Payment Terms document not found"),
-                          );
-                        }
-                        return {
-                          value: doc.value,
-                          title: doc.title,
-                          path: {
-                            text: doc.path,
-                            url: doc.title,
-                          },
-                          description: "",
-                          icon: "File",
-                        };
-                      }}
-                      initialOptions={
-                        paymentTermsDocumentNode
-                          ? [
-                              {
-                                value: paymentTermsDocumentNode.header.id,
-                                title: paymentTermsDocumentNode.header.name,
-                                path: {
-                                  text: paymentTermsDocumentNode.header.name,
-                                  url: paymentTermsDocumentNode.header.id,
-                                },
-                                description: "",
-                                icon: "File",
-                              },
-                            ]
-                          : undefined
-                      }
-                    />
-                    <button
-                      className={secondaryButtonClass}
-                      disabled={isCreatingPaymentTerms}
-                      onClick={async () => {
-                        console.log("Creating payment terms");
-                        const createdNode = await createPaymentTermsDocument();
-                        if (createdNode) {
-                          setNewlyCreatedPaymentTermsId(createdNode.id);
-
-                          dispatch(
-                            actions.editInitialProposal({
-                              id: state.initialProposal?.id || "",
-                              paymentTermsId: createdNode.id,
-                            }),
-                          );
-                        }
-                      }}
-                    >
-                      {isCreatingPaymentTerms
-                        ? "Creating..."
-                        : "Create Payment Terms"}
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="mb-4 text-sm font-medium text-foreground">
-                    Alternative Proposals
-                  </h4>
-                  <ObjectSetTable
-                    columns={alternativeProposalsColumns}
-                    data={alternativeProposalsData}
-                    allowRowSelection={true}
-                    onDelete={(data: Proposal[]) => {
-                      if (data.length > 0) {
-                        data.forEach((d: Proposal) => {
-                          dispatch(
-                            actions.removeAlternativeProposal({
-                              id: d.id,
-                            }),
-                          );
-                        });
-                      }
-                    }}
-                    onAdd={(data) => {
-                      if (data.authorName) {
+              <div className="flex w-full flex-row items-center gap-8">
+                <div className="w-[350px]">
+                  <OIDInput
+                    name="Request for Proposal"
+                    label="RFP Document"
+                    placeholder="Search for RFP Document"
+                    variant="withValueTitleAndDescription"
+                    value={newlyCreatedRfpId || state.rfp?.id || ""}
+                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                      if (e.target.value !== state.rfp?.id) {
                         dispatch(
-                          actions.addAlternativeProposal({
-                            id: generateId(),
-                            proposalAuthor: {
-                              id: generateId(),
-                              name: data.authorName as string,
-                            },
+                          actions.setRequestForProposal({
+                            rfpId: e.target.value,
+                            title: rfpDocument?.document.title || "",
                           }),
                         );
                       }
                     }}
+                    // search options as the user types
+                    fetchOptionsCallback={async (userInput) => {
+                      const results = searchRfpDocuments(userInput || "") || [];
+                      if (results?.length === 0) {
+                        return Promise.reject(
+                          new Error("No RFP documents found"),
+                        );
+                      }
+                      return results?.map((doc) => ({
+                        value: doc.value,
+                        title: doc.title,
+                        path: {
+                          text: doc.path,
+                          url: doc.value,
+                        },
+                        description: "",
+                        icon: "File",
+                      }));
+                    }}
+                    // get details of a specific option by its ID/value
+                    fetchSelectedOptionCallback={async (documentId) => {
+                      console.log("fetching selected option", documentId);
+                      const doc = searchRfpDocuments(documentId)?.[0];
+                      if (!doc) {
+                        return Promise.reject(
+                          new Error("RFP document not found"),
+                        );
+                      }
+                      return {
+                        value: doc.value,
+                        title: doc.title,
+                        path: {
+                          text: doc.path,
+                          url: doc.title,
+                        },
+                        description: "",
+                        icon: "File",
+                      };
+                    }}
+                    initialOptions={[
+                      {
+                        value: rfpDocument?.header.id || "",
+                        title: rfpDocument?.document.title || "",
+                        path: {
+                          text: rfpDocument?.document.title || "",
+                          url: rfpDocument?.header.id || "",
+                        },
+                        description: "",
+                        icon: "File",
+                      },
+                    ]}
                   />
                 </div>
-                </div>
-              </section>
-            ) : (
-              <section className={sectionCardClass}>
-                <div className="border-b border-border px-5 py-4">
-                  <h3 className="text-sm font-medium text-foreground">
-                    Initial Proposal
-                  </h3>
-                </div>
-                <div className="p-5">
+              </div>
+              {!rfpDocument ? (
+                <div className="mt-4">
                   <Button
                     color="light"
                     className={`cursor-pointer ${primaryButtonClass}`}
-                    title={"Create Initial Proposal"}
-                    aria-description={"Create Initial Proposal"}
-                    onClick={() => {
-                      console.log("Creating initial proposal");
-                      dispatch(
-                        actions.editInitialProposal({
-                          id: generateId(),
-                        }),
-                      );
+                    title={"Save Workstream"}
+                    aria-description={"Save Workstream"}
+                    disabled={isCreatingRfp}
+                    onClick={async () => {
+                      const createdNode = await createRfpDocument();
+                      if (createdNode) {
+                        setNewlyCreatedRfpId(createdNode.id);
+
+                        dispatch(
+                          actions.setRequestForProposal({
+                            rfpId: createdNode.id,
+                            title: createdNode.name,
+                          }),
+                        );
+                      }
                     }}
                   >
-                    Create Initial Proposal
+                    {isCreatingRfp ? "Creating..." : "Create RFP Document"}
                   </Button>
                 </div>
-              </section>
-            )}
-          </div>
-        ) : null}
+              ) : null}
+            </div>
+          </section>
+
+          {rfpDocument ? (
+            <div>
+              {state.initialProposal ? (
+                <section className={sectionCardClass}>
+                  <div className="border-b border-border px-5 py-4">
+                    <h3 className="text-sm font-medium text-foreground">
+                      Initial Proposal
+                    </h3>
+                  </div>
+                  <div className="p-5">
+                    <div className="mb-6 flex flex-row gap-4">
+                      <div className="flex-1">
+                        <TextInput
+                          label="Author"
+                          value={
+                            manualAuthorInput ||
+                            state.initialProposal?.author?.name ||
+                            ""
+                          }
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>,
+                          ) => {
+                            setManualAuthorInput(e.target.value);
+                          }}
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                            if (
+                              e.target.value !==
+                              state.initialProposal?.author?.name
+                            ) {
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  proposalAuthor: {
+                                    id: generateId(),
+                                    name: e.target.value,
+                                  },
+                                }),
+                              );
+                            }
+                          }}
+                        />
+                      </div>
+
+                      <div className="flex-1">
+                        <Select
+                          label="Status"
+                          options={[
+                            { value: "DRAFT", label: "Draft" },
+                            { value: "SUBMITTED", label: "Submitted" },
+                            { value: "ACCEPTED", label: "Accepted" },
+                            { value: "REJECTED", label: "Rejected" },
+                          ]}
+                          value={state.initialProposal.status || "DRAFT"}
+                          onChange={(value) => {
+                            if (value !== state.initialProposal?.status) {
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  status: value as ProposalStatus,
+                                }),
+                              );
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-6 flex flex-row gap-4">
+                      <div className="flex-1">
+                        <OIDInput
+                          name="Scope of Work"
+                          label="Scope Of Work"
+                          placeholder="Search for SOW Document"
+                          variant="withValueTitleAndDescription"
+                          value={
+                            newlyCreatedSowId ||
+                            state.initialProposal?.sow ||
+                            ""
+                          }
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                            if (e.target.value !== state.initialProposal?.sow) {
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  sowId: e.target.value,
+                                }),
+                              );
+                            }
+                          }}
+                          // search options as the user types
+                          fetchOptionsCallback={async (userInput) => {
+                            const results =
+                              searchSowDocuments(userInput || "") || [];
+                            if (results?.length === 0) {
+                              return Promise.reject(
+                                new Error("No SOW documents found"),
+                              );
+                            }
+                            return results?.map((doc) => ({
+                              value: doc.value,
+                              title: doc.title,
+                              path: {
+                                text: doc.path,
+                                url: doc.value,
+                              },
+                              description: "",
+                              icon: "File",
+                            }));
+                          }}
+                          // get details of a specific option by its ID/value
+                          fetchSelectedOptionCallback={async (documentId) => {
+                            const doc = searchSowDocuments(documentId)?.[0];
+                            if (!doc) {
+                              return Promise.reject(
+                                new Error("SOW document not found"),
+                              );
+                            }
+                            return {
+                              value: doc.value,
+                              title: doc.title,
+                              path: {
+                                text: doc.path,
+                                url: doc.title,
+                              },
+                              description: "",
+                              icon: "File",
+                            };
+                          }}
+                          initialOptions={
+                            sowDocumentNode
+                              ? [
+                                  {
+                                    value: sowDocumentNode.header.id,
+                                    title:
+                                      (
+                                        sowDocumentNode.state as unknown as PHDocumentState & {
+                                          global: ScopeOfWorkState;
+                                        }
+                                      )?.global?.title ||
+                                      sowDocumentNode.header.name,
+                                    path: {
+                                      text: sowDocumentNode.header.name,
+                                      url: sowDocumentNode.header.id,
+                                    },
+                                    description: "",
+                                    icon: "File",
+                                  },
+                                ]
+                              : undefined
+                          }
+                        />
+                        <button
+                          className={secondaryButtonClass}
+                          disabled={isCreatingSow}
+                          onClick={async () => {
+                            console.log("Creating sow");
+                            const createdNode = await createSowDocument();
+                            if (createdNode) {
+                              setNewlyCreatedSowId(createdNode.id);
+
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  sowId: createdNode.id,
+                                }),
+                              );
+                            }
+                          }}
+                        >
+                          {isCreatingSow ? "Creating..." : "Create sow"}
+                        </button>
+                      </div>
+                      <div className="flex-1">
+                        <OIDInput
+                          name="Payment Terms"
+                          label="Payment Terms"
+                          placeholder="Search for Payment Terms Document"
+                          variant="withValueTitleAndDescription"
+                          value={
+                            newlyCreatedPaymentTermsId ||
+                            state.initialProposal?.paymentTerms ||
+                            ""
+                          }
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                            if (
+                              e.target.value !==
+                              state.initialProposal?.paymentTerms
+                            ) {
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  paymentTermsId: e.target.value,
+                                }),
+                              );
+                            }
+                          }}
+                          // search options as the user types
+                          fetchOptionsCallback={async (userInput) => {
+                            const results =
+                              searchPaymentTermsDocuments(userInput || "") ||
+                              [];
+                            if (results?.length === 0) {
+                              return Promise.reject(
+                                new Error("No Payment Terms documents found"),
+                              );
+                            }
+                            return results?.map((doc) => ({
+                              value: doc.value,
+                              title: doc.title,
+                              path: {
+                                text: doc.path,
+                                url: doc.value,
+                              },
+                              description: "",
+                              icon: "File",
+                            }));
+                          }}
+                          // get details of a specific option by its ID/value
+                          fetchSelectedOptionCallback={async (documentId) => {
+                            const doc =
+                              searchPaymentTermsDocuments(documentId)?.[0];
+                            if (!doc) {
+                              return Promise.reject(
+                                new Error("Payment Terms document not found"),
+                              );
+                            }
+                            return {
+                              value: doc.value,
+                              title: doc.title,
+                              path: {
+                                text: doc.path,
+                                url: doc.title,
+                              },
+                              description: "",
+                              icon: "File",
+                            };
+                          }}
+                          initialOptions={
+                            paymentTermsDocumentNode
+                              ? [
+                                  {
+                                    value: paymentTermsDocumentNode.header.id,
+                                    title: paymentTermsDocumentNode.header.name,
+                                    path: {
+                                      text: paymentTermsDocumentNode.header
+                                        .name,
+                                      url: paymentTermsDocumentNode.header.id,
+                                    },
+                                    description: "",
+                                    icon: "File",
+                                  },
+                                ]
+                              : undefined
+                          }
+                        />
+                        <button
+                          className={secondaryButtonClass}
+                          disabled={isCreatingPaymentTerms}
+                          onClick={async () => {
+                            console.log("Creating payment terms");
+                            const createdNode =
+                              await createPaymentTermsDocument();
+                            if (createdNode) {
+                              setNewlyCreatedPaymentTermsId(createdNode.id);
+
+                              dispatch(
+                                actions.editInitialProposal({
+                                  id: state.initialProposal?.id || "",
+                                  paymentTermsId: createdNode.id,
+                                }),
+                              );
+                            }
+                          }}
+                        >
+                          {isCreatingPaymentTerms
+                            ? "Creating..."
+                            : "Create Payment Terms"}
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="mb-4 text-sm font-medium text-foreground">
+                        Alternative Proposals
+                      </h4>
+                      <ObjectSetTable
+                        columns={alternativeProposalsColumns}
+                        data={alternativeProposalsData}
+                        allowRowSelection={true}
+                        onDelete={(data: Proposal[]) => {
+                          if (data.length > 0) {
+                            data.forEach((d: Proposal) => {
+                              dispatch(
+                                actions.removeAlternativeProposal({
+                                  id: d.id,
+                                }),
+                              );
+                            });
+                          }
+                        }}
+                        onAdd={(data) => {
+                          if (data.authorName) {
+                            dispatch(
+                              actions.addAlternativeProposal({
+                                id: generateId(),
+                                proposalAuthor: {
+                                  id: generateId(),
+                                  name: data.authorName as string,
+                                },
+                              }),
+                            );
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                <section className={sectionCardClass}>
+                  <div className="border-b border-border px-5 py-4">
+                    <h3 className="text-sm font-medium text-foreground">
+                      Initial Proposal
+                    </h3>
+                  </div>
+                  <div className="p-5">
+                    <Button
+                      color="light"
+                      className={`cursor-pointer ${primaryButtonClass}`}
+                      title={"Create Initial Proposal"}
+                      aria-description={"Create Initial Proposal"}
+                      onClick={() => {
+                        console.log("Creating initial proposal");
+                        dispatch(
+                          actions.editInitialProposal({
+                            id: generateId(),
+                          }),
+                        );
+                      }}
+                    >
+                      Create Initial Proposal
+                    </Button>
+                  </div>
+                </section>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

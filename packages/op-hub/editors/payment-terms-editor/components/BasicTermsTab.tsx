@@ -122,33 +122,29 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className={fieldLabelClass}>
-              Proposer
-            </label>
-            <p className="text-lg text-foreground">{state.proposer || "Not set"}</p>
+            <label className={fieldLabelClass}>Proposer</label>
+            <p className="text-lg text-foreground">
+              {state.proposer || "Not set"}
+            </p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Payer
-            </label>
-            <p className="text-lg text-foreground">{state.payer || "Not set"}</p>
+            <label className={fieldLabelClass}>Payer</label>
+            <p className="text-lg text-foreground">
+              {state.payer || "Not set"}
+            </p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Currency
-            </label>
+            <label className={fieldLabelClass}>Currency</label>
             <p className="text-lg text-foreground">{state.currency}</p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Payment Model
-            </label>
-            <p className="text-lg text-foreground">{state.paymentModel.replace(/_/g, " ")}</p>
+            <label className={fieldLabelClass}>Payment Model</label>
+            <p className="text-lg text-foreground">
+              {state.paymentModel.replace(/_/g, " ")}
+            </p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Total Amount
-            </label>
+            <label className={fieldLabelClass}>Total Amount</label>
             <p className="text-lg text-foreground">
               {state.totalAmount
                 ? `${state.totalAmount.value} ${state.totalAmount.unit}`
@@ -156,15 +152,11 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
             </p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Status
-            </label>
+            <label className={fieldLabelClass}>Status</label>
             <p className="text-lg text-foreground">{state.status}</p>
           </div>
           <div>
-            <label className={fieldLabelClass}>
-              Escrow
-            </label>
+            <label className={fieldLabelClass}>Escrow</label>
             <p className="text-lg text-foreground">
               {state.escrowDetails && state.escrowDetails.releaseConditions
                 ? "Enabled"
@@ -186,9 +178,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
 
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className={fieldLabelClass}>
-            Proposer *
-          </label>
+          <label className={fieldLabelClass}>Proposer *</label>
           <TextInput
             value={formData.proposer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -200,9 +190,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Payer *
-          </label>
+          <label className={fieldLabelClass}>Payer *</label>
           <TextInput
             value={formData.payer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -214,9 +202,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Currency *
-          </label>
+          <label className={fieldLabelClass}>Currency *</label>
           <Select
             value={formData.currency}
             onChange={(value) =>
@@ -233,9 +219,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Payment Model *
-          </label>
+          <label className={fieldLabelClass}>Payment Model *</label>
           <Select
             value={formData.paymentModel}
             onChange={(value) =>
@@ -252,9 +236,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Total Amount
-          </label>
+          <label className={fieldLabelClass}>Total Amount</label>
           <TextInput
             value={formData.totalAmount}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -267,9 +249,7 @@ export function BasicTermsTab({ state, dispatch }: BasicTermsTabProps) {
         </div>
 
         <div>
-          <label className={fieldLabelClass}>
-            Status *
-          </label>
+          <label className={fieldLabelClass}>Status *</label>
           <Select
             value={formData.status}
             onChange={(value) =>

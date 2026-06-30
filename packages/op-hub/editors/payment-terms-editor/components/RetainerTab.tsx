@@ -137,49 +137,37 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
         {state.retainerDetails ? (
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className={fieldLabelClass}>
-                Retainer Amount
-              </label>
+              <label className={fieldLabelClass}>Retainer Amount</label>
               <p className="text-lg text-foreground">
                 {`${state.retainerDetails.retainerAmount.value} ${state.retainerDetails.retainerAmount.unit}`}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Billing Frequency
-              </label>
+              <label className={fieldLabelClass}>Billing Frequency</label>
               <p className="text-lg text-foreground">
                 {state.retainerDetails.billingFrequency}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Start Date
-              </label>
+              <label className={fieldLabelClass}>Start Date</label>
               <p className="text-lg text-foreground">
                 {state.retainerDetails.startDate}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                End Date
-              </label>
+              <label className={fieldLabelClass}>End Date</label>
               <p className="text-lg text-foreground">
                 {state.retainerDetails.endDate || "Ongoing"}
               </p>
             </div>
             <div>
-              <label className={fieldLabelClass}>
-                Auto Renew
-              </label>
+              <label className={fieldLabelClass}>Auto Renew</label>
               <p className="text-lg text-foreground">
                 {state.retainerDetails.autoRenew ? "Yes" : "No"}
               </p>
             </div>
             <div className="col-span-2">
-              <label className={fieldLabelClass}>
-                Services Included
-              </label>
+              <label className={fieldLabelClass}>Services Included</label>
               <div className={readOnlyPanelClass}>
                 <p className="text-sm text-foreground">
                   {state.retainerDetails.servicesIncluded}
@@ -285,10 +273,7 @@ export function RetainerTab({ state, dispatch }: RetainerTabProps) {
               }
               className={checkboxClass}
             />
-            <label
-              htmlFor="autoRenew"
-              className={checkboxLabelClass}
-            >
+            <label htmlFor="autoRenew" className={checkboxLabelClass}>
               Auto-Renew Retainer
             </label>
           </div>

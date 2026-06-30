@@ -378,9 +378,7 @@ export default function Editor() {
         align: "center",
         width: 200,
         renderCell: (value) => {
-          return (
-            <div className="text-center text-foreground">{value}</div>
-          );
+          return <div className="text-center text-foreground">{value}</div>;
         },
       },
       {
@@ -390,9 +388,7 @@ export default function Editor() {
         align: "center",
         width: 200,
         renderCell: (value) => {
-          return (
-            <div className="text-center text-foreground">{value}</div>
-          );
+          return <div className="text-center text-foreground">{value}</div>;
         },
       },
       {
