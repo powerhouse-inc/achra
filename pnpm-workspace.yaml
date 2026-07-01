@@ -2,6 +2,32 @@ packages:
   - 'apps/*'
   - 'packages/*'
 
+# pnpm 11 enforces a default minimumReleaseAge supply-chain policy (~24h): a package
+# must have been on the registry that long before it can be installed. Our own
+# first-party packages are published as fresh dev tags (e.g. 6.2.0-dev.NN) many times
+# a day, so they constantly fall inside the window and break `ph use dev` / `ph vetra`.
+# Exempt only the packages we publish ourselves; the age policy stays in force for all
+# third-party dependencies.
+minimumReleaseAgeExclude:
+  - '@powerhousedao/*'
+  - '@renown/*'
+  - 'document-model'
+
+allowBuilds:
+  # Native packages that need their build/postinstall to function:
+  esbuild: true # platform binary
+  sharp: true # native image lib (Next.js image optimization)
+  '@parcel/watcher': true # native file watcher (HMR)
+  unrs-resolver: true # native resolver (eslint-plugin-import)
+  # Optional — safe to skip building:
+  '@apollo/protobufjs': false
+  '@datadog/pprof': false # profiling only
+  '@vercel/speed-insights': false
+  bufferutil: false # optional ws speedup
+  msw: false
+  protobufjs: false
+  utf-8-validate: false # optional ws speedup
+
 # @renown/sdk 6.2.0-dev.10 crashes on login ("Cannot read properties of undefined
 # (reading 'chainId')") for credentials issued before the portal stored the EIP-712
 # domain: the renown.id API returns proof.eip712 as undefined for those, but the SDK
