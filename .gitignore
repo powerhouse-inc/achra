@@ -53,3 +53,5 @@ scheduled_tasks.lock
 
 # bun
 bun.lock
+
+.next/
