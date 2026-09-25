@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from 'react'
 import { PostLoginRedirect } from '@/modules/shared/components/post-login-redirect/post-login-redirect'
@@ -117,6 +118,10 @@ export default function RootLayout({
 
         <Analytics />
         <SpeedInsights />
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="df59dd49-90b2-4079-90ac-e3859818c057"
+        />
       </body>
     </html>
   )
