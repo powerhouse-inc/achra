@@ -20,7 +20,10 @@ export class MilestoneNotFoundError extends Error implements ReducerError {
 
 export const errors = {
   AddMilestone: { DuplicateMilestoneIdError },
+
   UpdateMilestone: { MilestoneNotFoundError },
+
   UpdateMilestoneStatus: { MilestoneNotFoundError },
+
   DeleteMilestone: { MilestoneNotFoundError },
 };

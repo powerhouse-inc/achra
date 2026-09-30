@@ -61,8 +61,12 @@ export class NoBillingCyclesSelectedError
 
 export const errors = {
   RemoveFacetTarget: { RemoveFacetTargetNotFoundError },
+
   AddFacetOption: { AddFacetOptionTargetNotFoundError },
+
   RemoveFacetOption: { RemoveFacetOptionTargetNotFoundError },
+
   ChangeResourceTemplate: { ChangeResourceTemplateMismatchError },
+
   SetAvailableBillingCycles: { NoBillingCyclesSelectedError },
 };

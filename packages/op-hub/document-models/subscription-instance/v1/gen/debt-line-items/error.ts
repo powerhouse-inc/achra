@@ -138,13 +138,16 @@ export const errors = {
     DynamicSliceNotYetChargeableError,
     MarkLineItemNotFoundError,
   },
+
   ConfirmLineItemPayment: {
     ConfirmLineItemNotFoundError,
     ConfirmLineItemInvalidStatusTransitionError,
     OverPaymentError,
     InvalidPaymentAmountError,
   },
+
   ReportPayment: { ReportPaymentInvalidAmountError, ReportPaymentNoDebtError },
+
   ApplyCredit: {
     ApplyCreditLineItemNotFoundError,
     ApplyCreditNoDebtError,

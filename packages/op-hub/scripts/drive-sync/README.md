@@ -11,7 +11,7 @@ Drives with no offering docs (network-admin, the builders drive, the operational
 
 ## Prerequisites
 
-- `switchboard` CLI installed and configured with profiles
+- `switchboard` CLI v1.0.40 or newer, configured with profiles
 - `python3`
 
 ## Quick Start
@@ -48,6 +48,27 @@ SB_PROFILE=local bash scripts/drive-sync/upload-all-split.sh
 3. **Route each drive through `upload-split.sh`**, which splits operator drives into a `team-admin` + `service-offering` pair (and dedupes service-offerings to one per title), or passes non-offering drives straight to `upload.sh`.
 4. **Skip drives already on the target** (matched by slug), so it is safe to re-run.
 5. **Run `phase3-remap.py`** to fix cross-drive references (builder-profile contributors, operationalHubMember), then **print Connect URLs** for every uploaded drive.
+
+The final pass also resolves legacy references that use a profile's `state.global.id`
+rather than its old document ID, remaps expense/snapshot owners, and links every
+operational-hub profile to the correct imported operator team. The team-admin copy
+of an operator is preferred over its duplicate in the builders registry. Missing
+hub profiles are created or linked into the hub drive; the operator's reverse
+`operationalHubMember` link and associated subteams are established as well.
+
+No local PHIDs are hard-coded. If the source operator reference is stale, the script
+uses the unique operator team whose hub-membership points to that hub. Ambiguous
+operator selection stops the run; set `OPERATOR_TEAM_PROFILE` to an explicit target
+builder profile only when the source cannot identify one uniquely.
+
+Reruns match drives by name as well as slug (important for UUID-as-slug sources)
+and validate that saved ID maps resolve on the selected target before reusing them.
+The linking pass runs on skipped drives too. Failed uploads, rejected batched
+actions, and failed link passes return a non-zero exit status.
+
+For the current reactor, leave `RENOWN_ADDRESS` unset and configure native CLI
+signing with `switchboard auth login --renown`. The optional Node signing sidecar
+uses the legacy signing scheme and bypasses native CLI signing.
 
 Verify before writing anything:
 
@@ -145,6 +166,10 @@ Compares each drive on the target against the source manifest: drive exists, `pr
 | `powerhouse/builder-profile` | Dedicated: isOperator, profile, links, skills, scopes, contributors |
 | `powerhouse/resource-template` | Dedicated: info, status, audiences, facets, services, FAQs, content sections |
 | `powerhouse/service-offering` | Dedicated: info, status, billing, facets, option groups, tiers, pricing |
+| `powerhouse/expense-report` | Dedicated: replaces seeded groups without duplicates, restores wallets/items/totals, remaps ownership after upload |
+| `powerhouse/snapshot-report` | Restores scalar/account state and owner IDs; remaps owners after all drives are uploaded |
+| `powerhouse/scopeofwork` | Dedicated: projects, roadmaps, deliverables, progress, milestones, and contributors |
+| `powerhouse/rfp` | Dedicated RFP state handling |
 | Any other type | Generic: operations discovered via `switchboard models get`, state fields matched to mutation inputs |
 
 ### Compatibility check
@@ -160,6 +185,7 @@ The `preferredEditor` value is read from each drive's `drive-info.json` and pass
 ```
 scripts/drive-sync/
 ├── lib/common.sh         # Shared helpers
+├── lib/profile_links.py  # Identity aliases, operator-team selection, hub readiness
 ├── download.sh           # Phase 1: download drive
 ├── upload.sh             # Phase 2: upload one drive (editor-id + icon normalization)
 ├── upload-split.sh       # Phase 2: upload one drive, splitting offering docs
@@ -176,3 +202,14 @@ scripts/drive-sync/
         ├── ops/<doc-id>.json
         └── id-map.json       # written by upload.sh: oldId → newId
 ```
+
+## Checks
+
+```bash
+python3 -m unittest discover -s scripts/drive-sync/lib -p 'test_*.py' -v
+bash -n scripts/drive-sync/upload.sh scripts/drive-sync/upload-all-split.sh
+```
+
+Source references to documents absent from the backup cannot be recreated from
+an ID alone. Include those document snapshots when a self-contained target is
+required; existing source data is not fabricated or replaced with empty profiles.

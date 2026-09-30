@@ -20,6 +20,17 @@ import {
   SetYoutubeInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<NetworkProfilePHState> = (
   state,
   action,
@@ -30,7 +41,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
   }
   switch (action.type) {
     case "SET_ICON": {
-      SetIconInputSchema().parse(action.input);
+      memoizedSchema(SetIconInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setIconOperation(
         (state as any)[action.scope],
@@ -42,7 +53,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_LOGO": {
-      SetLogoInputSchema().parse(action.input);
+      memoizedSchema(SetLogoInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setLogoOperation(
         (state as any)[action.scope],
@@ -54,7 +65,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_LOGO_BIG": {
-      SetLogoBigInputSchema().parse(action.input);
+      memoizedSchema(SetLogoBigInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setLogoBigOperation(
         (state as any)[action.scope],
@@ -66,7 +77,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_WEBSITE": {
-      SetWebsiteInputSchema().parse(action.input);
+      memoizedSchema(SetWebsiteInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setWebsiteOperation(
         (state as any)[action.scope],
@@ -78,7 +89,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_DESCRIPTION": {
-      SetDescriptionInputSchema().parse(action.input);
+      memoizedSchema(SetDescriptionInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setDescriptionOperation(
         (state as any)[action.scope],
@@ -90,7 +101,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_CATEGORY": {
-      SetCategoryInputSchema().parse(action.input);
+      memoizedSchema(SetCategoryInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setCategoryOperation(
         (state as any)[action.scope],
@@ -102,7 +113,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_X": {
-      SetXInputSchema().parse(action.input);
+      memoizedSchema(SetXInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setXOperation(
         (state as any)[action.scope],
@@ -114,7 +125,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_GITHUB": {
-      SetGithubInputSchema().parse(action.input);
+      memoizedSchema(SetGithubInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setGithubOperation(
         (state as any)[action.scope],
@@ -126,7 +137,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_DISCORD": {
-      SetDiscordInputSchema().parse(action.input);
+      memoizedSchema(SetDiscordInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setDiscordOperation(
         (state as any)[action.scope],
@@ -138,7 +149,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_YOUTUBE": {
-      SetYoutubeInputSchema().parse(action.input);
+      memoizedSchema(SetYoutubeInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setYoutubeOperation(
         (state as any)[action.scope],
@@ -150,7 +161,7 @@ const stateReducer: StateReducer<NetworkProfilePHState> = (
     }
 
     case "SET_PROFILE_NAME": {
-      SetProfileNameInputSchema().parse(action.input);
+      memoizedSchema(SetProfileNameInputSchema).parse(action.input);
 
       networkProfileNetworkProfileManagementOperations.setProfileNameOperation(
         (state as any)[action.scope],

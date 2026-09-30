@@ -13,6 +13,17 @@ import {
   UpdateKycStatusInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<AccountsPHState> = (
   state,
   action,
@@ -23,7 +34,7 @@ const stateReducer: StateReducer<AccountsPHState> = (
   }
   switch (action.type) {
     case "ADD_ACCOUNT": {
-      AddAccountInputSchema().parse(action.input);
+      memoizedSchema(AddAccountInputSchema).parse(action.input);
 
       accountsAccountsOperations.addAccountOperation(
         (state as any)[action.scope],
@@ -35,7 +46,7 @@ const stateReducer: StateReducer<AccountsPHState> = (
     }
 
     case "UPDATE_ACCOUNT": {
-      UpdateAccountInputSchema().parse(action.input);
+      memoizedSchema(UpdateAccountInputSchema).parse(action.input);
 
       accountsAccountsOperations.updateAccountOperation(
         (state as any)[action.scope],
@@ -47,7 +58,7 @@ const stateReducer: StateReducer<AccountsPHState> = (
     }
 
     case "DELETE_ACCOUNT": {
-      DeleteAccountInputSchema().parse(action.input);
+      memoizedSchema(DeleteAccountInputSchema).parse(action.input);
 
       accountsAccountsOperations.deleteAccountOperation(
         (state as any)[action.scope],
@@ -59,7 +70,7 @@ const stateReducer: StateReducer<AccountsPHState> = (
     }
 
     case "UPDATE_KYC_STATUS": {
-      UpdateKycStatusInputSchema().parse(action.input);
+      memoizedSchema(UpdateKycStatusInputSchema).parse(action.input);
 
       accountsAccountsOperations.updateKycStatusOperation(
         (state as any)[action.scope],

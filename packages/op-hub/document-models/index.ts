@@ -17,4 +17,5 @@ export { ServiceOffering as ServiceOfferingV1 } from "./service-offering/v1/modu
 export { SnapshotReport as SnapshotReportV1 } from "./snapshot-report/v1/module.js";
 export { SubscriptionInstance as SubscriptionInstanceV1 } from "./subscription-instance/v1/module.js";
 export { SubscriptionInvoice as SubscriptionInvoiceV1 } from "./subscription-invoice/v1/module.js";
+export { upgradeManifests } from "./upgrade-manifests.js";
 export { Workstream as WorkstreamV1 } from "./workstream/v1/module.js";

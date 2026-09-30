@@ -10,6 +10,7 @@ import {
   useAddReportToRemoteDrive,
   useOwnerDriveActions,
 } from "./AddReportToRemoteDrive.js";
+import { isTeamAdminAppId } from "../../shared/drive-app-ids.js";
 
 type BuilderProfileOption = {
   id: string;
@@ -39,7 +40,7 @@ export function SetOwner({ ownerIds, dispatch }: SetOwnerProps) {
       .filter(
         (drive) =>
           drive.header.documentType === "powerhouse/document-drive" &&
-          drive.header.meta?.preferredEditor === "builder-team-admin",
+          isTeamAdminAppId(drive.header.meta?.preferredEditor),
       )
       .flatMap((drive) =>
         (drive.state.global.nodes ?? [])

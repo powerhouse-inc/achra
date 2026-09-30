@@ -13,6 +13,8 @@ Usage:
 """
 
 import json, os, subprocess, sys, tempfile
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "lib"))
+from profile_links import extend_identity_map, ensure_operational_hub_links
 
 DATA_DIR = os.environ.get("DATA_DIR", "scripts/drive-sync/data")
 TARGET_PROFILE = os.environ.get("TARGET_PROFILE", "bai-dev")
@@ -26,6 +28,9 @@ if not os.path.exists(merged_map_path):
     print(f"  {R}✗{NC} no merged map at {merged_map_path}"); sys.exit(1)
 with open(merged_map_path) as f:
     merged_map = json.load(f)
+merged_map = extend_identity_map(DATA_DIR, merged_map)
+with open(merged_map_path, "w") as f:
+    json.dump(merged_map, f, indent=2)
 log(f"merged map: {len(merged_map)} ids")
 
 def map_id(old):
@@ -100,6 +105,53 @@ for drive_dir in sorted(os.listdir(DATA_DIR)):
                     else:
                         warn(f"  setOpHubMember failed for {d['name']!r}: {err}")
 
+        elif dtype in {"powerhouse/scopeofwork", "powerhouse/scope-of-work"}:
+            r = subprocess.run(
+                ["switchboard", "--profile", TARGET_PROFILE, "docs", "get", new_id, "--state", "--format", "json"],
+                capture_output=True, text=True, timeout=30,
+            )
+            if r.returncode:
+                raise RuntimeError(r.stderr)
+            current = json.loads(r.stdout)["state"]["global"]
+            agents = [dict(agent, id=map_id(agent["id"])) for agent in state.get("contributors") or []]
+            if current.get("contributors") != agents:
+                for agent in current.get("contributors") or []:
+                    ok, err = mutate(new_id, "removeAgent", {"id": agent["id"]})
+                    if not ok:
+                        raise RuntimeError(f"removeAgent failed: {err}")
+                for agent in agents:
+                    ok, err = mutate(new_id, "addAgent", agent)
+                    if not ok:
+                        raise RuntimeError(f"addAgent failed: {err}")
+                remapped += len(agents)
+            existing_deliverables = {item["id"]: item for item in current.get("deliverables") or []}
+            for deliverable in state.get("deliverables") or []:
+                owner = map_id(deliverable.get("owner"))
+                if owner and existing_deliverables.get(deliverable["id"], {}).get("owner") != owner:
+                    ok, err = mutate(new_id, "editDeliverable", {"id": deliverable["id"], "owner": owner})
+                    if not ok:
+                        raise RuntimeError(f"editDeliverable failed: {err}")
+                    remapped += 1
+
+        elif dtype == "powerhouse/expense-report":
+            old_owner = state.get("ownerId")
+            new_owner = map_id(old_owner)
+            if old_owner and new_owner != old_owner:
+                ok, err = mutate(new_id, "setOwnerId", {"ownerId": new_owner})
+                if not ok:
+                    raise RuntimeError(f"setOwnerId failed: {err}")
+                remapped += 1
+
+        elif dtype == "powerhouse/snapshot-report":
+            for old_owner in state.get("ownerIds") or []:
+                new_owner = map_id(old_owner)
+                if new_owner != old_owner:
+                    mutate(new_id, "removeOwnerId", {"ownerId": old_owner})
+                ok, err = mutate(new_id, "addOwnerId", {"ownerId": new_owner})
+                if not ok:
+                    raise RuntimeError(f"addOwnerId failed: {err}")
+                remapped += 1
+
         elif dtype == "powerhouse/builders":
             # builders[]: cross-drive PHIDs into the builders drive. The state-
             # application phase tends to drop this array entirely, so unlike
@@ -149,4 +201,5 @@ for drive_dir in sorted(os.listdir(DATA_DIR)):
                 else:
                     warn(f"  removeBuilder failed for {d['name']!r}: {err}")
 
+remapped += ensure_operational_hub_links(DATA_DIR, TARGET_PROFILE, merged_map)
 log(f"done — remapped {remapped} reference(s)")

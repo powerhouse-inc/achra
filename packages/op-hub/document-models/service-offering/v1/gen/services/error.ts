@@ -22,5 +22,6 @@ export class DeleteServiceNotFoundError extends Error implements ReducerError {
 
 export const errors = {
   UpdateService: { UpdateServiceNotFoundError },
+
   DeleteService: { DeleteServiceNotFoundError },
 };

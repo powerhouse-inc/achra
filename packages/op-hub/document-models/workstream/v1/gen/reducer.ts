@@ -19,6 +19,17 @@ import {
   SetRequestForProposalInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<WorkstreamPHState> = (
   state,
   action,
@@ -29,7 +40,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
   }
   switch (action.type) {
     case "EDIT_WORKSTREAM": {
-      EditWorkstreamInputSchema().parse(action.input);
+      memoizedSchema(EditWorkstreamInputSchema).parse(action.input);
 
       workstreamWorkstreamOperations.editWorkstreamOperation(
         (state as any)[action.scope],
@@ -41,7 +52,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "EDIT_CLIENT_INFO": {
-      EditClientInfoInputSchema().parse(action.input);
+      memoizedSchema(EditClientInfoInputSchema).parse(action.input);
 
       workstreamWorkstreamOperations.editClientInfoOperation(
         (state as any)[action.scope],
@@ -53,7 +64,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "SET_REQUEST_FOR_PROPOSAL": {
-      SetRequestForProposalInputSchema().parse(action.input);
+      memoizedSchema(SetRequestForProposalInputSchema).parse(action.input);
 
       workstreamWorkstreamOperations.setRequestForProposalOperation(
         (state as any)[action.scope],
@@ -65,7 +76,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "ADD_PAYMENT_REQUEST": {
-      AddPaymentRequestInputSchema().parse(action.input);
+      memoizedSchema(AddPaymentRequestInputSchema).parse(action.input);
 
       workstreamWorkstreamOperations.addPaymentRequestOperation(
         (state as any)[action.scope],
@@ -77,7 +88,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "REMOVE_PAYMENT_REQUEST": {
-      RemovePaymentRequestInputSchema().parse(action.input);
+      memoizedSchema(RemovePaymentRequestInputSchema).parse(action.input);
 
       workstreamWorkstreamOperations.removePaymentRequestOperation(
         (state as any)[action.scope],
@@ -89,7 +100,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "EDIT_INITIAL_PROPOSAL": {
-      EditInitialProposalInputSchema().parse(action.input);
+      memoizedSchema(EditInitialProposalInputSchema).parse(action.input);
 
       workstreamProposalsOperations.editInitialProposalOperation(
         (state as any)[action.scope],
@@ -101,7 +112,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "ADD_ALTERNATIVE_PROPOSAL": {
-      AddAlternativeProposalInputSchema().parse(action.input);
+      memoizedSchema(AddAlternativeProposalInputSchema).parse(action.input);
 
       workstreamProposalsOperations.addAlternativeProposalOperation(
         (state as any)[action.scope],
@@ -113,7 +124,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "EDIT_ALTERNATIVE_PROPOSAL": {
-      EditAlternativeProposalInputSchema().parse(action.input);
+      memoizedSchema(EditAlternativeProposalInputSchema).parse(action.input);
 
       workstreamProposalsOperations.editAlternativeProposalOperation(
         (state as any)[action.scope],
@@ -125,7 +136,7 @@ const stateReducer: StateReducer<WorkstreamPHState> = (
     }
 
     case "REMOVE_ALTERNATIVE_PROPOSAL": {
-      RemoveAlternativeProposalInputSchema().parse(action.input);
+      memoizedSchema(RemoveAlternativeProposalInputSchema).parse(action.input);
 
       workstreamProposalsOperations.removeAlternativeProposalOperation(
         (state as any)[action.scope],

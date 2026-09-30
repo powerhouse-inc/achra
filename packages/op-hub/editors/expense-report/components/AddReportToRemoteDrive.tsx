@@ -7,6 +7,7 @@ import {
 import { addFile } from "@powerhousedao/shared/document-drive";
 import { useSelectedExpenseReportDocument } from "../../../document-models/expense-report/v1/hooks.js";
 import type { ExpenseReportDocument } from "../../../document-models/expense-report/v1/gen/types.js";
+import { isTeamAdminAppId } from "../../shared/drive-app-ids.js";
 
 export function useAddReportToRemoteDrive(ownerIdOverride?: string | null) {
   const [selectedDocument] = useSelectedExpenseReportDocument();
@@ -19,7 +20,7 @@ export function useAddReportToRemoteDrive(ownerIdOverride?: string | null) {
     return drives.find((drive) => {
       if (
         drive.header.documentType !== "powerhouse/document-drive" ||
-        drive.header.meta?.preferredEditor !== "builder-team-admin"
+        !isTeamAdminAppId(drive.header.meta?.preferredEditor)
       ) {
         return false;
       }

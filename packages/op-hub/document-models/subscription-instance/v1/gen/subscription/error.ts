@@ -157,23 +157,30 @@ export const errors = {
     ActivateNotPendingError,
     ActivateMissingSliceIdError,
   },
+
   PauseSubscription: { PauseNotActiveError },
+
   SetExpiring: { SetExpiringNotActiveError },
+
   CancelSubscription: {
     CancelAlreadyCancelledError,
     CancelMissingSliceIdError,
   },
+
   ResumeSubscription: { ResumeNotPausedError },
+
   RenewExpiringSubscription: {
     RenewNotExpiringError,
     RenewMissingSliceIdError,
   },
+
   ChangePlan: {
     ChangePlanNotActiveError,
     BillingCycleSwapNotYetSupportedError,
     ChangePlanInvalidEffectiveDateError,
     ChangePlanMissingTierPricingError,
   },
+
   GenerateInvoice: {
     NoBillingCycleActiveError,
     SettleMissingSliceIdError,

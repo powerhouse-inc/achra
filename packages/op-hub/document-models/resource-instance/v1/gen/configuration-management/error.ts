@@ -47,8 +47,11 @@ export class ConfigurationLockedApplyConfigurationChangesError
 
 export const errors = {
   SetInstanceFacet: { ConfigurationLockedError },
+
   RemoveInstanceFacet: { ConfigurationLockedRemoveInstanceFacetError },
+
   UpdateInstanceFacet: { ConfigurationLockedUpdateInstanceFacetError },
+
   ApplyConfigurationChanges: {
     ConfigurationLockedApplyConfigurationChangesError,
   },

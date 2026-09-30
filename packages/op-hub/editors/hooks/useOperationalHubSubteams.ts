@@ -7,6 +7,7 @@ import {
 import { addSubteam } from "../../document-models/operational-hub-profile/v1/gen/configuration/creators.js";
 import type { OperationalHubProfileDocument } from "../../document-models/operational-hub-profile/v1/gen/types.js";
 import type { SelectOption } from "@powerhousedao/document-engineering/ui";
+import { isTeamAdminAppId } from "../shared/drive-app-ids.js";
 
 type BuilderProfileInfo = {
   id: string;
@@ -44,7 +45,7 @@ export function useOperationalHubSubteams() {
       // Look for builder-profile documents in drives with team-admin editor
       if (
         drive.header.documentType === "powerhouse/document-drive" &&
-        drive.header.meta?.preferredEditor === "team-admin"
+        isTeamAdminAppId(drive.header.meta?.preferredEditor)
       ) {
         const nodes = drive.state.global.nodes;
         for (const node of nodes) {

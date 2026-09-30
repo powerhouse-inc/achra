@@ -44,6 +44,17 @@ import {
   UpdateTemplateStatusInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<ResourceTemplatePHState> = (
   state,
   action,
@@ -54,7 +65,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
   }
   switch (action.type) {
     case "UPDATE_TEMPLATE_INFO": {
-      UpdateTemplateInfoInputSchema().parse(action.input);
+      memoizedSchema(UpdateTemplateInfoInputSchema).parse(action.input);
 
       resourceTemplateTemplateManagementOperations.updateTemplateInfoOperation(
         (state as any)[action.scope],
@@ -66,7 +77,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "UPDATE_TEMPLATE_STATUS": {
-      UpdateTemplateStatusInputSchema().parse(action.input);
+      memoizedSchema(UpdateTemplateStatusInputSchema).parse(action.input);
 
       resourceTemplateTemplateManagementOperations.updateTemplateStatusOperation(
         (state as any)[action.scope],
@@ -78,7 +89,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_OPERATOR": {
-      SetOperatorInputSchema().parse(action.input);
+      memoizedSchema(SetOperatorInputSchema).parse(action.input);
 
       resourceTemplateTemplateManagementOperations.setOperatorOperation(
         (state as any)[action.scope],
@@ -90,7 +101,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_TEMPLATE_ID": {
-      SetTemplateIdInputSchema().parse(action.input);
+      memoizedSchema(SetTemplateIdInputSchema).parse(action.input);
 
       resourceTemplateTemplateManagementOperations.setTemplateIdOperation(
         (state as any)[action.scope],
@@ -102,7 +113,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_WEIGHT": {
-      SetWeightInputSchema().parse(action.input);
+      memoizedSchema(SetWeightInputSchema).parse(action.input);
 
       resourceTemplateTemplateManagementOperations.setWeightOperation(
         (state as any)[action.scope],
@@ -114,7 +125,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_TARGET_AUDIENCE": {
-      AddTargetAudienceInputSchema().parse(action.input);
+      memoizedSchema(AddTargetAudienceInputSchema).parse(action.input);
 
       resourceTemplateAudienceManagementOperations.addTargetAudienceOperation(
         (state as any)[action.scope],
@@ -126,7 +137,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REMOVE_TARGET_AUDIENCE": {
-      RemoveTargetAudienceInputSchema().parse(action.input);
+      memoizedSchema(RemoveTargetAudienceInputSchema).parse(action.input);
 
       resourceTemplateAudienceManagementOperations.removeTargetAudienceOperation(
         (state as any)[action.scope],
@@ -138,7 +149,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_FACET_TARGET": {
-      SetFacetTargetInputSchema().parse(action.input);
+      memoizedSchema(SetFacetTargetInputSchema).parse(action.input);
 
       resourceTemplateFacetTargetingOperations.setFacetTargetOperation(
         (state as any)[action.scope],
@@ -150,7 +161,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REMOVE_FACET_TARGET": {
-      RemoveFacetTargetInputSchema().parse(action.input);
+      memoizedSchema(RemoveFacetTargetInputSchema).parse(action.input);
 
       resourceTemplateFacetTargetingOperations.removeFacetTargetOperation(
         (state as any)[action.scope],
@@ -162,7 +173,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_FACET_OPTION": {
-      AddFacetOptionInputSchema().parse(action.input);
+      memoizedSchema(AddFacetOptionInputSchema).parse(action.input);
 
       resourceTemplateFacetTargetingOperations.addFacetOptionOperation(
         (state as any)[action.scope],
@@ -174,7 +185,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REMOVE_FACET_OPTION": {
-      RemoveFacetOptionInputSchema().parse(action.input);
+      memoizedSchema(RemoveFacetOptionInputSchema).parse(action.input);
 
       resourceTemplateFacetTargetingOperations.removeFacetOptionOperation(
         (state as any)[action.scope],
@@ -186,7 +197,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_SETUP_SERVICES": {
-      SetSetupServicesInputSchema().parse(action.input);
+      memoizedSchema(SetSetupServicesInputSchema).parse(action.input);
 
       resourceTemplateServiceCategoryManagementOperations.setSetupServicesOperation(
         (state as any)[action.scope],
@@ -198,7 +209,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "SET_RECURRING_SERVICES": {
-      SetRecurringServicesInputSchema().parse(action.input);
+      memoizedSchema(SetRecurringServicesInputSchema).parse(action.input);
 
       resourceTemplateServiceCategoryManagementOperations.setRecurringServicesOperation(
         (state as any)[action.scope],
@@ -210,7 +221,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_SERVICE": {
-      AddServiceInputSchema().parse(action.input);
+      memoizedSchema(AddServiceInputSchema).parse(action.input);
 
       resourceTemplateServiceManagementOperations.addServiceOperation(
         (state as any)[action.scope],
@@ -222,7 +233,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "UPDATE_SERVICE": {
-      UpdateServiceInputSchema().parse(action.input);
+      memoizedSchema(UpdateServiceInputSchema).parse(action.input);
 
       resourceTemplateServiceManagementOperations.updateServiceOperation(
         (state as any)[action.scope],
@@ -234,7 +245,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "DELETE_SERVICE": {
-      DeleteServiceInputSchema().parse(action.input);
+      memoizedSchema(DeleteServiceInputSchema).parse(action.input);
 
       resourceTemplateServiceManagementOperations.deleteServiceOperation(
         (state as any)[action.scope],
@@ -246,7 +257,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_FACET_BINDING": {
-      AddFacetBindingInputSchema().parse(action.input);
+      memoizedSchema(AddFacetBindingInputSchema).parse(action.input);
 
       resourceTemplateServiceManagementOperations.addFacetBindingOperation(
         (state as any)[action.scope],
@@ -258,7 +269,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REMOVE_FACET_BINDING": {
-      RemoveFacetBindingInputSchema().parse(action.input);
+      memoizedSchema(RemoveFacetBindingInputSchema).parse(action.input);
 
       resourceTemplateServiceManagementOperations.removeFacetBindingOperation(
         (state as any)[action.scope],
@@ -270,7 +281,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_OPTION_GROUP": {
-      AddOptionGroupInputSchema().parse(action.input);
+      memoizedSchema(AddOptionGroupInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.addOptionGroupOperation(
         (state as any)[action.scope],
@@ -282,7 +293,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "UPDATE_OPTION_GROUP": {
-      UpdateOptionGroupInputSchema().parse(action.input);
+      memoizedSchema(UpdateOptionGroupInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.updateOptionGroupOperation(
         (state as any)[action.scope],
@@ -294,7 +305,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "DELETE_OPTION_GROUP": {
-      DeleteOptionGroupInputSchema().parse(action.input);
+      memoizedSchema(DeleteOptionGroupInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.deleteOptionGroupOperation(
         (state as any)[action.scope],
@@ -306,7 +317,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_FAQ": {
-      AddFaqInputSchema().parse(action.input);
+      memoizedSchema(AddFaqInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.addFaqOperation(
         (state as any)[action.scope],
@@ -318,7 +329,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "UPDATE_FAQ": {
-      UpdateFaqInputSchema().parse(action.input);
+      memoizedSchema(UpdateFaqInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.updateFaqOperation(
         (state as any)[action.scope],
@@ -330,7 +341,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "DELETE_FAQ": {
-      DeleteFaqInputSchema().parse(action.input);
+      memoizedSchema(DeleteFaqInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.deleteFaqOperation(
         (state as any)[action.scope],
@@ -342,7 +353,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REORDER_FAQS": {
-      ReorderFaqsInputSchema().parse(action.input);
+      memoizedSchema(ReorderFaqsInputSchema).parse(action.input);
 
       resourceTemplateOptionGroupManagementOperations.reorderFaqsOperation(
         (state as any)[action.scope],
@@ -354,7 +365,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "ADD_CONTENT_SECTION": {
-      AddContentSectionInputSchema().parse(action.input);
+      memoizedSchema(AddContentSectionInputSchema).parse(action.input);
 
       resourceTemplateContentSectionManagementOperations.addContentSectionOperation(
         (state as any)[action.scope],
@@ -366,7 +377,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "UPDATE_CONTENT_SECTION": {
-      UpdateContentSectionInputSchema().parse(action.input);
+      memoizedSchema(UpdateContentSectionInputSchema).parse(action.input);
 
       resourceTemplateContentSectionManagementOperations.updateContentSectionOperation(
         (state as any)[action.scope],
@@ -378,7 +389,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "DELETE_CONTENT_SECTION": {
-      DeleteContentSectionInputSchema().parse(action.input);
+      memoizedSchema(DeleteContentSectionInputSchema).parse(action.input);
 
       resourceTemplateContentSectionManagementOperations.deleteContentSectionOperation(
         (state as any)[action.scope],
@@ -390,7 +401,7 @@ const stateReducer: StateReducer<ResourceTemplatePHState> = (
     }
 
     case "REORDER_CONTENT_SECTIONS": {
-      ReorderContentSectionsInputSchema().parse(action.input);
+      memoizedSchema(ReorderContentSectionsInputSchema).parse(action.input);
 
       resourceTemplateContentSectionManagementOperations.reorderContentSectionsOperation(
         (state as any)[action.scope],

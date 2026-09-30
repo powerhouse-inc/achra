@@ -40,6 +40,17 @@ import {
   SetLineItemTagInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<InvoicePHState> = (
   state,
   action,
@@ -50,7 +61,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
   }
   switch (action.type) {
     case "EDIT_INVOICE": {
-      EditInvoiceInputSchema().parse(action.input);
+      memoizedSchema(EditInvoiceInputSchema).parse(action.input);
 
       invoiceGeneralOperations.editInvoiceOperation(
         (state as any)[action.scope],
@@ -62,7 +73,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "ADD_PAYMENT": {
-      AddPaymentInputSchema().parse(action.input);
+      memoizedSchema(AddPaymentInputSchema).parse(action.input);
 
       invoiceGeneralOperations.addPaymentOperation(
         (state as any)[action.scope],
@@ -74,7 +85,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_PAYMENT_DATA": {
-      EditPaymentDataInputSchema().parse(action.input);
+      memoizedSchema(EditPaymentDataInputSchema).parse(action.input);
 
       invoiceGeneralOperations.editPaymentDataOperation(
         (state as any)[action.scope],
@@ -86,7 +97,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_STATUS": {
-      EditStatusInputSchema().parse(action.input);
+      memoizedSchema(EditStatusInputSchema).parse(action.input);
 
       invoiceGeneralOperations.editStatusOperation(
         (state as any)[action.scope],
@@ -98,7 +109,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "SET_EXPORTED_DATA": {
-      SetExportedDataInputSchema().parse(action.input);
+      memoizedSchema(SetExportedDataInputSchema).parse(action.input);
 
       invoiceGeneralOperations.setExportedDataOperation(
         (state as any)[action.scope],
@@ -110,7 +121,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_ISSUER_BANK": {
-      EditIssuerBankInputSchema().parse(action.input);
+      memoizedSchema(EditIssuerBankInputSchema).parse(action.input);
 
       invoicePartiesOperations.editIssuerBankOperation(
         (state as any)[action.scope],
@@ -122,7 +133,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_ISSUER": {
-      EditIssuerInputSchema().parse(action.input);
+      memoizedSchema(EditIssuerInputSchema).parse(action.input);
 
       invoicePartiesOperations.editIssuerOperation(
         (state as any)[action.scope],
@@ -134,7 +145,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_ISSUER_WALLET": {
-      EditIssuerWalletInputSchema().parse(action.input);
+      memoizedSchema(EditIssuerWalletInputSchema).parse(action.input);
 
       invoicePartiesOperations.editIssuerWalletOperation(
         (state as any)[action.scope],
@@ -146,7 +157,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_PAYER_BANK": {
-      EditPayerBankInputSchema().parse(action.input);
+      memoizedSchema(EditPayerBankInputSchema).parse(action.input);
 
       invoicePartiesOperations.editPayerBankOperation(
         (state as any)[action.scope],
@@ -158,7 +169,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_PAYER": {
-      EditPayerInputSchema().parse(action.input);
+      memoizedSchema(EditPayerInputSchema).parse(action.input);
 
       invoicePartiesOperations.editPayerOperation(
         (state as any)[action.scope],
@@ -170,7 +181,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_PAYER_WALLET": {
-      EditPayerWalletInputSchema().parse(action.input);
+      memoizedSchema(EditPayerWalletInputSchema).parse(action.input);
 
       invoicePartiesOperations.editPayerWalletOperation(
         (state as any)[action.scope],
@@ -182,7 +193,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "ADD_LINE_ITEM": {
-      AddLineItemInputSchema().parse(action.input);
+      memoizedSchema(AddLineItemInputSchema).parse(action.input);
 
       invoiceItemsOperations.addLineItemOperation(
         (state as any)[action.scope],
@@ -194,7 +205,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "DELETE_LINE_ITEM": {
-      DeleteLineItemInputSchema().parse(action.input);
+      memoizedSchema(DeleteLineItemInputSchema).parse(action.input);
 
       invoiceItemsOperations.deleteLineItemOperation(
         (state as any)[action.scope],
@@ -206,7 +217,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "EDIT_LINE_ITEM": {
-      EditLineItemInputSchema().parse(action.input);
+      memoizedSchema(EditLineItemInputSchema).parse(action.input);
 
       invoiceItemsOperations.editLineItemOperation(
         (state as any)[action.scope],
@@ -218,7 +229,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "SET_INVOICE_TAG": {
-      SetInvoiceTagInputSchema().parse(action.input);
+      memoizedSchema(SetInvoiceTagInputSchema).parse(action.input);
 
       invoiceItemsOperations.setInvoiceTagOperation(
         (state as any)[action.scope],
@@ -230,7 +241,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "SET_LINE_ITEM_TAG": {
-      SetLineItemTagInputSchema().parse(action.input);
+      memoizedSchema(SetLineItemTagInputSchema).parse(action.input);
 
       invoiceItemsOperations.setLineItemTagOperation(
         (state as any)[action.scope],
@@ -242,7 +253,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "ACCEPT": {
-      AcceptInputSchema().parse(action.input);
+      memoizedSchema(AcceptInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.acceptOperation(
         (state as any)[action.scope],
@@ -254,7 +265,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "CANCEL": {
-      CancelInputSchema().parse(action.input);
+      memoizedSchema(CancelInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.cancelOperation(
         (state as any)[action.scope],
@@ -266,7 +277,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "CLOSE_PAYMENT": {
-      ClosePaymentInputSchema().parse(action.input);
+      memoizedSchema(ClosePaymentInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.closePaymentOperation(
         (state as any)[action.scope],
@@ -278,7 +289,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "CONFIRM_PAYMENT": {
-      ConfirmPaymentInputSchema().parse(action.input);
+      memoizedSchema(ConfirmPaymentInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.confirmPaymentOperation(
         (state as any)[action.scope],
@@ -290,7 +301,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "ISSUE": {
-      IssueInputSchema().parse(action.input);
+      memoizedSchema(IssueInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.issueOperation(
         (state as any)[action.scope],
@@ -302,7 +313,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "REAPPROVE_PAYMENT": {
-      ReapprovePaymentInputSchema().parse(action.input);
+      memoizedSchema(ReapprovePaymentInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.reapprovePaymentOperation(
         (state as any)[action.scope],
@@ -314,7 +325,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "REGISTER_PAYMENT_TX": {
-      RegisterPaymentTxInputSchema().parse(action.input);
+      memoizedSchema(RegisterPaymentTxInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.registerPaymentTxOperation(
         (state as any)[action.scope],
@@ -326,7 +337,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "REINSTATE": {
-      ReinstateInputSchema().parse(action.input);
+      memoizedSchema(ReinstateInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.reinstateOperation(
         (state as any)[action.scope],
@@ -338,7 +349,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "REJECT": {
-      RejectInputSchema().parse(action.input);
+      memoizedSchema(RejectInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.rejectOperation(
         (state as any)[action.scope],
@@ -350,7 +361,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "REPORT_PAYMENT_ISSUE": {
-      ReportPaymentIssueInputSchema().parse(action.input);
+      memoizedSchema(ReportPaymentIssueInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.reportPaymentIssueOperation(
         (state as any)[action.scope],
@@ -362,7 +373,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "RESET": {
-      ResetInputSchema().parse(action.input);
+      memoizedSchema(ResetInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.resetOperation(
         (state as any)[action.scope],
@@ -374,7 +385,7 @@ const stateReducer: StateReducer<InvoicePHState> = (
     }
 
     case "SCHEDULE_PAYMENT": {
-      SchedulePaymentInputSchema().parse(action.input);
+      memoizedSchema(SchedulePaymentInputSchema).parse(action.input);
 
       invoiceTransitionsOperations.schedulePaymentOperation(
         (state as any)[action.scope],

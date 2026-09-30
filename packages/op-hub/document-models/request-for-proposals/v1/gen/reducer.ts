@@ -17,6 +17,17 @@ import {
   RemoveProposalInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<RequestForProposalsPHState> = (
   state,
   action,
@@ -27,7 +38,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
   }
   switch (action.type) {
     case "EDIT_RFP": {
-      EditRfpInputSchema().parse(action.input);
+      memoizedSchema(EditRfpInputSchema).parse(action.input);
 
       requestForProposalsRfpStateOperations.editRfpOperation(
         (state as any)[action.scope],
@@ -39,7 +50,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
     }
 
     case "ADD_CONTEXT_DOCUMENT": {
-      AddContextDocumentInputSchema().parse(action.input);
+      memoizedSchema(AddContextDocumentInputSchema).parse(action.input);
 
       requestForProposalsContexDocumentOperations.addContextDocumentOperation(
         (state as any)[action.scope],
@@ -51,7 +62,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
     }
 
     case "REMOVE_CONTEXT_DOCUMENT": {
-      RemoveContextDocumentInputSchema().parse(action.input);
+      memoizedSchema(RemoveContextDocumentInputSchema).parse(action.input);
 
       requestForProposalsContexDocumentOperations.removeContextDocumentOperation(
         (state as any)[action.scope],
@@ -63,7 +74,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
     }
 
     case "ADD_PROPOSAL": {
-      AddProposalInputSchema().parse(action.input);
+      memoizedSchema(AddProposalInputSchema).parse(action.input);
 
       requestForProposalsProposalsOperations.addProposalOperation(
         (state as any)[action.scope],
@@ -75,7 +86,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
     }
 
     case "CHANGE_PROPOSAL_STATUS": {
-      ChangeProposalStatusInputSchema().parse(action.input);
+      memoizedSchema(ChangeProposalStatusInputSchema).parse(action.input);
 
       requestForProposalsProposalsOperations.changeProposalStatusOperation(
         (state as any)[action.scope],
@@ -87,7 +98,7 @@ const stateReducer: StateReducer<RequestForProposalsPHState> = (
     }
 
     case "REMOVE_PROPOSAL": {
-      RemoveProposalInputSchema().parse(action.input);
+      memoizedSchema(RemoveProposalInputSchema).parse(action.input);
 
       requestForProposalsProposalsOperations.removeProposalOperation(
         (state as any)[action.scope],

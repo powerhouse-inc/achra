@@ -28,6 +28,17 @@ import {
   UpdateStatusInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<PaymentTermsPHState> = (
   state,
   action,
@@ -38,7 +49,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
   }
   switch (action.type) {
     case "SET_BASIC_TERMS": {
-      SetBasicTermsInputSchema().parse(action.input);
+      memoizedSchema(SetBasicTermsInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.setBasicTermsOperation(
         (state as any)[action.scope],
@@ -50,7 +61,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "UPDATE_STATUS": {
-      UpdateStatusInputSchema().parse(action.input);
+      memoizedSchema(UpdateStatusInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.updateStatusOperation(
         (state as any)[action.scope],
@@ -62,7 +73,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "SET_COST_AND_MATERIALS": {
-      SetCostAndMaterialsInputSchema().parse(action.input);
+      memoizedSchema(SetCostAndMaterialsInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.setCostAndMaterialsOperation(
         (state as any)[action.scope],
@@ -74,7 +85,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "SET_ESCROW_DETAILS": {
-      SetEscrowDetailsInputSchema().parse(action.input);
+      memoizedSchema(SetEscrowDetailsInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.setEscrowDetailsOperation(
         (state as any)[action.scope],
@@ -86,7 +97,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "SET_EVALUATION_TERMS": {
-      SetEvaluationTermsInputSchema().parse(action.input);
+      memoizedSchema(SetEvaluationTermsInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.setEvaluationTermsOperation(
         (state as any)[action.scope],
@@ -98,7 +109,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "SET_RETAINER_DETAILS": {
-      SetRetainerDetailsInputSchema().parse(action.input);
+      memoizedSchema(SetRetainerDetailsInputSchema).parse(action.input);
 
       paymentTermsTermsOperations.setRetainerDetailsOperation(
         (state as any)[action.scope],
@@ -110,7 +121,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "ADD_MILESTONE": {
-      AddMilestoneInputSchema().parse(action.input);
+      memoizedSchema(AddMilestoneInputSchema).parse(action.input);
 
       paymentTermsMilestonesOperations.addMilestoneOperation(
         (state as any)[action.scope],
@@ -122,7 +133,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "UPDATE_MILESTONE": {
-      UpdateMilestoneInputSchema().parse(action.input);
+      memoizedSchema(UpdateMilestoneInputSchema).parse(action.input);
 
       paymentTermsMilestonesOperations.updateMilestoneOperation(
         (state as any)[action.scope],
@@ -134,7 +145,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "UPDATE_MILESTONE_STATUS": {
-      UpdateMilestoneStatusInputSchema().parse(action.input);
+      memoizedSchema(UpdateMilestoneStatusInputSchema).parse(action.input);
 
       paymentTermsMilestonesOperations.updateMilestoneStatusOperation(
         (state as any)[action.scope],
@@ -146,7 +157,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "DELETE_MILESTONE": {
-      DeleteMilestoneInputSchema().parse(action.input);
+      memoizedSchema(DeleteMilestoneInputSchema).parse(action.input);
 
       paymentTermsMilestonesOperations.deleteMilestoneOperation(
         (state as any)[action.scope],
@@ -158,7 +169,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "REORDER_MILESTONES": {
-      ReorderMilestonesInputSchema().parse(action.input);
+      memoizedSchema(ReorderMilestonesInputSchema).parse(action.input);
 
       paymentTermsMilestonesOperations.reorderMilestonesOperation(
         (state as any)[action.scope],
@@ -170,7 +181,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "ADD_BONUS_CLAUSE": {
-      AddBonusClauseInputSchema().parse(action.input);
+      memoizedSchema(AddBonusClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.addBonusClauseOperation(
         (state as any)[action.scope],
@@ -182,7 +193,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "UPDATE_BONUS_CLAUSE": {
-      UpdateBonusClauseInputSchema().parse(action.input);
+      memoizedSchema(UpdateBonusClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.updateBonusClauseOperation(
         (state as any)[action.scope],
@@ -194,7 +205,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "DELETE_BONUS_CLAUSE": {
-      DeleteBonusClauseInputSchema().parse(action.input);
+      memoizedSchema(DeleteBonusClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.deleteBonusClauseOperation(
         (state as any)[action.scope],
@@ -206,7 +217,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "ADD_PENALTY_CLAUSE": {
-      AddPenaltyClauseInputSchema().parse(action.input);
+      memoizedSchema(AddPenaltyClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.addPenaltyClauseOperation(
         (state as any)[action.scope],
@@ -218,7 +229,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "UPDATE_PENALTY_CLAUSE": {
-      UpdatePenaltyClauseInputSchema().parse(action.input);
+      memoizedSchema(UpdatePenaltyClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.updatePenaltyClauseOperation(
         (state as any)[action.scope],
@@ -230,7 +241,7 @@ const stateReducer: StateReducer<PaymentTermsPHState> = (
     }
 
     case "DELETE_PENALTY_CLAUSE": {
-      DeletePenaltyClauseInputSchema().parse(action.input);
+      memoizedSchema(DeletePenaltyClauseInputSchema).parse(action.input);
 
       paymentTermsClausesOperations.deletePenaltyClauseOperation(
         (state as any)[action.scope],

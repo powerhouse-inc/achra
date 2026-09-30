@@ -160,7 +160,7 @@ function UserButton({ open, onOpenChange }: UserButtonProps) {
   if (auth.status !== 'authorized' || !auth.address) {
     return (
       <>
-        <Button variant="outline" onClick={auth.login}>
+        <Button variant="outline" onClick={() => auth.login()}>
           Log in
         </Button>
         <SignUpButton />
@@ -240,7 +240,7 @@ function UserOption() {
   if (auth.status !== 'authorized' || !auth.address) {
     return (
       <>
-        <NavbarPrimitives.ActionOption onClick={auth.login}>
+        <NavbarPrimitives.ActionOption onClick={() => auth.login()}>
           <LogIn />
           <span>Log in</span>
         </NavbarPrimitives.ActionOption>

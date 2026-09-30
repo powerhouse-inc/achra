@@ -130,7 +130,11 @@ export function useSnapshotReportAutoPlacement(): UseSnapshotReportAutoPlacement
       return;
 
     globalCreationState.createdSnapshotReportsFolderForDrives.add(driveId);
-    void addFolder(driveId, SNAPSHOT_REPORTS_FOLDER_NAME);
+    addFolder(driveId, SNAPSHOT_REPORTS_FOLDER_NAME).catch((error: unknown) => {
+      // Allow a retry on the next render instead of staying stuck.
+      globalCreationState.createdSnapshotReportsFolderForDrives.delete(driveId);
+      console.error("Failed to create folder:", error);
+    });
   }, [driveId, snapshotReportsFolder]);
 
   // Get year folders that exist directly under the Snapshot Reports folder

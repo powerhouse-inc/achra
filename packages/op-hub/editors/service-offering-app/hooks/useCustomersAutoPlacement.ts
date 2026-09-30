@@ -148,7 +148,11 @@ export function useCustomersAutoPlacement(): UseCustomersAutoPlacementResult {
       return;
 
     globalCreationState.createdCustomersFolderForDrives.add(driveId);
-    void addFolder(driveId, CUSTOMERS_FOLDER_NAME);
+    addFolder(driveId, CUSTOMERS_FOLDER_NAME).catch((error: unknown) => {
+      // Allow a retry on the next render instead of staying stuck.
+      globalCreationState.createdCustomersFolderForDrives.delete(driveId);
+      console.error("Failed to create folder:", error);
+    });
   }, [driveId, customersFolder]);
 
   // Auto-place service subscription documents into the folder

@@ -3,6 +3,7 @@ import { generateId } from "document-model";
 import {
   addDocument,
   addFolder,
+  dispatchActions,
   useSelectedDriveId,
   useFolderNodesInSelectedDrive,
   usePHToast,
@@ -27,10 +28,7 @@ import {
   calculateNextBillingDate,
   calculateOverageCost,
 } from "../../../document-models/subscription-instance/v1/src/utils.js";
-import {
-  utils as subscriptionInvoiceUtils,
-  type SubscriptionInvoiceGlobalState,
-} from "document-models/subscription-invoice";
+import { actions as subscriptionInvoiceActions } from "document-models/subscription-invoice";
 import { useNowISO } from "./SimulatedClock.js";
 import { formatCurrency } from "./billing-utils.js";
 
@@ -718,44 +716,46 @@ export function SubscriptionActions({
         invoiceFolderId = folderNode.id;
         console.info("[GenerateInvoice] created folder", invoiceFolderId);
       }
-      // Build a fully-populated Invoice document via the model's utils,
-      // then pass it to addDocument as the `document` parameter. This
-      // creates + initializes atomically — no separate dispatchActions
-      // step (which had been failing silently here, leaving stamped
-      // subscription slices but no invoice doc).
-      const invoiceGlobal: SubscriptionInvoiceGlobalState = {
-        invoiceNumber,
-        issuedAt: null,
-        dueDate,
-        status: "DRAFT",
-        customerId: state.customerId ?? null,
-        customerName: state.customerName ?? null,
-        customerEmail: state.customerEmail ?? null,
-        sourceSubscriptionId: document.header.id,
-        sourceSubscriptionName: document.header.name,
-        cycleStart: state.currentBillingCycleStart ?? null,
-        cycleEnd: state.nextBillingDate ?? null,
-        billingCycle: state.selectedBillingCycle ?? null,
-        lineItems,
-        currency: ledgerCurrency,
-        subtotal,
-        creditApplied: totalCreditApplied,
-        totalDue,
-        totalPaid,
-        stripeInvoiceId: null,
-        notes: null,
-      };
-      const invoiceDoc = subscriptionInvoiceUtils.createDocument({
-        global: invoiceGlobal,
-        local: {},
-      });
+      // Create the invoice through Connect's addDocument (which builds a
+      // header that satisfies the reactor's signature policy), then fill it
+      // with INITIALIZE_SUBSCRIPTION_INVOICE. Passing a pre-built document
+      // to addDocument skips the signature policy, and the reactor rejects
+      // its self-assigned id with InvalidSignatureError [ID_MISMATCH].
       const node = await addDocument(
         driveId,
         invoiceNumber,
         "powerhouse/subscription-invoice",
         invoiceFolderId ?? undefined,
-        invoiceDoc,
       );
+      const initErrors: Error[] = [];
+      await dispatchActions(
+        subscriptionInvoiceActions.initializeSubscriptionInvoice({
+          invoiceNumber,
+          dueDate,
+          customerId: state.customerId ?? null,
+          customerName: state.customerName ?? null,
+          customerEmail: state.customerEmail ?? null,
+          sourceSubscriptionId: document.header.id,
+          sourceSubscriptionName: document.header.name,
+          cycleStart: state.currentBillingCycleStart ?? null,
+          cycleEnd: state.nextBillingDate ?? null,
+          billingCycle: state.selectedBillingCycle ?? null,
+          lineItems,
+          currency: ledgerCurrency,
+          subtotal,
+          creditApplied: totalCreditApplied,
+          totalDue,
+          totalPaid,
+          notes: null,
+        }),
+        node.id,
+        (errors) => initErrors.push(...errors),
+      );
+      if (initErrors.length > 0) {
+        throw new Error(
+          `invoice ${node.id} created but INITIALIZE_SUBSCRIPTION_INVOICE failed: ${initErrors.map((e) => e.message).join("; ")}`,
+        );
+      }
       console.info("[GenerateInvoice] created + populated invoice", node.id);
     } catch (err) {
       // Surface to console; the subscription's GENERATE_INVOICE op

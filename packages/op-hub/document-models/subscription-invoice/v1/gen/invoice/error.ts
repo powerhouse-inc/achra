@@ -61,10 +61,13 @@ export class SubscriptionInvoiceAlreadyVoidError
 
 export const errors = {
   InitializeSubscriptionInvoice: { SubscriptionInvoiceAlreadyInitializedError },
+
   MarkSubscriptionInvoiceIssued: { SubscriptionInvoiceNotDraftError },
+
   MarkSubscriptionInvoicePaid: {
     SubscriptionInvoiceNotIssuedError,
     SubscriptionInvoicePaidInvalidAmountError,
   },
+
   VoidSubscriptionInvoice: { SubscriptionInvoiceAlreadyVoidError },
 };

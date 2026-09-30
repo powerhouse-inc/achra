@@ -50,7 +50,10 @@ export class RemoveEndingBalanceNotFoundError
 
 export const errors = {
   SetStartingBalance: { SetStartingBalanceAccountNotFoundError },
+
   SetEndingBalance: { SetEndingBalanceAccountNotFoundError },
+
   RemoveStartingBalance: { RemoveStartingBalanceNotFoundError },
+
   RemoveEndingBalance: { RemoveEndingBalanceNotFoundError },
 };

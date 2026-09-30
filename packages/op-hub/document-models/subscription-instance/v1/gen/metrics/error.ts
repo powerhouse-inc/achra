@@ -198,26 +198,32 @@ export class AccrueMissingSliceIdError extends Error implements ReducerError {
 
 export const errors = {
   AddServiceMetric: { AddServiceMetricServiceNotFoundError },
+
   UpdateMetric: { UpdateMetricServiceNotFoundError, UpdateMetricNotFoundError },
+
   UpdateMetricUsage: {
     UpdateMetricUsageServiceNotFoundError,
     UpdateMetricUsageNotFoundError,
     SubscriptionNotActiveUpdateUsageError,
   },
+
   RemoveServiceMetric: {
     RemoveServiceMetricServiceNotFoundError,
     RemoveServiceMetricNotFoundError,
   },
+
   IncrementMetricUsage: {
     IncrementMetricUsageServiceNotFoundError,
     IncrementMetricUsageNotFoundError,
     SubscriptionNotActiveIncrementUsageError,
   },
+
   DecrementMetricUsage: {
     DecrementMetricUsageServiceNotFoundError,
     DecrementMetricUsageNotFoundError,
     SubscriptionNotActiveDecrementUsageError,
   },
+
   AccrueMetricUsage: {
     SubscriptionNotActiveAccrueMetricUsageError,
     AccrueMetricUsageServiceNotFoundError,

@@ -20,7 +20,7 @@ function AuthGuardLoginFallback() {
             This page is private. Log in to access it.
           </p>
         </div>
-        <Button onClick={login} className="min-w-44">
+        <Button onClick={() => login()} className="min-w-44">
           Log in
         </Button>
       </CardContent>

@@ -194,6 +194,8 @@ fi
 # Slugs already on the target — skip them so re-runs don't duplicate drives.
 EXISTING_SLUGS=$(switchboard drives list --format json 2>/dev/null \
   | python3 -c "import sys,json; print(' '.join(d.get('slug','') for d in json.load(sys.stdin)))" 2>/dev/null || echo "")
+EXISTING_NAMES=$(switchboard drives list --format json 2>/dev/null \
+  | python3 -c "import sys,json; print('\n'.join(d.get('name','') for d in json.load(sys.stdin)))")
 
 SUCCEEDED=0
 FAILED=0
@@ -202,7 +204,9 @@ SKIPPED=0
 for line in "${UPLOAD_LINES[@]}"; do
   IFS="$SEP" read -r slug name editor dir <<< "$line"
 
-  if [[ " $EXISTING_SLUGS " == *" $slug "* ]]; then
+  if [[ " $EXISTING_SLUGS " == *" $slug "* ]] || [[ $'\n'"$EXISTING_NAMES"$'\n' == *$'\n'"$name"$'\n'* ]]; then
+    python3 "$SCRIPT_DIR/lib/profile_links.py" --profile "$TARGET_PROFILE" --validate-map "$dir" \
+      || { err "Saved ID map for $name does not belong to this target; refusing a stale remap"; exit 1; }
     warn "Skipping $name ($slug) — already on target"
     SKIPPED=$((SKIPPED + 1))
     continue
@@ -233,7 +237,7 @@ echo -e "  ${CYAN}Total:${NC} $TOTAL drives"
 # map and run phase3-remap.py so cross-drive refs (e.g. builder-profile
 # contributors[] and operationalHubMember.phid) point at the freshly
 # created document IDs on the target — they change on every upload.
-if [[ $SUCCEEDED -gt 0 ]]; then
+if [[ $SUCCEEDED -gt 0 || $SKIPPED -gt 0 ]]; then
   step "Phase 3: cross-drive PHID remap"
   if python3 - "$DATA_DIR" <<'PY'
 import json, os, sys
@@ -256,9 +260,11 @@ PY
       log "Phase 3 remap completed"
     else
       err "Phase 3 remap failed (drives are uploaded, but cross-drive refs may be stale)"
+      exit 1
     fi
   else
     err "Failed to build merged-id-map.json — skipping Phase 3 remap"
+    exit 1
   fi
 fi
 
@@ -273,5 +279,11 @@ for d in drives:
     print(f'  {name:<40s} {slug:<55s} editor={editor}')
 " 2>/dev/null || true
 
+if [[ $FAILED -eq 0 ]]; then
+  TARGET_PROFILE="$TARGET_PROFILE" DATA_DIR="$DATA_DIR" python3 "$SCRIPT_DIR/verify-sync.py" \
+    || { err "Final drive/profile verification failed"; exit 1; }
+fi
+
 echo ""
 log "Done!"
+[[ $FAILED -eq 0 ]]

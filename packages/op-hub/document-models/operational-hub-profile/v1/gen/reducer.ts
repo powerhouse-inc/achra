@@ -13,6 +13,17 @@ import {
   SetOperatorTeamInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<OperationalHubProfilePHState> = (
   state,
   action,
@@ -23,7 +34,7 @@ const stateReducer: StateReducer<OperationalHubProfilePHState> = (
   }
   switch (action.type) {
     case "SET_OPERATIONAL_HUB_NAME": {
-      SetOperationalHubNameInputSchema().parse(action.input);
+      memoizedSchema(SetOperationalHubNameInputSchema).parse(action.input);
 
       operationalHubProfileConfigurationOperations.setOperationalHubNameOperation(
         (state as any)[action.scope],
@@ -35,7 +46,7 @@ const stateReducer: StateReducer<OperationalHubProfilePHState> = (
     }
 
     case "SET_OPERATOR_TEAM": {
-      SetOperatorTeamInputSchema().parse(action.input);
+      memoizedSchema(SetOperatorTeamInputSchema).parse(action.input);
 
       operationalHubProfileConfigurationOperations.setOperatorTeamOperation(
         (state as any)[action.scope],
@@ -47,7 +58,7 @@ const stateReducer: StateReducer<OperationalHubProfilePHState> = (
     }
 
     case "ADD_SUBTEAM": {
-      AddSubteamInputSchema().parse(action.input);
+      memoizedSchema(AddSubteamInputSchema).parse(action.input);
 
       operationalHubProfileConfigurationOperations.addSubteamOperation(
         (state as any)[action.scope],
@@ -59,7 +70,7 @@ const stateReducer: StateReducer<OperationalHubProfilePHState> = (
     }
 
     case "REMOVE_SUBTEAM": {
-      RemoveSubteamInputSchema().parse(action.input);
+      memoizedSchema(RemoveSubteamInputSchema).parse(action.input);
 
       operationalHubProfileConfigurationOperations.removeSubteamOperation(
         (state as any)[action.scope],

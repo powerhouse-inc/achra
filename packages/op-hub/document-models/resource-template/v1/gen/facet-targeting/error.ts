@@ -36,6 +36,8 @@ export class RemoveFacetOptionTargetNotFoundError
 
 export const errors = {
   RemoveFacetTarget: { FacetTargetNotFoundError },
+
   AddFacetOption: { AddFacetOptionTargetNotFoundError },
+
   RemoveFacetOption: { RemoveFacetOptionTargetNotFoundError },
 };

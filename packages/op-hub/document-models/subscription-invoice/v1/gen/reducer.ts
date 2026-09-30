@@ -15,6 +15,17 @@ import {
   VoidSubscriptionInvoiceInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
   state,
   action,
@@ -25,7 +36,9 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
   }
   switch (action.type) {
     case "INITIALIZE_SUBSCRIPTION_INVOICE": {
-      InitializeSubscriptionInvoiceInputSchema().parse(action.input);
+      memoizedSchema(InitializeSubscriptionInvoiceInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInvoiceInvoiceOperations.initializeSubscriptionInvoiceOperation(
         (state as any)[action.scope],
@@ -37,7 +50,9 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
     }
 
     case "MARK_SUBSCRIPTION_INVOICE_ISSUED": {
-      MarkSubscriptionInvoiceIssuedInputSchema().parse(action.input);
+      memoizedSchema(MarkSubscriptionInvoiceIssuedInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInvoiceInvoiceOperations.markSubscriptionInvoiceIssuedOperation(
         (state as any)[action.scope],
@@ -49,7 +64,9 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
     }
 
     case "MARK_SUBSCRIPTION_INVOICE_PAID": {
-      MarkSubscriptionInvoicePaidInputSchema().parse(action.input);
+      memoizedSchema(MarkSubscriptionInvoicePaidInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInvoiceInvoiceOperations.markSubscriptionInvoicePaidOperation(
         (state as any)[action.scope],
@@ -61,7 +78,7 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
     }
 
     case "VOID_SUBSCRIPTION_INVOICE": {
-      VoidSubscriptionInvoiceInputSchema().parse(action.input);
+      memoizedSchema(VoidSubscriptionInvoiceInputSchema).parse(action.input);
 
       subscriptionInvoiceInvoiceOperations.voidSubscriptionInvoiceOperation(
         (state as any)[action.scope],
@@ -73,7 +90,9 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
     }
 
     case "SET_SUBSCRIPTION_INVOICE_STRIPE_ID": {
-      SetSubscriptionInvoiceStripeIdInputSchema().parse(action.input);
+      memoizedSchema(SetSubscriptionInvoiceStripeIdInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInvoiceInvoiceOperations.setSubscriptionInvoiceStripeIdOperation(
         (state as any)[action.scope],
@@ -85,7 +104,9 @@ const stateReducer: StateReducer<SubscriptionInvoicePHState> = (
     }
 
     case "SET_SUBSCRIPTION_INVOICE_NOTES": {
-      SetSubscriptionInvoiceNotesInputSchema().parse(action.input);
+      memoizedSchema(SetSubscriptionInvoiceNotesInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInvoiceInvoiceOperations.setSubscriptionInvoiceNotesOperation(
         (state as any)[action.scope],

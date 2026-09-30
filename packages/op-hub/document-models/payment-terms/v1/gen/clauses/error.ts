@@ -41,9 +41,14 @@ export class PenaltyClauseNotFoundError extends Error implements ReducerError {
 
 export const errors = {
   AddBonusClause: { DuplicateBonusClauseIdError },
+
   UpdateBonusClause: { BonusClauseNotFoundError },
+
   DeleteBonusClause: { BonusClauseNotFoundError },
+
   AddPenaltyClause: { DuplicatePenaltyClauseIdError },
+
   UpdatePenaltyClause: { PenaltyClauseNotFoundError },
+
   DeletePenaltyClause: { PenaltyClauseNotFoundError },
 };

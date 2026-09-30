@@ -128,6 +128,23 @@ for drive_dir in selected:
 
     tgt_editor = tgt.get("preferredEditor")
     tgt_nodes = tgt["state"]["global"]["nodes"]
+    src_editor_norm = normalize_editor(src_editor)
+
+    hub_nodes = [n for n in tgt_nodes if n.get("documentType") == "powerhouse/operational-hub-profile"]
+    if src_editor_norm == "contributor-billing-editor" and not hub_nodes:
+        fail("operational hub drive has no linked hub profile"); failures += 1
+    for node in hub_nodes:
+        hub, err = sb_json("docs", "get", node["id"], "--state")
+        operator = (hub or {}).get("state", {}).get("global", {}).get("operatorTeam")
+        team, err = sb_json("docs", "get", operator, "--state") if operator else (None, "operatorTeam is empty")
+        if not team or team.get("documentType") != "powerhouse/builder-profile":
+            fail(f"hub operator team does not resolve: {err}"); failures += 1
+        else:
+            reverse = team["state"]["global"].get("operationalHubMember") or {}
+            if reverse.get("phid") not in {n["id"] for n in hub_nodes}:
+                fail("operator team has no reverse link to this operational hub"); failures += 1
+            else:
+                ok(f"hub ↔ operator team: {team['state']['global'].get('name')}")
 
     # preferredEditor parity (normalize legacy source ids to current config.id)
     src_editor_norm = normalize_editor(src_editor)
@@ -197,6 +214,13 @@ for drive_dir in selected:
             contribs = doc.get("state", {}).get("global", {}).get("contributors") or []
             if not contribs:
                 continue
+            for contributor in contribs:
+                if contributor not in set(merged_map.values()):
+                    continue
+                profile, error = sb_json("docs", "get", contributor, "--state")
+                metadata = (profile or {}).get("state", {}).get("global", {})
+                if not profile or profile.get("documentType") != "powerhouse/builder-profile" or not metadata.get("name"):
+                    fail(f"contributor metadata does not resolve for {contributor}: {error}"); failures += 1
             unresolved = [c for c in contribs if c not in set(merged_map.values())]
             if unresolved:
                 warn(f"builder-profile {d['name']!r}: {len(unresolved)}/{len(contribs)} contributors not in merged map (sample: {unresolved[:1]})")

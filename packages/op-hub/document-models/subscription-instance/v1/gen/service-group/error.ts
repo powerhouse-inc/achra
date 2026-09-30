@@ -105,18 +105,22 @@ export class UpdateServiceGroupCostNotFoundError
 
 export const errors = {
   AddServiceGroup: { StructuralChangeNotAllowedAddGroupError },
+
   RemoveServiceGroup: {
     RemoveServiceGroupNotFoundError,
     StructuralChangeNotAllowedRemoveGroupError,
   },
+
   AddServiceToGroup: {
     AddServiceToGroupGroupNotFoundError,
     SubscriptionNotActiveAddToGroupError,
   },
+
   RemoveServiceFromGroup: {
     RemoveServiceFromGroupGroupNotFoundError,
     RemoveServiceFromGroupServiceNotFoundError,
     SubscriptionNotActiveRemoveFromGroupError,
   },
+
   UpdateServiceGroupCost: { UpdateServiceGroupCostNotFoundError },
 };

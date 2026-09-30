@@ -236,9 +236,11 @@ export function SetWalletAddressInputSchema(): z.ZodObject<
   Properties<SetWalletAddressInput>
 > {
   return z.object({
-    walletAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/, {
-      message: "Invalid Ethereum address format",
-    }),
+    walletAddress: z
+      .string()
+      .regex(/^0x[a-fA-F0-9]{40}$/, {
+        message: "Invalid Ethereum address format",
+      }),
   });
 }
 

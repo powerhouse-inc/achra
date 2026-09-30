@@ -56,6 +56,17 @@ import {
   UpdateTierInfoInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<SubscriptionInstancePHState> = (
   state,
   action,
@@ -66,7 +77,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
   }
   switch (action.type) {
     case "INITIALIZE_SUBSCRIPTION": {
-      InitializeSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(InitializeSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.initializeSubscriptionOperation(
         (state as any)[action.scope],
@@ -78,7 +89,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "SET_RESOURCE_DOCUMENT": {
-      SetResourceDocumentInputSchema().parse(action.input);
+      memoizedSchema(SetResourceDocumentInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.setResourceDocumentOperation(
         (state as any)[action.scope],
@@ -90,7 +101,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ACTIVATE_SUBSCRIPTION": {
-      ActivateSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(ActivateSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.activateSubscriptionOperation(
         (state as any)[action.scope],
@@ -102,7 +113,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "PAUSE_SUBSCRIPTION": {
-      PauseSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(PauseSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.pauseSubscriptionOperation(
         (state as any)[action.scope],
@@ -114,7 +125,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "SET_EXPIRING": {
-      SetExpiringInputSchema().parse(action.input);
+      memoizedSchema(SetExpiringInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.setExpiringOperation(
         (state as any)[action.scope],
@@ -126,7 +137,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "CANCEL_SUBSCRIPTION": {
-      CancelSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(CancelSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.cancelSubscriptionOperation(
         (state as any)[action.scope],
@@ -138,7 +149,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "RESUME_SUBSCRIPTION": {
-      ResumeSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(ResumeSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.resumeSubscriptionOperation(
         (state as any)[action.scope],
@@ -150,7 +161,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "RENEW_EXPIRING_SUBSCRIPTION": {
-      RenewExpiringSubscriptionInputSchema().parse(action.input);
+      memoizedSchema(RenewExpiringSubscriptionInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.renewExpiringSubscriptionOperation(
         (state as any)[action.scope],
@@ -162,7 +173,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_CUSTOMER_INFO": {
-      UpdateCustomerInfoInputSchema().parse(action.input);
+      memoizedSchema(UpdateCustomerInfoInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.updateCustomerInfoOperation(
         (state as any)[action.scope],
@@ -174,7 +185,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_TIER_INFO": {
-      UpdateTierInfoInputSchema().parse(action.input);
+      memoizedSchema(UpdateTierInfoInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.updateTierInfoOperation(
         (state as any)[action.scope],
@@ -186,7 +197,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "SET_OPERATOR_NOTES": {
-      SetOperatorNotesInputSchema().parse(action.input);
+      memoizedSchema(SetOperatorNotesInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.setOperatorNotesOperation(
         (state as any)[action.scope],
@@ -198,7 +209,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "SET_AUTO_RENEW": {
-      SetAutoRenewInputSchema().parse(action.input);
+      memoizedSchema(SetAutoRenewInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.setAutoRenewOperation(
         (state as any)[action.scope],
@@ -210,7 +221,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "CHANGE_PLAN": {
-      ChangePlanInputSchema().parse(action.input);
+      memoizedSchema(ChangePlanInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.changePlanOperation(
         (state as any)[action.scope],
@@ -222,7 +233,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "GENERATE_INVOICE": {
-      GenerateInvoiceInputSchema().parse(action.input);
+      memoizedSchema(GenerateInvoiceInputSchema).parse(action.input);
 
       subscriptionInstanceSubscriptionOperations.generateInvoiceOperation(
         (state as any)[action.scope],
@@ -234,7 +245,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ADD_SERVICE": {
-      AddServiceInputSchema().parse(action.input);
+      memoizedSchema(AddServiceInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.addServiceOperation(
         (state as any)[action.scope],
@@ -246,7 +257,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REMOVE_SERVICE": {
-      RemoveServiceInputSchema().parse(action.input);
+      memoizedSchema(RemoveServiceInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.removeServiceOperation(
         (state as any)[action.scope],
@@ -258,7 +269,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_SERVICE_SETUP_COST": {
-      UpdateServiceSetupCostInputSchema().parse(action.input);
+      memoizedSchema(UpdateServiceSetupCostInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.updateServiceSetupCostOperation(
         (state as any)[action.scope],
@@ -270,7 +281,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_SERVICE_RECURRING_COST": {
-      UpdateServiceRecurringCostInputSchema().parse(action.input);
+      memoizedSchema(UpdateServiceRecurringCostInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.updateServiceRecurringCostOperation(
         (state as any)[action.scope],
@@ -282,7 +293,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REPORT_SETUP_PAYMENT": {
-      ReportSetupPaymentInputSchema().parse(action.input);
+      memoizedSchema(ReportSetupPaymentInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.reportSetupPaymentOperation(
         (state as any)[action.scope],
@@ -294,7 +305,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REPORT_RECURRING_PAYMENT": {
-      ReportRecurringPaymentInputSchema().parse(action.input);
+      memoizedSchema(ReportRecurringPaymentInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.reportRecurringPaymentOperation(
         (state as any)[action.scope],
@@ -306,7 +317,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_SERVICE_INFO": {
-      UpdateServiceInfoInputSchema().parse(action.input);
+      memoizedSchema(UpdateServiceInfoInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.updateServiceInfoOperation(
         (state as any)[action.scope],
@@ -318,7 +329,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ADD_SERVICE_FACET_SELECTION": {
-      AddServiceFacetSelectionInputSchema().parse(action.input);
+      memoizedSchema(AddServiceFacetSelectionInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.addServiceFacetSelectionOperation(
         (state as any)[action.scope],
@@ -330,7 +341,9 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REMOVE_SERVICE_FACET_SELECTION": {
-      RemoveServiceFacetSelectionInputSchema().parse(action.input);
+      memoizedSchema(RemoveServiceFacetSelectionInputSchema).parse(
+        action.input,
+      );
 
       subscriptionInstanceServiceOperations.removeServiceFacetSelectionOperation(
         (state as any)[action.scope],
@@ -342,7 +355,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REPORT_OVERAGE_PAYMENT": {
-      ReportOveragePaymentInputSchema().parse(action.input);
+      memoizedSchema(ReportOveragePaymentInputSchema).parse(action.input);
 
       subscriptionInstanceServiceOperations.reportOveragePaymentOperation(
         (state as any)[action.scope],
@@ -354,7 +367,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ADD_SERVICE_GROUP": {
-      AddServiceGroupInputSchema().parse(action.input);
+      memoizedSchema(AddServiceGroupInputSchema).parse(action.input);
 
       subscriptionInstanceServiceGroupOperations.addServiceGroupOperation(
         (state as any)[action.scope],
@@ -366,7 +379,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REMOVE_SERVICE_GROUP": {
-      RemoveServiceGroupInputSchema().parse(action.input);
+      memoizedSchema(RemoveServiceGroupInputSchema).parse(action.input);
 
       subscriptionInstanceServiceGroupOperations.removeServiceGroupOperation(
         (state as any)[action.scope],
@@ -378,7 +391,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ADD_SERVICE_TO_GROUP": {
-      AddServiceToGroupInputSchema().parse(action.input);
+      memoizedSchema(AddServiceToGroupInputSchema).parse(action.input);
 
       subscriptionInstanceServiceGroupOperations.addServiceToGroupOperation(
         (state as any)[action.scope],
@@ -390,7 +403,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REMOVE_SERVICE_FROM_GROUP": {
-      RemoveServiceFromGroupInputSchema().parse(action.input);
+      memoizedSchema(RemoveServiceFromGroupInputSchema).parse(action.input);
 
       subscriptionInstanceServiceGroupOperations.removeServiceFromGroupOperation(
         (state as any)[action.scope],
@@ -402,7 +415,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_SERVICE_GROUP_COST": {
-      UpdateServiceGroupCostInputSchema().parse(action.input);
+      memoizedSchema(UpdateServiceGroupCostInputSchema).parse(action.input);
 
       subscriptionInstanceServiceGroupOperations.updateServiceGroupCostOperation(
         (state as any)[action.scope],
@@ -414,7 +427,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ADD_SERVICE_METRIC": {
-      AddServiceMetricInputSchema().parse(action.input);
+      memoizedSchema(AddServiceMetricInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.addServiceMetricOperation(
         (state as any)[action.scope],
@@ -426,7 +439,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_METRIC": {
-      UpdateMetricInputSchema().parse(action.input);
+      memoizedSchema(UpdateMetricInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.updateMetricOperation(
         (state as any)[action.scope],
@@ -438,7 +451,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_METRIC_USAGE": {
-      UpdateMetricUsageInputSchema().parse(action.input);
+      memoizedSchema(UpdateMetricUsageInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.updateMetricUsageOperation(
         (state as any)[action.scope],
@@ -450,7 +463,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REMOVE_SERVICE_METRIC": {
-      RemoveServiceMetricInputSchema().parse(action.input);
+      memoizedSchema(RemoveServiceMetricInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.removeServiceMetricOperation(
         (state as any)[action.scope],
@@ -462,7 +475,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "INCREMENT_METRIC_USAGE": {
-      IncrementMetricUsageInputSchema().parse(action.input);
+      memoizedSchema(IncrementMetricUsageInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.incrementMetricUsageOperation(
         (state as any)[action.scope],
@@ -474,7 +487,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "DECREMENT_METRIC_USAGE": {
-      DecrementMetricUsageInputSchema().parse(action.input);
+      memoizedSchema(DecrementMetricUsageInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.decrementMetricUsageOperation(
         (state as any)[action.scope],
@@ -486,7 +499,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "ACCRUE_METRIC_USAGE": {
-      AccrueMetricUsageInputSchema().parse(action.input);
+      memoizedSchema(AccrueMetricUsageInputSchema).parse(action.input);
 
       subscriptionInstanceMetricsOperations.accrueMetricUsageOperation(
         (state as any)[action.scope],
@@ -498,7 +511,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "SET_CUSTOMER_TYPE": {
-      SetCustomerTypeInputSchema().parse(action.input);
+      memoizedSchema(SetCustomerTypeInputSchema).parse(action.input);
 
       subscriptionInstanceCustomerOperations.setCustomerTypeOperation(
         (state as any)[action.scope],
@@ -510,7 +523,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "UPDATE_TEAM_MEMBER_COUNT": {
-      UpdateTeamMemberCountInputSchema().parse(action.input);
+      memoizedSchema(UpdateTeamMemberCountInputSchema).parse(action.input);
 
       subscriptionInstanceCustomerOperations.updateTeamMemberCountOperation(
         (state as any)[action.scope],
@@ -522,7 +535,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "MARK_LINE_ITEM_INVOICED": {
-      MarkLineItemInvoicedInputSchema().parse(action.input);
+      memoizedSchema(MarkLineItemInvoicedInputSchema).parse(action.input);
 
       subscriptionInstanceDebtLineItemsOperations.markLineItemInvoicedOperation(
         (state as any)[action.scope],
@@ -534,7 +547,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "CONFIRM_LINE_ITEM_PAYMENT": {
-      ConfirmLineItemPaymentInputSchema().parse(action.input);
+      memoizedSchema(ConfirmLineItemPaymentInputSchema).parse(action.input);
 
       subscriptionInstanceDebtLineItemsOperations.confirmLineItemPaymentOperation(
         (state as any)[action.scope],
@@ -546,7 +559,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "REPORT_PAYMENT": {
-      ReportPaymentInputSchema().parse(action.input);
+      memoizedSchema(ReportPaymentInputSchema).parse(action.input);
 
       subscriptionInstanceDebtLineItemsOperations.reportPaymentOperation(
         (state as any)[action.scope],
@@ -558,7 +571,7 @@ const stateReducer: StateReducer<SubscriptionInstancePHState> = (
     }
 
     case "APPLY_CREDIT": {
-      ApplyCreditInputSchema().parse(action.input);
+      memoizedSchema(ApplyCreditInputSchema).parse(action.input);
 
       subscriptionInstanceDebtLineItemsOperations.applyCreditOperation(
         (state as any)[action.scope],

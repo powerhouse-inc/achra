@@ -18,6 +18,17 @@ import {
   EditStatusInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<BillingStatementPHState> = (
   state,
   action,
@@ -28,7 +39,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
   }
   switch (action.type) {
     case "EDIT_BILLING_STATEMENT": {
-      EditBillingStatementInputSchema().parse(action.input);
+      memoizedSchema(EditBillingStatementInputSchema).parse(action.input);
 
       billingStatementGeneralOperations.editBillingStatementOperation(
         (state as any)[action.scope],
@@ -40,7 +51,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "EDIT_CONTRIBUTOR": {
-      EditContributorInputSchema().parse(action.input);
+      memoizedSchema(EditContributorInputSchema).parse(action.input);
 
       billingStatementGeneralOperations.editContributorOperation(
         (state as any)[action.scope],
@@ -52,7 +63,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "EDIT_STATUS": {
-      EditStatusInputSchema().parse(action.input);
+      memoizedSchema(EditStatusInputSchema).parse(action.input);
 
       billingStatementGeneralOperations.editStatusOperation(
         (state as any)[action.scope],
@@ -64,7 +75,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "ADD_LINE_ITEM": {
-      AddLineItemInputSchema().parse(action.input);
+      memoizedSchema(AddLineItemInputSchema).parse(action.input);
 
       billingStatementLineItemsOperations.addLineItemOperation(
         (state as any)[action.scope],
@@ -76,7 +87,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "EDIT_LINE_ITEM": {
-      EditLineItemInputSchema().parse(action.input);
+      memoizedSchema(EditLineItemInputSchema).parse(action.input);
 
       billingStatementLineItemsOperations.editLineItemOperation(
         (state as any)[action.scope],
@@ -88,7 +99,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "DELETE_LINE_ITEM": {
-      DeleteLineItemInputSchema().parse(action.input);
+      memoizedSchema(DeleteLineItemInputSchema).parse(action.input);
 
       billingStatementLineItemsOperations.deleteLineItemOperation(
         (state as any)[action.scope],
@@ -100,7 +111,7 @@ const stateReducer: StateReducer<BillingStatementPHState> = (
     }
 
     case "EDIT_LINE_ITEM_TAG": {
-      EditLineItemTagInputSchema().parse(action.input);
+      memoizedSchema(EditLineItemTagInputSchema).parse(action.input);
 
       billingStatementTagsOperations.editLineItemTagOperation(
         (state as any)[action.scope],

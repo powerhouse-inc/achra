@@ -228,7 +228,15 @@ export function useResourcesServicesAutoPlacement(): UseResourcesServicesAutoPla
       return;
 
     globalCreationState.createdServicesAndOfferingsFolderForDrives.add(driveId);
-    void addFolder(driveId, SERVICES_AND_OFFERINGS_FOLDER_NAME);
+    addFolder(driveId, SERVICES_AND_OFFERINGS_FOLDER_NAME).catch(
+      (error: unknown) => {
+        // Allow a retry on the next render instead of staying stuck.
+        globalCreationState.createdServicesAndOfferingsFolderForDrives.delete(
+          driveId,
+        );
+        console.error("Failed to create folder:", error);
+      },
+    );
   }, [driveId, servicesAndOfferingsFolder]);
 
   // Step 2: Create "Products" subfolder if it doesn't exist (after parent exists)
@@ -238,11 +246,15 @@ export function useResourcesServicesAutoPlacement(): UseResourcesServicesAutoPla
     if (globalCreationState.createdProductsFolderForDrives.has(driveId)) return;
 
     globalCreationState.createdProductsFolderForDrives.add(driveId);
-    void addFolder(
+    addFolder(
       driveId,
       PRODUCTS_FOLDER_NAME,
       servicesAndOfferingsFolder.id,
-    );
+    ).catch((error: unknown) => {
+      // Allow a retry on the next render instead of staying stuck.
+      globalCreationState.createdProductsFolderForDrives.delete(driveId);
+      console.error("Failed to create folder:", error);
+    });
   }, [driveId, servicesAndOfferingsFolder, resourceTemplatesFolder]);
 
   // Step 3: Create "Service Offerings" subfolder if it doesn't exist (after parent exists)
@@ -253,11 +265,17 @@ export function useResourcesServicesAutoPlacement(): UseResourcesServicesAutoPla
       return;
 
     globalCreationState.createdServiceOfferingsFolderForDrives.add(driveId);
-    void addFolder(
+    addFolder(
       driveId,
       SERVICE_OFFERINGS_FOLDER_NAME,
       servicesAndOfferingsFolder.id,
-    );
+    ).catch((error: unknown) => {
+      // Allow a retry on the next render instead of staying stuck.
+      globalCreationState.createdServiceOfferingsFolderForDrives.delete(
+        driveId,
+      );
+      console.error("Failed to create folder:", error);
+    });
   }, [driveId, servicesAndOfferingsFolder, serviceOfferingsFolder]);
 
   // Step 4: Migrate documents from old folders to new structure and delete old folders

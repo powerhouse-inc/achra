@@ -167,6 +167,7 @@ export function InvoiceTableContainer({
         try {
           const fileNode = await onDropFile(
             file,
+            undefined, // targetFolder: fall back to the selected folder
             (progress: FileUploadProgress) => {
               if (
                 progress.stage === "complete" ||

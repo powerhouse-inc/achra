@@ -22,6 +22,17 @@ import {
   UpdateProfileInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<BuilderProfilePHState> = (
   state,
   action,
@@ -32,7 +43,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
   }
   switch (action.type) {
     case "UPDATE_PROFILE": {
-      UpdateProfileInputSchema().parse(action.input);
+      memoizedSchema(UpdateProfileInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.updateProfileOperation(
         (state as any)[action.scope],
@@ -44,7 +55,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "ADD_SKILL": {
-      AddSkillInputSchema().parse(action.input);
+      memoizedSchema(AddSkillInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.addSkillOperation(
         (state as any)[action.scope],
@@ -56,7 +67,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "REMOVE_SKILL": {
-      RemoveSkillInputSchema().parse(action.input);
+      memoizedSchema(RemoveSkillInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.removeSkillOperation(
         (state as any)[action.scope],
@@ -68,7 +79,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "ADD_SCOPE": {
-      AddScopeInputSchema().parse(action.input);
+      memoizedSchema(AddScopeInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.addScopeOperation(
         (state as any)[action.scope],
@@ -80,7 +91,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "REMOVE_SCOPE": {
-      RemoveScopeInputSchema().parse(action.input);
+      memoizedSchema(RemoveScopeInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.removeScopeOperation(
         (state as any)[action.scope],
@@ -92,7 +103,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "ADD_LINK": {
-      AddLinkInputSchema().parse(action.input);
+      memoizedSchema(AddLinkInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.addLinkOperation(
         (state as any)[action.scope],
@@ -104,7 +115,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "EDIT_LINK": {
-      EditLinkInputSchema().parse(action.input);
+      memoizedSchema(EditLinkInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.editLinkOperation(
         (state as any)[action.scope],
@@ -116,7 +127,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "REMOVE_LINK": {
-      RemoveLinkInputSchema().parse(action.input);
+      memoizedSchema(RemoveLinkInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.removeLinkOperation(
         (state as any)[action.scope],
@@ -128,7 +139,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "ADD_CONTRIBUTOR": {
-      AddContributorInputSchema().parse(action.input);
+      memoizedSchema(AddContributorInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.addContributorOperation(
         (state as any)[action.scope],
@@ -140,7 +151,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "REMOVE_CONTRIBUTOR": {
-      RemoveContributorInputSchema().parse(action.input);
+      memoizedSchema(RemoveContributorInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.removeContributorOperation(
         (state as any)[action.scope],
@@ -152,7 +163,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "SET_OPERATOR": {
-      SetOperatorInputSchema().parse(action.input);
+      memoizedSchema(SetOperatorInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.setOperatorOperation(
         (state as any)[action.scope],
@@ -164,7 +175,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "SET_OP_HUB_MEMBER": {
-      SetOpHubMemberInputSchema().parse(action.input);
+      memoizedSchema(SetOpHubMemberInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.setOpHubMemberOperation(
         (state as any)[action.scope],
@@ -176,7 +187,7 @@ const stateReducer: StateReducer<BuilderProfilePHState> = (
     }
 
     case "SET_WALLET_ADDRESS": {
-      SetWalletAddressInputSchema().parse(action.input);
+      memoizedSchema(SetWalletAddressInputSchema).parse(action.input);
 
       builderProfileBuildersOperations.setWalletAddressOperation(
         (state as any)[action.scope],

@@ -30,6 +30,17 @@ import {
   UpdateTransactionFlowTypeInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<SnapshotReportPHState> = (
   state,
   action,
@@ -40,7 +51,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
   }
   switch (action.type) {
     case "SET_REPORT_CONFIG": {
-      SetReportConfigInputSchema().parse(action.input);
+      memoizedSchema(SetReportConfigInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.setReportConfigOperation(
         (state as any)[action.scope],
@@ -52,7 +63,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_ACCOUNTS_DOCUMENT": {
-      SetAccountsDocumentInputSchema().parse(action.input);
+      memoizedSchema(SetAccountsDocumentInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.setAccountsDocumentOperation(
         (state as any)[action.scope],
@@ -64,7 +75,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_PERIOD": {
-      SetPeriodInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.setPeriodOperation(
         (state as any)[action.scope],
@@ -76,7 +87,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "ADD_OWNER_ID": {
-      AddOwnerIdInputSchema().parse(action.input);
+      memoizedSchema(AddOwnerIdInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.addOwnerIdOperation(
         (state as any)[action.scope],
@@ -88,7 +99,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_PERIOD_START": {
-      SetPeriodStartInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodStartInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.setPeriodStartOperation(
         (state as any)[action.scope],
@@ -100,7 +111,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_PERIOD_END": {
-      SetPeriodEndInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodEndInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.setPeriodEndOperation(
         (state as any)[action.scope],
@@ -112,7 +123,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "REMOVE_OWNER_ID": {
-      RemoveOwnerIdInputSchema().parse(action.input);
+      memoizedSchema(RemoveOwnerIdInputSchema).parse(action.input);
 
       snapshotReportConfigurationOperations.removeOwnerIdOperation(
         (state as any)[action.scope],
@@ -124,7 +135,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "ADD_SNAPSHOT_ACCOUNT": {
-      AddSnapshotAccountInputSchema().parse(action.input);
+      memoizedSchema(AddSnapshotAccountInputSchema).parse(action.input);
 
       snapshotReportAccountsOperations.addSnapshotAccountOperation(
         (state as any)[action.scope],
@@ -136,7 +147,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "UPDATE_SNAPSHOT_ACCOUNT_TYPE": {
-      UpdateSnapshotAccountTypeInputSchema().parse(action.input);
+      memoizedSchema(UpdateSnapshotAccountTypeInputSchema).parse(action.input);
 
       snapshotReportAccountsOperations.updateSnapshotAccountTypeOperation(
         (state as any)[action.scope],
@@ -148,7 +159,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "REMOVE_SNAPSHOT_ACCOUNT": {
-      RemoveSnapshotAccountInputSchema().parse(action.input);
+      memoizedSchema(RemoveSnapshotAccountInputSchema).parse(action.input);
 
       snapshotReportAccountsOperations.removeSnapshotAccountOperation(
         (state as any)[action.scope],
@@ -160,7 +171,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_STARTING_BALANCE": {
-      SetStartingBalanceInputSchema().parse(action.input);
+      memoizedSchema(SetStartingBalanceInputSchema).parse(action.input);
 
       snapshotReportBalancesOperations.setStartingBalanceOperation(
         (state as any)[action.scope],
@@ -172,7 +183,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "SET_ENDING_BALANCE": {
-      SetEndingBalanceInputSchema().parse(action.input);
+      memoizedSchema(SetEndingBalanceInputSchema).parse(action.input);
 
       snapshotReportBalancesOperations.setEndingBalanceOperation(
         (state as any)[action.scope],
@@ -184,7 +195,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "REMOVE_STARTING_BALANCE": {
-      RemoveStartingBalanceInputSchema().parse(action.input);
+      memoizedSchema(RemoveStartingBalanceInputSchema).parse(action.input);
 
       snapshotReportBalancesOperations.removeStartingBalanceOperation(
         (state as any)[action.scope],
@@ -196,7 +207,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "REMOVE_ENDING_BALANCE": {
-      RemoveEndingBalanceInputSchema().parse(action.input);
+      memoizedSchema(RemoveEndingBalanceInputSchema).parse(action.input);
 
       snapshotReportBalancesOperations.removeEndingBalanceOperation(
         (state as any)[action.scope],
@@ -208,7 +219,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "ADD_TRANSACTION": {
-      AddTransactionInputSchema().parse(action.input);
+      memoizedSchema(AddTransactionInputSchema).parse(action.input);
 
       snapshotReportTransactionsOperations.addTransactionOperation(
         (state as any)[action.scope],
@@ -220,7 +231,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "REMOVE_TRANSACTION": {
-      RemoveTransactionInputSchema().parse(action.input);
+      memoizedSchema(RemoveTransactionInputSchema).parse(action.input);
 
       snapshotReportTransactionsOperations.removeTransactionOperation(
         (state as any)[action.scope],
@@ -232,7 +243,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "UPDATE_TRANSACTION_FLOW_TYPE": {
-      UpdateTransactionFlowTypeInputSchema().parse(action.input);
+      memoizedSchema(UpdateTransactionFlowTypeInputSchema).parse(action.input);
 
       snapshotReportTransactionsOperations.updateTransactionFlowTypeOperation(
         (state as any)[action.scope],
@@ -244,7 +255,7 @@ const stateReducer: StateReducer<SnapshotReportPHState> = (
     }
 
     case "RECALCULATE_FLOW_TYPES": {
-      RecalculateFlowTypesInputSchema().parse(action.input);
+      memoizedSchema(RecalculateFlowTypesInputSchema).parse(action.input);
 
       snapshotReportTransactionsOperations.recalculateFlowTypesOperation(
         (state as any)[action.scope],

@@ -122,6 +122,7 @@ export function DocumentDropZone({
         try {
           const fileNode = await onDropFile(
             file,
+            undefined, // targetFolder: fall back to the selected folder
             (progress: FileUploadProgress) => {
               if (progress.stage === "complete") {
                 cbToast(`Successfully uploaded ${file.name}`, {

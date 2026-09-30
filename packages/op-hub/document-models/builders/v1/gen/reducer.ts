@@ -11,6 +11,17 @@ import {
   RemoveBuilderInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<BuildersPHState> = (
   state,
   action,
@@ -21,7 +32,7 @@ const stateReducer: StateReducer<BuildersPHState> = (
   }
   switch (action.type) {
     case "ADD_BUILDER": {
-      AddBuilderInputSchema().parse(action.input);
+      memoizedSchema(AddBuilderInputSchema).parse(action.input);
 
       buildersBuildersOperations.addBuilderOperation(
         (state as any)[action.scope],
@@ -33,7 +44,7 @@ const stateReducer: StateReducer<BuildersPHState> = (
     }
 
     case "REMOVE_BUILDER": {
-      RemoveBuilderInputSchema().parse(action.input);
+      memoizedSchema(RemoveBuilderInputSchema).parse(action.input);
 
       buildersBuildersOperations.removeBuilderOperation(
         (state as any)[action.scope],

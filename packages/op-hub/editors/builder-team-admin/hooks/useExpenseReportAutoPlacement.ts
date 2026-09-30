@@ -130,7 +130,11 @@ export function useExpenseReportAutoPlacement(): UseExpenseReportAutoPlacementRe
       return;
 
     globalCreationState.createdExpenseReportsFolderForDrives.add(driveId);
-    void addFolder(driveId, EXPENSE_REPORTS_FOLDER_NAME);
+    addFolder(driveId, EXPENSE_REPORTS_FOLDER_NAME).catch((error: unknown) => {
+      // Allow a retry on the next render instead of staying stuck.
+      globalCreationState.createdExpenseReportsFolderForDrives.delete(driveId);
+      console.error("Failed to create folder:", error);
+    });
   }, [driveId, expenseReportsFolder]);
 
   // Get year folders that exist directly under the Expense Reports folder

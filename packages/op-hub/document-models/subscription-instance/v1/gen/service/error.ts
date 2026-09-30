@@ -201,29 +201,38 @@ export class ReportOveragePaymentInvalidAmountError
 
 export const errors = {
   AddService: { SubscriptionNotActiveAddServiceError },
+
   RemoveService: {
     RemoveServiceNotFoundError,
     SubscriptionNotActiveRemoveServiceError,
   },
+
   UpdateServiceSetupCost: { UpdateServiceSetupCostNotFoundError },
+
   UpdateServiceRecurringCost: { UpdateServiceRecurringCostNotFoundError },
+
   ReportSetupPayment: {
     ReportSetupPaymentServiceNotFoundError,
     ReportSetupPaymentAlreadyPaidError,
     ReportSetupPaymentNoCostError,
     ReportSetupPaymentNothingOwedError,
   },
+
   ReportRecurringPayment: {
     ReportRecurringPaymentServiceNotFoundError,
     ReportRecurringPaymentAlreadyPaidThisCycleError,
     ReportRecurringPaymentNoCostError,
     ReportRecurringPaymentNothingOwedError,
   },
+
   UpdateServiceInfo: { UpdateServiceInfoNotFoundError },
+
   AddServiceFacetSelection: { AddServiceFacetSelectionServiceNotFoundError },
+
   RemoveServiceFacetSelection: {
     RemoveServiceFacetSelectionServiceNotFoundError,
   },
+
   ReportOveragePayment: {
     ReportOveragePaymentExceedsDebtError,
     ReportOveragePaymentInvalidAmountError,

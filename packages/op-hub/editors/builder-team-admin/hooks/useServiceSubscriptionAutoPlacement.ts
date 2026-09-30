@@ -153,7 +153,15 @@ export function useServiceSubscriptionAutoPlacement(): UseServiceSubscriptionAut
       return;
 
     globalCreationState.createdServiceSubscriptionsFolderForDrives.add(driveId);
-    void addFolder(driveId, SERVICE_SUBSCRIPTIONS_FOLDER_NAME);
+    addFolder(driveId, SERVICE_SUBSCRIPTIONS_FOLDER_NAME).catch(
+      (error: unknown) => {
+        // Allow a retry on the next render instead of staying stuck.
+        globalCreationState.createdServiceSubscriptionsFolderForDrives.delete(
+          driveId,
+        );
+        console.error("Failed to create folder:", error);
+      },
+    );
   }, [driveId, serviceSubscriptionsFolder]);
 
   // Auto-place service subscription documents into the folder

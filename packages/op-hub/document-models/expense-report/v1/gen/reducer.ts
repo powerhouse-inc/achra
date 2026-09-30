@@ -27,6 +27,17 @@ import {
   UpdateWalletInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<ExpenseReportPHState> = (
   state,
   action,
@@ -37,7 +48,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
   }
   switch (action.type) {
     case "ADD_WALLET": {
-      AddWalletInputSchema().parse(action.input);
+      memoizedSchema(AddWalletInputSchema).parse(action.input);
 
       expenseReportWalletOperations.addWalletOperation(
         (state as any)[action.scope],
@@ -49,7 +60,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "REMOVE_WALLET": {
-      RemoveWalletInputSchema().parse(action.input);
+      memoizedSchema(RemoveWalletInputSchema).parse(action.input);
 
       expenseReportWalletOperations.removeWalletOperation(
         (state as any)[action.scope],
@@ -61,7 +72,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "ADD_BILLING_STATEMENT": {
-      AddBillingStatementInputSchema().parse(action.input);
+      memoizedSchema(AddBillingStatementInputSchema).parse(action.input);
 
       expenseReportWalletOperations.addBillingStatementOperation(
         (state as any)[action.scope],
@@ -73,7 +84,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "REMOVE_BILLING_STATEMENT": {
-      RemoveBillingStatementInputSchema().parse(action.input);
+      memoizedSchema(RemoveBillingStatementInputSchema).parse(action.input);
 
       expenseReportWalletOperations.removeBillingStatementOperation(
         (state as any)[action.scope],
@@ -85,7 +96,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "ADD_LINE_ITEM": {
-      AddLineItemInputSchema().parse(action.input);
+      memoizedSchema(AddLineItemInputSchema).parse(action.input);
 
       expenseReportWalletOperations.addLineItemOperation(
         (state as any)[action.scope],
@@ -97,7 +108,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "UPDATE_LINE_ITEM": {
-      UpdateLineItemInputSchema().parse(action.input);
+      memoizedSchema(UpdateLineItemInputSchema).parse(action.input);
 
       expenseReportWalletOperations.updateLineItemOperation(
         (state as any)[action.scope],
@@ -109,7 +120,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "REMOVE_LINE_ITEM": {
-      RemoveLineItemInputSchema().parse(action.input);
+      memoizedSchema(RemoveLineItemInputSchema).parse(action.input);
 
       expenseReportWalletOperations.removeLineItemOperation(
         (state as any)[action.scope],
@@ -121,7 +132,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "ADD_LINE_ITEM_GROUP": {
-      AddLineItemGroupInputSchema().parse(action.input);
+      memoizedSchema(AddLineItemGroupInputSchema).parse(action.input);
 
       expenseReportWalletOperations.addLineItemGroupOperation(
         (state as any)[action.scope],
@@ -133,7 +144,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "UPDATE_LINE_ITEM_GROUP": {
-      UpdateLineItemGroupInputSchema().parse(action.input);
+      memoizedSchema(UpdateLineItemGroupInputSchema).parse(action.input);
 
       expenseReportWalletOperations.updateLineItemGroupOperation(
         (state as any)[action.scope],
@@ -145,7 +156,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "REMOVE_LINE_ITEM_GROUP": {
-      RemoveLineItemGroupInputSchema().parse(action.input);
+      memoizedSchema(RemoveLineItemGroupInputSchema).parse(action.input);
 
       expenseReportWalletOperations.removeLineItemGroupOperation(
         (state as any)[action.scope],
@@ -157,7 +168,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_GROUP_TOTALS": {
-      SetGroupTotalsInputSchema().parse(action.input);
+      memoizedSchema(SetGroupTotalsInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setGroupTotalsOperation(
         (state as any)[action.scope],
@@ -169,7 +180,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "REMOVE_GROUP_TOTALS": {
-      RemoveGroupTotalsInputSchema().parse(action.input);
+      memoizedSchema(RemoveGroupTotalsInputSchema).parse(action.input);
 
       expenseReportWalletOperations.removeGroupTotalsOperation(
         (state as any)[action.scope],
@@ -181,7 +192,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_PERIOD_START": {
-      SetPeriodStartInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodStartInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setPeriodStartOperation(
         (state as any)[action.scope],
@@ -193,7 +204,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_PERIOD_END": {
-      SetPeriodEndInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodEndInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setPeriodEndOperation(
         (state as any)[action.scope],
@@ -205,7 +216,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "UPDATE_WALLET": {
-      UpdateWalletInputSchema().parse(action.input);
+      memoizedSchema(UpdateWalletInputSchema).parse(action.input);
 
       expenseReportWalletOperations.updateWalletOperation(
         (state as any)[action.scope],
@@ -217,7 +228,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_OWNER_ID": {
-      SetOwnerIdInputSchema().parse(action.input);
+      memoizedSchema(SetOwnerIdInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setOwnerIdOperation(
         (state as any)[action.scope],
@@ -229,7 +240,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_STATUS": {
-      SetStatusInputSchema().parse(action.input);
+      memoizedSchema(SetStatusInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setStatusOperation(
         (state as any)[action.scope],
@@ -241,7 +252,7 @@ const stateReducer: StateReducer<ExpenseReportPHState> = (
     }
 
     case "SET_PERIOD": {
-      SetPeriodInputSchema().parse(action.input);
+      memoizedSchema(SetPeriodInputSchema).parse(action.input);
 
       expenseReportWalletOperations.setPeriodOperation(
         (state as any)[action.scope],

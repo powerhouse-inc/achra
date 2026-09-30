@@ -170,24 +170,36 @@ export class DuplicateTierIdError extends Error implements ReducerError {
 
 export const errors = {
   UpdateTier: { UpdateTierNotFoundError },
+
   UpdateTierPricing: { UpdateTierPricingNotFoundError },
+
   DeleteTier: { DeleteTierNotFoundError },
+
   AddServiceLevel: { AddServiceLevelTierNotFoundError },
+
   UpdateServiceLevel: {
     UpdateServiceLevelTierNotFoundError,
     UpdateServiceLevelNotFoundError,
   },
+
   RemoveServiceLevel: { RemoveServiceLevelTierNotFoundError },
+
   AddUsageLimit: { AddUsageLimitTierNotFoundError },
+
   UpdateUsageLimit: {
     UpdateUsageLimitTierNotFoundError,
     UpdateUsageLimitNotFoundError,
   },
+
   RemoveUsageLimit: { RemoveUsageLimitTierNotFoundError },
+
   SetTierDefaultBillingCycle: { SetTierDefaultBillingCycleTierNotFoundError },
+
   SetTierBillingCycleDiscounts: {
     SetTierBillingCycleDiscountsTierNotFoundError,
   },
+
   SetTierPricingMode: { SetTierPricingModeTierNotFoundError },
+
   ReorderTiers: { TierIdsMismatchError, DuplicateTierIdError },
 };

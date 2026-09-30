@@ -19,6 +19,17 @@ import {
   UpdateTransactionPeriodInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<AccountTransactionsPHState> = (
   state,
   action,
@@ -29,7 +40,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
   }
   switch (action.type) {
     case "SET_ACCOUNT": {
-      SetAccountInputSchema().parse(action.input);
+      memoizedSchema(SetAccountInputSchema).parse(action.input);
 
       accountTransactionsAccountOperations.setAccountOperation(
         (state as any)[action.scope],
@@ -41,7 +52,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "ADD_TRANSACTION": {
-      AddTransactionInputSchema().parse(action.input);
+      memoizedSchema(AddTransactionInputSchema).parse(action.input);
 
       accountTransactionsTransactionsOperations.addTransactionOperation(
         (state as any)[action.scope],
@@ -53,7 +64,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "UPDATE_TRANSACTION": {
-      UpdateTransactionInputSchema().parse(action.input);
+      memoizedSchema(UpdateTransactionInputSchema).parse(action.input);
 
       accountTransactionsTransactionsOperations.updateTransactionOperation(
         (state as any)[action.scope],
@@ -65,7 +76,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "DELETE_TRANSACTION": {
-      DeleteTransactionInputSchema().parse(action.input);
+      memoizedSchema(DeleteTransactionInputSchema).parse(action.input);
 
       accountTransactionsTransactionsOperations.deleteTransactionOperation(
         (state as any)[action.scope],
@@ -77,7 +88,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "UPDATE_TRANSACTION_PERIOD": {
-      UpdateTransactionPeriodInputSchema().parse(action.input);
+      memoizedSchema(UpdateTransactionPeriodInputSchema).parse(action.input);
 
       accountTransactionsTransactionsOperations.updateTransactionPeriodOperation(
         (state as any)[action.scope],
@@ -89,7 +100,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "ADD_BUDGET": {
-      AddBudgetInputSchema().parse(action.input);
+      memoizedSchema(AddBudgetInputSchema).parse(action.input);
 
       accountTransactionsBudgetsOperations.addBudgetOperation(
         (state as any)[action.scope],
@@ -101,7 +112,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "UPDATE_BUDGET": {
-      UpdateBudgetInputSchema().parse(action.input);
+      memoizedSchema(UpdateBudgetInputSchema).parse(action.input);
 
       accountTransactionsBudgetsOperations.updateBudgetOperation(
         (state as any)[action.scope],
@@ -113,7 +124,7 @@ const stateReducer: StateReducer<AccountTransactionsPHState> = (
     }
 
     case "DELETE_BUDGET": {
-      DeleteBudgetInputSchema().parse(action.input);
+      memoizedSchema(DeleteBudgetInputSchema).parse(action.input);
 
       accountTransactionsBudgetsOperations.deleteBudgetOperation(
         (state as any)[action.scope],

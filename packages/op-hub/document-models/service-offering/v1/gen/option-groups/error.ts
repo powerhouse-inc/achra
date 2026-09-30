@@ -83,12 +83,18 @@ export class SetOptionGroupDiscountModeNotFoundError
 
 export const errors = {
   UpdateOptionGroup: { UpdateOptionGroupNotFoundError },
+
   DeleteOptionGroup: { DeleteOptionGroupNotFoundError },
+
   SetOptionGroupStandalonePricing: {
     SetOptionGroupStandalonePricingNotFoundError,
   },
+
   AddOptionGroupTierPricing: { AddOptionGroupTierPricingNotFoundError },
+
   UpdateOptionGroupTierPricing: { UpdateOptionGroupTierPricingNotFoundError },
+
   RemoveOptionGroupTierPricing: { RemoveOptionGroupTierPricingNotFoundError },
+
   SetOptionGroupDiscountMode: { SetOptionGroupDiscountModeNotFoundError },
 };

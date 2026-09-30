@@ -58,14 +58,15 @@ async function graphqlRequest<T>(
 
 // Query to find all builder profile documents
 const FIND_BUILDER_PROFILES_QUERY = `
-  query FindBuilderProfiles {
-    findDocuments(search: { type: "powerhouse/builder-profile" }) {
+  query FindBuilderProfiles($cursor: String) {
+    findDocuments(search: { type: "powerhouse/builder-profile" }, paging: { limit: 500, cursor: $cursor }) {
       items {
         id
         name
         state
       }
-      totalCount
+      hasNextPage
+      cursor
     }
   }
 `;
@@ -96,7 +97,7 @@ export interface RemoteBuilderProfile {
 function getGlobalState(
   state: Record<string, unknown>,
 ): Record<string, unknown> {
-  if (state && typeof state === "object" && "global" in state) {
+  if (typeof state === "object" && "global" in state) {
     return (state as { global: Record<string, unknown> }).global;
   }
   return state;
@@ -111,7 +112,8 @@ interface FindBuilderProfilesItem {
 interface FindBuilderProfilesResponse {
   findDocuments: {
     items: FindBuilderProfilesItem[];
-    totalCount: number;
+    hasNextPage: boolean;
+    cursor: string | null;
   };
 }
 
@@ -126,10 +128,10 @@ function toRemoteProfile(item: FindBuilderProfilesItem): RemoteBuilderProfile {
   return {
     id: item.id,
     state: {
-      name: (global.name as string) ?? null,
-      slug: (global.slug as string) ?? null,
-      icon: (global.icon as string) ?? null,
-      description: (global.description as string) ?? null,
+      name: (global.name as string | null | undefined) ?? null,
+      slug: (global.slug as string | null | undefined) ?? null,
+      icon: (global.icon as string | null | undefined) ?? null,
+      description: (global.description as string | null | undefined) ?? null,
     },
   };
 }
@@ -155,11 +157,23 @@ export async function fetchAllRemoteBuilderProfiles(): Promise<
   RemoteBuilderProfile[]
 > {
   try {
-    const data = await graphqlRequest<FindBuilderProfilesResponse>(
-      FIND_BUILDER_PROFILES_QUERY,
-    );
-    const items = data?.findDocuments?.items ?? [];
-    return items.map(toRemoteProfile);
+    const profiles: RemoteBuilderProfile[] = [];
+    let cursor: string | null = null;
+    do {
+      const data: FindBuilderProfilesResponse | null =
+        await graphqlRequest<FindBuilderProfilesResponse>(
+          FIND_BUILDER_PROFILES_QUERY,
+          { cursor },
+        );
+      const page: FindBuilderProfilesResponse["findDocuments"] | undefined =
+        data?.findDocuments;
+      if (!page) return [];
+      profiles.push(...page.items.map(toRemoteProfile));
+      if (!page.hasNextPage) return profiles;
+      if (!page.cursor || page.cursor === cursor) return [];
+      cursor = page.cursor;
+    } while (cursor);
+    return profiles;
   } catch {
     return [];
   }

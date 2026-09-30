@@ -29,6 +29,17 @@ import {
   UpdateInstanceStatusInputSchema,
 } from "./schema/zod.js";
 
+const schemaMemo = new Map<() => unknown, unknown>();
+
+function memoizedSchema<T>(makeSchema: () => T): T {
+  let schema = schemaMemo.get(makeSchema) as T | undefined;
+  if (schema === undefined) {
+    schema = makeSchema();
+    schemaMemo.set(makeSchema, schema);
+  }
+  return schema;
+}
+
 const stateReducer: StateReducer<ResourceInstancePHState> = (
   state,
   action,
@@ -39,7 +50,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
   }
   switch (action.type) {
     case "INITIALIZE_INSTANCE": {
-      InitializeInstanceInputSchema().parse(action.input);
+      memoizedSchema(InitializeInstanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.initializeInstanceOperation(
         (state as any)[action.scope],
@@ -51,7 +62,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "UPDATE_INSTANCE_INFO": {
-      UpdateInstanceInfoInputSchema().parse(action.input);
+      memoizedSchema(UpdateInstanceInfoInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.updateInstanceInfoOperation(
         (state as any)[action.scope],
@@ -63,7 +74,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "SET_OPERATOR_PROFILE": {
-      SetOperatorProfileInputSchema().parse(action.input);
+      memoizedSchema(SetOperatorProfileInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.setOperatorProfileOperation(
         (state as any)[action.scope],
@@ -75,7 +86,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "UPDATE_INSTANCE_STATUS": {
-      UpdateInstanceStatusInputSchema().parse(action.input);
+      memoizedSchema(UpdateInstanceStatusInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.updateInstanceStatusOperation(
         (state as any)[action.scope],
@@ -87,7 +98,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "CONFIRM_INSTANCE": {
-      ConfirmInstanceInputSchema().parse(action.input);
+      memoizedSchema(ConfirmInstanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.confirmInstanceOperation(
         (state as any)[action.scope],
@@ -99,7 +110,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "REPORT_PROVISIONING_STARTED": {
-      ReportProvisioningStartedInputSchema().parse(action.input);
+      memoizedSchema(ReportProvisioningStartedInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.reportProvisioningStartedOperation(
         (state as any)[action.scope],
@@ -111,7 +122,9 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "REPORT_PROVISIONING_COMPLETED": {
-      ReportProvisioningCompletedInputSchema().parse(action.input);
+      memoizedSchema(ReportProvisioningCompletedInputSchema).parse(
+        action.input,
+      );
 
       resourceInstanceInstanceManagementOperations.reportProvisioningCompletedOperation(
         (state as any)[action.scope],
@@ -123,7 +136,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "REPORT_PROVISIONING_FAILED": {
-      ReportProvisioningFailedInputSchema().parse(action.input);
+      memoizedSchema(ReportProvisioningFailedInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.reportProvisioningFailedOperation(
         (state as any)[action.scope],
@@ -135,7 +148,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "ACTIVATE_INSTANCE": {
-      ActivateInstanceInputSchema().parse(action.input);
+      memoizedSchema(ActivateInstanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.activateInstanceOperation(
         (state as any)[action.scope],
@@ -147,7 +160,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "SUSPEND_FOR_NON_PAYMENT": {
-      SuspendForNonPaymentInputSchema().parse(action.input);
+      memoizedSchema(SuspendForNonPaymentInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.suspendForNonPaymentOperation(
         (state as any)[action.scope],
@@ -159,7 +172,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "SUSPEND_FOR_MAINTENANCE": {
-      SuspendForMaintenanceInputSchema().parse(action.input);
+      memoizedSchema(SuspendForMaintenanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.suspendForMaintenanceOperation(
         (state as any)[action.scope],
@@ -171,7 +184,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "RESUME_AFTER_PAYMENT": {
-      ResumeAfterPaymentInputSchema().parse(action.input);
+      memoizedSchema(ResumeAfterPaymentInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.resumeAfterPaymentOperation(
         (state as any)[action.scope],
@@ -183,7 +196,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "RESUME_AFTER_MAINTENANCE": {
-      ResumeAfterMaintenanceInputSchema().parse(action.input);
+      memoizedSchema(ResumeAfterMaintenanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.resumeAfterMaintenanceOperation(
         (state as any)[action.scope],
@@ -195,7 +208,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "SUSPEND_INSTANCE": {
-      SuspendInstanceInputSchema().parse(action.input);
+      memoizedSchema(SuspendInstanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.suspendInstanceOperation(
         (state as any)[action.scope],
@@ -207,7 +220,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "TERMINATE_INSTANCE": {
-      TerminateInstanceInputSchema().parse(action.input);
+      memoizedSchema(TerminateInstanceInputSchema).parse(action.input);
 
       resourceInstanceInstanceManagementOperations.terminateInstanceOperation(
         (state as any)[action.scope],
@@ -219,7 +232,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "SET_INSTANCE_FACET": {
-      SetInstanceFacetInputSchema().parse(action.input);
+      memoizedSchema(SetInstanceFacetInputSchema).parse(action.input);
 
       resourceInstanceConfigurationManagementOperations.setInstanceFacetOperation(
         (state as any)[action.scope],
@@ -231,7 +244,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "REMOVE_INSTANCE_FACET": {
-      RemoveInstanceFacetInputSchema().parse(action.input);
+      memoizedSchema(RemoveInstanceFacetInputSchema).parse(action.input);
 
       resourceInstanceConfigurationManagementOperations.removeInstanceFacetOperation(
         (state as any)[action.scope],
@@ -243,7 +256,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "UPDATE_INSTANCE_FACET": {
-      UpdateInstanceFacetInputSchema().parse(action.input);
+      memoizedSchema(UpdateInstanceFacetInputSchema).parse(action.input);
 
       resourceInstanceConfigurationManagementOperations.updateInstanceFacetOperation(
         (state as any)[action.scope],
@@ -255,7 +268,7 @@ const stateReducer: StateReducer<ResourceInstancePHState> = (
     }
 
     case "APPLY_CONFIGURATION_CHANGES": {
-      ApplyConfigurationChangesInputSchema().parse(action.input);
+      memoizedSchema(ApplyConfigurationChangesInputSchema).parse(action.input);
 
       resourceInstanceConfigurationManagementOperations.applyConfigurationChangesOperation(
         (state as any)[action.scope],

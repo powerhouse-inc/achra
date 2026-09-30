@@ -36,6 +36,8 @@ export class DeleteOptionGroupNotFoundError
 
 export const errors = {
   AddOptionGroup: { DuplicateOptionGroupIdError },
+
   UpdateOptionGroup: { UpdateOptionGroupNotFoundError },
+
   DeleteOptionGroup: { DeleteOptionGroupNotFoundError },
 };

@@ -20,6 +20,8 @@ export class AgentNotFoundError extends Error implements ReducerError {
 
 export const errors = {
   AddAgent: { AgentDuplicateIdError },
+
   RemoveAgent: { AgentNotFoundError },
+
   EditAgent: { AgentNotFoundError },
 };

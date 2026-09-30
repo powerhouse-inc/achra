@@ -163,29 +163,39 @@ export class AlreadyTerminatedError extends Error implements ReducerError {
 
 export const errors = {
   ConfirmInstance: { InvalidStatusTransitionError },
+
   ReportProvisioningStarted: {
     InvalidStatusTransitionReportProvisioningStartedError,
   },
+
   ReportProvisioningCompleted: {
     InvalidStatusTransitionReportProvisioningCompletedError,
   },
+
   ReportProvisioningFailed: {
     InvalidStatusTransitionReportProvisioningFailedError,
   },
+
   ActivateInstance: {
     InvalidStatusTransitionActivateInstanceError,
     ProvisioningNotCompletedError,
   },
+
   SuspendForNonPayment: { InvalidStatusTransitionSuspendForNonPaymentError },
+
   SuspendForMaintenance: { InvalidStatusTransitionSuspendForMaintenanceError },
+
   ResumeAfterPayment: {
     InvalidStatusTransitionResumeAfterPaymentError,
     InvalidSuspensionTypeError,
   },
+
   ResumeAfterMaintenance: {
     InvalidStatusTransitionResumeAfterMaintenanceError,
     InvalidSuspensionTypeResumeAfterMaintenanceError,
   },
+
   SuspendInstance: { InvalidStatusTransitionSuspendInstanceError },
+
   TerminateInstance: { AlreadyTerminatedError },
 };

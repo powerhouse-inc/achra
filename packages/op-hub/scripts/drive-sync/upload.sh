@@ -194,7 +194,7 @@ def _poll_job(job_id, timeout=120, interval=0.5):
     (status, error, completedAt). Older switchboards don't have JobInfo.progress,
     so we can't use `docs apply --wait`."""
     query = ('query($id:String!){ jobStatus(jobId:$id) '
-             '{ id status error completedAt } }')
+             '{ id status result error completedAt } }')
     variables = json.dumps({"id": job_id})
     deadline = time.time() + timeout
     last_status = None
@@ -218,6 +218,10 @@ def _poll_job(job_id, timeout=120, interval=0.5):
         # but tolerate the wrapped {data:{...}} shape too.
         root = data.get("data") if isinstance(data.get("data"), dict) else data
         info = (root or {}).get("jobStatus") or {}
+        outcome = info.get("result") or {}
+        if outcome.get("allApplied") is False:
+            rejected = [a for a in outcome.get("actions", []) if a.get("kind") != "applied"]
+            raise RuntimeError(f"job {job_id} rejected actions: {json.dumps(rejected)[:600]}")
         last_status = info.get("status")
         # Terminal-fail signal from reactor-api.
         if last_status in ("FAILED", "failed", "ERROR", "error"):
@@ -435,7 +439,7 @@ def get_drive_tree(drive_slug_or_id):
     try:
         stdout = sb_run("docs", "tree", drive_slug_or_id)
         tree = json.loads(stdout)
-        return tree["document"]["state"]["global"]["nodes"]
+        return tree.get("nodes", tree.get("document", {}).get("state", {}).get("global", {}).get("nodes", []))
     except Exception:
         return []
 
@@ -1273,11 +1277,13 @@ def apply_expense_report(old_id, new_id, state):
     if state.get("status"):
         mutate(new_id, "setStatus", {"status": state["status"]})
 
-    # 2. Line item groups — root groups first (parentId=None), then children
+    # New expense documents already contain default groups. Replace them,
+    # rather than duplicating defaults, and preserve source group order.
+    current = json.loads(sb_run("docs", "get", new_id, "--state"))["state"]["global"]
+    for grp in current.get("groups") or []:
+        mutate(new_id, "removeLineItemGroup", {"id": grp["id"]})
     groups = state.get("groups") or []
-    root_groups = [g for g in groups if not g.get("parentId")]
-    child_groups = [g for g in groups if g.get("parentId")]
-    for grp in root_groups + child_groups:
+    for grp in groups:
         inp = {"id": grp["id"], "label": grp.get("label", "")}
         if grp.get("parentId"):
             inp["parentId"] = grp["parentId"]
@@ -1545,6 +1551,18 @@ def apply_request_for_proposals(old_id, new_id, state):
 
 # ── Apply states to all documents ─────────────────────────────────────────────
 
+def apply_snapshot_report(old_id, new_id, state):
+    apply_generic_state(old_id, new_id, state, "powerhouse/snapshot-report")
+    for owner in state.get("ownerIds") or []:
+        mutate(new_id, "addOwnerId", {"ownerId": map_id(owner)})
+    for field, op, input_field in [
+        ("reportPeriodStart", "setPeriodStart", "periodStart"),
+        ("reportPeriodEnd", "setPeriodEnd", "periodEnd"),
+    ]:
+        if state.get(field) is not None:
+            mutate(new_id, op, {input_field: state[field]})
+
+
 HANDLERS = {
     "powerhouse/builder-profile": apply_builder_profile,
     "powerhouse/resource-template": apply_resource_template,
@@ -1552,7 +1570,10 @@ HANDLERS = {
     "powerhouse/expense-report": apply_expense_report,
     "powerhouse/workstream": apply_workstream,
     "powerhouse/scope-of-work": apply_scope_of_work,
+    "powerhouse/scopeofwork": apply_scope_of_work,
     "powerhouse/request-for-proposals": apply_request_for_proposals,
+    "powerhouse/rfp": apply_request_for_proposals,
+    "powerhouse/snapshot-report": apply_snapshot_report,
 }
 
 for doc in docs_sorted:
@@ -1573,6 +1594,7 @@ for doc in docs_sorted:
         except Exception as e:
             _batch_target = None  # reset on error
             errf(f"Error applying state for '{doc['name']}': {e}")
+            sys.exit(1)
     else:
         try:
             begin_batch(new_id)
@@ -1582,6 +1604,7 @@ for doc in docs_sorted:
         except Exception as e:
             _batch_target = None  # reset on error
             errf(f"Error applying generic state for '{doc['name']}': {e}")
+            sys.exit(1)
 
 # ── Step 5b: Cross-drive ID remapping ─────────────────────────────────────────
 
@@ -1668,6 +1691,8 @@ for doc in docs_sorted:
 
 if verified > 0 or verify_failed > 0:
     log(f"State verification: {verified} passed, {verify_failed} failed")
+if verify_failed:
+    sys.exit(1)
 
 # ── Save ID map ──────────────────────────────────────────────────────────────
 
