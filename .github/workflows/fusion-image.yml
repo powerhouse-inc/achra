@@ -1,0 +1,51 @@
+name: Fusion Image
+
+# Builds the apps/frontend Fusion image and pushes it to Harbor. vetra.io
+# auto-deploys the newest `sha-<12 hex>` tag to environments running it.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['main']
+
+concurrency:
+  group: fusion-image-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: cr.vetra.io/achra/frontend
+
+jobs:
+  build-and-push:
+    name: Build and push frontend image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute image tag
+        id: tag
+        run: echo "tag=sha-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Harbor
+        uses: docker/login-action@v3
+        with:
+          registry: cr.vetra.io
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/frontend/Dockerfile
+          push: true
+          tags: ${{ env.IMAGE }}:${{ steps.tag.outputs.tag }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
