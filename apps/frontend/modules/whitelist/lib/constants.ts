@@ -1,7 +1,9 @@
+import { PUBLIC_SHOW_WHITELIST_OVERLAY } from '@/modules/shared/lib/public-env'
+
 /**
  * Whether to show the whitelist overlay
  */
-export const SHOW_WHITELIST_OVERLAY = process.env.NEXT_PUBLIC_SHOW_WHITELIST_OVERLAY === 'true'
+export const SHOW_WHITELIST_OVERLAY = PUBLIC_SHOW_WHITELIST_OVERLAY === 'true'
 
 /**
  * Storage key for the whitelist overlay

@@ -27,6 +27,8 @@ const stubNodeBuiltinsInBrowser = Object.fromEntries(
 )
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle (.next/standalone) for the container image.
+  output: 'standalone',
   typedRoutes: true,
   reactCompiler: true,
   cacheComponents: true,

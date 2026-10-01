@@ -1,0 +1,26 @@
+# Build context = repo root (see apps/frontend/Dockerfile).
+**/node_modules
+**/.next
+**/.turbo
+**/dist
+**/storybook-static
+**/coverage
+**/playwright-report
+**/test-results
+**/blob-report
+**/playwright/.cache
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+!**/.env.example
+.git
+.github
+.vscode
+.claude
+.agent
+.agents
+.cursor
+.serena
+.ph
+**/*.log
+**/.DS_Store

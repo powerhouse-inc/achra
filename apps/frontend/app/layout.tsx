@@ -42,6 +42,16 @@ const openSansCondensed = localFont({
   variable: '--font-open-sans-condensed',
 })
 
+// Container images are built with NEXT_PUBLIC_BASE_URL set to a placeholder that
+// is substituted at start-up, so the build-time value need not be a valid URL.
+function metadataBaseUrl(): URL {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://achra.com')
+  } catch {
+    return new URL('https://achra.com')
+  }
+}
+
 const title = 'Achra | The Marketplace for Global Coordination'
 const description =
   'An operational marketplace where organizations, builders, and service providers collaborate to deliver customized solutions.'
@@ -53,7 +63,7 @@ export const metadata: Metadata = {
     template: '%s | Achra',
   },
   description,
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? 'https://achra.com'),
+  metadataBase: metadataBaseUrl(),
   openGraph: {
     title,
     description,
