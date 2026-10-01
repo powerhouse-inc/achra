@@ -47,5 +47,9 @@ jobs:
           file: apps/frontend/Dockerfile
           push: true
           tags: ${{ env.IMAGE }}:${{ steps.tag.outputs.tag }}
+          build-args: |
+            NEXT_DEPLOYMENT_ID=${{ steps.tag.outputs.tag }}
+          secrets: |
+            server_actions_key=${{ secrets.NEXT_SERVER_ACTIONS_ENCRYPTION_KEY }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

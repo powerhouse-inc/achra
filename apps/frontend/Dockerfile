@@ -29,8 +29,22 @@ ENV NEXT_PUBLIC_SWITCHBOARD_URL=__NEXT_PUBLIC_SWITCHBOARD_URL__ \
     NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED=__NEXT_PUBLIC_LEAVE_PAGE_GUARD_ENABLED__ \
     NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE=__NEXT_PUBLIC_ENABLE_SERVICE_PURCHASE_STORE_PERSISTENCE__
 
+# Skew protection: a per-build deployment id (CI passes the image tag). Next
+# adds it to asset/RSC requests and hard-reloads clients still running an older
+# build instead of calling Server Actions that no longer exist.
+ARG NEXT_DEPLOYMENT_ID=""
+ENV NEXT_DEPLOYMENT_ID=${NEXT_DEPLOYMENT_ID}
+
 # Workspace deps first (op-hub ships a built dist/), then the app.
-RUN pnpm --filter "frontend^..." run build \
+# NEXT_SERVER_ACTIONS_ENCRYPTION_KEY comes in as a BuildKit secret (not an ARG,
+# so it stays out of the image history): a fixed key keeps Server Action
+# payloads decryptable across replicas of the same build. Without the secret
+# Next generates a random key per build, which is fine for one replica.
+RUN --mount=type=secret,id=server_actions_key \
+    if [ -s /run/secrets/server_actions_key ]; then \
+      export NEXT_SERVER_ACTIONS_ENCRYPTION_KEY="$(cat /run/secrets/server_actions_key)"; \
+    fi \
+ && pnpm --filter "frontend^..." run build \
  && pnpm --filter frontend run build
 
 FROM ${NODE_IMAGE} AS runner
