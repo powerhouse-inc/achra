@@ -23,3 +23,11 @@ jobs:
       - uses: powerhouse-inc/vetra-deploy-action@v1
         with:
           app-id: 98c97ec5-580c-4d78-816f-fd9d3f6ce463
+          # The FUSION image's Dockerfile installs and builds the monorepo itself.
+          install-command: ''
+          build-command: ''
+          # The op-hub package is published separately; this App only ships the front-end.
+          package-dirs: ''
+          fusion-dockerfile: apps/frontend/Dockerfile
+          fusion-context: .
+          fusion-image-name: frontend
