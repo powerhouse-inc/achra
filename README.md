@@ -135,3 +135,4 @@ pnpm storybook
 - Path aliases are configured in `apps/frontend/tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `apps/frontend/modules/shared/*`.
 - shadcn/ui components are configured to live under `apps/frontend/modules/shared/components`.
 - Feature availability can differ by environment. Check `apps/frontend/modules/shared/lib/feature-flags` before assuming a section should always render.
+
