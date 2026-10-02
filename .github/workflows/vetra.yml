@@ -1,0 +1,30 @@
+name: Vetra
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+permissions:
+  id-token: write
+  contents: read
+concurrency:
+  group: vetra-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  deploy:
+    if: github.event.pull_request.head.repo.fork != true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: powerhouse-inc/vetra-deploy-action@v1
+        with:
+          app-id: 6f7c7615-05f8-4162-939e-ce6378604498
+          # The FUSION image's Dockerfile installs and builds the monorepo itself.
+          install-command: ''
+          build-command: ''
+          # The op-hub package is published separately; this App only ships the front-end.
+          package-dirs: ''
+          fusion-dockerfile: apps/frontend/Dockerfile
+          fusion-context: .
+          fusion-image-name: frontend
