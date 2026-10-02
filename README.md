@@ -130,6 +130,17 @@ Launch it locally with:
 pnpm storybook
 ```
 
+## Deployment (Vetra)
+
+The front-end (`apps/frontend`) is deployed by [Vetra](https://vetra.io/docs/deploy) through `.github/workflows/vetra.yml`:
+
+- **Production:** every push to `main` builds the FUSION image from `apps/frontend/Dockerfile`, pushes it to `cr.vetra.io` and deploys it to the app's production environment.
+- **Previews:** every pull request from this repository gets its own preview environment (front-end, Switchboard and Connect with a fresh, empty database). The Vetra bot posts the URLs as a PR comment and as a GitHub deployment. The preview is deleted when the PR is closed or merged.
+- Fork PRs get no preview (GitHub gives them no OIDC token).
+- No secrets are stored in the repo: the workflow authenticates with GitHub OIDC, exchanged for a short-lived Renown token.
+
+Deploy history, rollbacks and settings live on the app page at [vetra.io](https://vetra.io/user).
+
 ## Notes For Contributors
 
 - Path aliases are configured in `apps/frontend/tsconfig.json`: `@/*` points to the repo root and `@/shared/*` points to `apps/frontend/modules/shared/*`.
